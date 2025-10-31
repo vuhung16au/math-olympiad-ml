@@ -1,0 +1,425 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{HSC Maths Extension}
+\lhead{Sequence Convergence Proof}
+\cfoot{\thepage}
+
+% Title
+\title{Convergence of the Sequence $u_n = \sqrt{2 + u_{n-1}}$}
+\author{Prepared by Vu Hung Nguyen}
+\date{Nov 2025}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{Author Information:}\\
+\noindent Website: \url{https://vuhung16au.github.io/}\\
+\noindent GitHub: \url{https://github.com/vuhung16au/}\\
+\noindent LinkedIn: \url{https://www.linkedin.com/in/nguyenvuhung/}
+
+\vspace{0.5cm}
+
+\section{Introduction}
+
+This document presents a problem commonly found in \textbf{HSC Mathematics Extension} courses. The problem involves analyzing the convergence of a recursively defined sequence using fundamental theorems from calculus and real analysis. This topic is essential for students studying advanced sequences and series, as it demonstrates the powerful application of the Monotone Convergence Theorem.
+
+We will explore how sequences defined by recurrence relations behave, and learn to prove their convergence rigorously. The techniques used here are fundamental tools that you will encounter throughout your mathematical studies.
+
+\section{Problem Statement}
+
+Consider the sequence $(u_n)$ defined recursively by:
+\begin{equation}
+u_n = \sqrt{2 + u_{n-1}}, \quad n \geq 1
+\end{equation}
+with an initial value $u_0 > 0$.
+
+\textbf{Question:} Does this sequence converge? If so, what is its limit, and how can we prove this convergence?
+
+This problem challenges us to:
+\begin{enumerate}[label=\roman*)]
+    \item Determine the potential limit (if it exists)
+    \item Prove that the sequence actually converges to this limit
+    \item Understand the behavior of the sequence for different starting values
+\end{enumerate}
+
+\section{Solution}
+
+To discuss the convergence of the sequence $u_n = \sqrt{2 + u_{n-1}}$ with $u_0 > 0$, we will use the \textbf{Monotone Convergence Theorem}, which states that if a sequence is both monotonic (either increasing or decreasing) and bounded, it must converge.
+
+\begin{tcolorbox}[title=Monotone Convergence Theorem, colback=blue!5!white, colframe=blue!75!black]
+If a sequence $(a_n)$ is monotonic (either increasing or decreasing) and bounded, then $(a_n)$ converges.
+\end{tcolorbox}
+
+\textbf{Main Result:} The sequence $(u_n)$ \textbf{converges to 2} for any initial value $u_0 > 0$.
+
+\subsection{Finding the Potential Limit}
+
+First, let's assume the sequence converges to a limit $L$. If $u_n \to L$ as $n \to \infty$, then $u_{n-1} \to L$ as well. We can find the value of $L$ by substituting it into the recurrence relation:
+
+\[
+L = \sqrt{2 + L}
+\]
+
+To solve for $L$, we square both sides (noting that $L$ must be non-negative, as $u_n$ is the result of a principal square root for all $n \ge 1$):
+
+\begin{align*}
+L^2 &= 2 + L\\
+L^2 - L - 2 &= 0\\
+(L - 2)(L + 1) &= 0
+\end{align*}
+
+This gives two possible limits: $L = 2$ or $L = -1$.
+
+Since $u_0 > 0$, we have $u_1 = \sqrt{2 + u_0} > 0$. By induction, every term $u_n$ must be positive. Therefore, the limit $L$ must be non-negative.
+
+\textbf{Conclusion:} The only possible limit for the sequence is $L = 2$.
+
+\subsection{Proving Convergence (Monotonicity and Boundedness)}
+
+Now we must prove that the sequence \textit{does} converge. We analyze the behavior of the sequence based on the starting value $u_0$.
+
+To determine if the sequence is increasing or decreasing, we examine when $u_n > u_{n-1}$:
+
+\begin{align*}
+\sqrt{2 + u_{n-1}} &> u_{n-1}\\
+2 + u_{n-1} &> u_{n-1}^2 \quad \text{(since } u_{n-1} > 0\text{)}\\
+0 &> u_{n-1}^2 - u_{n-1} - 2\\
+0 &> (u_{n-1} - 2)(u_{n-1} + 1)
+\end{align*}
+
+Since $u_{n-1} > 0$, the term $(u_{n-1} + 1)$ is always positive. The inequality simplifies to:
+
+\[
+0 > u_{n-1} - 2
+\]
+
+which means $u_{n-1} < 2$.
+
+This tells us:
+\begin{itemize}
+    \item If $u_{n-1} < 2$, then $u_n > u_{n-1}$ (the sequence is \textbf{increasing}).
+    \item If $u_{n-1} > 2$, then $u_n < u_{n-1}$ (the sequence is \textbf{decreasing}).
+    \item If $u_{n-1} = 2$, then $u_n = 2$ (the sequence is \textbf{constant}).
+\end{itemize}
+
+We can now analyze the convergence by cases.
+
+\subsubsection{Case 1: $u_0 = 2$}
+
+If $u_0 = 2$, then $u_1 = \sqrt{2 + 2} = 2$. By induction, $u_n = 2$ for all $n$.
+
+\textbf{Conclusion:} The sequence is constant and \textbf{converges to 2}.
+
+\subsubsection{Case 2: $0 < u_0 < 2$}
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Monotonicity:} We know that if $u_{n-1} < 2$, the sequence increases. Let's prove by induction that $u_n$ \textit{stays} below 2.
+    \begin{itemize}
+        \item \textbf{Base Case:} $u_0 < 2$ (given).
+        \item \textbf{Inductive Step:} Assume $u_k < 2$. Then 
+        \[
+        u_{k+1} = \sqrt{2 + u_k} < \sqrt{2 + 2} = \sqrt{4} = 2.
+        \]
+        \item Thus, $u_n < 2$ for all $n$.
+        \item Because $u_n < 2$ for all $n$, it follows from our earlier analysis that $u_{n+1} > u_n$ for all $n$. The sequence is \textbf{strictly increasing}.
+    \end{itemize}
+    
+    \item \textbf{Boundedness:} We just proved by induction that $u_n < 2$ for all $n$. The sequence is \textbf{bounded above by 2}.
+\end{enumerate}
+
+\textbf{Conclusion (Case 2):} The sequence is increasing and bounded above. By the Monotone Convergence Theorem, it converges. As shown in Step 1, the only possible limit is 2.
+
+\subsubsection{Case 3: $u_0 > 2$}
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Monotonicity:} We know that if $u_{n-1} > 2$, the sequence decreases. Let's prove by induction that $u_n$ \textit{stays} above 2.
+    \begin{itemize}
+        \item \textbf{Base Case:} $u_0 > 2$ (given).
+        \item \textbf{Inductive Step:} Assume $u_k > 2$. Then 
+        \[
+        u_{k+1} = \sqrt{2 + u_k} > \sqrt{2 + 2} = \sqrt{4} = 2.
+        \]
+        \item Thus, $u_n > 2$ for all $n$.
+        \item Because $u_n > 2$ for all $n$, it follows from our earlier analysis that $u_{n+1} < u_n$ for all $n$. The sequence is \textbf{strictly decreasing}.
+    \end{itemize}
+    
+    \item \textbf{Boundedness:} We just proved by induction that $u_n > 2$ for all $n$. The sequence is \textbf{bounded below by 2}.
+\end{enumerate}
+
+\textbf{Conclusion (Case 3):} The sequence is decreasing and bounded below. By the Monotone Convergence Theorem, it converges. As shown in Step 1, the only possible limit is 2.
+
+\subsection{Summary}
+
+In all possible cases for $u_0 > 0$, the sequence $(u_n)$ is monotonic and bounded, and therefore \textbf{it always converges to the limit 2}.
+
+This result demonstrates the power of the Monotone Convergence Theorem: by simply showing that a sequence is monotonic and bounded, we can guarantee its convergence without needing to compute the limit directly from the recurrence relation.
+
+\section{Finding Closed Forms}
+
+While the Monotone Convergence Theorem proves convergence, we can also find explicit closed-form expressions for $u_n$ by treating the recurrence relation as a difference equation. This approach uses trigonometric and hyperbolic substitutions to derive exact formulas.
+
+\subsection{Difference Equation Approach: Closed-Form Solutions}
+
+The recurrence relation $u_n = \sqrt{2 + u_{n-1}}$ is a \textbf{non-linear first-order difference equation}. We can find closed-form solutions using clever substitutions based on trigonometric and hyperbolic identities. The form $\sqrt{2 + ...}$ suggests using the half-angle identities.
+
+\subsubsection{Case 1: $0 < u_0 \le 2$}
+
+We use the substitution \textbf{$u_n = 2\cos(\theta_n)$}. The half-angle identity for cosine is $\cos(x/2) = \sqrt{\frac{1 + \cos(x)}{2}}$, which can be rewritten as $2\cos(x/2) = \sqrt{2 + 2\cos(x)}$.
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Substitute:}
+    \begin{align*}
+    u_n &= \sqrt{2 + u_{n-1}}\\
+    2\cos(\theta_n) &= \sqrt{2 + 2\cos(\theta_{n-1})}
+    \end{align*}
+    
+    \item \textbf{Apply Identity:}
+    \begin{align*}
+    2\cos(\theta_n) &= \sqrt{2(1 + \cos(\theta_{n-1}))}\\
+    2\cos(\theta_n) &= \sqrt{2(2\cos^2(\theta_{n-1}/2))}\\
+    2\cos(\theta_n) &= \sqrt{4\cos^2(\theta_{n-1}/2)}\\
+    2\cos(\theta_n) &= 2|\cos(\theta_{n-1}/2)|
+    \end{align*}
+    
+    \item \textbf{Solve for $\theta_n$:}
+    Since $0 < u_0 \le 2$, we can set $u_0 = 2\cos(\theta_0)$ for some $\theta_0 \in [0, \pi/2)$. In this interval, $\cos$ is non-negative, so we can drop the absolute value.
+    
+    This gives $\theta_n = \theta_{n-1}/2$, which is a simple geometric progression. The solution is:
+    \[
+    \theta_n = \frac{\theta_0}{2^n}
+    \]
+    
+    \item \textbf{Find the Closed-Form Solution:}
+    From $u_0 = 2\cos(\theta_0)$, we have $\theta_0 = \arccos(u_0/2)$.
+    
+    Substituting back, the closed-form solution for $u_n$ is:
+    \[
+    u_n = 2\cos\left(\frac{\arccos(u_0/2)}{2^n}\right)
+    \]
+    
+    \item \textbf{Discuss Convergence:}
+    As $n \to \infty$, the argument of cosine goes to zero:
+    \[
+    \lim_{n \to \infty} \left(\frac{\arccos(u_0/2)}{2^n}\right) = 0
+    \]
+    Therefore, the limit of $u_n$ is:
+    \[
+    \lim_{n \to \infty} u_n = 2\cos(0) = 2 \cdot 1 = 2
+    \]
+\end{enumerate}
+
+\subsubsection{Case 2: $u_0 > 2$}
+
+The substitution $u_n = 2\cos(\theta_n)$ fails because $u_0/2 > 1$, which is outside the domain of $\arccos$. We use the hyperbolic cosine equivalent: \textbf{$u_n = 2\cosh(\theta_n)$}. The identity is $2\cosh(x/2) = \sqrt{2 + 2\cosh(x)}$.
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Substitute:}
+    \begin{align*}
+    u_n &= \sqrt{2 + u_{n-1}}\\
+    2\cosh(\theta_n) &= \sqrt{2 + 2\cosh(\theta_{n-1})}
+    \end{align*}
+    
+    \item \textbf{Apply Identity:}
+    \begin{align*}
+    2\cosh(\theta_n) &= \sqrt{2(1 + \cosh(\theta_{n-1}))}\\
+    2\cosh(\theta_n) &= \sqrt{2(2\cosh^2(\theta_{n-1}/2))}\\
+    2\cosh(\theta_n) &= 2\cosh(\theta_{n-1}/2) \quad \text{(since $\cosh(x) > 0$ for all $x$)}
+    \end{align*}
+    
+    \item \textbf{Solve for $\theta_n$:}
+    This again gives $\theta_n = \theta_{n-1}/2$, so:
+    \[
+    \theta_n = \frac{\theta_0}{2^n}
+    \]
+    
+    \item \textbf{Find the Closed-Form Solution:}
+    From $u_0 = 2\cosh(\theta_0)$, we have $\theta_0 = \text{arccosh}(u_0/2)$.
+    
+    The closed-form solution is:
+    \[
+    u_n = 2\cosh\left(\frac{\text{arccosh}(u_0/2)}{2^n}\right)
+    \]
+    
+    \item \textbf{Discuss Convergence:}
+    As $n \to \infty$, the argument of $\cosh$ goes to zero:
+    \[
+    \lim_{n \to \infty} u_n = 2\cosh(0) = 2 \cdot 1 = 2
+    \]
+\end{enumerate}
+
+\textbf{Conclusion (Difference Equation):} Both cases ($u_0 \le 2$ and $u_0 > 2$) lead to the same limit, \textbf{2}, confirming our earlier result from the Monotone Convergence Theorem.
+
+\subsection{Differential Equation Approach: Continuous Analogue}
+
+We can analyze the stability of the system by approximating the discrete difference equation with an autonomous differential equation. The discrete change is $u_n - u_{n-1} = \sqrt{2 + u_{n-1}} - u_{n-1}$.
+
+We approximate this with a continuous function $u(t)$, where the change $u'(t)$ is analogous to $u_n - u_{n-1}$.
+
+The associated differential equation is:
+\begin{equation}
+\frac{du}{dt} = \sqrt{2 + u} - u
+\end{equation}
+
+\subsubsection{Finding Equilibria (Fixed Points)}
+
+The equilibria occur where the system is stable, i.e., $\frac{du}{dt} = 0$.
+\begin{align*}
+\sqrt{2 + u} - u &= 0\\
+\sqrt{2 + u} &= u\\
+2 + u &= u^2\\
+u^2 - u - 2 &= 0\\
+(u - 2)(u + 1) &= 0
+\end{align*}
+
+Since $u_0 > 0$ (and all subsequent $u_n > 0$), we are only interested in non-negative equilibria. The only relevant equilibrium point is \textbf{$u = 2$}.
+
+\subsubsection{Analyzing Stability of the Equilibrium}
+
+We check the sign of $\frac{du}{dt}$ on either side of the equilibrium point $u=2$. Let $g(u) = \frac{du}{dt} = \sqrt{2 + u} - u$.
+
+\begin{itemize}
+    \item \textbf{Region 1: $0 < u < 2$}\\
+    Let's pick a test value, e.g., $u = 1$.
+    \[
+    g(1) = \sqrt{2 + 1} - 1 = \sqrt{3} - 1 \approx 1.732 - 1 = 0.732 > 0
+    \]
+    Since $\frac{du}{dt} > 0$, the function $u(t)$ is \textbf{increasing} in this region. The value of $u$ moves \textit{towards} 2.
+    
+    \item \textbf{Region 2: $u > 2$}\\
+    Let's pick a test value, e.g., $u = 7$.
+    \[
+    g(7) = \sqrt{2 + 7} - 7 = \sqrt{9} - 7 = 3 - 7 = -4 < 0
+    \]
+    Since $\frac{du}{dt} < 0$, the function $u(t)$ is \textbf{decreasing} in this region. The value of $u$ moves \textit{towards} 2.
+\end{itemize}
+
+\subsubsection{Conclusion (Differential Equation)}
+
+We can visualize this on a phase line:
+
+\[
+\ldots (0) \xrightarrow{\text{increasing}} [2] \xleftarrow{\text{decreasing}} (\infty) \ldots
+\]
+
+Because the system's flow (represented by the arrows) points towards $u=2$ from both sides, $u=2$ is an \textbf{asymptotically stable equilibrium}.
+
+This analysis of the continuous analogue strongly implies that the discrete system (our sequence) will also be attracted to this fixed point. Regardless of the starting value $u_0 > 0$, the sequence will move towards and ultimately \textbf{converge to 2}.
+
+\section{Non-Monotonic Sequence with Noise}
+
+\subsection{Problem Statement}
+
+What happens if we modify the recurrence relation by adding a small "noise" term? Consider the modified sequence:
+
+\begin{equation}
+u_n = \sqrt{2 + u_{n-1} + \epsilon_{n-1}}, \quad n \geq 1
+\end{equation}
+
+where $(\epsilon_n)$ is a sequence of non-negative numbers. 
+
+\textbf{Question:} Can we choose $(\epsilon_n)$ such that the sequence $(u_n)$ becomes \textbf{non-monotonic} while still converging to 2?
+
+This is an interesting extension that shows how sequences can converge even when they are not monotonic.
+
+\subsection{Solution}
+
+Yes! We can construct such a sequence. The key insight is to use a noise sequence $(\epsilon_n)$ that:
+\begin{itemize}
+    \item Is large enough initially to "kick" the sequence above 2
+    \item Decays to 0 as $n \to \infty$, so the modified sequence still converges to 2
+\end{itemize}
+
+\subsubsection{The Epsilon Sequence}
+
+Let's define the noise sequence $(\epsilon_n)$ as a simple decaying function:
+
+\[
+\epsilon_n = \frac{1}{n+1}
+\]
+
+So, the sequence $(\epsilon_n)$ is:
+\begin{itemize}
+    \item $\epsilon_0 = 1/1 = 1$
+    \item $\epsilon_1 = 1/2 = 0.5$
+    \item $\epsilon_2 = 1/3 \approx 0.333$
+    \item $\epsilon_3 = 1/4 = 0.25$
+    \item $\epsilon_4 = 1/5 = 0.2$
+    \item $\ldots$ (continuing indefinitely)
+\end{itemize}
+
+This sequence is simple, non-negative, and clearly converges to 0 as $n \to \infty$.
+
+\subsubsection{Analyzing the Modified Sequence}
+
+Now let's trace the sequence $u_n = \sqrt{2 + u_{n-1} + \epsilon_{n-1}}$ using this noise. The key to making $u_n$ non-monotonic is to start it \textit{below} 2, let the noise "kick" it \textit{above} 2, and then watch it oscillate.
+
+Let's pick an initial value of \textbf{$u_0 = 1.5$}.
+
+\begin{enumerate}
+    \item \textbf{Calculate $u_1$:}
+    \begin{align*}
+    u_1 &= \sqrt{2 + u_0 + \epsilon_0}\\
+    u_1 &= \sqrt{2 + 1.5 + 1} = \sqrt{4.5}\\
+    u_1 &\approx 2.121
+    \end{align*}
+    The sequence increased: $2.121 > 1.5$
+    
+    \item \textbf{Calculate $u_2$:}
+    \begin{align*}
+    u_2 &= \sqrt{2 + u_1 + \epsilon_1}\\
+    u_2 &= \sqrt{2 + 2.121 + 0.5} = \sqrt{4.621}\\
+    u_2 &\approx 2.149
+    \end{align*}
+    The sequence increased again: $2.149 > 2.121$
+    
+    \item \textbf{Calculate $u_3$:}
+    \begin{align*}
+    u_3 &= \sqrt{2 + u_2 + \epsilon_2}\\
+    u_3 &= \sqrt{2 + 2.149 + 0.333} = \sqrt{4.482}\\
+    u_3 &\approx 2.117
+    \end{align*}
+    The sequence \textbf{decreased}: $2.117 < 2.149$
+\end{enumerate}
+
+\subsubsection{Conclusion}
+
+The sequence $(u_n)$ is \textbf{non-monotonic} because it went up ($u_2 > u_1$) and then came down ($u_3 < u_2$).
+
+However, the sequence \textbf{still converges to 2}. The "noise" $\epsilon_n = \frac{1}{n+1}$ gets smaller and smaller, so its effect diminishes. The sequence's natural "pull" towards the stable limit of 2 eventually takes over, and $u_n$ will converge to 2.
+
+This example demonstrates an important principle: \textbf{monotonicity is sufficient but not necessary for convergence}. Sequences can converge even when they oscillate, as long as the oscillations become smaller over time.
+
+\section{Final Thoughts}
+
+This problem beautifully illustrates several key concepts in sequence convergence:
+\begin{itemize}
+    \item The Monotone Convergence Theorem as a powerful tool for proving convergence
+    \item How to find potential limits by analyzing the recurrence relation
+    \item The importance of considering different cases (initial conditions)
+    \item That convergence does not require monotonicity
+\end{itemize}
+
+Understanding these ideas will serve you well in more advanced mathematical studies, including calculus, real analysis, and beyond.
+
+\end{document}
+
