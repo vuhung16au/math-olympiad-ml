@@ -1,0 +1,226 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+\section{Bài T6/219 (Vietnamese version)} 
+
+Cho dãy số $\{a_n\}$ được xác định như sau:
+$$ a_1 = 1, a_{n+1} = a_n + \frac{1}{\sqrt[3]{a_n}} \quad (n \ge 1) $$
+Tìm tất cả các số thực $\alpha$ sao cho dãy $\{u_n\}$ xác định bởi
+$$ u_n = \frac{a_n^\alpha}{n} \quad (n \ge 1) $$
+hội tụ và giới hạn của nó khác không.
+
+\subsection{Lesson T6/219 (English translation)}
+
+Let the ordinal number $\{a_n\}$ be clearly defined as follows:
+$$ a_1 = 1, a_{n+1} = an_n + \frac{1}{\sqrt[3]{a_n}} \quad (n \ge 1) $$
+Find all real numbers $\alpha$ such that the sequence $\{u_n\}$ defined by
+$$ u_n = \frac{a_n^\alpha}{n} \quad (n \ge 1) $$
+converges and its limit is non-zero.
+
+\subsubsection*{Lời giải.}
+Từ cách xác định dãy $\{a_n\}$ dễ thấy
+$$ a_n > 0, \forall n \ge 1 \quad \text{và} \quad a_n^4 > \left(\sqrt[4]{a_{n-1}^4} + \frac{4}{3}\right)^3, $$
+$\forall n \ge 2$. Suy ra
+$$ \sqrt[4]{a_n^4} > \sqrt[4]{a_{n-1}^4} + \frac{4}{3}, \quad \forall n \ge 2 \implies $$
+$$ \sqrt[4]{a_n^4} > \frac{4}{3}(n-1), \quad \forall n \ge 2 \quad (1). $$
+
+Mặt khác, từ công thức xác định dãy $\{a_n\}$ ta lại có:
+\begin{align*} a_k &= \left(\sqrt[3]{a_{k-1}} + \frac{1}{3a_{k-1}}\right)^3 - \\
+&- \left(\frac{1}{3\sqrt[3]{a_{k-1}}} + \frac{1}{27a_{k-1}^3}\right), \quad \forall k \ge 2 \end{align*}
+$$\implies \sqrt[3]{a_k}^4 < \left(\sqrt[3]{a_{k-1}} + \frac{1}{3 a_{k-1}}\right)^4 = $$
+$$ = \sqrt[3]{a_{k-1}} + \frac{4}{3} + \frac{2}{3\sqrt[3]{a_{k-1}^4}} + \frac{4}{27\sqrt[3]{a_{k-1}^8}} + \frac{1}{81a_{k-1}^4}, $$
+$\forall k \ge 2$.
+
+
+Do đó, với mỗi $n > 4$ ta đều có:
+\begin{align*}
+\sqrt[3]{a_n} &< 1 + \frac{4}{3} (n-1) + 
+\frac{2}{3}\sum_{k=2}^{n} \frac{1}{\sqrt[3]{a_{k-1}^4}} + 
+\frac{4}{27}\sum_{k=2}^{n} \frac{1}{\sqrt[3]{a_{k-1}^8}} + 
+\frac{1}{81}\sum_{k=2}^{n} \frac{1}{a_{k-1}^4} \quad (2)
+\end{align*}
+
+Dựa vào $(1)$ và dựa vào bất đẳng thức Bunhiacopxki ta sẽ được:
+\begin{itemize}
+    \item $ \sum_{k=2}^{n} \frac{1}{\sqrt[3]{a_{k-1}^4}} = 1 + \sum_{k=3}^{n} \frac{1}{\sqrt[3]{a_{k-1}^4}} $
+    $$ < 1 + \frac{3}{4}\sum_{k=3}^{n} \frac{1}{(k-2)} < 1 + \frac{3}{4}  \sqrt{\sum_{k=3}^{n} (n-2) \frac{1}{(k-2)^2}} $$
+    $$ < 1 + \frac{3}{4} \sqrt{(n-2)(1 + \sum_{k=4}^{n} \frac{1}{(k-3)(k-2)})} $$
+    $$ = 1 + \frac{3}{4} \sqrt{(n-2)} \sqrt{(2 - \frac{1}{n-2})} < 1 + \frac{3}{4} \sqrt{2(n-2)} \quad (3) $$
+
+    \item $ \sum_{k=2}^{n} \frac{1}{\sqrt[3]{a_{k-1}^8}} = 1 + \sum_{k=3}^{n} \frac{1}{\sqrt[3]{a_{k-1}^2}} $
+    $$ < 1 + \frac{9}{16} \sum_{k=3}^{n} \frac{1}{(k-2)^2} < 1 + \frac{9}{16} = \frac{17}{8} \quad (4) $$
+
+    \item $ \sum_{k=2}^{n} \frac{1}{a_{k-1}^4} = 1 + \sum_{k=3}^{n} \frac{1}{(\sqrt[3]{a_{k-1}^4})^3} $
+    $$ < 1 + \frac{27}{64} \sum_{k=3}^{n} \frac{1}{(k-2)^3} < 1 + \frac{27}{64} \sum_{k=3}^{n} \frac{1}{(k-2)^2} < $$
+    $$ < 1 + \frac{27}{64} \cdot \frac{32}{3} = 1 + \frac{27}{59} \quad (5) $$
+\end{itemize}
+
+Từ $(2)$, $(3)$, $(4)$, $(5)$ ta được:
+$$ \sqrt[3]{a_n} < 1 + \frac{4}{3} \sqrt{2(n-2)} + \frac{35}{54n} + \frac{1}{8} \cdot \frac{59}{32} \quad (6) $$
+$\forall n > 4$.
+
+Từ $(1)$ và $(6)$ suy ra:
+$$ \frac{4}{3} \left(1 - \frac{1}{n}\right) < \frac{a_n^{4/3}}{n} < \frac{4}{3} \cdot \frac{1}{n} + \frac{2\sqrt{2(n-2)}}{n} + \frac{35}{54n} + \frac{1}{8} \cdot \frac{59}{32n}, \quad \forall n > 4 \quad (7) $$
+
+Vì $\lim_{n \to \infty} \frac{4}{3} \left(1 - \frac{1}{n}\right) = \frac{4}{3}$
+$$ \lim_{n \to \infty} \left(\frac{4}{3n} + \frac{2\sqrt{2(n-2)}}{n} + \frac{35}{54n} + \frac{1}{8} \frac{59}{32n}\right) = \lim_{n \to \infty} \frac{2\sqrt{2n}}{n} = 0 $$
+nên từ $(7)$ suy ra $\lim_{n \to \infty} \frac{\sqrt[4]{a_n}}{n} = \frac{4}{3}$.
+Như vậy $\alpha = \frac{4}{3}$ là một giá trị cần tìm.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Do $\lim_{n \to \infty} a_n = +\infty$ suy ra từ (1) nên:
+$$ \lim_{n \to \infty} a_n^{\alpha - \frac{4}{3}} = \begin{cases} +\infty & \text{nếu } \alpha > \frac{4}{3} \\ 0 & \text{nếu } \alpha < \frac{4}{3} \end{cases} $$
+Kết hợp với $u_n = \frac{a_n^\alpha}{n} = \frac{a_n^{4/3}}{n} \cdot a_n^{\alpha - \frac{4}{3}}$ suy ra:
+$$ \lim_{n \to \infty} u_n = \lim_{n \to \infty} \frac{a_n^\alpha}{n} = \begin{cases} +\infty & \text{nếu } \alpha > \frac{4}{3} \\ 0 & \text{nếu } \alpha < \frac{4}{3} \end{cases} $$
+Vậy $\alpha = \frac{4}{3}$ là giá trị duy nhất để dãy $\{u_n\}$ hội tụ và giới hạn của nó khác không.
+
+\subsubsection*{Nhận xét:}
+1. Có 8 bạn gửi lời giải cho bài toán. 
+Trong số đó chỉ có các bạn: Ngô Đức Duy (12CT THPT Trần Phú - Hải Phòng), 
+\textbf{Nguyễn Vũ Hưng} (12D Chuyên ngữ ĐHQG Hà Nội) và 
+Lê Anh Vũ (12CT Quốc học Huế) có lời giải đúng. 
+Bạn Vũ cho lời giải khá phức tạp; 
+bạn Hưng phải dùng tới các kiến thức vượt ra ngoài chương trình THPT để giải bài toán.
+
+2. Bạn \textbf{Ngô Đức Duy} đã đề xuất và giải tốt Bài toán khái quát sau: 
+"Cho số thực dương $a$ và số thực âm $b$. Cho dãy số $\{a_n\}$ được xác định bởi
+$$ a_0 = a, a_{n+1} = a_n + a_n^b, \quad \forall n \ge 0. $$
+Tìm tất cả các số thực $\alpha$ sao cho dãy $\{u_n\}$ xác định bởi
+$$ u_n = \frac{a_n^\alpha}{n}, \quad \forall n \ge 1 $$
+hội tụ và giới hạn của nó khác không". (\text{Đáp số: } $\alpha = 1 - b$).
+
+\hfill NGUYỄN KHẮC MINH
+
+\section{Observation}
+
+\begin{itemize}
+    \item Looks like this is a hard problem for high school students.
+    \item The idea in the solution above is using Talyor's expansion to approximate $a_n$, find a lower bound for $a_n^{4/3}$ and an upper bound for $a_n^{4/3}$, then use the squeeze theorem to find the limit.
+    \item Only 8 students submitted solutions to the problem and only 3 of them have correct solutions.
+    \item The solution of Nguyen Vu Hung is quite complicated and uses knowledge beyond the standard high school curriculum. 
+\end{itemize}
+
+
+\section{Differential Equation Approach (by Nguyen Vu Hung)}
+We approximate $a_n$ by values of a smooth function $f(x)$ at 
+integer points, i.e., $a_n \approx f(n)$. 
+For large $n$, the forward difference satisfies $a_{n+1} - a_n \approx f'(n)$.
+(See the Mean Value Theorem in the Discussion section.)
+
+% \emph{Proof sketch.} By the Mean Value Theorem, for each integer $n$ there exists $\zeta_n\in(n,n+1)$ such that 
+% $$f(n+1)-f(n)=f'(\zeta_n).$$
+% If $f'$ varies slowly on intervals of length $1$ (e.g., $f''$ is bounded along the trajectory), then $f'(\zeta_n)=f'(n)+O(\max_{t\in[n,n+1]}|f''(t)|)$, hence $f(n+1)-f(n)=f'(n)+o(1)$. Equivalently, the first-order Taylor expansion gives 
+% $$f(n+1)-f(n)=f'(n)\cdot 1+\tfrac12 f''(\xi_n)\cdot 1^2,$$ 
+% for some $\xi_n\in(n,n+1)$, so the remainder is controlled when $f''$ is moderate, justifying the approximation $a_{n+1}-a_n\approx f'(n)$.
+
+From the recurrence $a_{n+1} - a_n = a_n^{-1/3}$, we obtain the separable Ordinary Differential Equation (ODE)
+
+$$ f'(x) = f(x)^{-1/3}. $$
+Separating variables and integrating gives
+$$ \frac{df}{dx} = f^{-1/3} \quad \Rightarrow \quad f^{1/3}\, df = dx, $$
+$$ \int f^{1/3}\, df = \int dx \quad \Rightarrow \quad \frac{f^{4/3}}{4/3} = x + C, $$
+so
+$$ f(x)^{4/3} = \frac{4}{3}x + C'. $$
+As $x \to \infty$, the constant $C'$ is negligible in the asymptotic sense, hence
+$$ f(x)^{4/3} \sim \frac{4}{3}x. $$
+Consequently, for the sequence we have the approximation
+$$ a_n^{4/3} \sim \frac{4}{3}n. $$
+
+Now consider $u_n = \dfrac{a_n^{\alpha}}{n}$. Using $a_n^{4/3} \sim \dfrac{4}{3}n$,
+$$ u_n = \frac{a_n^{\alpha}}{n} = \frac{\big(a_n^{4/3}\big)^{\alpha\cdot 3/4}}{n}
+\sim \frac{\big(\tfrac{4}{3}n\big)^{\frac{3\alpha}{4}}}{n}
+= \left(\frac{4}{3}\right)^{\frac{3\alpha}{4}} n^{\frac{3\alpha}{4}-1}. $$
+For $u_n$ to converge to a nonzero limit, the exponent of $n$ must vanish, i.e.,
+$$ \frac{3\alpha}{4} - 1 = 0 \quad \Longrightarrow \quad \alpha = \frac{4}{3}. $$
+When $\alpha = \tfrac{4}{3}$, the asymptotic limit is
+$$ \lim_{n\to\infty} u_n \sim \left(\frac{4}{3}\right)^{\frac{3(4/3)}{4}} n^{0} = \left(\frac{4}{3}\right)^{1} = \frac{4}{3}, $$
+which is consistent with the rigorous solution above.
+
+\section{The Difference Equations}
+We formulate the problem purely in the language of difference equations. 
+Consider the first-order non-linear difference equation
+$$ a_{n+1} - a_n = a_n^{-1/3}, \quad n \ge 1, $$
+subject to the initial condition
+$$ a_1 = 1. $$
+For a given real parameter $\alpha$, define
+$$ u_n = \frac{a_n^\alpha}{n}. $$
+% \textbf{Problem (difference-equation formulation).} Determine all real values of $\alpha$ such that the sequence $\{u_n\}_{n\ge 1}$ converges and its limit is nonzero. No solution method is prescribed here; this section only states the problem in difference-equation terms.
+
+Let $f(n) = a_n$ be a function of $n$, which is a discrete sequence that models the growth of $a_n$ at integer points.
+As $n$ is large, the forward difference satisfies $a_{n+1} - a_n \approx f'(n)$.
+
+From the recurrence $a_{n+1} - a_n = a_n^{-1/3}$, we obtain the difference equation
+$$ f'(n) = f(n)^{-1/3}. $$
+
+\section{The Differential Equations}
+We state a continuous analogue of the problem via a differential equation. Let $f\colon [1,\infty) \to (0,\infty)$ be a differentiable function that models the growth of $a_n$ at integer points, with the initial condition
+$$ f(1) = 1, $$
+and governed by the first-order ODE
+$$ f'(x) = f(x)^{-1/3}. $$
+For a given real parameter $\alpha$, introduce the continuous analogue of $u_n$ by
+$$ v(x) = \frac{f(x)^\alpha}{x}. $$
+% \textbf{Problem (differential-equation formulation).} Find those real numbers $\alpha$ for which $v(x)$ admits a finite, nonzero limit as $x \to \infty$. In this section we only pose the ODE formulation of the problem without providing a solution.
+
+\section{Solution (using Stolz--Ces\'aro theorem)}
+We recall a common form of the Stolz--Ces\'aro theorem: if $(A_n)$ and $(B_n)$ satisfy $B_n\nearrow \infty$ and the limit $\lim\limits_{n\to\infty}\dfrac{A_{n+1}-A_n}{B_{n+1}-B_n}=L$ exists, then $\lim\limits_{n\to\infty}\dfrac{A_n}{B_n}=L$.
+Apply this with $A_n=a_n^{4/3}$ and $B_n=n$. Then
+$$\lim_{n\to\infty}\frac{A_{n+1}-A_n}{B_{n+1}-B_n}=\lim_{n\to\infty}\big(a_{n+1}^{4/3}-a_n^{4/3}\big).$$
+Using $a_{n+1}=a_n+a_n^{-1/3}$ and the binomial expansion (or MVT) for $(x+h)^{4/3}$ with $h=a_n^{-1/3}$,
+$$a_{n+1}^{4/3}-a_n^{4/3}=\frac{4}{3}\,a_n^{1/3}\cdot a_n^{-1/3}+o(1)=\frac{4}{3}+o(1).$$
+Hence the difference limit equals $\tfrac{4}{3}$, and by Stolz--Ces\'aro,
+$$\lim_{n\to\infty}\frac{a_n^{4/3}}{n}=\frac{4}{3}.$$
+This yields the unique exponent $\alpha=\tfrac{4}{3}$ for which $u_n=a_n^\alpha/n$ has a nonzero finite limit.
+
+\section{Discussion}
+
+\paragraph{Scaling and dominant balance.}
+A quick scaling ansatz $a_n \sim c\,n^p$ balances $a_{n+1}-a_n \asymp n^{p-1}$ with $a_n^{-1/3} \asymp n^{-p/3}$, yielding $p=\tfrac{3}{4}$ and $c=(\tfrac{4}{3})^{3/4}$. This immediately suggests both the exponent and the constant in the limit $\lim n^{-1}a_n^{4/3}=\tfrac{4}{3}$.
+
+\paragraph{Discrete vs. continuum.}
+Replacing differences by derivatives (or sums by integrals) is justified here by monotonicity and smooth growth. A rigorous bridge uses Stolz–Cesàro or the mean value theorem on $b_n=a_n^{4/3}$ to squeeze $n(b_{n+1}-b_n)$ between two sequences tending to $\tfrac{4}{3}$.
+
+\paragraph{Regular variation.}
+The sequence is regularly varying with index $3/4$. Both the inequality proof and the ODE heuristic identify the same index and slowly varying constant, explaining why $u_n=a_n^\alpha/n$ has a nonzero limit iff $\alpha=\tfrac{4}{3}$.
+
+\paragraph{Generalization.}
+For $a_{n+1}=a_n+a_n^b$ with $b<0$, the ODE $f'=f^b$ gives $f^{1-b}\sim (1-b)x$, hence $a_n\sim \text{const}\cdot n^{1/(1-b)}$ and $u_n\sim n^{\alpha/(1-b)-1}$. The unique nonzero-limit threshold is $\alpha=1-b$, matching the proposed general answer.
+
+\paragraph{Error terms and robustness.}
+Let $b_n:=a_n^{4/3}$. By the mean value theorem,
+$$b_{n+1}-b_n=\frac{4}{3}\,\xi_n^{1/3}\,(a_{n+1}-a_n),\quad \xi_n\in[a_n,a_{n+1}].$$
+Using $a_{n+1}-a_n=a_n^{-1/3}$ and $\xi_n\asymp a_n$, we get
+$$b_{n+1}-b_n=\frac{4}{3}+O\!\left(a_n^{-4/3}\right).$$
+Summing yields the quantitative asymptotic
+$$b_n=\frac{4}{3}\,n+O\!\left(\sum_{k\le n} a_k^{-4/3}\right),$$
+so in particular $b_n=\tfrac{4}{3}n+O(\log n)$ once $a_n\asymp n^{3/4}$. Consequently,
+$$\frac{a_n^{4/3}}{n}=\frac{4}{3}+O\!\left(\frac{\log n}{n}\right)\to\frac{4}{3}.$$
+Moreover, for perturbed recurrences of the form
+$$a_{n+1}=a_n+a_n^{-1/3}+\varepsilon_n,\qquad \varepsilon_n=o\!\left(a_n^{-1/3}\right),$$
+exactly the same computation gives
+$$b_{n+1}-b_n=\frac{4}{3}+o(1),\quad b_n=\frac{4}{3}\,n+o(n),$$
+so the exponent $3/4$ and the limit $\lim n^{-1}a_n^{4/3}=\tfrac{4}{3}$ are stable under small perturbations.
+
+\paragraph{Brief definitions and notation.}
+\emph{Mean Value Theorem (MVT).} If $g$ is differentiable on $[x,y]$, then there exists $\xi\in(x,y)$ such that $g(y)-g(x)=g'(\xi)(y-x)$. In our use, $g(t)=t^{4/3}$, $x=a_n$, $y=a_{n+1}$, and $\xi_n$ denotes such an intermediate point.\newline
+\emph{$\asymp$ notation.} For positive sequences $(f_n)$ and $(g_n)$, we write $f_n\asymp g_n$ if there exist constants $0<c\le C<\infty$ and $n_0$ such that $c\,g_n\le f_n\le C\,g_n$ for all $n\ge n_0$.
+
+\paragraph{Note on the Stolz--Ces\'aro theorem (statement and sketch).}
+If $(A_n)$ and $(B_n)$ satisfy $B_n\nearrow\infty$ and $\lim\limits_{n\to\infty}\dfrac{A_{n+1}-A_n}{B_{n+1}-B_n}=L$ exists, then $\lim\limits_{n\to\infty}\dfrac{A_n}{B_n}=L$. Sketch: write
+$$\frac{A_n}{B_n}=\frac{\sum_{k=1}^{n-1}(A_{k+1}-A_k)}{\sum_{k=1}^{n-1}(B_{k+1}-B_k)}$$
+and view it as a weighted average of the ratios $\dfrac{A_{k+1}-A_k}{B_{k+1}-B_k}$ with positive weights $B_{k+1}-B_k$. If these ratios converge to $L$ and the denominator diverges, the weighted average also converges to $L$ (a Ces\`aro-type argument). This justifies replacing a hard ratio limit by the simpler difference ratio limit.
+
+\paragraph{Relevance to time series and machine learning.}
+Difference equations are the backbone of many time-series models (e.g., AR, ARIMA, state-space recurrences, RNN updates). Our recurrence $a_{n+1}-a_n=a_n^{-1/3}$ is a nonlinear, state-dependent step size; analyzing its stability and asymptotics mirrors tasks in ML such as diagnosing exploding/vanishing dynamics, choosing scalings, and proving convergence of iterative training rules. The discrete-to-continuum translation (ODE surrogate) parallels common practice in optimization theory (gradient flow limits) and continuous-time modeling, while robustness results (persistence under small perturbations) echo stability under noise and model misspecification in real datasets.
+
+\paragraph{Pedagogical note.}
+The ODE/dominant-balance route offers intuition and a clean roadmap; the discrete inequalities provide full rigor. Presenting both helps students connect heuristic modeling with proof techniques.
+
+\end{document}
+
