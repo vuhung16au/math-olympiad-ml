@@ -5,55 +5,40 @@
 \usepackage{hyperref}
 \geometry{a4paper, margin=1in}
 
+\title{On the Convergence of Nonlinear Recurrence Sequences:\\ $a_{n+1} = a_n + \frac{1}{\sqrt[3]{a_n}}$}
 \author{Prepared by Vu Hung Nguyen}
 \date{November 2025}
 
 \begin{document}
 
-\noindent\textbf{Author:} Prepared by Vu Hung Nguyen \\
-\textbf{Date:} November 2025 \\
-\vspace{0.3cm}
-\textbf{Links:}
-\begin{itemize}
-    \item \href{https://vuhung16au.github.io/}{https://vuhung16au.github.io/}
-    \item \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}
-    \item \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}
-\end{itemize}
+\maketitle
+
 
 \vspace{0.5cm}
 
-\section{Bài T6/219 (Vietnamese version)} 
 
-Cho dãy số $\{a_n\}$ được xác định như sau:
-$$ a_1 = 1, a_{n+1} = a_n + \frac{1}{\sqrt[3]{a_n}} \quad (n \ge 1) $$
-Tìm tất cả các số thực $\alpha$ sao cho dãy $\{u_n\}$ xác định bởi
-$$ u_n = \frac{a_n^\alpha}{n} \quad (n \ge 1) $$
-hội tụ và giới hạn của nó khác không.
-
-\subsection{Lesson T6/219 (English translation)}
+\section{Problem T6/219 (1995)}
 
 Let the ordinal number $\{a_n\}$ be clearly defined as follows:
-$$ a_1 = 1, a_{n+1} = an_n + \frac{1}{\sqrt[3]{a_n}} \quad (n \ge 1) $$
+$$ a_1 = 1, a_{n+1} = a_n + \frac{1}{\sqrt[3]{a_n}} \quad (n \ge 1) $$
 Find all real numbers $\alpha$ such that the sequence $\{u_n\}$ defined by
 $$ u_n = \frac{a_n^\alpha}{n} \quad (n \ge 1) $$
 converges and its limit is non-zero.
 
-\subsubsection*{Lời giải.}
-Từ cách xác định dãy $\{a_n\}$ dễ thấy
-$$ a_n > 0, \forall n \ge 1 \quad \text{và} \quad a_n^4 > \left(\sqrt[4]{a_{n-1}^4} + \frac{4}{3}\right)^3, $$
-$\forall n \ge 2$. Suy ra
+\section*{Solution}
+From the definition of the sequence $\{a_n\}$, we have
+$$ a_n > 0, \forall n \ge 1 \quad \text{and} \quad a_n^4 > \left(\sqrt[4]{a_{n-1}^4} + \frac{4}{3}\right)^3, $$
+$\forall n \ge 2$. Hence,
 $$ \sqrt[4]{a_n^4} > \sqrt[4]{a_{n-1}^4} + \frac{4}{3}, \quad \forall n \ge 2 \implies $$
 $$ \sqrt[4]{a_n^4} > \frac{4}{3}(n-1), \quad \forall n \ge 2 \quad (1). $$
 
-Mặt khác, từ công thức xác định dãy $\{a_n\}$ ta lại có:
-\begin{align*} a_k &= \left(\sqrt[3]{a_{k-1}} + \frac{1}{3a_{k-1}}\right)^3 - \\
-&- \left(\frac{1}{3\sqrt[3]{a_{k-1}}} + \frac{1}{27a_{k-1}^3}\right), \quad \forall k \ge 2 \end{align*}
+From the definition of the sequence $\{a_n\}$, we have
+$$ a_k = \left(\sqrt[3]{a_{k-1}} + \frac{1}{3a_{k-1}}\right)^3 - \left(\frac{1}{3\sqrt[3]{a_{k-1}}} + \frac{1}{27a_{k-1}^3}\right), \quad \forall k \ge 2 $$
 $$\implies \sqrt[3]{a_k}^4 < \left(\sqrt[3]{a_{k-1}} + \frac{1}{3 a_{k-1}}\right)^4 = $$
 $$ = \sqrt[3]{a_{k-1}} + \frac{4}{3} + \frac{2}{3\sqrt[3]{a_{k-1}^4}} + \frac{4}{27\sqrt[3]{a_{k-1}^8}} + \frac{1}{81a_{k-1}^4}, $$
 $\forall k \ge 2$.
 
-
-Do đó, với mỗi $n > 4$ ta đều có:
+Hence, for each $n > 4$, we have:
 \begin{align*}
 \sqrt[3]{a_n} &< 1 + \frac{4}{3} (n-1) + 
 \frac{2}{3}\sum_{k=2}^{n} \frac{1}{\sqrt[3]{a_{k-1}^4}} + 
@@ -61,7 +46,7 @@ Do đó, với mỗi $n > 4$ ta đều có:
 \frac{1}{81}\sum_{k=2}^{n} \frac{1}{a_{k-1}^4} \quad (2)
 \end{align*}
 
-Dựa vào $(1)$ và dựa vào bất đẳng thức Bunhiacopxki ta sẽ được:
+From $(1)$ and the Cauchy-Schwarz inequality, we have:
 \begin{itemize}
     \item $ \sum_{k=2}^{n} \frac{1}{\sqrt[3]{a_{k-1}^4}} = 1 + \sum_{k=3}^{n} \frac{1}{\sqrt[3]{a_{k-1}^4}} $
     $$ < 1 + \frac{3}{4}\sum_{k=3}^{n} \frac{1}{(k-2)} < 1 + \frac{3}{4}  \sqrt{\sum_{k=3}^{n} (n-2) \frac{1}{(k-2)^2}} $$
@@ -76,46 +61,36 @@ Dựa vào $(1)$ và dựa vào bất đẳng thức Bunhiacopxki ta sẽ đư�
     $$ < 1 + \frac{27}{64} \cdot \frac{32}{3} = 1 + \frac{27}{59} \quad (5) $$
 \end{itemize}
 
-Từ $(2)$, $(3)$, $(4)$, $(5)$ ta được:
+From $(2)$, $(3)$, $(4)$, $(5)$, we have:
 $$ \sqrt[3]{a_n} < 1 + \frac{4}{3} \sqrt{2(n-2)} + \frac{35}{54n} + \frac{1}{8} \cdot \frac{59}{32} \quad (6) $$
 $\forall n > 4$.
 
-Từ $(1)$ và $(6)$ suy ra:
+From $(1)$ and $(6)$, we have:
 $$ \frac{4}{3} \left(1 - \frac{1}{n}\right) < \frac{a_n^{4/3}}{n} < \frac{4}{3} \cdot \frac{1}{n} + \frac{2\sqrt{2(n-2)}}{n} + \frac{35}{54n} + \frac{1}{8} \cdot \frac{59}{32n}, \quad \forall n > 4 \quad (7) $$
 
-Vì $\lim_{n \to \infty} \frac{4}{3} \left(1 - \frac{1}{n}\right) = \frac{4}{3}$
+Since $\lim_{n \to \infty} \frac{4}{3} \left(1 - \frac{1}{n}\right) = \frac{4}{3}$, we have:
 $$ \lim_{n \to \infty} \left(\frac{4}{3n} + \frac{2\sqrt{2(n-2)}}{n} + \frac{35}{54n} + \frac{1}{8} \frac{59}{32n}\right) = \lim_{n \to \infty} \frac{2\sqrt{2n}}{n} = 0 $$
-nên từ $(7)$ suy ra $\lim_{n \to \infty} \frac{\sqrt[4]{a_n}}{n} = \frac{4}{3}$.
-Như vậy $\alpha = \frac{4}{3}$ là một giá trị cần tìm.
+Hence, from $(7)$, we have $\lim_{n \to \infty} \frac{\sqrt[4]{a_n}}{n} = \frac{4}{3}$.
+Hence, $\alpha = \frac{4}{3}$ is a value we need to find.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Do $\lim_{n \to \infty} a_n = +\infty$ suy ra từ (1) nên:
+Since $\lim_{n \to \infty} a_n = +\infty$ from $(1)$, we have:
 $$ \lim_{n \to \infty} a_n^{\alpha - \frac{4}{3}} = \begin{cases} +\infty & \text{nếu } \alpha > \frac{4}{3} \\ 0 & \text{nếu } \alpha < \frac{4}{3} \end{cases} $$
-Kết hợp với $u_n = \frac{a_n^\alpha}{n} = \frac{a_n^{4/3}}{n} \cdot a_n^{\alpha - \frac{4}{3}}$ suy ra:
+From $u_n = \frac{a_n^\alpha}{n} = \frac{a_n^{4/3}}{n} \cdot a_n^{\alpha - \frac{4}{3}}$, we have:
 $$ \lim_{n \to \infty} u_n = \lim_{n \to \infty} \frac{a_n^\alpha}{n} = \begin{cases} +\infty & \text{nếu } \alpha > \frac{4}{3} \\ 0 & \text{nếu } \alpha < \frac{4}{3} \end{cases} $$
-Vậy $\alpha = \frac{4}{3}$ là giá trị duy nhất để dãy $\{u_n\}$ hội tụ và giới hạn của nó khác không.
+Hence, $\alpha = \frac{4}{3}$ is the only value that makes the sequence $\{u_n\}$ converge and its limit is non-zero.
 
-\subsubsection*{Nhận xét:}
-1. Có 8 bạn gửi lời giải cho bài toán. 
-Trong số đó chỉ có các bạn: Ngô Đức Duy (12CT THPT Trần Phú - Hải Phòng), 
-\textbf{Nguyễn Vũ Hưng} (12D Chuyên ngữ ĐHQG Hà Nội) và 
-Lê Anh Vũ (12CT Quốc học Huế) có lời giải đúng. 
-Bạn Vũ cho lời giải khá phức tạp; 
-bạn Hưng phải dùng tới các kiến thức vượt ra ngoài chương trình THPT để giải bài toán.
-
-2. Bạn \textbf{Ngô Đức Duy} đã đề xuất và giải tốt Bài toán khái quát sau: 
-"Cho số thực dương $a$ và số thực âm $b$. Cho dãy số $\{a_n\}$ được xác định bởi
-$$ a_0 = a, a_{n+1} = a_n + a_n^b, \quad \forall n \ge 0. $$
-Tìm tất cả các số thực $\alpha$ sao cho dãy $\{u_n\}$ xác định bởi
-$$ u_n = \frac{a_n^\alpha}{n}, \quad \forall n \ge 1 $$
-hội tụ và giới hạn của nó khác không". (\text{Đáp số: } $\alpha = 1 - b$).
-
-\hfill NGUYỄN KHẮC MINH
+\section*{Remarks}
+1. There are 8 students who submitted solutions to the problem. 
+There are 8 students who submitted solutions to the problem.
+Among them, only the students: Ngô Đức Duy (12CT THPT Trần Phú - Hải Phòng), 
+\textbf{Nguyễn Vũ Hưng} (12D Chuyên ngữ ĐHQG Hà Nội) and 
+Lê Anh Vũ (12CT Quốc học Huế) have correct solutions.
+Student Vu has a complicated solution and Hung has to use knowledge beyond the standard high school curriculum to solve the problem.
 
 \section{Observation}
-
 \begin{itemize}
     \item Looks like this is a hard problem for high school students.
     \item The idea in the solution above is using Talyor's expansion to approximate $a_n$, find a lower bound for $a_n^{4/3}$ and an upper bound for $a_n^{4/3}$, then use the squeeze theorem to find the limit.
@@ -129,12 +104,6 @@ We approximate $a_n$ by values of a smooth function $f(x)$ at
 integer points, i.e., $a_n \approx f(n)$. 
 For large $n$, the forward difference satisfies $a_{n+1} - a_n \approx f'(n)$.
 (See the Mean Value Theorem in the Discussion section.)
-
-% \emph{Proof sketch.} By the Mean Value Theorem, for each integer $n$ there exists $\zeta_n\in(n,n+1)$ such that 
-% $$f(n+1)-f(n)=f'(\zeta_n).$$
-% If $f'$ varies slowly on intervals of length $1$ (e.g., $f''$ is bounded along the trajectory), then $f'(\zeta_n)=f'(n)+O(\max_{t\in[n,n+1]}|f''(t)|)$, hence $f(n+1)-f(n)=f'(n)+o(1)$. Equivalently, the first-order Taylor expansion gives 
-% $$f(n+1)-f(n)=f'(n)\cdot 1+\tfrac12 f''(\xi_n)\cdot 1^2,$$ 
-% for some $\xi_n\in(n,n+1)$, so the remainder is controlled when $f''$ is moderate, justifying the approximation $a_{n+1}-a_n\approx f'(n)$.
 
 From the recurrence $a_{n+1} - a_n = a_n^{-1/3}$, we obtain the separable Ordinary Differential Equation (ODE)
 
@@ -232,11 +201,24 @@ If $(A_n)$ and $(B_n)$ satisfy $B_n\nearrow\infty$ and $\lim\limits_{n\to\infty}
 $$\frac{A_n}{B_n}=\frac{\sum_{k=1}^{n-1}(A_{k+1}-A_k)}{\sum_{k=1}^{n-1}(B_{k+1}-B_k)}$$
 and view it as a weighted average of the ratios $\dfrac{A_{k+1}-A_k}{B_{k+1}-B_k}$ with positive weights $B_{k+1}-B_k$. If these ratios converge to $L$ and the denominator diverges, the weighted average also converges to $L$ (a Ces\`aro-type argument). This justifies replacing a hard ratio limit by the simpler difference ratio limit.
 
-\paragraph{Relevance to time series and machine learning.}
-Difference equations are the backbone of many time-series models (e.g., AR, ARIMA, state-space recurrences, RNN updates). Our recurrence $a_{n+1}-a_n=a_n^{-1/3}$ is a nonlinear, state-dependent step size; analyzing its stability and asymptotics mirrors tasks in ML such as diagnosing exploding/vanishing dynamics, choosing scalings, and proving convergence of iterative training rules. The discrete-to-continuum translation (ODE surrogate) parallels common practice in optimization theory (gradient flow limits) and continuous-time modeling, while robustness results (persistence under small perturbations) echo stability under noise and model misspecification in real datasets.
 
 \paragraph{Pedagogical note.}
 The ODE/dominant-balance route offers intuition and a clean roadmap; the discrete inequalities provide full rigor. Presenting both helps students connect heuristic modeling with proof techniques.
+
+\newpage
+
+\noindent\textbf{Author:} Prepared by Vu Hung Nguyen \\
+\textbf{Date:} November 2025 \\
+\vspace{0.3cm}
+
+
+\textbf{Links:}
+\begin{itemize}
+    \item \href{https://vuhung16au.github.io/}{https://vuhung16au.github.io/}
+    \item \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}
+    \item \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}
+\end{itemize}
+
 
 \end{document}
 

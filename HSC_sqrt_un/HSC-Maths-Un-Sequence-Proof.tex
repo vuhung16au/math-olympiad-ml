@@ -32,18 +32,17 @@
 
 \maketitle
 
-\noindent\textbf{Author Information:}\\
-\noindent Website: \url{https://vuhung16au.github.io/}\\
-\noindent GitHub: \url{https://github.com/vuhung16au/}\\
-\noindent LinkedIn: \url{https://www.linkedin.com/in/nguyenvuhung/}
-
-\vspace{0.5cm}
-
 \section{Introduction}
 
-This document presents a problem commonly found in \textbf{HSC Mathematics Extension} courses. The problem involves analyzing the convergence of a recursively defined sequence using fundamental theorems from calculus and real analysis. This topic is essential for students studying advanced sequences and series, as it demonstrates the powerful application of the Monotone Convergence Theorem.
+This document presents a problem found in \textbf{HSC Mathematics Extension} course, Australian Curriculum, Year 12. 
+The problem involves analyzing the convergence of a recursively defined sequence using fundamental theorems 
+from calculus and real analysis. 
+This topic is essential for students studying advanced sequences and series, 
+as it demonstrates the powerful application of the Monotone Convergence Theorem.
 
-We will explore how sequences defined by recurrence relations behave, and learn to prove their convergence rigorously. The techniques used here are fundamental tools that you will encounter throughout your mathematical studies.
+We will explore how sequences defined by recurrence relations behave, 
+and learn to prove their convergence rigorously. 
+The techniques used here are fundamental tools that you will encounter throughout your mathematical studies.
 
 \section{Problem Statement}
 
@@ -53,14 +52,20 @@ u_n = \sqrt{2 + u_{n-1}}, \quad n \geq 1
 \end{equation}
 with an initial value $u_0 > 0$.
 
+
 \textbf{Question:} Does this sequence converge? If so, what is its limit, and how can we prove this convergence?
 
 This problem challenges us to:
 \begin{enumerate}[label=\roman*)]
     \item Determine the potential limit (if it exists)
+    \item Find the closed-form solution for $u_n$
     \item Prove that the sequence actually converges to this limit
     \item Understand the behavior of the sequence for different starting values
 \end{enumerate}
+
+Flip to the next page for the solution.
+
+\newpage
 
 \section{Solution}
 
@@ -269,6 +274,130 @@ The substitution $u_n = 2\cos(\theta_n)$ fails because $u_0/2 > 1$, which is out
 
 \textbf{Conclusion (Difference Equation):} Both cases ($u_0 \le 2$ and $u_0 > 2$) lead to the same limit, \textbf{2}, confirming our earlier result from the Monotone Convergence Theorem.
 
+\subsection{Complex Number Approach: Unified Solution}
+
+The two separate cases can be elegantly unified using complex numbers. Since $\cosh(x) = \cos(ix)$ for real $x$, we can express both cases using a single complex formulation.
+
+\subsubsection{Unified Complex Representation}
+
+We use the substitution \textbf{$u_n = 2\cos(\theta_n)$}, where $\theta_n$ is now allowed to be \textbf{complex}.
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Substitute:}
+    \begin{align*}
+    u_n &= \sqrt{2 + u_{n-1}}\\
+    2\cos(\theta_n) &= \sqrt{2 + 2\cos(\theta_{n-1})}
+    \end{align*}
+    
+    \item \textbf{Apply the Half-Angle Identity:}
+    Using the identity $2\cos(x/2) = \sqrt{2 + 2\cos(x)}$ (which holds for complex $x$), we obtain:
+    \[
+    2\cos(\theta_n) = 2\cos(\theta_{n-1}/2)
+    \]
+    
+    This gives us the recurrence relation:
+    \[
+    \theta_n = \frac{\theta_{n-1}}{2}
+    \]
+    
+    Which has the solution:
+    \[
+    \theta_n = \frac{\theta_0}{2^n}
+    \]
+    
+    \item \textbf{Determine $\theta_0$ from $u_0$:}
+    
+    We need to solve $u_0 = 2\cos(\theta_0)$ for $\theta_0$. The inverse function $\arccos$ can be extended to the complex plane.
+    
+    \begin{itemize}
+        \item \textbf{Case 1: $0 < u_0 \le 2$}\\
+        Here, $u_0/2 \in (0, 1]$, so we can take $\theta_0 = \arccos(u_0/2)$ where $\arccos$ returns a real value in $[0, \pi/2)$.
+        
+        \item \textbf{Case 2: $u_0 > 2$}\\
+        When $u_0/2 > 1$, we need to use the complex extension of $\arccos$. Using the identity $\cos(i\alpha) = \cosh(\alpha)$ for real $\alpha$, we can write:
+        \[
+        \theta_0 = i\alpha, \quad \text{where } \alpha = \text{arccosh}(u_0/2)
+        \]
+        This gives $u_0 = 2\cos(i\alpha) = 2\cosh(\alpha)$, which is consistent with our earlier hyperbolic substitution.
+    \end{itemize}
+    
+    \item \textbf{Unified Closed-Form Solution:}
+    
+    The closed-form solution can be written as:
+    \[
+    u_n = 2\cos\left(\frac{\theta_0}{2^n}\right)
+    \]
+    where $\theta_0$ is determined by:
+    \[
+    \theta_0 = \begin{cases}
+        \arccos(u_0/2) & \text{if } 0 < u_0 \le 2 \text{ (real $\theta_0$)}\\
+        i\cdot\text{arccosh}(u_0/2) & \text{if } u_0 > 2 \text{ (purely imaginary $\theta_0$)}
+    \end{cases}
+    \]
+    
+    \item \textbf{Complex Exponential Form:}
+    
+    Using Euler's formula, we can express this more elegantly. Since $\cos(z) = \frac{e^{iz} + e^{-iz}}{2}$ for any complex $z$, we have:
+    \[
+    u_n = e^{i\theta_n} + e^{-i\theta_n} = e^{i\theta_0/2^n} + e^{-i\theta_0/2^n}
+    \]
+    where the principal square root ensures we take the real part.
+    
+    More precisely, since $u_n$ must be real and positive:
+    \[
+    u_n = \Re\left(e^{i\theta_0/2^n} + e^{-i\theta_0/2^n}\right) = 2\Re\left(\cos\left(\frac{\theta_0}{2^n}\right)\right)
+    \]
+    
+    \item \textbf{Verification of Both Cases:}
+    
+    \begin{itemize}
+        \item \textbf{When $u_0 \le 2$:} $\theta_0$ is real, so $u_n = 2\cos(\theta_0/2^n)$, matching our trigonometric solution.
+        
+        \item \textbf{When $u_0 > 2$:} $\theta_0 = i\alpha$ where $\alpha = \text{arccosh}(u_0/2)$ is real. Then:
+        \[
+        u_n = 2\cos\left(\frac{i\alpha}{2^n}\right) = 2\cos\left(i\cdot\frac{\alpha}{2^n}\right) = 2\cosh\left(\frac{\alpha}{2^n}\right)
+        \]
+        which matches our hyperbolic solution.
+    \end{itemize}
+    
+    \item \textbf{Convergence:}
+    
+    As $n \to \infty$, we have:
+    \[
+    \lim_{n \to \infty} \frac{\theta_0}{2^n} = 0
+    \]
+    regardless of whether $\theta_0$ is real or purely imaginary. Therefore:
+    \[
+    \lim_{n \to \infty} u_n = 2\cos(0) = 2\cosh(0) = 2
+    \]
+\end{enumerate}
+
+\subsubsection{Alternative Complex Exponential Derivation}
+
+We can also derive this directly from the recurrence relation using complex exponentials. Starting from:
+\[
+u_n^2 = 2 + u_{n-1}
+\]
+
+If we let $u_n = z_n + \bar{z}_n$ where $z_n$ is complex and $\bar{z}_n$ is its complex conjugate, then $u_n = 2\Re(z_n)$. The recurrence becomes:
+\[
+(z_n + \bar{z}_n)^2 = 2 + (z_{n-1} + \bar{z}_{n-1})
+\]
+
+A particularly elegant choice is $z_n = e^{i\theta_n}$, which gives $u_n = 2\cos(\theta_n)$. Substituting into $u_n^2 = 2 + u_{n-1}$:
+\[
+4\cos^2(\theta_n) = 2 + 2\cos(\theta_{n-1})
+\]
+
+Using the double-angle identity $2\cos^2(x) = 1 + \cos(2x)$:
+\[
+2(1 + \cos(2\theta_n)) = 2 + 2\cos(\theta_{n-1})
+\]
+
+Simplifying gives $\cos(2\theta_n) = \cos(\theta_{n-1})$, which leads to $2\theta_n = \theta_{n-1}$ (choosing the appropriate branch), yielding $\theta_n = \theta_0/2^n$ as before.
+
+\textbf{Conclusion (Complex Approach):} The complex number formulation elegantly unifies both the trigonometric and hyperbolic cases into a single expression $u_n = 2\cos(\theta_0/2^n)$, where $\theta_0$ takes real or purely imaginary values depending on the initial condition. This demonstrates the power of complex analysis in providing unified solutions to problems that initially appear to require separate treatments.
+
 \subsection{Differential Equation Approach: Continuous Analogue}
 
 We can analyze the stability of the system by approximating the discrete difference equation with an autonomous differential equation. The discrete change is $u_n - u_{n-1} = \sqrt{2 + u_{n-1}} - u_{n-1}$.
@@ -420,6 +549,13 @@ This problem beautifully illustrates several key concepts in sequence convergenc
 \end{itemize}
 
 Understanding these ideas will serve you well in more advanced mathematical studies, including calculus, real analysis, and beyond.
+
+\vspace{1cm}
+
+\noindent\textbf{Author Information:}\\
+\noindent Website: \url{https://vuhung16au.github.io/}\\
+\noindent GitHub: \url{https://github.com/vuhung16au/}\\
+\noindent LinkedIn: \url{https://www.linkedin.com/in/nguyenvuhung/}
 
 \end{document}
 
