@@ -18,7 +18,7 @@
 *.vrb
 
 # PDF output
-*.pdf
+# *.pdf
 
 # Temporary files
 *.tmp
@@ -30,6 +30,10 @@
 .DS_Store
 Thumbs.db
 
+# Python virtual environment
+.venv/
+
 # Build directories
-release/
+# release/
 tmp/
+# data/

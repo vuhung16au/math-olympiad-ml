@@ -159,6 +159,19 @@ p(x) = \frac{2}{\pi\sqrt{1-x^2}}
 
 This map is a specific case of a family of maps known as \textbf{Chebyshev maps} (dynamical systems defined by Chebyshev polynomials, which are trigonometric polynomial maps that exhibit chaotic behavior), for which this measure is a well-known result.
 
+\subsection{Numerical Verification}
+
+To verify the theoretical result, we numerically simulate the sequence starting from an initial condition $x_0 = \frac{3}{4}$ and compute the empirical density. The simulation generates 100,000 iterations using the recurrence relation $x_{k+1} = 2x_k\sqrt{1-x_k^2}$, and the empirical distribution of the values is computed using a histogram.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{data/density_0.75.pdf}
+\caption{Empirical density of the sequence $x_{k+1} = 2x_k\sqrt{1-x_k^2}$ with initial condition $x_0 = \frac{3}{4}$, compared with the theoretical invariant density $p(x) = \frac{2}{\pi\sqrt{1-x^2}}$. The simulation shows excellent agreement between the empirical distribution (blue line) and the theoretical prediction (red dashed line), confirming that the invariant measure is indeed given by the stated formula.}
+\label{fig:density}
+\end{figure}
+
+Figure~\ref{fig:density} shows the empirical density obtained from the simulation alongside the theoretical invariant density. The excellent agreement between the two demonstrates that for typical initial conditions, the long-term empirical distribution of the sequence converges to the theoretical invariant measure, as predicted by ergodic theory.
+
 \section{The Dyadic Map}
 
 A dyadic map is a simple but important mathematical function in chaos theory and dynamical systems. It's defined as 

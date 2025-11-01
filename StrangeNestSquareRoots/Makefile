@@ -2,7 +2,7 @@ LATEX = pdflatex
 MAIN = StrangeNestSquareRoots
 RELEASE_DIR = release
 
-.PHONY: all pdf release view clean
+.PHONY: all pdf release view clean simul density-simulate
 
 all: pdf
 
@@ -48,3 +48,18 @@ $(MAIN).tex:
 ifneq ($(wildcard $(MAIN).md),)
 $(MAIN).tex: $(MAIN).md
 endif
+
+# Simulation targets
+simul: density-simulate
+
+density-simulate:
+	@echo "Running density simulation..."
+	@if [ -d .venv ]; then \
+		echo "Activating virtual environment and running simulation..."; \
+		.venv/bin/python StrangeNestSquareRoots.py; \
+	else \
+		echo "Warning: Virtual environment .venv not found."; \
+		echo "Attempting to run with system Python..."; \
+		python3 StrangeNestSquareRoots.py || python StrangeNestSquareRoots.py; \
+	fi
+	@echo "Simulation complete. Check ./data/ for output files."
