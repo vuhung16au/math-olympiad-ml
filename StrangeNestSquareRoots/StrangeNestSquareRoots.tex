@@ -11,12 +11,18 @@
 \geometry{margin=1in}
 
 \title{Strange Nested Square Roots}
-\author{}
+
+\author{Nguyen Vu Hung}
 \date{\today}
 
 \begin{document}
 
 \maketitle
+
+\noindent Website: \url{https://vuhung16au.github.io/}\\
+\noindent GitHub: \url{https://github.com/vuhung16au/}\\
+\noindent LinkedIn: \url{https://www.linkedin.com/in/nguyenvuhung/}
+
 
 \section{Introduction}
 
@@ -28,13 +34,13 @@ with initial condition $x_0 \in [0,1]$. We investigate several fundamental quest
 
 \begin{itemize}
     \item Finding initial conditions that yield rational number sequences
-    \item Identifying and characterizing the invariant measure of this system
-    \item Establishing connections to normal numbers via the dyadic map
+    \item Identifying and characterizing the invariant measure (a probability distribution that is preserved under the transformation) of this system
+    \item Establishing connections to normal numbers (numbers whose digits are uniformly distributed in every base) via the dyadic map
     \item Demonstrating ergodicity and explaining its significance
     \item Exploring connections to machine learning and artificial intelligence
 \end{itemize}
 
-The study of this system reveals deep connections between number theory, dynamical systems, ergodic theory, and probabilistic methods that are fundamental to modern machine learning.
+The study of this system reveals deep connections between number theory, dynamical systems, ergodic theory (the mathematical study of systems where time averages equal space averages), and probabilistic methods that are fundamental to modern machine learning.
 
 \section{The Problem}
 
@@ -157,7 +163,7 @@ Therefore, the invariant density is
 p(x) = \frac{2}{\pi\sqrt{1-x^2}}
 \]
 
-This map is a specific case of a family of maps known as \textbf{Chebyshev maps} (dynamical systems defined by Chebyshev polynomials, which are trigonometric polynomial maps that exhibit chaotic behavior), for which this measure is a well-known result.
+This map is a specific case of a family of maps known as \textbf{Chebyshev maps} (dynamical systems defined by Chebyshev polynomials, which are a family of orthogonal polynomials defined recursively as $T_n(\cos\theta) = \cos(n\theta)$ and which appear as trigonometric polynomial maps that exhibit chaotic behavior), for which this measure is a well-known result.
 
 \subsection{Numerical Verification}
 
