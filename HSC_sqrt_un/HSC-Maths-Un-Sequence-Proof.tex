@@ -4,6 +4,7 @@
 \usepackage{styles/dl101-base}
 \usepackage{styles/dl101-fonts}
 \usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
 % Note: dl101-boxes, dl101-theorems, and dl101-header-footer use chapter commands
 % which don't work with article class. We skip them and use custom styling instead.
 \usepackage[most]{tcolorbox}
@@ -563,7 +564,9 @@ The following exercises will help you deepen your understanding of sequence conv
     \]
     where $\epsilon_n = (-1)^n \cdot \frac{1}{n+1}$ for $n \geq 0$ and $u_0 = 1.5$. Show that this sequence converges to 2 despite being non-monotonic.
     
-    \textbf{Hint:} The noise alternates in sign. Consider the behavior of $u_n$ when the noise is positive versus negative. Use the fact that $|\epsilon_n| \to 0$ as $n \to \infty$.
+    \begin{hint}
+    The noise alternates in sign. Consider the behavior of $u_n$ when the noise is positive versus negative. Use the fact that $|\epsilon_n| \to 0$ as $n \to \infty$.
+    \end{hint}
     
     \item \textbf{Modified Recurrence: $\sqrt{1 + u_{n-1}}$}\\
     Consider the sequence defined by:
@@ -572,7 +575,9 @@ The following exercises will help you deepen your understanding of sequence conv
     \]
     with $u_0 > 0$. Determine whether this sequence converges, and if so, find its limit. Prove your result using the Monotone Convergence Theorem.
     
-    \textbf{Hint:} Start by finding the potential fixed point(s) by solving $L = \sqrt{1 + L}$ for $L$. Then analyze monotonicity and boundedness similar to the original problem.
+    \begin{hint}
+    Start by finding the potential fixed point(s) by solving $L = \sqrt{1 + L}$ for $L$. Then analyze monotonicity and boundedness similar to the original problem.
+    \end{hint}
     
     \item \textbf{Cube Root Recurrence: $\sqrt[3]{6 + u_{n-1}}$}\\
     Consider the sequence defined by:
@@ -586,7 +591,9 @@ The following exercises will help you deepen your understanding of sequence conv
         \item Find the limit of the sequence and prove convergence.
     \end{enumerate}
     
-    \textbf{Hint:} For part (i), solve $\sqrt[3]{6 + u} = u$ to find the fixed point. For part (ii), compare $u_n$ with $u_{n-1}$ by considering the function $f(x) = \sqrt[3]{6 + x} - x$.
+    \begin{hint}
+    For part (i), solve $\sqrt[3]{6 + u} = u$ to find the fixed point. For part (ii), compare $u_n$ with $u_{n-1}$ by considering the function $f(x) = \sqrt[3]{6 + x} - x$.
+    \end{hint}
     
     \item \textbf{Generalized Recurrence: $\sqrt{a + u_{n-1}}$}\\
     Consider the sequence defined by:
@@ -600,7 +607,9 @@ The following exercises will help you deepen your understanding of sequence conv
         \item Investigate the behavior when $a = 0$. Does the sequence converge? If so, to what?
     \end{enumerate}
     
-    \textbf{Hint:} Start by finding fixed points: solve $L = \sqrt{a + L}$. Consider the discriminant of the resulting quadratic equation. For part (iii), think carefully about the domain and what happens when $a = 0$.
+    \begin{hint}
+    Start by finding fixed points: solve $L = \sqrt{a + L}$. Consider the discriminant of the resulting quadratic equation. For part (iii), think carefully about the domain and what happens when $a = 0$.
+    \end{hint}
     
     \item \textbf{Rate of Convergence}\\
     For the original sequence $u_n = \sqrt{2 + u_{n-1}}$ with $0 < u_0 < 2$, we showed that $u_n \to 2$ as $n \to \infty$. 
@@ -613,7 +622,9 @@ The following exercises will help you deepen your understanding of sequence conv
         where $\theta_0 = \arccos(u_0/2)$ and $\sim$ means asymptotic equivalence.
     \end{enumerate}
     
-    \textbf{Hint:} For part (i), use the fact that $u_n = 2\cos(\theta_0/2^n)$ and consider the Taylor expansion of $\cos(x)$ near $x = 0$. For part (ii), use $\cos(x) = 1 - x^2/2 + O(x^4)$.
+    \begin{hint}
+    For part (i), use the fact that $u_n = 2\cos(\theta_0/2^n)$ and consider the Taylor expansion of $\cos(x)$ near $x = 0$. For part (ii), use $\cos(x) = 1 - x^2/2 + O(x^4)$.
+    \end{hint}
 \end{enumerate}
 
 \newpage
