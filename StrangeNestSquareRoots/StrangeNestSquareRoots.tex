@@ -19,11 +19,6 @@
 
 \maketitle
 
-\noindent Website: \url{https://vuhung16au.github.io/}\\
-\noindent GitHub: \url{https://github.com/vuhung16au/}\\
-\noindent LinkedIn: \url{https://www.linkedin.com/in/nguyenvuhung/}
-
-
 \section{Introduction}
 
 This document explores the fascinating properties of the discrete dynamical system defined by the recurrence relation
@@ -105,6 +100,71 @@ x_4 &= \frac{116749235904}{152587890625} \quad \text{(from Pythagorean triple $(
 
 This demonstrates that the recurrence preserves the property of being a rational number when starting from a rational initial condition derived from a Pythagorean triple.
 
+\section{Closed-Form Solution}
+
+Remarkably, the recurrence relation $x_{k+1} = 2x_k\sqrt{1-x_k^2}$ admits a closed-form solution using trigonometric functions. This elegant representation reveals the underlying structure of the system and provides a direct method to compute any term in the sequence without iteration.
+
+\subsection{Derivation Using Trigonometric Substitution}
+
+The key insight is to use the trigonometric substitution $x_k = \sin(\theta_k)$. Under this transformation, the recurrence relation becomes:
+
+\[
+\sin(\theta_{k+1}) = 2\sin(\theta_k)\sqrt{1-\sin^2(\theta_k)} = 2\sin(\theta_k)\cos(\theta_k) = \sin(2\theta_k)
+\]
+
+This immediately implies that $\theta_{k+1} = 2\theta_k$ (modulo periodicity considerations), which is the doubling map on the circle.
+
+\emph{Note:} The doubling map $\theta \mapsto 2\theta \pmod{2\pi}$ on the circle is chaotic. 
+This chaotic behavior is fundamentally related to the fact that $\pi$ is irrational. 
+Since $\pi$ is irrational, the doubling map exhibits ergodic and mixing properties: 
+typical trajectories densely fill the circle, making long-term prediction 
+impossible despite the deterministic nature of the system. 
+This irrationality ensures that the map cannot settle into periodic orbits for 
+typical initial conditions, which is precisely what makes the system chaotic.
+
+Starting with $x_0 = \sin(\theta_0)$, where $\theta_0 = \arcsin(x_0)$, we obtain:
+
+\begin{align*}
+x_0 &= \sin(\theta_0) \\
+x_1 &= \sin(2\theta_0) \\
+x_2 &= \sin(4\theta_0) = \sin(2^2\theta_0) \\
+x_3 &= \sin(8\theta_0) = \sin(2^3\theta_0) \\
+&\vdots \\
+x_k &= \sin(2^k\theta_0)
+\end{align*}
+
+\subsection{Explicit Formula}
+
+The closed-form solution for the strange nested square roots recurrence is:
+
+\[
+x_k = \sin(2^k \arcsin(x_0))
+\]
+
+or equivalently, if we define $\theta_0 = \arcsin(x_0)$:
+
+\[
+x_k = \sin(2^k \theta_0), \quad \text{where } \theta_0 = \arcsin(x_0)
+\]
+
+\subsection{Implications and Properties}
+
+The closed-form solution provides several important insights:
+
+\begin{enumerate}
+    \item \textbf{Direct Computation:} Any term $x_k$ can be computed directly from $x_0$ without iterating through all intermediate values, which is particularly useful for computing terms with very large indices.
+    
+    \item \textbf{Geometric Interpretation:} The sequence corresponds to repeatedly doubling an angle on the unit circle and taking the sine. This geometric picture helps visualize why the system exhibits chaotic behavior and why it explores the entire interval $[0,1]$ aperiodically.
+    
+    \item \textbf{Periodicity:} If $\theta_0$ is a rational multiple of $\pi$ (i.e., $\theta_0 = \frac{p}{q}\pi$ for some integers $p, q$), then the sequence is periodic. Otherwise, the sequence is dense in $[0,1]$ and exhibits chaotic behavior.
+    
+    \item \textbf{Connection to Doubling Map:} The closed-form confirms that our map is conjugate to the doubling map $\theta \mapsto 2\theta$ on the circle, which explains many of the system's properties, including the invariant measure and Lyapunov exponent.
+    
+    \item \textbf{Rational Initial Conditions:} For the special case $x_0 = \frac{3}{5}$ discussed earlier, we have $\theta_0 = \arcsin(3/5)$. While this yields a closed-form expression, the values remain rational due to the Pythagorean triple structure, demonstrating an interesting intersection between the algebraic and trigonometric representations.
+\end{enumerate}
+
+The existence of this closed-form solution is a beautiful example of how seemingly complex nonlinear recurrences can sometimes be reduced to simple trigonometric functions through appropriate coordinate transformations. This transformation not only simplifies computation but also reveals the deep geometric and dynamical structure underlying the system.
+
 \section{The Invariant Measure}
 
 The invariant measure of the mapping $T(x) = 2x\sqrt{1-x^2}$ on the interval $[0, 1]$ is given by the density function 
@@ -178,6 +238,57 @@ To verify the theoretical result, we numerically simulate the sequence starting 
 
 Figure~\ref{fig:density} shows the empirical density obtained from the simulation alongside the theoretical invariant density. The excellent agreement between the two demonstrates that for typical initial conditions, the long-term empirical distribution of the sequence converges to the theoretical invariant measure, as predicted by ergodic theory.
 
+\section{The Lyapunov Exponent}
+
+The \textbf{Lyapunov exponent} is a fundamental quantity in dynamical systems theory that measures the sensitivity to initial conditions. It quantifies how fast two nearby trajectories diverge or converge over time, providing a mathematical characterization of chaotic behavior.
+
+\subsection{Definition and Interpretation}
+
+For a discrete one-dimensional map $x_{n+1} = f(x_n)$, the Lyapunov exponent $\lambda$ measures the exponential rate of separation of initially close trajectories. If we start with two close initial points $x_0$ and $x_0 + \varepsilon$, the distance after $n$ steps is approximately:
+\[
+|\delta x_n| \approx |\delta x_0| e^{n\lambda}
+\]
+
+The Lyapunov exponent is defined as:
+\[
+\lambda = \lim_{n \to \infty} \frac{1}{n} \sum_{i=0}^{n-1} \ln |f'(x_i)|
+\]
+where $f'(x_i)$ is the derivative of $f$ at the $i$-th iterate.
+
+The value of $\lambda$ determines the system's behavior:
+\begin{itemize}
+    \item \textbf{$\lambda > 0$:} Trajectories diverge exponentially; the system exhibits chaotic behavior and is sensitive to initial conditions.
+    \item \textbf{$\lambda = 0$:} Neutral stability; trajectories neither converge nor diverge exponentially.
+    \item \textbf{$\lambda < 0$:} Trajectories converge; the system is stable and insensitive to initial conditions.
+\end{itemize}
+
+\subsection{Lyapunov Exponent for the Strange Nested Square Roots Map}
+
+For our map $T(x) = 2x\sqrt{1-x^2}$, we can compute the Lyapunov exponent using the invariant measure and the ergodic property. The derivative of the map is:
+\[
+T'(x) = \frac{2-4x^2}{\sqrt{1-x^2}}
+\]
+
+Since the system is ergodic with invariant density $p(x) = \frac{2}{\pi\sqrt{1-x^2}}$, the Lyapunov exponent can be computed as the space average:
+\[
+\lambda = \int_0^1 \ln |T'(x)| \, p(x) \, dx = \frac{2}{\pi} \int_0^1 \frac{\ln|T'(x)|}{\sqrt{1-x^2}} \, dx
+\]
+
+A more elegant approach uses the trigonometric substitution $x = \sin\theta$. Under this transformation, we find that $T(\sin\theta) = 2\sin\theta\cos\theta = \sin(2\theta)$, which reveals that our map is conjugate to the doubling map $\theta \mapsto 2\theta$ on the circle $[0, \pi/2]$. 
+
+The doubling map on the circle has a well-known Lyapunov exponent of $\ln 2$. Since Lyapunov exponents are preserved under conjugacy (smooth coordinate transformations), our map inherits this same Lyapunov exponent.
+
+\subsection{Result for the Strange Nested Square Roots System}
+
+For the map $x_{k+1} = 2x_k\sqrt{1-x_k^2}$, the Lyapunov exponent is:
+\[
+\lambda = \ln 2 \approx 0.693
+\]
+
+This positive Lyapunov exponent confirms that the system exhibits \textbf{chaotic behavior}. The exponential divergence of nearby trajectories means that even tiny differences in initial conditions will grow exponentially over time, making long-term prediction impossible despite the deterministic nature of the system.
+
+The fact that $\lambda = \ln 2$ is consistent with the observation that this map is related to the Chebyshev polynomial of degree 2 and is conjugate to the doubling map. This connection explains why the system shows strong mixing properties and why typical trajectories explore the entire interval $[0,1]$ in an aperiodic manner, leading to the invariant measure we identified earlier.
+
 \section{The Dyadic Map}
 
 A dyadic map is a simple but important mathematical function in chaos theory and dynamical systems. It's defined as 
@@ -214,6 +325,90 @@ For the dyadic map, this means:
 The ergodicity of the dyadic map allows us to study the behavior of a typical infinite sequence starting from a single number and draw conclusions about the properties of almost all numbers. For example, it helps to prove that almost all numbers are normal, even though we can't explicitly construct many of them.
 
 More than one invariant measure can exist. For the dyadic map, the uniform distribution is the \textbf{main} or \textbf{unique absolutely continuous invariant measure} (a measure that has a probability density function). However, there are also other invariant measures, such as \textbf{discrete invariant measures}. For instance, a measure that assigns probability 1 to a single fixed point (e.g., $x=0$) is an invariant measure. If the system is \textbf{ergodic}, it means that any invariant measure can be decomposed into a sum of ergodic measures.
+
+\section{The Logistic Map and the Mandelbrot Set}
+
+The Mandelbrot set and the logistic family are mathematically related through a change of variable that connects the classic quadratic iteration in the Mandelbrot set to the logistic map's difference equation. This relationship reveals how quadratic complex dynamics and real population models share universal routes to chaos and fractal structures.
+
+\subsection{The Mandelbrot Set Iteration}
+
+The Mandelbrot set uses the quadratic map:
+\[
+z_{n+1} = z_n^2 + c
+\]
+where $z$ and $c$ are generally complex numbers. The Mandelbrot set consists of all values of $c$ for which the sequence starting with $z_0 = 0$ remains bounded.
+
+\subsection{The Logistic Map}
+
+The logistic family is given by:
+\[
+x_{n+1} = r x_n (1 - x_n)
+\]
+where $r$ is a real-valued parameter and $x_n$ lies in the interval $[0, 1]$. This map is a classic example in chaos theory and population dynamics, exhibiting a rich bifurcation structure as the parameter $r$ varies.
+
+\subsection{Mathematical Transformation}
+
+A change of variables connects these two systems. Specifically:
+\[
+z = r\left(\frac{1}{2} - x\right), \quad c = \frac{r}{2}\left(1 - \frac{r}{2}\right)
+\]
+
+If you substitute and expand, you can recast the quadratic map of the Mandelbrot set into the logistic form (or vice versa). Both systems generate bifurcation phenomena and chaotic dynamics, and the bifurcation diagram of the logistic map is essentially a cross-section (along the real axis) of the Mandelbrot set.
+
+For certain values of $c$ in the Mandelbrot set, the iterative behavior (fixed points, cycles, chaos) matches the logistic map's bifurcation diagram. The Mandelbrot set encodes all the interesting dynamics of the logistic map within its ``middle section'' --- that is, along the real axis of $c$.
+
+\subsection{Visual Correspondence}
+
+Plotting the long-term behavior of both models reveals that the bifurcation diagram of the logistic map lines up with features on the real axis of the Mandelbrot set. This deep connection illustrates how quadratic complex dynamics (Mandelbrot) and real population models (logistic) share universal routes to chaos and fractal structures.
+
+The correspondence between the quadratic family (Mandelbrot set) and logistic map highlights their shared mathematical structure and intertwining bifurcation features. Both systems exhibit:
+\begin{itemize}
+    \item Period-doubling bifurcations leading to chaos
+    \item Universal scaling properties
+    \item Rich fractal structures in their parameter spaces
+\end{itemize}
+
+\subsection{Connection to the Strange Nested Square Roots Map}
+
+The strange nested square roots map $x_{k+1} = 2x_k\sqrt{1-x_k^2}$ studied in this document is directly related to the logistic map and Mandelbrot set through its identity as a \textbf{Chebyshev map} of degree 2.
+
+\subsubsection{Chebyshev Map Structure}
+
+As established earlier, our map $T(x) = 2x\sqrt{1-x^2}$ is a specific case of the family of Chebyshev maps. Using the trigonometric substitution $x = \sin\theta$, we find that:
+\[
+T(\sin\theta) = 2\sin\theta\cos\theta = \sin(2\theta)
+\]
+This reveals that our map is conjugate to the doubling map $\theta \mapsto 2\theta$ on the circle, which is a fundamental example in dynamical systems theory.
+
+\subsubsection{Relationship to Quadratic Maps}
+
+Chebyshev maps belong to the same universality class as quadratic polynomial maps. In particular, Chebyshev maps can be transformed into quadratic polynomial form through appropriate coordinate changes. This means that:
+
+\begin{itemize}
+    \item The strange nested square roots map shares the same universal properties as the logistic map and Mandelbrot iterations
+    \item All three systems exhibit period-doubling routes to chaos with the same Feigenbaum constants
+    \item They share similar bifurcation structures and scaling laws
+\end{itemize}
+
+\subsubsection{Fixed Parameter Interpretation}
+
+Unlike the logistic map (which depends on the parameter $r$) or the Mandelbrot set (which depends on the complex parameter $c$), our map has no free parameters. This fixed form corresponds to a specific point in the parameter space of quadratic maps, specifically in the \textbf{fully chaotic regime}. 
+
+The Lyapunov exponent $\lambda = \ln 2$ confirms that our map operates in the chaotic regime, where the system exhibits maximal sensitivity to initial conditions and ergodic behavior.
+
+\subsubsection{Unifying Framework}
+
+The connection between these systems reveals a unifying framework:
+
+\begin{itemize}
+    \item \textbf{Mandelbrot set:} $z_{n+1} = z_n^2 + c$ (complex quadratic family with parameter $c$)
+    \item \textbf{Logistic map:} $x_{n+1} = r x_n (1-x_n)$ (real quadratic family with parameter $r$)
+    \item \textbf{Strange nested square roots:} $x_{k+1} = 2x_k\sqrt{1-x_k^2}$ (Chebyshev map, fixed parameter, fully chaotic)
+\end{itemize}
+
+All three belong to the quadratic iteration universality class. The Mandelbrot set provides a complete picture of all possible behaviors, with the logistic map representing the real-axis cross-section, and our Chebyshev map representing a specific fully-chaotic instance within this framework.
+
+This deep connection explains why our map exhibits chaotic behavior, why it has the invariant measure $p(x) = \frac{2}{\pi\sqrt{1-x^2}}$, and why it shares universal scaling properties with other quadratic dynamical systems. The mathematical structure underlying these connections provides a rich theoretical foundation for understanding chaos, ergodicity, and the statistical properties of deterministic systems.
 
 \section{The Ergodic Theorem}
 
@@ -333,6 +528,12 @@ The deep connections between ergodic theory and machine learning suggest several
 \end{itemize}
 
 In conclusion, the strange nested square roots system and its associated mathematical framework of invariant measures, ergodic theory, and normal numbers form a rich theoretical foundation that underlies many practical techniques in modern machine learning and artificial intelligence. Understanding these connections not only deepens our theoretical understanding but also provides guidance for developing more effective and theoretically grounded learning algorithms.
+
+\vspace{2em}
+
+\noindent Website: \url{https://vuhung16au.github.io/}\\
+\noindent GitHub: \url{https://github.com/vuhung16au/}\\
+\noindent LinkedIn: \url{https://www.linkedin.com/in/nguyenvuhung/}
 
 \end{document}
 

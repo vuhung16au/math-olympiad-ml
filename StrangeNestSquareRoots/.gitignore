@@ -37,3 +37,8 @@ Thumbs.db
 # release/
 tmp/
 # data/
+
+# Project specific files
+
+Prompt.md
+TODO.md
