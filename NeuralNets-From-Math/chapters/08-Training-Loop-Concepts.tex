@@ -1,0 +1,47 @@
+\chapter{Training Loop Concepts}
+Predict, measure, adjust, repeat. Split data to measure progress fairly.
+
+\begin{learningobjectives}
+  \objective Describe the predict–loss–update loop.
+  \objective Explain train/validation/test splits.
+  \objective Recognise overfitting and how validation helps.
+\end{learningobjectives}
+
+\section{The Loop}
+For each mini‑batch: compute predictions, compute loss, update parameters a little. After each epoch, check validation loss.
+
+\begin{example}
+Consider a simple linear model \( \hat y = wx + b \) trained with mean squared error on one mini‑batch of two points: \( (x,y)\in\{(1,2),(2,4)\} \). Start from \( w_0=1.0 \), \( b_0=0.0 \), learning rate \( \eta=0.1 \).
+
+\textbf{Predictions.} With \( (w,b)=(1,0) \), predictions are \( \hat y=(1,2) \). Errors \( e=\hat y-y=( -1, -2) \).
+
+\textbf{Loss.} \( \text{MSE}=\tfrac{1}{2}( (-1)^2 + (-2)^2 ) = \tfrac{1}{2}(1+4)=2.5. \)
+
+\textbf{Gradients.} For MSE with this batch,
+\[
+\frac{\partial L}{\partial w}=\frac{1}{2}\sum 2e_i\,x_i = e_1x_1+e_2x_2 = (-1)\cdot 1 + (-2)\cdot 2 = -5,
+\]
+\[
+\frac{\partial L}{\partial b}=\frac{1}{2}\sum 2e_i = e_1+e_2 = -3.
+\]
+
+\textbf{Update.} Gradient descent gives
+\[
+w_1 = w_0 - \eta\,\frac{\partial L}{\partial w} = 1 - 0.1\cdot(-5)=1.5,\qquad
+b_1 = b_0 - \eta\,\frac{\partial L}{\partial b} = 0 - 0.1\cdot(-3)=0.3.
+\]
+Repeating on the next mini‑batch (or another epoch) will continue to reduce loss; validation loss is checked after full‑dataset passes to monitor overfitting.
+\end{example}
+
+\begin{remark}
+When validation loss rises while training loss falls, you may be overfitting.
+\end{remark}
+
+\section{Exercises}
+\begin{exercisebox}[easy]
+Why is a separate test set needed if validation loss looks good?
+\end{exercisebox}
+
+\begin{hint}
+To estimate performance on truly unseen data and avoid tuning to the validation set.
+\end{hint}

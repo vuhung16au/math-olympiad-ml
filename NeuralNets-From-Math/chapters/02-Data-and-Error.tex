@@ -1,0 +1,53 @@
+\chapter{Data and Error}
+Predictions meet reality through data. Error tells us how far off we are.
+
+\begin{learningobjectives}
+  \objective Define prediction, target, and error for a dataset.
+  \objective Compute simple average absolute and squared error.
+  \objective Explain why averaging error stabilises noisy measurements.
+\end{learningobjectives}
+
+\section{Measuring Error}
+Given inputs \( x_i \) with observed outputs \( y_i \) and predictions \( \hat y_i \), an error for item \( i \) is \( e_i = \hat y_i - y_i \). Two popular summaries are the mean absolute error (MAE) and mean squared error (MSE):
+\[ \text{MAE} = \frac{1}{n}\sum_i |e_i|, \quad \text{MSE} = \frac{1}{n}\sum_i e_i^2. \]
+
+\begin{example}
+Using the study–score data from the previous chapter
+\[
+\begin{array}{c|cccc}
+ x & 1 & 2 & 3 & 4 \\
+ \hline
+ y & 2.1 & 4.0 & 6.2 & 7.9 \\
+\end{array}
+\]
+consider the linear rule \( \hat y=2x \). The predictions and errors are:
+\[
+\begin{array}{c|cccc}
+ x & 1 & 2 & 3 & 4 \\
+ \hline
+ \hat y=2x & 2.0 & 4.0 & 6.0 & 8.0 \\
+ e=\hat y-y & 0.1 & 0.0 & -0.2 & 0.1 \\
+ |e| & 0.1 & 0.0 & 0.2 & 0.1 \\
+ e^2 & 0.01 & 0.00 & 0.04 & 0.01 \\
+\end{array}
+\]
+Thus
+\[
+\text{MAE}=\tfrac{0.1+0.0+0.2+0.1}{4}=0.1,\qquad
+\text{MSE}=\tfrac{0.01+0.00+0.04+0.01}{4}=0.015.
+\]
+The small MAE/MSE values indicate the line \( \hat y=2x \) matches the trend closely for these points.
+\end{example}
+
+\begin{remark}
+Squaring emphasises large mistakes; absolute value treats all deviations proportionally. Choice depends on the application.
+\end{remark}
+
+\section{Exercises}
+\begin{exercisebox}[medium]
+For true values \( y=(1,2,3) \) and predictions \( \hat y=(1.2,1.9,3.4) \), compute MAE and MSE.
+\end{exercisebox}
+
+\begin{hint}
+Errors: \( (0.2,-0.1,0.4) \). MAE = \( (0.2+0.1+0.4)/3=0.233\ldots \); MSE = \( (0.04+0.01+0.16)/3=0.07\ldots \).
+\end{hint}

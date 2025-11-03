@@ -1,0 +1,58 @@
+\chapter{Loss and Optimisation}
+Loss quantifies mismatch between predictions and targets; optimisation reduces loss.
+
+\begin{learningobjectives}
+  \objective Define a loss function suitable for a task.
+  \objective Describe gradient descent at a high level.
+  \objective Relate learning rate to step size and stability.
+\end{learningobjectives}
+
+\section{Loss Choices}
+For regression, MSE is common; for binary classification, logistic loss pairs well with sigmoid outputs.
+
+\begin{example}[Regression loss (MSE)]
+Suppose a model predicts house prices (in thousands) for three homes: $\hat{y}=(210,\, 195,\, 250)$, and true prices are $y=(200,\, 205,\, 240)$. Errors are $e=\hat{y}-y=(10,\,-10,\,10)$. The mean squared error is
+\[\text{MSE}=\tfrac{1}{3}(10^2+(-10)^2+10^2)=\tfrac{1}{3}(100+100+100)=100.\]
+Units are squared (here, thousands$^2$). A smaller value indicates closer predictions.
+\end{example}
+
+\begin{example}[Logistic loss]
+For a binary label $y\in\{0,1\}$ with sigmoid output $p=\sigma(z)$ interpreted as $\Pr(y=1\mid x)$, the logistic loss for a single example is
+\[\ell(y,p) = -\big(y\,\log p + (1-y)\,\log(1-p)\big).\]
+Consider two cases with $p=0.9$:
+\begin{itemize}
+  \item If $y=1$: $\ell=-(1\cdot\log 0.9 + 0\cdot\log 0.1)\approx 0.105$ (small penalty).
+  \item If $y=0$: $\ell=-(0\cdot\log 0.9 + 1\cdot\log 0.1)\approx 2.303$ (large penalty for confident wrong prediction).
+\end{itemize}
+This asymmetry encourages calibrated probabilities: confident and correct is rewarded; confident and wrong is penalised heavily.
+\end{example}
+
+\section{Gradient Descent (Conceptually)}
+Imagine standing on a landscape where height is loss. At each step, move a little in the downhill direction; repeat until you are low enough.
+
+\begin{example}[One variable]
+Let \( f(x) = (x-3)^2 \). Its derivative is \( f'(x)=2(x-3) \). Starting at \( x_0=0 \) with learning rate \( \eta=0.5 \), gradient descent updates are
+\[ x_{k+1} = x_k - \eta\, f'(x_k) = x_k - 0.5\cdot 2(x_k-3) = 3 - (x_k-3). \]
+Numerically: \( x_1 = 1.5 \), \( x_2 = 2.25 \), \( x_3 = 2.625 \)\,\ldots which approaches the minimiser \( x^*=3 \).
+\end{example}
+
+\begin{example}[Two variables]
+Let \( f(x,y)= (x-1)^2 + (y+2)^2 \). The gradient is \( \nabla f = (2(x-1),\, 2(y+2)) \). With \( (x_0,y_0)=(0,0) \) and \( \eta=0.25 \):
+\[ (x_1,y_1) = (0,0) - 0.25\,(2(-1),\, 2(2)) = (0.5,\, -1). \]
+Next step uses the new gradient: \( \nabla f(x_1,y_1)=(2(-0.5),\, 2(1))=(-1,2) \), thus
+\[ (x_2,y_2)=(0.5,-1) - 0.25\,(-1,2) = (0.75,\, -1.5). \]
+The iterates head toward the minimiser \( (1,-2) \).
+\end{example}
+
+\paragraph{Many inputs (neural nets).}
+For networks, parameters form a long vector \( \vect{\theta} \) (all weights and biases). The loss \( L(\vect{\theta}) \) is averaged over a mini‑batch. We compute the gradient \( \nabla L(\vect{\theta}) \) efficiently by backpropagation and update
+\[ \vect{\theta}_{k+1} = \vect{\theta}_k - \eta\, \nabla L(\vect{\theta}_k). \]
+Different layers receive different components of the same gradient, moving all parameters a little in the direction that most reduces loss on the current batch.
+
+\begin{exercisebox}[easy]
+If steps are too large, what failure can occur?
+\end{exercisebox}
+
+\begin{hint}
+You can overshoot and bounce around (diverge) instead of settling.
+\end{hint}

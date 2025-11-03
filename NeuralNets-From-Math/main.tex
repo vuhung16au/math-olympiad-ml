@@ -1,0 +1,62 @@
+\documentclass[12pt,oneside]{book}
+
+% Basic packages
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[british]{babel}
+\usepackage{amsmath,amssymb}
+
+% Apply DL101 styles
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-fonts}
+\usepackage{styles/dl101-base}
+\usepackage{styles/dl101-boxes}
+\usepackage{styles/dl101-theorems}
+\usepackage{styles/dl101-header-footer}
+\usepackage{styles/dl101-hints}
+% Optional chapter page styling (provides \styledchapter)
+% \usepackage{styles/dl101-chapter-pages}
+
+\title{Neural Networks from Math}
+\author{Vu Hung Nguyen}
+\date{\today}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+
+\input{frontmatter/preface}
+
+\mainmatter
+
+\include{chapters/00-Overview}
+\include{chapters/01-Functions-and-Graphs}
+\include{chapters/02-Data-and-Error}
+\include{chapters/03-Vectors-and-Matrices}
+\include{chapters/04-Linear-Models}
+\include{chapters/05-Nonlinearity-Activations}
+\include{chapters/06-Composing-Layers}
+\include{chapters/07-Loss-and-Optimization}
+\include{chapters/08-Training-Loop-Concepts}
+\include{chapters/09-Simple-NN-Architecture}
+\include{chapters/10-Limits-and-Ethics}
+\include{chapters/11-Glossary}
+
+\appendix
+\include{appendices/A-Worksheets-Checkpoints}
+\include{appendices/B-Worksheets-Exercises}
+
+\backmatter
+\input{backmatter/references}
+
+% Author information at the end of the book
+\input{backmatter/author}
+
+\end{document}
+
+

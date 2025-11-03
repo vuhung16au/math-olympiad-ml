@@ -1,0 +1,46 @@
+\chapter{A Simple Neural Network Architecture}
+A minimal feed‑forward network: inputs, a hidden layer, and an output.
+
+\begin{learningobjectives}
+  \objective Sketch a tiny network with one hidden layer.
+  \objective Track shapes through layers.
+  \objective Explain forward pass at a high level.
+\end{learningobjectives}
+
+\section{Shapes and Flow}
+With \( d \) inputs, \( h \) hidden units, and one output: \( W_1\in\mathbb{R}^{h\times d} \), \( \vect b_1\in\mathbb{R}^h \), activation \( g \); then \( W_2\in\mathbb{R}^{1\times h} \), \( b_2\in\mathbb{R} \).
+
+\begin{example}
+Let \( d=2, h=3 \). Then \( W_1 \) has 3 rows and 2 columns; \( W_2 \) has 1 row and 3 columns. Compute \( \vect h= g(W_1\vect x+\vect b_1) \), then \( \hat y=W_2\vect h+b_2 \).
+\par\smallskip
+Take a numerical instance with ReLU activation \( g=\mathrm{ReLU} \):
+\[
+\vect x = \begin{bmatrix}2\\1\end{bmatrix},\quad
+W_1 = \begin{bmatrix}1&-1\\[2pt]0.5&1\\[2pt]2&0\end{bmatrix},\quad
+\vect b_1 = \begin{bmatrix}0\\-1\\0.5\end{bmatrix}.
+\]
+First layer pre‑activation and activation:
+\[
+\vect z_1 = W_1\vect x+\vect b_1 =
+\begin{bmatrix}1&-1\\[2pt]0.5&1\\[2pt]2&0\end{bmatrix}
+\begin{bmatrix}2\\[2pt]1\end{bmatrix}
+ + \begin{bmatrix}0\\[2pt]-1\\[2pt]0.5\end{bmatrix}
+= \begin{bmatrix}1\\[2pt]1\\[2pt]4.5\end{bmatrix},\qquad
+\vect h = g(\vect z_1)=\mathrm{ReLU}(\vect z_1)=\begin{bmatrix}1\\1\\4.5\end{bmatrix}.
+\]
+Output layer parameters and prediction:
+\[
+W_2 = \begin{bmatrix}1&-2&0.5\end{bmatrix},\quad b_2=0.2,\qquad
+\hat y = W_2\vect h + b_2 = 1\cdot1 + (-2)\cdot1 + 0.5\cdot4.5 + 0.2 = 1.45.
+\]
+Thus with this small network and input \(\vect x=(2,1)^\top\), the hidden representation is \(\vect h=(1,1,4.5)^\top\) and the scalar output is \(\hat y=1.45\).
+\end{example}
+
+\section{Exercises}
+\begin{exercisebox}[easy]
+If \( g=\mathrm{ReLU} \) and \( \vect h=(0,2,0)^\top \), what is \( \hat y \) when \( W_2=(1,1,1) \) and \( b_2=0 \)?
+\end{exercisebox}
+
+\begin{hint}
+\( 2 \).
+\end{hint}

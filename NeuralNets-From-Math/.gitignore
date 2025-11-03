@@ -1,0 +1,53 @@
+# OS / editor cruft
+.DS_Store
+*.swp
+*.swo
+*.tmp
+
+# LaTeX intermediate files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.xdv
+*.vrb
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.thm
+*.exa
+*.rem
+*.tak
+
+# minted / pygments
+_minted*
+*.pyg
+
+# latexmk auxiliary dirs
+latex.out/
+
+# Build output directory (keep final PDF)
+release/*
+!release/NeuralNets-From-Math.pdf
+
+# Project specific files
+Prompt.md

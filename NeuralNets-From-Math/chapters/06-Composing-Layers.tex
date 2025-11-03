@@ -1,0 +1,54 @@
+\chapter{Composing Layers}
+Stack linear steps with activations to form complex functions.
+
+\begin{learningobjectives}
+  \objective Define a layer as \( \vect h = g(W\vect x + \vect b) \).
+  \objective Explain how two layers can form piecewise linear curves.
+  \objective Understand hidden units as learned features.
+\end{learningobjectives}
+
+\section{Two-Layer Example}
+Let \( \vect h = \mathrm{ReLU}(W_1\vect x + \vect b_1) \) and \( \hat y = W_2\vect h + b_2 \). Even with ReLU, the output is a flexible piecewise linear function of \( \vect x \).
+
+\begin{example}
+In one dimension, two ReLUs can create a ``bump'' by combining kinks at different locations. Consider a tiny network with one input \(x\), two hidden units, and one output:
+\[
+\vect h = \mathrm{ReLU}(W_1 x + \vect b_1), \qquad \hat y = W_2\,\vect h + b_2,
+\]
+where
+\[
+W_1 = \begin{bmatrix}1\\-1\end{bmatrix},\; \vect b_1 = \begin{bmatrix}-1\\-3\end{bmatrix},\; W_2=\begin{bmatrix}1 & -1\end{bmatrix},\; b_2=0.
+\]
+Thus the hidden units are
+\[
+h_1=\mathrm{ReLU}(x-1),\qquad h_2=\mathrm{ReLU}(-x-3)=\mathrm{ReLU}(-(x+3)).
+\]
+The output becomes \(\hat y = h_1 - h_2\). Evaluate at a few inputs:
+\[
+\begin{array}{c|c|c|c}
+ x & h_1=\max(0,x-1) & h_2=\max(0,-x-3) & \hat y=h_1-h_2 \\
+ \hline
+ -5 & 0 & 2 & -2 \\
+ -3 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 \\
+ 2 & 1 & 0 & 1 \\
+ 4 & 3 & 0 & 3 \\
+\end{array}
+\]
+Interpretation:
+\begin{itemize}
+  \item For \(x\le -3\), only the second unit is active, so \(\hat y=-h_2\) decreases linearly.
+  \item For \(-3<x<1\), both units are off, so \(\hat y=0\).
+  \item For \(x\ge 1\), only the first unit is active, so \(\hat y=h_1\) increases linearly.
+\end{itemize}
+This piecewise linear shape forms a flat region with rising and falling flanks—one way to build a ``bump'' by composing ReLUs.
+\end{example}
+
+\section{Exercises}
+\begin{exercisebox}[medium]
+How many linear regions can a sum of two shifted ReLUs create on the line?
+\end{exercisebox}
+
+\begin{hint}
+Up to three regions separated by the two kink locations.
+\end{hint}

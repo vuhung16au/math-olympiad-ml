@@ -1,0 +1,88 @@
+\ProvidesPackage{dl101-base}[2025/10/20 DL101 base style]
+% Core packages
+\RequirePackage{etoolbox,iftex}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\RequirePackage{eso-pic}
+\RequirePackage{booktabs}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{enumitem}
+% Index support
+\RequirePackage{makeidx}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+% Math (load before hyperref/cleveref)
+\RequirePackage{amsmath,amssymb,amsfonts,amsthm}
+\RequirePackage{mathtools}
+% Hyperref and cleveref (after math)
+% Load hyperref only if not already loaded to avoid option clashes
+\makeatletter
+\@ifpackageloaded{hyperref}{% already loaded
+}{% not loaded yet
+  \RequirePackage[unicode]{hyperref}
+}
+\makeatother
+\hypersetup{colorlinks=true,linkcolor=bookpurple,citecolor=bookred,urlcolor=bookpurple,bookmarksopen=true}
+\RequirePackage[capitalise,noabbrev]{cleveref}
+
+% Color palette (preserved from main.tex)
+% Primary Colors
+\definecolor{bookpurple}{RGB}{60,16,83}
+\definecolor{bookred}{RGB}{242,18,12}
+\definecolor{bookblack}{RGB}{0,0,0}
+\definecolor{bookwhite}{RGB}{255,255,255}
+% Secondary Colors
+\definecolor{lawpurple}{RGB}{181,24,37}
+\definecolor{warmstone}{RGB}{145,139,131}
+\definecolor{deepcharcoal}{RGB}{48,44,42}
+\definecolor{softivory}{RGB}{242,239,235}
+
+% Math shortcuts (guarded)
+\providecommand{\vect}[1]{\boldsymbol{#1}}
+\providecommand{\mat}[1]{\boldsymbol{#1}}
+\providecommand{\transpose}{^\top}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\abs}[1]{\left|#1\right|}
+
+% List commands (fallback definitions)
+\providecommand{\listofexamples}{\@starttoc{exa}}
+\providecommand{\listofremarks}{\@starttoc{rem}}
+\providecommand{\listoftakeaways}{\@starttoc{tak}}
+
+% Create custom list files for examples and remarks
+\makeatletter
+\newwrite\@exafile
+\newwrite\@remfile
+\newwrite\@takfile
+
+% Open files at begin document
+\AtBeginDocument{%
+  \immediate\openout\@exafile=\jobname.exa
+  \immediate\openout\@remfile=\jobname.rem
+  \immediate\openout\@takfile=\jobname.tak
+}
+
+% Close files at end document
+\AtEndDocument{%
+  \immediate\closeout\@exafile
+  \immediate\closeout\@remfile
+  \immediate\closeout\@takfile
+}
+
+% Simple write commands for our custom lists
+\newcommand{\@writeexample}[1]{%
+  \immediate\write\@exafile{\unexpanded{example}{#1}}%
+}
+\newcommand{\@writeremark}[1]{%
+  \immediate\write\@remfile{\unexpanded{remark}{#1}}%
+}
+\newcommand{\@writetakeaway}[1]{%
+  \immediate\write\@takfile{\unexpanded{takeaways}{#1}}%
+}
+\makeatother
+
+

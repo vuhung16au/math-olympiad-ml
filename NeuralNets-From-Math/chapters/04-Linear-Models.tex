@@ -1,0 +1,34 @@
+\chapter{Linear Models}
+A linear model scores inputs by a weighted sum plus a bias; decisions follow from thresholds or regression.
+
+\begin{learningobjectives}
+  \objective Write a linear model as \( \hat y = \vect w^\top \vect x + b \).
+  \objective Explain the geometric view: lines and hyperplanes.
+  \objective Recognise when linear models are insufficient.
+\end{learningobjectives}
+
+\section{Form and Geometry}
+The set of points with constant score forms a hyperplane. When classes are linearly separable, a single hyperplane can divide them.
+
+\begin{example}
+Classify points above a line: take \( \hat y = 2x_1 - x_2 + 0.5 \) and predict positive when \( \hat y>0 \).
+
+For \( (x_1,x_2)=(2,1) \),
+\[
+\hat y = 2\cdot 2 - 1 + 0.5 = 3.5 > 0 \;\Rightarrow\; \text{positive}.
+\]
+For \( (x_1,x_2)=(0,1) \),
+\[
+\hat y = 2\cdot 0 - 1 + 0.5 = -0.5 < 0 \;\Rightarrow\; \text{negative}.
+\]
+The decision boundary \( \hat y=0 \) is the straight line \( x_2 = 2x_1 + 0.5 \).
+\end{example}
+
+\section{Exercises}
+\begin{exercisebox}[medium]
+Find a line that separates points A: \( (0,2),(1,3) \) from B: \( (2,0),(3,1) \) if possible.
+\end{exercisebox}
+
+\begin{hint}
+Try \( x_2 = x_1 + 1.5 \). Points A lie above, B below.
+\end{hint}

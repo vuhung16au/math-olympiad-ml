@@ -1,0 +1,41 @@
+\chapter{Vectors and Matrices}
+Vectors collect features; matrices collect many vectors and define linear transformations.
+
+\begin{learningobjectives}
+  \objective Represent data points as vectors of features.
+  \objective Use matrix–vector multiplication to combine features linearly.
+  \objective Interpret a matrix as a transformation of space.
+\end{learningobjectives}
+
+\section{Notation}
+Write a feature vector as \( \vect x = (x_1,\dots,x_d)^\top \). A weight vector \( \vect w \) and bias \( b \) define a linear score \( s = \vect w^\top \vect x + b \).
+
+\begin{definition}
+A \emph{matrix} \( W \in \mathbb{R}^{m\times d} \) applied to a vector \( \vect x\in\mathbb{R}^d \) yields \( W\vect x\in\mathbb{R}^m \), combining inputs into \( m \) outputs.
+\end{definition}
+
+\begin{example}
+With two features (height, width) and two outputs (sum, difference),
+\( W=\begin{bmatrix}1&1\\1&-1\end{bmatrix} \) maps a vector \(\vect x=(x_1,x_2)^\top\) to \( W\vect x=(x_1+x_2,\; x_1-x_2)^\top \).
+
+For a concrete calculation, let \(\vect x=(3,2)^\top\). Then
+\[
+W\vect x=
+\begin{bmatrix}1&1\\[2pt]1&-1\end{bmatrix}
+\begin{bmatrix}3\\[2pt]2\end{bmatrix}
+=
+\begin{bmatrix}1\cdot3+1\cdot2\\[2pt]1\cdot3+(-1)\cdot2\end{bmatrix}
+=
+\begin{bmatrix}5\\[2pt]1\end{bmatrix}.
+\]
+So the first output (sum) is 5 and the second output (difference) is 1.
+\end{example}
+
+\section{Exercises}
+\begin{exercisebox}[easy]
+If \( W=\begin{bmatrix}2&0\\0&3\end{bmatrix} \) and \( \vect x=(1,2)^\top \), compute \( W\vect x \).
+\end{exercisebox}
+
+\begin{hint}
+\( (2,6)^\top \).
+\end{hint}

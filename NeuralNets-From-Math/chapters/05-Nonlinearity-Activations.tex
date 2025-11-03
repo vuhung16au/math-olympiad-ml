@@ -1,0 +1,55 @@
+\chapter{Nonlinearity and Activations}
+Nonlinear activations introduce bends that let models capture curved patterns.
+
+\begin{learningobjectives}
+  \objective Describe common activations: ReLU, sigmoid, tanh.
+  \objective Explain why stacking linear layers without activations stays linear.
+  \objective Match activations to tasks (e.g., sigmoid for probabilities).
+\end{learningobjectives}
+
+\section{Common Activations}
+ReLU: \( \mathrm{ReLU}(z)=\max(0,z) \) adds a kink at zero. Sigmoid \( \sigma(z)=1/(1+e^{-z}) \) squashes to \( (0,1) \). Tanh squashes to \( (-1,1) \).
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    width=0.45\linewidth,height=5cm,
+    xmin=-4,xmax=4,ymin=-1,ymax=4,
+    axis lines=middle, grid=both,
+    title={ReLU},
+    title style={yshift=0.5ex}]
+    \addplot[domain=-4:0,samples=2,thick,color=warmstone] {0};
+    \addplot[domain=0:4,samples=2,thick,color=bookpurple] {x};
+  \end{axis}
+\end{tikzpicture}
+\hspace{1em}
+\begin{tikzpicture}
+  \begin{axis}[
+    width=0.45\linewidth,height=5cm,
+    xmin=-6,xmax=6,ymin=-0.1,ymax=1.1,
+    axis lines=middle, grid=both,
+    title={Sigmoid},
+    title style={yshift=0.5ex}]
+    \addplot[domain=-6:6,samples=400,thick,color=bookred] {1/(1+exp(-x))};
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\paragraph{Why this matters.}
+Activations create nonlinearity so networks can approximate curved relationships. ReLU is simple and keeps gradients flowing for positive inputs, aiding optimisation. Sigmoid maps real numbers to \( (0,1) \), ideal for probabilities; but it can saturate (flat tails), slowing learning when inputs are very large in magnitude.
+
+\paragraph{Bio example (sigmoid).}
+The logistic (sigmoid) curve models population growth with carrying capacity and neuron firing rates as a function of membrane potential: response is low for small input, steep near threshold, and saturates at high input.
+
+\begin{remark}
+Linear \(\circ\) linear is still linear. Nonlinearity between linear steps is essential.
+\end{remark}
+
+\section{Exercises}
+\begin{exercisebox}[easy]
+Sketch and compare \( \tanh(z) \) and leaky ReLU \( \mathrm{LReLU}_\alpha(z)=\max(\alpha z, z) \) with \(\alpha=0.1\). Where are they most/least sensitive, and what ranges do their outputs take?
+\end{exercisebox}
+
+\begin{hint}
+ReLU is flat for \( z<0 \) and slope 1 for \( z>0 \). Sigmoid is steepest near 0, flat in tails.
+\end{hint}

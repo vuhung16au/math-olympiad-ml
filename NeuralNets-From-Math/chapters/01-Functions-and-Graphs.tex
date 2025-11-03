@@ -1,0 +1,59 @@
+\chapter{Functions and Graphs}
+Functions describe how inputs map to outputs. Graphs help us see this mapping.
+
+\begin{learningobjectives}
+  \objective Interpret a function as a rule from input to output.
+  \objective Read tables and plots to understand trends.
+  \objective Distinguish linear from nonlinear patterns visually.
+\end{learningobjectives}
+
+\section{From Tables to Rules}
+Suppose we record study time (hours) and score (percentage). A function \( f \) turns an input \( x \) into an output \( y=f(x) \). A straight trend suggests a linear rule; bends suggest nonlinearity.
+
+\begin{definition}
+A \emph{function} is a mapping assigning each input a single output. We often visualise \( (x, f(x)) \) as points on a graph.
+\end{definition}
+
+\begin{example}
+Measured study time (hours) and score (\%):
+\[
+\begin{array}{c|cccc}
+ x & 1 & 2 & 3 & 4 \\
+ \hline
+ y & 2.1 & 4.0 & 6.2 & 7.9 \\
+\end{array}
+\]
+If doubling \(x\) roughly doubles \(y\), a straight line is sensible. Below we plot the points, a simple linear rule \(y=2x\), and a curved (quadratic) rule \(y=0.5x^2+0.5\) to contrast linear vs nonlinear behaviour.
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    width=0.8\linewidth,height=6cm,
+    xlabel={Study time $x$ (hours)}, ylabel={Score $y$ (\%)},
+    xmin=0, xmax=5, ymin=0, ymax=10,
+    grid=both, legend style={at={(0.02,0.98)},anchor=north west,fill=softivory}]
+    % data points
+    \addplot+[only marks,mark=*,mark options={fill=bookred},color=bookred]
+      coordinates {(1,2.1) (2,4.0) (3,6.2) (4,7.9)};
+    \addlegendentry{Data}
+    % linear model
+    \addplot[domain=0:5,samples=200,color=bookpurple,thick] {2*x};
+    \addlegendentry{$y=2x$ (linear)}
+    % quadratic model
+    \addplot[domain=0:5,samples=200,color=warmstone,dashed,thick] {0.5*x^2 + 0.5};
+    \addlegendentry{$y=0.5x^2+0.5$ (quadratic)}
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+The linear rule tracks the trend closely; the quadratic bends upward and will diverge from the roughly proportional pattern as \(x\) grows.
+\end{example}
+
+\section{Exercises}
+\begin{exercisebox}[easy]
+Given points \( (1,2), (2,4.1), (3,5.9) \), would a straight line be a reasonable model? Explain briefly.
+\end{exercisebox}
+
+\begin{hint}[Turn the page upside down to read]
+Yes. The ratios are consistent with a near‑linear trend; noise causes small deviations.
+\end{hint}
