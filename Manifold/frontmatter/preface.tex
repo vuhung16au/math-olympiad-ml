@@ -1,3 +1,15 @@
 \chapter*{Preface}
 \addcontentsline{toc}{chapter}{Preface}
-This book introduces the concepts of manifolds and geodesics in an intuitive way, designed for students who are not yet familiar with these ideas. We start with simple examples and build up to more complex concepts, always emphasizing the visual and intuitive understanding.
+This book introduces manifolds, geodesics, and the core ideas of Riemannian and information geometry with an intuition-first approach. We begin with simple, concrete examples (lines, circles, planes, spheres), then gradually build the formal tools (tangent spaces, metric tensor, connections, curvature) and show how these concepts power modern generative AI (VAEs, GANs, diffusion, flows).
+
+Who this book is for. Readers in machine learning, data science, and applied mathematics who want a compact, visual route from geometry to practical AI. The text favors clarity over maximal generality; we keep proofs light and provide references for deeper study.
+
+What you need. A working knowledge of linear algebra and multivariable calculus is sufficient; light familiarity with probability and optimization is helpful. No prior differential geometry is assumed. A concise checklist of prerequisites and notation conventions is included in the Overview, and a quick summary appears in the project README.
+
+How to read this book. Part I develops manifold intuition and examples; Part II introduces geodesics and distance; Part III formalizes local neighborhoods with open n-balls; Chapter 9 provides a self-contained introduction to Riemannian geometry (tangent spaces, metrics, Levi-Civita connection, parallel transport, curvature); Chapter 10 connects geometry to generative AI with statistical/parameter manifolds, Fisher information, natural gradient, and Bregman divergences. Appendices collect summaries and metaphors; the glossary provides quick definitions.
+
+Why geometry for AI. Geometry offers principled, invariant ways to measure change, distance, and curvature. These ideas translate directly into stable training (via Fisher geometry and natural gradients), meaningful interpolation (geodesics), and better understanding of model behavior. Our goal is to make these connections precise yet accessible.
+
+Using the materials. You can build the PDF with the provided Makefile and find a release-ready PDF in the \texttt{release/} directory. A high-level synopsis---including target audience, prerequisites, and chapter summaries---is available in the README; consult it as a quick guide to the structure and intended outcomes of the book.
+
+Acknowledgments. Many classic texts and modern papers inform this presentation; we include citations and links in the References for further reading.
