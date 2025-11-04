@@ -1,2 +1,128 @@
 \chapter{Overview}
-This chapter provides an introduction to the book, explaining what manifolds and geodesics are at a high level, and outlining the journey we will take from simple 1D examples to understanding why these concepts matter in modern generative AI.
+
+This book introduces the concepts of manifolds and geodesics in an intuitive, accessible way, building from simple examples to understanding how these mathematical foundations power modern generative artificial intelligence. Whether you're interested in geometry, navigation, or AI, you'll discover how curved spaces and shortest paths connect to real-world applications.
+
+\section{Why Manifolds Matter}
+
+Imagine standing on Earth's surface. To you, the ground appears flat—you can use a local map as if you were on a plane. Yet we know Earth is a sphere. This intuition—that curved spaces look flat when you zoom in—is the essence of a \textbf{manifold}.
+
+Manifolds are everywhere:
+\begin{itemize}
+\item \textbf{Physical spaces}: Earth's surface, the universe (in general relativity), molecular configurations
+\item \textbf{Data spaces}: Images, text embeddings, audio signals—all lie on low-dimensional manifolds embedded in high-dimensional spaces
+\item \textbf{AI applications}: Generative models learn to represent and sample from these data manifolds
+\end{itemize}
+
+Understanding manifolds helps us navigate curved spaces, compress high-dimensional data, and build better AI systems. This book provides the mathematical foundation to understand these connections.
+
+\section{The Journey: From Geometry to AI}
+
+We'll build understanding progressively, starting with intuition and concrete examples, then developing systematic methods, and finally connecting to modern AI applications.
+
+\subsection{Part I: Foundations (Chapters 1-4)}
+
+We begin with the core concept: a \textbf{manifold} is a space that locally looks like flat Euclidean space. Chapter 1 introduces this idea with visual analogies and the concept of \textbf{charts}—mappings that allow us to work with curved spaces locally as if they were flat.
+
+Chapters 2 and 3 explore concrete examples: 1D manifolds (lines and circles) and 2D manifolds (planes, spheres, tori). We'll see how distance calculations work on these spaces and understand why local flatness is preserved even when the global structure is curved.
+
+Chapter 4 examines a counterexample—why a cone's tip is not a manifold—to clarify the definition through contrast. Understanding what fails to be a manifold deepens our grasp of what makes a space a manifold.
+
+\subsection{Part II: Geodesics and Distance (Chapters 5-7)}
+
+On a flat plane, the shortest path between two points is a straight line. On curved surfaces, we need \textbf{geodesics}—the shortest paths that stay on the surface. Chapter 5 introduces this concept with intuitive examples: great circle routes on Earth, paths on terrain, and the "string pulled tight" analogy.
+
+Chapter 6 develops systematic methods for finding geodesics: the \textbf{variational approach} (minimizing path length) and solving the \textbf{geodesic equation}. We'll derive geodesics on lines, circles, planes, and spheres, seeing how geometry determines the shortest paths.
+
+Chapter 7 deepens our understanding of distance calculations, particularly on spheres. We'll explore alternative formulas (like the haversine formula), handle special cases, and discuss practical applications in navigation and mapping.
+
+\subsection{Part III: Mathematical Foundations (Chapter 8)}
+
+Chapter 8 explores \textbf{open n-balls}—the fundamental neighborhoods that define what it means for a space to "look like" Euclidean space locally. Understanding open n-balls makes the manifold definition precise and mathematically rigorous.
+
+\subsection{Part IV: Applications in Generative AI (Chapter 10)}
+
+Chapter 10 bridges the mathematical foundations with modern generative AI. We'll see how:
+\begin{itemize}
+\item \textbf{Data manifolds}: High-dimensional data (images, text) lies on low-dimensional manifolds
+\item \textbf{VAEs}: Use encoder-decoder pairs as charts mapping between data manifolds and latent spaces
+\item \textbf{GANs}: Learn generators that implicitly define data manifolds
+\item \textbf{Diffusion models}: Move data off and back onto manifolds during generation
+\item \textbf{Geodesic interpolation}: Provides natural paths for smooth transitions in latent spaces
+\end{itemize}
+
+The mathematical concepts we've built—manifolds, geodesics, distances—become concrete tools for understanding and building AI systems.
+
+\subsection{Part V: Reference (Chapter 11)}
+
+Chapter 11 provides a glossary of key terms and concepts for quick reference throughout your reading.
+
+\section{Key Concepts You'll Master}
+
+By the end of this book, you'll understand:
+
+\begin{itemize}
+\item \textbf{Manifolds}: Spaces that are locally flat but globally curved, with charts providing local coordinate systems
+\item \textbf{Geodesics}: The shortest paths on curved surfaces, generalizing straight lines to curved spaces
+\item \textbf{Distance}: How to measure distances on manifolds, particularly on spheres (great circle distance)
+\item \textbf{Local structure}: Open n-balls and neighborhoods that define manifold structure
+\item \textbf{AI connections}: How manifolds describe data structure and how generative models learn to represent them
+\end{itemize}
+
+\section{Learning Approach}
+
+This book is designed for accessibility:
+\begin{itemize}
+\item \textbf{Visual learning}: TikZ diagrams throughout help build geometric intuition
+\item \textbf{Concrete examples}: We start with familiar examples (Earth, circles, spheres) before abstracting
+\item \textbf{Progressive complexity}: Each chapter builds on previous concepts
+\item \textbf{Worked examples}: Detailed calculations show how to apply the concepts
+\item \textbf{Practical applications}: Real-world connections from navigation to AI
+\end{itemize}
+
+\section{Prerequisites}
+
+This book assumes:
+\begin{itemize}
+\item \textbf{Basic calculus}: Understanding of derivatives and integrals
+\item \textbf{Linear algebra basics}: Familiarity with vectors and matrices
+\item \textbf{Coordinate systems}: Comfort with Cartesian and polar coordinates
+\item \textbf{No prior knowledge} of differential geometry, manifolds, or advanced topology required
+\end{itemize}
+
+The mathematical level is kept accessible, with intuitive explanations accompanying formal definitions.
+
+\section{The Big Picture}
+
+This book connects abstract mathematics to practical applications:
+
+\begin{itemize}
+\item \textbf{From geometry to navigation}: Understanding geodesics helps explain why airplanes follow great circle routes
+\item \textbf{From mathematics to data}: The manifold structure of data explains why dimensionality reduction works
+\item \textbf{From theory to AI}: Geometric foundations enable better generative models
+\item \textbf{From intuition to rigor}: We build both geometric intuition and mathematical precision
+\end{itemize}
+
+The journey from understanding what a manifold is to seeing how it powers generative AI is not just possible—it's essential for anyone working at the intersection of mathematics and modern machine learning.
+
+\section{How to Use This Book}
+
+\begin{itemize}
+\item \textbf{Sequential reading}: Chapters build on each other, so reading in order is recommended
+\item \textbf{Visual aids}: Pay attention to the TikZ diagrams—they're designed to build intuition
+\item \textbf{Examples}: Work through the examples to see concepts in action
+\item \textbf{Glossary}: Use Chapter 11 as a reference when you encounter unfamiliar terms
+\item \textbf{Active learning}: Try to visualize the concepts and connect them to familiar examples
+\end{itemize}
+
+\section{What Lies Ahead}
+
+As you progress through this book, you'll gain:
+\begin{itemize}
+\item A solid mathematical foundation in manifolds and geodesics
+\item Geometric intuition for curved spaces
+\item Practical skills for distance calculations and geodesic finding
+\item Deep insights into how generative AI models work
+\item A foundation for advanced topics in differential geometry and Riemannian geometry
+\end{itemize}
+
+The mathematical concepts we explore—though abstract at first—have become central to understanding both classical geometry and modern AI. Welcome to the journey from curved spaces to intelligent systems.

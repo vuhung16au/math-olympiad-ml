@@ -1,6 +1,336 @@
-@book{placeholder2025,
-  author    = {Author, A.},
-  title     = {Title To Be Added},
-  year      = {2025},
-  publisher = {Publisher}
+% ============================================================================
+% REFERENCES FOR MANIFOLDS AND GENERATIVE AI
+% Only references with verified DOI or arXiv ID are included
+% All entries include URLs for verification
+% ============================================================================
+
+% ----------------------------------------------------------------------------
+% Differential Geometry and Manifolds
+% ----------------------------------------------------------------------------
+
+@book{lee2012introduction,
+  author    = {Lee, John M.},
+  title     = {Introduction to Smooth Manifolds},
+  year      = {2012},
+  publisher = {Springer},
+  edition   = {2nd},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {218},
+  isbn      = {978-1-4419-9981-8},
+  doi       = {10.1007/978-1-4419-9982-5},
+  url       = {https://doi.org/10.1007/978-1-4419-9982-5},
+  note      = {Comprehensive introduction to smooth manifolds and differential geometry}
+}
+
+@book{do1992riemannian,
+  author    = {do Carmo, Manfredo P.},
+  title     = {Riemannian Geometry},
+  year      = {1992},
+  publisher = {Birkh\"{a}user},
+  edition   = {1st},
+  isbn      = {978-0-8176-3490-2},
+  doi       = {10.1007/978-1-4757-2201-7},
+  url       = {https://doi.org/10.1007/978-1-4757-2201-7},
+  note      = {Classic textbook on Riemannian geometry, including geodesics and curvature}
+}
+
+% ----------------------------------------------------------------------------
+% Geodesics and Distance Calculations
+% ----------------------------------------------------------------------------
+
+@article{vincenty1975direct,
+  author    = {Vincenty, Thaddeus},
+  title     = {Direct and Inverse Solutions of Geodesics on the Ellipsoid with Application of Nested Equations},
+  journal   = {Survey Review},
+  year      = {1975},
+  volume    = {23},
+  number    = {176},
+  pages     = {88--93},
+  doi       = {10.1179/sre.1975.23.176.88},
+  url       = {https://doi.org/10.1179/sre.1975.23.176.88},
+  note      = {Accurate algorithm for geodesic calculations on ellipsoids}
+}
+
+% ----------------------------------------------------------------------------
+% Manifold Learning and Data Manifolds
+% ----------------------------------------------------------------------------
+
+@article{tenenbaum2000global,
+  author    = {Tenenbaum, Joshua B. and de Silva, Vin and Langford, John C.},
+  title     = {A Global Geometric Framework for Nonlinear Dimensionality Reduction},
+  journal   = {Science},
+  year      = {2000},
+  volume    = {290},
+  number    = {5500},
+  pages     = {2319--2323},
+  doi       = {10.1126/science.290.5500.2319},
+  url       = {https://doi.org/10.1126/science.290.5500.2319},
+  note      = {Introduces Isomap algorithm for manifold learning}
+}
+
+@article{roweis2000nonlinear,
+  author    = {Roweis, Sam T. and Saul, Lawrence K.},
+  title     = {Nonlinear Dimensionality Reduction by Locally Linear Embedding},
+  journal   = {Science},
+  year      = {2000},
+  volume    = {290},
+  number    = {5500},
+  pages     = {2323--2326},
+  doi       = {10.1126/science.290.5500.2323},
+  url       = {https://doi.org/10.1126/science.290.5500.2323},
+  note      = {Presents LLE algorithm for manifold learning}
+}
+
+@article{belkin2003laplacian,
+  author    = {Belkin, Mikhail and Niyogi, Partha},
+  title     = {Laplacian Eigenmaps for Dimensionality Reduction and Data Representation},
+  journal   = {Neural Computation},
+  year      = {2003},
+  volume    = {15},
+  number    = {6},
+  pages     = {1373--1396},
+  doi       = {10.1162/089976603321780317},
+  url       = {https://doi.org/10.1162/089976603321780317},
+  note      = {Laplacian eigenmaps for manifold learning}
+}
+
+@article{fefferman2016testing,
+  author    = {Fefferman, Charles and Mitter, Sanjoy and Narayanan, Hariharan},
+  title     = {Testing the Manifold Hypothesis},
+  journal   = {Journal of the American Mathematical Society},
+  year      = {2016},
+  volume    = {29},
+  number    = {4},
+  pages     = {983--1049},
+  doi       = {10.1090/jams/852},
+  url       = {https://doi.org/10.1090/jams/852},
+  note      = {Rigorous mathematical treatment of the manifold hypothesis in data}
+}
+
+% ----------------------------------------------------------------------------
+% Variational Autoencoders (VAEs)
+% ----------------------------------------------------------------------------
+
+@article{kingma2013auto,
+  author    = {Kingma, Diederik P. and Welling, Max},
+  title     = {Auto-Encoding Variational Bayes},
+  journal   = {arXiv preprint},
+  year      = {2013},
+  eprint    = {1312.6114},
+  archivePrefix = {arXiv},
+  primaryClass = {stat.ML},
+  doi       = {10.48550/arXiv.1312.6114},
+  url       = {https://arxiv.org/abs/1312.6114},
+  note      = {Foundational paper on Variational Autoencoders}
+}
+
+@article{rezende2014stochastic,
+  author    = {Rezende, Danilo Jimenez and Mohamed, Shakir and Wierstra, Daan},
+  title     = {Stochastic Backpropagation and Approximate Inference in Deep Generative Models},
+  journal   = {arXiv preprint},
+  year      = {2014},
+  eprint    = {1401.4082},
+  archivePrefix = {arXiv},
+  primaryClass = {stat.ML},
+  doi       = {10.48550/arXiv.1401.4082},
+  url       = {https://arxiv.org/abs/1401.4082},
+  note      = {Alternative derivation of VAEs with reparameterization trick}
+}
+
+% ----------------------------------------------------------------------------
+% Generative Adversarial Networks (GANs)
+% ----------------------------------------------------------------------------
+
+@article{goodfellow2014generative,
+  author    = {Goodfellow, Ian and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},
+  title     = {Generative Adversarial Nets},
+  journal   = {arXiv preprint},
+  year      = {2014},
+  eprint    = {1406.2661},
+  archivePrefix = {arXiv},
+  primaryClass = {stat.ML},
+  doi       = {10.48550/arXiv.1406.2661},
+  url       = {https://arxiv.org/abs/1406.2661},
+  note      = {Original GAN paper introducing the adversarial training framework}
+}
+
+@article{arjovsky2017wasserstein,
+  author    = {Arjovsky, Martin and Chintala, Soumith and Bottou, L\'{e}on},
+  title     = {Wasserstein Generative Adversarial Networks},
+  journal   = {arXiv preprint},
+  year      = {2017},
+  eprint    = {1701.07875},
+  archivePrefix = {arXiv},
+  primaryClass = {stat.ML},
+  doi       = {10.48550/arXiv.1701.07875},
+  url       = {https://arxiv.org/abs/1701.07875},
+  note      = {WGAN using Wasserstein distance for improved training stability}
+}
+
+@article{radford2015unsupervised,
+  author    = {Radford, Alec and Metz, Luke and Chintala, Soumith},
+  title     = {Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks},
+  journal   = {arXiv preprint},
+  year      = {2015},
+  eprint    = {1511.06434},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  doi       = {10.48550/arXiv.1511.06434},
+  url       = {https://arxiv.org/abs/1511.06434},
+  note      = {DCGAN architecture for image generation}
+}
+
+% ----------------------------------------------------------------------------
+% Diffusion Models
+% ----------------------------------------------------------------------------
+
+@article{ho2020denoising,
+  author    = {Ho, Jonathan and Jain, Ajay and Abbeel, Pieter},
+  title     = {Denoising Diffusion Probabilistic Models},
+  journal   = {arXiv preprint},
+  year      = {2020},
+  eprint    = {2006.11239},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  doi       = {10.48550/arXiv.2006.11239},
+  url       = {https://arxiv.org/abs/2006.11239},
+  note      = {Foundational paper on diffusion models for image generation}
+}
+
+@article{song2020score,
+  author    = {Song, Yang and Sohl-Dickstein, Jascha and Kingma, Diederik P. and Kumar, Abhishek and Ermon, Stefano and Poole, Ben},
+  title     = {Score-Based Generative Modeling through Stochastic Differential Equations},
+  journal   = {arXiv preprint},
+  year      = {2020},
+  eprint    = {2011.13456},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  doi       = {10.48550/arXiv.2011.13456},
+  url       = {https://arxiv.org/abs/2011.13456},
+  note      = {Unifies diffusion models through stochastic differential equations}
+}
+
+@article{song2021denoising,
+  author    = {Song, Jiaming and Meng, Chenlin and Ermon, Stefano},
+  title     = {Denoising Diffusion Implicit Models},
+  journal   = {arXiv preprint},
+  year      = {2021},
+  eprint    = {2010.02502},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  doi       = {10.48550/arXiv.2010.02502},
+  url       = {https://arxiv.org/abs/2010.02502},
+  note      = {DDIM for faster sampling from diffusion models}
+}
+
+% ----------------------------------------------------------------------------
+% Normalizing Flows
+% ----------------------------------------------------------------------------
+
+@article{rezende2015variational,
+  author    = {Rezende, Danilo and Mohamed, Shakir},
+  title     = {Variational Inference with Normalizing Flows},
+  journal   = {arXiv preprint},
+  year      = {2015},
+  eprint    = {1505.05770},
+  archivePrefix = {arXiv},
+  primaryClass = {stat.ML},
+  doi       = {10.48550/arXiv.1505.05770},
+  url       = {https://arxiv.org/abs/1505.05770},
+  note      = {Introduces normalizing flows for variational inference}
+}
+
+@article{kingma2018glow,
+  author    = {Kingma, Diederik P. and Dhariwal, Prafulla},
+  title     = {Glow: Generative Flow with Invertible 1x1 Convolutions},
+  journal   = {arXiv preprint},
+  year      = {2018},
+  eprint    = {1807.03039},
+  archivePrefix = {arXiv},
+  primaryClass = {stat.ML},
+  doi       = {10.48550/arXiv.1807.03039},
+  url       = {https://arxiv.org/abs/1807.03039},
+  note      = {GLOW architecture for normalizing flows}
+}
+
+@article{chen2018neural,
+  author    = {Chen, Ricky T. Q. and Rubanova, Yulia and Bettencourt, Jesse and Duvenaud, David K.},
+  title     = {Neural Ordinary Differential Equations},
+  journal   = {arXiv preprint},
+  year      = {2018},
+  eprint    = {1806.07366},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  doi       = {10.48550/arXiv.1806.07366},
+  url       = {https://arxiv.org/abs/1806.07366},
+  note      = {Neural ODEs for continuous normalizing flows}
+}
+
+% ----------------------------------------------------------------------------
+% Manifolds in Machine Learning
+% ----------------------------------------------------------------------------
+
+@article{shao2018riemannian,
+  author    = {Shao, Hang and Kumar, Abhishek and Fletcher, P. Thomas},
+  title     = {The Riemannian Geometry of Deep Generative Models},
+  journal   = {arXiv preprint},
+  year      = {2018},
+  eprint    = {1711.08014},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  doi       = {10.48550/arXiv.1711.08014},
+  url       = {https://arxiv.org/abs/1711.08014},
+  note      = {Explores Riemannian geometry in the context of deep generative models}
+}
+
+@article{arvanitidis2018latent,
+  author    = {Arvanitidis, Georgios and Hansen, Lars Kai and Hauberg, S{\o}ren},
+  title     = {Latent Space Oddity: On the Curvature of Deep Generative Models},
+  journal   = {arXiv preprint},
+  year      = {2018},
+  eprint    = {1805.11104},
+  archivePrefix = {arXiv},
+  primaryClass = {stat.ML},
+  doi       = {10.48550/arXiv.1805.11104},
+  url       = {https://arxiv.org/abs/1805.11104},
+  note      = {Analyzes the geometry of latent spaces in generative models}
+}
+
+@article{gemici2016normalizing,
+  author    = {Gemici, Mevlana C. and Rezende, Danilo and Mohamed, Shakir},
+  title     = {Normalizing Flows on Riemannian Manifolds},
+  journal   = {arXiv preprint},
+  year      = {2016},
+  eprint    = {1611.02304},
+  archivePrefix = {arXiv},
+  primaryClass = {stat.ML},
+  doi       = {10.48550/arXiv.1611.02304},
+  url       = {https://arxiv.org/abs/1611.02304},
+  note      = {Extends normalizing flows to Riemannian manifolds}
+}
+
+@article{bronstein2021geometric,
+  author    = {Bronstein, Michael M. and Bruna, Joan and Cohen, Taco and Velicjkovic, Petar},
+  title     = {Geometric Deep Learning: Grids, Groups, Graphs, Geodesics, and Gauges},
+  journal   = {arXiv preprint},
+  year      = {2021},
+  eprint    = {2104.13478},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.LG},
+  doi       = {10.48550/arXiv.2104.13478},
+  url       = {https://arxiv.org/abs/2104.13478},
+  note      = {Comprehensive survey on geometric deep learning}
+}
+
+@article{bronstein2016geometric,
+  author    = {Bronstein, Michael M. and Bruna, Joan and LeCun, Yann and Szlam, Arthur and Vandergheynst, Pierre},
+  title     = {Geometric Deep Learning: Going Beyond Euclidean Data},
+  journal   = {IEEE Signal Processing Magazine},
+  year      = {2017},
+  volume    = {34},
+  number    = {4},
+  pages     = {18--42},
+  doi       = {10.1109/MSP.2017.2693418},
+  url       = {https://doi.org/10.1109/MSP.2017.2693418},
+  note      = {Early survey on geometric deep learning}
 }

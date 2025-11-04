@@ -1,2 +1,229 @@
-\chapter{Glossary}
-A glossary of key terms and concepts introduced throughout the book, with plain-language definitions for quick recall.
+% Glossary as a list of terms (not a chapter)
+% This file is included in backmatter
+
+\chapter*{Glossary}
+\addcontentsline{toc}{chapter}{Glossary}
+
+A glossary of key terms and concepts introduced throughout the book, with plain-language definitions for quick recall. Terms are organized alphabetically for easy reference.
+
+\section*{A}
+
+\begin{description}
+\item[Antipodal Points] Two points on a sphere that are exactly opposite each other. There are infinitely many geodesics (great circle arcs) connecting antipodal points.
+
+\item[Arc Length] The length of a curve on a manifold. For a geodesic, the arc length equals the distance between its endpoints.
+
+\item[Atlas] A collection of charts that cover the entire manifold. Just as an atlas of Earth contains multiple maps covering different regions, a mathematical atlas contains multiple charts covering different neighborhoods of the manifold.
+\end{description}
+
+\section*{B}
+
+\begin{description}
+\item[Bounded] A set is bounded if it fits within some finite region. Open balls are bounded.
+\end{description}
+
+\section*{C}
+
+\begin{description}
+\item[Calculus of Variations] The branch of mathematics concerned with finding functions that minimize (or extremize) functionals. Used to derive geodesics by minimizing path length.
+
+\item[Chart] (or \textbf{Coordinate Chart}) A mapping from a neighborhood on a manifold to a flat Euclidean space. Charts allow us to work with the manifold locally as if it were flat. The inverse mapping allows us to transfer coordinates back to the manifold.
+
+\item[Christoffel Symbols] Quantities $\Gamma^i_{jk}$ that encode how the metric tensor changes with position on a manifold. They appear in the geodesic equation and are computed from the metric and its partial derivatives.
+
+\item[Circle] A closed 1D manifold. Geodesics on a circle are arcs, and the distance between two points is $d = r \cdot \theta$ where $r$ is the radius and $\theta$ is the angle in radians.
+
+\item[Closed Set] A set that includes its boundary. The complement of an open set.
+
+\item[Complete] A manifold is geodesically complete if all geodesics can be extended indefinitely. Lines, circles, planes, and spheres are complete.
+
+\item[Computer Graphics] The application of manifold and geodesic concepts to rendering surfaces, calculating lighting, and creating realistic animations.
+
+\item[Connected] A space is connected if it cannot be divided into two disjoint non-empty open sets. Manifolds are typically connected.
+
+\item[Conjugate Points] Points on a geodesic where nearby geodesics intersect. On a sphere, antipodal points are conjugate.
+
+\item[Convex] A set is convex if the line segment between any two points lies entirely within the set. Open balls are convex.
+
+\item[Coordinate Transformation] Changing from one coordinate system to another while preserving geometric properties. Geodesics are coordinate-independent—their descriptions change with coordinates, but the geodesics themselves are invariant.
+
+\item[Cut Locus] The set of points where geodesics cease to be unique. On a sphere, the cut locus of a point is its antipodal point.
+
+\item[Curvature] A measure of how much a manifold deviates from being flat. Positive curvature (like a sphere) causes geodesics to converge; negative curvature causes them to diverge; zero curvature (flat space) keeps geodesics parallel.
+\end{description}
+
+\section*{D}
+
+\begin{description}
+\item[Data Manifold] The low-dimensional manifold on which high-dimensional data actually lies. The data manifold hypothesis states that natural data (images, text, etc.) lies on a much lower-dimensional manifold embedded in high-dimensional space.
+
+\item[Data Manifold Hypothesis] The principle that high-dimensional data like images, text embeddings, or audio actually lies on a low-dimensional manifold of intrinsic dimension $d \ll D$, where $D$ is the ambient dimension.
+
+\item[Decoder] In a VAE, the network that maps latent codes back to the data manifold. It acts as an inverse chart from the latent space to the data manifold.
+
+\item[Diffusion Model] A generative model that learns to generate data by reversing a diffusion process. The forward process moves data off the manifold to noise, and the reverse process learns to bring it back onto the manifold.
+
+\item[Dimension] The number of coordinates needed to describe a point locally on a manifold. A 1D manifold (like a circle) requires one coordinate, a 2D manifold (like a sphere) requires two coordinates.
+
+\item[Dimensionality Reduction] Techniques for finding lower-dimensional representations of high-dimensional data, often based on the data manifold hypothesis.
+
+\item[Distance] The length of the shortest path (geodesic) between two points on a manifold. On a flat plane, this is Euclidean distance; on a sphere, it's the great circle distance.
+\end{description}
+
+\section*{E}
+
+\begin{description}
+\item[ELBO (Evidence Lower BOund)] The objective function optimized by VAEs, consisting of a reconstruction term (encouraging accurate decoding) and a regularization term (ensuring the latent distribution matches the prior). The ELBO ensures the learned manifold structure is preserved.
+
+\item[Encoder] In a VAE, the network that maps data from the manifold to a flat latent space. It acts as a chart from the data manifold to the latent space.
+
+\item[Euclidean Distance] The standard distance in flat Euclidean space: $d = \sqrt{\sum (x_i - y_i)^2}$ for points with coordinates $(x_i)$ and $(y_i)$.
+
+\item[Euler-Lagrange Equations] The necessary conditions for a path to minimize (or extremize) a functional. Applied to the path length functional, they give the geodesic equation.
+
+\item[Extrinsic Geometry] Geometric properties that depend on how a manifold is embedded in a higher-dimensional space.
+\end{description}
+
+\section*{G}
+
+\begin{description}
+\item[GAN (Generative Adversarial Network)] A generative model where a generator network learns to map from a latent space to the data manifold. The generator implicitly defines the learned manifold $\mathcal{M}_G = \{G(\mathbf{z}) : \mathbf{z} \in \mathcal{Z}\}$.
+
+\item[Geodesic] The shortest path between two points on a curved surface or manifold. It's the natural generalization of "straight lines" to curved spaces. On a flat plane, geodesics are straight lines; on a sphere, geodesics are arcs of great circles.
+
+\item[Geodesic Curvature] A measure of how much a curve deviates from being a geodesic. Geodesics have zero geodesic curvature—they're "as straight as possible" on the manifold.
+
+\item[Geodesic Equation] The differential equation that geodesics satisfy: $\ddot{x}^i + \Gamma^i_{jk}\dot{x}^j\dot{x}^k = 0$, where $\Gamma^i_{jk}$ are the Christoffel symbols encoding the geometry of the manifold.
+
+\item[Geodesic Interpolation] Interpolation between two data points along a geodesic path on the manifold, ensuring the interpolated points stay on the manifold rather than leaving it.
+
+\item[General Relativity] The theory of gravity where spacetime is a curved manifold and particles follow geodesics in spacetime.
+
+\item[Great Circle] The largest circle that can be drawn on a sphere, formed by the intersection of the sphere with a plane passing through its center. Great circle arcs are geodesics on spheres.
+
+\item[Great Circle Distance] The distance between two points on a sphere measured along the arc of a great circle. For a sphere of radius $R$, it's $d = R \cdot \arccos(\vec{v}_1 \cdot \vec{v}_2)$ where $\vec{v}_1$ and $\vec{v}_2$ are unit vectors to the points.
+\end{description}
+
+\section*{H}
+
+\begin{description}
+\item[Haversine Formula] A numerically stable formula for calculating great circle distances on a sphere, particularly useful for computational applications. It uses $\arcsin$ instead of $\arccos$ to avoid numerical issues near the poles.
+
+\item[Homeomorphism] A continuous bijection with a continuous inverse. Two spaces are homeomorphic if one can be continuously deformed into the other without cutting or gluing. Manifolds are locally homeomorphic to Euclidean space.
+\end{description}
+
+\section*{I}
+
+\begin{description}
+\item[Intrinsic Dimension] The true dimensionality of a manifold, which may be much smaller than the ambient dimension in which it's embedded. For example, a sphere is intrinsically 2D even though it's embedded in 3D space.
+
+\item[Intrinsic Geometry] Geometric properties of a manifold that depend only on the manifold itself, not on how it's embedded in a higher-dimensional space. Geodesics are intrinsic—they depend only on the metric, not on the embedding.
+
+\item[Isometry] A mapping that preserves distances. An isometry between manifolds preserves all geometric properties.
+\end{description}
+
+\section*{J}
+
+\begin{description}
+\item[Jacobian] The matrix of partial derivatives of a function. For a generator $G: \mathcal{Z} \to \mathcal{M}$, the Jacobian $\mathbf{J}_G$ defines the tangent space to the manifold at each point.
+\end{description}
+
+\section*{L}
+
+\begin{description}
+\item[Latent Space] A lower-dimensional space (often Euclidean) used to represent data in a compressed form. In generative models, the latent space often corresponds to the intrinsic coordinates on the data manifold.
+
+\item[Local Flatness] The property that every point on a manifold has a neighborhood that looks like flat Euclidean space. This is the fundamental characteristic of manifolds.
+
+\item[Local vs. Global] Local properties hold in small neighborhoods, while global properties hold for the entire manifold. Manifolds are locally flat but may be globally curved.
+\end{description}
+
+\section*{M}
+
+\begin{description}
+\item[Manifold] A space that locally looks like flat Euclidean space, even if the overall shape is curved or complex. Every point has a neighborhood that can be mapped to a flat Euclidean space. Examples include lines, circles, spheres, and tori.
+
+\item[Manifold Learning] Algorithms and techniques for learning the structure of data manifolds from data, including dimensionality reduction and representation learning.
+
+\item[Metric] (or \textbf{Metric Tensor}) A mathematical object $g_{ij}$ that encodes the geometry of a manifold. It defines how to measure distances and angles locally. In Euclidean space, the metric is the identity matrix; on curved manifolds, it varies with position.
+
+\item[Mode Collapse] In generative models, when the learned manifold only covers a subset of the true data manifold, failing to capture all modes of the data distribution.
+\end{description}
+
+\section*{N}
+
+\begin{description}
+\item[Navigation] The application of geodesics and distance calculations to finding routes, particularly on Earth's surface. Great circle routes are used in aviation and shipping.
+
+\item[Negative Curvature] Curvature that causes geodesics to diverge. Examples include saddle surfaces and hyperboloids.
+
+\item[Numerical Stability] The property of algorithms to produce accurate results even with floating-point arithmetic errors. The haversine formula is more numerically stable than the basic arccos formula for sphere distances.
+\end{description}
+
+\section*{O}
+
+\begin{description}
+\item[Open n-Ball] The set of all points within a certain distance $r$ (the radius) from a center point $\mathbf{p}$ in $n$-dimensional Euclidean space, excluding the boundary. Denoted $B_r(\mathbf{p}) = \{\mathbf{x} \in \mathbb{R}^n : \|\mathbf{x} - \mathbf{p}\| < r\}$. Manifolds are locally homeomorphic to open n-balls.
+
+\item[Open Set] A set that doesn't include its boundary. Open n-balls are open sets, which is essential for the manifold definition.
+\end{description}
+
+\section*{P}
+
+\begin{description}
+\item[Path Length Functional] The mathematical expression for the length of a path on a manifold. For a path $\gamma(t)$, it's given by $L[\gamma] = \int \sqrt{g_{ij}\frac{dx^i}{dt}\frac{dx^j}{dt}} \, dt$, where $g_{ij}$ is the metric tensor.
+
+\item[Plane] A flat 2D manifold with zero curvature. Geodesics on a plane are straight lines.
+
+\item[Positive Curvature] Curvature that causes geodesics to converge. Examples include spheres. On a sphere, initially parallel geodesics (like lines of longitude) converge at the poles.
+
+\item[Pullback Metric] The metric induced on a latent space by a generator mapping. If $G: \mathcal{Z} \to \mathcal{M}$ is a generator, the pullback metric is $\mathbf{g}_{ij}(\mathbf{z}) = (\mathbf{J}_G^T \mathbf{J}_G)_{ij}$ where $\mathbf{J}_G$ is the Jacobian of $G$.
+\end{description}
+
+\section*{R}
+
+\begin{description}
+\item[Robotics] The use of geodesics for path planning on curved surfaces and in configuration spaces.
+\end{description}
+
+\section*{S}
+
+\begin{description}
+\item[Singularity] A point where the manifold structure breaks down. For example, the tip of a cone is a singularity—it cannot be locally mapped to a flat disk.
+
+\item[Sphere] A 2D manifold that is the set of all points equidistant from a center. A sphere has constant positive curvature.
+
+\item[Style Transfer] The application of geodesic interpolation in generative AI to create smooth transitions between different styles or attributes.
+
+\item[Symmetric] A set is symmetric if it looks the same from all directions. Open balls are symmetric about their center.
+\end{description}
+
+\section*{T}
+
+\begin{description}
+\item[Tangent Space] The space of all possible velocity vectors (tangent vectors) at a point on a manifold. On an $n$-dimensional manifold, the tangent space is $n$-dimensional.
+
+\item[Torus] A 2D manifold shaped like a doughnut. It can be constructed by identifying opposite edges of a square or as the surface of revolution of a circle.
+\end{description}
+
+\section*{V}
+
+\begin{description}
+\item[VAE (Variational Autoencoder)] A generative model that learns to encode data into a latent space and decode it back. The encoder and decoder act as charts mapping between the data manifold and the flat latent space. VAEs optimize the Evidence Lower BOund (ELBO) to learn the manifold structure.
+
+\item[Variational Approach] A method for finding geodesics by minimizing the path length functional. This leads to the Euler-Lagrange equations, which yield the geodesic equation.
+\end{description}
+
+\section*{Z}
+
+\begin{description}
+\item[Zero Curvature] Flat space where geodesics remain parallel. Examples include lines, planes, and cylinders.
+\end{description}
+
+\section*{1D and 2D Manifolds}
+
+\begin{description}
+\item[1D Manifold] A one-dimensional manifold. Examples include lines (open manifolds) and circles (closed manifolds).
+
+\item[2D Manifold] A two-dimensional manifold. Examples include planes, spheres, and tori.
+\end{description}

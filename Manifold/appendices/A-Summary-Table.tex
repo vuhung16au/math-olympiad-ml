@@ -1,2 +1,183 @@
 \chapter{Summary Table}
-A comprehensive summary table comparing concepts, definitions, examples, dimensions, and key visualizations across different manifolds and geodesic contexts.
+
+A comprehensive summary table comparing key properties, formulas, and characteristics across different manifolds and concepts explored in this book.
+
+\section{Manifold Comparison}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Manifold} & \textbf{Dimension} & \textbf{Curvature} & \textbf{Type} & \textbf{Key Property} \\
+\midrule
+1D Line & 1 & Zero & Open & Infinitely extendable \\
+1D Circle & 1 & Positive & Closed & Loops back on itself \\
+2D Plane & 2 & Zero & Open & Flat everywhere \\
+2D Sphere & 2 & Positive & Closed & Constant positive curvature \\
+2D Torus & 2 & Mixed & Closed & Positive and negative regions \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of basic manifold properties.}
+\label{tab:manifold-properties}
+\end{table}
+
+\section{Distance Formulas}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lc}
+\toprule
+\textbf{Manifold} & \textbf{Distance Formula} \\
+\midrule
+1D Line & $d = |x_2 - x_1|$ \\
+1D Circle & $d = r \cdot \theta$ \\
+2D Plane & $d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$ \\
+2D Sphere & $d = R \cdot \arccos(\vec{v}_1 \cdot \vec{v}_2)$ \\
+2D Sphere (coords) & $d = R \cdot \arccos(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\Delta\lambda))$ \\
+2D Sphere (haversine) & $d = 2R \cdot \arcsin\left(\sqrt{\sin^2(\Delta\phi/2) + \cos\phi_1\cos\phi_2\sin^2(\Delta\lambda/2)}\right)$ \\
+2D Torus & $d \approx \sqrt{(R + r\cos\theta)^2(\Delta\phi)^2 + r^2(\Delta\theta)^2}$ \\
+\bottomrule
+\end{tabular}
+\caption{Distance formulas for different manifolds.}
+\label{tab:distance-formulas}
+\end{table}
+
+\section{Geodesic Properties}
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Manifold} & \textbf{Geodesic Type} & \textbf{Uniqueness} & \textbf{Completeness} & \textbf{Construction} \\
+\midrule
+1D Line & Straight line & Always unique & Complete & Direct \\
+1D Circle & Arc & Unique (except antipodal) & Complete & Direct \\
+2D Plane & Straight line & Always unique & Complete & Direct \\
+2D Sphere & Great circle arc & Unique shortest & Complete & Plane intersection \\
+2D Torus & Complex paths & Multiple possible & Complete & Numerical methods \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of geodesic properties across different manifolds.}
+\label{tab:geodesic-properties}
+\end{table}
+
+\section{Geodesic Equations and Methods}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Manifold} & \textbf{Geodesic Equation} & \textbf{Solution Method} \\
+\midrule
+1D Line & $\ddot{x} = 0$ & Direct integration \\
+1D Circle & $\ddot{\theta} = 0$ & Direct integration \\
+2D Plane & $\ddot{x} = 0$, $\ddot{y} = 0$ & Direct integration \\
+2D Sphere & $\ddot{\phi} - \sin\phi\cos\phi\dot{\lambda}^2 = 0$ & Geometric construction \\
+& $\ddot{\lambda} + 2\cot\phi\dot{\phi}\dot{\lambda} = 0$ & or numerical methods \\
+\bottomrule
+\end{tabular}
+\caption{Geodesic equations and solution methods.}
+\label{tab:geodesic-equations}
+\end{table}
+
+\section{Open n-Ball Properties}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Dimension} & \textbf{Name} & \textbf{Definition} \\
+\midrule
+$n=1$ & Open interval & $B_r(p) = \{x : |x-p| < r\}$ \\
+$n=2$ & Open disk & $B_r(\mathbf{p}) = \{(x,y) : (x-p_x)^2 + (y-p_y)^2 < r^2\}$ \\
+$n=3$ & Open ball & $B_r(\mathbf{p}) = \{(x,y,z) : (x-p_x)^2 + (y-p_y)^2 + (z-p_z)^2 < r^2\}$ \\
+$n$ & Open n-ball & $B_r(\mathbf{p}) = \{\mathbf{x} : \|\mathbf{x}-\mathbf{p}\| < r\}$ \\
+\bottomrule
+\end{tabular}
+\caption{Open n-balls in different dimensions.}
+\label{tab:open-n-balls}
+\end{table}
+
+\section{Generative AI Models and Manifolds}
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Manifold Connection} & \textbf{Key Component} \\
+\midrule
+VAE & Encoder/decoder as charts & Maps data $\leftrightarrow$ latent space \\
+GAN & Generator defines manifold & $\mathcal{M}_G = \{G(\mathbf{z}) : \mathbf{z} \in \mathcal{Z}\}$ \\
+Diffusion & Forward/reverse on manifold & Data $\to$ noise $\to$ data \\
+Normalizing Flow & Manifold-to-manifold maps & Preserves volume/structure \\
+\bottomrule
+\end{tabular}
+\caption{How generative models relate to manifolds.}
+\label{tab:ai-manifolds}
+\end{table}
+
+\section{Curvature Effects}
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Curvature Type} & \textbf{Geodesic Behavior} & \textbf{Example} & \textbf{Visual} \\
+\midrule
+Zero & Parallel geodesics stay parallel & Plane, line & Parallel lines \\
+Positive & Geodesics converge & Sphere & Meridians meet at poles \\
+Negative & Geodesics diverge & Saddle & Hyperbolic geometry \\
+Mixed & Varies by region & Torus & Combination \\
+\bottomrule
+\end{tabular}
+\caption{How curvature affects geodesic behavior.}
+\label{tab:curvature-effects}
+\end{table}
+
+\section{Special Cases: Sphere Distance}
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{lc}
+\toprule
+\textbf{Special Case} & \textbf{Simplified Formula} \\
+\midrule
+Same meridian & $d = R \cdot |\phi_2 - \phi_1|$ \\
+Same parallel & $d = R \cdot \cos\phi \cdot |\Delta\lambda|$ \\
+Near poles & Use haversine formula \\
+Antipodal points & $d = \pi R$ (half circumference) \\
+Very small distance & Flat Earth: $d \approx R \sqrt{(\Delta\phi)^2 + (\cos\bar{\phi})^2(\Delta\lambda)^2}$ \\
+\bottomrule
+\end{tabular}
+\caption{Special cases for sphere distance calculations.}
+\label{tab:sphere-special-cases}
+\end{table}
+
+\section{Unifying Principles}
+
+All geodesics share these fundamental properties:
+\begin{enumerate}
+\item \textbf{Minimization}: They minimize path length (or are critical points of the length functional)
+\item \textbf{Differential equation}: They satisfy $\ddot{x}^i + \Gamma^i_{jk}\dot{x}^j\dot{x}^k = 0$
+\item \textbf{Local straightness}: Zero geodesic curvature—"as straight as possible" on the manifold
+\item \textbf{Coordinate independence}: Geometric objects, independent of coordinate choices
+\item \textbf{Intrinsic nature}: Depend only on the metric (intrinsic geometry), not on embeddings
+\end{enumerate}
+
+\section{Key Relationships}
+
+\begin{itemize}
+\item \textbf{Distance = Geodesic Length}: The distance between two points equals the length of the geodesic connecting them
+\item \textbf{Manifold = Locally Open n-Ball}: Every point has a neighborhood homeomorphic to an open n-ball
+\item \textbf{Chart = Local Coordinate System}: Charts provide mappings from manifolds to flat spaces
+\item \textbf{Geodesic = Minimized Path Length}: Geodesics minimize the path length functional
+\item \textbf{Curvature = Geodesic Convergence}: Positive curvature causes convergence, negative causes divergence
+\end{itemize}
