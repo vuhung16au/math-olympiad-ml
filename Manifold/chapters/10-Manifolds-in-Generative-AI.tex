@@ -85,6 +85,283 @@ Understanding the manifold structure enables:
 \item \textbf{Meaningful interpolation}: Move along the manifold rather than through empty space
 \end{enumerate}
 
+\section{Statistical Manifolds and Information Geometry}
+
+Many objects in generative modeling are not points in Euclidean space but \emph{probability distributions}. A \textbf{statistical manifold} models a parametric family of distributions $\{p(x\mid\boldsymbol{\theta})\}$ as a differentiable manifold with coordinates $\boldsymbol{\theta}$. This equips model spaces with geometry that reflects statistical distinguishability.
+
+\subsection{Tangent space and scores}
+At $\boldsymbol{\theta}$, the tangent space is spanned by the score functions (velocity of log-likelihood):
+\[
+\frac{\partial}{\partial \theta_i} \log p(x\mid\boldsymbol{\theta})\,,\quad i=1,\dots,k.
+\]
+These directions describe how the distribution changes under infinitesimal parameter moves.
+
+\subsection{Fisher information metric}
+The canonical Riemannian metric on a statistical manifold is the \textbf{Fisher information}:
+\[
+g_{ij}(\boldsymbol{\theta}) \,=\, \mathbb{E}_{x\sim p(\cdot\mid\boldsymbol{\theta})}\Big[\, \partial_{\theta_i}\log p\,\partial_{\theta_j}\log p \,\Big] \,=\, -\,\mathbb{E}\big[\partial_{\theta_i}\partial_{\theta_j} \log p\big].
+\]
+It is symmetric, positive definite (under regularity), and \emph{invariant to reparameterization}, making lengths/angles of parameter steps coordinate-independent.
+
+\subsection{KL divergence and local geometry}
+Around $\boldsymbol{\theta}$, the KL divergence admits the quadratic expansion
+\[
+\mathrm{KL}\big(p(\cdot\mid\boldsymbol{\theta})\,\|\,p(\cdot\mid\boldsymbol{\theta}+d\boldsymbol{\theta})\big) \,=\, \tfrac12\, d\boldsymbol{\theta}^\top \mathbf{F}(\boldsymbol{\theta})\, d\boldsymbol{\theta} \,+\, o(\|d\boldsymbol{\theta}\|^2),
+\]
+where $\mathbf{F}$ is the Fisher matrix. Thus Fisher is the \emph{local} metric induced by KL.
+
+\subsection{Geodesics and affine structures (brief)}
+Exponential families admit special affine coordinates (mixture vs exponential). While full $\alpha$-connections are beyond scope, it suffices to note: straight lines in natural parameters correspond to \emph{exponential geodesics}, and straight lines in mean parameters correspond to \emph{mixture geodesics}.
+
+\subsection{Exponential family examples}
+\begin{itemize}
+\item Bernoulli($\pi$): $\theta=\mathrm{logit}(\pi)$; Fisher $= \pi(1-\pi)$ in mean parameter, or 1 in natural parameter.
+\item Univariate Gaussian with mean $\mu$ and fixed variance $\sigma^2$: Fisher for $\mu$ is $1/\sigma^2$.
+\item Full Gaussian (mean and covariance): Fisher couples mean and covariance; natural coordinates yield block structure.
+\end{itemize}
+
+\subsection{Optimization: natural gradient}
+The \textbf{natural gradient} preconditions the Euclidean gradient by $\mathbf{F}^{-1}$:
+\[
+\tilde\nabla_{\boldsymbol{\theta}} \mathcal{L} \,=\, \mathbf{F}(\boldsymbol{\\theta})^{-1}\, \nabla_{\boldsymbol{\theta}} \mathcal{L}.
+\]
+This is the steepest-descent direction under the Fisher metric, often improving conditioning and invariance. Practical estimates include empirical Fisher, diagonal Fisher, and K-FAC.
+
+\subsection{Relevance to generative models}
+\begin{itemize}
+\item \textbf{VAEs}: Likelihood/decoder and encoder families live on statistical manifolds; Fisher links ELBO curvature to stable updates.
+\item \textbf{Normalizing flows}: Invertible maps reparameterize distributions; Fisher transforms via pushforward/pullback.
+\item \textbf{Diffusion}: Score $\nabla_x \log p_t$ relates to local geometry of intermediate $p_t$; small-step KL controls schedule design.
+\end{itemize}
+
+\begin{keytakeaways}
+\begin{itemize}
+\item A \textbf{statistical manifold} treats parametric distributions as a Riemannian manifold.
+\item The \textbf{Fisher metric} is the intrinsic metric; locally, KL equals its quadratic form.
+\item \textbf{Natural gradient} is steepest descent under Fisher, aiding stable and invariant learning.
+\end{itemize}
+\end{keytakeaways}
+
+\subsection{Information Geometry Primer}
+\textbf{KL local quadratic and Fisher.} Around $\boldsymbol{\theta}$, $\mathrm{KL}\big(p(\cdot\mid\boldsymbol{\theta})\,\|\,p(\cdot\mid\boldsymbol{\theta}+d\boldsymbol{\theta})\big)\approx \tfrac12 d\boldsymbol{\theta}^{\top}\mathbf{F}(\boldsymbol{\theta}) d\boldsymbol{\theta}$. Thus Fisher is the statistical manifold's metric.
+
+\textbf{Exponential families and log-partition.} For $p(x\mid\theta)=\exp\{\langle\theta, T(x)\rangle - A(\theta)\}$, the log-partition $A$ is convex and $\nabla^2 A(\theta)=\mathbf{F}(\theta)$. Moreover, $\mathrm{KL}(\theta_1\,\|\,\theta_2)=D_{A}(\theta_2\,\|\,\theta_1)$ (Bregman of $A$).
+
+\textbf{Bregman duality.} For a convex potential $\varphi$, $D_{\varphi}(p\,\|\,q)=D_{\varphi^*}(\nabla\varphi(q)\,\|\,\nabla\varphi(p))$. Negative entropy yields KL on the simplex; $\tfrac12\|\cdot\|^2$ yields squared Euclidean.
+
+\textbf{Mirror descent vs. natural gradient.} Mirror descent uses the mirror map $\nabla\varphi$ and Bregman projections; natural gradient uses a Riemannian metric $\mathbf{G}$ (e.g., Fisher) and updates $\mathbf{G}^{-1}\nabla L$. When $\mathbf{G}=\nabla^2\varphi$, the two align locally.
+
+\section{Fisher Information Matrix}
+
+\subsection{Definition and equivalent forms}
+Let the \textit{score} be $s(x;\boldsymbol{\theta}) = \nabla_{\boldsymbol{\theta}} \log p(x\mid \boldsymbol{\theta})$. The \textbf{Fisher information matrix} is
+\[
+\mathbf{F}(\boldsymbol{\theta}) \,=\, \mathbb{E}_{x\sim p(\cdot\mid\boldsymbol{\theta})}\big[\, s\, s^{\top} \,\big]
+\,=\, -\,\mathbb{E}_{x\sim p(\cdot\mid\boldsymbol{\theta})}\big[\, \nabla_{\boldsymbol{\theta}}^{2} \log p(x\mid\boldsymbol{\theta}) \,\big] \quad (\text{under regularity}).
+\]
+It quantifies local sensitivity of the distribution to parameter changes.
+
+\subsection{Core properties}
+\begin{itemize}
+\item Symmetric positive semidefinite; positive definite under identifiability.
+\item Additive across i.i.d. samples: $\mathbf{F}_N = N\,\mathbf{F}$.
+\item Invariant under smooth reparameterizations.
+\item Cram\'er--Rao lower bound: for any unbiased estimator $\hat{\boldsymbol{\theta}}$, $\operatorname{Cov}(\hat{\boldsymbol{\theta}}) \succeq \mathbf{F}(\boldsymbol{\theta})^{-1}$.
+\end{itemize}
+
+\subsection{Fisher as geometry}
+The Fisher matrix is the canonical Riemannian metric on a statistical manifold: locally
+\[
+\mathrm{KL}\big(p(\cdot\mid\boldsymbol{\theta})\,\|\,p(\cdot\mid\boldsymbol{\theta}+d\boldsymbol{\theta})\big)
+\;\approx\; \tfrac12\, d\boldsymbol{\theta}^{\top} \mathbf{F}(\boldsymbol{\theta})\, d\boldsymbol{\theta},
+\]
+so lengths and geodesics in parameter space are determined by $\mathbf{F}$.
+
+\subsection{Coordinate and computational views}
+True Fisher uses expectation over the model; the \textit{empirical Fisher} replaces it with a data average. Mini-batch estimates with damping improve stability. Diagonal and block approximations are common for scale.
+
+\subsection{Relationships to other curvature notions (see also Natural Gradient, Parameter Manifolds)}
+When the output-space metric is Euclidean and the model is well specified, Fisher often aligns with Gauss--Newton ($\approx J^{\top}J$). Fisher equals the negative expected Hessian in regular exponential families, but can differ from the true Hessian in general.
+
+\subsection{Worked examples}
+\begin{itemize}
+\item Bernoulli/logistic regression: $\mathbf{F}$ scales with predictive variance $\pi(1-\pi)$, improving step isotropy.
+\item Gaussian mean (known variance $\sigma^2$): $\mathbf{F}=\sigma^{-2}\,\mathbf{I}$; with unknown variance, blocks couple mean/variance.
+\item Softmax regression: Fisher reflects class probabilities; label smoothing modifies curvature.
+\end{itemize}
+
+\subsection{Practical estimation and approximations}
+\begin{itemize}
+\item True vs. empirical Fisher: bias/variance and computational cost trade-offs.
+\item Diagonal Fisher, K-FAC (Kronecker factored blocks), Shampoo: scalable curvature approximations.
+\item Use damping/trust-region strategies (NPG/TRPO) to control step sizes.
+\end{itemize}
+
+\subsection{Applications in generative modeling}
+\begin{itemize}
+\item VAEs: Fisher links ELBO curvature to stable, invariant updates.
+\item Normalizing flows: invertible reparameterizations transform Fisher by pushforward/pullback.
+\item Diffusion: KL-based terms exhibit local Fisher geometry along the noise schedule.
+\end{itemize}
+
+\subsection{Key takeaways}
+\begin{itemize}
+\item Fisher is the intrinsic metric of statistical manifolds via local KL geometry.
+\item It bounds estimator variance (CRLB) and guides geometry-aware optimization (natural gradient).
+\item Scalable approximations make Fisher usable in modern deep generative models.
+\end{itemize}
+
+\section{Parameter Manifolds}
+
+\subsection{Motivation: Why geometry in parameter space?}
+Training deep generative models involves optimizing parameters $\boldsymbol{\theta}$ in very high dimensions. Euclidean geometry on $\mathbb{R}^P$ is sensitive to reparameterizations and can be poorly conditioned. Treating $\Theta$ as a \textbf{parameter manifold} with an appropriate metric makes step sizes, directions, and conditioning meaningful and often invariant.
+
+\subsection{Definition and views (see also Fisher, Gauss--Newton)}
+$\Theta$ is a differentiable manifold (often $\mathbb{R}^P$ with charts). Useful geometries:
+\begin{itemize}
+\item \textbf{Euclidean}: baseline; sensitive to coordinate scalings.
+\item \textbf{Fisher metric on $\Theta$}: via the model likelihood $p(x\mid\boldsymbol{\theta})$.
+\item \textbf{Pullback metrics}: via mappings $F(\boldsymbol{\theta})$ (e.g., outputs, features): $g_\Theta = J_F^{\top} g_{\text{out}} J_F$.
+\end{itemize}
+
+\subsection{Metrics on parameter space}
+\paragraph{Fisher on $\Theta$.} $\mathbf{F}(\boldsymbol{\theta}) = \mathbb{E}\big[\nabla_{\boldsymbol{\theta}} \log p\,\nabla_{\boldsymbol{\theta}} \log p^{\top}\big]$ defines a Riemannian metric. Locally, $\mathrm{KL}(\theta,\theta+d\theta) \approx \tfrac12 d\theta^{\top}\mathbf{F}d\theta$.
+\paragraph{Output-space pullback.} If $F$ maps parameters to outputs, then $g_\Theta = J_F^{\top} g_{\text{out}} J_F$. With $g_{\text{out}}=I$, this reduces to $J_F^{\top}J_F$ (Gauss–Newton structure).
+
+\subsection{Natural gradient and preconditioning}
+The \textbf{natural gradient} takes steepest descent under the chosen metric: $\tilde\nabla_{\boldsymbol{\theta}}\mathcal{L} = \mathbf{G}(\boldsymbol{\theta})^{-1}\nabla_{\boldsymbol{\theta}}\mathcal{L}$ (e.g., $\mathbf{G}=\mathbf{F}$). Approximations:
+\begin{itemize}
+\item Empirical/diagonal Fisher (cheap, invariant approximations)
+\item K-FAC / block-diagonal curvature (layer-wise, scalable)
+\item Shampoo / Kronecker factorizations (improved conditioning)
+\end{itemize}
+
+\subsection{Reparameterization and invariance}
+Under Euclidean metrics, simple reparameterizations (scales, normalizations) distort optimization. Riemannian metrics (Fisher/pullbacks) yield steps that are invariant to smooth reparameterizations, stabilizing training across equivalent parameterizations (e.g., logits rescaling, batchnorm, weight normalization).
+
+\subsection{Examples and case studies}
+\begin{itemize}
+\item \textbf{Logistic regression}: closed-form Fisher; natural gradient rescales by variance of features under the model.
+\item \textbf{Shallow nets}: blockwise/K-FAC approximations track layerwise curvature; improved conditioning and convergence.
+\item \textbf{Gauss–Newton link}: pullback metrics align with GN approximations for squared-error objectives.
+\end{itemize}
+
+\subsection{Triangle of spaces}
+Parameter manifold ($\Theta$), statistical manifold (distributions), and data/latent manifolds interact via pushforward/pullback of metrics and Jacobians; many practical “second-order” methods can be viewed as choosing a geometry on one space and pulling it back to $\Theta$.
+
+\subsection{Practical guidance}
+When to use natural gradient/approximations: ill-conditioned training, sensitivity to reparameterization, unstable step sizes. Tune damping, use minibatch Fisher, and prefer scalable factorizations for large models.
+
+\subsection{Key takeaways}
+\begin{itemize}
+\item \textbf{Parameter manifolds} give a principled geometry for optimization.
+\item \textbf{Fisher/pullback metrics} produce invariant, better-conditioned steps.
+\item \textbf{Approximations} (diagonal/K-FAC/Shampoo) make geometry practical at scale.
+\end{itemize}
+
+\section{Natural Gradient}
+
+\subsection{Motivation}
+Euclidean gradients are coordinate-dependent and can be ill-conditioned in high-dimensional models. We seek updates that respect the geometry of the parameter manifold and are invariant to reparameterization.
+
+\subsection{Definition from Riemannian steepest descent}
+Let $\mathbf{G}(\boldsymbol{\theta})$ be a Riemannian metric on the parameter manifold (e.g., Fisher or a pullback metric). The \textbf{natural gradient} is
+\[
+\tilde\nabla_{\boldsymbol{\theta}} \mathcal{L} \;=\; \mathbf{G}(\boldsymbol{\theta})^{-1}\, \nabla_{\boldsymbol{\theta}} \mathcal{L},
+\]
+the steepest descent direction under $\mathbf{G}$. Trust-region view: minimize $\mathcal{L}$ subject to a local constraint $\mathrm{KL}(\theta,\theta+d\theta)\le \varepsilon$ yields $d\theta \propto \mathbf{F}^{-1}\nabla\mathcal{L}$.
+
+\subsection{Choice of metric}
+\begin{itemize}
+\item \textbf{Fisher metric}: from the statistical manifold; locally, $\mathrm{KL}\approx \tfrac12 d\theta^\top \mathbf{F}\, d\theta$.
+\item \textbf{Prediction/output pullback}: $\mathbf{G}=J_F^{\top} g_{\text{out}} J_F$; with $g_{\text{out}}=I$ this aligns with Gauss--Newton.
+\end{itemize}
+Choice depends on objective, likelihood modeling, and computational budget.
+
+\subsection{Invariance properties}
+Natural gradient is invariant to smooth reparameterizations of $\boldsymbol{\theta}$. Practical effects: robustness to scaling of logits, normalization layers, and alternate parameterizations, unlike Euclidean SGD with ad-hoc preconditioners.
+
+\subsection{Practical approximations and algorithms}
+\begin{itemize}
+\item \textbf{Empirical / diagonal Fisher}: inexpensive, improves conditioning; limited coupling.
+\item \textbf{K-FAC / blockwise curvature}: layerwise Kronecker factorizations; scalable to large nets.
+\item \textbf{Shampoo / second-moment factorizations}: better conditioning with manageable cost.
+\item Damping, trust-region variants (e.g., NPG/TRPO), line search for stability.
+\end{itemize}
+
+\subsection{Connections to second-order methods}
+Natural gradient often coincides with Gauss--Newton for squared-error models; both differ from full Newton (which uses the Hessian). These links clarify when curvature is about sensitivity to predictions vs. to parameters directly.
+
+\subsection{Worked examples (concise)}
+\begin{itemize}
+\item \textbf{Logistic/softmax regression}: closed-form Fisher; $\tilde\nabla$ rescales by predictive variance, improving step isotropy.
+\item \textbf{Small MLP/CNN block}: K-FAC captures input/output second moments, approximating natural steps layerwise.
+\end{itemize}
+
+\subsection{Usage guidance and caveats}
+Use when training is ill-conditioned or sensitive to reparameterization. Select approximations by model size; add damping; estimate Fisher on minibatches and maintain running averages. Watch for noisy Fisher estimates, metric--objective mismatch, and overly aggressive steps.
+
+\subsection{Key takeaways}
+\begin{itemize}
+\item Natural gradient = geometry-aware steepest descent on parameter/statistical manifolds.
+\item Fisher/pullback metrics provide invariance and improved conditioning.
+\item Scalable approximations make it practical for modern generative models.
+\end{itemize}
+
+\section{Bregman Divergence}
+
+\subsection{Definition and intuition}
+Given a strictly convex, differentiable potential $\varphi$, the \textbf{Bregman divergence} is
+\[
+D_{\varphi}(p\,\|\,q) \;=\; \varphi(p) - \varphi(q) - \langle \nabla\varphi(q),\, p - q \rangle.
+\]
+It measures the gap between $\varphi(p)$ and the tangent plane of $\varphi$ at $q$; asymmetric and zero iff $p=q$.
+
+\subsection{Core properties}
+Nonnegative and convex in the first argument; not a metric (asymmetry, no triangle inequality). \textbf{Duality:} with the Legendre transform $\varphi^*$, 
+\[
+D_{\varphi}(p\,\|\,q) = D_{\varphi^*}(\nabla\varphi(q)\,\|\,\nabla\varphi(p)).
+\]
+\textbf{Projections:} Bregman projections minimize $D_{\varphi}(\cdot\,\|\,\mathcal{C})$ and satisfy a generalized Pythagorean theorem.
+
+\subsection{Important examples}
+\begin{itemize}
+\item \textbf{Squared Euclidean:} $\varphi(x)=\tfrac12\|x\|^2 \Rightarrow D=\tfrac12\|p-q\|^2$.
+\item \textbf{KL on the simplex:} $\varphi(p)=\sum_i p_i\log p_i \Rightarrow D=\sum_i p_i\log \tfrac{p_i}{q_i}$.
+\item \textbf{Itakura--Saito:} $\varphi(x)= -\log x$ on $x>0$.
+\item Logistic and generalized $I$-divergences arise from suitable $\varphi$.
+\end{itemize}
+
+\subsection{Exponential families and Fisher geometry}
+For exponential families with natural parameter $\theta$ and log-partition $A(\theta)$, 
+\[
+\mathrm{KL}\big(p(\cdot\mid \theta_1)\,\|\,p(\cdot\mid \theta_2)\big) = D_{A}(\theta_2\,\|\,\theta_1).
+\]
+The local quadratic expansion of KL yields Fisher, linking Bregman structure to statistical manifolds and the geometry used by natural gradients.
+
+\subsection{Optimization links}
+\textbf{Mirror descent} performs gradient steps in the dual space with mirror map $\nabla\varphi$ and updates via Bregman projection. Natural gradient aligns locally when the metric $\mathbf{G}$ matches $\nabla^2\varphi$. Euclidean GD is mirror descent with $\varphi=\tfrac12\|\cdot\|^2$.
+
+\subsection{Projections, averaging, and means}
+The Bregman centroid minimizes average divergence and recovers familiar means: arithmetic (Euclidean), entropy-induced means on the simplex (geometric/softmax-like). Used in Bregman $k$-means and information-theoretic clustering.
+
+\subsection{Applications in generative modeling}
+\begin{itemize}
+\item \textbf{Loss design:} choose $\varphi$ to match output domains (simplex, positive reals).
+\item \textbf{Variational objectives:} ELBO's KL is Bregman; affects regularization and curvature.
+\item \textbf{Flows/diffusion:} divergence choices shape training dynamics and consistency terms.
+\end{itemize}
+
+\subsection{Practical guidance}
+Pick $\varphi$ by domain and invariances; mind asymmetry ($D_{\varphi}(p\,\|\,q)$ vs $D_{\varphi}(q\,\|\,p)$). Ensure numerical stability near boundaries (e.g., probabilities), and use appropriate smoothing/damping.
+
+\subsection{Key takeaways}
+\begin{itemize}
+\item Bregman divergences unify many losses via convex potentials.
+\item KL is a Bregman divergence; ties to exponential families and Fisher geometry.
+\item Mirror descent and natural gradient are complementary geometry-aware optimization views.
+\end{itemize}
+
 \section{Manifolds in Variational Autoencoders (VAEs)}
 
 \subsection{Architecture Overview}

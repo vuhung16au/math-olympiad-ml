@@ -1,0 +1,238 @@
+\chapter{Riemannian Manifolds}
+
+\section{From Manifolds to Riemannian Manifolds}
+
+Up to now, we have treated manifolds as spaces that locally look like Euclidean space (via charts) and we have computed distances and geodesics in concrete cases (lines, circles, planes, spheres). To make these ideas fully precise and unify all previous formulas, we introduce a \textbf{Riemannian metric}: a smoothly varying inner product on each tangent space that tells us how to measure lengths, angles, and distances on a manifold.
+
+At an intuitive level, a Riemannian metric is a field of ``local rulers'' that may vary from point to point. These rulers determine how long a small displacement is and how two directions compare via an angle. Once a metric is given, the manifold becomes a \textbf{Riemannian manifold}.
+
+\section{Tangent Spaces and Vectors on a Manifold}
+
+To measure lengths and angles on a manifold, we first need a notion of direction at a point. The \textbf{tangent space} $T_p\mathcal{M}$ at a point $p$ collects all possible ``velocities'' of curves passing through $p$.
+
+\subsection{Tangent Vectors as Velocities of Curves}
+Let $\gamma:(-\epsilon,\epsilon)\to\mathcal{M}$ be a smooth curve with $\gamma(0)=p$. The derivative $\dot\gamma(0)$ is a tangent vector at $p$. Two curves define the same tangent vector if their derivatives agree in any (hence every) chart. The set of all such velocities forms a vector space $T_p\mathcal{M}$.
+
+\subsection{Coordinate Bases and Change of Coordinates}
+Given a chart $(U, x^1,\dots,x^n)$ with $p\in U$, the partial derivatives $\big\{\frac{\partial}{\partial x^1}\big|_p,\dots,\frac{\partial}{\partial x^n}\big|_p\big\}$ form a basis of $T_p\mathcal{M}$. A tangent vector can be written
+\[
+v\big|_p = v^i\,\frac{\partial}{\partial x^i}\Big|_p,\quad v^i\in\mathbb{R}.
+\]
+Under a coordinate change $x\mapsto y$, components transform by the Jacobian: $v^i = \frac{\partial x^i}{\partial y^j} v^{\,j}$. The vector itself is geometric (coordinate-independent); only its components change.
+
+\subsection{Differential (Pushforward) and the Jacobian}
+For a smooth map $F: \mathcal{M}\to\mathcal{N}$, the \textbf{differential} at $p$, $dF_p:T_p\mathcal{M}\to T_{F(p)}\mathcal{N}$, pushes tangent vectors forward by $dF_p(\dot\gamma(0)) \,=\, \frac{d}{dt}\big(F\circ\gamma\big)(0)$. In coordinates, $dF_p$ is represented by the Jacobian matrix $\big(\partial F^\alpha/\partial x^i\big)$. This notion underlies pullback metrics and the geometry of learned manifolds (Chapter~10).
+
+\subsection{Examples}
+\begin{itemize}
+\item \textbf{$\mathbb{R}^n$}: $T_p\mathbb{R}^n\cong\mathbb{R}^n$ with the standard basis.
+\item \textbf{Circle $S^1$}: At angle $\theta$, $T_pS^1$ is the line tangent to the circle, spanned by $\partial/\partial\theta$; velocities are perpendicular to the radius.
+\item \textbf{Sphere $S^2$}: $T_pS^2$ is the plane tangent to the sphere at $p$; great-circle motion has velocity in this plane.
+\end{itemize}
+
+\section{The Riemannian Metric}
+
+\subsection{Definition (Intuition first)}
+
+For each point $p$ on a manifold $\mathcal{M}$, consider the tangent space $T_p\mathcal{M}$. A Riemannian metric assigns to each $p$ an inner product $g_p(\cdot,\cdot)$ on $T_p\mathcal{M}$ that varies smoothly with $p$. This inner product makes it possible to measure:
+\begin{itemize}
+\item \textbf{Lengths} of tangent vectors and curves
+\item \textbf{Angles} between tangent directions
+\item \textbf{Distances} between points (as minimal curve lengths)
+\end{itemize}
+
+\subsection{Coordinates and the Metric Tensor}
+
+In a local coordinate chart $(x^1,\dots,x^n)$, the metric is represented by a symmetric, positive-definite matrix of smooth functions $g_{ij}(x)$, and the squared infinitesimal length is
+\[
+ds^2 = g_{ij}(x)\,dx^i\,dx^j, \quad g_{ij}=g_{ji}, \quad \text{$(g_{ij})$ positive definite.}
+\]
+Under a coordinate change, the components $g_{ij}$ transform as a $(0,2)$-tensor, ensuring $ds^2$ is coordinate-independent.
+
+\subsection{Metric Tensor: Coordinate Form and Properties}
+
+The metric is a smoothly varying \textit{(0,2)-tensor field} $g$, meaning that at each point $p$ it takes two tangent vectors and returns a scalar $g_p(u,v)$, bilinear, symmetric, and positive-definite. In coordinates:
+\begin{itemize}
+\item \textbf{Bilinearity and symmetry}: $g_{ij}=g_{ji}$; linear in each argument.
+\item \textbf{Positive-definite}: $g_{ij} v^i v^j > 0$ for any nonzero $v$.
+\item \textbf{Line element}: $ds^2 = g_{ij}\,dx^i dx^j$ defines squared infinitesimal length.
+\item \textbf{Coordinate change}: If $y=y(x)$, then $g'_{\alpha\beta} = \frac{\partial x^i}{\partial y^{\alpha}}\,\frac{\partial x^j}{\partial y^{\beta}}\, g_{ij}$, leaving $ds^2$ invariant.
+\end{itemize}
+
+Important constructions:
+\begin{itemize}
+\item \textbf{Inverse metric}: $g^{ij}$ satisfies $g^{ik} g_{kj} = \delta^i_{\,j}$; used to raise/lower indices and map vectors to covectors.
+\item \textbf{Volume element}: $dV = \sqrt{\det g}\; dx^1\cdots dx^n$ gives area/volume in coordinates.
+\item \textbf{Levi-Civita connection}: The unique torsion-free connection compatible with $g$ has Christoffel symbols $\Gamma^i_{\,jk}$ built from $g$ and its first derivatives; geodesics and curvature derive from this.
+\item \textbf{Pullback metric}: For $F: \mathcal{Z}\to\mathcal{M}$, the induced metric on $\mathcal{Z}$ is $g_{\mathcal{Z}} = J_F^{\top}\, g_{\mathcal{M}}\, J_F$; with ambient Euclidean $g=I$, this reduces to $J_F^{\top}J_F$ (learned manifolds in Chapter~10).
+\end{itemize}
+
+\section{Examples of Riemannian Metrics}
+
+\subsection{Euclidean Space}
+On $\mathbb{R}^n$ with Cartesian coordinates, the standard metric is $g_{ij}=\delta_{ij}$. Then $ds^2=\sum_i (dx^i)^2$, which recovers familiar Euclidean geometry.
+
+\subsection{The Circle}
+On a circle of radius $r$ with angle coordinate $\theta$, the metric is $\,ds^2=r^2\,d\theta^2$. Curve length along the circle is the usual arc length $L=\int r\,|\dot\theta|\,dt$.
+
+\subsection{The Sphere}
+On a sphere of radius $R$ with spherical coordinates $(\phi,\lambda)$ (latitude, longitude),
+\[
+ds^2 = R^2\big(d\phi^2 + \sin^2\!\phi\, d\lambda^2\big),
+\]
+the \textit{round metric}, consistent with great-circle distances studied earlier.
+
+\section{Distances from the Metric}
+
+Given a smooth curve $\gamma:[t_1,t_2]\to\mathcal{M}$, its length with respect to $g$ is
+\[
+L[\gamma] = \int_{t_1}^{t_2} \sqrt{\,g_{ij}(\gamma(t))\,\dot x^i(t)\,\dot x^j(t)\,}\,dt.
+\]
+The \textbf{distance} between two points $p,q\in\mathcal{M}$ is the infimum of $L[\gamma]$ over all smooth curves $\gamma$ with $\gamma(t_1)=p$ and $\gamma(t_2)=q$. This construction unifies all earlier distance formulas:
+\begin{itemize}
+\item On a line ($g=1$), $d(p,q)=|x_2-x_1|$.
+\item On a circle ($g=r^2$), $d=r\,\theta$ (shorter arc).
+\item On a sphere (round metric), $d$ is the great-circle (central-angle) distance.
+\end{itemize}
+
+\section{Affine Connection and Covariant Derivative}
+
+To differentiate vector fields along curves on a manifold, we need a rule that compares vectors at nearby points. An \textbf{affine connection} (or simply a connection) $\nabla$ provides the \textit{covariant derivative} $\nabla_X Y$ of a vector field $Y$ along a vector field $X$.
+
+\subsection{Concept and properties}
+The covariant derivative obeys linearity in $X$ and $Y$, the Leibniz rule $\nabla_X(fY) = X[f]\,Y + f\,\nabla_X Y$, and reduces to ordinary differentiation in flat coordinates. It enables us to describe how vectors change along curves intrinsically.
+
+\subsection{Christoffel symbols in coordinates}
+In a chart with coordinate vector fields $\partial_i$, the connection is encoded by \textbf{Christoffel symbols} $\Gamma^{k}_{\,ij}$ via
+\[
+\nabla_{\partial_i} \, \partial_j \;=\; \Gamma^{k}_{\,ij}\, \partial_k.
+\]
+These symbols are not tensor components (they do not transform tensorially), but they assemble to a geometric object: the connection itself.
+
+\subsection{Levi-Civita connection from the metric}
+For a Riemannian metric $g$, there exists a unique connection that is \textit{torsion-free} ($\Gamma^{k}_{\,ij} = \Gamma^{k}_{\,ji}$) and \textit{metric-compatible} ($\nabla g = 0$). This \textbf{Levi-Civita connection} has Christoffel symbols
+\[
+\Gamma^{i}_{\,jk} \,=\, \tfrac{1}{2}\, g^{i\ell}\big( \partial_j g_{k\ell} + \partial_k g_{j\ell} - \partial_\ell g_{jk} \big),
+\]
+expressing how $g$ determines differentiation, parallel transport, and geodesics.
+
+\subsection{Parallel Transport}
+\paragraph{Definition and intuition.} Given a curve $\gamma:[0,1]\to\mathcal{M}$ and an initial vector $V(0)\in T_{\gamma(0)}\mathcal{M}$, the \textbf{parallel transport} of $V$ along $\gamma$ is the vector field $V(t)$ along $\gamma$ satisfying the ODE
+\[
+\nabla_{\dot\gamma(t)} V(t) \;=\; 0,\quad V(0)\;\text{given}.
+\]
+Under the Levi-Civita connection, transport preserves inner products, so lengths and angles of transported vectors remain constant.
+
+\paragraph{Coordinate form.} In local coordinates, with components $V^i(t)$ and $\dot\gamma^j(t)$,
+\[
+\frac{d V^i}{dt} \, + \, \Gamma^{i}_{\,jk}\big(\gamma(t)\big)\, \dot\gamma^{j}(t)\, V^{k}(t) \;=\; 0,
+\]
+an initial value problem with unique smooth solution for smooth data.
+
+\paragraph{Properties.} For the Levi-Civita connection: (i) inner products are preserved, (ii) transport depends on the path in general (path independence holds in flat regions/coordinates like Cartesian $\mathbb{R}^n$), (iii) concatenation of paths composes transports.
+
+\paragraph{Examples.}
+\begin{itemize}
+\item \textbf{Plane}: In Cartesian coordinates, $\Gamma=0$, so $dV/dt=0$ and $V$ is constant; transport is path-independent.
+\item \textbf{Sphere}: Transporting a tangent vector along a latitude or a spherical triangle generally changes its direction upon return, revealing positive curvature.
+\end{itemize}
+
+\paragraph{Relation to geodesics.} Geodesics are \textit{auto-parallel}: their velocity is parallel transported along themselves, $\nabla_{\dot\gamma}\dot\gamma=0$. Thus geodesics are ``straightest'' curves with respect to the connection.
+
+\paragraph{Holonomy and curvature (brief).} Transporting a vector around a closed loop typically produces a rotated vector at the base point; the net rotation (holonomy) encodes curvature. On flat manifolds (or regions), the holonomy is trivial.
+
+\paragraph{Note for learned manifolds.} For manifolds parameterized by generators $G$, parallel transport under the pullback metric can be approximated by integrating the coordinate ODE, enabling semantics-preserving traversals across the data manifold.
+
+\subsection{Exponential and Log Maps; Normal Coordinates}
+\paragraph{Exponential map.} For $v\in T_p\mathcal{M}$, let $\gamma_v$ be the unique geodesic with $\gamma_v(0)=p$ and $\dot\gamma_v(0)=v$. The \textbf{exponential map} is
+\[
+\exp_p(v) \,=\, \gamma_v(1),
+\]
+defined at least on a neighborhood of $0\in T_p\mathcal{M}$. It converts a tangent vector into a point by ``shooting'' along its geodesic for unit time.
+
+\paragraph{Log map (where defined).} On a normal neighborhood $U$ of $p$, the inverse map $\log_p:U\to T_p\mathcal{M}$ takes a point $q$ to the initial velocity of the minimizing geodesic from $p$ to $q$.
+
+\paragraph{Normal coordinates.} Using $\exp_p$, one defines \textbf{normal coordinates} centered at $p$; in these coordinates, geodesics through $p$ are straight lines, Christoffel symbols vanish at $p$, and $g_{ij}(p)=\delta_{ij}$, so the metric is Euclidean up to first order.
+
+\subsection{Geodesic Deviation and Curvature (Jacobi Fields)}
+Consider a smooth family of geodesics $\gamma_s(t)$ with variation field $J(t)=\partial\gamma_s/\partial s\big|_{s=0}$. Then $J$ satisfies the (coordinate-free) \textbf{Jacobi equation}
+\[
+\nabla_{\dot\gamma}\nabla_{\dot\gamma} J \, + \, R(J,\dot\gamma)\,\dot\gamma \,=\, 0,
+\]
+where $R$ is the Riemann curvature tensor. Qualitatively: positive curvature tends to focus (converge) nearby geodesics, negative curvature defocuses (diverges), and zero curvature keeps separation linear.
+
+\subsection{Curvature: Types and Intuition}
+\begin{itemize}
+\item \textbf{Gaussian curvature} (2D): intrinsic measure of bending; triangles have angle sum $\pi+\text{(area)}\cdot K$ (small triangles). Sphere: $K>0$; saddle: $K<0$; plane: $K=0$.
+\item \textbf{Sectional curvature} (general): curvature of a 2D plane in $T_p\mathcal{M}$; reduces to Gaussian curvature in 2D.
+\item \textbf{Ricci/scalar curvature} (brief): averages of sectional curvature controlling volume distortion and heat flow; useful summaries in higher dimensions.
+\end{itemize}
+Visualization: on a sphere, initially parallel geodesics (longitudes) meet; on a saddle, they spread apart; on a plane, they stay parallel.
+
+\subsection{Cut Locus, Conjugate Points, and Injectivity Radius}
+Geodesics minimize distance only up to certain limits. The \textbf{cut locus} of $p$ is where minimizing geodesics from $p$ first fail to be unique or to minimize. \textbf{Conjugate points} are points along a geodesic where nearby geodesics reconverge (nontrivial Jacobi fields vanish). The \textbf{injectivity radius} at $p$ is the largest radius for which $\exp_p$ is a diffeomorphism onto its image; within it, $\log_p$ and geodesic uniqueness/minimality hold.
+
+\subsection{Computation and Examples}
+\begin{itemize}
+\item \textbf{Sphere ($S^2$)}: Great circles are geodesics. With unit vectors $u,v\in S^2$, the central angle $\theta=\arccos(u\cdot v)$ gives the distance $d=R\theta$. The log map at $u$ can be written using the component of $v$ orthogonal to $u$; exp is its inverse along great circles.
+\item \textbf{Plane ($\mathbb{R}^n$)}: $\Gamma=0$ in Cartesian coordinates; exp/log are $\exp_p(v)=p+v$, $\log_p(q)=q-p$; transport and geodesics are path-independent straight lines.
+\item \textbf{Cylinder} (flat): Locally like a plane; unroll-and-roll constructions provide geodesics and transport.
+\end{itemize}
+Numerics: Boundary-value geodesics (given endpoints) can be solved with shooting methods; stability improves in normal coordinates and with good initial guesses.
+
+\subsection{Key Takeaways: Geodesics and Curvature}
+\begin{itemize}
+\item \textbf{exp/log}: Bridge between tangent spaces and points; normal coordinates make geodesics look straight near their base.
+\item \textbf{Curvature}: Determines how geodesics deviate, how transport around loops rotates vectors, and where geodesics stop minimizing.
+\item \textbf{Global limits}: Cut locus and injectivity radius bound geodesic uniqueness/minimality.
+\end{itemize}
+
+\subsection{Geodesics via the connection}
+Geodesics are the curves whose velocity vectors are \textit{auto-parallel}: $\nabla_{\dot\gamma}\dot\gamma = 0$. In coordinates, this condition yields the geodesic ODE with Christoffel symbols. This connects the variational and ``straightest-possible'' viewpoints.
+
+\section{Geodesics Determined by the Metric}
+
+\subsection{Variational Characterization}
+Geodesics are curves that are locally length-minimizing for the metric $g$. Equivalently, they are stationary points of the length functional. In coordinates, geodesics satisfy the \textbf{geodesic equation}
+\[
+\frac{d^2 x^i}{dt^2} + \Gamma^{i}_{\,jk}(x)\, \frac{dx^j}{dt}\,\frac{dx^k}{dt} = 0,
+\]
+where the Christoffel symbols are determined by the metric via
+\[
+\Gamma^{i}_{\,jk} \,=\, \tfrac{1}{2}\, g^{i\ell}\big( \partial_j g_{k\ell} + \partial_k g_{j\ell} - \partial_\ell g_{jk} \big).
+\]
+This shows the metric fully determines geodesics.
+
+\subsection{Consistency with Previous Chapters}
+\begin{itemize}
+\item \textbf{Plane}: $g_{ij}=\delta_{ij}\Rightarrow \Gamma^i_{\,jk}=0$, geodesics are straight lines.
+\item \textbf{Circle}: $ds^2=r^2 d\theta^2$ gives uniform motion in $\theta$ (arcs).
+\item \textbf{Sphere}: The geodesic equations yield great circles, matching our geometric construction.
+\end{itemize}
+
+\section{Curvature: How Metrics Encode Shape}
+
+The metric encodes how the space bends intrinsically. In two dimensions, the Gaussian curvature distinguishes flat ($K=0$), positively curved (sphere-like, geodesics converge), and negatively curved (saddle-like, geodesics diverge) behavior—precisely the phenomena observed in earlier chapters.
+
+\section{Why Riemannian Structure Matters}
+
+\begin{itemize}
+\item It provides the rigorous framework for length, distance, and angle on manifolds.
+\item It explains and unifies geodesics across all examples we studied.
+\item It prepares us for applications: learned manifolds in generative AI induce metrics (via pullbacks), affecting interpolation and distance.
+\end{itemize}
+
+\begin{keytakeaways}
+\begin{itemize}
+\item A \textbf{Riemannian manifold} is a manifold equipped with a smoothly varying inner product on tangent spaces.
+\item The \textbf{metric tensor} $g_{ij}$ defines local lengths and angles and determines distances and geodesics.
+\item Classical cases (line, circle, plane, sphere) fit naturally into this framework.
+\item Curvature (from the metric) governs how geodesics converge or diverge.
+\end{itemize}
+\end{keytakeaways}
+
+\section{What Comes Next}
+
+In the next chapter, we connect these ideas to generative AI: neural generators endow data manifolds with \textit{pullback metrics}, enabling geodesic interpolation and principled distance notions that align better with perception than raw Euclidean distances.
+
+
