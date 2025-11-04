@@ -5,6 +5,7 @@ Stack linear steps with activations to form complex functions.
   \objective Define a layer as \( \vect h = g(W\vect x + \vect b) \).
   \objective Explain how two layers can form piecewise linear curves.
   \objective Understand hidden units as learned features.
+  \objective Describe feature learning functions like PCA and autoencoders.
 \end{learningobjectives}
 
 \section{Two-Layer Example}
@@ -43,6 +44,33 @@ Interpretation:
 \end{itemize}
 This piecewise linear shape forms a flat region with rising and falling flanks—one way to build a ``bump'' by composing ReLUs.
 \end{example}
+
+\section{Feature Learning Functions}
+Feature learning functions extract useful representations from data. Hidden layers in neural networks learn features automatically; simpler methods like PCA provide linear transformations for dimensionality reduction.
+
+\begin{definition}
+A \emph{feature learning function} transforms raw inputs into a representation that captures essential patterns, making subsequent tasks (classification, prediction) easier. The learned features can reduce dimensionality or highlight important relationships in the data.
+\end{definition}
+
+\begin{example}[Principal Component Analysis (PCA)]
+PCA finds directions (principal components) that capture maximum variance. Given data points \( \vect x_1=(1,2), \vect x_2=(2,3), \vect x_3=(3,4) \), first centre them: \( \bar{\vect x} = (2,3) \). Centred points are \( (-1,-1), (0,0), (1,1) \). The first principal component aligns with the direction \( (1,1) \), capturing the main variation. Projecting onto this component reduces 2D data to 1D while preserving the most information.
+\end{example}
+
+\begin{example}[Autoencoders]
+An autoencoder is a neural network trained to reconstruct its input. It has an encoder (maps input \( \vect x \) to hidden representation \( \vect h \)) and a decoder (maps \( \vect h \) back to \( \hat{\vect x} \)). By constraining the hidden layer to be smaller than the input, the network learns a compressed representation. For instance, with 10 inputs, a hidden layer of 3 units forces the network to learn a 3D summary of the essential information needed for reconstruction.
+\end{example}
+
+\begin{remark}
+PCA provides fixed linear transformations; autoencoders learn nonlinear feature extraction through training. Hidden layers in standard neural networks also learn features, but they are optimised for the end task (e.g., classification) rather than reconstruction. A foundational result shows that multilayer feedforward networks are universal approximators \cite{hornik1989multilayer}—they can approximate any continuous function given enough hidden units.
+\end{remark}
+
+\begin{exercisebox}[medium]
+If PCA reduces 100D data to 10D, what percentage of the original dimensions are retained? What does this suggest about the data?
+\end{exercisebox}
+
+\begin{hint}
+10\% of dimensions retained. If PCA works well, it suggests the data has strong correlations and can be compressed without much loss.
+\end{hint}
 
 \section{Exercises}
 \begin{exercisebox}[medium]

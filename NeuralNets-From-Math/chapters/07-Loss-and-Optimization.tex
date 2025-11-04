@@ -1,11 +1,32 @@
 \chapter{Loss and Optimisation}
 Loss quantifies mismatch between predictions and targets; optimisation reduces loss.
 
+\begin{remark}
+The terms `loss function' and `cost function' are used interchangeably; both measure how far predictions are from targets. Both are types of \emph{objective functions}—what we optimise during training. This book uses `loss' throughout for consistency.
+\end{remark}
+
 \begin{learningobjectives}
+  \objective Understand objective functions as the general goal of optimisation.
   \objective Define a loss function suitable for a task.
+  \objective Explain how regularisation prevents overfitting.
   \objective Describe gradient descent at a high level.
   \objective Relate learning rate to step size and stability.
 \end{learningobjectives}
+
+\section{Objective Functions}
+An objective function represents the goal of the learning algorithm—what we aim to optimise (minimise or maximise) during training. Loss functions and cost functions are specific types of objective functions used in machine learning.
+
+\begin{definition}
+An \emph{objective function} is a mathematical expression that quantifies how well a model performs. In neural networks, we typically minimise the objective function to find optimal parameters \( \vect{\theta} \) that best fit the training data.
+\end{definition}
+
+\begin{remark}
+The hierarchy is: \emph{objective function} (general term) encompasses \emph{loss function} (per example) and \emph{cost function} (aggregated over dataset). In practice, `loss' and `cost' are often used interchangeably, and both are types of objective functions we minimise.
+\end{remark}
+
+\begin{example}
+For a regression task, the objective might be to minimise prediction error. The mean squared error (MSE) serves as both a loss function (for individual predictions) and a cost function (when averaged over all examples). The learning algorithm's goal is to find parameters that minimise this objective.
+\end{example}
 
 \section{Loss Choices}
 For regression, MSE is common; for binary classification, logistic loss pairs well with sigmoid outputs.
@@ -19,7 +40,7 @@ Units are squared (here, thousands$^2$). A smaller value indicates closer predic
 \begin{example}[Logistic loss]
 For a binary label $y\in\{0,1\}$ with sigmoid output $p=\sigma(z)$ interpreted as $\Pr(y=1\mid x)$, the logistic loss for a single example is
 \[\ell(y,p) = -\big(y\,\log p + (1-y)\,\log(1-p)\big).\]
-Consider two cases with $p=0.9$:
+This loss function is rooted in logistic regression \cite{cramer2002origins}. Consider two cases with $p=0.9$:
 \begin{itemize}
   \item If $y=1$: $\ell=-(1\cdot\log 0.9 + 0\cdot\log 0.1)\approx 0.105$ (small penalty).
   \item If $y=0$: $\ell=-(0\cdot\log 0.9 + 1\cdot\log 0.1)\approx 2.303$ (large penalty for confident wrong prediction).
@@ -27,8 +48,56 @@ Consider two cases with $p=0.9$:
 This asymmetry encourages calibrated probabilities: confident and correct is rewarded; confident and wrong is penalised heavily.
 \end{example}
 
+\section{Cost Functions}
+A cost function aggregates the loss over the entire dataset, usually by averaging the individual losses. It is minimised during training to find optimal model parameters.
+
+\begin{definition}
+A \emph{cost function} \( J(\vect{\theta}) \) computes the average loss across all training examples:
+\[ J(\vect{\theta}) = \frac{1}{n}\sum_{i=1}^{n} \ell(y_i, \hat{y}_i(\vect{\theta})), \]
+where \( \ell \) is the loss function for a single example, \( n \) is the number of examples, and \( \vect{\theta} \) represents the model parameters.
+\end{definition}
+
+\begin{example}
+Using the same house price data from earlier, suppose we have predictions \( \hat{y}=(210, 195, 250) \) and true values \( y=(200, 205, 240) \) for three homes. The cost function (mean squared error) aggregates the individual squared errors:
+\[ J = \frac{1}{3}\sum_{i=1}^{3} (y_i - \hat{y}_i)^2 = \frac{1}{3}(100 + 100 + 100) = 100. \]
+During training, we adjust parameters to minimise this cost; a lower cost indicates better overall fit to the data.
+\end{example}
+
+\section{Regularisation Functions}
+Regularisation functions penalise model complexity to prevent overfitting. They are added to the cost function, encouraging the model to favour simpler parameter values.
+
+\begin{definition}
+A \emph{regularised cost function} combines the original cost with a regularisation term:
+\[ J_{\text{reg}}(\vect{\theta}) = J(\vect{\theta}) + \lambda \cdot R(\vect{\theta}), \]
+where \( J(\vect{\theta}) \) is the original cost, \( \lambda > 0 \) is the regularisation strength (hyperparameter), and \( R(\vect{\theta}) \) is the regularisation function that penalises complexity.
+\end{definition}
+
+\begin{example}[L2 regularisation (Ridge)]
+L2 regularisation penalises the sum of squared parameters: \( R_{\text{L2}}(\vect{\theta}) = \sum_j \theta_j^2 \). For parameters \( \vect{\theta} = (2, -3, 1.5) \) with \( \lambda = 0.1 \), the regularisation term is
+\[ \lambda \cdot R_{\text{L2}} = 0.1 \cdot (2^2 + (-3)^2 + 1.5^2) = 0.1 \cdot (4 + 9 + 2.25) = 1.525. \]
+If the original cost is \( J = 50 \), the regularised cost becomes \( J_{\text{reg}} = 50 + 1.525 = 51.525 \). Larger parameters increase the penalty, encouraging smaller values.
+\end{example}
+
+\begin{example}[L1 regularisation (Lasso)]
+L1 regularisation penalises the sum of absolute parameter values: \( R_{\text{L1}}(\vect{\theta}) = \sum_j |\theta_j| \). For the same parameters \( \vect{\theta} = (2, -3, 1.5) \) with \( \lambda = 0.1 \):
+\[ \lambda \cdot R_{\text{L1}} = 0.1 \cdot (|2| + |-3| + |1.5|) = 0.1 \cdot (2 + 3 + 1.5) = 0.65. \]
+With \( J = 50 \), the regularised cost is \( J_{\text{reg}} = 50 + 0.65 = 50.65 \). L1 tends to drive some parameters exactly to zero, promoting sparsity.
+\end{example}
+
+\begin{remark}
+L2 regularisation (Ridge) shrinks parameters smoothly; L1 regularisation (Lasso) can zero out parameters entirely. Both help prevent overfitting by discouraging overly large parameter values. Dropout \cite{srivastava2014dropout} is another regularisation technique that randomly sets some neurons to zero during training, forcing the network to learn more robust features.
+\end{remark}
+
+\begin{exercisebox}[medium]
+Given \( \vect{\theta} = (1, -2, 0.5) \) and \( \lambda = 0.2 \), compute both L1 and L2 regularisation terms. Which is larger?
+\end{exercisebox}
+
+\begin{hint}
+L2: \( 0.2 \cdot (1^2 + (-2)^2 + 0.5^2) = 0.2 \cdot (1 + 4 + 0.25) = 1.05 \). L1: \( 0.2 \cdot (1 + 2 + 0.5) = 0.7 \). L2 is larger because squaring amplifies larger values.
+\end{hint}
+
 \section{Gradient Descent (Conceptually)}
-Imagine standing on a landscape where height is loss. At each step, move a little in the downhill direction; repeat until you are low enough.
+Imagine standing on a landscape where height is loss. At each step, move a little in the downhill direction; repeat until you are low enough. The theoretical foundation dates to stochastic approximation methods \cite{robbins1951stochastic}.
 
 \begin{example}[One variable]
 Let \( f(x) = (x-3)^2 \). Its derivative is \( f'(x)=2(x-3) \). Starting at \( x_0=0 \) with learning rate \( \eta=0.5 \), gradient descent updates are
@@ -45,9 +114,9 @@ The iterates head toward the minimiser \( (1,-2) \).
 \end{example}
 
 \paragraph{Many inputs (neural nets).}
-For networks, parameters form a long vector \( \vect{\theta} \) (all weights and biases). The loss \( L(\vect{\theta}) \) is averaged over a mini‑batch. We compute the gradient \( \nabla L(\vect{\theta}) \) efficiently by backpropagation and update
+For networks, parameters form a long vector \( \vect{\theta} \) (all weights and biases). The loss \( L(\vect{\theta}) \) is averaged over a mini‑batch. We compute the gradient \( \nabla L(\vect{\theta}) \) efficiently by backpropagation \cite{rumelhart1986learning} and update
 \[ \vect{\theta}_{k+1} = \vect{\theta}_k - \eta\, \nabla L(\vect{\theta}_k). \]
-Different layers receive different components of the same gradient, moving all parameters a little in the direction that most reduces loss on the current batch.
+Different layers receive different components of the same gradient, moving all parameters a little in the direction that most reduces loss on the current batch. Modern optimisers like Adam \cite{kingma2014adam} adapt the learning rate per parameter, often converging faster than basic gradient descent.
 
 \begin{exercisebox}[easy]
 If steps are too large, what failure can occur?

@@ -24,6 +24,10 @@ For \( (x_1,x_2)=(0,1) \),
 The decision boundary \( \hat y=0 \) is the straight line \( x_2 = 2x_1 + 0.5 \).
 \end{example}
 
+\begin{remark}
+When data is not linearly separable, linear models struggle. One alternative approach uses \emph{kernel functions} (e.g., in Support Vector Machines) to implicitly map inputs to higher-dimensional spaces where separation becomes easier. Neural networks handle nonlinearity differently, through explicit nonlinear activations (see Chapter 5).
+\end{remark}
+
 \section{Exercises}
 \begin{exercisebox}[medium]
 Find a line that separates points A: \( (0,2),(1,3) \) from B: \( (2,0),(3,1) \) if possible.

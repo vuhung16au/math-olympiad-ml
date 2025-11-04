@@ -3,11 +3,16 @@ Plain‑language definitions for quick recall.
 
 \begin{description}
   \item[Activation] A nonlinear function applied to a neuron's input (e.g., ReLU, sigmoid).
+  \item[Cost Function] Aggregates loss over the entire dataset, usually by averaging; minimised during training. See also \emph{Loss}, \emph{Objective Function}.
   \item[Error] The difference between a prediction and the true value.
+  \item[Feature Learning Functions] Functions that extract useful representations from data, such as Principal Component Analysis (PCA) for dimensionality reduction and autoencoders for unsupervised feature extraction.
   \item[Gradient Descent] An iterative method that adjusts parameters to reduce loss.
-  \item[Loss] A number that measures how far predictions are from targets.
+  \item[Kernel Function] A function that implicitly maps input data to higher-dimensional spaces for better separability, used in algorithms like Support Vector Machines. The kernel trick avoids explicit computation of transformed features.
+  \item[Loss] A number that measures how far predictions are from targets. See also \emph{Cost Function}, \emph{Objective Function}.
   \item[Matrix] A rectangular array of numbers; represents a linear transformation.
   \item[Neural Network] A function built by composing linear steps with activations.
+  \item[Objective Function] A general term encompassing loss and cost functions; represents what the learning algorithm aims to optimise (minimise or maximise). See also \emph{Loss}, \emph{Cost Function}.
   \item[Overfitting] Learning noise or specifics of training data that do not generalise.
+  \item[Regularisation] A technique that penalises model complexity to prevent overfitting, such as L1 (Lasso) and L2 (Ridge) regularisation added to the cost function.
   \item[Vector] An ordered list of numbers representing features.
 \end{description}

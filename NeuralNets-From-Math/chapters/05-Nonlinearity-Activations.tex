@@ -5,10 +5,11 @@ Nonlinear activations introduce bends that let models capture curved patterns.
   \objective Describe common activations: ReLU, sigmoid, tanh.
   \objective Explain why stacking linear layers without activations stays linear.
   \objective Match activations to tasks (e.g., sigmoid for probabilities).
+  \objective Understand kernel functions as an alternative approach to nonlinearity.
 \end{learningobjectives}
 
 \section{Common Activations}
-ReLU: \( \mathrm{ReLU}(z)=\max(0,z) \) adds a kink at zero. Sigmoid \( \sigma(z)=1/(1+e^{-z}) \) squashes to \( (0,1) \). Tanh squashes to \( (-1,1) \).
+ReLU: \( \mathrm{ReLU}(z)=\max(0,z) \) adds a kink at zero \cite{nair2010rectified}. Sigmoid \( \sigma(z)=1/(1+e^{-z}) \) squashes to \( (0,1) \). Tanh squashes to \( (-1,1) \).
 
 \begin{center}
 \begin{tikzpicture}
@@ -43,6 +44,21 @@ The logistic (sigmoid) curve models population growth with carrying capacity and
 
 \begin{remark}
 Linear \(\circ\) linear is still linear. Nonlinearity between linear steps is essential.
+\end{remark}
+
+\section{Kernel Functions}
+Kernel functions offer an alternative approach to handling nonlinearity. The \emph{kernel trick} implicitly maps input data to higher-dimensional feature spaces, where linear separation becomes possible without explicitly computing the transformed features.
+
+\begin{definition}
+A \emph{kernel function} \( k(\vect x, \vect x') \) computes the inner product of feature vectors in a transformed space: \( k(\vect x, \vect x') = \langle \phi(\vect x), \phi(\vect x') \rangle \), where \( \phi \) maps inputs to a higher-dimensional space. Common kernels include the polynomial kernel and the radial basis function (RBF) kernel.
+\end{definition}
+
+\begin{example}
+For data that is not linearly separable in 2D (e.g., points arranged in concentric circles), a kernel can map them to 3D where a plane can separate them. The kernel trick allows this transformation without explicitly computing the 3D coordinates, making it computationally efficient.
+\end{example}
+
+\begin{remark}
+Neural networks use \emph{explicit activations} instead of kernels. Unlike kernels, which provide a fixed transformation, activations are learned during training—each layer's weights and activations adapt to the data. This flexibility allows networks to discover task-specific nonlinear transformations rather than relying on predefined kernel functions. Additionally, activations enable deep, composable architectures that can learn hierarchical features.
 \end{remark}
 
 \section{Exercises}
