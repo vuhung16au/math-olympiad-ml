@@ -19,6 +19,7 @@
   isbn      = {978-1-4419-9981-8},
   doi       = {10.1007/978-1-4419-9982-5},
   url       = {https://doi.org/10.1007/978-1-4419-9982-5},
+  abstract  = {This book provides a comprehensive introduction to smooth manifolds, covering fundamental concepts including charts, atlases, smooth maps, tangent spaces, vector fields, differential forms, and integration on manifolds. The text is designed for graduate students and includes numerous exercises and examples that build intuition for working with manifolds.},
   note      = {Comprehensive introduction to smooth manifolds and differential geometry}
 }
 
@@ -31,6 +32,7 @@
   isbn      = {978-0-8176-3490-2},
   doi       = {10.1007/978-1-4757-2201-7},
   url       = {https://doi.org/10.1007/978-1-4757-2201-7},
+  abstract  = {A comprehensive textbook on Riemannian geometry covering metrics, connections, geodesics, curvature, and the fundamental theorems of Riemannian geometry. The book provides rigorous mathematical treatment with clear explanations of geometric concepts and their applications.},
   note      = {Classic textbook on Riemannian geometry, including geodesics and curvature}
 }
 
@@ -48,6 +50,7 @@
   pages     = {88--93},
   doi       = {10.1179/sre.1975.23.176.88},
   url       = {https://doi.org/10.1179/sre.1975.23.176.88},
+  abstract  = {Presents algorithms for computing geodesic distances on an ellipsoid using iterative methods. The direct solution computes the destination point and azimuth given a starting point, distance, and initial azimuth. The inverse solution computes the distance and azimuths between two given points. The method provides high accuracy suitable for surveying applications.},
   note      = {Accurate algorithm for geodesic calculations on ellipsoids}
 }
 
@@ -65,6 +68,7 @@
   pages     = {2319--2323},
   doi       = {10.1126/science.290.5500.2319},
   url       = {https://doi.org/10.1126/science.290.5500.2319},
+  abstract  = {We present Isomap, a nonlinear dimensionality reduction algorithm that preserves global geodesic distances. Unlike linear methods like PCA, Isomap discovers the intrinsic geometric structure of data by computing geodesic distances along the data manifold. The algorithm constructs a neighborhood graph, estimates geodesic distances, and applies multidimensional scaling to find a low-dimensional embedding that preserves these distances.},
   note      = {Introduces Isomap algorithm for manifold learning}
 }
 
@@ -78,6 +82,7 @@
   pages     = {2323--2326},
   doi       = {10.1126/science.290.5500.2323},
   url       = {https://doi.org/10.1126/science.290.5500.2323},
+  abstract  = {We introduce Locally Linear Embedding (LLE), an unsupervised learning algorithm that computes low-dimensional, neighborhood-preserving embeddings of high-dimensional inputs. LLE assumes that each data point and its neighbors lie on or close to a locally linear patch of the manifold. The algorithm finds local linear relationships in the high-dimensional space and preserves these relationships in the low-dimensional embedding.},
   note      = {Presents LLE algorithm for manifold learning}
 }
 
@@ -91,6 +96,7 @@
   pages     = {1373--1396},
   doi       = {10.1162/089976603321780317},
   url       = {https://doi.org/10.1162/089976603321780317},
+  abstract  = {We propose Laplacian Eigenmaps, a geometrically motivated algorithm for finding a low-dimensional representation of data lying on a manifold embedded in a high-dimensional space. The method constructs a weighted graph from local neighborhoods and finds the low-dimensional representation by computing the bottom eigenvectors of the graph Laplacian. This approach preserves local geometric structure and provides a natural connection to the heat kernel and diffusion processes on manifolds.},
   note      = {Laplacian eigenmaps for manifold learning}
 }
 
@@ -104,6 +110,7 @@
   pages     = {983--1049},
   doi       = {10.1090/jams/852},
   url       = {https://doi.org/10.1090/jams/852},
+  abstract  = {The manifold hypothesis posits that high-dimensional data lie on low-dimensional manifolds embedded in the ambient space. We provide a rigorous mathematical framework for testing this hypothesis. We develop algorithms that can determine whether data sampled from a probability distribution are concentrated near a low-dimensional manifold, and we provide theoretical guarantees on the performance of these algorithms.},
   note      = {Rigorous mathematical treatment of the manifold hypothesis in data}
 }
 
@@ -121,6 +128,7 @@
   primaryClass = {stat.ML},
   doi       = {10.48550/arXiv.1312.6114},
   url       = {https://arxiv.org/abs/1312.6114},
+  abstract  = {How can we perform efficient inference and learning in directed probabilistic models, in the presence of continuous latent variables with intractable posterior distributions, and large datasets? We introduce a stochastic variational inference and learning algorithm that scales to large datasets and, under some mild differentiability conditions, even works in the intractable case. Our contributions are two-fold. First, we show that a reparameterization of the variational lower bound yields a lower bound estimator that can be straightforwardly optimized using standard stochastic gradient methods. Second, we show that for i.i.d. datasets with continuous latent variables per datapoint, posterior inference can be made especially efficient by fitting an approximate inference model (also called a recognition model) to the intractable posterior using the proposed lower bound estimator. Theoretical advantages are reflected in experimental results.},
   note      = {Foundational paper on Variational Autoencoders}
 }
 
@@ -134,6 +142,7 @@
   primaryClass = {stat.ML},
   doi       = {10.48550/arXiv.1401.4082},
   url       = {https://arxiv.org/abs/1401.4082},
+  abstract  = {We marry ideas from deep neural networks and approximate Bayesian inference to derive a generalised class of deep, directed generative models, endowed with a new algorithm for scalable inference and learning. Our algorithm introduces a recognition model to represent approximate posterior distributions, and that acts as a stochastic encoder of the data. We develop stochastic back-propagation -- rules for back-propagation through stochastic variables -- and use this to develop an algorithm that allows for joint optimisation of the parameters of both the generative and recognition model. We demonstrate on several real-world data sets that the model generates realistic samples, provides accurate imputations of missing data and is a useful tool for high-dimensional data visualisation.},
   note      = {Alternative derivation of VAEs with reparameterization trick}
 }
 
@@ -151,6 +160,7 @@
   primaryClass = {stat.ML},
   doi       = {10.48550/arXiv.1406.2661},
   url       = {https://arxiv.org/abs/1406.2661},
+  abstract  = {We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1/2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples.},
   note      = {Original GAN paper introducing the adversarial training framework}
 }
 
@@ -164,6 +174,7 @@
   primaryClass = {stat.ML},
   doi       = {10.48550/arXiv.1701.07875},
   url       = {https://arxiv.org/abs/1701.07875},
+  abstract  = {We introduce a new algorithm named WGAN, an alternative to traditional GAN training. In this new model, we show that we can improve the stability of learning, get rid of problems like mode collapse, and provide meaningful learning curves useful for debugging and hyperparameter searches. Furthermore, we show that the corresponding optimization problem is sound, and provide extensive theoretical work highlighting the deep connections to other distances between distributions.},
   note      = {WGAN using Wasserstein distance for improved training stability}
 }
 
@@ -177,6 +188,7 @@
   primaryClass = {cs.LG},
   doi       = {10.48550/arXiv.1511.06434},
   url       = {https://arxiv.org/abs/1511.06434},
+  abstract  = {In recent years, supervised learning with convolutional networks (CNNs) has seen huge adoption in computer vision applications. Comparatively, unsupervised learning with CNNs has received less attention. In this work we hope to help bridge the gap between the success of CNNs for supervised learning and unsupervised learning. We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning. Training on various image datasets, we show convincing evidence that our deep convolutional adversarial pair learns a hierarchy of representations from object parts to scenes in both the generator and discriminator. Additionally, we use the learned features for novel tasks - demonstrating their applicability as general image representations.},
   note      = {DCGAN architecture for image generation}
 }
 
@@ -194,6 +206,7 @@
   primaryClass = {cs.LG},
   doi       = {10.48550/arXiv.2006.11239},
   url       = {https://arxiv.org/abs/2006.11239},
+  abstract  = {We present high quality image synthesis results using diffusion probabilistic models, a class of latent variable models inspired by considerations from nonequilibrium thermodynamics. Our best results are obtained by training on a weighted variational bound designed according to a novel connection between diffusion probabilistic models and denoising score matching with Langevin dynamics, and our models naturally admit a progressive lossy decompression scheme that can be interpreted as a generalization of autoregressive decoding. On the unconditional CIFAR10 dataset, we obtain an Inception score of 9.46 and a state-of-the-art FID score of 3.17. On 256x256 LSUN, we obtain sample quality similar to ProgressiveGAN. Our implementation is available at https://github.com/hojonathanho/diffusion},
   note      = {Foundational paper on diffusion models for image generation}
 }
 
@@ -207,6 +220,7 @@
   primaryClass = {cs.LG},
   doi       = {10.48550/arXiv.2011.13456},
   url       = {https://arxiv.org/abs/2011.13456},
+  abstract  = {Creating noise from data is easy; creating data from noise is generative modeling. We present a stochastic differential equation (SDE) that smoothly transforms a complex data distribution to a known prior distribution by slowly injecting noise, and a corresponding reverse-time SDE that transforms the prior distribution back into the data distribution by slowly removing the noise. Crucially, the reverse-time SDE depends only on the time-dependent gradient field (\aka, score) of the perturbed data distribution. By leveraging advances in score-based generative modeling, we can accurately estimate these scores with neural networks, and use numerical SDE solvers to generate samples. We show that this framework encapsulates previous approaches in score-based generative modeling and diffusion probabilistic modeling, allowing for new sampling procedures and new modeling capabilities. In particular, we introduce a predictor-corrector framework to correct errors in the evolution of the discretized reverse-time SDE. We also derive an equivalent neural ODE that samples from the same distribution as the SDE, but additionally enables exact likelihood computation, and improved sampling efficiency. In addition, we provide a new way to solve inverse problems with score-based models, as demonstrated with experiments on class-conditional generation, image inpainting, and colorization. Combined with multiple architectural improvements, we achieve record-breaking performance for unconditional image generation on CIFAR-10 with an Inception score of 9.89 and FID of 2.20, a competitive likelihood of 2.99 bits/dim, and demonstrate high fidelity generation of 1024 x 1024 images for the first time from a score-based generative model.},
   note      = {Unifies diffusion models through stochastic differential equations}
 }
 
@@ -220,6 +234,7 @@
   primaryClass = {cs.LG},
   doi       = {10.48550/arXiv.2010.02502},
   url       = {https://arxiv.org/abs/2010.02502},
+  abstract  = {Denoising diffusion probabilistic models (DDPMs) have achieved high quality image generation without adversarial training, yet they require simulating a Markov chain for many steps to produce a sample. To accelerate sampling, we present denoising diffusion implicit models (DDIMs), a more efficient class of iterative implicit probabilistic models with the same training procedure as DDPMs. In DDPMs, the generative process is defined as the reverse of a Markovian diffusion process. We construct a class of non-Markovian diffusion processes that lead to the same training objective, but whose reverse process can be much faster to sample from. We empirically demonstrate that DDIMs can produce high quality samples $10 \times$ to $50 \times$ faster in terms of wall-clock time compared to DDPMs, allow us to trade off computation for sample quality, and can perform semantically meaningful image interpolation directly in the latent space.},
   note      = {DDIM for faster sampling from diffusion models}
 }
 
@@ -237,6 +252,7 @@
   primaryClass = {stat.ML},
   doi       = {10.48550/arXiv.1505.05770},
   url       = {https://arxiv.org/abs/1505.05770},
+  abstract  = {The choice of approximate posterior distribution is one of the core problems in variational inference. Most applications of variational inference employ simple families of posterior approximations in order to allow for efficient inference, focusing on mean-field or other simple structured approximations. This restriction has a significant impact on the quality of inferences made using variational methods. We introduce a new approach for specifying flexible, arbitrarily complex and scalable approximate posterior distributions. Our approximations are distributions constructed through a normalizing flow, whereby a simple initial density is transformed into a more complex one by applying a sequence of invertible transformations until a desired level of complexity is attained. We use this view of normalizing flows to develop categories of finite and infinitesimal flows and provide a unified view of approaches for constructing rich posterior approximations. We demonstrate that the theoretical advantages of having posteriors that better match the true posterior, combined with the scalability of amortized variational approaches, provides a clear improvement in performance and applicability of variational inference.},
   note      = {Introduces normalizing flows for variational inference}
 }
 
@@ -250,6 +266,7 @@
   primaryClass = {stat.ML},
   doi       = {10.48550/arXiv.1807.03039},
   url       = {https://arxiv.org/abs/1807.03039},
+  abstract  = {Flow-based generative models (Dinh et al., 2014) are conceptually attractive due to tractability of the exact log-likelihood, tractability of exact latent-variable inference, and parallelizability of both training and synthesis. In this paper we propose Glow, a simple type of generative flow using an invertible 1x1 convolution. Using our method we demonstrate a significant improvement in log-likelihood on standard benchmarks. Perhaps most strikingly, we demonstrate that a generative model optimized towards the plain log-likelihood objective is capable of efficient realistic-looking synthesis and manipulation of large images. The code for our model is available at https://github.com/openai/glow},
   note      = {GLOW architecture for normalizing flows}
 }
 
@@ -263,6 +280,7 @@
   primaryClass = {cs.LG},
   doi       = {10.48550/arXiv.1806.07366},
   url       = {https://arxiv.org/abs/1806.07366},
+  abstract  = {We introduce a new family of deep neural network models. Instead of specifying a discrete sequence of hidden layers, we parameterize the derivative of the hidden state using a neural network. The output of the network is computed using a black-box differential equation solver. These continuous-depth models have constant memory cost, adapt their evaluation strategy to each input, and can explicitly trade numerical precision for speed. We demonstrate these properties in continuous-depth residual networks and continuous-time latent variable models. We also construct continuous normalizing flows, a generative model that can train by maximum likelihood, without partitioning or ordering the data dimensions. For training, we show how to scalably backpropagate through any ODE solver, without access to its internal operations. This allows end-to-end training of ODEs within larger models.},
   note      = {Neural ODEs for continuous normalizing flows}
 }
 
@@ -280,21 +298,10 @@
   primaryClass = {cs.LG},
   doi       = {10.48550/arXiv.1711.08014},
   url       = {https://arxiv.org/abs/1711.08014},
+  abstract  = {Deep generative models learn a mapping from a low dimensional latent space to a high-dimensional data space. Under certain regularity conditions, these models parameterize nonlinear manifolds in the data space. In this paper, we investigate the Riemannian geometry of these generated manifolds. First, we develop efficient algorithms for computing geodesic curves, which provide an intrinsic notion of distance between points on the manifold. Second, we develop an algorithm for parallel translation of a tangent vector along a path on the manifold. We show how parallel translation can be used to generate analogies, i.e., to transport a change in one data point into a semantically similar change of another data point. Our experiments on real image data show that the manifolds learned by deep generative models, while nonlinear, are surprisingly close to zero curvature. The practical implication is that linear paths in the latent space closely approximate geodesics on the generated manifold. However, further investigation into this phenomenon is warranted, to identify if there are other architectures or datasets where curvature plays a more prominent role. We believe that exploring the Riemannian geometry of deep generative models, using the tools developed in this paper, will be an important step in understanding the high-dimensional, nonlinear spaces these models learn.},
   note      = {Explores Riemannian geometry in the context of deep generative models}
 }
 
-@article{arvanitidis2018latent,
-  author    = {Arvanitidis, Georgios and Hansen, Lars Kai and Hauberg, S{\o}ren},
-  title     = {Latent Space Oddity: On the Curvature of Deep Generative Models},
-  journal   = {arXiv preprint},
-  year      = {2018},
-  eprint    = {1805.11104},
-  archivePrefix = {arXiv},
-  primaryClass = {stat.ML},
-  doi       = {10.48550/arXiv.1805.11104},
-  url       = {https://arxiv.org/abs/1805.11104},
-  note      = {Analyzes the geometry of latent spaces in generative models}
-}
 
 @article{gemici2016normalizing,
   author    = {Gemici, Mevlana C. and Rezende, Danilo and Mohamed, Shakir},
@@ -306,6 +313,7 @@
   primaryClass = {stat.ML},
   doi       = {10.48550/arXiv.1611.02304},
   url       = {https://arxiv.org/abs/1611.02304},
+  abstract  = {We consider the problem of density estimation on Riemannian manifolds. Density estimation on manifolds has many applications in fluid-mechanics, optics and plasma physics and it appears often when dealing with angular variables (such as used in protein folding, robot limbs, gene-expression) and in general directional statistics. In spite of the multitude of algorithms available for density estimation in the Euclidean spaces $\mathbf{R}^n$ that scale to large n (e.g. normalizing flows, kernel methods and variational approximations), most of these methods are not immediately suitable for density estimation in more general Riemannian manifolds. We revisit techniques related to homeomorphisms from differential geometry for projecting densities to sub-manifolds and use it to generalize the idea of normalizing flows to more general Riemannian manifolds. The resulting algorithm is scalable, simple to implement and suitable for use with automatic differentiation. We demonstrate concrete examples of this method on the n-sphere $\mathbf{S}^n$.},
   note      = {Extends normalizing flows to Riemannian manifolds}
 }
 
@@ -319,6 +327,7 @@
   primaryClass = {cs.LG},
   doi       = {10.48550/arXiv.2104.13478},
   url       = {https://arxiv.org/abs/2104.13478},
+  abstract  = {The last decade has witnessed an experimental revolution in data science and machine learning, epitomised by deep learning methods. Indeed, many high-dimensional learning tasks previously thought to be beyond reach -- such as computer vision, playing Go, or protein folding -- are in fact feasible with appropriate computational scale. Remarkably, the essence of deep learning is built from two simple algorithmic principles: first, the notion of representation or feature learning, whereby adapted, often hierarchical, features capture the appropriate notion of regularity for each task, and second, learning by local gradient-descent type methods, typically implemented as backpropagation. While learning generic functions in high dimensions is a cursed estimation problem, most tasks of interest are not generic, and come with essential pre-defined regularities arising from the underlying low-dimensionality and structure of the physical world. This text is concerned with exposing these regularities through unified geometric principles that can be applied throughout a wide spectrum of applications. Such a 'geometric unification' endeavour, in the spirit of Felix Klein's Erlangen Program, serves a dual purpose: on one hand, it provides a common mathematical framework to study the most successful neural network architectures, such as CNNs, RNNs, GNNs, and Transformers. On the other hand, it gives a constructive procedure to incorporate prior physical knowledge into neural architectures and provide principled way to build future architectures yet to be invented.},
   note      = {Comprehensive survey on geometric deep learning}
 }
 
@@ -332,5 +341,6 @@
   pages     = {18--42},
   doi       = {10.1109/MSP.2017.2693418},
   url       = {https://doi.org/10.1109/MSP.2017.2693418},
+  abstract  = {Many scientific fields study data with an underlying structure that is a non-Euclidean space. Some examples include social networks in computational social sciences, sensor networks in statistics, gene regulatory networks in biology, and meshed surfaces in computer graphics. In many applications, such geometric data are large and complex (in the case of social networks, on the scale of billions), and are natural targets for machine-learning techniques. In particular, we would like to use deep neural networks, which have recently proven to be powerful tools for a broad range of problems from computer vision, natural language processing, and audio analysis. However, these tools have been most successful on data with an underlying Euclidean or grid-like structure, and in cases where the invariances of these structures are built into networks used to process them.},
   note      = {Early survey on geometric deep learning}
 }
