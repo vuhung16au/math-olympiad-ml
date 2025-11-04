@@ -16,13 +16,21 @@
 *.vrb
 
 # Build directory
-release/
+!release/Manifold-Generative-AI.pdf
+# release/
+# !release/Manifold.pdf
 
 # Temporary files
 *~
 *.bak
 *.swp
 *.tmp
+
+release/*.exa
+release/*.rem
+release/*.tak
+release/main.pdf
+release/Manifold.pdf
 
 # System files
 .DS_Store

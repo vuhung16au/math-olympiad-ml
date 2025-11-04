@@ -27,7 +27,7 @@ $(RELEASE_OUT): $(SOURCES)
 
 clean:
 	latexmk -C -output-directory=release
-	rm -f $(OUT) $(RELEASE_OUT)
+	rm -f $(OUT)
 
 view: pdf
 	open $(OUT)
@@ -37,7 +37,7 @@ help:
 	@echo "  make pdf     - Build the PDF from LaTeX sources"
 	@echo "  make release - Build the release PDF (Manifold-Generative-AI.pdf)"
 	@echo "  make view    - Build and open the PDF in the default viewer"
-	@echo "  make clean   - Remove build artifacts and the generated PDFs"
+	@echo "  make clean   - Remove build artifacts and the regular PDF (preserves release PDF)"
 	@echo "  make help    - Show this help message"
 
 .PHONY: all clean pdf release view help
