@@ -12,6 +12,10 @@ Throughout this book, we've explored:
 \item \textbf{Open n-balls}: Local neighborhoods that define manifold structure
 \end{itemize}
 
+\begin{definition}[Parameter Manifold]
+A \emph{parameter manifold} is a differentiable manifold $\Theta$ of model parameters endowed with a metric (e.g., the Fisher metric or a pullback metric), which induces lengths/angles of parameter displacements and defines geometry-aware optimization.
+\end{definition}
+
 These mathematical concepts are not just abstract theory—they directly describe the structure of real-world data and provide the foundation for modern generative AI systems. In this chapter, we'll see how.
 
 \section{The Data Manifold Hypothesis}
@@ -104,7 +108,7 @@ g_{ij}(\boldsymbol{\theta}) \,=\, \mathbb{E}_{x\sim p(\cdot\mid\boldsymbol{\thet
 It is symmetric, positive definite (under regularity), and \emph{invariant to reparameterization}, making lengths/angles of parameter steps coordinate-independent.
 
 \subsection{KL divergence and local geometry}
-Around $\boldsymbol{\theta}$, the KL divergence admits the quadratic expansion
+Around $\boldsymbol{\theta}$, the KL divergence admits the quadratic expansion (see also Bregman Divergence)
 \[
 \mathrm{KL}\big(p(\cdot\mid\boldsymbol{\theta})\,\|\,p(\cdot\mid\boldsymbol{\theta}+d\boldsymbol{\theta})\big) \,=\, \tfrac12\, d\boldsymbol{\theta}^\top \mathbf{F}(\boldsymbol{\theta})\, d\boldsymbol{\theta} \,+\, o(\|d\boldsymbol{\theta}\|^2),
 \]
@@ -154,6 +158,9 @@ This is the steepest-descent direction under the Fisher metric, often improving 
 \section{Fisher Information Matrix}
 
 \subsection{Definition and equivalent forms}
+\begin{definition}[Fisher Information Matrix]
+For a model $p(x\mid\boldsymbol{\theta})$ with score $s=\nabla_{\boldsymbol{\theta}}\log p$, the \emph{Fisher information} is $\mathbf{F}(\boldsymbol{\theta})=\mathbb{E}[ss^{\top}]$ (equivalently, $-\mathbb{E}[\nabla_{\boldsymbol{\theta}}^{2}\log p]$ under regularity). It is the canonical metric of the statistical manifold.
+\end{definition}
 Let the \textit{score} be $s(x;\boldsymbol{\theta}) = \nabla_{\boldsymbol{\theta}} \log p(x\mid \boldsymbol{\theta})$. The \textbf{Fisher information matrix} is
 \[
 \mathbf{F}(\boldsymbol{\theta}) \,=\, \mathbb{E}_{x\sim p(\cdot\mid\boldsymbol{\theta})}\big[\, s\, s^{\top} \,\big]
@@ -161,7 +168,7 @@ Let the \textit{score} be $s(x;\boldsymbol{\theta}) = \nabla_{\boldsymbol{\theta
 \]
 It quantifies local sensitivity of the distribution to parameter changes.
 
-\subsection{Core properties}
+\subsection{Core properties (see also Fisher Information Matrix)}
 \begin{itemize}
 \item Symmetric positive semidefinite; positive definite under identifiability.
 \item Additive across i.i.d. samples: $\mathbf{F}_N = N\,\mathbf{F}$.
@@ -183,14 +190,14 @@ True Fisher uses expectation over the model; the \textit{empirical Fisher} repla
 \subsection{Relationships to other curvature notions (see also Natural Gradient, Parameter Manifolds)}
 When the output-space metric is Euclidean and the model is well specified, Fisher often aligns with Gauss--Newton ($\approx J^{\top}J$). Fisher equals the negative expected Hessian in regular exponential families, but can differ from the true Hessian in general.
 
-\subsection{Worked examples}
+\subsection{Worked examples (see also Natural Gradient, Parameter Manifolds)}
 \begin{itemize}
 \item Bernoulli/logistic regression: $\mathbf{F}$ scales with predictive variance $\pi(1-\pi)$, improving step isotropy.
 \item Gaussian mean (known variance $\sigma^2$): $\mathbf{F}=\sigma^{-2}\,\mathbf{I}$; with unknown variance, blocks couple mean/variance.
 \item Softmax regression: Fisher reflects class probabilities; label smoothing modifies curvature.
 \end{itemize}
 
-\subsection{Practical estimation and approximations}
+\subsection{Practical estimation and approximations (see also Natural Gradient)}
 \begin{itemize}
 \item True vs. empirical Fisher: bias/variance and computational cost trade-offs.
 \item Diagonal Fisher, K-FAC (Kronecker factored blocks), Shampoo: scalable curvature approximations.
@@ -239,7 +246,7 @@ The \textbf{natural gradient} takes steepest descent under the chosen metric: $\
 \subsection{Reparameterization and invariance}
 Under Euclidean metrics, simple reparameterizations (scales, normalizations) distort optimization. Riemannian metrics (Fisher/pullbacks) yield steps that are invariant to smooth reparameterizations, stabilizing training across equivalent parameterizations (e.g., logits rescaling, batchnorm, weight normalization).
 
-\subsection{Examples and case studies}
+\subsection{Examples and case studies (see also Fisher, Bregman Divergence)}
 \begin{itemize}
 \item \textbf{Logistic regression}: closed-form Fisher; natural gradient rescales by variance of features under the model.
 \item \textbf{Shallow nets}: blockwise/K-FAC approximations track layerwise curvature; improved conditioning and convergence.
@@ -249,7 +256,7 @@ Under Euclidean metrics, simple reparameterizations (scales, normalizations) dis
 \subsection{Triangle of spaces}
 Parameter manifold ($\Theta$), statistical manifold (distributions), and data/latent manifolds interact via pushforward/pullback of metrics and Jacobians; many practical “second-order” methods can be viewed as choosing a geometry on one space and pulling it back to $\Theta$.
 
-\subsection{Practical guidance}
+\subsection{Practical guidance (see also Natural Gradient)}
 When to use natural gradient/approximations: ill-conditioned training, sensitivity to reparameterization, unstable step sizes. Tune damping, use minibatch Fisher, and prefer scalable factorizations for large models.
 
 \subsection{Key takeaways}
@@ -265,6 +272,9 @@ When to use natural gradient/approximations: ill-conditioned training, sensitivi
 Euclidean gradients are coordinate-dependent and can be ill-conditioned in high-dimensional models. We seek updates that respect the geometry of the parameter manifold and are invariant to reparameterization.
 
 \subsection{Definition from Riemannian steepest descent}
+\begin{definition}[Natural Gradient]
+Given a Riemannian metric $\mathbf{G}(\boldsymbol{\theta})$ on parameter space, the \emph{natural gradient} of $\mathcal{L}$ is $\tilde\nabla_{\boldsymbol{\theta}}\mathcal{L}=\mathbf{G}(\boldsymbol{\theta})^{-1}\nabla_{\boldsymbol{\theta}}\mathcal{L}$. With $\mathbf{G}=\mathbf{F}$, this yields reparameterization-invariant updates.
+\end{definition}
 Let $\mathbf{G}(\boldsymbol{\theta})$ be a Riemannian metric on the parameter manifold (e.g., Fisher or a pullback metric). The \textbf{natural gradient} is
 \[
 \tilde\nabla_{\boldsymbol{\theta}} \mathcal{L} \;=\; \mathbf{G}(\boldsymbol{\theta})^{-1}\, \nabla_{\boldsymbol{\theta}} \mathcal{L},
@@ -298,7 +308,7 @@ Natural gradient often coincides with Gauss--Newton for squared-error models; bo
 \item \textbf{Small MLP/CNN block}: K-FAC captures input/output second moments, approximating natural steps layerwise.
 \end{itemize}
 
-\subsection{Usage guidance and caveats}
+\subsection{Usage guidance and caveats (see also Fisher, Parameter Manifolds)}
 Use when training is ill-conditioned or sensitive to reparameterization. Select approximations by model size; add damping; estimate Fisher on minibatches and maintain running averages. Watch for noisy Fisher estimates, metric--objective mismatch, and overly aggressive steps.
 
 \subsection{Key takeaways}
@@ -316,6 +326,9 @@ Given a strictly convex, differentiable potential $\varphi$, the \textbf{Bregman
 D_{\varphi}(p\,\|\,q) \;=\; \varphi(p) - \varphi(q) - \langle \nabla\varphi(q),\, p - q \rangle.
 \]
 It measures the gap between $\varphi(p)$ and the tangent plane of $\varphi$ at $q$; asymmetric and zero iff $p=q$.
+\begin{definition}[Bregman Divergence]
+For strictly convex differentiable $\varphi$, the \emph{Bregman divergence} is $D_{\varphi}(p\,\|\,q)=\varphi(p)-\varphi(q)-\langle\nabla\varphi(q),p-q\rangle$. It is generally asymmetric and not a metric.
+\end{definition}
 
 \subsection{Core properties}
 Nonnegative and convex in the first argument; not a metric (asymmetry, no triangle inequality). \textbf{Duality:} with the Legendre transform $\varphi^*$, 
@@ -339,7 +352,7 @@ For exponential families with natural parameter $\theta$ and log-partition $A(\t
 \]
 The local quadratic expansion of KL yields Fisher, linking Bregman structure to statistical manifolds and the geometry used by natural gradients.
 
-\subsection{Optimization links}
+\subsection{Optimization links (see also Natural Gradient, Parameter Manifolds)}
 \textbf{Mirror descent} performs gradient steps in the dual space with mirror map $\nabla\varphi$ and updates via Bregman projection. Natural gradient aligns locally when the metric $\mathbf{G}$ matches $\nabla^2\varphi$. Euclidean GD is mirror descent with $\varphi=\tfrac12\|\cdot\|^2$.
 
 \subsection{Projections, averaging, and means}
@@ -352,7 +365,7 @@ The Bregman centroid minimizes average divergence and recovers familiar means: a
 \item \textbf{Flows/diffusion:} divergence choices shape training dynamics and consistency terms.
 \end{itemize}
 
-\subsection{Practical guidance}
+\subsection{Practical guidance (see also Fisher, Natural Gradient)}
 Pick $\varphi$ by domain and invariances; mind asymmetry ($D_{\varphi}(p\,\|\,q)$ vs $D_{\varphi}(q\,\|\,p)$). Ensure numerical stability near boundaries (e.g., probabilities), and use appropriate smoothing/damping.
 
 \subsection{Key takeaways}

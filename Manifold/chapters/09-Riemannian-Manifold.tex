@@ -10,6 +10,10 @@ At an intuitive level, a Riemannian metric is a field of ``local rulers'' that m
 
 To measure lengths and angles on a manifold, we first need a notion of direction at a point. The \textbf{tangent space} $T_p\mathcal{M}$ at a point $p$ collects all possible ``velocities'' of curves passing through $p$.
 
+\begin{definition}[Tangent Space]
+Let $\mathcal{M}$ be a smooth manifold and $p\in\mathcal{M}$. The \emph{tangent space} $T_p\mathcal{M}$ is the vector space of equivalence classes of smooth curves $\gamma$ with $\gamma(0)=p$, where $\gamma_1\sim\gamma_2$ if, in any chart, $\frac{d}{dt}(x\circ\gamma_1)(0)=\frac{d}{dt}(x\circ\gamma_2)(0)$. Equivalently, $T_p\mathcal{M}$ is spanned by the coordinate derivations $\{\partial/\partial x^i|_p\}$.
+\end{definition}
+
 \subsection{Tangent Vectors as Velocities of Curves}
 Let $\gamma:(-\epsilon,\epsilon)\to\mathcal{M}$ be a smooth curve with $\gamma(0)=p$. The derivative $\dot\gamma(0)$ is a tangent vector at $p$. Two curves define the same tangent vector if their derivatives agree in any (hence every) chart. The set of all such velocities forms a vector space $T_p\mathcal{M}$.
 
@@ -99,6 +103,10 @@ The \textbf{distance} between two points $p,q\in\mathcal{M}$ is the infimum of $
 
 To differentiate vector fields along curves on a manifold, we need a rule that compares vectors at nearby points. An \textbf{affine connection} (or simply a connection) $\nabla$ provides the \textit{covariant derivative} $\nabla_X Y$ of a vector field $Y$ along a vector field $X$.
 
+\begin{definition}[Affine Connection]
+An \emph{affine connection} $\nabla$ assigns to vector fields $X,Y$ a vector field $\nabla_XY$ such that: (i) it is $\mathbb{R}$-bilinear, (ii) $C^\infty$-linear in $X$, (iii) obeys the Leibniz rule $\nabla_X(fY)=X[f]Y+f\,\nabla_XY$, and (iv) is tensorial in $Y$.
+\end{definition}
+
 \subsection{Concept and properties}
 The covariant derivative obeys linearity in $X$ and $Y$, the Leibniz rule $\nabla_X(fY) = X[f]\,Y + f\,\nabla_X Y$, and reduces to ordinary differentiation in flat coordinates. It enables us to describe how vectors change along curves intrinsically.
 
@@ -122,6 +130,10 @@ expressing how $g$ determines differentiation, parallel transport, and geodesics
 \nabla_{\dot\gamma(t)} V(t) \;=\; 0,\quad V(0)\;\text{given}.
 \]
 Under the Levi-Civita connection, transport preserves inner products, so lengths and angles of transported vectors remain constant.
+
+\begin{definition}[Parallel Transport]
+On a manifold with connection $(\mathcal{M},\nabla)$, a vector field $V$ along a curve $\gamma$ is \emph{parallel} if $\nabla_{\dot\gamma}V=0$. The map $P_{0\to t}:T_{\gamma(0)}\mathcal{M}\to T_{\gamma(t)}\mathcal{M}$ taking $V(0)$ to $V(t)$ is the \emph{parallel transport} along $\gamma$.
+\end{definition}
 
 \paragraph{Coordinate form.} In local coordinates, with components $V^i(t)$ and $\dot\gamma^j(t)$,
 \[
