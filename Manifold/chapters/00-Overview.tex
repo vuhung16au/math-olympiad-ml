@@ -21,6 +21,10 @@ Manifolds are everywhere:
 \item \textbf{AI applications}: Generative models learn to represent and sample from these data manifolds
 \end{itemize}
 
+\begin{remark}[Interpolation vs. extrapolation]
+Given observed pairs $(x_i, y_i)$, \emph{interpolation} estimates $y=f(x)$ for $x$ \emph{within} the range of observed inputs, while \emph{extrapolation} predicts values for $x$ \emph{outside} that range and is generally less reliable. Example: if $f(x)=x^2$ and we know $f(1)=1$, $f(2)=4$, an interpolated estimate at $x=1.5$ is $f(1.5)=2.25$; an extrapolated value at $x=3$ is $f(3)=9$ but would be much less trustworthy if $f$ were unknown and only approximated from data.
+\end{remark}
+
 Understanding manifolds helps us navigate curved spaces, compress high-dimensional data, and build better AI systems. This book provides the mathematical foundation to understand these connections.
 
 \section{The Journey: From Geometry to AI}
