@@ -1,0 +1,502 @@
+\chapter{Distance on Sphere}
+
+In Chapter 3, we learned the basic formula for calculating distances on a sphere using great circle arcs. In Chapter 6, we explored how geodesics (great circles) are derived and constructed. This chapter goes deeper into distance calculations: we'll explore alternative formulas, handle special cases, examine numerical considerations, and discuss Earth-specific applications.
+
+\section{Introduction: Beyond the Basic Formula}
+
+We've already established that:
+\begin{itemize}
+\item The distance between two points on a sphere equals the length of the great circle arc connecting them.
+\item The basic formula is $d = R \cdot \arccos(\vec{v}_1 \cdot \vec{v}_2)$ or, in spherical coordinates:
+\[
+d = R \cdot \arccos(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\lambda_2 - \lambda_1))
+\]
+\item We've seen a real-world example (Sydney to New York).
+\end{itemize}
+
+But there's more to learn: alternative formulas with better numerical properties, special cases that need careful handling, approximations for different scenarios, and practical considerations for Earth applications. This chapter covers these advanced topics.
+
+\section{Alternative Formulas for Sphere Distance}
+
+\subsection{The Haversine Formula}
+
+The haversine formula is an alternative formulation that's often preferred for computational purposes due to better numerical stability.
+
+\subsubsection{The Haversine Function}
+
+The \textbf{haversine} function is defined as:
+
+\[
+\operatorname{hav}(\theta) = \sin^2\left(\frac{\theta}{2}\right) = \frac{1 - \cos\theta}{2}
+\]
+
+This function has useful properties that make it well-suited for distance calculations.
+
+\subsubsection{Derivation of the Haversine Formula}
+
+Starting from the basic formula, we can derive the haversine version. For two points on a sphere with coordinates $(\phi_1, \lambda_1)$ and $(\phi_2, \lambda_2)$, the central angle $\theta$ between them satisfies:
+
+\[
+\cos\theta = \sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\Delta\lambda)
+\]
+
+where $\Delta\lambda = \lambda_2 - \lambda_1$.
+
+Using the identity $\cos\theta = 1 - 2\sin^2(\theta/2)$, we can rewrite this in terms of haversines:
+
+\[
+\operatorname{hav}(\theta) = \operatorname{hav}(\phi_2 - \phi_1) + \cos\phi_1\cos\phi_2\operatorname{hav}(\Delta\lambda)
+\]
+
+Therefore:
+
+\[
+\theta = 2\arcsin\left(\sqrt{\sin^2\left(\frac{\Delta\phi}{2}\right) + \cos\phi_1\cos\phi_2\sin^2\left(\frac{\Delta\lambda}{2}\right)}\right)
+\]
+
+And the distance is:
+
+\[
+d = 2R \cdot \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta\phi}{2}\right) + \cos\phi_1\cos\phi_2\sin^2\left(\frac{\Delta\lambda}{2}\right)}\right)
+\]
+
+where $\Delta\phi = \phi_2 - \phi_1$.
+
+\subsubsection{Advantages of the Haversine Formula}
+
+The haversine formula offers several advantages:
+
+\begin{itemize}
+\item \textbf{Numerical stability}: Uses $\arcsin$ instead of $\arccos$, avoiding precision issues when the argument is near $-1$ or $1$.
+
+\item \textbf{Better for small distances}: The formula is more stable for nearby points, which is common in many applications.
+
+\item \textbf{Computational efficiency}: Avoids the need to compute $\arccos$ of values near boundaries, which can be problematic in floating-point arithmetic.
+
+\item \textbf{Widely used}: The haversine formula is the standard in many navigation and mapping applications.
+\end{itemize}
+
+\subsection{Spherical Law of Cosines}
+
+The spherical law of cosines provides another approach to distance calculation, derived from spherical trigonometry.
+
+\subsubsection{Statement of the Law}
+
+For a spherical triangle with sides $a$, $b$, $c$ (measured as angles) and opposite angles $A$, $B$, $C$:
+
+\[
+\cos c = \cos a \cos b + \sin a \sin b \cos C
+\]
+
+\subsubsection{Application to Distance Calculation}
+
+For two points on a sphere, we can form a spherical triangle with:
+\begin{itemize}
+\item Side $a = \frac{\pi}{2} - \phi_1$ (co-latitude of first point)
+\item Side $b = \frac{\pi}{2} - \phi_2$ (co-latitude of second point)
+\item Angle $C = \Delta\lambda$ (longitude difference)
+\item Side $c = \frac{d}{R}$ (central angle, which is what we want to find)
+\end{itemize}
+
+Applying the spherical law of cosines:
+
+\[
+\cos\left(\frac{d}{R}\right) = \cos\left(\frac{\pi}{2} - \phi_1\right)\cos\left(\frac{\pi}{2} - \phi_2\right) + \sin\left(\frac{\pi}{2} - \phi_1\right)\sin\left(\frac{\pi}{2} - \phi_2\right)\cos(\Delta\lambda)
+\]
+
+Using trigonometric identities ($\cos(\pi/2 - x) = \sin x$ and $\sin(\pi/2 - x) = \cos x$):
+
+\[
+\cos\left(\frac{d}{R}\right) = \sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\Delta\lambda)
+\]
+
+This is exactly our basic formula! The spherical law of cosines provides the theoretical foundation for the distance formula.
+
+\subsection{Comparison of Formulas}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+\toprule
+\textbf{Formula} & \textbf{Stability} & \textbf{Best For} & \textbf{Complexity} \\
+\midrule
+Basic (arccos) & Medium & General use & Simple \\
+Haversine & High & Small distances, computation & Moderate \\
+Spherical Law & Low & Theoretical derivation & Simple \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of different distance formulas on a sphere.}
+\label{tab:formula-comparison}
+\end{table}
+
+In practice:
+\begin{itemize}
+\item Use the \textbf{basic formula} for general understanding and when precision is not critical.
+\item Use the \textbf{haversine formula} for computational applications, especially with small distances or when numerical stability matters.
+\item Use the \textbf{spherical law of cosines} primarily for theoretical work and understanding the geometric foundation.
+\end{itemize}
+
+\section{Special Cases and Edge Cases}
+
+\subsection{Points on the Same Meridian}
+
+When two points lie on the same meridian (same longitude), the formula simplifies significantly.
+
+\textbf{Condition}: $\lambda_1 = \lambda_2$, so $\Delta\lambda = 0$.
+
+The distance formula becomes:
+\[
+d = R \cdot \arccos(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2 \cdot 1)
+\]
+
+Using the angle subtraction formula:
+\[
+d = R \cdot \arccos(\cos(\phi_2 - \phi_1)) = R \cdot |\phi_2 - \phi_1|
+\]
+
+\textbf{Result}: $d = R \cdot |\phi_2 - \phi_1|$ (latitude difference in radians).
+
+\textbf{Example}: If $\phi_1 = 30^\circ$ and $\phi_2 = 60^\circ$ on the same meridian, with $R = 6371$ km:
+\[
+d = 6371 \times \left|\frac{\pi}{6} - \frac{\pi}{3}\right| = 6371 \times \frac{\pi}{6} \approx 3336 \text{ km}
+\]
+
+\subsection{Points on the Same Parallel (Latitude)}
+
+When two points have the same latitude, the distance depends on the longitude difference, but the effective radius is reduced.
+
+\textbf{Condition}: $\phi_1 = \phi_2 = \phi$, so $\Delta\phi = 0$.
+
+The distance formula simplifies to:
+\[
+d = R \cdot \arccos(\sin^2\phi + \cos^2\phi \cos(\Delta\lambda))
+\]
+
+Using $\sin^2\phi + \cos^2\phi = 1$ and trigonometric identities:
+\[
+d = R \cdot \arccos(\cos^2\phi + \cos^2\phi \cos(\Delta\lambda) - \cos^2\phi + \sin^2\phi)
+\]
+
+This can be simplified to:
+\[
+d = R \cdot \cos\phi \cdot |\Delta\lambda|
+\]
+
+\textbf{Interpretation}: The effective radius at latitude $\phi$ is $R\cos\phi$, which decreases as we move away from the equator. This makes sense because circles of latitude get smaller as we approach the poles.
+
+\textbf{Example}: At latitude $60^\circ$ ($\phi = \pi/3$), the effective radius is $R\cos(\pi/3) = R/2$. So a longitude difference of $1^\circ$ corresponds to a distance of approximately $R \cdot \frac{1}{2} \cdot \frac{\pi}{180} \approx 55.6$ km, compared to about $111$ km at the equator.
+
+\subsection{Points Near Poles}
+
+When points are near the poles, special numerical considerations are needed.
+
+\textbf{Issue}: Near the poles, small changes in longitude can cause large changes in actual direction, and the formulas can become numerically unstable.
+
+\textbf{Handling}: For points very close to the poles ($|\phi| > 85^\circ$), it's often better to:
+\begin{itemize}
+\item Use the haversine formula for better numerical stability.
+\item Consider the distance along the parallel as an approximation when appropriate.
+\item Use special polar coordinate transformations.
+\end{itemize}
+
+\textbf{Example}: Two points near the North Pole at $89^\circ$ N, with longitudes $0^\circ$ and $180^\circ$. The great circle distance is approximately $2R \times (90^\circ - 89^\circ) = 2R \times \frac{\pi}{180} \approx 222$ km, which is much smaller than the distance along the parallel ($\pi R \approx 20,015$ km).
+
+\subsection{Antipodal Points}
+
+When two points are exactly opposite each other on the sphere (antipodal points), the distance is maximized.
+
+\textbf{Condition}: Points are antipodal if $\phi_2 = -\phi_1$ and $\lambda_2 = \lambda_1 \pm \pi$ (mod $2\pi$).
+
+\textbf{Distance}: $d = \pi R$ (half the circumference).
+
+\textbf{Numerical considerations}: The basic formula gives $\arccos(-1) = \pi$, which is exact. However, numerical errors can occur if the coordinates are not exactly antipodal. The haversine formula is more robust in this case.
+
+\textbf{Multiple geodesics}: As we saw in Chapter 6, antipodal points have infinitely many great circles connecting them, all with the same length.
+
+\subsection{Very Small Distances}
+
+For very small distances, we can use approximations that are simpler and more efficient.
+
+\textbf{Small angle approximation}: When the central angle $\theta$ is small, we can approximate:
+
+\[
+\sin\theta \approx \theta, \quad \cos\theta \approx 1 - \frac{\theta^2}{2}
+\]
+
+For small distances on a sphere, we can use the flat Earth approximation:
+
+\[
+d \approx R \cdot \sqrt{(\Delta\phi)^2 + (\cos\phi)^2(\Delta\lambda)^2}
+\]
+
+where $\phi$ is the mean latitude.
+
+\textbf{When valid}: This approximation is accurate to within about 1\% for distances up to about 100 km, and within 0.1\% for distances up to about 20 km.
+
+\textbf{Example}: For two points 10 km apart at latitude $45^\circ$, the flat Earth approximation gives results accurate to within a few meters.
+
+\subsection{Very Large Distances}
+
+For very large distances (approaching half the circumference), numerical precision becomes important.
+
+\textbf{Issue}: When calculating $\arccos$ of values near $-1$, floating-point precision can cause problems.
+
+\textbf{Solution}: Use the haversine formula, which uses $\arcsin$ and is more stable. Alternatively, use:
+
+\[
+d = R \cdot \left(\pi - \arccos(-\cos\theta)\right) = R \cdot \left(\pi - \arccos(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\Delta\lambda))\right)
+\]
+
+when the argument of $\arccos$ is near $-1$.
+
+\section{Earth-Specific Considerations}
+
+\subsection{Sphere vs Ellipsoid}
+
+The Earth is not a perfect sphere—it's an ellipsoid (flattened at the poles). This affects distance calculations.
+
+\textbf{Earth's shape}: The Earth is approximately an oblate spheroid with:
+\begin{itemize}
+\item Equatorial radius: $a \approx 6378.137$ km
+\item Polar radius: $b \approx 6356.752$ km
+\item Flattening: $f = \frac{a - b}{a} \approx 0.003353$
+\end{itemize}
+
+\textbf{Sphere approximation}: Using a mean radius $R = 6371$ km introduces errors:
+\begin{itemize}
+\item At the equator: Error is minimal (less than 0.1\%)
+\item At mid-latitudes: Error is typically less than 0.5\%
+\item At the poles: Error can reach about 1\%
+\end{itemize}
+
+\textbf{When sphere is sufficient}: For most applications (navigation, flight planning for general aviation), the sphere approximation is adequate. For high-precision applications (surveying, geodesy), ellipsoidal models are needed.
+
+\subsection{Different Earth Models}
+
+Various Earth models are used for different purposes:
+
+\begin{itemize}
+\item \textbf{Mean radius}: $R = 6371$ km (simple, good for general use)
+\item \textbf{WGS84 ellipsoid}: Standard geodetic reference system
+\item \textbf{GRS80 ellipsoid}: Another common geodetic system
+\item \textbf{Local models}: Regional ellipsoids optimized for specific areas
+\end{itemize}
+
+\textbf{Choosing a model}: 
+\begin{itemize}
+\item General calculations: Use mean radius $R = 6371$ km
+\item GPS applications: Use WGS84
+\item High-precision regional work: Use local ellipsoids
+\end{itemize}
+
+\subsection{Altitude Considerations}
+
+When points are at different altitudes (e.g., aircraft at different flight levels), we need to adjust the radius.
+
+\textbf{Adjustment}: For a point at altitude $h$ above sea level, the effective radius is $R + h$.
+
+\textbf{Approximate formula}: If points are at altitudes $h_1$ and $h_2$:
+
+\[
+d \approx (R + \bar{h}) \cdot \theta
+\]
+
+where $\bar{h} = \frac{h_1 + h_2}{2}$ is the mean altitude and $\theta$ is the central angle calculated using sea-level coordinates.
+
+\textbf{When important}: For aircraft navigation, altitude differences can be significant (10-12 km for commercial flights). However, for most ground-based calculations, altitude effects are negligible.
+
+\section{Numerical Methods and Approximations}
+
+\subsection{Small Distance Approximation}
+
+For small distances, we can use simpler formulas that avoid trigonometric functions.
+
+\textbf{Flat Earth approximation}:
+\[
+d \approx R \cdot \sqrt{(\Delta\phi)^2 + (\cos\bar{\phi})^2(\Delta\lambda)^2}
+\]
+
+where $\bar{\phi} = \frac{\phi_1 + \phi_2}{2}$ is the mean latitude.
+
+\textbf{Accuracy}: This approximation has errors of:
+\begin{itemize}
+\item Less than 0.1\% for distances up to 20 km
+\item Less than 1\% for distances up to 100 km
+\item Less than 10\% for distances up to 1000 km
+\end{itemize}
+
+\textbf{Use cases}: Quick calculations, preliminary estimates, applications where exact precision isn't needed.
+
+\subsection{Precision and Floating-Point Issues}
+
+Floating-point arithmetic can introduce errors in distance calculations.
+
+\textbf{arccos issues}: When the argument of $\arccos$ is near $-1$ or $1$, small floating-point errors can cause large errors in the result.
+
+\textbf{Example}: If $\cos\theta = -0.9999999999$ (due to rounding), then $\theta = \arccos(-0.9999999999) \approx 1.414 \times 10^{-5}$ radians, but the true value might be slightly different, leading to distance errors.
+
+\textbf{Solution}: Use the haversine formula, which uses $\arcsin$ and is more stable. The $\arcsin$ function is well-behaved near $0$ and $\pi/2$.
+
+\subsection{Fast Computation Methods}
+
+For applications requiring many distance calculations, optimization techniques can help:
+
+\begin{itemize}
+\item \textbf{Precomputation}: Calculate $\cos\phi$ and $\sin\phi$ once per point, reuse for multiple distance calculations.
+
+\item \textbf{Lookup tables}: For fixed precision, precompute common values.
+
+\item \textbf{Series expansions}: For very small distances, use Taylor series:
+\[
+\theta \approx \sqrt{(\Delta\phi)^2 + (\cos\phi)^2(\Delta\lambda)^2}
+\]
+with higher-order corrections if needed.
+
+\item \textbf{Vectorized computation}: Use vector operations when calculating distances for many point pairs simultaneously.
+\end{itemize}
+
+\section{Applications Beyond Basic Distance}
+
+\subsection{Finding Intermediate Points}
+
+Sometimes we need to find a point at a given distance along a great circle from a starting point.
+
+\textbf{Problem}: Given point $P_1$ at $(\phi_1, \lambda_1)$, find point $P_2$ at distance $d$ along a great circle in direction $\alpha$ (bearing).
+
+\textbf{Solution}: Using spherical trigonometry:
+\begin{align}
+\phi_2 &= \arcsin(\sin\phi_1\cos\frac{d}{R} + \cos\phi_1\sin\frac{d}{R}\cos\alpha) \\
+\lambda_2 &= \lambda_1 + \arctan2(\sin\alpha\sin\frac{d}{R}\cos\phi_1, \cos\frac{d}{R} - \sin\phi_1\sin\phi_2)
+\end{align}
+
+\textbf{Application}: Finding waypoints along a flight path, interpolating points on a route.
+
+\subsection{Distance to a Great Circle}
+
+Calculating the shortest distance from a point to a great circle arc.
+
+\textbf{Problem}: Given a point $P$ and a great circle defined by two points $P_1$ and $P_2$, find the shortest distance from $P$ to the great circle.
+
+\textbf{Solution}: The distance is the arc length of the perpendicular from $P$ to the great circle plane. This involves:
+\begin{itemize}
+\item Finding the normal vector to the great circle plane
+\item Calculating the angle between $P$ and this plane
+\item Converting the angle to distance
+\end{itemize}
+
+\textbf{Application}: Navigation, determining closest approach to a route.
+
+\subsection{Bearing and Initial Heading}
+
+The \textbf{bearing} (or azimuth) is the initial direction from one point to another.
+
+\textbf{Formula}: The bearing $\alpha$ from $P_1$ to $P_2$ is:
+
+\[
+\alpha = \arctan2(\sin\Delta\lambda\cos\phi_2, \cos\phi_1\sin\phi_2 - \sin\phi_1\cos\phi_2\cos\Delta\lambda)
+\]
+
+\textbf{Interpretation}: 
+\begin{itemize}
+\item $0^\circ$ or $360^\circ$ = North
+\item $90^\circ$ = East
+\item $180^\circ$ = South
+\item $270^\circ$ = West
+\end{itemize}
+
+\textbf{Application}: Navigation, determining initial heading for travel between two points.
+
+\section{Worked Examples: Complex Scenarios}
+
+\subsection{Example 1: Multiple Cities Route}
+
+Calculate the total distance for a multi-city route: London → New York → Los Angeles → Tokyo.
+
+\textbf{Given coordinates}:
+\begin{itemize}
+\item London: $(51.5074^\circ, -0.1278^\circ)$
+\item New York: $(40.7128^\circ, -74.0060^\circ)$
+\item Los Angeles: $(34.0522^\circ, -118.2437^\circ)$
+\item Tokyo: $(35.6762^\circ, 139.6503^\circ)$
+\end{itemize}
+
+\textbf{Calculation}: Calculate each leg separately using the haversine formula, then sum:
+
+\begin{align}
+d_{\text{London→NY}} &\approx 5570 \text{ km} \\
+d_{\text{NY→LA}} &\approx 3944 \text{ km} \\
+d_{\text{LA→Tokyo}} &\approx 8767 \text{ km} \\
+d_{\text{total}} &\approx 18,281 \text{ km}
+\end{align}
+
+\textbf{Note}: This is the great circle route distance. Actual flight paths may differ due to air traffic control, weather, and other factors.
+
+\subsection{Example 2: Comparing Formulas}
+
+Calculate the distance between Paris $(48.8566^\circ, 2.3522^\circ)$ and Tokyo $(35.6762^\circ, 139.6503^\circ)$ using different formulas.
+
+\textbf{Using basic formula}:
+\[
+d = 6371 \cdot \arccos(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\Delta\lambda)) \approx 9714 \text{ km}
+\]
+
+\textbf{Using haversine formula}:
+\[
+d = 2 \cdot 6371 \cdot \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta\phi}{2}\right) + \cos\phi_1\cos\phi_2\sin^2\left(\frac{\Delta\lambda}{2}\right)}\right) \approx 9714 \text{ km}
+\]
+
+Both formulas give the same result (within numerical precision).
+
+\textbf{Using flat Earth approximation}:
+\[
+d \approx 6371 \cdot \sqrt{(\Delta\phi)^2 + (\cos\bar{\phi})^2(\Delta\lambda)^2} \approx 9710 \text{ km}
+\]
+
+The approximation is quite good (error less than 0.1\%) because the distance is large but not near the limits of the approximation.
+
+\subsection{Example 3: Near-Polar Distance}
+
+Calculate the distance between two points near the North Pole: $(85^\circ$ N, $0^\circ$ E) and $(85^\circ$ N, $180^\circ$ E).
+
+\textbf{Using the formula}: Since both points are at the same latitude:
+
+\[
+d = R \cdot \cos(85^\circ) \cdot |180^\circ| = 6371 \times 0.0872 \times \pi \approx 1744 \text{ km}
+\]
+
+\textbf{Note}: This is much shorter than the distance along the parallel (which would be approximately $6371 \times \cos(85^\circ) \times \pi \approx 1744$ km as well, since they're on the same parallel). However, the great circle distance is actually shorter, going "over the pole."
+
+Using the full formula accounting for the polar route:
+\[
+d = R \cdot \arccos(\sin^2(85^\circ) + \cos^2(85^\circ)\cos(180^\circ)) = R \cdot \arccos(0.9924 - 0.0076) = R \cdot \arccos(0.9848) \approx 222 \text{ km}
+\]
+
+This is the correct great circle distance, going over the pole!
+
+\section{Key Takeaways}
+
+\begin{itemize}
+\item \textbf{Multiple formulas}: The basic formula, haversine formula, and spherical law of cosines all calculate the same distance, but have different numerical properties.
+
+\item \textbf{Haversine preferred}: For computational applications, the haversine formula is generally preferred due to better numerical stability.
+
+\item \textbf{Special cases}: Points on the same meridian or parallel have simplified formulas. Near poles and antipodal points require special handling.
+
+\item \textbf{Approximations}: For small distances, the flat Earth approximation is accurate and efficient. For large distances, use exact formulas.
+
+\item \textbf{Earth considerations}: The sphere approximation is sufficient for most applications, but ellipsoidal models are needed for high precision.
+
+\item \textbf{Practical applications}: Distance calculations enable waypoint finding, bearing calculations, and route planning in navigation systems.
+\end{itemize}
+
+\section{What's Next?}
+
+The concepts we've explored here extend to:
+\begin{itemize}
+\item \textbf{Ellipsoidal distance}: More accurate calculations using ellipsoidal models (Vincenty's formulae).
+\item \textbf{General surfaces}: Distance calculations on arbitrary curved surfaces.
+\item \textbf{Computational geometry}: Efficient algorithms for distance queries on large datasets.
+\item \textbf{Navigation systems}: Integration of distance calculations into GPS and other navigation technologies.
+\end{itemize}
+
+Understanding distance calculations on spheres provides the foundation for these advanced applications while being practically useful for many real-world navigation and mapping tasks.

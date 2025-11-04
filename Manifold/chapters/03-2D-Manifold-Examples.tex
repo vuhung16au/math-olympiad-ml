@@ -1,0 +1,330 @@
+\chapter{2D Manifold Examples}
+Examples of 2D manifolds include a flat plane, the surface of a sphere (like Earth), or the surface of a donut (torus). Each tiny patch on these surfaces looks like a flat 2D disk, but the whole shape can be curved or looped in complex ways.
+
+We examine each of these examples, showing how they satisfy the definition of a manifold while exhibiting different global structures.
+
+\section{Visualizing 2D Manifolds}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.85]
+  % 2D plane - flat surface
+  \draw[fill=bookpurple!20, draw=bookpurple, thick] (0,0) rectangle (2.5,2);
+  % Mark two points
+  \filldraw[bookred] (0.5,0.5) coordinate (P1) circle (2pt) node[below left] {$P_1$};
+  \filldraw[bookred] (2,1.5) coordinate (P2) circle (2pt) node[above right] {$P_2$};
+  % Draw distance line
+  \draw[bookred, dashed, thick] (P1) -- (P2);
+  \node[above left] at (1.25, 1) {$d$};
+  % Add grid lines to show it's flat
+  \draw[bookpurple!30, thin] (0,0.67) -- (2.5,0.67);
+  \draw[bookpurple!30, thin] (0,1.33) -- (2.5,1.33);
+  \draw[bookpurple!30, thin] (0.83,0) -- (0.83,2);
+  \draw[bookpurple!30, thin] (1.67,0) -- (1.67,2);
+  % Add a local patch
+  \draw[fill=bookred!20, opacity=0.5] (1.2,0.9) rectangle (1.4,1.1);
+  \node[above] at (1.3, 1.15) {\tiny patch};
+  \node[above] at (1.25, 2.5) {\textbf{(a) 2D Plane}};
+  \node[below] at (1.25, -0.3) {\small (Flat surface)};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.85]
+  % 2D sphere
+  \shade[ball color=bookpurple!40] (1.25,1) circle (0.8cm);
+  \draw[bookpurple, thick] (1.25,1) circle (0.8cm);
+  % Draw latitude lines for 3D effect
+  \draw[bookpurple!60, dashed, very thin] (0.45,1) arc (180:0:0.8);
+  \draw[bookpurple!60, dashed, very thin] (0.45,0.6) arc (180:0:0.6);
+  \draw[bookpurple!60, dashed, very thin] (0.45,1.4) arc (180:0:0.6);
+  % Mark two points on sphere
+  \filldraw[bookred] (1.6,0.7) coordinate (P1) circle (1.5pt);
+  \filldraw[bookred] (1.9,1.3) coordinate (P2) circle (1.5pt);
+  \node[above right] at (P1) {\tiny $P_1$};
+  \node[above right] at (P2) {\tiny $P_2$};
+  % Draw approximate geodesic (great circle arc)
+  \draw[bookred, dashed, thick] (P1) to[out=45,in=-30] (P2);
+  \node[above] at (1.75, 1.1) {\tiny $d$};
+  % Add a local patch
+  \draw[fill=bookred!20, opacity=0.6] (1.7,0.9) -- (1.8,0.95) -- (1.75,1.05) -- (1.65,1.0) -- cycle;
+  \node[above] at (1.25, 2.2) {\textbf{(b) 2D Sphere}};
+  \node[below] at (1.25, -0.3) {\small (Curved surface)};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.85]
+  % 2D torus
+  \begin{scope}
+    \clip (0,0) rectangle (2.5,2);
+    % Outer ellipse
+    \draw[bookpurple, thick] (1.25,1) ellipse (0.9cm and 0.5cm);
+    % Inner ellipse (hole)
+    \draw[bookpurple, thick] (1.25,1) ellipse (0.4cm and 0.2cm);
+    % Draw the torus surface with shading
+    \shade[left color=bookpurple!40, right color=bookpurple!20] 
+      (1.25,1) ellipse (0.9cm and 0.5cm);
+    \shade[left color=bookwhite, right color=bookwhite] 
+      (1.25,1) ellipse (0.4cm and 0.2cm);
+    % Mark two points
+    \filldraw[bookred] (1.85,0.85) coordinate (P1) circle (1.5pt);
+    \filldraw[bookred] (1.6,1.25) coordinate (P2) circle (1.5pt);
+    \node[right] at (P1) {\tiny $P_1$};
+    \node[above] at (P2) {\tiny $P_2$};
+    % Draw approximate path
+    \draw[bookred, dashed, thick] (P1) to[out=120,in=-60] (P2);
+    \node[above left] at (1.7, 1.05) {\tiny $d$};
+    % Add a local patch
+    \draw[fill=bookred!20, opacity=0.6] (1.7,0.95) -- (1.75,1.0) -- (1.7,1.05) -- (1.65,1.0) -- cycle;
+  \end{scope}
+  \node[above] at (1.25, 2.2) {\textbf{(c) 2D Torus}};
+  \node[below] at (1.25, -0.3) {\small (Donut surface)};
+\end{tikzpicture}
+\end{minipage}
+\caption{Examples of 2D manifolds: (a) a 2D plane (flat surface), (b) a 2D sphere (curved surface), and (c) a 2D torus (complex curved surface). Each manifold locally looks like a flat 2D disk, as indicated by the highlighted patches.}
+\label{fig:2d-manifolds}
+\end{figure}
+
+\section{Distance Calculations on 2D Manifolds}
+
+\subsection{Distance on a 2D Plane}
+
+The simplest 2D manifold is the flat plane, which we can think of as the familiar $xy$-plane. On a plane, calculating the distance between two points is straightforward using the Euclidean distance formula.
+
+\subsubsection{Formula}
+
+Given two points $P_1 = (x_1, y_1)$ and $P_2 = (x_2, y_2)$ on a 2D plane, the distance between them is:
+
+\[
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+\]
+
+This is the familiar Pythagorean theorem extended to two dimensions. The distance is the length of the straight line segment connecting the two points.
+
+\subsubsection{Example}
+
+Consider two points on a plane: $P_1 = (1, 2)$ and $P_2 = (4, 6)$. The distance between them is:
+
+\[
+d = \sqrt{(4 - 1)^2 + (6 - 2)^2} = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5
+\]
+
+\subsubsection{Intuition}
+
+On a flat plane, the shortest path between two points is always a straight line. This is the fundamental property of Euclidean geometry. The plane has zero curvature, meaning it's ``flat'' everywhere, and there's no ``bending'' of space that would make curved paths shorter.
+
+\subsection{Distance on a 2D Sphere}
+
+The surface of a sphere is a 2D manifold that is curved. Unlike the plane, the shortest path between two points on a sphere is not a straight line (which would cut through the sphere), but rather a \textbf{great circle arc}—the intersection of the sphere with a plane passing through the center and both points.
+
+\subsubsection{Formula: Great Circle Distance}
+
+Given two points on a sphere, we can represent them using spherical coordinates. If we have two points with latitude and longitude $(\phi_1, \lambda_1)$ and $(\phi_2, \lambda_2)$, or equivalently, their unit vectors from the center, the distance along the sphere's surface (great circle distance) is:
+
+\[
+d = R \cdot \arccos(\vec{v}_1 \cdot \vec{v}_2)
+\]
+
+where $R$ is the radius of the sphere, and $\vec{v}_1$ and $\vec{v}_2$ are unit vectors pointing to the two points from the sphere's center.
+
+In terms of spherical coordinates:
+
+\[
+d = R \cdot \arccos(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\lambda_2 - \lambda_1))
+\]
+
+This is known as the \textbf{haversine formula} when written in an alternative form.
+
+\subsubsection{Simplified Case: Points on the Equator}
+
+For points on the equator (where $\phi_1 = \phi_2 = 0$), the formula simplifies to:
+
+\[
+d = R \cdot |\lambda_2 - \lambda_1|
+\]
+
+where $\lambda$ is the longitude difference in radians. This is similar to the 1D circle case we saw earlier.
+
+\subsubsection{Example}
+
+Consider a sphere with radius $R = 1$ unit. Two points are located at:
+\begin{itemize}
+\item $P_1$: latitude $0^\circ$, longitude $0^\circ$ (on the equator)
+\item $P_2$: latitude $0^\circ$, longitude $60^\circ$ (also on the equator, $60^\circ$ away)
+\end{itemize}
+
+Using the simplified formula:
+\[
+d = 1 \cdot \left|\frac{\pi}{3} - 0\right| = \frac{\pi}{3} \approx 1.047 \text{ units}
+\]
+
+For a more general case, if $P_1$ is at $(0^\circ, 0^\circ)$ and $P_2$ is at $(30^\circ, 60^\circ)$, we use the full formula with $\phi_1 = 0$, $\phi_2 = \frac{\pi}{6}$, $\lambda_1 = 0$, $\lambda_2 = \frac{\pi}{3}$:
+
+\[
+d = 1 \cdot \arccos\left(\sin(0)\sin\left(\frac{\pi}{6}\right) + \cos(0)\cos\left(\frac{\pi}{6}\right)\cos\left(\frac{\pi}{3}\right)\right)
+\]
+
+\[
+d = \arccos\left(0 \cdot \frac{1}{2} + 1 \cdot \frac{\sqrt{3}}{2} \cdot \frac{1}{2}\right) = \arccos\left(\frac{\sqrt{3}}{4}\right) \approx 0.722 \text{ radians} \approx 1.0 \text{ units}
+\]
+
+\subsubsection{Real-World Example: Sydney to New York}
+
+Let's calculate the great circle distance between two real-world locations on Earth:
+
+\begin{itemize}
+\item \textbf{Opera House Sydney}: latitude $\phi_1 = -33.8567^\circ$, longitude $\lambda_1 = 151.2151^\circ$
+\item \textbf{Bow Bridge, New York}: latitude $\phi_2 = 40.7757^\circ$, longitude $\lambda_2 = -73.9718^\circ$
+\end{itemize}
+
+The Earth's radius is approximately $R = 6371$ km. First, we convert the coordinates to radians:
+
+\begin{align*}
+\phi_1 &= -33.8567^\circ \times \frac{\pi}{180} \approx -0.5903 \text{ radians} \\
+\lambda_1 &= 151.2151^\circ \times \frac{\pi}{180} \approx 2.6390 \text{ radians} \\
+\phi_2 &= 40.7757^\circ \times \frac{\pi}{180} \approx 0.7108 \text{ radians} \\
+\lambda_2 &= -73.9718^\circ \times \frac{\pi}{180} \approx -1.2905 \text{ radians}
+\end{align*}
+
+Now we calculate the great circle distance using the formula:
+
+\[
+d = R \cdot \arccos(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\lambda_2 - \lambda_1))
+\]
+
+Substituting the values:
+
+\begin{align*}
+\sin\phi_1 &= \sin(-0.5903) \approx -0.5564 \\
+\sin\phi_2 &= \sin(0.7108) \approx 0.6522 \\
+\cos\phi_1 &= \cos(-0.5903) \approx 0.8309 \\
+\cos\phi_2 &= \cos(0.7108) \approx 0.7580 \\
+\lambda_2 - \lambda_1 &= -1.2905 - 2.6390 = -3.9295 \text{ radians} \\
+\cos(\lambda_2 - \lambda_1) &= \cos(-3.9295) \approx -0.7077
+\end{align*}
+
+Plugging into the formula:
+
+\begin{align*}
+d &= 6371 \cdot \arccos((-0.5564)(0.6522) + (0.8309)(0.7580)(-0.7077)) \\
+  &= 6371 \cdot \arccos(-0.3629 - 0.4456) \\
+  &= 6371 \cdot \arccos(-0.8085) \\
+  &= 6371 \cdot 2.5130 \\
+  &\approx 16,015 \text{ km}
+\end{align*}
+
+So the great circle distance between Sydney Opera House and Bow Bridge in New York is approximately \textbf{16,015 kilometers} (about 9,946 miles). This is the shortest path along the Earth's surface—the route that airplanes would follow for the most efficient flight.
+
+\subsubsection{Intuition}
+
+On a sphere, the shortest path between two points is always along a great circle—the largest circle that can be drawn on the sphere. This is why airplanes flying long distances appear to follow curved paths on a flat map: they're actually following great circle routes, which are the shortest paths on the Earth's spherical surface.
+
+The sphere has positive curvature, meaning it curves ``outward'' everywhere. This curvature makes the geometry different from the flat plane, and distances are measured along the curved surface rather than through space.
+
+\subsection{Distance on a 2D Torus}
+
+A torus (the surface of a donut) is a more complex 2D manifold. Unlike the sphere, which has constant positive curvature, a torus has regions of both positive and negative curvature, and its geometry is more complicated.
+
+\subsubsection{Approximate Formula}
+
+For a torus, calculating the exact distance between two points is more complex because the shortest path (geodesic) can wrap around the torus in different ways. However, we can approximate the distance for nearby points.
+
+Consider a torus parameterized by two angles $(\theta, \phi)$, where:
+\begin{itemize}
+\item $\theta$ is the angle around the ``tube'' (the smaller circle)
+\item $\phi$ is the angle around the ``hole'' (the larger circle)
+\end{itemize}
+
+The torus has two radii: $R$ (the distance from the center of the torus to the center of the tube) and $r$ (the radius of the tube itself).
+
+For two nearby points $P_1 = (\theta_1, \phi_1)$ and $P_2 = (\theta_2, \phi_2)$ on a torus, an approximate distance formula is:
+
+\[
+d \approx \sqrt{(R + r\cos\theta_1)^2(\phi_2 - \phi_1)^2 + r^2(\theta_2 - \theta_1)^2}
+\]
+
+This approximation works well when the points are close together and the angle differences are small.
+
+\subsubsection{Simplified Approximation for Small Distances}
+
+For very small distances, we can use a simpler approximation. If the points are close enough that the torus looks locally flat, we can use:
+
+\[
+d \approx \sqrt{(R + r)^2(\Delta\phi)^2 + r^2(\Delta\theta)^2}
+\]
+
+where $\Delta\phi = \phi_2 - \phi_1$ and $\Delta\theta = \theta_2 - \theta_1$ are small angle differences.
+
+\subsubsection{Example}
+
+Consider a torus with $R = 2$ (major radius) and $r = 1$ (minor radius). Two points are located at:
+\begin{itemize}
+\item $P_1$: $(\theta_1 = 0, \phi_1 = 0)$
+\item $P_2$: $(\theta_2 = \frac{\pi}{6}, \phi_2 = \frac{\pi}{12})$ (small angles)
+\end{itemize}
+
+Using the simplified approximation:
+\[
+d \approx \sqrt{(2 + 1)^2\left(\frac{\pi}{12}\right)^2 + 1^2\left(\frac{\pi}{6}\right)^2}
+\]
+
+\[
+d \approx \sqrt{9 \cdot \left(\frac{\pi}{12}\right)^2 + \left(\frac{\pi}{6}\right)^2} = \sqrt{\frac{9\pi^2}{144} + \frac{\pi^2}{36}}
+\]
+
+\[
+d \approx \sqrt{\frac{\pi^2}{16} + \frac{\pi^2}{36}} = \pi\sqrt{\frac{1}{16} + \frac{1}{36}} = \pi\sqrt{\frac{9 + 4}{144}} = \frac{\pi\sqrt{13}}{12} \approx 0.944 \text{ units}
+\]
+
+\subsubsection{Intuition}
+
+The torus is more complex because:
+\begin{enumerate}
+\item \textbf{Multiple paths}: Unlike the sphere or plane, there can be multiple geodesics (shortest paths) between two points on a torus, depending on how many times the path wraps around the hole or the tube.
+
+\item \textbf{Mixed curvature}: The torus has positive curvature on the outer surface (like a sphere) and negative curvature on the inner surface (saddle-like). This mixed geometry makes distance calculations more involved.
+
+\item \textbf{Local flatness}: Despite the global complexity, small patches on the torus still look like flat 2D planes, which is why our approximation works for nearby points.
+
+\item \textbf{Practical consideration}: For real-world applications, exact geodesic calculations on a torus often require numerical methods or more advanced differential geometry.
+\end{enumerate}
+
+\section{Mathematical Background}
+
+\subsection{Why These Formulas Work}
+
+The distance formulas we've discussed are based on the concept of a \textbf{metric}—a way of measuring distances on a manifold. Each manifold has its own metric that determines how distances are calculated.
+
+\begin{itemize}
+\item \textbf{Plane}: Uses the Euclidean metric $ds^2 = dx^2 + dy^2$, which gives rise to the familiar distance formula.
+
+\item \textbf{Sphere}: Uses the spherical metric, which in spherical coordinates is $ds^2 = R^2(d\phi^2 + \sin^2\phi \, d\lambda^2)$, leading to the great circle distance formula.
+
+\item \textbf{Torus}: Uses a more complex metric that depends on both the major and minor radii, making the distance calculations more involved.
+\end{itemize}
+
+\subsection{Geodesics}
+
+The shortest paths on manifolds are called \textbf{geodesics}:
+\begin{itemize}
+\item On a plane: Geodesics are straight lines.
+\item On a sphere: Geodesics are great circle arcs.
+\item On a torus: Geodesics can be more complex, potentially wrapping around the torus multiple times.
+\end{itemize}
+
+\section{Key Takeaways}
+
+\begin{itemize}
+\item The 2D plane uses the simple Euclidean distance formula: $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$.
+
+\item On a sphere, distances are calculated using great circle arcs: $d = R \cdot \arccos(\vec{v}_1 \cdot \vec{v}_2)$.
+
+\item On a torus, distance calculations are more complex and typically require approximations for nearby points: $d \approx \sqrt{(R + r\cos\theta)^2(\Delta\phi)^2 + r^2(\Delta\theta)^2}$.
+
+\item Each manifold has different curvature properties that affect how distances are measured, but all maintain local flatness—small patches look like flat planes.
+\end{itemize}

@@ -1,0 +1,346 @@
+\chapter{Geodesics: Introduction}
+A \textbf{geodesic} is the \textbf{shortest path between two points on a curved surface or manifold}. It's a generalization of ``straight lines'' to curved spaces. This chapter introduces the concept and prepares the ground for exploring geodesics in various contexts.
+
+\section{What is a Geodesic?}
+
+A geodesic is the shortest path between two points that stays entirely on the surface or manifold. Think of it as the natural generalization of a straight line to curved spaces.
+
+\begin{itemize}
+\item On a flat plane: A geodesic is simply a straight line.
+\item On a sphere: A geodesic is an arc of a great circle (the largest circle on the sphere).
+\item On a cylinder: A geodesic can be a straight line (when unrolled) or a helix.
+\item On any curved surface: A geodesic is the path a string would take if you pulled it tight between two points on the surface.
+\end{itemize}
+
+The key insight is that geodesics are determined by the geometry of the surface itself—they're the ``straightest possible'' paths while staying on the surface.
+
+\section{Why Straight Lines Don't Work on Curved Surfaces}
+
+In flat Euclidean space, the shortest path between two points is a straight line. But on a curved surface, a straight line in the ambient space might cut through the surface, which violates our requirement that paths must stay on the surface.
+
+\subsection{The Problem}
+
+Consider trying to find the shortest path between two cities on Earth. If we draw a straight line through the Earth (cutting through the planet), that's not useful—we need to travel along the Earth's surface!
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % Draw sphere
+  \shade[ball color=bookpurple!30] (1.5,1) circle (1cm);
+  \draw[bookpurple, thick] (1.5,1) circle (1cm);
+  % Mark two points
+  \filldraw[bookred] (0.8,0.7) coordinate (P1) circle (2pt) node[below left] {$P_1$};
+  \filldraw[bookred] (2.2,1.3) coordinate (P2) circle (2pt) node[above right] {$P_2$};
+  % Draw straight line through space (BAD)
+  \draw[bookred, dashed, very thick] (P1) -- (P2);
+  \node[above] at (1.5, 1.5) {\small Straight line};
+  \node[below] at (1.5, 0.3) {\small (Cuts through sphere)};
+  \node[above] at (1.5, 2.3) {\textbf{(a) Straight Line}};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % Draw sphere
+  \shade[ball color=bookpurple!30] (1.5,1) circle (1cm);
+  \draw[bookpurple, thick] (1.5,1) circle (1cm);
+  % Mark two points
+  \filldraw[bookred] (0.8,0.7) coordinate (P1) circle (2pt) node[below left] {$P_1$};
+  \filldraw[bookred] (2.2,1.3) coordinate (P2) circle (2pt) node[above right] {$P_2$};
+  % Draw geodesic (great circle arc) on surface (GOOD)
+  \draw[bookred, thick] (P1) arc (225:45:1.5);
+  \node[above] at (1.5, 1.5) {\small Great circle arc};
+  \node[below] at (1.5, 0.3) {\small (Stays on surface)};
+  \node[above] at (1.5, 2.3) {\textbf{(b) Geodesic}};
+\end{tikzpicture}
+\end{minipage}
+\caption{Comparison: (a) A straight line through space cuts through the sphere, while (b) a geodesic (great circle arc) stays on the surface and represents the shortest path along the surface.}
+\label{fig:straight-vs-geodesic}
+\end{figure}
+
+\subsection{The Solution: Geodesics}
+
+Geodesics solve this problem by finding the shortest path that \textbf{stays on the surface}. They're the natural generalization of straight lines to curved spaces.
+
+\section{Visual Examples of Geodesics}
+
+Let's visualize geodesics on different manifolds:
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.9]
+  % 2D plane
+  \draw[fill=bookpurple!20, draw=bookpurple, thick] (0,0) rectangle (2.5,2);
+  % Mark two points
+  \filldraw[bookred] (0.3,0.3) coordinate (P1) circle (2pt) node[below left] {$P_1$};
+  \filldraw[bookred] (2.2,1.7) coordinate (P2) circle (2pt) node[above right] {$P_2$};
+  % Draw straight line (geodesic)
+  \draw[bookred, thick] (P1) -- (P2);
+  \node[above left] at (1.25, 1) {$d$};
+  \node[above] at (1.25, 2.5) {\textbf{(a) Plane}};
+  \node[below] at (1.25, -0.3) {\small Straight line};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.9]
+  % Sphere with great circle
+  \shade[ball color=bookpurple!30] (1.25,1) circle (0.8cm);
+  \draw[bookpurple, thick] (1.25,1) circle (0.8cm);
+  % Mark two points
+  \filldraw[bookred] (0.7,0.5) coordinate (P1) circle (1.5pt);
+  \filldraw[bookred] (1.8,1.5) coordinate (P2) circle (1.5pt);
+  \node[below left] at (P1) {\tiny $P_1$};
+  \node[above right] at (P2) {\tiny $P_2$};
+  % Draw great circle arc (geodesic)
+  \draw[bookred, thick] (P1) arc (225:45:1.25);
+  \node[above] at (1.25, 2.2) {\textbf{(b) Sphere}};
+  \node[below] at (1.25, -0.3) {\small Great circle arc};
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.9]
+  % Cylinder (showing unrolled)
+  \draw[fill=bookpurple!20, draw=bookpurple, thick] (0,0) rectangle (3,1.5);
+  % Mark two points
+  \filldraw[bookred] (0.3,0.3) coordinate (P1) circle (2pt) node[below left] {$P_1$};
+  \filldraw[bookred] (2.7,1.2) coordinate (P2) circle (2pt) node[above right] {$P_2$};
+  % Draw geodesic (straight line when unrolled)
+  \draw[bookred, thick] (P1) -- (P2);
+  \node[above] at (1.5, 1.8) {\small Unrolled cylinder};
+  \node[above] at (1.5, 2.5) {\textbf{(c) Cylinder}};
+  \node[below] at (1.5, -0.3) {\small Straight line};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.9]
+  % Show comparison: straight line through space vs geodesic
+  \draw[bookpurple!30, fill=bookpurple!10] (0,0) .. controls (1,0.5) and (2,0.3) .. (3,0);
+  \draw[bookpurple, thick] (0,0) .. controls (1,0.5) and (2,0.3) .. (3,0);
+  % Mark two points on curve
+  \filldraw[bookred] (0.5,0.1) coordinate (P1) circle (2pt) node[below] {$P_1$};
+  \filldraw[bookred] (2.5,0.2) coordinate (P2) circle (2pt) node[below] {$P_2$};
+  % Draw straight line through space (dashed)
+  \draw[bookred!50, dashed, thick] (P1) -- (P2);
+  % Draw geodesic along curve (solid)
+  \draw[bookred, thick] (P1) .. controls (1.2,0.35) and (1.8,0.25) .. (P2);
+  \node[above] at (1.5, 0.6) {\tiny Geodesic};
+  \node[above] at (1.5, 2.5) {\textbf{(d) Curved Surface}};
+  \node[below] at (1.5, -0.5) {\small Geodesic vs straight};
+\end{tikzpicture}
+\end{minipage}
+\caption{Examples of geodesics on different manifolds: (a) On a plane, geodesics are straight lines. (b) On a sphere, geodesics are great circle arcs. (c) On a cylinder, geodesics appear as straight lines when unrolled. (d) On a curved surface, the geodesic follows the surface while a straight line cuts through space.}
+\label{fig:geodesic-examples}
+\end{figure}
+
+\section{Key Properties of Geodesics}
+
+Geodesics have several important properties:
+
+\subsection{Shortest Path Property}
+
+The fundamental property of a geodesic is that it minimizes the distance between two points, measured along the surface. This is why we use geodesics to calculate distances on manifolds.
+
+\subsection{Local Straightness}
+
+Geodesics are ``locally straight''—if you zoom in on any small segment of a geodesic, it looks like a straight line. This connects to the idea that manifolds are locally flat.
+
+\subsection{Uniqueness (or Not)}
+
+Depending on the manifold:
+\begin{itemize}
+\item On a plane: There's exactly one geodesic (straight line) between any two points.
+\item On a sphere: There's exactly one shortest geodesic (the shorter great circle arc), but potentially two paths if we consider the longer arc.
+\item On a torus: There can be multiple geodesics between two points, wrapping around the hole or tube in different ways.
+\end{itemize}
+
+\subsection{Symmetry}
+
+Geodesics are symmetric: the geodesic from point $A$ to point $B$ is the same as the geodesic from $B$ to $A$ (just traversed in the opposite direction).
+
+\section{Connection to Distance Calculations}
+
+In previous chapters, we calculated distances on manifolds. Those distances are precisely the lengths of geodesics!
+
+\subsection{Relationship to Previous Chapters}
+
+\begin{itemize}
+\item \textbf{1D Plane}: The distance $d = |x_2 - x_1|$ is the length of the straight line (geodesic) segment.
+
+\item \textbf{1D Circle}: The distance $d = r \cdot \theta$ is the length of the geodesic arc along the circle.
+
+\item \textbf{2D Plane}: The distance $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ is the length of the straight line (geodesic).
+
+\item \textbf{2D Sphere}: The great circle distance $d = R \cdot \arccos(\vec{v}_1 \cdot \vec{v}_2)$ is the length of the geodesic arc.
+\end{itemize}
+
+This connection is fundamental: \textbf{the distance between two points on a manifold equals the length of the geodesic connecting them}.
+
+\section{Mathematical Intuition}
+
+\subsection{Minimizing Path Length}
+
+Geodesics can be thought of as paths that minimize the total length. Mathematically, if we have a path $\gamma(t)$ between two points, the length is:
+
+\[
+L[\gamma] = \int_{t_1}^{t_2} \sqrt{g_{ij}\frac{dx^i}{dt}\frac{dx^j}{dt}} \, dt
+\]
+
+where $g_{ij}$ is the metric tensor that encodes the geometry of the manifold. A geodesic is a path that minimizes this length functional.
+
+\subsection{Variational Principle}
+
+Geodesics satisfy a variational principle: they're paths for which any small variation increases (or at least doesn't decrease) the length. This is analogous to how a taut string naturally takes the shortest path between two fixed points.
+
+\subsection{The Geodesic Equation}
+
+For those familiar with calculus of variations, geodesics satisfy the geodesic equation:
+
+\[
+\frac{d^2 x^i}{dt^2} + \Gamma^i_{jk} \frac{dx^j}{dt}\frac{dx^k}{dt} = 0
+\]
+
+where $\Gamma^i_{jk}$ are the Christoffel symbols that encode the geometry. This equation ensures the path is ``straight'' in the curved space.
+
+Don't worry if this looks complicated—the key intuition is that geodesics are paths that are ``as straight as possible'' given the curvature of the space.
+
+\section{Real-World Examples}
+
+Geodesics appear everywhere in our daily lives:
+
+\subsection{Aviation and Navigation}
+
+When airplanes fly long distances, they follow great circle routes—geodesics on the Earth's sphere. This is why flight paths appear curved on flat maps but are actually the shortest routes.
+
+\subsection{GPS and Mapping}
+
+GPS systems calculate shortest routes along roads, which approximate geodesics on the road network (a graph-like manifold). The navigation system finds geodesic-like paths within the network.
+
+\subsection{Surface Transportation}
+
+When planning routes on hilly terrain, the shortest path follows the geodesics of the terrain's surface. Hikers naturally follow geodesic-like paths when taking the most direct route.
+
+\subsection{Physics}
+
+In general relativity, light rays and free-falling objects follow geodesics in spacetime. This is one of the most profound applications of geodesics in physics.
+
+\section{Relationship to Curvature}
+
+The curvature of a manifold affects how geodesics behave:
+
+\subsection{Zero Curvature (Flat Space)}
+
+On a plane (zero curvature), geodesics are straight lines that never converge or diverge. Parallel geodesics remain parallel.
+
+\subsection{Positive Curvature (Sphere)}
+
+On a sphere (positive curvature), geodesics (great circles) tend to converge. Two initially parallel geodesics will eventually meet—think of lines of longitude on Earth meeting at the poles.
+
+\subsection{Negative Curvature (Saddle)}
+
+On a saddle surface (negative curvature), geodesics tend to diverge. Two initially parallel geodesics will spread apart.
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+  % Flat plane with parallel lines
+  \draw[fill=bookpurple!20, draw=bookpurple, thick] (0,0) rectangle (2,2);
+  \draw[bookred, thick] (0.3,0.3) -- (1.7,1.7);
+  \draw[bookred, thick] (0.7,0.3) -- (2.1,1.7);
+  \node[above] at (1, 2.3) {\textbf{(a) Zero}};
+  \node[below] at (1, -0.3) {\small Parallel stay parallel};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+  % Sphere with converging geodesics
+  \shade[ball color=bookpurple!30] (1,1) circle (0.7cm);
+  \draw[bookpurple, thick] (1,1) circle (0.7cm);
+  % Draw converging great circles
+  \draw[bookred, thick] (0.3,0.5) arc (200:340:1);
+  \draw[bookred, thick] (0.5,0.3) arc (220:340:1.2);
+  \node[above] at (1, 2.1) {\textbf{(b) Positive}};
+  \node[below] at (1, -0.3) {\small Converge};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+  % Saddle with diverging geodesics
+  \draw[bookpurple, thick] (0,1) .. controls (0.5,0.3) and (1.5,1.7) .. (2,1);
+  \draw[bookpurple, thick] (0,1.5) .. controls (0.5,1.7) and (1.5,0.3) .. (2,1.5);
+  \draw[bookred, thick] (0.3,1.2) -- (1.7,1.2);
+  \draw[bookred, thick] (0.3,1.3) -- (1.7,0.8);
+  \node[above] at (1, 2.1) {\textbf{(c) Negative}};
+  \node[below] at (1, -0.3) {\small Diverge};
+\end{tikzpicture}
+\end{minipage}
+\caption{How curvature affects geodesics: (a) Zero curvature: parallel geodesics stay parallel. (b) Positive curvature: geodesics converge. (c) Negative curvature: geodesics diverge.}
+\label{fig:curvature-effects}
+\end{figure}
+
+\section{Intuitive Understanding: The String Analogy}
+
+The best way to understand geodesics is to imagine pulling a string tight between two points on a surface:
+
+\begin{itemize}
+\item The string naturally takes the shortest path.
+\item It stays on the surface (can't cut through it).
+\item It's under tension, which minimizes its length.
+\item The path it takes is the geodesic!
+\end{itemize}
+
+This physical intuition helps us understand why geodesics are the natural ``straight lines'' on curved surfaces.
+
+\section{What's Next?}
+
+In the next chapter, we'll explore geodesics in detail:
+\begin{itemize}
+\item \textbf{1D Manifolds}: Geodesics on lines and circles.
+\item \textbf{2D Manifolds}: Geodesics on planes and spheres.
+\item \textbf{Calculations}: How to find and compute geodesics.
+\item \textbf{Examples}: Specific cases with numerical calculations.
+\end{itemize}
+
+We'll see how the abstract concept of geodesics plays out in concrete examples, building on the foundation we've established here.
+
+\section{Key Takeaways}
+
+\begin{itemize}
+\item A \textbf{geodesic} is the shortest path between two points that stays on a manifold.
+
+\item Geodesics are the natural generalization of straight lines to curved spaces.
+
+\item The distance between two points on a manifold equals the length of the geodesic connecting them.
+
+\item Geodesics depend on the geometry (curvature) of the manifold—they're not just straight lines in the ambient space.
+
+\item Real-world examples include airplane routes (great circles), GPS navigation, and paths on terrain.
+
+\item Curvature affects how geodesics behave: zero curvature keeps them parallel, positive curvature makes them converge, negative curvature makes them diverge.
+
+\item The string analogy provides excellent intuition: geodesics are like the path a taut string would take on a surface.
+\end{itemize}
+
+\section{Conclusion}
+
+Geodesics are fundamental to understanding geometry on manifolds. They provide the natural way to measure distances, define ``straightness'' on curved surfaces, and connect the abstract mathematical structure of manifolds to practical applications like navigation and physics.
+
+By understanding geodesics, we gain insight into how geometry works in curved spaces—a concept that's essential not just in mathematics, but in physics (general relativity), computer graphics, robotics, and many other fields.

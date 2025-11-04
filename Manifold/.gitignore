@@ -1,0 +1,63 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.pdfsync
+*.nav
+*.snm
+*.vrb
+
+# Build directory
+release/
+
+# Temporary files
+*~
+*.bak
+*.swp
+*.tmp
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor specific
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+
+# LaTeX intermediate files
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.maf
+*.mtc
+*.mtc0
+*.slg
+*.syg
+*.syi
+*.synctex(busy)
+*.xdy
+

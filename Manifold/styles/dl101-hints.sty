@@ -1,0 +1,53 @@
+\ProvidesPackage{dl101-hints}[2025/11/02 DL101 upside-down hint style]
+
+\RequirePackage{rotating}
+\RequirePackage{environ}
+\RequirePackage[framemethod=tikz]{mdframed}
+\RequirePackage{xcolor}
+
+% Define hint style with mdframed
+% Use providecolor to avoid errors if colors aren't defined yet
+\providecolor{bookpurple}{RGB}{60,16,83}
+\providecolor{softivory}{RGB}{242,239,235}
+
+\mdfdefinestyle{hintstyle}{
+  linecolor=bookpurple,
+  backgroundcolor=softivory,
+  linewidth=1pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+}
+
+% Define the hint environment (upside-down)
+\NewEnviron{hint}[1][]{%
+\noindent
+\rotatebox[origin=c]{180}{%
+\noindent
+\begin{minipage}[t]{\linewidth}
+\begin{mdframed}[style=hintstyle]
+\ifstrempty{#1}{%
+  \textbf{Hint:}%
+}{%
+  \textbf{Hint:} #1%
+}%
+\BODY
+\end{mdframed}%
+\end{minipage}%
+}%
+}
+
+% Alternative: If you want to keep hints right-side up but with special styling
+% Uncomment this and comment out the above if needed
+% \NewEnviron{hint}[1][]{%
+% \begin{mdframed}[style=hintstyle]
+% \ifstrempty{#1}{%
+%   \textbf{Hint:}%
+% }{%
+%   \textbf{Hint:} #1%
+% }%
+% \BODY
+% \end{mdframed}%
+% }
+

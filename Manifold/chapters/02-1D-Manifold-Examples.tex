@@ -1,0 +1,162 @@
+\chapter{1D Manifold Examples}
+Examples of 1D manifolds include a straight line or a circle. Each small segment of a circle (like a tiny arc) looks like a straight line segment when zoomed in enough. But the circle itself loops back, making it a 1D manifold that is ``curved'' globally.
+
+We explore these examples in detail, showing how local flatness is preserved even when the global structure is curved or closed.
+
+\section{Visualizing 1D Manifolds}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % 1D plane - x-axis
+  \draw[thick, bookpurple, <->] (-2,0) -- (2,0);
+  \node[below] at (0,-0.2) {$x$};
+  % Mark two points
+  \filldraw[bookred] (-1,0) circle (2pt) node[below] {$P_1$};
+  \filldraw[bookred] (1.2,0) circle (2pt) node[below] {$P_2$};
+  % Draw distance line
+  \draw[bookred, dashed, thick] (-1,0) -- (1.2,0);
+  \node[above] at (0.1, 0.2) {$d$};
+  % Add coordinate labels
+  \draw[bookpurple!50] (-1,0.1) -- (-1,-0.1) node[below] {$x_1$};
+  \draw[bookpurple!50] (1.2,0.1) -- (1.2,-0.1) node[below] {$x_2$};
+  % Add a local patch
+  \draw[fill=bookred!20, opacity=0.5] (0.5,-0.15) rectangle (0.8,0.15);
+  \node[above] at (0.65, 0.2) {\tiny patch};
+  \node[above] at (0, 1.2) {\textbf{(a) 1D Plane}};
+  \node[below] at (0, -0.8) {\small (Real line / x-axis)};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % 1D circle
+  \draw[thick, bookpurple] (0,0) circle (1.2cm);
+  % Mark center
+  \filldraw[bookpurple!30] (0,0) circle (1pt);
+  % Mark two points on circle
+  \filldraw[bookred] (0:1.2) coordinate (P1) circle (2pt) node[right] {$P_1$};
+  \filldraw[bookred] (60:1.2) coordinate (P2) circle (2pt) node[above right] {$P_2$};
+  % Draw radius lines
+  \draw[bookpurple!50, dashed] (0,0) -- (P1);
+  \draw[bookpurple!50, dashed] (0,0) -- (P2);
+  % Draw arc
+  \draw[bookred, thick] (P1) arc (0:60:1.2);
+  \node[above right] at (30:1.5) {$d = r\theta$};
+  % Add angle label
+  \draw[bookpurple!40, ->] (0.3,0) arc (0:60:0.3);
+  \node[above] at (30:0.5) {$\theta$};
+  % Add radius label
+  \node[left] at (30:0.6) {$r$};
+  % Add a local patch
+  \draw[fill=bookred!20, opacity=0.5] (30:1.05) arc (30:35:1.05) -- (35:1.35) arc (35:30:1.35) -- cycle;
+  \node[above] at (32.5:1.45) {\tiny patch};
+  \node[above] at (0, 2) {\textbf{(b) 1D Circle}};
+  \node[below] at (0, -2.2) {\small (Closed curve)};
+\end{tikzpicture}
+\end{minipage}
+\caption{Examples of 1D manifolds: (a) a 1D plane (the real line or x-axis), and (b) a 1D circle. Both manifolds locally look like a line segment, but the circle has a closed, curved global structure.}
+\label{fig:1d-manifolds}
+\end{figure}
+
+\section{Distance Calculations on 1D Manifolds}
+
+\subsection{Distance on a 1D Plane (x-axis)}
+
+On a straight line (the x-axis), calculating the distance between two points is straightforward. Given two points $P_1$ at position $x_1$ and $P_2$ at position $x_2$, the distance is simply the absolute difference:
+
+\[
+d = |x_2 - x_1|
+\]
+
+This is the familiar Euclidean distance formula in one dimension. For example, if $P_1$ is at $x_1 = -1$ and $P_2$ is at $x_2 = 1.2$, then:
+
+\[
+d = |1.2 - (-1)| = |2.2| = 2.2
+\]
+
+\subsection{Distance on a 1D Circle}
+
+For a circle of radius $r$, calculating the distance between two points requires more consideration. The distance along the circle depends on the angle between the two points.
+
+\subsubsection{Exact Distance Using Arc Length}
+
+Given two points $P_1$ and $P_2$ on a circle, we can represent their positions using angles $\theta_1$ and $\theta_2$ measured from a reference axis. The distance along the circle (arc length) is:
+
+\[
+d = r \cdot \min(|\theta_2 - \theta_1|, 2\pi - |\theta_2 - \theta_1|)
+\]
+
+where we take the minimum to get the shorter arc between the two points. The angle difference $\theta = |\theta_2 - \theta_1|$ is measured in radians.
+
+For small angles, we can approximate this as:
+
+\[
+d \approx r \cdot \theta
+\]
+
+where $\theta$ is the angle between the two points in radians.
+
+\subsubsection{Using Cartesian Coordinates}
+
+If we know the Cartesian coordinates of the points on the circle, we can calculate the distance using trigonometric functions. For a circle centered at the origin with radius $r$, if point $P_1$ is at $(r\cos\theta_1, r\sin\theta_1)$ and $P_2$ is at $(r\cos\theta_2, r\sin\theta_2)$, then:
+
+\[
+\theta = \arccos\left(\frac{P_1 \cdot P_2}{r^2}\right) = \arccos(\cos\theta_1\cos\theta_2 + \sin\theta_1\sin\theta_2)
+\]
+
+Using the angle addition formula, this simplifies to:
+
+\[
+\theta = \arccos(\cos(\theta_2 - \theta_1)) = |\theta_2 - \theta_1|
+\]
+
+And the distance is:
+
+\[
+d = r \cdot |\theta_2 - \theta_1|
+\]
+
+\subsubsection{Example Calculation}
+
+Consider a circle with radius $r = 1.2$ units. If point $P_1$ is at angle $\theta_1 = 0$ (or $0^\circ$) and point $P_2$ is at angle $\theta_2 = \frac{\pi}{3}$ (or $60^\circ$), then:
+
+\[
+\theta = \left|\frac{\pi}{3} - 0\right| = \frac{\pi}{3} \text{ radians}
+\]
+
+Using the approximate formula $d = r \cdot \theta$:
+
+\[
+d = 1.2 \times \frac{\pi}{3} = 1.2 \times 1.047 \approx 1.256 \text{ units}
+\]
+
+For comparison, the straight-line (chord) distance would be:
+
+\[
+d_{\text{chord}} = \sqrt{(r\cos\theta_2 - r\cos\theta_1)^2 + (r\sin\theta_2 - r\sin\theta_1)^2}
+\]
+
+\[
+d_{\text{chord}} = r\sqrt{(\cos\theta - 1)^2 + \sin^2\theta} = r\sqrt{2 - 2\cos\theta} = 2r\sin\left(\frac{\theta}{2}\right)
+\]
+
+For $\theta = \frac{\pi}{3}$:
+
+\[
+d_{\text{chord}} = 2 \times 1.2 \times \sin\left(\frac{\pi}{6}\right) = 2.4 \times 0.5 = 1.2 \text{ units}
+\]
+
+Note that the arc distance ($d = 1.256$) is slightly longer than the chord distance ($d_{\text{chord}} = 1.2$), which is expected since the arc follows the curve of the circle.
+
+\section{Key Takeaways}
+
+\begin{itemize}
+\item A 1D plane (like the x-axis) is an open manifold where distance is simply the absolute difference between coordinates.
+\item A 1D circle is a closed manifold where distance is calculated using arc length: $d = r \cdot \theta$ for angle $\theta$ in radians.
+\item For small angles on a circle, the arc distance formula $d \approx r \cdot \theta$ provides a good approximation.
+\item The arc distance is always greater than or equal to the straight-line (chord) distance between two points on a circle.
+\end{itemize}

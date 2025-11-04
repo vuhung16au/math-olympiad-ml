@@ -1,0 +1,518 @@
+\chapter{Geodesics in 1D, 2D, and on a Sphere}
+
+In previous chapters, we calculated distances on manifolds and learned that these distances equal the lengths of geodesics. This chapter goes deeper: we'll derive geodesics systematically, solve the geodesic equations, and explore their properties. Instead of just stating what geodesics are, we'll learn \textit{how} to find them and \textit{why} they have their particular forms.
+
+\section{Introduction: From Distances to Paths}
+
+We've already established that:
+\begin{itemize}
+\item The distance between two points on a manifold equals the length of the geodesic connecting them.
+\item On a line, geodesics are straight segments.
+\item On a circle, geodesics are arcs.
+\item On a plane, geodesics are straight lines.
+\item On a sphere, geodesics are great circle arcs.
+\end{itemize}
+
+But \textit{how} do we know these are the geodesics? And \textit{how} can we find geodesics on more complex manifolds? This chapter answers these questions by introducing systematic methods for deriving geodesics.
+
+\section{Deriving Geodesics: The Variational Approach}
+
+\subsection{The Path Length Functional}
+
+A fundamental principle is that geodesics minimize path length. Mathematically, if we have a path $\gamma(t)$ between two points $P_1$ and $P_2$ on a manifold, its length is given by:
+
+\[
+L[\gamma] = \int_{t_1}^{t_2} \sqrt{g_{ij}\frac{dx^i}{dt}\frac{dx^j}{dt}} \, dt
+\]
+
+where $g_{ij}$ is the metric tensor encoding the geometry, and $x^i(t)$ are the coordinates of the path. A geodesic is a path that minimizes this functional.
+
+\subsection{The Euler-Lagrange Equations}
+
+To find paths that minimize $L[\gamma]$, we use the calculus of variations. The Euler-Lagrange equations tell us that if a path minimizes an integral $\int L(x, \dot{x}, t) \, dt$, then:
+
+\[
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}^i}\right) - \frac{\partial L}{\partial x^i} = 0
+\]
+
+For the path length functional, this leads to the geodesic equation. Let's see how this works for simple manifolds.
+
+\subsection{Applying Variational Calculus: 1D Line}
+
+On a 1D line, the metric is simply $g_{11} = 1$, so the path length is:
+
+\[
+L = \int_{t_1}^{t_2} \left|\frac{dx}{dt}\right| \, dt = \int_{t_1}^{t_2} \sqrt{\left(\frac{dx}{dt}\right)^2} \, dt
+\]
+
+The Lagrangian is $L = \sqrt{(\dot{x})^2} = |\dot{x}|$. For a smooth path, we can assume $\dot{x} > 0$ (or reverse the parameterization), so $L = \dot{x}$.
+
+The Euler-Lagrange equation gives:
+\[
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}}\right) - \frac{\partial L}{\partial x} = \frac{d}{dt}(1) - 0 = 0
+\]
+
+This is automatically satisfied! But we need to consider the full functional. Actually, for the path length, we should use $L = (\dot{x})^2$ (minimizing squared length is equivalent), which gives:
+
+\[
+\frac{d}{dt}(2\dot{x}) = 0 \quad \Rightarrow \quad \ddot{x} = 0
+\]
+
+This means $\dot{x}$ is constant, so $x(t) = at + b$—a straight line! This confirms that geodesics on a line are straight segments.
+
+\subsection{Applying Variational Calculus: 2D Plane}
+
+On a 2D plane with Cartesian coordinates, the metric is $g_{ij} = \delta_{ij}$ (the identity matrix), so:
+
+\[
+L = \int \sqrt{(\dot{x})^2 + (\dot{y})^2} \, dt
+\]
+
+Using the squared length approach (minimizing $(\dot{x})^2 + (\dot{y})^2$), the Euler-Lagrange equations give:
+
+\[
+\ddot{x} = 0, \quad \ddot{y} = 0
+\]
+
+This means both $x(t)$ and $y(t)$ are linear functions, so the path is a straight line: $\mathbf{r}(t) = \mathbf{p}_1 + t(\mathbf{p}_2 - \mathbf{p}_1)$.
+
+\section{Solving the Geodesic Equation}
+
+\subsection{The Geodesic Equation in Detail}
+
+The geodesic equation is:
+
+\[
+\frac{d^2 x^i}{dt^2} + \Gamma^i_{jk}\frac{dx^j}{dt}\frac{dx^k}{dt} = 0
+\]
+
+where $\Gamma^i_{jk}$ are the \textbf{Christoffel symbols}, which encode how the metric changes with position. They are given by:
+
+\[
+\Gamma^i_{jk} = \frac{1}{2}g^{il}\left(\frac{\partial g_{jl}}{\partial x^k} + \frac{\partial g_{kl}}{\partial x^j} - \frac{\partial g_{jk}}{\partial x^l}\right)
+\]
+
+where $g^{il}$ is the inverse of the metric tensor.
+
+\subsection{Solving for a 1D Line}
+
+On a line, the metric is constant: $g_{11} = 1$. Therefore, all partial derivatives vanish, so $\Gamma^1_{11} = 0$.
+
+The geodesic equation becomes:
+\[
+\frac{d^2 x}{dt^2} = 0
+\]
+
+Solving this: $\dot{x} = \text{constant}$, so $x(t) = x_0 + vt$. This is a straight line with constant velocity, confirming our earlier result.
+
+\subsection{Solving for a 2D Plane}
+
+In Cartesian coordinates, the metric is $g_{ij} = \delta_{ij}$, which is constant. Therefore, all Christoffel symbols vanish: $\Gamma^i_{jk} = 0$.
+
+The geodesic equations become:
+\[
+\frac{d^2 x}{dt^2} = 0, \quad \frac{d^2 y}{dt^2} = 0
+\]
+
+Solutions: $x(t) = x_0 + v_x t$, $y(t) = y_0 + v_y t$. This describes a straight line in the plane.
+
+\subsection{Solving for a 1D Circle}
+
+A circle of radius $r$ can be parameterized by angle $\theta$. The metric is $g_{\theta\theta} = r^2$ (constant), so $\Gamma^\theta_{\theta\theta} = 0$.
+
+The geodesic equation becomes:
+\[
+\frac{d^2 \theta}{dt^2} = 0
+\]
+
+Solution: $\theta(t) = \theta_0 + \omega t$, where $\omega$ is constant. This describes uniform motion along the circle—a geodesic arc.
+
+\subsection{Solving for a 2D Sphere}
+
+On a sphere of radius $R$, using spherical coordinates $(\phi, \lambda)$ (latitude, longitude), the metric is:
+
+\[
+ds^2 = R^2(d\phi^2 + \sin^2\phi \, d\lambda^2)
+\]
+
+The Christoffel symbols are non-zero. The geodesic equations become:
+
+\begin{align}
+\frac{d^2\phi}{dt^2} - \sin\phi\cos\phi\left(\frac{d\lambda}{dt}\right)^2 &= 0 \\
+\frac{d^2\lambda}{dt^2} + 2\cot\phi\frac{d\phi}{dt}\frac{d\lambda}{dt} &= 0
+\end{align}
+
+These equations are more complex, but their solutions describe great circles. One can verify that paths with constant $\lambda$ (lines of longitude) and the equator ($\phi = 0$) are solutions, representing great circles.
+
+A more elegant approach uses the fact that great circles are intersections of the sphere with planes through the center, which we'll explore in the next section.
+
+\section{Geometric Construction of Geodesics}
+
+\subsection{Construction Methods}
+
+Sometimes it's easier to construct geodesics geometrically rather than solving differential equations. Let's see how this works for each manifold.
+
+\subsubsection{1D Line}
+
+Trivial: the geodesic is simply the straight line segment connecting the two points.
+
+\subsubsection{1D Circle}
+
+Given two points on a circle, there are two arcs connecting them. The geodesic is the shorter arc. If the points are antipodal, both arcs are geodesics of equal length.
+
+\subsubsection{2D Plane}
+
+The geodesic is the straight line segment. This can be constructed using a ruler or by drawing the line through the two points.
+
+\subsubsection{2D Sphere: Great Circle Construction}
+
+For a sphere, geodesics are great circles. Here's how to construct the great circle through two points $P_1$ and $P_2$:
+
+\begin{enumerate}
+\item Consider the sphere centered at the origin.
+\item The two points define vectors $\mathbf{p}_1$ and $\mathbf{p}_2$ from the center.
+\item The great circle lies in the plane containing the origin, $P_1$, and $P_2$.
+\item This plane is perpendicular to the normal vector $\mathbf{n} = \mathbf{p}_1 \times \mathbf{p}_2$.
+\item The intersection of this plane with the sphere is the great circle.
+\item The geodesic is the shorter arc of this great circle connecting $P_1$ and $P_2$.
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.2]
+  % Draw sphere
+  \shade[ball color=bookpurple!30] (1.5,1) circle (1cm);
+  \draw[bookpurple, thick] (1.5,1) circle (1cm);
+  % Mark center
+  \filldraw[bookpurple] (1.5,1) circle (1.5pt) node[below] {Center};
+  % Mark two points
+  \filldraw[bookred] (0.8,0.7) coordinate (P1) circle (2pt) node[below left] {$P_1$};
+  \filldraw[bookred] (2.2,1.3) coordinate (P2) circle (2pt) node[above right] {$P_2$};
+  % Draw vectors from center
+  \draw[bookpurple!50, dashed] (1.5,1) -- (P1);
+  \draw[bookpurple!50, dashed] (1.5,1) -- (P2);
+  % Draw great circle arc (geodesic)
+  \draw[bookred, very thick] (P1) arc (225:45:1.5);
+  % Show the plane (as a line through center)
+  \draw[bookpurple!30, thick, dashed] (0.3,0.5) -- (2.7,1.5);
+  \node[above] at (1.5, 2.2) {\textbf{(a) Great Circle Construction}};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.2]
+  % Show cross-section: plane cutting sphere
+  \draw[bookpurple, thick] (1.5,0.5) arc (180:0:1.5 and 0.5);
+  \draw[bookpurple, thick] (1.5,1.5) arc (180:0:1.5 and 0.5);
+  \draw[bookpurple, thick] (0,1) -- (3,1);
+  % Draw the cutting plane
+  \draw[bookpurple!40, fill=bookpurple!20, opacity=0.5] (0,0.5) -- (3,1.5) -- (3,0.5) -- (0,1.5) -- cycle;
+  % Mark intersection (great circle)
+  \draw[bookred, very thick] (0.5,0.75) arc (180:0:1 and 0.25);
+  % Mark two points
+  \filldraw[bookred] (0.5,0.75) circle (2pt) node[left] {$P_1$};
+  \filldraw[bookred] (2.5,1.25) circle (2pt) node[right] {$P_2$};
+  % Mark center
+  \filldraw[bookpurple] (1.5,1) circle (1.5pt) node[above] {Center};
+  \node[above] at (1.5, 2.2) {\textbf{(b) Cross-Section View}};
+  \node[below] at (1.5, -0.3) {\small Plane through center};
+\end{tikzpicture}
+\end{minipage}
+\caption{Constructing a great circle geodesic on a sphere: (a) The great circle is the intersection of the sphere with a plane through the center and both points. (b) Cross-section showing how the plane cuts the sphere.}
+\label{fig:great-circle-construction}
+\end{figure}
+
+This geometric construction is often more intuitive than solving differential equations and directly shows why great circles are geodesics.
+
+\subsection{Coordinate-Free Description}
+
+Geodesics are \textbf{intrinsic} to the manifold—they depend only on the metric, not on how the manifold is embedded in higher-dimensional space. For example, great circles on a sphere are geodesics regardless of how we view the sphere in 3D space. This is a fundamental property of Riemannian geometry.
+
+\section{Multiple Geodesics and Special Cases}
+
+\subsection{When Are There Multiple Geodesics?}
+
+Not all pairs of points have a unique geodesic. Let's examine when multiple geodesics exist:
+
+\begin{itemize}
+\item \textbf{1D Line}: Always exactly one geodesic (the straight line segment).
+
+\item \textbf{1D Circle}: 
+  \begin{itemize}
+  \item Usually one geodesic (the shorter arc).
+  \item If points are antipodal: two geodesics of equal length (both semicircles).
+  \end{itemize}
+
+\item \textbf{2D Plane}: Always exactly one geodesic (the straight line).
+
+\item \textbf{2D Sphere}:
+  \begin{itemize}
+  \item Usually one shortest geodesic (the shorter great circle arc).
+  \item If points are antipodal: infinitely many geodesics (all great circles through them have the same length: $\pi R$).
+  \item The longer great circle arc is also a geodesic, but not the shortest one.
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % Circle with antipodal points
+  \draw[bookpurple, thick] (0,0) circle (1.2cm);
+  % Mark antipodal points
+  \filldraw[bookred] (1.2,0) coordinate (P1) circle (2pt) node[right] {$P_1$};
+  \filldraw[bookred] (-1.2,0) coordinate (P2) circle (2pt) node[left] {$P_2$};
+  % Draw two geodesics (semicircles)
+  \draw[bookred, very thick] (P1) arc (0:180:1.2);
+  \draw[bookred!50, very thick, dashed] (P1) arc (0:-180:1.2);
+  \node[above] at (0, 1.5) {\textbf{(a) Antipodal on Circle}};
+  \node[below] at (0, -1.7) {\small Two equal geodesics};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % Sphere with antipodal points
+  \shade[ball color=bookpurple!30] (1.5,1) circle (1cm);
+  \draw[bookpurple, thick] (1.5,1) circle (1cm);
+  % Mark antipodal points (top and bottom)
+  \filldraw[bookred] (1.5,2) circle (2pt) node[above] {$P_1$};
+  \filldraw[bookred] (1.5,0) circle (2pt) node[below] {$P_2$};
+  % Draw several great circles through them
+  \draw[bookred, very thick] (1.5,2) arc (90:270:1.5);
+  \draw[bookred!70, very thick] (0.5,1) arc (180:360:1.5);
+  \draw[bookred!40, very thick, dashed] (2.5,1) arc (0:180:1.5);
+  \node[above] at (1.5, 2.5) {\textbf{(b) Antipodal on Sphere}};
+  \node[below] at (1.5, -0.5) {\small Infinitely many geodesics};
+\end{tikzpicture}
+\end{minipage}
+\caption{Multiple geodesics: (a) On a circle, antipodal points have two geodesics of equal length. (b) On a sphere, antipodal points have infinitely many geodesics (all great circles through them).}
+\label{fig:multiple-geodesics}
+\end{figure}
+
+\subsection{Conjugate Points and Cut Locus}
+
+The set of points where geodesics cease to be unique is called the \textbf{cut locus}. For example:
+\begin{itemize}
+\item On a circle, the cut locus of a point is its antipodal point.
+\item On a sphere, the cut locus of a point is its antipodal point.
+\end{itemize}
+
+At these special points, the geometry becomes degenerate in the sense that multiple geodesics have the same length.
+
+\section{Geodesics in Different Coordinate Systems}
+
+\subsection{Coordinate Transformations}
+
+Geodesics are geometric objects—they exist independently of coordinate systems. However, their descriptions change with coordinates. Let's see how the same geodesic looks in different coordinate systems.
+
+\subsubsection{Example: Straight Line in Different Coordinates}
+
+Consider a straight line in the plane. In Cartesian coordinates $(x, y)$, it's simply:
+\[
+y = mx + b
+\]
+
+In polar coordinates $(r, \theta)$, the same line becomes:
+\[
+r = \frac{b}{\sin\theta - m\cos\theta}
+\]
+
+This is more complex, but it's the same geometric object.
+
+\subsubsection{Example: Great Circle on Sphere}
+
+A great circle on a sphere can be described in:
+\begin{itemize}
+\item \textbf{Cartesian coordinates}: $ax + by + cz = 0$ (plane through origin)
+\item \textbf{Spherical coordinates}: More complex, but the geodesic equation we solved earlier describes it.
+\end{itemize}
+
+The key insight: the geodesic equation transforms covariantly, so solving it in any coordinate system gives the same geometric geodesic.
+
+\subsection{Natural Parameterization}
+
+A particularly useful parameterization is the \textbf{arc length parameter} $s$. In this parameterization, the speed along the geodesic is constant (equal to 1), so:
+
+\[
+\left|\frac{d\mathbf{r}}{ds}\right| = 1
+\]
+
+For example:
+\begin{itemize}
+\item On a line: $x(s) = x_0 + s$ (if we choose appropriate orientation).
+\item On a circle: $\theta(s) = \theta_0 + s/r$ (uniform angular speed).
+\item On a plane: $\mathbf{r}(s) = \mathbf{r}_0 + s\mathbf{u}$ where $|\mathbf{u}| = 1$.
+\end{itemize}
+
+This parameterization simplifies many calculations and is often used in differential geometry.
+
+\section{Properties and Characteristics of Geodesics}
+
+\subsection{Local vs Global Properties}
+
+\subsubsection{Local Minimality}
+
+Geodesics are \textbf{locally shortest}: if you take a small enough neighborhood around any point on a geodesic, it's the shortest path between its endpoints in that neighborhood.
+
+\subsubsection{Global Minimality}
+
+On simply connected manifolds (like a plane or sphere), geodesics are also \textbf{globally shortest}—they minimize distance among all possible paths. However, there can be exceptions:
+
+\begin{itemize}
+\item On a sphere, the longer great circle arc is a geodesic but not the shortest path.
+\item On a torus, there can be multiple geodesics between two points, and the shortest one depends on how the geodesic wraps around.
+\end{itemize}
+
+\subsection{Geodesic Completeness}
+
+A manifold is \textbf{geodesically complete} if every geodesic can be extended indefinitely (in both directions). Examples:
+
+\begin{itemize}
+\item \textbf{Line}: Complete—geodesics extend to $\pm\infty$.
+\item \textbf{Circle}: Complete—geodesics are closed (they loop around).
+\item \textbf{Plane}: Complete—geodesics extend infinitely.
+\item \textbf{Sphere}: Complete—geodesics are closed (great circles).
+\end{itemize}
+
+Geodesic completeness is an important property that relates to the global structure of the manifold.
+
+\subsection{Geodesic Curvature}
+
+Geodesics have \textbf{zero geodesic curvature}—they are "as straight as possible" on the manifold. This is an intrinsic property. However, they may appear curved when viewed from an embedding space:
+
+\begin{itemize}
+\item A great circle on a sphere has zero geodesic curvature (intrinsic).
+\item But it appears curved when viewed in 3D space (extrinsic curvature).
+\end{itemize}
+
+This distinction between intrinsic and extrinsic geometry is fundamental to understanding manifolds.
+
+\section{Worked Examples: Systematic Derivation}
+
+\subsection{Example 1: Circle Geodesic via Variational Method}
+
+Let's derive that arcs are geodesics on a circle using the variational approach.
+
+\textbf{Setup}: Circle of radius $r$, parameterized by angle $\theta$. The metric is $g_{\theta\theta} = r^2$.
+
+\textbf{Path length functional}:
+\[
+L = \int \sqrt{r^2\left(\frac{d\theta}{dt}\right)^2} \, dt = r\int \left|\frac{d\theta}{dt}\right| \, dt
+\]
+
+For smooth paths, we can use $L = r\int (\dot{\theta})^2 \, dt$ (minimizing squared length).
+
+\textbf{Euler-Lagrange equation}:
+\[
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\theta}}\right) - \frac{\partial L}{\partial \theta} = \frac{d}{dt}(2r^2\dot{\theta}) = 0
+\]
+
+This gives $\ddot{\theta} = 0$, so $\theta(t) = \theta_0 + \omega t$—uniform motion along the circle, which describes an arc. This confirms that arcs are geodesics on a circle.
+
+\subsection{Example 2: Sphere Geodesic via Geometric Construction}
+
+Let's construct the great circle through two points on a sphere.
+
+\textbf{Setup}: Sphere of radius $R$, points $P_1$ and $P_2$ with position vectors $\mathbf{p}_1$ and $\mathbf{p}_2$.
+
+\textbf{Construction}:
+\begin{enumerate}
+\item The normal to the plane containing the great circle is $\mathbf{n} = \mathbf{p}_1 \times \mathbf{p}_2$.
+\item The plane equation is $\mathbf{n} \cdot \mathbf{r} = 0$ (passes through origin).
+\item The intersection of this plane with the sphere $|\mathbf{r}| = R$ is the great circle.
+\item The geodesic is the shorter arc of this great circle.
+\end{enumerate}
+
+This geometric construction is often simpler than solving differential equations and directly shows why great circles are geodesics.
+
+\subsection{Example 3: Coordinate Transformation}
+
+Let's verify that a straight line geodesic on a plane transforms correctly under coordinate changes.
+
+\textbf{In Cartesian coordinates}: Geodesic is $y = 2x + 1$ (straight line).
+
+\textbf{In polar coordinates}: $x = r\cos\theta$, $y = r\sin\theta$. Substituting:
+\[
+r\sin\theta = 2r\cos\theta + 1
+\]
+
+Solving for $r$:
+\[
+r = \frac{1}{\sin\theta - 2\cos\theta}
+\]
+
+This is the same geodesic, just described in different coordinates. The geodesic equation, when transformed to polar coordinates, will give this same result.
+
+\section{Comparison Across Manifolds: Deeper Insights}
+
+\subsection{Systematic Comparison}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Manifold} & \textbf{Curvature} & \textbf{Geodesic Type} & \textbf{Uniqueness} & \textbf{Completeness} \\
+\midrule
+1D Line & Zero & Straight line & Always unique & Complete \\
+1D Circle & Positive & Arc & Unique (except antipodal) & Complete \\
+2D Plane & Zero & Straight line & Always unique & Complete \\
+2D Sphere & Positive & Great circle arc & Unique shortest & Complete \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of geodesic properties across different manifolds.}
+\label{tab:geodesic-comparison}
+\end{table}
+
+\subsection{Unifying Principles}
+
+Despite their differences, all geodesics share fundamental properties:
+
+\begin{enumerate}
+\item \textbf{Minimization}: They minimize path length (or are critical points of the length functional).
+
+\item \textbf{Differential equation}: They satisfy the geodesic equation $\ddot{x}^i + \Gamma^i_{jk}\dot{x}^j\dot{x}^k = 0$.
+
+\item \textbf{Local straightness}: They have zero geodesic curvature—they're "as straight as possible" on the manifold.
+
+\item \textbf{Coordinate independence}: They are geometric objects, independent of coordinate choices.
+
+\item \textbf{Intrinsic nature}: They depend only on the metric (intrinsic geometry), not on embeddings.
+\end{enumerate}
+
+These unifying principles allow us to study geodesics on any manifold, not just the simple ones we've explored here.
+
+\section{Key Takeaways}
+
+\begin{itemize}
+\item \textbf{Systematic derivation}: Geodesics can be derived using variational calculus (minimizing path length) or by solving the geodesic differential equation.
+
+\item \textbf{Variational approach}: The Euler-Lagrange equations applied to the path length functional yield the geodesic equation.
+
+\item \textbf{Geodesic equation}: $\ddot{x}^i + \Gamma^i_{jk}\dot{x}^j\dot{x}^k = 0$ describes geodesics, where Christoffel symbols $\Gamma^i_{jk}$ encode the geometry.
+
+\item \textbf{Geometric construction}: On spheres, great circles can be constructed as intersections with planes through the center—often simpler than solving equations.
+
+\item \textbf{Multiple geodesics}: Some manifolds (circle, sphere) have multiple geodesics between certain point pairs (antipodal points).
+
+\item \textbf{Coordinate independence}: Geodesics are geometric objects—their descriptions change with coordinates, but the geodesics themselves are invariant.
+
+\item \textbf{Unifying principles}: All geodesics minimize length, satisfy the geodesic equation, have zero geodesic curvature, and are intrinsic to the manifold.
+\end{itemize}
+
+\section{What's Next?}
+
+The methods we've developed here extend to more complex manifolds:
+\begin{itemize}
+\item \textbf{Torus}: Geodesics can wrap around in multiple ways, leading to rich behavior.
+\item \textbf{General surfaces}: Numerical methods are often needed to find geodesics.
+\item \textbf{Riemannian geometry}: The general theory provides tools for any manifold with a metric.
+\item \textbf{Applications}: Geodesics appear in general relativity (spacetime paths), robotics (path planning), and computer graphics (surface rendering).
+\end{itemize}
+
+Understanding geodesics on simple manifolds provides the foundation for these advanced topics.

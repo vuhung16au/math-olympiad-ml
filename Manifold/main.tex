@@ -1,0 +1,50 @@
+\documentclass[12pt,oneside]{book}
+
+% Basic packages
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{microtype}
+
+% DL101 Style packages (load in dependency order)
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-base}
+\usepackage{styles/dl101-fonts}
+\usepackage{styles/dl101-boxes}
+\usepackage{styles/dl101-theorems}
+\usepackage{styles/dl101-header-footer}
+\usepackage{styles/dl101-chapter-pages}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/keytheorems}
+
+\title{Manifold: An Intuitive Introduction}
+\author{Vu Hung Nguyen}
+\date{\today}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+
+\input{frontmatter/preface}
+
+\mainmatter
+
+\include{chapters/00-Overview}
+\include{chapters/01-What-is-a-Manifold}
+\include{chapters/02-1D-Manifold-Examples}
+\include{chapters/03-2D-Manifold-Examples}
+\include{chapters/04-Why-Not-a-Cone}
+\include{chapters/05-Geodesics-Introduction}
+\include{chapters/06-Geodesics-1D-2D-Sphere}
+\include{chapters/07-Distance-on-Sphere}
+\include{chapters/08-Open-n-Ball}
+\include{chapters/10-Manifolds-in-Generative-AI}
+\include{chapters/11-Glossary}
+
+\appendix
+\include{appendices/A-Summary-Table}
+\include{appendices/B-Metaphors-and-Intuition}
+
+\backmatter
+\input{backmatter/references}
+
+\end{document}
