@@ -397,6 +397,7 @@ This distinction between intrinsic and extrinsic geometry is fundamental to unde
 
 \subsection{Example 1: Circle Geodesic via Variational Method}
 
+\begin{example}
 Let's derive that arcs are geodesics on a circle using the variational approach.
 
 \textbf{Setup}: Circle of radius $r$, parameterized by angle $\theta$. The metric is $g_{\theta\theta} = r^2$.
@@ -414,9 +415,11 @@ For smooth paths, we can use $L = r\int (\dot{\theta})^2 \, dt$ (minimizing squa
 \]
 
 This gives $\ddot{\theta} = 0$, so $\theta(t) = \theta_0 + \omega t$—uniform motion along the circle, which describes an arc. This confirms that arcs are geodesics on a circle.
+\end{example}
 
 \subsection{Example 2: Sphere Geodesic via Geometric Construction}
 
+\begin{example}
 Let's construct the great circle through two points on a sphere.
 
 \textbf{Setup}: Sphere of radius $R$, points $P_1$ and $P_2$ with position vectors $\mathbf{p}_1$ and $\mathbf{p}_2$.
@@ -430,9 +433,11 @@ Let's construct the great circle through two points on a sphere.
 \end{enumerate}
 
 This geometric construction is often simpler than solving differential equations and directly shows why great circles are geodesics.
+\end{example}
 
 \subsection{Example 3: Coordinate Transformation}
 
+\begin{example}
 Let's verify that a straight line geodesic on a plane transforms correctly under coordinate changes.
 
 \textbf{In Cartesian coordinates}: Geodesic is $y = 2x + 1$ (straight line).
@@ -448,6 +453,7 @@ r = \frac{1}{\sin\theta - 2\cos\theta}
 \]
 
 This is the same geodesic, just described in different coordinates. The geodesic equation, when transformed to polar coordinates, will give this same result.
+\end{example}
 
 \section{Comparison Across Manifolds: Deeper Insights}
 
@@ -487,8 +493,7 @@ Despite their differences, all geodesics share fundamental properties:
 
 These unifying principles allow us to study geodesics on any manifold, not just the simple ones we've explored here.
 
-\section{Key Takeaways}
-
+\begin{keytakeaways}
 \begin{itemize}
 \item \textbf{Systematic derivation}: Geodesics can be derived using variational calculus (minimizing path length) or by solving the geodesic differential equation.
 
@@ -504,6 +509,7 @@ These unifying principles allow us to study geodesics on any manifold, not just 
 
 \item \textbf{Unifying principles}: All geodesics minimize length, satisfy the geodesic equation, have zero geodesic curvature, and are intrinsic to the manifold.
 \end{itemize}
+\end{keytakeaways}
 
 \section{What's Next?}
 

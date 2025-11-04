@@ -120,7 +120,9 @@ In one dimension, an open ball is simply an open interval on the real line.
 \label{fig:1d-ball}
 \end{figure}
 
-\textbf{Example}: If $p = 0$ and $r = 2$, then $B_2(0) = (-2, 2)$ is the open interval from $-2$ to $2$, excluding the endpoints.
+\begin{example}
+If $p = 0$ and $r = 2$, then $B_2(0) = (-2, 2)$ is the open interval from $-2$ to $2$, excluding the endpoints.
+\end{example}
 
 \subsection{2D Open Ball (Open Disk)}
 
@@ -168,7 +170,9 @@ In two dimensions, an open ball is a disk (circle's interior) without its bounda
 \label{fig:2d-ball}
 \end{figure}
 
-\textbf{Example}: The unit disk centered at the origin is $B_1(\mathbf{0}) = \{(x,y) : x^2 + y^2 < 1\}$.
+\begin{example}
+The unit disk centered at the origin is $B_1(\mathbf{0}) = \{(x,y) : x^2 + y^2 < 1\}$.
+\end{example}
 
 \subsection{3D Open Ball (Open Sphere)}
 
@@ -195,7 +199,9 @@ In three dimensions, an open ball is the interior of a sphere (without its surfa
 \label{fig:3d-ball}
 \end{figure}
 
-\textbf{Example}: The unit ball centered at the origin is $B_1(\mathbf{0}) = \{(x,y,z) : x^2 + y^2 + z^2 < 1\}$.
+\begin{example}
+The unit ball centered at the origin is $B_1(\mathbf{0}) = \{(x,y,z) : x^2 + y^2 + z^2 < 1\}$.
+\end{example}
 
 \subsection{n-Dimensional Open Ball}
 
@@ -295,10 +301,12 @@ In a 1D open ball (interval), the distance is simply:
 d(p, q) = |p - q|
 \]
 
-\textbf{Example}: In the open interval $(-2, 2)$, the distance between $p = -1$ and $q = 1.5$ is:
+\begin{example}
+In the open interval $(-2, 2)$, the distance between $p = -1$ and $q = 1.5$ is:
 \[
 d(-1, 1.5) = |1.5 - (-1)| = 2.5
 \]
+\end{example}
 
 \subsubsection{2D Distance}
 
@@ -308,10 +316,12 @@ In a 2D open ball (disk), the distance is:
 d(\mathbf{p}, \mathbf{q}) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2}
 \]
 
-\textbf{Example}: In the unit disk centered at the origin, for points $\mathbf{p} = (0.3, 0.4)$ and $\mathbf{q} = (0.7, 0.2)$:
+\begin{example}
+In the unit disk centered at the origin, for points $\mathbf{p} = (0.3, 0.4)$ and $\mathbf{q} = (0.7, 0.2)$:
 \[
 d = \sqrt{(0.7-0.3)^2 + (0.2-0.4)^2} = \sqrt{0.16 + 0.04} = \sqrt{0.2} \approx 0.447
 \]
+\end{example}
 
 \subsubsection{3D Distance}
 
@@ -321,10 +331,12 @@ In a 3D open ball, the distance is:
 d(\mathbf{p}, \mathbf{q}) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2 + (p_z - q_z)^2}
 \]
 
-\textbf{Example}: In the unit ball, for points $\mathbf{p} = (0.5, 0.5, 0.5)$ and $\mathbf{q} = (0.8, 0.3, 0.6)$:
+\begin{example}
+In the unit ball, for points $\mathbf{p} = (0.5, 0.5, 0.5)$ and $\mathbf{q} = (0.8, 0.3, 0.6)$:
 \[
 d = \sqrt{(0.3)^2 + (-0.2)^2 + (0.1)^2} = \sqrt{0.09 + 0.04 + 0.01} = \sqrt{0.14} \approx 0.374
 \]
+\end{example}
 
 \subsubsection{n-Dimensional Distance}
 
@@ -532,6 +544,7 @@ Open balls are not the only open sets that could work for manifolds, but they're
 
 \subsection{Example 1: Is a Point in an Open Ball?}
 
+\begin{example}
 \textbf{Question}: Is the point $(2, 3)$ in the open ball centered at $(1, 1)$ with radius $r = 2.5$?
 
 \textbf{Solution}: Check if the distance is less than the radius:
@@ -541,9 +554,11 @@ d((2,3), (1,1)) = \sqrt{(2-1)^2 + (3-1)^2} = \sqrt{1 + 4} = \sqrt{5} \approx 2.2
 \]
 
 Since $2.236 < 2.5$, the point $(2, 3)$ is inside the open ball.
+\end{example}
 
 \subsection{Example 2: Distance Between Two Points in a Ball}
 
+\begin{example}
 \textbf{Question}: Calculate the distance between points $(0.5, 0.5)$ and $(0.8, 0.7)$ in the unit ball $B_1(\mathbf{0})$.
 
 \textbf{Solution}: First, verify both points are in the unit ball:
@@ -559,19 +574,21 @@ Now calculate the distance between $(0.5, 0.5)$ and $(0.6, 0.6)$:
 \[
 d = \sqrt{(0.6-0.5)^2 + (0.6-0.5)^2} = \sqrt{0.01 + 0.01} = \sqrt{0.02} \approx 0.141
 \]
+\end{example}
 
 Both points are in the unit ball, and their distance is approximately $0.141$.
 
 \subsection{Example 3: Finding the Largest Contained Ball}
 
+\begin{example}
 \textbf{Question}: Given a rectangular region $R = \{(x,y) : 0 < x < 3, 0 < y < 2\}$, what's the largest open ball that fits entirely in $R$?
 
 \textbf{Solution}: The largest ball will be limited by the closest boundary. The center should be at the center of the rectangle: $(1.5, 1.0)$. The distance to the nearest boundary is $\min(1.5, 1.0, 1.5, 1.0) = 1.0$.
 
 So the largest open ball is $B_1((1.5, 1.0))$ with radius $r = 1.0$.
+\end{example}
 
-\section{Key Takeaways}
-
+\begin{keytakeaways}
 \begin{itemize}
 \item \textbf{Definition}: An open n-ball $B_r(\mathbf{p})$ is the set of points within distance $r$ of center $\mathbf{p}$, with the boundary excluded.
 
@@ -587,6 +604,7 @@ So the largest open ball is $B_1((1.5, 1.0))$ with radius $r = 1.0$.
 
 \item \textbf{Standard neighborhoods}: Open balls are the fundamental neighborhoods in Euclidean space, making them the natural choice for manifold definitions.
 \end{itemize}
+\end{keytakeaways}
 
 \section{What's Next?}
 

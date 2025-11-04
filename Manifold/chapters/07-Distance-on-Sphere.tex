@@ -156,10 +156,12 @@ d = R \cdot \arccos(\cos(\phi_2 - \phi_1)) = R \cdot |\phi_2 - \phi_1|
 
 \textbf{Result}: $d = R \cdot |\phi_2 - \phi_1|$ (latitude difference in radians).
 
-\textbf{Example}: If $\phi_1 = 30^\circ$ and $\phi_2 = 60^\circ$ on the same meridian, with $R = 6371$ km:
+\begin{example}
+If $\phi_1 = 30^\circ$ and $\phi_2 = 60^\circ$ on the same meridian, with $R = 6371$ km:
 \[
 d = 6371 \times \left|\frac{\pi}{6} - \frac{\pi}{3}\right| = 6371 \times \frac{\pi}{6} \approx 3336 \text{ km}
 \]
+\end{example}
 
 \subsection{Points on the Same Parallel (Latitude)}
 
@@ -184,7 +186,9 @@ d = R \cdot \cos\phi \cdot |\Delta\lambda|
 
 \textbf{Interpretation}: The effective radius at latitude $\phi$ is $R\cos\phi$, which decreases as we move away from the equator. This makes sense because circles of latitude get smaller as we approach the poles.
 
-\textbf{Example}: At latitude $60^\circ$ ($\phi = \pi/3$), the effective radius is $R\cos(\pi/3) = R/2$. So a longitude difference of $1^\circ$ corresponds to a distance of approximately $R \cdot \frac{1}{2} \cdot \frac{\pi}{180} \approx 55.6$ km, compared to about $111$ km at the equator.
+\begin{example}
+At latitude $60^\circ$ ($\phi = \pi/3$), the effective radius is $R\cos(\pi/3) = R/2$. So a longitude difference of $1^\circ$ corresponds to a distance of approximately $R \cdot \frac{1}{2} \cdot \frac{\pi}{180} \approx 55.6$ km, compared to about $111$ km at the equator.
+\end{example}
 
 \subsection{Points Near Poles}
 
@@ -199,7 +203,9 @@ When points are near the poles, special numerical considerations are needed.
 \item Use special polar coordinate transformations.
 \end{itemize}
 
-\textbf{Example}: Two points near the North Pole at $89^\circ$ N, with longitudes $0^\circ$ and $180^\circ$. The great circle distance is approximately $2R \times (90^\circ - 89^\circ) = 2R \times \frac{\pi}{180} \approx 222$ km, which is much smaller than the distance along the parallel ($\pi R \approx 20,015$ km).
+\begin{example}
+Two points near the North Pole at $89^\circ$ N, with longitudes $0^\circ$ and $180^\circ$. The great circle distance is approximately $2R \times (90^\circ - 89^\circ) = 2R \times \frac{\pi}{180} \approx 222$ km, which is much smaller than the distance along the parallel ($\pi R \approx 20,015$ km).
+\end{example}
 
 \subsection{Antipodal Points}
 
@@ -233,7 +239,9 @@ where $\phi$ is the mean latitude.
 
 \textbf{When valid}: This approximation is accurate to within about 1\% for distances up to about 100 km, and within 0.1\% for distances up to about 20 km.
 
-\textbf{Example}: For two points 10 km apart at latitude $45^\circ$, the flat Earth approximation gives results accurate to within a few meters.
+\begin{example}
+For two points 10 km apart at latitude $45^\circ$, the flat Earth approximation gives results accurate to within a few meters.
+\end{example}
 
 \subsection{Very Large Distances}
 
@@ -333,7 +341,9 @@ Floating-point arithmetic can introduce errors in distance calculations.
 
 \textbf{arccos issues}: When the argument of $\arccos$ is near $-1$ or $1$, small floating-point errors can cause large errors in the result.
 
-\textbf{Example}: If $\cos\theta = -0.9999999999$ (due to rounding), then $\theta = \arccos(-0.9999999999) \approx 1.414 \times 10^{-5}$ radians, but the true value might be slightly different, leading to distance errors.
+\begin{example}
+If $\cos\theta = -0.9999999999$ (due to rounding), then $\theta = \arccos(-0.9999999999) \approx 1.414 \times 10^{-5}$ radians, but the true value might be slightly different, leading to distance errors.
+\end{example}
 
 \textbf{Solution}: Use the haversine formula, which uses $\arcsin$ and is more stable. The $\arcsin$ function is well-behaved near $0$ and $\pi/2$.
 
@@ -410,6 +420,7 @@ The \textbf{bearing} (or azimuth) is the initial direction from one point to ano
 
 \subsection{Example 1: Multiple Cities Route}
 
+\begin{example}
 Calculate the total distance for a multi-city route: London → New York → Los Angeles → Tokyo.
 
 \textbf{Given coordinates}:
@@ -430,9 +441,11 @@ d_{\text{total}} &\approx 18,281 \text{ km}
 \end{align}
 
 \textbf{Note}: This is the great circle route distance. Actual flight paths may differ due to air traffic control, weather, and other factors.
+\end{example}
 
 \subsection{Example 2: Comparing Formulas}
 
+\begin{example}
 Calculate the distance between Paris $(48.8566^\circ, 2.3522^\circ)$ and Tokyo $(35.6762^\circ, 139.6503^\circ)$ using different formulas.
 
 \textbf{Using basic formula}:
@@ -453,9 +466,11 @@ d \approx 6371 \cdot \sqrt{(\Delta\phi)^2 + (\cos\bar{\phi})^2(\Delta\lambda)^2}
 \]
 
 The approximation is quite good (error less than 0.1\%) because the distance is large but not near the limits of the approximation.
+\end{example}
 
 \subsection{Example 3: Near-Polar Distance}
 
+\begin{example}
 Calculate the distance between two points near the North Pole: $(85^\circ$ N, $0^\circ$ E) and $(85^\circ$ N, $180^\circ$ E).
 
 \textbf{Using the formula}: Since both points are at the same latitude:
@@ -472,9 +487,9 @@ d = R \cdot \arccos(\sin^2(85^\circ) + \cos^2(85^\circ)\cos(180^\circ)) = R \cdo
 \]
 
 This is the correct great circle distance, going over the pole!
+\end{example}
 
-\section{Key Takeaways}
-
+\begin{keytakeaways}
 \begin{itemize}
 \item \textbf{Multiple formulas}: The basic formula, haversine formula, and spherical law of cosines all calculate the same distance, but have different numerical properties.
 
@@ -488,6 +503,7 @@ This is the correct great circle distance, going over the pole!
 
 \item \textbf{Practical applications}: Distance calculations enable waypoint finding, bearing calculations, and route planning in navigation systems.
 \end{itemize}
+\end{keytakeaways}
 
 \section{What's Next?}
 
