@@ -3,6 +3,17 @@ A \textbf{geodesic} is the \textbf{shortest path between two points on a curved 
 
 \section{What is a Geodesic?}
 
+\begin{definition}[Geodesic]
+On a Riemannian manifold $(\mathcal M,g)$, a smooth curve $\gamma:[t_1,t_2]\to \mathcal M$ is a \emph{geodesic} if its velocity is parallel transported along itself,
+\[
+\nabla_{\dot\gamma}\dot\gamma \;=\; 0,
+\]
+equivalently, $\gamma$ is a stationary curve of the length (or energy) functional with fixed endpoints. In local coordinates $x^i(t)$ this is
+\[
+\ddot x^i + \Gamma^i_{jk}\,\dot x^j\dot x^k = 0.
+\]
+\end{definition}
+
 A geodesic is the shortest path between two points that stays entirely on the surface or manifold. Think of it as the natural generalization of a straight line to curved spaces.
 
 \begin{itemize}
@@ -67,7 +78,9 @@ Geodesics solve this problem by finding the shortest path that \textbf{stays on 
 
 \section{Visual Examples of Geodesics}
 
-Let's visualize geodesics on different manifolds:
+\begin{example}[Visual examples of geodesics]
+This example previews geodesics on several manifolds; see the panels below.
+\end{example}
 
 \begin{figure}[htbp]
 \centering
@@ -157,6 +170,14 @@ The fundamental property of a geodesic is that it minimizes the distance between
 
 Geodesics are ``locally straight''—if you zoom in on any small segment of a geodesic, it looks like a straight line. This connects to the idea that manifolds are locally flat.
 
+\begin{example}[Local straightness on $S^1$]
+On a circle of radius $R$, two nearby angles $\theta_1,\theta_2$ with $\Delta\theta=|\theta_2-\theta_1|\ll 1$ have geodesic (arc) distance
+\[
+d_{\text{arc}} = R\,\Delta\theta,
+\]
+while the chord distance is $d_{\text{chord}}=2R\sin(\Delta\theta/2)=R\,\Delta\theta\big(1-\tfrac{(\Delta\theta)^2}{24}+\cdots\big)$. Thus, over small neighborhoods the geodesic looks straight to first order (arc and chord agree to $O(\Delta\theta)$).
+\end{example}
+
 \subsection{Uniqueness (or Not)}
 
 Depending on the manifold:
@@ -169,6 +190,10 @@ Depending on the manifold:
 \subsection{Symmetry}
 
 Geodesics are symmetric: the geodesic from point $A$ to point $B$ is the same as the geodesic from $B$ to $A$ (just traversed in the opposite direction).
+
+\begin{remark}[When are geodesics unique?]
+On a complete Riemannian manifold, for points within a \emph{convex normal neighborhood} (i.e., before reaching the cut locus), there exists a \emph{unique} minimizing geodesic between them. Non-uniqueness arises beyond the injectivity radius (e.g., antipodal points on a sphere admit infinitely many geodesics).
+\end{remark}
 
 \section{Connection to Distance Calculations}
 
@@ -194,9 +219,12 @@ This connection is fundamental: \textbf{the distance between two points on a man
 
 Geodesics can be thought of as paths that minimize the total length. Mathematically, if we have a path $\gamma(t)$ between two points, the length is:
 
+\begin{definition}[Length functional]\label{def:length-functional}
+Given a smooth curve $\gamma:[t_1,t_2]\to \mathcal M$ with local coordinates $x^i(t)$, its length is
 \[
-L[\gamma] = \int_{t_1}^{t_2} \sqrt{g_{ij}\frac{dx^i}{dt}\frac{dx^j}{dt}} \, dt
+L[\gamma] = \int_{t_1}^{t_2} \sqrt{ g_{ij}(\gamma(t))\,\dot x^i(t)\,\dot x^j(t) }\, dt.
 \]
+\end{definition}
 
 where $g_{ij}$ is the metric tensor that encodes the geometry of the manifold. A geodesic is a path that minimizes this length functional.
 
@@ -208,11 +236,15 @@ Geodesics satisfy a variational principle: they're paths for which any small var
 
 For those familiar with calculus of variations, geodesics satisfy the geodesic equation:
 
+\begin{definition}[Geodesic equation (coordinate form)]
+In local coordinates $x^i(t)$ on $(\mathcal M,g)$, a geodesic satisfies
 \[
-\frac{d^2 x^i}{dt^2} + \Gamma^i_{jk} \frac{dx^j}{dt}\frac{dx^k}{dt} = 0
+\frac{d^2 x^i}{dt^2} + \Gamma^i_{jk}(x) \, \frac{dx^j}{dt}\,\frac{dx^k}{dt} = 0,
 \]
+where $\Gamma^i_{jk}$ are the Christoffel symbols of the Levi-Civita connection.
+\end{definition}
 
-where $\Gamma^i_{jk}$ are the Christoffel symbols that encode the geometry. This equation ensures the path is ``straight'' in the curved space.
+This equation ensures the path is ``straight'' in the curved space.
 
 Don't worry if this looks complicated—the key intuition is that geodesics are paths that are ``as straight as possible'' given the curvature of the space.
 
@@ -220,21 +252,21 @@ Don't worry if this looks complicated—the key intuition is that geodesics are 
 
 Geodesics appear everywhere in our daily lives:
 
-\subsection{Aviation and Navigation}
-
+\begin{example}[Aviation and navigation]
 When airplanes fly long distances, they follow great circle routes—geodesics on the Earth's sphere. This is why flight paths appear curved on flat maps but are actually the shortest routes.
+\end{example}
 
-\subsection{GPS and Mapping}
-
+\begin{example}[GPS and mapping]
 GPS systems calculate shortest routes along roads, which approximate geodesics on the road network (a graph-like manifold). The navigation system finds geodesic-like paths within the network.
+\end{example}
 
-\subsection{Surface Transportation}
-
+\begin{example}[Surface transportation]
 When planning routes on hilly terrain, the shortest path follows the geodesics of the terrain's surface. Hikers naturally follow geodesic-like paths when taking the most direct route.
+\end{example}
 
-\subsection{Physics}
-
+\begin{example}[Physics]
 In general relativity, light rays and free-falling objects follow geodesics in spacetime. This is one of the most profound applications of geodesics in physics.
+\end{example}
 
 \section{Relationship to Curvature}
 

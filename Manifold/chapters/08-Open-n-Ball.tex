@@ -22,28 +22,17 @@ Understanding open n-balls is crucial because they're what we map to when we say
 
 \subsection{Formal Definition}
 
-An \textbf{open n-ball} (also called an \textbf{open ball} in $\mathbb{R}^n$) is the set of all points within a certain distance $r$ (the radius) from a center point $\mathbf{p}$ in $n$-dimensional Euclidean space.
-
-\textbf{Mathematical definition}:
-
+\begin{definition}[Open $n$-ball]
+An \emph{open $n$-ball} in $\mathbb{R}^n$ of radius $r>0$ centered at $\mathbf{p}\in\mathbb{R}^n$ is
 \[
-B_r(\mathbf{p}) = \{\mathbf{x} \in \mathbb{R}^n : \|\mathbf{x} - \mathbf{p}\| < r\}
+B_r(\mathbf{p}) = \{\mathbf{x} \in \mathbb{R}^n : \|\mathbf{x} - \mathbf{p}\| < r\},
 \]
-
-where $\|\mathbf{x} - \mathbf{p}\|$ is the Euclidean distance between $\mathbf{x}$ and $\mathbf{p}$.
-
-\textbf{In coordinates}: If $\mathbf{p} = (p_1, p_2, \ldots, p_n)$ and $\mathbf{x} = (x_1, x_2, \ldots, x_n)$, then:
-
+where $\|\mathbf{x}-\mathbf{p}\|$ is the Euclidean norm. In coordinates, for $\mathbf{p}=(p_1,\dots,p_n)$ and $\mathbf{x}=(x_1,\dots,x_n)$,
 \[
-B_r(\mathbf{p}) = \left\{(x_1, \ldots, x_n) \in \mathbb{R}^n : \sum_{i=1}^n (x_i - p_i)^2 < r^2\right\}
+B_r(\mathbf{p}) = \Big\{(x_1,\dots,x_n)\in\mathbb{R}^n : \sum_{i=1}^n (x_i-p_i)^2 < r^2\Big\}.
 \]
-
-\textbf{Components}:
-\begin{itemize}
-\item \textbf{Center}: The point $\mathbf{p}$ around which the ball is centered
-\item \textbf{Radius}: The positive real number $r > 0$ that determines the size
-\item \textbf{Strict inequality}: The use of $<$ (not $\leq$) means the boundary is \textit{not} included
-\end{itemize}
+Components: center $\mathbf{p}$; radius $r$; strict inequality excludes the boundary.
+\end{definition}
 
 \subsection{Why "Open"?}
 
@@ -60,6 +49,10 @@ The term "open" is crucial and has a specific mathematical meaning:
 \item Homeomorphisms would need to map boundaries, which is restrictive
 \item The local structure should be "smooth" without edge effects
 \end{itemize}
+
+\begin{remark}[A mapping thought experiment]
+Can you construct a one-to-one, continuous, onto map with continuous inverse from a 2D open disk $B_r(\mathbf{p})\subset\mathbb{R}^2$ to an open ball in $\mathbb{R}^n$ for $n\neq 2$? \;\emph{Hint}: Dimension is a topological invariant; by invariance of domain, such a homeomorphism cannot exist unless the dimensions match.
+\end{remark}
 
 For example, if you're standing on Earth, your local neighborhood (the patch of ground you see) doesn't include a boundary—you can move in any direction. This is what "open" captures.
 
@@ -125,7 +118,7 @@ B_r(p) \,=\, \{x \in \mathbb{R} : |x - p| < r\} \,=\, (p-r,\, p+r).
 \label{fig:1d-ball}
 \end{figure}
 
-\begin{example}
+\begin{example}[1D open ball]
 If $p = 0$ and $r = 2$, then $B_2(0) = (-2, 2)$ is the open interval from $-2$ to $2$, excluding the endpoints.
 \end{example}
 
@@ -180,7 +173,7 @@ B_r(\mathbf{p}) \,=\, \{(x,y) \in \mathbb{R}^2 : (x-p_x)^2 + (y-p_y)^2 < r^2\}.
 \label{fig:2d-ball}
 \end{figure}
 
-\begin{example}
+\begin{example}[2D open ball]
 The unit disk centered at the origin is $B_1(\mathbf{0}) = \{(x,y) : x^2 + y^2 < 1\}$.
 \end{example}
 
@@ -214,7 +207,7 @@ B_r(\mathbf{p}) \,=\, \{(x,y,z) \in \mathbb{R}^3 : (x-p_x)^2 + (y-p_y)^2 + (z-p_
 \label{fig:3d-ball}
 \end{figure}
 
-\begin{example}
+\begin{example}[3D open ball]
 The unit ball centered at the origin is $B_1(\mathbf{0}) = \{(x,y,z) : x^2 + y^2 + z^2 < 1\}$.
 \end{example}
 
@@ -316,7 +309,7 @@ In a 1D open ball (interval), the distance is simply:
 d(p, q) = |p - q|
 \]
 
-\begin{example}
+\begin{example}[Distance in $(-2,2)$]
 In the open interval $(-2, 2)$, the distance between $p = -1$ and $q = 1.5$ is:
 \[
 d(-1, 1.5) = |1.5 - (-1)| = 2.5
@@ -331,7 +324,7 @@ In a 2D open ball (disk), the distance is:
 d(\mathbf{p}, \mathbf{q}) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2}
 \]
 
-\begin{example}
+\begin{example}[Distance in the unit disk]
 In the unit disk centered at the origin, for points $\mathbf{p} = (0.3, 0.4)$ and $\mathbf{q} = (0.7, 0.2)$:
 \[
 d = \sqrt{(0.7-0.3)^2 + (0.2-0.4)^2} = \sqrt{0.16 + 0.04} = \sqrt{0.2} \approx 0.447
@@ -346,7 +339,7 @@ In a 3D open ball, the distance is:
 d(\mathbf{p}, \mathbf{q}) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2 + (p_z - q_z)^2}
 \]
 
-\begin{example}
+\begin{example}[Distance in the unit ball]
 In the unit ball, for points $\mathbf{p} = (0.5, 0.5, 0.5)$ and $\mathbf{q} = (0.8, 0.3, 0.6)$:
 \[
 d = \sqrt{(0.3)^2 + (-0.2)^2 + (0.1)^2} = \sqrt{0.09 + 0.04 + 0.01} = \sqrt{0.14} \approx 0.374
@@ -365,23 +358,25 @@ d(\mathbf{p}, \mathbf{q}) = \sqrt{\sum_{i=1}^n (p_i - q_i)^2}
 
 \subsubsection{Maximum Distance Within a Ball}
 
-The maximum distance between any two points in an open ball $B_r(\mathbf{p})$ is less than $2r$ (the diameter). Since the ball is open, we can approach but never reach $2r$:
-
+\begin{definition}[Diameter via supremum]
+The maximum distance between any two points in an open ball $B_r(\mathbf{p})$ is strictly less than $2r$ (the diameter). Since the ball is open, we can approach but never attain $2r$. Formally,
 \[
-\sup\{d(\mathbf{x}, \mathbf{y}) : \mathbf{x}, \mathbf{y} \in B_r(\mathbf{p})\} = 2r
+\sup\{d(\mathbf{x}, \mathbf{y}) : \mathbf{x}, \mathbf{y} \in B_r(\mathbf{p})\} = 2r.
 \]
+Here $\sup$ (\emph{supremum}) is the least upper bound of a set: the smallest number that is greater than or equal to every element in the set, not necessarily achieved by any element.
+\end{definition}
 
 \textbf{Note}: The supremum is $2r$, but this maximum is never actually achieved because the ball is open (boundary excluded).
 
 \subsubsection{Triangle Inequality}
 
-For any three points $\mathbf{p}$, $\mathbf{q}$, $\mathbf{r}$ in an open ball:
-
+\begin{theorem}[Triangle inequality]
+For any three points $\mathbf{p}$, $\mathbf{q}$, $\mathbf{r}$ in an open ball,
 \[
-d(\mathbf{p}, \mathbf{r}) \leq d(\mathbf{p}, \mathbf{q}) + d(\mathbf{q}, \mathbf{r})
+d(\mathbf{p}, \mathbf{r}) \leq d(\mathbf{p}, \mathbf{q}) + d(\mathbf{q}, \mathbf{r}).
 \]
-
 This is a fundamental property of Euclidean distance that holds in any dimension.
+\end{theorem}
 
 \section{Properties of Open n-Balls}
 
@@ -399,7 +394,13 @@ An open ball is itself an \textbf{open set}: every point in the ball has a neigh
 
 \subsubsection{Connected}
 
-An open ball is \textbf{connected}: any two points in the ball can be connected by a continuous path that stays entirely within the ball. This makes sense intuitively—you can always draw a line (or curve) between any two points inside a ball without leaving it.
+\begin{definition}[Connected set]
+A set is \emph{connected} if it cannot be written as the disjoint union of two nonempty open sets in the subspace topology. Equivalently, any two points can be joined by a continuous path lying in the set. An open ball is connected.
+\end{definition}
+
+\begin{remark}[Convex vs. concave]
+A set is \emph{convex} if for any two points in it, the entire line segment between them lies in the set. “Concave” typically describes functions or shapes that curve inward; in set terms we usually contrast convex with nonconvex rather than “concave.”
+\end{remark}
 
 \subsubsection{Simply Connected}
 
@@ -557,9 +558,7 @@ Open balls are not the only open sets that could work for manifolds, but they're
 
 \section{Worked Examples}
 
-\subsection{Example 1: Is a Point in an Open Ball?}
-
-\begin{example}
+\begin{example}[Is a point in an open ball?]
 \textbf{Question}: Is the point $(2, 3)$ in the open ball centered at $(1, 1)$ with radius $r = 2.5$?
 
 \textbf{Solution}: Check if the distance is less than the radius:
@@ -571,9 +570,7 @@ d((2,3), (1,1)) = \sqrt{(2-1)^2 + (3-1)^2} = \sqrt{1 + 4} = \sqrt{5} \approx 2.2
 Since $2.236 < 2.5$, the point $(2, 3)$ is inside the open ball.
 \end{example}
 
-\subsection{Example 2: Distance Between Two Points in a Ball}
-
-\begin{example}
+\begin{example}[Distance between two points in a ball]
 \textbf{Question}: Calculate the distance between points $(0.5, 0.5)$ and $(0.8, 0.7)$ in the unit ball $B_1(\mathbf{0})$.
 
 \textbf{Solution}: First, verify both points are in the unit ball:
@@ -593,9 +590,7 @@ d = \sqrt{(0.6-0.5)^2 + (0.6-0.5)^2} = \sqrt{0.01 + 0.01} = \sqrt{0.02} \approx 
 
 Both points are in the unit ball, and their distance is approximately $0.141$.
 
-\subsection{Example 3: Finding the Largest Contained Ball}
-
-\begin{example}
+\begin{example}[Largest contained ball]
 \textbf{Question}: Given a rectangular region $R = \{(x,y) : 0 < x < 3, 0 < y < 2\}$, what's the largest open ball that fits entirely in $R$?
 
 \textbf{Solution}: The largest ball will be limited by the closest boundary. The center should be at the center of the rectangle: $(1.5, 1.0)$. The distance to the nearest boundary is $\min(1.5, 1.0, 1.5, 1.0) = 1.0$.

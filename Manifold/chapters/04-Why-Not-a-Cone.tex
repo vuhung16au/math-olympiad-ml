@@ -115,6 +115,10 @@ This means that no matter how small a neighborhood you take around the tip, you 
 \label{fig:cone-flattening}
 \end{figure}
 
+\begin{remark}[What is homeomorphic?]
+Two spaces are \emph{homeomorphic} if there is a continuous bijection between them with a continuous inverse. Intuitively, one can be deformed into the other without cutting or gluing. In manifold language, “locally homeomorphic to Euclidean space” means each point has a neighborhood topologically equivalent to an open ball.
+\end{remark}
+
 \section{The Rest of the Cone is Fine}
 
 Here's an important point: \textbf{the cone minus its tip IS a manifold!} 
@@ -140,6 +144,14 @@ Suppose we have a cone with tip at point $P$. Consider any open neighborhood $U$
 \end{enumerate}
 
 \subsection{The Curvature Singularity}
+
+\begin{remark}[Singularity and singular point]
+In differential geometry, a \emph{singularity} is a point where the smooth structure or geometric quantities fail to be well-defined (e.g., not differentiable) or become unbounded. A \emph{singular point} of a surface is a point at which no coordinate chart yields a smooth embedding with a regular (full-rank) differential, so standard objects like a well-defined tangent plane or curvature tensors cannot be assigned in the usual way. For a cone, the tip is singular because any local parametrization has rank deficiency at the apex, and curvature measures are not defined there.
+\end{remark}
+
+\begin{remark}[Curvature (brief)]
+Curvature quantifies deviation from flatness. On surfaces in $\mathbb{R}^3$, \emph{Gaussian curvature} $K$ at a regular point is the product of principal curvatures and can be computed from the first and second fundamental forms; for smooth Riemannian manifolds, curvature is encoded by the Riemann curvature tensor $R$, with sectional curvature giving a 2D-plane slice of $R$. Smooth points have finite, well-defined curvature; at the cone tip, curvature is not defined in the smooth sense (it concentrates as a singular defect).
+\end{remark}
 
 The tip of a cone represents a \textbf{curvature singularity}. In differential geometry, we can measure how much a surface curves at each point. For a smooth surface like a sphere, the curvature is well-defined and continuous everywhere. But at the cone's tip, the curvature becomes infinite or undefined—it's a singularity.
 
@@ -192,6 +204,8 @@ This is the essence of why the tip fails: it doesn't have the local flatness pro
 
 \section{Other Examples of Non-Manifolds}
 
+\begin{example}[Other non-manifold cases]
+
 Understanding why a cone fails helps us identify other non-manifolds:
 
 \begin{itemize}
@@ -200,6 +214,8 @@ Understanding why a cone fails helps us identify other non-manifolds:
 \item \textbf{Self-intersections}: A figure-8 curve intersecting itself creates a point that's not a manifold.
 \item \textbf{Boundary points}: Points on the edge of a disk (if we consider the disk as a 2D object) are not manifolds in the strict sense, though they form a ``manifold with boundary.''
 \end{itemize}
+
+\end{example}
 
 \begin{keytakeaways}
 \begin{itemize}

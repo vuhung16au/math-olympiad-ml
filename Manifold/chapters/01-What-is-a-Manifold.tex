@@ -1,6 +1,14 @@
 \chapter{What is a Manifold?}
 A \textbf{manifold} is a space that \textbf{locally looks like flat Euclidean space}, even if the overall shape is curved or complex. The idea is that if you zoom in very closely on any small neighborhood in a manifold, it looks like regular n-dimensional space.
 
+\begin{definition}[Topological Manifold]
+A \emph{topological $n$-manifold} is a second-countable, Hausdorff topological space $\mathcal{M}$ such that every point $p\in\mathcal{M}$ has an open neighborhood $U$ and a homeomorphism (chart) $\varphi:U\to V\subset\mathbb{R}^n$. An \emph{atlas} is a collection of charts whose domains cover $\mathcal{M}$. If all transition maps $\varphi_j\circ\varphi_i^{-1}$ between overlapping charts are $C^k$ (typically $k=\infty$), $\mathcal{M}$ is a \emph{$C^k$ (smooth) manifold}.
+\end{definition}
+
+\begin{definition}[Chart and Atlas]
+A \emph{chart} on $\mathcal{M}$ is a pair $(U,\varphi)$ with $U\subset\mathcal{M}$ open and $\varphi:U\to\varphi(U)\subset\mathbb{R}^n$ a homeomorphism. An \emph{atlas} is a family of charts whose domains cover $\mathcal{M}$; it is \emph{smooth} when all chart transitions are smooth.
+\end{definition}
+
 Imagine standing on Earth. To you, the ground seems flat locally (like a plane), but we know Earth is actually a curved sphere globally. The small patch you see is like a flat 2D plane, even though the whole planet curves.
 
 \section{The Key Concept: Local Mapping to Flat Space}
@@ -60,9 +68,9 @@ The fundamental property of a manifold is that every point has a neighborhood th
 
 This mapping property is what makes manifolds so useful: we can use familiar flat space mathematics (like calculus, geometry, and coordinates) locally on the manifold, even though the manifold itself is curved globally.
 
-\section{Examples of Manifolds}
-
-To better understand manifolds, let's visualize some key examples:
+\begin{example}[Examples of manifolds]
+To better understand manifolds, let's visualize some key examples.
+\end{example}
 
 \begin{figure}[htbp]
 \centering
@@ -141,8 +149,11 @@ To better understand manifolds, let's visualize some key examples:
   \node[below] at (1.5, -0.3) {\small (Donut surface)};
 \end{tikzpicture}
 \end{minipage}
-\caption{Examples of manifolds: (a) a 1D manifold (curved line), (b) a 2D plane, (c) a 2D sphere surface, and (d) a 2D torus. Each manifold locally looks like flat Euclidean space of the appropriate dimension, as indicated by the highlighted patches.}
-\label{fig:manifold-examples}
 \end{figure}
+
+\begin{example}
+Examples of manifolds: (a) a 1D manifold (curved line), (b) a 2D plane, (c) a 2D sphere surface, and (d) a 2D torus. Each manifold locally looks like flat Euclidean space of the appropriate dimension, as indicated by the highlighted patches.
+\label{fig:manifold-examples}
+\end{example}
 
 These visualizations illustrate the key concept: each manifold, regardless of its global shape, has the property that any small neighborhood (patch) looks like flat Euclidean space of the corresponding dimension. The 1D manifold looks like a line locally, the 2D manifolds look like a plane locally, even though globally they may be curved or have complex topology.

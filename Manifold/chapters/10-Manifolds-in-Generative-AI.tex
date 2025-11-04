@@ -2,6 +2,17 @@
 
 This chapter bridges the mathematical foundations we've built—manifolds, geodesics, distances, and local structure—with modern generative artificial intelligence. We'll see how the abstract concepts of differential geometry become concrete tools for understanding and building AI systems that generate images, text, audio, and other complex data.
 
+\begin{example}[Text generation (e.g., ChatGPT)]
+Viewing model parameters as a \emph{parameter manifold} with the Fisher metric yields \emph{natural gradient} updates that follow geodesics in information space, often converging faster than Euclidean gradients. Inference traverses a low-dimensional \emph{data manifold} of plausible token sequences, where curvature helps explain why small Euclidean steps can produce large semantic shifts and why geometry-aware sampling (e.g., temperature, nucleus) stabilizes outputs.
+\end{example}
+
+\begin{example}[Image generation (diffusion, GANs, flows)]
+Diffusion models learn score fields that align with the manifold of natural images; denoising follows integral curves tangent to this manifold. Normalizing flows learn \emph{diffeomorphisms} between a simple latent manifold and image space; the pullback metric clarifies conditioning and mode coverage. In GANs, geodesic distances in latent space better preserve semantics than Euclidean pixel metrics, guiding interpolation and editing.
+\end{example}
+
+\begin{example}[Video generation]
+Video lives on a manifold with temporal constraints (smooth trajectories). Geodesics in latent space produce temporally coherent frames; parallel transport transfers motion styles between clips. Information geometry (Fisher) improves training stability for sequence models by respecting curvature induced by autoregressive likelihoods, reducing exposure bias and drift.
+\end{example}
 \section{Introduction: From Mathematics to AI}
 
 Throughout this book, we've explored:
@@ -56,9 +67,25 @@ Consider a 256×256 grayscale image. In its raw form, this is a vector in $\math
   % Add annotation
   \node[below, align=center] at (2, -0.5, 0) {\small High-dimensional data (e.g., images) lies on\\ a low-dimensional manifold embedded in the ambient space};
 \end{tikzpicture}
-\caption{The data manifold hypothesis: high-dimensional data points (like images) lie on a low-dimensional manifold $\mathcal{M}$ embedded in the ambient space. Points off the manifold are typically invalid or meaningless.}
+
+\caption{The data manifold hypothesis: high-dimensional data points (like images) 
+lie on a low-dimensional manifold $\mathcal{M}$ embedded in the ambient space. 
+Points off the manifold are typically invalid or meaningless.}
 \label{fig:data-manifold}
+
 \end{figure}
+
+
+\begin{remark}[Ambient Space]
+The ambient space is the high-dimensional space in which the data lies. For example, 
+the ambient space for an image is $\mathbb{R}^{256 \times 256 \times 3}$.
+\end{remark}
+
+
+\begin{remark}[Latent Space]
+The latent space is the low-dimensional space in which the data is represented. For example, 
+the latent space for an image is $\mathbb{R}^{50-200}$.
+\end{remark}
 
 \subsection{Mathematical Formulation}
 
@@ -77,6 +104,7 @@ The intrinsic dimension $d$ is typically much smaller than the ambient dimension
 \item \textbf{Images}: $D = 65536$ (256×256), but $d \approx 50-200$ for natural images
 \item \textbf{Text embeddings}: $D = 768$ (BERT), but $d \approx 100-300$ for semantic structure
 \item \textbf{Audio}: $D = 16000$ (1 second at 16kHz), but $d \approx 20-100$ for speech
+\item \textbf{Video}: $D = 256 \times 256 \times 3 \times 30$ (256x256x3 for each frame, 30 frames), but $d \approx 50-200$ for natural videos
 \end{itemize}
 
 \subsection{Why This Matters for AI}

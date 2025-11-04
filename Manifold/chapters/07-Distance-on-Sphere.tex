@@ -24,13 +24,14 @@ The haversine formula is an alternative formulation that's often preferred for c
 
 \subsubsection{The Haversine Function}
 
-The \textbf{haversine} function is defined as:
-
+\begin{definition}[Haversine function]
+The \emph{haversine} of an angle $\theta$ is
 \[
-\operatorname{hav}(\theta) = \sin^2\left(\frac{\theta}{2}\right) = \frac{1 - \cos\theta}{2}
+\operatorname{hav}(\theta) \;=\; \sin^2\!\left(\frac{\theta}{2}\right) 
+\;=\; \frac{1 - \cos\theta}{2}.
 \]
-
-This function has useful properties that make it well-suited for distance calculations.
+It is widely used in spherical distance formulas due to its numerical stability, especially for small angles.
+\end{definition}
 
 \subsubsection{Derivation of the Haversine Formula}
 
@@ -136,10 +137,17 @@ In practice:
 \item Use the \textbf{spherical law of cosines} primarily for theoretical work and understanding the geometric foundation.
 \end{itemize}
 
+\begin{remark}[Distance formulas summary]
+\textbf{Basic (arccos)}: $\; d = R\,\arccos\!\big(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos\Delta\lambda\big)$.\\
+\textbf{Haversine}: $\; d = 2R\,\arcsin\!\Big(\sqrt{\sin^2(\tfrac{\Delta\phi}{2}) + \cos\phi_1\cos\phi_2\,\sin^2(\tfrac{\Delta\lambda}{2})}\;\Big)$.\\
+\textbf{Spherical law of cosines (central angle)}: $\; \cos\tfrac{d}{R} = \sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos\Delta\lambda$.
+\end{remark}
+
 \section{Special Cases and Edge Cases}
 
 \subsection{Points on the Same Meridian}
 
+\begin{example}[Same meridian]
 When two points lie on the same meridian (same longitude), the formula simplifies significantly.
 
 \textbf{Condition}: $\lambda_1 = \lambda_2$, so $\Delta\lambda = 0$.
@@ -155,8 +163,9 @@ d = R \cdot \arccos(\cos(\phi_2 - \phi_1)) = R \cdot |\phi_2 - \phi_1|
 \]
 
 \textbf{Result}: $d = R \cdot |\phi_2 - \phi_1|$ (latitude difference in radians).
+\end{example}
 
-\begin{example}
+\begin{example}[Same meridian: numerical example]
 If $\phi_1 = 30^\circ$ and $\phi_2 = 60^\circ$ on the same meridian, with $R = 6371$ km:
 \[
 d = 6371 \times \left|\frac{\pi}{6} - \frac{\pi}{3}\right| = 6371 \times \frac{\pi}{6} \approx 3336 \text{ km}
@@ -165,6 +174,7 @@ d = 6371 \times \left|\frac{\pi}{6} - \frac{\pi}{3}\right| = 6371 \times \frac{\
 
 \subsection{Points on the Same Parallel (Latitude)}
 
+\begin{example}[Same parallel (latitude)]
 When two points have the same latitude, the distance depends on the longitude difference, but the effective radius is reduced.
 
 \textbf{Condition}: $\phi_1 = \phi_2 = \phi$, so $\Delta\phi = 0$.
@@ -185,13 +195,15 @@ d = R \cdot \cos\phi \cdot |\Delta\lambda|
 \]
 
 \textbf{Interpretation}: The effective radius at latitude $\phi$ is $R\cos\phi$, which decreases as we move away from the equator. This makes sense because circles of latitude get smaller as we approach the poles.
+\end{example}
 
-\begin{example}
+\begin{example}[Same parallel: numerical example]
 At latitude $60^\circ$ ($\phi = \pi/3$), the effective radius is $R\cos(\pi/3) = R/2$. So a longitude difference of $1^\circ$ corresponds to a distance of approximately $R \cdot \frac{1}{2} \cdot \frac{\pi}{180} \approx 55.6$ km, compared to about $111$ km at the equator.
 \end{example}
 
 \subsection{Points Near Poles}
 
+\begin{example}[Near poles: numerical considerations]
 When points are near the poles, special numerical considerations are needed.
 
 \textbf{Issue}: Near the poles, small changes in longitude can cause large changes in actual direction, and the formulas can become numerically unstable.
@@ -202,8 +214,9 @@ When points are near the poles, special numerical considerations are needed.
 \item Consider the distance along the parallel as an approximation when appropriate.
 \item Use special polar coordinate transformations.
 \end{itemize}
+\end{example}
 
-\begin{example}
+\begin{example}[Near-pole numerical example]
 Two points near the North Pole at $89^\circ$ N, with longitudes $0^\circ$ and $180^\circ$. The great circle distance is approximately $2R \times (90^\circ - 89^\circ) = 2R \times \frac{\pi}{180} \approx 222$ km, which is much smaller than the distance along the parallel ($\pi R \approx 20,015$ km).
 \end{example}
 
@@ -239,7 +252,7 @@ where $\phi$ is the mean latitude.
 
 \textbf{When valid}: This approximation is accurate to within about 1\% for distances up to about 100 km, and within 0.1\% for distances up to about 20 km.
 
-\begin{example}
+\begin{example}[Flat Earth approximation accuracy]
 For two points 10 km apart at latitude $45^\circ$, the flat Earth approximation gives results accurate to within a few meters.
 \end{example}
 
@@ -341,7 +354,7 @@ Floating-point arithmetic can introduce errors in distance calculations.
 
 \textbf{arccos issues}: When the argument of $\arccos$ is near $-1$ or $1$, small floating-point errors can cause large errors in the result.
 
-\begin{example}
+\begin{example}[arccos precision issue]
 If $\cos\theta = -0.9999999999$ (due to rounding), then $\theta = \arccos(-0.9999999999) \approx 1.414 \times 10^{-5}$ radians, but the true value might be slightly different, leading to distance errors.
 \end{example}
 
@@ -418,9 +431,7 @@ The \textbf{bearing} (or azimuth) is the initial direction from one point to ano
 
 \section{Worked Examples: Complex Scenarios}
 
-\subsection{Example 1: Multiple Cities Route}
-
-\begin{example}
+\begin{example}[Multiple cities route]
 Calculate the total distance for a multi-city route: London → New York → Los Angeles → Tokyo.
 
 \textbf{Given coordinates}:
@@ -443,9 +454,7 @@ d_{\text{total}} &\approx 18,281 \text{ km}
 \textbf{Note}: This is the great circle route distance. Actual flight paths may differ due to air traffic control, weather, and other factors.
 \end{example}
 
-\subsection{Example 2: Comparing Formulas}
-
-\begin{example}
+\begin{example}[Comparing formulas]
 Calculate the distance between Paris $(48.8566^\circ, 2.3522^\circ)$ and Tokyo $(35.6762^\circ, 139.6503^\circ)$ using different formulas.
 
 \textbf{Using basic formula}:
@@ -468,9 +477,7 @@ d \approx 6371 \cdot \sqrt{(\Delta\phi)^2 + (\cos\bar{\phi})^2(\Delta\lambda)^2}
 The approximation is quite good (error less than 0.1\%) because the distance is large but not near the limits of the approximation.
 \end{example}
 
-\subsection{Example 3: Near-Polar Distance}
-
-\begin{example}
+\begin{example}[Near-polar distance]
 Calculate the distance between two points near the North Pole: $(85^\circ$ N, $0^\circ$ E) and $(85^\circ$ N, $180^\circ$ E).
 
 \textbf{Using the formula}: Since both points are at the same latitude:

@@ -19,7 +19,7 @@ But \textit{how} do we know these are the geodesics? And \textit{how} can we fin
 
 \subsection{The Path Length Functional}
 
-A fundamental principle is that geodesics minimize path length. Mathematically, if we have a path $\gamma(t)$ between two points $P_1$ and $P_2$ on a manifold, its length is given by:
+A fundamental principle is that geodesics minimize path length. Mathematically, if we have a path $\gamma(t)$ between two points $P_1$ and $P_2$ on a manifold, its length is given by (see Definition~\ref{def:length-functional}):
 
 \[
 L[\gamma] = \int_{t_1}^{t_2} \sqrt{g_{ij}\frac{dx^i}{dt}\frac{dx^j}{dt}} \, dt
@@ -34,6 +34,16 @@ To find paths that minimize $L[\gamma]$, we use the calculus of variations. The 
 \[
 \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}^i}\right) - \frac{\partial L}{\partial x^i} = 0
 \]
+
+\noindent\textit{Notes.} $\dot{x}^i = \tfrac{dx^i}{dt}$ denotes time derivatives of the coordinates along the curve $\gamma(t)$; $L$ is the Lagrangian (here derived from length/energy); $t$ is a curve parameter; $x^i$ are local coordinates on the manifold.
+
+\begin{remark}[Euler–Lagrange refresher]
+For a scalar functional $\int L(x,\dot x, t)\,dt$ of a single coordinate $x(t)$ (and its velocity $\dot x$), stationary curves satisfy
+\[
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}}\right) - \frac{\partial L}{\partial x} = 0.
+\]
+In multiple coordinates $x^i(t)$, apply this to each component to obtain the vector form above.
+\end{remark}
 
 For the path length functional, this leads to the geodesic equation. Let's see how this works for simple manifolds.
 
@@ -159,6 +169,9 @@ Trivial: the geodesic is simply the straight line segment connecting the two poi
 \subsubsection{1D Circle}
 
 Given two points on a circle, there are two arcs connecting them. The geodesic is the shorter arc. If the points are antipodal, both arcs are geodesics of equal length.
+\begin{remark}[Antipodal points]
+Two points on a circle or sphere are \emph{antipodal} if they are diametrically opposite (separated by half the circumference on the circle or by a central angle of $\pi$ on the sphere). On a sphere, every great circle through one antipodal point also passes through the other.
+\end{remark}
 
 \subsubsection{2D Plane}
 
@@ -297,11 +310,16 @@ Not all pairs of points have a unique geodesic. Let's examine when multiple geod
 
 \subsection{Conjugate Points and Cut Locus}
 
-The set of points where geodesics cease to be unique is called the \textbf{cut locus}. For example:
+The set of points where geodesics cease to be unique is called the \textbf{cut locus}. 
+\begin{example}[Cut locus examples]
+% \begin{example}[Arc-length parameterization examples]
+For example:
 \begin{itemize}
 \item On a circle, the cut locus of a point is its antipodal point.
 \item On a sphere, the cut locus of a point is its antipodal point.
 \end{itemize}
+\end{example}
+% \end{example}
 
 At these special points, the geometry becomes degenerate in the sense that multiple geodesics have the same length.
 
@@ -311,7 +329,7 @@ At these special points, the geometry becomes degenerate in the sense that multi
 
 Geodesics are geometric objects—they exist independently of coordinate systems. However, their descriptions change with coordinates. Let's see how the same geodesic looks in different coordinate systems.
 
-\subsubsection{Example: Straight Line in Different Coordinates}
+\begin{example}[Straight line in different coordinates]
 
 Consider a straight line in the plane. In Cartesian coordinates $(x, y)$, it's simply:
 \[
@@ -324,14 +342,16 @@ r = \frac{b}{\sin\theta - m\cos\theta}
 \]
 
 This is more complex, but it's the same geometric object.
+\end{example}
 
-\subsubsection{Example: Great Circle on Sphere}
+\begin{example}[Great circle on a sphere]
 
 A great circle on a sphere can be described in:
 \begin{itemize}
 \item \textbf{Cartesian coordinates}: $ax + by + cz = 0$ (plane through origin)
 \item \textbf{Spherical coordinates}: More complex, but the geodesic equation we solved earlier describes it.
 \end{itemize}
+\end{example}
 
 The key insight: the geodesic equation transforms covariantly, so solving it in any coordinate system gives the same geometric geodesic.
 
@@ -371,7 +391,9 @@ On simply connected manifolds (like a plane or sphere), geodesics are also \text
 
 \subsection{Geodesic Completeness}
 
-A manifold is \textbf{geodesically complete} if every geodesic can be extended indefinitely (in both directions). Examples:
+A manifold is \textbf{geodesically complete} if every geodesic can be extended indefinitely (in both directions).
+
+\begin{example}[Geodesic completeness examples]
 
 \begin{itemize}
 \item \textbf{Line}: Complete—geodesics extend to $\pm\infty$.
@@ -379,6 +401,7 @@ A manifold is \textbf{geodesically complete} if every geodesic can be extended i
 \item \textbf{Plane}: Complete—geodesics extend infinitely.
 \item \textbf{Sphere}: Complete—geodesics are closed (great circles).
 \end{itemize}
+\end{example}
 
 Geodesic completeness is an important property that relates to the global structure of the manifold.
 
@@ -395,9 +418,7 @@ This distinction between intrinsic and extrinsic geometry is fundamental to unde
 
 \section{Worked Examples: Systematic Derivation}
 
-\subsection{Example 1: Circle Geodesic via Variational Method}
-
-\begin{example}
+\begin{example}[Circle geodesic via variational method]
 Let's derive that arcs are geodesics on a circle using the variational approach.
 
 \textbf{Setup}: Circle of radius $r$, parameterized by angle $\theta$. The metric is $g_{\theta\theta} = r^2$.
@@ -417,9 +438,7 @@ For smooth paths, we can use $L = r\int (\dot{\theta})^2 \, dt$ (minimizing squa
 This gives $\ddot{\theta} = 0$, so $\theta(t) = \theta_0 + \omega t$—uniform motion along the circle, which describes an arc. This confirms that arcs are geodesics on a circle.
 \end{example}
 
-\subsection{Example 2: Sphere Geodesic via Geometric Construction}
-
-\begin{example}
+\begin{example}[Sphere geodesic via geometric construction]
 Let's construct the great circle through two points on a sphere.
 
 \textbf{Setup}: Sphere of radius $R$, points $P_1$ and $P_2$ with position vectors $\mathbf{p}_1$ and $\mathbf{p}_2$.
@@ -435,9 +454,7 @@ Let's construct the great circle through two points on a sphere.
 This geometric construction is often simpler than solving differential equations and directly shows why great circles are geodesics.
 \end{example}
 
-\subsection{Example 3: Coordinate Transformation}
-
-\begin{example}
+\begin{example}[Coordinate transformation]
 Let's verify that a straight line geodesic on a plane transforms correctly under coordinate changes.
 
 \textbf{In Cartesian coordinates}: Geodesic is $y = 2x + 1$ (straight line).

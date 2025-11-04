@@ -58,9 +58,34 @@ We explore these examples in detail, showing how local flatness is preserved eve
   \node[below] at (0, -2.2) {\small (Closed curve)};
 \end{tikzpicture}
 \end{minipage}
-\caption{Examples of 1D manifolds: (a) a 1D plane (the real line or x-axis), and (b) a 1D circle. Both manifolds locally look like a line segment, but the circle has a closed, curved global structure.}
-\label{fig:1d-manifolds}
 \end{figure}
+
+\begin{example}
+Examples of 1D manifolds: (a) a 1D plane (the real line or x-axis), and (b) a 1D circle. Both manifolds locally look like a line segment, but the circle has a closed, curved global structure.
+\label{fig:1d-manifolds}
+\end{example}
+
+\begin{example}[Circle distance on $S^1$]
+
+Let a circle have radius $r$ and two points with angles $\theta_1,\theta_2$. Denote the small angle difference by $\Delta\theta = |\theta_2-\theta_1|$ with $\Delta\theta \ll 1$.
+
+- Arc-length (geodesic) distance:
+\[
+d_{\text{arc}} = r\,\min(\Delta\theta, 2\pi-\Delta\theta) = r\,\Delta\theta\quad (\text{since }\Delta\theta\ll 1).
+\]
+- Chord distance:
+\[
+d_{\text{chord}} = 2r\sin\!\left(\frac{\Delta\theta}{2}\right) = r\,\Delta\theta\Big(1-\tfrac{(\Delta\theta)^2}{24}+\cdots\Big).
+\]
+
+Hence $d_{\text{arc}} \approx r\,\Delta\theta$ and the gap to the chord shrinks cubically:
+\[
+d_{\text{arc}}-d_{\text{chord}} = r\Big(\Delta\theta - 2\sin\tfrac{\Delta\theta}{2}\Big) \approx r\,\frac{(\Delta\theta)^3}{24} \to 0\quad \text{as }\Delta\theta\to 0.
+\]
+
+Interpretation: for very close angles, the circle is \emph{locally flat}. The geodesic distance along the circle behaves like the Euclidean distance on a straight line, with arclength coordinate $s = r\theta$. In particular, on the unit circle ($r=1$), $d_{\text{arc}} \approx |\theta_2-\theta_1|$.
+
+\end{example}
 
 \section{Distance Calculations on 1D Manifolds}
 
@@ -72,11 +97,14 @@ On a straight line (the x-axis), calculating the distance between two points is 
 d = |x_2 - x_1|
 \]
 
-This is the familiar Euclidean distance formula in one dimension. For example, if $P_1$ is at $x_1 = -1$ and $P_2$ is at $x_2 = 1.2$, then:
+This is the familiar Euclidean distance formula in one dimension.
 
+\begin{example}
+If $P_1$ is at $x_1 = -1$ and $P_2$ is at $x_2 = 1.2$, then
 \[
-d = |1.2 - (-1)| = |2.2| = 2.2
+d = |1.2 - (-1)| = |2.2| = 2.2.
 \]
+\end{example}
 
 \subsection{Distance on a 1D Circle}
 
@@ -120,7 +148,7 @@ And the distance is:
 d = r \cdot |\theta_2 - \theta_1|
 \]
 
-\subsubsection{Example Calculation}
+\begin{example}[Circle distance on $S^1$]
 
 Consider a circle with radius $r = 1.2$ units. If point $P_1$ is at angle $\theta_1 = 0$ (or $0^\circ$) and point $P_2$ is at angle $\theta_2 = \frac{\pi}{3}$ (or $60^\circ$), then:
 
@@ -151,6 +179,8 @@ d_{\text{chord}} = 2 \times 1.2 \times \sin\left(\frac{\pi}{6}\right) = 2.4 \tim
 \]
 
 Note that the arc distance ($d = 1.256$) is slightly longer than the chord distance ($d_{\text{chord}} = 1.2$), which is expected since the arc follows the curve of the circle.
+
+\end{example}
 
 \begin{keytakeaways}
 \begin{itemize}

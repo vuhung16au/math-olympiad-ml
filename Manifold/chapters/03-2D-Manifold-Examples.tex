@@ -96,23 +96,24 @@ We examine each of these examples, showing how they satisfy the definition of a 
 
 The simplest 2D manifold is the flat plane, which we can think of as the familiar $xy$-plane. On a plane, calculating the distance between two points is straightforward using the Euclidean distance formula.
 
-\subsubsection{Formula}
-
-Given two points $P_1 = (x_1, y_1)$ and $P_2 = (x_2, y_2)$ on a 2D plane, the distance between them is:
-
+\begin{definition}[Distance between two points in $\mathbb{R}^2$]
+Given two points $P_1 = (x_1, y_1)$ and $P_2 = (x_2, y_2)$ on the Euclidean plane, their distance is
 \[
-d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}.
 \]
+\end{definition}
 
 This is the familiar Pythagorean theorem extended to two dimensions. The distance is the length of the straight line segment connecting the two points.
 
-\subsubsection{Example}
+\begin{example}[Euclidean distance on a plane]
 
 Consider two points on a plane: $P_1 = (1, 2)$ and $P_2 = (4, 6)$. The distance between them is:
 
 \[
 d = \sqrt{(4 - 1)^2 + (6 - 2)^2} = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5
 \]
+
+\end{example}
 
 \subsubsection{Intuition}
 
@@ -138,7 +139,29 @@ In terms of spherical coordinates:
 d = R \cdot \arccos(\sin\phi_1\sin\phi_2 + \cos\phi_1\cos\phi_2\cos(\lambda_2 - \lambda_1))
 \]
 
-This is known as the \textbf{haversine formula} when written in an alternative form.
+\begin{definition}[Haversine formula]
+Let two points on a sphere of radius $R$ have latitudes $\phi_1,\phi_2$ and longitude difference $\Delta\lambda = \lambda_2-\lambda_1$. Define the haversine $\operatorname{hav}(\theta)=\sin^2(\tfrac{\theta}{2})$. The central angle $\Delta\sigma$ satisfies
+\[
+\operatorname{hav}(\Delta\sigma)
+\;=\; \operatorname{hav}(\phi_2-\phi_1)
+\;+
+\cos\phi_1\cos\phi_2\,\operatorname{hav}(\Delta\lambda).
+\]
+Equivalently,
+\[
+\Delta\sigma
+\;=\; 2\,\arcsin\!\Bigg(\sqrt{\sin^2\!\frac{\phi_2-\phi_1}{2}
+\;+
+\cos\phi_1\cos\phi_2\,\sin^2\!\frac{\Delta\lambda}{2}}\;\Bigg),
+\]
+and the great-circle distance is
+\[
+d \;=\; R\,\Delta\sigma
+\;=\; 2R\,\arcsin\!\Bigg(\sqrt{\sin^2\!\frac{\phi_2-\phi_1}{2}
+\;+
+\cos\phi_1\cos\phi_2\,\sin^2\!\frac{\Delta\lambda}{2}}\;\Bigg).
+\]
+\end{definition}
 
 \subsubsection{Simplified Case: Points on the Equator}
 
@@ -150,7 +173,7 @@ d = R \cdot |\lambda_2 - \lambda_1|
 
 where $\lambda$ is the longitude difference in radians. This is similar to the 1D circle case we saw earlier.
 
-\subsubsection{Example}
+\begin{example}[Sphere distance on the equator]
 
 Consider a sphere with radius $R = 1$ unit. Two points are located at:
 \begin{itemize}
@@ -173,7 +196,9 @@ d = 1 \cdot \arccos\left(\sin(0)\sin\left(\frac{\pi}{6}\right) + \cos(0)\cos\lef
 d = \arccos\left(0 \cdot \frac{1}{2} + 1 \cdot \frac{\sqrt{3}}{2} \cdot \frac{1}{2}\right) = \arccos\left(\frac{\sqrt{3}}{4}\right) \approx 0.722 \text{ radians} \approx 1.0 \text{ units}
 \]
 
-\subsubsection{Real-World Example: Sydney to New York}
+\end{example}
+
+\begin{example}[Real-World: Sydney to New York]
 
 Let's calculate the great circle distance between two real-world locations on Earth:
 
@@ -220,6 +245,8 @@ d &= 6371 \cdot \arccos((-0.5564)(0.6522) + (0.8309)(0.7580)(-0.7077)) \\
 
 So the great circle distance between Sydney Opera House and Bow Bridge in New York is approximately \textbf{16,015 kilometers} (about 9,946 miles). This is the shortest path along the Earth's surface—the route that airplanes would follow for the most efficient flight.
 
+\end{example}
+
 \subsubsection{Intuition}
 
 On a sphere, the shortest path between two points is always along a great circle—the largest circle that can be drawn on the sphere. This is why airplanes flying long distances appear to follow curved paths on a flat map: they're actually following great circle routes, which are the shortest paths on the Earth's spherical surface.
@@ -260,7 +287,7 @@ d \approx \sqrt{(R + r)^2(\Delta\phi)^2 + r^2(\Delta\theta)^2}
 
 where $\Delta\phi = \phi_2 - \phi_1$ and $\Delta\theta = \theta_2 - \theta_1$ are small angle differences.
 
-\subsubsection{Example}
+\begin{example}[Approximate distance on a torus]
 
 Consider a torus with $R = 2$ (major radius) and $r = 1$ (minor radius). Two points are located at:
 \begin{itemize}
@@ -280,6 +307,8 @@ d \approx \sqrt{9 \cdot \left(\frac{\pi}{12}\right)^2 + \left(\frac{\pi}{6}\righ
 \[
 d \approx \sqrt{\frac{\pi^2}{16} + \frac{\pi^2}{36}} = \pi\sqrt{\frac{1}{16} + \frac{1}{36}} = \pi\sqrt{\frac{9 + 4}{144}} = \frac{\pi\sqrt{13}}{12} \approx 0.944 \text{ units}
 \]
+
+\end{example}
 
 \subsubsection{Intuition}
 
