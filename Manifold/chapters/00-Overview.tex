@@ -81,15 +81,38 @@ This book is designed for accessibility:
 
 \section{Prerequisites}
 
-This book assumes:
+This section is a short checklist of the math background helpful for reading this book. It is not a full course; we provide the geometric details where they first appear (see Chapter~9 for Riemannian geometry and Chapter~10 for information geometry).
+
+\subsection{Notation and conventions}
 \begin{itemize}
-\item \textbf{Basic calculus}: Understanding of derivatives and integrals
-\item \textbf{Linear algebra basics}: Familiarity with vectors and matrices
-\item \textbf{Coordinate systems}: Comfort with Cartesian and polar coordinates
-\item \textbf{No prior knowledge} of differential geometry, manifolds, or advanced topology required
+\item \textbf{Vectors, matrices, tensors}: Bold for vectors $\mathbf{x}$, uppercase for matrices $\mathbf{A}$; indices $x^i$, matrix entries $A_{ij}$.
+\item \textbf{Inner products and norms}: $\langle u,v\rangle$, $\|v\|^2=\langle v,v\rangle$.
+\item \textbf{Derivatives}: Gradient $\nabla f$, Jacobian $\mathbf{J}_F$, Hessian $\mathbf{H}_f$.
+\item \textbf{Probability}: $\mathbb{E}[\cdot]$, $\mathrm{Var}[\cdot]$, $\mathrm{KL}(p\|q)$.
 \end{itemize}
 
-The mathematical level is kept accessible, with intuitive explanations accompanying formal definitions.
+\subsection{Linear algebra (core)}
+Vector spaces and bases; orthonormality; eigenvalues/eigenvectors; positive (semi)definite matrices; SVD and projections; Jacobian/Hessian as matrices/tensors. Used in pullback metrics and curvature approximations (see Chapter~10: Parameter Manifolds, Fisher).
+
+\subsection{Calculus and multivariable calculus}
+Partial derivatives and chain rule; gradients/Hessians; Taylor expansions; arc length as an integral. Used for geodesic length and local KL expansions (see Chapter~9: Distances from the Metric; Chapter~10: Fisher).
+
+\subsection{Ordinary differential equations (light)}
+Initial value problems and basic numerical integration intuition. Used in geodesic ODEs and parallel transport (see Chapter~9: Geodesics, Parallel Transport).
+
+\subsection{Probability and statistics (core)}
+Expectations/variance; log-likelihood and score; common families (Bernoulli, Gaussian). Used in Fisher information and ELBO (see Chapter~10: Statistical Manifolds; Fisher Information Matrix).
+
+\subsection{Information theory and divergences}
+Entropy, cross-entropy, KL; Bregman divergences and Legendre duality (at a glance). Used in KL\,$\approx$\,Fisher locally and loss design (see Chapter~10: Bregman Divergence, Natural Gradient).
+
+\subsection{Optimization (core)}
+Gradient descent; conditioning and preconditioning; Gauss--Newton vs Hessian; trust regions. Used in geometry-aware training (see Chapter~10: Natural Gradient; Parameter Manifolds).
+
+\subsection{Differential geometry (orientation only)}
+Curves and tangent vectors as velocities; coordinate bases; Riemannian metric and line element $ds^2=g_{ij}dx^i dx^j$; Christoffel symbols and the idea of geodesics. Full treatment in Chapter~9.
+
+\paragraph{Minimal expectation.} Comfort with basic linear algebra and multivariable calculus is sufficient. No prior knowledge of manifolds or differential geometry is required.
 
 \section{The Big Picture}
 
