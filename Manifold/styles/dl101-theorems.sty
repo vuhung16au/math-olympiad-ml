@@ -51,7 +51,14 @@
 % Redefine theorem environments to use tcolorbox from dl101-boxes
 \makeatletter
 \renewenvironment{theorem}[1][]{\begin{theorembox}[title={\bfseries Theorem~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{theorembox}}
-\renewenvironment{example}[1][]{\begin{examplebox}[title={\bfseries Example~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{examplebox}}
+% Example environment: unboxed, just a heading
+% Since example shares counter with theorem, we use thetheorem
+\renewenvironment{example}[1][]{%
+  \refstepcounter{theorem}%
+  \par\noindent\textbf{Example~\thetheorem\ifx\relax#1\relax\else: #1\fi}\par\noindent
+}{%
+  \par
+}
 \renewenvironment{remark}[1][]{\begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{remarkbox}}
 \renewenvironment{definition}[1][]{\begin{definitionbox}[title={\bfseries Definition~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{definitionbox}}
 \makeatother
