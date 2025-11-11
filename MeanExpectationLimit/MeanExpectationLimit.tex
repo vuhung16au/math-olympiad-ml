@@ -16,7 +16,7 @@
 \newtheorem{problem}{Problem}
 \newtheorem*{solution}{Solution}
 
-\author{Vu Hung Nguyen, \href{mailto:vuhung16plus@gmail.com}{vuhung16plus@gmail.com}}
+\author{Vu Hung Nguyen}
 \title{Limits of Generalized Mean Expectations}
 \date{}
 
@@ -141,7 +141,7 @@ Since the generalized mean is bounded (for $x_i \in [0,1]$ and $p > 0$, we have 
 
 \subsection{Solution for Minimum Mean}
 
-Let $M_n = \min(X_1, \ldots, X_n)$ for i.i.d. $X_i \sim \text{Unif}(0,1)$. The probability that $M_n > t$ is:
+The minimum corresponds to the limit of the generalized mean as $p \to -\infty$. Let $M_n = \min(X_1, \ldots, X_n)$ for i.i.d. $X_i \sim \text{Unif}(0,1)$. The probability that $M_n > t$ is:
 \[
 P(M_n > t) = P(X_1 > t, \ldots, X_n > t) = (1-t)^n, \quad 0 < t < 1.
 \]
@@ -164,7 +164,7 @@ Taking the limit:
 
 \subsection{Solution for Maximum Mean}
 
-Let $M_n' = \max(X_1, \ldots, X_n)$ for i.i.d. $X_i \sim \text{Unif}(0,1)$. The cumulative distribution function is:
+The maximum corresponds to the limit of the generalized mean as $p \to +\infty$. Let $M_n' = \max(X_1, \ldots, X_n)$ for i.i.d. $X_i \sim \text{Unif}(0,1)$. The cumulative distribution function is:
 \[
 F_{M_n'}(t) = P(M_n' \le t) = P(X_1 \le t, \ldots, X_n \le t) = t^n, \quad 0 \le t \le 1.
 \]
@@ -187,7 +187,7 @@ Taking the limit:
 
 \subsection{Solution for Harmonic Mean}
 
-The harmonic mean is $H_n = \frac{n}{\sum_{i=1}^n \frac{1}{X_i}}$. Let $Y_i = \frac{1}{X_i}$. Then:
+The harmonic mean corresponds to $p = -1$ in the generalized mean. This case demonstrates the application of the generalized SLLN when the expectation is infinite. The harmonic mean is $H_n = \frac{n}{\sum_{i=1}^n \frac{1}{X_i}}$. Let $Y_i = \frac{1}{X_i}$. Then:
 \[
 E[Y_i] = \int_0^1 \frac{1}{x} \, dx = \lim_{t \to 0^+} [\ln x]_t^1 = \infty.
 \]
@@ -215,7 +215,7 @@ Since $0 < H_n \le 1$ (harmonic mean of numbers in $(0,1]$ is bounded), the Domi
 
 \subsection{Solution for Geometric Mean}
 
-The geometric mean is $G_n = \left( \prod_{i=1}^n X_i \right)^{1/n}$. By the Fubini-Tonelli Theorem and independence:
+The geometric mean corresponds to the limit $p \to 0$ in the generalized mean, signifying the exponential of the arithmetic mean of logarithms. The geometric mean is $G_n = \left( \prod_{i=1}^n X_i \right)^{1/n}$. By the Fubini-Tonelli Theorem and independence:
 \[
 E[G_n] = \int_{[0,1]^n} \left( \prod_{i=1}^n x_i \right)^{1/n} dx_1 \cdots dx_n = \prod_{i=1}^n \int_0^1 x_i^{1/n} \, dx_i = \left( \int_0^1 x^{1/n} \, dx \right)^n.
 \]
@@ -238,7 +238,7 @@ Taking the limit:
 
 \subsection{Solution for Arithmetic Mean}
 
-The arithmetic mean is $A_n = \frac{1}{n} \sum_{i=1}^n X_i$. By the SLLN:
+The arithmetic mean corresponds to $p = 1$, which is the most straightforward case. The arithmetic mean is $A_n = \frac{1}{n} \sum_{i=1}^n X_i$. By the SLLN:
 \[
 \lim_{n \to \infty} A_n = E[X_1] = \int_0^1 x \, dx = \frac{1}{2} \quad \text{a.s.}
 \]

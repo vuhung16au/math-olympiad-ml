@@ -88,5 +88,8 @@ build.bat release  # Build and copy to releases/
 ## Author
 
 Vu Hung Nguyen  
-Email: vuhung16plus@gmail.com
+
+- LinkedIn: https://www.linkedin.com/in/nguyenvuhung/
+- Github: https://github.com/vuhung16au/
+
 
