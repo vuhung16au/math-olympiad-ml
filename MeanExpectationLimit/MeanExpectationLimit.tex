@@ -1,0 +1,346 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+\newtheorem{problem}{Problem}
+\newtheorem*{solution}{Solution}
+
+\author{Vu Hung Nguyen, \href{mailto:vuhung16plus@gmail.com}{vuhung16plus@gmail.com}}
+\title{Limits of Generalized Mean Expectations}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Overview}
+
+This document evaluates the limits of expectations of generalized means $H_p$ over the unit hypercube $[0,1]^n$ as $n \to \infty$, where $H_p = \left(\frac{1}{n}\sum_{i=1}^n x_i^p\right)^{1/p}$ for various values of $p$, including special cases such as minimum, maximum, harmonic, geometric, arithmetic, root mean square, and cubic means.
+
+\section{Problem Statements}
+
+\subsection{Generalized Mean}
+
+For a real parameter $p \neq 0$, the generalized mean (or power mean) is defined as:
+\[
+H_p(\mathbf{x}) = \left( \frac{1}{n} \sum_{i=1}^n x_i^p \right)^{1/p}.
+\]
+
+We seek to evaluate:
+\begin{problem}
+For $p \in \mathbb{R} \setminus \{0\}$, find
+\[
+\lim_{n \to \infty} \int_{[0,1]^n} \left( \frac{1}{n} \sum_{i=1}^n x_i^p \right)^{1/p} dx_1 \cdots dx_n.
+\]
+\end{problem}
+
+\subsection{Special Cases}
+
+We also consider the following special cases:
+
+\begin{problem}[Minimum Mean]
+\[
+\lim_{n \to \infty} \int_{[0,1]^n} \min(x_1, x_2, \dots, x_n) \, dx_1 \cdots dx_n.
+\]
+\end{problem}
+
+\begin{problem}[Maximum Mean]
+\[
+\lim_{n \to \infty} \int_{[0,1]^n} \max(x_1, x_2, \dots, x_n) \, dx_1 \cdots dx_n.
+\]
+\end{problem}
+
+\begin{problem}[Harmonic Mean]
+\[
+\lim_{n \to \infty} \int_{[0,1]^n} \frac{n}{\sum_{i=1}^n \frac{1}{x_i}} \, dx_1 \cdots dx_n.
+\]
+\end{problem}
+
+\begin{problem}[Geometric Mean]
+\[
+\lim_{n \to \infty} \int_{[0,1]^n} \left( \prod_{i=1}^n x_i \right)^{1/n} dx_1 \cdots dx_n.
+\]
+\end{problem}
+
+\begin{problem}[Arithmetic Mean]
+\[
+\lim_{n \to \infty} \int_{[0,1]^n} \frac{1}{n} \sum_{i=1}^n x_i \, dx_1 \cdots dx_n.
+\]
+\end{problem}
+
+\begin{problem}[Root Mean Square]
+\[
+\lim_{n \to \infty} \int_{[0,1]^n} \left( \frac{1}{n} \sum_{i=1}^n x_i^2 \right)^{1/2} dx_1 \cdots dx_n.
+\]
+\end{problem}
+
+\begin{problem}[Cubic Mean]
+\[
+\lim_{n \to \infty} \int_{[0,1]^n} \left( \frac{1}{n} \sum_{i=1}^n x_i^3 \right)^{1/3} dx_1 \cdots dx_n.
+\]
+\end{problem}
+
+\section{Key Ideas}
+
+The solutions rely on two fundamental tools:
+
+\begin{enumerate}
+\item \textbf{The Fubini-Tonelli Theorem}: This allows us to exchange the order of integration and factorize integrals over independent variables. For independent random variables $X_1, \ldots, X_n$ uniformly distributed on $[0,1]$, we can write:
+\[
+E[f(X_1, \ldots, X_n)] = \int_{[0,1]^n} f(x_1, \ldots, x_n) \, dx_1 \cdots dx_n = \int_0^1 \cdots \int_0^1 f(x_1, \ldots, x_n) \, dx_1 \cdots dx_n.
+\]
+
+\item \textbf{Strong Law of Large Numbers (SLLN)}: For i.i.d. random variables $X_1, X_2, \ldots$ with finite expectation $E[X]$, we have:
+\[
+\lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n X_i = E[X] \quad \text{almost surely}.
+\]
+For the case when $E[X] = \infty$ (as in the harmonic mean), a generalized version applies, stating that the sample mean converges to infinity almost surely.
+\end{enumerate}
+
+\section{Solutions}
+
+\subsection{Solution for Generalized Mean $H_p$}
+
+For $p \neq 0$, we interpret the integral as an expectation:
+\[
+I_n^{(p)} = \int_{[0,1]^n} \left( \frac{1}{n} \sum_{i=1}^n x_i^p \right)^{1/p} dx_1 \cdots dx_n = E\left[\left( \frac{1}{n} \sum_{i=1}^n X_i^p \right)^{1/p}\right],
+\]
+where $X_1, \ldots, X_n$ are i.i.d. $\text{Unif}(0,1)$.
+
+By the Strong Law of Large Numbers, $\frac{1}{n}\sum_{i=1}^n X_i^p \to E[X_1^p]$ almost surely. Since $E[X_1^p] = \int_0^1 x^p \, dx = \frac{1}{p+1}$ for $p > -1$, we have:
+\[
+\lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n X_i^p = \frac{1}{p+1} \quad \text{a.s.}
+\]
+
+Taking the $1/p$-th power (which is continuous for $p \neq 0$):
+\[
+\lim_{n \to \infty} \left( \frac{1}{n} \sum_{i=1}^n X_i^p \right)^{1/p} = \left( \frac{1}{p+1} \right)^{1/p} \quad \text{a.s.}
+\]
+
+Since the generalized mean is bounded (for $x_i \in [0,1]$ and $p > 0$, we have $H_p \in [0,1]$; for $p < 0$, appropriate bounds exist), the Dominated Convergence Theorem applies:
+\[
+\lim_{n \to \infty} I_n^{(p)} = E\left[\lim_{n \to \infty} \left( \frac{1}{n} \sum_{i=1}^n X_i^p \right)^{1/p}\right] = \left( \frac{1}{p+1} \right)^{1/p}.
+\]
+
+\begin{solution}
+\[
+\boxed{\lim_{n \to \infty} \int_{[0,1]^n} \left( \frac{1}{n} \sum_{i=1}^n x_i^p \right)^{1/p} dx_1 \cdots dx_n = \left( \frac{1}{p+1} \right)^{1/p}}
+\]
+\end{solution}
+
+\subsection{Solution for Minimum Mean}
+
+Let $M_n = \min(X_1, \ldots, X_n)$ for i.i.d. $X_i \sim \text{Unif}(0,1)$. The probability that $M_n > t$ is:
+\[
+P(M_n > t) = P(X_1 > t, \ldots, X_n > t) = (1-t)^n, \quad 0 < t < 1.
+\]
+
+Using the identity $E[M_n] = \int_0^1 P(M_n > t) \, dt$:
+\[
+E[M_n] = \int_0^1 (1-t)^n \, dt = \frac{1}{n+1}.
+\]
+
+Taking the limit:
+\[
+\lim_{n \to \infty} E[M_n] = \lim_{n \to \infty} \frac{1}{n+1} = 0.
+\]
+
+\begin{solution}
+\[
+\boxed{\lim_{n \to \infty} \int_{[0,1]^n} \min(x_1, x_2, \dots, x_n) \, dx_1 \cdots dx_n = 0}
+\]
+\end{solution}
+
+\subsection{Solution for Maximum Mean}
+
+Let $M_n' = \max(X_1, \ldots, X_n)$ for i.i.d. $X_i \sim \text{Unif}(0,1)$. The cumulative distribution function is:
+\[
+F_{M_n'}(t) = P(M_n' \le t) = P(X_1 \le t, \ldots, X_n \le t) = t^n, \quad 0 \le t \le 1.
+\]
+
+The probability density function is $f_{M_n'}(t) = n t^{n-1}$, so:
+\[
+E[M_n'] = \int_0^1 t \cdot n t^{n-1} \, dt = n \int_0^1 t^n \, dt = \frac{n}{n+1}.
+\]
+
+Taking the limit:
+\[
+\lim_{n \to \infty} E[M_n'] = \lim_{n \to \infty} \frac{n}{n+1} = 1.
+\]
+
+\begin{solution}
+\[
+\boxed{\lim_{n \to \infty} \int_{[0,1]^n} \max(x_1, x_2, \dots, x_n) \, dx_1 \cdots dx_n = 1}
+\]
+\end{solution}
+
+\subsection{Solution for Harmonic Mean}
+
+The harmonic mean is $H_n = \frac{n}{\sum_{i=1}^n \frac{1}{X_i}}$. Let $Y_i = \frac{1}{X_i}$. Then:
+\[
+E[Y_i] = \int_0^1 \frac{1}{x} \, dx = \lim_{t \to 0^+} [\ln x]_t^1 = \infty.
+\]
+
+Since $E[Y_i] = \infty$, the generalized SLLN implies:
+\[
+\lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n Y_i = \infty \quad \text{a.s.}
+\]
+
+Therefore:
+\[
+\lim_{n \to \infty} H_n = \lim_{n \to \infty} \frac{1}{\frac{1}{n} \sum_{i=1}^n Y_i} = 0 \quad \text{a.s.}
+\]
+
+Since $0 < H_n \le 1$ (harmonic mean of numbers in $(0,1]$ is bounded), the Dominated Convergence Theorem applies:
+\[
+\lim_{n \to \infty} E[H_n] = E\left[\lim_{n \to \infty} H_n\right] = 0.
+\]
+
+\begin{solution}
+\[
+\boxed{\lim_{n \to \infty} \int_{[0,1]^n} \frac{n}{\sum_{i=1}^n \frac{1}{x_i}} \, dx_1 \cdots dx_n = 0}
+\]
+\end{solution}
+
+\subsection{Solution for Geometric Mean}
+
+The geometric mean is $G_n = \left( \prod_{i=1}^n X_i \right)^{1/n}$. By the Fubini-Tonelli Theorem and independence:
+\[
+E[G_n] = \int_{[0,1]^n} \left( \prod_{i=1}^n x_i \right)^{1/n} dx_1 \cdots dx_n = \prod_{i=1}^n \int_0^1 x_i^{1/n} \, dx_i = \left( \int_0^1 x^{1/n} \, dx \right)^n.
+\]
+
+Since $\int_0^1 x^{1/n} \, dx = \frac{n}{n+1}$:
+\[
+E[G_n] = \left( \frac{n}{n+1} \right)^n.
+\]
+
+Taking the limit:
+\[
+\lim_{n \to \infty} E[G_n] = \lim_{n \to \infty} \left( \frac{n}{n+1} \right)^n = \lim_{n \to \infty} \frac{1}{(1 + 1/n)^n} = \frac{1}{e}.
+\]
+
+\begin{solution}
+\[
+\boxed{\lim_{n \to \infty} \int_{[0,1]^n} \left( \prod_{i=1}^n x_i \right)^{1/n} dx_1 \cdots dx_n = \frac{1}{e}}
+\]
+\end{solution}
+
+\subsection{Solution for Arithmetic Mean}
+
+The arithmetic mean is $A_n = \frac{1}{n} \sum_{i=1}^n X_i$. By the SLLN:
+\[
+\lim_{n \to \infty} A_n = E[X_1] = \int_0^1 x \, dx = \frac{1}{2} \quad \text{a.s.}
+\]
+
+Since $A_n \in [0,1]$, the Dominated Convergence Theorem gives:
+\[
+\lim_{n \to \infty} E[A_n] = E\left[\lim_{n \to \infty} A_n\right] = \frac{1}{2}.
+\]
+
+\begin{solution}
+\[
+\boxed{\lim_{n \to \infty} \int_{[0,1]^n} \frac{1}{n} \sum_{i=1}^n x_i \, dx_1 \cdots dx_n = \frac{1}{2}}
+\]
+\end{solution}
+
+\subsection{Solution for Root Mean Square}
+
+The root mean square is $R_n = \left( \frac{1}{n} \sum_{i=1}^n X_i^2 \right)^{1/2}$. By the SLLN:
+\[
+\lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n X_i^2 = E[X_1^2] = \int_0^1 x^2 \, dx = \frac{1}{3} \quad \text{a.s.}
+\]
+
+Taking the square root:
+\[
+\lim_{n \to \infty} R_n = \sqrt{\frac{1}{3}} = \frac{1}{\sqrt{3}} \quad \text{a.s.}
+\]
+
+Since $R_n \in [0,1]$, the Dominated Convergence Theorem applies:
+\[
+\lim_{n \to \infty} E[R_n] = \frac{1}{\sqrt{3}}.
+\]
+
+\begin{solution}
+\[
+\boxed{\lim_{n \to \infty} \int_{[0,1]^n} \left( \frac{1}{n} \sum_{i=1}^n x_i^2 \right)^{1/2} dx_1 \cdots dx_n = \frac{1}{\sqrt{3}}}
+\]
+\end{solution}
+
+\subsection{Solution for Cubic Mean}
+
+The cubic mean is $C_n = \left( \frac{1}{n} \sum_{i=1}^n X_i^3 \right)^{1/3}$. By the SLLN:
+\[
+\lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^n X_i^3 = E[X_1^3] = \int_0^1 x^3 \, dx = \frac{1}{4} \quad \text{a.s.}
+\]
+
+Taking the cube root:
+\[
+\lim_{n \to \infty} C_n = \left( \frac{1}{4} \right)^{1/3} = \frac{1}{\sqrt[3]{4}} \quad \text{a.s.}
+\]
+
+Since $C_n \in [0,1]$, the Dominated Convergence Theorem applies:
+\[
+\lim_{n \to \infty} E[C_n] = \frac{1}{\sqrt[3]{4}}.
+\]
+
+\begin{solution}
+\[
+\boxed{\lim_{n \to \infty} \int_{[0,1]^n} \left( \frac{1}{n} \sum_{i=1}^n x_i^3 \right)^{1/3} dx_1 \cdots dx_n = \frac{1}{\sqrt[3]{4}}}
+\]
+\end{solution}
+
+\section{Further Works and Open Problems}
+
+Several directions for future research emerge:
+
+\begin{enumerate}
+\item \textbf{Generalized means for $p < -1$}: The case $p < -1$ requires careful analysis since $E[X_1^p]$ may not exist. The behavior of the limit as $p \to -1^-$ (approaching the harmonic mean from below) is of particular interest.
+
+\item \textbf{Non-uniform distributions}: Extending these results to other probability distributions on $[0,1]$ or to unbounded domains would provide a more general theory.
+
+\item \textbf{Convergence rates}: While we have established the limits, the rate of convergence (e.g., $O(1/n)$ for arithmetic mean) could be studied more systematically.
+
+\item \textbf{Multivariate extensions}: Generalizing to integrals over $[0,1]^{n \times d}$ for $d > 1$ or to other geometric domains.
+
+\item \textbf{Connection to order statistics}: The minimum and maximum cases are directly related to order statistics. A unified treatment connecting all means through order statistics might yield deeper insights.
+\end{enumerate}
+
+\section{Conclusions}
+
+We have evaluated the limits of expectations of various generalized means over the unit hypercube $[0,1]^n$ as $n \to \infty$. The key results are summarized in Table~\ref{tab:results}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Mean Type} & \textbf{Limit} \\
+\hline
+Generalized Mean $H_p$ ($p \neq 0$) & $\left( \frac{1}{p+1} \right)^{1/p}$ \\
+Minimum & $0$ \\
+Maximum & $1$ \\
+Harmonic Mean ($p = -1$) & $0$ \\
+Geometric Mean ($p \to 0$) & $\frac{1}{e}$ \\
+Arithmetic Mean ($p = 1$) & $\frac{1}{2}$ \\
+Root Mean Square ($p = 2$) & $\frac{1}{\sqrt{3}}$ \\
+Cubic Mean ($p = 3$) & $\frac{1}{\sqrt[3]{4}}$ \\
+\hline
+\end{tabular}
+\caption{Summary of limit results for various means.}
+\label{tab:results}
+\end{table}
+
+The solutions demonstrate the power of probabilistic methods (interpreting integrals as expectations) combined with fundamental convergence theorems (SLLN, Dominated Convergence Theorem) to solve high-dimensional integration problems. The results show interesting patterns: the minimum and harmonic means converge to $0$, the maximum converges to $1$, while other means converge to intermediate values that depend on the parameter $p$.
+
+\end{document}
+
