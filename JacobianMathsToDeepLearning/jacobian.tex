@@ -1,0 +1,546 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+
+\title{From Gaussian Integral to Deep Learning:\\
+The Jacobian Matrix and Its Applications}
+\author{Nguyen Vu Hung}
+\date{\today}
+
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document explores the fundamental role of the Jacobian matrix in mathematics and its critical applications in deep learning. We begin with the classical Gaussian integral problem, demonstrating how the Jacobian transformation enables elegant solutions to otherwise intractable integrals. We then trace the evolution of this concept from multivariable calculus to modern machine learning, showing how the Jacobian serves as the mathematical backbone of backpropagation, optimization algorithms, and neural network training. Through this journey, we connect classical mathematical theory to cutting-edge deep learning techniques.
+\end{abstract}
+
+\section{Overview}
+
+The Jacobian matrix is one of the most important mathematical tools bridging classical calculus and modern machine learning. Named after the German mathematician Carl Gustav Jacob Jacobi (1804--1851), who made fundamental contributions to analysis and mechanics, the Jacobian was originally developed for solving multivariable calculus problems, particularly in the context of coordinate transformations and change of variables in integrals. The Jacobian has found profound applications in deep learning, where it enables efficient computation of gradients through backpropagation.
+
+This document presents a comprehensive exploration of the Jacobian matrix, starting from its foundational role in solving the Gaussian integral, through its theoretical development in multivariable calculus, and culminating in its practical applications in neural networks and optimization algorithms.
+
+\section{Problem 1: The Gaussian Integral}
+
+\begin{problem}[Gaussian Integral (Euler-Poisson Integral)]
+Evaluate the integral:
+\begin{equation}
+I = \int_{-\infty}^{\infty} e^{-x^2} \, dx
+\end{equation}
+\end{problem}
+
+This integral, also known as the Euler-Poisson integral, is fundamental in probability theory, statistics, and physics. Despite its simple appearance, it cannot be evaluated using elementary antiderivatives.
+
+\subsection{Solution to Problem 1}
+
+The standard approach to solving this integral involves a clever trick: squaring the integral and converting it to a double integral.
+
+\subsubsection{Step 1: Squaring the Integral}
+
+We consider the square of the integral:
+\begin{equation}
+I^2 = \left(\int_{-\infty}^{\infty} e^{-x^2} \, dx\right)^2 = \int_{-\infty}^{\infty} e^{-x^2} \, dx \cdot \int_{-\infty}^{\infty} e^{-y^2} \, dy
+\end{equation}
+
+\subsubsection{Step 2: Converting to a Double Integral}
+
+Since the two integrals are independent, we can combine them into a double integral over the entire $xy$-plane:
+\begin{equation}
+I^2 = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{-(x^2 + y^2)} \, dx \, dy
+\end{equation}
+
+\subsubsection{Step 3: Direct Evaluation Attempt}
+
+At this point, we have a double integral that is still difficult to evaluate directly in Cartesian coordinates. The integrand $e^{-(x^2 + y^2)}$ suggests that polar coordinates might be more suitable, as $x^2 + y^2 = r^2$ in polar coordinates.
+
+\subsection{Solution Using Jacobian Transformation}
+
+The key insight is to transform the integral from Cartesian coordinates $(x, y)$ to polar coordinates $(r, \theta)$ using the Jacobian transformation.
+
+\subsubsection{Coordinate Transformation}
+
+The transformation from Cartesian to polar coordinates is:
+\begin{align}
+x &= r \cos \theta \\
+y &= r \sin \theta
+\end{align}
+where $r \geq 0$ and $0 \leq \theta \leq 2\pi$.
+
+\subsubsection{Region of Integration}
+
+The region of integration (the entire $xy$-plane) transforms to:
+\begin{align}
+0 &\leq r < \infty \\
+0 &\leq \theta \leq 2\pi
+\end{align}
+
+\subsubsection{The Jacobian Determinant}
+
+The crucial step is replacing the differential area element $dx \, dy$ with the appropriate expression in polar coordinates. This requires the Jacobian determinant of the transformation, which we will compute in the next section. For now, we state that:
+\begin{equation}
+dx \, dy = r \, dr \, d\theta
+\end{equation}
+where the factor $r$ is the absolute value of the Jacobian determinant.
+
+\subsubsection{Transformed Integral}
+
+The double integral becomes:
+\begin{equation}
+I^2 = \int_{0}^{2\pi} \int_{0}^{\infty} e^{-r^2} \cdot r \, dr \, d\theta
+\end{equation}
+
+\subsubsection{Solving the Polar Integral}
+
+We can now separate the integrals:
+\begin{equation}
+I^2 = \int_{0}^{2\pi} d\theta \cdot \int_{0}^{\infty} r e^{-r^2} \, dr
+\end{equation}
+
+The $\theta$ integral is straightforward:
+\begin{equation}
+\int_{0}^{2\pi} d\theta = 2\pi
+\end{equation}
+
+For the $r$ integral, we use the substitution $u = r^2$, so $du = 2r \, dr$, or $r \, dr = \frac{du}{2}$:
+\begin{align}
+\int_{0}^{\infty} r e^{-r^2} \, dr &= \int_{0}^{\infty} e^{-u} \cdot \frac{du}{2} \\
+&= \frac{1}{2} \int_{0}^{\infty} e^{-u} \, du \\
+&= \frac{1}{2} \left[-e^{-u}\right]_{0}^{\infty} \\
+&= \frac{1}{2} (0 - (-1)) = \frac{1}{2}
+\end{align}
+
+\subsubsection{Final Result}
+
+Substituting back:
+\begin{equation}
+I^2 = 2\pi \cdot \frac{1}{2} = \pi
+\end{equation}
+
+Taking the positive square root (since the integrand is always positive):
+\begin{equation}
+I = \int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
+\end{equation}
+
+\section{The Jacobian Determinant in Multivariable Calculus}
+
+\subsection{Definition and Explanation}
+
+\begin{definition}[Jacobian Matrix]
+For a transformation from variables $(u, v, \ldots)$ to $(x, y, \ldots)$, where $x = x(u, v, \ldots)$ and $y = y(u, v, \ldots)$, the \textbf{Jacobian matrix} $\mathbf{J}_M$ is the matrix of all first-order partial derivatives:
+\begin{equation}
+\mathbf{J}_M = \begin{bmatrix}
+\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} & \cdots \\
+\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} & \cdots \\
+\vdots & \vdots & \ddots
+\end{bmatrix}
+\end{equation}
+\end{definition}
+
+\begin{definition}[Jacobian Determinant]
+The \textbf{Jacobian determinant}, denoted $J$ or $\det(\mathbf{J}_M)$, is the determinant of the Jacobian matrix. For a transformation from $(u, v)$ to $(x, y)$:
+\begin{equation}
+J = \det(\mathbf{J}_M) = \begin{vmatrix}
+\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+\end{vmatrix} = \frac{\partial x}{\partial u} \frac{\partial y}{\partial v} - \frac{\partial x}{\partial v} \frac{\partial y}{\partial u}
+\end{equation}
+\end{definition}
+
+The Jacobian determinant acts as a scaling factor or correction factor needed when transforming a small differential volume/area element from one coordinate system to another. In a double integral:
+\begin{equation}
+\iint_R f(x, y) \, dx \, dy = \iint_{R'} f(x(u, v), y(u, v)) \cdot |J| \, du \, dv
+\end{equation}
+where $|J|$ is the absolute value of the Jacobian determinant.
+
+\subsection{Application: Cartesian to Polar Coordinates}
+
+In the Gaussian integral example, we transformed from Cartesian $(x, y)$ to polar $(r, \theta)$ coordinates.
+
+\subsubsection{Transformation Equations}
+\begin{align}
+x &= r \cos \theta \\
+y &= r \sin \theta
+\end{align}
+
+\subsubsection{Calculating Partial Derivatives}
+\begin{align}
+\frac{\partial x}{\partial r} &= \cos \theta, \quad \frac{\partial x}{\partial \theta} = -r \sin \theta \\
+\frac{\partial y}{\partial r} &= \sin \theta, \quad \frac{\partial y}{\partial \theta} = r \cos \theta
+\end{align}
+
+\subsubsection{Calculating the Determinant}
+\begin{align}
+J &= \begin{vmatrix}
+\cos \theta & -r \sin \theta \\
+\sin \theta & r \cos \theta
+\end{vmatrix} \\
+&= \cos \theta \cdot r \cos \theta - (-r \sin \theta) \cdot \sin \theta \\
+&= r \cos^2 \theta + r \sin^2 \theta \\
+&= r (\cos^2 \theta + \sin^2 \theta) \\
+&= r
+\end{align}
+
+\subsubsection{Result}
+
+Since $r \geq 0$, the absolute value $|J| = r$. Therefore, the differential area element $dx \, dy$ is replaced by $r \, dr \, d\theta$, as used in the Gaussian integral calculation.
+
+\section{Analogy to Single-Variable Calculus}
+
+The Jacobian determinant generalizes the concept of the derivative in single-variable calculus to multivariable functions.
+
+In single-variable calculus, when we perform a change of variables $x = g(u)$, the differential transforms as:
+\begin{equation}
+dx = g'(u) \, du = \frac{dx}{du} \, du
+\end{equation}
+
+The factor $g'(u) = \frac{dx}{du}$ is the one-dimensional analog of the Jacobian determinant. In the multivariable case, the Jacobian determinant $J$ plays the same role, accounting for how the transformation stretches or compresses the differential area/volume element.
+
+For a single-variable integral:
+\begin{equation}
+\int_a^b f(x) \, dx = \int_{g^{-1}(a)}^{g^{-1}(b)} f(g(u)) \cdot |g'(u)| \, du
+\end{equation}
+
+This is directly analogous to the multivariable change of variables formula using the Jacobian.
+
+\section{Special Case: Linear Transformations}
+
+\subsection{Jacobian of a Linear Transformation}
+
+A linear transformation $\mathbf{T}$ from $\mathbb{R}^n$ to $\mathbb{R}^m$ is defined by an $m \times n$ matrix $\mathbf{A}$:
+\begin{equation}
+\mathbf{T}(\mathbf{x}) = \mathbf{A}\mathbf{x}
+\end{equation}
+
+Written component-wise:
+\begin{equation}
+t_i = \sum_{j=1}^n a_{ij} x_j, \quad i = 1, 2, \ldots, m
+\end{equation}
+
+\subsection{Computing the Jacobian}
+
+The Jacobian matrix $\mathbf{J}_{\mathbf{T}}$ is the matrix of all first-order partial derivatives:
+\begin{equation}
+\mathbf{J}_{\mathbf{T}} = \begin{bmatrix}
+\frac{\partial t_1}{\partial x_1} & \frac{\partial t_1}{\partial x_2} & \cdots & \frac{\partial t_1}{\partial x_n} \\
+\frac{\partial t_2}{\partial x_1} & \frac{\partial t_2}{\partial x_2} & \cdots & \frac{\partial t_2}{\partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial t_m}{\partial x_1} & \frac{\partial t_m}{\partial x_2} & \cdots & \frac{\partial t_m}{\partial x_n}
+\end{bmatrix}
+\end{equation}
+
+For a linear function:
+\begin{equation}
+\frac{\partial t_i}{\partial x_j} = a_{ij}
+\end{equation}
+
+Therefore:
+\begin{equation}
+\mathbf{J}_{\mathbf{T}}(\mathbf{x}) = \mathbf{A}
+\end{equation}
+
+\subsection{Key Properties}
+
+\begin{enumerate}
+\item \textbf{Constant Jacobian}: The Jacobian matrix of a linear transformation is constant and equal to the transformation matrix $\mathbf{A}$ itself.
+\item \textbf{Uniform Scaling}: Because the transformation is linear, the "stretching" or "distortion" it imposes on the input space is uniform everywhere.
+\item \textbf{Best Linear Approximation}: For a function that is already linear, the best linear approximation is the function itself, so the Jacobian is exactly the matrix that defines the function.
+\end{enumerate}
+
+\subsection{Change of Variables for Linear Transformations}
+
+If a coordinate transformation is linear (e.g., a simple scaling or rotation), the Jacobian determinant is just the determinant of the transformation matrix, and it gives the uniform scaling factor for the area or volume element.
+
+\section{Best Linear Approximation Using Jacobian}
+
+The Jacobian matrix represents the best linear approximation of a function near a point. For a differentiable function $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$, the linear approximation near a point $\mathbf{x}_0$ is:
+\begin{equation}
+\mathbf{f}(\mathbf{x}) \approx \mathbf{f}(\mathbf{x}_0) + \mathbf{J}_{\mathbf{f}}(\mathbf{x}_0)(\mathbf{x} - \mathbf{x}_0)
+\end{equation}
+
+where $\mathbf{J}_{\mathbf{f}}(\mathbf{x}_0)$ is the Jacobian matrix evaluated at $\mathbf{x}_0$.
+
+This is the multivariable generalization of the tangent line approximation in single-variable calculus:
+\begin{equation}
+f(x) \approx f(x_0) + f'(x_0)(x - x_0)
+\end{equation}
+
+\section{Jacobian's Role in Optimization}
+
+\subsection{Generalizing the First Derivative}
+
+In single-variable calculus, an extremum (minimum or maximum) is found where the first derivative is zero: $f'(x) = 0$.
+
+For scalar-valued functions (loss functions) $L(\mathbf{w})$ with respect to a vector of parameters $\mathbf{w}$, the Jacobian specializes to the gradient vector $\nabla L$. The Jacobian of a scalar function $\mathbf{T}: \mathbb{R}^n \to \mathbb{R}^1$ is a $1 \times n$ matrix (a row vector), which is the transpose of the standard gradient column vector:
+\begin{equation}
+\nabla L(\mathbf{w}) = \begin{bmatrix}
+\frac{\partial L}{\partial w_1} & \frac{\partial L}{\partial w_2} & \cdots & \frac{\partial L}{\partial w_n}
+\end{bmatrix}^T
+\end{equation}
+
+To find critical points, we set:
+\begin{equation}
+\nabla L(\mathbf{w}) = \mathbf{0}
+\end{equation}
+
+\subsection{Jacobian and Gradient Descent}
+
+The Jacobian (in the form of the gradient) is the core of Gradient Descent (an iterative optimization algorithm that moves in the direction of the negative gradient to minimize a function) and its variants: SGD (Stochastic Gradient Descent, which uses a random subset of data at each iteration, making it faster and more memory-efficient for large datasets) and Adam (Adaptive Moment Estimation, which combines momentum and adaptive learning rates for each parameter, often providing faster convergence and better performance on sparse gradients), which are fundamental algorithms in machine learning.
+
+The gradient vector $\nabla L(\mathbf{w})$ points in the direction of the steepest ascent. Optimization algorithms use the negative gradient $-\nabla L$ to determine the direction of the next step, ensuring movement toward a local minimum:
+\begin{equation}
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} - \eta \nabla L(\mathbf{w}^{(t)})
+\end{equation}
+where $\eta$ is the learning rate (a hyperparameter that controls the step size in the direction of the negative gradient; a larger learning rate takes bigger steps but may overshoot the minimum, while a smaller learning rate takes smaller, more cautious steps but may converge slowly).
+
+\subsection{Nonlinear Least Squares}
+
+In Nonlinear Least Squares (NLS) problems, we minimize the sum of squares of a vector-valued function $\mathbf{F}(\mathbf{x})$:
+\begin{equation}
+\min_{\mathbf{x}} \sum_{i=1}^m [f_i(\mathbf{x})]^2
+\end{equation}
+
+Here, $\mathbf{F}(\mathbf{x}): \mathbb{R}^n \to \mathbb{R}^m$, 
+and the Jacobian matrix $\mathbf{J}_{\mathbf{F}}$ of $\mathbf{F}$ is explicitly calculated. 
+Algorithms like the Gauss-Newton method (an iterative optimization algorithm that approximates the Hessian using the Jacobian, avoiding expensive second-derivative computations) or the Levenberg-Marquardt algorithm (a damped version of Gauss-Newton that combines the benefits of gradient descent and Gauss-Newton, particularly robust for ill-conditioned problems) use $\mathbf{J}_{\mathbf{F}}$ 
+to approximate the Hessian matrix (the matrix of second-order partial derivatives, which captures the curvature of the function):
+\begin{equation}
+\mathbf{H} \approx \mathbf{J}_{\mathbf{F}}^T \mathbf{J}_{\mathbf{F}}
+\end{equation}
+
+Providing the analytical Jacobian to the solver significantly improves efficiency and speed of convergence compared to finite-difference approximations.
+
+\subsection{Multi-Objective Optimization}
+
+The Jacobian is essential for problems where we simultaneously optimize multiple objective functions $\mathbf{F}(\mathbf{x}) = (f_1(\mathbf{x}), f_2(\mathbf{x}), \ldots, f_m(\mathbf{x}))$. The Jacobian $\mathbf{J}_{\mathbf{F}}$ is composed of the gradients of all $m$ objective functions, stacked as rows:
+\begin{equation}
+\mathbf{J}_{\mathbf{F}} = \begin{bmatrix}
+\nabla f_1(\mathbf{x})^T \\
+\nabla f_2(\mathbf{x})^T \\
+\vdots \\
+\nabla f_m(\mathbf{x})^T
+\end{bmatrix}
+\end{equation}
+
+\section{Jacobian Matrix in Deep Learning}
+
+The Jacobian matrix is fundamental to deep learning, primarily serving as the mathematical backbone for backpropagation, the algorithm used to train neural networks.
+
+A deep neural network is a vector-valued composite function that maps an input vector (like an image or a set of features) to an output vector (like classification probabilities). The Jacobian provides a way to calculate all the necessary first-order partial derivatives of this complex, multi-layered function.
+
+\subsection{The Jacobian Matrix Definition}
+
+The Jacobian matrix $\mathbf{J}$ collects all the first-order partial derivatives of a function that has multiple inputs and multiple outputs. If $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$, the Jacobian is an $m \times n$ matrix:
+\begin{equation}
+\mathbf{J} = \begin{bmatrix}
+\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \cdots & \frac{\partial f_1}{\partial x_n} \\
+\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \cdots & \frac{\partial f_2}{\partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \cdots & \frac{\partial f_m}{\partial x_n}
+\end{bmatrix}
+\end{equation}
+
+\subsection{Backpropagation}
+
+\subsubsection{Chain Rule}
+
+Training a neural network requires Gradient Descent, which minimizes a loss function $L$ by adjusting the network's weights $\mathbf{W}$. This requires calculating the gradient $\nabla_{\mathbf{W}} L$.
+
+Since the loss $L$ depends on the network's final output $\mathbf{y}$, and $\mathbf{y}$ depends on the weights $\mathbf{W}$ across many layers, the gradient must be computed using the multivariate Chain Rule.
+
+\subsubsection{Layer-wise Derivatives}
+
+For each layer transformation $f^{(l)}$ with input $\mathbf{x}^{(l)}$ and output $\mathbf{x}^{(l+1)}$, the derivative $\frac{\partial \mathbf{x}^{(l+1)}}{\partial \mathbf{x}^{(l)}}$ is the Jacobian matrix of that layer.
+
+\subsubsection{Propagation}
+
+Backpropagation efficiently uses matrix multiplication of these Jacobian matrices, propagating the error signal (gradient) backward through the network layers to update the weights. This allows the network to efficiently compute the final gradient:
+\begin{equation}
+\nabla_{\mathbf{W}} L = \mathbf{J}_{L}^{(L)} \mathbf{J}_{L-1}^{(L-1)} \cdots \mathbf{J}_{1}^{(1)}
+\end{equation}
+where each $\mathbf{J}_{i}^{(i)}$ is the Jacobian matrix of layer $i$.
+
+\subsection{Neural Networks}
+
+In a neural network, each layer performs a transformation:
+\begin{equation}
+\mathbf{x}^{(l+1)} = \sigma(\mathbf{W}^{(l)} \mathbf{x}^{(l)} + \mathbf{b}^{(l)})
+\end{equation}
+where $\sigma$ is an activation function, $\mathbf{W}^{(l)}$ is the weight matrix, and $\mathbf{b}^{(l)}$ is the bias vector.
+
+The Jacobian of this transformation with respect to the input $\mathbf{x}^{(l)}$ is:
+\begin{equation}
+\mathbf{J}^{(l)} = \frac{\partial \mathbf{x}^{(l+1)}}{\partial \mathbf{x}^{(l)}} = \text{diag}(\sigma'(\mathbf{z}^{(l)})) \mathbf{W}^{(l)}
+\end{equation}
+where $\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{x}^{(l)} + \mathbf{b}^{(l)}$ and $\sigma'$ is the derivative of the activation function.
+
+\subsection{Analysis and Stability}
+
+Beyond training, the Jacobian is used to analyze the behavior of trained models:
+
+\begin{itemize}
+\item \textbf{Sensitivity Analysis}: The Jacobian of the output with respect to the input $\frac{\partial \mathbf{y}}{\partial \mathbf{x}}$ reveals how sensitive the model's output is to small changes in the input data. Large elements in this Jacobian indicate that the network output is very volatile, which often corresponds to a lack of robustness.
+
+\item \textbf{Adversarial Attacks}: Adversarial examples (inputs slightly modified to trick the network) are often constructed using information from the Jacobian $\frac{\partial L}{\partial \mathbf{x}}$ to find the direction of input change that most rapidly increases the loss.
+
+\item \textbf{Gradient Stability}: The spectral norm (or largest singular value) of the Jacobian of the layer-wise transformation is key to understanding and mitigating the vanishing/exploding gradient problem. Initialization schemes like Xavier or Kaiming aim to keep the norm of these Jacobians close to 1 to ensure effective training.
+\end{itemize}
+
+\section{Advanced Optimizations}
+
+\subsection{Newton's Method}
+
+Newton's method is a second-order optimization method that uses the Hessian matrix (the matrix of second-order partial derivatives). The Hessian can be approximated using the Jacobian:
+\begin{equation}
+\mathbf{H} \approx \mathbf{J}^T \mathbf{J}
+\end{equation}
+
+Newton's method update rule is:
+\begin{equation}
+\mathbf{x}^{(t+1)} = \mathbf{x}^{(t)} - \mathbf{H}^{-1} \nabla L(\mathbf{x}^{(t)})
+\end{equation}
+
+While more computationally expensive than gradient descent, Newton's method can converge much faster, especially near the optimum.
+
+\subsection{Jacobian-Enhanced Neural Networks (JENN)}
+
+Jacobian-Enhanced Neural Networks (JENN) are specialized networks that explicitly include terms in their loss function to ensure the network not only fits the target function values $F(\mathbf{x})$ but also accurately predicts the Jacobian matrix $J(\mathbf{x})$. This leads to higher accuracy with less training data.
+
+The loss function for JENN includes both function value error and Jacobian error:
+\begin{equation}
+L_{\text{JENN}} = L_{\text{function}} + \lambda L_{\text{Jacobian}}
+\end{equation}
+where $\lambda$ is a weighting parameter.
+
+\section{Jacobian Matrix and Sigmoid Functions}
+
+The Jacobian matrix is applied to Sigmoid functions when they are used as activation functions in neural networks. The simplicity of the Sigmoid's Jacobian is one of the features that historically made it a popular choice for activation layers.
+
+\subsection{Element-Wise Nature}
+
+The Sigmoid function, $\sigma(x) = \frac{1}{1 + e^{-x}}$, is applied element-wise to the input vector $\mathbf{z}$ of a layer. If the input to the activation function is a vector $\mathbf{z} = (z_1, z_2, \ldots, z_n)$, the output $\mathbf{a}$ is also a vector:
+\begin{equation}
+\mathbf{a} = \begin{bmatrix}
+\sigma(z_1) \\
+\sigma(z_2) \\
+\vdots \\
+\sigma(z_n)
+\end{bmatrix}
+\end{equation}
+
+Crucially, the output $a_i$ only depends on its corresponding input $z_i$, not on any other input $z_j$ (where $j \neq i$).
+
+\subsection{The Diagonal Jacobian}
+
+Because of this element-wise independence, the Jacobian matrix $\mathbf{J}$ of the Sigmoid activation function is a diagonal matrix. The off-diagonal entries (the partial derivatives of $a_i$ with respect to $z_j$, where $i \neq j$) are all zero.
+
+\subsection{Derivative Term}
+
+The diagonal elements of the Jacobian are the simple scalar derivative of the Sigmoid function itself:
+\begin{equation}
+\sigma'(x) = \sigma(x)(1 - \sigma(x))
+\end{equation}
+
+So, the Jacobian can be written as:
+\begin{equation}
+\mathbf{J}_{\sigma} = \text{diag}(\sigma'(\mathbf{z})) = \text{diag}(\sigma(\mathbf{z}) \odot (1 - \sigma(\mathbf{z})))
+\end{equation}
+where $\odot$ denotes the element-wise (Hadamard) product.
+
+\subsection{Backpropagation Optimization}
+
+During backpropagation, the gradient from the subsequent layer, $\boldsymbol{\delta}_{l+1}$ (often a vector), is multiplied by the Jacobian to get the gradient for the current layer, $\boldsymbol{\delta}_{l}$:
+\begin{equation}
+\boldsymbol{\delta}_{l} = \mathbf{J}_{\sigma}^T \boldsymbol{\delta}_{l+1}
+\end{equation}
+
+Since $\mathbf{J}_{\sigma}$ is diagonal, this matrix-vector multiplication simplifies to a much faster element-wise multiplication in practice:
+\begin{equation}
+\boldsymbol{\delta}_{l} = \sigma'(\mathbf{z}) \odot \boldsymbol{\delta}_{l+1}
+\end{equation}
+
+This optimization is a key reason why element-wise activation functions like Sigmoid, ReLU, and Tanh are computationally efficient to train. Contrast this with the Softmax function, which is element-dependent, resulting in a full, non-diagonal Jacobian and requiring a more complex matrix multiplication.
+
+\section{Jacobian Descent (JD)}
+
+Jacobian Descent (JD) is a newer optimization technique that uses the full Jacobian matrix to find a parameter update direction that balances all objectives in multi-objective optimization problems. This is particularly useful when objectives conflict.
+
+In multi-objective optimization, we have:
+\begin{equation}
+\mathbf{F}(\mathbf{x}) = (f_1(\mathbf{x}), f_2(\mathbf{x}), \ldots, f_m(\mathbf{x}))
+\end{equation}
+
+The Jacobian $\mathbf{J}_{\mathbf{F}}$ is composed of the gradients of all $m$ objective functions. Jacobian Descent uses this full matrix to find update directions that prevent any single objective from degrading too much, even when objectives conflict.
+
+The update rule for Jacobian Descent can be formulated as:
+\begin{equation}
+\mathbf{x}^{(t+1)} = \mathbf{x}^{(t)} - \eta \mathbf{J}_{\mathbf{F}}^T \mathbf{d}
+\end{equation}
+where $\mathbf{d}$ is a direction vector that balances the objectives.
+
+\section{Further Works and Open Problems}
+
+Several open problems and areas of active research remain:
+
+\begin{enumerate}
+\item \textbf{Computational Efficiency}: While automatic differentiation makes Jacobian computation feasible, computing full Jacobians for very large networks remains computationally expensive. Research continues into more efficient approximations and sparse Jacobian representations.
+
+\item \textbf{Second-Order Methods}: Extending Jacobian-based methods to incorporate second-order information (Hessian) efficiently for large-scale deep learning remains challenging.
+
+\item \textbf{Adversarial Robustness}: Understanding how to use Jacobian information to build more robust networks that are resistant to adversarial attacks is an active area of research.
+
+\item \textbf{Neural ODEs}: The connection between continuous-time neural networks (Neural ODEs) and the Jacobian provides new perspectives on network dynamics and training stability.
+
+\item \textbf{Implicit Neural Representations}: Using Jacobian constraints in loss functions for implicit neural representations (INRs) to ensure smoothness and differentiability.
+
+\item \textbf{Multi-Objective Learning}: Developing more sophisticated Jacobian-based methods for multi-objective optimization in deep learning, particularly for tasks with competing objectives.
+\end{enumerate}
+
+\section{Conclusions}
+
+The Jacobian matrix serves as a fundamental bridge between classical mathematics and modern machine learning. From its origins in solving the Gaussian integral through coordinate transformations, to its central role in backpropagation and neural network training, the Jacobian demonstrates the deep connections between mathematical theory and practical applications.
+
+Key takeaways:
+
+\begin{itemize}
+\item The Jacobian determinant enables elegant solutions to otherwise intractable integrals through coordinate transformations.
+
+\item The Jacobian matrix generalizes the concept of the derivative to multivariable and vector-valued functions.
+
+\item In deep learning, the Jacobian is the mathematical foundation of backpropagation, enabling efficient gradient computation through the chain rule.
+
+\item The structure of the Jacobian (e.g., diagonal for element-wise activations) provides computational optimizations that make modern deep learning feasible.
+
+\item Advanced techniques like JENN and Jacobian Descent demonstrate how explicit use of Jacobian information can improve model performance and training efficiency.
+
+\item The Jacobian continues to inspire new research directions in optimization, robustness, and neural network design.
+\end{itemize}
+
+As deep learning continues to evolve, the Jacobian matrix remains a cornerstone of the mathematical framework that makes these advances possible. Understanding its theory and applications is essential for both theoretical research and practical implementation of modern machine learning systems.
+
+\vspace{2cm}
+
+\section*{Contact Information}
+
+\begin{itemize}
+\item \textbf{LinkedIn}: \url{https://www.linkedin.com/in/nguyenvuhung/}
+\item \textbf{GitHub}: \url{https://github.com/vuhung16au/}
+\item \textbf{Repository}: \url{https://github.com/vuhung16au/math-olympiad-ml/tree/main/MeanExpectationLimit}
+\end{itemize}
+
+\end{document}
+

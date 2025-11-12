@@ -1,0 +1,36 @@
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdy
+*.tdo
+*.auxlock
+
+# PDF files (optional - uncomment if you don't want to track PDFs)
+# *.pdf
+
+# Build directories
+releases/
+
+# Editor files
+*.swp
+*.swo
+*~
+.DS_Store
+
