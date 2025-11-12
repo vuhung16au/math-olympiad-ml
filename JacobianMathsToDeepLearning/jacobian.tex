@@ -37,6 +37,7 @@ This document presents a comprehensive exploration of the Jacobian matrix, start
 
 \section{Problem 1: The Gaussian Integral}
 
+
 \begin{problem}[Gaussian Integral (Euler-Poisson Integral)]
 Evaluate the integral:
 \begin{equation}
@@ -45,6 +46,9 @@ I = \int_{-\infty}^{\infty} e^{-x^2} \, dx
 \end{problem}
 
 This integral, also known as the Euler-Poisson integral, is fundamental in probability theory, statistics, and physics. Despite its simple appearance, it cannot be evaluated using elementary antiderivatives.
+
+Sit tight --- the solution is a bit long, but it's worth it.
+
 
 \subsection{Solution to Problem 1}
 
@@ -136,6 +140,22 @@ Taking the positive square root (since the integrand is always positive):
 I = \int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
 \end{equation}
 
+\subsection{What We Learned from Problem 1}
+
+The solution to the Gaussian integral demonstrates several important concepts that are central to this document:
+
+\begin{itemize}
+\item \textbf{The Power of Coordinate Transformation}: The integral was intractable in Cartesian coordinates but became solvable after transforming to polar coordinates. This illustrates how choosing the right coordinate system can simplify complex problems.
+
+\item \textbf{The Role of the Jacobian Determinant}: The key step was recognizing that $dx \, dy = r \, dr \, d\theta$, where the factor $r$ is the Jacobian determinant of the transformation. This correction factor accounts for how the coordinate transformation stretches or compresses the differential area element.
+
+\item \textbf{Connection to Multivariable Calculus}: This problem showcases the fundamental principle that when changing variables in multiple integrals, we must account for how the transformation affects the differential elements---a concept that the Jacobian matrix generalizes to higher dimensions and more complex transformations.
+
+\item \textbf{Bridge to Modern Applications}: While this classical problem uses the Jacobian for coordinate transformations in integration, the same mathematical framework---computing how transformations affect differential elements---underlies modern deep learning, where the Jacobian matrix describes how neural network layers transform input gradients during backpropagation.
+\end{itemize}
+
+This elegant solution sets the stage for understanding how the Jacobian matrix, originally developed for such classical problems, has become indispensable in modern machine learning and optimization.
+
 \section{The Jacobian Determinant in Multivariable Calculus}
 
 \subsection{Definition and Explanation}
@@ -223,7 +243,7 @@ This is directly analogous to the multivariable change of variables formula usin
 
 A linear transformation $\mathbf{T}$ from $\mathbb{R}^n$ to $\mathbb{R}^m$ is defined by an $m \times n$ matrix $\mathbf{A}$:
 \begin{equation}
-\mathbf{T}(\mathbf{x}) = \mathbf{A}\mathbf{x}
+\mathbf{T}(\mathbf{x}) = \mathbf{A} \mathbf{x}
 \end{equation}
 
 Written component-wise:
@@ -370,9 +390,9 @@ For each layer transformation $f^{(l)}$ with input $\mathbf{x}^{(l)}$ and output
 
 Backpropagation efficiently uses matrix multiplication of these Jacobian matrices, propagating the error signal (gradient) backward through the network layers to update the weights. This allows the network to efficiently compute the final gradient:
 \begin{equation}
-\nabla_{\mathbf{W}} L = \mathbf{J}_{L}^{(L)} \mathbf{J}_{L-1}^{(L-1)} \cdots \mathbf{J}_{1}^{(1)}
+\nabla_{\mathbf{W}} L = \mathbf{J}^{(L)} \mathbf{J}^{(L-1)} \cdots \mathbf{J}^{(1)}
 \end{equation}
-where each $\mathbf{J}_{i}^{(i)}$ is the Jacobian matrix of layer $i$.
+where each $\mathbf{J}^{(l)}$ is the Jacobian matrix of layer $l$.
 
 \subsection{Neural Networks}
 
@@ -418,7 +438,7 @@ While more computationally expensive than gradient descent, Newton's method can 
 
 \subsection{Jacobian-Enhanced Neural Networks (JENN)}
 
-Jacobian-Enhanced Neural Networks (JENN) are specialized networks that explicitly include terms in their loss function to ensure the network not only fits the target function values $F(\mathbf{x})$ but also accurately predicts the Jacobian matrix $J(\mathbf{x})$. This leads to higher accuracy with less training data.
+Jacobian-Enhanced Neural Networks (JENN) are specialized networks that explicitly include terms in their loss function to ensure the network not only fits the target function values $\mathbf{F}(\mathbf{x})$ but also accurately predicts the Jacobian matrix $\mathbf{J}(\mathbf{x})$. This leads to higher accuracy with less training data.
 
 The loss function for JENN includes both function value error and Jacobian error:
 \begin{equation}
@@ -531,6 +551,127 @@ Key takeaways:
 \end{itemize}
 
 As deep learning continues to evolve, the Jacobian matrix remains a cornerstone of the mathematical framework that makes these advances possible. Understanding its theory and applications is essential for both theoretical research and practical implementation of modern machine learning systems.
+
+\vspace{2cm}
+
+\appendix
+
+\section{Example: Finding Extrema of a Function}
+
+The Jacobian matrix is primarily used in multivariable calculus for coordinate transformations and for finding the derivative of a vector-valued function. While the Jacobian matrix itself is not directly used to find the maximum or minimum of a function, its first-order counterpart, the gradient vector (which is the transpose of the Jacobian matrix of a scalar function), is essential in this process.
+
+The search for maximum or minimum values (extrema) of a function is better exemplified by using the gradient vector (first derivative test) and the Hessian matrix (second derivative test). Let us work through a concrete example.
+
+\subsection{Problem Statement}
+
+Find the critical points and determine the nature of the extrema (maximum, minimum, or saddle point) for the function:
+\begin{equation}
+f(x, y) = x^2 + 4y^2 - 11x + 8y - 16
+\end{equation}
+
+\subsection{Gradient Calculation (Related to the Jacobian)}
+
+The function $f(x, y)$ is a scalar function of two variables, so its first derivative is the gradient vector, $\nabla f(x, y)$, which is the transpose of the Jacobian matrix of $f$.
+
+The Jacobian of a scalar function $f(\mathbf{x}): \mathbb{R}^n \to \mathbb{R}$ is a $1 \times n$ matrix of its partial derivatives:
+\begin{equation}
+\mathbf{J}_f(\mathbf{x}) = \begin{pmatrix} \frac{\partial f}{\partial x_1} & \frac{\partial f}{\partial x_2} & \cdots & \frac{\partial f}{\partial x_n} \end{pmatrix}
+\end{equation}
+
+For our function $f(x, y)$, the gradient (and the transpose of the Jacobian) is:
+\begin{equation}
+\nabla f(x, y) = \mathbf{J}_f(x,y)^T = \begin{pmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{\partial y} \end{pmatrix}
+\end{equation}
+
+Computing the partial derivatives:
+\begin{align}
+\frac{\partial f}{\partial x} &= \frac{\partial}{\partial x} (x^2 + 4y^2 - 11x + 8y - 16) = 2x - 11 \\
+\frac{\partial f}{\partial y} &= \frac{\partial}{\partial y} (x^2 + 4y^2 - 11x + 8y - 16) = 8y + 8
+\end{align}
+
+Therefore, the gradient vector is:
+\begin{equation}
+\nabla f(x, y) = \begin{pmatrix} 2x - 11 \\ 8y + 8 \end{pmatrix}
+\end{equation}
+
+\subsection{Finding Critical Points (First Derivative Test)}
+
+To find critical points, we set the gradient equal to the zero vector:
+\begin{equation}
+\nabla f(x, y) = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\end{equation}
+
+This gives us a system of equations:
+\begin{align}
+2x - 11 &= 0 \implies 2x = 11 \implies x = \frac{11}{2} \\
+8y + 8 &= 0 \implies 8y = -8 \implies y = -1
+\end{align}
+
+The only critical point is $\left(\frac{11}{2}, -1\right)$.
+
+\subsection{The Hessian Matrix (Second Derivative Test)}
+
+The Hessian matrix, $\mathbf{H}$, is used to determine if a critical point is a local maximum, local minimum, or a saddle point. The Hessian is the matrix of second-order partial derivatives, which can be thought of as the Jacobian of the gradient vector (or the Jacobian of the Jacobian's transpose).
+
+For a function $f(x, y)$, the Hessian matrix is:
+\begin{equation}
+\mathbf{H}(x, y) = \begin{pmatrix} 
+\frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y} \\ 
+\frac{\partial^2 f}{\partial y \partial x} & \frac{\partial^2 f}{\partial y^2} 
+\end{pmatrix}
+\end{equation}
+
+Computing the second-order partial derivatives:
+\begin{align}
+\frac{\partial^2 f}{\partial x^2} &= \frac{\partial}{\partial x} (2x - 11) = 2 \\
+\frac{\partial^2 f}{\partial y^2} &= \frac{\partial}{\partial y} (8y + 8) = 8 \\
+\frac{\partial^2 f}{\partial x \partial y} &= \frac{\partial}{\partial x} (8y + 8) = 0 \\
+\frac{\partial^2 f}{\partial y \partial x} &= \frac{\partial}{\partial y} (2x - 11) = 0
+\end{align}
+
+Therefore, the Hessian matrix is:
+\begin{equation}
+\mathbf{H}(x, y) = \begin{pmatrix} 2 & 0 \\ 0 & 8 \end{pmatrix}
+\end{equation}
+
+Since the Hessian is constant, the second derivative test results will be the same for all points, including the critical point $\left(\frac{11}{2}, -1\right)$.
+
+\subsection{Determining the Extrema}
+
+We use the determinant of the Hessian, $\det(\mathbf{H})$, and the element $H_{11}$ (or $\frac{\partial^2 f}{\partial x^2}$) to classify the critical point.
+
+First, calculate the determinant:
+\begin{equation}
+\det(\mathbf{H}) = (2)(8) - (0)(0) = 16
+\end{equation}
+
+Now apply the second derivative test at the critical point $\left(\frac{11}{2}, -1\right)$:
+
+\begin{itemize}
+\item If $\det(\mathbf{H}) > 0$ and $H_{11} > 0$: \textbf{Local Minimum}
+\item If $\det(\mathbf{H}) > 0$ and $H_{11} < 0$: \textbf{Local Maximum}
+\item If $\det(\mathbf{H}) < 0$: \textbf{Saddle Point}
+\item If $\det(\mathbf{H}) = 0$: Test is inconclusive
+\end{itemize}
+
+In our case:
+\begin{itemize}
+\item $\det(\mathbf{H}) = 16 > 0$
+\item $H_{11} = 2 > 0$
+\end{itemize}
+
+Therefore, the function has a \textbf{Local Minimum} at the point $\left(\frac{11}{2}, -1\right)$.
+
+The value of the minimum is:
+\begin{align}
+f\left(\frac{11}{2}, -1\right) &= \left(\frac{11}{2}\right)^2 + 4(-1)^2 - 11\left(\frac{11}{2}\right) + 8(-1) - 16 \\
+&= \frac{121}{4} + 4 - \frac{121}{2} - 8 - 16 \\
+&= \frac{121}{4} + \frac{16}{4} - \frac{242}{4} - \frac{32}{4} - \frac{64}{4} \\
+&= \frac{121 + 16 - 242 - 32 - 64}{4} \\
+&= \frac{-201}{4}
+\end{align}
+
+This example demonstrates how the gradient (related to the Jacobian) and the Hessian matrix work together to find and classify extrema of multivariable functions, providing a concrete illustration of the optimization principles discussed in this document.
 
 \vspace{2cm}
 
