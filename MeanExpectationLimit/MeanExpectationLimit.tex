@@ -305,6 +305,21 @@ Since $C_n \in [0,1]$, the Dominated Convergence Theorem applies:
 Several directions for future research emerge:
 
 \begin{enumerate}
+\item \textbf{Alternative proof for Harmonic Mean}: For the harmonic mean case ($p = -1$), 
+an alternative proof can be constructed using bounds and the squeeze theorem, 
+without relying on the Strong Law of Large Numbers. 
+The key idea is to establish upper and lower bounds for $E[H_n]$ that both converge to zero. 
+
+Specifically, for any $\epsilon > 0$, we can partition the integration domain based on the 
+minimum value $m = \min(x_1, \ldots, x_n)$. 
+On the region where $m > \epsilon$, 
+we have $\sum_{i=1}^n \frac{1}{x_i} \ge \frac{n}{\epsilon}$, 
+which gives $H_n \le \epsilon$. On the complement where $m \le \epsilon$, 
+we use the fact that $H_n \le 1$ and that the measure of this region is 
+$1 - (1-\epsilon)^n \to 0$ as $n \to \infty$. 
+By carefully bounding $E[H_n]$ from above using these two regions and noting that 
+$E[H_n] \ge 0$ trivially, the squeeze theorem yields $\lim_{n \to \infty} E[H_n] = 0$.
+
 \item \textbf{Generalized means for $p < -1$}: The case $p < -1$ requires careful analysis since $E[X_1^p]$ may not exist. The behavior of the limit as $p \to -1^-$ (approaching the harmonic mean from below) is of particular interest.
 
 \item \textbf{Non-uniform distributions}: Extending these results to other probability distributions on $[0,1]$ or to unbounded domains would provide a more general theory.
