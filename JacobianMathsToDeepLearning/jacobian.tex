@@ -26,14 +26,14 @@ The Jacobian Matrix and Its Applications}
 \maketitle
 
 \begin{abstract}
-This document explores the fundamental role of the Jacobian matrix in mathematics and its critical applications in deep learning. We begin with the classical Gaussian integral problem, demonstrating how the Jacobian transformation enables elegant solutions to otherwise intractable integrals. We then trace the evolution of this concept from multivariable calculus to modern machine learning, showing how the Jacobian serves as the mathematical backbone of backpropagation, optimization algorithms, and neural network training. Through this journey, we connect classical mathematical theory to cutting-edge deep learning techniques.
+This document explores the fundamental role of the Jacobian matrix in mathematics and its critical applications in deep learning. We begin with the classical Gaussian integral problem, demonstrating how the Jacobian transformation enables elegant solutions to otherwise intractable integrals. We then trace the evolution of this concept from multivariable calculus to modern machine learning, showing how the Jacobian serves as the mathematical backbone of backpropagation, optimisation algorithms, and neural network training. Through this journey, we connect classical mathematical theory to cutting-edge deep learning techniques.
 \end{abstract}
 
 \section{Overview}
 
 The Jacobian matrix is one of the most important mathematical tools bridging classical calculus and modern machine learning. Named after the German mathematician Carl Gustav Jacob Jacobi (1804--1851), who made fundamental contributions to analysis and mechanics, the Jacobian was originally developed for solving multivariable calculus problems, particularly in the context of coordinate transformations and change of variables in integrals. The Jacobian has found profound applications in deep learning, where it enables efficient computation of gradients through backpropagation.
 
-This document presents a comprehensive exploration of the Jacobian matrix, starting from its foundational role in solving the Gaussian integral, through its theoretical development in multivariable calculus, and culminating in its practical applications in neural networks and optimization algorithms.
+This document presents a comprehensive exploration of the Jacobian matrix, starting from its foundational role in solving the Gaussian integral, through its theoretical development in multivariable calculus, and culminating in its practical applications in neural networks and optimisation algorithms.
 
 \section{Problem 1: The Gaussian Integral}
 
@@ -147,14 +147,14 @@ The solution to the Gaussian integral demonstrates several important concepts th
 \begin{itemize}
 \item \textbf{The Power of Coordinate Transformation}: The integral was intractable in Cartesian coordinates but became solvable after transforming to polar coordinates. This illustrates how choosing the right coordinate system can simplify complex problems.
 
-\item \textbf{The Role of the Jacobian Determinant}: The key step was recognizing that $dx \, dy = r \, dr \, d\theta$, where the factor $r$ is the Jacobian determinant of the transformation. This correction factor accounts for how the coordinate transformation stretches or compresses the differential area element.
+\item \textbf{The Role of the Jacobian Determinant}: The key step was recognising that $dx \, dy = r \, dr \, d\theta$, where the factor $r$ is the Jacobian determinant of the transformation. This correction factor accounts for how the coordinate transformation stretches or compresses the differential area element.
 
-\item \textbf{Connection to Multivariable Calculus}: This problem showcases the fundamental principle that when changing variables in multiple integrals, we must account for how the transformation affects the differential elements---a concept that the Jacobian matrix generalizes to higher dimensions and more complex transformations.
+\item \textbf{Connection to Multivariable Calculus}: This problem showcases the fundamental principle that when changing variables in multiple integrals, we must account for how the transformation affects the differential elements---a concept that the Jacobian matrix generalises to higher dimensions and more complex transformations.
 
 \item \textbf{Bridge to Modern Applications}: While this classical problem uses the Jacobian for coordinate transformations in integration, the same mathematical framework---computing how transformations affect differential elements---underlies modern deep learning, where the Jacobian matrix describes how neural network layers transform input gradients during backpropagation.
 \end{itemize}
 
-This elegant solution sets the stage for understanding how the Jacobian matrix, originally developed for such classical problems, has become indispensable in modern machine learning and optimization.
+This elegant solution sets the stage for understanding how the Jacobian matrix, originally developed for such classical problems, has become indispensable in modern machine learning and optimisation.
 
 \section{The Jacobian Determinant in Multivariable Calculus}
 
@@ -221,7 +221,7 @@ Since $r \geq 0$, the absolute value $|J| = r$. Therefore, the differential area
 
 \section{Analogy to Single-Variable Calculus}
 
-The Jacobian determinant generalizes the concept of the derivative in single-variable calculus to multivariable functions.
+The Jacobian determinant generalises the concept of the derivative in single-variable calculus to multivariable functions.
 
 In single-variable calculus, when we perform a change of variables $x = g(u)$, the differential transforms as:
 \begin{equation}
@@ -294,18 +294,18 @@ The Jacobian matrix represents the best linear approximation of a function near 
 
 where $\mathbf{J}_{\mathbf{f}}(\mathbf{x}_0)$ is the Jacobian matrix evaluated at $\mathbf{x}_0$.
 
-This is the multivariable generalization of the tangent line approximation in single-variable calculus:
+This is the multivariable generalisation of the tangent line approximation in single-variable calculus:
 \begin{equation}
 f(x) \approx f(x_0) + f'(x_0)(x - x_0)
 \end{equation}
 
-\section{Jacobian's Role in Optimization}
+\section{Jacobian's Role in Optimisation}
 
-\subsection{Generalizing the First Derivative}
+\subsection{Generalising the First Derivative}
 
 In single-variable calculus, an extremum (minimum or maximum) is found where the first derivative is zero: $f'(x) = 0$.
 
-For scalar-valued functions (loss functions) $L(\mathbf{w})$ with respect to a vector of parameters $\mathbf{w}$, the Jacobian specializes to the gradient vector $\nabla L$. The Jacobian of a scalar function $\mathbf{T}: \mathbb{R}^n \to \mathbb{R}^1$ is a $1 \times n$ matrix (a row vector), which is the transpose of the standard gradient column vector:
+For scalar-valued functions (loss functions) $L(\mathbf{w})$ with respect to a vector of parameters $\mathbf{w}$, the Jacobian specialises to the gradient vector $\nabla L$. The Jacobian of a scalar function $\mathbf{T}: \mathbb{R}^n \to \mathbb{R}^1$ is a $1 \times n$ matrix (a row vector), which is the transpose of the standard gradient column vector:
 \begin{equation}
 \nabla L(\mathbf{w}) = \begin{bmatrix}
 \frac{\partial L}{\partial w_1} & \frac{\partial L}{\partial w_2} & \cdots & \frac{\partial L}{\partial w_n}
@@ -319,9 +319,9 @@ To find critical points, we set:
 
 \subsection{Jacobian and Gradient Descent}
 
-The Jacobian (in the form of the gradient) is the core of Gradient Descent (an iterative optimization algorithm that moves in the direction of the negative gradient to minimize a function) and its variants: SGD (Stochastic Gradient Descent, which uses a random subset of data at each iteration, making it faster and more memory-efficient for large datasets) and Adam (Adaptive Moment Estimation, which combines momentum and adaptive learning rates for each parameter, often providing faster convergence and better performance on sparse gradients), which are fundamental algorithms in machine learning.
+The Jacobian (in the form of the gradient) is the core of Gradient Descent (an iterative optimisation algorithm that moves in the direction of the negative gradient to minimise a function) and its variants: SGD (Stochastic Gradient Descent, which uses a random subset of data at each iteration, making it faster and more memory-efficient for large datasets) and Adam (Adaptive Moment Estimation, which combines momentum and adaptive learning rates for each parameter, often providing faster convergence and better performance on sparse gradients), which are fundamental algorithms in machine learning.
 
-The gradient vector $\nabla L(\mathbf{w})$ points in the direction of the steepest ascent. Optimization algorithms use the negative gradient $-\nabla L$ to determine the direction of the next step, ensuring movement toward a local minimum:
+The gradient vector $\nabla L(\mathbf{w})$ points in the direction of the steepest ascent. Optimisation algorithms use the negative gradient $-\nabla L$ to determine the direction of the next step, ensuring movement toward a local minimum:
 \begin{equation}
 \mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} - \eta \nabla L(\mathbf{w}^{(t)})
 \end{equation}
@@ -329,14 +329,14 @@ where $\eta$ is the learning rate (a hyperparameter that controls the step size 
 
 \subsection{Nonlinear Least Squares}
 
-In Nonlinear Least Squares (NLS) problems, we minimize the sum of squares of a vector-valued function $\mathbf{F}(\mathbf{x})$:
+In Nonlinear Least Squares (NLS) problems, we minimise the sum of squares of a vector-valued function $\mathbf{F}(\mathbf{x})$:
 \begin{equation}
 \min_{\mathbf{x}} \sum_{i=1}^m [f_i(\mathbf{x})]^2
 \end{equation}
 
 Here, $\mathbf{F}(\mathbf{x}): \mathbb{R}^n \to \mathbb{R}^m$, 
 and the Jacobian matrix $\mathbf{J}_{\mathbf{F}}$ of $\mathbf{F}$ is explicitly calculated. 
-Algorithms like the Gauss-Newton method (an iterative optimization algorithm that approximates the Hessian using the Jacobian, avoiding expensive second-derivative computations) or the Levenberg-Marquardt algorithm (a damped version of Gauss-Newton that combines the benefits of gradient descent and Gauss-Newton, particularly robust for ill-conditioned problems) use $\mathbf{J}_{\mathbf{F}}$ 
+Algorithms like the Gauss-Newton method (an iterative optimisation algorithm that approximates the Hessian using the Jacobian, avoiding expensive second-derivative computations) or the Levenberg-Marquardt algorithm (a damped version of Gauss-Newton that combines the benefits of gradient descent and Gauss-Newton, particularly robust for ill-conditioned problems) use $\mathbf{J}_{\mathbf{F}}$ 
 to approximate the Hessian matrix (the matrix of second-order partial derivatives, which captures the curvature of the function):
 \begin{equation}
 \mathbf{H} \approx \mathbf{J}_{\mathbf{F}}^T \mathbf{J}_{\mathbf{F}}
@@ -344,9 +344,9 @@ to approximate the Hessian matrix (the matrix of second-order partial derivative
 
 Providing the analytical Jacobian to the solver significantly improves efficiency and speed of convergence compared to finite-difference approximations.
 
-\subsection{Multi-Objective Optimization}
+\subsection{Multi-Objective Optimisation}
 
-The Jacobian is essential for problems where we simultaneously optimize multiple objective functions $\mathbf{F}(\mathbf{x}) = (f_1(\mathbf{x}), f_2(\mathbf{x}), \ldots, f_m(\mathbf{x}))$. The Jacobian $\mathbf{J}_{\mathbf{F}}$ is composed of the gradients of all $m$ objective functions, stacked as rows:
+The Jacobian is essential for problems where we simultaneously optimise multiple objective functions $\mathbf{F}(\mathbf{x}) = (f_1(\mathbf{x}), f_2(\mathbf{x}), \ldots, f_m(\mathbf{x}))$. The Jacobian $\mathbf{J}_{\mathbf{F}}$ is composed of the gradients of all $m$ objective functions, stacked as rows:
 \begin{equation}
 \mathbf{J}_{\mathbf{F}} = \begin{bmatrix}
 \nabla f_1(\mathbf{x})^T \\
@@ -378,7 +378,7 @@ The Jacobian matrix $\mathbf{J}$ collects all the first-order partial derivative
 
 \subsubsection{Chain Rule}
 
-Training a neural network requires Gradient Descent, which minimizes a loss function $L$ by adjusting the network's weights $\mathbf{W}$. This requires calculating the gradient $\nabla_{\mathbf{W}} L$.
+Training a neural network requires Gradient Descent, which minimises a loss function $L$ by adjusting the network's weights $\mathbf{W}$. This requires calculating the gradient $\nabla_{\mathbf{W}} L$.
 
 Since the loss $L$ depends on the network's final output $\mathbf{y}$, and $\mathbf{y}$ depends on the weights $\mathbf{W}$ across many layers, the gradient must be computed using the multivariate Chain Rule.
 
@@ -410,21 +410,21 @@ where $\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{x}^{(l)} + \mathbf{b}^{(l)}$ 
 
 \subsection{Analysis and Stability}
 
-Beyond training, the Jacobian is used to analyze the behavior of trained models:
+Beyond training, the Jacobian is used to analyse the behaviour of trained models:
 
 \begin{itemize}
 \item \textbf{Sensitivity Analysis}: The Jacobian of the output with respect to the input $\frac{\partial \mathbf{y}}{\partial \mathbf{x}}$ reveals how sensitive the model's output is to small changes in the input data. Large elements in this Jacobian indicate that the network output is very volatile, which often corresponds to a lack of robustness.
 
 \item \textbf{Adversarial Attacks}: Adversarial examples (inputs slightly modified to trick the network) are often constructed using information from the Jacobian $\frac{\partial L}{\partial \mathbf{x}}$ to find the direction of input change that most rapidly increases the loss.
 
-\item \textbf{Gradient Stability}: The spectral norm (or largest singular value) of the Jacobian of the layer-wise transformation is key to understanding and mitigating the vanishing/exploding gradient problem. Initialization schemes like Xavier or Kaiming aim to keep the norm of these Jacobians close to 1 to ensure effective training.
+\item \textbf{Gradient Stability}: The spectral norm (or largest singular value) of the Jacobian of the layer-wise transformation is key to understanding and mitigating the vanishing/exploding gradient problem. Initialisation schemes like Xavier or Kaiming aim to keep the norm of these Jacobians close to 1 to ensure effective training.
 \end{itemize}
 
-\section{Advanced Optimizations}
+\section{Advanced Optimisations}
 
 \subsection{Newton's Method}
 
-Newton's method is a second-order optimization method that uses the Hessian matrix (the matrix of second-order partial derivatives). The Hessian can be approximated using the Jacobian:
+Newton's method is a second-order optimisation method that uses the Hessian matrix (the matrix of second-order partial derivatives). The Hessian can be approximated using the Jacobian:
 \begin{equation}
 \mathbf{H} \approx \mathbf{J}^T \mathbf{J}
 \end{equation}
@@ -438,7 +438,7 @@ While more computationally expensive than gradient descent, Newton's method can 
 
 \subsection{Jacobian-Enhanced Neural Networks (JENN)}
 
-Jacobian-Enhanced Neural Networks (JENN) are specialized networks that explicitly include terms in their loss function to ensure the network not only fits the target function values $\mathbf{F}(\mathbf{x})$ but also accurately predicts the Jacobian matrix $\mathbf{J}(\mathbf{x})$. This leads to higher accuracy with less training data.
+Jacobian-Enhanced Neural Networks (JENN) are specialised networks that explicitly include terms in their loss function to ensure the network not only fits the target function values $\mathbf{F}(\mathbf{x})$ but also accurately predicts the Jacobian matrix $\mathbf{J}(\mathbf{x})$. This leads to higher accuracy with less training data.
 
 The loss function for JENN includes both function value error and Jacobian error:
 \begin{equation}
@@ -481,7 +481,7 @@ So, the Jacobian can be written as:
 \end{equation}
 where $\odot$ denotes the element-wise (Hadamard) product.
 
-\subsection{Backpropagation Optimization}
+\subsection{Backpropagation Optimisation}
 
 During backpropagation, the gradient from the subsequent layer, $\boldsymbol{\delta}_{l+1}$ (often a vector), is multiplied by the Jacobian to get the gradient for the current layer, $\boldsymbol{\delta}_{l}$:
 \begin{equation}
@@ -493,13 +493,13 @@ Since $\mathbf{J}_{\sigma}$ is diagonal, this matrix-vector multiplication simpl
 \boldsymbol{\delta}_{l} = \sigma'(\mathbf{z}) \odot \boldsymbol{\delta}_{l+1}
 \end{equation}
 
-This optimization is a key reason why element-wise activation functions like Sigmoid, ReLU, and Tanh are computationally efficient to train. Contrast this with the Softmax function, which is element-dependent, resulting in a full, non-diagonal Jacobian and requiring a more complex matrix multiplication.
+This optimisation is a key reason why element-wise activation functions like Sigmoid, ReLU, and Tanh are computationally efficient to train. Contrast this with the Softmax function, which is element-dependent, resulting in a full, non-diagonal Jacobian and requiring a more complex matrix multiplication.
 
 \section{Jacobian Descent (JD)}
 
-Jacobian Descent (JD) is a newer optimization technique that uses the full Jacobian matrix to find a parameter update direction that balances all objectives in multi-objective optimization problems. This is particularly useful when objectives conflict.
+Jacobian Descent (JD) is a newer optimisation technique that uses the full Jacobian matrix to find a parameter update direction that balances all objectives in multi-objective optimisation problems. This is particularly useful when objectives conflict.
 
-In multi-objective optimization, we have:
+In multi-objective optimisation, we have:
 \begin{equation}
 \mathbf{F}(\mathbf{x}) = (f_1(\mathbf{x}), f_2(\mathbf{x}), \ldots, f_m(\mathbf{x}))
 \end{equation}
@@ -527,7 +527,7 @@ Several open problems and areas of active research remain:
 
 \item \textbf{Implicit Neural Representations}: Using Jacobian constraints in loss functions for implicit neural representations (INRs) to ensure smoothness and differentiability.
 
-\item \textbf{Multi-Objective Learning}: Developing more sophisticated Jacobian-based methods for multi-objective optimization in deep learning, particularly for tasks with competing objectives.
+\item \textbf{Multi-Objective Learning}: Developing more sophisticated Jacobian-based methods for multi-objective optimisation in deep learning, particularly for tasks with competing objectives.
 \end{enumerate}
 
 \section{Conclusions}
@@ -539,15 +539,15 @@ Key takeaways:
 \begin{itemize}
 \item The Jacobian determinant enables elegant solutions to otherwise intractable integrals through coordinate transformations.
 
-\item The Jacobian matrix generalizes the concept of the derivative to multivariable and vector-valued functions.
+\item The Jacobian matrix generalises the concept of the derivative to multivariable and vector-valued functions.
 
 \item In deep learning, the Jacobian is the mathematical foundation of backpropagation, enabling efficient gradient computation through the chain rule.
 
-\item The structure of the Jacobian (e.g., diagonal for element-wise activations) provides computational optimizations that make modern deep learning feasible.
+\item The structure of the Jacobian (e.g., diagonal for element-wise activations) provides computational optimisations that make modern deep learning feasible.
 
 \item Advanced techniques like JENN and Jacobian Descent demonstrate how explicit use of Jacobian information can improve model performance and training efficiency.
 
-\item The Jacobian continues to inspire new research directions in optimization, robustness, and neural network design.
+\item The Jacobian continues to inspire new research directions in optimisation, robustness, and neural network design.
 \end{itemize}
 
 As deep learning continues to evolve, the Jacobian matrix remains a cornerstone of the mathematical framework that makes these advances possible. Understanding its theory and applications is essential for both theoretical research and practical implementation of modern machine learning systems.
@@ -671,7 +671,7 @@ f\left(\frac{11}{2}, -1\right) &= \left(\frac{11}{2}\right)^2 + 4(-1)^2 - 11\lef
 &= \frac{-201}{4}
 \end{align}
 
-This example demonstrates how the gradient (related to the Jacobian) and the Hessian matrix work together to find and classify extrema of multivariable functions, providing a concrete illustration of the optimization principles discussed in this document.
+This example demonstrates how the gradient (related to the Jacobian) and the Hessian matrix work together to find and classify extrema of multivariable functions, providing a concrete illustration of the optimisation principles discussed in this document.
 
 \vspace{2cm}
 
@@ -680,7 +680,7 @@ This example demonstrates how the gradient (related to the Jacobian) and the Hes
 \begin{itemize}
 \item \textbf{LinkedIn}: \url{https://www.linkedin.com/in/nguyenvuhung/}
 \item \textbf{GitHub}: \url{https://github.com/vuhung16au/}
-\item \textbf{Repo:}: \url{https://github.com/vuhung16au/math-olympiad-ml/tree/main/JacobianMathsToDeepLearning}
+\item \textbf{Repo}: \url{https://github.com/vuhung16au/math-olympiad-ml/tree/main/JacobianMathsToDeepLearning}
 \end{itemize}
 
 \end{document}

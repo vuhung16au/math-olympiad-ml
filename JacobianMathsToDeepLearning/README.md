@@ -4,7 +4,7 @@ This repository contains a comprehensive LaTeX document exploring the fundamenta
 
 ## Overview
 
-The document begins with the classical Gaussian integral problem, demonstrating how the Jacobian transformation enables elegant solutions to otherwise intractable integrals. It then traces the evolution of this concept from multivariable calculus to modern machine learning, showing how the Jacobian serves as the mathematical backbone of backpropagation, optimization algorithms, and neural network training.
+The document begins with the classical Gaussian integral problem, demonstrating how the Jacobian transformation enables elegant solutions to otherwise intractable integrals. It then traces the evolution of this concept from multivariable calculus to modern machine learning, showing how the Jacobian serves as the mathematical backbone of backpropagation, optimisation algorithms, and neural network training.
 
 ## Contents
 
@@ -16,11 +16,11 @@ The document covers:
 - **Analogy to single-variable calculus**: Connecting multivariable concepts to familiar single-variable results
 - **Linear transformations**: Special case where the Jacobian is constant
 - **Best linear approximation**: Using the Jacobian for local approximations
-- **Optimization**: Jacobian's role in gradient descent and optimization algorithms
+- **Optimisation**: Jacobian's role in gradient descent and optimisation algorithms
 - **Deep learning applications**: Backpropagation, neural networks, and analysis
-- **Advanced optimizations**: Newton's method and Jacobian-Enhanced Neural Networks (JENN)
+- **Advanced optimisations**: Newton's method and Jacobian-Enhanced Neural Networks (JENN)
 - **Sigmoid functions**: How the Jacobian applies to activation functions
-- **Jacobian Descent (JD)**: Multi-objective optimization techniques
+- **Jacobian Descent (JD)**: Multi-objective optimisation techniques
 - **Further works and open problems**: Current research directions
 - **Conclusions**: Summary and key takeaways
 
