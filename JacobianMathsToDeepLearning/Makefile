@@ -1,6 +1,7 @@
 TEXFILE = jacobian
 PDFFILE = $(TEXFILE).pdf
-RELEASE_DIR = releases
+RELEASE_DIR = release
+RELEASE_PDF = JacobianMathsToDeepLearning.pdf
 
 .PHONY: all pdf clean release
 
@@ -19,5 +20,5 @@ clean:
 
 release: $(PDFFILE)
 	mkdir -p $(RELEASE_DIR)
-	cp $(PDFFILE) $(RELEASE_DIR)/
+	cp $(PDFFILE) $(RELEASE_DIR)/$(RELEASE_PDF)
 

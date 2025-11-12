@@ -26,7 +26,8 @@
 # *.pdf
 
 # Build directories
-releases/
+# release/
+# releases/
 
 # Editor files
 *.swp

@@ -36,7 +36,7 @@ The document covers:
 ```bash
 make pdf        # Build the PDF
 make clean      # Remove auxiliary files
-make release    # Build and copy PDF to releases/ directory
+make release    # Build and copy PDF to release/ directory as JacobianMathsToDeepLearning.pdf
 make all        # Same as make pdf
 ```
 
@@ -45,7 +45,7 @@ make all        # Same as make pdf
 ```powershell
 .\build.ps1 pdf      # Build the PDF
 .\build.ps1 clean    # Remove auxiliary files
-.\build.ps1 release  # Build and copy PDF to releases/ directory
+.\build.ps1 release  # Build and copy PDF to release/ directory as JacobianMathsToDeepLearning.pdf
 ```
 
 ### Using Batch Script (Windows)
@@ -53,7 +53,7 @@ make all        # Same as make pdf
 ```cmd
 build.bat pdf      # Build the PDF
 build.bat clean    # Remove auxiliary files
-build.bat release  # Build and copy PDF to releases/ directory
+build.bat release  # Build and copy PDF to release/ directory as JacobianMathsToDeepLearning.pdf
 ```
 
 ### Manual Docker Build
@@ -89,7 +89,7 @@ docker run -ti -v miktex:/var/lib/miktex -v "$(pwd):/miktex/work" \
 ├── build.ps1         # PowerShell build script
 ├── README.md         # This file
 ├── .gitignore        # Git ignore patterns for LaTeX files
-└── releases/         # Directory for compiled PDFs (created by make release)
+└── release/          # Directory for compiled PDFs (created by make release)
 ```
 
 ## Contact

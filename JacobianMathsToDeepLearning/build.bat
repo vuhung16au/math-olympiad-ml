@@ -4,7 +4,8 @@ REM Usage: build.bat [pdf|clean|release]
 
 set TEXFILE=jacobian
 set PDFFILE=%TEXFILE%.pdf
-set RELEASE_DIR=releases
+set RELEASE_DIR=release
+set RELEASE_PDF=JacobianMathsToDeepLearning.pdf
 
 if "%1"=="pdf" goto build
 if "%1"=="clean" goto clean
@@ -34,8 +35,8 @@ if not exist %PDFFILE% (
     call :build
 )
 if not exist %RELEASE_DIR% mkdir %RELEASE_DIR%
-copy %PDFFILE% %RELEASE_DIR%\
-echo PDF copied to %RELEASE_DIR%\%PDFFILE%
+copy %PDFFILE% %RELEASE_DIR%\%RELEASE_PDF%
+echo PDF copied to %RELEASE_DIR%\%RELEASE_PDF%
 goto end
 
 :end

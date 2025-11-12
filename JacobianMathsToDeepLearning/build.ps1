@@ -7,7 +7,8 @@ param(
 
 $TEXFILE = "jacobian"
 $PDFFILE = "$TEXFILE.pdf"
-$RELEASE_DIR = "releases"
+$RELEASE_DIR = "release"
+$RELEASE_PDF = "JacobianMathsToDeepLearning.pdf"
 $CURRENT_DIR = (Get-Location).Path
 
 function Build-PDF {
@@ -62,8 +63,8 @@ function Release-PDF {
         New-Item -ItemType Directory -Path $RELEASE_DIR | Out-Null
     }
     
-    Copy-Item $PDFFILE -Destination $RELEASE_DIR
-    Write-Host "PDF copied to $RELEASE_DIR/$PDFFILE" -ForegroundColor Green
+    Copy-Item $PDFFILE -Destination "$RELEASE_DIR/$RELEASE_PDF"
+    Write-Host "PDF copied to $RELEASE_DIR/$RELEASE_PDF" -ForegroundColor Green
 }
 
 switch ($Target.ToLower()) {
