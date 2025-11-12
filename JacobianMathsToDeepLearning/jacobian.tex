@@ -11,7 +11,7 @@
 
 \geometry{margin=1in}
 
-\title{From Gaussian Integral to Deep Learning:\\
+\title{From Gaussian Integral to Differentiable Programming:\\
 The Jacobian Matrix and Its Applications}
 \author{Nguyen Vu Hung}
 \date{\today}
@@ -47,7 +47,9 @@ I = \int_{-\infty}^{\infty} e^{-x^2} \, dx
 
 This integral, also known as the Euler-Poisson integral, is fundamental in probability theory, statistics, and physics. Despite its simple appearance, it cannot be evaluated using elementary antiderivatives.
 
-Sit tight --- the solution is a bit long, but it's worth it.
+The solution that follows is verbose and lengthy, 
+but it is well worth working through carefully, 
+as it illustrates fundamental techniques that generalise to modern applications.
 
 
 \subsection{Solution to Problem 1}
@@ -512,6 +514,115 @@ The update rule for Jacobian Descent can be formulated as:
 \end{equation}
 where $\mathbf{d}$ is a direction vector that balances the objectives.
 
+\section{Differentiable Programming}
+
+Differentiable Programming (DP) represents a paradigm shift that generalises the principles underlying deep learning to a broader class of computational problems. While neural networks are a specific application, differentiable programming extends the use of automatic differentiation and gradient-based optimisation to arbitrary programs containing differentiable operations.
+
+\subsection{From Neural Networks to Differentiable Programs}
+
+The evolution from classical analysis to modern computing can be traced as:
+\begin{enumerate}
+\item \textbf{Classical Analysis}: The Gaussian integral problem (Section 2) required the Jacobian determinant for coordinate transformations.
+\item \textbf{Multivariable Calculus}: The Jacobian matrix (Section 3) generalised derivatives to vector-valued functions.
+\item \textbf{Neural Networks}: Backpropagation (Section 8) applied the Jacobian through the chain rule for training.
+\item \textbf{Differentiable Programming}: The Jacobian becomes the universal tool for making arbitrary computational pipelines optimisable.
+\end{enumerate}
+
+\subsection{The Jacobian as Universal Differentiator}
+
+In differentiable programming, any computation that can be expressed as a composition of differentiable operations has a well-defined Jacobian. This includes:
+
+\begin{itemize}
+\item \textbf{Physics Simulations}: Differentiable physics engines use Jacobians to optimise physical parameters (mass, friction) by backpropagating through simulation steps.
+\item \textbf{Graphics and Rendering}: Differentiable renderers compute gradients of rendered images with respect to scene parameters (camera position, object geometry, lighting).
+\item \textbf{Probabilistic Inference}: Automatic differentiation enables gradient-based inference in complex probabilistic models.
+\item \textbf{Scientific Computing}: Solving differential equations with learned components requires Jacobians through both the solver and the learned functions.
+\end{itemize}
+
+\subsection{Mathematical Framework}
+
+A differentiable program can be viewed as a composition of functions:
+\begin{equation}
+\mathbf{y} = f_L \circ f_{L-1} \circ \cdots \circ f_2 \circ f_1(\mathbf{x}, \boldsymbol{\theta})
+\end{equation}
+where each $f_i$ is differentiable with respect to its inputs and parameters $\boldsymbol{\theta}$.
+
+The gradient of the output with respect to parameters is computed via the chain rule:
+\begin{equation}
+\frac{\partial \mathbf{y}}{\partial \boldsymbol{\theta}} = \frac{\partial f_L}{\partial f_{L-1}} \cdot \frac{\partial f_{L-1}}{\partial f_{L-2}} \cdots \frac{\partial f_2}{\partial f_1} \cdot \frac{\partial f_1}{\partial \boldsymbol{\theta}}
+\end{equation}
+
+Each term $\frac{\partial f_i}{\partial f_{i-1}}$ is a Jacobian matrix, making the entire computation a product of Jacobians---exactly as in neural network backpropagation, but applied to arbitrary computational graphs.
+
+\subsection{Automatic Differentiation Systems}
+
+Modern automatic differentiation (autodiff) frameworks like TensorFlow, PyTorch, and JAX implement differentiable programming by:
+
+\begin{enumerate}
+\item \textbf{Building Computational Graphs}: Recording operations as a directed acyclic graph (DAG).
+\item \textbf{Forward Pass}: Computing outputs by traversing the graph forward.
+\item \textbf{Backward Pass}: Computing gradients by traversing backward, multiplying Jacobian matrices at each node.
+\item \textbf{Jacobian-Vector Products}: For efficiency, most systems compute Jacobian-vector products $\mathbf{J} \mathbf{v}$ rather than full Jacobian matrices.
+\end{enumerate}
+
+\subsection{Key Differences from Traditional Programming}
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Aspect} & \textbf{Traditional} & \textbf{Differentiable} \\
+\hline
+Operations & Any & Must be differentiable \\
+Control flow & Arbitrary branches & Limited (or differentiable) \\
+Optimisation & Manual tuning & Gradient-based \\
+Debugging & Output correctness & Gradient correctness \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Applications Beyond Deep Learning}
+
+\subsubsection{Differentiable Physics}
+
+Physics simulations traditionally solve forward problems (given parameters, predict behaviour). Differentiable physics solves inverse problems: given desired behaviour, find parameters.
+
+Example: Robot control optimisation. The Jacobian of the simulator output (robot trajectory) with respect to control inputs enables gradient-based policy search.
+
+\subsubsection{Differentiable Rendering}
+
+Rendering converts 3D scene parameters to 2D images. Differentiable rendering computes:
+\begin{equation}
+\frac{\partial \text{Image}}{\partial \text{Scene Parameters}}
+\end{equation}
+
+This Jacobian enables fitting 3D models to 2D observations, enabling applications like 3D reconstruction and inverse graphics.
+
+\subsubsection{Program Synthesis}
+
+Differentiable interpreters allow learning programs through gradient descent. The Jacobian of program output with respect to program parameters (weights, structure) makes traditional discrete program spaces continuous and optimisable.
+
+\subsection{Challenges and Research Directions}
+
+\begin{enumerate}
+\item \textbf{Discrete Operations}: Many algorithms involve non-differentiable operations (argmax, sorting). Research focuses on differentiable relaxations.
+\item \textbf{Memory Efficiency}: Storing intermediate values for backpropagation can be memory-intensive. Gradient checkpointing and reversible architectures address this.
+\item \textbf{Numerical Stability}: Long chains of Jacobian multiplications can lead to numerical issues (vanishing/exploding gradients).
+\item \textbf{Higher-Order Derivatives}: Some applications require Hessians (second-order) or beyond, requiring nested autodiff.
+\end{enumerate}
+
+\subsection{Connection to This Document's Themes}
+
+Differentiable programming demonstrates how the Jacobian matrix---first encountered in the 18th-century Gaussian integral problem---has become the mathematical foundation for making entire computer programs ``learnable'':
+
+\begin{itemize}
+\item The \textbf{coordinate transformation} insight from Section 2 generalises to transforming any computational operation.
+\item The \textbf{chain rule} from multivariable calculus (Section 3) becomes the core algorithm for autodiff systems.
+\item The \textbf{backpropagation} technique from neural networks (Section 8) extends to arbitrary computational graphs.
+\item The \textbf{optimisation methods} (Sections 6--10) apply unchanged to differentiable programs.
+\end{itemize}
+
+Differentiable programming represents the ultimate generalisation: not just differentiable functions, but differentiable computation itself, all enabled by the humble Jacobian matrix.
+
 \section{Further Works and Open Problems}
 
 Several open problems and areas of active research remain:
@@ -528,6 +639,8 @@ Several open problems and areas of active research remain:
 \item \textbf{Implicit Neural Representations}: Using Jacobian constraints in loss functions for implicit neural representations (INRs) to ensure smoothness and differentiability.
 
 \item \textbf{Multi-Objective Learning}: Developing more sophisticated Jacobian-based methods for multi-objective optimisation in deep learning, particularly for tasks with competing objectives.
+
+\item \textbf{Differentiable Programming}: Extending Jacobian-based techniques to broader computational pipelines beyond neural networks, including differentiable physics, rendering, and program synthesis.
 \end{enumerate}
 
 \section{Conclusions}
@@ -546,6 +659,8 @@ Key takeaways:
 \item The structure of the Jacobian (e.g., diagonal for element-wise activations) provides computational optimisations that make modern deep learning feasible.
 
 \item Advanced techniques like JENN and Jacobian Descent demonstrate how explicit use of Jacobian information can improve model performance and training efficiency.
+
+\item Differentiable programming extends the Jacobian framework beyond neural networks to arbitrary computational pipelines, enabling gradient-based optimisation of physics simulations, rendering engines, and program synthesis.
 
 \item The Jacobian continues to inspire new research directions in optimisation, robustness, and neural network design.
 \end{itemize}

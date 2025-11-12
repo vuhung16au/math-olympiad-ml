@@ -1,10 +1,10 @@
-# From Gaussian Integral to Deep Learning: The Jacobian Matrix and Its Applications
+# From Gaussian Integral to Differentiable Programming: The Jacobian Matrix and Its Applications
 
-This repository contains a comprehensive LaTeX document exploring the fundamental role of the Jacobian matrix in mathematics and its critical applications in deep learning.
+This repository contains a comprehensive LaTeX document exploring the fundamental role of the Jacobian matrix in mathematics and its critical applications in deep learning and differentiable programming.
 
 ## Overview
 
-The document begins with the classical Gaussian integral problem, demonstrating how the Jacobian transformation enables elegant solutions to otherwise intractable integrals. It then traces the evolution of this concept from multivariable calculus to modern machine learning, showing how the Jacobian serves as the mathematical backbone of backpropagation, optimisation algorithms, and neural network training.
+The document begins with the classical Gaussian integral problem, demonstrating how the Jacobian transformation enables elegant solutions to otherwise intractable integrals. It then traces the evolution of this concept from multivariable calculus to modern machine learning and differentiable programming, showing how the Jacobian serves as the mathematical backbone of backpropagation, optimisation algorithms, neural network training, and broader computational paradigms including differentiable physics, rendering, and program synthesis.
 
 ## Contents
 
@@ -21,6 +21,7 @@ The document covers:
 - **Advanced optimisations**: Newton's method and Jacobian-Enhanced Neural Networks (JENN)
 - **Sigmoid functions**: How the Jacobian applies to activation functions
 - **Jacobian Descent (JD)**: Multi-objective optimisation techniques
+- **Differentiable Programming**: Extension beyond neural networks to arbitrary computational pipelines, including physics simulations, rendering, and program synthesis
 - **Further works and open problems**: Current research directions
 - **Conclusions**: Summary and key takeaways
 
