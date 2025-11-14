@@ -418,7 +418,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             # Phase 1 (0-1s): Fade in from black
             if current_second < 1.0:
                 point_alpha = current_second  # 0 to 1
-                zoom_factor = 25
+                zoom_factor = 12  # Changed from 25 to 12 (heart 2x bigger)
                 elevation = 20
                 azimuth = 45
                 
@@ -426,7 +426,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 3.0:
                 phase_t = (current_second - 1.0) / 2.0
                 point_alpha = 0.8
-                zoom_factor = 150 - 125 * phase_t  # 150 to 25
+                zoom_factor = 80 - 68 * phase_t  # 80 to 12 (closer for larger heart)
                 elevation = 10 + 10 * phase_t  # 10 to 20
                 azimuth = 45
                 
@@ -438,17 +438,17 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                 # Condensed G1: zoom through, turn, and start orbit
                 if phase_t < 0.35:  # 0-20s: Zoom through
                     sub_t = phase_t / 0.35
-                    zoom_factor = 25 - 35 * (sub_t ** 2)  # 25 to -10 (through heart)
+                    zoom_factor = 12 - 22 * (sub_t ** 2)  # 12 to -10 (through heart, larger)
                     elevation = 20 + 5 * np.sin(np.pi * sub_t)
                     azimuth = 45
                 elif phase_t < 0.53:  # 20-30s: Exit and turn
                     sub_t = (phase_t - 0.35) / 0.18
-                    zoom_factor = -10 + 35 * sub_t  # -10 to 25
+                    zoom_factor = -10 + 22 * sub_t  # -10 to 12 (adjusted)
                     elevation = 20
                     azimuth = 45 + 180 * sub_t
                 else:  # 30-60s: Start orbital motion
                     sub_t = (phase_t - 0.53) / 0.47
-                    zoom_factor = 25 - 5 * sub_t  # 25 to 20
+                    zoom_factor = 12 - 2 * sub_t  # 12 to 10 (closer orbit)
                     elevation = 20 + 20 * np.sin(2 * np.pi * sub_t)
                     azimuth = 225 + 360 * sub_t
                     
@@ -456,14 +456,14 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 62.0:
                 phase_t = (current_second - 60.0) / 2.0
                 point_alpha = 0.8 * (1.0 - phase_t)  # 0.8 to 0
-                zoom_factor = 20
+                zoom_factor = 10  # Changed from 20 to 10
                 elevation = 20
                 azimuth = 225 + 360 * 0.53
                 
             # Phase 5 (62-64s): Black screen with formulas (heart invisible)
             elif current_second < 64.0:
                 point_alpha = 0.0  # Heart invisible
-                zoom_factor = 20
+                zoom_factor = 10  # Changed from 20 to 10
                 elevation = 20
                 azimuth = 45
                 # Formula display handled by setup_figure, just keep heart hidden
@@ -471,7 +471,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             # Phase 6 (64-66s): Fade formulas out (keep heart hidden, formulas handled by matplotlib text alpha)
             elif current_second < 66.0:
                 point_alpha = 0.0  # Heart still invisible
-                zoom_factor = 20
+                zoom_factor = 10  # Changed from 20 to 10
                 elevation = 20
                 azimuth = 45
                 
@@ -479,7 +479,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 68.0:
                 phase_t = (current_second - 66.0) / 2.0
                 point_alpha = 0.8 * phase_t  # 0 to 0.8
-                zoom_factor = 50  # Start from distance
+                zoom_factor = 30  # Changed from 50 to 30 (closer start)
                 elevation = 15
                 azimuth = 45
                 
@@ -487,7 +487,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 90.0:
                 phase_t = (current_second - 68.0) / 22.0
                 point_alpha = 0.8
-                zoom_factor = 50 - 70 * (phase_t ** 1.5)  # Accelerate through: 50 to -20
+                zoom_factor = 30 - 50 * (phase_t ** 1.5)  # 30 to -20 (adjusted range)
                 elevation = 15 + 15 * np.sin(np.pi * phase_t)
                 azimuth = 45 + 90 * phase_t
                 
@@ -495,7 +495,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 92.0:
                 phase_t = (current_second - 90.0) / 2.0
                 point_alpha = 0.8
-                zoom_factor = -20 + 50 * phase_t  # -20 to 30
+                zoom_factor = -20 + 35 * phase_t  # -20 to 15 (closer)
                 elevation = 30
                 azimuth = 135 + 90 * phase_t  # Complete the turn
                 
@@ -503,7 +503,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 102.0:
                 phase_t = (current_second - 92.0) / 10.0
                 point_alpha = 0.8
-                zoom_factor = 30 + 70 * phase_t  # 30 to 100 (very far)
+                zoom_factor = 15 + 50 * phase_t  # 15 to 65 (not as far)
                 elevation = 30 - 10 * phase_t  # Slowly descend
                 azimuth = 225 + 180 * phase_t
                 
@@ -511,8 +511,8 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 122.0:
                 phase_t = (current_second - 102.0) / 20.0
                 point_alpha = 0.8
-                # Dramatic zoom: 100 down to 18 (close)
-                zoom_factor = 100 - 82 * (phase_t ** 2)  # Accelerating zoom in
+                # Dramatic zoom: 65 down to 10 (very close)
+                zoom_factor = 65 - 55 * (phase_t ** 2)  # Accelerating zoom in
                 elevation = 20 + 25 * np.sin(np.pi * phase_t)  # Dramatic arc
                 azimuth = 405 + 270 * phase_t  # Continue orbit
                 
@@ -520,7 +520,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 132.0:
                 phase_t = (current_second - 122.0) / 10.0
                 point_alpha = 0.8
-                zoom_factor = 18 + 7 * np.sin(2 * np.pi * phase_t)  # Slight zoom pulse
+                zoom_factor = 10 + 4 * np.sin(2 * np.pi * phase_t)  # Closer orbit (10±4)
                 elevation = 25 + 15 * np.sin(2 * np.pi * 2 * phase_t)  # 2 oscillations
                 azimuth = 675 + 720 * phase_t  # 2 complete orbits
                 
@@ -528,14 +528,14 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             elif current_second < 137.0:
                 phase_t = (current_second - 132.0) / 5.0
                 point_alpha = 0.8 * (1.0 - phase_t)  # Fade out: 0.8 to 0
-                zoom_factor = 18 + 100 * (phase_t ** 2)  # Accelerating zoom out
+                zoom_factor = 10 + 60 * (phase_t ** 2)  # 10 to 70 (less dramatic)
                 elevation = 25 - 25 * phase_t  # Return to neutral
                 azimuth = 1395 + 180 * phase_t
             
             else:
                 # Fallback (shouldn't reach here)
                 point_alpha = 0.0
-                zoom_factor = 20
+                zoom_factor = 10  # Changed from 20 to 10
                 elevation = 20
                 azimuth = 45
             
