@@ -252,6 +252,12 @@ python heart_animation.py --resolution large --effect D --no-axes --no-formulas
 
 # Custom quality settings
 python heart_animation.py --resolution medium --dpi 120 --density medium --effect C --output outputs/heart_hd.mp4
+
+# Epic Heart Story at 2x speed (60 fps) - 68.5 seconds
+python heart_animation.py --effect G2 --resolution small --density lower --fps 60 --output outputs/heart_epic_story_2x.mp4
+
+# Add audio to the video with fade-out
+ffmpeg -i outputs/heart_epic_story_2x.mp4 -i Engima.mp3 -t 68.5 -af "afade=t=out:st=66.5:d=2" -c:v copy -c:a aac -b:a 192k outputs/heart_epic_story_2x-sound.mp4
 ```
 
 ## Expected Runtime

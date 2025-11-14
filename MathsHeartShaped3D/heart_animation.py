@@ -127,7 +127,7 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
 
 
 def create_animation(resolution='medium', dpi=100, density='high', effect='A',
-                    show_axes=True, show_formulas=True, output_path='outputs/heart_animation.mp4'):
+                    show_axes=False, show_formulas=False, fps=30, output_path='outputs/heart_animation.mp4'):
     """
     Create and save the 3D heart rotation animation.
     
@@ -138,6 +138,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     - effect: Animation effect ('A', 'B', 'C', 'D')
     - show_axes: Whether to show coordinate axes
     - show_formulas: Whether to show parametric formulas
+    - fps: Frames per second for output video (default: 30)
     - output_path: Path to save the output video
     """
     # Calculate actual point count
@@ -150,7 +151,8 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
         'E': 'Heartbeat Pulse (rotation + rhythmic scaling)',
         'F': 'Spiral Ascent (rotation + spiral camera + zoom out)',
         'G': 'Figure-8 Dance (rotation + figure-8 camera path)',
-        'G1': 'Heart Journey (camera through heart + moon orbit - 90s)'
+        'G1': 'Heart Journey (camera through heart + moon orbit - 90s)',
+        'G2': 'Epic Heart Story (fade in/out + formulas + through heart + orbit - 137s)'
     }
     print(f"Generating heart shape with {point_counts.get(density, '40,000')} points (density: {density})...")
     print(f"Effect: {effect} - {effect_names.get(effect, 'Simple Y-axis rotation')}")
@@ -173,6 +175,9 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     if effect == 'G1':
         total_frames = 2700  # 90 seconds at 30 fps for G1
         duration_text = "90 seconds"
+    elif effect == 'G2':
+        total_frames = 4110  # 137 seconds at 30 fps for G2
+        duration_text = "137 seconds"
     else:
         total_frames = 900   # 30 seconds at 30 fps for other effects
         duration_text = "30 seconds"
@@ -392,6 +397,155 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
+        # Effect G2: Epic Heart Story (137 seconds total - 4110 frames)
+        elif effect == 'G2':
+            # Convert frame to seconds for easier calculation
+            current_second = frame / 30.0
+            
+            # Heart rotates throughout entire animation (slower - 270 degrees total)
+            alpha_deg = frame * 270 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            # Default alpha for heart points
+            point_alpha = 0.8
+            
+            # Phase 1 (0-1s): Fade in from black
+            if current_second < 1.0:
+                point_alpha = current_second  # 0 to 1
+                zoom_factor = 25
+                elevation = 20
+                azimuth = 45
+                
+            # Phase 2 (1-3s): Gradually show heart with G1 starting position
+            elif current_second < 3.0:
+                phase_t = (current_second - 1.0) / 2.0
+                point_alpha = 0.8
+                zoom_factor = 150 - 125 * phase_t  # 150 to 25
+                elevation = 10 + 10 * phase_t  # 10 to 20
+                azimuth = 45
+                
+            # Phase 3 (3-60s): Run G1 effect (first 57 seconds of it - condensed)
+            elif current_second < 60.0:
+                phase_t = (current_second - 3.0) / 57.0  # Normalize to 0-1
+                point_alpha = 0.8
+                
+                # Condensed G1: zoom through, turn, and start orbit
+                if phase_t < 0.35:  # 0-20s: Zoom through
+                    sub_t = phase_t / 0.35
+                    zoom_factor = 25 - 35 * (sub_t ** 2)  # 25 to -10 (through heart)
+                    elevation = 20 + 5 * np.sin(np.pi * sub_t)
+                    azimuth = 45
+                elif phase_t < 0.53:  # 20-30s: Exit and turn
+                    sub_t = (phase_t - 0.35) / 0.18
+                    zoom_factor = -10 + 35 * sub_t  # -10 to 25
+                    elevation = 20
+                    azimuth = 45 + 180 * sub_t
+                else:  # 30-60s: Start orbital motion
+                    sub_t = (phase_t - 0.53) / 0.47
+                    zoom_factor = 25 - 5 * sub_t  # 25 to 20
+                    elevation = 20 + 20 * np.sin(2 * np.pi * sub_t)
+                    azimuth = 225 + 360 * sub_t
+                    
+            # Phase 4 (60-62s): Fade out heart
+            elif current_second < 62.0:
+                phase_t = (current_second - 60.0) / 2.0
+                point_alpha = 0.8 * (1.0 - phase_t)  # 0.8 to 0
+                zoom_factor = 20
+                elevation = 20
+                azimuth = 225 + 360 * 0.53
+                
+            # Phase 5 (62-64s): Black screen with formulas (heart invisible)
+            elif current_second < 64.0:
+                point_alpha = 0.0  # Heart invisible
+                zoom_factor = 20
+                elevation = 20
+                azimuth = 45
+                # Formula display handled by setup_figure, just keep heart hidden
+                
+            # Phase 6 (64-66s): Fade formulas out (keep heart hidden, formulas handled by matplotlib text alpha)
+            elif current_second < 66.0:
+                point_alpha = 0.0  # Heart still invisible
+                zoom_factor = 20
+                elevation = 20
+                azimuth = 45
+                
+            # Phase 7 (66-68s): Fade heart back in at G1 starting position
+            elif current_second < 68.0:
+                phase_t = (current_second - 66.0) / 2.0
+                point_alpha = 0.8 * phase_t  # 0 to 0.8
+                zoom_factor = 50  # Start from distance
+                elevation = 15
+                azimuth = 45
+                
+            # Phase 8 (68-90s): Zoom through heart (accelerated)
+            elif current_second < 90.0:
+                phase_t = (current_second - 68.0) / 22.0
+                point_alpha = 0.8
+                zoom_factor = 50 - 70 * (phase_t ** 1.5)  # Accelerate through: 50 to -20
+                elevation = 15 + 15 * np.sin(np.pi * phase_t)
+                azimuth = 45 + 90 * phase_t
+                
+            # Phase 9 (90-92s): Exit and show heart from behind
+            elif current_second < 92.0:
+                phase_t = (current_second - 90.0) / 2.0
+                point_alpha = 0.8
+                zoom_factor = -20 + 50 * phase_t  # -20 to 30
+                elevation = 30
+                azimuth = 135 + 90 * phase_t  # Complete the turn
+                
+            # Phase 10 (92-102s): Slow zoom out, heart gets smaller
+            elif current_second < 102.0:
+                phase_t = (current_second - 92.0) / 10.0
+                point_alpha = 0.8
+                zoom_factor = 30 + 70 * phase_t  # 30 to 100 (very far)
+                elevation = 30 - 10 * phase_t  # Slowly descend
+                azimuth = 225 + 180 * phase_t
+                
+            # Phase 11 (102-122s): Zoom back in dramatically
+            elif current_second < 122.0:
+                phase_t = (current_second - 102.0) / 20.0
+                point_alpha = 0.8
+                # Dramatic zoom: 100 down to 18 (close)
+                zoom_factor = 100 - 82 * (phase_t ** 2)  # Accelerating zoom in
+                elevation = 20 + 25 * np.sin(np.pi * phase_t)  # Dramatic arc
+                azimuth = 405 + 270 * phase_t  # Continue orbit
+                
+            # Phase 12 (122-132s): Moon orbit around heart
+            elif current_second < 132.0:
+                phase_t = (current_second - 122.0) / 10.0
+                point_alpha = 0.8
+                zoom_factor = 18 + 7 * np.sin(2 * np.pi * phase_t)  # Slight zoom pulse
+                elevation = 25 + 15 * np.sin(2 * np.pi * 2 * phase_t)  # 2 oscillations
+                azimuth = 675 + 720 * phase_t  # 2 complete orbits
+                
+            # Phase 13 (132-137s): Quick zoom out and fade to black
+            elif current_second < 137.0:
+                phase_t = (current_second - 132.0) / 5.0
+                point_alpha = 0.8 * (1.0 - phase_t)  # Fade out: 0.8 to 0
+                zoom_factor = 18 + 100 * (phase_t ** 2)  # Accelerating zoom out
+                elevation = 25 - 25 * phase_t  # Return to neutral
+                azimuth = 1395 + 180 * phase_t
+            
+            else:
+                # Fallback (shouldn't reach here)
+                point_alpha = 0.0
+                zoom_factor = 20
+                elevation = 20
+                azimuth = 45
+            
+            # Apply alpha to scatter plot
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
         else:
             # Default: simple Y-axis rotation (original behavior)
             alpha_deg = frame * 360 / total_frames
@@ -410,7 +564,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
         
         return scatter,
     
-    print(f"Creating animation with {total_frames} frames ({duration_text} at 30 fps)...")
+    print(f"Creating animation with {total_frames} frames ({duration_text} at {fps} fps)...")
     print("This may take several minutes depending on your system...")
     
     # Create animation
@@ -422,7 +576,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     
     # Save animation
     print(f"Saving animation to {output_path}...")
-    writer = FFMpegWriter(fps=30, bitrate=5000)
+    writer = FFMpegWriter(fps=fps, bitrate=5000)
     anim.save(output_path, writer=writer)
     
     print(f"✓ Animation successfully saved to {output_path}")
@@ -457,14 +611,17 @@ Effect options:
   F - Spiral Ascent: Camera spirals upward while heart rotates, zooming out dramatically
   G - Figure-8 Dance: Camera follows infinity symbol path while heart rotates
   G1 - Heart Journey: Camera zooms through heart center, exits behind, then orbits back like moon (90 seconds, fast-paced)
+  G2 - Epic Heart Story: Cinematic sequence with fade in/out, formula display, dramatic zooms through heart, 
+       distant zoom out, dramatic zoom back in, moon orbit, and fade to black (137 seconds, epic storytelling)
 
 Examples:
   python heart_animation.py
   python heart_animation.py --resolution large --effect C
   python heart_animation.py --density lower --effect E
   python heart_animation.py --resolution medium --effect F
-  python heart_animation.py --resolution small --dpi 150 --no-formulas --effect G
+  python heart_animation.py --resolution small --dpi 150 --effect G
   python heart_animation.py --density low --effect G1 --output outputs/heart_journey.mp4
+  python heart_animation.py --density lower --effect G2 --output outputs/epic_heart_story.mp4
         """
     )
     
@@ -491,21 +648,28 @@ Examples:
     
     parser.add_argument(
         '--effect', '-e',
-        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1'],
+        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2'],
         default='A',
-        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (heart journey 90s) (default: A)'
+        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s) (default: A)'
     )
     
     parser.add_argument(
-        '--no-axes',
+        '--axes',
         action='store_true',
-        help='Hide coordinate axes lines'
+        help='Show coordinate axes lines'
     )
     
     parser.add_argument(
-        '--no-formulas',
+        '--formulas',
         action='store_true',
-        help='Hide parametric formulas text'
+        help='Show parametric formulas text'
+    )
+    
+    parser.add_argument(
+        '--fps',
+        type=int,
+        default=30,
+        help='Frames per second for output video (default: 30, use 60 for 2x speed)'
     )
     
     parser.add_argument(
@@ -523,8 +687,9 @@ Examples:
     print(f"DPI: {args.dpi}")
     print(f"Density: {args.density}")
     print(f"Effect: {args.effect}")
-    print(f"Show Axes: {not args.no_axes}")
-    print(f"Show Formulas: {not args.no_formulas}")
+    print(f"FPS: {args.fps}")
+    print(f"Show Axes: {args.axes}")
+    print(f"Show Formulas: {args.formulas}")
     print(f"Output: {args.output}")
     print("=" * 60)
     
@@ -534,8 +699,9 @@ Examples:
             dpi=args.dpi,
             density=args.density,
             effect=args.effect,
-            show_axes=not args.no_axes,
-            show_formulas=not args.no_formulas,
+            show_axes=args.axes,
+            show_formulas=args.formulas,
+            fps=args.fps,
             output_path=args.output
         )
     except Exception as e:
