@@ -7,7 +7,7 @@ env/
 outputs/
 
 # Prompt file
-Prompt.md
+# Prompt.md
 
 # Python cache
 __pycache__/
@@ -24,3 +24,13 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+
+# Project specific files 
+
+TODO/
+TODO/*
+Enigma.mp3
+inputs/
+outputs/
+

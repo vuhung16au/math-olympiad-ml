@@ -1,0 +1,43 @@
+# Cursor Rules Configuration
+# This file configures Cursor's AI behavior for this project
+
+## File Inclusion for Autocomplete and Context
+
+# Explicitly include markdown files for autocomplete
+# Markdown files should be included in AI suggestions and completions
+*.md
+
+# Include all code files
+*.py
+*.ps1
+*.js
+*.ts
+*.json
+*.yaml
+*.yml
+*.toml
+
+# Include configuration files
+.gitignore
+.cursorrules
+*.config
+
+## Instructions for AI
+
+# When working with markdown files:
+# - Provide autocomplete suggestions based on file content
+# - Include markdown files in context for better understanding
+# - Treat markdown files with the same priority as code files
+# - Support markdown syntax and structure in suggestions
+
+## Project Context
+
+# This is a 3D Heart Animation project with:
+# - Python animation scripts
+# - PowerShell build scripts
+# - Markdown documentation (Prompt.md, README.md, docs/)
+# - Effect descriptions and TODO files
+
+# All markdown files are important for understanding project requirements
+# and should be included in AI context and autocomplete processing.
+

@@ -13,6 +13,13 @@ This document describes all available animation effects for the 3D Heart Animati
 - [Effect G: Figure-8 Dance](#effect-g-figure-8-dance)
 - [Effect G1: Heart Journey](#effect-g1-heart-journey)
 - [Effect G2: Epic Heart Story](#effect-g2-epic-heart-story)
+- [Effect H1: Heart Genesis](#effect-h1-heart-genesis)
+- [Effect H2: Time Reversal](#effect-h2-time-reversal)
+- [Effect H3: Fractal Heart](#effect-h3-fractal-heart)
+- [Effect H4: Dual Hearts](#effect-h4-dual-hearts)
+- [Effect H5: Kaleidoscope Heart](#effect-h5-kaleidoscope-heart)
+- [Effect H6: Heart Nebula](#effect-h6-heart-nebula)
+- [Effect H7: Hologram Heart](#effect-h7-hologram-heart)
 - [Comparison Table](#comparison-table)
 - [Usage Examples](#usage-examples)
 
@@ -387,6 +394,512 @@ Automatically generates G2 at 4K, 60 fps with audio integration.
 
 ---
 
+## Effect H1: Heart Genesis
+
+**Duration:** 100 seconds (1 minute 40 seconds)  
+**Complexity:** Epic  
+**Best For:** Opening sequences, creation stories, philosophical content
+
+### Description
+A creation story that begins with empty black space and a single point of light, which explodes into particles that gradually form the heart shape. The heart materializes, pulses to life, rotates majestically, then zooms out to cosmic scale. A complete narrative of birth and existence.
+
+### Technical Details
+
+### Phase 1: Empty Space (0-10s)
+- **Heart:** Invisible (alpha: 0)
+- **Zoom:** 200 (very far, cosmic scale)
+- **Effect:** Black space with potential for single light point
+
+### Phase 2: Particle Explosion (10-25s)
+- **Alpha:** 0 → 0.8 (fade in)
+- **Scale:** 0.1 → 1.0 (grows from tiny to normal)
+- **Zoom:** 25 → 20 (approach)
+- **Effect:** Particles coalesce into heart shape
+
+### Phase 3: Materialization (25-40s)
+- **Alpha:** 0.8 (fully visible)
+- **Zoom:** 20 → 17 (continue approaching)
+- **Elevation:** 20° ± 10° (sinusoidal sweep)
+- **Azimuth:** 45° → 135° (90° rotation)
+- **Effect:** Heart becomes solid and defined
+
+### Phase 4: First Heartbeat (40-60s)
+- **Heartbeat Pulse:** Scale 1.0 → 1.2 (20% expansion)
+- **Pulse Frequency:** 2 beats per 20 seconds
+- **Zoom:** 17 (constant, close view)
+- **Azimuth:** 135° → 315° (180° rotation)
+- **Effect:** Heart "comes to life" with rhythmic pulsing
+
+### Phase 5: Majestic Rotation (60-75s)
+- **Zoom:** 17 ± 3 (subtle pulsing)
+- **Elevation:** 20° ± 20° (dramatic sweep)
+- **Azimuth:** 315° → 675° (360° full rotation)
+- **Effect:** Showcase heart's beauty from all angles
+
+### Phase 6: Cosmic Scale (75-90s)
+- **Alpha:** 0.8 → 1.0 (glow effect, brighter)
+- **Zoom:** 20 → 100 (zoom out dramatically)
+- **Elevation:** 40° → 20° (descend)
+- **Azimuth:** 675° → 765° (90° rotation)
+- **Effect:** Heart becomes star-like in cosmic space
+
+### Phase 7: Blueprint of Creation (90-95s)
+- **Alpha:** 1.0 (fully bright)
+- **Zoom:** 100 (cosmic distance)
+- **Display:** Formulas visible (if enabled)
+- **Effect:** Mathematical foundation revealed
+
+### Phase 8: Fade to Stars (95-100s)
+- **Alpha:** 1.0 → 0 (fade out)
+- **Zoom:** 100 → 200 (zoom out further)
+- **Effect:** Heart fades, becomes one of infinite stars
+
+### Overall Heart Rotation
+- **Total:** 180° over entire 100 seconds
+- **Speed:** Slow, allowing phases to dominate
+
+### Visual Characteristics
+- Complete creation narrative (nothing → something)
+- Particle-like formation effect
+- First heartbeat moment creates emotional impact
+- Cosmic scale reveals heart as celestial body
+- Formula display adds mathematical beauty
+- Perfect for opening sequences or philosophical content
+
+### Command
+```powershell
+python heart_animation.py --effect H1 --resolution large --density lower --formulas --output outputs/heart_genesis.mp4
+```
+
+---
+
+## Effect H2: Time Reversal
+
+**Duration:** 90 seconds  
+**Complexity:** High  
+**Best For:** Philosophical content, mind-bending visuals, artistic videos
+
+### Description
+A journey that plays forward for 45 seconds, freezes at a peak moment, then reverses completely. The heart and camera movements play backward, creating a mesmerizing time-echo effect that challenges perception.
+
+### Technical Details
+
+### Phase 1: Forward Journey (0-45s)
+- **Heart Rotation:** 270° around Y-axis
+- **Camera Motion:** Dynamic orbit with elevation changes
+- **Zoom:** 20 → 10 → 20 (oscillating pattern)
+- **Elevation:** 20° ± 15° (sinusoidal)
+- **Azimuth:** 45° → 405° (360° orbit)
+- **Effect:** Normal forward progression
+
+### Phase 2: Freeze Frame (45-48s)
+- **Heart:** Frozen at peak position
+- **Zoom:** 15 (close view)
+- **Elevation:** 35° (dramatic angle)
+- **Azimuth:** 405° (peak position)
+- **Effect:** Moment of suspension, anticipation
+
+### Phase 3: Time Reversal (48-90s)
+- **Heart Rotation:** Reverses from 270° back to 0°
+- **Camera Motion:** All movements play backward
+- **Zoom:** Reverses pattern (20 → 10 → 20)
+- **Elevation:** Reverses oscillation
+- **Azimuth:** Reverses orbit (405° → 45°)
+- **Effect:** Everything moves backward in time
+
+### Visual Characteristics
+- Forward motion creates narrative
+- Freeze frame adds dramatic pause
+- Reversal creates "time echo" effect
+- Mind-bending visual experience
+- Philosophical implications of time
+- Perfect for artistic or conceptual content
+
+### Command
+```powershell
+python heart_animation.py --effect H2 --resolution large --density lower --output outputs/time_reversal.mp4
+```
+
+---
+
+## Effect H3: Fractal Heart
+
+**Duration:** 90 seconds  
+**Complexity:** Epic  
+**Best For:** Mathematical content, infinity themes, mind-expanding visuals
+
+### Description
+A journey into infinity: start with a normal heart, zoom deep into its center to discover smaller hearts within, continue zooming to find even smaller hearts, then zoom back out through all levels. The final reveal shows the universe is made of hearts.
+
+### Technical Details
+
+### Phase 1: Normal Heart (0-15s)
+- **Zoom:** 20 (standard view)
+- **Elevation:** 20° (standard angle)
+- **Azimuth:** 45° → 225° (180° rotation)
+- **Effect:** Establish baseline heart
+
+### Phase 2: First Zoom In (15-45s)
+- **Zoom:** 20 → 2 (dramatic zoom in)
+- **Scale:** 1.0 → 0.5 (heart appears to shrink)
+- **Elevation:** 20° ± 10° (oscillating)
+- **Azimuth:** 225° → 585° (360° rotation)
+- **Effect:** Discover smaller heart inside
+
+### Phase 3: Deeper Zoom (45-60s)
+- **Zoom:** 2 → 0.5 (extreme close-up)
+- **Scale:** 0.5 → 0.2 (even smaller)
+- **Elevation:** 30° ± 10° (more dramatic)
+- **Azimuth:** 585° → 945° (360° rotation)
+- **Effect:** Find third level of hearts
+
+### Phase 4: Zoom Back Out (60-75s)
+- **Zoom:** 0.5 → 20 (reverse journey)
+- **Scale:** 0.2 → 1.0 (return to normal)
+- **Elevation:** 40° → 20° (descend)
+- **Azimuth:** 945° → 225° (reverse rotation)
+- **Effect:** Travel back through all levels
+
+### Phase 5: Cosmic Reveal (75-90s)
+- **Zoom:** 20 → 50 (zoom out to cosmic scale)
+- **Scale:** 1.0 (normal size)
+- **Elevation:** 20° (neutral)
+- **Azimuth:** 225° → 405° (180° rotation)
+- **Effect:** Heart is one of many in infinite universe
+
+### Visual Characteristics
+- Recursive structure (heart within heart)
+- Zoom creates sense of infinite depth
+- Mathematical beauty of fractals
+- Mind-expanding concept
+- Perfect for math-oriented channels
+- Visual metaphor for infinity
+
+### Command
+```powershell
+python heart_animation.py --effect H3 --resolution large --density lower --output outputs/fractal_heart.mp4
+```
+
+---
+
+## Effect H4: Dual Hearts
+
+**Duration:** 120 seconds (2 minutes)  
+**Complexity:** Epic  
+**Best For:** Love stories, Valentine's Day, relationship content, emotional narratives
+
+### Description
+A love story told through two hearts: the first heart appears, then a second heart joins it. They orbit each other like binary stars, spiral closer together, briefly merge in an emotional peak, separate but remain connected, then perform a final synchronized orbit before fading.
+
+### Technical Details
+
+### Phase 1: First Heart Appears (0-15s)
+- **Hearts:** Only heart 1 visible
+- **Alpha:** 0 → 0.8 (fade in)
+- **Zoom:** 30 → 20 (approach)
+- **Effect:** Introduction of first character
+
+### Phase 2: Second Heart Appears (15-30s)
+- **Hearts:** Both hearts visible
+- **Alpha:** 0.8 (both fully visible)
+- **Separation:** 8 units (side by side)
+- **Zoom:** 20 (constant)
+- **Azimuth:** 45° → 135° (90° rotation)
+- **Effect:** Second character enters
+
+### Phase 3: Binary Orbit (30-60s)
+- **Orbit Radius:** 8 units
+- **Motion:** Circular orbit around center
+- **Zoom:** 25 (slightly wider to show both)
+- **Elevation:** 20° ± 10° (oscillating)
+- **Azimuth:** 135° → 495° (360° orbit)
+- **Effect:** Hearts dance around each other
+
+### Phase 4: Spiral Closer (60-75s)
+- **Orbit Radius:** 8 → 0 (spiral in)
+- **Motion:** Tightening spiral
+- **Zoom:** 20 → 15 (zoom in)
+- **Elevation:** 30° → 20° (descend)
+- **Azimuth:** 495° → 675° (180° rotation)
+- **Effect:** Hearts drawn together
+
+### Phase 5: Merge/Overlap (75-85s)
+- **Position:** Hearts at same location
+- **Alpha:** 0.8 → 1.0 (pulsing, brighter)
+- **Pulse:** 4 pulses per 10 seconds
+- **Zoom:** 15 (close view)
+- **Azimuth:** 675° → 765° (90° rotation)
+- **Effect:** Emotional peak, union
+
+### Phase 6: Separation with Connection (85-95s)
+- **Separation:** 0 → 4 units (move apart)
+- **Alpha:** 0.8 (return to normal)
+- **Zoom:** 15 → 20 (zoom out slightly)
+- **Azimuth:** 765° → 855° (90° rotation)
+- **Effect:** Separate but connected
+
+### Phase 7: Synchronized Orbit (95-105s)
+- **Orbit Radius:** 4 → 8 units (expand)
+- **Motion:** Perfect synchronized orbit
+- **Zoom:** 20 (constant)
+- **Elevation:** 20° ± 5° (subtle oscillation)
+- **Azimuth:** 855° → 1215° (360° orbit)
+- **Effect:** Harmonious dance
+
+### Phase 8: Fade to Black (105-120s)
+- **Alpha:** 0.8 → 0 (fade out)
+- **Orbit Radius:** 8 units (maintain)
+- **Zoom:** 20 → 30 (zoom out)
+- **Effect:** Connection remains visible as hearts fade
+
+### Visual Characteristics
+- Two-heart system creates narrative
+- Binary star motion is visually striking
+- Merge moment creates emotional peak
+- Separation shows connection despite distance
+- Perfect for love/relationship themes
+- Universal emotional resonance
+
+### Command
+```powershell
+python heart_animation.py --effect H4 --resolution large --density lower --output outputs/dual_hearts.mp4
+```
+
+---
+
+## Effect H5: Kaleidoscope Heart
+
+**Duration:** 60 seconds  
+**Complexity:** High  
+**Best For:** Artistic content, psychedelic visuals, mandala patterns, meditation videos
+
+### Description
+A mesmerizing kaleidoscope effect where a single heart multiplies through mirroring: first 4 quadrants, then 8 reflections, then 16 hearts forming a mandala pattern. The pattern then collapses back to reveal it was always one heart.
+
+### Technical Details
+
+### Phase 1: Single Heart (0-10s)
+- **Hearts:** 1 (original)
+- **Zoom:** 20 (standard view)
+- **Elevation:** 20° (standard angle)
+- **Azimuth:** 45° → 225° (180° rotation)
+- **Effect:** Establish base heart
+
+### Phase 2: 4 Quadrants (10-25s)
+- **Hearts:** 4 (original + 3 mirrors)
+- **Mirroring:** X-axis, Y-axis, both axes
+- **Alpha:** 0 → 0.8 (fade in mirrors)
+- **Zoom:** 25 (wider to show all)
+- **Azimuth:** 225° → 405° (180° rotation)
+- **Effect:** First multiplication
+
+### Phase 3: 8 Reflections (25-40s)
+- **Hearts:** 8 (octagon pattern)
+- **Mirroring:** 45° increments around circle
+- **Zoom:** 30 (even wider)
+- **Elevation:** 20° ± 10° (oscillating)
+- **Azimuth:** 405° → 765° (360° rotation)
+- **Effect:** Mandala begins to form
+
+### Phase 4: 16 Hearts (40-50s)
+- **Hearts:** 16 (full mandala)
+- **Mirroring:** 22.5° increments
+- **Zoom:** 35 (maximum width)
+- **Elevation:** 20° ± 15° (dramatic oscillation)
+- **Azimuth:** 765° → 1485° (720° rotation)
+- **Effect:** Complete kaleidoscope pattern
+
+### Phase 5: Collapse (50-55s)
+- **Hearts:** 16 → 1 (fade out mirrors)
+- **Alpha:** 0.8 → 0 (fade out)
+- **Zoom:** 35 → 20 (zoom in)
+- **Elevation:** 35° → 20° (descend)
+- **Azimuth:** 1485° → 45° (reverse rotation)
+- **Effect:** Pattern dissolves
+
+### Phase 6: Final Reveal (55-60s)
+- **Hearts:** 1 (original only)
+- **Alpha:** 0 → 0.8 (fade back in)
+- **Zoom:** 20 (standard)
+- **Elevation:** 20° (neutral)
+- **Azimuth:** 45° (starting position)
+- **Effect:** Was always one heart
+
+### Visual Characteristics
+- Hypnotic mandala patterns
+- Symmetrical beauty
+- Multiplication creates visual complexity
+- Collapse reveals unity
+- Perfect for artistic/meditation content
+- Psychedelic, trippy aesthetic
+
+### Command
+```powershell
+python heart_animation.py --effect H5 --resolution large --density lower --output outputs/kaleidoscope_heart.mp4
+```
+
+---
+
+## Effect H6: Heart Nebula
+
+**Duration:** 120 seconds (2 minutes)  
+**Complexity:** Epic  
+**Best For:** Space themes, cosmic content, awe-inspiring visuals, science channels
+
+### Description
+A cosmic journey through deep space: start in the void with a distant glowing heart-nebula, travel through stars toward it, pass through cosmic dust, arrive at the massive glowing heart, orbit it like a planet, see other heart-planets in the distance, then zoom out to reveal the heart galaxy.
+
+### Technical Details
+
+### Phase 1: Deep Space (0-15s)
+- **Alpha:** 0.3 → 0.8 (glow effect, fade in)
+- **Zoom:** 200 → 50 (approach from cosmic distance)
+- **Elevation:** 20° (neutral)
+- **Azimuth:** 45° (frontal)
+- **Effect:** Distant heart glows like galaxy
+
+### Phase 2: Travel Through Stars (15-45s)
+- **Alpha:** 0.8 ± 0.2 (pulsing glow)
+- **Zoom:** 50 → 20 (continue approaching)
+- **Elevation:** 20° ± 10° (oscillating)
+- **Azimuth:** 45° → 225° (180° rotation)
+- **Effect:** Journey through starfield
+
+### Phase 3: Cosmic Dust (45-60s)
+- **Alpha:** 0.8 ± 0.2 (rapid pulsing)
+- **Zoom:** 20 → 15 (get very close)
+- **Elevation:** 30° → 20° (descend)
+- **Azimuth:** 225° → 315° (90° rotation)
+- **Effect:** Pass through particle field
+
+### Phase 4: Arrival (60-75s)
+- **Alpha:** 1.0 (fully bright, glowing)
+- **Zoom:** 15 ± 2 (close, pulsing)
+- **Elevation:** 20° ± 15° (dramatic arc)
+- **Azimuth:** 315° → 495° (180° rotation)
+- **Effect:** Heart is massive and glowing
+
+### Phase 5: Orbital Motion (75-90s)
+- **Alpha:** 1.0 (fully bright)
+- **Zoom:** 17 (constant, close orbit)
+- **Elevation:** 20° ± 25° (2 oscillations)
+- **Azimuth:** 495° → 855° (360° orbit)
+- **Effect:** Orbit around heart-planet
+
+### Phase 6: Distant Hearts (90-105s)
+- **Alpha:** 1.0 (fully bright)
+- **Zoom:** 17 → 37 (zoom out to see others)
+- **Elevation:** 45° → 20° (descend)
+- **Azimuth:** 855° → 1035° (180° rotation)
+- **Effect:** See other heart-planets
+
+### Phase 7: Galaxy View (105-120s)
+- **Alpha:** 1.0 → 0.8 (slight fade)
+- **Zoom:** 37 → 200 (zoom out dramatically)
+- **Elevation:** 20° (neutral)
+- **Azimuth:** 1035° → 1125° (90° rotation)
+- **Effect:** Heart is one of many in galaxy
+
+### Overall Heart Rotation
+- **Total:** 180° over entire 120 seconds
+- **Speed:** Slow, allowing cosmic journey to dominate
+
+### Visual Characteristics
+- Cosmic scale creates awe
+- Glow effects make heart celestial
+- Journey structure creates narrative
+- Orbital motion shows heart as planet
+- Galaxy view reveals infinite hearts
+- Perfect for space/science content
+
+### Command
+```powershell
+python heart_animation.py --effect H6 --resolution large --density lower --output outputs/heart_nebula.mp4
+```
+
+---
+
+## Effect H7: Hologram Heart
+
+**Duration:** 90 seconds  
+**Complexity:** High  
+**Best For:** Tech content, sci-fi themes, futuristic aesthetics, cyberpunk visuals
+
+### Description
+A futuristic holographic projection: grid floor appears, heart materializes as wireframe, fills in progressively, glitches and reforms, shows multiple holographic layers, displays scan lines, then powers down in sections. A complete tech aesthetic experience.
+
+### Technical Details
+
+### Phase 1: Grid Appearance (0-10s)
+- **Heart:** Invisible (alpha: 0)
+- **Zoom:** 30 (medium distance)
+- **Elevation:** 20° (standard)
+- **Azimuth:** 45° (frontal)
+- **Effect:** Tron-style grid environment
+
+### Phase 2: Wireframe Materialization (10-20s)
+- **Alpha:** 0 → 0.3 (wireframe effect, low opacity)
+- **Zoom:** 30 → 20 (approach)
+- **Elevation:** 20° (constant)
+- **Azimuth:** 45° → 135° (90° rotation)
+- **Effect:** Heart appears as wireframe
+
+### Phase 3: Progressive Fill (20-35s)
+- **Alpha:** 0.3 → 0.8 (gradually fill in)
+- **Zoom:** 20 (constant)
+- **Elevation:** 20° ± 10° (oscillating)
+- **Azimuth:** 135° → 315° (180° rotation)
+- **Effect:** Wireframe becomes solid
+
+### Phase 4: Glitch Effects (35-50s)
+- **Alpha:** 0.8 ± 0.1 (glitch fluctuations)
+- **Glitch Pattern:** Complex sinusoidal interference
+- **Zoom:** 20 ± 3 (pulsing)
+- **Elevation:** 30° ± 10° (oscillating)
+- **Azimuth:** 315° → 675° (360° rotation)
+- **Effect:** Hologram glitches and reforms
+
+### Phase 5: Multiple Layers (50-70s)
+- **Alpha:** 0.8 ± 0.2 (layer effect)
+- **Zoom:** 17 ± 3 (pulsing)
+- **Elevation:** 20° ± 20° (dramatic sweep)
+- **Azimuth:** 675° → 1215° (540° rotation)
+- **Effect:** X-ray-like layered views
+
+### Phase 6: Scan Lines (70-85s)
+- **Alpha:** 1.0 ± 0.1 (scan line effect)
+- **Scan Pattern:** High-frequency oscillation
+- **Zoom:** 20 (constant)
+- **Elevation:** 40° → 20° (descend)
+- **Azimuth:** 1215° → 1395° (180° rotation)
+- **Effect:** Final solid form with tech aesthetic
+
+### Phase 7: Power Down (85-90s)
+- **Alpha:** 1.0 → 0 (fade out)
+- **Zoom:** 20 → 30 (zoom out)
+- **Elevation:** 20° (neutral)
+- **Azimuth:** 1395° (final position)
+- **Effect:** Hologram deactivates
+
+### Overall Heart Rotation
+- **Total:** 360° over entire 90 seconds
+- **Speed:** Moderate, allowing tech effects to show
+
+### Visual Characteristics
+- Futuristic tech aesthetic
+- Wireframe to solid progression
+- Glitch effects add authenticity
+- Scan lines create hologram feel
+- Perfect for sci-fi/tech content
+- Cyberpunk visual style
+
+### Command
+```powershell
+python heart_animation.py --effect H7 --resolution large --density lower --output outputs/hologram_heart.mp4
+```
+
+---
+
 ## Comparison Table
 
 | Effect | Duration | Complexity | Heart Rotation | Camera Motion | Zoom Changes | Special Features |
@@ -400,6 +913,13 @@ Automatically generates G2 at 4K, 60 fps with audio integration.
 | **G** | 30s | High | 360° Y-axis | Figure-8 path | Pulse | Lemniscate motion |
 | **G1** | 90s | Epic | 180° Y-axis | Through + orbit | Through heart | 3-phase journey |
 | **G2** | 137s | Cinematic | 270° Y-axis | Multi-phase | Multiple | 13 phases, fades, formulas |
+| **H1** | 100s | Epic | 180° Y-axis | Multi-phase | Multiple | Creation story, particle effects, cosmic scale |
+| **H2** | 90s | High | 270° Y-axis | Forward + reverse | Oscillating | Time reversal, freeze frame |
+| **H3** | 90s | Epic | 360° Y-axis | Deep zoom | Extreme in/out | Fractal hearts, recursive structure |
+| **H4** | 120s | Epic | 360° Y-axis | Dual orbit | Multiple | Two hearts, binary motion, merge |
+| **H5** | 60s | High | 360° Y-axis | Multi-mirror | Expanding | Kaleidoscope, mandala patterns |
+| **H6** | 120s | Epic | 180° Y-axis | Cosmic journey | Multiple | Space theme, glow effects, galaxy view |
+| **H7** | 90s | High | 360° Y-axis | Tech aesthetic | Pulsing | Hologram, wireframe, glitch effects |
 
 ---
 
@@ -413,6 +933,13 @@ Based on typical hardware (varies by system):
 | E-G | 3-7 min | 10-18 min | 30-50 min | 60-100 min |
 | G1 | 8-15 min | 25-45 min | 75-120 min | 150-270 min |
 | G2 | 12-25 min | 40-70 min | 120-200 min | 240-360 min |
+| H1 | 10-20 min | 35-60 min | 100-160 min | 200-360 min |
+| H2 | 8-15 min | 25-45 min | 75-120 min | 150-270 min |
+| H3 | 8-15 min | 25-45 min | 75-120 min | 150-270 min |
+| H4 | 12-25 min | 40-70 min | 120-200 min | 240-360 min |
+| H5 | 5-10 min | 15-30 min | 45-75 min | 90-150 min |
+| H6 | 12-25 min | 40-70 min | 120-200 min | 240-360 min |
+| H7 | 8-15 min | 25-45 min | 75-120 min | 150-270 min |
 
 ---
 
@@ -438,7 +965,11 @@ python heart_animation.py --effect E --resolution large --density medium --outpu
 
 ### Batch Render Multiple Effects
 ```powershell
+# Render all A-G effects
 .\scripts\build_effects.ps1
+
+# Render all H* effects at large resolution
+.\scripts\build_h_large.ps1
 ```
 
 ### Custom Quality
@@ -468,10 +999,24 @@ python heart_animation.py --effect G --resolution small --density lower --dpi 80
 ### For YouTube/Long-Form Content
 - **Effect G1**: 90-second journey (fast-paced)
 - **Effect G2**: 137-second epic story (cinematic)
+- **Effect H1**: 100-second creation story (philosophical)
+- **Effect H4**: 120-second love story (emotional)
+- **Effect H6**: 120-second cosmic journey (awe-inspiring)
 
 ### For Social Media
 - **Effect E** (30s): Perfect for Instagram/TikTok
 - **Effect G2 at 2x** (68.5s): Ideal for YouTube Shorts
+- **Effect H5** (60s): Kaleidoscope for artistic content
+- **Effect H7** (90s): Hologram for tech/sci-fi channels
+
+### For Special Themes
+- **Effect H1**: Creation/philosophy themes
+- **Effect H2**: Time/philosophy themes
+- **Effect H3**: Math/infinity themes
+- **Effect H4**: Love/relationship themes
+- **Effect H5**: Art/meditation themes
+- **Effect H6**: Space/science themes
+- **Effect H7**: Tech/sci-fi themes
 
 ### For Mobile Viewing
 - **Effect G2**: Optimized with close zoom (heart fills 50% screen)
@@ -507,9 +1052,13 @@ python heart_animation.py --effect G --resolution small --density lower --dpi 80
 ## Related Files
 
 - **Main Script:** `heart_animation.py`
-- **Build Scripts:** `scripts/build_effects.ps1`, `scripts/build_g2_x2.ps1`
+- **Build Scripts:** 
+  - `scripts/build_effects.ps1` (A-G effects)
+  - `scripts/build_g2_x2.ps1` (G2 with audio)
+  - `scripts/build_h_large.ps1` (H* effects at large resolution)
 - **Documentation:** `README.md`
 - **YouTube Description:** `descriptions-heart_epic_story.txt`
+- **Effect Concepts:** `TODO/TODO-effects-H.md`
 
 ---
 
@@ -526,4 +1075,4 @@ To add new effects:
 ---
 
 **Last Updated:** November 14, 2025  
-**Version:** 1.0 with G2 optimization (larger heart for mobile)
+**Version:** 2.0 with H* effects (H1-H7) - 7 new epic storytelling effects

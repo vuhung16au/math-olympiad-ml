@@ -55,7 +55,7 @@ def generate_heart_points(u_points=200, v_points=200, density='high'):
     return x, y, z, colors
 
 
-def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=True):
+def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=True, watermark='VUHUNG'):
     """
     Set up the matplotlib figure and 3D axes.
     
@@ -64,6 +64,7 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
     - dpi: Dots per inch for the figure
     - show_axes: Whether to show coordinate axes
     - show_formulas: Whether to show parametric formulas
+    - watermark: Watermark text to display (empty string for no watermark)
     
     Returns:
     - fig, ax: Matplotlib figure and axes objects
@@ -85,6 +86,9 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
     
     # Set initial view angle
     ax.view_init(elev=20, azim=45)
+    
+    # Force equal aspect ratio for 3D plot to fill screen properly
+    ax.set_box_aspect([1, 1, 1])
     
     # Hide axes, grid, and panes
     ax.axis('off')
@@ -124,11 +128,25 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
                 color='white',
                 bbox=dict(boxstyle='round', facecolor='black', alpha=0.7, edgecolor='white', linewidth=0.5))
     
+    # Add watermark if provided
+    if watermark:
+        # Very dark color (close to black background) - nearly invisible but visible
+        # Using a very dark gray (#050505) that's slightly lighter than pure black
+        # with low alpha to make it subtle and non-intrusive
+        fig.text(0.5, 0.5, watermark,
+                transform=fig.transFigure,
+                fontsize=14,  # Medium size
+                verticalalignment='center',
+                horizontalalignment='center',
+                color='#050505',  # Very dark gray, nearly invisible
+                alpha=0.25,  # Low transparency for subtlety - nearly invisible but visible
+                weight='normal')
+    
     return fig, ax
 
 
 def create_animation(resolution='medium', dpi=100, density='high', effect='A',
-                    show_axes=False, show_formulas=False, fps=30, bitrate=5000, output_path='outputs/heart_animation.mp4'):
+                    show_axes=False, show_formulas=False, fps=30, bitrate=5000, output_path='outputs/heart_animation.mp4', watermark='VUHUNG'):
     """
     Create and save the 3D heart rotation animation.
     
@@ -136,12 +154,13 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     - resolution: 'small', 'medium', 'large', or '4k'
     - dpi: Dots per inch for the figure
     - density: Point density ('lower', 'low', 'medium', 'high')
-    - effect: Animation effect ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2')
+    - effect: Animation effect ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7')
     - show_axes: Whether to show coordinate axes
     - show_formulas: Whether to show parametric formulas
     - fps: Frames per second for output video (default: 30)
     - bitrate: Video bitrate in kbps (default: 5000)
     - output_path: Path to save the output video
+    - watermark: Watermark text to display (default: 'VUHUNG', empty string for no watermark)
     """
     # Calculate actual point count
     point_counts = {'lower': '~5,000', 'low': '10,000', 'medium': '22,500', 'high': '40,000'}
@@ -154,22 +173,36 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
         'F': 'Spiral Ascent (rotation + spiral camera + zoom out)',
         'G': 'Figure-8 Dance (rotation + figure-8 camera path)',
         'G1': 'Heart Journey (camera through heart + moon orbit - 90s)',
-        'G2': 'Epic Heart Story (fade in/out + formulas + through heart + orbit - 137s)'
+        'G2': 'Epic Heart Story (fade in/out + formulas + through heart + orbit - 137s)',
+        'H1': 'Heart Genesis (creation story - 100s)',
+        'H2': 'Time Reversal (forward then backward - 90s)',
+        'H3': 'Fractal Heart (recursive hearts - 90s)',
+        'H4': 'Dual Hearts (two hearts dancing - 120s)',
+        'H5': 'Kaleidoscope Heart (mirrored reflections - 60s)',
+        'H6': 'Heart Nebula (cosmic space journey - 120s)',
+        'H7': 'Hologram Heart (wireframe tech aesthetic - 90s)',
+        'H8': 'Heart Genesis with Music Sync (creation story with BPM-synchronized beats - 100s)'
     }
     print(f"Generating heart shape with {point_counts.get(density, '40,000')} points (density: {density})...")
     print(f"Effect: {effect} - {effect_names.get(effect, 'Simple Y-axis rotation')}")
     x_original, y_original, z_original, colors = generate_heart_points(density=density)
     
     print(f"Setting up figure with resolution: {resolution}, DPI: {dpi}")
-    fig, ax = setup_figure(resolution, dpi, show_axes, show_formulas)
+    fig, ax = setup_figure(resolution, dpi, show_axes, show_formulas, watermark)
+    
+    # Generate second heart for H4 effect (dual hearts)
+    if effect == 'H4':
+        x_heart2, y_heart2, z_heart2, colors2 = generate_heart_points(density=density)
+    else:
+        x_heart2, y_heart2, z_heart2, colors2 = None, None, None, None
     
     # Initial scatter plot
     scatter = ax.scatter(x_original, y_original, z_original, 
                         c=colors, cmap='magma', s=1, alpha=0.8)
     
-    # Set axis limits to keep the heart centered with 16:9 aspect ratio
+    # Set axis limits to keep the heart centered with equal aspect ratio
     max_range = 20
-    ax.set_xlim([-max_range * 1.78, max_range * 1.78])  # 16:9 widescreen
+    ax.set_xlim([-max_range, max_range])
     ax.set_ylim([-max_range, max_range])
     ax.set_zlim([-max_range, max_range])
     
@@ -180,6 +213,30 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     elif effect == 'G2':
         total_frames = 4110  # 137 seconds at 30 fps for G2
         duration_text = "137 seconds"
+    elif effect == 'H1':
+        total_frames = 3000  # 100 seconds at 30 fps for H1
+        duration_text = "100 seconds"
+    elif effect == 'H8':
+        total_frames = 3000  # 100 seconds at 30 fps for H8
+        duration_text = "100 seconds"
+    elif effect == 'H2':
+        total_frames = 2700  # 90 seconds at 30 fps for H2
+        duration_text = "90 seconds"
+    elif effect == 'H3':
+        total_frames = 2700  # 90 seconds at 30 fps for H3
+        duration_text = "90 seconds"
+    elif effect == 'H4':
+        total_frames = 3600  # 120 seconds at 30 fps for H4
+        duration_text = "120 seconds"
+    elif effect == 'H5':
+        total_frames = 1800  # 60 seconds at 30 fps for H5
+        duration_text = "60 seconds"
+    elif effect == 'H6':
+        total_frames = 3600  # 120 seconds at 30 fps for H6
+        duration_text = "120 seconds"
+    elif effect == 'H7':
+        total_frames = 2700  # 90 seconds at 30 fps for H7
+        duration_text = "90 seconds"
     else:
         total_frames = 900   # 30 seconds at 30 fps for other effects
         duration_text = "30 seconds"
@@ -249,7 +306,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             else:
                 zoom_factor = 15 + 5 * ((t - 0.5) * 2)  # Zoom out from 15 to 20
             
-            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
+            ax.set_xlim([-zoom_factor, zoom_factor])
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -271,7 +328,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             
             # Subtle zoom pulse
             zoom_factor = 20 + 3 * np.sin(4 * np.pi * t)
-            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
+            ax.set_xlim([-zoom_factor, zoom_factor])
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -322,7 +379,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             
             # Gradual zoom out as camera ascends
             zoom_factor = 20 + 15 * t  # Zoom from 20 to 35
-            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
+            ax.set_xlim([-zoom_factor, zoom_factor])
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -350,7 +407,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             
             # Subtle zoom synchronized with figure-8 motion
             zoom_factor = 20 + 4 * np.sin(2 * np.pi * t)
-            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
+            ax.set_xlim([-zoom_factor, zoom_factor])
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -395,7 +452,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                 azimuth = 225 + 720 * phase_t
             
             ax.view_init(elev=elevation, azim=azimuth)
-            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
+            ax.set_xlim([-zoom_factor, zoom_factor])
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -539,12 +596,776 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                 elevation = 20
                 azimuth = 45
             
-            # Apply alpha to scatter plot
+            # Apply alpha and position
             scatter.set_alpha(point_alpha)
             scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
             
             ax.view_init(elev=elevation, azim=azimuth)
-            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect H1: Heart Genesis (creation story - 100 seconds)
+        elif effect == 'H1':
+            current_second = frame / 30.0
+            
+            # Heart rotates slowly (180 degrees total)
+            alpha_deg = frame * 180 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            point_alpha = 0.8
+            
+            # Phase 1 (0-10s): Empty black space with single point of light
+            if current_second < 10.0:
+                phase_t = current_second / 10.0
+                point_alpha = 0.0  # Heart invisible
+                zoom_factor = 200  # Very far
+                elevation = 20
+                azimuth = 45
+                # Could add a single point of light here (would need additional scatter)
+            
+            # Phase 2 (10-25s): Point explodes into scattered particles forming heart shape
+            elif current_second < 25.0:
+                phase_t = (current_second - 10.0) / 15.0
+                # Gradually reveal heart with particle-like effect (alpha fade in)
+                point_alpha = 0.8 * phase_t
+                # Scale from very small to normal
+                scale = 0.1 + 0.9 * phase_t
+                x_rotated = x_rotated * scale
+                y_rotated = y_rotated * scale
+                z_rotated = z_rotated * scale
+                zoom_factor = 25 - 5 * phase_t  # Zoom in
+                elevation = 20
+                azimuth = 45
+            
+            # Phase 3 (25-40s): Particles coalesce, heart materializes with increasing density
+            elif current_second < 40.0:
+                phase_t = (current_second - 25.0) / 15.0
+                point_alpha = 0.8
+                zoom_factor = 20 - 3 * phase_t  # Continue zooming
+                elevation = 20 + 10 * np.sin(np.pi * phase_t)
+                azimuth = 45 + 90 * phase_t
+            
+            # Phase 4 (40-60s): Fully formed heart pulses to life (first heartbeat)
+            elif current_second < 60.0:
+                phase_t = (current_second - 40.0) / 20.0
+                point_alpha = 0.8
+                # Heartbeat pulse
+                heartbeat = 1.0 + 0.2 * np.sin(2 * np.pi * 2 * phase_t) ** 2
+                x_rotated = x_rotated * heartbeat
+                y_rotated = y_rotated * heartbeat
+                z_rotated = z_rotated * heartbeat
+                zoom_factor = 17
+                elevation = 20
+                azimuth = 45 + 180 * phase_t
+            
+            # Phase 5 (60-75s): Heart rotates majestically, showing its beauty
+            elif current_second < 75.0:
+                phase_t = (current_second - 60.0) / 15.0
+                point_alpha = 0.8
+                zoom_factor = 17 + 3 * np.sin(2 * np.pi * phase_t)
+                elevation = 20 + 20 * np.sin(2 * np.pi * phase_t)
+                azimuth = 225 + 360 * phase_t
+            
+            # Phase 6 (75-90s): Zoom out to cosmic scale, heart glows like a star
+            elif current_second < 90.0:
+                phase_t = (current_second - 75.0) / 15.0
+                point_alpha = 0.8 + 0.2 * phase_t  # Glow effect (brighter)
+                zoom_factor = 20 + 80 * phase_t  # Zoom out dramatically
+                elevation = 40 - 20 * phase_t
+                azimuth = 585 + 90 * phase_t
+            
+            # Phase 7 (90-95s): Fade formulas in as "blueprint of creation"
+            elif current_second < 95.0:
+                phase_t = (current_second - 90.0) / 5.0
+                point_alpha = 1.0  # Fully bright
+                zoom_factor = 100
+                elevation = 20
+                azimuth = 675
+                # Formulas handled by show_formulas flag
+            
+            # Phase 8 (95-100s): Fade to infinite stars, one becomes the heart again
+            else:
+                phase_t = (current_second - 95.0) / 5.0
+                point_alpha = 1.0 * (1.0 - phase_t)  # Fade out
+                zoom_factor = 100 + 100 * phase_t
+                elevation = 20
+                azimuth = 675
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect H8: Heart Genesis with Music Sync (BPM-synchronized beats - 100 seconds)
+        elif effect == 'H8':
+            current_second = frame / 30.0
+            
+            # Heart rotates slowly (180 degrees total)
+            alpha_deg = frame * 180 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_base = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_base = y_original
+            z_base = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            # Base scale (no heartbeat yet)
+            heartbeat_scale = 1.0
+            
+            # Calculate heartbeat pulses at BPM transition points
+            # Each heartbeat is a quick pulse (0.3 seconds) at the transition
+            heartbeat_duration = 0.3  # 0.3 seconds for each heartbeat
+            
+            # BPM transition points where heartbeats occur
+            if abs(current_second - 10.0) < heartbeat_duration:  # 60→75 BPM at 0:10
+                beat_t = abs(current_second - 10.0) / heartbeat_duration
+                heartbeat_scale = 1.0 + 0.15 * (1.0 - beat_t)  # Quick pulse
+            elif abs(current_second - 25.0) < heartbeat_duration:  # 75→80 BPM at 0:25
+                beat_t = abs(current_second - 25.0) / heartbeat_duration
+                heartbeat_scale = 1.0 + 0.15 * (1.0 - beat_t)
+            elif abs(current_second - 40.0) < heartbeat_duration:  # 80→85 BPM at 0:40
+                beat_t = abs(current_second - 40.0) / heartbeat_duration
+                heartbeat_scale = 1.0 + 0.15 * (1.0 - beat_t)
+            elif abs(current_second - 60.0) < heartbeat_duration:  # 85→90 BPM at 1:00
+                beat_t = abs(current_second - 60.0) / heartbeat_duration
+                heartbeat_scale = 1.0 + 0.15 * (1.0 - beat_t)
+            elif abs(current_second - 75.0) < heartbeat_duration:  # 90→75 BPM at 1:15
+                beat_t = abs(current_second - 75.0) / heartbeat_duration
+                heartbeat_scale = 1.0 + 0.15 * (1.0 - beat_t)
+            elif abs(current_second - 90.0) < heartbeat_duration:  # 75→70 BPM at 1:30
+                beat_t = abs(current_second - 90.0) / heartbeat_duration
+                heartbeat_scale = 1.0 + 0.15 * (1.0 - beat_t)
+            elif abs(current_second - 95.0) < heartbeat_duration:  # 70→60 BPM at 1:35
+                beat_t = abs(current_second - 95.0) / heartbeat_duration
+                heartbeat_scale = 1.0 + 0.15 * (1.0 - beat_t)
+            
+            # Apply heartbeat scale
+            x_rotated = x_base * heartbeat_scale
+            y_rotated = y_base * heartbeat_scale
+            z_rotated = z_base * heartbeat_scale
+            
+            point_alpha = 0.8
+            
+            # Phase 1 (0-10s): Empty black space, then gradually heart appears
+            if current_second < 10.0:
+                phase_t = current_second / 10.0
+                # Gradually fade in from blank
+                point_alpha = 0.8 * phase_t
+                # Scale from very small to normal
+                scale = 0.1 + 0.9 * phase_t
+                x_rotated = x_rotated * scale
+                y_rotated = y_rotated * scale
+                z_rotated = z_rotated * scale
+                zoom_factor = 200 - 175 * phase_t  # Start very far, approach
+                elevation = 20
+                azimuth = 45
+            
+            # Phase 2 (10-25s): Energy burst, strings ascending
+            elif current_second < 25.0:
+                phase_t = (current_second - 10.0) / 15.0
+                point_alpha = 0.8
+                zoom_factor = 25 - 5 * phase_t  # Continue zooming in
+                elevation = 20
+                azimuth = 45 + 90 * phase_t
+            
+            # Phase 3 (25-40s): Strings coalesce, 80 BPM
+            elif current_second < 40.0:
+                phase_t = (current_second - 25.0) / 15.0
+                point_alpha = 0.8
+                zoom_factor = 20 - 3 * phase_t  # Continue zooming
+                elevation = 20 + 10 * np.sin(np.pi * phase_t)
+                azimuth = 135 + 90 * phase_t
+            
+            # Phase 4 (40-60s): Heartbeat rhythm, 85 BPM
+            elif current_second < 60.0:
+                phase_t = (current_second - 40.0) / 20.0
+                point_alpha = 0.8
+                zoom_factor = 17
+                elevation = 20
+                azimuth = 225 + 180 * phase_t
+            
+            # Phase 5 (60-75s): Majestic orchestral, 90 BPM
+            elif current_second < 75.0:
+                phase_t = (current_second - 60.0) / 15.0
+                point_alpha = 0.8
+                zoom_factor = 17 + 3 * np.sin(2 * np.pi * phase_t)
+                elevation = 20 + 20 * np.sin(2 * np.pi * phase_t)
+                azimuth = 405 + 360 * phase_t
+            
+            # Phase 6 (75-90s): Cosmic expansion, 75 BPM
+            elif current_second < 90.0:
+                phase_t = (current_second - 75.0) / 15.0
+                point_alpha = 0.8 + 0.2 * phase_t  # Glow effect
+                zoom_factor = 20 + 80 * phase_t  # Zoom out dramatically
+                elevation = 40 - 20 * phase_t
+                azimuth = 585 + 90 * phase_t
+            
+            # Phase 7 (90-95s): Mathematical precision, 70 BPM
+            elif current_second < 95.0:
+                phase_t = (current_second - 90.0) / 5.0
+                point_alpha = 1.0  # Fully bright
+                zoom_factor = 100
+                elevation = 20
+                azimuth = 675
+            
+            # Phase 8 (95-100s): Fade to silence, 60 BPM, infinite stars
+            else:
+                phase_t = (current_second - 95.0) / 5.0
+                point_alpha = 1.0 * (1.0 - phase_t)  # Fade out
+                zoom_factor = 100 + 100 * phase_t
+                elevation = 20
+                azimuth = 675
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect H2: Time Reversal (forward then backward - 90 seconds)
+        elif effect == 'H2':
+            current_second = frame / 30.0
+            
+            # Phase 1 (0-45s): Normal G2-style journey forward
+            if current_second < 45.0:
+                phase_t = current_second / 45.0
+                # Rotate heart
+                alpha_deg = frame * 270 / (total_frames // 2)
+                alpha_rad = np.deg2rad(alpha_deg)
+                x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+                y_rotated = y_original
+                z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+                
+                # Camera motion
+                zoom_factor = 20 - 10 * phase_t + 5 * np.sin(4 * np.pi * phase_t)
+                elevation = 20 + 15 * np.sin(2 * np.pi * phase_t)
+                azimuth = 45 + 360 * phase_t
+                point_alpha = 0.8
+                
+            # Phase 2 (45-48s): Freeze frame at peak moment
+            elif current_second < 48.0:
+                alpha_deg = (total_frames // 2) * 270 / (total_frames // 2)
+                alpha_rad = np.deg2rad(alpha_deg)
+                x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+                y_rotated = y_original
+                z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+                
+                zoom_factor = 15
+                elevation = 35
+                azimuth = 405
+                point_alpha = 0.8
+            
+            # Phase 3 (48-90s): Reverse time - everything plays backward
+            else:
+                reverse_t = (current_second - 48.0) / 42.0
+                reverse_frame = int((1.0 - reverse_t) * (total_frames // 2))
+                
+                # Rotate heart backward
+                alpha_deg = reverse_frame * 270 / (total_frames // 2)
+                alpha_rad = np.deg2rad(alpha_deg)
+                x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+                y_rotated = y_original
+                z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+                
+                # Camera motion backward
+                phase_t = 1.0 - reverse_t
+                zoom_factor = 20 - 10 * phase_t + 5 * np.sin(4 * np.pi * phase_t)
+                elevation = 20 + 15 * np.sin(2 * np.pi * phase_t)
+                azimuth = 45 + 360 * phase_t
+                point_alpha = 0.8
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect H3: Fractal Heart (recursive hearts - 90 seconds)
+        elif effect == 'H3':
+            current_second = frame / 30.0
+            
+            # Rotate main heart
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            point_alpha = 0.8
+            
+            # Phase 1 (0-15s): Start with normal heart
+            if current_second < 15.0:
+                zoom_factor = 20
+                elevation = 20
+                azimuth = 45 + 180 * (current_second / 15.0)
+            
+            # Phase 2 (15-45s): Zoom into heart center, discover smaller heart inside
+            elif current_second < 45.0:
+                phase_t = (current_second - 15.0) / 30.0
+                # Zoom in dramatically
+                zoom_factor = 20 - 18 * phase_t  # 20 to 2
+                elevation = 20 + 10 * np.sin(2 * np.pi * phase_t)
+                azimuth = 225 + 360 * phase_t
+                # Visual effect: scale down to show "inner heart"
+                scale = 1.0 - 0.5 * phase_t
+                x_rotated = x_rotated * scale
+                y_rotated = y_rotated * scale
+                z_rotated = z_rotated * scale
+            
+            # Phase 3 (45-60s): Zoom into that heart, find another (3-5 levels)
+            elif current_second < 60.0:
+                phase_t = (current_second - 45.0) / 15.0
+                zoom_factor = 2 - 1.5 * phase_t  # 2 to 0.5
+                elevation = 30 + 10 * np.sin(4 * np.pi * phase_t)
+                azimuth = 585 + 360 * phase_t
+                scale = 0.5 - 0.3 * phase_t
+                x_rotated = x_rotated * scale
+                y_rotated = y_rotated * scale
+                z_rotated = z_rotated * scale
+            
+            # Phase 4 (60-75s): Zoom back out through all levels
+            elif current_second < 75.0:
+                phase_t = (current_second - 60.0) / 15.0
+                zoom_factor = 0.5 + 19.5 * phase_t  # 0.5 to 20
+                elevation = 40 - 20 * phase_t
+                azimuth = 945 - 720 * phase_t
+                scale = 0.2 + 0.8 * phase_t
+                x_rotated = x_rotated * scale
+                y_rotated = y_rotated * scale
+                z_rotated = z_rotated * scale
+            
+            # Phase 5 (75-90s): Final reveal - the universe is made of hearts
+            else:
+                phase_t = (current_second - 75.0) / 15.0
+                zoom_factor = 20 + 30 * phase_t  # Zoom out to cosmic scale
+                elevation = 20
+                azimuth = 225 + 180 * phase_t
+                # Return to normal scale
+                x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+                y_rotated = y_original
+                z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect H4: Dual Hearts (two hearts dancing - 120 seconds)
+        elif effect == 'H4':
+            current_second = frame / 30.0
+            
+            # Rotate both hearts
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            # Heart 1 (original)
+            x1 = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y1 = y_original
+            z1 = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            # Heart 2 (offset and rotated)
+            x2 = x_heart2 * np.cos(alpha_rad + np.pi/4) + z_heart2 * np.sin(alpha_rad + np.pi/4)
+            y2 = y_heart2
+            z2 = -x_heart2 * np.sin(alpha_rad + np.pi/4) + z_heart2 * np.cos(alpha_rad + np.pi/4)
+            
+            # Phase 1 (0-15s): First heart appears
+            if current_second < 15.0:
+                phase_t = current_second / 15.0
+                # Only show heart 1, fade in
+                point_alpha = 0.8 * phase_t
+                # Position heart 1
+                offset = 0
+                x_rotated = x1 + offset
+                y_rotated = y1
+                z_rotated = z1
+                zoom_factor = 30 - 10 * phase_t
+                elevation = 20
+                azimuth = 45
+            
+            # Phase 2 (15-30s): Second heart appears
+            elif current_second < 30.0:
+                phase_t = (current_second - 15.0) / 15.0
+                point_alpha = 0.8
+                # Combine both hearts with offset
+                offset1 = -8 * (1.0 - phase_t)
+                offset2 = 8 * phase_t
+                x_rotated = np.concatenate([x1 + offset1, x2 + offset2])
+                y_rotated = np.concatenate([y1, y2])
+                z_rotated = np.concatenate([z1, z2])
+                zoom_factor = 20
+                elevation = 20
+                azimuth = 45 + 90 * phase_t
+            
+            # Phase 3 (30-60s): Hearts orbit each other like binary stars
+            elif current_second < 60.0:
+                phase_t = (current_second - 30.0) / 30.0
+                point_alpha = 0.8
+                orbit_radius = 8
+                angle = 2 * np.pi * phase_t
+                offset1 = orbit_radius * np.cos(angle)
+                offset2 = orbit_radius * np.cos(angle + np.pi)
+                x_rotated = np.concatenate([x1 + offset1, x2 + offset2])
+                y_rotated = np.concatenate([y1, y2])
+                z_rotated = np.concatenate([z1 + orbit_radius * np.sin(angle), z2 + orbit_radius * np.sin(angle + np.pi)])
+                zoom_factor = 25
+                elevation = 20 + 10 * np.sin(2 * np.pi * phase_t)
+                azimuth = 135 + 360 * phase_t
+            
+            # Phase 4 (60-75s): Hearts spiral closer
+            elif current_second < 75.0:
+                phase_t = (current_second - 60.0) / 15.0
+                point_alpha = 0.8
+                orbit_radius = 8 * (1.0 - phase_t)  # Spiral in
+                angle = 2 * np.pi * phase_t * 2
+                offset1 = orbit_radius * np.cos(angle)
+                offset2 = orbit_radius * np.cos(angle + np.pi)
+                x_rotated = np.concatenate([x1 + offset1, x2 + offset2])
+                y_rotated = np.concatenate([y1, y2])
+                z_rotated = np.concatenate([z1 + orbit_radius * np.sin(angle), z2 + orbit_radius * np.sin(angle + np.pi)])
+                zoom_factor = 20 - 5 * phase_t
+                elevation = 30 - 10 * phase_t
+                azimuth = 495 + 180 * phase_t
+            
+            # Phase 5 (75-85s): Hearts briefly merge/overlap
+            elif current_second < 85.0:
+                phase_t = (current_second - 75.0) / 10.0
+                point_alpha = 0.8 + 0.2 * np.sin(4 * np.pi * phase_t)  # Pulse
+                # Hearts at same position
+                x_rotated = np.concatenate([x1, x2])
+                y_rotated = np.concatenate([y1, y2])
+                z_rotated = np.concatenate([z1, z2])
+                zoom_factor = 15
+                elevation = 20
+                azimuth = 675 + 90 * phase_t
+            
+            # Phase 6 (85-95s): Hearts separate but remain connected by "thread"
+            elif current_second < 95.0:
+                phase_t = (current_second - 85.0) / 10.0
+                point_alpha = 0.8
+                separation = 4 * phase_t
+                x_rotated = np.concatenate([x1 - separation, x2 + separation])
+                y_rotated = np.concatenate([y1, y2])
+                z_rotated = np.concatenate([z1, z2])
+                zoom_factor = 15 + 5 * phase_t
+                elevation = 20
+                azimuth = 765 + 90 * phase_t
+            
+            # Phase 7 (95-105s): Final orbit, synchronized rotation
+            elif current_second < 105.0:
+                phase_t = (current_second - 95.0) / 10.0
+                point_alpha = 0.8
+                orbit_radius = 4 + 4 * phase_t
+                angle = 2 * np.pi * phase_t
+                offset1 = orbit_radius * np.cos(angle)
+                offset2 = orbit_radius * np.cos(angle + np.pi)
+                x_rotated = np.concatenate([x1 + offset1, x2 + offset2])
+                y_rotated = np.concatenate([y1, y2])
+                z_rotated = np.concatenate([z1 + orbit_radius * np.sin(angle), z2 + orbit_radius * np.sin(angle + np.pi)])
+                zoom_factor = 20
+                elevation = 20 + 5 * np.sin(4 * np.pi * phase_t)
+                azimuth = 855 + 360 * phase_t
+            
+            # Phase 8 (105-120s): Fade to black, showing connection line last
+            else:
+                phase_t = (current_second - 105.0) / 15.0
+                point_alpha = 0.8 * (1.0 - phase_t)
+                orbit_radius = 8
+                angle = 2 * np.pi * (1.0 + phase_t)
+                offset1 = orbit_radius * np.cos(angle)
+                offset2 = orbit_radius * np.cos(angle + np.pi)
+                x_rotated = np.concatenate([x1 + offset1, x2 + offset2])
+                y_rotated = np.concatenate([y1, y2])
+                z_rotated = np.concatenate([z1 + orbit_radius * np.sin(angle), z2 + orbit_radius * np.sin(angle + np.pi)])
+                zoom_factor = 20 + 10 * phase_t
+                elevation = 25
+                azimuth = 1215
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect H5: Kaleidoscope Heart (mirrored reflections - 60 seconds)
+        elif effect == 'H5':
+            # Rotate heart
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            current_second = frame / 30.0
+            point_alpha = 0.8
+            
+            # Create mirrored versions
+            # Phase 1 (0-10s): Single heart in center
+            if current_second < 10.0:
+                zoom_factor = 20
+                elevation = 20
+                azimuth = 45 + 180 * (current_second / 10.0)
+            
+            # Phase 2 (10-25s): Mirrors appear (4 quadrants)
+            elif current_second < 25.0:
+                phase_t = (current_second - 10.0) / 15.0
+                # Create 4 mirrored hearts
+                x_all = np.concatenate([
+                    x_rotated,  # Original
+                    -x_rotated,  # Mirror X
+                    x_rotated,  # Mirror Y
+                    -x_rotated,  # Mirror both
+                ])
+                y_all = np.concatenate([y_rotated, y_rotated, -y_rotated, -y_rotated])
+                z_all = np.concatenate([z_rotated, -z_rotated, z_rotated, -z_rotated])
+                
+                # Fade in mirrors
+                if phase_t < 0.5:
+                    point_alpha = 0.8 * (phase_t * 2)
+                else:
+                    point_alpha = 0.8
+                
+                x_rotated = x_all
+                y_rotated = y_all
+                z_rotated = z_all
+                zoom_factor = 25
+                elevation = 20
+                azimuth = 225 + 180 * phase_t
+            
+            # Phase 3 (25-40s): 8 mirrors (add diagonal)
+            elif current_second < 40.0:
+                phase_t = (current_second - 25.0) / 15.0
+                # 8 hearts in octagon pattern
+                angles = np.linspace(0, 2*np.pi, 8, endpoint=False)
+                x_all = []
+                y_all = []
+                z_all = []
+                for angle in angles:
+                    cos_a = np.cos(angle)
+                    sin_a = np.sin(angle)
+                    x_mirror = x_rotated * cos_a - z_rotated * sin_a
+                    z_mirror = x_rotated * sin_a + z_rotated * cos_a
+                    x_all.append(x_mirror)
+                    y_all.append(y_rotated)
+                    z_all.append(z_mirror)
+                
+                x_rotated = np.concatenate(x_all)
+                y_rotated = np.concatenate(y_all)
+                z_rotated = np.concatenate(z_all)
+                zoom_factor = 30
+                elevation = 20 + 10 * np.sin(2 * np.pi * phase_t)
+                azimuth = 405 + 360 * phase_t
+            
+            # Phase 4 (40-50s): 16 mirrors (mandala pattern)
+            elif current_second < 50.0:
+                phase_t = (current_second - 40.0) / 10.0
+                # 16 hearts
+                angles = np.linspace(0, 2*np.pi, 16, endpoint=False)
+                x_all = []
+                y_all = []
+                z_all = []
+                for angle in angles:
+                    cos_a = np.cos(angle)
+                    sin_a = np.sin(angle)
+                    x_mirror = x_rotated * cos_a - z_rotated * sin_a
+                    z_mirror = x_rotated * sin_a + z_rotated * cos_a
+                    x_all.append(x_mirror)
+                    y_all.append(y_rotated)
+                    z_all.append(z_mirror)
+                
+                x_rotated = np.concatenate(x_all)
+                y_rotated = np.concatenate(y_all)
+                z_rotated = np.concatenate(z_all)
+                zoom_factor = 35
+                elevation = 20 + 15 * np.sin(4 * np.pi * phase_t)
+                azimuth = 765 + 720 * phase_t
+            
+            # Phase 5 (50-55s): Pattern collapses back to single heart
+            elif current_second < 55.0:
+                phase_t = (current_second - 50.0) / 5.0
+                point_alpha = 0.8 * (1.0 - phase_t)
+                zoom_factor = 35 - 15 * phase_t
+                elevation = 35 - 15 * phase_t
+                azimuth = 1485 - 1440 * phase_t
+            
+            # Phase 6 (55-60s): Final reveal - was always one heart
+            else:
+                phase_t = (current_second - 55.0) / 5.0
+                point_alpha = 0.8 * phase_t
+                zoom_factor = 20
+                elevation = 20
+                azimuth = 45
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect H6: Heart Nebula (cosmic space journey - 120 seconds)
+        elif effect == 'H6':
+            current_second = frame / 30.0
+            
+            # Rotate heart slowly
+            alpha_deg = frame * 180 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            point_alpha = 0.8
+            
+            # Phase 1 (0-15s): Start in deep space (distant heart glows like galaxy)
+            if current_second < 15.0:
+                phase_t = current_second / 15.0
+                point_alpha = 0.3 + 0.5 * phase_t  # Glow effect
+                zoom_factor = 200 - 150 * phase_t  # Very far to closer
+                elevation = 20
+                azimuth = 45
+            
+            # Phase 2 (15-45s): Travel through stars toward heart-nebula
+            elif current_second < 45.0:
+                phase_t = (current_second - 15.0) / 30.0
+                point_alpha = 0.8 + 0.2 * np.sin(4 * np.pi * phase_t)  # Pulsing glow
+                zoom_factor = 50 - 30 * phase_t  # Continue approaching
+                elevation = 20 + 10 * np.sin(2 * np.pi * phase_t)
+                azimuth = 45 + 180 * phase_t
+            
+            # Phase 3 (45-60s): Pass through "cosmic dust" (particle effects)
+            elif current_second < 60.0:
+                phase_t = (current_second - 45.0) / 15.0
+                point_alpha = 0.8 + 0.2 * np.sin(8 * np.pi * phase_t)  # Rapid pulsing
+                zoom_factor = 20 - 5 * phase_t  # Get very close
+                elevation = 30 - 10 * phase_t
+                azimuth = 225 + 90 * phase_t
+            
+            # Phase 4 (60-75s): Arrive at heart, now massive and glowing
+            elif current_second < 75.0:
+                phase_t = (current_second - 60.0) / 15.0
+                point_alpha = 1.0  # Fully bright
+                zoom_factor = 15 + 2 * np.sin(2 * np.pi * phase_t)
+                elevation = 20 + 15 * np.sin(2 * np.pi * phase_t)
+                azimuth = 315 + 180 * phase_t
+            
+            # Phase 5 (75-90s): Orbit around heart-planet
+            elif current_second < 90.0:
+                phase_t = (current_second - 75.0) / 15.0
+                point_alpha = 1.0
+                zoom_factor = 17
+                elevation = 20 + 25 * np.sin(2 * np.pi * phase_t)
+                azimuth = 495 + 360 * phase_t
+            
+            # Phase 6 (90-105s): See other "heart planets" in distance
+            elif current_second < 105.0:
+                phase_t = (current_second - 90.0) / 15.0
+                point_alpha = 1.0
+                zoom_factor = 17 + 20 * phase_t  # Zoom out to see others
+                elevation = 45 - 25 * phase_t
+                azimuth = 855 + 180 * phase_t
+            
+            # Phase 7 (105-120s): Zoom out - our heart is one of many in "heart galaxy"
+            else:
+                phase_t = (current_second - 105.0) / 15.0
+                point_alpha = 1.0 - 0.2 * phase_t  # Slight fade
+                zoom_factor = 37 + 163 * phase_t  # Zoom out dramatically
+                elevation = 20
+                azimuth = 1035 + 90 * phase_t
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect H7: Hologram Heart (wireframe tech aesthetic - 90 seconds)
+        elif effect == 'H7':
+            current_second = frame / 30.0
+            
+            # Rotate heart
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            point_alpha = 0.8
+            
+            # Phase 1 (0-10s): Grid floor and walls appear (tron-style)
+            if current_second < 10.0:
+                phase_t = current_second / 10.0
+                point_alpha = 0.0  # Heart invisible initially
+                zoom_factor = 30
+                elevation = 20
+                azimuth = 45
+            
+            # Phase 2 (10-20s): Heart materializes as wireframe
+            elif current_second < 20.0:
+                phase_t = (current_second - 10.0) / 10.0
+                point_alpha = 0.3 * phase_t  # Wireframe effect (low alpha)
+                zoom_factor = 30 - 10 * phase_t
+                elevation = 20
+                azimuth = 45 + 90 * phase_t
+            
+            # Phase 3 (20-35s): Wireframe fills in with points progressively
+            elif current_second < 35.0:
+                phase_t = (current_second - 20.0) / 15.0
+                point_alpha = 0.3 + 0.5 * phase_t  # Gradually fill
+                zoom_factor = 20
+                elevation = 20 + 10 * np.sin(2 * np.pi * phase_t)
+                azimuth = 135 + 180 * phase_t
+            
+            # Phase 4 (35-50s): Hologram "glitches" and reforms
+            elif current_second < 50.0:
+                phase_t = (current_second - 35.0) / 15.0
+                # Glitch effect: random alpha fluctuations
+                glitch = 0.1 * np.sin(20 * np.pi * phase_t) * np.sin(7 * np.pi * phase_t)
+                point_alpha = 0.8 + glitch
+                zoom_factor = 20 + 3 * np.sin(4 * np.pi * phase_t)
+                elevation = 30 - 10 * np.sin(2 * np.pi * phase_t)
+                azimuth = 315 + 360 * phase_t
+            
+            # Phase 5 (50-70s): Multiple holographic layers (like x-ray views)
+            elif current_second < 70.0:
+                phase_t = (current_second - 50.0) / 20.0
+                point_alpha = 0.8 + 0.2 * np.sin(2 * np.pi * phase_t)
+                zoom_factor = 17 + 3 * np.sin(2 * np.pi * phase_t)
+                elevation = 20 + 20 * np.sin(2 * np.pi * phase_t)
+                azimuth = 675 + 540 * phase_t
+            
+            # Phase 6 (70-85s): Final solid form with scan lines effect
+            elif current_second < 85.0:
+                phase_t = (current_second - 70.0) / 15.0
+                # Scan line effect: slight alpha variation
+                scan_line = 0.1 * np.sin(10 * np.pi * phase_t)
+                point_alpha = 1.0 + scan_line
+                zoom_factor = 20
+                elevation = 40 - 20 * phase_t
+                azimuth = 1215 + 180 * phase_t
+            
+            # Phase 7 (85-90s): Hologram powers down in sections
+            else:
+                phase_t = (current_second - 85.0) / 5.0
+                point_alpha = 1.0 * (1.0 - phase_t)  # Fade out
+                zoom_factor = 20 + 10 * phase_t
+                elevation = 20
+                azimuth = 1395
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -616,6 +1437,13 @@ Effect options:
   G1 - Heart Journey: Camera zooms through heart center, exits behind, then orbits back like moon (90 seconds, fast-paced)
   G2 - Epic Heart Story: Cinematic sequence with fade in/out, formula display, dramatic zooms through heart, 
        distant zoom out, dramatic zoom back in, moon orbit, and fade to black (137 seconds, epic storytelling)
+  H1 - Heart Genesis: Creation story from nothing to heart, with particle effects and cosmic scale (100 seconds)
+  H2 - Time Reversal: Forward journey then backward with time echoes (90 seconds)
+  H3 - Fractal Heart: Recursive hearts at different scales, zoom in and out (90 seconds)
+  H4 - Dual Hearts: Two hearts dancing together, orbiting and merging (120 seconds)
+  H5 - Kaleidoscope Heart: Mirrored reflections creating mandala patterns (60 seconds)
+  H6 - Heart Nebula: Cosmic space journey with glowing heart as celestial body (120 seconds)
+  H7 - Hologram Heart: Wireframe tech aesthetic with glitch effects (90 seconds)
 
 Examples:
   python heart_animation.py
@@ -652,9 +1480,9 @@ Examples:
     
     parser.add_argument(
         '--effect', '-e',
-        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2'],
+        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8'],
         default='A',
-        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s) (default: A)'
+        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s) (default: A)'
     )
     
     parser.add_argument(
@@ -689,6 +1517,12 @@ Examples:
         help='Output file path (default: outputs/heart_animation.mp4)'
     )
     
+    parser.add_argument(
+        '--watermark',
+        default='VUHUNG',
+        help='Watermark text to display at center of video (default: "VUHUNG"). Use --watermark "" to disable watermark.'
+    )
+    
     args = parser.parse_args()
     
     print("=" * 60)
@@ -701,6 +1535,7 @@ Examples:
     print(f"FPS: {args.fps}")
     print(f"Show Axes: {args.axes}")
     print(f"Show Formulas: {args.formulas}")
+    print(f"Watermark: {args.watermark if args.watermark else '(disabled)'}")
     print(f"Output: {args.output}")
     print("=" * 60)
     
@@ -714,7 +1549,8 @@ Examples:
             show_formulas=args.formulas,
             fps=args.fps,
             bitrate=args.bitrate,
-            output_path=args.output
+            output_path=args.output,
+            watermark=args.watermark
         )
     except Exception as e:
         print(f"✗ Error: {e}")
