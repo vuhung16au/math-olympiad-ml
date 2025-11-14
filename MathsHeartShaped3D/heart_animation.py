@@ -26,7 +26,8 @@ def generate_heart_points(u_points=200, v_points=200, density='high'):
     """
     # Adjust point count based on density
     density_multipliers = {
-        'low': 0.5,     # 100x100 = 10,000 points
+        'lower': 0.35,   # 70x70 = 4,900 points (~5,000)
+        'low': 0.5,      # 100x100 = 10,000 points
         'medium': 0.75,  # 150x150 = 22,500 points
         'high': 1.0      # 200x200 = 40,000 points
     }
@@ -43,10 +44,10 @@ def generate_heart_points(u_points=200, v_points=200, density='high'):
     v_flat = v_grid.flatten()
     
     # Parametric equations for the 3D heart
-    x = np.sin(u_flat) * (15 * np.sin(v_flat) - 4 * np.sin(3 * v_flat))
-    y = 8 * np.cos(u_flat)
-    z = np.sin(u_flat) * (15 * np.cos(v_flat) - 5 * np.cos(2 * v_flat) - 
-                          2 * np.cos(3 * v_flat) - np.cos(4 * v_flat))
+    x = np.sin(u_flat) * (15.16 * np.sin(v_flat) - 3.59 * np.sin(2.99 * v_flat))
+    y = 7.9911 * np.cos(u_flat)
+    z = np.sin(u_flat) * (15.16 * np.cos(v_flat) - 5.11 * np.cos(2.12 * v_flat) - 
+                          2 * np.cos(3.11 * v_flat) - np.cos(v_flat))
     
     # Use z values for color gradient
     colors = z
@@ -109,9 +110,9 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
     # Add formulas text if requested
     if show_formulas:
         formula_text = (
-            r'$x = \sin(u) \cdot (15\sin(v) - 4\sin(3v))$' + '\n'
-            r'$y = 8\cos(u)$' + '\n'
-            r'$z = \sin(u) \cdot (15\cos(v) - 5\cos(2v) - 2\cos(3v) - \cos(v))$' + '\n'
+            r'$x = \sin(u) \cdot (15.16\sin(v) - 3.59\sin(2.99v))$' + '\n'
+            r'$y = 7.9911\cos(u)$' + '\n'
+            r'$z = \sin(u) \cdot (15.16\cos(v) - 5.11\cos(2.12v) - 2\cos(3.11v) - \cos(v))$' + '\n'
             r'$u \in [0, \pi], \quad v \in [0, 2\pi]$'
         )
         fig.text(0.02, 0.98, formula_text, 
@@ -125,7 +126,7 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
     return fig, ax
 
 
-def create_animation(resolution='medium', dpi=100, density='high', 
+def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                     show_axes=True, show_formulas=True, output_path='outputs/heart_animation.mp4'):
     """
     Create and save the 3D heart rotation animation.
@@ -133,14 +134,25 @@ def create_animation(resolution='medium', dpi=100, density='high',
     Parameters:
     - resolution: 'small', 'medium', or 'large'
     - dpi: Dots per inch for the figure
-    - density: Point density ('low', 'medium', 'high')
+    - density: Point density ('lower', 'low', 'medium', 'high')
+    - effect: Animation effect ('A', 'B', 'C', 'D')
     - show_axes: Whether to show coordinate axes
     - show_formulas: Whether to show parametric formulas
     - output_path: Path to save the output video
     """
     # Calculate actual point count
-    point_counts = {'low': '10,000', 'medium': '22,500', 'high': '40,000'}
+    point_counts = {'lower': '~5,000', 'low': '10,000', 'medium': '22,500', 'high': '40,000'}
+    effect_names = {
+        'A': 'Multi-axis rotation (Y + X wobble)',
+        'B': 'Dynamic camera orbit',
+        'C': 'Combined (rotation + camera + zoom)',
+        'D': 'Custom (Y rotation + elevation sweep + zoom)',
+        'E': 'Heartbeat Pulse (rotation + rhythmic scaling)',
+        'F': 'Spiral Ascent (rotation + spiral camera + zoom out)',
+        'G': 'Figure-8 Dance (rotation + figure-8 camera path)'
+    }
     print(f"Generating heart shape with {point_counts.get(density, '40,000')} points (density: {density})...")
+    print(f"Effect: {effect} - {effect_names.get(effect, 'Simple Y-axis rotation')}")
     x_original, y_original, z_original, colors = generate_heart_points(density=density)
     
     print(f"Setting up figure with resolution: {resolution}, DPI: {dpi}")
@@ -161,22 +173,184 @@ def create_animation(resolution='medium', dpi=100, density='high',
     
     def update(frame):
         """
-        Update function for animation - rotates the heart around the y-axis.
+        Update function for animation - applies different effects based on mode.
         
         Parameters:
         - frame: Current frame number (0 to 899)
         """
-        # Calculate rotation angle in degrees and convert to radians
-        alpha_deg = frame * 360 / total_frames
-        alpha_rad = np.deg2rad(alpha_deg)
+        # Calculate normalized time (0 to 1)
+        t = frame / total_frames
         
-        # Apply 3D rotation matrix around y-axis
-        x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
-        y_rotated = y_original  # y remains unchanged
-        z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+        # Effect A: Multi-axis rotation (Y-axis + X-axis wobble)
+        if effect == 'A':
+            # Primary rotation around Y-axis
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            # Add gentle X-axis wobble (15-degree amplitude)
+            beta_deg = 15 * np.sin(2 * np.pi * t)
+            beta_rad = np.deg2rad(beta_deg)
+            
+            # Rotate around Y-axis first
+            x_temp = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_temp = y_original
+            z_temp = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            # Then rotate around X-axis for wobble
+            x_rotated = x_temp
+            y_rotated = y_temp * np.cos(beta_rad) - z_temp * np.sin(beta_rad)
+            z_rotated = y_temp * np.sin(beta_rad) + z_temp * np.cos(beta_rad)
+            
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
         
-        # Update scatter plot data
-        scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+        # Effect B: Dynamic camera orbit (heart stays stationary)
+        elif effect == 'B':
+            # Heart doesn't rotate
+            scatter._offsets3d = (x_original, y_original, z_original)
+            
+            # Camera orbits around the heart
+            azimuth = 45 + 360 * t
+            elevation = 20 + 20 * np.sin(2 * np.pi * t)  # Elevation oscillates
+            ax.view_init(elev=elevation, azim=azimuth)
+        
+        # Effect C: Combined (rotating heart + orbiting camera + zoom)
+        elif effect == 'C':
+            # Rotate heart around Y-axis
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            
+            # Camera orbits slower (180 degrees total)
+            azimuth = 45 + 180 * t
+            elevation = 20 + 15 * np.sin(np.pi * t)
+            ax.view_init(elev=elevation, azim=azimuth)
+            
+            # Zoom effect: zoom in first half, zoom out second half
+            if t < 0.5:
+                zoom_factor = 20 - 5 * (t * 2)  # Zoom in from 20 to 15
+            else:
+                zoom_factor = 15 + 5 * ((t - 0.5) * 2)  # Zoom out from 15 to 20
+            
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect D: Custom (Y rotation + elevation sweep + zoom pulse)
+        elif effect == 'D':
+            # Rotate around Y-axis
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            
+            # Smooth elevation sweep from bottom to top and back
+            elevation = 20 + 40 * np.sin(np.pi * t)
+            ax.view_init(elev=elevation, azim=45)
+            
+            # Subtle zoom pulse
+            zoom_factor = 20 + 3 * np.sin(4 * np.pi * t)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect E: Heartbeat Pulse (rotation + rhythmic scaling)
+        elif effect == 'E':
+            # Rotate around Y-axis
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_temp = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_temp = y_original
+            z_temp = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            # Heartbeat pulse: double beat pattern (lub-dub)
+            # Create a heartbeat rhythm with two pulses per cycle
+            heartbeat_freq = 2  # 2 beats per rotation
+            pulse1 = np.sin(2 * np.pi * heartbeat_freq * t) ** 2
+            pulse2 = np.sin(2 * np.pi * heartbeat_freq * t + np.pi/3) ** 2
+            heartbeat = 1.0 + 0.15 * (pulse1 + 0.5 * pulse2)  # Scale between 1.0 and 1.15
+            
+            # Apply pulsating scale
+            x_rotated = x_temp * heartbeat
+            y_rotated = y_temp * heartbeat
+            z_rotated = z_temp * heartbeat
+            
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            
+            # Gentle camera wobble synchronized with heartbeat
+            elevation = 20 + 5 * np.sin(2 * np.pi * heartbeat_freq * t)
+            ax.view_init(elev=elevation, azim=45)
+        
+        # Effect F: Spiral Ascent (rotation + spiral camera + zoom out)
+        elif effect == 'F':
+            # Rotate heart around Y-axis
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            
+            # Camera spirals upward while orbiting
+            azimuth = 45 + 720 * t  # Two full rotations
+            elevation = -10 + 70 * t  # Rises from -10 to 60 degrees
+            ax.view_init(elev=elevation, azim=azimuth)
+            
+            # Gradual zoom out as camera ascends
+            zoom_factor = 20 + 15 * t  # Zoom from 20 to 35
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        # Effect G: Figure-8 Dance (rotation + figure-8 camera path)
+        elif effect == 'G':
+            # Rotate heart around Y-axis
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            
+            # Camera follows a figure-8 (lemniscate) path
+            # Parametric equations for figure-8: x = sin(t), y = sin(t)*cos(t)
+            azimuth_offset = 60 * np.sin(2 * np.pi * t)  # Horizontal figure-8 component
+            elevation_offset = 30 * np.sin(4 * np.pi * t)  # Vertical figure-8 component (double frequency)
+            
+            azimuth = 45 + azimuth_offset + 180 * t  # Also slowly rotate around
+            elevation = 20 + elevation_offset
+            
+            ax.view_init(elev=elevation, azim=azimuth)
+            
+            # Subtle zoom synchronized with figure-8 motion
+            zoom_factor = 20 + 4 * np.sin(2 * np.pi * t)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
+        else:
+            # Default: simple Y-axis rotation (original behavior)
+            alpha_deg = frame * 360 / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_rotated = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_rotated = y_original
+            z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
         
         # Print progress every 30 frames (every second)
         if frame % 30 == 0:
@@ -218,16 +392,27 @@ Resolution options:
   large   - 1920x1080
 
 Density options:
-  low     - 10,000 points (fastest)
+  lower   - ~5,000 points (fastest)
+  low     - 10,000 points (default)
   medium  - 22,500 points
-  high    - 40,000 points (default, best quality)
+  high    - 40,000 points (best quality)
+
+Effect options:
+  A - Multi-axis rotation: Heart spins on Y-axis with gentle X-axis wobble
+  B - Dynamic camera orbit: Camera circles around stationary heart with elevation changes
+  C - Combined: Rotating heart + orbiting camera + zoom in/out effect
+  D - Custom: Y-axis rotation + elevation sweep + subtle zoom pulse
+  E - Heartbeat Pulse: Heart rotates and pulses rhythmically like a beating heart
+  F - Spiral Ascent: Camera spirals upward while heart rotates, zooming out dramatically
+  G - Figure-8 Dance: Camera follows infinity symbol path while heart rotates
 
 Examples:
   python heart_animation.py
-  python heart_animation.py --resolution large
-  python heart_animation.py --density low
-  python heart_animation.py --resolution small --dpi 150 --no-formulas
-  python heart_animation.py --density medium --no-axes
+  python heart_animation.py --resolution large --effect C
+  python heart_animation.py --density lower --effect E
+  python heart_animation.py --resolution medium --effect F
+  python heart_animation.py --resolution small --dpi 150 --no-formulas --effect G
+  python heart_animation.py --density medium --no-axes --effect A
         """
     )
     
@@ -247,9 +432,16 @@ Examples:
     
     parser.add_argument(
         '--density', '-d',
-        choices=['low', 'medium', 'high'],
+        choices=['lower', 'low', 'medium', 'high'],
         default='low',
-        help='Point density: low (10K), medium (22.5K), high (40K) (default: low)'
+        help='Point density: lower (~5K), low (10K), medium (22.5K), high (40K) (default: low)'
+    )
+    
+    parser.add_argument(
+        '--effect', '-e',
+        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        default='A',
+        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8) (default: A)'
     )
     
     parser.add_argument(
@@ -278,6 +470,7 @@ Examples:
     print(f"Resolution: {args.resolution}")
     print(f"DPI: {args.dpi}")
     print(f"Density: {args.density}")
+    print(f"Effect: {args.effect}")
     print(f"Show Axes: {not args.no_axes}")
     print(f"Show Formulas: {not args.no_formulas}")
     print(f"Output: {args.output}")
@@ -288,6 +481,7 @@ Examples:
             resolution=args.resolution,
             dpi=args.dpi,
             density=args.density,
+            effect=args.effect,
             show_axes=not args.no_axes,
             show_formulas=not args.no_formulas,
             output_path=args.output

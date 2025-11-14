@@ -6,15 +6,19 @@ A Python script that generates a beautiful 3D rotating heart animation using par
 
 ## Overview
 
-This project creates a mesmerizing 3D visualization of a parametric heart shape that rotates 360 degrees around the vertical axis. The heart is rendered using 40,000 points with a stunning magma color gradient against a black background, creating a visually striking animation.
+This project creates a mesmerizing 3D visualization of a parametric heart shape with multiple animation effects. The heart can be rendered with various point densities, animated with different rotation and camera effects, and exported at multiple resolutions.
 
 ### Key Features
 
 - **Parametric 3D Heart**: Mathematical heart shape defined by parametric equations
-- **Smooth Rotation**: 30-second animation with 900 frames at 30 fps
-- **Multiple Resolutions**: Choose between small (640x480), medium (1280x720), or large (1920x1080)
+- **Multiple Animation Effects**: 4 different animation modes (multi-axis rotation, camera orbit, combined effects, custom)
+- **Flexible Point Density**: Choose from ~5K to 40K points for speed vs quality trade-off
+- **Multiple Resolutions**: Small (640x480), medium (1280x720), or large (1920x1080)
 - **Beautiful Gradient**: Uses matplotlib's magma colormap for vibrant colors
-- **Customizable Parameters**: Easy to tweak rotation speed, colors, view angles, and more
+- **Formula Display**: Optionally show parametric equations on the animation
+- **Coordinate Axes**: Optional X, Y, Z axis visualization
+- **Build Script**: PowerShell script for easy batch rendering
+- **30-Second Animation**: 900 frames at 30 fps for smooth playback
 
 ## System Requirements
 
@@ -93,80 +97,205 @@ uv pip install -r requirements.txt
 
 ## Usage
 
-### Basic Usage (Medium Resolution)
+### Quick Start with Build Script
 
+The easiest way to generate animations is using the `build.ps1` script:
+
+```powershell
+# Generate small resolution (640x480) - fastest
+.\build.ps1 small
+
+# Generate medium resolution (1280x720) - balanced
+.\build.ps1 medium
+
+# Generate large resolution (1920x1080) - best quality
+.\build.ps1 large
+```
+
+The build script will:
+- ✓ Validate Python and FFmpeg installation
+- ✓ Check virtual environment setup
+- ✓ Display estimated render time
+- ✓ Ask for confirmation before rendering
+- ✓ Show progress during generation
+- ✓ Display final file size and render time
+
+Output files are saved as: `outputs/heart_animation-{size}.mp4`
+
+### Direct Python Script Usage
+
+For more control over animation parameters, use the Python script directly:
+
+**Basic Usage (Default Settings):**
 ```powershell
 python heart_animation.py
 ```
 
-This will generate a 1280x720 video at `outputs/heart_animation.mp4`.
+This generates: medium resolution, low density, effect A (multi-axis rotation)
 
-### Choose Resolution
+This generates: medium resolution, low density, effect A (multi-axis rotation)
 
-**Small (640x480) - Fastest:**
+### Resolution Options
+
 ```powershell
+# Small (640x480) - fastest rendering
 python heart_animation.py --resolution small
-```
 
-**Medium (1280x720) - Default:**
-```powershell
+# Medium (1280x720) - default
 python heart_animation.py --resolution medium
-```
 
-**Large (1920x1080) - Best Quality:**
-```powershell
+# Large (1920x1080) - best quality
 python heart_animation.py --resolution large
 ```
 
-### Custom DPI
+### Point Density Options
 
+Control the number of points rendering the heart shape:
+
+```powershell
+# Lower (~5,000 points) - fastest, good for testing
+python heart_animation.py --density lower
+
+# Low (10,000 points) - default, good balance
+python heart_animation.py --density low
+
+# Medium (22,500 points) - higher quality
+python heart_animation.py --density medium
+
+# High (40,000 points) - best quality, slower
+python heart_animation.py --density high
+```
+
+**Recommended combinations:**
+- Testing: `--resolution small --density lower` (fastest)
+- Preview: `--resolution medium --density low` (default)
+- Final output: `--resolution large --density high` (best quality)
+
+### Animation Effects
+
+Choose from 4 different animation styles:
+
+**Effect A - Multi-axis Rotation (Default):**
+```powershell
+python heart_animation.py --effect A
+```
+- Heart rotates around Y-axis (vertical)
+- Adds gentle X-axis wobble for depth
+- Creates dynamic 3D perception
+
+**Effect B - Dynamic Camera Orbit:**
+```powershell
+python heart_animation.py --effect B
+```
+- Heart remains stationary
+- Camera circles around the heart (360°)
+- Elevation changes create dramatic angles
+- Best for showcasing the heart shape
+
+**Effect C - Combined Effects:**
+```powershell
+python heart_animation.py --effect C
+```
+- Heart rotates around Y-axis (360°)
+- Camera orbits halfway around (180°)
+- Zoom in during first half, zoom out during second half
+- Most cinematic and complex effect
+
+**Effect D - Custom Animation:**
+```powershell
+python heart_animation.py --effect D
+```
+- Heart rotates around Y-axis
+- Camera elevation sweeps from low to high
+- Subtle zoom pulse synchronized with rotation
+- Unique vertical perspective changes
+
+### Display Options
+
+```powershell
+# Hide coordinate axes
+python heart_animation.py --no-axes
+
+# Hide parametric formulas
+python heart_animation.py --no-formulas
+
+# Hide both
+python heart_animation.py --no-axes --no-formulas
+```
+
+### Advanced Options
+
+**Custom DPI (rendering quality):**rendering quality):**
 ```powershell
 python heart_animation.py --dpi 150
 ```
 
-### Custom Output Path
-
+**Custom Output Path:**
 ```powershell
 python heart_animation.py --output my_heart.mp4
 ```
 
-### Combined Options
+### Combined Examples
 
 ```powershell
-python heart_animation.py --resolution large --dpi 120 --output outputs/heart_hd.mp4
+# Quick test render
+python heart_animation.py --resolution small --density lower --effect A
+
+# High-quality cinematic render
+python heart_animation.py --resolution large --density high --effect C
+
+# Camera orbit with medium quality
+python heart_animation.py --resolution medium --density medium --effect B
+
+# Clean render without annotations
+python heart_animation.py --resolution large --effect D --no-axes --no-formulas
+
+# Custom quality settings
+python heart_animation.py --resolution medium --dpi 120 --density medium --effect C --output outputs/heart_hd.mp4
 ```
 
 ## Expected Runtime
 
-Rendering time depends on your system specifications:
+Rendering time depends on resolution, density, and your system specifications:
 
-- **Small (640x480)**: ~5-10 minutes
-- **Medium (1280x720)**: ~10-20 minutes
-- **Large (1920x1080)**: ~20-40 minutes
+| Resolution | Density | Approximate Time |
+|------------|---------|------------------|
+| Small      | Lower   | 2-5 minutes      |
+| Small      | Low     | 3-7 minutes      |
+| Medium     | Low     | 8-15 minutes     |
+| Medium     | Medium  | 15-25 minutes    |
+| Large      | Medium  | 25-40 minutes    |
+| Large      | High    | 40-70 minutes    |
 
-*Note: Times may vary significantly based on CPU, available RAM, and system load.*
+**Notes:**
+- Effect types don't significantly impact render time
+- Times vary based on CPU, RAM, and system load
+- The build script shows estimated times before rendering
+- Progress updates appear every second during generation
 
 ## Output Specifications
 
 - **Duration**: 30 seconds
 - **Frame Rate**: 30 fps
 - **Total Frames**: 900 frames
-- **Rotation**: Full 360-degree rotation around the y-axis
-- **Points**: 40,000 data points rendering the heart shape
+- **Animation**: Full 360-degree rotation (varies by effect mode)
+- **Point Density**: ~5,000 to 40,000 data points
 - **Colormap**: Magma (purple, pink, orange gradient)
 - **Background**: Black
 - **Format**: MP4 (H.264 codec via FFmpeg)
+- **Effects**: 4 different animation styles
+- **Display Options**: Optional formulas and coordinate axes
 
 ## Tweaking Parameters
 
-You can modify the script to customize various aspects:
+You can modify the script to customize various aspects. For most use cases, the command-line options provide sufficient control. For advanced customization, edit the script directly:
 
-### 1. Rotation Speed
+### 1. Animation Duration
 
 Edit the `total_frames` variable in `create_animation()`:
 
 ```python
-# Faster rotation (15 seconds)
+# Faster animation (15 seconds)
 total_frames = 450  # 15 seconds * 30 fps
 
 # Slower rotation (60 seconds)
@@ -185,7 +314,7 @@ scatter = ax.scatter(x_original, y_original, z_original,
 # Other options: 'plasma', 'inferno', 'twilight', 'cool', 'RdPu'
 ```
 
-### 3. Initial View Angle
+### 3. Initial View Angle (for non-animated camera modes)
 
 Modify the `setup_figure()` function:
 
@@ -199,6 +328,8 @@ ax.view_init(elev=0, azim=90)
 # Custom angle
 ax.view_init(elev=30, azim=60)
 ```
+
+Note: Effects B, C, and D override the initial view angle with dynamic camera movements.
 
 ### 4. Marker Size and Transparency
 
@@ -214,16 +345,15 @@ scatter = ax.scatter(x_original, y_original, z_original,
                     c=colors, cmap='magma', s=0.5, alpha=0.6)
 ```
 
-### 5. Point Density
+### 5. Custom Point Density (advanced)
 
-In the `generate_heart_points()` function:
+Use command-line options instead: `--density lower|low|medium|high`
+
+For custom values, edit the `generate_heart_points()` function:
 
 ```python
-# More detailed (slower rendering)
-x, y, z, colors = generate_heart_points(u_points=300, v_points=300)
-
-# Less detailed (faster rendering)
-x, y, z, colors = generate_heart_points(u_points=100, v_points=100)
+# Ultra detailed (very slow rendering)
+density_multipliers = {'ultra': 1.5}  # 300x300 = 90,000 points
 ```
 
 ### 6. Video Quality
@@ -272,18 +402,28 @@ Error: ffmpeg not found in PATH
 MemoryError: Unable to allocate array
 ```
 
-**Solution**: Reduce the number of points or resolution:
+**Solution**: Reduce the point density or resolution:
 ```powershell
-python heart_animation.py --resolution small
+# Try lower density
+python heart_animation.py --density lower
+
+# Or smaller resolution
+python heart_animation.py --resolution small --density low
 ```
 
 ### Slow Rendering
 
 **Solutions**:
-- Use a smaller resolution
+- Use lower density: `--density lower` or `--density low`
+- Use smaller resolution: `--resolution small`
 - Reduce DPI: `--dpi 80`
-- Reduce point count (edit script)
+- Use simpler effects: `--effect A` (default)
 - Close other applications to free up resources
+
+**Quick test render:**
+```powershell
+python heart_animation.py --resolution small --density lower --effect A
+```
 
 ### Module Not Found Error
 
@@ -299,31 +439,37 @@ uv pip install -r requirements.txt
 
 ## Future Improvements and Enhancements
 
-- [ ] Add support for different rotation axes (x-axis, z-axis)
-- [ ] Implement multiple camera angles/views in one video
-- [ ] Add particle effects or trails
-- [ ] Support for GIF output format
-- [ ] Real-time preview mode before rendering
-- [ ] Add pulsating animation (scale variation)
-- [ ] Multiple heart shapes in the same scene
-- [ ] Interactive 3D viewer using Plotly or PyVista
-- [ ] Stereo 3D / VR output support
+- [x] Multiple animation effects (A, B, C, D)
+- [x] Flexible point density options
+- [x] Formula and axes display
+- [x] PowerShell build script
+- [ ] Support for different primary rotation axes
+- [ ] Multiple hearts in one scene
+- [ ] Particle effects or trails
+- [ ] GIF output format
+- [ ] Real-time preview mode
+- [ ] Pulsating animation (scale variation)
+- [ ] Interactive 3D viewer using Plotly
+- [ ] Stereo 3D / VR output
 - [ ] Custom color gradient designer
-- [ ] Audio synchronization (music-reactive animation)
-- [ ] Batch rendering with different parameters
-- [ ] Progress bar with ETA display
+- [ ] Audio synchronization (music-reactive)
+- [ ] Batch rendering different configurations
+- [ ] Enhanced progress bar with ETA
 - [ ] GPU acceleration for faster rendering
 
 ## Project Structure
 
 ```
 MathsHeartShaped3D/
-├── heart_animation.py      # Main script
-├── requirements.txt        # Python dependencies
-├── .gitignore             # Git ignore rules
-├── README.md              # This file
-└── outputs/               # Generated videos
-    └── heart_animation.mp4
+├── heart_animation.py         # Main Python script with animation logic
+├── build.ps1                  # PowerShell build script for easy rendering
+├── requirements.txt           # Python dependencies
+├── .gitignore                # Git ignore rules
+├── README.md                 # This documentation
+└── outputs/                  # Generated video files
+    ├── heart_animation-small.mp4
+    ├── heart_animation-medium.mp4
+    └── heart_animation-large.mp4
 ```
 
 ## Dependencies
