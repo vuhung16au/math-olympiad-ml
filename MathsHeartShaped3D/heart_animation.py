@@ -9,6 +9,7 @@ from matplotlib.animation import FuncAnimation, FFMpegWriter
 from mpl_toolkits.mplot3d import Axes3D
 import argparse
 import os
+import json
 
 
 def generate_heart_points(u_points=200, v_points=200, density='high'):
@@ -145,8 +146,73 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
     return fig, ax
 
 
+def get_beat_intensity(current_time, beat_times, window=0.1):
+    """
+    Check if there's a beat near current_time.
+    Returns intensity (0-1) based on proximity to nearest beat.
+    """
+    if not beat_times or len(beat_times) == 0:
+        return 0.0
+    
+    # Find nearest beat
+    distances = np.abs(np.array(beat_times) - current_time)
+    nearest_idx = np.argmin(distances)
+    nearest_distance = distances[nearest_idx]
+    
+    # If within window, return intensity (closer = stronger)
+    if nearest_distance < window:
+        intensity = 1.0 - (nearest_distance / window)
+        return float(intensity)
+    return 0.0
+
+
+def get_onset_intensity(current_time, onset_times, window=0.15):
+    """Check if there's an onset near current_time."""
+    if not onset_times or len(onset_times) == 0:
+        return 0.0
+    
+    distances = np.abs(np.array(onset_times) - current_time)
+    nearest_distance = np.min(distances)
+    
+    if nearest_distance < window:
+        intensity = 1.0 - (nearest_distance / window)
+        return float(intensity)
+    return 0.0
+
+
+def get_loudness_at_time(current_time, rms_times, rms_values):
+    """Get normalized loudness (0-1) at current_time."""
+    if not rms_times or not rms_values or len(rms_times) == 0:
+        return 0.5
+    
+    # Find nearest RMS measurement
+    distances = np.abs(np.array(rms_times) - current_time)
+    idx = np.argmin(distances)
+    return float(rms_values[idx])
+
+
+def get_bass_at_time(current_time, bass_times, bass_values):
+    """Get bass strength (0-1) at current_time."""
+    if not bass_times or not bass_values or len(bass_times) == 0:
+        return 0.5
+    
+    distances = np.abs(np.array(bass_times) - current_time)
+    idx = np.argmin(distances)
+    return float(bass_values[idx])
+
+
+def get_tempo_at_time(current_time, tempo_times, tempo_values):
+    """Get tempo (BPM) at current_time."""
+    if not tempo_times or not tempo_values or len(tempo_times) == 0:
+        return 120.0  # Default
+    
+    distances = np.abs(np.array(tempo_times) - current_time)
+    idx = np.argmin(distances)
+    return float(tempo_values[idx])
+
+
 def create_animation(resolution='medium', dpi=100, density='high', effect='A',
-                    show_axes=False, show_formulas=False, fps=30, bitrate=5000, output_path='outputs/heart_animation.mp4', watermark='VUHUNG'):
+                    show_axes=False, show_formulas=False, fps=30, bitrate=5000, output_path='outputs/heart_animation.mp4', watermark='VUHUNG', audio_features_path=None):
     """
     Create and save the 3D heart rotation animation.
     
@@ -181,10 +247,29 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
         'H5': 'Kaleidoscope Heart (mirrored reflections - 60s)',
         'H6': 'Heart Nebula (cosmic space journey - 120s)',
         'H7': 'Hologram Heart (wireframe tech aesthetic - 90s)',
-        'H8': 'Heart Genesis with Music Sync (creation story with BPM-synchronized beats - 100s)'
+        'H8': 'Heart Genesis with Music Sync (creation story with BPM-synchronized beats - 100s)',
+        'H8sync': 'Heart Genesis with Real Audio Sync (creation story with librosa-detected beats - 100s)'
     }
     print(f"Generating heart shape with {point_counts.get(density, '40,000')} points (density: {density})...")
     print(f"Effect: {effect} - {effect_names.get(effect, 'Simple Y-axis rotation')}")
+    
+    # Load audio features if provided
+    audio_features = None
+    if audio_features_path and os.path.exists(audio_features_path):
+        try:
+            with open(audio_features_path, 'r') as f:
+                audio_features = json.load(f)
+            print(f"Loaded audio features: {len(audio_features.get('beat_times', []))} beats, {len(audio_features.get('onset_times', []))} onsets")
+            if 'tempo_global' in audio_features:
+                print(f"  Global tempo: {audio_features['tempo_global']:.1f} BPM")
+        except Exception as e:
+            print(f"Warning: Could not load audio features from {audio_features_path}: {e}")
+            print("  Continuing without audio synchronization...")
+            audio_features = None
+    elif audio_features_path:
+        print(f"Warning: Audio features file not found: {audio_features_path}")
+        print("  Continuing without audio synchronization...")
+    
     x_original, y_original, z_original, colors = generate_heart_points(density=density)
     
     print(f"Setting up figure with resolution: {resolution}, DPI: {dpi}")
@@ -218,6 +303,9 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
         duration_text = "100 seconds"
     elif effect == 'H8':
         total_frames = 3000  # 100 seconds at 30 fps for H8
+        duration_text = "100 seconds"
+    elif effect == 'H8sync':
+        total_frames = 3000  # 100 seconds at 30 fps for H8sync
         duration_text = "100 seconds"
     elif effect == 'H2':
         total_frames = 2700  # 90 seconds at 30 fps for H2
@@ -829,6 +917,152 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
+        # Effect H8sync: Heart Genesis with Real Audio Sync (using librosa-detected features - 100 seconds)
+        elif effect == 'H8sync':
+            current_second = frame / 30.0
+            
+            # Load audio features if available
+            if audio_features:
+                beat_times = audio_features.get('beat_times', [])
+                onset_times = audio_features.get('onset_times', [])
+                rms_times = audio_features.get('rms_times', [])
+                rms_values = audio_features.get('rms_values', [])
+                bass_times = audio_features.get('bass_times', [])
+                bass_values = audio_features.get('bass_values', [])
+                tempo_times = audio_features.get('tempo_times', [])
+                tempo_values = audio_features.get('tempo_values', [])
+                
+                # Get current audio features
+                beat_intensity = get_beat_intensity(current_second, beat_times, window=0.1)
+                onset_intensity = get_onset_intensity(current_second, onset_times, window=0.15)
+                loudness = get_loudness_at_time(current_second, rms_times, rms_values)
+                bass = get_bass_at_time(current_second, bass_times, bass_values)
+                current_tempo = get_tempo_at_time(current_second, tempo_times, tempo_values)
+            else:
+                # Fallback to hardcoded values if no audio features
+                beat_intensity = 0.0
+                onset_intensity = 0.0
+                loudness = 0.5
+                bass = 0.5
+                current_tempo = 75.0
+            
+            # Heart rotates slowly (180 degrees total, tempo-adjusted)
+            # Adjust rotation speed based on tempo (faster tempo = faster rotation)
+            tempo_factor = current_tempo / 75.0  # Normalize to 75 BPM baseline
+            alpha_deg = frame * 180 * tempo_factor / total_frames
+            alpha_rad = np.deg2rad(alpha_deg)
+            
+            x_base = x_original * np.cos(alpha_rad) + z_original * np.sin(alpha_rad)
+            y_base = y_original
+            z_base = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
+            
+            # Heartbeat pulse synchronized with beats
+            heartbeat_scale = 1.0
+            if beat_intensity > 0:
+                # Pulse on beat: stronger beat = bigger pulse
+                heartbeat_scale = 1.0 + 0.2 * beat_intensity
+            
+            # Also pulse on strong onsets
+            if onset_intensity > 0.5:
+                heartbeat_scale = max(heartbeat_scale, 1.0 + 0.15 * onset_intensity)
+            
+            # Apply heartbeat
+            x_rotated = x_base * heartbeat_scale
+            y_rotated = y_base * heartbeat_scale
+            z_rotated = z_base * heartbeat_scale
+            
+            point_alpha = 0.8
+            
+            # Phase 1 (0-10s): Empty black space, then gradually heart appears
+            if current_second < 10.0:
+                phase_t = current_second / 10.0
+                # Gradually fade in from blank
+                point_alpha = 0.8 * phase_t
+                # Scale from very small to normal
+                scale = 0.1 + 0.9 * phase_t
+                x_rotated = x_rotated * scale
+                y_rotated = y_rotated * scale
+                z_rotated = z_rotated * scale
+                # Adjust zoom based on loudness (louder = closer)
+                base_zoom = 200 - 175 * phase_t
+                zoom_factor = base_zoom - 5 * loudness  # Louder = zoom in more
+                elevation = 20
+                azimuth = 45
+            
+            # Phase 2 (10-25s): Energy burst, strings ascending
+            elif current_second < 25.0:
+                phase_t = (current_second - 10.0) / 15.0
+                point_alpha = 0.8
+                # Zoom based on loudness
+                base_zoom = 25 - 5 * phase_t
+                zoom_factor = base_zoom - 5 * loudness
+                elevation = 20
+                azimuth = 45 + 90 * phase_t
+            
+            # Phase 3 (25-40s): Strings coalesce
+            elif current_second < 40.0:
+                phase_t = (current_second - 25.0) / 15.0
+                point_alpha = 0.8
+                base_zoom = 20 - 3 * phase_t
+                zoom_factor = base_zoom - 5 * loudness
+                elevation = 20 + 10 * np.sin(np.pi * phase_t)
+                azimuth = 135 + 90 * phase_t
+            
+            # Phase 4 (40-60s): Heartbeat rhythm
+            elif current_second < 60.0:
+                phase_t = (current_second - 40.0) / 20.0
+                point_alpha = 0.8
+                # Zoom based on loudness
+                zoom_factor = 17 - 5 * loudness
+                elevation = 20
+                azimuth = 225 + 180 * phase_t
+            
+            # Phase 5 (60-75s): Majestic orchestral
+            elif current_second < 75.0:
+                phase_t = (current_second - 60.0) / 15.0
+                point_alpha = 0.8
+                base_zoom = 17 + 3 * np.sin(2 * np.pi * phase_t)
+                zoom_factor = base_zoom - 5 * loudness
+                elevation = 20 + 20 * np.sin(2 * np.pi * phase_t)
+                azimuth = 405 + 360 * phase_t
+            
+            # Phase 6 (75-90s): Cosmic expansion
+            elif current_second < 90.0:
+                phase_t = (current_second - 75.0) / 15.0
+                # Adjust alpha based on bass (more bass = brighter)
+                point_alpha = 0.6 + 0.4 * bass + 0.2 * phase_t  # Glow effect
+                point_alpha = min(1.0, max(0.0, point_alpha))  # Clamp to 0-1
+                base_zoom = 20 + 80 * phase_t
+                zoom_factor = base_zoom - 5 * loudness
+                elevation = 40 - 20 * phase_t
+                azimuth = 585 + 90 * phase_t
+            
+            # Phase 7 (90-95s): Mathematical precision
+            elif current_second < 95.0:
+                phase_t = (current_second - 90.0) / 5.0
+                point_alpha = 0.6 + 0.4 * bass  # Fully bright based on bass
+                point_alpha = min(1.0, max(0.0, point_alpha))  # Clamp to 0-1
+                zoom_factor = 100 - 5 * loudness
+                elevation = 20
+                azimuth = 675
+            
+            # Phase 8 (95-100s): Fade to silence, infinite stars
+            else:
+                phase_t = (current_second - 95.0) / 5.0
+                point_alpha = (0.6 + 0.4 * bass) * (1.0 - phase_t)  # Fade out
+                point_alpha = min(1.0, max(0.0, point_alpha))  # Clamp to 0-1
+                base_zoom = 100 + 100 * phase_t
+                zoom_factor = base_zoom - 5 * loudness
+                elevation = 20
+                azimuth = 675
+            
+            scatter.set_alpha(point_alpha)
+            scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
+            ax.view_init(elev=elevation, azim=azimuth)
+            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_ylim([-zoom_factor, zoom_factor])
+            ax.set_zlim([-zoom_factor, zoom_factor])
+        
         # Effect H2: Time Reversal (forward then backward - 90 seconds)
         elif effect == 'H2':
             current_second = frame / 30.0
@@ -1332,6 +1566,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                 # Glitch effect: random alpha fluctuations
                 glitch = 0.1 * np.sin(20 * np.pi * phase_t) * np.sin(7 * np.pi * phase_t)
                 point_alpha = 0.8 + glitch
+                point_alpha = min(1.0, max(0.0, point_alpha))  # Clamp to 0-1
                 zoom_factor = 20 + 3 * np.sin(4 * np.pi * phase_t)
                 elevation = 30 - 10 * np.sin(2 * np.pi * phase_t)
                 azimuth = 315 + 360 * phase_t
@@ -1350,6 +1585,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                 # Scan line effect: slight alpha variation
                 scan_line = 0.1 * np.sin(10 * np.pi * phase_t)
                 point_alpha = 1.0 + scan_line
+                point_alpha = min(1.0, max(0.0, point_alpha))  # Clamp to 0-1
                 zoom_factor = 20
                 elevation = 40 - 20 * phase_t
                 azimuth = 1215 + 180 * phase_t
@@ -1402,7 +1638,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     writer = FFMpegWriter(fps=fps, bitrate=bitrate)
     anim.save(output_path, writer=writer)
     
-    print(f"✓ Animation successfully saved to {output_path}")
+    print(f"Animation successfully saved to {output_path}")
     plt.close(fig)
 
 
@@ -1444,6 +1680,7 @@ Effect options:
   H5 - Kaleidoscope Heart: Mirrored reflections creating mandala patterns (60 seconds)
   H6 - Heart Nebula: Cosmic space journey with glowing heart as celestial body (120 seconds)
   H7 - Hologram Heart: Wireframe tech aesthetic with glitch effects (90 seconds)
+  H8sync - Heart Genesis with Real Audio Sync: Creation story synchronized with librosa-detected beats, tempo, loudness, and bass (100 seconds, requires --audio-features)
 
 Examples:
   python heart_animation.py
@@ -1480,9 +1717,15 @@ Examples:
     
     parser.add_argument(
         '--effect', '-e',
-        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8'],
+        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H8sync'],
         default='A',
-        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s) (default: A)'
+        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s) (default: A)'
+    )
+    
+    parser.add_argument(
+        '--audio-features',
+        dest='audio_features',
+        help='Path to JSON file containing audio features (from analyze_audio.py). Required for H8sync effect.'
     )
     
     parser.add_argument(
@@ -1550,10 +1793,11 @@ Examples:
             fps=args.fps,
             bitrate=args.bitrate,
             output_path=args.output,
-            watermark=args.watermark
+            watermark=args.watermark,
+            audio_features_path=args.audio_features
         )
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
         import traceback
         traceback.print_exc()
         return 1

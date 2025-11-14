@@ -4,6 +4,10 @@ A Python script that generates a beautiful 3D rotating heart animation using par
 
 ![Heart Animation](outputs/heart_animation.mp4)
 
+# Quick Start  
+
+
+
 ## Overview
 
 This project creates a mesmerizing 3D visualization of a parametric heart shape with multiple animation effects. The heart can be rendered with various point densities, animated with different rotation and camera effects, and exported at multiple resolutions.
@@ -198,9 +202,30 @@ python heart_animation.py --density high
 - Preview: `--resolution medium --density low` (default)
 - Final output: `--resolution large --density high` (best quality)
 
+### Audio Synchronization (NEW!)
+
+Create music-synchronized animations using the H8sync effect:
+
+```powershell
+# Step 1: Analyze your audio file
+python analyze_audio.py inputs/H8InfiniteStars2.mp3
+
+# Step 2: Generate synchronized animation
+python heart_animation.py --effect H8sync --audio-features H8InfiniteStars2_features.json --output outputs/heart_synced.mp4
+```
+
+The H8sync effect synchronizes:
+- **Heartbeat pulses** with detected beats
+- **Rotation speed** with tempo changes
+- **Zoom** with loudness (RMS energy)
+- **Brightness** with bass frequencies
+- **Additional pulses** on strong onsets
+
+See `docs/AnalyseAudio.md` for detailed audio analysis documentation.
+
 ### Animation Effects
 
-Choose from 4 different animation styles:
+Choose from multiple animation styles:
 
 **Effect A - Multi-axis Rotation (Default):**
 ```powershell
@@ -236,6 +261,23 @@ python heart_animation.py --effect D
 - Camera elevation sweeps from low to high
 - Subtle zoom pulse synchronized with rotation
 - Unique vertical perspective changes
+
+**Effect H8sync - Real Audio Sync (NEW!):**
+```powershell
+# First analyze audio
+python analyze_audio.py inputs/your_audio.mp3
+
+# Then generate with sync
+python heart_animation.py --effect H8sync --audio-features your_audio_features.json
+```
+- Creation story synchronized with real audio analysis
+- Heartbeat pulses on detected beats
+- Rotation speed adapts to tempo
+- Zoom responds to loudness
+- Brightness responds to bass
+- Requires audio features JSON from `analyze_audio.py`
+
+See `docs/effects.md` for all available effects (A-G, G1, G2, H1-H7, H8, H8sync).
 
 ### Display Options
 
@@ -493,7 +535,7 @@ uv pip install -r requirements.txt
 - [ ] Interactive 3D viewer using Plotly
 - [ ] Stereo 3D / VR output
 - [ ] Custom color gradient designer
-- [ ] Audio synchronization (music-reactive)
+- [x] Audio synchronization (music-reactive) - **NEW!** Use `analyze_audio.py` and `--audio-features` with H8sync effect
 - [ ] Batch rendering different configurations
 - [ ] Enhanced progress bar with ETA
 - [ ] GPU acceleration for faster rendering

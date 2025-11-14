@@ -900,6 +900,147 @@ python heart_animation.py --effect H7 --resolution large --density lower --outpu
 
 ---
 
+## Effect H8sync: Heart Genesis with Real Audio Sync
+
+**Duration:** 100 seconds (1 minute 40 seconds)  
+**Complexity:** Epic  
+**Best For:** Music videos, synchronized animations, professional productions  
+**Requires:** Audio features JSON file (from `analyze_audio.py`)
+
+### Description
+
+A creation story synchronized with real audio analysis using librosa. The heart animation responds dynamically to detected beats, tempo changes, loudness, and bass frequencies. Unlike H8 which uses hardcoded BPM transitions, H8sync uses actual audio analysis for precise synchronization.
+
+### Technical Details
+
+### Phase 1: Empty Space (0-10s)
+- **Heart:** Fades in from invisible (alpha: 0 → 0.8)
+- **Scale:** 0.1 → 1.0 (grows from tiny to normal)
+- **Zoom:** 200 → 25 (approach, adjusted by loudness)
+- **Effect:** Particles coalesce into heart shape
+- **Audio Sync:** Zoom responds to loudness (louder = closer)
+
+### Phase 2: Energy Burst (10-25s)
+- **Alpha:** 0.8 (fully visible)
+- **Zoom:** 25 → 20 (continue approaching, loudness-adjusted)
+- **Azimuth:** 45° → 135° (90° rotation)
+- **Effect:** Strings ascending, energy building
+- **Audio Sync:** Zoom and rotation speed respond to tempo
+
+### Phase 3: Strings Coalesce (25-40s)
+- **Alpha:** 0.8
+- **Zoom:** 20 → 17 (continue zooming, loudness-adjusted)
+- **Elevation:** 20° ± 10° (sinusoidal sweep)
+- **Azimuth:** 135° → 225° (90° rotation)
+- **Effect:** Heart becomes solid and defined
+- **Audio Sync:** Rotation speed adapts to tempo changes
+
+### Phase 4: Heartbeat Rhythm (40-60s)
+- **Heartbeat Pulse:** Synchronized with detected beats
+- **Pulse Intensity:** Based on beat strength (0-20% expansion)
+- **Zoom:** 17 (constant, adjusted by loudness)
+- **Azimuth:** 225° → 405° (180° rotation)
+- **Effect:** Heart "comes to life" with real beat synchronization
+- **Audio Sync:** 
+  - Heartbeat pulses on detected beats
+  - Strong onsets trigger additional pulses
+  - Rotation speed follows tempo
+
+### Phase 5: Majestic Orchestral (60-75s)
+- **Zoom:** 17 ± 3 (subtle pulsing, loudness-adjusted)
+- **Elevation:** 20° ± 20° (dramatic sweep)
+- **Azimuth:** 405° → 765° (360° full rotation)
+- **Effect:** Showcase heart's beauty from all angles
+- **Audio Sync:** Zoom and rotation respond to audio dynamics
+
+### Phase 6: Cosmic Expansion (75-90s)
+- **Alpha:** 0.6 + 0.4 × bass + 0.2 × phase (glow effect, bass-responsive)
+- **Zoom:** 20 → 100 (zoom out dramatically, loudness-adjusted)
+- **Elevation:** 40° → 20° (descend)
+- **Azimuth:** 765° → 855° (90° rotation)
+- **Effect:** Heart becomes star-like in cosmic space
+- **Audio Sync:** Brightness responds to bass strength
+
+### Phase 7: Mathematical Precision (90-95s)
+- **Alpha:** 0.6 + 0.4 × bass (fully bright, bass-responsive)
+- **Zoom:** 100 (cosmic distance, loudness-adjusted)
+- **Effect:** Mathematical foundation revealed
+- **Audio Sync:** Brightness follows bass frequencies
+
+### Phase 8: Fade to Stars (95-100s)
+- **Alpha:** (0.6 + 0.4 × bass) × (1 - phase) (fade out, bass-responsive)
+- **Zoom:** 100 → 200 (zoom out further, loudness-adjusted)
+- **Effect:** Heart fades, becomes one of infinite stars
+- **Audio Sync:** Final fade follows audio dynamics
+
+### Overall Heart Rotation
+- **Total:** 180° over entire 100 seconds
+- **Speed:** Tempo-adaptive (faster tempo = faster rotation)
+- **Base Tempo:** Normalized to 75 BPM
+
+### Audio Synchronization Features
+
+1. **Beat Detection**: Heart pulses on detected beats with intensity based on beat strength
+2. **Onset Detection**: Strong onsets trigger additional heartbeat pulses
+3. **Tempo Tracking**: Rotation speed adapts to tempo changes throughout the song
+4. **Loudness Response**: Zoom adjusts based on RMS energy (louder = closer)
+5. **Bass Response**: Brightness/alpha responds to bass frequencies (more bass = brighter)
+
+### Visual Characteristics
+- Complete creation narrative (nothing → something)
+- Real-time audio synchronization
+- Dynamic response to musical features
+- Professional music video quality
+- Perfect synchronization with beats and tempo
+- Responsive to audio dynamics
+
+### Prerequisites
+
+Before using H8sync, you must analyze your audio file:
+
+```powershell
+# Step 1: Analyze audio
+python analyze_audio.py inputs/H8InfiniteStars2.mp3
+
+# This creates: H8InfiniteStars2_features.json
+```
+
+### Command
+
+```powershell
+# Generate with audio sync
+python heart_animation.py --effect H8sync --audio-features H8InfiniteStars2_features.json --output outputs/heart_synced.mp4
+
+# With formulas and high quality
+python heart_animation.py --effect H8sync --audio-features H8InfiniteStars2_features.json --formulas --resolution large --density low --output outputs/heart_synced_hd.mp4
+```
+
+### Complete Workflow
+
+```powershell
+# 1. Analyze audio (if not already done)
+python analyze_audio.py inputs/H8InfiniteStars2.mp3
+
+# 2. Generate synchronized animation
+python heart_animation.py --effect H8sync --audio-features H8InfiniteStars2_features.json --output outputs/heart_synced.mp4
+
+# 3. Combine with original audio (optional, if video doesn't have audio)
+ffmpeg -i outputs/heart_synced.mp4 -i inputs/H8InfiniteStars2.mp3 -t 100 -c:v copy -c:a aac -b:a 192k outputs/heart_synced_with_audio.mp4
+```
+
+### Differences from H8
+
+| Feature | H8 | H8sync |
+|---------|----|--------|
+| Beat Detection | Hardcoded BPM transitions | Real librosa beat detection |
+| Tempo | Fixed transitions at specific times | Dynamic tempo tracking |
+| Loudness | Not used | Zoom responds to RMS energy |
+| Bass | Not used | Brightness responds to bass |
+| Onsets | Not used | Triggers additional pulses |
+| Precision | Approximate | Precise audio synchronization |
+
+---
+
 ## Comparison Table
 
 | Effect | Duration | Complexity | Heart Rotation | Camera Motion | Zoom Changes | Special Features |
@@ -920,6 +1061,7 @@ python heart_animation.py --effect H7 --resolution large --density lower --outpu
 | **H5** | 60s | High | 360° Y-axis | Multi-mirror | Expanding | Kaleidoscope, mandala patterns |
 | **H6** | 120s | Epic | 180° Y-axis | Cosmic journey | Multiple | Space theme, glow effects, galaxy view |
 | **H7** | 90s | High | 360° Y-axis | Tech aesthetic | Pulsing | Hologram, wireframe, glitch effects |
+| **H8sync** | 100s | Epic | 180° Y-axis (tempo-adaptive) | Multi-phase | Multiple | Real audio sync, beat detection, tempo/loudness/bass response |
 
 ---
 
@@ -940,6 +1082,7 @@ Based on typical hardware (varies by system):
 | H5 | 5-10 min | 15-30 min | 45-75 min | 90-150 min |
 | H6 | 12-25 min | 40-70 min | 120-200 min | 240-360 min |
 | H7 | 8-15 min | 25-45 min | 75-120 min | 150-270 min |
+| H8sync | 10-20 min | 35-60 min | 100-160 min | 200-360 min |
 
 ---
 
@@ -1017,6 +1160,7 @@ python heart_animation.py --effect G --resolution small --density lower --dpi 80
 - **Effect H5**: Art/meditation themes
 - **Effect H6**: Space/science themes
 - **Effect H7**: Tech/sci-fi themes
+- **Effect H8sync**: Music videos, synchronized animations, professional productions
 
 ### For Mobile Viewing
 - **Effect G2**: Optimized with close zoom (heart fills 50% screen)
