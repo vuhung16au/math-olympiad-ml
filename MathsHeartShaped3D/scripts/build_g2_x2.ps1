@@ -33,16 +33,17 @@ Write-Info "This script will generate the G2 epic heart animation at 2x speed (6
 Write-Info "and combine it with audio, resulting in a 68.5-second video."
 Write-Host ""
 Write-Info "Configuration:"
-Write-Host "  Resolution: large (1920x1080)" -ForegroundColor White
+Write-Host "  Resolution: 4K (3840x2160)" -ForegroundColor White
 Write-Host "  Density: lower (~5,000 points)" -ForegroundColor White
 Write-Host "  Effect: G2 (Epic Heart Story)" -ForegroundColor White
 Write-Host "  FPS: 60 (2x speed)" -ForegroundColor White
+Write-Host "  Bitrate: 20000 kbps (4K quality)" -ForegroundColor White
 Write-Host "  Duration: 68.5 seconds" -ForegroundColor White
 Write-Host "  Audio: Engima.mp3 with 2-second fade-out" -ForegroundColor White
 Write-Host ""
 
 # Estimate total time
-$estimatedVideoTime = "15-25 minutes"
+$estimatedVideoTime = "30-50 minutes (4K rendering)"
 $estimatedAudioTime = "5-10 seconds"
 Write-Info "Estimated time for video rendering: $estimatedVideoTime"
 Write-Info "Estimated time for audio mixing: $estimatedAudioTime"
@@ -124,7 +125,7 @@ Write-Host ""
 
 $videoStartTime = Get-Date
 
-$videoCommand = "& `"$venvPython`" heart_animation.py --effect G2 --resolution large --density lower --fps 60 --output outputs/heart_epic_story_2x.mp4"
+$videoCommand = "& `"$venvPython`" heart_animation.py --effect G2 --resolution 4k --density lower --fps 60 --bitrate 20000 --output outputs/heart_epic_story_2x.mp4"
 
 try {
     Invoke-Expression $videoCommand
@@ -211,9 +212,10 @@ Write-Host ""
 Write-Host "Total time: $totalMinutes minutes, $totalSeconds seconds" -ForegroundColor Cyan
 Write-Host ""
 Write-Info "Video specifications:"
-Write-Host "  • Resolution: 1920x1080 (large)" -ForegroundColor White
+Write-Host "  • Resolution: 3840x2160 (4K Ultra HD)" -ForegroundColor White
 Write-Host "  • Point density: ~5,000 points (lower)" -ForegroundColor White
 Write-Host "  • Frame rate: 60 fps (2x speed)" -ForegroundColor White
+Write-Host "  • Bitrate: 20000 kbps (4K quality)" -ForegroundColor White
 Write-Host "  • Duration: 68.5 seconds" -ForegroundColor White
 Write-Host "  • Audio: AAC 192 kbps with 2-second fade-out" -ForegroundColor White
 Write-Host ""

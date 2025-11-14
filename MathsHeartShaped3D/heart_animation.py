@@ -45,7 +45,7 @@ def generate_heart_points(u_points=200, v_points=200, density='high'):
     
     # Parametric equations for the 3D heart
     x = np.sin(u_flat) * (15.16 * np.sin(v_flat) - 3.59 * np.sin(2.99 * v_flat))
-    y = 7.9911 * np.cos(u_flat)
+    y = -7.9911 * np.cos(u_flat)  # Negative to flip vertically (point down)
     z = np.sin(u_flat) * (15.16 * np.cos(v_flat) - 5.11 * np.cos(2.12 * v_flat) - 
                           2 * np.cos(3.11 * v_flat) - np.cos(v_flat))
     
@@ -72,7 +72,8 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
     resolutions = {
         'small': (640, 480),
         'medium': (1280, 720),
-        'large': (1920, 1080)
+        'large': (1920, 1080),
+        '4k': (3840, 2160)
     }
     
     width, height = resolutions.get(resolution, resolutions['medium'])
@@ -127,18 +128,19 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
 
 
 def create_animation(resolution='medium', dpi=100, density='high', effect='A',
-                    show_axes=False, show_formulas=False, fps=30, output_path='outputs/heart_animation.mp4'):
+                    show_axes=False, show_formulas=False, fps=30, bitrate=5000, output_path='outputs/heart_animation.mp4'):
     """
     Create and save the 3D heart rotation animation.
     
     Parameters:
-    - resolution: 'small', 'medium', or 'large'
+    - resolution: 'small', 'medium', 'large', or '4k'
     - dpi: Dots per inch for the figure
     - density: Point density ('lower', 'low', 'medium', 'high')
-    - effect: Animation effect ('A', 'B', 'C', 'D')
+    - effect: Animation effect ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2')
     - show_axes: Whether to show coordinate axes
     - show_formulas: Whether to show parametric formulas
     - fps: Frames per second for output video (default: 30)
+    - bitrate: Video bitrate in kbps (default: 5000)
     - output_path: Path to save the output video
     """
     # Calculate actual point count
@@ -165,9 +167,9 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     scatter = ax.scatter(x_original, y_original, z_original, 
                         c=colors, cmap='magma', s=1, alpha=0.8)
     
-    # Set axis limits to keep the heart centered
+    # Set axis limits to keep the heart centered with 16:9 aspect ratio
     max_range = 20
-    ax.set_xlim([-max_range, max_range])
+    ax.set_xlim([-max_range * 1.78, max_range * 1.78])  # 16:9 widescreen
     ax.set_ylim([-max_range, max_range])
     ax.set_zlim([-max_range, max_range])
     
@@ -247,7 +249,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             else:
                 zoom_factor = 15 + 5 * ((t - 0.5) * 2)  # Zoom out from 15 to 20
             
-            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -269,7 +271,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             
             # Subtle zoom pulse
             zoom_factor = 20 + 3 * np.sin(4 * np.pi * t)
-            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -320,7 +322,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             
             # Gradual zoom out as camera ascends
             zoom_factor = 20 + 15 * t  # Zoom from 20 to 35
-            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -348,7 +350,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             
             # Subtle zoom synchronized with figure-8 motion
             zoom_factor = 20 + 4 * np.sin(2 * np.pi * t)
-            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -393,7 +395,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                 azimuth = 225 + 720 * phase_t
             
             ax.view_init(elev=elevation, azim=azimuth)
-            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -542,7 +544,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
             
             ax.view_init(elev=elevation, azim=azimuth)
-            ax.set_xlim([-zoom_factor, zoom_factor])
+            ax.set_xlim([-zoom_factor * 1.78, zoom_factor * 1.78])  # 16:9
             ax.set_ylim([-zoom_factor, zoom_factor])
             ax.set_zlim([-zoom_factor, zoom_factor])
         
@@ -576,7 +578,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     
     # Save animation
     print(f"Saving animation to {output_path}...")
-    writer = FFMpegWriter(fps=fps, bitrate=5000)
+    writer = FFMpegWriter(fps=fps, bitrate=bitrate)
     anim.save(output_path, writer=writer)
     
     print(f"✓ Animation successfully saved to {output_path}")
@@ -592,9 +594,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Resolution options:
-  small   - 640x480
-  medium  - 1280x720 (default)
-  large   - 1920x1080
+  small   - 640x480 (SD)
+  medium  - 1280x720 (HD, default)
+  large   - 1920x1080 (Full HD)
+  4k      - 3840x2160 (4K Ultra HD)
 
 Density options:
   lower   - ~5,000 points (fastest)
@@ -622,12 +625,13 @@ Examples:
   python heart_animation.py --resolution small --dpi 150 --effect G
   python heart_animation.py --density low --effect G1 --output outputs/heart_journey.mp4
   python heart_animation.py --density lower --effect G2 --output outputs/epic_heart_story.mp4
+  python heart_animation.py --resolution 4k --bitrate 20000 --effect G2 --output outputs/epic_4k.mp4
         """
     )
     
     parser.add_argument(
         '--resolution', '-r',
-        choices=['small', 'medium', 'large'],
+        choices=['small', 'medium', 'large', '4k'],
         default='medium',
         help='Output video resolution (default: medium)'
     )
@@ -673,6 +677,13 @@ Examples:
     )
     
     parser.add_argument(
+        '--bitrate', '-b',
+        type=int,
+        default=5000,
+        help='Video bitrate in kbps (default: 5000). Recommended: SD=2000, HD=5000, FHD=8000, 4K=20000'
+    )
+    
+    parser.add_argument(
         '--output', '-o',
         default='outputs/heart_animation.mp4',
         help='Output file path (default: outputs/heart_animation.mp4)'
@@ -702,6 +713,7 @@ Examples:
             show_axes=args.axes,
             show_formulas=args.formulas,
             fps=args.fps,
+            bitrate=args.bitrate,
             output_path=args.output
         )
     except Exception as e:

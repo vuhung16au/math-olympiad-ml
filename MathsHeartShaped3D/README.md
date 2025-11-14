@@ -138,15 +138,42 @@ This generates: medium resolution, low density, effect A (multi-axis rotation)
 ### Resolution Options
 
 ```powershell
-# Small (640x480) - fastest rendering
+# Small (640x480) - fastest rendering (SD)
 python heart_animation.py --resolution small
 
-# Medium (1280x720) - default
+# Medium (1280x720) - default (HD)
 python heart_animation.py --resolution medium
 
-# Large (1920x1080) - best quality
+# Large (1920x1080) - Full HD quality
 python heart_animation.py --resolution large
+
+# 4K (3840x2160) - Ultra HD quality (recommended for YouTube)
+python heart_animation.py --resolution 4k
 ```
+
+### Bitrate Options
+
+Control video quality and file size with bitrate settings:
+
+```powershell
+# SD quality (640x480)
+python heart_animation.py --resolution small --bitrate 2000
+
+# HD quality (1280x720)
+python heart_animation.py --resolution medium --bitrate 5000
+
+# Full HD quality (1920x1080)
+python heart_animation.py --resolution large --bitrate 8000
+
+# 4K Ultra HD quality (3840x2160) - recommended for YouTube
+python heart_animation.py --resolution 4k --bitrate 20000
+```
+
+**Recommended bitrate by resolution:**
+- **SD (480p)**: 1500-2500 kbps
+- **HD (720p)**: 4000-6000 kbps  
+- **Full HD (1080p)**: 6000-10000 kbps
+- **4K (2160p)**: 15000-25000 kbps
 
 ### Point Density Options
 
@@ -253,8 +280,11 @@ python heart_animation.py --resolution large --effect D --no-axes --no-formulas
 # Custom quality settings
 python heart_animation.py --resolution medium --dpi 120 --density medium --effect C --output outputs/heart_hd.mp4
 
-# Epic Heart Story at 2x speed (60 fps) - 68.5 seconds
-python heart_animation.py --effect G2 --resolution small --density lower --fps 60 --output outputs/heart_epic_story_2x.mp4
+# 4K Ultra HD with high bitrate
+python heart_animation.py --resolution 4k --bitrate 20000 --density low --effect G2 --output outputs/heart_4k.mp4
+
+# Epic Heart Story at 2x speed (60 fps) - 68.5 seconds in 4K
+python heart_animation.py --effect G2 --resolution 4k --density lower --fps 60 --bitrate 20000 --output outputs/heart_epic_story_2x.mp4
 
 # Add audio to the video with fade-out
 ffmpeg -i outputs/heart_epic_story_2x.mp4 -i Engima.mp3 -t 68.5 -af "afade=t=out:st=66.5:d=2" -c:v copy -c:a aac -b:a 192k outputs/heart_epic_story_2x-sound.mp4
@@ -272,6 +302,9 @@ Rendering time depends on resolution, density, and your system specifications:
 | Medium     | Medium  | 15-25 minutes    |
 | Large      | Medium  | 25-40 minutes    |
 | Large      | High    | 40-70 minutes    |
+| 4K         | Lower   | 30-50 minutes    |
+| 4K         | Low     | 50-90 minutes    |
+| 4K         | Medium  | 90-150 minutes   |
 
 **Notes:**
 - Effect types don't significantly impact render time
@@ -281,15 +314,17 @@ Rendering time depends on resolution, density, and your system specifications:
 
 ## Output Specifications
 
-- **Duration**: 30 seconds
-- **Frame Rate**: 30 fps
-- **Total Frames**: 900 frames
+- **Duration**: 30 seconds (90s for G1, 137s for G2)
+- **Frame Rate**: 30 fps (configurable, 60 fps for 2x speed)
+- **Total Frames**: 900 frames (2700 for G1, 4110 for G2)
 - **Animation**: Full 360-degree rotation (varies by effect mode)
 - **Point Density**: ~5,000 to 40,000 data points
+- **Resolutions**: 640x480 (SD), 1280x720 (HD), 1920x1080 (Full HD), 3840x2160 (4K)
+- **Bitrate**: Configurable from 1500 kbps (SD) to 25000 kbps (4K)
 - **Colormap**: Magma (purple, pink, orange gradient)
 - **Background**: Black
 - **Format**: MP4 (H.264 codec via FFmpeg)
-- **Effects**: 4 different animation styles
+- **Effects**: 9 different animation styles (A-G, G1, G2)
 - **Display Options**: Optional formulas and coordinate axes
 
 ## Tweaking Parameters
