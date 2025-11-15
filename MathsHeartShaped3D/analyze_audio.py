@@ -11,6 +11,11 @@ import os
 import sys
 import argparse
 
+try:
+    from tqdm import tqdm
+except ImportError:
+    tqdm = None
+
 
 def analyze_audio(audio_path, output_json_path=None):
     """
@@ -29,16 +34,32 @@ def analyze_audio(audio_path, output_json_path=None):
     
     print(f"Analyzing audio: {audio_path}")
     
+    # Initialize progress bar
+    total_steps = 7  # Loading, beats, onsets, RMS, bass, tempo tracking, ZCR, saving
+    if tqdm:
+        pbar = tqdm(total=total_steps, desc="Analyzing audio", unit="step", ncols=None, leave=False)
+    else:
+        pbar = None
+    
     # Load audio (use lower sample rate for speed)
-    print("Loading audio file...")
+    if pbar:
+        pbar.set_description("Loading audio file")
+    else:
+        print("Loading audio file...")
     y, sr = librosa.load(audio_path, sr=22050)
     duration = librosa.get_duration(y=y, sr=sr)
     
-    print(f"Audio duration: {duration:.2f} seconds")
-    print(f"Sample rate: {sr} Hz")
+    if pbar:
+        pbar.update(1)
+    else:
+        print(f"Audio duration: {duration:.2f} seconds")
+        print(f"Sample rate: {sr} Hz")
     
     # 1. Detect beats and tempo
-    print("Detecting beats and tempo...")
+    if pbar:
+        pbar.set_description("Detecting beats and tempo")
+    else:
+        print("Detecting beats and tempo...")
     tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
     # Convert tempo to float (handle numpy array)
     if hasattr(tempo, '__iter__') and not isinstance(tempo, str):
@@ -47,18 +68,30 @@ def analyze_audio(audio_path, output_json_path=None):
         tempo = float(tempo)
     beat_times = librosa.frames_to_time(beat_frames, sr=sr)
     
-    print(f"  Detected tempo: {tempo:.1f} BPM")
-    print(f"  Found {len(beat_times)} beats")
+    if not pbar:
+        print(f"  Detected tempo: {tempo:.1f} BPM")
+        print(f"  Found {len(beat_times)} beats")
+    if pbar:
+        pbar.update(1)
     
     # 2. Detect onsets (new sound events)
-    print("Detecting onsets...")
+    if pbar:
+        pbar.set_description("Detecting onsets")
+    else:
+        print("Detecting onsets...")
     onset_frames = librosa.onset.onset_detect(y=y, sr=sr, units='frames')
     onset_times = librosa.frames_to_time(onset_frames, sr=sr)
     
-    print(f"  Found {len(onset_times)} onsets")
+    if not pbar:
+        print(f"  Found {len(onset_times)} onsets")
+    if pbar:
+        pbar.update(1)
     
     # 3. Calculate RMS energy (loudness) over time
-    print("Calculating loudness (RMS energy)...")
+    if pbar:
+        pbar.set_description("Calculating loudness (RMS)")
+    else:
+        print("Calculating loudness (RMS energy)...")
     rms = librosa.feature.rms(y=y)[0]
     rms_times = librosa.frames_to_time(range(len(rms)), sr=sr)
     
@@ -71,10 +104,16 @@ def analyze_audio(audio_path, output_json_path=None):
     else:
         rms_normalized = np.ones_like(rms) * 0.5  # Default to middle if no variation
     
-    print(f"  RMS range: {rms_min:.4f} to {rms_max:.4f}")
+    if not pbar:
+        print(f"  RMS range: {rms_min:.4f} to {rms_max:.4f}")
+    if pbar:
+        pbar.update(1)
     
     # 4. Calculate spectral centroid (brightness) - inverse = bass
-    print("Calculating bass strength...")
+    if pbar:
+        pbar.set_description("Calculating bass strength")
+    else:
+        print("Calculating bass strength...")
     spec_cent = librosa.feature.spectral_centroid(y=y, sr=sr)[0]
     spec_times = librosa.frames_to_time(range(len(spec_cent)), sr=sr)
     
@@ -88,16 +127,22 @@ def analyze_audio(audio_path, output_json_path=None):
     else:
         bass_strength = np.ones_like(spec_cent) * 0.5  # Default to middle
     
-    print(f"  Spectral centroid range: {spec_min:.1f} to {spec_max:.1f} Hz")
+    if not pbar:
+        print(f"  Spectral centroid range: {spec_min:.1f} to {spec_max:.1f} Hz")
+    if pbar:
+        pbar.update(1)
     
     # 5. Dynamic tempo tracking (tempo changes over time)
-    print("Tracking dynamic tempo changes...")
+    if pbar:
+        pbar.set_description("Tracking dynamic tempo")
+    else:
+        print("Tracking dynamic tempo changes...")
     tempo_times = []
     tempo_values = []
     window_size = 3.0  # 3 second windows
     hop_size = 0.5    # Check every 0.5 seconds
     
-    for t in np.arange(0, duration, hop_size):
+    for i, t in enumerate(np.arange(0, duration, hop_size)):
         start_frame = librosa.time_to_frames(t, sr=sr)
         end_frame = librosa.time_to_frames(min(t + window_size, duration), sr=sr)
         
@@ -118,13 +163,25 @@ def analyze_audio(audio_path, output_json_path=None):
                     tempo_times.append(t)
                     tempo_values.append(tempo)
     
-    print(f"  Tracked tempo at {len(tempo_times)} time points")
+    if not pbar:
+        print(f"  Tracked tempo at {len(tempo_times)} time points")
+    if pbar:
+        pbar.update(1)
     
     # 6. Calculate zero-crossing rate (for detecting silence/activity)
-    print("Calculating zero-crossing rate...")
+    if pbar:
+        pbar.set_description("Calculating zero-crossing rate")
+    else:
+        print("Calculating zero-crossing rate...")
     zcr = librosa.feature.zero_crossing_rate(y)[0]
     zcr_times = librosa.frames_to_time(range(len(zcr)), sr=sr)
     zcr_normalized = (zcr - zcr.min()) / (zcr.max() - zcr.min() + 1e-6)
+    
+    if pbar:
+        pbar.update(1)
+        pbar.set_description("Saving features")
+    else:
+        print("Saving features...")
     
     # Save all features to JSON
     features = {
@@ -153,14 +210,19 @@ def analyze_audio(audio_path, output_json_path=None):
     with open(output_json_path, 'w') as f:
         json.dump(features, f, indent=2)
     
-    print(f"\nAnalysis complete!")
-    print(f"  Saved to: {output_json_path}")
-    print(f"\nSummary:")
-    print(f"  - {len(beat_times)} beats detected")
-    print(f"  - {len(onset_times)} onsets detected")
-    print(f"  - {len(rms_times)} RMS energy points")
-    print(f"  - {len(tempo_times)} tempo measurements")
-    print(f"  - Global tempo: {tempo:.1f} BPM")
+    if pbar:
+        pbar.update(1)  # Final step: saving
+        pbar.close()
+        print(f"\nAnalysis complete! Saved to: {output_json_path}")
+    else:
+        print(f"\nAnalysis complete!")
+        print(f"  Saved to: {output_json_path}")
+        print(f"\nSummary:")
+        print(f"  - {len(beat_times)} beats detected")
+        print(f"  - {len(onset_times)} onsets detected")
+        print(f"  - {len(rms_times)} RMS energy points")
+        print(f"  - {len(tempo_times)} tempo measurements")
+        print(f"  - Global tempo: {tempo:.1f} BPM")
     
     return features
 

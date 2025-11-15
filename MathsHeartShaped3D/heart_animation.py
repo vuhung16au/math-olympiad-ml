@@ -10,7 +10,11 @@ from mpl_toolkits.mplot3d import Axes3D
 import argparse
 import os
 import json
-from tqdm import tqdm
+
+try:
+    from tqdm import tqdm
+except ImportError:
+    tqdm = None
 
 # Import from new modular structure
 from core.heart_generator import generate_heart_points
@@ -171,32 +175,45 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     print(f"Creating animation with {total_frames} frames ({duration_text} at {fps} fps)...")
     print("This may take several minutes depending on your system...")
     
-    # Create progress bar
-    pbar = tqdm(total=total_frames, desc="Rendering", unit="frame", ncols=100)
-    
-    # Wrap update function to update progress bar
-    original_update = update
-    def update_with_progress(frame):
-        result = original_update(frame)
-        # Update progress bar to current frame
-        pbar.n = frame + 1  # tqdm uses 1-based indexing
-        pbar.refresh()
-        return result
+    # Create progress bar (single line, auto-detect width)
+    if tqdm:
+        pbar = tqdm(total=total_frames, desc="Rendering video", unit="frame", ncols=None, leave=False)
+        
+        # Wrap update function to update progress bar
+        original_update = update
+        last_frame = [-1]  # Use list to allow modification in closure
+        def update_with_progress(frame):
+            result = original_update(frame)
+            # Update progress bar to current frame (only if frame advanced)
+            if frame > last_frame[0]:
+                pbar.n = frame + 1  # tqdm uses 1-based indexing
+                pbar.refresh()
+                last_frame[0] = frame
+            return result
+        
+        update_func = update_with_progress
+    else:
+        pbar = None
+        update_func = update
     
     # Create animation
-    anim = FuncAnimation(fig, update_with_progress, frames=total_frames, 
+    anim = FuncAnimation(fig, update_func, frames=total_frames, 
                         interval=1000/fps, blit=False)
     
     # Ensure output directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
     # Save animation
-    print(f"Saving animation to {output_path}...")
+    if pbar:
+        pbar.set_description("Saving video file")
+    else:
+        print(f"Saving animation to {output_path}...")
     writer = FFMpegWriter(fps=fps, bitrate=bitrate)
     anim.save(output_path, writer=writer)
     
     # Close progress bar
-    pbar.close()
+    if pbar:
+        pbar.close()
     
     print(f"Animation successfully saved to {output_path}")
     plt.close(fig)
