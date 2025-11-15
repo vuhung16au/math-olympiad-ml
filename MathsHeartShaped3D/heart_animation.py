@@ -10,6 +10,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import argparse
 import os
 import json
+from tqdm import tqdm
 
 # Import from new modular structure
 from core.heart_generator import generate_heart_points
@@ -59,7 +60,8 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
         'H8': 'Heart Genesis with Music Sync (creation story with BPM-synchronized beats - 100s)',
         'H8sync': 'Heart Genesis with Real Audio Sync (creation story with librosa-detected beats - 100s)',
         'H8sync3min': 'Heart Genesis with Real Audio Sync - Extended 3.5 minute version (210s)',
-        'H9': 'Cuba to New Orleans - Musical Journey Through the Heart with through-heart passages (~698s)'
+        'H9': 'Cuba to New Orleans - Musical Journey Through the Heart with through-heart passages (~698s)',
+        'H10': 'The Mission (Gabriel\'s Oboe) - Spiritual Journey Through the Heart with through-heart passages'
     }
     print(f"Generating heart shape with {point_counts.get(density, '40,000')} points (density: {density})...")
     print(f"Effect: {effect} - {effect_names.get(effect, 'Simple Y-axis rotation')}")
@@ -118,9 +120,6 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             y_rotated = y_original
             z_rotated = -x_original * np.sin(alpha_rad) + z_original * np.cos(alpha_rad)
             scatter._offsets3d = (x_rotated, y_rotated, z_rotated)
-            if frame % 30 == 0:
-                progress = (frame / 900) * 100
-                print(f"Progress: {progress:.1f}% ({frame}/900 frames)")
             return scatter,
     else:
         # Instantiate effect
@@ -167,17 +166,25 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
         # Create update function that delegates to effect
         def update(frame):
             result = effect_instance.update(frame)
-            # Print progress every 30 frames (every second at 30 fps)
-            if frame % 30 == 0:
-                progress = (frame / total_frames) * 100
-                print(f"Progress: {progress:.1f}% ({frame}/{total_frames} frames)")
             return result
     
     print(f"Creating animation with {total_frames} frames ({duration_text} at {fps} fps)...")
     print("This may take several minutes depending on your system...")
     
+    # Create progress bar
+    pbar = tqdm(total=total_frames, desc="Rendering", unit="frame", ncols=100)
+    
+    # Wrap update function to update progress bar
+    original_update = update
+    def update_with_progress(frame):
+        result = original_update(frame)
+        # Update progress bar to current frame
+        pbar.n = frame + 1  # tqdm uses 1-based indexing
+        pbar.refresh()
+        return result
+    
     # Create animation
-    anim = FuncAnimation(fig, update, frames=total_frames, 
+    anim = FuncAnimation(fig, update_with_progress, frames=total_frames, 
                         interval=1000/fps, blit=False)
     
     # Ensure output directory exists
@@ -187,6 +194,9 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     print(f"Saving animation to {output_path}...")
     writer = FFMpegWriter(fps=fps, bitrate=bitrate)
     anim.save(output_path, writer=writer)
+    
+    # Close progress bar
+    pbar.close()
     
     print(f"Animation successfully saved to {output_path}")
     plt.close(fig)
@@ -268,9 +278,9 @@ Examples:
     
     parser.add_argument(
         '--effect', '-e',
-        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H8sync', 'H8sync3min', 'H9'],
+        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H8sync', 'H8sync3min', 'H9', 'H10'],
         default='A',
-        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s), H8sync3min (extended 3.5min version 210s), H9 (Cuba to New Orleans musical journey ~698s) (default: A)'
+        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s), H8sync3min (extended 3.5min version 210s), H9 (Cuba to New Orleans musical journey ~698s), H10 (The Mission - Gabriel\'s Oboe spiritual journey) (default: A)'
     )
     
     parser.add_argument(
