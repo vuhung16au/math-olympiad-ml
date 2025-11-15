@@ -118,6 +118,7 @@ try:
     from . import effect_h8
     from . import effect_h8sync
     from . import effect_h8sync3min
+    from . import effect_h9
 except ImportError:
     # Effects not yet created, will be imported later
     pass

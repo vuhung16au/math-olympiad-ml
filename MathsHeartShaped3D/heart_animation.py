@@ -58,7 +58,8 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
         'H7': 'Hologram Heart (wireframe tech aesthetic - 90s)',
         'H8': 'Heart Genesis with Music Sync (creation story with BPM-synchronized beats - 100s)',
         'H8sync': 'Heart Genesis with Real Audio Sync (creation story with librosa-detected beats - 100s)',
-        'H8sync3min': 'Heart Genesis with Real Audio Sync - Extended 3.5 minute version (210s)'
+        'H8sync3min': 'Heart Genesis with Real Audio Sync - Extended 3.5 minute version (210s)',
+        'H9': 'Cuba to New Orleans - Musical Journey Through the Heart with through-heart passages (~698s)'
     }
     print(f"Generating heart shape with {point_counts.get(density, '40,000')} points (density: {density})...")
     print(f"Effect: {effect} - {effect_names.get(effect, 'Simple Y-axis rotation')}")
@@ -267,9 +268,9 @@ Examples:
     
     parser.add_argument(
         '--effect', '-e',
-        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H8sync', 'H8sync3min'],
+        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H8sync', 'H8sync3min', 'H9'],
         default='A',
-        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s), H8sync3min (extended 3.5min version 210s) (default: A)'
+        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s), H8sync3min (extended 3.5min version 210s), H9 (Cuba to New Orleans musical journey ~698s) (default: A)'
     )
     
     parser.add_argument(
