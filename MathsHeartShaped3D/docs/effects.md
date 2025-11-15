@@ -20,6 +20,8 @@ This document describes all available animation effects for the 3D Heart Animati
 - [Effect H5: Kaleidoscope Heart](#effect-h5-kaleidoscope-heart)
 - [Effect H6: Heart Nebula](#effect-h6-heart-nebula)
 - [Effect H7: Hologram Heart](#effect-h7-hologram-heart)
+- [Effect H8sync: Heart Genesis with Real Audio Sync](#effect-h8sync-heart-genesis-with-real-audio-sync)
+- [Effect H8sync3min: Extended 3.5 Minute Version](#effect-h8sync3min-heart-genesis-with-real-audio-sync---extended-35-minute-version)
 - [Comparison Table](#comparison-table)
 - [Usage Examples](#usage-examples)
 
@@ -1041,6 +1043,155 @@ ffmpeg -i outputs/heart_synced.mp4 -i inputs/H8InfiniteStars2.mp3 -t 100 -c:v co
 
 ---
 
+## Effect H8sync3min: Heart Genesis with Real Audio Sync - Extended 3.5 Minute Version
+
+**Duration:** 210 seconds (3 minutes 30 seconds)  
+**Complexity:** Epic  
+**Best For:** Extended music videos, full-length songs, professional productions  
+**Requires:** Audio features JSON file (from `analyze_audio.py`)
+
+### Description
+
+An extended version of H8sync that runs for 3.5 minutes (210 seconds). It includes all 8 phases from H8sync (0-100s) plus 5 additional artistic phases (100-210s) that create a complete musical journey. Perfect for full-length songs or extended compositions.
+
+### Technical Details
+
+**Phases 1-8 (0-100s):** Identical to H8sync
+- Phase 1: Empty space, heart appears (0-10s)
+- Phase 2: Energy burst (10-25s)
+- Phase 3: Strings coalesce (25-40s)
+- Phase 4: Heartbeat rhythm (40-60s)
+- Phase 5: Majestic orchestral (60-75s)
+- Phase 6: Cosmic expansion (75-90s)
+- Phase 7: Mathematical precision (90-95s)
+- Phase 8: Fade to stars (95-100s)
+
+**Phase 9: Spiral Descent (100-130s)**
+- **Duration:** 30 seconds
+- **Camera:** Spirals down while rotating (elevation: 60° → 20°)
+- **Rotation:** 2 full rotations (720°)
+- **Zoom:** 150 → 100 (zoom in, bass-responsive)
+- **Brightness:** 0.5 + 0.5 × bass + pulsing
+- **Effect:** Camera descends in spiral while heart pulses with bass
+- **Audio Sync:** Brightness and zoom respond to bass frequencies
+
+**Phase 10: Kaleidoscope Transformation (130-160s)**
+- **Duration:** 30 seconds
+- **Effect:** Heart multiplies through mirroring (4-8 mirrors)
+- **Rotation:** Rapid orbital motion (3 full rotations)
+- **Zoom:** 100 → 70 (continue zooming in)
+- **Elevation:** 20° ± 30° (dramatic oscillation)
+- **Pulse:** Strong pulses on onsets
+- **Effect:** Kaleidoscope pattern with rotating mirrors
+- **Audio Sync:** Pulses on detected onsets, rotation follows tempo
+
+**Phase 11: Cosmic Dance (160-180s)**
+- **Duration:** 20 seconds
+- **Motion:** Complex orbital patterns (figure-8 combined with spiral)
+- **Brightness:** Follows loudness (0.6 + 0.4 × loudness)
+- **Zoom:** 70 → 50 (continue approaching)
+- **Elevation:** Complex multi-frequency oscillation
+- **Pulse:** Strong pulses on beats
+- **Effect:** Heart dances in complex patterns
+- **Audio Sync:** All movements respond to audio dynamics
+
+**Phase 12: Energy Convergence (180-200s)**
+- **Duration:** 20 seconds
+- **Zoom:** 50 → 10 (dramatic accelerating zoom in)
+- **Brightness:** Peaks with bass (0.5 + 0.5 × bass + pulsing)
+- **Elevation:** Dramatic sweep (50° → 10° with oscillations)
+- **Pulse:** Intense pulses on beats and bass
+- **Effect:** Dramatic convergence, heart fills screen
+- **Audio Sync:** Maximum responsiveness to beats and bass
+
+**Phase 13: Final Crescendo (200-210s)**
+- **Duration:** 10 seconds
+- **Zoom:** 10 → 300 (explosive expansion)
+- **Brightness:** Peaks then fades (bass-responsive)
+- **Pulse:** Final strong pulses on beats
+- **Effect:** Explosive expansion then fade to black
+- **Audio Sync:** Final moments synchronized with music climax
+
+### Overall Heart Rotation
+- **Total:** 360° over entire 210 seconds (extended from H8sync's 180°)
+- **Speed:** Tempo-adaptive (faster tempo = faster rotation)
+- **Base Tempo:** Normalized to 75 BPM
+
+### Audio Synchronization Features
+
+Same as H8sync, plus enhanced responsiveness in extended phases:
+1. **Beat Detection**: Heart pulses on detected beats with intensity based on beat strength
+2. **Onset Detection**: Strong onsets trigger additional heartbeat pulses (especially in Phase 10)
+3. **Tempo Tracking**: Rotation speed adapts to tempo changes throughout the song
+4. **Loudness Response**: Zoom adjusts based on RMS energy (louder = closer)
+5. **Bass Response**: Brightness/alpha responds to bass frequencies (more bass = brighter)
+
+### Visual Characteristics
+- Complete 3.5-minute musical journey
+- Extended narrative with 13 distinct phases
+- Enhanced artistic phases for longer compositions
+- Professional music video quality
+- Perfect synchronization with full-length songs
+- Dynamic response to all audio features
+
+### Prerequisites
+
+Before using H8sync3min, you must analyze your audio file:
+
+```powershell
+# Step 1: Analyze audio (full 3:30 file)
+python analyze_audio.py inputs/H8InfiniteStars2.mp3
+
+# This creates: H8InfiniteStars2_features.json
+```
+
+### Command
+
+```powershell
+# Generate with audio sync (first time)
+python heart_animation.py --effect H8sync3min --audio-features H8InfiniteStars2_features.json --output outputs/heart_synced_3min.mp4
+
+# With formulas and high quality
+python heart_animation.py --effect H8sync3min --audio-features H8InfiniteStars2_features.json --formulas --resolution large --density low --output outputs/heart_synced_3min_hd.mp4
+```
+
+### Complete Workflow with Build Script
+
+The easiest way to generate H8sync3min is using the automated build script:
+
+```powershell
+# First time (with audio analysis):
+.\scripts\build_h8sync3min.ps1 -Resolution large -Density lower
+
+# Subsequent runs (skip analysis if features file exists):
+.\scripts\build_h8sync3min.ps1 -Resolution large -Density lower -SkipAnalysis
+```
+
+The build script automatically:
+1. Analyzes the audio file (unless `-SkipAnalysis` is used)
+2. Generates the video with H8sync3min effect
+3. Combines video with audio
+4. Outputs final file: `outputs/h8sync3min_large_with_audio.mp4`
+
+**Using `-SkipAnalysis`:**
+- Use when audio features file already exists
+- Skips the audio analysis step (saves 2-5 minutes)
+- Useful when regenerating video with different settings
+- Only works if `{audio_file}_features.json` exists
+
+### Differences from H8sync
+
+| Feature | H8sync | H8sync3min |
+|---------|--------|------------|
+| Duration | 100 seconds (1:40) | 210 seconds (3:30) |
+| Phases | 8 phases | 13 phases (8 original + 5 extended) |
+| Heart Rotation | 180° | 360° |
+| Extended Phases | None | 5 additional artistic phases |
+| Best For | Short compositions | Full-length songs |
+| Build Script | `build_h8sync_large.ps1` | `build_h8sync3min.ps1` |
+
+---
+
 ## Comparison Table
 
 | Effect | Duration | Complexity | Heart Rotation | Camera Motion | Zoom Changes | Special Features |
@@ -1062,6 +1213,7 @@ ffmpeg -i outputs/heart_synced.mp4 -i inputs/H8InfiniteStars2.mp3 -t 100 -c:v co
 | **H6** | 120s | Epic | 180° Y-axis | Cosmic journey | Multiple | Space theme, glow effects, galaxy view |
 | **H7** | 90s | High | 360° Y-axis | Tech aesthetic | Pulsing | Hologram, wireframe, glitch effects |
 | **H8sync** | 100s | Epic | 180° Y-axis (tempo-adaptive) | Multi-phase | Multiple | Real audio sync, beat detection, tempo/loudness/bass response |
+| **H8sync3min** | 210s | Epic | 360° Y-axis (tempo-adaptive) | Multi-phase | Multiple | Extended H8sync with 5 additional artistic phases, full-length song support |
 
 ---
 
@@ -1083,6 +1235,7 @@ Based on typical hardware (varies by system):
 | H6 | 12-25 min | 40-70 min | 120-200 min | 240-360 min |
 | H7 | 8-15 min | 25-45 min | 75-120 min | 150-270 min |
 | H8sync | 10-20 min | 35-60 min | 100-160 min | 200-360 min |
+| H8sync3min | 20-40 min | 70-120 min | 200-320 min | 400-720 min |
 
 ---
 
@@ -1161,6 +1314,7 @@ python heart_animation.py --effect G --resolution small --density lower --dpi 80
 - **Effect H6**: Space/science themes
 - **Effect H7**: Tech/sci-fi themes
 - **Effect H8sync**: Music videos, synchronized animations, professional productions
+- **Effect H8sync3min**: Extended music videos, full-length songs, professional productions
 
 ### For Mobile Viewing
 - **Effect G2**: Optimized with close zoom (heart fills 50% screen)
@@ -1200,6 +1354,8 @@ python heart_animation.py --effect G --resolution small --density lower --dpi 80
   - `scripts/build_effects.ps1` (A-G effects)
   - `scripts/build_g2_x2.ps1` (G2 with audio)
   - `scripts/build_h_large.ps1` (H* effects at large resolution)
+  - `scripts/build_h8sync_large.ps1` (H8sync with audio)
+  - `scripts/build_h8sync3min.ps1` (H8sync3min with audio, extended version)
 - **Documentation:** `README.md`
 - **YouTube Description:** `descriptions-heart_epic_story.txt`
 - **Effect Concepts:** `TODO/TODO-effects-H.md`
@@ -1218,5 +1374,5 @@ To add new effects:
 
 ---
 
-**Last Updated:** November 14, 2025  
-**Version:** 2.0 with H* effects (H1-H7) - 7 new epic storytelling effects
+**Last Updated:** November 15, 2025  
+**Version:** 2.1 with H* effects (H1-H7, H8sync, H8sync3min) - 9 epic storytelling effects including extended audio-synchronized versions
