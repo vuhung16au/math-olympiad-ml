@@ -1,0 +1,9 @@
+pygame>=2.5.0
+pydub>=0.25.1
+librosa>=0.11.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+PyQt6>=6.6.0
+mido>=1.2.10
+tqdm>=4.65.0
+
