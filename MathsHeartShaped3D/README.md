@@ -277,7 +277,21 @@ python heart_animation.py --effect H8sync --audio-features your_audio_features.j
 - Brightness responds to bass
 - Requires audio features JSON from `analyze_audio.py`
 
-See `docs/effects.md` for all available effects (A-G, G1, G2, H1-H7, H8, H8sync).
+**Effect H8sync3min - Extended 3.5 Minute Version (NEW!):**
+```powershell
+# First time (with audio analysis):
+.\scripts\build_h8sync3min.ps1 -Resolution large -Density lower
+
+# Subsequent runs (skip analysis if features file exists):
+.\scripts\build_h8sync3min.ps1 -Resolution large -Density lower -SkipAnalysis
+```
+- Extended version of H8sync (210 seconds / 3:30)
+- Includes all H8sync phases plus 5 additional artistic phases
+- Same audio synchronization features as H8sync
+- Uses `-SkipAnalysis` parameter to skip audio analysis on subsequent runs
+- Automatically combines video with audio
+
+See `docs/effects.md` for all available effects (A-G, G1, G2, H1-H7, H8, H8sync, H8sync3min).
 
 ### Display Options
 

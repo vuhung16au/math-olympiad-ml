@@ -117,6 +117,7 @@ try:
     from . import effect_h7
     from . import effect_h8
     from . import effect_h8sync
+    from . import effect_h8sync3min
 except ImportError:
     # Effects not yet created, will be imported later
     pass
