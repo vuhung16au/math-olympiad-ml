@@ -13,13 +13,32 @@ if "%1"=="" goto build
 
 :build
 echo Compiling LaTeX document...
-docker run --rm -v "%CD%:/workdir" -w /workdir texlive/texlive:latest pdflatex -interaction=nonstopmode %TEXFILE%.tex
-docker run --rm -v "%CD%:/workdir" -w /workdir texlive/texlive:latest pdflatex -interaction=nonstopmode %TEXFILE%.tex
+REM Check if pdflatex is available locally
+where pdflatex >nul 2>&1
 if %ERRORLEVEL% EQU 0 (
-    echo PDF compiled successfully: %PDFFILE%
+    echo Using local pdflatex installation...
+    pdflatex -interaction=nonstopmode %TEXFILE%.tex
+    pdflatex -interaction=nonstopmode %TEXFILE%.tex
+    if %ERRORLEVEL% EQU 0 (
+        echo PDF compiled successfully: %PDFFILE%
+    ) else (
+        echo Compilation failed!
+        exit /b 1
+    )
 ) else (
-    echo Compilation failed!
-    exit /b 1
+    echo Using Docker for LaTeX compilation...
+    docker run --rm -v "%CD%:/workdir" -w /workdir texlive/texlive:latest pdflatex -interaction=nonstopmode %TEXFILE%.tex 2>nul
+    if %ERRORLEVEL% NEQ 0 (
+        echo Docker compilation failed! Please install LaTeX or ensure Docker is running.
+        exit /b 1
+    )
+    docker run --rm -v "%CD%:/workdir" -w /workdir texlive/texlive:latest pdflatex -interaction=nonstopmode %TEXFILE%.tex 2>nul
+    if %ERRORLEVEL% EQU 0 (
+        echo PDF compiled successfully: %PDFFILE%
+    ) else (
+        echo Compilation failed!
+        exit /b 1
+    )
 )
 goto end
 

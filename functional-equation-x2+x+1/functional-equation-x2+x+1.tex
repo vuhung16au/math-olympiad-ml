@@ -17,7 +17,7 @@
 \newtheorem{theorem}{Theorem}
 
 % --- TITLE ---
-\title{Functional Equation: $f(f(x)) = x^2 + x + 1$}
+\title{Functional Equation: $f(f(x)) = x^2 - x + 1$}
 \author{Vu Hung Nguyen}
 \date{November 2025}
 
@@ -27,32 +27,32 @@
 \maketitle
 
 \begin{abstract}
-This document explores a functional equation of the form $f(f(x)) = x^2 + x + 1$ where $f: \mathbb{R} \to \mathbb{R}$. We analyze the properties of such functions, derive specific values, and explore generalizations and extensions of the problem. The polynomial $x^2 + x + 1$ has special properties related to the cube roots of unity, which play a key role in understanding this functional equation.
+This document explores a functional equation of the form $f(f(x)) = x^2 - x + 1$ where $f: \mathbb{R} \to \mathbb{R}$. We analyze the properties of such functions, derive specific values, and explore generalizations and extensions of the problem. The polynomial $x^2 - x + 1$ has special properties related to the sixth roots of unity and shares the same discriminant as $x^2 + x + 1$, making this functional equation similarly challenging.
 \end{abstract}
 
 % --- OVERVIEW ---
 \section{Overview}
 
-Functional equations are equations in which the unknowns are functions rather than simple quantities. The functional equation $f(f(x)) = x^2 + x + 1$ is particularly interesting because:
+Functional equations are equations in which the unknowns are functions rather than simple quantities. The functional equation $f(f(x)) = x^2 - x + 1$ is particularly interesting because:
 
 \begin{itemize}
-    \item The polynomial $x^2 + x + 1$ is the third cyclotomic polynomial, closely related to the primitive cube roots of unity
-    \item It has no real roots (discriminant $\Delta = 1 - 4 = -3 < 0$)
-    \item The polynomial can be factored over the complex numbers as $(x - \omega)(x - \omega^2)$ where $\omega = e^{2\pi i/3}$
+    \item The polynomial $x^2 - x + 1$ has no real roots (discriminant $\Delta = 1 - 4 = -3 < 0$)
+    \item It has the same discriminant as $x^2 + x + 1$, showing a symmetric relationship
+    \item The polynomial can be factored over the complex numbers as $(x - \zeta)(x - \overline{\zeta})$ where $\zeta = \frac{1 + i\sqrt{3}}{2}$
     \item Finding $f$ requires careful analysis of the iteration structure and domain-range relationships
 \end{itemize}
 
-The relationship to cube roots of unity comes from the fact that $\omega^3 = 1$ and $1 + \omega + \omega^2 = 0$, which gives us $\omega^2 + \omega + 1 = 0$.
+The polynomial $x^2 - x + 1$ is related to sixth roots of unity, since if $\omega = e^{2\pi i/3}$, then $\omega^2 - \omega + 1 = 0$.
 
 % --- PROBLEM STATEMENT ---
 \section{Problem Statement}
 
 \begin{problem}
-Find all functions $f: \mathbb{R} \to \mathbb{R}$ that satisfy the following functional equation for all $x \in \mathbb{R}$:
+Given a function $f: \mathbb{R} \to \mathbb{R}$ that satisfy the following functional equation for all $x \in \mathbb{R}$:
 \[
-f(f(x)) = x^2 + x + 1
+f(f(x)) = x^2 - x + 1
 \]
-In particular, determine the value of $f(0)$ and $f(1)$.
+In particular, determine the value of $f(0)$.
 \end{problem}
 
 \subsection{Initial Observations}
@@ -60,9 +60,9 @@ In particular, determine the value of $f(0)$ and $f(1)$.
 Before diving into the solution, we make several key observations:
 
 \begin{enumerate}
-    \item The right-hand side $x^2 + x + 1$ is always positive for all real $x$, since its minimum value occurs at $x = -\frac{1}{2}$ where it equals $\frac{3}{4}$
+    \item The right-hand side $x^2 - x + 1$ is always positive for all real $x$, since its minimum value occurs at $x = \frac{1}{2}$ where it equals $\frac{3}{4}$
     \item This means $f(f(x)) \geq \frac{3}{4}$ for all $x$, implying that the range of $f$ must be such that composing $f$ with itself produces only values $\geq \frac{3}{4}$
-    \item The polynomial $x^2 + x + 1$ has complex roots at $\omega = e^{2\pi i/3}$ and $\omega^2 = e^{4\pi i/3}$, the primitive cube roots of unity
+    \item The polynomial $x^2 - x + 1$ has complex roots at $\frac{1 \pm i\sqrt{3}}{2}$, related to sixth roots of unity
 \end{enumerate}
 
 % --- SOLUTION ---
@@ -81,7 +81,7 @@ f(f(0)) = (0)^2 + (0) + 1 \implies \mathbf{f(f(0)) = 1}
 
 \textbf{For $x = 1$:}
 \[
-f(f(1)) = (1)^2 + (1) + 1 \implies \mathbf{f(f(1)) = 3}
+f(f(1)) = (1)^2 - (1) + 1 \implies \mathbf{f(f(1)) = 1}
 \]
 
 \subsection{Step 2: Analyze $f(0)$ and $f(1)$}
@@ -89,114 +89,135 @@ f(f(1)) = (1)^2 + (1) + 1 \implies \mathbf{f(f(1)) = 3}
 Let $a = f(0)$ and $b = f(1)$. From Step 1, we have:
 \begin{align}
 f(a) &= 1 \label{eq:fa} \\
-f(b) &= 3 \label{eq:fb}
+f(b) &= 1 \label{eq:fb}
 \end{align}
+
+\textbf{Key observation:} Both $f(a) = 1$ and $f(b) = 1$, meaning both $f(0)$ and $f(1)$ map to values that $f$ sends to 1.
 
 Now, substitute $x = a$ into the original equation:
 \[
-f(f(a)) = a^2 + a + 1
+f(f(a)) = a^2 - a + 1
 \]
 Since $f(a) = 1$ from equation~\eqref{eq:fa}, we get:
 \[
-f(1) = a^2 + a + 1
+f(1) = a^2 - a + 1
 \]
 But $f(1) = b$, so:
 \begin{equation}
-b = a^2 + a + 1 \label{eq:bina}
+b = a^2 - a + 1 \label{eq:bina}
 \end{equation}
 
 Similarly, substitute $x = b$ into the original equation:
 \[
-f(f(b)) = b^2 + b + 1
+f(f(b)) = b^2 - b + 1
 \]
-Since $f(b) = 3$ from equation~\eqref{eq:fb}, we get:
+Since $f(b) = 1$ from equation~\eqref{eq:fb}, we get:
 \[
-f(3) = b^2 + b + 1 \label{eq:f3}
+f(1) = b^2 - b + 1 \label{eq:f3}
 \]
 
 \subsection{Step 3: Finding the Value of $a = f(0)$}
 
-From equation~\eqref{eq:bina}, we have $b = a^2 + a + 1$. Now substitute $x = 1$ into the original equation:
+From equation~\eqref{eq:bina}, we have $b = a^2 - a + 1$. We also know from equation~\eqref{eq:f3} that:
 \[
-f(f(1)) = 1^2 + 1 + 1 = 3
-\]
-So $f(b) = 3$, which we already knew.
-
-To find $a$, we use the fact that $f(a) = 1$. Substituting $x = 1$ into the equation and using $f(1) = b$:
-
-Let's try to find consistency. If we assume $f$ is bijective (one-to-one and onto) on some subset, we can work backwards. 
-
-Substituting $x = -1$:
-\[
-f(f(-1)) = (-1)^2 + (-1) + 1 = 1
+f(1) = b^2 - b + 1
 \]
 
-So $f(f(-1)) = 1 = f(f(0))$. This suggests that either $f(-1) = f(0)$ or $f$ maps different values to the same point which then maps to 1.
-
-\subsection{Step 4: Testing Specific Cases}
-
-Let's assume a simple form. If $f(x) = x$, then:
+But we also know $f(1) = b$, so:
 \[
-f(f(x)) = x \neq x^2 + x + 1 \text{ (for most $x$)}
+b = b^2 - b + 1
+\]
+\[
+b^2 - 2b + 1 = 0
+\]
+\[
+(b - 1)^2 = 0
+\]
+\[
+\boxed{b = 1}
 \]
 
-If $f(x) = x + 1$, then:
+Now, using $b = a^2 - a + 1$ and $b = 1$:
 \[
-f(f(x)) = f(x + 1) = x + 2 \neq x^2 + x + 1
+1 = a^2 - a + 1
+\]
+\[
+a^2 - a = 0
+\]
+\[
+a(a - 1) = 0
 \]
 
-If $f(x) = x^2 + x + 1$, then:
+So either $a = 0$ or $a = 1$.
+
+\subsection{Step 4: Testing the Two Cases}
+
+\textbf{Case 1: $a = 0$ (i.e., $f(0) = 0$)}
+
+If $f(0) = 0$ and $f(1) = 1$, let's check consistency:
+\begin{itemize}
+    \item We need $f(f(0)) = f(0) = 0$
+    \item But the equation requires $f(f(0)) = 0^2 - 0 + 1 = 1$
+    \item Contradiction! \texttimes
+\end{itemize}
+
+\textbf{Case 2: $a = 1$ (i.e., $f(0) = 1$)}
+
+If $f(0) = 1$ and $f(1) = 1$, let's check consistency:
+\begin{itemize}
+    \item We need $f(f(0)) = f(1) = 1$
+    \item The equation requires $f(f(0)) = 0^2 - 0 + 1 = 1$ \checkmark
+    \item We need $f(f(1)) = f(1) = 1$
+    \item The equation requires $f(f(1)) = 1^2 - 1 + 1 = 1$ \checkmark
+\end{itemize}
+
+Both conditions are satisfied!
+
+\subsection{Step 5: Verification and Fixed Point Analysis}
+
+The value $f(0) = 1$ is consistent with the functional equation. Moreover, we observe that $x = 1$ is a \textbf{fixed point} of $f$:
 \[
-f(f(x)) = f(x^2 + x + 1) = (x^2 + x + 1)^2 + (x^2 + x + 1) + 1
+f(1) = 1
 \]
-This is much larger than $x^2 + x + 1$ for most values.
 
-\subsection{Step 5: Key Insight}
-
-The key observation is that $f(0)$ maps to some value $a$, and $f(a) = 1$. Similarly, $f(1) = b$ and $f(b) = 3$.
-
-From $b = a^2 + a + 1$ and knowing that $f(a) = 1$, $f(1) = b$:
-
-If we substitute $x = a$ in the original equation:
+This is consistent because if $f(1) = 1$, then:
 \[
-a^2 + a + 1 = f(1) = b
+f(f(1)) = f(1) = 1
 \]
-
-Now, we need another equation. Substitute $x = 1$:
+and the functional equation requires:
 \[
-f(f(1)) = 1 + 1 + 1 = 3 \implies f(b) = 3
+f(f(1)) = 1^2 - 1 + 1 = 1 \quad \checkmark
 \]
 
-If we try $a = 0$: then $b = 0^2 + 0 + 1 = 1$.
-Check: $f(0) = 0$, $f(1) = 1$, but then $f(f(0)) = f(0) = 0 \neq 1$. Contradiction!
-
-If we try $a = 1$: then $b = 1^2 + 1 + 1 = 3$.
-Check: $f(0) = 1$, $f(1) = 3$.
-Then $f(f(0)) = f(1) = 3$, but we need $f(f(0)) = 1$. Contradiction!
-
-\textbf{Testing $a = -1$:}
-Then $b = (-1)^2 + (-1) + 1 = 1 - 1 + 1 = 1$.
-So $f(0) = -1$, $f(1) = 1$.
-Check: $f(f(0)) = f(-1)$ should equal 1.
-And $f(f(1)) = f(1) = 1$ should equal 3. Contradiction!
-
-After systematic exploration, the solution involves recognizing that no simple polynomial solution exists, and the function may have a more complex structure.
+The structure of this equation is fundamentally different from $f(f(x)) = x^2 + x + 1$ because:
+\begin{itemize}
+    \item Both $f(0)$ and $f(1)$ map to the same value under $f$ (namely 1)
+    \item The value $x = 1$ is a fixed point: $f(1) = 1$
+    \item This creates a consistent constraint system with a unique solution for $f(0)$
+\end{itemize}
 
 \subsection{Conclusion of Derivation}
 
-For the specific question of finding $f(0)$:
-
-Through substitution and algebraic manipulation, we establish that if $f(0) = a$, then $f(a) = 1$, and $f(1) = a^2 + a + 1$.
-
-One consistent solution that emerges from detailed analysis (which may involve piecewise definitions or more sophisticated constructions) suggests:
+Through systematic substitution and algebraic manipulation, we have definitively determined:
 \[
 \boxed{f(0) = 1}
 \]
 
+The key steps in our derivation were:
+\begin{enumerate}
+    \item From $f(f(0)) = 1$ and $f(f(1)) = 1$, we found that both $f(0)$ and $f(1)$ must map to values that $f$ sends to 1
+    \item Setting $a = f(0)$ and $b = f(1)$, we derived $b = a^2 - a + 1$ and $b = b^2 - b + 1$
+    \item Solving $b = b^2 - b + 1$ gave us $b = 1$, meaning $f(1) = 1$ (a fixed point)
+    \item Substituting $b = 1$ into $b = a^2 - a + 1$ yielded $a = 0$ or $a = 1$
+    \item Testing showed that only $a = 1$ is consistent with the functional equation
+\end{enumerate}
+
+This result is remarkably cleaner than the analogous problem with $f(f(x)) = x^2 + x + 1$, where the constraint system leads to contradictions.
+
 % --- FURTHER WORK ---
 \section{Further Work}
 
-The functional equation $f(f(x)) = x^2 + x + 1$ opens several avenues for further investigation:
+The functional equation $f(f(x)) = x^2 - x + 1$ opens several avenues for further investigation:
 
 \subsection{Existence and Uniqueness}
 
@@ -205,7 +226,7 @@ The functional equation $f(f(x)) = x^2 + x + 1$ opens several avenues for furthe
     
     \item \textbf{Is the solution unique?} Given the constraints, is there a unique function satisfying the equation, or are there multiple solutions? Uniqueness typically requires additional constraints such as continuity, monotonicity, or analyticity.
     
-    \item \textbf{Continuous solutions:} If we restrict to continuous functions, does a continuous solution exist? The composition of continuous functions is continuous, so $f \circ f$ would be continuous, matching the continuity of $x^2 + x + 1$.
+    \item \textbf{Continuous solutions:} If we restrict to continuous functions, does a continuous solution exist? The composition of continuous functions is continuous, so $f \circ f$ would be continuous, matching the continuity of $x^2 + x + 1$. Likely impossible to find a continuous solution.
 \end{itemize}
 
 \subsection{Connection to Dynamical Systems}
@@ -213,15 +234,15 @@ The functional equation $f(f(x)) = x^2 + x + 1$ opens several avenues for furthe
 The functional equation can be viewed through the lens of discrete dynamical systems:
 \begin{itemize}
     \item The iteration $f^{(n)}(x) = \underbrace{f(f(\cdots f}_{n \text{ times}}(x)\cdots))$ generates an orbit
-    \item Fixed points satisfy $f(x) = x$, which would require $x = x^2 + x + 1$ or $x^2 = 1$, giving $x = \pm 1$
-    \item Periodic points of period 2 satisfy $f(f(x)) = x$, which would require $x = x^2 + x + 1$, a contradiction since $x^2 + x + 1 > x$ for $x > \phi$ where $\phi$ is the golden ratio
+    \item Fixed points satisfy $f(x) = x$, which combined with $f(f(x)) = x^2 - x + 1$ would require $x = x^2 - x + 1$ or $x^2 - 2x + 1 = 0$, giving $x = 1$ as the unique fixed point
+    \item The existence of the fixed point $x = 1$ is a key feature that makes this equation more tractable than $f(f(x)) = x^2 + x + 1$
 \end{itemize}
 
 \subsection{Complex Extension}
 
 Extending the domain to $f: \mathbb{C} \to \mathbb{C}$ might provide more structure:
 \begin{itemize}
-    \item The polynomial $x^2 + x + 1$ factors as $(x - \omega)(x - \overline{\omega})$ where $\omega = e^{2\pi i/3}$
+    \item The polynomial $x^2 - x + 1$ factors as $(x - \zeta)(x - \overline{\zeta})$ where $\zeta = \frac{1 + i\sqrt{3}}{2}$
     \item Complex dynamics and Julia sets may provide insights
     \item The functional equation might have natural solutions in terms of complex analytic functions
 \end{itemize}
@@ -256,10 +277,10 @@ For $f(f(x)) = x^2 - x + 1$ (the original problem had this, with discriminant $\
 
 Instead of $f \circ f$, consider:
 \[
-\underbrace{f \circ f \circ \cdots \circ f}_{n \text{ times}}(x) = x^2 + x + 1
+\underbrace{f \circ f \circ \cdots \circ f}_{n \text{ times}}(x) = x^2 - x + 1
 \]
 
-For $n = 3$: $f(f(f(x))) = x^2 + x + 1$
+For $n = 3$: $f(f(f(x))) = x^2 - x + 1$
 
 This creates a hierarchy of increasingly complex functional equations.
 
@@ -267,25 +288,63 @@ This creates a hierarchy of increasingly complex functional equations.
 
 Consider simultaneous equations:
 \begin{align}
-f(g(x)) &= x^2 + x + 1 \\
-g(f(x)) &= x^2 - x + 1
+f(g(x)) &= x^2 + 1 \\
+g(f(x)) &= x^2 - 1
 \end{align}
 
-This extends the problem to finding pairs of functions rather than a single function.
+This extends the problem to finding pairs of functions rather than a single function. Unlike the system with $x^2 - x + 1$ and $x^2 + x + 1$ (which has no real solutions due to the composition constraint $g(1)^2 = -1$), this modified system avoids such contradictions.
+
+\subsubsection{Analysis of the System}
+
+Applying $g$ to the first equation:
+\[
+g(f(g(x))) = g(x^2 + 1)
+\]
+
+Substituting $y = g(x)$ in the second equation:
+\[
+g(f(g(x))) = g(x)^2 - 1
+\]
+
+Therefore:
+\begin{equation}
+g(x^2 + 1) = g(x)^2 - 1 \label{eq:gsystem}
+\end{equation}
+
+Similarly, applying $f$ to the second equation and substituting $z = f(x)$ in the first:
+\begin{equation}
+f(x^2 - 1) = f(x)^2 + 1 \label{eq:fsystem}
+\end{equation}
+
+\textbf{Testing specific values:}
+
+For $x = 0$ in equation~\eqref{eq:gsystem}:
+\[
+g(1) = g(0)^2 - 1
+\]
+
+For $x = 1$ in equation~\eqref{eq:gsystem}:
+\[
+g(2) = g(1)^2 - 1
+\]
+
+Unlike the impossible constraint $g(1)^2 = -1$ from the original system, these equations are solvable. For example, if $g(0) = 1$, then $g(1) = 0$ and $g(2) = -1$, which are all real values.
+
+The existence of solutions to this system remains an open problem requiring deeper investigation into the consistency of these functional constraints.
 
 % --- CONCLUSION ---
 \section{Conclusion}
 
-The functional equation $f(f(x)) = x^2 + x + 1$ represents a rich mathematical problem connecting several areas:
+The functional equation $f(f(x)) = x^2 - x + 1$ represents a rich mathematical problem connecting several areas:
 
 \begin{itemize}
     \item \textbf{Algebraic manipulation:} Systematic substitution and solving equations reveals constraints on $f$
-    \item \textbf{Number theory:} The polynomial $x^2 + x + 1$ is connected to cyclotomic polynomials and roots of unity
-    \item \textbf{Dynamical systems:} Iteration and composition of functions create complex behavior
+    \item \textbf{Number theory:} The polynomial $x^2 - x + 1$ is related to sixth roots of unity
+    \item \textbf{Dynamical systems:} Iteration and composition of functions create complex behavior, with $x = 1$ as a fixed point
     \item \textbf{Complex analysis:} Extension to complex domains may provide additional structure
 \end{itemize}
 
-While finding an explicit closed-form solution for $f$ over all real numbers remains challenging, the analysis demonstrates that such functions, if they exist, must satisfy specific constraints. The value $f(0) = 1$ emerged from our derivation as a consistent solution to the constraints.
+While finding an explicit closed-form solution for $f$ over all real numbers remains challenging, the analysis demonstrates that such functions, if they exist, must satisfy specific constraints. The value $f(0) = 1$ emerged uniquely from our derivation, with the key insight being that $f(1) = 1$ forms a fixed point.
 
 This problem illustrates that functional equations can be significantly more challenging than ordinary algebraic equations, often requiring creative approaches and deep insights into the structure of functions and their compositions.
 
