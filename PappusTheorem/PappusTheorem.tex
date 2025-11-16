@@ -378,27 +378,6 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         \node[point, label=below:$E$] (E) at (-2.5, -1.2) {};
         \node[point, label=below:$F$] (F) at (2.5, -1.2) {};
         
-        % Hexagon sides
-        \draw[green!70!black, name path=AB] (A) -- (B);
-        \draw[green!70!black, name path=DE] (D) -- (E);
-        \draw[blue, name path=BC] (B) -- (C);
-        \draw[blue, name path=EF] (E) -- (F);
-        \draw[magenta, name path=CD] (C) -- (D);
-        \draw[magenta, name path=FA] (F) -- (A);
-        
-        % Find intersections
-        \path[name intersections={of=AB and DE, by=X}];
-        \path[name intersections={of=BC and EF, by=Y}];
-        \path[name intersections={of=CD and FA, by=Z}];
-        
-        % Draw intersection points
-        \node[point, label=left:$X$] at (X) {};
-        \node[point, label=right:$Y$] at (Y) {};
-        \node[point, label=right:$Z$] at (Z) {};
-        
-        % Draw Pascal line
-        \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
-        
         \node[below] at (0, -3) {(a) Ellipse};
     \end{tikzpicture}
     \hfill
@@ -416,27 +395,6 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         \node[point, label=right:$D$] (D) at (1.5, -1.325) {};
         \node[point, label=right:$E$] (E) at (2, -0.8) {};
         \node[point, label=above:$F$] (F) at (1, -1.7) {};
-        
-        % Hexagon sides
-        \draw[green!70!black, name path=AB] (A) -- (B);
-        \draw[green!70!black, name path=DE] (D) -- (E);
-        \draw[blue, name path=BC] (B) -- (C);
-        \draw[blue, name path=EF] (E) -- (F);
-        \draw[magenta, name path=CD] (C) -- (D);
-        \draw[magenta, name path=FA] (F) -- (A);
-        
-        % Find intersections
-        \path[name intersections={of=AB and DE, by=X}];
-        \path[name intersections={of=BC and EF, by=Y}];
-        \path[name intersections={of=CD and FA, by=Z}];
-        
-        % Draw intersection points
-        \node[point, label=left:$X$] at (X) {};
-        \node[point, label=right:$Y$] at (Y) {};
-        \node[point, label=left:$Z$] at (Z) {};
-        
-        % Draw Pascal line
-        \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
         
         \node[below] at (0, -3) {(b) Parabola};
     \end{tikzpicture}
@@ -461,30 +419,9 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         \node[point, label=below:$E$] (E) at (2.5, {-0.7*sqrt(2.5*2.5 - 2.25)}) {};
         \node[point, label=left:$F$] (F) at (2.8, {-0.7*sqrt(2.8*2.8 - 2.25)}) {};
         
-        % Hexagon sides
-        \draw[green!70!black, name path=AB] (A) -- (B);
-        \draw[green!70!black, name path=DE] (D) -- (E);
-        \draw[blue, name path=BC] (B) -- (C);
-        \draw[blue, name path=EF] (E) -- (F);
-        \draw[magenta, name path=CD] (C) -- (D);
-        \draw[magenta, name path=FA] (F) -- (A);
-        
-        % Find intersections
-        \path[name intersections={of=AB and DE, by=X}];
-        \path[name intersections={of=BC and EF, by=Y}];
-        \path[name intersections={of=CD and FA, by=Z}];
-        
-        % Draw intersection points
-        \node[point, label=left:$X$] at (X) {};
-        \node[point, label=right:$Y$] at (Y) {};
-        \node[point, label=left:$Z$] at (Z) {};
-        
-        % Draw Pascal line
-        \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
-        
         \node[below] at (0, -3) {(c) Hyperbola};
     \end{tikzpicture}
-    \caption{Pascal's Theorem illustrated for (a) ellipse, (b) parabola, and (c) hyperbola. The red dashed line is the Pascal line.}
+    \caption{Six points $A, B, C, D, E, F$ on (a) ellipse, (b) parabola, and (c) hyperbola.}
 \end{figure}
 
 \begin{figure}[h!]
@@ -496,36 +433,38 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         % Circle
         \draw[thick, blue] (0,0) circle (2.5cm);
         
-        % Points on circle in order A-B-C-D-E-F (hexagon order)
-        % Arranged so lines extend outside the circle
-        \node[point, label=above:$A$] (A) at (60:2.5) {};
-        \node[point, label=above left:$B$] (B) at (120:2.5) {};
-        \node[point, label=left:$C$] (C) at (180:2.5) {};
-        \node[point, label=below left:$D$] (D) at (240:2.5) {};
-        \node[point, label=below:$E$] (E) at (300:2.5) {};
-        \node[point, label=right:$F$] (F) at (0:2.5) {};
+        % Points on circle in order around circle: A -> B -> C -> D -> E -> F -> A
+        % Hexagon order for Pascal's theorem: A-B-C-D-E-F
+        % Arranged as non-regular hexagon so opposite sides clearly intersect outside
+        % Angles chosen to ensure AB∩DE, BC∩EF, CD∩FA are all visible
+        \node[point, label=above:$A$] (A) at (10:2.5) {};   % 
+        \node[point, label=above right:$B$] (B) at (80:2.5) {};   % 
+        \node[point, label=above left:$C$] (C) at (140:2.5) {};  % 
+        \node[point, label=below left:$D$] (D) at (190:2.5) {};  % 
+        \node[point, label=below:$E$] (E) at (260:2.5) {};  % 
+        \node[point, label=below right:$F$] (F) at (310:2.5) {};  % 
         
         % Hexagon sides according to Pascal's theorem:
         % X = (AB) ∩ (DE), Y = (BC) ∩ (EF), Z = (CD) ∩ (FA)
-        % Extended well beyond circle so intersections occur outside
-        \draw[green!70!black, thick, name path=AB] ($(A)!-1.0!(B)$) -- ($(A)!2.0!(B)$);
-        \draw[green!70!black, thick, name path=DE] ($(D)!-1.0!(E)$) -- ($(D)!2.0!(E)$);
+        % Extended well beyond circle so intersections occur outside and are visible
+        \draw[green!70!black, thick, name path=AB] ($(A)!-2.0!(B)$) -- ($(A)!3.0!(B)$);
+        \draw[green!70!black, thick, name path=DE] ($(D)!-2.0!(E)$) -- ($(D)!3.0!(E)$);
         
-        \draw[blue, thick, name path=BC] ($(B)!-1.0!(C)$) -- ($(B)!2.0!(C)$);
-        \draw[blue, thick, name path=EF] ($(E)!-1.0!(F)$) -- ($(E)!2.0!(F)$);
+        \draw[blue, thick, name path=BC] ($(B)!-2.0!(C)$) -- ($(B)!3.0!(C)$);
+        \draw[blue, thick, name path=EF] ($(E)!-2.0!(F)$) -- ($(E)!3.0!(F)$);
         
-        \draw[magenta, thick, name path=CD] ($(C)!-1.0!(D)$) -- ($(C)!2.0!(D)$);
-        \draw[magenta, thick, name path=FA] ($(F)!-1.0!(A)$) -- ($(F)!2.0!(A)$);
+        \draw[magenta, thick, name path=CD] ($(C)!-2.0!(D)$) -- ($(C)!3.0!(D)$);
+        \draw[magenta, thick, name path=FA] ($(F)!-2.0!(A)$) -- ($(F)!3.0!(A)$);
         
         % Find intersections according to Pascal's theorem
         \path[name intersections={of=AB and DE, by=X}];
         \path[name intersections={of=BC and EF, by=Y}];
         \path[name intersections={of=CD and FA, by=Z}];
         
-        % Draw and label intersection points
-        \node[point, label=above left:$X$] at (X) {};
-        \node[point, label=below right:$Y$] at (Y) {};
-        \node[point, label=above right:$Z$] at (Z) {};
+        % Draw and label intersection points (X = AB∩DE, Y = BC∩EF, Z = CD∩FA)
+        \node[point, fill=red, label=above left:$X$] at (X) {};
+        \node[point, fill=red, label=below right:$Y$] at (Y) {};
+        \node[point, fill=red, label=above right:$Z$] at (Z) {};
         
         % Draw Pascal line
         \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
@@ -540,36 +479,38 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         % Circle
         \draw[thick, blue] (0,0) circle (2.5cm);
         
-        % Points on circle in order A-B-C-D-E-F (hexagon order)
-        % Arranged so lines intersect inside the circle
-        \node[point, label=above:$A$] (A) at (30:2.5) {};
-        \node[point, label=above left:$B$] (B) at (90:2.5) {};
-        \node[point, label=left:$C$] (C) at (150:2.5) {};
-        \node[point, label=below left:$D$] (D) at (210:2.5) {};
-        \node[point, label=below:$E$] (E) at (270:2.5) {};
-        \node[point, label=right:$F$] (F) at (330:2.5) {};
+        % Points on circle in order around circle: A -> E -> C -> F -> B -> D -> A
+        % Hexagon order for Pascal's theorem: A-B-C-D-E-F
+        % This arrangement ensures intersections X, Y, Z are inside the circle
+        % Spacing: 60° apart (360°/6)
+        \node[point, label=above:$A$] (A) at (30:2.5) {};   % First: 30°
+        \node[point, label=above:$E$] (E) at (90:2.5) {};   % Second: 90° (upper)
+        \node[point, label=above left:$C$] (C) at (150:2.5) {};  % Third: 150° (upper)
+        \node[point, label=below:$F$] (F) at (210:2.5) {};  % Fourth: 210° (lower)
+        \node[point, label=below right:$B$] (B) at (270:2.5) {};  % Fifth: 270° (lower)
+        \node[point, label=below left:$D$] (D) at (330:2.5) {};  % Sixth: 330° (lower)
         
         % Hexagon sides according to Pascal's theorem:
         % X = (AB) ∩ (DE), Y = (BC) ∩ (EF), Z = (CD) ∩ (FA)
         % Extended slightly so intersections are clearly visible inside the circle
-        \draw[green!70!black, thick, name path=AB] ($(A)!-0.2!(B)$) -- ($(A)!1.2!(B)$);
-        \draw[green!70!black, thick, name path=DE] ($(D)!-0.2!(E)$) -- ($(D)!1.2!(E)$);
+        \draw[green!70!black, thick, name path=AB] ($(A)!-0.3!(B)$) -- ($(A)!1.3!(B)$);
+        \draw[green!70!black, thick, name path=DE] ($(D)!-0.3!(E)$) -- ($(D)!1.3!(E)$);
         
-        \draw[blue, thick, name path=BC] ($(B)!-0.2!(C)$) -- ($(B)!1.2!(C)$);
-        \draw[blue, thick, name path=EF] ($(E)!-0.2!(F)$) -- ($(E)!1.2!(F)$);
+        \draw[blue, thick, name path=BC] ($(B)!-0.3!(C)$) -- ($(B)!1.3!(C)$);
+        \draw[blue, thick, name path=EF] ($(E)!-0.3!(F)$) -- ($(E)!1.3!(F)$);
         
-        \draw[magenta, thick, name path=CD] ($(C)!-0.2!(D)$) -- ($(C)!1.2!(D)$);
-        \draw[magenta, thick, name path=FA] ($(F)!-0.2!(A)$) -- ($(F)!1.2!(A)$);
+        \draw[magenta, thick, name path=CD] ($(C)!-0.3!(D)$) -- ($(C)!1.3!(D)$);
+        \draw[magenta, thick, name path=FA] ($(F)!-0.3!(A)$) -- ($(F)!1.3!(A)$);
         
         % Find intersections according to Pascal's theorem
         \path[name intersections={of=AB and DE, by=X}];
         \path[name intersections={of=BC and EF, by=Y}];
         \path[name intersections={of=CD and FA, by=Z}];
         
-        % Draw and label intersection points
-        \node[point, label=above:$X$] at (X) {};
-        \node[point, label=below:$Y$] at (Y) {};
-        \node[point, label=right:$Z$] at (Z) {};
+        % Draw and label intersection points (X = AB∩DE, Y = BC∩EF, Z = CD∩FA)
+        \node[point, fill=red, label=above:$X$] at (X) {};
+        \node[point, fill=red, label=below:$Y$] at (Y) {};
+        \node[point, fill=red, label=right:$Z$] at (Z) {};
         
         % Draw Pascal line
         \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
