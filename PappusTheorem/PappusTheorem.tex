@@ -21,7 +21,7 @@
 \newtheorem*{solution}{Solution}
 
 \author{Vu Hung Nguyen}
-\title{Pappus's Theorem}
+\title{Pappus's hexagon theorem}
 \date{}
 
 \begin{document}
@@ -30,13 +30,13 @@
 
 \section{Overview}
 
-This document presents Pappus's Theorem, one of the fundamental results in projective geometry. We explore its statement, historical context, and provide proofs using both affine transformations and the elegant connection to Pascal's Theorem. The document is designed for olympiad-level high school students and advanced mathematics enthusiasts who wish to understand this beautiful geometric result and its deep connections to projective geometry.
+This document presents Pappus's hexagon theorem, one of the fundamental results in projective geometry. We explore its statement, historical context, and provide proofs using both affine transformations and the elegant connection to Pascal's Theorem. The document is designed for olympiad-level high school students and advanced mathematics enthusiasts who wish to understand this beautiful geometric result and its deep connections to projective geometry.
 
 \section{Problem Statements}
 
-\subsection{Pappus's Theorem}
+\subsection{Pappus's hexagon theorem}
 
-\begin{theorem}[Pappus's Theorem]
+\begin{theorem}[Pappus's hexagon theorem]
 Let $A, B, C$ be three distinct points on a line $g$, and let $a, b, c$ be three distinct points on another line $h$.
 
 Consider the intersection points:
@@ -102,12 +102,12 @@ Then the points $X, Y, \text{ and } Z$ are collinear. This common line is called
             node[midway, below, yshift=-2mm] {$u$ (Pappus line)};
 
     \end{tikzpicture}
-    \caption{A TikZ diagram illustrating Pappus's Theorem.}
+    \caption{A diagram illustrating Pappus's hexagon theorem.}
 \end{figure}
 
 \subsection{Special Case: Parallel Lines}
 
-When the lines $g$ and $h$ are parallel, Pappus's Theorem still holds. In this case, the two lines never intersect, but the theorem remains valid in the affine plane. The Pappus line $u$ will be parallel to both $g$ and $h$ in this configuration.
+When the lines $g$ and $h$ are parallel, Pappus's hexagon theorem still holds. In this case, the two lines never intersect, but the theorem remains valid in the affine plane. The Pappus line $u$ will be parallel to both $g$ and $h$ in this configuration.
 
 \begin{figure}[h!]
     \centering
@@ -159,12 +159,12 @@ When the lines $g$ and $h$ are parallel, Pappus's Theorem still holds. In this c
             node[midway, left, xshift=-2mm] {$u$};
 
     \end{tikzpicture}
-    \caption{Pappus's Theorem when lines $g$ and $h$ are parallel.}
+    \caption{Pappus's hexagon theorem when lines $g$ and $h$ are parallel.}
 \end{figure}
 
 \subsection{Special Case: Perpendicular Lines}
 
-When the lines $g$ and $h$ are perpendicular, Pappus's Theorem provides a particularly elegant configuration. The perpendicular case can be transformed to the coordinate axes, making calculations more straightforward.
+When the lines $g$ and $h$ are perpendicular, Pappus's hexagon theorem provides a particularly elegant configuration. The perpendicular case can be transformed to the coordinate axes, making calculations more straightforward.
 
 \begin{figure}[h!]
     \centering
@@ -216,14 +216,14 @@ When the lines $g$ and $h$ are perpendicular, Pappus's Theorem provides a partic
             node[midway, above, yshift=2mm] {$u$};
 
     \end{tikzpicture}
-    \caption{Pappus's Theorem when lines $g$ and $h$ are perpendicular.}
+    \caption{Pappus's hexagon theorem when lines $g$ and $h$ are perpendicular.}
 \end{figure}
 
-\section{History of Pappus's Theorem and Pappus}
+\section{History of Pappus's hexagon theorem and Pappus}
 
 Pappus of Alexandria (c. 290--350 CE) was one of the last great mathematicians of antiquity. He lived in Alexandria, Egypt, during the later period of the Roman Empire. Pappus is best known for his work \textit{Collection} (or \textit{Synagoge}), a comprehensive compilation of Greek mathematical knowledge that preserved many results that would otherwise have been lost.
 
-Pappus's Theorem, also known as the Pappus hexagon theorem, is one of the fundamental results in projective geometry. It was stated by Pappus in his \textit{Collection}, though the modern formulation and proof techniques have evolved significantly since then.
+Pappus's hexagon theorem is one of the fundamental results in projective geometry. It was stated by Pappus in his \textit{Collection}, though the modern formulation and proof techniques have evolved significantly since then.
 
 The theorem holds a special place in the history of mathematics because:
 \begin{itemize}
@@ -258,11 +258,13 @@ The key property we use is that affine transformations preserve collinearity, wh
 \subsection{Projective Geometry}
 Projective geometry extends Euclidean geometry by adding ``points at infinity'' and treating parallel lines as meeting at infinity. This unification allows many theorems to be stated more elegantly. The projective plane can be thought of as the Euclidean plane plus a ``line at infinity.''
 
-In projective geometry, conic sections (circles, ellipses, parabolas, hyperbolas) are unified, and degenerate cases like two intersecting lines are also considered conics. This perspective is crucial for understanding the connection between Pappus's Theorem and Pascal's Theorem.
+In projective geometry, conic sections (circles, ellipses, parabolas, hyperbolas) are unified, and degenerate cases like two intersecting lines are also considered conics. This perspective is crucial for understanding the connection between Pappus's hexagon theorem and Pascal's Theorem.
 
 \section{Solutions}
 
-We present two approaches to proving Pappus's Theorem: one using affine transformations (more computational) and one using Pascal's Theorem (more elegant and conceptual).
+We present two approaches to proving Pappus's hexagon theorem: one using affine transformations (more computational) and one using Pascal's Theorem (more elegant and conceptual).
+
+\noindent\textbf{Note:} Additional proofs of Pappus's hexagon theorem, including coordinate geometry proofs and other approaches, can be found on Wikipedia: \href{https://en.wikipedia.org/wiki/Pappus\%27s_hexagon_theorem}{https://en.wikipedia.org/wiki/Pappus's hexagon theorem}.
 
 \subsection{Proof Using Affine Transformations}
 
@@ -305,7 +307,7 @@ By applying an affine transformation, we reduce the general case to a coordinate
 
 \subsection{Proof Using Pascal's Theorem}
 
-A more elegant proof recognizes that Pappus's Theorem is a special case of Pascal's Theorem. This connection reveals the deeper structure of projective geometry.
+A more elegant proof recognizes that Pappus's hexagon theorem is a special case of Pascal's Theorem. This connection reveals the deeper structure of projective geometry.
 
 \subsubsection{The Connection}
 
@@ -324,10 +326,10 @@ Pascal's Theorem (discussed in detail in the next section) states that for any h
     \item Opposite sides $(Ca)$ and $(cA)$ intersect at $Y$
 \end{itemize}
 
-By Pascal's Theorem, $X, Y, Z$ are collinear---exactly the statement of Pappus's Theorem!
+By Pascal's Theorem, $X, Y, Z$ are collinear---exactly the statement of Pappus's hexagon theorem!
 
 \begin{solution}[Pascal's Theorem Proof]
-Pappus's Theorem follows immediately from Pascal's Theorem by recognizing that two lines form a degenerate conic. The hexagon $A-b-C-a-B-c$ inscribed in this degenerate conic has opposite sides intersecting at $X, Y, Z$, which must be collinear by Pascal's Theorem.
+Pappus's hexagon theorem follows immediately from Pascal's Theorem by recognizing that two lines form a degenerate conic. The hexagon $A-b-C-a-B-c$ inscribed in this degenerate conic has opposite sides intersecting at $X, Y, Z$, which must be collinear by Pascal's Theorem.
 \end{solution}
 
 \section{Pascal's Theorem}
@@ -353,7 +355,9 @@ A \textbf{conic section} is a curve obtained by intersecting a cone with a plane
     \item \textbf{Hyperbola}: An open curve with two branches
 \end{itemize}
 
-In projective geometry, these are unified: all conics are projectively equivalent. Additionally, \textbf{degenerate conics}---pairs of lines (intersecting or parallel)---are also considered. This is why Pappus's Theorem is a special case of Pascal's Theorem.
+In projective geometry, these are unified: all conics are projectively equivalent. 
+Additionally, \textbf{degenerate conics}---pairs of lines (intersecting or parallel)---are also considered. 
+This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
 
 \subsection{Illustrations of Pascal's Theorem}
 
@@ -441,19 +445,21 @@ In projective geometry, these are unified: all conics are projectively equivalen
         point/.style={circle, fill, inner sep=1.5pt},
         scale=0.8
     ]
-        % Hyperbola: x^2/4 - y^2/2 = 1, right branch: y = ±0.7*sqrt(x^2 - 2.25) for |x| >= 1.5
-        \draw[thick, blue, domain=1.5:3, samples=100] plot (\x, {0.7*sqrt(\x*\x - 2.25)});
-        \draw[thick, blue, domain=1.5:3, samples=100] plot (\x, {-0.7*sqrt(\x*\x - 2.25)});
-        \draw[thick, blue, domain=-3:-1.5, samples=100] plot (\x, {0.7*sqrt(\x*\x - 2.25)});
-        \draw[thick, blue, domain=-3:-1.5, samples=100] plot (\x, {-0.7*sqrt(\x*\x - 2.25)});
+        % Hyperbola: x^2/2.25 - y^2/1 = 1, so y = ±(1/1.5)*sqrt(x^2 - 2.25) for |x| >= 1.5
+        % Using coefficient 0.7 for better visual scaling
+        \draw[thick, blue, domain=1.5:3.5, samples=100] plot (\x, {0.7*sqrt(\x*\x - 2.25)});
+        \draw[thick, blue, domain=1.5:3.5, samples=100] plot (\x, {-0.7*sqrt(\x*\x - 2.25)});
+        \draw[thick, blue, domain=-3.5:-1.5, samples=100] plot (\x, {0.7*sqrt(\x*\x - 2.25)});
+        \draw[thick, blue, domain=-3.5:-1.5, samples=100] plot (\x, {-0.7*sqrt(\x*\x - 2.25)});
         
-        % Points on hyperbola (right branch)
-        \node[point, label=above:$A$] (A) at (2.2, 1.2) {};
-        \node[point, label=above:$B$] (B) at (2.5, 0.6) {};
-        \node[point, label=right:$C$] (C) at (2.8, 0) {};
-        \node[point, label=below:$D$] (D) at (2.5, -0.6) {};
-        \node[point, label=below:$E$] (E) at (2.2, -1.2) {};
-        \node[point, label=left:$F$] (F) at (1.8, 0) {};
+        % Points on hyperbola (right branch) - calculated to lie exactly on the curve
+        % For hyperbola y = ±0.7*sqrt(x^2 - 2.25), choosing x values and computing y
+        \node[point, label=above:$A$] (A) at (2.8, {0.7*sqrt(2.8*2.8 - 2.25)}) {};
+        \node[point, label=above:$B$] (B) at (2.5, {0.7*sqrt(2.5*2.5 - 2.25)}) {};
+        \node[point, label=right:$C$] (C) at (2.0, {0.7*sqrt(2.0*2.0 - 2.25)}) {};
+        \node[point, label=below:$D$] (D) at (2.0, {-0.7*sqrt(2.0*2.0 - 2.25)}) {};
+        \node[point, label=below:$E$] (E) at (2.5, {-0.7*sqrt(2.5*2.5 - 2.25)}) {};
+        \node[point, label=left:$F$] (F) at (2.8, {-0.7*sqrt(2.8*2.8 - 2.25)}) {};
         
         % Hexagon sides
         \draw[green!70!black, name path=AB] (A) -- (B);
@@ -479,6 +485,160 @@ In projective geometry, these are unified: all conics are projectively equivalen
         \node[below] at (0, -3) {(c) Hyperbola};
     \end{tikzpicture}
     \caption{Pascal's Theorem illustrated for (a) ellipse, (b) parabola, and (c) hyperbola. The red dashed line is the Pascal line.}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[
+        point/.style={circle, fill, inner sep=1.5pt},
+        scale=0.7
+    ]
+        % Circle
+        \draw[thick, blue] (0,0) circle (2.5cm);
+        
+        % Points on circle in order A-B-C-D-E-F (hexagon order)
+        % Arranged so lines extend outside the circle
+        \node[point, label=above:$A$] (A) at (60:2.5) {};
+        \node[point, label=above left:$B$] (B) at (120:2.5) {};
+        \node[point, label=left:$C$] (C) at (180:2.5) {};
+        \node[point, label=below left:$D$] (D) at (240:2.5) {};
+        \node[point, label=below:$E$] (E) at (300:2.5) {};
+        \node[point, label=right:$F$] (F) at (0:2.5) {};
+        
+        % Hexagon sides according to Pascal's theorem:
+        % X = (AB) ∩ (DE), Y = (BC) ∩ (EF), Z = (CD) ∩ (FA)
+        % Extended well beyond circle so intersections occur outside
+        \draw[green!70!black, thick, name path=AB] ($(A)!-1.0!(B)$) -- ($(A)!2.0!(B)$);
+        \draw[green!70!black, thick, name path=DE] ($(D)!-1.0!(E)$) -- ($(D)!2.0!(E)$);
+        
+        \draw[blue, thick, name path=BC] ($(B)!-1.0!(C)$) -- ($(B)!2.0!(C)$);
+        \draw[blue, thick, name path=EF] ($(E)!-1.0!(F)$) -- ($(E)!2.0!(F)$);
+        
+        \draw[magenta, thick, name path=CD] ($(C)!-1.0!(D)$) -- ($(C)!2.0!(D)$);
+        \draw[magenta, thick, name path=FA] ($(F)!-1.0!(A)$) -- ($(F)!2.0!(A)$);
+        
+        % Find intersections according to Pascal's theorem
+        \path[name intersections={of=AB and DE, by=X}];
+        \path[name intersections={of=BC and EF, by=Y}];
+        \path[name intersections={of=CD and FA, by=Z}];
+        
+        % Draw and label intersection points
+        \node[point, label=above left:$X$] at (X) {};
+        \node[point, label=below right:$Y$] at (Y) {};
+        \node[point, label=above right:$Z$] at (Z) {};
+        
+        % Draw Pascal line
+        \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
+        
+        \node[below] at (0, -4.5) {(a1) Circle with lines cutting outside};
+    \end{tikzpicture}
+    \hfill
+    \begin{tikzpicture}[
+        point/.style={circle, fill, inner sep=1.5pt},
+        scale=0.7
+    ]
+        % Circle
+        \draw[thick, blue] (0,0) circle (2.5cm);
+        
+        % Points on circle in order A-B-C-D-E-F (hexagon order)
+        % Arranged so lines intersect inside the circle
+        \node[point, label=above:$A$] (A) at (30:2.5) {};
+        \node[point, label=above left:$B$] (B) at (90:2.5) {};
+        \node[point, label=left:$C$] (C) at (150:2.5) {};
+        \node[point, label=below left:$D$] (D) at (210:2.5) {};
+        \node[point, label=below:$E$] (E) at (270:2.5) {};
+        \node[point, label=right:$F$] (F) at (330:2.5) {};
+        
+        % Hexagon sides according to Pascal's theorem:
+        % X = (AB) ∩ (DE), Y = (BC) ∩ (EF), Z = (CD) ∩ (FA)
+        % Extended slightly so intersections are clearly visible inside the circle
+        \draw[green!70!black, thick, name path=AB] ($(A)!-0.2!(B)$) -- ($(A)!1.2!(B)$);
+        \draw[green!70!black, thick, name path=DE] ($(D)!-0.2!(E)$) -- ($(D)!1.2!(E)$);
+        
+        \draw[blue, thick, name path=BC] ($(B)!-0.2!(C)$) -- ($(B)!1.2!(C)$);
+        \draw[blue, thick, name path=EF] ($(E)!-0.2!(F)$) -- ($(E)!1.2!(F)$);
+        
+        \draw[magenta, thick, name path=CD] ($(C)!-0.2!(D)$) -- ($(C)!1.2!(D)$);
+        \draw[magenta, thick, name path=FA] ($(F)!-0.2!(A)$) -- ($(F)!1.2!(A)$);
+        
+        % Find intersections according to Pascal's theorem
+        \path[name intersections={of=AB and DE, by=X}];
+        \path[name intersections={of=BC and EF, by=Y}];
+        \path[name intersections={of=CD and FA, by=Z}];
+        
+        % Draw and label intersection points
+        \node[point, label=above:$X$] at (X) {};
+        \node[point, label=below:$Y$] at (Y) {};
+        \node[point, label=right:$Z$] at (Z) {};
+        
+        % Draw Pascal line
+        \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
+        
+        \node[below] at (0, -4.5) {(a2) Circle with lines cutting inside};
+    \end{tikzpicture}
+    \caption{Pascal's Theorem for a circle: (a1) when lines extend outside the circle, (a2) when lines intersect inside the circle. The intersection points are defined as $X = (AB) \cap (DE)$, $Y = (BC) \cap (EF)$, and $Z = (CD) \cap (FA)$. The red dashed line is the Pascal line.}
+\end{figure}
+
+\subsection{Formation of Conic Sections}
+
+Conic sections are curves formed by the intersection of a plane with a double cone (two cones joined at their apex). The type of conic section depends on the angle at which the plane intersects the cone.
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[
+        scale=0.85,
+        every node/.style={font=\small}
+    ]
+        % Define cone parameters
+        \def\coneHeight{4.5}
+        \def\coneRadius{1.8}
+        \def\apexY{0}
+        
+        % Draw double cone (simplified 2D representation)
+        % Upper cone
+        \filldraw[fill=yellow!30, draw=black, thick, opacity=0.7] 
+            (0, \apexY) -- (-\coneRadius, \apexY + \coneHeight) -- 
+            (\coneRadius, \apexY + \coneHeight) -- cycle;
+        % Lower cone
+        \filldraw[fill=yellow!30, draw=black, thick, opacity=0.7] 
+            (0, \apexY) -- (-\coneRadius, \apexY - \coneHeight) -- 
+            (\coneRadius, \apexY - \coneHeight) -- cycle;
+        
+        % Draw axis
+        \draw[dashed, blue!70!black, thick] (0, \apexY - \coneHeight - 0.6) -- (0, \apexY + \coneHeight + 0.6);
+        \node[blue!70!black, font=\scriptsize] at (0.4, \apexY + \coneHeight + 0.4) {axis};
+        \node[blue!70!black, font=\scriptsize] at (0.3, \apexY + 0.2) {apex};
+        \filldraw[blue!70!black] (0, \apexY) circle (2.5pt);
+        
+        % Circle: horizontal plane (perpendicular to axis)
+        \draw[thick, blue, line width=1.5pt] (-1.3, \apexY - 2.8) -- (1.3, \apexY - 2.8);
+        \draw[thick, blue, line width=1.5pt] (0, \apexY - 2.8) ellipse (1.3cm and 0.35cm);
+        \node[blue, below, font=\small] at (1.6, \apexY - 2.8) {\textbf{circle}};
+        
+        % Ellipse: angled plane (not parallel to base, not through apex)
+        \draw[thick, green!70!black, line width=1.5pt] (-1.6, \apexY - 1.5) -- (1.6, \apexY + 1.0);
+        \draw[thick, green!70!black, line width=1.5pt] (0, \apexY - 0.25) ellipse (1.6cm and 0.7cm);
+        \node[green!70!black, right, font=\small] at (1.8, \apexY + 0.4) {\textbf{ellipse}};
+        
+        % Parabola: plane parallel to one side of cone
+        \draw[thick, red!70!black, line width=1.5pt] (-2.0, \apexY + 1.8) -- (0.6, \apexY + 3.8);
+        % Draw parabola curve (opening upward)
+        \draw[thick, red!70!black, line width=1.5pt, domain=-1.3:0.4, samples=100] 
+            plot (\x, {2.8 + 0.9*(\x + 0.45)^2});
+        \node[red!70!black, right, font=\small] at (0.8, \apexY + 3.0) {\textbf{parabola}};
+        
+        % Hyperbola: vertical plane cutting both cones
+        \draw[thick, magenta!70!black, line width=1.5pt] (0.9, \apexY - \coneHeight) -- (0.9, \apexY + \coneHeight);
+        % Upper branch (right side)
+        \draw[thick, magenta!70!black, line width=1.5pt, domain=0.9:2.4, samples=100] 
+            plot (\x, {\apexY + 1.6 + 0.7*sqrt((\x - 0.9)^2)});
+        % Lower branch (right side)
+        \draw[thick, magenta!70!black, line width=1.5pt, domain=0.9:2.4, samples=100] 
+            plot (\x, {\apexY - 1.6 - 0.7*sqrt((\x - 0.9)^2)});
+        \node[magenta!70!black, right, font=\small] at (2.6, \apexY + 0.6) {\textbf{hyperbola}};
+        
+    \end{tikzpicture}
+    \caption{Formation of conic sections by intersecting a double cone with planes at different angles. A \textbf{circle} is formed by a horizontal plane (perpendicular to the axis), an \textbf{ellipse} by an angled plane (not parallel to the base and not through the apex), a \textbf{parabola} by a plane parallel to one side of the cone, and a \textbf{hyperbola} by a vertical plane cutting both cones.}
 \end{figure}
 
 \subsection{High-Level Proof of Pascal's Theorem}
@@ -512,43 +672,47 @@ The most elegant modern proof uses the theory of cubic curves. The six points on
 
 \subsubsection{Connection to Pappus}
 
-As we've seen, Pappus's Theorem is the special case where the conic degenerates to two lines. This demonstrates the power of projective geometry: by working in the projective plane and considering degenerate cases, we unify many seemingly different theorems.
+As we've seen, Pappus's hexagon theorem is the special case where the conic degenerates to two lines. This demonstrates the power of projective geometry: by working in the projective plane and considering degenerate cases, we unify many seemingly different theorems.
 
 \section{Future Works and Open Problems}
 
-Several directions for further exploration emerge from Pappus's Theorem:
+Several directions for further exploration emerge from Pappus's hexagon theorem:
 
 \begin{enumerate}
-    \item \textbf{Generalizations}: Pappus's Theorem can be generalized to configurations with more points and lines. The study of such configurations leads to matroid theory and combinatorial geometry.
+    \item \textbf{Generalizations}: Pappus's hexagon theorem can be generalized to configurations with more points and lines. The study of such configurations leads to matroid theory and combinatorial geometry.
     
     \item \textbf{Computational Geometry}: Efficient algorithms for verifying Pappus configurations and computing Pappus lines have applications in computer graphics and geometric modeling.
     
-    \item \textbf{Finite Projective Planes}: Pappus's Theorem holds in finite projective planes as well. The study of finite geometries and their automorphism groups is an active area of research.
+    \item \textbf{Finite Projective Planes}: Pappus's hexagon theorem holds in finite projective planes as well. The study of finite geometries and their automorphism groups is an active area of research.
     
     \item \textbf{Algebraic Proofs}: While we've presented geometric and projective proofs, purely algebraic proofs using coordinate geometry and elimination theory offer computational perspectives.
     
-    \item \textbf{Applications in Computer Vision}: Projective geometry, including results like Pappus's Theorem, has applications in camera calibration and 3D reconstruction from images.
+    \item \textbf{Applications in Computer Vision}: Projective geometry, including results like Pappus's hexagon theorem, has applications in camera calibration and 3D reconstruction from images.
     
-    \item \textbf{Connection to Other Theorems}: Exploring the relationships between Pappus's Theorem, Desargues's Theorem, and other fundamental results in projective geometry reveals deep structural connections.
+    \item \textbf{Connection to Other Theorems}: Exploring relationships between Pappus's hexagon theorem, Desargues's Theorem, and other fundamental results in projective geometry reveals deep structural connections.
     
     \item \textbf{Constructive Proofs}: Developing constructive (algorithmic) proofs that actually compute the Pappus line from given points has computational interest.
+    
+    \item \textbf{Cayley–Bacharach Theorem}: This fundamental result in algebraic geometry states that if two cubic curves intersect in nine distinct points, then any cubic curve passing through eight of these points must also pass through the ninth. This theorem generalizes Pascal's Theorem and provides a deeper understanding of the intersection properties of curves in the projective plane. Exploring the connections between Pappus's hexagon theorem and the Cayley–Bacharach Theorem offers insights into the unified structure of projective geometry.
+    
+    \item \textbf{Bézout's Theorem}: This cornerstone theorem in algebraic geometry asserts that two projective plane curves of degrees $d_1$ and $d_2$ without a common component intersect in exactly $d_1 \times d_2$ points, counted with multiplicity. Bézout's Theorem provides the theoretical foundation for understanding intersection multiplicities and is essential for proving many results in algebraic geometry, including those related to conic sections and their degenerations.
 \end{enumerate}
 
 \section{Conclusions}
 
-Pappus's Theorem stands as a cornerstone of projective geometry, connecting classical Euclidean geometry to modern algebraic geometry. We have seen:
+Pappus's hexagon theorem stands as a cornerstone of projective geometry, connecting classical Euclidean geometry to modern algebraic geometry. We have seen:
 
 \begin{itemize}
     \item The theorem's elegant statement about collinearity of intersection points
     \item Its historical significance dating back to Pappus of Alexandria
     \item Two proof approaches: the computational affine transformation method and the elegant connection to Pascal's Theorem
-    \item The deep relationship between Pappus's Theorem and Pascal's Theorem through the concept of degenerate conics
+    \item The deep relationship between Pappus's hexagon theorem and Pascal's Theorem through the concept of degenerate conics
     \item The power of projective geometry in unifying seemingly different geometric phenomena
 \end{itemize}
 
-The theorem demonstrates that sometimes the most elegant proofs come from recognizing that a specific result is a special case of a more general theorem. By viewing two lines as a degenerate conic, Pappus's Theorem becomes an immediate consequence of Pascal's Theorem, revealing the beautiful structure underlying projective geometry.
+The theorem demonstrates that sometimes the most elegant proofs come from recognizing that a specific result is a special case of a more general theorem. By viewing two lines as a degenerate conic, Pappus's hexagon theorem becomes an immediate consequence of Pascal's Theorem, revealing the beautiful structure underlying projective geometry.
 
-For olympiad students, mastering Pappus's Theorem provides:
+For olympiad students, mastering Pappus's hexagon theorem provides:
 \begin{itemize}
     \item A deeper understanding of projective geometry
     \item Experience with transformation techniques (affine transformations)
