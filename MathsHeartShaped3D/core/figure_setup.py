@@ -35,6 +35,9 @@ def setup_figure(resolution='medium', dpi=100, show_axes=True, show_formulas=Tru
     fig = plt.figure(figsize=figsize, dpi=dpi, facecolor='black')
     ax = fig.add_subplot(111, projection='3d', facecolor='black')
     
+    # Remove all margins to fill entire screen
+    plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
+    
     # Set initial view angle
     ax.view_init(elev=20, azim=45)
     
