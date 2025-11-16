@@ -93,14 +93,59 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     print(f"Setting up figure with resolution: {resolution}, DPI: {dpi}")
     fig, ax = setup_figure(resolution, dpi, show_axes, show_formulas, watermark)
     
-    # Generate second heart for H4 effect (dual hearts)
+    # Generate additional hearts for multi-heart effects
     x_heart2, y_heart2, z_heart2 = None, None, None
-    if effect == 'H4':
+    x_heart3, y_heart3, z_heart3 = None, None, None
+    x_heart4, y_heart4, z_heart4 = None, None, None
+    x_heart5, y_heart5, z_heart5 = None, None, None
+    scatter2 = None
+    scatter3 = None
+    scatter4 = None
+    scatter5 = None
+    heart_data_list = None  # For I3 effect
+    
+    if effect == 'H4' or effect == 'I1' or effect == 'I2':
         x_heart2, y_heart2, z_heart2, colors2 = generate_heart_points(density=density)
     
-    # Initial scatter plot
+    if effect == 'I2':
+        x_heart3, y_heart3, z_heart3, colors3 = generate_heart_points(density=density)
+        x_heart4, y_heart4, z_heart4, colors4 = generate_heart_points(density=density)
+        x_heart5, y_heart5, z_heart5, colors5 = generate_heart_points(density=density)
+    
+    # For I3: Generate 16 hearts
+    if effect == 'I3':
+        heart_data_list = []
+        colormaps = ['magma', 'YlOrRd', 'Blues', 'Greens', 'Purples', 'plasma', 'viridis', 
+                     'cool', 'hot', 'spring', 'summer', 'autumn', 'winter', 'coolwarm', 
+                     'RdYlBu', 'Spectral']
+        for i in range(16):
+            x_h, y_h, z_h, colors_h = generate_heart_points(density=density)
+            colormap = colormaps[i % len(colormaps)]
+            scatter_h = ax.scatter(x_h, y_h, z_h, c=colors_h, cmap=colormap, s=1, alpha=0.5)
+            heart_data_list.append((x_h, y_h, z_h, scatter_h, colormap))
+    
+    # Initial scatter plot (1st heart - magma colormap)
     scatter = ax.scatter(x_original, y_original, z_original, 
                         c=colors, cmap='magma', s=1, alpha=0.8)
+    
+    # Additional scatter plots for multi-heart effects
+    if effect == 'I1' and x_heart2 is not None:
+        scatter2 = ax.scatter(x_heart2, y_heart2, z_heart2,
+                             c=colors2, cmap='YlOrRd', s=1, alpha=0.6)
+    
+    if effect == 'I2':
+        if x_heart2 is not None:
+            scatter2 = ax.scatter(x_heart2, y_heart2, z_heart2,
+                                 c=colors2, cmap='YlOrRd', s=1, alpha=0.6)
+        if x_heart3 is not None:
+            scatter3 = ax.scatter(x_heart3, y_heart3, z_heart3,
+                                 c=colors3, cmap='Blues', s=1, alpha=0.5)
+        if x_heart4 is not None:
+            scatter4 = ax.scatter(x_heart4, y_heart4, z_heart4,
+                                 c=colors4, cmap='Greens', s=1, alpha=0.5)
+        if x_heart5 is not None:
+            scatter5 = ax.scatter(x_heart5, y_heart5, z_heart5,
+                                 c=colors5, cmap='Purples', s=1, alpha=0.5)
     
     # Set axis limits to keep the heart centered with equal aspect ratio
     max_range = 20
@@ -127,7 +172,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
             return scatter,
     else:
         # Instantiate effect
-        # For H4, pass second heart coordinates
+        # For H4 and I1, pass second heart coordinates
         if effect == 'H4':
             effect_instance = EffectClass(
                 total_frames=0,  # Will be set by get_total_frames
@@ -141,6 +186,68 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                 x_heart2=x_heart2,
                 y_heart2=y_heart2,
                 z_heart2=z_heart2
+            )
+        elif effect == 'I1':
+            effect_instance = EffectClass(
+                total_frames=0,  # Will be set by get_total_frames
+                fps=fps,
+                x_original=x_original,
+                y_original=y_original,
+                z_original=z_original,
+                scatter=scatter,
+                ax=ax,
+                audio_features=audio_features,
+                x_heart2=x_heart2,
+                y_heart2=y_heart2,
+                z_heart2=z_heart2,
+                scatter2=scatter2
+            )
+        elif effect == 'I2':
+            effect_instance = EffectClass(
+                total_frames=0,  # Will be set by get_total_frames
+                fps=fps,
+                x_original=x_original,
+                y_original=y_original,
+                z_original=z_original,
+                scatter=scatter,
+                ax=ax,
+                audio_features=audio_features,
+                x_heart2=x_heart2,
+                y_heart2=y_heart2,
+                z_heart2=z_heart2,
+                scatter2=scatter2,
+                x_heart3=x_heart3,
+                y_heart3=y_heart3,
+                z_heart3=z_heart3,
+                scatter3=scatter3,
+                x_heart4=x_heart4,
+                y_heart4=y_heart4,
+                z_heart4=z_heart4,
+                scatter4=scatter4,
+                x_heart5=x_heart5,
+                y_heart5=y_heart5,
+                z_heart5=z_heart5,
+                scatter5=scatter5
+            )
+        elif effect == 'I3':
+            # For I3, include the first heart in the list
+            if heart_data_list is not None:
+                # Replace first heart in list with the main scatter
+                heart_data_list[0] = (x_original, y_original, z_original, scatter, 'magma')
+            else:
+                # Fallback: create list with just first heart
+                heart_data_list = [(x_original, y_original, z_original, scatter, 'magma')]
+            
+            effect_instance = EffectClass(
+                total_frames=0,  # Will be set by get_total_frames
+                fps=fps,
+                x_original=x_original,
+                y_original=y_original,
+                z_original=z_original,
+                scatter=scatter,
+                ax=ax,
+                audio_features=audio_features,
+                heart_data_list=heart_data_list
             )
         else:
             effect_instance = EffectClass(
@@ -295,9 +402,9 @@ Examples:
     
     parser.add_argument(
         '--effect', '-e',
-        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H8sync', 'H8sync3min', 'H9', 'H10'],
+        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H8sync', 'H8sync3min', 'H9', 'H10', 'I1', 'I2', 'I3'],
         default='A',
-        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s), H8sync3min (extended 3.5min version 210s), H9 (Cuba to New Orleans musical journey ~698s), H10 (The Mission - Gabriel\'s Oboe spiritual journey) (default: A)'
+        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s), H8sync3min (extended 3.5min version 210s), H9 (Cuba to New Orleans musical journey ~698s), H10 (The Mission - Gabriel\'s Oboe spiritual journey), I1 (Two Hearts - dual heart visualization with beat and tempo sync), I2 (Five Hearts - comprehensive audio feature synchronization), I3 (Birthday Celebration - 11 hearts then 16 hearts with number display) (default: A)'
     )
     
     parser.add_argument(

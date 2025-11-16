@@ -5,6 +5,7 @@ Adapts existing heart effects for real-time rendering
 
 import os
 import sys
+import logging
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -20,6 +21,8 @@ from core.heart_generator import generate_heart_points
 from effects import get_effect_class
 from mathheart_player.player.audio_analyzer import AudioAnalyzer
 
+logger = logging.getLogger(__name__)
+
 
 class HeartVisualizer:
     """Real-time 3D heart visualizer adapted from existing effects."""
@@ -33,6 +36,8 @@ class HeartVisualizer:
             effect_name: Effect name (H8sync, H9, H10)
             density: Point density ('lower', 'low', 'medium', 'high')
         """
+        logger.info(f"Initializing HeartVisualizer: effect={effect_name}, density={density}")
+        
         self.canvas = canvas
         self.effect_name = effect_name
         self.density = density
@@ -47,6 +52,7 @@ class HeartVisualizer:
         self.ax.set_yticks([])
         self.ax.set_zticks([])
         
+        logger.debug("Generating heart points")
         # Generate heart points
         self.x_original, self.y_original, self.z_original, _ = generate_heart_points(
             u_points=200, v_points=200, density=density
@@ -76,6 +82,7 @@ class HeartVisualizer:
         Parameters:
             effect_name: Effect name (H8sync, H9, H10)
         """
+        logger.info(f"Setting visualization effect: {self.effect_name} -> {effect_name}")
         self.effect_name = effect_name
         self._create_effect_instance()
     
@@ -86,15 +93,18 @@ class HeartVisualizer:
         Parameters:
             audio_analyzer: AudioAnalyzer instance
         """
+        logger.debug("Loading audio features into visualizer")
         self.audio_features = audio_analyzer.get_all_features()
         self.duration = audio_analyzer.get_duration()
+        logger.debug(f"Audio features loaded: duration={self.duration:.2f}s")
         self._create_effect_instance()
     
     def _create_effect_instance(self):
         """Create effect instance based on current settings."""
+        logger.debug(f"Creating effect instance: {self.effect_name}")
         EffectClass = get_effect_class(self.effect_name)
         if EffectClass is None:
-            print(f"Warning: Effect '{self.effect_name}' not found")
+            logger.warning(f"Effect '{self.effect_name}' not found")
             self.effect_instance = None
             return
         
@@ -108,34 +118,45 @@ class HeartVisualizer:
         # For H4 effect, need second heart
         if self.effect_name == 'H4':
             if self.x_heart2 is None:
+                logger.debug("Generating second heart for H4 effect")
                 self.x_heart2, self.y_heart2, self.z_heart2, _ = generate_heart_points(
                     u_points=200, v_points=200, density=self.density
                 )
             
-            self.effect_instance = EffectClass(
-                total_frames=total_frames,
-                fps=self.fps,
-                x_original=self.x_original,
-                y_original=self.y_original,
-                z_original=self.z_original,
-                scatter=self.scatter,
-                ax=self.ax,
-                audio_features=self.audio_features,
-                x_heart2=self.x_heart2,
-                y_heart2=self.y_heart2,
-                z_heart2=self.z_heart2
-            )
+            try:
+                self.effect_instance = EffectClass(
+                    total_frames=total_frames,
+                    fps=self.fps,
+                    x_original=self.x_original,
+                    y_original=self.y_original,
+                    z_original=self.z_original,
+                    scatter=self.scatter,
+                    ax=self.ax,
+                    audio_features=self.audio_features,
+                    x_heart2=self.x_heart2,
+                    y_heart2=self.y_heart2,
+                    z_heart2=self.z_heart2
+                )
+                logger.debug(f"H4 effect instance created: total_frames={total_frames}")
+            except Exception as e:
+                logger.error(f"Failed to create H4 effect instance: {e}", exc_info=True)
+                self.effect_instance = None
         else:
-            self.effect_instance = EffectClass(
-                total_frames=total_frames,
-                fps=self.fps,
-                x_original=self.x_original,
-                y_original=self.y_original,
-                z_original=self.z_original,
-                scatter=self.scatter,
-                ax=self.ax,
-                audio_features=self.audio_features
-            )
+            try:
+                self.effect_instance = EffectClass(
+                    total_frames=total_frames,
+                    fps=self.fps,
+                    x_original=self.x_original,
+                    y_original=self.y_original,
+                    z_original=self.z_original,
+                    scatter=self.scatter,
+                    ax=self.ax,
+                    audio_features=self.audio_features
+                )
+                logger.debug(f"Effect instance created: {self.effect_name}, total_frames={total_frames}")
+            except Exception as e:
+                logger.error(f"Failed to create effect instance: {self.effect_name} - {e}", exc_info=True)
+                self.effect_instance = None
     
     def update(self, current_time: float):
         """
@@ -177,12 +198,11 @@ class HeartVisualizer:
             # Redraw canvas
             self.canvas.draw_idle()
         except Exception as e:
-            print(f"Error updating visualization: {e}")
-            import traceback
-            traceback.print_exc()
+            logger.warning(f"Error updating visualization at frame {frame}: {e}", exc_info=True)
     
     def clear(self):
         """Clear visualization."""
+        logger.debug("Clearing visualization")
         self.ax.clear()
         self.ax.set_facecolor('black')
         self.ax.grid(False)

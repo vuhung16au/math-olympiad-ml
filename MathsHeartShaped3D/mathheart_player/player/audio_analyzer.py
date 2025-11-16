@@ -5,6 +5,7 @@ Hybrid approach: pre-analyze (with caching) + streaming fallback
 
 import os
 import sys
+import logging
 import librosa
 import numpy as np
 from typing import Optional, Dict, Callable
@@ -23,6 +24,9 @@ from core.audio_sync import (
     get_tempo_at_time
 )
 from mathheart_player.player.analysis_cache import load_from_cache, save_to_cache
+from mathheart_player.utils.logger import sanitize_path
+
+logger = logging.getLogger(__name__)
 
 
 class AudioAnalyzer:
@@ -52,21 +56,30 @@ class AudioAnalyzer:
         Returns:
             True if successful, False otherwise
         """
+        file_name = sanitize_path(filepath)
+        logger.info(f"Audio analysis started: {file_name}")
+        
         if not os.path.exists(filepath):
+            logger.error(f"Audio file not found for analysis: {file_name}")
             return False
         
         self.current_file = filepath
         
         # Try to load from cache first
         if use_cache:
+            logger.debug(f"Checking cache for: {file_name}")
             cached_features = load_from_cache(filepath)
             if cached_features:
                 self.features = cached_features
+                logger.info(f"Cache hit: Loaded analysis from cache for {file_name}")
                 if self.progress_callback:
                     self.progress_callback("Loaded from cache", 1.0)
                 return True
+            else:
+                logger.debug(f"Cache miss: Analysis not found in cache for {file_name}")
         
         # Cache miss - run full analysis
+        logger.info(f"Running full audio analysis: {file_name}")
         if self.progress_callback:
             self.progress_callback("Analyzing audio...", 0.0)
         
@@ -79,30 +92,43 @@ class AudioAnalyzer:
                 f"mathheart_temp_{os.getpid()}.json"
             )
             
+            logger.debug(f"Starting librosa analysis: {file_name}")
             # Run analysis (this will show progress with tqdm)
             # Note: tqdm progress bars work fine in background threads
             # as long as we're using the callback for UI updates
             self.features = analyze_audio(filepath, temp_output)
             
+            # Log analysis results
+            if self.features:
+                duration = self.features.get('duration', 0)
+                num_beats = len(self.features.get('beat_times', []))
+                num_onsets = len(self.features.get('onset_times', []))
+                logger.info(f"Analysis completed: {file_name}, duration={duration:.2f}s, beats={num_beats}, onsets={num_onsets}")
+                logger.debug(f"Features extracted: {list(self.features.keys())}")
+            
             # Save to cache
             if use_cache:
+                logger.debug(f"Saving analysis to cache: {file_name}")
                 save_to_cache(filepath, self.features)
+                logger.info(f"Analysis saved to cache: {file_name}")
             
             # Clean up temp file
             if os.path.exists(temp_output):
                 try:
                     os.remove(temp_output)
-                except:
-                    pass
+                    logger.debug("Temporary analysis file removed")
+                except Exception as e:
+                    logger.warning(f"Failed to remove temporary file: {e}")
             
             if self.progress_callback:
                 self.progress_callback("Analysis complete", 1.0)
             
             return True
         except Exception as e:
-            print(f"Error analyzing audio: {e}")
+            logger.error(f"Error during audio analysis: {file_name} - {e}", exc_info=True)
             if self.progress_callback:
                 self.progress_callback(f"Analysis failed: {e}", 0.0)
+            self.features = None
             return False
     
     def get_features_at_time(self, current_time: float) -> Dict[str, float]:

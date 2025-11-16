@@ -3,6 +3,7 @@ Main Window for MathHeart Player
 """
 
 import os
+import logging
 from PyQt6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QPushButton, QSlider, QLabel, QFileDialog, QComboBox,
@@ -14,6 +15,9 @@ from PyQt6.QtGui import QAction
 from mathheart_player.player.audio_player import AudioPlayer
 from mathheart_player.player.audio_analyzer import AudioAnalyzer
 from mathheart_player.ui.visualization_panel import VisualizationPanel
+from mathheart_player.utils.logger import sanitize_path
+
+logger = logging.getLogger(__name__)
 
 
 class AudioLoadWorker(QThread):
@@ -30,6 +34,10 @@ class AudioLoadWorker(QThread):
     
     def run(self):
         """Load audio file in background thread."""
+        logger = logging.getLogger(__name__)
+        file_name = sanitize_path(self.filepath)
+        logger.info(f"Audio load thread started: {file_name}")
+        
         try:
             # Pass progress callback to audio player
             def on_progress(message: str, progress: float):
@@ -37,14 +45,14 @@ class AudioLoadWorker(QThread):
             
             success = self.audio_player.load_file(self.filepath, progress_callback=on_progress)
             if success:
+                logger.info(f"Audio load thread completed successfully: {file_name}")
                 self.progress.emit("Audio file loaded successfully", 1.0)
             else:
+                logger.error(f"Audio load thread failed: {file_name}")
                 self.progress.emit("Failed to load audio file", 0.0)
             self.finished.emit(success, self.filepath, self.audio_player)
         except Exception as e:
-            print(f"Error in audio load thread: {e}")
-            import traceback
-            traceback.print_exc()
+            logger.error(f"Error in audio load thread: {file_name} - {e}", exc_info=True)
             self.progress.emit(f"Error: {str(e)}", 0.0)
             self.finished.emit(False, self.filepath, self.audio_player)
 
@@ -68,13 +76,19 @@ class AudioAnalysisWorker(QThread):
     
     def run(self):
         """Run audio analysis in background thread."""
+        logger = logging.getLogger(__name__)
+        file_name = sanitize_path(self.filepath)
+        logger.info(f"Audio analysis thread started: {file_name}")
+        
         try:
             success = self.analyzer.load_file(self.filepath, self.use_cache)
+            if success:
+                logger.info(f"Audio analysis thread completed successfully: {file_name}")
+            else:
+                logger.error(f"Audio analysis thread failed: {file_name}")
             self.finished.emit(success, self.filepath)
         except Exception as e:
-            print(f"Error in analysis thread: {e}")
-            import traceback
-            traceback.print_exc()
+            logger.error(f"Error in analysis thread: {file_name} - {e}", exc_info=True)
             self.finished.emit(False, self.filepath)
 
 
@@ -85,10 +99,13 @@ class MainWindow(QMainWindow):
         """Initialize main window."""
         super().__init__()
         
+        logger.info("Initializing MainWindow")
+        
         self.setWindowTitle("MathHeart Player")
         self.setGeometry(100, 100, 1200, 800)
         
         # Initialize components
+        logger.debug("Creating audio player and analyzer")
         self.audio_player = AudioPlayer()
         self.audio_analyzer = AudioAnalyzer(progress_callback=self.on_analysis_progress)
         self.current_file = None
@@ -96,6 +113,7 @@ class MainWindow(QMainWindow):
         self.analysis_worker = None  # Background thread for analysis
         
         # Setup UI
+        logger.debug("Setting up UI components")
         self.setup_ui()
         self.setup_menu()
         
@@ -108,6 +126,8 @@ class MainWindow(QMainWindow):
         self.seek_timer = QTimer()
         self.seek_timer.timeout.connect(self.update_seek_bar)
         self.seek_timer.setInterval(100)  # Update every 100ms
+        
+        logger.info("MainWindow initialized successfully")
         
     def setup_ui(self):
         """Setup user interface."""
@@ -216,6 +236,7 @@ class MainWindow(QMainWindow):
     
     def browse_file(self):
         """Browse for audio file."""
+        logger.info("File selection dialog opened")
         filepath, _ = QFileDialog.getOpenFileName(
             self,
             "Open Audio File",
@@ -224,15 +245,24 @@ class MainWindow(QMainWindow):
         )
         
         if filepath:
+            file_name = sanitize_path(filepath)
+            logger.info(f"File selected: {file_name}")
             self.load_file(filepath)
+        else:
+            logger.debug("File selection cancelled")
     
     def load_file(self, filepath: str):
         """Load audio file."""
+        file_name = sanitize_path(filepath)
+        logger.info(f"File loading initiated: {file_name}")
+        
         # Cancel any ongoing operations
         if self.load_worker and self.load_worker.isRunning():
+            logger.warning("Terminating existing load worker thread")
             self.load_worker.terminate()
             self.load_worker.wait()
         if self.analysis_worker and self.analysis_worker.isRunning():
+            logger.warning("Terminating existing analysis worker thread")
             self.analysis_worker.terminate()
             self.analysis_worker.wait()
         
@@ -249,6 +279,7 @@ class MainWindow(QMainWindow):
         self.play_button.setEnabled(False)
         
         # Load audio file in background thread (MP3 conversion can be slow)
+        logger.debug(f"Starting audio load worker thread: {file_name}")
         self.load_worker = AudioLoadWorker(filepath, self.audio_player)
         self.load_worker.progress.connect(self.on_analysis_progress)
         self.load_worker.finished.connect(self.on_audio_load_finished)
@@ -256,12 +287,15 @@ class MainWindow(QMainWindow):
     
     def on_audio_load_finished(self, success: bool, filepath: str, audio_player):
         """Handle completion of audio file loading."""
+        file_name = sanitize_path(filepath)
+        
         if not success or filepath != self.current_file:
             # Loading failed or user selected different file
             self.browse_button.setEnabled(True)
             self.play_button.setEnabled(False)
             self.progress_bar.setVisible(False)
             if not success:
+                logger.error(f"File loading failed: {file_name}")
                 QMessageBox.warning(
                     self, 
                     "Error", 
@@ -273,13 +307,17 @@ class MainWindow(QMainWindow):
                 )
                 self.file_label.setText("No file loaded")
                 self.status_bar.showMessage("Failed to load audio file")
+            else:
+                logger.debug(f"Ignoring load result: file changed (current: {sanitize_path(self.current_file) if self.current_file else 'none'})")
             return
         
         # File loaded successfully, update label
+        logger.info(f"File loaded successfully, starting analysis: {file_name}")
         self.file_label.setText(f"✓ {os.path.basename(filepath)}")
         self.status_bar.showMessage("Starting analysis...")
         
         # Now start analysis in background thread
+        logger.debug(f"Starting audio analysis worker thread: {file_name}")
         self.analysis_worker = AudioAnalysisWorker(filepath, use_cache=True)
         self.analysis_worker.progress.connect(self.on_analysis_progress)
         self.analysis_worker.finished.connect(self.on_analysis_finished)
@@ -287,17 +325,21 @@ class MainWindow(QMainWindow):
     
     def on_analysis_finished(self, success: bool, filepath: str):
         """Handle completion of audio analysis."""
+        file_name = sanitize_path(filepath)
+        
         # Re-enable controls
         self.browse_button.setEnabled(True)
         self.play_button.setEnabled(True)
         self.progress_bar.setVisible(False)
         
         if success and filepath == self.current_file:
+            logger.info(f"Analysis completed successfully: {file_name}")
             # Get analyzer from worker thread
             self.audio_analyzer = self.analysis_worker.analyzer
             
             # Load features into visualizer
             self.visualization_panel.load_audio_features(self.audio_analyzer)
+            logger.debug("Audio features loaded into visualizer")
             
             # Update seek bar range
             duration = self.audio_analyzer.get_duration()
@@ -311,17 +353,21 @@ class MainWindow(QMainWindow):
             
             # Auto-select effect if needed
             if self.effect_combo.currentText() == "Auto-select" and duration > 0:
-                self.auto_select_effect(duration)
+                selected_effect = self.auto_select_effect(duration)
+                logger.info(f"Auto-selected effect: {selected_effect} for duration={duration:.2f}s")
             
             # Update file label to show it's loaded
             self.file_label.setText(f"✓ {os.path.basename(filepath)}")
             self.status_bar.showMessage("File loaded successfully")
         else:
             if not success:
+                logger.error(f"Analysis failed: {file_name}")
                 error_msg = "Failed to analyze audio file"
                 QMessageBox.warning(self, "Error", error_msg)
                 self.status_bar.showMessage("Analysis failed")
                 self.file_label.setText(f"✗ {os.path.basename(filepath) if filepath else 'No file loaded'}")
+            else:
+                logger.debug(f"Ignoring analysis result: file changed (current: {sanitize_path(self.current_file) if self.current_file else 'none'})")
             # If filepath changed, user loaded a different file, ignore this result
     
     def auto_select_effect(self, duration: float):
@@ -336,14 +382,19 @@ class MainWindow(QMainWindow):
         else:
             effect = 'H9'
         
+        logger.debug(f"Auto-selecting effect: {effect} for duration={duration:.2f}s")
+        
         # Find and set effect in combo
         index = self.effect_combo.findText(effect)
         if index >= 0:
             self.effect_combo.setCurrentIndex(index)
+            return effect
+        return None
     
     def on_effect_changed(self, effect_name: str):
         """Handle effect selection change."""
         if effect_name != "Auto-select":
+            logger.info(f"Effect changed: {effect_name}")
             self.visualization_panel.set_effect(effect_name)
     
     def toggle_playback(self):
@@ -353,14 +404,17 @@ class MainWindow(QMainWindow):
         else:
             # Resume or start playback
             if self.audio_player.play():
+                logger.info("Playback started")
                 self.update_timer.start()
                 self.seek_timer.start()
                 self.status_bar.showMessage("Playing")
             else:
+                logger.warning("Failed to start playback")
                 self.status_bar.showMessage("Failed to play audio")
     
     def pause_playback(self):
         """Pause playback."""
+        logger.info("Playback paused")
         self.audio_player.pause()
         self.update_timer.stop()
         self.seek_timer.stop()
@@ -368,6 +422,7 @@ class MainWindow(QMainWindow):
     
     def stop_playback(self):
         """Stop playback."""
+        logger.info("Playback stopped")
         self.audio_player.stop()
         self.update_timer.stop()
         self.seek_timer.stop()
@@ -378,6 +433,7 @@ class MainWindow(QMainWindow):
     def on_seek_changed(self, value: int):
         """Handle seek bar change."""
         position = value / 10.0  # Convert to seconds (0.1s precision)
+        logger.debug(f"Seek bar changed: {position:.2f}s")
         self.audio_player.seek(position)
         self.update_time_display()
     
@@ -406,6 +462,7 @@ class MainWindow(QMainWindow):
     def on_volume_changed(self, value: int):
         """Handle volume change."""
         volume = value / 100.0
+        logger.debug(f"Volume changed: {value}%")
         self.audio_player.set_volume(volume)
     
     def update_visualization(self):
@@ -433,15 +490,20 @@ class MainWindow(QMainWindow):
     
     def closeEvent(self, event):
         """Handle window close event."""
+        logger.info("MainWindow closing")
+        
         # Stop any ongoing operations
         if self.load_worker and self.load_worker.isRunning():
+            logger.warning("Terminating load worker thread on window close")
             self.load_worker.terminate()
             self.load_worker.wait()
         if self.analysis_worker and self.analysis_worker.isRunning():
+            logger.warning("Terminating analysis worker thread on window close")
             self.analysis_worker.terminate()
             self.analysis_worker.wait()
         
         # Cleanup audio player
         self.audio_player.cleanup()
+        logger.info("MainWindow closed")
         event.accept()
 
