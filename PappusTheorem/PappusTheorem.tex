@@ -424,37 +424,36 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
     \caption{Six points $A, B, C, D, E, F$ on (a) ellipse, (b) parabola, and (c) hyperbola.}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[htbp]
     \centering
     \begin{tikzpicture}[
         point/.style={circle, fill, inner sep=1.5pt},
-        scale=0.7
+        scale=1.0
     ]
-        % Circle
-        \draw[thick, blue] (0,0) circle (2.5cm);
+        % Circle (unit circle)
+        \draw[thick, blue] (0,0) circle (1cm);
         
-        % Points on circle in order around circle: A -> B -> C -> D -> E -> F -> A
+        % Points on unit circle in order around circle: A -> B -> C -> D -> E -> F -> A
         % Hexagon order for Pascal's theorem: A-B-C-D-E-F
-        % Arranged as non-regular hexagon so opposite sides clearly intersect outside
-        % Angles chosen to ensure AB∩DE, BC∩EF, CD∩FA are all visible
-        \node[point, label=above:$A$] (A) at (10:2.5) {};   % 
-        \node[point, label=above right:$B$] (B) at (80:2.5) {};   % 
-        \node[point, label=above left:$C$] (C) at (140:2.5) {};  % 
-        \node[point, label=below left:$D$] (D) at (190:2.5) {};  % 
-        \node[point, label=below:$E$] (E) at (260:2.5) {};  % 
-        \node[point, label=below right:$F$] (F) at (310:2.5) {};  % 
+        % Using specified Cartesian coordinates on unit circle
+        \node[point, label=above:$A$] (A) at (0, 1) {};   % 
+        \node[point, label=left:$B$] (B) at (-1, 0) {};   % 
+        \node[point, label=above left:$C$] (C) at ({-0.5}, {sqrt(3)/2}) {};  % 
+        \node[point, label=below:$D$] (D) at (0, -1) {};  % 
+        \node[point, label=above right:$E$] (E) at ({0.5}, {sqrt(3)/2}) {};  % 
+        \node[point, label=right:$F$] (F) at (1, 0) {};  %
         
         % Hexagon sides according to Pascal's theorem:
         % X = (AB) ∩ (DE), Y = (BC) ∩ (EF), Z = (CD) ∩ (FA)
-        % Extended well beyond circle so intersections occur outside and are visible
-        \draw[green!70!black, thick, name path=AB] ($(A)!-2.0!(B)$) -- ($(A)!3.0!(B)$);
-        \draw[green!70!black, thick, name path=DE] ($(D)!-2.0!(E)$) -- ($(D)!3.0!(E)$);
+        % Extended well beyond circle so intersections occur outside and are clearly visible
+        \draw[green!70!black, thick, name path=AB] ($(A)!-2.5!(B)$) -- ($(A)!3.5!(B)$);
+        \draw[green!70!black, thick, name path=DE] ($(D)!-2.5!(E)$) -- ($(D)!3.5!(E)$);
         
-        \draw[blue, thick, name path=BC] ($(B)!-2.0!(C)$) -- ($(B)!3.0!(C)$);
-        \draw[blue, thick, name path=EF] ($(E)!-2.0!(F)$) -- ($(E)!3.0!(F)$);
+        \draw[blue, thick, name path=BC] ($(B)!-2.5!(C)$) -- ($(B)!3.5!(C)$);
+        \draw[blue, thick, name path=EF] ($(E)!-2.5!(F)$) -- ($(E)!3.5!(F)$);
         
-        \draw[magenta, thick, name path=CD] ($(C)!-2.0!(D)$) -- ($(C)!3.0!(D)$);
-        \draw[magenta, thick, name path=FA] ($(F)!-2.0!(A)$) -- ($(F)!3.0!(A)$);
+        \draw[magenta, thick, name path=CD] ($(C)!-2.5!(D)$) -- ($(C)!3.5!(D)$);
+        \draw[magenta, thick, name path=FA] ($(F)!-2.5!(A)$) -- ($(F)!3.5!(A)$);
         
         % Find intersections according to Pascal's theorem
         \path[name intersections={of=AB and DE, by=X}];
@@ -462,6 +461,7 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         \path[name intersections={of=CD and FA, by=Z}];
         
         % Draw and label intersection points (X = AB∩DE, Y = BC∩EF, Z = CD∩FA)
+        % These should be outside the circle and clearly visible
         \node[point, fill=red, label=above left:$X$] at (X) {};
         \node[point, fill=red, label=below right:$Y$] at (Y) {};
         \node[point, fill=red, label=above right:$Z$] at (Z) {};
@@ -469,12 +469,12 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         % Draw Pascal line
         \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
         
-        \node[below] at (0, -4.5) {(a1) Circle with lines cutting outside};
+        \node[below] at (0, -2.0) {(a1) Circle with lines cutting outside};
     \end{tikzpicture}
     \hfill
     \begin{tikzpicture}[
         point/.style={circle, fill, inner sep=1.5pt},
-        scale=0.7
+        scale=0.8
     ]
         % Circle
         \draw[thick, blue] (0,0) circle (2.5cm);
@@ -515,7 +515,7 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         % Draw Pascal line
         \draw[red, dashed, thick] ($(X)!-0.5!(Z)$) -- ($(X)!1.5!(Z)$);
         
-        \node[below] at (0, -4.5) {(a2) Circle with lines cutting inside};
+        \node[below] at (0, -3.5) {(a2) Circle with lines cutting inside};
     \end{tikzpicture}
     \caption{Pascal's Theorem for a circle: (a1) when lines extend outside the circle, (a2) when lines intersect inside the circle. The intersection points are defined as $X = (AB) \cap (DE)$, $Y = (BC) \cap (EF)$, and $Z = (CD) \cap (FA)$. The red dashed line is the Pascal line.}
 \end{figure}
