@@ -1,11 +1,17 @@
 \documentclass[12pt]{article}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
+
+% Load style packages
+\usepackage{styles/dl101-base}
+\usepackage{styles/dl101-fonts}
+\usepackage{styles/dl101-colors}
+% Note: We skip dl101-boxes because it uses chapter numbering which doesn't work with article class
+% Instead, we'll define our own boxes with section numbering
+\usepackage[most]{tcolorbox}
 \usepackage{geometry}
-\usepackage[utf8]{inputenc}
-\usepackage{hyperref}
-\usepackage{tikz}
+
+% Force English figure names (vntex sets Vietnamese by default)
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
 
 % TikZ libraries needed for diagrams
 \usetikzlibrary{intersections, calc, shapes.geometric}
@@ -17,8 +23,102 @@
  top=20mm,
 }
 
-\newtheorem{theorem}{Theorem}
-\newtheorem*{solution}{Solution}
+% Theorem environments - adjusted for article class (section numbering instead of chapter)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Define boxes with section numbering (for article class, not chapter-based)
+\newtcolorbox[auto counter,number within=section]{theorembox}[1][]{
+  title={\bfseries Theorem~\thetcbcounter\ifx\relax#1\relax\else: #1\fi},
+  enhanced,
+  drop shadow={black!30!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookpurple,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookpurple,coltitle=white},
+  fonttitle=\bfseries
+}
+
+\newtcolorbox[auto counter,number within=section]{examplebox}[1][]{
+  title={\bfseries Example~\thetcbcounter\ifx\relax#1\relax\else: #1\fi},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookred,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookred,coltitle=white},
+  fonttitle=\bfseries
+}
+
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
+  title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else: #1\fi},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries
+}
+
+\newtcolorbox[auto counter,number within=section]{definitionbox}[1][]{
+  title={\bfseries Definition~\thetcbcounter\ifx\relax#1\relax\else: #1\fi},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookpurple,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookpurple,coltitle=white},
+  fonttitle=\bfseries
+}
+
+% Redefine theorem environments to use the boxes
+\renewenvironment{theorem}[1][]{\begin{theorembox}[#1]}{\end{theorembox}}
+\renewenvironment{example}[1][]{\begin{examplebox}[#1]}{\end{examplebox}}
+\renewenvironment{remark}[1][]{\begin{remarkbox}[#1]}{\end{remarkbox}}
+\renewenvironment{definition}[1][]{\begin{definitionbox}[#1]}{\end{definitionbox}}
+
+% Solution environment - styled as a box
+\newtcolorbox[auto counter,number within=section]{solutionbox}[1][]{
+  title={\bfseries Solution\ifx\relax#1\relax\else: #1\fi},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookred,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookred,coltitle=white},
+  fonttitle=\bfseries
+}
+
+% Define solution environment to use the box
+\newenvironment{solution}[1][]{\begin{solutionbox}[#1]}{\end{solutionbox}}
 
 \author{Vu Hung Nguyen}
 \title{Pappus's hexagon theorem}
