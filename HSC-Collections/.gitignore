@@ -26,8 +26,8 @@ privs/
 *.auxlock
 
 # PDF files (optional - uncomment if you don't want to track PDFs)
-# *.pdf
+HSC-Collections.pdf
 
 # Release directory (optional - uncomment if you don't want to track releases)
-# releases/
+!releases/HSC-Collections.pdf
 
