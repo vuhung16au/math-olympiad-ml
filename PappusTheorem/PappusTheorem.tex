@@ -491,12 +491,14 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         \draw[thick, blue, domain=-2.5:2.5, samples=100] plot (\x, {0.3*\x*\x - 2});
         
         % Points on parabola
+        % Left side (x < 0): A, C, E
         \node[point, label=above:$A$] (A) at (-2, -0.8) {};
-        \node[point, label=above:$B$] (B) at (-1, -1.7) {};
-        \node[point, label=above:$C$] (C) at (0.5, -1.925) {};
+        \node[point, label=above:$C$] (C) at (-0.5, -1.925) {};
+        \node[point, label=above:$E$] (E) at (-1.5, -1.325) {};
+        % Right side (x > 0): D, B, F
         \node[point, label=right:$D$] (D) at (1.5, -1.325) {};
-        \node[point, label=right:$E$] (E) at (2, -0.8) {};
-        \node[point, label=above:$F$] (F) at (1, -1.7) {};
+        \node[point, label=above:$B$] (B) at (1, -1.7) {};
+        \node[point, label=above:$F$] (F) at (2, -0.8) {};
         
         \node[below] at (0, -3) {(b) Parabola};
     \end{tikzpicture}
@@ -512,14 +514,16 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         \draw[thick, blue, domain=-3.5:-1.5, samples=100] plot (\x, {0.7*sqrt(\x*\x - 2.25)});
         \draw[thick, blue, domain=-3.5:-1.5, samples=100] plot (\x, {-0.7*sqrt(\x*\x - 2.25)});
         
-        % Points on hyperbola (right branch) - calculated to lie exactly on the curve
+        % Points on hyperbola - calculated to lie exactly on the curve
         % For hyperbola y = ±0.7*sqrt(x^2 - 2.25), choosing x values and computing y
-        \node[point, label=above:$A$] (A) at (2.8, {0.7*sqrt(2.8*2.8 - 2.25)}) {};
+        % Left branch: A, C, E
+        \node[point, label=above:$A$] (A) at (-2.8, {0.7*sqrt(2.8*2.8 - 2.25)}) {};
+        \node[point, label=left:$C$] (C) at (-2.0, {0.7*sqrt(2.0*2.0 - 2.25)}) {};
+        \node[point, label=below:$E$] (E) at (-2.5, {-0.7*sqrt(2.5*2.5 - 2.25)}) {};
+        % Right branch: F, B, D
+        \node[point, label=right:$F$] (F) at (2.8, {-0.7*sqrt(2.8*2.8 - 2.25)}) {};
         \node[point, label=above:$B$] (B) at (2.5, {0.7*sqrt(2.5*2.5 - 2.25)}) {};
-        \node[point, label=right:$C$] (C) at (2.0, {0.7*sqrt(2.0*2.0 - 2.25)}) {};
         \node[point, label=below:$D$] (D) at (2.0, {-0.7*sqrt(2.0*2.0 - 2.25)}) {};
-        \node[point, label=below:$E$] (E) at (2.5, {-0.7*sqrt(2.5*2.5 - 2.25)}) {};
-        \node[point, label=left:$F$] (F) at (2.8, {-0.7*sqrt(2.8*2.8 - 2.25)}) {};
         
         \node[below] at (0, -3) {(c) Hyperbola};
     \end{tikzpicture}
@@ -532,10 +536,10 @@ This is why Pappus's hexagon theorem is a special case of Pascal's Theorem.
         point/.style={circle, fill, inner sep=1.5pt},
         scale=1.0
     ]
-        % Circle (unit circle)
+        % Circle (smaller radius for a1)
         \draw[thick, blue] (0,0) circle (1cm);
         
-        % Points on unit circle in order around circle: A -> B -> C -> D -> E -> F -> A
+        % Points on circle in order around circle: A -> B -> C -> D -> E -> F -> A
         % Hexagon order for Pascal's theorem: A-B-C-D-E-F
         % Using specified Cartesian coordinates on unit circle
         \node[point, label=above:$A$] (A) at (0, 1) {};   % 
@@ -746,7 +750,8 @@ We work in the projective plane, where:
 \begin{enumerate}
     \item \textbf{Projective Equivalence}: Since all conics are projectively equivalent, it suffices to prove the theorem for one conic (e.g., a circle).
     
-    \item \textbf{Coordinate Geometry Approach}: Using homogeneous coordinates, we can express the condition that six points lie on a conic as a determinant condition. The collinearity of $X, Y, Z$ can then be verified algebraically.
+    \item \textbf{Coordinate Geometry Approach}: Using homogeneous coordinates, 
+    we can express the condition that six points lie on a conic as a determinant condition. The collinearity of $X, Y, Z$ can then be verified algebraically.
     
     \item \textbf{Bezout's Theorem}: This fundamental result in algebraic geometry states that two curves of degrees $m$ and $n$ intersect in at most $mn$ points (counting multiplicity). This helps control the intersection structure.
     
@@ -755,7 +760,9 @@ We work in the projective plane, where:
 
 \subsubsection{The Elegant Insight}
 
-The most elegant modern proof uses the theory of cubic curves. The six points on the conic, together with the three intersection points $X, Y, Z$, can be related through cubic curves. The fact that the six points lie on a conic (a quadratic curve) forces a relationship that implies $X, Y, Z$ are collinear.
+The most elegant modern proof uses the theory of cubic curves. 
+The six points on the conic, together with the three intersection points $X, Y, Z$, can be related through cubic curves.
+ The fact that the six points lie on a conic (a quadratic curve) forces a relationship that implies $X, Y, Z$ are collinear.
 
 \subsubsection{Connection to Pappus}
 
