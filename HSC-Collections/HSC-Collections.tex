@@ -1,0 +1,320 @@
+\documentclass[12pt]{article}
+
+% Load style packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+% Load custom styles
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Mathematics Extension 2: Collection of Hard Problems}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Overview}
+
+This collection presents a curated set of challenging problems from the HSC Mathematics Extension 2 curriculum. These problems are designed to test deep understanding, creative problem-solving skills, and the ability to synthesize multiple mathematical concepts.
+
+\subsection{What This Collection Is About}
+
+This collection focuses on \textbf{HSC Mathematics Extension 2 (hard problems)}. The problems span various topics including:
+\begin{itemize}
+    \item Complex numbers and their geometric interpretations
+    \item Integration techniques and applications
+    \item Vector geometry in three dimensions
+    \item Mechanics and particle motion
+    \item Inequalities and optimization
+\end{itemize}
+
+Each problem is carefully selected to represent the level of difficulty and sophistication expected in the most challenging HSC Extension 2 examinations.
+
+\subsection{Target Audience}
+
+This collection is designed for:
+\begin{itemize}
+    \item \textbf{Students} preparing for HSC Mathematics Extension 2 who want to challenge themselves with difficult problems
+    \item \textbf{Tutors} seeking high-quality problems to use in their teaching
+    \item \textbf{Educators} looking for challenging problems to incorporate into their curriculum
+\end{itemize}
+
+The problems are presented with hints to guide thinking, followed by detailed solutions and key takeaways to reinforce learning.
+
+\section{Problems}
+
+\subsection{Problem 1: Two Particles in Resisting Medium}
+
+\begin{problem}
+Two particles, $A$ and $B$, each have mass 1 kg and are in a medium that exerts a resistance to motion equal to $kv$, where $k > 0$ and $v$ is the velocity of any particle. Both particles maintain vertical trajectories.
+
+The acceleration due to gravity is $g$ m s$^{-2}$, where $g > 0$.
+
+The two particles are simultaneously projected towards each other with the same speed, $v_0$ m s$^{-1}$, where $0 < v_0 < \frac{g}{k}$.
+
+The particle $A$ is initially $d$ metres directly above particle $B$, where $d < \frac{2v_0}{k}$.
+
+Find the time taken for the particles to meet.
+\end{problem}
+
+\begin{hint}
+Consider the equations of motion for each particle under the influence of gravity and resistance. Set up differential equations for the velocities and positions. The condition for the particles to meet will give you an equation involving time.
+\end{hint}
+
+\subsection{Problem 2: Complex Square with Equilateral Triangle}
+
+\begin{problem}
+A square in the Argand plane has vertices
+\[
+5 + 5i, \quad 5 - 5i, \quad -5 - 5i \quad \text{and} \quad -5 + 5i.
+\]
+The complex numbers $z_A = 5 + i$, $z_B$ and $z_C$ lie on the square and form the vertices of an equilateral triangle.
+
+Find the exact value of the complex number $z_B$.
+\end{problem}
+
+\begin{hint}
+Use the geometric properties of equilateral triangles. Consider rotations in the complex plane. The vertices of an equilateral triangle are related by rotations of $60^\circ$ or $120^\circ$ about the centroid.
+\end{hint}
+
+\subsection{Problem 3: Complex 7th Root of Unity}
+
+\begin{problem}
+Let $w$ be a complex number such that $1 + w + w^2 + \dots + w^6 = 0$.
+
+\begin{enumerate}
+    \item[(i)] Show that $w$ is a 7th root of unity.
+    
+    \item[(ii)] The complex number $\alpha = w + w^2 + w^4$ is a root of the equation $x^2 + bx + c = 0$, where $b$ and $c$ are real and $\alpha$ is not real. Find the other root of $x^2 + bx + c = 0$ in terms of positive powers of $w$.
+    
+    \item[(iii)] Find the numerical value of $c$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), use the formula for the sum of a geometric series. For part (ii), use the fact that for a quadratic with real coefficients, the other root is the complex conjugate. For part (iii), use properties of roots of unity and their relationships.
+\end{hint}
+
+\subsection{Problem 4: Complex Triangle Inequality}
+
+\begin{problem}
+The complex number $z$ satisfies $\left| z - \frac{4}{z} \right| = 2$.
+
+Using the triangle inequality, or otherwise, show that $|z| \leq \sqrt{5} + 1$.
+\end{problem}
+
+\begin{hint}
+Apply the triangle inequality to $|z - \frac{4}{z}|$. Consider both directions: $|z| - |\frac{4}{z}| \leq |z - \frac{4}{z}|$ and $|z - \frac{4}{z}| \leq |z| + |\frac{4}{z}|$. Use the given condition to derive bounds on $|z|$.
+\end{hint}
+
+\subsection{Problem 5: Integral with Inverse Sine}
+
+\begin{problem}
+Using the substitution $x = \tan^2 \theta$, evaluate
+\[
+\int_{0}^{1} \sin^{-1} \sqrt{\frac{x}{1+x}} \,dx.
+\]
+\end{problem}
+
+\begin{hint}
+After making the substitution, simplify the integrand. You may need to use trigonometric identities. Consider the relationship between $\sin^{-1}$ and the substitution variable.
+\end{hint}
+
+\subsection{Problem 6: Integral with Cotangent}
+
+\begin{problem}
+Let $I_n = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n}\theta \, d\theta$ for integers $n \ge 0$.
+
+\begin{enumerate}
+    \item[(i)] Show that $I_n = \frac{1}{2n-1} - I_{n-1}$ for $n > 0$, given that $\frac{d}{d\theta}\cot\theta = -\csc^2\theta$.
+    
+    \item[(ii)] Hence, or otherwise, calculate $I_2$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), use integration by parts. Write $\cot^{2n}\theta = \cot^{2n-2}\theta \cdot \cot^2\theta$ and use the identity $\cot^2\theta = \csc^2\theta - 1$. For part (ii), use the recurrence relation and find $I_0$ first.
+\end{hint}
+
+\subsection{Problem 7: 3D Vectors and Distance}
+
+\begin{problem}
+Consider the point $B$ with three-dimensional position vector $\mathbf{b}$ and the line $l$: $\mathbf{a} + \lambda \mathbf{d}$, where $\mathbf{a}$ and $\mathbf{d}$ are three-dimensional vectors, $|\mathbf{d}| = 1$ and $\lambda$ is a parameter.
+
+Let $f(\lambda)$ be the distance between a point on the line $l$ and the point $B$.
+
+\begin{enumerate}
+    \item[(i)] Find $\lambda_0$, the value of $\lambda$ that minimises $f$, in terms of $\mathbf{a}$, $\mathbf{b}$ and $\mathbf{d}$.
+    
+    \item[(ii)] Let $P$ be the point with position vector $\mathbf{a} + \lambda_0 \mathbf{d}$. Show that $PB$ is perpendicular to the direction of the line $l$.
+    
+    \item[(iii)] Hence, or otherwise, find the shortest distance between the line $l$ and the sphere of radius 1 unit, centred at the origin $O$, in terms of $\mathbf{d}$ and $\mathbf{a}$.
+    
+    You may assume that if $B$ is the point on the sphere closest to $l$, then $OBP$ is a straight line.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), minimize $f^2(\lambda)$ by differentiating. For part (ii), use the fact that the minimum distance occurs when the vector from $P$ to $B$ is perpendicular to the direction vector. For part (iii), use the geometric interpretation and the given assumption.
+\end{hint}
+
+\subsection{Problem 8: Triangle Inequality and Rectangular Prism}
+
+\begin{problem}
+It is given that for positive numbers $x_1, x_2, x_3, \dots, x_n$ with arithmetic mean $A$,
+\[
+\frac{x_1 \times x_2 \times x_3 \times \dots \times x_n}{A^n} \leq 1. \quad (\text{Do NOT prove this.})
+\]
+
+Suppose a rectangular prism has dimensions $a, b, c$ and surface area $S$.
+
+\begin{enumerate}
+    \item[(i)] Show that $abc \leq \left(\frac{S}{6}\right)^{\frac{3}{2}}$.
+    
+    \item[(ii)] Using part (i), show that when the rectangular prism with surface area $S$ is a cube, it has maximum volume.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), relate the surface area to the dimensions and apply the given inequality. For part (ii), show that equality in the inequality from part (i) occurs when $a = b = c$, which corresponds to a cube.
+\end{hint}
+
+\section{Solutions}
+
+\subsection{Solution to Problem 1: Two Particles in Resisting Medium}
+
+\begin{solution}
+[Solution will be provided here. This is a placeholder for the detailed solution involving differential equations for particle motion under resistance and gravity.]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Key takeaway 1: Understanding differential equations for motion with resistance
+    \item Key takeaway 2: Setting up coordinate systems for relative motion
+    \item Key takeaway 3: Solving for meeting conditions
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 2: Complex Square with Equilateral Triangle}
+
+\begin{solution}
+[Solution will be provided here. This is a placeholder for the detailed solution involving complex number rotations and geometric properties of equilateral triangles.]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Key takeaway 1: Using rotations in the complex plane
+    \item Key takeaway 2: Geometric properties of equilateral triangles
+    \item Key takeaway 3: Working with complex numbers on geometric shapes
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 3: Complex 7th Root of Unity}
+
+\begin{solution}
+[Solution will be provided here. This is a placeholder for the detailed solution involving roots of unity, geometric series, and quadratic equations with complex roots.]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Key takeaway 1: Properties of roots of unity
+    \item Key takeaway 2: Sum of geometric series
+    \item Key takeaway 3: Complex conjugate roots of polynomials with real coefficients
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 4: Complex Triangle Inequality}
+
+\begin{solution}
+[Solution will be provided here. This is a placeholder for the detailed solution using the triangle inequality to bound the modulus of a complex number.]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Key takeaway 1: Application of triangle inequality in complex analysis
+    \item Key takeaway 2: Bounding moduli of complex expressions
+    \item Key takeaway 3: Working with inequalities involving absolute values
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 5: Integral with Inverse Sine}
+
+\begin{solution}
+[Solution will be provided here. This is a placeholder for the detailed solution using trigonometric substitution to evaluate the integral.]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Key takeaway 1: Trigonometric substitution techniques
+    \item Key takeaway 2: Simplifying inverse trigonometric functions
+    \item Key takeaway 3: Integration by substitution
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 6: Integral with Cotangent}
+
+\begin{solution}
+[Solution will be provided here. This is a placeholder for the detailed solution using integration by parts and recurrence relations.]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Key takeaway 1: Integration by parts technique
+    \item Key takeaway 2: Recurrence relations in integration
+    \item Key takeaway 3: Trigonometric identities and derivatives
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 7: 3D Vectors and Distance}
+
+\begin{solution}
+[Solution will be provided here. This is a placeholder for the detailed solution involving vector geometry, distance minimization, and geometric interpretations.]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Key takeaway 1: Minimizing distance functions using calculus
+    \item Key takeaway 2: Perpendicularity conditions in vector geometry
+    \item Key takeaway 3: Geometric interpretations of vector problems
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 8: Triangle Inequality and Rectangular Prism}
+
+\begin{solution}
+[Solution will be provided here. This is a placeholder for the detailed solution using the AM-GM inequality and optimization techniques.]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Key takeaway 1: Application of AM-GM inequality
+    \item Key takeaway 2: Optimization with constraints
+    \item Key takeaway 3: Equality conditions in inequalities
+\end{itemize}
+\end{takeaways}
+
+\vspace{2em}
+\noindent
+\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Collections}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Collections}
+
+\end{document}
+
