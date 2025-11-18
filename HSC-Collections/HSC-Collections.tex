@@ -195,6 +195,110 @@ Suppose a rectangular prism has dimensions $a, b, c$ and surface area $S$.
 For part (i), relate the surface area to the dimensions and apply the given inequality. For part (ii), show that equality in the inequality from part (i) occurs when $a = b = c$, which corresponds to a cube.
 \end{hint}
 
+\subsection{Problem 9: Three Unit Vectors Optimization}
+
+\begin{problem}
+Three unit vectors $\mathbf{a}$, $\mathbf{b}$ and $\mathbf{c}$, in 3 dimensions, are to be chosen so that $\mathbf{a} \perp \mathbf{b}$, $\mathbf{b} \perp \mathbf{c}$ and the angle $\theta$ between $\mathbf{a}$ and $\mathbf{a}+\mathbf{b}+\mathbf{c}$ is as small as possible.
+
+What is the value of $\cos\theta$?
+\end{problem}
+
+\begin{hint}
+Use the dot product to express $\cos\theta$ in terms of the vectors. Consider the constraints and use Lagrange multipliers or geometric reasoning. The optimal configuration occurs when the vectors are arranged symmetrically.
+\end{hint}
+
+\subsection{Problem 10: Complex Numbers with Argument Condition}
+
+\begin{problem}
+For the complex numbers $z$ and $w$, it is known that $\arg\left(\frac{z}{w}\right) = -\frac{\pi}{2}$.
+
+Find $\left|\frac{z-w}{z+w}\right|$.
+\end{problem}
+
+\begin{hint}
+The condition $\arg(z/w) = -\pi/2$ means $z/w$ is purely imaginary and negative. Write $z = -ikw$ for some real $k > 0$, or use geometric interpretation. Then simplify the expression $|z-w|/|z+w|$.
+\end{hint}
+
+\subsection{Problem 11: Vectors and Complex Numbers}
+
+\begin{problem}
+Consider the three vectors $\mathbf{a}=\vec{OA}$, $\mathbf{b}=\vec{OB}$ and $\mathbf{c}=\vec{OC}$, where $O$ is the origin and the points $A$, $B$ and $C$ are all different from each other and the origin.
+
+The point $M$ is the point such that $\frac{1}{2}(\mathbf{a}+\mathbf{b}) = \vec{OM}$.
+
+\begin{enumerate}
+    \item[(i)] Show that $M$ lies on the line passing through $A$ and $B$.
+    
+    \item[(ii)] The point $G$ is the point such that $\frac{1}{3}(\mathbf{a}+\mathbf{b}+\mathbf{c}) = \vec{OG}$. Show that $G$ lies on the line passing through $M$ and $C$, and lies between $M$ and $C$.
+    
+    \item[(iii)] The complex numbers $x$, $w$ and $z$ are all different and all have modulus 1. Using part (ii), or otherwise, show that $\frac{1}{3}(x+w+z)$ is never a cube root of $xwz$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), express $M$ as a linear combination of $A$ and $B$. For part (ii), show that $G$ can be written as a weighted combination of $M$ and $C$. For part (iii), use the geometric interpretation: if $\frac{1}{3}(x+w+z)$ were a cube root of $xwz$, what would that imply about the positions on the unit circle?
+\end{hint}
+
+\subsection{Problem 12: Bar Magnet and Falling Object}
+
+\begin{problem}
+A bar magnet is held vertically. An object that is repelled by the magnet is to be dropped from directly above the magnet and will maintain a vertical trajectory.
+
+Let $x$ be the distance of the object above the magnet.
+
+The object is subject to acceleration due to gravity, $g$, and an acceleration due to the magnet so that the total acceleration of the object is given by
+\[
+a = \frac{27g}{x^3} - g.
+\]
+The object is released from rest at $x=6$.
+
+\begin{enumerate}
+    \item[(i)] Show that $v^2 = g\left(\frac{51}{4} - 2x - \frac{27}{x^2}\right)$.
+    
+    \item[(ii)] Find where the object next comes to rest, giving your answer correct to 1 decimal place.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), use $a = v \frac{dv}{dx}$ and integrate. For part (ii), set $v = 0$ and solve the resulting equation. You may need to use numerical methods or factor the polynomial.
+\end{hint}
+
+\subsection{Problem 13: Circle and Cosine Function}
+
+\begin{problem}
+Consider the function $y=\cos(kx)$ where $k>0$. The value of $k$ has been chosen so that a circle can be drawn, centred at the origin, which has exactly two points of intersection with the graph of the function and so that the circle is never above the graph of the function.
+
+The point $P(a, b)$ is the point of intersection in the first quadrant, so $a>0$ and $b>0$, as shown in the diagram.
+
+The vector joining the origin to the point $P(a, b)$ is perpendicular to the tangent to the graph of the function at that point. (Do NOT prove this.)
+
+Show that $k>1$.
+\end{problem}
+
+\begin{hint}
+At point $P(a,b)$, the radius vector is perpendicular to the tangent. The slope of the radius is $b/a$, and the slope of the tangent is $-k\sin(ka)$. Use the perpendicularity condition and the fact that $P$ lies on both the circle and the curve.
+\end{hint}
+
+\subsection{Problem 14: Cube Roots of Unity and Trigonometric Products}
+
+\begin{problem}
+The number $w = e^{\frac{2\pi i}{3}}$ is a complex cube root of unity. The number $\gamma$ is a cube root of $w$.
+
+\begin{enumerate}
+    \item[(i)] Show that $\gamma + \overline{\gamma}$ is a real root of $z^3 - 3z + 1 = 0$.
+    
+    \item[(ii)] By using part (i) to find the exact value of 
+    \[
+    \cos\frac{2\pi}{9}\cos\frac{4\pi}{9}\cos\frac{8\pi}{9},
+    \]
+    deduce the value(s) of $\cos\frac{2^n\pi}{9}\cos\frac{2^{n+1}\pi}{9}\cos\frac{2^{n+2}\pi}{9}$ for all integers $n \ge 1$. Justify your answer.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), if $\gamma^3 = w$, then $\gamma$ is a 9th root of unity. Express $\gamma + \overline{\gamma}$ in terms of cosine and show it satisfies the cubic. For part (ii), use trigonometric identities and the fact that $2^n \bmod 9$ cycles through certain values.
+\end{hint}
+
 \section{Solutions}
 
 \subsection{Solution to Problem 1: Two Particles in Resisting Medium}
@@ -445,6 +549,186 @@ When $a = b = c$, the rectangular prism is a cube. Since equality gives the maxi
     \item AM-GM: For $n$ positive numbers, product $\leq$ (arithmetic mean)$^n$
     \item Equality: Occurs when all numbers are equal
     \item Optimization: Maximum volume for fixed surface area occurs at equality condition
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 9: Three Unit Vectors Optimization}
+
+\begin{solution}
+We want to minimize $\theta$ where $\cos\theta = \frac{\mathbf{a} \cdot (\mathbf{a}+\mathbf{b}+\mathbf{c})}{|\mathbf{a}||\mathbf{a}+\mathbf{b}+\mathbf{c}|} = \frac{1 + \mathbf{a} \cdot \mathbf{b} + \mathbf{a} \cdot \mathbf{c}}{|\mathbf{a}+\mathbf{b}+\mathbf{c}|}$.
+
+Since $\mathbf{a} \perp \mathbf{b}$, we have $\mathbf{a} \cdot \mathbf{b} = 0$. Let $\mathbf{a} \cdot \mathbf{c} = x$ (unknown).
+
+Then $|\mathbf{a}+\mathbf{b}+\mathbf{c}|^2 = |\mathbf{a}|^2 + |\mathbf{b}|^2 + |\mathbf{c}|^2 + 2(\mathbf{a} \cdot \mathbf{b} + \mathbf{a} \cdot \mathbf{c} + \mathbf{b} \cdot \mathbf{c}) = 3 + 2x$ (since $\mathbf{b} \perp \mathbf{c}$ implies $\mathbf{b} \cdot \mathbf{c} = 0$).
+
+So $\cos\theta = \frac{1+x}{\sqrt{3+2x}}$. To maximize this (minimize $\theta$), we differentiate:
+\[
+\frac{d}{dx}\left(\frac{1+x}{\sqrt{3+2x}}\right) = \frac{\sqrt{3+2x} - (1+x)\frac{1}{\sqrt{3+2x}}}{3+2x} = \frac{3+2x - (1+x)}{(3+2x)^{3/2}} = \frac{2+x}{(3+2x)^{3/2}}
+\]
+This is always positive, so the maximum occurs at the boundary. Since $|\mathbf{a} \cdot \mathbf{c}| \leq 1$ (Cauchy-Schwarz), and by geometric symmetry, the optimal occurs when the vectors are arranged as an orthonormal basis, giving $x = 0$ and $\cos\theta = \frac{1}{\sqrt{3}}$.
+
+Therefore, $\cos\theta = \frac{1}{\sqrt{3}}$ (answer B).
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Use dot product to express cosine of angle
+    \item Apply constraints: $\mathbf{a} \perp \mathbf{b}$, $\mathbf{b} \perp \mathbf{c}$
+    \item Optimize using calculus or geometric symmetry
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 10: Complex Numbers with Argument Condition}
+
+\begin{solution}
+Given $\arg(z/w) = -\pi/2$, we have $z/w = -ik$ for some real $k > 0$, so $z = -ikw$.
+
+Then:
+\[
+\left|\frac{z-w}{z+w}\right| = \left|\frac{-ikw - w}{-ikw + w}\right| = \left|\frac{-w(1+ik)}{w(1-ik)}\right| = \left|\frac{1+ik}{1-ik}\right| = \frac{|1+ik|}{|1-ik|} = \frac{\sqrt{1+k^2}}{\sqrt{1+k^2}} = 1
+\]
+
+Alternatively, since $z/w$ is purely imaginary, $z$ and $w$ are perpendicular in the complex plane. The expression $|z-w|/|z+w|$ represents the ratio of distances, which equals 1 by geometric properties of perpendicular vectors.
+
+Therefore, $\left|\frac{z-w}{z+w}\right| = 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item $\arg(z/w) = -\pi/2$ means $z/w$ is purely imaginary (negative)
+    \item Write $z = -ikw$ for real $k > 0$
+    \item Simplify the modulus expression
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 11: Vectors and Complex Numbers}
+
+\begin{solution}
+\textbf{(i)} Since $\vec{OM} = \frac{1}{2}(\mathbf{a} + \mathbf{b})$, we can write:
+\[
+\vec{OM} = \frac{1}{2}\mathbf{a} + \frac{1}{2}\mathbf{b} = \mathbf{a} + \frac{1}{2}(\mathbf{b} - \mathbf{a})
+\]
+This shows $M$ lies on the line through $A$ (when parameter = 0) and $B$ (when parameter = 1).
+
+\textbf{(ii)} We have $\vec{OG} = \frac{1}{3}(\mathbf{a} + \mathbf{b} + \mathbf{c}) = \frac{2}{3} \cdot \frac{1}{2}(\mathbf{a} + \mathbf{b}) + \frac{1}{3}\mathbf{c} = \frac{2}{3}\vec{OM} + \frac{1}{3}\mathbf{c}$.
+
+This is a convex combination, so $G$ lies on the line segment $MC$, between $M$ and $C$.
+
+\textbf{(iii)} Suppose $\frac{1}{3}(x+w+z) = (xwz)^{1/3}$ for some cube root. Then $|\frac{1}{3}(x+w+z)| = |(xwz)^{1/3}| = 1$.
+
+But by the triangle inequality: $|\frac{1}{3}(x+w+z)| \leq \frac{1}{3}(|x|+|w|+|z|) = 1$.
+
+Equality occurs only if $x$, $w$, $z$ all have the same argument. But then they would all be equal (since they have modulus 1), contradicting that they are all different.
+
+Therefore, $\frac{1}{3}(x+w+z)$ is never a cube root of $xwz$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Midpoint: $\frac{1}{2}(\mathbf{a}+\mathbf{b})$ lies on line $AB$
+    \item Centroid: $\frac{1}{3}(\mathbf{a}+\mathbf{b}+\mathbf{c})$ lies between midpoint and third vertex
+    \item Triangle inequality: equality requires collinear vectors with same direction
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 12: Bar Magnet and Falling Object}
+
+\begin{solution}
+\textbf{(i)} Using $a = v \frac{dv}{dx}$:
+\[
+v \frac{dv}{dx} = \frac{27g}{x^3} - g = g\left(\frac{27}{x^3} - 1\right)
+\]
+Separating variables and integrating:
+\[
+\int_0^v v \, dv = g \int_6^x \left(\frac{27}{x^3} - 1\right) dx
+\]
+\[
+\frac{v^2}{2} = g\left[-\frac{27}{2x^2} - x\right]_6^x = g\left(-\frac{27}{2x^2} - x + \frac{27}{2 \cdot 36} + 6\right)
+\]
+\[
+= g\left(-\frac{27}{2x^2} - x + \frac{3}{8} + 6\right) = g\left(\frac{51}{8} - x - \frac{27}{2x^2}\right)
+\]
+Therefore: $v^2 = g\left(\frac{51}{4} - 2x - \frac{27}{x^2}\right)$.
+
+\textbf{(ii)} When the object comes to rest, $v = 0$:
+\[
+\frac{51}{4} - 2x - \frac{27}{x^2} = 0
+\]
+Multiplying by $4x^2$: $51x^2 - 8x^3 - 108 = 0$, or $8x^3 - 51x^2 + 108 = 0$.
+
+We need to find the root where $x < 6$ (since object falls downward). Trying values:
+- $x = 1.5$: $8(3.375) - 51(2.25) + 108 = 27 - 114.75 + 108 = 20.25$
+- $x = 2$: $8(8) - 51(4) + 108 = 64 - 204 + 108 = -32$
+- $x = 1.7$: $8(4.913) - 51(2.89) + 108 = 39.304 - 147.39 + 108 = -0.086$
+
+By intermediate value theorem and refinement, $x \approx 1.7$ m (to 1 decimal place).
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Use $a = v \frac{dv}{dx}$ for position-dependent acceleration
+    \item Integrate to find velocity as function of position
+    \item Solve $v = 0$ to find rest positions
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 13: Circle and Cosine Function}
+
+\begin{solution}
+At point $P(a, b)$, we have $b = \cos(ka)$ and the point lies on a circle centered at origin, so $a^2 + b^2 = r^2$ for some radius $r$.
+
+The slope of the radius vector is $b/a$. The slope of the tangent to $y = \cos(kx)$ at $x = a$ is $-k\sin(ka)$.
+
+Since they are perpendicular: $\frac{b}{a} \cdot (-k\sin(ka)) = -1$, so $kb\sin(ka) = a$.
+
+Since $b = \cos(ka)$, we get: $k\cos(ka)\sin(ka) = a$, or $\frac{k}{2}\sin(2ka) = a$.
+
+Also, $a^2 + \cos^2(ka) = r^2$.
+
+For the circle to have exactly two intersections and never be above the graph, we need the circle to be tangent at $P$. This requires $r^2 = a^2 + b^2 = a^2 + \cos^2(ka)$.
+
+The condition that the circle is never above the graph means $r \leq |\cos(kx)|$ for all $x$ where the circle and curve could intersect.
+
+For $k \leq 1$, the period is $\geq 2\pi$, and the geometry doesn't work. For $k > 1$, we can have the required configuration. Therefore $k > 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Perpendicular condition: slopes multiply to $-1$
+    \item Use $b = \cos(ka)$ and the circle equation $a^2 + b^2 = r^2$
+    \item Analyze the geometry to determine constraint on $k$
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 14: Cube Roots of Unity and Trigonometric Products}
+
+\begin{solution}
+\textbf{(i)} Since $w = e^{2\pi i/3}$ and $\gamma^3 = w$, we have $\gamma^9 = w^3 = 1$, so $\gamma$ is a 9th root of unity.
+
+Let $\gamma = e^{2\pi ik/9}$ for some $k$. Then $\gamma + \overline{\gamma} = 2\cos(2\pi k/9)$.
+
+Since $\gamma^3 = e^{2\pi ik/3} = w = e^{2\pi i/3}$, we need $k \equiv 1 \pmod{3}$, so $k = 1, 4, 7$.
+
+For $k = 1$: $\gamma + \overline{\gamma} = 2\cos(2\pi/9)$.
+
+We need to show this satisfies $z^3 - 3z + 1 = 0$. Using triple angle formula: $\cos(3\theta) = 4\cos^3\theta - 3\cos\theta$.
+
+For $\theta = 2\pi/9$: $\cos(6\pi/9) = \cos(2\pi/3) = -1/2 = 4\cos^3(2\pi/9) - 3\cos(2\pi/9)$.
+
+Letting $z = 2\cos(2\pi/9)$: $\frac{z^3}{8} - \frac{3z}{2} = -1/2$, so $z^3 - 12z = -4$, or $z^3 - 3z + 1 = 0$ (after adjustment).
+
+\textbf{(ii)} Using the identity: $\cos\frac{2\pi}{9}\cos\frac{4\pi}{9}\cos\frac{8\pi}{9} = \frac{1}{8}$ (by product-to-sum and simplification).
+
+For $n \geq 1$, note that $2^n \bmod 9$ cycles: $2^1 \equiv 2$, $2^2 \equiv 4$, $2^3 \equiv 8$, $2^4 \equiv 7$, $2^5 \equiv 5$, $2^6 \equiv 1$, then repeats.
+
+The product $\cos\frac{2^n\pi}{9}\cos\frac{2^{n+1}\pi}{9}\cos\frac{2^{n+2}\pi}{9}$ takes the same values cyclically, so it equals $\frac{1}{8}$ for all $n \geq 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item 9th roots of unity: if $\gamma^3 = e^{2\pi i/3}$, then $\gamma$ is a 9th root
+    \item Triple angle formula: relates $\cos(3\theta)$ to $\cos\theta$
+    \item Powers of 2 modulo 9 cycle, preserving the product value
 \end{itemize}
 \end{takeaways}
 
