@@ -299,6 +299,16 @@ The number $w = e^{\frac{2\pi i}{3}}$ is a complex cube root of unity. The numbe
 For part (i), if $\gamma^3 = w$, then $\gamma$ is a 9th root of unity. Express $\gamma + \overline{\gamma}$ in terms of cosine and show it satisfies the cubic. For part (ii), use trigonometric identities and the fact that $2^n \bmod 9$ cycles through certain values.
 \end{hint}
 
+\subsection{Problem 15: Integer Equation with Large Exponents}
+
+\begin{problem}
+Explain why there is no integer $n$ such that $(n + 1)^{41} - 79n^{40} = 2$.
+\end{problem}
+
+\begin{hint}
+Consider the equation modulo a small prime number. Try working modulo 2, 3, or other small primes. Also consider the binomial expansion of $(n+1)^{41}$ and look for divisibility properties.
+\end{hint}
+
 \section{Solutions}
 
 \subsection{Solution to Problem 1: Two Particles in Resisting Medium}
@@ -729,6 +739,40 @@ The product $\cos\frac{2^n\pi}{9}\cos\frac{2^{n+1}\pi}{9}\cos\frac{2^{n+2}\pi}{9
     \item 9th roots of unity: if $\gamma^3 = e^{2\pi i/3}$, then $\gamma$ is a 9th root
     \item Triple angle formula: relates $\cos(3\theta)$ to $\cos\theta$
     \item Powers of 2 modulo 9 cycle, preserving the product value
+\end{itemize}
+\end{takeaways}
+
+\subsection{Solution to Problem 15: Integer Equation with Large Exponents}
+
+\begin{solution}
+We show that $(n + 1)^{41} - 79n^{40} = 2$ has no integer solutions by considering the equation modulo 2.
+
+\textbf{Case 1:} $n$ is even.
+
+Then $n+1$ is odd, so $(n+1)^{41} \equiv 1 \pmod{2}$ (odd to any power is odd).
+
+Also, $n^{40}$ is even (since $n$ is even), so $79n^{40} \equiv 0 \pmod{2}$.
+
+Therefore: $(n+1)^{41} - 79n^{40} \equiv 1 - 0 = 1 \pmod{2}$.
+
+\textbf{Case 2:} $n$ is odd.
+
+Then $n+1$ is even, so $(n+1)^{41} \equiv 0 \pmod{2}$.
+
+Also, $n^{40}$ is odd (since $n$ is odd), so $79n^{40} \equiv 1 \pmod{2}$ (odd times odd is odd).
+
+Therefore: $(n+1)^{41} - 79n^{40} \equiv 0 - 1 = -1 \equiv 1 \pmod{2}$.
+
+In both cases, the left-hand side is congruent to $1 \pmod{2}$, but the right-hand side is $2 \equiv 0 \pmod{2}$.
+
+This is a contradiction. Therefore, there is no integer $n$ satisfying the equation.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Modular arithmetic: Check equations modulo small primes to find contradictions
+    \item Parity: Modulo 2 often gives quick contradictions for integer equations
+    \item Fermat's Little Theorem: For prime $p$ and $\gcd(a,p)=1$, $a^{p-1} \equiv 1 \pmod{p}$
 \end{itemize}
 \end{takeaways}
 
