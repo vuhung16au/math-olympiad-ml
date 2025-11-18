@@ -1,0 +1,57 @@
+\subsection{Problem 32: Parallelogram Geometry}
+
+\begin{problem}
+Let $OPQR$ be a parallelogram with $\vec{OP} = \mathbf{p}$ and $\vec{OR} = \mathbf{r}$. The point $S$ is the midpoint of $QR$ and $T$ is the intersection of $PR$ and $OS$, as shown in the diagram below.
+
+\vspace{0.5em}
+\noindent
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/32-01.png}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+    \item[(i)] Show that $\vec{OT} = \frac{2}{3}\mathbf{r} + \frac{1}{3}\mathbf{p}$.
+    
+    \item[(ii)] Using part (i), or otherwise, prove that $T$ is the point that divides the interval $PR$ in the ratio 2:1.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), express $T$ as a point on both lines $PR$ and $OS$ using parameters, then equate. For part (ii), show that $\vec{PT} = 2\vec{TR}$ or use the section formula.
+\end{hint}
+
+\subsection{Solution to Problem 32: Parallelogram Geometry}
+
+\begin{solution}
+\textbf{(i)} In parallelogram $OPQR$, we have $\vec{OQ} = \vec{OP} + \vec{OR} = \mathbf{p} + \mathbf{r}$.
+
+Since $S$ is the midpoint of $QR$: $\vec{OS} = \vec{OR} + \frac{1}{2}\vec{RQ} = \mathbf{r} + \frac{1}{2}(\mathbf{p} + \mathbf{r} - \mathbf{r}) = \mathbf{r} + \frac{1}{2}\mathbf{p}$.
+
+Point $T$ lies on both $PR$ and $OS$.
+
+On $PR$: $\vec{OT} = \mathbf{r} + \lambda(\mathbf{p} - \mathbf{r}) = (1-\lambda)\mathbf{r} + \lambda\mathbf{p}$ for some $\lambda$.
+
+On $OS$: $\vec{OT} = \mu\left(\mathbf{r} + \frac{1}{2}\mathbf{p}\right) = \mu\mathbf{r} + \frac{\mu}{2}\mathbf{p}$ for some $\mu$.
+
+Equating: $(1-\lambda)\mathbf{r} + \lambda\mathbf{p} = \mu\mathbf{r} + \frac{\mu}{2}\mathbf{p}$.
+
+So: $1-\lambda = \mu$ and $\lambda = \frac{\mu}{2}$.
+
+Substituting: $1 - \frac{\mu}{2} = \mu$, so $1 = \frac{3\mu}{2}$, giving $\mu = \frac{2}{3}$ and $\lambda = \frac{1}{3}$.
+
+Therefore: $\vec{OT} = \frac{2}{3}\mathbf{r} + \frac{1}{3}\mathbf{p}$.
+
+\textbf{(ii)} On line $PR$: $\vec{OT} = \frac{1}{3}\mathbf{p} + \frac{2}{3}\mathbf{r}$.
+
+This means $T$ divides $PR$ in the ratio $PT : TR = \frac{2}{3} : \frac{1}{3} = 2 : 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Parametric form: Express points on lines using parameters
+    \item Intersection: Equate parametric forms to find intersection point
+    \item Section formula: Use to determine division ratio
+\end{itemize}
+\end{takeaways}
+

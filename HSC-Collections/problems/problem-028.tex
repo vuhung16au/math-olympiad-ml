@@ -1,0 +1,53 @@
+\subsection{Problem 28: Induction Proof for Series}
+
+\begin{problem}
+Prove by mathematical induction that, for $n \ge 2$,
+\[
+\frac{1}{2^2} + \frac{1}{3^2} + \dots + \frac{1}{n^2} < \frac{n-1}{n}.
+\]
+\end{problem}
+
+\begin{hint}
+For the base case, check $n = 2$. For the inductive step, assume the inequality holds for $n = k$ and show it holds for $n = k+1$ by adding $\frac{1}{(k+1)^2}$ to both sides and manipulating the inequality.
+\end{hint}
+
+\subsection{Solution to Problem 28: Induction Proof for Series}
+
+\begin{solution}
+\textbf{Base case ($n = 2$):} LHS $= \frac{1}{4} = 0.25$, RHS $= \frac{1}{2} = 0.5$. So $0.25 < 0.5$ $\checkmark$
+
+\textbf{Inductive step:} Assume true for $n = k$, i.e., $\frac{1}{2^2} + \frac{1}{3^2} + \dots + \frac{1}{k^2} < \frac{k-1}{k}$.
+
+For $n = k+1$, we need to show:
+\[
+\frac{1}{2^2} + \frac{1}{3^2} + \dots + \frac{1}{k^2} + \frac{1}{(k+1)^2} < \frac{k}{k+1}
+\]
+
+By the inductive hypothesis:
+\[
+\frac{1}{2^2} + \frac{1}{3^2} + \dots + \frac{1}{k^2} + \frac{1}{(k+1)^2} < \frac{k-1}{k} + \frac{1}{(k+1)^2}
+\]
+
+We need: $\frac{k-1}{k} + \frac{1}{(k+1)^2} < \frac{k}{k+1}$.
+
+This is equivalent to: $\frac{k-1}{k} < \frac{k}{k+1} - \frac{1}{(k+1)^2} = \frac{k(k+1) - 1}{(k+1)^2} = \frac{k^2 + k - 1}{(k+1)^2}$.
+
+Cross-multiplying: $(k-1)(k+1)^2 < k(k^2 + k - 1)$.
+
+Expanding: $(k-1)(k^2 + 2k + 1) < k^3 + k^2 - k$.
+
+Left side: $k^3 + 2k^2 + k - k^2 - 2k - 1 = k^3 + k^2 - k - 1$.
+
+So we need: $k^3 + k^2 - k - 1 < k^3 + k^2 - k$, which is $-1 < 0$ $\checkmark$
+
+Therefore, by mathematical induction, the inequality holds for all $n \ge 2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Base case: Verify for smallest value ($n = 2$)
+    \item Inductive step: Assume for $k$, prove for $k+1$
+    \item Algebraic manipulation: Simplify the inequality to verify it holds
+\end{itemize}
+\end{takeaways}
+

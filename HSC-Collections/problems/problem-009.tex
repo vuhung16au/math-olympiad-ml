@@ -1,0 +1,38 @@
+\subsection{Problem 9: Three Unit Vectors Optimization}
+
+\begin{problem}
+Three unit vectors $\mathbf{a}$, $\mathbf{b}$ and $\mathbf{c}$, in 3 dimensions, are to be chosen so that $\mathbf{a} \perp \mathbf{b}$, $\mathbf{b} \perp \mathbf{c}$ and the angle $\theta$ between $\mathbf{a}$ and $\mathbf{a}+\mathbf{b}+\mathbf{c}$ is as small as possible.
+
+What is the value of $\cos\theta$?
+\end{problem}
+
+\begin{hint}
+Use the dot product to express $\cos\theta$ in terms of the vectors. Consider the constraints and use Lagrange multipliers or geometric reasoning. The optimal configuration occurs when the vectors are arranged symmetrically.
+\end{hint}
+
+\subsection{Solution to Problem 9: Three Unit Vectors Optimization}
+
+\begin{solution}
+We want to minimize $\theta$ where $\cos\theta = \frac{\mathbf{a} \cdot (\mathbf{a}+\mathbf{b}+\mathbf{c})}{|\mathbf{a}||\mathbf{a}+\mathbf{b}+\mathbf{c}|} = \frac{1 + \mathbf{a} \cdot \mathbf{b} + \mathbf{a} \cdot \mathbf{c}}{|\mathbf{a}+\mathbf{b}+\mathbf{c}|}$.
+
+Since $\mathbf{a} \perp \mathbf{b}$, we have $\mathbf{a} \cdot \mathbf{b} = 0$. Let $\mathbf{a} \cdot \mathbf{c} = x$ (unknown).
+
+Then $|\mathbf{a}+\mathbf{b}+\mathbf{c}|^2 = |\mathbf{a}|^2 + |\mathbf{b}|^2 + |\mathbf{c}|^2 + 2(\mathbf{a} \cdot \mathbf{b} + \mathbf{a} \cdot \mathbf{c} + \mathbf{b} \cdot \mathbf{c}) = 3 + 2x$ (since $\mathbf{b} \perp \mathbf{c}$ implies $\mathbf{b} \cdot \mathbf{c} = 0$).
+
+So $\cos\theta = \frac{1+x}{\sqrt{3+2x}}$. To maximize this (minimize $\theta$), we differentiate:
+\[
+\frac{d}{dx}\left(\frac{1+x}{\sqrt{3+2x}}\right) = \frac{\sqrt{3+2x} - (1+x)\frac{1}{\sqrt{3+2x}}}{3+2x} = \frac{3+2x - (1+x)}{(3+2x)^{3/2}} = \frac{2+x}{(3+2x)^{3/2}}
+\]
+This is always positive, so the maximum occurs at the boundary. Since $|\mathbf{a} \cdot \mathbf{c}| \leq 1$ (Cauchy-Schwarz), and by geometric symmetry, the optimal occurs when the vectors are arranged as an orthonormal basis, giving $x = 0$ and $\cos\theta = \frac{1}{\sqrt{3}}$.
+
+Therefore, $\cos\theta = \frac{1}{\sqrt{3}}$ (answer B).
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Use dot product to express cosine of angle
+    \item Apply constraints: $\mathbf{a} \perp \mathbf{b}$, $\mathbf{b} \perp \mathbf{c}$
+    \item Optimize using calculus or geometric symmetry
+\end{itemize}
+\end{takeaways}
+

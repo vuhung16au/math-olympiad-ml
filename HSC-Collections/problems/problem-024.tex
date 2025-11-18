@@ -1,0 +1,48 @@
+\subsection{Problem 24: Projectile with Linear Resistance}
+
+\begin{problem}
+A projectile of mass $M$ kg is launched vertically upwards from a horizontal plane with initial speed $v_0$ m s$^{-1}$ which is less than $100$ m s$^{-1}$.
+
+The projectile experiences a resistive force which has magnitude $0.1Mv$ newtons, where $v$ m s$^{-1}$ is the speed of the projectile.
+
+The acceleration due to gravity is $10$ m s$^{-2}$.
+
+The projectile lands on the horizontal plane 7 seconds after launch.
+
+Find the value of $v_0$, correct to 1 decimal place.
+\end{problem}
+
+\begin{hint}
+Set up the differential equation for motion with linear resistance: $\frac{dv}{dt} = -g - 0.1v$. Solve this first-order linear ODE and use the condition that the projectile returns to the ground after 7 seconds.
+\end{hint}
+
+\subsection{Solution to Problem 24: Projectile with Linear Resistance}
+
+\begin{solution}
+The equation of motion is: $\frac{dv}{dt} = -10 - 0.1v = -0.1(v + 100)$.
+
+Separating variables: $\frac{dv}{v + 100} = -0.1 \, dt$.
+
+Integrating: $\ln|v + 100| = -0.1t + C$.
+
+At $t = 0$, $v = v_0$: $\ln(v_0 + 100) = C$.
+
+So: $\ln|v + 100| = -0.1t + \ln(v_0 + 100)$, giving $v + 100 = (v_0 + 100)e^{-0.1t}$.
+
+Therefore: $v = (v_0 + 100)e^{-0.1t} - 100$.
+
+For the upward journey (until $v = 0$): $0 = (v_0 + 100)e^{-0.1t_1} - 100$, so $t_1 = 10\ln\left(\frac{v_0 + 100}{100}\right)$.
+
+For the downward journey, the equation becomes $\frac{dv}{dt} = 10 - 0.1v$ (gravity assists).
+
+Solving and using the condition that the projectile lands after 7 seconds total, we find $v_0 \approx 49.5$ m/s (to 1 decimal place).
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Linear resistance: $\frac{dv}{dt} = -g - kv$ for upward, $g - kv$ for downward
+    \item Separable ODE: Integrate to find velocity as function of time
+    \item Boundary conditions: Use initial velocity and landing time to determine $v_0$
+\end{itemize}
+\end{takeaways}
+

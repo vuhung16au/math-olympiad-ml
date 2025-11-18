@@ -1,0 +1,86 @@
+\subsection{Problem 17: Integration with Recurrence Relations}
+
+\begin{problem}
+\begin{enumerate}
+    \item[(i)] Let
+    \[
+    J_{n}=\int_{0}^{\frac{\pi}{2}}\sin^{n}\theta \, d\theta
+    \]
+    where $n \ge 0$ is an integer. Show that $J_{n}=\frac{n-1}{n}J_{n-2}$ for all integers $n \ge 2$.
+    
+    \item[(ii)] Let
+    \[
+    I_{n}=\int_{0}^{1}x^{n}(1-x)^{n}dx
+    \]
+    where $n$ is a positive integer. By using the substitution $x=\sin^{2}\theta$, or otherwise, show that
+    \[
+    I_{n}=\frac{1}{2^{2n}}\int_{0}^{\frac{\pi}{2}}\sin^{2n+1}\theta \, d\theta.
+    \]
+    
+    \item[(iii)] Hence, or otherwise, show that $I_{n}=\frac{n}{4n+2}I_{n-1}$, for all integers $n \ge 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), use integration by parts with $u = \sin^{n-1}\theta$ and $dv = \sin\theta \, d\theta$. For part (ii), make the substitution and simplify using trigonometric identities. For part (iii), combine the results from parts (i) and (ii).
+\end{hint}
+
+\subsection{Solution to Problem 17: Integration with Recurrence Relations}
+
+\begin{solution}
+\textbf{(i)} Using integration by parts with $u = \sin^{n-1}\theta$ and $dv = \sin\theta \, d\theta$:
+\[
+J_n = \int_0^{\pi/2} \sin^n\theta \, d\theta = \int_0^{\pi/2} \sin^{n-1}\theta \cdot \sin\theta \, d\theta
+\]
+Let $u = \sin^{n-1}\theta$, $dv = \sin\theta \, d\theta$, so $du = (n-1)\sin^{n-2}\theta \cos\theta \, d\theta$ and $v = -\cos\theta$:
+\[
+J_n = \left[-\sin^{n-1}\theta \cos\theta\right]_0^{\pi/2} + (n-1)\int_0^{\pi/2} \sin^{n-2}\theta \cos^2\theta \, d\theta
+\]
+The boundary term is 0. Using $\cos^2\theta = 1 - \sin^2\theta$:
+\[
+J_n = (n-1)\int_0^{\pi/2} \sin^{n-2}\theta (1 - \sin^2\theta) \, d\theta = (n-1)(J_{n-2} - J_n)
+\]
+Solving: $J_n = (n-1)J_{n-2} - (n-1)J_n$, so $nJ_n = (n-1)J_{n-2}$.
+
+Therefore: $J_n = \frac{n-1}{n}J_{n-2}$.
+
+\textbf{(ii)} Using substitution $x = \sin^2\theta$, so $dx = 2\sin\theta\cos\theta \, d\theta$ and $1-x = \cos^2\theta$:
+\[
+I_n = \int_0^1 x^n(1-x)^n \, dx = \int_0^{\pi/2} \sin^{2n}\theta \cos^{2n}\theta \cdot 2\sin\theta\cos\theta \, d\theta
+\]
+\[
+= 2\int_0^{\pi/2} \sin^{2n+1}\theta \cos^{2n+1}\theta \, d\theta = 2\int_0^{\pi/2} (\sin\theta\cos\theta)^{2n+1} \, d\theta
+\]
+Using $\sin(2\theta) = 2\sin\theta\cos\theta$, so $\sin\theta\cos\theta = \frac{1}{2}\sin(2\theta)$:
+\[
+I_n = 2\int_0^{\pi/2} \left(\frac{1}{2}\sin(2\theta)\right)^{2n+1} \, d\theta = \frac{2}{2^{2n+1}}\int_0^{\pi/2} \sin^{2n+1}(2\theta) \, d\theta
+\]
+Let $u = 2\theta$, so $du = 2d\theta$:
+\[
+I_n = \frac{1}{2^{2n+1}} \int_0^{\pi} \sin^{2n+1}u \cdot \frac{du}{2} = \frac{1}{2^{2n+2}} \int_0^{\pi} \sin^{2n+1}u \, du
+\]
+By symmetry: $\int_0^{\pi} \sin^{2n+1}u \, du = 2\int_0^{\pi/2} \sin^{2n+1}u \, du$.
+
+Therefore: $I_n = \frac{1}{2^{2n+2}} \cdot 2J_{2n+1} = \frac{1}{2^{2n+1}}J_{2n+1}$.
+
+\textbf{(iii)} From part (ii): $I_n = \frac{1}{2^{2n+1}}J_{2n+1}$ and $I_{n-1} = \frac{1}{2^{2n-1}}J_{2n-1}$.
+
+From part (i): $J_{2n+1} = \frac{2n}{2n+1}J_{2n-1}$.
+
+Therefore:
+\[
+I_n = \frac{1}{2^{2n+1}} \cdot \frac{2n}{2n+1}J_{2n-1} = \frac{2n}{2n+1} \cdot \frac{1}{2^{2n+1}}J_{2n-1} = \frac{2n}{2n+1} \cdot \frac{1}{4} \cdot \frac{1}{2^{2n-1}}J_{2n-1}
+\]
+\[
+= \frac{n}{2(2n+1)} \cdot I_{n-1} = \frac{n}{4n+2}I_{n-1}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Integration by parts: Use to derive recurrence relations for powers of trigonometric functions
+    \item Substitution: $x = \sin^2\theta$ converts polynomial integrals to trigonometric integrals
+    \item Combining recurrences: Use multiple recurrence relations together to prove new results
+\end{itemize}
+\end{takeaways}
+

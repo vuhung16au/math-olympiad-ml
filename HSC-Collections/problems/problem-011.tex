@@ -1,0 +1,50 @@
+\subsection{Problem 11: Vectors and Complex Numbers}
+
+\begin{problem}
+Consider the three vectors $\mathbf{a}=\vec{OA}$, $\mathbf{b}=\vec{OB}$ and $\mathbf{c}=\vec{OC}$, where $O$ is the origin and the points $A$, $B$ and $C$ are all different from each other and the origin.
+
+The point $M$ is the point such that $\frac{1}{2}(\mathbf{a}+\mathbf{b}) = \vec{OM}$.
+
+\begin{enumerate}
+    \item[(i)] Show that $M$ lies on the line passing through $A$ and $B$.
+    
+    \item[(ii)] The point $G$ is the point such that $\frac{1}{3}(\mathbf{a}+\mathbf{b}+\mathbf{c}) = \vec{OG}$. Show that $G$ lies on the line passing through $M$ and $C$, and lies between $M$ and $C$.
+    
+    \item[(iii)] The complex numbers $x$, $w$ and $z$ are all different and all have modulus 1. Using part (ii), or otherwise, show that $\frac{1}{3}(x+w+z)$ is never a cube root of $xwz$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), express $M$ as a linear combination of $A$ and $B$. For part (ii), show that $G$ can be written as a weighted combination of $M$ and $C$. For part (iii), use the geometric interpretation: if $\frac{1}{3}(x+w+z)$ were a cube root of $xwz$, what would that imply about the positions on the unit circle?
+\end{hint}
+
+\subsection{Solution to Problem 11: Vectors and Complex Numbers}
+
+\begin{solution}
+\textbf{(i)} Since $\vec{OM} = \frac{1}{2}(\mathbf{a} + \mathbf{b})$, we can write:
+\[
+\vec{OM} = \frac{1}{2}\mathbf{a} + \frac{1}{2}\mathbf{b} = \mathbf{a} + \frac{1}{2}(\mathbf{b} - \mathbf{a})
+\]
+This shows $M$ lies on the line through $A$ (when parameter = 0) and $B$ (when parameter = 1).
+
+\textbf{(ii)} We have $\vec{OG} = \frac{1}{3}(\mathbf{a} + \mathbf{b} + \mathbf{c}) = \frac{2}{3} \cdot \frac{1}{2}(\mathbf{a} + \mathbf{b}) + \frac{1}{3}\mathbf{c} = \frac{2}{3}\vec{OM} + \frac{1}{3}\mathbf{c}$.
+
+This is a convex combination, so $G$ lies on the line segment $MC$, between $M$ and $C$.
+
+\textbf{(iii)} Suppose $\frac{1}{3}(x+w+z) = (xwz)^{1/3}$ for some cube root. Then $|\frac{1}{3}(x+w+z)| = |(xwz)^{1/3}| = 1$.
+
+But by the triangle inequality: $|\frac{1}{3}(x+w+z)| \leq \frac{1}{3}(|x|+|w|+|z|) = 1$.
+
+Equality occurs only if $x$, $w$, $z$ all have the same argument. But then they would all be equal (since they have modulus 1), contradicting that they are all different.
+
+Therefore, $\frac{1}{3}(x+w+z)$ is never a cube root of $xwz$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Midpoint: $\frac{1}{2}(\mathbf{a}+\mathbf{b})$ lies on line $AB$
+    \item Centroid: $\frac{1}{3}(\mathbf{a}+\mathbf{b}+\mathbf{c})$ lies between midpoint and third vertex
+    \item Triangle inequality: equality requires collinear vectors with same direction
+\end{itemize}
+\end{takeaways}
+

@@ -1,0 +1,40 @@
+\subsection{Problem 4: Complex Triangle Inequality}
+
+\begin{problem}
+The complex number $z$ satisfies $\left| z - \frac{4}{z} \right| = 2$.
+
+Using the triangle inequality, or otherwise, show that $|z| \leq \sqrt{5} + 1$.
+\end{problem}
+
+\begin{hint}
+Apply the triangle inequality to $|z - \frac{4}{z}|$. Consider both directions: $|z| - |\frac{4}{z}| \leq |z - \frac{4}{z}|$ and $|z - \frac{4}{z}| \leq |z| + |\frac{4}{z}|$. Use the given condition to derive bounds on $|z|$.
+\end{hint}
+
+\subsection{Solution to Problem 4: Complex Triangle Inequality}
+
+\begin{solution}
+Given $|z - 4/z| = 2$. Applying the triangle inequality in both directions:
+
+\textbf{Lower bound:} $|z - 4/z| \geq |z| - |4/z| = |z| - 4/|z|$
+
+So $2 \geq |z| - 4/|z|$, which gives $|z|^2 - 2|z| - 4 \leq 0$.
+
+Solving: $|z| \leq 1 + \sqrt{5}$.
+
+\textbf{Upper bound:} $|z - 4/z| \leq |z| + |4/z| = |z| + 4/|z|$
+
+So $2 \leq |z| + 4/|z|$, which gives $|z|^2 - 2|z| + 4 \geq 0$.
+
+This quadratic has discriminant $4 - 16 = -12 < 0$, so it's always positive. This gives no upper bound.
+
+Combining both: $|z| \leq 1 + \sqrt{5} = \sqrt{5} + 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Triangle inequality: $|a - b| \geq ||a| - |b||$ and $|a - b| \leq |a| + |b|$
+    \item Apply both directions to get bounds on $|z|$
+    \item Solve resulting quadratic inequalities
+\end{itemize}
+\end{takeaways}
+

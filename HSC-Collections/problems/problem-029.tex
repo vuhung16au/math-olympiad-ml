@@ -1,0 +1,36 @@
+\subsection{Problem 29: Irrationality of Logarithm}
+
+\begin{problem}
+Prove that for any integer $n > 1$, $\log_n(n+1)$ is irrational.
+\end{problem}
+
+\begin{hint}
+Use proof by contradiction. Assume $\log_n(n+1) = \frac{p}{q}$ for integers $p, q$. Then $n^{p/q} = n+1$, so $n^p = (n+1)^q$. Use the fact that $n$ and $n+1$ are coprime.
+\end{hint}
+
+\subsection{Solution to Problem 29: Irrationality of Logarithm}
+
+\begin{solution}
+Assume, for contradiction, that $\log_n(n+1) = \frac{p}{q}$ for some integers $p, q > 0$.
+
+Then $n^{p/q} = n+1$, so $n^p = (n+1)^q$.
+
+Since $n$ and $n+1$ are consecutive integers, they are coprime (their greatest common divisor is 1).
+
+The prime factorization of $n^p$ contains only primes dividing $n$, while $(n+1)^q$ contains only primes dividing $n+1$.
+
+Since $n$ and $n+1$ are coprime, no prime can divide both, so $n^p = (n+1)^q$ is impossible unless $n^p = (n+1)^q = 1$.
+
+But $n > 1$, so $n^p \ge 2^p \ge 2 > 1$, and $(n+1)^q \ge 3^q \ge 3 > 1$.
+
+This is a contradiction. Therefore, $\log_n(n+1)$ is irrational.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Proof by contradiction: Assume the number is rational
+    \item Coprime property: Consecutive integers are coprime
+    \item Prime factorization: Use uniqueness of prime factorization to derive contradiction
+\end{itemize}
+\end{takeaways}
+

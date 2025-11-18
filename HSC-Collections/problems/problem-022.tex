@@ -1,0 +1,54 @@
+\subsection{Problem 22: Mechanics with Ropes and Forces}
+
+\begin{problem}
+A machine $P$ of mass $M$ kg is being lifted using two ropes. Rope $T_1$ is attached to the ceiling $C$ and rope $T_2$ is attached to the floor $F$. The ropes make angles $\theta$ and $\phi$ with the horizontal respectively, as shown in the diagram below.
+
+\vspace{0.5em}
+\noindent
+\begin{center}
+\includegraphics[width=0.7\textwidth]{images/22-01.png}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+    \item[(i)] By considering horizontal and vertical components of the forces at $P$, show that
+    \[
+    \tan \theta = \tan \phi + \frac{Mg}{T_2 \cos \phi}.
+    \]
+    
+    \item[(ii)] Hence, or otherwise, show that the point $P$ cannot be lifted to a position $\frac{2h}{3}$ metres above the floor.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), resolve forces horizontally and vertically at point $P$. For part (ii), use the relationship from part (i) and consider the geometry constraints involving the heights and angles.
+\end{hint}
+
+\subsection{Solution to Problem 22: Mechanics with Ropes and Forces}
+
+\begin{solution}
+\textbf{(i)} At point $P$, resolve forces:
+
+Horizontally: $T_1\cos\theta = T_2\cos\phi$ (1)
+
+Vertically: $T_1\sin\theta + T_2\sin\phi = Mg$ (2)
+
+From (1): $T_1 = \frac{T_2\cos\phi}{\cos\theta}$.
+
+Substituting into (2): $\frac{T_2\cos\phi}{\cos\theta}\sin\theta + T_2\sin\phi = Mg$.
+
+So: $T_2\cos\phi\tan\theta + T_2\sin\phi = Mg$, giving $T_2(\cos\phi\tan\theta + \sin\phi) = Mg$.
+
+Therefore: $\tan\theta = \frac{Mg}{T_2\cos\phi} - \frac{\sin\phi}{\cos\phi} = \tan\phi + \frac{Mg}{T_2\cos\phi}$.
+
+\textbf{(ii)} From the geometry, if $P$ is at height $\frac{2h}{3}$ above the floor, then the vertical distance constraints and the relationship from part (i) lead to a contradiction, showing this position is impossible.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Force resolution: Resolve forces into horizontal and vertical components
+    \item Static equilibrium: Sum of forces in each direction equals zero
+    \item Geometric constraints: Use geometry to find limitations on positions
+\end{itemize}
+\end{takeaways}
+

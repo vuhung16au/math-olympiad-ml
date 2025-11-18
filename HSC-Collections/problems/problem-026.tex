@@ -1,0 +1,53 @@
+\subsection{Problem 26: Complex Numbers and Equilateral Triangle}
+
+\begin{problem}
+Let $z_1$ be a complex number and let $z_2 = e^{\frac{i\pi}{3}}z_1$. The diagram below shows points $A$ and $B$ which represent $z_1$ and $z_2$, respectively, in the Argand plane.
+
+\vspace{0.5em}
+\noindent
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/26-01.png}
+\end{center}
+\vspace{0.3em}
+
+\begin{enumerate}
+    \item[(i)] Explain why triangle $OAB$ is an equilateral triangle.
+    
+    \item[(ii)] Prove that ${z_1}^2 + {z_2}^2 = z_1 z_2$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), note that $e^{i\pi/3}$ represents a $60^\circ$ rotation. For part (ii), substitute $z_2 = e^{i\pi/3}z_1$ and use properties of $e^{i\pi/3}$.
+\end{hint}
+
+\subsection{Solution to Problem 26: Complex Numbers and Equilateral Triangle}
+
+\begin{solution}
+\textbf{(i)} Since $z_2 = e^{i\pi/3}z_1$, multiplying by $e^{i\pi/3}$ rotates $z_1$ by $60^\circ$ about the origin.
+
+So $|z_2| = |z_1|$ (rotation preserves modulus) and $\text{Arg}(z_2) = \text{Arg}(z_1) + \pi/3$.
+
+Since $O$ is at the origin, $|OA| = |z_1|$, $|OB| = |z_2| = |z_1|$, and the angle $AOB = \pi/3$.
+
+Therefore triangle $OAB$ has two equal sides ($OA = OB$) and the included angle is $60^\circ$, making it equilateral.
+
+\textbf{(ii)} We have $z_2 = e^{i\pi/3}z_1 = \left(\frac{1}{2} + \frac{i\sqrt{3}}{2}\right)z_1$.
+
+Then: $z_1^2 + z_2^2 = z_1^2 + e^{2i\pi/3}z_1^2 = z_1^2(1 + e^{2i\pi/3})$.
+
+And: $z_1 z_2 = z_1 \cdot e^{i\pi/3}z_1 = e^{i\pi/3}z_1^2$.
+
+Since $1 + e^{2i\pi/3} = 1 + \left(-\frac{1}{2} + \frac{i\sqrt{3}}{2}\right) = \frac{1}{2} + \frac{i\sqrt{3}}{2} = e^{i\pi/3}$:
+
+We get $z_1^2 + z_2^2 = z_1^2 e^{i\pi/3} = z_1 z_2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Rotation: $e^{i\pi/3}$ rotates by $60^\circ$
+    \item Equilateral triangle: Two equal sides with $60^\circ$ angle implies equilateral
+    \item Complex algebra: Use $e^{2i\pi/3} = -\frac{1}{2} + \frac{i\sqrt{3}}{2}$
+\end{itemize}
+\end{takeaways}
+

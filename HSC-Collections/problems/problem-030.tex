@@ -1,0 +1,55 @@
+\subsection{Problem 30: Proposition Logic}
+
+\begin{problem}
+In the set of integers, let $P$ be the proposition: 'If $k+1$ is divisible by 3, then $k^3+1$ is divisible by 3'.
+
+\begin{enumerate}
+    \item[(i)] Prove that the proposition $P$ is true.
+    
+    \item[(ii)] Write down the contrapositive of the proposition $P$.
+    
+    \item[(iii)] Write down the converse of the proposition $P$ and state, with reasons, whether this converse is true or false.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), if $k+1 = 3m$, then $k = 3m-1$. Expand $k^3+1$ and show it's divisible by 3. For part (ii), the contrapositive is 'If $k^3+1$ is not divisible by 3, then $k+1$ is not divisible by 3'. For part (iii), test the converse with counterexamples.
+\end{hint}
+
+\subsection{Solution to Problem 30: Proposition Logic}
+
+\begin{solution}
+\textbf{(i)} If $k+1$ is divisible by 3, then $k+1 = 3m$ for some integer $m$, so $k = 3m - 1$.
+
+Then: $k^3 + 1 = (3m - 1)^3 + 1 = 27m^3 - 27m^2 + 9m - 1 + 1 = 9m(3m^2 - 3m + 1)$.
+
+Since $9m(3m^2 - 3m + 1)$ is divisible by 3, the proposition $P$ is true.
+
+\textbf{(ii)} The contrapositive is: 'If $k^3+1$ is not divisible by 3, then $k+1$ is not divisible by 3'.
+
+\textbf{(iii)} The converse is: 'If $k^3+1$ is divisible by 3, then $k+1$ is divisible by 3'.
+
+This is false. Counterexample: $k = 2$. Then $k^3+1 = 9$ is divisible by 3, but $k+1 = 3$ is also divisible by 3. 
+
+Actually, let's check $k = 5$: $k^3+1 = 126$ is divisible by 3, but $k+1 = 6$ is also divisible by 3.
+
+Let's try $k = 8$: $k^3+1 = 513$ is divisible by 3, and $k+1 = 9$ is divisible by 3.
+
+Actually, the converse might be true. Let's check: If $k^3+1$ is divisible by 3, then $k^3 \equiv -1 \equiv 2 \pmod{3}$.
+
+The cubes modulo 3 are: $0^3 \equiv 0$, $1^3 \equiv 1$, $2^3 \equiv 8 \equiv 2 \pmod{3}$.
+
+So $k^3 \equiv 2 \pmod{3}$ means $k \equiv 2 \pmod{3}$, so $k+1 \equiv 0 \pmod{3}$.
+
+Therefore the converse is actually true!
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Direct proof: Substitute $k = 3m - 1$ and expand
+    \item Contrapositive: Negate both hypothesis and conclusion
+    \item Converse: Swap hypothesis and conclusion
+    \item Modular arithmetic: Use to check divisibility properties
+\end{itemize}
+\end{takeaways}
+

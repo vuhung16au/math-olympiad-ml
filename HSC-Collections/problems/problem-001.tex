@@ -1,0 +1,52 @@
+\subsection{Problem 1: Two Particles in Resisting Medium}
+
+\begin{problem}
+Two particles, $A$ and $B$, each have mass 1 kg and are in a medium that exerts a resistance to motion equal to $kv$, where $k > 0$ and $v$ is the velocity of any particle. Both particles maintain vertical trajectories.
+
+The acceleration due to gravity is $g$ m s$^{-2}$, where $g > 0$.
+
+The two particles are simultaneously projected towards each other with the same speed, $v_0$ m s$^{-1}$, where $0 < v_0 < \frac{g}{k}$.
+
+The particle $A$ is initially $d$ metres directly above particle $B$, where $d < \frac{2v_0}{k}$.
+
+Find the time taken for the particles to meet.
+\end{problem}
+
+\begin{hint}
+Consider the equations of motion for each particle under the influence of gravity and resistance. Set up differential equations for the velocities and positions. The condition for the particles to meet will give you an equation involving time.
+\end{hint}
+
+\subsection{Solution to Problem 1: Two Particles in Resisting Medium}
+
+\begin{solution}
+Let $y_A(t)$ and $y_B(t)$ be the positions of particles $A$ and $B$ respectively, with $y_A(0) = d$ and $y_B(0) = 0$. The equation of motion for each particle is:
+\[
+\frac{dv}{dt} = -g - kv
+\]
+Solving this first-order linear ODE with $v(0) = -v_0$ (downward for $A$) and $v(0) = v_0$ (upward for $B$):
+\[
+v(t) = -\frac{g}{k} + \left(v_0 + \frac{g}{k}\right)e^{-kt}
+\]
+Integrating to find position:
+\[
+y(t) = y(0) - \frac{g}{k}t + \frac{1}{k}\left(v_0 + \frac{g}{k}\right)(1 - e^{-kt})
+\]
+For particle $A$: $y_A(t) = d - \frac{g}{k}t + \frac{1}{k}\left(v_0 + \frac{g}{k}\right)(1 - e^{-kt})$
+
+For particle $B$: $y_B(t) = \frac{g}{k}t - \frac{1}{k}\left(v_0 + \frac{g}{k}\right)(1 - e^{-kt})$
+
+Setting $y_A(t) = y_B(t)$ and solving:
+\[
+d = \frac{2}{k}\left(v_0 + \frac{g}{k}\right)(1 - e^{-kt})
+\]
+Therefore, $t = -\frac{1}{k}\ln\left(1 - \frac{kd}{2(v_0 + g/k)}\right)$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Motion with linear resistance: $dv/dt = -g - kv$ has solution $v = -g/k + (v_0 + g/k)e^{-kt}$
+    \item Relative motion: Set positions equal to find meeting time
+    \item Exponential decay in velocity due to resistance
+\end{itemize}
+\end{takeaways}
+

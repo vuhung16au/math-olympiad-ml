@@ -1,0 +1,35 @@
+\subsection{Problem 10: Complex Numbers with Argument Condition}
+
+\begin{problem}
+For the complex numbers $z$ and $w$, it is known that $\arg\left(\frac{z}{w}\right) = -\frac{\pi}{2}$.
+
+Find $\left|\frac{z-w}{z+w}\right|$.
+\end{problem}
+
+\begin{hint}
+The condition $\arg(z/w) = -\pi/2$ means $z/w$ is purely imaginary and negative. Write $z = -ikw$ for some real $k > 0$, or use geometric interpretation. Then simplify the expression $|z-w|/|z+w|$.
+\end{hint}
+
+\subsection{Solution to Problem 10: Complex Numbers with Argument Condition}
+
+\begin{solution}
+Given $\arg(z/w) = -\pi/2$, we have $z/w = -ik$ for some real $k > 0$, so $z = -ikw$.
+
+Then:
+\[
+\left|\frac{z-w}{z+w}\right| = \left|\frac{-ikw - w}{-ikw + w}\right| = \left|\frac{-w(1+ik)}{w(1-ik)}\right| = \left|\frac{1+ik}{1-ik}\right| = \frac{|1+ik|}{|1-ik|} = \frac{\sqrt{1+k^2}}{\sqrt{1+k^2}} = 1
+\]
+
+Alternatively, since $z/w$ is purely imaginary, $z$ and $w$ are perpendicular in the complex plane. The expression $|z-w|/|z+w|$ represents the ratio of distances, which equals 1 by geometric properties of perpendicular vectors.
+
+Therefore, $\left|\frac{z-w}{z+w}\right| = 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item $\arg(z/w) = -\pi/2$ means $z/w$ is purely imaginary (negative)
+    \item Write $z = -ikw$ for real $k > 0$
+    \item Simplify the modulus expression
+\end{itemize}
+\end{takeaways}
+

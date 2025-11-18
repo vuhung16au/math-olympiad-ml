@@ -1,0 +1,51 @@
+\subsection{Problem 13: Circle and Cosine Function}
+
+\begin{problem}
+Consider the function $y=\cos(kx)$ where $k>0$. The value of $k$ has been chosen so that a circle can be drawn, centred at the origin, which has exactly two points of intersection with the graph of the function and so that the circle is never above the graph of the function.
+
+The point $P(a, b)$ is the point of intersection in the first quadrant, so $a>0$ and $b>0$, as shown in the diagram below.
+
+\vspace{0.5em}
+\noindent
+\begin{center}
+\includegraphics[width=0.7\textwidth]{images/13-01.png}
+\end{center}
+\vspace{0.3em}
+
+The vector joining the origin to the point $P(a, b)$ is perpendicular to the tangent to the graph of the function at that point. (Do NOT prove this.)
+
+Show that $k>1$.
+\end{problem}
+
+\begin{hint}
+At point $P(a,b)$, the radius vector is perpendicular to the tangent. The slope of the radius is $b/a$, and the slope of the tangent is $-k\sin(ka)$. Use the perpendicularity condition and the fact that $P$ lies on both the circle and the curve.
+\end{hint}
+
+\subsection{Solution to Problem 13: Circle and Cosine Function}
+
+\begin{solution}
+At point $P(a, b)$, we have $b = \cos(ka)$ and the point lies on a circle centered at origin, so $a^2 + b^2 = r^2$ for some radius $r$.
+
+The slope of the radius vector is $b/a$. The slope of the tangent to $y = \cos(kx)$ at $x = a$ is $-k\sin(ka)$.
+
+Since they are perpendicular: $\frac{b}{a} \cdot (-k\sin(ka)) = -1$, so $kb\sin(ka) = a$.
+
+Since $b = \cos(ka)$, we get: $k\cos(ka)\sin(ka) = a$, or $\frac{k}{2}\sin(2ka) = a$.
+
+Also, $a^2 + \cos^2(ka) = r^2$.
+
+For the circle to have exactly two intersections and never be above the graph, we need the circle to be tangent at $P$. This requires $r^2 = a^2 + b^2 = a^2 + \cos^2(ka)$.
+
+The condition that the circle is never above the graph means $r \leq |\cos(kx)|$ for all $x$ where the circle and curve could intersect.
+
+For $k \leq 1$, the period is $\geq 2\pi$, and the geometry doesn't work. For $k > 1$, we can have the required configuration. Therefore $k > 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Perpendicular condition: slopes multiply to $-1$
+    \item Use $b = \cos(ka)$ and the circle equation $a^2 + b^2 = r^2$
+    \item Analyze the geometry to determine constraint on $k$
+\end{itemize}
+\end{takeaways}
+
