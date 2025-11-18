@@ -16,37 +16,3 @@ Let $w$ be a complex number such that $1 + w + w^2 + \dots + w^6 = 0$.
 For part (i), use the formula for the sum of a geometric series. For part (ii), use the fact that for a quadratic with real coefficients, the other root is the complex conjugate. For part (iii), use properties of roots of unity and their relationships.
 \end{hint}
 
-\subsection{Solution to Problem 3: Complex 7th Root of Unity}
-
-\begin{solution}
-\textbf{(i)} If $w = 1$, then $1 + w + \dots + w^6 = 7 \neq 0$. So $w \neq 1$. Using the geometric series formula:
-\[
-1 + w + w^2 + \dots + w^6 = \frac{1 - w^7}{1 - w} = 0
-\]
-Since $w \neq 1$, we have $1 - w^7 = 0$, so $w^7 = 1$. Therefore $w$ is a 7th root of unity.
-
-\textbf{(ii)} Since the quadratic has real coefficients, the other root is $\overline{\alpha} = \overline{w + w^2 + w^4} = \overline{w} + \overline{w^2} + \overline{w^4}$.
-
-For a 7th root of unity $w = e^{2\pi ik/7}$ where $k \in \{1,2,3,4,5,6\}$, we have $\overline{w} = w^{-1} = w^6$. Similarly, $\overline{w^2} = w^5$ and $\overline{w^4} = w^3$.
-
-Therefore, $\overline{\alpha} = w^6 + w^5 + w^3$.
-
-\textbf{(iii)} For $w = e^{2\pi i/7}$, we have:
-\[
-c = \alpha \cdot \overline{\alpha} = (w + w^2 + w^4)(w^6 + w^5 + w^3)
-\]
-Expanding and using $w^7 = 1$:
-\[
-c = w^7 + w^6 + w^5 + w^8 + w^7 + w^6 + w^{10} + w^9 + w^7 = 3 + (w + w^2 + w^3 + w^4 + w^5 + w^6)
-\]
-Since $1 + w + w^2 + \dots + w^6 = 0$, we get $w + w^2 + \dots + w^6 = -1$, so $c = 3 - 1 = 2$.
-\end{solution}
-
-\begin{takeaways}
-\begin{itemize}
-    \item 7th roots of unity: $w^7 = 1$ with $w \neq 1$ implies $1 + w + \dots + w^6 = 0$
-    \item Complex conjugate: For $w = e^{2\pi ik/7}$, we have $\overline{w} = w^{-1} = w^6$
-    \item Product of roots: For real-coefficient quadratics, $c = \alpha \overline{\alpha} = |\alpha|^2$
-\end{itemize}
-\end{takeaways}
-

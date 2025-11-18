@@ -1,0 +1,38 @@
+\subsection{Solution to Problem 33: Two Masses with Pulley}
+
+\begin{solution}
+\textbf{(i)} For the larger mass ($4m$): $4mg - T - kv = 4m\frac{dv}{dt}$ (downward positive).
+
+For the smaller mass ($2m$): $T - 2mg - kv = 2m\frac{dv}{dt}$ (upward positive).
+
+Adding: $4mg - 2mg - 2kv = 6m\frac{dv}{dt}$, so $2mg - 2kv = 6m\frac{dv}{dt}$.
+
+Therefore: $\frac{dv}{dt} = \frac{2mg - 2kv}{6m} = \frac{gm - kv}{3m}$.
+
+\textbf{(ii)} The differential equation is: $\frac{dv}{dt} = \frac{gm - kv}{3m}$.
+
+Separating variables: $\frac{dv}{gm - kv} = \frac{dt}{3m}$.
+
+Integrating: $-\frac{1}{k}\ln|gm - kv| = \frac{t}{3m} + C$.
+
+At $t = 0$, $v = 0$: $-\frac{1}{k}\ln(gm) = C$.
+
+So: $-\frac{1}{k}\ln|gm - kv| = \frac{t}{3m} - \frac{1}{k}\ln(gm)$.
+
+Rearranging: $\ln\left|\frac{gm - kv}{gm}\right| = -\frac{kt}{3m}$.
+
+Since $v < \frac{gm}{k}$, we have $gm - kv > 0$, so: $\frac{gm - kv}{gm} = e^{-kt/(3m)}$.
+
+Therefore: $v = \frac{gm}{k}\left(1 - e^{-kt/(3m)}\right)$.
+
+At $t = \frac{3m}{k}\ln 2$: $v = \frac{gm}{k}\left(1 - e^{-\ln 2}\right) = \frac{gm}{k}\left(1 - \frac{1}{2}\right) = \frac{gm}{2k}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Newton's second law: Apply to each mass separately
+    \item System of equations: Add equations to eliminate tension
+    \item Separable ODE: Integrate to find velocity as function of time
+\end{itemize}
+\end{takeaways}
+

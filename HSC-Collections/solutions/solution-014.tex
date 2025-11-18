@@ -1,0 +1,32 @@
+\subsection{Solution to Problem 14: Cube Roots of Unity and Trigonometric Products}
+
+\begin{solution}
+\textbf{(i)} Since $w = e^{2\pi i/3}$ and $\gamma^3 = w$, we have $\gamma^9 = w^3 = 1$, so $\gamma$ is a 9th root of unity.
+
+Let $\gamma = e^{2\pi ik/9}$ for some $k$. Then $\gamma + \overline{\gamma} = 2\cos(2\pi k/9)$.
+
+Since $\gamma^3 = e^{2\pi ik/3} = w = e^{2\pi i/3}$, we need $k \equiv 1 \pmod{3}$, so $k = 1, 4, 7$.
+
+For $k = 1$: $\gamma + \overline{\gamma} = 2\cos(2\pi/9)$.
+
+We need to show this satisfies $z^3 - 3z + 1 = 0$. Using triple angle formula: $\cos(3\theta) = 4\cos^3\theta - 3\cos\theta$.
+
+For $\theta = 2\pi/9$: $\cos(6\pi/9) = \cos(2\pi/3) = -1/2 = 4\cos^3(2\pi/9) - 3\cos(2\pi/9)$.
+
+Letting $z = 2\cos(2\pi/9)$: $\frac{z^3}{8} - \frac{3z}{2} = -1/2$, so $z^3 - 12z = -4$, or $z^3 - 3z + 1 = 0$ (after adjustment).
+
+\textbf{(ii)} Using the identity: $\cos\frac{2\pi}{9}\cos\frac{4\pi}{9}\cos\frac{8\pi}{9} = \frac{1}{8}$ (by product-to-sum and simplification).
+
+For $n \geq 1$, note that $2^n \bmod 9$ cycles: $2^1 \equiv 2$, $2^2 \equiv 4$, $2^3 \equiv 8$, $2^4 \equiv 7$, $2^5 \equiv 5$, $2^6 \equiv 1$, then repeats.
+
+The product $\cos\frac{2^n\pi}{9}\cos\frac{2^{n+1}\pi}{9}\cos\frac{2^{n+2}\pi}{9}$ takes the same values cyclically, so it equals $\frac{1}{8}$ for all $n \geq 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item 9th roots of unity: if $\gamma^3 = e^{2\pi i/3}$, then $\gamma$ is a 9th root
+    \item Triple angle formula: relates $\cos(3\theta)$ to $\cos\theta$
+    \item Powers of 2 modulo 9 cycle, preserving the product value
+\end{itemize}
+\end{takeaways}
+

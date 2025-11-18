@@ -1,0 +1,34 @@
+\subsection{Solution to Problem 1: Two Particles in Resisting Medium}
+
+\begin{solution}
+Let $y_A(t)$ and $y_B(t)$ be the positions of particles $A$ and $B$ respectively, with $y_A(0) = d$ and $y_B(0) = 0$. The equation of motion for each particle is:
+\[
+\frac{dv}{dt} = -g - kv
+\]
+Solving this first-order linear ODE with $v(0) = -v_0$ (downward for $A$) and $v(0) = v_0$ (upward for $B$):
+\[
+v(t) = -\frac{g}{k} + \left(v_0 + \frac{g}{k}\right)e^{-kt}
+\]
+Integrating to find position:
+\[
+y(t) = y(0) - \frac{g}{k}t + \frac{1}{k}\left(v_0 + \frac{g}{k}\right)(1 - e^{-kt})
+\]
+For particle $A$: $y_A(t) = d - \frac{g}{k}t + \frac{1}{k}\left(v_0 + \frac{g}{k}\right)(1 - e^{-kt})$
+
+For particle $B$: $y_B(t) = \frac{g}{k}t - \frac{1}{k}\left(v_0 + \frac{g}{k}\right)(1 - e^{-kt})$
+
+Setting $y_A(t) = y_B(t)$ and solving:
+\[
+d = \frac{2}{k}\left(v_0 + \frac{g}{k}\right)(1 - e^{-kt})
+\]
+Therefore, $t = -\frac{1}{k}\ln\left(1 - \frac{kd}{2(v_0 + g/k)}\right)$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Motion with linear resistance: $dv/dt = -g - kv$ has solution $v = -g/k + (v_0 + g/k)e^{-kt}$
+    \item Relative motion: Set positions equal to find meeting time
+    \item Exponential decay in velocity due to resistance
+\end{itemize}
+\end{takeaways}
+

@@ -19,31 +19,3 @@ Suppose a rectangular prism has dimensions $a, b, c$ and surface area $S$.
 For part (i), relate the surface area to the dimensions and apply the given inequality. For part (ii), show that equality in the inequality from part (i) occurs when $a = b = c$, which corresponds to a cube.
 \end{hint}
 
-\subsection{Solution to Problem 8: Triangle Inequality and Rectangular Prism}
-
-\begin{solution}
-\textbf{(i)} The surface area is $S = 2(ab + bc + ca)$.
-
-The arithmetic mean of $ab$, $bc$, and $ca$ is $A = \frac{ab + bc + ca}{3} = \frac{S}{6}$.
-
-By the given inequality:
-\[
-\frac{(ab)(bc)(ca)}{A^3} \leq 1
-\]
-That is: $\frac{a^2b^2c^2}{(S/6)^3} \leq 1$, so $a^2b^2c^2 \leq (S/6)^3$.
-
-Taking square roots: $abc \leq (S/6)^{3/2}$.
-
-\textbf{(ii)} Equality in the given inequality occurs when $ab = bc = ca$, which implies $a = b = c$ (since all are positive).
-
-When $a = b = c$, the rectangular prism is a cube. Since equality gives the maximum value of the left-hand side, and $abc$ is maximized when equality holds, the cube has maximum volume for a given surface area $S$.
-\end{solution}
-
-\begin{takeaways}
-\begin{itemize}
-    \item AM-GM: For $n$ positive numbers, product $\leq$ (arithmetic mean)$^n$
-    \item Equality: Occurs when all numbers are equal
-    \item Optimization: Maximum volume for fixed surface area occurs at equality condition
-\end{itemize}
-\end{takeaways}
-

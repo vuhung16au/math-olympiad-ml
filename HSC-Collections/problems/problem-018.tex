@@ -29,39 +29,3 @@ By using the diagram below, which shows the graphs of the functions $f(x)=\cos(\
 The curve is on a sphere of radius 3, so $x^2 + y^2 + z^2 = 9$. The function $g(x) = \sqrt{9-x^2}$ suggests a relationship with the sphere. Use $f(x) = \cos(\pi x)$ to create the spiraling effect. Consider parameterizing with $t$ such that $z$ goes from $-3$ to $3$ as the parameter increases.
 \end{hint}
 
-\subsection{Solution to Problem 18: Curve on a Sphere}
-
-\begin{solution}
-The curve is on a sphere of radius 3, so $x^2 + y^2 + z^2 = 9$.
-
-The function $g(x) = \sqrt{9-x^2}$ suggests using $z$ as a parameter. Let $z = 3t$ where $t$ goes from $-1$ to $1$.
-
-For the spiraling effect, we use $f(x) = \cos(\pi x)$. Since the curve spirals 3 times, we want the angle to vary by $6\pi$ as $z$ goes from $-3$ to $3$.
-
-Let $\theta = 3\pi t$ (so when $t = -1$, $\theta = -3\pi$; when $t = 1$, $\theta = 3\pi$).
-
-On the sphere, we can use spherical coordinates. Since $z = 3t$, we have $r = 3$ (radius of sphere).
-
-For a point on the sphere: $x = 3\sin\phi\cos\theta$, $y = 3\sin\phi\sin\theta$, $z = 3\cos\phi$.
-
-Since $z = 3t = 3\cos\phi$, we have $\cos\phi = t$, so $\sin\phi = \sqrt{1-t^2}$.
-
-Using $g(z/3) = \sqrt{9 - z^2/9} = \sqrt{9 - 9t^2} = 3\sqrt{1-t^2}$ and $f(z/3) = \cos(\pi t)$:
-
-A possible parameterization:
-\[
-x(t) = 3\sqrt{1-t^2}\cos(3\pi t), \quad y(t) = 3\sqrt{1-t^2}\sin(3\pi t), \quad z(t) = 3t
-\]
-where $t \in [-1, 1]$.
-
-This gives: $x^2 + y^2 + z^2 = 9(1-t^2)(\cos^2(3\pi t) + \sin^2(3\pi t)) + 9t^2 = 9$.
-\end{solution}
-
-\begin{takeaways}
-\begin{itemize}
-    \item Spherical coordinates: Use for curves on spheres
-    \item Parameterization: Choose parameter so $z$ varies linearly from $-3$ to $3$
-    \item Spiraling: Use trigonometric functions with appropriate frequency to create spirals
-\end{itemize}
-\end{takeaways}
-

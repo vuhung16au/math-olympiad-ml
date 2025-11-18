@@ -1,0 +1,30 @@
+\subsection{Solution to Problem 26: Complex Numbers and Equilateral Triangle}
+
+\begin{solution}
+\textbf{(i)} Since $z_2 = e^{i\pi/3}z_1$, multiplying by $e^{i\pi/3}$ rotates $z_1$ by $60^\circ$ about the origin.
+
+So $|z_2| = |z_1|$ (rotation preserves modulus) and $\text{Arg}(z_2) = \text{Arg}(z_1) + \pi/3$.
+
+Since $O$ is at the origin, $|OA| = |z_1|$, $|OB| = |z_2| = |z_1|$, and the angle $AOB = \pi/3$.
+
+Therefore triangle $OAB$ has two equal sides ($OA = OB$) and the included angle is $60^\circ$, making it equilateral.
+
+\textbf{(ii)} We have $z_2 = e^{i\pi/3}z_1 = \left(\frac{1}{2} + \frac{i\sqrt{3}}{2}\right)z_1$.
+
+Then: $z_1^2 + z_2^2 = z_1^2 + e^{2i\pi/3}z_1^2 = z_1^2(1 + e^{2i\pi/3})$.
+
+And: $z_1 z_2 = z_1 \cdot e^{i\pi/3}z_1 = e^{i\pi/3}z_1^2$.
+
+Since $1 + e^{2i\pi/3} = 1 + \left(-\frac{1}{2} + \frac{i\sqrt{3}}{2}\right) = \frac{1}{2} + \frac{i\sqrt{3}}{2} = e^{i\pi/3}$:
+
+We get $z_1^2 + z_2^2 = z_1^2 e^{i\pi/3} = z_1 z_2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Rotation: $e^{i\pi/3}$ rotates by $60^\circ$
+    \item Equilateral triangle: Two equal sides with $60^\circ$ angle implies equilateral
+    \item Complex algebra: Use $e^{2i\pi/3} = -\frac{1}{2} + \frac{i\sqrt{3}}{2}$
+\end{itemize}
+\end{takeaways}
+

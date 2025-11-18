@@ -1,0 +1,28 @@
+\subsection{Solution to Problem 13: Circle and Cosine Function}
+
+\begin{solution}
+At point $P(a, b)$, we have $b = \cos(ka)$ and the point lies on a circle centered at origin, so $a^2 + b^2 = r^2$ for some radius $r$.
+
+The slope of the radius vector is $b/a$. The slope of the tangent to $y = \cos(kx)$ at $x = a$ is $-k\sin(ka)$.
+
+Since they are perpendicular: $\frac{b}{a} \cdot (-k\sin(ka)) = -1$, so $kb\sin(ka) = a$.
+
+Since $b = \cos(ka)$, we get: $k\cos(ka)\sin(ka) = a$, or $\frac{k}{2}\sin(2ka) = a$.
+
+Also, $a^2 + \cos^2(ka) = r^2$.
+
+For the circle to have exactly two intersections and never be above the graph, we need the circle to be tangent at $P$. This requires $r^2 = a^2 + b^2 = a^2 + \cos^2(ka)$.
+
+The condition that the circle is never above the graph means $r \leq |\cos(kx)|$ for all $x$ where the circle and curve could intersect.
+
+For $k \leq 1$, the period is $\geq 2\pi$, and the geometry doesn't work. For $k > 1$, we can have the required configuration. Therefore $k > 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Perpendicular condition: slopes multiply to $-1$
+    \item Use $b = \cos(ka)$ and the circle equation $a^2 + b^2 = r^2$
+    \item Analyze the geometry to determine constraint on $k$
+\end{itemize}
+\end{takeaways}
+

@@ -1,0 +1,59 @@
+\subsection{Solution to Problem 16: Projectile with Quadratic Resistance}
+
+\begin{solution}
+\textbf{(i)} On the upward journey, the acceleration is $a = -g - kv^2$ (negative because both gravity and resistance oppose motion).
+
+Using $a = v \frac{dv}{dx}$:
+\[
+v \frac{dv}{dx} = -g - kv^2
+\]
+Separating variables:
+\[
+\frac{v}{g + kv^2} \, dv = -dx
+\]
+Integrating from $v = v_0$ at $x = 0$ to $v = 0$ at $x = H$:
+\[
+\int_{v_0}^0 \frac{v}{g + kv^2} \, dv = -\int_0^H dx
+\]
+For the left integral, let $u = g + kv^2$, so $du = 2kv \, dv$, giving:
+\[
+\int_{v_0}^0 \frac{v}{g + kv^2} \, dv = \frac{1}{2k} \int_{g + kv_0^2}^g \frac{du}{u} = \frac{1}{2k} \ln\left(\frac{g}{g + kv_0^2}\right) = -\frac{1}{2k} \ln\left(\frac{g + kv_0^2}{g}\right)
+\]
+Therefore: $-H = -\frac{1}{2k} \ln\left(\frac{g + kv_0^2}{g}\right)$, so
+\[
+H = \frac{1}{2k}\ln\left(\frac{kv_0^2 + g}{g}\right).
+\]
+
+\textbf{(ii)} On the downward journey, acceleration is $a = g - kv^2$ (gravity assists, resistance opposes).
+
+Using the same technique: $v \frac{dv}{dx} = g - kv^2$.
+
+Integrating from $v = 0$ at $x = H$ to $v = v_1$ at $x = 0$:
+\[
+\int_0^{v_1} \frac{v}{g - kv^2} \, dv = \int_H^0 dx = -H
+\]
+Let $u = g - kv^2$, so $du = -2kv \, dv$:
+\[
+\int_0^{v_1} \frac{v}{g - kv^2} \, dv = -\frac{1}{2k} \int_g^{g - kv_1^2} \frac{du}{u} = -\frac{1}{2k} \ln\left(\frac{g - kv_1^2}{g}\right) = \frac{1}{2k} \ln\left(\frac{g}{g - kv_1^2}\right)
+\]
+So: $\frac{1}{2k} \ln\left(\frac{g}{g - kv_1^2}\right) = -H = -\frac{1}{2k}\ln\left(\frac{kv_0^2 + g}{g}\right)$.
+
+Therefore: $\ln\left(\frac{g}{g - kv_1^2}\right) = -\ln\left(\frac{kv_0^2 + g}{g}\right)$, so $\frac{g}{g - kv_1^2} = \frac{g}{kv_0^2 + g}$.
+
+Cross-multiplying: $(g - kv_1^2)(kv_0^2 + g) = g^2$.
+
+Expanding: $g(kv_0^2 + g) - kv_1^2(kv_0^2 + g) = g^2$, so $gkv_0^2 + g^2 - kv_0^2v_1^2 - kgv_1^2 = g^2$.
+
+Simplifying: $gkv_0^2 - kv_0^2v_1^2 - kgv_1^2 = 0$, so $gk(v_0^2 - v_1^2) = kv_0^2v_1^2$.
+
+Therefore: $g(v_0^2 - v_1^2) = kv_0^2 v_1^2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Quadratic resistance: Use $a = v \frac{dv}{dx}$ for position-dependent acceleration
+    \item Integration: Use substitution $u = g \pm kv^2$ to integrate $\frac{v}{g \pm kv^2}$
+    \item Energy approach: Can also use work-energy theorem for part (ii)
+\end{itemize}
+\end{takeaways}
+

@@ -1,0 +1,30 @@
+\subsection{Solution to Problem 11: Vectors and Complex Numbers}
+
+\begin{solution}
+\textbf{(i)} Since $\vec{OM} = \frac{1}{2}(\mathbf{a} + \mathbf{b})$, we can write:
+\[
+\vec{OM} = \frac{1}{2}\mathbf{a} + \frac{1}{2}\mathbf{b} = \mathbf{a} + \frac{1}{2}(\mathbf{b} - \mathbf{a})
+\]
+This shows $M$ lies on the line through $A$ (when parameter = 0) and $B$ (when parameter = 1).
+
+\textbf{(ii)} We have $\vec{OG} = \frac{1}{3}(\mathbf{a} + \mathbf{b} + \mathbf{c}) = \frac{2}{3} \cdot \frac{1}{2}(\mathbf{a} + \mathbf{b}) + \frac{1}{3}\mathbf{c} = \frac{2}{3}\vec{OM} + \frac{1}{3}\mathbf{c}$.
+
+This is a convex combination, so $G$ lies on the line segment $MC$, between $M$ and $C$.
+
+\textbf{(iii)} Suppose $\frac{1}{3}(x+w+z) = (xwz)^{1/3}$ for some cube root. Then $|\frac{1}{3}(x+w+z)| = |(xwz)^{1/3}| = 1$.
+
+But by the triangle inequality: $|\frac{1}{3}(x+w+z)| \leq \frac{1}{3}(|x|+|w|+|z|) = 1$.
+
+Equality occurs only if $x$, $w$, $z$ all have the same argument. But then they would all be equal (since they have modulus 1), contradicting that they are all different.
+
+Therefore, $\frac{1}{3}(x+w+z)$ is never a cube root of $xwz$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Midpoint: $\frac{1}{2}(\mathbf{a}+\mathbf{b})$ lies on line $AB$
+    \item Centroid: $\frac{1}{3}(\mathbf{a}+\mathbf{b}+\mathbf{c})$ lies between midpoint and third vertex
+    \item Triangle inequality: equality requires collinear vectors with same direction
+\end{itemize}
+\end{takeaways}
+

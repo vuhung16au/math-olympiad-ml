@@ -1,0 +1,34 @@
+\subsection{Solution to Problem 5: Integral with Inverse Sine}
+
+\begin{solution}
+Let $x = \tan^2 \theta$, so $dx = 2\tan\theta \sec^2\theta \, d\theta = 2\tan\theta(1 + \tan^2\theta) \, d\theta$.
+
+When $x = 0$, $\theta = 0$; when $x = 1$, $\theta = \pi/4$.
+
+The integrand becomes:
+\[
+\sin^{-1}\sqrt{\frac{x}{1+x}} = \sin^{-1}\sqrt{\frac{\tan^2\theta}{1+\tan^2\theta}} = \sin^{-1}\sqrt{\frac{\tan^2\theta}{\sec^2\theta}} = \sin^{-1}|\sin\theta| = \sin^{-1}(\sin\theta) = \theta
+\]
+for $\theta \in [0, \pi/4]$.
+
+Therefore:
+\[
+\int_0^1 \sin^{-1}\sqrt{\frac{x}{1+x}} \, dx = \int_0^{\pi/4} \theta \cdot 2\tan\theta \sec^2\theta \, d\theta
+\]
+Using integration by parts with $u = \theta$, $dv = 2\tan\theta \sec^2\theta \, d\theta$:
+\[
+= \left[\theta \tan^2\theta\right]_0^{\pi/4} - \int_0^{\pi/4} \tan^2\theta \, d\theta = \frac{\pi}{4} - \int_0^{\pi/4} (\sec^2\theta - 1) \, d\theta
+\]
+\[
+= \frac{\pi}{4} - [\tan\theta - \theta]_0^{\pi/4} = \frac{\pi}{4} - (1 - \frac{\pi}{4}) = \frac{\pi}{2} - 1
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Substitution $x = \tan^2\theta$ simplifies $\sqrt{x/(1+x)}$ to $|\sin\theta|$
+    \item For $\theta \in [0, \pi/4]$, we have $\sin^{-1}(\sin\theta) = \theta$
+    \item Integration by parts: differentiate the polynomial part, integrate the trigonometric part
+\end{itemize}
+\end{takeaways}
+

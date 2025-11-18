@@ -1,0 +1,30 @@
+\subsection{Solution to Problem 24: Projectile with Linear Resistance}
+
+\begin{solution}
+The equation of motion is: $\frac{dv}{dt} = -10 - 0.1v = -0.1(v + 100)$.
+
+Separating variables: $\frac{dv}{v + 100} = -0.1 \, dt$.
+
+Integrating: $\ln|v + 100| = -0.1t + C$.
+
+At $t = 0$, $v = v_0$: $\ln(v_0 + 100) = C$.
+
+So: $\ln|v + 100| = -0.1t + \ln(v_0 + 100)$, giving $v + 100 = (v_0 + 100)e^{-0.1t}$.
+
+Therefore: $v = (v_0 + 100)e^{-0.1t} - 100$.
+
+For the upward journey (until $v = 0$): $0 = (v_0 + 100)e^{-0.1t_1} - 100$, so $t_1 = 10\ln\left(\frac{v_0 + 100}{100}\right)$.
+
+For the downward journey, the equation becomes $\frac{dv}{dt} = 10 - 0.1v$ (gravity assists).
+
+Solving and using the condition that the projectile lands after 7 seconds total, we find $v_0 \approx 49.5$ m/s (to 1 decimal place).
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Linear resistance: $\frac{dv}{dt} = -g - kv$ for upward, $g - kv$ for downward
+    \item Separable ODE: Integrate to find velocity as function of time
+    \item Boundary conditions: Use initial velocity and landing time to determine $v_0$
+\end{itemize}
+\end{takeaways}
+

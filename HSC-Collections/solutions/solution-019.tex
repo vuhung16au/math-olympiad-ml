@@ -1,0 +1,54 @@
+\subsection{Solution to Problem 19: Complex Numbers and Equilateral Triangles}
+
+\begin{solution}
+\textbf{(i)} Since $w = e^{2\pi i/3}$, we have $w^3 = e^{2\pi i} = 1$, so $w$ is a cube root of unity.
+
+If $w \neq 1$, then $1 + w + w^2 = \frac{1 - w^3}{1 - w} = \frac{1 - 1}{1 - w} = 0$.
+
+\textbf{(ii)} If triangle $ABC$ is anticlockwise and equilateral, then rotating by $120^\circ$ (multiplying by $w$) maps the triangle to itself.
+
+Specifically, if we rotate about the centroid, vertex $A$ maps to $B$, $B$ maps to $C$, and $C$ maps to $A$.
+
+This gives: $b - G = w(a - G)$, $c - G = w(b - G)$, where $G = \frac{a+b+c}{3}$ is the centroid.
+
+From the first: $b = G + w(a - G) = (1-w)G + wa = \frac{1-w}{3}(a+b+c) + wa$.
+
+Rearranging and using $1+w+w^2 = 0$ (so $1-w = -w-w^2$), we eventually get $a + bw + cw^2 = 0$.
+
+\textbf{(iii)} For an equilateral triangle, we have either $a + bw + cw^2 = 0$ or $a + bw^2 + cw = 0$.
+
+Multiplying the first by $w$: $aw + bw^2 + c = 0$, so $c = -aw - bw^2$.
+
+Substituting into the second: $a + bw^2 + w(-aw - bw^2) = a + bw^2 - aw^2 - bw^3 = a(1-w^2) + bw^2(1-w) = 0$.
+
+Since $1+w+w^2 = 0$, we have $1-w^2 = w$ and $1-w = w^2$, so $aw + bw^4 = aw + bw = w(a+b) = 0$.
+
+Therefore $a + b = -c$, so $a + b + c = 0$.
+
+Now, from $a + bw + cw^2 = 0$ and $a + b + c = 0$:
+
+Subtracting: $b(w-1) + c(w^2-1) = 0$.
+
+Since $w^2-1 = (w-1)(w+1)$ and $w+1 = -w^2$ (from $1+w+w^2=0$), we get $b(w-1) - cw^2(w-1) = (w-1)(b-cw^2) = 0$.
+
+Since $w \neq 1$, we have $b = cw^2$. Similarly, we can show $a = bw^2$ and $c = aw^2$.
+
+Multiplying: $abc = abc \cdot w^6 = abc$ (since $w^6 = 1$), which is consistent.
+
+From $a = -bw - cw^2$ and $a + b + c = 0$, we get $a^2 = (-bw - cw^2)^2 = b^2w^2 + c^2w + 2bcw^3 = b^2w^2 + c^2w + 2bc$.
+
+Similarly, $b^2 = c^2w^2 + a^2w + 2ca$ and $c^2 = a^2w^2 + b^2w + 2ab$.
+
+Adding and using $w + w^2 = -1$: $a^2 + b^2 + c^2 = (a^2 + b^2 + c^2)(w + w^2) + 2(ab + bc + ca) = -(a^2 + b^2 + c^2) + 2(ab + bc + ca)$.
+
+Therefore: $2(a^2 + b^2 + c^2) = 2(ab + bc + ca)$, so $a^2 + b^2 + c^2 = ab + bc + ca$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Cube roots of unity: $1 + w + w^2 = 0$ where $w = e^{2\pi i/3}$
+    \item Rotations: Equilateral triangles are preserved under $120^\circ$ rotations
+    \item Algebraic manipulation: Use both orientation conditions to derive symmetric relations
+\end{itemize}
+\end{takeaways}
+
