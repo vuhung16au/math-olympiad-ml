@@ -192,5 +192,26 @@
 }{%
   \end{tcolorbox}%
 }
+
+% Redefine problem environment to use boxed style
+\renewenvironment{problem}[1][]{%
+  \refstepcounter{problem}%
+  \begin{tcolorbox}[
+    title={\bfseries Exercise~\theproblem\ifx\relax#1\relax\else: #1\fi},
+    enhanced,
+    drop shadow={black!20!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=bookred,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=bookred,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+}{%
+  \end{tcolorbox}%
+}
 \makeatother
 

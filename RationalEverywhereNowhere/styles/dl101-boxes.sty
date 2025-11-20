@@ -86,6 +86,23 @@
   boxed title style={size=small,colback=yellow!30,colframe=orange!50}
 }
 
+% Solution box for solution outlines
+\newtcolorbox{solutionbox}[1][]{
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  title={\bfseries Solution Outline:},
+  #1
+}
+
 % Learning objectives
 \newcommand{\objective}[1]{\item \textcolor{objtext}{#1}}
 \newenvironment{learningobjectives}{%
