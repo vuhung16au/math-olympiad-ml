@@ -15,6 +15,41 @@ For more general sets, the Lebesgue measure extends this notion of "length" in a
 
 The Lebesgue measure generalizes our intuitive notion of length, area, and volume to more complicated sets. For intervals, it simply gives the length, but it can also measure sets that are not intervals.
 
+\begin{example}[Riemann Integral vs Lebesgue Measure]
+To understand how Lebesgue measure relates to integration, consider calculating the integral of the constant function $f(x) = 1$ from 0 to 1 using the traditional Riemann integral.
+
+The Riemann integral partitions the \textit{domain} (the $x$-axis) into subintervals and approximates the area under the curve using rectangles. For $f(x) = 1$ on $[0, 1]$, we have:
+\[
+\int_0^1 1 \, dx = [x]_0^1 = 1 - 0 = 1
+\]
+
+The Riemann approach works by:
+\begin{enumerate}
+    \item Dividing the interval $[0, 1]$ into smaller subintervals
+    \item Approximating the function value on each subinterval
+    \item Summing the areas of rectangles: $\sum f(x_i) \cdot \Delta x_i$
+    \item Taking the limit as the partition becomes finer
+\end{enumerate}
+
+The \textbf{Lebesgue integral} (which uses Lebesgue measure) takes a different approach:
+\begin{enumerate}
+    \item It partitions the \textit{range} (the $y$-axis) instead of the domain
+    \item For each value $y$ in the range, it considers the set $\{x : f(x) \geq y\}$
+    \item It uses the \textit{measure} of these sets (their "length") rather than just their endpoints
+    \item For $f(x) = 1$, the set $\{x : 1 \geq y\}$ equals $[0, 1]$ when $y \leq 1$ (with measure 1), and is empty when $y > 1$ (with measure 0)
+    \item The Lebesgue integral becomes: $\int_0^1 1 \, d\mu = \mu([0, 1]) = 1$
+\end{enumerate}
+
+For this simple function, both methods give the same result ($1$), but the Lebesgue approach is more powerful because:
+\begin{itemize}
+    \item It can integrate functions that Riemann integration cannot handle (e.g., functions with many discontinuities)
+    \item It provides better convergence theorems (e.g., the dominated convergence theorem)
+    \item It naturally extends to higher dimensions and more abstract spaces
+\end{itemize}
+
+The key insight is that Lebesgue measure allows us to measure the "size" of sets (like $\{x : f(x) \geq y\}$) even when they are not simple intervals, which makes the Lebesgue integral more general and powerful than the Riemann integral.
+\end{example}
+
 \begin{theorem}[Measure of a Single Point]
 A single point has Lebesgue measure zero. That is, for any $x \in \mathbb{R}$:
 \[
@@ -36,17 +71,17 @@ For any $\epsilon > 0$, the point $\{x\}$ is contained in the interval $[x - \fr
     \node[above] at (4, 0.2) {$x$};
     
     % Interval around point
-    \draw[thick, bookpurple, <->] (3.5, -0.3) -- (4.5, -0.3);
-    \node[below] at (4, -0.3) {$\epsilon$};
+    \draw[thick, bookpurple, <->] (3.5, -0.4) -- (4.5, -0.4);
+    \node[left] at (3.5, -0.4) {$\epsilon$};
     
     % Shrinking intervals
-    \draw[thick, bookpurple!70, <->] (3.75, -0.6) -- (4.25, -0.6);
-    \node[below] at (4, -0.6) {$\epsilon/2$};
+    \draw[thick, bookpurple!70, <->] (3.75, -0.8) -- (4.25, -0.8);
+    \node[left] at (3.75, -0.8) {$\epsilon/2$};
     
-    \draw[thick, bookpurple!50, <->] (3.875, -0.9) -- (4.125, -0.9);
-    \node[below] at (4, -0.9) {$\epsilon/4$};
+    \draw[thick, bookpurple!50, <->] (3.875, -1.2) -- (4.125, -1.2);
+    \node[left] at (3.875, -1.2) {$\epsilon/4$};
     
-    \node[below] at (4, -1.3) {As $\epsilon \to 0$, measure $\to 0$};
+    \node[below] at (4, -1.7) {As $\epsilon \to 0$, measure $\to 0$};
 \end{tikzpicture}
 \caption{Visualization that a single point has measure zero}
 \end{figure}
@@ -94,7 +129,7 @@ Since $A \subseteq \bigcup_{i=1}^{\infty} I_i$ and we can make $\epsilon$ arbitr
     }
     
     \node[below] at (5, -0.5) {Each rational covered by interval of length $\epsilon/2^i$};
-    \node[below] at (5, -0.7) {Total length = $\epsilon \sum_{i=1}^{\infty} 1/2^i = \epsilon$};
+    \node[below] at (5, -0.8) {Total length = $\epsilon \sum_{i=1}^{\infty} 1/2^i = \epsilon$};
 \end{tikzpicture}
 \caption{Visual representation of covering countable set with intervals of decreasing size}
 \end{figure}
