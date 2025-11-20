@@ -1,0 +1,213 @@
+\section{Wiener's Attack on RSA: A Concrete Example}
+
+Wiener's attack on RSA provides a concrete and elegant example of how rational approximation theory can be used in cryptanalysis. This attack exploits the fact that if an RSA private key is "too small," it can be recovered by finding a rational approximation to a fraction derived from the public key.
+
+\subsection{RSA Key Generation Recap}
+
+In RSA cryptography:
+\begin{itemize}
+    \item Choose two large primes $p$ and $q$
+    \item Compute $n = pq$ (the modulus)
+    \item Choose public exponent $e$ such that $\gcd(e, \phi(n)) = 1$ where $\phi(n) = (p-1)(q-1)$
+    \item Compute private exponent $d$ such that $ed \equiv 1 \pmod{\phi(n)}$
+    \item Public key: $(n, e)$
+    \item Private key: $(n, d)$
+\end{itemize}
+
+The security of RSA relies on the difficulty of factoring $n$ or computing $d$ from $(n, e)$.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1]
+    % Key generation
+    \node[draw, rectangle, fill=bookpurple!30] (gen) at (0, 2) {Key Generation};
+    \node[draw, rectangle, fill=bookred!30, align=center] (pub) at (-2, 0) {Public Key\\$(n, e)$};
+    \node[draw, rectangle, fill=bookpurple!30, align=center] (priv) at (2, 0) {Private Key\\$(n, d)$};
+    
+    \draw[->] (gen) -- (pub);
+    \draw[->] (gen) -- (priv);
+    
+    % Relationship
+    \node[draw, ellipse, fill=bookred!20] (rel) at (0, -1.5) {$ed \equiv 1 \pmod{\phi(n)}$};
+    \draw[->] (pub) -- (rel);
+    \draw[->] (priv) -- (rel);
+    
+    \node[below] at (0, -2.5) {RSA key relationship};
+\end{tikzpicture}
+\caption{RSA key generation and relationship}
+\end{figure}
+
+\subsection{The Vulnerability: Small Private Exponent}
+
+\begin{theorem}[Wiener's Condition]
+If the private exponent $d$ satisfies:
+\[
+d < \frac{1}{3}n^{1/4}
+\]
+then $d$ can be efficiently recovered from the public key $(n, e)$ using continued fractions.
+\end{theorem}
+
+This means that if $d$ is "too small" relative to $n$, the RSA system is vulnerable to attack, even without factoring $n$.
+
+\subsection{The Mathematical Foundation}
+
+The attack relies on a key mathematical relationship. Since $ed \equiv 1 \pmod{\phi(n)}$, there exists an integer $k$ such that:
+\[
+ed = 1 + k\phi(n)
+\]
+
+Rearranging:
+\[
+\frac{e}{n} = \frac{k}{d} + \frac{1 + k(\phi(n) - n)}{dn}
+\]
+
+If $d$ is small, then $\frac{k}{d}$ is a good rational approximation to $\frac{e}{n}$.
+
+\begin{theorem}[Approximation Quality]
+If $d < \frac{1}{3}n^{1/4}$ and $p, q$ are balanced (similar size), then:
+\[
+\left| \frac{e}{n} - \frac{k}{d} \right| < \frac{1}{2d^2}
+\]
+\end{theorem}
+
+This means $\frac{k}{d}$ appears as a convergent in the continued fraction expansion of $\frac{e}{n}$!
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % Number line
+    \draw[thick, ->] (0,0) -- (8,0);
+    
+    % e/n point
+    \draw[fill=bookred] (3.5, 0) circle (2pt);
+    \node[above] at (3.5, 0.2) {$\frac{e}{n}$};
+    
+    % k/d approximation
+    \draw[fill=bookpurple] (3.48, 0) circle (1.5pt);
+    \node[below] at (3.48, -0.2) {$\frac{k}{d}$};
+    
+    % Error
+    \draw[thick, bookred, <->] (3.48, -0.4) -- (3.5, -0.4);
+    \node[below] at (3.49, -0.4) {$< \frac{1}{2d^2}$};
+    
+    \node[below] at (4, -0.8) {Rational approximation reveals private key};
+\end{tikzpicture}
+\caption{Number line showing how $\frac{k}{d}$ approximates $\frac{e}{n}$}
+\end{figure}
+
+\subsection{The Attack Algorithm}
+
+\begin{algorithm}
+\caption{Wiener's Attack on RSA}
+\begin{algorithmic}
+\State Compute the continued fraction expansion of $\frac{e}{n}$
+\For{each convergent $\frac{k_i}{d_i}$ of the continued fraction}
+    \If{$d_i$ is odd and $d_i < \frac{1}{3}n^{1/4}$}
+        \State Try $d_i$ as the private exponent
+        \State Check if $d_i$ works (verify with a test message)
+        \If{verification succeeds}
+            \State \Return $d_i$ (private key found!)
+        \EndIf
+    \EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % Flow chart
+    \node[draw, rectangle, fill=bookpurple!30] (start) at (0, 4) {Start: Public key $(n, e)$};
+    \node[draw, rectangle, fill=bookred!20, align=center] (cf) at (0, 3) {Compute continued fraction\\of $\frac{e}{n}$};
+    \node[draw, diamond, fill=bookpurple!20, align=center] (check) at (0, 1.5) {Check convergents\\$\frac{k_i}{d_i}$};
+    \node[draw, rectangle, fill=bookred!30, align=center] (test) at (-2, 0) {Test if $d_i$\\is valid};
+    \node[draw, rectangle, fill=bookpurple!40, align=center] (found) at (2, 0) {Private key\\found!};
+    \node[draw, rectangle, fill=warmstone!30] (fail) at (0, -1.5) {Attack fails};
+    
+    \draw[->] (start) -- (cf);
+    \draw[->] (cf) -- (check);
+    \draw[->] (check) -- (test);
+    \draw[->] (test) -- node[above] {Success} (found);
+    \draw[->] (test) -- node[left] {Fail} (check);
+    \draw[->] (check) -- node[right] {No more} (fail);
+\end{tikzpicture}
+\caption{Wiener's attack flowchart}
+\end{figure}
+
+\subsection{Why This Works}
+
+The attack succeeds because:
+
+\begin{enumerate}
+    \item \textbf{Continued fractions give best approximations}: The convergents of a continued fraction are the best rational approximations (in a precise sense).
+    
+    \item \textbf{Small $d$ ensures good approximation}: If $d$ is small, then $\frac{k}{d}$ must be a convergent.
+    
+    \item \textbf{Efficient computation}: Continued fractions can be computed efficiently using the Euclidean algorithm.
+    
+    \item \textbf{Verification is easy}: Once we guess $d$, we can verify it by testing encryption/decryption.
+\end{enumerate}
+
+\begin{example}[Concrete Example]
+Suppose:
+\begin{itemize}
+    \item $n = 10000019$ (product of two primes)
+    \item $e = 65537$ (common public exponent)
+    \item $d$ is small (violating Wiener's condition)
+\end{itemize}
+
+The continued fraction expansion of $\frac{65537}{10000019}$ will have $\frac{k}{d}$ as a convergent, revealing the private key.
+\end{example}
+
+\subsection{Continued Fraction Approximation Process}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Continued fraction steps
+    \node[draw, rectangle] (step1) at (0, 3) {$\frac{e}{n} = a_0 + \frac{1}{r_1}$};
+    \node[draw, rectangle] (step2) at (0, 2) {$r_1 = a_1 + \frac{1}{r_2}$};
+    \node[draw, rectangle] (step3) at (0, 1) {$r_2 = a_2 + \frac{1}{r_3}$};
+    \node[draw, rectangle] (dots) at (0, 0) {$\vdots$};
+    
+    % Convergents
+    \node[draw, ellipse, fill=bookred!30] (conv1) at (4, 3) {Convergent 1: $\frac{k_1}{d_1}$};
+    \node[draw, ellipse, fill=bookred!30] (conv2) at (4, 2) {Convergent 2: $\frac{k_2}{d_2}$};
+    \node[draw, ellipse, fill=bookred!30] (conv3) at (4, 1) {Convergent 3: $\frac{k_3}{d_3}$};
+    
+    \draw[->] (step1) -- (conv1);
+    \draw[->] (step2) -- (conv2);
+    \draw[->] (step3) -- (conv3);
+    
+    \node[below] at (2, -0.5) {Continued fraction expansion process};
+\end{tikzpicture}
+\caption{Visualization of continued fraction approximation algorithm}
+\end{figure}
+
+\subsection{Defenses Against Wiener's Attack}
+
+To prevent Wiener's attack:
+
+\begin{enumerate}
+    \item \textbf{Large private exponent}: Ensure $d > \frac{1}{3}n^{1/4}$
+    \item \textbf{Use $d'$ instead of $d$}: Compute a larger equivalent private exponent
+    \item \textbf{CRT-based decryption}: Use Chinese Remainder Theorem, which doesn't require small $d$
+\end{enumerate}
+
+\begin{remark}
+Wiener's attack beautifully illustrates how the mathematical theory of rational approximation (rooted in the properties of rational numbers) directly applies to cryptanalysis. The "everywhere" nature of rationals (density) ensures approximations exist, while the computational difficulty of finding the \textit{right} approximation provides security—until the key is too small, making the approximation too easy to find.
+\end{remark}
+
+\subsection{Connection to Rational Number Properties}
+
+This attack directly connects to our earlier discussions:
+
+\begin{itemize}
+    \item \textbf{Density}: Rationals are dense, so good approximations to $\frac{e}{n}$ exist
+    \item \textbf{Countability}: There are only countably many "small" private keys
+    \item \textbf{Measure Zero}: Small private keys form a measure zero set in the keyspace
+    \item \textbf{Probability}: Random key generation almost surely avoids this vulnerability
+\end{itemize}
+
+The attack succeeds precisely when we're in the "measure zero" set of weak keys—the same mathematical structure we explored in Section 8.
+

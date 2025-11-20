@@ -1,0 +1,73 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.pdfsync
+
+# LaTeX custom lists
+*.exa
+*.rem
+*.tak
+
+# LaTeX temporary files
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.auxlock
+
+# LaTeX backup files
+*~
+*.bak
+*.swp
+*.swo
+
+# PDF output (optional - uncomment if you don't want to track PDFs)
+# *.pdf
+
+# Release directory (keep release PDFs but ignore build artifacts)
+release/*.aux
+release/*.log
+release/*.out
+release/*.toc
+release/*.fls
+release/*.fdb_latexmk
+release/*.synctex.gz
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor-specific files
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python cache (if any Python scripts are added later)
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.exa
+*.rem
+*.tak
+
+RationalEverywhereNowhere/RationalEverywhereNowhere.pdf
+

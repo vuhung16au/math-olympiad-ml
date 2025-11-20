@@ -1,0 +1,125 @@
+\section{Introduction to Rational Numbers}
+
+\subsection{What Are Rational Numbers?}
+
+\begin{definition}[Rational Numbers]
+A \textbf{rational number} is any number that can be expressed as the ratio of two integers, where the denominator is not zero. Formally, the set of rational numbers is:
+\[
+\mathbb{Q} = \left\{ \frac{p}{q} : p, q \in \mathbb{Z}, q \neq 0 \right\}
+\]
+where $\mathbb{Z}$ denotes the set of integers.
+\end{definition}
+
+Rational numbers include familiar fractions like $\frac{1}{2}$, $\frac{3}{4}$, and $\frac{22}{7}$, as well as integers (which can be written as $\frac{n}{1}$) and terminating or repeating decimals (e.g., $0.5 = \frac{1}{2}$, $0.\overline{3} = \frac{1}{3}$).
+
+\begin{example}
+Examples of rational numbers:
+\begin{itemize}
+    \item $\frac{1}{2} = 0.5$ (terminating decimal)
+    \item $\frac{1}{3} = 0.\overline{3}$ (repeating decimal)
+    \item $\frac{22}{7} \approx 3.142857...$ (approximation of $\pi$)
+    \item $-5 = \frac{-5}{1}$ (integer)
+    \item $0 = \frac{0}{1}$ (zero)
+\end{itemize}
+\end{example}
+
+\subsection{Historical Review: From Ancient Greek Mathematics to Modern Post-Quantum Computing}
+
+The study of rational numbers has a rich history spanning millennia, from ancient mathematical discoveries to cutting-edge cryptographic applications.
+
+\subsubsection{Ancient Greek Mathematics}
+
+The ancient Greeks made fundamental contributions to number theory. Pythagoras and his followers discovered that not all numbers could be expressed as ratios of integers—the discovery of irrational numbers (like $\sqrt{2}$) was revolutionary and initially disturbing to their worldview. The Euclidean algorithm, developed around 300 BCE, provided a method to find the greatest common divisor of two integers, which is essential for working with rational numbers in their simplest form.
+
+\subsubsection{Evolution of Number Systems}
+
+The development of number systems followed a natural progression:
+
+\begin{enumerate}
+    \item \textbf{Natural Numbers ($\mathbb{N}$)}: The counting numbers $1, 2, 3, \ldots$ used by ancient civilizations for basic arithmetic and counting.
+    
+    \item \textbf{Integers ($\mathbb{Z}$)}: The extension to include zero and negative numbers, enabling subtraction without restrictions. This was formalized by mathematicians like Brahmagupta (7th century CE).
+    
+    \item \textbf{Rational Numbers ($\mathbb{Q}$)}: Fractions and ratios, allowing division to be meaningful for any pair of integers (except division by zero). The Greeks extensively studied these.
+    
+    \item \textbf{Real Numbers ($\mathbb{R}$)}: The completion of the rationals, including irrational numbers like $\sqrt{2}$, $\pi$, and $e$. This was rigorously developed in the 19th century by mathematicians like Dedekind and Cantor.
+    
+    \item \textbf{Complex Numbers ($\mathbb{C}$)}: Numbers of the form $a + bi$ where $i^2 = -1$, extending the reals to solve equations like $x^2 + 1 = 0$. First systematically studied by Cardano and Bombelli in the 16th century.
+\end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Timeline
+    \draw[thick, ->] (0,0) -- (12,0);
+    
+    % Time periods
+    \node[below] at (1,0) {Ancient};
+    \node[below] at (4,0) {Medieval};
+    \node[below] at (7,0) {Renaissance};
+    \node[below] at (10,0) {Modern};
+    
+    % Number systems
+    \node[above] at (0.5,0.5) {$\mathbb{N}$};
+    \draw[fill=bookpurple!30] (0.3,0.2) rectangle (0.7,0.8);
+    
+    \node[above] at (2,0.5) {$\mathbb{Z}$};
+    \draw[fill=bookpurple!40] (1.8,0.2) rectangle (2.2,0.8);
+    
+    \node[above] at (3.5,0.5) {$\mathbb{Q}$};
+    \draw[fill=bookpurple!50] (3.3,0.2) rectangle (3.7,0.8);
+    
+    \node[above] at (5.5,0.5) {$\mathbb{R}$};
+    \draw[fill=bookpurple!60] (5.3,0.2) rectangle (5.7,0.8);
+    
+    \node[above] at (7.5,0.5) {$\mathbb{C}$};
+    \draw[fill=bookpurple!70] (7.3,0.2) rectangle (7.7,0.8);
+    
+    % Labels
+    \node[below] at (6, -0.5) {Timeline of Number System Evolution};
+    
+    % Arrows showing progression
+    \draw[->, thick, bookpurple] (0.7,0.5) -- (1.8,0.5);
+    \draw[->, thick, bookpurple] (2.2,0.5) -- (3.3,0.5);
+    \draw[->, thick, bookpurple] (3.7,0.5) -- (5.3,0.5);
+    \draw[->, thick, bookpurple] (5.7,0.5) -- (7.3,0.5);
+\end{tikzpicture}
+\caption{Evolution of number systems from natural numbers to complex numbers}
+\end{figure}
+
+\subsubsection{Modern Applications: Post-Quantum Cryptography}
+
+In the 21st century, rational numbers and their properties have found crucial applications in cryptography, particularly in the development of post-quantum cryptographic systems. Lattice-based cryptography, which relies on the hardness of problems involving rational approximations, is one of the leading candidates for secure communication in the quantum computing era.
+
+The connection between rational numbers and cryptography stems from:
+\begin{itemize}
+    \item \textbf{Diophantine Approximation}: Finding rational numbers close to irrational numbers, which underlies lattice problems
+    \item \textbf{Measure Zero Properties}: Understanding that "weak" cryptographic keys form a set of measure zero, ensuring security
+    \item \textbf{Countability}: Distinguishing between countable and uncountable sets in security proofs
+\end{itemize}
+
+\subsection{Basic Properties of Rational Numbers}
+
+\begin{theorem}[Closure Properties]
+The set of rational numbers $\mathbb{Q}$ is closed under addition, subtraction, multiplication, and division (by non-zero rationals). That is, if $a, b \in \mathbb{Q}$ and $b \neq 0$, then:
+\begin{align*}
+a + b &\in \mathbb{Q} \\
+a - b &\in \mathbb{Q} \\
+a \cdot b &\in \mathbb{Q} \\
+\frac{a}{b} &\in \mathbb{Q}
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+If $a = \frac{p}{q}$ and $b = \frac{r}{s}$ where $p, q, r, s \in \mathbb{Z}$ and $q, s \neq 0$, then:
+\begin{align*}
+a + b &= \frac{p}{q} + \frac{r}{s} = \frac{ps + qr}{qs} \in \mathbb{Q} \\
+a \cdot b &= \frac{p}{q} \cdot \frac{r}{s} = \frac{pr}{qs} \in \mathbb{Q}
+\end{align*}
+Similar arguments hold for subtraction and division.
+\end{proof}
+
+\begin{remark}
+The closure properties ensure that rational numbers form a \textit{field}, making them suitable for algebraic operations without leaving the set. This property is fundamental to their use in cryptography, where operations must remain within well-defined mathematical structures.
+\end{remark}
+

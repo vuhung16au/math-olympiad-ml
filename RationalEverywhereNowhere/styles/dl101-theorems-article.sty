@@ -1,0 +1,196 @@
+\ProvidesPackage{dl101-theorems-article}[2025/11/21 DL101 theorem environments for article class]
+\RequirePackage{tcolorbox}
+\RequirePackage{amsthm}
+
+% Colors (assume base palette)
+\colorlet{theoremblue}{bookpurple!80}
+\colorlet{theoremgray}{softivory}
+\colorlet{definitionblue}{bookpurple!70}
+
+% Define theorem counter using section (for article class)
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{plain}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% proof environment is already defined by amsthm
+
+% Exercises counter
+\newtheorem{problem}{Exercise}[section]
+
+% Use tcolorbox for theorem environments
+% Note: We use the theorem counters directly, not tcolorbox auto counters
+\makeatletter
+
+% Helper to create boxed theorem environments
+\newcommand{\@theorembox}[3]{%
+  \refstepcounter{theorem}%
+  \begin{tcolorbox}[
+    title={\bfseries #1~\thetheorem\ifx\relax#2\relax\else: #2\fi},
+    enhanced,
+    drop shadow={black!30!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=bookpurple,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=bookpurple,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+  #3%
+  \end{tcolorbox}%
+}
+
+% Redefine environments to use boxes
+\renewenvironment{theorem}[1][]{%
+  \refstepcounter{theorem}%
+  \begin{tcolorbox}[
+    title={\bfseries Theorem~\thetheorem\ifx\relax#1\relax\else: #1\fi},
+    enhanced,
+    drop shadow={black!30!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=bookpurple,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=bookpurple,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+\renewenvironment{example}[1][]{%
+  \refstepcounter{theorem}%
+  \begin{tcolorbox}[
+    title={\bfseries Example~\theexample\ifx\relax#1\relax\else: #1\fi},
+    enhanced,
+    drop shadow={black!20!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=bookred,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=bookred,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+\renewenvironment{remark}[1][]{%
+  \refstepcounter{theorem}%
+  \begin{tcolorbox}[
+    title={\bfseries Remark~\theremark\ifx\relax#1\relax\else: #1\fi},
+    enhanced,
+    drop shadow={black!20!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=warmstone,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=warmstone,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+\renewenvironment{definition}[1][]{%
+  \refstepcounter{theorem}%
+  \begin{tcolorbox}[
+    title={\bfseries Definition~\thedefinition\ifx\relax#1\relax\else: #1\fi},
+    enhanced,
+    drop shadow={black!20!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=bookpurple,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=bookpurple,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+% Redefine corollary, lemma, proposition to use theorembox (they share the theorem counter)
+\renewenvironment{corollary}[1][]{%
+  \refstepcounter{theorem}%
+  \begin{tcolorbox}[
+    title={\bfseries Corollary~\thecorollary\ifx\relax#1\relax\else: #1\fi},
+    enhanced,
+    drop shadow={black!30!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=bookpurple,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=bookpurple,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+\renewenvironment{lemma}[1][]{%
+  \refstepcounter{theorem}%
+  \begin{tcolorbox}[
+    title={\bfseries Lemma~\thelemma\ifx\relax#1\relax\else: #1\fi},
+    enhanced,
+    drop shadow={black!30!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=bookpurple,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=bookpurple,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+\renewenvironment{proposition}[1][]{%
+  \refstepcounter{theorem}%
+  \begin{tcolorbox}[
+    title={\bfseries Proposition~\theproposition\ifx\relax#1\relax\else: #1\fi},
+    enhanced,
+    drop shadow={black!30!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=bookpurple,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=bookpurple,coltitle=white},
+    fonttitle=\bfseries
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+\makeatother
+

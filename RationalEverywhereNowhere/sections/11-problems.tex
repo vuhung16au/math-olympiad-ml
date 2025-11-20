@@ -1,0 +1,154 @@
+\section{Problems: Mathematical and Cryptographic Challenges}
+
+This section presents problems at various difficulty levels, from high school accessible to research level. Each problem connects to the themes explored in this document: rational numbers, measure theory, and cryptography.
+
+\subsection{Level 1: High School Accessible}
+
+\begin{problem}[Density Exercise]
+Show that between any two rational numbers $\frac{a}{b}$ and $\frac{c}{d}$ (where $a, b, c, d \in \mathbb{Z}$ and $b, d > 0$), there exists another rational number.
+\end{problem}
+
+\begin{hintbox}
+Consider the average of the two rational numbers. Is it rational? Where does it lie relative to the original two numbers?
+\end{hintbox}
+
+\textbf{Solution Outline:} The number $\frac{\frac{a}{b} + \frac{c}{d}}{2} = \frac{ad + bc}{2bd}$ is rational and lies strictly between the two given rationals.
+
+\begin{problem}[Countability Practice]
+Show that the set of integers $\mathbb{Z}$ is countable by explicitly constructing a bijection with $\mathbb{N}$.
+\end{problem}
+
+\begin{hintbox}
+Try mapping: $1 \mapsto 0, 2 \mapsto 1, 3 \mapsto -1, 4 \mapsto 2, 5 \mapsto -2, \ldots$ Can you find the pattern?
+\end{hintbox}
+
+\textbf{Solution Outline:} Define $f: \mathbb{N} \to \mathbb{Z}$ by $f(1) = 0$ and for $n > 1$, $f(n) = (-1)^n \lfloor n/2 \rfloor$. This gives a bijection.
+
+\subsection{Level 2: More Depth}
+
+\begin{problem}[Measure of Finite Sets]
+Prove that any finite set of real numbers has Lebesgue measure zero.
+\end{problem}
+
+\begin{hintbox}
+Cover each point with an interval of length $\epsilon/n$ where $n$ is the number of points. What is the total measure?
+\end{hintbox}
+
+\textbf{Solution Outline:} If $A = \{a_1, a_2, \ldots, a_n\}$, cover each $a_i$ with interval $I_i = [a_i - \frac{\epsilon}{2n}, a_i + \frac{\epsilon}{2n}]$. Then $\mu(\bigcup I_i) \leq n \cdot \frac{\epsilon}{n} = \epsilon$. Since $\epsilon$ is arbitrary, $\mu(A) = 0$.
+
+\begin{problem}[Uncountability of Irrationals]
+Prove that the set of irrational numbers is uncountable.
+\end{problem}
+
+\begin{hintbox}
+Use the fact that $\mathbb{R} = \mathbb{Q} \cup (\mathbb{R} \setminus \mathbb{Q})$. What do you know about the cardinalities of these sets?
+\end{hintbox}
+
+\textbf{Solution Outline:} Since $\mathbb{R}$ is uncountable and $\mathbb{Q}$ is countable, if $\mathbb{R} \setminus \mathbb{Q}$ were countable, then $\mathbb{R}$ would be countable (union of two countable sets). Contradiction.
+
+\subsection{Level 3: Crypto + Maths High Level}
+
+\begin{problem}[Weak Keys in Simplified RSA]
+Consider a simplified RSA system where $n = pq$ with $p, q$ primes, and the private exponent $d$ satisfies $d < \sqrt{n}/10$. Show that the set of such weak keys has measure zero in an appropriate keyspace.
+\end{problem}
+
+\begin{hintbox}
+How many pairs $(p, q)$ with $pq = n$ exist? How many values of $d$ satisfy the condition for a given $n$?
+\end{hintbox}
+
+\textbf{Solution Outline:} For each $n$, there are at most $O(\sqrt{n})$ valid $d$ values. The number of possible $n$ is countable. Therefore, the set of weak keys is countable, hence has measure zero.
+
+\begin{problem}[Continued Fraction Convergence]
+Show that if $\frac{p}{q}$ is a convergent of the continued fraction expansion of an irrational number $\alpha$, then:
+\[
+\left| \alpha - \frac{p}{q} \right| < \frac{1}{q^2}
+\]
+\end{problem}
+
+\begin{hintbox}
+Use properties of continued fractions: convergents are best approximations, and they satisfy a recurrence relation.
+\end{hintbox}
+
+\textbf{Solution Outline:} This follows from the theory of continued fractions. Convergents satisfy $p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}$, and the error bound can be derived from this relationship.
+
+\begin{problem}[Lattice Basis and Approximation]
+Given a 2D lattice with basis vectors $\mathbf{b}_1 = (1, 0)$ and $\mathbf{b}_2 = (\alpha, 1)$ where $\alpha$ is irrational, show that finding the shortest vector in this lattice is equivalent to finding a good rational approximation to $\alpha$.
+\end{problem}
+
+\begin{hintbox}
+A lattice point has the form $m\mathbf{b}_1 + n\mathbf{b}_2 = (m + n\alpha, n)$. What is the length of this vector?
+\end{hintbox}
+
+\textbf{Solution Outline:} The length is $\sqrt{(m + n\alpha)^2 + n^2}$. Minimizing this is equivalent to finding $m, n$ such that $|m + n\alpha|$ is small, i.e., finding a rational approximation $\frac{m}{n} \approx -\alpha$.
+
+\subsection{Level 4: Research Level}
+
+\begin{problem}[Measure-Theoretic Security]
+Formalize the following security guarantee in measure-theoretic terms: "A cryptographic scheme is secure if the set of keys that allow an efficient attack has measure zero in the keyspace."
+\end{problem}
+
+\begin{hintbox}
+Define the keyspace as a measure space, define "efficient attack" precisely, and show that the set of vulnerable keys is measurable with measure zero.
+\end{hintbox}
+
+\textbf{Solution Outline:} 
+\begin{enumerate}
+    \item Define keyspace $K$ with measure $\mu$
+    \item Define attack function $A: K \to \{0, 1\}$ (1 if attack succeeds)
+    \item Show $V = \{k \in K : A(k) = 1\}$ is measurable
+    \item Prove $\mu(V) = 0$ under security assumptions
+    \item Conclude $P(\text{random key} \in V) = 0$
+\end{enumerate}
+
+\begin{problem}[Optimal Approximation Bounds]
+For a given irrational $\alpha$ and bound $B$, what is the maximum number of rational approximations $\frac{p}{q}$ with $q \leq B$ that can satisfy $|\alpha - \frac{p}{q}| < \frac{1}{q^2}$? How does this relate to cryptographic security?
+\end{problem}
+
+\begin{hintbox}
+Use the theory of continued fractions and the fact that convergents are the best approximations. Consider the growth rate of denominators in continued fraction expansions.
+\end{hintbox}
+
+\textbf{Solution Outline:} By Hurwitz's theorem and properties of continued fractions, there are at most $O(\log B)$ such approximations. This bounds the number of "good" keys an attacker needs to check, relating to security parameters in lattice-based cryptography.
+
+\begin{problem}[Quantum Resistance of Lattice Problems]
+Investigate why lattice problems (and the underlying Diophantine approximation problems) are believed to be resistant to quantum attacks, unlike factoring and discrete log.
+\end{problem}
+
+\begin{hintbox}
+Consider what makes Shor's algorithm work for factoring (period finding) and why this doesn't apply to lattice problems. Look into the structure of lattice problems vs. the structure of problems with efficient quantum algorithms.
+\end{hintbox}
+
+\textbf{Solution Outline:} 
+\begin{enumerate}
+    \item Shor's algorithm relies on finding periods in abelian groups
+    \item Lattice problems don't have this algebraic structure
+    \item Best known quantum algorithms for lattices provide only polynomial speedups
+    \item The approximation structure doesn't yield to quantum period finding
+    \item This is why lattice-based crypto is post-quantum secure
+\end{enumerate}
+
+\subsection{Additional Challenge Problems}
+
+\begin{problem}[Density in Higher Dimensions]
+Generalize the density of rationals to $\mathbb{Q}^n$ (rational points in $n$-dimensional space). Is $\mathbb{Q}^n$ dense in $\mathbb{R}^n$? What is its measure?
+\end{problem}
+
+\begin{problem}[Computational Complexity of Approximation]
+What is the computational complexity of finding the best rational approximation to an irrational number with denominator bounded by $B$? How does this relate to cryptographic assumptions?
+\end{problem}
+
+\begin{problem}[Measure Zero in Practice]
+In cryptographic implementations, "measure zero" sets might still cause problems due to implementation bugs or side channels. Discuss the gap between theoretical measure zero and practical security.
+\end{problem}
+
+\subsection{Further Reading and Exploration}
+
+For readers interested in deeper exploration:
+
+\begin{itemize}
+    \item \textbf{Number Theory}: Hardy and Wright's "An Introduction to the Theory of Numbers" for continued fractions and Diophantine approximation
+    \item \textbf{Measure Theory}: Royden's "Real Analysis" for rigorous treatment of Lebesgue measure
+    \item \textbf{Lattice Cryptography}: Peikert's survey "A Decade of Lattice Cryptography" for modern developments
+    \item \textbf{Cryptanalysis}: Boneh's "Twenty Years of Attacks on the RSA Cryptosystem" for various attacks including Wiener's
+\end{itemize}
+

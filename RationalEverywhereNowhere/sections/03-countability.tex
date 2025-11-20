@@ -1,0 +1,157 @@
+\section{Countability}
+
+While rational numbers are dense (appearing everywhere), they are fundamentally different from real numbers in terms of their "size" or cardinality. This section explores the concept of countability and shows that rational numbers, despite being infinite, are in a sense "smaller" than the real numbers.
+
+\subsection{Countable Sets}
+
+\begin{definition}[Countable Set]
+A set $A$ is called \textbf{countable} if there exists a bijection (one-to-one correspondence) between $A$ and the set of natural numbers $\mathbb{N} = \{1, 2, 3, \ldots\}$. If a set is countable and infinite, we say it is \textbf{countably infinite}.
+\end{definition}
+
+In simpler terms, a countable set can be "listed" or enumerated—we can assign each element a natural number index, even if the set is infinite.
+
+\begin{example}
+The set of even positive integers $\{2, 4, 6, 8, \ldots\}$ is countable because we can list them as:
+\begin{align*}
+1 &\mapsto 2 \\
+2 &\mapsto 4 \\
+3 &\mapsto 6 \\
+4 &\mapsto 8 \\
+&\vdots
+\end{align*}
+The bijection is $f(n) = 2n$.
+\end{example}
+
+\subsection{Cantor's Enumeration of Rational Numbers}
+
+The remarkable fact that rational numbers are countable was first proven by Georg Cantor in the 19th century. His proof uses a clever enumeration method.
+
+\begin{theorem}[Countability of Rational Numbers]
+The set of rational numbers $\mathbb{Q}$ is countably infinite.
+\end{theorem}
+
+\begin{proof}
+We will show that the positive rationals are countable by arranging them in a grid and enumerating them systematically.
+
+Consider the infinite grid where row $i$ contains all fractions with numerator $i$:
+\[
+\begin{array}{cccccc}
+\frac{1}{1} & \frac{1}{2} & \frac{1}{3} & \frac{1}{4} & \frac{1}{5} & \cdots \\
+\frac{2}{1} & \frac{2}{2} & \frac{2}{3} & \frac{2}{4} & \frac{2}{5} & \cdots \\
+\frac{3}{1} & \frac{3}{2} & \frac{3}{3} & \frac{3}{4} & \frac{3}{5} & \cdots \\
+\frac{4}{1} & \frac{4}{2} & \frac{4}{3} & \frac{4}{4} & \frac{4}{5} & \cdots \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+\end{array}
+\]
+
+We enumerate by following diagonal paths:
+\begin{enumerate}
+    \item Start with $\frac{1}{1}$ (position 1)
+    \item Move diagonally: $\frac{1}{2}, \frac{2}{1}$ (positions 2, 3)
+    \item Next diagonal: $\frac{1}{3}, \frac{2}{2}, \frac{3}{1}$ (positions 4, 5, 6)
+    \item Continue this pattern...
+\end{enumerate}
+
+When we encounter a fraction that is not in lowest terms (like $\frac{2}{2} = 1$), we skip it since we've already counted its reduced form. This gives us an enumeration of all positive rationals.
+
+To include negative rationals and zero, we can interleave: $0, \frac{1}{1}, -\frac{1}{1}, \frac{1}{2}, -\frac{1}{2}, \frac{2}{1}, -\frac{2}{1}, \ldots$
+
+Therefore, $\mathbb{Q}$ is countable.
+\end{proof}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % Grid
+    \foreach \i in {1,...,5} {
+        \foreach \j in {1,...,5} {
+            \node[draw, rectangle, minimum size=0.8cm] at (\j, -\i+1) {$\frac{\i}{\j}$};
+        }
+    }
+    
+    % Diagonal enumeration path
+    \draw[thick, bookred, ->] (1, 1) -- (1.4, 0.6);
+    \draw[thick, bookred, ->] (1.4, 0.6) -- (2, 1);
+    \draw[thick, bookred, ->] (2, 1) -- (1.4, 1.4);
+    \draw[thick, bookred, ->] (1.4, 1.4) -- (3, 1);
+    \draw[thick, bookred, ->] (3, 1) -- (2.4, 1.6);
+    \draw[thick, bookred, ->] (2.4, 1.6) -- (1.4, 2.4);
+    \draw[thick, bookred, ->] (1.4, 2.4) -- (4, 1);
+    
+    % Labels
+    \node[above] at (1, 1.2) {1};
+    \node[above right] at (2, 1.2) {2,3};
+    \node[above right] at (3, 1.2) {4,5,6};
+    \node[above right] at (4, 1.2) {7,8,9,10};
+    
+    \node[below] at (3, -4.5) {Cantor's diagonal enumeration of rational numbers};
+\end{tikzpicture}
+\caption{Grid showing Cantor's enumeration method for rational numbers}
+\end{figure}
+
+\subsection{Uncountability of Real Numbers}
+
+In contrast to rational numbers, the real numbers are \textit{uncountable}—they cannot be put into a one-to-one correspondence with the natural numbers.
+
+\begin{theorem}[Uncountability of Real Numbers]
+The set of real numbers $\mathbb{R}$ is uncountable.
+\end{theorem}
+
+\begin{proof}[Cantor's Diagonal Argument]
+Assume for contradiction that $\mathbb{R}$ is countable. Then we can list all real numbers between 0 and 1:
+\begin{align*}
+r_1 &= 0.d_{11}d_{12}d_{13}d_{14}\ldots \\
+r_2 &= 0.d_{21}d_{22}d_{23}d_{24}\ldots \\
+r_3 &= 0.d_{31}d_{32}d_{33}d_{34}\ldots \\
+r_4 &= 0.d_{41}d_{42}d_{43}d_{44}\ldots \\
+&\vdots
+\end{align*}
+where each $d_{ij}$ is a digit.
+
+Now construct a number $s = 0.s_1s_2s_3s_4\ldots$ where $s_i \neq d_{ii}$ (and $s_i \neq 9$ to avoid the $0.999\ldots = 1$ issue). Then $s$ differs from every $r_i$ in at least one decimal place, so $s$ is not in our list—a contradiction.
+
+Therefore, $\mathbb{R}$ is uncountable.
+\end{proof}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1]
+    % Countable set visualization
+    \draw[fill=bookpurple!30, rounded corners] (0, 0) rectangle (3, 4);
+    \node[above] at (1.5, 4) {Countable Sets};
+    \node at (1.5, 3) {$\mathbb{N}$};
+    \node at (1.5, 2) {$\mathbb{Z}$};
+    \node at (1.5, 1) {$\mathbb{Q}$};
+    \node at (1.5, 0.5) {Can be listed};
+    
+    % Uncountable set visualization
+    \draw[fill=bookred!30, rounded corners] (5, 0) rectangle (8, 4);
+    \node[above] at (6.5, 4) {Uncountable Sets};
+    \node at (6.5, 3) {$\mathbb{R}$};
+    \node at (6.5, 2) {$\mathbb{C}$};
+    \node at (6.5, 1) {Power set of $\mathbb{N}$};
+    \node at (6.5, 0.5) {Cannot be listed};
+    
+    % Arrow
+    \draw[->, thick, bookpurple] (3.2, 2) -- (4.8, 2);
+    \node[above] at (4, 2.3) {Much larger!};
+\end{tikzpicture}
+\caption{Comparison of countable and uncountable sets}
+\end{figure}
+
+\subsection{Implications of Countability}
+
+The fact that rational numbers are countable while real numbers are uncountable has profound implications:
+
+\begin{enumerate}
+    \item \textbf{Size Difference}: Even though both sets are infinite, there are "more" real numbers than rational numbers in a precise mathematical sense.
+    
+    \item \textbf{Probability}: As we'll see in Section 6, if you pick a real number at random, the probability it's rational is 0, even though rationals are dense.
+    
+    \item \textbf{Cryptography}: The distinction between countable and uncountable sets is crucial in security proofs, where we need to show that "weak" keys form a negligible (measure zero) set.
+\end{enumerate}
+
+\begin{remark}
+The countability of rational numbers, combined with their density, creates the paradox we explore in later sections: they are "everywhere" (dense) but "nowhere" (measure zero) at the same time.
+\end{remark}
+

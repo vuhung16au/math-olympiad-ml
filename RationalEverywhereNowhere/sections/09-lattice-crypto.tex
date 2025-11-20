@@ -1,0 +1,199 @@
+\section{Lattice-Based Cryptography and Diophantine Approximation}
+
+Lattice-based cryptography is one of the most promising approaches for post-quantum cryptography. It relies fundamentally on the difficulty of finding good rational approximations to certain numbers, directly connecting to the properties of rational numbers we've explored.
+
+\subsection{Introduction to Lattices}
+
+\begin{definition}[Lattice]
+A \textbf{lattice} $\mathcal{L}$ in $\mathbb{R}^n$ is the set of all integer linear combinations of linearly independent vectors $\mathbf{b}_1, \mathbf{b}_2, \ldots, \mathbf{b}_k$:
+\[
+\mathcal{L} = \left\{ \sum_{i=1}^{k} x_i \mathbf{b}_i : x_i \in \mathbb{Z} \right\}
+\]
+
+The vectors $\mathbf{b}_1, \ldots, \mathbf{b}_k$ form a \textbf{basis} of the lattice.
+\end{definition}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % Basis vectors
+    \draw[->, thick, bookpurple] (0,0) -- (2,0) node[above] {$\mathbf{b}_1$};
+    \draw[->, thick, bookpurple] (0,0) -- (0.5,1.5) node[left] {$\mathbf{b}_2$};
+    
+    % Lattice points
+    \foreach \i in {-1,0,1,2} {
+        \foreach \j in {-1,0,1,2} {
+            \draw[fill=bookred] (2*\i + 0.5*\j, 1.5*\j) circle (1.5pt);
+        }
+    }
+    
+    % Grid lines
+    \foreach \i in {-1,0,1,2} {
+        \draw[thin, gray, dashed] (2*\i - 0.5, -1.5) -- (2*\i + 1, 3);
+    }
+    \foreach \j in {-1,0,1,2} {
+        \draw[thin, gray, dashed] (-2.5, 1.5*\j) -- (4.5, 1.5*\j);
+    }
+    
+    \node[below] at (1, -2) {2D Lattice: integer combinations of basis vectors};
+\end{tikzpicture}
+\caption{Visualization of a 2D lattice}
+\end{figure}
+
+\subsection{Diophantine Approximation}
+
+\begin{definition}[Diophantine Approximation]
+\textbf{Diophantine approximation} is the study of how well real numbers can be approximated by rational numbers. Given an irrational number $\alpha$ and an error bound $\epsilon > 0$, we seek rational numbers $\frac{p}{q}$ such that:
+\[
+\left| \alpha - \frac{p}{q} \right| < \epsilon
+\]
+\end{definition}
+
+The density of rational numbers (Section 2) guarantees that such approximations always exist, but finding \textit{good} approximations (with small denominators) is computationally hard.
+
+\begin{theorem}[Dirichlet's Approximation Theorem]
+For any irrational number $\alpha$ and any positive integer $N$, there exist integers $p$ and $q$ with $1 \leq q \leq N$ such that:
+\[
+\left| \alpha - \frac{p}{q} \right| < \frac{1}{qN}
+\]
+\end{theorem}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % Number line
+    \draw[thick, ->] (0,0) -- (6,0);
+    \node[below] at (0,0) {$0$};
+    
+    % Irrational point
+    \draw[fill=bookred] (2.236, 0) circle (2pt);
+    \node[above] at (2.236, 0.2) {$\sqrt{5} \approx 2.236$};
+    
+    % Rational approximations
+    \draw[fill=bookpurple] (2, 0) circle (1.5pt);
+    \node[below] at (2, -0.2) {$\frac{2}{1}$};
+    \draw[fill=bookpurple] (2.25, 0) circle (1.5pt);
+    \node[below] at (2.25, -0.2) {$\frac{9}{4}$};
+    \draw[fill=bookpurple] (2.2, 0) circle (1.5pt);
+    \node[below] at (2.2, -0.2) {$\frac{11}{5}$};
+    
+    % Error bars
+    \draw[thick, bookred, <->] (2, -0.4) -- (2.236, -0.4);
+    \node[below] at (2.118, -0.4) {error};
+    
+    \node[below] at (3, -0.8) {Rational approximations to $\sqrt{5}$};
+\end{tikzpicture}
+\caption{Number line showing rational approximation to irrational number}
+\end{figure}
+
+\subsection{Continued Fractions}
+
+Continued fractions provide the best rational approximations to irrational numbers.
+
+\begin{definition}[Continued Fraction]
+A \textbf{continued fraction} is an expression of the form:
+\[
+\alpha = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \cdots}}}
+\]
+where $a_0$ is an integer and $a_1, a_2, a_3, \ldots$ are positive integers.
+\end{definition}
+
+\begin{example}
+The continued fraction for $\sqrt{2}$ is:
+\[
+\sqrt{2} = 1 + \cfrac{1}{2 + \cfrac{1}{2 + \cfrac{1}{2 + \cdots}}}
+\]
+
+The convergents (rational approximations) are: $\frac{1}{1}, \frac{3}{2}, \frac{7}{5}, \frac{17}{12}, \ldots$
+\end{example}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Tree structure
+    \node[draw, circle, fill=bookpurple!30] (root) at (4, 4) {$\alpha$};
+    
+    \node[draw, circle, fill=bookred!20] (a0) at (2, 3) {$a_0$};
+    \node[draw, circle, fill=bookred!20] (frac) at (6, 3) {$\frac{1}{\ldots}$};
+    
+    \node[draw, circle, fill=bookred!20] (a1) at (5, 2) {$a_1$};
+    \node[draw, circle, fill=bookred!20] (frac2) at (7, 2) {$\frac{1}{\ldots}$};
+    
+    \node[draw, circle, fill=bookred!20] (a2) at (6.5, 1) {$a_2$};
+    \node[draw, circle, fill=bookred!20] (dots) at (8, 1) {$\cdots$};
+    
+    \draw[->] (root) -- (a0);
+    \draw[->] (root) -- (frac);
+    \draw[->] (frac) -- (a1);
+    \draw[->] (frac) -- (frac2);
+    \draw[->] (frac2) -- (a2);
+    \draw[->] (frac2) -- (dots);
+    
+    \node[below] at (4, 0) {Continued fraction tree structure};
+\end{tikzpicture}
+\caption{Tree structure of continued fraction expansion}
+\end{figure}
+
+\subsection{Connection to Lattice Problems}
+
+Lattice-based cryptography relies on the computational hardness of certain lattice problems, which are closely related to Diophantine approximation:
+
+\begin{theorem}[Lattice Problems and Approximation]
+The following problems are computationally equivalent (up to polynomial factors):
+\begin{enumerate}
+    \item \textbf{Shortest Vector Problem (SVP)}: Find the shortest non-zero vector in a lattice
+    \item \textbf{Closest Vector Problem (CVP)}: Find the lattice point closest to a given target vector
+    \item \textbf{Approximate SVP}: Find a vector within a factor of the shortest vector
+\end{enumerate}
+These problems reduce to finding good rational approximations.
+\end{theorem}
+
+\begin{remark}
+The security of lattice-based cryptosystems depends on the assumption that these approximation problems are computationally hard, even for quantum computers. This is why lattice-based cryptography is a leading candidate for post-quantum security.
+\end{remark}
+
+\subsection{Cryptographic Applications}
+
+\subsubsection{Learning With Errors (LWE)}
+
+The Learning With Errors problem, a foundation of lattice-based cryptography, can be viewed as an approximation problem:
+
+\begin{definition}[Learning With Errors]
+Given a matrix $\mathbf{A}$ and a vector $\mathbf{b} = \mathbf{A}\mathbf{s} + \mathbf{e}$ (where $\mathbf{e}$ is a small error vector), recover the secret vector $\mathbf{s}$.
+\end{definition}
+
+This is essentially finding a "close" solution to a system of equations, which relates to approximation problems.
+
+\subsubsection{Post-Quantum Security}
+
+Lattice-based cryptography is considered secure against quantum attacks because:
+
+\begin{itemize}
+    \item Quantum algorithms (like Shor's algorithm) don't provide speedups for lattice problems
+    \item The approximation problems remain hard even with quantum computation
+    \item The security relies on the structure of rational approximations, which quantum computers don't help with
+\end{itemize}
+
+\begin{example}
+NIST's post-quantum cryptography standardization includes several lattice-based schemes:
+\begin{itemize}
+    \item CRYSTALS-Kyber (key encapsulation)
+    \item CRYSTALS-Dilithium (digital signatures)
+    \item FALCON (digital signatures)
+\end{itemize}
+All rely on the hardness of lattice approximation problems.
+\end{example}
+
+\subsection{The Rational Number Connection}
+
+The connection to rational numbers is fundamental:
+
+\begin{enumerate}
+    \item \textbf{Density}: Rationals are dense, so approximations always exist
+    \item \textbf{Countability}: There are only countably many "good" approximations (with bounded denominators)
+    \item \textbf{Hardness}: Finding the best approximation is computationally difficult
+    \item \textbf{Security}: Cryptographic security relies on this computational difficulty
+\end{enumerate}
+
+The "everywhere but nowhere" nature of rationals—dense yet measure zero—ensures that while approximations exist, finding them is hard, providing the foundation for cryptographic security.
+

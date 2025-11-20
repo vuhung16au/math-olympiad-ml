@@ -1,0 +1,92 @@
+\documentclass[12pt]{article}
+
+% Basic packages
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[british]{babel}
+
+% Apply DL101 styles (adapted for article class)
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-fonts}
+\usepackage{styles/dl101-base}
+
+% Create dummy chapter counter and commands for compatibility (article class doesn't have chapters)
+\newcounter{chapter}
+\renewcommand{\thechapter}{}
+\newcommand{\chaptermark}[1]{}  % Dummy chaptermark for header-footer compatibility
+
+\usepackage{styles/dl101-boxes}
+\usepackage{styles/dl101-theorems-article}
+\usepackage{styles/dl101-header-footer}
+
+% Note: Boxes are defined with chapter numbering, but since we're in article class,
+% the chapter counter is empty, so numbering will work correctly within sections
+
+% TikZ libraries for diagrams
+\usetikzlibrary{intersections, calc, shapes.geometric, arrows.meta, positioning}
+
+% Algorithm support (for pseudocode)
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\author{Vu Hung Nguyen}
+\title{Rational Numbers: Everywhere but Nowhere\\From Ancient Mathematics to Modern Cryptography}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% Abstract
+\input{sections/00-abstract}
+
+\tableofcontents
+\newpage
+
+% Main content sections
+\input{sections/01-introduction}
+\input{sections/02-density}
+\input{sections/03-countability}
+\input{sections/04-measure-zero}
+\input{sections/05-paradox}
+\input{sections/06-probability}
+\input{sections/07-crypto-overview}
+\input{sections/08-rng}
+\input{sections/09-lattice-crypto}
+\input{sections/10-wiener-attack}
+\input{sections/11-problems}
+\input{sections/12-conclusion}
+
+% References
+\begin{thebibliography}{99}
+\bibitem{chalktalk}
+Chalk Talk, ``The Rational Numbers Are Not So 'Rational' | Everywhere but Nowhere,'' 
+YouTube video, \url{https://www.youtube.com/watch?v=G8dLWja-bY0}
+
+\bibitem{wiener1990}
+M. J. Wiener, ``Cryptanalysis of short RSA secret exponents,'' 
+\textit{IEEE Transactions on Information Theory}, vol. 36, no. 3, pp. 553--558, 1990.
+
+\bibitem{hardy2008}
+G. H. Hardy and E. M. Wright, \textit{An Introduction to the Theory of Numbers}, 
+6th ed. Oxford University Press, 2008.
+
+\bibitem{rosen2010}
+K. H. Rosen, \textit{Elementary Number Theory and Its Applications}, 
+6th ed. Pearson, 2010.
+
+\bibitem{regev2009}
+O. Regev, ``On lattices, learning with errors, random linear codes, and cryptography,'' 
+\textit{Journal of the ACM}, vol. 56, no. 6, pp. 1--40, 2009.
+
+\bibitem{peikert2016}
+C. Peikert, ``A decade of lattice cryptography,'' 
+\textit{Foundations and Trends in Theoretical Computer Science}, vol. 10, no. 4, pp. 283--424, 2016.
+\end{thebibliography}
+
+\end{document}
+

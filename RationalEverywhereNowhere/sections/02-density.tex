@@ -1,0 +1,146 @@
+\section{Density (Everywhere)}
+
+The property of \textit{density} is what makes rational numbers seem to be "everywhere" on the number line. This section explores this fundamental property and its implications.
+
+\subsection{The Density Property}
+
+\begin{definition}[Dense Set]
+A set $A \subseteq \mathbb{R}$ is said to be \textbf{dense} in $\mathbb{R}$ if for any two distinct real numbers $a < b$, there exists an element $x \in A$ such that $a < x < b$.
+\end{definition}
+
+In other words, a dense set has elements in every interval, no matter how small. The rational numbers have this remarkable property.
+
+\begin{theorem}[Density of Rational Numbers]
+The set of rational numbers $\mathbb{Q}$ is dense in $\mathbb{R}$. That is, between any two distinct real numbers, there exists a rational number.
+\end{theorem}
+
+\begin{proof}
+Let $a, b \in \mathbb{R}$ with $a < b$. We need to show there exists $r \in \mathbb{Q}$ such that $a < r < b$.
+
+Since $b - a > 0$, by the Archimedean property, there exists a positive integer $n$ such that $n(b-a) > 1$, which means $b - a > \frac{1}{n}$.
+
+Now consider the set of integers $m$ such that $m > na$. By the Archimedean property, this set is non-empty. Let $m_0$ be the smallest such integer. Then:
+\[
+m_0 - 1 \leq na < m_0
+\]
+
+Dividing by $n$:
+\[
+\frac{m_0 - 1}{n} \leq a < \frac{m_0}{n}
+\]
+
+Since $m_0 \leq na + 1 < nb + 1$ and $na < m_0$, we have:
+\[
+a < \frac{m_0}{n} \leq a + \frac{1}{n} < a + (b - a) = b
+\]
+
+Therefore, $r = \frac{m_0}{n}$ is a rational number satisfying $a < r < b$.
+\end{proof}
+
+\begin{corollary}
+Between any two distinct rational numbers, there are infinitely many rational numbers.
+\end{corollary}
+
+\begin{proof}
+If $r_1 < r_2$ are rational numbers, by the density theorem, there exists a rational $r_3$ such that $r_1 < r_3 < r_2$. Applying the theorem again, we can find rationals $r_4, r_5, \ldots$ between $r_1$ and $r_3$, and between $r_3$ and $r_2$, and so on. This process can be repeated infinitely many times.
+\end{proof}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % Number line
+    \draw[thick, ->] (0,0) -- (10,0);
+    \node[below] at (0,0) {$a$};
+    \node[below] at (10,0) {$b$};
+    
+    % Mark some rationals
+    \foreach \x in {2, 3.5, 5, 6.5, 8} {
+        \draw[fill=bookpurple] (\x, 0) circle (2pt);
+        \node[above] at (\x, 0.1) {$r$};
+    }
+    
+    % Interval
+    \draw[thick, bookred, <->] (0, 0.3) -- (10, 0.3);
+    \node[above] at (5, 0.3) {$(a, b)$};
+    
+    % Zoom indicator
+    \draw[thick, bookpurple, dashed] (3, -0.5) rectangle (7, -1.5);
+    \node[below] at (5, -1.5) {Zoom in: infinitely many rationals};
+    
+    % Zoomed view
+    \begin{scope}[xshift=5cm, yshift=-2.5cm, scale=2]
+        \draw[thick, ->] (0,0) -- (2,0);
+        \node[below] at (0,0) {$a$};
+        \node[below] at (2,0) {$b$};
+        \foreach \x in {0.3, 0.6, 0.9, 1.2, 1.5, 1.8} {
+            \draw[fill=bookpurple] (\x, 0) circle (1.5pt);
+        }
+    \end{scope}
+\end{tikzpicture}
+\caption{Number line showing rational numbers densely packed between any two reals $a$ and $b$}
+\end{figure}
+
+\subsection{Visualizing Density}
+
+The density property means that no matter how small an interval you choose on the real number line, it will always contain rational numbers. This is illustrated in the following figure, which shows multiple levels of zooming.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % Level 1: Original interval
+    \draw[thick] (0,0) -- (8,0);
+    \node[below] at (0,0) {$0$};
+    \node[below] at (8,0) {$1$};
+    \foreach \x in {1,2,3,4,5,6,7} {
+        \draw[fill=bookpurple] (\x, 0) circle (1.5pt);
+    }
+    \node[above] at (4, 0.2) {Level 1: Interval [0,1]};
+    
+    % Level 2: Zoom to [0.3, 0.7]
+    \begin{scope}[yshift=-1.5cm]
+        \draw[thick] (2.4,0) -- (5.6,0);
+        \node[below] at (2.4,0) {$0.3$};
+        \node[below] at (5.6,0) {$0.7$};
+        \foreach \x in {2.6,2.8,3.0,3.2,3.4,3.6,3.8,4.0,4.2,4.4,4.6,4.8,5.0,5.2,5.4} {
+            \draw[fill=bookpurple] (\x, 0) circle (1pt);
+        }
+        \node[above] at (4, 0.2) {Level 2: Zoom to [0.3, 0.7]};
+    \end{scope}
+    
+    % Level 3: Zoom to [0.45, 0.55]
+    \begin{scope}[yshift=-3cm]
+        \draw[thick] (3.6,0) -- (4.4,0);
+        \node[below] at (3.6,0) {$0.45$};
+        \node[below] at (4.4,0) {$0.55$};
+        \foreach \x in {3.65,3.7,3.75,3.8,3.85,3.9,3.95,4.0,4.05,4.1,4.15,4.2,4.25,4.3,4.35} {
+            \draw[fill=bookpurple] (\x, 0) circle (0.8pt);
+        }
+        \node[above] at (4, 0.2) {Level 3: Zoom to [0.45, 0.55]};
+    \end{scope}
+    
+    % Arrow showing zoom
+    \draw[->, thick, bookred] (4, -0.3) -- (4, -1.2);
+    \draw[->, thick, bookred] (4, -2.7) -- (4, -2.85);
+\end{tikzpicture}
+\caption{Progressive zooming reveals infinitely many rational numbers in any interval}
+\end{figure}
+
+\subsection{Constructive Proof: Finding Rationals Between Reals}
+
+The proof of the density theorem is \textit{constructive}—it actually shows us how to find a rational number between any two reals. This has practical applications in numerical analysis and cryptography.
+
+\begin{example}[Finding a Rational Between $\sqrt{2}$ and $\sqrt{3}$]
+We know $\sqrt{2} \approx 1.414$ and $\sqrt{3} \approx 1.732$. To find a rational between them:
+
+Since $1.732 - 1.414 = 0.318 > \frac{1}{4}$, we can use $n = 4$. Then:
+\[
+4 \cdot 1.414 = 5.656 < 6 < 7.328 = 4 \cdot 1.732
+\]
+
+So $\frac{6}{4} = \frac{3}{2} = 1.5$ is a rational number between $\sqrt{2}$ and $\sqrt{3}$.
+\end{example}
+
+\begin{remark}
+The density property is what makes rational numbers seem "everywhere." However, as we will see in later sections, this intuitive sense of "everywhere" is misleading when we consider measure theory. The rationals are dense, but they occupy zero "space" in a precise mathematical sense.
+\end{remark}
+
