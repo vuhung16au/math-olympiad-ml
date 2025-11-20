@@ -80,17 +80,17 @@ This means $\frac{k}{d}$ appears as a convergent in the continued fraction expan
     
     % e/n point
     \draw[fill=bookred] (3.5, 0) circle (2pt);
-    \node[above] at (3.5, 0.2) {$\frac{e}{n}$};
+    \node[above] at (3.5, 0.3) {$\frac{e}{n}$};
     
     % k/d approximation
     \draw[fill=bookpurple] (3.48, 0) circle (1.5pt);
-    \node[below] at (3.48, -0.2) {$\frac{k}{d}$};
+    \node[below] at (3.48, -0.3) {$\frac{k}{d}$};
     
     % Error
-    \draw[thick, bookred, <->] (3.48, -0.4) -- (3.5, -0.4);
-    \node[below] at (3.49, -0.4) {$< \frac{1}{2d^2}$};
+    \draw[thick, bookred, <->] (3.48, -0.6) -- (3.5, -0.6);
+    \node[below] at (3.49, -0.6) {$< \frac{1}{2d^2}$};
     
-    \node[below] at (4, -0.8) {Rational approximation reveals private key};
+    \node[below] at (4, -1.0) {Rational approximation reveals private key};
 \end{tikzpicture}
 \caption{Number line showing how $\frac{k}{d}$ approximates $\frac{e}{n}$}
 \end{figure}
@@ -115,21 +115,21 @@ This means $\frac{k}{d}$ appears as a convergent in the continued fraction expan
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[scale=0.9]
-    % Flow chart
-    \node[draw, rectangle, fill=bookpurple!30] (start) at (0, 4) {Start: Public key $(n, e)$};
-    \node[draw, rectangle, fill=bookred!20, align=center] (cf) at (0, 3) {Compute continued fraction\\of $\frac{e}{n}$};
-    \node[draw, diamond, fill=bookpurple!20, align=center] (check) at (0, 1.5) {Check convergents\\$\frac{k_i}{d_i}$};
-    \node[draw, rectangle, fill=bookred!30, align=center] (test) at (-2, 0) {Test if $d_i$\\is valid};
-    \node[draw, rectangle, fill=bookpurple!40, align=center] (found) at (2, 0) {Private key\\found!};
-    \node[draw, rectangle, fill=warmstone!30] (fail) at (0, -1.5) {Attack fails};
+\begin{tikzpicture}[scale=0.9, node distance=1.2cm]
+    % Flow chart - increased spacing to prevent overlap
+    \node[draw, rectangle, fill=bookpurple!30] (start) at (0, 6) {Start: Public key $(n, e)$};
+    \node[draw, rectangle, fill=bookred!20, align=center] (cf) at (0, 4.2) {Compute continued fraction\\of $\frac{e}{n}$};
+    \node[draw, diamond, fill=bookpurple!20, align=center, minimum width=2.5cm, minimum height=1.5cm] (check) at (0, 2) {Check convergents\\$\frac{k_i}{d_i}$};
+    \node[draw, rectangle, fill=bookred!30, align=center] (test) at (-3, -0.5) {Test if $d_i$\\is valid};
+    \node[draw, rectangle, fill=bookpurple!40, align=center] (found) at (3, -0.5) {Private key\\found!};
+    \node[draw, rectangle, fill=warmstone!30] (fail) at (0, -2.5) {Attack fails};
     
     \draw[->] (start) -- (cf);
     \draw[->] (cf) -- (check);
     \draw[->] (check) -- (test);
-    \draw[->] (test) -- node[above] {Success} (found);
-    \draw[->] (test) -- node[left] {Fail} (check);
-    \draw[->] (check) -- node[right] {No more} (fail);
+    \draw[->] (test) -- node[above, yshift=0.2cm] {Success} (found);
+    \draw[->, bend left=30] (test) to node[left, xshift=-0.3cm] {Fail} (check);
+    \draw[->] (check) -- node[right, xshift=0.2cm] {No more} (fail);
 \end{tikzpicture}
 \caption{Wiener's attack flowchart}
 \end{figure}
@@ -165,21 +165,21 @@ The continued fraction expansion of $\frac{65537}{10000019}$ will have $\frac{k}
 \centering
 \begin{tikzpicture}[scale=0.8]
     % Continued fraction steps
-    \node[draw, rectangle] (step1) at (0, 3) {$\frac{e}{n} = a_0 + \frac{1}{r_1}$};
-    \node[draw, rectangle] (step2) at (0, 2) {$r_1 = a_1 + \frac{1}{r_2}$};
-    \node[draw, rectangle] (step3) at (0, 1) {$r_2 = a_2 + \frac{1}{r_3}$};
-    \node[draw, rectangle] (dots) at (0, 0) {$\vdots$};
+    \node[draw, rectangle, minimum width=3cm, align=center] (step1) at (-2, 3) {$\frac{e}{n} = a_0 + \frac{1}{r_1}$};
+    \node[draw, rectangle, minimum width=3cm, align=center] (step2) at (-2, 2) {$r_1 = a_1 + \frac{1}{r_2}$};
+    \node[draw, rectangle, minimum width=3cm, align=center] (step3) at (-2, 1) {$r_2 = a_2 + \frac{1}{r_3}$};
+    \node[draw, rectangle] (dots) at (-2, 0) {$\vdots$};
     
-    % Convergents
-    \node[draw, ellipse, fill=bookred!30] (conv1) at (4, 3) {Convergent 1: $\frac{k_1}{d_1}$};
-    \node[draw, ellipse, fill=bookred!30] (conv2) at (4, 2) {Convergent 2: $\frac{k_2}{d_2}$};
-    \node[draw, ellipse, fill=bookred!30] (conv3) at (4, 1) {Convergent 3: $\frac{k_3}{d_3}$};
+    % Convergents - moved further right to prevent overlap
+    \node[draw, ellipse, fill=bookred!30, minimum width=3.5cm, align=center] (conv1) at (3, 3) {Convergent 1: $\frac{k_1}{d_1}$};
+    \node[draw, ellipse, fill=bookred!30, minimum width=3.5cm, align=center] (conv2) at (3, 2) {Convergent 2: $\frac{k_2}{d_2}$};
+    \node[draw, ellipse, fill=bookred!30, minimum width=3.5cm, align=center] (conv3) at (3, 1) {Convergent 3: $\frac{k_3}{d_3}$};
     
     \draw[->] (step1) -- (conv1);
     \draw[->] (step2) -- (conv2);
     \draw[->] (step3) -- (conv3);
     
-    \node[below] at (2, -0.5) {Continued fraction expansion process};
+    \node[below] at (0.5, -0.5) {Continued fraction expansion process};
 \end{tikzpicture}
 \caption{Visualization of continued fraction approximation algorithm}
 \end{figure}

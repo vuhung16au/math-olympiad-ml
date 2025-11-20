@@ -38,7 +38,7 @@ P(x \in \mathbb{Q} \cap [a, b]) = \frac{\mu(\mathbb{Q} \cap [a, b])}{b - a} = \f
     
     % Interval
     \draw[thick, bookpurple, <->] (0, 0.3) -- (10, 0.3);
-    \node[above] at (5, 0.3) {Interval $[a, b]$};
+    \node[above] at (5, 0.5) {Interval $[a, b]$};
     
     % Rational points (many small dots)
     \foreach \x in {0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5} {
@@ -47,15 +47,15 @@ P(x \in \mathbb{Q} \cap [a, b]) = \frac{\mu(\mathbb{Q} \cap [a, b])}{b - a} = \f
     
     % Probability distribution
     \draw[thick, bookpurple, fill=bookpurple!20] (0, -1) rectangle (10, -0.5);
-    \node[below] at (5, -1.3) {Probability distribution: uniform over $[a, b]$};
+    \node[below] at (5, -1.4) {Probability distribution: uniform over $[a, b]$};
     
     % Rationals probability
     \draw[thick, bookred, fill=bookred!10] (4.8, -1) rectangle (5.2, -0.5);
-    \node[below] at (5, -1.6) {Rationals: measure = 0, probability = 0};
+    \node[below] at (5, -1.8) {Rationals: measure = 0, probability = 0};
     
     % Irrationals probability
     \draw[thick, bookpurple, fill=bookpurple!30] (0, -1) rectangle (10, -0.5);
-    \node[below] at (5, -1.9) {Irrationals: measure = $b-a$, probability = 1};
+    \node[below] at (5, -2.2) {Irrationals: measure = $b-a$, probability = 1};
 \end{tikzpicture}
 \caption{Geometric probability on number line showing rationals vs irrationals}
 \end{figure}
@@ -84,13 +84,13 @@ This is a striking result: even though rational numbers are dense (you can find 
     \node at (0, 0) {\Large \textbf{100\%}};
     \node[below] at (0, -2.5) {Irrational Numbers};
     
-    \draw[fill=bookred!10] (5, 0) circle (0.1);
-    \node at (5, 0) {\tiny \textbf{0\%}};
-    \node[below] at (5, -0.3) {Rational Numbers};
+    \draw[fill=bookred!10] (5, 0) circle (0.15);
+    \node at (5, 0) {\scriptsize \textbf{0\%}};
+    \node[below] at (5, -0.6) {Rational Numbers};
     
     % Arrow
     \draw[->, thick, bookred] (0.2, 0) -- (4.8, 0);
-    \node[above] at (2.5, 0.3) {Negligible};
+    \node[above] at (2.5, 0.5) {Negligible};
 \end{tikzpicture}
 \caption{Probability distribution: 0\% rationals, 100\% irrationals}
 \end{figure}

@@ -33,6 +33,22 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
+% Custom Takeaway box style
+\newtcolorbox{takeawaybox}[1][]{
+  enhanced,
+  drop shadow={black!20!white},
+  colback=softivory,
+  colframe=bookpurple,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,
+  right=12pt,
+  top=12pt,
+  bottom=12pt,
+  fonttitle=\bfseries,
+  #1
+}
+
 \author{Vu Hung Nguyen}
 \title{Rational Numbers: Everywhere but Nowhere\\From Ancient Mathematics to Modern Cryptography}
 \date{\today}
@@ -86,6 +102,10 @@ O. Regev, ``On lattices, learning with errors, random linear codes, and cryptogr
 \bibitem{peikert2016}
 C. Peikert, ``A decade of lattice cryptography,'' 
 \textit{Foundations and Trends in Theoretical Computer Science}, vol. 10, no. 4, pp. 283--424, 2016.
+
+\bibitem{nistpqc}
+National Institute of Standards and Technology (NIST), ``Post-Quantum Cryptography,'' 
+\url{https://csrc.nist.gov/projects/post-quantum-cryptography}
 \end{thebibliography}
 
 \end{document}
