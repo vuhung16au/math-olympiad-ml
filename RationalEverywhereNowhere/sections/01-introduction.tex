@@ -59,30 +59,21 @@ The development of number systems followed a natural progression:
     \node[below] at (7,0) {Renaissance};
     \node[below] at (10,0) {Modern};
     
-    % Number systems
-    \node[above] at (0.5,0.5) {$\mathbb{N}$};
-    \draw[fill=bookpurple!30] (0.3,0.2) rectangle (0.7,0.8);
+    % Number systems - boxes with text inside
+    \node[draw, fill=bookpurple!30, minimum width=0.4cm, minimum height=0.6cm, rectangle] (N) at (0.5,0.5) {$\mathbb{N}$};
+    \node[draw, fill=bookpurple!40, minimum width=0.4cm, minimum height=0.6cm, rectangle] (Z) at (2,0.5) {$\mathbb{Z}$};
+    \node[draw, fill=bookpurple!50, minimum width=0.4cm, minimum height=0.6cm, rectangle] (Q) at (3.5,0.5) {$\mathbb{Q}$};
+    \node[draw, fill=bookpurple!60, minimum width=0.4cm, minimum height=0.6cm, rectangle] (R) at (5.5,0.5) {$\mathbb{R}$};
+    \node[draw, fill=bookpurple!70, minimum width=0.4cm, minimum height=0.6cm, rectangle] (C) at (7.5,0.5) {$\mathbb{C}$};
     
-    \node[above] at (2,0.5) {$\mathbb{Z}$};
-    \draw[fill=bookpurple!40] (1.8,0.2) rectangle (2.2,0.8);
-    
-    \node[above] at (3.5,0.5) {$\mathbb{Q}$};
-    \draw[fill=bookpurple!50] (3.3,0.2) rectangle (3.7,0.8);
-    
-    \node[above] at (5.5,0.5) {$\mathbb{R}$};
-    \draw[fill=bookpurple!60] (5.3,0.2) rectangle (5.7,0.8);
-    
-    \node[above] at (7.5,0.5) {$\mathbb{C}$};
-    \draw[fill=bookpurple!70] (7.3,0.2) rectangle (7.7,0.8);
-    
-    % Labels
+    % Title
     \node[below] at (6, -0.5) {Timeline of Number System Evolution};
     
     % Arrows showing progression
-    \draw[->, thick, bookpurple] (0.7,0.5) -- (1.8,0.5);
-    \draw[->, thick, bookpurple] (2.2,0.5) -- (3.3,0.5);
-    \draw[->, thick, bookpurple] (3.7,0.5) -- (5.3,0.5);
-    \draw[->, thick, bookpurple] (5.7,0.5) -- (7.3,0.5);
+    \draw[->, thick, bookpurple] (N.east) -- (Z.west);
+    \draw[->, thick, bookpurple] (Z.east) -- (Q.west);
+    \draw[->, thick, bookpurple] (Q.east) -- (R.west);
+    \draw[->, thick, bookpurple] (R.east) -- (C.west);
 \end{tikzpicture}
 \caption{Evolution of number systems from natural numbers to complex numbers}
 \end{figure}

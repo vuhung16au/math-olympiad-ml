@@ -65,24 +65,44 @@ Therefore, $\mathbb{Q}$ is countable.
     % Grid
     \foreach \i in {1,...,5} {
         \foreach \j in {1,...,5} {
-            \node[draw, rectangle, minimum size=0.8cm] at (\j, -\i+1) {$\frac{\i}{\j}$};
+            \node[draw, rectangle, minimum size=0.8cm] (n\i-\j) at (\j, -\i+1) {$\frac{\i}{\j}$};
         }
     }
     
-    % Diagonal enumeration path
-    \draw[thick, bookred, ->] (1, 1) -- (1.4, 0.6);
-    \draw[thick, bookred, ->] (1.4, 0.6) -- (2, 1);
-    \draw[thick, bookred, ->] (2, 1) -- (1.4, 1.4);
-    \draw[thick, bookred, ->] (1.4, 1.4) -- (3, 1);
-    \draw[thick, bookred, ->] (3, 1) -- (2.4, 1.6);
-    \draw[thick, bookred, ->] (2.4, 1.6) -- (1.4, 2.4);
-    \draw[thick, bookred, ->] (1.4, 2.4) -- (4, 1);
+    % Diagonal enumeration path - following the correct sequence
+    % Position 1: 1/1 at (1, 0)
+    % Position 2: 1/2 at (2, 0)
+    % Position 3: 2/1 at (1, -1)
+    % Position 4: 1/3 at (3, 0)
+    % Position 5: 2/2 at (2, -1)
+    % Position 6: 3/1 at (1, -2)
+    % Position 7: 1/4 at (4, 0)
+    % Position 8: 2/3 at (3, -1)
+    % Position 9: 3/2 at (2, -2)
+    % Position 10: 4/1 at (1, -3)
     
-    % Labels
-    \node[above] at (1, 1.2) {1};
-    \node[above right] at (2, 1.2) {2,3};
-    \node[above right] at (3, 1.2) {4,5,6};
-    \node[above right] at (4, 1.2) {7,8,9,10};
+    % Draw arrows following the diagonal pattern
+    \draw[thick, bookred, ->] (1, 0) -- (2, 0);  % 1/1 -> 1/2
+    \draw[thick, bookred, ->] (2, 0) -- (1, -1);  % 1/2 -> 2/1
+    \draw[thick, bookred, ->] (1, -1) -- (3, 0);  % 2/1 -> 1/3
+    \draw[thick, bookred, ->] (3, 0) -- (2, -1);  % 1/3 -> 2/2
+    \draw[thick, bookred, ->] (2, -1) -- (1, -2); % 2/2 -> 3/1
+    \draw[thick, bookred, ->] (1, -2) -- (4, 0);  % 3/1 -> 1/4
+    \draw[thick, bookred, ->] (4, 0) -- (3, -1);  % 1/4 -> 2/3
+    \draw[thick, bookred, ->] (3, -1) -- (2, -2); % 2/3 -> 3/2
+    \draw[thick, bookred, ->] (2, -2) -- (1, -3); % 3/2 -> 4/1
+    
+    % Labels showing enumeration order
+    \node[above] at (1, 0.5) {\small 1};
+    \node[above] at (2, 0.5) {\small 2};
+    \node[above] at (1, -0.5) {\small 3};
+    \node[above] at (3, 0.5) {\small 4};
+    \node[above] at (2, -0.5) {\small 5};
+    \node[above] at (1, -1.5) {\small 6};
+    \node[above] at (4, 0.5) {\small 7};
+    \node[above] at (3, -0.5) {\small 8};
+    \node[above] at (2, -1.5) {\small 9};
+    \node[above] at (1, -2.5) {\small 10};
     
     \node[below] at (3, -4.5) {Cantor's diagonal enumeration of rational numbers};
 \end{tikzpicture}
@@ -138,6 +158,153 @@ Therefore, $\mathbb{R}$ is uncountable.
 \end{tikzpicture}
 \caption{Comparison of countable and uncountable sets}
 \end{figure}
+
+\subsection{Paradoxes of Infinite Sets}
+
+The concept of infinity leads to many counterintuitive results that challenge our everyday intuition. These paradoxes help illustrate the strange and fascinating properties of infinite sets, including the countably infinite set of rational numbers.
+
+\begin{example}[Hilbert's Grand Hotel]
+Imagine a hotel with infinitely many rooms, numbered $1, 2, 3, \ldots$, and suppose every room is occupied. One might think the hotel is full and cannot accommodate any new guests. However, this is not the case!
+
+When a new guest arrives, the hotel manager can accommodate them by asking each current guest in room $n$ to move to room $2n$. This frees up all the odd-numbered rooms ($1, 3, 5, 7, \ldots$), allowing the new guest to take room 1. In fact, the hotel can accommodate infinitely many new guests by having guest in room $n$ move to room $2n$, freeing up all odd-numbered rooms.
+
+This paradox illustrates a fundamental property of countably infinite sets: they can be "rearranged" to accommodate additional elements while maintaining the same cardinality. Just as the rational numbers can be enumerated (listed) in different ways, the hotel's guests can be reassigned to different rooms. This property is unique to infinite sets—a finite hotel with all rooms occupied truly cannot accommodate new guests, but an infinite hotel always can.
+\end{example}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % Before: All rooms occupied
+    \begin{scope}[xshift=0cm]
+        \node[above] at (2, 2.5) {\textbf{Before: All rooms occupied}};
+        \foreach \i in {1,...,8} {
+            \draw[fill=bookpurple!50, draw=bookpurple, thick] (\i*0.6, 0) rectangle (\i*0.6+0.5, 1);
+            \node at (\i*0.6+0.25, 0.5) {\small \i};
+            \draw[fill=bookpurple] (\i*0.6+0.25, 1.3) circle (2pt);
+        }
+    \end{scope}
+    
+    % Arrow
+    \draw[->, thick, bookred] (5.2, 0.5) -- (6.2, 0.5);
+    \node[above] at (5.7, 0.8) {Move guest};
+    \node[above] at (5.7, 0.5) {from room $n$};
+    \node[below] at (5.7, 0.2) {to room $2n$};
+    
+    % After: Guests in even rooms, odd rooms free
+    \begin{scope}[xshift=7.5cm]
+        \node[above] at (2, 2.5) {\textbf{After: Odd rooms free}};
+        \foreach \i in {1,3,5,7} {
+            \draw[fill=bookred!30, draw=bookred, thick, dashed] (\i*0.6, 0) rectangle (\i*0.6+0.5, 1);
+            \node at (\i*0.6+0.25, 0.5) {\small \i};
+        }
+        \foreach \i in {2,4,6,8} {
+            \draw[fill=bookpurple!50, draw=bookpurple, thick] (\i*0.6, 0) rectangle (\i*0.6+0.5, 1);
+            \node at (\i*0.6+0.25, 0.5) {\small \i};
+            \draw[fill=bookpurple] (\i*0.6+0.25, 1.3) circle (2pt);
+        }
+        \node[above] at (0.3, 1.3) {\small New};
+        \draw[fill=bookred] (0.3, 1.3) circle (2pt);
+    \end{scope}
+\end{tikzpicture}
+\caption{Hilbert's Grand Hotel: Rearranging guests to free up infinitely many rooms}
+\end{figure}
+
+\begin{example}[Russell's Paradox]
+Consider the set $R$ of all sets that do not contain themselves as an element. Does $R$ contain itself?
+
+If $R$ contains itself, then by definition it should not contain itself (since $R$ only contains sets that don't contain themselves). But if $R$ does not contain itself, then it should contain itself (since it's a set that doesn't contain itself). This creates an inescapable contradiction.
+
+This paradox, discovered by Bertrand Russell in 1901, revealed a fundamental flaw in naive set theory and led to the development of axiomatic set theory (such as Zermelo-Fraenkel set theory with the Axiom of Choice, or ZFC). The resolution required restricting what can be considered a "set" and introducing careful axioms to prevent such self-referential contradictions.
+
+While Russell's paradox doesn't directly involve rational numbers, it highlights the importance of rigorous foundations in set theory. Our understanding of number systems, including the rational numbers $\mathbb{Q}$, rests on these carefully constructed foundations. The fact that we can rigorously define and work with infinite sets like $\mathbb{Q}$ is a testament to the success of modern set theory in resolving such paradoxes.
+\end{example}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1]
+    % Set R box
+    \node[draw, rectangle, fill=bookpurple!30, minimum width=4cm, minimum height=1.5cm, align=center] (R) at (0, 0) {
+        \textbf{Set $R$}\\
+        All sets that do not\\
+        contain themselves
+    };
+    
+    % Self-referential arrow
+    \draw[->, thick, bookred, out=45, in=135, looseness=1.5] (R.north east) to node[above, align=center] {\textbf{?}\\Does $R$ contain\\itself?} (R.north west);
+    
+    % Contradiction branches
+    \node[draw, rectangle, fill=bookred!30, minimum width=2.5cm, minimum height=1cm, align=center] (yes) at (-3, -2.5) {
+        If YES:\\
+        Contradiction!
+    };
+    \node[draw, rectangle, fill=bookred!30, minimum width=2.5cm, minimum height=1cm, align=center] (no) at (3, -2.5) {
+        If NO:\\
+        Contradiction!
+    };
+    
+    \draw[->, thick, bookred] (R.south west) -- (yes.north);
+    \draw[->, thick, bookred] (R.south east) -- (no.north);
+    
+    \node[below] at (0, -3.8) {Russell's Paradox: An inescapable logical contradiction};
+\end{tikzpicture}
+\caption{Russell's Paradox: The self-referential set that leads to contradiction}
+\end{figure}
+
+\begin{example}[Tristram Shandy's Paradox]
+In Laurence Sterne's novel \textit{The Life and Opinions of Tristram Shandy, Gentleman}, the protagonist takes two years to write the history of the first two days of his life. He laments that he will never finish his autobiography because he cannot keep up with the accumulating events—as he writes about day $n$, days $n+1, n+2, \ldots$ continue to pass.
+
+At first glance, this seems like an impossible task. However, if we assume Tristram lives forever and continues writing at the same pace (one day's history per year), he will eventually complete his autobiography! After year 1, he has written about day 1. After year 2, he has written about days 1 and 2. After year $n$, he has written about days 1 through $n$. Since there are infinitely many natural numbers, he can eventually cover all days of his infinite life.
+
+This paradox relates to the nature of countably infinite processes. Just as we can enumerate the rational numbers (assigning each rational a natural number index), Tristram can enumerate the days of his life. The key insight is that with infinite time, a countably infinite task can be completed, even if the task grows over time. This mirrors how we can "complete" the enumeration of all rational numbers, despite there being infinitely many of them.
+\end{example}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.85]
+    % Timeline axis
+    \draw[thick, ->] (0, 0) -- (10, 0);
+    \node[below] at (0, 0) {Year 1};
+    \node[below] at (2.5, 0) {Year 2};
+    \node[below] at (5, 0) {Year 3};
+    \node[below] at (7.5, 0) {Year $n$};
+    \node[below] at (10, 0) {$\ldots$};
+    
+    % Progress bars showing days written
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (0, 0.5) rectangle (1, 1.5);
+    \node[above] at (0.5, 1.5) {Day 1};
+    \node[above] at (0.5, 1.8) {written};
+    
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (2.5, 0.5) rectangle (3.5, 1.5);
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (2.5, 1.5) rectangle (3.5, 2.5);
+    \node[above] at (3, 2.5) {Days 1-2};
+    \node[above] at (3, 2.8) {written};
+    
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (5, 0.5) rectangle (6, 1.5);
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (5, 1.5) rectangle (6, 2.5);
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (5, 2.5) rectangle (6, 3.5);
+    \node[above] at (5.5, 3.5) {Days 1-3};
+    \node[above] at (5.5, 3.8) {written};
+    
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (7.5, 0.5) rectangle (8.5, 1.5);
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (7.5, 1.5) rectangle (8.5, 2.5);
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (7.5, 2.5) rectangle (8.5, 3.5);
+    \draw[fill=bookpurple!50, draw=bookpurple, thick] (7.5, 3.5) rectangle (8.5, 4.5);
+    \node[above] at (8, 4.5) {Days 1-$n$};
+    \node[above] at (8, 4.8) {written};
+    
+    % Arrow showing progression
+    \draw[->, thick, bookred] (1.2, 1) -- (2.3, 1);
+    \draw[->, thick, bookred] (3.7, 1.5) -- (4.8, 1.5);
+    \draw[->, thick, bookred] (6.2, 2) -- (7.3, 2);
+    
+    \node[below] at (5, -0.5) {With infinite time, all days will eventually be written};
+\end{tikzpicture}
+\caption{Tristram Shandy's Paradox: The infinite autobiography can be completed}
+\end{figure}
+
+\begin{remark}
+These paradoxes demonstrate that infinite sets behave in ways that defy our finite intuition. The counterintuitive nature of infinity helps explain why the properties of rational numbers—being both dense (everywhere) and having measure zero (nowhere)—can seem paradoxical at first. Understanding these paradoxes of infinity provides valuable intuition for appreciating the deeper mathematical structures we explore in this document.
+\end{remark}
 
 \subsection{Implications of Countability}
 
