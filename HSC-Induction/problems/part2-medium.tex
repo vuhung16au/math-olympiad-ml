@@ -95,28 +95,4 @@ Add the $(k+1)$-th term $(k+1)\left(\frac{1}{2}\right)^k$ to the hypothesis and 
 Base case: $n=1$ gives $1 = 4 - 3$. Assume the formula holds for $n=k$. Then the sum up to $k+1$ is $4 - \frac{k+2}{2^{k-1}} + (k+1)\left(\frac{1}{2}\right)^k = 4 - \frac{2(k+2)}{2^k} + \frac{k+1}{2^k} = 4 - \frac{2k+4-k-1}{2^k} = 4 - \frac{k+3}{2^k}$.
 \end{solution}
 
-\begin{problem}[Factorial Inequality $\sqrt{n!} > 2^n$]
-Prove by mathematical induction that $\sqrt{n!} > 2^n$ for all integers $n \ge 9$.
-\end{problem}
-
-\begin{hint}
-Show that $(k+1) \cdot k! > 4 \cdot 4^k$ when $k \ge 9$, which simplifies to $k+1 > 4 \cdot \frac{4^k}{k!}$. Use the hypothesis $\sqrt{k!} > 2^k$ to get $k! > 4^k$.
-\end{hint}
-
-\begin{solution}[Sketch]
-Base case: $n=9$ gives $\sqrt{9!} = \sqrt{362880} \approx 602.4 > 512 = 2^9$. Assume $\sqrt{k!} > 2^k$ for some $k \ge 9$, so $k! > 4^k$. Then $(k+1)! = (k+1) \cdot k! > (k+1) \cdot 4^k$. We need $(k+1) \cdot 4^k > 4^{k+1}$, or $k+1 > 4$, which holds for all $k \ge 9$. Thus $\sqrt{(k+1)!} > 2^{k+1}$.
-\end{solution}
-
-\begin{problem}[Sum of Reciprocals of Squares]
-Use mathematical induction to prove that for all integers $n \ge 2$:
-\[\frac{1}{1^2} + \frac{1}{2^2} + \frac{1}{3^2} + \cdots + \frac{1}{n^2} < 2 - \frac{1}{n}\]
-\end{problem}
-
-\begin{hint}
-Show that $\frac{1}{(k+1)^2} < \frac{1}{k} - \frac{1}{k+1}$ by cross-multiplying and verifying $k < (k+1)^2 - k(k+1) = k+1$.
-\end{hint}
-
-\begin{solution}[Sketch]
-Base case: $n=2$ gives $1 + \frac{1}{4} = \frac{5}{4} < \frac{3}{2} = 2 - \frac{1}{2}$. Assume $\sum_{r=1}^{k} \frac{1}{r^2} < 2 - \frac{1}{k}$ for some $k \ge 2$. Then $\sum_{r=1}^{k+1} \frac{1}{r^2} < 2 - \frac{1}{k} + \frac{1}{(k+1)^2}$. We need $\frac{1}{(k+1)^2} < \frac{1}{k} - \frac{1}{k+1} = \frac{1}{k(k+1)}$, or $k < k+1$, which is always true. Thus $\sum_{r=1}^{k+1} \frac{1}{r^2} < 2 - \frac{1}{k+1}$.
-\end{solution}
 

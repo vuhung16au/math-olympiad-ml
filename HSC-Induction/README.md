@@ -7,9 +7,9 @@ This project curates mathematical induction problems tailored to HSC Mathematics
 The booklet `HSC-Induction.tex` is organised in two parts:
 
 - **Part 1**: Detailed walk-throughs (15 problems) with every base case, hypothesis, and inductive step spelled out. Divided into basic (5), medium (5), and advanced (5) difficulty levels.
-- **Part 2**: Concise write-ups with hints and solution sketches (31 problems). Each problem includes an upside-down hint rendered via `styles/dl101-hints` before a short solution sketch. Divided into basic (7), medium (10), and advanced (14) difficulty levels.
+- **Part 2**: Concise write-ups with hints and solution sketches (25 problems). Each problem includes an upside-down hint rendered via `styles/dl101-hints` before a short solution sketch. Divided into basic (7), medium (8), and advanced (10) difficulty levels.
 
-The collection contains **46 total problems** covering a comprehensive range of induction techniques and applications.
+The collection contains **40 total problems** covering a comprehensive range of induction techniques and applications.
 
 ## What This Collection Focuses On
 
@@ -69,11 +69,19 @@ Available targets:
 - `make pdf` (default): build `HSC-Induction.pdf`
 - `make clean`: remove `.aux`, `.log`, `.toc`, and related artefacts
 - `make release`: build the PDF and copy it to `releases/`
+- `make open`: open the compiled PDF in your default viewer
 
 Example:
 
 ```bash
 make pdf
+make open
+```
+
+Or build and open in one line:
+
+```bash
+make pdf && make open
 ```
 
 ## How to Use the Booklet
@@ -104,7 +112,7 @@ make pdf
 - `samples/`: Reference problems and source material from HSC past papers and resources.
 - `problems/`: Part-wise problem+solution snippets organized by difficulty that are `\input` into the main TeX file:
   - `part1-basic.tex`, `part1-medium.tex`, `part1-advanced.tex` (5 problems each)
-  - `part2-basic.tex`, `part2-medium.tex`, `part2-advanced.tex` (7, 10, and 14 problems respectively)
+  - `part2-basic.tex`, `part2-medium.tex`, `part2-advanced.tex` (7, 8, and 10 problems respectively)
 - `solutions/`: Reserved for future standalone solution files.
 - `styles/`: Shared LaTeX style files (colors, hint box, problem environments):
   - `dl101-colors.sty`: Color definitions for consistent formatting

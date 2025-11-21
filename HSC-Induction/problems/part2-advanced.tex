@@ -58,62 +58,6 @@ For $p>2$, pair each $a \in \{2,3,\ldots,p-2\}$ with its inverse $a^{-1} \pmod{p
 Base case: $p=2$ gives $(2-1)! = 1 \equiv -1 \pmod{2}$. For prime $p>2$, in the product $(p-1)! = 1 \cdot 2 \cdots (p-1)$, each $a \in \{2,\ldots,p-2\}$ pairs with its inverse $a^{-1}$ (where $a \neq a^{-1}$), contributing $aa^{-1} \equiv 1$. Only $1$ and $p-1$ are self-inverse, so $(p-1)! \equiv 1 \cdot (p-1) \equiv -1 \pmod{p}$.
 \end{solution}
 
-\begin{problem}[Tiling a Defective Board]
-Prove a $2^n \times 2^n$ board with one missing square can be tiled with L-shaped trominoes.
-\end{problem}
-
-\begin{hint}
-Partition the big board into four quadrants and use one tromino to create "defects" in the three untouched quadrants.
-\end{hint}
-
-\begin{solution}[Sketch]
-For $n=1$ the statement is clear. Assume it is true for $n=k$. Split the $2^{k+1}\times 2^{k+1}$ board into four $2^k$ boards. Place one tromino at the center to cover one square in each of the other three quadrants, leaving each quadrant with exactly one missing square. Tile each quadrant via the hypothesis.
-\end{solution}
-
-\begin{problem}[Closed Form for $I_n$]
-Given $I_n = \frac{2n}{2n+1} I_{n-1}$ and $I_0 = 1$, prove $I_n = \frac{2^{2n}(n!)^2}{(2n+1)!}$.
-\end{problem}
-
-\begin{hint}
-Check the base case and show that multiplying the hypothesised formula by $\frac{2n}{2n+1}$ produces the $(n+1)$ version.
-\end{hint}
-
-\begin{solution}[Sketch]
-The formula matches $I_0$. Assuming $I_k = \frac{2^{2k}(k!)^2}{(2k+1)!}$,
-\[
-I_{k+1} = \frac{2(k+1)}{2k+3} I_k = \frac{2^{2k+2}((k+1)!)^2}{(2k+3)!},
-\]
-which is exactly the claimed expression.
-\end{solution}
-
-\begin{problem}[Integer Coefficients in $\int_0^1 x^n e^x dx$]
-Show that $I_n = \int_{0}^{1} x^n e^x dx$ can be written as $a_n + b_n e$ with integers $a_n,b_n$.
-\end{problem}
-
-\begin{hint}
-Integration by parts gives $I_n = e - n I_{n-1}$.
-\end{hint}
-
-\begin{solution}[Sketch]
-We have $I_0 = e - 1$. If $I_{n-1} = a_{n-1} + b_{n-1} e$, then
-$I_n = e - n(a_{n-1} + b_{n-1} e) = (-n a_{n-1}) + (1 - n b_{n-1}) e$, so the coefficients stay integral.
-\end{solution}
-
-\begin{problem}[Formula for $J_n = \int_0^1 x^n e^{-x} dx$]
-Show $J_n = n! - \frac{n!}{e} \sum_{r=0}^{n} \frac{1}{r!}$ for all $n \ge 0$.
-\end{problem}
-
-\begin{hint}
-Use the recurrence $J_n = n J_{n-1} - \frac{1}{e}$ from integration by parts.
-\end{hint}
-
-\begin{solution}[Sketch]
-Check $n=0$. Assuming the formula for $n=k$, substitute into $J_{k+1} = (k+1)J_k - \frac{1}{e}$ to obtain
-\[
-J_{k+1} = (k+1)! - \frac{(k+1)!}{e}\sum_{r=0}^{k} \frac{1}{r!} - \frac{1}{e} = (k+1)! - \frac{(k+1)!}{e}\sum_{r=0}^{k+1} \frac{1}{r!}.
-\]
-\end{solution}
-
 \begin{problem}[Recursive Sequence with Surds]
 A sequence $a_n$ is defined by $a_n = 2a_{n-1} + a_{n-2}$ for $n \ge 2$ with $a_0 = a_1 = 2$. Use mathematical induction to prove that:
 \[a_n = (1+\sqrt{2})^n + (1-\sqrt{2})^n \quad \text{for all } n \ge 0\]
