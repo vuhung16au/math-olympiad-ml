@@ -23,6 +23,26 @@ Examples of rational numbers:
 \end{itemize}
 \end{example}
 
+\subsection{Document Roadmap}
+
+This document is organized into three main parts, designed to guide readers from fundamental mathematical concepts to advanced cryptographic applications:
+
+\begin{itemize}
+    \item \textbf{Part I: Mathematical Foundations} (Sections 1--5) introduces rational numbers, explores their density and countability properties, establishes measure theory concepts, and reconciles the "everywhere but nowhere" paradox. This part is accessible to readers with high school mathematics background.
+    
+    \item \textbf{Part II: Cryptographic Applications} (Sections 6--10) connects the mathematical properties of rational numbers to modern cryptography, covering probability implications, random number generation, lattice-based cryptography, and Wiener's attack on RSA. This part requires more advanced mathematical and cryptographic knowledge.
+    
+    \item \textbf{Part III: Practice and Synthesis} (Sections 11--12) provides problems at various difficulty levels (from high school to research level) and concludes with key takeaways and future directions.
+\end{itemize}
+
+\textbf{Target Audience Levels:}
+\begin{itemize}
+    \item \textbf{Level 1 (High School Accessible)}: Sections 1--3
+    \item \textbf{Level 2 (More Depth)}: Sections 4--6
+    \item \textbf{Level 3 (Crypto + Maths High Level)}: Sections 7--10
+    \item \textbf{Level 4 (Research Level)}: Section 11 problems
+\end{itemize}
+
 \subsection{Historical Review: From Ancient Greek Mathematics to Modern Post-Quantum Computing}
 
 The study of rational numbers has a rich history spanning millennia, from ancient mathematical discoveries to cutting-edge cryptographic applications.
@@ -113,4 +133,29 @@ Similar arguments hold for subtraction and division.
 \begin{remark}
 The closure properties ensure that rational numbers form a \textit{field}, making them suitable for algebraic operations without leaving the set. This property is fundamental to their use in cryptography, where operations must remain within well-defined mathematical structures.
 \end{remark}
+
+\subsection{Notation}
+
+Throughout this document, we use the following mathematical notation:
+
+\begin{description}
+    \item[$\mathbb{N}$] The set of natural numbers: $\{1, 2, 3, \ldots\}$
+    \item[$\mathbb{Z}$] The set of integers: $\{\ldots, -2, -1, 0, 1, 2, \ldots\}$
+    \item[$\mathbb{Q}$] The set of rational numbers: $\{\frac{p}{q} : p, q \in \mathbb{Z}, q \neq 0\}$
+    \item[$\mathbb{R}$] The set of real numbers
+    \item[$\mathbb{C}$] The set of complex numbers
+    \item[$\mu$] Lebesgue measure
+    \item[$\mu(A)$] The Lebesgue measure of set $A$
+    \item[$P(\cdot)$] Probability function
+    \item[$\gcd(a, b)$] Greatest common divisor of $a$ and $b$
+    \item[$\phi(n)$] Euler's totient function
+    \item[$|A|$] Cardinality (size) of set $A$
+    \item[$\in$] Element of (membership)
+    \item[$\subseteq$] Subset of
+    \item[$\cup$] Union of sets
+    \item[$\cap$] Intersection of sets
+    \item[$\setminus$] Set difference
+    \item[$\approx$] Approximately equal to
+    \item[$\equiv$] Congruent to (modular arithmetic)
+\end{description}
 

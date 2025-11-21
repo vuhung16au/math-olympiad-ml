@@ -1,0 +1,48 @@
+\section{Glossary}
+
+This glossary provides definitions of key terms used throughout this document, organized alphabetically for easy reference.
+
+\subsection{Mathematical Terms}
+
+\begin{description}
+    \item[\textbf{Almost Surely}] An event is said to occur almost surely if it occurs with probability 1. Equivalently, the set of outcomes where it does not occur has measure zero.
+    
+    \item[\textbf{Countable Set}] A set is countable if it can be put into a one-to-one correspondence with the natural numbers. The rational numbers are countable, while the real numbers are uncountable.
+    
+    \item[\textbf{Density}] A set $A$ is dense in a set $B$ if every point in $B$ is either in $A$ or is a limit point of $A$. Rational numbers are dense in the real numbers.
+    
+    \item[\textbf{Diophantine Approximation}] The study of how well real numbers (especially irrational numbers) can be approximated by rational numbers. This is fundamental to lattice-based cryptography.
+    
+    \item[\textbf{Lebesgue Measure}] A way of assigning a "size" or "length" to subsets of the real line. The Lebesgue measure of a countable set is zero.
+    
+    \item[\textbf{Measure Zero}] A set has measure zero if it can be covered by a countable collection of intervals whose total length is arbitrarily small. Countable sets, including the rational numbers, have measure zero.
+    
+    \item[\textbf{Topology}] The branch of mathematics concerned with properties of space that are preserved under continuous deformations. Density is a topological property.
+    
+    \item[\textbf{Uncountable Set}] A set that cannot be put into a one-to-one correspondence with the natural numbers. The real numbers are uncountable.
+\end{description}
+
+\subsection{Cryptographic Terms}
+
+\begin{description}
+    \item[\textbf{Continued Fractions}] An expression of the form $a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \cdots}}$, where $a_0$ is an integer and $a_1, a_2, \ldots$ are positive integers. Continued fractions provide the best rational approximations to irrational numbers.
+    
+    \item[\textbf{Convergent}] In the context of continued fractions, a convergent is a rational approximation obtained by truncating the continued fraction expansion. Convergents are the best approximations.
+    
+    \item[\textbf{Diophantine Approximation}] (See Mathematical Terms) Used in cryptography to find rational approximations that reveal private keys.
+    
+    \item[\textbf{Keyspace}] The set of all possible keys that can be used in a cryptographic system. For a key of length $n$ bits, the keyspace has size $2^n$.
+    
+    \item[\textbf{Lattice}] A discrete subgroup of $\mathbb{R}^n$ consisting of all integer linear combinations of linearly independent basis vectors. Lattice problems form the basis of post-quantum cryptography.
+    
+    \item[\textbf{Lattice-Based Cryptography}] Cryptographic systems whose security relies on the computational hardness of lattice problems, such as finding short vectors in lattices.
+    
+    \item[\textbf{Negligible Probability}] In cryptography, a probability that is smaller than any polynomial function of the security parameter. This concept is directly related to measure zero.
+    
+    \item[\textbf{Post-Quantum Cryptography}] Cryptographic systems designed to be secure against attacks by quantum computers. Lattice-based cryptography is a leading candidate.
+    
+    \item[\textbf{Weak Key}] A cryptographic key that, due to its mathematical properties, makes the cryptographic system vulnerable to attack or easier to break than intended. Weak keys typically form a countable (hence measure zero) set.
+    
+    \item[\textbf{Wiener's Attack}] A cryptanalytic attack on RSA that exploits small private exponents by finding rational approximations to fractions derived from the public key using continued fractions.
+\end{description}
+

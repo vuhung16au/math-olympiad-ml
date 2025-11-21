@@ -64,6 +64,9 @@
 \tableofcontents
 \newpage
 
+% Part I: Mathematical Foundations
+\part*{Part I: Mathematical Foundations}
+
 % Main content sections
 \input{sections/01-introduction}
 \input{sections/02-density}
@@ -71,43 +74,26 @@
 \input{sections/04-measure-zero}
 \input{sections/05-paradox}
 \input{sections/06-probability}
+
+% Part II: Cryptographic Applications
+\part*{Part II: Cryptographic Applications}
+
 \input{sections/07-crypto-overview}
 \input{sections/08-rng}
 \input{sections/09-lattice-crypto}
 \input{sections/10-wiener-attack}
+
+% Part III: Practice and Synthesis
+\part*{Part III: Practice and Synthesis}
+
 \input{sections/11-problems}
 \input{sections/12-conclusion}
+\input{sections/13-glossary}
 
 % References
-\begin{thebibliography}{99}
-\bibitem{chalktalk}
-Chalk Talk, ``The Rational Numbers Are Not So 'Rational' | Everywhere but Nowhere,'' 
-YouTube video, \url{https://www.youtube.com/watch?v=G8dLWja-bY0}
-
-\bibitem{wiener1990}
-M. J. Wiener, ``Cryptanalysis of short RSA secret exponents,'' 
-\textit{IEEE Transactions on Information Theory}, vol. 36, no. 3, pp. 553--558, 1990.
-
-\bibitem{hardy2008}
-G. H. Hardy and E. M. Wright, \textit{An Introduction to the Theory of Numbers}, 
-6th ed. Oxford University Press, 2008.
-
-\bibitem{rosen2010}
-K. H. Rosen, \textit{Elementary Number Theory and Its Applications}, 
-6th ed. Pearson, 2010.
-
-\bibitem{regev2009}
-O. Regev, ``On lattices, learning with errors, random linear codes, and cryptography,'' 
-\textit{Journal of the ACM}, vol. 56, no. 6, pp. 1--40, 2009.
-
-\bibitem{peikert2016}
-C. Peikert, ``A decade of lattice cryptography,'' 
-\textit{Foundations and Trends in Theoretical Computer Science}, vol. 10, no. 4, pp. 283--424, 2016.
-
-\bibitem{nistpqc}
-National Institute of Standards and Technology (NIST), ``Post-Quantum Cryptography,'' 
-\url{https://csrc.nist.gov/projects/post-quantum-cryptography}
-\end{thebibliography}
+\bibliographystyle{plain}
+\nocite{*}
+\bibliography{references}
 
 \end{document}
 

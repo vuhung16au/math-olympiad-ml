@@ -2,13 +2,26 @@ TEXFILE = RationalEverywhereNowhere
 PDFFILE = $(TEXFILE).pdf
 RELEASE_DIR = release
 
-.PHONY: all pdf clean release open
+.PHONY: all pdf clean release open bib
 
 all: pdf
 
 pdf: $(PDFFILE)
 
-$(PDFFILE): $(TEXFILE).tex $(wildcard sections/*.tex) $(wildcard styles/*.sty)
+bib: $(TEXFILE).tex references.bib
+	@echo "Generating bibliography..."
+	pdflatex -interaction=nonstopmode $(TEXFILE).tex > /dev/null 2>&1 || true
+	bibtex $(TEXFILE) || true
+	@if [ -f $(TEXFILE).bbl ]; then \
+		echo "Bibliography generated successfully: $(TEXFILE).bbl"; \
+		wc -l $(TEXFILE).bbl | awk '{print "  " $$1 " lines"}'; \
+	else \
+		echo "Warning: Bibliography file was not created!"; \
+	fi
+
+$(PDFFILE): $(TEXFILE).tex $(wildcard sections/*.tex) $(wildcard styles/*.sty) references.bib
+	pdflatex -interaction=nonstopmode $(TEXFILE).tex || true
+	bibtex $(TEXFILE) || true
 	pdflatex -interaction=nonstopmode $(TEXFILE).tex || true
 	pdflatex -interaction=nonstopmode $(TEXFILE).tex || true
 	@if [ ! -f $(PDFFILE) ]; then \
@@ -19,6 +32,7 @@ $(PDFFILE): $(TEXFILE).tex $(wildcard sections/*.tex) $(wildcard styles/*.sty)
 clean:
 	rm -f $(TEXFILE).aux $(TEXFILE).log $(TEXFILE).out $(TEXFILE).toc $(TEXFILE).pdf
 	rm -f $(TEXFILE).exa $(TEXFILE).rem $(TEXFILE).tak
+	rm -f $(TEXFILE).bbl $(TEXFILE).blg
 
 release: $(PDFFILE)
 	mkdir -p $(RELEASE_DIR)
