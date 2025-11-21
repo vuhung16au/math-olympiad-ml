@@ -1,0 +1,33 @@
+Prompt.md
+privs/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdy
+*.tdo
+*.auxlock
+
+# PDF files (optional - uncomment if you don't want to track PDFs)
+HSC-Induction.pdf
+
+# Release directory (optional - uncomment if you don't want to track releases)
+!releases/HSC-Induction.pdf
+samples/

@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+% Custom styles shared with HSC-Collections
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: Induction Mastery}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet compiles high quality mathematical induction problems curated specifically for the HSC Mathematics Extension~2 syllabus. Every task can be attacked with induction (sometimes combined with algebraic manipulation, inequalities, recurrence relations, or integrals). Detailed reasoning showcases common techniques such as weak and strong induction, structural induction on algebraic forms, and inductive proofs for inequalities.
+
+\subsection{Target Audience}
+The explanations are crafted for Extension~2 students aiming to deepen their proof-writing skills. Each solution explicitly states the induction hypothesis, justification of the base case, and reasoning for the inductive step so that high-school learners can follow every transition.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the overview and induction primer before attempting the problems.
+  \item Attempt problems in Part~1 without hints; compare against the detailed solutions to understand model reasoning.
+  \item Use the upside-down hints in Part~2 only after making a genuine attempt.
+  \item Revisit problems after a few days and try to re-derive the arguments without notes to reinforce technique.
+\end{itemize}
+
+\subsection{Induction Primer}
+Mathematical induction is a two-step method:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Base Case:} Verify the statement for the initial value (often $n=1$ or $n=0$), ensuring the proposition is anchored.
+  \item \textbf{Inductive Step:} Assume the statement is true for $n=k$ (or all values up to $k$ for strong induction) and show it holds for $n=k+1$. Clearly state the hypothesis and highlight algebraic transformations used to bridge from $k$ to $k+1$.
+\end{enumerate}
+We will reference these two steps in every solution so students can trace the logic effortlessly.
+
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains three sets of problems---basic, medium, and advanced. Each set provides five problems. For every problem we present a comprehensive induction-based solution without any hints so that learners focus on the full reasoning trail.
+
+\subsection{Basic Induction Problems}
+\input{problems/part1-basic}
+
+\subsection{Medium Induction Problems}
+\input{problems/part1-medium}
+
+\subsection{Advanced Induction Problems}
+\input{problems/part1-advanced}
+
+\section{Part 2: Problems and Solutions (Concise + Hints)}
+Part~2 revisits three new sets of problems. Solutions are intentionally briefer to encourage student ownership, and every problem includes an upside-down hint.
+
+\subsection{Basic Induction Problems}
+\input{problems/part2-basic}
+
+\subsection{Medium Induction Problems}
+\input{problems/part2-medium}
+
+\subsection{Advanced Induction Problems}
+\input{problems/part2-advanced}
+
+\section{Conclusion}
+Induction is a core reasoning tool in the HSC Mathematics Extension~2 course. Mastery comes from repeated, reflective practice. Use these problems to sharpen the ability to hypothesize, algebraically manipulate, and communicate complete proofs. Best of luck with your studies and future competitions!
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Induction}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Induction}
+
+\end{document}

@@ -1,0 +1,127 @@
+\begin{problem}[Bounding a Basel-type Sum]
+Given that for every $k \ge 1$,
+\[
+\frac{1}{(k+1)^2} - \frac{1}{k} + \frac{1}{k+1} < 0,
+\]
+prove by induction that for all integers $n \ge 2$,
+\[
+\frac{1}{1^2} + \frac{1}{2^2} + \dots + \frac{1}{n^2} < 2 - \frac{1}{n}.
+\]
+\end{problem}
+
+\begin{solution}
+Define $S_n = \sum_{k=1}^{n} \frac{1}{k^2}$. The given inequality can be rearranged into
+\[
+\frac{1}{k^2} - \left(\frac{1}{k} - \frac{1}{k+1}\right) < \frac{1}{k^2} - \left(\frac{1}{k} - \frac{1}{k+1}\right) + \frac{1}{(k+1)^2} = \frac{1}{(k+1)^2},
+\]
+which justifies the inductive step below.
+
+\textbf{Base case ($n=2$).} $S_2 = 1 + \tfrac{1}{4} = \tfrac54 < \tfrac32 = 2 - \tfrac12$, so the statement holds.
+
+\textbf{Inductive step.} Assume $S_n < 2 - \frac{1}{n}$ for some $n \ge 2$. Applying the given inequality with $k=n$ gives $\frac{1}{(n+1)^2} < \frac{1}{n} - \frac{1}{n+1}$. Hence
+\[
+S_{n+1} = S_n + \frac{1}{(n+1)^2}
+< \left(2 - \frac{1}{n}\right) + \left(\frac{1}{n} - \frac{1}{n+1}\right)
+= 2 - \frac{1}{n+1}.
+\]
+Thus the inequality holds for $n+1$, completing the induction.
+\end{solution}
+
+\begin{takeaways}
+Induction inequalities often require massaging the inductive hypothesis into an expression that absorbs the new term; algebraic manipulation of rational expressions keeps reasoning transparent for Extension~2 students.
+\end{takeaways}
+
+\begin{problem}[Comparing $\sqrt{n!}$ and $2^n$]
+Show that $\sqrt{n!} > 2^n$ for all integers $n \ge 9$.
+\end{problem}
+
+\begin{solution}
+It is easier to square both sides and prove $n! > 4^n$.
+
+\textbf{Base case ($n=9$).} $9! = 362880$ and $4^9 = 262144$, so the inequality holds.
+
+\textbf{Inductive step.} Assume $k! > 4^k$ for some $k \ge 9$. Then
+\[
+(k+1)! = (k+1)\cdot k! > (k+1)\cdot 4^k.
+\]
+Because $k+1 \ge 10$, we have $(k+1)\cdot 4^k \ge 10\cdot 4^k = 4\cdot (2.5)\cdot 4^k > 4 \cdot 4^k = 4^{k+1}$. Thus $(k+1)! > 4^{k+1}$, completing the induction. Taking square roots recovers the stated inequality $\sqrt{n!} > 2^n$.
+\end{solution}
+
+\begin{takeaways}
+When factorials are compared with exponentials, work with squared (or unsquared) versions that eliminate radicals and keep all quantities positive.
+\end{takeaways}
+
+\begin{problem}[Solving a Linear Recurrence]
+Suppose $T_1 = 3$ and $T_n = 2T_{n-1} + 2 - n$ for $n \ge 2$. Prove that $T_n = 2^n + n$ for all $n \ge 1$.
+\end{problem}
+
+\begin{solution}
+\textbf{Base case ($n=1$).} $T_1 = 3 = 2^1 + 1$, so the formula works.
+
+\textbf{Inductive step.} Assume $T_k = 2^k + k$ for some $k \ge 1$. Then
+\begin{align*}
+T_{k+1} &= 2T_k + 2 - (k+1) \\
+&= 2(2^k + k) + 1 - k \\
+&= 2^{k+1} + k + 1 \\
+&= 2^{k+1} + (k+1),
+\end{align*}
+which agrees with the claimed closed form. Thus the identity holds for all positive integers $n$.
+\end{solution}
+
+\begin{takeaways}
+Linear recurrences with constant coefficients are tailor-made for induction proofs once you conjecture the closed form by spotting patterns in the first few terms.
+\end{takeaways}
+
+\begin{problem}[Derivative of $x^n$]
+Using the product rule and induction, prove that for every integer $n \ge 1$,
+\[
+\frac{d}{dx}(x^n) = n x^{n-1}.
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{Base case ($n=1$).} $\frac{d}{dx}(x) = 1$, which equals $1\cdot x^{0}$.
+
+\textbf{Inductive step.} Assume $\frac{d}{dx}(x^k) = k x^{k-1}$. Then for $n=k+1$,
+\[
+x^{k+1} = x \cdot x^{k}.
+\]
+By the product rule,
+\begin{align*}
+\frac{d}{dx}(x^{k+1})
+&= \frac{d}{dx}(x)\cdot x^{k} + x \cdot \frac{d}{dx}(x^{k})
+= 1\cdot x^{k} + x \cdot k x^{k-1} \\
+&= x^{k} + k x^{k}
+= (k+1) x^{k},
+\end{align*}
+which equals $(k+1) x^{(k+1)-1}$. This completes the induction.
+\end{solution}
+
+\begin{takeaways}
+Induction can justify formulas students memorize in calculus by combining algebraic identities with differentiation rules they already know.
+\end{takeaways}
+
+\begin{problem}[Factorising $x^{3^n}-1$]
+Use mathematical induction to prove that, for $n \ge 1$,
+\[
+x^{3^{n}} - 1 = (x - 1)(x^2 + x + 1)(x^6 + x^3 + 1)\cdots\left(x^{2\cdot 3^{n-1}} + x^{3^{n-1}} + 1\right).
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{Base case ($n=1$).} The right side becomes $(x-1)(x^2 + x + 1)$, which equals $x^3 - 1$ by the difference of cubes identity.
+
+\textbf{Inductive step.} Assume the factorisation holds for $n=k$:
+\[
+x^{3^{k}} - 1 = (x-1)(x^2 + x + 1)\cdots\left(x^{2\cdot 3^{k-1}} + x^{3^{k-1}} + 1\right).
+\]
+For $n=k+1$,
+\[
+x^{3^{k+1}} - 1 = (x^{3^{k}})^3 - 1 = \bigl(x^{3^{k}} - 1\bigr)\left(x^{2\cdot 3^{k}} + x^{3^{k}} + 1\right).
+\]
+Replace the first factor by the induction hypothesis to obtain the same product as before with one additional term $x^{2\cdot 3^{k}} + x^{3^{k}} + 1$, giving the desired factorisation.
+\end{solution}
+
+\begin{takeaways}
+Recognising “difference of cubes” inside the inductive step is a powerful pattern for algebraic factorizations involving rapidly growing exponents.
+\end{takeaways}

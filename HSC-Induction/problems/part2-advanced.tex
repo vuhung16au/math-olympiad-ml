@@ -1,0 +1,180 @@
+\begin{problem}[Binomial Theorem]
+Prove that $(a+b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k$ for all integers $n \ge 0$ and real numbers $a,b$.
+\end{problem}
+
+\begin{hint}
+Use Pascal's identity $\binom{n+1}{k} = \binom{n}{k-1} + \binom{n}{k}$ to expand $(a+b)^{n+1} = (a+b)(a+b)^n$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $(a+b)^0 = 1 = \binom{0}{0}a^0b^0$. Assume the formula holds for $n$. Then $(a+b)^{n+1} = (a+b)\sum_{k=0}^{n}\binom{n}{k}a^{n-k}b^k = \sum_{k=0}^{n}\binom{n}{k}a^{n+1-k}b^k + \sum_{k=0}^{n}\binom{n}{k}a^{n-k}b^{k+1}$. Reindex and apply Pascal's identity to combine terms.
+\end{solution}
+
+\begin{problem}[Fermat's Little Theorem]
+For any prime $p$ and integer $a$, prove that $a^p \equiv a \pmod{p}$.
+\end{problem}
+
+\begin{hint}
+Use induction on $a$. Show $(k+1)^p - (k+1) \equiv k^p - k \pmod{p}$ by expanding with the binomial theorem and noting that $\binom{p}{j}$ is divisible by $p$ for $1 \le j \le p-1$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $0^p \equiv 0 \pmod{p}$. Assume $k^p \equiv k \pmod{p}$. Then $(k+1)^p = k^p + \binom{p}{1}k^{p-1} + \cdots + \binom{p}{p-1}k + 1$. Since $p \mid \binom{p}{j}$ for $1 \le j \le p-1$, we have $(k+1)^p \equiv k^p + 1 \equiv k + 1 \pmod{p}$ by the hypothesis.
+\end{solution}
+
+\begin{problem}[Tower of Hanoi]
+Prove that the minimum number of moves required to transfer $n$ disks in the Tower of Hanoi puzzle is $2^n - 1$.
+\end{problem}
+
+\begin{hint}
+To move $k+1$ disks, first move the top $k$ disks to the auxiliary peg (requiring $T_k$ moves), then move the largest disk (1 move), then move the $k$ disks to the destination (requiring $T_k$ moves again). This gives $T_{k+1} = 2T_k + 1$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $T_1 = 1 = 2^1 - 1$. Assume $T_k = 2^k - 1$. To move $k+1$ disks: move $k$ disks to auxiliary peg ($2^k-1$ moves), move largest disk (1 move), move $k$ disks to destination ($2^k-1$ moves). Total: $T_{k+1} = 2(2^k-1) + 1 = 2^{k+1} - 1$.
+\end{solution}
+
+\begin{problem}[Vandermonde's Identity]
+Prove that $\binom{m+n}{r} = \sum_{k=0}^{r} \binom{m}{k}\binom{n}{r-k}$ for non-negative integers $m,n,r$.
+\end{problem}
+
+\begin{hint}
+Use induction on $n$. Apply Pascal's identity $\binom{n+1}{j} = \binom{n}{j-1} + \binom{n}{j}$ to split the right-hand side.
+\end{hint}
+
+\begin{solution}[Sketch]
+Induct on $n$ with $m,r$ fixed. Base case $n=0$: both sides equal $\binom{m}{r}$. Assume the identity holds for $n$. Then $\binom{m+n+1}{r} = \binom{m+n}{r-1} + \binom{m+n}{r}$. Apply the hypothesis to both terms and rearrange using $\binom{n}{j-1} + \binom{n}{j} = \binom{n+1}{j}$ to obtain the desired sum.
+\end{solution}
+
+\begin{problem}[Wilson's Theorem]
+Prove that $(p-1)! \equiv -1 \pmod{p}$ for every prime $p$.
+\end{problem}
+
+\begin{hint}
+For $p>2$, pair each $a \in \{2,3,\ldots,p-2\}$ with its inverse $a^{-1} \pmod{p}$. The only elements that are their own inverses are $1$ and $p-1$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $p=2$ gives $(2-1)! = 1 \equiv -1 \pmod{2}$. For prime $p>2$, in the product $(p-1)! = 1 \cdot 2 \cdots (p-1)$, each $a \in \{2,\ldots,p-2\}$ pairs with its inverse $a^{-1}$ (where $a \neq a^{-1}$), contributing $aa^{-1} \equiv 1$. Only $1$ and $p-1$ are self-inverse, so $(p-1)! \equiv 1 \cdot (p-1) \equiv -1 \pmod{p}$.
+\end{solution}
+
+\begin{problem}[Tiling a Defective Board]
+Prove a $2^n \times 2^n$ board with one missing square can be tiled with L-shaped trominoes.
+\end{problem}
+
+\begin{hint}
+Partition the big board into four quadrants and use one tromino to create "defects" in the three untouched quadrants.
+\end{hint}
+
+\begin{solution}[Sketch]
+For $n=1$ the statement is clear. Assume it is true for $n=k$. Split the $2^{k+1}\times 2^{k+1}$ board into four $2^k$ boards. Place one tromino at the center to cover one square in each of the other three quadrants, leaving each quadrant with exactly one missing square. Tile each quadrant via the hypothesis.
+\end{solution}
+
+\begin{problem}[Closed Form for $I_n$]
+Given $I_n = \frac{2n}{2n+1} I_{n-1}$ and $I_0 = 1$, prove $I_n = \frac{2^{2n}(n!)^2}{(2n+1)!}$.
+\end{problem}
+
+\begin{hint}
+Check the base case and show that multiplying the hypothesised formula by $\frac{2n}{2n+1}$ produces the $(n+1)$ version.
+\end{hint}
+
+\begin{solution}[Sketch]
+The formula matches $I_0$. Assuming $I_k = \frac{2^{2k}(k!)^2}{(2k+1)!}$,
+\[
+I_{k+1} = \frac{2(k+1)}{2k+3} I_k = \frac{2^{2k+2}((k+1)!)^2}{(2k+3)!},
+\]
+which is exactly the claimed expression.
+\end{solution}
+
+\begin{problem}[Integer Coefficients in $\int_0^1 x^n e^x dx$]
+Show that $I_n = \int_{0}^{1} x^n e^x dx$ can be written as $a_n + b_n e$ with integers $a_n,b_n$.
+\end{problem}
+
+\begin{hint}
+Integration by parts gives $I_n = e - n I_{n-1}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+We have $I_0 = e - 1$. If $I_{n-1} = a_{n-1} + b_{n-1} e$, then
+$I_n = e - n(a_{n-1} + b_{n-1} e) = (-n a_{n-1}) + (1 - n b_{n-1}) e$, so the coefficients stay integral.
+\end{solution}
+
+\begin{problem}[Formula for $J_n = \int_0^1 x^n e^{-x} dx$]
+Show $J_n = n! - \frac{n!}{e} \sum_{r=0}^{n} \frac{1}{r!}$ for all $n \ge 0$.
+\end{problem}
+
+\begin{hint}
+Use the recurrence $J_n = n J_{n-1} - \frac{1}{e}$ from integration by parts.
+\end{hint}
+
+\begin{solution}[Sketch]
+Check $n=0$. Assuming the formula for $n=k$, substitute into $J_{k+1} = (k+1)J_k - \frac{1}{e}$ to obtain
+\[
+J_{k+1} = (k+1)! - \frac{(k+1)!}{e}\sum_{r=0}^{k} \frac{1}{r!} - \frac{1}{e} = (k+1)! - \frac{(k+1)!}{e}\sum_{r=0}^{k+1} \frac{1}{r!}.
+\]
+\end{solution}
+
+\begin{problem}[Recursive Sequence with Surds]
+A sequence $a_n$ is defined by $a_n = 2a_{n-1} + a_{n-2}$ for $n \ge 2$ with $a_0 = a_1 = 2$. Use mathematical induction to prove that:
+\[a_n = (1+\sqrt{2})^n + (1-\sqrt{2})^n \quad \text{for all } n \ge 0\]
+\end{problem}
+
+\begin{hint}
+Use strong induction. For the base cases verify $n=0$ and $n=1$. Then show $(1+\sqrt{2})^{k+1} + (1-\sqrt{2})^{k+1} = 2[(1+\sqrt{2})^k + (1-\sqrt{2})^k] + [(1+\sqrt{2})^{k-1} + (1-\sqrt{2})^{k-1}]$ using the fact that $(1 \pm \sqrt{2})$ satisfy $x^2 = 2x + 1$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base cases: $a_0 = 2 = 1 + 1$, $a_1 = 2 = (1+\sqrt{2}) + (1-\sqrt{2})$. Assume the formula holds for $n=k-1$ and $n=k$. Note that $\alpha = 1+\sqrt{2}$ and $\beta = 1-\sqrt{2}$ both satisfy $x^2 = 2x + 1$. Then $a_{k+1} = 2a_k + a_{k-1} = 2(\alpha^k + \beta^k) + (\alpha^{k-1} + \beta^{k-1}) = \alpha^{k-1}(2\alpha + 1) + \beta^{k-1}(2\beta + 1) = \alpha^{k-1} \cdot \alpha^2 + \beta^{k-1} \cdot \beta^2 = \alpha^{k+1} + \beta^{k+1}$.
+\end{solution}
+
+\begin{problem}[Sum of Cosines]
+It is given that $2\cos A \sin B = \sin(A+B) - \sin(A-B)$. Prove by induction that for integers $n \ge 1$:
+\[\cos \theta + \cos 3\theta + \cdots + \cos(2n-1)\theta = \frac{\sin 2n\theta}{2\sin\theta}\]
+\end{problem}
+
+\begin{hint}
+Use the product-to-sum identity to show that $\sin 2(k+1)\theta = \sin 2k\theta + 2\sin\theta \cos(2k+1)\theta$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $n=1$ gives $\cos \theta = \frac{\sin 2\theta}{2\sin\theta} = \frac{2\sin\theta\cos\theta}{2\sin\theta} = \cos\theta$. Assume $\sum_{r=1}^{k} \cos(2r-1)\theta = \frac{\sin 2k\theta}{2\sin\theta}$. Then $\sum_{r=1}^{k+1} \cos(2r-1)\theta = \frac{\sin 2k\theta}{2\sin\theta} + \cos(2k+1)\theta$. Using $2\cos(2k+1)\theta \sin\theta = \sin(2k+2)\theta - \sin 2k\theta$, we get $\cos(2k+1)\theta = \frac{\sin 2(k+1)\theta - \sin 2k\theta}{2\sin\theta}$. Thus the sum equals $\frac{\sin 2(k+1)\theta}{2\sin\theta}$.
+\end{solution}
+
+\begin{problem}[Nested Radicals]
+The numbers $a_n$, for integers $n \ge 1$, are defined as $a_1 = \sqrt{2}$, $a_2 = \sqrt{2+\sqrt{2}}$, $a_3 = \sqrt{2+\sqrt{2+\sqrt{2}}}$ and so on. These numbers satisfy the relation $a_{n+1}^2 = 2 + a_n$. Use mathematical induction to prove that:
+\[a_n = 2\cos\frac{\pi}{2^{n+1}} \quad \text{for all integers } n \ge 1\]
+\end{problem}
+
+\begin{hint}
+Use the half-angle formula: $\cos\frac{\theta}{2} = \sqrt{\frac{1+\cos\theta}{2}}$ to show that $2\cos\frac{\pi}{2^{k+2}}$ satisfies the recurrence when squared.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $a_1 = \sqrt{2} = 2\cos\frac{\pi}{4}$. Assume $a_k = 2\cos\frac{\pi}{2^{k+1}}$. Then $a_{k+1}^2 = 2 + a_k = 2 + 2\cos\frac{\pi}{2^{k+1}} = 2\left(1 + \cos\frac{\pi}{2^{k+1}}\right) = 4\cos^2\frac{\pi}{2^{k+2}}$ using the double-angle formula $1 + \cos\theta = 2\cos^2\frac{\theta}{2}$. Since $a_{k+1} > 0$, we have $a_{k+1} = 2\cos\frac{\pi}{2^{k+2}}$.
+\end{solution}
+
+\begin{problem}[Cosecant Sum Formula]
+Use mathematical induction to prove that for all $n \ge 1$:
+\[\sum_{r=1}^{n}\csc(2^r x) = \cot x - \cot(2^n x)\]
+\end{problem}
+
+\begin{hint}
+Use the identity $\cot x - \cot 2x = \csc 2x$ to simplify the $(k+1)$-th term.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $n=1$ gives $\csc 2x = \frac{1}{\sin 2x} = \frac{1}{2\sin x \cos x} = \frac{1}{2\sin x}\cdot\frac{1}{\cos x} = \cot x - \cot 2x$ (using $\cot x - \cot 2x = \frac{\cos x}{\sin x} - \frac{\cos 2x}{\sin 2x} = \frac{2\cos x \sin x - \cos 2x \sin x}{\sin 2x \sin x} = \frac{\sin 2x}{\sin 2x \sin x} = \csc 2x$). Assume $\sum_{r=1}^{k}\csc(2^r x) = \cot x - \cot(2^k x)$. Then $\sum_{r=1}^{k+1}\csc(2^r x) = \cot x - \cot(2^k x) + \csc(2^{k+1}x) = \cot x - [\cot(2^k x) - \csc(2^{k+1}x)] = \cot x - \cot(2^{k+1}x)$.
+\end{solution}
+
+\begin{problem}[Arctangent Sum]
+Use mathematical induction to prove that for all positive integers $n$:
+\[\sum_{j=1}^{n}\tan^{-1}\left(\frac{1}{2j^2}\right) = \tan^{-1}\left(\frac{n}{n+1}\right)\]
+\end{problem}
+
+\begin{hint}
+Use the arctangent addition formula: $\tan^{-1}a + \tan^{-1}b = \tan^{-1}\left(\frac{a+b}{1-ab}\right)$ when $ab < 1$. Show that $\frac{1}{2(k+1)^2} + \frac{k}{k+1} = \frac{k+1}{k+2}$ after applying the formula.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $n=1$ gives $\tan^{-1}\frac{1}{2} = \tan^{-1}\frac{1}{2}$. Assume $\sum_{j=1}^{k}\tan^{-1}\left(\frac{1}{2j^2}\right) = \tan^{-1}\left(\frac{k}{k+1}\right)$. Then $\sum_{j=1}^{k+1}\tan^{-1}\left(\frac{1}{2j^2}\right) = \tan^{-1}\left(\frac{k}{k+1}\right) + \tan^{-1}\left(\frac{1}{2(k+1)^2}\right)$. Using the addition formula with $a = \frac{k}{k+1}$ and $b = \frac{1}{2(k+1)^2}$: $\frac{a+b}{1-ab} = \frac{\frac{k}{k+1} + \frac{1}{2(k+1)^2}}{1 - \frac{k}{2(k+1)^3}} = \frac{2k(k+1)+1}{2(k+1)^2 - k} = \frac{2k^2+2k+1}{2k^2+4k+2-k} = \frac{2k^2+2k+1}{2k^2+3k+2} = \frac{(k+1)(2k+1)}{(k+2)(2k+1)} = \frac{k+1}{k+2}$.
+\end{solution}

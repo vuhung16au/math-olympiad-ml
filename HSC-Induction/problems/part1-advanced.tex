@@ -1,0 +1,122 @@
+\begin{problem}[De Moivre's Theorem]
+Let $z = r(\cos\theta + i\sin\theta)$ with $r>0$. Prove by induction that for every integer $n \ge 1$,
+\[
+z^n = r^n (\cos n\theta + i \sin n\theta).
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{Base case ($n=1$).} Trivial because $z^1 = r(\cos\theta + i\sin\theta)$.
+
+\textbf{Inductive step.} Assume $z^k = r^k(\cos k\theta + i\sin k\theta)$. Then
+\begin{align*}
+z^{k+1}
+&= z \cdot z^{k}
+= r(\cos\theta + i\sin\theta)\cdot r^k(\cos k\theta + i\sin k\theta) \\
+&= r^{k+1}\bigl[(\cos\theta\cos k\theta - \sin\theta\sin k\theta) + i(\sin\theta\cos k\theta + \cos\theta\sin k\theta)\bigr] \\
+&= r^{k+1}\bigl[\cos((k+1)\theta) + i\sin((k+1)\theta)\bigr],
+\end{align*}
+using the addition formulas for sine and cosine. The statement follows by induction.
+\end{solution}
+
+\begin{takeaways}
+Complex-number induction proofs nearly always hinge on angle addition formulas once you factor out magnitudes.
+\end{takeaways}
+
+\begin{problem}[Tiling a Defective $2^n \times 2^n$ Board]
+Prove that any $2^n \times 2^n$ chessboard with one square missing can be completely tiled with L-shaped trominoes for all integers $n \ge 1$.
+\end{problem}
+
+\begin{solution}
+\textbf{Base case ($n=1$).} A $2\times 2$ board with one square removed exactly matches a single L-shaped tromino.
+
+\textbf{Inductive step.} Assume the claim is true for $n=k$: every $2^k \times 2^k$ board with one missing square can be tiled. Consider a board of size $2^{k+1}\times 2^{k+1}$. Divide it into four quadrants, each of size $2^k \times 2^k$. One quadrant already has the missing square. Place a single L-shaped tromino at the center to cover one square from each of the other three quadrants, effectively creating an artificial “missing” square inside each. Now each quadrant is a $2^k \times 2^k$ board with one square missing, so by the inductive hypothesis all four quadrants can be tiled. Thus the entire board can be tiled, completing the induction.
+\end{solution}
+
+\begin{takeaways}
+Structural induction typically requires creating the same “defect” in each subproblem so the hypothesis applies uniformly.
+\end{takeaways}
+
+\begin{problem}[Evaluating $I_n$ from a Recurrence]
+Given $I_0 = 1$ and the recurrence
+\[
+I_n = \frac{2n}{2n+1} I_{n-1} \quad (n \ge 1),
+\]
+show that
+\[
+I_n = \frac{2^{2n}(n!)^2}{(2n+1)!}
+\]
+for every $n \ge 0$.
+\end{problem}
+
+\begin{solution}
+\textbf{Base case ($n=0$).} The closed form gives $I_0 = \frac{2^{0}(0!)^2}{1!} = 1$, matching the definition.
+
+\textbf{Inductive step.} Assume the result holds for $n=k$, so $I_k = \frac{2^{2k}(k!)^2}{(2k+1)!}$. Then
+\begin{align*}
+I_{k+1}
+&= \frac{2(k+1)}{2(k+1)+1} I_k
+= \frac{2(k+1)}{2k+3} \cdot \frac{2^{2k}(k!)^2}{(2k+1)!} \\
+&= \frac{2^{2k+1}(k+1)(k!)^2}{(2k+3)(2k+1)!}
+= \frac{2^{2k+2}((k+1)!)^2}{(2k+3)!}.
+\end{align*}
+The last step follows because $(k+1)(k!)^2 = (k+1)! \cdot k!$ and $(2k+3)! = (2k+3)(2k+2)(2k+1)!$. Therefore the closed form holds for $k+1$, and by induction it is valid for all $n$.
+\end{solution}
+
+\begin{takeaways}
+Products such as $\frac{2n}{2n+1}$ often telescope into factorials; writing several terms explicitly helps you guess the factorial pattern to confirm by induction.
+\end{takeaways}
+
+\begin{problem}[Integer Coefficients in $\int_0^1 x^n e^x \, dx$]
+Let $I_n = \int_0^{1} x^n e^x \, dx$. Show by induction that there exist integers $a_n$ and $b_n$ with $I_n = a_n + b_n e$ for every $n \ge 0$.
+\end{problem}
+
+\begin{solution}
+Integrate by parts with $u = x^n$ and $dv = e^x dx$ to obtain, for $n \ge 1$,
+\[
+I_n = [x^n e^x]_0^1 - n \int_0^1 x^{n-1} e^x dx = e - n I_{n-1}.
+\]
+
+\textbf{Base case ($n=0$).} $I_0 = \int_0^1 e^x dx = e - 1$, so choose $(a_0,b_0) = (-1,1)$.
+
+\textbf{Inductive step.} Suppose $I_{n-1} = a_{n-1} + b_{n-1} e$ with integers $a_{n-1}, b_{n-1}$. Then
+\[
+I_n = e - n(a_{n-1} + b_{n-1} e) = (-n a_{n-1}) + (1 - n b_{n-1}) e.
+\]
+Both coefficients are integers, so set $a_n = -n a_{n-1}$ and $b_n = 1 - n b_{n-1}$. Therefore $I_n$ always takes the form $a_n + b_n e$ with integers $a_n,b_n$.
+\end{solution}
+
+\begin{takeaways}
+The recurrence $I_n = e - n I_{n-1}$ keeps the structure “integer plus integer times $e$,” so tracking the coefficients directly is an efficient inductive strategy.
+\end{takeaways}
+
+\begin{problem}[Closed Form for $J_n$]
+Let $J_n = \displaystyle \int_{0}^{1} x^n e^{-x}\,dx$ with $J_0 = 1 - \frac{1}{e}$. Show that for every $n \ge 0$,
+\[
+J_n = n! - \frac{n!}{e}\sum_{r=0}^{n} \frac{1}{r!}.
+\]
+\end{problem}
+
+\begin{solution}
+We have the recurrence $J_n = n J_{n-1} - \frac{1}{e}$ for $n \ge 1$.
+
+\textbf{Base case ($n=0$).} The right-hand side yields $0! - \frac{0!}{e}\cdot 1 = 1 - \frac{1}{e}$, which equals $J_0$.
+
+\textbf{Inductive step.} Assume $J_k = k! - \frac{k!}{e}\sum_{r=0}^{k} \frac{1}{r!}$. Then
+\begin{align*}
+J_{k+1}
+&= (k+1)J_k - \frac{1}{e} \\
+&= (k+1)\left(k! - \frac{k!}{e}\sum_{r=0}^{k} \frac{1}{r!}\right) - \frac{1}{e} \\
+&= (k+1)! - \frac{(k+1)!}{e}\sum_{r=0}^{k} \frac{1}{r!} - \frac{1}{e}.
+\end{align*}
+Observe that $\frac{1}{e} = \frac{(k+1)!}{e}\cdot \frac{1}{(k+1)!}$. Therefore
+\[
+J_{k+1} = (k+1)! - \frac{(k+1)!}{e}\left(\sum_{r=0}^{k} \frac{1}{r!} + \frac{1}{(k+1)!}\right)
+= (k+1)! - \frac{(k+1)!}{e}\sum_{r=0}^{k+1} \frac{1}{r!}.
+\]
+This matches the claimed closed form, completing the induction.
+\end{solution}
+
+\begin{takeaways}
+Recurrences derived from integration by parts usually reveal factorial patterns; substituting the hypothesis and carefully aligning summations keep the algebra manageable.
+\end{takeaways}
