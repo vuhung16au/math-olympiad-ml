@@ -185,7 +185,7 @@ Control the number of points rendering the heart shape:
 
 ```powershell
 # Lower (~5,000 points) - fastest, good for testing
-python heart_animation.py --density lower
+python heart_animation.py --density lower`
 
 # Low (10,000 points) - default, good balance
 python heart_animation.py --density low

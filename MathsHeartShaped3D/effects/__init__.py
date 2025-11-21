@@ -123,6 +123,50 @@ try:
     from . import effect_i1
     from . import effect_i2
     from . import effect_i3
+    # Import effects with dashes in filename using importlib.util
+    import importlib.util
+    import os
+    _current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Import I2-TwoHearts-BeMyLover
+    _effect_file = os.path.join(_current_dir, 'i2-TwoHearts-BeMyLover.py')
+    if os.path.exists(_effect_file):
+        spec = importlib.util.spec_from_file_location("i2_TwoHearts_BeMyLover", _effect_file)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+    
+    # Import I2-TwoHearts-WomanInLove
+    _effect_file = os.path.join(_current_dir, 'i2-TwoHearts-WomanInLove.py')
+    if os.path.exists(_effect_file):
+        spec = importlib.util.spec_from_file_location("i2_TwoHearts_WomanInLove", _effect_file)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+    
+    # Import I2-TwoHearts-WakaWaka
+    _effect_file = os.path.join(_current_dir, 'i2-TwoHearts-WakaWaka.py')
+    if os.path.exists(_effect_file):
+        spec = importlib.util.spec_from_file_location("i2_TwoHearts_WakaWaka", _effect_file)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+    
+    # Import I2-TwoHearts-Katyusha
+    _effect_file = os.path.join(_current_dir, 'i2-TwoHearts-Katyusha.py')
+    if os.path.exists(_effect_file):
+        spec = importlib.util.spec_from_file_location("i2_TwoHearts_Katyusha", _effect_file)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+    
+    # Import I2-TwoHearts-Kalinka
+    _effect_file = os.path.join(_current_dir, 'i2-TwoHearts-Kalinka.py')
+    if os.path.exists(_effect_file):
+        spec = importlib.util.spec_from_file_location("i2_TwoHearts_Kalinka", _effect_file)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
 except ImportError:
     # Effects not yet created, will be imported later
     pass

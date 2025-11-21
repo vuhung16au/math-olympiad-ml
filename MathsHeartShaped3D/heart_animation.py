@@ -19,7 +19,7 @@ except ImportError:
 # Import from new modular structure
 from core.heart_generator import generate_heart_points
 from core.figure_setup import setup_figure
-from effects import get_effect_class
+from effects import get_effect_class, get_all_effect_names
 
 
 def create_animation(resolution='medium', dpi=100, density='high', effect='A',
@@ -104,7 +104,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
     scatter5 = None
     heart_data_list = None  # For I3 effect
     
-    if effect == 'H4' or effect == 'I1' or effect == 'I2':
+    if effect == 'H4' or effect == 'I1' or effect == 'I2' or effect == 'I2-TwoHearts-BeMyLover' or effect == 'I2-TwoHearts-WomanInLove' or effect == 'I2-TwoHearts-WakaWaka' or effect == 'I2-TwoHearts-Katyusha' or effect == 'I2-TwoHearts-Kalinka':
         x_heart2, y_heart2, z_heart2, colors2 = generate_heart_points(density=density)
     
     if effect == 'I2':
@@ -129,7 +129,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                         c=colors, cmap='magma', s=1, alpha=0.8)
     
     # Additional scatter plots for multi-heart effects
-    if effect == 'I1' and x_heart2 is not None:
+    if (effect == 'I1' or effect == 'I2-TwoHearts-BeMyLover' or effect == 'I2-TwoHearts-WomanInLove' or effect == 'I2-TwoHearts-WakaWaka' or effect == 'I2-TwoHearts-Katyusha' or effect == 'I2-TwoHearts-Kalinka') and x_heart2 is not None:
         scatter2 = ax.scatter(x_heart2, y_heart2, z_heart2,
                              c=colors2, cmap='YlOrRd', s=1, alpha=0.6)
     
@@ -187,7 +187,7 @@ def create_animation(resolution='medium', dpi=100, density='high', effect='A',
                 y_heart2=y_heart2,
                 z_heart2=z_heart2
             )
-        elif effect == 'I1':
+        elif effect == 'I1' or effect == 'I2-TwoHearts-BeMyLover' or effect == 'I2-TwoHearts-WomanInLove' or effect == 'I2-TwoHearts-WakaWaka' or effect == 'I2-TwoHearts-Katyusha' or effect == 'I2-TwoHearts-Kalinka':
             effect_instance = EffectClass(
                 total_frames=0,  # Will be set by get_total_frames
                 fps=fps,
@@ -400,11 +400,13 @@ Examples:
         help='Point density: lower (~5K), low (10K), medium (22.5K), high (40K) (default: low)'
     )
     
+    # Get available effect names dynamically
+    available_effects = get_all_effect_names()
     parser.add_argument(
         '--effect', '-e',
-        choices=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'G1', 'G2', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H8sync', 'H8sync3min', 'H9', 'H10', 'I1', 'I2', 'I3'],
+        choices=available_effects,
         default='A',
-        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s), H8sync3min (extended 3.5min version 210s), H9 (Cuba to New Orleans musical journey ~698s), H10 (The Mission - Gabriel\'s Oboe spiritual journey), I1 (Two Hearts - dual heart visualization with beat and tempo sync), I2 (Five Hearts - comprehensive audio feature synchronization), I3 (Birthday Celebration - 11 hearts then 16 hearts with number display) (default: A)'
+        help='Animation effect: A (multi-axis), B (camera orbit), C (combined), D (custom), E (heartbeat), F (spiral), G (figure-8), G1 (journey 90s), G2 (epic story 137s), H1 (genesis 100s), H2 (time reversal 90s), H3 (fractal 90s), H4 (dual hearts 120s), H5 (kaleidoscope 60s), H6 (nebula 120s), H7 (hologram 90s), H8 (genesis with music sync 100s), H8sync (genesis with real audio sync 100s), H8sync3min (extended 3.5min version 210s), H9 (Cuba to New Orleans musical journey ~698s), H10 (The Mission - Gabriel\'s Oboe spiritual journey), I1 (Two Hearts - dual heart visualization with beat and tempo sync), I2 (Five Hearts - comprehensive audio feature synchronization), I3 (Birthday Celebration - 11 hearts then 16 hearts with number display), I2-TwoHearts-BeMyLover (Two Hearts for BeMyLover) (default: A)'
     )
     
     parser.add_argument(
