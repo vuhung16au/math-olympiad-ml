@@ -4,7 +4,9 @@ Main script to orchestrate and render the complete drone show.
 """
 
 import os
+import sys
 import argparse
+import logging
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, FFMpegWriter
@@ -141,14 +143,23 @@ class DroneShowRenderer:
             output_path: Path to save the video
         """
         print(f"\nRendering drone show to {output_path}...")
-        print("This may take several minutes...")
+        print("This may take several minutes...\n")
         
         # Ensure output directory exists
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         
-        # Create progress bar
+        # Create progress bar with proper configuration
         if tqdm:
-            pbar = tqdm(total=self.total_frames, desc="Rendering", unit="frame")
+            # Configure tqdm to stay on one line
+            pbar = tqdm(
+                total=self.total_frames,
+                desc="Rendering",
+                unit="frame",
+                dynamic_ncols=True,
+                leave=True,
+                position=0,
+                file=None  # Use default (sys.stderr)
+            )
             
             # Wrap update function
             original_update = self.update_frame
@@ -170,9 +181,26 @@ class DroneShowRenderer:
             blit=False
         )
         
-        # Save animation
-        writer = FFMpegWriter(fps=self.fps, bitrate=VIDEO_BITRATE)
-        anim.save(output_path, writer=writer)
+        # Save animation with minimal verbosity
+        writer = FFMpegWriter(
+            fps=self.fps,
+            bitrate=VIDEO_BITRATE,
+            metadata={'title': 'Drone Show Simulation'}
+        )
+        
+        # Suppress matplotlib logging during save
+        matplotlib_logger = logging.getLogger('matplotlib')
+        animation_logger = logging.getLogger('matplotlib.animation')
+        original_mpl_level = matplotlib_logger.level
+        original_anim_level = animation_logger.level
+        matplotlib_logger.setLevel(logging.WARNING)
+        animation_logger.setLevel(logging.WARNING)
+        
+        try:
+            anim.save(output_path, writer=writer)
+        finally:
+            matplotlib_logger.setLevel(original_mpl_level)
+            animation_logger.setLevel(original_anim_level)
         
         if tqdm:
             pbar.close()
