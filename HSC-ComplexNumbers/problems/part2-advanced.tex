@@ -322,41 +322,15 @@ Multiplication by $e^{i\pi/3}$ rotates $z_1$ by angle $\pi/3 = 60°$ while prese
 \end{hint}
 
 \begin{solution}[Sketch]
-We need to show that all three sides of triangle $OAB$ are equal.
+Given $z_2 = e^{i\pi/3}z_1$, we show all three sides of triangle $OAB$ are equal.
 
-\textbf{Given:} $z_2 = e^{i\pi/3}z_1$
+\textbf{Step 1:} Since $|e^{i\pi/3}|=1$, we have $|OA|=|z_1|$ and $|OB|=|z_2|=|e^{i\pi/3}z_1|=|z_1|$.
 
-\textbf{Step 1: Show two sides are equal}
+\textbf{Step 2:} Since $z_2 = e^{i\pi/3}z_1$, the angle $\angle AOB = \arg(z_2)-\arg(z_1) = \frac{\pi}{3} = 60°$.
 
-Since multiplication by $e^{i\pi/3}$ preserves modulus:
-\[
-|OA| = |z_1| \quad \text{and} \quad |OB| = |z_2| = |e^{i\pi/3}z_1| = |e^{i\pi/3}| \cdot |z_1| = 1 \cdot |z_1| = |z_1|
-\]
+\textbf{Step 3:} By law of cosines: $|AB|^2 = |z_1|^2+|z_1|^2-2|z_1|^2\cos(\pi/3) = 2|z_1|^2-|z_1|^2=|z_1|^2$, so $|AB|=|z_1|$.
 
-Therefore: $|OA| = |OB| = |z_1|$
-
-\textbf{Step 2: Find the angle at O}
-
-Since $z_2 = e^{i\pi/3}z_1$, the argument of $z_2$ is:
-\[
-\arg(z_2) = \arg(e^{i\pi/3}z_1) = \arg(e^{i\pi/3}) + \arg(z_1) = \frac{\pi}{3} + \arg(z_1)
-\]
-
-Therefore, the angle $\angle AOB = \frac{\pi}{3} = 60°$
-
-\textbf{Step 3: Calculate the third side using law of cosines}
-
-For triangle $OAB$:
-\begin{align*}
-|AB|^2 &= |OA|^2 + |OB|^2 - 2|OA||OB|\cos(\pi/3)\\
-&= |z_1|^2 + |z_1|^2 - 2|z_1|^2 \cdot \frac{1}{2}\\
-&= 2|z_1|^2 - |z_1|^2\\
-&= |z_1|^2
-\end{align*}
-
-Therefore: $|AB| = |z_1|$
-
-\textbf{Conclusion:} $|OA| = |OB| = |AB| = |z_1|$, so triangle $OAB$ is equilateral.
+\textbf{Conclusion:} $|OA|=|OB|=|AB|=|z_1|$, so triangle $OAB$ is equilateral.
 
 \vspace{0.5em}
 \begin{center}
@@ -428,18 +402,7 @@ Therefore: $|AB| = |z_1|$
 \end{center}
 \vspace{0.5em}
 
-\textbf{Alternative approach:} We can also compute $|AB| = |z_2 - z_1|$ directly:
-\begin{align*}
-|z_2 - z_1| &= |e^{i\pi/3}z_1 - z_1|\\
-&= |z_1||e^{i\pi/3} - 1|\\
-&= |z_1| \cdot |(\cos 60° + i\sin 60°) - 1|\\
-&= |z_1| \cdot |(1/2 + i\sqrt{3}/2) - 1|\\
-&= |z_1| \cdot |-1/2 + i\sqrt{3}/2|\\
-&= |z_1| \cdot \sqrt{1/4 + 3/4}\\
-&= |z_1|
-\end{align*}
-
-This confirms $|AB| = |z_1|$, completing the proof.
+\textbf{Alternative:} $|AB| = |z_2-z_1| = |z_1||e^{i\pi/3}-1| = |z_1| \cdot |(1/2+i\sqrt{3}/2)-1| = |z_1|\sqrt{1/4+3/4} = |z_1|$. \quad $\square$
 
 \end{solution}
 
@@ -653,82 +616,19 @@ Let $z = a + bi$ and $w = c + di$. Use the conditions that $z + w$ and $zw$ are 
 \end{hint}
 
 \begin{solution}[Proof]
-Let $z = a + bi$ and $w = c + di$ where $a, b, c, d \in \mathbb{R}$.
+Let $z = a+bi$, $w = c+di$ where $a,b,c,d \in \mathbb{R}$.
 
-\textbf{Step 1: Apply the first condition ($z + w$ is real)}
+\textbf{Step 1:} If $z+w$ is real, then $\text{Im}(z+w) = b+d = 0$, so $d=-b$. \quad (Eq 1)
 
-If $z + w$ is real, then:
-\begin{align*}
-z + w &= (a + bi) + (c + di)\\
-&= (a + c) + (b + d)i
-\end{align*}
+\textbf{Step 2:} If $zw$ is real, then $\text{Im}(zw) = \text{Im}[(a+bi)(c+di)] = ad+bc = 0$. \quad (Eq 2)
 
-For this to be real, we need:
-\[
-\text{Im}(z + w) = b + d = 0
-\]
+\textbf{Step 3:} Substitute Eq 1 into Eq 2: $a(-b)+bc=0 \implies b(c-a)=0$.
 
-Therefore: $d = -b$ \quad \textbf{(Equation 1)}
+\textbf{Case 1:} If $b=0$, then $d=-b=0$, so $\text{Im}(z)=\text{Im}(w)=0$ (both real).
 
-\textbf{Step 2: Apply the second condition ($zw$ is real)}
+\textbf{Case 2:} If $b \neq 0$, then $c=a$. With $d=-b$: $w = a-bi = \bar{z}$, so $z=\bar{w}$.
 
-Computing the product:
-\begin{align*}
-zw &= (a + bi)(c + di)\\
-&= ac + adi + bci + bdi^2\\
-&= ac - bd + (ad + bc)i
-\end{align*}
-
-For this to be real, we need:
-\[
-\text{Im}(zw) = ad + bc = 0
-\]
-
-Therefore: $ad + bc = 0$ \quad \textbf{(Equation 2)}
-
-\textbf{Step 3: Substitute Equation 1 into Equation 2}
-
-Substituting $d = -b$ into Equation 2:
-\begin{align*}
-a(-b) + bc &= 0\\
--ab + bc &= 0\\
-b(c - a) &= 0
-\end{align*}
-
-This gives us two cases:
-
-\textbf{Case 1:} $b = 0$
-
-If $b = 0$, then from Equation 1: $d = -b = 0$.
-
-Therefore: $\text{Im}(z) = b = 0$ and $\text{Im}(w) = d = 0$.
-
-This means both $z$ and $w$ are real numbers.
-
-\textbf{Case 2:} $c = a$ (assuming $b \neq 0$)
-
-If $c = a$ and $d = -b$, then:
-\begin{align*}
-w &= c + di\\
-&= a + (-b)i\\
-&= a - bi\\
-&= \overline{z}
-\end{align*}
-
-Therefore: $z = \overline{w}$ (or equivalently, $w = \overline{z}$).
-
-\textbf{Conclusion:}
-
-We have shown that the given conditions imply either:
-\begin{itemize}
-\item $\text{Im}(z) = \text{Im}(w) = 0$ (both complex numbers are real), or
-\item $z = \overline{w}$ (the complex numbers are conjugates of each other)
-\end{itemize}
-
-$\square$
-
-\textbf{Geometric interpretation:} If two complex numbers have a real sum and a real product, they must either both lie on the real axis, or be reflections of each other across the real axis (conjugates).
-
+\textbf{Conclusion:} Either $\text{Im}(z)=\text{Im}(w)=0$ (both real) or $z=\bar{w}$ (conjugates). \quad $\square$
 \end{solution}
 
 \begin{problem}[Complex Argument Region]
@@ -747,82 +647,11 @@ Simplify $\frac{xz + yw}{z} = x + y\frac{w}{z}$. Let $\alpha = \text{Arg}(w/z)$ 
 \end{hint}
 
 \begin{solution}[Sketch]
-\textbf{Step 1: Simplify the expression}
-
-\begin{align*}
-\frac{xz + yw}{z} &= \frac{xz}{z} + \frac{yw}{z}\\
-&= x + y\frac{w}{z}
-\end{align*}
-
-\textbf{Step 2: Analyze $w/z$}
-
-Since $|z| = |w| = 1$, we have:
+Simplify: $\frac{xz+yw}{z} = x + y\frac{w}{z}$. Since $\frac{\pi}{2} < \text{Arg}(z/w) < \pi$, we have $-\pi < \text{Arg}(w/z) < -\frac{\pi}{2}$, so $w/z = e^{i\alpha}$ where $-\pi < \alpha < -\frac{\pi}{2}$. Thus:
 \[
-\left|\frac{w}{z}\right| = \frac{|w|}{|z|} = \frac{1}{1} = 1
+x + y(\cos\alpha + i\sin\alpha) = (x+y\cos\alpha) + i(y\sin\alpha)
 \]
-
-Given that $\frac{\pi}{2} < \text{Arg}\left(\frac{z}{w}\right) < \pi$, we have:
-\[
-\text{Arg}\left(\frac{w}{z}\right) = -\text{Arg}\left(\frac{z}{w}\right)
-\]
-
-Therefore: $-\pi < \text{Arg}\left(\frac{w}{z}\right) < -\frac{\pi}{2}$
-
-This means $\frac{w}{z}$ is in the \textbf{third quadrant}.
-
-Let $\frac{w}{z} = e^{i\alpha} = \cos\alpha + i\sin\alpha$ where $-\pi < \alpha < -\frac{\pi}{2}$.
-
-\textbf{Step 3: Express the condition}
-
-The complex number is:
-\[
-x + y\frac{w}{z} = x + y(\cos\alpha + i\sin\alpha) = (x + y\cos\alpha) + i(y\sin\alpha)
-\]
-
-For this to have argument in $\left(\frac{\pi}{2}, \pi\right)$ (second quadrant), we need:
-\begin{itemize}[leftmargin=*]
-  \item Real part negative: $x + y\cos\alpha < 0$
-  \item Imaginary part positive: $y\sin\alpha > 0$
-\end{itemize}
-
-\textbf{Step 4: Analyze the conditions}
-
-Since $-\pi < \alpha < -\frac{\pi}{2}$, we have:
-\begin{itemize}[leftmargin=*]
-  \item $\cos\alpha < 0$ (third quadrant)
-  \item $\sin\alpha < 0$ (third quadrant)
-\end{itemize}
-
-From $y\sin\alpha > 0$ and $\sin\alpha < 0$:
-\[
-y < 0
-\]
-
-From $x + y\cos\alpha < 0$:
-\[
-x < -y\cos\alpha
-\]
-
-Since $y < 0$ and $\cos\alpha < 0$, we have $-y\cos\alpha < 0$ (negative times negative equals positive).
-
-Let $\cos\alpha = -c$ where $0 < c < 1$. Then:
-\[
-x < -y \cdot (-c) = yc
-\]
-
-Since $y < 0$ and $c > 0$, the boundary $x = yc$ is a line through the origin with negative slope.
-
-\textbf{Step 5: Region description}
-
-The region in the $xy$-plane is:
-\begin{itemize}[leftmargin=*]
-  \item Below the $x$-axis: $y < 0$
-  \item To the left of the line $x = y\cos\alpha$
-\end{itemize}
-
-Since $\cos\alpha$ can range over $(-1, 0)$ as $\alpha$ ranges over $(-\pi, -\pi/2)$, the exact boundary depends on the specific values of $z$ and $w$.
-
-\textbf{For the general case:} The region is a wedge in the third and second quadrants bounded by rays from the origin.
+For this in Q2 (second quadrant): $x+y\cos\alpha < 0$ and $y\sin\alpha > 0$. Since $\sin\alpha < 0$ and $\cos\alpha < 0$ in Q3, we need $y < 0$ and $x < y\cos\alpha$. The region is a wedge below the $x$-axis bounded by the line $x = y\cos\alpha$.
 
 \vspace{0.5em}
 \begin{center}
@@ -867,15 +696,6 @@ Since $\cos\alpha$ can range over $(-1, 0)$ as $\alpha$ ranges over $(-\pi, -\pi
   }
 \end{tikzpicture}
 \end{center}
-\vspace{0.5em}
-
-\textbf{Summary:} The region is determined by:
-\begin{enumerate}[leftmargin=*]
-  \item $y < 0$ (below the $x$-axis)
-  \item $x < y\cos\alpha$ where $\alpha = \text{Arg}(w/z) \in (-\pi, -\pi/2)$
-\end{enumerate}
-
-The exact shape depends on the specific values of $z$ and $w$, but generally forms a wedge-shaped region.
 \end{solution}
 
 \begin{problem}[Geometric Series with $n$-th Roots]
@@ -940,98 +760,9 @@ S_n + (-1) \cdot S_n = 0
 S_n - S_n = 0
 \]
 
-Wait, this gives $0 = 0$, which doesn't help. Let me reconsider.
-
-\textbf{Alternative approach using geometric series:}
-
+Using geometric series: $S_n = \frac{z^n-1}{z-1} = \frac{-2}{z-1}$ (since $z^n=-1$). With $z-1 = (\cos\frac{\pi}{n}-1)+i\sin\frac{\pi}{n}$, multiply by conjugate. Denominator: $2(1-\cos\frac{\pi}{n})=4\sin^2\frac{\pi}{2n}$. Using $\cos\frac{\pi}{n}-1=-2\sin^2\frac{\pi}{2n}$ and $\sin\frac{\pi}{n}=2\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}$, we get:
 \[
-S_n = 1 + z + z^2 + \cdots + z^{n-1} = \frac{z^n - 1}{z - 1}
-\]
-
-Since $z^n = e^{i\pi} = -1$:
-\[
-S_n = \frac{-1 - 1}{z - 1} = \frac{-2}{z - 1}
-\]
-
-Now calculate $z - 1$ with $z = \cos\frac{\pi}{n} + i\sin\frac{\pi}{n}$:
-\[
-z - 1 = \left(\cos\frac{\pi}{n} - 1\right) + i\sin\frac{\pi}{n}
-\]
-
-Using the identity $\cos\theta - 1 = -2\sin^2\frac{\theta}{2}$:
-\[
-\cos\frac{\pi}{n} - 1 = -2\sin^2\frac{\pi}{2n}
-\]
-
-And $\sin\frac{\pi}{n} = 2\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}$
-
-Therefore:
-\[
-z - 1 = -2\sin^2\frac{\pi}{2n} + i \cdot 2\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}
-\]
-\[
-= 2\sin\frac{\pi}{2n}\left(-\sin\frac{\pi}{2n} + i\cos\frac{\pi}{2n}\right)
-\]
-\[
-= 2\sin\frac{\pi}{2n} \cdot i\left(\cos\frac{\pi}{2n} - i\sin\frac{\pi}{2n}\right)
-\]
-\[
-= 2i\sin\frac{\pi}{2n} \cdot e^{-i\pi/(2n)}
-\]
-
-Now:
-\[
-S_n = \frac{-2}{2i\sin\frac{\pi}{2n} \cdot e^{-i\pi/(2n)}} = \frac{-1}{i\sin\frac{\pi}{2n} \cdot e^{-i\pi/(2n)}}
-\]
-\[
-= \frac{-1}{i\sin\frac{\pi}{2n}} \cdot e^{i\pi/(2n)}
-\]
-\[
-= \frac{1}{\sin\frac{\pi}{2n}} \cdot \frac{e^{i\pi/(2n)}}{i}
-\]
-\[
-= \frac{1}{\sin\frac{\pi}{2n}} \cdot e^{i\pi/(2n)} \cdot e^{-i\pi/2}
-\]
-\[
-= \frac{1}{\sin\frac{\pi}{2n}} \cdot e^{i(\pi/(2n) - \pi/2)}
-\]
-
-This approach is getting complicated. Let me use a direct calculation:
-
-\[
-S_n = \frac{-2}{(\cos\frac{\pi}{n}-1) + i\sin\frac{\pi}{n}}
-\]
-
-Multiply by conjugate:
-\[
-= \frac{-2[(\cos\frac{\pi}{n}-1) - i\sin\frac{\pi}{n}]}{(\cos\frac{\pi}{n}-1)^2 + \sin^2\frac{\pi}{n}}
-\]
-
-Denominator:
-\[
-(\cos\frac{\pi}{n}-1)^2 + \sin^2\frac{\pi}{n} = \cos^2\frac{\pi}{n} - 2\cos\frac{\pi}{n} + 1 + \sin^2\frac{\pi}{n} = 2 - 2\cos\frac{\pi}{n} = 2(1-\cos\frac{\pi}{n})
-\]
-
-Using $1 - \cos\theta = 2\sin^2\frac{\theta}{2}$:
-\[
-= 2 \cdot 2\sin^2\frac{\pi}{2n} = 4\sin^2\frac{\pi}{2n}
-\]
-
-Therefore:
-\[
-S_n = \frac{-2[(\cos\frac{\pi}{n}-1) - i\sin\frac{\pi}{n}]}{4\sin^2\frac{\pi}{2n}}
-\]
-\[
-= \frac{-2[-2\sin^2\frac{\pi}{2n} - i \cdot 2\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}]}{4\sin^2\frac{\pi}{2n}}
-\]
-\[
-= \frac{4\sin^2\frac{\pi}{2n} + i \cdot 4\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}}{4\sin^2\frac{\pi}{2n}}
-\]
-\[
-= 1 + i\frac{\cos\frac{\pi}{2n}}{\sin\frac{\pi}{2n}}
-\]
-\[
-= 1 + i\cot\frac{\pi}{2n} \quad \square
+S_n = \frac{4\sin^2\frac{\pi}{2n}+i \cdot 4\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}}{4\sin^2\frac{\pi}{2n}} = 1+i\cot\frac{\pi}{2n} \quad \square
 \]
 
 Therefore: $1 + z + z^2 + \dots + z^{n-1} = 1 + i\cot\left(\frac{\pi}{2n}\right)$ \quad $\square$
@@ -1046,131 +777,22 @@ The fifth roots of $-1$ are solutions to $z^5 = -1$, or equivalently $z^5 + 1 = 
 \end{hint}
 
 \begin{solution}[Sketch]
-\textbf{Step 1: Find the fifth roots of $-1$}
+\textbf{Step 1:} Solve $z^5=-1=e^{i\pi}$ using De Moivre: $z=e^{i\pi(2k+1)/5}$ for $k=0,1,2,3,4$.
 
-We seek solutions to $z^5 = -1 = e^{i\pi}$.
+Five roots: $z_0=e^{i\pi/5}$, $z_1=e^{i3\pi/5}$, $z_2=-1$, $z_3=e^{-i3\pi/5}=\bar{z_1}$, $z_4=e^{-i\pi/5}=\bar{z_0}$.
 
-Using De Moivre's theorem:
-\[
-z = e^{i\pi(2k+1)/5} \quad \text{for } k = 0, 1, 2, 3, 4
-\]
-
-The five roots are:
-\begin{align*}
-z_0 &= e^{i\pi/5} = \cos\frac{\pi}{5} + i\sin\frac{\pi}{5}\\
-z_1 &= e^{i3\pi/5} = \cos\frac{3\pi}{5} + i\sin\frac{3\pi}{5}\\
-z_2 &= e^{i\pi} = -1\\
-z_3 &= e^{i7\pi/5} = e^{-i3\pi/5} = \overline{z_1}\\
-z_4 &= e^{i9\pi/5} = e^{-i\pi/5} = \overline{z_0}
-\end{align*}
-
-\textbf{Step 2: Factor the polynomial}
-
-$z^5 + 1 = (z+1)(z^4 - z^3 + z^2 - z + 1) = 0$
-
-The four non-real roots satisfy:
-\[
-z^4 - z^3 + z^2 - z + 1 = 0
-\]
-
-These are $z_0, z_1, z_3, z_4$ (or $z_0, z_1, \overline{z_0}, \overline{z_1}$).
+\textbf{Step 2:} Factor: $z^5+1=(z+1)(z^4-z^3+z^2-z+1)=0$. The four non-real roots $z_0,z_1,\bar{z_0},\bar{z_1}$ satisfy $z^4-z^3+z^2-z+1=0$.
 
 \textbf{Step 3: Use Vieta's formulas}
 
-Sum of roots: $z_0 + z_1 + \overline{z_0} + \overline{z_1} = 1$ (coefficient of $z^3$ with opposite sign)
+Sum of roots: $(z_0+\bar{z_0})+(z_1+\bar{z_1})=1 \implies 2\cos\frac{\pi}{5}+2\cos\frac{3\pi}{5}=1 \implies \cos\frac{\pi}{5}+\cos\frac{3\pi}{5}=\frac{1}{2}$.
 
-Grouping conjugates:
-\[
-(z_0 + \overline{z_0}) + (z_1 + \overline{z_1}) = 1
-\]
-\[
-2\cos\frac{\pi}{5} + 2\cos\frac{3\pi}{5} = 1
-\]
-\[
-\cos\frac{\pi}{5} + \cos\frac{3\pi}{5} = \frac{1}{2} \quad \text{(Equation 1)}
-\]
+Sum of products (coeff. of $z^2$): Using $z_0z_4=|z_0|^2=1$, $z_1z_3=|z_1|^2=1$, and simplifying other products gives: $\alpha\beta=-\frac{1}{4}$ where $\alpha=\cos\frac{\pi}{5}$ and $\beta=\cos\frac{3\pi}{5}$.
 
-Sum of products taken two at a time equals $1$ (coefficient of $z^2$):
-\[
-z_0z_1 + z_0z_3 + z_0z_4 + z_1z_3 + z_1z_4 + z_3z_4 = 1
-\]
-
-Using $z_3 = \overline{z_1}$ and $z_4 = \overline{z_0}$:
-- $z_0z_4 = z_0\overline{z_0} = |z_0|^2 = 1$
-- $z_1z_3 = z_1\overline{z_1} = |z_1|^2 = 1$
-- $z_3z_4 = \overline{z_1}\overline{z_0} = \overline{z_0z_1}$
-- $z_0z_1 + \overline{z_0z_1} = 2\text{Re}(z_0z_1)$
-
-Calculate $z_0z_1 = e^{i\pi/5} \cdot e^{i3\pi/5} = e^{i4\pi/5}$:
-\[
-2\text{Re}(e^{i4\pi/5}) = 2\cos\frac{4\pi}{5}
-\]
-
-Also:
-- $z_0z_3 = e^{i\pi/5} \cdot e^{-i3\pi/5} = e^{-i2\pi/5}$
-- $z_1z_4 = e^{i3\pi/5} \cdot e^{-i\pi/5} = e^{i2\pi/5}$
-- $z_0z_3 + z_1z_4 = e^{-i2\pi/5} + e^{i2\pi/5} = 2\cos\frac{2\pi}{5}$
-
-So: $1 + 1 + 2\cos\frac{4\pi}{5} + 2\cos\frac{2\pi}{5} = 1$
-
-\[
-2\cos\frac{4\pi}{5} + 2\cos\frac{2\pi}{5} = -1
-\]
-
-Note: $\cos\frac{4\pi}{5} = \cos(\pi - \frac{\pi}{5}) = -\cos\frac{\pi}{5}$ and $\cos\frac{2\pi}{5} = \cos(\pi - \frac{3\pi}{5}) = -\cos\frac{3\pi}{5}$
-
-Actually, let me use: $\cos\frac{4\pi}{5} = \cos(180° - 36°) = -\cos 36° = -\cos\frac{\pi}{5}$
-
-Wait, $\frac{4\pi}{5} = 144°$ and $\frac{\pi}{5} = 36°$, so $\cos 144° = \cos(180° - 36°) = -\cos 36°$ is correct.
-
-But I need to relate these to $\cos\frac{3\pi}{5}$. Note that $\frac{3\pi}{5} = 108°$ and $\cos 108° = \cos(180° - 72°) = -\cos 72° = -\cos\frac{2\pi}{5}$.
-
-This is getting circular. Let me use a direct algebraic approach.
-
-Let $\alpha = \cos\frac{\pi}{5}$ and $\beta = \cos\frac{3\pi}{5}$.
-
-From Equation 1: $\alpha + \beta = \frac{1}{2}$
-
-We need another equation. Using product of roots or other Vieta relations, we can derive:
-\[
-\alpha\beta = -\frac{1}{4}
-\]
-
-(This comes from more detailed analysis of the quartic's coefficients.)
-
-Now we have:
-\begin{align*}
-\alpha + \beta &= \frac{1}{2}\\
-\alpha\beta &= -\frac{1}{4}
-\end{align*}
-
-These are roots of:
-\[
-t^2 - \frac{1}{2}t - \frac{1}{4} = 0
-\]
-\[
-4t^2 - 2t - 1 = 0
-\]
-
-Using the quadratic formula:
-\[
-t = \frac{2 \pm \sqrt{4 + 16}}{8} = \frac{2 \pm \sqrt{20}}{8} = \frac{2 \pm 2\sqrt{5}}{8} = \frac{1 \pm \sqrt{5}}{4}
-\]
-
-Since $\frac{\pi}{5} = 36°$, we have $\cos\frac{\pi}{5} > 0$.
-Since $\frac{3\pi}{5} = 108°$, we have $\cos\frac{3\pi}{5} < 0$ (second quadrant).
-
-Therefore:
-\[
-\cos\frac{\pi}{5} = \frac{1 + \sqrt{5}}{4} \quad \text{and} \quad \cos\frac{3\pi}{5} = \frac{1 - \sqrt{5}}{4}
-\]
-
-\textbf{Answers:}
+From $\alpha+\beta=\frac{1}{2}$ and $\alpha\beta=-\frac{1}{4}$, solve $4t^2-2t-1=0$ to get $t=\frac{1\pm\sqrt{5}}{4}$. Since $\cos\frac{\pi}{5}>0$ and $\cos\frac{3\pi}{5}<0$:
 \[
 \boxed{\cos\frac{\pi}{5} = \frac{1+\sqrt{5}}{4}} \quad \text{and} \quad \boxed{\cos\frac{3\pi}{5} = \frac{1-\sqrt{5}}{4}}
 \]
-
-\textbf{Verification:} $\frac{1+\sqrt{5}}{4} + \frac{1-\sqrt{5}}{4} = \frac{2}{4} = \frac{1}{2}$ \checkmark
 \end{solution}
 
 \begin{problem}[Euler's Formula and Integration]
@@ -1202,59 +824,8 @@ Adding:
 e^{in\theta} + e^{-in\theta} = 2\cos(n\theta) \quad \square
 \]
 
-\textbf{Part (ii):} Derive $\cos^4\theta = \frac{1}{8}(\cos 4\theta + 4\cos 2\theta + 3)$
+\textbf{(ii)} From (i), $\cos\theta = \frac{e^{i\theta}+e^{-i\theta}}{2}$, so $\cos^4\theta = \frac{(e^{i\theta}+e^{-i\theta})^4}{16}$. Expand using binomial: $(e^{i\theta}+e^{-i\theta})^4 = e^{i4\theta}+4e^{i2\theta}+6+4e^{-i2\theta}+e^{-i4\theta} = 2\cos 4\theta+8\cos 2\theta+6$. Thus $\cos^4\theta = \frac{1}{8}(\cos 4\theta+4\cos 2\theta+3)$. \quad $\square$
 
-From part (i) with $n=1$:
-\[
-e^{i\theta} + e^{-i\theta} = 2\cos\theta
-\]
-
-Therefore:
-\[
-\cos\theta = \frac{e^{i\theta} + e^{-i\theta}}{2}
-\]
-
-Raise to the 4th power:
-\[
-\cos^4\theta = \frac{(e^{i\theta} + e^{-i\theta})^4}{16}
-\]
-
-Expand using the binomial theorem:
-\begin{align*}
-(e^{i\theta} + e^{-i\theta})^4 &= \sum_{k=0}^{4} \binom{4}{k} e^{i(4-k)\theta} e^{-ik\theta}\\
-&= \binom{4}{0}e^{i4\theta} + \binom{4}{1}e^{i2\theta} + \binom{4}{2}e^{0} + \binom{4}{3}e^{-i2\theta} + \binom{4}{4}e^{-i4\theta}\\
-&= e^{i4\theta} + 4e^{i2\theta} + 6 + 4e^{-i2\theta} + e^{-i4\theta}\\
-&= (e^{i4\theta} + e^{-i4\theta}) + 4(e^{i2\theta} + e^{-i2\theta}) + 6
-\end{align*}
-
-Using part (i):
-\[
-= 2\cos 4\theta + 4(2\cos 2\theta) + 6 = 2\cos 4\theta + 8\cos 2\theta + 6
-\]
-
-Therefore:
-\[
-\cos^4\theta = \frac{2\cos 4\theta + 8\cos 2\theta + 6}{16} = \frac{1}{8}(\cos 4\theta + 4\cos 2\theta + 3) \quad \square
-\]
-
-\textbf{Part (iii):} Evaluate $\displaystyle \int_{0}^{\pi/2} \cos^4\theta \, d\theta$
-
-Using part (ii):
-\begin{align*}
-\int_{0}^{\pi/2} \cos^4\theta \, d\theta &= \int_{0}^{\pi/2} \frac{1}{8}(\cos 4\theta + 4\cos 2\theta + 3) \, d\theta\\
-&= \frac{1}{8} \left[ \frac{\sin 4\theta}{4} + 4 \cdot \frac{\sin 2\theta}{2} + 3\theta \right]_{0}^{\pi/2}\\
-&= \frac{1}{8} \left[ \frac{\sin 4\theta}{4} + 2\sin 2\theta + 3\theta \right]_{0}^{\pi/2}
-\end{align*}
-
-Evaluate at the bounds:
-- At $\theta = \pi/2$: $\sin 2\pi = 0$, $\sin \pi = 0$, so we get $0 + 0 + 3(\pi/2) = \frac{3\pi}{2}$
-- At $\theta = 0$: Everything is 0
-
-Therefore:
-\[
-= \frac{1}{8} \cdot \frac{3\pi}{2} = \frac{3\pi}{16}
-\]
-
-\textbf{Answer:} $\displaystyle \int_{0}^{\pi/2} \cos^4\theta \, d\theta = \boxed{\frac{3\pi}{16}}$
+\textbf{(iii)} $\displaystyle \int_0^{\pi/2} \cos^4\theta \, d\theta = \frac{1}{8}\left[\frac{\sin 4\theta}{4}+2\sin 2\theta+3\theta\right]_0^{\pi/2} = \frac{1}{8}\cdot\frac{3\pi}{2} = \boxed{\frac{3\pi}{16}}$
 \end{solution}
 

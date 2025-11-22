@@ -697,86 +697,13 @@ For part (a): The fifth roots of unity are roots of $z^5 - 1 = 0$. Factor as $(z
 \end{hint}
 
 \begin{solution}[Sketch]
-\textbf{Part (a):} Show $1 + \omega + \omega^2 + \omega^3 + \omega^4 = 0$
+\textbf{(a)} Since $\omega^5 = 1$, factor $z^5-1 = (z-1)(z^4+z^3+z^2+z+1)=0$. As $\omega \neq 1$ (non-real), we have $z^4+z^3+z^2+z+1=0$, so $1+\omega+\omega^2+\omega^3+\omega^4=0$. \quad $\square$
 
-Since $\omega$ is a fifth root of unity, we have:
+\textbf{(b)} Let $\omega = e^{i2\pi/5}$. Then $\omega^4 = e^{-i2\pi/5} = \bar{\omega}$ and $\omega^3 = \bar{\omega^2}$. From (a):
 \[
-\omega^5 = 1
+1 + (\omega + \omega^4) + (\omega^2 + \omega^3) = 0 \implies 1 + 2\cos\frac{2\pi}{5} + 2\cos\frac{4\pi}{5} = 0
 \]
-
-Therefore $\omega$ is a root of $z^5 - 1 = 0$. We can factor this as:
-\[
-z^5 - 1 = (z-1)(z^4 + z^3 + z^2 + z + 1) = 0
-\]
-
-Since $\omega$ is a \emph{non-real} root, we have $\omega \neq 1$, so $\omega$ must satisfy:
-\[
-\omega^4 + \omega^3 + \omega^2 + \omega + 1 = 0
-\]
-
-Rearranging:
-\[
-1 + \omega + \omega^2 + \omega^3 + \omega^4 = 0 \quad \square
-\]
-
-\textbf{Alternative proof using geometric series:}
-
-The sum $S = 1 + \omega + \omega^2 + \omega^3 + \omega^4$ is a geometric series with first term 1, common ratio $\omega$, and 5 terms.
-
-If $\omega \neq 1$:
-\[
-S = \frac{\omega^5 - 1}{\omega - 1} = \frac{1 - 1}{\omega - 1} = 0
-\]
-
-\textbf{Part (b):} Show $\cos\left(\frac{2\pi}{5}\right) + \cos\left(\frac{4\pi}{5}\right) = -\frac{1}{2}$
-
-The fifth roots of unity are: $1, \omega, \omega^2, \omega^3, \omega^4$ where:
-\[
-\omega = e^{i2\pi/5} = \cos\frac{2\pi}{5} + i\sin\frac{2\pi}{5}
-\]
-
-Note that:
-\begin{align*}
-\omega^2 &= e^{i4\pi/5} = \cos\frac{4\pi}{5} + i\sin\frac{4\pi}{5}\\
-\omega^3 &= e^{i6\pi/5} = \cos\frac{6\pi}{5} + i\sin\frac{6\pi}{5}\\
-\omega^4 &= e^{i8\pi/5} = \cos\frac{8\pi}{5} + i\sin\frac{8\pi}{5}
-\end{align*}
-
-Since $\frac{8\pi}{5} = 2\pi - \frac{2\pi}{5}$, we have:
-\[
-\omega^4 = e^{-i2\pi/5} = \overline{\omega} = \cos\frac{2\pi}{5} - i\sin\frac{2\pi}{5}
-\]
-
-Similarly, $\omega^3 = e^{-i4\pi/5} = \overline{\omega^2}$.
-
-From part (a): $1 + \omega + \omega^2 + \omega^3 + \omega^4 = 0$
-
-Grouping conjugate pairs:
-\[
-1 + (\omega + \omega^4) + (\omega^2 + \omega^3) = 0
-\]
-
-Calculate $\omega + \omega^4 = \omega + \overline{\omega}$:
-\[
-\omega + \overline{\omega} = 2\text{Re}(\omega) = 2\cos\frac{2\pi}{5}
-\]
-
-Calculate $\omega^2 + \omega^3 = \omega^2 + \overline{\omega^2}$:
-\[
-\omega^2 + \overline{\omega^2} = 2\text{Re}(\omega^2) = 2\cos\frac{4\pi}{5}
-\]
-
-Substituting:
-\[
-1 + 2\cos\frac{2\pi}{5} + 2\cos\frac{4\pi}{5} = 0
-\]
-
-Rearranging:
-\[
-\cos\frac{2\pi}{5} + \cos\frac{4\pi}{5} = -\frac{1}{2} \quad \square
-\]
-
-\textbf{Geometric interpretation:} The fifth roots of unity form a regular pentagon centered at the origin on the unit circle. The sum of all five vertices is zero (centroid at origin), which gives us the algebraic identity. The cosine sum represents the sum of the real parts of two of these roots.
+Therefore $\cos\frac{2\pi}{5} + \cos\frac{4\pi}{5} = -\frac{1}{2}$. \quad $\square$
 \end{solution}
 
 \begin{problem}[Cube Roots of Unity Properties]
@@ -849,37 +776,7 @@ Therefore:
 = 37 + 6(-1) = 37 - 6 = 31 \quad \square
 \]
 
-\textbf{Part (d):} Show $(1 + \omega^2)^3 (2 + 3\omega + 3\omega^2) = 1$
-
-From part (a): $1 + \omega + \omega^2 = 0$, so:
-\[
-1 + \omega^2 = -\omega
-\]
-
-Therefore:
-\[
-(1 + \omega^2)^3 = (-\omega)^3 = -\omega^3 = -1
-\]
-
-Now simplify the second factor. From $1 + \omega + \omega^2 = 0$:
-\[
-\omega + \omega^2 = -1
-\]
-
-So:
-\begin{align*}
-2 + 3\omega + 3\omega^2 &= 2 + 3(\omega + \omega^2)\\
-&= 2 + 3(-1)\\
-&= 2 - 3\\
-&= -1
-\end{align*}
-
-Therefore:
-\[
-(1 + \omega^2)^3 (2 + 3\omega + 3\omega^2) = (-1)(-1) = 1 \quad \square
-\]
-
-\textbf{Summary:} All four identities follow from the fundamental properties $\omega^3 = 1$ and $1 + \omega + \omega^2 = 0$.
+\textbf{Part (d):} From (a), $1+\omega^2=-\omega$, so $(1+\omega^2)^3=(-\omega)^3=-\omega^3=-1$. Also, $2+3\omega+3\omega^2=2+3(-1)=-1$. Therefore $(1+\omega^2)^3(2+3\omega+3\omega^2)=(-1)(-1)=1$. \quad $\square$
 \end{solution}
 
 \begin{problem}[Circle Locus in Complex Plane]
@@ -894,70 +791,11 @@ Let $z = x + iy$ where $x, y \in \mathbb{R}$. Express $\frac{1}{z}$ and $\frac{1
 \end{hint}
 
 \begin{solution}[Sketch]
-Let $z = x + iy$ where $x, y \in \mathbb{R}$ with $z \neq 0$.
-
-\textbf{Step 1: Calculate $\frac{1}{z}$ and $\frac{1}{\bar{z}}$}
-
-The conjugate is $\bar{z} = x - iy$.
-
-Calculate $\frac{1}{z}$ by multiplying by the conjugate:
+Let $z = x + iy$. Then:
 \[
-\frac{1}{z} = \frac{1}{x+iy} = \frac{x-iy}{(x+iy)(x-iy)} = \frac{x-iy}{x^2+y^2}
+\frac{1}{z} - \frac{1}{\bar{z}} = \frac{x-iy}{x^2+y^2} - \frac{x+iy}{x^2+y^2} = \frac{-2iy}{x^2+y^2}
 \]
-
-Similarly:
-\[
-\frac{1}{\bar{z}} = \frac{1}{x-iy} = \frac{x+iy}{(x-iy)(x+iy)} = \frac{x+iy}{x^2+y^2}
-\]
-
-\textbf{Step 2: Calculate the difference}
-
-\begin{align*}
-\frac{1}{z} - \frac{1}{\bar{z}} &= \frac{x-iy}{x^2+y^2} - \frac{x+iy}{x^2+y^2}\\
-&= \frac{(x-iy) - (x+iy)}{x^2+y^2}\\
-&= \frac{-2iy}{x^2+y^2}\\
-&= \frac{-2y}{x^2+y^2} \cdot i
-\end{align*}
-
-\textbf{Step 3: Apply the given condition}
-
-Given that $\frac{1}{z} - \frac{1}{\bar{z}} = i$:
-\[
-\frac{-2y}{x^2+y^2} \cdot i = i
-\]
-
-Since both sides are purely imaginary (assuming $i \neq 0$), we can equate the coefficients:
-\[
-\frac{-2y}{x^2+y^2} = 1
-\]
-
-Multiply both sides by $(x^2 + y^2)$:
-\[
--2y = x^2 + y^2
-\]
-
-Rearrange:
-\[
-x^2 + y^2 + 2y = 0
-\]
-
-Complete the square for $y$:
-\[
-x^2 + (y^2 + 2y + 1) - 1 = 0
-\]
-\[
-x^2 + (y + 1)^2 = 1
-\]
-
-\textbf{Step 4: Identify the circle}
-
-The equation $x^2 + (y+1)^2 = 1$ represents a circle with:
-\begin{itemize}[leftmargin=*]
-  \item Center: $(0, -1)$ or $-i$ in complex notation
-  \item Radius: $1$
-\end{itemize}
-
-Therefore, the locus is a \textbf{circle centered at $-i$ with radius 1}.
+Given this equals $i$: $\frac{-2y}{x^2+y^2}=1 \implies x^2+y^2+2y=0 \implies x^2+(y+1)^2=1$. This is a circle centered at $-i$ with radius $1$.
 
 \vspace{0.5em}
 \begin{center}
@@ -1059,37 +897,9 @@ z^2 + w^2 &= z^2 + (iz)^2\\
 &= 0 \quad \square
 \end{align*}
 
-\textbf{Part (b):} Find the complex numbers for $B$ and $C$
+\textbf{(b)} $C$: $w = iz = i(2+i) = 2i-1 = -1+2i$. $B$: $B = A+C = (2+i)+(-1+2i) = 1+3i$.
 
-Calculate $C$:
-\[
-w = iz = i(2+i) = 2i + i^2 = 2i - 1 = -1 + 2i
-\]
-
-Calculate $B$ using vector addition. In the square $OABC$:
-\[
-\overrightarrow{OB} = \overrightarrow{OA} + \overrightarrow{AB} = \overrightarrow{OA} + \overrightarrow{OC}
-\]
-
-Therefore:
-\[
-B = A + C = (2+i) + (-1+2i) = 1 + 3i
-\]
-
-\textbf{Answers:}
-\begin{itemize}[leftmargin=*]
-  \item $C = -1 + 2i$
-  \item $B = 1 + 3i$
-\end{itemize}
-
-\textbf{Part (c):} Find $\overrightarrow{AC}$
-
-The vector from $A$ to $C$ is:
-\[
-\overrightarrow{AC} = C - A = (-1+2i) - (2+i) = -3 + i
-\]
-
-\textbf{Answer:} $\overrightarrow{AC} = -3 + i$
+\textbf{(c)} $\overrightarrow{AC} = C-A = (-1+2i)-(2+i) = -3+i$.
 
 \vspace{0.5em}
 \begin{center}
@@ -1157,14 +967,6 @@ The vector from $A$ to $C$ is:
   }
 \end{tikzpicture}
 \end{center}
-\vspace{0.5em}
-
-\textbf{Verification:} 
-\begin{itemize}[leftmargin=*]
-  \item All sides have length $|z| = \sqrt{5}$: Check $|A| = |C| = |B-A| = |B-C| = \sqrt{5}$ \checkmark
-  \item All angles are $90°$ \checkmark
-  \item $z^2 + w^2 = (2+i)^2 + (-1+2i)^2 = (3+4i) + (-3-4i) = 0$ \checkmark
-\end{itemize}
 \end{solution}
 
 \begin{problem}[Square ABCD Vertices with Complex Numbers]
@@ -1176,57 +978,9 @@ The vector from $A$ to $B$ is $\overrightarrow{AB} = B - A = (4+13i) - (9+i) = -
 \end{hint}
 
 \begin{solution}[Sketch]
-\textbf{Given:} Square $ABCD$ with $A = 9+i$ and $B = 4+13i$.
+$\overrightarrow{AB} = B-A = (4+13i)-(9+i) = -5+12i$. Rotate by $90°$: $\overrightarrow{BC} = i(-5+12i) = -12-5i$. Thus $C = B+\overrightarrow{BC} = (4+13i)+(-12-5i) = -8+8i$. Similarly, $D = A+\overrightarrow{BC} = (9+i)+(-12-5i) = -3-4i$.
 
-\textbf{Step 1: Find the side vector}
-
-The vector from $A$ to $B$ is:
-\[
-\overrightarrow{AB} = B - A = (4+13i) - (9+i) = -5 + 12i
-\]
-
-\textbf{Step 2: Find vertex $C$}
-
-To go from $B$ to $C$, we rotate the vector $\overrightarrow{AB}$ by $90°$ counterclockwise (multiply by $i$):
-\[
-\overrightarrow{BC} = i \cdot \overrightarrow{AB} = i(-5+12i) = -5i + 12i^2 = -5i - 12 = -12 - 5i
-\]
-
-Therefore:
-\[
-C = B + \overrightarrow{BC} = (4+13i) + (-12-5i) = -8 + 8i
-\]
-
-\textbf{Step 3: Find vertex $D$}
-
-Method 1 - Using rotation from $C$:
-\[
-\overrightarrow{CD} = i \cdot \overrightarrow{BC} = i(-12-5i) = -12i - 5i^2 = -12i + 5 = 5 - 12i
-\]
-\[
-D = C + \overrightarrow{CD} = (-8+8i) + (5-12i) = -3 - 4i
-\]
-
-Method 2 - Using parallelogram property ($\overrightarrow{AD} = \overrightarrow{BC}$):
-\[
-D = A + \overrightarrow{AD} = A + \overrightarrow{BC} = (9+i) + (-12-5i) = -3 - 4i
-\]
-
-\textbf{Answers:}
-\begin{itemize}[leftmargin=*]
-  \item $C = -8 + 8i$
-  \item $D = -3 - 4i$
-\end{itemize}
-
-\textbf{Verification:} Check that all sides have equal length:
-\begin{align*}
-|AB| &= |-5+12i| = \sqrt{25+144} = \sqrt{169} = 13\\
-|BC| &= |-12-5i| = \sqrt{144+25} = \sqrt{169} = 13\\
-|CD| &= |5-12i| = \sqrt{25+144} = \sqrt{169} = 13\\
-|DA| &= |A-D| = |(9+i)-(-3-4i)| = |12+5i| = \sqrt{144+25} = 13 \quad \checkmark
-\end{align*}
-
-All sides have length 13, confirming our answer.
+\textbf{Answers:} $C = -8+8i$, $D = -3-4i$.
 \end{solution}
 
 \begin{problem}[Square ABCD Vector Relationship]
@@ -1240,35 +994,9 @@ Use the fact that in a square, consecutive sides are equal in length and perpend
 \end{hint}
 
 \begin{solution}[Proof]
-\textbf{Given:} Square $ABCD$ with vertices represented by complex numbers $a, b, c, d$.
-
-\textbf{Goal:} Prove $c = (1+i)d - ia$
-
-\textbf{Step 1: Use the square property}
-
-In a square $ABCD$, the vector from $D$ to $C$ is obtained by rotating the vector from $A$ to $D$ by $90°$ counterclockwise:
+In square $ABCD$, $\overrightarrow{DC} = i \cdot \overrightarrow{AD}$ (rotation by $90°$). Thus:
 \[
-\overrightarrow{DC} = i \cdot \overrightarrow{AD}
+c-d = i(d-a) = id-ia \implies c = d+id-ia = (1+i)d-ia \quad \square
 \]
-
-\textbf{Step 2: Express in terms of complex numbers}
-
-\[
-c - d = i(d - a)
-\]
-
-\textbf{Step 3: Solve for $c$}
-
-\begin{align*}
-c - d &= i(d - a)\\
-c - d &= id - ia\\
-c &= d + id - ia\\
-c &= d(1 + i) - ia\\
-c &= (1+i)d - ia \quad \square
-\end{align*}
-
-Therefore: $c = (1+i)d - ia$ \quad $\square$
-
-\textbf{Geometric interpretation:} This identity relates the positions of vertices $C$, $D$, and $A$ of a square using complex number operations. The term $(1+i)d$ represents $d$ plus its $90°$ rotation, while $-ia$ adjusts for the position of vertex $A$.
 \end{solution}
 
