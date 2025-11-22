@@ -1,0 +1,39 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Outputs
+outputs/
+
+# Prompt file
+# Prompt.md
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+
+# Project specific files 
+
+TODO/
+TODO/*
+Enigma.mp3
+inputs/
+tmp/*
+outputs/
+bloggings/
+*.json
+
