@@ -1,0 +1,200 @@
+\begin{problem}[Geometric Proof with Complex Numbers]
+Points $A$ and $B$ represent complex numbers $z$ and $w$ on a circle centered at $O$. Point $C$ represents $z+w$ and also lies on the circle. Show geometrically that $\angle AOB = \frac{2\pi}{3}$.
+\end{problem}
+
+\begin{solution}
+Given that $|z| = |w| = |z+w| = r$ (the radius of the circle), we need to find $\angle AOB$.
+
+Since $OACB$ forms a parallelogram (by vector addition), and we know:
+\begin{itemize}[leftmargin=*]
+  \item $OA = |z| = r$
+  \item $OB = |w| = r$
+  \item $OC = |z+w| = r$
+  \item $AC = |w| = r$ (opposite side of parallelogram)
+  \item $BC = |z| = r$ (opposite side of parallelogram)
+\end{itemize}
+
+All sides of the rhombus $OACB$ have length $r$. Moreover, diagonal $OC$ also has length $r$.
+
+Consider triangle $OAC$: all three sides have length $r$ (since $OA = AC = OC = r$), so it is equilateral. Therefore, $\angle AOC = \frac{\pi}{3}$.
+
+Similarly, triangle $OBC$ has $OB = BC = OC = r$, so it is also equilateral. Therefore, $\angle BOC = \frac{\pi}{3}$.
+
+Thus:
+\[
+\angle AOB = \angle AOC + \angle BOC = \frac{\pi}{3} + \frac{\pi}{3} = \frac{2\pi}{3}.
+\]
+\end{solution}
+
+\begin{takeaways}
+When complex numbers are represented geometrically, vector addition corresponds to the parallelogram law. A rhombus with all sides equal to its diagonal consists of two equilateral triangles.
+\end{takeaways}
+
+\begin{problem}[Complex Division and Real Parts]
+Let $z = 2(\cos \theta + i \sin \theta)$. Show that the real part of $\frac{1}{1-z}$ is $\frac{1-2\cos\theta}{5-4\cos\theta}$.
+\end{problem}
+
+\begin{solution}
+First, compute $1 - z$:
+\[
+1 - z = 1 - 2(\cos\theta + i\sin\theta) = (1-2\cos\theta) - 2i\sin\theta.
+\]
+
+To find $\frac{1}{1-z}$, multiply numerator and denominator by the conjugate of $1-z$:
+\[
+\frac{1}{1-z} = \frac{1}{(1-2\cos\theta) - 2i\sin\theta} \cdot \frac{(1-2\cos\theta) + 2i\sin\theta}{(1-2\cos\theta) + 2i\sin\theta}
+\]
+\[
+= \frac{(1-2\cos\theta) + 2i\sin\theta}{(1-2\cos\theta)^2 + (2\sin\theta)^2}.
+\]
+
+Compute the denominator:
+\begin{align*}
+(1-2\cos\theta)^2 + 4\sin^2\theta &= 1 - 4\cos\theta + 4\cos^2\theta + 4\sin^2\theta \\
+&= 1 - 4\cos\theta + 4(\cos^2\theta + \sin^2\theta) \\
+&= 1 - 4\cos\theta + 4 \\
+&= 5 - 4\cos\theta.
+\end{align*}
+
+Therefore:
+\[
+\frac{1}{1-z} = \frac{(1-2\cos\theta) + 2i\sin\theta}{5-4\cos\theta}.
+\]
+
+The real part is:
+\[
+\text{Re}\left(\frac{1}{1-z}\right) = \frac{1-2\cos\theta}{5-4\cos\theta}.
+\]
+\end{solution}
+
+\begin{takeaways}
+To find the real part of a complex fraction, rationalize by multiplying by the conjugate of the denominator. Use the identity $\cos^2\theta + \sin^2\theta = 1$ to simplify.
+\end{takeaways}
+
+\begin{problem}[Finding Complex Roots of Polynomials]
+Two zeros of $P(x) = x^4 - 12x^3 + 59x^2 - 138x + 130$ are $a+ib$ and $a+2ib$ where $a, b$ are real and $b>0$. Find $a$ and $b$.
+\end{problem}
+
+\begin{solution}
+Since $P(x)$ has real coefficients, complex roots occur in conjugate pairs. If $a+ib$ is a root, then $a-ib$ is also a root. Similarly, if $a+2ib$ is a root, then $a-2ib$ is also a root.
+
+Therefore, the four roots are: $a+ib$, $a-ib$, $a+2ib$, $a-2ib$.
+
+By Vieta's formulas, the sum of roots equals the negative of the coefficient of $x^3$ divided by the leading coefficient:
+\[
+(a+ib) + (a-ib) + (a+2ib) + (a-2ib) = 4a = 12,
+\]
+so $a = 3$.
+
+The product of roots equals the constant term:
+\[
+[(a+ib)(a-ib)][(a+2ib)(a-2ib)] = (a^2+b^2)(a^2+4b^2) = 130.
+\]
+
+Substituting $a = 3$:
+\[
+(9+b^2)(9+4b^2) = 130.
+\]
+
+Expand:
+\[
+81 + 36b^2 + 9b^2 + 4b^4 = 130,
+\]
+\[
+4b^4 + 45b^2 + 81 = 130,
+\]
+\[
+4b^4 + 45b^2 - 49 = 0.
+\]
+
+Let $u = b^2$:
+\[
+4u^2 + 45u - 49 = 0.
+\]
+
+Using the quadratic formula:
+\[
+u = \frac{-45 \pm \sqrt{45^2 + 4 \cdot 4 \cdot 49}}{8} = \frac{-45 \pm \sqrt{2025 + 784}}{8} = \frac{-45 \pm \sqrt{2809}}{8} = \frac{-45 \pm 53}{8}.
+\]
+
+Since $u = b^2 \ge 0$: $u = \frac{-45+53}{8} = \frac{8}{8} = 1$.
+
+Therefore, $b^2 = 1$, so $b = 1$ (since $b > 0$).
+
+Thus, $a = 3$ and $b = 1$.
+\end{solution}
+
+\begin{takeaways}
+For polynomials with real coefficients, complex roots come in conjugate pairs. Use Vieta's formulas (sum and product of roots) along with conjugate pairing to set up equations for unknown parameters.
+\end{takeaways}
+
+\begin{problem}[Trigonometric Identity via Complex Numbers]
+Show that $\cos 4\theta = \cos^4\theta - 6\cos^2\theta\sin^2\theta + \sin^4\theta$.
+\end{problem}
+
+\begin{solution}
+By De Moivre's theorem:
+\[
+(\cos\theta + i\sin\theta)^4 = \cos 4\theta + i\sin 4\theta.
+\]
+
+Expand the left side using the binomial theorem:
+\begin{align*}
+(\cos\theta + i\sin\theta)^4 &= \sum_{k=0}^{4} \binom{4}{k} \cos^{4-k}\theta (i\sin\theta)^k \\
+&= \cos^4\theta + 4i\cos^3\theta\sin\theta + 6i^2\cos^2\theta\sin^2\theta \\
+&\quad + 4i^3\cos\theta\sin^3\theta + i^4\sin^4\theta \\
+&= \cos^4\theta + 4i\cos^3\theta\sin\theta - 6\cos^2\theta\sin^2\theta \\
+&\quad - 4i\cos\theta\sin^3\theta + \sin^4\theta \\
+&= (\cos^4\theta - 6\cos^2\theta\sin^2\theta + \sin^4\theta) \\
+&\quad + i(4\cos^3\theta\sin\theta - 4\cos\theta\sin^3\theta).
+\end{align*}
+
+Equating real parts:
+\[
+\cos 4\theta = \cos^4\theta - 6\cos^2\theta\sin^2\theta + \sin^4\theta.
+\]
+\end{solution}
+
+\begin{takeaways}
+De Moivre's theorem combined with binomial expansion provides a systematic way to derive multiple-angle formulas. Equate real and imaginary parts to obtain separate identities for $\cos(n\theta)$ and $\sin(n\theta)$.
+\end{takeaways}
+
+\begin{problem}[Conjugate Pairs and De Moivre]
+Show that $(1+i)^n + (1-i)^n = 2(\sqrt{2})^n \cos \frac{n\pi}{4}$.
+\end{problem}
+
+\begin{solution}
+First, convert $1+i$ and $1-i$ to polar form.
+
+For $1+i$:
+\[
+|1+i| = \sqrt{2}, \quad \arg(1+i) = \frac{\pi}{4},
+\]
+so $1+i = \sqrt{2}\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right) = \sqrt{2}e^{i\pi/4}$.
+
+For $1-i$:
+\[
+|1-i| = \sqrt{2}, \quad \arg(1-i) = -\frac{\pi}{4},
+\]
+so $1-i = \sqrt{2}\left(\cos\left(-\frac{\pi}{4}\right) + i\sin\left(-\frac{\pi}{4}\right)\right) = \sqrt{2}e^{-i\pi/4}$.
+
+By De Moivre's theorem:
+\[
+(1+i)^n = (\sqrt{2})^n e^{in\pi/4} = (\sqrt{2})^n\left(\cos\frac{n\pi}{4} + i\sin\frac{n\pi}{4}\right),
+\]
+\[
+(1-i)^n = (\sqrt{2})^n e^{-in\pi/4} = (\sqrt{2})^n\left(\cos\frac{n\pi}{4} - i\sin\frac{n\pi}{4}\right).
+\]
+
+Adding:
+\begin{align*}
+(1+i)^n + (1-i)^n &= (\sqrt{2})^n\left[\left(\cos\frac{n\pi}{4} + i\sin\frac{n\pi}{4}\right) + \left(\cos\frac{n\pi}{4} - i\sin\frac{n\pi}{4}\right)\right] \\
+&= (\sqrt{2})^n \cdot 2\cos\frac{n\pi}{4} \\
+&= 2(\sqrt{2})^n\cos\frac{n\pi}{4}.
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+For conjugate pairs $z$ and $\bar{z}$ in polar form, $z^n + \bar{z}^n = 2|z|^n\cos(n\arg(z))$ because the imaginary parts cancel. This is useful for simplifying sums involving conjugate powers.
+\end{takeaways}
+

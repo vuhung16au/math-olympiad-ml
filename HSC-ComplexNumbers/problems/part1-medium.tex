@@ -1,0 +1,181 @@
+\begin{problem}[Rhombus on Argand Diagram]
+On the Argand diagram, the complex numbers $0$, $1+i\sqrt{3}$, $\sqrt{3}+i$ and $z$ form a rhombus. Find $z$ in the form $a+ib$.
+\end{problem}
+
+\begin{solution}
+In a rhombus, opposite sides are parallel and equal in length. Since we have vertices at $0$, $1+i\sqrt{3}$, $\sqrt{3}+i$, and $z$, and they form a rhombus with one vertex at the origin, we need $z$ to be the fourth vertex.
+
+The rhombus has sides:
+\begin{itemize}[leftmargin=*]
+  \item From $0$ to $1+i\sqrt{3}$
+  \item From $0$ to $\sqrt{3}+i$
+  \item From $1+i\sqrt{3}$ to $z$
+  \item From $\sqrt{3}+i$ to $z$
+\end{itemize}
+
+For a rhombus with one vertex at the origin, if two adjacent vertices are at $w_1$ and $w_2$, then the fourth vertex is at $w_1 + w_2$ (by the parallelogram law).
+
+Therefore:
+\[
+z = (1+i\sqrt{3}) + (\sqrt{3}+i) = (1+\sqrt{3}) + i(\sqrt{3}+1) = (1+\sqrt{3})(1+i).
+\]
+Simplifying:
+\[
+z = 1 + \sqrt{3} + i(1 + \sqrt{3}) = (1+\sqrt{3})(1+i).
+\]
+Therefore, $z = (1+\sqrt{3}) + i(1+\sqrt{3})$.
+\end{solution}
+
+\begin{takeaways}
+In the Argand diagram, a parallelogram (including rhombus) with vertices at $0$, $w_1$, $w_2$, and $z$ has its fourth vertex at $z = w_1 + w_2$ by the parallelogram law of vector addition.
+\end{takeaways}
+
+\begin{problem}[De Moivre's Theorem for Real Results]
+Given $-\sqrt{3}-i = 2\left(\cos\left(-\frac{5\pi}{6}\right) + i \sin\left(-\frac{5\pi}{6}\right)\right)$, show that $(-\sqrt{3}-i)^6$ is a real number.
+\end{problem}
+
+\begin{solution}
+Using De Moivre's theorem:
+\[
+(-\sqrt{3}-i)^6 = \left[2\left(\cos\left(-\frac{5\pi}{6}\right) + i\sin\left(-\frac{5\pi}{6}\right)\right)\right]^6
+\]
+\[
+= 2^6\left(\cos\left(6 \cdot \left(-\frac{5\pi}{6}\right)\right) + i\sin\left(6 \cdot \left(-\frac{5\pi}{6}\right)\right)\right)
+\]
+\[
+= 64\left(\cos(-5\pi) + i\sin(-5\pi)\right).
+\]
+
+Now evaluate the trigonometric values:
+\[
+\cos(-5\pi) = \cos(5\pi) = \cos(\pi) = -1,
+\]
+\[
+\sin(-5\pi) = -\sin(5\pi) = -\sin(\pi) = 0.
+\]
+
+Therefore:
+\[
+(-\sqrt{3}-i)^6 = 64(-1 + 0i) = -64.
+\]
+Since the imaginary part is zero, $(-\sqrt{3}-i)^6 = -64$ is indeed a real number.
+\end{solution}
+
+\begin{takeaways}
+A complex number in polar form $r(\cos\theta + i\sin\theta)$ raised to power $n$ has argument $n\theta$. If $n\theta$ is a multiple of $\pi$, then $\sin(n\theta) = 0$ and the result is real.
+\end{takeaways}
+
+\begin{problem}[Division in Polar Form]
+Let $\alpha = 1+i\sqrt{3}$ and $\beta = 1+i$. Find the modulus-argument form of $\frac{\alpha}{\beta}$.
+\end{problem}
+
+\begin{solution}
+First, convert $\alpha$ and $\beta$ to polar form.
+
+For $\alpha = 1 + i\sqrt{3}$:
+\[
+|\alpha| = \sqrt{1^2 + (\sqrt{3})^2} = \sqrt{1 + 3} = 2,
+\]
+\[
+\arg(\alpha) = \tan^{-1}\left(\frac{\sqrt{3}}{1}\right) = \frac{\pi}{3}.
+\]
+So $\alpha = 2\left(\cos\frac{\pi}{3} + i\sin\frac{\pi}{3}\right)$.
+
+For $\beta = 1 + i$:
+\[
+|\beta| = \sqrt{1^2 + 1^2} = \sqrt{2},
+\]
+\[
+\arg(\beta) = \tan^{-1}(1) = \frac{\pi}{4}.
+\]
+So $\beta = \sqrt{2}\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right)$.
+
+Now compute the quotient:
+\[
+\frac{\alpha}{\beta} = \frac{2}{\sqrt{2}} \left(\cos\left(\frac{\pi}{3} - \frac{\pi}{4}\right) + i\sin\left(\frac{\pi}{3} - \frac{\pi}{4}\right)\right)
+\]
+\[
+= \sqrt{2}\left(\cos\frac{\pi}{12} + i\sin\frac{\pi}{12}\right).
+\]
+\end{solution}
+
+\begin{takeaways}
+For division in polar form: $\frac{r_1(\cos\theta_1 + i\sin\theta_1)}{r_2(\cos\theta_2 + i\sin\theta_2)} = \frac{r_1}{r_2}(\cos(\theta_1-\theta_2) + i\sin(\theta_1-\theta_2))$.
+\end{takeaways}
+
+\begin{problem}[Powers and Cartesian Form]
+Express $(\sqrt{3}-i)^7$ in the form $x+iy$.
+\end{problem}
+
+\begin{solution}
+First, convert $\sqrt{3}-i$ to polar form:
+\[
+r = \sqrt{(\sqrt{3})^2 + (-1)^2} = \sqrt{3+1} = 2,
+\]
+\[
+\theta = \tan^{-1}\left(\frac{-1}{\sqrt{3}}\right) = -\frac{\pi}{6} \text{ (fourth quadrant)}.
+\]
+So $\sqrt{3}-i = 2\left(\cos\left(-\frac{\pi}{6}\right) + i\sin\left(-\frac{\pi}{6}\right)\right)$.
+
+Apply De Moivre's theorem:
+\[
+(\sqrt{3}-i)^7 = 2^7\left(\cos\left(7 \cdot \left(-\frac{\pi}{6}\right)\right) + i\sin\left(7 \cdot \left(-\frac{\pi}{6}\right)\right)\right)
+\]
+\[
+= 128\left(\cos\left(-\frac{7\pi}{6}\right) + i\sin\left(-\frac{7\pi}{6}\right)\right).
+\]
+
+Now evaluate:
+\[
+\cos\left(-\frac{7\pi}{6}\right) = \cos\left(\frac{7\pi}{6}\right) = \cos\left(\pi + \frac{\pi}{6}\right) = -\cos\frac{\pi}{6} = -\frac{\sqrt{3}}{2},
+\]
+\[
+\sin\left(-\frac{7\pi}{6}\right) = -\sin\left(\frac{7\pi}{6}\right) = -\sin\left(\pi + \frac{\pi}{6}\right) = -\left(-\sin\frac{\pi}{6}\right) = \frac{1}{2}.
+\]
+
+Therefore:
+\[
+(\sqrt{3}-i)^7 = 128\left(-\frac{\sqrt{3}}{2} + i\cdot\frac{1}{2}\right) = -64\sqrt{3} + 64i.
+\]
+\end{solution}
+
+\begin{takeaways}
+To compute high powers of complex numbers: (1) Convert to polar form. (2) Apply De Moivre's theorem. (3) Simplify the angle using periodicity and reference angles. (4) Convert back to Cartesian form.
+\end{takeaways}
+
+\begin{problem}[Locus as a Curve]
+The point $P$ on the Argand diagram represents $z=x+iy$ satisfying $z^2 + \bar{z}^2 = 8$. Find the equation of the curve in terms of $x$ and $y$ and state what type of curve it is.
+\end{problem}
+
+\begin{solution}
+Let $z = x + iy$, so $\bar{z} = x - iy$.
+
+Then:
+\[
+z^2 = (x+iy)^2 = x^2 - y^2 + 2ixy,
+\]
+\[
+\bar{z}^2 = (x-iy)^2 = x^2 - y^2 - 2ixy.
+\]
+
+Therefore:
+\[
+z^2 + \bar{z}^2 = (x^2 - y^2 + 2ixy) + (x^2 - y^2 - 2ixy) = 2(x^2 - y^2) = 8.
+\]
+
+Simplifying:
+\[
+x^2 - y^2 = 4.
+\]
+
+This can be rewritten as:
+\[
+\frac{x^2}{4} - \frac{y^2}{4} = 1,
+\]
+which is a rectangular hyperbola with center at the origin, with branches along the $x$-axis at $x = \pm 2$.
+\end{solution}
+
+\begin{takeaways}
+To find the locus of points satisfying a complex equation: (1) Substitute $z = x+iy$ and $\bar{z} = x-iy$. (2) Expand and simplify. (3) Equate real and imaginary parts. (4) Identify the curve type.
+\end{takeaways}
+

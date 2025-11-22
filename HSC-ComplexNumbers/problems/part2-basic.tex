@@ -1,0 +1,204 @@
+\begin{problem}[Multiplication by $i$ as Rotation]
+The complex number $z$ is shown on the Argand diagram. Which of the following best represents $iz$?
+\end{problem}
+
+\begin{hint}
+Multiplication by $i$ rotates a complex number by $90^\circ$ counterclockwise about the origin while preserving its modulus.
+\end{hint}
+
+\begin{solution}[Sketch]
+If $z = a + bi$, then $iz = i(a+bi) = ai + bi^2 = -b + ai$. This represents a $90^\circ$ counterclockwise rotation. On the diagram, $iz$ would be at position $(-b, a)$ if $z$ is at $(a, b)$.
+\end{solution}
+
+\begin{problem}[Quadrant Determination]
+The Argand diagram shows $z$ in the first quadrant and $w$ in the second quadrant. Which complex number could lie in the 3rd quadrant: $-w$, $2iz$, $\bar{z}$, or $w - z$?
+\end{problem}
+
+\begin{hint}
+Check the signs of the real and imaginary parts of each option. Third quadrant means both parts are negative.
+\end{hint}
+
+\begin{solution}[Sketch]
+If $z$ is in Q1: $\text{Re}(z)>0, \text{Im}(z)>0$. If $w$ is in Q2: $\text{Re}(w)<0, \text{Im}(w)>0$. Then $w-z$ has $\text{Re}(w-z) = \text{Re}(w)-\text{Re}(z) < 0$ and $\text{Im}(w-z) = \text{Im}(w)-\text{Im}(z)$ which could be negative if $\text{Im}(z) > \text{Im}(w)$. Answer: (D) $w-z$.
+\end{solution}
+
+\begin{problem}[Doubling the Argument]
+A complex number $z$ is on the unit circle. Which diagram best shows $\frac{z^2}{|z|}$?
+\end{problem}
+
+\begin{hint}
+If $z = e^{i\theta}$, then $z^2 = e^{i2\theta}$ and $|z| = 1$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Since $|z| = 1$, we have $\frac{z^2}{|z|} = z^2$. By De Moivre's theorem, $z^2$ has the same modulus but double the argument. If $z$ is at angle $\theta$, then $z^2$ is at angle $2\theta$.
+\end{solution}
+
+\begin{problem}[Polynomial with Complex Zero]
+Which polynomial could have $2+i$ as a zero, given that $k$ is real: (A) $x^3 - 4x^2 + kx$, (B) $x^3 - 4x^2 + kx + 5$, (C) $x^3 - 5x^2 + kx$, (D) $x^3 - 5x^2 + kx + 5$?
+\end{problem}
+
+\begin{hint}
+If the polynomial has real coefficients and $2+i$ is a root, then $2-i$ must also be a root. The sum of these roots is $4$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Roots $2+i$ and $2-i$ sum to $4$. Let the third root be $r$. Then sum of all roots $= 4+r$. From the coefficient of $x^2$: $-(4+r) = -4$ or $-5$. If $-4$, then $r=0$, giving option (A) or (B). Check: $(x)(x^2-4x+5) = x^3-4x^2+5x$, but we need $+5$ constant. Answer: (B).
+\end{solution}
+
+\begin{problem}[Squaring Complex Numbers]
+Let $z = 3+i$ and $w = 2-5i$. Find $z^2$ in the form $x+iy$.
+\end{problem}
+
+\begin{hint}
+Use $(a+bi)^2 = a^2 - b^2 + 2abi$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$z^2 = (3+i)^2 = 9 + 6i + i^2 = 9 + 6i - 1 = 8 + 6i$.
+\end{solution}
+
+\begin{problem}[Conjugate Subtraction]
+Let $z = 4+i$ and $w = \bar{z}$. Find $w-z$ in the form $x+iy$.
+\end{problem}
+
+\begin{hint}
+If $z = 4+i$, then $\bar{z} = 4-i$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$w = \bar{z} = 4-i$. Then $w-z = (4-i) - (4+i) = -2i$.
+\end{solution}
+
+\begin{problem}[Division by Complex Number]
+Let $z = 2+i$. Find $\frac{4}{z}$ in the form $x+iy$.
+\end{problem}
+
+\begin{hint}
+Multiply numerator and denominator by $\bar{z} = 2-i$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\frac{4}{2+i} = \frac{4(2-i)}{(2+i)(2-i)} = \frac{8-4i}{4-i^2} = \frac{8-4i}{5} = \frac{8}{5} - \frac{4}{5}i$.
+\end{solution}
+
+\begin{problem}[Complex Multiplication]
+Let $z = 3+i$ and $w = 1-i$. Find $zw$ in the form $x+iy$.
+\end{problem}
+
+\begin{hint}
+Use FOIL: $(a+bi)(c+di) = ac - bd + (ad+bc)i$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$zw = (3+i)(1-i) = 3 - 3i + i - i^2 = 3 - 2i + 1 = 4 - 2i$.
+\end{solution}
+
+\begin{problem}[Another Division]
+Let $w = 1-i$. Find $\frac{6}{w}$ in the form $x+iy$.
+\end{problem}
+
+\begin{hint}
+Multiply by conjugate: $\bar{w} = 1+i$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\frac{6}{1-i} = \frac{6(1+i)}{(1-i)(1+i)} = \frac{6+6i}{1-i^2} = \frac{6+6i}{2} = 3+3i$.
+\end{solution}
+
+\begin{problem}[Dividing by Conjugate]
+Let $z = 4+i$ and $w = \bar{z}$. Find $\frac{z}{w}$ in the form $x+iy$.
+\end{problem}
+
+\begin{hint}
+$w = 4-i$, so $\frac{z}{w} = \frac{4+i}{4-i}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\frac{4+i}{4-i} = \frac{(4+i)(4+i)}{(4-i)(4+i)} = \frac{16+8i+i^2}{16-i^2} = \frac{15+8i}{17} = \frac{15}{17} + \frac{8}{17}i$.
+\end{solution}
+
+\begin{problem}[Modulus from Polar Form]
+Let $z = \frac{1}{2}(\cos \theta + i \sin \theta)$. Find $|z|$.
+\end{problem}
+
+\begin{hint}
+For $z = r(\cos\theta + i\sin\theta)$, we have $|z| = r$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$|z| = \frac{1}{2}$.
+\end{solution}
+
+\begin{problem}[Division in Cartesian Form]
+Express $\frac{3-i}{2+i}$ in the form $x+iy$.
+\end{problem}
+
+\begin{hint}
+Multiply by $\frac{2-i}{2-i}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\frac{3-i}{2+i} = \frac{(3-i)(2-i)}{(2+i)(2-i)} = \frac{6-3i-2i+i^2}{4-i^2} = \frac{5-5i}{5} = 1-i$.
+\end{solution}
+
+\begin{problem}[Addition with Conjugate]
+Let $z=1+3i$ and $w=2-i$. Find $z+\bar{w}$.
+\end{problem}
+
+\begin{hint}
+$\bar{w} = 2+i$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$z+\bar{w} = (1+3i) + (2+i) = 3+4i$.
+\end{solution}
+
+\begin{problem}[Product with Conjugate]
+Evaluate $w\bar{z}$ given $w=-1+4i$ and $z=2-i$.
+\end{problem}
+
+\begin{hint}
+$\bar{z} = 2+i$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$w\bar{z} = (-1+4i)(2+i) = -2-i+8i+4i^2 = -2+7i-4 = -6+7i$.
+\end{solution}
+
+\begin{problem}[Polar Form of Given Number]
+Let $w=1+i\sqrt{3}$. Express $w$ in modulus-argument form.
+\end{problem}
+
+\begin{hint}
+$|w| = \sqrt{1+3} = 2$, and $\arg(w) = \tan^{-1}(\sqrt{3}/1) = \pi/3$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$w = 2\left(\cos\frac{\pi}{3} + i\sin\frac{\pi}{3}\right)$.
+\end{solution}
+
+\begin{problem}[Showing a Power is Real]
+Let $z = \sqrt{3}-i$. Show that $z^6$ is real.
+\end{problem}
+
+\begin{hint}
+Convert to polar form: $z = 2(\cos(-\pi/6) + i\sin(-\pi/6))$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$z^6 = 2^6(\cos(-\pi) + i\sin(-\pi)) = 64(-1 + 0i) = -64$, which is real.
+\end{solution}
+
+\begin{problem}[Principal Argument]
+Evaluate $\text{Arg}(z)$ for $z=-\sqrt{3}+i$.
+\end{problem}
+
+\begin{hint}
+$z$ is in the second quadrant. Use $\tan\theta = \frac{1}{-\sqrt{3}} = -\frac{1}{\sqrt{3}}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Reference angle is $\pi/6$. Since $z$ is in Q2, $\text{Arg}(z) = \pi - \pi/6 = \frac{5\pi}{6}$.
+\end{solution}
+

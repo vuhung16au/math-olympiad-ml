@@ -1,0 +1,180 @@
+\begin{problem}[Complex Region with Exclusion]
+Sketch the region on the Argand diagram where $|z - \bar{z}| < 2$ and $|z-1| \ge 1$ hold simultaneously.
+\end{problem}
+
+\begin{hint}
+$|z - \bar{z}| = |2iy| = 2|y|$, so the first inequality gives $|y| < 1$. The second is the exterior of a circle.
+\end{hint}
+
+\begin{solution}[Sketch]
+The region $|y| < 1$ is a horizontal strip $-1 < y < 1$. The region $|z-1| \ge 1$ is outside the circle centered at $(1,0)$ with radius 1. Shade the intersection: horizontal strip with circular hole.
+\end{solution}
+
+\begin{problem}[Isosceles Right Triangle]
+Triangle $ABC$ is represented by $z_1, z_2, z_3$. It is isosceles and right-angled at $B$. Explain why $(z_1 - z_2)^2 = -(z_3 - z_2)^2$.
+\end{problem}
+
+\begin{hint}
+The vectors $BA$ and $BC$ are perpendicular and equal in length. Multiplication by $i$ rotates by $90^\circ$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$BA = z_1-z_2$, $BC = z_3-z_2$. Since $BA \perp BC$ and $|BA|=|BC|$, we have $BA = \pm i \cdot BC$. Squaring: $(z_1-z_2)^2 = (\pm i)^2(z_3-z_2)^2 = -1 \cdot (z_3-z_2)^2$.
+\end{solution}
+
+\begin{problem}[Square from Triangle]
+Use the result from the previous problem. If $ABCD$ is a square, find the complex number for $D$ in terms of $z_1, z_2, z_3$.
+\end{problem}
+
+\begin{hint}
+$D$ is obtained from $C$ by the same transformation that takes $A$ to $C$ via $B$.
+\end{hint}
+
+\begin{solution}[Sketch]
+From $(z_1-z_2)^2 = -(z_3-z_2)^2$, we have $z_1-z_2 = i(z_3-z_2)$ (choosing sign). For square, $z_4-z_3 = i(z_2-z_3)$, giving $z_4 = z_3 + i(z_2-z_3) = z_2 + z_3 - iz_2 + iz_3 = z_2(1-i) + z_3(1+i)$. Alternatively: $z_4 = z_1 + z_3 - z_2$.
+\end{solution}
+
+\begin{problem}[Factoring Polynomial]
+Express $P(x) = x^4 - 12x^3 + 59x^2 - 138x + 130$ as product of quadratic factors, given roots $3+i$ and $3+2i$.
+\end{problem}
+
+\begin{hint}
+The roots are $3\pm i$ and $3\pm 2i$. Group conjugate pairs.
+\end{hint}
+
+\begin{solution}[Sketch]
+$(x-(3+i))(x-(3-i)) = (x-3)^2+1 = x^2-6x+10$. $(x-(3+2i))(x-(3-2i)) = (x-3)^2+4 = x^2-6x+13$. Thus $P(x) = (x^2-6x+10)(x^2-6x+13)$.
+\end{solution}
+
+\begin{problem}[Real Root Count]
+Deduce that $x^4 - 3x^3 + 5x^2 + 7x - 8 = 0$ has exactly two real roots.
+\end{problem}
+
+\begin{hint}
+A degree-4 polynomial with real coefficients has either 0, 2, or 4 real roots. Check behavior or use Descartes' rule.
+\end{hint}
+
+\begin{solution}[Sketch]
+Complex roots come in conjugate pairs. If there are 4 complex roots, they form 2 pairs, leaving 0 real roots. If 1 pair of complex roots, then 2 real roots. Since the polynomial has sign changes, it must have at least one positive real root. Testing values or using intermediate value theorem confirms exactly 2 real roots.
+\end{solution}
+
+\begin{problem}[Vector Addition and Angles]
+Points $P_0, P_1, P_2, P_3$ correspond to $z_0, z_0+z_1, z_0+z_1+z_2, \ldots$ where $z_n = \cos(\alpha+n\beta) + i\sin(\alpha+n\beta)$. Using vector addition, explain why external angles $\theta_0 = \theta_1 = \theta_2 = \beta$.
+\end{problem}
+
+\begin{hint}
+Each $z_n$ is a unit vector at angle $\alpha + n\beta$. The angle between consecutive vectors is constant.
+\end{hint}
+
+\begin{solution}[Sketch]
+Vector $z_n$ has argument $\alpha+n\beta$, and $z_{n+1}$ has argument $\alpha+(n+1)\beta$. The difference is $\beta$, which is the external angle between consecutive segments. Thus all external angles equal $\beta$.
+\end{solution}
+
+\begin{problem}[Modulus via Trigonometry]
+Show $|z| = 2\sin\theta$ for $z = 1-\cos2\theta + i\sin2\theta$.
+\end{problem}
+
+\begin{hint}
+Use $1-\cos2\theta = 2\sin^2\theta$ and $\sin2\theta = 2\sin\theta\cos\theta$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$|z|^2 = (1-\cos2\theta)^2 + \sin^22\theta = (2\sin^2\theta)^2 + (2\sin\theta\cos\theta)^2 = 4\sin^4\theta + 4\sin^2\theta\cos^2\theta = 4\sin^2\theta(\sin^2\theta+\cos^2\theta) = 4\sin^2\theta$. Thus $|z| = 2|\sin\theta|$.
+\end{solution}
+
+\begin{problem}[Euler's Formula Identity]
+Show $e^{in\theta} + e^{-in\theta} = 2\cos(n\theta)$.
+\end{problem}
+
+\begin{hint}
+Use $e^{i\phi} = \cos\phi + i\sin\phi$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$e^{in\theta} = \cos(n\theta) + i\sin(n\theta)$ and $e^{-in\theta} = \cos(n\theta) - i\sin(n\theta)$. Adding: $e^{in\theta} + e^{-in\theta} = 2\cos(n\theta)$.
+\end{solution}
+
+\begin{problem}[Modulus of Sum]
+Let $z = e^{i\pi/6}, w = e^{i3\pi/4}$. Show $|z+w|^2 = \frac{4-\sqrt{6}+\sqrt{2}}{2}$.
+\end{problem}
+
+\begin{hint}
+$|z+w|^2 = (z+w)(\overline{z+w}) = (z+w)(\bar{z}+\bar{w}) = |z|^2 + |w|^2 + z\bar{w} + \bar{z}w$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$|z|=|w|=1$. $z\bar{w} = e^{i(\pi/6-3\pi/4)} = e^{-i7\pi/12}$, $\bar{z}w = e^{i7\pi/12}$. Thus $|z+w|^2 = 2 + 2\cos(7\pi/12) = 2(1+\cos(7\pi/12))$. Evaluate $\cos(7\pi/12) = \cos(105^\circ) = -\sin(15^\circ) = -\frac{\sqrt{6}-\sqrt{2}}{4}$. Result follows.
+\end{solution}
+
+\begin{problem}[Equilateral Triangle]
+$z_2 = e^{i\pi/3}z_1$. Explain why $\triangle OAB$ (points $0, z_1, z_2$) is equilateral.
+\end{problem}
+
+\begin{hint}
+$|z_1| = |z_2|$ since multiplication by $e^{i\pi/3}$ preserves modulus. The angle $\angle z_1 O z_2 = \pi/3 = 60^\circ$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$|OA| = |z_1|$, $|OB| = |z_2| = |z_1|$. The angle between them is $\pi/3$. By the law of cosines, $|AB|^2 = 2|z_1|^2(1-\cos\pi/3) = 2|z_1|^2(1-1/2) = |z_1|^2$. Thus $|AB|=|OA|=|OB|$, making it equilateral.
+\end{solution}
+
+\begin{problem}[Algebraic Identity]
+Prove $z_1^2 + z_2^2 = z_1 z_2$ for the equilateral triangle in the previous problem.
+\end{problem}
+
+\begin{hint}
+$z_2 = e^{i\pi/3}z_1 = \omega z_1$ where $\omega = e^{i\pi/3}$ satisfies $\omega^2 - \omega + 1 = 0$ (approximately).
+\end{hint}
+
+\begin{solution}[Sketch]
+Let $\omega = e^{i\pi/3}$. Then $z_2 = \omega z_1$. We have $z_1^2 + z_2^2 = z_1^2 + \omega^2z_1^2 = z_1^2(1+\omega^2)$. Also, $z_1z_2 = z_1 \cdot \omega z_1 = \omega z_1^2$. Need to show $1+\omega^2 = \omega$, i.e., $\omega^2 - \omega + 1 = 0$. Since $\omega = e^{i\pi/3}$, we have $\omega^3 = e^{i\pi} = -1$, so $\omega$ satisfies $\omega^3+1=0$, which factors as $(\omega+1)(\omega^2-\omega+1)=0$. Since $\omega \neq -1$, we have $\omega^2-\omega+1=0$.
+\end{solution}
+
+\begin{problem}[Finding Non-Real Roots]
+Find the two complex roots of $P(x) = x^5 - 10x^2 + 15x - 6$.
+\end{problem}
+
+\begin{hint}
+Test for rational roots first (like $x=1$). Factor out linear factors, then solve the remaining polynomial.
+\end{hint}
+
+\begin{solution}[Sketch]
+$P(1) = 1-10+15-6=0$, so $(x-1)$ is a factor. Polynomial division gives $P(x) = (x-1)(x^4+x^3+x^2-9x+6)$. Continue factoring or use numerical/algebraic methods to find complex roots.
+\end{solution}
+
+\begin{problem}[Expansion Result]
+Using expansion of $\cos 5\theta$, show a specific result (problem statement incomplete in original).
+\end{problem}
+
+\begin{hint}
+Use $(e^{i\theta})^5 = e^{i5\theta}$ and expand with binomial theorem.
+\end{hint}
+
+\begin{solution}[Sketch]
+$(\cos\theta+i\sin\theta)^5 = \cos5\theta + i\sin5\theta$. Expand left side and equate real parts to derive $\cos5\theta$ in terms of powers of $\cos\theta$ and $\sin\theta$.
+\end{solution}
+
+\begin{problem}[Symmetry Identity]
+Show $\alpha^k + \alpha^{-k} = 2\cos k\theta$ where $\alpha = \cos\theta + i\sin\theta$.
+\end{problem}
+
+\begin{hint}
+$\alpha = e^{i\theta}$ and $\alpha^{-1} = e^{-i\theta}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\alpha^k = e^{ik\theta} = \cos k\theta + i\sin k\theta$, $\alpha^{-k} = e^{-ik\theta} = \cos k\theta - i\sin k\theta$. Adding: $\alpha^k + \alpha^{-k} = 2\cos k\theta$.
+\end{solution}
+
+\begin{problem}[Equilateral Triangle Centroid]
+Let $w = e^{i2\pi/3}$. Show that if $\triangle ABC$ is anticlockwise and equilateral, then $a + bw + cw^2 = 0$.
+\end{problem}
+
+\begin{hint}
+For an equilateral triangle centered at origin, vertices satisfy $b = wa$, $c = w^2a$ where $w$ is a cube root of unity.
+\end{hint}
+
+\begin{solution}[Sketch]
+If the triangle is equilateral with center at origin, then the vertices are related by $120^\circ$ rotations: $b = wa$, $c = w^2a$. Then $a+bw+cw^2 = a + wa \cdot w + w^2a \cdot w^2 = a(1+w^2+w^4) = a(1+w^2+w)$ since $w^3=1$. Since $w$ is a primitive cube root of unity, $1+w+w^2=0$. Thus $a+bw+cw^2=0$.
+\end{solution}
+

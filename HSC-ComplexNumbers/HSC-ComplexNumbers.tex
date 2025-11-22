@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+% Custom styles shared with HSC-Collections
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: Complex Numbers Mastery}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet compiles high quality complex numbers problems curated specifically for the HSC Mathematics Extension~2 syllabus. Every problem explores fundamental and advanced techniques involving complex numbers---from basic arithmetic and form conversions to De Moivre's theorem, Argand diagram geometry, polynomial roots, and geometric transformations. Detailed reasoning showcases common techniques such as modulus-argument manipulation, Euler's formula applications, and geometric interpretations.
+
+\subsection{Target Audience}
+The explanations are crafted for Extension~2 students aiming to deepen their complex number skills. Each solution explicitly states the conversion steps, theorem applications, and geometric reasoning so that high-school learners can follow every transition.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the overview and complex numbers primer before attempting the problems.
+  \item Attempt problems in Part~1 without hints; compare against the detailed solutions to understand model reasoning.
+  \item Use the upside-down hints in Part~2 only after making a genuine attempt.
+  \item Revisit problems after a few days and try to re-derive the arguments without notes to reinforce technique.
+\end{itemize}
+
+\subsection{Complex Numbers Primer}
+
+\subsubsection{Key Theorems and Formulas}
+
+\textbf{Euler's Theorem:}
+\[
+e^{i\theta} = \cos\theta + i\sin\theta
+\]
+This connects exponential form with polar form and is fundamental to many proofs.
+
+\textbf{De Moivre's Theorem:}
+For any integer $n$,
+\[
+(r(\cos\theta + i\sin\theta))^n = r^n(\cos(n\theta) + i\sin(n\theta))
+\]
+or equivalently, $(r e^{i\theta})^n = r^n e^{in\theta}$.
+
+This theorem is invaluable for:
+\begin{itemize}[leftmargin=*]
+  \item Finding powers of complex numbers
+  \item Finding $n$-th roots of complex numbers
+  \item Proving trigonometric identities
+\end{itemize}
+
+\textbf{Modulus and Argument:}
+For $z = x + iy$:
+\begin{itemize}[leftmargin=*]
+  \item Modulus: $|z| = \sqrt{x^2 + y^2}$
+  \item Argument: $\arg(z) = \tan^{-1}(y/x)$ (with appropriate quadrant adjustments)
+  \item Properties: $|z_1 z_2| = |z_1||z_2|$, $\arg(z_1 z_2) = \arg(z_1) + \arg(z_2)$ (modulo $2\pi$)
+\end{itemize}
+
+\subsubsection{Forms of Complex Numbers}
+
+\textbf{Cartesian Form:} $z = x + iy$
+
+\textbf{Polar Form:} $z = r(\cos\theta + i\sin\theta)$ where $r = |z|$ and $\theta = \arg(z)$
+
+\textbf{Exponential Form:} $z = re^{i\theta}$
+
+Conversions between these forms are essential skills tested frequently in Extension~2.
+
+\subsubsection{Argand Diagram}
+
+The Argand diagram visualizes complex numbers as points in the plane, with the real part on the horizontal axis and the imaginary part on the vertical axis. Geometric interpretations include:
+\begin{itemize}[leftmargin=*]
+  \item $|z_1 - z_2|$ represents the distance between $z_1$ and $z_2$
+  \item $(z_1 + z_2)/2$ represents the midpoint
+  \item Multiplication by $e^{i\theta}$ rotates by angle $\theta$
+  \item Multiplication by $r$ scales by factor $r$
+\end{itemize}
+
+\subsubsection{Notation and Conventions}
+
+Throughout this booklet:
+\begin{itemize}[leftmargin=*]
+  \item $\bar{z}$ denotes the complex conjugate of $z$
+  \item $\text{Re}(z)$ and $\text{Im}(z)$ denote the real and imaginary parts
+  \item $\arg(z)$ denotes the principal argument in $(-\pi, \pi]$
+  \item Angles are in radians unless otherwise specified
+\end{itemize}
+
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains three sets of problems---basic, medium, and advanced. Each set provides five problems. For every problem we present a comprehensive solution without any hints so that learners focus on the full reasoning trail.
+
+\subsection{Basic Complex Numbers Problems}
+\input{problems/part1-basic}
+
+\subsection{Medium Complex Numbers Problems}
+\input{problems/part1-medium}
+
+\subsection{Advanced Complex Numbers Problems}
+\input{problems/part1-advanced}
+
+\section{Part 2: Problems and Solutions (Concise + Hints)}
+Part~2 revisits three new sets of problems. Solutions are intentionally briefer to encourage student ownership, and every problem includes an upside-down hint.
+
+\subsection{Basic Complex Numbers Problems}
+\input{problems/part2-basic}
+
+\subsection{Medium Complex Numbers Problems}
+\input{problems/part2-medium}
+
+\subsection{Advanced Complex Numbers Problems}
+\input{problems/part2-advanced}
+
+\section{Conclusion}
+Complex numbers are a core component of the HSC Mathematics Extension~2 course. Mastery comes from repeated, reflective practice across all forms---Cartesian, polar, and exponential---and understanding their geometric interpretations. Use these problems to sharpen the ability to convert between forms, apply De Moivre's theorem, interpret loci geometrically, and communicate complete mathematical reasoning. Best of luck with your studies and HSC examinations!
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-ComplexNumbers}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-ComplexNumbers}
+
+\end{document}
+

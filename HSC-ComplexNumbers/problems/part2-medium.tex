@@ -1,0 +1,204 @@
+\begin{problem}[Region with Real and Argument Constraints]
+Let $R$ be the region in the complex plane defined by $1 < \text{Re}(z) \le 3$ and $\frac{\pi}{6} \le \text{Arg}(z) < \frac{\pi}{3}$. Sketch this region.
+\end{problem}
+
+\begin{hint}
+The region is bounded by two vertical lines ($x=1$ and $x=3$) and two rays from the origin at angles $\pi/6$ and $\pi/3$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Draw vertical lines at $x=1$ (dashed, excluded) and $x=3$ (solid, included). Draw rays from origin at angles $30^\circ$ (solid) and $60^\circ$ (dashed). The region is the intersection in the first quadrant.
+\end{solution}
+
+\begin{problem}[Statement Analysis]
+Which statement about complex numbers is true? (Multiple options about arguments, exponential form, etc.)
+\end{problem}
+
+\begin{hint}
+Check each statement. Remember that $\text{Arg}(z_1z_2) = \text{Arg}(z_1) + \text{Arg}(z_2)$ only modulo $2\pi$.
+\end{hint}
+
+\begin{solution}[Sketch]
+(A) False: arctan doesn't account for quadrant. (B) False: principal argument addition requires modulo $2\pi$ adjustment. (C) False: $\theta_1 = \theta_2 + 2\pi k$ for integer $k$. (D) False: same issue as (A). The correct answer depends on careful reading; typically (C) is closest if equality means modulo $2\pi$.
+\end{solution}
+
+\begin{problem}[Roots of Unity Application]
+Suppose that $x + \frac{1}{x} = -1$. What is the value of $x^{2016} + \frac{1}{x^{2016}}$?
+\end{problem}
+
+\begin{hint}
+Solve $x^2 + x + 1 = 0$ to find $x = e^{i2\pi/3}$ or $x = e^{-i2\pi/3}$. These are cube roots of unity.
+\end{hint}
+
+\begin{solution}[Sketch]
+$x^2+x+1=0$ gives $x = e^{\pm i2\pi/3}$. Since $x^3=1$, we have $x^{2016} = x^{3 \cdot 672} = 1$. Thus $x^{2016} + \frac{1}{x^{2016}} = 1 + 1 = 2$.
+\end{solution}
+
+\begin{problem}[Shading a Region]
+On an Argand diagram, shade the region where $0 \le \text{Re}(z) \le 2$ and $|z - (1-i)| \le 2$ both hold.
+\end{problem}
+
+\begin{hint}
+The first inequality is a vertical strip. The second is a disk centered at $(1,-1)$ with radius 2.
+\end{hint}
+
+\begin{solution}[Sketch]
+Draw vertical lines at $x=0$ and $x=2$. Draw circle centered at $(1,-1)$ with radius 2. Shade the intersection.
+\end{solution}
+
+\begin{problem}[Modulus-Argument Division]
+Given $\frac{1+\sqrt{3}i}{1+i} = \frac{1+\sqrt{3}}{2} + \frac{\sqrt{3}-1}{2}i$, express $\frac{1+i\sqrt{3}}{1+i}$ in modulus-argument form by converting both numerator and denominator.
+\end{problem}
+
+\begin{hint}
+$|1+i\sqrt{3}| = 2$, $\arg(1+i\sqrt{3}) = \pi/3$; $|1+i| = \sqrt{2}$, $\arg(1+i) = \pi/4$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\frac{1+i\sqrt{3}}{1+i} = \frac{2}{\sqrt{2}}\left(\cos\left(\frac{\pi}{3}-\frac{\pi}{4}\right) + i\sin\left(\frac{\pi}{3}-\frac{\pi}{4}\right)\right) = \sqrt{2}\left(\cos\frac{\pi}{12} + i\sin\frac{\pi}{12}\right)$.
+\end{solution}
+
+\begin{problem}[Power in Polar Form]
+Let $\beta = 1 - i\sqrt{3}$. Express $\beta^5$ in modulus-argument form.
+\end{problem}
+
+\begin{hint}
+$|\beta| = 2$, $\arg(\beta) = -\pi/3$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\beta = 2(\cos(-\pi/3) + i\sin(-\pi/3))$. Then $\beta^5 = 32(\cos(-5\pi/3) + i\sin(-5\pi/3)) = 32(\cos(\pi/3) + i\sin(\pi/3))$.
+\end{solution}
+
+\begin{problem}[Deriving Trigonometric Value]
+Using previous results, find the exact value of $\sin \frac{\pi}{12}$.
+\end{problem}
+
+\begin{hint}
+From $\frac{\alpha}{\beta} = \sqrt{2}(\cos\frac{\pi}{12} + i\sin\frac{\pi}{12})$, compute explicitly or use half-angle formulas.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\frac{\pi}{12} = \frac{\pi}{3} - \frac{\pi}{4}$. Using angle subtraction: $\sin\frac{\pi}{12} = \sin\frac{\pi}{3}\cos\frac{\pi}{4} - \cos\frac{\pi}{3}\sin\frac{\pi}{4} = \frac{\sqrt{3}}{2} \cdot \frac{\sqrt{2}}{2} - \frac{1}{2} \cdot \frac{\sqrt{2}}{2} = \frac{\sqrt{6}-\sqrt{2}}{4}$.
+\end{solution}
+
+\begin{problem}[Marking Rotated Point]
+Points $P(z)$ and $Q(w)$ are on the Argand diagram. Mark the point $R$ representing $iz$.
+\end{problem}
+
+\begin{hint}
+Multiply by $i$ rotates $90^\circ$ counterclockwise.
+\end{hint}
+
+\begin{solution}[Sketch]
+If $z$ is at $(a,b)$, then $iz$ is at $(-b,a)$. Draw accordingly.
+\end{solution}
+
+\begin{problem}[Conjugate Root Property]
+$2+i$ is a root of $P(z) = z^3 + rz^2 + sz + 20$ where $r,s$ are real. State why $2-i$ is also a root.
+\end{problem}
+
+\begin{hint}
+Polynomials with real coefficients have complex roots in conjugate pairs.
+\end{hint}
+
+\begin{solution}[Sketch]
+Since $P(z)$ has real coefficients, if $2+i$ is a root, then $\overline{2+i} = 2-i$ must also be a root.
+\end{solution}
+
+\begin{problem}[Factorizing Over Reals]
+Factorise $P(z) = z^3 + rz^2 + sz + 20$ over the real numbers, given roots $2+i$ and $2-i$.
+\end{problem}
+
+\begin{hint}
+$(z-(2+i))(z-(2-i)) = (z-2)^2 - (i)^2 = z^2 - 4z + 5$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$(z-2-i)(z-2+i) = z^2-4z+5$. Divide $P(z)$ by $z^2-4z+5$ to find the third factor. $P(z) = (z^2-4z+5)(z+4)$ after polynomial division.
+\end{solution}
+
+\begin{problem}[Vector Addition Point]
+Points $P(z)$ and $Q(w)$ are given. Mark point $T$ representing $z+w$.
+\end{problem}
+
+\begin{hint}
+Use parallelogram law: $T$ is the fourth vertex of parallelogram $OP TQ$.
+\end{hint}
+
+\begin{solution}[Sketch]
+From $O$ to $P$ is vector $z$, from $O$ to $Q$ is vector $w$. The sum $z+w$ is at the opposite corner of the parallelogram.
+\end{solution}
+
+\begin{problem}[Sum in Polar Form]
+Let $z = -2-2i$ and $w=3+i$. Express $z+w$ in modulus-argument form.
+\end{problem}
+
+\begin{hint}
+First find $z+w = 1-i$, then convert to polar.
+\end{hint}
+
+\begin{solution}[Sketch]
+$z+w = 1-i$. $|z+w| = \sqrt{2}$, $\arg(z+w) = -\pi/4$. So $z+w = \sqrt{2}(\cos(-\pi/4) + i\sin(-\pi/4))$.
+\end{solution}
+
+\begin{problem}[Division in Mixed Form]
+Express $\frac{z}{w}$ in form $x+iy$ where $z=-2-2i, w=3+i$.
+\end{problem}
+
+\begin{hint}
+$\frac{-2-2i}{3+i} = \frac{(-2-2i)(3-i)}{(3+i)(3-i)}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\frac{(-2-2i)(3-i)}{10} = \frac{-6+2i-6i+2i^2}{10} = \frac{-8-4i}{10} = -\frac{4}{5} - \frac{2}{5}i$.
+\end{solution}
+
+\begin{problem}[Sketching with Argument and Circle]
+Sketch the region: $-\frac{\pi}{4} \le \arg z \le 0$ and $|z - (1-i)| \le 1$.
+\end{problem}
+
+\begin{hint}
+The first is a wedge in the fourth quadrant. The second is a disk centered at $(1,-1)$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Draw rays at angles $-45^\circ$ and $0^\circ$ from origin. Draw circle centered at $(1,-1)$ radius 1. Shade intersection.
+\end{solution}
+
+\begin{problem}[High Power via De Moivre]
+Express $z^9$ in form $x+iy$ for $z=\sqrt{3}-i$.
+\end{problem}
+
+\begin{hint}
+$z = 2(\cos(-\pi/6) + i\sin(-\pi/6))$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$z^9 = 2^9(\cos(-3\pi/2) + i\sin(-3\pi/2)) = 512(0 + i) = 512i$.
+\end{solution}
+
+\begin{problem}[Polar Form of Specific Number]
+Write $z=-1+i\sqrt{3}$ in modulus-argument form.
+\end{problem}
+
+\begin{hint}
+$|z| = 2$, $z$ is in the second quadrant with reference angle $\pi/3$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$z = 2(\cos(2\pi/3) + i\sin(2\pi/3))$.
+\end{solution}
+
+\begin{problem}[Plotting a Squared Number]
+Given $|z|=2, \arg(z)=\frac{\pi}{4}$, plot $u=z^2$.
+\end{problem}
+
+\begin{hint}
+$|u| = |z|^2 = 4$, $\arg(u) = 2\arg(z) = \pi/2$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$u$ has modulus 4 and argument $\pi/2$, so $u = 4i$. Plot at $(0,4)$.
+\end{solution}
+

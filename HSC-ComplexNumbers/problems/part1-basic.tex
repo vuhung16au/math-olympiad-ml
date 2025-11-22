@@ -1,0 +1,137 @@
+\begin{problem}[Basic Complex Arithmetic]
+Let $z = 5 - i$ and $w = 2 + 3i$. What is the value of $2z + \overline{w}$?
+\end{problem}
+
+\begin{solution}
+First, compute $2z$:
+\[
+2z = 2(5 - i) = 10 - 2i.
+\]
+Next, find the conjugate of $w$:
+\[
+\overline{w} = \overline{2 + 3i} = 2 - 3i.
+\]
+Now add these results:
+\[
+2z + \overline{w} = (10 - 2i) + (2 - 3i) = 12 - 5i.
+\]
+Therefore, $2z + \overline{w} = 12 - 5i$.
+\end{solution}
+
+\begin{takeaways}
+The conjugate of $a+bi$ is $a-bi$. When adding complex numbers, combine real parts with real parts and imaginary parts with imaginary parts.
+\end{takeaways}
+
+\begin{problem}[Finding Square Roots]
+What value of $z$ satisfies $z^2 = 7 - 24i$?
+\end{problem}
+
+\begin{solution}
+Let $z = a + bi$ where $a, b$ are real. Then:
+\[
+z^2 = (a+bi)^2 = a^2 - b^2 + 2abi = 7 - 24i.
+\]
+Equating real and imaginary parts:
+\begin{align*}
+a^2 - b^2 &= 7 \\
+2ab &= -24.
+\end{align*}
+From the second equation: $ab = -12$, so $b = -\frac{12}{a}$.
+
+Substitute into the first equation:
+\[
+a^2 - \left(-\frac{12}{a}\right)^2 = 7 \implies a^2 - \frac{144}{a^2} = 7.
+\]
+Multiply by $a^2$:
+\[
+a^4 - 7a^2 - 144 = 0.
+\]
+Let $u = a^2$:
+\[
+u^2 - 7u - 144 = 0 \implies (u-16)(u+9) = 0.
+\]
+Since $u = a^2 \ge 0$, we have $u = 16$, so $a^2 = 16$ giving $a = \pm 4$.
+
+If $a = 4$: $b = -\frac{12}{4} = -3$, so $z = 4 - 3i$.
+
+If $a = -4$: $b = -\frac{12}{-4} = 3$, so $z = -4 + 3i$.
+
+Verify: $(4-3i)^2 = 16 - 24i + 9i^2 = 16 - 24i - 9 = 7 - 24i$. \checkmark
+
+Therefore, $z = 4 - 3i$ or $z = -4 + 3i$.
+\end{solution}
+
+\begin{takeaways}
+To find square roots of complex numbers in Cartesian form, let $z = a+bi$ and equate real and imaginary parts after expanding $z^2$. This gives a system of two equations in two unknowns.
+\end{takeaways}
+
+\begin{problem}[Complex Roots of Quadratics]
+Given that $z = 3 + i$ is a root of $z^2 + pz + q = 0$, where $p$ and $q$ are real, what are the values of $p$ and $q$?
+\end{problem}
+
+\begin{solution}
+Since the polynomial has real coefficients and $z = 3 + i$ is a root, its complex conjugate $\overline{z} = 3 - i$ must also be a root.
+
+By Vieta's formulas:
+\[
+p = -(z_1 + z_2) = -\bigl((3+i) + (3-i)\bigr) = -6,
+\]
+\[
+q = z_1 \cdot z_2 = (3+i)(3-i) = 9 - i^2 = 9 - (-1) = 10.
+\]
+Therefore, $p = -6$ and $q = 10$.
+\end{solution}
+
+\begin{takeaways}
+For polynomials with real coefficients, complex roots occur in conjugate pairs. Use Vieta's formulas: sum of roots $= -p$ and product of roots $= q$ for $z^2 + pz + q = 0$.
+\end{takeaways}
+
+\begin{problem}[Powers of $i$]
+Write $i^9$ in the form $a+ib$ where $a$ and $b$ are real.
+\end{problem}
+
+\begin{solution}
+Note the pattern of powers of $i$:
+\begin{align*}
+i^1 &= i \\
+i^2 &= -1 \\
+i^3 &= i^2 \cdot i = -i \\
+i^4 &= (i^2)^2 = 1 \\
+i^5 &= i^4 \cdot i = i
+\end{align*}
+The pattern repeats every 4 powers. To find $i^9$:
+\[
+9 = 4 \cdot 2 + 1,
+\]
+so $i^9 = i^{4 \cdot 2 + 1} = (i^4)^2 \cdot i = 1^2 \cdot i = i$.
+
+Therefore, $i^9 = 0 + 1i$, giving $a = 0$ and $b = 1$.
+\end{solution}
+
+\begin{takeaways}
+Powers of $i$ repeat with period 4: $i^1 = i$, $i^2 = -1$, $i^3 = -i$, $i^4 = 1$. Use division by 4 to find $i^n = i^{n \bmod 4}$.
+\end{takeaways}
+
+\begin{problem}[Polar Form Conversion]
+Write $1+i$ in the form $r(\cos \theta + i \sin \theta)$.
+\end{problem}
+
+\begin{solution}
+For $z = 1 + i$, first find the modulus:
+\[
+r = |z| = \sqrt{1^2 + 1^2} = \sqrt{2}.
+\]
+Next, find the argument. Since $z$ is in the first quadrant:
+\[
+\theta = \arg(z) = \tan^{-1}\left(\frac{1}{1}\right) = \tan^{-1}(1) = \frac{\pi}{4}.
+\]
+Therefore:
+\[
+1 + i = \sqrt{2}\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right).
+\]
+\end{solution}
+
+\begin{takeaways}
+To convert $z = x+iy$ to polar form: (1) Find modulus $r = \sqrt{x^2+y^2}$. (2) Find argument $\theta = \tan^{-1}(y/x)$ (adjust for quadrant). (3) Write $z = r(\cos\theta + i\sin\theta)$.
+\end{takeaways}
+
