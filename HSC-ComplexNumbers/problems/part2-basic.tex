@@ -1,13 +1,107 @@
 \begin{problem}[Multiplication by $i$ as Rotation]
-The complex number $z$ is shown on the Argand diagram. Which of the following best represents $iz$?
+Consider the complex number $z = 3 + 2i$ on the Argand diagram. Find the complex number $iz$ and describe its geometric relationship to $z$.
 \end{problem}
 
 \begin{hint}
-Multiplication by $i$ rotates a complex number by $90^\circ$ counterclockwise about the origin while preserving its modulus.
+Multiplication by $i$ rotates a complex number by $90°$ counterclockwise about the origin while preserving its modulus. If $z = a + bi$, calculate $iz$ algebraically.
 \end{hint}
 
 \begin{solution}[Sketch]
-If $z = a + bi$, then $iz = i(a+bi) = ai + bi^2 = -b + ai$. This represents a $90^\circ$ counterclockwise rotation. On the diagram, $iz$ would be at position $(-b, a)$ if $z$ is at $(a, b)$.
+\textbf{Algebraic calculation:}
+
+Given $z = 3 + 2i$, we compute:
+\begin{align*}
+iz &= i(3 + 2i)\\
+&= 3i + 2i^2\\
+&= 3i + 2(-1)\\
+&= -2 + 3i
+\end{align*}
+
+Therefore: $iz = -2 + 3i$
+
+\textbf{General rule:} If $z = a + bi$, then:
+\[
+iz = i(a+bi) = ai + bi^2 = -b + ai
+\]
+
+This shows that $(a,b) \to (-b,a)$, which is a $90°$ counterclockwise rotation.
+
+\textbf{Verification for our example:}
+- Original point: $z = 3 + 2i$ at position $(3, 2)$
+- Rotated point: $iz = -2 + 3i$ at position $(-2, 3)$
+- Check: $(3,2) \to (-2,3)$ is correct
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.5,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-3,0) -- (4,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-1) -- (0,4) node[above,font=\small] {Im};
+  
+  % Original complex number z = 3 + 2i
+  \coordinate (Z) at (3,2);
+  \draw[->,very thick,bookpurple] (0,0) -- (Z);
+  \fill[bookpurple] (Z) circle (2pt);
+  \node[bookpurple,font=\small,right] at (Z) {$z = 3+2i$};
+  
+  % Rotated complex number iz = -2 + 3i
+  \coordinate (IZ) at (-2,3);
+  \draw[->,very thick,bookred] (0,0) -- (IZ);
+  \fill[bookred] (IZ) circle (2pt);
+  \node[bookred,font=\small,left] at (IZ) {$iz = -2+3i$};
+  
+  % Show the rotation with a curved arrow
+  \draw[->,lawpurple,very thick] (Z) to[bend left=30] node[midway,above right,font=\scriptsize] {$\times i$} (IZ);
+  
+  % Show 90° rotation angle at origin
+  \draw[bookred!80,thick] (0.8,0) arc (0:90:0.8);
+  \node[bookred!80,font=\scriptsize] at (45:1.1) {$90°$};
+  
+  % Draw circles showing equal moduli
+  \pgfmathsetmacro{\modulus}{sqrt(3*3 + 2*2)}
+  \draw[dashed,warmstone!50,thin] (0,0) circle (\modulus);
+  
+  % Mark coordinates
+  \node[bookpurple,font=\tiny,below] at (Z) {$(3,2)$};
+  \node[bookred,font=\tiny,above left] at (IZ) {$(-2,3)$};
+  
+  % Draw projections (dashed lines)
+  \draw[dashed,bookpurple!30,thin] (Z) -- (3,0) node[below,font=\tiny] {$3$};
+  \draw[dashed,bookpurple!30,thin] (Z) -- (0,2) node[left,font=\tiny] {$2$};
+  \draw[dashed,bookred!30,thin] (IZ) -- (-2,0) node[below,font=\tiny] {$-2$};
+  \draw[dashed,bookred!30,thin] (IZ) -- (0,3) node[right,font=\tiny] {$3$};
+  
+  % Origin
+  \fill (0,0) circle (1pt);
+  \node[below left,font=\scriptsize] at (0,0) {$O$};
+  
+  % Add annotation box
+  \node[font=\scriptsize,align=left,draw=lawpurple!50,fill=white,rounded corners] at (3,3.5) {
+    \textbf{Multiplication by $i$:}\\
+    $z = a+bi \to iz = -b+ai$\\
+    Rotates $90°$ CCW\\
+    Preserves modulus
+  };
+  
+  % Grid for reference
+  \foreach \x in {-2,-1,1,2,3} {
+    \draw[warmstone!20,very thin] (\x,-1) -- (\x,4);
+  }
+  \foreach \y in {1,2,3} {
+    \draw[warmstone!20,very thin] (-3,\y) -- (4,\y);
+  }
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Key observations:}
+\begin{itemize}[leftmargin=*]
+  \item The modulus is preserved: $|z| = |iz| = \sqrt{13}$
+  \item The transformation $(a,b) \to (-b,a)$ is a $90°$ counterclockwise rotation
+  \item Both points lie on the same circle centered at the origin
+  \item This geometric property makes $i$ rotation in the complex plane
+\end{itemize}
+
 \end{solution}
 
 \begin{problem}[Quadrant Determination]
@@ -23,7 +117,117 @@ If $z$ is in Q1: $\text{Re}(z)>0, \text{Im}(z)>0$. If $w$ is in Q2: $\text{Re}(w
 \end{solution}
 
 \begin{problem}[Doubling the Argument]
-A complex number $z$ is on the unit circle. Which diagram best shows $\frac{z^2}{|z|}$?
+A complex number $z$ is on the unit circle at angle $\theta = 40°$. Which diagram best shows the location of $\frac{z^2}{|z|}$?
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=0.8,>=Stealth]
+  % OPTION A (CORRECT): z² at angle 2θ
+  \begin{scope}
+    % Draw axes
+    \draw[->,thick] (-1.2,0) -- (1.3,0) node[right,font=\tiny] {Re};
+    \draw[->,thick] (0,-1.2) -- (0,1.3) node[above,font=\tiny] {Im};
+    % Draw unit circle
+    \draw[lawpurple,thick] (0,0) circle (1);
+    % z at 40°
+    \coordinate (Z1) at ({cos(40)},{sin(40)});
+    \draw[->,thick,bookpurple] (0,0) -- (Z1);
+    \fill[blue] (Z1) circle (1.5pt);
+    \node[above right,font=\scriptsize] at (Z1) {$z$};
+    % z² at 80° (2θ)
+    \coordinate (Z2) at ({cos(80)},{sin(80)});
+    \draw[->,thick,bookred] (0,0) -- (Z2);
+    \fill[red] (Z2) circle (1.5pt);
+    \node[above left,font=\scriptsize] at (Z2) {$z^2$};
+    % Angles
+    \draw[bookpurple!70,thin] (0.3,0) arc (0:40:0.3);
+    \node[bookpurple!70,font=\tiny] at (0.45,0.12) {$40°$};
+    \draw[bookred!70,thin] (0.45,0) arc (0:80:0.45);
+    \node[bookred!70,font=\tiny] at (0.52,0.32) {$80°$};
+    % Label
+    \node[font=\small\bfseries] at (0,-1.5) {(A)};
+  \end{scope}
+  
+  % OPTION B: z² at angle θ/2 (halving)
+  \begin{scope}[xshift=3.2cm]
+    % Draw axes
+    \draw[->,thick] (-1.2,0) -- (1.3,0) node[right,font=\tiny] {Re};
+    \draw[->,thick] (0,-1.2) -- (0,1.3) node[above,font=\tiny] {Im};
+    % Draw unit circle
+    \draw[lawpurple,thick] (0,0) circle (1);
+    % z at 40°
+    \coordinate (Z1) at ({cos(40)},{sin(40)});
+    \draw[->,thick,bookpurple] (0,0) -- (Z1);
+    \fill[blue] (Z1) circle (1.5pt);
+    \node[above right,font=\scriptsize] at (Z1) {$z$};
+    % z² at 20° (θ/2)
+    \coordinate (Z2) at ({cos(20)},{sin(20)});
+    \draw[->,thick,bookred] (0,0) -- (Z2);
+    \fill[red] (Z2) circle (1.5pt);
+    \node[above right,font=\scriptsize] at (Z2) {$z^2$};
+    % Angles
+    \draw[bookpurple!70,thin] (0.3,0) arc (0:40:0.3);
+    \node[bookpurple!70,font=\tiny] at (0.45,0.12) {$40°$};
+    \draw[bookred!70,thin] (0.55,0) arc (0:20:0.55);
+    \node[bookred!70,font=\tiny] at (0.7,0.1) {$20°$};
+    % Label
+    \node[font=\small\bfseries] at (0,-1.5) {(B)};
+  \end{scope}
+  
+  % OPTION C: z² at angle θ + 90°
+  \begin{scope}[xshift=6.4cm]
+    % Draw axes
+    \draw[->,thick] (-1.2,0) -- (1.3,0) node[right,font=\tiny] {Re};
+    \draw[->,thick] (0,-1.2) -- (0,1.3) node[above,font=\tiny] {Im};
+    % Draw unit circle
+    \draw[lawpurple,thick] (0,0) circle (1);
+    % z at 40°
+    \coordinate (Z1) at ({cos(40)},{sin(40)});
+    \draw[->,thick,bookpurple] (0,0) -- (Z1);
+    \fill[blue] (Z1) circle (1.5pt);
+    \node[above right,font=\scriptsize] at (Z1) {$z$};
+    % z² at 130° (40° + 90°)
+    \coordinate (Z2) at ({cos(130)},{sin(130)});
+    \draw[->,thick,bookred] (0,0) -- (Z2);
+    \fill[red] (Z2) circle (1.5pt);
+    \node[above left,font=\scriptsize] at (Z2) {$z^2$};
+    % Angles
+    \draw[bookpurple!70,thin] (0.3,0) arc (0:40:0.3);
+    \node[bookpurple!70,font=\tiny] at (0.45,0.12) {$40°$};
+    \draw[bookred!70,thin] (0.4,0) arc (0:130:0.4);
+    \node[bookred!70,font=\tiny] at (-0.1,0.5) {$130°$};
+    % Label
+    \node[font=\small\bfseries] at (0,-1.5) {(C)};
+  \end{scope}
+  
+  % OPTION D: z² at angle -θ (reflection)
+  \begin{scope}[xshift=9.6cm]
+    % Draw axes
+    \draw[->,thick] (-1.2,0) -- (1.3,0) node[right,font=\tiny] {Re};
+    \draw[->,thick] (0,-1.2) -- (0,1.3) node[above,font=\tiny] {Im};
+    % Draw unit circle
+    \draw[lawpurple,thick] (0,0) circle (1);
+    % z at 40°
+    \coordinate (Z1) at ({cos(40)},{sin(40)});
+    \draw[->,thick,bookpurple] (0,0) -- (Z1);
+    \fill[blue] (Z1) circle (1.5pt);
+    \node[above right,font=\scriptsize] at (Z1) {$z$};
+    % z² at -40° (reflection)
+    \coordinate (Z2) at ({cos(-40)},{sin(-40)});
+    \draw[->,thick,bookred] (0,0) -- (Z2);
+    \fill[red] (Z2) circle (1.5pt);
+    \node[below right,font=\scriptsize] at (Z2) {$z^2$};
+    % Angles
+    \draw[bookpurple!70,thin] (0.3,0) arc (0:40:0.3);
+    \node[bookpurple!70,font=\tiny] at (0.45,0.12) {$40°$};
+    \draw[bookred!70,thin] (0.45,0) arc (0:-40:0.45);
+    \node[bookred!70,font=\tiny] at (0.58,-0.15) {$-40°$};
+    % Label
+    \node[font=\small\bfseries] at (0,-1.5) {(D)};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
 \end{problem}
 
 \begin{hint}
@@ -31,7 +235,17 @@ If $z = e^{i\theta}$, then $z^2 = e^{i2\theta}$ and $|z| = 1$.
 \end{hint}
 
 \begin{solution}[Sketch]
-Since $|z| = 1$, we have $\frac{z^2}{|z|} = z^2$. By De Moivre's theorem, $z^2$ has the same modulus but double the argument. If $z$ is at angle $\theta$, then $z^2$ is at angle $2\theta$.
+Since $|z| = 1$, we have $\frac{z^2}{|z|} = z^2$. By De Moivre's theorem, $z^2$ has the same modulus but double the argument. If $z$ is at angle $\theta = 40°$, then $z^2$ is at angle $2\theta = 80°$.
+
+\textbf{Analysis of options:}
+\begin{itemize}
+\item[(A)] \textbf{CORRECT}: Shows $z^2$ at angle $80° = 2 \times 40°$. This correctly applies De Moivre's theorem.
+\item[(B)] Incorrect: Shows $z^2$ at angle $20° = 40°/2$. This halves the angle instead of doubling it.
+\item[(C)] Incorrect: Shows $z^2$ at angle $130° = 40° + 90°$. This adds a fixed angle, which would represent multiplication by $i$.
+\item[(D)] Incorrect: Shows $z^2$ at angle $-40°$. This reflects across the real axis, which would give the conjugate $\bar{z}$.
+\end{itemize}
+
+\textbf{Answer: (A)}
 \end{solution}
 
 \begin{problem}[Polynomial with Complex Zero]
@@ -200,5 +414,144 @@ $z$ is in the second quadrant. Use $\tan\theta = \frac{1}{-\sqrt{3}} = -\frac{1}
 
 \begin{solution}[Sketch]
 Reference angle is $\pi/6$. Since $z$ is in Q2, $\text{Arg}(z) = \pi - \pi/6 = \frac{5\pi}{6}$.
+\end{solution}
+
+\begin{problem}[Polynomial with Complex Root]
+It is given that $z = 2 + i$ is a root of $z^3 + az^2 - 7z + 15 = 0$, where $a$ is a real number.
+
+What is the value of $a$?
+\begin{enumerate}[label=(\Alph*),leftmargin=*]
+  \item $-1$
+  \item $1$
+  \item $7$
+  \item $-7$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Since the polynomial has real coefficients and $2+i$ is a root, then $2-i$ must also be a root. Use Vieta's formulas or substitute the root directly.
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Method 1: Direct substitution}
+
+Since $z = 2+i$ is a root, substitute into the equation:
+\begin{align*}
+(2+i)^3 + a(2+i)^2 - 7(2+i) + 15 &= 0
+\end{align*}
+
+Calculate $(2+i)^2$:
+\[
+(2+i)^2 = 4 + 4i + i^2 = 4 + 4i - 1 = 3 + 4i
+\]
+
+Calculate $(2+i)^3 = (2+i)(3+4i)$:
+\[
+(2+i)(3+4i) = 6 + 8i + 3i + 4i^2 = 6 + 11i - 4 = 2 + 11i
+\]
+
+Substitute into the equation:
+\begin{align*}
+(2+11i) + a(3+4i) - 7(2+i) + 15 &= 0\\
+(2+11i) + (3a + 4ai) + (-14-7i) + 15 &= 0\\
+(2 + 3a - 14 + 15) + (11 + 4a - 7)i &= 0\\
+(3 + 3a) + (4 + 4a)i &= 0
+\end{align*}
+
+For this to equal zero, both real and imaginary parts must be zero:
+\begin{align*}
+\text{Real part: } &3 + 3a = 0 \implies a = -1\\
+\text{Imaginary part: } &4 + 4a = 0 \implies a = -1
+\end{align*}
+
+\textbf{Method 2: Using conjugate roots}
+
+Since the polynomial has real coefficients, if $2+i$ is a root, then $2-i$ is also a root.
+
+Let the third root be $r$. By Vieta's formulas, the sum of roots equals $-a$:
+\[
+(2+i) + (2-i) + r = -a
+\]
+\[
+4 + r = -a
+\]
+
+The product of roots equals $-15$:
+\[
+(2+i)(2-i) \cdot r = -15
+\]
+\[
+(4 - i^2) \cdot r = -15
+\]
+\[
+5r = -15
+\]
+\[
+r = -3
+\]
+
+Therefore: $4 + (-3) = -a \implies a = -1$
+
+\textbf{Answer: (A) $a = -1$}
+\end{solution}
+
+\begin{problem}[Power Using De Moivre's Theorem]
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+  \item Write the number $\sqrt{3} + i$ in modulus-argument form.
+  \item Hence, or otherwise, write $(\sqrt{3} + i)^7$ in exact Cartesian form.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i): Find $|z| = \sqrt{3+1} = 2$ and $\arg(z) = \tan^{-1}(1/\sqrt{3}) = \pi/6$. For part (ii): Use De Moivre's theorem to find $(re^{i\theta})^7 = r^7e^{i7\theta}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Part (i): Convert to modulus-argument form}
+
+Let $z = \sqrt{3} + i$.
+
+Calculate the modulus:
+\[
+|z| = \sqrt{(\sqrt{3})^2 + 1^2} = \sqrt{3 + 1} = \sqrt{4} = 2
+\]
+
+Calculate the argument. Since $z$ is in the first quadrant:
+\[
+\arg(z) = \tan^{-1}\left(\frac{1}{\sqrt{3}}\right) = \tan^{-1}\left(\frac{1}{\sqrt{3}}\right) = \frac{\pi}{6}
+\]
+
+Therefore, in modulus-argument form:
+\[
+z = 2\left(\cos\frac{\pi}{6} + i\sin\frac{\pi}{6}\right) = 2e^{i\pi/6}
+\]
+
+\textbf{Part (ii): Calculate $z^7$ using De Moivre's theorem}
+
+By De Moivre's theorem:
+\begin{align*}
+z^7 &= \left[2\left(\cos\frac{\pi}{6} + i\sin\frac{\pi}{6}\right)\right]^7\\
+&= 2^7\left(\cos\frac{7\pi}{6} + i\sin\frac{7\pi}{6}\right)\\
+&= 128\left(\cos\frac{7\pi}{6} + i\sin\frac{7\pi}{6}\right)
+\end{align*}
+
+Calculate the trigonometric values. The angle $\frac{7\pi}{6}$ is in the third quadrant (reference angle $\frac{\pi}{6}$):
+\[
+\cos\frac{7\pi}{6} = -\cos\frac{\pi}{6} = -\frac{\sqrt{3}}{2}
+\]
+\[
+\sin\frac{7\pi}{6} = -\sin\frac{\pi}{6} = -\frac{1}{2}
+\]
+
+Therefore:
+\begin{align*}
+z^7 &= 128\left(-\frac{\sqrt{3}}{2} + i\left(-\frac{1}{2}\right)\right)\\
+&= 128\left(-\frac{\sqrt{3}}{2} - \frac{i}{2}\right)\\
+&= -64\sqrt{3} - 64i
+\end{align*}
+
+\textbf{Answer:} $(\sqrt{3} + i)^7 = -64\sqrt{3} - 64i$
+
+\textbf{Verification (optional):} We can verify that $|z^7| = |z|^7 = 2^7 = 128$ and $\arg(z^7) = 7\arg(z) = 7 \cdot \frac{\pi}{6} = \frac{7\pi}{6}$ (in the range $(-\pi, \pi]$).
 \end{solution}
 

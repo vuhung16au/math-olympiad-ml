@@ -9,9 +9,34 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{angles,arrows.meta,calc,decorations.markings,quotes}
 
 % Custom styles shared with HSC-Collections
 \usepackage{styles/dl101-colors}
+
+% TikZ color styles using ACU/DL101 color scheme
+\tikzset{
+  acu primary/.style={color=bookpurple},
+  bookred/.style={color=bookred},
+  lawpurple/.style={color=lawpurple},
+  acu neutral/.style={color=warmstone},
+  acu dark/.style={color=deepcharcoal},
+  acu light/.style={color=softivory},
+  % Specific element styles
+  acu vector/.style={very thick, bookpurple},
+  acu vector2/.style={very thick, bookred},
+  acu vector3/.style={very thick, lawpurple},
+  acu vector4/.style={very thick, warmstone!80!black},
+  acu point/.style={fill=bookpurple},
+  acu point2/.style={fill=bookred},
+  acu circle/.style={very thick, lawpurple},
+  acu angle/.style={thick, bookred!80},
+  acu axis/.style={thick, deepcharcoal!60},
+  acu grid/.style={thin, warmstone!50},
+  acu fill/.style={fill=softivory!50},
+  acu region/.style={fill=bookpurple!10, opacity=0.3},
+}
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
 
@@ -56,6 +81,103 @@ e^{i\theta} = \cos\theta + i\sin\theta
 \]
 This connects exponential form with polar form and is fundamental to many proofs.
 
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[scale=1.6,>=Stealth]
+  % LEFT DIAGRAM: e^(ix) on unit circle
+  \begin{scope}
+    % Draw axes
+    \draw[->,thick] (-1.3,0) -- (1.5,0) node[right,font=\small] {Re};
+    \draw[->,thick] (0,-1.3) -- (0,1.5) node[above,font=\small] {Im};
+    
+    % Draw unit circle
+    \draw[acu circle] (0,0) circle (1);
+    
+    % Mark special point i
+    \fill[acu point] (0,1) circle (1pt);
+    \node[left,font=\small] at (0,1) {$i$};
+    
+    % Mark point 1
+    \fill[acu point] (1,0) circle (1pt);
+    \node[below right,font=\small] at (1,0) {$1$};
+    
+    % Draw e^(ix) at angle x = 50 degrees
+    \def\angle{50}
+    \coordinate (P) at ({cos(\angle)},{sin(\angle)});
+    
+    % Draw radius to point
+    \draw[->,acu vector] (0,0) -- (P);
+    \fill[acu point] (P) circle (1.2pt);
+    
+    % Draw projections (dashed)
+    \draw[dashed,deepcharcoal!60] (P) -- ({cos(\angle)},0) node[below,font=\scriptsize] {$\cos x$};
+    \draw[dashed,deepcharcoal!60] (P) -- (0,{sin(\angle)}) node[left,font=\scriptsize] {$\sin x$};
+    
+    % Draw angle arc
+    \draw[acu angle,->] (0.3,0) arc (0:\angle:0.3);
+    \node[bookred,font=\scriptsize] at ({0.42*cos(\angle/2)},{0.42*sin(\angle/2)}) {$x$};
+    
+    % Label the point
+    \node[above right,font=\small,align=left] at (P) {$e^{ix} =$\\[-0.1em]$\cos x + i\sin x$};
+    
+    % Radius label
+    \node[font=\scriptsize,bookpurple] at ({0.35*cos(\angle)},{0.35*sin(\angle)}) {$1$};
+    
+    % Origin
+    \fill (0,0) circle (0.8pt);
+    
+    % Title
+    \node[font=\small\bfseries] at (0,-1.6) {Unit Circle: $e^{ix}$};
+  \end{scope}
+  
+  % RIGHT DIAGRAM: General complex number z = |z|e^(iθ)
+  \begin{scope}[xshift=4.5cm]
+    % Draw axes
+    \draw[->,thick] (-0.3,0) -- (1.8,0) node[right,font=\small] {Re};
+    \draw[->,thick] (0,-0.3) -- (0,2.5) node[above,font=\small] {Im};
+    
+    % Draw arc (partial circle showing path)
+    \def\radius{1.5}
+    \def\thetaAngle{55}
+    \draw[acu circle] (0,0) ++ (\thetaAngle:\radius) arc (\thetaAngle:90:\radius);
+    \draw[acu circle] (\radius,0) arc (0:\thetaAngle:\radius);
+    
+    % Point z
+    \coordinate (Z) at ({\radius*cos(\thetaAngle)},{\radius*sin(\thetaAngle)});
+    
+    % Draw radius to z
+    \draw[->,acu vector] (0,0) -- (Z) node[midway,left,font=\scriptsize] {$|z|$};
+    \fill[acu point] (Z) circle (1.2pt);
+    
+    % Draw projections (dashed)
+    \draw[dashed,deepcharcoal!60] (Z) -- ({\radius*cos(\thetaAngle)},0) node[below,font=\scriptsize] {$a$};
+    \draw[dashed,deepcharcoal!60] (Z) -- (0,{\radius*sin(\thetaAngle)}) node[left,font=\scriptsize] {$b$};
+    
+    % Draw angle arc
+    \draw[acu angle,->] (0.4,0) arc (0:\thetaAngle:0.4);
+    \node[bookred,font=\scriptsize] at ({0.55*cos(\thetaAngle/2)},{0.55*sin(\thetaAngle/2)}) {$\theta$};
+    
+    % Label the point with multiple representations
+    \node[above right,font=\small,align=left] at (Z) {
+      $z = a + ib$
+    };
+    
+    \node[font=\scriptsize,align=left,text width=2.5cm] at (2.4,1.5) {
+      $= |z| \cdot (\cos\theta$\\
+      $\quad + i\sin\theta)$\\[0.1em]
+      $= |z| \cdot e^{i\theta}$
+    };
+    
+    % Origin
+    \fill (0,0) circle (0.8pt);
+    
+    % Title
+    \node[font=\small\bfseries,align=center] at (1.2,-0.6) {General Form:\\[-0.2em] $z = |z|e^{i\theta}$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\vspace{1em}
+
 \textbf{De Moivre's Theorem:}
 For any integer $n$,
 \[
@@ -70,6 +192,76 @@ This theorem is invaluable for:
   \item Proving trigonometric identities
 \end{itemize}
 
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[scale=2.5,>=Stealth]
+  % Define the angle t
+  \def\tangle{35}
+  
+  % Draw axes
+  \draw[->,thick] (-1.3,0) -- (1.3,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-1.3) -- (0,1.3) node[above,font=\small] {Im};
+  
+  % Draw unit circle
+  \draw[dashed,warmstone!70] (0,0) circle (1);
+  
+  % Origin
+  \fill[deepcharcoal] (0,0) circle (0.6pt);
+  
+  % Draw z and its powers (z, z^2, z^3, z^4)
+  % z = e^{it}
+  \coordinate (Z1) at ({cos(\tangle)},{sin(\tangle)});
+  \coordinate (Z2) at ({cos(2*\tangle)},{sin(2*\tangle)});
+  \coordinate (Z3) at ({cos(3*\tangle)},{sin(3*\tangle)});
+  \coordinate (Z4) at ({cos(4*\tangle)},{sin(4*\tangle)});
+  
+  % Draw vectors with different colors and line styles
+  \draw[->,acu vector] (0,0) -- (Z1) node[right,font=\small] {$z$};
+  \draw[->,acu vector2] (0,0) -- (Z2) node[above right,font=\small] {$z^2$};
+  \draw[->,acu vector3] (0,0) -- (Z3) node[above,font=\small] {$z^3$};
+  \draw[->,acu vector4] (0,0) -- (Z4) node[above left,font=\small] {$z^4$};
+  
+  % Draw angle arcs
+  % Arc for t
+  \draw[acu angle,->] (0.35,0) arc (0:\tangle:0.35);
+  \node[bookred,font=\scriptsize] at ({0.45*cos(\tangle/2)},{0.45*sin(\tangle/2)}) {$t$};
+  
+  % Arc for 2t
+  \draw[bookred,thick,dotted] (0.25,0) arc (0:{2*\tangle}:0.25);
+  \node[bookred,font=\scriptsize] at ({0.32*cos(\tangle)},{0.32*sin(\tangle)}) {$2t$};
+  
+  % Arc for 3t
+  \draw[lawpurple,thick,dotted] (0.15,0) arc (0:{3*\tangle}:0.15);
+  \node[lawpurple,font=\scriptsize] at ({0.22*cos(1.5*\tangle)},{0.22*sin(1.5*\tangle)}) {$3t$};
+  
+  % Arc for 4t
+  \draw[warmstone!80!black,thick,dotted] (0.08,0) arc (0:{4*\tangle}:0.08);
+  \node[warmstone!80!black,font=\scriptsize] at ({0.14*cos(2*\tangle)},{0.14*sin(2*\tangle)}) {$4t$};
+  
+  % Add points
+  \fill[acu point] (Z1) circle (0.8pt);
+  \fill[acu point2] (Z2) circle (0.8pt);
+  \fill[lawpurple] (Z3) circle (0.8pt);
+  \fill[warmstone!80!black] (Z4) circle (0.8pt);
+  
+  % Add caption below
+  \node[font=\small\itshape,align=center] at (0,-1.55) {
+    Powers of $z$ with $|z|=1$ and $\arg(z)=t$
+  };
+  
+  % Add formula annotation
+  \node[font=\scriptsize,align=left,text width=4cm] at (3.2,0) {
+    For $z = e^{it}$ on unit circle:\\[0.3em]
+    $z^2 = e^{i(2t)}$ rotates by $2t$\\
+    $z^3 = e^{i(3t)}$ rotates by $3t$\\
+    $z^4 = e^{i(4t)}$ rotates by $4t$\\[0.3em]
+    Each power multiplies\\
+    the angle by $n$.
+  };
+\end{tikzpicture}
+\end{center}
+\vspace{1em}
+
 \textbf{Modulus and Argument:}
 For $z = x + iy$:
 \begin{itemize}[leftmargin=*]
@@ -77,6 +269,69 @@ For $z = x + iy$:
   \item Argument: $\arg(z) = \tan^{-1}(y/x)$ (with appropriate quadrant adjustments)
   \item Properties: $|z_1 z_2| = |z_1||z_2|$, $\arg(z_1 z_2) = \arg(z_1) + \arg(z_2)$ (modulo $2\pi$)
 \end{itemize}
+
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[scale=2.5,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-0.5,0) -- (4,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-0.5) -- (0,3.0) node[above,font=\small] {Im};
+  
+  % Complex number z
+  \def\zx{3}
+  \def\zy{2.3}
+  \coordinate (Z) at (\zx,\zy);
+  \coordinate (O) at (0,0);
+  \coordinate (X) at (\zx,0);
+  \coordinate (Y) at (0,\zy);
+  
+  % Draw the right triangle
+  \draw[dashed,gray,thick] (Z) -- (X);
+  \draw[dashed,gray,thick] (Z) -- (Y);
+  
+  % Draw modulus (as thick blue vector)
+  \draw[->,acu vector] (O) -- (Z) node[midway,above left,font=\small] {$|z| = \sqrt{x^2+y^2}$};
+  
+  % Draw right angle indicator
+  \draw (X) ++(-0.15,0) -- ++(0,0.15) -- ++(0.15,0);
+  
+  % Label x and y
+  \draw[<->,thick,red!70] (O) -- (X) node[midway,below,font=\small] {$x = \text{Re}(z)$};
+  \draw[<->,thick,red!70] (X) -- (Z) node[midway,right,font=\small] {$y = \text{Im}(z)$};
+  
+  % Draw argument angle
+  \draw[green!60!black,very thick,->] (0.8,0) arc (0:37.5:0.8);
+  \node[green!60!black,font=\small] at (1.1,0.35) {$\theta = \arg(z)$};
+  
+  % Mark the complex number point
+  \fill[bookpurple] (Z) circle (1.5pt);
+  \node[above right,font=\small] at (Z) {$z = x + iy$};
+  
+  % Origin point
+  \fill (O) circle (0.8pt);
+  \node[below left,font=\scriptsize] at (O) {$0$};
+  
+  % Add formula annotations
+  \node[font=\scriptsize,align=left,text width=3.5cm] at (5.5,2.5) {
+    \textbf{Modulus:}\\
+    $|z| = \sqrt{x^2 + y^2}$\\[0.3em]
+    Represents the \emph{distance}\\
+    from origin to $z$
+  };
+  
+  \node[font=\scriptsize,align=left,text width=3.5cm] at (5.5,1.2) {
+    \textbf{Argument:}\\
+    $\arg(z) = \tan^{-1}\left(\frac{y}{x}\right)$\\[0.3em]
+    Represents the \emph{angle}\\
+    from positive real axis
+  };
+  
+  % Pythagorean theorem visual hint
+  \node[font=\tiny,gray] at (1.5,1.3) {Pythagorean};
+  \node[font=\tiny,gray] at (1.5,1.1) {theorem};
+\end{tikzpicture}
+\end{center}
+\vspace{1em}
 
 \subsubsection{Forms of Complex Numbers}
 
@@ -88,6 +343,49 @@ For $z = x + iy$:
 
 Conversions between these forms are essential skills tested frequently in Extension~2.
 
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[scale=1.2,>=Stealth]
+  % Axes
+  \draw[->,thick] (-0.5,0) -- (4.5,0) node[right] {Re};
+  \draw[->,thick] (0,-0.5) -- (0,3.5) node[above] {Im};
+  
+  % Complex number point
+  \coordinate (O) at (0,0);
+  \coordinate (Z) at (3,2.5);
+  
+  % Draw the vector to z
+  \draw[->,acu vector] (O) -- (Z) node[above right] {$z$};
+  
+  % Draw projection lines (dashed)
+  \draw[dashed,gray] (Z) -- (3,0) node[below] {$x$};
+  \draw[dashed,gray] (Z) -- (0,2.5) node[left] {$y$};
+  
+  % Draw r (modulus)
+  \draw[red,thick,decoration={markings,mark=at position 0.6 with {\arrow{>}}},postaction={decorate}] 
+    (O) -- ($(O)!0.75!(Z)$) node[midway,below right] {$r = |z|$};
+  
+  % Draw angle theta
+  \draw[green!60!black,thick,->] (0.8,0) arc (0:39.8:0.8) node[midway,right] {$\theta$};
+  
+  % Annotations for the three forms
+  \node[align=left,anchor=west,font=\small] at (4.8,2.5) {
+    \textbf{Cartesian:} $z = x + iy$
+  };
+  \node[align=left,anchor=west,font=\small] at (4.8,1.8) {
+    \textbf{Polar:} $z = r(\cos\theta + i\sin\theta)$
+  };
+  \node[align=left,anchor=west,font=\small] at (4.8,1.1) {
+    \textbf{Exponential:} $z = re^{i\theta}$
+  };
+  
+  % Add grid points at origin
+  \fill (O) circle (1.5pt);
+  \fill (Z) circle (2pt);
+\end{tikzpicture}
+\end{center}
+\vspace{1em}
+
 \subsubsection{Argand Diagram}
 
 The Argand diagram visualizes complex numbers as points in the plane, with the real part on the horizontal axis and the imaginary part on the vertical axis. Geometric interpretations include:
@@ -97,6 +395,230 @@ The Argand diagram visualizes complex numbers as points in the plane, with the r
   \item Multiplication by $e^{i\theta}$ rotates by angle $\theta$
   \item Multiplication by $r$ scales by factor $r$
 \end{itemize}
+
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[scale=0.9,>=Stealth]
+  % Left diagram: Distance and Midpoint
+  \begin{scope}
+    % Axes
+    \draw[->,thick] (-0.5,0) -- (4,0) node[right,font=\small] {Re};
+    \draw[->,thick] (0,-0.5) -- (0,3.5) node[above,font=\small] {Im};
+    
+    % Two complex numbers
+    \coordinate (Z1) at (1,2.5);
+    \coordinate (Z2) at (3,1);
+    \coordinate (Mid) at ($(Z1)!0.5!(Z2)$);
+    
+    % Draw points
+    \fill[blue] (Z1) circle (2pt) node[above left,font=\small] {$z_1$};
+    \fill[blue] (Z2) circle (2pt) node[below right,font=\small] {$z_2$};
+    
+    % Draw distance line
+    \draw[red,thick,<->] (Z1) -- (Z2) node[midway,above right,font=\small] {$|z_1 - z_2|$};
+    
+    % Draw midpoint
+    \fill[purple] (Mid) circle (2.5pt) node[below left,font=\small] {$\frac{z_1+z_2}{2}$};
+    
+    % Draw vectors from origin
+    \draw[->,dashed,gray,thin] (0,0) -- (Z1);
+    \draw[->,dashed,gray,thin] (0,0) -- (Z2);
+    
+    \fill (0,0) circle (1pt);
+    
+    \node[font=\small\bfseries] at (1.5,-1) {Distance \& Midpoint};
+  \end{scope}
+  
+  % Right diagram: Rotation and Scaling
+  \begin{scope}[xshift=6cm]
+    % Axes
+    \draw[->,thick] (-0.5,0) -- (4,0) node[right,font=\small] {Re};
+    \draw[->,thick] (0,-0.5) -- (0,3.5) node[above,font=\small] {Im};
+    
+    % Original complex number
+    \coordinate (W) at (2.5,0.7);
+    
+    % Rotated by theta
+    \coordinate (WRot) at (1.8,2);
+    
+    % Scaled by r
+    \coordinate (WScale) at (3.5,1);
+    
+    % Draw original
+    \draw[->,acu vector] (0,0) -- (W) node[right,font=\small] {$w$};
+    \fill[blue] (W) circle (2pt);
+    
+    % Draw rotated
+    \draw[->,lawpurple,thick] (0,0) -- (WRot) node[above left,font=\small] {$we^{i\theta}$};
+    \fill[orange] (WRot) circle (2pt);
+    
+    % Draw rotation angle
+    \draw[green!60!black,thick,->] (0.8,0) arc (0:48:0.8);
+    \node[green!60!black,font=\scriptsize] at (1.1,0.35) {$\theta$};
+    
+    % Draw scaled
+    \draw[->,acu vector2] (0,0) -- (WScale) node[below right,font=\small] {$rw$};
+    \fill[red] (WScale) circle (2pt);
+    
+    % Show scaling relationship
+    \draw[dashed,gray] (W) -- (WScale);
+    \node[font=\scriptsize,gray] at (3,0.5) {$\times r$};
+    
+    \fill (0,0) circle (1pt);
+    
+    \node[font=\small\bfseries] at (1.5,-1) {Rotation \& Scaling};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\vspace{1em}
+
+\subsubsection{2D Rotation with Euler's Equation}
+
+The multiplication of two complex numbers implies a rotation in 2D space. When we multiply a complex number $z$ by $e^{i\phi}$, it rotates $z$ by angle $\phi$ while preserving its modulus.
+
+\textbf{Key Insight:} For complex numbers $e^{i\theta}$ and $e^{i\phi}$ on the unit circle:
+\[
+e^{i\theta} \cdot e^{i\phi} = e^{i(\theta+\phi)}
+\]
+This shows that multiplication adds the angles, which is equivalent to rotation.
+
+\textbf{General Rotation:} To rotate any complex number $z = x + iy = |z|e^{i\theta}$ by angle $\phi$:
+\begin{align*}
+z' &= z \cdot e^{i\phi} = |z|e^{i\theta} \cdot e^{i\phi}\\
+&= |z|e^{i(\theta+\phi)}\\
+&= (x + iy)e^{i\phi}\\
+&= (x + iy)(\cos\phi + i\sin\phi)\\
+&= \cos\phi \cdot x - \sin\phi \cdot y + i(\sin\phi \cdot x + \cos\phi \cdot y)
+\end{align*}
+
+\textbf{Matrix Form:} This rotation can be expressed as a 2D rotation matrix:
+\[
+\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} \cos\phi & -\sin\phi \\ \sin\phi & \cos\phi \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}
+\]
+
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[scale=1.7,>=Stealth]
+  % LEFT DIAGRAM: Multiplication implies rotation
+  \begin{scope}
+    % Draw axes
+    \draw[->,thick] (-1.3,0) -- (1.4,0) node[right,font=\small] {Re};
+    \draw[->,thick] (0,-1.3) -- (0,1.4) node[above,font=\small] {Im};
+    
+    % Draw unit circle
+    \draw[acu circle] (0,0) circle (1);
+    
+    % Mark point i
+    \fill (0,1) circle (1pt);
+    \node[left,font=\scriptsize] at (0,1) {$i$};
+    
+    % Mark point 1
+    \fill (1,0) circle (1pt);
+    \node[below right,font=\scriptsize] at (1,0) {$1$};
+    
+    % Define angles
+    \def\thetaA{35}
+    \def\phiA{50}
+    \def\sumA{85}
+    
+    % First point e^(iθ)
+    \coordinate (EA) at ({cos(\thetaA)},{sin(\thetaA)});
+    \draw[->,thick,black!70] (0,0) -- (EA);
+    \fill[black!70] (EA) circle (1.2pt);
+    \node[right,font=\scriptsize] at (EA) {$e^{i\theta}$};
+    
+    % Second point e^(iφ)  
+    \coordinate (EB) at ({cos(\phiA)},{sin(\phiA)});
+    \draw[->,thick,blue!70] (0,0) -- (EB);
+    \fill[bookpurple] (EB) circle (1.2pt);
+    \node[above right,font=\scriptsize] at (EB) {$e^{i\phi}$};
+    
+    % Result e^(i(θ+φ))
+    \coordinate (EC) at ({cos(\sumA)},{sin(\sumA)});
+    \draw[->,acu vector2] (0,0) -- (EC);
+    \fill[bookred] (EC) circle (1.4pt);
+    \node[above left,font=\scriptsize] at (EC) {$e^{i(\theta+\phi)}$};
+    
+    % Draw angle arcs
+    \draw[green!60!black,thick] (0.25,0) arc (0:\thetaA:0.25);
+    \node[green!60!black,font=\tiny] at ({0.35*cos(\thetaA/2)},{0.35*sin(\thetaA/2)}) {$\theta$};
+    
+    \draw[blue!60,thick] (0.4,0) arc (0:\phiA:0.4);
+    \node[blue!60,font=\tiny] at ({0.52*cos(\phiA/2)},{0.52*sin(\phiA/2)}) {$\phi$};
+    
+    % Arc showing sum (θ+φ) - curved arrow from EA to EC
+    \draw[->,lawpurple,thick] (EA) arc (\thetaA:\sumA:1);
+    \node[lawpurple,font=\tiny] at ({1.15*cos(60)},{1.15*sin(60)}) {rotate};
+    
+    % Origin
+    \fill (0,0) circle (0.8pt);
+    
+    % Title
+    \node[font=\small\bfseries,align=center] at (0,-1.6) {Multiplication implies rotation};
+  \end{scope}
+  
+  % RIGHT DIAGRAM: 2D rotation of a complex number
+  \begin{scope}[xshift=4.3cm]
+    % Draw axes
+    \draw[->,thick] (-1.3,0) -- (1.4,0) node[right,font=\small] {Re};
+    \draw[->,thick] (0,-1.3) -- (0,1.4) node[above,font=\small] {Im};
+    
+    % Draw unit circle (partial)
+    \draw[very thick,orange!80,domain=0:100] plot ({cos(\x)}, {sin(\x)});
+    
+    % Mark point i
+    \fill (0,1) circle (1pt);
+    \node[left,font=\scriptsize] at (0,1) {$i$};
+    
+    % Mark point 1
+    \fill (1,0) circle (1pt);
+    \node[below right,font=\scriptsize] at (1,0) {$1$};
+    
+    % Define angles for rotation
+    \def\thetaB{30}
+    \def\phiB{45}
+    \def\sumB{75}
+    \def\radius{0.85}
+    
+    % Original point z = |z|e^(iθ)
+    \coordinate (Z) at ({\radius*cos(\thetaB)},{\radius*sin(\thetaB)});
+    \draw[->,very thick,black!70] (0,0) -- (Z);
+    \fill[black!70] (Z) circle (1.3pt);
+    \node[right,font=\tiny,align=left] at (Z) {$z = x + iy$\\[-0.15em]$= |z|e^{i\theta}$};
+    
+    % Rotation operator e^(iφ)
+    \coordinate (ROT) at ({cos(\phiB)},{sin(\phiB)});
+    \draw[->,thick,blue!70] (0,0) -- (ROT);
+    \fill[bookpurple] (ROT) circle (1.1pt);
+    \node[above right,font=\scriptsize] at (ROT) {$e^{i\phi}$};
+    
+    % Rotated result z'
+    \coordinate (ZP) at ({\radius*cos(\sumB)},{\radius*sin(\sumB)});
+    \draw[->,acu vector3] (0,0) -- (ZP);
+    \fill[purple!70] (ZP) circle (1.3pt);
+    \node[above left,font=\tiny,align=left] at (ZP) {$z' = x' + iy'$\\[-0.15em]$= |z|e^{i(\theta+\phi)}$};
+    
+    % Draw angle arcs
+    \draw[green!60!black,thick] (0.3,0) arc (0:\thetaB:0.3);
+    \node[green!60!black,font=\tiny] at ({0.42*cos(\thetaB/2)},{0.42*sin(\thetaB/2)}) {$\theta$};
+    
+    \draw[blue!60,thick] (0.48,0) arc (0:\phiB:0.48);
+    \node[blue!60,font=\tiny] at ({0.62*cos(\phiB/2)},{0.62*sin(\phiB/2)}) {$\phi$};
+    
+    % Arc showing rotation from z to z'
+    \draw[->,lawpurple,thick] (Z) arc (\thetaB:\sumB:\radius);
+    
+    % Origin
+    \fill (0,0) circle (0.8pt);
+    
+    % Title
+    \node[font=\small\bfseries,align=center] at (0,-1.6) {2D rotation of\\[-0.2em]complex number};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\vspace{1em}
+
+\textbf{Note:} This concept extends to 3D rotations using \emph{quaternions}, which use a rotation axis vector $\mathbf{u}$ instead of a single complex number. The quaternion rotation formula is $\cos\theta + \mathbf{u}\sin\theta$ where $\mathbf{u}$ is the unit vector along the rotation axis.
 
 \subsubsection{Notation and Conventions}
 

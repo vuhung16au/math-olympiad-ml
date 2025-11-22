@@ -8,10 +8,116 @@ The region is bounded by two vertical lines ($x=1$ and $x=3$) and two rays from 
 
 \begin{solution}[Sketch]
 Draw vertical lines at $x=1$ (dashed, excluded) and $x=3$ (solid, included). Draw rays from origin at angles $30^\circ$ (solid) and $60^\circ$ (dashed). The region is the intersection in the first quadrant.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=2.2,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-0.3,0) -- (4,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-0.3) -- (0,3.5) node[above,font=\small] {Im};
+  
+  % Define angles
+  \def\angleMin{30}  % π/6 = 30°
+  \def\angleMax{60}  % π/3 = 60°
+  
+  % Calculate the corner points of the region
+  % Bottom edge: x=1, angle=30° → point (1, 1·tan(30°))
+  \coordinate (BL) at (1,{1*tan(\angleMin)});
+  % Top-left edge: x=1, angle=60° → point (1, 1·tan(60°))
+  \coordinate (TL) at (1,{1*tan(\angleMax)});
+  % Bottom-right edge: x=3, angle=30° → point (3, 3·tan(30°))
+  \coordinate (BR) at (3,{3*tan(\angleMin)});
+  % Top-right edge: x=3, angle=60° → point (3, 3·tan(60°))
+  \coordinate (TR) at (3,{3*tan(\angleMax)});
+  
+  % Fill the region (quadrilateral)
+  \fill[purple!25,opacity=0.8] (BL) -- (BR) -- (TR) -- (TL) -- cycle;
+  
+  % Draw the boundaries of the region
+  % Bottom boundary: along ray at angle 30° from x=1 to x=3 (solid, included)
+  \draw[very thick,bookpurple!80!black,solid] (BL) -- (BR);
+  
+  % Top boundary: along ray at angle 60° from x=1 to x=3 (dashed, excluded)
+  \draw[very thick,lawpurple,dashed] (TL) -- (TR);
+  
+  % Left boundary: vertical line at x=1 from angle 30° to 60° (dashed, excluded)
+  \draw[very thick,bookred,dashed] (BL) -- (TL);
+  
+  % Right boundary: vertical line at x=3 from angle 30° to 60° (solid, included)
+  \draw[very thick,bookpurple,solid] (BR) -- (TR);
+  
+  % Draw the complete rays from origin (extended for clarity)
+  % Ray at angle π/6 = 30° (solid)
+  \draw[thick,bookpurple!80!black,solid] (0,0) -- ({\angleMin}:3.8);
+  \node[bookpurple!80!black,font=\scriptsize,right] at ({\angleMin}:3.8) {$\text{Arg}(z)=\frac{\pi}{6}$};
+  
+  % Ray at angle π/3 = 60° (dashed)
+  \draw[thick,lawpurple,dashed] (0,0) -- ({\angleMax}:3.6);
+  \node[lawpurple,font=\scriptsize,above left] at ({\angleMax}:3.6) {$\text{Arg}(z)=\frac{\pi}{3}$};
+  
+  % Draw the complete vertical lines (extended for clarity)
+  % x = 1 (dashed)
+  \draw[thick,bookred,dashed] (1,0) -- (1,3.2);
+  \node[bookred,font=\scriptsize,below] at (1,-0.05) {$\text{Re}(z)=1$};
+  
+  % x = 3 (solid)
+  \draw[thick,bookpurple,solid] (3,0) -- (3,3.2);
+  \node[bookpurple,font=\scriptsize,below] at (3,-0.05) {$\text{Re}(z)=3$};
+  
+  % Mark the corner points with appropriate symbols
+  % Bottom-left: x=1 (excluded), angle=30° (included)
+  \draw[fill=white,draw=bookred,thick] (BL) circle (1.5pt);
+  
+  % Top-left: x=1 (excluded), angle=60° (excluded)
+  \draw[fill=white,draw=bookred,thick] (TL) circle (1.5pt);
+  
+  % Bottom-right: x=3 (included), angle=30° (included)
+  \fill[bookpurple] (BR) circle (1.5pt);
+  
+  % Top-right: x=3 (included), angle=60° (excluded)
+  \draw[fill=white,draw=bookpurple,thick] (TR) circle (1.5pt);
+  
+  % Label the region
+  \node[font=\normalsize,deepcharcoal,align=center] at (2,1.6) {\textbf{Region $R$}};
+  
+  % Origin
+  \fill (0,0) circle (1pt);
+  \node[below left,font=\scriptsize] at (0,0) {$O$};
+  
+  % Add angle markers at origin
+  \draw[bookpurple!80!black,thick,->] (0.5,0) arc (0:\angleMin:0.5);
+  \node[bookpurple!80!black,font=\scriptsize] at (15:0.7) {$\frac{\pi}{6}$};
+  
+  \draw[lawpurple,thick,->] (0.7,0) arc (0:\angleMax:0.7);
+  \node[lawpurple,font=\scriptsize] at (30:0.95) {$\frac{\pi}{3}$};
+  
+  % Add a box with the conditions
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (3.2,2.8) {
+    Conditions:\\
+    $1 < \text{Re}(z) \le 3$\\
+    $\frac{\pi}{6} \le \text{Arg}(z) < \frac{\pi}{3}$
+  };
+  
+  % Legend for boundary symbols
+  \node[font=\tiny,align=left,draw=warmstone!30,fill=white] at (0.5,3.1) {
+    $\circ$ excluded\\
+    $\bullet$ included
+  };
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
 \end{solution}
 
 \begin{problem}[Statement Analysis]
-Which statement about complex numbers is true? (Multiple options about arguments, exponential form, etc.)
+Which statement about complex numbers is true?
+
+\begin{enumerate}[label=(\Alph*),leftmargin=*]
+  \item For $z = x + iy$, the argument is given by $\arg(z) = \arctan(y/x)$ for all $z \neq 0$.
+  \item For any two complex numbers $z_1$ and $z_2$, we have $\text{Arg}(z_1 z_2) = \text{Arg}(z_1) + \text{Arg}(z_2)$.
+  \item If two complex numbers have the same modulus and their arguments satisfy $\theta_1 = \theta_2 + 2\pi k$ for some integer $k$, then they are equal (modulo $2\pi$).
+  \item For $z = x + iy$ with $x > 0$, the argument is $\arg(z) = \arctan(y/x)$.
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
@@ -19,7 +125,17 @@ Check each statement. Remember that $\text{Arg}(z_1z_2) = \text{Arg}(z_1) + \tex
 \end{hint}
 
 \begin{solution}[Sketch]
-(A) False: arctan doesn't account for quadrant. (B) False: principal argument addition requires modulo $2\pi$ adjustment. (C) False: $\theta_1 = \theta_2 + 2\pi k$ for integer $k$. (D) False: same issue as (A). The correct answer depends on careful reading; typically (C) is closest if equality means modulo $2\pi$.
+\begin{itemize}[leftmargin=*]
+  \item \textbf{(A) False:} The formula $\arg(z) = \arctan(y/x)$ doesn't account for the quadrant. For example, if $z = -1 + i$, then $\arctan(-1) = -\pi/4$, but the actual argument is $3\pi/4$ (in the second quadrant).
+  
+  \item \textbf{(B) False:} Principal argument addition requires modulo $2\pi$ adjustment. For instance, if $\text{Arg}(z_1) = 3\pi/4$ and $\text{Arg}(z_2) = 3\pi/4$, then $\text{Arg}(z_1) + \text{Arg}(z_2) = 3\pi/2$, but we need to adjust to the principal range $(-\pi, \pi]$, giving $\text{Arg}(z_1 z_2) = -\pi/2$.
+  
+  \item \textbf{(C) True (with proper interpretation):} If $|z_1| = |z_2|$ and $\arg(z_1) = \arg(z_2) + 2\pi k$ for integer $k$, then $z_1 = z_2$ since arguments that differ by $2\pi k$ represent the same direction.
+  
+  \item \textbf{(D) True (but limited):} This is correct when $x > 0$ (first and fourth quadrants), as the arctan function gives the correct argument in these quadrants without adjustment.
+\end{itemize}
+
+\textbf{Answer:} The best answer is \textbf{(D)} for its specific domain, though \textbf{(C)} is also correct if ``equality'' means modulo $2\pi$. Statement (D) is the most straightforward true statement.
 \end{solution}
 
 \begin{problem}[Roots of Unity Application]
@@ -44,6 +160,93 @@ The first inequality is a vertical strip. The second is a disk centered at $(1,-
 
 \begin{solution}[Sketch]
 Draw vertical lines at $x=0$ and $x=2$. Draw circle centered at $(1,-1)$ with radius 2. Shade the intersection.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.5,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-1,0) -- (3.5,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-3.5) -- (0,2) node[above,font=\small] {Im};
+  
+  % Center of circle
+  \coordinate (C) at (1,-1);
+  \def\radius{2}
+  
+  % Draw the vertical strip boundaries
+  % x = 0 (imaginary axis)
+  \draw[very thick,bookpurple] (0,-3.5) -- (0,2);
+  \node[bookpurple,font=\scriptsize,above] at (0,1.8) {$\text{Re}(z)=0$};
+  
+  % x = 2
+  \draw[very thick,bookpurple] (2,-3.5) -- (2,2);
+  \node[bookpurple,font=\scriptsize,above] at (2,1.8) {$\text{Re}(z)=2$};
+  
+  % Draw the circle
+  \draw[very thick,bookred] (C) circle (\radius);
+  
+  % Mark the center
+  \fill[bookred] (C) circle (1.5pt);
+  \node[bookred,font=\scriptsize,below right] at (C) {$(1,-1)$};
+  
+  % Draw radius indicator
+  \draw[bookred,dashed,thin] (C) -- ($(C)+(0:\radius)$);
+  \node[bookred,font=\tiny] at ($(C)+(0:1)$) [above] {$r=2$};
+  
+  % Shade the intersection region
+  % The intersection is the part of the circle between x=0 and x=2
+  \begin{scope}
+    \clip (0,-3.5) rectangle (2,2);
+    \fill[purple!30,opacity=0.7] (C) circle (\radius);
+  \end{scope}
+  
+  % Draw the clipped boundary more prominently
+  \begin{scope}
+    \clip (0,-3.5) rectangle (2,2);
+    \draw[very thick,lawpurple] (C) circle (\radius);
+  \end{scope}
+  
+  % Add label for the region
+  \node[font=\normalsize,deepcharcoal,align=center] at (1,0) {\textbf{Region}};
+  
+  % Mark key intersection points
+  % Circle intersects x=0 at (0, -1±√3)
+  % Calculate: (x-1)² + (y+1)² = 4, when x=0: 1 + (y+1)² = 4, so (y+1)² = 3, y = -1±√3
+  \coordinate (L1) at (0,{-1+sqrt(3)});
+  \coordinate (L2) at (0,{-1-sqrt(3)});
+  \fill[bookpurple!80!black] (L1) circle (1.5pt);
+  \fill[bookpurple!80!black] (L2) circle (1.5pt);
+  
+  % Circle intersects x=2 at (2, -1±√3)
+  \coordinate (R1) at (2,{-1+sqrt(3)});
+  \coordinate (R2) at (2,{-1-sqrt(3)});
+  \fill[bookpurple!80!black] (R1) circle (1.5pt);
+  \fill[bookpurple!80!black] (R2) circle (1.5pt);
+  
+  % Add grid for reference
+  \foreach \x in {-1,1,2,3} {
+    \draw[warmstone!30,very thin] (\x,-3.5) -- (\x,2);
+  }
+  \foreach \y in {-3,-2,-1,1} {
+    \draw[warmstone!30,very thin] (-1,\y) -- (3.5,\y);
+  }
+  
+  % Origin
+  \fill (0,0) circle (1pt);
+  \node[below left,font=\scriptsize] at (0,0) {$O$};
+  
+  % Add condition box
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (3,1.2) {
+    Conditions:\\
+    $0 \le \text{Re}(z) \le 2$\\
+    $|z-(1-i)| \le 2$
+  };
+  
+  % Label the circle
+  \node[bookred,font=\scriptsize] at (2.8,-1) {Circle: $|z-(1-i)|=2$};
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
 \end{solution}
 
 \begin{problem}[Modulus-Argument Division]
@@ -71,27 +274,132 @@ $\beta = 2(\cos(-\pi/3) + i\sin(-\pi/3))$. Then $\beta^5 = 32(\cos(-5\pi/3) + i\
 \end{solution}
 
 \begin{problem}[Deriving Trigonometric Value]
-Using previous results, find the exact value of $\sin \frac{\pi}{12}$.
+Find the exact value of $\sin \frac{\pi}{12}$ using the angle subtraction formula. Note that $\frac{\pi}{12} = \frac{\pi}{3} - \frac{\pi}{4} = 60° - 45° = 15°$.
 \end{problem}
 
 \begin{hint}
-From $\frac{\alpha}{\beta} = \sqrt{2}(\cos\frac{\pi}{12} + i\sin\frac{\pi}{12})$, compute explicitly or use half-angle formulas.
+Use the angle subtraction formula: $\sin(A - B) = \sin A \cos B - \cos A \sin B$.
+
+Recall the exact values:
+\begin{itemize}
+\item $\sin \frac{\pi}{3} = \frac{\sqrt{3}}{2}$, $\cos \frac{\pi}{3} = \frac{1}{2}$
+\item $\sin \frac{\pi}{4} = \frac{\sqrt{2}}{2}$, $\cos \frac{\pi}{4} = \frac{\sqrt{2}}{2}$
+\end{itemize}
 \end{hint}
 
 \begin{solution}[Sketch]
-$\frac{\pi}{12} = \frac{\pi}{3} - \frac{\pi}{4}$. Using angle subtraction: $\sin\frac{\pi}{12} = \sin\frac{\pi}{3}\cos\frac{\pi}{4} - \cos\frac{\pi}{3}\sin\frac{\pi}{4} = \frac{\sqrt{3}}{2} \cdot \frac{\sqrt{2}}{2} - \frac{1}{2} \cdot \frac{\sqrt{2}}{2} = \frac{\sqrt{6}-\sqrt{2}}{4}$.
+We use the fact that $\frac{\pi}{12} = \frac{\pi}{3} - \frac{\pi}{4}$.
+
+Applying the angle subtraction formula:
+\begin{align*}
+\sin\frac{\pi}{12} &= \sin\left(\frac{\pi}{3} - \frac{\pi}{4}\right)\\
+&= \sin\frac{\pi}{3}\cos\frac{\pi}{4} - \cos\frac{\pi}{3}\sin\frac{\pi}{4}\\
+&= \frac{\sqrt{3}}{2} \cdot \frac{\sqrt{2}}{2} - \frac{1}{2} \cdot \frac{\sqrt{2}}{2}\\
+&= \frac{\sqrt{6}}{4} - \frac{\sqrt{2}}{4}\\
+&= \frac{\sqrt{6}-\sqrt{2}}{4}
+\end{align*}
+
+\textbf{Alternative approach using complex numbers:}
+
+Consider the division $\frac{1+i\sqrt{3}}{1+i}$. In modulus-argument form:
+\begin{itemize}
+\item Numerator: $|1+i\sqrt{3}| = 2$, $\arg(1+i\sqrt{3}) = \frac{\pi}{3}$
+\item Denominator: $|1+i| = \sqrt{2}$, $\arg(1+i) = \frac{\pi}{4}$
+\end{itemize}
+
+Therefore:
+$$\frac{1+i\sqrt{3}}{1+i} = \frac{2}{\sqrt{2}}\left(\cos\left(\frac{\pi}{3}-\frac{\pi}{4}\right) + i\sin\left(\frac{\pi}{3}-\frac{\pi}{4}\right)\right) = \sqrt{2}\left(\cos\frac{\pi}{12} + i\sin\frac{\pi}{12}\right)$$
+
+Computing the division algebraically:
+$$\frac{1+i\sqrt{3}}{1+i} = \frac{(1+i\sqrt{3})(1-i)}{(1+i)(1-i)} = \frac{1-i+i\sqrt{3}+\sqrt{3}}{2} = \frac{1+\sqrt{3}}{2} + i\frac{\sqrt{3}-1}{2}$$
+
+Comparing imaginary parts: $\sin\frac{\pi}{12} = \frac{\sqrt{3}-1}{2\sqrt{2}} = \frac{\sqrt{6}-\sqrt{2}}{4}$.
+
+\textbf{Answer:} $\sin \frac{\pi}{12} = \frac{\sqrt{6}-\sqrt{2}}{4}$
 \end{solution}
 
 \begin{problem}[Marking Rotated Point]
-Points $P(z)$ and $Q(w)$ are on the Argand diagram. Mark the point $R$ representing $iz$.
+A point $P$ represents the complex number $z = 3 + 2i$ on the Argand diagram. Mark the point $R$ representing $iz$.
 \end{problem}
 
 \begin{hint}
-Multiply by $i$ rotates $90^\circ$ counterclockwise.
+Multiply by $i$ rotates $90^\circ$ counterclockwise. If $z = a + bi$, then $iz = i(a+bi) = ai + bi^2 = -b + ai$.
 \end{hint}
 
 \begin{solution}[Sketch]
 If $z$ is at $(a,b)$, then $iz$ is at $(-b,a)$. Draw accordingly.
+
+For $z = 3 + 2i$ at point $(3,2)$:
+\[
+iz = i(3+2i) = 3i + 2i^2 = 3i - 2 = -2 + 3i
+\]
+So $R$ is at $(-2, 3)$.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.5,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-3,0) -- (4,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-1) -- (0,4) node[above,font=\small] {Im};
+  
+  % Original point z = 3 + 2i
+  \coordinate (Z) at (3,2);
+  \draw[->,very thick,bookpurple] (0,0) -- (Z);
+  \fill[bookpurple] (Z) circle (2pt);
+  \node[bookpurple,font=\small,right] at (Z) {$P: z = 3+2i$};
+  
+  % Rotated point iz = -2 + 3i
+  \coordinate (IZ) at (-2,3);
+  \draw[->,very thick,bookred] (0,0) -- (IZ);
+  \fill[bookred] (IZ) circle (2pt);
+  \node[bookred,font=\small,left] at (IZ) {$R: iz = -2+3i$};
+  
+  % Draw the rotation arc
+  \draw[->,lawpurple,very thick] (Z) to[bend left=30] node[midway,above right,font=\scriptsize] {$\times i$} (IZ);
+  
+  % Show 90° rotation angle at origin
+  \draw[bookpurple!80!black,thick] (0.8,0) arc (0:90:0.8);
+  \node[bookpurple!80!black,font=\scriptsize] at (45:1.1) {$90°$};
+  
+  % Draw circles showing equal moduli
+  \pgfmathsetmacro{\modulus}{sqrt(3*3 + 2*2)}
+  \draw[dashed,warmstone!40,thin] (0,0) circle (\modulus);
+  
+  % Mark coordinates
+  \node[bookpurple,font=\tiny,below] at (Z) {$(3,2)$};
+  \node[bookred,font=\tiny,above left] at (IZ) {$(-2,3)$};
+  
+  % Draw projections (dashed lines)
+  \draw[dashed,bookpurple!30,thin] (Z) -- (3,0) node[below,font=\tiny] {$3$};
+  \draw[dashed,bookpurple!30,thin] (Z) -- (0,2) node[left,font=\tiny] {$2$};
+  \draw[dashed,bookred!30,thin] (IZ) -- (-2,0) node[below,font=\tiny] {$-2$};
+  \draw[dashed,bookred!30,thin] (IZ) -- (0,3) node[right,font=\tiny] {$3$};
+  
+  % Origin
+  \fill (0,0) circle (1pt);
+  \node[below left,font=\scriptsize] at (0,0) {$O$};
+  
+  % Add annotation box
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (3,3.5) {
+    \textbf{Multiplication by $i$:}\\
+    $z = a+bi \to iz = -b+ai$\\
+    Rotates $90°$ CCW\\
+    Preserves modulus
+  };
+  
+  % Grid for reference
+  \foreach \x in {-2,-1,1,2,3} {
+    \draw[warmstone!15,very thin] (\x,-1) -- (\x,4);
+  }
+  \foreach \y in {1,2,3} {
+    \draw[warmstone!15,very thin] (-3,\y) -- (4,\y);
+  }
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Key observation:} Multiplying by $i$ rotates any complex number by $90°$ counterclockwise while keeping the same distance from the origin.
+
 \end{solution}
 
 \begin{problem}[Conjugate Root Property]
@@ -119,15 +427,103 @@ $(z-2-i)(z-2+i) = z^2-4z+5$. Divide $P(z)$ by $z^2-4z+5$ to find the third facto
 \end{solution}
 
 \begin{problem}[Vector Addition Point]
-Points $P(z)$ and $Q(w)$ are given. Mark point $T$ representing $z+w$.
+Points $P$ and $Q$ represent the complex numbers $z = 2 + i$ and $w = 1 + 3i$ respectively on the Argand diagram. Mark point $T$ representing $z+w$.
 \end{problem}
 
 \begin{hint}
-Use parallelogram law: $T$ is the fourth vertex of parallelogram $OP TQ$.
+Use parallelogram law: $T$ is the fourth vertex of parallelogram $OPTQ$ where $O$ is the origin.
 \end{hint}
 
 \begin{solution}[Sketch]
 From $O$ to $P$ is vector $z$, from $O$ to $Q$ is vector $w$. The sum $z+w$ is at the opposite corner of the parallelogram.
+
+For $z = 2 + i$ and $w = 1 + 3i$:
+\[
+z + w = (2+i) + (1+3i) = 3 + 4i
+\]
+So $T$ is at $(3, 4)$.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.4,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-0.5,0) -- (4,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-0.5) -- (0,4.8) node[above,font=\small] {Im};
+  
+  % Define points
+  \coordinate (O) at (0,0);
+  \coordinate (P) at (2,1);
+  \coordinate (Q) at (1,3);
+  \coordinate (T) at (3,4);
+  
+  % Draw the parallelogram
+  \draw[thick,orange!50,dashed] (O) -- (P) -- (T) -- (Q) -- cycle;
+  
+  % Draw vectors from origin
+  \draw[->,very thick,bookpurple] (O) -- (P) node[midway,below right,font=\scriptsize] {$z$};
+  \draw[->,very thick,bookpurple!80!black] (O) -- (Q) node[midway,left,font=\scriptsize] {$w$};
+  \draw[->,very thick,bookred] (O) -- (T) node[midway,above left,font=\scriptsize] {$z+w$};
+  
+  % Draw the parallelogram sides (showing vector addition)
+  \draw[->,thick,bookpurple!80!black,dashed] (P) -- (T) node[midway,right,font=\tiny] {$w$};
+  \draw[->,thick,bookpurple,dashed] (Q) -- (T) node[midway,above,font=\tiny] {$z$};
+  
+  % Mark the points
+  \fill[bookpurple] (P) circle (2pt);
+  \node[bookpurple,font=\small,below right] at (P) {$P: z=2+i$};
+  
+  \fill[bookpurple!80!black] (Q) circle (2pt);
+  \node[bookpurple!80!black,font=\small,left] at (Q) {$Q: w=1+3i$};
+  
+  \fill[bookred] (T) circle (2.5pt);
+  \node[bookred,font=\small,right] at (T) {$T: z+w=3+4i$};
+  
+  \fill (O) circle (1.5pt);
+  \node[below left,font=\scriptsize] at (O) {$O$};
+  
+  % Mark coordinates
+  \node[bookpurple,font=\tiny] at (2,-0.3) {$(2,1)$};
+  \node[bookpurple!80!black,font=\tiny] at (0.5,3.3) {$(1,3)$};
+  \node[bookred,font=\tiny] at (3.3,4.3) {$(3,4)$};
+  
+  % Draw coordinate projections (light dashed)
+  \draw[dashed,warmstone!30,very thin] (P) -- (2,0);
+  \draw[dashed,warmstone!30,very thin] (P) -- (0,1);
+  \draw[dashed,warmstone!30,very thin] (Q) -- (1,0);
+  \draw[dashed,warmstone!30,very thin] (Q) -- (0,3);
+  \draw[dashed,warmstone!30,very thin] (T) -- (3,0);
+  \draw[dashed,warmstone!30,very thin] (T) -- (0,4);
+  
+  % Add annotation box
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (1.5,0.5) {
+    \textbf{Parallelogram Law:}\\
+    $z + w$ forms the\\
+    fourth vertex $T$
+  };
+  
+  % Add label for parallelogram
+  \node[orange!70,font=\scriptsize] at (1.5,2) {$OPTQ$};
+  
+  % Grid for reference
+  \foreach \x in {1,2,3} {
+    \draw[warmstone!15,very thin] (\x,-0.5) -- (\x,4.8);
+  }
+  \foreach \y in {1,2,3,4} {
+    \draw[warmstone!15,very thin] (-0.5,\y) -- (4,\y);
+  }
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Key observations:}
+\begin{itemize}[leftmargin=*]
+  \item The parallelogram $OPTQ$ has $OP$ parallel to $QT$ (both represent vector $z$)
+  \item Similarly, $OQ$ is parallel to $PT$ (both represent vector $w$)
+  \item Vector addition: starting from $O$, go to $P$ (add $z$), then to $T$ (add $w$)
+  \item Alternatively: starting from $O$, go to $Q$ (add $w$), then to $T$ (add $z$)
+  \item The diagonal $OT$ represents the sum $z+w$
+\end{itemize}
+
 \end{solution}
 
 \begin{problem}[Sum in Polar Form]
@@ -200,5 +596,679 @@ $|u| = |z|^2 = 4$, $\arg(u) = 2\arg(z) = \pi/2$.
 
 \begin{solution}[Sketch]
 $u$ has modulus 4 and argument $\pi/2$, so $u = 4i$. Plot at $(0,4)$.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.3,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-0.5,0) -- (3,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-0.5) -- (0,4.8) node[above,font=\small] {Im};
+  
+  % Define z: |z| = 2, arg(z) = π/4 = 45°
+  \def\angleZ{45}
+  \def\modulusZ{2}
+  \coordinate (Z) at ({\modulusZ*cos(\angleZ)},{\modulusZ*sin(\angleZ)});
+  
+  % Define u = z²: |u| = 4, arg(u) = π/2 = 90°
+  \def\angleU{90}
+  \def\modulusU{4}
+  \coordinate (U) at ({\modulusU*cos(\angleU)},{\modulusU*sin(\angleU)});
+  
+  % Draw circles showing moduli
+  \draw[dashed,bookpurple!30,thin] (0,0) circle (\modulusZ);
+  \draw[dashed,bookred!30,thin] (0,0) circle (\modulusU);
+  
+  % Draw z
+  \draw[->,very thick,bookpurple] (0,0) -- (Z);
+  \fill[bookpurple] (Z) circle (2pt);
+  \node[bookpurple,font=\small,right] at (Z) {$z$};
+  
+  % Label for z
+  \node[bookpurple,font=\scriptsize,align=left] at ($(Z)+(0.5,-0.5)$) {
+    $|z|=2$\\
+    $\arg(z)=\frac{\pi}{4}$
+  };
+  
+  % Draw u = z²
+  \draw[->,very thick,bookred] (0,0) -- (U);
+  \fill[bookred] (U) circle (2pt);
+  \node[bookred,font=\small,left] at (U) {$u=z^2$};
+  
+  % Label for u
+  \node[bookred,font=\scriptsize,align=left] at ($(U)+(-1,0)$) {
+    $|u|=4$\\
+    $\arg(u)=\frac{\pi}{2}$
+  };
+  
+  % Draw angle arcs
+  % Arc for z (π/4)
+  \draw[bookpurple,thick,->] (0.6,0) arc (0:\angleZ:0.6);
+  \node[bookpurple,font=\tiny] at (22.5:0.85) {$\frac{\pi}{4}$};
+  
+  % Arc for u (π/2)
+  \draw[bookred,thick,->] (1,0) arc (0:\angleU:1);
+  \node[bookred,font=\tiny] at (45:1.3) {$\frac{\pi}{2}$};
+  
+  % Show the relationship with an arrow
+  \draw[->,thick,lawpurple,dashed] (Z) to[bend left=20] node[midway,right,font=\scriptsize] {square} (U);
+  
+  % Mark the coordinates
+  \node[bookpurple,font=\tiny,below] at (Z) {$(\sqrt{2},\sqrt{2})$};
+  \node[bookred,font=\tiny,right] at (U) {$(0,4)$};
+  
+  % Origin
+  \fill (0,0) circle (1pt);
+  \node[below left,font=\scriptsize] at (0,0) {$O$};
+  
+  % Add annotation box
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (2.5,2.5) {
+    \textbf{Squaring Rule:}\\
+    $|z^2| = |z|^2$\\
+    $\arg(z^2) = 2\arg(z)$
+  };
+  
+  % Draw the modulus labels on the circles
+  \node[blue!50,font=\tiny] at (45:{\modulusZ-0.3}) {$r=2$};
+  \node[red!50,font=\tiny] at (120:{\modulusU-0.3}) {$r=4$};
+  
+  % Grid for reference (light)
+  \foreach \x in {1,2} {
+    \draw[warmstone!15,very thin] (\x,-0.5) -- (\x,4.8);
+  }
+  \foreach \y in {1,2,3,4} {
+    \draw[warmstone!15,very thin] (-0.5,\y) -- (3,\y);
+  }
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\end{solution}
+
+\begin{problem}[Fifth Roots of Unity and Cosine Sum]
+Let $\omega$ be a non-real root of $z^5 = 1$
+\begin{enumerate}[label=\alph*),leftmargin=*]
+    \item Show that: $1 + \omega + \omega^2 + \omega^3 + \omega^4 = 0$
+    \item Hence, show that: $\displaystyle \cos\left(\frac{2\pi}{5}\right) + \cos\left(\frac{4\pi}{5}\right) = -\frac{1}{2}$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (a): The fifth roots of unity are roots of $z^5 - 1 = 0$. Factor as $(z-1)(z^4+z^3+z^2+z+1)=0$. For part (b): Use $\omega = e^{i2\pi/5}$ and $\omega^4 = e^{i8\pi/5} = e^{-i2\pi/5} = \bar{\omega}$. Add $\omega + \omega^4$ using Euler's formula.
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Part (a):} Show $1 + \omega + \omega^2 + \omega^3 + \omega^4 = 0$
+
+Since $\omega$ is a fifth root of unity, we have:
+\[
+\omega^5 = 1
+\]
+
+Therefore $\omega$ is a root of $z^5 - 1 = 0$. We can factor this as:
+\[
+z^5 - 1 = (z-1)(z^4 + z^3 + z^2 + z + 1) = 0
+\]
+
+Since $\omega$ is a \emph{non-real} root, we have $\omega \neq 1$, so $\omega$ must satisfy:
+\[
+\omega^4 + \omega^3 + \omega^2 + \omega + 1 = 0
+\]
+
+Rearranging:
+\[
+1 + \omega + \omega^2 + \omega^3 + \omega^4 = 0 \quad \square
+\]
+
+\textbf{Alternative proof using geometric series:}
+
+The sum $S = 1 + \omega + \omega^2 + \omega^3 + \omega^4$ is a geometric series with first term 1, common ratio $\omega$, and 5 terms.
+
+If $\omega \neq 1$:
+\[
+S = \frac{\omega^5 - 1}{\omega - 1} = \frac{1 - 1}{\omega - 1} = 0
+\]
+
+\textbf{Part (b):} Show $\cos\left(\frac{2\pi}{5}\right) + \cos\left(\frac{4\pi}{5}\right) = -\frac{1}{2}$
+
+The fifth roots of unity are: $1, \omega, \omega^2, \omega^3, \omega^4$ where:
+\[
+\omega = e^{i2\pi/5} = \cos\frac{2\pi}{5} + i\sin\frac{2\pi}{5}
+\]
+
+Note that:
+\begin{align*}
+\omega^2 &= e^{i4\pi/5} = \cos\frac{4\pi}{5} + i\sin\frac{4\pi}{5}\\
+\omega^3 &= e^{i6\pi/5} = \cos\frac{6\pi}{5} + i\sin\frac{6\pi}{5}\\
+\omega^4 &= e^{i8\pi/5} = \cos\frac{8\pi}{5} + i\sin\frac{8\pi}{5}
+\end{align*}
+
+Since $\frac{8\pi}{5} = 2\pi - \frac{2\pi}{5}$, we have:
+\[
+\omega^4 = e^{-i2\pi/5} = \overline{\omega} = \cos\frac{2\pi}{5} - i\sin\frac{2\pi}{5}
+\]
+
+Similarly, $\omega^3 = e^{-i4\pi/5} = \overline{\omega^2}$.
+
+From part (a): $1 + \omega + \omega^2 + \omega^3 + \omega^4 = 0$
+
+Grouping conjugate pairs:
+\[
+1 + (\omega + \omega^4) + (\omega^2 + \omega^3) = 0
+\]
+
+Calculate $\omega + \omega^4 = \omega + \overline{\omega}$:
+\[
+\omega + \overline{\omega} = 2\text{Re}(\omega) = 2\cos\frac{2\pi}{5}
+\]
+
+Calculate $\omega^2 + \omega^3 = \omega^2 + \overline{\omega^2}$:
+\[
+\omega^2 + \overline{\omega^2} = 2\text{Re}(\omega^2) = 2\cos\frac{4\pi}{5}
+\]
+
+Substituting:
+\[
+1 + 2\cos\frac{2\pi}{5} + 2\cos\frac{4\pi}{5} = 0
+\]
+
+Rearranging:
+\[
+\cos\frac{2\pi}{5} + \cos\frac{4\pi}{5} = -\frac{1}{2} \quad \square
+\]
+
+\textbf{Geometric interpretation:} The fifth roots of unity form a regular pentagon centered at the origin on the unit circle. The sum of all five vertices is zero (centroid at origin), which gives us the algebraic identity. The cosine sum represents the sum of the real parts of two of these roots.
+\end{solution}
+
+\begin{problem}[Cube Roots of Unity Properties]
+If $\omega$ is a complex cube root of unity, show that:
+\begin{enumerate}[label=\alph*),leftmargin=*]
+    \item $1 + \omega + \omega^2 = 0$
+    \item $1 + \omega + \bar{\omega} = 0$
+    \item $(6\omega + 1)(6\omega^2 + 1) = 31$
+    \item $(1 + \omega^2)^3 (2 + 3\omega + 3\omega^2) = 1$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+A complex cube root of unity satisfies $\omega^3 = 1$ and $\omega \neq 1$. Use $\omega = e^{i2\pi/3}$ and the fundamental identity $1 + \omega + \omega^2 = 0$ to prove all parts. For (b), note that $\omega^2 = \bar{\omega}$. For (c) and (d), expand and repeatedly substitute $\omega^3 = 1$ and $1 + \omega + \omega^2 = 0$.
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Key facts:} A complex cube root of unity $\omega$ satisfies:
+\begin{itemize}[leftmargin=*]
+  \item $\omega^3 = 1$
+  \item $\omega = e^{i2\pi/3} = -\frac{1}{2} + i\frac{\sqrt{3}}{2}$
+  \item $\omega^2 = e^{i4\pi/3} = -\frac{1}{2} - i\frac{\sqrt{3}}{2}$
+  \item $\omega^2 = \bar{\omega}$ (conjugates)
+\end{itemize}
+
+\textbf{Part (a):} Show $1 + \omega + \omega^2 = 0$
+
+Since $\omega$ is a cube root of unity: $\omega^3 = 1$, so $\omega^3 - 1 = 0$.
+
+Factor: $(\omega - 1)(\omega^2 + \omega + 1) = 0$
+
+Since $\omega \neq 1$ (it's a complex root), we must have:
+\[
+\omega^2 + \omega + 1 = 0
+\]
+
+Therefore: $1 + \omega + \omega^2 = 0$ \quad $\square$
+
+\textbf{Part (b):} Show $1 + \omega + \bar{\omega} = 0$
+
+Since $\omega = e^{i2\pi/3}$ and $\omega^2 = e^{i4\pi/3} = e^{-i2\pi/3}$, we have:
+\[
+\omega^2 = \overline{\omega}
+\]
+
+From part (a): $1 + \omega + \omega^2 = 0$
+
+Substituting $\omega^2 = \bar{\omega}$:
+\[
+1 + \omega + \bar{\omega} = 0 \quad \square
+\]
+
+\textbf{Part (c):} Show $(6\omega + 1)(6\omega^2 + 1) = 31$
+
+Expand the product:
+\begin{align*}
+(6\omega + 1)(6\omega^2 + 1) &= 36\omega \cdot \omega^2 + 6\omega + 6\omega^2 + 1\\
+&= 36\omega^3 + 6\omega + 6\omega^2 + 1
+\end{align*}
+
+Use $\omega^3 = 1$:
+\[
+= 36(1) + 6\omega + 6\omega^2 + 1 = 36 + 1 + 6(\omega + \omega^2)
+\]
+
+From part (a): $\omega + \omega^2 = -1$
+
+Therefore:
+\[
+= 37 + 6(-1) = 37 - 6 = 31 \quad \square
+\]
+
+\textbf{Part (d):} Show $(1 + \omega^2)^3 (2 + 3\omega + 3\omega^2) = 1$
+
+From part (a): $1 + \omega + \omega^2 = 0$, so:
+\[
+1 + \omega^2 = -\omega
+\]
+
+Therefore:
+\[
+(1 + \omega^2)^3 = (-\omega)^3 = -\omega^3 = -1
+\]
+
+Now simplify the second factor. From $1 + \omega + \omega^2 = 0$:
+\[
+\omega + \omega^2 = -1
+\]
+
+So:
+\begin{align*}
+2 + 3\omega + 3\omega^2 &= 2 + 3(\omega + \omega^2)\\
+&= 2 + 3(-1)\\
+&= 2 - 3\\
+&= -1
+\end{align*}
+
+Therefore:
+\[
+(1 + \omega^2)^3 (2 + 3\omega + 3\omega^2) = (-1)(-1) = 1 \quad \square
+\]
+
+\textbf{Summary:} All four identities follow from the fundamental properties $\omega^3 = 1$ and $1 + \omega + \omega^2 = 0$.
+\end{solution}
+
+\begin{problem}[Circle Locus in Complex Plane]
+Show that the following relationship geometrically describes a circle in the complex plane:
+\[
+\frac{1}{z} - \frac{1}{\bar{z}} = i
+\]
+\end{problem}
+
+\begin{hint}
+Let $z = x + iy$ where $x, y \in \mathbb{R}$. Express $\frac{1}{z}$ and $\frac{1}{\bar{z}}$ in terms of $x$ and $y$, then separate real and imaginary parts. The result should be an equation of the form $(x-a)^2 + (y-b)^2 = r^2$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Let $z = x + iy$ where $x, y \in \mathbb{R}$ with $z \neq 0$.
+
+\textbf{Step 1: Calculate $\frac{1}{z}$ and $\frac{1}{\bar{z}}$}
+
+The conjugate is $\bar{z} = x - iy$.
+
+Calculate $\frac{1}{z}$ by multiplying by the conjugate:
+\[
+\frac{1}{z} = \frac{1}{x+iy} = \frac{x-iy}{(x+iy)(x-iy)} = \frac{x-iy}{x^2+y^2}
+\]
+
+Similarly:
+\[
+\frac{1}{\bar{z}} = \frac{1}{x-iy} = \frac{x+iy}{(x-iy)(x+iy)} = \frac{x+iy}{x^2+y^2}
+\]
+
+\textbf{Step 2: Calculate the difference}
+
+\begin{align*}
+\frac{1}{z} - \frac{1}{\bar{z}} &= \frac{x-iy}{x^2+y^2} - \frac{x+iy}{x^2+y^2}\\
+&= \frac{(x-iy) - (x+iy)}{x^2+y^2}\\
+&= \frac{-2iy}{x^2+y^2}\\
+&= \frac{-2y}{x^2+y^2} \cdot i
+\end{align*}
+
+\textbf{Step 3: Apply the given condition}
+
+Given that $\frac{1}{z} - \frac{1}{\bar{z}} = i$:
+\[
+\frac{-2y}{x^2+y^2} \cdot i = i
+\]
+
+Since both sides are purely imaginary (assuming $i \neq 0$), we can equate the coefficients:
+\[
+\frac{-2y}{x^2+y^2} = 1
+\]
+
+Multiply both sides by $(x^2 + y^2)$:
+\[
+-2y = x^2 + y^2
+\]
+
+Rearrange:
+\[
+x^2 + y^2 + 2y = 0
+\]
+
+Complete the square for $y$:
+\[
+x^2 + (y^2 + 2y + 1) - 1 = 0
+\]
+\[
+x^2 + (y + 1)^2 = 1
+\]
+
+\textbf{Step 4: Identify the circle}
+
+The equation $x^2 + (y+1)^2 = 1$ represents a circle with:
+\begin{itemize}[leftmargin=*]
+  \item Center: $(0, -1)$ or $-i$ in complex notation
+  \item Radius: $1$
+\end{itemize}
+
+Therefore, the locus is a \textbf{circle centered at $-i$ with radius 1}.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=2.5,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-1.8,0) -- (1.8,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-2.5) -- (0,1) node[above,font=\small] {Im};
+  
+  % Draw the circle: x^2 + (y+1)^2 = 1
+  % Center at (0, -1), radius 1
+  \coordinate (Center) at (0,-1);
+  \def\radius{1}
+  
+  \draw[very thick,bookpurple] (Center) circle (\radius);
+  
+  % Mark the center
+  \fill[bookred] (Center) circle (1.5pt);
+  \node[bookred,font=\small,right] at (Center) {Center: $-i$};
+  
+  % Draw radius indicator
+  \draw[bookred,dashed,thin] (Center) -- ($(Center)+(90:\radius)$);
+  \node[bookred,font=\scriptsize,right] at ($(Center)+(45:0.5)$) {$r=1$};
+  
+  % Mark some key points on the circle
+  \fill[bookpurple] ($(Center)+(90:\radius)$) circle (1pt);
+  \node[bookpurple,font=\scriptsize,above] at ($(Center)+(90:\radius)$) {$(0,0)$};
+  
+  \fill[bookpurple] ($(Center)+(-90:\radius)$) circle (1pt);
+  \node[bookpurple,font=\scriptsize,below] at ($(Center)+(-90:\radius)$) {$(0,-2)$};
+  
+  \fill[bookpurple] ($(Center)+(0:\radius)$) circle (1pt);
+  \node[bookpurple,font=\scriptsize,right] at ($(Center)+(0:\radius)$) {$(1,-1)$};
+  
+  \fill[bookpurple] ($(Center)+(180:\radius)$) circle (1pt);
+  \node[bookpurple,font=\scriptsize,left] at ($(Center)+(180:\radius)$) {$(-1,-1)$};
+  
+  % Add grid for reference
+  \foreach \x in {-1,1} {
+    \draw[warmstone!30,very thin] (\x,-2.5) -- (\x,1);
+  }
+  \foreach \y in {-2,-1} {
+    \draw[warmstone!30,very thin] (-1.8,\y) -- (1.8,\y);
+  }
+  
+  % Origin
+  \fill (0,0) circle (1pt);
+  \node[below right,font=\scriptsize] at (0,0) {$O$};
+  
+  % Add equation label
+  \node[font=\small,align=center,draw=purple!50,fill=white,rounded corners] at (1.3,0.5) {
+    $x^2 + (y+1)^2 = 1$
+  };
+  
+  % Note that origin is ON the circle
+  \node[bookpurple!80,font=\tiny,align=left] at (-1.5,-2.2) {
+    Note: Origin $(0,0)$\\is on the circle
+  };
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Verification:} The origin $(0,0)$ satisfies the equation: $0^2 + (0+1)^2 = 1$ \checkmark
+
+\textbf{Geometric interpretation:} For any point $z$ on this circle, the difference $\frac{1}{z} - \frac{1}{\bar{z}}$ equals $i$. This relates the reciprocals and their conjugates in a specific way that constrains $z$ to lie on a circle.
+\end{solution}
+
+\begin{problem}[Square OABC with Complex Numbers]
+$OABC$ is a square with point $A$ represented by the complex number $z = 2 + i$.
+
+\begin{enumerate}[label=\alph*),leftmargin=*]
+    \item Let $w$ represent the complex number at point $C$. Prove that: $z^2 + w^2 = 0$
+    \item Find the complex numbers represented by $B$ and $C$.
+    \item Find the complex number represented by the vector $\overrightarrow{AC}$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For a square $OABC$ with $O$ at the origin, $C$ is obtained by rotating $A$ by $90°$ counterclockwise, so $w = iz$. For part (a), substitute and use $i^2 = -1$. For part (b), $B$ is the fourth vertex, obtained by $B = A + C$ (vector addition).
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Given:} Square $OABC$ with $O$ at origin and $A$ at $z = 2+i$.
+
+\textbf{Part (a):} Prove $z^2 + w^2 = 0$
+
+For a square with one vertex at the origin $O$ and adjacent vertex at $A$ (represented by $z$), the next vertex $C$ (going counterclockwise) is obtained by rotating $OA$ by $90°$ counterclockwise.
+
+Rotation by $90°$ is achieved by multiplying by $i$:
+\[
+w = iz
+\]
+
+Now calculate $z^2 + w^2$:
+\begin{align*}
+z^2 + w^2 &= z^2 + (iz)^2\\
+&= z^2 + i^2z^2\\
+&= z^2 + (-1)z^2\\
+&= z^2 - z^2\\
+&= 0 \quad \square
+\end{align*}
+
+\textbf{Part (b):} Find the complex numbers for $B$ and $C$
+
+Calculate $C$:
+\[
+w = iz = i(2+i) = 2i + i^2 = 2i - 1 = -1 + 2i
+\]
+
+Calculate $B$ using vector addition. In the square $OABC$:
+\[
+\overrightarrow{OB} = \overrightarrow{OA} + \overrightarrow{AB} = \overrightarrow{OA} + \overrightarrow{OC}
+\]
+
+Therefore:
+\[
+B = A + C = (2+i) + (-1+2i) = 1 + 3i
+\]
+
+\textbf{Answers:}
+\begin{itemize}[leftmargin=*]
+  \item $C = -1 + 2i$
+  \item $B = 1 + 3i$
+\end{itemize}
+
+\textbf{Part (c):} Find $\overrightarrow{AC}$
+
+The vector from $A$ to $C$ is:
+\[
+\overrightarrow{AC} = C - A = (-1+2i) - (2+i) = -3 + i
+\]
+
+\textbf{Answer:} $\overrightarrow{AC} = -3 + i$
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.8,>=Stealth]
+  % Define coordinates
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (2,1);
+  \coordinate (C) at (-1,2);
+  \coordinate (B) at (1,3);
+  
+  % Draw axes
+  \draw[->,thick] (-1.5,0) -- (3,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-0.5) -- (0,3.8) node[above,font=\small] {Im};
+  
+  % Draw the square
+  \draw[very thick,purple!60] (O) -- (A) -- (B) -- (C) -- cycle;
+  \fill[purple!10,opacity=0.5] (O) -- (A) -- (B) -- (C) -- cycle;
+  
+  % Draw vectors
+  \draw[->,very thick,bookpurple] (O) -- (A) node[midway,below right,font=\scriptsize] {$z=2+i$};
+  \draw[->,very thick,bookred] (O) -- (C) node[midway,left,font=\scriptsize] {$w=-1+2i$};
+  \draw[->,very thick,bookpurple!80!black] (O) -- (B) node[midway,above left,font=\tiny] {$1+3i$};
+  
+  % Draw AC vector
+  \draw[->,very thick,lawpurple,dashed] (A) -- (C) node[midway,above right,font=\tiny] {$\overrightarrow{AC}=-3+i$};
+  
+  % Mark right angle at O
+  \draw[thick] (0.2,0) -- (0.2,0.2) -- (0,0.2);
+  
+  % Mark right angle at A
+  \draw[thick] ($(A)+(-0.1,0.2)$) -- ($(A)+(0.1,0.2)$) -- ($(A)+(0.1,0)$);
+  
+  % Label vertices
+  \fill[black] (O) circle (1.5pt);
+  \node[black,font=\small,below left] at (O) {$O$ (origin)};
+  
+  \fill[bookpurple] (A) circle (1.5pt);
+  \node[bookpurple,font=\small,right] at (A) {$A: 2+i$};
+  
+  \fill[bookred] (C) circle (1.5pt);
+  \node[bookred,font=\small,left] at (C) {$C: -1+2i$};
+  
+  \fill[bookpurple!80!black] (B) circle (1.5pt);
+  \node[bookpurple!80!black,font=\small,above right] at (B) {$B: 1+3i$};
+  
+  % Mark coordinates
+  \node[bookpurple,font=\tiny,below] at (A) {$(2,1)$};
+  \node[bookred,font=\tiny,above] at (C) {$(-1,2)$};
+  \node[bookpurple!80!black,font=\tiny,left] at (B) {$(1,3)$};
+  
+  % Add annotation
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (2.3,2.5) {
+    \textbf{Key relations:}\\
+    $w = iz$\\
+    $B = A + C$\\
+    $\overrightarrow{AC} = C - A$
+  };
+  
+  % Grid for reference
+  \foreach \x in {-1,1,2} {
+    \draw[warmstone!15,very thin] (\x,-0.5) -- (\x,3.8);
+  }
+  \foreach \y in {1,2,3} {
+    \draw[warmstone!15,very thin] (-1.5,\y) -- (3,\y);
+  }
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Verification:} 
+\begin{itemize}[leftmargin=*]
+  \item All sides have length $|z| = \sqrt{5}$: Check $|A| = |C| = |B-A| = |B-C| = \sqrt{5}$ \checkmark
+  \item All angles are $90°$ \checkmark
+  \item $z^2 + w^2 = (2+i)^2 + (-1+2i)^2 = (3+4i) + (-3-4i) = 0$ \checkmark
+\end{itemize}
+\end{solution}
+
+\begin{problem}[Square ABCD Vertices with Complex Numbers]
+$ABCD$ is a square in the complex plane. The vertices $A$ and $B$ represent the complex numbers $9 + i$ and $4 + 13i$ respectively. Find the complex numbers corresponding to vertices $C$ and $D$.
+\end{problem}
+
+\begin{hint}
+The vector from $A$ to $B$ is $\overrightarrow{AB} = B - A = (4+13i) - (9+i) = -5 + 12i$. To find $C$, rotate $\overrightarrow{AB}$ by $90°$ counterclockwise (multiply by $i$) and add to $B$. Similarly for $D$.
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Given:} Square $ABCD$ with $A = 9+i$ and $B = 4+13i$.
+
+\textbf{Step 1: Find the side vector}
+
+The vector from $A$ to $B$ is:
+\[
+\overrightarrow{AB} = B - A = (4+13i) - (9+i) = -5 + 12i
+\]
+
+\textbf{Step 2: Find vertex $C$}
+
+To go from $B$ to $C$, we rotate the vector $\overrightarrow{AB}$ by $90°$ counterclockwise (multiply by $i$):
+\[
+\overrightarrow{BC} = i \cdot \overrightarrow{AB} = i(-5+12i) = -5i + 12i^2 = -5i - 12 = -12 - 5i
+\]
+
+Therefore:
+\[
+C = B + \overrightarrow{BC} = (4+13i) + (-12-5i) = -8 + 8i
+\]
+
+\textbf{Step 3: Find vertex $D$}
+
+Method 1 - Using rotation from $C$:
+\[
+\overrightarrow{CD} = i \cdot \overrightarrow{BC} = i(-12-5i) = -12i - 5i^2 = -12i + 5 = 5 - 12i
+\]
+\[
+D = C + \overrightarrow{CD} = (-8+8i) + (5-12i) = -3 - 4i
+\]
+
+Method 2 - Using parallelogram property ($\overrightarrow{AD} = \overrightarrow{BC}$):
+\[
+D = A + \overrightarrow{AD} = A + \overrightarrow{BC} = (9+i) + (-12-5i) = -3 - 4i
+\]
+
+\textbf{Answers:}
+\begin{itemize}[leftmargin=*]
+  \item $C = -8 + 8i$
+  \item $D = -3 - 4i$
+\end{itemize}
+
+\textbf{Verification:} Check that all sides have equal length:
+\begin{align*}
+|AB| &= |-5+12i| = \sqrt{25+144} = \sqrt{169} = 13\\
+|BC| &= |-12-5i| = \sqrt{144+25} = \sqrt{169} = 13\\
+|CD| &= |5-12i| = \sqrt{25+144} = \sqrt{169} = 13\\
+|DA| &= |A-D| = |(9+i)-(-3-4i)| = |12+5i| = \sqrt{144+25} = 13 \quad \checkmark
+\end{align*}
+
+All sides have length 13, confirming our answer.
+\end{solution}
+
+\begin{problem}[Square ABCD Vector Relationship]
+The points $A, B, C$ and $D$ on the Argand diagram represent the complex numbers $a, b, c$ and $d$ respectively. The points form a square $ABCD$.
+
+By using vectors, or otherwise, show that $c = (1 + i)d - ia$.
+\end{problem}
+
+\begin{hint}
+Use the fact that in a square, consecutive sides are equal in length and perpendicular. The key relationship is $\overrightarrow{DC} = i \cdot \overrightarrow{AD}$ (rotation by $90°$).
+\end{hint}
+
+\begin{solution}[Proof]
+\textbf{Given:} Square $ABCD$ with vertices represented by complex numbers $a, b, c, d$.
+
+\textbf{Goal:} Prove $c = (1+i)d - ia$
+
+\textbf{Step 1: Use the square property}
+
+In a square $ABCD$, the vector from $D$ to $C$ is obtained by rotating the vector from $A$ to $D$ by $90°$ counterclockwise:
+\[
+\overrightarrow{DC} = i \cdot \overrightarrow{AD}
+\]
+
+\textbf{Step 2: Express in terms of complex numbers}
+
+\[
+c - d = i(d - a)
+\]
+
+\textbf{Step 3: Solve for $c$}
+
+\begin{align*}
+c - d &= i(d - a)\\
+c - d &= id - ia\\
+c &= d + id - ia\\
+c &= d(1 + i) - ia\\
+c &= (1+i)d - ia \quad \square
+\end{align*}
+
+Therefore: $c = (1+i)d - ia$ \quad $\square$
+
+\textbf{Geometric interpretation:} This identity relates the positions of vertices $C$, $D$, and $A$ of a square using complex number operations. The term $(1+i)d$ represents $d$ plus its $90°$ rotation, while $-ia$ adjusts for the position of vertex $A$.
 \end{solution}
 

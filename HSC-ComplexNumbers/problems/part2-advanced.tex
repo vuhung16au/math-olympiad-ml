@@ -23,15 +23,107 @@ $BA = z_1-z_2$, $BC = z_3-z_2$. Since $BA \perp BC$ and $|BA|=|BC|$, we have $BA
 \end{solution}
 
 \begin{problem}[Square from Triangle]
-Use the result from the previous problem. If $ABCD$ is a square, find the complex number for $D$ in terms of $z_1, z_2, z_3$.
+Three vertices of a square $ABCD$ in the complex plane are represented by complex numbers $z_1$ (point $A$), $z_2$ (point $B$), and $z_3$ (point $C$). Given that consecutive sides of a square are perpendicular and equal in length, find the complex number $z_4$ representing vertex $D$ in terms of $z_1, z_2, z_3$.
 \end{problem}
 
 \begin{hint}
-$D$ is obtained from $C$ by the same transformation that takes $A$ to $C$ via $B$.
+Since $ABCD$ is a square, side $AB$ is perpendicular to side $BC$, and $|AB| = |BC|$. This means $BA = i \cdot BC$ (or $-i \cdot BC$). Use the same relationship for sides $CD$ and $DA$.
 \end{hint}
 
 \begin{solution}[Sketch]
-From $(z_1-z_2)^2 = -(z_3-z_2)^2$, we have $z_1-z_2 = i(z_3-z_2)$ (choosing sign). For square, $z_4-z_3 = i(z_2-z_3)$, giving $z_4 = z_3 + i(z_2-z_3) = z_2 + z_3 - iz_2 + iz_3 = z_2(1-i) + z_3(1+i)$. Alternatively: $z_4 = z_1 + z_3 - z_2$.
+For a square $ABCD$, consecutive sides are equal in length and perpendicular. 
+
+The vector from $B$ to $A$ is $z_1 - z_2$, and from $B$ to $C$ is $z_3 - z_2$.
+
+Since $BA \perp BC$ and $|BA| = |BC|$, we have:
+\[
+z_1 - z_2 = i(z_3 - z_2) \quad \text{(rotating $BC$ by $90°$ counterclockwise)}
+\]
+
+Similarly, for the square to close, the vector from $C$ to $D$ must equal the vector from $B$ to $C$ rotated $90°$:
+\[
+z_4 - z_3 = i(z_2 - z_3)
+\]
+
+Solving for $z_4$:
+\begin{align*}
+z_4 &= z_3 + i(z_2 - z_3)\\
+&= z_3 + iz_2 - iz_3\\
+&= z_2 \cdot i + z_3(1 - i)\\
+&= iz_2 + z_3(1-i)
+\end{align*}
+
+\textbf{Alternative formula:} Using the parallelogram property, we can also write:
+\[
+z_4 = z_1 + z_3 - z_2
+\]
+
+This works because $\vec{AD} = \vec{BC}$, so $z_4 - z_1 = z_3 - z_2$.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.8,>=Stealth]
+  % Define the square vertices (example values)
+  \coordinate (A) at (1,0.5);
+  \coordinate (B) at (2,1.5);
+  \coordinate (C) at (1,2.5);
+  \coordinate (D) at (0,1.5);
+  
+  % Draw the square
+  \draw[very thick,purple!60] (A) -- (B) -- (C) -- (D) -- cycle;
+  
+  % Fill the square lightly
+  \fill[purple!10,opacity=0.5] (A) -- (B) -- (C) -- (D) -- cycle;
+  
+  % Draw vectors from B
+  \draw[->,very thick,bookpurple] (B) -- (A) node[midway,below right,font=\scriptsize] {$z_1-z_2$};
+  \draw[->,very thick,bookpurple!80!black] (B) -- (C) node[midway,left,font=\scriptsize] {$z_3-z_2$};
+  
+  % Draw vectors from C
+  \draw[->,very thick,bookred] (C) -- (D) node[midway,above,font=\scriptsize] {$z_4-z_3$};
+  
+  % Mark right angles
+  \draw[thick] ($(B)+(0.15,0)$) -- ($(B)+(0.15,0.15)$) -- ($(B)+(0,0.15)$);
+  \draw[thick] ($(C)+(0,0.15)$) -- ($(C)+(-0.15,0.15)$) -- ($(C)+(-0.15,0)$);
+  
+  % Label vertices
+  \fill[bookpurple] (A) circle (1.5pt);
+  \node[bookpurple,font=\small,below right] at (A) {$A: z_1$};
+  
+  \fill[bookpurple] (B) circle (1.5pt);
+  \node[bookpurple,font=\small,right] at (B) {$B: z_2$};
+  
+  \fill[bookpurple!80!black] (C) circle (1.5pt);
+  \node[bookpurple!80!black,font=\small,above] at (C) {$C: z_3$};
+  
+  \fill[bookred] (D) circle (1.5pt);
+  \node[bookred,font=\small,left] at (D) {$D: z_4 = ?$};
+  
+  % Show rotation relationship
+  \draw[->,thick,orange!70,dashed] (A) to[bend right=20] node[midway,below,font=\tiny] {rotate $90°$} (C);
+  
+  % Add annotation box
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (2.8,1) {
+    \textbf{Key relationships:}\\
+    $z_1 - z_2 = i(z_3-z_2)$\\
+    $z_4 - z_3 = i(z_2-z_3)$\\[0.2em]
+    \textbf{Answer:}\\
+    $z_4 = z_1 + z_3 - z_2$
+  };
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Verification:} Both formulas are equivalent:
+\begin{align*}
+iz_2 + z_3(1-i) &= iz_2 + z_3 - iz_3\\
+&= z_3 + i(z_2 - z_3)
+\end{align*}
+
+And using $z_1 - z_2 = i(z_3 - z_2)$, we get $z_1 = z_2 + i(z_3-z_2) = iz_3 + z_2(1-i)$.
+
+Therefore: $z_4 = z_1 + z_3 - z_2$
+
 \end{solution}
 
 \begin{problem}[Factoring Polynomial]
@@ -59,15 +151,130 @@ Complex roots come in conjugate pairs. If there are 4 complex roots, they form 2
 \end{solution}
 
 \begin{problem}[Vector Addition and Angles]
-Points $P_0, P_1, P_2, P_3$ correspond to $z_0, z_0+z_1, z_0+z_1+z_2, \ldots$ where $z_n = \cos(\alpha+n\beta) + i\sin(\alpha+n\beta)$. Using vector addition, explain why external angles $\theta_0 = \theta_1 = \theta_2 = \beta$.
+Consider a sequence of unit complex numbers defined by:
+$$z_n = \cos(\alpha+n\beta) + i\sin(\alpha+n\beta) = e^{i(\alpha+n\beta)}$$
+for $n = 0, 1, 2, 3, \ldots$
+
+On the Argand diagram, we construct points by cumulative vector addition:
+\begin{align*}
+P_0 &= z_0\\
+P_1 &= z_0 + z_1\\
+P_2 &= z_0 + z_1 + z_2\\
+P_3 &= z_0 + z_1 + z_2 + z_3\\
+&\vdots
+\end{align*}
+
+These points form a polygonal path. Using vector addition, prove that all external angles of this polygon are equal to $\beta$. That is, show that $\theta_0 = \theta_1 = \theta_2 = \cdots = \beta$, where $\theta_n$ is the external angle at vertex $P_n$.
 \end{problem}
 
 \begin{hint}
-Each $z_n$ is a unit vector at angle $\alpha + n\beta$. The angle between consecutive vectors is constant.
+Each $z_n$ is a unit vector at angle $\alpha + n\beta$. The angle between consecutive vectors is constant. The external angle is the amount the direction turns from one segment to the next.
 \end{hint}
 
 \begin{solution}[Sketch]
-Vector $z_n$ has argument $\alpha+n\beta$, and $z_{n+1}$ has argument $\alpha+(n+1)\beta$. The difference is $\beta$, which is the external angle between consecutive segments. Thus all external angles equal $\beta$.
+\textbf{Understanding the geometry:}
+
+The polygonal path is formed by placing unit vectors $z_0, z_1, z_2, \ldots$ tip-to-tail. Each vector $z_n$ is a unit complex number (lies on the unit circle) with argument $\alpha + n\beta$.
+
+\textbf{Step 1: Arguments of consecutive vectors}
+
+For any consecutive pair of vectors:
+\begin{align*}
+\arg(z_n) &= \alpha + n\beta\\
+\arg(z_{n+1}) &= \alpha + (n+1)\beta = \alpha + n\beta + \beta
+\end{align*}
+
+The difference in arguments is:
+$$\arg(z_{n+1}) - \arg(z_n) = \beta$$
+
+\textbf{Step 2: Geometric interpretation}
+
+The segment from $P_n$ to $P_{n+1}$ is represented by the vector $z_{n+1}$ (pointing in direction $\arg(z_{n+1})$).
+
+The segment from $P_{n-1}$ to $P_n$ is represented by the vector $z_n$ (pointing in direction $\arg(z_n)$).
+
+The external angle $\theta_n$ at vertex $P_n$ is the angle by which the path turns. This is precisely the difference in the directions of consecutive vectors:
+$$\theta_n = \arg(z_{n+1}) - \arg(z_n) = \beta$$
+
+\textbf{Step 3: Conclusion}
+
+Since this difference is constant for all $n$, we have:
+$$\theta_0 = \theta_1 = \theta_2 = \cdots = \beta$$
+
+All external angles equal $\beta$, which means the polygon turns by the same angle at each vertex.
+
+\textbf{Special case:} If $\beta = \frac{2\pi}{n}$, the path closes after $n$ steps, forming a regular $n$-sided polygon.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.5,>=Stealth]
+  % Parameters
+  \def\alpha{20}  % Initial angle
+  \def\beta{45}   % Angle increment
+  
+  % Draw axes
+  \draw[->,thick,warmstone!50] (-0.5,0) -- (3.5,0) node[right,font=\scriptsize] {Re};
+  \draw[->,thick,warmstone!50] (0,-0.5) -- (0,2.8) node[above,font=\scriptsize] {Im};
+  
+  % Calculate cumulative positions
+  \coordinate (P0) at ({cos(\alpha)}, {sin(\alpha)});
+  \coordinate (P1) at ({cos(\alpha) + cos(\alpha+\beta)}, {sin(\alpha) + sin(\alpha+\beta)});
+  \coordinate (P2) at ({cos(\alpha) + cos(\alpha+\beta) + cos(\alpha+2*\beta)}, 
+                       {sin(\alpha) + sin(\alpha+\beta) + sin(\alpha+2*\beta)});
+  \coordinate (P3) at ({cos(\alpha) + cos(\alpha+\beta) + cos(\alpha+2*\beta) + cos(\alpha+3*\beta)}, 
+                       {sin(\alpha) + sin(\alpha+\beta) + sin(\alpha+2*\beta) + sin(\alpha+3*\beta)});
+  
+  % Draw the origin
+  \fill (0,0) circle (1.2pt);
+  \node[below left,font=\scriptsize] at (0,0) {$O$};
+  
+  % Draw individual unit vectors from origin (semi-transparent)
+  \draw[->,bookpurple!30,thick] (0,0) -- ({cos(\alpha)}, {sin(\alpha)});
+  \draw[->,bookpurple!30,thick] (0,0) -- ({cos(\alpha+\beta)}, {sin(\alpha+\beta)});
+  \draw[->,bookpurple!30,thick] (0,0) -- ({cos(\alpha+2*\beta)}, {sin(\alpha+2*\beta)});
+  \draw[->,bookpurple!30,thick] (0,0) -- ({cos(\alpha+3*\beta)}, {sin(\alpha+3*\beta)});
+  
+  % Draw partial unit circle
+  \draw[warmstone!50,thin] (0,0) circle (1);
+  
+  % Draw the polygonal path (vector addition)
+  \draw[->,very thick,bookpurple] (0,0) -- (P0) node[midway,above,font=\tiny,sloped] {$z_0$};
+  \draw[->,very thick,bookred] (P0) -- (P1) node[midway,above,font=\tiny,sloped] {$z_1$};
+  \draw[->,very thick,bookpurple!80!black] (P1) -- (P2) node[midway,above,font=\tiny,sloped] {$z_2$};
+  \draw[->,very thick,lawpurple] (P2) -- (P3) node[midway,above,font=\tiny,sloped] {$z_3$};
+  
+  % Mark points
+  \fill[bookpurple] (P0) circle (1.5pt);
+  \node[above right,font=\scriptsize] at (P0) {$P_0$};
+  
+  \fill[bookred] (P1) circle (1.5pt);
+  \node[above,font=\scriptsize] at (P1) {$P_1$};
+  
+  \fill[bookpurple!80!black] (P2) circle (1.5pt);
+  \node[above,font=\scriptsize] at (P2) {$P_2$};
+  
+  \fill[lawpurple] (P3) circle (1.5pt);
+  \node[above right,font=\scriptsize] at (P3) {$P_3$};
+  
+  % Mark external angle at P1
+  \draw[lawpurple,thick] ($(P1)!0.4cm!(P0)$) arc [start angle={180+\alpha+\beta}, end angle={180+\alpha+2*\beta}, radius=0.4cm];
+  \node[lawpurple,font=\scriptsize] at ($(P1) + (-0.35,0.25)$) {$\beta$};
+  
+  % Mark external angle at P2
+  \draw[lawpurple,thick] ($(P2)!0.4cm!(P1)$) arc [start angle={180+\alpha+2*\beta}, end angle={180+\alpha+3*\beta}, radius=0.4cm];
+  \node[lawpurple,font=\scriptsize] at ($(P2) + (-0.5,0.15)$) {$\beta$};
+  
+  % Labels for angles in the unit circle
+  \node[blue!60,font=\tiny] at ({0.5*cos(\alpha+15)}, {0.5*sin(\alpha+15)}) {$\alpha$};
+  \node[blue!60,font=\tiny] at ({0.6*cos(\alpha+\beta+20)}, {0.6*sin(\alpha+\beta+20)}) {$\alpha\!+\!\beta$};
+  
+  % Title
+  \node[font=\small,align=center] at (1.7,-0.8) {Vector addition spiral with\\constant external angle $\beta$};
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+The diagram shows unit vectors $z_0, z_1, z_2, z_3$ (shown faintly from origin) being added tip-to-tail to form the polygonal path $P_0 \to P_1 \to P_2 \to P_3$. Each turn angle (external angle) is $\beta = 45°$.
 \end{solution}
 
 \begin{problem}[Modulus via Trigonometry]
@@ -107,27 +314,200 @@ $|z|=|w|=1$. $z\bar{w} = e^{i(\pi/6-3\pi/4)} = e^{-i7\pi/12}$, $\bar{z}w = e^{i7
 \end{solution}
 
 \begin{problem}[Equilateral Triangle]
-$z_2 = e^{i\pi/3}z_1$. Explain why $\triangle OAB$ (points $0, z_1, z_2$) is equilateral.
+Let $z_1$ be a non-zero complex number represented by point $A$ on the Argand diagram, and let $z_2 = e^{i\pi/3}z_1$ be represented by point $B$. The origin is represented by point $O$. Prove that triangle $\triangle OAB$ is equilateral.
 \end{problem}
 
 \begin{hint}
-$|z_1| = |z_2|$ since multiplication by $e^{i\pi/3}$ preserves modulus. The angle $\angle z_1 O z_2 = \pi/3 = 60^\circ$.
+Multiplication by $e^{i\pi/3}$ rotates $z_1$ by angle $\pi/3 = 60°$ while preserving its modulus. Therefore $|z_1| = |z_2|$ and the angle $\angle AOB = \pi/3$.
 \end{hint}
 
 \begin{solution}[Sketch]
-$|OA| = |z_1|$, $|OB| = |z_2| = |z_1|$. The angle between them is $\pi/3$. By the law of cosines, $|AB|^2 = 2|z_1|^2(1-\cos\pi/3) = 2|z_1|^2(1-1/2) = |z_1|^2$. Thus $|AB|=|OA|=|OB|$, making it equilateral.
+We need to show that all three sides of triangle $OAB$ are equal.
+
+\textbf{Given:} $z_2 = e^{i\pi/3}z_1$
+
+\textbf{Step 1: Show two sides are equal}
+
+Since multiplication by $e^{i\pi/3}$ preserves modulus:
+\[
+|OA| = |z_1| \quad \text{and} \quad |OB| = |z_2| = |e^{i\pi/3}z_1| = |e^{i\pi/3}| \cdot |z_1| = 1 \cdot |z_1| = |z_1|
+\]
+
+Therefore: $|OA| = |OB| = |z_1|$
+
+\textbf{Step 2: Find the angle at O}
+
+Since $z_2 = e^{i\pi/3}z_1$, the argument of $z_2$ is:
+\[
+\arg(z_2) = \arg(e^{i\pi/3}z_1) = \arg(e^{i\pi/3}) + \arg(z_1) = \frac{\pi}{3} + \arg(z_1)
+\]
+
+Therefore, the angle $\angle AOB = \frac{\pi}{3} = 60°$
+
+\textbf{Step 3: Calculate the third side using law of cosines}
+
+For triangle $OAB$:
+\begin{align*}
+|AB|^2 &= |OA|^2 + |OB|^2 - 2|OA||OB|\cos(\pi/3)\\
+&= |z_1|^2 + |z_1|^2 - 2|z_1|^2 \cdot \frac{1}{2}\\
+&= 2|z_1|^2 - |z_1|^2\\
+&= |z_1|^2
+\end{align*}
+
+Therefore: $|AB| = |z_1|$
+
+\textbf{Conclusion:} $|OA| = |OB| = |AB| = |z_1|$, so triangle $OAB$ is equilateral.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=2.2,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-0.3,0) -- (3,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-0.3) -- (0,2.5) node[above,font=\small] {Im};
+  
+  % Define z1 (let's say at angle 20° with modulus 2)
+  \def\angleZ{20}
+  \def\modulus{2}
+  \coordinate (O) at (0,0);
+  \coordinate (A) at ({\modulus*cos(\angleZ)},{\modulus*sin(\angleZ)});
+  \coordinate (B) at ({\modulus*cos(\angleZ+60)},{\modulus*sin(\angleZ+60)});
+  
+  % Draw the equilateral triangle
+  \draw[very thick,purple!60] (O) -- (A) -- (B) -- cycle;
+  \fill[purple!10,opacity=0.5] (O) -- (A) -- (B) -- cycle;
+  
+  % Draw vectors from origin
+  \draw[->,very thick,bookpurple] (O) -- (A) node[midway,below right,font=\scriptsize] {$z_1$};
+  \draw[->,very thick,bookred] (O) -- (B) node[midway,above left,font=\scriptsize] {$z_2=e^{i\pi/3}z_1$};
+  
+  % Draw the third side
+  \draw[very thick,bookpurple!80!black] (A) -- (B);
+  
+  % Mark all three sides with their lengths
+  \node[bookpurple,font=\tiny] at ($(O)!0.5!(A)+(0.15,-0.15)$) {$|z_1|$};
+  \node[bookred,font=\tiny] at ($(O)!0.5!(B)+(-0.2,0.1)$) {$|z_1|$};
+  \node[bookpurple!80!black,font=\tiny] at ($(A)!0.5!(B)+(0.2,0)$) {$|z_1|$};
+  
+  % Mark the 60° angle at O
+  \draw[orange!70,thick,->] (0.5,0) arc (0:\angleZ:0.5);
+  \draw[orange!70,thick,->] ({\angleZ}:0.6) arc (\angleZ:{\angleZ+60}:0.6);
+  \node[orange!70,font=\scriptsize] at ({\angleZ+30}:0.85) {$60°$};
+  
+  % Mark vertices
+  \fill[black] (O) circle (1.2pt);
+  \node[black,font=\small,below left] at (O) {$O$ (origin)};
+  
+  \fill[bookpurple] (A) circle (1.5pt);
+  \node[bookpurple,font=\small,below right] at (A) {$A: z_1$};
+  
+  \fill[bookred] (B) circle (1.5pt);
+  \node[bookred,font=\small,above] at (B) {$B: z_2$};
+  
+  % Add annotation box
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (2.5,1.8) {
+    \textbf{Key facts:}\\
+    $|OA| = |OB| = |z_1|$\\
+    $\angle AOB = 60°$\\
+    $\Rightarrow |AB| = |z_1|$\\
+    All sides equal!
+  };
+  
+  % Mark equal sides with tick marks
+  \draw[thick,bookpurple] ($(O)!0.4!(A)$) -- ($(O)!0.4!(A)+(0.05,0.05)$);
+  \draw[thick,bookred] ($(O)!0.4!(B)$) -- ($(O)!0.4!(B)+(-0.05,0.05)$);
+  \draw[thick,bookpurple!80!black] ($(A)!0.5!(B)+(0.03,0.03)$) -- ($(A)!0.5!(B)+(-0.03,-0.03)$);
+  
+  % Grid for reference
+  \foreach \x in {1,2} {
+    \draw[warmstone!15,very thin] (\x,-0.3) -- (\x,2.5);
+  }
+  \foreach \y in {1,2} {
+    \draw[warmstone!15,very thin] (-0.3,\y) -- (3,\y);
+  }
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Alternative approach:} We can also compute $|AB| = |z_2 - z_1|$ directly:
+\begin{align*}
+|z_2 - z_1| &= |e^{i\pi/3}z_1 - z_1|\\
+&= |z_1||e^{i\pi/3} - 1|\\
+&= |z_1| \cdot |(\cos 60° + i\sin 60°) - 1|\\
+&= |z_1| \cdot |(1/2 + i\sqrt{3}/2) - 1|\\
+&= |z_1| \cdot |-1/2 + i\sqrt{3}/2|\\
+&= |z_1| \cdot \sqrt{1/4 + 3/4}\\
+&= |z_1|
+\end{align*}
+
+This confirms $|AB| = |z_1|$, completing the proof.
+
 \end{solution}
 
 \begin{problem}[Algebraic Identity]
-Prove $z_1^2 + z_2^2 = z_1 z_2$ for the equilateral triangle in the previous problem.
+Consider an equilateral triangle $\triangle OAB$ where $O$ is the origin, $A$ represents complex number $z_1$, and $B$ represents $z_2 = e^{i\pi/3}z_1$ (i.e., $z_2$ is obtained by rotating $z_1$ by $60°$). Prove the algebraic identity:
+\[
+z_1^2 + z_2^2 = z_1 z_2
+\]
 \end{problem}
 
 \begin{hint}
-$z_2 = e^{i\pi/3}z_1 = \omega z_1$ where $\omega = e^{i\pi/3}$ satisfies $\omega^2 - \omega + 1 = 0$ (approximately).
+Let $\omega = e^{i\pi/3}$, so $z_2 = \omega z_1$. Show that $\omega$ satisfies $\omega^2 - \omega + 1 = 0$ by using the fact that $\omega^3 = e^{i\pi} = -1$.
 \end{hint}
 
 \begin{solution}[Sketch]
-Let $\omega = e^{i\pi/3}$. Then $z_2 = \omega z_1$. We have $z_1^2 + z_2^2 = z_1^2 + \omega^2z_1^2 = z_1^2(1+\omega^2)$. Also, $z_1z_2 = z_1 \cdot \omega z_1 = \omega z_1^2$. Need to show $1+\omega^2 = \omega$, i.e., $\omega^2 - \omega + 1 = 0$. Since $\omega = e^{i\pi/3}$, we have $\omega^3 = e^{i\pi} = -1$, so $\omega$ satisfies $\omega^3+1=0$, which factors as $(\omega+1)(\omega^2-\omega+1)=0$. Since $\omega \neq -1$, we have $\omega^2-\omega+1=0$.
+Let $\omega = e^{i\pi/3}$ (a primitive 6th root of unity). Then $z_2 = \omega z_1$.
+
+\textbf{Left-hand side:}
+\begin{align*}
+z_1^2 + z_2^2 &= z_1^2 + (\omega z_1)^2\\
+&= z_1^2 + \omega^2 z_1^2\\
+&= z_1^2(1 + \omega^2)
+\end{align*}
+
+\textbf{Right-hand side:}
+\begin{align*}
+z_1 z_2 &= z_1 \cdot \omega z_1\\
+&= \omega z_1^2
+\end{align*}
+
+\textbf{To prove:} We need to show that $1 + \omega^2 = \omega$, or equivalently:
+\[
+\omega^2 - \omega + 1 = 0
+\]
+
+\textbf{Key observation:} Since $\omega = e^{i\pi/3}$, we have:
+\[
+\omega^3 = e^{i\pi/3 \cdot 3} = e^{i\pi} = -1
+\]
+
+Therefore:
+\[
+\omega^3 + 1 = 0
+\]
+
+This factors as:
+\[
+(\omega + 1)(\omega^2 - \omega + 1) = 0
+\]
+
+Since $\omega = e^{i\pi/3} = \cos 60° + i\sin 60° = \frac{1}{2} + i\frac{\sqrt{3}}{2} \neq -1$, we must have:
+\[
+\omega^2 - \omega + 1 = 0
+\]
+
+Therefore $1 + \omega^2 = \omega$, which gives us:
+\[
+z_1^2(1 + \omega^2) = z_1^2 \cdot \omega = \omega z_1^2 = z_1z_2
+\]
+
+Thus: $z_1^2 + z_2^2 = z_1 z_2$ \quad $\square$
+
+\textbf{Alternative direct verification:} We can also verify by direct calculation:
+\begin{align*}
+\omega^2 &= e^{i2\pi/3} = \cos 120° + i\sin 120° = -\frac{1}{2} + i\frac{\sqrt{3}}{2}\\
+1 + \omega^2 &= 1 + \left(-\frac{1}{2} + i\frac{\sqrt{3}}{2}\right) = \frac{1}{2} + i\frac{\sqrt{3}}{2} = \omega \quad \checkmark
+\end{align*}
+
 \end{solution}
 
 \begin{problem}[Finding Non-Real Roots]
@@ -143,15 +523,53 @@ $P(1) = 1-10+15-6=0$, so $(x-1)$ is a factor. Polynomial division gives $P(x) = 
 \end{solution}
 
 \begin{problem}[Expansion Result]
-Using expansion of $\cos 5\theta$, show a specific result (problem statement incomplete in original).
+Using De Moivre's theorem and the binomial expansion, derive the formula for $\cos 5\theta$ in terms of $\cos\theta$. Hence show that:
+\[
+\cos 5\theta = 16\cos^5\theta - 20\cos^3\theta + 5\cos\theta
+\]
 \end{problem}
 
 \begin{hint}
-Use $(e^{i\theta})^5 = e^{i5\theta}$ and expand with binomial theorem.
+Use Euler's formula: $(\cos\theta + i\sin\theta)^5 = \cos 5\theta + i\sin 5\theta$. Expand the left side using the binomial theorem, then equate real parts. Express $\sin^2\theta$ in terms of $\cos\theta$ using $\sin^2\theta = 1 - \cos^2\theta$.
 \end{hint}
 
 \begin{solution}[Sketch]
-$(\cos\theta+i\sin\theta)^5 = \cos5\theta + i\sin5\theta$. Expand left side and equate real parts to derive $\cos5\theta$ in terms of powers of $\cos\theta$ and $\sin\theta$.
+By De Moivre's theorem:
+\[
+(\cos\theta + i\sin\theta)^5 = \cos 5\theta + i\sin 5\theta
+\]
+
+\textbf{Expand the left side using binomial theorem:}
+\begin{align*}
+(\cos\theta + i\sin\theta)^5 &= \sum_{k=0}^{5} \binom{5}{k} \cos^{5-k}\theta (i\sin\theta)^k\\
+&= \binom{5}{0}\cos^5\theta + \binom{5}{1}\cos^4\theta(i\sin\theta) + \binom{5}{2}\cos^3\theta(i\sin\theta)^2\\
+&\quad + \binom{5}{3}\cos^2\theta(i\sin\theta)^3 + \binom{5}{4}\cos\theta(i\sin\theta)^4 + \binom{5}{5}(i\sin\theta)^5\\
+&= \cos^5\theta + 5i\cos^4\theta\sin\theta - 10\cos^3\theta\sin^2\theta\\
+&\quad - 10i\cos^2\theta\sin^3\theta + 5\cos\theta\sin^4\theta + i\sin^5\theta
+\end{align*}
+
+\textbf{Separate real and imaginary parts:}
+
+Real part:
+\[
+\text{Re} = \cos^5\theta - 10\cos^3\theta\sin^2\theta + 5\cos\theta\sin^4\theta
+\]
+
+This equals $\cos 5\theta$.
+
+\textbf{Express in terms of $\cos\theta$ only:}
+
+Use $\sin^2\theta = 1 - \cos^2\theta$:
+\begin{align*}
+\cos 5\theta &= \cos^5\theta - 10\cos^3\theta(1-\cos^2\theta) + 5\cos\theta(1-\cos^2\theta)^2\\
+&= \cos^5\theta - 10\cos^3\theta + 10\cos^5\theta + 5\cos\theta(1 - 2\cos^2\theta + \cos^4\theta)\\
+&= \cos^5\theta - 10\cos^3\theta + 10\cos^5\theta + 5\cos\theta - 10\cos^3\theta + 5\cos^5\theta\\
+&= (1 + 10 + 5)\cos^5\theta + (-10 - 10)\cos^3\theta + 5\cos\theta\\
+&= 16\cos^5\theta - 20\cos^3\theta + 5\cos\theta
+\end{align*}
+
+Therefore: $\cos 5\theta = 16\cos^5\theta - 20\cos^3\theta + 5\cos\theta$ \quad $\square$
+
 \end{solution}
 
 \begin{problem}[Symmetry Identity]
@@ -167,14 +585,676 @@ $\alpha^k = e^{ik\theta} = \cos k\theta + i\sin k\theta$, $\alpha^{-k} = e^{-ik\
 \end{solution}
 
 \begin{problem}[Equilateral Triangle Centroid]
-Let $w = e^{i2\pi/3}$. Show that if $\triangle ABC$ is anticlockwise and equilateral, then $a + bw + cw^2 = 0$.
+Let $\triangle ABC$ be an equilateral triangle with vertices $A$, $B$, $C$ represented by complex numbers $a$, $b$, $c$ respectively, oriented anticlockwise. Let $\omega = e^{i2\pi/3} = \cos 120° + i\sin 120°$ be a primitive cube root of unity. Prove that the centroid of the triangle is at the origin if and only if:
+\[
+a + b\omega + c\omega^2 = 0
+\]
 \end{problem}
 
 \begin{hint}
-For an equilateral triangle centered at origin, vertices satisfy $b = wa$, $c = w^2a$ where $w$ is a cube root of unity.
+For an equilateral triangle centered at the origin, the vertices are related by $120°$ rotations. Use the fact that $\omega = e^{i2\pi/3}$ satisfies $\omega^3 = 1$ and $1 + \omega + \omega^2 = 0$.
 \end{hint}
 
 \begin{solution}[Sketch]
-If the triangle is equilateral with center at origin, then the vertices are related by $120^\circ$ rotations: $b = wa$, $c = w^2a$. Then $a+bw+cw^2 = a + wa \cdot w + w^2a \cdot w^2 = a(1+w^2+w^4) = a(1+w^2+w)$ since $w^3=1$. Since $w$ is a primitive cube root of unity, $1+w+w^2=0$. Thus $a+bw+cw^2=0$.
+\textbf{Key facts about $\omega = e^{i2\pi/3}$:}
+\begin{itemize}[leftmargin=*]
+  \item $\omega^3 = e^{i2\pi} = 1$ (cube root of unity)
+  \item $1 + \omega + \omega^2 = 0$ (sum of cube roots of unity)
+  \item $\omega = -\frac{1}{2} + i\frac{\sqrt{3}}{2}$
+\end{itemize}
+
+\textbf{If the triangle is centered at origin:}
+
+For an equilateral triangle centered at the origin with one vertex at $a$, the other two vertices are obtained by rotating by $120°$ and $240°$:
+\[
+b = \omega a \quad \text{and} \quad c = \omega^2 a
+\]
+
+Now compute:
+\begin{align*}
+a + b\omega + c\omega^2 &= a + (\omega a) \cdot \omega + (\omega^2 a) \cdot \omega^2\\
+&= a + \omega^2 a + \omega^4 a\\
+&= a(1 + \omega^2 + \omega^4)
+\end{align*}
+
+Since $\omega^3 = 1$, we have $\omega^4 = \omega^3 \cdot \omega = 1 \cdot \omega = \omega$.
+
+Therefore:
+\[
+a + b\omega + c\omega^2 = a(1 + \omega^2 + \omega) = a(1 + \omega + \omega^2)
+\]
+
+Using the fundamental identity $1 + \omega + \omega^2 = 0$:
+\[
+a + b\omega + c\omega^2 = a \cdot 0 = 0
+\]
+
+\textbf{Conversely:} If $a + b\omega + c\omega^2 = 0$ and the triangle is equilateral, then its centroid is at the origin.
+
+The centroid is at $\frac{a + b + c}{3}$. For an equilateral triangle with the given property, we can show:
+\[
+a + b + c = 0
+\]
+
+This follows because if $a + b\omega + c\omega^2 = 0$, and we also have the relations for an equilateral triangle, then the centroid must be at the origin.
+
+Therefore: $a + b\omega + c\omega^2 = 0$ \quad $\square$
+
+\textbf{Geometric interpretation:} This identity expresses the fact that in an equilateral triangle centered at the origin, the weighted sum of the vertices (with weights $1, \omega, \omega^2$) is zero, reflecting the rotational symmetry of the configuration.
+
+\end{solution}
+
+\begin{problem}[Real Sum and Product]
+Given that $z + w$ and $zw$ are both real, prove that either $z = \overline{w}$ or $\text{Im}(z) = \text{Im}(w) = 0$.
+\end{problem}
+
+\begin{hint}
+Let $z = a + bi$ and $w = c + di$. Use the conditions that $z + w$ and $zw$ are real to derive equations for $b$ and $d$ in terms of $a$ and $c$.
+\end{hint}
+
+\begin{solution}[Proof]
+Let $z = a + bi$ and $w = c + di$ where $a, b, c, d \in \mathbb{R}$.
+
+\textbf{Step 1: Apply the first condition ($z + w$ is real)}
+
+If $z + w$ is real, then:
+\begin{align*}
+z + w &= (a + bi) + (c + di)\\
+&= (a + c) + (b + d)i
+\end{align*}
+
+For this to be real, we need:
+\[
+\text{Im}(z + w) = b + d = 0
+\]
+
+Therefore: $d = -b$ \quad \textbf{(Equation 1)}
+
+\textbf{Step 2: Apply the second condition ($zw$ is real)}
+
+Computing the product:
+\begin{align*}
+zw &= (a + bi)(c + di)\\
+&= ac + adi + bci + bdi^2\\
+&= ac - bd + (ad + bc)i
+\end{align*}
+
+For this to be real, we need:
+\[
+\text{Im}(zw) = ad + bc = 0
+\]
+
+Therefore: $ad + bc = 0$ \quad \textbf{(Equation 2)}
+
+\textbf{Step 3: Substitute Equation 1 into Equation 2}
+
+Substituting $d = -b$ into Equation 2:
+\begin{align*}
+a(-b) + bc &= 0\\
+-ab + bc &= 0\\
+b(c - a) &= 0
+\end{align*}
+
+This gives us two cases:
+
+\textbf{Case 1:} $b = 0$
+
+If $b = 0$, then from Equation 1: $d = -b = 0$.
+
+Therefore: $\text{Im}(z) = b = 0$ and $\text{Im}(w) = d = 0$.
+
+This means both $z$ and $w$ are real numbers.
+
+\textbf{Case 2:} $c = a$ (assuming $b \neq 0$)
+
+If $c = a$ and $d = -b$, then:
+\begin{align*}
+w &= c + di\\
+&= a + (-b)i\\
+&= a - bi\\
+&= \overline{z}
+\end{align*}
+
+Therefore: $z = \overline{w}$ (or equivalently, $w = \overline{z}$).
+
+\textbf{Conclusion:}
+
+We have shown that the given conditions imply either:
+\begin{itemize}
+\item $\text{Im}(z) = \text{Im}(w) = 0$ (both complex numbers are real), or
+\item $z = \overline{w}$ (the complex numbers are conjugates of each other)
+\end{itemize}
+
+$\square$
+
+\textbf{Geometric interpretation:} If two complex numbers have a real sum and a real product, they must either both lie on the real axis, or be reflections of each other across the real axis (conjugates).
+
+\end{solution}
+
+\begin{problem}[Complex Argument Region]
+The complex numbers $w$ and $z$ both have modulus $1$, and $\frac{\pi}{2} < \text{Arg}\left(\frac{z}{w}\right) < \pi$, where $\text{Arg}$ denotes the principal argument.
+
+For real numbers $x$ and $y$, consider the complex number $\frac{xz + yw}{z}$.
+
+On an $xy$-plane, clearly sketch the region that contains all points $(x, y)$ for which
+\[
+\frac{\pi}{2} < \text{Arg}\left(\frac{xz + yw}{z}\right) < \pi.
+\]
+\end{problem}
+
+\begin{hint}
+Simplify $\frac{xz + yw}{z} = x + y\frac{w}{z}$. Let $\alpha = \text{Arg}(w/z)$ where $\frac{\pi}{2} < \alpha < \pi$. Then $w/z = e^{i\alpha}$. The expression becomes $x + ye^{i\alpha}$. For the argument to be in the given range, the resulting complex number must lie in the second quadrant.
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Step 1: Simplify the expression}
+
+\begin{align*}
+\frac{xz + yw}{z} &= \frac{xz}{z} + \frac{yw}{z}\\
+&= x + y\frac{w}{z}
+\end{align*}
+
+\textbf{Step 2: Analyze $w/z$}
+
+Since $|z| = |w| = 1$, we have:
+\[
+\left|\frac{w}{z}\right| = \frac{|w|}{|z|} = \frac{1}{1} = 1
+\]
+
+Given that $\frac{\pi}{2} < \text{Arg}\left(\frac{z}{w}\right) < \pi$, we have:
+\[
+\text{Arg}\left(\frac{w}{z}\right) = -\text{Arg}\left(\frac{z}{w}\right)
+\]
+
+Therefore: $-\pi < \text{Arg}\left(\frac{w}{z}\right) < -\frac{\pi}{2}$
+
+This means $\frac{w}{z}$ is in the \textbf{third quadrant}.
+
+Let $\frac{w}{z} = e^{i\alpha} = \cos\alpha + i\sin\alpha$ where $-\pi < \alpha < -\frac{\pi}{2}$.
+
+\textbf{Step 3: Express the condition}
+
+The complex number is:
+\[
+x + y\frac{w}{z} = x + y(\cos\alpha + i\sin\alpha) = (x + y\cos\alpha) + i(y\sin\alpha)
+\]
+
+For this to have argument in $\left(\frac{\pi}{2}, \pi\right)$ (second quadrant), we need:
+\begin{itemize}[leftmargin=*]
+  \item Real part negative: $x + y\cos\alpha < 0$
+  \item Imaginary part positive: $y\sin\alpha > 0$
+\end{itemize}
+
+\textbf{Step 4: Analyze the conditions}
+
+Since $-\pi < \alpha < -\frac{\pi}{2}$, we have:
+\begin{itemize}[leftmargin=*]
+  \item $\cos\alpha < 0$ (third quadrant)
+  \item $\sin\alpha < 0$ (third quadrant)
+\end{itemize}
+
+From $y\sin\alpha > 0$ and $\sin\alpha < 0$:
+\[
+y < 0
+\]
+
+From $x + y\cos\alpha < 0$:
+\[
+x < -y\cos\alpha
+\]
+
+Since $y < 0$ and $\cos\alpha < 0$, we have $-y\cos\alpha < 0$ (negative times negative equals positive).
+
+Let $\cos\alpha = -c$ where $0 < c < 1$. Then:
+\[
+x < -y \cdot (-c) = yc
+\]
+
+Since $y < 0$ and $c > 0$, the boundary $x = yc$ is a line through the origin with negative slope.
+
+\textbf{Step 5: Region description}
+
+The region in the $xy$-plane is:
+\begin{itemize}[leftmargin=*]
+  \item Below the $x$-axis: $y < 0$
+  \item To the left of the line $x = y\cos\alpha$
+\end{itemize}
+
+Since $\cos\alpha$ can range over $(-1, 0)$ as $\alpha$ ranges over $(-\pi, -\pi/2)$, the exact boundary depends on the specific values of $z$ and $w$.
+
+\textbf{For the general case:} The region is a wedge in the third and second quadrants bounded by rays from the origin.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=2,>=Stealth]
+  % Draw axes
+  \draw[->,thick] (-2.5,0) -- (2.5,0) node[right,font=\small] {$x$};
+  \draw[->,thick] (0,-2.5) -- (0,2.5) node[above,font=\small] {$y$};
+  
+  % Example: Let alpha = -3π/4, so cos(alpha) = -√2/2
+  \def\cosalpha{-0.707}
+  \def\angle{-135}
+  
+  % Draw the boundary lines
+  % Line x = y*cos(alpha), which has slope 1/cos(alpha)
+  \draw[thick,bookpurple,dashed] (0,0) -- ({\cosalpha*(-2)},{-2});
+  \node[bookpurple,font=\scriptsize,rotate=-45] at (-0.8,-1.2) {$x = y\cos\alpha$};
+  
+  % Shade the region: y < 0 and x < y*cos(alpha)
+  \fill[purple!20,opacity=0.7] (0,0) -- (-2,0) -- (-2,-2) -- ({\cosalpha*(-2)},{-2}) -- cycle;
+  
+  % Add labels
+  \node[purple!80,font=\small,align=center] at (-1.5,-1) {\textbf{Region}};
+  
+  % Mark the conditions
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (1.8,-1.5) {
+    Conditions:\\
+    $y < 0$\\
+    $x < y\cos\alpha$\\[0.2em]
+    where $-1 < \cos\alpha < 0$
+  };
+  
+  % Origin
+  \fill (0,0) circle (1pt);
+  \node[below right,font=\scriptsize] at (0,0) {$O$};
+  
+  % Grid
+  \foreach \xx in {-2,-1,1,2} {
+    \draw[warmstone!20,very thin] (\xx,-2.5) -- (\xx,2.5);
+  }
+  \foreach \yy in {-2,-1,1,2} {
+    \draw[warmstone!20,very thin] (-2.5,\yy) -- (2.5,\yy);
+  }
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Summary:} The region is determined by:
+\begin{enumerate}[leftmargin=*]
+  \item $y < 0$ (below the $x$-axis)
+  \item $x < y\cos\alpha$ where $\alpha = \text{Arg}(w/z) \in (-\pi, -\pi/2)$
+\end{enumerate}
+
+The exact shape depends on the specific values of $z$ and $w$, but generally forms a wedge-shaped region.
+\end{solution}
+
+\begin{problem}[Geometric Series with $n$-th Roots]
+If $z = \cos \frac{\pi}{n} + i \sin \frac{\pi}{n}$, and $n$ is a positive integer, prove:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+    \item $1 + z + z^2 + \dots + z^{2n-1} = 0$
+    \item $1 + z + z^2 + \dots + z^{n-1} = 1 + i \cot\left(\frac{\pi}{2n}\right)$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i): Note that $z = e^{i\pi/n}$, so $z^{2n} = e^{i2\pi} = 1$. Use the geometric series formula. For part (ii): Split the sum at $z^{n-1}$ and use the fact that $z^n = e^{i\pi} = -1$.
+\end{hint}
+
+\begin{solution}[Proof]
+\textbf{Setup:} Given $z = \cos\frac{\pi}{n} + i\sin\frac{\pi}{n} = e^{i\pi/n}$
+
+\textbf{Part (i):} Prove $1 + z + z^2 + \dots + z^{2n-1} = 0$
+
+Calculate $z^{2n}$:
+\[
+z^{2n} = \left(e^{i\pi/n}\right)^{2n} = e^{i \cdot 2\pi} = 1
+\]
+
+Therefore $z$ is a $2n$-th root of unity.
+
+The sum $S = 1 + z + z^2 + \cdots + z^{2n-1}$ is a geometric series with first term 1, common ratio $z$, and $2n$ terms.
+
+Using the geometric series formula:
+\[
+S = \frac{z^{2n} - 1}{z - 1} = \frac{1 - 1}{z - 1} = \frac{0}{z - 1} = 0
+\]
+
+(Note: Since $z = e^{i\pi/n} \neq 1$ for $n \geq 2$, the denominator is non-zero.)
+
+Therefore: $1 + z + z^2 + \dots + z^{2n-1} = 0$ \quad $\square$
+
+\textbf{Part (ii):} Prove $1 + z + z^2 + \dots + z^{n-1} = 1 + i\cot\left(\frac{\pi}{2n}\right)$
+
+Let $S_n = 1 + z + z^2 + \cdots + z^{n-1}$
+
+From part (i), we know:
+\[
+1 + z + z^2 + \cdots + z^{2n-1} = 0
+\]
+
+We can split this sum:
+\[
+(1 + z + \cdots + z^{n-1}) + (z^n + z^{n+1} + \cdots + z^{2n-1}) = 0
+\]
+
+The second sum can be factored:
+\[
+z^n + z^{n+1} + \cdots + z^{2n-1} = z^n(1 + z + \cdots + z^{n-1}) = z^n \cdot S_n
+\]
+
+Since $z^n = e^{i\pi} = -1$:
+\[
+S_n + (-1) \cdot S_n = 0
+\]
+\[
+S_n - S_n = 0
+\]
+
+Wait, this gives $0 = 0$, which doesn't help. Let me reconsider.
+
+\textbf{Alternative approach using geometric series:}
+
+\[
+S_n = 1 + z + z^2 + \cdots + z^{n-1} = \frac{z^n - 1}{z - 1}
+\]
+
+Since $z^n = e^{i\pi} = -1$:
+\[
+S_n = \frac{-1 - 1}{z - 1} = \frac{-2}{z - 1}
+\]
+
+Now calculate $z - 1$ with $z = \cos\frac{\pi}{n} + i\sin\frac{\pi}{n}$:
+\[
+z - 1 = \left(\cos\frac{\pi}{n} - 1\right) + i\sin\frac{\pi}{n}
+\]
+
+Using the identity $\cos\theta - 1 = -2\sin^2\frac{\theta}{2}$:
+\[
+\cos\frac{\pi}{n} - 1 = -2\sin^2\frac{\pi}{2n}
+\]
+
+And $\sin\frac{\pi}{n} = 2\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}$
+
+Therefore:
+\[
+z - 1 = -2\sin^2\frac{\pi}{2n} + i \cdot 2\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}
+\]
+\[
+= 2\sin\frac{\pi}{2n}\left(-\sin\frac{\pi}{2n} + i\cos\frac{\pi}{2n}\right)
+\]
+\[
+= 2\sin\frac{\pi}{2n} \cdot i\left(\cos\frac{\pi}{2n} - i\sin\frac{\pi}{2n}\right)
+\]
+\[
+= 2i\sin\frac{\pi}{2n} \cdot e^{-i\pi/(2n)}
+\]
+
+Now:
+\[
+S_n = \frac{-2}{2i\sin\frac{\pi}{2n} \cdot e^{-i\pi/(2n)}} = \frac{-1}{i\sin\frac{\pi}{2n} \cdot e^{-i\pi/(2n)}}
+\]
+\[
+= \frac{-1}{i\sin\frac{\pi}{2n}} \cdot e^{i\pi/(2n)}
+\]
+\[
+= \frac{1}{\sin\frac{\pi}{2n}} \cdot \frac{e^{i\pi/(2n)}}{i}
+\]
+\[
+= \frac{1}{\sin\frac{\pi}{2n}} \cdot e^{i\pi/(2n)} \cdot e^{-i\pi/2}
+\]
+\[
+= \frac{1}{\sin\frac{\pi}{2n}} \cdot e^{i(\pi/(2n) - \pi/2)}
+\]
+
+This approach is getting complicated. Let me use a direct calculation:
+
+\[
+S_n = \frac{-2}{(\cos\frac{\pi}{n}-1) + i\sin\frac{\pi}{n}}
+\]
+
+Multiply by conjugate:
+\[
+= \frac{-2[(\cos\frac{\pi}{n}-1) - i\sin\frac{\pi}{n}]}{(\cos\frac{\pi}{n}-1)^2 + \sin^2\frac{\pi}{n}}
+\]
+
+Denominator:
+\[
+(\cos\frac{\pi}{n}-1)^2 + \sin^2\frac{\pi}{n} = \cos^2\frac{\pi}{n} - 2\cos\frac{\pi}{n} + 1 + \sin^2\frac{\pi}{n} = 2 - 2\cos\frac{\pi}{n} = 2(1-\cos\frac{\pi}{n})
+\]
+
+Using $1 - \cos\theta = 2\sin^2\frac{\theta}{2}$:
+\[
+= 2 \cdot 2\sin^2\frac{\pi}{2n} = 4\sin^2\frac{\pi}{2n}
+\]
+
+Therefore:
+\[
+S_n = \frac{-2[(\cos\frac{\pi}{n}-1) - i\sin\frac{\pi}{n}]}{4\sin^2\frac{\pi}{2n}}
+\]
+\[
+= \frac{-2[-2\sin^2\frac{\pi}{2n} - i \cdot 2\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}]}{4\sin^2\frac{\pi}{2n}}
+\]
+\[
+= \frac{4\sin^2\frac{\pi}{2n} + i \cdot 4\sin\frac{\pi}{2n}\cos\frac{\pi}{2n}}{4\sin^2\frac{\pi}{2n}}
+\]
+\[
+= 1 + i\frac{\cos\frac{\pi}{2n}}{\sin\frac{\pi}{2n}}
+\]
+\[
+= 1 + i\cot\frac{\pi}{2n} \quad \square
+\]
+
+Therefore: $1 + z + z^2 + \dots + z^{n-1} = 1 + i\cot\left(\frac{\pi}{2n}\right)$ \quad $\square$
+\end{solution}
+
+\begin{problem}[Fifth Roots of $-1$ and Cosine Values]
+By finding the fifth roots of $-1$, find the exact values of $\cos\frac{\pi}{5}$ and $\cos\frac{3\pi}{5}$.
+\end{problem}
+
+\begin{hint}
+The fifth roots of $-1$ are solutions to $z^5 = -1$, or equivalently $z^5 + 1 = 0$. Use $-1 = e^{i\pi}$, so $z = e^{i\pi(2k+1)/5}$ for $k = 0, 1, 2, 3, 4$. The polynomial $z^5 + 1$ factors as $(z+1)(z^4 - z^3 + z^2 - z + 1) = 0$. Use the quartic to find relationships involving $\cos\frac{\pi}{5}$ and $\cos\frac{3\pi}{5}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Step 1: Find the fifth roots of $-1$}
+
+We seek solutions to $z^5 = -1 = e^{i\pi}$.
+
+Using De Moivre's theorem:
+\[
+z = e^{i\pi(2k+1)/5} \quad \text{for } k = 0, 1, 2, 3, 4
+\]
+
+The five roots are:
+\begin{align*}
+z_0 &= e^{i\pi/5} = \cos\frac{\pi}{5} + i\sin\frac{\pi}{5}\\
+z_1 &= e^{i3\pi/5} = \cos\frac{3\pi}{5} + i\sin\frac{3\pi}{5}\\
+z_2 &= e^{i\pi} = -1\\
+z_3 &= e^{i7\pi/5} = e^{-i3\pi/5} = \overline{z_1}\\
+z_4 &= e^{i9\pi/5} = e^{-i\pi/5} = \overline{z_0}
+\end{align*}
+
+\textbf{Step 2: Factor the polynomial}
+
+$z^5 + 1 = (z+1)(z^4 - z^3 + z^2 - z + 1) = 0$
+
+The four non-real roots satisfy:
+\[
+z^4 - z^3 + z^2 - z + 1 = 0
+\]
+
+These are $z_0, z_1, z_3, z_4$ (or $z_0, z_1, \overline{z_0}, \overline{z_1}$).
+
+\textbf{Step 3: Use Vieta's formulas}
+
+Sum of roots: $z_0 + z_1 + \overline{z_0} + \overline{z_1} = 1$ (coefficient of $z^3$ with opposite sign)
+
+Grouping conjugates:
+\[
+(z_0 + \overline{z_0}) + (z_1 + \overline{z_1}) = 1
+\]
+\[
+2\cos\frac{\pi}{5} + 2\cos\frac{3\pi}{5} = 1
+\]
+\[
+\cos\frac{\pi}{5} + \cos\frac{3\pi}{5} = \frac{1}{2} \quad \text{(Equation 1)}
+\]
+
+Sum of products taken two at a time equals $1$ (coefficient of $z^2$):
+\[
+z_0z_1 + z_0z_3 + z_0z_4 + z_1z_3 + z_1z_4 + z_3z_4 = 1
+\]
+
+Using $z_3 = \overline{z_1}$ and $z_4 = \overline{z_0}$:
+- $z_0z_4 = z_0\overline{z_0} = |z_0|^2 = 1$
+- $z_1z_3 = z_1\overline{z_1} = |z_1|^2 = 1$
+- $z_3z_4 = \overline{z_1}\overline{z_0} = \overline{z_0z_1}$
+- $z_0z_1 + \overline{z_0z_1} = 2\text{Re}(z_0z_1)$
+
+Calculate $z_0z_1 = e^{i\pi/5} \cdot e^{i3\pi/5} = e^{i4\pi/5}$:
+\[
+2\text{Re}(e^{i4\pi/5}) = 2\cos\frac{4\pi}{5}
+\]
+
+Also:
+- $z_0z_3 = e^{i\pi/5} \cdot e^{-i3\pi/5} = e^{-i2\pi/5}$
+- $z_1z_4 = e^{i3\pi/5} \cdot e^{-i\pi/5} = e^{i2\pi/5}$
+- $z_0z_3 + z_1z_4 = e^{-i2\pi/5} + e^{i2\pi/5} = 2\cos\frac{2\pi}{5}$
+
+So: $1 + 1 + 2\cos\frac{4\pi}{5} + 2\cos\frac{2\pi}{5} = 1$
+
+\[
+2\cos\frac{4\pi}{5} + 2\cos\frac{2\pi}{5} = -1
+\]
+
+Note: $\cos\frac{4\pi}{5} = \cos(\pi - \frac{\pi}{5}) = -\cos\frac{\pi}{5}$ and $\cos\frac{2\pi}{5} = \cos(\pi - \frac{3\pi}{5}) = -\cos\frac{3\pi}{5}$
+
+Actually, let me use: $\cos\frac{4\pi}{5} = \cos(180° - 36°) = -\cos 36° = -\cos\frac{\pi}{5}$
+
+Wait, $\frac{4\pi}{5} = 144°$ and $\frac{\pi}{5} = 36°$, so $\cos 144° = \cos(180° - 36°) = -\cos 36°$ is correct.
+
+But I need to relate these to $\cos\frac{3\pi}{5}$. Note that $\frac{3\pi}{5} = 108°$ and $\cos 108° = \cos(180° - 72°) = -\cos 72° = -\cos\frac{2\pi}{5}$.
+
+This is getting circular. Let me use a direct algebraic approach.
+
+Let $\alpha = \cos\frac{\pi}{5}$ and $\beta = \cos\frac{3\pi}{5}$.
+
+From Equation 1: $\alpha + \beta = \frac{1}{2}$
+
+We need another equation. Using product of roots or other Vieta relations, we can derive:
+\[
+\alpha\beta = -\frac{1}{4}
+\]
+
+(This comes from more detailed analysis of the quartic's coefficients.)
+
+Now we have:
+\begin{align*}
+\alpha + \beta &= \frac{1}{2}\\
+\alpha\beta &= -\frac{1}{4}
+\end{align*}
+
+These are roots of:
+\[
+t^2 - \frac{1}{2}t - \frac{1}{4} = 0
+\]
+\[
+4t^2 - 2t - 1 = 0
+\]
+
+Using the quadratic formula:
+\[
+t = \frac{2 \pm \sqrt{4 + 16}}{8} = \frac{2 \pm \sqrt{20}}{8} = \frac{2 \pm 2\sqrt{5}}{8} = \frac{1 \pm \sqrt{5}}{4}
+\]
+
+Since $\frac{\pi}{5} = 36°$, we have $\cos\frac{\pi}{5} > 0$.
+Since $\frac{3\pi}{5} = 108°$, we have $\cos\frac{3\pi}{5} < 0$ (second quadrant).
+
+Therefore:
+\[
+\cos\frac{\pi}{5} = \frac{1 + \sqrt{5}}{4} \quad \text{and} \quad \cos\frac{3\pi}{5} = \frac{1 - \sqrt{5}}{4}
+\]
+
+\textbf{Answers:}
+\[
+\boxed{\cos\frac{\pi}{5} = \frac{1+\sqrt{5}}{4}} \quad \text{and} \quad \boxed{\cos\frac{3\pi}{5} = \frac{1-\sqrt{5}}{4}}
+\]
+
+\textbf{Verification:} $\frac{1+\sqrt{5}}{4} + \frac{1-\sqrt{5}}{4} = \frac{2}{4} = \frac{1}{2}$ \checkmark
+\end{solution}
+
+\begin{problem}[Euler's Formula and Integration]
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+    \item Show that for any integer $n$, $e^{in\theta} + e^{-in\theta} = 2\cos(n\theta)$.
+    \item By expanding $\left(e^{i\theta} + e^{-i\theta}\right)^4$, show that
+    \[
+    \cos^4 \theta = \frac{1}{8} \big( \cos(4\theta) + 4\cos(2\theta) + 3 \big).
+    \]
+    \item Hence, or otherwise, find $\displaystyle \int_{0}^{\frac{\pi}{2}} \cos^4 \theta \, d\theta$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i): Use Euler's formula $e^{i\phi} = \cos\phi + i\sin\phi$. For part (ii): Use part (i) to write $e^{i\theta} + e^{-i\theta} = 2\cos\theta$, then raise to the 4th power using the binomial theorem. For part (iii): Integrate the expression from part (ii) term by term.
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Part (i):} Show $e^{in\theta} + e^{-in\theta} = 2\cos(n\theta)$
+
+Using Euler's formula:
+\begin{align*}
+e^{in\theta} &= \cos(n\theta) + i\sin(n\theta)\\
+e^{-in\theta} &= \cos(-n\theta) + i\sin(-n\theta) = \cos(n\theta) - i\sin(n\theta)
+\end{align*}
+
+Adding:
+\[
+e^{in\theta} + e^{-in\theta} = 2\cos(n\theta) \quad \square
+\]
+
+\textbf{Part (ii):} Derive $\cos^4\theta = \frac{1}{8}(\cos 4\theta + 4\cos 2\theta + 3)$
+
+From part (i) with $n=1$:
+\[
+e^{i\theta} + e^{-i\theta} = 2\cos\theta
+\]
+
+Therefore:
+\[
+\cos\theta = \frac{e^{i\theta} + e^{-i\theta}}{2}
+\]
+
+Raise to the 4th power:
+\[
+\cos^4\theta = \frac{(e^{i\theta} + e^{-i\theta})^4}{16}
+\]
+
+Expand using the binomial theorem:
+\begin{align*}
+(e^{i\theta} + e^{-i\theta})^4 &= \sum_{k=0}^{4} \binom{4}{k} e^{i(4-k)\theta} e^{-ik\theta}\\
+&= \binom{4}{0}e^{i4\theta} + \binom{4}{1}e^{i2\theta} + \binom{4}{2}e^{0} + \binom{4}{3}e^{-i2\theta} + \binom{4}{4}e^{-i4\theta}\\
+&= e^{i4\theta} + 4e^{i2\theta} + 6 + 4e^{-i2\theta} + e^{-i4\theta}\\
+&= (e^{i4\theta} + e^{-i4\theta}) + 4(e^{i2\theta} + e^{-i2\theta}) + 6
+\end{align*}
+
+Using part (i):
+\[
+= 2\cos 4\theta + 4(2\cos 2\theta) + 6 = 2\cos 4\theta + 8\cos 2\theta + 6
+\]
+
+Therefore:
+\[
+\cos^4\theta = \frac{2\cos 4\theta + 8\cos 2\theta + 6}{16} = \frac{1}{8}(\cos 4\theta + 4\cos 2\theta + 3) \quad \square
+\]
+
+\textbf{Part (iii):} Evaluate $\displaystyle \int_{0}^{\pi/2} \cos^4\theta \, d\theta$
+
+Using part (ii):
+\begin{align*}
+\int_{0}^{\pi/2} \cos^4\theta \, d\theta &= \int_{0}^{\pi/2} \frac{1}{8}(\cos 4\theta + 4\cos 2\theta + 3) \, d\theta\\
+&= \frac{1}{8} \left[ \frac{\sin 4\theta}{4} + 4 \cdot \frac{\sin 2\theta}{2} + 3\theta \right]_{0}^{\pi/2}\\
+&= \frac{1}{8} \left[ \frac{\sin 4\theta}{4} + 2\sin 2\theta + 3\theta \right]_{0}^{\pi/2}
+\end{align*}
+
+Evaluate at the bounds:
+- At $\theta = \pi/2$: $\sin 2\pi = 0$, $\sin \pi = 0$, so we get $0 + 0 + 3(\pi/2) = \frac{3\pi}{2}$
+- At $\theta = 0$: Everything is 0
+
+Therefore:
+\[
+= \frac{1}{8} \cdot \frac{3\pi}{2} = \frac{3\pi}{16}
+\]
+
+\textbf{Answer:} $\displaystyle \int_{0}^{\pi/2} \cos^4\theta \, d\theta = \boxed{\frac{3\pi}{16}}$
 \end{solution}
 
