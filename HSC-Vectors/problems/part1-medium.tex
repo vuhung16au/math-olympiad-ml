@@ -2,7 +2,8 @@
 % Problems: 49, 32, 45, 12, 23
 
 \begin{problem}[Line Tangent to Sphere]
-A sphere has centre at $(3, -3, 4)$ and radius 6 units. A line has equation $\mathbf{r} = \begin{pmatrix} 1 \\ 5 \\ 4 \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ -1 \\ -1 \end{pmatrix}$.
+A sphere has centre at $(3, -3, 4)$ and radius 6 units. \\ 
+A line has equation $\mathbf{r} = \begin{pmatrix} 1 \\ 5 \\ 4 \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ -1 \\ -1 \end{pmatrix}$.
 \begin{enumerate}[label=(\roman*)]
     \item Write down the vector equation of the sphere.
     \item Determine whether the line is a tangent to the sphere, clearly justifying your conclusion.
@@ -25,7 +26,7 @@ Parametric line: $x = 1 + 2\lambda$, $y = 5 - \lambda$, $z = 4 - \lambda$.
 6\lambda^2 - 24\lambda + 32 &= 0\\
 3\lambda^2 - 12\lambda + 16 &= 0
 \end{align*}
-\vspace{-2mm}
+% \vspace{-2mm}
 Discriminant: $\Delta = (-12)^2 - 4(3)(16) = 144 - 192 = -48 < 0$
 
 No real solutions $\implies$ \textbf{line does NOT intersect sphere} (not a tangent).
@@ -50,7 +51,7 @@ $L_2: \mathbf{r} = \begin{pmatrix} -1 \\ 1 \\ 0 \end{pmatrix} + \mu \begin{pmatr
 \begin{solution}
 \textbf{(i)} Directions: $\mathbf{d}_1 = \begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix}$, $\mathbf{d}_2 = \begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}$.
 Perpendicular: $\mathbf{d}_1 \cdot \mathbf{d}_2 = 2 - 1 - 1 = 0$ \checkmark
-\vspace{-2mm}
+% \vspace{-2mm}
 
 Intersection: Equate $(3+2\lambda, 2-\lambda, -1+\lambda) = (-1+\mu, 1+\mu, -\mu)$
 \begin{align*}
@@ -58,17 +59,17 @@ x: 3+2\lambda = -1+\mu &\implies \mu - 2\lambda = 4 \quad (1)\\
 y: 2-\lambda = 1+\mu &\implies \mu + \lambda = 1 \quad (2)\\
 z: -1+\lambda = -\mu &\implies \mu + \lambda = 1 \quad (3)
 \end{align*}
-\vspace{-2mm}
+% \vspace{-2mm}
 $(1)-(2)$: $-3\lambda = 3 \implies \lambda = -1$, so $\mu = 2$.
 Point: $(3-2, 2+1, -1-1) = (1, 3, -2)$ \checkmark
-\vspace{-2mm}
+% \vspace{-2mm}
 
 \textbf{(ii)} Plane through $(1,3,-2)$ spanned by $\mathbf{d}_1, \mathbf{d}_2$. Normal vector:
 $$\mathbf{n} = \mathbf{d}_1 \times \mathbf{d}_2 = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 2 & -1 & 1 \\ 1 & 1 & -1 \end{vmatrix} = 0\mathbf{i} + 3\mathbf{j} + 3\mathbf{k}$$
-\vspace{-2mm}
+% \vspace{-2mm}
 Simplified: $\mathbf{n} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$. Plane: $0x + y + z = k$.
 Using $(1,3,-2)$: $3 + (-2) = 1 \implies k = 1$. Thus $y + z = 1$.
-\vspace{-2mm}
+% \vspace{-2mm}
 
 \textbf{(iii)} Distance from origin $(0,0,0)$ to plane $y + z - 1 = 0$:
 $$D = \tfrac{|0 + 0 - 1|}{\sqrt{0^2 + 1^2 + 1^2}} = \tfrac{1}{\sqrt{2}} = \tfrac{\sqrt{2}}{2} \text{ units}$$
@@ -81,7 +82,7 @@ When two lines intersect, they determine a unique plane. To find the plane's Car
 \vspace{1em}
 
 \begin{problem}[Three Conditions on Vectors]
-Which of the following is a true statement about the lines 
+Which of the following is a true statement about the lines \\ 
 $\ell_1 = \begin{pmatrix} -1 \\ 2 \\ 5 \end{pmatrix} + \lambda \begin{pmatrix} -1 \\ 3 \\ 1 \end{pmatrix}$ and 
 $\ell_2 = \begin{pmatrix} 3 \\ -10 \\ 1 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ -3 \\ -1 \end{pmatrix}$?
 \begin{enumerate}[label=\Alph*.]
@@ -99,19 +100,19 @@ Direction vectors: $\mathbf{d}_1 = \begin{pmatrix} -1 \\ 3 \\ 1 \end{pmatrix}$, 
 \textbf{Step 1: Check parallelism}
 $$\mathbf{d}_2 = -1 \cdot \mathbf{d}_1$$
 Lines are \textbf{parallel} (eliminates B and D).
-\vspace{-2mm}
+% \vspace{-2mm}
 
 \textbf{Step 2: Check if coincident}
 Test if point $P_1 = (-1, 2, 5)$ from $\ell_1$ lies on $\ell_2$:
 $$\begin{pmatrix} -1 \\ 2 \\ 5 \end{pmatrix} = \begin{pmatrix} 3 \\ -10 \\ 1 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ -3 \\ -1 \end{pmatrix}$$
-\vspace{-2mm}
+% \vspace{-2mm}
 Component equations:
 \begin{align*}
 x: -1 = 3 + \mu &\implies \mu = -4\\
 y: 2 = -10 - 3\mu &\implies \mu = -4\\
 z: 5 = 1 - \mu &\implies \mu = -4
 \end{align*}
-\vspace{-2mm}
+% \vspace{-2mm}
 Consistent value $\mu = -4$ for all components $\implies$ point lies on $\ell_2$.
 
 \textbf{Answer: A} (same line).
@@ -145,12 +146,12 @@ $$\mathbf{r}(t) = \int \mathbf{v}(t)\,dt = \begin{pmatrix} ut\cos\theta \\ ut\si
 y &= u\sin\theta \cdot \tfrac{x}{u\cos\theta} - \tfrac{1}{2}g\left(\tfrac{x}{u\cos\theta}\right)^2\\
 &= x\tan\theta - \tfrac{gx^2}{2u^2\cos^2\theta}
 \end{align*}
-\vspace{-2mm}
+% \vspace{-2mm}
 
 \textbf{(iii)} At landing, $y = 0$ and $x = R$:
 $$0 = R\tan\theta - \tfrac{gR^2}{2u^2\cos^2\theta}$$
 Multiply by $\cos^2\theta$: $0 = R\sin\theta\cos\theta - \tfrac{gR^2}{2u^2}$
-\vspace{-2mm}
+% \vspace{-2mm}
 
 Using $\sin(2\theta) = 2\sin\theta\cos\theta$:
 $$\sin(2\theta) = \tfrac{gR}{u^2}$$
@@ -180,19 +181,19 @@ S(\lambda) &= |\mathbf{a} - \mathbf{b}|^2 + 2\lambda(\mathbf{a} - \mathbf{b}) \c
 \tfrac{dS}{d\lambda} &= 2(\mathbf{a} - \mathbf{b}) \cdot \mathbf{d} + 2\lambda = 0\\
 \lambda_0 &= -(\mathbf{a} - \mathbf{b}) \cdot \mathbf{d} = (\mathbf{b} - \mathbf{a}) \cdot \mathbf{d}
 \end{align*}
-\vspace{-2mm}
+% \vspace{-2mm}
 
 \textbf{(ii)} $\vec{PB} = \mathbf{b} - (\mathbf{a} + \lambda_0\mathbf{d}) = (\mathbf{b} - \mathbf{a}) - \lambda_0\mathbf{d}$
 Check: $\vec{PB} \cdot \mathbf{d} = (\mathbf{b} - \mathbf{a}) \cdot \mathbf{d} - \lambda_0(\mathbf{d} \cdot \mathbf{d}) = \lambda_0 - \lambda_0(1) = 0$ \checkmark
-\vspace{-2mm}
+% \vspace{-2mm}
 
 \textbf{(iii)} For origin (set $\mathbf{b} = \mathbf{0}$): $\lambda_{min} = -\mathbf{a} \cdot \mathbf{d}$.
 Point on line closest to $O$: $\mathbf{p} = \mathbf{a} - (\mathbf{a} \cdot \mathbf{d})\mathbf{d}$
-\vspace{-2mm}
+% \vspace{-2mm}
 \begin{align*}
 |\mathbf{p}|^2 &= |\mathbf{a}|^2 - 2(\mathbf{a} \cdot \mathbf{d})^2 + (\mathbf{a} \cdot \mathbf{d})^2 = |\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d})^2
 \end{align*}
-\vspace{-2mm}
+% \vspace{-2mm}
 Shortest distance to sphere: $\sqrt{|\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d})^2} - 1$ or equivalently $|\mathbf{a} \times \mathbf{d}| - 1$.
 \end{solution}
 
