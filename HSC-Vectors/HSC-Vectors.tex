@@ -55,16 +55,192 @@ These problems are designed for Extension~2 students who want to master vectors 
   \item Revisit challenging problems after a few days to reinforce techniques.
 \end{itemize}
 
+\subsubsection{Notations}
+Throughout this booklet, we use the following standard mathematical notations:
+
+\vspace{0.3em}
+\noindent\textbf{Vectors:}
+\begin{itemize}[leftmargin=*]
+  \item $\mathbf{v}$, $\mathbf{a}$, $\mathbf{b}$, $\mathbf{u}$ --- vectors in bold font
+  \item $\overrightarrow{AB}$ --- directed line segment from point $A$ to point $B$
+  \item $\vec{AB}$ --- alternative notation for directed line segment
+  \item $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$ --- standard unit vectors along $x$, $y$, $z$ axes
+  \item $|\mathbf{v}|$ --- magnitude (length) of vector $\mathbf{v}$
+  \item $\hat{\mathbf{u}}$ --- unit vector in the direction of $\mathbf{u}$
+  \item $\begin{pmatrix} x \\ y \\ z \end{pmatrix}$ --- column vector notation
+  \item $(x, y, z)$ --- coordinate/component notation
+\end{itemize}
+
+\vspace{0.3em}
+\noindent\textbf{Vector Operations:}
+\begin{itemize}[leftmargin=*]
+  \item $\mathbf{a} \cdot \mathbf{b}$ --- dot product (scalar product) of vectors $\mathbf{a}$ and $\mathbf{b}$
+  \item $\mathbf{a} \times \mathbf{b}$ --- cross product (vector product) of vectors $\mathbf{a}$ and $\mathbf{b}$
+  \item $\mathbf{a} \perp \mathbf{b}$ --- vectors $\mathbf{a}$ and $\mathbf{b}$ are perpendicular
+  \item $\mathbf{a} \parallel \mathbf{b}$ --- vectors $\mathbf{a}$ and $\mathbf{b}$ are parallel
+  \item $\text{proj}_{\mathbf{b}}\mathbf{a}$ --- projection of vector $\mathbf{a}$ onto vector $\mathbf{b}$
+\end{itemize}
+
+\vspace{0.3em}
+\noindent\textbf{Lines, Planes, and Spheres:}
+\begin{itemize}[leftmargin=*]
+  \item $\mathbf{r}$ --- position vector of a general point
+  \item $\mathbf{r} = \mathbf{a} + \lambda\mathbf{b}$ --- parametric equation of a line through $\mathbf{a}$ with direction $\mathbf{b}$
+  \item $\lambda$, $\mu$, $t$ --- scalar parameters
+  \item $(\mathbf{r} - \mathbf{a}) \cdot \mathbf{n} = 0$ --- vector equation of a plane through $\mathbf{a}$ with normal $\mathbf{n}$
+  \item $|\mathbf{r} - \mathbf{c}| = R$ --- vector equation of a sphere with center $\mathbf{c}$ and radius $R$
+  \item $ax + by + cz = d$ --- Cartesian equation of a plane
+  \item $(x-h)^2 + (y-k)^2 + (z-\ell)^2 = R^2$ --- Cartesian equation of a sphere
+\end{itemize}
+
+\vspace{0.3em}
+\noindent\textbf{Angles and Geometry:}
+\begin{itemize}[leftmargin=*]
+  \item $\theta$ --- angle between vectors or geometric objects
+  \item $\cos\theta = \frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}$ --- formula for angle between vectors
+  \item $\angle ABC$ --- angle at vertex $B$ formed by rays $BA$ and $BC$
+  \item $\triangle ABC$ --- triangle with vertices $A$, $B$, $C$
+  \item $ABCD$ --- quadrilateral with vertices listed in order
+\end{itemize}
+
+\vspace{0.3em}
+\noindent\textbf{Other Symbols:}
+\begin{itemize}[leftmargin=*]
+  \item $\mathbb{R}$ --- the set of real numbers
+  \item $\in$ --- belongs to (element of)
+  \item $\Leftrightarrow$ --- if and only if (equivalence)
+  \item $\Rightarrow$ --- implies
+  \item $\equiv$ --- identically equal to
+  \item $\approx$ --- approximately equal to
+\end{itemize}
+
 \subsection{Vectors Primer}
 
 \subsubsection{3D Vectors \& Coordinates}
 Extension 2 introduces the $z$-axis, moving from $(x, y)$ plane to $(x, y, z)$ space.
 \begin{itemize}[leftmargin=*]
   \item \textbf{Component Form:} $\mathbf{v} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$ or column vectors $\begin{pmatrix} x \\ y \\ z \end{pmatrix}$
+  
+  \textit{Note:} $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ are standard unit vectors with magnitude 1:
+  \begin{itemize}
+    \item $\mathbf{i} = (1, 0, 0)$ points along the positive $x$-axis
+    \item $\mathbf{j} = (0, 1, 0)$ points along the positive $y$-axis
+    \item $\mathbf{k} = (0, 0, 1)$ points along the positive $z$-axis
+  \end{itemize}
+  These form a mutually perpendicular basis, meaning $\mathbf{i} \cdot \mathbf{j} = \mathbf{j} \cdot \mathbf{k} = \mathbf{k} \cdot \mathbf{i} = 0$.
+  
   \item \textbf{Magnitude:} $|\mathbf{v}| = \sqrt{x^2 + y^2 + z^2}$
   \item \textbf{Distance Formula:} Between $A(x_1, y_1, z_1)$ and $B(x_2, y_2, z_2)$: \\
   $|\vec{AB}| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}$
 \end{itemize}
+
+\vspace{0.5em}
+\begin{center}
+\tdplotsetmaincoords{70}{120}
+\begin{tikzpicture}[tdplot_main_coords,scale=1.3]
+  % Axes (lighter, longer)
+  \draw[thick,->,gray!40] (0,0,0) -- (4.5,0,0) node[anchor=north east]{$x$};
+  \draw[thick,->,gray!40] (0,0,0) -- (0,4.5,0) node[anchor=north west]{$y$};
+  \draw[thick,->,gray!40] (0,0,0) -- (0,0,4.5) node[anchor=south]{$z$};
+  
+  % Origin
+  \node[circle,fill=black,inner sep=2pt] at (0,0,0) {};
+  \node[below left] at (0,0,0) {$O$};
+  
+  % Unit vector i (red, along x-axis)
+  \draw[->,ultra thick,red] (0,0,0) -- (2.5,0,0);
+  \node[below,red] at (2.5,0,0) {$\mathbf{i} = (1,0,0)$};
+  \draw[red,dashed] (2.5,0,0) -- (2.5,0,-0.3);
+  \node[below,red,font=\small] at (1.25,0,-0.15) {$x$-axis};
+  
+  % Unit vector j (blue, along y-axis)
+  \draw[->,ultra thick,blue] (0,0,0) -- (0,2.5,0);
+  \node[left,blue] at (0,2.5,0) {$\mathbf{j} = (0,1,0)$};
+  \draw[blue,dashed] (0,2.5,0) -- (-0.3,2.5,0);
+  \node[left,blue,font=\small] at (-0.15,1.25,0) {$y$-axis};
+  
+  % Unit vector k (green, along z-axis)
+  \draw[->,ultra thick,green!60!black] (0,0,0) -- (0,0,2.5);
+  \node[right,green!60!black] at (0,0,2.5) {$\mathbf{k} = (0,0,1)$};
+  \draw[green!60!black,dashed] (0,0,2.5) -- (0,-0.3,2.5);
+  \node[right,green!60!black,font=\small] at (0,-0.15,1.25) {$z$-axis};
+  
+  % Right angle markers to show perpendicularity
+  % Between i and j
+  \draw[thick,purple] (0.35,0,0) -- (0.35,0.35,0) -- (0,0.35,0);
+  % Between j and k
+  \draw[thick,purple] (0,0.35,0) -- (0,0.35,0.35) -- (0,0,0.35);
+  % Between i and k (harder to see in 3D, so we'll skip or make subtle)
+  
+  % Label showing they're unit vectors (magnitude = 1)
+  \node[anchor=north,font=\footnotesize,align=center] at (2,-0.5,0) {Each has magnitude 1:\\$|\mathbf{i}| = |\mathbf{j}| = |\mathbf{k}| = 1$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\noindent\textit{Standard unit vectors:} $\mathbf{i}$ (red), $\mathbf{j}$ (blue), and $\mathbf{k}$ (green) are mutually perpendicular unit vectors that form the basis of 3D coordinate space. Any vector can be written as a combination of these three directions.
+
+\begin{center}
+\tdplotsetmaincoords{70}{110}
+\begin{tikzpicture}[tdplot_main_coords,scale=0.8]
+  % Axes
+  \draw[thick,->] (0,0,0) -- (4,0,0) node[anchor=north east]{$x$};
+  \draw[thick,->] (0,0,0) -- (0,4,0) node[anchor=north west]{$y$};
+  \draw[thick,->] (0,0,0) -- (0,0,4) node[anchor=south]{$z$};
+  
+  % Vector components
+  \coordinate (O) at (0,0,0);
+  \coordinate (P) at (3,2,2.5);
+  
+  % Component projections (dashed)
+  \draw[dashed,gray] (O) -- (3,0,0) node[midway,below] {$x$};
+  \draw[dashed,gray] (3,0,0) -- (3,2,0);
+  \draw[dashed,gray] (O) -- (0,2,0) node[midway,left] {$y$};
+  \draw[dashed,gray] (3,2,0) -- (3,2,2.5);
+  \draw[dashed,gray] (O) -- (0,0,2.5) node[midway,left] {$z$};
+  \draw[dashed,gray] (0,2,0) -- (3,2,0);
+  
+  % Main vector
+  \draw[->,thick,blue] (O) -- (P) node[midway,above right] {$\mathbf{v}$};
+  \node[circle,fill=blue,inner sep=1.5pt] at (P) {};
+  \node[above right] at (P) {$(x,y,z)$};
+  
+  % Magnitude arc (in xy-plane projection)
+  \draw[dashed,gray] (O) -- (3,2,0);
+  \draw[red,thick] (O) -- (P);
+  \node[red,right] at (1.5,1,1.25) {$|\mathbf{v}|$};
+  
+  % Component labels
+  \draw[->,thick,red!70] (3,2,0) -- (3,2,2.5) node[midway,right] {$z\mathbf{k}$};
+  \draw[->,thick,green!70!black] (3,0,0) -- (3,2,0) node[midway,right] {$y\mathbf{j}$};
+  \draw[->,thick,orange!80] (0,0,0) -- (3,0,0) node[midway,below] {$x\mathbf{i}$};
+\end{tikzpicture}
+\hspace{1cm}
+\begin{tikzpicture}[scale=0.9]
+  % 2D projection showing magnitude calculation
+  \draw[thick,->] (0,0) -- (4.5,0) node[anchor=north] {$\sqrt{x^2+y^2}$};
+  \draw[thick,->] (0,0) -- (0,3.5) node[anchor=east] {$z$};
+  
+  % Right triangle
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (3.6,0);
+  \coordinate (B) at (3.6,2.5);
+  
+  \draw[thick] (O) -- (A) node[midway,below] {$\sqrt{x^2+y^2}$};
+  \draw[thick] (A) -- (B) node[midway,right] {$z$};
+  \draw[thick,blue] (O) -- (B) node[midway,above left] {$|\mathbf{v}|=\sqrt{x^2+y^2+z^2}$};
+  
+  % Right angle marker
+  \draw (3.3,0) -- (3.3,0.3) -- (3.6,0.3);
+  
+  \node[circle,fill=blue,inner sep=1.5pt] at (O) {};
+  \node[circle,fill=blue,inner sep=1.5pt] at (B) {};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\noindent\textit{Left:} A vector $\mathbf{v}$ in 3D space decomposed into components $x\mathbf{i}$, $y\mathbf{j}$, and $z\mathbf{k}$. 
+\textit{Right:} The magnitude formula derived using Pythagoras' theorem twice.
 
 \subsubsection{The Dot Product (Scalar Product)}
 The dot product is the central algebraic tool for vectors in Extension 2.
@@ -76,6 +252,90 @@ The dot product is the central algebraic tool for vectors in Extension 2.
   \item \textbf{Vector Projection:} $\text{proj}_{\mathbf{b}}\mathbf{a} = \tfrac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{b} \cdot \mathbf{b}}\mathbf{b}$
 \end{itemize}
 
+\vspace{0.3em}
+\noindent\textbf{Remark (Useful Identity for Vector Proofs):}
+
+A powerful formula relating the dot product and cross product is:
+$$|\mathbf{a} \times \mathbf{b}|^2 = |\mathbf{a}|^2 |\mathbf{b}|^2 - (\mathbf{a} \cdot \mathbf{b})^2$$
+
+\textit{Derivation:} Using $\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\theta$ and $|\mathbf{a} \times \mathbf{b}| = |\mathbf{a}||\mathbf{b}|\sin\theta$:
+\begin{align*}
+|\mathbf{a} \times \mathbf{b}|^2 &= |\mathbf{a}|^2|\mathbf{b}|^2\sin^2\theta \\
+&= |\mathbf{a}|^2|\mathbf{b}|^2(1 - \cos^2\theta) \quad \text{(using } \sin^2\theta + \cos^2\theta = 1\text{)}\\
+&= |\mathbf{a}|^2|\mathbf{b}|^2 - |\mathbf{a}|^2|\mathbf{b}|^2\cos^2\theta \\
+&= |\mathbf{a}|^2|\mathbf{b}|^2 - (\mathbf{a} \cdot \mathbf{b})^2
+\end{align*}
+
+\textit{Connection to Cauchy-Schwarz:} This identity is equivalent to the Cauchy-Schwarz inequality in 3D:
+$$(\mathbf{a} \cdot \mathbf{b})^2 \leq |\mathbf{a}|^2 |\mathbf{b}|^2$$
+Since $|\mathbf{a} \times \mathbf{b}|^2 \geq 0$, the identity immediately gives the Cauchy-Schwarz inequality. Equality holds when vectors are parallel (cross product is zero).
+
+\textit{Applications:} This formula is particularly useful in geometric proofs involving perpendicular distances, areas, and relationships between dot and cross products without explicitly computing angles.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % Origin
+  \coordinate (O) at (0,0);
+  
+  % Vector a
+  \coordinate (A) at (4,1);
+  \draw[->,thick,blue] (O) -- (A) node[midway,below] {$\mathbf{a}$};
+  \node[above right] at (A) {$|\mathbf{a}|$};
+  
+  % Vector b
+  \coordinate (B) at (2.5,3);
+  \draw[->,thick,red] (O) -- (B) node[midway,left] {$\mathbf{b}$};
+  \node[above left] at (B) {$|\mathbf{b}|$};
+  
+  % Angle arc
+  \draw[thick] (0.8,0.2) arc (14:50:0.85);
+  \node at (1.2,0.6) {$\theta$};
+  
+  % Projection of a onto b
+  \coordinate (P) at (1.367,1.64);
+  \draw[dashed,orange,thick] (A) -- (P);
+  \draw[->,thick,green!60!black] (O) -- (P) node[midway,right,xshift=2pt] {\small $|\mathbf{a}|\cos\theta$};
+  
+  % Right angle marker
+  \draw[orange] (P) ++(-0.15,0.125) -- ++(-0.125,-0.15) -- ++(0.15,-0.125);
+  
+  % Origin point
+  \node[circle,fill=black,inner sep=1.5pt] at (O) {};
+  
+  % Labels
+  \node[anchor=north] at (2,-0.5) {$\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\theta$};
+\end{tikzpicture}
+\hspace{1.5cm}
+\begin{tikzpicture}[scale=1.2]
+  % Perpendicular vectors example
+  \coordinate (O) at (0,0);
+  
+  % Vector u (horizontal)
+  \coordinate (U) at (3,0);
+  \draw[->,thick,blue] (O) -- (U) node[midway,below] {$\mathbf{u}$};
+  
+  % Vector v (vertical)
+  \coordinate (V) at (0,2.5);
+  \draw[->,thick,red] (O) -- (V) node[midway,left] {$\mathbf{v}$};
+  
+  % Right angle marker
+  \draw[thick] (0.3,0) -- (0.3,0.3) -- (0,0.3);
+  
+  % Angle label
+  \node at (0.5,0.5) {$90°$};
+  
+  % Origin point
+  \node[circle,fill=black,inner sep=1.5pt] at (O) {};
+  
+  % Labels
+  \node[anchor=north] at (1.5,-0.5) {$\mathbf{u} \cdot \mathbf{v} = 0$ (perpendicular)};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\noindent\textit{Left:} The dot product $\mathbf{a} \cdot \mathbf{b}$ equals $|\mathbf{a}|$ times the projection of $\mathbf{b}$ onto $\mathbf{a}$ (or vice versa).
+\textit{Right:} When vectors are perpendicular ($\theta = 90°$), the dot product is zero.
+
 \subsubsection{Vector Equation of a Line}
 Extension 2 uses vector form rather than $y=mx+b$.
 \begin{itemize}[leftmargin=*]
@@ -84,12 +344,192 @@ Extension 2 uses vector form rather than $y=mx+b$.
   \item \textbf{Skew Lines:} In 3D, lines can be non-parallel and non-intersecting
 \end{itemize}
 
+\begin{center}
+\tdplotsetmaincoords{70}{120}
+\begin{tikzpicture}[tdplot_main_coords,scale=0.9]
+  % Axes
+  \draw[thick,->] (0,0,0) -- (5,0,0) node[anchor=north east]{$x$};
+  \draw[thick,->] (0,0,0) -- (0,4,0) node[anchor=north west]{$y$};
+  \draw[thick,->] (0,0,0) -- (0,0,4) node[anchor=south]{$z$};
+  
+  % Point a on the line
+  \coordinate (A) at (1.5,2,1);
+  \node[circle,fill=red,inner sep=2pt] at (A) {};
+  \node[above right] at (A) {$\mathbf{a}$};
+  
+  % Direction vector b
+  \coordinate (B) at (1.2,0.8,1);
+  \draw[->,very thick,blue] (A) -- ($(A)+(B)$) node[midway,above] {$\mathbf{b}$};
+  
+  % The line extending in both directions
+  \draw[thick,red!70,<->] ($(A)-2*(B)$) -- ($(A)+2.5*(B)$);
+  
+  % Points on the line for different lambda values
+  \coordinate (P1) at ($(A)-1*(B)$);
+  \coordinate (P2) at ($(A)+0*(B)$);
+  \coordinate (P3) at ($(A)+1.5*(B)$);
+  
+  \node[circle,fill=green!60!black,inner sep=1.5pt] at (P1) {};
+  \node[below left,green!60!black] at (P1) {\small $\lambda=-1$};
+  
+  \node[circle,fill=orange,inner sep=1.5pt] at (P3) {};
+  \node[above right,orange] at (P3) {\small $\lambda=1.5$};
+  
+  % Origin point
+  \node[circle,fill=black,inner sep=1.5pt] at (0,0,0) {};
+  \node[below left] at (0,0,0) {$O$};
+\end{tikzpicture}
+\hspace{1cm}
+\begin{tikzpicture}[scale=1.1]
+  % 2D illustration for clarity
+  \draw[thick,->] (-0.5,0) -- (5,0) node[anchor=north] {$x$};
+  \draw[thick,->] (0,-0.5) -- (0,4) node[anchor=east] {$y$};
+  
+  % Point a
+  \coordinate (A) at (1.5,2);
+  \node[circle,fill=red,inner sep=2.5pt] at (A) {};
+  \node[above left,red] at (A) {$\mathbf{a}$};
+  
+  % Direction vector b
+  \coordinate (B) at (1.5,0.8);
+  \draw[->,very thick,blue] (A) -- ($(A)+(B)$) node[midway,above right] {$\mathbf{b}$};
+  
+  % The line
+  \draw[thick,red!70,<->] ($(A)-1.5*(B)$) -- ($(A)+2.2*(B)$);
+  
+  % Points on line with different lambda values
+  \coordinate (P0) at ($(A)-1*(B)$);
+  \coordinate (P1) at ($(A)+0.5*(B)$);
+  \coordinate (P2) at ($(A)+1*(B)$);
+  \coordinate (P3) at ($(A)+2*(B)$);
+  
+  \node[circle,fill=green!60!black,inner sep=1.8pt] at (P0) {};
+  \node[below,green!60!black,font=\small] at (P0) {$\lambda=-1$};
+  
+  \node[circle,fill=purple,inner sep=1.8pt] at (P1) {};
+  \node[above,purple,font=\small] at (P1) {$\lambda=0.5$};
+  
+  \node[circle,fill=orange,inner sep=1.8pt] at (P2) {};
+  \node[below,orange,font=\small] at (P2) {$\lambda=1$};
+  
+  \node[circle,fill=cyan!70!black,inner sep=1.8pt] at (P3) {};
+  \node[above,cyan!70!black,font=\small] at (P3) {$\lambda=2$};
+  
+  % Position vectors from origin
+  \draw[->,dashed,gray] (0,0) -- (A);
+  \draw[->,dashed,gray] (0,0) -- (P2);
+  
+  % Labels
+  \node[below right,gray,font=\footnotesize] at (0.75,1) {$\mathbf{r}$};
+  
+  % Origin
+  \node[circle,fill=black,inner sep=1.5pt] at (0,0) {};
+  \node[below left] at (0,0) {$O$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\noindent\textit{Left:} A line in 3D space defined by $\mathbf{r} = \mathbf{a} + \lambda\mathbf{b}$, where $\mathbf{a}$ is a fixed point and $\mathbf{b}$ is the direction vector.
+\textit{Right:} Different values of $\lambda$ generate different points along the line; $\lambda=0$ gives point $\mathbf{a}$, positive $\lambda$ extends forward, negative $\lambda$ extends backward.
+
 \subsubsection{Spheres \& Planes}
 \begin{itemize}[leftmargin=*]
   \item \textbf{Sphere:} Vector form $|\mathbf{r} - \mathbf{c}| = R$ or Cartesian $(x-x_0)^2 + (y-y_0)^2 + (z-z_0)^2 = R^2$
   \item \textbf{Plane (Point-Normal):} $(\mathbf{r} - \mathbf{a}) \cdot \mathbf{n} = 0$ where $\mathbf{n}$ is normal to the plane
   \item \textbf{Plane (Cartesian):} $ax + by + cz = d$ where $(a, b, c)$ is the normal vector
 \end{itemize}
+
+\begin{center}
+\tdplotsetmaincoords{70}{110}
+\begin{tikzpicture}[tdplot_main_coords,scale=0.85]
+  % Axes
+  \draw[thick,->] (0,0,0) -- (4,0,0) node[anchor=north east]{$x$};
+  \draw[thick,->] (0,0,0) -- (0,4,0) node[anchor=north west]{$y$};
+  \draw[thick,->] (0,0,0) -- (0,0,4) node[anchor=south]{$z$};
+  
+  % Center of sphere
+  \coordinate (C) at (2,2,2);
+  \node[circle,fill=red,inner sep=2pt] at (C) {};
+  \node[above right,red] at (C) {$\mathbf{c}$};
+  
+  % Draw sphere (approximated with circles)
+  \tdplotsetrotatedcoords{0}{0}{0}
+  \draw[blue,thick,tdplot_rotated_coords] (C) circle (1.2);
+  \tdplotsetrotatedcoords{90}{90}{0}
+  \draw[blue,thick,dashed,tdplot_rotated_coords] (C) circle (1.2);
+  \tdplotsetrotatedcoords{0}{90}{0}
+  \draw[blue,thick,dashed,tdplot_rotated_coords] (C) circle (1.2);
+  
+  % Radius vector
+  \coordinate (P) at (3.0,2.8,2.5);
+  \draw[->,thick,green!60!black] (C) -- (P) node[midway,above] {$R$};
+  \node[circle,fill=blue,inner sep=1.5pt] at (P) {};
+  
+  % Position vector r
+  \draw[->,dashed,gray] (0,0,0) -- (P) node[midway,below left] {$\mathbf{r}$};
+  \draw[->,dashed,red!70] (0,0,0) -- (C);
+  
+  % Point on sphere
+  \node[right] at (P) {$P$};
+  
+  % Origin
+  \node[circle,fill=black,inner sep=1.5pt] at (0,0,0) {};
+  \node[below left] at (0,0,0) {$O$};
+  
+  % Label
+  \node[below,blue] at (2,2,0.3) {$|\mathbf{r}-\mathbf{c}|=R$};
+\end{tikzpicture}
+\hspace{1cm}
+\tdplotsetmaincoords{70}{115}
+\begin{tikzpicture}[tdplot_main_coords,scale=0.85]
+  % Axes
+  \draw[thick,->] (0,0,0) -- (4.5,0,0) node[anchor=north east]{$x$};
+  \draw[thick,->] (0,0,0) -- (0,4,0) node[anchor=north west]{$y$};
+  \draw[thick,->] (0,0,0) -- (0,0,4) node[anchor=south]{$z$};
+  
+  % Point on plane
+  \coordinate (A) at (1.5,2,1.5);
+  \node[circle,fill=red,inner sep=2pt] at (A) {};
+  \node[above left,red] at (A) {$\mathbf{a}$};
+  
+  % Normal vector
+  \coordinate (N) at (1,1,1.5);
+  \draw[->,very thick,blue] (A) -- ($(A)+(N)$) node[near end,right] {$\mathbf{n}$};
+  
+  % Draw plane (as a parallelogram)
+  \coordinate (P1) at (0,0.5,0.5);
+  \coordinate (P2) at (3.5,0.5,0.5);
+  \coordinate (P3) at (4,3.5,0.5);
+  \coordinate (P4) at (0.5,3.5,0.5);
+  
+  \fill[green!20,opacity=0.6] (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+  \draw[green!60!black,thick] (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+  
+  % Another point on plane
+  \coordinate (R) at (2.5,1.2,1.2);
+  \node[circle,fill=purple,inner sep=1.5pt] at (R) {};
+  \node[below,purple] at (R) {$\mathbf{r}$};
+  
+  % Vector from a to r (lies in plane)
+  \draw[->,dashed,orange,thick] (A) -- (R) node[midway,below] {\small $\mathbf{r}-\mathbf{a}$};
+  
+  % Right angle indicator (perpendicular)
+  \coordinate (Mid) at ($(A)!0.3!(R)$);
+  \coordinate (NormalEnd) at ($(A)+(0.3,0.3,0.45)$);
+  \draw[thick] (Mid) -- ++(0.15,0.15,0.225) -- (NormalEnd);
+  
+  % Origin
+  \node[circle,fill=black,inner sep=1.5pt] at (0,0,0) {};
+  \node[below left] at (0,0,0) {$O$};
+  
+  % Label
+  \node[below,green!60!black] at (2,0.3,0.3) {$(\mathbf{r}-\mathbf{a})\cdot\mathbf{n}=0$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\noindent\textit{Left:} A sphere centered at $\mathbf{c}$ with radius $R$. Any point $\mathbf{r}$ on the sphere satisfies $|\mathbf{r}-\mathbf{c}|=R$.
+\textit{Right:} A plane containing point $\mathbf{a}$ with normal vector $\mathbf{n}$. Any point $\mathbf{r}$ on the plane has $(\mathbf{r}-\mathbf{a})\perp\mathbf{n}$, so their dot product is zero.
 
 \subsubsection{Geometric Proofs}
 Use pure vector logic (without coordinates) to prove theorems about parallelograms, triangles, centroids, medians, and 3D shapes like tetrahedrons.
@@ -108,6 +548,93 @@ While not explicitly in the NESA syllabus, the cross product is a powerful tool 
   \item $|\mathbf{a} \times \mathbf{b}| = |\mathbf{a}||\mathbf{b}|\sin\theta$ (area of parallelogram)
   \item $\mathbf{a} \times \mathbf{b} = -\mathbf{b} \times \mathbf{a}$ (anticommutative)
 \end{itemize}
+
+\begin{center}
+\tdplotsetmaincoords{70}{120}
+\begin{tikzpicture}[tdplot_main_coords,scale=1.1]
+  % Origin
+  \coordinate (O) at (0,0,0);
+  
+  % Vector a
+  \coordinate (A) at (3,1,0);
+  \draw[->,very thick,blue] (O) -- (A) node[midway,below] {$\mathbf{a}$};
+  
+  % Vector b
+  \coordinate (B) at (1,3,0.5);
+  \draw[->,very thick,red] (O) -- (B) node[midway,left] {$\mathbf{b}$};
+  
+  % Cross product vector (perpendicular to both a and b)
+  \coordinate (C) at (0,0,3);
+  \draw[->,ultra thick,green!60!black] (O) -- (C) node[midway,right] {$\mathbf{a}\times\mathbf{b}$};
+  
+  % Parallelogram formed by a and b
+  \coordinate (P) at (4,4,0.5);
+  \draw[dashed,orange,thick] (A) -- (P);
+  \draw[dashed,orange,thick] (B) -- (P);
+  \fill[blue!20,opacity=0.4] (O) -- (A) -- (P) -- (B) -- cycle;
+  
+  % Right angle indicators (showing perpendicularity)
+  % Between a and cross product
+  \draw[thick,green!60!black] (0.3,0.1,0) -- (0.3,0.1,0.3) -- (0,0.1,0.3);
+  % Between b and cross product
+  \draw[thick,green!60!black] (0.1,0.3,0) -- (0.1,0.3,0.3) -- (0.1,0,0.3);
+  
+  % Angle theta between a and b
+  \tdplotsetrotatedcoords{0}{0}{0}
+  \tdplotdrawarc[thick,tdplot_rotated_coords]{(O)}{0.6}{18}{70}{anchor=south west}{$\theta$}
+  
+  % Origin point
+  \node[circle,fill=black,inner sep=2pt] at (O) {};
+  
+  % Axes for reference
+  \draw[gray,->] (O) -- (4,0,0) node[anchor=north east]{$x$};
+  \draw[gray,->] (O) -- (0,4.5,0) node[anchor=north west]{$y$};
+  \draw[gray,->] (O) -- (0,0,3.5) node[anchor=south]{$z$};
+\end{tikzpicture}
+\hspace{0.5cm}
+\begin{tikzpicture}[scale=1.0]
+  % 2D view showing parallelogram area
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (4,0.8);
+  \coordinate (B) at (1.2,3);
+  \coordinate (P) at (5.2,3.8);
+  
+  % Parallelogram
+  \fill[blue!20,opacity=0.5] (O) -- (A) -- (P) -- (B) -- cycle;
+  \draw[thick] (O) -- (A);
+  \draw[thick] (O) -- (B);
+  \draw[dashed,orange,thick] (A) -- (P);
+  \draw[dashed,orange,thick] (B) -- (P);
+  
+  % Vectors
+  \draw[->,very thick,blue] (O) -- (A) node[midway,below] {$\mathbf{a}$};
+  \draw[->,very thick,red] (O) -- (B) node[midway,left] {$\mathbf{b}$};
+  
+  % Angle
+  \draw[thick] (0.8,0.16) arc (11:68:0.85);
+  \node at (1.2,0.6) {$\theta$};
+  
+  % Height line (perpendicular from b to a)
+  \coordinate (H) at (0.896,0.179);
+  \draw[dotted,thick,purple] (B) -- (H);
+  \draw[->,thick,purple] (0.5,1.8) -- (0.7,1.2) node[midway,right] {\small height};
+  
+  % Origin point
+  \node[circle,fill=black,inner sep=2pt] at (O) {};
+  
+  % Area label
+  \node[anchor=north] at (2.5,-0.5) {Area $= |\mathbf{a}\times\mathbf{b}| = |\mathbf{a}||\mathbf{b}|\sin\theta$};
+  
+  % Cross product direction indicator
+  \node at (2.5,2) {$\mathbf{a}\times\mathbf{b}$ points $\perp$ to page};
+  \draw[->,ultra thick,green!60!black] (2.5,2.5) -- (2.5,2.7);
+  \node[green!60!black] at (2.5,2.9) {$\otimes$ or $\odot$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\noindent\textit{Left:} The cross product $\mathbf{a}\times\mathbf{b}$ (green) is perpendicular to both $\mathbf{a}$ (blue) and $\mathbf{b}$ (red), using the right-hand rule for direction.
+\textit{Right:} The magnitude $|\mathbf{a}\times\mathbf{b}|$ equals the area of the parallelogram formed by $\mathbf{a}$ and $\mathbf{b}$.
 
 \textbf{Worked Example: Distance from Point to Line}
 

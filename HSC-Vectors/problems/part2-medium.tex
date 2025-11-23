@@ -13,8 +13,9 @@ Equating components: $3 + \lambda = 1 - 2\mu$, $-1 + 2\lambda = -6 + \mu$, $7 + 
 \vspace{1em}
 
 \begin{problem}[Perpendicular Intersecting Lines]
-Two lines intersect and are perpendicular. \\
-Find values of $p$ and $q$ for the line $\mathbf{r} = \begin{pmatrix} 1 \\ 0 \\ p \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ q \\ -1 \end{pmatrix}$.
+Consider the line $L_1: \mathbf{r} = \begin{pmatrix} 3 \\ -1 \\ 7 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$ and the line $L_2: \mathbf{r} = \begin{pmatrix} 1 \\ 0 \\ p \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ q \\ -1 \end{pmatrix}$. \\
+Given that these two lines intersect and are perpendicular to each other, find the values of $p$ and $q$. \\
+(Note: Two conditions must be satisfied: the lines must intersect at some point, and their direction vectors must be perpendicular.)
 \end{problem}
 
 \begin{hint}
@@ -28,49 +29,225 @@ Direction vectors must be perpendicular: $\mathbf{d}_1 \cdot \mathbf{d}_2 = 0$. 
 \vspace{1em}
 
 \begin{problem}[Tetrahedron Collinearity]
-Given tetrahedron with vertices and specific vector relationships, prove collinearity of certain points using linear combinations of non-parallel vectors.
+\begin{enumerate}[label=(\roman*)]
+    \item The two non-parallel vectors $\vec{u}$ and $\vec{v}$ satisfy $\lambda \vec{u} + \mu \vec{v} = \vec{0}$ for some real numbers $\lambda$ and $\mu$.
+    
+    Show that $\lambda = \mu = 0$.
+
+    \item The two non-parallel vectors $\vec{u}$ and $\vec{v}$ satisfy $\lambda_1 \vec{u} + \mu_1 \vec{v} = \lambda_2 \vec{u} + \mu_2 \vec{v}$ for some real numbers $\lambda_1, \lambda_2, \mu_1$ and $\mu_2$.
+    
+    Using part (i), or otherwise, show that $\lambda_1 = \lambda_2$ and $\mu_1 = \mu_2$.
+\end{enumerate}
+
+
+\vspace{0.3cm}
+
+\noindent The diagram below shows a tetrahedron with vertices $A, B, C$ and $S$.
+
+\noindent The point $K$ is defined by $\vec{SK} = \frac{1}{4}\vec{SB} + \frac{1}{3}\vec{SC}$, as shown in the diagram.
+
+\noindent The point $L$ is the point of intersection of the straight lines $SK$ and $BC$.
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, cap=round, join=round]
+    % Define coordinates
+    \coordinate (S) at (2, 3.5);
+    \coordinate (A) at (0, 0);
+    \coordinate (B) at (4, -0.3);
+    \coordinate (C) at (5, 1.2);
+
+    % Calculate L based on BL = 4/7 BC
+    \coordinate (L) at ($(B)!4/7!(C)$);
+
+    % Calculate K based on SK = 1/4 SB + 1/3 SC
+    \coordinate (K) at ($(S) + 0.25*($(B)-(S)$) + 0.3333*($(C)-(S)$)$);
+
+    % Dashed lines for hidden edges
+    \draw[dashed] (A) -- (C);
+    \draw[dashed] (A) -- (L);
+
+    % Main Tetrahedron Edges
+    \draw (S) -- (A);
+    \draw (S) -- (B);
+    \draw (S) -- (C);
+    \draw (A) -- (B);
+    \draw (B) -- (C);
+    
+    % Lines SK and KL
+    \draw (S) -- (K);
+    \draw (K) -- (L);
+
+    % Points
+    \fill (S) circle (1.2pt) node[above] {$S$};
+    \fill (A) circle (1.2pt) node[left] {$A$};
+    \fill (B) circle (1.2pt) node[below] {$B$};
+    \fill (C) circle (1.2pt) node[right] {$C$};
+    \fill (K) circle (1.2pt) node[right=2pt] {$K$};
+    \fill (L) circle (1.2pt) node[below right=1pt] {$L$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{enumerate}[resume*, label=(\roman*)]
+    \item Using part (ii), or otherwise, determine the position of $L$ by showing that $\vec{BL} = \frac{4}{7}\vec{BC}$.
+    
+    \item The point $P$ is defined by $\vec{AP} = -6\vec{AB} - 8\vec{AC}$.
+    
+    Does $P$ lie on the line $AL$? Justify your answer.
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
-Express vectors in terms of base vectors and use uniqueness of coefficients for non-parallel vectors.
+(i) Use proof by contradiction: if $\lambda \neq 0$, then $\vec{u} = -\frac{\mu}{\lambda}\vec{v}$, contradicting non-parallel assumption. 
+(ii) Rearrange to get $(\lambda_1 - \lambda_2)\vec{u} + (\mu_1 - \mu_2)\vec{v} = \vec{0}$ and apply part (i).
+(iii) Express $\vec{SL}$ in two ways: as $m\vec{SK}$ and as $(1-k)\vec{SB} + k\vec{SC}$, then equate coefficients.
+(iv) Express $\vec{AL}$ in terms of $\vec{AB}$ and $\vec{AC}$, then check if $\vec{AP} = c\vec{AL}$ for some scalar $c$.
 \end{hint}
 
 \begin{solution}[Sketch]
-Show that if $\lambda \mathbf{a} + \mu \mathbf{b} = \vec{0}$ for non-parallel $\mathbf{a}, \mathbf{b}$, then $\lambda = \mu = 0$. Use this to prove position relationships, showing that $\overrightarrow{BL} = \frac{4}{7}\overrightarrow{BC}$ by equating coefficients.
+(i) Assume $\lambda \neq 0$. Then $\vec{u} = -\frac{\mu}{\lambda}\vec{v}$, implying $\vec{u} \parallel \vec{v}$, contradiction. Thus $\lambda = 0$, which gives $\mu = 0$.
+
+(ii) Rearranging: $(\lambda_1 - \lambda_2)\vec{u} + (\mu_1 - \mu_2)\vec{v} = \vec{0}$. By part (i), both coefficients equal zero.
+
+(iii) Since $S, K, L$ are collinear: $\vec{SL} = m\vec{SK} = \frac{m}{4}\vec{SB} + \frac{m}{3}\vec{SC}$. Since $L$ is on $BC$: $\vec{SL} = (1-k)\vec{SB} + k\vec{SC}$ where $\vec{BL} = k\vec{BC}$. Equating coefficients: $\frac{m}{4} = 1-k$ and $\frac{m}{3} = k$. Solving: $m = \frac{12}{7}$ and $k = \frac{4}{7}$.
+
+(iv) $\vec{AL} = \vec{AB} + \frac{4}{7}\vec{BC} = \vec{AB} + \frac{4}{7}(\vec{AC} - \vec{AB}) = \frac{3}{7}\vec{AB} + \frac{4}{7}\vec{AC}$. Check: $\vec{AP} = -6\vec{AB} - 8\vec{AC} = -14(\frac{3}{7}\vec{AB} + \frac{4}{7}\vec{AC}) = -14\vec{AL}$. Yes, $P$ lies on line $AL$ (extended backwards through $A$).
 \end{solution}
 
 \vspace{1em}
 
-\begin{problem}[Parallelogram Proof]
-Show that quadrilateral $CDFE$ is a parallelogram given that $ABCD$ and $ABEF$ are parallelograms.
+\begin{problem}[Varignon's Theorem - Midpoint Parallelogram]
+Let $ABCD$ be any quadrilateral in three-dimensional space (not necessarily planar). Let $P$, $Q$, $R$, and $S$ be the midpoints of sides $AB$, $BC$, $CD$, and $DA$ respectively.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Express the position vectors of $P$, $Q$, $R$, and $S$ in terms of the position vectors $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$, and $\mathbf{d}$ of points $A$, $B$, $C$, and $D$ respectively.
+    
+    \item Show that $\overrightarrow{PQ} = \overrightarrow{SR}$.
+    
+    \item Hence, prove that $PQRS$ is a parallelogram.
+    
+    \item If $ABCD$ is a parallelogram, what special type of quadrilateral is $PQRS$? Justify your answer.
+\end{enumerate}
+
+\textit{Note: This result is known as Varignon's Theorem (1731). It states that the midpoints of any quadrilateral always form a parallelogram, regardless of the shape of the original quadrilateral.}
 \end{problem}
 
 \begin{hint}
-Use the fact that opposite sides of parallelograms are equal vectors.
+(i) Use the midpoint formula: the position vector of the midpoint of two points is the average of their position vectors.
+(ii) Express both $\overrightarrow{PQ}$ and $\overrightarrow{SR}$ in terms of $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$, and $\mathbf{d}$, then show they are equal.
+(iii) Use the result from (ii) - if one pair of opposite sides is equal and parallel, then $PQRS$ is a parallelogram.
+(iv) When $ABCD$ is a parallelogram, use $\overrightarrow{DC} = \overrightarrow{AB}$ and investigate the relationship between adjacent sides of $PQRS$.
 \end{hint}
 
 \begin{solution}[Sketch]
-From parallelogram $ABCD$: $\overrightarrow{AB} = \overrightarrow{DC}$. From parallelogram $ABEF$: $\overrightarrow{AB} = \overrightarrow{FE}$. Therefore $\overrightarrow{DC} = \overrightarrow{FE}$, which means $\overrightarrow{CD} = \overrightarrow{EF}$, proving $CDFE$ is a parallelogram.
+(i) Using the midpoint formula:
+\begin{align*}
+\mathbf{p} &= \frac{\mathbf{a} + \mathbf{b}}{2} \\
+\mathbf{q} &= \frac{\mathbf{b} + \mathbf{c}}{2} \\
+\mathbf{r} &= \frac{\mathbf{c} + \mathbf{d}}{2} \\
+\mathbf{s} &= \frac{\mathbf{d} + \mathbf{a}}{2}
+\end{align*}
+
+(ii) Calculate $\overrightarrow{PQ}$:
+\begin{align*}
+\overrightarrow{PQ} &= \mathbf{q} - \mathbf{p} = \frac{\mathbf{b} + \mathbf{c}}{2} - \frac{\mathbf{a} + \mathbf{b}}{2} \\
+&= \frac{\mathbf{b} + \mathbf{c} - \mathbf{a} - \mathbf{b}}{2} = \frac{\mathbf{c} - \mathbf{a}}{2}
+\end{align*}
+
+Calculate $\overrightarrow{SR}$:
+\begin{align*}
+\overrightarrow{SR} &= \mathbf{r} - \mathbf{s} = \frac{\mathbf{c} + \mathbf{d}}{2} - \frac{\mathbf{d} + \mathbf{a}}{2} \\
+&= \frac{\mathbf{c} + \mathbf{d} - \mathbf{d} - \mathbf{a}}{2} = \frac{\mathbf{c} - \mathbf{a}}{2}
+\end{align*}
+
+Therefore $\overrightarrow{PQ} = \overrightarrow{SR}$.
+
+(iii) Since $\overrightarrow{PQ} = \overrightarrow{SR}$, the sides $PQ$ and $SR$ are equal in length and parallel. By definition, a quadrilateral with one pair of opposite sides equal and parallel is a parallelogram. Therefore $PQRS$ is a parallelogram.
+
+(iv) If $ABCD$ is a parallelogram, then $\overrightarrow{AB} = \overrightarrow{DC}$, which means $\mathbf{b} - \mathbf{a} = \mathbf{c} - \mathbf{d}$.
+
+Calculate $\overrightarrow{PS}$:
+$$\overrightarrow{PS} = \mathbf{s} - \mathbf{p} = \frac{\mathbf{d} + \mathbf{a}}{2} - \frac{\mathbf{a} + \mathbf{b}}{2} = \frac{\mathbf{d} - \mathbf{b}}{2}$$
+
+Calculate $\overrightarrow{QR}$:
+$$\overrightarrow{QR} = \mathbf{r} - \mathbf{q} = \frac{\mathbf{c} + \mathbf{d}}{2} - \frac{\mathbf{b} + \mathbf{c}}{2} = \frac{\mathbf{d} - \mathbf{b}}{2}$$
+
+So $\overrightarrow{PS} = \overrightarrow{QR}$, meaning both pairs of opposite sides are equal and parallel.
+
+Additionally, from (ii): $|\overrightarrow{PQ}| = \frac{1}{2}|\mathbf{c} - \mathbf{a}| = \frac{1}{2}|\overrightarrow{AC}|$ (half the diagonal $AC$).
+
+Similarly: $|\overrightarrow{PS}| = \frac{1}{2}|\mathbf{d} - \mathbf{b}| = \frac{1}{2}|\overrightarrow{BD}|$ (half the diagonal $BD$).
+
+If $ABCD$ is a parallelogram with equal diagonals, then $PQRS$ is a **rhombus** (all four sides equal). If the diagonals of $ABCD$ are perpendicular, then $PQRS$ is a **rectangle**.
 \end{solution}
 
 \vspace{1em}
 
 \begin{problem}[Force Vector Analysis]
-Force $\mathbf{F}_1$ has magnitude 12 N in direction $2\mathbf{i} - 2\mathbf{j} + \mathbf{k}$. Show $\mathbf{F}_1 = 8\mathbf{i} - 8\mathbf{j} + 4\mathbf{k}$, find resultant with $\mathbf{F}_2 = -6\mathbf{i} + 12\mathbf{j} + 4\mathbf{k}$, and compute work done.
+A particle is subject to two forces and undergoes a displacement in three-dimensional space.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Force $\mathbf{F}_1$ has magnitude 12 newtons in the direction of vector $2\mathbf{i} - 2\mathbf{j} + \mathbf{k}$. 
+    
+    Show that $\mathbf{F}_1 = 8\mathbf{i} - 8\mathbf{j} + 4\mathbf{k}$ newtons.
+    
+    \item Force $\mathbf{F}_1$ from part (i) and a second force, $\mathbf{F}_2 = -6\mathbf{i} + 12\mathbf{j} + 4\mathbf{k}$ newtons, both act upon the particle. 
+    
+    Show that the resultant force acting on the particle is given by:
+    $$\mathbf{F}_3 = 2\mathbf{i} + 4\mathbf{j} + 8\mathbf{k} \text{ newtons}$$
+    
+    \item The particle moves through a displacement $\mathbf{d} = \mathbf{i} + \mathbf{j} + 2\mathbf{k}$ metres under the action of the resultant force $\mathbf{F}_3$ from part (ii).
+    
+    Calculate the work done by the resultant force on the particle.
+\end{enumerate}
+
+\textit{Note: Here $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ are the standard unit vectors in the $x$, $y$, and $z$ directions respectively. Work done is calculated using $W = \mathbf{F} \cdot \mathbf{d}$ and is measured in joules (J) when force is in newtons (N) and displacement is in metres (m).}
 \end{problem}
 
 \begin{hint}
-Find unit vector in given direction, multiply by magnitude, then add forces vectorially.
+(i) Find the unit vector in the given direction by dividing by its magnitude, then multiply by 12 to get the force vector.
+(ii) Add the two force vectors component-wise to find the resultant.
+(iii) Use the dot product formula $W = \mathbf{F} \cdot \mathbf{d}$ to compute the work done.
 \end{hint}
 
 \begin{solution}[Sketch]
-Direction vector has magnitude $\sqrt{4+4+1} = 3$. Unit vector: $\frac{1}{3}(2\mathbf{i} - 2\mathbf{j} + \mathbf{k})$. Force: $12 \cdot \frac{1}{3}(2\mathbf{i} - 2\mathbf{j} + \mathbf{k}) = 8\mathbf{i} - 8\mathbf{j} + 4\mathbf{k}$. Resultant: $\mathbf{F}_3 = 2\mathbf{i} + 4\mathbf{j} + 8\mathbf{k}$. Work: $\mathbf{F}_3 \cdot \mathbf{d} = 2 + 4 + 16 = 22$.
+(i) Direction vector: $\mathbf{v} = 2\mathbf{i} - 2\mathbf{j} + \mathbf{k}$ has magnitude $|\mathbf{v}| = \sqrt{2^2 + (-2)^2 + 1^2} = \sqrt{4+4+1} = \sqrt{9} = 3$.
+
+Unit vector in this direction: $\hat{\mathbf{u}} = \frac{1}{3}(2\mathbf{i} - 2\mathbf{j} + \mathbf{k})$.
+
+Force with magnitude 12 N: 
+$$\mathbf{F}_1 = 12\hat{\mathbf{u}} = 12 \times \frac{1}{3}(2\mathbf{i} - 2\mathbf{j} + \mathbf{k}) = 4(2\mathbf{i} - 2\mathbf{j} + \mathbf{k}) = 8\mathbf{i} - 8\mathbf{j} + 4\mathbf{k} \text{ N}$$
+
+(ii) Resultant force (vector addition): 
+\begin{align*}
+\mathbf{F}_3 &= \mathbf{F}_1 + \mathbf{F}_2 \\
+&= (8\mathbf{i} - 8\mathbf{j} + 4\mathbf{k}) + (-6\mathbf{i} + 12\mathbf{j} + 4\mathbf{k}) \\
+&= (8-6)\mathbf{i} + (-8+12)\mathbf{j} + (4+4)\mathbf{k} \\
+&= 2\mathbf{i} + 4\mathbf{j} + 8\mathbf{k} \text{ N}
+\end{align*}
+
+(iii) Work done is $W = \mathbf{F}_3 \cdot \mathbf{d}$:
+\begin{align*}
+W &= (2\mathbf{i} + 4\mathbf{j} + 8\mathbf{k}) \cdot (\mathbf{i} + \mathbf{j} + 2\mathbf{k}) \\
+&= (2)(1) + (4)(1) + (8)(2) \\
+&= 2 + 4 + 16 \\
+&= 22 \text{ J}
+\end{align*}
+
+The work done by the resultant force is 22 joules.
 \end{solution}
 
 \vspace{1em}
 
 \begin{problem}[Double Angle with Vectors]
-For vectors $\mathbf{a} = \mathbf{i} + 2\mathbf{j} + 2\mathbf{k}$ and $\mathbf{b} = 2\mathbf{i} - 4\mathbf{j} + 4\mathbf{k}$ with acute angle $\theta$, find $\sin 2\theta$.
+Consider the vectors $\mathbf{a} = \mathbf{i} + 2\mathbf{j} + 2\mathbf{k}$ and $\mathbf{b} = 2\mathbf{i} - 4\mathbf{j} + 4\mathbf{k}$. 
+
+Let $\theta$ be the acute angle between these two vectors. Find the exact value of $\sin 2\theta$.
+
+\textit{Note: Here $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ are the standard unit vectors in the $x$, $y$, and $z$ directions respectively.}
 \end{problem}
 
 \begin{hint}
@@ -85,6 +262,8 @@ $|\mathbf{a}| = 3$, $|\mathbf{b}| = 6$, $\mathbf{a} \cdot \mathbf{b} = 2$. Thus 
 
 \begin{problem}[Vector Projection]
 Find the integer value of $m$ such that the projection of $\mathbf{a} = 2\mathbf{i} - 3\mathbf{j} + \mathbf{k}$ onto $\mathbf{b} = \mathbf{i} + m\mathbf{j} - \mathbf{k}$ equals $-\frac{11}{18}\mathbf{b}$.
+
+\textit{Note: Here $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ are the standard unit vectors in the $x$, $y$, and $z$ directions respectively.}
 \end{problem}
 
 \begin{hint}
@@ -99,6 +278,8 @@ $\mathbf{a} \cdot \mathbf{b} = 2 - 3m - 1 = 1 - 3m$, $|\mathbf{b}|^2 = 1 + m^2 +
 
 \begin{problem}[Perpendicular Vectors Condition]
 For $\mathbf{u} = -2\mathbf{i} - \mathbf{j} + 3\mathbf{k}$ and $\mathbf{v} = p\mathbf{i} + \mathbf{j} + 2\mathbf{k}$, find values of $p$ such that $\mathbf{u} - \mathbf{v}$ and $\mathbf{u} + \mathbf{v}$ are perpendicular.
+
+\textit{Note: Here $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ are the standard unit vectors in the $x$, $y$, and $z$ directions respectively.}
 \end{problem}
 
 \begin{hint}
@@ -126,15 +307,71 @@ Parallel: direction vectors are scalar multiples. Perpendicular: dot product equ
 \vspace{1em}
 
 \begin{problem}[Angle BCD Using Dot Product]
-Given position vectors $\mathbf{b} = \mathbf{i} - \mathbf{j} + 2\mathbf{k}$, $\mathbf{c} = 2\mathbf{i} - \mathbf{j} + \mathbf{k}$, $\mathbf{d} = a\mathbf{i} - 2\mathbf{j}$, and angle $BCD = \frac{\pi}{3}$, find $a$.
+Relative to a fixed origin, the points $B$, $C$, and $D$ are defined respectively by the position vectors:
+\begin{align*}
+\mathbf{b} &= \mathbf{i} - \mathbf{j} + 2\mathbf{k} \\
+\mathbf{c} &= 2\mathbf{i} - \mathbf{j} + \mathbf{k} \\
+\mathbf{d} &= a\mathbf{i} - 2\mathbf{j}
+\end{align*}
+where $a$ is a real constant.
+
+Given that the magnitude of angle $BCD$ is $\frac{\pi}{3}$ (i.e., $\angle BCD = \frac{\pi}{3}$), find the value of $a$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Define coordinates
+    \coordinate (C) at (0,0);
+    \coordinate (B) at (-2, 2.5);
+    \coordinate (D) at (2, 2.2);
+    
+    % Draw vectors from C
+    \draw[->, blue, thick] (C) -- (B);
+    \draw[->, red, thick] (C) -- (D);
+    
+    % Draw points
+    \fill (C) circle (2pt);
+    \fill (B) circle (2pt);
+    \fill (D) circle (2pt);
+    
+    % Labels for points
+    \node[below] at (C) {$C$};
+    \node[left] at (B) {$B$};
+    \node[right] at (D) {$D$};
+    
+    % Draw angle arc
+    \draw[->] (0.8,0) arc (0:52:0.8);
+    \node at (0.6, 0.5) {$\frac{\pi}{3}$};
+    
+    % Label vectors
+    \node[blue] at (-1.2, 1) {$\overrightarrow{CB}$};
+    \node[red] at (1.2, 0.9) {$\overrightarrow{CD}$};
+\end{tikzpicture}
+\end{center}
+
+(Note: The angle $BCD$ is the angle at vertex $C$ between rays $CB$ and $CD$.)
 \end{problem}
 
 \begin{hint}
-Find vectors $\overrightarrow{CB}$ and $\overrightarrow{CD}$, use dot product formula with $\cos(\pi/3) = 1/2$.
+Find vectors $\overrightarrow{CB}$ and $\overrightarrow{CD}$ emanating from vertex $C$, then use the dot product formula $\cos\theta = \frac{\vec{u} \cdot \vec{v}}{|\vec{u}||\vec{v}|}$ with $\cos(\pi/3) = 1/2$. Be careful to check that your solution gives a positive value for $1-a$.
 \end{hint}
 
 \begin{solution}[Sketch]
-$\overrightarrow{CB} = -\mathbf{i} + \mathbf{k}$, $\overrightarrow{CD} = (a-2)\mathbf{i} - \mathbf{j} - \mathbf{k}$. Dot product: $-(a-2) - 1 = 1 - a$. Magnitudes: $|\overrightarrow{CB}| = \sqrt{2}$, $|\overrightarrow{CD}| = \sqrt{(a-2)^2 + 2}$. Equation: $1 - a = \frac{\sqrt{2}\sqrt{(a-2)^2+2}}{2}$. Squaring and solving: $a^2 = 4$, but checking sign constraint gives $a = -2$.
+Step 1: Find vectors from $C$: 
+$\overrightarrow{CB} = \mathbf{b} - \mathbf{c} = -\mathbf{i} + \mathbf{k}$ and $\overrightarrow{CD} = \mathbf{d} - \mathbf{c} = (a-2)\mathbf{i} - \mathbf{j} - \mathbf{k}$.
+
+Step 2: Calculate magnitudes: 
+$|\overrightarrow{CB}| = \sqrt{2}$ and $|\overrightarrow{CD}| = \sqrt{(a-2)^2 + 2}$.
+
+Step 3: Dot product: 
+$\overrightarrow{CB} \cdot \overrightarrow{CD} = -(a-2) + 0 - 1 = 1 - a$.
+
+Step 4: Use formula with $\cos(\pi/3) = 1/2$:
+$1 - a = \sqrt{2} \cdot \sqrt{(a-2)^2 + 2} \cdot \frac{1}{2}$
+
+Step 5: Square both sides: 
+$4(1-a)^2 = 2[(a-2)^2 + 2]$, which simplifies to $a^2 = 4$, giving $a = \pm 2$.
+
+Step 6: Check constraint: Since the RHS is positive, we need $1-a > 0$, so $a < 1$. Therefore $a = -2$.
 \end{solution}
 
 \vspace{1em}
@@ -168,7 +405,13 @@ Since $\frac{CB}{AC} = \frac{m}{n}$, we have $\overrightarrow{AC} = \frac{n}{m+n
 \vspace{1em}
 
 \begin{problem}[Skew or Intersecting Lines]
-Determine whether lines $\mathbf{r} = \begin{pmatrix} 2 \\ -3 \\ 1 \end{pmatrix} + \lambda \begin{pmatrix} 1 \\ 4 \\ 1 \end{pmatrix}$ and $\mathbf{r} = \begin{pmatrix} -4 \\ 6 \\ -2 \end{pmatrix} + \mu \begin{pmatrix} 4 \\ -11 \\ 3 \end{pmatrix}$ are skew or intersecting.
+Consider the two lines:
+\begin{align*}
+L_1: \quad \mathbf{r} &= \begin{pmatrix} 2 \\ -3 \\ 1 \end{pmatrix} + \lambda \begin{pmatrix} 1 \\ 4 \\ 1 \end{pmatrix} \\
+L_2: \quad \mathbf{r} &= \begin{pmatrix} -4 \\ 6 \\ -2 \end{pmatrix} + \mu \begin{pmatrix} 4 \\ -11 \\ 3 \end{pmatrix}
+\end{align*}
+
+Determine whether lines $L_1$ and $L_2$ are skew or intersecting.
 \end{problem}
 
 \begin{hint}
@@ -182,43 +425,139 @@ Direction vectors not parallel (check ratios). Solve system: from equations 1 an
 \vspace{1em}
 
 \begin{problem}[Line Through Points, Intersection Check]
-Line passes through $A(1,3,-2)$ and $B(2,-1,5)$. Does $C(3,4,9)$ lie on the line? Does it intersect another given line?
+A line passes through the points $A(1, 3, -2)$ and $B(2, -1, 5)$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that the vector equation of the line $AB$ is given by:
+    \[
+    \mathbf{r} = (\mathbf{i} + 3\mathbf{j} - 2\mathbf{k}) + \lambda_1 (\mathbf{i} - 4\mathbf{j} + 7\mathbf{k}), \quad \lambda_1 \in \mathbb{R}
+    \]
+
+    \item Determine if the point $C(3, 4, 9)$ lies on the line.
+
+    \item Consider a second line with parametric equations $x = 1 - \lambda_2$, $y = 2 + 3\lambda_2$, $z = -1 + \lambda_2$.
+    
+    Assuming this line is neither parallel nor perpendicular to $AB$, determine whether the two lines intersect or are skew.
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
-Find direction vector, write parametric equations, check if $C$ satisfies them.
+(i) Find the direction vector $\overrightarrow{AB}$ and use the point $A$ to write the vector equation.
+(ii) Substitute the coordinates of $C$ into the line equation and check if a consistent value of $\lambda_1$ exists for all three components.
+(iii) Set the two lines equal component-wise, solve for both parameters, then verify if the solution is consistent across all three equations.
 \end{hint}
 
 \begin{solution}[Sketch]
-Direction: $\overrightarrow{AB} = \mathbf{i} - 4\mathbf{j} + 7\mathbf{k}$. Line: $\mathbf{r} = \begin{pmatrix} 1 \\ 3 \\ -2 \end{pmatrix} + \lambda \begin{pmatrix} 1 \\ -4 \\ 7 \end{pmatrix}$. For $C$: $x$-component gives $\lambda = 2$, but $y$-component gives $-5 \neq 4$, so $C$ not on line. For intersection with second line, set up system and check consistency.
+(i) Direction vector: $\overrightarrow{AB} = \mathbf{b} - \mathbf{a} = \begin{pmatrix} 2-1 \\ -1-3 \\ 5-(-2) \end{pmatrix} = \begin{pmatrix} 1 \\ -4 \\ 7 \end{pmatrix} = \mathbf{i} - 4\mathbf{j} + 7\mathbf{k}$. 
+
+Using point $A$ as the position vector: $\mathbf{r} = (\mathbf{i} + 3\mathbf{j} - 2\mathbf{k}) + \lambda_1 (\mathbf{i} - 4\mathbf{j} + 7\mathbf{k})$.
+
+(ii) If $C$ lies on the line: $\begin{pmatrix} 3 \\ 4 \\ 9 \end{pmatrix} = \begin{pmatrix} 1 \\ 3 \\ -2 \end{pmatrix} + \lambda_1 \begin{pmatrix} 1 \\ -4 \\ 7 \end{pmatrix}$.
+
+From $x$-component: $3 = 1 + \lambda_1 \Rightarrow \lambda_1 = 2$.
+
+Check $y$-component: $y = 3 - 4(2) = -5 \neq 4$. Since the $y$-coordinate doesn't match, point $C$ does not lie on the line.
+
+(iii) Line 1: $\mathbf{r}_1 = \begin{pmatrix} 1 \\ 3 \\ -2 \end{pmatrix} + \lambda_1 \begin{pmatrix} 1 \\ -4 \\ 7 \end{pmatrix}$. Line 2: $\mathbf{r}_2 = \begin{pmatrix} 1 \\ 2 \\ -1 \end{pmatrix} + \lambda_2 \begin{pmatrix} -1 \\ 3 \\ 1 \end{pmatrix}$.
+
+Equate components: From $x$: $1 + \lambda_1 = 1 - \lambda_2 \Rightarrow \lambda_1 = -\lambda_2$. From $y$: $3 - 4\lambda_1 = 2 + 3\lambda_2$. Substitute $\lambda_1 = -\lambda_2$: $3 + 4\lambda_2 = 2 + 3\lambda_2 \Rightarrow \lambda_2 = -1$, so $\lambda_1 = 1$.
+
+Check $z$-component: LHS: $-2 + 7(1) = 5$. RHS: $-1 + (-1) = -2$. Since $5 \neq -2$, the system is inconsistent. The lines do not intersect and are not parallel, therefore they are skew.
 \end{solution}
 
 \vspace{1em}
 
 \begin{problem}[Line-Sphere Intersection Angle]
-Find intersection points of line and sphere with center $O$ and radius $\sqrt{10}$, then find angle $\angle AOB$ between the two intersection points.
+Let $S$ be the sphere with center at the origin and equation $x^2 + y^2 + z^2 = 10$.
+
+Let $\ell$ be the line with equation:
+\[
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix} + \lambda \begin{bmatrix} 0 \\ 1 \\ -1 \end{bmatrix}
+\]
+
+\begin{enumerate}[label=(\roman*)]
+    \item Find $A$ and $B$, the points of intersection of $S$ and $\ell$.
+    \item Find $\angle AOB$ to the nearest degree, where $O$ is the origin.
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
-Substitute parametric equations into sphere equation, solve quadratic for parameter values.
+(i) Write the line in parametric form ($x = 1$, $y = 2 + \lambda$, $z = 1 - \lambda$), substitute into the sphere equation, and solve the resulting quadratic equation for $\lambda$.
+(ii) Use the dot product formula $\cos\theta = \frac{\overrightarrow{OA} \cdot \overrightarrow{OB}}{|\overrightarrow{OA}||\overrightarrow{OB}|}$ to find the angle between the two position vectors.
 \end{hint}
 
 \begin{solution}[Sketch]
-Substitute line equations into $x^2 + y^2 + z^2 = 10$. Get quadratic in $\lambda$, solve to find $\lambda = 1$ and $\lambda = -2$. Points: $A(1,3,0)$ and $B(1,0,3)$. Find $\cos\theta = \frac{\overrightarrow{OA} \cdot \overrightarrow{OB}}{|\overrightarrow{OA}||\overrightarrow{OB}|} = \frac{1}{10}$, so $\theta \approx 84^\circ$.
+(i) Parametric form: $x = 1$, $y = 2 + \lambda$, $z = 1 - \lambda$. 
+
+Substitute into $x^2 + y^2 + z^2 = 10$:
+$1 + (2+\lambda)^2 + (1-\lambda)^2 = 10$
+$1 + 4 + 4\lambda + \lambda^2 + 1 - 2\lambda + \lambda^2 = 10$
+$2\lambda^2 + 2\lambda + 6 = 10$
+$\lambda^2 + \lambda - 2 = 0$
+$(\lambda + 2)(\lambda - 1) = 0$
+
+So $\lambda = 1$ or $\lambda = -2$.
+
+When $\lambda = 1$: $A(1, 3, 0)$. When $\lambda = -2$: $B(1, 0, 3)$.
+
+(ii) $\overrightarrow{OA} = \begin{pmatrix} 1 \\ 3 \\ 0 \end{pmatrix}$, $\overrightarrow{OB} = \begin{pmatrix} 1 \\ 0 \\ 3 \end{pmatrix}$.
+
+$\overrightarrow{OA} \cdot \overrightarrow{OB} = (1)(1) + (3)(0) + (0)(3) = 1$.
+
+$|\overrightarrow{OA}| = \sqrt{1^2 + 3^2 + 0^2} = \sqrt{10}$, $|\overrightarrow{OB}| = \sqrt{1^2 + 0^2 + 3^2} = \sqrt{10}$.
+
+$\cos\theta = \frac{1}{\sqrt{10} \cdot \sqrt{10}} = \frac{1}{10} = 0.1$.
+
+Therefore $\theta = \cos^{-1}(0.1) \approx 84.26^\circ \approx 84^\circ$.
 \end{solution}
 
 \vspace{1em}
 
+
 \begin{problem}[Linear Combination of Vectors]
-Express $\mathbf{u} = 5\mathbf{i} + 5\mathbf{j} + 5\mathbf{k}$ as $\lambda\mathbf{a} + \mu\mathbf{b} + \nu\mathbf{c}$ where $\mathbf{a}, \mathbf{b}, \mathbf{c}$ are given non-parallel vectors.
+Consider the following four vectors in three-dimensional space:
+\begin{align*}
+\mathbf{a} &= 2\mathbf{i} + 3\mathbf{j} + \mathbf{k} \\
+\mathbf{b} &= \mathbf{i} - \mathbf{j} + 2\mathbf{k} \\
+\mathbf{c} &= -\mathbf{i} + 2\mathbf{j} - \mathbf{k} \\
+\mathbf{u} &= 5\mathbf{i} + 5\mathbf{j} + 5\mathbf{k}
+\end{align*}
+
+Find the values of the scalars $\lambda$, $\mu$, and $\nu$ that satisfy the equation:
+\[
+\mathbf{u} = \lambda\mathbf{a} + \mu\mathbf{b} + \nu\mathbf{c}
+\]
+
+\textit{Note: This means expressing vector $\mathbf{u}$ as a linear combination of vectors $\mathbf{a}$, $\mathbf{b}$, and $\mathbf{c}$. Any vector in 3D space can be written as a combination of three non-coplanar (non-parallel) vectors.}
 \end{problem}
 
 \begin{hint}
-Set up system of three equations by equating components, solve for $\lambda, \mu, \nu$.
+Substitute the given vectors into the equation $\mathbf{u} = \lambda\mathbf{a} + \mu\mathbf{b} + \nu\mathbf{c}$, then equate the coefficients of $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ to form a system of three linear equations. Solve the system by elimination.
 \end{hint}
 
 \begin{solution}[Sketch]
-From component equations: $2\lambda + \mu - \nu = 5$, $3\lambda - \mu + 2\nu = 5$, $\lambda + 2\mu - \nu = 5$. Solve systematically: subtract equations to eliminate variables. Find $\lambda = \mu = \frac{15}{8}$, $\nu = \frac{5}{8}$.
+Substituting: $5\mathbf{i} + 5\mathbf{j} + 5\mathbf{k} = \lambda(2\mathbf{i} + 3\mathbf{j} + \mathbf{k}) + \mu(\mathbf{i} - \mathbf{j} + 2\mathbf{k}) + \nu(-\mathbf{i} + 2\mathbf{j} - \mathbf{k})$.
+
+Equating coefficients gives the system:
+\begin{align*}
+2\lambda + \mu - \nu &= 5 \quad (1) \\
+3\lambda - \mu + 2\nu &= 5 \quad (2) \\
+\lambda + 2\mu - \nu &= 5 \quad (3)
+\end{align*}
+
+Subtract (1) from (3): $-\lambda + \mu = 0 \Rightarrow \lambda = \mu$.
+
+Substitute $\mu = \lambda$ into (2): $3\lambda - \lambda + 2\nu = 5 \Rightarrow 2\lambda + 2\nu = 5 \Rightarrow \lambda + \nu = \frac{5}{2}$.
+
+Substitute $\mu = \lambda$ into (1): $2\lambda + \lambda - \nu = 5 \Rightarrow 3\lambda - \nu = 5$.
+
+Add these two results: $4\lambda = \frac{5}{2} + 5 = \frac{15}{2} \Rightarrow \lambda = \frac{15}{8}$.
+
+Since $\lambda = \mu$: $\mu = \frac{15}{8}$.
+
+From $3\lambda - \nu = 5$: $\nu = 3 \cdot \frac{15}{8} - 5 = \frac{45}{8} - \frac{40}{8} = \frac{5}{8}$.
+
+Therefore: $\lambda = \frac{15}{8}$, $\mu = \frac{15}{8}$, $\nu = \frac{5}{8}$.
 \end{solution}
 
 \vspace{1em}

@@ -13,6 +13,54 @@ Let $OPQR$ be a parallelogram with $\vec{OP} = \mathbf{p}$, $\vec{OR} = \mathbf{
     \item Show that $\vec{OT} = \tfrac{2}{3}\mathbf{r} + \tfrac{1}{3}\mathbf{p}$.
     \item Prove that $T$ divides $PR$ in the ratio $2:1$.
 \end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+  % Define vertices
+  \coordinate (O) at (0,0);
+  \coordinate (P) at (4,0.5);
+  \coordinate (R) at (1.5,3);
+  \coordinate (Q) at ($(P)+(R)$);
+  
+  % Draw parallelogram
+  \draw[thick,blue] (O) -- (P) node[midway,below] {$\mathbf{p}$};
+  \draw[thick,red] (O) -- (R) node[midway,left] {$\mathbf{r}$};
+  \draw[thick] (P) -- (Q);
+  \draw[thick] (R) -- (Q);
+  
+  % Midpoint S of QR
+  \coordinate (S) at ($(Q)!0.5!(R)$);
+  
+  % Line PR (diagonal)
+  \draw[thick,purple] (P) -- (R);
+  
+  % Line OS
+  \draw[thick,orange] (O) -- (S);
+  
+  % Intersection T
+  \coordinate (T) at (intersection of O--S and P--R);
+  
+  % Mark points
+  \node[circle,fill=black,inner sep=2pt,label=below left:$O$] at (O) {};
+  \node[circle,fill=blue,inner sep=2pt,label=below right:$P$] at (P) {};
+  \node[circle,fill=red,inner sep=2pt,label=above left:$R$] at (R) {};
+  \node[circle,fill=black,inner sep=2pt,label=above right:$Q$] at (Q) {};
+  \node[circle,fill=green!60!black,inner sep=2pt,label=right:$S$] at (S) {};
+  \node[circle,fill=purple,inner sep=2.5pt,label=above right:$T$] at (T) {};
+  
+  % Additional labels
+  \node[above] at ($(Q)!0.5!(P)$) {$\mathbf{p}$};
+  \node[right] at ($(Q)!0.5!(R)$) {$\mathbf{r}$};
+  
+  % Show that T divides PR in ratio 2:1
+  \draw[<->,thick,cyan,opacity=0.7] ($(P)+(0,-0.3)$) -- ($(T)+(0,-0.3)$) node[midway,below,cyan] {\small $2$};
+  \draw[<->,thick,cyan,opacity=0.7] ($(T)+(0,-0.3)$) -- ($(R)+(0,-0.3)$) node[midway,below,cyan] {\small $1$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\noindent\textit{Parallelogram $OPQR$ with} $\vec{OP}=\mathbf{p}$, $\vec{OR}=\mathbf{r}$. 
+\textit{Point $S$ is the midpoint of $QR$, and $T$ is where diagonal $PR$ intersects $OS$, dividing $PR$ in ratio $2:1$.}
 \end{problem}
 
 \begin{solution}
@@ -89,6 +137,62 @@ On triangular pyramid $ABCD$, $L, M, N, P, Q, R$ are midpoints of edges $AB, AC,
     \item Given that $\vec{MQ} = \tfrac{1}{2}(\mathbf{b} - \mathbf{c} + \mathbf{d})$ and $\vec{NR} = \tfrac{1}{2}(\mathbf{b} + \mathbf{c} - \mathbf{d})$, prove that
     $|AB|^2 + |AC|^2 + |AD|^2 + |BC|^2 + |BD|^2 + |CD|^2 = 4(|LP|^2 + |MQ|^2 + |NR|^2)$.
 \end{enumerate}
+
+\begin{center}
+\tdplotsetmaincoords{70}{115}
+\begin{tikzpicture}[tdplot_main_coords,scale=1.2]
+  % Define vertices of tetrahedron
+  \coordinate (A) at (0,0,0);
+  \coordinate (B) at (4,0,0);
+  \coordinate (C) at (1.5,3.5,0);
+  \coordinate (D) at (1.5,1.5,3.5);
+  
+  % Draw edges of tetrahedron
+  \draw[thick] (A) -- (B);
+  \draw[thick] (A) -- (C);
+  \draw[thick] (A) -- (D);
+  \draw[thick,dashed,gray] (B) -- (C);
+  \draw[thick] (B) -- (D);
+  \draw[thick] (C) -- (D);
+  
+  % Calculate midpoints
+  \coordinate (L) at ($(A)!0.5!(B)$); % midpoint of AB
+  \coordinate (M) at ($(A)!0.5!(C)$); % midpoint of AC
+  \coordinate (N) at ($(A)!0.5!(D)$); % midpoint of AD
+  \coordinate (P) at ($(C)!0.5!(D)$); % midpoint of CD
+  \coordinate (Q) at ($(B)!0.5!(D)$); % midpoint of BD
+  \coordinate (R) at ($(B)!0.5!(C)$); % midpoint of BC
+  
+  % Draw bimedians (connecting midpoints of opposite edges)
+  \draw[very thick,blue] (L) -- (P) node[midway,above,sloped] {\small $LP$};
+  \draw[very thick,red] (M) -- (Q) node[midway,above right] {\small $MQ$};
+  \draw[very thick,green!60!black] (N) -- (R);
+  \node[green!60!black] at ($(N)!0.6!(R)$) [below] {\small $NR$};
+  
+  % Mark vertices
+  \node[circle,fill=black,inner sep=2pt,label=below left:$A$] at (A) {};
+  \node[circle,fill=black,inner sep=2pt,label=below right:$B$] at (B) {};
+  \node[circle,fill=black,inner sep=2pt,label=above:$C$] at (C) {};
+  \node[circle,fill=black,inner sep=2pt,label=above:$D$] at (D) {};
+  
+  % Mark midpoints
+  \node[circle,fill=blue,inner sep=1.5pt,label=below:$L$] at (L) {};
+  \node[circle,fill=red,inner sep=1.5pt,label=left:$M$] at (M) {};
+  \node[circle,fill=green!60!black,inner sep=1.5pt,label=left:$N$] at (N) {};
+  \node[circle,fill=blue,inner sep=1.5pt,label=above right:$P$] at (P) {};
+  \node[circle,fill=red,inner sep=1.5pt,label=right:$Q$] at (Q) {};
+  \node[circle,fill=green!60!black,inner sep=1.5pt,label=below right:$R$] at (R) {};
+  
+  % Label edges with vectors
+  \draw[->,thick,purple] (A) -- ($(A)!0.4!(B)$) node[midway,below] {\small $\mathbf{b}$};
+  \draw[->,thick,orange] (A) -- ($(A)!0.35!(C)$) node[midway,left] {\small $\mathbf{c}$};
+  \draw[->,thick,cyan!70!black] (A) -- ($(A)!0.35!(D)$) node[midway,left] {\small $\mathbf{d}$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\noindent\textit{Tetrahedron $ABCD$ with midpoints: $L$ (of $AB$), $M$ (of $AC$), $N$ (of $AD$), $P$ (of $CD$), $Q$ (of $BD$), $R$ (of $BC$).
+The three bimedians $LP$, $MQ$, $NR$ connect midpoints of opposite edges.}
 \end{problem}
 
 \begin{solution}

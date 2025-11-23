@@ -95,7 +95,7 @@ $\ell_2 = \begin{pmatrix} 3 \\ -10 \\ 1 \end{pmatrix} + \mu \begin{pmatrix} 1 \\
 
 \begin{solution}
 Direction vectors: $\mathbf{d}_1 = \begin{pmatrix} -1 \\ 3 \\ 1 \end{pmatrix}$, $\mathbf{d}_2 = \begin{pmatrix} 1 \\ -3 \\ -1 \end{pmatrix}$
-\vspace{-2mm}
+% \vspace{-2mm}
 
 \textbf{Step 1: Check parallelism}
 $$\mathbf{d}_2 = -1 \cdot \mathbf{d}_1$$
@@ -198,7 +198,7 @@ Shortest distance to sphere: $\sqrt{|\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d
 \end{solution}
 
 \begin{takeaways}
-Point-to-line distance problems use calculus (minimize squared distance) or projection (subtract parallel component). The perpendicularity in part (ii) confirms the minimum—the shortest path is always perpendicular to the line. For sphere-line distance, first find line-to-centre distance, then subtract radius. The identity $|\mathbf{a} - (\mathbf{a} \cdot \mathbf{d})\mathbf{d}|^2 = |\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d})^2$ (when $|\mathbf{d}|=1$) is equivalent to $|\mathbf{a} \times \mathbf{d}|^2$ via Lagrange's identity.
+Point-to-line distance problems use calculus (minimize squared distance) or projection (subtract parallel component). The perpendicularity in part (ii) confirms the minimum—the shortest path is always perpendicular to the line. For sphere-line distance, first find line-to-centre distance, then subtract radius. The identity $|\mathbf{a} - (\mathbf{a} \cdot \mathbf{d})\mathbf{d}|^2 = |\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d})^2$ (when $|\mathbf{d}|=1$) represents the perpendicular component of $\mathbf{a}$ to the line, which can also be expressed as $|\mathbf{a} \times \mathbf{d}|^2$ using the cross product.
 \end{takeaways}
 
 \vspace{1em}
