@@ -23,7 +23,56 @@ Use perpendicularity condition (dot product = 0) and intersection condition (sol
 \end{hint}
 
 \begin{solution}[Sketch]
-Direction vectors must be perpendicular: $\mathbf{d}_1 \cdot \mathbf{d}_2 = 0$. Additionally, equate position vectors at intersection and solve the resulting system for $p$ and $q$. The specific values depend on the second line equation (not fully shown in sample).
+\textbf{Step 1: Apply the perpendicularity condition}
+
+The direction vectors are $\mathbf{d}_1 = \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$ and $\mathbf{d}_2 = \begin{pmatrix} 2 \\ q \\ -1 \end{pmatrix}$.
+
+For perpendicular lines: $\mathbf{d}_1 \cdot \mathbf{d}_2 = 0$
+$$(1)(2) + (2)(q) + (1)(-1) = 0$$
+$$2 + 2q - 1 = 0$$
+$$2q = -1$$
+$$q = -\frac{1}{2}$$
+
+\vspace{0.3em}
+
+\textbf{Step 2: Apply the intersection condition}
+
+For the lines to intersect, there must exist values $\mu$ and $\lambda$ such that:
+$$\begin{pmatrix} 3 \\ -1 \\ 7 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ p \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ q \\ -1 \end{pmatrix}$$
+
+Substituting $q = -\frac{1}{2}$, we get the system:
+\begin{align*}
+3 + \mu &= 1 + 2\lambda \quad \text{(x-component)} \\
+-1 + 2\mu &= 0 - \frac{1}{2}\lambda \quad \text{(y-component)} \\
+7 + \mu &= p - \lambda \quad \text{(z-component)}
+\end{align*}
+
+\vspace{0.3em}
+
+\textbf{Step 3: Solve for $\mu$ and $\lambda$}
+
+From the first equation: $\mu = 2\lambda - 2$.
+
+Substitute into the second equation:
+$$-1 + 2(2\lambda - 2) = -\frac{1}{2}\lambda$$
+$$-1 + 4\lambda - 4 = -\frac{1}{2}\lambda$$
+$$4\lambda + \frac{1}{2}\lambda = 5$$
+$$\frac{9}{2}\lambda = 5$$
+$$\lambda = \frac{10}{9}$$
+
+Therefore: $\mu = 2 \cdot \frac{10}{9} - 2 = \frac{20}{9} - \frac{18}{9} = \frac{2}{9}$.
+
+\vspace{0.3em}
+
+\textbf{Step 4: Find $p$ using the z-component equation}
+
+$$7 + \mu = p - \lambda$$
+$$p = 7 + \mu + \lambda = 7 + \frac{2}{9} + \frac{10}{9}$$
+$$p = 7 + \frac{12}{9} = 7 + \frac{4}{3} = \frac{25}{3}$$
+
+\vspace{0.3em}
+
+\textbf{Answer:} $p = \dfrac{25}{3}$ and $q = -\dfrac{1}{2}$.
 \end{solution}
 
 \vspace{1em}
@@ -122,6 +171,214 @@ Direction vectors must be perpendicular: $\mathbf{d}_1 \cdot \mathbf{d}_2 = 0$. 
 \begin{problem}[Varignon's Theorem - Midpoint Parallelogram]
 Let $ABCD$ be any quadrilateral in three-dimensional space (not necessarily planar). Let $P$, $Q$, $R$, and $S$ be the midpoints of sides $AB$, $BC$, $CD$, and $DA$ respectively.
 
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    % CONVEX QUADRILATERAL
+    \begin{scope}[xshift=0cm]
+        % Define coordinates for a convex quadrilateral
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (3, -0.3);
+        \coordinate (C) at (3.5, 2.3);
+        \coordinate (D) at (0.3, 2.5);
+        
+        % Calculate midpoints
+        \coordinate (P) at ($(A)!0.5!(B)$);
+        \coordinate (Q) at ($(B)!0.5!(C)$);
+        \coordinate (R) at ($(C)!0.5!(D)$);
+        \coordinate (S) at ($(D)!0.5!(A)$);
+        
+        % Draw the original quadrilateral ABCD
+        \draw[thick, black!70] (A) -- (B) -- (C) -- (D) -- cycle;
+        
+        % Fill the midpoint parallelogram
+        \fill[red!15] (P) -- (Q) -- (R) -- (S) -- cycle;
+        
+        % Draw the midpoint parallelogram PQRS
+        \draw[thick, red!70] (P) -- (Q) -- (R) -- (S) -- cycle;
+        
+        % Label the vertices of ABCD
+        \fill[blue] (A) circle (1.5pt);
+        \fill[blue] (B) circle (1.5pt);
+        \fill[blue] (C) circle (1.5pt);
+        \fill[blue] (D) circle (1.5pt);
+        \node[below left, blue] at (A) {$A$};
+        \node[below right, blue] at (B) {$B$};
+        \node[above right, blue] at (C) {$C$};
+        \node[above left, blue] at (D) {$D$};
+        
+        % Label the midpoints P, Q, R, S
+        \fill[red] (P) circle (1.5pt);
+        \fill[red] (Q) circle (1.5pt);
+        \fill[red] (R) circle (1.5pt);
+        \fill[red] (S) circle (1.5pt);
+        \node[below, red, font=\small] at (P) {$E$};
+        \node[right, red, font=\small] at (Q) {$F$};
+        \node[above, red, font=\small] at (R) {$G$};
+        \node[left, red, font=\small] at (S) {$H$};
+        
+        % Title
+        \node[font=\small\bfseries] at (1.75, 3.2) {convex quadrilateral};
+    \end{scope}
+    
+    % CONCAVE QUADRILATERAL
+    \begin{scope}[xshift=5.5cm]
+        % Define coordinates for a concave quadrilateral
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (1.2, 1.5);
+        \coordinate (C) at (4, 0.3);
+        \coordinate (D) at (0.3, 2.5);
+        
+        % Calculate midpoints
+        \coordinate (P) at ($(A)!0.5!(B)$);
+        \coordinate (Q) at ($(B)!0.5!(C)$);
+        \coordinate (R) at ($(C)!0.5!(D)$);
+        \coordinate (S) at ($(D)!0.5!(A)$);
+        
+        % Draw the original quadrilateral ABCD
+        \draw[thick, black!70] (A) -- (B) -- (C) -- (D) -- cycle;
+        
+        % Fill the midpoint parallelogram
+        \fill[red!15] (P) -- (Q) -- (R) -- (S) -- cycle;
+        
+        % Draw the midpoint parallelogram PQRS
+        \draw[thick, red!70] (P) -- (Q) -- (R) -- (S) -- cycle;
+        
+        % Label the vertices of ABCD
+        \fill[blue] (A) circle (1.5pt);
+        \fill[blue] (B) circle (1.5pt);
+        \fill[blue] (C) circle (1.5pt);
+        \fill[blue] (D) circle (1.5pt);
+        \node[below, blue] at (A) {$A$};
+        \node[above left, blue] at (B) {$B$};
+        \node[below right, blue] at (C) {$C$};
+        \node[above left, blue] at (D) {$D$};
+        
+        % Label the midpoints P, Q, R, S
+        \fill[red] (P) circle (1.5pt);
+        \fill[red] (Q) circle (1.5pt);
+        \fill[red] (R) circle (1.5pt);
+        \fill[red] (S) circle (1.5pt);
+        \node[left, red, font=\small] at (P) {$E$};
+        \node[above right, red, font=\small] at (Q) {$B$};
+        \node[right, red, font=\small] at (R) {$F$};
+        \node[left, red, font=\small] at (S) {$H$};
+        
+        % Title
+        \node[font=\small\bfseries] at (2, 3.2) {concave quadrilateral};
+    \end{scope}
+    
+    % CROSSED QUADRILATERAL
+    \begin{scope}[xshift=11cm]
+        % Define coordinates for a crossed quadrilateral
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (0.3, 2.5);
+        \coordinate (C) at (3.5, -0.3);
+        \coordinate (D) at (0.5, 1.2);
+        
+        % Calculate midpoints
+        \coordinate (P) at ($(A)!0.5!(B)$);
+        \coordinate (Q) at ($(B)!0.5!(C)$);
+        \coordinate (R) at ($(C)!0.5!(D)$);
+        \coordinate (S) at ($(D)!0.5!(A)$);
+        
+        % Draw the original quadrilateral ABCD
+        \draw[thick, black!70] (A) -- (B) -- (C) -- (D) -- cycle;
+        
+        % Fill the midpoint parallelogram
+        \fill[red!15] (P) -- (Q) -- (R) -- (S) -- cycle;
+        
+        % Draw the midpoint parallelogram PQRS
+        \draw[thick, red!70] (P) -- (Q) -- (R) -- (S) -- cycle;
+        
+        % Label the vertices of ABCD
+        \fill[blue] (A) circle (1.5pt);
+        \fill[blue] (B) circle (1.5pt);
+        \fill[blue] (C) circle (1.5pt);
+        \fill[blue] (D) circle (1.5pt);
+        \node[below, blue] at (A) {$A$};
+        \node[above left, blue] at (B) {$B$};
+        \node[below right, blue] at (C) {$C$};
+        \node[left, blue] at (D) {$D$};
+        
+        % Label the midpoints P, Q, R, S
+        \fill[red] (P) circle (1.5pt);
+        \fill[red] (Q) circle (1.5pt);
+        \fill[red] (R) circle (1.5pt);
+        \fill[red] (S) circle (1.5pt);
+        \node[left, red, font=\small] at (P) {$E$};
+        \node[above right, red, font=\small] at (Q) {$F$};
+        \node[below right, red, font=\small] at (R) {$G$};
+        \node[left, red, font=\small] at (S) {$H$};
+        
+        % Title
+        \node[font=\small\bfseries] at (1.75, 3.2) {crossed quadrilateral};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+\textit{3D Non-Planar Quadrilateral:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, x={(0.8cm, 0.4cm)}, y={(0cm, 1cm)}, z={(-0.6cm, 0.3cm)}]
+    % Define 3D coordinates for a non-planar quadrilateral
+    % A at origin, B forward-right, C up-forward-right, D up-back-left
+    \coordinate (A) at (0, 0, 0);
+    \coordinate (B) at (3, 0, 1);
+    \coordinate (C) at (3, 2.5, 0);
+    \coordinate (D) at (0, 2, 2);
+    
+    % Calculate midpoints
+    \coordinate (P) at ($(A)!0.5!(B)$);
+    \coordinate (Q) at ($(B)!0.5!(C)$);
+    \coordinate (R) at ($(C)!0.5!(D)$);
+    \coordinate (S) at ($(D)!0.5!(A)$);
+    
+    % Draw back edges (dashed)
+    \draw[thick, black!50, dashed] (A) -- (D);
+    \draw[thick, black!50, dashed] (D) -- (C);
+    
+    % Draw the midpoint parallelogram (with fill)
+    \fill[red!15, opacity=0.7] (P) -- (Q) -- (R) -- (S) -- cycle;
+    \draw[thick, red!70] (P) -- (Q) -- (R) -- (S) -- cycle;
+    
+    % Draw front edges (solid)
+    \draw[thick, black!70] (A) -- (B);
+    \draw[thick, black!70] (B) -- (C);
+    \draw[thick, black!70] (C) -- (A);
+    
+    % Draw axes for reference (light gray, dashed)
+    \draw[gray!40, dashed, ->] (0, 0, 0) -- (3.5, 0, 0) node[right, font=\tiny] {$x$};
+    \draw[gray!40, dashed, ->] (0, 0, 0) -- (0, 3, 0) node[above, font=\tiny] {$y$};
+    \draw[gray!40, dashed, ->] (0, 0, 0) -- (0, 0, 2.5) node[below left, font=\tiny] {$z$};
+    
+    % Label the vertices of ABCD
+    \fill[blue] (A) circle (1.5pt);
+    \fill[blue] (B) circle (1.5pt);
+    \fill[blue] (C) circle (1.5pt);
+    \fill[blue] (D) circle (1.5pt);
+    \node[below left, blue] at (A) {$A$};
+    \node[below right, blue] at (B) {$B$};
+    \node[right, blue] at (C) {$C$};
+    \node[above left, blue] at (D) {$D$};
+    
+    % Label the midpoints P, Q, R, S
+    \fill[red] (P) circle (1.5pt);
+    \fill[red] (Q) circle (1.5pt);
+    \fill[red] (R) circle (1.5pt);
+    \fill[red] (S) circle (1.5pt);
+    \node[below, red, font=\small] at (P) {$P$};
+    \node[right, red, font=\small] at (Q) {$Q$};
+    \node[above right, red, font=\small] at (R) {$R$};
+    \node[left, red, font=\small] at (S) {$S$};
+    
+    % Annotation
+    \node[font=\small, align=center] at (1.5, -0.8, 1) {Non-planar quadrilateral in $\mathbb{R}^3$\\
+    {\footnotesize (vertices not in the same plane)}};
+\end{tikzpicture}
+\end{center}
+
 \begin{enumerate}[label=(\roman*)]
     \item Express the position vectors of $P$, $Q$, $R$, and $S$ in terms of the position vectors $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$, and $\mathbf{d}$ of points $A$, $B$, $C$, and $D$ respectively.
     
@@ -181,7 +438,9 @@ Additionally, from (ii): $|\overrightarrow{PQ}| = \frac{1}{2}|\mathbf{c} - \math
 
 Similarly: $|\overrightarrow{PS}| = \frac{1}{2}|\mathbf{d} - \mathbf{b}| = \frac{1}{2}|\overrightarrow{BD}|$ (half the diagonal $BD$).
 
-If $ABCD$ is a parallelogram with equal diagonals, then $PQRS$ is a **rhombus** (all four sides equal). If the diagonals of $ABCD$ are perpendicular, then $PQRS$ is a **rectangle**.
+If $ABCD$ is a parallelogram with equal diagonals, 
+then $PQRS$ is a rhombus (all four sides equal). 
+If the diagonals of $ABCD$ are perpendicular, then $PQRS$ is a rectangle.
 \end{solution}
 
 \vspace{1em}
@@ -377,7 +636,15 @@ Step 6: Check constraint: Since the RHS is positive, we need $1-a > 0$, so $a < 
 \vspace{1em}
 
 \begin{problem}[Direction Cosines Sum]
-Prove that for a position vector making angles with coordinate axes, the sum of squares of direction cosines equals 1.
+Let $\mathbf{r}$ be a non-zero position vector in three-dimensional space with magnitude $r = |\mathbf{r}|$. Suppose $\mathbf{r}$ makes angles $\alpha$, $\beta$, and $\gamma$ with the positive $x$-axis, $y$-axis, and $z$-axis respectively.
+
+The \textbf{direction cosines} of $\mathbf{r}$ are defined as:
+$$l = \cos\alpha, \quad m = \cos\beta, \quad n = \cos\gamma$$
+
+Prove that:
+$$l^2 + m^2 + n^2 = 1$$
+
+That is, prove that $\cos^2\alpha + \cos^2\beta + \cos^2\gamma = 1$.
 \end{problem}
 
 \begin{hint}
@@ -560,10 +827,74 @@ From $3\lambda - \nu = 5$: $\nu = 3 \cdot \frac{15}{8} - 5 = \frac{45}{8} - \fra
 Therefore: $\lambda = \frac{15}{8}$, $\mu = \frac{15}{8}$, $\nu = \frac{5}{8}$.
 \end{solution}
 
+\begin{takeaways}
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item \textbf{Linear Combination of Vectors:} Any vector can potentially be expressed as a linear combination of other vectors: $\mathbf{v} = \lambda\mathbf{u}_1 + \mu\mathbf{u}_2 + \nu\mathbf{u}_3$. The scalars $\lambda$, $\mu$, $\nu$ are the coefficients.
+    
+    \item \textbf{Equating Coefficients Method:} When vectors are expressed in component form (using $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$), equate the coefficients of each unit vector separately to create a system of linear equations.
+    
+    \item \textbf{Solving Linear Systems:} The systematic approach involves:
+    \begin{enumerate}
+        \item Look for relationships by adding/subtracting equations
+        \item Find simple relationships (e.g., $\lambda = \mu$) to reduce variables
+        \item Substitute to eliminate variables progressively
+        \item Solve for remaining variables and back-substitute
+    \end{enumerate}
+    
+    \item \textbf{Verification Strategy:} Always substitute final values back into the original equations to verify correctness. Here: $2(\frac{15}{8}) + \frac{15}{8} - \frac{5}{8} = \frac{30 + 15 - 5}{8} = \frac{40}{8} = 5$ ✓
+    
+    \item \textbf{Linear Independence:} The fact that a unique solution exists ($\lambda = \mu = \frac{15}{8}$, $\nu = \frac{5}{8}$) indicates that the three given vectors are linearly independent and span $\mathbb{R}^3$. Any vector in 3D space can be expressed as a linear combination of these three vectors.
+\end{itemize}
+\end{takeaways}
+
 \vspace{1em}
 
 \begin{problem}[Parallelogram Fourth Vertex]
-Three vertices of parallelogram are $O(0,0,0)$, $A(2,2,1)$, $B(1,2,2)$. Find possible positions of fourth vertex.
+Three vertices of a parallelogram are $O(0,0,0)$, $A(2,2,1)$, $B(1,2,2)$. Find all possible positions of the fourth vertex.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3, x={(0.9cm, 0.3cm)}, y={(0cm, 1cm)}, z={(-0.5cm, 0.4cm)}]
+    % Define the three given points
+    \coordinate (O) at (0, 0, 0);
+    \coordinate (A) at (2, 2, 1);
+    \coordinate (B) at (1, 2, 2);
+    
+    % Calculate three possible fourth vertices
+    \coordinate (C1) at (3, 4, 3);  % Case 1: C opposite to O
+    \coordinate (C2) at (1, 0, -1); % Case 2: C opposite to B
+    \coordinate (C3) at (-1, 0, 1); % Case 3: C opposite to A
+    
+    % Draw Case 1: OABC1 (C1 opposite to O) - blue
+    \draw[thick, blue!60] (O) -- (A) -- (C1) -- (B) -- cycle;
+    \fill[blue!60] (C1) circle (2pt);
+    \node[above right, blue!60, font=\small] at (C1) {$C_1(3,4,3)$};
+    
+    % Draw Case 2: OACB (C2 opposite to B) - red
+    \draw[thick, red!60] (O) -- (A) -- (C2) -- (B) -- cycle;
+    \fill[red!60] (C2) circle (2pt);
+    \node[below left, red!60, font=\small] at (C2) {$C_2(1,0,-1)$};
+    
+    % Draw Case 3: OBAC3 (C3 opposite to A) - green
+    \draw[thick, green!60!black] (O) -- (B) -- (C3) -- (A) -- cycle;
+    \fill[green!60!black] (C3) circle (2pt);
+    \node[below left, green!60!black, font=\small] at (C3) {$C_3(-1,0,1)$};
+    
+    % Draw and label the three given points
+    \fill[black] (O) circle (2.5pt);
+    \fill[black] (A) circle (2.5pt);
+    \fill[black] (B) circle (2.5pt);
+    \node[below left, black] at (O) {$O(0,0,0)$};
+    \node[above right, black] at (A) {$A(2,2,1)$};
+    \node[above left, black] at (B) {$B(1,2,2)$};
+    
+    % Add annotation
+    \node[font=\small, align=center] at (1, -1.5, 0) {
+        Three possible parallelograms with vertices $O$, $A$, $B$\\
+        {\footnotesize (shown in blue, red, and green)}
+    };
+\end{tikzpicture}
+\end{center}
 \end{problem}
 
 \begin{hint}
@@ -571,7 +902,53 @@ Consider three cases: which point is opposite to which, giving three parallelogr
 \end{hint}
 
 \begin{solution}[Sketch]
-Case 1: $C$ opposite to $O$: $\overrightarrow{OC} = \overrightarrow{OA} + \overrightarrow{OB} = (3,4,3)$. Case 2: $C$ opposite to $B$: $\overrightarrow{OC} = \overrightarrow{OA} - \overrightarrow{OB} = (1,0,-1)$. Case 3: $C$ opposite to $A$: $\overrightarrow{OC} = \overrightarrow{OB} - \overrightarrow{OA} = (-1,0,1)$.
+Given three vertices $O(0,0,0)$, $A(2,2,1)$, and $B(1,2,2)$, we need to find all possible fourth vertices $C$ such that $OABC$ forms a parallelogram (in some order).
+
+In a parallelogram, opposite sides are equal and parallel. This gives us three distinct cases depending on which vertex is opposite to which.
+
+\textbf{Case 1: $C_1$ opposite to $O$ (parallelogram $OABC_1$ with $OA \parallel BC_1$ and $OB \parallel AC_1$)}
+
+Using the parallelogram property: $\overrightarrow{OC_1} = \overrightarrow{OA} + \overrightarrow{OB}$.
+
+Calculate:
+\begin{align*}
+\overrightarrow{OA} &= (2, 2, 1) \\
+\overrightarrow{OB} &= (1, 2, 2) \\
+\overrightarrow{OC_1} &= (2, 2, 1) + (1, 2, 2) = (3, 4, 3)
+\end{align*}
+
+Therefore, $C_1 = (3, 4, 3)$.
+
+\textbf{Verification:} $\overrightarrow{OA} = (2,2,1)$ and $\overrightarrow{BC_1} = (3,4,3) - (1,2,2) = (2,2,1)$ ✓
+
+\textbf{Case 2: $C_2$ opposite to $B$ (parallelogram $OAC_2B$ with $OA \parallel C_2B$ and $OC_2 \parallel AB$)}
+
+Using the parallelogram property: $\overrightarrow{OC_2} = \overrightarrow{OA} - \overrightarrow{OB}$.
+
+Calculate:
+\begin{align*}
+\overrightarrow{OC_2} &= (2, 2, 1) - (1, 2, 2) = (1, 0, -1)
+\end{align*}
+
+Therefore, $C_2 = (1, 0, -1)$.
+
+\textbf{Verification:} $\overrightarrow{OA} = (2,2,1)$ and $\overrightarrow{C_2B} = (1,2,2) - (1,0,-1) = (0,2,3)$... Actually, $\overrightarrow{AC_2} = (1,0,-1) - (2,2,1) = (-1,-2,-2)$ and $\overrightarrow{OB} = (1,2,2)$. Let me verify: $\overrightarrow{OC_2} + \overrightarrow{OB} = (1,0,-1) + (1,2,2) = (2,2,1) = \overrightarrow{OA}$ ✓
+
+\textbf{Case 3: $C_3$ opposite to $A$ (parallelogram $OBC_3A$ with $OB \parallel C_3A$ and $OC_3 \parallel BA$)}
+
+Using the parallelogram property: $\overrightarrow{OC_3} = \overrightarrow{OB} - \overrightarrow{OA}$.
+
+Calculate:
+\begin{align*}
+\overrightarrow{OC_3} &= (1, 2, 2) - (2, 2, 1) = (-1, 0, 1)
+\end{align*}
+
+Therefore, $C_3 = (-1, 0, 1)$.
+
+\textbf{Verification:} $\overrightarrow{OB} = (1,2,2)$ and $\overrightarrow{C_3A} = (2,2,1) - (-1,0,1) = (3,2,0)$... Let me verify: $\overrightarrow{OC_3} + \overrightarrow{OA} = (-1,0,1) + (2,2,1) = (1,2,2) = \overrightarrow{OB}$ ✓
+
+\textbf{Final Answer:} The three possible positions for the fourth vertex are:
+$$C_1 = (3, 4, 3), \quad C_2 = (1, 0, -1), \quad C_3 = (-1, 0, 1)$$
 \end{solution}
 
 \vspace{1em}

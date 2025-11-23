@@ -173,7 +173,7 @@ Extension 2 introduces the $z$-axis, moving from $(x, y)$ plane to $(x, y, z)$ s
   % Between i and k (harder to see in 3D, so we'll skip or make subtle)
   
   % Label showing they're unit vectors (magnitude = 1)
-  \node[anchor=north,font=\footnotesize,align=center] at (2,-0.5,0) {Each has magnitude 1:\\$|\mathbf{i}| = |\mathbf{j}| = |\mathbf{k}| = 1$};
+  \node[anchor=north,font=\footnotesize,align=center] at (1,2.5,0) {Each has magnitude 1:\\$|\mathbf{i}| = |\mathbf{j}| = |\mathbf{k}| = 1$};
 \end{tikzpicture}
 \end{center}
 
@@ -226,7 +226,7 @@ Extension 2 introduces the $z$-axis, moving from $(x, y)$ plane to $(x, y, z)$ s
   \coordinate (A) at (3.6,0);
   \coordinate (B) at (3.6,2.5);
   
-  \draw[thick] (O) -- (A) node[midway,below] {$\sqrt{x^2+y^2}$};
+  % \draw[thick] (O) -- (A) node[midway,below] {$\sqrt{x^2+y^2}$};
   \draw[thick] (A) -- (B) node[midway,right] {$z$};
   \draw[thick,blue] (O) -- (B) node[midway,above left] {$|\mathbf{v}|=\sqrt{x^2+y^2+z^2}$};
   
@@ -380,6 +380,8 @@ Extension 2 uses vector form rather than $y=mx+b$.
   \node[below left] at (0,0,0) {$O$};
 \end{tikzpicture}
 \hspace{1cm}
+
+
 \begin{tikzpicture}[scale=1.1]
   % 2D illustration for clarity
   \draw[thick,->] (-0.5,0) -- (5,0) node[anchor=north] {$x$};
@@ -404,23 +406,23 @@ Extension 2 uses vector form rather than $y=mx+b$.
   \coordinate (P3) at ($(A)+2*(B)$);
   
   \node[circle,fill=green!60!black,inner sep=1.8pt] at (P0) {};
-  \node[below,green!60!black,font=\small] at (P0) {$\lambda=-1$};
+  \node[below left,green!60!black,font=\small] at (P0) {$\lambda=-1$};
   
   \node[circle,fill=purple,inner sep=1.8pt] at (P1) {};
-  \node[above,purple,font=\small] at (P1) {$\lambda=0.5$};
+  \node[above left,purple,font=\small] at (P1) {$\lambda=0.5$};
   
   \node[circle,fill=orange,inner sep=1.8pt] at (P2) {};
-  \node[below,orange,font=\small] at (P2) {$\lambda=1$};
+  \node[below right,orange,font=\small] at (P2) {$\lambda=1$};
   
   \node[circle,fill=cyan!70!black,inner sep=1.8pt] at (P3) {};
-  \node[above,cyan!70!black,font=\small] at (P3) {$\lambda=2$};
+  \node[above right,cyan!70!black,font=\small] at (P3) {$\lambda=2$};
   
   % Position vectors from origin
   \draw[->,dashed,gray] (0,0) -- (A);
   \draw[->,dashed,gray] (0,0) -- (P2);
   
   % Labels
-  \node[below right,gray,font=\footnotesize] at (0.75,1) {$\mathbf{r}$};
+  \node[right,gray,font=\footnotesize] at (0.5,0.7) {$\mathbf{r}$};
   
   % Origin
   \node[circle,fill=black,inner sep=1.5pt] at (0,0) {};

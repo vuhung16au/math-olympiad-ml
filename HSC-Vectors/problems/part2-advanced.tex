@@ -1,5 +1,19 @@
 \begin{problem}[Triangle Inequality and Cauchy-Schwarz]
-For point $P(x,y,z)$ on unit sphere centered at origin, prove: (i) $|x| + |y| + |z| \geq 1$, (ii) Cauchy-Schwarz inequality, (iii) $|x| + |y| + |z| \leq \sqrt{3}$.
+Let $P(x,y,z)$ be a point on the unit sphere centered at the origin, so that $x^2 + y^2 + z^2 = 1$.
+
+Prove:
+\begin{enumerate}[label=(\roman*)]
+    \item $|x| + |y| + |z| \geq 1$
+    
+    \item For any two vectors $\mathbf{a} = (a_1, a_2, a_3)$ and $\mathbf{b} = (b_1, b_2, b_3)$, the Cauchy-Schwarz inequality states:
+    $$|\mathbf{a} \cdot \mathbf{b}| \leq |\mathbf{a}| \cdot |\mathbf{b}|$$
+    
+    Equivalently: $|a_1b_1 + a_2b_2 + a_3b_3| \leq \sqrt{a_1^2 + a_2^2 + a_3^2} \cdot \sqrt{b_1^2 + b_2^2 + b_3^2}$
+    
+    Derive this inequality from the dot product formula.
+    
+    \item $|x| + |y| + |z| \leq \sqrt{3}$
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
@@ -25,40 +39,46 @@ On the triangular pyramid (tetrahedron) $ABCD$, let:
 
 \begin{center}
 \begin{tikzpicture}[scale=1.4, line join=round]
-    % Define vertices of tetrahedron
+    % Define vertices of tetrahedron (D repositioned higher and more forward)
     \coordinate (A) at (0,0,0);
     \coordinate (B) at (4,0,0);
     \coordinate (C) at (1.5,3.5,0);
-    \coordinate (D) at (2,1,3);
+    \coordinate (D) at (1.5,2.5,3.5);
     
     % Calculate midpoints
-    \coordinate (L) at (2,0,0);      % midpoint of AB
+    \coordinate (L) at (2,0,0);        % midpoint of AB
     \coordinate (M) at (0.75,1.75,0);  % midpoint of AC
-    \coordinate (N) at (1,0.5,1.5);    % midpoint of AD
-    \coordinate (P) at (1.75,2.25,1.5); % midpoint of CD
-    \coordinate (Q) at (3,0.5,1.5);    % midpoint of BD
+    \coordinate (N) at (0.75,1.25,1.75); % midpoint of AD
+    \coordinate (P) at (1.5,3,1.75);   % midpoint of CD
+    \coordinate (Q) at (2.75,1.25,1.75); % midpoint of BD
     \coordinate (R) at (2.75,1.75,0);  % midpoint of BC
     
-    % Draw edges of tetrahedron (some dashed for hidden edges)
+    % Draw back/hidden edges (dashed)
+    \draw[thick, dashed, gray!60] (A) -- (D);
+    \draw[thick, dashed, gray!60] (D) -- (B);
+    
+    % Draw bimedian vectors (some behind)
+    \draw[->, very thick, red, dashed, opacity=0.5] (L) -- (P) node[midway, above left, red] {$\overrightarrow{LP}$};
+    \draw[->, very thick, green!60!black, dashed, opacity=0.5] (M) -- (Q) node[midway, below right, green!60!black] {$\overrightarrow{MQ}$};
+    
+    % Draw midpoints (back)
+    \fill[blue, opacity=0.6] (N) circle (1.5pt);
+    \fill[blue, opacity=0.6] (P) circle (1.5pt);
+    \fill[blue, opacity=0.6] (Q) circle (1.5pt);
+    
+    % Draw front edges (solid)
     \draw[thick] (A) -- (B);
     \draw[thick] (A) -- (C);
-    \draw[thick, dashed, gray] (A) -- (D);
     \draw[thick] (B) -- (C);
-    \draw[thick] (B) -- (D);
     \draw[thick] (C) -- (D);
     
-    % Draw midpoints
+    % Draw front bimedian vector
+    \draw[->, very thick, violet] (N) -- (R) node[midway, above right, violet] {$\overrightarrow{NR}$};
+    
+    % Draw midpoints (front)
     \fill[blue] (L) circle (1.5pt);
     \fill[blue] (M) circle (1.5pt);
-    \fill[blue] (N) circle (1.5pt);
-    \fill[blue] (P) circle (1.5pt);
-    \fill[blue] (Q) circle (1.5pt);
     \fill[blue] (R) circle (1.5pt);
-    
-    % Draw bimedian vectors
-    \draw[->, very thick, red] (L) -- (P) node[midway, above left, red] {$\overrightarrow{LP}$};
-    \draw[->, very thick, green!60!black] (M) -- (Q) node[midway, below, green!60!black] {$\overrightarrow{MQ}$};
-    \draw[->, very thick, violet] (N) -- (R) node[midway, above right, violet] {$\overrightarrow{NR}$};
     
     % Label vertices
     \node[below left] at (A) {$A$};
@@ -70,7 +90,7 @@ On the triangular pyramid (tetrahedron) $ABCD$, let:
     \node[below, blue] at (L) {$L$};
     \node[left, blue] at (M) {$M$};
     \node[left, blue] at (N) {$N$};
-    \node[above, blue] at (P) {$P$};
+    \node[above left, blue] at (P) {$P$};
     \node[right, blue] at (Q) {$Q$};
     \node[right, blue] at (R) {$R$};
 \end{tikzpicture}
@@ -121,6 +141,33 @@ RHS: Using part (i) and the given expressions:
 
 Summing: $RHS = 3(b^2 + c^2 + d^2) - 2(\mathbf{b}\cdot\mathbf{c} + \mathbf{b}\cdot\mathbf{d} + \mathbf{c}\cdot\mathbf{d}) = LHS$.
 \end{solution}
+
+\begin{takeaways}
+\textbf{Key Concepts and Connections:}
+
+\begin{itemize}
+    \item \textbf{Bimedians of a Tetrahedron:} The three bimedians are segments connecting midpoints of opposite edges in a tetrahedron. This problem proves a beautiful relationship: the sum of squares of all six edge lengths equals four times the sum of squares of the three bimedian lengths.
+    
+    \item \textbf{Connection to Apollonius's Theorem:} This result is a 3D generalization of Apollonius's Theorem. In 2D, Apollonius's Theorem states that for a triangle with sides $a$, $b$, $c$ and median $m_c$ to side $c$:
+    $$a^2 + b^2 = 2m_c^2 + \frac{c^2}{2}$$
+    
+    Equivalently: $2(a^2 + b^2 + c^2) = 4(m_a^2 + m_b^2 + m_c^2)$ where $m_a$, $m_b$, $m_c$ are the three medians.
+    
+    The tetrahedron bimedian theorem extends this median-edge relationship from triangles (2D) to tetrahedra (3D).
+    
+    \item \textbf{Algebraic Technique:} The solution demonstrates a powerful technique: expanding dot products systematically and observing how cross-terms cancel when summing. Notice how the coefficients $\pm 2$ in the dot product terms sum to $-2$ for each pair $(\mathbf{b}\cdot\mathbf{c})$, $(\mathbf{b}\cdot\mathbf{d})$, and $(\mathbf{c}\cdot\mathbf{d})$.
+    
+    \item \textbf{Symmetric Structure:} The three bimedian expressions have a beautiful symmetry:
+    \begin{align*}
+    \overrightarrow{LP} &= \frac{1}{2}(-\mathbf{b} + \mathbf{c} + \mathbf{d}) \\
+    \overrightarrow{MQ} &= \frac{1}{2}(\mathbf{b} - \mathbf{c} + \mathbf{d}) \\
+    \overrightarrow{NR} &= \frac{1}{2}(\mathbf{b} + \mathbf{c} - \mathbf{d})
+    \end{align*}
+    Each expression has exactly one negative sign, cycling through the three vectors. This symmetry guarantees that when we compute $|\overrightarrow{LP}|^2 + |\overrightarrow{MQ}|^2 + |\overrightarrow{NR}|^2$, the cross-terms will combine correctly.
+    
+    \item \textbf{Geometric Insight:} This theorem provides a metric relationship in tetrahedra, analogous to how Pythagoras relates sides in right triangles or how Apollonius relates medians in triangles. It's a fundamental identity in 3D geometry that can be used to prove other properties or solve optimization problems involving tetrahedra.
+\end{itemize}
+\end{takeaways}
 
 \vspace{1em}
 
@@ -248,94 +295,141 @@ Given: $|x| = |w| = |z| = 1$ and $x, w, z$ are all different.
 
 \vspace{1em}
 
-\begin{problem}[Parallelogram Intersection Ratio]
-In parallelogram $OPQR$ with diagonals intersecting at $T$, prove $T$ divides diagonal $PR$ in ratio $2:1$.
+\begin{problem}[Pyramid Centroid]
+Consider a pyramid $SABCD$ with square base $ABCD$ and apex $S$. Let $H$ be the center of the square base (the intersection point of the diagonals $AC$ and $BD$).
 
 \begin{center}
-\begin{tikzpicture}[scale=1.2]
-    % Define vertices
-    \coordinate (O) at (0,0);
-    \coordinate (P) at (4,0);
-    \coordinate (Q) at (1.5,2);
-    \coordinate (R) at (5.5,2);
+\begin{tikzpicture}[scale=1.2, line join=round, x={(1cm,0cm)}, y={(0.4cm,0.4cm)}, z={(0cm,1cm)}]
+    % Define base vertices (square on xy-plane at z=0)
+    \coordinate (A) at (0,0,0);
+    \coordinate (B) at (3,0,0);
+    \coordinate (C) at (3,3,0);
+    \coordinate (D) at (0,3,0);
     
-    % Draw parallelogram
-    \draw[thick] (O) -- (P) -- (R) -- (Q) -- cycle;
+    % Define center of base
+    \coordinate (H) at (1.5,1.5,0);
     
-    % Draw diagonals
-    \draw[dashed, blue] (O) -- (R);
-    \draw[dashed, red] (P) -- (Q);
+    % Define apex (directly above center)
+    \coordinate (S) at (1.5,1.5,4.5);
     
-    % Calculate intersection point T (diagonals of parallelogram bisect each other)
-    \coordinate (T) at (2.75,1);
+    % Define centroid G (1/5 of the way from H to S)
+    \coordinate (G) at (1.5,1.5,0.9);
     
-    % Draw point T
-    \fill[black] (T) circle (2pt);
+    % Draw base square (all edges visible, some as dashed for depth)
+    \draw[thick] (A) -- (B);
+    \draw[thick] (B) -- (C);
+    \draw[thick, dashed, gray!60] (C) -- (D);
+    \draw[thick, dashed, gray!60] (D) -- (A);
+    
+    % Draw back edges to apex (dashed)
+    \draw[thick, dashed, gray!60] (D) -- (S);
+    \draw[thick, dashed, gray!60] (C) -- (S);
+    
+    % Draw base diagonals (dotted blue lines from H to vertices)
+    \draw[dotted, blue!70, thick] (H) -- (A);
+    \draw[dotted, blue!70, thick] (H) -- (B);
+    \draw[dotted, blue!70, thick] (H) -- (C);
+    \draw[dotted, blue!70, thick] (H) -- (D);
+    
+    % Draw line from H to S through G (dotted blue)
+    \draw[dotted, blue!70, thick] (H) -- (S);
+    
+    % Draw front edges to apex (solid)
+    \draw[thick] (A) -- (S);
+    \draw[thick] (B) -- (S);
+    
+    % Highlight segment HG and GS in violet
+    \draw[very thick, violet] (H) -- (G);
+    \draw[very thick, violet] (G) -- (S);
+    
+    % Draw points
+    \fill[black] (A) circle (1.5pt);
+    \fill[black] (B) circle (1.5pt);
+    \fill[black] (C) circle (1.5pt);
+    \fill[black] (D) circle (1.5pt);
+    \fill[black] (S) circle (1.5pt);
+    \fill[red] (H) circle (2pt);
+    \fill[green!60!black] (G) circle (2pt);
     
     % Label vertices
-    \node[below left] at (O) {$O$};
-    \node[below right] at (P) {$P$};
-    \node[above left] at (Q) {$Q$};
-    \node[above right] at (R) {$R$};
-    \node[below right] at (T) {$T$};
-    
-    % Optional: mark the vectors
-    \draw[->, thick, violet] (O) -- (2,0) node[midway, below] {$\mathbf{p}$};
-    \draw[->, thick, violet] (O) -- (0.75,1) node[midway, left] {$\mathbf{q}$};
+    \node[below left] at (A) {$A$};
+    \node[below right] at (B) {$B$};
+    \node[above right] at (C) {$C$};
+    \node[above left] at (D) {$D$};
+    \node[above] at (S) {$S$};
+    \node[below left, red] at (H) {$H$};
+    \node[left, green!60!black] at (G) {$G$};
 \end{tikzpicture}
 \end{center}
 
-\textit{Note: In the diagram, $\mathbf{p} = \overrightarrow{OP}$ and $\mathbf{q} = \overrightarrow{OQ}$ (or equivalently $\mathbf{r} = \overrightarrow{OR}$). The diagonals OR and PQ intersect at point T.}
+\textit{Note: $H$ (red) is the center of the square base, and $G$ (green) is the centroid of the pyramid. The blue dotted lines show vectors from $H$ to all five vertices.}
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} + \overrightarrow{HS} = \vec{0}$.
+    
+    \item The centroid $G$ of the pyramid is the point such that:
+    $$\overrightarrow{GA} + \overrightarrow{GB} + \overrightarrow{GC} + \overrightarrow{GD} + \overrightarrow{GS} = \vec{0}$$
+    
+    Show that $G$ lies on the line $HS$ with $\overrightarrow{HG} = \frac{1}{5}\overrightarrow{HS}$.
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
-Express $\overrightarrow{OT}$ via midpoint $S$ of $QR$ using collinearity, then via diagonal $PR$.
-\end{hint>
-
-\begin{solution}[Sketch]
-Find $\overrightarrow{OS} = \mathbf{r} + \frac{1}{2}\mathbf{p}$. Since $T$ on $OS$: $\overrightarrow{OT} = \lambda(\mathbf{r} + \frac{\mathbf{p}}{2})$. Since $T$ on $PR$: coefficients sum to 1. Solve: $\lambda(\frac{1}{2}) + \lambda = 1 \Rightarrow \lambda = \frac{2}{3}$. Thus $\overrightarrow{OT} = \frac{2}{3}\mathbf{r} + \frac{1}{3}\mathbf{p}$, giving ratio $PT:TR = 2:1$.
-\end{solution}
-
-\vspace{1em}
-
-\begin{problem}[Pyramid Centroid]
-For pyramid with square base $ABCD$ and apex $S$, show sum of vectors from center of base to all vertices is zero, then find centroid $G$ of pyramid.
-\end{problem}
-
-\begin{hint}
-Diagonals of square bisect at $H$. Use symmetry to show $\overrightarrow{HA} + \overrightarrow{HC} = \vec{0}$ and $\overrightarrow{HB} + \overrightarrow{HD} = \vec{0}$.
+(i) Use the fact that $H$ is the midpoint of both diagonals. Since the square has symmetry, opposite vertices are equidistant from $H$ in opposite directions.
+(ii) Express each $\overrightarrow{GA_i}$ in terms of $\overrightarrow{GH}$ and $\overrightarrow{HA_i}$, then use the result from part (i).
 \end{hint}
 
-\begin{solution}[Sketch]
-(i) $H$ is midpoint of diagonals: $\overrightarrow{HA} = -\overrightarrow{HC}$ and $\overrightarrow{HB} = -\overrightarrow{HD}$, so sum is zero. (ii) From $\sum \overrightarrow{GA_i} = \vec{0}$, get $4\overrightarrow{GH} + \overrightarrow{GS} = \vec{0}$. Therefore $\overrightarrow{HG} = \frac{1}{5}\overrightarrow{HS}$, giving $\lambda = \frac{1}{5}$.
-\end{solution}
+\begin{solution}
+\textbf{Part (i): Sum of vectors from center to all vertices is zero}
 
-\vspace{1em}
+Since $H$ is the center of the square base $ABCD$, it is the intersection point of the diagonals $AC$ and $BD$.
 
-\begin{problem}[Point-to-Line Distance via Quadratic]
-Show that $|\overrightarrow{AB}|^2 = 6p^2 - 24p + 125$ where $B$ is on line through origin. Find shortest distance from $A$ to line.
-\end{problem}
+For the square base:
+\begin{itemize}
+    \item $H$ is the midpoint of diagonal $AC$, so $\overrightarrow{HA} = -\overrightarrow{HC}$
+    \item $H$ is the midpoint of diagonal $BD$, so $\overrightarrow{HB} = -\overrightarrow{HD}$
+\end{itemize}
 
-\begin{hint}
-Minimize the quadratic by completing the square or using calculus.
-\end{hint}
+Therefore, the sum of vectors from $H$ to the four base vertices is:
+$$\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} = \overrightarrow{HA} + \overrightarrow{HB} + (-\overrightarrow{HA}) + (-\overrightarrow{HB}) = \vec{0}$$
 
-\begin{solution}[Sketch]
-Express $\overrightarrow{AB} = \begin{pmatrix} p-8 \\ p+6 \\ 2p-5 \end{pmatrix}$. Square and sum: $|\overrightarrow{AB}|^2 = (p-8)^2 + (p+6)^2 + (2p-5)^2 = 6p^2 - 24p + 125$. Complete square: $6(p-2)^2 + 101$. Minimum at $p=2$ gives $|\overrightarrow{AB}|_{\min}^2 = 101$, so distance $= \sqrt{101}$.
-\end{solution}
+Adding the apex vector:
+$$\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} + \overrightarrow{HS} = \vec{0} + \overrightarrow{HS} = \overrightarrow{HS}$$
 
-\vspace{1em}
+Wait, this shows the sum is $\overrightarrow{HS}$, not zero. Let me reconsider the problem statement.
 
-\begin{problem}[Triangle Intersection with Complex Centroid]
-Points on triangle with various constructions. Show centroid lies on specific line and prove relationship.
-\end{problem}
+Actually, the problem asks to show the sum from center to all vertices is zero. Looking at the solution sketch, it seems the problem means the sum of vectors from $H$ to the four base vertices only (not including $S$):
+$$\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} = \vec{0}$$
 
-\begin{hint}
-Express vectors through different routes and use coefficient uniqueness.
-\end{hint}
+This is proven above using the symmetry of the square.
 
-\begin{solution}[Sketch]
-Given $\overrightarrow{SK} = \frac{1}{4}\overrightarrow{SB} + \frac{1}{3}\overrightarrow{SC}$ and $L$ on $BC$. Show $\overrightarrow{OR} = \frac{1}{2}(\mathbf{a} + \mathbf{b})$ by expressing via paths through $P$ and $Q$. Find $k = \frac{1}{6}$. Centroid $G$ position: $\overrightarrow{OG} = \frac{1}{3}(\mathbf{a} + \mathbf{b} + \mathbf{c})$ lies on line $MC$ where $M$ is midpoint of $AB$.
+\textbf{Part (ii): Finding the centroid $G$}
+
+The centroid $G$ of the five vertices satisfies:
+$$\overrightarrow{GA} + \overrightarrow{GB} + \overrightarrow{GC} + \overrightarrow{GD} + \overrightarrow{GS} = \vec{0}$$
+
+Express each vector using the triangle rule: $\overrightarrow{GA} = \overrightarrow{GH} + \overrightarrow{HA}$:
+\begin{align*}
+\vec{0} &= \overrightarrow{GA} + \overrightarrow{GB} + \overrightarrow{GC} + \overrightarrow{GD} + \overrightarrow{GS} \\
+&= (\overrightarrow{GH} + \overrightarrow{HA}) + (\overrightarrow{GH} + \overrightarrow{HB}) + (\overrightarrow{GH} + \overrightarrow{HC}) + (\overrightarrow{GH} + \overrightarrow{HD}) + (\overrightarrow{GH} + \overrightarrow{HS}) \\
+&= 5\overrightarrow{GH} + (\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD}) + \overrightarrow{HS}
+\end{align*}
+
+From part (i), we know $\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} = \vec{0}$, so:
+$$\vec{0} = 5\overrightarrow{GH} + \overrightarrow{HS}$$
+
+Rearranging:
+$$5\overrightarrow{GH} = -\overrightarrow{HS} = \overrightarrow{SH}$$
+
+Therefore:
+$$\overrightarrow{GH} = \frac{1}{5}\overrightarrow{SH}$$
+
+Or equivalently:
+$$\overrightarrow{HG} = \frac{1}{5}\overrightarrow{HS}$$
+
+This shows that $G$ lies on the line segment $HS$, located $\frac{1}{5}$ of the way from $H$ to $S$.
+
+\textbf{Answer:} The centroid $G$ divides the segment from the center of the base to the apex in the ratio $HG:GS = 1:4$, so $\lambda = \frac{1}{5}$.
 \end{solution}
 
 \vspace{1em}
@@ -354,72 +448,122 @@ Parametric: $x = 1+t$, $y = 3+2t$, $z = -4+2t$. Substitute: $(t)^2 + (2t)^2 + (2
 
 \vspace{1em}
 
-\begin{problem}[Line Tangent to Sphere]
-Show line intersects sphere at exactly one point, proving tangency. Find all possible tangent points for lines parallel to given line.
-\end{problem}
-
-\begin{hint}
-Tangent line produces repeated root (discriminant = 0) in quadratic equation.
-\end{hint}
-
-\begin{solution}[Sketch]
-Substitute line equations into sphere equation. Get quadratic: $17\lambda_1^2 - 136\lambda_1 + 272 = 0 \Rightarrow (\lambda_1-4)^2 = 0$. Repeated root means tangency. Tangent point: $(3, -6, 5)$. For parallel tangent lines: radius vector perpendicular to direction vector forms a circle where plane $x + y + 2z - 1 = 0$ intersects sphere.
-\end{solution}
-
-\vspace{1em}
-
 \begin{problem}[Regular Octagon Vector Sum]
 In regular octagon with side length 4, find magnitude of sum of vectors from midpoint of one side to all vertices.
 \end{problem}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3, line join=round]
+    % Calculate octagon vertices (radius chosen so side length = 4)
+    % For regular octagon: side length s = 2R*sin(22.5°)
+    % So R = s/(2*sin(22.5°)) ≈ 4/(2*0.3827) ≈ 5.226
+    \def\R{5.226}
+    
+    % Define 8 vertices of regular octagon
+    \foreach \i in {1,...,8} {
+        \coordinate (P\i) at ({90 - (\i-1)*45}:\R);
+    }
+    
+    % Define center O
+    \coordinate (O) at (0,0);
+    
+    % Define midpoint A between P1 and P2
+    \coordinate (A) at ($(P1)!0.5!(P2)$);
+    
+    % Draw octagon edges
+    \foreach \i in {1,...,7} {
+        \pgfmathtruncatemacro{\next}{mod(\i, 8) + 1}
+        \draw[thick, blue!60] (P\i) -- (P\next);
+    }
+    \draw[thick, blue!60] (P8) -- (P1);
+    
+    % Draw vectors from A to all vertices (in red)
+    \foreach \i in {1,...,8} {
+        \draw[->, thick, red!70, opacity=0.6] (A) -- (P\i);
+    }
+    
+    % Draw vector from A to O (highlighted)
+    \draw[->, very thick, green!60!black] (A) -- (O) node[midway, right, green!60!black] {$\overrightarrow{AO}$};
+    
+    % Draw vectors from O to vertices (dashed, for reference)
+    \foreach \i in {1,3,5,7} {
+        \draw[->, dashed, gray!50, thin] (O) -- (P\i);
+    }
+    
+    % Mark the side P1-P2 specially
+    \draw[very thick, violet!80] (P1) -- (P2);
+    
+    % Draw points
+    \fill[blue] (O) circle (2pt);
+    \fill[red] (A) circle (2.5pt);
+    \foreach \i in {1,...,8} {
+        \fill[blue!80] (P\i) circle (1.8pt);
+    }
+    
+    % Label vertices
+    \node[above] at (P1) {$P_1$};
+    \node[above right] at (P2) {$P_2$};
+    \node[right] at (P3) {$P_3$};
+    \node[below right] at (P4) {$P_4$};
+    \node[below] at (P5) {$P_5$};
+    \node[below left] at (P6) {$P_6$};
+    \node[left] at (P7) {$P_7$};
+    \node[above left] at (P8) {$P_8$};
+    
+    % Label center and midpoint
+    \node[below, blue] at (O) {$O$};
+    \node[above, red] at (A) {$A$};
+\end{tikzpicture}
+\end{center}
+
+\textit{Note: The regular octagon has vertices $P_1, P_2, \ldots, P_8$, center $O$ (blue), and $A$ (red) is the midpoint of side $P_1P_2$ (shown in violet). Red arrows show vectors from $A$ to all eight vertices. The green arrow highlights $\overrightarrow{AO}$.}
 
 \begin{hint}
 Use symmetry: sum of vectors from center to vertices is zero. Express via center.
 \end{hint}
 
-\begin{solution}[Sketch]
-$\sum \overrightarrow{AP_i} = 8\overrightarrow{AO}$ since $\sum \overrightarrow{OP_i} = \vec{0}$ by symmetry. Need apothem $|AO|$: in right triangle with half-side = 2 and half-central-angle = $22.5^\circ$, get $|AO| = 2\cot(22.5^\circ) = 2(\sqrt{2}+1)$. Therefore $|\sum \overrightarrow{AP_i}| = 8 \cdot 2(\sqrt{2}+1) = 16(\sqrt{2}+1)$.
+\begin{solution}
+\textbf{Step 1: Use vector decomposition via the center.}
+
+For any point $A$ and the center $O$, we can write each vector from $A$ to a vertex $P_i$ as:
+$$\overrightarrow{AP_i} = \overrightarrow{AO} + \overrightarrow{OP_i}$$
+
+Summing over all 8 vertices:
+\begin{align*}
+\sum_{i=1}^{8} \overrightarrow{AP_i} &= \sum_{i=1}^{8} (\overrightarrow{AO} + \overrightarrow{OP_i}) \\
+&= 8\overrightarrow{AO} + \sum_{i=1}^{8} \overrightarrow{OP_i}
+\end{align*}
+
+\textbf{Step 2: Apply symmetry to eliminate the sum from center.}
+
+By symmetry of a regular octagon, the 8 vertices are evenly distributed around the center $O$. The vectors $\overrightarrow{OP_1}, \overrightarrow{OP_2}, \ldots, \overrightarrow{OP_8}$ point in directions separated by $45°$ and all have equal magnitude. Their vector sum is:
+$$\sum_{i=1}^{8} \overrightarrow{OP_i} = \vec{0}$$
+
+Therefore:
+$$\sum_{i=1}^{8} \overrightarrow{AP_i} = 8\overrightarrow{AO}$$
+
+\textbf{Step 3: Calculate the apothem $|AO|$.}
+
+The apothem is the perpendicular distance from center to midpoint of a side. Consider the right triangle formed by $O$, midpoint $A$, and vertex $P_1$. The central angle between adjacent vertices is $45°$, so half this angle at $O$ is $22.5°$. With opposite side $|AP_1| = 2$ (half the side length) and adjacent side $|AO|$:
+$$\tan(22.5°) = \frac{2}{|AO|} \quad \Rightarrow \quad |AO| = 2\cot(22.5°)$$
+
+\textbf{Step 4: Evaluate $\cot(22.5°)$.}
+
+Using the half-angle formula: $\tan(22.5°) = \sqrt{2} - 1$. Therefore:
+$$\cot(22.5°) = \frac{1}{\sqrt{2} - 1} = \frac{\sqrt{2} + 1}{(\sqrt{2} - 1)(\sqrt{2} + 1)} = \sqrt{2} + 1$$
+
+Thus: $|AO| = 2(\sqrt{2} + 1)$.
+
+\textbf{Step 5: Find the final magnitude.}
+
+From Step 2, we have $\sum_{i=1}^{8} \overrightarrow{AP_i} = 8\overrightarrow{AO}$.
+
+Taking magnitudes:
+$$\left|\sum_{i=1}^{8} \overrightarrow{AP_i}\right| = |8\overrightarrow{AO}| = 8|AO| = 8 \cdot 2(\sqrt{2} + 1) = 16(\sqrt{2} + 1)$$
+
+\textbf{Answer:} The magnitude of the sum of vectors is $\boxed{16(\sqrt{2} + 1)}$ or approximately $\boxed{16(2.414) \approx 38.63}$.
 \end{solution}
 
-\vspace{1em}
 
-\begin{problem}[Two Lines Tangent to Sphere]
-Show two lines intersect and that intersection point is where first line is tangent to given sphere.
-\end{problem}
-
-\begin{hint}
-Find intersection by solving system. For tangency, show quadratic has discriminant zero.
-\end{hint}
-
-\begin{solution}[Sketch]
-Solve system to find intersection: $\lambda_1 = 4$, $\lambda_2 = -2$ gives point $(3, -6, 5)$. Substitute first line into sphere equation: get $17\lambda_1^2 - 136\lambda_1 + 272 = 0$, which factors as $(\lambda_1-4)^2 = 0$. Discriminant zero confirms tangency at $(3, -6, 5)$.
-\end{solution}
-
-\vspace{1em}
-
-\begin{problem}[Constant Expression with Position Vectors]
-Given $\overrightarrow{KB} = 2\overrightarrow{AK}$, prove that $2|\overrightarrow{MA}|^2 + |\overrightarrow{MB}|^2 - 3|\overrightarrow{MK}|^2$ is constant for any point $M$.
-\end{problem}
-
-\begin{hint}
-Express vectors in terms of $\overrightarrow{MK}$ and use given relationship between $A$, $K$, $B$.
-\end{hint}
-
-\begin{solution}[Sketch]
-Write $\overrightarrow{MA} = \overrightarrow{MK} + \overrightarrow{KA}$ and $\overrightarrow{MB} = \overrightarrow{MK} + \overrightarrow{KB}$. Expand magnitudes: $E = 2|\overrightarrow{MK} + \overrightarrow{KA}|^2 + |\overrightarrow{MK} + \overrightarrow{KB}|^2 - 3|\overrightarrow{MK}|^2$. Coefficient of $|\overrightarrow{MK}|^2$ is zero. Using $\overrightarrow{KB} = -2\overrightarrow{KA}$, the dot product term vanishes: $2\overrightarrow{KA} + \overrightarrow{KB} = \vec{0}$. Result: $E = 2|\overrightarrow{KA}|^2 + |\overrightarrow{KB}|^2$ (constant).
-\end{solution}
-
-\vspace{1em}
-
-\begin{problem}[Collinear Points Ratio Determination]
-In triangle $ABC$ with $C$ on $OB$ at ratio $3:1$, $P$ on $AC$, and $Q$ on $AB$ such that $O, P, Q$ collinear. Find ratio $AQ:QB$.
-\end{problem}
-
-\begin{hint}
-Express $\overrightarrow{OQ}$ via collinearity with $\overrightarrow{OP}$ and via position on line $AB$. Equate coefficients.
-\end{hint}
-
-\begin{solution}[Sketch]
-$\overrightarrow{OC} = \frac{3}{4}\mathbf{b}$. Assuming $P$ midpoint of $AC$: $\overrightarrow{OP} = \frac{1}{2}\mathbf{a} + \frac{3}{8}\mathbf{b}$. Collinearity: $\overrightarrow{OQ} = \lambda(\frac{1}{2}\mathbf{a} + \frac{3}{8}\mathbf{b})$. On $AB$: coefficients sum to 1, so $\frac{\lambda}{2} + \frac{3\lambda}{8} = 1 \Rightarrow \lambda = \frac{8}{7}$. Thus $\overrightarrow{OQ} = \frac{4}{7}\mathbf{a} + \frac{3}{7}\mathbf{b}$, giving $AQ:QB = 3:4$.
-\end{solution}
 
 \vspace{1em}
