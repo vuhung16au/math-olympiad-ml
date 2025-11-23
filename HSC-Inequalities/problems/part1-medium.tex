@@ -1,0 +1,415 @@
+\begin{problem}[Problem 6: Arithmetic Sequence of Reciprocals]
+Positive real numbers $a, b, c$ and $d$ are chosen such that $\frac{1}{a}, \frac{1}{b}, \frac{1}{c}$ and $\frac{1}{d}$ are consecutive terms in an arithmetic sequence with common difference $k$, where $k \in \mathbb{R}$, $k > 0$.
+
+Show that $b+c < a+d$.
+\end{problem}
+
+\begin{solution}
+Since $\frac{1}{a}, \frac{1}{b}, \frac{1}{c}, \frac{1}{d}$ are consecutive terms in an arithmetic sequence with common difference $k > 0$, we have:
+\begin{align*}
+\frac{1}{b} &= \frac{1}{a} + k \quad \implies \quad k = \frac{1}{b} - \frac{1}{a} = \frac{a-b}{ab} \tag{1} \\
+\frac{1}{c} &= \frac{1}{b} + k \quad \implies \quad k = \frac{1}{c} - \frac{1}{b} = \frac{b-c}{bc} \tag{2} \\
+\frac{1}{d} &= \frac{1}{c} + k \quad \implies \quad k = \frac{1}{d} - \frac{1}{c} = \frac{c-d}{cd} \tag{3}
+\end{align*}
+
+Since $k > 0$ and $a, b, c, d$ are positive, the numerators must be positive, which implies:
+\begin{align*}
+&a-b > 0 \quad \implies \quad a > b \\
+&b-c > 0 \quad \implies \quad b > c \\
+&c-d > 0 \quad \implies \quad c > d
+\end{align*}
+Thus, $a > b > c > d$.
+
+We want to show that $b+c < a+d$, which is equivalent to showing $0 < (a+d) - (b+c)$, or $0 < (a-b) - (c-d)$.
+
+From equations (1) and (3), we can express the differences in terms of $k$:
+\begin{align*}
+a-b &= k \cdot ab \tag{4} \\
+c-d &= k \cdot cd \tag{5}
+\end{align*}
+
+We need to compare $k \cdot ab$ and $k \cdot cd$. Since $k > 0$, the inequality $a-b > c-d$ is equivalent to showing:
+\[ ab > cd \]
+
+Since we established $a > b > c > d$, it is clear that $a > c$ and $b > d$. Since all are positive:
+\begin{align*} 
+a &> c > 0 \\ 
+b &> d > 0 
+\end{align*}
+
+Multiplying these two inequalities:
+\[ ab > cd \]
+
+Multiplying by $k>0$:
+\[ k \cdot ab > k \cdot cd \]
+
+Substituting from equations (4) and (5):
+\[ a-b > c-d \]
+
+Rearranging the terms:
+\[ a+d > b+c \]
+
+Therefore, $b+c < a+d$ as required.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Technique:} Converting arithmetic sequence conditions into algebraic equations allows us to extract ordering information about the original terms.
+\item \textbf{Strategy:} When dealing with reciprocals in arithmetic progression, recognize that the original terms form a decreasing sequence, and use this monotonicity to compare products.
+\item \textbf{Key Insight:} Express target differences as products with a common positive factor ($k$), reducing the problem to comparing products of ordered terms.
+\item \textbf{Pitfall:} Don't forget that $k > 0$ is crucial for establishing the ordering $a > b > c > d$; without this, the inequality direction could reverse.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 7: Cascading AM-GM Applications]
+For all non-negative real numbers $x$ and $y$, $\sqrt{xy} \le \frac{x+y}{2}.$ (Do NOT prove this.)
+
+\begin{enumerate}
+    \item[(i)] Using this fact, show that for all non-negative real numbers $a, b$ and $c$,
+    \[
+    \sqrt{abc} \le \frac{a^2+b^2+2c}{4}.
+    \]
+
+    \item[(ii)] Using part (i), or otherwise, show that for all non-negative real numbers $a, b$ and $c$,
+    \[
+    \sqrt{abc} \le \frac{a^2+b^2+c^2+a+b+c}{6}.
+    \]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (i):}
+
+We are given the AM-GM inequality: $\sqrt{xy} \le \frac{x+y}{2}$.
+
+First, apply AM-GM to $x = a^2$ and $y = b^2$:
+\begin{align}
+    \sqrt{a^2b^2} &\le \frac{a^2+b^2}{2} \notag \\
+    ab &\le \frac{a^2+b^2}{2} \label{eq:ab}
+\end{align}
+
+Next, apply AM-GM to $x = ab$ and $y = c$:
+\begin{align*}
+    \sqrt{(ab) \cdot c} &\le \frac{ab+c}{2}
+\end{align*}
+
+Substitute inequality \eqref{eq:ab} into this expression. Since $ab \le \frac{a^2+b^2}{2}$, we have:
+\begin{align*}
+    \sqrt{abc} &\le \frac{ab+c}{2} \le \frac{\frac{a^2+b^2}{2} + c}{2} \\
+    &= \frac{\frac{a^2+b^2+2c}{2}}{2} \\
+    &= \frac{a^2+b^2+2c}{4}
+\end{align*}
+
+Therefore, $\sqrt{abc} \le \frac{a^2+b^2+2c}{4}$.
+
+\textbf{Part (ii):}
+
+Using the result from part (i), we can generate symmetrical inequalities by cyclically permuting the variables $a, b,$ and $c$.
+
+From part (i):
+\begin{align}
+    \sqrt{abc} &\le \frac{a^2+b^2+2c}{4} \label{eq:cycl1}
+\end{align}
+
+Applying the same result with variables permuted $(a \to b, b \to c, c \to a)$:
+\begin{align}
+    \sqrt{bca} &\le \frac{b^2+c^2+2a}{4} \label{eq:cycl2}
+\end{align}
+
+Applying again with permutation $(a \to c, b \to a, c \to b)$:
+\begin{align}
+    \sqrt{cab} &\le \frac{c^2+a^2+2b}{4} \label{eq:cycl3}
+\end{align}
+
+Since $\sqrt{abc} = \sqrt{bca} = \sqrt{cab}$, we can add inequalities \eqref{eq:cycl1}, \eqref{eq:cycl2}, and \eqref{eq:cycl3}:
+\begin{align*}
+    3\sqrt{abc} &\le \frac{(a^2+b^2+2c) + (b^2+c^2+2a) + (c^2+a^2+2b)}{4} \\
+    &= \frac{2a^2 + 2b^2 + 2c^2 + 2a + 2b + 2c}{4} \\
+    &= \frac{2(a^2 + b^2 + c^2 + a + b + c)}{4} \\
+    &= \frac{a^2 + b^2 + c^2 + a + b + c}{2}
+\end{align*}
+
+Dividing both sides by 3:
+\begin{align*}
+    \sqrt{abc} &\le \frac{a^2 + b^2 + c^2 + a + b + c}{6}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Technique:} Cascade AM-GM applications by strategically choosing pairs of terms, then use the resulting inequality as input for another AM-GM application.
+\item \textbf{Strategy:} When proving symmetric inequalities, exploit cyclic symmetry by generating multiple versions of an intermediate result and summing them.
+\item \textbf{Key Insight:} The transition from part (i) to part (ii) demonstrates how adding symmetric inequalities can yield a stronger bound with better balance among variables.
+\item \textbf{Common Pattern:} Notice that $\frac{a^2+b^2}{2} \ge ab$ is a specific application of AM-GM to squares, which often serves as a useful intermediate step.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 8: Inductive Sum of Squared Reciprocals]
+Prove by mathematical induction that, for $n \ge 2$,
+\[
+\frac{1}{2^2} + \frac{1}{3^2} + \dots + \frac{1}{n^2} < \frac{n-1}{n}.
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{Step 1: Base Case ($n=2$)}
+
+Let $n=2$.
+\begin{align*}
+    \text{LHS} &= \frac{1}{2^2} = \frac{1}{4} \\
+    \text{RHS} &= \frac{2-1}{2} = \frac{1}{2}
+\end{align*}
+Since $\frac{1}{4} < \frac{1}{2}$, the statement is true for $n=2$.
+
+\textbf{Step 2: Inductive Hypothesis}
+
+Assume the statement is true for $n=k$, where $k \ge 2$. That is, assume:
+\[
+\frac{1}{2^2} + \frac{1}{3^2} + \dots + \frac{1}{k^2} < \frac{k-1}{k} \tag{*}
+\]
+
+\textbf{Step 3: Inductive Step}
+
+We must prove the statement is true for $n=k+1$. That is, we must prove:
+\[
+\frac{1}{2^2} + \dots + \frac{1}{k^2} + \frac{1}{(k+1)^2} < \frac{(k+1)-1}{k+1} = \frac{k}{k+1}
+\]
+
+Consider the left-hand side for $n=k+1$:
+\[
+\text{LHS} = \left( \frac{1}{2^2} + \dots + \frac{1}{k^2} \right) + \frac{1}{(k+1)^2}
+\]
+
+Using our inductive hypothesis (*), we can substitute:
+\[
+\text{LHS} < \frac{k-1}{k} + \frac{1}{(k+1)^2}
+\]
+
+Now, we need to show that this expression is less than our target $\frac{k}{k+1}$. Let's compute the difference between the target and $\frac{k-1}{k}$:
+\[
+\frac{k}{k+1} - \frac{k-1}{k} = \frac{k^2 - (k-1)(k+1)}{k(k+1)} = \frac{k^2 - (k^2 - 1)}{k(k+1)} = \frac{1}{k(k+1)}
+\]
+
+We need to show that $\frac{1}{(k+1)^2} < \frac{1}{k(k+1)}$. This is equivalent to showing:
+\[
+k(k+1) < (k+1)^2
+\]
+
+For $k \ge 2$:
+\begin{align*}
+    k &< k+1 \\
+    \implies k(k+1) &< (k+1)(k+1) = (k+1)^2
+\end{align*}
+
+Therefore:
+\[
+\frac{1}{(k+1)^2} < \frac{1}{k(k+1)}
+\]
+
+This means:
+\[
+\frac{1}{(k+1)^2} < \frac{k}{k+1} - \frac{k-1}{k}
+\]
+
+Rearranging:
+\[
+\frac{k-1}{k} + \frac{1}{(k+1)^2} < \frac{k}{k+1}
+\]
+
+Thus:
+\[
+\text{LHS} < \frac{k-1}{k} + \frac{1}{(k+1)^2} < \frac{k}{k+1}
+\]
+
+The statement holds true for $n=k+1$.
+
+\textbf{Conclusion}
+
+Since the statement is true for $n=2$, and assuming it is true for $n=k$ implies it is true for $n=k+1$, then by the principle of mathematical induction, the inequality is true for all integers $n \ge 2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Technique:} In inductive proofs of inequalities, compute the ``gap'' between successive right-hand sides to determine what bound is needed on the new term.
+\item \textbf{Strategy:} Show that the additional term $\frac{1}{(k+1)^2}$ is strictly less than the increase in the RHS from $\frac{k-1}{k}$ to $\frac{k}{k+1}$.
+\item \textbf{Key Insight:} The inequality $k(k+1) < (k+1)^2$ (equivalently $k < k+1$) is the critical comparison that makes the inductive step work.
+\item \textbf{Pitfall:} Don't assume the new term is small enough without verification; always explicitly show the required inequality between the new term and the gap in the RHS.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 9: Power Mean Inequality via QM-RMS]
+For positive real numbers $x$ and $y$, $\sqrt{xy} \leq \frac{x+y}{2}$. (Do NOT prove this.)
+
+\begin{enumerate}[label=(\roman*)]
+    \item Prove $\sqrt{xy} \leq \sqrt{\frac{x^2 + y^2}{2}}$, for positive real numbers $x$ and $y$.
+    \item Prove $\sqrt[4]{abcd} \leq \sqrt{\frac{a^2 + b^2 + c^2 + d^2}{4}}$, for positive real numbers $a, b, c$ and $d$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (i):}
+
+We are required to prove $\sqrt{xy} \leq \sqrt{\frac{x^2 + y^2}{2}}$.
+
+Consider the identity $(x-y)^2 \geq 0$ for all real numbers $x, y$. Expanding:
+\begin{align*}
+    x^2 - 2xy + y^2 &\geq 0 \\
+    x^2 + y^2 &\geq 2xy \\
+    \frac{x^2 + y^2}{2} &\geq xy
+\end{align*}
+
+Since $x, y > 0$, both sides are positive. Taking the square root of both sides preserves the inequality:
+\[
+    \sqrt{\frac{x^2 + y^2}{2}} \geq \sqrt{xy}
+\]
+
+Rearranging gives the required result:
+\[
+    \sqrt{xy} \leq \sqrt{\frac{x^2 + y^2}{2}}
+\]
+
+\textbf{Part (ii):}
+
+We are required to prove $\sqrt[4]{abcd} \leq \sqrt{\frac{a^2 + b^2 + c^2 + d^2}{4}}$.
+
+Note that:
+\[
+\sqrt[4]{abcd} = \left(abcd\right)^{1/4} = \left[\left(ab\right)\left(cd\right)\right]^{1/4} = \sqrt{\sqrt{ab} \cdot \sqrt{cd}}
+\]
+
+First, apply the result from Part (i) to the pairs $(a,b)$ and $(c,d)$:
+\[
+    \sqrt{ab} \leq \sqrt{\frac{a^2+b^2}{2}} \quad \text{and} \quad \sqrt{cd} \leq \sqrt{\frac{c^2+d^2}{2}}
+\]
+
+Let $X = \sqrt{\frac{a^2+b^2}{2}}$ and $Y = \sqrt{\frac{c^2+d^2}{2}}$. Then:
+\[
+\sqrt{ab} \leq X \quad \text{and} \quad \sqrt{cd} \leq Y
+\]
+
+Multiplying these inequalities:
+\[
+\sqrt{ab} \cdot \sqrt{cd} = \sqrt{abcd} \leq X \cdot Y
+\]
+
+Now apply Part (i) to $X$ and $Y$:
+\[
+X \cdot Y \leq \sqrt{\frac{X^2 + Y^2}{2}}
+\]
+
+Substituting back:
+\begin{align*}
+    \sqrt{abcd} &\leq \sqrt{\frac{X^2 + Y^2}{2}} \\
+    &= \sqrt{\frac{\left(\sqrt{\frac{a^2+b^2}{2}}\right)^2 + \left(\sqrt{\frac{c^2+d^2}{2}}\right)^2}{2}} \\
+    &= \sqrt{\frac{\frac{a^2+b^2}{2} + \frac{c^2+d^2}{2}}{2}} \\
+    &= \sqrt{\frac{\frac{a^2+b^2+c^2+d^2}{2}}{2}} \\
+    &= \sqrt{\frac{a^2+b^2+c^2+d^2}{4}}
+\end{align*}
+
+Taking the square root of both sides:
+\[
+    \sqrt[4]{abcd} \leq \sqrt{\frac{a^2+b^2+c^2+d^2}{4}}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Technique:} The inequality $(x-y)^2 \geq 0$ is a fundamental tool for proving that the quadratic mean (RMS) dominates the geometric mean.
+\item \textbf{Strategy:} Build up to higher-order inequalities by pairing terms and applying proven results recursively; here we go from 2 terms to 4 terms.
+\item \textbf{Key Insight:} The relationship $\sqrt{xy} \leq \sqrt{\frac{x^2+y^2}{2}}$ (GM $\leq$ QM) serves as a bridge to extend AM-GM style inequalities to power means.
+\item \textbf{Common Pattern:} When dealing with fourth roots of products, rewrite as square roots of square roots, then apply two-variable inequalities twice.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 10: Calculus and Induction for Harmonic Inequality]
+\begin{enumerate}
+    \item[(i)] Use calculus to show that $x > \ln(1+x)$ for all $x > 0$.
+    \item[(ii)] Use the inequality in part (i) and the principle of mathematical induction to prove that
+    \[ \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n} > \ln(1+n) \]
+    for all positive integers, $n$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (i):}
+
+Let $f(x) = x - \ln(1+x)$. We want to show that $f(x) > 0$ for $x > 0$.
+
+First, find the derivative with respect to $x$:
+\begin{align*}
+    f'(x) &= \frac{d}{dx}\left( x - \ln(1+x) \right) \\
+    &= 1 - \frac{1}{1+x} \\
+    &= \frac{1+x-1}{1+x} \\
+    &= \frac{x}{1+x}
+\end{align*}
+
+For all $x > 0$, both the numerator ($x$) and the denominator ($1+x$) are positive. Therefore:
+\[ f'(x) > 0 \quad \text{for all } x > 0 \]
+
+Since the derivative is positive, $f(x)$ is a strictly increasing function for $x > 0$.
+
+Checking the boundary at $x=0$:
+\[ f(0) = 0 - \ln(1+0) = 0 - 0 = 0 \]
+
+Since $f(0) = 0$ and $f(x)$ is strictly increasing for $x > 0$, it follows that $f(x) > 0$ for all $x > 0$.
+
+Therefore, $x > \ln(1+x)$ for all $x > 0$.
+
+\textbf{Part (ii):}
+
+Let $P(n)$ be the proposition that $\sum_{r=1}^{n} \frac{1}{r} > \ln(1+n)$.
+
+\textbf{Step 1: Base Case ($n=1$)}
+\begin{align*}
+    \text{LHS} &= \frac{1}{1} = 1 \\
+    \text{RHS} &= \ln(1+1) = \ln(2) \approx 0.693
+\end{align*}
+
+Since $1 > \ln(2)$, $P(1)$ is true.
+
+\textbf{Step 2: Inductive Hypothesis}
+
+Assume $P(k)$ is true for some integer $k \ge 1$. That is:
+\[ \frac{1}{1} + \frac{1}{2} + \dots + \frac{1}{k} > \ln(1+k) \tag{*}
+\]
+
+\textbf{Step 3: Inductive Step}
+
+We want to prove $P(k+1)$ is true. That is:
+\[ \left(\frac{1}{1} + \dots + \frac{1}{k}\right) + \frac{1}{k+1} > \ln(k+2) \]
+
+Using the inductive hypothesis (*), we have:
+\[ \text{LHS} > \ln(1+k) + \frac{1}{k+1} \]
+
+Now, we use the inequality proved in Part (i). Let $x = \frac{1}{k+1}$. Since $k \ge 1$, we have $x > 0$, so the inequality holds:
+\begin{align*}
+    x &> \ln(1+x) \\
+    \frac{1}{k+1} &> \ln\left(1 + \frac{1}{k+1}\right) \\
+    \frac{1}{k+1} &> \ln\left(\frac{k+1+1}{k+1}\right) \\
+    \frac{1}{k+1} &> \ln\left(\frac{k+2}{k+1}\right) \\
+    \frac{1}{k+1} &> \ln(k+2) - \ln(k+1)
+\end{align*}
+
+Substitute this back into our expression for the LHS:
+\begin{align*}
+    \text{LHS} &> \ln(1+k) + \frac{1}{k+1} \\
+    &> \ln(k+1) + \left[ \ln(k+2) - \ln(k+1) \right] \\
+    &> \ln(k+2)
+\end{align*}
+
+Thus, $P(k+1)$ is true whenever $P(k)$ is true.
+
+\textbf{Conclusion}
+
+By the principle of mathematical induction, since the statement is true for $n=1$, and assuming it is true for $n=k$ implies it is true for $n=k+1$, the inequality holds for all positive integers $n$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Technique:} Use calculus to establish a continuous inequality, then leverage it as a lemma in an inductive proof for a discrete sum.
+\item \textbf{Strategy:} The key connection is recognizing that $\frac{1}{k+1} > \ln(k+2) - \ln(k+1)$ allows us to bridge from $\ln(k+1)$ to $\ln(k+2)$ in the inductive step.
+\item \textbf{Key Insight:} The logarithm property $\ln(a) - \ln(b) = \ln(a/b)$ is crucial for converting the Part (i) inequality into a form usable in the induction.
+\item \textbf{Common Pattern:} When proving inequalities involving harmonic sums and logarithms, calculus-based lemmas about $\ln(1+x)$ frequently serve as bridges between consecutive cases.
+\item \textbf{Pitfall:} Don't forget to verify that the substitution $x = \frac{1}{k+1}$ satisfies the domain condition $x > 0$ required for Part (i) to apply.
+\end{itemize}
+\end{takeaways}

@@ -1,0 +1,416 @@
+% ==============================================================================
+% PART 2: ADVANCED PROBLEMS (34-45)
+% Hard Problems - HSC Extension 2 Level
+% ==============================================================================
+
+\begin{problem}[Problem 34: Bernoulli's Inequality - Weighted AM-GM]
+Let $n$ be a positive integer and let $x$ be a positive real number.
+\begin{enumerate}
+    \item[(i)] Show that $x^n - 1 - n(x-1) = (x-1)(1+x+x^2+\dots+x^{n-1}-n)$.
+    \item[(ii)] Hence show that $x^n \ge 1 + n(x-1)$.
+    \item[(iii)] Deduce that for positive real numbers $a$ and $b$,
+    \[ a^n b^{1-n} \ge na + (1-n)b. \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙sɹǝʍod ɟo ǝɔuǝɹǝɟɟᴉp ɹoɟ uoᴉʇɐzᴉɹoʇɔɐɟ pɹɐpuɐʇs ǝɥʇ ǝsn
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Use standard factorization: $x^n - 1 = (x-1)(1 + x + \dots + x^{n-1})$. Then
+\begin{align*}
+x^n - 1 - n(x-1) &= (x-1)(1 + x + \dots + x^{n-1}) - n(x-1)\\
+&= (x-1)(1 + x + \dots + x^{n-1} - n)
+\end{align*}
+
+\textbf{Part (ii):} Analyze sign of $(x-1)(1+x+\dots+x^{n-1}-n)$:
+\begin{itemize}
+\item If $x=1$: expression equals 0
+\item If $x>1$: both factors positive $\implies$ product $> 0$
+\item If $0<x<1$: both factors negative $\implies$ product $> 0$
+\end{itemize}
+Thus $x^n - 1 - n(x-1) \ge 0 \implies x^n \ge 1 + n(x-1)$.
+
+\textbf{Part (iii):} Substitute $x = \frac{a}{b}$ into (ii):
+\begin{align*}
+\left(\frac{a}{b}\right)^n &\ge 1 + n\left(\frac{a}{b} - 1\right)\\
+\frac{a^n}{b^n} &\ge 1 + \frac{na - nb}{b}
+\end{align*}
+Multiply by $b$: $\frac{a^n}{b^{n-1}} \ge na + b(1-n)$, giving $a^n b^{1-n} \ge na + (1-n)b$.
+\end{solution}
+
+\begin{takeaways}
+\item Bernoulli's inequality extends to weighted AM-GM forms
+\item Sign analysis crucial when $x$ varies around 1
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 35: Reciprocal Polynomial with AM-GM]
+Let $a, b, c$ be real numbers. Suppose that $P(x) = x^4 + ax^3 + bx^2 + cx + 1$ has roots $\alpha, \frac{1}{\alpha}, \beta, \frac{1}{\beta}$, where $\alpha > 0$ and $\beta > 0$.
+\begin{enumerate}
+    \item[(i)] Prove that $a = c$.
+    \item[(ii)] Using the inequality, show that $b \ge 6$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙lɐᴉɯouʎlod lɐɔoɹdᴉɔǝɹ ɐ sᴉ )x(Ԁ
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Consider $Q(x) = x^4 P(1/x) = x^4 + cx^3 + bx^2 + ax + 1$. The roots of $P(1/x)$ are reciprocals of roots of $P(x)$, which are $\frac{1}{\alpha}, \alpha, \frac{1}{\beta}, \beta$ - the same set. Since $P$ and $Q$ are monic with same roots, $P \equiv Q$. Comparing coefficients: $a = c$.
+
+\textbf{Part (ii):} By Vieta's formulas, $b$ equals sum of products of roots taken two at a time:
+\begin{align*}
+b &= \alpha \cdot \frac{1}{\alpha} + \alpha\beta + \frac{\alpha}{\beta} + \frac{\beta}{\alpha} + \frac{1}{\alpha\beta} + \beta \cdot \frac{1}{\beta}\\
+&= 2 + \left(\alpha\beta + \frac{1}{\alpha\beta}\right) + \left(\frac{\alpha}{\beta} + \frac{\beta}{\alpha}\right)
+\end{align*}
+Apply AM-GM: $\alpha\beta + \frac{1}{\alpha\beta} \ge 2$ and $\frac{\alpha}{\beta} + \frac{\beta}{\alpha} \ge 2$. Thus $b \ge 2 + 2 + 2 = 6$.
+\end{solution}
+
+\begin{takeaways}
+\item Reciprocal polynomials satisfy $P(x) = x^n P(1/x)$
+\item AM-GM applies to sum of reciprocals: $x + \frac{1}{x} \ge 2$
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 36: Nested AM-GM Application]
+Let $x, y, z, w$ be positive real numbers.
+\begin{enumerate}
+    \item[(i)] Given that $x>0$ and $y>0$, show that $x+y \ge 2\sqrt{xy}$.
+    \item[(ii)] Hence show that for $x>0$, $y>0$, $z>0$ and $w>0$,
+    \[ x+y+z+w \ge 4\sqrt[4]{xyzw}. \]
+    \item[(iii)] Consider $x, y, z$ and $w = \frac{x+y+z}{3}$. Apply the result in (ii) to show that
+    \[ \frac{x+y+z}{3} \ge \sqrt[3]{xyz}. \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙ʎlʇɔǝɹᴉp Ɯ-WV ʎlddɐ ʇou op ˙sɹᴉɐd oʇ ʎlddɐ ʇsɹᴉℲ
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Standard AM-GM: $(\sqrt{x} - \sqrt{y})^2 \ge 0 \implies x - 2\sqrt{xy} + y \ge 0 \implies x+y \ge 2\sqrt{xy}$.
+
+\textbf{Part (ii):} Apply (i) twice:
+\begin{align*}
+x+y &\ge 2\sqrt{xy}, \quad z+w \ge 2\sqrt{zw}\\
+(x+y) + (z+w) &\ge 2\sqrt{xy} + 2\sqrt{zw}\\
+x+y+z+w &\ge 2(\sqrt{xy} + \sqrt{zw}) \ge 2 \cdot 2\sqrt{\sqrt{xy} \cdot \sqrt{zw}} = 4\sqrt[4]{xyzw}
+\end{align*}
+
+\textbf{Part (iii):} Let $w = \frac{x+y+z}{3}$. Then:
+\begin{align*}
+x+y+z+w &\ge 4\sqrt[4]{xyzw}\\
+\frac{4}{3}(x+y+z) &\ge 4\sqrt[4]{xyz \cdot \frac{x+y+z}{3}}\\
+\frac{x+y+z}{3} &\ge \sqrt[4]{xyz \cdot \frac{x+y+z}{3}}
+\end{align*}
+Raise to 4th power: $\left(\frac{x+y+z}{3}\right)^4 \ge xyz \cdot \frac{x+y+z}{3}$. Divide by $\frac{x+y+z}{3}$: $\left(\frac{x+y+z}{3}\right)^3 \ge xyz$.
+\end{solution}
+
+\begin{takeaways}
+\item AM-GM for $n=3$ derived from $n=2$ and $n=4$ cases
+\item Nested application: pair terms, then apply again
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 37: Triangle Inequality - Quadratic Forms]
+Let $p, q, r$ be the lengths of the three sides of a triangle.
+\begin{enumerate}
+    \item[(a)] Show that: $p^2 + q^2 + r^2 \ge pq + pr + qr$
+    \item[(b)] Show that: $3(pq + pr + qr) \le (p + q + r)^2 < 4(pq + pr + qr)$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙sǝɔuǝɹǝɟɟᴉp ɟo sǝɹɐnbs ɟo ɯns ɹǝpᴉsuoↃ
+\end{hint}
+
+\begin{solution}
+\textbf{Part (a):} Consider $(p-q)^2 + (q-r)^2 + (p-r)^2 \ge 0$:
+\begin{align*}
+2p^2 + 2q^2 + 2r^2 - 2pq - 2qr - 2pr &\ge 0\\
+p^2 + q^2 + r^2 &\ge pq + pr + qr
+\end{align*}
+
+\textbf{Part (b):} Expand $(p+q+r)^2 = p^2 + q^2 + r^2 + 2(pq+pr+qr)$. Using (a):
+\begin{align*}
+(p+q+r)^2 &\ge (pq+pr+qr) + 2(pq+pr+qr) = 3(pq+pr+qr)
+\end{align*}
+For the upper bound, use triangle inequalities $p < q+r$, $q < p+r$, $r < p+q$:
+\begin{align*}
+p^2 < pq + pr, \quad q^2 < pq + qr, \quad r^2 < pr + qr\\
+p^2 + q^2 + r^2 &< 2(pq + pr + qr)
+\end{align*}
+Add $2(pq+pr+qr)$ to both sides: $(p+q+r)^2 < 4(pq+pr+qr)$.
+\end{solution}
+
+\begin{takeaways}
+\item Sum of squares of differences always non-negative
+\item Triangle inequality crucial for strict upper bound
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 38: Complex Triangle Inequality]
+Prove that for any two complex numbers $z_1, z_2 \in \mathbb{C}$:
+\[ |z_1 + z_2| \le |z_1| + |z_2| \]
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙)ʍ(ǝɹ ≤ |ʍ| ʇɐɥʇ ʎʇɹǝdoɹd ǝɥʇ ǝsn
+\end{hint}
+
+\begin{solution}
+Square the modulus: $|z_1 + z_2|^2 = (z_1 + z_2)(\overline{z_1 + z_2})$:
+\begin{align*}
+|z_1 + z_2|^2 &= z_1\bar{z}_1 + z_1\bar{z}_2 + z_2\bar{z}_1 + z_2\bar{z}_2\\
+&= |z_1|^2 + (z_1\bar{z}_2 + \overline{z_1\bar{z}_2}) + |z_2|^2\\
+&= |z_1|^2 + 2\text{Re}(z_1\bar{z}_2) + |z_2|^2
+\end{align*}
+Use $\text{Re}(w) \le |w|$:
+\begin{align*}
+|z_1 + z_2|^2 &\le |z_1|^2 + 2|z_1\bar{z}_2| + |z_2|^2\\
+&= |z_1|^2 + 2|z_1||z_2| + |z_2|^2 = (|z_1| + |z_2|)^2
+\end{align*}
+Taking square roots: $|z_1 + z_2| \le |z_1| + |z_2|$.
+\end{solution}
+
+\begin{takeaways}
+\item Key identity: $z\bar{z} = |z|^2$ and $w + \bar{w} = 2\text{Re}(w)$
+\item $\text{Re}(w) \le |w|$ fundamental for complex inequalities
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 39: Complex Modulus with Constraint]
+Given $|z| < \frac{1}{2}$, show that:
+\[ |(1+i)z^3 + iz| < \frac{3}{4} \]
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙ʎʇᴉlɐnbǝuᴉ ǝlƃuɐᴉɹʇ xǝldɯoɔ ǝɥʇ ʎlddɐ
+\end{hint}
+
+\begin{solution}
+Apply triangle inequality:
+\begin{align*}
+|(1+i)z^3 + iz| &\le |(1+i)z^3| + |iz|\\
+&= |1+i||z|^3 + |i||z|\\
+&= \sqrt{2}|z|^3 + |z|
+\end{align*}
+Since $|z| < \frac{1}{2}$ and $f(x) = \sqrt{2}x^3 + x$ is increasing for $x > 0$:
+\begin{align*}
+|(1+i)z^3 + iz| &< \sqrt{2}\left(\frac{1}{2}\right)^3 + \frac{1}{2}\\
+&= \frac{\sqrt{2}}{8} + \frac{4}{8} = \frac{4 + \sqrt{2}}{8}
+\end{align*}
+Since $\sqrt{2} < 2$: $\frac{4 + \sqrt{2}}{8} < \frac{6}{8} = \frac{3}{4}$.
+\end{solution}
+
+\begin{takeaways}
+\item Triangle inequality: $|w_1 + w_2| \le |w_1| + |w_2|$
+\item Evaluate at boundary of constraint for tight bounds
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 40: Harmonic-Arithmetic Mean Inequality]
+Let $a, b, c$ be positive real numbers such that $\frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1$.
+Using the fact that $x+y \ge 2\sqrt{xy}$ for positive $x, y$, prove that:
+\[ a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \le abc \]
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙cbɐ = cɐ + qɐ + cq ʇɐɥʇ ʍoɥs oʇ uoᴉʇᴉpuoɔ uǝʌᴉƃ ǝɥʇ ǝsn
+\end{hint}
+
+\begin{solution}
+Multiply given condition by $abc$: $bc + ac + ab = abc$.
+
+Apply AM-GM to pairs:
+\begin{align*}
+ab + ac &\ge 2\sqrt{a^2bc} = 2a\sqrt{bc}\\
+ab + bc &\ge 2\sqrt{ab^2c} = 2b\sqrt{ac}\\
+ac + bc &\ge 2\sqrt{abc^2} = 2c\sqrt{ab}
+\end{align*}
+Sum the three inequalities:
+\begin{align*}
+2(ab + bc + ac) &\ge 2(a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab})\\
+ab + bc + ac &\ge a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab}
+\end{align*}
+Substitute $ab + bc + ac = abc$: $abc \ge a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab}$.
+\end{solution}
+
+\begin{takeaways}
+\item Convert harmonic condition to algebraic form first
+\item Apply AM-GM systematically to all pairs
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 41: Logarithmic Inequality with Factorial]
+\begin{enumerate}
+\item[(i)] Prove that $x > \ln(x)$ for all positive real numbers $x$.
+\item[(ii)] Hence, show that for all positive integers $n$:
+\[ e^{n^2+n} > (n!)^2 \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙)x(ul - x = )x(ɟ ɹǝpᴉsuoↃ
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Let $f(x) = x - \ln(x)$. Then $f'(x) = 1 - \frac{1}{x}$.
+Setting $f'(x) = 0$ gives $x = 1$. Since $f''(x) = \frac{1}{x^2} > 0$, point $(1,1)$ is a minimum.
+Thus $f(x) \ge f(1) = 1 - \ln(1) = 1 > 0$, so $x > \ln(x)$.
+
+\textbf{Part (ii):} Apply (i) to $k = 1, 2, \ldots, n$ and sum:
+\begin{align*}
+\sum_{k=1}^{n} k &> \sum_{k=1}^{n} \ln(k)\\
+\frac{n(n+1)}{2} &> \ln(n!)\\
+\frac{n^2 + n}{2} &> \ln(n!)\\
+n^2 + n &> 2\ln(n!) = \ln((n!)^2)
+\end{align*}
+Exponentiating: $e^{n^2+n} > (n!)^2$.
+\end{solution}
+
+\begin{takeaways}
+\item Calculus proves $x > \ln(x)$ via minimization
+\item Sum inequalities to relate arithmetic to logarithmic sums
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 42: Cauchy-Schwarz with Homogenization]
+Prove that for all positive real numbers $a, b, c$:
+\[ \frac{a^2}{3a+2b} + \frac{b^2}{3b+2c} + \frac{c^2}{3c+2a} \ge \frac{a+b+c}{5} \]
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙zɹɐʍɥɔs-ʎɥɔnɐↃ ʎlddɐ
+\end{hint}
+
+\begin{solution}
+Apply Cauchy-Schwarz: $\left(\sum \frac{u_i^2}{v_i}\right)\left(\sum v_i\right) \ge \left(\sum u_i\right)^2$.
+
+Let $u_i = (a, b, c)$ and $v_i = (3a+2b, 3b+2c, 3c+2a)$:
+\begin{align*}
+\left(\frac{a^2}{3a+2b} + \frac{b^2}{3b+2c} + \frac{c^2}{3c+2a}\right) &\cdot [(3a+2b) + (3b+2c) + (3c+2a)]\\
+&\ge (a+b+c)^2
+\end{align*}
+Simplify denominator sum:
+\begin{align*}
+(3a+2b) + (3b+2c) + (3c+2a) &= 3(a+b+c) + 2(a+b+c) = 5(a+b+c)
+\end{align*}
+Therefore:
+\[ \text{LHS} \cdot 5(a+b+c) \ge (a+b+c)^2 \implies \text{LHS} \ge \frac{a+b+c}{5} \]
+\end{solution}
+
+\begin{takeaways}
+\item Cauchy-Schwarz in Titu's Lemma form: $\sum \frac{x_i^2}{y_i} \ge \frac{(\sum x_i)^2}{\sum y_i}$
+\item Check that denominators sum to simple multiple of numerator sum
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 43: Bernoulli's Inequality - Power Form]
+Prove the following inequality for all integers $n \ge 1$:
+\[ \left(1 + \frac{1}{\sqrt{n}}\right)^n \ge 1 + \sqrt{n} \]
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙ʎlʇɔǝɹᴉp ᴉllonuɹǝq ʎlddɐ
+\end{hint}
+
+\begin{solution}
+Let $x = \frac{1}{\sqrt{n}}$. Since $n \ge 1$, we have $x > 0 > -1$.
+
+Apply Bernoulli's inequality $(1+x)^n \ge 1+nx$:
+\begin{align*}
+\left(1 + \frac{1}{\sqrt{n}}\right)^n &\ge 1 + n \cdot \frac{1}{\sqrt{n}}\\
+&= 1 + \frac{n}{\sqrt{n}}\\
+&= 1 + \sqrt{n}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item Bernoulli's inequality: $(1+x)^n \ge 1+nx$ for $x > -1$, $n \ge 1$
+\item Choose substitution to match target form
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 44: Strict Bernoulli via Induction]
+\begin{enumerate}
+    \item[(i)] Prove that $(1+x)^n > 1+nx$ for $n \ge 1$ and $x > -1$.
+    \item[(ii)] Hence, deduce that $\left(1 - \frac{1}{2n}\right)^n > \frac{1}{2}$ for $n > 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙uoᴉʇɔnpuᴉ ɥʇɐɯ ʎq ǝʌoɹd
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} By induction. Base case $n=1$: equality holds.
+
+Inductive step: Assume $(1+x)^k \ge 1+kx$. Then:
+\begin{align*}
+(1+x)^{k+1} &= (1+x)(1+x)^k \ge (1+x)(1+kx)\\
+&= 1 + kx + x + kx^2 = 1 + (k+1)x + kx^2
+\end{align*}
+Since $k \ge 1$ and $x^2 \ge 0$, we have $kx^2 \ge 0$, so $(1+x)^{k+1} \ge 1+(k+1)x$.
+For $n > 1$ and $x \neq 0$, strict inequality holds since $kx^2 > 0$.
+
+\textbf{Part (ii):} Let $x = -\frac{1}{2n}$. Check $x > -1$: $-\frac{1}{2n} > -1$ holds for $n > \frac{1}{2}$.
+Apply (i):
+\begin{align*}
+\left(1 - \frac{1}{2n}\right)^n &> 1 + n\left(-\frac{1}{2n}\right) = 1 - \frac{1}{2} = \frac{1}{2}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item Induction proves Bernoulli; strict inequality when $kx^2 > 0$
+\item Negative substitutions require careful domain checking
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 45: Summation Inequality via Induction]
+Given that for $k > 0$, $2k + 3 > 2\sqrt{(k+1)(k+2)}$, prove that:
+\[ \sum_{r=1}^{n} \frac{1}{\sqrt{r}} > 2\left(\sqrt{n+1} - 1\right) \]
+for all positive integers $n$.
+\end{problem}
+
+\begin{hint}
+$\uparrow$˙uoᴉʇɔnpuᴉ ʎq ǝʌoɹԀ ˙uǝʌᴉƃ ʎʇᴉlɐnbǝuᴉ ǝɥʇ ǝsn
+\end{hint}
+
+\begin{solution}
+\textbf{Base case} ($n=1$): LHS $= 1$, RHS $= 2(\sqrt{2}-1) \approx 0.828$. True.
+
+\textbf{Inductive step:} Assume $\sum_{r=1}^{k} \frac{1}{\sqrt{r}} > 2(\sqrt{k+1} - 1)$.
+Then:
+\begin{align*}
+\sum_{r=1}^{k+1} \frac{1}{\sqrt{r}} &= \sum_{r=1}^{k} \frac{1}{\sqrt{r}} + \frac{1}{\sqrt{k+1}}\\
+&> 2(\sqrt{k+1} - 1) + \frac{1}{\sqrt{k+1}}\\
+&= 2\sqrt{k+1} + \frac{1}{\sqrt{k+1}} - 2\\
+&= \frac{2(k+1) + 1}{\sqrt{k+1}} - 2 = \frac{2k+3}{\sqrt{k+1}} - 2
+\end{align*}
+Given $2k+3 > 2\sqrt{(k+1)(k+2)}$:
+\begin{align*}
+\frac{2k+3}{\sqrt{k+1}} - 2 &> \frac{2\sqrt{(k+1)(k+2)}}{\sqrt{k+1}} - 2\\
+&= 2\sqrt{k+2} - 2 = 2(\sqrt{k+2} - 1)
+\end{align*}
+Thus the inequality holds for $n = k+1$.
+\end{solution}
+
+\begin{takeaways}
+\item Use given auxiliary inequality in inductive step
+\item Algebraic manipulation converts sum to target form
+\end{takeaways}

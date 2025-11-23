@@ -1,0 +1,378 @@
+% ==========================================
+% PART 2: MEDIUM PROBLEMS (Problems 24-33)
+% ==========================================
+
+\begin{problem}[Problem 24: AM-GM with Harmonic Constraint]
+Let $a, b, c$ be positive real numbers such that $\frac{1}{a}+\frac{1}{b}+\frac{1}{c}=1$. 
+It is known that for all positive real numbers $x, y$:
+\[ x+y \geq 2\sqrt{xy} \]
+Prove that:
+\[ a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \leq abc \]
+\end{problem}
+
+\begin{hint}
+˙ɔqɐ ʎq ǝpᴉs ɥʇoq ǝpᴉʌᴉp 'dɯ-ɯɐ ʎlddɐ uǝɥʇ
+\end{hint}
+
+\begin{solution}
+Divide both sides by $abc$ (positive):
+\begin{align*}
+\frac{a\sqrt{bc}}{abc} + \frac{b\sqrt{ac}}{abc} + \frac{c\sqrt{ab}}{abc} &\leq 1 \\
+\frac{1}{\sqrt{bc}} + \frac{1}{\sqrt{ac}} + \frac{1}{\sqrt{ab}} &\leq 1
+\end{align*}
+
+Apply AM-GM to pairs: $\frac{1}{\sqrt{xy}} \leq \frac{1}{2}\left(\frac{1}{x} + \frac{1}{y}\right)$
+
+\begin{align*}
+\frac{1}{\sqrt{bc}} &\leq \frac{1}{2}\left(\frac{1}{b} + \frac{1}{c}\right) \\
+\frac{1}{\sqrt{ac}} &\leq \frac{1}{2}\left(\frac{1}{a} + \frac{1}{c}\right) \\
+\frac{1}{\sqrt{ab}} &\leq \frac{1}{2}\left(\frac{1}{a} + \frac{1}{b}\right)
+\end{align*}
+
+Sum all three:
+\begin{align*}
+\frac{1}{\sqrt{bc}} + \frac{1}{\sqrt{ac}} + \frac{1}{\sqrt{ab}} &\leq \frac{1}{2} \cdot 2\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) \\
+&= \frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item Divide by positive terms to simplify before applying AM-GM
+\item Use AM-GM on reciprocals: $\frac{1}{\sqrt{xy}} \leq \frac{1}{2}(\frac{1}{x} + \frac{1}{y})$
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 25: Binomial Inequality via Induction]
+Use mathematical induction to prove that ${}^{2n}C_n < 2^{2n-2}$ for all integers $n \geq 5$.
+\end{problem}
+
+\begin{hint}
+˙ʞɔ uᴉ uo ǝsɐɔ ʞ⁺¹ ssǝɹdxǝ 'ɐlnɯɹoɟ lɐᴉɯouᴉq ǝsn
+\end{hint}
+
+\begin{solution}
+\textbf{Base Case ($n=5$):}
+\begin{align*}
+{}^{10}C_5 &= \frac{10!}{5!5!} = 252 \\
+2^{2(5)-2} &= 2^8 = 256
+\end{align*}
+Since $252 < 256$, base case holds.
+
+\textbf{Inductive Hypothesis:} Assume ${}^{2k}C_k < 2^{2k-2}$ for some $k \geq 5$.
+
+\textbf{Inductive Step:} Show ${}^{2(k+1)}C_{k+1} < 2^{2(k+1)-2}$, i.e., ${}^{2k+2}C_{k+1} < 2^{2k}$.
+
+Express in terms of ${}^{2k}C_k$:
+\begin{align*}
+{}^{2k+2}C_{k+1} &= \frac{(2k+2)!}{(k+1)!(k+1)!} = \frac{2(2k+1)}{k+1} \cdot {}^{2k}C_k
+\end{align*}
+
+Since $\frac{2(2k+1)}{k+1} = 4 - \frac{2}{k+1} < 4$ for $k \geq 5$:
+\begin{align*}
+{}^{2k+2}C_{k+1} &< 4 \cdot {}^{2k}C_k < 4 \cdot 2^{2k-2} = 2^2 \cdot 2^{2k-2} = 2^{2k}
+\end{align*}
+
+By induction, the inequality holds for all $n \geq 5$.
+\end{solution}
+
+\begin{takeaways}
+\item Express ${}^{2k+2}C_{k+1}$ as a multiple of ${}^{2k}C_k$ using binomial identities
+\item Show the multiplier $\frac{2(2k+1)}{k+1} < 4$ when $k \geq 5$
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 26: Surface Area to Volume Optimization]
+It is given that for positive numbers $x_1, x_2, x_3, \dots, x_n$ with arithmetic mean $A$:
+\[
+\frac{x_1 \times x_2 \times x_3 \times \dots \times x_n}{A^n} \le 1
+\]
+Suppose a rectangular prism has dimensions $a, b, c$ and surface area $S$.
+\begin{enumerate}
+    \item[(i)] Show that $abc \le \left(\frac{S}{6}\right)^{\frac{3}{2}}$.
+    \item[(ii)] Using part (i), show that when the rectangular prism with surface area $S$ is a cube, it has maximum volume.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+˙qɐ 'ɔɐ 'ɔq sɐǝɹɐ ǝɔɐɟ ǝɥʇ ǝɹɐ sɹǝqɯnu ǝɥʇ ʇǝl
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Surface area $S = 2(ab + bc + ca)$. Let $x_1 = ab$, $x_2 = bc$, $x_3 = ca$.
+
+Arithmetic mean:
+\[ A = \frac{ab + bc + ca}{3} = \frac{S/2}{3} = \frac{S}{6} \]
+
+Apply given inequality with $n=3$:
+\begin{align*}
+\frac{(ab)(bc)(ca)}{A^3} &\leq 1 \\
+\frac{(abc)^2}{A^3} &\leq 1 \\
+(abc)^2 &\leq A^3 = \left(\frac{S}{6}\right)^3
+\end{align*}
+
+Taking square root: $abc \leq \left(\frac{S}{6}\right)^{\frac{3}{2}}$.
+
+\textbf{Part (ii):} Volume $V = abc \leq \left(\frac{S}{6}\right)^{\frac{3}{2}}$. 
+
+Maximum occurs when equality holds, which requires $x_1 = x_2 = x_3$:
+\[ ab = bc = ca \implies a = b = c \]
+
+A rectangular prism with all equal dimensions is a cube.
+\end{solution}
+
+\begin{takeaways}
+\item Apply AM-GM to face areas, not edge lengths
+\item Equality in AM-GM occurs when all terms are equal ($ab = bc = ca \Rightarrow a = b = c$)
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 27: Cubic Sum Inequality]
+Let $a, b > 0$. Prove that:
+\[
+a^3 + b^3 \geq \frac{(a + b)^3}{4}
+\]
+\end{problem}
+
+\begin{hint}
+˙ʇɔnpoɹd ɐ oʇuᴉ ɹoʇɔɐɟ uǝɥʇ 'ʇno lǝɔuɐɔ 'puɐdxǝ
+\end{hint}
+
+\begin{solution}
+Multiply both sides by 4:
+\[ 4(a^3 + b^3) \geq (a + b)^3 \]
+
+Expand RHS:
+\[ 4a^3 + 4b^3 \geq a^3 + 3a^2b + 3ab^2 + b^3 \]
+
+Rearrange:
+\[ 3a^3 - 3a^2b - 3ab^2 + 3b^3 \geq 0 \]
+
+Factor:
+\begin{align*}
+3(a^3 - a^2b - ab^2 + b^3) &\geq 0 \\
+3[a^2(a - b) - b^2(a - b)] &\geq 0 \\
+3(a - b)(a^2 - b^2) &\geq 0 \\
+3(a - b)(a - b)(a + b) &\geq 0 \\
+3(a - b)^2(a + b) &\geq 0
+\end{align*}
+
+Since $(a - b)^2 \geq 0$ and $(a + b) > 0$ for $a, b > 0$, the inequality holds.
+\end{solution}
+
+\begin{takeaways}
+\item Clear denominators first, then expand and factor
+\item Factor as $(a-b)^2(a+b) \geq 0$ where perfect square ensures non-negativity
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 28: Product of Sums via AM-GM]
+Let $a, b, c > 0$. 
+\begin{enumerate}
+    \item[(a)] Prove that $a + b \ge 2\sqrt{ab}$.
+    \item[(b)] Hence, or otherwise, show that $(a + b)(b + c)(a + c) \ge 8abc$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+˙sɯɹǝʇ llɐ ǝɹɐ ǝʌᴊᴉsod ǝɔuᴉs sǝᴊʇᴉlɐnbǝuᴉ ǝǝɹɥʇ ʎldᴉʇlnɯ
+\end{hint}
+
+\begin{solution}
+\textbf{Part (a):} Consider $(\sqrt{a} - \sqrt{b})^2 \geq 0$:
+\begin{align*}
+a - 2\sqrt{ab} + b &\geq 0 \\
+a + b &\geq 2\sqrt{ab}
+\end{align*}
+
+\textbf{Part (b):} Apply part (a) to each pair:
+\begin{align*}
+a + b &\geq 2\sqrt{ab} \\
+b + c &\geq 2\sqrt{bc} \\
+a + c &\geq 2\sqrt{ac}
+\end{align*}
+
+Multiply all three inequalities (all terms positive):
+\begin{align*}
+(a + b)(b + c)(a + c) &\geq 2\sqrt{ab} \cdot 2\sqrt{bc} \cdot 2\sqrt{ac} \\
+&= 8\sqrt{ab \cdot bc \cdot ac} \\
+&= 8\sqrt{a^2b^2c^2} = 8abc
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item AM-GM for two variables: $(x-y)^2 \geq 0 \Rightarrow x + y \geq 2\sqrt{xy}$
+\item Can multiply inequalities when all terms are positive
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 29: Nested Inequalities]
+Let $a, b, c > 0$.
+\begin{enumerate}
+    \item[(i)] Show that $\frac{a}{b} + \frac{b}{a} \ge 2$.
+    \item[(ii)] Show that $(a+b)\left(\frac{1}{a} + \frac{1}{b}\right) \ge 4$.
+    \item[(iii)] Hence, or otherwise, show that $(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) \ge 9$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+˙ʇɹɐd ɥɔɐǝ oʇ dɯ-ɯɐ ʎlddɐ 'puɐdxǝ
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Apply AM-GM with $x = \frac{a}{b}$, $y = \frac{b}{a}$:
+\[ \frac{a}{b} + \frac{b}{a} \geq 2\sqrt{\frac{a}{b} \cdot \frac{b}{a}} = 2 \]
+
+\textbf{Part (ii):} Expand:
+\[ (a+b)\left(\frac{1}{a} + \frac{1}{b}\right) = 1 + \frac{b}{a} + \frac{a}{b} + 1 = 2 + \left(\frac{a}{b} + \frac{b}{a}\right) \]
+By part (i): $\geq 2 + 2 = 4$.
+
+\textbf{Part (iii):} Expand:
+\begin{align*}
+(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) &= 3 + \frac{a}{b} + \frac{b}{a} + \frac{b}{c} + \frac{c}{b} + \frac{a}{c} + \frac{c}{a}
+\end{align*}
+Apply part (i) to each pair:
+\[ \geq 3 + 2 + 2 + 2 = 9 \]
+\end{solution}
+
+\begin{takeaways}
+\item Expand products before applying AM-GM to identify reciprocal pairs
+\item Each pair $\frac{x}{y} + \frac{y}{x} \geq 2$ contributes 2 to the bound
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 30: Cauchy-Schwarz Bound]
+Let $x, y$ be real numbers such that $x^2 + y^2 \neq 0$. Prove that:
+\[
+\frac{(x+y)^2}{x^2 + y^2} \le 2
+\]
+\end{problem}
+
+\begin{hint}
+˙0 ≥ ²)ʎ-x( ɥʇᴉʍ ʇɹɐʇs
+\end{hint}
+
+\begin{solution}
+Start with $(x - y)^2 \geq 0$:
+\begin{align*}
+x^2 - 2xy + y^2 &\geq 0 \\
+x^2 + y^2 &\geq 2xy
+\end{align*}
+
+Add $x^2 + y^2$ to both sides:
+\[ 2(x^2 + y^2) \geq x^2 + 2xy + y^2 = (x + y)^2 \]
+
+Divide by $x^2 + y^2 > 0$:
+\[ 2 \geq \frac{(x + y)^2}{x^2 + y^2} \]
+\end{solution}
+
+\begin{takeaways}
+\item Use $(x-y)^2 \geq 0$ to establish $x^2 + y^2 \geq 2xy$
+\item Add equal term to both sides to create perfect square on RHS
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 31: Cauchy-Schwarz with Constraint]
+Let $x, y, z$ be real numbers such that $x^2 + y^2 + z^2 = 25$. Prove that:
+\[
+3x + 4y + 5z \le 25\sqrt{2}
+\]
+\end{problem}
+
+\begin{hint}
+˙)5'4'3( puɐ )z'ʎ'x( sǝɔuǝnbǝs oʇ zɹɐʍɥɔs-ʎɥɔnɐɔ ʎlddɐ
+\end{hint}
+
+\begin{solution}
+Apply Cauchy-Schwarz inequality to $(x, y, z)$ and $(3, 4, 5)$:
+\[ (x^2 + y^2 + z^2)(3^2 + 4^2 + 5^2) \geq (3x + 4y + 5z)^2 \]
+
+Substitute $x^2 + y^2 + z^2 = 25$:
+\begin{align*}
+(25)(9 + 16 + 25) &\geq (3x + 4y + 5z)^2 \\
+(25)(50) &\geq (3x + 4y + 5z)^2 \\
+1250 &\geq (3x + 4y + 5z)^2
+\end{align*}
+
+Take square root:
+\[ \sqrt{1250} = \sqrt{625 \times 2} = 25\sqrt{2} \geq 3x + 4y + 5z \]
+\end{solution}
+
+\begin{takeaways}
+\item Cauchy-Schwarz: $(a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2) \geq (a_1b_1 + a_2b_2 + a_3b_3)^2$
+\item Choose coefficient sequence to match linear form on RHS
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 32: Bernoulli's Inequality Application]
+Without using a calculator, apply Bernoulli's Inequality to prove:
+\[ (1.005)^{200} > 2 \]
+\end{problem}
+
+\begin{hint}
+˙500˙0 = x 'xʇ∀0˙¹ sɐ 500˙¹ ǝʇᴉɹʍ
+\end{hint}
+
+\begin{solution}
+Express $1.005 = 1 + 0.005$. Let $x = 0.005$ and $n = 200$.
+
+Check conditions: $x > -1$ and $n$ is a positive integer, so Bernoulli's Inequality applies:
+\[ (1 + x)^n \geq 1 + nx \]
+
+Since $n > 1$ and $x \neq 0$, the inequality is strict:
+\begin{align*}
+(1 + 0.005)^{200} &> 1 + 200(0.005) \\
+(1.005)^{200} &> 1 + 1 \\
+(1.005)^{200} &> 2
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item Bernoulli: $(1+x)^n \geq 1 + nx$ for $x > -1$ and $n \in \mathbb{Z}^+$
+\item Strict inequality when $n > 1$ and $x \neq 0$
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Problem 33: Exponential Inequality via Induction]
+\begin{enumerate}
+    \item[(i)] By considering $f'(x)$ where $f(x) = e^x - x$, show that $e^x > x$ for $x \ge 0$.
+    \item[(ii)] Hence, use Mathematical Induction to show that for $x \ge 0$, $e^x > \frac{x^n}{n!}$ for all positive integers $n \ge 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+˙)n(d ɯoɹɟ ʎlʇɔǝɹᴉp sǝɯoɔ )¹⁺n(d ɹoɟ ɟo ǝʌᴉʇɐʌᴉɹǝp ǝɥʇ
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Let $f(x) = e^x - x$. Then $f'(x) = e^x - 1 > 0$ for $x > 0$.
+
+Since $f(0) = 1 > 0$ and $f$ is increasing for $x \geq 0$, we have $f(x) \geq 1 > 0$, so $e^x > x$.
+
+\textbf{Part (ii):} 
+\textit{Base Case ($n=1$):} From part (i), $e^x > x = \frac{x^1}{1!}$. ✓
+
+\textit{Inductive Hypothesis:} Assume $e^x > \frac{x^k}{k!}$ for some $k \geq 1$.
+
+\textit{Inductive Step:} Let $g(x) = e^x - \frac{x^{k+1}}{(k+1)!}$. Then:
+\[ g'(x) = e^x - \frac{x^k}{k!} > 0 \]
+by the inductive hypothesis.
+
+Since $g(0) = 1 > 0$ and $g$ is increasing, $g(x) > 0$ for $x \geq 0$, so:
+\[ e^x > \frac{x^{k+1}}{(k+1)!} \]
+
+By induction, $e^x > \frac{x^n}{n!}$ for all $n \geq 1$ and $x \geq 0$.
+\end{solution}
+
+\begin{takeaways}
+\item Use derivative to show function is increasing, combined with initial value
+\item In induction step, derivative of $g(x)$ involves inductive hypothesis directly
+\end{takeaways}

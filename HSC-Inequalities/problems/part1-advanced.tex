@@ -1,0 +1,515 @@
+\begin{problem}[Problem 11: Exponential Bounds on Factorials]
+\begin{enumerate}[(i)]
+    \item Prove that $x > \ln x$, for $x > 0$.
+    \item Using part (i), or otherwise, prove that for all positive integers $n$,
+    $$e^{n^2+n} > (n!)^2.$$
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (i): Prove that $x > \ln x$, for $x > 0$}
+
+Let $f(x) = x - \ln x$. We need to show that $f(x) > 0$ for all $x > 0$.
+
+\textbf{Step 1: Find the critical points.}
+
+The first derivative is:
+$$f'(x) = \frac{d}{dx} (x - \ln x) = 1 - \frac{1}{x}$$
+
+Set $f'(x) = 0$ to find the critical point:
+$$1 - \frac{1}{x} = 0 \implies x = 1$$
+
+\textbf{Step 2: Determine the nature of the critical point.}
+
+The second derivative is:
+$$f''(x) = \frac{d}{dx} \left(1 - \frac{1}{x}\right) = \frac{1}{x^2}$$
+
+Since $x > 0$, we have $f''(1) = \frac{1}{1^2} = 1 > 0$.
+
+Thus, $f(x)$ has a local minimum at $x=1$.
+
+\textbf{Step 3: Evaluate the minimum value.}
+
+The minimum value of $f(x)$ is:
+$$f(1) = 1 - \ln(1) = 1 - 0 = 1$$
+
+\textbf{Step 4: Conclusion.}
+
+Since the minimum value of $f(x)$ is $1 > 0$, we have $f(x) > 0$ for all $x > 0$.
+
+Therefore, $x - \ln x > 0$, which proves $x > \ln x$ for $x > 0$.
+
+\medskip
+\textbf{Part (ii): Prove that $e^{n^2+n} > (n!)^2$ for all positive integers $n$}
+
+\textbf{Step 1: Apply the natural logarithm to the inequality.}
+
+Since $\ln$ is an increasing function, the inequality holds if and only if:
+$$\ln \left(e^{n^2+n}\right) > \ln \left((n!)^2\right)$$
+$$(n^2+n) \ln e > 2 \ln (n!)$$
+$$n^2+n > 2 \sum_{k=1}^{n} \ln k$$
+$$\frac{n^2+n}{2} > \sum_{k=1}^{n} \ln k$$
+
+\textbf{Step 2: Use the result from Part (i).}
+
+From part (i), we know that $x > \ln x$ for any $x > 0$.
+
+Since $k$ is a positive integer for $k=1, 2, \dots, n$, we can write:
+$$k > \ln k \quad \text{for } k=1, 2, \dots, n$$
+
+\textbf{Step 3: Sum the inequalities.}
+
+Summing all $n$ inequalities from $k=1$ to $n$:
+$$\sum_{k=1}^{n} k > \sum_{k=1}^{n} \ln k$$
+
+The left side is the sum of the first $n$ positive integers:
+$$\sum_{k=1}^{n} k = 1 + 2 + \dots + n = \frac{n(n+1)}{2} = \frac{n^2+n}{2}$$
+
+Thus, we have:
+$$\frac{n^2+n}{2} > \sum_{k=1}^{n} \ln k$$
+
+\textbf{Step 4: Conclusion.}
+
+This is the inequality derived in step 1:
+$$\frac{n^2+n}{2} > \sum_{k=1}^{n} \ln k$$
+
+Therefore:
+$$n^2+n > 2 \ln(n!) \implies e^{n^2+n} > (n!)^2$$
+
+Hence, $e^{n^2+n} > (n!)^2$ for all positive integers $n$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Calculus technique:} Use first and second derivatives to find and classify critical points, then evaluate the function at the critical point to determine global behavior.
+    \item \textbf{Summation strategy:} Apply a single inequality to multiple values, then sum all inequalities together to obtain a cumulative result.
+    \item \textbf{Logarithmic transformation:} Convert multiplicative inequalities to additive ones using logarithms, which simplifies the analysis.
+    \item \textbf{Building block approach:} Use the result from a simpler part to prove a more complex statement in subsequent parts.
+    \item \textbf{Common pitfall:} Don't forget to verify that the critical point is indeed a minimum (not a maximum or inflection point) by checking the second derivative or analyzing the sign of the first derivative around the critical point.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 12: Sphere Inequalities via Vector Methods]
+The point $P(x, y, z)$ lies on the sphere of radius $1$ centred at the origin $O$.
+\begin{enumerate}[(i)]
+    \item Using the position vector of $P$, $\vec{OP} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$, and the triangle inequality, or otherwise, show that $|x| + |y| + |z| \ge 1$.
+    
+    \item Given the vectors $\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$ and $\mathbf{b} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}$, show that
+    \[
+    |a_1b_1 + a_2b_2 + a_3b_3| \le \sqrt{a_1^2 + a_2^2 + a_3^2} \sqrt{b_1^2 + b_2^2 + b_3^2}.
+    \]
+    
+    \item Using part (ii), or otherwise, show that $|x| + |y| + |z| \le \sqrt{3}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (i): Show that $|x| + |y| + |z| \ge 1$}
+
+Since $P(x, y, z)$ lies on the sphere of radius 1 centred at the origin, the magnitude of the position vector $\vec{OP}$ is 1:
+\[
+|\vec{OP}| = |x\mathbf{i} + y\mathbf{j} + z\mathbf{k}| = 1
+\]
+
+Applying the Triangle Inequality for vectors $|\mathbf{u} + \mathbf{v}| \le |\mathbf{u}| + |\mathbf{v}|$ repeatedly:
+\begin{align*}
+    |x\mathbf{i} + y\mathbf{j} + z\mathbf{k}| &\le |x\mathbf{i}| + |y\mathbf{j}| + |z\mathbf{k}| \\
+    1 &\le |x||\mathbf{i}| + |y||\mathbf{j}| + |z||\mathbf{k}|
+\end{align*}
+
+Since the unit vectors have magnitude 1: $|\mathbf{i}| = |\mathbf{j}| = |\mathbf{k}| = 1$:
+\[
+1 \le |x| + |y| + |z|
+\]
+
+Therefore, $|x| + |y| + |z| \ge 1$.
+
+\medskip
+\textbf{Part (ii): Prove the Cauchy-Schwarz inequality}
+
+We use the definition of the scalar (dot) product:
+\[
+\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos \theta
+\]
+where $\theta$ is the angle between the vectors.
+
+Taking the absolute value of both sides:
+\begin{align*}
+    |\mathbf{a} \cdot \mathbf{b}| &= ||\mathbf{a}| |\mathbf{b}| \cos \theta| \\
+    |\mathbf{a} \cdot \mathbf{b}| &= |\mathbf{a}| |\mathbf{b}| |\cos \theta|
+\end{align*}
+
+Since $-1 \le \cos \theta \le 1$, we know that $|\cos \theta| \le 1$.
+
+Therefore:
+\[
+|\mathbf{a} \cdot \mathbf{b}| \le |\mathbf{a}| |\mathbf{b}|
+\]
+
+Substituting the component forms of the vectors:
+\[
+|a_1b_1 + a_2b_2 + a_3b_3| \le \sqrt{a_1^2 + a_2^2 + a_3^2} \sqrt{b_1^2 + b_2^2 + b_3^2}
+\]
+
+\medskip
+\textbf{Part (iii): Show that $|x| + |y| + |z| \le \sqrt{3}$}
+
+We define two specific vectors to apply the Cauchy-Schwarz inequality from Part (ii):
+
+Let $\mathbf{a} = \begin{pmatrix} |x| \\ |y| \\ |z| \end{pmatrix}$ and $\mathbf{b} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}$.
+
+Applying the result from (ii):
+\begin{align*}
+    | (|x|)(1) + (|y|)(1) + (|z|)(1) | &\le \sqrt{|x|^2 + |y|^2 + |z|^2} \sqrt{1^2 + 1^2 + 1^2} \\
+    |x| + |y| + |z| &\le \sqrt{x^2 + y^2 + z^2} \cdot \sqrt{3}
+\end{align*}
+
+From the problem statement, $P$ is on the unit sphere, so $x^2 + y^2 + z^2 = 1$.
+
+Therefore:
+\begin{align*}
+    |x| + |y| + |z| &\le \sqrt{1} \cdot \sqrt{3} \\
+    |x| + |y| + |z| &\le \sqrt{3}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Triangle inequality:} For vectors, $|\mathbf{u} + \mathbf{v}| \le |\mathbf{u}| + |\mathbf{v}|$ provides lower bounds on sums of absolute values.
+    \item \textbf{Cauchy-Schwarz application:} This fundamental inequality relates dot products to vector magnitudes and provides upper bounds on sums.
+    \item \textbf{Strategic vector choice:} Choose specific vectors (like the all-ones vector) to convert Cauchy-Schwarz into the desired form.
+    \item \textbf{Multi-part coordination:} Each part builds toward the final result; part (i) establishes a lower bound, part (ii) proves a general tool, and part (iii) applies it for an upper bound.
+    \item \textbf{Common pitfall:} Remember that $|x|^2 = x^2$, so the constraint $x^2 + y^2 + z^2 = 1$ directly gives $\sqrt{|x|^2 + |y|^2 + |z|^2} = 1$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 13: Logarithmic Inequalities and the Limit Definition of $e$]
+Suppose that $x \geq 0$ and $n$ is a positive integer.
+\begin{enumerate}[(i)]
+    \item Show that
+    \[
+    1-x \leq \frac{1}{1+x} \leq 1.
+    \]
+
+    \item Hence, or otherwise, show that
+    \[
+    1-\frac{1}{2n} \leq n\ln \left(1+\frac{1}{n}\right) \leq 1.
+    \]
+
+    \item Hence, explain why
+    \[
+    \lim_{n\to\infty} \left(1+\frac{1}{n}\right)^n = e.
+    \]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (i): Show that $1-x \leq \frac{1}{1+x} \leq 1$ for $x \geq 0$}
+
+\textbf{Right Inequality:}
+
+Since $x \geq 0$, it follows that $1+x \geq 1$.
+
+Taking the reciprocal reverses the inequality (both sides are positive):
+\[
+\frac{1}{1+x} \leq \frac{1}{1} = 1
+\]
+
+\textbf{Left Inequality:}
+
+Consider the expression $1 - x^2$. Since $x^2 \geq 0$, we know:
+\[
+1 - x^2 \leq 1
+\]
+
+Factoring the left side (difference of squares):
+\[
+(1-x)(1+x) \leq 1
+\]
+
+Since $x \geq 0$, we have $1+x > 0$. We can divide by $(1+x)$ without changing the inequality sign:
+\[
+1-x \leq \frac{1}{1+x}
+\]
+
+Combining both results:
+\[
+1-x \leq \frac{1}{1+x} \leq 1
+\]
+
+\medskip
+\textbf{Part (ii): Show that $1-\frac{1}{2n} \leq n\ln \left(1+\frac{1}{n}\right) \leq 1$}
+
+Using the result from Part (i), we integrate the inequality with respect to $t$ from $0$ to $\frac{1}{n}$:
+
+\[
+\int_{0}^{1/n} (1-t) \, dt \leq \int_{0}^{1/n} \frac{1}{1+t} \, dt \leq \int_{0}^{1/n} 1 \, dt
+\]
+
+\textbf{Evaluating the integrals:}
+
+Left integral:
+\begin{align*}
+\int_{0}^{1/n} (1-t) \, dt &= \left[ t - \frac{t^2}{2} \right]_0^{1/n} \\
+&= \left(\frac{1}{n} - \frac{1}{2n^2}\right) - 0 \\
+&= \frac{1}{n} - \frac{1}{2n^2}
+\end{align*}
+
+Middle integral:
+\begin{align*}
+\int_{0}^{1/n} \frac{1}{1+t} \, dt &= \left[ \ln(1+t) \right]_0^{1/n} \\
+&= \ln\left(1+\frac{1}{n}\right) - \ln(1) \\
+&= \ln\left(1+\frac{1}{n}\right)
+\end{align*}
+
+Right integral:
+\begin{align*}
+\int_{0}^{1/n} 1 \, dt &= \left[ t \right]_0^{1/n} = \frac{1}{n}
+\end{align*}
+
+Substituting these back into the inequality:
+\[
+\frac{1}{n} - \frac{1}{2n^2} \leq \ln\left(1+\frac{1}{n}\right) \leq \frac{1}{n}
+\]
+
+Multiply the entire inequality by $n$ (since $n > 0$, the sign remains):
+\[
+n\left(\frac{1}{n} - \frac{1}{2n^2}\right) \leq n\ln\left(1+\frac{1}{n}\right) \leq n\left(\frac{1}{n}\right)
+\]
+\[
+1 - \frac{1}{2n} \leq n\ln\left(1+\frac{1}{n}\right) \leq 1
+\]
+
+\medskip
+\textbf{Part (iii): Explain why $\lim_{n\to\infty} \left(1+\frac{1}{n}\right)^n = e$}
+
+Take the limit as $n \to \infty$ for the inequality established in Part (ii):
+\[
+\lim_{n\to\infty} \left( 1 - \frac{1}{2n} \right) \leq \lim_{n\to\infty} \left[ n\ln\left(1+\frac{1}{n}\right) \right] \leq \lim_{n\to\infty} (1)
+\]
+
+Observing the limits of the outer terms:
+\begin{itemize}
+    \item $\lim_{n\to\infty} \left(1 - \frac{1}{2n}\right) = 1 - 0 = 1$
+    \item $\lim_{n\to\infty} (1) = 1$
+\end{itemize}
+
+By the Squeeze Theorem, the middle limit must also be 1:
+\[
+\lim_{n\to\infty} n\ln\left(1+\frac{1}{n}\right) = 1
+\]
+
+Rewriting using logarithm properties:
+\[
+\lim_{n\to\infty} \ln\left(1+\frac{1}{n}\right)^n = 1
+\]
+
+Exponentiating both sides (since $e^x$ is continuous):
+\[
+e^{\lim_{n\to\infty} \ln\left(1+\frac{1}{n}\right)^n} = e^1
+\]
+
+By continuity of the exponential function:
+\[
+\lim_{n\to\infty} e^{\ln\left(1+\frac{1}{n}\right)^n} = e
+\]
+
+Since $e^{\ln(a)} = a$:
+\[
+\lim_{n\to\infty} \left(1+\frac{1}{n}\right)^n = e
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Integration of inequalities:} Integrating all parts of a valid inequality preserves the inequality relation and is a powerful technique for deriving new bounds.
+    \item \textbf{Squeeze Theorem:} When a function is bounded above and below by functions that converge to the same limit, the middle function must also converge to that limit.
+    \item \textbf{Logarithm-exponential interplay:} Use logarithms to convert powers to products, then exponentiate to recover the original form after taking limits.
+    \item \textbf{Progressive refinement:} Each part provides a tool or bound that is then used in subsequent parts to build toward the final result.
+    \item \textbf{Common pitfall:} When integrating, don't forget to evaluate the definite integral at both bounds and subtract correctly. Also, remember that $\ln\left(a^n\right) = n\ln(a)$ when moving between forms.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 14: Homogeneous Inequality via Substitution and AM-GM]
+Prove
+\[
+\frac{x^2}{y^2} + \frac{y^2}{z^2} + \frac{z^2}{x^2} \geq \frac{1}{yz}\sqrt{x^2y^2 + z^4} + \frac{1}{xz}\sqrt{z^2y^2 + x^4} \quad \text{for } x, y, z > 0.
+\]
+\end{problem}
+
+\begin{solution}
+Let the Left Hand Side be $L$ and the Right Hand Side be $R$.
+
+\textbf{Step 1: Simplify the RHS terms.}
+
+We simplify the terms on the RHS by moving factors outside the square roots inside:
+\begin{align*}
+\frac{1}{yz}\sqrt{x^2y^2 + z^4} &= \sqrt{\frac{x^2y^2 + z^4}{y^2z^2}} = \sqrt{\frac{x^2y^2}{y^2z^2} + \frac{z^4}{y^2z^2}} = \sqrt{\frac{x^2}{z^2} + \frac{z^2}{y^2}}
+\end{align*}
+
+Similarly:
+\begin{align*}
+\frac{1}{xz}\sqrt{z^2y^2 + x^4} &= \sqrt{\frac{z^2y^2 + x^4}{x^2z^2}} = \sqrt{\frac{z^2y^2}{x^2z^2} + \frac{x^4}{x^2z^2}} = \sqrt{\frac{y^2}{x^2} + \frac{x^2}{z^2}}
+\end{align*}
+
+Thus, the inequality becomes:
+\[
+\frac{x^2}{y^2} + \frac{y^2}{z^2} + \frac{z^2}{x^2} \geq \sqrt{\frac{x^2}{z^2} + \frac{z^2}{y^2}} + \sqrt{\frac{y^2}{x^2} + \frac{x^2}{z^2}}
+\]
+
+\textbf{Step 2: Introduce substitution.}
+
+Let $u = \frac{x}{y}$, $v = \frac{y}{z}$, and $w = \frac{z}{x}$.
+
+Note that $uvw = \frac{x}{y} \cdot \frac{y}{z} \cdot \frac{z}{x} = 1$.
+
+We rewrite the terms using these new variables:
+\begin{itemize}
+    \item $\frac{x}{z} = \frac{x}{y} \cdot \frac{y}{z} = uv$
+    \item $\frac{z}{y} = \frac{1}{v} = uw$ (since $w = \frac{z}{x} = \frac{z}{y} \cdot \frac{y}{x} = \frac{z}{y} \cdot \frac{1}{u}$, so $\frac{z}{y} = uw$)
+    \item $\frac{y}{x} = \frac{1}{u} = vw$ (since $u = \frac{x}{y}$)
+\end{itemize}
+
+Now substitute these into the inequality:
+\begin{align*}
+L &= u^2 + v^2 + w^2 \\
+R &= \sqrt{(uv)^2 + (uw)^2} + \sqrt{(vw)^2 + (uv)^2}
+\end{align*}
+
+Factoring:
+\begin{align*}
+R &= \sqrt{u^2(v^2 + w^2)} + \sqrt{v^2(w^2 + u^2)} \\
+R &= |u|\sqrt{v^2 + w^2} + |v|\sqrt{w^2 + u^2}
+\end{align*}
+
+Since $u, v, w > 0$ (as $x, y, z > 0$):
+\begin{align*}
+R &= u\sqrt{v^2 + w^2} + v\sqrt{w^2 + u^2}
+\end{align*}
+
+\textbf{Step 3: Apply AM-GM inequality.}
+
+We use the AM-GM inequality in the form: for $A, B \geq 0$, $\sqrt{AB} \leq \frac{A+B}{2}$.
+
+For the first term of $R$, let $A = u^2$ and $B = v^2 + w^2$:
+\[
+u\sqrt{v^2 + w^2} = \sqrt{u^2(v^2 + w^2)} \leq \frac{u^2 + (v^2 + w^2)}{2}
+\]
+
+For the second term of $R$, let $A = v^2$ and $B = w^2 + u^2$:
+\[
+v\sqrt{w^2 + u^2} = \sqrt{v^2(w^2 + u^2)} \leq \frac{v^2 + (w^2 + u^2)}{2}
+\]
+
+\textbf{Step 4: Add the inequalities.}
+
+Adding these two inequalities:
+\begin{align*}
+R &\leq \frac{u^2 + v^2 + w^2}{2} + \frac{v^2 + w^2 + u^2}{2} \\
+R &\leq \frac{2(u^2 + v^2 + w^2)}{2} \\
+R &\leq u^2 + v^2 + w^2 \\
+R &\leq L
+\end{align*}
+
+Since $L = u^2 + v^2 + w^2$, we have proved that $L \geq R$, or:
+\[
+\frac{x^2}{y^2} + \frac{y^2}{z^2} + \frac{z^2}{x^2} \geq \frac{1}{yz}\sqrt{x^2y^2 + z^4} + \frac{1}{xz}\sqrt{z^2y^2 + x^4}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Homogeneous substitution:} For homogeneous inequalities, substitute ratios of variables (like $u = x/y$) to reduce the number of variables and simplify the problem.
+    \item \textbf{Algebraic simplification:} Move constants in and out of square roots systematically to reveal the underlying structure.
+    \item \textbf{AM-GM strategy:} Use AM-GM on products under square roots: $\sqrt{AB} \leq \frac{A+B}{2}$ is particularly useful when the sum $A+B$ appears elsewhere.
+    \item \textbf{Summation technique:} When applying AM-GM to multiple terms, add the resulting inequalities to obtain the final bound.
+    \item \textbf{Common pitfall:} Verify that the substitution constraint (like $uvw = 1$) is satisfied; this ensures the substitution is valid and the problem hasn't been changed.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 15: Bernoulli's Inequality and Sequence Monotonicity]
+Using Bernoulli's Inequality, prove that the sequence $a_n = \left(1 + \frac{1}{n}\right)^n$ is strictly increasing for integers $n \ge 1$. Specifically, prove:
+\[ \left(1 + \frac{1}{n}\right)^n < \left(1 + \frac{1}{n+1}\right)^{n+1} \]
+\end{problem}
+
+\begin{solution}
+To prove the sequence is increasing, we examine the ratio of consecutive terms. We aim to prove:
+\[ \frac{\left(1 + \frac{1}{n+1}\right)^{n+1}}{\left(1 + \frac{1}{n}\right)^n} > 1 \]
+
+\textbf{Step 1: Rewrite the ratio in a convenient form.}
+
+Express each term as a fraction:
+\begin{align*}
+\frac{\left(1 + \frac{1}{n+1}\right)^{n+1}}{\left(1 + \frac{1}{n}\right)^n} &= \frac{\left(\frac{n+2}{n+1}\right)^{n+1}}{\left(\frac{n+1}{n}\right)^n}
+\end{align*}
+
+To manipulate this, multiply and divide by $\left(\frac{n+1}{n}\right)$:
+\begin{align*}
+&= \frac{\left(\frac{n+2}{n+1}\right)^{n+1}}{\left(\frac{n+1}{n}\right)^{n+1}} \times \left(\frac{n+1}{n}\right) \\
+&= \left( \frac{(n+2)n}{(n+1)^2} \right)^{n+1} \times \left(\frac{n+1}{n}\right)
+\end{align*}
+
+\textbf{Step 2: Simplify the expression inside the power.}
+
+\begin{align*}
+\frac{(n+2)n}{(n+1)^2} &= \frac{n^2 + 2n}{n^2 + 2n + 1} \\
+&= \frac{(n^2 + 2n + 1) - 1}{n^2 + 2n + 1} \\
+&= 1 - \frac{1}{(n+1)^2}
+\end{align*}
+
+So the ratio becomes:
+\[
+\text{Ratio} = \left( 1 - \frac{1}{(n+1)^2} \right)^{n+1} \times \left(\frac{n+1}{n}\right)
+\]
+
+\textbf{Step 3: Apply Bernoulli's Inequality.}
+
+Bernoulli's Inequality states that for $x > -1$ and integer $r \geq 1$:
+\[
+(1 + x)^r \geq 1 + rx
+\]
+
+with equality only when $x = 0$ or $r = 1$.
+
+Let $x = -\frac{1}{(n+1)^2}$ and $r = n+1$.
+
+Since $n \ge 1$, we have $x = -\frac{1}{(n+1)^2} > -1$ (in fact, $x \geq -\frac{1}{4}$).
+
+Since $n \geq 1$, we have $r = n + 1 \geq 2 > 1$.
+
+Since $x \neq 0$ and $r > 1$, the inequality is strict:
+\begin{align*}
+\left( 1 - \frac{1}{(n+1)^2} \right)^{n+1} &> 1 + (n+1)\left(-\frac{1}{(n+1)^2}\right) \\
+&= 1 - \frac{n+1}{(n+1)^2} \\
+&= 1 - \frac{1}{n+1} \\
+&= \frac{n}{n+1}
+\end{align*}
+
+\textbf{Step 4: Complete the proof.}
+
+Substitute this result back into our ratio:
+\begin{align*}
+\text{Ratio} &> \frac{n}{n+1} \times \frac{n+1}{n} \\
+\text{Ratio} &> 1
+\end{align*}
+
+Since the ratio of the $(n+1)$-th term to the $n$-th term is strictly greater than 1:
+\[
+\frac{a_{n+1}}{a_n} > 1 \implies a_{n+1} > a_n
+\]
+
+Therefore:
+\[ \left(1 + \frac{1}{n}\right)^n < \left(1 + \frac{1}{n+1}\right)^{n+1} \]
+
+This proves the sequence is strictly increasing.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Ratio test for monotonicity:} To prove $a_n < a_{n+1}$, show that $\frac{a_{n+1}}{a_n} > 1$. This often simplifies the algebra.
+    \item \textbf{Bernoulli's Inequality application:} When you have $(1 + x)^r$ with small $x$ and large $r$, Bernoulli provides a useful linear lower bound.
+    \item \textbf{Strategic algebraic manipulation:} Rewrite expressions to isolate a $(1 + x)^r$ term suitable for Bernoulli's Inequality.
+    \item \textbf{Strict vs. non-strict inequalities:} Bernoulli's Inequality is strict when $x \neq 0$ and $r > 1$, which is crucial for proving strict monotonicity.
+    \item \textbf{Common pitfall:} Verify that Bernoulli's Inequality applies: check that $x > -1$ and that the inequality is strict (not just $\geq$) when needed. Also, be careful with sign changes when $x$ is negative.
+\end{itemize}
+\end{takeaways}

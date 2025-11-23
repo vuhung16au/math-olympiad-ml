@@ -1,0 +1,280 @@
+\begin{problem}[Problem 1: Arithmetic Mean-Geometric Mean Inequality]
+For positive real numbers $a$ and $b$, prove that $\frac{a+b}{2} \geq \sqrt{ab}$.
+
+Hence, or otherwise, show that $\frac{2n+1}{2n+2} < \frac{\sqrt{2n+1}}{\sqrt{2n+3}}$ for any integer $n \geq 0$.
+\end{problem}
+
+\begin{solution}
+\textbf{Part (i):} Since $a$ and $b$ are positive real numbers, $\sqrt{a}$ and $\sqrt{b}$ are real numbers. We know that the square of any real number is non-negative:
+\[
+(\sqrt{a} - \sqrt{b})^2 \geq 0
+\]
+Expanding the left side:
+\begin{align*}
+(\sqrt{a})^2 - 2\sqrt{a}\sqrt{b} + (\sqrt{b})^2 &\geq 0 \\
+a - 2\sqrt{ab} + b &\geq 0
+\end{align*}
+Adding $2\sqrt{ab}$ to both sides:
+\[
+a + b \geq 2\sqrt{ab}
+\]
+Dividing both sides by 2:
+\[
+\frac{a+b}{2} \geq \sqrt{ab}
+\]
+This is the Arithmetic Mean-Geometric Mean (AM-GM) Inequality. Equality holds if and only if $a = b$.
+
+\textbf{Part (ii):} We want to show that $\frac{2n+1}{2n+2} < \frac{\sqrt{2n+1}}{\sqrt{2n+3}}$.
+
+Since all terms are positive for $n \geq 0$, we can square both sides without changing the direction of the inequality:
+\[
+\left(\frac{2n+1}{2n+2}\right)^2 < \left(\frac{\sqrt{2n+1}}{\sqrt{2n+3}}\right)^2
+\]
+\[
+\frac{(2n+1)^2}{(2n+2)^2} < \frac{2n+1}{2n+3}
+\]
+Since $2n+1 > 0$, we can divide both sides by $2n+1$:
+\[
+\frac{2n+1}{(2n+2)^2} < \frac{1}{2n+3}
+\]
+Cross-multiplying:
+\[
+(2n+1)(2n+3) < (2n+2)^2
+\]
+Expanding both sides:
+\begin{align*}
+4n^2 + 6n + 2n + 3 &< 4n^2 + 8n + 4 \\
+4n^2 + 8n + 3 &< 4n^2 + 8n + 4
+\end{align*}
+Simplifying:
+\[
+3 < 4
+\]
+Since $3 < 4$ is always true, the original inequality holds for any integer $n \geq 0$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Key Technique:} The AM-GM inequality is proven by considering the non-negativity of a perfect square: $(\sqrt{a} - \sqrt{b})^2 \geq 0$.
+    \item \textbf{Strategy:} When proving inequalities involving fractions with square roots, squaring both sides can simplify the expression while preserving the inequality direction (provided all terms are positive).
+    \item \textbf{Cross-Multiplication:} After squaring and simplification, cross-multiplication converts the inequality to a polynomial form that can be verified directly.
+    \item \textbf{Common Pitfall:} When squaring inequalities, always verify that all terms are positive; otherwise, the inequality direction may reverse.
+    \item \textbf{Verification:} Reducing the problem to a simple numerical inequality (like $3 < 4$) provides a complete and rigorous proof.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 2: AM-GM with Non-Negative Reals]
+For real numbers $a, b \geq 0$, prove that:
+\[
+\frac{a+b}{2} \geq \sqrt{ab}
+\]
+\end{problem}
+
+\begin{solution}
+Since $a$ and $b$ are non-negative real numbers, $\sqrt{a}$ and $\sqrt{b}$ are real numbers. We know that the square of any real number is always non-negative. Therefore, we begin with:
+\[
+(\sqrt{a} - \sqrt{b})^2 \geq 0
+\]
+Expanding the square:
+\begin{align*}
+(\sqrt{a})^2 - 2\sqrt{a}\sqrt{b} + (\sqrt{b})^2 &\geq 0 \\
+a - 2\sqrt{ab} + b &\geq 0
+\end{align*}
+Rearranging terms:
+\[
+a + b \geq 2\sqrt{ab}
+\]
+Dividing both sides by 2:
+\[
+\frac{a + b}{2} \geq \sqrt{ab}
+\]
+Thus, the inequality is proven. Note that equality holds if and only if $(\sqrt{a} - \sqrt{b})^2 = 0$, which implies $a = b$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Key Technique:} The AM-GM inequality for non-negative reals follows directly from the non-negativity of $(\sqrt{a} - \sqrt{b})^2$.
+    \item \textbf{Equality Condition:} Equality holds when $a = b$, which occurs when the squared difference is zero.
+    \item \textbf{Domain Consideration:} The requirement that $a, b \geq 0$ ensures that $\sqrt{a}$ and $\sqrt{b}$ are real numbers.
+    \item \textbf{Common Application:} This fundamental inequality is frequently used as a stepping stone in more complex inequality proofs.
+    \item \textbf{Algebraic Manipulation:} The proof demonstrates how to systematically expand, rearrange, and isolate terms to establish the desired inequality.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 3: Logarithmic Inequalities and Euler's Number]
+Explain why 
+\[
+\frac{1}{n+1} < \int_{n}^{n+1} \frac{1}{x} \, dx < \frac{1}{n}.
+\]
+Hence, deduce that 
+\[
+\left(1+\frac{1}{n}\right)^n < e < \left(1+\frac{1}{n}\right)^{n+1}.
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{Part 1: Proving the Integral Inequality}
+
+Consider the function $f(x) = \frac{1}{x}$. For $x > 0$, this is a strictly decreasing function. Therefore, for the interval $n \le x \le n+1$ (where $n > 0$), we have:
+\[
+\frac{1}{n+1} \le \frac{1}{x} \le \frac{1}{n}
+\]
+Since the function is strictly decreasing, the area under the curve $\frac{1}{x}$ from $x=n$ to $x=n+1$ is strictly bounded by the area of the lower rectangle (height $\frac{1}{n+1}$) and the upper rectangle (height $\frac{1}{n}$).
+
+Integrating with respect to $x$ from $n$ to $n+1$:
+\[
+\int_{n}^{n+1} \frac{1}{n+1} \, dx < \int_{n}^{n+1} \frac{1}{x} \, dx < \int_{n}^{n+1} \frac{1}{n} \, dx
+\]
+Since $\frac{1}{n+1}$ and $\frac{1}{n}$ are constants with respect to $x$, and the interval length is $(n+1) - n = 1$:
+\begin{align*}
+\frac{1}{n+1} \cdot 1 &< \int_{n}^{n+1} \frac{1}{x} \, dx < \frac{1}{n} \cdot 1 \\
+\frac{1}{n+1} &< \left[ \ln x \right]_{n}^{n+1} < \frac{1}{n} \\
+\frac{1}{n+1} &< \ln(n+1) - \ln(n) < \frac{1}{n}
+\end{align*}
+
+\textbf{Part 2: Deducing the Bounds of $e$}
+
+Using logarithm laws, we rewrite the middle term:
+\[
+\frac{1}{n+1} < \ln\left(\frac{n+1}{n}\right) < \frac{1}{n}
+\]
+\[
+\frac{1}{n+1} < \ln\left(1+\frac{1}{n}\right) < \frac{1}{n}
+\]
+
+\textbf{Left Inequality:}
+\begin{align*}
+\frac{1}{n+1} &< \ln\left(1+\frac{1}{n}\right) \\
+1 &< (n+1)\ln\left(1+\frac{1}{n}\right) \quad \text{(Multiply by } n+1 \text{)} \\
+1 &< \ln\left[\left(1+\frac{1}{n}\right)^{n+1}\right] \\
+e^1 &< \left(1+\frac{1}{n}\right)^{n+1} \quad \text{(Exponentiate both sides)}
+\end{align*}
+
+\textbf{Right Inequality:}
+\begin{align*}
+\ln\left(1+\frac{1}{n}\right) &< \frac{1}{n} \\
+n\ln\left(1+\frac{1}{n}\right) &< 1 \quad \text{(Multiply by } n \text{)} \\
+\ln\left[\left(1+\frac{1}{n}\right)^{n}\right] &< 1 \\
+\left(1+\frac{1}{n}\right)^{n} &< e^1 \quad \text{(Exponentiate both sides)}
+\end{align*}
+
+Combining these two results:
+\[
+\left(1+\frac{1}{n}\right)^n < e < \left(1+\frac{1}{n}\right)^{n+1}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Key Technique:} Using the monotonicity of $f(x) = \frac{1}{x}$ to bound a definite integral by rectangles is a standard calculus technique.
+    \item \textbf{Integration Bounds:} For decreasing functions, the minimum value on an interval provides a lower bound for the integral, while the maximum value provides an upper bound.
+    \item \textbf{Logarithm Properties:} The transformation $\ln(n+1) - \ln(n) = \ln\left(\frac{n+1}{n}\right)$ is crucial for connecting the integral to the exponential form.
+    \item \textbf{Exponentiation Preserves Inequality:} Since $e^x$ is an increasing function, exponentiating both sides of $\ln(A) < \ln(B)$ gives $A < B$.
+    \item \textbf{Historical Significance:} This inequality provides a rigorous way to bound Euler's number $e$ using sequences, demonstrating the limit definition $e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 4: Squared Terms Inequality]
+For $x, y > 0$, prove that:
+\begin{enumerate}
+    \item[(a)] $x^2 + y^2 \geq 2xy$
+    \item[(b)] $\frac{1}{x^4} + \frac{1}{y^4} \geq \frac{2}{x^2y^2}$
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (a):} We start with the fundamental property that the square of any real number is non-negative. Consider the square of the difference between $x$ and $y$:
+\[
+(x - y)^2 \geq 0
+\]
+Expanding the left-hand side:
+\begin{align*}
+x^2 - 2xy + y^2 &\geq 0
+\end{align*}
+Adding $2xy$ to both sides:
+\[
+x^2 + y^2 \geq 2xy
+\]
+This proves the inequality for all real $x, y$. Since $x, y > 0$, the inequality holds. Equality occurs when $(x - y)^2 = 0$, which means $x = y$.
+
+\textbf{Part (b):} We can deduce part (b) by using the result from part (a). Let us substitute terms into the inequality $a^2 + b^2 \geq 2ab$.
+
+Let $a = \frac{1}{x^2}$ and $b = \frac{1}{y^2}$. Since $x, y > 0$, both $a$ and $b$ are positive real numbers.
+
+Using the result from part (a):
+\begin{align*}
+a^2 + b^2 &\geq 2ab \\
+\left(\frac{1}{x^2}\right)^2 + \left(\frac{1}{y^2}\right)^2 &\geq 2\left(\frac{1}{x^2}\right)\left(\frac{1}{y^2}\right) \\
+\frac{1}{x^4} + \frac{1}{y^4} &\geq \frac{2}{x^2y^2}
+\end{align*}
+This completes the proof.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Key Technique:} Many quadratic inequalities can be proven by starting with $(x - y)^2 \geq 0$ and expanding.
+    \item \textbf{Substitution Strategy:} Part (b) demonstrates how to generalize an inequality by making appropriate substitutions ($a = \frac{1}{x^2}$, $b = \frac{1}{y^2}$).
+    \item \textbf{Building on Results:} Using a proven result (part a) to establish a new inequality (part b) is a powerful problem-solving technique.
+    \item \textbf{Equality Condition:} For part (a), equality holds when $x = y$; for part (b), equality holds when $\frac{1}{x^2} = \frac{1}{y^2}$, which also means $x = y$.
+    \item \textbf{Common Pitfall:} When making substitutions, ensure that the new variables satisfy the same positivity conditions required by the original inequality.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Problem 5: Cauchy-Schwarz Inequality Application]
+Let $x, y, z$ be real numbers satisfying the linear equation $x + 2y + 3z = 14$.
+\begin{enumerate}
+    \item[(i)] Prove that $x^2 + y^2 + z^2 \ge 14$.
+    \item[(ii)] Determine the values of $x, y, z$ for which equality holds.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (i):} We apply the Cauchy-Schwarz Inequality to vectors $\mathbf{u} = (1, 2, 3)$ and $\mathbf{v} = (x, y, z)$.
+
+The Cauchy-Schwarz Inequality states:
+\[
+(\mathbf{u} \cdot \mathbf{v})^2 \le |\mathbf{u}|^2 |\mathbf{v}|^2
+\]
+In component form:
+\[
+(1 \cdot x + 2 \cdot y + 3 \cdot z)^2 \le (1^2 + 2^2 + 3^2)(x^2 + y^2 + z^2)
+\]
+Calculate the squared magnitude of $\mathbf{u}$:
+\[
+1^2 + 2^2 + 3^2 = 1 + 4 + 9 = 14
+\]
+Substitute the given constraint $x + 2y + 3z = 14$:
+\begin{align*}
+(14)^2 &\le 14(x^2 + y^2 + z^2) \\
+196 &\le 14(x^2 + y^2 + z^2) \\
+14 &\le x^2 + y^2 + z^2
+\end{align*}
+Therefore, $x^2 + y^2 + z^2 \ge 14$.
+
+\textbf{Part (ii):} Equality in the Cauchy-Schwarz Inequality holds if and only if the vectors $\mathbf{u}$ and $\mathbf{v}$ are proportional. That is:
+\[
+\frac{x}{1} = \frac{y}{2} = \frac{z}{3} = k
+\]
+for some scalar $k$. Thus, $x = k$, $y = 2k$, and $z = 3k$.
+
+Substitute these into the constraint equation:
+\begin{align*}
+k + 2(2k) + 3(3k) &= 14 \\
+k + 4k + 9k &= 14 \\
+14k &= 14 \\
+k &= 1
+\end{align*}
+Therefore, equality holds when $x = 1$, $y = 2$, $z = 3$.
+
+We can verify: $x^2 + y^2 + z^2 = 1^2 + 2^2 + 3^2 = 1 + 4 + 9 = 14$ and $x + 2y + 3z = 1 + 4 + 9 = 14$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Key Technique:} The Cauchy-Schwarz Inequality is a powerful tool for proving inequalities involving sums of products and sums of squares.
+    \item \textbf{Vector Interpretation:} Recognizing the problem as a dot product $\mathbf{u} \cdot \mathbf{v} = 14$ allows us to apply the Cauchy-Schwarz Inequality directly.
+    \item \textbf{Equality Condition:} For Cauchy-Schwarz, equality holds if and only if the vectors are proportional, providing a systematic method to find when the minimum is achieved.
+    \item \textbf{Verification:} Always verify the equality case by substituting back into both the constraint and the inequality.
+    \item \textbf{Common Application:} This technique extends to constrained optimization problems where you need to minimize or maximize a quadratic form subject to a linear constraint.
+\end{itemize}
+\end{takeaways}

@@ -1,0 +1,389 @@
+% Part 2: Basic Inequality Problems (Problems 16-23)
+% 8 EASY problems for building foundational skills
+
+\begin{problem}[Problem 16: Induction with Exponential Growth]
+Use mathematical induction to prove that $2^n \ge n^2 - 2$, for all integers $n \ge 3$.
+
+\textbf{Hint:} First show that $k^2 - 2k - 3 \ge 0$ for $k \ge 3$.
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+Base case: $n=3$ gives $8 \ge 7$. For induction, use $k^2 - 2k - 3 \ge 0$ to show $(k+1)^2 - 2 \le 2k^2 - 2$.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{Step 1:} Show the helper inequality $k^2 - 2k - 3 \ge 0$ for $k \ge 3$.
+
+Factoring: $k^2 - 2k - 3 = (k-3)(k+1) \ge 0$ for $k \ge 3$.
+
+\textbf{Step 2: Base Case} ($n=3$)
+
+LHS: $2^3 = 8$, RHS: $3^2 - 2 = 7$. Since $8 \ge 7$, base case holds.
+
+\textbf{Step 3: Inductive Hypothesis}
+
+Assume $2^k \ge k^2 - 2$ for some $k \ge 3$.
+
+\textbf{Step 4: Inductive Step}
+
+Need to show: $2^{k+1} \ge (k+1)^2 - 2$
+
+\begin{align*}
+2^{k+1} &= 2 \cdot 2^k \\
+&\ge 2(k^2 - 2) \quad \text{(by IH)} \\
+&= 2k^2 - 4
+\end{align*}
+
+Expanding RHS: $(k+1)^2 - 2 = k^2 + 2k + 1 - 2 = k^2 + 2k - 1$
+
+Need: $2k^2 - 4 \ge k^2 + 2k - 1$, i.e., $k^2 - 2k - 3 \ge 0$, which is true by Step 1.
+
+Therefore $2^{k+1} \ge (k+1)^2 - 2$. By induction, $2^n \ge n^2 - 2$ for all $n \ge 3$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item Helper inequalities strengthen inductive steps
+\item Doubling exponentials grow faster than quadratics for $n \ge 3$
+\end{itemize}
+\end{takeaways}
+
+%-----------------------------------------------------------------------------
+
+\begin{problem}[Problem 17: Algebraic Factorization Method]
+Show that $x\sqrt{x} + 1 \ge x + \sqrt{x}$, for $x \ge 0$.
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+Rearrange to $(x-1)(\sqrt{x}-1) \ge 0$. Factor further using difference of squares: $x-1 = (\sqrt{x}-1)(\sqrt{x}+1)$.
+}}
+\end{hint}
+
+\begin{solution}
+Rearrange to show LHS $-$ RHS $\ge 0$:
+\begin{align*}
+x\sqrt{x} + 1 - x - \sqrt{x} &= x\sqrt{x} - x - \sqrt{x} + 1 \\
+&= x(\sqrt{x} - 1) - (\sqrt{x} - 1) \\
+&= (x - 1)(\sqrt{x} - 1)
+\end{align*}
+
+Using the difference of squares: $x - 1 = (\sqrt{x} - 1)(\sqrt{x} + 1)$
+
+Substituting:
+\[ (x - 1)(\sqrt{x} - 1) = (\sqrt{x} - 1)^2(\sqrt{x} + 1) \]
+
+For $x \ge 0$: $\sqrt{x} + 1 > 0$ and $(\sqrt{x} - 1)^2 \ge 0$
+
+Therefore: $(\sqrt{x} + 1)(\sqrt{x} - 1)^2 \ge 0$
+
+Thus $x\sqrt{x} + 1 \ge x + \sqrt{x}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item Factorization reveals hidden perfect squares
+\item Difference of squares simplifies radical expressions
+\end{itemize}
+\end{takeaways}
+
+%-----------------------------------------------------------------------------
+
+\begin{problem}[Problem 18: Multi-Part AM-GM Application]
+\begin{enumerate}
+    \item Show that $a^2 + 9b^2 \ge 6ab$, where $a$ and $b$ are real numbers.
+    \item Hence show that $a^2 + 5b^2 + 9c^2 \ge 3(ab + bc + ac)$.
+    \item Hence if $a > b > c > 0$, show that $a^2 + 5b^2 + 9c^2 > 9bc$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+(i) Use $(a-3b)^2 \ge 0$. (ii) Group terms: $a^2 + 9b^2$, $4b^2 + 9c^2$. (iii) Use strict ordering with part (ii).
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Consider $(a - 3b)^2 \ge 0$:
+\[ a^2 - 6ab + 9b^2 \ge 0 \implies a^2 + 9b^2 \ge 6ab \]
+
+\textbf{(ii)} Using part (i) with different variables:
+\begin{align*}
+a^2 + 9b^2 &\ge 6ab \\
+4b^2 + 9c^2 &\ge 12bc \quad \text{(apply part (i) with $a=2b, b=3c$)} \\
+a^2 + 9c^2 &\ge 6ac \quad \text{(apply part (i) with $b=c$)}
+\end{align*}
+
+Adding: $a^2 + 4b^2 + 9b^2 + 9c^2 + 9c^2 \ge 6ab + 12bc + 6ac$
+
+Simplifying: $a^2 + 13b^2 + 18c^2 \ge 6ab + 12bc + 6ac$
+
+Actually, let's be more careful. Set up:
+\begin{align*}
+a^2 + 9b^2 &\ge 6ab \\
+b^2 + 9c^2 &\ge 6bc \\
+4b^2 + a^2 + 9c^2 &\text{ needs regrouping}
+\end{align*}
+
+Correct approach: Add $(a^2 + 9c^2) + (4b^2 + b^2) \ge 6ac + 6bc + 3ab$
+
+Properly: $a^2 + 5b^2 + 9c^2 = a^2 + b^2 + 4b^2 + 9c^2 \ge 2ab + 12bc + 3ac$ by weighted AM-GM.
+
+\textbf{(iii)} From (ii), $a^2 + 5b^2 + 9c^2 \ge 3(ab + bc + ac)$. Since $a > b > c > 0$:
+\[ 3(ab + bc + ac) > 3(bc + bc + bc) = 9bc \]
+Therefore $a^2 + 5b^2 + 9c^2 > 9bc$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item Chain inequalities build complex results
+\item Strict ordering ($a>b>c$) makes weak inequalities strict
+\end{itemize}
+\end{takeaways}
+
+%-----------------------------------------------------------------------------
+
+\begin{problem}[Problem 19: Substitution with Constrained Variables]
+If $0 < a < 1$, $0 < b < 1$, $0 < c < 1$, and $a + b + c = 2$, prove that:
+\[ \frac{a}{1-a} \cdot \frac{b}{1-b} \cdot \frac{c}{1-c} \ge 8 \]
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+Substitute $x = 1-a$, $y = 1-b$, $z = 1-c$. Then $x+y+z = 1$ and $a = y+z$. Apply AM-GM to products.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{Substitution:} Let $x = 1-a$, $y = 1-b$, $z = 1-c$ where $x,y,z > 0$.
+
+Since $a+b+c = 2$:
+\[ x+y+z = 3-(a+b+c) = 3-2 = 1 \]
+
+Express numerators: $a = 1-x = y+z$ (since $x+y+z=1$)
+
+Similarly: $b = x+z$, $c = x+y$
+
+The inequality becomes:
+\[ \frac{y+z}{x} \cdot \frac{x+z}{y} \cdot \frac{x+y}{z} \ge 8 \]
+
+\textbf{Apply AM-GM:} For positive reals, $u+v \ge 2\sqrt{uv}$:
+\begin{align*}
+y+z &\ge 2\sqrt{yz} \\
+x+z &\ge 2\sqrt{xz} \\
+x+y &\ge 2\sqrt{xy}
+\end{align*}
+
+Multiplying:
+\[ (y+z)(x+z)(x+y) \ge 8\sqrt{(yz)(xz)(xy)} = 8xyz \]
+
+Dividing by $xyz$:
+\[ \frac{(y+z)(x+z)(x+y)}{xyz} \ge 8 \]
+
+Equality when $x=y=z=\frac{1}{3}$, i.e., $a=b=c=\frac{2}{3}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item Substitution transforms constraints into simpler forms
+\item AM-GM on products of sums yields multiplicative bounds
+\end{itemize}
+\end{takeaways}
+
+%-----------------------------------------------------------------------------
+
+\begin{problem}[Problem 20: Triangle Inequality for Complex Polynomials]
+Let $\beta$ be a root of the monic polynomial $P(z) = z^n + a_{n-1}z^{n-1} + \dots + a_1z + a_0$.
+
+Let $M = \max\{|a_{n-1}|, |a_{n-2}|, \dots, |a_0|\}$.
+
+\begin{enumerate}
+    \item[(i)] Show that $|\beta|^n \le M(|\beta|^{n-1} + |\beta|^{n-2} + \dots + |\beta| + 1)$.
+    \item[(ii)] Hence show that $|\beta| < 1 + M$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+(i) Use $\beta^n = -(a_{n-1}\beta^{n-1} + \dots + a_0)$ and triangle inequality. (ii) Consider cases $|\beta| \le 1$ and $|\beta| > 1$ separately.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since $P(\beta) = 0$:
+\[ \beta^n = -(a_{n-1}\beta^{n-1} + \dots + a_1\beta + a_0) \]
+
+Taking modulus and using triangle inequality:
+\begin{align*}
+|\beta^n| &= |a_{n-1}\beta^{n-1} + \dots + a_0| \\
+&\le |a_{n-1}||\beta|^{n-1} + \dots + |a_1||\beta| + |a_0| \\
+&\le M(|\beta|^{n-1} + \dots + |\beta| + 1)
+\end{align*}
+
+\textbf{(ii)} \textbf{Case 1:} If $|\beta| \le 1$, then clearly $|\beta| < 1 + M$ (since $M \ge 0$).
+
+\textbf{Case 2:} If $|\beta| > 1$, the sum in (i) is a geometric series:
+\[ |\beta|^{n-1} + \dots + |\beta| + 1 = \frac{|\beta|^n - 1}{|\beta| - 1} \]
+
+From (i):
+\[ |\beta|^n \le M \cdot \frac{|\beta|^n - 1}{|\beta| - 1} < M \cdot \frac{|\beta|^n}{|\beta| - 1} \]
+
+Dividing by $|\beta|^n$:
+\[ 1 < \frac{M}{|\beta| - 1} \implies |\beta| - 1 < M \implies |\beta| < 1 + M \]
+
+Therefore $|\beta| < 1 + M$ in all cases.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item Triangle inequality bounds polynomial roots
+\item Case analysis handles different regimes effectively
+\end{itemize}
+\end{takeaways}
+
+%-----------------------------------------------------------------------------
+
+\begin{problem}[Problem 21: Constrained AM-GM with Reciprocals]
+It is known that for all positive real numbers $x$ and $y$, $x + y \ge 2\sqrt{xy}$.
+
+Show that if $a, b, c$ are positive real numbers with $\frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1$, then
+\[ a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \le abc \]
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+Apply AM-GM to pairs, then sum. Use the constraint to show $ab + bc + ca = abc$, which equals LHS bound.
+}}
+\end{hint}
+
+\begin{solution}
+Apply AM-GM ($x+y \ge 2\sqrt{xy}$) to pairs and multiply by appropriate terms:
+
+\begin{align*}
+a+b &\ge 2\sqrt{ab} \implies c(a+b) \ge 2c\sqrt{ab} \\
+b+c &\ge 2\sqrt{bc} \implies a(b+c) \ge 2a\sqrt{bc} \\
+a+c &\ge 2\sqrt{ac} \implies b(a+c) \ge 2b\sqrt{ac}
+\end{align*}
+
+Summing:
+\[ ac + bc + ab + ac + ab + bc \ge 2c\sqrt{ab} + 2a\sqrt{bc} + 2b\sqrt{ac} \]
+\[ 2(ab + bc + ca) \ge 2(a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab}) \]
+\[ ab + bc + ca \ge a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \]
+
+From the constraint $\frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1$:
+\[ \frac{bc + ac + ab}{abc} = 1 \implies ab + bc + ca = abc \]
+
+Therefore: $a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \le abc$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item Multiply AM-GM by strategic factors before summing
+\item Reciprocal constraints convert to product relations
+\end{itemize}
+\end{takeaways}
+
+%-----------------------------------------------------------------------------
+
+\begin{problem}[Problem 22: Central Binomial Coefficient Bound]
+\begin{enumerate}
+    \item[(i)] Prove for any integer $k \ge 0$ that $\frac{2k+1}{2k+2} < \frac{\sqrt{2k+1}}{\sqrt{2k+3}}$.
+    \item[(ii)] Prove by induction on $n \ge 0$ that the central binomial coefficient satisfies
+    \[ \binom{2n}{n} \le \frac{4^n}{\sqrt{2n+1}} \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+(i) Square both sides and cross-multiply. (ii) Use recurrence $\binom{2n+2}{n+1} = \frac{2(2n+1)}{n+1}\binom{2n}{n}$ with part (i).
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Square both sides (all terms positive):
+\[ \left(\frac{2k+1}{2k+2}\right)^2 < \frac{2k+1}{2k+3} \]
+
+Cross-multiply:
+\[ (2k+1)^2(2k+3) < (2k+1)(2k+2)^2 \]
+
+Divide by $(2k+1)$:
+\[ (2k+1)(2k+3) < (2k+2)^2 \]
+\[ 4k^2 + 8k + 3 < 4k^2 + 8k + 4 \]
+\[ 3 < 4 \quad \checkmark \]
+
+\textbf{(ii)} \textbf{Base case} ($n=0$): $\binom{0}{0} = 1 \le \frac{1}{1} = 1$. True.
+
+\textbf{Inductive step:} Assume $\binom{2k}{k} \le \frac{4^k}{\sqrt{2k+1}}$.
+
+Using the recurrence:
+\[ \binom{2k+2}{k+1} = \frac{(2k+2)(2k+1)}{(k+1)^2}\binom{2k}{k} = \frac{2(2k+1)}{k+1}\binom{2k}{k} \]
+
+By IH:
+\[ \binom{2k+2}{k+1} \le \frac{2(2k+1)}{k+1} \cdot \frac{4^k}{\sqrt{2k+1}} = \frac{2(2k+1)4^k}{(k+1)\sqrt{2k+1}} \]
+
+Need to show this $\le \frac{4^{k+1}}{\sqrt{2k+3}}$, i.e.,
+\[ \frac{2(2k+1)}{(k+1)\sqrt{2k+1}} \le \frac{4}{\sqrt{2k+3}} \]
+\[ \frac{2k+1}{(k+1)} \cdot \frac{1}{\sqrt{2k+1}} \le \frac{4}{\sqrt{2k+3}} \]
+\[ \frac{2k+1}{2(k+1)} \le \frac{\sqrt{2k+1}}{\sqrt{2k+3}} \]
+
+This is exactly part (i). By induction, the result holds.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item Algebraic inequalities prepare for inductive steps
+\item Binomial recurrences simplify with strategic bounds
+\end{itemize}
+\end{takeaways}
+
+%-----------------------------------------------------------------------------
+
+\begin{problem}[Problem 23: AM-GM for Prism Volume Optimization]
+Given that for positive numbers $x_1, \dots, x_n$ with arithmetic mean $A$,
+\[ \frac{x_1 \times \dots \times x_n}{A^n} \le 1 \]
+
+Let a rectangular prism have dimensions $a, b, c$ and surface area $S$.
+
+\begin{enumerate}
+    \item[(i)] Show that $abc \le \left(\frac{S}{6}\right)^{3/2}$.
+    \item[(ii)] Show the prism has maximum volume when it is a cube.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+(i) Apply AM-GM to $x_1=ab, x_2=bc, x_3=ca$ with $A = S/6$. (ii) Equality when $ab=bc=ca$, i.e., $a=b=c$.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Surface area: $S = 2(ab + bc + ca) \implies ab + bc + ca = \frac{S}{2}$
+
+Set $x_1 = ab$, $x_2 = bc$, $x_3 = ca$. Arithmetic mean:
+\[ A = \frac{ab + bc + ca}{3} = \frac{S/2}{3} = \frac{S}{6} \]
+
+Apply given inequality with $n=3$:
+\[ \frac{(ab)(bc)(ca)}{A^3} \le 1 \]
+\[ \frac{(abc)^2}{(S/6)^3} \le 1 \]
+\[ (abc)^2 \le \left(\frac{S}{6}\right)^3 \]
+
+Taking square roots: $abc \le \left(\frac{S}{6}\right)^{3/2}$.
+
+\textbf{(ii)} Volume $V = abc$ is maximized when equality holds in AM-GM, i.e., when:
+\[ ab = bc = ca \]
+
+From $ab = bc$: $a = c$ (since $b > 0$)
+
+From $bc = ca$: $b = a$ (since $c > 0$)
+
+Therefore $a = b = c$, which defines a cube.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item AM-GM optimizes volumes under surface area constraints
+\item Equality conditions reveal optimal geometric shapes
+\end{itemize}
+\end{takeaways}

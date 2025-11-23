@@ -1,0 +1,195 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+% Custom styles shared with other HSC projects
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: Inequalities Mastery}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet presents a comprehensive collection of inequality problems tailored for the HSC Mathematics Extension~2 syllabus. Each problem explores fundamental techniques including the Arithmetic Mean-Geometric Mean (AM-GM) inequality, Cauchy-Schwarz inequality, triangle inequality, integration-based inequalities, and inequalities via mathematical induction. Through rigorous proofs and detailed solutions, students will develop advanced problem-solving skills essential for Extension~2 examinations and mathematical competitions.
+
+\subsection{Target Audience}
+This resource is designed for Extension~2 students who want to challenge themselves with difficult problems and develop mastery of inequality techniques. Each solution provides step-by-step reasoning, explicit identification of key theorems, and clear algebraic manipulations to ensure high-school learners can follow every logical transition.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the fundamentals and worked examples below before attempting problems.
+  \item Attempt Part~1 problems without hints; compare your solutions against the detailed explanations.
+  \item Study the \textbf{Takeaways} sections to understand the key techniques and strategies.
+  \item Use the upside-down hints in Part~2 only after making a genuine attempt.
+  \item Practice multiple problems of each type to reinforce pattern recognition and proof techniques.
+\end{itemize}
+
+\subsection{Inequality Fundamentals}
+
+\subsubsection{Basic Properties}
+For real numbers $a$, $b$, $c$, and $d$, the following properties hold:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Transitivity:} $a > b$ and $b > c \Rightarrow a > c$
+    \item \textbf{Multiplication:} $a > b$ and $c > 0 \Rightarrow ac > bc$; but $c < 0 \Rightarrow ac < bc$
+    \item \textbf{Product rule:} $a > b > 0$ and $c > d > 0 \Rightarrow ac > bd$
+    \item \textbf{Reciprocals:} $a > b > 0 \Rightarrow \dfrac{1}{a} < \dfrac{1}{b}$
+    \item \textbf{Non-negativity:} For any real $x$, we have $x^2 \ge 0$
+    \item \textbf{Absolute values:} $|a| \ge a$ and $|x| + |y| \ge |x + y|$ (triangle inequality)
+    \item \textbf{Sum of squares:} $a^2 + b^2 \ge 0$ with equality if and only if $a = b = 0$
+\end{itemize}
+
+\subsubsection{Key Theorems}
+
+\paragraph{AM-GM Inequality (Two Variables).}
+For non-negative real numbers $x$ and $y$:
+\[
+\frac{x + y}{2} \ge \sqrt{xy}
+\]
+with equality if and only if $x = y$.
+
+\paragraph{AM-GM Inequality (Three Variables).}
+For non-negative real numbers $x$, $y$, and $z$:
+\[
+\frac{x + y + z}{3} \ge \sqrt[3]{xyz}
+\]
+with equality if and only if $x = y = z$.
+
+\paragraph{Cauchy-Schwarz Inequality.}
+For real numbers $a_1, a_2, \ldots, a_n$ and $b_1, b_2, \ldots, b_n$:
+\[
+\left(\sum_{i=1}^{n} a_i b_i\right)^2 \le \left(\sum_{i=1}^{n} a_i^2\right)\left(\sum_{i=1}^{n} b_i^2\right)
+\]
+with equality if and only if the sequences are proportional.
+
+\paragraph{Triangle Inequality (Real Numbers).}
+For real numbers $a$ and $b$:
+\[
+|a + b| \le |a| + |b|
+\]
+
+\paragraph{Triangle Inequality (Complex Numbers).}
+For complex numbers $z$ and $w$:
+\[
+|z + w| \le |z| + |w|
+\]
+
+\subsection{Worked Examples}
+
+\paragraph{Example 1: Basic AM-GM Application.}
+Prove that for positive real numbers $a$ and $b$, we have $a + b \ge 2\sqrt{ab}$.
+
+\textit{Solution:}
+By the AM-GM inequality with $x = a$ and $y = b$:
+\[
+\frac{a + b}{2} \ge \sqrt{ab}
+\]
+Multiplying both sides by 2 yields $a + b \ge 2\sqrt{ab}$, with equality when $a = b$. \qed
+
+\paragraph{Example 2: Cauchy-Schwarz with Constraint.}
+Given $x^2 + y^2 = 1$, find the maximum value of $3x + 4y$.
+
+\textit{Solution:}
+By Cauchy-Schwarz inequality:
+\[
+(3x + 4y)^2 \le (3^2 + 4^2)(x^2 + y^2) = 25 \cdot 1 = 25
+\]
+Therefore $3x + 4y \le 5$, with equality when $(x, y) = \left(\frac{3}{5}, \frac{4}{5}\right)$. The maximum value is $5$. \qed
+
+\paragraph{Example 3: Triangle Inequality.}
+Prove that for any complex number $z$ with $|z| = 1$, we have $|z^2 + z + 1| \le 3$.
+
+\textit{Solution:}
+Using the triangle inequality repeatedly:
+\[
+|z^2 + z + 1| \le |z^2| + |z| + |1| = 1 + 1 + 1 = 3
+\]
+with equality when $z = 1$. \qed
+
+\paragraph{Example 4: Integration Inequality.}
+Prove that $\displaystyle\int_0^1 x^2 \, dx < \int_0^1 x \, dx$.
+
+\textit{Solution:}
+For $x \in [0, 1]$, we have $x^2 \le x$ (with equality only at $x = 0$ and $x = 1$). Therefore:
+\[
+\int_0^1 x^2 \, dx < \int_0^1 x \, dx
+\]
+Computing: $\dfrac{1}{3} < \dfrac{1}{2}$. \qed
+
+\paragraph{Example 5: Induction with Inequality.}
+Prove by induction that $2^n > n$ for all integers $n \ge 1$.
+
+\textit{Solution:}
+\textit{Base case ($n = 1$):} $2^1 = 2 > 1$. \checkmark
+
+\textit{Inductive step:} Assume $2^k > k$ for some $k \ge 1$. Then:
+\[
+2^{k+1} = 2 \cdot 2^k > 2k
+\]
+Since $k \ge 1$, we have $2k = k + k \ge k + 1$. Therefore $2^{k+1} > k + 1$. By induction, the result holds for all $n \ge 1$. \qed
+
+\subsection{Notation and Conventions}
+\begin{itemize}[leftmargin=*]
+  \item Unless stated otherwise, variables represent real numbers.
+  \item The notation $a, b > 0$ means both $a$ and $b$ are positive.
+  \item ``Prove'' indicates a complete justification is required.
+  \item ``Hence'' or ``deduce'' means use the previous result directly.
+  \item Equality conditions identify when an inequality becomes an equality.
+\end{itemize}
+
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains 15 carefully selected problems---five basic, five medium, and five advanced. Each problem includes a comprehensive solution with step-by-step reasoning and a \textbf{Takeaways} section highlighting key techniques and strategic insights.
+
+\subsection{Basic Inequality Problems}
+\input{problems/part1-basic}
+
+\subsection{Medium Inequality Problems}
+\input{problems/part1-medium}
+
+\subsection{Advanced Inequality Problems}
+\input{problems/part1-advanced}
+
+\section{Part 2: Problems and Solutions (Concise + Hints)}
+Part~2 presents 30 additional problems distributed across difficulty levels. Solutions are intentionally more concise to encourage independent problem-solving, and every problem includes an upside-down hint followed by a brief \textbf{Takeaways} section.
+
+\subsection{Basic Inequality Problems}
+\input{problems/part2-basic}
+
+\subsection{Medium Inequality Problems}
+\input{problems/part2-medium}
+
+\subsection{Advanced Inequality Problems}
+\input{problems/part2-advanced}
+
+\section{Conclusion}
+Inequalities are a cornerstone of the HSC Mathematics Extension~2 course, appearing in diverse contexts from pure algebra to calculus and complex numbers. Mastery requires recognizing when to apply AM-GM, Cauchy-Schwarz, triangle inequality, or induction-based techniques. Use these 45 problems to develop pattern recognition, proof-writing clarity, and strategic problem-solving skills. Best of luck with your studies and examinations!
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Inequalities}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Inequalities}
+
+\end{document}
