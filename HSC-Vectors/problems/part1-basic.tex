@@ -1,0 +1,156 @@
+% Part 1 Basic Problems (5 problems)
+% Problems: 16, 17, 22, 58, 02
+
+\begin{problem}[Vector Projection Formula]
+The vector $\mathbf{a}$ is $\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$ and the vector $\mathbf{b}$ is $\begin{pmatrix} 2 \\ 0 \\ -4 \end{pmatrix}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Find $\tfrac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{b} \cdot \mathbf{b}} \mathbf{b}$.
+    \item Show that $\mathbf{a} - \tfrac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{b} \cdot \mathbf{b}} \mathbf{b}$ is perpendicular to $\mathbf{b}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Given: $\mathbf{a} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$, $\mathbf{b} = \begin{pmatrix} 2 \\ 0 \\ -4 \end{pmatrix}$
+\vspace{-2mm}
+
+\textbf{(i)} Calculate the dot products:
+\begin{align*}
+\mathbf{a} \cdot \mathbf{b} &= (1)(2) + (2)(0) + (3)(-4) = 2 - 12 = -10 \\
+\mathbf{b} \cdot \mathbf{b} &= 4 + 0 + 16 = 20
+\end{align*}
+\vspace{-3mm}
+Thus: $\tfrac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{b} \cdot \mathbf{b}} \mathbf{b} = \tfrac{-10}{20} \begin{pmatrix} 2 \\ 0 \\ -4 \end{pmatrix} = -\tfrac{1}{2} \begin{pmatrix} 2 \\ 0 \\ -4 \end{pmatrix} = \begin{pmatrix} -1 \\ 0 \\ 2 \end{pmatrix}$
+\vspace{-2mm}
+
+\textbf{(ii)} Let $\mathbf{v} = \mathbf{a} - \tfrac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{b} \cdot \mathbf{b}} \mathbf{b}$. Then:
+$$\mathbf{v} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} - \begin{pmatrix} -1 \\ 0 \\ 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 2 \\ 1 \end{pmatrix}$$
+\vspace{-2mm}
+Check perpendicularity: $\mathbf{v} \cdot \mathbf{b} = (2)(2) + (2)(0) + (1)(-4) = 4 - 4 = 0$ \quad $\therefore$ perpendicular.
+\end{solution}
+
+\begin{takeaways}
+The expression $\text{proj}_{\mathbf{b}}\mathbf{a} = \tfrac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{b} \cdot \mathbf{b}}\mathbf{b}$ is the \textbf{vector projection} of $\mathbf{a}$ onto $\mathbf{b}$. The remainder $\mathbf{a} - \text{proj}_{\mathbf{b}}\mathbf{a}$ is the component perpendicular to $\mathbf{b}$. This orthogonal decomposition is fundamental: any vector can be split into parallel and perpendicular components relative to another vector. Always verify perpendicularity by checking that the dot product equals zero.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Shortest Distance from Point to Line]
+$\mathbf{r}_1$ and $\mathbf{r}_2$ are two lines with vector equations:
+$\mathbf{r}_1 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} + \lambda \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$ and 
+$\mathbf{r}_2 = \begin{pmatrix} 2 \\ 0 \\ 0 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix}$, $\lambda, \mu \in \mathbb{R}$
+\begin{enumerate}[label=(\roman*)]
+    \item Show that these two lines intersect.
+    \item Find the angle between the lines.
+    \item Find the shortest distance from point $P(1,2,0)$ to line $\mathbf{r}_1$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Equate components: $1 = 2 + \mu$ gives $\mu = -1$. Then $\lambda = 3\mu = -3$. Check $z$: $1 + \lambda = 1 - 3 = -2$ and $2\mu = -2$. Consistent. Lines intersect at $(1, -3, -2)$.
+\vspace{-2mm}
+
+\textbf{(ii)} Direction vectors: $\mathbf{d}_1 = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$, $\mathbf{d}_2 = \begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix}$
+\vspace{-2mm}
+\begin{align*}
+\mathbf{d}_1 \cdot \mathbf{d}_2 &= 0 + 3 + 2 = 5\\
+|\mathbf{d}_1| &= \sqrt{2}, \quad |\mathbf{d}_2| = \sqrt{1+9+4} = \sqrt{14}\\
+\cos\theta &= \tfrac{5}{\sqrt{2}\sqrt{14}} = \tfrac{5}{2\sqrt{7}} \implies \theta \approx 19.1^\circ
+\end{align*}
+\vspace{-2mm}
+
+\textbf{(iii)} Let $A(1,0,1)$ be on line $\mathbf{r}_1$, direction $\mathbf{d} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$.
+$$\vec{AP} = \begin{pmatrix} 0 \\ 2 \\ -1 \end{pmatrix}$$
+\vspace{-2mm}
+Cross product: $\vec{AP} \times \mathbf{d} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 0 & 2 & -1 \\ 0 & 1 & 1 \end{vmatrix} = \mathbf{i}(2+1) = 3\mathbf{i}$
+\vspace{-2mm}
+$$D = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2} \text{ units}$$
+\end{solution}
+
+\begin{takeaways}
+To find line intersection in 3D: equate components and solve the system (3 equations, 2 unknowns). Consistent solution means intersection; inconsistent means skew lines. The \textbf{cross product method} for point-to-line distance is efficient: $d = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|}$ where $A$ is any point on the line. This uses the geometric interpretation that $|\vec{AP} \times \mathbf{d}|$ equals the area of a parallelogram with base $|\mathbf{d}|$ and height $d$.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Parallelogram Area via Cross Product]
+The adjacent sides of a parallelogram are represented by vectors 
+$\mathbf{a} = 4\mathbf{i} + 3\mathbf{j} - \mathbf{k}$ and $\mathbf{b} = 2\mathbf{i} - \mathbf{j} + 3\mathbf{k}$.
+Show that the area of the parallelogram is $6\sqrt{10}$ square units.
+\end{problem}
+
+\begin{solution}
+Area of parallelogram $= |\mathbf{a} \times \mathbf{b}|$. Calculate the cross product:
+\vspace{-2mm}
+\begin{align*}
+\mathbf{a} \times \mathbf{b} &= \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 4 & 3 & -1 \\ 2 & -1 & 3 \end{vmatrix}\\
+&= \mathbf{i}(3 \cdot 3 - (-1)(-1)) - \mathbf{j}(4 \cdot 3 - (-1)(2)) + \mathbf{k}(4(-1) - 3 \cdot 2)\\
+&= \mathbf{i}(9-1) - \mathbf{j}(12+2) + \mathbf{k}(-4-6)\\
+&= 8\mathbf{i} - 14\mathbf{j} - 10\mathbf{k}
+\end{align*}
+\vspace{-2mm}
+Magnitude:
+$$|\mathbf{a} \times \mathbf{b}| = \sqrt{64 + 196 + 100} = \sqrt{360} = \sqrt{36 \cdot 10} = 6\sqrt{10}$$
+\end{solution}
+
+\begin{takeaways}
+The \textbf{cross product} $\mathbf{a} \times \mathbf{b}$ produces a vector perpendicular to both $\mathbf{a}$ and $\mathbf{b}$, with magnitude equal to the area of the parallelogram they span. Key properties: (1) anticommutative: $\mathbf{a} \times \mathbf{b} = -\mathbf{b} \times \mathbf{a}$; (2) $|\mathbf{a} \times \mathbf{b}| = |\mathbf{a}||\mathbf{b}|\sin\theta$. For area calculations, only the magnitude matters. Remember the determinant pattern for $3 \times 3$ cross products.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Cosine Difference Formula Proof]
+Let $\mathbf{a}$ and $\mathbf{b}$ be 2-dimensional unit vectors, inclined to the $x$-axis at angles $\alpha$ and $\beta$ respectively. You may assume $\mathbf{a} = \cos\alpha\,\mathbf{i} + \sin\alpha\,\mathbf{j}$ and $\mathbf{b} = \cos\beta\,\mathbf{i} + \sin\beta\,\mathbf{j}$. Prove that $\cos(\alpha - \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta$.
+\end{problem}
+
+\begin{solution}
+\textbf{Method 1: Geometric dot product}
+\vspace{-2mm}
+
+The angle between $\mathbf{a}$ and $\mathbf{b}$ is $\theta = \alpha - \beta$. Since both are unit vectors:
+$$\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\theta = (1)(1)\cos(\alpha - \beta) = \cos(\alpha - \beta)$$
+\vspace{-2mm}
+
+\textbf{Method 2: Algebraic dot product}
+\vspace{-2mm}
+$$\mathbf{a} \cdot \mathbf{b} = (\cos\alpha)(\cos\beta) + (\sin\alpha)(\sin\beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta$$
+\vspace{-2mm}
+
+Equating the two expressions: $\cos(\alpha - \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta$ \quad $\square$
+\end{solution}
+
+\begin{takeaways}
+This elegant proof demonstrates the power of vectors in deriving trigonometric identities. The key insight: the dot product has both a \textbf{geometric definition} ($|\mathbf{a}||\mathbf{b}|\cos\theta$) and an \textbf{algebraic definition} (sum of component products). Equating these yields the cosine difference formula. Similar approaches can derive $\cos(\alpha + \beta)$, $\sin(\alpha \pm \beta)$, and other compound angle formulas. This vector method is often cleaner than traditional geometric proofs.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Perpendicular Vectors Condition]
+Consider two vectors $\mathbf{u} = -2\mathbf{i} - \mathbf{j} + 3\mathbf{k}$ and $\mathbf{v} = p\mathbf{i} + \mathbf{j} + 2\mathbf{k}$. For what values of $p$ are $\mathbf{u} - \mathbf{v}$ and $\mathbf{u} + \mathbf{v}$ perpendicular?
+\end{problem}
+
+\begin{solution}
+First compute $\mathbf{u} - \mathbf{v}$ and $\mathbf{u} + \mathbf{v}$:
+\vspace{-2mm}
+\begin{align*}
+\mathbf{u} - \mathbf{v} &= (-2-p)\mathbf{i} + (-1-1)\mathbf{j} + (3-2)\mathbf{k} = (-2-p)\mathbf{i} - 2\mathbf{j} + \mathbf{k}\\
+\mathbf{u} + \mathbf{v} &= (-2+p)\mathbf{i} + (-1+1)\mathbf{j} + (3+2)\mathbf{k} = (-2+p)\mathbf{i} + 0\mathbf{j} + 5\mathbf{k}
+\end{align*}
+\vspace{-2mm}
+
+For perpendicularity, their dot product must equal zero:
+\vspace{-2mm}
+\begin{align*}
+(\mathbf{u} - \mathbf{v}) \cdot (\mathbf{u} + \mathbf{v}) &= 0\\
+(-2-p)(-2+p) + (-2)(0) + (1)(5) &= 0\\
+4 - p^2 + 5 &= 0\\
+9 - p^2 &= 0\\
+p^2 &= 9\\
+p &= \pm 3
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+Perpendicularity problems always reduce to setting the dot product equal to zero. This problem illustrates the algebraic identity: $(\mathbf{u} - \mathbf{v}) \cdot (\mathbf{u} + \mathbf{v}) = |\mathbf{u}|^2 - |\mathbf{v}|^2$ (vector form of difference of squares). The general principle: two vectors are perpendicular if and only if the sum of products of corresponding components equals zero. When the problem involves a parameter, solve the resulting equation carefully—don't forget both positive and negative solutions for squared terms.
+\end{takeaways}
+
+\vspace{1em}

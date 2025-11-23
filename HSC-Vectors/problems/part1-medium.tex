@@ -1,0 +1,203 @@
+% Part 1 Medium Problems (5 problems)
+% Problems: 49, 32, 45, 12, 23
+
+\begin{problem}[Line Tangent to Sphere]
+A sphere has centre at $(3, -3, 4)$ and radius 6 units. A line has equation $\mathbf{r} = \begin{pmatrix} 1 \\ 5 \\ 4 \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ -1 \\ -1 \end{pmatrix}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Write down the vector equation of the sphere.
+    \item Determine whether the line is a tangent to the sphere, clearly justifying your conclusion.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Let centre $\mathbf{c} = \begin{pmatrix} 3 \\ -3 \\ 4 \end{pmatrix}$ and radius $R = 6$. Vector equation:
+$$\left| \mathbf{r} - \begin{pmatrix} 3 \\ -3 \\ 4 \end{pmatrix} \right| = 6$$
+\vspace{-2mm}
+
+\textbf{(ii)} Substitute line into sphere. Cartesian form: $(x-3)^2 + (y+3)^2 + (z-4)^2 = 36$.
+Parametric line: $x = 1 + 2\lambda$, $y = 5 - \lambda$, $z = 4 - \lambda$.
+\vspace{-2mm}
+\begin{align*}
+(1+2\lambda-3)^2 + (5-\lambda+3)^2 + (4-\lambda-4)^2 &= 36\\
+(2\lambda-2)^2 + (8-\lambda)^2 + (-\lambda)^2 &= 36\\
+4\lambda^2 - 8\lambda + 4 + 64 - 16\lambda + \lambda^2 + \lambda^2 &= 36\\
+6\lambda^2 - 24\lambda + 68 &= 36\\
+6\lambda^2 - 24\lambda + 32 &= 0\\
+3\lambda^2 - 12\lambda + 16 &= 0
+\end{align*}
+\vspace{-2mm}
+Discriminant: $\Delta = (-12)^2 - 4(3)(16) = 144 - 192 = -48 < 0$
+
+No real solutions $\implies$ \textbf{line does NOT intersect sphere} (not a tangent).
+\end{solution}
+
+\begin{takeaways}
+For line-sphere intersection: substitute parametric line equations into sphere equation to get a quadratic in $\lambda$. The discriminant determines the nature: $\Delta > 0$ (2 intersections, secant), $\Delta = 0$ (1 intersection, tangent), $\Delta < 0$ (no intersection). A tangent touches the sphere at exactly one point, requiring distance from centre to line equals radius. Always check discriminant rather than just counting solutions.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Perpendicular Lines and Plane Equation]
+Consider lines $L_1: \mathbf{r} = \begin{pmatrix} 3 \\ 2 \\ -1 \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix}$ and 
+$L_2: \mathbf{r} = \begin{pmatrix} -1 \\ 1 \\ 0 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}$
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $L_1$ and $L_2$ intersect and are perpendicular, stating the point of intersection.
+    \item Deduce that the plane containing both lines has equation $y+z=1$.
+    \item Find the perpendicular distance from the origin to this plane.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Directions: $\mathbf{d}_1 = \begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix}$, $\mathbf{d}_2 = \begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}$.
+Perpendicular: $\mathbf{d}_1 \cdot \mathbf{d}_2 = 2 - 1 - 1 = 0$ \checkmark
+\vspace{-2mm}
+
+Intersection: Equate $(3+2\lambda, 2-\lambda, -1+\lambda) = (-1+\mu, 1+\mu, -\mu)$
+\begin{align*}
+x: 3+2\lambda = -1+\mu &\implies \mu - 2\lambda = 4 \quad (1)\\
+y: 2-\lambda = 1+\mu &\implies \mu + \lambda = 1 \quad (2)\\
+z: -1+\lambda = -\mu &\implies \mu + \lambda = 1 \quad (3)
+\end{align*}
+\vspace{-2mm}
+$(1)-(2)$: $-3\lambda = 3 \implies \lambda = -1$, so $\mu = 2$.
+Point: $(3-2, 2+1, -1-1) = (1, 3, -2)$ \checkmark
+\vspace{-2mm}
+
+\textbf{(ii)} Plane through $(1,3,-2)$ spanned by $\mathbf{d}_1, \mathbf{d}_2$. Normal vector:
+$$\mathbf{n} = \mathbf{d}_1 \times \mathbf{d}_2 = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 2 & -1 & 1 \\ 1 & 1 & -1 \end{vmatrix} = 0\mathbf{i} + 3\mathbf{j} + 3\mathbf{k}$$
+\vspace{-2mm}
+Simplified: $\mathbf{n} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$. Plane: $0x + y + z = k$.
+Using $(1,3,-2)$: $3 + (-2) = 1 \implies k = 1$. Thus $y + z = 1$.
+\vspace{-2mm}
+
+\textbf{(iii)} Distance from origin $(0,0,0)$ to plane $y + z - 1 = 0$:
+$$D = \tfrac{|0 + 0 - 1|}{\sqrt{0^2 + 1^2 + 1^2}} = \tfrac{1}{\sqrt{2}} = \tfrac{\sqrt{2}}{2} \text{ units}$$
+\end{solution}
+
+\begin{takeaways}
+When two lines intersect, they determine a unique plane. To find the plane's Cartesian equation: (1) verify intersection, (2) compute normal via cross product of direction vectors, (3) use point-normal form. The cross product automatically gives a perpendicular vector. For distance from point $(x_0, y_0, z_0)$ to plane $Ax + By + Cz + D = 0$: $d = \tfrac{|Ax_0 + By_0 + Cz_0 + D|}{\sqrt{A^2 + B^2 + C^2}}$. Memorize this formula.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Three Conditions on Vectors]
+Which of the following is a true statement about the lines 
+$\ell_1 = \begin{pmatrix} -1 \\ 2 \\ 5 \end{pmatrix} + \lambda \begin{pmatrix} -1 \\ 3 \\ 1 \end{pmatrix}$ and 
+$\ell_2 = \begin{pmatrix} 3 \\ -10 \\ 1 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ -3 \\ -1 \end{pmatrix}$?
+\begin{enumerate}[label=\Alph*.]
+    \item $\ell_1$ and $\ell_2$ are the same line.
+    \item $\ell_1$ and $\ell_2$ are not parallel and they intersect.
+    \item $\ell_1$ and $\ell_2$ are parallel and they do not intersect.
+    \item $\ell_1$ and $\ell_2$ are not parallel and they do not intersect.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Direction vectors: $\mathbf{d}_1 = \begin{pmatrix} -1 \\ 3 \\ 1 \end{pmatrix}$, $\mathbf{d}_2 = \begin{pmatrix} 1 \\ -3 \\ -1 \end{pmatrix}$
+\vspace{-2mm}
+
+\textbf{Step 1: Check parallelism}
+$$\mathbf{d}_2 = -1 \cdot \mathbf{d}_1$$
+Lines are \textbf{parallel} (eliminates B and D).
+\vspace{-2mm}
+
+\textbf{Step 2: Check if coincident}
+Test if point $P_1 = (-1, 2, 5)$ from $\ell_1$ lies on $\ell_2$:
+$$\begin{pmatrix} -1 \\ 2 \\ 5 \end{pmatrix} = \begin{pmatrix} 3 \\ -10 \\ 1 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ -3 \\ -1 \end{pmatrix}$$
+\vspace{-2mm}
+Component equations:
+\begin{align*}
+x: -1 = 3 + \mu &\implies \mu = -4\\
+y: 2 = -10 - 3\mu &\implies \mu = -4\\
+z: 5 = 1 - \mu &\implies \mu = -4
+\end{align*}
+\vspace{-2mm}
+Consistent value $\mu = -4$ for all components $\implies$ point lies on $\ell_2$.
+
+\textbf{Answer: A} (same line).
+\end{solution}
+
+\begin{takeaways}
+For two lines to be identical, two conditions must hold: (1) direction vectors are scalar multiples (parallel), and (2) they share at least one common point. If parallel but don't share a point, they're distinct parallel lines. In 3D, non-parallel lines can be skew (no intersection). The systematic approach: first check parallelism via direction vectors, then test a point from one line on the other. This problem reinforces the distinction between "parallel" and "coincident."
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Projectile Motion Vector Proof]
+A particle is projected from the origin with initial velocity $u$ m/s at angle $\theta$ to the horizontal. The acceleration vector is $\mathbf{a} = \begin{pmatrix} 0 \\ -g \end{pmatrix}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that the position vector is $\mathbf{r}(t) = \begin{pmatrix} ut\cos\theta \\ ut\sin\theta - \tfrac{1}{2}gt^2 \end{pmatrix}$.
+    \item Show that the Cartesian equation of the path is $y = x\tan\theta - \tfrac{gx^2}{2u^2\cos^2\theta}$.
+    \item Given $u^2 > gR$, prove there are two distinct values of $\theta$ for which the particle lands at $x = R$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Initial velocity: $\mathbf{v}_0 = u\begin{pmatrix} \cos\theta \\ \sin\theta \end{pmatrix}$. Integrate acceleration:
+$$\mathbf{v}(t) = \mathbf{v}_0 + \int \mathbf{a}\,dt = \begin{pmatrix} u\cos\theta \\ u\sin\theta - gt \end{pmatrix}$$
+Integrate velocity (starting from origin):
+$$\mathbf{r}(t) = \int \mathbf{v}(t)\,dt = \begin{pmatrix} ut\cos\theta \\ ut\sin\theta - \tfrac{1}{2}gt^2 \end{pmatrix}$$
+\vspace{-2mm}
+
+\textbf{(ii)} From $x = ut\cos\theta$, we get $t = \tfrac{x}{u\cos\theta}$. Substitute into $y$:
+\vspace{-2mm}
+\begin{align*}
+y &= u\sin\theta \cdot \tfrac{x}{u\cos\theta} - \tfrac{1}{2}g\left(\tfrac{x}{u\cos\theta}\right)^2\\
+&= x\tan\theta - \tfrac{gx^2}{2u^2\cos^2\theta}
+\end{align*}
+\vspace{-2mm}
+
+\textbf{(iii)} At landing, $y = 0$ and $x = R$:
+$$0 = R\tan\theta - \tfrac{gR^2}{2u^2\cos^2\theta}$$
+Multiply by $\cos^2\theta$: $0 = R\sin\theta\cos\theta - \tfrac{gR^2}{2u^2}$
+\vspace{-2mm}
+
+Using $\sin(2\theta) = 2\sin\theta\cos\theta$:
+$$\sin(2\theta) = \tfrac{gR}{u^2}$$
+Since $u^2 > gR$, we have $\tfrac{gR}{u^2} < 1$. Thus $2\theta$ has two solutions in $[0, 180^\circ]$: one acute, one obtuse. This gives two distinct values of $\theta$ in $[0, 90^\circ]$.
+\end{solution}
+
+\begin{takeaways}
+Projectile motion problems integrate naturally with vectors: acceleration $\to$ velocity $\to$ position. The key insight for part (iii): for a given range $R$, there are two launch angles (complementary angles to $45^\circ$) that achieve the same horizontal distance, provided the initial speed is sufficient. The condition $u^2 > gR$ ensures the target is within reach. The identity $\sin(2\theta) = 2\sin\theta\cos\theta$ is crucial for converting between different forms.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Distance from Point to Line and Sphere]
+Consider point $B$ with position vector $\mathbf{b}$ and line $\ell: \mathbf{a} + \lambda\mathbf{d}$, where $|\mathbf{d}|=1$ and $\lambda$ is a parameter. Let $f(\lambda)$ be the distance between a point on $\ell$ and point $B$.
+\begin{enumerate}[label=(\roman*)]
+    \item Find $\lambda_0$, the value of $\lambda$ that minimises $f$, in terms of $\mathbf{a}$, $\mathbf{b}$, and $\mathbf{d}$.
+    \item Let $P$ be the point with position vector $\mathbf{a} + \lambda_0\mathbf{d}$. Show that $PB$ is perpendicular to the direction of $\ell$.
+    \item Hence find the shortest distance between line $\ell$ and the sphere of radius 1 centred at origin $O$, in terms of $\mathbf{d}$ and $\mathbf{a}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Minimize $S(\lambda) = f(\lambda)^2 = |(\mathbf{a} + \lambda\mathbf{d}) - \mathbf{b}|^2$:
+\vspace{-2mm}
+\begin{align*}
+S(\lambda) &= |\mathbf{a} - \mathbf{b}|^2 + 2\lambda(\mathbf{a} - \mathbf{b}) \cdot \mathbf{d} + \lambda^2|\mathbf{d}|^2\\
+\tfrac{dS}{d\lambda} &= 2(\mathbf{a} - \mathbf{b}) \cdot \mathbf{d} + 2\lambda = 0\\
+\lambda_0 &= -(\mathbf{a} - \mathbf{b}) \cdot \mathbf{d} = (\mathbf{b} - \mathbf{a}) \cdot \mathbf{d}
+\end{align*}
+\vspace{-2mm}
+
+\textbf{(ii)} $\vec{PB} = \mathbf{b} - (\mathbf{a} + \lambda_0\mathbf{d}) = (\mathbf{b} - \mathbf{a}) - \lambda_0\mathbf{d}$
+Check: $\vec{PB} \cdot \mathbf{d} = (\mathbf{b} - \mathbf{a}) \cdot \mathbf{d} - \lambda_0(\mathbf{d} \cdot \mathbf{d}) = \lambda_0 - \lambda_0(1) = 0$ \checkmark
+\vspace{-2mm}
+
+\textbf{(iii)} For origin (set $\mathbf{b} = \mathbf{0}$): $\lambda_{min} = -\mathbf{a} \cdot \mathbf{d}$.
+Point on line closest to $O$: $\mathbf{p} = \mathbf{a} - (\mathbf{a} \cdot \mathbf{d})\mathbf{d}$
+\vspace{-2mm}
+\begin{align*}
+|\mathbf{p}|^2 &= |\mathbf{a}|^2 - 2(\mathbf{a} \cdot \mathbf{d})^2 + (\mathbf{a} \cdot \mathbf{d})^2 = |\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d})^2
+\end{align*}
+\vspace{-2mm}
+Shortest distance to sphere: $\sqrt{|\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d})^2} - 1$ or equivalently $|\mathbf{a} \times \mathbf{d}| - 1$.
+\end{solution}
+
+\begin{takeaways}
+Point-to-line distance problems use calculus (minimize squared distance) or projection (subtract parallel component). The perpendicularity in part (ii) confirms the minimum—the shortest path is always perpendicular to the line. For sphere-line distance, first find line-to-centre distance, then subtract radius. The identity $|\mathbf{a} - (\mathbf{a} \cdot \mathbf{d})\mathbf{d}|^2 = |\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d})^2$ (when $|\mathbf{d}|=1$) is equivalent to $|\mathbf{a} \times \mathbf{d}|^2$ via Lagrange's identity.
+\end{takeaways}
+
+\vspace{1em}

@@ -26,10 +26,10 @@ privs/
 *.auxlock
 
 # PDF files (optional - uncomment if you don't want to track PDFs)
-HSC-Inequalities.pdf
+HSC-Induction.pdf
 
 # Release directory (optional - uncomment if you don't want to track releases)
-!releases/HSC-Inequalities.pdf
+!releases/HSC-Induction.pdf
 samples/
 bloggings/
 docs/

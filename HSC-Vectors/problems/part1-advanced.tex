@@ -1,0 +1,184 @@
+% Part 1 Advanced Problems (4 problems)
+% Problems: 03, 05, 06, 42
+
+\begin{problem}[Position Vector Ratios and Parallelogram Division]
+Point $C$ divides interval $AB$ so that $\tfrac{CB}{AC} = \tfrac{m}{n}$. Position vectors of $A$ and $B$ are $\mathbf{a}, \mathbf{b}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $\vec{AC} = \tfrac{n}{m+n}(\mathbf{b} - \mathbf{a})$.
+    \item Prove that $\vec{OC} = \tfrac{m}{m+n}\mathbf{a} + \tfrac{n}{m+n}\mathbf{b}$.
+\end{enumerate}
+Let $OPQR$ be a parallelogram with $\vec{OP} = \mathbf{p}$, $\vec{OR} = \mathbf{r}$. $S$ is the midpoint of $QR$, $T$ is the intersection of $PR$ and $OS$.
+\begin{enumerate}[label=(\roman*)]
+    \setcounter{enumi}{2}
+    \item Show that $\vec{OT} = \tfrac{2}{3}\mathbf{r} + \tfrac{1}{3}\mathbf{p}$.
+    \item Prove that $T$ divides $PR$ in the ratio $2:1$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Given $\tfrac{CB}{AC} = \tfrac{m}{n}$, let $\vec{AC} = k(\mathbf{b} - \mathbf{a})$ for some $k$. Then $C = A + k(\mathbf{b} - \mathbf{a})$.
+Since $\vec{CB} = \mathbf{b} - \mathbf{c} = (1-k)(\mathbf{b} - \mathbf{a})$ and $\vec{AC} = k(\mathbf{b} - \mathbf{a})$:
+$$\tfrac{CB}{AC} = \tfrac{1-k}{k} = \tfrac{m}{n} \implies n(1-k) = mk \implies n = k(m+n) \implies k = \tfrac{n}{m+n}$$
+Thus $\vec{AC} = \tfrac{n}{m+n}(\mathbf{b} - \mathbf{a})$.
+\vspace{-2mm}
+
+\textbf{(ii)} $\vec{OC} = \vec{OA} + \vec{AC} = \mathbf{a} + \tfrac{n}{m+n}(\mathbf{b} - \mathbf{a}) = \mathbf{a}\left(1 - \tfrac{n}{m+n}\right) + \tfrac{n}{m+n}\mathbf{b} = \tfrac{m}{m+n}\mathbf{a} + \tfrac{n}{m+n}\mathbf{b}$
+\vspace{-2mm}
+
+\textbf{(iii)} In parallelogram $OPQR$: $\vec{OQ} = \mathbf{p} + \mathbf{r}$. $S$ is midpoint of $QR$:
+$$\vec{OS} = \tfrac{1}{2}(\vec{OQ} + \vec{OR}) = \tfrac{1}{2}(\mathbf{p} + \mathbf{r} + \mathbf{r}) = \tfrac{1}{2}\mathbf{p} + \mathbf{r}$$
+$T$ lies on $OS$: $\vec{OT} = s(\tfrac{1}{2}\mathbf{p} + \mathbf{r})$ for some $s$.
+$T$ also lies on $PR$. Since $\vec{OP} = \mathbf{p}$ and $\vec{OR} = \mathbf{r}$:
+$$\vec{OT} = (1-t)\mathbf{p} + t\mathbf{r}$$ for some $t \in [0,1]$.
+Equating: $s\cdot\tfrac{1}{2}\mathbf{p} + s\mathbf{r} = (1-t)\mathbf{p} + t\mathbf{r}$
+\vspace{-2mm}
+
+Since $\mathbf{p}, \mathbf{r}$ are independent: $\tfrac{s}{2} = 1-t$ and $s = t$.
+From second: $s = t$. Substitute into first: $\tfrac{s}{2} = 1-s \implies \tfrac{3s}{2} = 1 \implies s = \tfrac{2}{3}$.
+Thus: $\vec{OT} = \tfrac{2}{3}(\tfrac{1}{2}\mathbf{p} + \mathbf{r}) = \tfrac{1}{3}\mathbf{p} + \tfrac{2}{3}\mathbf{r}$ (or equivalently $\tfrac{2}{3}\mathbf{r} + \tfrac{1}{3}\mathbf{p}$).
+\vspace{-2mm}
+
+\textbf{(iv)} From part (iii), $t = \tfrac{2}{3}$ means $T$ divides $PR$ such that $\vec{PT} = \tfrac{2}{3}\vec{PR}$, so $PT:TR = 2:1$.
+\end{solution}
+
+\begin{takeaways}
+The \textbf{section formula} $\vec{OC} = \tfrac{m\mathbf{a} + n\mathbf{b}}{m+n}$ (when $C$ divides $AB$ in ratio $n:m$ from $A$) is fundamental for position vectors. For geometric proofs: (1) express target point in terms of base vectors using two different paths, (2) equate and solve using linear independence. Parts (iii)-(iv) show how medians and diagonals in parallelograms create consistent ratios—here $T$ is the centroid-like point dividing both segments in ratio $2:1$.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Triangle Inequality and Cauchy-Schwarz on Sphere]
+\begin{enumerate}[label=(\roman*)]
+    \item Point $P(x,y,z)$ lies on the unit sphere centred at origin $O$. Using the triangle inequality, show that $|x| + |y| + |z| \geq 1$.
+    \item Given vectors $\mathbf{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$ and $\mathbf{b} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}$, show that
+    $|a_1b_1 + a_2b_2 + a_3b_3| \leq \sqrt{a_1^2 + a_2^2 + a_3^2}\sqrt{b_1^2 + b_2^2 + b_3^2}$.
+    \item As in part (i), point $P(x,y,z)$ lies on the unit sphere. Using part (ii), show that $|x| + |y| + |z| \leq \sqrt{3}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Position vector: $\vec{OP} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$ with $|\vec{OP}| = 1$.
+\vspace{-2mm}
+
+Triangle inequality: $|\mathbf{u} + \mathbf{v} + \mathbf{w}| \leq |\mathbf{u}| + |\mathbf{v}| + |\mathbf{w}|$
+$$1 = |x\mathbf{i} + y\mathbf{j} + z\mathbf{k}| \leq |x\mathbf{i}| + |y\mathbf{j}| + |z\mathbf{k}| = |x| + |y| + |z|$$
+\vspace{-2mm}
+
+\textbf{(ii)} Cauchy-Schwarz from dot product: $\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\theta$
+Taking absolute value: $|\mathbf{a} \cdot \mathbf{b}| = |\mathbf{a}||\mathbf{b}||\cos\theta| \leq |\mathbf{a}||\mathbf{b}|$ (since $|\cos\theta| \leq 1$).
+In components: $|a_1b_1 + a_2b_2 + a_3b_3| \leq \sqrt{a_1^2 + a_2^2 + a_3^2}\sqrt{b_1^2 + b_2^2 + b_3^2}$
+\vspace{-2mm}
+
+\textbf{(iii)} Let $\mathbf{a} = \begin{pmatrix} |x| \\ |y| \\ |z| \end{pmatrix}$ and $\mathbf{b} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}$.
+Apply Cauchy-Schwarz:
+$$|x| + |y| + |z| = |x|(1) + |y|(1) + |z|(1) \leq \sqrt{x^2 + y^2 + z^2}\sqrt{1^2 + 1^2 + 1^2}$$
+Since $P$ is on unit sphere: $x^2 + y^2 + z^2 = 1$. Thus:
+$$|x| + |y| + |z| \leq \sqrt{1} \cdot \sqrt{3} = \sqrt{3}$$
+\end{solution}
+
+\begin{takeaways}
+This problem demonstrates two fundamental inequalities. The \textbf{triangle inequality} $|\mathbf{u} + \mathbf{v}| \leq |\mathbf{u}| + |\mathbf{v}|$ gives lower bounds. The \textbf{Cauchy-Schwarz inequality} $|\mathbf{a} \cdot \mathbf{b}| \leq |\mathbf{a}||\mathbf{b}|$ gives upper bounds. Both arise from the dot product definition. Part (iii) uses a clever choice of vectors to convert a sum constraint into a dot product. Combined: $1 \leq |x| + |y| + |z| \leq \sqrt{3}$ for points on the unit sphere—tight bounds achieved at corners of inscribed cube.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Tetrahedron Bimedians Equality]
+On triangular pyramid $ABCD$, $L, M, N, P, Q, R$ are midpoints of edges $AB, AC, AD, CD, BD, BC$ respectively. Let $\mathbf{b} = \vec{AB}$, $\mathbf{c} = \vec{AC}$, $\mathbf{d} = \vec{AD}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $\vec{LP} = \tfrac{1}{2}(-\mathbf{b} + \mathbf{c} + \mathbf{d})$.
+    \item Given that $\vec{MQ} = \tfrac{1}{2}(\mathbf{b} - \mathbf{c} + \mathbf{d})$ and $\vec{NR} = \tfrac{1}{2}(\mathbf{b} + \mathbf{c} - \mathbf{d})$, prove that
+    $|AB|^2 + |AC|^2 + |AD|^2 + |BC|^2 + |BD|^2 + |CD|^2 = 4(|LP|^2 + |MQ|^2 + |NR|^2)$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} $L$ is midpoint of $AB$: $\vec{AL} = \tfrac{1}{2}\mathbf{b}$.
+$P$ is midpoint of $CD$: $\vec{AP} = \tfrac{1}{2}(\vec{AC} + \vec{AD}) = \tfrac{1}{2}(\mathbf{c} + \mathbf{d})$.
+$$\vec{LP} = \vec{AP} - \vec{AL} = \tfrac{1}{2}(\mathbf{c} + \mathbf{d}) - \tfrac{1}{2}\mathbf{b} = \tfrac{1}{2}(-\mathbf{b} + \mathbf{c} + \mathbf{d})$$
+\vspace{-2mm}
+
+\textbf{(ii)} \textbf{LHS:} Sum of squared edge lengths.
+\vspace{-2mm}
+\begin{align*}
+\text{LHS} &= |\mathbf{b}|^2 + |\mathbf{c}|^2 + |\mathbf{d}|^2 + |\mathbf{c}-\mathbf{b}|^2 + |\mathbf{d}-\mathbf{b}|^2 + |\mathbf{d}-\mathbf{c}|^2\\
+&= b^2 + c^2 + d^2 + (c^2 + b^2 - 2\mathbf{b} \cdot \mathbf{c}) + (d^2 + b^2 - 2\mathbf{b} \cdot \mathbf{d})\\
+&\quad + (d^2 + c^2 - 2\mathbf{c} \cdot \mathbf{d})\\
+&= 3(b^2 + c^2 + d^2) - 2(\mathbf{b} \cdot \mathbf{c} + \mathbf{b} \cdot \mathbf{d} + \mathbf{c} \cdot \mathbf{d})
+\end{align*}
+\vspace{-2mm}
+
+\textbf{RHS:} Calculate $4|LP|^2$:
+\vspace{-2mm}
+\begin{align*}
+|LP|^2 &= \tfrac{1}{4}(-\mathbf{b} + \mathbf{c} + \mathbf{d}) \cdot (-\mathbf{b} + \mathbf{c} + \mathbf{d})\\
+&= \tfrac{1}{4}(b^2 + c^2 + d^2 - 2\mathbf{b} \cdot \mathbf{c} - 2\mathbf{b} \cdot \mathbf{d} + 2\mathbf{c} \cdot \mathbf{d})\\
+4|LP|^2 &= b^2 + c^2 + d^2 - 2\mathbf{b} \cdot \mathbf{c} - 2\mathbf{b} \cdot \mathbf{d} + 2\mathbf{c} \cdot \mathbf{d}
+\end{align*}
+\vspace{-2mm}
+Similarly:
+\vspace{-2mm}
+\begin{align*}
+4|MQ|^2 &= b^2 + c^2 + d^2 - 2\mathbf{b} \cdot \mathbf{c} + 2\mathbf{b} \cdot \mathbf{d} - 2\mathbf{c} \cdot \mathbf{d}\\
+4|NR|^2 &= b^2 + c^2 + d^2 + 2\mathbf{b} \cdot \mathbf{c} - 2\mathbf{b} \cdot \mathbf{d} - 2\mathbf{c} \cdot \mathbf{d}
+\end{align*}
+\vspace{-2mm}
+Sum:
+\vspace{-2mm}
+\begin{align*}
+\text{RHS} &= 4(|LP|^2 + |MQ|^2 + |NR|^2)\\
+&= 3(b^2 + c^2 + d^2) + (-2-2+2)\mathbf{b} \cdot \mathbf{c} + (-2+2-2)\mathbf{b} \cdot \mathbf{d}\\
+&\quad + (2-2-2)\mathbf{c} \cdot \mathbf{d}\\
+&= 3(b^2 + c^2 + d^2) - 2(\mathbf{b} \cdot \mathbf{c} + \mathbf{b} \cdot \mathbf{d} + \mathbf{c} \cdot \mathbf{d}) = \text{LHS} \quad \square
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\textbf{Bimedians} (segments joining midpoints of opposite edges) in a tetrahedron have remarkable properties. This identity relates all six edge lengths to the three bimedian lengths—a 3D analogue of the parallelogram law. The proof strategy: express everything in terms of base vectors $\mathbf{b}, \mathbf{c}, \mathbf{d}$, expand dot products carefully, and verify algebraic cancellation. Note the symmetry in coefficients $(+2, -2, -2)$ cycling through the three cross terms. Such identities are useful in crystallography and structural analysis.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Point-to-Line Distance and Sphere Intersection]
+Consider the line $\ell$ with equation $\mathbf{r} = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} + \lambda \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Find the perpendicular distance from point $P(1, 2, 0)$ to the line $\ell$.
+    \item Find the shortest distance from the origin to the line $\ell$.
+    \item Determine the points where line $\ell$ intersects the sphere $x^2 + y^2 + z^2 = 4$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Let $A(1, 0, 1)$ be on $\ell$, direction $\mathbf{d} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$.
+$$\vec{AP} = \begin{pmatrix} 0 \\ 2 \\ -1 \end{pmatrix}$$
+Cross product:
+$$\vec{AP} \times \mathbf{d} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 0 & 2 & -1 \\ 0 & 1 & 1 \end{vmatrix} = \mathbf{i}(2 + 1) = 3\mathbf{i}$$
+Distance: $d = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2}$ units.
+\vspace{-2mm}
+
+\textbf{(ii)} Use projection method. Let $\vec{OA} = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}$.
+Projection of $\vec{OA}$ onto $\mathbf{d}$: $\text{proj}_{\mathbf{d}}\vec{OA} = \tfrac{\vec{OA} \cdot \mathbf{d}}{|\mathbf{d}|^2}\mathbf{d} = \tfrac{1}{2}\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$
+\vspace{-2mm}
+
+Perpendicular component: $\vec{OA}_{\perp} = \vec{OA} - \text{proj}_{\mathbf{d}}\vec{OA} = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} - \begin{pmatrix} 0 \\ \tfrac{1}{2} \\ \tfrac{1}{2} \end{pmatrix} = \begin{pmatrix} 1 \\ -\tfrac{1}{2} \\ \tfrac{1}{2} \end{pmatrix}$
+\vspace{-2mm}
+
+Distance: $|\vec{OA}_{\perp}| = \sqrt{1 + \tfrac{1}{4} + \tfrac{1}{4}} = \sqrt{\tfrac{3}{2}} = \tfrac{\sqrt{6}}{2}$ units.
+\vspace{-2mm}
+
+\textbf{(iii)} Substitute line into sphere: $x = 1$, $y = \lambda$, $z = 1 + \lambda$.
+$$1 + \lambda^2 + (1+\lambda)^2 = 4$$
+$$1 + \lambda^2 + 1 + 2\lambda + \lambda^2 = 4$$
+$$2\lambda^2 + 2\lambda - 2 = 0 \implies \lambda^2 + \lambda - 1 = 0$$
+$$\lambda = \tfrac{-1 \pm \sqrt{1+4}}{2} = \tfrac{-1 \pm \sqrt{5}}{2}$$
+\vspace{-2mm}
+
+Points: For $\lambda_1 = \tfrac{-1+\sqrt{5}}{2}$: $(1, \tfrac{-1+\sqrt{5}}{2}, \tfrac{1+\sqrt{5}}{2})$
+
+For $\lambda_2 = \tfrac{-1-\sqrt{5}}{2}$: $(1, \tfrac{-1-\sqrt{5}}{2}, \tfrac{1-\sqrt{5}}{2})$
+\end{solution}
+
+\begin{takeaways}
+Three key distance techniques demonstrated: (1) \textbf{cross product} for point-to-line (geometric), (2) \textbf{projection} for point-to-line (algebraic), (3) \textbf{substitution} for line-sphere intersection. Both methods in (i)-(ii) should give same result (verify as practice). For intersections, substitute parametric equations into the surface equation to get a quadratic—the number of real solutions indicates the geometric relationship. The golden ratio $\phi = \tfrac{1+\sqrt{5}}{2}$ appearing in $\lambda$ is a nice coincidence!
+\end{takeaways}
+
+\vspace{1em}

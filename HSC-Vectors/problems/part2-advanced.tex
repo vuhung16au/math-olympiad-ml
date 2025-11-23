@@ -1,0 +1,223 @@
+\begin{problem}[Triangle Inequality and Cauchy-Schwarz]
+For point $P(x,y,z)$ on unit sphere centered at origin, prove: (i) $|x| + |y| + |z| \geq 1$, (ii) Cauchy-Schwarz inequality, (iii) $|x| + |y| + |z| \leq \sqrt{3}$.
+\end{problem}
+
+\begin{hint}
+Use triangle inequality for part (i) and Cauchy-Schwarz with vector $(1,1,1)$ for part (iii).
+\end{hint}
+
+\begin{solution}[Sketch]
+(i) By triangle inequality: $1 = |\mathbf{r}| \leq |x| + |y| + |z|$. (ii) From dot product: $|\mathbf{a} \cdot \mathbf{b}| \leq |\mathbf{a}||\mathbf{b}|$. (iii) Apply Cauchy-Schwarz with $\mathbf{a} = (|x|,|y|,|z|)$, $\mathbf{b} = (1,1,1)$: $|x| + |y| + |z| \leq \sqrt{x^2+y^2+z^2}\sqrt{3} = \sqrt{3}$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Tetrahedron Vector Collinearity]
+In tetrahedron with vertices and given vector relations, prove points are collinear using unique representation with non-parallel vectors.
+\end{problem}
+
+\begin{hint}
+Show that if $\lambda\mathbf{u} + \mu\mathbf{v} = \vec{0}$ for non-parallel vectors, then both coefficients must be zero.
+\end{hint}
+
+\begin{solution}[Sketch]
+Prove uniqueness: if $\lambda\mathbf{u} + \mu\mathbf{v} = \vec{0}$ and vectors non-parallel, then $\lambda = \mu = 0$. Use this to show $\overrightarrow{BL} = \frac{4}{7}\overrightarrow{BC}$ by expressing $\overrightarrow{OR}$ in two ways via different paths and equating coefficients of non-parallel vectors $\overrightarrow{SB}$ and $\overrightarrow{SC}$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Bimedians of Tetrahedron]
+Show that opposite edges of tetrahedron satisfy certain equality relationship involving midpoint connections.
+\end{problem}
+
+\begin{hint}
+Express midpoint vectors in terms of vertex position vectors.
+\end{hint}
+
+\begin{solution}[Sketch]
+Let vertices be $A, B, C, D$ with position vectors $\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{d}$. Midpoints of edges have position vectors like $\frac{\mathbf{a}+\mathbf{b}}{2}$. Show that vectors connecting midpoints of opposite edges have equal magnitudes by expressing them in terms of vertex vectors and using algebraic manipulation.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Triangle Intersection Ratios]
+In triangle with specific point constructions, prove that intersection point divides segments in particular ratios.
+\end{problem}
+
+\begin{hint}
+Express position vectors through multiple paths and use uniqueness of representation.
+\end{hint}
+
+\begin{solution}[Sketch]
+Use vector methods to express $\overrightarrow{OR}$ via different routes. Equate coefficients of non-parallel base vectors to find parameters. Show systematic approach leads to specific ratio like $\overrightarrow{BL} = \frac{4}{7}\overrightarrow{BC}$. Verify point $P$ lies on line $AL$ by showing $\overrightarrow{AP} = -14\overrightarrow{AL}$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Circle Intersection of Sets]
+Two sets defined by perpendicularity condition and equidistance condition. Show intersection is a circle and find its radius.
+\end{problem}
+
+\begin{hint}
+$S_1$ is sphere with diameter $AB$; $S_2$ is perpendicular bisecting plane of segment $AM$.
+\end{hint}
+
+\begin{solution}[Sketch]
+$S_1$: sphere centered at midpoint $M$ with radius $\frac{|\overrightarrow{AB}|}{2}$. $S_2$: plane perpendicular to $AM$ at its midpoint. Distance from sphere center to plane: $d = \frac{|\overrightarrow{AB}|}{4}$. Circle radius: $r = \sqrt{R^2 - d^2} = \sqrt{\frac{|\overrightarrow{AB}|^2}{4} - \frac{|\overrightarrow{AB}|^2}{16}} = \frac{\sqrt{3}|\overrightarrow{AB}|}{4}$. Answer: D.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Complex Numbers and Centroid]
+Using vectors and complex numbers on unit circle, prove that centroid of three points is never a cube root of their product.
+\end{problem}
+
+\begin{hint}
+Centroid has modulus less than 1, while cube roots of product have modulus exactly 1.
+\end{hint}
+
+\begin{solution}[Sketch]
+Points $x, w, z$ on unit circle: $|x| = |w| = |z| = 1$. Centroid: $G = \frac{x+w+z}{3}$. Any cube root $K$ of $xwz$ satisfies $|K|^3 = |xwz| = 1$, so $|K| = 1$. By triangle inequality (strict since points distinct): $|x+w+z| < 3$, thus $|G| < 1$. Therefore $G \neq K$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Parallelogram Intersection Ratio]
+In parallelogram $OPQR$ with diagonals intersecting at $T$, prove $T$ divides diagonal $PR$ in ratio $2:1$.
+\end{problem}
+
+\begin{hint}
+Express $\overrightarrow{OT}$ via midpoint $S$ of $QR$ using collinearity, then via diagonal $PR$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Find $\overrightarrow{OS} = \mathbf{r} + \frac{1}{2}\mathbf{p}$. Since $T$ on $OS$: $\overrightarrow{OT} = \lambda(\mathbf{r} + \frac{\mathbf{p}}{2})$. Since $T$ on $PR$: coefficients sum to 1. Solve: $\lambda(\frac{1}{2}) + \lambda = 1 \Rightarrow \lambda = \frac{2}{3}$. Thus $\overrightarrow{OT} = \frac{2}{3}\mathbf{r} + \frac{1}{3}\mathbf{p}$, giving ratio $PT:TR = 2:1$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Pyramid Centroid]
+For pyramid with square base $ABCD$ and apex $S$, show sum of vectors from center of base to all vertices is zero, then find centroid $G$ of pyramid.
+\end{problem}
+
+\begin{hint}
+Diagonals of square bisect at $H$. Use symmetry to show $\overrightarrow{HA} + \overrightarrow{HC} = \vec{0}$ and $\overrightarrow{HB} + \overrightarrow{HD} = \vec{0}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+(i) $H$ is midpoint of diagonals: $\overrightarrow{HA} = -\overrightarrow{HC}$ and $\overrightarrow{HB} = -\overrightarrow{HD}$, so sum is zero. (ii) From $\sum \overrightarrow{GA_i} = \vec{0}$, get $4\overrightarrow{GH} + \overrightarrow{GS} = \vec{0}$. Therefore $\overrightarrow{HG} = \frac{1}{5}\overrightarrow{HS}$, giving $\lambda = \frac{1}{5}$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Point-to-Line Distance via Quadratic]
+Show that $|\overrightarrow{AB}|^2 = 6p^2 - 24p + 125$ where $B$ is on line through origin. Find shortest distance from $A$ to line.
+\end{problem}
+
+\begin{hint}
+Minimize the quadratic by completing the square or using calculus.
+\end{hint}
+
+\begin{solution}[Sketch]
+Express $\overrightarrow{AB} = \begin{pmatrix} p-8 \\ p+6 \\ 2p-5 \end{pmatrix}$. Square and sum: $|\overrightarrow{AB}|^2 = (p-8)^2 + (p+6)^2 + (2p-5)^2 = 6p^2 - 24p + 125$. Complete square: $6(p-2)^2 + 101$. Minimum at $p=2$ gives $|\overrightarrow{AB}|_{\min}^2 = 101$, so distance $= \sqrt{101}$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Triangle Intersection with Complex Centroid]
+Points on triangle with various constructions. Show centroid lies on specific line and prove relationship.
+\end{problem}
+
+\begin{hint}
+Express vectors through different routes and use coefficient uniqueness.
+\end{hint}
+
+\begin{solution}[Sketch]
+Given $\overrightarrow{SK} = \frac{1}{4}\overrightarrow{SB} + \frac{1}{3}\overrightarrow{SC}$ and $L$ on $BC$. Show $\overrightarrow{OR} = \frac{1}{2}(\mathbf{a} + \mathbf{b})$ by expressing via paths through $P$ and $Q$. Find $k = \frac{1}{6}$. Centroid $G$ position: $\overrightarrow{OG} = \frac{1}{3}(\mathbf{a} + \mathbf{b} + \mathbf{c})$ lies on line $MC$ where $M$ is midpoint of $AB$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Line-Sphere Intersection Points]
+Find intersection points of line $\mathbf{r} = \mathbf{i} + 3\mathbf{j} - 4\mathbf{k} + t(\mathbf{i} + 2\mathbf{j} + 2\mathbf{k})$ and sphere $(x-1)^2 + (y-3)^2 + (z+4)^2 = 81$.
+\end{problem}
+
+\begin{hint}
+Substitute parametric equations into sphere equation and solve resulting quadratic.
+\end{hint}
+
+\begin{solution}[Sketch]
+Parametric: $x = 1+t$, $y = 3+2t$, $z = -4+2t$. Substitute: $(t)^2 + (2t)^2 + (2t)^2 = 81 \Rightarrow 9t^2 = 81 \Rightarrow t = \pm 3$. Points: $(4, 9, 2)$ when $t=3$ and $(-2, -3, -10)$ when $t=-3$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Line Tangent to Sphere]
+Show line intersects sphere at exactly one point, proving tangency. Find all possible tangent points for lines parallel to given line.
+\end{problem}
+
+\begin{hint}
+Tangent line produces repeated root (discriminant = 0) in quadratic equation.
+\end{hint}
+
+\begin{solution}[Sketch]
+Substitute line equations into sphere equation. Get quadratic: $17\lambda_1^2 - 136\lambda_1 + 272 = 0 \Rightarrow (\lambda_1-4)^2 = 0$. Repeated root means tangency. Tangent point: $(3, -6, 5)$. For parallel tangent lines: radius vector perpendicular to direction vector forms a circle where plane $x + y + 2z - 1 = 0$ intersects sphere.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Regular Octagon Vector Sum]
+In regular octagon with side length 4, find magnitude of sum of vectors from midpoint of one side to all vertices.
+\end{problem}
+
+\begin{hint}
+Use symmetry: sum of vectors from center to vertices is zero. Express via center.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\sum \overrightarrow{AP_i} = 8\overrightarrow{AO}$ since $\sum \overrightarrow{OP_i} = \vec{0}$ by symmetry. Need apothem $|AO|$: in right triangle with half-side = 2 and half-central-angle = $22.5^\circ$, get $|AO| = 2\cot(22.5^\circ) = 2(\sqrt{2}+1)$. Therefore $|\sum \overrightarrow{AP_i}| = 8 \cdot 2(\sqrt{2}+1) = 16(\sqrt{2}+1)$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Two Lines Tangent to Sphere]
+Show two lines intersect and that intersection point is where first line is tangent to given sphere.
+\end{problem}
+
+\begin{hint}
+Find intersection by solving system. For tangency, show quadratic has discriminant zero.
+\end{hint}
+
+\begin{solution}[Sketch]
+Solve system to find intersection: $\lambda_1 = 4$, $\lambda_2 = -2$ gives point $(3, -6, 5)$. Substitute first line into sphere equation: get $17\lambda_1^2 - 136\lambda_1 + 272 = 0$, which factors as $(\lambda_1-4)^2 = 0$. Discriminant zero confirms tangency at $(3, -6, 5)$.
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Constant Expression with Position Vectors]
+Given $\overrightarrow{KB} = 2\overrightarrow{AK}$, prove that $2|\overrightarrow{MA}|^2 + |\overrightarrow{MB}|^2 - 3|\overrightarrow{MK}|^2$ is constant for any point $M$.
+\end{problem}
+
+\begin{hint}
+Express vectors in terms of $\overrightarrow{MK}$ and use given relationship between $A$, $K$, $B$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Write $\overrightarrow{MA} = \overrightarrow{MK} + \overrightarrow{KA}$ and $\overrightarrow{MB} = \overrightarrow{MK} + \overrightarrow{KB}$. Expand magnitudes: $E = 2|\overrightarrow{MK} + \overrightarrow{KA}|^2 + |\overrightarrow{MK} + \overrightarrow{KB}|^2 - 3|\overrightarrow{MK}|^2$. Coefficient of $|\overrightarrow{MK}|^2$ is zero. Using $\overrightarrow{KB} = -2\overrightarrow{KA}$, the dot product term vanishes: $2\overrightarrow{KA} + \overrightarrow{KB} = \vec{0}$. Result: $E = 2|\overrightarrow{KA}|^2 + |\overrightarrow{KB}|^2$ (constant).
+\end{solution}
+
+\vspace{1em}
+
+\begin{problem}[Collinear Points Ratio Determination]
+In triangle $ABC$ with $C$ on $OB$ at ratio $3:1$, $P$ on $AC$, and $Q$ on $AB$ such that $O, P, Q$ collinear. Find ratio $AQ:QB$.
+\end{problem}
+
+\begin{hint}
+Express $\overrightarrow{OQ}$ via collinearity with $\overrightarrow{OP}$ and via position on line $AB$. Equate coefficients.
+\end{hint}
+
+\begin{solution}[Sketch]
+$\overrightarrow{OC} = \frac{3}{4}\mathbf{b}$. Assuming $P$ midpoint of $AC$: $\overrightarrow{OP} = \frac{1}{2}\mathbf{a} + \frac{3}{8}\mathbf{b}$. Collinearity: $\overrightarrow{OQ} = \lambda(\frac{1}{2}\mathbf{a} + \frac{3}{8}\mathbf{b})$. On $AB$: coefficients sum to 1, so $\frac{\lambda}{2} + \frac{3\lambda}{8} = 1 \Rightarrow \lambda = \frac{8}{7}$. Thus $\overrightarrow{OQ} = \frac{4}{7}\mathbf{a} + \frac{3}{7}\mathbf{b}$, giving $AQ:QB = 3:4$.
+\end{solution}
+
+\vspace{1em}

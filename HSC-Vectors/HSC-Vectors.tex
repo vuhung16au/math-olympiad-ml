@@ -1,0 +1,169 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+% Custom styles shared with HSC-Collections
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+% Compact notation macros for A4 constraint compliance
+\newcommand{\cvec}[3]{\begin{psmallmatrix}#1\\#2\\#3\end{psmallmatrix}}
+\newcommand{\tvec}[3]{#1\mathbf{i}+#2\mathbf{j}+#3\mathbf{k}}
+\newcommand{\rvec}[3]{\langle #1, #2, #3 \rangle}
+\newcommand{\smallvec}[3]{\left(\begin{smallmatrix}#1\\#2\\#3\end{smallmatrix}\right)}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: Vectors Mastery}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet compiles high quality vector problems curated specifically for the HSC Mathematics Extension~2 syllabus. The collection covers all essential topics in 3D vectors including geometric proofs, line equations, dot and cross products, spheres, planes, and distance calculations. Each problem is selected to challenge students while building toward exam readiness.
+
+\subsection{Target Audience}
+These problems are designed for Extension~2 students who want to master vectors through systematic practice. Part~1 provides detailed solutions showing complete algebraic steps, geometric intuition, and key takeaways. Part~2 offers hints and concise solutions to encourage independent problem-solving.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the vectors primer below to review fundamental concepts and notation.
+  \item Attempt problems in Part~1 independently; study the detailed solutions to understand model approaches.
+  \item Use the upside-down hints in Part~2 only after making a genuine attempt.
+  \item Focus on understanding geometric meaning alongside algebraic manipulation.
+  \item Revisit challenging problems after a few days to reinforce techniques.
+\end{itemize}
+
+\subsection{Vectors Primer}
+
+\subsubsection{3D Vectors \& Coordinates}
+Extension 2 introduces the $z$-axis, moving from $(x, y)$ plane to $(x, y, z)$ space.
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Component Form:} $\mathbf{v} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$ or column vectors $\begin{pmatrix} x \\ y \\ z \end{pmatrix}$
+  \item \textbf{Magnitude:} $|\mathbf{v}| = \sqrt{x^2 + y^2 + z^2}$
+  \item \textbf{Distance Formula:} Between $A(x_1, y_1, z_1)$ and $B(x_2, y_2, z_2)$: $|\vec{AB}| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}$
+\end{itemize}
+
+\subsubsection{The Dot Product (Scalar Product)}
+The dot product is the central algebraic tool for vectors in Extension 2.
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Definition:} $\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\theta$ and algebraically: $\mathbf{a} \cdot \mathbf{b} = a_1b_1 + a_2b_2 + a_3b_3$
+  \item \textbf{Perpendicular Vectors:} $\mathbf{a} \cdot \mathbf{b} = 0 \Leftrightarrow \mathbf{a} \perp \mathbf{b}$
+  \item \textbf{Angle Between Vectors:} $\cos\theta = \tfrac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}$
+  \item \textbf{Scalar Projection:} $\text{proj}_{\mathbf{b}}\mathbf{a} = \tfrac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{b}|}$
+  \item \textbf{Vector Projection:} $\text{proj}_{\mathbf{b}}\mathbf{a} = \tfrac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{b} \cdot \mathbf{b}}\mathbf{b}$
+\end{itemize}
+
+\subsubsection{Vector Equation of a Line}
+Extension 2 uses vector form rather than $y=mx+b$.
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Parametric Form:} $\mathbf{r} = \mathbf{a} + \lambda\mathbf{b}$ where $\mathbf{a}$ is a point on the line, $\mathbf{b}$ is the direction vector, and $\lambda$ is a parameter
+  \item \textbf{Parallel Lines:} Direction vectors are scalar multiples
+  \item \textbf{Skew Lines:} In 3D, lines can be non-parallel and non-intersecting
+\end{itemize}
+
+\subsubsection{Spheres \& Planes}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Sphere:} Vector form $|\mathbf{r} - \mathbf{c}| = R$ or Cartesian $(x-x_0)^2 + (y-y_0)^2 + (z-z_0)^2 = R^2$
+  \item \textbf{Plane (Point-Normal):} $(\mathbf{r} - \mathbf{a}) \cdot \mathbf{n} = 0$ where $\mathbf{n}$ is normal to the plane
+  \item \textbf{Plane (Cartesian):} $ax + by + cz = d$ where $(a, b, c)$ is the normal vector
+\end{itemize}
+
+\subsubsection{Geometric Proofs}
+Use pure vector logic (without coordinates) to prove theorems about parallelograms, triangles, centroids, medians, and 3D shapes like tetrahedrons.
+
+\subsubsection{The Cross Product (Optional Advanced Technique)}
+While not explicitly in the NESA syllabus, the cross product is a powerful tool for certain problems.
+
+\textbf{Definition:} For $\mathbf{a} = (a_1, a_2, a_3)$ and $\mathbf{b} = (b_1, b_2, b_3)$:
+\[
+\mathbf{a} \times \mathbf{b} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix} = (a_2b_3 - a_3b_2)\mathbf{i} - (a_1b_3 - a_3b_1)\mathbf{j} + (a_1b_2 - a_2b_1)\mathbf{k}
+\]
+
+\textbf{Properties:}
+\begin{itemize}[leftmargin=*]
+  \item $\mathbf{a} \times \mathbf{b}$ is perpendicular to both $\mathbf{a}$ and $\mathbf{b}$
+  \item $|\mathbf{a} \times \mathbf{b}| = |\mathbf{a}||\mathbf{b}|\sin\theta$ (area of parallelogram)
+  \item $\mathbf{a} \times \mathbf{b} = -\mathbf{b} \times \mathbf{a}$ (anticommutative)
+\end{itemize}
+
+\textbf{Worked Example: Distance from Point to Line}
+
+\textit{Problem:} Find the distance from point $P(1, 2, 0)$ to the line $\mathbf{r} = \begin{pmatrix}1\\0\\1\end{pmatrix} + \lambda\begin{pmatrix}0\\1\\1\end{pmatrix}$.
+
+\textit{Solution using Cross Product:}
+Let $A(1, 0, 1)$ be a point on the line and $\mathbf{d} = \begin{pmatrix}0\\1\\1\end{pmatrix}$ be the direction vector.
+
+The vector from $A$ to $P$ is $\vec{AP} = \begin{pmatrix}0\\2\\-1\end{pmatrix}$.
+
+Using the cross product:
+\[
+\vec{AP} \times \mathbf{d} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 0 & 2 & -1 \\ 0 & 1 & 1 \end{vmatrix} = 3\mathbf{i} + 0\mathbf{j} + 0\mathbf{k} = \begin{pmatrix}3\\0\\0\end{pmatrix}
+\]
+
+Distance: $d = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2}$ units.
+
+\textit{Comparison with Dot Product Method:}
+The dot product method uses projection. The component of $\vec{AP}$ perpendicular to the line is found by:
+\[
+\vec{AP}_{\perp} = \vec{AP} - \text{proj}_{\mathbf{d}}\vec{AP} = \vec{AP} - \tfrac{\vec{AP} \cdot \mathbf{d}}{\mathbf{d} \cdot \mathbf{d}}\mathbf{d}
+\]
+Then $d = |\vec{AP}_{\perp}|$. Both methods yield the same result, but cross product is often more direct for distance calculations.
+
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains 15 carefully selected problems covering all 10 topic areas. Each problem includes complete solutions with all algebraic steps, geometric diagrams where helpful, and key takeaways. Solutions use compact notation to fit on one A4 page while maintaining clarity.
+
+\subsection{Part 1 Basic Problems (Easy)}
+\input{problems/part1-basic}
+
+\subsection{Part 1 Medium Problems}
+\input{problems/part1-medium}
+
+\subsection{Part 1 Advanced Problems (Hard)}
+\input{problems/part1-advanced}
+
+\section{Part 2: Problems and Solutions (Concise + Hints)}
+Part~2 contains 45 additional problems distributed across three difficulty levels. Each problem includes an upside-down hint and a concise solution sketch to encourage independent thinking.
+
+\subsection{Part 2 Basic Problems}
+\input{problems/part2-basic}
+
+\subsection{Part 2 Medium Problems}
+\input{problems/part2-medium}
+
+\subsection{Part 2 Advanced Problems}
+\input{problems/part2-advanced}
+
+\section{Conclusion}
+Vectors are a powerful tool in HSC Mathematics Extension~2, unifying geometry, algebra, and analytic methods. Mastery comes from understanding both the algebraic manipulation and the geometric intuition behind each technique. Use these 60 problems to develop fluency across all vector topics, from basic computations to sophisticated proofs.
+
+Best of luck with your studies and the HSC examination!
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Vectors}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Vectors}
+
+\end{document}
