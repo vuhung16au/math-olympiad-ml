@@ -23,54 +23,13 @@ Use perpendicularity condition (dot product = 0) and intersection condition (sol
 \end{hint}
 
 \begin{solution}[Sketch]
-\textbf{Step 1: Apply the perpendicularity condition}
+\textbf{Step 1: Find $q$ from perpendicularity.} Direction vectors: $\mathbf{d}_1 = (1, 2, 1)$ and $\mathbf{d}_2 = (2, q, -1)$. Since $\mathbf{d}_1 \cdot \mathbf{d}_2 = 0$: $(1)(2) + (2)(q) + (1)(-1) = 0 \Rightarrow 2q = -1 \Rightarrow q = -\frac{1}{2}$.
 
-The direction vectors are $\mathbf{d}_1 = \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$ and $\mathbf{d}_2 = \begin{pmatrix} 2 \\ q \\ -1 \end{pmatrix}$.
+\textbf{Step 2: Set up intersection condition.} The lines intersect when $\begin{pmatrix} 3 \\ -1 \\ 7 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ p \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ -1/2 \\ -1 \end{pmatrix}$. This gives: $3 + \mu = 1 + 2\lambda$, $-1 + 2\mu = -\frac{1}{2}\lambda$, and $7 + \mu = p - \lambda$.
 
-For perpendicular lines: $\mathbf{d}_1 \cdot \mathbf{d}_2 = 0$
-$$(1)(2) + (2)(q) + (1)(-1) = 0$$
-$$2 + 2q - 1 = 0$$
-$$2q = -1$$
-$$q = -\frac{1}{2}$$
+\textbf{Step 3: Solve for $\mu$ and $\lambda$.} From first equation: $\mu = 2\lambda - 2$. Substituting into second: $-1 + 2(2\lambda - 2) = -\frac{1}{2}\lambda \Rightarrow \frac{9}{2}\lambda = 5 \Rightarrow \lambda = \frac{10}{9}$. Thus $\mu = \frac{2}{9}$.
 
-\vspace{0.3em}
-
-\textbf{Step 2: Apply the intersection condition}
-
-For the lines to intersect, there must exist values $\mu$ and $\lambda$ such that:
-$$\begin{pmatrix} 3 \\ -1 \\ 7 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ p \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ q \\ -1 \end{pmatrix}$$
-
-Substituting $q = -\frac{1}{2}$, we get the system:
-\begin{align*}
-3 + \mu &= 1 + 2\lambda \quad \text{(x-component)} \\
--1 + 2\mu &= 0 - \frac{1}{2}\lambda \quad \text{(y-component)} \\
-7 + \mu &= p - \lambda \quad \text{(z-component)}
-\end{align*}
-
-\vspace{0.3em}
-
-\textbf{Step 3: Solve for $\mu$ and $\lambda$}
-
-From the first equation: $\mu = 2\lambda - 2$.
-
-Substitute into the second equation:
-$$-1 + 2(2\lambda - 2) = -\frac{1}{2}\lambda$$
-$$-1 + 4\lambda - 4 = -\frac{1}{2}\lambda$$
-$$4\lambda + \frac{1}{2}\lambda = 5$$
-$$\frac{9}{2}\lambda = 5$$
-$$\lambda = \frac{10}{9}$$
-
-Therefore: $\mu = 2 \cdot \frac{10}{9} - 2 = \frac{20}{9} - \frac{18}{9} = \frac{2}{9}$.
-
-\vspace{0.3em}
-
-\textbf{Step 4: Find $p$ using the z-component equation}
-
-$$7 + \mu = p - \lambda$$
-$$p = 7 + \mu + \lambda = 7 + \frac{2}{9} + \frac{10}{9}$$
-$$p = 7 + \frac{12}{9} = 7 + \frac{4}{3} = \frac{25}{3}$$
-
-\vspace{0.3em}
+\textbf{Step 4: Find $p$.} From third equation: $p = 7 + \frac{2}{9} + \frac{10}{9} = 7 + \frac{4}{3} = \frac{25}{3}$.
 
 \textbf{Answer:} $p = \dfrac{25}{3}$ and $q = -\dfrac{1}{2}$.
 \end{solution}
@@ -211,10 +170,10 @@ Let $ABCD$ be any quadrilateral in three-dimensional space (not necessarily plan
         \fill[red] (Q) circle (1.5pt);
         \fill[red] (R) circle (1.5pt);
         \fill[red] (S) circle (1.5pt);
-        \node[below, red, font=\small] at (P) {$E$};
-        \node[right, red, font=\small] at (Q) {$F$};
-        \node[above, red, font=\small] at (R) {$G$};
-        \node[left, red, font=\small] at (S) {$H$};
+        \node[below, red, font=\small] at (P) {$P$};
+        \node[right, red, font=\small] at (Q) {$Q$};
+        \node[above, red, font=\small] at (R) {$R$};
+        \node[left, red, font=\small] at (S) {$S$};
         
         % Title
         \node[font=\small\bfseries] at (1.75, 3.2) {convex quadrilateral};
@@ -258,10 +217,10 @@ Let $ABCD$ be any quadrilateral in three-dimensional space (not necessarily plan
         \fill[red] (Q) circle (1.5pt);
         \fill[red] (R) circle (1.5pt);
         \fill[red] (S) circle (1.5pt);
-        \node[left, red, font=\small] at (P) {$E$};
-        \node[above right, red, font=\small] at (Q) {$B$};
-        \node[right, red, font=\small] at (R) {$F$};
-        \node[left, red, font=\small] at (S) {$H$};
+        \node[left, red, font=\small] at (P) {$P$};
+        \node[above right, red, font=\small] at (Q) {$Q$};
+        \node[right, red, font=\small] at (R) {$R$};
+        \node[left, red, font=\small] at (S) {$S$};
         
         % Title
         \node[font=\small\bfseries] at (2, 3.2) {concave quadrilateral};
@@ -305,10 +264,10 @@ Let $ABCD$ be any quadrilateral in three-dimensional space (not necessarily plan
         \fill[red] (Q) circle (1.5pt);
         \fill[red] (R) circle (1.5pt);
         \fill[red] (S) circle (1.5pt);
-        \node[left, red, font=\small] at (P) {$E$};
-        \node[above right, red, font=\small] at (Q) {$F$};
-        \node[below right, red, font=\small] at (R) {$G$};
-        \node[left, red, font=\small] at (S) {$H$};
+        \node[left, red, font=\small] at (P) {$P$};
+        \node[above right, red, font=\small] at (Q) {$Q$};
+        \node[below right, red, font=\small] at (R) {$R$};
+        \node[left, red, font=\small] at (S) {$S$};
         
         % Title
         \node[font=\small\bfseries] at (1.75, 3.2) {crossed quadrilateral};
@@ -322,12 +281,15 @@ Let $ABCD$ be any quadrilateral in three-dimensional space (not necessarily plan
 
 \begin{center}
 \begin{tikzpicture}[scale=1.2, x={(0.8cm, 0.4cm)}, y={(0cm, 1cm)}, z={(-0.6cm, 0.3cm)}]
+    % Annotation on the left
+    \node[font=\small, align=right, anchor=east] at (-1, 1.5, 1.5) {Non-planar quadrilateral\\in $\mathbb{R}^3$\\{\footnotesize (vertices not in}\\{\footnotesize the same plane)}};
+    
     % Define 3D coordinates for a non-planar quadrilateral
-    % A at origin, B forward-right, C up-forward-right, D up-back-left
-    \coordinate (A) at (0, 0, 0);
-    \coordinate (B) at (3, 0, 1);
-    \coordinate (C) at (3, 2.5, 0);
-    \coordinate (D) at (0, 2, 2);
+    % A at top, B, C, D form the base
+    \coordinate (A) at (1.5, 3, 1);
+    \coordinate (B) at (0, 0, 0);
+    \coordinate (C) at (3, 0, 0);
+    \coordinate (D) at (1.5, 0, 2.5);
     
     % Calculate midpoints
     \coordinate (P) at ($(A)!0.5!(B)$);
@@ -335,9 +297,9 @@ Let $ABCD$ be any quadrilateral in three-dimensional space (not necessarily plan
     \coordinate (R) at ($(C)!0.5!(D)$);
     \coordinate (S) at ($(D)!0.5!(A)$);
     
-    % Draw back edges (dashed)
-    \draw[thick, black!50, dashed] (A) -- (D);
-    \draw[thick, black!50, dashed] (D) -- (C);
+    % Draw back edges (dotted - invisible from viewer)
+    \draw[thick, black!50, dotted] (B) -- (D);
+    \draw[thick, black!50, dotted] (A) -- (D);
     
     % Draw the midpoint parallelogram (with fill)
     \fill[red!15, opacity=0.7] (P) -- (Q) -- (R) -- (S) -- cycle;
@@ -346,36 +308,33 @@ Let $ABCD$ be any quadrilateral in three-dimensional space (not necessarily plan
     % Draw front edges (solid)
     \draw[thick, black!70] (A) -- (B);
     \draw[thick, black!70] (B) -- (C);
-    \draw[thick, black!70] (C) -- (A);
+    \draw[thick, black!70] (C) -- (D);
+    \draw[thick, black!70] (A) -- (C);
     
     % Draw axes for reference (light gray, dashed)
     \draw[gray!40, dashed, ->] (0, 0, 0) -- (3.5, 0, 0) node[right, font=\tiny] {$x$};
-    \draw[gray!40, dashed, ->] (0, 0, 0) -- (0, 3, 0) node[above, font=\tiny] {$y$};
-    \draw[gray!40, dashed, ->] (0, 0, 0) -- (0, 0, 2.5) node[below left, font=\tiny] {$z$};
+    \draw[gray!40, dashed, ->] (0, 0, 0) -- (0, 3.5, 0) node[above, font=\tiny] {$y$};
+    \draw[gray!40, dashed, ->] (0, 0, 0) -- (0, 0, 3) node[below left, font=\tiny] {$z$};
     
     % Label the vertices of ABCD
     \fill[blue] (A) circle (1.5pt);
     \fill[blue] (B) circle (1.5pt);
     \fill[blue] (C) circle (1.5pt);
     \fill[blue] (D) circle (1.5pt);
-    \node[below left, blue] at (A) {$A$};
-    \node[below right, blue] at (B) {$B$};
-    \node[right, blue] at (C) {$C$};
-    \node[above left, blue] at (D) {$D$};
+    \node[above, blue] at (A) {$A$};
+    \node[below left, blue] at (B) {$B$};
+    \node[below right, blue] at (C) {$C$};
+    \node[below, blue] at (D) {$D$};
     
     % Label the midpoints P, Q, R, S
     \fill[red] (P) circle (1.5pt);
     \fill[red] (Q) circle (1.5pt);
     \fill[red] (R) circle (1.5pt);
     \fill[red] (S) circle (1.5pt);
-    \node[below, red, font=\small] at (P) {$P$};
-    \node[right, red, font=\small] at (Q) {$Q$};
-    \node[above right, red, font=\small] at (R) {$R$};
-    \node[left, red, font=\small] at (S) {$S$};
-    
-    % Annotation
-    \node[font=\small, align=center] at (1.5, -0.8, 1) {Non-planar quadrilateral in $\mathbb{R}^3$\\
-    {\footnotesize (vertices not in the same plane)}};
+    \node[left, red, font=\small] at (P) {$P$};
+    \node[below, red, font=\small] at (Q) {$Q$};
+    \node[right, red, font=\small] at (R) {$R$};
+    \node[above right, red, font=\small] at (S) {$S$};
 \end{tikzpicture}
 \end{center}
 

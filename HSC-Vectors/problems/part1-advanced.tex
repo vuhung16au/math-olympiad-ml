@@ -141,19 +141,11 @@ On triangular pyramid $ABCD$, $L, M, N, P, Q, R$ are midpoints of edges $AB, AC,
 \begin{center}
 \tdplotsetmaincoords{70}{115}
 \begin{tikzpicture}[tdplot_main_coords,scale=1.2]
-  % Define vertices of tetrahedron
-  \coordinate (A) at (0,0,0);
-  \coordinate (B) at (4,0,0);
-  \coordinate (C) at (1.5,3.5,0);
-  \coordinate (D) at (1.5,1.5,3.5);
-  
-  % Draw edges of tetrahedron
-  \draw[thick] (A) -- (B);
-  \draw[thick] (A) -- (C);
-  \draw[thick] (A) -- (D);
-  \draw[thick,dashed,gray] (B) -- (C);
-  \draw[thick] (B) -- (D);
-  \draw[thick] (C) -- (D);
+  % Define vertices of tetrahedron - A at apex, BCD as base
+  \coordinate (A) at (1.5,1.5,3.5);
+  \coordinate (B) at (0,0,0);
+  \coordinate (C) at (4,0,0);
+  \coordinate (D) at (1.5,3.5,0);
   
   % Calculate midpoints
   \coordinate (L) at ($(A)!0.5!(B)$); % midpoint of AB
@@ -163,30 +155,40 @@ On triangular pyramid $ABCD$, $L, M, N, P, Q, R$ are midpoints of edges $AB, AC,
   \coordinate (Q) at ($(B)!0.5!(D)$); % midpoint of BD
   \coordinate (R) at ($(B)!0.5!(C)$); % midpoint of BC
   
+  % Draw base edges (BCD) - hidden edge as dotted
+  \draw[thick,dotted,gray] (B) -- (D);
+  \draw[thick] (B) -- (C);
+  \draw[thick] (C) -- (D);
+  
   % Draw bimedians (connecting midpoints of opposite edges)
   \draw[very thick,blue] (L) -- (P) node[midway,above,sloped] {\small $LP$};
   \draw[very thick,red] (M) -- (Q) node[midway,above right] {\small $MQ$};
   \draw[very thick,green!60!black] (N) -- (R);
   \node[green!60!black] at ($(N)!0.6!(R)$) [below] {\small $NR$};
   
+  % Draw edges from apex A (all visible)
+  \draw[thick] (A) -- (B);
+  \draw[thick] (A) -- (C);
+  \draw[thick] (A) -- (D);
+  
   % Mark vertices
-  \node[circle,fill=black,inner sep=2pt,label=below left:$A$] at (A) {};
-  \node[circle,fill=black,inner sep=2pt,label=below right:$B$] at (B) {};
-  \node[circle,fill=black,inner sep=2pt,label=above:$C$] at (C) {};
-  \node[circle,fill=black,inner sep=2pt,label=above:$D$] at (D) {};
+  \node[circle,fill=black,inner sep=2pt,label=above:$A$] at (A) {};
+  \node[circle,fill=black,inner sep=2pt,label=below left:$B$] at (B) {};
+  \node[circle,fill=black,inner sep=2pt,label=below right:$C$] at (C) {};
+  \node[circle,fill=black,inner sep=2pt,label=above left:$D$] at (D) {};
   
   % Mark midpoints
-  \node[circle,fill=blue,inner sep=1.5pt,label=below:$L$] at (L) {};
-  \node[circle,fill=red,inner sep=1.5pt,label=left:$M$] at (M) {};
-  \node[circle,fill=green!60!black,inner sep=1.5pt,label=left:$N$] at (N) {};
-  \node[circle,fill=blue,inner sep=1.5pt,label=above right:$P$] at (P) {};
-  \node[circle,fill=red,inner sep=1.5pt,label=right:$Q$] at (Q) {};
-  \node[circle,fill=green!60!black,inner sep=1.5pt,label=below right:$R$] at (R) {};
+  \node[circle,fill=blue,inner sep=1.5pt,label=left:$L$] at (L) {};
+  \node[circle,fill=red,inner sep=1.5pt,label=right:$M$] at (M) {};
+  \node[circle,fill=green!60!black,inner sep=1.5pt,label=above left:$N$] at (N) {};
+  \node[circle,fill=blue,inner sep=1.5pt,label=below right:$P$] at (P) {};
+  \node[circle,fill=red,inner sep=1.5pt,label=below left:$Q$] at (Q) {};
+  \node[circle,fill=green!60!black,inner sep=1.5pt,label=below:$R$] at (R) {};
   
-  % Label edges with vectors
-  \draw[->,thick,purple] (A) -- ($(A)!0.4!(B)$) node[midway,below] {\small $\mathbf{b}$};
-  \draw[->,thick,orange] (A) -- ($(A)!0.35!(C)$) node[midway,left] {\small $\mathbf{c}$};
-  \draw[->,thick,cyan!70!black] (A) -- ($(A)!0.35!(D)$) node[midway,left] {\small $\mathbf{d}$};
+  % Label edges with vectors from A
+  \draw[->,thick,purple] (A) -- ($(A)!0.4!(B)$) node[midway,left] {\small $\mathbf{b}$};
+  \draw[->,thick,orange] (A) -- ($(A)!0.35!(C)$) node[midway,right] {\small $\mathbf{c}$};
+  \draw[->,thick,cyan!70!black] (A) -- ($(A)!0.35!(D)$) node[midway,above left] {\small $\mathbf{d}$};
 \end{tikzpicture}
 \end{center}
 
@@ -237,7 +239,11 @@ Sum:
 \end{solution}
 
 \begin{takeaways}
-\textbf{Bimedians} (segments joining midpoints of opposite edges) in a tetrahedron have remarkable properties. This identity relates all six edge lengths to the three bimedian lengths—a 3D analogue of the parallelogram law. The proof strategy: express everything in terms of base vectors $\mathbf{b}, \mathbf{c}, \mathbf{d}$, expand dot products carefully, and verify algebraic cancellation. Note the symmetry in coefficients $(+2, -2, -2)$ cycling through the three cross terms. Such identities are useful in crystallography and structural analysis.
+\textbf{Bimedians} (segments joining midpoints of opposite edges) in a tetrahedron have remarkable properties. This identity relates all six edge lengths to the three bimedian lengths—a 3D analogue of the parallelogram law. The result is known as \textbf{Commandino's theorem} (16th century): the sum of squares of all edges equals four times the sum of squares of the three bimedians.
+
+The proof strategy: express everything in terms of base vectors $\mathbf{b}, \mathbf{c}, \mathbf{d}$, expand dot products carefully, and verify algebraic cancellation. Note the symmetry in coefficients $(+2, -2, -2)$ cycling through the three cross terms.
+
+\textbf{Special case:} When $D = A$ (degenerate tetrahedron), $ABCD$ collapses to triangle $ABC$. Then $\mathbf{d} = \mathbf{0}$, and the identity reduces to: $|AB|^2 + |AC|^2 + |BC|^2 = 4(|LP|^2 + |MQ|^2 + |NR|^2)$, which becomes the triangle median formula: the sum of squares of the sides equals $\tfrac{4}{3}$ times the sum of squares of the medians. Such identities are useful in crystallography and structural analysis.
 \end{takeaways}
 
 \vspace{1em}

@@ -364,46 +364,18 @@ Consider a pyramid $SABCD$ with square base $ABCD$ and apex $S$. Let $H$ be the 
 
 \textit{Note: $H$ (red) is the center of the square base, and $G$ (green) is the centroid of the pyramid. The blue dotted lines show vectors from $H$ to all five vertices.}
 
-\begin{enumerate}[label=(\roman*)]
-    \item Show that $\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} + \overrightarrow{HS} = \vec{0}$.
-    
-    \item The centroid $G$ of the pyramid is the point such that:
-    $$\overrightarrow{GA} + \overrightarrow{GB} + \overrightarrow{GC} + \overrightarrow{GD} + \overrightarrow{GS} = \vec{0}$$
-    
-    Show that $G$ lies on the line $HS$ with $\overrightarrow{HG} = \frac{1}{5}\overrightarrow{HS}$.
-\end{enumerate}
+The centroid $G$ of the pyramid is the point such that:
+$$\overrightarrow{GA} + \overrightarrow{GB} + \overrightarrow{GC} + \overrightarrow{GD} + \overrightarrow{GS} = \vec{0}$$
+
+Show that $G$ lies on the line $HS$ with $\overrightarrow{HG} = \frac{1}{5}\overrightarrow{HS}$.
 \end{problem}
 
 \begin{hint}
-(i) Use the fact that $H$ is the midpoint of both diagonals. Since the square has symmetry, opposite vertices are equidistant from $H$ in opposite directions.
-(ii) Express each $\overrightarrow{GA_i}$ in terms of $\overrightarrow{GH}$ and $\overrightarrow{HA_i}$, then use the result from part (i).
+Express each $\overrightarrow{GA_i}$ in terms of $\overrightarrow{GH}$ and $\overrightarrow{HA_i}$. Use the fact that $H$ is the center of the square base, so $\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} = \vec{0}$ by symmetry.
 \end{hint}
 
 \begin{solution}
-\textbf{Part (i): Sum of vectors from center to all vertices is zero}
-
-Since $H$ is the center of the square base $ABCD$, it is the intersection point of the diagonals $AC$ and $BD$.
-
-For the square base:
-\begin{itemize}
-    \item $H$ is the midpoint of diagonal $AC$, so $\overrightarrow{HA} = -\overrightarrow{HC}$
-    \item $H$ is the midpoint of diagonal $BD$, so $\overrightarrow{HB} = -\overrightarrow{HD}$
-\end{itemize}
-
-Therefore, the sum of vectors from $H$ to the four base vertices is:
-$$\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} = \overrightarrow{HA} + \overrightarrow{HB} + (-\overrightarrow{HA}) + (-\overrightarrow{HB}) = \vec{0}$$
-
-Adding the apex vector:
-$$\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} + \overrightarrow{HS} = \vec{0} + \overrightarrow{HS} = \overrightarrow{HS}$$
-
-Wait, this shows the sum is $\overrightarrow{HS}$, not zero. Let me reconsider the problem statement.
-
-Actually, the problem asks to show the sum from center to all vertices is zero. Looking at the solution sketch, it seems the problem means the sum of vectors from $H$ to the four base vertices only (not including $S$):
-$$\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} = \vec{0}$$
-
-This is proven above using the symmetry of the square.
-
-\textbf{Part (ii): Finding the centroid $G$}
+\textbf{Finding the centroid $G$}
 
 The centroid $G$ of the five vertices satisfies:
 $$\overrightarrow{GA} + \overrightarrow{GB} + \overrightarrow{GC} + \overrightarrow{GD} + \overrightarrow{GS} = \vec{0}$$
@@ -415,7 +387,12 @@ Express each vector using the triangle rule: $\overrightarrow{GA} = \overrightar
 &= 5\overrightarrow{GH} + (\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD}) + \overrightarrow{HS}
 \end{align*}
 
-From part (i), we know $\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} = \vec{0}$, so:
+Since $H$ is the center of the square base, by symmetry the vectors from $H$ to the four base vertices cancel:
+$$\overrightarrow{HA} + \overrightarrow{HB} + \overrightarrow{HC} + \overrightarrow{HD} = \vec{0}$$
+
+(This follows because $H$ is the midpoint of both diagonals: $\overrightarrow{HA} = -\overrightarrow{HC}$ and $\overrightarrow{HB} = -\overrightarrow{HD}$.)
+
+Therefore:
 $$\vec{0} = 5\overrightarrow{GH} + \overrightarrow{HS}$$
 
 Rearranging:
@@ -429,7 +406,7 @@ $$\overrightarrow{HG} = \frac{1}{5}\overrightarrow{HS}$$
 
 This shows that $G$ lies on the line segment $HS$, located $\frac{1}{5}$ of the way from $H$ to $S$.
 
-\textbf{Answer:} The centroid $G$ divides the segment from the center of the base to the apex in the ratio $HG:GS = 1:4$, so $\lambda = \frac{1}{5}$.
+\textbf{Answer:} The centroid $G$ divides the segment from the center of the base to the apex in the ratio $HG:GS = 1:4$.
 \end{solution}
 
 \vspace{1em}
