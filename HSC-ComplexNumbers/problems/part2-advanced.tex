@@ -301,16 +301,101 @@ Use $e^{i\phi} = \cos\phi + i\sin\phi$.
 $e^{in\theta} = \cos(n\theta) + i\sin(n\theta)$ and $e^{-in\theta} = \cos(n\theta) - i\sin(n\theta)$. Adding: $e^{in\theta} + e^{-in\theta} = 2\cos(n\theta)$.
 \end{solution}
 
-\begin{problem}[Modulus of Sum]
-Let $z = e^{i\pi/6}, w = e^{i3\pi/4}$. Show $|z+w|^2 = \frac{4-\sqrt{6}+\sqrt{2}}{2}$.
+\begin{problem}[Modulus and Angle Calculation with Complex Exponentials]
+Let $z$ be the complex number $z = e^{\frac{i\pi}{6}}$ and $w$ be the complex number $w = e^{\frac{3i\pi}{4}}$.
+
+\begin{enumerate}
+    \item[(i)] By first writing $z$ and $w$ in Cartesian form, or otherwise, show that
+    \[
+    |z + w|^2 = \frac{4 - \sqrt{6} + \sqrt{2}}{2}.
+    \]
+
+    \item[(ii)] The complex numbers $z$, $w$ and $z + w$ are represented in the complex plane by the vectors $\overrightarrow{OA}$, $\overrightarrow{OB}$ and $\overrightarrow{OC}$ respectively, where $O$ is the origin.
+    
+    Show that $\angle AOC = \frac{7\pi}{24}$.
+
+    \item[(iii)] Deduce that $\cos \frac{7\pi}{24} = \frac{\sqrt{8 - 2\sqrt{6} + 2\sqrt{2}}}{4}$.
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
-$|z+w|^2 = (z+w)(\overline{z+w}) = (z+w)(\bar{z}+\bar{w}) = |z|^2 + |w|^2 + z\bar{w} + \bar{z}w$.
+For (i): Convert to Cartesian form and compute $|z+w|^2 = x^2+y^2$. For (ii): Since $|z|=|w|=1$, the parallelogram $OACB$ is a rhombus, and the diagonal bisects the angle. For (iii): Use the relationship $|z+w| = 2\cos(\angle AOC)$ in a rhombus.
 \end{hint}
 
-\begin{solution}[Sketch]
-$|z|=|w|=1$. $z\bar{w} = e^{i(\pi/6-3\pi/4)} = e^{-i7\pi/12}$, $\bar{z}w = e^{i7\pi/12}$. Thus $|z+w|^2 = 2 + 2\cos(7\pi/12) = 2(1+\cos(7\pi/12))$. Evaluate $\cos(7\pi/12) = \cos(105^\circ) = -\sin(15^\circ) = -\frac{\sqrt{6}-\sqrt{2}}{4}$. Result follows.
+\begin{solution}[Full Solution]
+\textbf{Part (i)}
+
+First, we convert $z$ and $w$ to Cartesian form:
+\[
+z = e^{\frac{i\pi}{6}} = \cos\left(\frac{\pi}{6}\right) + i\sin\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2} + \frac{1}{2}i
+\]
+\[
+w = e^{\frac{3i\pi}{4}} = \cos\left(\frac{3\pi}{4}\right) + i\sin\left(\frac{3\pi}{4}\right) = -\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}i = \frac{-\sqrt{2}}{2} + \frac{\sqrt{2}}{2}i
+\]
+
+Now, find $z + w$:
+\[
+z + w = \left(\frac{\sqrt{3}}{2} - \frac{\sqrt{2}}{2}\right) + i\left(\frac{1}{2} + \frac{\sqrt{2}}{2}\right) = \frac{\sqrt{3}-\sqrt{2}}{2} + i\frac{1+\sqrt{2}}{2}
+\]
+
+Calculate the square of the modulus $|z+w|^2 = x^2 + y^2$:
+\begin{align*}
+|z+w|^2 &= \left(\frac{\sqrt{3}-\sqrt{2}}{2}\right)^2 + \left(\frac{1+\sqrt{2}}{2}\right)^2 \\
+&= \frac{3 - 2\sqrt{6} + 2}{4} + \frac{1 + 2\sqrt{2} + 2}{4} \\
+&= \frac{5 - 2\sqrt{6} + 3 + 2\sqrt{2}}{4} \\
+&= \frac{8 - 2\sqrt{6} + 2\sqrt{2}}{4} \\
+&= \frac{4 - \sqrt{6} + \sqrt{2}}{2} \quad \checkmark
+\end{align*}
+
+\textbf{Part (ii)}
+
+Note that $|z| = |e^{\frac{i\pi}{6}}| = 1$ and $|w| = |e^{\frac{3i\pi}{4}}| = 1$. Since the moduli are equal ($OA = OB = 1$), the parallelogram $OACB$ formed by vector addition is a \textbf{rhombus}.
+
+In a rhombus, the main diagonal $\overrightarrow{OC}$ bisects the angle between the adjacent sides $\overrightarrow{OA}$ and $\overrightarrow{OB}$.
+
+Find $\angle AOB$:
+\[
+\text{arg}(z) = \frac{\pi}{6} = \frac{4\pi}{24}, \quad \text{arg}(w) = \frac{3\pi}{4} = \frac{18\pi}{24}
+\]
+\[
+\angle AOB = \text{arg}(w) - \text{arg}(z) = \frac{18\pi}{24} - \frac{4\pi}{24} = \frac{14\pi}{24}
+\]
+
+Since $\overrightarrow{OC}$ bisects $\angle AOB$, the angle between $\overrightarrow{OA}$ and $\overrightarrow{OC}$ is half of $\angle AOB$:
+\[
+\angle AOC = \frac{1}{2} \times \frac{14\pi}{24} = \frac{7\pi}{24} \quad \checkmark
+\]
+
+\textbf{Part (iii)}
+
+We use the geometry of the rhombus. The length of the diagonal $OC$ can be calculated using the property that in a rhombus with side length $1$ and angle $\theta$ between the diagonal and the side:
+\[
+OC = 2 \times OA \times \cos(\angle AOC)
+\]
+
+Substituting the known values:
+\[
+|z+w| = 2(1)\cos\left(\frac{7\pi}{24}\right) = 2\cos\left(\frac{7\pi}{24}\right)
+\]
+
+Squaring both sides:
+\[
+|z+w|^2 = 4\cos^2\left(\frac{7\pi}{24}\right)
+\]
+
+Substitute the result from Part (i):
+\[
+\frac{4 - \sqrt{6} + \sqrt{2}}{2} = 4\cos^2\left(\frac{7\pi}{24}\right)
+\]
+\[
+\cos^2\left(\frac{7\pi}{24}\right) = \frac{4 - \sqrt{6} + \sqrt{2}}{8} = \frac{8 - 2\sqrt{6} + 2\sqrt{2}}{16}
+\]
+
+Taking the square root (noting the angle is acute, so cosine is positive):
+\[
+\cos\left(\frac{7\pi}{24}\right) = \sqrt{\frac{8 - 2\sqrt{6} + 2\sqrt{2}}{16}} = \frac{\sqrt{8 - 2\sqrt{6} + 2\sqrt{2}}}{4} \quad \checkmark
+\]
+
 \end{solution}
 
 \begin{problem}[Equilateral Triangle]
