@@ -10,62 +10,30 @@ Let $\displaystyle I_n = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n}\theta \,
 \end{enumerate}
 \end{problem}
 
-\textbf{Strategy:} This is a classic reduction formula problem. For part (i), we'll combine $I_n + I_{n-1}$ and use the identity $\cot^2\theta + 1 = \csc^2\theta$ to simplify, then apply substitution. For part (ii), we'll use the recurrence relation iteratively, starting from $I_0$.
+\begin{hint}
+This is a classic reduction formula problem. For part (i), we'll combine $I_n + I_{n-1}$ and use the identity $\cot^2\theta + 1 = \csc^2\theta$ to simplify, then apply substitution. For part (ii), we'll use the recurrence relation iteratively, starting from $I_0$.
+\end{hint}
 
 \begin{solution}
-\textbf{Part (i):}
-
-Consider $I_n + I_{n-1}$:
+\textbf{Part (i):} Consider $I_n + I_{n-1}$:
 \begin{align*}
-I_n + I_{n-1} &= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n}\theta \, d\theta + \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2(n-1)}\theta \, d\theta \\
-&= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \left( \cot^{2n}\theta + \cot^{2n-2}\theta \right) d\theta \\
-&= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n-2}\theta \left( \cot^2\theta + 1 \right) d\theta
+I_n + I_{n-1} &= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \left( \cot^{2n}\theta + \cot^{2n-2}\theta \right) d\theta = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n-2}\theta \left( \cot^2\theta + 1 \right) d\theta \\
+&= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n-2}\theta \cdot \csc^2\theta \, d\theta \quad \text{(using $\cot^2\theta + 1 = \csc^2\theta$)}
 \end{align*}
 
-Using the Pythagorean identity $\cot^2\theta + 1 = \csc^2\theta$:
-\[
-I_n + I_{n-1} = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n-2}\theta \cdot \csc^2\theta \, d\theta
-\]
-
-\textit{Substitution:} Let $u = \cot\theta$, then $du = -\csc^2\theta \, d\theta$.
-
-Change limits:
-\begin{itemize}
-\item When $\theta = \frac{\pi}{4}$: $u = \cot\left(\frac{\pi}{4}\right) = 1$
-\item When $\theta = \frac{\pi}{2}$: $u = \cot\left(\frac{\pi}{2}\right) = 0$
-\end{itemize}
-
-Substituting:
+Let $u = \cot\theta$, so $du = -\csc^2\theta \, d\theta$. Limits: $\theta = \frac{\pi}{4} \Rightarrow u = 1$; $\theta = \frac{\pi}{2} \Rightarrow u = 0$.
 \begin{align*}
-I_n + I_{n-1} &= \int_{1}^{0} u^{2n-2} (-du) \\
-&= \int_{0}^{1} u^{2n-2} \, du \\
-&= \left[ \frac{u^{2n-1}}{2n-1} \right]_{0}^{1} \\
-&= \frac{1}{2n-1}
+I_n + I_{n-1} &= \int_{1}^{0} u^{2n-2} (-du) = \int_{0}^{1} u^{2n-2} \, du = \left[ \frac{u^{2n-1}}{2n-1} \right]_{0}^{1} = \frac{1}{2n-1}
 \end{align*}
+Therefore: $\boxed{I_n = \frac{1}{2n-1} - I_{n-1}}$
 
-Rearranging: $\boxed{I_n = \frac{1}{2n-1} - I_{n-1}}$
-
-\textbf{Part (ii):}
-
-We need $I_2$. First, calculate $I_0$ and $I_1$.
-
-\textit{Calculate $I_0$:}
+\textbf{Part (ii):} Calculate base cases and apply recursion:
 \[
-I_0 = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} 1 \, d\theta = \left[ \theta \right]_{\frac{\pi}{4}}^{\frac{\pi}{2}} = \frac{\pi}{2} - \frac{\pi}{4} = \frac{\pi}{4}
+I_0 = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} 1 \, d\theta = \frac{\pi}{4}, \quad I_1 = \frac{1}{1} - I_0 = 1 - \frac{\pi}{4}
 \]
-
-\textit{Calculate $I_1$:} Using the formula with $n=1$:
 \[
-I_1 = \frac{1}{2(1)-1} - I_0 = 1 - \frac{\pi}{4}
+I_2 = \frac{1}{3} - I_1 = \frac{1}{3} - \left( 1 - \frac{\pi}{4} \right) = \boxed{\frac{\pi}{4} - \frac{2}{3}}
 \]
-
-\textit{Calculate $I_2$:} Using the formula with $n=2$:
-\begin{align*}
-I_2 &= \frac{1}{2(2)-1} - I_1 \\
-&= \frac{1}{3} - \left( 1 - \frac{\pi}{4} \right) \\
-&= \frac{1}{3} - 1 + \frac{\pi}{4} \\
-&= \boxed{\frac{\pi}{4} - \frac{2}{3}}
-\end{align*}
 \end{solution}
 
 \begin{takeaways}
@@ -93,7 +61,9 @@ Evaluate
 by first using the substitution $u = \frac{\pi}{2} - x$.
 \end{problem}
 
-\textbf{Strategy:} Use King's property (reflection about midpoint) to create a self-referencing equation that simplifies the numerator. Then apply the t-formula (Weierstrass substitution) to handle the trigonometric denominator.
+\begin{hint}
+Use King's property (reflection about midpoint) to create a self-referencing equation that simplifies the numerator. Then apply the t-formula (Weierstrass substitution) to handle the trigonometric denominator.
+\end{hint}
 
 \begin{solution}
 Let $I = \int_0^{\frac{\pi}{2}} \frac{u}{1 + \sin u + \cos u} \, du$ \quad \ldots (1)
@@ -165,7 +135,9 @@ I_n = \int_1^e (\ln x)^n \, dx \quad \text{for integers } n \ge 0
 Show that $I_n = e - nI_{n-1}$ for $n \ge 1$.
 \end{problem}
 
-\textbf{Strategy:} Use integration by parts with $u = (\ln x)^n$ and $dv = dx$. The derivative of $u$ will reduce the power of the logarithm.
+\begin{hint}
+Use integration by parts with $u = (\ln x)^n$ and $dv = dx$. The derivative of $u$ will reduce the power of the logarithm.
+\end{hint}
 
 \begin{solution}
 \textbf{Step 1:} Choose $u$ and $dv$:
@@ -217,7 +189,9 @@ The motion is resisted by a constant force of $mk$ newtons and a variable force 
 Show that the distance travelled when the particle comes to rest is $\displaystyle \frac{1}{2}\ln\left(\frac{k + V_0^2}{k}\right)$ metres.
 \end{problem}
 
-\textbf{Strategy:} Apply Newton's Second Law, use the kinematic identity $a = v\frac{dv}{dx}$ to change variables, then separate and integrate.
+\begin{hint}
+Apply Newton's Second Law, use the kinematic identity $a = v\frac{dv}{dx}$ to change variables, then separate and integrate.
+\end{hint}
 
 \begin{solution}
 \textbf{Step 1:} Establish equation of motion using $F = ma$:
@@ -290,7 +264,9 @@ D &= -\left[ \frac{1}{2} \ln(k + v^2) \right]_{V_0}^{0} \\
 \end{enumerate}
 \end{problem}
 
-\textbf{Strategy:} Use Euler's formula to convert complex exponentials to trigonometric form, then use binomial theorem and group terms to derive the power reduction formula.
+\begin{hint}
+Use Euler's formula to convert complex exponentials to trigonometric form, then use binomial theorem and group terms to derive the power reduction formula.
+\end{hint}
 
 \begin{solution}
 \textbf{Part (i):}

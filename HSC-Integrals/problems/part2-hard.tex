@@ -1,3 +1,565 @@
 % Part 2: Hard Problems (~15 problems with hints and concise solutions)
 
-% TO BE COMPLETED: ~15 hard problems with hints and concise solutions
+% Problem 1: Substitution Transformation Proof (from sample 03.tex)
+\begin{problem}[Substitution Proof]
+Given $A = \int_{2}^{4} \frac{e^x}{x-1} \, dx$, show that:
+\[
+\int_{m-4}^{m-2} \frac{e^{-x}}{x - m + 1} \, dx = kA
+\]
+where $k$ and $m$ are constants, and determine $k$.
+\end{problem}
+
+\begin{hint}
+Use substitution $u = m - x$ to reverse limits and transform the integral to match form of $A$.
+\end{hint}
+
+\begin{solution}
+Let $u = m - x \implies x = m - u$, $dx = -du$
+
+Limits: $x = m-4 \implies u = 4$; $x = m-2 \implies u = 2$
+
+\begin{align*}
+I &= \int_{4}^{2} \frac{e^{-(m-u)}}{(m-u) - m + 1} (-du) = \int_{4}^{2} \frac{e^{u-m}}{-u + 1} (-du) \\
+&= \int_{4}^{2} \frac{e^{-m} e^{u}}{u - 1} du = -\int_{2}^{4} \frac{e^{-m} e^{u}}{u - 1} du = -e^{-m} A
+\end{align*}
+
+\textbf{Answer:} $\boxed{k = -e^{-m}}$
+\end{solution}
+
+\begin{takeaways}
+Reversing substitution changes limit order. Factor out constants independent of integration variable.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 2: Advanced Partial Fractions (from sample 19.tex)
+\begin{problem}[Partial Fractions with Function Form]
+Using partial fractions, evaluate $\displaystyle \int_{2}^{n} \frac{4+x}{(1-x)(4+x^2)} \, dx$, giving answer in form:
+\[
+\frac{1}{2}\ln\left(\frac{f(n)}{8(n-1)^2}\right)
+\]
+where $f(n)$ is a function of $n$.
+\end{problem}
+
+\begin{hint}
+Decompose as $\frac{A}{1-x} + \frac{Bx+C}{4+x^2}$. Integrate each part, then combine using log laws.
+\end{hint}
+
+\begin{solution}
+Partial fractions: $\frac{4+x}{(1-x)(4+x^2)} = \frac{1}{1-x} + \frac{x}{4+x^2}$
+
+Integrate:
+\[
+I = \left[ -\ln|1-x| + \frac{1}{2}\ln(4+x^2) \right]_{2}^{n}
+\]
+
+\[
+= -\ln(n-1) + \frac{1}{2}\ln(n^2+4) - (-\ln 1 + \frac{1}{2}\ln 8)
+\]
+
+\[
+= \frac{1}{2}[-2\ln(n-1) + \ln(n^2+4) - \ln 8] = \frac{1}{2}\ln\left(\frac{n^2+4}{8(n-1)^2}\right)
+\]
+
+\textbf{Answer:} $\boxed{f(n) = n^2 + 4}$
+\end{solution}
+
+\begin{takeaways}
+Combine logarithms using $\ln a - \ln b = \ln(a/b)$ and $n\ln a = \ln(a^n)$.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 3: Complex Substitution with Inverse Trig (from sample 21.tex)
+\begin{problem}[Trigonometric Substitution with Inverse Sine]
+Using substitution $x = \tan^2 \theta$, evaluate:
+\[
+\int_0^1 \sin^{-1} \sqrt{\frac{x}{1+x}} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+After substitution, simplify $\sqrt{\frac{\tan^2\theta}{1+\tan^2\theta}} = \sin\theta$. Use integration by parts on $\theta \tan\theta \sec^2\theta$.
+\end{hint}
+
+\begin{solution}
+Let $x = \tan^2\theta \implies dx = 2\tan\theta\sec^2\theta \, d\theta$
+
+Limits: $x=0 \implies \theta=0$; $x=1 \implies \theta=\frac{\pi}{4}$
+
+Simplify: $\sqrt{\frac{x}{1+x}} = \sqrt{\frac{\tan^2\theta}{\sec^2\theta}} = \sin\theta$
+
+Therefore: $\sin^{-1}(\sin\theta) = \theta$
+
+\[
+I = 2\int_0^{\frac{\pi}{4}} \theta \tan\theta \sec^2\theta \, d\theta
+\]
+
+By parts ($u=\theta$, $dv=\tan\theta\sec^2\theta \, d\theta$, $v=\frac{1}{2}\tan^2\theta$):
+\[
+I = [\theta\tan^2\theta]_0^{\frac{\pi}{4}} - \int_0^{\frac{\pi}{4}} \tan^2\theta \, d\theta
+\]
+
+\[
+= \frac{\pi}{4} - \int_0^{\frac{\pi}{4}} (\sec^2\theta - 1) d\theta = \frac{\pi}{4} - [\tan\theta - \theta]_0^{\frac{\pi}{4}}
+\]
+
+\[
+= \frac{\pi}{4} - (1 - \frac{\pi}{4}) = \frac{\pi}{2} - 1
+\]
+
+\textbf{Answer:} $\boxed{\frac{\pi}{2} - 1}$
+\end{solution}
+
+\begin{takeaways}
+Creative substitutions can simplify complex expressions. Use trig identities to reduce under square roots.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 4: Inclined Plane Dynamics (from sample 15.tex - modified from part1-hard)
+\begin{problem}[Applications - Inclined Plane]
+An object of mass $5$ kg is on a slope inclined at $60°$ to horizontal. Gravity is $g$ m/s$^2$, velocity down slope is $v$ m/s. Resistive forces (up slope): $2v$ N and $2v^2$ N.
+
+\begin{enumerate}[label=(\roman*)]
+\item Show resultant force down slope is $\frac{5\sqrt{3}}{2}g - 2v - 2v^2$ newtons.
+\item Find $v$ for constant speed given $g = 10$ (to 1 d.p.).
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Part (i): Resolve weight parallel to slope using $F = mg\sin(60°)$. Part (ii): Constant speed $\implies$ zero net force.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Down slope: $F_g = 5g\sin(60°) = 5g \cdot \frac{\sqrt{3}}{2} = \frac{5\sqrt{3}}{2}g$
+
+Up slope resistance: $R = 2v + 2v^2$
+
+Net force: $\boxed{\frac{5\sqrt{3}}{2}g - 2v - 2v^2}$ ✓
+
+\textbf{(ii)} Constant speed $\implies F_{net} = 0$:
+\[
+\frac{5\sqrt{3}}{2}(10) - 2v - 2v^2 = 0 \implies 2v^2 + 2v - 25\sqrt{3} = 0
+\]
+
+Quadratic formula: $v = \frac{-2 + \sqrt{4 + 200\sqrt{3}}}{4} \approx \frac{-2 + 18.72}{4} \approx 4.18$
+
+\textbf{Answer:} $\boxed{v = 4.2 \text{ m/s}}$
+\end{solution}
+
+\begin{takeaways}
+Resolve forces parallel to plane. Equilibrium means zero acceleration, not zero velocity.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 5: Volumes of Revolution (from sample 12.tex - modified from part1-hard)
+\begin{problem}[Volumes of Revolution Ratio]
+Region $A$: bounded by $y=1$ and $x^2 + y^2 = 1$ between $x=0$ and $x=1$.
+Region $B$: bounded by $y=1$ and $y = \ln x$ between $x=1$ and $x=e$.
+
+Show that $V_A : V_B = 1:3$ when rotated about $x$-axis.
+\end{problem}
+
+\begin{hint}
+Use washer method: $V = \pi\int_a^b [(y_{outer})^2 - (y_{inner})^2] dx$. For $\int (\ln x)^2 dx$, use parts twice.
+\end{hint}
+
+\begin{solution}
+Region $A$: $V_A = \pi\int_0^1 [1 - (1-x^2)] dx = \pi\int_0^1 x^2 dx = \frac{\pi}{3}$
+
+Region $B$: $V_B = \pi\int_1^e [1 - (\ln x)^2] dx$
+
+For $\int (\ln x)^2 dx$, parts twice: $\int (\ln x)^2 dx = x(\ln x)^2 - 2x\ln x + 2x$
+
+\[
+V_B = \pi[-x(\ln x)^2 + 2x\ln x - x]_1^e = \pi[0 - (-1)] = \pi
+\]
+
+Ratio: $V_A : V_B = \frac{\pi}{3} : \pi = 1 : 3$ ✓
+
+\textbf{Answer:} $\boxed{1:3}$
+\end{solution}
+
+\begin{takeaways}
+Washer method subtracts inner from outer. Repeated parts for $(\ln x)^n$. Boundary simplifications key.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 6: Split Numerator for Reverse Chain Rule and Inverse Trig (from sample 24.tex)
+\begin{problem}[Numerator Decomposition]
+Find the indefinite integral:
+\[
+\int \frac{1-x}{\sqrt{5 - 4x - x^2}} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+Express $(1-x)$ in form $\frac{1}{2}(-2x-4) + 3$ to match derivative of denominator. Split into two integrals.
+\end{hint}
+
+\begin{solution}
+Note: $f(x) = 5 - 4x - x^2$, so $f'(x) = -4 - 2x$
+
+Rewrite: $1-x = \frac{1}{2}(-2x-4) + 3$
+
+Split:
+\[
+I = \frac{1}{2}\int \frac{-2x-4}{\sqrt{5-4x-x^2}} dx + 3\int \frac{1}{\sqrt{5-4x-x^2}} dx
+\]
+
+First part: $u$-substitution gives $\sqrt{5-4x-x^2}$
+
+Second part: Complete square: $5-4x-x^2 = 9-(x+2)^2$
+
+Standard form: $\int \frac{1}{\sqrt{9-(x+2)^2}} dx = \arcsin\left(\frac{x+2}{3}\right)$
+
+\textbf{Answer:} $\boxed{\sqrt{5-4x-x^2} + 3\arcsin\left(\frac{x+2}{3}\right) + C}$
+\end{solution}
+
+\begin{takeaways}
+Split numerator to create $f'(x)$ term for substitution. Complete square for inverse trig forms.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 7: Definite Integral with Partial Fractions (from sample 25.tex)
+\begin{problem}[Partial Fractions - Definite]
+Evaluate:
+\[
+\int_{0}^{2} \frac{5x - 3}{(x + 1)(x - 3)} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+Decompose: $\frac{5x-3}{(x+1)(x-3)} = \frac{A}{x+1} + \frac{B}{x-3}$. Find $A, B$ then integrate logarithms.
+\end{hint}
+
+\begin{solution}
+Partial fractions: $5x-3 = A(x-3) + B(x+1)$
+
+$x=-1$: $-8 = -4A \implies A = 2$
+
+$x=3$: $12 = 4B \implies B = 3$
+
+Therefore: $\frac{2}{x+1} + \frac{3}{x-3}$
+
+\[
+I = [2\ln|x+1| + 3\ln|x-3|]_0^2
+\]
+
+\[
+= (2\ln 3 + 3\ln 1) - (2\ln 1 + 3\ln 3) = 2\ln 3 - 3\ln 3 = -\ln 3
+\]
+
+\textbf{Answer:} $\boxed{-\ln 3}$
+\end{solution}
+
+\begin{takeaways}
+Cover-up method for partial fractions. Be careful with absolute values: $\ln|x-3|$ at $x=2$ gives $\ln 1 = 0$.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 8: King's Property with Substitution (from sample 28.tex)
+\begin{problem}[Definite Integral Substitution Property]
+Evaluate:
+\[
+\int_{0}^{\frac{\pi}{2}} \frac{1}{\sin \theta + 1} \, d\theta
+\]
+\end{problem}
+
+\begin{hint}
+Use $\int_a^b f(x)dx = \int_a^b f(a+b-x)dx$ to transform $\sin\theta$ to $\cos\theta$. Then apply half-angle identity.
+\end{hint}
+
+\begin{solution}
+Apply substitution property:
+\[
+I = \int_{0}^{\frac{\pi}{2}} \frac{1}{\sin(\frac{\pi}{2}-\theta) + 1} d\theta = \int_{0}^{\frac{\pi}{2}} \frac{1}{\cos\theta + 1} d\theta
+\]
+
+Use $\cos\theta + 1 = 2\cos^2(\frac{\theta}{2})$:
+\[
+I = \frac{1}{2}\int_0^{\frac{\pi}{2}} \sec^2\left(\frac{\theta}{2}\right) d\theta = \left[\tan\left(\frac{\theta}{2}\right)\right]_0^{\frac{\pi}{2}}
+\]
+
+\[
+= \tan\left(\frac{\pi}{4}\right) - \tan(0) = 1 - 0 = 1
+\]
+
+\textbf{Answer:} $\boxed{1}$
+\end{solution}
+
+\begin{takeaways}
+King's property transforms integrals. Half-angle identities simplify trig expressions.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 9: Reduction Formula (from sample 31.tex)
+\begin{problem}[Integration by Parts - Reduction Formula]
+Let $I_n = \int_0^a x^{n+\frac{1}{2}} (a-x)^{\frac{1}{2}} \, dx$ where $n \ge 0$.
+
+Show that $(2n+4)I_n = a(2n+1)I_{n-1}$ for $n > 0$.
+\end{problem}
+
+\begin{hint}
+Parts: $u = x^{n+\frac{1}{2}}$, $dv = (a-x)^{\frac{1}{2}}dx$. Boundary terms vanish. Factor $(a-x)^{\frac{3}{2}} = (a-x)(a-x)^{\frac{1}{2}}$.
+\end{hint}
+
+\begin{solution}
+By parts: $u = x^{n+\frac{1}{2}}$, $du = \frac{2n+1}{2}x^{n-\frac{1}{2}}dx$; $v = -\frac{2}{3}(a-x)^{\frac{3}{2}}$
+
+Boundary term: $\left[-\frac{2}{3}x^{n+\frac{1}{2}}(a-x)^{\frac{3}{2}}\right]_0^a = 0$
+
+\[
+I_n = \frac{2n+1}{3}\int_0^a x^{n-\frac{1}{2}}(a-x)^{\frac{3}{2}} dx
+\]
+
+Expand $(a-x)^{\frac{3}{2}} = (a-x)(a-x)^{\frac{1}{2}}$:
+\[
+= \frac{2n+1}{3}[aI_{n-1} - I_n]
+\]
+
+\[
+3I_n = (2n+1)aI_{n-1} - (2n+1)I_n \implies (2n+4)I_n = a(2n+1)I_{n-1}
+\]
+
+\textbf{Result:} $\boxed{(2n+4)I_n = a(2n+1)I_{n-1}}$ ✓
+\end{solution}
+
+\begin{takeaways}
+Reduction formulae relate $I_n$ to $I_{n-1}$. Check boundary terms carefully at both limits.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 10: Complete Square and Trig Substitution (from sample 32.tex)
+\begin{problem}[Complete Square with Trig Substitution]
+Using suitable substitution, find:
+\[
+\int \frac{2x^2}{\sqrt{2x - x^2}} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+Complete square: $2x-x^2 = 1-(x-1)^2$. Let $x-1 = \sin\theta$ then use $\sin^2\theta = \frac{1-\cos 2\theta}{2}$.
+\end{hint}
+
+\begin{solution}
+Complete square: $2x-x^2 = 1-(x-1)^2$
+
+Let $x-1 = \sin\theta \implies x = 1+\sin\theta$, $dx = \cos\theta \, d\theta$
+
+\[
+I = \int \frac{2(1+\sin\theta)^2}{\cos\theta} \cos\theta \, d\theta = 2\int (1+2\sin\theta+\sin^2\theta) d\theta
+\]
+
+Using $\sin^2\theta = \frac{1-\cos 2\theta}{2}$:
+\[
+= 2\theta - 4\cos\theta + \int(1-\cos 2\theta)d\theta
+\]
+
+\[
+= 3\theta - 4\cos\theta - \sin\theta\cos\theta + C
+\]
+
+Back-substitute: $\theta = \arcsin(x-1)$, $\cos\theta = \sqrt{2x-x^2}$
+
+\textbf{Answer:} $\boxed{3\arcsin(x-1) - (x+3)\sqrt{2x-x^2} + C}$
+\end{solution}
+
+\begin{takeaways}
+Complete square transforms to standard form $a^2 - (x-h)^2$. Double angle for $\sin^2\theta$ integration.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 11: U-substitution with Completing Square (from sample 33.tex)
+\begin{problem}[Substitution and Inverse Tangent]
+Evaluate:
+\[
+\int \frac{\cos x}{\sin^2 x + 2 \sin x + 5} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+Let $u = \sin x$. Complete square in denominator: $u^2 + 2u + 5 = (u+1)^2 + 4$. Standard $\arctan$ form.
+\end{hint}
+
+\begin{solution}
+Let $u = \sin x \implies du = \cos x \, dx$
+
+\[
+I = \int \frac{1}{u^2+2u+5} du
+\]
+
+Complete square: $u^2+2u+5 = (u+1)^2 + 4$
+
+Standard form: $\int \frac{1}{v^2+a^2} dv = \frac{1}{a}\arctan\left(\frac{v}{a}\right)$
+
+\[
+I = \frac{1}{2}\arctan\left(\frac{u+1}{2}\right) + C
+\]
+
+Back-substitute: $u = \sin x$
+
+\textbf{Answer:} $\boxed{\frac{1}{2}\arctan\left(\frac{\sin x + 1}{2}\right) + C}$
+\end{solution}
+
+\begin{takeaways}
+Recognize when numerator is derivative of part of denominator. Complete square for inverse trig forms.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 12: Exponential Substitution (from sample 34.tex)
+\begin{problem}[Exponential with Complete Square]
+Evaluate:
+\[
+\int \frac{e^x}{\sqrt{e^{2x} + 2e^x - 3}} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+Let $u = e^x$. Complete square: $u^2+2u-3 = (u+1)^2-4$. Use $\int \frac{1}{\sqrt{x^2-a^2}}dx = \ln|x+\sqrt{x^2-a^2}|$.
+\end{hint}
+
+\begin{solution}
+Let $u = e^x \implies du = e^x dx$
+
+\[
+I = \int \frac{1}{\sqrt{u^2+2u-3}} du
+\]
+
+Complete square: $u^2+2u-3 = (u+1)^2 - 4$
+
+Standard form: $\int \frac{1}{\sqrt{v^2-a^2}} dv = \ln|v+\sqrt{v^2-a^2}|$
+
+\[
+I = \ln|(u+1) + \sqrt{(u+1)^2-4}| + C
+\]
+
+Back-substitute: $u = e^x$
+
+\textbf{Answer:} $\boxed{\ln|e^x+1+\sqrt{e^{2x}+2e^x-3}| + C}$
+\end{solution}
+
+\begin{takeaways}
+Exponential substitution simplifies $e^{2x}$ and $e^x$ terms. Memorize $\sqrt{x^2-a^2}$ integral form.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 13: Chain Rule Recognition (from sample 35.tex)
+\begin{problem}[Nested Function Substitution]
+Evaluate:
+\[
+\int \frac{x \sin\left(\sqrt{2x^2 - 1}\right)}{\sqrt{2x^2 - 1}} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+Let $u = \sqrt{2x^2-1}$. Then $u^2 = 2x^2-1$ and $2u \, du = 4x \, dx$, so $x \, dx = \frac{1}{2}u \, du$.
+\end{hint}
+
+\begin{solution}
+Let $u = \sqrt{2x^2-1} \implies u^2 = 2x^2-1$
+
+Differentiate: $2u \, du = 4x \, dx \implies x \, dx = \frac{1}{2}u \, du$
+
+\[
+I = \int \frac{\sin u}{u} \cdot \frac{1}{2}u \, du = \frac{1}{2}\int \sin u \, du
+\]
+
+\[
+= -\frac{1}{2}\cos u + C
+\]
+
+Back-substitute: $u = \sqrt{2x^2-1}$
+
+\textbf{Answer:} $\boxed{-\frac{1}{2}\cos\left(\sqrt{2x^2-1}\right) + C}$
+\end{solution}
+
+\begin{takeaways}
+Look for composition patterns. Square both sides to differentiate nested radicals easily.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 14: Odd Power of Cosine (from sample 36.tex)
+\begin{problem}[Odd Power Trig with Radical]
+Evaluate:
+\[
+\int \frac{\cos^3 x}{\sqrt{\sin x}} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+Rewrite $\cos^3 x = (1-\sin^2 x)\cos x$. Let $u = \sin x$, then integrate $\frac{1-u^2}{\sqrt{u}}$.
+\end{hint}
+
+\begin{solution}
+Rewrite: $\cos^3 x = \cos^2 x \cdot \cos x = (1-\sin^2 x)\cos x$
+
+Let $u = \sin x \implies du = \cos x \, dx$
+
+\[
+I = \int \frac{1-u^2}{\sqrt{u}} du = \int (u^{-1/2} - u^{3/2}) du
+\]
+
+\[
+= 2u^{1/2} - \frac{2}{5}u^{5/2} + C
+\]
+
+Back-substitute: $u = \sin x$
+
+\textbf{Answer:} $\boxed{2\sqrt{\sin x} - \frac{2}{5}\sin^2 x\sqrt{\sin x} + C}$
+\end{solution}
+
+\begin{takeaways}
+For odd power of cosine, factor out one $\cos x$ for $du$. Use Pythagorean identity for remaining even power.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 15: King's Property with Trig Identity (from sample 37.tex)
+\begin{problem}[King's Property with Double Usage]
+Let $I = \int_{1}^{3} \frac{\cos^2 \left(\frac{\pi}{8}x\right)}{x(4-x)} \, dx$
+
+\begin{enumerate}[label=(\roman*)]
+\item Use substitution $u = 4-x$ to show $I = \int_{1}^{3} \frac{\sin^2 \left(\frac{\pi}{8}u\right)}{u(4-u)} \, du$
+\item Hence, find the value of $I$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Part (i): Co-function identity $\cos(\frac{\pi}{2}-\theta) = \sin\theta$. Part (ii): Add both forms, use $\sin^2+\cos^2=1$, partial fractions.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Let $u=4-x$: $x=4-u$, $dx=-du$, limits swap
+
+$\cos^2(\frac{\pi}{8}(4-u)) = \cos^2(\frac{\pi}{2}-\frac{\pi}{8}u) = \sin^2(\frac{\pi}{8}u)$ ✓
+
+\textbf{(ii)} Add original and transformed:
+\[
+2I = \int_1^3 \frac{\cos^2(\frac{\pi x}{8}) + \sin^2(\frac{\pi x}{8})}{x(4-x)} dx = \int_1^3 \frac{1}{x(4-x)} dx
+\]
+
+Partial fractions: $\frac{1}{x(4-x)} = \frac{1/4}{x} + \frac{1/4}{4-x}$
+
+\[
+2I = \frac{1}{4}[\ln|x| - \ln|4-x|]_1^3 = \frac{1}{4}[\ln 3 - \ln(1/3)] = \frac{1}{2}\ln 3
+\]
+
+\textbf{Answer:} $\boxed{I = \frac{1}{4}\ln 3}$
+\end{solution}
+
+\begin{takeaways}
+King's property creates self-similar integrals. Adding them eliminates complex parts via identities.
+\end{takeaways}
+

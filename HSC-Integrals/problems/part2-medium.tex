@@ -1,3 +1,504 @@
 % Part 2: Medium Problems (~15 problems with hints and concise solutions)
 
-% TO BE COMPLETED: ~15 medium problems with hints and concise solutions
+% Problem 1: Applications - Particle Motion (from sample 02.tex)
+\begin{problem}[Particle Motion with Resistance]
+A particle of mass $m$ kg moves along a horizontal line with initial velocity $V_0$ m/s. The motion is resisted by a constant force of $mk$ newtons and a variable force of $mv^2$ newtons, where $k$ is a positive constant and $v$ m/s is the velocity at time $t$ seconds.
+
+Show that the distance travelled when the particle comes to rest is $\displaystyle \frac{1}{2}\ln\left(\frac{k + V_0^2}{k}\right)$ metres.
+\end{problem}
+
+\begin{hint}
+Apply Newton's Second Law, then use $a = v\frac{dv}{dx}$ to change variables. Separate and integrate.
+\end{hint}
+
+\begin{solution}
+Total resistive force: $F = -(mk + mv^2) \implies ma = -m(k + v^2) \implies a = -(k + v^2)$
+
+Using $a = v\frac{dv}{dx}$:
+\[
+v \frac{dv}{dx} = -(k + v^2) \implies dx = -\frac{v}{k + v^2} dv
+\]
+
+Integrate with limits: $x=0$ to $x=D$, $v=V_0$ to $v=0$:
+\[
+\int_{0}^{D} dx = \int_{V_0}^{0} -\frac{v}{k + v^2} dv
+\]
+
+RHS: $\int \frac{v}{k+v^2} dv = \frac{1}{2} \ln(k+v^2)$
+
+\[
+D = -\frac{1}{2}[\ln k - \ln(k + V_0^2)] = \frac{1}{2}\ln\left(\frac{k + V_0^2}{k}\right)
+\]
+
+\textbf{Answer:} $\boxed{\frac{1}{2}\ln\left(\frac{k + V_0^2}{k}\right) \text{ metres}}$
+\end{solution}
+
+\begin{takeaways}
+For distance problems, use $a = v\frac{dv}{dx}$ instead of $a = \frac{dv}{dt}$. Reverse chain rule for logarithms.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 2: Mechanics with differential equation (from sample 18.tex)
+\begin{problem}[Resistive Force Problem]
+A particle with mass $1$ kg is moving along the $x$-axis. Initially at origin with speed $u$ m/s to the right. It experiences resistive force of magnitude $v + 3v^2$ newtons.
+
+\begin{enumerate}[label=(\roman*)]
+\item Show that $\displaystyle \frac{dv}{dx} = -(1 + 3v)$.
+\item Hence find $x$ as a function of $v$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Part (i): Use $F = ma$ with $a = v\frac{dv}{dx}$, then simplify. Part (ii): Separate variables and integrate.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} $F = -(v + 3v^2) = ma = 1 \cdot v\frac{dv}{dx}$
+
+\[
+v\frac{dv}{dx} = -v(1 + 3v) \implies \frac{dv}{dx} = -(1 + 3v) \quad \text{(since } v \neq 0\text{)}
+\]
+
+\textbf{(ii)} Invert: $\frac{dx}{dv} = -\frac{1}{1 + 3v}$
+
+Integrate: $x = -\frac{1}{3}\ln(1 + 3v) + C$
+
+Initial conditions: $x=0, v=u \implies 0 = -\frac{1}{3}\ln(1 + 3u) + C$
+
+Therefore: $C = \frac{1}{3}\ln(1 + 3u)$
+
+\textbf{Answer:} $\boxed{x = \frac{1}{3}\ln\left(\frac{1 + 3u}{1 + 3v}\right)}$
+\end{solution}
+
+\begin{takeaways}
+Invert $\frac{dv}{dx}$ to $\frac{dx}{dv}$ when finding $x$ as function of $v$. Use initial conditions for constant.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 3: t-formula with more complex form (from sample 17.tex)
+\begin{problem}[Weierstrass Substitution - Complex Form]
+Using the substitution $t = \tan\frac{x}{2}$, find $\displaystyle \int \frac{dx}{1 + \cos x - \sin x}$.
+\end{problem}
+
+\begin{hint}
+Apply t-formulae: $\cos x = \frac{1-t^2}{1+t^2}$, $\sin x = \frac{2t}{1+t^2}$, $dx = \frac{2}{1+t^2}dt$. Simplify denominator carefully.
+\end{hint}
+
+\begin{solution}
+Substitute t-formulae:
+\[
+I = \int \frac{1}{1 + \frac{1-t^2}{1+t^2} - \frac{2t}{1+t^2}} \cdot \frac{2}{1+t^2} dt
+\]
+
+Multiply denominator by $(1+t^2)$:
+\[
+I = \int \frac{2}{(1+t^2) + (1-t^2) - 2t} dt = \int \frac{2}{2 - 2t} dt = \int \frac{1}{1 - t} dt
+\]
+
+Integrate: $I = -\ln|1 - t| + C$
+
+\textbf{Answer:} $\boxed{-\ln\left|1 - \tan\frac{x}{2}\right| + C}$
+\end{solution}
+
+\begin{takeaways}
+t-formula simplifies rational trig expressions. Combine fractions carefully before integrating.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 4: SHM integration (from sample 13.tex - simplified)
+\begin{problem}[Simple Harmonic Motion]
+An object moves in SHM with acceleration $\ddot{x} = -4(x-3)$. Initially at $x=5.5$ m moving toward origin with speed $8$ m/s at origin.
+
+Find the range of oscillation (between which two values of $x$).
+\end{problem}
+
+\begin{hint}
+Identify $n^2 = 4$ and center $c = 3$. Use $v^2 = n^2(A^2 - (x-c)^2)$ with $v=8$ when $x=0$ to find amplitude $A$.
+\end{hint}
+
+\begin{solution}
+Standard SHM form: $\ddot{x} = -n^2(x - c)$
+
+Comparing: $n^2 = 4 \implies n = 2$, $c = 3$
+
+Velocity-displacement relation: $v^2 = n^2(A^2 - (x-c)^2)$
+
+At $x=0$, $v=8$:
+\[
+64 = 4(A^2 - 9) \implies 16 = A^2 - 9 \implies A = 5
+\]
+
+Range: $[c-A, c+A] = [3-5, 3+5]$
+
+\textbf{Answer:} $\boxed{x \in [-2, 8]}$
+\end{solution}
+
+\begin{takeaways}
+SHM amplitude found from energy equation. Particle oscillates between $c \pm A$.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 5: Reduction formula (from sample 05.tex)
+\begin{problem}[Cotangent Reduction Formula]
+Let $I_n = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n}\theta \, d\theta$ for $n \geq 0$.
+
+Show that $I_n = \frac{1}{2n-1} - I_{n-1}$ for $n > 0$.
+\end{problem}
+
+\begin{hint}
+Add $I_n + I_{n-1}$ and use $\cot^2\theta + 1 = \text{cosec}^2\theta$. Substitute $u = \cot\theta$ with $du = -\text{cosec}^2\theta \, d\theta$.
+\end{hint}
+
+\begin{solution}
+Add: $I_n + I_{n-1} = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n-2}\theta(\cot^2\theta + 1) d\theta$
+
+Use identity: $= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n-2}\theta \cdot \text{cosec}^2\theta \, d\theta$
+
+Substitute $u = \cot\theta$, $-du = \text{cosec}^2\theta \, d\theta$
+
+Limits: $\theta=\frac{\pi}{4} \implies u=1$; $\theta=\frac{\pi}{2} \implies u=0$
+
+\[
+I_n + I_{n-1} = -\int_1^0 u^{2n-2} du = \int_0^1 u^{2n-2} du = \frac{1}{2n-1}
+\]
+
+\textbf{Result:} $\boxed{I_n = \frac{1}{2n-1} - I_{n-1}}$ ✓
+\end{solution}
+
+\begin{takeaways}
+Reduction formulae created by strategic addition. Trig identities convert to substitution-friendly forms.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 6: Logarithmic reduction (from sample 11.tex)
+\begin{problem}[Logarithmic Power Reduction]
+Let $I_n = \int_1^e (\ln x)^n \, dx$ for $n \ge 0$.
+
+Show that $I_n = e - nI_{n-1}$ for $n \ge 1$.
+\end{problem}
+
+\begin{hint}
+Integration by parts: $u = (\ln x)^n$, $dv = dx$. Boundary term at $x=1$ gives zero since $\ln 1 = 0$.
+\end{hint}
+
+\begin{solution}
+Parts: $u = (\ln x)^n \implies du = n(\ln x)^{n-1} \cdot \frac{1}{x}dx$; $v = x$
+
+\[
+I_n = [x(\ln x)^n]_1^e - \int_1^e x \cdot n(\ln x)^{n-1} \cdot \frac{1}{x} dx
+\]
+
+Boundary: At $x=e$: $e \cdot 1^n = e$; at $x=1$: $1 \cdot 0^n = 0$
+
+\[
+I_n = e - n\int_1^e (\ln x)^{n-1} dx = e - nI_{n-1}
+\]
+
+\textbf{Result:} $\boxed{I_n = e - nI_{n-1}}$ ✓
+\end{solution}
+
+\begin{takeaways}
+Parts on repeated functions creates recursion. Logarithm boundaries simplify at $e$ and $1$.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 7: Complex substitution (from sample 04.tex)
+\begin{problem}[King's Property with t-Formula]
+Evaluate $\int_{0}^{\frac{\pi}{2}} \frac{u}{1 + \sin u + \cos u} \, du$ using substitution $u = \frac{\pi}{2} - x$.
+\end{problem}
+
+\begin{hint}
+After substitution, add original and transformed. Numerators combine to $\frac{\pi}{2}$. Then use t-formula on resulting $\frac{1}{1+\sin u+\cos u}$.
+\end{hint}
+
+\begin{solution}
+Let $u = \frac{\pi}{2} - x$:
+\[
+I = \int_0^{\frac{\pi}{2}} \frac{\frac{\pi}{2}-u}{1+\sin u+\cos u} du
+\]
+
+Add with original: $2I = \frac{\pi}{2}\int_0^{\frac{\pi}{2}} \frac{1}{1+\sin u+\cos u} du$
+
+t-formula ($t = \tan\frac{u}{2}$): $\sin u = \frac{2t}{1+t^2}$, $\cos u = \frac{1-t^2}{1+t^2}$, $du = \frac{2}{1+t^2}dt$
+
+Limits: $u=0 \implies t=0$; $u=\frac{\pi}{2} \implies t=1$
+
+\[
+2I = \frac{\pi}{2}\int_0^1 \frac{2}{(1+t^2) + 2t + (1-t^2)} dt = \frac{\pi}{2}\int_0^1 \frac{1}{1+t} dt
+\]
+
+\[
+= \frac{\pi}{2}[\ln(1+t)]_0^1 = \frac{\pi\ln 2}{2} \implies I = \frac{\pi\ln 2}{4}
+\]
+
+\textbf{Answer:} $\boxed{\frac{\pi\ln 2}{4}}$
+\end{solution}
+
+\begin{takeaways}
+King's property plus t-formula powerful combination. Self-similar integrals simplify via addition.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 8: Power of cosine reduction (from sample 08.tex - part iii only)
+\begin{problem}[Quartic Cosine via Complex Numbers]
+Using the identity $\cos^4\theta = \frac{1}{8}(\cos 4\theta + 4\cos 2\theta + 3)$, evaluate:
+\[
+\int_0^{\frac{\pi}{2}} \cos^4\theta \, d\theta
+\]
+\end{problem}
+
+\begin{hint}
+Expand using given identity. Integrate term by term. Note $\sin(2\pi) = \sin(\pi) = 0$.
+\end{hint}
+
+\begin{solution}
+Apply identity:
+\[
+I = \frac{1}{8}\int_0^{\frac{\pi}{2}} (\cos 4\theta + 4\cos 2\theta + 3) d\theta
+\]
+
+\[
+= \frac{1}{8}\left[\frac{1}{4}\sin 4\theta + 2\sin 2\theta + 3\theta\right]_0^{\frac{\pi}{2}}
+\]
+
+At $\theta=\frac{\pi}{2}$: $\frac{1}{4}\sin(2\pi) + 2\sin(\pi) + \frac{3\pi}{2} = 0 + 0 + \frac{3\pi}{2}$
+
+At $\theta=0$: All terms zero
+
+\[
+I = \frac{1}{8} \cdot \frac{3\pi}{2} = \frac{3\pi}{16}
+\]
+
+\textbf{Answer:} $\boxed{\frac{3\pi}{16}}$
+\end{solution}
+
+\begin{takeaways}
+Power reduction formulae via complex exponentials. Check boundary values carefully for trig terms.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 9: Partial fractions with quadratic (from sample 29.tex)
+\begin{problem}[Partial Fractions - Mixed]
+Find $\int \frac{3x^2 + 2x + 1}{(x-1)(x^2+1)} \, dx$.
+\end{problem}
+
+\begin{hint}
+Decompose: $\frac{A}{x-1} + \frac{Bx+C}{x^2+1}$. Cover-up for $A$, compare coefficients for $B, C$.
+\end{hint}
+
+\begin{solution}
+Partial fractions: $3x^2+2x+1 = A(x^2+1) + (Bx+C)(x-1)$
+
+At $x=1$: $6 = 2A \implies A=3$
+
+Expand: $3x^2+2x+1 = 3x^2+3 + Bx^2 + (C-B)x - C$
+
+Coefficients: $x^2$: $3 = 3+B \implies B=0$; constant: $1 = 3-C \implies C=2$
+
+\[
+I = \int\left(\frac{3}{x-1} + \frac{2}{x^2+1}\right) dx = 3\ln|x-1| + 2\arctan x + C
+\]
+
+\textbf{Answer:} $\boxed{3\ln|x-1| + 2\arctan x + C}$
+\end{solution}
+
+\begin{takeaways}
+Irreducible quadratics need $Bx+C$ form. Coefficient comparison after substitution.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 10: Half-angle identity (from sample 38.tex)
+\begin{problem}[Perfect Square Form]
+Evaluate $\int \sqrt{1 + \sin x} \, dx$.
+\end{problem}
+
+\begin{hint}
+Use identities: $1 = \sin^2\frac{x}{2} + \cos^2\frac{x}{2}$ and $\sin x = 2\sin\frac{x}{2}\cos\frac{x}{2}$ to form perfect square $(\sin\frac{x}{2} + \cos\frac{x}{2})^2$.
+\end{hint}
+
+\begin{solution}
+Apply identities:
+\[
+1 + \sin x = \sin^2\frac{x}{2} + \cos^2\frac{x}{2} + 2\sin\frac{x}{2}\cos\frac{x}{2} = \left(\sin\frac{x}{2} + \cos\frac{x}{2}\right)^2
+\]
+
+Therefore:
+\[
+I = \int \left(\sin\frac{x}{2} + \cos\frac{x}{2}\right) dx = -2\cos\frac{x}{2} + 2\sin\frac{x}{2} + C
+\]
+
+\textbf{Answer:} $\boxed{2\left(\sin\frac{x}{2} - \cos\frac{x}{2}\right) + C}$
+\end{solution}
+
+\begin{takeaways}
+Half-angle identities create perfect squares. Simplifies radicals with trig expressions.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 11: Product-to-sum (from sample 39.tex)
+\begin{problem}[Product-to-Sum Formula]
+Prove $\int \sin x \sin 2x \, dx = \frac{2\sin^3 x}{3} + c$ using the product-to-sum formula.
+\end{problem}
+
+\begin{hint}
+Use $\sin A \sin B = \frac{1}{2}[\cos(A-B) - \cos(A+B)]$. Then use triple angle $\sin 3x = 3\sin x - 4\sin^3 x$ to verify.
+\end{hint}
+
+\begin{solution}
+Product-to-sum: $\sin x \sin 2x = \frac{1}{2}[\cos(-x) - \cos 3x] = \frac{1}{2}(\cos x - \cos 3x)$
+
+\[
+I = \frac{1}{2}\int(\cos x - \cos 3x)dx = \frac{1}{2}\left(\sin x - \frac{1}{3}\sin 3x\right) + c
+\]
+
+Use $\sin 3x = 3\sin x - 4\sin^3 x$:
+\[
+= \frac{1}{2}\left[\sin x - \frac{1}{3}(3\sin x - 4\sin^3 x)\right] + c = \frac{1}{2} \cdot \frac{4\sin^3 x}{3} + c
+\]
+
+\textbf{Result:} $\boxed{\frac{2\sin^3 x}{3} + c}$ ✓
+\end{solution}
+
+\begin{takeaways}
+Product-to-sum converts trig products to sums. Triple angle back-substitution verifies equivalence.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 12: Error in integration (from sample 30.tex)
+\begin{problem}[Integration Paradox]
+Explain the error in this argument:
+
+Using parts on $\int \frac{1}{x} dx$ with $u=\frac{1}{x}$, $dv=dx$ gives:
+\[
+\int \frac{1}{x} dx = 1 + \int \frac{1}{x} dx \implies 0 = 1
+\]
+What is wrong?
+\end{problem}
+
+\begin{hint}
+Indefinite integrals represent families of functions, each with different constant $C$. Cannot "cancel" integrals algebraically.
+\end{hint}
+
+\begin{solution}
+The flaw: treating indefinite integral as single value.
+
+Correctly: $\ln|x| + C_1 = 1 + \ln|x| + C_2$
+
+Simplifying: $C_1 = 1 + C_2 \implies C_1 - C_2 = 1$ ✓
+
+This says constants differ by 1, not that $0=1$.
+
+\textbf{Lesson:} Cannot algebraically cancel indefinite integrals; they represent function families, not values.
+\end{solution}
+
+\begin{takeaways}
+Indefinite integrals are families with arbitrary constants. Cannot treat as algebraic equations without accounting for constants.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 13: Complex induction problem (from sample 20.tex - simplified)
+\begin{problem}[Exponential Integral Bounds]
+Let $J_n = \int_0^1 x^n e^{-x} dx$ for $n \ge 0$.
+
+\begin{enumerate}[label=(\roman*)]
+\item Show $J_0 = 1 - \frac{1}{e}$.
+\item Show $J_n = nJ_{n-1} - \frac{1}{e}$ for $n \ge 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Part (i): Direct integration. Part (ii): Parts with $u=x^n$, $dv=e^{-x}dx$. Boundary terms simplify at $x=0,1$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} $J_0 = \int_0^1 e^{-x} dx = [-e^{-x}]_0^1 = -\frac{1}{e} - (-1) = 1 - \frac{1}{e}$ ✓
+
+\textbf{(ii)} Parts: $u=x^n$, $du=nx^{n-1}dx$; $v=-e^{-x}$
+
+\[
+J_n = [-x^n e^{-x}]_0^1 + n\int_0^1 x^{n-1}e^{-x} dx
+\]
+
+Boundary: $-1^n e^{-1} - 0 = -\frac{1}{e}$
+
+\[
+J_n = -\frac{1}{e} + nJ_{n-1} = nJ_{n-1} - \frac{1}{e}
+\]
+
+\textbf{Result:} $\boxed{J_n = nJ_{n-1} - \frac{1}{e}}$ ✓
+\end{solution}
+
+\begin{takeaways}
+Reduction formulae via parts. Check boundaries carefully - exponentials decay, powers vanish at zero.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 14: Reverse chain rule trickier
+\begin{problem}[Chain Rule with Substitution]
+Evaluate $\int \frac{x}{\sqrt{1-x^4}} \, dx$.
+\end{problem}
+
+\begin{hint}
+Let $u = x^2$, then $du = 2x \, dx$, so $x \, dx = \frac{1}{2}du$. Results in $\arcsin u$ form.
+\end{hint}
+
+\begin{solution}
+Let $u = x^2 \implies du = 2x \, dx$
+
+\[
+I = \frac{1}{2}\int \frac{1}{\sqrt{1-u^2}} du = \frac{1}{2}\arcsin u + C
+\]
+
+Back-substitute: $u = x^2$
+
+\textbf{Answer:} $\boxed{\frac{1}{2}\arcsin(x^2) + C}$
+\end{solution}
+
+\begin{takeaways}
+Recognize hidden derivatives after simple substitutions. $\sqrt{1-u^2}$ suggests inverse sine.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 15: Trig substitution application
+\begin{problem}[Trigonometric Substitution]
+Evaluate $\int \frac{x^2}{\sqrt{4-x^2}} \, dx$.
+\end{problem}
+
+\begin{hint}
+Let $x = 2\sin\theta$. Then $\sqrt{4-x^2} = 2\cos\theta$. Use $\sin^2\theta = \frac{1-\cos 2\theta}{2}$.
+\end{hint}
+
+\begin{solution}
+Let $x = 2\sin\theta \implies dx = 2\cos\theta \, d\theta$
+
+\[
+I = \int \frac{4\sin^2\theta}{2\cos\theta} \cdot 2\cos\theta \, d\theta = 4\int \sin^2\theta \, d\theta
+\]
+
+\[
+= 4\int \frac{1-\cos 2\theta}{2} d\theta = 2\left(\theta - \frac{1}{2}\sin 2\theta\right) + C
+\]
+
+Back-substitute: $\theta = \arcsin\frac{x}{2}$, $\sin 2\theta = 2\sin\theta\cos\theta = 2 \cdot \frac{x}{2} \cdot \frac{\sqrt{4-x^2}}{2} = \frac{x\sqrt{4-x^2}}{2}$
+
+\textbf{Answer:} $\boxed{2\arcsin\frac{x}{2} - \frac{x\sqrt{4-x^2}}{2} + C}$
+\end{solution}
+
+\begin{takeaways}
+Trig substitution for $\sqrt{a^2-x^2}$ forms. Double angle formula for $\sin^2\theta$ integration.
+\end{takeaways}
+

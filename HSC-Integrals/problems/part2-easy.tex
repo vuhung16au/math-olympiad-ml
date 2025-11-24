@@ -33,5 +33,401 @@ Limits: $x = \sqrt{10} \implies u = 1$; $x = \sqrt{13} \implies u = 4$.
 Choose $u$ as the inner function ($x^2-9$) to simplify the square root. Always update integration limits when substituting.
 \end{takeaways}
 
-% Add ~14 more easy problems...
-% TO BE COMPLETED
+\vspace{1cm}
+
+% Problem 2: Integration by Parts (from sample 07.tex)
+\begin{problem}[Integration by Parts with Logarithm]
+Use integration by parts to evaluate $\displaystyle \int_{1}^{e} x \ln x \, dx$.
+\end{problem}
+
+\begin{hint}
+Use LIATE rule: let $u = \ln x$ and $dv = x \, dx$. Remember $\ln(e) = 1$ and $\ln(1) = 0$.
+\end{hint}
+
+\begin{solution}
+Let $u = \ln x$, $dv = x \, dx \implies du = \frac{1}{x}dx$, $v = \frac{x^2}{2}$.
+
+By parts:
+\begin{align*}
+I &= \left[ \frac{x^2}{2} \ln x \right]_{1}^{e} - \int_{1}^{e} \frac{x^2}{2} \cdot \frac{1}{x} dx = \left[ \frac{x^2}{2} \ln x \right]_{1}^{e} - \frac{1}{2}\int_{1}^{e} x \, dx \\
+&= \left[ \frac{x^2}{2} \ln x - \frac{x^2}{4} \right]_{1}^{e} = \left(\frac{e^2}{2} - \frac{e^2}{4}\right) - \left(0 - \frac{1}{4}\right) = \boxed{\frac{e^2 + 1}{4}}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+LIATE rule prioritizes $\ln x$ for $u$. Boundary values $\ln(e)=1$, $\ln(1)=0$ simplify evaluation.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 3: Reverse Chain Rule (from sample 09.tex)
+\begin{problem}[Reverse Chain Rule - Split Numerator]
+Find $\displaystyle \int \frac{2x+3}{x^2+2x+2} \, dx$.
+\end{problem}
+
+\begin{hint}
+Split numerator as $(2x+2) + 1$. First part gives $\ln$, second part uses completing the square for $\arctan$.
+\end{hint}
+
+\begin{solution}
+Split: $\displaystyle \int \frac{2x+2}{x^2+2x+2} dx + \int \frac{1}{x^2+2x+2} dx$
+
+First integral: numerator is derivative of denominator $\implies \ln(x^2+2x+2)$
+
+Second integral: Complete square: $x^2+2x+2 = (x+1)^2 + 1$
+\[
+\int \frac{1}{(x+1)^2 + 1} dx = \arctan(x+1)
+\]
+
+\textbf{Answer:} $\boxed{\ln(x^2+2x+2) + \arctan(x+1) + C}$
+\end{solution}
+
+\begin{takeaways}
+Split numerator to match derivative form for $\ln$. Complete square to get $\arctan$ form.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 4: Simple Trig Substitution (from sample 16.tex)
+\begin{problem}[Power and Product of Trig Functions]
+Evaluate $\displaystyle \int \sin^3 2x \cos 2x \, dx$.
+\end{problem}
+
+\begin{hint}
+Let $u = \sin 2x$. The remaining $\cos 2x \, dx$ becomes part of $du$.
+\end{hint}
+
+\begin{solution}
+Let $u = \sin 2x \implies du = 2\cos 2x \, dx \implies \cos 2x \, dx = \frac{1}{2}du$
+
+\[
+I = \int u^3 \cdot \frac{1}{2} du = \frac{1}{2} \cdot \frac{u^4}{4} = \frac{u^4}{8} + C
+\]
+
+Substitute back: $\boxed{\frac{1}{8}\sin^4 2x + C}$
+\end{solution}
+
+\begin{takeaways}
+When integrand has $\sin^n \cos$ or $\cos^n \sin$, use the base function as substitution variable.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 5: Definite Integral Property (from sample 06.tex)
+\begin{problem}[King's Property Application]
+Which expression equals $\displaystyle \int_0^{2a} f(x) \, dx$?
+
+\begin{enumerate}[label=\Alph*.]
+\item $\displaystyle \int_0^a \left( f(x) - f(2a - x) \right) dx$
+\item $\displaystyle \int_0^a \left( f(x) + f(2a - x) \right) dx$
+\item $\displaystyle 2 \int_0^a f(x - a) \, dx$
+\item $\displaystyle \int_0^a \frac{1}{2} f(2x) \, dx$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Split integral at $x=a$, then use substitution $u = 2a - x$ on the second part to shift limits back to $[0,a]$.
+\end{hint}
+
+\begin{solution}
+Split: $\displaystyle \int_0^{2a} f(x)dx = \int_0^a f(x)dx + \int_a^{2a} f(x)dx$
+
+For second integral, let $u = 2a - x$:
+\begin{itemize}
+\item When $x=a$: $u=a$; when $x=2a$: $u=0$
+\item $du = -dx$
+\end{itemize}
+
+\[
+\int_a^{2a} f(x)dx = \int_a^0 f(2a-u)(-du) = \int_0^a f(2a-x)dx
+\]
+
+Combine: $\displaystyle \int_0^{2a} f(x)dx = \int_0^a [f(x) + f(2a-x)]dx$
+
+\textbf{Answer:} $\boxed{\text{B}}$
+\end{solution}
+
+\begin{takeaways}
+King's property: split at midpoint, use substitution to create symmetry.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 6: t-formula application (from sample 14.tex)
+\begin{problem}[Weierstrass Substitution]
+Evaluate $\displaystyle \int_{0}^{\frac{\pi}{2}} \frac{1}{3 + 5\cos x} \, dx$.
+\end{problem}
+
+\begin{hint}
+Use t-formula: $t = \tan(\frac{x}{2})$, then $\cos x = \frac{1-t^2}{1+t^2}$ and $dx = \frac{2}{1+t^2}dt$.
+\end{hint}
+
+\begin{solution}
+Let $t = \tan(\frac{x}{2})$: $\cos x = \frac{1-t^2}{1+t^2}$, $dx = \frac{2}{1+t^2}dt$
+
+Limits: $x=0 \implies t=0$; $x=\frac{\pi}{2} \implies t=1$
+
+\begin{align*}
+I &= \int_0^1 \frac{1}{3 + 5\left(\frac{1-t^2}{1+t^2}\right)} \cdot \frac{2}{1+t^2} dt = \int_0^1 \frac{2}{3(1+t^2) + 5(1-t^2)} dt \\
+&= \int_0^1 \frac{2}{8-2t^2} dt = \int_0^1 \frac{1}{4-t^2} dt
+\end{align*}
+
+Using $\int \frac{1}{a^2-t^2}dt = \frac{1}{2a}\ln\left|\frac{a+t}{a-t}\right|$ with $a=2$:
+\[
+I = \frac{1}{4}\left[\ln\left|\frac{2+t}{2-t}\right|\right]_0^1 = \frac{1}{4}(\ln 3 - 0) = \boxed{\frac{1}{4}\ln 3}
+\]
+\end{solution}
+
+\begin{takeaways}
+t-formula converts rational trig integrals to algebraic form. Limits transform via $t = \tan(\frac{x}{2})$.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 7: Basic reverse chain rule with trig (from sample 20.tex)
+\begin{problem}[Simple Trig Substitution]
+Find $\displaystyle \int x e^x \, dx$.
+\end{problem}
+
+\begin{hint}
+Integration by parts: $u=x$, $dv=e^x dx$. Factor the result.
+\end{hint}
+
+\begin{solution}
+Parts: $u=x \implies du=dx$; $dv=e^x dx \implies v=e^x$
+
+\[
+I = xe^x - \int e^x dx = xe^x - e^x + C = e^x(x-1) + C
+\]
+
+\textbf{Answer:} $\boxed{e^x(x-1) + C}$
+\end{solution}
+
+\begin{takeaways}
+Basic parts: differentiate algebraic, integrate exponential. Factor common term.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 8: Standard inverse trig form
+\begin{problem}[Inverse Trig Form]
+Evaluate $\displaystyle \int \sqrt{2x - x^2} \, dx$.
+\end{problem}
+
+\begin{hint}
+Complete square: $2x-x^2 = 1-(x-1)^2$. Let $u=x-1$, then $u=\sin\theta$. Use $\cos^2\theta = \frac{1+\cos 2\theta}{2}$.
+\end{hint}
+
+\begin{solution}
+Complete square: $2x-x^2 = 1-(x-1)^2$
+
+Let $u=x-1$: $I = \int \sqrt{1-u^2} du$
+
+Trig sub: $u=\sin\theta$, $du=\cos\theta \, d\theta$
+
+\[
+I = \int \cos^2\theta \, d\theta = \frac{1}{2}\int(1+\cos 2\theta)d\theta = \frac{1}{2}\theta + \frac{1}{4}\sin 2\theta + C
+\]
+
+Back-substitute: $\theta = \arcsin(x-1)$, $\sin 2\theta = 2(x-1)\sqrt{2x-x^2}$
+
+\textbf{Answer:} $\boxed{\frac{1}{2}\arcsin(x-1) + \frac{1}{2}(x-1)\sqrt{2x-x^2} + C}$
+\end{solution}
+
+\begin{takeaways}
+Complete square for $\sqrt{a^2-(x-h)^2}$ forms. Double angle formula simplifies $\cos^2\theta$.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 9: Basic partial fractions
+\begin{problem}[Partial Fractions - Linear and Quadratic]
+Find $\displaystyle \int \frac{x^2 - 2x + 9}{(4-x)(x^2+1)} \, dx$.
+\end{problem}
+
+\begin{hint}
+Decompose: $\frac{A}{4-x} + \frac{Bx+C}{x^2+1}$. Solve at $x=4$ for $A$, compare coefficients for $B, C$.
+\end{hint}
+
+\begin{solution}
+Partial fractions: $x^2-2x+9 = A(x^2+1) + (Bx+C)(4-x)$
+
+At $x=4$: $17 = 17A \implies A=1$
+
+Comparing coefficients: $x^2$: $1 = 1-B \implies B=0$; constant: $9 = 1+4C \implies C=2$
+
+\[
+I = \int \left(\frac{1}{4-x} + \frac{2}{x^2+1}\right) dx = -\ln|4-x| + 2\arctan x + C
+\]
+
+\textbf{Answer:} $\boxed{-\ln|4-x| + 2\arctan x + C}$
+\end{solution}
+
+\begin{takeaways}
+Cover-up method for linear factors. Compare coefficients for irreducible quadratics.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 10: Exponential reverse chain rule
+\begin{problem}[Exponential Recognition]
+Evaluate $\displaystyle \int \frac{e^{2x}}{e^{2x} + 3} \, dx$.
+\end{problem}
+
+\begin{hint}
+Let $u = e^{2x}+3$, then $du = 2e^{2x}dx$, so $e^{2x}dx = \frac{1}{2}du$.
+\end{hint}
+
+\begin{solution}
+Let $u = e^{2x}+3 \implies du = 2e^{2x}dx$
+
+\[
+I = \frac{1}{2}\int \frac{1}{u} du = \frac{1}{2}\ln|u| + C = \frac{1}{2}\ln(e^{2x}+3) + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{1}{2}\ln(e^{2x}+3) + C}$
+\end{solution}
+
+\begin{takeaways}
+Recognize derivative in numerator. Adjust constants to match exactly.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 11: Trig identity simplification
+\begin{problem}[Trig Identity Application]
+Evaluate $\displaystyle \int \sin^2 x \, dx$.
+\end{problem}
+
+\begin{hint}
+Use double angle: $\sin^2 x = \frac{1-\cos 2x}{2}$.
+\end{hint}
+
+\begin{solution}
+Apply identity: $\sin^2 x = \frac{1-\cos 2x}{2}$
+
+\[
+I = \int \frac{1-\cos 2x}{2} dx = \frac{1}{2}\left(x - \frac{1}{2}\sin 2x\right) + C = \frac{x}{2} - \frac{1}{4}\sin 2x + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{x}{2} - \frac{1}{4}\sin 2x + C}$
+\end{solution}
+
+\begin{takeaways}
+Double angle formulae convert even powers of trig functions to linear trig expressions.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 12: Logarithmic reverse chain rule
+\begin{problem}[Logarithmic Derivative]
+Find $\displaystyle \int \frac{\ln x}{x} \, dx$.
+\end{problem}
+
+\begin{hint}
+Let $u = \ln x$, then $du = \frac{1}{x}dx$.
+\end{hint}
+
+\begin{solution}
+Let $u = \ln x \implies du = \frac{1}{x}dx$
+
+\[
+I = \int u \, du = \frac{u^2}{2} + C = \frac{(\ln x)^2}{2} + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{(\ln x)^2}{2} + C}$
+\end{solution}
+
+\begin{takeaways}
+Recognize $\frac{1}{x}$ as derivative of $\ln x$. Power rule applies to $(\ln x)^n$.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 13: Definite integral with odd function
+\begin{problem}[Odd Function Property]
+Evaluate $\displaystyle \int_{-2}^{2} x^3 \, dx$.
+\end{problem}
+
+\begin{hint}
+Check if integrand is odd: $f(-x) = -f(x)$. For odd functions over symmetric intervals: $\int_{-a}^a f(x)dx = 0$.
+\end{hint}
+
+\begin{solution}
+Let $f(x) = x^3$
+
+Check oddness: $f(-x) = (-x)^3 = -x^3 = -f(x)$ ✓ ODD
+
+For any odd function integrated over a symmetric interval $[-a, a]$:
+\[
+\int_{-a}^a f(x)dx = 0
+\]
+
+Therefore: $\int_{-2}^2 x^3 dx = 0$
+
+\textbf{Answer:} $\boxed{0}$
+\end{solution}
+
+\begin{takeaways}
+Odd function: $f(-x) = -f(x) \implies \int_{-a}^a f(x)dx = 0$. Even: $f(-x) = f(x) \implies \int_{-a}^a f(x)dx = 2\int_0^a f(x)dx$.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 14: Polynomial division
+\begin{problem}[Polynomial Long Division]
+Evaluate $\displaystyle \int \frac{x^3}{x^2+1} \, dx$.
+\end{problem}
+
+\begin{hint}
+Degree of numerator $\ge$ degree of denominator requires polynomial division first: $\frac{x^3}{x^2+1} = x - \frac{x}{x^2+1}$.
+\end{hint}
+
+\begin{solution}
+Long division: $x^3 = x(x^2+1) - x$
+
+So: $\frac{x^3}{x^2+1} = x - \frac{x}{x^2+1}$
+
+\[
+I = \int x \, dx - \int \frac{x}{x^2+1} dx
+\]
+
+First integral: $\frac{x^2}{2}$
+
+Second: Let $u=x^2+1$, $du=2x \, dx$: $\frac{1}{2}\ln(x^2+1)$
+
+\textbf{Answer:} $\boxed{\frac{x^2}{2} - \frac{1}{2}\ln(x^2+1) + C}$
+\end{solution}
+
+\begin{takeaways}
+Improper fractions need polynomial division before integration. Then integrate term by term.
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 15: Absolute value in definite integrals
+\begin{problem}[Absolute Value Split]
+Evaluate $\displaystyle \int_{-1}^{2} |x| \, dx$.
+\end{problem}
+
+\begin{hint}
+Split at $x=0$: $|x| = -x$ for $x<0$ and $|x| = x$ for $x \ge 0$.
+\end{hint}
+
+\begin{solution}
+Split domain where $|x|$ changes definition:
+
+\[
+I = \int_{-1}^0 (-x) dx + \int_0^2 x \, dx
+\]
+
+\[
+= \left[-\frac{x^2}{2}\right]_{-1}^0 + \left[\frac{x^2}{2}\right]_0^2 = 0 - \left(-\frac{1}{2}\right) + 2 - 0 = \frac{1}{2} + 2 = \frac{5}{2}
+\]
+
+\textbf{Answer:} $\boxed{\frac{5}{2}}$
+\end{solution}
+
+\begin{takeaways}
+Absolute value requires piecewise definition. Split integral at points where expression inside changes sign.
+\end{takeaways}
