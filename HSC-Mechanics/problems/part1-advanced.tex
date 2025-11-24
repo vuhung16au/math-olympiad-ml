@@ -1,0 +1,614 @@
+% Part 1: Advanced Problems - Detailed Solutions
+% Problems: 10, 21, 22, 13, 56
+
+% Problem from samples/10.tex
+\begin{problem}
+A bar magnet is held vertically. An object that is repelled by the magnet is to be dropped from directly above the magnet and will maintain a vertical trajectory. Let $x$ be the distance of the object above the magnet.
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.8]
+        % Draw Magnet
+        \draw[thick] (-0.5, -3) rectangle (0.5, -1);
+        \draw (-0.5, -2) -- (0.5, -2);
+        \node at (0, -1.5) {N};
+        \node at (0, -2.5) {S};
+
+        % Draw dashed lines for height x
+        \draw[dashed] (-1.5, 2) -- (0, 2);
+        \draw[dashed] (-1.5, -1) -- (0, -1);
+
+        % Draw dimension line x
+        \draw[<->] (-1.2, 2) -- (-1.2, -1) node[midway, left] {$x$};
+
+        % Draw Object (Ball)
+        \shade[ball color=gray!50] (0, 2) circle (0.4);
+
+        % Draw Force Arrows
+        \draw[-latex, thick, bookpurple] (0, 2.4) -- (0, 3.5) node[right] {$\dfrac{27g}{x^3}$};
+        \draw[-latex, thick, bookpurple] (0, 1.6) -- (0, 0.8) node[right] {$g$};
+    \end{tikzpicture}
+\end{center}
+
+The object is subject to acceleration due to gravity, $g$, and an acceleration due to the magnet $\frac{27g}{x^3}$, so that the total acceleration of the object is given by:
+\[
+    a = \frac{27g}{x^3} - g
+\]
+The object is released from rest at $x = 6$.
+
+\begin{enumerate}
+    \item[(i)] Show that $v^2 = g\left(\frac{51}{4} - 2x - \frac{27}{x^2}\right)$.
+    \item[(ii)] Find where the object next comes to rest, giving your answer correct to 1 decimal place.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i) Deriving the velocity-displacement relationship}
+
+\textbf{Approach:} We have acceleration as a function of position. We use the identity:
+\[ a = \ddot{x} = \frac{d}{dx}\left(\frac{1}{2}v^2\right) \]
+
+Given: $a = 27gx^{-3} - g$
+
+Applying the identity:
+\[ \frac{d}{dx}\left(\frac{1}{2}v^2\right) = 27gx^{-3} - g \]
+
+Integrate both sides with respect to $x$:
+\begin{align*}
+    \frac{1}{2}v^2 &= \int \left( 27gx^{-3} - g \right) \, dx \\
+    &= 27g \int x^{-3} \, dx - g \int 1 \, dx \\
+    &= 27g \cdot \frac{x^{-2}}{-2} - gx + C \\
+    &= -\frac{27g}{2x^2} - gx + C
+\end{align*}
+
+Multiply by 2 to isolate $v^2$:
+\[ v^2 = -\frac{27g}{x^2} - 2gx + 2C \]
+
+Let $K = 2C$ be the constant:
+\[ v^2 = -\frac{27g}{x^2} - 2gx + K \]
+
+\textbf{Apply initial conditions:} Released from rest means $v=0$ at $x=6$:
+\begin{align*}
+    0 &= -\frac{27g}{(6)^2} - 2g(6) + K \\
+    0 &= -\frac{27g}{36} - 12g + K \\
+    0 &= -\frac{3g}{4} - 12g + K \\
+    K &= \frac{3g}{4} + 12g = \frac{3g + 48g}{4} = \frac{51g}{4}
+\end{align*}
+
+Substitute back:
+\[ v^2 = \frac{51g}{4} - 2gx - \frac{27g}{x^2} \]
+
+Factor out $g$:
+\[ \boxed{v^2 = g\left(\frac{51}{4} - 2x - \frac{27}{x^2}\right)} \quad \text{(shown)} \]
+
+\vspace{0.5cm}
+
+\textbf{(ii) Finding where the object next comes to rest}
+
+The object comes to rest when $v = 0$, which means $v^2 = 0$:
+\[ g\left(\frac{51}{4} - 2x - \frac{27}{x^2}\right) = 0 \]
+
+Since $g \neq 0$:
+\[ \frac{51}{4} - 2x - \frac{27}{x^2} = 0 \]
+
+Multiply by $4x^2$ to clear fractions:
+\begin{align*}
+    51x^2 - 8x^3 - 108 &= 0 \\
+    8x^3 - 51x^2 + 108 &= 0
+\end{align*}
+
+We know $x=6$ is a root (the starting position). Use polynomial division to factor:
+\[ 8x^3 - 51x^2 + 108 = (x - 6)(8x^2 - 3x - 18) \]
+
+\textbf{Verification of factorization:}
+\begin{itemize}
+    \item Leading coefficient: $x \cdot 8x^2 = 8x^3$ \checkmark
+    \item Constant term: $(-6) \cdot (-18) = 108$ \checkmark
+    \item Middle term: $-6(8x^2) + x(-3x) + x(-18) = -48x^2 - 3x^2 = -51x^2$ \checkmark
+\end{itemize}
+
+Now solve the quadratic $8x^2 - 3x - 18 = 0$ using the quadratic formula:
+\begin{align*}
+    x &= \frac{-(-3) \pm \sqrt{(-3)^2 - 4(8)(-18)}}{2(8)} \\
+    &= \frac{3 \pm \sqrt{9 + 576}}{16} \\
+    &= \frac{3 \pm \sqrt{585}}{16}
+\end{align*}
+
+Evaluate the discriminant:
+\[ \sqrt{585} \approx 24.187 \]
+
+Two solutions:
+\begin{align*}
+    x_1 &= \frac{3 - 24.187}{16} = \frac{-21.187}{16} \approx -1.32 \quad \text{(reject, } x > 0\text{)} \\
+    x_2 &= \frac{3 + 24.187}{16} = \frac{27.187}{16} \approx 1.699
+\end{align*}
+
+Rounding to 1 decimal place:
+
+\textbf{Answer:} \boxed{x \approx 1.7 \text{ units}}
+
+\textbf{Physical interpretation:} The object is repelled by the magnet with a force proportional to $1/x^3$. Initially at $x=6$, the repulsive force is weak, so gravity dominates and the object accelerates downward. As it gets closer to the magnet (smaller $x$), the repulsive force increases dramatically (inverse cube law). Eventually, at $x \approx 1.7$, the accumulated upward impulse from the magnetic repulsion exactly cancels the downward motion, bringing the object momentarily to rest before it's pushed back up.
+\end{solution}
+
+\newpage
+
+% Problem from samples/21.tex
+\begin{problem}
+An object of mass $1 \text{ kg}$ is projected vertically upwards with an initial velocity of $u \text{ m/s}$. It experiences air resistance of magnitude $kv^2$ newtons where $v$ is the velocity of the object, in m/s, and $k$ is a positive constant. The height of the object above its starting point is $x$ metres. The time since projection is $t$ seconds and acceleration due to gravity is $g \text{ m/s}^2$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that the time for the object to reach its maximum height is 
+    \[
+    \frac{1}{\sqrt{gk}}\arctan\left(u\sqrt{\frac{k}{g}}\right) \text{ seconds.}
+    \]
+    \item Find an expression for the maximum height reached by the object, in terms of $k$, $g$ and $u$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Setup and force analysis}
+
+Let upward direction be positive.
+
+\textbf{Forces:}
+\begin{itemize}
+    \item Gravity (downward): $F_g = -mg = -g$ (since $m=1$)
+    \item Air resistance (opposes motion): When moving upward ($v > 0$), $F_R = -kv^2$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    % Ground
+    \draw[thick] (-1,0) -- (1,0);
+    \node[below] at (0,0) {Ground ($x=0$)};
+    
+    % Particle
+    \filldraw [black] (0,2) circle (2pt);
+    \node[right] at (0.1,2) {$m=1$};
+    
+    % Velocity vector
+    \draw[->, thick, blue] (0,2.2) -- (0,3) node[right] {$v$ (up)};
+    
+    % Force vectors
+    \draw[->, thick, bookpurple] (0,1.8) -- (0,1) node[right] {$mg$};
+    \draw[->, thick, bookpurple] (-0.2,1.8) -- (-0.2,0.8) node[left] {$kv^2$};
+    
+    % Axis
+    \draw[->, dashed] (-2,0) -- (-2,3) node[left] {$x (+)$};
+\end{tikzpicture}
+\end{center}
+
+Newton's Second Law:
+\begin{align*}
+    m\ddot{x} &= -mg - kv^2 \\
+    \ddot{x} &= -(g + kv^2)
+\end{align*}
+
+\vspace{0.5cm}
+
+\textbf{(i) Time to reach maximum height}
+
+At maximum height, velocity is zero. We need to find the relationship between $v$ and $t$.
+
+Replace $\ddot{x}$ with $\frac{dv}{dt}$:
+\begin{align*}
+    \frac{dv}{dt} &= -(g + kv^2) \\
+    \frac{dv}{g + kv^2} &= -dt
+\end{align*}
+
+Integrate from initial state ($t=0$, $v=u$) to maximum height ($t=T$, $v=0$):
+\[ \int_{u}^{0} \frac{dv}{g + kv^2} = \int_{0}^{T} -dt \]
+
+Switch limits on left side to remove negative:
+\[ \int_{0}^{u} \frac{dv}{g + kv^2} = T \]
+
+Factor out $k$ from the denominator:
+\begin{align*}
+    T &= \int_{0}^{u} \frac{1}{k\left(\frac{g}{k} + v^2\right)} \, dv \\
+    &= \frac{1}{k} \int_{0}^{u} \frac{1}{\left(\sqrt{\frac{g}{k}}\right)^2 + v^2} \, dv
+\end{align*}
+
+Use the standard integral $\int \frac{dx}{a^2+x^2} = \frac{1}{a}\arctan\left(\frac{x}{a}\right)$ with $a = \sqrt{\frac{g}{k}}$:
+\begin{align*}
+    T &= \frac{1}{k} \left[ \frac{1}{\sqrt{\frac{g}{k}}} \arctan\left(\frac{v}{\sqrt{\frac{g}{k}}}\right) \right]_{0}^{u} \\
+    &= \frac{1}{k} \cdot \sqrt{\frac{k}{g}} \left[ \arctan\left(v\sqrt{\frac{k}{g}}\right) \right]_{0}^{u} \\
+    &= \frac{1}{\sqrt{gk}} \left( \arctan\left(u\sqrt{\frac{k}{g}}\right) - \arctan(0) \right) \\
+    &= \frac{1}{\sqrt{gk}} \arctan\left(u\sqrt{\frac{k}{g}}\right)
+\end{align*}
+
+\boxed{T = \frac{1}{\sqrt{gk}} \arctan\left(u\sqrt{\frac{k}{g}}\right) \text{ seconds}} \quad \text{(shown)}
+
+\vspace{0.5cm}
+
+\textbf{(ii) Maximum height}
+
+We need the relationship between $v$ and $x$. Replace $\ddot{x}$ with $v\frac{dv}{dx}$:
+\begin{align*}
+    v\frac{dv}{dx} &= -(g + kv^2) \\
+    \frac{v \, dv}{g + kv^2} &= -dx
+\end{align*}
+
+Integrate from initial state ($x=0$, $v=u$) to maximum height ($x=H$, $v=0$):
+\[ \int_{u}^{0} \frac{v \, dv}{g + kv^2} = \int_{0}^{H} -dx \]
+
+Switch limits on left:
+\[ \int_{0}^{u} \frac{v \, dv}{g + kv^2} = H \]
+
+Use substitution: Let $w = g + kv^2$, then $dw = 2kv \, dv$, so $v \, dv = \frac{1}{2k} \, dw$
+
+\textbf{Change of limits:}
+\begin{itemize}
+    \item When $v = 0$: $w = g$
+    \item When $v = u$: $w = g + ku^2$
+\end{itemize}
+
+Therefore:
+\begin{align*}
+    H &= \int_{g}^{g+ku^2} \frac{1}{w} \cdot \frac{1}{2k} \, dw \\
+    &= \frac{1}{2k} \left[ \ln|w| \right]_{g}^{g+ku^2} \\
+    &= \frac{1}{2k} \left( \ln(g + ku^2) - \ln(g) \right) \\
+    &= \frac{1}{2k} \ln\left(\frac{g + ku^2}{g}\right)
+\end{align*}
+
+Simplify:
+\[ H = \frac{1}{2k} \ln\left(1 + \frac{ku^2}{g}\right) \]
+
+\textbf{Answer:} \boxed{H = \frac{1}{2k} \ln\left(1 + \frac{k}{g}u^2\right) \text{ metres}}
+
+\textbf{Comparison with no air resistance:} Without resistance, $H_0 = \frac{u^2}{2g}$. With resistance, the logarithmic term ensures $H < H_0$. For small $ku^2/g$, using $\ln(1+x) \approx x$, we get $H \approx \frac{u^2}{2g}$, recovering the no-resistance case as expected.
+\end{solution}
+
+\newpage
+
+% Problem from samples/22.tex
+\begin{problem}
+A particle is undergoing simple harmonic motion with period $\frac{\pi}{3}$. The central point of motion of the particle is at $x = \sqrt{3}$. When $t = 0$ the particle has its maximum displacement of $2\sqrt{3}$ from the central point of motion.
+
+\vspace{0.5cm}
+\noindent Find an equation for the displacement, $x$, of the particle in terms of $t$.
+\end{problem}
+
+\begin{solution}
+\textbf{Approach:} For SHM with a shifted center, we use the general form with cosine (since the particle starts at maximum displacement).
+
+\textbf{Step 1: General equation for SHM}
+
+The general equation for simple harmonic motion with a shifted equilibrium is:
+$$ x(t) = C + A \cos(nt + \alpha) $$
+
+Where:
+\begin{itemize}
+    \item $C$ = center of motion (equilibrium position)
+    \item $A$ = amplitude
+    \item $n$ = angular frequency, related to period by $T = \frac{2\pi}{n}$
+    \item $\alpha$ = phase constant
+\end{itemize}
+
+\textbf{Step 2: Determine angular frequency ($n$)}
+
+Given period $T = \frac{\pi}{3}$:
+\begin{align*}
+    T &= \frac{2\pi}{n} \\
+    \frac{\pi}{3} &= \frac{2\pi}{n} \\
+    n &= \frac{2\pi}{\pi/3} = 2\pi \cdot \frac{3}{\pi} = 6
+\end{align*}
+
+\textbf{Step 3: Determine center and amplitude}
+
+Given: central point (equilibrium) is at $x = \sqrt{3}$:
+$$ C = \sqrt{3} $$
+
+Given: maximum displacement \textit{from the central point} is $2\sqrt{3}$. This is the amplitude:
+$$ A = 2\sqrt{3} $$
+
+\textbf{Step 4: Determine phase constant ($\alpha$)}
+
+At $t=0$, the particle is at maximum positive displacement from the center. This means:
+$$ x(0) = C + A $$
+
+For the cosine function to equal its maximum value of $+1$ at $t=0$:
+$$ \cos(n \cdot 0 + \alpha) = \cos(\alpha) = 1 $$
+
+This occurs when $\alpha = 0$ (or any multiple of $2\pi$).
+
+\textbf{Verification:}
+\begin{align*}
+    x(0) &= \sqrt{3} + 2\sqrt{3}\cos(6 \cdot 0 + 0) \\
+    &= \sqrt{3} + 2\sqrt{3} \cdot 1 \\
+    &= 3\sqrt{3} \quad \checkmark
+\end{align*}
+
+This matches: center plus maximum displacement = $\sqrt{3} + 2\sqrt{3} = 3\sqrt{3}$.
+
+\textbf{Step 5: Final equation}
+
+Substituting all parameters:
+\[ \boxed{x = \sqrt{3} + 2\sqrt{3} \cos(6t)} \]
+
+\textbf{Alternative form:} Factor out $\sqrt{3}$:
+\[ x = \sqrt{3}(1 + 2\cos(6t)) \]
+
+\textbf{Verification of key features:}
+\begin{itemize}
+    \item At $t=0$: $x = \sqrt{3}(1 + 2) = 3\sqrt{3}$ (maximum) \checkmark
+    \item At $t=\frac{\pi}{12}$: $6t = \frac{\pi}{2}$, so $\cos(6t) = 0$, giving $x = \sqrt{3}$ (center) \checkmark
+    \item At $t=\frac{\pi}{6}$: $6t = \pi$, so $\cos(6t) = -1$, giving $x = \sqrt{3}(1-2) = -\sqrt{3}$ (minimum) \checkmark
+    \item At $t=\frac{\pi}{3}$: $6t = 2\pi$, so $\cos(6t) = 1$, giving $x = 3\sqrt{3}$ (back to maximum, one period complete) \checkmark
+\end{itemize}
+
+\textbf{Physical insight:} The particle oscillates symmetrically about $x = \sqrt{3}$, reaching maximum displacement $3\sqrt{3}$ and minimum displacement $-\sqrt{3}$, with amplitude $2\sqrt{3}$ and completing 3 full cycles every $\pi$ seconds.
+\end{solution}
+
+\newpage
+
+% Problem from samples/13.tex
+\begin{problem}
+The point $P$ is $4$ metres to the right of the origin $O$ on a straight line.
+
+\vspace{0.5em}
+\noindent A particle is released from rest at $P$ and moves along the straight line in simple harmonic motion about $O$, with period $8\pi$ seconds.
+
+\vspace{0.5em}
+\noindent After $2\pi$ seconds, another particle is released from rest at $P$ and also moves along this straight line in simple harmonic motion about $O$, with period $8\pi$ seconds.
+
+\vspace{0.5em}
+\noindent Find when and where the two particles first collide.
+\end{problem}
+
+\begin{solution}
+\textbf{Approach:} Establish equations of motion for both particles, find when their positions are equal, and verify the solution is physically valid.
+
+\textbf{Step 1: General SHM equation}
+
+For SHM starting from rest at an extremity, the displacement from equilibrium is:
+$$ x(t) = a \cos(nt) $$
+
+where $a$ is the amplitude and $n$ is the angular frequency.
+
+\textbf{Step 2: Determine parameters}
+
+Given:
+\begin{itemize}
+    \item Amplitude: $a = 4$ (released from rest at $x = 4$)
+    \item Period: $T = 8\pi$
+    \item Angular frequency: $n = \frac{2\pi}{T} = \frac{2\pi}{8\pi} = \frac{1}{4}$
+\end{itemize}
+
+\textbf{Step 3: Equations of motion}
+
+\textbf{Particle 1} (released at $t=0$):
+\begin{equation}
+    x_1(t) = 4 \cos\left(\frac{t}{4}\right) \quad \text{for } t \ge 0
+\end{equation}
+
+\textbf{Particle 2} (released at $t=2\pi$):
+The motion starts $2\pi$ seconds later, so we replace $t$ with $(t - 2\pi)$:
+\begin{equation}
+    x_2(t) = 4 \cos\left(\frac{t - 2\pi}{4}\right) \quad \text{for } t \ge 2\pi
+\end{equation}
+
+\textbf{Step 4: Find collision time}
+
+Particles collide when $x_1(t) = x_2(t)$ for $t > 2\pi$:
+\begin{align*}
+    4 \cos\left(\frac{t}{4}\right) &= 4 \cos\left(\frac{t - 2\pi}{4}\right) \\
+    \cos\left(\frac{t}{4}\right) &= \cos\left(\frac{t}{4} - \frac{\pi}{2}\right)
+\end{align*}
+
+Use the identity $\cos(\theta - \frac{\pi}{2}) = \sin(\theta)$:
+\[ \cos\left(\frac{t}{4}\right) = \sin\left(\frac{t}{4}\right) \]
+
+Divide both sides by $\cos\left(\frac{t}{4}\right)$ (assuming non-zero):
+\[ \tan\left(\frac{t}{4}\right) = 1 \]
+
+Solve for $t$:
+\begin{align*}
+    \frac{t}{4} &= \frac{\pi}{4}, \frac{5\pi}{4}, \frac{9\pi}{4}, \ldots \\
+    t &= \pi, 5\pi, 9\pi, \ldots
+\end{align*}
+
+\textbf{Step 5: Verify validity}
+
+Particle 2 only exists for $t \ge 2\pi$, so:
+\begin{itemize}
+    \item $t = \pi$ is invalid (Particle 2 hasn't been released yet)
+    \item $t = 5\pi$ is the first valid solution ($5\pi > 2\pi$ \checkmark)
+\end{itemize}
+
+\textbf{Step 6: Find collision position}
+
+Substitute $t = 5\pi$ into the equation for Particle 1:
+\begin{align*}
+    x &= 4 \cos\left(\frac{5\pi}{4}\right) \\
+    &= 4 \cos\left(\pi + \frac{\pi}{4}\right) \\
+    &= 4 \left(-\cos\left(\frac{\pi}{4}\right)\right) \\
+    &= 4 \left(-\frac{1}{\sqrt{2}}\right) \\
+    &= -\frac{4}{\sqrt{2}} = -\frac{4\sqrt{2}}{2} = -2\sqrt{2}
+\end{align*}
+
+\textbf{Verification with Particle 2:}
+\begin{align*}
+    x_2(5\pi) &= 4 \cos\left(\frac{5\pi - 2\pi}{4}\right) = 4 \cos\left(\frac{3\pi}{4}\right) \\
+    &= 4 \left(-\cos\left(\frac{\pi}{4}\right)\right) = -2\sqrt{2} \quad \checkmark
+\end{align*}
+
+\textbf{Answer:}
+\begin{itemize}
+    \item \textbf{Time:} \boxed{t = 5\pi \text{ seconds}}
+    \item \textbf{Position:} \boxed{x = -2\sqrt{2} \text{ metres}} (i.e., $2\sqrt{2}$ metres to the left of origin)
+\end{itemize}
+
+\textbf{Physical interpretation:} At $t = 5\pi$ seconds:
+\begin{itemize}
+    \item Particle 1 has been oscillating for $5\pi$ seconds, completing $\frac{5\pi}{8\pi} = \frac{5}{8}$ of a period
+    \item Particle 2 has been oscillating for $5\pi - 2\pi = 3\pi$ seconds, completing $\frac{3\pi}{8\pi} = \frac{3}{8}$ of a period
+    \item Both particles are moving in the same direction (toward $x = -4$) when they collide
+\end{itemize}
+
+\textbf{Key insight:} The time delay of $2\pi = \frac{T}{4}$ means Particle 2 lags by a quarter period. The collision occurs when the faster-oscillating first particle "laps" the second particle, meeting at the point $-2\sqrt{2}$ on the negative side.
+\end{solution}
+
+\newpage
+
+% Problem from samples/56.tex
+\begin{problem}
+A particle of mass $m$ is attracted towards the origin by a force of magnitude $\frac{\mu m}{x^2}$ for $x \neq 0$, where the distance from the origin is $x$ and $\mu$ is a positive constant.
+
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item Prove that $\displaystyle \frac{d}{dx}\left[\sqrt{bx - x^2} + \frac{b}{2}\cos^{-1}\left(\frac{2x-b}{b}\right)\right] = -\sqrt{\frac{x}{b-x}}$ for $x \ge 0$.
+    \item If the particle starts at rest at a distance $b$ to the right of the origin, show that its velocity $v$ is given by $\displaystyle v^2 = 2\mu \left(\frac{b-x}{bx}\right)$.
+    \item Find the time required for the particle to reach a point halfway towards the origin.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Setup and diagram}
+
+\begin{center}
+\begin{tikzpicture}
+    % Axis
+    \draw[->, thick] (-1,0) -- (6,0) node[right] {$x$};
+    \draw[thick] (0,-0.2) -- (0,0.2) node[above] {$O$};
+    
+    % Points
+    \draw[thick] (5,-0.2) -- (5,0.2) node[above] {$x=b$ (Start, $v=0$)};
+    \draw[thick] (2.5,-0.2) -- (2.5,0.2) node[above] {$x=b/2$};
+    
+    % Particle
+    \filldraw [blue] (3.5,0) circle (3pt) node[above right, blue] {$m$};
+    \draw[->, thick, bookpurple] (3.5,0.3) -- (2.5,0.3) node[midway, above] {$F$};
+    
+    % Label motion
+    \node at (3.5, -0.5) {Motion towards Origin};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{(i) Differentiation proof}
+
+Let $y = \sqrt{bx - x^2} + \frac{b}{2}\cos^{-1}\left(\frac{2x-b}{b}\right)$
+
+\textbf{First term:}
+\begin{align*}
+    \frac{d}{dx}(\sqrt{bx - x^2}) &= \frac{1}{2\sqrt{bx - x^2}} \cdot (b - 2x) = \frac{b - 2x}{2\sqrt{bx - x^2}}
+\end{align*}
+
+\textbf{Second term:} Use $\frac{d}{dx}\cos^{-1}(u) = \frac{-u'}{\sqrt{1-u^2}}$
+
+Let $u = \frac{2x-b}{b}$, so $u' = \frac{2}{b}$:
+\begin{align*}
+    \frac{d}{dx}\left[ \frac{b}{2}\cos^{-1}\left(\frac{2x-b}{b}\right) \right] &= \frac{b}{2} \cdot \left( - \frac{2/b}{\sqrt{1 - \left(\frac{2x-b}{b}\right)^2}} \right) \\
+    &= - \frac{1}{\sqrt{1 - \frac{(2x-b)^2}{b^2}}} \\
+    &= - \frac{1}{\sqrt{\frac{b^2 - (4x^2 - 4bx + b^2)}{b^2}}} \\
+    &= - \frac{b}{\sqrt{b^2 - 4x^2 + 4bx - b^2}} \\
+    &= - \frac{b}{\sqrt{4bx - 4x^2}} \\
+    &= - \frac{b}{2\sqrt{bx - x^2}}
+\end{align*}
+
+\textbf{Combine both terms:}
+\begin{align*}
+    \frac{dy}{dx} &= \frac{b - 2x}{2\sqrt{bx - x^2}} - \frac{b}{2\sqrt{bx - x^2}} \\
+    &= \frac{(b - 2x) - b}{2\sqrt{bx - x^2}} \\
+    &= \frac{-2x}{2\sqrt{bx - x^2}} \\
+    &= \frac{-x}{\sqrt{x(b-x)}} \\
+    &= -\frac{\sqrt{x}}{\sqrt{b-x}} \\
+    &= -\sqrt{\frac{x}{b-x}}
+\end{align*}
+
+\boxed{\frac{d}{dx}\left[\sqrt{bx - x^2} + \frac{b}{2}\cos^{-1}\left(\frac{2x-b}{b}\right)\right] = -\sqrt{\frac{x}{b-x}}} \quad \text{(proven)}
+
+\vspace{0.5cm}
+
+\textbf{(ii) Velocity-position relationship}
+
+\textbf{Force and acceleration:}
+
+Since force is attractive (toward origin), for $x > 0$:
+\[ F = -\frac{\mu m}{x^2} \]
+
+Newton's Second Law:
+\begin{align*}
+    m\ddot{x} &= -\frac{\mu m}{x^2} \\
+    \ddot{x} &= -\frac{\mu}{x^2}
+\end{align*}
+
+Use the identity $\ddot{x} = \frac{d}{dx}\left(\frac{1}{2}v^2\right) = v\frac{dv}{dx}$:
+\begin{align*}
+    \frac{d}{dx}\left(\frac{1}{2}v^2\right) &= -\mu x^{-2} \\
+    \frac{1}{2}v^2 &= \int -\mu x^{-2} \, dx = \mu x^{-1} + C = \frac{\mu}{x} + C
+\end{align*}
+
+\textbf{Apply initial conditions:} At $x = b$, $v = 0$ (starts from rest):
+\begin{align*}
+    0 &= \frac{\mu}{b} + C \\
+    C &= -\frac{\mu}{b}
+\end{align*}
+
+Therefore:
+\begin{align*}
+    \frac{1}{2}v^2 &= \frac{\mu}{x} - \frac{\mu}{b} = \mu\left(\frac{1}{x} - \frac{1}{b}\right) = \mu\left(\frac{b-x}{bx}\right) \\
+    v^2 &= 2\mu\left(\frac{b-x}{bx}\right)
+\end{align*}
+
+\boxed{v^2 = 2\mu \left(\frac{b-x}{bx}\right)} \quad \text{(shown)}
+
+\vspace{0.5cm}
+
+\textbf{(iii) Time to reach $x = b/2$}
+
+From part (ii), velocity as the particle moves toward the origin (negative direction):
+\[ v = \frac{dx}{dt} = -\sqrt{2\mu\left(\frac{b-x}{bx}\right)} \]
+
+(Negative because $x$ is decreasing.)
+
+Rearrange:
+\begin{align*}
+    dt &= -\frac{dx}{\sqrt{2\mu\left(\frac{b-x}{bx}\right)}} \\
+    &= -\sqrt{\frac{bx}{2\mu(b-x)}} \, dx \\
+    &= -\sqrt{\frac{b}{2\mu}} \sqrt{\frac{x}{b-x}} \, dx
+\end{align*}
+
+Integrate from $x = b$ to $x = b/2$:
+\begin{align*}
+    T &= \int_b^{b/2} -\sqrt{\frac{b}{2\mu}} \sqrt{\frac{x}{b-x}} \, dx \\
+    &= \sqrt{\frac{b}{2\mu}} \int_{b/2}^{b} \sqrt{\frac{x}{b-x}} \, dx
+\end{align*}
+
+From part (i), we know:
+\[ \frac{d}{dx}\left[\sqrt{bx - x^2} + \frac{b}{2}\cos^{-1}\left(\frac{2x-b}{b}\right)\right] = -\sqrt{\frac{x}{b-x}} \]
+
+Therefore:
+\[ \sqrt{\frac{x}{b-x}} \, dx = -d\left[\sqrt{bx - x^2} + \frac{b}{2}\cos^{-1}\left(\frac{2x-b}{b}\right)\right] \]
+
+Evaluating the antiderivative:
+
+At $x = b/2$:
+\begin{align*}
+    \sqrt{b \cdot \frac{b}{2} - \left(\frac{b}{2}\right)^2} + \frac{b}{2}\cos^{-1}\left(\frac{2 \cdot \frac{b}{2}-b}{b}\right) &= \sqrt{\frac{b^2}{2} - \frac{b^2}{4}} + \frac{b}{2}\cos^{-1}(0) \\
+    &= \sqrt{\frac{b^2}{4}} + \frac{b}{2} \cdot \frac{\pi}{2} \\
+    &= \frac{b}{2} + \frac{b\pi}{4}
+\end{align*}
+
+At $x = b$:
+\begin{align*}
+    \sqrt{b^2 - b^2} + \frac{b}{2}\cos^{-1}\left(\frac{2b-b}{b}\right) &= 0 + \frac{b}{2}\cos^{-1}(1) \\
+    &= \frac{b}{2} \cdot 0 = 0
+\end{align*}
+
+Therefore:
+\begin{align*}
+    T &= \sqrt{\frac{b}{2\mu}} \left[0 - \left(\frac{b}{2} + \frac{b\pi}{4}\right)\right] \cdot (-1) \\
+    &= \sqrt{\frac{b}{2\mu}} \left(\frac{b}{2} + \frac{b\pi}{4}\right) \\
+    &= \sqrt{\frac{b}{2\mu}} \cdot \frac{b}{4}(2 + \pi) \\
+    &= \frac{b(2 + \pi)}{4}\sqrt{\frac{b}{2\mu}}
+\end{align*}
+
+Simplify:
+\[ T = \frac{b(2 + \pi)}{4} \cdot \frac{\sqrt{b}}{\sqrt{2\mu}} = \frac{(2 + \pi)b\sqrt{b}}{4\sqrt{2\mu}} \]
+
+\textbf{Answer:} \boxed{T = \frac{(2 + \pi)\sqrt{b^3}}{4\sqrt{2\mu}} \text{ seconds}}
+
+Or equivalently: \boxed{T = \frac{(2 + \pi)b}{4}\sqrt{\frac{b}{2\mu}} \text{ seconds}}
+
+\textbf{Key insight:} The inverse square law of attraction leads to a complex integral for time. Part (i) provides the antiderivative needed for part (iii), demonstrating how mathematical preparation (proving differentiation formulas) enables solving physically meaningful problems. The time depends on $\sqrt{b^3/\mu}$, showing that doubling the initial distance more than doubles the transit time due to the weaker force at greater distances.
+\end{solution}

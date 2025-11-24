@@ -1,0 +1,207 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, decorations.markings}
+
+% Custom styles
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: Mechanics Mastery}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet presents a comprehensive collection of mechanics problems for HSC Mathematics Extension~2 students. The 64 carefully selected problems cover all essential topics: Simple Harmonic Motion (SHM), variable forces, resisted motion (linear and quadratic), terminal velocity, projectile motion with resistance, and force analysis. Each problem demonstrates key mathematical techniques including integration methods, differential equations, Newton's laws applications, and limiting behavior analysis.
+
+The collection is divided into two parts:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Part 1 (15 problems):} Detailed step-by-step solutions showing complete reasoning, algebraic manipulation, and justification of each step.
+  \item \textbf{Part 2 (49 problems):} Concise solutions with strategic hints to guide independent problem-solving while encouraging student ownership of the solution process.
+\end{itemize}
+
+\subsection{Target Audience}
+This booklet is designed for HSC Mathematics Extension~2 students who want to:
+\begin{itemize}[leftmargin=*]
+  \item Master the calculus-based approach to mechanics problems
+  \item Develop advanced problem-solving skills in force analysis and motion
+  \item Prepare thoroughly for challenging HSC examination questions
+  \item Build confidence with complex multi-step mechanics proofs
+  \item Understand the connections between differential equations and physical motion
+\end{itemize}
+
+Teachers and tutors will also find this collection valuable for:
+\begin{itemize}[leftmargin=*]
+  \item Selecting problems at appropriate difficulty levels
+  \item Demonstrating worked examples with clear pedagogical progression
+  \item Providing supplementary practice materials
+  \item Preparing students for Extension~2 examination standards
+\end{itemize}
+
+\subsection{How to Use This Booklet}
+\textbf{For Students:}
+\begin{itemize}[leftmargin=*]
+  \item Begin with the Mechanics Primer below to review fundamental concepts and formulas.
+  \item Work through Part~1 problems first, attempting each problem before reading the detailed solution.
+  \item Compare your approach with the provided solutions to identify gaps and strengthen technique.
+  \item Move to Part~2 problems, using the upside-down hints only after making a genuine attempt.
+  \item Revisit challenging problems after a few days to reinforce understanding and technique.
+  \item Pay attention to force diagrams and sign conventions---these are critical for avoiding errors.
+\end{itemize}
+
+\textbf{For Tutors and Teachers:}
+\begin{itemize}[leftmargin=*]
+  \item Use Part~1 problems as worked examples in lessons, highlighting key techniques.
+  \item Assign Part~2 problems for homework or practice, encouraging students to attempt problems before revealing hints.
+  \item Select problems by topic to target specific areas of the syllabus.
+  \item Use the variety of difficulty levels to differentiate instruction for different student abilities.
+\end{itemize}
+
+\subsection{Mechanics Primer}
+
+\subsubsection*{The ``Golden Rule'' of Mechanics}
+In Extension~2, the most critical skill is choosing the correct form of acceleration ($\ddot{x}$) to integrate, depending on the variables provided in the problem.
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}l l p{7cm}@{}}
+\toprule
+\textbf{Form} & \textbf{Variable} & \textbf{Usage} \\
+\midrule
+$\ddot{x} = \frac{d^2x}{dt^2}$ & Time ($t$) & Basic integration when $a$ is in terms of $t$. \\
+$\ddot{x} = \frac{dv}{dt}$ & Time ($t$) & Find \textbf{velocity as function of time} ($v = f(t)$). \\
+$\ddot{x} = \frac{d}{dx}\left(\frac{1}{2}v^2\right)$ & Displacement ($x$) & Find \textbf{velocity as function of displacement} ($v^2 = f(x)$). \textit{Very Common!} \\
+$\ddot{x} = v\frac{dv}{dx}$ & Displacement ($x$) & When resistance is in terms of $v$ but need distance. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection*{Simple Harmonic Motion (SHM)}
+SHM occurs when a particle's acceleration is proportional to its displacement from a fixed point but in the opposite direction.
+
+\textbf{Core Formulas:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Differential Equation:} $\ddot{x} = -n^2(x - c)$, where $n$ is angular frequency and $c$ is the centre of motion.
+  \item \textbf{Velocity-Displacement Relation:} $v^2 = n^2(a^2 - (x-c)^2)$, where $a$ is the amplitude.
+  \item \textbf{Period and Frequency:} $T = \frac{2\pi}{n}$, $f = \frac{1}{T} = \frac{n}{2\pi}$
+  \item \textbf{General Solution:} $x = c + a\cos(nt + \alpha)$ or $x = c + a\sin(nt + \beta)$
+\end{itemize}
+
+\subsubsection*{Resisted Motion}
+When particles move through a medium (air, water), a drag force opposes motion. Resistance is typically proportional to $v$ (linear: $R = kv$) or $v^2$ (quadratic: $R = kv^2$).
+
+\textbf{Key Steps:}
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Draw a force diagram:} Show gravity ($mg$) downward and resistance ($R$) opposing velocity.
+  \item \textbf{Apply Newton's Second Law:} $F_{\text{net}} = ma$ where $a = \ddot{x}$.
+  \item \textbf{State positive direction clearly:} This determines signs in your equation.
+\end{enumerate}
+
+\textbf{Common Scenarios:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Horizontal motion (slowing):} $m\ddot{x} = -kv$ or $m\ddot{x} = -kv^2$
+  \item \textbf{Vertical motion (falling):} $m\ddot{x} = mg - kv$ or $m\ddot{x} = mg - kv^2$
+  \item \textbf{Vertical motion (rising):} $m\ddot{x} = -mg - kv$ or $m\ddot{x} = -mg - kv^2$
+  \item \textbf{Terminal velocity:} Occurs when $\ddot{x} = 0$, giving $v_{\text{term}} = \sqrt{\frac{mg}{k}}$ (for quadratic resistance).
+\end{itemize}
+
+\subsubsection*{Projectile Motion with Resistance}
+Projectiles affected by air resistance require analyzing horizontal ($x$) and vertical ($y$) components separately:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Horizontal:} $m\ddot{x} = -k\dot{x}$ (resistance opposes motion)
+  \item \textbf{Vertical:} $m\ddot{y} = -mg - k\dot{y}$ (both gravity and resistance act downward when moving upward)
+\end{itemize}
+
+Solve by integrating twice in each direction, applying initial conditions carefully.
+
+\subsubsection*{Key Integration Techniques}
+Common integrals in mechanics problems:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Separation of variables:} For equations like $\frac{dv}{dt} = f(v)$
+  \item \textbf{Partial fractions:} Essential for integrals like $\int \frac{1}{a^2 - v^2} dv$
+  \item \textbf{Logarithmic form:} $\int \frac{f'(x)}{f(x)} dx = \ln|f(x)| + C$
+  \item \textbf{Inverse tangent:} $\int \frac{1}{a^2 + x^2} dx = \frac{1}{a}\tan^{-1}\left(\frac{x}{a}\right) + C$
+\end{itemize}
+
+\subsubsection*{Notation and Conventions}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Units:} Use SI units---m, m\,s$^{-1}$, m\,s$^{-2}$, kg, N
+  \item \textbf{Sign conventions:} Always state positive direction explicitly (e.g., ``taking downward as positive'')
+  \item \textbf{Terminal velocity:} Denoted $v_{\text{term}}$ or $V_T$
+  \item \textbf{Dot notation:} $\dot{x}$ for velocity, $\ddot{x}$ for acceleration
+  \item \textbf{Initial conditions:} State clearly at $t = 0$ (or other reference time)
+\end{itemize}
+
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains 15 carefully selected problems organized by difficulty: 5 basic, 5 medium, and 5 advanced. Each problem includes a complete, step-by-step solution showing all reasoning, algebraic manipulation, and justification. These solutions serve as model examples for mastering fundamental techniques. No hints are provided---the focus is on understanding the full solution process.
+
+\subsection{Basic Mechanics Problems}
+\input{problems/part1-basic}
+
+\subsection{Medium Mechanics Problems}
+\input{problems/part1-medium}
+
+\subsection{Advanced Mechanics Problems}
+\input{problems/part1-advanced}
+
+\section{Part 2: Problems and Solutions (Concise + Hints)}
+Part~2 contains 49 additional problems distributed across difficulty levels. Each problem includes a strategic upside-down hint to guide your approach without revealing the solution. Solutions are more concise than Part~1, focusing on key steps while omitting routine algebraic details. This format encourages you to develop independence and ownership of the problem-solving process.
+
+\subsection{Basic Mechanics Problems}
+\input{problems/part2-basic}
+
+\subsection{Medium Mechanics Problems}
+\input{problems/part2-medium}
+
+\subsection{Advanced Mechanics Problems}
+\input{problems/part2-advanced}
+
+\section{Conclusion}
+Mechanics is a cornerstone of HSC Mathematics Extension~2, combining calculus, differential equations, and physical reasoning. Mastery requires not only technical proficiency with integration and differentiation, but also careful attention to force diagrams, sign conventions, and initial conditions. The 64 problems in this collection provide comprehensive practice across all major topics and difficulty levels.
+
+Key takeaways for success:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Choose the right acceleration form} from the ``Golden Rule'' table based on given variables.
+  \item \textbf{Draw clear force diagrams} showing all forces and stating positive direction explicitly.
+  \item \textbf{Apply Newton's Second Law systematically:} $F_{\text{net}} = ma$.
+  \item \textbf{Master separation of variables and partial fractions}---these are essential integration techniques.
+  \item \textbf{Check limiting behavior:} Does terminal velocity make physical sense? Does the particle approach equilibrium?
+  \item \textbf{Practice regularly:} Mechanics problems require both conceptual understanding and technical fluency.
+\end{itemize}
+
+Use this booklet as a comprehensive resource throughout your Extension~2 studies. Return to challenging problems multiple times to deepen your understanding. With consistent practice and careful attention to technique, you will develop the problem-solving skills needed for success in HSC examinations and beyond.
+
+Best of luck with your studies and your HSC examinations!
+
+\vspace{2em}
+\noindent\textbf{About the Author:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Mechanics}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Mechanics}
+
+\end{document}
