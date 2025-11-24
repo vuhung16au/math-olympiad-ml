@@ -1,0 +1,111 @@
+\section{Standard Integrals \& The ``Reverse Chain Rule''}
+Before applying complex techniques, always check if the integral fits a standard form or the reverse chain rule.
+
+\begin{itemize}
+    \item \textbf{Logarithmic Form:}
+    \[
+    \int \frac{f'(x)}{f(x)} \, dx = \ln|f(x)| + C
+    \]
+    \item \textbf{Power Rule (General):}
+    \[
+    \int [f(x)]^n f'(x) \, dx = \frac{[f(x)]^{n+1}}{n+1} + C \quad (\text{where } n \neq -1)
+    \]
+    \item \textbf{Inverse Trigonometric Forms:}
+    \begin{align*}
+        \int \frac{1}{\sqrt{a^2 - x^2}} \, dx &= \sin^{-1}\left(\frac{x}{a}\right) + C \\
+        \int \frac{1}{a^2 + x^2} \, dx &= \frac{1}{a}\tan^{-1}\left(\frac{x}{a}\right) + C
+    \end{align*}
+\end{itemize}
+
+\section{Integration by Parts}
+Used for integrating products of functions (e.g., $x e^x$, $x \ln x$, $e^x \cos x$).
+
+\textbf{The Formula:}
+\[
+\int u \, dv = uv - \int v \, du
+\]
+
+\textbf{Strategy (LIATE):}
+Choose $u$ based on this priority list (top to bottom):
+\begin{enumerate}
+    \item \textbf{L} -- Logarithmic ($\ln x$)
+    \item \textbf{I} -- Inverse Trigonometric ($\tan^{-1}x$)
+    \item \textbf{A} -- Algebraic ($x^2, 3x$)
+    \item \textbf{T} -- Trigonometric ($\sin x, \cos x$)
+    \item \textbf{E} -- Exponential ($e^x$)
+\end{enumerate}
+
+\section{Integration by Substitution}
+
+\subsection{General Substitution ($u$-sub)}
+Used to simplify composite functions. Let $u = g(x)$, then find $du = g'(x)dx$.
+
+\subsection{Trigonometric Substitution}
+Used when the integrand contains quadratic roots:
+\begin{itemize}
+    \item $\sqrt{a^2 - x^2}$: Let $x = a \sin \theta$ \quad (uses $1 - \sin^2\theta = \cos^2\theta$)
+    \item $\sqrt{a^2 + x^2}$: Let $x = a \tan \theta$ \quad (uses $1 + \tan^2\theta = \sec^2\theta$)
+    \item $\sqrt{x^2 - a^2}$: Let $x = a \sec \theta$ \quad (uses $\sec^2\theta - 1 = \tan^2\theta$)
+\end{itemize}
+
+\subsection{The $t$-Formula Substitution}
+Used for rational functions involving $\sin x$ and $\cos x$. Let $t = \tan\left(\frac{x}{2}\right)$.
+\begin{align*}
+    dx &= \frac{2}{1+t^2} \, dt \\
+    \sin x &= \frac{2t}{1+t^2} \\
+    \cos x &= \frac{1-t^2}{1+t^2}
+\end{align*}
+
+\section{Partial Fractions}
+Used to integrate rational functions $\frac{P(x)}{Q(x)}$ where $\text{deg}(P) < \text{deg}(Q)$. If $\text{deg}(P) \geq \text{deg}(Q)$, perform \textbf{polynomial long division} first.
+
+\begin{itemize}
+    \item \textbf{Distinct Linear Factors:}
+    \[
+    \frac{1}{(x-a)(x-b)} = \frac{A}{x-a} + \frac{B}{x-b}
+    \]
+    \item \textbf{Repeated Linear Factors:}
+    \[
+    \frac{1}{(x-a)^2} = \frac{A}{x-a} + \frac{B}{(x-a)^2}
+    \]
+    \item \textbf{Irreducible Quadratic Factors:}
+    \[
+    \frac{1}{(x-a)(x^2+b)} = \frac{A}{x-a} + \frac{Bx+C}{x^2+b}
+    \]
+\end{itemize}
+
+\section{Trigonometric Integrals}
+
+\subsection{ Integrals of $\sin^m x \cos^n x$}
+\begin{itemize}
+    \item \textbf{One power is odd:} Save one factor of the odd power for $du$. Convert the rest using $\sin^2x + \cos^2x = 1$.
+    \item \textbf{Both powers even:} Use double angle formulae:
+    \[
+    \sin^2x = \frac{1}{2}(1-\cos 2x) \quad \text{and} \quad \cos^2x = \frac{1}{2}(1+\cos 2x)
+    \]
+\end{itemize}
+
+\subsection{ Integrals of $\tan^m x \sec^n x$}
+\begin{itemize}
+    \item \textbf{If $\sec$ power is even:} Save $\sec^2 x$ for $du$. Convert remaining $\sec$ to $\tan$.
+    \item \textbf{If $\tan$ power is odd:} Save $\sec x \tan x$ for $du$. Convert remaining $\tan$ to $\sec$.
+\end{itemize}
+
+\section{Reduction Formulas ($I_n$)}
+Involves finding a recurrence relation using \textbf{Integration by Parts}.
+
+\textbf{Typical form:}
+\[
+I_n = \int x^n e^x \, dx \quad \text{or} \quad I_n = \int_0^{\frac{\pi}{2}} \sin^n x \, dx
+\]
+\textbf{Steps:} Apply parts, manipulate the integral to find $I_{n-1}$ or $I_{n-2}$, then rearrange for $I_n$.
+
+\section{Definite Integral Properties}
+\begin{itemize}
+    \item \textbf{Odd Function:} If $f(-x) = -f(x)$, then $\int_{-a}^a f(x) \, dx = 0$.
+    \item \textbf{Even Function:} If $f(-x) = f(x)$, then $\int_{-a}^a f(x) \, dx = 2\int_0^a f(x) \, dx$.
+    \item \textbf{Reflection (King's) Property:}
+    \[
+    \int_a^b f(x) \, dx = \int_a^b f(a+b-x) \, dx
+    \]
+nd{itemize}

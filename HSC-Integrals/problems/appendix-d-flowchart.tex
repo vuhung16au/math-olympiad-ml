@@ -1,0 +1,92 @@
+% Appendix D: Integration by Parts Decision Tree
+
+\subsubsection*{Integration by Parts Formula}
+
+\[
+\boxed{\int u \, dv = uv - \int v \, du}
+\]
+
+\subsubsection*{The LIATE Rule}
+
+Choose $u$ according to this priority (top to bottom):
+
+\begin{enumerate}
+\item \textbf{L}ogarithmic functions: $\ln x$, $\log_a x$
+\item \textbf{I}nverse trigonometric functions: $\sin^{-1} x$, $\tan^{-1} x$, $\sec^{-1} x$
+\item \textbf{A}lgebraic functions: $x^n$, polynomials
+\item \textbf{T}rigonometric functions: $\sin x$, $\cos x$, $\tan x$
+\item \textbf{E}xponential functions: $e^x$, $a^x$
+\end{enumerate}
+
+The remaining factor becomes $dv$.
+
+\subsubsection*{Decision Flowchart}
+
+\begin{enumerate}
+\item \textbf{Identify the product:} Is the integrand a product of two different types of functions?
+   \begin{itemize}
+   \item If YES $\rightarrow$ Proceed to step 2
+   \item If NO $\rightarrow$ Consider other methods (substitution, partial fractions)
+   \end{itemize}
+
+\item \textbf{Apply LIATE:} Choose $u$ as the function highest in the LIATE priority list
+
+\item \textbf{Determine $dv$:} The remaining factor (and $dx$) becomes $dv$
+
+\item \textbf{Can you find $v$?} Integrate $dv$ to get $v$
+   \begin{itemize}
+   \item If YES $\rightarrow$ Proceed to step 5
+   \item If NO $\rightarrow$ Reconsider choice of $u$ and $dv$
+   \end{itemize}
+
+\item \textbf{Is $\int v \, du$ simpler?} Compare $\int v \, du$ with the original integral
+   \begin{itemize}
+   \item If SIMPLER $\rightarrow$ Good choice! Proceed with integration
+   \item If SAME COMPLEXITY $\rightarrow$ May need to apply parts again
+   \item If MORE COMPLEX $\rightarrow$ Try different $u$ and $dv$
+   \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Special Cases}
+
+\textbf{Cyclic Integrals:} When $\int v \, du$ returns to the original form
+
+Example: $\int e^x \sin x \, dx$ or $\int e^x \cos x \, dx$
+
+Strategy: Apply integration by parts twice, then solve algebraically for the original integral.
+
+\textbf{Reduction Formulae:} When seeking a recurrence relation $I_n$ in terms of $I_{n-1}$
+
+Strategy: Choose $u$ and $dv$ to reduce the power of the function.
+
+\textbf{Definite Integrals:} Don't forget to apply limits to $uv$ term!
+
+\[
+\int_a^b u \, dv = [uv]_a^b - \int_a^b v \, du
+\]
+
+\subsubsection*{Common Examples}
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Integral} & \textbf{Choose $u$} & \textbf{Choose $dv$} & \textbf{Why} \\
+\hline
+$\int x e^x \, dx$ & $u = x$ & $dv = e^x dx$ & A before E \\
+$\int x \sin x \, dx$ & $u = x$ & $dv = \sin x \, dx$ & A before T \\
+$\int \ln x \, dx$ & $u = \ln x$ & $dv = dx$ & L is highest \\
+$\int x^2 e^x \, dx$ & $u = x^2$ & $dv = e^x dx$ & A before E \\
+$\int \tan^{-1} x \, dx$ & $u = \tan^{-1} x$ & $dv = dx$ & I is high \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{Tips and Warnings}
+
+\begin{itemize}
+\item \textbf{Tip 1:} If $u = \ln x$ or $u = \tan^{-1} x$, set $dv = dx$
+\item \textbf{Tip 2:} For $\int x^n e^{ax} dx$ or $\int x^n \sin(ax) dx$, apply parts $n$ times
+\item \textbf{Tip 3:} Watch your signs! Especially with $v = -\cos x$ or $v = -e^{-x}$
+\item \textbf{Warning:} Don't forget the constant of integration $+C$ for indefinite integrals
+\item \textbf{Warning:} For definite integrals, apply limits to the $[uv]$ term before integrating $\int v \, du$
+\end{itemize}

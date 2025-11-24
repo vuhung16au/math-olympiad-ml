@@ -1,0 +1,180 @@
+% Part 2: Easy Problems (15 problems with hints only - upside-down format)
+% Students attempt first, then rotate page 180° to read hint
+
+% =============================================================================
+% PROBLEM 1: Basic u-substitution
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int (3x + 1)^5 \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = 3x + 1$. Then $du = 3dx$, so $dx = \frac{1}{3}du$. The integral becomes $\frac{1}{3}\int u^5 du = \frac{u^6}{18} + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 2: Basic substitution with square root
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int \frac{x}{\sqrt{x^2 + 4}} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = x^2 + 4$. Then $du = 2x \, dx$. Rewrite as $\frac{1}{2}\int u^{-1/2} du = \sqrt{u} + C = \sqrt{x^2+4} + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 3: Reverse chain rule - exponential
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int 2x e^{x^2} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} The derivative of $x^2$ is $2x$. Pattern: $\int f'(x) e^{f(x)} dx = e^{f(x)} + C$. Answer: $e^{x^2} + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 4: Standard form - arctan
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int \frac{3}{9 + x^2} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Factor: $\frac{3}{9 + x^2} = \frac{1}{3} \cdot \frac{1}{1 + (x/3)^2}$. Let $u = x/3$. Answer: $\arctan(x/3) + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 5: Basic trig substitution
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int \sin^3 2x \cos 2x \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = \sin 2x$. Then $du = 2\cos 2x \, dx$. Integral: $\frac{1}{2}\int u^3 du = \frac{1}{8}\sin^4 2x + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 6: Simple integration by parts
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int x e^x \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} LIATE: $u = x$, $dv = e^x dx$. Then $du = dx$, $v = e^x$. Answer: $xe^x - e^x + C = e^x(x-1) + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 7: Reverse chain rule - logarithm
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int \frac{2x + 3}{x^2 + 3x + 1} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Numerator = derivative of denominator. Pattern: $\int \frac{f'(x)}{f(x)} dx = \ln|f(x)| + C = \ln|x^2 + 3x + 1| + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 8: Basic trig integral
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int \sin^2 x \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Use $\sin^2 x = \frac{1 - \cos 2x}{2}$. Integrate: $\frac{x}{2} - \frac{\sin 2x}{4} + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 9: Substitution with definite integral
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int_0^2 x\sqrt{1 + x^2} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = 1 + x^2$, $du = 2x \, dx$. Limits: $u=1$ to $u=5$. Answer: $\frac{1}{3}[(5)^{3/2} - (1)^{3/2}] = \frac{5\sqrt{5}-1}{3}$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 10: Standard form - arcsin
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int \frac{1}{\sqrt{25 - x^2}} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Factor: $\sqrt{25 - x^2} = 5\sqrt{1 - (x/5)^2}$. Let $u = x/5$. Answer: $\arcsin(x/5) + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 11: Basic partial fractions
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int \frac{1}{(x-1)(x+2)} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{1}{(x-1)(x+2)} = \frac{A}{x-1} + \frac{B}{x+2}$. Solving: $A=\frac{1}{3}$, $B=-\frac{1}{3}$. Answer: $\frac{1}{3}\ln\left|\frac{x-1}{x+2}\right| + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 12: Integration by parts - polynomial × trig
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int x \cos x \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = x$, $dv = \cos x \, dx$. Then $v = \sin x$. Answer: $x\sin x + \cos x + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 13: Reverse chain rule - power
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int \frac{6x^2}{(x^3 + 1)^4} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = x^3 + 1$, $du = 3x^2 dx$. Then $6x^2 dx = 2du$. Answer: $2 \cdot \frac{u^{-3}}{-3} = -\frac{2}{3(x^3+1)^3} + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 14: Even function property
+% =============================================================================
+\begin{problem}
+Given $f(x)$ is even, evaluate $\displaystyle \int_{-2}^{2} f(x) \, dx$ if $\displaystyle \int_0^2 f(x) \, dx = 5$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} For even functions: $\int_{-a}^{a} f(x)dx = 2\int_0^a f(x)dx$. Answer: $2 \times 5 = 10$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 15: Completing the square for arctan
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int \frac{1}{x^2 + 4x + 13} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Complete square: $x^2 + 4x + 13 = (x+2)^2 + 9$. Let $u = \frac{x+2}{3}$. Answer: $\frac{1}{3}\arctan\left(\frac{x+2}{3}\right) + C$.}}

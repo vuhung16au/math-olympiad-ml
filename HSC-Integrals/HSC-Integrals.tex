@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+% Custom styles shared with HSC-Induction
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+% TikZ libraries for diagrams
+\usetikzlibrary{arrows.meta, calc, patterns, decorations.pathreplacing}
+\pgfplotsset{compat=1.18}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: Integration Mastery}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet compiles high-quality integration problems curated specifically for the HSC Mathematics Extension~2 syllabus. Every problem covers essential integration techniques including substitution, integration by parts, partial fractions, reduction formulae, volumes of solids, and definite integral properties. Detailed reasoning showcases advanced problem-solving strategies that build from fundamental techniques to complex multi-step applications.
+
+\subsection{Target Audience}
+The explanations are crafted for Extension~2 students aiming to master integration and develop advanced problem-solving skills. Each solution in Part~1 explicitly states the strategy, justifies technique choices, and provides complete step-by-step working so that high-school learners can follow every transition. Part~2 offers hints and concise solutions to encourage independent problem-solving.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Review the fundamentals section before attempting problems to refresh key techniques.
+  \item Attempt problems in Part~1 without looking at solutions; compare your work against detailed solutions to understand model reasoning.
+  \item For Part~2, try each problem first, then check the upside-down hint if needed, and finally review the solution sketch.
+  \item Practice problems multiple times, working from memory to reinforce technique mastery.
+  \item Use the appendices as quick references for formulas, techniques, and decision-making flowcharts.
+\end{itemize}
+
+\subsection{Integration Techniques Overview}
+The problems in this collection cover:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Basic Techniques:} Reverse chain rule, standard integrals, u-substitution
+  \item \textbf{Advanced Substitution:} Trigonometric substitution, t-formula, rationalizing substitutions
+  \item \textbf{Integration by Parts:} Single and multiple applications, LIATE rule
+  \item \textbf{Partial Fractions:} Linear, quadratic, and repeated factors
+  \item \textbf{Reduction Formulae:} Deriving and applying recurrence relations
+  \item \textbf{Volumes of Solids:} Disk method, washer method, cylindrical shells, general slicing
+  \item \textbf{Definite Integral Properties:} Symmetry, King's property, inequalities
+\end{itemize}
+
+\newpage
+\section{Fundamentals Review}
+This section provides a comprehensive review of integration techniques essential for HSC Extension~2. Use this as a reference while working through problems.
+
+\input{problems/fundamentals}
+
+\newpage
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains three sets of problems---basic, medium, and advanced. Each set provides five problems with comprehensive solutions. Every solution includes a strategy paragraph explaining technique selection, complete step-by-step working with annotations, and a takeaways box highlighting key insights.
+
+\subsection{Basic Integration Problems}
+\input{problems/part1-easy}
+
+\subsection{Medium Integration Problems}
+\input{problems/part1-medium}
+
+\subsection{Advanced Integration Problems}
+\input{problems/part1-hard}
+
+\newpage
+\section{Part 2: Problems with Hints Only}
+Part~2 presents additional problems with upside-down hints. Try each problem first, then rotate the page to read the hint if needed. These 45 problems provide additional practice across all difficulty levels.
+
+\subsection{Basic Integration Problems}
+\input{problems/part2-easy-hints}
+
+\subsection{Medium Integration Problems}
+\input{problems/part2-medium-hints}
+
+\subsection{Advanced Integration Problems}
+\input{problems/part2-hard-hints}
+
+\newpage
+\section{Appendices}
+
+\subsection{Appendix A: Formula Sheet}
+\input{problems/appendix-a-formulas}
+
+\subsection{Appendix B: Index of Problems by Technique}
+\input{problems/appendix-b-index}
+
+\subsection{Appendix C: Common Substitutions Guide}
+\input{problems/appendix-c-substitutions}
+
+\subsection{Appendix D: Integration by Parts Decision Tree}
+\input{problems/appendix-d-flowchart}
+
+\newpage
+\section{Conclusion}
+Integration is a cornerstone technique in the HSC Mathematics Extension~2 course. Mastery requires understanding when and how to apply different techniques, recognizing patterns, and practicing extensively. Use these problems to build confidence, develop systematic approaches, and strengthen your ability to communicate complete mathematical solutions. Best of luck with your studies and HSC examinations!
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Integrals}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Integrals}
+
+\end{document}

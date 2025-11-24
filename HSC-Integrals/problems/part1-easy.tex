@@ -1,0 +1,320 @@
+% Part 1: Easy Problems (5 problems with detailed solutions)
+% Each problem includes: boxed statement, strategy, complete solution, takeaways, alternative approaches
+
+% Problem 1: Basic Partial Fractions (from sample 01.tex)
+\begin{problem}[Partial Fractions]
+Find the indefinite integral:
+\[
+\int \frac{x^2 - 2x + 9}{(4-x)(x^2+1)} \, dx
+\]
+\end{problem}
+
+\textbf{Strategy:} This integral requires partial fraction decomposition. The denominator contains a linear factor $(4-x)$ and an irreducible quadratic factor $(x^2+1)$, so we set up the decomposition with constants $A$ for the linear part and $Bx+C$ for the quadratic part.
+
+\begin{solution}
+\textbf{Step 1: Set up the decomposition}
+
+Since the denominator has $(4-x)$ (linear) and $(x^2+1)$ (irreducible quadratic):
+\[
+\frac{x^2 - 2x + 9}{(4-x)(x^2+1)} = \frac{A}{4-x} + \frac{Bx + C}{x^2 + 1}
+\]
+
+\textbf{Step 2: Find coefficients}
+
+Multiply both sides by $(4-x)(x^2+1)$:
+\[
+x^2 - 2x + 9 = A(x^2 + 1) + (Bx + C)(4 - x)
+\]
+
+\textit{Finding A:} Let $x = 4$:
+\begin{align*}
+16 - 8 + 9 &= A(17) + 0 \\
+17 &= 17A \\
+A &= 1
+\end{align*}
+
+\textit{Finding B and C:} Substitute $A = 1$ and expand:
+\[
+x^2 - 2x + 9 = x^2 + 1 + 4Bx - Bx^2 + 4C - Cx
+\]
+
+Group by powers of $x$:
+\[
+x^2 - 2x + 9 = (1 - B)x^2 + (4B - C)x + (1 + 4C)
+\]
+
+Equating coefficients:
+\begin{itemize}
+\item $x^2$: $1 = 1 - B \implies B = 0$
+\item $x^0$: $9 = 1 + 4C \implies C = 2$
+\item Check $x^1$: $-2 = 4(0) - 2 = -2$ $\checkmark$
+\end{itemize}
+
+\textbf{Step 3: Integrate}
+
+With $A=1$, $B=0$, $C=2$:
+\[
+\int \left( \frac{1}{4-x} + \frac{2}{x^2+1} \right) dx
+\]
+
+For $\int \frac{1}{4-x} dx$, let $u = 4-x$, then $du = -dx$:
+\[
+\int \frac{1}{4-x} dx = -\ln|4-x| + C_1
+\]
+
+For $\int \frac{2}{x^2+1} dx$:
+\[
+2 \int \frac{1}{x^2+1} dx = 2\arctan(x) + C_2
+\]
+
+\textbf{Final Answer:}
+\[
+\boxed{\int \frac{x^2 - 2x + 9}{(4-x)(x^2+1)} \, dx = -\ln|4-x| + 2\arctan(x) + C}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Partial Fractions Setup:} Linear factors use constant numerators ($A$), irreducible quadratics use linear numerators ($Bx + C$).
+\item \textbf{Strategic Value Selection:} Choose $x$ values that eliminate terms (e.g., $x=4$ eliminates the $(4-x)$ factor).
+\item \textbf{Coefficient Matching:} After substitution, equate coefficients of like powers to find remaining constants.
+\item \textbf{Standard Integral Recognition:} $\int \frac{1}{a-x}dx = -\ln|a-x|$ and $\int \frac{1}{x^2+1}dx = \arctan(x)$ are key formulas.
+\end{itemize}
+\end{takeaways}
+
+% =============================================================================
+% PROBLEM 2: Integration by Parts (LIATE Rule)
+% Source: Sample 07.tex
+% Technique: Integration by parts
+% =============================================================================
+
+\begin{problem}[Integration by Parts]
+Use integration by parts to evaluate:
+\[
+\int_{1}^{e} x \ln x \, dx
+\]
+\end{problem}
+
+\textbf{Strategy:} This is a classic integration by parts problem. Apply the LIATE rule to choose which function to differentiate: Logarithmic functions come before Algebraic functions, so let $u = \ln x$.
+
+\begin{solution}
+Using the integration by parts formula $\int u \, dv = uv - \int v \, du$:
+
+\textbf{Step 1:} Choose $u$ and $dv$ using LIATE:
+\begin{align*}
+    u &= \ln x & dv &= x \, dx
+\end{align*}
+
+\textbf{Step 2:} Differentiate $u$ and integrate $dv$:
+\begin{align*}
+    du &= \frac{1}{x} \, dx & v &= \frac{x^2}{2}
+\end{align*}
+
+\textbf{Step 3:} Apply the formula:
+\begin{align*}
+    \int_{1}^{e} x \ln x \, dx &= \left[ \frac{x^2}{2} \ln x \right]_{1}^{e} - \int_{1}^{e} \frac{x^2}{2} \cdot \frac{1}{x} \, dx \\[8pt]
+    &= \left[ \frac{x^2}{2} \ln x \right]_{1}^{e} - \frac{1}{2} \int_{1}^{e} x \, dx \\[8pt]
+    &= \left[ \frac{x^2}{2} \ln x - \frac{x^2}{4} \right]_{1}^{e}
+\end{align*}
+
+\textbf{Step 4:} Evaluate at the limits (using $\ln(e)=1$ and $\ln(1)=0$):
+\begin{align*}
+    &= \left( \frac{e^2}{2} - \frac{e^2}{4} \right) - \left( 0 - \frac{1}{4} \right) \\[8pt]
+    &= \frac{e^2}{4} + \frac{1}{4} = \boxed{\frac{e^2 + 1}{4}}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{LIATE Rule:} Prioritize L(og) $>$ I(nverse trig) $>$ A(lgebraic) $>$ T(rig) $>$ E(xponential) for $u$
+\item \textbf{Boundary Terms:} Apply limits after integration: $[uv]_a^b - \int_a^b v \, du$
+\item \textbf{Special Values:} Remember $\ln(e) = 1$ and $\ln(1) = 0$
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 3: Reverse Chain Rule
+% Source: Sample 09.tex
+% Technique: Splitting numerator, logarithm + arctan forms
+% =============================================================================
+
+\begin{problem}[Reverse Chain Rule]
+Find the indefinite integral:
+\[
+\int \frac{2x+3}{x^2+2x+2} \, dx
+\]
+\end{problem}
+
+\textbf{Strategy:} Recognize that the numerator can be split to match the derivative of the denominator plus a constant. This allows us to use both logarithmic and inverse trigonometric standard forms.
+
+\begin{solution}
+\textbf{Step 1:} Check the derivative of the denominator:
+\[
+\frac{d}{dx}(x^2+2x+2) = 2x+2
+\]
+
+\textbf{Step 2:} Split the numerator:
+\[
+2x+3 = (2x+2) + 1
+\]
+
+\textbf{Step 3:} Separate the integral:
+\[
+I = \int \frac{2x+2}{x^2+2x+2} \, dx + \int \frac{1}{x^2+2x+2} \, dx
+\]
+
+\textbf{Step 4:} First integral uses logarithm form $\int \frac{f'(x)}{f(x)} dx = \ln|f(x)|$:
+\[
+\int \frac{2x+2}{x^2+2x+2} \, dx = \ln(x^2+2x+2)
+\]
+(Note: $x^2+2x+2 = (x+1)^2 + 1 > 0$ always)
+
+\textbf{Step 5:} Second integral requires completing the square:
+\[
+x^2+2x+2 = (x+1)^2 + 1
+\]
+
+Apply arctangent form:
+\[
+\int \frac{1}{(x+1)^2 + 1} \, dx = \arctan(x+1)
+\]
+
+\textbf{Final Answer:}
+\[
+\boxed{\int \frac{2x+3}{x^2+2x+2} \, dx = \ln(x^2+2x+2) + \arctan(x+1) + C}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Numerator Splitting:} Match part of numerator to $f'(x)$ when denominator is $f(x)$
+\item \textbf{Standard Forms:} $\frac{f'}{f} \to \ln|f|$ and $\frac{1}{a^2+u^2} \to \frac{1}{a}\arctan(\frac{u}{a})$
+\item \textbf{Completing the Square:} Essential for identifying inverse trig forms
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 4: Algebraic Substitution
+% Source: Sample 10.tex  
+% Technique: u-substitution with radical
+% =============================================================================
+
+\begin{problem}[Algebraic Substitution]
+Use an appropriate substitution to evaluate:
+\[
+\int_{\sqrt{10}}^{\sqrt{13}} x^3 \sqrt{x^2 - 9} \, dx
+\]
+\end{problem}
+
+\textbf{Strategy:} The radical $\sqrt{x^2-9}$ suggests $u = x^2 - 9$. This also helps manage the $x^3$ term since $x^3 dx = x^2 \cdot x dx$.
+
+\begin{solution}
+\textbf{Step 1:} Let $u = x^2 - 9$, then:
+\[
+\frac{du}{dx} = 2x \implies x \, dx = \frac{1}{2} du
+\]
+
+Since $x^2 = u + 9$:
+\[
+x^3 \, dx = x^2 \cdot x \, dx = (u+9) \cdot \frac{1}{2} du
+\]
+
+\textbf{Step 2:} Transform limits:
+\begin{itemize}
+\item $x = \sqrt{10} \implies u = 10 - 9 = 1$
+\item $x = \sqrt{13} \implies u = 13 - 9 = 4$
+\end{itemize}
+
+\textbf{Step 3:} Substitute:
+\begin{align*}
+    \int_{\sqrt{10}}^{\sqrt{13}} x^3 \sqrt{x^2 - 9} \, dx &= \int_{1}^{4} (u + 9) \sqrt{u} \cdot \frac{1}{2} \, du \\[8pt]
+    &= \frac{1}{2} \int_{1}^{4} (u^{3/2} + 9u^{1/2}) \, du
+\end{align*}
+
+\textbf{Step 4:} Integrate:
+\begin{align*}
+    &= \frac{1}{2} \left[ \frac{2u^{5/2}}{5} + 6u^{3/2} \right]_{1}^{4} = \left[ \frac{u^{5/2}}{5} + 3u^{3/2} \right]_{1}^{4}
+\end{align*}
+
+\textbf{Step 5:} Evaluate:
+\begin{align*}
+    \text{At } u=4: & \quad \frac{32}{5} + 24 = \frac{152}{5} \\
+    \text{At } u=1: & \quad \frac{1}{5} + 3 = \frac{16}{5}
+\end{align*}
+
+\textbf{Final Answer:}
+\[
+\boxed{\frac{152}{5} - \frac{16}{5} = \frac{136}{5} = 27.2}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Radical Substitution:} For $\sqrt{x^2 \pm a^2}$, try $u = x^2 \pm a^2$
+\item \textbf{Limit Transformation:} Always convert limits for definite integrals
+\item \textbf{Fractional Powers:} $\int u^n du = \frac{u^{n+1}}{n+1}$ works for all $n \neq -1$
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 5: Definite Integral Property
+% Source: Sample 06.tex
+% Technique: Interval splitting and substitution
+% =============================================================================
+
+\begin{problem}[Definite Integral Property]
+Which of the following is equal to $\displaystyle \int_0^{2a} f(x) \, dx$?
+
+\begin{enumerate}
+\item[(A)] $\displaystyle \int_0^a \left( f(x) - f(2a - x) \right) \, dx$
+\item[(B)] $\displaystyle \int_0^a \left( f(x) + f(2a - x) \right) \, dx$
+\item[(C)] $\displaystyle 2 \int_0^a f(x - a) \, dx$
+\item[(D)] $\displaystyle \int_0^a \frac{1}{2} f(2x) \, dx$
+\end{enumerate}
+\end{problem}
+
+\textbf{Strategy:} Split the integral at $x=a$, then use substitution on the second part to transform its limits to match $[0,a]$.
+
+\begin{solution}
+\textbf{Step 1:} Split the interval:
+\[
+I = \int_0^{2a} f(x) \, dx = \int_0^a f(x) \, dx + \int_a^{2a} f(x) \, dx
+\]
+
+\textbf{Step 2:} For the second integral, let $u = 2a - x$:
+\begin{itemize}
+\item Then $du = -dx$
+\item When $x = a$: $u = a$
+\item When $x = 2a$: $u = 0$
+\end{itemize}
+
+\textbf{Step 3:} Substitute:
+\begin{align*}
+    \int_a^{2a} f(x) \, dx &= \int_a^0 f(2a - u) (-du) \\
+    &= \int_0^a f(2a - u) \, du \\
+    &= \int_0^a f(2a - x) \, dx \quad \text{(dummy variable)}
+\end{align*}
+
+\textbf{Step 4:} Combine:
+\begin{align*}
+    I &= \int_0^a f(x) \, dx + \int_0^a f(2a - x) \, dx \\
+    &= \int_0^a \left( f(x) + f(2a - x) \right) \, dx
+\end{align*}
+
+\textbf{Answer:} \boxed{\text{B}}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Interval Splitting:} $\int_a^b = \int_a^c + \int_c^b$ for any $c \in [a,b]$
+\item \textbf{Reflection Substitution:} $u = 2a - x$ reflects the interval about the midpoint
+\item \textbf{Dummy Variables:} In definite integrals, the variable name doesn't matter
+\item \textbf{King's Property:} This is a special case: $\int_0^{2a} f(x) dx = \int_0^a [f(x) + f(2a-x)] dx$
+\end{itemize}
+\end{takeaways}

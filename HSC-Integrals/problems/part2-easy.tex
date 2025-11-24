@@ -1,0 +1,37 @@
+% Part 2: Easy Problems (~15 problems with hints and concise solutions)
+
+% Problem 1: Basic substitution (from sample 10.tex)
+\begin{problem}[U-Substitution with Definite Integral]
+Use an appropriate substitution to evaluate:
+\[
+\int_{\sqrt{10}}^{\sqrt{13}} x^3 \sqrt{x^2 - 9} \, dx
+\]
+\end{problem}
+
+\begin{hint}
+Try the substitution $u = x^2 - 9$. Don't forget to change the limits of integration.
+\end{hint}
+
+\begin{solution}
+Let $u = x^2 - 9$, so $du = 2x \, dx \implies x \, dx = \frac{1}{2}du$.
+
+Since $x^3 = x^2 \cdot x$ and $x^2 = u + 9$:
+
+Limits: $x = \sqrt{10} \implies u = 1$; $x = \sqrt{13} \implies u = 4$.
+
+\begin{align*}
+\int_{\sqrt{10}}^{\sqrt{13}} x^2 \sqrt{x^2 - 9} \cdot x \, dx &= \int_{1}^{4} (u + 9)\sqrt{u} \cdot \frac{1}{2} \, du \\
+&= \frac{1}{2} \int_{1}^{4} (u^{3/2} + 9u^{1/2}) \, du \\
+&= \frac{1}{2} \left[ \frac{2}{5}u^{5/2} + 6u^{3/2} \right]_{1}^{4} \\
+&= \left[ \frac{1}{5}u^{5/2} + 3u^{3/2} \right]_{1}^{4} \\
+&= \left(\frac{32}{5} + 24\right) - \left(\frac{1}{5} + 3\right) \\
+&= \boxed{\frac{136}{5}}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+Choose $u$ as the inner function ($x^2-9$) to simplify the square root. Always update integration limits when substituting.
+\end{takeaways}
+
+% Add ~14 more easy problems...
+% TO BE COMPLETED

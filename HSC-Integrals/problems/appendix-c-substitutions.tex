@@ -1,0 +1,90 @@
+% Appendix C: Common Substitutions Guide
+
+\subsubsection*{Basic U-Substitution}
+
+\textbf{When to use:} The integrand contains a function and its derivative (or a constant multiple).
+
+\textbf{How:} Let $u = g(x)$ where $g(x)$ is the inner function. Then $du = g'(x) \, dx$.
+
+\textbf{Examples:}
+\begin{itemize}
+\item $\int x \sqrt{x^2 + 1} \, dx$: Let $u = x^2 + 1$
+\item $\int \sin x \cos x \, dx$: Let $u = \sin x$ (or $u = \cos x$)
+\item $\int \frac{x}{x^2 + 5} \, dx$: Let $u = x^2 + 5$
+\end{itemize}
+
+\subsubsection*{Trigonometric Substitutions}
+
+\textbf{For $\sqrt{a^2 - x^2}$:} Let $x = a\sin\theta$ or $x = a\cos\theta$
+
+Uses: $1 - \sin^2\theta = \cos^2\theta$
+
+\textit{Example:} $\int \frac{1}{\sqrt{9-x^2}} \, dx$ with $x = 3\sin\theta$
+
+\textbf{For $\sqrt{a^2 + x^2}$:} Let $x = a\tan\theta$
+
+Uses: $1 + \tan^2\theta = \sec^2\theta$
+
+\textit{Example:} $\int \frac{1}{x^2\sqrt{x^2+4}} \, dx$ with $x = 2\tan\theta$
+
+\textbf{For $\sqrt{x^2 - a^2}$:} Let $x = a\sec\theta$ or $x = a\cosh t$
+
+Uses: $\sec^2\theta - 1 = \tan^2\theta$
+
+\textit{Example:} $\int x^3\sqrt{x^2-9} \, dx$ with $x = 3\sec\theta$
+
+\subsubsection*{t-Formula Substitution}
+
+\textbf{When to use:} Rational functions of $\sin x$ and $\cos x$
+
+\textbf{Substitution:} $t = \tan\left(\frac{x}{2}\right)$
+
+\textbf{Formulas:}
+\begin{align*}
+dx &= \frac{2}{1+t^2} \, dt \\
+\sin x &= \frac{2t}{1+t^2} \\
+\cos x &= \frac{1-t^2}{1+t^2}
+\end{align*}
+
+\textbf{Example:} $\int \frac{1}{2 + \sin x} \, dx$
+
+\subsubsection*{Exponential and Logarithmic Substitutions}
+
+\textbf{For integrands with $e^x$:} Often let $u = e^x$, then $du = e^x \, dx$
+
+\textbf{For integrands with $\ln x$:} Often use integration by parts with $u = \ln x$
+
+\textbf{Examples:}
+\begin{itemize}
+\item $\int \frac{e^x}{1+e^x} \, dx$: Let $u = 1 + e^x$
+\item $\int \frac{\ln x}{x} \, dx$: Let $u = \ln x$
+\end{itemize}
+
+\subsubsection*{Completing the Square}
+
+\textbf{When to use:} Quadratic expressions in denominators or under square roots
+
+\textbf{How:} Rewrite $ax^2 + bx + c$ as $a[(x+h)^2 + k]$
+
+\textbf{Example:} $\int \frac{1}{x^2 + 4x + 13} \, dx$
+
+Complete the square: $x^2 + 4x + 13 = (x+2)^2 + 9$
+
+Then use $u = x + 2$ and apply $\int \frac{1}{u^2+a^2} \, du = \frac{1}{a}\tan^{-1}\left(\frac{u}{a}\right) + C$
+
+\subsubsection*{Quick Reference Table}
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Integrand Contains} & \textbf{Try Substitution} & \textbf{Uses Identity} \\
+\hline
+$\sqrt{a^2 - x^2}$ & $x = a\sin\theta$ & $1 - \sin^2\theta = \cos^2\theta$ \\
+$\sqrt{a^2 + x^2}$ & $x = a\tan\theta$ & $1 + \tan^2\theta = \sec^2\theta$ \\
+$\sqrt{x^2 - a^2}$ & $x = a\sec\theta$ & $\sec^2\theta - 1 = \tan^2\theta$ \\
+$f(x)$ and $f'(x)$ & $u = f(x)$ & Reverse chain rule \\
+Rational trig & $t = \tan(x/2)$ & t-formula identities \\
+$e^x$ and algebra & $u = e^x$ & $du = e^x dx$ \\
+\hline
+\end{tabular}
+\end{center}

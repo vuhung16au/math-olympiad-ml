@@ -1,0 +1,424 @@
+% Part 1: Hard Problems (5 problems with detailed solutions)
+
+% Problem 1: Multi-part reduction formula with proof (from sample 23.tex)
+\begin{problem}[Advanced Reduction Formula with Induction]
+\begin{enumerate}
+    \item[(i)] Let $J_n = \int_{0}^{\frac{\pi}{2}} \sin^n \theta \, d\theta$ where $n \ge 0$ is an integer.
+    
+    Show that $J_n = \frac{n-1}{n}J_{n-2}$ for all integers $n \ge 2$.
+
+    \item[(ii)] Let $I_n = \int_{0}^{1} x^n(1-x)^n \, dx$ where $n$ is a positive integer.
+    
+    By using the substitution $x = \sin^2 \theta$, or otherwise,
+    
+    show that $I_n = \frac{1}{2^{2n}} \int_{0}^{\frac{\pi}{2}} \sin^{2n+1} \theta \, d\theta$.
+
+    \item[(iii)] Hence, or otherwise, show that $I_n = \frac{n}{4n+2}I_{n-1}$, for all integers $n \ge 1$.
+\end{enumerate}
+\end{problem}
+
+\textbf{Strategy:} This is a sophisticated multi-part problem connecting two different integral forms through substitution and reduction formulae. Part (i) uses integration by parts to derive a recurrence for $J_n$. Part (ii) employs trigonometric substitution to relate $I_n$ to $J_{2n+1}$. Part (iii) combines the previous results to establish the recurrence for $I_n$.
+
+\begin{solution}
+\textbf{Part (i):}
+
+We use integration by parts on $J_n = \int_{0}^{\frac{\pi}{2}} \sin^n \theta \, d\theta$.
+
+Let:
+\begin{align*}
+u = \sin^{n-1}\theta &\implies du = (n-1)\sin^{n-2}\theta \cos\theta \, d\theta \\
+dv = \sin\theta \, d\theta &\implies v = -\cos\theta
+\end{align*}
+
+Applying $\int u \, dv = [uv] - \int v \, du$:
+\begin{align*}
+J_n &= \left[ -\sin^{n-1}\theta \cos\theta \right]_{0}^{\frac{\pi}{2}} + \int_{0}^{\frac{\pi}{2}} \cos\theta (n-1)\sin^{n-2}\theta \cos\theta \, d\theta
+\end{align*}
+
+The boundary term vanishes: $[-\sin^{n-1}(\pi/2)\cos(\pi/2)] - [-\sin^{n-1}(0)\cos(0)] = 0 - 0 = 0$.
+
+\begin{align*}
+J_n &= (n-1) \int_{0}^{\frac{\pi}{2}} \sin^{n-2}\theta \cos^2\theta \, d\theta \\
+&= (n-1) \int_{0}^{\frac{\pi}{2}} \sin^{n-2}\theta (1 - \sin^2\theta) \, d\theta \quad \text{[using } \cos^2\theta = 1-\sin^2\theta\text{]} \\
+&= (n-1) \left( \int_{0}^{\frac{\pi}{2}} \sin^{n-2}\theta \, d\theta - \int_{0}^{\frac{\pi}{2}} \sin^{n}\theta \, d\theta \right) \\
+&= (n-1) J_{n-2} - (n-1) J_n
+\end{align*}
+
+Rearranging:
+\begin{align*}
+J_n + (n-1)J_n &= (n-1)J_{n-2} \\
+n J_n &= (n-1)J_{n-2}
+\end{align*}
+\[
+\boxed{J_n = \frac{n-1}{n} J_{n-2}}
+\]
+
+\textbf{Part (ii):}
+
+Substitute $x = \sin^2 \theta$, so $dx = 2\sin\theta\cos\theta \, d\theta$.
+
+Limits: $x=0 \implies \theta=0$; $x=1 \implies \theta=\frac{\pi}{2}$.
+
+\begin{align*}
+I_n &= \int_{0}^{1} x^n(1-x)^n \, dx \\
+&= \int_{0}^{\frac{\pi}{2}} (\sin^2\theta)^n (1-\sin^2\theta)^n \cdot 2\sin\theta\cos\theta \, d\theta \\
+&= \int_{0}^{\frac{\pi}{2}} \sin^{2n}\theta \cos^{2n}\theta \cdot 2\sin\theta\cos\theta \, d\theta \\
+&= 2 \int_{0}^{\frac{\pi}{2}} \sin^{2n+1}\theta\cos^{2n+1}\theta \, d\theta
+\end{align*}
+
+Using $\sin\theta\cos\theta = \frac{1}{2}\sin 2\theta$:
+\begin{align*}
+I_n &= 2 \int_{0}^{\frac{\pi}{2}} \left( \frac{1}{2}\sin 2\theta \right)^{2n+1} \, d\theta \\
+&= \frac{2}{2^{2n+1}} \int_{0}^{\frac{\pi}{2}} \sin^{2n+1} 2\theta \, d\theta \\
+&= \frac{1}{2^{2n}} \int_{0}^{\frac{\pi}{2}} \sin^{2n+1} 2\theta \, d\theta
+\end{align*}
+
+Let $\phi = 2\theta$, so $d\theta = \frac{1}{2}d\phi$. Limits: $0 \to \pi$.
+
+\begin{align*}
+I_n &= \frac{1}{2^{2n}} \int_{0}^{\pi} \sin^{2n+1} \phi \cdot \frac{1}{2} \, d\phi \\
+&= \frac{1}{2^{2n+1}} \int_{0}^{\pi} \sin^{2n+1} \phi \, d\phi
+\end{align*}
+
+Using symmetry: $\int_{0}^{\pi} \sin^{k} \phi \, d\phi = 2\int_{0}^{\pi/2} \sin^{k} \phi \, d\phi$ (since $\sin(\pi-\phi) = \sin\phi$):
+
+\[
+\boxed{I_n = \frac{1}{2^{2n}} \int_{0}^{\frac{\pi}{2}} \sin^{2n+1} \theta \, d\theta}
+\]
+
+\textbf{Part (iii):}
+
+From part (ii): $I_n = \frac{1}{2^{2n}} J_{2n+1}$ and $I_{n-1} = \frac{1}{2^{2(n-1)}} J_{2n-1} = \frac{4}{2^{2n}} J_{2n-1}$
+
+From part (i) with $k = 2n+1$:
+\[
+J_{2n+1} = \frac{2n}{2n+1} J_{2n-1}
+\]
+
+Therefore:
+\begin{align*}
+I_n &= \frac{1}{2^{2n}} \cdot \frac{2n}{2n+1} J_{2n-1} \\
+&= \frac{2n}{2n+1} \cdot \frac{1}{2^{2n}} J_{2n-1} \\
+&= \frac{2n}{2n+1} \cdot \frac{1}{4} \cdot \frac{4}{2^{2n}} J_{2n-1} \\
+&= \frac{2n}{4(2n+1)} \cdot I_{n-1} \\
+&= \boxed{\frac{n}{4n+2} I_{n-1}}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Integration by Parts for Reduction:} Choosing $u = \sin^{n-1}\theta$ and $dv = \sin\theta \, d\theta$ systematically reduces the power.
+\item \textbf{Trigonometric Substitution Power:} $x = \sin^2\theta$ transforms algebraic integrals into trigonometric ones.
+\item \textbf{Connecting Different Integrals:} Parts (i) and (ii) establish relationships that combine in part (iii).
+\item \textbf{Symmetry Properties:} $\int_0^{\pi} \sin^k\phi \, d\phi = 2\int_0^{\pi/2} \sin^k\phi \, d\phi$ simplifies definite integrals.
+\item \textbf{Multi-Part Problems:} Each part builds on previous results---read all parts before starting!
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 2: Advanced Induction with Series (5 parts)
+% Source: Sample 20.tex
+% Technique: Integration by parts, reduction formula, induction, series, limits
+% =============================================================================
+
+\begin{problem}[Reduction Formula with Factorial Series]
+Let $J_n = \int_{0}^{1} x^n e^{-x} \, dx$, where $n$ is a non-negative integer.
+
+\begin{enumerate}[label=(\roman*)]
+\item Show that $J_0 = 1 - \frac{1}{e}$.
+\item Show that $J_n \le \frac{1}{n+1}$.
+\item Show that $J_n = n J_{n-1} - \frac{1}{e}$, for $n \ge 1$.
+\item Using parts (i) and (iii), show by mathematical induction that for all $n \ge 0$,
+\[
+J_n = n! - \frac{n!}{e} \sum_{r=0}^{n} \frac{1}{r!}
+\]
+\item Using parts (ii) and (iv) prove that $e = \lim_{n \to \infty} \sum_{r=0}^{n} \frac{1}{r!}$.
+\end{enumerate}
+\end{problem}
+
+\textbf{Strategy:} This sophisticated problem connects integration, reduction formulae, induction, and limits. Part (i) establishes base case, (ii) bounds, (iii) recurrence, (iv) explicit formula via induction, and (v) uses squeeze theorem.
+
+\begin{solution}
+\textbf{Part (i):}
+
+\begin{align*}
+J_0 &= \int_{0}^{1} e^{-x} \, dx = \left[ -e^{-x} \right]_{0}^{1} = -e^{-1} - (-1) = \boxed{1 - \frac{1}{e}}
+\end{align*}
+
+\textbf{Part (ii):}
+
+For $x \in [0, 1]$: $e^{-x} \le e^0 = 1$, so $x^n e^{-x} \le x^n$.
+
+\begin{align*}
+J_n = \int_{0}^{1} x^n e^{-x} \, dx &\le \int_{0}^{1} x^n \, dx = \left[ \frac{x^{n+1}}{n+1} \right]_{0}^{1} = \boxed{\frac{1}{n+1}}
+\end{align*}
+
+\textbf{Part (iii):}
+
+Use integration by parts: $u = x^n$, $dv = e^{-x}dx$
+\begin{align*}
+du &= nx^{n-1}dx, \quad v = -e^{-x}
+\end{align*}
+
+\begin{align*}
+J_n &= \left[ -x^n e^{-x} \right]_{0}^{1} + \int_{0}^{1} n x^{n-1} e^{-x} \, dx \\
+&= \left( -\frac{1}{e} - 0 \right) + n J_{n-1} = \boxed{n J_{n-1} - \frac{1}{e}}
+\end{align*}
+
+\textbf{Part (iv):}
+
+\textit{Base case} ($n=0$): LHS: $J_0 = 1 - \frac{1}{e}$. RHS: $0! - \frac{0!}{e}(1) = 1 - \frac{1}{e}$. $\checkmark$
+
+\textit{Inductive step:} Assume true for $n=k$: $J_k = k! - \frac{k!}{e} \sum_{r=0}^{k} \frac{1}{r!}$
+
+From part (iii): $J_{k+1} = (k+1)J_k - \frac{1}{e}$
+
+\begin{align*}
+J_{k+1} &= (k+1)\left[ k! - \frac{k!}{e} \sum_{r=0}^{k} \frac{1}{r!} \right] - \frac{1}{e} \\
+&= (k+1)! - \frac{(k+1)!}{e} \sum_{r=0}^{k} \frac{1}{r!} - \frac{1}{e} \\
+&= (k+1)! - \frac{(k+1)!}{e} \left[ \sum_{r=0}^{k} \frac{1}{r!} + \frac{1}{(k+1)!} \right] \\
+&= \boxed{(k+1)! - \frac{(k+1)!}{e} \sum_{r=0}^{k+1} \frac{1}{r!}}
+\end{align*}
+
+By induction, the formula holds for all $n \ge 0$. $\blacksquare$
+
+\textbf{Part (v):}
+
+From part (iv): $\frac{n!}{e} \sum_{r=0}^{n} \frac{1}{r!} = n! - J_n$
+
+Rearranging: $\sum_{r=0}^{n} \frac{1}{r!} = e - \frac{eJ_n}{n!}$
+
+From part (ii): $0 \le J_n \le \frac{1}{n+1}$, so: $0 \le \frac{eJ_n}{n!} \le \frac{e}{(n+1)!}$
+
+As $n \to \infty$: $(n+1)! \to \infty$, thus $\frac{e}{(n+1)!} \to 0$.
+
+By Squeeze Theorem: $\lim_{n \to \infty} \frac{eJ_n}{n!} = 0$
+
+Therefore: $\boxed{e = \lim_{n \to \infty} \sum_{r=0}^{n} \frac{1}{r!}}$ $\blacksquare$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Proof Architecture:} Each part builds toward the final limit result
+\item \textbf{Induction with Series:} Factorial notation and series manipulation are key
+\item \textbf{Squeeze Theorem:} Upper bound from (ii) + explicit formula from (iv) $\implies$ limit
+\item \textbf{e as Series:} This proves the famous expansion $e = \sum_{r=0}^{\infty} \frac{1}{r!}$
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 3: Substitution Transformation Proof
+% Source: Sample 03.tex
+% Technique: Variable substitution, definite integral transformation
+% =============================================================================
+
+\begin{problem}[Substitution Proof]
+It is given that:
+\[
+A = \int_{2}^{4} \frac{e^x}{x-1} \, dx
+\]
+
+Show that:
+\[
+\int_{m-4}^{m-2} \frac{e^{-x}}{x - m + 1} \, dx = kA
+\]
+where $k$ and $m$ are constants, and determine the value of $k$.
+\end{problem}
+
+\textbf{Strategy:} Transform the second integral using substitution $u = m - x$ to reverse limits and match the form of $A$. Factor out constants carefully.
+
+\begin{solution}
+Let $I = \int_{m-4}^{m-2} \frac{e^{-x}}{x - m + 1} \, dx$
+
+\textbf{Step 1:} Substitute $u = m - x$, so $x = m - u$ and $dx = -du$.
+
+Change limits:
+\begin{itemize}
+\item $x = m-4 \implies u = 4$
+\item $x = m-2 \implies u = 2$
+\end{itemize}
+
+\textbf{Step 2:} Transform the integral:
+\begin{align*}
+I &= \int_{4}^{2} \frac{e^{-(m-u)}}{(m-u) - m + 1} (-du) \\
+&= \int_{4}^{2} \frac{e^{u-m}}{-u + 1} (-du) \\
+&= \int_{4}^{2} \frac{e^{-m} \cdot e^{u}}{-(u - 1)} (-du) \\
+&= \int_{4}^{2} \frac{e^{-m} e^{u}}{u - 1} du
+\end{align*}
+
+\textbf{Step 3:} Reverse limits (introduces negative sign):
+\begin{align*}
+I &= -\int_{2}^{4} \frac{e^{-m} e^{u}}{u - 1} du \\
+&= -e^{-m} \int_{2}^{4} \frac{e^{u}}{u - 1} du
+\end{align*}
+
+\textbf{Step 4:} Recognize $A$:
+
+Since $\int_{2}^{4} \frac{e^{u}}{u - 1} du = A$ (dummy variable):
+\[
+I = -e^{-m} A
+\]
+
+\textbf{Final Answer:}
+\[
+\boxed{k = -e^{-m}}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Reversing Substitution:} $u = m - x$ reverses limit order and transforms exponentials
+\item \textbf{Limit Transformation:} Always check how limits change under substitution
+\item \textbf{Dummy Variables:} $\int_a^b f(x)dx = \int_a^b f(u)du$ for definite integrals
+\item \textbf{Constant Extraction:} $e^{-m}$ can be factored out as it's independent of $u$
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 4: Applications - Mechanics on Inclined Plane
+% Source: Sample 15.tex (modified)
+% Technique: Newton's laws, trigonometry, quadratic equations
+% =============================================================================
+
+\begin{problem}[Applications - Inclined Plane Dynamics]
+An object of mass $5$ kg is on a slope inclined at $60°$ to the horizontal. The acceleration due to gravity is $g$ m/s$^2$ and velocity down the slope is $v$ m/s.
+
+The object experiences two resistive forces (acting up the slope): one of magnitude $2v$ N and one of $2v^2$ N.
+
+\begin{enumerate}[label=(\roman*)]
+\item Show that the resultant force down the slope is $\frac{5\sqrt{3}}{2}g - 2v - 2v^2$ newtons.
+\item There is one value of $v$ such that the object slides at constant speed. Find this value (in m/s, to 1 d.p.) given $g = 10$.
+\end{enumerate}
+\end{problem}
+
+\textbf{Strategy:} Resolve forces parallel to slope using $F = mg\sin\theta$, then apply Newton's First Law for constant velocity (equilibrium).
+
+\begin{solution}
+\textbf{Part (i):}
+
+Forces parallel to slope:
+\begin{itemize}
+\item \textbf{Down slope:} Component of weight: $F_g = mg\sin(60°) = 5g \cdot \frac{\sqrt{3}}{2} = \frac{5\sqrt{3}}{2}g$
+\item \textbf{Up slope:} Resistance: $R = 2v + 2v^2$
+\end{itemize}
+
+Resultant force (taking down-slope as positive):
+\[
+\boxed{F_{net} = \frac{5\sqrt{3}}{2}g - 2v - 2v^2 \text{ N}} \quad \blacksquare
+\]
+
+\textbf{Part (ii):}
+
+Constant speed $\implies$ $F_{net} = 0$ (Newton's First Law):
+\[
+\frac{5\sqrt{3}}{2}(10) - 2v - 2v^2 = 0
+\]
+\[
+25\sqrt{3} - 2v - 2v^2 = 0
+\]
+\[
+2v^2 + 2v - 25\sqrt{3} = 0
+\]
+
+Using quadratic formula with $a=2$, $b=2$, $c=-25\sqrt{3}$:
+\[
+v = \frac{-2 \pm \sqrt{4 + 200\sqrt{3}}}{4}
+\]
+
+Taking positive root (velocity down slope):
+\[
+v = \frac{-2 + \sqrt{4 + 346.41}}{4} = \frac{-2 + \sqrt{350.41}}{4} \approx \frac{-2 + 18.72}{4} \approx 4.18
+\]
+
+\textbf{Answer:} $\boxed{v = 4.2 \text{ m/s}}$ (to 1 d.p.)
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Force Resolution:} Always resolve perpendicular and parallel to the plane
+\item \textbf{Constant Velocity:} Zero acceleration $\implies$ balanced forces
+\item \textbf{Sign Convention:} Define positive direction (here: down-slope)
+\item \textbf{Quadratic Reality Check:} Reject negative velocity (unphysical)
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 5: Volumes of Revolution
+% Source: Sample 12.tex
+% Technique: Washer method, integration of squares, geometric analysis
+% =============================================================================
+
+\begin{problem}[Volumes of Revolution with Ratio]
+Region $A$ is bounded by $y=1$ and $x^2 + y^2 = 1$ between $x=0$ and $x=1$.
+
+Region $B$ is bounded by $y=1$ and $y = \ln x$ between $x=1$ and $x=e$.
+
+The volume of solid formed when region $A$ is rotated about the $x$-axis is $V_A$.
+The volume of solid formed when region $B$ is rotated about the $x$-axis is $V_B$.
+
+Show that the ratio $V_A : V_B$ is $1:3$.
+\end{problem}
+
+\textbf{Strategy:} Use washer method: $V = \pi \int_a^b [(y_{outer})^2 - (y_{inner})^2] dx$. For region $A$, outer is line $y=1$, inner is circle. For region $B$, outer is $y=1$, inner is $\ln x$.
+
+\begin{solution}
+\textbf{Calculate $V_A$:}
+
+Region $A$: outer $y=1$, inner $y=\sqrt{1-x^2}$ (upper semicircle), from $x=0$ to $x=1$:
+\begin{align*}
+V_A &= \pi \int_0^1 [1^2 - (\sqrt{1-x^2})^2] dx = \pi \int_0^1 [1 - (1-x^2)] dx \\
+&= \pi \int_0^1 x^2 dx = \pi \left[ \frac{x^3}{3} \right]_0^1 = \frac{\pi}{3}
+\end{align*}
+
+\textbf{Calculate $V_B$:}
+
+Region $B$: outer $y=1$, inner $y=\ln x$, from $x=1$ to $x=e$:
+\begin{align*}
+V_B &= \pi \int_1^e [1 - (\ln x)^2] dx = \pi \left[ x - \int (\ln x)^2 dx \right]_1^e
+\end{align*}
+
+For $\int (\ln x)^2 dx$, use parts twice:
+
+Let $u = (\ln x)^2$, $dv = dx \implies du = \frac{2\ln x}{x}dx$, $v = x$:
+\begin{align*}
+\int (\ln x)^2 dx &= x(\ln x)^2 - 2\int \ln x dx \\
+&= x(\ln x)^2 - 2(x\ln x - x) \\
+&= x(\ln x)^2 - 2x\ln x + 2x
+\end{align*}
+
+Therefore:
+\begin{align*}
+V_B &= \pi [x - (x(\ln x)^2 - 2x\ln x + 2x)]_1^e \\
+&= \pi [-x(\ln x)^2 + 2x\ln x - x]_1^e
+\end{align*}
+
+At $x=e$: $-e(1)^2 + 2e(1) - e = 0$
+
+At $x=1$: $-1(0)^2 + 2(1)(0) - 1 = -1$
+
+\[
+V_B = \pi[0 - (-1)] = \pi
+\]
+
+\textbf{Calculate Ratio:}
+\[
+V_A : V_B = \frac{\pi}{3} : \pi = \frac{1}{3} : 1 = \boxed{1 : 3} \quad \blacksquare
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Washer Method:} Subtract inner curve squared from outer curve squared
+\item \textbf{Repeated Parts:} $\int (\ln x)^2 dx$ requires applying by parts twice
+\item \textbf{Boundary Simplification:} $\ln e = 1$ and $\ln 1 = 0$ simplify evaluation
+\item \textbf{Geometric Insight:} Volume comparisons often yield simple ratios
+\end{itemize}
+\end{takeaways}

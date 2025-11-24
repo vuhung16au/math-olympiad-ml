@@ -1,0 +1,63 @@
+% Appendix A: Formula Sheet for Quick Reference
+
+\subsubsection*{Standard Integrals}
+
+\begin{tabular}{ll}
+$\displaystyle \int x^n \, dx = \frac{x^{n+1}}{n+1} + C$ & $(n \neq -1)$ \\[0.3em]
+$\displaystyle \int \frac{1}{x} \, dx = \ln|x| + C$ & \\[0.3em]
+$\displaystyle \int e^x \, dx = e^x + C$ & \\[0.3em]
+$\displaystyle \int a^x \, dx = \frac{a^x}{\ln a} + C$ & $(a > 0, a \neq 1)$ \\[0.3em]
+$\displaystyle \int \sin x \, dx = -\cos x + C$ & \\[0.3em]
+$\displaystyle \int \cos x \, dx = \sin x + C$ & \\[0.3em]
+$\displaystyle \int \sec^2 x \, dx = \tan x + C$ & \\[0.3em]
+$\displaystyle \int \csc^2 x \, dx = -\cot x + C$ & \\[0.3em]
+$\displaystyle \int \sec x \tan x \, dx = \sec x + C$ & \\[0.3em]
+$\displaystyle \int \csc x \cot x \, dx = -\csc x + C$ & \\
+\end{tabular}
+
+\subsubsection*{Inverse Trigonometric Forms}
+
+\begin{tabular}{ll}
+$\displaystyle \int \frac{1}{\sqrt{a^2 - x^2}} \, dx = \sin^{-1}\left(\frac{x}{a}\right) + C$ & $(|x| < a)$ \\[0.3em]
+$\displaystyle \int \frac{1}{a^2 + x^2} \, dx = \frac{1}{a}\tan^{-1}\left(\frac{x}{a}\right) + C$ & \\[0.3em]
+$\displaystyle \int \frac{1}{x\sqrt{x^2 - a^2}} \, dx = \frac{1}{a}\sec^{-1}\left(\frac{|x|}{a}\right) + C$ & $(|x| > a)$ \\
+\end{tabular}
+
+\subsubsection*{Integration by Parts}
+
+\[
+\int u \, dv = uv - \int v \, du
+\]
+
+\textbf{LIATE Rule for choosing $u$:}
+\begin{enumerate}[leftmargin=2cm]
+\item[\textbf{L}] Logarithmic ($\ln x$, $\log x$)
+\item[\textbf{I}] Inverse Trigonometric ($\sin^{-1} x$, $\tan^{-1} x$, etc.)
+\item[\textbf{A}] Algebraic ($x^2$, $3x$, etc.)
+\item[\textbf{T}] Trigonometric ($\sin x$, $\cos x$, etc.)
+\item[\textbf{E}] Exponential ($e^x$, $a^x$)
+\end{enumerate}
+
+\subsubsection*{Reverse Chain Rule}
+
+\begin{tabular}{ll}
+$\displaystyle \int \frac{f'(x)}{f(x)} \, dx = \ln|f(x)| + C$ & (Logarithmic form) \\[0.3em]
+$\displaystyle \int [f(x)]^n f'(x) \, dx = \frac{[f(x)]^{n+1}}{n+1} + C$ & $(n \neq -1)$ \\
+\end{tabular}
+
+\subsubsection*{Trigonometric Identities}
+
+\begin{tabular}{ll}
+$\sin^2 x + \cos^2 x = 1$ & $1 + \tan^2 x = \sec^2 x$ \\
+$1 + \cot^2 x = \csc^2 x$ & $\sin 2x = 2\sin x \cos x$ \\
+$\cos 2x = \cos^2 x - \sin^2 x$ & $\sin^2 x = \frac{1 - \cos 2x}{2}$ \\
+$\cos^2 x = \frac{1 + \cos 2x}{2}$ & \\
+\end{tabular}
+
+\subsubsection*{Definite Integral Properties}
+
+\begin{itemize}
+\item \textbf{Odd Function:} If $f(-x) = -f(x)$, then $\displaystyle \int_{-a}^a f(x) \, dx = 0$
+\item \textbf{Even Function:} If $f(-x) = f(x)$, then $\displaystyle \int_{-a}^a f(x) \, dx = 2\int_0^a f(x) \, dx$
+\item \textbf{King's Property:} $\displaystyle \int_a^b f(x) \, dx = \int_a^b f(a+b-x) \, dx$
+\end{itemize}

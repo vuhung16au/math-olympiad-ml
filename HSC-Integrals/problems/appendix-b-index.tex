@@ -1,0 +1,198 @@
+% Appendix B: Index of Problems by Technique
+% Cross-references to help locate problems by integration method
+
+\subsubsection*{Substitution Methods}
+
+\textbf{Basic u-Substitution:}
+\begin{itemize}
+  \item Part 1, Easy \#4: $\int \frac{2x+1}{\sqrt{x^2+x+3}}dx$ (algebraic substitution)
+  \item Part 2, Easy \#1: $\int (3x+1)^5 dx$ (linear substitution)
+  \item Part 2, Easy \#2: $\int \frac{x}{\sqrt{x^2+4}}dx$ (radical with u-substitution)
+  \item Part 2, Easy \#5: $\int \sin^3 2x \cos 2x \, dx$ (trig substitution)
+  \item Part 2, Easy \#9: $\int_0^2 x\sqrt{1+x^2}dx$ (definite with substitution)
+  \item Part 2, Easy \#13: $\int \frac{6x^2}{(x^3+1)^4}dx$ (reverse chain rule power)
+\end{itemize}
+
+\textbf{Trigonometric Substitution ($\sqrt{a^2 \pm x^2}$ forms):}
+\begin{itemize}
+  \item Part 1, Hard \#1: Three-part trig substitution with reduction
+  \item Part 2, Medium \#3: $\int \frac{1}{\sqrt{6x-x^2}}dx$ (completing square + arcsin)
+  \item Part 2, Medium \#5: $\int \sqrt{16-x^2}dx$ (standard $\sqrt{a^2-x^2}$ form)
+  \item Part 2, Hard \#1: $\int \frac{x^2}{\sqrt{x^2+9}}dx$ (standard $\sqrt{x^2+a^2}$ form)
+  \item Part 2, Hard \#7: $\int \frac{\sqrt{9-x^2}}{x}dx$ (mixed trig substitution)
+\end{itemize}
+
+\textbf{t-Formula ($t = \tan(x/2)$):}
+\begin{itemize}
+  \item Part 1, Medium \#2: King's property combined with t-formula
+  \item Part 2, Medium \#12: $\int_0^{\pi/2} \frac{1}{3+5\cos x}dx$ (standard t-formula)
+\end{itemize}
+
+\textbf{Substitution Transformation Proofs:}
+\begin{itemize}
+  \item Part 1, Hard \#3: Proving two integrals equal via substitution
+  \item Part 2, Hard \#5: $\int_0^1 \ln(1+x)dx = \int_0^1 \frac{x}{1+x}dx$ proof
+\end{itemize}
+
+\subsubsection*{Integration by Parts}
+
+\textbf{Single Application:}
+\begin{itemize}
+  \item Part 1, Easy \#2: $\int x\ln x \, dx$ (LIATE: logarithm)
+  \item Part 2, Easy \#6: $\int xe^x dx$ (algebraic × exponential)
+  \item Part 2, Easy \#12: $\int x\cos x \, dx$ (algebraic × trig)
+  \item Part 2, Medium \#8: $\int x^2 \ln x \, dx$ (higher power × ln)
+\end{itemize}
+
+\textbf{Multiple Applications:}
+\begin{itemize}
+  \item Part 2, Medium \#1: $\int x^2 e^x dx$ (by parts twice)
+  \item Part 2, Hard \#11: $\int (\ln x)^2 dx$ (nested logarithms)
+\end{itemize}
+
+\textbf{Cyclic Method:}
+\begin{itemize}
+  \item Part 1, Medium \#5: $\int e^x \sin x \, dx$ using complex numbers
+  \item Part 2, Hard \#6: $\int e^x \sin x \, dx$ (traditional cyclic method)
+  \item Part 2, Medium \#15: $\int e^x \cos x \, dx$ using Euler's formula
+\end{itemize}
+
+\subsubsection*{Partial Fractions}
+
+\textbf{Linear Factors:}
+\begin{itemize}
+  \item Part 1, Easy \#1: Linear + irreducible quadratic
+  \item Part 2, Easy \#11: $\int \frac{1}{(x-1)(x+2)}dx$ (two linear factors)
+\end{itemize}
+
+\textbf{Repeated Factors:}
+\begin{itemize}
+  \item Part 2, Medium \#2: $\int \frac{2x+3}{(x-1)^2}dx$ (repeated linear)
+\end{itemize}
+
+\textbf{Irreducible Quadratics:}
+\begin{itemize}
+  \item Part 2, Hard \#3: $\int \frac{x^3+2x+1}{x^2(x^2+1)}dx$ (quadratic in denominator)
+  \item Part 2, Hard \#10: $\int \frac{x^2-3x+5}{(x-1)(x^2+4)}dx$ (linear + quadratic)
+\end{itemize}
+
+\textbf{Simplification First:}
+\begin{itemize}
+  \item Part 2, Medium \#7: $\int \frac{x^2+1}{(x-1)(x^2+1)}dx$ (cancel common factor)
+\end{itemize}
+
+\subsubsection*{Reduction Formulae}
+
+\textbf{Derivation and Application:}
+\begin{itemize}
+  \item Part 1, Medium \#1: $I_n = \int \cot^n x \, dx$ (cotangent reduction, 2-part)
+  \item Part 1, Medium \#3: $I_n = \int (\ln x)^n dx$ (logarithm reduction)
+  \item Part 2, Medium \#6: $I_n = \int_0^{\pi/2} \sin^n x \, dx$ (sine reduction)
+  \item Part 2, Hard \#2: $I_n = \int_0^{\pi/2} \cos^n x \, dx$ (cosine reduction with induction)
+  \item Part 2, Hard \#13: $I_n = \int \frac{1}{(x^2+1)^n}dx$ (rational reduction)
+\end{itemize}
+
+\textbf{With Mathematical Induction:}
+\begin{itemize}
+  \item Part 1, Hard \#2: 5-part problem with factorial series and limit proof for $e$
+\end{itemize}
+
+\subsubsection*{Reverse Chain Rule}
+
+\textbf{Recognition Patterns:}
+\begin{itemize}
+  \item Part 1, Easy \#3: $\int \left(\frac{1}{x+1} + \frac{2x}{x^2+1}\right)dx$ (ln + arctan)
+  \item Part 2, Easy \#3: $\int 2xe^{x^2}dx$ (exponential pattern)
+  \item Part 2, Easy \#7: $\int \frac{2x+3}{x^2+3x+1}dx$ (logarithm pattern)
+  \item Part 2, Medium \#14: $\int \frac{3x+5}{x^2+4}dx$ (split into ln + arctan)
+\end{itemize}
+
+\subsubsection*{Trigonometric Techniques}
+
+\textbf{Power-Reduction Identities:}
+\begin{itemize}
+  \item Part 2, Easy \#8: $\int \sin^2 x \, dx$ ($\sin^2 x = \frac{1-\cos 2x}{2}$)
+  \item Part 2, Medium \#10: $\int \sin^4 x \, dx$ (double application)
+\end{itemize}
+
+\textbf{Combined Methods:}
+\begin{itemize}
+  \item Part 1, Medium \#2: King's property + t-formula
+\end{itemize}
+
+\subsubsection*{Definite Integral Properties}
+
+\textbf{Even/Odd Functions:}
+\begin{itemize}
+  \item Part 2, Easy \#14: $\int_{-a}^{a} f(x)dx = 2\int_0^a f(x)dx$ for even functions
+\end{itemize}
+
+\textbf{King's Property ($\int_a^b f(x)dx = \int_a^b f(a+b-x)dx$):}
+\begin{itemize}
+  \item Part 1, Easy \#5: MCQ using King's property
+  \item Part 2, Medium \#4: $\int_0^{\pi/2} \frac{x}{\sin x + \cos x}dx$ (King's + t-formula)
+  \item Part 2, Medium \#9: $\int_{-1}^{1} \frac{x^2}{1+e^x}dx$ (symmetry with exponential)
+  \item Part 2, Hard \#8: $\int_0^{\pi} \frac{x\sin x}{1+\cos^2 x}dx$ (complex denominator)
+  \item Part 2, Hard \#15: $\int_0^{\pi/2} \ln(\sin x)dx$ (logarithm with King's)
+\end{itemize}
+
+\subsubsection*{Volumes of Revolution}
+
+\textbf{Disk Method:}
+\begin{itemize}
+  \item Part 2, Medium \#11: $y = \sqrt{x}$ rotated about x-axis
+\end{itemize}
+
+\textbf{Washer Method:}
+\begin{itemize}
+  \item Part 1, Hard \#5: Two regions (circle and logarithm) with ratio proof
+  \item Part 2, Hard \#4: Between $y=x^2$ and $y=\sqrt{x}$
+\end{itemize}
+
+\textbf{Shell Method:}
+\begin{itemize}
+  \item Part 2, Hard \#14: $y = x^2$ rotated about y-axis
+\end{itemize}
+
+\subsubsection*{Mechanics Applications}
+
+\textbf{Particle Motion:}
+\begin{itemize}
+  \item Part 1, Medium \#4: Velocity integration with $F = ma$
+  \item Part 2, Medium \#13: Position from velocity with initial conditions
+\end{itemize}
+
+\textbf{Simple Harmonic Motion (SHM):}
+\begin{itemize}
+  \item Part 1, Hard \#4: Inclined plane with quadratic solution
+  \item Part 2, Hard \#12: Amplitude, period, and timing calculations
+\end{itemize}
+
+\subsubsection*{Special Techniques}
+
+\textbf{Completing the Square:}
+\begin{itemize}
+  \item Part 2, Easy \#15: $\int \frac{1}{x^2+4x+13}dx$ (arctan form)
+  \item Part 2, Medium \#3: Combined with substitution for arcsin
+\end{itemize}
+
+\textbf{Complex Numbers Method:}
+\begin{itemize}
+  \item Part 1, Medium \#5: Using Euler's formula $e^{i\theta}$
+  \item Part 2, Medium \#15: $\int e^x \cos x \, dx$ via complex exponentials
+\end{itemize}
+
+\textbf{Series and Limits:}
+\begin{itemize}
+  \item Part 1, Hard \#2: Factorial series limit proof for $e$
+  \item Part 2, Hard \#9: $I_n = \int_0^1 x^n e^x dx$ with series sum
+\end{itemize}
+
+\textbf{Standard Forms:}
+\begin{itemize}
+  \item Part 2, Easy \#4: $\int \frac{1}{a^2+x^2}dx = \frac{1}{a}\arctan(x/a) + C$
+  \item Part 2, Easy \#10: $\int \frac{1}{\sqrt{a^2-x^2}}dx = \arcsin(x/a) + C$
+\end{itemize}
+
+\vspace{1em}
+\noindent\textit{Note: This index helps identify problems by technique. Many problems combine multiple methods---refer to solution strategies for complete technique breakdowns.}

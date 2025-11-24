@@ -1,0 +1,187 @@
+% Part 2: Hard Problems (15 problems with hints only - upside-down format)
+% Students attempt first, then rotate page 180° to read hint
+
+% =============================================================================
+% PROBLEM 1: Trig substitution for √(x² + a²)
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int \frac{x^2}{\sqrt{x^2 + 9}} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $x = 3\tan\theta$, $dx = 3\sec^2\theta \, d\theta$. Then $\sqrt{x^2+9} = 3\sec\theta$. Use $\tan^2\theta\sec\theta = \sec^3\theta - \sec\theta$. Answer involves $\frac{x\sqrt{x^2+9}}{2} - \frac{9}{2}\ln|x + \sqrt{x^2+9}|$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 2: Reduction formula with induction
+% =============================================================================
+\begin{problem}
+Let $I_n = \displaystyle \int_0^{\pi/2} \cos^n x \, dx$.\\
+(a) Show $I_n = \frac{n-1}{n}I_{n-2}$ for $n \geq 2$\\
+(b) Hence find $I_6$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) $I_n = \int \cos^{n-1}x \cdot \cos x \, dx$. By parts: $u = \cos^{n-1}x$, $dv = \cos x \, dx$. (b) $I_0 = \frac{\pi}{2}$, $I_2 = \frac{\pi}{4}$, $I_4 = \frac{3\pi}{16}$, $I_6 = \frac{5}{6} \cdot \frac{3\pi}{16} = \frac{5\pi}{32}$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 3: Advanced partial fractions
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int \frac{x^3 + 2x + 1}{x^2(x^2 + 1)} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{x^3 + 2x + 1}{x^2(x^2+1)} = \frac{A}{x} + \frac{B}{x^2} + \frac{Cx + D}{x^2+1}$. Solve: $A=0$, $B=1$, $C=1$, $D=1$. Answer: $-\frac{1}{x} + \frac{\ln(x^2+1)}{2} + \arctan x + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 4: Volume with washer method
+% =============================================================================
+\begin{problem}
+Find the volume when the region between $y = x^2$ and $y = \sqrt{x}$ for $0 \leq x \leq 1$ is rotated about the $x$-axis.
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Washer: $V = \pi\int_0^1 [(\sqrt{x})^2 - (x^2)^2]dx = \pi\int_0^1 (x - x^4)dx = \pi\left[\frac{x^2}{2} - \frac{x^5}{5}\right]_0^1 = \pi\left(\frac{1}{2} - \frac{1}{5}\right) = \frac{3\pi}{10}$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 5: Substitution transformation proof
+% =============================================================================
+\begin{problem}
+Show that $\displaystyle \int_0^1 \ln(1 + x) \, dx = \int_0^1 \frac{x}{1 + x} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = 1 + x$ in LHS. Then $x = u - 1$, $dx = du$. Limits: $u=1$ to $u=2$. LHS $= \int_1^2 \ln u \, du$. By parts: $\int \ln u \, du = u\ln u - u$. Evaluate and simplify to show both equal $2\ln 2 - 1$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 6: Integration by parts three times (cyclic)
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int e^x \sin x \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int e^x \sin x \, dx$. By parts twice creates: $I = e^x\sin x - e^x\cos x - I$. Solve: $2I = e^x(\sin x - \cos x)$, so $I = \frac{e^x(\sin x - \cos x)}{2} + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 7: Trig substitution for √(a² - x²) with arcsin
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int \frac{\sqrt{9 - x^2}}{x} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $x = 3\sin\theta$, $dx = 3\cos\theta \, d\theta$. Then $\sqrt{9-x^2} = 3\cos\theta$. Integral: $\int \frac{3\cos\theta}{3\sin\theta} \cdot 3\cos\theta \, d\theta = 3\int\cot\theta\cos\theta \, d\theta$. Use $\cot\theta = \frac{\cos\theta}{\sin\theta}$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 8: King's property with complex denominator
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int_0^{\pi} \frac{x \sin x}{1 + \cos^2 x} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int_0^{\pi} \frac{x\sin x}{1+\cos^2 x}dx$. King's: $I = \int_0^{\pi} \frac{(\pi-x)\sin x}{1+\cos^2 x}dx$. Add: $2I = \pi\int_0^{\pi}\frac{\sin x}{1+\cos^2 x}dx$. Let $u = \cos x$. Answer: $\frac{\pi^2}{4}$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 9: Definite integral with series expansion
+% =============================================================================
+\begin{problem}
+Let $I_n = \displaystyle \int_0^1 x^n e^x \, dx$ for $n \geq 0$.\\
+(a) Show $I_n = e - nI_{n-1}$ for $n \geq 1$\\
+(b) Find $I_4$ and use it to find $\displaystyle \sum_{k=0}^{4} \frac{4!}{k!}$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) By parts: $u = x^n$, $dv = e^x dx$. (b) Calculate: $I_0 = e-1$, $I_1 = 1$, $I_2 = e-2$, $I_3 = 6-2e$, $I_4 = 9e - 24$. Pattern: $I_n = e\sum_{k=0}^{n}(-1)^k\frac{n!}{k!} + (-1)^{n+1}n!$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 10: Partial fractions with irreducible quadratic
+% =============================================================================
+\begin{problem}
+Evaluate $\displaystyle \int \frac{x^2 - 3x + 5}{(x-1)(x^2 + 4)} \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{x^2-3x+5}{(x-1)(x^2+4)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+4}$. Solve: $A=\frac{3}{5}$, $B=\frac{2}{5}$, $C=-\frac{6}{5}$. Integrate separately: ln, ln, arctan terms.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 11: Integration by parts - product of ln
+% =============================================================================
+\begin{problem}
+Find $\displaystyle \int (\ln x)^2 \, dx$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = (\ln x)^2$, $dv = dx$. Then $du = \frac{2\ln x}{x}dx$, $v = x$. Apply by parts again to $\int \ln x \, dx$. Answer: $x(\ln x)^2 - 2x\ln x + 2x + C = x[(\ln x)^2 - 2\ln x + 2] + C$.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 12: Mechanics - SHM with integration
+% =============================================================================
+\begin{problem}
+A particle undergoes SHM with $\ddot{x} = -4(x - 3)$. At $t=0$, $x=8$ and $\dot{x}=0$.\\
+(a) Find the amplitude and period\\
+(b) Find the time taken to first reach $x = 1$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) Center $c=3$, $\omega^2=4$ so $\omega=2$. From $x(0)=8$: amplitude $A=5$. Period $T=\frac{2\pi}{\omega}=\pi$. (b) $x = 3 + 5\cos(2t)$. Solve $1 = 3 + 5\cos(2t)$: $t = \frac{1}{2}\arccos(-\frac{2}{5}) \approx 0.58$s.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 13: Reduction formula application
+% =============================================================================
+\begin{problem}
+Let $I_n = \displaystyle \int \frac{1}{(x^2 + 1)^n} \, dx$ for $n \geq 1$.\\
+Show that $(2n-1)I_n = \frac{x}{(x^2+1)^{n-1}} + (2n-2)I_{n-1}$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Write $I_n = \int \frac{x^2 + 1 - x^2}{(x^2+1)^n}dx = I_{n-1} - \int\frac{x^2}{(x^2+1)^n}dx$. By parts on second term: $u = x$, $dv = \frac{x}{(x^2+1)^n}dx$. Rearrange to get reduction formula.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 14: Volume with shell method
+% =============================================================================
+\begin{problem}
+Find the volume when the region bounded by $y = x^2$, $y = 0$, $x = 2$ is rotated about the $y$-axis.
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Shell method: $V = 2\pi\int_0^2 x \cdot x^2 \, dx = 2\pi\int_0^2 x^3 dx = 2\pi \cdot \frac{16}{4} = 8\pi$ cubic units.}}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 15: Advanced definite integral with properties
+% =============================================================================
+\begin{problem}
+Prove that $\displaystyle \int_0^{\pi/2} \ln(\sin x) \, dx = -\frac{\pi}{2}\ln 2$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int_0^{\pi/2} \ln(\sin x)dx$. King's: $I = \int_0^{\pi/2}\ln(\cos x)dx$. Add: $2I = \int_0^{\pi/2}[\ln(\sin x) + \ln(\cos x)]dx = \int_0^{\pi/2}\ln(\sin x\cos x)dx$. Use $\sin x\cos x = \frac{\sin 2x}{2}$. Substitute $u = 2x$.}}

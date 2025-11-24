@@ -1,0 +1,344 @@
+% Part 1: Medium Problems (5 problems with detailed solutions)
+
+% Problem 1: Reduction Formula with Cotangent (from sample 05.tex)
+\begin{problem}[Reduction Formula for Powers of Cotangent]
+Let $\displaystyle I_n = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n}\theta \, d\theta$ for integers $n \geq 0$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $\displaystyle I_n = \frac{1}{2n-1} - I_{n-1}$ for $n > 0$, given that $\displaystyle \frac{d}{d\theta}\cot\theta = -\csc^2\theta$.
+    \item Hence, or otherwise, calculate $I_2$.
+\end{enumerate}
+\end{problem}
+
+\textbf{Strategy:} This is a classic reduction formula problem. For part (i), we'll combine $I_n + I_{n-1}$ and use the identity $\cot^2\theta + 1 = \csc^2\theta$ to simplify, then apply substitution. For part (ii), we'll use the recurrence relation iteratively, starting from $I_0$.
+
+\begin{solution}
+\textbf{Part (i):}
+
+Consider $I_n + I_{n-1}$:
+\begin{align*}
+I_n + I_{n-1} &= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n}\theta \, d\theta + \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2(n-1)}\theta \, d\theta \\
+&= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \left( \cot^{2n}\theta + \cot^{2n-2}\theta \right) d\theta \\
+&= \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n-2}\theta \left( \cot^2\theta + 1 \right) d\theta
+\end{align*}
+
+Using the Pythagorean identity $\cot^2\theta + 1 = \csc^2\theta$:
+\[
+I_n + I_{n-1} = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} \cot^{2n-2}\theta \cdot \csc^2\theta \, d\theta
+\]
+
+\textit{Substitution:} Let $u = \cot\theta$, then $du = -\csc^2\theta \, d\theta$.
+
+Change limits:
+\begin{itemize}
+\item When $\theta = \frac{\pi}{4}$: $u = \cot\left(\frac{\pi}{4}\right) = 1$
+\item When $\theta = \frac{\pi}{2}$: $u = \cot\left(\frac{\pi}{2}\right) = 0$
+\end{itemize}
+
+Substituting:
+\begin{align*}
+I_n + I_{n-1} &= \int_{1}^{0} u^{2n-2} (-du) \\
+&= \int_{0}^{1} u^{2n-2} \, du \\
+&= \left[ \frac{u^{2n-1}}{2n-1} \right]_{0}^{1} \\
+&= \frac{1}{2n-1}
+\end{align*}
+
+Rearranging: $\boxed{I_n = \frac{1}{2n-1} - I_{n-1}}$
+
+\textbf{Part (ii):}
+
+We need $I_2$. First, calculate $I_0$ and $I_1$.
+
+\textit{Calculate $I_0$:}
+\[
+I_0 = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}} 1 \, d\theta = \left[ \theta \right]_{\frac{\pi}{4}}^{\frac{\pi}{2}} = \frac{\pi}{2} - \frac{\pi}{4} = \frac{\pi}{4}
+\]
+
+\textit{Calculate $I_1$:} Using the formula with $n=1$:
+\[
+I_1 = \frac{1}{2(1)-1} - I_0 = 1 - \frac{\pi}{4}
+\]
+
+\textit{Calculate $I_2$:} Using the formula with $n=2$:
+\begin{align*}
+I_2 &= \frac{1}{2(2)-1} - I_1 \\
+&= \frac{1}{3} - \left( 1 - \frac{\pi}{4} \right) \\
+&= \frac{1}{3} - 1 + \frac{\pi}{4} \\
+&= \boxed{\frac{\pi}{4} - \frac{2}{3}}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Reduction Formula Strategy:} Adding consecutive terms ($I_n + I_{n-1}$) can reveal simplifying identities.
+\item \textbf{Trigonometric Identities:} $\cot^2\theta + 1 = \csc^2\theta$ is key for cotangent integrals.
+\item \textbf{Substitution Choice:} $u = \cot\theta$ works well because $du = -\csc^2\theta \, d\theta$ matches our integral.
+\item \textbf{Iterative Application:} Build from base case ($I_0$) through recurrence to find any $I_n$.
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 2: King's Rule + t-Formula
+% Source: Sample 04.tex
+% Technique: Definite integral property (reflection) + Weierstrass substitution
+% =============================================================================
+
+\begin{problem}[King's Rule with t-Formula]
+Evaluate
+\[
+\int_0^{\frac{\pi}{2}} \frac{u}{1 + \sin u + \cos u} \, du
+\]
+by first using the substitution $u = \frac{\pi}{2} - x$.
+\end{problem}
+
+\textbf{Strategy:} Use King's property (reflection about midpoint) to create a self-referencing equation that simplifies the numerator. Then apply the t-formula (Weierstrass substitution) to handle the trigonometric denominator.
+
+\begin{solution}
+Let $I = \int_0^{\frac{\pi}{2}} \frac{u}{1 + \sin u + \cos u} \, du$ \quad \ldots (1)
+
+\textbf{Step 1:} Apply substitution $u = \frac{\pi}{2} - x$, so $du = -dx$.
+
+Change limits: $u=0 \implies x=\frac{\pi}{2}$, $u=\frac{\pi}{2} \implies x=0$
+
+\begin{align*}
+I &= \int_{\frac{\pi}{2}}^{0} \frac{\frac{\pi}{2} - x}{1 + \sin(\frac{\pi}{2} - x) + \cos(\frac{\pi}{2} - x)} (-dx) \\
+&= \int_{0}^{\frac{\pi}{2}} \frac{\frac{\pi}{2} - x}{1 + \cos x + \sin x} \, dx
+\end{align*}
+
+Relabel: $I = \int_{0}^{\frac{\pi}{2}} \frac{\frac{\pi}{2} - u}{1 + \sin u + \cos u} \, du$ \quad \ldots (2)
+
+\textbf{Step 2:} Add equations (1) and (2):
+\begin{align*}
+2I &= \int_0^{\frac{\pi}{2}} \frac{u + (\frac{\pi}{2} - u)}{1 + \sin u + \cos u} \, du \\
+2I &= \frac{\pi}{2} \int_0^{\frac{\pi}{2}} \frac{1}{1 + \sin u + \cos u} \, du
+\end{align*}
+
+\textbf{Step 3:} Apply t-formula. Let $t = \tan(\frac{u}{2})$:
+\[
+du = \frac{2}{1+t^2}dt, \quad \sin u = \frac{2t}{1+t^2}, \quad \cos u = \frac{1-t^2}{1+t^2}
+\]
+
+Limits: $u=0 \implies t=0$, $u=\frac{\pi}{2} \implies t=1$
+
+\begin{align*}
+2I &= \frac{\pi}{2} \int_0^{1} \frac{1}{1 + \frac{2t}{1+t^2} + \frac{1-t^2}{1+t^2}} \cdot \frac{2}{1+t^2} \, dt \\
+&= \frac{\pi}{2} \int_0^{1} \frac{2}{(1+t^2) + 2t + (1-t^2)} \, dt \\
+&= \frac{\pi}{2} \int_0^{1} \frac{2}{2 + 2t} \, dt \\
+&= \frac{\pi}{2} \int_0^{1} \frac{1}{1 + t} \, dt
+\end{align*}
+
+\textbf{Step 4:} Integrate:
+\[
+2I = \frac{\pi}{2} [\ln|1+t|]_0^1 = \frac{\pi}{2}(\ln 2 - \ln 1) = \frac{\pi}{2} \ln 2
+\]
+
+\textbf{Final Answer:}
+\[
+\boxed{I = \frac{\pi}{4} \ln 2}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{King's Property:} For $\int_a^b f(x)dx$, use $\int_a^b f(a+b-x)dx$ to create symmetry
+\item \textbf{Self-Reference:} Adding two forms of same integral can simplify complex expressions
+\item \textbf{t-Formula:} $t = \tan(\frac{x}{2})$ converts rational trig functions to rational algebraic functions
+\item \textbf{Workflow:} Simplify limits first (King's), then tackle trig terms (t-formula)
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 3: Reduction Formula for Logarithms
+% Source: Sample 11.tex
+% Technique: Integration by parts for reduction
+% =============================================================================
+
+\begin{problem}[Reduction Formula - Logarithmic Powers]
+The integral $I_n$ is defined by:
+\[
+I_n = \int_1^e (\ln x)^n \, dx \quad \text{for integers } n \ge 0
+\]
+Show that $I_n = e - nI_{n-1}$ for $n \ge 1$.
+\end{problem}
+
+\textbf{Strategy:} Use integration by parts with $u = (\ln x)^n$ and $dv = dx$. The derivative of $u$ will reduce the power of the logarithm.
+
+\begin{solution}
+\textbf{Step 1:} Choose $u$ and $dv$:
+\begin{align*}
+u &= (\ln x)^n & dv &= dx \\
+du &= n(\ln x)^{n-1} \cdot \frac{1}{x} \, dx & v &= x
+\end{align*}
+
+\textbf{Step 2:} Apply parts formula:
+\begin{align*}
+I_n &= \left[ x(\ln x)^n \right]_1^e - \int_1^e x \cdot n(\ln x)^{n-1} \cdot \frac{1}{x} \, dx \\
+&= \left[ x(\ln x)^n \right]_1^e - n \int_1^e (\ln x)^{n-1} \, dx
+\end{align*}
+
+\textbf{Step 3:} Evaluate boundary term:
+\begin{itemize}
+\item At $x = e$: $e(\ln e)^n = e(1)^n = e$
+\item At $x = 1$: $1(\ln 1)^n = 1(0)^n = 0$ (for $n \ge 1$)
+\end{itemize}
+
+\textbf{Step 4:} Recognize $I_{n-1}$:
+\[
+I_n = e - n I_{n-1} \quad \blacksquare
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Parts for Reduction:} Choose $u$ as the term you want to reduce in power
+\item \textbf{Logarithm Priority:} $\ln x$ is top choice for $u$ in LIATE
+\item \textbf{Boundary Evaluation:} Special values like $\ln(e)=1$ and $\ln(1)=0$ simplify calculations
+\item \textbf{Recurrence Relations:} Reduction formulae connect $I_n$ to simpler $I_{n-1}$ or $I_{n-2}$
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 4: Applications - Particle Motion
+% Source: Sample 02.tex (modified)
+% Technique: Newton's laws, variable separation, logarithmic integration
+% =============================================================================
+
+\begin{problem}[Applications - Particle Dynamics]
+A particle of mass $m$ kg moves along a horizontal line with initial velocity $V_0$ m/s.
+
+The motion is resisted by a constant force of $mk$ newtons and a variable force of $mv^2$ newtons, where $k$ is a positive constant and $v$ m/s is the velocity at time $t$ seconds.
+
+Show that the distance travelled when the particle comes to rest is $\displaystyle \frac{1}{2}\ln\left(\frac{k + V_0^2}{k}\right)$ metres.
+\end{problem}
+
+\textbf{Strategy:} Apply Newton's Second Law, use the kinematic identity $a = v\frac{dv}{dx}$ to change variables, then separate and integrate.
+
+\begin{solution}
+\textbf{Step 1:} Establish equation of motion using $F = ma$:
+
+Total resistive force: $F = -(mk + mv^2)$
+\[
+ma = -m(k + v^2) \implies a = -(k + v^2)
+\]
+
+\textbf{Step 2:} Change variable to displacement using $a = v\frac{dv}{dx}$:
+\[
+v \frac{dv}{dx} = -(k + v^2)
+\]
+
+\textbf{Step 3:} Separate variables:
+\[
+dx = -\frac{v}{k + v^2} \, dv
+\]
+
+\textbf{Step 4:} Integrate with limits:
+\begin{itemize}
+\item Initial: $x=0, v=V_0$
+\item Final: $x=D, v=0$ (at rest)
+\end{itemize}
+
+\[
+\int_{0}^{D} dx = \int_{V_0}^{0} -\frac{v}{k + v^2} \, dv
+\]
+
+LHS: $D$
+
+RHS: Note that $\frac{d}{dv}(k+v^2) = 2v$, so:
+\[
+\int \frac{v}{k+v^2} \, dv = \frac{1}{2} \ln(k+v^2)
+\]
+
+\textbf{Step 5:} Evaluate:
+\begin{align*}
+D &= -\left[ \frac{1}{2} \ln(k + v^2) \right]_{V_0}^{0} \\
+&= -\frac{1}{2}(\ln k - \ln(k + V_0^2)) \\
+&= \frac{1}{2}(\ln(k + V_0^2) - \ln k) \\
+&= \boxed{\frac{1}{2}\ln\left(\frac{k + V_0^2}{k}\right) \text{ metres}} \quad \blacksquare
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Variable Change:} For distance problems, use $a = v\frac{dv}{dx}$ instead of $a = \frac{dv}{dt}$
+\item \textbf{Separation:} Rearrange to get all $x$ terms on one side, all $v$ terms on other
+\item \textbf{Reverse Chain Rule:} $\int \frac{f'(x)}{f(x)}dx = \ln|f(x)|$ is crucial for rational integrands
+\item \textbf{Log Laws:} $\ln a - \ln b = \ln(\frac{a}{b})$ simplifies final answers
+\end{itemize}
+\end{takeaways}
+
+\vspace{1.5cm}
+
+% =============================================================================
+% PROBLEM 5: Complex Method - Trigonometric Powers
+% Source: Sample 08.tex (simplified version - 2 parts instead of 3)
+% Technique: Euler's formula, binomial expansion, power reduction
+% =============================================================================
+
+\begin{problem}[Complex Numbers Method]
+\begin{enumerate}[label=(\roman*)]
+\item Show that for any integer $n$, $e^{in\theta} + e^{-in\theta} = 2\cos(n\theta)$.
+\item By expanding $(e^{i\theta} + e^{-i\theta})^4$, show that
+\[
+\cos^4\theta = \frac{1}{8}\left(\cos(4\theta) + 4\cos(2\theta) + 3\right)
+\]
+\end{enumerate}
+\end{problem}
+
+\textbf{Strategy:} Use Euler's formula to convert complex exponentials to trigonometric form, then use binomial theorem and group terms to derive the power reduction formula.
+
+\begin{solution}
+\textbf{Part (i):}
+
+Using Euler's formula $e^{ix} = \cos x + i\sin x$:
+\begin{align*}
+e^{in\theta} &= \cos(n\theta) + i\sin(n\theta) \\
+e^{-in\theta} &= \cos(n\theta) - i\sin(n\theta) \quad \text{(using $\cos(-x)=\cos x$, $\sin(-x)=-\sin x$)}
+\end{align*}
+
+Adding:
+\[
+e^{in\theta} + e^{-in\theta} = 2\cos(n\theta) \quad \blacksquare
+\]
+
+\textbf{Part (ii):}
+
+From part (i) with $n=1$: $2\cos\theta = e^{i\theta} + e^{-i\theta}$
+
+Raise to power 4:
+\[
+16\cos^4\theta = (e^{i\theta} + e^{-i\theta})^4
+\]
+
+Let $z = e^{i\theta}$. By Binomial Theorem:
+\begin{align*}
+(z + z^{-1})^4 &= z^4 + 4z^3 \cdot z^{-1} + 6z^2 \cdot z^{-2} + 4z \cdot z^{-3} + z^{-4} \\
+&= z^4 + 4z^2 + 6 + 4z^{-2} + z^{-4} \\
+&= (z^4 + z^{-4}) + 4(z^2 + z^{-2}) + 6
+\end{align*}
+
+Using part (i) identity:
+\begin{align*}
+16\cos^4\theta &= 2\cos(4\theta) + 4(2\cos(2\theta)) + 6 \\
+16\cos^4\theta &= 2\cos(4\theta) + 8\cos(2\theta) + 6
+\end{align*}
+
+Divide by 16:
+\[
+\cos^4\theta = \frac{1}{8}(\cos(4\theta) + 4\cos(2\theta) + 3) \quad \blacksquare
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Euler's Bridge:} $e^{ix} = \cos x + i\sin x$ connects exponentials and trig functions
+\item \textbf{Power Reduction:} Complex methods convert high powers of trig to sums of single-angle terms
+\item \textbf{Binomial Expansion:} $(a+b)^n$ with $b=a^{-1}$ creates symmetric terms
+\item \textbf{Integration Advantage:} Reduced forms integrate easily (useful for $\int \cos^4\theta d\theta$)
+\end{itemize}
+\end{takeaways}
