@@ -7,9 +7,9 @@ This project presents a comprehensive collection of mechanics problems for HSC M
 The booklet `HSC-Mechanics.tex` is organized in two parts:
 
 - **Part 1**: Detailed step-by-step solutions (15 problems) with every force diagram, integration technique, and algebraic manipulation fully explained. Divided into basic (5), medium (5), and advanced (5) difficulty levels.
-- **Part 2**: Concise solutions with strategic hints (49 problems). Each problem includes an upside-down hint rendered via `styles/dl101-hints` to guide approach without revealing the solution. Divided into basic (11), medium (21), and advanced (17) difficulty levels.
+- **Part 2**: Concise solutions with strategic hints (65 problems). Each problem includes an upside-down hint rendered via `styles/dl101-hints` to guide approach without revealing the solution. Divided into basic (11), medium (29), and advanced (25) difficulty levels.
 
-The collection contains **64 total problems** covering all essential HSC Extension 2 mechanics topics.
+The collection contains **80 total problems** covering all essential HSC Extension 2 mechanics topics.
 
 ## What This Collection Focuses On
 
@@ -127,7 +127,7 @@ make pdf && make open
   - `01.tex` through `64.tex`: Individual mechanics problems
 - `problems/`: Organized problem files by part and difficulty that are `\input` into main TeX:
   - `part1-basic.tex`, `part1-medium.tex`, `part1-advanced.tex` (5 problems each, detailed solutions, no hints)
-  - `part2-basic.tex`, `part2-medium.tex`, `part2-advanced.tex` (11, 21, and 17 problems respectively, with hints)
+  - `part2-basic.tex`, `part2-medium.tex`, `part2-advanced.tex` (11, 29, and 25 problems respectively, with hints)
 - `solutions/`: Reserved for future standalone solution files.
 - `styles/`: Shared LaTeX style files (copied from HSC-Induction):
   - `dl101-colors.sty`: Color palette (bookpurple, bookred, bookblack, softivory)
@@ -147,13 +147,13 @@ make pdf && make open
 | Medium | 5 | Projectile with air resistance, quadratic resistance, particle systems, combined resistance |
 | Advanced | 5 | Magnetic repulsion, complex SHM, inverse square law, advanced calculus techniques |
 
-### Part 2: Hints + Solutions (49 problems)
+### Part 2: Hints + Solutions (65 problems)
 
 | Difficulty | Count | Topics Covered |
 |------------|-------|----------------|
 | Basic | 11 | SHM fundamentals, basic projectiles, simple resisted motion, Newton's laws |
-| Medium | 21 | Combined SHM, parametric projectiles, terminal velocity, multi-step integration |
-| Advanced | 17 | Bungee SHM, hyperbolic functions, exotic forces, envelope of trajectories, complex proofs |
+| Medium | 29 | Combined SHM, parametric projectiles, terminal velocity, multi-step integration |
+| Advanced | 25 | Bungee SHM, hyperbolic functions, exotic forces, envelope of trajectories, complex proofs |
 
 ## Key Techniques Covered
 

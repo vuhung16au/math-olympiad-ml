@@ -23,131 +23,37 @@ The position vector of the particle, at time $t$ seconds after the particle is p
 \end{problem}
 
 \begin{solution}
-\textbf{(i) Initial velocity vector}
-
-Given: speed $V = 40 \text{ m s}^{-1}$, angle $\theta = 30^\circ$
-
-The initial velocity components are:
-\begin{align*}
-    \v{v}(0) &= \begin{pmatrix} 40 \cos 30^\circ \\ 40 \sin 30^\circ \end{pmatrix} \\
-    &= \begin{pmatrix} 40 \times \frac{\sqrt{3}}{2} \\ 40 \times \frac{1}{2} \end{pmatrix} \\
-    &= \begin{pmatrix} 20\sqrt{3} \\ 20 \end{pmatrix} \quad \text{(shown)}
-\end{align*}
-
-\vspace{0.5cm}
-
-\textbf{(ii) Velocity vector $\v{v}(t)$}
-
-\textbf{Setup:} Using Newton's Second Law with $m=1$, $g=10$, and resistance force $4\v{v}$:
+\textbf{(i)} Given $V = 40 \text{ m s}^{-1}$, $\theta = 30^\circ$:
 \[
-m\v{a} = m\v{g} - 4\v{v} \implies \dot{\v{v}} = \begin{pmatrix} 0 \\ -10 \end{pmatrix} - 4\v{v}
+\v{v}(0) = \begin{pmatrix} 40 \cos 30^\circ \\ 40 \sin 30^\circ \end{pmatrix} = \begin{pmatrix} 40 \cdot \frac{\sqrt{3}}{2} \\ 40 \cdot \frac{1}{2} \end{pmatrix} = \begin{pmatrix} 20\sqrt{3} \\ 20 \end{pmatrix} \quad \text{(shown)}
 \]
 
-Separating into components:
+\textbf{(ii)} Newton's law with $m=1$, $g=10$, resistance $4\v{v}$ gives $\dot{\v{v}} = \begin{pmatrix} 0 \\ -10 \end{pmatrix} - 4\v{v}$, so $\ddot{x} = -4\dot{x}$ and $\ddot{y} = -10 - 4\dot{y}$.
+
+\textbf{Horizontal:} $\frac{d\dot{x}}{dt} = -4\dot{x} \implies \dot{x} = Ae^{-4t}$. With $\dot{x}(0) = 20\sqrt{3}$: $\dot{x} = 20\sqrt{3}e^{-4t}$.
+
+\textbf{Vertical:} $\frac{d\dot{y}}{dt} + 4\dot{y} = -10$. Using integrating factor $e^{4t}$: $\frac{d}{dt}(\dot{y}e^{4t}) = -10e^{4t} \implies \dot{y}e^{4t} = -\frac{5}{2}e^{4t} + C \implies \dot{y} = -\frac{5}{2} + Ce^{-4t}$.
+With $\dot{y}(0) = 20$: $C = \frac{45}{2}$, so $\dot{y} = \frac{45}{2}e^{-4t} - \frac{5}{2}$.
+
 \[
-\ddot{x} = -4\dot{x} \quad \text{and} \quad \ddot{y} = -10 - 4\dot{y}
+\boxed{\v{v}(t) = \begin{pmatrix} 20\sqrt{3}e^{-4t} \\[4pt] \frac{45}{2}e^{-4t} - \frac{5}{2} \end{pmatrix}} \quad \text{(shown)}
 \]
 
-\textbf{Horizontal component ($\dot{x}$):}
+\textbf{(iii)} Integrating velocity from $t=0$:
 
-The differential equation is:
-\[ \frac{d\dot{x}}{dt} = -4\dot{x} \]
+\textbf{Horizontal:} $x(t) = \int 20\sqrt{3}e^{-4t} dt = -5\sqrt{3}e^{-4t} + C_1$. With $x(0)=0$: $C_1 = 5\sqrt{3}$, so $x(t) = 5\sqrt{3}(1-e^{-4t})$.
 
-This is a first-order linear ODE with solution:
-\[ \dot{x} = A e^{-4t} \]
+\textbf{Vertical:} $y(t) = \int \left(\frac{45}{2}e^{-4t} - \frac{5}{2}\right) dt = -\frac{45}{8}e^{-4t} - \frac{5}{2}t + C_2$. With $y(0)=0$: $C_2 = \frac{45}{8}$, so $y(t) = \frac{45}{8}(1-e^{-4t}) - \frac{5}{2}t$.
 
-Applying initial condition $\dot{x}(0) = 20\sqrt{3}$:
-\[ 20\sqrt{3} = A e^{0} = A \]
+\[
+\boxed{\v{r}(t) = \begin{pmatrix} 5\sqrt{3}(1 - e^{-4t}) \\[4pt] \frac{45}{8}(1 - e^{-4t}) - \frac{5}{2}t \end{pmatrix}} \quad \text{(shown)}
+\]
 
-Therefore:
-\[ \dot{x} = 20\sqrt{3}e^{-4t} \]
+\textbf{(iv)} Ground impact when $y(t)=0$: $\frac{45}{8}(1-e^{-4t}) - \frac{5}{2}t = 0 \implies 45(1-e^{-4t}) = 20t \implies 1-e^{-4t} = \frac{4t}{9}$.
 
-\textbf{Vertical component ($\dot{y}$):}
+From diagram, intersection at $t \approx 2.25$. Range: $x(2.25) = 5\sqrt{3}\left(\frac{4(2.25)}{9}\right) = 5\sqrt{3}(1) = 5\sqrt{3} \approx 8.660$ metres.
 
-The differential equation is:
-\[ \frac{d\dot{y}}{dt} + 4\dot{y} = -10 \]
-
-This is a first-order linear ODE. Using integrating factor $I(t) = e^{4t}$:
-\begin{align*}
-    \frac{d}{dt}(\dot{y} e^{4t}) &= -10 e^{4t} \\
-    \dot{y} e^{4t} &= \int -10 e^{4t} dt = -\frac{10}{4}e^{4t} + C = -\frac{5}{2}e^{4t} + C \\
-    \dot{y} &= -\frac{5}{2} + Ce^{-4t}
-\end{align*}
-
-Applying initial condition $\dot{y}(0) = 20$:
-\begin{align*}
-    20 &= -\frac{5}{2} + C \\
-    C &= 20 + \frac{5}{2} = \frac{40 + 5}{2} = \frac{45}{2}
-\end{align*}
-
-Therefore:
-\[ \dot{y} = \frac{45}{2}e^{-4t} - \frac{5}{2} \]
-
-Combining both components:
-\[ \boxed{\v{v}(t) = \begin{pmatrix} 20\sqrt{3}e^{-4t} \\[4pt] \frac{45}{2}e^{-4t} - \frac{5}{2} \end{pmatrix}} \quad \text{(shown)} \]
-
-\vspace{0.5cm}
-
-\textbf{(iii) Position vector $\v{r}(t)$}
-
-We integrate the velocity components, starting from the origin at $t=0$.
-
-\textbf{Horizontal position ($x$):}
-\begin{align*}
-    x(t) &= \int 20\sqrt{3}e^{-4t} dt = 20\sqrt{3} \cdot \frac{e^{-4t}}{-4} + C_1 = -5\sqrt{3}e^{-4t} + C_1
-\end{align*}
-
-Applying $x(0) = 0$:
-\[ 0 = -5\sqrt{3} + C_1 \implies C_1 = 5\sqrt{3} \]
-
-Therefore:
-\[ x(t) = 5\sqrt{3}(1 - e^{-4t}) \]
-
-\textbf{Vertical position ($y$):}
-\begin{align*}
-    y(t) &= \int \left( \frac{45}{2}e^{-4t} - \frac{5}{2} \right) dt \\
-    &= \frac{45}{2} \cdot \frac{e^{-4t}}{-4} - \frac{5}{2}t + C_2 \\
-    &= -\frac{45}{8}e^{-4t} - \frac{5}{2}t + C_2
-\end{align*}
-
-Applying $y(0) = 0$:
-\[ 0 = -\frac{45}{8} + C_2 \implies C_2 = \frac{45}{8} \]
-
-Therefore:
-\[ y(t) = \frac{45}{8}(1 - e^{-4t}) - \frac{5}{2}t \]
-
-Combining both components:
-\[ \boxed{\v{r}(t) = \begin{pmatrix} 5\sqrt{3}(1 - e^{-4t}) \\[4pt] \frac{45}{8}(1 - e^{-4t}) - \frac{5}{2}t \end{pmatrix}} \quad \text{(shown)} \]
-
-\vspace{0.5cm}
-
-\textbf{(iv) Horizontal range}
-
-The particle hits the ground when $y(t) = 0$ (for $t > 0$):
-\[ \frac{45}{8}(1 - e^{-4t}) - \frac{5}{2}t = 0 \]
-
-Multiply by 8:
-\begin{align*}
-    45(1 - e^{-4t}) - 20t &= 0 \\
-    45(1 - e^{-4t}) &= 20t \\
-    1 - e^{-4t} &= \frac{20t}{45} = \frac{4t}{9}
-\end{align*}
-
-This equation $1 - e^{-4t} = \frac{4t}{9}$ represents the intersection of the two given graphs. From the diagram, this occurs at $t \approx 2.25$ seconds.
-
-To find the horizontal range, substitute $t = 2.25$ into $x(t)$:
-
-Using the relationship $1 - e^{-4t} = \frac{4t}{9}$ at $t = 2.25$:
-\begin{align*}
-    \text{Range} &= x(2.25) = 5\sqrt{3}\left( \frac{4(2.25)}{9} \right) \\
-    &= 5\sqrt{3} \left( \frac{9}{9} \right) \\
-    &= 5\sqrt{3} \\
-    &\approx 8.660 \text{ metres}
-\end{align*}
-
-\textbf{Answer:} \boxed{8.7 \text{ metres}} (to 1 decimal place)
-
-\textbf{Key insight:} The exponential decay of velocity due to air resistance means the projectile doesn't follow a simple parabolic path. The problem cleverly provides a graphical solution to the transcendental equation.
+\textbf{Answer:} \boxed{8.7 \text{ metres}}
 \end{solution}
 
 \begin{takeaways}
@@ -176,100 +82,31 @@ Initially the particle is at the origin and has a velocity of $40 \text{ m s}^{-
 \end{problem}
 
 \begin{solution}
-\textbf{(i) Finding velocity as a function of displacement}
-
-Given: $\ddot{x} = -kv^2$
-
-To relate $v$ and $x$, we use the identity:
-\[ \ddot{x} = v\frac{dv}{dx} \]
-
-Substituting:
-\begin{align*}
-    v\frac{dv}{dx} &= -kv^2 \\
-    \frac{dv}{dx} &= -kv \quad (\text{dividing by } v, \text{ assuming } v \neq 0)
-\end{align*}
-
-This is a separable first-order ODE:
-\begin{align*}
-    \frac{dv}{v} &= -k \, dx \\
-    \int \frac{1}{v} \, dv &= \int -k \, dx \\
-    \ln |v| &= -kx + C
-\end{align*}
-
-Apply initial conditions: when $x=0$, $v=40$:
-\[ \ln 40 = -k(0) + C \implies C = \ln 40 \]
-
-Substituting back:
-\begin{align*}
-    \ln v &= -kx + \ln 40 \\
-    \ln v - \ln 40 &= -kx \\
-    \ln\left(\frac{v}{40}\right) &= -kx \\
-    \frac{v}{40} &= e^{-kx} \\
-    v &= 40e^{-kx}
-\end{align*}
+\textbf{(i)} Given $\ddot{x} = -kv^2$, use $\ddot{x} = v\frac{dv}{dx}$:
+\[
+v\frac{dv}{dx} = -kv^2 \implies \frac{dv}{dx} = -kv \implies \frac{dv}{v} = -kdx \implies \ln|v| = -kx + C
+\]
+With $v(0)=40$: $C = \ln 40$, so $\ln v = -kx + \ln 40 \implies \ln\left(\frac{v}{40}\right) = -kx \implies v = 40e^{-kx}$.
 
 \boxed{v = 40e^{-kx}} \quad \text{(shown)}
 
-\vspace{0.5cm}
-
-\textbf{(ii) Finding the constant $k$}
-
-We're given that when $x=15$, $v=10$. Substitute into the equation from part (i):
-\begin{align*}
-    10 &= 40e^{-k(15)} \\
-    \frac{10}{40} &= e^{-15k} \\
-    \frac{1}{4} &= e^{-15k}
-\end{align*}
-
-Take natural logarithm of both sides:
-\begin{align*}
-    \ln\left(\frac{1}{4}\right) &= -15k \\
-    -\ln 4 &= -15k \\
-    k &= \frac{\ln 4}{15}
-\end{align*}
+\textbf{(ii)} With $v=10$ at $x=15$:
+\[
+10 = 40e^{-15k} \implies \frac{1}{4} = e^{-15k} \implies \ln\left(\frac{1}{4}\right) = -15k \implies k = \frac{\ln 4}{15}
+\]
 
 \boxed{k = \frac{\ln 4}{15}} \quad \text{(shown)}
 
-\vspace{0.5cm}
+\textbf{(iii)} Using $\frac{dv}{dt} = -kv^2$, separate variables: $\frac{dv}{v^2} = -kdt$.
 
-\textbf{(iii) Finding time when $v=30$}
+Integrate from $(t=0, v=40)$ to $(t=T, v=30)$:
+\[
+\int_{40}^{30} v^{-2}dv = \int_0^T -kdt \implies \left[-v^{-1}\right]_{40}^{30} = -kT \implies -\frac{1}{30} + \frac{1}{40} = -kT \implies \frac{-1}{120} = -kT
+\]
 
-To find time, we use $\ddot{x} = \frac{dv}{dt}$:
-\[ \frac{dv}{dt} = -kv^2 \]
+Thus $T = \frac{1}{120k} = \frac{1}{120 \cdot \frac{\ln 4}{15}} = \frac{15}{120\ln 4} = \frac{1}{8\ln 4}$.
 
-Separate variables:
-\begin{align*}
-    \frac{dv}{v^2} &= -k \, dt \\
-    \int \frac{1}{v^2} \, dv &= \int -k \, dt
-\end{align*}
-
-Integrate from initial state ($t=0$, $v=40$) to the state when $v=30$ (at time $t=T$):
-\begin{align*}
-    \int_{40}^{30} v^{-2} \, dv &= \int_{0}^{T} -k \, dt \\
-    \left[ -v^{-1} \right]_{40}^{30} &= [-kt]_{0}^{T} \\
-    \left( -\frac{1}{30} \right) - \left( -\frac{1}{40} \right) &= -kT \\
-    -\frac{1}{30} + \frac{1}{40} &= -kT
-\end{align*}
-
-Find common denominator for the left side:
-\begin{align*}
-    \frac{-4 + 3}{120} &= -kT \\
-    -\frac{1}{120} &= -kT \\
-    T &= \frac{1}{120k}
-\end{align*}
-
-Substitute $k = \frac{\ln 4}{15}$:
-\begin{align*}
-    T &= \frac{1}{120 \cdot \frac{\ln 4}{15}} \\
-    &= \frac{15}{120 \ln 4} \\
-    &= \frac{1}{8 \ln 4}
-\end{align*}
-
-\textbf{Answer:} \boxed{T = \frac{1}{8 \ln 4} \text{ seconds}}
-
-Alternatively: $T = \frac{1}{8 \ln 4} = \frac{1}{16 \ln 2} \approx 0.090$ seconds
-
-\textbf{Key insight:} Quadratic resistance leads to exponential decay in velocity with position, but requires integration of $1/v^2$ to find time. The particle asymptotically approaches rest but never actually stops in finite time.
+\textbf{Answer:} \boxed{T = \frac{1}{8 \ln 4} \text{ seconds}} $\approx 0.090$ seconds
 \end{solution}
 
 \begin{takeaways}
@@ -301,105 +138,25 @@ Derive the Cartesian equation of the motion of the particle, given $\sin \theta 
 \end{problem}
 
 \begin{solution}
-\textbf{Step 1: Initial conditions}
+Given $V = 50 \text{ m s}^{-1}$, $\sin\theta = \frac{3}{5}$ below horizontal: $\cos\theta = \frac{4}{5}$, so $\dot{x}(0) = 40$, $\dot{y}(0) = -30$, $x(0)=y(0)=0$.
 
-Given: speed $V = 50 \text{ m s}^{-1}$, angle $\theta$ below horizontal, $\sin \theta = \frac{3}{5}$
+\textbf{Horizontal motion:} $\ddot{x} = -k\dot{x} \implies \dot{x} = 40e^{-kt} \implies x = \frac{40}{k}(1-e^{-kt})$, so $e^{-kt} = 1 - \frac{kx}{40}$.
 
-From the Pythagorean identity with the 3-4-5 triangle:
-$$ \cos \theta = \frac{4}{5} $$
+\textbf{Vertical motion:} $\ddot{y} = -k\dot{y} - 10$. Separating: $\frac{d\dot{y}}{k\dot{y}+10} = -dt \implies \frac{1}{k}\ln|k\dot{y}+10| = -t + C_3$.
 
-Initial velocity components at $t=0$:
-\begin{align*}
-    \dot{x}(0) &= 50 \cos \theta = 50 \left(\frac{4}{5}\right) = 40 \\
-    \dot{y}(0) &= -50 \sin \theta = -50 \left(\frac{3}{5}\right) = -30 \quad \text{(negative, downward)}
-\end{align*}
+With $\dot{y}(0)=-30$: $C_3 = \frac{1}{k}\ln|10-30k|$, so $\ln\left|\frac{k\dot{y}+10}{10-30k}\right| = -kt \implies \dot{y} = \left(\frac{10}{k}-30\right)e^{-kt} - \frac{10}{k}$.
 
-Initial position: $x(0) = 0$, $y(0) = 0$
+Integrating: $y = -\frac{1}{k}\left(\frac{10}{k}-30\right)e^{-kt} - \frac{10t}{k} + C_4$. With $y(0)=0$: $C_4 = \frac{1}{k}\left(\frac{10}{k}-30\right)$, thus
+\[
+y = \frac{1}{k}\left(\frac{10}{k}-30\right)(1-e^{-kt}) - \frac{10t}{k}
+\]
 
-\textbf{Step 2: Horizontal motion}
+\textbf{Eliminate $t$:} From $e^{-kt} = 1-\frac{kx}{40}$: $t = -\frac{1}{k}\ln\left(1-\frac{kx}{40}\right)$. Substituting and using $1-e^{-kt} = \frac{kx}{40}$:
+\[
+y = \frac{1}{k}\left(\frac{10}{k}-30\right) \cdot \frac{kx}{40} + \frac{10}{k^2}\ln\left(1-\frac{kx}{40}\right) = \frac{x}{4k} - \frac{3x}{4} + \frac{10}{k^2}\ln\left(1-\frac{kx}{40}\right)
+\]
 
-Equation: $\ddot{x} = -k\dot{x}$
-
-Integrating:
-\[ \dot{x} = C_1 e^{-kt} \]
-
-With $\dot{x}(0) = 40$:
-\[ \dot{x} = 40e^{-kt} \]
-
-Integrating again:
-\[ x = \int 40e^{-kt} \, dt = -\frac{40}{k}e^{-kt} + C_2 \]
-
-With $x(0) = 0$:
-\[ 0 = -\frac{40}{k} + C_2 \implies C_2 = \frac{40}{k} \]
-
-Therefore:
-\begin{equation}
-    x = \frac{40}{k}(1 - e^{-kt}) \label{eq:x_pos}
-\end{equation}
-
-From equation \eqref{eq:x_pos}, we can express $e^{-kt}$:
-\begin{equation}
-    e^{-kt} = 1 - \frac{kx}{40} \label{eq:exp_kt}
-\end{equation}
-
-\textbf{Step 3: Vertical motion}
-
-Equation: $\ddot{y} = -k\dot{y} - 10$
-
-Rearranging:
-\[ \frac{d\dot{y}}{dt} = -(k\dot{y} + 10) \]
-
-Separate variables:
-\begin{align*}
-    \frac{d\dot{y}}{k\dot{y} + 10} &= -dt \\
-    \int \frac{1}{k\dot{y} + 10} \, d\dot{y} &= \int -1 \, dt \\
-    \frac{1}{k} \ln|k\dot{y} + 10| &= -t + C_3
-\end{align*}
-
-With $\dot{y}(0) = -30$:
-\[ C_3 = \frac{1}{k} \ln|k(-30) + 10| = \frac{1}{k} \ln|10 - 30k| \]
-
-Therefore:
-\begin{align*}
-    \ln\left|\frac{k\dot{y} + 10}{10 - 30k}\right| &= -kt \\
-    k\dot{y} + 10 &= (10 - 30k)e^{-kt} \\
-    \dot{y} &= \frac{10 - 30k}{k}e^{-kt} - \frac{10}{k} \\
-    \dot{y} &= \left(\frac{10}{k} - 30\right)e^{-kt} - \frac{10}{k}
-\end{align*}
-
-Integrating to find $y$:
-\begin{align*}
-    y &= \int \left[ \left(\frac{10}{k} - 30\right)e^{-kt} - \frac{10}{k} \right] dt \\
-    &= \left(\frac{10}{k} - 30\right) \cdot \frac{e^{-kt}}{-k} - \frac{10t}{k} + C_4 \\
-    &= -\frac{1}{k}\left(\frac{10}{k} - 30\right)e^{-kt} - \frac{10t}{k} + C_4
-\end{align*}
-
-With $y(0) = 0$:
-\[ C_4 = \frac{1}{k}\left(\frac{10}{k} - 30\right) \]
-
-Therefore:
-\begin{equation}
-    y = \frac{1}{k}\left(\frac{10}{k} - 30\right)(1 - e^{-kt}) - \frac{10t}{k} \label{eq:y_pos}
-\end{equation}
-
-\textbf{Step 4: Derive Cartesian equation}
-
-From equation \eqref{eq:x_pos}: $1 - e^{-kt} = \frac{kx}{40}$
-
-Also, from $e^{-kt} = 1 - \frac{kx}{40}$, taking logarithm:
-\[ -kt = \ln\left(1 - \frac{kx}{40}\right) \implies t = -\frac{1}{k}\ln\left(1 - \frac{kx}{40}\right) \]
-
-Substitute into equation \eqref{eq:y_pos}:
-\begin{align*}
-    y &= \frac{1}{k}\left(\frac{10}{k} - 30\right) \cdot \frac{kx}{40} + \frac{10}{k^2}\ln\left(1 - \frac{kx}{40}\right) \\
-    &= \frac{x}{40}\left(\frac{10}{k} - 30\right) + \frac{10}{k^2}\ln\left(1 - \frac{kx}{40}\right) \\
-    &= \frac{x}{4k} - \frac{3x}{4} + \frac{10}{k^2}\ln\left(1 - \frac{kx}{40}\right)
-\end{align*}
-
-\textbf{Final Answer:}
-$$ \boxed{y = \frac{x}{4}\left(\frac{1}{k} - 3\right) + \frac{10}{k^2}\ln\left(1 - \frac{kx}{40}\right)} $$
-
-\textbf{Key insight:} Linear resistance in a vector field requires solving coupled differential equations. The logarithmic term in the trajectory equation is characteristic of exponential decay in velocity components.
+\textbf{Answer:} $\boxed{y = \frac{x}{4}\left(\frac{1}{k} - 3\right) + \frac{10}{k^2}\ln\left(1 - \frac{kx}{40}\right)}$
 \end{solution}
 
 \begin{takeaways}
@@ -428,108 +185,26 @@ The particle $A$ is initially $d$ metres directly above particle $B$, where $d <
 \end{problem}
 
 \begin{solution}
-\textbf{Setup and coordinate system}
+Origin at $B$'s initial position, upward positive. Both particles satisfy $\ddot{x} = -g - k\dot{x}$ with $m=1$.
 
-Let origin be at particle $B$'s initial position. Upward direction is positive.
+\textbf{Particle B:} $x_B(0)=0$, $\dot{x}_B(0)=v_0$. 
 
-\textbf{Forces and equation of motion:}
+Separating: $\frac{d\dot{x}}{g+k\dot{x}} = -dt \implies \frac{1}{k}\ln(g+k\dot{x}) = -t + C_1$. With $\dot{x}(0)=v_0$: $C_1 = \frac{1}{k}\ln(g+kv_0)$, so $\dot{x}_B = \frac{1}{k}[(g+kv_0)e^{-kt} - g]$.
 
-For mass $m=1$, Newton's Second Law gives:
-\begin{equation}
-    \ddot{x} = -g - k\dot{x} \label{eq:motion_gen}
-\end{equation}
+Integrating with $x_B(0)=0$: $x_B(t) = \frac{g+kv_0}{k^2}(1-e^{-kt}) - \frac{gt}{k}$.
 
-This applies to both particles.
+\textbf{Particle A:} $x_A(0)=d$, $\dot{x}_A(0)=-v_0$. 
 
-\textbf{Particle B (projected upwards):}
+Similarly: $\dot{x}_A = \frac{1}{k}[(g-kv_0)e^{-kt} - g]$ and $x_A(t) = d + \frac{g-kv_0}{k^2}(1-e^{-kt}) - \frac{gt}{k}$.
 
-Initial conditions: $x_B(0) = 0$, $\dot{x}_B(0) = v_0$
+\textbf{Meeting time:} Set $x_A(t) = x_B(t)$. The $-\frac{gt}{k}$ terms cancel:
+\[
+d + \frac{g-kv_0}{k^2}(1-e^{-kt}) = \frac{g+kv_0}{k^2}(1-e^{-kt}) \implies d = \frac{2kv_0}{k^2}(1-e^{-kt}) = \frac{2v_0}{k}(1-e^{-kt})
+\]
 
-Solve equation \eqref{eq:motion_gen} for velocity:
-\begin{align*}
-    \frac{d\dot{x}}{dt} &= -(g + k\dot{x}) \\
-    \frac{d\dot{x}}{g + k\dot{x}} &= -dt \\
-    \frac{1}{k} \ln(g + k\dot{x}) &= -t + C_1
-\end{align*}
+Thus $e^{-kt} = 1 - \frac{kd}{2v_0} = \frac{2v_0-kd}{2v_0} \implies t = -\frac{1}{k}\ln\left(\frac{2v_0-kd}{2v_0}\right) = \frac{1}{k}\ln\left(\frac{2v_0}{2v_0-kd}\right)$.
 
-With $\dot{x}(0) = v_0$:
-\[ C_1 = \frac{1}{k} \ln(g + kv_0) \]
-
-Therefore:
-\begin{align*}
-    \ln\left(\frac{g + k\dot{x}}{g + kv_0}\right) &= -kt \\
-    \dot{x}_B(t) &= \frac{1}{k} \left[ (g + kv_0)e^{-kt} - g \right]
-\end{align*}
-
-Integrate for position:
-\begin{align*}
-    x_B(t) &= \int \left( \frac{g+kv_0}{k}e^{-kt} - \frac{g}{k} \right) dt \\
-    &= -\frac{g+kv_0}{k^2}e^{-kt} - \frac{gt}{k} + C_2
-\end{align*}
-
-With $x_B(0) = 0$:
-\[ C_2 = \frac{g+kv_0}{k^2} \]
-
-Therefore:
-\begin{equation}
-    x_B(t) = \frac{g+kv_0}{k^2}(1 - e^{-kt}) - \frac{gt}{k} \label{eq:pos_B}
-\end{equation}
-
-\textbf{Particle A (projected downwards):}
-
-Initial conditions: $x_A(0) = d$, $\dot{x}_A(0) = -v_0$
-
-Following the same procedure with $\dot{x}(0) = -v_0$:
-\[ C_3 = \frac{1}{k} \ln(g - kv_0) \]
-
-Note: $g - kv_0 > 0$ since $v_0 < \frac{g}{k}$.
-
-Therefore:
-\[ \dot{x}_A(t) = \frac{1}{k} \left[ (g - kv_0)e^{-kt} - g \right] \]
-
-Integrating:
-\begin{align*}
-    x_A(t) &= -\frac{g-kv_0}{k^2}e^{-kt} - \frac{gt}{k} + C_4
-\end{align*}
-
-With $x_A(0) = d$:
-\[ C_4 = d + \frac{g-kv_0}{k^2} \]
-
-Therefore:
-\begin{equation}
-    x_A(t) = d + \frac{g-kv_0}{k^2}(1 - e^{-kt}) - \frac{gt}{k} \label{eq:pos_A}
-\end{equation}
-
-\textbf{Finding meeting time:}
-
-Particles meet when $x_A(t) = x_B(t)$. Equating \eqref{eq:pos_A} and \eqref{eq:pos_B}:
-\begin{align*}
-    d + \frac{g-kv_0}{k^2}(1 - e^{-kt}) - \frac{gt}{k} &= \frac{g+kv_0}{k^2}(1 - e^{-kt}) - \frac{gt}{k}
-\end{align*}
-
-The $-\frac{gt}{k}$ terms cancel:
-\begin{align*}
-    d + \frac{g-kv_0}{k^2}(1 - e^{-kt}) &= \frac{g+kv_0}{k^2}(1 - e^{-kt}) \\
-    d &= \left[ \frac{g+kv_0 - (g-kv_0)}{k^2} \right] (1 - e^{-kt}) \\
-    d &= \frac{2kv_0}{k^2} (1 - e^{-kt}) \\
-    d &= \frac{2v_0}{k} (1 - e^{-kt})
-\end{align*}
-
-Solve for $t$:
-\begin{align*}
-    \frac{kd}{2v_0} &= 1 - e^{-kt} \\
-    e^{-kt} &= 1 - \frac{kd}{2v_0} = \frac{2v_0 - kd}{2v_0} \\
-    -kt &= \ln\left( \frac{2v_0 - kd}{2v_0} \right) \\
-    t &= -\frac{1}{k} \ln\left( \frac{2v_0 - kd}{2v_0} \right)
-\end{align*}
-
-Using logarithm property $-\ln(a/b) = \ln(b/a)$:
-
-\textbf{Answer:} \boxed{t = \frac{1}{k} \ln\left( \frac{2v_0}{2v_0 - kd} \right) \text{ seconds}}
-
-\textbf{Verification:} The condition $d < \frac{2v_0}{k}$ ensures $2v_0 - kd > 0$, so the argument of the logarithm is positive and greater than 1, giving $t > 0$.
-
-\textbf{Key insight:} Even though both particles experience the same resistance law, their different initial velocities lead to different position functions. The symmetry in the problem allows the $gt/k$ terms to cancel, simplifying the solution.
+\textbf{Answer:} $\boxed{t = \frac{1}{k}\ln\left(\frac{2v_0}{2v_0-kd}\right) \text{ seconds}}$
 \end{solution}
 
 \begin{takeaways}
@@ -559,126 +234,25 @@ A particle of unit mass moves in a straight line against a resistance numericall
 \end{problem}
 
 \begin{solution}
-\textbf{Setup:}
+Given $m=1$, resistance $R = v(1+v^2)$, ICs: $x(0)=0$, $v(0)=Q$. Equation of motion: $\ddot{x} = -v(1+v^2)$.
 
-Given: mass $m=1$, resistance $R = v + v^3 = v(1+v^2)$, initial conditions: $x(0)=0$, $v(0)=Q$
+\textbf{(a)} Using $v\frac{dv}{dx} = -v(1+v^2) \implies \frac{dv}{1+v^2} = -dx$, integrate: $\tan^{-1}v = -x + C$. With $x(0)=0$, $v(0)=Q$: $C = \tan^{-1}Q$, so $x = \tan^{-1}Q - \tan^{-1}v$. Apply identity $\tan^{-1}A - \tan^{-1}B = \tan^{-1}\left(\frac{A-B}{1+AB}\right)$:
 
-Equation of motion:
-\[ \ddot{x} = -(v+v^3) = -v(1+v^2) \]
+\boxed{x = \tan^{-1}\left(\frac{Q-v}{1+Qv}\right)} \quad \text{(shown)}
 
-\textbf{(a) Velocity and displacement}
+\textbf{(b)} Using $\frac{dv}{dt} = -v(1+v^2) \implies \frac{dv}{v(1+v^2)} = -dt$. Partial fractions: $\frac{1}{v(1+v^2)} = \frac{1}{v} - \frac{v}{1+v^2}$. Integrate: $\ln v - \frac{1}{2}\ln(1+v^2) = -t + C_2 \implies \frac{1}{2}\ln\left(\frac{v^2}{1+v^2}\right) = -t + C_2$. With $t=0$, $v=Q$: $C_2 = \frac{1}{2}\ln\left(\frac{Q^2}{1+Q^2}\right)$. Thus:
 
-Use $\ddot{x} = v\frac{dv}{dx}$:
-\begin{align*}
-    v \frac{dv}{dx} &= -v(1+v^2) \\
-    \frac{dv}{dx} &= -(1+v^2) \quad \text{(dividing by } v \neq 0\text{)} \\
-    \frac{dv}{1+v^2} &= -dx
-\end{align*}
+\boxed{t = \frac{1}{2}\ln\frac{Q^2(1+v^2)}{v^2(1+Q^2)}} \quad \text{(shown)}
 
-Integrate both sides:
-\begin{align*}
-    \int \frac{1}{1+v^2} \, dv &= \int -1 \, dx \\
-    \tan^{-1} v &= -x + C
-\end{align*}
-
-Apply initial conditions ($x=0$, $v=Q$):
-\[ \tan^{-1} Q = C \]
-
-Therefore:
-\[ x = \tan^{-1} Q - \tan^{-1} v \]
-
-Using the inverse tangent subtraction identity:
-\[ \tan^{-1} A - \tan^{-1} B = \tan^{-1} \left( \frac{A-B}{1+AB} \right) \]
-
-\boxed{x = \tan^{-1} \left( \frac{Q-v}{1+Qv} \right)} \quad \text{(shown)}
-
-\vspace{0.5cm}
-
-\textbf{(b) Velocity and time}
-
-Use $\ddot{x} = \frac{dv}{dt}$:
-\begin{align*}
-    \frac{dv}{dt} &= -v(1+v^2) \\
-    \frac{dv}{v(1+v^2)} &= -dt
-\end{align*}
-
-Use partial fractions: $\frac{1}{v(1+v^2)} = \frac{A}{v} + \frac{Bv+C}{1+v^2}$
-
-Solving: $A=1$, $B=-1$, $C=0$
-
-Therefore:
-\[ \frac{1}{v(1+v^2)} = \frac{1}{v} - \frac{v}{1+v^2} \]
-
-Integrate:
-\begin{align*}
-    \int \left( \frac{1}{v} - \frac{v}{1+v^2} \right) dv &= \int -1 \, dt \\
-    \ln v - \frac{1}{2} \ln(1+v^2) &= -t + C_2 \\
-    \frac{1}{2} \ln \left( \frac{v^2}{1+v^2} \right) &= -t + C_2
-\end{align*}
-
-Apply initial conditions ($t=0$, $v=Q$):
-\[ C_2 = \frac{1}{2} \ln \left( \frac{Q^2}{1+Q^2} \right) \]
-
-Therefore:
-\begin{align*}
-    t &= C_2 - \frac{1}{2} \ln \left( \frac{v^2}{1+v^2} \right) \\
-    &= \frac{1}{2} \ln \left( \frac{Q^2}{1+Q^2} \cdot \frac{1+v^2}{v^2} \right)
-\end{align*}
-
-\boxed{t = \frac{1}{2} \ln \frac{Q^2(1+v^2)}{v^2(1+Q^2)}} \quad \text{(shown)}
-
-\vspace{0.5cm}
-
-\textbf{(c) $v^2$ as a function of $t$}
-
-From part (b):
-\begin{align*}
-    2t &= \ln \left( \frac{Q^2(1+v^2)}{v^2(1+Q^2)} \right) \\
-    e^{2t} &= \frac{Q^2}{1+Q^2} \cdot \frac{1+v^2}{v^2} \\
-    e^{2t} &= \frac{Q^2}{1+Q^2} \left( \frac{1}{v^2} + 1 \right)
-\end{align*}
-
-Let $K = \frac{Q^2}{1+Q^2}$:
-\begin{align*}
-    e^{2t} &= K \left( \frac{1}{v^2} + 1 \right) \\
-    \frac{e^{2t}}{K} - 1 &= \frac{1}{v^2} \\
-    \frac{1}{v^2} &= \frac{e^{2t} - K}{K} \\
-    v^2 &= \frac{K}{e^{2t} - K}
-\end{align*}
-
-Substitute back $K = \frac{Q^2}{1+Q^2}$:
-\begin{align*}
-    v^2 &= \frac{\frac{Q^2}{1+Q^2}}{e^{2t} - \frac{Q^2}{1+Q^2}}
-\end{align*}
-
-Multiply numerator and denominator by $(1+Q^2)$:
+\textbf{(c)} From part (b): $2t = \ln\left(\frac{Q^2(1+v^2)}{v^2(1+Q^2)}\right) \implies e^{2t} = \frac{Q^2}{1+Q^2}\left(\frac{1}{v^2}+1\right)$. Let $K=\frac{Q^2}{1+Q^2}$: $\frac{e^{2t}}{K}-1 = \frac{1}{v^2} \implies v^2 = \frac{K}{e^{2t}-K}$. Substituting $K$ and multiplying by $(1+Q^2)$:
 
 \boxed{v^2 = \frac{Q^2}{(1+Q^2)e^{2t} - Q^2}}
 
-\vspace{0.5cm}
+\textbf{(d)} As $t \to \infty$: $\lim_{t\to\infty} v^2 = \lim_{t\to\infty}\frac{Q^2}{(1+Q^2)e^{2t}-Q^2} = 0$, so \boxed{\lim_{t\to\infty} v = 0}
 
-\textbf{(d) Limiting values as $t \to \infty$}
+From part (a), as $v \to 0$: $\lim_{t\to\infty} x = \tan^{-1}\left(\frac{Q-0}{1+0}\right) = \tan^{-1}(Q)$, so \boxed{\lim_{t\to\infty} x = \tan^{-1}(Q)}
 
-\textbf{Limiting velocity:}
-\begin{align*}
-    \lim_{t \to \infty} v^2 &= \lim_{t \to \infty} \frac{Q^2}{(1+Q^2)e^{2t} - Q^2} \\
-    &= \frac{Q^2}{\infty} = 0
-\end{align*}
-
-Therefore: \boxed{\lim_{t \to \infty} v = 0}
-
-\textbf{Limiting displacement:}
-
-From part (a), as $v \to 0$:
-\begin{align*}
-    \lim_{t \to \infty} x &= \lim_{v \to 0} \tan^{-1}\left(\frac{Q-v}{1+Qv}\right) \\
-    &= \tan^{-1}\left(\frac{Q-0}{1+0}\right) \\
-    &= \tan^{-1}(Q)
-\end{align*}
-
-\boxed{\lim_{t \to \infty} x = \tan^{-1}(Q)}
-
-\textbf{Key insight:} The cubic resistance term $v^3$ dominates at high velocities, causing rapid deceleration. As $t \to \infty$, the particle approaches rest at a finite distance $\tan^{-1}(Q)$ from the origin, demonstrating that strong resistance can prevent infinite displacement.
+The cubic resistance $v^3$ dominates at high velocities. The particle stops at finite distance $\tan^{-1}(Q)$ as $t \to \infty$.
 \end{solution}
 
 \begin{takeaways}

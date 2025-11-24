@@ -86,86 +86,13 @@ The acceleration of a particle is given by $\ddot{x} = 32x(x^2 + 3)$, where $x$ 
 \end{problem}
 
 \begin{solution}
-\textbf{(i) Finding the velocity function}
+\textbf{(i)} Use $\ddot{x} = \frac{d}{dx}\left(\frac{1}{2}v^2\right)$ with $\ddot{x} = 32x^3 + 96x$:
+\[ \frac{1}{2}v^2 = \int (32x^3 + 96x) \, dx = 8x^4 + 48x^2 + C \]
 
-\textbf{Approach:} We have acceleration as a function of displacement. We use the identity:
-\[ \ddot{x} = \frac{d}{dx}\left(\frac{1}{2}v^2\right) \]
+At $t=0$: $x=0$, $v = -12$ gives $144 = 2C$, so $C = 72$. Thus $v^2 = 16x^4 + 96x^2 + 144 = 16(x^2 + 3)^2$. Taking negative root (particle moves in negative direction): $\boxed{v = -4(x^2 + 3)}$
 
-Given: $\ddot{x} = 32x(x^2 + 3) = 32x^3 + 96x$
-
-Applying the identity:
-\begin{align*}
-    \frac{d}{dx}\left(\frac{1}{2}v^2\right) &= 32x^3 + 96x
-\end{align*}
-
-Integrate both sides with respect to $x$:
-\begin{align*}
-    \frac{1}{2}v^2 &= \int (32x^3 + 96x) \, dx \\
-    &= 32 \cdot \frac{x^4}{4} + 96 \cdot \frac{x^2}{2} + C \\
-    &= 8x^4 + 48x^2 + C
-\end{align*}
-
-Multiply by 2:
-\[ v^2 = 16x^4 + 96x^2 + 2C \]
-
-\textbf{Apply initial conditions:} At $t=0$, $x=0$ and $v = -12$ (negative direction):
-\begin{align*}
-    (-12)^2 &= 16(0)^4 + 96(0)^2 + 2C \\
-    144 &= 2C \\
-    C &= 72
-\end{align*}
-
-Therefore:
-\[ v^2 = 16x^4 + 96x^2 + 144 \]
-
-Factor the right side:
-\begin{align*}
-    v^2 &= 16(x^4 + 6x^2 + 9) \\
-    &= 16(x^2 + 3)^2
-\end{align*}
-
-Take the square root:
-\[ v = \pm 4(x^2 + 3) \]
-
-Since the particle moves in the negative direction initially and $x^2 + 3$ is always positive (meaning $v$ maintains constant sign), we take the negative case:
-\[ \boxed{v = -4(x^2 + 3)} \]
-
-\vspace{0.5cm}
-
-\textbf{(ii) Time to travel 3 metres from the origin}
-
-Since $v = -4(x^2+3) < 0$, the particle moves in the negative direction. To travel 3 metres from the origin means moving from $x = 0$ to $x = -3$.
-
-We use $v = \frac{dx}{dt}$:
-\begin{align*}
-    \frac{dx}{dt} &= -4(x^2 + 3) \\
-    \frac{dt}{dx} &= \frac{-1}{4(x^2 + 3)} \\
-    dt &= \frac{-1}{4(x^2 + 3)} \, dx
-\end{align*}
-
-Integrate from $x = 0$ to $x = -3$:
-\[ t = \int_{0}^{-3} \frac{-1}{4(x^2 + 3)} \, dx \]
-
-Factor out the constant:
-\[ t = -\frac{1}{4} \int_{0}^{-3} \frac{1}{x^2 + 3} \, dx \]
-
-Use the standard integral $\int \frac{1}{a^2 + x^2} \, dx = \frac{1}{a}\tan^{-1}\left(\frac{x}{a}\right)$ with $a = \sqrt{3}$:
-\begin{align*}
-    t &= -\frac{1}{4} \left[ \frac{1}{\sqrt{3}} \tan^{-1}\left(\frac{x}{\sqrt{3}}\right) \right]_{0}^{-3} \\
-    &= -\frac{1}{4\sqrt{3}} \left[ \tan^{-1}\left(\frac{-3}{\sqrt{3}}\right) - \tan^{-1}(0) \right] \\
-    &= -\frac{1}{4\sqrt{3}} \left[ \tan^{-1}(-\sqrt{3}) - 0 \right]
-\end{align*}
-
-Since $\tan^{-1}(-\sqrt{3}) = -\frac{\pi}{3}$:
-\begin{align*}
-    t &= -\frac{1}{4\sqrt{3}} \left( -\frac{\pi}{3} \right) \\
-    &= \frac{\pi}{12\sqrt{3}}
-\end{align*}
-
-Rationalize the denominator:
-\[ t = \frac{\pi}{12\sqrt{3}} \cdot \frac{\sqrt{3}}{\sqrt{3}} = \frac{\pi\sqrt{3}}{36} \text{ seconds} \]
-
-\textbf{Answer:} \boxed{t = \frac{\pi\sqrt{3}}{36} \text{ seconds}}
+\textbf{(ii)} From $\frac{dx}{dt} = -4(x^2 + 3)$, we have $dt = \frac{-dx}{4(x^2 + 3)}$. Integrating from $x = 0$ to $x = -3$:
+\[ t = -\frac{1}{4} \int_{0}^{-3} \frac{dx}{x^2 + 3} = -\frac{1}{4\sqrt{3}} \left[ \tan^{-1}\left(\frac{x}{\sqrt{3}}\right) \right]_{0}^{-3} = -\frac{1}{4\sqrt{3}} \left( -\frac{\pi}{3} \right) = \frac{\pi\sqrt{3}}{36} \text{ seconds} \]
 \end{solution}
 
 \begin{takeaways}
@@ -187,77 +114,17 @@ Assume no air resistance.
 \end{problem}
 
 \begin{solution}
-\textbf{Approach:} We'll derive the trajectory equation, substitute the target point $(a,b)$, and analyze when there are two distinct projection angles.
+From $x = ut\cos\theta$ and $y = ut\sin\theta - \frac{1}{2}gt^2$, eliminate $t = \frac{x}{u\cos\theta}$ to get trajectory:
+\[ y = x\tan\theta - \frac{gx^2}{2u^2}(1 + \tan^2\theta) \]
 
-\textbf{Step 1: Establish the equations of motion}
+At point $(a,b)$: $b = a\tan\theta - \frac{ga^2}{2u^2}(1 + \tan^2\theta)$. Let $T = \tan\theta$ and multiply by $2u^2$:
+\[ ga^2 T^2 - 2u^2a T + (ga^2 + 2u^2b) = 0 \]
 
-Let the angle of projection be $\theta$ to the horizontal. The equations of motion are:
-\begin{align}
-    x &= ut \cos\theta \label{eq:x} \\
-    y &= ut \sin\theta - \frac{1}{2}gt^2 \label{eq:y}
-\end{align}
+For two distinct trajectories, discriminant $\Delta > 0$:
+\[ \Delta = 4u^4a^2 - 4ga^2(ga^2 + 2u^2b) = 4a^2(u^4 - g^2a^2 - 2u^2gb) > 0 \]
 
-\textbf{Step 2: Derive the trajectory equation}
-
-From equation \eqref{eq:x}, solve for $t$:
-$$ t = \frac{x}{u \cos\theta} $$
-
-Substitute into equation \eqref{eq:y}:
-\begin{align*}
-    y &= u\left( \frac{x}{u \cos\theta} \right) \sin\theta - \frac{1}{2}g \left( \frac{x}{u \cos\theta} \right)^2 \\
-    &= x \tan\theta - \frac{gx^2}{2u^2 \cos^2\theta}
-\end{align*}
-
-Using the identity $\sec^2\theta = 1 + \tan^2\theta$:
-\begin{equation}
-    y = x \tan\theta - \frac{gx^2}{2u^2} (1 + \tan^2\theta) \label{eq:traj}
-\end{equation}
-
-\textbf{Step 3: Substitute the target point $(a,b)$}
-
-Since the particle passes through $(a,b)$, substitute $x=a$ and $y=b$:
-$$ b = a \tan\theta - \frac{ga^2}{2u^2} (1 + \tan^2\theta) $$
-
-\textbf{Step 4: Form a quadratic in $\tan\theta$}
-
-Let $T = \tan\theta$. Multiply by $2u^2$:
-\begin{align*}
-    2u^2b &= 2u^2a T - ga^2(1 + T^2) \\
-    2u^2b &= 2u^2a T - ga^2 - ga^2 T^2
-\end{align*}
-
-Rearrange into standard form:
-$$ ga^2 T^2 - 2u^2a T + (ga^2 + 2u^2b) = 0 $$
-
-\textbf{Step 5: Analyze the discriminant}
-
-For two distinct trajectories, the quadratic must have two distinct real roots, so the discriminant $\Delta > 0$.
-
-With $A = ga^2$, $B = -2u^2a$, $C = ga^2 + 2u^2b$:
-\begin{align*}
-    \Delta &= B^2 - 4AC \\
-    &= (-2u^2a)^2 - 4(ga^2)(ga^2 + 2u^2b) \\
-    &= 4u^4a^2 - 4g^2a^4 - 8u^2g a^2 b
-\end{align*}
-
-For $\Delta > 0$ (assuming $a \neq 0$), divide by $4a^2$:
-$$ u^4 - g^2a^2 - 2u^2gb > 0 $$
-
-\textbf{Step 6: Complete the square}
-
-Rearrange:
-$$ u^4 - 2u^2gb - g^2a^2 > 0 $$
-
-Add and subtract $g^2b^2$:
-\begin{align*}
-    u^4 - 2u^2gb + g^2b^2 - g^2b^2 - g^2a^2 &> 0 \\
-    (u^2 - gb)^2 - g^2(a^2 + b^2) &> 0 \\
-    (u^2 - gb)^2 &> g^2(a^2 + b^2)
-\end{align*}
-
-This is the required condition. \qed
-
-\textbf{Physical interpretation:} The condition ensures that the initial kinetic energy $(u^2)$ minus the potential energy gained reaching height $b$ (represented by $gb$) is sufficiently large compared to the total "distance" to the target.
+Dividing by $4a^2$ and completing the square (add/subtract $g^2b^2$):
+\[ u^4 - 2u^2gb - g^2a^2 > 0 \implies (u^2-gb)^2 - g^2b^2 - g^2a^2 > 0 \implies (u^2-gb)^2 > g^2(a^2+b^2) \qed \]
 \end{solution}
 
 \begin{takeaways}
@@ -371,70 +238,18 @@ Which of the following statements about the motion of the particle is always tru
 \end{problem}
 
 \begin{solution}
-\textbf{Approach:} Analyze the motion in two cases: downward and upward initial motion.
+With resistive force $R = kv$ and terminal velocity $v_T = \frac{mg}{k}$ (when $mg = kv$):
 
-\textbf{Setup:}
+\textbf{Case 1: Downward motion} ($a = g - \frac{k}{m}v$)
 \begin{itemize}
-    \item Mass: $m$, Velocity: $v$, Gravity: $g$
-    \item Resistive force: $R = kv$ (proportional to velocity)
-    \item Terminal velocity (when resistance balances gravity): $v_T = \frac{mg}{k}$
+    \item If $v_0 < v_T$: $a > 0$, particle speeds up toward $v_T$
+    \item If $v_0 > v_T$: $a < 0$, particle slows down toward $v_T$
 \end{itemize}
+Since initial speed relative to $v_T$ is unknown, statements A and B are not always true.
 
-\textbf{Case 1: Particle initially moving downwards}
+\textbf{Case 2: Upward motion} ($a = -g - \frac{k}{m}v < 0$ always)
 
-Let downward be positive. Newton's Second Law:
-\[ ma = mg - kv \]
-\[ a = g - \frac{k}{m}v \]
-
-\begin{center}
-\begin{tikzpicture}
-    \draw[fill=black] (0,0) circle (0.1);
-    \draw[->, thick, bookpurple] (0,0) -- (0,-1.5) node[right] {$mg$};
-    \draw[->, thick, bookpurple] (0,0) -- (0,1.0) node[right] {$kv$};
-    \node at (2,0) {Motion: Down $\downarrow$};
-\end{tikzpicture}
-\end{center}
-
-Analysis:
-\begin{itemize}
-    \item If $v_0 < v_T$: then $mg > kv_0$, so $a > 0$. Particle speeds up toward $v_T$.
-    \item If $v_0 > v_T$: then $mg < kv_0$, so $a < 0$. Particle slows down toward $v_T$.
-\end{itemize}
-
-Since we don't know whether $v_0 < v_T$ or $v_0 > v_T$, neither statement \textbf{A} nor \textbf{B} is always true.
-
-\textbf{Case 2: Particle initially moving upwards}
-
-Let upward be positive. Both gravity and resistance oppose motion:
-\[ ma = -mg - kv \]
-\[ a = -\left(g + \frac{k}{m}v\right) < 0 \]
-
-\begin{center}
-\begin{tikzpicture}
-    \draw[fill=black] (0,0) circle (0.1);
-    \draw[->, thick, bookpurple] (0,0) -- (0,-1.5) node[right] {$mg$};
-    \draw[->, thick, bookpurple] (0,0) -- (0,-0.8) node[left] {$kv$};
-    \draw[->, dashed, bookred] (0.5, 0) -- (0.5, 1) node[right] {$v$};
-    \node at (2,0) {Motion: Up $\uparrow$};
-\end{tikzpicture}
-\end{center}
-
-Analysis:
-\begin{itemize}
-    \item Acceleration is always negative, so the particle decelerates.
-    \item The particle will momentarily come to rest ($v=0$) at maximum height.
-    \item Once at rest, gravity causes it to fall downward.
-    \item Once falling, it enters Case 1 (downward motion).
-    \item As shown in Case 1, a falling particle approaches terminal velocity $v_T$.
-\end{itemize}
-
-Therefore, regardless of initial upward speed, the particle will eventually approach terminal velocity.
-
-\textbf{Conclusion:} Statement \textbf{C} is always true.
-
-\textbf{Answer:} \boxed{\text{C}}
-
-\textbf{Key insight:} The critical difference is that upward motion must eventually reverse (becoming downward), at which point terminal velocity is approached. Downward motion behavior depends on initial speed relative to terminal velocity.
+Particle decelerates, reaches maximum height, reverses to downward motion, then approaches $v_T$ (Case 1). Therefore statement \textbf{C} is always true. $\boxed{\text{C}}$
 \end{solution}
 
 \begin{takeaways}

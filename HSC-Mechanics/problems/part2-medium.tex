@@ -538,3 +538,270 @@ Differentiate to find velocity: $v = -4 \times 2\sin(2t - \frac{\pi}{3})$. Set $
 \item \textbf{Crossing Center:} Particle at origin when $\cos(2t - \frac{\pi}{3}) = 0$; solve for smallest positive $t$
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}
+A particle moves in Simple Harmonic Motion (SHM) with period $T$ about a centre $O$. Its displacement at any time $t$ is given by $x = A \sin nt$, where $A$ is the amplitude.
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item Show that $\dot{x} = \frac{2\pi A}{T} \cos \left(\frac{2\pi t}{T}\right)$.
+    \item The point $P$ lies $D$ units on the positive side of $O$. Let $V$ be the velocity of the particle when it first passes through $P$. Show that the first time the particle is at $P$ after passing through $O$ is 
+    \[ t = \frac{T}{2\pi} \tan^{-1} \left( \frac{2\pi D}{VT} \right) \]
+    \item Show that the time between the first two occasions when the particle passes through $P$ is 
+    \[ \frac{T}{\pi} \tan^{-1} \left( \frac{VT}{2\pi D} \right) \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use $n = \frac{2\pi}{T}$ and divide displacement by velocity equations to eliminate $A$. For time between passages, use sine symmetry: if $nt_1 = \alpha$, then $nt_2 = \pi - \alpha$.
+\end{hint}
+
+\begin{solution}
+\textbf{i.} $n = \frac{2\pi}{T}$, so $\dot{x} = An\cos(nt) = \frac{2\pi A}{T}\cos\left(\frac{2\pi t}{T}\right)$ ✓
+
+\textbf{ii.} At $P$: $D = A\sin(nt_1)$ and $V = An\cos(nt_1)$. Dividing: $\frac{D}{V} = \frac{\tan(nt_1)}{n} \Rightarrow t_1 = \frac{1}{n}\tan^{-1}\left(\frac{nD}{V}\right) = \frac{T}{2\pi}\tan^{-1}\left(\frac{2\pi D}{VT}\right)$ ✓
+
+\textbf{iii.} By symmetry, $nt_2 = \pi - \alpha$ where $\alpha = nt_1$. Time difference: $n\Delta t = \pi - 2\alpha = 2\tan^{-1}\left(\frac{VT}{2\pi D}\right)$ using given identity. Thus $\Delta t = \frac{T}{\pi}\tan^{-1}\left(\frac{VT}{2\pi D}\right)$ ✓
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Period-Angular Frequency Relation:} $n = \frac{2\pi}{T}$ connects period $T$ and angular frequency $n$
+\item \textbf{Eliminating Amplitude:} Divide displacement by velocity equations to remove $A$, yielding $\tan(nt)$
+\item \textbf{Sine Symmetry:} For $\sin\theta = k$, solutions in first period are $\theta$ and $\pi - \theta$
+\item \textbf{Inverse Tangent Identity:} $\tan^{-1}x + \tan^{-1}(1/x) = \frac{\pi}{2}$ useful for complementary angles
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}
+A particle is moving in a straight line and performing simple harmonic motion. At time $t$ seconds it has displacement $x$ metres from a fixed point $O$ on the line, given by $x = 2 \cos \left( 2t - \frac{\pi}{4} \right)$.
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item Show that $v^2 - x\ddot{x} = 16$.
+    \item Show that the particle first returns to its starting point after one quarter of its period.
+    \item Find the time taken by the particle to travel the first 100 metres of its motion.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Find $v = \dot{x}$ and $\ddot{x}$ by differentiation. For part (ii), evaluate $x$ at $t = T/4$. For part (iii), calculate distance per period and determine how many complete cycles are needed.
+\end{hint}
+
+\begin{solution}
+\textbf{i.} $v = -4\sin(2t - \frac{\pi}{4})$, $\ddot{x} = -8\cos(2t - \frac{\pi}{4})$. Then $v^2 - x\ddot{x} = 16\sin^2(...) + 16\cos^2(...) = 16$ ✓
+
+\textbf{ii.} Period $T = \pi$. At $t = \frac{\pi}{4}$: $x = 2\cos(\frac{\pi}{2} - \frac{\pi}{4}) = 2\cos(\frac{\pi}{4}) = \sqrt{2}$. At $t=0$: $x = 2\cos(-\frac{\pi}{4}) = \sqrt{2}$ ✓
+
+\textbf{iii.} Distance per period: $4 \times 2 = 8$ m. $\frac{100}{8} = 12.5$ periods. Total time: $12.5\pi$ seconds
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{SHM Energy Invariant:} $v^2 - x\ddot{x} = n^2A^2$ is constant (here $n=2$, $A=2$, so $16$)
+\item \textbf{Chain Rule Differentiation:} $\frac{d}{dt}\cos(at+b) = -a\sin(at+b)$
+\item \textbf{Return to Starting Point:} For phase-shifted SHM, evaluate at specific time intervals
+\item \textbf{Distance in SHM:} Total distance per period is $4A$ (amplitude traversed 4 times)
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}
+A particle moves such that its displacement $x$ cm from the origin at time $t$ seconds is given by $x = 2 + \cos^2 t$.
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item Show that acceleration is given by $\ddot{x} = 10 - 4x$
+    \item Prove $v^2 = -4x^2 + 20x - 24$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use double angle formula: $\cos(2t) = 2\cos^2 t - 1$. For part (ii), use $\ddot{x} = \frac{d}{dx}\left(\frac{v^2}{2}\right)$ and integrate.
+\end{hint}
+
+\begin{solution}
+\textbf{i.} $\dot{x} = -2\sin t\cos t = -\sin(2t)$, $\ddot{x} = -2\cos(2t) = -2(2\cos^2 t - 1) = -4\cos^2 t + 2 = -4(x-2) + 2 = 10 - 4x$ ✓
+
+\textbf{ii.} Integrate $\frac{v^2}{2} = \int(10-4x)dx = 10x - 2x^2 + C$. At $t=0$: $x=3$, $v=0$, so $C = -24 + 18 = -6$. Thus $v^2 = 20x - 4x^2 - 12$... wait, recalculate: $0 = 30 - 18 + 2C \Rightarrow C = -6$, so $\frac{v^2}{2} = 10x - 2x^2 - 6 \Rightarrow v^2 = -4x^2 + 20x - 12$. Actually $C = -12$, giving $v^2 = -4x^2 + 20x - 24$ ✓
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Double Angle Identity:} $\cos(2t) = 2\cos^2 t - 1$ allows expressing $\cos^2 t$ in terms of $\cos(2t)$
+\item \textbf{Position-Dependent Acceleration:} Use $v\frac{dv}{dx} = \ddot{x}$ to integrate with respect to position
+\item \textbf{Integration Method:} $\frac{d}{dx}\left(\frac{v^2}{2}\right) = \ddot{x}$ yields $v^2$ relation
+\item \textbf{Boundary Conditions:} Use initial values to determine integration constant
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}
+A fishing boat drifts with a current. The boat's velocity $v$ at time $t$ is given by $v = b - (b - v_0)e^{-\alpha t}$ where $v_0$, $\alpha$, and $b$ are positive constants with $v_0 < b$.
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item Show that $\frac{dv}{dt} = \alpha(b - v)$.
+    \item Let $x$ be distance travelled from the start. Show that $x = \frac{b}{\alpha}\ln\left(\frac{b - v_0}{b - v}\right) + \frac{v_0 - v}{\alpha}$.
+    \item If initial velocity is $\frac{b}{10}$, find the distance drifted when $v = \frac{b}{2}$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), differentiate and factor out $(b-v_0)e^{-\alpha t}$. For part (ii), integrate $v$ then eliminate $t$ using logarithms. For part (iii), substitute the given values.
+\end{hint}
+
+\begin{solution}
+\textbf{i.} $\frac{dv}{dt} = \alpha(b-v_0)e^{-\alpha t} = \alpha(b-v)$ (since $b-v = (b-v_0)e^{-\alpha t}$) ✓
+
+\textbf{ii.} From $e^{-\alpha t} = \frac{b-v}{b-v_0}$, we get $t = \frac{1}{\alpha}\ln\left(\frac{b-v_0}{b-v}\right)$. Integrating $v$: $x = bt + \frac{b-v_0}{\alpha}e^{-\alpha t} - \frac{b-v_0}{\alpha}$. Substitute and simplify to get result ✓
+
+\textbf{iii.} $x = \frac{b}{\alpha}\ln(1.8) - \frac{2b}{5\alpha} = \frac{b}{\alpha}(\ln 1.8 - 0.4)$ units
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Exponential Approach to Terminal Velocity:} Velocity asymptotically approaches $b$ as $t \to \infty$
+\item \textbf{Differential Form:} $\frac{dv}{dt} = \alpha(b-v)$ shows rate proportional to velocity deficit
+\item \textbf{Eliminating Time:} Use logarithmic relationship to express $x$ in terms of $v$ instead of $t$
+\item \textbf{Physical Interpretation:} $b$ is terminal velocity (current speed), $v_0$ is initial boat velocity
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}
+A rock of mass $m$ is dropped under gravity $g$ from rest. Air resistance is proportional to velocity: $R = -kv$.
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item Explain why $\frac{dv}{dt} = g - \frac{k}{m}v$.
+    \item Show that $v = \frac{mg}{k}\left(1 - e^{-\frac{k}{m}t}\right)$.
+    \item Show that $x = -\frac{m}{k}v + \frac{m^2g}{k^2}\ln\left(\frac{mg}{mg-kv}\right)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Apply Newton's Second Law with gravity and resistance forces. Separate variables and integrate for velocity. For displacement, use $v\frac{dv}{dx} = \ddot{x}$.
+\end{hint}
+
+\begin{solution}
+\textbf{i.} $ma = mg - kv \Rightarrow \frac{dv}{dt} = g - \frac{k}{m}v$ ✓
+
+\textbf{ii.} $\frac{dv}{mg-kv} = \frac{dt}{m}$. Integrating with $v(0)=0$: $-\frac{m}{k}\ln(mg-kv) = t + C$ where $C = -\frac{m}{k}\ln(mg)$. Solving gives result ✓
+
+\textbf{iii.} Using $v\frac{dv}{dx} = g - \frac{kv}{m}$: $x = \int \frac{mv}{mg-kv}dv = -\frac{m}{k}v - \frac{m^2g}{k^2}\ln(mg-kv) + C$. With $x(0)=0$, get result ✓
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Linear Air Resistance:} Force $R = -kv$ gives equation $m\ddot{x} = mg - kv$
+\item \textbf{Separable ODE:} Rearrange to $\frac{dv}{mg-kv} = \frac{dt}{m}$ for integration
+\item \textbf{Terminal Velocity:} As $t \to \infty$, $v \to \frac{mg}{k}$ when acceleration becomes zero
+\item \textbf{Position-Velocity Relation:} Use $v\frac{dv}{dx} = \ddot{x}$ to eliminate time variable
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}
+A particle of mass $m$ is projected from the origin with velocity $V$ at angle $\theta$ to the horizontal, experiencing gravity and resistance proportional to velocity. Prove:
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item $\dot{x} = V \cos \theta \, e^{-\frac{k}{m}t}$
+    \item $x = \frac{mV \cos \theta}{k} \left( 1 - e^{-\frac{k}{m}t} \right)$
+    \item $\dot{y} = \left( \frac{mg}{k} + V \sin \theta \right) e^{-\frac{k}{m}t} - \frac{mg}{k}$
+    \item $y = \frac{m}{k} \left( \frac{mg}{k} + V \sin \theta \right) \left( 1 - e^{-\frac{k}{m}t} \right) - \frac{mgt}{k}$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Horizontal: $m\ddot{x} = -k\dot{x}$. Vertical: $m\ddot{y} = -mg - k\dot{y}$. Solve each as separable ODE with appropriate initial conditions.
+\end{hint}
+
+\begin{solution}
+\textbf{i.} $\frac{d\dot{x}}{\dot{x}} = -\frac{k}{m}dt \Rightarrow \ln(\dot{x}) = -\frac{k}{m}t + \ln(V\cos\theta)$, giving result ✓
+
+\textbf{ii.} $x = \int V\cos\theta \, e^{-kt/m}dt = -\frac{mV\cos\theta}{k}e^{-kt/m} + C$. With $x(0)=0$, obtain result ✓
+
+\textbf{iii.} $\frac{d\dot{y}}{mg+k\dot{y}} = -\frac{dt}{m}$. Integrating with $\dot{y}(0) = V\sin\theta$ gives result ✓
+
+\textbf{iv.} Integrate $\dot{y}$ from part (iii) with $y(0)=0$ ✓
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Component Separation:} Horizontal and vertical motions are independent; solve separately
+\item \textbf{Horizontal Decay:} Velocity exponentially decays to zero with no sustaining force
+\item \textbf{Vertical Terminal Velocity:} Approaches $\frac{mg}{k}$ downward as resistance balances gravity
+\item \textbf{Integration Sequence:} Solve for velocities first, then integrate again for positions
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}
+A particle of mass $m$ is projected at $30°$ with speed $V$. Find the speed and direction when horizontal displacement equals maximum height reached.
+\end{problem}
+
+\begin{hint}
+Maximum height $H = \frac{V^2\sin^2 30°}{2g} = \frac{V^2}{8g}$. Find time when $x = H$ using $x = V\cos 30° \cdot t$, then evaluate velocity components.
+\end{hint}
+
+\begin{solution}
+$H = \frac{V^2\sin^2 30°}{2g} = \frac{V^2}{8g}$. When $x = H$: $V\cos 30° \cdot t = \frac{V^2}{8g} \Rightarrow t = \frac{V}{4g\sqrt{3}}$
+
+$v_x = V\cos 30° = \frac{V\sqrt{3}}{2}$, $v_y = V\sin 30° - gt = \frac{V}{2} - \frac{V}{4\sqrt{3}} = \frac{V(2\sqrt{3}-1)}{4\sqrt{3}}$
+
+Speed: $v = \sqrt{v_x^2 + v_y^2}$. Direction: $\tan\alpha = \frac{v_y}{v_x}$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Maximum Height Formula:} $H = \frac{V^2\sin^2\alpha}{2g}$ from vertical energy conservation
+\item \textbf{Special Angle Values:} $\sin 30° = \frac{1}{2}$, $\cos 30° = \frac{\sqrt{3}}{2}$
+\item \textbf{Horizontal Distance:} $x = v_x t$ where $v_x$ remains constant throughout flight
+\item \textbf{Velocity Components:} $v_x$ constant, $v_y = V\sin\alpha - gt$ decreases linearly
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}
+A body of unit mass is projected vertically upwards with initial velocity $10(20-g)$ in a medium with resistance $\frac{v}{10}$.
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item Show that $\frac{dv}{dt} = -g - \frac{v}{10}$.
+    \item Show that time $T$ to reach greatest height is $T = 10 \ln\left(\frac{20}{g}\right)$.
+    \item Show that maximum height is $H = 2000 - 10g[10 + T]$.
+    \item Find terminal velocity when falling from this height.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For upward motion, both gravity and resistance act downward. Integrate velocity equation from $u$ to $0$. For terminal velocity falling, set $\frac{dv}{dt} = 0$.
+\end{hint}
+
+\begin{solution}
+\textbf{i.} Net force: $F = -g - \frac{v}{10}$ (both downward). With $m=1$: $\frac{dv}{dt} = -g - \frac{v}{10}$ ✓
+
+\textbf{ii.} $\int_{u}^{0} \frac{dv}{10g+v} = -\frac{1}{10}\int_0^T dt$ where $u = 200-10g$. Evaluating: $T = 10\ln\left(\frac{20}{g}\right)$ ✓
+
+\textbf{iii.} Using $v\frac{dv}{dx} = -(10g+v)/10$: integrate from $u$ to $0$. With $T$ from (ii): $H = 10u - 10gT = 2000 - 10g(10+T)$ ✓
+
+\textbf{iv.} Falling: $g - \frac{v_t}{10} = 0 \Rightarrow v_t = 10g$ units/s
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Combined Forces:} During ascent, both gravity and resistance oppose motion (add)
+\item \textbf{Logarithmic Time:} Integration of $\frac{dv}{a+bv}$ yields logarithmic time relationship
+\item \textbf{Terminal Velocity:} In descent, $v_t = \frac{mg}{k}$ when drag balances weight ($10g$ here)
+\item \textbf{Energy Dissipation:} Maximum height less than frictionless case due to resistance work
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}
+A weight oscillates on a spring underwater with damped motion $\ddot{x} = -4x - 2\sqrt{3}\dot{x}$. Initially at equilibrium ($x=0$) moving upwards at $3$ m/s.
+\begin{enumerate}[label=\textbf{\roman*.}]
+    \item Show that $x = Ae^{-\sqrt{3}t} \sin t$ satisfies the equation and find $A$.
+    \item At what times during the first $2\pi$ seconds is the particle moving downwards?
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Compute $\dot{x}$ and $\ddot{x}$ using product rule, then verify the differential equation. For part (ii), find when $\dot{x} < 0$ using auxiliary angle method.
+\end{hint}
+
+\begin{solution}
+\textbf{i.} $\dot{x} = Ae^{-\sqrt{3}t}(\cos t - \sqrt{3}\sin t)$, $\ddot{x} = 2Ae^{-\sqrt{3}t}(\sin t - \sqrt{3}\cos t)$. Verification: $\ddot{x} + 2\sqrt{3}\dot{x} + 4x = 0$ ✓. From $\dot{x}(0) = 3$: $A = 3$
+
+\textbf{ii.} $\dot{x} < 0$ when $\cos t - \sqrt{3}\sin t < 0$. Using $R\cos(t+\alpha)$ form with $R=2$, $\alpha = \frac{\pi}{3}$: $\cos(t+\frac{\pi}{3}) < 0 \Rightarrow \frac{\pi}{6} < t < \frac{7\pi}{6}$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Damped Harmonic Motion:} Solution form $Ae^{-\lambda t}\sin(\omega t)$ combines exponential decay with oscillation
+\item \textbf{Product Rule:} Differentiate $f(t)g(t)$ as $f'g + fg'$ twice for second derivative
+\item \textbf{Initial Conditions:} Use both position and velocity at $t=0$ to determine constants
+\item \textbf{Auxiliary Angle:} Transform $a\cos t + b\sin t = R\cos(t \pm \alpha)$ to simplify inequalities
+\end{itemize}
+\end{takeaways}

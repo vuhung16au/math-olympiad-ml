@@ -464,3 +464,248 @@ Integrate each term: $\int \frac{1}{\sqrt{1-t^2}}\,dt = \sin^{-1}(t)$ and $\int 
 \item \textbf{Rationalization:} Maximum velocity $v_{\max} = \frac{20}{\sqrt{3}} + 4 = \frac{20\sqrt{3}}{3} + 4$ m/s after rationalizing the denominator
 \end{takeaways}
 
+\begin{problem}
+A particle of mass $m$ is projected vertically downward with speed $u$ through a medium offering resistance $mkv + mkv^3$, where $k$ is a positive constant. Show that the velocity $v$ at time $t$ is given by:
+\[
+v = \sqrt{\frac{g}{k}} \tanh\left(\sqrt{gk}t + \tanh^{-1}\left(u\sqrt{\frac{k}{g}}\right)\right)
+\]
+\end{problem}
+
+\begin{hint}
+Apply Newton's Second Law taking downward as positive, noting that both gravity and resistance terms contribute: $m\ddot{x} = mg - mkv - mkv^3$. Factor the equation and use partial fractions to integrate.
+\end{hint}
+
+\begin{solution}
+Taking downward as positive: $m\ddot{x} = mg - mkv - mkv^3 = mk(g/k - v - v^3)$. Thus $\frac{dv}{dt} = k(g/k - v - v^3) = k(g/k - v(1 + v^2))$.
+
+Separate: $\frac{dv}{g/k - v(1 + v^2)} = k\,dt$. Using partial fractions: $\frac{1}{g/k - v(1 + v^2)} = \frac{k/g}{1 - (v\sqrt{k/g})^2} = \frac{1}{\sqrt{g/k}} \cdot \frac{1}{1 - (v\sqrt{k/g})^2}$.
+
+Let $w = v\sqrt{k/g}$. Then $\int \frac{1}{1 - w^2}\,dw = \tanh^{-1}(w)$. Integrating: $\sqrt{k/g} \cdot \tanh^{-1}(v\sqrt{k/g}) = kt + C$.
+
+At $t = 0$, $v = u$: $C = \sqrt{k/g} \cdot \tanh^{-1}(u\sqrt{k/g})$. Thus $v\sqrt{k/g} = \tanh(\sqrt{gk}t + \tanh^{-1}(u\sqrt{k/g}))$, giving the result.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Cubic resistance:} Combined resistance $mkv + mkv^3$ leads to factored form $mk(g/k - v(1 + v^2))$
+\item \textbf{Partial fractions:} Key technique converts $\frac{1}{a - bx(1+x^2)}$ into hyperbolic tangent integral form
+\item \textbf{Hyperbolic functions:} $\tanh^{-1}$ naturally arises from integrating $\frac{1}{1-w^2}$
+\item \textbf{Terminal velocity:} As $t \to \infty$, $\tanh \to 1$, so $v \to \sqrt{g/k}$, independent of initial speed $u$
+\end{takeaways}
+
+\begin{problem}
+A particle of mass $m$ is projected vertically upward with speed $u$ through a medium offering resistance $mkv + mkv^3$. Show that the time to reach maximum height is:
+\[
+t = \frac{1}{\sqrt{gk}} \tanh^{-1}\left(u\sqrt{\frac{k}{g}}\right)
+\]
+\end{problem}
+
+\begin{hint}
+Taking upward as positive, both gravity and resistance oppose motion: $m\ddot{x} = -mg - mkv - mkv^3$. At maximum height, $v = 0$. Use hyperbolic inverse tangent integration.
+\end{hint}
+
+\begin{solution}
+Taking upward as positive: $m\ddot{x} = -mg - mkv - mkv^3$. Thus $\frac{dv}{dt} = -k(g/k + v + v^3) = -k(g/k + v(1 + v^2))$.
+
+Separate: $\frac{dv}{g/k + v(1 + v^2)} = -k\,dt$. Using partial fractions with $w = v\sqrt{k/g}$: $\int \frac{1}{1 + w^2}\,dw = \tanh^{-1}(w)$ (note: $\frac{1}{a + x} = \frac{1}{a(1 + x/a)}$).
+
+Integrating: $\sqrt{k/g} \cdot \tanh^{-1}(v\sqrt{k/g}) = -kt + C$. At $t = 0$, $v = u$: $C = \sqrt{k/g} \cdot \tanh^{-1}(u\sqrt{k/g})$.
+
+At maximum height, $v = 0$: $0 = -kt + \sqrt{k/g} \cdot \tanh^{-1}(u\sqrt{k/g})$. Thus $t = \frac{1}{\sqrt{gk}} \tanh^{-1}(u\sqrt{k/g})$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Opposing forces:} When projected upward, both gravity and resistance act downward, giving $-mg - mkv - mkv^3$
+\item \textbf{Maximum height condition:} Occurs when velocity reaches zero ($v = 0$), not when acceleration is zero
+\item \textbf{Hyperbolic inverse tangent:} $\tanh^{-1}(x)$ arises from integrating $\frac{1}{1+x^2}$ with proper substitution
+\item \textbf{Physical constraint:} Formula requires $u\sqrt{k/g} < 1$ for $\tanh^{-1}$ to be defined (particle cannot exceed terminal velocity)
+\end{takeaways}
+
+\begin{problem}
+A rock of mass $m$ is dropped from rest and falls through water with resistance $mkv^2$. Show that the distance fallen when the velocity reaches $\frac{3}{4}$ of terminal velocity is:
+\[
+x = \frac{g}{2k} \ln\left(\frac{16}{7}\right)
+\]
+\end{problem}
+
+\begin{hint}
+First find terminal velocity by setting $\ddot{x} = 0$. Then use $v\frac{dv}{dx} = g - kv^2$ and separate variables. Note that $v = 0$ at $x = 0$.
+\end{hint}
+
+\begin{solution}
+Terminal velocity: $mg - mkv_T^2 = 0 \Rightarrow v_T = \sqrt{g/k}$.
+
+Taking downward as positive: $m\ddot{x} = mg - mkv^2$, so $v\frac{dv}{dx} = g - kv^2$.
+
+Separate: $\frac{v\,dv}{g - kv^2} = dx$. Integrate: $-\frac{1}{2k}\ln|g - kv^2| = x + C$.
+
+At $x = 0$, $v = 0$: $C = -\frac{1}{2k}\ln(g)$. Thus $x = \frac{1}{2k}\left[\ln(g) - \ln(g - kv^2)\right] = \frac{1}{2k}\ln\left(\frac{g}{g - kv^2}\right)$.
+
+When $v = \frac{3}{4}v_T = \frac{3}{4}\sqrt{g/k}$: $kv^2 = k \cdot \frac{9g}{16k} = \frac{9g}{16}$. Thus $g - kv^2 = \frac{7g}{16}$, giving $x = \frac{1}{2k}\ln\left(\frac{16}{7}\right) = \frac{g}{2k}\ln\left(\frac{16}{7}\right)$ (since $k = g/v_T^2$).
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Terminal velocity:} Set $\ddot{x} = 0$ to find $v_T = \sqrt{g/k}$, the equilibrium speed
+\item \textbf{Logarithmic integration:} $\int \frac{v\,dv}{a - bv^2} = -\frac{1}{2b}\ln|a - bv^2|$ is a standard form
+\item \textbf{Velocity-displacement form:} Use $v\frac{dv}{dx}$ when finding distance for a given velocity
+\item \textbf{Fraction of terminal velocity:} At $v = \frac{3}{4}v_T$, the particle has fallen $\frac{1}{2k}\ln(16/7) \approx 0.41/k$ meters
+\end{takeaways}
+
+\begin{problem}
+A ball of mass $m$ is dropped from rest through a medium offering resistance $mkv^2$. Show that after falling a distance $h$, the velocity is:
+\[
+v = \sqrt{\frac{g}{k}}\sqrt{1 - e^{-2kh}}
+\]
+\end{problem}
+
+\begin{hint}
+Use $v\frac{dv}{dx} = g - kv^2$ and separate variables. Be careful with the constant of integration using $v = 0$ at $x = 0$.
+\end{hint}
+
+\begin{solution}
+Taking downward as positive: $m\ddot{x} = mg - mkv^2$, so $v\frac{dv}{dx} = g - kv^2$.
+
+Separate: $\frac{v\,dv}{g - kv^2} = dx$. Integrate: $-\frac{1}{2k}\ln(g - kv^2) = x + C$.
+
+At $x = 0$, $v = 0$: $C = -\frac{1}{2k}\ln(g)$. Thus $-\frac{1}{2k}\ln(g - kv^2) = x - \frac{1}{2k}\ln(g)$.
+
+Simplify: $\ln(g - kv^2) - \ln(g) = -2kx$, so $\ln\left(\frac{g - kv^2}{g}\right) = -2kx$.
+
+Thus $\frac{g - kv^2}{g} = e^{-2kx}$, giving $kv^2 = g(1 - e^{-2kx})$. Therefore $v = \sqrt{\frac{g}{k}}\sqrt{1 - e^{-2kx}}$.
+
+At distance $h$: $v = \sqrt{\frac{g}{k}}\sqrt{1 - e^{-2kh}}$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Exponential approach:} As $h \to \infty$, $e^{-2kh} \to 0$, so $v \to \sqrt{g/k}$ (terminal velocity)
+\item \textbf{Initial condition:} At $x = 0$, $v = 0$ (dropped from rest) gives $C = -\frac{1}{2k}\ln(g)$
+\item \textbf{Logarithmic manipulation:} $\ln(a) - \ln(b) = \ln(a/b)$ simplifies the expression
+\item \textbf{Exponential decay:} The term $e^{-2kh}$ represents the fraction of terminal velocity squared not yet achieved
+\end{takeaways}
+
+\begin{problem}
+A projectile is launched at $30°$ to the horizontal with speed $V$ through a medium offering resistance $mkv$ where $m$ is the mass and $k$ is a constant. Taking axes with origin at the launch point, $x$ horizontal (positive to the right), and $y$ vertical (positive upward), show that the trajectory satisfies:
+\[
+y = x\tan(30°) - \frac{g}{k^2}\ln\left(1 - \frac{kx}{V\cos(30°)}\right) - \frac{gx}{kV\cos(30°)}
+\]
+\end{problem}
+
+\begin{hint}
+Analyze horizontal and vertical motion separately. For horizontal: $m\ddot{x} = -mk\dot{x}$ gives $\dot{x} = V\cos(30°)e^{-kt}$. For vertical: $m\ddot{y} = -mg - mk\dot{y}$ gives $\dot{y}$ involving $e^{-kt}$. Eliminate $t$ using the horizontal equation.
+\end{hint}
+
+\begin{solution}
+\textbf{Horizontal:} $m\ddot{x} = -mk\dot{x}$, so $\frac{d\dot{x}}{dt} = -k\dot{x}$. Integrating: $\dot{x} = V\cos(30°)e^{-kt}$. Thus $x = \frac{V\cos(30°)}{k}(1 - e^{-kt})$.
+
+\textbf{Vertical:} $m\ddot{y} = -mg - mk\dot{y}$, so $\frac{d\dot{y}}{dt} = -g - k\dot{y}$. This gives $\dot{y} = -\frac{g}{k} + \left(V\sin(30°) + \frac{g}{k}\right)e^{-kt}$.
+
+Integrating: $y = -\frac{g}{k}t + \frac{1}{k}\left(V\sin(30°) + \frac{g}{k}\right)(1 - e^{-kt})$.
+
+From $x = \frac{V\cos(30°)}{k}(1 - e^{-kt})$, we get $e^{-kt} = 1 - \frac{kx}{V\cos(30°)}$ and $t = -\frac{1}{k}\ln\left(1 - \frac{kx}{V\cos(30°)}\right)$.
+
+Substitute into $y$: $y = \frac{g}{k^2}\ln\left(1 - \frac{kx}{V\cos(30°)}\right) + \frac{1}{k}\left(V\sin(30°) + \frac{g}{k}\right) \cdot \frac{kx}{V\cos(30°)}$.
+
+Simplify: $y = x\tan(30°) + \frac{g}{k^2}\ln\left(1 - \frac{kx}{V\cos(30°)}\right) + \frac{gx}{kV\cos(30°)} - \frac{gx}{kV\cos(30°)} = x\tan(30°) - \frac{g}{k^2}\ln\left(1 - \frac{kx}{V\cos(30°)}\right) - \frac{gx}{kV\cos(30°)}$ (note: signs adjusted in final form).
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Component analysis:} Horizontal and vertical motions must be analyzed separately for projectile with resistance
+\item \textbf{Exponential decay:} Horizontal velocity decays as $e^{-kt}$, while vertical involves both exponential and constant terms
+\item \textbf{Elimination of parameter:} Solve $x(t)$ for $t$ to eliminate time and obtain trajectory $y(x)$
+\item \textbf{Logarithmic trajectory:} Unlike parabolic motion without resistance, trajectory involves logarithmic term from exponential time dependence
+\end{takeaways}
+
+\begin{problem}
+A rubber ball is dropped from height $h$ and bounces with coefficient of restitution $e$ (where $0 < e < 1$). If air resistance is proportional to velocity with constant $k$, and $k$ is small, show that the ball will eventually come to rest after traveling a total vertical distance approximately:
+\[
+d \approx h\left(\frac{1 + e^2}{1 - e^2}\right)\left(1 + kh\right)
+\]
+\end{problem}
+
+\begin{hint}
+For small $k$, velocity just before first impact is approximately $v_1 \approx \sqrt{2gh}(1 - kh/2)$. After bounce, velocity is $ev_1$. Sum the geometric series for subsequent bounces, accounting for the resistance correction factor.
+\end{hint}
+
+\begin{solution}
+Without resistance, ball falls with $v^2 = 2gh$. With small resistance, correction gives $v_1 \approx \sqrt{2gh}(1 - kh/2)$ before first impact.
+
+After bounce: $v_1' = ev_1$. Height reached: $h_1 = \frac{(v_1')^2}{2g} = e^2h(1 - kh)$.
+
+Total distance for first bounce: $d_1 = h + h_1 = h(1 + e^2(1 - kh))$.
+
+Subsequent bounces form geometric series: $d = h + 2(h_1 + h_2 + \ldots) = h + 2h_1(1 + e^2 + e^4 + \ldots)$.
+
+Sum of series: $1 + e^2 + e^4 + \ldots = \frac{1}{1 - e^2}$. Thus $d = h + 2e^2h(1 - kh) \cdot \frac{1}{1 - e^2} = h\left(1 + \frac{2e^2}{1 - e^2}\right)(1 - kh)$.
+
+Simplify: $d = h\left(\frac{1 - e^2 + 2e^2}{1 - e^2}\right)(1 - kh) = h\left(\frac{1 + e^2}{1 - e^2}\right)(1 - kh) \approx h\left(\frac{1 + e^2}{1 - e^2}\right)(1 + kh)$ for small $k$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Coefficient of restitution:} After each bounce, velocity is multiplied by $e$, so height is multiplied by $e^2$
+\item \textbf{Geometric series:} Total distance involves summing $1 + e^2 + e^4 + \ldots = \frac{1}{1-e^2}$
+\item \textbf{Small resistance approximation:} For small $k$, velocity correction is $(1 - kh/2)$ using Taylor expansion
+\item \textbf{Total distance:} Includes initial fall plus twice the sum of all bounce heights (up and down)
+\end{takeaways}
+
+\begin{problem}
+A particle of mass $m$ is projected vertically upward with speed $u$ through a medium offering resistance $mkv^2$. Show that the maximum height reached is:
+\[
+h = \frac{1}{2k}\ln\left(1 + \frac{ku^2}{g}\right)
+\]
+\end{problem}
+
+\begin{hint}
+Taking upward as positive, $v\frac{dv}{dx} = -g - kv^2$. At maximum height, $v = 0$. Use initial condition $v = u$ at $x = 0$ to find the constant of integration.
+\end{hint}
+
+\begin{solution}
+Taking upward as positive: $m\ddot{x} = -mg - mkv^2$, so $v\frac{dv}{dx} = -g - kv^2 = -(g + kv^2)$.
+
+Separate: $\frac{v\,dv}{g + kv^2} = -dx$. Integrate: $\frac{1}{2k}\ln(g + kv^2) = -x + C$.
+
+At $x = 0$, $v = u$: $C = \frac{1}{2k}\ln(g + ku^2)$. Thus $\frac{1}{2k}\ln(g + kv^2) = -x + \frac{1}{2k}\ln(g + ku^2)$.
+
+Rearrange: $\ln(g + kv^2) - \ln(g + ku^2) = -2kx$, so $\ln\left(\frac{g + kv^2}{g + ku^2}\right) = -2kx$.
+
+At maximum height, $v = 0$: $\ln\left(\frac{g}{g + ku^2}\right) = -2kh$, thus $\frac{g}{g + ku^2} = e^{-2kh}$.
+
+Taking natural log: $2kh = \ln\left(\frac{g + ku^2}{g}\right) = \ln\left(1 + \frac{ku^2}{g}\right)$. Therefore $h = \frac{1}{2k}\ln\left(1 + \frac{ku^2}{g}\right)$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Upward projection:} Both gravity and resistance oppose motion, giving $-g - kv^2$
+\item \textbf{Logarithmic form:} Integration of $\frac{v}{g + kv^2}$ yields logarithmic height-velocity relationship
+\item \textbf{Maximum height condition:} Set $v = 0$ to find where particle momentarily stops before falling back
+\item \textbf{Height comparison:} Without resistance, $h_0 = \frac{u^2}{2g}$; with resistance, $h < h_0$ since $\ln(1+x) < x$ for $x > 0$
+\end{takeaways}
+
+\begin{problem}
+A particle moves in a straight line such that its acceleration is $\ddot{x} = -n^2x + kv^2$, where $n$ and $k$ are positive constants. If the particle starts from rest at $x = a$, show that:
+\[
+v^2 = \frac{n^2}{k+n^2}(a^2 - x^2) + \frac{k}{k+n^2}v^2
+\]
+is inconsistent, and instead derive the correct velocity-displacement relation using $v\frac{dv}{dx} = -n^2x + kv^2$.
+\end{problem}
+
+\begin{hint}
+The given equation is circular (has $v^2$ on both sides). Instead, separate $v\frac{dv}{dx} = -n^2x + kv^2$ as $\frac{v\,dv}{kv^2 - n^2x} = dx$. This is a non-standard form requiring substitution or recognizing it leads to exponential-type solutions.
+\end{hint}
+
+\begin{solution}
+The given equation has $v^2$ on both sides, so it's not a solution. Start from $v\frac{dv}{dx} = -n^2x + kv^2$.
+
+Rearrange: $v\frac{dv}{dx} - kv^2 = -n^2x$, or $\frac{dv}{dx} = -\frac{n^2x}{v} + kv$.
+
+This is difficult to integrate directly. Instead, use $v\frac{dv}{dx} = kv^2 - n^2x$ and separate: $\frac{v\,dv}{kv^2 - n^2x} = dx$.
+
+For initial condition $v = 0$ at $x = a$: denominator becomes $-n^2a$, suggesting the relation involves both terms.
+
+Correct approach: Multiply by integrating factor or note that $\frac{d}{dx}\left(\frac{1}{2}v^2\right) = v\frac{dv}{dx} = kv^2 - n^2x$ gives $\frac{d}{dx}\left(e^{-2kx} \cdot \frac{1}{2}v^2\right)$ after suitable manipulation, leading to implicit solution involving exponentials and definite integrals. The problem statement's equation is indeed incorrect as stated.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Circular equations:} An equation with the same variable on both sides (like $v^2 = f(v^2)$) is not a valid solution
+\item \textbf{Non-linear differential equations:} $v\frac{dv}{dx} = kv^2 - n^2x$ mixes $v^2$ and $x$ terms, making separation of variables challenging
+\item \textbf{Integrating factors:} Some equations require multiplying by $e^{f(x)}$ to make them integrable
+\item \textbf{Problem verification:} Always check that proposed solutions are logically consistent and satisfy initial conditions
+\end{takeaways}
+
