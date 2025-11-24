@@ -1,0 +1,69 @@
+% Part 1, Problem 10: Parity of m^2-n^2 - Direct Proof (Biconditional, Multi-part)
+% Medium
+
+\begin{problem}[Medium]
+Prove that if $m, n$ are integers, then $m^2 - n^2$ is even if and only if at least one of $(m+n)$ and $(m-n)$ is even.
+\end{problem}
+
+\begin{solution}
+\textbf{Biconditional Proof}
+
+\textbf{Step 1: Factor the expression}
+
+\[ m^2 - n^2 = (m-n)(m+n) \]
+
+This factorization will be used in both directions.
+
+\vspace{0.5em}
+\textbf{Forward Direction} ($\implies$): If $m^2 - n^2$ is even, then at least one of $(m+n)$ or $(m-n)$ is even.
+
+\begin{proof}
+Since $m^2 - n^2$ is even, the product $(m-n)(m+n)$ is even.
+
+A product of two integers is even if and only if at least one factor is even.
+
+Therefore, at least one of $(m-n)$ or $(m+n)$ must be even. \qed
+\end{proof}
+
+\vspace{0.5em}
+\textbf{Reverse Direction} ($\impliedby$): If at least one of $(m+n)$ or $(m-n)$ is even, then $m^2 - n^2$ is even.
+
+\begin{proof}
+We consider two cases:
+
+\textbf{Case 1:} $(m+n)$ is even.
+
+Write $(m+n) = 2k$ for some integer $k$.
+
+Then:
+\[ m^2 - n^2 = (m-n)(m+n) = (m-n)(2k) = 2k(m-n) \]
+
+Since $k(m-n)$ is an integer, $m^2 - n^2$ is even.
+
+\textbf{Case 2:} $(m-n)$ is even.
+
+Write $(m-n) = 2j$ for some integer $j$.
+
+Then:
+\[ m^2 - n^2 = (m-n)(m+n) = (2j)(m+n) = 2j(m+n) \]
+
+Since $j(m+n)$ is an integer, $m^2 - n^2$ is even.
+
+In both cases, $m^2 - n^2$ is even. \qed
+\end{proof}
+
+\vspace{0.5em}
+\textbf{Conclusion:}
+
+Both directions proven, therefore:
+\[ m^2 - n^2 \text{ is even} \iff \text{at least one of } (m+n), (m-n) \text{ is even} \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Factorization First:} Factoring $m^2 - n^2 = (m-n)(m+n)$ immediately connects to parity of factors
+\item \textbf{Product Parity:} Product even $\iff$ at least one factor even (fundamental parity property)
+\item \textbf{Case Analysis:} Reverse direction handles two cases (either factor even) separately
+\item \textbf{Note on Parity:} Actually, $(m+n)$ and $(m-n)$ always have same parity (both even or both odd), so "at least one even" is equivalent to "both even"
+\end{itemize}
+\end{takeaways}

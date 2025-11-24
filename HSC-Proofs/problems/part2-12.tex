@@ -1,0 +1,64 @@
+% Part 2 Problem 12 (Hard): Pythagorean triple parity constraint
+% Source: samples/23.tex
+% Technique: Proof by Contradiction
+% Topic: Parity/Number Theory
+
+\begin{problem}[Hard]
+Prove that there is no Pythagorean triple $(a, b, c)$ where $a$ and $b$ (the two smallest numbers) are both even and $c$ (the largest number) is odd.
+\end{problem}
+
+\begin{hint}
+Use proof by contradiction. Assume such a triple exists with $a = 2k$ and $b = 2m$ (both even) and $c$ odd.
+
+Substitute into the Pythagorean equation $a^2 + b^2 = c^2$ and analyze the parity of $c^2$. What can you conclude about the parity of $c$?
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{Proof by Contradiction:}
+
+Assume there exists a Pythagorean triple $(a, b, c)$ where:
+\begin{itemize}
+\item $a^2 + b^2 = c^2$
+\item $a$ and $b$ are both even
+\item $c$ is odd
+\end{itemize}
+
+Since $a$ and $b$ are even, write $a = 2k$ and $b = 2m$ for integers $k, m$.
+
+\vspace{0.3cm}
+
+\textbf{Substitute into Pythagorean equation:}
+\begin{align*}
+(2k)^2 + (2m)^2 &= c^2 \\
+4k^2 + 4m^2 &= c^2 \\
+4(k^2 + m^2) &= c^2
+\end{align*}
+
+\vspace{0.3cm}
+
+\textbf{Analyze parity of $c^2$:}
+
+The equation shows $c^2 = 4(k^2 + m^2)$, which is a multiple of $4$.
+
+In particular, $c^2$ is divisible by $2$, so $c^2$ is \textbf{even}.
+
+\vspace{0.3cm}
+
+\textbf{Derive parity of $c$:}
+
+If $c$ were odd, then $c = 2n+1$ for some integer $n$, and:
+\[
+c^2 = (2n+1)^2 = 4n^2 + 4n + 1 = 2(2n^2 + 2n) + 1
+\]
+This shows $c^2$ would be \textbf{odd}, contradicting that $c^2$ is even.
+
+Therefore, $c$ must be \textbf{even}.
+
+\vspace{0.3cm}
+
+\textbf{Contradiction:}
+
+We derived that $c$ must be even, which contradicts our assumption that $c$ is odd.
+
+Hence, no such Pythagorean triple exists. $\qed$
+\end{solutionsketch}

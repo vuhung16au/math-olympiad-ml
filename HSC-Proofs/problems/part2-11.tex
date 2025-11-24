@@ -1,0 +1,43 @@
+% Part 2 Problem 11 (Hard): Product of irrationals can be rational (counterexample)
+% Source: samples/22.tex
+% Technique: Disproof by Counterexample
+% Topic: Irrationality/Logic
+
+\begin{problem}[Hard]
+Prove or disprove: If $x$ and $y$ are irrational numbers with $x \neq y$, then $xy$ is irrational.
+\end{problem}
+
+\begin{hint}
+The statement is \textbf{false}. Find a counterexample using multiples of $\sqrt{2}$.
+
+Consider $x = \sqrt{2}$ and $y = k\sqrt{2}$ for some rational $k \neq 1$. What is $xy$? Is it rational or irrational?
+\end{hint}
+
+\begin{solutionsketch}
+The statement is \textbf{false}. We disprove by counterexample.
+
+\vspace{0.3cm}
+
+\textbf{Counterexample:}
+
+Let $x = \sqrt{2}$ and $y = 2\sqrt{2}$.
+
+\begin{itemize}
+\item \textbf{Check $x$ is irrational:} $\sqrt{2}$ is irrational (well-known).
+\item \textbf{Check $y$ is irrational:} $2\sqrt{2}$ is the product of rational $2$ and irrational $\sqrt{2}$, so it's irrational.
+\item \textbf{Check $x \neq y$:} Clearly $\sqrt{2} \neq 2\sqrt{2}$ since $1 \neq 2$.
+\item \textbf{Compute $xy$:}
+\[
+xy = (\sqrt{2})(2\sqrt{2}) = 2 \cdot (\sqrt{2})^2 = 2 \cdot 2 = 4
+\]
+\item \textbf{Check rationality of $xy$:} $4 = \frac{4}{1}$ is \textbf{rational}.
+\end{itemize}
+
+\vspace{0.3cm}
+
+Since we found irrational numbers $x$ and $y$ with $x \neq y$ such that $xy$ is rational, the original statement is \textbf{disproven}. $\qed$
+
+\vspace{0.3cm}
+
+\textit{Note: This shows that the irrationals are not closed under multiplication. The rationals are closed under multiplication, but the irrationals are not.}
+\end{solutionsketch}

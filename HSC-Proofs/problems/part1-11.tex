@@ -1,0 +1,68 @@
+% Part 1, Problem 11: No integer solution (n+1)^41 - 79n^40 = 2 - Cases + Modular
+% Hard
+
+\begin{problem}[Hard]
+Explain why there is no integer $n$ such that $(n+1)^{41} - 79n^{40} = 2$.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Modular Analysis and Case Checking}
+
+\textbf{Step 1: Test $n = 0$}
+
+If $n = 0$:
+\[ (0+1)^{41} - 79(0)^{40} = 1 - 0 = 1 \neq 2 \]
+
+So $n = 0$ is not a solution.
+
+\textbf{Step 2: Analyze for $n \neq 0$ using modular arithmetic}
+
+For $n \neq 0$, consider the equation modulo $n$:
+
+By the Binomial Theorem:
+\[ (n+1)^{41} = \sum_{k=0}^{41} \binom{41}{k} n^k \cdot 1^{41-k} \]
+
+All terms contain $n$ except the last term ($k=0$):
+\[ (n+1)^{41} \equiv 1 \pmod{n} \]
+
+The term $-79n^{40}$ is clearly divisible by $n$:
+\[ -79n^{40} \equiv 0 \pmod{n} \]
+
+Therefore:
+\begin{align*}
+    (n+1)^{41} - 79n^{40} &\equiv 2 \pmod{n} \\
+    1 - 0 &\equiv 2 \pmod{n} \\
+    1 &\equiv 2 \pmod{n}
+\end{align*}
+
+\textbf{Step 3: Interpret the congruence}
+
+$1 \equiv 2 \pmod{n}$ means $n \mid (1-2)$, so $n \mid (-1)$.
+
+Therefore $n \in \{-1, 1\}$.
+
+\textbf{Step 4: Test candidate values}
+
+\textbf{For $n = 1$:}
+\[ (1+1)^{41} - 79(1)^{40} = 2^{41} - 79 = 2,199,023,255,552 - 79 \neq 2 \]
+
+\textbf{For $n = -1$:}
+\[ (-1+1)^{41} - 79(-1)^{40} = 0 - 79(1) = -79 \neq 2 \]
+
+\textbf{Conclusion}
+
+All possible integer values of $n$ have been checked and none satisfy the equation.
+
+Therefore, there is no integer $n$ such that $(n+1)^{41} - 79n^{40} = 2$.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Modular Arithmetic Strategy:} Working mod $n$ can dramatically constrain possible solutions
+\item \textbf{Binomial Expansion Mod $n$:} $(n+1)^k \equiv 1 \pmod{n}$ since all terms except constant contain $n$
+\item \textbf{Divisor Analysis:} $1 \equiv 2 \pmod{n}$ means $n \mid (-1)$, giving only $n \in \{-1, 1\}$
+\item \textbf{Exhaustive Checking:} After constraining to finitely many cases, verify each directly
+\end{itemize}
+\end{takeaways}

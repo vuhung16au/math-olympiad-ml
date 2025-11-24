@@ -1,0 +1,80 @@
+% Part 2 Problem 09 (Medium): Complex numbers geometry (multi-part)
+% Source: samples/16.tex
+% Technique: Direct Proof (Geometric/Algebraic)
+% Topic: Complex Numbers
+
+\begin{problem}[Medium]
+Consider the region $\mathcal{R}$ in the complex plane defined by $|z - (2\sqrt{3} + 2i)| \leq 2$.
+
+\begin{enumerate}[label=(\alph*)]
+\item Describe the region $\mathcal{R}$ geometrically (what shape? center? radius?).
+\item Find the maximum and minimum values of $\arg(z)$ for $z \in \mathcal{R}$, where $-\pi < \arg(z) \leq \pi$.
+\item Find the complex number $z$ associated with the maximum argument in part (b) in the form $x + iy$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+(a) The inequality $|z - w| \leq r$ represents a disk (filled circle) in the complex plane.
+
+(b) Find $\arg(C)$ where $C = 2\sqrt{3} + 2i$ is the center. The max/min arguments occur at tangent lines from the origin to the circle. Use the right triangle formed by the origin, center, and tangent point.
+
+(c) The point with maximum argument lies on the ray from $O$ with angle $\arg_{\max}$ found in (b), at distance $\sqrt{|OC|^2 - r^2}$ from origin.
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{(a) Geometric Description:}
+
+The region is a closed disk (circle plus interior) with:
+\begin{itemize}
+\item Center: $C = 2\sqrt{3} + 2i$ (which is $(2\sqrt{3}, 2)$ in Cartesian coordinates)
+\item Radius: $r = 2$
+\end{itemize}
+
+Distance from origin to center: $|OC| = \sqrt{(2\sqrt{3})^2 + 2^2} = \sqrt{12 + 4} = 4$.
+
+Since $|OC| = 4 > r = 2$, the origin lies outside the circle.
+
+\vspace{0.3cm}
+
+\textbf{(b) Max and Min Arguments:}
+
+The argument of the center is:
+\[
+\arg(C) = \arctan\left(\frac{2}{2\sqrt{3}}\right) = \arctan\left(\frac{1}{\sqrt{3}}\right) = \frac{\pi}{6}
+\]
+
+The tangent lines from $O$ to the circle create a right triangle with:
+\begin{itemize}
+\item Hypotenuse: $|OC| = 4$
+\item Opposite side (radius): $r = 2$
+\end{itemize}
+
+The angle $\theta$ from $OC$ to the tangent satisfies:
+\[
+\sin \theta = \frac{r}{|OC|} = \frac{2}{4} = \frac{1}{2} \implies \theta = \frac{\pi}{6}
+\]
+
+Therefore:
+\begin{align*}
+\arg_{\max} &= \frac{\pi}{6} + \frac{\pi}{6} = \frac{\pi}{3} \\
+\arg_{\min} &= \frac{\pi}{6} - \frac{\pi}{6} = 0
+\end{align*}
+
+\vspace{0.3cm}
+
+\textbf{(c) Complex Number for Max Argument:}
+
+The tangent point distance from origin:
+\[
+|OP| = \sqrt{|OC|^2 - r^2} = \sqrt{16 - 4} = \sqrt{12} = 2\sqrt{3}
+\]
+
+The point lies on the ray with argument $\pi/3$:
+\begin{align*}
+z &= 2\sqrt{3} \cdot e^{i\pi/3} = 2\sqrt{3}\left(\cos\frac{\pi}{3} + i\sin\frac{\pi}{3}\right) \\
+&= 2\sqrt{3}\left(\frac{1}{2} + i\frac{\sqrt{3}}{2}\right) \\
+&= \sqrt{3} + 3i
+\end{align*}
+
+\textbf{Answer:} $z = \sqrt{3} + 3i$. $\qed$
+\end{solutionsketch}

@@ -1,0 +1,51 @@
+% Part 2 Problem 07 (Medium): No positive integer solution x^2 - y^2 = 1
+% Source: samples/19.tex
+% Technique: Direct Proof + Case Analysis
+% Topic: Divisibility/Factorization
+
+\begin{problem}[Medium]
+Prove that there are no positive integers $x, y$ such that $x^2 - y^2 = 1$.
+\end{problem}
+
+\begin{hint}
+Factor the left side as a difference of squares: $(x-y)(x+y) = 1$.
+
+For this product to equal $1$, what must be true about the integer factors $(x-y)$ and $(x+y)$? Consider all possible integer factor pairs of $1$.
+\end{hint}
+
+\begin{solutionsketch}
+Factor the equation:
+\[
+x^2 - y^2 = 1 \implies (x-y)(x+y) = 1
+\]
+
+Since $x$ and $y$ are integers, both $(x-y)$ and $(x+y)$ are integers.
+
+For the product of two integers to equal $1$, the only possibilities are:
+\begin{itemize}
+\item $x - y = 1$ and $x + y = 1$, or
+\item $x - y = -1$ and $x + y = -1$
+\end{itemize}
+
+\textbf{Case 1:} $x - y = 1$ and $x + y = 1$
+
+Adding these equations: $2x = 2$, so $x = 1$.
+
+Substituting back: $1 + y = 1$, so $y = 0$.
+
+Since $y = 0$ is not a positive integer, this case fails.
+
+\vspace{0.3cm}
+
+\textbf{Case 2:} $x - y = -1$ and $x + y = -1$
+
+Adding these equations: $2x = -2$, so $x = -1$.
+
+Since $x = -1$ is not a positive integer, this case fails.
+
+\vspace{0.3cm}
+
+\textbf{Conclusion:} Neither case yields a solution with both $x$ and $y$ positive integers.
+
+Therefore, there are no positive integers $x, y$ such that $x^2 - y^2 = 1$. $\qed$
+\end{solutionsketch}

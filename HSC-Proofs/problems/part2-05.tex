@@ -1,0 +1,54 @@
+% Part 2 Problem 05 (Easy): Mersenne Prime Contrapositive
+% Source: samples/06.tex
+% Technique: Proof by Contrapositive
+% Topic: Number Theory/Primes
+
+\begin{problem}[Easy]
+Prove that for all integers $n \geq 3$, if $2^n - 1$ is prime, then $n$ cannot be even.
+\end{problem}
+
+\begin{hint}
+Use proof by contrapositive. Instead of proving "$P \implies Q$", prove "$\neg Q \implies \neg P$".
+
+That is, prove: "If $n$ is even (and $n \geq 3$), then $2^n - 1$ is composite."
+
+Write $n = 2k$ and factor $2^{2k} - 1$ as a difference of squares.
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{Proof by Contrapositive:}
+
+We prove the contrapositive: If $n$ is even (with $n \geq 3$), then $2^n - 1$ is composite.
+
+Assume $n$ is even. Then $n = 2k$ for some integer $k$.
+
+Since $n \geq 3$ and $n$ is even, we have $n \geq 4$, so $k \geq 2$.
+
+Substitute:
+\[
+2^n - 1 = 2^{2k} - 1 = (2^k)^2 - 1^2
+\]
+
+Factor as difference of squares:
+\[
+2^n - 1 = (2^k - 1)(2^k + 1)
+\]
+
+Since $k \geq 2$:
+\begin{itemize}
+\item $2^k \geq 4$, so $2^k - 1 \geq 3 > 1$
+\item $2^k \geq 4$, so $2^k + 1 \geq 5 > 1$
+\end{itemize}
+
+Both factors are integers strictly greater than $1$, so their product is composite.
+
+Therefore, $2^n - 1$ is composite.
+
+\vspace{0.3cm}
+
+By contrapositive, if $2^n - 1$ is prime, then $n$ cannot be even. $\qed$
+
+\vspace{0.3cm}
+
+\textit{Note: This is why Mersenne primes have the form $2^p - 1$ where $p$ itself is prime (though not all such numbers are prime).}
+\end{solutionsketch}

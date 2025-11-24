@@ -1,0 +1,69 @@
+% Part 1, Problem 7: Modular powers - Proof by Cases (Multi-part)
+% Medium
+
+\begin{problem}[Medium]
+\begin{enumerate}[label=(\alph*)]
+    \item Given $a$ is integral and not divisible by 5, prove the remainder when $a^2$ is divided by 5 is either 1 or 4.
+    
+    \item Hence, given that $a, b$ are integral and not divisible by 5, prove that $a^4 - b^4$ is divisible by 5.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (a): Proof by Cases}
+
+Since $a$ is not divisible by 5, we have $a \not\equiv 0 \pmod{5}$.
+
+By the division algorithm, $a$ must be congruent to 1, 2, 3, or 4 modulo 5.
+
+We check each case:
+
+\textbf{Case 1:} $a \equiv 1 \pmod{5}$
+\[ a^2 \equiv 1^2 \equiv 1 \pmod{5} \]
+
+\textbf{Case 2:} $a \equiv 2 \pmod{5}$
+\[ a^2 \equiv 2^2 \equiv 4 \pmod{5} \]
+
+\textbf{Case 3:} $a \equiv 3 \pmod{5}$
+\[ a^2 \equiv 3^2 \equiv 9 \equiv 4 \pmod{5} \]
+
+\textbf{Case 4:} $a \equiv 4 \pmod{5}$
+\[ a^2 \equiv 4^2 \equiv 16 \equiv 1 \pmod{5} \]
+
+In all cases, $a^2 \equiv 1$ or $4 \pmod{5}$.
+
+Therefore, the remainder when $a^2$ is divided by 5 is either 1 or 4. \hfill $\square$
+
+\vspace{1em}
+
+\textbf{Part (b): Using Part (a)}
+
+From part (a), for any integer $x$ not divisible by 5: $x^2 \equiv 1$ or $4 \pmod{5}$.
+
+Consider $a^4 = (a^2)^2$:
+\begin{itemize}
+    \item If $a^2 \equiv 1 \pmod{5}$, then $(a^2)^2 \equiv 1^2 \equiv 1 \pmod{5}$
+    \item If $a^2 \equiv 4 \pmod{5}$, then $(a^2)^2 \equiv 4^2 \equiv 16 \equiv 1 \pmod{5}$
+\end{itemize}
+
+Thus $a^4 \equiv 1 \pmod{5}$ for any integer $a$ not divisible by 5.
+
+Similarly, $b^4 \equiv 1 \pmod{5}$.
+
+Therefore:
+\begin{align*}
+    a^4 - b^4 &\equiv 1 - 1 \pmod{5} \\
+    &\equiv 0 \pmod{5}
+\end{align*}
+
+Hence $5 \mid (a^4 - b^4)$. \hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Systematic Case Analysis:} For $5 \nmid a$, check all residues $a \equiv 1, 2, 3, 4 \pmod{5}$ systematically
+\item \textbf{Squaring Congruences:} If $a \equiv b \pmod{m}$, then $a^2 \equiv b^2 \pmod{m}$
+\item \textbf{``Hence'' Strategy:} Part (b) builds directly on part (a)'s result; apply it twice to get $a^4 \equiv b^4 \equiv 1 \pmod{5}$
+\item \textbf{Fermat's Little Theorem Preview:} Result $a^4 \equiv 1 \pmod{5}$ for $\gcd(a,5)=1$ is special case of FLT
+\end{itemize}
+\end{takeaways}

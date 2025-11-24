@@ -1,0 +1,48 @@
+% Part 2 Problem 03 (Easy): Irrational^Irrational can be Rational
+% Source: samples/12.tex
+% Technique: Proof by Cases (Non-constructive)
+% Topic: Irrationality/Existence
+
+\begin{problem}[Easy]
+Prove that an irrational number raised to the power of an irrational number can be rational, by considering $\sqrt{2}^{\sqrt{2}}$. You may assume $\sqrt{2}$ is irrational.
+\end{problem}
+
+\begin{hint}
+Consider $\alpha = \sqrt{2}^{\sqrt{2}}$. By the Law of Excluded Middle, $\alpha$ is either rational or irrational. Examine both cases:
+\begin{itemize}
+\item If $\alpha$ is rational, you're done immediately.
+\item If $\alpha$ is irrational, compute $\alpha^{\sqrt{2}}$ and simplify.
+\end{itemize}
+
+This is a \textbf{non-constructive} existence proof---you prove something exists without determining which case actually holds!
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{Proof by Cases:}
+
+Let $\alpha = \sqrt{2}^{\sqrt{2}}$. We consider two exhaustive cases:
+
+\vspace{0.3cm}
+
+\textbf{Case 1:} If $\alpha = \sqrt{2}^{\sqrt{2}}$ is rational, then we have found irrational base $\sqrt{2}$ and irrational exponent $\sqrt{2}$ such that $\sqrt{2}^{\sqrt{2}}$ is rational. Done.
+
+\vspace{0.3cm}
+
+\textbf{Case 2:} If $\alpha = \sqrt{2}^{\sqrt{2}}$ is irrational, consider:
+\begin{align*}
+\alpha^{\sqrt{2}} &= \left(\sqrt{2}^{\sqrt{2}}\right)^{\sqrt{2}} \\
+&= \sqrt{2}^{\sqrt{2} \cdot \sqrt{2}} \quad \text{(exponent law)} \\
+&= \sqrt{2}^{2} \\
+&= 2
+\end{align*}
+
+Since $2$ is rational and both $\alpha$ (irrational by case assumption) and $\sqrt{2}$ (given as irrational) are irrational, we have found an example.
+
+\vspace{0.3cm}
+
+\textbf{Conclusion:} In either case, there exist irrational numbers $a$ and $b$ such that $a^b$ is rational. $\qed$
+
+\vspace{0.3cm}
+
+\textit{Note: This proof doesn't tell us whether $\sqrt{2}^{\sqrt{2}}$ is actually rational or irrational---and we don't need to know! This is the beauty of non-constructive existence proofs.}
+\end{solutionsketch}

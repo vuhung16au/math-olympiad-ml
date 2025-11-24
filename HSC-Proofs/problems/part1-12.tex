@@ -1,0 +1,81 @@
+% Part 1, Problem 12: Nested radical induction - Mathematical Induction
+% Hard
+
+\begin{problem}[Hard]
+The numbers $a_n$, for integers $n \geq 1$, are defined as:
+\begin{align*}
+    a_1 &= \sqrt{2} \\
+    a_2 &= \sqrt{2 + \sqrt{2}} \\
+    a_3 &= \sqrt{2 + \sqrt{2 + \sqrt{2}}}, \text{ and so on.}
+\end{align*}
+
+These numbers satisfy the relation $a_{n+1}^2 = 2 + a_n$, for $n \geq 1$. (Do NOT prove this.)
+
+Use mathematical induction to prove that $a_n = 2\cos\left(\frac{\pi}{2^{n+1}}\right)$ for all integers $n \geq 1$.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Mathematical Induction}
+
+\textbf{Base Case} ($n=1$):
+
+LHS: $a_1 = \sqrt{2}$ (given)
+
+RHS: $2\cos\left(\frac{\pi}{2^{1+1}}\right) = 2\cos\left(\frac{\pi}{4}\right) = 2 \cdot \frac{\sqrt{2}}{2} = \sqrt{2}$
+
+Since LHS = RHS, the statement holds for $n=1$. \checkmark
+
+\vspace{0.5em}
+\textbf{Inductive Hypothesis:}
+
+Assume the statement is true for $n=k$, where $k$ is a positive integer:
+\[ a_k = 2\cos\left(\frac{\pi}{2^{k+1}}\right) \]
+
+\vspace{0.5em}
+\textbf{Inductive Step:}
+
+We must prove the statement for $n=k+1$:
+\[ a_{k+1} = 2\cos\left(\frac{\pi}{2^{k+2}}\right) \]
+
+Using the recurrence relation $a_{k+1}^2 = 2 + a_k$ and the inductive hypothesis:
+\begin{align*}
+    a_{k+1}^2 &= 2 + 2\cos\left(\frac{\pi}{2^{k+1}}\right) \\
+    &= 2\left[1 + \cos\left(\frac{\pi}{2^{k+1}}\right)\right]
+\end{align*}
+
+Apply the double angle identity: $1 + \cos(2\theta) = 2\cos^2(\theta)$.
+
+Let $2\theta = \frac{\pi}{2^{k+1}}$, so $\theta = \frac{\pi}{2^{k+2}}$:
+\begin{align*}
+    a_{k+1}^2 &= 2 \cdot 2\cos^2\left(\frac{\pi}{2^{k+2}}\right) \\
+    &= 4\cos^2\left(\frac{\pi}{2^{k+2}}\right)
+\end{align*}
+
+Taking square roots:
+\[ a_{k+1} = \pm 2\cos\left(\frac{\pi}{2^{k+2}}\right) \]
+
+Since $n \geq 1$, we have $0 < \frac{\pi}{2^{k+2}} < \frac{\pi}{2}$, so $\cos\left(\frac{\pi}{2^{k+2}}\right) > 0$.
+
+Also, $a_n$ is defined as nested square roots of positive numbers, so $a_{k+1} > 0$.
+
+Therefore:
+\[ a_{k+1} = 2\cos\left(\frac{\pi}{2^{k+2}}\right) \]
+
+This completes the inductive step. \checkmark
+
+\vspace{0.5em}
+\textbf{Conclusion:}
+
+By mathematical induction, $a_n = 2\cos\left(\frac{\pi}{2^{n+1}}\right)$ for all integers $n \geq 1$.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Induction with Recurrence:} Use given recurrence relation in inductive step to relate $a_{k+1}$ to $a_k$
+\item \textbf{Double Angle Formula:} Identity $1 + \cos(2\theta) = 2\cos^2(\theta)$ is key to converting sum to square
+\item \textbf{Sign Consideration:} Must justify taking positive square root using domain/range analysis
+\item \textbf{Angle Halving:} Pattern shows $a_n$ relates to $\cos$ of successively halved angles ($\pi/4, \pi/8, \pi/16, \ldots$)
+\end{itemize}
+\end{takeaways}

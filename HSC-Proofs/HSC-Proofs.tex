@@ -1,0 +1,269 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+% Custom styles
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: The Nature of Proof}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet presents a comprehensive collection of proof problems for HSC Mathematics Extension~2 students. The 30 carefully selected problems cover all essential proof techniques: Direct Proof, Proof by Contradiction, Mathematical Induction, and Proof by Cases. Topics include divisibility, irrationality, modular arithmetic, parity, and logical reasoning.
+
+The collection is divided into two parts:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Part 1 (15 problems):} Detailed step-by-step solutions showing complete reasoning, algebraic manipulation, and justification of each step. Each solution is designed to fit within one page, modeling clear and concise proof writing.
+  \item \textbf{Part 2 (15 problems):} Strategic hints and solution sketches using flipped hint environments, encouraging independent problem-solving while providing guidance on key steps.
+\end{itemize}
+
+\subsection{Target Audience}
+This booklet is designed for HSC Mathematics Extension~2 students who want to:
+\begin{itemize}[leftmargin=*]
+  \item Master fundamental proof techniques required for the HSC examination
+  \item Develop rigorous mathematical reasoning and proof-writing skills
+  \item Build confidence with both standard and non-standard proof problems
+  \item Understand connections between different proof methods
+  \item Practice problems at Easy, Medium, and Hard difficulty levels
+\end{itemize}
+
+Teachers and tutors will also find this collection valuable for:
+\begin{itemize}[leftmargin=*]
+  \item Demonstrating worked examples with clear pedagogical progression
+  \item Selecting problems at appropriate difficulty levels for students
+  \item Providing comprehensive coverage of HSC Extension~2 proof topics
+  \item Preparing students for examination standards in mathematical proof
+\end{itemize}
+
+\subsection{How to Use This Booklet}
+\textbf{For Students:}
+\begin{itemize}[leftmargin=*]
+  \item Begin with the Proof Primer below to review fundamental concepts and techniques.
+  \item Work through Part~1 problems first, attempting each problem before reading the detailed solution.
+  \item Compare your proof structure and reasoning with the provided solutions.
+  \item Pay attention to the ``Takeaways'' section after each solution---these highlight key techniques and common pitfalls.
+  \item Move to Part~2 problems, using the upside-down hints only after making a genuine attempt.
+  \item Revisit challenging problems after a few days to reinforce understanding and technique.
+\end{itemize}
+
+\textbf{For Tutors and Teachers:}
+\begin{itemize}[leftmargin=*]
+  \item Use Part~1 problems as worked examples in lessons, highlighting proof structure and key techniques.
+  \item Assign Part~2 problems for homework or practice, encouraging students to attempt problems before revealing hints.
+  \item Select problems by proof technique or topic to target specific areas of the syllabus.
+  \item Use the variety of difficulty levels (Easy, Medium, Hard) to differentiate instruction for different student abilities.
+  \item Note Problem 14 (Part 1) as the ``Induction Crossover'' demonstrating overlap with HSC-Induction collection.
+\end{itemize}
+
+\subsection{Proof Primer}
+
+\subsubsection*{Essential Number Theory Concepts}
+
+\textbf{1. Divisibility:} $a | b$ (read ``$a$ divides $b$'') means there exists an integer $k$ such that $b = ak$.
+
+\textbf{2. Division Algorithm:} For integers $a$ and $b > 0$, there exist unique integers $q$ (quotient) and $r$ (remainder) such that:
+\[ a = bq + r, \quad 0 \le r < b \]
+This is essential for case-based proofs (e.g., classifying integers as $3k$, $3k+1$, or $3k+2$).
+
+\textbf{3. Modular Arithmetic:} $a \equiv b \pmod{m}$ (read ``$a$ is congruent to $b$ modulo $m$'') means $m | (a-b)$. Equivalently, $a$ and $b$ have the same remainder when divided by $m$.
+
+\textbf{Key Properties:}
+\begin{itemize}
+    \item If $a \equiv b \pmod{m}$ and $c \equiv d \pmod{m}$, then $a+c \equiv b+d \pmod{m}$
+    \item If $a \equiv b \pmod{m}$ and $c \equiv d \pmod{m}$, then $ac \equiv bd \pmod{m}$
+    \item If $a \equiv b \pmod{m}$, then $a^n \equiv b^n \pmod{m}$ for any positive integer $n$
+\end{itemize}
+
+\textbf{4. Parity:} An integer is \textit{even} if it can be written as $2k$ for some integer $k$. An integer is \textit{odd} if it can be written as $2k+1$ for some integer $k$.
+
+\textbf{5. Prime Numbers:} An integer $p > 1$ is prime if its only positive divisors are 1 and $p$. Key property: If prime $p$ divides $ab$, then $p | a$ or $p | b$.
+
+\subsubsection*{Essential Proof Techniques}
+
+\textbf{1. Direct Proof:} Start with given information and use logical steps to reach the desired conclusion.
+\begin{itemize}
+    \item Example: To prove $a | b$ and $b | c$ implies $a | c$, write $b = ak_1$ and $c = bk_2$, then $c = (ak_1)k_2 = a(k_1k_2)$.
+\end{itemize}
+
+\textbf{2. Proof by Contradiction (Reductio ad Absurdum):}
+\begin{itemize}
+    \item Assume the negation of what you want to prove
+    \item Use logical reasoning to derive a statement that contradicts a known fact, the hypothesis, or a mathematical truth
+    \item Conclude that the assumption must be false, hence the original statement is true
+    \item Example: Proving $\sqrt{2}$ is irrational by assuming $\sqrt{2} = \frac{p}{q}$ and deriving a contradiction
+\end{itemize}
+
+\textbf{3. Mathematical Induction:} To prove $P(n)$ is true for all integers $n \geq n_0$:
+\begin{itemize}
+    \item \textit{Base Case:} Prove $P(n_0)$ is true
+    \item \textit{Inductive Hypothesis:} Assume $P(k)$ is true for some arbitrary $k \geq n_0$
+    \item \textit{Inductive Step:} Prove $P(k+1)$ is true using the assumption that $P(k)$ is true
+    \item \textit{Conclusion:} By the principle of mathematical induction, $P(n)$ is true for all $n \geq n_0$
+\end{itemize}
+
+\textbf{4. Proof by Cases:} When the hypothesis can be divided into distinct cases:
+\begin{itemize}
+    \item Identify all possible cases (ensure they are exhaustive and mutually exclusive)
+    \item Prove the statement for each case separately
+    \item Conclude that the statement holds in all cases
+    \item Example: Proving $n^2 \equiv 0$ or $1 \pmod{4}$ by checking cases $n$ even and $n$ odd
+\end{itemize}
+
+\textbf{5. Biconditional Proof (If and Only If):} To prove ``$P$ if and only if $Q$'' (written $P \iff Q$):
+\begin{itemize}
+    \item Prove the forward direction: $P \implies Q$
+    \item Prove the reverse direction: $Q \implies P$
+    \item Both directions must be proven independently
+\end{itemize}
+
+\subsubsection*{Common Proof Strategies}
+
+\textbf{Contrapositive:} To prove $P \implies Q$, instead prove $\neg Q \implies \neg P$ (logically equivalent).
+
+\textbf{Consecutive Integers:} Among $k$ consecutive integers, exactly one is divisible by $k$. Among 2 consecutive integers, exactly one is even.
+
+\textbf{Irrationality Proofs:} Standard template for proving $\sqrt{n}$ irrational (where $n$ is not a perfect square):
+\begin{enumerate}
+    \item Assume $\sqrt{n} = \frac{p}{q}$ in lowest terms ($\gcd(p,q) = 1$)
+    \item Square both sides: $n = \frac{p^2}{q^2}$, so $p^2 = nq^2$
+    \item Show $n | p^2$ implies $n | p$ (using prime factorization if $n$ is prime)
+    \item Substitute $p = nk$, derive $q^2 = nk^2$, showing $n | q$
+    \item Contradict $\gcd(p,q) = 1$
+\end{enumerate}
+
+\newpage
+
+\section{Part 1: Problems with Detailed Solutions}
+
+\subsection*{Easy Problems (5 problems)}
+
+\input{problems/part1-01}
+\newpage
+
+\input{problems/part1-02}
+\newpage
+
+\input{problems/part1-03}
+\newpage
+
+\input{problems/part1-04}
+\newpage
+
+\input{problems/part1-05}
+\newpage
+
+\subsection*{Medium Problems (5 problems)}
+
+\input{problems/part1-06}
+\newpage
+
+\input{problems/part1-07}
+\newpage
+
+\input{problems/part1-08}
+\newpage
+
+\input{problems/part1-09}
+\newpage
+
+\input{problems/part1-10}
+\newpage
+
+\subsection*{Hard Problems (5 problems)}
+
+\input{problems/part1-11}
+\newpage
+
+\input{problems/part1-12}
+\newpage
+
+\input{problems/part1-13}
+\newpage
+
+\input{problems/part1-14}
+\newpage
+
+\input{problems/part1-15}
+\newpage
+
+\section{Part 2: Problems with Hints and Sketches}
+
+\textit{The following problems provide strategic hints and solution sketches. Attempt each problem independently before consulting the hint. The sketches outline key steps but leave details for you to complete---use them to check your approach and fill in any gaps in your reasoning.}
+
+\vspace{1cm}
+
+\subsection*{Easy Problems (5 problems)}
+
+\input{problems/part2-01}
+\newpage
+
+\input{problems/part2-02}
+\newpage
+
+\input{problems/part2-03}
+\newpage
+
+\input{problems/part2-04}
+\newpage
+
+\input{problems/part2-05}
+\newpage
+
+\subsection*{Medium Problems (5 problems)}
+
+\input{problems/part2-06}
+\newpage
+
+\input{problems/part2-07}
+\newpage
+
+\input{problems/part2-08}
+\newpage
+
+\input{problems/part2-09}
+\newpage
+
+\input{problems/part2-10}
+\newpage
+
+\subsection*{Hard Problems (5 problems)}
+
+\input{problems/part2-11}
+\newpage
+
+\input{problems/part2-12}
+\newpage
+
+\input{problems/part2-13}
+\newpage
+
+\input{problems/part2-14}
+\newpage
+
+\input{problems/part2-15}
+
+\end{document}

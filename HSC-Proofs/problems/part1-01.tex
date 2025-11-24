@@ -1,0 +1,54 @@
+% Part 1, Problem 1: sqrt{3} + sqrt{5} > sqrt{11} - Proof by Contradiction
+% Easy
+
+\begin{problem}[Easy]
+Prove by contradiction that $\sqrt{3} + \sqrt{5} > \sqrt{11}$.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Contradiction}
+
+\textbf{Step 1: Assume the negation}
+
+Assume, for the sake of contradiction, that the statement is false. That is, assume:
+\[ \sqrt{3} + \sqrt{5} \leq \sqrt{11} \]
+
+\textbf{Step 2: Square both sides}
+
+Since all terms are positive, we can square both sides without changing the inequality:
+\begin{align*}
+    (\sqrt{3} + \sqrt{5})^2 &\leq (\sqrt{11})^2 \\
+    3 + 2\sqrt{3}\cdot\sqrt{5} + 5 &\leq 11 \\
+    8 + 2\sqrt{15} &\leq 11 \\
+    2\sqrt{15} &\leq 3
+\end{align*}
+
+\textbf{Step 3: Square again}
+
+Both sides are still positive, so square again:
+\begin{align*}
+    (2\sqrt{15})^2 &\leq 3^2 \\
+    4 \cdot 15 &\leq 9 \\
+    60 &\leq 9
+\end{align*}
+
+\textbf{Step 4: Establish contradiction}
+
+The statement $60 \leq 9$ is clearly false.
+
+This contradiction arose from our assumption that $\sqrt{3} + \sqrt{5} \leq \sqrt{11}$.
+
+Therefore, our assumption must be false, and we conclude:
+\[ \sqrt{3} + \sqrt{5} > \sqrt{11} \]
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Proof by Contradiction Structure:} Assume the negation of what you want to prove, derive a logical impossibility, conclude original statement must be true
+\item \textbf{Squaring Inequalities:} When both sides are positive, squaring preserves the inequality direction
+\item \textbf{Algebraic Manipulation:} Expand $(\sqrt{3}+\sqrt{5})^2$ carefully: $(a+b)^2 = a^2 + 2ab + b^2$
+\item \textbf{Clear Contradictions:} A numerical impossibility like $60 \leq 9$ is an immediate and decisive contradiction
+\end{itemize}
+\end{takeaways}

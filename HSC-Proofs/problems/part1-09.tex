@@ -1,0 +1,71 @@
+% Part 1, Problem 9: Divisibility by 4 rule - Direct Proof (Biconditional, Multi-part)
+% Medium
+
+\begin{problem}[Medium]
+Prove that a number is divisible by 4 if and only if the last two digits form a number divisible by 4.
+\end{problem}
+
+\begin{solution}
+\textbf{Biconditional Proof (If and Only If)}
+
+This requires proving both directions:
+
+\textbf{Forward Direction} ($\implies$): If $N$ is divisible by 4, then its last two digits form a number divisible by 4.
+
+\textbf{Reverse Direction} ($\impliedby$): If the last two digits form a number divisible by 4, then $N$ is divisible by 4.
+
+\vspace{0.5em}
+\textbf{Setup:} Express any integer $N$ as:
+\[ N = 100A + L \]
+where $A$ is the number formed by all digits except the last two, and $L$ is the two-digit number formed by the last two digits ($0 \leq L \leq 99$).
+
+\vspace{0.5em}
+\textbf{Forward Direction Proof:}
+
+Assume $4 \mid N$, so $N \equiv 0 \pmod{4}$.
+
+Then:
+\begin{align*}
+    100A + L &\equiv 0 \pmod{4}
+\end{align*}
+
+Since $100 = 4 \times 25$, we have $100A \equiv 0 \pmod{4}$.
+
+Therefore:
+\begin{align*}
+    0 + L &\equiv 0 \pmod{4} \\
+    L &\equiv 0 \pmod{4}
+\end{align*}
+
+Thus $4 \mid L$. \hfill $\square$
+
+\vspace{0.5em}
+\textbf{Reverse Direction Proof:}
+
+Assume $4 \mid L$, so $L \equiv 0 \pmod{4}$.
+
+Since $100 = 4 \times 25$, we have $100A \equiv 0 \pmod{4}$.
+
+Therefore:
+\begin{align*}
+    N = 100A + L &\equiv 0 + 0 \pmod{4} \\
+    N &\equiv 0 \pmod{4}
+\end{align*}
+
+Thus $4 \mid N$. \hfill $\square$
+
+\vspace{0.5em}
+\textbf{Conclusion:}
+
+Since both directions are proven, we conclude:
+\[ N \text{ is divisible by } 4 \iff \text{last two digits of } N \text{ divisible by } 4 \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Iff Proof Structure:} Must prove both ($\implies$) and ($\impliedby$) directions independently
+\item \textbf{Digit Representation:} Writing $N = 100A + L$ separates last two digits for modular analysis
+\item \textbf{Key Observation:} Since $100 \equiv 0 \pmod{4}$, divisibility of $N$ by 4 depends only on last two digits
+\item \textbf{Generalization:} Same technique proves divisibility rules for powers of 2 (e.g., rule for 8 uses last three digits)
+\end{itemize}
+\end{takeaways}

@@ -1,0 +1,35 @@
+% Part 2 Problem 02 (Easy): Rational + Irrational = Irrational
+% Source: samples/17.tex
+% Technique: Proof by Contradiction
+% Topic: Irrationality
+
+\begin{problem}[Easy]
+If $a$ is rational and $b$ is irrational, prove that $a + b$ is irrational.
+\end{problem}
+
+\begin{hint}
+Use proof by contradiction. Assume $a + b$ is rational, then solve for $b$ in terms of rational numbers. What property of rational numbers does this contradict?
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{Proof by Contradiction:}
+
+Assume, for contradiction, that $a + b$ is rational.
+
+Since $a$ is rational and $a + b$ is rational (by assumption), we can write:
+\begin{align*}
+a &= \frac{p}{q} \quad \text{where } p, q \in \mathbb{Z}, q \neq 0 \\
+a + b &= \frac{r}{s} \quad \text{where } r, s \in \mathbb{Z}, s \neq 0
+\end{align*}
+
+Solving for $b$:
+\[
+b = (a + b) - a = \frac{r}{s} - \frac{p}{q} = \frac{rq - ps}{sq}
+\]
+
+Since $r, q, p, s$ are all integers and $sq \neq 0$, this shows $b$ is expressible as a ratio of two integers.
+
+Therefore, $b$ must be rational, which \textbf{contradicts} the given condition that $b$ is irrational.
+
+Hence, our assumption was false, and $a + b$ must be irrational. $\qed$
+\end{solutionsketch}

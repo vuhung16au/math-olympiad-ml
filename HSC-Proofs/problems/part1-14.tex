@@ -1,0 +1,71 @@
+% Part 1, Problem 14: x^n - y^n divisible by x-y - Mathematical Induction (CROSSOVER)
+% Hard
+
+\begin{problem}[Hard]
+Prove by induction that $x^n - y^n$ is divisible by $x - y$ for all positive integers $n$, where $x, y$ are integers with $x \neq y$.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Mathematical Induction}
+
+\textbf{Base Case} ($n=1$):
+
+For $n=1$:
+\[ x^1 - y^1 = x - y \]
+
+Since $x - y$ is divisible by $x - y$, the statement holds for $n=1$. \checkmark
+
+\vspace{0.5em}
+\textbf{Inductive Hypothesis:}
+
+Assume the statement is true for $n=k$, where $k$ is a positive integer:
+\[ x^k - y^k \text{ is divisible by } x - y \]
+
+This means we can write:
+\[ x^k - y^k = m(x - y) \]
+for some integer $m$.
+
+\vspace{0.5em}
+\textbf{Inductive Step:}
+
+We must prove the statement for $n=k+1$:
+\[ x^{k+1} - y^{k+1} \text{ is divisible by } x - y \]
+
+Start with $x^{k+1} - y^{k+1}$ and manipulate to introduce $x^k - y^k$:
+\begin{align*}
+    x^{k+1} - y^{k+1} &= x^{k+1} - xy^k + xy^k - y^{k+1} \\
+    &= x(x^k - y^k) + y^k(x - y)
+\end{align*}
+
+Substitute the inductive hypothesis $x^k - y^k = m(x-y)$:
+\begin{align*}
+    x^{k+1} - y^{k+1} &= x \cdot m(x-y) + y^k(x-y) \\
+    &= (x-y)(xm + y^k)
+\end{align*}
+
+Since $x, y, m, k$ are all integers, $M = xm + y^k$ is an integer.
+
+Therefore:
+\[ x^{k+1} - y^{k+1} = M(x-y) \]
+
+This shows $x^{k+1} - y^{k+1}$ is divisible by $x-y$. \checkmark
+
+\vspace{0.5em}
+\textbf{Conclusion:}
+
+By mathematical induction, $x^n - y^n$ is divisible by $x - y$ for all positive integers $n$.
+
+\hfill $\square$
+
+\vspace{1em}
+\noindent\textit{Note: This problem demonstrates the crossover between Induction and Proofs topics in HSC Extension 2.}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Strategic Addition/Subtraction:} Add and subtract $xy^k$ to create terms involving $x^k - y^k$ and $x - y$
+\item \textbf{Factorization:} Extract common factor $(x-y)$ after rearrangement
+\item \textbf{Induction Crossover:} Problem appears in both HSC-Induction and HSC-Proofs collections, showing technique overlap
+\item \textbf{Alternative Formula:} Result leads to $x^n - y^n = (x-y)(x^{n-1} + x^{n-2}y + \ldots + xy^{n-2} + y^{n-1})$
+\end{itemize}
+\end{takeaways}

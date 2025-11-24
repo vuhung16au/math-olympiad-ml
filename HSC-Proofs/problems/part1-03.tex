@@ -1,0 +1,63 @@
+% Part 1, Problem 3: sqrt{23} is irrational - Proof by Contradiction
+% Easy
+
+\begin{problem}[Easy]
+Prove that $\sqrt{23}$ is irrational.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Contradiction}
+
+\textbf{Step 1: Assume the negation}
+
+Assume, for contradiction, that $\sqrt{23}$ is rational. Then it can be written as:
+\[ \sqrt{23} = \frac{p}{q} \]
+where $p, q \in \mathbb{Z}$, $q \neq 0$, and $\gcd(p,q) = 1$ (the fraction is in lowest terms).
+
+\textbf{Step 2: Square both sides}
+
+\begin{align*}
+    23 &= \frac{p^2}{q^2} \\
+    p^2 &= 23q^2
+\end{align*}
+
+\textbf{Step 3: Deduce divisibility}
+
+From $p^2 = 23q^2$, we see that $p^2$ is divisible by 23.
+
+Since 23 is prime, if $23 \mid p^2$, then $23 \mid p$ (by fundamental theorem of arithmetic).
+
+\textbf{Step 4: Substitute and derive contradiction}
+
+Since $23 \mid p$, write $p = 23k$ for some integer $k$. Substituting into $p^2 = 23q^2$:
+\begin{align*}
+    (23k)^2 &= 23q^2 \\
+    529k^2 &= 23q^2 \\
+    23k^2 &= q^2
+\end{align*}
+
+This shows $q^2$ is divisible by 23. Since 23 is prime, $23 \mid q$.
+
+\textbf{Step 5: Establish contradiction}
+
+We have shown that both $p$ and $q$ are divisible by 23.
+
+This contradicts our assumption that $\gcd(p,q) = 1$.
+
+\textbf{Conclusion}
+
+Therefore, $\sqrt{23}$ cannot be expressed as a fraction of integers.
+
+Hence, $\sqrt{23}$ is irrational.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Standard Irrationality Template:} Assume rational form $\frac{p}{q}$ in lowest terms, square to get $p^2 = nq^2$, show both $p$ and $q$ divisible by prime factor, contradict lowest terms assumption
+\item \textbf{Prime Divisibility:} If prime $p$ divides $a^2$, then $p$ divides $a$ (key property from fundamental theorem of arithmetic)
+\item \textbf{Lowest Terms:} Always start with $\gcd(p,q) = 1$ to enable the contradiction via common factors
+\item \textbf{Generalization:} This method proves $\sqrt{p}$ irrational for any prime $p$
+\end{itemize}
+\end{takeaways}

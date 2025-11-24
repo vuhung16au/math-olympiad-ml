@@ -1,0 +1,53 @@
+% Part 1, Problem 8: Conditional divisibility - Proof by Contradiction
+% Medium
+
+\begin{problem}[Medium]
+Prove by contradiction that if $a, b$ are integers and $a + b \leq 5$, then $a \leq 2$ or $b \leq 2$.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Contradiction}
+
+\textbf{Step 1: Assume the negation of the conclusion}
+
+We want to prove: If $a + b \leq 5$, then $a \leq 2$ or $b \leq 2$.
+
+Assume the conclusion is false. The negation of ``$a \leq 2$ or $b \leq 2$'' is:
+\[ a > 2 \quad \text{AND} \quad b > 2 \]
+
+\textbf{Step 2: Apply the integer constraint}
+
+Since $a$ and $b$ are integers with $a > 2$ and $b > 2$, we must have:
+\[ a \geq 3 \quad \text{and} \quad b \geq 3 \]
+
+(The smallest integer greater than 2 is 3.)
+
+\textbf{Step 3: Derive a contradiction}
+
+Adding these inequalities:
+\begin{align*}
+    a + b &\geq 3 + 3 \\
+    a + b &\geq 6
+\end{align*}
+
+But this contradicts our hypothesis that $a + b \leq 5$.
+
+We cannot have both $a + b \geq 6$ and $a + b \leq 5$ simultaneously.
+
+\textbf{Conclusion}
+
+Since assuming the negation of the conclusion leads to a contradiction, the conclusion must be true.
+
+Therefore, if $a, b$ are integers with $a + b \leq 5$, then $a \leq 2$ or $b \leq 2$.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Negating ``Or'' Statements:} The negation of ``$P$ or $Q$'' is ``not $P$ AND not $Q$''
+\item \textbf{Integer Constraints:} For integers, $a > 2$ implies $a \geq 3$ (no integers strictly between 2 and 3)
+\item \textbf{Contradiction Structure:} Derive statement that directly contradicts a hypothesis (here: $a+b \geq 6$ vs $a+b \leq 5$)
+\item \textbf{Logical Form:} Statement has form $(P \implies Q \lor R)$; negate conclusion to get $\neg Q \land \neg R$
+\end{itemize}
+\end{takeaways}

@@ -1,0 +1,69 @@
+% Part 1, Problem 4: Contrapositive logic - Direct Proof (Logical Analysis)
+% Easy
+
+\begin{problem}[Easy]
+Consider the statement: ``For all integers $n$, if $n$ is a multiple of 6, then $n$ is a multiple of 2.''
+
+Which of the following is the contrapositive of this statement?
+
+\begin{enumerate}[label=\Alph*.]
+    \item There exists an integer $n$ such that $n$ is a multiple of 6 and not a multiple of 2.
+    \item There exists an integer $n$ such that $n$ is a multiple of 2 and not a multiple of 6.
+    \item For all integers $n$, if $n$ is not a multiple of 2, then $n$ is not a multiple of 6.
+    \item For all integers $n$, if $n$ is not a multiple of 6, then $n$ is not a multiple of 2.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Logical Analysis of Contrapositive}
+
+\textbf{Step 1: Identify the logical structure}
+
+The original statement has the form:
+\[ \forall n \in \mathbb{Z}, \quad P(n) \implies Q(n) \]
+
+Where:
+\begin{itemize}
+    \item $P(n)$: ``$n$ is a multiple of 6''
+    \item $Q(n)$: ``$n$ is a multiple of 2''
+\end{itemize}
+
+\textbf{Step 2: Apply contrapositive definition}
+
+The contrapositive of $P \implies Q$ is $\neg Q \implies \neg P$.
+
+Key: The universal quantifier (``for all'') remains unchanged.
+
+\textbf{Step 3: Negate each part}
+
+\begin{itemize}
+    \item $\neg Q(n)$: ``$n$ is NOT a multiple of 2''
+    \item $\neg P(n)$: ``$n$ is NOT a multiple of 6''
+\end{itemize}
+
+\textbf{Step 4: Construct the contrapositive}
+
+\[ \forall n \in \mathbb{Z}, \quad \neg Q(n) \implies \neg P(n) \]
+
+In words: ``For all integers $n$, if $n$ is not a multiple of 2, then $n$ is not a multiple of 6.''
+
+This matches \textbf{Option C}.
+
+\textbf{Analysis of incorrect options:}
+\begin{itemize}
+    \item \textbf{Option A:} Negation of original ($\exists n: P(n) \land \neg Q(n)$), not contrapositive
+    \item \textbf{Option B:} Negation of converse
+    \item \textbf{Option D:} Inverse ($\neg P \implies \neg Q$), not contrapositive
+\end{itemize}
+
+\textbf{Answer:} \boxed{\text{C}}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Contrapositive Form:} $P \implies Q$ has contrapositive $\neg Q \implies \neg P$ (swap and negate both parts)
+\item \textbf{Logical Equivalence:} A statement and its contrapositive are logically equivalent (same truth value)
+\item \textbf{Quantifiers Unchanged:} Universal quantifier (``for all'') stays when forming contrapositive
+\item \textbf{Common Errors:} Inverse ($\neg P \implies \neg Q$) and converse ($Q \implies P$) are NOT equivalent to original
+\end{itemize}
+\end{takeaways}

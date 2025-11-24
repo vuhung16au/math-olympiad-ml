@@ -1,0 +1,56 @@
+% Part 2 Problem 10 (Medium): x is even iff x^2 is even
+% Source: samples/26.tex
+% Technique: Direct Proof + Contrapositive (Biconditional)
+% Topic: Parity
+
+\begin{problem}[Medium]
+Prove that $x$ is even if and only if $x^2$ is even (for integer $x$).
+\end{problem}
+
+\begin{hint}
+This is a biconditional (iff) statement requiring two proofs:
+\begin{itemize}
+\item Direction 1: If $x$ is even, then $x^2$ is even (direct proof).
+\item Direction 2: If $x^2$ is even, then $x$ is even (try contrapositive: if $x$ is odd, then $x^2$ is odd).
+\end{itemize}
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{Direction 1 ($\Rightarrow$):} If $x$ is even, then $x^2$ is even.
+
+Assume $x$ is even. Then $x = 2k$ for some integer $k$.
+
+Therefore:
+\[
+x^2 = (2k)^2 = 4k^2 = 2(2k^2)
+\]
+
+Since $2k^2$ is an integer, $x^2$ is even by definition.
+
+\vspace{0.5cm}
+
+\textbf{Direction 2 ($\Leftarrow$):} If $x^2$ is even, then $x$ is even.
+
+We prove the contrapositive: If $x$ is odd, then $x^2$ is odd.
+
+Assume $x$ is odd. Then $x = 2k + 1$ for some integer $k$.
+
+Therefore:
+\begin{align*}
+x^2 &= (2k+1)^2 \\
+&= 4k^2 + 4k + 1 \\
+&= 2(2k^2 + 2k) + 1
+\end{align*}
+
+Since $2k^2 + 2k$ is an integer, $x^2$ is odd by definition.
+
+By contrapositive, if $x^2$ is even, then $x$ must be even.
+
+\vspace{0.5cm}
+
+\textbf{Conclusion:} Both directions proven, so $x$ is even $\iff$ $x^2$ is even. $\qed$
+
+\vspace{0.3cm}
+
+\textit{Note: This result is fundamental in many irrationality proofs (e.g., $\sqrt{2}$ is irrational). If $p$ is an odd prime and $p|x^2$, then $p|x$.}
+\end{solutionsketch}

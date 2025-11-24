@@ -1,0 +1,58 @@
+% Part 1, Problem 5: n^2-1 divisible by 3 if 3 doesn't divide n - Proof by Cases
+% Easy
+
+\begin{problem}[Easy]
+Prove that $n^2 - 1$ is divisible by 3 if $n$ is not a multiple of 3.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Cases (Modular Arithmetic)}
+
+\textbf{Step 1: Set up the cases}
+
+If $n$ is not a multiple of 3, then $n \not\equiv 0 \pmod{3}$.
+
+By the division algorithm, $n$ must satisfy one of:
+\begin{itemize}
+    \item $n \equiv 1 \pmod{3}$, or
+    \item $n \equiv 2 \pmod{3}$
+\end{itemize}
+
+We will prove $n^2 - 1 \equiv 0 \pmod{3}$ in both cases.
+
+\textbf{Step 2: Case 1 - $n \equiv 1 \pmod{3}$}
+
+\begin{align*}
+    n^2 - 1 &\equiv (1)^2 - 1 \pmod{3} \\
+    &\equiv 1 - 1 \pmod{3} \\
+    &\equiv 0 \pmod{3}
+\end{align*}
+
+Therefore, $3 \mid (n^2 - 1)$ in this case.
+
+\textbf{Step 3: Case 2 - $n \equiv 2 \pmod{3}$}
+
+\begin{align*}
+    n^2 - 1 &\equiv (2)^2 - 1 \pmod{3} \\
+    &\equiv 4 - 1 \pmod{3} \\
+    &\equiv 3 \pmod{3} \\
+    &\equiv 0 \pmod{3}
+\end{align*}
+
+Therefore, $3 \mid (n^2 - 1)$ in this case as well.
+
+\textbf{Conclusion}
+
+Since $n^2 - 1 \equiv 0 \pmod{3}$ in all possible cases where $3 \nmid n$, we conclude that $n^2 - 1$ is divisible by 3 whenever $n$ is not a multiple of 3.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Proof by Cases Setup:} If $n \not\equiv 0 \pmod{m}$, check all other residue classes modulo $m$
+\item \textbf{Modular Arithmetic:} Use $a \equiv b \pmod{m}$ to mean $m \mid (a-b)$, or equivalently, $a$ and $b$ have same remainder when divided by $m$
+\item \textbf{Complete Case Coverage:} For modulo 3, only residues are 0, 1, 2; excluding 0 leaves exactly 2 cases to check
+\item \textbf{Calculation Technique:} Substitute residue values directly: if $n \equiv 2 \pmod{3}$, then $n^2 \equiv 4 \equiv 1 \pmod{3}$
+\end{itemize}
+\end{takeaways}

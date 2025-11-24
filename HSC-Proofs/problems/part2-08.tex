@@ -1,0 +1,60 @@
+% Part 2 Problem 08 (Medium): Divisibility by 9 iff sum of digits divisible by 9
+% Source: samples/21.tex
+% Technique: Direct Proof (Biconditional)
+% Topic: Divisibility Rules/Modular Arithmetic
+
+\begin{problem}[Medium]
+Prove that a three-digit number is divisible by $9$ if and only if the sum of its digits is divisible by $9$.
+\end{problem}
+
+\begin{hint}
+Let $N = 100a + 10b + c$ where $a, b, c$ are the digits.
+
+Rewrite this as $N = 9(11a + b) + (a + b + c)$ to establish the relationship between $N$ and the digit sum.
+
+Then prove both directions of the biconditional using this relationship.
+\end{hint}
+
+\begin{solutionsketch}
+Let $N = 100a + 10b + c$ be a three-digit number with digits $a, b, c$.
+
+Let $S = a + b + c$ be the sum of digits.
+
+\vspace{0.3cm}
+
+\textbf{Key Relationship:}
+
+Rewrite $N$:
+\begin{align*}
+N &= 100a + 10b + c \\
+&= (99a + a) + (9b + b) + c \\
+&= 9(11a + b) + (a + b + c) \\
+&= 9(11a + b) + S
+\end{align*}
+
+Therefore: $N - S = 9(11a + b)$, which means $N \equiv S \pmod{9}$.
+
+\vspace{0.3cm}
+
+\textbf{Direction 1 ($\Rightarrow$):} If $9|N$, then $9|S$.
+
+If $N \equiv 0 \pmod{9}$, then from $N \equiv S \pmod{9}$, we get $S \equiv 0 \pmod{9}$.
+
+Thus $9|S$.
+
+\vspace{0.3cm}
+
+\textbf{Direction 2 ($\Leftarrow$):} If $9|S$, then $9|N$.
+
+If $S \equiv 0 \pmod{9}$, then from $N \equiv S \pmod{9}$, we get $N \equiv 0 \pmod{9}$.
+
+Thus $9|N$.
+
+\vspace{0.3cm}
+
+Both directions proven, so the biconditional holds. $\qed$
+
+\vspace{0.3cm}
+
+\textit{Note: This proof generalizes to all positive integers and divisibility by 9. The key is the modular relationship $N \equiv S \pmod{9}$.}
+\end{solutionsketch}

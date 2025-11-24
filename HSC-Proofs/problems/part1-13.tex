@@ -1,0 +1,62 @@
+% Part 1, Problem 13: log_n(n+1) irrational - Proof by Contradiction
+% Hard
+
+\begin{problem}[Hard]
+Prove that for any integer $n > 1$, $\log_n(n+1)$ is irrational.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Contradiction}
+
+\textbf{Step 1: Assume the negation}
+
+Assume, for contradiction, that $\log_n(n+1)$ is rational for some integer $n > 1$.
+
+Then we can write:
+\[ \log_n(n+1) = \frac{p}{q} \]
+where $p, q$ are positive integers.
+
+\textbf{Step 2: Convert to exponential form}
+
+By definition of logarithm:
+\[ n^{p/q} = n+1 \]
+
+Raising both sides to the power $q$:
+\[ n^p = (n+1)^q \]
+
+\textbf{Step 3: Analyze modulo $n$}
+
+\textbf{Left side:} $n^p \equiv 0 \pmod{n}$ (clearly divisible by $n$)
+
+\textbf{Right side:} By the Binomial Theorem:
+\[ (n+1)^q = \sum_{k=0}^{q} \binom{q}{k} n^k \cdot 1^{q-k} = n^q + \binom{q}{1}n^{q-1} + \ldots + \binom{q}{q-1}n + 1 \]
+
+All terms contain $n$ except the last term, so:
+\[ (n+1)^q \equiv 1 \pmod{n} \]
+
+\textbf{Step 4: Derive contradiction}
+
+From $n^p = (n+1)^q$, we have modulo $n$:
+\[ 0 \equiv 1 \pmod{n} \]
+
+This means $n \mid (0-1)$, so $n \mid (-1)$.
+
+For $n > 1$, this is impossible.
+
+\textbf{Conclusion}
+
+The assumption that $\log_n(n+1)$ is rational leads to a contradiction.
+
+Therefore, $\log_n(n+1)$ is irrational for all integers $n > 1$.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Logarithm to Exponential:} Converting $\log_n(n+1) = \frac{p}{q}$ to $n^p = (n+1)^q$ enables algebraic manipulation
+\item \textbf{Modular Analysis:} Working mod $n$ reveals contradiction: LHS $\equiv 0$ but RHS $\equiv 1$
+\item \textbf{Binomial Expansion:} $(n+1)^q \equiv 1 \pmod{n}$ since only constant term survives
+\item \textbf{Non-standard Irrationality:} Unlike $\sqrt{p}$ proofs, this uses modular arithmetic rather than prime factorization
+\end{itemize}
+\end{takeaways}

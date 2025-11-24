@@ -1,0 +1,42 @@
+% Part 2 Problem 04 (Easy): Either b or b+1 not divisible by a
+% Source: samples/18.tex
+% Technique: Proof by Contradiction
+% Topic: Divisibility
+
+\begin{problem}[Easy]
+Prove that for positive integers $a, b$ with $a > 1$, either $b$ is not divisible by $a$ or $b + 1$ is not divisible by $a$ (or both).
+\end{problem}
+
+\begin{hint}
+Use proof by contradiction. Assume both $a|b$ and $a|(b+1)$. What does this tell you about $a|[(b+1) - b]$? What can you conclude about $a$?
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{Proof by Contradiction:}
+
+The statement is equivalent to: "It is not the case that both $a|b$ and $a|(b+1)$."
+
+Assume, for contradiction, that \textbf{both} $a|b$ and $a|(b+1)$.
+
+Then there exist integers $k_1$ and $k_2$ such that:
+\begin{align*}
+b &= ak_1 \\
+b + 1 &= ak_2
+\end{align*}
+
+Subtracting the first equation from the second:
+\[
+(b+1) - b = ak_2 - ak_1
+\]
+\[
+1 = a(k_2 - k_1)
+\]
+
+Let $K = k_2 - k_1 \in \mathbb{Z}$. Then $1 = aK$, which means $a$ divides $1$.
+
+Since $a$ is a positive integer, the only positive divisor of $1$ is $1$ itself. Therefore, $a = 1$.
+
+This \textbf{contradicts} the given condition that $a > 1$.
+
+Hence, our assumption must be false, and at least one of $b$ or $b+1$ is not divisible by $a$. $\qed$
+\end{solutionsketch}

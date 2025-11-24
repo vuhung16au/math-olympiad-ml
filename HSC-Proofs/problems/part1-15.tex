@@ -1,0 +1,83 @@
+% Part 1, Problem 15: Divisibility by 6 - Direct Proof (Multi-part)
+% Hard
+
+\begin{problem}[Hard]
+For $n \in \mathbb{Z}$, prove that:
+\begin{enumerate}[label=(\alph*)]
+    \item $n$ is divisible by 6 if and only if $n$ is divisible by 2 and 3.
+    \item $n^3 - n$ is divisible by 6.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Part (a): Biconditional Proof}
+
+\textbf{Forward} ($\implies$): If $6 \mid n$, then $2 \mid n$ and $3 \mid n$.
+
+\begin{proof}
+Assume $6 \mid n$. Then $n = 6k$ for some integer $k$.
+
+Write $n = 6k = 2(3k)$. Since $3k$ is an integer, $2 \mid n$.
+
+Write $n = 6k = 3(2k)$. Since $2k$ is an integer, $3 \mid n$. \qed
+\end{proof}
+
+\textbf{Reverse} ($\impliedby$): If $2 \mid n$ and $3 \mid n$, then $6 \mid n$.
+
+\begin{proof}
+Assume $2 \mid n$ and $3 \mid n$.
+
+Then $n = 2a$ and $n = 3b$ for some integers $a, b$.
+
+From $n = 2a$, $n$ is even. From $n = 3b$, we have $2a = 3b$.
+
+Since LHS is even, RHS $3b$ must be even. Since 3 is odd, $b$ must be even.
+
+Write $b = 2c$ for some integer $c$.
+
+Then:
+\[ n = 3b = 3(2c) = 6c \]
+
+Since $c$ is an integer, $6 \mid n$. \qed
+\end{proof}
+
+\vspace{1em}
+\textbf{Part (b): Using Part (a)}
+
+\textbf{Goal:} Prove $6 \mid (n^3 - n)$.
+
+By part (a), sufficient to show $2 \mid (n^3 - n)$ and $3 \mid (n^3 - n)$.
+
+\textbf{Step 1: Factor}
+\[ n^3 - n = n(n^2 - 1) = n(n-1)(n+1) = (n-1)n(n+1) \]
+
+This is the product of three consecutive integers.
+
+\textbf{Step 2: Prove $2 \mid (n^3 - n)$}
+
+Among any three consecutive integers, at least one is even.
+
+Therefore, $(n-1)n(n+1)$ contains an even factor, so $2 \mid (n^3 - n)$. \checkmark
+
+\textbf{Step 3: Prove $3 \mid (n^3 - n)$}
+
+Among any three consecutive integers, exactly one is divisible by 3.
+
+Therefore, $(n-1)n(n+1)$ contains a factor divisible by 3, so $3 \mid (n^3 - n)$. \checkmark
+
+\textbf{Conclusion}
+
+Since $2 \mid (n^3 - n)$ and $3 \mid (n^3 - n)$, and $\gcd(2,3) = 1$, by part (a):
+\[ 6 \mid (n^3 - n) \]
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Coprime Divisibility:} If $\gcd(a,b) = 1$ and both $a \mid n$ and $b \mid n$, then $ab \mid n$
+\item \textbf{Consecutive Integer Properties:} Among $k$ consecutive integers, exactly one is divisible by $k$
+\item \textbf{Multi-part Strategy:} Part (b) leverages part (a) to simplify proof (check divisibility by 2 and 3 separately)
+\item \textbf{Factorization:} $n^3 - n = (n-1)n(n+1)$ reveals structure as consecutive integer product
+\end{itemize}
+\end{takeaways}

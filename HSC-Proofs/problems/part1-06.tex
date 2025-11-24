@@ -1,0 +1,54 @@
+% Part 1, Problem 6: Odd integer squared minus 1 divisible by 8 - Direct Proof
+% Medium
+
+\begin{problem}[Medium]
+Prove that if $a$ is any odd integer, then $a^2 - 1$ is divisible by 8.
+\end{problem}
+
+\begin{solution}
+\textbf{Direct Proof}
+
+\textbf{Step 1: Express $a$ as an odd integer}
+
+Since $a$ is odd, we can write:
+\[ a = 2k + 1 \]
+for some integer $k$.
+
+\textbf{Step 2: Expand $a^2 - 1$}
+
+\begin{align*}
+    a^2 - 1 &= (2k + 1)^2 - 1 \\
+    &= 4k^2 + 4k + 1 - 1 \\
+    &= 4k^2 + 4k \\
+    &= 4k(k + 1)
+\end{align*}
+
+\textbf{Step 3: Analyze $k(k+1)$}
+
+Note that $k$ and $(k+1)$ are consecutive integers. 
+
+Therefore, one of them must be even, which means their product $k(k+1)$ is divisible by 2.
+
+Write $k(k+1) = 2m$ for some integer $m$.
+
+\textbf{Step 4: Substitute and conclude}
+
+\begin{align*}
+    a^2 - 1 &= 4 \cdot k(k+1) \\
+    &= 4 \cdot 2m \\
+    &= 8m
+\end{align*}
+
+Since $a^2 - 1 = 8m$, we conclude that $a^2 - 1$ is divisible by 8.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Odd Integer Form:} Any odd integer can be written as $2k+1$ for some integer $k$
+\item \textbf{Consecutive Integer Property:} Product of consecutive integers $k(k+1)$ is always even (one must be even)
+\item \textbf{Factor Extraction:} From $4k(k+1) = 4 \cdot 2m = 8m$, directly see divisibility by 8
+\item \textbf{Alternative View:} Can also factor $a^2-1 = (a-1)(a+1)$, both even for odd $a$, with one divisible by 4
+\end{itemize}
+\end{takeaways}

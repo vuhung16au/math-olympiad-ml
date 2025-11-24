@@ -1,0 +1,41 @@
+% Part 2 Problem 06 (Medium): (2^m-1)^2 - 1 divisible by 2^{m+1}
+% Source: samples/10.tex
+% Technique: Direct Proof
+% Topic: Divisibility/Exponents
+
+\begin{problem}[Medium]
+Prove that $(2^m - 1)^2 - 1$ is divisible by $2^{m+1}$ for all integers $m \geq 1$.
+\end{problem}
+
+\begin{hint}
+Expand the perfect square $(2^m - 1)^2$ algebraically, then simplify. Try to factor out $2^{m+1}$ from the resulting expression.
+\end{hint}
+
+\begin{solutionsketch}
+Let $E = (2^m - 1)^2 - 1$.
+
+\textbf{Step 1:} Expand the square:
+\begin{align*}
+E &= (2^m)^2 - 2(2^m) + 1 - 1 \\
+&= 2^{2m} - 2^{m+1} + 1 - 1 \\
+&= 2^{2m} - 2^{m+1}
+\end{align*}
+
+\textbf{Step 2:} Factor out $2^{m+1}$:
+
+Note that $2^{2m} = 2^{m+1} \cdot 2^{m-1}$ (using exponent laws).
+
+Therefore:
+\begin{align*}
+E &= 2^{m+1} \cdot 2^{m-1} - 2^{m+1} \cdot 1 \\
+&= 2^{m+1}(2^{m-1} - 1)
+\end{align*}
+
+\textbf{Step 3:} Conclude divisibility:
+
+Since $m \geq 1$, we have $m - 1 \geq 0$, so $2^{m-1}$ is an integer. Thus $(2^{m-1} - 1)$ is an integer.
+
+Therefore, $E = 2^{m+1} \cdot k$ where $k = 2^{m-1} - 1 \in \mathbb{Z}$.
+
+By definition, $(2^m - 1)^2 - 1$ is divisible by $2^{m+1}$. $\qed$
+\end{solutionsketch}

@@ -1,0 +1,72 @@
+% Part 2 Problem 15 (Hard): Divisibility induction 4^{n+1} + 6^n divisible by 10
+% Source: samples/29.tex
+% Technique: Mathematical Induction
+% Topic: Divisibility/Induction
+
+\begin{problem}[Hard]
+Prove by induction that $4^{n+1} + 6^n$ is divisible by $10$ when $n$ is an even positive integer.
+\end{problem}
+
+\begin{hint}
+Since $n$ is even, let $n = 2k$ for $k \geq 1$. Prove by induction on $k$ that $4^{2k+1} + 6^{2k}$ is divisible by $10$.
+
+For the inductive step:
+\begin{itemize}
+\item Express $4^{2(k+1)+1} + 6^{2(k+1)}$ as $16 \cdot 4^{2k+1} + 36 \cdot 6^{2k}$
+\item From IH: $6^{2k} = 10M - 4^{2k+1}$ for some integer $M$
+\item Substitute and factor out $10$
+\end{itemize}
+\end{hint}
+
+\begin{solutionsketch}
+Since $n$ is an even positive integer, let $n = 2k$ where $k \in \mathbb{Z}^+$.
+
+We prove by induction on $k$ that $P(k)$: "$4^{2k+1} + 6^{2k}$ is divisible by $10$" holds for all $k \geq 1$.
+
+\vspace{0.3cm}
+
+\textbf{Base case ($k=1$, i.e., $n=2$):}
+\[
+4^{2(1)+1} + 6^{2(1)} = 4^3 + 6^2 = 64 + 36 = 100 = 10 \times 10
+\]
+Divisible by $10$. \checkmark
+
+\vspace{0.3cm}
+
+\textbf{Inductive hypothesis:}
+
+Assume $P(k)$ holds: $4^{2k+1} + 6^{2k} = 10M$ for some integer $M$.
+
+From this: $6^{2k} = 10M - 4^{2k+1}$
+
+\vspace{0.3cm}
+
+\textbf{Inductive step:}
+
+Prove $P(k+1)$: $4^{2(k+1)+1} + 6^{2(k+1)}$ is divisible by $10$.
+
+\begin{align*}
+4^{2(k+1)+1} + 6^{2(k+1)} &= 4^{2k+3} + 6^{2k+2} \\
+&= 4^2 \cdot 4^{2k+1} + 6^2 \cdot 6^{2k} \\
+&= 16 \cdot 4^{2k+1} + 36 \cdot 6^{2k}
+\end{align*}
+
+Substitute $6^{2k} = 10M - 4^{2k+1}$ from IH:
+\begin{align*}
+&= 16 \cdot 4^{2k+1} + 36(10M - 4^{2k+1}) \\
+&= 16 \cdot 4^{2k+1} + 360M - 36 \cdot 4^{2k+1} \\
+&= 360M + (16 - 36) \cdot 4^{2k+1} \\
+&= 360M - 20 \cdot 4^{2k+1} \\
+&= 10(36M - 2 \cdot 4^{2k+1})
+\end{align*}
+
+Since $M$ and $4^{2k+1}$ are integers, $36M - 2 \cdot 4^{2k+1}$ is an integer.
+
+Therefore, $4^{2(k+1)+1} + 6^{2(k+1)}$ is divisible by $10$. \checkmark
+
+\vspace{0.3cm}
+
+By the principle of mathematical induction, $P(k)$ holds for all $k \geq 1$.
+
+Therefore, $4^{n+1} + 6^n$ is divisible by $10$ for all even positive integers $n$. $\qed$
+\end{solutionsketch}

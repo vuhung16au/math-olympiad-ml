@@ -1,0 +1,62 @@
+% Part 2 Problem 13 (Hard): Exponential inequality existence
+% Source: samples/24.tex
+% Technique: Existence Proof (by example and analysis)
+% Topic: Inequalities/Analysis
+
+\begin{problem}[Hard]
+Prove or disprove: There exists a real number $n$ such that $3^n + 4^n < 5^n$.
+\end{problem}
+
+\begin{hint}
+The statement is \textbf{true}. Try a few values: $n = 2$ gives $9 + 16 = 25 = 5^2$ (equality, not $<$).
+
+Try $n = 3$: Is $3^3 + 4^3 < 5^3$? Calculate $27 + 64$ vs $125$.
+
+Alternatively, divide by $5^n$ to get $(3/5)^n + (4/5)^n < 1$ and analyze the function behavior.
+\end{hint}
+
+\begin{solutionsketch}
+The statement is \textbf{true}.
+
+\vspace{0.3cm}
+
+\textbf{Proof by Example:}
+
+Try $n = 3$:
+\begin{align*}
+3^3 + 4^3 &= 27 + 64 = 91 \\
+5^3 &= 125
+\end{align*}
+
+Since $91 < 125$, the inequality $3^3 + 4^3 < 5^3$ holds.
+
+Therefore, $n = 3$ is a real number satisfying the inequality. $\qed$
+
+\vspace{0.5cm}
+
+\textbf{Alternative Proof (Analysis):}
+
+Divide the inequality by $5^n$:
+\[
+\left(\frac{3}{5}\right)^n + \left(\frac{4}{5}\right)^n < 1
+\]
+
+Let $f(n) = \left(\frac{3}{5}\right)^n + \left(\frac{4}{5}\right)^n$.
+
+\begin{itemize}
+\item At $n = 2$: $f(2) = \frac{9}{25} + \frac{16}{25} = 1$ (equality)
+\item The derivative: $f'(n) = \left(\frac{3}{5}\right)^n \ln\left(\frac{3}{5}\right) + \left(\frac{4}{5}\right)^n \ln\left(\frac{4}{5}\right)$
+
+Since $\frac{3}{5} < 1$ and $\frac{4}{5} < 1$, both logarithms are negative, so $f'(n) < 0$.
+
+\item Therefore, $f(n)$ is strictly decreasing.
+\end{itemize}
+
+Since $f(2) = 1$ and $f$ is strictly decreasing, for any $n > 2$, we have $f(n) < 1$.
+
+Thus, the inequality holds for all $n > 2$. In particular, it holds for $n = 3$ (and infinitely many other values). $\qed$
+
+\vspace{0.3cm}
+
+\textit{Note: This shows the power of the "divide by largest term" technique in inequality problems. The critical point is $n = 2$ where equality holds (Pythagorean triple: $3^2 + 4^2 = 5^2$).}
+\end{solutionsketch}

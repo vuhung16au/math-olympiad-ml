@@ -1,0 +1,39 @@
+% Part 2 Problem 01 (Easy): a^3 - a + 1 is always odd
+% Source: samples/13.tex
+% Technique: Direct Proof or Proof by Cases
+% Topic: Parity
+
+\begin{problem}[Easy]
+Prove that the expression $a^3 - a + 1$ is odd for all positive integer values of $a$.
+\end{problem}
+
+\begin{hint}
+Consider factoring $a^3 - a$ as a product of consecutive integers. What can you say about the parity of any product of consecutive integers?
+
+Alternatively, try proof by cases: analyze when $a$ is even and when $a$ is odd separately.
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{Method 1 (Factorization - Elegant):}
+
+Factor the expression:
+\begin{align*}
+a^3 - a + 1 &= a(a^2 - 1) + 1 \\
+&= a(a-1)(a+1) + 1 \\
+&= (a-1)a(a+1) + 1
+\end{align*}
+
+The product $(a-1)a(a+1)$ is the product of three consecutive integers. In any set of consecutive integers, at least one must be even, so the product is even. Let $(a-1)a(a+1) = 2k$ for some integer $k$.
+
+Therefore, $a^3 - a + 1 = 2k + 1$, which is odd by definition.
+
+\vspace{0.5cm}
+
+\textbf{Method 2 (Cases):}
+
+\textit{Case 1:} If $a = 2m$ (even), then $a^3 - a + 1 = 8m^3 - 2m + 1 = 2(4m^3 - m) + 1$ (odd).
+
+\textit{Case 2:} If $a = 2m+1$ (odd), then expanding shows $a^3 - a + 1 = 2(\text{integer}) + 1$ (odd).
+
+In both cases, the expression is odd. $\qed$
+\end{solutionsketch}
