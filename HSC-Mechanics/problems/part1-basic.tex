@@ -64,6 +64,15 @@ Both conditions are satisfied!
 \textbf{Answer:} \boxed{\text{A}}
 \end{solution}
 
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Acceleration Formula:} For velocity as function of displacement, use $a = v\frac{dv}{dx}$ to test motion equations
+\item \textbf{Initial Condition Testing:} Always verify given initial values ($x$, $v$, $a$) in candidate equations before calculating derivatives
+\item \textbf{Multiple Choice Strategy:} Test easier conditions (like initial velocity) before computing acceleration to eliminate options efficiently
+\item \textbf{Sign Convention:} Remember acceleration and velocity can have different signs (e.g., $v=2 > 0$ and $a=4 > 0$)
+\end{itemize}
+\end{takeaways}
+
 \newpage
 
 % Problem from samples/05.tex
@@ -159,6 +168,15 @@ Rationalize the denominator:
 \textbf{Answer:} \boxed{t = \frac{\pi\sqrt{3}}{36} \text{ seconds}}
 \end{solution}
 
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Energy-Based Integration:} For $\ddot{x} = f(x)$, use identity $\ddot{x} = \frac{d}{dx}\left(\frac{1}{2}v^2\right)$ to integrate with respect to displacement
+\item \textbf{Factoring Perfect Squares:} Recognize $16x^4 + 96x^2 + 144 = 16(x^2+3)^2$ to simplify velocity expressions
+\item \textbf{Direction from Sign:} Negative velocity coefficient indicates motion in negative direction; sign of $v$ remains constant if expression maintains sign
+\item \textbf{Arctangent Integrals:} For $\int \frac{1}{x^2+a^2}dx$, use standard form $\frac{1}{a}\tan^{-1}\left(\frac{x}{a}\right)$ with $a = \sqrt{3}$ here
+\end{itemize}
+\end{takeaways}
+
 \newpage
 
 % Problem from samples/30.tex
@@ -242,6 +260,15 @@ This is the required condition. \qed
 \textbf{Physical interpretation:} The condition ensures that the initial kinetic energy $(u^2)$ minus the potential energy gained reaching height $b$ (represented by $gb$) is sufficiently large compared to the total "distance" to the target.
 \end{solution}
 
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Trajectory Derivation:} Eliminate time from parametric equations $x = ut\cos\theta$, $y = ut\sin\theta - \frac{1}{2}gt^2$ to get trajectory
+\item \textbf{Quadratic in $\tan\theta$:} Substituting target point creates quadratic equation; discriminant determines number of solutions
+\item \textbf{Completing the Square:} Transform discriminant condition from $u^4 - 2u^2gb - g^2a^2 > 0$ by adding/subtracting $g^2b^2$
+\item \textbf{Physical Meaning:} Two trajectories exist when initial energy $(u^2 - gb)^2$ exceeds geometric constraint $g^2(a^2+b^2)$
+\end{itemize}
+\end{takeaways}
+
 \newpage
 
 % Problem from samples/16.tex
@@ -315,6 +342,15 @@ Substituting:
 \textbf{Verification:} First plane at $t=30$: completes $\frac{30}{20} = 1.5$ laps \checkmark \\
 Second plane takes off at $t=15$, flies for 15 seconds, completing $\frac{15}{10} = 1.5$ laps \checkmark
 \end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Angular Frequency:} From argument coefficient in $\sin(\omega t)$ or $\cos(\omega t)$, identify angular frequency $\omega$ directly
+\item \textbf{Relative Speed:} If $\omega_2 = 2\omega_1$, second object travels twice as fast (completes laps in half the time)
+\item \textbf{Period Formula:} Relationship $P = \frac{2\pi}{\omega}$ connects period to angular frequency for circular/periodic motion
+\item \textbf{Time Accounting:} For delayed starts, collision time = start delay + flight time of delayed object
+\end{itemize}
+\end{takeaways}
 
 \newpage
 
@@ -400,3 +436,13 @@ Therefore, regardless of initial upward speed, the particle will eventually appr
 
 \textbf{Key insight:} The critical difference is that upward motion must eventually reverse (becoming downward), at which point terminal velocity is approached. Downward motion behavior depends on initial speed relative to terminal velocity.
 \end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Terminal Velocity:} Occurs when $mg = kv$, giving $v_T = \frac{mg}{k}$ (resistance balances gravity)
+\item \textbf{Downward Motion Analysis:} If $v < v_T$, particle accelerates; if $v > v_T$, particle decelerates toward terminal velocity
+\item \textbf{Upward Motion:} Both gravity and resistance oppose motion, so $a = -(g + \frac{k}{m}v) < 0$ always
+\item \textbf{Motion Reversal:} Upward-moving particle must stop, reverse, then fall and approach terminal velocity
+\item \textbf{"Always True" Questions:} Test all cases systematically; reject options that fail in any valid scenario
+\end{itemize}
+\end{takeaways}

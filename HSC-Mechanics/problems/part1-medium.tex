@@ -150,6 +150,16 @@ Using the relationship $1 - e^{-4t} = \frac{4t}{9}$ at $t = 2.25$:
 \textbf{Key insight:} The exponential decay of velocity due to air resistance means the projectile doesn't follow a simple parabolic path. The problem cleverly provides a graphical solution to the transcendental equation.
 \end{solution}
 
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Vector Force Equation:} Air resistance $4\v{v}$ opposes motion; Newton's law gives $\dot{\v{v}} = \v{g} - 4\v{v}$ for unit mass
+\item \textbf{Separating Components:} Solve horizontal ($\ddot{x} = -4\dot{x}$) and vertical ($\ddot{y} = -10 - 4\dot{y}$) equations independently
+\item \textbf{Integrating Factor Method:} For $\frac{d\dot{y}}{dt} + 4\dot{y} = -10$, multiply by $e^{4t}$ to get $\frac{d}{dt}(\dot{y}e^{4t}) = -10e^{4t}$
+\item \textbf{Graphical Solutions:} Transcendental equations like $1-e^{-4t} = \frac{4t}{9}$ often require graphical or numerical methods
+\item \textbf{Integration Constants:} Apply initial position conditions after integrating velocity to find position functions
+\end{itemize}
+\end{takeaways}
+
 \newpage
 
 % Problem from samples/09.tex
@@ -261,6 +271,16 @@ Alternatively: $T = \frac{1}{8 \ln 4} = \frac{1}{16 \ln 2} \approx 0.090$ second
 
 \textbf{Key insight:} Quadratic resistance leads to exponential decay in velocity with position, but requires integration of $1/v^2$ to find time. The particle asymptotically approaches rest but never actually stops in finite time.
 \end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Quadratic Resistance Form:} Acceleration $\ddot{x} = -kv^2$ leads to velocity-displacement relationship through $v\frac{dv}{dx} = -kv^2$
+\item \textbf{Exponential Velocity Decay:} Separating variables gives $\frac{dv}{v} = -kdx$, leading to $v = v_0 e^{-kx}$
+\item \textbf{Finding Constants:} Use given conditions (here: $v=10$ at $x=15$, $v=40$ at $x=0$) to determine resistance coefficient $k$
+\item \textbf{Time Integration:} Converting to time requires $\frac{dv}{v^2} = -kdt$, yielding $\int v^{-2}dv = [-v^{-1}]$ form
+\item \textbf{Asymptotic Behavior:} With quadratic resistance, particle approaches rest asymptotically but never reaches $v=0$ in finite time
+\end{itemize}
+\end{takeaways}
 
 \newpage
 
@@ -382,6 +402,16 @@ $$ \boxed{y = \frac{x}{4}\left(\frac{1}{k} - 3\right) + \frac{10}{k^2}\ln\left(1
 \textbf{Key insight:} Linear resistance in a vector field requires solving coupled differential equations. The logarithmic term in the trajectory equation is characteristic of exponential decay in velocity components.
 \end{solution}
 
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Initial Velocity Components:} For angle $\theta$ below horizontal, $\dot{x}(0) = V\cos\theta$ (positive), $\dot{y}(0) = -V\sin\theta$ (negative)
+\item \textbf{Exponential Motion Solution:} Linear resistance $\ddot{x} = -k\dot{x}$ yields $\dot{x} = Ae^{-kt}$ and $x = \frac{A}{k}(1-e^{-kt})$
+\item \textbf{Non-homogeneous ODE:} For $\ddot{y} = -k\dot{y} - 10$, separate variables $\frac{d\dot{y}}{k\dot{y}+10} = -dt$ to integrate
+\item \textbf{Eliminating Time:} Express $e^{-kt}$ from one equation, then substitute into the other to eliminate $t$
+\item \textbf{Logarithmic Trajectories:} Linear drag creates logarithmic terms in Cartesian trajectory equations
+\end{itemize}
+\end{takeaways}
+
 \newpage
 
 % Problem from samples/11.tex
@@ -501,6 +531,16 @@ Using logarithm property $-\ln(a/b) = \ln(b/a)$:
 
 \textbf{Key insight:} Even though both particles experience the same resistance law, their different initial velocities lead to different position functions. The symmetry in the problem allows the $gt/k$ terms to cancel, simplifying the solution.
 \end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Identical Force Laws:} Both particles satisfy $\ddot{x} = -g - k\dot{x}$, but initial conditions differ
+\item \textbf{First-Order Linear ODE:} Equation $\frac{d\dot{x}}{dt} = -(g+k\dot{x})$ solved by separating variables: $\frac{d\dot{x}}{g+k\dot{x}} = -dt$
+\item \textbf{Logarithmic Integration:} Yields $\frac{1}{k}\ln(g+k\dot{x}) = -t + C$, leading to $\dot{x}(t) = \frac{1}{k}[(g+kv_0)e^{-kt} - g]$
+\item \textbf{Cancellation Symmetry:} When finding meeting point, identical terms (like $-\frac{gt}{k}$) cancel, simplifying algebra
+\item \textbf{Constraint Interpretation:} Condition $v_0 < \frac{g}{k}$ ensures $g-kv_0 > 0$; condition $d < \frac{2v_0}{k}$ ensures positive time
+\end{itemize}
+\end{takeaways}
 
 \newpage
 
@@ -640,3 +680,14 @@ From part (a), as $v \to 0$:
 
 \textbf{Key insight:} The cubic resistance term $v^3$ dominates at high velocities, causing rapid deceleration. As $t \to \infty$, the particle approaches rest at a finite distance $\tan^{-1}(Q)$ from the origin, demonstrating that strong resistance can prevent infinite displacement.
 \end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Combined Resistance:} Force $R = v + v^3 = v(1+v^2)$ combines linear and cubic terms
+\item \textbf{Velocity-Displacement:} Using $v\frac{dv}{dx} = -v(1+v^2)$ simplifies to $\frac{dv}{1+v^2} = -dx$
+\item \textbf{Arctangent Relationship:} Integration $\int \frac{1}{1+v^2}dv = \tan^{-1}v$ leads to $x = \tan^{-1}Q - \tan^{-1}v$
+\item \textbf{Partial Fractions for Time:} $\frac{1}{v(1+v^2)} = \frac{1}{v} - \frac{v}{1+v^2}$ enables integration for time relation
+\item \textbf{Exponential from Logarithm:} From $\frac{1}{2}\ln\frac{v^2}{1+v^2} = -t + C$, solve for $v^2$ as function of $t$
+\item \textbf{Finite Limiting Distance:} Strong cubic resistance causes particle to stop at $x = \tan^{-1}(Q)$ as $t \to \infty$
+\end{itemize}
+\end{takeaways}

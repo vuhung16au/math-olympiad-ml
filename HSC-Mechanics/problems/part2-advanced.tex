@@ -23,6 +23,14 @@ Rewrite the equation to identify SHM about a shifted center. Use $v\frac{dv}{dx}
 \textbf{iii.} Motion is SHM about center $c = a + \frac{g}{k}$ with $n = \sqrt{k}$. Amplitude from max displacement when $v=0$. General form: $x = a + \frac{g}{k} + A\cos(\sqrt{k}t + \phi)$ with constants determined by initial conditions.
 \end{solution}
 
+\begin{takeaways}
+\item \textbf{Shifted SHM center:} When forces combine to create SHM about a new equilibrium position (here $x = a + g/k$ rather than $x = a$), rewrite the equation as $\ddot{x} = -k(x - c)$ to identify the center
+\item \textbf{Energy method for SHM:} Using $v\,dv = \ddot{x}\,dx$ and integrating with initial conditions provides the velocity-displacement relation for SHM, showing that $v^2$ depends on displacement from the center
+\item \textbf{Bungee physics:} The cord acts like a spring with Hooke's law force $k(x-a)$ once taut, creating SHM with equilibrium at the point where elastic force balances gravity
+\item \textbf{Two-phase motion:} Free fall for $x < a$ transitions to SHM for $x \ge a$, requiring matching of velocity at the transition point $x = a$ where $v = \sqrt{2ga}$
+\item \textbf{Amplitude determination:} In SHM, amplitude can be found from maximum displacement when $v = 0$, or from the velocity at any known position using the energy equation
+\end{takeaways}
+
 \begin{problem}
 A particle moves with acceleration $\ddot{x} = k(1 - v^2)$ where $k$ is a positive constant. Initially, $x = 0$ and $v = 0$.
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -43,6 +51,14 @@ Separate variables: $\frac{dv}{1-v^2} = k\,dt$. Use partial fractions: $\frac{1}
 
 \textbf{iii.} $x = \int_0^\infty \tanh(kt)\,dt = \frac{1}{k}[\ln(\cosh(kt))]_0^\infty = \infty$ 
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{Hyperbolic functions in mechanics:} The acceleration $\ddot{x} = k(1-v^2)$ leads naturally to hyperbolic tangent solutions via partial fractions: $\frac{1}{1-v^2} = \frac{1}{2}\left(\frac{1}{1-v} + \frac{1}{1+v}\right)$
+\item \textbf{Tanh as velocity function:} $\tanh(kt) = \frac{e^{2kt}-1}{e^{2kt}+1}$ provides a velocity that smoothly approaches limiting value from zero, modeling realistic acceleration with velocity-dependent resistance
+\item \textbf{Limiting velocity analysis:} As $t \to \infty$, $\tanh(kt) \to 1$, showing the particle approaches unit velocity asymptotically, never exceeding it
+\item \textbf{Infinite displacement with finite velocity:} Even though velocity approaches a finite limit, integrating $\tanh(kt)$ from $0$ to $\infty$ yields infinite displacement, demonstrating that bounded velocity doesn't imply bounded position
+\item \textbf{Logarithmic integration:} The antiderivative $\int \tanh(kt)\,dt = \frac{1}{k}\ln(\cosh(kt))$ involves hyperbolic cosine, which grows exponentially, confirming the infinite limiting position
+\end{takeaways}
 
 \begin{problem}
 A particle moves with resisted motion governed by $\ddot{x} = -\lambda(c + v)$ where $\lambda, c > 0$. Initially, $x = 0$ and $v = u$.
@@ -65,6 +81,14 @@ Re-examining: Given that particle comes to rest at specific position, and using 
 \textbf{ii.} Solving the differential equation with appropriate constants yields $v = (u+c)e^{-\lambda x} - c$
 \end{solution}
 
+\begin{takeaways}
+\item \textbf{Linear resistance form:} The equation $\ddot{x} = -\lambda(c+v)$ represents resistance proportional to $(c+v)$, a shifted linear model that can be solved using separation of variables
+\item \textbf{Velocity-displacement relation:} Using $v\frac{dv}{dx} = \ddot{x}$ converts the second-order equation to first-order, yielding $\frac{v\,dv}{c+v} = -\lambda\,dx$ which separates cleanly
+\item \textbf{Logarithmic integration technique:} Writing $\frac{v}{c+v} = 1 - \frac{c}{c+v}$ allows term-by-term integration: $\int\left(1 - \frac{c}{c+v}\right)dv = v - c\ln|c+v|$
+\item \textbf{Exponential decay solution:} The general form $v = (u+c)e^{-\lambda x} - c$ shows velocity decays exponentially with distance, approaching $-c$ as $x \to \infty$
+\item \textbf{Boundary conditions:} Initial condition $v(0) = u$ and rest condition $v(x_0) = 0$ determine the constants and validate model parameters
+\end{takeaways}
+
 \begin{problem}
 A particle is projected vertically upward with speed $u$ under gravity with air resistance $\frac{gv^2}{k^2}$.
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -82,6 +106,14 @@ Going up: $\ddot{x} = -g - \frac{gv^2}{k^2} = -g\left(1 + \frac{v^2}{k^2}\right)
 
 \textbf{ii.} Going down, terminal velocity when $\ddot{x} = 0$: $g = \frac{gv_T^2}{k^2} \Rightarrow v_T = k$
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{Quadratic resistance upward:} Going up, acceleration is $\ddot{x} = -g\left(1 + \frac{v^2}{k^2}\right)$, combining gravity and air resistance proportional to $v^2$
+\item \textbf{Logarithmic height formula:} Integrating $\frac{v\,dv}{1+v^2/k^2} = -g\,dx$ with substitution $w = 1 + v^2/k^2$ yields $H = \frac{k^2}{2g}\ln\left(1+\frac{u^2}{k^2}\right)$ for maximum height
+\item \textbf{Terminal velocity concept:} On descent, when $\ddot{x} = 0$, forces balance: $g = \frac{gv_T^2}{k^2}$ gives terminal velocity $v_T = k$
+\item \textbf{Asymmetric ascent/descent:} Quadratic resistance affects upward and downward motion differently—time and distance profiles are not symmetric
+\item \textbf{Natural logarithm in mechanics:} The presence of $(1 + v^2/k^2)$ factors leads to logarithmic expressions for displacement, a characteristic signature of quadratic resistance models
+\end{takeaways}
 
 \begin{problem}
 Two particles A and B start simultaneously from the origin. A moves horizontally with constant speed $V$ and experiences resistance $Rv^2$. B falls vertically under gravity and experiences resistance $Rv^2$.
@@ -106,6 +138,14 @@ Setting $v_A = v_B$ and solving numerically or analytically for $t$ when velocit
 \textbf{ii.} Integrate each velocity function from $0$ to $t$ found in (i) to compare distances.
 \end{solution}
 
+\begin{takeaways}
+\item \textbf{Horizontal quadratic resistance:} For constant initial speed $V$, the equation $\frac{dv_A}{dt} = -Rv_A^2$ yields $v_A = \frac{V}{1+RVt}$, showing velocity decreases hyperbolically
+\item \textbf{Vertical motion with resistance:} The equation $\frac{dv_B}{dt} = g - Rv_B^2$ has terminal velocity $v_T = \sqrt{g/R}$ and solution $v_B = v_T\tanh\left(\frac{gt}{v_T}\right)$
+\item \textbf{Comparing velocity profiles:} Setting $v_A = v_B$ involves solving $\frac{V}{1+RVt} = \sqrt{\frac{g}{R}}\tanh\left(\sqrt{gR}\,t\right)$, requiring numerical or graphical methods
+\item \textbf{Distance comparison via integration:} Once the time of equal speeds is found, integrating $v_A(t)$ and $v_B(t)$ from $0$ to that time gives the distances traveled by each particle
+\item \textbf{Two resistance models:} Horizontal deceleration follows rational function decay while vertical motion follows hyperbolic tangent growth, illustrating how initial conditions affect resistance dynamics
+\end{takeaways}
+
 \begin{problem}
 Two particles start from origin with A moving horizontally at constant speed $u$, and B falling vertically under gravity. Both experience resistance $kv$ where $k > 0$.
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -125,6 +165,14 @@ For B: $\frac{dv_B}{dt} = g - kv_B$. At terminal velocity: $0 = g - kv_{TB} \Rig
 
 \textbf{ii.} $ue^{-kt} = \frac{g}{k}(1-e^{-kt})$ (using solution from resisted motion). Solving: $ue^{-kt} + \frac{g}{k}e^{-kt} = \frac{g}{k} \Rightarrow e^{-kt} = \frac{g/k}{u + g/k} \Rightarrow t = \frac{1}{k}\ln\left(\frac{ku + g}{g}\right)$
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{Linear resistance horizontal:} $\frac{dv_A}{dt} = -kv_A$ yields exponential decay $v_A = ue^{-kt}$, approaching zero asymptotically (particle comes to rest)
+\item \textbf{Linear resistance vertical:} $\frac{dv_B}{dt} = g - kv_B$ has terminal velocity $v_{TB} = g/k$ and solution $v_B = \frac{g}{k}(1-e^{-kt})$ (particle approaches constant speed)
+\item \textbf{Equal speeds equation:} Setting $ue^{-kt} = \frac{g}{k}(1-e^{-kt})$ and solving yields $t = \frac{1}{k}\ln\left(\frac{ku+g}{g}\right)$, showing when horizontal and vertical speeds match
+\item \textbf{Exponential vs. terminal behavior:} Horizontal particle decelerates to rest while vertical particle accelerates to terminal velocity, demonstrating opposite trends under linear resistance
+\item \textbf{Logarithmic time solution:} The time of equal speeds involves natural logarithm of the ratio of initial and terminal parameters, a typical feature of exponential models
+\end{takeaways}
 
 \begin{problem}
 A particle moves on an inclined plane at angle $60°$ with forces $2v$ and $2v^2$ acting down the plane in addition to gravity component $g\sin 60°$.
@@ -146,6 +194,14 @@ Resultant force = $mg\sin 60° + 2v + 2v^2 = m\ddot{x}$. For constant velocity, 
 
 Reconsidering: if initial speed is given and forces resist, then $0 = g\sin 60° - 2v - 2v^2$ for equilibrium: $2v^2 + 2v = 5\sqrt{3} \Rightarrow v \approx 1.47$ m/s
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{Inclined plane forces:} On an incline at angle $\theta$, gravity contributes $mg\sin\theta$ down the plane, which must be balanced or overcome by resistance forces
+\item \textbf{Combined resistance:} Forces $2v$ (linear) and $2v^2$ (quadratic) act simultaneously, giving total resistance $2v + 2v^2$, a polynomial in velocity
+\item \textbf{Equilibrium speed:} For constant velocity, acceleration is zero: $0 = g\sin 60° - 2v - 2v^2$, leading to a quadratic equation in $v$
+\item \textbf{Physical interpretation:} The equilibrium speed occurs when gravitational component down the plane exactly equals the total resistance, creating a steady-state motion
+\item \textbf{Quadratic formula application:} Solving $2v^2 + 2v - 5\sqrt{3} = 0$ (taking positive root) gives the physical speed at which forces balance
+\end{takeaways}
 
 \begin{problem}
 [Note: Problem 34 from sample is a 3D vector problem about perpendicular distance, not a mechanics problem - likely misclassified]
@@ -179,6 +235,14 @@ Use $v\frac{dv}{dx} = x - 1$ and integrate. Then solve the separable equation $\
 \textbf{ii.} $\frac{dx}{dt} = 1 - x \Rightarrow \frac{dx}{1-x} = dt$. Integrating: $-\ln|1-x| = t + K$. At $t=0$, $x=0$: $K = 0$. Thus $1-x = e^{-t} \Rightarrow x = 1 - e^{-t}$ 
 \end{solution}
 
+\begin{takeaways}
+\item \textbf{Position-dependent acceleration:} $\ddot{x} = x - 1$ creates motion where acceleration depends linearly on displacement, leading to exponential time evolution
+\item \textbf{Velocity from energy method:} Using $v\,dv = (x-1)\,dx$ and integrating gives $v^2 = (x-1)^2 + C$, which with initial conditions yields $v = |x-1| = 1-x$
+\item \textbf{Sign determination:} Since particle starts at $x=0$ with $v=1 > 0$ and $x < 1$ initially, we take $v = 1-x$ (negative square root)
+\item \textbf{Exponential approach to limit:} The solution $x = 1 - e^{-t}$ shows displacement approaches $x = 1$ asymptotically as $t \to \infty$, never quite reaching it
+\item \textbf{Separable differential equation:} $\frac{dx}{1-x} = dt$ integrates to $-\ln|1-x| = t$, yielding the exponential form characteristic of first-order linear dynamics
+\end{takeaways}
+
 \begin{problem}
 A particle is in simple harmonic motion between $x = 2$ and $x = 6$, taking 8 seconds to move from one extremity to the other. Sketch the graph of acceleration versus displacement.
 \end{problem}
@@ -196,6 +260,14 @@ This is a straight line through $(4, 0)$ with slope $-\frac{\pi^2}{64}$. At $x=2
 
 Graph: Line segment from $(2, \frac{\pi^2}{32})$ to $(6, -\frac{\pi^2}{32})$ passing through $(4, 0)$.
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{SHM parameters from extremities:} Given motion between $x=2$ and $x=6$, the center is $c = \frac{2+6}{2} = 4$ and amplitude is $A = \frac{6-2}{2} = 2$
+\item \textbf{Period from half-period:} Time from one extremity to the other is half the period, so $T/2 = 8$s gives $T = 16$s and $n = \frac{2\pi}{T} = \frac{\pi}{8}$
+\item \textbf{Linear acceleration-displacement relation:} In SHM, $\ddot{x} = -n^2(x-c)$ is a straight line with slope $-n^2 = -\frac{\pi^2}{64}$ passing through $(c, 0)$
+\item \textbf{Graphing SHM acceleration:} The graph is a line segment from $(x_{\text{min}}, n^2A)$ to $(x_{\text{max}}, -n^2A)$, showing maximum positive acceleration at minimum displacement
+\item \textbf{Acceleration extrema:} At $x=2$: $\ddot{x} = \frac{\pi^2}{32}$ (max, toward center); at $x=6$: $\ddot{x} = -\frac{\pi^2}{32}$ (min, toward center)
+\end{takeaways}
 
 \begin{problem}
 A particle has acceleration $\ddot{x} = -\frac{e^x + 1}{e^{2x}}$. Initially at origin with velocity 2 m/s (remaining positive).
@@ -215,6 +287,14 @@ Use $\frac{d}{dx}\left(\frac{v^2}{2}\right) = \ddot{x}$. Integrate and apply ini
 \textbf{ii.} $\frac{dx}{dt} = e^{-x} + 1 \Rightarrow \frac{e^x\,dx}{1+e^x} = dt$. Integrating: $\ln(1+e^x) = t + K$. At $t=0$, $x=0$: $K = -\ln 2$. Thus $\ln(1+e^x) = t + \ln(1/2) \Rightarrow 1 + e^x = 2e^t \Rightarrow x = \ln(2e^t - 1)$ 
 \end{solution}
 
+\begin{takeaways}
+\item \textbf{Complex acceleration formula:} $\ddot{x} = -\frac{e^x+1}{e^{2x}} = -(e^{-x} + e^{-2x})$ involves negative exponentials in displacement
+\item \textbf{Energy integration method:} $\frac{d}{dx}\left(\frac{v^2}{2}\right) = \ddot{x}$ allows integration of $-e^{-x} - e^{-2x}$ to yield $v^2/2 = e^{-x} + \frac{e^{-2x}}{2} + C$
+\item \textbf{Perfect square velocity:} The result $v^2 = (e^{-x}+1)^2$ simplifies to $v = e^{-x} + 1$, showing velocity decreases exponentially with displacement
+\item \textbf{Separable time equation:} $\frac{dx}{e^{-x}+1} = dt$ becomes $\frac{e^x\,dx}{1+e^x} = dt$, integrating to $\ln(1+e^x) = t + K$
+\item \textbf{Logarithmic displacement:} The solution $x = \ln(2e^t - 1)$ shows displacement increases logarithmically with time, slowing as $t$ increases
+\end{takeaways}
+
 \begin{problem}
 A particle in SHM satisfies $\ddot{x} = -4(x+1)$. When passing through origin, speed is 4 m/s. What distance does the particle travel during one complete period?
 \end{problem}
@@ -228,6 +308,14 @@ From $\ddot{x} = -4(x+1)$: center $c = -1$, $n = 2$. At $x = 0$, $v = 4$: $16 = 
 
 Distance in one period: $4A = 4\sqrt{5}$ meters
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{SHM with shifted center:} $\ddot{x} = -4(x+1)$ indicates SHM about center $c = -1$ with $n^2 = 4$, so $n = 2$
+\item \textbf{Amplitude from velocity:} Using $v^2 = n^2(A^2 - (x-c)^2)$ at known point $(x=0, v=4)$: $16 = 4(A^2 - 1) \Rightarrow A = \sqrt{5}$
+\item \textbf{Distance in one period:} In SHM, the particle travels from one extreme to the other and back, covering total distance $4A$ in period $T = \frac{2\pi}{n}$
+\item \textbf{Motion range:} Particle oscillates between $c-A = -1-\sqrt{5}$ and $c+A = -1+\sqrt{5}$, passing through origin with speed 4 m/s
+\item \textbf{Amplitude calculation priority:} Finding amplitude is essential before calculating total distance traveled, using the energy equation at any known state
+\end{takeaways}
 
 \begin{problem}
 A stone projected from ground clears a fence of height $h$ at distance $d$. Angle of projection is $\theta$, speed is $v$.
@@ -251,6 +339,14 @@ Use trajectory equation and substitute point $(d, h)$. For max height, use $H = 
 \textbf{iii.} Setting $H = h$: $\frac{d^2\tan^2\theta}{4(d\tan\theta-h)} = h \Rightarrow d^2\tan^2\theta = 4h(d\tan\theta-h) = 4hd\tan\theta - 4h^2$. Rearranging: $d^2\tan^2\theta - 4hd\tan\theta + 4h^2 = 0 \Rightarrow (d\tan\theta - 2h)^2 = 0 \Rightarrow \tan\theta = \frac{2h}{d}$ 
 \end{solution}
 
+\begin{takeaways}
+\item \textbf{Trajectory equation application:} Substituting point $(d, h)$ into $y = x\tan\theta - \frac{gx^2\sec^2\theta}{2v^2}$ yields a relation between speed, angle, and fence parameters
+\item \textbf{Speed formula derivation:} Rearranging $h = d\tan\theta - \frac{gd^2\sec^2\theta}{2v^2}$ gives $v^2 = \frac{gd^2\sec^2\theta}{2(d\tan\theta-h)}$
+\item \textbf{Maximum height formula:} Using $H = \frac{v^2\sin^2\theta}{2g}$ and substituting the speed formula yields $H = \frac{d^2\tan^2\theta}{4(d\tan\theta-h)}$
+\item \textbf{Fence at highest point:} Setting $H = h$ creates the equation $(d\tan\theta - 2h)^2 = 0$, giving unique angle $\tan\theta = \frac{2h}{d}$ for apex passage
+\item \textbf{Perfect square condition:} The condition for fence at maximum height results in a perfect square, indicating a unique trajectory (single angle solution)
+\end{takeaways}
+
 \begin{problem}
 Projectile fired at angle $\alpha$, speed $V$, passes through point $(m, n)$.
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -268,6 +364,14 @@ Substitute $(m, n)$ into trajectory equation to get quadratic in $\tan\alpha$. T
 
 \textbf{ii.} Discriminant: $\Delta = 4m^2V^4 - 4gm^2(gm^2 + 2nV^2) = 4m^2(V^4 - g^2m^2 - 2gnV^2) > 0$. Dividing by $4m^2$: $V^4 - 2gnV^2 - g^2m^2 > 0 \Leftrightarrow (V^2-gn)^2 - g^2n^2 - g^2m^2 > 0 \Leftrightarrow (V^2-gn)^2 > g^2(m^2+n^2)$ 
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{Quadratic in tan α:} Substituting $(m,n)$ into trajectory equation yields $gm^2\tan^2\alpha - 2mV^2\tan\alpha + gm^2 + 2nV^2 = 0$, a quadratic in $\tan\alpha$
+\item \textbf{Two trajectories condition:} For two distinct angles $\alpha$, the discriminant must be positive: $\Delta = 4m^2V^4 - 4gm^2(gm^2+2nV^2) > 0$
+\item \textbf{Completing the square:} Factoring the discriminant condition yields $(V^2-gn)^2 > g^2(m^2+n^2)$, a more interpretable geometric condition
+\item \textbf{Physical interpretation:} The condition $(V^2-gn)^2 > g^2(m^2+n^2)$ means the speed must be sufficiently large relative to the target position $(m,n)$ for two trajectories to exist
+\item \textbf{High and low trajectories:} When two solutions exist, they correspond to a high-angle trajectory and a low-angle trajectory, both passing through the same point
+\end{takeaways}
 
 \begin{problem}
 Projectile fired at $45°$ with speed $V$ clears two posts of height $8a^2$ separated by distance $12a^2$. First post at distance $b$ from origin.
@@ -290,6 +394,14 @@ Use symmetry of parabola: midpoint of posts is at axis of symmetry. Apply trajec
 
 \textbf{iii.} From (i): $b = \frac{V^2}{2g} - 6a^2$. Substitute into (ii): $8a^2 = \frac{V^2}{2g} - 6a^2 - \frac{gb^2}{V^2}$. Using sum and product of roots for the quadratic in $x$ at height $8a^2$: $x_1 x_2 = b(b+12a^2) = \frac{8a^2V^2}{g}$. Substituting $b = \frac{V^2}{2g} - 6a^2$ and solving: $V^4 - 32ga^2V^2 - 144g^2a^4 = 0$. Using quadratic formula: $V^2 = 36ga^2$ (taking positive root). Thus $V = 6a\sqrt{g}$ 
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{Symmetry at 45°:} For projectile at $45°$, the range is $R = \frac{V^2}{g}$ and the axis of symmetry is at $x = R/2 = \frac{V^2}{2g}$
+\item \textbf{Midpoint symmetry:} Two posts at equal height $8a^2$ separated by $12a^2$ have midpoint at $x = b + 6a^2$, which must equal the axis of symmetry: $\frac{V^2}{g} = 2b + 12a^2$
+\item \textbf{Trajectory through first post:} At $(b, 8a^2)$, trajectory equation gives $8a^2 = b - \frac{gb^2}{V^2}$, a second relation between $b$ and $V$
+\item \textbf{System of equations:} Solving the two equations simultaneously (using product of roots $x_1 x_2 = b(b+12a^2)$) leads to quartic in $V^2$: $V^4 - 32ga^2V^2 - 144g^2a^4 = 0$
+\item \textbf{Quadratic in V²:} Treating as quadratic $u^2 - 32ga^2u - 144g^2a^4 = 0$ (where $u = V^2$) and taking positive root gives $V^2 = 36ga^2$, thus $V = 6a\sqrt{g}$
+\end{takeaways}
 
 \begin{problem}
 In an alien universe with gravity $\propto x^{-3}$, a particle satisfies $\ddot{x} = -\frac{k}{x^3}$. Projected upward with speed $u$ from surface at radius $R$.
@@ -316,6 +428,15 @@ At surface, $\ddot{x} = -g$ when $x = R$. Use $v\frac{dv}{dx} = \ddot{x}$. For n
 \textbf{iv.} At max distance, $v=0$: $\frac{gR^3}{D^2} = gR - u^2 \Rightarrow D = R\sqrt{\frac{gR}{gR-u^2}}$. For return time, set $x = R$: $0 = 2uRt - (gR-u^2)t^2 \Rightarrow t = \frac{2uR}{gR-u^2}$ 
 \end{solution}
 
+\begin{takeaways}
+\item \textbf{Inverse cube law:} In this alien universe, $\ddot{x} = -\frac{k}{x^3}$ represents gravitational acceleration proportional to $x^{-3}$, stronger falloff than real gravity ($x^{-2}$)
+\item \textbf{Surface gravity condition:} At $x = R$, requiring $\ddot{x} = -g$ determines the constant: $k = gR^3$
+\item \textbf{Energy integration:} Using $v\,dv = -\frac{gR^3}{x^3}\,dx$ and integrating yields $v^2 = \frac{gR^3}{x^2} - (gR-u^2)$, the velocity-displacement relation
+\item \textbf{Escape velocity concept:} For particle not to return, $v^2 \ge 0$ for all $x$, requiring $u \ge \sqrt{gR}$. This is the escape velocity from the surface
+\item \textbf{Maximum distance formula:} When $u < \sqrt{gR}$, particle reaches max distance $D = R\sqrt{\frac{gR}{gR-u^2}}$ where $v=0$, then returns at time $t = \frac{2uR}{gR-u^2}$
+\item \textbf{Quadratic time equation:} The given displacement formula $x = \sqrt{R^2 + 2uRt - (gR-u^2)t^2}$ shows particle motion is governed by quadratic under the radical, with non-return when coefficient of $t^2$ is non-negative
+\end{takeaways}
+
 \begin{problem}
 For $0 \le t \le \frac{1}{2}$, velocity is $v = \frac{10}{\sqrt{1-t^2}} + \frac{1}{(1-t)^2}$ m/s.
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -333,3 +454,13 @@ Integrate each term: $\int \frac{1}{\sqrt{1-t^2}}\,dt = \sin^{-1}(t)$ and $\int 
 
 \textbf{ii.} Both terms increase as $t$ increases on $[0, 1/2]$, so $v$ is strictly increasing. Maximum at $t = 1/2$: $v_{\max} = \frac{10}{\sqrt{3/4}} + \frac{1}{1/4} = \frac{20}{\sqrt{3}} + 4 = \frac{20\sqrt{3}}{3} + 4$ m/s
 \end{solution}
+
+\begin{takeaways}
+\item \textbf{Complex velocity function:} $v = \frac{10}{\sqrt{1-t^2}} + \frac{1}{(1-t)^2}$ combines inverse square root and inverse square terms, both increasing on the given domain
+\item \textbf{Arcsine integration:} $\int \frac{1}{\sqrt{1-t^2}}\,dt = \sin^{-1}(t)$ is a standard integral that evaluates to $\frac{\pi}{6}$ at $t = 1/2$
+\item \textbf{Power rule for negative exponents:} $\int (1-t)^{-2}\,dt = \frac{1}{1-t}$ increases from 1 to 2 as $t$ goes from 0 to $1/2$
+\item \textbf{Distance calculation:} Total distance $x = [10\sin^{-1}(t) + \frac{1}{1-t}]_0^{1/2} = \frac{5\pi}{3} + 1$ meters
+\item \textbf{Monotonicity analysis:} Since both $\frac{1}{\sqrt{1-t^2}}$ and $\frac{1}{(1-t)^2}$ increase on $[0, 1/2]$, the sum is strictly increasing, so maximum velocity occurs at $t = 1/2$
+\item \textbf{Rationalization:} Maximum velocity $v_{\max} = \frac{20}{\sqrt{3}} + 4 = \frac{20\sqrt{3}}{3} + 4$ m/s after rationalizing the denominator
+\end{takeaways}
+
