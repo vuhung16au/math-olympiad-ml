@@ -18,7 +18,7 @@ Folder structure of this project (`/HSC-Integrals/`) is similar to `/HSC-Inducti
 - styles/: use the same styles as `/HSC-Induction/styles/`
 - releases/
 - README.md
-- .gitignore
+- .gitignore 
 
 The content of the file `HSC-Integrals.tex` is as follows:
 - Intro to this project

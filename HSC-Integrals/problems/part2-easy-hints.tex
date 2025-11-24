@@ -11,7 +11,21 @@ Evaluate $\displaystyle \int (3x + 1)^5 \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = 3x + 1$. Then $du = 3dx$, so $dx = \frac{1}{3}du$. The integral becomes $\frac{1}{3}\int u^5 du = \frac{u^6}{18} + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $u = 3x + 1 \implies du = 3dx$
+
+\[
+I = \frac{1}{3}\int u^5 du = \frac{1}{3} \cdot \frac{u^6}{6} = \frac{u^6}{18} + C
+\]
+
+Substitute back: $\boxed{\frac{(3x+1)^6}{18} + C}$
+\end{solution}
+
+\begin{takeaways}
+Reverse chain rule: identify inner function, adjust constant to match derivative.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 2: Basic substitution with square root
@@ -23,7 +37,21 @@ Find $\displaystyle \int \frac{x}{\sqrt{x^2 + 4}} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = x^2 + 4$. Then $du = 2x \, dx$. Rewrite as $\frac{1}{2}\int u^{-1/2} du = \sqrt{u} + C = \sqrt{x^2+4} + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $u = x^2 + 4 \implies du = 2x\,dx$, so $x\,dx = \frac{1}{2}du$
+
+\[
+I = \frac{1}{2}\int u^{-1/2} du = \frac{1}{2} \cdot 2u^{1/2} + C = \sqrt{u} + C
+\]
+
+\textbf{Answer:} $\boxed{\sqrt{x^2+4} + C}$
+\end{solution}
+
+\begin{takeaways}
+Recognize numerator as part of denominator's derivative. Power rule for fractional powers.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 3: Reverse chain rule - exponential
@@ -35,7 +63,21 @@ Evaluate $\displaystyle \int 2x e^{x^2} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} The derivative of $x^2$ is $2x$. Pattern: $\int f'(x) e^{f(x)} dx = e^{f(x)} + C$. Answer: $e^{x^2} + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Recognize $2x$ as derivative of $x^2$:
+
+\[
+\int 2x e^{x^2} dx = e^{x^2} + C
+\]
+
+\textbf{Answer:} $\boxed{e^{x^2} + C}$
+\end{solution}
+
+\begin{takeaways}
+Reverse chain rule for exponentials: $\int f'(x)e^{f(x)}dx = e^{f(x)} + C$.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 4: Standard form - arctan
@@ -47,7 +89,19 @@ Find $\displaystyle \int \frac{3}{9 + x^2} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Factor: $\frac{3}{9 + x^2} = \frac{1}{3} \cdot \frac{1}{1 + (x/3)^2}$. Let $u = x/3$. Answer: $\arctan(x/3) + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Factor: $\displaystyle \int \frac{3}{9+x^2}dx = 3\int \frac{1}{9(1+(x/3)^2)}dx = \frac{1}{3}\int \frac{1}{1+(x/3)^2}dx$
+
+Standard form: $\displaystyle \int \frac{1}{1+u^2}du = \arctan u + C$
+
+\textbf{Answer:} $\boxed{\arctan(x/3) + C}$
+\end{solution}
+
+\begin{takeaways}
+Standard form: $\int \frac{1}{a^2+x^2}dx = \frac{1}{a}\arctan(x/a) + C$.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 5: Basic trig substitution
@@ -59,7 +113,21 @@ Evaluate $\displaystyle \int \sin^3 2x \cos 2x \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = \sin 2x$. Then $du = 2\cos 2x \, dx$. Integral: $\frac{1}{2}\int u^3 du = \frac{1}{8}\sin^4 2x + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $u = \sin 2x \implies du = 2\cos 2x\,dx$
+
+\[
+I = \frac{1}{2}\int u^3 du = \frac{1}{2} \cdot \frac{u^4}{4} = \frac{u^4}{8} + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{\sin^4 2x}{8} + C}$
+\end{solution}
+
+\begin{takeaways}
+For $\sin^n\theta\cos\theta$ or $\cos^n\theta\sin\theta$, use base function as $u$.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 6: Simple integration by parts
@@ -71,7 +139,21 @@ Find $\displaystyle \int x e^x \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} LIATE: $u = x$, $dv = e^x dx$. Then $du = dx$, $v = e^x$. Answer: $xe^x - e^x + C = e^x(x-1) + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+By parts: $u=x$, $dv=e^x dx \implies du=dx$, $v=e^x$
+
+\[
+I = xe^x - \int e^x dx = xe^x - e^x + C = e^x(x-1) + C
+\]
+
+\textbf{Answer:} $\boxed{e^x(x-1) + C}$
+\end{solution}
+
+\begin{takeaways}
+LIATE rule: differentiate algebraic, integrate exponential. Factor common terms.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 7: Reverse chain rule - logarithm
@@ -83,7 +165,19 @@ Evaluate $\displaystyle \int \frac{2x + 3}{x^2 + 3x + 1} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Numerator = derivative of denominator. Pattern: $\int \frac{f'(x)}{f(x)} dx = \ln|f(x)| + C = \ln|x^2 + 3x + 1| + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Observe: $\frac{d}{dx}(x^2+3x+1) = 2x+3$
+
+Reverse chain rule: $\displaystyle \int \frac{f'(x)}{f(x)}dx = \ln|f(x)| + C$
+
+\textbf{Answer:} $\boxed{\ln|x^2+3x+1| + C}$
+\end{solution}
+
+\begin{takeaways}
+Pattern: $\int \frac{f'(x)}{f(x)}dx = \ln|f(x)| + C$. Check if numerator matches derivative.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 8: Basic trig integral
@@ -95,7 +189,21 @@ Find $\displaystyle \int \sin^2 x \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Use $\sin^2 x = \frac{1 - \cos 2x}{2}$. Integrate: $\frac{x}{2} - \frac{\sin 2x}{4} + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Double angle identity: $\sin^2 x = \frac{1-\cos 2x}{2}$
+
+\[
+I = \int \frac{1-\cos 2x}{2}dx = \frac{x}{2} - \frac{\sin 2x}{4} + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{x}{2} - \frac{\sin 2x}{4} + C}$
+\end{solution}
+
+\begin{takeaways}
+Double angle formulae convert even trig powers to integrable forms.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 9: Substitution with definite integral
@@ -107,7 +215,23 @@ Evaluate $\displaystyle \int_0^2 x\sqrt{1 + x^2} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = 1 + x^2$, $du = 2x \, dx$. Limits: $u=1$ to $u=5$. Answer: $\frac{1}{3}[(5)^{3/2} - (1)^{3/2}] = \frac{5\sqrt{5}-1}{3}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $u = 1+x^2 \implies du = 2x\,dx$
+
+Limits: $x=0 \implies u=1$; $x=2 \implies u=5$
+
+\[
+I = \frac{1}{2}\int_1^5 u^{1/2}du = \frac{1}{2}\left[\frac{2u^{3/2}}{3}\right]_1^5 = \frac{1}{3}(5\sqrt{5} - 1)
+\]
+
+\textbf{Answer:} $\boxed{\frac{5\sqrt{5}-1}{3}}$
+\end{solution}
+
+\begin{takeaways}
+Always transform limits when substituting in definite integrals.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 10: Standard form - arcsin
@@ -119,7 +243,19 @@ Find $\displaystyle \int \frac{1}{\sqrt{25 - x^2}} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Factor: $\sqrt{25 - x^2} = 5\sqrt{1 - (x/5)^2}$. Let $u = x/5$. Answer: $\arcsin(x/5) + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Standard form: $\displaystyle \int \frac{1}{\sqrt{a^2-x^2}}dx = \arcsin(x/a) + C$
+
+With $a=5$:
+
+\textbf{Answer:} $\boxed{\arcsin(x/5) + C}$
+\end{solution}
+
+\begin{takeaways}
+Standard form: $\int \frac{1}{\sqrt{a^2-x^2}}dx = \arcsin(x/a) + C$.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 11: Basic partial fractions
@@ -131,7 +267,23 @@ Evaluate $\displaystyle \int \frac{1}{(x-1)(x+2)} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{1}{(x-1)(x+2)} = \frac{A}{x-1} + \frac{B}{x+2}$. Solving: $A=\frac{1}{3}$, $B=-\frac{1}{3}$. Answer: $\frac{1}{3}\ln\left|\frac{x-1}{x+2}\right| + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Partial fractions: $1 = A(x+2) + B(x-1)$
+
+At $x=1$: $A=\frac{1}{3}$; at $x=-2$: $B=-\frac{1}{3}$
+
+\[
+I = \frac{1}{3}\ln|x-1| - \frac{1}{3}\ln|x+2| + C = \frac{1}{3}\ln\left|\frac{x-1}{x+2}\right| + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{1}{3}\ln\left|\frac{x-1}{x+2}\right| + C}$
+\end{solution}
+
+\begin{takeaways}
+Cover-up method for simple linear factors. Combine logs using quotient rule.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 12: Integration by parts - polynomial × trig
@@ -143,7 +295,21 @@ Find $\displaystyle \int x \cos x \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = x$, $dv = \cos x \, dx$. Then $v = \sin x$. Answer: $x\sin x + \cos x + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+By parts: $u=x$, $dv=\cos x\,dx \implies du=dx$, $v=\sin x$
+
+\[
+I = x\sin x - \int \sin x\,dx = x\sin x + \cos x + C
+\]
+
+\textbf{Answer:} $\boxed{x\sin x + \cos x + C}$
+\end{solution}
+
+\begin{takeaways}
+LIATE: algebraic before trig. Differentiate polynomial, integrate trig.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 13: Reverse chain rule - power
@@ -155,7 +321,21 @@ Evaluate $\displaystyle \int \frac{6x^2}{(x^3 + 1)^4} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = x^3 + 1$, $du = 3x^2 dx$. Then $6x^2 dx = 2du$. Answer: $2 \cdot \frac{u^{-3}}{-3} = -\frac{2}{3(x^3+1)^3} + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $u = x^3+1 \implies du = 3x^2dx$, so $6x^2dx = 2du$
+
+\[
+I = 2\int u^{-4}du = 2 \cdot \frac{u^{-3}}{-3} = -\frac{2}{3u^3} + C
+\]
+
+\textbf{Answer:} $\boxed{-\frac{2}{3(x^3+1)^3} + C}$
+\end{solution}
+
+\begin{takeaways}
+Match coefficient: if $du=3x^2dx$, then $6x^2dx=2du$. Power rule for negative exponents.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 14: Even function property
@@ -167,7 +347,23 @@ Given $f(x)$ is even, evaluate $\displaystyle \int_{-2}^{2} f(x) \, dx$ if $\dis
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} For even functions: $\int_{-a}^{a} f(x)dx = 2\int_0^a f(x)dx$. Answer: $2 \times 5 = 10$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+For even functions: $f(-x) = f(x)$
+
+Property: $\displaystyle \int_{-a}^a f(x)dx = 2\int_0^a f(x)dx$
+
+\[
+\int_{-2}^2 f(x)dx = 2\int_0^2 f(x)dx = 2(5) = 10
+\]
+
+\textbf{Answer:} $\boxed{10}$
+\end{solution}
+
+\begin{takeaways}
+Even: $\int_{-a}^a f(x)dx = 2\int_0^a f(x)dx$. Odd: $\int_{-a}^a f(x)dx = 0$.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 15: Completing the square for arctan
@@ -178,3 +374,15 @@ Find $\displaystyle \int \frac{1}{x^2 + 4x + 13} \, dx$
 
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Complete square: $x^2 + 4x + 13 = (x+2)^2 + 9$. Let $u = \frac{x+2}{3}$. Answer: $\frac{1}{3}\arctan\left(\frac{x+2}{3}\right) + C$.}}
+
+\begin{solution}
+Complete square: $x^2+4x+13 = (x+2)^2 + 9$
+
+Standard form: $\displaystyle \int \frac{1}{(x+2)^2+9}dx = \frac{1}{3}\arctan\left(\frac{x+2}{3}\right) + C$
+
+\textbf{Answer:} $\boxed{\frac{1}{3}\arctan\left(\frac{x+2}{3}\right) + C}$
+\end{solution}
+
+\begin{takeaways}
+Complete square to get $(x-h)^2+a^2$ form for $\arctan$ integration.
+\end{takeaways}

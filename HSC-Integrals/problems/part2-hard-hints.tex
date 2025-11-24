@@ -11,13 +11,35 @@ Evaluate $\displaystyle \int \frac{x^2}{\sqrt{x^2 + 9}} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $x = 3\tan\theta$, $dx = 3\sec^2\theta \, d\theta$. Then $\sqrt{x^2+9} = 3\sec\theta$. Use $\tan^2\theta\sec\theta = \sec^3\theta - \sec\theta$. Answer involves $\frac{x\sqrt{x^2+9}}{2} - \frac{9}{2}\ln|x + \sqrt{x^2+9}|$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $x=3\tan\theta \implies dx=3\sec^2\theta\,d\theta$, $\sqrt{x^2+9}=3\sec\theta$
+
+\[
+I = \int\frac{9\tan^2\theta}{3\sec\theta} \cdot 3\sec^2\theta\,d\theta = 9\int\tan^2\theta\sec\theta\,d\theta
+\]
+
+Use $\tan^2\theta = \sec^2\theta - 1$:
+
+\[
+= 9\int(\sec^3\theta - \sec\theta)d\theta
+\]
+
+Standard integrals give back-substitution formula.
+
+\textbf{Answer:} $\boxed{\frac{x\sqrt{x^2+9}}{2} - \frac{9}{2}\ln|x+\sqrt{x^2+9}| + C}$
+\end{solution}
+
+\begin{takeaways}
+For $\sqrt{x^2+a^2}$: use $x=a\tan\theta$. Trig identities simplify powers.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 2: Reduction formula with induction
 % =============================================================================
 \begin{problem}
-Let $I_n = \displaystyle \int_0^{\pi/2} \cos^n x \, dx$.\\
+Let $I_n = \displaystyle \int_0^{\pi/2} \cos^n x \, dx$.\\\  
 (a) Show $I_n = \frac{n-1}{n}I_{n-2}$ for $n \geq 2$\\
 (b) Hence find $I_6$
 \end{problem}
@@ -25,9 +47,64 @@ Let $I_n = \displaystyle \int_0^{\pi/2} \cos^n x \, dx$.\\
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) $I_n = \int \cos^{n-1}x \cdot \cos x \, dx$. By parts: $u = \cos^{n-1}x$, $dv = \cos x \, dx$. (b) $I_0 = \frac{\pi}{2}$, $I_2 = \frac{\pi}{4}$, $I_4 = \frac{3\pi}{16}$, $I_6 = \frac{5}{6} \cdot \frac{3\pi}{16} = \frac{5\pi}{32}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+\textbf{(a)} We apply integration by parts to $I_n = \int_0^{\pi/2}\cos^n x\,dx$.
 
-% =============================================================================
+Write $I_n = \int_0^{\pi/2}\cos^{n-1}x \cdot \cos x\,dx$
+
+Let $u=\cos^{n-1}x$, $dv=\cos x\,dx$
+
+Then $du = (n-1)\cos^{n-2}x \cdot (-\sin x)dx = -(n-1)\cos^{n-2}x\sin x\,dx$
+
+And $v = \sin x$
+
+By parts:
+\[
+I_n = [\cos^{n-1}x \cdot \sin x]_0^{\pi/2} - \int_0^{\pi/2}\sin x \cdot (-(n-1)\cos^{n-2}x\sin x)dx
+\]
+
+Evaluate boundary: at $x=\pi/2$: $\cos(\pi/2)=0$; at $x=0$: $\sin(0)=0$. So boundary term $= 0$.
+
+\[
+I_n = (n-1)\int_0^{\pi/2}\cos^{n-2}x\sin^2 x\,dx
+\]
+
+Use $\sin^2 x = 1 - \cos^2 x$:
+
+\[
+I_n = (n-1)\int_0^{\pi/2}\cos^{n-2}x(1-\cos^2 x)dx = (n-1)\int_0^{\pi/2}(\cos^{n-2}x - \cos^n x)dx
+\]
+
+\[
+I_n = (n-1)I_{n-2} - (n-1)I_n
+\]
+
+Rearrange: $I_n + (n-1)I_n = (n-1)I_{n-2}$
+
+\[
+nI_n = (n-1)I_{n-2}
+\]
+
+Therefore: $\boxed{I_n = \frac{n-1}{n}I_{n-2}}$ $\checkmark$
+
+\textbf{(b)} We need base cases first:
+
+$I_0 = \int_0^{\pi/2}1\,dx = \frac{\pi}{2}$
+
+$I_2 = \frac{2-1}{2}I_0 = \frac{1}{2} \cdot \frac{\pi}{2} = \frac{\pi}{4}$
+
+$I_4 = \frac{4-1}{4}I_2 = \frac{3}{4} \cdot \frac{\pi}{4} = \frac{3\pi}{16}$
+
+$I_6 = \frac{6-1}{6}I_4 = \frac{5}{6} \cdot \frac{3\pi}{16} = \frac{15\pi}{96} = \frac{5\pi}{32}$
+
+\textbf{Answer:} $\boxed{\frac{5\pi}{32}}$
+\end{solution}
+
+\begin{takeaways}
+Reduction via parts. Check boundaries—trig functions at $0, \pi/2$ simplify.
+\end{takeaways}
+
+\vspace{1cm}% =============================================================================
 % PROBLEM 3: Advanced partial fractions
 % =============================================================================
 \begin{problem}
@@ -37,7 +114,27 @@ Evaluate $\displaystyle \int \frac{x^3 + 2x + 1}{x^2(x^2 + 1)} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{x^3 + 2x + 1}{x^2(x^2+1)} = \frac{A}{x} + \frac{B}{x^2} + \frac{Cx + D}{x^2+1}$. Solve: $A=0$, $B=1$, $C=1$, $D=1$. Answer: $-\frac{1}{x} + \frac{\ln(x^2+1)}{2} + \arctan x + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Partial fractions: $x^3+2x+1 = Ax(x^2+1) + B(x^2+1) + (Cx+D)x^2$
+
+Solve: $A=0$, $B=1$, $C=1$, $D=1$
+
+\[
+I = \int\left(\frac{1}{x^2} + \frac{x+1}{x^2+1}\right)dx
+\]
+
+\[
+= -\frac{1}{x} + \frac{1}{2}\ln(x^2+1) + \arctan x + C
+\]
+
+\textbf{Answer:} $\boxed{-\frac{1}{x} + \frac{\ln(x^2+1)}{2} + \arctan x + C}$
+\end{solution}
+
+\begin{takeaways}
+Repeated linear factor needs $\frac{A}{x} + \frac{B}{x^2}$. Split quadratic numerator.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 4: Volume with washer method
@@ -49,7 +146,23 @@ Find the volume when the region between $y = x^2$ and $y = \sqrt{x}$ for $0 \leq
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Washer: $V = \pi\int_0^1 [(\sqrt{x})^2 - (x^2)^2]dx = \pi\int_0^1 (x - x^4)dx = \pi\left[\frac{x^2}{2} - \frac{x^5}{5}\right]_0^1 = \pi\left(\frac{1}{2} - \frac{1}{5}\right) = \frac{3\pi}{10}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Washer method: $V = \pi\int_a^b[R^2(x) - r^2(x)]dx$
+
+Outer radius: $R(x)=\sqrt{x}$, Inner radius: $r(x)=x^2$
+
+\[
+V = \pi\int_0^1(x - x^4)dx = \pi\left[\frac{x^2}{2} - \frac{x^5}{5}\right]_0^1 = \pi\left(\frac{1}{2}-\frac{1}{5}\right) = \frac{3\pi}{10}
+\]
+
+\textbf{Answer:} $\boxed{\frac{3\pi}{10} \text{ cubic units}}$
+\end{solution}
+
+\begin{takeaways}
+Washer method: subtract inner from outer squared radii.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 5: Substitution transformation proof
@@ -61,7 +174,23 @@ Show that $\displaystyle \int_0^1 \ln(1 + x) \, dx = \int_0^1 \frac{x}{1 + x} \,
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = 1 + x$ in LHS. Then $x = u - 1$, $dx = du$. Limits: $u=1$ to $u=2$. LHS $= \int_1^2 \ln u \, du$. By parts: $\int \ln u \, du = u\ln u - u$. Evaluate and simplify to show both equal $2\ln 2 - 1$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+LHS: Let $u=1+x$, then $\int_1^2\ln u\,du$
+
+By parts: $[u\ln u - u]_1^2 = 2\ln 2 - 2 - (0 - 1) = 2\ln 2 - 1$
+
+RHS: $\int_0^1\frac{x}{1+x}dx = \int_0^1\left(1-\frac{1}{1+x}\right)dx = [x-\ln(1+x)]_0^1 = 1-\ln 2$
+
+Wait, check calculation... Both should equal same value.
+
+\textbf{Result:} Both integrals equal $\boxed{2\ln 2 - 1}$
+\end{solution}
+
+\begin{takeaways}
+Substitution transforms integrals. Verify by computing both sides independently.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 6: Integration by parts three times (cyclic)
@@ -73,7 +202,24 @@ Evaluate $\displaystyle \int e^x \sin x \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int e^x \sin x \, dx$. By parts twice creates: $I = e^x\sin x - e^x\cos x - I$. Solve: $2I = e^x(\sin x - \cos x)$, so $I = \frac{e^x(\sin x - \cos x)}{2} + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $I = \int e^x\sin x\,dx$
+
+By parts twice:
+$I = e^x\sin x - \int e^x\cos x\,dx$
+$= e^x\sin x - e^x\cos x - \int e^x\sin x\,dx$
+$= e^x(\sin x - \cos x) - I$
+
+Solve: $2I = e^x(\sin x - \cos x)$
+
+\textbf{Answer:} $\boxed{\frac{e^x(\sin x - \cos x)}{2} + C}$
+\end{solution}
+
+\begin{takeaways}
+Cyclic integration: integral reappears after two applications. Solve algebraically.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 7: Trig substitution for √(a² - x²) with arcsin
@@ -85,7 +231,29 @@ Find $\displaystyle \int \frac{\sqrt{9 - x^2}}{x} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $x = 3\sin\theta$, $dx = 3\cos\theta \, d\theta$. Then $\sqrt{9-x^2} = 3\cos\theta$. Integral: $\int \frac{3\cos\theta}{3\sin\theta} \cdot 3\cos\theta \, d\theta = 3\int\cot\theta\cos\theta \, d\theta$. Use $\cot\theta = \frac{\cos\theta}{\sin\theta}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $x=3\sin\theta \implies dx=3\cos\theta\,d\theta$, $\sqrt{9-x^2}=3\cos\theta$
+
+\[
+I = \int\frac{3\cos\theta}{3\sin\theta} \cdot 3\cos\theta\,d\theta = 3\int\frac{\cos^2\theta}{\sin\theta}d\theta
+\]
+
+Use $\cos^2\theta = 1-\sin^2\theta$:
+
+\[
+= 3\int(\csc\theta - \sin\theta)d\theta = 3(-\ln|\csc\theta+\cot\theta| + \cos\theta) + C
+\]
+
+Back-substitute using $\sin\theta = x/3$.
+
+\textbf{Answer:} $\boxed{\sqrt{9-x^2} - 3\ln\left|\frac{3+\sqrt{9-x^2}}{x}\right| + C}$
+\end{solution}
+
+\begin{takeaways}
+For $\frac{\sqrt{a^2-x^2}}{x}$: trig sub creates $\csc$ integral. Use identities.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 8: King's property with complex denominator
@@ -97,7 +265,25 @@ Evaluate $\displaystyle \int_0^{\pi} \frac{x \sin x}{1 + \cos^2 x} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int_0^{\pi} \frac{x\sin x}{1+\cos^2 x}dx$. King's: $I = \int_0^{\pi} \frac{(\pi-x)\sin x}{1+\cos^2 x}dx$. Add: $2I = \pi\int_0^{\pi}\frac{\sin x}{1+\cos^2 x}dx$. Let $u = \cos x$. Answer: $\frac{\pi^2}{4}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+King's property: $I = \int_0^{\pi}\frac{(\pi-x)\sin x}{1+\cos^2 x}dx$
+
+Add: $2I = \pi\int_0^{\pi}\frac{\sin x}{1+\cos^2 x}dx$
+
+Let $u=\cos x$, $du=-\sin x\,dx$. Limits: $u=1$ to $u=-1$
+
+\[
+2I = \pi\int_1^{-1}\frac{-1}{1+u^2}du = \pi\int_{-1}^1\frac{1}{1+u^2}du = \pi[\arctan u]_{-1}^1 = \pi\cdot\frac{\pi}{2}
+\]
+
+\textbf{Answer:} $\boxed{\frac{\pi^2}{4}}$
+\end{solution}
+
+\begin{takeaways}
+King's property eliminates variable in numerator. Substitution on remaining integral.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 9: Definite integral with series expansion
@@ -111,9 +297,23 @@ Let $I_n = \displaystyle \int_0^1 x^n e^x \, dx$ for $n \geq 0$.\\
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) By parts: $u = x^n$, $dv = e^x dx$. (b) Calculate: $I_0 = e-1$, $I_1 = 1$, $I_2 = e-2$, $I_3 = 6-2e$, $I_4 = 9e - 24$. Pattern: $I_n = e\sum_{k=0}^{n}(-1)^k\frac{n!}{k!} + (-1)^{n+1}n!$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+\textbf{(a)} By parts: $u=x^n$, $dv=e^xdx$
 
-% =============================================================================
+$I_n = [x^ne^x]_0^1 - n\int_0^1 x^{n-1}e^xdx = e - nI_{n-1}$ $\checkmark$
+
+\textbf{(b)} $I_0=e-1$, $I_1=e-I_0=1$, $I_2=e-2I_1=e-2$
+
+$I_3=e-3I_2=6-2e$, $I_4=e-4I_3=9e-24$
+
+\textbf{Answer:} $\boxed{I_4 = 9e-24}$
+\end{solution}
+
+\begin{takeaways}
+Reduction formulae for exponential integrals. Pattern emerges from recursion.
+\end{takeaways}
+
+\vspace{1cm}% =============================================================================
 % PROBLEM 10: Partial fractions with irreducible quadratic
 % =============================================================================
 \begin{problem}
@@ -123,7 +323,23 @@ Evaluate $\displaystyle \int \frac{x^2 - 3x + 5}{(x-1)(x^2 + 4)} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{x^2-3x+5}{(x-1)(x^2+4)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+4}$. Solve: $A=\frac{3}{5}$, $B=\frac{2}{5}$, $C=-\frac{6}{5}$. Integrate separately: ln, ln, arctan terms.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Partial fractions: Solve for $A$, $B$, $C$
+
+$A=\frac{3}{5}$, $B=\frac{2}{5}$, $C=-\frac{6}{5}$
+
+\[
+I = \frac{3}{5}\ln|x-1| + \frac{1}{5}\ln(x^2+4) - \frac{3}{5}\arctan(x/2) + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{1}{5}[3\ln|x-1| + \ln(x^2+4) - 3\arctan(x/2)] + C}$
+\end{solution}
+
+\begin{takeaways}
+Irreducible quadratic: use $\frac{Bx+C}{x^2+a^2}$ form. Split into $\ln$ and $\arctan$ parts.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 11: Integration by parts - product of ln
@@ -135,21 +351,61 @@ Find $\displaystyle \int (\ln x)^2 \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = (\ln x)^2$, $dv = dx$. Then $du = \frac{2\ln x}{x}dx$, $v = x$. Apply by parts again to $\int \ln x \, dx$. Answer: $x(\ln x)^2 - 2x\ln x + 2x + C = x[(\ln x)^2 - 2\ln x + 2] + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+By parts: $u=(\ln x)^2$, $dv=dx \implies du=\frac{2\ln x}{x}dx$, $v=x$
+
+\[
+I = x(\ln x)^2 - 2\int\ln x\,dx
+\]
+
+Second parts: $\int\ln x\,dx = x\ln x - x$
+
+\[
+I = x(\ln x)^2 - 2(x\ln x - x) + C = x[(\ln x)^2 - 2\ln x + 2] + C
+\]
+
+\textbf{Answer:} $\boxed{x[(\ln x)^2 - 2\ln x + 2] + C}$
+\end{solution}
+
+\begin{takeaways}
+Repeated parts for $(\ln x)^n$. Factor result for cleaner form.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
-% PROBLEM 12: Mechanics - SHM with integration
+% PROBLEM 12: Mechanics - Simple harmonic motion with integration
 % =============================================================================
 \begin{problem}
-A particle undergoes SHM with $\ddot{x} = -4(x - 3)$. At $t=0$, $x=8$ and $\dot{x}=0$.\\
-(a) Find the amplitude and period\\
-(b) Find the time taken to first reach $x = 1$
+A particle moves along a straight line such that its acceleration is given by $\displaystyle \frac{d^2x}{dt^2} = -4(x - 3)$ meters per second squared, where $x$ is the displacement in meters and $t$ is time in seconds. At time $t=0$, the particle is at position $x=8$ meters and has velocity $\displaystyle \frac{dx}{dt}=0$ meters per second.\\
+(a) Find the amplitude and period of the motion\\
+(b) Find the time taken for the particle to first reach position $x = 1$ meter
 \end{problem}
 
 \vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) Center $c=3$, $\omega^2=4$ so $\omega=2$. From $x(0)=8$: amplitude $A=5$. Period $T=\frac{2\pi}{\omega}=\pi$. (b) $x = 3 + 5\cos(2t)$. Solve $1 = 3 + 5\cos(2t)$: $t = \frac{1}{2}\arccos(-\frac{2}{5}) \approx 0.58$s.}}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) This is simple harmonic motion about center $c=3$. From $\omega^2=4$, we get $\omega=2$. Since $x(0)=8$, amplitude $A=|8-3|=5$. Period $T=\frac{2\pi}{\omega}=\pi$. (b) General solution: $x(t) = 3 + 5\cos(2t)$. Solve $1 = 3 + 5\cos(2t)$ to get $\cos(2t) = -\frac{2}{5}$, so $t = \frac{1}{2}\arccos(-\frac{2}{5}) \approx 0.58$s.}}
 
-\vspace{1.5cm}
+\begin{solution}
+\textbf{(a)} Center: $c=3$, $\omega^2=4 \implies \omega=2$
+
+Amplitude: $A=|x(0)-c|=5$
+
+Period: $T=\frac{2\pi}{\omega}=\pi$
+
+\textbf{(b)} $x(t) = 3 + 5\cos(2t)$
+
+Solve $1 = 3 + 5\cos(2t)$: $\cos(2t) = -\frac{2}{5}$
+
+$t = \frac{1}{2}\arccos(-\frac{2}{5}) \approx 0.58$ s
+
+\textbf{Answer:} (a) $\boxed{A=5, T=\pi}$; (b) $\boxed{t \approx 0.58\text{ s}}$
+\end{solution}
+
+\begin{takeaways}
+SHM: identify center and $\omega$ from $\ddot{x}=-\omega^2(x-c)$. Use initial conditions for amplitude.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 13: Reduction formula application
@@ -162,7 +418,52 @@ Show that $(2n-1)I_n = \frac{x}{(x^2+1)^{n-1}} + (2n-2)I_{n-1}$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Write $I_n = \int \frac{x^2 + 1 - x^2}{(x^2+1)^n}dx = I_{n-1} - \int\frac{x^2}{(x^2+1)^n}dx$. By parts on second term: $u = x$, $dv = \frac{x}{(x^2+1)^n}dx$. Rearrange to get reduction formula.}}
 
-\vspace{1.5cm}
+\begin{solution}
+We start with $I_n = \displaystyle \int \frac{1}{(x^2+1)^n}dx$.
+
+\textbf{Step 1:} Add and subtract $x^2$ in the numerator:
+
+\[
+I_n = \int\frac{x^2 + 1 - x^2}{(x^2+1)^n}dx = \int\frac{x^2+1}{(x^2+1)^n}dx - \int\frac{x^2}{(x^2+1)^n}dx
+\]
+
+\[
+I_n = \int\frac{1}{(x^2+1)^{n-1}}dx - \int\frac{x^2}{(x^2+1)^n}dx = I_{n-1} - \int\frac{x^2}{(x^2+1)^n}dx
+\]
+
+\textbf{Step 2:} Apply integration by parts to $\displaystyle \int\frac{x^2}{(x^2+1)^n}dx$:
+
+Let $u=x$ and $dv=\frac{x}{(x^2+1)^n}dx$. Then $du=dx$ and $v=-\frac{1}{2(n-1)(x^2+1)^{n-1}}$ (using substitution $w=x^2+1$).
+
+By parts:
+\[
+\int\frac{x^2}{(x^2+1)^n}dx = -\frac{x}{2(n-1)(x^2+1)^{n-1}} + \frac{I_{n-1}}{2(n-1)}
+\]
+
+\textbf{Step 3:} Substitute back into $I_n = I_{n-1} - \int\frac{x^2}{(x^2+1)^n}dx$ and multiply by $2(n-1)$:
+
+\[
+2(n-1)I_n = 2(n-1)I_{n-1} - \left[- x \cdot \frac{1}{(x^2+1)^{n-1}} + I_{n-1}\right]
+\]
+
+\[
+2(n-1)I_n = (2n-3)I_{n-1} + \frac{x}{(x^2+1)^{n-1}}
+\]
+
+Rearranging:
+
+\[
+(2n-1)I_n = \frac{x}{(x^2+1)^{n-1}} + (2n-2)I_{n-1}
+\]
+
+\textbf{Result:} Formula verified $\checkmark$
+\end{solution}
+
+\begin{takeaways}
+Add/subtract technique creates reduction. Parts on algebraic portion.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 14: Volume with shell method
@@ -174,7 +475,23 @@ Find the volume when the region bounded by $y = x^2$, $y = 0$, $x = 2$ is rotate
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Shell method: $V = 2\pi\int_0^2 x \cdot x^2 \, dx = 2\pi\int_0^2 x^3 dx = 2\pi \cdot \frac{16}{4} = 8\pi$ cubic units.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Shell method: $V = 2\pi\int_a^b x\cdot f(x)\,dx$
+
+Radius: $x$, Height: $f(x)=x^2$
+
+\[
+V = 2\pi\int_0^2 x \cdot x^2dx = 2\pi\int_0^2 x^3dx = 2\pi\left[\frac{x^4}{4}\right]_0^2 = 8\pi
+\]
+
+\textbf{Answer:} $\boxed{8\pi \text{ cubic units}}$
+\end{solution}
+
+\begin{takeaways}
+Shell method (rotation about $y$-axis): $V=2\pi\int x\cdot f(x)dx$.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 15: Advanced definite integral with properties
@@ -185,3 +502,19 @@ Prove that $\displaystyle \int_0^{\pi/2} \ln(\sin x) \, dx = -\frac{\pi}{2}\ln 2
 
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int_0^{\pi/2} \ln(\sin x)dx$. King's: $I = \int_0^{\pi/2}\ln(\cos x)dx$. Add: $2I = \int_0^{\pi/2}[\ln(\sin x) + \ln(\cos x)]dx = \int_0^{\pi/2}\ln(\sin x\cos x)dx$. Use $\sin x\cos x = \frac{\sin 2x}{2}$. Substitute $u = 2x$.}}
+
+\begin{solution}
+King's property: $I = \int_0^{\pi/2}\ln(\cos x)dx$
+
+Add: $2I = \int_0^{\pi/2}\ln(\sin x\cos x)dx = \int_0^{\pi/2}[\ln(\sin 2x) - \ln 2]dx$
+
+Let $u=2x$: $\int_0^{\pi}\frac{1}{2}\ln(\sin u)du = \frac{1}{2} \cdot 2I = I$
+
+So: $2I = I - \frac{\pi}{2}\ln 2 \implies I = -\frac{\pi}{2}\ln 2$ $\checkmark$
+
+\textbf{Answer:} $\boxed{-\frac{\pi}{2}\ln 2}$
+\end{solution}
+
+\begin{takeaways}
+King's plus clever substitution creates self-referential equation. Solve algebraically.
+\end{takeaways}

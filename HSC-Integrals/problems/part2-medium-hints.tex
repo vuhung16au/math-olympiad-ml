@@ -11,7 +11,23 @@ Evaluate $\displaystyle \int x^2 e^x \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Apply by parts twice. First: $u_1 = x^2$, $dv_1 = e^x dx$. Second: $u_2 = 2x$, $dv_2 = e^x dx$. Answer: $e^x(x^2 - 2x + 2) + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+First: $u=x^2$, $dv=e^xdx \implies I = x^2e^x - 2\int xe^xdx$
+
+Second: $u=x$, $dv=e^xdx \implies \int xe^xdx = xe^x - e^x$
+
+\[
+I = x^2e^x - 2(xe^x - e^x) + C = e^x(x^2 - 2x + 2) + C
+\]
+
+\textbf{Answer:} $\boxed{e^x(x^2-2x+2) + C}$
+\end{solution}
+
+\begin{takeaways}
+Apply parts repeatedly for polynomial × exponential. Factor result.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 2: Partial fractions with repeated factor
@@ -23,7 +39,23 @@ Find $\displaystyle \int \frac{2x + 3}{(x-1)^2} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{2x+3}{(x-1)^2} = \frac{A}{x-1} + \frac{B}{(x-1)^2}$. Solving: $A=2$, $B=5$. Answer: $2\ln|x-1| - \frac{5}{x-1} + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Partial fractions: $2x+3 = A(x-1) + B$
+
+Solve: $A=2$, $B=5$
+
+\[
+I = \int\left(\frac{2}{x-1} + \frac{5}{(x-1)^2}\right)dx = 2\ln|x-1| - \frac{5}{x-1} + C
+\]
+
+\textbf{Answer:} $\boxed{2\ln|x-1| - \frac{5}{x-1} + C}$
+\end{solution}
+
+\begin{takeaways}
+Repeated factors need separate terms for each power: $\frac{A}{x-a} + \frac{B}{(x-a)^2}$.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 3: Substitution + completing square
@@ -35,7 +67,19 @@ Evaluate $\displaystyle \int \frac{1}{\sqrt{6x - x^2}} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Complete square: $6x - x^2 = 9 - (x-3)^2$. Let $u = x-3$. Answer: $\arcsin\left(\frac{x-3}{3}\right) + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Complete square: $6x-x^2 = -(x^2-6x) = -(x^2-6x+9-9) = 9-(x-3)^2$
+
+Standard form: $\displaystyle \int\frac{1}{\sqrt{9-(x-3)^2}}dx = \arcsin\left(\frac{x-3}{3}\right) + C$
+
+\textbf{Answer:} $\boxed{\arcsin\left(\frac{x-3}{3}\right) + C}$
+\end{solution}
+
+\begin{takeaways}
+Complete square for $\sqrt{ax-x^2}$ to get $\sqrt{a^2-(x-h)^2}$ form.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 4: King's property with trig
@@ -47,7 +91,23 @@ Evaluate $\displaystyle \int_0^{\pi/2} \frac{x}{\sin x + \cos x} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int_0^{\pi/2} \frac{x}{\sin x + \cos x}dx$. King's: $I = \int_0^{\pi/2} \frac{\pi/2 - x}{\cos x + \sin x}dx$. Add: $2I = \frac{\pi}{2}\int_0^{\pi/2}\frac{1}{\sin x + \cos x}dx$. Use $t = \tan(x/2)$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+King's property: $I = \int_0^{\pi/2}\frac{\pi/2-x}{\sin x+\cos x}dx$
+
+Add: $2I = \frac{\pi}{2}\int_0^{\pi/2}\frac{1}{\sin x+\cos x}dx$
+
+Using t-formula: $\int\frac{1}{\sin x+\cos x}dx = \ln|1+\tan(x/2)|$
+
+Evaluate: $2I = \frac{\pi}{2}\ln 2 \implies I = \frac{\pi\ln 2}{4}$
+
+\textbf{Answer:} $\boxed{\frac{\pi\ln 2}{4}}$
+\end{solution}
+
+\begin{takeaways}
+King's property eliminates $x$ in numerator. t-formula handles rational trig expressions.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 5: Trig substitution for √(a² - x²)
@@ -59,7 +119,23 @@ Find $\displaystyle \int \sqrt{16 - x^2} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $x = 4\sin\theta$, $dx = 4\cos\theta \, d\theta$. Then $\sqrt{16-x^2} = 4\cos\theta$. Answer: $8\arcsin(x/4) + \frac{x\sqrt{16-x^2}}{2} + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $x=4\sin\theta \implies dx=4\cos\theta\,d\theta$, $\sqrt{16-x^2}=4\cos\theta$
+
+\[
+I = 16\int\cos^2\theta\,d\theta = 8\int(1+\cos 2\theta)d\theta = 8\theta + 4\sin 2\theta + C
+\]
+
+Back-substitute: $\theta=\arcsin(x/4)$, $\sin 2\theta = \frac{x\sqrt{16-x^2}}{8}$
+
+\textbf{Answer:} $\boxed{8\arcsin(x/4) + \frac{x\sqrt{16-x^2}}{2} + C}$
+\end{solution}
+
+\begin{takeaways}
+For $\sqrt{a^2-x^2}$: use $x=a\sin\theta$. Double angle for $\cos^2\theta$ integration.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 6: Reduction formula - powers of sin
@@ -71,19 +147,71 @@ Derive and use: If $I_n = \displaystyle \int_0^{\pi/2} \sin^n x \, dx$, find $I_
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} By parts: $I_n = \frac{n-1}{n}I_{n-2}$. Calculate: $I_0 = \frac{\pi}{2}$, $I_2 = \frac{\pi}{4}$, $I_4 = \frac{3}{4} \cdot \frac{\pi}{4} = \frac{3\pi}{16}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Reduction formula (derived using integration by parts): $I_n = \frac{n-1}{n}I_{n-2}$
+
+Base: $I_0 = \frac{\pi}{2}$
+
+\[
+I_2 = \frac{1}{2}I_0 = \frac{\pi}{4}
+\]
+
+\[
+I_4 = \frac{3}{4}I_2 = \frac{3}{4} \cdot \frac{\pi}{4} = \frac{3\pi}{16}
+\]
+
+\textbf{Answer:} $\boxed{\frac{3\pi}{16}}$
+\end{solution}
+
+\begin{takeaways}
+Reduction formulae link $I_n$ to $I_{n-2}$. Work backward from base cases.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 7: Partial fractions with quadratic
 % =============================================================================
 \begin{problem}
-Evaluate $\displaystyle \int \frac{x^2 + 1}{(x-1)(x^2 + 1)} \, dx$
+Evaluate $\displaystyle \int \frac{x^2 + 11}{(x-1)(x^2 + 1)} \, dx$
 \end{problem}
 
 \vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Simplify first: $\frac{x^2+1}{(x-1)(x^2+1)} = \frac{1}{x-1}$. Answer: $\ln|x-1| + C$.}}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{x^2+11}{(x-1)(x^2+1)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+1}$. Solve: $A=6$, $B=-6$, $C=5$. Answer: $6\ln|x-1| - 3\ln(x^2+1) + 5\arctan x + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Partial fractions: $\frac{x^2+11}{(x-1)(x^2+1)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+1}$
+
+Multiply: $x^2+11 = A(x^2+1) + (Bx+C)(x-1)$
+
+Solve: $x=1$: $12 = 2A \implies A=6$
+
+Coefficients: $x^2$: $1 = A+B \implies B=-5$
+
+Constant: $11 = A-C \implies C=A-11=-5$
+
+Actually: $x^2+11 = A(x^2+1) + (Bx+C)(x-1) = (A+B)x^2 + (C-B)x + (A-C)$
+
+So: $A+B=1$, $C-B=0$, $A-C=11$. This gives $A=6$, $B=-5$, $C=-5$.
+
+\[
+I = \int\left(\frac{6}{x-1} + \frac{-5x-5}{x^2+1}\right)dx = 6\ln|x-1| - \frac{5}{2}\ln(x^2+1) - 5\arctan x + C
+\]
+
+Wait, let me recalculate: For $\frac{-5x}{x^2+1}$: let $u=x^2+1$, $du=2xdx$, so $\int\frac{-5x}{x^2+1}dx = -\frac{5}{2}\ln(x^2+1)$
+
+\[
+I = 6\ln|x-1| - \frac{5}{2}\ln(x^2+1) - 5\arctan x + C
+\]
+
+\textbf{Answer:} $\boxed{6\ln|x-1| - \frac{5}{2}\ln(x^2+1) - 5\arctan x + C}$
+\end{solution}
+
+\begin{takeaways}
+For partial fractions with irreducible quadratic: use $\frac{Bx+C}{x^2+1}$. Split into ln and arctan terms.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 8: Integration by parts - ln
@@ -95,7 +223,21 @@ Find $\displaystyle \int x^2 \ln x \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} LIATE: $u = \ln x$, $dv = x^2 dx$. Then $v = \frac{x^3}{3}$. Answer: $\frac{x^3 \ln x}{3} - \frac{x^3}{9} + C = \frac{x^3}{9}(3\ln x - 1) + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+By parts: $u=\ln x$, $dv=x^2dx \implies du=\frac{1}{x}dx$, $v=\frac{x^3}{3}$
+
+\[
+I = \frac{x^3\ln x}{3} - \int\frac{x^3}{3} \cdot \frac{1}{x}dx = \frac{x^3\ln x}{3} - \frac{1}{3}\int x^2dx = \frac{x^3\ln x}{3} - \frac{x^3}{9} + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{x^3}{9}(3\ln x - 1) + C}$
+\end{solution}
+
+\begin{takeaways}
+LIATE: logarithm before algebraic. Factor result for cleaner form.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 9: Definite integral with symmetry
@@ -107,7 +249,23 @@ Evaluate $\displaystyle \int_{-1}^{1} \frac{x^2}{1 + e^x} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int_{-1}^{1} \frac{x^2}{1+e^x}dx$. King's property: $I = \int_{-1}^{1} \frac{x^2 e^x}{1+e^x}dx$. Add: $2I = \int_{-1}^{1} x^2 dx = \frac{2}{3}$, so $I = \frac{1}{3}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Let $I = \int_{-1}^1 \frac{x^2}{1+e^x}dx$
+
+King's: $I = \int_{-1}^1 \frac{x^2e^x}{e^x+1}dx$
+
+Add: $2I = \int_{-1}^1 \frac{x^2(1+e^x)}{1+e^x}dx = \int_{-1}^1 x^2dx = \left[\frac{x^3}{3}\right]_{-1}^1 = \frac{2}{3}$
+
+Therefore: $I = \frac{1}{3}$
+
+\textbf{Answer:} $\boxed{\frac{1}{3}}$
+\end{solution}
+
+\begin{takeaways}
+King's property: $\int_a^b f(x)dx = \int_a^b f(a+b-x)dx$. Add to simplify.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 10: Trig identity + substitution
@@ -119,7 +277,29 @@ Evaluate $\displaystyle \int \sin^4 x \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Use $\sin^2 x = \frac{1-\cos 2x}{2}$. Then $\sin^4 x = \left(\frac{1-\cos 2x}{2}\right)^2 = \frac{1 - 2\cos 2x + \cos^2 2x}{4}$. Use $\cos^2 2x = \frac{1+\cos 4x}{2}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Apply double angle twice:
+
+\[
+\sin^4 x = \left(\frac{1-\cos 2x}{2}\right)^2 = \frac{1-2\cos 2x+\cos^2 2x}{4}
+\]
+
+\[
+= \frac{1-2\cos 2x}{4} + \frac{1+\cos 4x}{8} = \frac{3-4\cos 2x+\cos 4x}{8}
+\]
+
+\[
+I = \frac{1}{8}\left(3x - 2\sin 2x + \frac{\sin 4x}{4}\right) + C
+\]
+
+\textbf{Answer:} $\boxed{\frac{3x}{8} - \frac{\sin 2x}{4} + \frac{\sin 4x}{32} + C}$
+\end{solution}
+
+\begin{takeaways}
+Repeatedly apply double angle formula for higher even powers.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 11: Volume of revolution
@@ -131,7 +311,21 @@ Find the volume when the region bounded by $y = \sqrt{x}$, $y = 0$, $x = 4$ is r
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $V = \pi\int_0^4 (\sqrt{x})^2 dx = \pi\int_0^4 x \, dx = \pi \cdot \frac{16}{2} = 8\pi$ cubic units.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Disk method: $V = \pi\int_a^b [f(x)]^2dx$
+
+\[
+V = \pi\int_0^4 (\sqrt{x})^2dx = \pi\int_0^4 x\,dx = \pi\left[\frac{x^2}{2}\right]_0^4 = 8\pi
+\]
+
+\textbf{Answer:} $\boxed{8\pi \text{ cubic units}}$
+\end{solution}
+
+\begin{takeaways}
+Disk method: $V=\pi\int[f(x)]^2dx$. Square the radius function.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 12: t-formula application
@@ -143,7 +337,27 @@ Evaluate $\displaystyle \int_0^{\pi/2} \frac{1}{3 + 5\cos x} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $t = \tan(x/2)$. Then $\cos x = \frac{1-t^2}{1+t^2}$, $dx = \frac{2}{1+t^2}dt$. Limits: $t=0$ to $t=1$. Answer: $\frac{\ln 3}{4}$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+t-formula: $t=\tan(x/2)$, $\cos x = \frac{1-t^2}{1+t^2}$, $dx=\frac{2}{1+t^2}dt$
+
+Limits: $x=0 \implies t=0$; $x=\pi/2 \implies t=1$
+
+\[
+I = \int_0^1 \frac{2}{3(1+t^2)+5(1-t^2)}dt = \int_0^1 \frac{1}{4-t^2}dt = \frac{1}{4}[\ln|2+t|-\ln|2-t|]_0^1
+\]
+
+\[
+= \frac{1}{4}\ln 3
+\]
+
+\textbf{Answer:} $\boxed{\frac{\ln 3}{4}}$
+\end{solution}
+
+\begin{takeaways}
+t-formula transforms rational trig expressions to algebraic fractions.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 13: Particle motion with integration
@@ -155,7 +369,23 @@ A particle moves with velocity $v = 2t - 3$ m/s. If $s(0) = 5$m, find $s(4)$.
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $s(t) = \int v \, dt = t^2 - 3t + C$. Use $s(0)=5$: $C=5$. Then $s(4) = 16 - 12 + 5 = 9$m.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Integrate: $s(t) = \int(2t-3)dt = t^2 - 3t + C$
+
+Initial condition: $s(0) = 5 \implies C = 5$
+
+Therefore: $s(t) = t^2 - 3t + 5$
+
+At $t=4$: $s(4) = 16 - 12 + 5 = 9$
+
+\textbf{Answer:} $\boxed{9 \text{ m}}$
+\end{solution}
+
+\begin{takeaways}
+Velocity integration gives displacement. Use initial conditions for constant.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 14: Substitution creating ln + arctan
@@ -167,7 +397,25 @@ Find $\displaystyle \int \frac{3x + 5}{x^2 + 4} \, dx$
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Split: $\frac{3x}{x^2+4} + \frac{5}{x^2+4}$. First gives $\frac{3}{2}\ln(x^2+4)$, second gives $\frac{5}{2}\arctan(x/2)$. Answer: $\frac{3}{2}\ln(x^2+4) + \frac{5}{2}\arctan(x/2) + C$.}}
 
-\vspace{1.5cm}
+\begin{solution}
+Split numerator:
+
+\[
+I = \int\frac{3x}{x^2+4}dx + \int\frac{5}{x^2+4}dx
+\]
+
+First: $\frac{3}{2}\ln(x^2+4)$
+
+Second: $\frac{5}{2}\arctan(x/2)$
+
+\textbf{Answer:} $\boxed{\frac{3}{2}\ln(x^2+4) + \frac{5}{2}\arctan(x/2) + C}$
+\end{solution}
+
+\begin{takeaways}
+Split numerator: match derivative for $\ln$, constant for $\arctan$.
+\end{takeaways}
+
+\vspace{1cm}
 
 % =============================================================================
 % PROBLEM 15: Complex numbers method
@@ -178,3 +426,17 @@ Use $e^{i\theta} = \cos\theta + i\sin\theta$ to find $\displaystyle \int e^x \co
 
 \vspace{0.5cm}
 \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Consider $\int e^x e^{ix}dx = \int e^{(1+i)x}dx = \frac{e^{(1+i)x}}{1+i}$. Multiply by $\frac{1-i}{1-i}$, take real part. Answer: $\frac{e^x(\cos x + \sin x)}{2} + C$.}}
+
+\begin{solution}
+Consider: $\int e^x(\cos x + i\sin x)dx = \int e^{(1+i)x}dx = \frac{e^{(1+i)x}}{1+i}$
+
+Simplify: $\frac{e^x e^{ix}}{1+i} \cdot \frac{1-i}{1-i} = \frac{e^x(1-i)(\cos x+i\sin x)}{2}$
+
+Real part: $\frac{e^x(\cos x + \sin x)}{2}$
+
+\textbf{Answer:} $\boxed{\frac{e^x(\cos x + \sin x)}{2} + C}$
+\end{solution}
+
+\begin{takeaways}
+Complex exponentials simplify products of exponential and trig. Take real part for result.
+\end{takeaways}
