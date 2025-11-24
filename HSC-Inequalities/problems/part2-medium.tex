@@ -127,6 +127,28 @@ A rectangular prism with all equal dimensions is a cube.
 \item Equality in AM-GM occurs when all terms are equal ($ab = bc = ca \Rightarrow a = b = c$)
 \end{takeaways}
 
+\begin{remark}[Two Approaches to Proving AM-GM]
+The AM-GM inequality states that for positive reals $x_1, x_2, \ldots, x_n$:
+\[ \frac{x_1 + x_2 + \cdots + x_n}{n} \geq \sqrt[n]{x_1 x_2 \cdots x_n} \]
+
+\textbf{(a) Proof by Induction on $n$:}
+\begin{enumerate}
+    \item \textit{Base case:} $n=2$ follows from $(\sqrt{x_1} - \sqrt{x_2})^2 \geq 0$
+    \item \textit{Forward-backward step:} Prove $n=2^k \Rightarrow n=2^{k+1}$ by grouping pairs
+    \item \textit{Backward step:} Show $n=k \Rightarrow n=k-1$ by setting $x_k = \frac{x_1 + \cdots + x_{k-1}}{k-1}$ and applying the $n=k$ case
+\end{enumerate}
+
+\textbf{(b) Proof using Convex Functions:}
+\begin{enumerate}
+    \item Consider $f(x) = -\ln(x)$, which is convex for $x > 0$ (since $f''(x) = \frac{1}{x^2} > 0$)
+    \item By Jensen's inequality for convex functions:
+    \[ f\left(\frac{x_1 + x_2 + \cdots + x_n}{n}\right) \leq \frac{f(x_1) + f(x_2) + \cdots + f(x_n)}{n} \]
+    \item Substituting $f(x) = -\ln(x)$:
+    \[ -\ln\left(\frac{x_1 + \cdots + x_n}{n}\right) \leq \frac{-\ln(x_1) - \cdots - \ln(x_n)}{n} = -\ln(\sqrt[n]{x_1 \cdots x_n}) \]
+    \item Multiply by $-1$ and exponentiate to obtain AM-GM
+\end{enumerate}
+\end{remark}
+
 % ==========================================
 
 \begin{problem}[Problem 27: Cubic Sum Inequality]
