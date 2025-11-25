@@ -22,7 +22,73 @@ Use induction on $a$. Show $(k+1)^p - (k+1) \equiv k^p - k \pmod{p}$ by expandin
 Base case: $0^p \equiv 0 \pmod{p}$. Assume $k^p \equiv k \pmod{p}$. Then $(k+1)^p = k^p + \binom{p}{1}k^{p-1} + \cdots + \binom{p}{p-1}k + 1$. Since $p \mid \binom{p}{j}$ for $1 \le j \le p-1$, we have $(k+1)^p \equiv k^p + 1 \equiv k + 1 \pmod{p}$ by the hypothesis.
 \end{solution}
 
+% --- New Problem: Symmetric Sum Inequality ---
+\begin{problem}[Symmetric Sum Inequality]
+Let $n$ be a positive integer and $a_1, a_2, \dots, a_n$ be $n$ positive real numbers. Prove by mathematical induction that:
+\[
+\left( a_1 + a_2 + \dots + a_n \right) \left( \frac{1}{a_1} + \frac{1}{a_2} + \dots + \frac{1}{a_n} \right) \geq n^2
+\]
+for all $n \geq 1$.
+\end{problem}
+
+\begin{hint}
+Use induction on $n$. For the inductive step, expand $\left( \sum_{i=1}^{k+1} a_i \right) \left( \sum_{i=1}^{k+1} \frac{1}{a_i} \right)$ and apply the inequality $x + \frac{1}{x} \geq 2$ for $x > 0$ to each pair $\frac{a_i}{a_{k+1}}$ and $\frac{a_{k+1}}{a_i}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $n=1$. $(a_1)\left(\frac{1}{a_1}\right) = 1 \geq 1^2$.
+
+Inductive hypothesis: Assume true for $n=k$, i.e., $\left( \sum_{i=1}^k a_i \right) \left( \sum_{i=1}^k \frac{1}{a_i} \right) \geq k^2$.
+
+Inductive step: For $n=k+1$,
+\begin{align*}
+\left( \sum_{i=1}^{k+1} a_i \right) \left( \sum_{i=1}^{k+1} \frac{1}{a_i} \right) &= \left( S_k + a_{k+1} \right) \left( R_k + \frac{1}{a_{k+1}} \right) \\
+&= S_k R_k + S_k \cdot \frac{1}{a_{k+1}} + a_{k+1} \cdot R_k + 1 \\
+&= S_k R_k + 1 + \sum_{i=1}^k \left( \frac{a_i}{a_{k+1}} + \frac{a_{k+1}}{a_i} \right)
+\end{align*}
+By the hypothesis, $S_k R_k \geq k^2$. For each $i$, $\frac{a_i}{a_{k+1}} + \frac{a_{k+1}}{a_i} \geq 2$. Thus,
+\begin{align*}
+	ext{LHS}_{k+1} &\geq k^2 + 1 + 2k = (k+1)^2
+\end{align*}
+So the result holds for $n=k+1$.
+
+Conclusion: By induction, the inequality holds for all $n \geq 1$.
+\end{solution}
+
+\begin{problem}[Symmetric Sum Inequality]
+Let $n$ be a positive integer and $a_1, a_2, \dots, a_n$ be $n$ positive real numbers. Prove by mathematical induction that:
+\[
+\left( a_1 + a_2 + \dots + a_n \right) \left( \frac{1}{a_1} + \frac{1}{a_2} + \dots + \frac{1}{a_n} \right) \geq n^2
+\]
+for all $n \geq 1$.
+\end{problem}
+
+\begin{hint}
+Use induction on $n$. For the inductive step, expand $\left( \sum_{i=1}^{k+1} a_i \right) \left( \sum_{i=1}^{k+1} \frac{1}{a_i} \right)$ and apply the inequality $x + \frac{1}{x} \geq 2$ for $x > 0$ to each pair $\frac{a_i}{a_{k+1}}$ and $\frac{a_{k+1}}{a_i}$.
+\end{hint}
+
+\begin{solution}[Sketch]
+Base case: $n=1$. $(a_1)\left(\frac{1}{a_1}\right) = 1 \geq 1^2$.
+
+Inductive hypothesis: Assume true for $n=k$, i.e., $\left( \sum_{i=1}^k a_i \right) \left( \sum_{i=1}^k \frac{1}{a_i} \right) \geq k^2$.
+
+Inductive step: For $n=k+1$,
+\begin{align*}
+\left( \sum_{i=1}^{k+1} a_i \right) \left( \sum_{i=1}^{k+1} \frac{1}{a_i} \right) &= \left( S_k + a_{k+1} \right) \left( R_k + \frac{1}{a_{k+1}} \right) \\
+&= S_k R_k + S_k \cdot \frac{1}{a_{k+1}} + a_{k+1} \cdot R_k + 1 \\
+&= S_k R_k + 1 + \sum_{i=1}^k \left( \frac{a_i}{a_{k+1}} + \frac{a_{k+1}}{a_i} \right)
+\end{align*}
+By the hypothesis, $S_k R_k \geq k^2$. For each $i$, $\frac{a_i}{a_{k+1}} + \frac{a_{k+1}}{a_i} \geq 2$. Thus,
+\begin{align*}
+	ext{LHS}_{k+1} &\geq k^2 + 1 + 2k = (k+1)^2
+\end{align*}
+So the result holds for $n=k+1$.
+
+Conclusion: By induction, the inequality holds for all $n \geq 1$.
+\end{solution}
+
 \begin{problem}[Tower of Hanoi]
+The Tower of Hanoi is a classic puzzle involving three pegs and $n$ disks of different sizes, all initially stacked in order of decreasing size on one peg. The objective is to move the entire stack to another peg, moving only one disk at a time and never placing a larger disk on top of a smaller one.
 Prove that the minimum number of moves required to transfer $n$ disks in the Tower of Hanoi puzzle is $2^n - 1$.
 \end{problem}
 
