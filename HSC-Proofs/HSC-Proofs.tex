@@ -140,6 +140,28 @@ This is essential for case-based proofs (e.g., classifying integers as $3k$, $3k
     \item Both directions must be proven independently
 \end{itemize}
 
+\textbf{6. Inequality Proofs:} Common strategies for proving inequalities:
+\begin{itemize}
+    \item \textit{Algebraic manipulation:} Transform the inequality to an obviously true statement (show $A \geq B$ by proving $A - B \geq 0$)
+    \item \textit{AM-GM Inequality:} For non-negative numbers: $\frac{a_1 + \cdots + a_n}{n} \geq \sqrt[n]{a_1 \cdots a_n}$
+    \item \textit{Cauchy-Schwarz:} $(a_1b_1 + \cdots + a_nb_n)^2 \leq (a_1^2 + \cdots + a_n^2)(b_1^2 + \cdots + b_n^2)$
+    \item \textit{Induction:} For inequalities involving $n$, establish base case and inductive step
+\end{itemize}
+
+\subsubsection*{Induction Variants}
+
+Beyond the standard induction framework, several specialized variants frequently appear:
+
+\textbf{Induction for Series:} Proving closed-form formulas for sums (e.g., $\sum_{k=1}^n k^2 = \frac{n(n+1)(2n+1)}{6}$). In the inductive step, add the $(k+1)$-th term to both sides of $P(k)$ and simplify algebraically.
+
+\textbf{Induction for Divisibility:} Proving statements like ``$n | f(n)$ for all $n \geq n_0$''. Use the inductive hypothesis to express $f(k+1)$ in terms of $f(k)$ and factor to show divisibility.
+
+\textbf{Induction for Inequalities:} Proving statements like ``$2^n > n^2$ for $n \geq 5$''. The inductive step requires showing $f(k+1) > g(k+1)$ using the assumption $f(k) > g(k)$, often with careful estimation.
+
+\textbf{Induction for Recursive Sequences:} For recursively defined sequences $a_{n+1} = f(a_n)$, prove properties by expressing $a_{k+1}$ using the recurrence and applying the inductive hypothesis to $a_k$.
+
+\textbf{Strong Induction:} Assume $P(n_0), P(n_0+1), \ldots, P(k)$ all true, then prove $P(k+1)$. Essential when the $(k+1)$-th case depends on multiple previous cases.
+
 \subsubsection*{Common Proof Strategies}
 
 \textbf{Contrapositive:} To prove $P \implies Q$, instead prove $\neg Q \implies \neg P$ (logically equivalent).
