@@ -1,0 +1,228 @@
+% Fundamentals Review: Polynomials in HSC Mathematics Extension 2
+
+\subsection*{Overview}
+The study of \textbf{Polynomials} in the HSC Mathematics Extension 2 course is one of the most challenging and comprehensive topics, integrating advanced concepts from \textbf{Complex Numbers} and \textbf{Calculus}. Students are expected to move beyond simple factoring and root-finding to investigate the deep relationships between a polynomial's \textbf{coefficients} and its \textbf{roots}.
+
+The core of the topic revolves around manipulating and solving polynomial equations of degree three or higher. A central focus is the \textbf{Conjugate Root Theorem}, which states that for polynomials with real coefficients, complex roots must occur in conjugate pairs. This theorem, along with \textbf{Vieta's Formulas} (which systematically express the relationships between the roots and coefficients), is essential for constructing, transforming, and analysing polynomial equations.
+
+Mastery of this topic requires strong algebraic skills, a solid understanding of complex number geometry, and the ability to link polynomial structures to trigonometric principles.
+
+\section{Basic Polynomial Theorems}
+
+\subsection{Factor Theorem}
+For a polynomial $P(x)$, if $P(a) = 0$, then $(x - a)$ is a factor of $P(x)$.
+
+\textbf{Conversely:} If $(x - a)$ is a factor of $P(x)$, then $P(a) = 0$.
+
+This theorem is fundamental for factoring polynomials and finding roots systematically.
+
+\subsection{Remainder Theorem}
+When a polynomial $P(x)$ is divided by $(x - a)$, the remainder is $P(a)$.
+
+\textbf{Application:} This provides a quick way to evaluate remainders without performing full polynomial division.
+
+\subsection{Conjugate Root Theorem}
+\textbf{If $P(x)$ is a polynomial with real coefficients, and $z = a + bi$ (where $b \neq 0$) is a root, then the complex conjugate $\overline{z} = a - bi$ is also a root.}
+
+\textbf{Consequence:} Complex roots of real polynomials always occur in conjugate pairs. This means:
+\begin{itemize}
+    \item A polynomial of odd degree with real coefficients must have at least one real root.
+    \item Complex roots contribute quadratic factors with real coefficients: $(x - z)(x - \overline{z}) = x^2 - 2ax + (a^2 + b^2)$ where $z = a + bi$.
+\end{itemize}
+
+\section{Vieta's Formulas}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Beyond Syllabus: Vieta's Formulas]
+\textbf{Note:} While not explicitly listed in the HSC syllabus, \textbf{Vieta's Formulas} are essential advanced knowledge for Extension 2 students. These formulas express the relationships between polynomial roots and coefficients, enabling powerful problem-solving techniques that frequently appear in HSC examinations.
+\end{tcolorbox}
+
+\subsection{Statement of Vieta's Formulas}
+For a polynomial $P(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$ with roots $\alpha_1, \alpha_2, \ldots, \alpha_n$, Vieta's formulas state:
+
+\begin{align*}
+\alpha_1 + \alpha_2 + \cdots + \alpha_n &= -\frac{a_{n-1}}{a_n} \\
+\alpha_1 \alpha_2 + \alpha_1 \alpha_3 + \cdots + \alpha_{n-1}\alpha_n &= \frac{a_{n-2}}{a_n} \\
+\alpha_1 \alpha_2 \alpha_3 + \cdots &= -\frac{a_{n-3}}{a_n} \\
+&\vdots \\
+\alpha_1 \alpha_2 \cdots \alpha_n &= (-1)^n \frac{a_0}{a_n}
+\end{align*}
+
+\subsection{Special Cases}
+
+\textbf{Quadratic} ($ax^2 + bx + c = 0$ with roots $\alpha, \beta$):
+\begin{align*}
+\alpha + \beta &= -\frac{b}{a} \\
+\alpha \beta &= \frac{c}{a}
+\end{align*}
+
+\textbf{Cubic} ($ax^3 + bx^2 + cx + d = 0$ with roots $\alpha, \beta, \gamma$):
+\begin{align*}
+\alpha + \beta + \gamma &= -\frac{b}{a} \\
+\alpha\beta + \beta\gamma + \gamma\alpha &= \frac{c}{a} \\
+\alpha \beta \gamma &= -\frac{d}{a}
+\end{align*}
+
+\textbf{Quartic} ($ax^4 + bx^3 + cx^2 + dx + e = 0$ with roots $\alpha, \beta, \gamma, \delta$):
+\begin{align*}
+\alpha + \beta + \gamma + \delta &= -\frac{b}{a} \\
+\alpha\beta + \alpha\gamma + \alpha\delta + \beta\gamma + \beta\delta + \gamma\delta &= \frac{c}{a} \\
+\alpha\beta\gamma + \alpha\beta\delta + \alpha\gamma\delta + \beta\gamma\delta &= -\frac{d}{a} \\
+\alpha \beta \gamma \delta &= \frac{e}{a}
+\end{align*}
+
+\subsection{Applications of Vieta's Formulas}
+
+\textbf{1. Constructing Polynomials from Root Conditions}
+
+Given relationships between roots, Vieta's formulas allow us to find polynomial coefficients.
+
+\textbf{Example:} Find a polynomial with roots $\alpha, \beta$ where $\alpha + \beta = 5$ and $\alpha\beta = 6$.
+
+\textit{Solution:} Using Vieta's formulas backwards: $P(x) = x^2 - 5x + 6$
+
+\textbf{2. Finding Sums and Products of Root Combinations}
+
+For roots of $x^3 - 3x^2 + 5x - 7 = 0$ called $\alpha, \beta, \gamma$:
+\begin{align*}
+\alpha + \beta + \gamma &= 3 \\
+\alpha\beta + \beta\gamma + \gamma\alpha &= 5 \\
+\alpha\beta\gamma &= 7
+\end{align*}
+
+We can find $\alpha^2 + \beta^2 + \gamma^2$ using: $(\alpha + \beta + \gamma)^2 = \alpha^2 + \beta^2 + \gamma^2 + 2(\alpha\beta + \beta\gamma + \gamma\alpha)$
+
+Thus: $\alpha^2 + \beta^2 + \gamma^2 = 9 - 2(5) = -1$
+
+\textbf{3. Transformations of Roots}
+
+If $\alpha, \beta, \gamma$ are roots of $P(x) = 0$, find a polynomial with roots $2\alpha, 2\beta, 2\gamma$.
+
+Let $y = 2x$, so $x = \frac{y}{2}$. Substitute into $P(x) = 0$ to get $P(\frac{y}{2}) = 0$.
+
+\section{Nature of Roots}
+
+\subsection{Multiple (Repeated) Roots}
+A polynomial $P(x)$ has a \textbf{multiple root} at $x = \alpha$ if $(x - \alpha)^k$ is a factor for some $k \geq 2$.
+
+\textbf{Criterion for Double Root:} $\alpha$ is a double root of $P(x)$ if and only if:
+\begin{align*}
+P(\alpha) &= 0 \\
+P'(\alpha) &= 0
+\end{align*}
+
+\textbf{General Criterion:} $\alpha$ is a root of multiplicity $k$ if:
+\begin{align*}
+P(\alpha) = P'(\alpha) = P''(\alpha) = \cdots = P^{(k-1)}(\alpha) &= 0 \\
+P^{(k)}(\alpha) &\neq 0
+\end{align*}
+
+\textbf{Application:} This calculus-based approach is powerful for determining conditions on coefficients that produce repeated roots.
+
+\subsection{Discriminant (Quadratic Only)}
+For $ax^2 + bx + c = 0$, the discriminant $\Delta = b^2 - 4ac$ determines root nature:
+\begin{itemize}
+    \item $\Delta > 0$: Two distinct real roots
+    \item $\Delta = 0$: One repeated real root
+    \item $\Delta < 0$: Two complex conjugate roots
+\end{itemize}
+
+\section{Transformations of Roots}
+
+Given a polynomial $P(x)$ with roots $\alpha, \beta, \gamma, \ldots$, we can construct new polynomials with transformed roots.
+
+\subsection{Common Transformations}
+
+\textbf{1. Reciprocals of Roots} ($\frac{1}{\alpha}, \frac{1}{\beta}, \frac{1}{\gamma}$)
+
+If $P(x) = a_n x^n + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0$, then the polynomial with reciprocal roots is:
+\[
+Q(x) = a_0 x^n + a_1 x^{n-1} + \cdots + a_{n-1}x + a_n = x^n P\left(\frac{1}{x}\right)
+\]
+
+\textbf{2. Negative Roots} ($-\alpha, -\beta, -\gamma$)
+
+Replace $x$ with $-x$: $Q(x) = P(-x)$
+
+\textbf{3. Shifted Roots} ($\alpha + k, \beta + k, \gamma + k$)
+
+Replace $x$ with $(x - k)$: $Q(x) = P(x - k)$
+
+\textbf{4. Scaled Roots} ($k\alpha, k\beta, k\gamma$)
+
+Replace $x$ with $\frac{x}{k}$: $Q(x) = P\left(\frac{x}{k}\right)$
+
+\textbf{5. Squared Roots} ($\alpha^2, \beta^2, \gamma^2$)
+
+Let $y = x^2$, so $x = \pm\sqrt{y}$. Note: This produces both positive and negative roots, requiring careful handling.
+
+\section{De Moivre's Theorem and Roots of Unity}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=De Moivre's Theorem: Extended Coverage]
+\textbf{Note:} De Moivre's Theorem is a cornerstone for connecting complex numbers, trigonometry, and polynomials. While covered in the Complex Numbers topic, its applications to polynomial problems—especially roots of unity—are extensive and warrant expanded treatment here.
+\end{tcolorbox}
+
+\subsection{Statement of De Moivre's Theorem}
+For any real number $\theta$ and integer $n$:
+\[
+(\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta)
+\]
+
+In polar form: $(r\text{cis}\,\theta)^n = r^n \text{cis}(n\theta)$
+
+\subsection{Finding $n$th Roots}
+To solve $z^n = w$ where $w = r\text{cis}\,\alpha$:
+
+The $n$ solutions are:
+\[
+z_k = r^{1/n} \text{cis}\left(\frac{\alpha + 2\pi k}{n}\right) \quad \text{for } k = 0, 1, 2, \ldots, n-1
+\]
+
+\subsection{Roots of Unity}
+The \textbf{$n$th roots of unity} are solutions to $z^n = 1$:
+\[
+z_k = \text{cis}\left(\frac{2\pi k}{n}\right) = e^{2\pi i k/n} \quad \text{for } k = 0, 1, 2, \ldots, n-1
+\]
+
+\textbf{Key Properties:}
+\begin{itemize}
+    \item The roots are evenly distributed on the unit circle in the complex plane
+    \item If $\omega = \text{cis}(2\pi/n)$ is a primitive $n$th root, all roots are $1, \omega, \omega^2, \ldots, \omega^{n-1}$
+    \item Sum of all $n$th roots of unity: $\sum_{k=0}^{n-1} \omega^k = 0$ (for $n \geq 2$)
+    \item Product of all $n$th roots of unity: $\prod_{k=0}^{n-1} \omega^k = (-1)^{n+1}$
+\end{itemize}
+
+\subsection{Applications to Polynomial Problems}
+
+\textbf{1. Factorization}
+
+$z^n - 1 = (z - 1)(z - \omega)(z - \omega^2) \cdots (z - \omega^{n-1})$
+
+For $n \geq 2$: $z^{n-1} + z^{n-2} + \cdots + z + 1 = \frac{z^n - 1}{z - 1} = (z - \omega)(z - \omega^2) \cdots (z - \omega^{n-1})$
+
+\textbf{2. Trigonometric Identities from De Moivre}
+
+Expanding $(\cos\theta + i\sin\theta)^n$ using the binomial theorem and equating real and imaginary parts yields formulas for $\cos(n\theta)$ and $\sin(n\theta)$ in terms of $\cos\theta$ and $\sin\theta$.
+
+\textbf{Example:} For $n = 3$:
+\begin{align*}
+\cos(3\theta) &= \cos^3\theta - 3\cos\theta\sin^2\theta = 4\cos^3\theta - 3\cos\theta \\
+\sin(3\theta) &= 3\cos^2\theta\sin\theta - \sin^3\theta = 3\sin\theta - 4\sin^3\theta
+\end{align*}
+
+\textbf{3. Solving Polynomial Equations via Trigonometry}
+
+If a polynomial can be written as $\tan(n\theta)$ or $\cos(n\theta)$ in terms of $\tan\theta$ or $\cos\theta$, De Moivre's theorem helps find all solutions by solving trigonometric equations.
+
+\section{Notation and Conventions}
+
+Throughout this collection:
+\begin{itemize}
+    \item $P(x), Q(x)$ denote polynomials
+    \item Greek letters $\alpha, \beta, \gamma, \delta$ denote roots
+    \item $\omega$ typically denotes a primitive $n$th root of unity: $\omega = \text{cis}(2\pi/n)$
+    \item $z, w$ denote complex numbers
+    \item $\text{cis}\,\theta = \cos\theta + i\sin\theta$
+    \item $\overline{z}$ denotes the complex conjugate of $z$
+    \item $|z|$ denotes the modulus (absolute value) of $z$
+    \item $\text{arg}(z)$ denotes the argument (angle) of $z$
+\end{itemize}

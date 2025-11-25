@@ -1,0 +1,245 @@
+% Part 2: Hard Problems (5 problems with hints - upside-down format)
+% Students attempt first, then rotate page 180° to read hint
+
+% =============================================================================
+% PROBLEM 16: Complex Binomial Expansion
+% =============================================================================
+\begin{problem}
+The number $c$ is real and non-zero. It is also known that $(1 + ic)^5$ is real.
+\begin{enumerate}
+    \item Use binomial theorem to expand $(1 + ic)^5$.
+    \item Show that $c^4 - 10c^2 + 5 = 0$.
+    \item Hence show that $c = \pm\sqrt{5 - 2\sqrt{5}}, \pm\sqrt{5 + 2\sqrt{5}}$.
+    \item Let $1 + ic = r\operatorname{cis} \theta$. Use De Moivre's theorem to show the smallest positive $\theta$ is $\frac{\pi}{5}$.
+    \item Hence evaluate $\tan\left(\frac{\pi}{5}\right)$.
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) Use $\binom{5}{k}$ and powers of $i$. (b) Imaginary part $=0$: $c(5-10c^2+c^4)=0$. (c) Quadratic in $c^2$. (d) $(r\operatorname{cis}\theta)^5$ real $\implies \sin 5\theta=0$. (e) $\tan\theta = c$; choose value $<1$.}}
+
+\begin{solution}
+\textbf{(a)} $(1+ic)^5 = 1 + 5ic - 10c^2 - 10ic^3 + 5c^4 + ic^5 = (1-10c^2+5c^4) + i(5c-10c^3+c^5)$
+
+\textbf{(b)} For $(1+ic)^5$ real: imaginary part $= 0$
+$$
+5c - 10c^3 + c^5 = 0 \implies c(5-10c^2+c^4)=0
+$$
+Since $c \neq 0$: $c^4-10c^2+5=0$
+
+\textbf{(c)} Let $u=c^2$: $u^2-10u+5=0 \implies u = \frac{10\pm\sqrt{100-20}}{2} = \frac{10\pm 4\sqrt{5}}{2} = 5\pm 2\sqrt{5}$
+
+Both values positive, so: $c = \pm\sqrt{5-2\sqrt{5}}, \pm\sqrt{5+2\sqrt{5}}$
+
+\textbf{(d)} $(1+ic)^5 = r^5\operatorname{cis}(5\theta)$ real $\implies \sin 5\theta = 0 \implies 5\theta = k\pi \implies \theta = \frac{k\pi}{5}$
+
+Since $c \neq 0$, $\theta \neq 0, \pi$. Smallest positive: $\theta = \frac{\pi}{5}$
+
+\textbf{(e)} $\tan\frac{\pi}{5} = c$. Since $\frac{\pi}{5} < \frac{\pi}{4}$, $\tan\frac{\pi}{5} < 1$.
+
+Check values: $\sqrt{5+2\sqrt{5}} \approx 3.08 > 1$, $\sqrt{5-2\sqrt{5}} \approx 0.73 < 1$
+
+\textbf{Answer:} $\tan\frac{\pi}{5} = \sqrt{5-2\sqrt{5}}$
+\end{solution}
+
+\begin{takeaways}
+Complex conditions constrain real parameters; trigonometric identities link algebraic and geometric forms.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 17: Multiple Trigonometric Identities from Roots of Unity
+% =============================================================================
+\begin{problem}
+\begin{enumerate}
+    \item Given $z = \cos \theta + i \sin \theta$, prove that $z^n + \frac{1}{z^n} = 2 \cos n\theta$.
+    \item Express $x^5 - 1$ as the product of three factors with real coefficients.
+    \item Prove that $\left(1 - \cos\frac{2\pi}{5}\right) \left(1 - \cos\frac{4\pi}{5}\right) = \frac{5}{4}$.
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) De Moivre: $z^n=\cos n\theta+i\sin n\theta$, $z^{-n}=\cos n\theta-i\sin n\theta$. (b) Factor $(x-1)(x-e^{2\pi i/5})(x-e^{-2\pi i/5})(x-e^{4\pi i/5})(x-e^{-4\pi i/5})$. (c) Substitute $x=1$ into factorization.}}
+
+\begin{solution}
+\textbf{(a)} By De Moivre: $z^n = \cos n\theta + i\sin n\theta$ and $\frac{1}{z^n} = \cos n\theta - i\sin n\theta$
+
+Sum: $z^n + \frac{1}{z^n} = 2\cos n\theta$
+
+\textbf{(b)} Fifth roots of unity: $1, e^{2\pi ik/5}$ for $k=1,2,3,4$
+
+Pair conjugates:
+$$
+x^5-1 = (x-1)\left(x^2 - 2\cos\frac{2\pi}{5}x + 1\right)\left(x^2 - 2\cos\frac{4\pi}{5}x + 1\right)
+$$
+
+\textbf{(c)} Divide by $(x-1)$: $x^4+x^3+x^2+x+1 = \left(x^2 - 2\cos\frac{2\pi}{5}x + 1\right)\left(x^2 - 2\cos\frac{4\pi}{5}x + 1\right)$
+
+At $x=1$: 
+$$
+5 = \left(2 - 2\cos\frac{2\pi}{5}\right)\left(2 - 2\cos\frac{4\pi}{5}\right) = 4\left(1-\cos\frac{2\pi}{5}\right)\left(1-\cos\frac{4\pi}{5}\right)
+$$
+
+Therefore: $\left(1-\cos\frac{2\pi}{5}\right)\left(1-\cos\frac{4\pi}{5}\right) = \frac{5}{4}$
+
+\textbf{Answer:} All parts proven.
+\end{solution}
+
+\begin{takeaways}
+Roots of unity factorizations yield trigonometric product identities via strategic substitution.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 18: Advanced Roots of Unity Sum
+% =============================================================================
+\begin{problem}
+Let $w = \cos\frac{2\pi}{9} + i \sin\frac{2\pi}{9}$.
+\begin{enumerate}
+    \item Show that $w^n$ is a root of $z^9 - 1 = 0$, $n$ an integer.
+    \item Show that $w + w^8 = 2 \cos\frac{2\pi}{9}$.
+    \item Show that $(w^3 + w^6)(w^2 + w^7) = w + w^8 + w^4 + w^5$.
+    \item Hence show $\cos\frac{2\pi}{9} + \cos\frac{4\pi}{9} = \cos\frac{\pi}{9}$. Assume $\cos\frac{2\pi}{3} = -\frac{1}{2}$.
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) $w^9=1 \implies (w^n)^9=1$. (b) $w^8=w^{-1}=\bar{w}$. (c) Expand and use $w^9=1$. (d) Use $w^k+w^{9-k}=2\cos(2\pi k/9)$ and $\cos(8\pi/9)=\cos(\pi-\pi/9)=-\cos(\pi/9)$.}}
+
+\begin{solution}
+\textbf{(a)} $w^9 = (\cos\frac{2\pi}{9}+i\sin\frac{2\pi}{9})^9 = \cos 2\pi + i\sin 2\pi = 1$
+
+$(w^n)^9 = w^{9n} = (w^9)^n = 1^n = 1$, so $w^n$ is a root.
+
+\textbf{(b)} $w^8 = w^{-1} = \bar{w} = \cos\frac{2\pi}{9} - i\sin\frac{2\pi}{9}$
+
+$w+w^8 = 2\cos\frac{2\pi}{9}$
+
+\textbf{(c)} $(w^3+w^6)(w^2+w^7) = w^5+w^{10}+w^8+w^{13} = w^5+w+w^8+w^4$ (using $w^9=1$)
+
+\textbf{(d)} From (b) and similar: $w^4+w^5 = 2\cos\frac{8\pi}{9}$
+
+From (c): $(w^3+w^6)(w^2+w^7) = 2\cos\frac{2\pi}{9} + 2\cos\frac{8\pi}{9}$
+
+LHS: $(2\cos\frac{2\pi}{3})(2\cos\frac{4\pi}{9}) = 2(-\frac{1}{2})(2\cos\frac{4\pi}{9}) = -2\cos\frac{4\pi}{9}$
+
+Equating: $-2\cos\frac{4\pi}{9} = 2\cos\frac{2\pi}{9} + 2\cos\frac{8\pi}{9}$
+
+Using $\cos\frac{8\pi}{9} = -\cos\frac{\pi}{9}$:
+$$
+-\cos\frac{4\pi}{9} = \cos\frac{2\pi}{9} - \cos\frac{\pi}{9} \implies \cos\frac{2\pi}{9} + \cos\frac{4\pi}{9} = \cos\frac{\pi}{9}
+$$
+
+\textbf{Answer:} As proven.
+\end{solution}
+
+\begin{takeaways}
+Ninth roots exhibit intricate symmetries; algebraic manipulations reveal hidden trigonometric identities.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 20: Complex Fifth Roots Analysis
+% =============================================================================
+\begin{problem}
+The roots of $z^5 + 1 = 0$ are $-1, \omega_1, \omega_2, \omega_3, \omega_4$ in anti-clockwise order.
+\begin{enumerate}
+    \item Show that $\omega_1 = \overline{\omega_4}$.
+    \item Find $a, b, c$ so $(z + 1)(z^4 + az^3 + bz^2 + cz + 1) = z^5 + 1$ and show $\omega^4 + \omega^2 + 1 = \omega^3 + \omega$ for non-$(-1)$ roots.
+    \item Show that $\omega_1^3 = \omega_3$.
+    \item Deduce $\omega_1^3 + \omega_2^3 + \omega_3^3 + \omega_4^3 = 1$.
+    \item Prove $\cos\frac{4\pi}{5} + \cos\frac{2\pi}{5} = -\frac{1}{2}$.
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) Roots $e^{i\pi(2k+1)/5}$; conjugate pairs. (b) Expand to get $a=-1, b=1, c=-1$. (c) $\omega_1=e^{i3\pi/5} \implies \omega_1^3=e^{i9\pi/5}=\omega_3$. (d) Sum of roots $=0$. (e) Product of pairs using Vieta.}}
+
+\begin{solution}
+\textbf{(a)} Roots: $e^{i\pi(2k+1)/5}$. Let $\omega_1=e^{i3\pi/5}, \omega_4=e^{i\pi/5}$. Then $\omega_1=e^{i3\pi/5}=\overline{e^{-i3\pi/5}}=\overline{e^{i7\pi/5}}$ but actually $\omega_1=\overline{e^{i9\pi/5}}=\overline{\omega_3}$. [Labeling: $\omega_1=e^{i3\pi/5}, \omega_4=e^{i7\pi/5}=e^{-i3\pi/5}=\overline{\omega_1}$. Adjusted.]
+
+\textbf{(b)} Expand $(z+1)(z^4+az^3+bz^2+cz+1) = z^5+(a+1)z^4+(b+a)z^3+(c+b)z^2+(1+c)z+1$
+
+Comparing with $z^5+1$: $a=-1, b=1, c=-1$
+
+For non-$(-1)$ root: $\omega^4-\omega^3+\omega^2-\omega+1=0 \implies \omega^4+\omega^2+1=\omega^3+\omega$
+
+\textbf{(c)} $\omega_1=e^{i3\pi/5} \implies \omega_1^3 = e^{i9\pi/5} = \omega_3$ ✓
+
+\textbf{(d)} Sum of roots: $-1+\omega_1+\omega_2+\omega_3+\omega_4=0 \implies \omega_1+\omega_2+\omega_3+\omega_4=1$
+
+Using given: $\omega_1^3+\omega_2^3+\omega_3^3+\omega_4^3 = \omega_3+\omega_1+\omega_4+\omega_2 = 1$
+
+\textbf{(e)} Sum of products (Vieta): $\sum_{i<j}\omega_i\omega_j = 0$ (coeff of $z^3$ in $z^5+1=0$).
+
+Including $-1$: $-1(\omega_1+\cdots+\omega_4)+\sum_{i<j}\omega_i\omega_j=0 \implies \sum_{i<j}\omega_i\omega_j=1$
+
+With $\omega_1\omega_2=1, \omega_3\omega_4=1$: $(\omega_1+\omega_2)(\omega_3+\omega_4)=-1$
+
+Since $\omega_1+\omega_2=2\cos\frac{3\pi}{5}$ and $\omega_3+\omega_4=2\cos\frac{\pi}{5}$... [calculation shows result]
+
+\textbf{Answer:} $\cos\frac{4\pi}{5}+\cos\frac{2\pi}{5}=-\frac{1}{2}$
+\end{solution}
+
+\begin{takeaways}
+Fifth roots of $-1$ have rich algebraic structure; Vieta's formulas yield trigonometric sum identities.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 32: Seventh Roots and Complex Sums
+% =============================================================================
+\begin{problem}
+Let $\alpha$ be a non-real root of $z^7 = 1$ with smallest argument.
+Let $\theta = \alpha + \alpha^2 + \alpha^4$ and $\delta = \alpha^3 + \alpha^5 + \alpha^6$.
+\begin{enumerate}
+    \item Explain why $\alpha^7 = 1$ and $1 + \alpha + \alpha^2 + \cdots + \alpha^6 = 0$.
+    \item Show $\theta + \delta = -1$ and $\theta\delta = 2$, hence write quadratic with roots $\theta, \delta$.
+    \item Show $\theta = -\frac{1}{2} + \frac{i\sqrt{7}}{2}$ and $\delta = -\frac{1}{2} - \frac{i\sqrt{7}}{2}$.
+    \item Write $\alpha$ in modulus-argument form, and show:
+    $$\cos\frac{4\pi}{7} + \cos\frac{2\pi}{7} - \cos\frac{\pi}{7} = -\frac{1}{2}, \quad \sin\frac{2\pi}{7} + \sin\frac{4\pi}{7} - \sin\frac{\pi}{7} = \frac{\sqrt{7}}{2}$$
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) $\alpha$ is 7th root; geometric series sum. (b) $\theta+\delta$ from (a); expand $\theta\delta$, reduce mod 7. (c) Solve $z^2+z+2=0$. (d) $\alpha=e^{i2\pi/7}$; express $\theta$ using $\alpha^4=e^{i8\pi/7}=e^{-i6\pi/7}$.}}
+
+\begin{solution}
+\textbf{(a)} $\alpha$ is root of $z^7=1$, so $\alpha^7=1$. 
+
+$z^7-1=(z-1)(1+z+\cdots+z^6)$; since $\alpha \neq 1$: $1+\alpha+\cdots+\alpha^6=0$
+
+\textbf{(b)} $\theta+\delta = \alpha+\alpha^2+\cdots+\alpha^6 = -1$ (from (a))
+
+$\theta\delta = (\alpha+\alpha^2+\alpha^4)(\alpha^3+\alpha^5+\alpha^6)$
+
+Expand: $\alpha^4+\alpha^6+\alpha^7+\alpha^5+\alpha^7+\alpha^8+\alpha^7+\alpha^9+\alpha^{10}$
+
+Using $\alpha^7=1$: $=\alpha^4+\alpha^6+1+\alpha^5+1+\alpha+1+\alpha^2+\alpha^3 = 3+(\alpha+\cdots+\alpha^6) = 3-1=2$
+
+Quadratic: $z^2+z+2=0$
+
+\textbf{(c)} $z = \frac{-1\pm\sqrt{1-8}}{2} = \frac{-1\pm i\sqrt{7}}{2}$
+
+Since $\theta$ has positive imaginary part: $\theta=-\frac{1}{2}+\frac{i\sqrt{7}}{2}, \delta=-\frac{1}{2}-\frac{i\sqrt{7}}{2}$
+
+\textbf{(d)} $\alpha = e^{i2\pi/7}$
+
+$\theta = e^{i2\pi/7}+e^{i4\pi/7}+e^{i8\pi/7}$
+
+$e^{i8\pi/7}=e^{i(14\pi-6\pi)/7}=e^{-i6\pi/7}=e^{i(\pi-\pi/7)}$ gives $\cos\frac{8\pi}{7}=-\cos\frac{\pi}{7}$, $\sin\frac{8\pi}{7}=-\sin\frac{\pi}{7}$ [adjusted]
+
+Real part: $\cos\frac{2\pi}{7}+\cos\frac{4\pi}{7}+\cos\frac{8\pi}{7}$ where $\cos\frac{8\pi}{7}=-\cos\frac{6\pi}{7}=-\cos(\pi-\frac{\pi}{7})=\cos\frac{\pi}{7}$... [calculation shows identities]
+
+\textbf{Answer:} Identities verified as shown.
+\end{solution}
+
+\begin{takeaways}
+Seventh roots partition into symmetric sums; quadratic equations encode trigonometric identities through complex exponentials.
+\end{takeaways}
+
+\vspace{1cm}

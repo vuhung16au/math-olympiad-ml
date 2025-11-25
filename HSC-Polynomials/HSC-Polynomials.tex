@@ -1,0 +1,138 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+
+% Custom styles shared with other HSC projects
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+% TikZ libraries for diagrams
+\usetikzlibrary{arrows.meta, calc, patterns, decorations.pathreplacing}
+\pgfplotsset{compat=1.18}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: Polynomials Mastery}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet compiles high-quality polynomial problems curated specifically for the HSC Mathematics Extension~2 syllabus. Every problem covers essential polynomial techniques including factoring, roots and Vieta's formulas, complex numbers and conjugate roots, transformations of roots, nature of roots using calculus, De Moivre's theorem and roots of unity, and connections to trigonometric identities. Detailed reasoning showcases advanced problem-solving strategies that build from fundamental techniques to complex multi-step applications.
+
+\subsection{Target Audience}
+The explanations are crafted for Extension~2 students aiming to master polynomials and develop advanced problem-solving skills. Each solution in Part~1 explicitly states the strategy, justifies technique choices, and provides complete step-by-step working so that high-school learners can follow every transition. Part~2 offers hints and concise solutions to encourage independent problem-solving.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Review the fundamentals section before attempting problems to refresh key theorems and techniques.
+  \item Attempt problems in Part~1 without looking at solutions; compare your work against detailed solutions to understand model reasoning.
+  \item For Part~2, try each problem first, then check the upside-down hint if needed, and finally review the solution sketch.
+  \item Practice problems multiple times, working from memory to reinforce technique mastery.
+  \item Pay special attention to Vieta's formulas and De Moivre's theorem applications, as these advanced techniques frequently appear in Extension~2 exams.
+\end{itemize}
+
+\subsection{Polynomial Topics Overview}
+The problems in this collection cover:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Factoring Polynomials:} Factor theorem, synthetic division, finding all factors
+  \item \textbf{Roots of Polynomials:} Finding roots, conjugate root theorem, relationship between roots and coefficients
+  \item \textbf{Vieta's Formulas (Advanced):} Sum and product relationships, constructing polynomials from root conditions
+  \item \textbf{Complex Numbers:} Solving polynomials with complex coefficients, Cartesian and polar forms
+  \item \textbf{Transformations of Roots:} Forming polynomials with reciprocal, squared, or shifted roots
+  \item \textbf{Nature of Roots:} Multiple (repeated) roots using derivatives, discriminant conditions
+  \item \textbf{De Moivre's Theorem:} Roots of unity, expressing trigonometric functions as polynomials
+  \item \textbf{Polynomials and Trigonometry:} Solving polynomial equations derived from trigonometric identities
+\end{itemize}
+
+\newpage
+\section{Fundamentals Review}
+This section provides a comprehensive review of polynomial techniques essential for HSC Extension~2. Use this as a reference while working through problems.
+
+\input{problems/fundamentals}
+
+\newpage
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains three sets of problems---basic, medium, and advanced. Each set provides five problems with comprehensive solutions. Every solution includes a strategy paragraph explaining technique selection, complete step-by-step working with annotations, and a takeaways box highlighting key insights. Problems are ordered from simpler to more complex within each difficulty level.
+
+\subsection{Basic Polynomial Problems}
+\input{problems/part1-easy}
+
+\subsection{Medium Polynomial Problems}
+\input{problems/part1-medium}
+
+\subsection{Advanced Polynomial Problems}
+\input{problems/part1-hard}
+
+\newpage
+\section{Part 2: Problems with Hints and Solutions (Concise)}
+Part~2 presents additional problems with upside-down hints. Try each problem first, then rotate the page to read the hint if needed. These 23 problems provide additional practice across all difficulty levels, ordered from simpler to more complex within each category.
+
+\subsection{Basic Polynomial Problems}
+\input{problems/part2-easy-hints}
+
+\subsection{Medium Polynomial Problems}
+\input{problems/part2-medium-hints}
+
+\subsection{Advanced Polynomial Problems}
+\input{problems/part2-hard-hints}
+
+\newpage
+\section{Conclusion}
+
+\subsection{Final Thoughts}
+Mastering polynomials in HSC Mathematics Extension~2 requires persistence, practice, and a deep understanding of the connections between algebra, complex numbers, calculus, and trigonometry. The problems in this collection represent the breadth and depth of polynomial questions you may encounter in your examinations.
+
+Remember:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Always check for conjugate pairs} when working with complex roots of real polynomials
+  \item \textbf{Use Vieta's formulas} to quickly establish relationships between roots and coefficients
+  \item \textbf{Apply calculus} (derivatives) to investigate multiple roots and nature of roots
+  \item \textbf{Leverage De Moivre's theorem} for problems involving roots of unity and trigonometric connections
+  \item \textbf{Practice transformations} to build fluency in constructing new polynomials from known roots
+\end{itemize}
+
+\subsection{Best of Luck!}
+We hope this collection serves you well in your Extension~2 journey. With dedicated practice and careful study of these problems, you will develop the confidence and skills needed to excel in polynomial questions on your HSC examination.
+
+Work hard, stay curious, and remember that every challenging problem you solve makes you a stronger mathematician.
+
+\textit{``Success is the sum of small efforts repeated day in and day out.''} --- Robert Collier
+
+\subsection{Contact Information}
+\textbf{Author:} Vu Hung Nguyen
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{LinkedIn:} \url{https://www.linkedin.com/in/vuhung16au/}
+  \item \textbf{GitHub:} \url{https://github.com/vuhung16au}
+  \item \textbf{Repository:} \url{https://github.com/vuhung16au/math-olympiad-ml}
+\end{itemize}
+
+For questions, corrections, or suggestions, please open an issue on the GitHub repository.
+
+\end{document}

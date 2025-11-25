@@ -1,0 +1,189 @@
+% Part 2: Easy Problems (5 problems with hints - upside-down format)
+% Students attempt first, then rotate page 180° to read hint
+
+% =============================================================================
+% PROBLEM 23: Binomial Theorem Statement
+% =============================================================================
+\begin{problem}
+State the Binomial Theorem for the expansion of $(x+a)^n$, where $n$ is a positive integer. Define the binomial coefficient used in the expansion.
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} The theorem expresses $(x+a)^n$ as a sum involving binomial coefficients $\binom{n}{r} = \frac{n!}{r!(n-r)!}$.}}
+
+\begin{solution}
+The Binomial Theorem states:
+$$
+(x+a)^n = \sum_{r=0}^{n} \binom{n}{r} x^{n-r} a^{r}
+$$
+or equivalently:
+$$
+(x+a)^n = \binom{n}{0} x^n + \binom{n}{1} x^{n-1} a + \binom{n}{2} x^{n-2} a^2 + \dots + \binom{n}{n} a^n
+$$
+
+The binomial coefficient is defined as:
+$$
+\binom{n}{r} = \frac{n!}{r!(n-r)!}
+$$
+where $n! = n \times (n-1) \times \dots \times 2 \times 1$ and $0! = 1$.
+
+\textbf{Answer:} Binomial Theorem with coefficients $\binom{n}{r}$.
+\end{solution}
+
+\begin{takeaways}
+Binomial coefficients count combinations; central to polynomial expansions.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 25: System of equations (symmetric polynomials)
+% =============================================================================
+\begin{problem}
+Solve for $p$, $q$, $r$ over the complex numbers, given:
+$$
+\begin{aligned}
+p + q + r &= 1 \\
+pq + pr + qr &= 9 \\
+pqr &= 9
+\end{aligned}
+$$
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} These are elementary symmetric polynomials. Construct cubic $P(x) = x^3 - x^2 + 9x - 9$ with roots $p, q, r$. Factor by grouping.}}
+
+\begin{solution}
+The cubic polynomial with roots $p, q, r$ is:
+$$
+P(x) = x^3 - (p+q+r)x^2 + (pq+pr+qr)x - pqr = x^3 - x^2 + 9x - 9
+$$
+
+Factor by grouping:
+$$
+x^3 - x^2 + 9x - 9 = x^2(x-1) + 9(x-1) = (x^2+9)(x-1) = 0
+$$
+
+From $x-1=0$: $x=1$
+
+From $x^2+9=0$: $x^2 = -9 \implies x = \pm 3i$
+
+\textbf{Answer:} $\{p,q,r\} = \{1, 3i, -3i\}$ (in any order).
+\end{solution}
+
+\begin{takeaways}
+Vieta's formulas connect roots to coefficients; factorization reveals complex roots.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 27: Complex roots of quadratic
+% =============================================================================
+\begin{problem}
+The complex roots of $iz^2 + \sqrt{3}z - 1 = 0$ are $\alpha$ and $\beta$.
+\begin{enumerate}
+    \item Find $\alpha$ and $\beta$ in Cartesian form.
+    \item Show that $\alpha^2\beta^2 + 1 = 0$.
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Use quadratic formula with $a=i$. Find $\sqrt{3-4i}$ by setting $\sqrt{3-4i}=x+iy$ and solving. Part (b): Use Vieta's formula $\alpha\beta = -1/i = i$.}}
+
+\begin{solution}
+\textbf{(a)} Using quadratic formula with $a=i, b=\sqrt{3}, c=-1$:
+$$
+z = \frac{-\sqrt{3} \pm \sqrt{3-4i}}{2i}
+$$
+
+To find $\sqrt{3-4i}$, let $x+iy = \sqrt{3-4i}$. Then $(x+iy)^2 = 3-4i$, giving:
+$$
+x^2-y^2 = 3, \quad 2xy = -4 \implies y = -2/x
+$$
+
+Substituting: $x^2 - 4/x^2 = 3 \implies x^4 - 3x^2 - 4 = 0 \implies (x^2-4)(x^2+1)=0$
+
+Thus $x=2, y=-1$, so $\sqrt{3-4i} = \pm(2-i)$.
+
+Computing: $\alpha = -\frac{1}{2} + \frac{\sqrt{3}-2}{2}i$ and $\beta = \frac{1}{2} + \frac{\sqrt{3}+2}{2}i$
+
+\textbf{(b)} By Vieta's formulas: $\alpha\beta = \frac{-1}{i} = i$
+
+Therefore: $\alpha^2\beta^2 = (\alpha\beta)^2 = i^2 = -1$, so $\alpha^2\beta^2 + 1 = 0$.
+
+\textbf{Answer:} (a) As shown above; (b) Verified.
+\end{solution}
+
+\begin{takeaways}
+Finding square roots of complex numbers requires solving simultaneous equations; Vieta's formulas simplify products.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 37: Integer solution to polynomial equation
+% =============================================================================
+\begin{problem}
+Prove that the only integer solution to
+$$ (x-a)(x-b)(x-c)(x-d) - 4 = 0 $$
+is $x = \frac{a+b+c+d}{4}$, where $a, b, c, d$ are unique integers.
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} The product equals 4. For distinct integer factors, the only way is $\{1, 2, -1, -2\}$ with product 4. Their sum is 0.}}
+
+\begin{solution}
+Let $y_i = x-i$ for $i \in \{a,b,c,d\}$. Then $y_a y_b y_c y_d = 4$.
+
+Since $a, b, c, d$ are unique integers, the $y_i$ are four distinct integers.
+
+The only way to factor 4 into four distinct integers is $\{-2, -1, 1, 2\}$, since their product is $(-2)(-1)(1)(2) = 4$.
+
+Therefore: $\{x-a, x-b, x-c, x-d\} = \{-2, -1, 1, 2\}$
+
+Summing: $(x-a)+(x-b)+(x-c)+(x-d) = -2-1+1+2 = 0$
+
+Thus: $4x - (a+b+c+d) = 0 \implies x = \frac{a+b+c+d}{4}$
+
+\textbf{Answer:} $x = \frac{a+b+c+d}{4}$ is the unique integer solution.
+\end{solution}
+
+\begin{takeaways}
+Integer factorization constraints severely limit solutions; summing symmetric expressions reveals structure.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 38: No rational roots (parity argument)
+% =============================================================================
+\begin{problem}
+Without using the rational roots theorem, prove that there is no rational solution to the equation $x^3 + x + 1 = 0$. Hint: Assume there exists a rational root and consider whether the LHS is odd or even.
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} If $x = p/q$ (coprime), then $p^3 + pq^2 + q^3 = 0$. Check all parity cases: (odd,odd), (odd,even), (even,odd). All lead to odd=even contradiction.}}
+
+\begin{solution}
+Assume $x = \frac{p}{q}$ where $\gcd(p,q)=1$. Substituting into $x^3+x+1=0$ and multiplying by $q^3$:
+$$
+p^3 + pq^2 + q^3 = 0
+$$
+
+\textbf{Case 1:} $p$ odd, $q$ odd $\implies p^3 + pq^2 + q^3 = \text{odd + odd + odd = odd} \neq 0$ (even). Contradiction.
+
+\textbf{Case 2:} $p$ odd, $q$ even $\implies p^3 + pq^2 + q^3 = \text{odd + even + even = odd} \neq 0$. Contradiction.
+
+\textbf{Case 3:} $p$ even, $q$ odd $\implies p^3 + pq^2 + q^3 = \text{even + even + odd = odd} \neq 0$. Contradiction.
+
+All cases lead to contradiction.
+
+\textbf{Answer:} No rational solution exists.
+\end{solution}
+
+\begin{takeaways}
+Parity arguments provide elegant proofs without explicit factorization or rational root tests.
+\end{takeaways}
+
+\vspace{1cm}

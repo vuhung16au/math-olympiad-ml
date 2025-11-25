@@ -1,0 +1,493 @@
+% Part 1 Hard - HSC Polynomials
+% Problems: 03, 07, 08, 14, 15
+
+\begin{problem}[Complex Solutions with Triangle Inequality]
+Consider the equation
+$$z^n \cos(n\theta) + z^{n-1} \cos((n-1)\theta) + z^{n-2} \cos((n-2)\theta) + \cdots + z \cos(\theta) = 1$$
+where $z \in \mathbb{C}$, $\theta \in \mathbb{R}$, and $n$ is a positive integer.
+
+Using a proof by contradiction and the triangle inequality, or otherwise, prove that all the solutions to the equation lie outside the circle $|z| = \frac{1}{2}$ on the complex plane.
+\end{problem}
+
+\begin{solution}
+\textbf{Strategy:} This problem requires a proof by contradiction combined with the triangle inequality. We assume a solution exists inside or on the circle $|z| = \frac{1}{2}$, then use the triangle inequality to establish an upper bound on the left-hand side. This bound will contradict the requirement that the expression equals 1, proving no such solution can exist.
+
+We will use a proof by contradiction.
+
+Assume that there exists a solution $z_0$ such that $z_0$ lies on or inside the circle $|z| = \frac{1}{2}$. That is, assume $|z_0| \leq \frac{1}{2}$.
+
+Let $E$ denote the left-hand side of the given equation:
+$$E = z^n \cos(n\theta) + z^{n-1} \cos((n-1)\theta) + z^{n-2} \cos((n-2)\theta) + \cdots + z \cos(\theta)$$
+Since $z_0$ is a solution, we have $E = 1$ when $z=z_0$. Taking the modulus of both sides:
+$$|E| = |1| = 1$$
+
+Now, we apply the \textbf{triangle inequality} to the expression for $|E|$:
+\begin{align*}
+|E| &= \left| \sum_{k=1}^n z^k \cos(k\theta) \right| \\
+&\leq \sum_{k=1}^n \left| z^k \cos(k\theta) \right| \\
+&= \sum_{k=1}^n |z^k| |\cos(k\theta)| \\
+&= \sum_{k=1}^n |z|^k |\cos(k\theta)|
+\end{align*}
+
+Since $z=z_0$ and we assumed $|z_0| \leq \frac{1}{2}$, and knowing that $|\cos(k\theta)| \leq 1$ for all $k$ and $\theta \in \mathbb{R}$, we have:
+$$|E| \leq \sum_{k=1}^n |z_0|^k |\cos(k\theta)| \leq \sum_{k=1}^n |z_0|^k$$
+
+Substituting the assumption $|z_0| \leq \frac{1}{2}$ into the inequality:
+$$|E| \leq \sum_{k=1}^n \left(\frac{1}{2}\right)^k = \frac{1}{2} + \left(\frac{1}{2}\right)^2 + \cdots + \left(\frac{1}{2}\right)^n$$
+
+The right-hand side is the sum of the first $n$ terms of a geometric series with the first term $a = \frac{1}{2}$ and common ratio $r = \frac{1}{2}$. The sum $S_n$ is given by the formula:
+$$S_n = \frac{a(1-r^n)}{1-r} = \frac{\frac{1}{2} \left(1 - \left(\frac{1}{2}\right)^n \right)}{1 - \frac{1}{2}} = \frac{\frac{1}{2} \left(1 - \left(\frac{1}{2}\right)^n \right)}{\frac{1}{2}} = 1 - \left(\frac{1}{2}\right)^n$$
+
+Since $n$ is a positive integer, $n \geq 1$.
+$$\left(\frac{1}{2}\right)^n > 0 \implies 1 - \left(\frac{1}{2}\right)^n < 1$$
+
+Therefore, our inequality becomes:
+$$|E| \leq 1 - \left(\frac{1}{2}\right)^n < 1$$
+
+This gives us the result:
+$$|E| < 1$$
+
+However, from the original equation, we must have $|E| = 1$.
+The statement $|E| < 1$ \textbf{contradicts} the requirement that $|E|=1$.
+
+Therefore, the initial assumption that a solution $z_0$ exists such that $|z_0| \leq \frac{1}{2}$ must be false.
+
+Hence, all the solutions to the equation lie \textbf{outside} the circle $|z| = \frac{1}{2}$ on the complex plane, which means $|z| > \frac{1}{2}$.
+
+\textbf{Final Answer:} Proven by contradiction using the triangle inequality.
+\end{solution}
+
+\begin{takeaways}
+This problem showcases sophisticated proof techniques in complex analysis:
+\begin{itemize}
+    \item \textbf{Triangle Inequality:} $|z_1 + z_2 + \cdots + z_n| \leq |z_1| + |z_2| + \cdots + |z_n|$ is fundamental for bounding complex sums.
+    \item \textbf{Proof by Contradiction:} Assume the negation, derive a logical impossibility, conclude the original statement is true.
+    \item \textbf{Modulus Properties:} $|z^k| = |z|^k$ and $|z_1 z_2| = |z_1||z_2|$ simplify modulus calculations.
+    \item \textbf{Bounded Trigonometric Functions:} $|\cos\theta| \leq 1$ for all real $\theta$ provides crucial bounds.
+    \item \textbf{Geometric Series:} The formula $\sum_{k=1}^n r^k = r\frac{1-r^n}{1-r}$ is essential for summing powers.
+    \item \textbf{Strict Inequality:} The key insight is that $\sum_{k=1}^n (1/2)^k < 1$ for all finite $n$, creating the necessary contradiction.
+\end{itemize}
+\end{takeaways}
+
+\vspace{1cm}
+
+\begin{problem}[Equilateral Triangle in Complex Plane]
+Let $w$ be the complex number $w = e^{\frac{2\pi i}{3}}$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $1 + w + w^2 = 0$.
+
+    \medskip
+    \noindent Three complex numbers $a$, $b$ and $c$ are represented in the complex plane by points $A$, $B$ and $C$ respectively.
+
+    \item Show that if triangle $ABC$ is anticlockwise and equilateral, then $a + b w + c w^2 = 0$.
+
+    \item It can be shown that if triangle $ABC$ is clockwise and equilateral, then $a + b w^2 + c w = 0$. (Do NOT prove this.)
+
+    Show that if $ABC$ is an equilateral triangle, then
+    $$a^2 + b^2 + c^2 = ab + bc + ca.$$
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Strategy:} Part (i) uses either the geometric series formula or the factorization of $z^3 - 1$. Part (ii) requires understanding rotations in the complex plane—an anticlockwise equilateral triangle satisfies a rotation property that leads to the stated equation. Part (iii) multiplies the two possible conditions and uses the result from part (i) to derive the required identity.
+
+\noindent Let $w = e^{\frac{2\pi i}{3}}$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Show that $1 + w + w^2 = 0$.}
+
+    \medskip
+    \textbf{Method 1: Sum of a Geometric Series}
+
+    The expression $1 + w + w^2$ is a geometric series with first term $1$, common ratio $w$, and $n=3$ terms.
+    The sum $S_n$ is given by:
+    $$S_n = \frac{1(w^n - 1)}{w - 1}$$
+    Substituting $n=3$ and $w = e^{\frac{2\pi i}{3}}$:
+    $$1 + w + w^2 = \frac{w^3 - 1}{w - 1}$$
+    Now calculate $w^3$:
+    $$w^3 = \left(e^{\frac{2\pi i}{3}}\right)^3 = e^{2\pi i} = \cos(2\pi) + i\sin(2\pi) = 1$$
+    Since $w = e^{\frac{2\pi i}{3}} \neq 1$, the denominator $w-1 \neq 0$.
+    Substituting $w^3 = 1$ into the sum formula:
+    $$1 + w + w^2 = \frac{1 - 1}{w - 1} = \frac{0}{w - 1} = 0$$
+    Thus, $1 + w + w^2 = 0$.
+
+    \medskip
+    \textbf{Method 2: Roots of Unity}
+
+    $w$ is a cube root of unity, since $w^3 = 1$ (as shown in Method 1).
+    The equation $z^3 = 1$ can be factored as $z^3 - 1 = 0$, or
+    $$(z - 1)(z^2 + z + 1) = 0$$
+    The roots of $z^3 = 1$ are $z=1$, $z=w$, and $z=w^2$.
+    Since $w \neq 1$, $w$ must be a root of the quadratic factor:
+    $$w^2 + w + 1 = 0$$
+    Thus, $1 + w + w^2 = 0$.
+
+    ---
+
+    \item \textbf{Show that if triangle $ABC$ is anticlockwise and equilateral, then $a + b w + c w^2 = 0$.}
+
+    \medskip
+    For an anticlockwise equilateral triangle, the vector $\vec{CA}$ is obtained by rotating the vector $\vec{BC}$ by $120^\circ$ anticlockwise. In complex notation, rotation by angle $\theta$ corresponds to multiplication by $e^{i\theta}$.
+
+    The rotation relationship for an anticlockwise equilateral triangle is:
+    $$a - c = (c - b) e^{\frac{2\pi i}{3}}$$
+    Since $w = e^{\frac{2\pi i}{3}}$, we have:
+    $$a - c = (c - b) w$$
+    Expand and rearrange:
+    $$a - c = c w - b w$$
+    $$a + b w - c - c w = 0$$
+    $$a + b w - c(1 + w) = 0$$
+    From part (i), we know $1 + w + w^2 = 0$, so $1 + w = -w^2$.
+    Substitute this into the equation:
+    $$a + b w - c(-w^2) = 0$$
+    $$a + b w + c w^2 = 0$$
+    This proves the required result.
+
+    ---
+
+    \item \textbf{Show that if $ABC$ is an equilateral triangle, then $a^2 + b^2 + c^2 = ab + bc + ca$.}
+
+    \medskip
+    If $\triangle ABC$ is equilateral, it must be either \textbf{anticlockwise} or \textbf{clockwise}.
+
+    \medskip
+    \textbf{Case 1: Triangle $ABC$ is anticlockwise.}
+    From part (ii), the condition is:
+    $$a + b w + c w^2 = 0 \quad (1)$$
+
+    \medskip
+    \textbf{Case 2: Triangle $ABC$ is clockwise.}
+    From part (iii), the condition is given as:
+    $$a + b w^2 + c w = 0 \quad (2)$$
+
+    Since the triangle is equilateral, one of the two conditions must hold. Therefore, their product must be zero:
+    $$(a + b w + c w^2)(a + b w^2 + c w) = 0$$
+    Expand the product:
+    \begin{align*}
+    & a(a + b w^2 + c w) + b w (a + b w^2 + c w) + c w^2 (a + b w^2 + c w) \\
+    &= (a^2 + a b w^2 + a c w) + (a b w + b^2 w^3 + b c w^2) + (a c w^2 + b c w^4 + c^2 w^3) \\
+    &= a^2 + a b w^2 + a c w + a b w + b^2(1) + b c w^2 + a c w^2 + b c (w^3 \cdot w) + c^2(1) \\
+    &= a^2 + b^2 + c^2 + a b (w + w^2) + a c (w + w^2) + b c (w^2 + w)
+    \end{align*}
+    We use the property from part (i): $1 + w + w^2 = 0$, which implies $w + w^2 = -1$.
+    Substituting $w + w^2 = -1$:
+    $$a^2 + b^2 + c^2 + a b (-1) + a c (-1) + b c (-1) = 0$$
+    $$a^2 + b^2 + c^2 - a b - a c - b c = 0$$
+    Rearranging the terms gives the required identity:
+    $$a^2 + b^2 + c^2 = a b + b c + c a$$
+
+\end{enumerate}
+
+\textbf{Final Answer:} (i) Shown using geometric series or factorization; (ii) Shown using rotation in complex plane; (iii) $a^2 + b^2 + c^2 = ab + bc + ca$.
+\end{solution}
+
+\begin{takeaways}
+This beautiful problem connects complex numbers with geometry:
+\begin{itemize}
+    \item \textbf{Roots of Unity Properties:} For $w = e^{2\pi i/3}$, we have $w^3 = 1$ and $1 + w + w^2 = 0$.
+    \item \textbf{Rotation in Complex Plane:} Multiplying by $e^{i\theta}$ rotates a complex number by angle $\theta$ counterclockwise.
+    \item \textbf{Equilateral Triangle Condition:} The relation $a + bw + cw^2 = 0$ (or its variant) characterizes equilateral triangles.
+    \item \textbf{Algebraic Identity:} $w + w^2 = -1$ is a key simplification that appears repeatedly.
+    \item \textbf{Product of Conditions:} Multiplying the anticlockwise and clockwise conditions eliminates the orientation dependence.
+    \item \textbf{Symmetric Functions:} The identity $a^2 + b^2 + c^2 = ab + bc + ca$ is a beautiful symmetric relation for equilateral triangles.
+\end{itemize}
+\end{takeaways}
+
+\vspace{1cm}
+
+\begin{problem}[Fifth Roots of $-1$ and Trigonometric Values]
+Consider the equation $z^5 + 1 = 0$, where $z$ is a complex number.
+
+\begin{enumerate}
+    \item Solve the equation $z^5 + 1 = 0$ by finding the $5^\text{th}$ roots of $-1$.
+    \item Show that if $z$ is a solution of $z^5 + 1 = 0$ and $z \neq -1$, then $u = z + \frac{1}{z}$ is a solution of $u^2 - u - 1 = 0$.
+    \item Hence find the exact value of $\cos \frac{3\pi}{5}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Strategy:} Part (1) uses de Moivre's theorem to find all fifth roots in polar form. Part (2) manipulates the polynomial equation by dividing by $z^2$ and using the substitution $u = z + 1/z$ to derive a quadratic. Part (3) exploits the fact that $u = 2\cos\theta$ for $z = e^{i\theta}$ and uses the quadratic formula, selecting the correct root based on the sign of $\cos(3\pi/5)$.
+
+\begin{enumerate}
+    \item \textbf{Solve $z^5 + 1 = 0$}
+    \newline
+    We need to solve $z^5 = -1$.
+    In polar form, $-1 = 1 \cdot e^{i(\pi + 2k\pi)}$, for $k \in \mathbb{Z}$.
+    
+    The $5^\text{th}$ roots are given by:
+    $$z_k = (-1)^{1/5} = 1^{1/5} e^{i \frac{\pi + 2k\pi}{5}} = e^{i \frac{(2k+1)\pi}{5}}, \quad \text{for } k=0, 1, 2, 3, 4.$$
+    
+    The five solutions are:
+    \begin{align*}
+        k=0: \quad z_0 &= e^{i \frac{\pi}{5}} = \cos \frac{\pi}{5} + i \sin \frac{\pi}{5} \\
+        k=1: \quad z_1 &= e^{i \frac{3\pi}{5}} = \cos \frac{3\pi}{5} + i \sin \frac{3\pi}{5} \\
+        k=2: \quad z_2 &= e^{i\pi} = -1 \\
+        k=3: \quad z_3 &= e^{i \frac{7\pi}{5}} = \cos \frac{7\pi}{5} + i \sin \frac{7\pi}{5} = \overline{z_1} \\
+        k=4: \quad z_4 &= e^{i \frac{9\pi}{5}} = \cos \frac{9\pi}{5} + i \sin \frac{9\pi}{5} = \overline{z_0}
+    \end{align*}
+    
+    The solutions are $\left\{ e^{i \frac{\pi}{5}}, e^{i \frac{3\pi}{5}}, -1, e^{i \frac{7\pi}{5}}, e^{i \frac{9\pi}{5}} \right\}$.
+
+    \item \textbf{Show $u = z + \frac{1}{z}$ is a solution to $u^2 - u - 1 = 0$}
+    \newline
+    If $z$ is a solution to $z^5+1=0$ and $z \neq -1$, then $z^5 = -1$. We can factor:
+    $$z^5 + 1 = (z+1)(z^4 - z^3 + z^2 - z + 1) = 0$$
+    
+    Since $z \neq -1$, we know $z^4 - z^3 + z^2 - z + 1 = 0$.
+    
+    Since $z \neq 0$ (as $0^5 + 1 \neq 0$), we can divide this polynomial equation by $z^2$:
+    $$\frac{z^4}{z^2} - \frac{z^3}{z^2} + \frac{z^2}{z^2} - \frac{z}{z^2} + \frac{1}{z^2} = 0$$
+    $$z^2 - z + 1 - \frac{1}{z} + \frac{1}{z^2} = 0$$
+    Group the terms:
+    $$\left(z^2 + \frac{1}{z^2}\right) - \left(z + \frac{1}{z}\right) + 1 = 0$$
+    
+    Let $u = z + \frac{1}{z}$. We can find an expression for $z^2 + \frac{1}{z^2}$:
+    $$u^2 = \left(z + \frac{1}{z}\right)^2 = z^2 + 2 + \frac{1}{z^2}$$
+    $$\implies z^2 + \frac{1}{z^2} = u^2 - 2$$
+    
+    Substitute this into the grouped equation:
+    $$(u^2 - 2) - u + 1 = 0$$
+    $$u^2 - u - 1 = 0$$
+    Thus, $u = z + \frac{1}{z}$ is a solution of $u^2 - u - 1 = 0$.
+
+    \item \textbf{Find the exact value of $\cos \frac{3\pi}{5}$}
+    \newline
+    Consider the solution $z_1 = e^{i \frac{3\pi}{5}}$ (with $z_1 \neq -1$).
+    For $z_1$, we have:
+    $$u = z_1 + \frac{1}{z_1} = e^{i \frac{3\pi}{5}} + e^{-i \frac{3\pi}{5}}$$
+    Using Euler's formula, $e^{i\theta} + e^{-i\theta} = 2 \cos \theta$:
+    $$u = 2 \cos \frac{3\pi}{5}$$
+    
+    From part (ii), we know that $u$ satisfies the quadratic equation $u^2 - u - 1 = 0$.
+    We solve for $u$ using the quadratic formula:
+    $$u = \frac{1 \pm \sqrt{1 + 4}}{2} = \frac{1 \pm \sqrt{5}}{2}$$
+    
+    So, $2 \cos \frac{3\pi}{5}$ must be one of these two values.
+    
+    Since $\frac{\pi}{2} < \frac{3\pi}{5} < \pi$, the angle $\frac{3\pi}{5}$ lies in the **second quadrant**, where the cosine function is **negative**.
+    
+    We compare the two possible values for $u$:
+    $$u_1 = \frac{1 + \sqrt{5}}{2} \approx 1.618 \quad (\text{Positive})$$
+    $$u_2 = \frac{1 - \sqrt{5}}{2} \approx -0.618 \quad (\text{Negative})$$
+    
+    Since $u = 2 \cos \frac{3\pi}{5}$ must be negative, we must have:
+    $$2 \cos \frac{3\pi}{5} = \frac{1 - \sqrt{5}}{2}$$
+    
+    Therefore, the exact value is:
+    $$\cos \frac{3\pi}{5} = \frac{1 - \sqrt{5}}{4}$$
+\end{enumerate}
+
+\textbf{Final Answer:} (1) $z_k = e^{i(2k+1)\pi/5}$ for $k=0,1,2,3,4$; (2) Shown by dividing by $z^2$ and substitution; (3) $\cos \frac{3\pi}{5} = \frac{1 - \sqrt{5}}{4}$.
+\end{solution}
+
+\begin{takeaways}
+This problem beautifully connects roots of unity with exact trigonometric values:
+\begin{itemize}
+    \item \textbf{de Moivre's Theorem:} For finding $n$-th roots, use $z^n = r e^{i\theta} \implies z = r^{1/n} e^{i(\theta + 2k\pi)/n}$.
+    \item \textbf{Polynomial Factorization:} $z^5 + 1 = (z+1)(z^4 - z^3 + z^2 - z + 1)$ separates the real root.
+    \item \textbf{Clever Substitution:} Setting $u = z + 1/z$ reduces a quartic to a quadratic, a powerful technique.
+    \item \textbf{Euler's Formula Bridge:} $z + \bar{z} = 2\cos\theta$ connects complex and trigonometric forms.
+    \item \textbf{Quadrant Analysis:} Determining the sign of $\cos\theta$ from the quadrant is essential for selecting the correct root.
+    \item \textbf{Golden Ratio Connection:} $(1+\sqrt{5})/2$ is the golden ratio $\phi$, appearing naturally in pentagon geometry.
+\end{itemize}
+\end{takeaways}
+
+\vspace{1cm}
+
+\begin{problem}[De Moivre's Theorem and Secant Value]
+\begin{enumerate}
+    \item Solve $z^5 + 1 = 0$ by de Moivre's theorem, leaving your solutions in modulus-argument form.
+    \item Prove that the solutions of $z^4 - z^3 + z^2 - z + 1 = 0$ are the non-real solutions of $z^5 + 1 = 0$.
+    \item Show that if $z^4 - z^3 + z^2 - z + 1 = 0$ where $z = \text{cis } \theta$ then $4 \cos^2 \theta - 2 \cos \theta - 1 = 0$.
+    \item Hence find the exact value of $\sec \frac{3\pi}{5}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{Strategy:} This problem systematically builds from finding roots of unity to deriving exact trigonometric values. Part (i) applies de Moivre's theorem directly. Part (ii) uses polynomial factorization. Part (iii) divides the polynomial by $z^2$ and applies the identity $z + 1/z = 2\cos\theta$ for unit modulus. Part (iv) solves the resulting quadratic and rationalizes.
+
+\subsubsection*{Part (i): Solve $z^5 + 1 = 0$}
+
+The equation is $z^5 = -1$.
+In polar form, $-1 = 1 \cdot \text{cis}(\pi)$.
+The solutions are given by $z_k = \sqrt[5]{1} \cdot \text{cis}\left(\frac{\pi + 2k\pi}{5}\right)$, where $k \in \{0, 1, 2, 3, 4\}$.
+$$z_k = \text{cis}\left(\frac{(2k+1)\pi}{5}\right), \quad k = 0, 1, 2, 3, 4$$
+The solutions are:
+\begin{align*}
+    z_0 &= \text{cis}\left(\frac{\pi}{5}\right) \\
+    z_1 &= \text{cis}\left(\frac{3\pi}{5}\right) \\
+    z_2 &= \text{cis}(\pi) = -1 \\
+    z_3 &= \text{cis}\left(\frac{7\pi}{5}\right) \\
+    z_4 &= \text{cis}\left(\frac{9\pi}{5}\right)
+\end{align*}
+
+\subsubsection*{Part (ii): Relationship between solutions}
+
+The equation $z^5 + 1 = 0$ can be factored. Since $z = -1$ is a root, we have:
+$$z^5 + 1 = (z+1)(z^4 - z^3 + z^2 - z + 1)$$
+The roots of $z^5 + 1 = 0$ are the union of the roots of $z+1=0$ and the roots of $z^4 - z^3 + z^2 - z + 1 = 0$.
+\begin{itemize}
+    \item The root of $z+1=0$ is $z=-1$, which is $z_2 = \text{cis}(\pi)$, a \textbf{real} solution.
+    \item The roots of $z^4 - z^3 + z^2 - z + 1 = 0$ are the remaining four roots: $z_0, z_1, z_3, z_4$.
+\end{itemize}
+These four roots have non-zero arguments and modulus 1, so they are the \textbf{non-real} solutions of $z^5 + 1 = 0$.
+
+\subsubsection*{Part (iii): Show $4 \cos^2 \theta - 2 \cos \theta - 1 = 0$}
+
+If $z$ is a solution to $z^4 - z^3 + z^2 - z + 1 = 0$, then $z \neq 0$. Dividing by $z^2$:
+$$z^2 - z + 1 - \frac{1}{z} + \frac{1}{z^2} = 0$$
+Rearranging and grouping terms:
+$$\left(z^2 + \frac{1}{z^2}\right) - \left(z + \frac{1}{z}\right) + 1 = 0$$
+Given $z = \text{cis } \theta = e^{i\theta}$, we have $|z| = 1$, so $\bar{z} = 1/z = e^{-i\theta}$.
+Using the identity:
+$$z + \frac{1}{z} = e^{i\theta} + e^{-i\theta} = 2 \cos \theta$$
+$$z^2 + \frac{1}{z^2} = e^{2i\theta} + e^{-2i\theta} = 2\cos(2\theta) = 2(2\cos^2\theta - 1) = 4\cos^2\theta - 2$$
+Alternatively:
+$$z^2 + \frac{1}{z^2} = \left(z+\frac{1}{z}\right)^2 - 2 = (2 \cos \theta)^2 - 2 = 4 \cos^2 \theta - 2$$
+Substituting into the equation:
+$$(4 \cos^2 \theta - 2) - (2 \cos \theta) + 1 = 0$$
+$$4 \cos^2 \theta - 2 \cos \theta - 1 = 0$$
+
+\subsubsection*{Part (iv): Find the exact value of $\sec \frac{3\pi}{5}$}
+
+The solutions to $z^4 - z^3 + z^2 - z + 1 = 0$ correspond to $\theta = \frac{\pi}{5}, \frac{3\pi}{5}, \frac{7\pi}{5}, \frac{9\pi}{5}$.
+These give two distinct values of $\cos\theta$ that satisfy $4 \cos^2 \theta - 2 \cos \theta - 1 = 0$.
+
+Using the quadratic formula:
+$$\cos \theta = \frac{2 \pm \sqrt{4 + 16}}{8} = \frac{2 \pm \sqrt{20}}{8} = \frac{2 \pm 2\sqrt{5}}{8} = \frac{1 \pm \sqrt{5}}{4}$$
+
+Since $\frac{3\pi}{5}$ is in the second quadrant, $\cos\left(\frac{3\pi}{5}\right) < 0$.
+Comparing:
+$$\frac{1 + \sqrt{5}}{4} > 0 \quad \text{and} \quad \frac{1 - \sqrt{5}}{4} < 0$$
+Therefore:
+$$\cos\left(\frac{3\pi}{5}\right) = \frac{1 - \sqrt{5}}{4}$$
+
+We need $\sec \frac{3\pi}{5} = \frac{1}{\cos \frac{3\pi}{5}}$:
+$$\sec \frac{3\pi}{5} = \frac{1}{\frac{1 - \sqrt{5}}{4}} = \frac{4}{1 - \sqrt{5}}$$
+
+Rationalizing by multiplying by $\frac{1 + \sqrt{5}}{1 + \sqrt{5}}$:
+$$\sec \frac{3\pi}{5} = \frac{4(1 + \sqrt{5})}{(1 - \sqrt{5})(1 + \sqrt{5})} = \frac{4(1 + \sqrt{5})}{1 - 5} = \frac{4(1 + \sqrt{5})}{-4} = -(1 + \sqrt{5})$$
+
+\textbf{Final Answer:} (i) $z_k = \text{cis}((2k+1)\pi/5)$ for $k=0,1,2,3,4$; (ii) Shown by factorization; (iii) Shown by substitution and grouping; (iv) $\sec \frac{3\pi}{5} = -1 - \sqrt{5}$.
+\end{solution}
+
+\begin{takeaways}
+This comprehensive problem ties together multiple advanced concepts:
+\begin{itemize}
+    \item \textbf{Cis Notation:} $\text{cis } \theta = \cos\theta + i\sin\theta = e^{i\theta}$ is a compact notation for complex exponentials.
+    \item \textbf{Polynomial Factorization:} Separating real from non-real roots via $(z+1)$ factor.
+    \item \textbf{Trigonometric Substitution:} For $|z| = 1$, the substitution $z + 1/z = 2\cos\theta$ is fundamental.
+    \item \textbf{Double Angle Formula:} $\cos(2\theta) = 2\cos^2\theta - 1$ can derive $z^2 + 1/z^2$.
+    \item \textbf{Rationalizing Denominators:} Multiply by conjugate: $\frac{1}{1-\sqrt{5}} \cdot \frac{1+\sqrt{5}}{1+\sqrt{5}} = \frac{1+\sqrt{5}}{-4}$.
+    \item \textbf{Sign Determination:} Quadrant analysis is crucial for selecting correct values from quadratic formula.
+\end{itemize}
+\end{takeaways}
+
+\vspace{1cm}
+
+\begin{problem}[Tangent Function and Product Identity]
+\textbf{i} Use De Moivre's theorem to express $\tan 5\theta$ in terms of powers of $\tan \theta$.
+
+\textbf{ii} Hence show that $x^4 - 10x^2 + 5 = 0$ has roots $\pm \tan \frac{\pi}{5}$ and $\pm \tan \frac{2\pi}{5}$.
+
+\textbf{iii} Deduce that $\tan \frac{\pi}{5} \cdot \tan \frac{2\pi}{5} \cdot \tan \frac{3\pi}{5} \cdot \tan \frac{4\pi}{5} = 5$.
+\end{problem}
+
+\begin{solution}
+\textbf{Strategy:} Part (i) applies the binomial theorem to $(\cos\theta + i\sin\theta)^5$, then separates real and imaginary parts and divides. Part (ii) sets $\tan 5\theta = 0$ to find when the numerator vanishes, yielding a polynomial whose roots are the required tangent values. Part (iii) uses Vieta's formula for the product of roots and symmetry properties.
+
+\subsection*{i. Express $\tan 5\theta$ in terms of powers of $\tan \theta$}
+
+By De Moivre's Theorem, for $n=5$:
+$$
+\cos 5\theta + i \sin 5\theta = (\cos \theta + i \sin \theta)^5
+$$
+Expanding the right-hand side using the Binomial Theorem:
+\begin{align*}
+(\cos \theta + i \sin \theta)^5 &= \sum_{k=0}^5 \binom{5}{k} \cos^{5-k}\theta (i\sin\theta)^k \\
+&= \cos^5 \theta + 5i \cos^4 \theta \sin \theta - 10 \cos^3 \theta \sin^2 \theta \\
+&\quad - 10i \cos^2 \theta \sin^3 \theta + 5 \cos \theta \sin^4 \theta + i \sin^5 \theta
+\end{align*}
+Equating the imaginary and real parts:
+$$
+\sin 5\theta = 5 \cos^4 \theta \sin \theta - 10 \cos^2 \theta \sin^3 \theta + \sin^5 \theta
+$$
+$$
+\cos 5\theta = \cos^5 \theta - 10 \cos^3 \theta \sin^2 \theta + 5 \cos \theta \sin^4 \theta
+$$
+Now, we find $\tan 5\theta = \frac{\sin 5\theta}{\cos 5\theta}$.
+
+Divide numerator and denominator by $\cos^5 \theta$:
+$$
+\tan 5\theta = \frac{5 \tan \theta - 10 \tan^3 \theta + \tan^5 \theta}{1 - 10 \tan^2 \theta + 5 \tan^4 \theta}
+$$
+Let $t = \tan \theta$:
+$$\tan 5\theta = \frac{5t - 10t^3 + t^5}{1 - 10t^2 + 5t^4}$$
+
+\subsection*{ii. Roots of $x^4 - 10x^2 + 5 = 0$}
+
+Consider the equation $\tan 5\theta = 0$. This occurs when $5\theta = k\pi$ for integer $k$.
+$$
+\theta = \frac{k\pi}{5}
+$$
+For $0 < \theta < \pi$ (distinct non-zero values of $\tan\theta$):
+$$
+\theta = \frac{\pi}{5}, \frac{2\pi}{5}, \frac{3\pi}{5}, \frac{4\pi}{5}
+$$
+Substituting $\tan 5\theta = 0$:
+$$
+0 = \frac{5t - 10t^3 + t^5}{1 - 10t^2 + 5t^4}
+$$
+The numerator must be zero (denominator is non-zero for these values):
+$$
+t^5 - 10t^3 + 5t = 0
+$$
+Since $\theta \neq 0$, $t = \tan\theta \neq 0$, so divide by $t$:
+$$
+t^4 - 10t^2 + 5 = 0
+$$
+The roots are $t = \tan\frac{\pi}{5}, \tan\frac{2\pi}{5}, \tan\frac{3\pi}{5}, \tan\frac{4\pi}{5}$.
+
+Using $\tan(\pi - A) = -\tan A$:
+$$
+\tan \frac{4\pi}{5} = -\tan \frac{\pi}{5}, \quad \tan \frac{3\pi}{5} = -\tan \frac{2\pi}{5}
+$$
+The four roots of $x^4 - 10x^2 + 5 = 0$ are:
+$$
+\pm \tan \frac{\pi}{5} \quad \text{and} \quad \pm \tan \frac{2\pi}{5}
+$$
+
+\subsection*{iii. Deduce the product}
+
+The roots of $x^4 - 10x^2 + 5 = 0$ are:
+$$
+r_1 = \tan \frac{\pi}{5}, \quad r_2 = \tan \frac{2\pi}{5}, \quad r_3 = \tan \frac{3\pi}{5}, \quad r_4 = \tan \frac{4\pi}{5}
+$$
+For the quartic $x^4 + bx^3 + cx^2 + dx + e = 0$, the product of roots is $e/a$.
+For $x^4 - 10x^2 + 5 = 0$: $a=1, e=5$.
+The product of the roots is:
+$$
+r_1 r_2 r_3 r_4 = \frac{5}{1} = 5
+$$
+Therefore:
+$$
+\tan \frac{\pi}{5} \cdot \tan \frac{2\pi}{5} \cdot \tan \frac{3\pi}{5} \cdot \tan \frac{4\pi}{5} = 5
+$$
+
+\textbf{Final Answer:} (i) $\tan 5\theta = \frac{5t - 10t^3 + t^5}{1 - 10t^2 + 5t^4}$ where $t = \tan\theta$; (ii) Shown by setting numerator to zero; (iii) Product equals $5$ by Vieta's formulas.
+\end{solution}
+
+\begin{takeaways}
+This elegant problem demonstrates the power of combining complex analysis with algebra:
+\begin{itemize}
+    \item \textbf{Binomial Expansion:} $(\cos\theta + i\sin\theta)^n = \sum_{k=0}^n \binom{n}{k} \cos^{n-k}\theta (i\sin\theta)^k$ generates multiple-angle formulas.
+    \item \textbf{Separation Technique:} Dividing numerator and denominator by $\cos^n\theta$ converts to tangent form.
+    \item \textbf{Zero Finding:} Setting $\tan n\theta = 0$ identifies specific angles whose tangents satisfy polynomial equations.
+    \item \textbf{Supplementary Angle:} $\tan(\pi - \theta) = -\tan\theta$ explains why roots come in $\pm$ pairs.
+    \item \textbf{Vieta's Product Formula:} For $a_nx^n + \cdots + a_0 = 0$, product of roots equals $(-1)^n a_0/a_n$.
+    \item \textbf{Pentagon Connection:} These tangent values relate to regular pentagon geometry, where the number 5 appears naturally.
+\end{itemize}
+\end{takeaways}
+
+\vspace{1cm}
