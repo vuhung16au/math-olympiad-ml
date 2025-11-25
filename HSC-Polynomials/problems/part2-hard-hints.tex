@@ -16,7 +16,9 @@ The number $c$ is real and non-zero. It is also known that $(1 + ic)^5$ is real.
 \end{problem}
 
 \vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) Use $\binom{5}{k}$ and powers of $i$. (b) Imaginary part $=0$: $c(5-10c^2+c^4)=0$. (c) Quadratic in $c^2$. (d) $(r\operatorname{cis}\theta)^5$ real $\implies \sin 5\theta=0$. (e) $\tan\theta = c$; choose value $<1$.}}
+\begin{hintbox}
+(a) Use $\binom{5}{k}$ and powers of $i$. (b) Imaginary part $=0$: $c(5-10c^2+c^4)=0$. (c) Quadratic in $c^2$. (d) $(r\operatorname{cis}\theta)^5$ real $\implies \sin 5\theta=0$. (e) $\tan\theta = c$; choose value $<1$.
+\end{hintbox}
 
 \begin{solution}
 \textbf{(a)} $(1+ic)^5 = 1 + 5ic - 10c^2 - 10ic^3 + 5c^4 + ic^5 = (1-10c^2+5c^4) + i(5c-10c^3+c^5)$
@@ -60,7 +62,9 @@ Complex conditions constrain real parameters; trigonometric identities link alge
 \end{problem}
 
 \vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) De Moivre: $z^n=\cos n\theta+i\sin n\theta$, $z^{-n}=\cos n\theta-i\sin n\theta$. (b) Factor $(x-1)(x-e^{2\pi i/5})(x-e^{-2\pi i/5})(x-e^{4\pi i/5})(x-e^{-4\pi i/5})$. (c) Substitute $x=1$ into factorization.}}
+\begin{hintbox}
+(a) De Moivre: $z^n=\cos n\theta+i\sin n\theta$, $z^{-n}=\cos n\theta-i\sin n\theta$. (b) Factor $(x-1)(x-e^{2\pi i/5})(x-e^{-2\pi i/5})(x-e^{4\pi i/5})(x-e^{-4\pi i/5})$. (c) Substitute $x=1$ into factorization.
+\end{hintbox}
 
 \begin{solution}
 \textbf{(a)} By De Moivre: $z^n = \cos n\theta + i\sin n\theta$ and $\frac{1}{z^n} = \cos n\theta - i\sin n\theta$
@@ -106,7 +110,9 @@ Let $w = \cos\frac{2\pi}{9} + i \sin\frac{2\pi}{9}$.
 \end{problem}
 
 \vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) $w^9=1 \implies (w^n)^9=1$. (b) $w^8=w^{-1}=\bar{w}$. (c) Expand and use $w^9=1$. (d) Use $w^k+w^{9-k}=2\cos(2\pi k/9)$ and $\cos(8\pi/9)=\cos(\pi-\pi/9)=-\cos(\pi/9)$.}}
+\begin{hintbox}
+(a) $w^9=1 \implies (w^n)^9=1$. (b) $w^8=w^{-1}=\bar{w}$. (c) Expand and use $w^9=1$. (d) Use $w^k+w^{9-k}=2\cos(2\pi k/9)$ and $\cos(8\pi/9)=\cos(\pi-\pi/9)=-\cos(\pi/9)$.
+\end{hintbox}
 
 \begin{solution}
 \textbf{(a)} $w^9 = (\cos\frac{2\pi}{9}+i\sin\frac{2\pi}{9})^9 = \cos 2\pi + i\sin 2\pi = 1$
@@ -156,7 +162,9 @@ The roots of $z^5 + 1 = 0$ are $-1, \omega_1, \omega_2, \omega_3, \omega_4$ in a
 \end{problem}
 
 \vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) Roots $e^{i\pi(2k+1)/5}$; conjugate pairs. (b) Expand to get $a=-1, b=1, c=-1$. (c) $\omega_1=e^{i3\pi/5} \implies \omega_1^3=e^{i9\pi/5}=\omega_3$. (d) Sum of roots $=0$. (e) Product of pairs using Vieta.}}
+\begin{hintbox}
+(a) Roots $e^{i\pi(2k+1)/5}$; conjugate pairs. (b) Expand to get $a=-1, b=1, c=-1$. (c) $\omega_1=e^{i3\pi/5} \implies \omega_1^3=e^{i9\pi/5}=\omega_3$. (d) Sum of roots $=0$. (e) Product of pairs using Vieta.
+\end{hintbox}
 
 \begin{solution}
 \textbf{(a)} Roots: $e^{i\pi(2k+1)/5}$. Let $\omega_1=e^{i3\pi/5}, \omega_4=e^{i\pi/5}$. Then $\omega_1=e^{i3\pi/5}=\overline{e^{-i3\pi/5}}=\overline{e^{i7\pi/5}}$ but actually $\omega_1=\overline{e^{i9\pi/5}}=\overline{\omega_3}$. [Labeling: $\omega_1=e^{i3\pi/5}, \omega_4=e^{i7\pi/5}=e^{-i3\pi/5}=\overline{\omega_1}$. Adjusted.]
@@ -167,7 +175,7 @@ Comparing with $z^5+1$: $a=-1, b=1, c=-1$
 
 For non-$(-1)$ root: $\omega^4-\omega^3+\omega^2-\omega+1=0 \implies \omega^4+\omega^2+1=\omega^3+\omega$
 
-\textbf{(c)} $\omega_1=e^{i3\pi/5} \implies \omega_1^3 = e^{i9\pi/5} = \omega_3$ ✓
+\textbf{(c)} $\omega_1=e^{i3\pi/5} \implies \omega_1^3 = e^{i9\pi/5} = \omega_3$
 
 \textbf{(d)} Sum of roots: $-1+\omega_1+\omega_2+\omega_3+\omega_4=0 \implies \omega_1+\omega_2+\omega_3+\omega_4=1$
 
@@ -206,7 +214,9 @@ Let $\theta = \alpha + \alpha^2 + \alpha^4$ and $\delta = \alpha^3 + \alpha^5 + 
 \end{problem}
 
 \vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) $\alpha$ is 7th root; geometric series sum. (b) $\theta+\delta$ from (a); expand $\theta\delta$, reduce mod 7. (c) Solve $z^2+z+2=0$. (d) $\alpha=e^{i2\pi/7}$; express $\theta$ using $\alpha^4=e^{i8\pi/7}=e^{-i6\pi/7}$.}}
+\begin{hintbox}
+(a) $\alpha$ is 7th root; geometric series sum. (b) $\theta+\delta$ from (a); expand $\theta\delta$, reduce mod 7. (c) Solve $z^2+z+2=0$. (d) $\alpha=e^{i2\pi/7}$; express $\theta$ using $\alpha^4=e^{i8\pi/7}=e^{-i6\pi/7}$.
+\end{hintbox}
 
 \begin{solution}
 \textbf{(a)} $\alpha$ is root of $z^7=1$, so $\alpha^7=1$. 

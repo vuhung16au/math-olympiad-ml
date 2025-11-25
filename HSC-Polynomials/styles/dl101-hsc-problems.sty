@@ -1,6 +1,5 @@
 \ProvidesPackage{dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
 
-\RequirePackage[most]{tcolorbox}
 \RequirePackage{etoolbox}
 
 % Ensure colors are defined (provide fallbacks if not already defined)
@@ -69,3 +68,15 @@
 \newenvironment{solution}[1][]{\begin{solutionbox}[#1]}{\end{solutionbox}}
 \newenvironment{takeaways}[1][]{\begin{takeawaysbox}[#1]}{\end{takeawaysbox}}
 
+% Hint box (for part 2 problems with hints)
+\newtcolorbox{hintbox}{
+  colback=yellow!10,
+  colframe=orange!50,
+  boxrule=0.5pt,
+  arc=3pt,
+  left=5pt,right=5pt,top=5pt,bottom=5pt,
+  before skip=5pt,after skip=5pt,
+  fontupper=\small\itshape,
+  title={\small\bfseries Hint:},
+  coltitle=black
+}

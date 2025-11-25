@@ -9,74 +9,35 @@
 \end{problem}
 
 \begin{solution}
-\textbf{Strategy:} This problem combines algebraic manipulation with complex number properties. For part (i), we'll use the substitution method by setting $z = x + iy$ and equating real and imaginary parts. We could also use polar form with de Moivre's theorem. For part (ii), completing the square transforms the equation into a form where we can directly apply the results from part (i), demonstrating how solving simpler problems leads to solutions for more complex ones.
+\textbf{Strategy:} Set $z = x + iy$ and equate real and imaginary parts to find the square roots. Use completing the square in part (ii) to apply part (i)'s results.
 
 \subsubsection*{(i) Finding the square roots of $-i$}
 
-Let the square roots of $-i$ be $z = x + iy$, where $x, y \in \mathbb{R}$.
-Then $z^2 = -i$.
-$$(x + iy)^2 = -i$$
-$$x^2 + 2ixy + (iy)^2 = -i$$
-$$x^2 - y^2 + 2ixy = 0 - i$$
+Let $z = x + iy$ where $x, y \in \mathbb{R}$. Then $z^2 = -i$ gives:
+$$(x + iy)^2 = x^2 - y^2 + 2ixy = -i$$
 
-Equating the real and imaginary parts:
+Equating real and imaginary parts:
 \begin{align}
-    x^2 - y^2 &= 0 \quad \text{(Real parts)} \label{eq:1a} \\
-    2xy &= -1 \quad \text{(Imaginary parts)} \label{eq:2a}
+    x^2 - y^2 &= 0 \label{eq:1a} \\
+    2xy &= -1 \label{eq:2a}
 \end{align}
 
-From equation \eqref{eq:1a}:
-$$x^2 = y^2 \implies y = x \quad \text{or} \quad y = -x$$
+From \eqref{eq:1a}: $y = \pm x$
 
-\paragraph*{Case 1: $y = x$}
-Substitute $y = x$ into equation \eqref{eq:2a}:
-$$2x(x) = -1$$
-$$2x^2 = -1$$
-$$x^2 = -\frac{1}{2}$$
-Since $x$ is a real number, $x^2$ must be non-negative, so there are **no real solutions** in this case.
+\textbf{Case 1:} If $y = x$, then $2x^2 = -1 \implies x^2 = -\frac{1}{2}$ (no real solutions).
 
-\paragraph*{Case 2: $y = -x$}
-Substitute $y = -x$ into equation \eqref{eq:2a}:
-$$2x(-x) = -1$$
-$$-2x^2 = -1$$
-$$2x^2 = 1$$
-$$x^2 = \frac{1}{2}$$
-$$x = \pm \frac{1}{\sqrt{2}} = \pm \frac{\sqrt{2}}{2}$$
+\textbf{Case 2:} If $y = -x$, then $-2x^2 = -1 \implies x^2 = \frac{1}{2} \implies x = \pm \frac{\sqrt{2}}{2}$
 
-If $x = \frac{\sqrt{2}}{2}$, then $y = -x = -\frac{\sqrt{2}}{2}$.
-$$z_1 = \frac{\sqrt{2}}{2} - i \frac{\sqrt{2}}{2}$$
-
-If $x = -\frac{\sqrt{2}}{2}$, then $y = -x = \frac{\sqrt{2}}{2}$.
-$$z_2 = -\frac{\sqrt{2}}{2} + i \frac{\sqrt{2}}{2}$$
-
-\textbf{The two square roots of $-i$ are $\frac{\sqrt{2}}{2} - i \frac{\sqrt{2}}{2}$ and $-\frac{\sqrt{2}}{2} + i \frac{\sqrt{2}}{2}$.}
-
-\hrule
-\vspace{0.5cm}
+Therefore: $z_1 = \frac{\sqrt{2}}{2} - i \frac{\sqrt{2}}{2}$ and $z_2 = -\frac{\sqrt{2}}{2} + i \frac{\sqrt{2}}{2}$
 
 \subsubsection*{(ii) Solving $z^2 + 2z + 1 + i = 0$}
 
-The given equation is $z^2 + 2z + 1 + i = 0$.
-We can rewrite the equation by completing the square for the terms involving $z$:
-$$(z^2 + 2z + 1) + i = 0$$
-$$(z + 1)^2 + i = 0$$
-$$(z + 1)^2 = -i$$
+Completing the square: $(z + 1)^2 = -i$
 
-Let $w = z + 1$. The equation becomes $w^2 = -i$.
-From part (i), the two values for $w$ (the square roots of $-i$) are:
-$$w_1 = \frac{\sqrt{2}}{2} - i \frac{\sqrt{2}}{2} \quad \text{and} \quad w_2 = -\frac{\sqrt{2}}{2} + i \frac{\sqrt{2}}{2}$$
+Let $w = z + 1$. From part (i), $w = \pm\left(\frac{\sqrt{2}}{2} - i \frac{\sqrt{2}}{2}\right)$
 
-Since $z + 1 = w$, we have $z = w - 1$.
-
-\paragraph*{Solution 1:}
-$$z_1 = w_1 - 1 = \left(\frac{\sqrt{2}}{2} - i \frac{\sqrt{2}}{2}\right) - 1$$
-$$z_1 = \left(\frac{\sqrt{2}}{2} - 1\right) - i \frac{\sqrt{2}}{2}$$
-
-\paragraph*{Solution 2:}
-$$z_2 = w_2 - 1 = \left(-\frac{\sqrt{2}}{2} + i \frac{\sqrt{2}}{2}\right) - 1$$
-$$z_2 = \left(-\frac{\sqrt{2}}{2} - 1\right) + i \frac{\sqrt{2}}{2}$$
-
-\textbf{Final Answer:} The solutions are $z = \left(\frac{\sqrt{2}}{2} - 1\right) - i \frac{\sqrt{2}}{2}$ and $z = \left(-\frac{\sqrt{2}}{2} - 1\right) + i \frac{\sqrt{2}}{2}$.
+Since $z = w - 1$:
+$$z_1 = \left(\frac{\sqrt{2}}{2} - 1\right) - i \frac{\sqrt{2}}{2}, \quad z_2 = \left(-\frac{\sqrt{2}}{2} - 1\right) + i \frac{\sqrt{2}}{2}$$
 \end{solution}
 
 \begin{takeaways}
@@ -140,47 +101,26 @@ Given that $(z + 2 - i)$ is a factor of $P(z) = z^4 + 4z^3 + 3z^2 - 8z - 10$, fa
 \end{problem}
 
 \begin{solution}
-\textbf{Strategy:} When a polynomial has real coefficients and a complex factor is given, we immediately invoke the Conjugate Root Theorem. The product of conjugate factors gives a real quadratic, which we can then divide into the original polynomial. Polynomial division reveals the remaining quadratic factor, which we then fully factorize into linear factors.
+\textbf{Strategy:} Use the Conjugate Root Theorem to find the conjugate factor, multiply to get a real quadratic, divide into $P(z)$, then factorize the quotient.
 
-Since $P(z) = z^4 + 4z^3 + 3z^2 - 8z - 10$ is a polynomial with **real coefficients**, and $(z - \alpha)$ is a factor, then the **conjugate root theorem** implies that $(z - \bar{\alpha})$ must also be a factor.
+Since $P(z)$ has real coefficients and $(z + 2 - i)$ is a factor, the conjugate root theorem implies $(z + 2 + i)$ is also a factor.
 
-\subsubsection*{Step 1: Identify the roots and factors}
-If $(z + 2 - i)$ is a factor, then $z = -2 + i$ is a root of $P(z)$.
-Thus, $\alpha = -2 + i$ is a root.
+\textbf{Step 1: Find the quadratic from conjugate factors}
 
-By the conjugate root theorem, the conjugate $\bar{\alpha}$ is also a root:
-$$\bar{\alpha} = \overline{-2 + i} = -2 - i$$
-The corresponding factor is $(z - \bar{\alpha}) = (z - (-2 - i)) = (z + 2 + i)$.
+The product gives a quadratic with real coefficients:
+$$Q(z) = (z + 2 - i)(z + 2 + i) = ((z + 2) - i)((z + 2) + i) = (z + 2)^2 + 1 = z^2 + 4z + 5$$
 
-\subsubsection*{Step 2: Find the quadratic factor}
-The product of these two complex factors gives a quadratic factor with real coefficients, $Q(z)$:
-\begin{align*} Q(z) &= (z - \alpha)(z - \bar{\alpha}) \\ &= (z - (-2 + i))(z - (-2 - i)) \\ &= ((z + 2) - i)((z + 2) + i) \end{align*}
-Using the difference of squares identity, $(A-B)(A+B) = A^2 - B^2$:
-\begin{align*} Q(z) &= (z + 2)^2 - i^2 \\ &= (z^2 + 4z + 4) - (-1) \\ &= z^2 + 4z + 5 \end{align*}
+\textbf{Step 2: Perform polynomial division}
 
-\subsubsection*{Step 3: Perform polynomial division}
-We divide $P(z)$ by $Q(z)$ to find the remaining quadratic factor, $R(z)$, such that $P(z) = Q(z)R(z)$.
-$$z^4 + 4z^3 + 3z^2 - 8z - 10 = (z^2 + 4z + 5)(az^2 + bz + c)$$
-By comparing leading and constant terms, we can quickly determine some coefficients:
+Write $P(z) = (z^2 + 4z + 5)(az^2 + bz + c)$. Comparing coefficients:
 \begin{itemize}
-    \item Comparing leading terms ($z^4$): $(z^2)(az^2) = z^4 \implies a = 1$
-    \item Comparing constant terms: $(5)(c) = -10 \implies c = -2$
+    \item Leading term: $a = 1$
+    \item Constant term: $5c = -10 \implies c = -2$
+    \item Coefficient of $z^3$: $b + 4 = 4 \implies b = 0$
 \end{itemize}
-So, the remaining factor is of the form $R(z) = z^2 + bz - 2$.
-Now, we compare the coefficient of $z^3$:
-\begin{align*} 4z^3 &= (z^2)(bz) + (4z)(z^2) \\ 4z^3 &= bz^3 + 4z^3 \\ \implies b &= 0 \end{align*}
-Thus, the remaining quadratic factor is $R(z) = z^2 - 2$.
+Thus $R(z) = z^2 - 2 = (z - \sqrt{2})(z + \sqrt{2})$.
 
-\subsubsection*{Step 4: Factorise the remaining quadratic factor}
-We need to factorise $z^2 - 2$ over the complex numbers. Since $z^2 - 2$ has real coefficients, we first factorise it over the real numbers using the difference of squares, $A^2 - B^2 = (A-B)(A+B)$:
-$$z^2 - 2 = z^2 - (\sqrt{2})^2 = (z - \sqrt{2})(z + \sqrt{2})$$
-Since $\sqrt{2}$ is a real number, this is already the factorisation over $\mathbb{C}$.
-
-\subsubsection*{Step 5: Write the final factorisation}
-The complete factorisation over the set of complex numbers is:
-\begin{align*} P(z) &= (z - \alpha)(z - \bar{\alpha})(z - \sqrt{2})(z + \sqrt{2}) \\ &= (z - (-2 + i))(z - (-2 - i))(z - \sqrt{2})(z + \sqrt{2}) \\ &= (z + 2 - i)(z + 2 + i)(z - \sqrt{2})(z + \sqrt{2}) \end{align*}
-
-\textbf{Final Answer:} $(z + 2 - i)(z + 2 + i)(z - \sqrt{2})(z + \sqrt{2})$
+\textbf{Final Answer:} $P(z) = (z + 2 - i)(z + 2 + i)(z - \sqrt{2})(z + \sqrt{2})$
 \end{solution}
 
 \begin{takeaways}
@@ -203,68 +143,22 @@ Given that a solution of $p(z) = 0$ is $z_1 = 3 - 2i$ and that $p(-2) = 0$, find
 \end{problem}
 
 \begin{solution}
-\textbf{Strategy:} We use the Conjugate Root Theorem to identify all three roots, then apply Vieta's formulas to relate roots to coefficients. This approach is more efficient than polynomial division or substitution. The three formulas from Vieta give us three equations for $b$, $c$, and $d$ directly.
+\textbf{Strategy:} Use the Conjugate Root Theorem to identify all three roots, then apply Vieta's formulas to relate roots to coefficients directly.
 
-\subsection*{Finding the Roots}
+Since the coefficients are real, if $z_1 = 3 - 2i$ is a root, then $z_2 = 3 + 2i$ (conjugate) is also a root. Given $p(-2) = 0$, the three roots are: $z_1 = 3 - 2i$, $z_2 = 3 + 2i$, $z_3 = -2$.
 
-Since the coefficients $b, c, d$ are \textbf{real}, if a complex number $z_1 = 3 - 2i$ is a root of $p(z)=0$, then its \textbf{conjugate} $\bar{z}_1$ must also be a root.
-\begin{align*}
-    z_1 &= 3 - 2i \\
-    z_2 = \bar{z}_1 &= 3 + 2i
-\end{align*}
-We are also given that $p(-2) = 0$, which means that $z_3 = -2$ is the third root.
-The three roots are $z_1 = 3 - 2i$, $z_2 = 3 + 2i$, and $z_3 = -2$.
+\textbf{Applying Vieta's formulas:}
 
-\subsection*{Using Vieta's Formulas (Relations between Roots and Coefficients)}
+\textbf{Finding $b$:} $-b = z_1 + z_2 + z_3 = (3-2i) + (3+2i) + (-2) = 4 \implies b = -4$
 
-For a monic cubic polynomial $p(z) = z^3 + bz^2 + cz + d$, Vieta's formulas state:
-\begin{itemize}
-    \item Sum of the roots: $z_1 + z_2 + z_3 = -b$
-    \item Sum of the roots taken two at a time: $z_1z_2 + z_1z_3 + z_2z_3 = c$
-    \item Product of the roots: $z_1z_2z_3 = -d$
-\end{itemize}
+\textbf{Finding $c$:} $c = z_1z_2 + z_1z_3 + z_2z_3$
 
-\subsubsection*{Finding $b$}
-$$
--b = z_1 + z_2 + z_3
-$$
-Substituting the roots:
-\begin{align*}
-    -b &= (3 - 2i) + (3 + 2i) + (-2) \\
-    -b &= (3 + 3 - 2) + (-2i + 2i) \\
-    -b &= 4 \\
-    b &= -4
-\end{align*}
+Note $z_1z_2 = (3-2i)(3+2i) = 9 + 4 = 13$, so:
+$$c = 13 + (3-2i)(-2) + (3+2i)(-2) = 13 - 12 = 1$$
 
-\subsubsection*{Finding $c$}
-$$
-c = z_1z_2 + z_1z_3 + z_2z_3
-$$
-First, calculate $z_1z_2$:
-$$
-z_1z_2 = (3 - 2i)(3 + 2i) = 3^2 - (2i)^2 = 9 - (-4) = 13
-$$
-Now, substitute into the formula for $c$:
-\begin{align*}
-    c &= 13 + (3 - 2i)(-2) + (3 + 2i)(-2) \\
-    c &= 13 + (-6 + 4i) + (-6 - 4i) \\
-    c &= 13 - 6 + 4i - 6 - 4i \\
-    c &= 13 - 12 \\
-    c &= 1
-\end{align*}
+\textbf{Finding $d$:} $-d = z_1z_2z_3 = 13 \cdot (-2) = -26 \implies d = 26$
 
-\subsubsection*{Finding $d$}
-$$
--d = z_1z_2z_3
-$$
-Substituting the product $z_1z_2 = 13$ and $z_3 = -2$:
-\begin{align*}
-    -d &= (13)(-2) \\
-    -d &= -26 \\
-    d &= 26
-\end{align*}
-
-\textbf{Final Answer:} The values are $b = -4$, $c = 1$, and $d = 26$. The polynomial is $p(z) = z^3 - 4z^2 + z + 26$.
+\textbf{Final Answer:} $b = -4$, $c = 1$, $d = 26$. The polynomial is $p(z) = z^3 - 4z^2 + z + 26$.
 \end{solution}
 
 \begin{takeaways}
@@ -285,60 +179,44 @@ Given that $w$ is a root of the cubic equation $z^3 + iz^2 + ikz + 2i = 0$, wher
 \end{problem}
 
 \begin{solution}
-\textbf{Strategy:} The condition that $(1-i)w$ is real provides a constraint on the form of $w$. By expressing $w = x + iy$ and requiring the imaginary part of $(1-i)w$ to be zero, we find that $w = x(1+i)$ for real $x$. Substituting this form into the cubic equation and separating real and imaginary parts gives us two simultaneous equations in $x$ and $k$, which we can solve.
+\textbf{Strategy:} Use the constraint that $(1-i)w$ is real to find the form of $w$, substitute into the cubic equation, then separate real and imaginary parts to solve for $k$.
 
-\subsection*{Part 1: Determine the form of the root $w$}
-We are given that $w$ is a complex number and that $(1 - i)w$ is a **real** number.
-Let $w = x + iy$, where $x$ and $y$ are real numbers.
-Then, we calculate the product:
-\begin{align*} (1 - i)w &= (1 - i)(x + iy) \\ &= x + iy - ix - i^2y \\ &= x + y + i(y - x) \end{align*}
-Since $(1 - i)w$ is real, its imaginary part must be zero.
-$$ \text{Im}((1 - i)w) = y - x = 0 $$
-$$ \implies y = x $$
-Therefore, the root $w$ must be of the form:
-$$ w = x + ix = x(1 + i), \quad \text{where } x \in \mathbb{R} \setminus \{0\} $$
-\emph{Note:} If $x=0$, then $w=0$. Substituting $z=0$ into the equation $z^3 + iz^2 + ikz + 2i = 0$ gives $0 + 0 + 0 + 2i = 0$, which simplifies to $2i = 0$. This is false, so $w \neq 0$, and thus $x \neq 0$.
+\textbf{Step 1: Determine the form of $w$}
 
-\subsection*{Part 2: Substitute $w$ into the polynomial equation}
-Since $w$ is a root of $z^3 + iz^2 + ikz + 2i = 0$, we substitute $z=w = x(1+i)$ into the equation:
-$$ (x(1+i))^3 + i(x(1+i))^2 + ik(x(1+i)) + 2i = 0 $$
+Let $w = x + iy$ where $x, y \in \mathbb{R}$. Since $(1-i)w = (1-i)(x+iy) = x+y + i(y-x)$ is real:
+$$y - x = 0 \implies y = x \implies w = x(1+i), \quad x \neq 0$$
 
-\subsubsection*{Calculate powers of $w$}
-\begin{align*} w^2 &= x^2 (1+i)^2 \\ &= x^2 (1 + 2i + i^2) \\ &= x^2 (1 + 2i - 1) \\ &= 2ix^2 \end{align*}
-\begin{align*} w^3 &= w \cdot w^2 \\ &= x(1+i) \cdot (2ix^2) \\ &= 2ix^3(1+i) \\ &= 2ix^3 + 2i^2x^3 \\ &= 2ix^3 - 2x^3 \\ &= -2x^3 + 2ix^3 \end{align*}
+(Note: $x \neq 0$ since $w = 0$ gives $2i = 0$, a contradiction)
 
-\subsubsection*{Substitute back into the equation}
-\begin{align*} w^3 + i w^2 + ik w + 2i &= 0 \\ (-2x^3 + 2ix^3) + i(2ix^2) + ik(x(1+i)) + 2i &= 0 \\ -2x^3 + 2ix^3 + 2i^2x^2 + ikx + i^2kx + 2i &= 0 \\ -2x^3 + 2ix^3 - 2x^2 + ikx - kx + 2i &= 0 \end{align*}
+\textbf{Step 2: Calculate powers and substitute}
 
-\subsubsection*{Group the real and imaginary parts}
-Since $x$ and $k$ are real, we group the terms into a real part and an imaginary part:
-$$ \underbrace{(-2x^3 - 2x^2 - kx)}_{\text{Real Part}} + i \underbrace{(2x^3 + kx + 2)}_{\text{Imaginary Part}} = 0 + 0i $$
-For this complex number to be zero, both its real and imaginary parts must be zero.
+For $w = x(1+i)$:
+$$w^2 = x^2(1+i)^2 = x^2(2i) = 2ix^2$$
+$$w^3 = w \cdot w^2 = x(1+i) \cdot 2ix^2 = 2ix^3(1+i) = -2x^3 + 2ix^3$$
 
-\subsection*{Part 3: Solve the system of simultaneous equations}
-We set the real and imaginary parts to zero:
-\begin{align} -2x^3 - 2x^2 - kx &= 0 \quad (\text{Real Part}) \label{eq:1b} \\ 2x^3 + kx + 2 &= 0 \quad (\text{Imaginary Part}) \label{eq:2b} \end{align}
+Substituting into $z^3 + iz^2 + ikz + 2i = 0$:
+$$(-2x^3 + 2ix^3) + i(2ix^2) + ikx(1+i) + 2i = 0$$
+$$(-2x^3 - 2x^2 - kx) + i(2x^3 + kx + 2) = 0$$
 
-Since $x \neq 0$, we can divide equation \eqref{eq:1b} by $-x$:
-$$ 2x^2 + 2x + k = 0 \quad (\text{Eq. 3}) $$
-From Equation (3), we can express $k$ in terms of $x$:
-$$ k = -2x^2 - 2x \quad (\text{Eq. 4}) $$
+\textbf{Step 3: Solve the system}
 
-Now, substitute $k$ from Equation (4) into Equation (2b):
-\begin{align*} 2x^3 + (-2x^2 - 2x)x + 2 &= 0 \\ 2x^3 - 2x^3 - 2x^2 + 2 &= 0 \\ -2x^2 + 2 &= 0 \\ 2x^2 &= 2 \\ x^2 &= 1 \\ x &= \pm 1 \end{align*}
+Equating real and imaginary parts to zero:
+\begin{align}
+-2x^3 - 2x^2 - kx &= 0 \label{eq:1c} \\
+2x^3 + kx + 2 &= 0 \label{eq:2c}
+\end{align}
 
-\subsection*{Part 4: Find the possible values of $k$}
-We use Equation (4), $k = -2x^2 - 2x$, with the possible values of $x$.
+From \eqref{eq:1c}, divide by $-x$: $k = -2x^2 - 2x$
 
-\paragraph{Case 1: $x = 1$}
-$$ k = -2(1)^2 - 2(1) = -2 - 2 = -4 $$
-The root is $w = 1(1+i) = 1+i$.
+Substitute into \eqref{eq:2c}: $2x^3 + (-2x^2-2x)x + 2 = 0 \implies -2x^2 + 2 = 0 \implies x = \pm 1$
 
-\paragraph{Case 2: $x = -1$}
-$$ k = -2(-1)^2 - 2(-1) = -2(1) + 2 = -2 + 2 = 0 $$
-The root is $w = -1(1+i) = -1-i$.
+\textbf{Step 4: Find values of $k$}
 
-\textbf{Final Answer:} The possible values of $k$ are $-4$ or $0$.
+For $x = 1$: $k = -2(1)^2 - 2(1) = -4$ (root: $w = 1+i$)
+
+For $x = -1$: $k = -2(-1)^2 - 2(-1) = 0$ (root: $w = -1-i$)
+
+\textbf{Final Answer:} $k = -4$ or $k = 0$
 \end{solution}
 
 \begin{takeaways}
