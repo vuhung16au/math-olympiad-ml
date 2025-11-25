@@ -1,6 +1,8 @@
 \ProvidesPackage{dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
 
 \RequirePackage{etoolbox}
+\RequirePackage{rotating}
+\RequirePackage{environ}
 
 % Ensure colors are defined (provide fallbacks if not already defined)
 \providecolor{bookpurple}{RGB}{60,16,83}
@@ -68,15 +70,28 @@
 \newenvironment{solution}[1][]{\begin{solutionbox}[#1]}{\end{solutionbox}}
 \newenvironment{takeaways}[1][]{\begin{takeawaysbox}[#1]}{\end{takeawaysbox}}
 
-% Hint box (for part 2 problems with hints)
-\newtcolorbox{hintbox}{
+% Hint box (for part 2 problems with hints) - UPSIDE DOWN
+% First define a regular tcolorbox for the visual styling
+\newtcolorbox{hintboxinner}{
   colback=yellow!10,
   colframe=orange!50,
   boxrule=0.5pt,
   arc=3pt,
   left=5pt,right=5pt,top=5pt,bottom=5pt,
-  before skip=5pt,after skip=5pt,
   fontupper=\small\itshape,
-  title={\small\bfseries Hint:},
+  title={\small\bfseries :tniH},
   coltitle=black
+}
+
+% Now define hintbox environment that rotates the content upside down
+\NewEnviron{hintbox}{%
+  \begin{center}
+  \rotatebox[origin=c]{180}{%
+    \begin{minipage}{0.95\linewidth}
+      \begin{hintboxinner}
+        \BODY
+      \end{hintboxinner}
+    \end{minipage}%
+  }%
+  \end{center}
 }
