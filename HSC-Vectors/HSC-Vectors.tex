@@ -116,23 +116,32 @@ Throughout this booklet, we use the following standard mathematical notations:
 
 \subsection{Vectors Primer}
 
-\subsubsection{3D Vectors \& Coordinates}
-Extension 2 introduces the $z$-axis, moving from $(x, y)$ plane to $(x, y, z)$ space.
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Component Form:} $\mathbf{v} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$ or column vectors $\begin{pmatrix} x \\ y \\ z \end{pmatrix}$
-  
-  \textit{Note:} $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ are standard unit vectors with magnitude 1:
-  \begin{itemize}
-    \item $\mathbf{i} = (1, 0, 0)$ points along the positive $x$-axis
-    \item $\mathbf{j} = (0, 1, 0)$ points along the positive $y$-axis
-    \item $\mathbf{k} = (0, 0, 1)$ points along the positive $z$-axis
-  \end{itemize}
-  These form a mutually perpendicular basis, meaning $\mathbf{i} \cdot \mathbf{j} = \mathbf{j} \cdot \mathbf{k} = \mathbf{k} \cdot \mathbf{i} = 0$.
-  
-  \item \textbf{Magnitude:} $|\mathbf{v}| = \sqrt{x^2 + y^2 + z^2}$
-  \item \textbf{Distance Formula:} Between $A(x_1, y_1, z_1)$ and $B(x_2, y_2, z_2)$: \\
-  $|\vec{AB}| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}$
-\end{itemize}
+
+% --- Brief Introductions to Key Topics ---
+\subsubsection{Coordinates in 3D}
+In three dimensions, every point is described by an ordered triple $(x, y, z)$, representing its position along the $x$, $y$, and $z$ axes. This extension from 2D to 3D allows us to model space more realistically and solve geometric problems involving depth.
+
+\subsubsection{Vectors in Three Dimensions}
+A vector in 3D is an object with both magnitude and direction, written as $\mathbf{v} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$ or $\begin{pmatrix} x \\ y \\ z \end{pmatrix}$. The standard unit vectors $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ point along the $x$, $y$, and $z$ axes, respectively, and form a basis for all vectors in space.
+
+\subsubsection{The Dot Product}
+The dot product (or scalar product) combines two vectors to produce a real number. It measures how much one vector extends in the direction of another and is fundamental for finding angles, projections, and testing perpendicularity in 3D geometry.
+
+\subsubsection{Applications of the Dot Product}
+The dot product is used to calculate angles between vectors, determine orthogonality, find projections, and solve geometric problems such as distances from points to planes or lines. It is also essential in physics for work and energy calculations.
+
+\subsubsection{Vector Proofs in Geometry}
+Vector methods provide elegant, coordinate-free proofs for geometric properties of shapes like triangles, parallelograms, and tetrahedrons. By expressing points and relationships with vectors, many results can be derived more simply than with traditional coordinate geometry.
+
+\subsubsection{Vector Equation of a Line}
+In 3D, the equation $\mathbf{r} = \mathbf{a} + \lambda\mathbf{b}$ describes a line through point $\mathbf{a}$ in the direction of vector $\mathbf{b}$. This form is more flexible than $y=mx+b$ and is well-suited for problems involving intersections and distances in space.
+
+\subsubsection{Vector Equations of Circles, Spheres and Planes}
+Circles and spheres can be described using vector equations such as $|\mathbf{r} - \mathbf{c}| = R$, where $\mathbf{c}$ is the center and $R$ the radius. Planes are described by $ (\mathbf{r} - \mathbf{a}) \cdot \mathbf{n} = 0 $, where $\mathbf{n}$ is a normal vector. These forms unify many geometric objects under a common vector framework.
+
+% --- End Brief Introductions ---
+
+% ...existing code...
 
 \vspace{0.5em}
 \begin{center}
