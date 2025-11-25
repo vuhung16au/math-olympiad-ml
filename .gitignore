@@ -1,3 +1,5 @@
+.DS_Store 
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -21,7 +23,7 @@
 # *.eps
 # *.pdf
 
-## Generated if empty string is given at "Please type another file name for output:"
+## Generated if empty string is given at "Please type another file name for outpuStt:"
 .pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
