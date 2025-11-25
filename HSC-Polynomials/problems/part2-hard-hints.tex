@@ -51,6 +51,54 @@ Complex conditions constrain real parameters; trigonometric identities link alge
 \vspace{1cm}
 
 % =============================================================================
+% PROBLEM 33: Stationary Points and Zeros of a Polynomial
+% =============================================================================
+\begin{problem}
+Let $P(x)=(n-1)x^n - nx^{n-1} + 1$, where $n$ is an odd integer, $n \ge 3$.
+\begin{enumerate}
+    \item[(i)] Show that $P(x)$ has exactly two stationary points.
+    \item[(ii)] Show that $P(x)$ has a double zero at $x=1$.
+    \item[(iii)] Use the graph $y=P(x)$ to explain why $P(x)$ has exactly one real zero other than $1$.
+    \item[(iv)] Let $\alpha$ be the real zero of $P(x)$ other than $1$. Using part (ii), or otherwise, show that $-1 < \alpha \le -\frac{1}{2}$.
+    \item[(v)] Deduce that each of the zeros of $4x^5 - 5x^4 + 1$ has modulus less than or equal to $1$.
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\begin{hintbox}
+For (i): Differentiate $P(x)$ and solve $P'(x)=0$. For (ii): Check $P(1)=0$ and $P'(1)=0$, then $P''(1)\neq 0$. For (iii): Odd degree, sign at $\pm\infty$, and stationary points. For (iv): Use Intermediate Value Theorem and check $P(-1)$, $P(-1/2)$. For (v): Use Vieta's formulas and modulus bounds for roots of cubics.
+\end{hintbox}
+
+\begin{solution}
+We are given $P(x)=(n-1)x^n - nx^{n-1} + 1$, where $n$ is an odd integer, $n \ge 3$.
+
+	extbf{(i) Stationary Points:}
+\[
+P'(x) = n(n-1)x^{n-1} - n(n-1)x^{n-2} = n(n-1)x^{n-2}(x-1)
+\]
+Setting $P'(x)=0$ gives $x=0$ and $x=1$. Thus, exactly two stationary points.
+
+	extbf{(ii) Double Zero at $x=1$:}
+\[
+P(1) = (n-1) - n + 1 = 0,\quad P'(1) = n(n-1)(1-1) = 0
+\]
+Check $P''(1)$:
+\[
+P''(x) = n(n-1)[(n-2)x^{n-3}(x-1) + x^{n-2}]\implies P''(1) = n(n-1)
+\]
+Since $n\ge3$, $P''(1)\neq0$. So $x=1$ is a double zero.
+
+	extbf{(iii) Exactly One Other Real Zero:}
+Degree $n$ is odd, so $P(x)$ has at least one real zero. $P(x)\to-\infty$ as $x\to-\infty$, $P(x)\to\infty$ as $x\to\infty$. $P(1)=0$ is a local minimum. $P(0)=1>0$. So, there is exactly one real zero $\alpha<1$ other than $x=1$.
+
+	extbf{(iv) Bounds for $\alpha$:}
+$P(-1)<0$, $P(0)>0$ $\implies$ $\alpha\in(-1,0)$. For $n=3$, $P(-1/2)=0$; for $n\ge5$, $P(-1/2)>0$, so $\alpha\le-1/2$. Thus, $-1<\alpha\le-1/2$.
+
+	extbf{(v) Zeros of $4x^5-5x^4+1$:}
+For $n=5$, $P(x) = 4x^5-5x^4+1 = (x-1)^2(4x^3+3x^2+2x+1)$. The cubic's roots $\alpha, z, \bar{z}$ satisfy $|\alpha z\bar{z}|=1/4$ and $-1<\alpha<-1/2$. Thus $|z|^2=1/(4|\alpha|)<1/2$, so $|z|<1$. All zeros have modulus $\le1$.
+\end{solution}
+
+% =============================================================================
 % PROBLEM 17: Multiple Trigonometric Identities from Roots of Unity
 % =============================================================================
 \begin{problem}

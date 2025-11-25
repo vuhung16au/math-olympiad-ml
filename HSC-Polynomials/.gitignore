@@ -36,6 +36,8 @@ HSC-Polynomials.pdf
 # Release directory (optional - uncomment if you don't want to track releases)
 !releases/HSC-Polynomials.pdf
 samples/
+samples2/
+Prompt.md
 TODO/
 PLAN.md
 PROBLEM_CLASSIFICATION.md
