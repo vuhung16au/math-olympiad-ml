@@ -3,7 +3,7 @@
 % Hard Problems - HSC Extension 2 Level
 % ==============================================================================
 
-\begin{problem}[Problem 34: Bernoulli's Inequality - Weighted AM-GM]
+\begin{problem}[Bernoulli's Inequality - Weighted AM-GM]
 Let $n$ be a positive integer and let $x$ be a positive real number.
 \begin{enumerate}
     \item[(i)] Show that $x^n - 1 - n(x-1) = (x-1)(1+x+x^2+\dots+x^{n-1}-n)$.
@@ -48,7 +48,7 @@ Multiply by $b$: $\frac{a^n}{b^{n-1}} \ge na + b(1-n)$, giving $a^n b^{1-n} \ge 
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 45: Cauchy-Schwarz and Sums]
+\begin{problem}[Cauchy-Schwarz and Sums]
 Let $a, b, A$ and $B$ be positive numbers.
 \begin{enumerate}[label=\textbf{(\roman*)}]
     \item Prove that
@@ -89,7 +89,7 @@ So $\sum_{k=1}^n \frac{S}{S-x_k} \geq \frac{n^2}{n-1}$.
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 46: Power Mean, Young's, and AM-GM]
+\begin{problem}[Power Mean, Young's, and AM-GM]
 The numbers $p, q$ and $s$ are fixed and positive. Also $p > 1, q > 1$ and $p = \frac{q}{q-1}$.
 \begin{enumerate}[label=(\roman*)]
     \item What positive value of $t$ minimises the expression
@@ -109,27 +109,26 @@ For (i), find the stationary point of $f(t)$. For (ii), evaluate $f$ at the mini
 \end{hint}
 
 \begin{solution}
-	extbf{(i)} $f'(t) = t^{q-1} - s = 0 \implies t = s^{1/(q-1)} = s^{p-1}$. $f''(t) > 0$ for $q > 1$, so this is a minimum.
+	\textbf{(i)} $f'(t) = t^{q-1} - s = 0 \implies t = s^{1/(q-1)} = s^{p-1}$. $f''(t) > 0$ for $q > 1$, so this is a minimum.
 
-	extbf{(ii)} At $t = s^{p-1}$:
+	\textbf{(ii)} At $t = s^{p-1}$:
 \[ f(s^{p-1}) = \frac{s^p}{p} + \frac{s^p}{q} - s^p = s^p\left(\frac{1}{p} + \frac{1}{q} - 1\right) = 0 \]
 So $f(t) \geq 0$ for all $t > 0$.
 
-	extbf{(iii)} Induction for AM-GM: Base case $n=1$ is trivial. Assume for $k$, prove for $k+1$ by grouping and using the hypothesis. (See detailed proof in sample.)
-
-	extbf{(iv)} Apply AM-GM to $\frac{y_1}{y_2}, \dots, \frac{y_n}{y_1}$:
+	\textbf{(iii)} Induction for AM-GM: Base case $n=1$ is trivial. Assume for $k$, prove for $k+1$ by grouping and using the hypothesis. (See detailed proof in sample.)
+	\textbf{(iv)} Apply AM-GM to $\frac{y_1}{y_2}, \dots, \frac{y_n}{y_1}$:
 \[ \sum_{cyc} \frac{y_i}{y_{i+1}} \geq n \left(1\right)^{1/n} = n \]
 \end{solution}
 
 \begin{takeaways}
 \item Young's inequality generalizes AM-GM
-\item Induction is a powerful tool for inequalities
+\item Induction is a powerful tool for inequalities. And convexity applied for Inequalities. 
 \item Cyclic sums often reduce to AM-GM
 \end{takeaways}
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 47: Inductive Proof of AM-GM]
+\begin{problem}[Inductive Proof of AM-GM]
 The real numbers $a_1, a_2, \dots$ are all positive. For each positive $n$, $A_n$ and $G_n$ are defined by:
 \[ A_n = \frac{a_1 + a_2 + \dots + a_n}{n} \quad \text{and} \quad G_n = (a_1 a_2 \dots a_n)^{1/n} \]
 \begin{enumerate}[label=(\roman*)]
@@ -162,7 +161,7 @@ For (i), manipulate the given inequality and substitute $\lambda_k$. For (ii), a
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 35: Reciprocal Polynomial with AM-GM]
+\begin{problem}[Reciprocal Polynomial with AM-GM]
 Let $a, b, c$ be real numbers. Suppose that $P(x) = x^4 + ax^3 + bx^2 + cx + 1$ has roots $\alpha, \frac{1}{\alpha}, \beta, \frac{1}{\beta}$, where $\alpha > 0$ and $\beta > 0$.
 \begin{enumerate}
     \item[(i)] Prove that $a = c$.
@@ -192,7 +191,7 @@ Apply AM-GM: $\alpha\beta + \frac{1}{\alpha\beta} \ge 2$ and $\frac{\alpha}{\bet
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 36: Nested AM-GM Application]
+\begin{problem}[Nested AM-GM Application]
 Let $x, y, z, w$ be positive real numbers.
 \begin{enumerate}
     \item[(i)] Given that $x>0$ and $y>0$, show that $x+y \ge 2\sqrt{xy}$.
@@ -234,7 +233,7 @@ Raise to 4th power: $\left(\frac{x+y+z}{3}\right)^4 \ge xyz \cdot \frac{x+y+z}{3
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 37: Triangle Inequality - Quadratic Forms]
+\begin{problem}[Triangle Inequality - Quadratic Forms]
 Let $p, q, r$ be the lengths of the three sides of a triangle.
 \begin{enumerate}
     \item[(a)] Show that: $p^2 + q^2 + r^2 \ge pq + pr + qr$
@@ -272,7 +271,7 @@ Add $2(pq+pr+qr)$ to both sides: $(p+q+r)^2 < 4(pq+pr+qr)$.
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 38: Complex Triangle Inequality]
+\begin{problem}[Complex Triangle Inequality]
 Prove that for any two complex numbers $z_1, z_2 \in \mathbb{C}$:
 \[ |z_1 + z_2| \le |z_1| + |z_2| \]
 \end{problem}
@@ -303,7 +302,7 @@ Taking square roots: $|z_1 + z_2| \le |z_1| + |z_2|$.
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 39: Complex Modulus with Constraint]
+\begin{problem}[Complex Modulus with Constraint]
 Given $|z| < \frac{1}{2}$, show that:
 \[ |(1+i)z^3 + iz| < \frac{3}{4} \]
 \end{problem}
@@ -368,7 +367,7 @@ Substitute $ab + bc + ac = abc$: $abc \ge a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab}$.
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 41: Logarithmic Inequality with Factorial]
+\begin{problem}[Logarithmic Inequality with Factorial]
 \begin{enumerate}
 \item[(i)] Prove that $x > \ln(x)$ for all positive real numbers $x$.
 \item[(ii)] Hence, show that for all positive integers $n$:
@@ -402,7 +401,7 @@ Exponentiating: $e^{n^2+n} > (n!)^2$.
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 42: Cauchy-Schwarz with Homogenization]
+\begin{problem}[Cauchy-Schwarz with Homogenization]
 Prove that for all positive real numbers $a, b, c$:
 \[ \frac{a^2}{3a+2b} + \frac{b^2}{3b+2c} + \frac{c^2}{3c+2a} \ge \frac{a+b+c}{5} \]
 \end{problem}
@@ -434,7 +433,7 @@ Therefore:
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 43: Bernoulli's Inequality - Power Form]
+\begin{problem}[Bernoulli's Inequality - Power Form]
 Prove the following inequality for all integers $n \ge 1$:
 \[ \left(1 + \frac{1}{\sqrt{n}}\right)^n \ge 1 + \sqrt{n} \]
 \end{problem}
@@ -461,7 +460,7 @@ Apply Bernoulli's inequality $(1+x)^n \ge 1+nx$:
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 44: Strict Bernoulli via Induction]
+\begin{problem}[Strict Bernoulli via Induction]
 \begin{enumerate}
     \item[(i)] Prove that $(1+x)^n > 1+nx$ for $n \ge 1$ and $x > -1$.
     \item[(ii)] Hence, deduce that $\left(1 - \frac{1}{2n}\right)^n > \frac{1}{2}$ for $n > 1$.
@@ -497,7 +496,7 @@ Apply (i):
 
 % ------------------------------------------------------------------------------
 
-\begin{problem}[Problem 45: Summation Inequality via Induction]
+\begin{problem}[Summation Inequality via Induction]
 Given that for $k > 0$, $2k + 3 > 2\sqrt{(k+1)(k+2)}$, prove that:
 \[ \sum_{r=1}^{n} \frac{1}{\sqrt{r}} > 2\left(\sqrt{n+1} - 1\right) \]
 for all positive integers $n$.
