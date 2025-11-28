@@ -43,8 +43,123 @@ Multiply by $b$: $\frac{a^n}{b^{n-1}} \ge na + b(1-n)$, giving $a^n b^{1-n} \ge 
 \begin{takeaways}
 \item Bernoulli's inequality extends to weighted AM-GM forms
 \item Sign analysis crucial when $x$ varies around 1
+\item The inequality can be generalized when $n$ is not an integer 
 \end{takeaways}
 
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 45: Cauchy-Schwarz and Sums]
+Let $a, b, A$ and $B$ be positive numbers.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+    \item Prove that
+    \[ \frac{ab}{AB} \leq \frac{1}{2} \left( \frac{a^2}{A^2} + \frac{b^2}{B^2} \right) \]
+    \item Let $A = \sqrt{\sum_{k=1}^n a_k^2}$ and $B = \sqrt{\sum_{k=1}^n b_k^2}$, where $a_k$ and $b_k$ are positive real numbers.
+    Use (i) to prove that
+    \[ \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) \]
+    \item Let $S = x_1 + x_2 + x_3 + \dots + x_n$, where $x_k > 0$ for all $1 \leq k \leq n$. Use (ii) to prove that
+    \[ \frac{S}{S-x_1} + \frac{S}{S-x_2} + \cdots + \frac{S}{S-x_n} \geq \frac{n^2}{n-1} \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (i), use $(x-y)^2 \geq 0$ with $x = \frac{a}{A}$, $y = \frac{b}{B}$. For (ii), sum the result from (i). For (iii), apply Cauchy-Schwarz with suitable choices.
+\end{hint}
+
+\begin{solution}
+	extbf{(i)} $(x-y)^2 \geq 0 \implies x^2 + y^2 \geq 2xy$. Let $x = \frac{a}{A}$, $y = \frac{b}{B}$:
+\[ \frac{a^2}{A^2} + \frac{b^2}{B^2} \geq 2\frac{ab}{AB} \implies \frac{ab}{AB} \leq \frac{1}{2}\left(\frac{a^2}{A^2} + \frac{b^2}{B^2}\right) \]
+
+	extbf{(ii)} Apply (i) for each $k$:
+\[ \frac{a_k b_k}{AB} \leq \frac{1}{2}\left(\frac{a_k^2}{A^2} + \frac{b_k^2}{B^2}\right) \]
+Sum over $k$:
+\[ \frac{1}{AB} \sum_{k=1}^n a_k b_k \leq 1 \implies \sum_{k=1}^n a_k b_k \leq AB \]
+Square both sides:
+\[ \left(\sum_{k=1}^n a_k b_k\right)^2 \leq \left(\sum_{k=1}^n a_k^2\right)\left(\sum_{k=1}^n b_k^2\right) \]
+
+	extbf{(iii)} Let $a_k = \sqrt{S-x_k}$, $b_k = \frac{1}{\sqrt{S-x_k}}$.
+\[ \left(\sum_{k=1}^n 1\right)^2 = n^2 \leq (S(n-1)) \sum_{k=1}^n \frac{1}{S-x_k} \]
+So $\sum_{k=1}^n \frac{S}{S-x_k} \geq \frac{n^2}{n-1}$.
+\end{solution}
+
+\begin{takeaways}
+\item Cauchy-Schwarz can be derived from simple quadratic inequalities
+\item Summing pairwise inequalities yields the general form
+\item Clever substitutions can turn Cauchy-Schwarz into other inequalities
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 46: Power Mean, Young's, and AM-GM]
+The numbers $p, q$ and $s$ are fixed and positive. Also $p > 1, q > 1$ and $p = \frac{q}{q-1}$.
+\begin{enumerate}[label=(\roman*)]
+    \item What positive value of $t$ minimises the expression
+    \[ f(t) = \frac{s^p}{p} + \frac{t^q}{q} - st \ ? \]
+    \item Show that for all $t > 0$,
+    \[ \frac{s^p}{p} + \frac{t^q}{q} \geq st . \]
+    \item Prove by induction that
+    \[ (x_1 x_2 \cdots x_n)^{\frac{1}{n}} \leq \frac{x_1 + x_2 + \cdots + x_n}{n} \]
+    for all $x_1, \dots, x_n > 0$.
+    \item Deduce that, for all $y_1, y_2, \dots, y_n > 0$,
+    \[ \frac{y_1}{y_2} + \frac{y_2}{y_3} + \cdots + \frac{y_{n-1}}{y_n} + \frac{y_n}{y_1} \geq n . \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (i), find the stationary point of $f(t)$. For (ii), evaluate $f$ at the minimum. For (iii), use induction on $n$ for AM-GM. For (iv), apply AM-GM to the cyclic ratios.
+\end{hint}
+
+\begin{solution}
+	extbf{(i)} $f'(t) = t^{q-1} - s = 0 \implies t = s^{1/(q-1)} = s^{p-1}$. $f''(t) > 0$ for $q > 1$, so this is a minimum.
+
+	extbf{(ii)} At $t = s^{p-1}$:
+\[ f(s^{p-1}) = \frac{s^p}{p} + \frac{s^p}{q} - s^p = s^p\left(\frac{1}{p} + \frac{1}{q} - 1\right) = 0 \]
+So $f(t) \geq 0$ for all $t > 0$.
+
+	extbf{(iii)} Induction for AM-GM: Base case $n=1$ is trivial. Assume for $k$, prove for $k+1$ by grouping and using the hypothesis. (See detailed proof in sample.)
+
+	extbf{(iv)} Apply AM-GM to $\frac{y_1}{y_2}, \dots, \frac{y_n}{y_1}$:
+\[ \sum_{cyc} \frac{y_i}{y_{i+1}} \geq n \left(1\right)^{1/n} = n \]
+\end{solution}
+
+\begin{takeaways}
+\item Young's inequality generalizes AM-GM
+\item Induction is a powerful tool for inequalities
+\item Cyclic sums often reduce to AM-GM
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
+
+\begin{problem}[Problem 47: Inductive Proof of AM-GM]
+The real numbers $a_1, a_2, \dots$ are all positive. For each positive $n$, $A_n$ and $G_n$ are defined by:
+\[ A_n = \frac{a_1 + a_2 + \dots + a_n}{n} \quad \text{and} \quad G_n = (a_1 a_2 \dots a_n)^{1/n} \]
+\begin{enumerate}[label=(\roman*)]
+    \item Show that, for any positive integer $k$,
+    \[ \text{if } (\lambda_k)^{k+1} - (k+1)\lambda_k + k \geq 0, \text{ where } \lambda_k = \left( \frac{a_{k+1}}{G_k} \right)^{1/(k+1)} \]
+    \[ \text{then } (k+1)(A_{k+1} - G_{k+1}) \geq k(A_k - G_k) \]
+    \item Let $f(x) = x^{k+1} - (k+1)x + k$, $x > 0$, $k \in \mathbb{Z}^+$. Show $f(x) \geq 0$.
+    \item Hence prove by induction $A_n \geq G_n$ for all $n \in \mathbb{Z}^+$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (i), manipulate the given inequality and substitute $\lambda_k$. For (ii), analyze $f(x)$ using calculus. For (iii), use induction and results from (i) and (ii).
+\end{hint}
+
+\begin{solution}
+	extbf{(i)} Given $\lambda_k^{k+1} + k \geq (k+1)\lambda_k$. Multiply by $G_k > 0$ and substitute $\lambda_k$ to relate $A_{k+1}$ and $G_{k+1}$. (See sample for full algebraic steps.)
+
+	extbf{(ii)} $f'(x) = (k+1)x^k - (k+1)$. Minimum at $x=1$, $f(1)=0$. So $f(x) \geq 0$ for $x > 0$.
+
+	extbf{(iii)} Induction: Base case $n=1$ is trivial. Assume for $k$, use (i) and (ii) to show $A_{k+1} \geq G_{k+1}$.
+\end{solution}
+
+\begin{takeaways}
+\item Inductive proofs can be structured using auxiliary inequalities
+\item Calculus can establish non-negativity for all $x > 0$
+\item AM-GM is a fundamental result for all $n$
+\end{takeaways}
+
+% ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 
 \begin{problem}[Problem 35: Reciprocal Polynomial with AM-GM]
@@ -114,6 +229,7 @@ Raise to 4th power: $\left(\frac{x+y+z}{3}\right)^4 \ge xyz \cdot \frac{x+y+z}{3
 \begin{takeaways}
 \item AM-GM for $n=3$ derived from $n=2$ and $n=4$ cases
 \item Nested application: pair terms, then apply again
+\item Clever choice of variables can be used to solve the general case
 \end{takeaways}
 
 % ------------------------------------------------------------------------------

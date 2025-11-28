@@ -31,3 +31,6 @@ HSC-Collections.pdf
 # Release directory (optional - uncomment if you don't want to track releases)
 !releases/HSC-Collections.pdf
 
+samples/
+samples2/
+Prompt.md

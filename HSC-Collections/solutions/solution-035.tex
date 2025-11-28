@@ -1,0 +1,28 @@
+% Solution 35
+% Source: samples/01.tex
+% Author: Vu Hung Nguyen
+% Date: November 2025
+
+\begin{dl101box}{Solution to Problem 35}
+\begin{enumerate}
+\item[(a)] $nA_n = \frac{2n-1}{2}A_{n-1}$ by integration by parts on $A_n$.
+
+\item[(b)] $A_n = 2n \int_0^{\frac{\pi}{2}} x \sin x \cos^{2n-1} x \, dx$ by parts.
+
+\item[(c)] $\frac{A_n}{n^2} = \frac{2n-1}{n} B_{n-1} - 2B_n$ by parts on (b).
+
+\item[(d)] $\frac{1}{n^2} = 2\left(\frac{B_{n-1}}{A_{n-1}} - \frac{B_n}{A_n}\right)$ using (a) and (c).
+
+\item[(e)] $\sum_{k=1}^n \frac{1}{k^2} = \frac{\pi^2}{6} - 2\frac{B_n}{A_n}$ by telescoping (d) and $\frac{B_0}{A_0} = \frac{\pi^2}{12}$.
+
+\item[(f)] $B_n \le \int_0^{\frac{\pi}{2}} x^2 \left(1-\frac{4x^2}{\pi^2}\right)^n dx$ using $\sin x \ge \frac{2}{\pi}x$.
+
+\item[(g)] $\int_0^{\frac{\pi}{2}} x^2 \left(1-\frac{4x^2}{\pi^2}\right)^n dx = \frac{\pi^2}{8(n+1)} \int_0^{\frac{\pi}{2}} \left(1-\frac{4x^2}{\pi^2}\right)^{n+1} dx$ by parts.
+
+\item[(h)] $B_n \le \frac{\pi^3}{16(n+1)} \int_0^{\frac{\pi}{2}} \cos^{2n+3} t dt \le \frac{\pi^3}{16(n+1)}A_n$ by substitution $x=\frac{\pi}{2}\sin t$.
+
+\item[(i)] $\frac{\pi^2}{6} - \frac{\pi^3}{8(n+1)} \le \sum_{k=1}^n \frac{1}{k^2} < \frac{\pi^2}{6}$ using (e) and (h).
+
+\item[(j)] $\lim\limits_{n\to\infty} \sum_{k=1}^n \frac{1}{k^2} = \frac{\pi^2}{6}$.
+\end{enumerate}
+\end{dl101box}
