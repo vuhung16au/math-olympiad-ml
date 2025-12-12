@@ -1,0 +1,214 @@
+\documentclass[12pt]{article}
+
+% Core math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+
+% Define theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{pgfplots}
+
+% Custom styles shared with HSC projects
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+% TikZ libraries for diagrams
+\usetikzlibrary{arrows.meta, calc, patterns, decorations.pathreplacing}
+\pgfplotsset{compat=1.18}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Math Extension 2: Last Resorts Mastery}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet compiles the most challenging problems from HSC Mathematics Extension~2 examinations---the notorious Problem~16, as we call them "Last Resort." These problems represent the pinnacle of high school mathematics, typically combining multiple advanced topics and requiring sophisticated problem-solving techniques. Every problem showcases the depth and complexity expected at the highest level of the HSC Mathematics curriculum.
+
+The collection draws from authentic examination problems that have challenged Extension~2 students over many years. Each problem has been carefully selected to represent the diverse range of mathematical concepts and proof techniques that appear in Problem~16, from advanced inequalities and complex number theory to vector optimization and differential geometry applications.
+
+\subsection{What Makes Problem 16 Special}
+Problem~16 is uniquely challenging because it:
+\begin{itemize}[leftmargin=*]
+  \item Combines multiple mathematical topics within a single problem
+  \item Requires advanced proof techniques and mathematical maturity
+  \item Often involves multi-part questions that build complexity progressively
+  \item Tests both computational skills and conceptual understanding
+  \item Demands clear mathematical communication and rigorous reasoning
+\end{itemize}
+
+\subsection{Target Audience}
+This booklet is designed for Extension~2 students who want to:
+\begin{itemize}[leftmargin=*]
+  \item Master the most challenging problems in the HSC curriculum
+  \item Develop advanced problem-solving strategies
+  \item Build confidence in tackling complex multi-step problems
+  \item Understand how to approach unfamiliar mathematical scenarios
+  \item Prepare thoroughly for the demands of Problem~16 in examinations
+\end{itemize}
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Study the Fundamentals:} Review key theorems and techniques 
+  \item \textbf{Attempt Problems Independently:} Try each problem without looking at solutions first
+  \item \textbf{Part 1 Strategy:} Compare your work against solutions to understand model reasoning
+  \item \textbf{Part 2 Approach:} Use upside-down hints sparingly, then review concise solutions
+  \item \textbf{Practice Multiple Times:} Rework problems from memory to build technique mastery
+  \item \textbf{Focus on Communication:} Pay attention to how mathematical arguments are structured and presented
+\end{itemize}
+
+\newpage
+\section{Fundamentals Review}
+
+\subsection{Key Inequalities}
+Problem~16 frequently employs fundamental inequalities as building blocks for more complex arguments.
+
+\subsubsection{Arithmetic-Geometric Mean (AM-GM) Inequality}
+\begin{theorem}[AM-GM Inequality]
+For positive real numbers $a_1, a_2, \ldots, a_n$:
+\[\frac{a_1 + a_2 + \cdots + a_n}{n} \geq \sqrt[n]{a_1 a_2 \cdots a_n}\]
+Equality occurs if and only if $a_1 = a_2 = \cdots = a_n$.
+\end{theorem}
+
+\begin{theorem}[Weighted AM-GM Inequality]
+For positive real numbers $a_1, a_2, \ldots, a_n$ and positive weights $w_1, w_2, \ldots, w_n$ with $w_1 + w_2 + \cdots + w_n = 1$:
+\[w_1 a_1 + w_2 a_2 + \cdots + w_n a_n \geq a_1^{w_1} a_2^{w_2} \cdots a_n^{w_n}\]
+\end{theorem}
+
+\subsubsection{Cauchy-Schwarz Inequality}
+\begin{theorem}[Cauchy-Schwarz Inequality]
+For vectors $\mathbf{u}$ and $\mathbf{v}$ in $\mathbb{R}^n$:
+\[|\mathbf{u} \cdot \mathbf{v}| \leq |\mathbf{u}| |\mathbf{v}|\]
+Equivalently, for real numbers $a_1, a_2, \ldots, a_n$ and $b_1, b_2, \ldots, b_n$:
+\[\left(\sum_{i=1}^{n} a_i b_i\right)^2 \leq \left(\sum_{i=1}^{n} a_i^2\right)\left(\sum_{i=1}^{n} b_i^2\right)\]
+\end{theorem}
+
+\subsection{Complex Number Theory}
+\subsubsection{De Moivre's Theorem}
+\begin{theorem}[De Moivre's Theorem]
+For complex numbers in polar form $z = r(\cos\theta + i\sin\theta)$:
+\[z^n = r^n(\cos(n\theta) + i\sin(n\theta))\]
+\end{theorem}
+
+\subsubsection{Roots of Unity}
+\begin{theorem}[Roots of Unity]
+The $n$th roots of unity are given by:
+\[\omega_k = e^{2\pi i k/n} = \cos\left(\frac{2\pi k}{n}\right) + i\sin\left(\frac{2\pi k}{n}\right)\]
+for $k = 0, 1, 2, \ldots, n-1$.
+\end{theorem}
+
+\subsection{Vector Algebra}
+\subsubsection{Dot Product}
+For vectors $\mathbf{u} = (u_1, u_2, u_3)$ and $\mathbf{v} = (v_1, v_2, v_3)$:
+\[\mathbf{u} \cdot \mathbf{v} = u_1v_1 + u_2v_2 + u_3v_3 = |\mathbf{u}||\mathbf{v}|\cos\theta\]
+
+\subsubsection{Cross Product}
+\[\mathbf{u} \times \mathbf{v} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3 \end{vmatrix}\]
+The magnitude $|\mathbf{u} \times \mathbf{v}| = |\mathbf{u}||\mathbf{v}|\sin\theta$ equals the area of the parallelogram formed by $\mathbf{u}$ and $\mathbf{v}$.
+
+\subsection{Polynomial Theory}
+\subsubsection{Newton's Identities}
+\begin{theorem}[Newton's Identities]
+For a polynomial with roots $\alpha_1, \alpha_2, \ldots, \alpha_n$, if $S_k = \sum_{i=1}^n \alpha_i^k$ and $e_k$ are the elementary symmetric polynomials, then:
+\[S_k - e_1 S_{k-1} + e_2 S_{k-2} - \cdots + (-1)^{k-1} e_{k-1} S_1 + (-1)^k k e_k = 0\]
+\end{theorem}
+
+\subsection{Optimization Techniques}
+\subsubsection{Lagrange Multipliers (Conceptual)}
+To optimize $f(x,y,z)$ subject to constraint $g(x,y,z) = 0$, look for points where:
+\[\nabla f = \lambda \nabla g\]
+This often reduces to applying AM-GM or Cauchy-Schwarz in HSC problems.
+
+\subsection{Notation and Conventions}
+\begin{itemize}[leftmargin=*]
+  \item Complex numbers are denoted by $z, w, \alpha, \beta, \ldots$
+  \item Vectors are written in bold: $\mathbf{u}, \mathbf{v}, \mathbf{a}, \mathbf{b}$
+  \item Real numbers are assumed unless stated otherwise
+  \item $\mathbb{R}^n$ denotes $n$-dimensional real space
+  \item $|z|$ denotes the modulus of complex number $z$
+  \item $|\mathbf{v}|$ denotes the magnitude of vector $\mathbf{v}$
+\end{itemize}
+
+\newpage
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains 15 carefully selected problems representing the core techniques and challenge levels found in Problem~16. Each solution includes a strategy explanation, complete step-by-step working, and takeaway insights to build your problem-solving toolkit.
+
+\subsection{Medium Last Resort Problems}
+Problems that combine 2--3 mathematical topics with sophisticated reasoning.
+
+\input{problems/part1-medium}
+
+\subsection{Advanced Last Resort Problems}
+The most challenging problems requiring multiple advanced techniques and mathematical maturity.
+
+\input{problems/part1-hard}
+
+\newpage
+\section{Part 2: Problems with Hints and Solutions (Concise)}
+Part~2 presents the remaining 43 problems with upside-down hints followed by solution sketches. These problems provide comprehensive practice across the full spectrum of Problem~16 topics and difficulty levels.
+
+\subsection{Easy Last Resort Problems}
+Foundation problems that introduce key concepts with straightforward applications.
+
+\input{problems/part2-easy-hints}
+
+\subsection{Medium Last Resort Problems}
+Problems that develop technique combinations and multi-step reasoning.
+
+\input{problems/part2-medium-hints}
+
+\subsection{Advanced Last Resort Problems}
+Complex problems that push the boundaries of high school mathematics.
+
+\input{problems/part2-hard-hints}
+
+\newpage
+\section{Conclusion}
+Mastering Problem~16 represents the culmination of your HSC Mathematics Extension~2 journey. These "Last Resort" problems demand not just computational skills, but mathematical maturity, strategic thinking, and the ability to synthesize diverse topics under examination pressure.
+
+The problems in this collection span the full range of techniques and topics that appear in Problem~16: from elegant inequality applications to sophisticated complex number theory, from vector optimization to advanced function analysis. Each problem has been chosen to develop specific aspects of mathematical reasoning while building your confidence in tackling unfamiliar scenarios.
+
+Remember that Problem~16 success comes from:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Pattern Recognition:} Learning to identify familiar structures in new contexts
+  \item \textbf{Technique Integration:} Combining multiple approaches within single problems
+  \item \textbf{Proof Communication:} Expressing mathematical arguments clearly and completely
+  \item \textbf{Strategic Thinking:} Choosing effective approaches when multiple paths exist
+  \item \textbf{Persistence:} Working through complex multi-step problems systematically
+\end{itemize}
+
+Use this collection as a comprehensive training ground. Work through problems multiple times, focus on understanding the reasoning behind each step, and practice communicating your solutions clearly. With dedicated preparation, you can approach Problem~16 with confidence and skill.
+
+Best of luck with your studies and HSC examinations!
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-LastResorts}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-LastResorts}
+
+\end{document}

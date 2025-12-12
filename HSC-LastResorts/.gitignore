@@ -1,0 +1,15 @@
+# .gitignore for HSC-LastResorts
+*.aux
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.pdf
+__pycache__/
+
+
+samples/
+samples2/
+problems/extracted/

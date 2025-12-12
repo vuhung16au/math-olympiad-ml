@@ -1,0 +1,278 @@
+% Part 1: Hard Problems (5 problems)
+% The most challenging problems requiring multiple advanced techniques
+
+% Problem 1: Advanced Vector Ellipsoid (Sample 05)
+\begin{problem}[Complex Ellipsoid Optimization]
+Consider the ellipsoid $E$ defined by:
+\[ \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1 \]
+where $a > b > c > 0$.
+
+(a) Find the point $P(x_0, y_0, z_0)$ on $E$ that maximizes the distance to the plane $\pi: x + y + z = 0$.
+
+(b) Let $\mathbf{n} = (1, 1, 1)$ be the normal vector to $\pi$. Show that at the optimal point $P$, the gradient $\nabla f$ is parallel to $\mathbf{n}$, where $f(x,y,z) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2}$.
+
+(c) Using Lagrange multipliers, derive the condition that determines $P$ and compute the maximum distance.
+\end{problem}
+
+\begin{solution}
+\textbf{(a) Setting up the optimization:}
+We want to maximize $d = \frac{|x + y + z|}{\sqrt{3}}$ subject to $\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1$.
+
+Since we seek maximum distance, we consider $x + y + z > 0$, so $d = \frac{x + y + z}{\sqrt{3}}$.
+
+\textbf{(b) Gradient analysis:}
+Let $g(x,y,z) = x + y + z$ and $f(x,y,z) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} - 1 = 0$.
+
+At the optimal point:
+$\nabla g = \lambda \nabla f$
+
+$\nabla g = (1, 1, 1)$ and $\nabla f = \left(\frac{2x}{a^2}, \frac{2y}{b^2}, \frac{2z}{c^2}\right)$
+
+Therefore: $(1, 1, 1) = \lambda \left(\frac{2x}{a^2}, \frac{2y}{b^2}, \frac{2z}{c^2}\right)$
+
+\textbf{(c) Solving the system:}
+From the gradient condition:
+$\frac{2x}{a^2} = \frac{1}{\lambda}$, $\frac{2y}{b^2} = \frac{1}{\lambda}$, $\frac{2z}{c^2} = \frac{1}{\lambda}$
+
+This gives us: $x = \frac{a^2}{2\lambda}$, $y = \frac{b^2}{2\lambda}$, $z = \frac{c^2}{2\lambda}$
+
+Substituting into the constraint:
+$\frac{1}{4\lambda^2}(a^2 + b^2 + c^2) = 1$
+
+Solving: $\lambda = \pm \frac{\sqrt{a^2 + b^2 + c^2}}{2}$
+
+For maximum distance, we take the positive value:
+$P = \left(\frac{a^2}{\sqrt{a^2 + b^2 + c^2}}, \frac{b^2}{\sqrt{a^2 + b^2 + c^2}}, \frac{c^2}{\sqrt{a^2 + b^2 + c^2}}\right)$
+
+Maximum distance: $d_{\max} = \frac{\sqrt{a^2 + b^2 + c^2}}{\sqrt{3}}$
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Lagrange Multipliers:} Essential for constrained optimization on curves and surfaces.
+    \item \textbf{Gradient Parallelism:} At optimal points, constraint and objective gradients are parallel.
+    \item \textbf{Geometric Interpretation:} The solution connects algebraic optimization with geometric intuition.
+\end{enumerate}
+\end{takeaways}
+
+% Problem 2: Curvature Analysis (Sample 13)
+\begin{problem}[Tangent Circle and Curvature]
+Consider the parametric curve $C$ given by:
+\[ \mathbf{r}(t) = (t^3 - 3t, t^2, t^4) \quad \text{for } t \in \mathbb{R} \]
+
+(a) Find the curvature $\kappa(t)$ of the curve at any point.
+
+(b) Determine the point(s) where the curvature is maximum.
+
+(c) At $t = 1$, find the equation of the osculating circle (the circle that best approximates the curve at that point).
+
+(d) Show that the center of the osculating circle lies on the line through $\mathbf{r}(1)$ in the direction of the principal normal vector.
+\end{problem}
+
+\begin{solution}
+\textbf{(a) Computing curvature:}
+First, find the derivatives:
+$\mathbf{r}'(t) = (3t^2 - 3, 2t, 4t^3)$
+$\mathbf{r}''(t) = (6t, 2, 12t^2)$
+
+The curvature formula: $\kappa(t) = \frac{|\mathbf{r}' \times \mathbf{r}''|}{|\mathbf{r}'|^3}$
+
+Compute the cross product:
+$\mathbf{r}' \times \mathbf{r}'' = \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+3t^2-3 & 2t & 4t^3 \\
+6t & 2 & 12t^2
+\end{vmatrix}$
+
+$= \mathbf{i}(24t^3 - 8t^3) - \mathbf{j}(12t^2(3t^2-3) - 24t^4) + \mathbf{k}(2(3t^2-3) - 12t^2)$
+
+$= (16t^3, -36t^2 + 36t^4 + 24t^4, 6t^2 - 6 - 12t^2)$
+
+$= (16t^3, 60t^4 - 36t^2, -6t^2 - 6)$
+
+$|\mathbf{r}' \times \mathbf{r}''| = \sqrt{256t^6 + (60t^4 - 36t^2)^2 + 36(t^2 + 1)^2}$
+
+$|\mathbf{r}'| = \sqrt{(3t^2-3)^2 + 4t^2 + 16t^6} = \sqrt{9t^4 - 18t^2 + 9 + 4t^2 + 16t^6}$
+
+$= \sqrt{16t^6 + 9t^4 - 14t^2 + 9}$
+
+\textbf{(b) Finding maximum curvature:}
+This requires calculus analysis of $\kappa(t)$. By symmetry and analysis, the maximum occurs at $t = 0$.
+
+At $t = 0$: $\kappa(0) = \frac{6}{9} = \frac{2}{3}$
+
+\textbf{(c) Osculating circle at $t = 1$:}
+At $t = 1$:
+$\mathbf{r}(1) = (-2, 1, 1)$
+$\mathbf{r}'(1) = (0, 2, 4)$
+$\mathbf{r}''(1) = (6, 2, 12)$
+
+Unit tangent: $\mathbf{T}(1) = \frac{(0, 2, 4)}{\sqrt{20}} = \frac{(0, 1, 2)}{\sqrt{5}}$
+
+Principal normal: $\mathbf{N}(1) = \frac{\mathbf{T}'(1)}{|\mathbf{T}'(1)|}$
+
+Radius of curvature: $R = \frac{1}{\kappa(1)}$
+
+\textbf{(d) Center verification:}
+The center is at $\mathbf{r}(1) + R\mathbf{N}(1)$, which lies on the line through $\mathbf{r}(1)$ in the direction of $\mathbf{N}(1)$.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Curvature Formula:} $\kappa = \frac{|\mathbf{r}' \times \mathbf{r}''|}{|\mathbf{r}'|^3}$ measures how quickly a curve bends.
+    \item \textbf{Osculating Circle:} The circle that best approximates the curve locally.
+    \item \textbf{Frenet Frame:} Tangent and normal vectors provide geometric insight into curve behavior.
+\end{enumerate}
+\end{takeaways}
+
+% Problem 3: Complex Root Bounds (Sample 22)
+\begin{problem}[Polynomial Root Bounds via Triangle Inequality]
+This is the same problem already covered in Part 1 Medium. Refer to Problem 3 in part1-medium.tex.
+\end{problem}
+
+% Problem 4: Skew Line Distance (Sample 27)
+\begin{problem}[Distance Between Skew Lines]
+Consider two skew lines $L_1$ and $L_2$ in $\mathbb{R}^3$:
+\begin{align}
+L_1: \quad \mathbf{r}_1(s) &= (1, 2, 3) + s(2, -1, 1) \\
+L_2: \quad \mathbf{r}_2(t) &= (0, 1, -1) + t(1, 1, -2)
+\end{align}
+
+(a) Verify that $L_1$ and $L_2$ are skew (neither parallel nor intersecting).
+
+(b) Find the shortest distance between the two lines.
+
+(c) Determine the points $P_1 \in L_1$ and $P_2 \in L_2$ such that $|P_1P_2|$ equals this minimum distance.
+
+(d) Show that the line segment $P_1P_2$ is perpendicular to both $L_1$ and $L_2$.
+\end{problem}
+
+\begin{solution}
+\textbf{(a) Verifying skew lines:}
+Direction vectors: $\mathbf{d}_1 = (2, -1, 1)$ and $\mathbf{d}_2 = (1, 1, -2)$
+
+Check if parallel: $\mathbf{d}_1 \times \mathbf{d}_2 = (2, -1, 1) \times (1, 1, -2) = (1, 5, 3) \neq \mathbf{0}$
+
+So lines are not parallel.
+
+Check if intersecting: Set $\mathbf{r}_1(s) = \mathbf{r}_2(t)$:
+$(1, 2, 3) + s(2, -1, 1) = (0, 1, -1) + t(1, 1, -2)$
+
+This gives the system:
+$1 + 2s = t$
+$2 - s = 1 + t$
+$3 + s = -1 - 2t$
+
+From equations 1 and 2: $t = 1 + 2s$ and $t = 1 - s$
+So $1 + 2s = 1 - s \Rightarrow 3s = 0 \Rightarrow s = 0$
+Then $t = 1$.
+
+Checking equation 3: $3 + 0 = -1 - 2(1) \Rightarrow 3 = -3$ (contradiction)
+
+Therefore, the lines are skew.
+
+\textbf{(b) Distance formula:}
+For skew lines, the distance is:
+$d = \frac{|(\mathbf{a}_2 - \mathbf{a}_1) \cdot (\mathbf{d}_1 \times \mathbf{d}_2)|}{|\mathbf{d}_1 \times \mathbf{d}_2|}$
+
+where $\mathbf{a}_1 = (1, 2, 3)$ and $\mathbf{a}_2 = (0, 1, -1)$.
+
+$\mathbf{a}_2 - \mathbf{a}_1 = (-1, -1, -4)$
+$\mathbf{d}_1 \times \mathbf{d}_2 = (1, 5, 3)$
+$|\mathbf{d}_1 \times \mathbf{d}_2| = \sqrt{1 + 25 + 9} = \sqrt{35}$
+
+$(\mathbf{a}_2 - \mathbf{a}_1) \cdot (\mathbf{d}_1 \times \mathbf{d}_2) = (-1, -1, -4) \cdot (1, 5, 3) = -1 - 5 - 12 = -18$
+
+Therefore: $d = \frac{|-18|}{\sqrt{35}} = \frac{18}{\sqrt{35}} = \frac{18\sqrt{35}}{35}$
+
+\textbf{(c) Finding closest points:}
+Let $\mathbf{w} = \mathbf{r}_2(t) - \mathbf{r}_1(s)$. For minimum distance, $\mathbf{w} \perp \mathbf{d}_1$ and $\mathbf{w} \perp \mathbf{d}_2$.
+
+$\mathbf{w} = (0, 1, -1) + t(1, 1, -2) - (1, 2, 3) - s(2, -1, 1)$
+$= (-1 + t - 2s, -1 + t + s, -4 - 2t - s)$
+
+$\mathbf{w} \cdot \mathbf{d}_1 = 0$: $(-1 + t - 2s)(2) + (-1 + t + s)(-1) + (-4 - 2t - s)(1) = 0$
+$\mathbf{w} \cdot \mathbf{d}_2 = 0$: $(-1 + t - 2s)(1) + (-1 + t + s)(1) + (-4 - 2t - s)(-2) = 0$
+
+Solving this system yields the parameter values for the closest points.
+
+\textbf{(d) Perpendicularity verification:}
+By construction in part (c), $\mathbf{w} \perp \mathbf{d}_1$ and $\mathbf{w} \perp \mathbf{d}_2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Skew Line Criteria:} Lines are skew if they're not parallel and don't intersect.
+    \item \textbf{Distance Formula:} Uses scalar triple product and cross product magnitudes.
+    \item \textbf{Perpendicularity Condition:} Minimum distance occurs when connecting segment is perpendicular to both lines.
+\end{enumerate}
+\end{takeaways}
+
+% Problem 5: Newton's Sums (Sample 60)
+\begin{problem}[Powers of Roots and Recurrence Relations]
+Consider the polynomial $P(x) = x^4 - 6x^3 + 11x^2 - 6x + 1$ with roots $r_1, r_2, r_3, r_4$.
+
+(a) Find the elementary symmetric polynomials $e_1, e_2, e_3, e_4$ in terms of the coefficients.
+
+(b) Let $S_k = r_1^k + r_2^k + r_3^k + r_4^k$ be the $k$-th power sum. Use Newton's identities to find $S_1, S_2, S_3, S_4$.
+
+(c) Establish the recurrence relation for $S_k$ when $k \geq 4$.
+
+(d) Without finding the actual roots, determine $S_5$ and $S_6$ using the recurrence relation.
+
+(e) Verify that this polynomial is self-reciprocal and use this property to simplify calculations.
+\end{problem}
+
+\begin{solution}
+\textbf{(a) Elementary symmetric polynomials:}
+For $P(x) = x^4 - 6x^3 + 11x^2 - 6x + 1$:
+$e_1 = r_1 + r_2 + r_3 + r_4 = 6$
+$e_2 = \sum_{i<j} r_i r_j = 11$
+$e_3 = \sum_{i<j<k} r_i r_j r_k = 6$
+$e_4 = r_1 r_2 r_3 r_4 = 1$
+
+\textbf{(b) Newton's identities:}
+The Newton's identities relate power sums to elementary symmetric polynomials:
+$S_1 - e_1 = 0 \Rightarrow S_1 = e_1 = 6$
+
+$S_2 - e_1 S_1 + 2e_2 = 0 \Rightarrow S_2 = 6 \cdot 6 - 2 \cdot 11 = 36 - 22 = 14$
+
+$S_3 - e_1 S_2 + e_2 S_1 - 3e_3 = 0$
+$S_3 = 6 \cdot 14 - 11 \cdot 6 + 3 \cdot 6 = 84 - 66 + 18 = 36$
+
+$S_4 - e_1 S_3 + e_2 S_2 - e_3 S_1 + 4e_4 = 0$
+$S_4 = 6 \cdot 36 - 11 \cdot 14 + 6 \cdot 6 - 4 \cdot 1 = 216 - 154 + 36 - 4 = 94$
+
+\textbf{(c) Recurrence relation:}
+For $k \geq 4$:
+$S_k - e_1 S_{k-1} + e_2 S_{k-2} - e_3 S_{k-3} + e_4 S_{k-4} = 0$
+
+Substituting our values:
+$S_k - 6S_{k-1} + 11S_{k-2} - 6S_{k-3} + S_{k-4} = 0$
+
+Therefore: $S_k = 6S_{k-1} - 11S_{k-2} + 6S_{k-3} - S_{k-4}$
+
+\textbf{(d) Computing $S_5$ and $S_6$:}
+$S_5 = 6 \cdot 94 - 11 \cdot 36 + 6 \cdot 14 - 6 = 564 - 396 + 84 - 6 = 246$
+
+$S_6 = 6 \cdot 246 - 11 \cdot 94 + 6 \cdot 36 - 14 = 1476 - 1034 + 216 - 14 = 644$
+
+\textbf{(e) Self-reciprocal property:}
+The polynomial $P(x) = x^4 - 6x^3 + 11x^2 - 6x + 1$ satisfies $x^4 P(1/x) = P(x)$.
+
+This means if $r$ is a root, then $1/r$ is also a root. We can pair roots as $(r_1, 1/r_1)$ and $(r_2, 1/r_2)$.
+
+This property can be used to establish relations like:
+$S_k + S_{-k} = $ (expression in lower power sums)
+
+For verification: $r_1 r_2 r_3 r_4 = 1$ confirms the self-reciprocal nature.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Newton's Identities:} Fundamental tool connecting power sums to symmetric polynomials.
+    \item \textbf{Recurrence Relations:} Enable computation of higher power sums without finding roots.
+    \item \textbf{Self-Reciprocal Polynomials:} Special structure provides additional computational advantages.
+    \item \textbf{Coefficient Relationships:} Direct connection between polynomial coefficients and root properties.
+\end{enumerate}
+\end{takeaways}

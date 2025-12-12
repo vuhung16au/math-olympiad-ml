@@ -1,0 +1,90 @@
+\ProvidesPackage{dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
+
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{etoolbox}
+
+% Ensure colors are defined (provide fallbacks if not already defined)
+\providecolor{bookpurple}{RGB}{60,16,83}
+\providecolor{bookred}{RGB}{242,18,12}
+\providecolor{bookwhite}{RGB}{255,255,255}
+\providecolor{lawpurple}{RGB}{181,24,37}
+\providecolor{softivory}{RGB}{242,239,235}
+
+% Problem statement box
+\newtcolorbox[auto counter,number within=section]{problembox}[1][]{
+  title={\bfseries Problem~\thetcbcounter\ifstrempty{#1}{}{: #1}},
+  enhanced,
+  drop shadow={black!30!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookpurple,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookpurple,coltitle=white},
+  fonttitle=\bfseries,
+  before skip=15pt,
+  after skip=10pt
+}
+
+% Solution box
+\newtcolorbox[auto counter,number within=section]{solutionbox}[1][]{
+  title={\bfseries Solution~\thetcbcounter\ifstrempty{#1}{}{: #1}},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookred,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookred,coltitle=white},
+  fonttitle=\bfseries,
+  before skip=15pt,
+  after skip=10pt
+}
+
+% Hint box
+\newtcolorbox[auto counter,number within=section]{hintbox}[1][]{
+  title={\bfseries Hint~\thetcbcounter\ifstrempty{#1}{}{: #1}},
+  enhanced,
+  drop shadow={black!30!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=blue!70!black,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=blue!70!black,coltitle=white},
+  fonttitle=\bfseries,
+  before skip=15pt,
+  after skip=10pt
+}
+
+% Takeaways box (reusing from dl101-boxes.sty style but with section numbering)
+\newtcolorbox[auto counter,number within=section]{takeawaysbox}[1][]{
+  title={\bfseries Takeaways~\thetcbcounter\ifstrempty{#1}{}{: #1}},
+  enhanced,
+  drop shadow={black!50!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=lawpurple,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=lawpurple,coltitle=white},
+  fonttitle=\bfseries,
+  before skip=10pt,
+  after skip=10pt
+}
+
+% Convenience environments
+\newenvironment{problem}[1][]{\begin{problembox}[#1]}{\end{problembox}}
+% Note: hint environment conflicts with dl101-hints.sty, so we use hintbox directly
+\newenvironment{solution}[1][]{\begin{solutionbox}[#1]}{\end{solutionbox}}
+\newenvironment{takeaways}[1][]{\begin{takeawaysbox}[#1]}{\end{takeawaysbox}}
+

@@ -1,0 +1,54 @@
+% Solutions for Easy Problems (Part 1)
+% Problem 1 Solution
+\section*{Solution to Problem 1}
+(a) By the AM-GM inequality for three positive numbers $x, y, z$:
+\[
+\frac{1}{x} + \frac{1}{y} + \frac{1}{z} \geq 3 \sqrt[3]{\frac{1}{xyz}} = \frac{3}{\sqrt[3]{xyz}}
+\]
+(b) For a rectangular prism with volume $V = abc$, the surface area $S = 2(ab + bc + ca)$. By AM-GM, $ab + bc + ca \geq 3\sqrt[3]{(abc)^2}$. The minimum occurs when $a = b = c$, i.e., the prism is a cube.
+
+Takeaway: AM-GM is powerful for proving inequalities and optimization in geometry.
+
+% Problem 2 Solution
+\section*{Solution to Problem 2}
+(a) By AM-GM for $p, p, q$:
+\[
+2p + q \geq 3 \sqrt[3]{p^2 q}
+\]
+(b) For a cylinder with surface area $A = 2\pi r^2 + 2\pi r h$, maximize $V = \pi r^2 h$ given $A$ fixed. Setting $h = 2r$ gives the maximum volume.
+
+Takeaway: AM-GM helps optimize geometric quantities under constraints.
+
+% Problem 3 Solution
+\section*{Solution to Problem 3}
+(a) By Cauchy-Schwarz or AM-GM:
+\[
+(x + y + z)\left(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}\right) \geq 9
+\]
+(b) The minimum volume of tetrahedron $OXYZ$ is $\frac{9}{2}abc$ when the intercepts are equal.
+
+Takeaway: Symmetry and inequalities are key in optimization problems.
+
+% Problem 4 Solution
+\section*{Solution to Problem 4}
+(a) By AM-GM:
+\[
+u^2 + v^2 + w^2 \geq 3(uvw)^{2/3}
+\]
+(b) The prism inscribed in a sphere has maximum volume when it is a cube, by symmetry and optimization.
+
+Takeaway: Symmetry often leads to optimal solutions in geometry.
+
+% Problem 5 Solution
+\section*{Solution to Problem 5}
+(i) Let $\mathbf{u} = (x/2, y/3, z/5)$, $|\mathbf{u}|^2 = 1$. Let $\mathbf{v} = (2, 3, 5)$, then $\mathbf{u} \cdot \mathbf{v} = x + y + z$. By Cauchy-Schwarz:
+\[
+|x + y + z| \leq |\mathbf{u}| |\mathbf{v}| = 1 \times \sqrt{2^2 + 3^2 + 5^2} = \sqrt{38}
+\]
+(ii) The maximum occurs at $x/2 = y/3 = z/5$, so $x = 2t, y = 3t, z = 5t$ for $t > 0$. Substitute into ellipsoid equation:
+\[
+\frac{(2t)^2}{4} + \frac{(3t)^2}{9} + \frac{(5t)^2}{25} = 1 \implies t^2(1 + 1 + 1) = 1 \implies t = 1/\sqrt{3}
+\]
+So $x = 2/\sqrt{3}, y = 3/\sqrt{3}, z = 5/\sqrt{3}$.
+
+Takeaway: Cauchy-Schwarz is essential for bounding expressions in vector geometry.

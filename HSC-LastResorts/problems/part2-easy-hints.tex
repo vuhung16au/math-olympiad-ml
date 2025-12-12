@@ -1,0 +1,57 @@
+% Part 2: Easy Problems with Hints (2 problems)
+
+% Problem 1: Complex Locus (Sample 19)
+\begin{problem}[Distance Ratio Regions]
+Let $z_1 = 2 + i$ and $z_2 = -1 + 2i$. Sketch the region in the complex plane where:
+\[ \frac{|z - z_1|}{|z - z_2|} < 1 \]
+\end{problem}
+
+\begin{hint}
+Consider the geometric interpretation of $|z - z_1|/|z - z_2| < 1$. This represents the locus where one distance is smaller than another.
+\end{hint}
+
+\begin{solution}
+The inequality $\frac{|z - z_1|}{|z - z_2|} < 1$ is equivalent to $|z - z_1| < |z - z_2|$.
+This means point $z$ is closer to $z_1 = 2 + i$ than to $z_2 = -1 + 2i$.
+The locus of points equidistant from two points is the perpendicular bisector of the line segment joining them.
+The midpoint of $z_1z_2$ is $\frac{(2+i) + (-1+2i)}{2} = \frac{1 + 3i}{2}$.
+The direction vector is $z_2 - z_1 = (-1+2i) - (2+i) = -3 + i$.
+The perpendicular bisector has normal vector $-3 + i$.
+The region where $|z - z_1| < |z - z_2|$ is the half-plane containing $z_1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Distance Comparison:} The locus $|z-a| = |z-b|$ is the perpendicular bisector of segment $ab$.
+    \item \textbf{Half-Plane Regions:} Inequality $|z-a| < |z-b|$ defines the half-plane containing $a$.
+\end{enumerate}
+\end{takeaways}
+
+% Problem 2: Complex Regions (Sample 20)
+\begin{problem}[Imaginary Part Constraints]
+Sketch the region in the complex plane where:
+\[ \text{Im}(2z + 3\bar{z}) \ge 1 \]
+\end{problem}
+
+\begin{hint}
+For a linear combination $az + b\bar{z}$, the imaginary part has a specific geometric interpretation in the complex plane.
+\end{hint}
+
+\begin{solution}
+Let $z = x + iy$, so $\bar{z} = x - iy$.
+\begin{align*}
+2z + 3\bar{z} &= 2(x + iy) + 3(x - iy) \\
+&= 2x + 2iy + 3x - 3iy \\
+&= 5x - iy
+\end{align*}
+Therefore, $\text{Im}(2z + 3\bar{z}) = -y$.
+The constraint becomes $-y \ge 1$, which is equivalent to $y \le -1$.
+This is the region below the horizontal line $y = -1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Linear Combinations:} For $az + b\bar{z}$ with $z = x + iy$, substitute and collect real/imaginary parts.
+    \item \textbf{Half-Plane Regions:} Constraints on $\text{Im}(...)$ or $\text{Re}(...)$ typically define half-planes.
+\end{enumerate}
+\end{takeaways}

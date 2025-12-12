@@ -1,0 +1,49 @@
+% Solutions for Medium Problems (Part 1)
+% Problem 6 Solution
+\section*{Solution to Problem 6}
+(i) The area of triangle $ABC$ with $A(a,0,0)$, $B(0,b,0)$, $C(0,0,c)$ is given by half the magnitude of the cross product of vectors $\vec{AB}$ and $\vec{AC}$:
+\[
+S = \frac{1}{2} |\vec{AB} \times \vec{AC}| = \frac{1}{2} \sqrt{b^2 c^2 + a^2 c^2 + a^2 b^2}
+\]
+(ii) The projections onto coordinate planes yield $S_{xy} = \frac{1}{2} ab$, $S_{yz} = \frac{1}{2} bc$, $S_{zx} = \frac{1}{2} ca$. Then $S^2 = S_{xy}^2 + S_{yz}^2 + S_{zx}^2$.
+
+Takeaway: Cross products and projections are powerful tools in 3D geometry.
+
+% Problem 7 Solution
+\section*{Solution to Problem 7}
+Given $\mathbf{v}_1 + \mathbf{v}_2 + \mathbf{v}_3 + \mathbf{v}_4 = \mathbf{0}$, expand $|\sum \mathbf{v}_i|^2 = 0$:
+\[
+0 = \sum_{i=1}^4 |\mathbf{v}_i|^2 + 2\sum_{1 \leq i < j \leq 4} \mathbf{v}_i \cdot \mathbf{v}_j
+\]
+Each $|\mathbf{v}_i|^2 = 1$, so $4 + 2\sum \cos \theta_{ij} = 0 \implies \sum \cos \theta_{ij} = -2$.
+
+Takeaway: Vector identities simplify complex geometric relationships.
+
+% Problem 8 Solution
+\section*{Solution to Problem 8}
+Let $\sigma_1, \sigma_2, \sigma_3$ be the elementary symmetric polynomials. Given $\sigma_1 = 3$.
+From $\sum z^2 = \sigma_1^2 - 2\sigma_2$, we have $3 = 9 - 2\sigma_2$, so $\sigma_2 = 3$.
+Using Newton's identity: $S_3 - \sigma_1 S_2 + \sigma_2 S_1 - 3\sigma_3 = 0$.
+Substituting: $3 - 3(3) + 3(3) - 3\sigma_3 = 0$, so $\sigma_3 = 1$.
+The cubic is $z^3 - 3z^2 + 3z - 1 = (z-1)^3 = 0$, giving $z_1 = z_2 = z_3 = 1$.
+
+Takeaway: Newton's identities connect power sums with elementary symmetric polynomials.
+
+% Problem 9 Solution
+\section*{Solution to Problem 9}
+We need $\sigma_2 = z_1z_2 + z_2z_3 + z_3z_1$. Since $|z_k| = 1$, we have $\bar{z_k} = 1/z_k$.
+Thus $\sum \frac{1}{z} = \sum \bar{z} = \overline{\sum z} = \overline{1} = 1$.
+Also, $\sigma_2 = \sigma_3 \sum \frac{1}{z} = 1 \cdot 1 = 1$.
+The cubic equation is $z^3 - z^2 + z - 1 = (z^2 + 1)(z - 1) = 0$.
+Roots are $z = 1, i, -i$. At least one root is $1$.
+
+Takeaway: Unit circle properties simplify complex polynomial analysis.
+
+% Problem 10 Solution
+\section*{Solution to Problem 10}
+To show equilateral triangle, prove $|z_1-z_2|^2 = |z_2-z_3|^2 = |z_3-z_1|^2$.
+Expand: $|z_1-z_2|^2 = (z_1-z_2)(\bar{z_1}-\bar{z_2}) = |z_1|^2 + |z_2|^2 - z_1\bar{z_2} - \bar{z_1}z_2$.
+Since $|z_k| = r$ and $z_1 + z_2 + z_3 = 0$, we get $z_3 = -(z_1 + z_2)$.
+After substitution and using $|z_k|^2 = r^2$, all side lengths equal $\sqrt{3}r$.
+
+Takeaway: Complex number constraints lead to elegant geometric results.
