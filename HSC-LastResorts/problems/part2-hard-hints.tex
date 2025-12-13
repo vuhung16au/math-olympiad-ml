@@ -308,8 +308,17 @@ Exponentiate both sides:
 \begin{problem}[The Logarithmic Bound]
 (i) Prove that for $x > 0$, $\frac{1}{x+1} < \ln(x+1) - \ln x < \frac{1}{x}$.
 
+Let $H_n = 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n}$ denote the $n$-th harmonic number.
+
 (ii) Hence, prove that for any integer $n > 1$:
-\[ \ln(n+1) < 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n} < 1 + \ln n \]
+\[ \ln(n+1) < H_n < 1 + \ln n \]
+
+(iii) Use parts (i) and (ii), or otherwise, to prove that the sequence
+
+\[ \gamma_n := H_n - \ln n \]
+
+converges as $n \to \infty$. The limit is known as the Euler's constant $\gamma$.
+
 \end{problem}
 
 \begin{hint}
@@ -331,6 +340,17 @@ Integrating from $x$ to $x+1$:
 \textbf{Right inequality:} Sum $\frac{1}{k+1} < \ln(k+1) - \ln k$ from $k=1$ to $n-1$:
 \[ \sum_{k=2}^n \frac{1}{k} < \ln n - \ln 1 \]
 \[ 1 + \frac{1}{2} + \dots + \frac{1}{n} < 1 + \ln n \]
+\medskip
+
+\textbf{(iii)} Let $H_n = \sum_{k=1}^n \frac{1}{k}$ and set $a_n = H_n - \ln n$. By (i),
+\[ \frac{1}{n+1} < \ln(n+1) - \ln n, \]
+so
+\[ a_{n+1} - a_n = \frac{1}{n+1} - (\ln(n+1) - \ln n) < 0, \]
+hence $(a_n)$ is decreasing. By (ii), $\ln(n+1) < H_n$, thus
+\[ a_n = H_n - \ln n > \ln(n+1) - \ln n > 0, \]
+so $(a_n)$ is bounded below. Therefore $a_n$ converges, and the limit
+\[ \gamma := \lim_{n\to\infty} \left(\sum_{k=1}^n \frac{1}{k} - \ln n\right) \]
+exists (Euler's constant).
 \end{solution}
 
 \begin{takeaways}
