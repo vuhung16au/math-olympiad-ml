@@ -1,4 +1,4 @@
-% Part 1: Medium Problems (5 problems)
+% Part 1: Medium Problems (6 problems)
 % These problems combine 2-3 mathematical topics with sophisticated reasoning
 
 % Problem 1: AM-GM Optimization (Sample 01)
@@ -256,5 +256,101 @@ Minimum distance = $\sqrt{4.5} = \sqrt{\frac{9}{2}} = \frac{3}{\sqrt{2}} = \frac
 \begin{enumerate}
     \item \textbf{Distance Squared:} Always minimize distance \textit{squared} ($|\mathbf{d}|^2$) rather than distance ($|\mathbf{d}|$). It avoids square roots and simplifies the calculus derivatives.
     \item \textbf{Kinematics Connection:} If velocities are constant vectors, the distance function is always a quadratic (convex parabola), ensuring a unique minimum.
+\end{enumerate}
+\end{takeaways}
+
+% Problem 6: Complex System via Newton Sums (Sample 09)
+\begin{problem}[Complex System via Newton Sums]
+Find all complex numbers $z_1, z_2, z_3$ that satisfy the following system of equations simultaneously:
+\[
+\begin{cases}
+    z_1 + z_2 + z_3 = 3 \\
+    z_1^2 + z_2^2 + z_3^2 = 3 \\
+    z_1^3 + z_2^3 + z_3^3 = 3
+\end{cases}
+\]
+\end{problem}
+
+\begin{hint}
+Do not try to substitute variables directly. Instead, assume $z_1, z_2, z_3$ are the roots of a cubic equation:
+\[ P(z) = z^3 - \sigma_1 z^2 + \sigma_2 z - \sigma_3 = 0 \]
+Use the identity for the sum of squares: $\sum z^2 = (\sum z)^2 - 2\sum z_1 z_2$.
+Then use Newton's Sums to find the sum of cubes relation:
+\[ S_3 - \sigma_1 S_2 + \sigma_2 S_1 - 3\sigma_3 = 0 \]
+where $S_k = z_1^k + z_2^k + z_3^k$.
+\end{hint}
+
+\begin{solution}
+Let $\sigma_1, \sigma_2, \sigma_3$ be the elementary symmetric polynomials. Then $z_1, z_2, z_3$ are the roots of 
+\[ P(z) = z^3 - \sigma_1 z^2 + \sigma_2 z - \sigma_3. \]
+
+\textbf{Step 1: Find $\sigma_1$.}
+From the first condition, $\sigma_1 = z_1 + z_2 + z_3 = 3$.
+
+\textbf{Step 2: Find $\sigma_2$.}
+Use the identity $\sum z^2 = (\sum z)^2 - 2\sum z_1 z_2$:
+\[ 3 = 3^2 - 2\sigma_2 = 9 - 2\sigma_2 \]
+\[ 2\sigma_2 = 6 \implies \sigma_2 = 3 \]
+
+\textbf{Step 3: Find $\sigma_3$.}
+By Newton's Sums, $S_3 - \sigma_1 S_2 + \sigma_2 S_1 - 3\sigma_3 = 0$, where $S_k = \sum z_i^k$:
+\[ 3 - 3 \cdot 3 + 3 \cdot 3 - 3\sigma_3 = 0 \]
+\[ 3 - 9 + 9 - 3\sigma_3 = 0 \implies 3\sigma_3 = 3 \implies \sigma_3 = 1 \]
+
+\textbf{Step 4: Solve the cubic.}
+The polynomial is $P(z) = z^3 - 3z^2 + 3z - 1$. 
+Recognize that this is $(z-1)^3 = z^3 - 3z^2 + 3z - 1$.
+Thus, the only root is $z = 1$ with multiplicity 3.
+
+\textbf{Solution:} $z_1 = z_2 = z_3 = 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Newton's Identities:} When dealing with sums of powers, always think about elementary symmetric polynomials and Newton's Sums relations.
+    \item \textbf{Binomial Recognition:} The polynomial $z^3 - 3z^2 + 3z - 1$ matches the binomial expansion of $(z-1)^3$.
+    \item \textbf{Symmetric System Strategy:} Systems involving $\sum z_i, \sum z_i^2, \sum z_i^3$ are often easiest when approached via symmetric polynomials.
+\end{enumerate}
+\end{takeaways}
+
+% Problem 7: Proof that e is Irrational (Sample 56)
+\begin{problem}[Proof that $e$ is Irrational]
+You are given the series definition
+\[ e = \sum_{n=0}^{\infty} \frac{1}{n!} = 1 + \frac{1}{1!} + \frac{1}{2!} + \frac{1}{3!} + \dots. \]
+
+\begin{enumerate}
+    \item[(i)] Let $S_k = \sum_{n=0}^{k} \frac{1}{n!}$. Show that for any integer $k\ge 1$,
+    \[ 0 < e - S_k < \frac{1}{k\cdot k!}. \]
+
+    \item[(ii)] Suppose for contradiction that $e=\tfrac{p}{q}$ with positive integers $p,q$. Consider $X = q!\,(e - S_q)$ and show that $X$ is an integer.
+
+    \item[(iii)] Using (i) with $k=q$, prove that $0 < X < 1$.
+
+    \item[(iv)] Conclude that $e$ is irrational.
+\end{enumerate}
+
+\begin{hintbox}
+	\textbf{(i)} Write the tail $e-S_k=\tfrac{1}{(k+1)!}+\tfrac{1}{(k+2)!}+\cdots$ and bound it by a geometric progression with ratio $\tfrac{1}{k+1}$.\\
+	\textbf{(ii)} Note $q!/n!\in\mathbb{Z}$ for all $0\le n\le q$, so $q!S_q$ is an integer while $q!e= (q-1)!\,p$.\\
+	\textbf{(iii)} Multiply the inequality from (i) by $q!$.\\
+	\textbf{(iv)} There is no integer strictly between $0$ and $1$.
+\end{hintbox}
+\end{problem}
+
+\begin{solution}
+    \textbf{(i)} We have $e-S_k=\sum_{j=k+1}^{\infty}\tfrac{1}{j!}=\tfrac{1}{(k+1)!}\left(1+\tfrac{1}{k+2}+\tfrac{1}{(k+2)(k+3)}+\cdots\right)$. This tail is strictly less than the geometric series with ratio $\tfrac{1}{k+1}$, so
+\[ 0<e-S_k<\frac{1}{(k+1)!}\cdot\frac{1}{1-\tfrac{1}{k+1}}=\frac{1}{(k+1)!}\cdot\frac{k+1}{k}=\frac{1}{k\cdot k!}. \]
+
+    \textbf{(ii)} Define $X=q!\,(e-S_q)=q!e- q!\sum_{n=0}^q\tfrac{1}{n!}$. If $e=\tfrac{p}{q}$, then $q!e=p\,(q-1)!\in\mathbb{Z}$, and $q!/n!\in\mathbb{Z}$ for $n\le q$, hence $q!S_q\in\mathbb{Z}$. Therefore $X\in\mathbb{Z}$.
+
+    \textbf{(iii)} Using (i) with $k=q$ and multiplying by $q!$ yields $0<q!(e-S_q)<\tfrac{1}{q}$, i.e., $0<X<1$.
+
+    \textbf{(iv)} There is no integer strictly between $0$ and $1$, contradiction. Hence $e$ is irrational.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Integrality Trick:} Multiplying by $q!$ clears denominators in partial sums, turning analysis into integer arithmetic.
+    \item \textbf{Series Bounding:} Bound factorial tails by simple geometric estimates to obtain sharp inequalities.
 \end{enumerate}
 \end{takeaways}

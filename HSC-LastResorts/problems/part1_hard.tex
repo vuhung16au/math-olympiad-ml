@@ -46,3 +46,51 @@ Consider the ellipse $\frac{x^2}{16} + \frac{y^2}{4} = 1$ (major axis $a=4$, min
 A circle $x^2 + y^2 = r^2$ is centered at the origin.
 (i) Determine the range of values for $r$ such that the circle intersects the ellipse at exactly four distinct points.
 (ii) Visualize the scenario where $r$ creates exactly 2 intersection points.
+
+% Problem 16: The Irrationality of ζ(3)
+\section*{Problem 16}
+% From samples/49.tex
+
+Let $\zeta(3) = 1 + \frac{1}{2^3} + \frac{1}{3^3} + \frac{1}{4^3} + \dots = \sum_{n=1}^\infty \frac{1}{n^3}$.
+
+This sequence converges to a real number known as Apéry's constant (DO NOT prove this)
+
+\begin{enumerate}
+    \item[(a)] \textbf{The Irrationality Criterion}
+    
+    Let $\alpha$ be a real number. Suppose $\alpha$ is rational, meaning $\alpha = \frac{p}{q}$ where $p, q$ are integers and $q > 0$.
+    
+    Show that for any integers $A$ and $B$, if $A\alpha - B \neq 0$, then:
+    \[ |A\alpha - B| \ge \frac{1}{q} \]
+
+    \item[(b)] \textbf{Optimization}
+    
+    Consider the function $f(x) = x(1-x)$ for $0 \le x \le 1$.
+    Find the maximum value of the function:
+    \[ g(x, y, z) = \frac{x(1-x)y(1-y)z(1-z)}{1 - (1-xy)z} \]
+    for $0 \le x, y, z \le 1$.
+    
+    \textit{(Hint: You may assume the maximum occurs when $x=y$. First substitute $y=x$, then maximize with respect to $z$, then with respect to $x$.)}
+
+    \item[(c)] \textbf{The Integral Construction}
+    
+    Let $d_n = \text{lcm}(1, 2, \dots, n)$.
+    Consider the sequence of integrals defined for $n \ge 1$:
+    \[ I_n = \int_0^1 \int_0^1 \int_0^1 \left( \frac{x(1-x)y(1-y)z(1-z)}{1 - (1-xy)z} \right)^n \frac{dx \, dy \, dz}{1 - (1-xy)z} \]
+    
+    You are given the following properties of $I_n$ (Do \textbf{NOT} prove these):
+    \begin{itemize}
+        \item[(1)] $I_n > 0$ for all $n \ge 1$.
+        \item[(2)] $2 d_n^3 I_n = A_n \zeta(3) + B_n$, where $A_n$ and $B_n$ are integers.
+        \item[(3)] For sufficiently large $n$, $d_n < 3^n$.
+    \end{itemize}
+    
+    Using part (b), show that:
+    \[ 0 < I_n < (\sqrt{2}-1)^{4n} \cdot C \]
+    where $C$ is a constant independent of $n$.
+
+    \item[(d)] \textbf{Conclusion}
+    
+    Using parts (a) and (c), prove that $\zeta(3)$ is irrational.
+
+\end{enumerate}

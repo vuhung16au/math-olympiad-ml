@@ -301,3 +301,55 @@ For verification: $r_1 r_2 r_3 r_4 = 1$ confirms the self-reciprocal nature.
     \item \textbf{Coefficient Relationships:} Direct connection between polynomial coefficients and root properties.
 \end{enumerate}
 \end{takeaways}
+
+% Problem 6: Irrationality of \zeta(3) (Sample 49)
+\begin{problem}[The Irrationality of $\zeta(3)$]
+Let $\zeta(3) = 1 + \frac{1}{2^3} + \frac{1}{3^3} + \frac{1}{4^3} + \dots = \sum_{n=1}^{\infty} \frac{1}{n^3}$ denote Ap\'ery's constant. In this problem you will show $\zeta(3)$ is irrational using a sequence of integrals and bounds (you may use the stated facts without proof).
+
+\begin{enumerate}
+    \item[(a)] \textbf{Irrationality Criterion.} Let $\alpha=\tfrac{p}{q}$ be rational with integers $p,q>0$. Show that for any integers $A,B$ with $A\alpha-B\ne 0$,
+    \[ |A\alpha - B| \ge \frac{1}{q}. \]
+
+    \item[(b)] \textbf{Optimization bound.} For $0\le x,y,z\le 1$, consider
+    \[ g(x,y,z) = \frac{x(1-x)\,y(1-y)\,z(1-z)}{1-(1-xy)z}. \]
+    Show that $g$ attains a global maximum value $g_{\max}=(\sqrt{2}-1)^4$ (you may assume the maximum occurs when $x=y$ and optimize in $z$ first).
+
+    \item[(c)] \textbf{Integral construction.} Let $d_n=\operatorname{lcm}(1,2,\dots,n)$ and
+    \[ I_n = \int_0^1\!\int_0^1\!\int_0^1 \Big( g(x,y,z) \Big)^n \, \frac{dx\,dy\,dz}{1-(1-xy)z}. \]
+    You are given: (1) $I_n>0$ for all $n\ge 1$; (2) $2d_n^3 I_n = A_n\,\zeta(3) + B_n$ for some integers $A_n,B_n$; (3) for large $n$, $d_n<3^n$.
+    Using (b), deduce a bound of the form
+    \[ 0 < I_n < C\,(\sqrt{2}-1)^{4n}, \]
+    where $C$ is independent of $n$.
+
+    \item[(d)] \textbf{Conclusion.} Assuming $\zeta(3)$ is rational, apply (a) to $X_n=A_n\,\zeta(3)+B_n$ and use (c) together with $d_n<3^n$ to derive a contradiction as $n\to\infty$. Conclude that $\zeta(3)$ is irrational.
+\end{enumerate}
+
+\begin{hintbox}
+	\textbf{(a)} Clear denominators: $A\frac{p}{q}-B=\frac{Ap-Bq}{q}$ and use that a nonzero integer has magnitude at least 1.\\
+	\textbf{(b)} Set $y=x$, maximize in $z$ to get $z=\frac{1}{1+x}$, then maximize in $x\in[0,1]$.\\
+	\textbf{(c)} Bound the integrand by $g_{\max}^n$ and pull it outside the integral.\\
+	\textbf{(d)} Compare the fixed lower bound $1/q$ with the upper bound decaying like $\big(27(\sqrt{2}-1)^4\big)^n$.
+\end{hintbox}
+\end{problem}
+
+\begin{solution}
+	\textbf{(a)} If $\alpha=\tfrac{p}{q}$, then $A\alpha-B=\tfrac{Ap-Bq}{q}$. The numerator is a nonzero integer, so $|Ap-Bq|\ge 1$, hence $|A\alpha-B|\ge \tfrac{1}{q}$.
+
+	\textbf{(b)} Setting $y=x$ and optimizing first in $z$ yields $z=\tfrac{1}{1+x}$. Substituting and maximizing over $x\in[0,1]$ gives $\max g=(\sqrt{2}-1)^4$.
+
+	\textbf{(c)} Since $g(x,y,z)\le (\sqrt{2}-1)^4$ on $[0,1]^3$, we have
+\[ 0<I_n=\iiint g(x,y,z)^n\,\frac{dx\,dy\,dz}{1-(1-xy)z} < \Big((\sqrt{2}-1)^4\Big)^n \iiint \frac{dx\,dy\,dz}{1-(1-xy)z} = C\,(\sqrt{2}-1)^{4n}, \]
+for some finite constant $C$.
+
+	\textbf{(d)} Write $X_n=A_n\,\zeta(3)+B_n=2d_n^3 I_n$. By (a), $|X_n|\ge \tfrac{1}{q}$ if $\zeta(3)$ were rational. But from (c) and $d_n<3^n$ we get
+\[ |X_n|=2d_n^3 I_n < 2\,(3^n)^3\,C\,(\sqrt{2}-1)^{4n} = 2C\,\big(27(\sqrt{2}-1)^4\big)^n, \]
+whose right-hand side tends to $0$ as $n\to\infty$. This contradicts $|X_n|\ge \tfrac{1}{q}>0$. Therefore $\zeta(3)$ is irrational.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Logic of Irrationality:} Use integer linear forms and uniform lower bounds ($1/q$) vs exponentially decaying upper bounds to force contradictions.
+    \item \textbf{Bounding Integrals:} Maximize the integrand to bound the whole integral without evaluation.
+    \item \textbf{Assumption Management:} Treat given constructions (LCM growth, integral identity) as black boxes and connect them via inequalities.
+\end{enumerate}
+\end{takeaways}

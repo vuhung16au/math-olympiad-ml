@@ -795,15 +795,27 @@ Let $\omega = e^{2\pi i/n}$ be an $n$-th root of unity.
 \textbf{(i)} $z^n - 1 = (z-1)(z-\omega)(z-\omega^2)\dots(z-\omega^{n-1})$.
 
 \textbf{(ii)} Let $f(z) = \ln(z^n - 1) = \sum \ln (z-\omega^k)$.
+
+Differentiate both sides:
 $f'(z) = \frac{n z^{n-1}}{z^n - 1} = \sum_{k=0}^{n-1} \frac{1}{z - \omega^k}$.
 
 \textbf{(iii)} Isolate $k=0$ term on RHS:
+
+
 $\frac{n z^{n-1}}{z^n - 1} = \frac{1}{z-1} + \sum_{k=1}^{n-1} \frac{1}{z - \omega^k}$.
+
 
 $\sum_{k=1}^{n-1} \frac{1}{z - \omega^k} = \frac{n z^{n-1}}{z^n - 1} - \frac{1}{z-1}$.
 
+
 Limit as $z \to 1$ using L'Hôpital or Taylor expansion:
-Let $z = 1+h$. Using Taylor:
+
+
+Let $z = 1+h$. 
+
+Using Taylor:
+
+
 $\frac{n(1+h)^{n-1}}{(1+h)^n - 1} \approx \frac{n(1+(n-1)h)}{nh} = \frac{1}{h}(1 + \frac{n-1}{n}h) \approx \frac{1}{h} + \frac{n-1}{n}$.
 
 $\lim_{z \to 1} \left( \frac{n z^{n-1}}{z^n - 1} - \frac{1}{z-1} \right) = \frac{n-1}{2}$.
