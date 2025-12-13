@@ -17,6 +17,38 @@ The line $CP$ connects $(0,k)$ and $(p, \cos p)$.
 Slope $m_{CP} = \frac{\cos p - k}{p - 0}$.
 Equating slopes: $\frac{\cos p - k}{p} = \frac{1}{\sin p}$.
 $\cos p - k = \frac{p}{\sin p} \implies k = \cos p - p \csc p$.
+
+\begin{center}
+    \begin{tikzpicture}[scale=1.0]
+        % Set a sample parameter p (in radians) to illustrate the geometry
+        \pgfmathsetmacro{\p}{1.2}
+        \pgfmathsetmacro{\cosP}{cos(\p r)}
+        \pgfmathsetmacro{\sinP}{sin(\p r)}
+        \pgfmathsetmacro{\k}{\cosP - \p/\sinP}
+        \pgfmathsetmacro{\radius}{sqrt( (\p)^2 + (\cosP-\k)^2 )}
+
+        % Axes
+        \draw[->,gray!80] (-3,0) -- (3,0) node[below right]{$x$};
+        \draw[->,gray!80] (0,-3) -- (0,2.5) node[above left]{$y$};
+
+        % Cosine curve
+        \draw[thick,blue!60] plot[domain=-3:3,samples=200] (\x,{cos(\x r)});
+
+        % Circle centered at C(0,k)
+        \draw[thick,red!60] (0,\k) circle (\radius);
+
+        % Points C and P
+        \fill[red!70] (0,\k) circle (2pt) node[below left]{$C(0,k)$};
+        \fill[green!70!black] (\p,\cosP) circle (2pt) node[above right]{$P(p,\cos p)$};
+
+        % Normal segment CP
+        \draw[very thick,teal!80!black] (0,\k) -- (\p,\cosP);
+
+        % Light guide from P to x-axis for reference
+        \draw[dashed,gray!60] (\p,0) -- (\p,\cosP) node[midway,right]{\small $p$};
+        \draw[dashed,gray!60] (0,\cosP) -- (\p,\cosP) node[midway,above]{\small $\cos p$};
+    \end{tikzpicture}
+\end{center}
 \end{solution}
 
 \begin{takeaways}
@@ -116,7 +148,8 @@ The solutions are: $x = \cos\left(\frac{\pi}{9}\right), \cos\left(\frac{5\pi}{9}
 \begin{takeaways}
 \begin{enumerate}
     \item \textbf{Trigonometric Substitution:} For cubic equations with specific forms, trigonometric identities can provide exact solutions.
-    \item \textbf{Multiple Angle Formulas:} The identity $4\cos^3\theta - 3\cos\theta = \cos(3\theta)$ is particularly useful for cubics.
+    \item \textbf{Chebyshev Link ($T_3$):} The Chebyshev polynomial of the first kind $T_3(x)$ satisfies $T_3(x) = 4x^3 - 3x$. Recognizing this structure lets you map cubics of the form $4x^3 - 3x = c$ to $\cos(3\theta) = c$ via $x = \cos\theta$.
+    \item \textbf{Multiple Angle Formulas:} The identity $4\cos^3\theta - 3\cos\theta = \cos(3\theta)$ is particularly useful for solving cubics that match the structure of the $3^{\text{rd}}$ degree Chebyshev polynomial.
 \end{enumerate}
 \end{takeaways}
 

@@ -15,36 +15,19 @@ where $a > b > c > 0$.
 \end{problem}
 
 \begin{solution}
-\textbf{(a) Setting up the optimization:}
-We want to maximize $d = \frac{|x + y + z|}{\sqrt{3}}$ subject to $\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1$.
+We maximize the distance $d=\dfrac{x+y+z}{\sqrt{3}}$ under $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$ with $x+y+z>0$.
 
-Since we seek maximum distance, we consider $x + y + z > 0$, so $d = \frac{x + y + z}{\sqrt{3}}$.
-
-\textbf{(b) Gradient analysis:}
-Let $g(x,y,z) = x + y + z$ and $f(x,y,z) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} - 1 = 0$.
-
-At the optimal point:
-$\nabla g = \lambda \nabla f$
-
-$\nabla g = (1, 1, 1)$ and $\nabla f = \left(\frac{2x}{a^2}, \frac{2y}{b^2}, \frac{2z}{c^2}\right)$
-
-Therefore: $(1, 1, 1) = \lambda \left(\frac{2x}{a^2}, \frac{2y}{b^2}, \frac{2z}{c^2}\right)$
-
-\textbf{(c) Solving the system:}
-From the gradient condition:
-$\frac{2x}{a^2} = \frac{1}{\lambda}$, $\frac{2y}{b^2} = \frac{1}{\lambda}$, $\frac{2z}{c^2} = \frac{1}{\lambda}$
-
-This gives us: $x = \frac{a^2}{2\lambda}$, $y = \frac{b^2}{2\lambda}$, $z = \frac{c^2}{2\lambda}$
-
-Substituting into the constraint:
-$\frac{1}{4\lambda^2}(a^2 + b^2 + c^2) = 1$
-
-Solving: $\lambda = \pm \frac{\sqrt{a^2 + b^2 + c^2}}{2}$
-
-For maximum distance, we take the positive value:
-$P = \left(\frac{a^2}{\sqrt{a^2 + b^2 + c^2}}, \frac{b^2}{\sqrt{a^2 + b^2 + c^2}}, \frac{c^2}{\sqrt{a^2 + b^2 + c^2}}\right)$
-
-Maximum distance: $d_{\max} = \frac{\sqrt{a^2 + b^2 + c^2}}{\sqrt{3}}$
+By Cauchy--Schwarz,
+\[
+    (x+y+z)^2 = \bigg(\tfrac{x}{a}a+\tfrac{y}{b}b+\tfrac{z}{c}c\bigg)^2
+    \le \Big(\tfrac{x^2}{a^2}+\tfrac{y^2}{b^2}+\tfrac{z^2}{c^2}\Big)(a^2+b^2+c^2)
+    = a^2+b^2+c^2,
+\]
+so $x+y+z \le \sqrt{a^2+b^2+c^2}$ with equality exactly when $\tfrac{x}{a}=\tfrac{y}{b}=\tfrac{z}{c}=k>0$. Writing $x=ka^2$, $y=kb^2$, $z=kc^2$ in the constraint gives $k^2(a^2+b^2+c^2)=1$, hence $k=1/\sqrt{a^2+b^2+c^2}$ and
+\[
+    P=\left( \frac{a^2}{\sqrt{a^2+b^2+c^2}},\; \frac{b^2}{\sqrt{a^2+b^2+c^2}},\; \frac{c^2}{\sqrt{a^2+b^2+c^2}} \right),
+    \quad d_{\max}=\frac{\sqrt{a^2+b^2+c^2}}{\sqrt{3}}.
+\]
 \end{solution}
 
 \begin{takeaways}
@@ -55,10 +38,22 @@ Maximum distance: $d_{\max} = \frac{\sqrt{a^2 + b^2 + c^2}}{\sqrt{3}}$
 \end{enumerate}
 \end{takeaways}
 
+\begin{remark}[Distance Between Shapes]
+In general, the distance between two shapes $A$ and $B$ is defined as
+\[ d(A,B) = \inf\{\|p-q\| : p\in A,\ q\in B\}. \]
+For an ellipsoid and a plane, this reduces to optimizing the point on the ellipsoid whose normal is aligned with the plane's normal (via Lagrange multipliers), yielding the maximum/minimum perpendicular separation between the surfaces.
+Here, inf means the greatest lower bound (or minimum if it exists).
+
+\end{remark}
+
 % Problem 2: Curvature Analysis (Sample 13)
 \begin{problem}[Tangent Circle and Curvature]
 Consider the parametric curve $C$ given by:
 \[ \mathbf{r}(t) = (t^3 - 3t, t^2, t^4) \quad \text{for } t \in \mathbb{R} \]
+
+For a smooth space curve $\mathbf{r}(t)$, the curvature at parameter $t$ is
+\[\kappa(t) = \frac{\big\lVert\,\mathbf{r}'(t) \times \mathbf{r}''(t)\,\big\rVert}{\big\lVert\mathbf{r}'(t)\big\rVert^3},\]
+which measures how quickly the curve is turning at that point (do NOT prove this formula).
 
 (a) Find the curvature $\kappa(t)$ of the curve at any point.
 
@@ -68,6 +63,14 @@ Consider the parametric curve $C$ given by:
 
 (d) Show that the center of the osculating circle lies on the line through $\mathbf{r}(1)$ in the direction of the principal normal vector.
 \end{problem}
+
+
+\begin{remark}[Plane Curve Curvature]
+For a plane curve given by $\gamma(t)=(x(t),y(t))$, a common equivalent formula is
+\[\kappa(t) = \frac{\big|x'(t)\,y''(t) - y'(t)\,x''(t)\big|}{\big(x'(t)^2 + y'(t)^2\big)^{3/2}}.\]
+This matches the space-curve definition when the curve lies in a plane.
+\end{remark}
+
 
 \begin{solution}
 \textbf{(a) Computing curvature:}
@@ -126,9 +129,31 @@ The center is at $\mathbf{r}(1) + R\mathbf{N}(1)$, which lies on the line throug
 \end{takeaways}
 
 % Problem 3: Complex Root Bounds (Sample 22)
-\begin{problem}[Polynomial Root Bounds via Triangle Inequality]
-This is the same problem already covered in Part 1 Medium. Refer to Problem 3 in part1-medium.tex.
+\begin{problem}[Cauchy’s Root Bound via Triangle Inequality]
+Let $P(z) = z^n + a_{n-1}z^{n-1} + \cdots + a_1 z + a_0$ be a monic complex polynomial. Show that every root $\zeta$ of $P$ satisfies
+\[ |\zeta| \le 1 + M, \quad \text{where } M = \max_{0\le k < n} |a_k|. \]
+Hint: Assume $|\zeta| > 1+M$ and compare $|\zeta|^n$ with $\sum_{k=0}^{n-1} |a_k|\,|\zeta|^k$ via the triangle inequality.
 \end{problem}
+
+\begin{solution}
+If $P(\zeta)=0$ then
+\[ |\zeta|^n = \Big|\sum_{k=0}^{n-1} a_k \zeta^k\Big| \le \sum_{k=0}^{n-1} |a_k|\,|\zeta|^k \le M \sum_{k=0}^{n-1} |\zeta|^k. \]
+Suppose $|\zeta| > 1+M$. Then $\sum_{k=0}^{n-1} |\zeta|^k < n\,|\zeta|^{n-1}$ and so
+\[ |\zeta|^n \le M\,n\,|\zeta|^{n-1} \quad \Rightarrow \quad |\zeta| \le Mn. \]
+But $|\zeta| > 1+M$ implies $|\zeta|/M > 1 + 1/M \ge 1$ (when $M>0$), and for sufficiently large $n$ this contradicts the inequality $|\zeta| \le Mn$. A standard refinement avoids $n$ entirely by dividing the identity $\zeta^n = -\sum_{k=0}^{n-1} a_k \zeta^k$ by $\zeta^n$ to get
+\[ 1 = -\sum_{k=0}^{n-1} a_k \zeta^{k-n}, \quad \text{hence} \quad 1 \le \sum_{k=0}^{n-1} |a_k|\,|\zeta|^{k-n}. \]
+If $|\zeta| > 1+M$, then $|\zeta|^{k-n} < (1+M)^{k-n} \le (1+M)^{-1}$ for all $k \le n-1$, giving
+\[ 1 < \sum_{k=0}^{n-1} |a_k|\,(1+M)^{-1} \le M\,(1+M)^{-1} < 1, \]
+which is a contradiction. Therefore $|\zeta| \le 1 + M$ for all roots.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Cauchy Bound:} Every root of a monic polynomial lies in the disk $|z| \le 1 + \max |a_k|$.
+    \item \textbf{Triangle Inequality Tool:} Comparing $|z|^n$ with coefficient-weighted sums yields robust bounds.
+    \item \textbf{Rescaling Remarks:} Stronger bounds exist (e.g., Fujiwara’s), derivable by rescaling or sharper estimates.
+\end{enumerate}
+\end{takeaways}
 
 % Problem 4: Skew Line Distance (Sample 27)
 \begin{problem}[Distance Between Skew Lines]

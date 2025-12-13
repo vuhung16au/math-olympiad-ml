@@ -81,24 +81,43 @@ Show that the minimum volume of the tetrahedron $OXYZ$ is $\frac{9}{2}abc$.
 \vspace{1cm}
 
 \begin{center}
-\begin{tikzpicture}[x=0.5cm,y=0.5cm,z=0.3cm,>=stealth]
-    % Axes
+% Slightly rotated 3D projection and hidden edges styled
+\begin{tikzpicture}[
+    x={(0.8cm,0cm)},
+    y={(0cm,0.8cm)},
+    z={(0.35cm,0.25cm)},
+    >=stealth]
+    % Axes (tilted for better perspective)
     \draw[->] (0,0,0) -- (6,0,0) node[right] {$x$};
     \draw[->] (0,0,0) -- (0,6,0) node[above] {$y$};
     \draw[->] (0,0,0) -- (0,0,6) node[below left] {$z$};
-    
+
     % Plane Intercepts
     \coordinate (X) at (4,0,0);
     \coordinate (Y) at (0,4,0);
     \coordinate (Z) at (0,0,4);
-    
-    % Draw Plane
-    \fill[gray!20, opacity=0.5] (X) -- (Y) -- (Z) -- cycle;
-    \draw[thick] (X) -- (Y) -- (Z) -- cycle;
-    
-    % Point P
+
+    % Tetrahedron edges from origin
+    \draw[thick] (0,0,0) -- (X);
+    \draw[thick,dashed] (0,0,0) -- (Y); % hidden
+    \draw[thick,dashed] (0,0,0) -- (Z); % hidden
+
+    % Draw Plane triangle XYZ (tweaked color/opacity)
+    \fill[blue!18, opacity=0.35] (X) -- (Y) -- (Z) -- cycle;
+    % Visible edges
+    \draw[thick, blue!40!black] (X) -- (Y);
+    \draw[thick, blue!40!black] (X) -- (Z);
+    % Edge potentially behind (style as dashed)
+    \draw[thick,dashed, blue!40!black] (Y) -- (Z);
+
+    % Point P (projected inside)
     \node[circle, fill, inner sep=1.5pt, label=right:{$P(a,b,c)$}] at (1.33, 1.33, 1.33) {};
-    
+
+    % Helper dotted projections from P to axes/intercepts (optional visibility cues)
+    \draw[dotted] (1.33,1.33,1.33) -- (1.33,1.33,0);
+    \draw[dotted] (1.33,1.33,1.33) -- (1.33,0,1.33);
+    \draw[dotted] (1.33,1.33,1.33) -- (0,1.33,1.33);
+
     % Labels
     \node[below] at (X) {$X$};
     \node[left] at (Y) {$Y$};
@@ -115,10 +134,13 @@ Apply Cauchy-Schwarz to vectors formed by coordinates and reciprocals. The volum
 \begin{solution}
 \textbf{(a) Proof:}
 Apply AM-GM to the sums separately.
+
 1. $(x+y+z) \ge 3\sqrt[3]{xyz}$
+
 2. $(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}) \ge 3\sqrt[3]{\frac{1}{xyz}}$
 
 Multiplying the inequalities (since all terms are positive):
+
 \[ (x+y+z)\left(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}\right) \ge \left(3\sqrt[3]{xyz}\right) \left(\frac{3}{\sqrt[3]{xyz}}\right) = 9 \]
 
 \textbf{(b) Application:}
@@ -148,6 +170,15 @@ Thus, the minimum volume is $\frac{9}{2}abc$. \hfill $\square$
     \item \textbf{Constraint Optimization:} Use the constraint equation to express the objective function, then apply AM-GM to the constraint terms.
 \end{enumerate}
 \end{takeaways}
+
+\begin{remark}[Alternate proof for part (a)]
+By Cauchy--Schwarz,
+\[
+    (x+y+z)\Big(\tfrac{1}{x}+\tfrac{1}{y}+\tfrac{1}{z}\Big)
+    \ge (1+1+1)^2 = 9,
+\]
+with equality at $x=y=z$. This gives the same bound in one step.
+\end{remark}
 
 % Problem 5: Sphere Inscriptions (Sample 04)
 \begin{problem}[Cube in Sphere Optimization]

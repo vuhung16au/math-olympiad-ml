@@ -7,9 +7,13 @@
 \usepackage{geometry}
 \usepackage[utf8]{inputenc}
 
-% Define theorem environments
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
+% Define theorem environments via DL101 theorem boxes (ensure chapter counter exists first)
+\newcounter{chapter} % required because dl101-theorems numbers by chapter
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-boxes}
+\usepackage{styles/dl101-theorems}
+\usepackage{chngcntr}
+\counterwithin{theorem}{section} % keep theorem numbering tied to sections
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{enumitem}
@@ -18,7 +22,6 @@
 \usepackage{pgfplots}
 
 % Custom styles shared with HSC projects
-\usepackage{styles/dl101-colors}
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
 
@@ -137,11 +140,25 @@ For a polynomial with roots $\alpha_1, \alpha_2, \ldots, \alpha_n$, if $S_k = \s
 \[S_k - e_1 S_{k-1} + e_2 S_{k-2} - \cdots + (-1)^{k-1} e_{k-1} S_1 + (-1)^k k e_k = 0\]
 \end{theorem}
 
+\subsection{Chebyshev Polynomials (First Kind)}
+The Chebyshev polynomials of the first kind $T_n(x)$ are a family of orthogonal polynomials on $[-1,1]$ with the defining trigonometric identity:
+\[ T_n(x) = \cos\big(n\arccos x\big). \]
+
+\subsubsection{Recurrence Formula}
+They satisfy the three-term recurrence for $n\ge 1$:
+\[ T_{n+1}(x) = 2x\,T_n(x) - T_{n-1}(x), \quad T_0(x)=1,\; T_1(x)=x. \]
+
+\subsubsection{Explicit Low-Degree Polynomials}
+\[ T_0(x) = 1, \quad T_1(x) = x, \quad T_2(x) = 2x^2 - 1, \quad T_3(x) = 4x^3 - 3x. \]
+
+These identities are frequently useful for transforming certain cubic equations by matching the structure of $T_3(x)$.
+
 \subsection{Optimization Techniques}
 \subsubsection{Lagrange Multipliers (Conceptual)}
 To optimize $f(x,y,z)$ subject to constraint $g(x,y,z) = 0$, look for points where:
 \[\nabla f = \lambda \nabla g\]
 This often reduces to applying AM-GM or Cauchy-Schwarz in HSC problems.
+Good to know though the technique is not covered at HSC level.
 
 \subsection{Notation and Conventions}
 \begin{itemize}[leftmargin=*]
