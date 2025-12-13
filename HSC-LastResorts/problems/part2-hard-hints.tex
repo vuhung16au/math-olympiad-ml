@@ -301,6 +301,7 @@ Exponentiate both sides:
 \begin{enumerate}
     \item \textbf{Riemann Sums:} Any time you see $n!$ related to $(n/e)^n$, think about integrating $\ln x$.
     \item \textbf{Rectangle Inequality:} $\int_k^{k+1} f(x) dx$ is often compared to $f(k)$ (lower rectangle) or $f(k+1)$ (upper rectangle).
+    \item \textbf{Stirling's Approximation:} These bounds on $\ln(n!)$ are key steps toward Stirling's formula $n! \sim \sqrt{2\pi n}\,(n/e)^n$.
 \end{enumerate}
 \end{takeaways}
 
@@ -404,6 +405,17 @@ Raise to power $n+1$:
 
 (ii) By using the inequality $x - \frac{x^2}{2} < \ln(1+x) < x$ for $x>0$, show that:
 \[ e^{\frac{n(n+1)}{2n^2} - \frac{n(n+1)(2n+1)}{12n^4}} < \prod_{k=1}^n \left( 1 + \frac{k}{n^2} \right) < e^{\frac{n(n+1)}{2n^2}} \]
+
+(iii) By using the result from part (ii), determine the limit of the product as $n \to \infty$:
+\[
+\lim_{n \to \infty} \prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right)
+\]
+
+(iv) Use a Riemann sum argument to show that:
+\[
+\lim_{n \to \infty} \ln \left(\prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right)\right) = \int_{0}^{1} x \, dx
+\]
+
 \end{problem}
 
 \begin{hint}
@@ -425,12 +437,30 @@ Using $x - x^2/2 < \ln(1+x) < x$ with $x = k/n^2$:
 \textbf{Lower Bound:} $\frac{1}{n^2} \sum k - \frac{1}{2n^4} \sum k^2$.
 \[ \frac{n(n+1)}{2n^2} - \frac{1}{2n^4} \cdot \frac{n(n+1)(2n+1)}{6} = \frac{n(n+1)}{2n^2} - \frac{n(n+1)(2n+1)}{12n^4} \]
 Exponentiating gives the result.
+
+\textbf{(iii)} From part (ii), the bounds are:
+\[ e^{\frac{n(n+1)}{2n^2} - \frac{n(n+1)(2n+1)}{12n^4}} < \prod_{k=1}^n \left( 1 + \frac{k}{n^2} \right) < e^{\frac{n(n+1)}{2n^2}} \]
+The exponents simplify as $n \to \infty$:
+\[ \frac{n(n+1)}{2n^2} = \frac{1}{2}\left(1 + \frac{1}{n}\right) \to \frac{1}{2} \]
+\[ \frac{n(n+1)(2n+1)}{12n^4} = \frac{(1+\frac{1}{n})(2+\frac{1}{n})}{12n} \to 0 \]
+By the squeeze theorem, $\displaystyle \lim_{n \to \infty} \prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right) = e^{1/2} = \sqrt{e}$.
+
+\textbf{(iv)} Taking logarithms:
+\[ \ln \left(\prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right)\right) = \sum_{k=1}^n \ln\left(1 + \frac{k}{n^2}\right) \]
+For small $x$ (see (i)), $\ln(1+x) \approx x$. With $x = k/n^2$:
+\[ \sum_{k=1}^n \ln\left(1 + \frac{k}{n^2}\right) \approx \sum_{k=1}^n \frac{k}{n^2} = \frac{1}{n^2} \cdot \frac{n(n+1)}{2} = \frac{n+1}{2n} \]
+This is a Riemann sum for $\int_0^1 x \, dx$ with partition width $\Delta x = 1/n$ and sample points $x_k = k/n$:
+\[ \sum_{k=1}^n \frac{k}{n} \cdot \frac{1}{n} = \frac{1}{n^2}\sum_{k=1}^n k \to \int_0^1 x \, dx = \frac{1}{2} \]
+Therefore, $\displaystyle \lim_{n \to \infty} \ln \left(\prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right)\right) = \int_{0}^{1} x \, dx = \frac{1}{2}$.
 \end{solution}
 
 \begin{takeaways}
 \begin{enumerate}
     \item \textbf{Logs turn Products to Sums:} This is the standard strategy for dealing with $\prod (1+a_k)$.
     \item \textbf{Taylor Polynomial Bounds:} $\ln(1+x) \approx x - x^2/2$. Using the first few terms of a Taylor series as an inequality is a very common "Harder" topic.
+    \item $\sum_{k=1}^n k = \frac{n(n+1)}{2}$. Still really useful to remember!
+    \item $\ln(1 + x) < x$ for $x > 0$
+    \item $\ln (1 + x) = x - x^2/2 + x^3/3 - ...$ (alternating series)
 \end{enumerate}
 \end{takeaways}
 
