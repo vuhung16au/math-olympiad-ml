@@ -6,10 +6,12 @@
 *.fdb_latexmk
 *.fls
 *.synctex.gz
-*.pdf
+# *.pdf
 __pycache__/
 
 
 samples/
 samples2/
 problems/extracted/
+
+!release/*.pdf
