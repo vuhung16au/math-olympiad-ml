@@ -308,9 +308,13 @@ Exponentiate both sides:
 
 % Problem 24: Logarithmic Harmonic Bounds (Sample 32)
 \begin{problem}[The Logarithmic Bound]
-(i) Prove that for $x > 0$, $\frac{1}{x+1} < \ln(x+1) - \ln x < \frac{1}{x}$.
+(i) Prove that for $x > 0$, 
 
-Let $H_n = 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n}$ denote the $n$-th harmonic number.
+\[\frac{1}{x+1} < \ln(x+1) - \ln x < \frac{1}{x} \]
+
+Let 
+
+\[H_n = 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n}\] denote the $n$-th harmonic number.
 
 (ii) Hence, prove that for any integer $n > 1$:
 \[ \ln(n+1) < H_n < 1 + \ln n \]
@@ -695,7 +699,7 @@ Divide by $2^N$:
     \item \textbf{Polynomial Link:} The identity $z^n + 1/z^n = P_n(z+1/z)$ links complex roots of unity to polynomials with real coefficients. These are related to Chebyshev polynomials ($T_n$).
     \item \textbf{Roots to Coefficients:} Harder problems often ask you to evaluate a trigonometric product. This is almost always a signal to form a polynomial equation and use \textbf{Vieta's Product of Roots}.
     \item \textbf{Generalization:} Identifying $N$ as odd was crucial. If $N$ were even, the constant term of $P_N(x)$ would be non-zero, changing the final result.
-    \item Link this problem with Chebyshev polynomial of first kind. Substitute $ \gamma = e^{i\theta}$
+    \item Try substitute $ \gamma = e^{i\theta}$
 
 \end{enumerate}
 \end{takeaways}
@@ -827,9 +831,16 @@ Let $I_n$ be the integral defined for integers $n \ge 0$ by:
     \item[(ii)] Hence, show that:
     \[ I_n = \frac{2^{2n} (n!)^2}{(2n+1)!} \]
     
-    \item[(iii)] Using the substitution $x = \sin\theta$, show that $I_n = \int_{0}^{\frac{\pi}{2}} \cos^{2n+1}\theta \, d\theta$.
+    \item[(iii)] Using the substitution $x = \sin\theta$, show that 
     
-    \item[(iv)] Let $J_n = \int_{0}^{\frac{\pi}{2}} \cos^{2n}\theta \, d\theta$. You are given that $J_n = \frac{\pi (2n)!}{2^{2n+1} (n!)^2}$.
+    \[ I_n = \int_{0}^{\frac{\pi}{2}} \cos^{2n+1}\theta \, d\theta \]
+    
+    \item[(iv)] Let 
+    
+    \[ J_n = \int_{0}^{\frac{\pi}{2}} \cos^{2n}\theta \, d\theta \]. 
+    You are given that 
+    \[ J_n = \frac{\pi (2n)!}{2^{2n+1} (n!)^2} \].
+
     By considering the behaviour of $\cos \theta$ on the interval $(0, \frac{\pi}{2})$, explain why $I_n < J_n$.
     
     \item[(v)] Deduce the inequality:
@@ -891,7 +902,9 @@ Multiply and rearrange:
 Let $\omega = e^{2\pi i/n}$ be an $n$-th root of unity.
 
 \begin{enumerate}
-    \item[(i)] Show that $z^n - 1 = \prod_{k=0}^{n-1} (z - \omega^k)$.
+    \item[(i)] Show that 
+    
+    \[ z^n - 1 = \prod_{k=0}^{n-1} (z - \omega^k) \].
     
     \item[(ii)] By taking logarithms and differentiating, prove:
     \[ \frac{n z^{n-1}}{z^n - 1} = \sum_{k=0}^{n-1} \frac{1}{z - \omega^k} \]

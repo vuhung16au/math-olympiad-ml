@@ -250,13 +250,33 @@ Therefore, the rectangular prism must be a cube to maximize the volume. \hfill $
 
 % Problem 22: Complex Series Summation (Sample 43)
 \begin{problem}[De Moivre's Theorem and Geometric Series]
-Let $\alpha = \cos\theta + i \sin\theta$ and consider the series $C = \alpha^{-n} + \alpha^{-n+1} + \dots + \alpha^{-1} + \alpha^0 + \alpha^1 + \dots + \alpha^n$.
+Let $\alpha = \cos\theta + i \sin\theta$ and consider the series 
+
+\[ 
+C = \alpha^{-n} + \alpha^{-n+1} + \dots + \alpha^{-1} + \alpha^0 + \alpha^1 + \dots + \alpha^n 
+\] for a positive integer $n$.
 
 \begin{enumerate}[label=(\roman*)]
     \item Show that $\alpha^k + \alpha^{-k} = 2 \cos k\theta$.
-    \item Prove that $C = \frac{\alpha^n + \alpha^{-n} - (\alpha^{n+1} + \alpha^{-(n+1)})}{(1-\alpha)(1-\bar{\alpha})}$.
-    \item Deduce that $1 + 2(\cos\theta + \cos 2\theta + \dots + \cos n\theta) = \frac{\cos n\theta - \cos (n+1)\theta}{1 - \cos\theta}$.
-    \item Show that $\sum_{k=1}^n \cos \frac{k\pi}{n} = -1$ (independent of $n$).
+    \item Prove that 
+    
+    \[
+    C = \frac{\alpha^n + \alpha^{-n} - (\alpha^{n+1} + \alpha^{-(n+1)})}{(1-\alpha)(1-\bar{\alpha})}
+    \]
+    where $\bar{\alpha}$ is the complex conjugate of $\alpha$.
+
+    \item Deduce that 
+    
+    \[
+    1 + 2\sum_{k=1}^n \cos k\theta 
+    = \frac{\cos n\theta - \cos (n+1)\theta}{1 - \cos\theta}.
+    \]
+
+    \item Show that 
+    
+    \[ 
+    \sum_{k=1}^n \cos \frac{k\pi}{n} = -1 \quad \text{(independent of $n$)}.
+    \]
 \end{enumerate}
 \end{problem}
 
