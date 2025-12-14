@@ -54,14 +54,12 @@ Inverse cube repulsion weak at $x=6$; gravity dominates initially. As object app
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{Inverse Cube Force:} Acceleration $a = \frac{27g}{x^3} - g$ combines repulsive magnetic force and gravity
 \item \textbf{Energy Integration:} Use $\frac{d}{dx}\left(\frac{v^2}{2}\right) = a$ to integrate acceleration with respect to position
 \item \textbf{Integration of Powers:} $\int x^{-3}dx = \frac{x^{-2}}{-2} = -\frac{1}{2x^2}$ is key for inverse cube terms
 \item \textbf{Initial Conditions:} "Released from rest" means $v=0$ at starting position; use to find integration constant
 \item \textbf{Solving Cubics:} Factor known root $(x-6)$ from cubic, then solve remaining quadratic using formula
 \item \textbf{Physical Constraints:} Reject negative solutions ($x > 0$); select root representing next rest point
-\end{itemize}
 \end{takeaways}
 
 \newpage
@@ -117,14 +115,12 @@ For weak resistance ($ku^2 \ll g$), $\ln(1+x) \approx x$ gives $H \approx \frac{
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{Quadratic Air Resistance:} Upward motion has $\ddot{x} = -(g + kv^2) = -g(1 + \frac{v^2}{k/g})$ combining gravity and drag
 \item \textbf{Arctangent Integral:} $\int \frac{1}{a^2+x^2}dx = \frac{1}{a}\arctan\left(\frac{x}{a}\right)$ with $a = \sqrt{g/k}$ gives time to max height
 \item \textbf{Velocity-Displacement:} Use $v\frac{dv}{dx} = -(g+kv^2)$ to relate velocity and position
 \item \textbf{Logarithmic Integration:} Substitution $w = g + kv^2$ transforms $\int \frac{v\,dv}{g+kv^2}$ to $\frac{1}{2k}\int \frac{dw}{w} = \frac{1}{2k}\ln w$
 \item \textbf{Limiting Behavior:} For weak resistance ($ku^2 \ll g$), logarithm approximates to linear, recovering classical result
 \item \textbf{Terminal Velocity:} Downward motion reaches equilibrium at $v_T = \sqrt{g/k}$ when drag balances gravity
-\end{itemize}
 \end{takeaways}
 
 \newpage
@@ -148,14 +144,12 @@ Verify: $t=0 \implies x=3\sqrt{3}$ (max); $t=\frac{\pi}{12} \implies x=\sqrt{3}$
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{SHM General Form:} $x(t) = C + A\cos(nt + \alpha)$ where $C$ is center, $A$ is amplitude, $n$ is angular frequency
 \item \textbf{Period to Frequency:} From period $T = \frac{\pi}{3}$, calculate $n = \frac{2\pi}{T} = 6$
 \item \textbf{Maximum Displacement:} "Maximum displacement from center" is the amplitude ($A = 2\sqrt{3}$), not absolute position
 \item \textbf{Phase Constant:} Starting at maximum means $\cos(\alpha) = 1$, so $\alpha = 0$ (or $2\pi k$)
 \item \textbf{Verification Strategy:} Check multiple time values to confirm equation matches all features (extrema, center crossings, period)
 \item \textbf{Alternative Form:} Can factor common terms: $x = \sqrt{3}(1 + 2\cos(6t))$
-\end{itemize}
 \end{takeaways}
 
 \newpage
@@ -191,7 +185,6 @@ Time delay $2\pi = T/4$ (quarter period). Particle 1 completes 5/8 period, Parti
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{SHM from Rest at Extreme:} Starting from rest at maximum displacement gives $x(t) = a\cos(nt)$ (no phase shift)
 \item \textbf{Time-Shifted Motion:} For particle starting at $t = t_0$, replace $t$ with $(t-t_0)$ in the equation
 \item \textbf{Period and Angular Frequency:} From $T = 8\pi$, get $n = \frac{2\pi}{T} = \frac{1}{4}$
@@ -199,7 +192,6 @@ Time delay $2\pi = T/4$ (quarter period). Particle 1 completes 5/8 period, Parti
 \item \textbf{Cosine Identity:} Use $\cos(\theta - \frac{\pi}{2}) = \sin(\theta)$ to simplify collision equation
 \item \textbf{Periodic Solutions:} $\tan(\frac{t}{4}) = 1$ gives $t = \pi, 5\pi, 9\pi, \ldots$ (multiples of period difference)
 \item \textbf{Validity Check:} Ensure collision time satisfies constraints (e.g., second particle must exist: $t \geq 2\pi$)
-\end{itemize}
 \end{takeaways}
 
 \newpage
@@ -251,7 +243,6 @@ Inverse square force weakens with distance; time $\propto \sqrt{b^3/\mu}$ shows 
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{Inverse Square Law:} Force $F = -\frac{\mu m}{x^2}$ attracts toward origin; acceleration $\ddot{x} = -\frac{\mu}{x^2}$
 \item \textbf{Chain Rule for Derivatives:} Part (i) requires product rule, chain rule, and derivatives of $\cos^{-1}$: $\frac{d}{dx}\cos^{-1}(u) = \frac{-u'}{\sqrt{1-u^2}}$
 \item \textbf{Energy-Based Integration:} Use $\frac{d}{dx}(\frac{v^2}{2}) = -\frac{\mu}{x^2}$ and integrate: $\frac{v^2}{2} = \frac{\mu}{x} + C$
@@ -259,5 +250,4 @@ Inverse square force weakens with distance; time $\propto \sqrt{b^3/\mu}$ shows 
 \item \textbf{Time Integration Setup:} From $v = \frac{dx}{dt}$, rearrange to $dt = \frac{dx}{v}$ and integrate over displacement range
 \item \textbf{Evaluating Complex Integrals:} Use given antiderivative formula, carefully evaluate at endpoints with proper substitution
 \item \textbf{Scaling Analysis:} Time $\propto \sqrt{b^3/\mu}$ shows nonlinear dependence on initial distance
-\end{itemize}
 \end{takeaways}

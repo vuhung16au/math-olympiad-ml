@@ -6,6 +6,9 @@
 \usepackage{amsthm}
 \usepackage{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{enumitem}
@@ -17,6 +20,20 @@
 \usepackage{styles/dl101-colors}
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
+
+% Simple vector macro to support \vect{...} usage
+\newcommand{\vect}[1]{\vec{#1}}
+
+% Upright vector macro used in some problems; map to \vec
+\newcommand{\uvec}[1]{\vec{#1}}
+
+% Map common Unicode symbols to LaTeX equivalents
+\usepackage{newunicodechar}
+\newunicodechar{✓}{\checkmark}
+\newunicodechar{°}{\ensuremath{^\circ}}
+\newunicodechar{²}{\textsuperscript{2}}
+% Make \textdegree safe in math mode
+\renewcommand{\textdegree}{\ensuremath{^\circ}}
 
 \geometry{
   a4paper,

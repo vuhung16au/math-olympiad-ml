@@ -6,17 +6,17 @@
 A particle of mass $1 \text{ kg}$ is projected from the origin with speed $40 \text{ m s}^{-1}$ at an angle $30^\circ$ to the horizontal plane.
 
 \begin{enumerate}[label=(\roman*)]
-    \item Use the information above to show that the initial velocity of the particle is $\v{v}(0) = \begin{pmatrix} 20\sqrt{3} \\ 20 \end{pmatrix}$.
+    \item Use the information above to show that the initial velocity of the particle is $\vect{v}(0) = \begin{pmatrix} 20\sqrt{3} \\ 20 \end{pmatrix}$.
 \end{enumerate}
 
 The forces acting on the particle are gravity and air resistance. The air resistance is proportional to the velocity vector with a constant of proportionality $4$. Let the acceleration due to gravity be $10 \text{ m s}^{-2}$.
 
-The position vector of the particle, at time $t$ seconds after the particle is projected, is $\v{r}(t)$ and the velocity vector is $\v{v}(t)$.
+The position vector of the particle, at time $t$ seconds after the particle is projected, is $\vect{r}(t)$ and the velocity vector is $\vect{v}(t)$.
 
 \begin{enumerate}[label=(\roman*), resume]
-    \item Show that $\v{v}(t) = \begin{pmatrix} 20\sqrt{3}e^{-4t} \\[6pt] \dfrac{45}{2}e^{-4t} - \dfrac{5}{2} \end{pmatrix}$.
+    \item Show that $\vect{v}(t) = \begin{pmatrix} 20\sqrt{3}e^{-4t} \\[6pt] \dfrac{45}{2}e^{-4t} - \dfrac{5}{2} \end{pmatrix}$.
     
-    \item Show that $\v{r}(t) = \begin{pmatrix} 5\sqrt{3}\left(1 - e^{-4t}\right) \\[6pt] \dfrac{45}{8}\left(1 - e^{-4t}\right) - \dfrac{5}{2}t \end{pmatrix}$.
+    \item Show that $\vect{r}(t) = \begin{pmatrix} 5\sqrt{3}\left(1 - e^{-4t}\right) \\[6pt] \dfrac{45}{8}\left(1 - e^{-4t}\right) - \dfrac{5}{2}t \end{pmatrix}$.
     
     \item The graphs $y = 1 - e^{-4x}$ and $y = \frac{4x}{9}$ are given in the diagram. Using the diagram, find the horizontal range of the particle, giving your answer rounded to one decimal place. (Note: The intersection occurs at $x_0 \approx 2.25$.)
 \end{enumerate}
@@ -25,10 +25,10 @@ The position vector of the particle, at time $t$ seconds after the particle is p
 \begin{solution}
 \textbf{(i)} Given $V = 40 \text{ m s}^{-1}$, $\theta = 30^\circ$:
 \[
-\v{v}(0) = \begin{pmatrix} 40 \cos 30^\circ \\ 40 \sin 30^\circ \end{pmatrix} = \begin{pmatrix} 40 \cdot \frac{\sqrt{3}}{2} \\ 40 \cdot \frac{1}{2} \end{pmatrix} = \begin{pmatrix} 20\sqrt{3} \\ 20 \end{pmatrix} \quad \text{(shown)}
+\vect{v}(0) = \begin{pmatrix} 40 \cos 30^\circ \\ 40 \sin 30^\circ \end{pmatrix} = \begin{pmatrix} 40 \cdot \frac{\sqrt{3}}{2} \\ 40 \cdot \frac{1}{2} \end{pmatrix} = \begin{pmatrix} 20\sqrt{3} \\ 20 \end{pmatrix} \quad \text{(shown)}
 \]
 
-\textbf{(ii)} Newton's law with $m=1$, $g=10$, resistance $4\v{v}$ gives $\dot{\v{v}} = \begin{pmatrix} 0 \\ -10 \end{pmatrix} - 4\v{v}$, so $\ddot{x} = -4\dot{x}$ and $\ddot{y} = -10 - 4\dot{y}$.
+	extbf{(ii)} Newton's law with $m=1$, $g=10$, resistance $4\vect{v}$ gives $\dot{\vect{v}} = \begin{pmatrix} 0 \\ -10 \end{pmatrix} - 4\vect{v}$, so $\ddot{x} = -4\dot{x}$ and $\ddot{y} = -10 - 4\dot{y}$.
 
 \textbf{Horizontal:} $\frac{d\dot{x}}{dt} = -4\dot{x} \implies \dot{x} = Ae^{-4t}$. With $\dot{x}(0) = 20\sqrt{3}$: $\dot{x} = 20\sqrt{3}e^{-4t}$.
 
@@ -36,7 +36,7 @@ The position vector of the particle, at time $t$ seconds after the particle is p
 With $\dot{y}(0) = 20$: $C = \frac{45}{2}$, so $\dot{y} = \frac{45}{2}e^{-4t} - \frac{5}{2}$.
 
 \[
-\boxed{\v{v}(t) = \begin{pmatrix} 20\sqrt{3}e^{-4t} \\[4pt] \frac{45}{2}e^{-4t} - \frac{5}{2} \end{pmatrix}} \quad \text{(shown)}
+\boxed{\vect{v}(t) = \begin{pmatrix} 20\sqrt{3}e^{-4t} \\[4pt] \frac{45}{2}e^{-4t} - \frac{5}{2} \end{pmatrix}} \quad \text{(shown)}
 \]
 
 \textbf{(iii)} Integrating velocity from $t=0$:
@@ -46,7 +46,7 @@ With $\dot{y}(0) = 20$: $C = \frac{45}{2}$, so $\dot{y} = \frac{45}{2}e^{-4t} - 
 \textbf{Vertical:} $y(t) = \int \left(\frac{45}{2}e^{-4t} - \frac{5}{2}\right) dt = -\frac{45}{8}e^{-4t} - \frac{5}{2}t + C_2$. With $y(0)=0$: $C_2 = \frac{45}{8}$, so $y(t) = \frac{45}{8}(1-e^{-4t}) - \frac{5}{2}t$.
 
 \[
-\boxed{\v{r}(t) = \begin{pmatrix} 5\sqrt{3}(1 - e^{-4t}) \\[4pt] \frac{45}{8}(1 - e^{-4t}) - \frac{5}{2}t \end{pmatrix}} \quad \text{(shown)}
+\boxed{\vect{r}(t) = \begin{pmatrix} 5\sqrt{3}(1 - e^{-4t}) \\[4pt] \frac{45}{8}(1 - e^{-4t}) - \frac{5}{2}t \end{pmatrix}} \quad \text{(shown)}
 \]
 
 \textbf{(iv)} Ground impact when $y(t)=0$: $\frac{45}{8}(1-e^{-4t}) - \frac{5}{2}t = 0 \implies 45(1-e^{-4t}) = 20t \implies 1-e^{-4t} = \frac{4t}{9}$.
@@ -57,13 +57,11 @@ From diagram, intersection at $t \approx 2.25$. Range: $x(2.25) = 5\sqrt{3}\left
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
-\item \textbf{Vector Force Equation:} Air resistance $4\v{v}$ opposes motion; Newton's law gives $\dot{\v{v}} = \v{g} - 4\v{v}$ for unit mass
+\item \textbf{Vector Force Equation:} Air resistance $4\vect{v}$ opposes motion; Newton's law gives $\dot{\vect{v}} = \vect{g} - 4\vect{v}$ for unit mass
 \item \textbf{Separating Components:} Solve horizontal ($\ddot{x} = -4\dot{x}$) and vertical ($\ddot{y} = -10 - 4\dot{y}$) equations independently
 \item \textbf{Integrating Factor Method:} For $\frac{d\dot{y}}{dt} + 4\dot{y} = -10$, multiply by $e^{4t}$ to get $\frac{d}{dt}(\dot{y}e^{4t}) = -10e^{4t}$
 \item \textbf{Graphical Solutions:} Transcendental equations like $1-e^{-4t} = \frac{4t}{9}$ often require graphical or numerical methods
 \item \textbf{Integration Constants:} Apply initial position conditions after integrating velocity to find position functions
-\end{itemize}
 \end{takeaways}
 
 \newpage
@@ -74,7 +72,7 @@ A particle of unit mass moves horizontally in a straight line. It experiences a 
 
 Initially the particle is at the origin and has a velocity of $40 \text{ m s}^{-1}$ to the right. After the particle has moved $15 \text{ m}$ to the right, its velocity is $10 \text{ m s}^{-1}$ (to the right).
 
-\begin{enumerate}[(i)]
+\begin{enumerate}[label=(\roman*)]
     \item Show that $v = 40e^{-kx}$.
     \item Show that $k = \frac{\ln 4}{15}$.
     \item At what time will the particle's velocity be $30 \text{ m s}^{-1}$ to the right?
@@ -110,13 +108,11 @@ Thus $T = \frac{1}{120k} = \frac{1}{120 \cdot \frac{\ln 4}{15}} = \frac{15}{120\
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{Quadratic Resistance Form:} Acceleration $\ddot{x} = -kv^2$ leads to velocity-displacement relationship through $v\frac{dv}{dx} = -kv^2$
 \item \textbf{Exponential Velocity Decay:} Separating variables gives $\frac{dv}{v} = -kdx$, leading to $v = v_0 e^{-kx}$
 \item \textbf{Finding Constants:} Use given conditions (here: $v=10$ at $x=15$, $v=40$ at $x=0$) to determine resistance coefficient $k$
 \item \textbf{Time Integration:} Converting to time requires $\frac{dv}{v^2} = -kdt$, yielding $\int v^{-2}dv = [-v^{-1}]$ form
 \item \textbf{Asymptotic Behavior:} With quadratic resistance, particle approaches rest asymptotically but never reaches $v=0$ in finite time
-\end{itemize}
 \end{takeaways}
 
 \newpage
@@ -160,13 +156,11 @@ y = \frac{1}{k}\left(\frac{10}{k}-30\right) \cdot \frac{kx}{40} + \frac{10}{k^2}
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{Initial Velocity Components:} For angle $\theta$ below horizontal, $\dot{x}(0) = V\cos\theta$ (positive), $\dot{y}(0) = -V\sin\theta$ (negative)
 \item \textbf{Exponential Motion Solution:} Linear resistance $\ddot{x} = -k\dot{x}$ yields $\dot{x} = Ae^{-kt}$ and $x = \frac{A}{k}(1-e^{-kt})$
 \item \textbf{Non-homogeneous ODE:} For $\ddot{y} = -k\dot{y} - 10$, separate variables $\frac{d\dot{y}}{k\dot{y}+10} = -dt$ to integrate
 \item \textbf{Eliminating Time:} Express $e^{-kt}$ from one equation, then substitute into the other to eliminate $t$
 \item \textbf{Logarithmic Trajectories:} Linear drag creates logarithmic terms in Cartesian trajectory equations
-\end{itemize}
 \end{takeaways}
 
 \newpage
@@ -208,13 +202,11 @@ Thus $e^{-kt} = 1 - \frac{kd}{2v_0} = \frac{2v_0-kd}{2v_0} \implies t = -\frac{1
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{Identical Force Laws:} Both particles satisfy $\ddot{x} = -g - k\dot{x}$, but initial conditions differ
 \item \textbf{First-Order Linear ODE:} Equation $\frac{d\dot{x}}{dt} = -(g+k\dot{x})$ solved by separating variables: $\frac{d\dot{x}}{g+k\dot{x}} = -dt$
 \item \textbf{Logarithmic Integration:} Yields $\frac{1}{k}\ln(g+k\dot{x}) = -t + C$, leading to $\dot{x}(t) = \frac{1}{k}[(g+kv_0)e^{-kt} - g]$
 \item \textbf{Cancellation Symmetry:} When finding meeting point, identical terms (like $-\frac{gt}{k}$) cancel, simplifying algebra
 \item \textbf{Constraint Interpretation:} Condition $v_0 < \frac{g}{k}$ ensures $g-kv_0 > 0$; condition $d < \frac{2v_0}{k}$ ensures positive time
-\end{itemize}
 \end{takeaways}
 
 \newpage
@@ -256,12 +248,10 @@ The cubic resistance $v^3$ dominates at high velocities. The particle stops at f
 \end{solution}
 
 \begin{takeaways}
-\begin{itemize}
 \item \textbf{Combined Resistance:} Force $R = v + v^3 = v(1+v^2)$ combines linear and cubic terms
 \item \textbf{Velocity-Displacement:} Using $v\frac{dv}{dx} = -v(1+v^2)$ simplifies to $\frac{dv}{1+v^2} = -dx$
 \item \textbf{Arctangent Relationship:} Integration $\int \frac{1}{1+v^2}dv = \tan^{-1}v$ leads to $x = \tan^{-1}Q - \tan^{-1}v$
 \item \textbf{Partial Fractions for Time:} $\frac{1}{v(1+v^2)} = \frac{1}{v} - \frac{v}{1+v^2}$ enables integration for time relation
 \item \textbf{Exponential from Logarithm:} From $\frac{1}{2}\ln\frac{v^2}{1+v^2} = -t + C$, solve for $v^2$ as function of $t$
 \item \textbf{Finite Limiting Distance:} Strong cubic resistance causes particle to stop at $x = \tan^{-1}(Q)$ as $t \to \infty$
-\end{itemize}
 \end{takeaways}

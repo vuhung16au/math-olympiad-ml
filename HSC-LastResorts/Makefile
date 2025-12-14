@@ -13,6 +13,7 @@ clean:
 release:
 	$(LATEX) $(TEX)
 	mv HSC-LastResorts.pdf releases/
+final: clean pdf release
 open:
 	open HSC-LastResorts.pdf
 pdf:
@@ -24,4 +25,5 @@ help:
 	@echo "  pdf     - Compile .tex file to .pdf"
 	@echo "  clean   - Remove build artifacts"
 	@echo "  release - Build and move PDF to releases/"
+	@echo "  final   - Clean, build PDF, and release"
 	@echo "  help    - Show this help message"

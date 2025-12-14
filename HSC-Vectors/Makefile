@@ -12,7 +12,7 @@ else
 	OPEN_CMD = start
 endif
 
-.PHONY: all pdf clean release open
+.PHONY: all pdf clean release open final help
 
 all: pdf
 
@@ -33,3 +33,15 @@ release: $(PDFFILE)
 
 open: $(PDFFILE)
 	$(OPEN_CMD) $(PDFFILE)
+
+final: clean pdf release
+
+help:
+	@echo "Available targets:"
+	@echo "  all     - Build the main PDF (default)"
+	@echo "  pdf     - Compile .tex file to .pdf using Docker"
+	@echo "  clean   - Remove build artifacts"
+	@echo "  release - Copy PDF to releases/"
+	@echo "  open    - Open the generated PDF"
+	@echo "  final   - Clean, build PDF, and release"
+	@echo "  help    - Show this help message"

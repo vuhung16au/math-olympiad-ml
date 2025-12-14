@@ -1,4 +1,4 @@
-\ProvidesPackage{dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
+\ProvidesPackage{styles/dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
 
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{etoolbox}
@@ -67,5 +67,6 @@
 % Convenience environments
 \newenvironment{problem}[1][]{\begin{problembox}[#1]}{\end{problembox}}
 \newenvironment{solution}[1][]{\begin{solutionbox}[#1]}{\end{solutionbox}}
-\newenvironment{takeaways}[1][]{\begin{takeawaysbox}[#1]}{\end{takeawaysbox}}
+% Allow list items directly inside takeaways by wrapping an itemize environment
+\newenvironment{takeaways}[1][]{\begin{takeawaysbox}[#1]\begin{itemize}}{\end{itemize}\end{takeawaysbox}}
 
