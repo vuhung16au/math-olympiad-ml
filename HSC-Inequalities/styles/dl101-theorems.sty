@@ -1,0 +1,87 @@
+\ProvidesPackage{dl101-theorems}[2025/10/20 DL101 theorem environments]
+% Load tcolorbox with the full feature set used across styles
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{amsthm}
+% Ensure color palette is available before defining themed boxes (explicit relative path)
+\RequirePackage{styles/dl101-colors}
+% Box styles that define theorembox/examplebox/etc (explicit relative path)
+\RequirePackage{styles/dl101-boxes}
+% Colors (assume base palette)
+\colorlet{theoremblue}{bookpurple!80}
+\colorlet{theoremgray}{softivory}
+\colorlet{definitionblue}{bookpurple!70}
+
+% Platform-specific theorem environment setup
+% Check if running in Docker (Ubuntu) by looking for /etc/os-release
+\IfFileExists{/etc/os-release}{%
+  % Running in Docker/Ubuntu - define theorem counter first, then use tcolorbox
+  \newtheorem{theorem}{Theorem}[chapter]
+  \theoremstyle{plain}
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{corollary}[theorem]{Corollary}
+
+  \theoremstyle{definition}
+  \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{example}[theorem]{Example}
+
+  \theoremstyle{remark}
+  \newtheorem{remark}[theorem]{Remark}
+
+  % proof environment is already defined by amsthm
+
+}{%
+  % Running on Mac - define theorem counter first, then use tcolorbox
+  \newtheorem{theorem}{Theorem}[chapter]
+  \theoremstyle{plain}
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{corollary}[theorem]{Corollary}
+
+  \theoremstyle{definition}
+  \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{example}[theorem]{Example}
+
+  \theoremstyle{remark}
+  \newtheorem{remark}[theorem]{Remark}
+
+  % proof environment is already defined by amsthm
+
+}
+
+% Redefine theorem environments to use tcolorbox from dl101-boxes
+\makeatletter
+\renewenvironment{theorem}[1][]{\begin{theorembox}[title={\bfseries Theorem~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{theorembox}}
+\renewenvironment{example}[1][]{\begin{examplebox}[title={\bfseries Example~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{examplebox}}
+\renewenvironment{remark}[1][]{\begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{remarkbox}}
+\renewenvironment{definition}[1][]{\begin{definitionbox}[title={\bfseries Definition~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{definitionbox}}
+\makeatother
+
+% Custom list for takeaways (since keytakeaways uses tcolorbox) - DISABLED
+% \RequirePackage{tocloft}
+% \newlistof{takeaways}{tak}{List of Takeaways}
+
+% Add list entries for examples and remarks
+\makeatletter
+% Patch example environment to add to list - DISABLED
+% \let\old@example\example
+% \let\old@endexample\endexample
+% \renewenvironment{example}[1][]{%
+%   \old@example[#1]%
+%   \@writeexample{\protect\numberline{\theexample}#1}%
+% }{%
+%   \old@endexample%
+% }
+
+% Patch remark environment to add to list - DISABLED
+% \let\old@remark\remark
+% \let\old@endremark\endremark
+% \renewenvironment{remark}[1][]{%
+%   \old@remark[#1]%
+%   \@writeremark{\protect\numberline{\theremark}#1}%
+% }{%
+%   \old@endremark%
+% }
+\makeatother
+
+

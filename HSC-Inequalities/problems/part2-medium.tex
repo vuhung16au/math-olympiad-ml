@@ -127,27 +127,27 @@ A rectangular prism with all equal dimensions is a cube.
 \item Equality in AM-GM occurs when all terms are equal ($ab = bc = ca \Rightarrow a = b = c$)
 \end{takeaways}
 
-\begin{remark}[Two Approaches to Proving AM-GM]
-The AM-GM inequality states that for positive reals $x_1, x_2, \ldots, x_n$:
-\[ \frac{x_1 + x_2 + \cdots + x_n}{n} \geq \sqrt[n]{x_1 x_2 \cdots x_n} \]
+% \begin{remark}[Two Approaches to Proving AM-GM]
+% The AM-GM inequality states that for positive reals $x_1, x_2, \ldots, x_n$:
+% \[ \frac{x_1 + x_2 + \cdots + x_n}{n} \geq \sqrt[n]{x_1 x_2 \cdots x_n} \]
 
-\textbf{(a) Proof by Induction on $n$:}
-\begin{enumerate}
-    \item \textit{Base case:} $n=2$ follows from $(\sqrt{x_1} - \sqrt{x_2})^2 \geq 0$
-    \item \textit{Forward-backward step:} Prove $n=2^k \Rightarrow n=2^{k+1}$ by grouping pairs
-    \item \textit{Backward step:} Show $n=k \Rightarrow n=k-1$ by setting $x_k = \frac{x_1 + \cdots + x_{k-1}}{k-1}$ and applying the $n=k$ case
-\end{enumerate}
+% \textbf{(a) Proof by Induction on $n$:}
+% \begin{enumerate}
+%     \item \textit{Base case:} $n=2$ follows from $(\sqrt{x_1} - \sqrt{x_2})^2 \geq 0$
+%     \item \textit{Forward-backward step:} Prove $n=2^k \Rightarrow n=2^{k+1}$ by grouping pairs
+%     \item \textit{Backward step:} Show $n=k \Rightarrow n=k-1$ by setting $x_k = \frac{x_1 + \cdots + x_{k-1}}{k-1}$ and applying the $n=k$ case
+% \end{enumerate}
 
-\textbf{(b) Proof using Convex Functions:}
-\begin{enumerate}
-    \item Consider $f(x) = -\ln(x)$, which is convex for $x > 0$ (since $f''(x) = \frac{1}{x^2} > 0$)
-    \item By Jensen's inequality for convex functions:
-    \[ f\left(\frac{x_1 + x_2 + \cdots + x_n}{n}\right) \leq \frac{f(x_1) + f(x_2) + \cdots + f(x_n)}{n} \]
-    \item Substituting $f(x) = -\ln(x)$:
-    \[ -\ln\left(\frac{x_1 + \cdots + x_n}{n}\right) \leq \frac{-\ln(x_1) - \cdots - \ln(x_n)}{n} = -\ln(\sqrt[n]{x_1 \cdots x_n}) \]
-    \item Multiply by $-1$ and exponentiate to obtain AM-GM
-\end{enumerate}
-\end{remark}
+% \textbf{(b) Proof using Convex Functions:}
+% \begin{enumerate}
+%     \item Consider $f(x) = -\ln(x)$, which is convex for $x > 0$ (since $f''(x) = \frac{1}{x^2} > 0$)
+%     \item By Jensen's inequality for convex functions:
+%     \[ f\left(\frac{x_1 + x_2 + \cdots + x_n}{n}\right) \leq \frac{f(x_1) + f(x_2) + \cdots + f(x_n)}{n} \]
+%     \item Substituting $f(x) = -\ln(x)$:
+%     \[ -\ln\left(\frac{x_1 + \cdots + x_n}{n}\right) \leq \frac{-\ln(x_1) - \cdots - \ln(x_n)}{n} = -\ln(\sqrt[n]{x_1 \cdots x_n}) \]
+%     \item Multiply by $-1$ and exponentiate to obtain AM-GM
+% \end{enumerate}
+% \end{remark}
 
 % ==========================================
 
@@ -397,4 +397,55 @@ By induction, $e^x > \frac{x^n}{n!}$ for all $n \geq 1$ and $x \geq 0$.
 \begin{takeaways}
 \item Use derivative to show function is increasing, combined with initial value
 \item In induction step, derivative of $g(x)$ involves inductive hypothesis directly
+\end{takeaways}
+
+% ==========================================
+
+\begin{problem}[Reciprocal Sum Inequality via AM-HM]
+Let $a, b, c$ be positive real numbers.
+\begin{enumerate}
+    \item[(i)] Prove the AM-HM inequality: $\frac{a+b+c}{3} \ge \frac{3}{\frac{1}{a} + \frac{1}{b} + \frac{1}{c}}$.
+    \item[(ii)] Hence show that $(a+b+c)\left(\frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a}\right) \ge \frac{9}{2}$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+For (i): Apply AM-GM to $\{a,b,c\}$ and $\{\frac{1}{a},\frac{1}{b},\frac{1}{c}\}$, then multiply. For (ii): Use the form $(x+y+z)\left(\frac{1}{x}+\frac{1}{y}+\frac{1}{z}\right) \ge 9$ with substitution $x=a+b$, $y=b+c$, $z=c+a$.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Apply AM-GM to $a, b, c$:
+\[ a+b+c \ge 3\sqrt[3]{abc} \]
+
+Apply AM-GM to $\frac{1}{a}, \frac{1}{b}, \frac{1}{c}$:
+\[ \frac{1}{a} + \frac{1}{b} + \frac{1}{c} \ge 3\sqrt[3]{\frac{1}{abc}} \]
+
+Multiply these inequalities:
+\begin{align*}
+(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) &\ge 9\sqrt[3]{abc} \cdot \sqrt[3]{\frac{1}{abc}} \\
+&= 9
+\end{align*}
+
+Divide by $3\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right)$ to obtain:
+\[ \frac{a+b+c}{3} \ge \frac{3}{\frac{1}{a} + \frac{1}{b} + \frac{1}{c}} \]
+
+\textbf{Part (ii):} From (i), we have $(x+y+z)\left(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}\right) \ge 9$ for positive $x, y, z$.
+
+Let $x = a+b$, $y = b+c$, $z = c+a$. Then:
+\[ ((a+b) + (b+c) + (c+a)) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge 9 \]
+
+Simplify the left factor:
+\[ 2(a+b+c) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge 9 \]
+
+Divide by 2:
+\[ (a+b+c) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge \frac{9}{2} \]
+\end{solution}
+
+\begin{takeaways}
+\item The AM-HM inequality follows from applying AM-GM to both a set and its reciprocals
+\item The inequality $(x+y+z)(\frac{1}{x}+\frac{1}{y}+\frac{1}{z}) \ge 9$ is fundamental and versatile
+\item Strategic substitution (e.g., $x=a+b$) transforms complex expressions into standard forms
+\item Equality holds when $a=b=c$, giving $3a \cdot \frac{3}{2a} = \frac{9}{2}$
 \end{takeaways}
