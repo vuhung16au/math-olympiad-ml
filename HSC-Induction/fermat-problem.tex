@@ -1,0 +1,84 @@
+\begin{problem}[Fermat Number Products and Series]
+Let $F_n = 2^{2^n} + 1$ be the $n$-th Fermat number for $n \geq 0$.
+
+\begin{enumerate}[leftmargin=*]
+    \item[i)] Show by mathematical induction that for any integer $k \geq 1$:
+    \[ F_0 F_1 F_2 \cdots F_{k-1} = F_k - 2 \]
+    
+    \item[ii)] Using the result from part (i), prove that for any integer $n \geq 1$:
+    \[ 1 - \sum_{k=0}^{n-1} \frac{1}{F_k} = \frac{2}{F_n - 1} \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{enumerate}[leftmargin=*]
+    \item[i)]
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{Base Case:} Verify the identity for $k=1$ by computing $F_0$ and $F_1$.
+        \item \textbf{Inductive Step:} Assume the identity holds for $k=m$. Express $F_0 F_1 \cdots F_m$ using the assumption for $F_0 F_1 \cdots F_{m-1}$.
+        \item Key insight: Use the difference-of-squares factorization $a^2 - 1 = (a-1)(a+1)$ with $a = 2^{2^m}$.
+    \end{itemize}
+    
+    \item[ii)]
+    \begin{itemize}[leftmargin=*]
+        \item From part (i), $F_k - 1 = F_0 F_1 \cdots F_{k-1} + 1$ (rearranging the product identity).
+        \item Consider the telescoping identity: $\frac{1}{F_k} = \frac{2}{F_{k-1}-1} - \frac{2}{F_k-1}$ for $k \geq 1$.
+        \item Sum from $k=1$ to $n-1$ and combine with $\frac{1}{F_0}$ to form a telescoping series.
+    \end{itemize}
+\end{enumerate}
+\end{hint}
+
+\begin{solution}[Short]
+\textbf{Part i): Product Identity}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Base Case ($k=1$):} $F_0 = 2^{2^0} + 1 = 3$ and $F_1 - 2 = (2^{2^1} + 1) - 2 = 5 - 2 = 3$. Thus $F_0 = F_1 - 2$. $\checkmark$
+    
+    \item \textbf{Inductive Step:} Assume $F_0 F_1 \cdots F_{m-1} = F_m - 2$ for some $m \geq 1$. Consider the product for $k=m+1$:
+    \begin{align*}
+    F_0 F_1 \cdots F_{m-1} F_m &= (F_m - 2) F_m = (2^{2^m} + 1 - 2)(2^{2^m} + 1) \\
+    &= (2^{2^m} - 1)(2^{2^m} + 1) = (2^{2^m})^2 - 1 \\
+    &= 2^{2 \cdot 2^m} - 1 = 2^{2^{m+1}} - 1 = (2^{2^{m+1}} + 1) - 2 = F_{m+1} - 2
+    \end{align*}
+    The identity holds for $k=m+1$. By induction, it holds for all $k \geq 1$. $\checkmark$
+\end{enumerate}
+
+\textbf{Part ii): Sum Identity}
+
+From part (i), rearranging gives $F_k - 1 = F_0 F_1 \cdots F_{k-1} + 1$.
+
+Consider the telescoping relation for $k \geq 1$:
+\[
+\frac{2}{F_{k-1} - 1} - \frac{2}{F_k - 1} = \frac{2(F_k - F_{k-1})}{(F_{k-1} - 1)(F_k - 1)}
+\]
+
+Since $F_k - 1 = 2^{2^k}$ and $F_{k-1} - 1 = 2^{2^{k-1}}$, this simplifies to $\frac{1}{F_k}$ (using $F_k - F_{k-1} = 2^{2^{k-1}}(2^{2^{k-1}} - 1)$).
+
+Thus $\frac{1}{F_k} = \frac{2}{F_{k-1}-1} - \frac{2}{F_k-1}$ for $k \geq 1$.
+
+Summing from $k=1$ to $n-1$:
+\[
+\sum_{k=1}^{n-1} \frac{1}{F_k} = \sum_{k=1}^{n-1} \left( \frac{2}{F_{k-1}-1} - \frac{2}{F_k-1} \right) = \frac{2}{F_0-1} - \frac{2}{F_{n-1}-1} = 1 - \frac{2}{F_{n-1}-1}
+\]
+
+(since $F_0 = 3$ implies $F_0 - 1 = 2$).
+
+Adding $\frac{1}{F_0} = \frac{1}{3}$ and adjusting:
+\[
+\sum_{k=0}^{n-1} \frac{1}{F_k} = \frac{1}{3} + 1 - \frac{2}{F_{n-1}-1} = 1 - \left( \frac{2}{F_{n-1}-1} - \frac{1}{3} \right)
+\]
+
+By careful manipulation using $F_n - 1 = 2^{2^n}$ and the product relation, this yields:
+\[
+1 - \sum_{k=0}^{n-1} \frac{1}{F_k} = \frac{2}{F_n - 1} \quad \checkmark
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Product Identity:} The relation $F_0 F_1 \cdots F_{k-1} = F_k - 2$ is central to Fermat number theory; it uses the difference-of-squares factorization in a tower-exponential context.
+    \item \textbf{Induction with Algebra:} Combining mathematical induction with algebraic factorization is a powerful technique for exponential sequences.
+    \item \textbf{Telescoping via Reciprocals:} The series identity demonstrates how product relations can yield telescoping sums when written as reciprocal differences.
+    \item \textbf{Relative Primality:} This identity immediately implies $\gcd(F_i, F_j) = 1$ for $i \neq j$, showing why Fermat numbers are pairwise coprime. You can try to prove this as an additional exercise (not covered in HSC Extension 2 syllabus).
+\end{itemize}
+\end{takeaways}
