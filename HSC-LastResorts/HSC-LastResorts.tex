@@ -153,11 +153,50 @@ They satisfy the three-term recurrence for $n\ge 1$:
 
 These identities are frequently useful for transforming certain cubic equations by matching the structure of $T_3(x)$.
 
+\subsection{Chebyshev Polynomials (Second Kind)}
+The Chebyshev polynomials of the second kind $U_n(x)$ form another family of orthogonal polynomials on $[-1,1]$, closely related to the first kind. They are defined by the trigonometric identity:
+\[ U_n(x) = \frac{\sin\big((n+1)\arccos x\big)}{\sin(\arccos x)}. \]
+
+Equivalently, if $x = \cos\theta$, then:
+\[ U_n(\cos\theta) = \frac{\sin((n+1)\theta)}{\sin\theta}. \]
+
+\subsubsection{Recurrence Formula}
+The second kind Chebyshev polynomials satisfy the same three-term recurrence as the first kind, but with different initial conditions:
+\[ U_{n+1}(x) = 2x\,U_n(x) - U_{n-1}(x), \quad U_0(x)=1,\; U_1(x)=2x. \]
+
+\subsubsection{Explicit Low-Degree Polynomials}
+\[ U_0(x) = 1, \quad U_1(x) = 2x, \quad U_2(x) = 4x^2 - 1, \quad U_3(x) = 8x^3 - 4x. \]
+
+\subsubsection{Relationship to First Kind}
+The Chebyshev polynomials of the first and second kind are related by:
+\[ U_n(x) = \frac{T'_{n+1}(x)}{n+1}, \quad T_n(x) = U_n(x) - x\,U_{n-1}(x). \]
+
+Additionally, they satisfy:
+\[ T_n(x) = \cos(n\arccos x) \quad \text{and} \quad U_n(x) = \frac{\sin((n+1)\arccos x)}{\sqrt{1-x^2}}. \]
+
+\subsubsection{Key Properties}
+\begin{itemize}[leftmargin=*]
+  \item Both $T_n$ and $U_n$ are orthogonal polynomials on $[-1,1]$ with respect to different weight functions.
+  \item $T_n(x)$ has the minimal leading coefficient among all monic polynomials of degree $n$ bounded by 1 on $[-1,1]$.
+  \item The zeros of $U_n(x)$ are simple and lie in the interior of $(-1,1)$.
+  \item Both families play a crucial role in approximation theory and the study of polynomial bounds.
+\end{itemize}
+
+These polynomials appear frequently in Problem~16 when dealing with bounded polynomial coefficients and optimal approximations.
+
 \subsection{Optimization Techniques}
 \subsubsection{Lagrange Multipliers (Conceptual)}
 To optimize $f(x,y,z)$ subject to constraint $g(x,y,z) = 0$, look for points where:
 \[\nabla f = \lambda \nabla g\]
 This often reduces to applying AM-GM or Cauchy-Schwarz in HSC problems.
+
+Here, $\nabla f$ and $\nabla g$ are the gradients of $f$ and $g$, respectively, 
+and $\lambda$ is a scalar known as the Lagrange multiplier.
+
+The gradient is defined as:
+
+\[\nabla f = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right)\]
+
 Good to know though the technique is not covered at HSC level.
 
 \subsection{Notation and Conventions}

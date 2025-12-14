@@ -164,16 +164,17 @@ Consider the polynomial $P(z) = z^5 + az^4 + bz^3 + cz^2 + dz + e$ where all coe
 (c) Given that $P(z)$ has roots $r_1, r_2, r_3, r_4, r_5$ with $|r_1| = |r_2| = |r_3| = 1$ and $|r_4|, |r_5| < 1$, prove that:
 \[ |a + \overline{r_4} + \overline{r_5}| \geq 3 \]
 
-(d) 
-
-
-\textbf{Rouché's Theorem:} Let $f(z)$ and $g(z)$ be analytic functions inside and on a simple closed curve $C$. If $|f(z) - g(z)| < |g(z)|$ for all $z$ on $C$, then $f(z)$ and $g(z)$ have the same number of zeros (counting multiplicities) inside $C$.
-
-\textbf{Note:} Do NOT prove this theorem - use it as given.
-
-
-Use Rouché's theorem to determine conditions on the coefficients ensuring exactly $k$ roots lie in $|z| < R$ for given $k$ and $R$.
+(d) Use Rouché's theorem to determine conditions on the coefficients ensuring exactly $k$ roots lie in $|z| < R$ for given $k$ and $R$.
 \end{problem}
+
+\textbf{Rouché's Theorem:} 
+Let $f(z)$ and $g(z)$ be analytic functions inside and on a simple closed curve $C$. 
+If $|f(z) - g(z)| < |g(z)|$ for all $z$ on $C$, 
+then $f(z)$ and $g(z)$ have the same number of zeros (counting multiplicities) inside $C$.
+Do \textbf{NOT} prove this theorem - use it as given.
+
+
+
 
 \begin{hint}
 For part (a), use the maximum modulus principle. For part (b), apply the intermediate value theorem to $|P(z)|$ on the unit circle. Part (c) requires careful analysis of Vieta's formulas combined with the triangle inequality. Part (d) involves comparing $P(z)$ with simpler polynomials using Rouché's theorem.
@@ -401,19 +402,25 @@ Raise to power $n+1$:
 
 % Problem 26: Bounding Products via Logarithms (Sample 34)
 \begin{problem}[Bounding Products]
+
+Let 
+
+\[ P_n = \prod_{k=1}^n \left( 1 + \frac{k}{n^2} \right) \].
+
 (i) Prove that $x - \frac{x^2}{2} < \ln(1+x)$ for $x > 0$.
 
 (ii) By using the inequality $x - \frac{x^2}{2} < \ln(1+x) < x$ for $x>0$, show that:
-\[ e^{\frac{n(n+1)}{2n^2} - \frac{n(n+1)(2n+1)}{12n^4}} < \prod_{k=1}^n \left( 1 + \frac{k}{n^2} \right) < e^{\frac{n(n+1)}{2n^2}} \]
+
+\[ e^{\frac{n(n+1)}{2n^2} - \frac{n(n+1)(2n+1)}{12n^4}} < P_n < e^{\frac{n(n+1)}{2n^2}} \]
 
 (iii) By using the result from part (ii), determine the limit of the product as $n \to \infty$:
 \[
-\lim_{n \to \infty} \prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right)
+\lim_{n \to \infty} P_n
 \]
 
-(iv) Use a Riemann sum argument to show that:
+(iv) Use a Riemann sum argument, or otherwise, to show that:
 \[
-\lim_{n \to \infty} \ln \left(\prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right)\right) = \int_{0}^{1} x \, dx
+\lim_{n \to \infty} \ln \left(P_n\right) = \int_{0}^{1} x \, dx
 \]
 
 \end{problem}
@@ -573,6 +580,38 @@ Now consider the triangle $PCP'$. You know sides 3, 4, 5.
 
 2. Since rotation preserves length, $|P'C| = |PB| = 4$.
 
+\begin{center}
+    \begin{tikzpicture}[scale=1.0]
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (4,0);
+        \coordinate (C) at (2,3.464);
+        \coordinate (P) at (2,1);
+        \coordinate (Pprime) at ($(A)+({0.5*(2) - 0.8660254*(1)},{0.8660254*(2)+0.5*(1)})$);
+
+        \draw[thick] (A)--(B)--(C)--cycle;
+        \draw[thick,blue!70] (A)--(P)--(B);
+        \draw[thick,blue!70] (A)--(Pprime)--(C);
+        \draw[thick,blue!50,dashed] (P)--(Pprime)--(C);
+        \draw[thick,blue!50,dashed] (P)--(C);
+
+        \draw[->,orange!80!black] (0.95,0.475) arc[start angle=26,end angle=86,radius=1.05];
+        \node[orange!80!black] at (0.8,0.9) {$60^\circ$};
+
+        \draw[thick] ($(Pprime)+(0.08,-0.08)$) -- ($(Pprime)+(0.18,-0.08)$) -- ($(Pprime)+(0.18,0.02)$);
+
+        \fill (A) circle (2pt) node[below left] {$A$};
+        \fill (B) circle (2pt) node[below right] {$B$};
+        \fill (C) circle (2pt) node[above] {$C$};
+        \fill (P) circle (2pt) node[right] {$P$};
+        \fill (Pprime) circle (2pt) node[left] {$P'$};
+
+        \node[below] at ($(A)!0.5!(P)$) {$3$};
+        \node[below] at ($(P)!0.5!(B)$) {$4$};
+        \node[right] at ($(P)!0.5!(C)$) {$5$};
+        \node[right] at ($(P)!0.5!(Pprime)$) {$3$};
+    \end{tikzpicture}
+\end{center}
+
 3. Since $AP$ rotates to $AP'$ by $60^\circ$, $\triangle APP'$ is isosceles with $60^\circ$, hence equilateral.
    Therefore, $|PP'| = |AP| = 3$.
 
@@ -592,8 +631,16 @@ Now consider the triangle $PCP'$. You know sides 3, 4, 5.
 
 \begin{takeaways}
 \begin{enumerate}
-    \item \textbf{Constructive Rotation:} If you are given three distances from a point to vertices of an equilateral triangle, ALWAYS rotate the whole setup by $60^\circ$ around one vertex. It creates a new triangle with the known lengths as sides.
+    \item \textbf{Constructive Rotation:} 
+    If you are given three distances from a point to vertices of an equilateral triangle, 
+    \textbf{ALWAYS} rotate the whole setup by $60^\circ$ around one vertex. 
+    It creates a new triangle with the known lengths as sides.
+    \item Rotating a point around a vertex of an equilateral triangle by 
+    $60^\circ$ creates an equilateral triangle with the original point and its image.
+    
 \end{enumerate}
+
+
 \end{takeaways}
 
 % Problem 30: Polynomial-Trig Identity (Sample 45)
@@ -648,6 +695,8 @@ Divide by $2^N$:
     \item \textbf{Polynomial Link:} The identity $z^n + 1/z^n = P_n(z+1/z)$ links complex roots of unity to polynomials with real coefficients. These are related to Chebyshev polynomials ($T_n$).
     \item \textbf{Roots to Coefficients:} Harder problems often ask you to evaluate a trigonometric product. This is almost always a signal to form a polynomial equation and use \textbf{Vieta's Product of Roots}.
     \item \textbf{Generalization:} Identifying $N$ as odd was crucial. If $N$ were even, the constant term of $P_N(x)$ would be non-zero, changing the final result.
+    \item Link this problem with Chebyshev polynomial of first kind. Substitute $ \gamma = e^{i\theta}$
+
 \end{enumerate}
 \end{takeaways}
 
@@ -656,13 +705,13 @@ Divide by $2^N$:
 Let $N = 2m+1$ be an odd integer.
 
 \begin{enumerate}
-    \item[(ii)] Show that $\sin(N\theta)$ can be expressed as:
+    \item[(i)] Show that $\sin(N\theta)$ can be expressed as:
     \[ \sin(N\theta) = \sin^N\theta \cdot P(\cot^2\theta) \]
     where $P$ is a polynomial of degree $m$.
     
-    \item[(iii)] Find the roots of $P(x) = 0$ in terms of $\theta$.
+    \item[(ii)] Find the roots of $P(x) = 0$ in terms of $\theta$.
     
-    \item[(iv)] Use Vieta's formulas to find:
+    \item[(iii)] Use Vieta's formulas to find:
     \[ \sum_{k=1}^m \cot^2\left(\frac{k\pi}{N}\right) \]
 \end{enumerate}
 \end{problem}
@@ -676,23 +725,93 @@ Let $N = 2m+1$ be an odd integer.
 \end{itemize}
 \end{hint}
 
+% \begin{solution}
+
+% \textbf{(i} 
+
+% \[ \text{Im}((\cos+i\sin)^N) = \binom{N}{1}c^{N-1}s - \binom{N}{3}c^{N-3}s^3 + \dots \]
+% where $c = \cos\theta$, $s = \sin\theta$.
+
+% Factor out $s^N$:
+
+% \[ = s^N \left[ \binom{N}{1}\left(\frac{c}{s}\right)^{N-1} - \binom{N}{3}\left(\frac{c}{s}\right)^{N-3} + \dots \right] \].
+
+% Let $x = \cot^2 \theta$. Since $N=2m+1$, powers are even.
+
+% \[ P(x) = \binom{N}{1}x^m - \binom{N}{3}x^{m-1} + \dots \]
+
+% \textbf{(ii)} $\sin(N\theta) = 0 \implies N\theta = k\pi \implies \theta = k\pi/N$.
+% Since $\cot^2$ is even and periodic, $k=1 \dots m$ gives distinct roots.
+
+% \textbf{(iii)} 
+
+% Sum of roots:
+
+% \[ \sum_{k=1}^m \cot^2\left(\frac{k\pi}{N}\right)  = \frac{(N-1)(N-2)}{6} \]
+
+% \end{solution}
+
+
+%%%% 
+
 \begin{solution}
-\textbf{(ii)} $\text{Im}((\cos+i\sin)^N) = \binom{N}{1}c^{N-1}s - \binom{N}{3}c^{N-3}s^3 + \dots$
-Factor out $s^N$:
-$= s^N [ \binom{N}{1}(\frac{c}{s})^{N-1} - \binom{N}{3}(\frac{c}{s})^{N-3} + \dots ]$.
-Let $x = \cot^2 \theta$. Since $N=2m+1$, powers are even.
-$P(x) = \binom{N}{1}x^m - \binom{N}{3}x^{m-1} + \dots$
 
-\textbf{(iii)} $\sin(N\theta) = 0 \implies N\theta = k\pi \implies \theta = k\pi/N$.
-Since $\cot^2$ is even and periodic, $k=1 \dots m$ gives distinct roots.
+\textbf{(i) Derive the Polynomial $P(x)$}
 
-\textbf{(iv)} Sum of roots $= \frac{\binom{N}{3}}{\binom{N}{1}} = \frac{N(N-1)(N-2)/6}{N} = \frac{(N-1)(N-2)}{6}$.
+Using De Moivre's Theorem and the binomial expansion for $N=2m+1$:
+\begin{align*} 
+\sin(N\theta) &= \text{Im}[(\cos\theta+i\sin\theta)^N] \\
+&= \binom{N}{1}\cos^{N-1}\theta\sin\theta - \binom{N}{3}\cos^{N-3}\theta\sin^3\theta - \dots + (-1)^m \binom{N}{N}\sin^N\theta
+\end{align*}
+Factor out $\sin^N\theta$:
+\begin{align*}
+\sin(N\theta) 
+% &= \sin^N\theta \left[ \binom{N}{1}\frac{\cos^{N-1}\theta}{\sin^{N-1}\theta} - \binom{N}{3}\frac{\cos^{N-3}\theta}{\sin^{N-3}\theta} + \binom{N}{5}\frac{\cos^{N-5}\theta}{\sin^{N-5}\theta} - \dots + (-1)^m \binom{N}{N} \right] \\
+&= \sin^N\theta \left[ \binom{N}{1}\cot^{N-1}\theta - \binom{N}{3}\cot^{N-3}\theta - \dots + (-1)^m \binom{N}{N} \right]
+\end{align*}
+% Since $N=2m+1$, the powers of $\cot\theta$ are even (e.g., $N-1 = 2m$, $N-3 = 2m-2$). 
+Let $x = \cot^2\theta$. Then $\cot^{N-1}\theta = (\cot^2\theta)^m = x^m$, and $\cot^{N-3}\theta = (\cot^2\theta)^{m-1} = x^{m-1}$, etc.
+The polynomial $P(x)$ is of degree $m$:
+\[ P(x) = \binom{N}{1}x^m - \binom{N}{3}x^{m-1} + \binom{N}{5}x^{m-2} - \dots + (-1)^m \binom{N}{N} \]
+
+\textbf{(ii) Find the Roots of $P(x) = 0$}
+
+The roots of $P(\cot^2\theta) = 0$ occur when $\sin(N\theta) = 0$, provided $\sin\theta \neq 0$.
+$$ \sin(N\theta) = 0 \implies N\theta = k\pi \implies \theta = \frac{k\pi}{N} $$
+Since $\cot^2\theta$ is periodic with period $\pi$ and is an even function, we need distinct values of $\cot^2\theta$. The values of $k = 1, 2, \dots, m$ give distinct roots $x_k$:
+$$ x_k = \cot^2\left(\frac{k\pi}{N}\right) \quad \text{for } k=1, 2, \dots, m $$
+Since $P(x)$ is a polynomial of degree $m$, these $m$ roots are all the roots of $P(x)=0$.
+
+\textbf{(iii) Use Vieta's Formulas to Find the Sum of Roots}
+
+\textbf{Step 1: Identify the Coefficients.}
+The polynomial is $P(x) = a_m x^m + a_{m-1} x^{m-1} + \dots + a_0$, where:
+
+(i) Coefficient of $x^m$: $a_m = \binom{N}{1}$
+(ii) Coefficient of $x^{m-1}$: $a_{m-1} = -\binom{N}{3}$
+
+\textbf{Step 2: Apply Vieta's Formula.}
+The sum of the roots ($\sum x_k$) is given by Vieta's formula: $\sum x_k = -\frac{a_{m-1}}{a_m}$.
+\[ \sum_{k=1}^m \cot^2\left(\frac{k\pi}{N}\right) = - \frac{-\binom{N}{3}}{\binom{N}{1}} = \frac{\binom{N}{3}}{\binom{N}{1}} \]
+
+\textbf{Step 3: Substitute Binomial Coefficients and Simplify.}
+Substitute the formulas for the binomial coefficients: $\binom{N}{1} = N$ and $\binom{N}{3} = \frac{N(N-1)(N-2)}{6}$.
+
+\[ \sum_{k=1}^m \cot^2\left(\frac{k\pi}{N}\right) = \frac{\frac{N(N-1)(N-2)}{6}}{N} = \frac{(N-1)(N-2)}{6} \]
+
 \end{solution}
+
+%%%% 
 
 \begin{takeaways}
 \begin{enumerate}
-    \item \textbf{Imaginary Part Extraction:} Equating the imaginary part of the expansion to $\sin(N\theta)$ is the standard way to generate polynomials in $\cot \theta$.
-    \item \textbf{Vieta's Sum:} The sum of trig squares usually simplifies to a quadratic in $N$.
+    \item \textbf{Imaginary Part Extraction:} 
+    Equating the imaginary part of the expansion to $\sin(N\theta)$ 
+    is the standard way to generate polynomials in $\cot \theta$.
+    \item \textbf{Vieta's Sum:} 
+    The sum of trig squares usually simplifies to a quadratic in $N$.
+    \item The polynomial $P(x)$ links to Chebyshev polynomials of the second kind.
+
 \end{enumerate}
 \end{takeaways}
 
