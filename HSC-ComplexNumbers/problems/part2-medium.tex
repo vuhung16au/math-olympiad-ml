@@ -249,6 +249,54 @@ Draw vertical lines at $x=0$ and $x=2$. Draw circle centered at $(1,-1)$ with ra
 
 \end{solution}
 
+\begin{problem}[Shifted Reciprocal Locus]
+If $z$ is a complex number, describe the locus defined by $\Re\!\left(\frac{1}{z-1}\right) = 2$.
+\end{problem}
+
+\begin{hint}
+Write $z = x + iy$ and set $w = z - 1 = (x-1) + iy$. Compute $\Re\!\left(\frac{1}{w}\right)$ by multiplying numerator and denominator by $\bar{w}$, then complete the square to reveal the circle; note the locus must pass through $z = 1$.
+\end{hint}
+
+\begin{solution}[Sketch]
+\[
+\Re\!\left(\frac{1}{z-1}\right) = \frac{x-1}{(x-1)^2 + y^2} = 2 \;\Rightarrow\; (x-1)^2 - \tfrac{1}{2}(x-1) + y^2 = 0
+\]
+Completing the square gives $\left(x - \tfrac{5}{4}\right)^2 + y^2 = \left(\tfrac{1}{4}\right)^2$, a circle centered at $(\tfrac{5}{4}, 0)$ with radius $\tfrac{1}{4}$ that passes through $z = 1$ and is tangent to the line $x = 1$.
+
+\vspace{0.4em}
+\begin{center}
+\begin{tikzpicture}[scale=5,>=Stealth]
+  \def\cx{1.25}
+  \def\r{0.25}
+  % Axes
+  \draw[->,gray] (-0.05,0) -- (1.6,0) node[right,font=\scriptsize] {Re};
+  \draw[->,gray] (\cx,-0.35) -- (\cx,0.35) node[above,font=\scriptsize] {Im};
+  \draw[gray,thin] (0,0.3) -- (0,-0.3);
+  % Circle
+  \draw[very thick,bookpurple] (\cx,0) circle (\r);
+  % Center
+  \fill[bookred] (\cx,0) circle (0.5pt) node[above right,font=\scriptsize] {Center $(\tfrac{5}{4}, 0)$};
+  % Point z=1
+  \fill[bookpurple!80!black] (1,0) circle (0.5pt) node[below left,font=\scriptsize] {$1$};
+  % Tick marks
+  \draw[gray] (0.5,0) -- (0.5,0.035) node[below,font=\tiny] {$\tfrac{1}{2}$};
+  \draw[gray] (1,0) -- (1,0.035);
+  \draw[gray] (1.5,0) -- (1.5,0.035) node[below,font=\tiny] {$\tfrac{3}{2}$};
+  % Highlight tangency line
+  \draw[dashed,warmstone!70] (1,-0.32) -- (1,0.32);
+  \node[warmstone!80!black,font=\scriptsize,below] at (1,-0.32) {$x=1$};
+\end{tikzpicture}
+\end{center}
+\vspace{0.4em}
+
+\textbf{Takeaways:}
+\begin{itemize}[leftmargin=*]
+  \item Translating by $1$ then inverting sends vertical lines to circles that pass through the translation point.
+  \item $\Re\!\left(\frac{1}{z-a}\right) = k \ne 0$ traces a circle through $z = a$ with center shifted by $\frac{1}{2k}$ along the real axis from $a$.
+  \item Here the circle has center $(\tfrac{5}{4}, 0)$, radius $\tfrac{1}{4}$, and is tangent to the line $x = 1$.
+\end{itemize}
+\end{solution}
+
 \begin{problem}[Modulus-Argument Division]
 Given $\frac{1+\sqrt{3}i}{1+i} = \frac{1+\sqrt{3}}{2} + \frac{\sqrt{3}-1}{2}i$, express $\frac{1+i\sqrt{3}}{1+i}$ in modulus-argument form by converting both numerator and denominator.
 \end{problem}
