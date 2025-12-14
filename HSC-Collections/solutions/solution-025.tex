@@ -1,19 +1,17 @@
 \subsection{Solution to Problem 25: Complex Numbers with Three Conditions}
 
 \begin{solution}
-Since $|z_1| = |z_2| = |z_3| = r$ (say), write $z_k = re^{i\theta_k}$ for $k = 1, 2, 3$.
+Since $|z_1| = |z_2| = |z_3| = r$ (say), write $z_k = r(\cos\theta_k + i\sin\theta_k)$ for $k = 1, 2, 3$.
 
-From $z_1 z_2 z_3 = 1$: $r^3 e^{i(\theta_1 + \theta_2 + \theta_3)} = 1$.
+From $z_1 z_2 z_3 = 1$: $r^3[\cos(\theta_1 + \theta_2 + \theta_3) + i\sin(\theta_1 + \theta_2 + \theta_3)] = 1$.
 
-Since the right-hand side is real and positive, we need $r^3 = 1$ (so $r = 1$) and $\theta_1 + \theta_2 + \theta_3 = 2\pi k$ for some integer $k$.
+The right-hand side is real and positive, so $r^3 = 1$ (hence $r = 1$) and $\sin(\theta_1 + \theta_2 + \theta_3) = 0$, $\cos(\theta_1 + \theta_2 + \theta_3) = 1$, giving $\theta_1 + \theta_2 + \theta_3 = 2\pi k$ for some integer $k$.
 
-So all three numbers lie on the unit circle: $z_k = e^{i\theta_k}$.
+Thus all three numbers lie on the unit circle: $z_k = \cos\theta_k + i\sin\theta_k$.
 
-From $z_1 + z_2 + z_3 = 1$: $e^{i\theta_1} + e^{i\theta_2} + e^{i\theta_3} = 1$.
+From $z_1 + z_2 + z_3 = 1$: $(\cos\theta_1 + \cos\theta_2 + \cos\theta_3) + i(\sin\theta_1 + \sin\theta_2 + \sin\theta_3) = 1$.
 
-Since the sum is real, the imaginary parts must cancel. One approach is to look for symmetric solutions where two numbers are complex conjugates.
-
-Let $z_1 = 1$ (real), $z_2 = e^{i\theta}$, and $z_3 = e^{-i\theta}$ (conjugate pair).
+Since the sum is real, the imaginary parts cancel. A symmetric choice is to take a conjugate pair: let $z_1 = 1$ (real), $z_2 = \cos\theta + i\sin\theta$, and $z_3 = \cos\theta - i\sin\theta$.
 
 Then $z_1 + z_2 + z_3 = 1 + 2\cos\theta = 1$, so $\cos\theta = 0$, giving $\theta = \frac{\pi}{2}$ or $\frac{3\pi}{2}$.
 
@@ -30,8 +28,8 @@ Therefore, the solutions are all permutations of $\{1, i, -i\}$.
 
 \begin{takeaways}
 \begin{itemize}
-    \item Unit circle: If $|z| = 1$, write $z = e^{i\theta}$
-    \item Sum and product: Use both conditions to find relationships between angles
+    \item Unit circle: If $|z| = 1$, use $z = \cos\theta + i\sin\theta$
+    \item Sum and product: Use both conditions to pin down angle relationships
     \item Symmetry: Look for symmetric solutions (conjugate pairs)
 \end{itemize}
 \end{takeaways}

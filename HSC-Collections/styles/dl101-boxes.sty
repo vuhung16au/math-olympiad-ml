@@ -86,6 +86,11 @@
   boxed title style={size=small,colback=yellow!30,colframe=orange!50}
 }
 
+% Provide alias environment for hints used in problems
+\makeatletter
+\@ifundefined{hint}{\newenvironment{hint}{\begin{hintbox}}{\end{hintbox}}}{}
+\makeatother
+
 % Learning objectives
 \newcommand{\objective}[1]{\item \textcolor{objtext}{#1}}
 \newenvironment{learningobjectives}{%
@@ -105,7 +110,7 @@
 }
 
 % Theorem environments with custom styling
-\newtcolorbox[auto counter,number within=chapter]{theorembox}[1][]{
+\newtcolorbox[auto counter,number within=section]{theorembox}[1][]{
   title={\bfseries Theorem~\thetcbcounter},
   enhanced,
   drop shadow={black!30!white},
@@ -121,7 +126,7 @@
   #1
 }
 
-\newtcolorbox[auto counter,number within=chapter]{examplebox}[1][]{
+\newtcolorbox[auto counter,number within=section]{examplebox}[1][]{
   title={\bfseries Example~\thetcbcounter},
   enhanced,
   drop shadow={black!20!white},
@@ -137,7 +142,7 @@
   #1
 }
 
-\newtcolorbox[auto counter,number within=chapter]{remarkbox}[1][]{
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
   title={\bfseries Remark~\thetcbcounter},
   enhanced,
   drop shadow={black!20!white},
@@ -153,7 +158,7 @@
   #1
 }
 
-\newtcolorbox[auto counter,number within=chapter]{definitionbox}[1][]{
+\newtcolorbox[auto counter,number within=section]{definitionbox}[1][]{
   title={\bfseries Definition~\thetcbcounter},
   enhanced,
   drop shadow={black!20!white},
