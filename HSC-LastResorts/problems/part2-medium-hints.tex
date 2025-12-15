@@ -316,5 +316,59 @@ Use De Moivre's theorem to express $\sin(n\theta)$ in terms of $z = e^{i\theta}$
 \end{enumerate}
 \end{takeaways}
 
+% Problem 18: Orthogonality and Roots of Unity (Sample 60)
+\begin{problem}[Complex Number Perpendicularity]
+Let $n$ be a positive integer, and let $z_k = e^{i\frac{2k\pi}{n}}$ for $k \in \{1, 2, \dots, n\}$.
+
+Let $z_a, z_b,$ and $z_c$ be three distinct complex numbers from this set. Prove that if they satisfy the equation:
+\[
+\frac{z_a}{z_b} = - \frac{z_c}{z_a}
+\]
+then the vector represented by the sum $z_b + z_c$ is perpendicular to the vector $z_a$.
+\end{problem}
+
+\begin{hint}
+\begin{enumerate}
+    \item Use the given equation to express $\frac{z_c}{z_a}$ in terms of $\frac{z_b}{z_a}$.
+    \item Recall that two complex numbers $w_1$ and $w_2$ are perpendicular if their ratio $\frac{w_1}{w_2}$ is purely imaginary.
+    \item Form the ratio $Z = \frac{z_b + z_c}{z_a}$ and simplify using the given condition.
+    \item For any complex number $u$ on the unit circle, $u - \frac{1}{u} = u - \overline{u} = 2i\text{Im}(u)$ is purely imaginary.
+\end{enumerate}
+\end{hint}
+
+\begin{solution}
+To prove perpendicularity, we show that $Z = \frac{z_b + z_c}{z_a}$ is purely imaginary.
+
+\textbf{Step 1:} Express the ratio:
+\[
+Z = \frac{z_b + z_c}{z_a} = \frac{z_b}{z_a} + \frac{z_c}{z_a}
+\]
+
+\textbf{Step 2:} From the given condition $\frac{z_a}{z_b} = -\frac{z_c}{z_a}$, rearrange:
+\[
+\frac{z_c}{z_a} = -\frac{z_a}{z_b}
+\]
+
+\textbf{Step 3:} Substitute into $Z$:
+\[
+Z = \frac{z_b}{z_a} - \frac{z_a}{z_b}
+\]
+
+\textbf{Step 4:} Let $u = \frac{z_b}{z_a}$. Since both $z_a$ and $z_b$ are roots of unity, $|u|=1$, so $\overline{u} = \frac{1}{u}$.
+\[
+Z = u - \frac{1}{u} = u - \overline{u} = 2i \cdot \text{Im}(u)
+\]
+
+Since $Z$ is purely imaginary, the vectors $z_b + z_c$ and $z_a$ are perpendicular.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Perpendicularity Test:} For complex numbers, perpendicularity is equivalent to having a purely imaginary ratio.
+    \item \textbf{Unit Circle Property:} When $|z|=1$, we have $\overline{z} = \frac{1}{z}$, which simplifies many algebraic manipulations.
+    \item \textbf{Conjugate Differences:} The expression $z - \overline{z}$ is always purely imaginary, while $z + \overline{z}$ is purely real.
+\end{enumerate}
+\end{takeaways}
+
 % Additional medium problems from the selection would continue here...
 % (Samples 07, 09, 10, 12, 15, 17, 18, 21, 28, 30, 35, 36, 55)
