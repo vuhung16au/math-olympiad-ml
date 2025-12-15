@@ -1,7 +1,7 @@
 % Part 2: Easy Problems with Hints (2 problems)
 
 % Problem 1: Complex Locus (Sample 19)
-\begin{problem}[Distance Ratio Regions]
+\begin{problem}[Problem 1: Distance Ratio Regions]
 Let $z_1 = 2 + i$ and $z_2 = -1 + 2i$. Sketch the region in the complex plane where:
 \[ \frac{|z - z_1|}{|z - z_2|} < 1 \]
 \end{problem}
@@ -53,8 +53,74 @@ The region where $|z - z_1| < |z - z_2|$ is the half-plane containing $z_1$.
 \end{enumerate}
 \end{takeaways}
 
-% Problem 2: Complex Regions (Sample 20)
-\begin{problem}[Imaginary Part Constraints]
+% Problem 2: Orthocenter via Vectors (Sample 02 - New)
+\begin{problem}[Problem 2: Orthocenter Vector Identity]
+Let $ABC$ be a triangle with circumcentre $O$, and set
+\[\vec{OA}=\mathbf{a},\qquad \vec{OB}=\mathbf{b},\qquad \vec{OC}=\mathbf{c}.
+\]
+Define the point $H$ by
+\[\vec{OH}=\mathbf{a}+\mathbf{b}+\mathbf{c}.
+\]
+Show that $\vec{BH}\perp\vec{AC}$.
+\end{problem}
+
+\begin{hint}
+Express $\vec{BH}$ and $\vec{AC}$ in terms of $\mathbf{a},\mathbf{b},\mathbf{c}$ and compute their dot product. Use that $|\mathbf{a}|=|\mathbf{c}|$ since $O$ is the circumcentre.
+\end{hint}
+
+\begin{solution}
+Compute
+\[\vec{BH}=\vec{OH}-\vec{OB}=(\mathbf{a}+\mathbf{b}+\mathbf{c})-\mathbf{b}=\mathbf{a}+\mathbf{c},\]
+and
+\[\vec{AC}=\vec{OC}-\vec{OA}=\mathbf{c}-\mathbf{a}.
+\]
+Their dot product is
+\[(\mathbf{a}+\mathbf{c})\cdot(\mathbf{c}-\mathbf{a})=|\mathbf{c}|^2-|\mathbf{a}|^2=0,
+\]
+since $|\mathbf{a}|=|\mathbf{c}|$ (both equal the circumradius). Hence $\vec{BH}\perp\vec{AC}$.
+
+\begin{center}
+    \begin{tikzpicture}[scale=1.2]
+        % Circumradius
+        \def\R{2}
+        % Points
+        \coordinate (O) at (0,0);
+        \coordinate (A) at ({110}:\R);
+        \coordinate (B) at ({200}:\R);
+        \coordinate (C) at ({340}:\R);
+        % H = A+B+C (vector sum)
+        \coordinate (H) at ($(A)+(B)+(C)$);
+        % Draw circle and triangle
+        \draw[gray,thin] (O) circle (\R);
+        \draw[thick] (A) -- (B) -- (C) -- cycle;
+        % Vectors OA,OB,OC and OH
+        \draw[->,blue,thick] (O) -- (A) node[midway,left]{$\mathbf{a}$};
+        \draw[->,blue,thick] (O) -- (B) node[midway,below]{$\mathbf{b}$};
+        \draw[->,blue,thick] (O) -- (C) node[midway,right]{$\mathbf{c}$};
+        \draw[->,red,very thick] (O) -- (H) node[midway,right]{$\vec{OH}$};
+        % BH dashed and foot projection to AC
+        \draw[dashed,red] (B) -- (H) node[midway,above right]{$\vec{BH}$};
+        \draw[dashed,gray] (B) -- ($(A)!(B)!(C)$);
+        % Labels
+        \node[above] at (A) {$A$};
+        \node[below left] at (B) {$B$};
+        \node[below right] at (C) {$C$};
+        \node[below] at (O) {$O$};
+        \node[above right] at (H) {$H$};
+    \end{tikzpicture}
+\end{center}
+
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Vector orthocenter:} The identity $\vec{OH}=\vec{OA}+\vec{OB}+\vec{OC}$ characterises the triangle's orthocentre relative to the circumcentre.
+    \item \textbf{Dot-product trick:} Use $(\mathbf{u}+\mathbf{v})\cdot(\mathbf{v}-\mathbf{u})=|\mathbf{v}|^2-|\mathbf{u}|^2$ when equal magnitudes appear.
+\end{enumerate}
+\end{takeaways}
+
+% Problem 3: Complex Regions (Sample 20)
+\begin{problem}[Problem 3: Imaginary Part Constraints]
 Sketch the region in the complex plane where:
 \[ \text{Im}(2z + 3\bar{z}) \ge 1 \]
 \end{problem}
