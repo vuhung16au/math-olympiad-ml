@@ -131,6 +131,15 @@ and taking square roots yields the familiar central binomial asymptotic
     \item \textbf{Wallis connection:} Comparing integrals of even and odd powers of cosine gives precise bounds involving $\pi$ and leads to Wallis-type asymptotics.
     \item \textbf{Central binomial asymptotics:} The estimate $\binom{2n}{n}\sim 4^n/\sqrt{\pi n}$ follows from simple integral comparisons and is a core asymptotic used throughout combinatorics and analysis.
     \item This result establishes Stirling's approximation for the central binomial coefficient.
+    \item \textbf{The Trigonometric Isomorphism:} 
+    While algebraic Integration by Parts works, 
+    substituting $x = \sin \theta$ instantly converts this problem into 
+    the standard Wallis integral $\int_0^{\pi/2} \sin^n \theta \, d\theta$. 
+    Try to link this problem with Chebyshev polynomials for deeper insights.
+    \item \textbf{The Weight Function:} 
+    The term $\frac{1}{\sqrt{1-x^2}}$ appearing in the integrand is the 
+    characteristic weight that makes Chebyshev polynomials orthogonal.
+    $$\int_{-1}^1 T_n(x) T_m(x) \frac{dx}{\sqrt{1-x^2}} = 0 \quad \text{for } n \neq m$$
 \end{enumerate}
 \end{takeaways}
 
