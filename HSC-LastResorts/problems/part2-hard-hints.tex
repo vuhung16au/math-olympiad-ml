@@ -58,6 +58,126 @@ $\cos p - k = \frac{p}{\sin p} \implies k = \cos p - p \csc p$.
 \end{enumerate}
 \end{takeaways}
 
+% Problem 18: Binomial Integrals and Wallis Asymptotics (Sample 07)
+\begin{problem}[Binomial Integrals and Wallis' Product for $\pi$]\label{prob:part2-wallis-07}
+
+Consider the quadratic equation
+\[z^2 - 2z\sin\theta + 1 = 0,\qquad 0<\theta<\frac{\pi}{2}.\]
+
+\begin{enumerate}[label=(\roman*)]
+
+    \item Find the roots $\alpha,\beta$ in the exponential form $e^{i\psi}$ 
+    , and don't complain why the form is being removed from the NESA.
+    \item By expanding $(\alpha+\beta)^{2n}$ and grouping conjugate terms, prove the identity
+    \[2^{2n-1}\sin^{2n}\theta = \frac{1}{2}\binom{2n}{n} + \sum_{k=0}^{n-1} (-1)^{n-k}\binom{2n}{k}\cos(2(n-k)\theta).
+    \]
+    \item 
+
+    Let 
+
+    \[ I_n = \int_0^{\frac{\pi}{2}} \sin^n \theta \, d\theta.
+    \]
+
+    You are given the recurrence form: $I_n = \frac{n-1}{n} I_{n-2}$ (do NOT prove this).
+
+    Hence evaluate the definite integral
+    
+    \[ I_{2n} = \int_0^{\frac{\pi}{2}} \sin^{2n}\theta\,d\theta.
+    \]
+    
+    \item Use the result of (iii), or otherwise, to prove the limit
+    \[\lim_{n\to\infty}\left[\frac{2\cdot4\cdot6\cdots(2n)}{1\cdot3\cdot5\cdots(2n-1)}\cdot\frac{1}{\sqrt{n}}\right]=\sqrt{\pi}.
+    \]
+
+    You are given the Wallis inequality:
+    $\frac{2n}{2n+1} < \frac{I_{2n+1}}{I_{2n}} < 1$ (do NOT prove this).
+
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (i) use the quadratic formula and rewrite the root in polar form. 
+For (ii) note $\alpha\beta=1$ and group terms $k$ with $2n-k$. 
+For (iii) integrate the identity from (ii) on $[0,\pi/2]$ and use that cosine terms integrate to zero. 
+For (iv) express the central binomial coefficient using factorials and rearrange 
+into products of even and odd integers; apply Stirling/Wallis asymptotics.
+\end{hint}
+
+\begin{solution}
+	\textbf{(i)} The quadratic formula gives
+\[z=\sin\theta\pm i\cos\theta=\cos\left(\tfrac{\pi}{2}-\theta\right)\pm i\sin\left(\tfrac{\pi}{2}-\theta\right)=e^{\pm i(\frac{\pi}{2}-\theta)}.
+\]
+
+	\textbf{(ii)} Since $\alpha+\beta=2\sin\theta$ and $\alpha\beta=1$, expand $(\alpha+\beta)^{2n}$ by the Binomial Theorem and group conjugate pairs to obtain the stated identity after simplifying terms.
+
+    Using $(\alpha+\beta)^{2n} = (2\sin\theta)^{2n}$. 
+    Expanding the LHS:
+    
+    $$\sum_{k=0}^{2n} \binom{2n}{k} \alpha^{2n-k}\beta^k 
+    = \binom{2n}{n} + \sum_{k=0}^{n-1} \binom{2n}{k}(\alpha^{2n-2k} + \beta^{2n-2k})$$
+    
+    Using $\alpha^{m} + \beta^{m} = 2\cos(m(\frac{\pi}{2}-\theta))$ 
+    and simplified parity logic leads to the result.
+
+	\textbf{(iii)} Integrate the identity in (ii) from $0$ to $\pi/2$. 
+    
+    All cosine terms $\cos(2(n-k)\theta)$ integrate to zero over this interval, leaving
+    
+    \[2^{2n-1}\int_0^{\pi/2}\sin^{2n}\theta\,d\theta = \frac{\pi}{4}\binom{2n}{n}.
+    \]
+    Hence
+    \[\int_0^{\pi/2}\sin^{2n}\theta\,d\theta = \frac{\pi}{2^{2n+1}}\binom{2n}{n} = \frac{\pi(2n)!}{2^{2n+1}(n!)^2}.
+    \]
+
+    and so,
+    $$2^{2n-1} I_{2n} = \frac{1}{2}\binom{2n}{n} \cdot \frac{\pi}{2} \implies I_{2n} = \frac{\pi (2n)!}{2^{2n+1} (n!)^2}$$
+
+	\textbf{(iv)} 
+    Rearranging the factorials in the expression from (iii) 
+
+    $$I_{2n} = \int_0^{\frac{\pi}{2}} \sin^{2n}\theta \, d\theta = \frac{1 \cdot 3 \cdot 5 \cdots (2n-1)}{2 \cdot 4 \cdot 6 \cdots (2n)} \cdot \frac{\pi}{2}$$
+
+    $$I_{2n+1} = \int_0^{\frac{\pi}{2}} \sin^{2n+1}\theta \, d\theta = \frac{2 \cdot 4 \cdot 6 \cdots (2n)}{1 \cdot 3 \cdot 5 \cdots (2n+1)}$$
+
+    Let $W_n$ be the expression inside the limit we are trying to find (the "Wallis Product" term):$$W_n = \frac{2 \cdot 4 \cdot 6 \cdots (2n)}{1 \cdot 3 \cdot 5 \cdots (2n-1)}$$
+
+
+    % and isolating the product of even over odd integers yields the required limit. 
+    
+    Using the provided hint (or we can prove it within 10 - 15 minutes easily), we can show that 
+    $\frac{2n}{2n+1} < \frac{I_{2n+1}}{I_{2n}} < 1$.
+
+    Use this inequality, we can write:
+
+    $$\frac{I_{2n+1}}{I_{2n}} = \frac{W_n}{2n+1} \cdot \frac{2W_n}{\pi} = \frac{2 W_n^2}{\pi(2n+1)}$$
+
+    Substitute back to the inequality:
+
+    $$n\pi < W_n^2 < \frac{\pi(2n+1)}{2}$$
+
+    and use the Squeeze Theorem to conclude the proof. 
+
+    $$\lim_{n \to \infty} \frac{W_n}{\sqrt{n}} = \sqrt{\pi}$$
+
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item Connects complex roots, binomial expansions and definite integrals — a useful synthesis for Problem~16 style questions.
+    % \item The Wallis integral identity gives a clean route to central binomial asymptotics and the appearance of $\sqrt{\pi}$.
+    \item Wallis derived this result (heuristically) before Newton and Leibniz fully developed calculus.
+    \item Grouping conjugate terms is a recurring trick when expanding symmetric binomial expressions involving roots on the unit circle.
+    \item \textbf{Wallis' Product for $\pi$: } 
+    Wallis' Product: (published by John Wallis in 1655) is a famous mathematical formula 
+    that expresses the value of $\pi$ as an infinite product of rational numbers. 
+    It is typically written as:
+    
+    $$\frac{\pi}{2} = \prod_{n=1}^{\infty} \left( \frac{2n}{2n-1} \cdot \frac{2n}{2n+1} \right) 
+    = \frac{2}{1} \cdot \frac{2}{3} \cdot \frac{4}{3} \cdot \frac{4}{5} \cdot \frac{6}{5} \cdot \frac{6}{7} \cdots$$Or, 
+    equivalently:$$\pi = 2 \cdot \frac{2 \cdot 2 \cdot 4 \cdot 4 \cdot 6 \cdot 6 \cdots}{1 \cdot 3 \cdot 3 \cdot 5 \cdot 5 \cdot 7 \cdots}$$
+\end{enumerate}
+\end{takeaways}
+
 % Problem 26: Wallis Integrals and Asymptotic Approximations (Sample 03)
 \begin{problem}[Wallis Integrals and Asymptotic Approximations]
 Let
