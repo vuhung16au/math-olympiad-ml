@@ -68,21 +68,26 @@ Let
 
 \[U_n=\frac{n-1}{n}\,U_{n-2}\quad(n\ge2),\]
 
-(ii) Evaluate $U_0$ and $U_1$,
+(ii) Evaluate $U_0$ and $U_1$
 
 (iii) Deduce closed forms for $U_{2n}$ and $U_{2n+1}$
 
-(iv) Use the inequalities
+(iv) Prove, then use the inequalities
 \[U_{2n+2}<U_{2n+1}<U_{2n}\]
 
 to obtain the bounds
-\[\frac{2n+1}{2n+2}\cdot\frac{\pi}{2}<\frac{16^n}{(2n+1)\binom{2n}{n}^2}<\frac{\pi}{2},\]
+\[\frac{2n+1}{2n+2}\cdot\frac{\pi}{2}<\frac{16^n}{(2n+1)\binom{2n}{n}^2}<\frac{\pi}{2}\]
 
-(iv) Hence, prove the asymptotic approximation for the central binomial coefficient:
-\[ \binom{2n}{n}= \dfrac{(2n)!}{(n!)^2} \sim\frac{4^n}{\sqrt{\pi n}}\quad(n\to\infty).
-\]
+(v) Hence, using the inequality in part (iv), show that:
+$$
+\lim_{n \to \infty} \left[ \binom{2n}{n} \div \frac{4^n}{\sqrt{n\pi}} \right] = 1
+$$
 
-% Here, $\binom{2n}{n}=\dfrac{(2n)!}{(n!)^2}$ is the central binomial coefficient.
+% (iv) Hence, prove the asymptotic approximation for the central binomial coefficient:
+% \[ \binom{2n}{n}= \dfrac{(2n)!}{(n!)^2} \sim\frac{4^n}{\sqrt{\pi n}}\quad(n\to\infty).
+% \]
+
+Here, $\binom{2n}{n}=\dfrac{(2n)!}{(n!)^2}$ is the central binomial coefficient.
 
 \end{problem}
 
@@ -125,6 +130,7 @@ and taking square roots yields the familiar central binomial asymptotic
     \item \textbf{Reduction formulas:} Integrals of the form $\int x^n(1-x^2)^{-1/2}\,dx$ often reduce by two degrees; IBP is the systematic tool.
     \item \textbf{Wallis connection:} Comparing integrals of even and odd powers of cosine gives precise bounds involving $\pi$ and leads to Wallis-type asymptotics.
     \item \textbf{Central binomial asymptotics:} The estimate $\binom{2n}{n}\sim 4^n/\sqrt{\pi n}$ follows from simple integral comparisons and is a core asymptotic used throughout combinatorics and analysis.
+    \item This result establishes Stirling's approximation for the central binomial coefficient.
 \end{enumerate}
 \end{takeaways}
 
