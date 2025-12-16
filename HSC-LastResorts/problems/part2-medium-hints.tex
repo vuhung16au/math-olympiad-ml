@@ -70,6 +70,57 @@ Thus, the volume is maximized when the height equals the diameter. \hfill $\squa
 \end{enumerate}
 \end{takeaways}
 
+% Problem 9: Linear Growth Coefficients (Sample 04 - New)
+\begin{problem}[Linear Growth Coefficients]
+Let \(P(z)=a_n z^n + a_{n-1} z^{n-1}+\dots+a_1 z\) be a polynomial with complex coefficients satisfying
+\(|a_k|\le k\) for all $1\le k\le n$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that for real $x$ with $|x|<1$:
+    \[\sum_{k=1}^\infty k x^k = \frac{x}{(1-x)^2}.
+    \]
+    \item Using (i), prove that for $|z|<1$:
+    \[|P(z)| < \frac{|z|}{(1-|z|)^2}.
+    \]
+    \item Deduce that if $P(z)=1$ and $|z|<1$ then
+    \[|z|>\frac{3-\sqrt{5}}{2}.
+    \]
+    \item If instead $Q(z)=b_n z^n+\dots+b_1 z$ with $|b_k|\le1$, show any root of $Q(z)=1$ with $|z|<1$ satisfies $|z|>\tfrac12$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Differentiate the geometric series to obtain (i). For (ii) apply the triangle inequality and compare the finite sum with the infinite series from (i). For (iii) set $r=|z|$ and solve the inequality $1<r/(1-r)^2$. For (iv) repeat with the bound $|b_k|\le1$ and the standard geometric series.
+\end{hint}
+
+\begin{solution}
+	\textbf{(i)} Differentiate $\sum_{k=0}^\infty x^k=1/(1-x)$ (valid for $|x|<1$) to get
+\[\sum_{k=1}^\infty k x^{k-1}=\frac{1}{(1-x)^2},\]
+then multiply by $x$ to obtain the stated formula.
+
+	\textbf{(ii)} For $|z|<1$ the triangle inequality gives
+\[|P(z)|\le\sum_{k=1}^n |a_k||z|^k\le\sum_{k=1}^n k|z|^k<\sum_{k=1}^\infty k|z|^k=\frac{|z|}{(1-|z|)^2}.
+\]
+
+	\textbf{(iii)} If $P(z)=1$ then $1<\dfrac{r}{(1-r)^2}$ with $r=|z|$. Rearranging yields
+\[r^2-3r+1<0,
+\]
+whose roots are $(3\pm\sqrt{5})/2$. Since $r<1$ we obtain $r>\dfrac{3-\sqrt{5}}{2}$.
+
+	\textbf{(iv)} With $|b_k|\le1$ we have
+\[1=|Q(z)|\le\sum_{k=1}^n |z|^k<\sum_{k=1}^\infty r^k=\frac{r}{1-r},
+\]
+so $1<r/(1-r)$, giving $r>1/2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item Differentiate power series to obtain weighted sums like $\sum kx^k$.
+    \item Bounding $|P(z)|$ by a real series is a reliable method to locate roots in the complex plane.
+    \item Coefficient growth affects how close roots can lie to the origin: larger coefficients allow roots nearer $0$.
+\end{enumerate}
+\end{takeaways}
+
 % Problem 2: Tetrahedron Volume (Sample 03)
 \begin{problem}[Cauchy-Schwarz and Plane Intersections]
 (a) Let $x, y, z$ be positive real numbers. Prove that:
