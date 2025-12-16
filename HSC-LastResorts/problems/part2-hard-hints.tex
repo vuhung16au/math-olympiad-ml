@@ -58,6 +58,76 @@ $\cos p - k = \frac{p}{\sin p} \implies k = \cos p - p \csc p$.
 \end{enumerate}
 \end{takeaways}
 
+% Problem 26: Wallis Integrals and Asymptotic Approximations (Sample 03)
+\begin{problem}[Wallis Integrals and Asymptotic Approximations]
+Let
+
+\[U_n=\int_0^1 \frac{x^n}{\sqrt{1-x^2}}\,dx,\qquad n\ge0.\]
+
+(i) Prove the reduction formula
+
+\[U_n=\frac{n-1}{n}\,U_{n-2}\quad(n\ge2),\]
+
+(ii) Evaluate $U_0$ and $U_1$,
+
+(iii) Deduce closed forms for $U_{2n}$ and $U_{2n+1}$
+
+(iv) Use the inequalities
+\[U_{2n+2}<U_{2n+1}<U_{2n}\]
+
+to obtain the bounds
+\[\frac{2n+1}{2n+2}\cdot\frac{\pi}{2}<\frac{16^n}{(2n+1)\binom{2n}{n}^2}<\frac{\pi}{2},\]
+
+(iv) Hence, prove the asymptotic approximation for the central binomial coefficient:
+\[ \binom{2n}{n}= \dfrac{(2n)!}{(n!)^2} \sim\frac{4^n}{\sqrt{\pi n}}\quad(n\to\infty).
+\]
+
+% Here, $\binom{2n}{n}=\dfrac{(2n)!}{(n!)^2}$ is the central binomial coefficient.
+
+\end{problem}
+
+\begin{hint}
+Use integration by parts for the reduction formula (split $x^n=x^{n-1}\cdot x$). Evaluate $U_0=\int_0^1(1-x^2)^{-1/2}dx=\frac{\pi}{2}$ and $U_1=1$. Reduce even and odd indices down to these base cases to get factorial/binomial expressions. For the inequality chain compare powers of $x$ on $(0,1)$ and integrate; convert the resulting bounds into expressions involving central binomial coefficients and apply the Squeeze Theorem.
+\end{hint}
+
+\begin{solution}
+	\textbf{(i) Reduction:} Write
+\[U_n=\int_0^1 x^{n-1}\cdot\frac{x}{\sqrt{1-x^2}}\,dx.
+\]
+Let $u=x^{n-1}$ and $dv=\dfrac{x}{\sqrt{1-x^2}}dx$, so $du=(n-1)x^{n-2}dx$ and $v=-\sqrt{1-x^2}$. Integration by parts gives
+\[U_n=\left[-x^{n-1}\sqrt{1-x^2}\right]_0^1+(n-1)\int_0^1 x^{n-2}\sqrt{1-x^2}\,dx.
+\]
+Rewrite $\sqrt{1-x^2}=\dfrac{1-x^2}{\sqrt{1-x^2}}$ in the integral to obtain
+\[U_n=(n-1)(U_{n-2}-U_n),\]
+hence $U_n=\dfrac{n-1}{n}U_{n-2}$.
+
+	\textbf{(ii) Base values and closed forms:} $U_0=\int_0^1(1-x^2)^{-1/2}dx=\frac{\pi}{2}$ (substitute $x=\sin\theta$) and $U_1=\int_0^1 \dfrac{x}{\sqrt{1-x^2}}dx=1$. Repeated application of the reduction yields
+\[U_{2n}=\frac{(2n-1)(2n-3)\cdots1}{(2n)(2n-2)\cdots2}\,U_0=\frac{\binom{2n}{n}\pi}{2^{2n+1}},\]
+and
+\[U_{2n+1}=\frac{(2n)(2n-2)\cdots2}{(2n+1)(2n-1)\cdots3}\,U_1=\frac{2^{2n}}{(2n+1)\binom{2n}{n}}.
+\]
+
+	\textbf{(iii) Inequalities and bounds:} For $x\in(0,1)$ we have $x^{2n+2}<x^{2n+1}<x^{2n}$; integrating against the positive weight $(1-x^2)^{-1/2}$ preserves the inequalities, giving $U_{2n+2}<U_{2n+1}<U_{2n}$. Substituting the closed forms and rearranging yields
+\[\frac{2^{2n}}{(2n+1)\binom{2n}{n}}<\frac{\binom{2n}{n}\pi}{2^{2n+1}},\]
+and the companion inequality coming from $U_{2n+2}<U_{2n+1}$ gives the lower bound. Combining both bounds produces
+\[\frac{2n+1}{2n+2}\cdot\frac{\pi}{2}<\frac{16^n}{(2n+1)\binom{2n}{n}^2}<\frac{\pi}{2}.
+\]
+
+	\textbf{(iv) Asymptotics:} Let $A_n=\dfrac{16^n}{(2n+1)\binom{2n}{n}^2}$. The bounds show $A_n\to\dfrac{\pi}{2}$ as $n\to\infty$, so
+\[\binom{2n}{n}^2\sim\frac{16^n}{(2n)\cdot(\pi/2)}\sim\frac{8\cdot4^{2n}}{\pi n},\]
+and taking square roots yields the familiar central binomial asymptotic
+\[\binom{2n}{n}\sim\frac{4^n}{\sqrt{\pi n}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Reduction formulas:} Integrals of the form $\int x^n(1-x^2)^{-1/2}\,dx$ often reduce by two degrees; IBP is the systematic tool.
+    \item \textbf{Wallis connection:} Comparing integrals of even and odd powers of cosine gives precise bounds involving $\pi$ and leads to Wallis-type asymptotics.
+    \item \textbf{Central binomial asymptotics:} The estimate $\binom{2n}{n}\sim 4^n/\sqrt{\pi n}$ follows from simple integral comparisons and is a core asymptotic used throughout combinatorics and analysis.
+\end{enumerate}
+\end{takeaways}
+
 % Problem 2: Polynomial Bounds (Sample 24)
 \begin{problem}[Triangle Inequality and Coefficient Analysis]
 Let $P(z) = a_n z^n + a_{n-1} z^{n-1} + \dots + a_1 z$.
