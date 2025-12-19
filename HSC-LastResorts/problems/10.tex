@@ -1,0 +1,78 @@
+% Problem 10: Viète's Formula and Infinite Cosine Product
+% Difficulty: Medium
+
+\begin{problem}[Viète's Formula and Infinite Cosine Product]
+Prove the following statements.
+\begin{enumerate}[label=(\roman*)]
+  \item For all integers $n\ge1$ and $\theta\neq m\pi$:
+  \[
+    \prod_{k=1}^{n} \cos\left(\frac{\theta}{2^k}\right) 
+    = \frac{\sin\theta}{2^n\sin\left(\dfrac{\theta}{2^n}\right)}.
+  \]
+
+  \item Hence show that for $\theta\neq0$:
+  \[
+    \prod_{k=1}^{\infty} \cos\left(\frac{\theta}{2^k}\right) = \frac{\sin\theta}{\theta}.
+  \]
+
+  \item Let $u_1=\sqrt{2}$ and $u_{n+1}=\sqrt{2+u_n}$ for $n\ge1$. Prove that for all $n\ge1$:
+  \[
+    u_n = 2\cos\left(\frac{\pi}{2^{n+1}}\right).
+  \]
+
+  \item Using (ii) and (iii), prove Viète's Formula:
+  \[
+    \frac{2}{\pi} = \frac{\sqrt{2}}{2}\cdot\frac{\sqrt{2+\sqrt{2}}}{2}\cdot\frac{\sqrt{2+\sqrt{2+\sqrt{2}}}}{2}\cdots
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (i) use induction; for the inductive step apply the double-angle identity
+\(\sin 2A = 2\sin A\cos A\). For (ii) take the limit as $n\to\infty$ and use the small-angle limit $\sin x\sim x$. For (iii) use the identity
+$1+\cos 2A = 2\cos^2 A$ to rewrite the recursion. For (iv) substitute $\theta=\pi/2$ into (ii) and relate the cosine factors to $u_n/2$ from (iii).
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Base case $n=1$ is immediate from $\sin\theta = 2\sin(\theta/2)\cos(\theta/2)$. Assume the formula holds for $n=k$. Then
+\begin{align*}
+  \prod_{r=1}^{k+1}\cos\left(\frac{\theta}{2^r}\right)
+  &= \left(\prod_{r=1}^{k}\cos\left(\frac{\theta}{2^r}\right)\right)\cos\left(\frac{\theta}{2^{k+1}}\right) \\
+  &= \frac{\sin\theta}{2^k\sin\left(\dfrac{\theta}{2^k}\right)}\cos\left(\frac{\theta}{2^{k+1}}\right).
+\end{align*}
+Use $\sin(2A)=2\sin A\cos A$ with $A=\dfrac{\theta}{2^{k+1}}$ to write
+\(\sin\left(\dfrac{\theta}{2^k}\right)=2\sin\left(\dfrac{\theta}{2^{k+1}}\right)\cos\left(\dfrac{\theta}{2^{k+1}}\right)\).
+Canceling the cosine gives the formula for $n=k+1$.
+
+\textbf{(ii)} From (i):
+\[\prod_{k=1}^{n} \cos\left(\frac{\theta}{2^k}\right)=\frac{\sin\theta}{2^n\sin(\theta/2^n)}.
+\]
+Let $x=\theta/2^n$. As $n\to\infty$, $x\to0$ and $2^n = \theta/x$, so the right-hand side becomes
+\[\frac{\sin\theta}{\theta}\cdot\frac{x}{\sin x} \to \frac{\sin\theta}{\theta} \cdot 1 = \frac{\sin\theta}{\theta}.
+\]
+
+\textbf{(iii)} For $n=1$ we have $u_1=\sqrt2=2\cos(\pi/4)$. Assume $u_k=2\cos(\pi/2^{k+1})$. Then
+\begin{align*}
+  u_{k+1} &= \sqrt{2+u_k} = \sqrt{2 + 2\cos\left(\frac{\pi}{2^{k+1}}\right)} \\
+  &= \sqrt{4\cos^2\left(\frac{\pi}{2^{k+2}}\right)} = 2\cos\left(\frac{\pi}{2^{k+2}}\right),
+\end{align*}
+using $1+\cos 2A = 2\cos^2 A$ with $2A=\dfrac{\pi}{2^{k+1}}$.
+
+\textbf{(iv)} Substitute $\theta=\pi/2$ in (ii):
+\[\prod_{k=1}^{\infty} \cos\left(\frac{\pi}{2^{k+1}}\right)=\frac{\sin(\pi/2)}{\pi/2}=\frac{2}{\pi}.
+\]
+Each factor $\cos\left(\dfrac{\pi}{2^{k+1}}\right)=\dfrac{u_k}{2}$ by (iii), so the infinite product equals
+\[\prod_{k=1}^{\infty} \frac{u_k}{2} = \frac{2}{\pi},
+\]
+which rearranges to the stated nested radical product (Viète's formula).
+
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+  \item Infinite products can often be obtained by taking limits of finite trigonometric product identities.
+  \item Recursive nested radicals are closely linked to half-angle cosine values.
+  \item Viète's Formula provides a beautiful product representation of $2/\pi$ and connects classical geometry with analysis. 
+  The formula is named after François Viète, who published it in 1593.
+\end{enumerate}
+\end{takeaways}
