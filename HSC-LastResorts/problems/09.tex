@@ -1,0 +1,99 @@
+% Problem 9: Pendulum Period and the AGM
+\begin{problem}[Pendulum Motion and the AGM]
+
+\noindent A simple pendulum of length $l$ is released from rest at the horizontal position ($\theta=\tfrac{\pi}{2}$). Let $\theta$ be the angle the pendulum makes with the downward vertical. From conservation of energy, the angular velocity satisfies:
+\[
+\left(\frac{d\theta}{dt}\right)^2=\frac{2g}{l}\cos\theta,
+\]
+where $g$ is the acceleration due to gravity. Let $T$ be the time taken for the pendulum 
+to swing from the horizontal position ($\theta=\tfrac{\pi}{2}$) to the vertical position ($\theta=0$).
+We can note that for small oscillations, $\cos\theta\approx1$, 
+so $T \approx \sqrt{\frac{l}{2g}} \cdot \frac{\pi}{2}$. (Do NOT prove this approximation.)
+
+\begin{enumerate}[label=(\roman*)]
+    \item By using the substitution $\sin(\tfrac{\theta}{2}) = \tfrac{1}{\sqrt{2}}\sin\phi$, show that:
+    \[
+    T=\sqrt{\frac{l}{g}}\int_{0}^{\pi/2}\frac{d\phi}{\sqrt{1-\tfrac{1}{2}\sin^2\phi}}
+    \]
+
+    \item Let the elliptic-type integral
+    \[
+    I(a,b)=\int_0^{\pi/2}\frac{d\phi}{\sqrt{a^2\cos^2\phi+b^2\sin^2\phi}}.
+    \]
+    Show the expression for $T$ can be written as
+    \[T=\sqrt{\frac{l}{g}}\,I\Bigl(1,\tfrac{1}{\sqrt2}\Bigr).\]
+
+    \item Define sequences $a_1=1$, $b_1=\tfrac{1}{\sqrt2}$ and for $n\ge1$:
+    \[a_{n+1}=\frac{a_n+b_n}{2},\qquad b_{n+1}=\sqrt{a_n b_n}.
+    \]
+    Show that $I(a_n,b_n)$ is invariant in $n$, and the sequences $a_n, b_n$ converge to the same limit. 
+    Let $M=\lim_{n\to\infty} a_n=\lim_{n\to\infty} b_n$. 
+    By taking limits show that the full period $P=4T$ satisfies
+    \[P=\frac{2\pi\sqrt{l/g}}{M}.
+    \]
+
+    \item The small-angle (harmonic) approximation gives $P_0=2\pi\sqrt{l/g}$. Using $b_1<M<a_1$, deduce
+    \[P_0 < P < \sqrt{2}\,P_0.
+    \]
+    Briefly explain why $P>P_0$.
+\end{enumerate}
+
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item For (i): Separate variables from the energy relation to get $dt$ in terms of $d\theta$, pick the correct sign for the motion, then substitute $\sin(\theta/2)=\tfrac{1}{\sqrt2}\sin\phi$ and change limits.
+    \item For (ii): Use $\cos^2\phi+\sin^2\phi=1$ to rewrite the integrand into the form $a^2\cos^2\phi+b^2\sin^2\phi$.
+    \item For (iii): Use the invariance to equate $I(1,1/\sqrt2)=I(M,M)$ and evaluate $I(M,M)=\pi/(2M)$.
+    \item For (iv): Invert the inequalities to bound $1/M$, then multiply by $2\pi\sqrt{l/g}$; explain that large amplitude slows the motion compared to the small-angle linearisation.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+
+% Small illustrative pendulum diagram
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+  % pivot O
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (2,0); % vertical down position for reference
+  % bob at horizontal start (theta = pi/2)
+  \coordinate (B) at (0,-2);
+  % draw support
+  \draw (O) node[above] {$O$} -- (B) node[below] {$B$};
+  \draw[dashed] (O) -- (A) node[right] {$\downarrow$};
+  \draw (O) circle (0.03cm);
+  \draw (0,0) -- ( -2,0 ) node[left] {$A$};
+  % arc and angle label
+  \draw[->] (-0.6,0) arc (180:270:0.6) node[midway,left] {$\theta$};
+  % length label
+  \draw[<->] (0,-2.2) -- (0,0.15) node[midway,right] {$l$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{(i)} From energy, $d\theta/dt=-\sqrt{(2g/l)\cos\theta}$ for the downward swing. Thus
+\[T=\sqrt{\tfrac{l}{2g}}\int_0^{\pi/2}\frac{d\theta}{\sqrt{\cos\theta}}.
+\]
+With $\sin(\theta/2)=\tfrac{1}{\sqrt2}\sin\phi$ one finds $\cos\theta=\cos^2\phi$ and
+\[d\theta=\frac{\sqrt{2}\cos\phi}{\sqrt{1-\tfrac{1}{2}\sin^2\phi}}\,d\phi,
+\]
+which yields the stated integral.
+
+\textbf{(ii)} Note $1-\tfrac{1}{2}\sin^2\phi=\cos^2\phi+\tfrac{1}{2}\sin^2\phi$, so the integrand is of the form in $I(a,b)$ with $a=1$, $b=1/\sqrt2$.
+
+\textbf{(iii)} By invariance $I(1,1/\sqrt2)=I(M,M)=\int_0^{\pi/2}d\phi/(M)=\pi/(2M)$. Hence
+\[T=\sqrt{\tfrac{l}{g}}\cdot\frac{\pi}{2M},\qquad P=4T=\frac{2\pi\sqrt{l/g}}{M}.
+\]
+
+\textbf{(iv)} Since $b_1< M< a_1$ we have $1/\sqrt2< M<1$, so $1<1/M<\sqrt2$. Multiplying by $2\pi\sqrt{l/g}$ gives $P_0<P<\sqrt2\,P_0$. Physically, for large amplitude the restoring tangential acceleration is not proportional to $\theta$, so the motion is slower than the small-angle linear approximation.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item The pendulum period for large amplitude leads to elliptic integrals; the AGM gives an efficient exact representation.
+    \item Recursive arithmetic–geometric mean sequences converge rapidly and can be used to evaluate certain definite integrals.
+    \item Small-angle linearisation underestimates the true period; inequalities give sharp bounds on the error.
+\end{enumerate}
+\end{takeaways}
+
+
