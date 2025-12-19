@@ -1,0 +1,74 @@
+% Problem 08: AGM and an Elliptic Integral
+\begin{problem}[Arithmetic--Geometric Mean and an Elliptic Integral]
+Let $a$ and $b$ be positive real numbers with $a>b$. Define
+\[
+I(a,b)=\int_{0}^{\pi/2}\frac{d\theta}{\sqrt{a^2\cos^2\theta+b^2\sin^2\theta}}.
+\]
+The AGM sequences are defined by $a_1=a$, $b_1=b$ and for $n\ge1$:
+\[
+a_{n+1}=\frac{a_n+b_n}{2},\qquad b_{n+1}=\sqrt{a_nb_n}.
+\]
+\begin{enumerate}[label=(\roman*)]
+\item Show that
+\[I(a,b)=I\Big(\frac{a+b}{2},\sqrt{ab}\Big).\]
+\item Prove that $a_n$ and $b_n$ converge to the same limit $L$, and deduce
+\[I(a,b)=\frac{\pi}{2L}.\]
+\item Show that for $a>b>0$,
+\[\frac{\pi}{2a}<I(a,b)<\frac{\pi}{2b},\]
+and hence $b<L<a$.
+\item By substituting $x=a\tan\theta$ show that
+\[\int_0^{\infty}\frac{dx}{\sqrt{(x^2+a^2)(x^2+b^2)}}=I(a,b).
+\]
+% Calculate the integral when $a_1=\sqrt{2}$ and $b_1=1$ (give answer to 3 d.p.).
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+  \item For (i) use Gauss's transformation (a standard substitution for elliptic integrals); if short on time you may accept the invariance $I(a_n,b_n)=I(a_{n+1},b_{n+1})$ and proceed.
+  \item For (ii) use monotonicity: $a_{n+1}\le a_n$, $b_{n+1}\ge b_n$, and $b_n\le a_n$ for all $n$, so both converge to the same limit $L$.
+  \item For (iii) bound the integrand by using $b^2< a^2\cos^2\theta+b^2\sin^2\theta< a^2$ on $(0,\pi/2)$.
+  \item For (iv) set $x=a\tan\theta$ and simplify the radical; then apply the AGM iteration numerically to find $L$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} The substitution
+\[\sin\theta=\frac{2b\sin\phi}{(a+b)+(a-b)\sin^2\phi}\]
+is Gauss's transformation and (after simplifying differentials) converts the integrand to the same form with parameters $(\tfrac{a+b}{2},\sqrt{ab})$, proving the invariance.
+
+\textbf{(ii)} The AGM sequences satisfy
+\[b_1\le b_2\le\dots\le a_2\le a_1,\]
+so they converge to a common limit $L$. Using (i) repeatedly gives
+\[I(a,b)=I(a_2,b_2)=\cdots=I(L,L)=\int_0^{\pi/2}\frac{d\theta}{\sqrt{L^2}}=\frac{\pi}{2L}.
+\]
+
+\textbf{(iii)} For $0\le\theta\le\pi/2$ we have $b^2\le a^2\cos^2\theta+b^2\sin^2\theta\le a^2$, so
+\[\frac{1}{a}\le\frac{1}{\sqrt{a^2\cos^2\theta+b^2\sin^2\theta}}\le\frac{1}{b}.
+\]
+Integrate to obtain the stated bounds; combining with (ii) gives $b<L<a$.
+
+\textbf{(iv)} Let $x=a\tan\theta$ so $dx=a\sec^2\theta\,d\theta$. Then
+\begin{align*}
+\int_0^{\infty}\frac{dx}{\sqrt{(x^2+a^2)(x^2+b^2)}}
+&=\int_0^{\pi/2}\frac{a\sec^2\theta\,d\theta}{\sqrt{a^2\tan^2\theta+a^2}\,\sqrt{a^2\tan^2\theta+b^2}}\\
+&=\int_0^{\pi/2}\frac{d\theta}{\sqrt{a^2\cos^2\theta+b^2\sin^2\theta}}=I(a,b).
+\end{align*}
+
+% For $a_1=\sqrt{2}\approx1.41421356$ and $b_1=1$ compute a few AGM steps:
+% \begin{align*}
+% a_2&=\tfrac{1.41421356+1}{2}=1.20710678,\quad b_2=\sqrt{1.41421356\cdot1}=1.18920712,\\
+% a_3&=\tfrac{1.20710678+1.18920712}{2}=1.19815695,\quad b_3=\sqrt{1.20710678\cdot1.18920712}=1.19814023.
+% \end{align*}
+% They agree to 5 decimal places; take $L\approx1.1981486$. Thus
+% \[\int_0^{\infty}\frac{dx}{\sqrt{(x^2+2)(x^2+1)}}=\frac{\pi}{2L}\approx\frac{3.14159265}{2\cdot1.1981486}\approx1.311\, (\text{to 3 d.p.}).\]
+
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+  \item The arithmetic--geometric mean iteration quickly reduces certain elliptic integrals to an elementary value $\pi/(2L)$; convergence is typically quadratic.
+  \item Bounding integrals by simple constants is a reliable way to obtain order estimates and locate limits.
+  \item The substitution $x=a\tan\theta$ is useful for converting improper integrals with symmetric quadratic factors into trigonometric elliptic forms.
+\end{enumerate}
+\end{takeaways}
