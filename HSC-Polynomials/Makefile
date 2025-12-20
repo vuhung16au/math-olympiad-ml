@@ -20,9 +20,7 @@ pdf: $(PDFFILE)
 
 $(PDFFILE): $(TEXFILE).tex
 	docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
-		pdflatex -interaction=nonstopmode $(TEXFILE).tex
-	docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
-		pdflatex -interaction=nonstopmode $(TEXFILE).tex
+		latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode %O %S" -silent $(TEXFILE).tex
 
 clean:
 	rm -f $(TEXFILE).aux $(TEXFILE).log $(TEXFILE).out $(TEXFILE).toc $(TEXFILE).pdf
