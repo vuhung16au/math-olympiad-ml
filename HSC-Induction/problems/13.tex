@@ -1,0 +1,30 @@
+\begin{problem}[Sum of consecutive odd numbers]
+\begin{enumerate}
+  \item[(a)] Use mathematical induction to prove that for all integers $n\ge1$,
+  \[
+  \sum_{r=1}^n (2r-1) = n^2.
+  \]
+  \item[(b)] Hence find the value of
+  \[
+  51 + 53 + 55 + \dots + 99.
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (a) check the base case $n=1$ and assume the formula for $n=k$, then add the $(k+1)$st odd number $2(k+1)-1$. For (b) express the requested sum as a difference of two partial sums of the first $N$ odd numbers.
+\end{hint}
+
+\begin{solution}
+For (a): base $n=1$ gives $1=1^2$. Assume $\sum_{r=1}^k(2r-1)=k^2$. Then
+\[\sum_{r=1}^{k+1}(2r-1)=k^2+2(k+1)-1=k^2+2k+1=(k+1)^2.
+\]
+For (b): note $51+\dots+99=\sum_{r=1}^{50}(2r-1)-\sum_{r=1}^{25}(2r-1)=50^2-25^2=2500-625=1875$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+  \item The sum of the first $n$ odd numbers equals $n^2$; visual proofs via gnomons illustrate this nicely.
+  \item Many evaluation problems reduce to re-indexing or subtracting partial sums.
+\end{itemize}
+\end{takeaways}
