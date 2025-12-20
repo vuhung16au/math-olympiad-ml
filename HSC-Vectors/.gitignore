@@ -31,7 +31,9 @@ privs/
 # Release directory (optional - uncomment if you don't want to track releases)
 !releases/HSC-Induction.pdf
 samples/
+samples2/
 bloggings/
+Prompts/
 docs/
 TODO/
 PLAN.md

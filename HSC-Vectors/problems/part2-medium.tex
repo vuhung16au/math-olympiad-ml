@@ -11,6 +11,88 @@ Equating components: $3 + \lambda = 1 - 2\mu$, $-1 + 2\lambda = -6 + \mu$, $7 + 
 \end{solution}
 
 \vspace{1em}
+\begin{problem}[Triangular Pyramid — Find Vertex Coordinates]
+The diagram below shows a triangular pyramid with vertices 
+$O(0,0,0)$, $P(4,3,0)$, $Q(3,4,0)$ and $R(x,y,z)$, 
+where $x,y,z$ are positive real numbers. 
+Given that $\angle RPO=\angle RQO=\frac{\pi}{3}$ and $|\vec{PR}|=|\vec{QR}|=5$, 
+find the coordinates of $R$.
+
+
+\tdplotsetmaincoords{70}{110}
+\begin{center}
+\begin{tikzpicture}[tdplot_main_coords, scale=0.8]
+    % Axes
+    \draw[thick,->] (0,0,0) -- (7,0,0) node[anchor=north east]{$x$};
+    \draw[thick,->] (0,0,0) -- (0,7,0) node[anchor=north west]{$y$};
+    \draw[thick,->] (0,0,0) -- (0,0,7) node[anchor=south]{$z$};
+
+    % Points
+    \coordinate (O) at (0,0,0);
+    \coordinate (P) at (4,3,0);
+    \coordinate (Q) at (3,4,0);
+    \coordinate (R) at (1.78, 1.78, 4.35); % Approximate for visualization
+
+    % Lines - Solid for visible
+    \draw[thick, blue] (O) -- (P) node[midway, below left] {5};
+    \draw[thick, blue] (O) -- (Q) node[midway, below right] {5};
+    \draw[thick, blue] (P) -- (Q);
+    \draw[thick, blue] (O) -- (R);
+    \draw[thick, blue] (P) -- (R) node[midway, left] {5};
+    \draw[thick, blue] (Q) -- (R) node[midway, right] {5};
+
+    % Labels
+    \node[anchor=south east] at (O) {$O(0,0,0)$};
+    \node[anchor=north] at (P) {$P(4,3,0)$};
+    \node[anchor=west] at (Q) {$Q(3,4,0)$};
+    \node[anchor=south west] at (R) {$R(x,y,z)$};
+
+    % Angles (Arcs)
+    % Angle RPO
+    \draw[thin, blue] (4,3,0) ++(140:0.8) arc (140:100:0.8);
+    \node[blue, scale=0.8] at (3.5, 3.2, 0.5) {$\frac{\pi}{3}$};
+    
+    % Angle RQO
+    \draw[thin, blue] (3,4,0) ++(120:0.8) arc (120:80:0.8);
+    \node[blue, scale=0.8] at (2.8, 3.5, 0.5) {$\frac{\pi}{3}$};
+
+    % Dashed lines for projection (optional, adds depth)
+    \draw[dashed, gray] (R) -- (1.78, 1.78, 0);
+\end{tikzpicture}
+\end{center}
+
+
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item Calculate $|OP|$ and $|OQ|$ to recognise any special triangle.
+    \item Use the fact that equal sides with included $60^\circ$ imply equilateral properties.
+    \item Set up three sphere-distance equations for $R(x,y,z)$ from $O,P,Q$ and subtract to get linear relations for $x,y$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Sketch]
+Compute $|OP|=\sqrt{4^2+3^2}=5$ and $|OQ|=5$. Since $|PR|=5$ and $\angle RPO=60^\circ$, triangle $RPO$ is equilateral so $|OR|=5$. Thus
+\begin{align*}
+x^2+y^2+z^2 &= 25, \\
+(x-4)^2+(y-3)^2+z^2 &= 25, \\
+(x-3)^2+(y-4)^2+z^2 &= 25.
+\end{align*}
+Subtracting the first from the second and third gives the linear system
+\begin{align*}
+8x+6y &= 25, \\
+6x+8y &= 25,
+\end{align*}
+so by symmetry $x=y=\tfrac{25}{14}$. Substituting into $x^2+y^2+z^2=25$ yields $z=\dfrac{5\sqrt{47}}{7}$.
+\end{solution}
+
+\vspace{0.5em}
+\noindent\textbf{Takeaways}
+\begin{itemize}
+    \item Intersection of spheres often reduces 3D location problems to solving linear systems by subtraction.
+    \item Symmetry in the base points can force $x=y$ and simplify algebra.
+\end{itemize}
 
 \begin{problem}[Perpendicular Intersecting Lines]
 Consider the line $L_1: \mathbf{r} = \begin{pmatrix} 3 \\ -1 \\ 7 \end{pmatrix} + \mu \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$ and the line $L_2: \mathbf{r} = \begin{pmatrix} 1 \\ 0 \\ p \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ q \\ -1 \end{pmatrix}$. \\
