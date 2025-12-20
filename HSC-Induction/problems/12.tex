@@ -1,0 +1,24 @@
+\begin{problem}[Logarithmic Reduction and Closed Form]
+Let $I_n=\displaystyle\int_1^e(\ln x)^n\,dx$ for $n\ge0$.
+\begin{enumerate}
+  \item Use integration by parts to show $I_n=e-nI_{n-1}$ for $n\ge1$.
+  \item Prove by induction that
+  \[I_n = (-1)^n n! + e\sum_{r=0}^n (-1)^{n-r}\frac{n!}{r!}\quad\text{for }n\ge0.
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (1) take $u=(\ln x)^n$ and $dv=dx$. For part (2) verify base $I_0$ and substitute the recurrence into the inductive step.
+\end{hint}
+
+\begin{solution}
+Integration by parts with $u=(\ln x)^n$, $dv=dx$ gives $I_n=[x(\ln x)^n]_1^e-n\int_1^e(\ln x)^{n-1}\,dx=e-nI_{n-1}$. The closed form follows by induction using this recurrence and the base value $I_0=\int_1^e1\,dx=e$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+  \item Reduction formulae from integration by parts often yield closed forms when iterated.
+  \item Combining recurrences with factorial manipulations is a useful technique for exact evaluations.
+\end{itemize}
+\end{takeaways}

@@ -1,0 +1,30 @@
+\begin{problem}[Product of odd factorials inequality]
+Prove that for every integer $n\ge1$,
+\[
+1!\cdot3!\cdot5!\cdots(2n-1)! \ge (n!)^n.
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+  \item Compare the product for $n=k+1$ with the product for $n=k$ and isolate the new factor $(2k+1)!$.
+  \item Expand $(2k+1)!$ as $(2k+1)(2k)\cdots(k+2)(k+1)!$ and lower-bound the first $k$ factors by $(k+1)$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Base case $n=1$ is trivial. Assume the inequality for $n=k$. Then
+\[\prod_{r=1}^{k+1}(2r-1)! = \Bigl(\prod_{r=1}^{k}(2r-1)!\Bigr)(2k+1)! \ge (k!)^k (2k+1)!.
+\]
+Since $(2k+1)!=(2k+1)(2k)\cdots(k+2)\cdot(k+1)!$ and each of the $k$ factors in $(2k+1)\dots(k+2)$ is at least $k+1$, we have
+\[(2k+1)! \ge (k+1)^k (k+1)! = ((k+1)!)^{k+1}/(k!)^k.
+\]
+Combining yields the claim for $k+1$, completing the induction.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+  \item Product-type induction frequently uses termwise bounds and counting arguments to compare multiplicative growth.
+  \item Carefully isolate the new multiplicative factor when moving from $k$ to $k+1$.
+\end{itemize}
+\end{takeaways}

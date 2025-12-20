@@ -1,0 +1,24 @@
+\begin{problem}[Bounding cubic sums]
+Let $a_1,a_2,\dots,a_n$ be positive real numbers with $a_1+a_2+\cdots+a_n=1$. Prove that
+\[
+\sum_{i=1}^n a_i^3 \ge \frac{1}{n^2}.
+\]
+\end{problem}
+
+\begin{hint}
+Use Holder's inequality or the power mean inequality; compare $(\sum a_i)^3$ with $n^2\sum a_i^3$.
+\end{hint}
+
+\begin{solution}
+By Hölder (or power mean),
+\[(\sum_{i=1}^n a_i)^3 \le n^2 \sum_{i=1}^n a_i^3.
+\]
+Since the left side equals $1$, rearrange to get $\sum a_i^3 \ge 1/n^2$, as desired.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+  \item Hölder and power mean inequalities give quick bounds relating different power sums.
+  \item Normalizing sums to $1$ simplifies many symmetric inequalities.
+\end{itemize}
+\end{takeaways}

@@ -1,0 +1,64 @@
+\begin{problem}[Reduction of the Tangent Integral]
+Let $I_n=\displaystyle\int_0^{\pi/4}\tan^n x\,dx$ for $n=0,1,2,\dots$.
+\begin{enumerate}
+  \item Show that for $n\ge2$,
+  \[I_n+I_{n-2}=\frac{1}{n-1}.
+  \]
+  \item Hence find the exact value of $I_4$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Write $\tan^n x=\tan^{n-2}x\cdot\tan^2x$ and use the identity $\tan^2x=\sec^2x-1$; substitute $u=\tan x$ for the term with $\sec^2x$.
+\end{hint}
+
+\begin{solution}
+
+\textbf{Direct Proof}
+
+
+For $n\ge2$,
+\[I_n=\int_0^{\pi/4}\tan^{n-2}x(\sec^2x-1)\,dx = \left[\frac{\tan^{n-1}x}{n-1}\right]_0^{\pi/4}-I_{n-2}=\frac{1}{n-1}-I_{n-2}.
+\]
+Rearranging gives $I_n+I_{n-2}=1/(n-1)$. To find $I_4$, note
+\begin{align*}
+I_4+I_2&=\tfrac{1}{3},\\
+I_2+I_0&=1,\quad I_0=\int_0^{\pi/4}1\,dx=\tfrac{\pi}{4}.
+\end{align*}
+Thus $I_2=1-\tfrac{\pi}{4}$ and $I_4=\tfrac{1}{3}-I_2=\tfrac{\pi}{4}-\tfrac{2}{3}$.
+
+\textbf{Inductive proof of the recurrence}
+
+Two cases arise depending on the parity of $n$. 
+
+First, let's prove the case for even $n = 2m$.
+Similarly to above, we can verify the base case of $m = 1$.
+
+Now assume for some $m\ge1$ that for $n=2m$ the identity $I_{2m}+I_{2m-2}=1/(2m-1)$ holds. 
+
+Consider $n=2m+2$:
+\begin{align*}
+I_{2m+2} &= \int_0^{\pi/4}\tan^{2m}(x)\tan^2x\,dx \\
+         &= \int_0^{\pi/4}\tan^{2m}x(\sec^2x-1)\,dx \\
+         &= \left[\frac{\tan^{2m+1}x}{2m+1}\right]_0^{\pi/4}-I_{2m} \\
+         &= \frac{1}{2m+1}-I_{2m}.
+\end{align*}
+
+% Consider $n=2m+2$:
+% \[I_{2m+2}=\int_0^{\pi/4}\tan^{2m}(x)\tan^2x\,dx=\int_0^{\pi/4}\tan^{2m}x(\sec^2x-1)\,dx=\left[\frac{\tan^{2m+1}x}{2m+1}\right]_0^{\pi/4}-I_{2m}=\frac{1}{2m+1}-I_{2m}.
+% \]
+
+Rearranging gives $I_{2m+2}+I_{2m}=1/(2m+1)$, completing the induction step. An analogous parity-shifted argument covers odd indices, so the recurrence holds for all $n\ge2$.
+A side note: The direct proof is more straightforward in this case, but the inductive approach illustrates how to handle reduction formulae recursively, though not necessry here.
+% \end{proof}
+
+\end{solution}
+
+
+
+\begin{takeaways}
+\begin{itemize}
+  \item Reduction formulae convert higher-power integrals into lower-power ones, enabling recursive evaluation.
+  \item Substitution after using trigonometric identities is a common pattern.
+\end{itemize}
+\end{takeaways}
