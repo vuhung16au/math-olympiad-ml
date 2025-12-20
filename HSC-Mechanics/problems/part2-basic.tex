@@ -27,6 +27,30 @@ Consider when the velocity changes sign to determine the motion direction. The p
 \item \textbf{Distance Calculation:} Sum absolute values of displacement for each segment between direction changes
 \end{takeaways}
 
+% --- New problem: samples3/06.tex (Motion with $v^2$ retardation) ---
+\begin{problem}
+A particle moving in a straight line experiences an acceleration $a = -\dfrac{v^2}{10}$ (m/s$^2$). Initially ($t=0$) it is at the origin with velocity $v(0)=U$. Show that
+\begin{enumerate}[label=\textbf{\alph*.}]
+    \item $v(t)=\dfrac{10U}{10+Ut}$
+    \item $x(t)=10\ln\left(1+\dfrac{Ut}{10}\right)$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Write $a=\dfrac{dv}{dt}$, separate variables for $\dfrac{dv}{v^2}$, then integrate. For $x$, use $v=\dfrac{dx}{dt}$ and integrate the resulting rational function in $t$.
+\end{hint}
+
+\begin{solution}
+From $\dfrac{dv}{dt}=-\dfrac{v^2}{10}$, separate: $\int v^{-2}\,dv=-\int \dfrac{1}{10}\,dt$, giving $-v^{-1}=-\dfrac{t}{10}+C$. With $v(0)=U$ we get $C=-1/U$, so $-1/v=-(t/10+1/U)$ and hence $v=\dfrac{10U}{10+Ut}$. 
+
+For displacement, $\dfrac{dx}{dt}=\dfrac{10U}{10+Ut}$. Integrate: $x=10\int\dfrac{1}{10+Ut}\,dt =10\ln(10+Ut)+C'$. Using $x(0)=0$ gives $C'=-10\ln 10$, so $x=10\ln\frac{10+Ut}{10}=10\ln\left(1+\dfrac{Ut}{10}\right)$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Variable acceleration:} When $a$ depends on $v$, use $\dfrac{dv}{dt}$ for $v(t)$ and $v\dfrac{dv}{dx}$ for $v(x)$ depending on the target.
+\item \textbf{Logarithmic displacement:} Quadratic retardation often leads to logarithmic expressions for displacement; the particle slows but continues moving without a finite stopping distance.
+\end{takeaways}
+
 \begin{problem}
 A particle moves in simple harmonic motion about the point $x = 3$ m with amplitude 2 m. When $t = 0$, the particle is at $x = 5$ m and moving towards the origin with speed $4$ m/s.
 

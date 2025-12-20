@@ -31,6 +31,29 @@ Rewrite the equation to identify SHM about a shifted center. Use $v\frac{dv}{dx}
 \item \textbf{Amplitude determination:} In SHM, amplitude can be found from maximum displacement when $v = 0$, or from the velocity at any known position using the energy equation
 \end{takeaways}
 
+% --- New problem: samples3/05.tex (Terminal velocity and limiting position for $a=k(1-v^2)$) ---
+\begin{problem}
+The acceleration of a particle is $a=k(1-v^2)$ with $k>0$ and initial conditions $x=0$, $v=0$. Show:
+\begin{enumerate}[label=\textbf{\alph*.}]
+    \item $v(t)=\tanh(kt)$
+    \item Terminal velocity $v_T=1$
+    \item $x(v)=-\dfrac{1}{2k}\ln(1-v^2)$
+    \item As $t\to\infty$, $x\to\infty$ (no finite limiting position)
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Solve $\dfrac{dv}{dt}=k(1-v^2)$ by separation and partial fractions to obtain a hyperbolic tangent. Use $v\dfrac{dv}{dx}=k(1-v^2)$ to relate $x$ and $v$.
+\end{hint}
+
+\begin{solution}
+Separating: $\int\dfrac{dv}{1-v^2}=\int k\,dt$ gives $\tfrac{1}{2}\ln\left|\dfrac{1+v}{1-v}\right|=kt+C$. With $v(0)=0$, $C=0$, solve to get $v=\tanh(kt)$. Terminal velocity is $\lim_{t\to\infty}\tanh(kt)=1$. For $x$, use $v\dfrac{dv}{dx}=k(1-v^2)$, integrate $\int\dfrac{v}{1-v^2}\,dv=\int k\,dx$ to get $x=-\dfrac{1}{2k}\ln(1-v^2)$. As $v\to1$, $x\to\infty$.
+\end{solution}
+
+\begin{takeaways}
+\item Nonlinear ODEs with form $1-v^2$ often yield hyperbolic function solutions (here $\tanh$).
+\item Terminal velocity can be finite while displacement still grows without bound.
+\end{takeaways}
 \begin{problem}
 A particle moves with acceleration $\ddot{x} = k(1 - v^2)$ where $k$ is a positive constant. Initially, $x = 0$ and $v = 0$.
 \begin{enumerate}[label=\textbf{\roman*.}]

@@ -31,6 +31,99 @@ $V = 10\sqrt{2}$, $\alpha = 45°$. $v_x = v_y = 10$ m/s.
 \item \textbf{Time to Max Height:} $t = \frac{v_y}{g}$ from $v_y - gt = 0$
 \end{takeaways}
 
+% --- New problem: samples3/01.tex (Resisted vertical motion: quadratic drag upwards) ---
+\begin{problem}
+A particle of mass $m$ is projected vertically upwards from the ground with initial velocity $u$. Air resistance is $R = mkv^2$ acting opposite to motion. Let $x$ be upward displacement. Show:
+\begin{enumerate}[label=\textbf{(\roman*)}]
+    \item $\ddot{x}=-(g+kv^2)$ while rising
+    \item Maximum height $H=\dfrac{1}{2k}\ln\left(\dfrac{g+ku^2}{g}\right)$
+    \item Time to reach max $T=\dfrac{1}{\sqrt{gk}}\tan^{-1}\left(u\sqrt{\dfrac{k}{g}}\right)$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Apply $F=ma$ with both gravity and drag opposing upward motion. Use $v\dfrac{dv}{dx}$ for displacement and $\dfrac{dv}{dt}$ for time integrals; the time integral leads to an arctan form.
+\end{hint}
+
+\begin{solution}
+Newton: $m\ddot{x}=-mg-mkv^2\Rightarrow\ddot{x}=-(g+kv^2)$. Using $v\dfrac{dv}{dx}=-(g+kv^2)$ and integrating gives $H=\dfrac{1}{2k}\ln\left(\dfrac{g+ku^2}{g}\right)$. For time, integrate $\dfrac{dv}{g+kv^2}$ from $u$ to $0$, yielding $T=\dfrac{1}{\sqrt{gk}}\tan^{-1}\left(u\sqrt{\dfrac{k}{g}}\right)$.
+\end{solution}
+
+\begin{takeaways}
+\item Both gravity and quadratic drag oppose upward motion, producing logarithmic height expressions.
+\item Use $v\dfrac{dv}{dx}$ to find distances and $\dfrac{dv}{dt}$ for times; expect $\tan^{-1}$ when integrating $1/(a+bv^2)$.
+\end{takeaways}
+
+% --- New problem: samples3/02.tex (Horizontal motion with resistance $R=v+v^3$) ---
+\begin{problem}
+A particle of unit mass moves against resistance $R=v+v^3$. Initially $x=0$, $v=Q>0$. Show:
+\begin{enumerate}[label=\textbf{\alph*.}]
+    \item $x=\arctan(Q)-\arctan(v)$
+    \item $t=\dfrac{1}{2}\ln\left(\dfrac{Q^2(1+v^2)}{v^2(1+Q^2)}\right)$
+    \item $v^2=\dfrac{Q^2}{e^{2t}(1+Q^2)-Q^2}$
+    \item As $t\to\infty$, $v\to0$ and $x\to\arctan Q$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use $v\dfrac{dv}{dx}=-(v+v^3)$ for displacement (inverse tan integral), and $\dfrac{dv}{dt}=-(v+v^3)$ with partial fractions for time.
+\end{hint}
+
+\begin{solution}
+For $x$: $\dfrac{dv}{dx}=-(1+v^2)$ so integrate to get $x=\arctan(Q)-\arctan(v)$. For $t$: separate $\dfrac{dv}{v(1+v^2)}$ and use partial fractions to obtain the logarithmic expression; rearrange to the $v^2$ formula above. Limits follow from $e^{2t}\to\infty$.
+\end{solution}
+
+\begin{takeaways}
+\item Combining linear and cubic resistance yields inverse-trigonometric displacement and logarithmic time laws.
+\item Partial fractions and the substitution $u=v^2$ simplify the time integral.
+\end{takeaways}
+
+% --- New problem: samples3/03.tex (Piecewise resisted motion; parachute opening) ---
+\begin{problem}
+A parachutist falls under $\frac{dv}{dt}=g-kv$. For $0\le t\le10$, $k=0.1$; for $t>10$, $k=2.0$ (parachute open). With $v(0)=0$, show:
+\begin{enumerate}[label=\textbf{\alph*.}]
+    \item Velocity after 10 s: $v_{10}=98(1-e^{-1})\approx61.95$ m/s
+    \item For $t>10$, $v(t)=4.9-(4.9-v_{10})e^{-2(t-10)}$
+    \item Terminal velocity after chute opens: $v_T=4.9$ m/s
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Solve $\dfrac{dv}{dt}=g-kv$ in each stage; use continuity of velocity at $t=10$. For the second stage, shift time origin or use $t-10$.
+\end{hint}
+
+\begin{solution}
+Stage 1: $v=\dfrac{g}{k}(1-e^{-kt})$ with $k=0.1$ gives $v_{10}=\dfrac{9.8}{0.1}(1-e^{-1})=98(1-e^{-1})$. Stage 2: with initial $v_{10}$ at $T=0$ and $k=2$, solve to get $v(t)=4.9-(4.9-v_{10})e^{-2(t-10)}$. Terminal velocity $4.9$ follows from $g/k$.
+\end{solution}
+
+\begin{takeaways}
+\item For piecewise resistance, solve separately and match boundary conditions at switching time.
+\item Terminal velocity depends only on current resistance constant $k$, not past history.
+\end{takeaways}
+
+% --- New problem: samples3/04.tex (Falling with quadratic resistance; terminal velocity) ---
+\begin{problem}
+A mass is dropped from rest at height $h$ and experiences resistance $Res = mkv^2$ (downwards positive). Let $x$ be distance fallen. Show:
+\begin{enumerate}[label=\textbf{\alph*.}]
+    \item $\ddot{x}=g-kv^2$
+    \item $v^2=\dfrac{g}{k}(1-e^{-2kx})$
+    \item Velocity at ground: $v=\sqrt{\dfrac{g}{k}\left(1-e^{-2kh}\right)}$
+    \item Terminal velocity $v_T=\sqrt{\dfrac{g}{k}}$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use $m\ddot{x}=mg-mkv^2$ and the identity $\ddot{x}=v\dfrac{dv}{dx}=\dfrac{1}{2}\dfrac{d(v^2)}{dx}$ to obtain a separable equation in $v^2$ and $x$.
+\end{hint}
+
+\begin{solution}
+Newton gives $\ddot{x}=g-kv^2$. With $\dfrac{1}{2}\dfrac{d(v^2)}{dx}=g-kv^2$, separate and integrate to obtain $g-kv^2=ge^{-2kx}$, hence $v^2=\dfrac{g}{k}(1-e^{-2kx})$. Evaluate at $x=h$ for impact speed; let $x\to\infty$ to get terminal velocity.
+\end{solution}
+
+\begin{takeaways}
+\item Quadratic drag in vertical fall yields an increasing $v^2$ approaching the constant $g/k$.
+\item Using $v\dfrac{dv}{dx}$ converts the second-order ODE into a first-order separable equation for $v^2(x)$.
+\end{takeaways}
 \begin{problem}
 A particle moves in a straight line with acceleration $\ddot{x} = 3x^2$. When $x = 1$, the velocity is $v = 2$ m/s. Find the velocity when $x = 2$.
 \end{problem}
