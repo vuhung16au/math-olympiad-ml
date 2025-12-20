@@ -1,0 +1,46 @@
+\begin{problem}[Logarithmic derivative of a polynomial]
+Given the polynomial
+\[
+P_n(x)=\prod_{i=1}^n(x-a_i)=(x-a_1)(x-a_2)\dots(x-a_n),
+\]
+prove by mathematical induction that for all integers $n\ge2$:
+\[
+\frac{P_n'(x)}{P_n(x)}=\frac{1}{x-a_1}+\frac{1}{x-a_2}+\dots+\frac{1}{x-a_n}.
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+  \item Verify the base case $n=2$ using the product rule $(uv)'=u'v+uv'$. 
+  \item Write $P_{k+1}(x)=P_k(x)(x-a_{k+1})$ and differentiate using the product rule.
+  \item Divide the derivative $P_{k+1}'(x)$ by $P_{k+1}(x)$ and use the inductive hypothesis.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{Base case.} For $n=2$, $P_2(x)=(x-a_1)(x-a_2)$ and
+\[P_2'(x)=(x-a_2)+(x-a_1),\]
+so
+\[\frac{P_2'(x)}{P_2(x)}=\frac{(x-a_1)+(x-a_2)}{(x-a_1)(x-a_2)}=\frac{1}{x-a_1}+\frac{1}{x-a_2}.
+\]
+
+\textbf{Inductive step.} Assume for some $k\ge2$ that
+\[\frac{P_k'(x)}{P_k(x)}=\sum_{i=1}^k\frac{1}{x-a_i}.
+\]
+Let $P_{k+1}(x)=P_k(x)(x-a_{k+1})$. Differentiating gives
+\[P_{k+1}'(x)=P_k'(x)(x-a_{k+1})+P_k(x).
+\]
+Divide by $P_{k+1}(x)=P_k(x)(x-a_{k+1})$ to obtain
+\[\frac{P_{k+1}'(x)}{P_{k+1}(x)}=\frac{P_k'(x)}{P_k(x)}+\frac{1}{x-a_{k+1}}.
+\]
+Substituting the inductive hypothesis yields the desired identity for $k+1$. Thus the formula holds for all $n\ge2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+  \item This identity is the logarithmic derivative: $\frac{d}{dx}\ln P_n(x)=\frac{P_n'(x)}{P_n(x)}$, turning products into sums.
+  No induction required!
+  \item It generalises the product rule to $n$ factors and is useful for partial-fraction decompositions.
+  \item The proof is a straightforward application of the product rule combined with induction.
+\end{itemize}
+\end{takeaways}
