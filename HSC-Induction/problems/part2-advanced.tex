@@ -48,7 +48,7 @@ Inductive step: For $n=k+1$,
 \end{align*}
 By the hypothesis, $S_k R_k \geq k^2$. For each $i$, $\frac{a_i}{a_{k+1}} + \frac{a_{k+1}}{a_i} \geq 2$. Thus,
 \begin{align*}
-	ext{LHS}_{k+1} &\geq k^2 + 1 + 2k = (k+1)^2
+	\text{LHS}_{k+1} &\geq k^2 + 1 + 2k = (k+1)^2
 \end{align*}
 So the result holds for $n=k+1$.
 
@@ -69,7 +69,13 @@ Base case: $T_1 = 1 = 2^1 - 1$. Assume $T_k = 2^k - 1$. To move $k+1$ disks: mov
 \end{solution}
 
 \begin{problem}[Vandermonde's Identity]
-Prove that $\binom{m+n}{r} = \sum_{k=0}^{r} \binom{m}{k}\binom{n}{r-k}$ for non-negative integers $m,n,r$.
+Prove that $\binom{m+n}{r} = \sum_{k=0}^{r} \binom{m}{k}\binom{n}{r-k}$ 
+for non-negative integers $m,n,r$.
+
+Here, by definition, $\binom{a}{b} = \frac{a!}{b!(a-b)!}$ for integers $0 \le b \le a$, and
+
+$\binom{a}{b} = 0$ if $b > a$. 
+
 \end{problem}
 
 \begin{hint}

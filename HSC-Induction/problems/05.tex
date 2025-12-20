@@ -1,0 +1,84 @@
+\begin{problem}[Recursive sequence via $f(x)=2^x+2^{-x}$]
+Let the function $f(x)$ be defined by 
+
+$$f(x)=2^x+2^{-x}$$ for all real $x$.
+
+Consider the sequence $(u_n)$ defined by
+\[
+u_1=\tfrac{5}{2},\qquad u_{n+1}=\sqrt{2+u_n}\quad(n\ge1).
+\]
+
+\begin{enumerate}[label=(\roman*)]
+  \item Show that $f(x)^2=f(2x)+2$, and deduce that
+  \[f\left(\frac{x}{2}\right)=\sqrt{2+f(x)}\quad(\forall x\in\mathbb{R}).\]
+  \item Use induction to prove that for every integer $n\ge1$,
+  \[u_n=f\left(\frac{1}{2^{n-1}}\right).
+  \]
+  \item Find the exact value of
+  \[\lim_{n\to\infty} 2^n\sqrt{u_n-2}.\]
+  \item Evaluate the telescoping product limit
+  \[\lim_{n\to\infty}\frac{u_1u_2\cdots u_n}{2^n}.
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+  \item Expand $(2^x+2^{-x})^2$ and take the positive square root (note $f>0$).
+  \item For induction, set $x=2^{1-k}$ when passing from $k$ to $k+1$ and use part (i).
+  \item Write $u_n-2=(2^{t}-2^{-t})^2$ for a small $t$ and use the limit $\lim_{t\to0}\frac{2^t-1}{t}=\ln2$.
+  \item Multiply the product by the conjugate factors $2^{x}-2^{-x}$ to telescope.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Part (i): Expand to get $[f(x)]^2=2^{2x}+2^{-2x}+2=f(2x)+2$. Replace $x$ by $x/2$ and take the positive root to obtain the identity claimed.
+
+Part (ii): Base case $u_1=f(1)=2+2^{-1}=5/2$. If $u_k=f(2^{1-k})$ then
+\[u_{k+1}=\sqrt{2+u_k}=\sqrt{2+f(2^{1-k})}=f\left(\tfrac{2^{1-k}}{2}\right)=f(2^{-k}),\]
+so the statement holds by induction.
+
+Part (iii): Put $h_n=1/2^{n-1}$ so $u_n=2^{h_n}+2^{-h_n}$. Then
+\[\sqrt{u_n-2}=2^{h_n/2}-2^{-h_n/2},\quad \text{where }h_n/2=1/2^n.
+\]
+Thus
+\[2^n\sqrt{u_n-2}=\frac{2^t-2^{-t}}{t}\Big|_{t=1/2^n}\to (\ln2)-(-\ln2)=2\ln2.
+\]
+
+Part (iv): Let $x_k=1/2^{k-1}$ and set $g_k=2^{x_k}-2^{-x_k}$. Note
+\[u_k g_k=2^{2x_k}-2^{-2x_k}=g_{k-1}.
+\]
+Multiplying for $k=1,\dots,n$ gives $P_n g_n=g_0$ where $P_n=\prod_{k=1}^n u_k$ and $g_0=2^{2}-2^{-2}=15/4$. Hence
+\[\frac{P_n}{2^n}=\frac{15/4}{2^n(2^{x_n}-2^{-x_n})}.
+\]
+With $t=x_n=1/2^{n-1}$ we have $2^n(2^t-2^{-t})\to 2\cdot2\ln2=4\ln2$, so the limit equals $\dfrac{15}{16\ln2}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+  \item What happens when $u_1 < 2$? Can we use trigonometric functions instead of exponentials?
+  \item When $u_1 = 2$, the sequence is constant: $u_n = 2$ for all $n$ and we call the point a fixed point.
+  \item Link this problem to the hyperbolic cosine function $\cosh x = \frac{e^x + e^{-x}}{2}$.
+  \item Recognise when sequences stem from a two-term exponential identity such as $2^x+2^{-x}$ (a hyperbolic/cosh-like form).
+  \item Telescoping products often require multiplying by conjugates; identify the right companion factor.
+  \item Convert limits with $n\to\infty$ and exponentials to standard derivative-form limits via substitution $t\to0$.
+  \item Using L'Hopital's rule can help evaluate tricky limits.
+  
+    L'Hopital's rule states that if $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = 0$, and the derivatives $f'(x)$ and $g'(x)$ are continuous near $a$ with $g'(x) \neq 0$ for $x \neq a$, then
+        \[
+        \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}
+        \]
+    provided the limit on the right exists.
+
+\end{itemize}
+\end{takeaways}
+
+
+% \begin{remark}
+%     L'Hopital's rule states that if $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = 0$, and the derivatives $f'(x)$ and $g'(x)$ are continuous near $a$ with $g'(x) \neq 0$ for $x \neq a$, then
+% \[
+% \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}
+% \]
+% provided the limit on the right exists.
+
+% \end{remark}
