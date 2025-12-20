@@ -39,6 +39,50 @@ Binomial coefficients count combinations; central to polynomial expansions.
 \vspace{1cm}
 
 % =============================================================================
+% PROBLEM 39: Integration Problem - Partial Fraction Decomposition
+% =============================================================================
+\begin{problem}
+Consider the integral:
+$$
+I = \int \frac{1}{x^6 - x^4} \, dx
+$$
+\begin{enumerate}
+    \item[(i)] Factorise the polynomial $P(x) = x^6 - x^4$ completely.
+    \item[(ii)] Show that the integrand can be expressed as:
+    $$
+    \frac{1}{x^6 - x^4} = -\frac{1}{x^2} - \frac{1}{x^4} + \frac{1}{x^2 - 1}
+    $$
+    \item[(iii)] Hence, evaluate the integral $I$.
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\begin{hintbox}
+Factor out the greatest common factor and apply difference of squares. For the decomposition, set $u=x^2$ and perform partial fractions in $u$. Use standard antiderivatives for power functions and the logarithmic form for $1/(x^2-1)$.
+\end{hintbox}
+
+\begin{solution}
+Factor: $x^6-x^4=x^4(x^2-1)=x^4(x-1)(x+1)$. Let $u=x^2$. Decompose:
+$$
+\frac{1}{u^2(u-1)}=\frac{A}{u}+\frac{B}{u^2}+\frac{C}{u-1}
+$$
+Solving gives $A=-1,B=-1,C=1$, so returning to $x$:
+$$
+\frac{1}{x^6-x^4} = -\frac{1}{x^2} - \frac{1}{x^4} + \frac{1}{x^2-1}
+$$
+Integrating termwise:
+$$
+I = \int\left(-x^{-2}-x^{-4}+\frac{1}{x^2-1}\right)dx = \frac{1}{x}+\frac{1}{3x^3}+\frac{1}{2}\ln\left|\frac{x-1}{x+1}\right| + C
+$$
+\end{solution}
+
+\begin{takeaways}
+Partial-fraction substitution can simplify high-degree rational integrands; using $u=x^2$ is a useful trick when even powers appear. Recognise standard antiderivatives for quick evaluation.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
 % PROBLEM 25: System of equations (symmetric polynomials)
 % =============================================================================
 \begin{problem}
