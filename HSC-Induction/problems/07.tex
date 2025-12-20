@@ -1,0 +1,33 @@
+\begin{problem}[Product of odd factorials vs powers of factorials]
+Prove that for every integer $n\ge1$,
+\[
+1!\cdot3!\cdot5!\cdots(2n-1)! \ge (n!)^n.
+\]
+\end{problem}
+
+\begin{hint}
+\begin{enumerate}
+  \item Write the product for $n=k+1$ as the product for $n=k$ times $(2k+1)!$ and compare with $((k+1)!)^{k+1}$.
+  \item Expand $(2k+1)!$ as $(2k+1)(2k)\cdots(k+2)\cdot(k+1)!$ and compare termwise.
+\end{enumerate}
+\end{hint}
+
+\begin{solution}
+Base case $n=1$ holds since $1!\ge(1!)^1$. Assume true for $n=k$. Then
+\[\prod_{r=1}^{k+1}(2r-1)! = \Bigl(\prod_{r=1}^k(2r-1)!\Bigr) (2k+1)! \ge (k!)^k(2k+1)!.
+\]
+Now $(2k+1)!=(2k+1)(2k)\cdots(k+2)\cdot(k+1)!$ contains $k$ factors each at least $k+1$, so
+\[(2k+1)! \ge (k+1)^k (k+1)! = (k+1)^{k+1} k!.
+\]
+Combining gives
+\[\prod_{r=1}^{k+1}(2r-1)! \ge (k!)^k \cdot (k+1)^{k+1} k! = ((k+1)!)^{k+1},
+\]
+completing the induction.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+  \item For product-type induction, compare multiplicative growth by isolating the new factor and estimating it against the required power.
+  \item Counting how many terms exceed a threshold (here $k+1$) is an effective lower-bound technique.
+\end{itemize}
+\end{takeaways}

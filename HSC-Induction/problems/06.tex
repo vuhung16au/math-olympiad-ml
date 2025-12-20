@@ -1,0 +1,52 @@
+\begin{problem}[Weighted geometric sum]
+Prove that for every integer $n\ge 1$,
+\[
+\sum_{k=1}^n k2^k = (n-1)2^{n+1}+2.
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+  \item Verify the base case $n=1$ first.
+  \item For induction, add the term $(m+1)2^{m+1}$ to the assumed sum for $m$.
+  \item (Alternative) Differentiate the finite geometric series \(\sum_{k=0}^n x^k\) with respect to $x$ and substitute $x=2$. 
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{Induction.} For $n=1$ the left-hand side is $1\cdot2=2$ and the right-hand side is $(1-1)2^{2}+2=2$, so the base case holds.
+
+Assume the identity holds for $n=m\ge1$. Then
+\begin{align*}
+\sum_{k=1}^{m+1} k2^k &= \left(\sum_{k=1}^m k2^k\right) + (m+1)2^{m+1} \\ 
+&= (m-1)2^{m+1}+2 + (m+1)2^{m+1} \\ 
+&= m2^{m+2}+2 = \bigl((m+1)-1\bigr)2^{(m+1)+1}+2,
+\end{align*}
+which is the desired formula for $n=m+1$. By induction the formula holds for all $n\ge1$.
+
+\textbf{Proof with Calculus (Differentiation)} 
+
+Consider the geometric series:
+\[ P(x) = \sum_{k=0}^{n} x^k = \frac{x^{n+1}-1}{x-1} \]
+Differentiating both sides with respect to $x$:
+\[ \frac{d}{dx} \sum_{k=0}^{n} x^k = \sum_{k=1}^{n} k x^{k-1} \]
+Using the quotient rule on the right-hand side:
+\[ \sum_{k=1}^{n} k x^{k-1} = \frac{(n+1)x^n(x-1) - (x^{n+1}-1)}{(x-1)^2} \]
+Multiply both sides by $x$ to obtain the desired summation form:
+\[ \sum_{k=1}^{n} k x^k = \frac{(n+1)x^{n+1}(x-1) - x(x^{n+1}-1)}{(x-1)^2} \]
+Substitute $x=2$:
+\begin{align*}
+    \sum_{k=1}^{n} k 2^k &= \frac{(n+1)2^{n+1}(2-1) - 2(2^{n+1}-1)}{(2-1)^2} \\
+    &= (n+1)2^{n+1} - 2 \cdot 2^{n+1} + 2 \\
+    &= 2^{n+1} (n+1-2) + 2 \\
+    &= (n-1) 2^{n+1} + 2
+\end{align*}
+\qed
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+  \item Many weighted sums $\sum k a^k$ can be handled by induction or by differentiating a geometric series.
+  \item Verifying base cases and clearly aligning the algebra in the inductive step keeps the argument clean for students.
+\end{itemize}
+\end{takeaways}
