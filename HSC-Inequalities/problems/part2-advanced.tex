@@ -48,6 +48,55 @@ Multiply by $b$: $\frac{a^n}{b^{n-1}} \ge na + b(1-n)$, giving $a^n b^{1-n} \ge 
 
 % ------------------------------------------------------------------------------
 
+\begin{problem}[Convexity and Product Constraints (Jensen)]
+
+\begin{quote}
+\textbf{Jensen's Inequality:}
+Let $f(x)$ be a convex function on an interval $I$. For any $x_1, x_2, \dots, x_n \in I$:
+
+\[ \frac{f(x_1) + f(x_2) + \dots + f(x_n)}{n} \geq f\left( \frac{x_1 + x_2 + \dots + x_n}{n} \right) \]
+
+\textit{Note: You may use this inequality in the following problem without proof.}
+
+\end{quote}
+
+Let $a_1,\dots,a_n>0$ satisfy $\prod_{i=1}^n a_i = a_1 a_2 \cdots a_n = 1$ and set $x_i=\ln a_i$. 
+
+Let $f(x)=\ln(1+e^x)$.
+
+\begin{enumerate}
+    \item[(i)] Show $f''(x)=\tfrac{e^x}{(1+e^x)^2}>0$, so $f$ is convex on $\mathbb{R}$.
+    \item[(ii)] Using Jensen's inequality deduce
+    \[ \prod_{i=1}^n(1+a_i)\ge 2^n. \]
+    \item[(iii)] Let $g(k)=\sum_{i=1}^n f(kx_i)$ for $k\ge0$. Show $g'(0)=0$ and $g''(k)\ge0$.
+    \item[(iv)] Conclude the cyclic inequality
+    \[ \prod_{i=1}^n(1+a_i)\ge\prod_{i=1}^n\big(1+a_i^{1/n}\big). \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (ii) use $\sum x_i=0$ (since $\prod a_i=1$) so Jensen at the average gives $\sum f(x_i)\ge n f(0)=n\ln2$. For (iii) compute derivatives by the chain rule and use $f''>0$. For (iv) compare $g(1)$ and $g(1/n)$.
+\end{hint}
+
+\begin{solution}
+(i) Differentiate: $f'(x)=\tfrac{e^x}{1+e^x}$ and $f''(x)=\tfrac{e^x}{(1+e^x)^2}>0$. 
+
+(ii) Since $\sum x_i=0$, Jensen gives $\frac{1}{n}\sum f(x_i)\ge f(0)=\ln2$, so $\sum\ln(1+a_i)\ge n\ln2$ and exponentiating gives $\prod(1+a_i)\ge2^n$.
+
+(iii) $g'(k)=\sum x_i f'(kx_i)$ so $g'(0)=f'(0)\sum x_i=\tfrac12\cdot0=0$. Also $g''(k)=\sum x_i^2 f''(kx_i)\ge0$ since each term is nonnegative.
+
+(iv) Convexity of $g$ on $[0,\infty)$ (from $g''\ge0$) implies $g(1)\ge g(1/n)$, i.e. $\sum\ln(1+a_i)\ge\sum\ln(1+a_i^{1/n})$. Exponentiate to obtain the cyclic inequality.
+\end{solution}
+
+\begin{takeaways}
+\item Log-space transformations turn products into sums that are amenable to Jensen and calculus.
+% \item Convexity plus scaling gives monotonicity in the parameter; comparing parameters yields useful cyclic bounds.
+\item Convexity is Key: In Extension 2, proving convexity ($f'' > 0$) is often the "hidden" first step to solving complex inequalities.
+\item The Power of $k$: By introducing a scaling factor $k$, we can show that an inequality isn't just a "one-off" truth, but part of a continuous growth pattern.
+\item Logarithmic Limits: This problem proves that the closer the $a_i$ values are to each other (and thus to 1), the smaller the product becomes, reaching its minimum at $2^n$.
+\end{takeaways}
+
+
 \begin{problem}[Cauchy-Schwarz and Sums]
 Let $a, b, A$ and $B$ be positive numbers.
 \begin{enumerate}[label=\textbf{(\roman*)}]
@@ -66,25 +115,33 @@ For (i), use $(x-y)^2 \geq 0$ with $x = \frac{a}{A}$, $y = \frac{b}{B}$. For (ii
 \end{hint}
 
 \begin{solution}
-	extbf{(i)} $(x-y)^2 \geq 0 \implies x^2 + y^2 \geq 2xy$. Let $x = \frac{a}{A}$, $y = \frac{b}{B}$:
+	\textbf{(i)} $(x-y)^2 \geq 0 \implies x^2 + y^2 \geq 2xy$. Let $x = \frac{a}{A}$, $y = \frac{b}{B}$:
 \[ \frac{a^2}{A^2} + \frac{b^2}{B^2} \geq 2\frac{ab}{AB} \implies \frac{ab}{AB} \leq \frac{1}{2}\left(\frac{a^2}{A^2} + \frac{b^2}{B^2}\right) \]
 
-	extbf{(ii)} Apply (i) for each $k$:
+	\textbf{(ii)} Apply (i) for each $k$:
 \[ \frac{a_k b_k}{AB} \leq \frac{1}{2}\left(\frac{a_k^2}{A^2} + \frac{b_k^2}{B^2}\right) \]
 Sum over $k$:
 \[ \frac{1}{AB} \sum_{k=1}^n a_k b_k \leq 1 \implies \sum_{k=1}^n a_k b_k \leq AB \]
 Square both sides:
 \[ \left(\sum_{k=1}^n a_k b_k\right)^2 \leq \left(\sum_{k=1}^n a_k^2\right)\left(\sum_{k=1}^n b_k^2\right) \]
 
-	extbf{(iii)} Let $a_k = \sqrt{S-x_k}$, $b_k = \frac{1}{\sqrt{S-x_k}}$.
+	\textbf{(iii)} Let $a_k = \sqrt{S-x_k}$, $b_k = \frac{1}{\sqrt{S-x_k}}$.
 \[ \left(\sum_{k=1}^n 1\right)^2 = n^2 \leq (S(n-1)) \sum_{k=1}^n \frac{1}{S-x_k} \]
-So $\sum_{k=1}^n \frac{S}{S-x_k} \geq \frac{n^2}{n-1}$.
+So 
+
+$$\sum_{k=1}^n \frac{S}{S-x_k} \geq \frac{n^2}{n-1}$$.
+
 \end{solution}
 
 \begin{takeaways}
 \item Cauchy-Schwarz can be derived from simple quadratic inequalities
 \item Summing pairwise inequalities yields the general form
 \item Clever substitutions can turn Cauchy-Schwarz into other inequalities
+\item The similar-looking, Nesbitt’s Inequality, states that for positive numbers $a, b, c$, the following holds: 
+
+$$\frac{a}{b+c} + \frac{b}{a+c} + \frac{c}{a+b} \geq \frac{3}{2}$$
+
+which can be proved using AM-GM or Cauchy-Schwarz.
 \end{takeaways}
 
 % ------------------------------------------------------------------------------
@@ -112,12 +169,13 @@ For (i), find the stationary point of $f(t)$. For (ii), evaluate $f$ at the mini
 	\textbf{(i)} $f'(t) = t^{q-1} - s = 0 \implies t = s^{1/(q-1)} = s^{p-1}$. $f''(t) > 0$ for $q > 1$, so this is a minimum.
 
 	\textbf{(ii)} At $t = s^{p-1}$:
-\[ f(s^{p-1}) = \frac{s^p}{p} + \frac{s^p}{q} - s^p = s^p\left(\frac{1}{p} + \frac{1}{q} - 1\right) = 0 \]
-So $f(t) \geq 0$ for all $t > 0$.
+    \[ f(s^{p-1}) = \frac{s^p}{p} + \frac{s^p}{q} - s^p = s^p\left(\frac{1}{p} + \frac{1}{q} - 1\right) = 0 \]
+    So $f(t) \geq 0$ for all $t > 0$.
 
-	\textbf{(iii)} Induction for AM-GM: Base case $n=1$ is trivial. Assume for $k$, prove for $k+1$ by grouping and using the hypothesis. (See detailed proof in sample.)
+	\textbf{(iii)} Induction for AM-GM: Base case $n=1$ is trivial. Assume for $k$, prove for $k+1$ by grouping and using the hypothesis.
+
 	\textbf{(iv)} Apply AM-GM to $\frac{y_1}{y_2}, \dots, \frac{y_n}{y_1}$:
-\[ \sum_{cyc} \frac{y_i}{y_{i+1}} \geq n \left(1\right)^{1/n} = n \]
+    \[ \sum_{cyc} \frac{y_i}{y_{i+1}} \geq n \left(1\right)^{1/n} = n \]
 \end{solution}
 
 \begin{takeaways}

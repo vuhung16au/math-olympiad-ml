@@ -43,6 +43,83 @@ Sum all three:
 
 % ==========================================
 
+\begin{problem}[Refining the Wallis Product Bound]
+Let
+\[
+P_n=\frac{1}{2}\cdot\frac{3}{4}\cdot\frac{5}{6}\cdots\frac{2n-1}{2n}.
+\]
+
+\begin{enumerate}
+    \item Show that for any positive integer $k$, $\frac{2k-1}{2k}<\frac{2k}{2k+1}$ and use this to prove
+    \[ P_n<\frac{1}{\sqrt{2n+1}}. \]
+    \item Prove by induction the lower bound
+    \[ P_n\ge\frac{1}{2\sqrt{n}}\quad\text{for all }n\ge1. \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (1) compare termwise with $Q_n=\frac{2}{3}\cdot\frac{4}{5}\cdots\frac{2n}{2n+1}$ and telescope the product $P_nQ_n$. For (2) use the inductive step
+$P_{k+1}=P_k\cdot\frac{2k+1}{2k+2}$ and square where helpful.
+\end{hint}
+
+\begin{solution}
+For (1) observe $(2k-1)(2k+1)<(2k)^2$, so each term of $P_n$ is less than the corresponding term of $Q_n$. The product $P_nQ_n$ telescopes to $\frac{1}{2n+1}$, hence $P_n^2<\frac{1}{2n+1}$ and $P_n<\frac{1}{\sqrt{2n+1}}$.
+
+For (2) base case $n=1$ holds. Assume $P_k\ge\tfrac{1}{2\sqrt{k}}$. Then
+\[P_{k+1}=P_k\frac{2k+1}{2k+2}\ge\frac{1}{2\sqrt{k}}\cdot\frac{2k+1}{2k+2}.
+\]
+Square both sides and simplify to reduce to $k+1\ge0$, which holds; thus the inductive claim follows.
+\end{solution}
+
+\begin{takeaways}
+\item Telescoping products are useful to produce sharp bounds.
+\item Careful inductive algebra (squaring when necessary) yields lower bounds.
+\end{takeaways}
+
+% -----------------------------------------
+
+\begin{problem}[Matrix Recurrence and Contraction Mapping]
+Define $a_1=0$ 
+
+and the sequence $a_n$ be defined by the matrix relation:
+
+$$\begin{pmatrix} a_n \\ 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 1 & 3 \end{pmatrix} \begin{pmatrix} a_{n-1} \\ 1 \end{pmatrix}$$
+
+
+\begin{enumerate}
+    \item Prove by induction that $0\le a_n<\sqrt{3}-1$ for all $n\ge1$.
+    \item Let $L=\sqrt{3}-1$. Prove the convergence rate
+    \[ |a_n-L|<\left(\tfrac{1}{3}\right)^{n-1}|a_1-L|. \]
+    \item Determine whether the series $\sum_{n=1}^\infty (L-a_n)$ converges.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Show $L$ is the positive fixed point of $f(x)=\tfrac{x+2}{x+3}$ and note $f'(x)=\tfrac{1}{(x+3)^2}>0$. 
+Express $a_n-L$ in terms of $a_{n-1}-L$ to find the contraction constant.
+\end{hint}
+
+\begin{solution}
+For (1) base case $a_1=0$ lies in the interval. If $0\le a_k< L$ then applying increasing $f$ gives $f(0)\le a_{k+1}<f(L)=L$, so $0\le a_{k+1}<L$. 
+
+For (2) compute
+\[
+a_n-L=\frac{a_{n-1}+2}{a_{n-1}+3}-\frac{L+2}{L+3}=(a_{n-1}-L)\cdot\frac{1}{(a_{n-1}+3)(L+3)}.
+\]
+Because $a_{n-1}\ge0$ and $L+3>3$, the multiplier is $<\tfrac{1}{3}$, so iterating yields the claimed geometric bound.
+
+For (3) set $u_n=L-a_n$. From (2) $|u_n|\le C(\tfrac{1}{3})^{n-1}$ for some constant $C$, so $\sum u_n$ is dominated by a convergent geometric series; hence the series converges absolutely.
+\end{solution}
+
+\begin{takeaways}
+    \item A fixed point of a recurrence can be found by solving $x=f(x)$ (or the sequence: $x=\frac{x+2}{x+3}$). The behavior of the derivative $f'(x)$ determines monotonicity and depends on the fixed point(s).
+\item Fixed-point iteration and derivative bounds give convergence rates.
+\item Comparison with geometric series proves absolute convergence of the error series.
+\item Fixed Points are Attractors: In sequences $a_n = f(a_{n-1})$, if $|f'(L)| < 1$, the sequence converges to $L$ (You can prove this)
+\item Do you see the connection between this problem and eigenvalues of the matrix? 
+\end{takeaways}
+
+
 \begin{problem}[Binomial Inequality via Induction]
 Use mathematical induction to prove that ${}^{2n}C_n < 2^{2n-2}$ for all integers $n \geq 5$.
 \end{problem}
