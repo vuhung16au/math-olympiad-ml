@@ -1,0 +1,66 @@
+% Problem 12: Wallis integrals and the Gaussian integral
+\begin{problem}[Wallis Integrals and the Gaussian Integral]
+Let $W_n = \int_0^{\pi/2} \sin^n x \, dx$ denote the Wallis Integrals. It is given that:
+\[ \lim_{n \to \infty} \sqrt{n} W_n = \sqrt{\frac{\pi}{2}}. 
+\text{ (Do NOT prove this)}
+\]
+
+
+\begin{enumerate}
+   \item[(i)] Prove that for all $t \ge 0$:
+   \[ 1 - t \le e^{-t} \le \frac{1}{1+t} \]    
+   \item[(ii)] By substituting $t = \frac{x^2}{n}$, show that for all $n \in \mathbb{Z}^+$:
+   
+   \[ \int_0^{\sqrt{n}} \left(1 - \frac{x^2}{n}\right)^n dx 
+   \le \int_0^{\sqrt{n}} e^{-x^2} dx 
+   \le \int_0^{\infty} e^{-x^2} dx 
+   \le \int_0^{\infty} \left(1 + \frac{x^2}{n}\right)^{-n} dx \]    
+   
+   \item[(iii)] Use the substitutions $x = \sqrt{n}\sin\theta$ and $x = \sqrt{n}\tan\theta$ to show that 
+   $$\int_0^{\sqrt{n}} \left(1 - \frac{x^2}{n}\right)^n dx = \sqrt{n} W_{2n+1} 
+   \text{, and } 
+   \int_0^{\infty} \left(1 + \frac{x^2}{n}\right)^{-n} dx = \sqrt{n} W_{2n-2}.$$
+
+   \item[(iv)] A continuous random variable $X$ follows the Normal Distribution $X \sim \mathcal{N}(0, \sigma^2)$ if its probability density function (PDF) is given by 
+   $$f(x) = k \cdot e^{-\frac{x^2}{2\sigma^2}} \text{ for } x \in (-\infty, \infty)$$. 
+
+   Show that for $f(x)$ to be a valid PDF, the constant $k$ must be:
+   
+   $$k = \frac{1}{\sigma\sqrt{2\pi}}$$
+
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item Use the inequality $e^t \ge 1+t$ for $t \ge 0$. For the left side, consider the function $f(t) = e^{-t} - (1-t)$.
+    \item Recall that for $n > 0$, if $f(x) \le g(x)$, then $f(x)^n \le g(x)^n$. For the tangent substitution, remember that $1 + \tan^2 \theta = \sec^2 \theta$ and the limits for $x \in [0, \infty)$ map to $\theta \in [0, \pi/2)$.
+   \item \textbf{Part (iii):} Use $x = \sqrt{n}\sin\theta$ and $x = \sqrt{n}\tan\theta$.
+   \item \textbf{Part (iv):} Use the fact that $e^{-ax^2}$ is an even function. Apply the substitution $u = \frac{x}{\sigma\sqrt{2}}$ to transform the integral into the standard Gaussian form.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\begin{itemize}
+   \item \textbf{(i)} Recall the Taylor series expansion: 
+   $e^t = 1 + t + \frac{t^2}{2!} + \dots \ge 1+t \implies e^{-t} \le \frac{1}{1+t}$. For $1-t \le e^{-t}$, let $f(t) = e^{-t} - 1 + t$. $f'(t) = 1 - e^{-t} \ge 0$ for $t \ge 0$. Since $f(0)=0$, $f(t) \ge 0$.
+   You can also consider the derevative of $e^{-t} + t - 1$ directly.
+   \item \textbf{(ii)}
+   From (i), $(1-x^2/n) \le e^{-x^2/n} \le (1+x^2/n)^{-1}$. Raising to power $n$ gives $(1-x^2/n)^n \le e^{-x^2} \le (1+x^2/n)^{-n}$. Integrating over the respective bounds yields the result.
+   \item \textbf{(iii)} 
+   $I_{left} = \int_0^{\pi/2} (1-\sin^2\theta)^n \sqrt{n}\cos\theta \, d\theta = \sqrt{n}W_{2n+1}$. $I_{right} = \int_0^{\pi/2} (\sec^2\theta)^{-n} \sqrt{n}\sec^2\theta \, d\theta = \sqrt{n}W_{2n-2}$.
+   \item \textbf{(iv)} $\int_{-\infty}^{\infty} k e^{-\frac{x^2}{2\sigma^2}} dx = 2k \int_{0}^{\infty} e^{-\frac{x^2}{2\sigma^2}} dx = 1$. \\
+   Let $u = \frac{x}{\sigma\sqrt{2}} \implies dx = \sigma\sqrt{2} du$. \\
+   $2k\sigma\sqrt{2} \int_{0}^{\infty} e^{-u^2} du = 2k\sigma\sqrt{2} \left( \frac{\sqrt{\pi}}{2} \right) = 1$. \\
+   Solving for $k$ yields $k = \frac{1}{\sigma\sqrt{2\pi}}$.
+\end{itemize}
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item The Bernoulli Link: The expression $(1 + z/n)^n$ is the classic limit definition of $e^z$. This problem shows how that convergence behaves under an integral sign. It is kind of advance but useful to know.
+   \item \textbf{Normalization:} Normalization: This problem demonstrates why the "messy" constant $\frac{1}{\sqrt{2\pi}}$ exists in statistics; it is a mathematical necessity to ensure the total probability equals 1.
+   \item \textbf{Symmetry:} The use of even function properties is a vital shortcut in Extension 2 integration problems.
+   \item \textbf{Interdisciplinary Math:} This problem bridges the gap between pure integration techniques and the foundations of statistics.
+\end{enumerate}
+\end{takeaways}
