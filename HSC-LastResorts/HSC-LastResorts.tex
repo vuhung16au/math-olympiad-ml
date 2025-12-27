@@ -186,18 +186,22 @@ These polynomials appear frequently in Problem~16 when dealing with bounded poly
 
 \subsection{Optimization Techniques}
 \subsubsection{Lagrange Multipliers (Conceptual)}
-To optimize $f(x,y,z)$ subject to constraint $g(x,y,z) = 0$, look for points where:
+
+\begin{definition}[Method of Lagrange Multipliers]
+To optimize a function $f(x,y,z)$ subject to a constraint $g(x,y,z) = 0$, look for points where:
 \[\nabla f = \lambda \nabla g\]
-This often reduces to applying AM-GM or Cauchy-Schwarz in HSC problems.
 
 Here, $\nabla f$ and $\nabla g$ are the gradients of $f$ and $g$, respectively, 
 and $\lambda$ is a scalar known as the Lagrange multiplier.
 
-The gradient is defined as:
-
+The gradient of a function $f$ is the vector of its partial derivatives:
 \[\nabla f = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right)\]
 
-Good to know though the technique is not covered at HSC level.
+\end{definition}
+
+In HSC problems, this often reduces to applying AM-GM or Cauchy-Schwarz inequalities.
+
+\textbf{Note:} This technique is not covered at HSC level but is useful attacking hard problems (and for university studies as well).
 
 Here is how you could use it to attack the problems:
 
@@ -206,6 +210,61 @@ Here is how you could use it to attack the problems:
   \item Identify the "Target Inequality": Once you know the values that achieve the optimum (e.g., $x=2, y=2$), you know exactly what the right-hand side of your inequality should look like.
   \item Reverse-engineer the formal proof: Work backward from that optimum using standard HSC tools—most commonly by setting up AM-GM terms or choosing the vectors for Cauchy-Schwarz that align with your discovered ratios.
 \end{itemize}
+
+\subsection{The Big O Notation}
+\subsubsection{What is Big O?}
+The Big O notation is a mathematical tool used to describe the behavior of functions as their input approaches a particular value (often infinity or zero). It provides a way to express approximations and compare the growth rates of functions.
+
+\begin{definition}[Big O Notation]
+For functions $f$ and $g$, we write $f(x) = O(g(x))$ as $x \to a$ if there exist constants $C > 0$ and $\delta > 0$ such that 
+\[|f(x)| \leq C|g(x)|\]
+for all $x$ near $a$.
+
+Informally, this means $f(x)$ grows no faster than $g(x)$ near $a$.
+\end{definition}
+
+\subsubsection{Important Note for HSC Students}
+\begin{itemize}[leftmargin=*]
+  \item Big O notation is \textbf{NOT} covered in the HSC/NESA syllabus
+  \item It is \textbf{NOT required} for HSC examinations
+  \item \textbf{NOT recommended} to use or mention in HSC assessments or exams
+  \item However, keep it as your \textbf{``secret weapon''} for Extension 2! It can help you:
+  \begin{itemize}
+    \item Find limits quickly by identifying dominant terms
+    \item Approximate expressions efficiently
+    \item Understand the behavior of complex expressions
+  \end{itemize}
+  \item Excellent preparation for university mathematics and further studies
+\end{itemize}
+
+\subsubsection{Applications}
+Big O notation is particularly useful for:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Approximating functions:} Understanding which terms dominate as $x$ becomes large or small
+  \item \textbf{Finding limits:} Identifying the leading behavior to evaluate challenging limits
+  \item \textbf{Sequences of numbers:} Describing how sequences grow or decay
+  \item \textbf{Functions:} Comparing growth rates of different functions
+\end{itemize}
+
+\subsubsection{Common Examples}
+Here are some fundamental approximations using Big O notation:
+
+\textbf{Exponential Function:}
+\[e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + O(x^4) \quad \text{as } x \to 0\]
+
+\textbf{Natural Logarithm:}
+\[\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + O(x^5) \quad \text{as } x \to 0\]
+
+\textbf{Sine Function:}
+\[\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} + O(x^7) \quad \text{as } x \to 0\]
+
+\textbf{Cosine Function:}
+\[\cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + O(x^6) \quad \text{as } x \to 0\]
+
+\subsubsection{Connection with Taylor Series}
+The Big O notation naturally connects with Taylor series expansions. The Taylor series represents a function as an infinite sum of terms calculated from the function's derivatives at a single point. The $O(x^n)$ term represents all the remaining terms of order $n$ and higher, giving us a precise way to express truncation error.
+
+For example, when we write $e^x = 1 + x + \frac{x^2}{2} + O(x^3)$, we're saying that the error in approximating $e^x$ by $1 + x + \frac{x^2}{2}$ behaves like $x^3$ for small $x$.
 
 \subsection{Notation and Conventions}
 \begin{itemize}[leftmargin=*]
