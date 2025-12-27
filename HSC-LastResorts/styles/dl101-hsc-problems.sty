@@ -27,7 +27,8 @@
   boxed title style={size=small,colback=bookpurple,coltitle=white},
   fonttitle=\bfseries,
   before skip=15pt,
-  after skip=10pt
+  after skip=10pt,
+  phantom={\ifstrempty{#1}{}{\addcontentsline{toc}{subsubsection}{Problem~\thetcbcounter: #1}}}
 }
 
 % Solution box
