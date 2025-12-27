@@ -1,0 +1,104 @@
+% Problem 14: The Irrationality of π²
+\begin{problem}[Niven's Contradiction: The Irrationality of $\pi^2$]
+
+% \textbf{The Motivation:}
+
+\medskip
+
+In this problem, we will prove that $\pi^2$ is irrational using a proof by contradiction inspired by Niven's approach. You may already know that $\pi$ itself is irrational yet the proof is somewhat not straightforward.
+
+\medskip
+
+Proving the irrationality of $\pi^2$ makes the statement stronger, since if $\pi^2$ were rational, then $\pi$ would also be rational (as the square root of a rational number) (do NOT prove this). Thus, by proving that $\pi^2$ is irrational, we also confirm the irrationality of $\pi$.
+
+\medskip
+
+This problem will walk you through the steps to establish this result.
+
+\bigskip
+
+To prove that $\pi^2$ is irrational, we assume by way of contradiction that $\pi^2$ is rational. That is, we can write $\pi^2 = \frac{a}{b}$ where $a$ and $b$ are positive integers.
+
+\medskip
+
+Let $n$ be a positive integer and define the polynomial $f(x)$ as:
+$$ f(x) = \frac{x^n(1-x)^n}{n!} $$
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show $f(x)$ and its derivatives $f^{(k)}(x)$ take integer values at $x=0$ and $x=1$.
+    
+    \item Define the function $G(x)$ by:
+    $$ G(x) = b^n \sum_{k=0}^n (-1)^k \pi^{2n-2k} f^{(2k)}(x) $$
+    Using the assumption $\pi^2 = \frac{a}{b}$, show that $G(0)$ and $G(1)$ are integers.
+
+    \item Consider the function $H(x) = G'(x)\sin(\pi x) - \pi G(x)\cos(\pi x)$.
+    Differentiate $H(x)$ with respect to $x$ and verify that:
+    $$ H'(x) = \pi^2 a^n f(x) \sin(\pi x) $$
+
+    \item Consider the integral:
+    $$ I_n = \int_0^1 \pi a^n f(x) \sin(\pi x) \, dx $$
+    Using the result from part (iii), show that $I_n = G(1) + G(0)$. Hence, explain why $I_n$ must be an integer.
+    
+    Finally, by establishing an upper bound for $I_n$, derive a contradiction for sufficiently large $n$. Conclude that $\pi^2$ is irrational.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Use the binomial expansion of $(1-x)^n$. Recall that derivatives of $\frac{x^m}{n!}$ at $0$ are zero if $m \neq k$ (for $k$-th derivative) or integers if $m=k$. Use symmetry $f(x)=f(1-x)$ for the $x=1$ case.
+    \item \textbf{Part (ii):} Substitute $\pi^{2n-2k} = (\frac{a}{b})^{n-k}$. Combine this with $b^n$ outside the sum to clear the fractions. Observe that $\pi^{2m} = (a/b)^m$. Rewrite the sum to show the coefficients are integers.
+    \item \textbf{Part (iii):} Use the product rule on $H(x)$. Group terms by $\sin(\pi x)$ and $\cos(\pi x)$. The $\cos$ terms should cancel. You may assume without proof the algebraic identity: $G''(x) + \pi^2 G(x) = \pi^{2n+2} b^n f(x)$. Note also that $\pi^{2n+2} b^n = \pi^2 a^n$.
+    \item \textbf{Part (iv):} Integrate $H'(x)$ from $0$ to $1$. Note that $H(1) = \pi G(1)$ and $H(0) = -\pi G(0)$. Don't forget that $\lim_{n \to \infty} \frac{C^n}{n!} = 0$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Integer Derivatives}
+
+$f(x) = \frac{1}{n!} \sum_{j=0}^n \binom{n}{j} (-1)^j x^{n+j}$.
+For any $k$, $f^{(k)}(0)$ is determined by the term with power $x^k$. If $k < n$, the coefficient is 0. If $k \ge n$, the derivative of $\frac{x^k}{n!}$ is an integer multiple of $\frac{k!}{n!}$, which is an integer.
+Since $f(x) = f(1-x)$, by chain rule $f^{(k)}(1) = (-1)^k f^{(k)}(0)$, which is also an integer.
+
+\textbf{(ii) G(x) Integers}
+
+Substitute $\pi^2 = a/b$:
+$$ G(x) = \sum_{k=0}^n (-1)^k b^n \left(\frac{a}{b}\right)^{n-k} f^{(2k)}(x) = \sum_{k=0}^n (-1)^k a^{n-k} b^k f^{(2k)}(x) $$
+Since $a, b, f^{(2k)}(0)$ and $f^{(2k)}(1)$ are all integers, $G(0)$ and $G(1)$ are integers.
+
+\textbf{(iii) The Derivative}
+
+$H'(x) = G''(x)\sin(\pi x) + \pi G'(x)\cos(\pi x) - \pi G'(x)\cos(\pi x) + \pi^2 G(x)\sin(\pi x)$
+$$ H'(x) = \sin(\pi x) [ G''(x) + \pi^2 G(x) ] $$
+Using the hint $G''(x) + \pi^2 G(x) = \pi^{2n+2} b^n f(x)$:
+$$ H'(x) = \sin(\pi x) [ \pi^{2n+2} b^n f(x) ] $$
+Since $\pi^2 = a/b \implies b \pi^2 = a$, we have $\pi^{2n+2} b^n = \pi^2 (\pi^2)^n b^n = \pi^2 (a/b)^n b^n = \pi^2 a^n$.
+$$ H'(x) = \pi^2 a^n f(x) \sin(\pi x) $$
+
+\textbf{(iv) The Integral and Contradiction}
+
+From (iii), $\int_0^1 \pi^2 a^n f(x) \sin(\pi x) dx = [H(x)]_0^1$.
+Evaluate RHS:
+$H(1) = G'(1)\sin \pi - \pi G(1)\cos \pi = \pi G(1)$.
+$H(0) = G'(0)\sin 0 - \pi G(0)\cos 0 = -\pi G(0)$.
+So, $\int_0^1 \pi^2 a^n f(x) \sin(\pi x) dx = \pi(G(1) + G(0))$.
+Divide both sides by $\pi$:
+$$ \int_0^1 \pi a^n f(x) \sin(\pi x) dx = G(1) + G(0) $$
+The LHS is $I_n$. The RHS is the sum of integers (from part ii). Thus $I_n$ is an integer.
+
+\textbf{Bounds:} On $(0,1)$, $0 < f(x) \le \frac{1}{n!} (1/4)^n < \frac{1}{n!}$ and $0 < \sin(\pi x) \le 1$.
+$$ 0 < I_n < \frac{\pi a^n}{n!} $$
+Since $\lim_{n \to \infty} \frac{\pi a^n}{n!} = 0$, for sufficiently large $n$, we have $0 < I_n < 1$.
+No integer exists strictly between 0 and 1. Contradiction.
+$\therefore \pi^2$ is irrational.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Stronger Result}: Proving $\pi^2$ is irrational automatically proves $\pi$ is irrational, but the reverse is not true.
+    \item \textbf{Proof by Contradiction:} This classic technique assumes the opposite of what we want to prove, then derives an impossible conclusion. The contradiction forces our original assumption to be false.
+    \item \textbf{Auxiliary Functions:} The sophisticated choice of $f(x)$, $G(x)$, and $H(x)$ is characteristic of advanced proofs in analysis. Each function serves a specific purpose in the overall argument.
+    \item \textbf{Integer Forcing:} By carefully constructing $G(x)$ to have integer values at endpoints, we force the integral $I_n$ to be an integer, setting up the contradiction.
+    \item \textbf{Factorial Growth:} The key to the contradiction lies in the factorial in the denominator: $n!$ grows much faster than any exponential $a^n$, making the integral arbitrarily small.
+    \item \textbf{Historical Significance:} This problem represents one of the most elegant applications of calculus to number theory, demonstrating the deep connections between analysis and arithmetic.
+\end{enumerate}
+\end{takeaways}

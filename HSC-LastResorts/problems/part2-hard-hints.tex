@@ -80,7 +80,7 @@ Consider the quadratic equation
 
     You are given the recurrence form: $I_n = \frac{n-1}{n} I_{n-2}$ (do NOT prove this).
 
-    Hence evaluate the definite integral
+    Hence evaluate the following definite integral in term of $n$:
     
     \[ I_{2n} = \int_0^{\frac{\pi}{2}} \sin^{2n}\theta\,d\theta.
     \]
@@ -190,17 +190,17 @@ Let
 
 \[U_n=\frac{n-1}{n}\,U_{n-2}\quad(n\ge2),\]
 
-(ii) Evaluate $U_0$ and $U_1$
+% (ii) Evaluate $U_0$ and $U_1$
 
-(iii) Deduce closed forms for $U_{2n}$ and $U_{2n+1}$
+(ii) Evaluate $U_0$ and $U_1$ and deduce the closed forms for $U_{2n}$ and $U_{2n+1}$
 
-(iv) Prove, then use the inequalities
+(iii) Prove, then use the inequalities
 \[U_{2n+2}<U_{2n+1}<U_{2n}\]
 
 to obtain the bounds
 \[\frac{2n+1}{2n+2}\cdot\frac{\pi}{2}<\frac{16^n}{(2n+1)\binom{2n}{n}^2}<\frac{\pi}{2}\]
 
-(v) Hence, using the inequality in part (iv), show that:
+(iv) Hence, using the inequality in part (iii), show that:
 $$
 \lim_{n \to \infty} \left[ \binom{2n}{n} \div \frac{4^n}{\sqrt{n\pi}} \right] = 1
 $$
@@ -1178,3 +1178,6 @@ Therefore: $\sum_{k=1}^{n-1} \frac{1}{1 - \omega^k} = \frac{n-1}{2}$.
 
 % Problem 13: Complex Numbers and Polynomial Geometry
 \input{problems/13}
+
+% Problem 14: The Irrationality of π²
+\input{problems/14}
