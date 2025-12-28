@@ -294,6 +294,45 @@ Here are some fundamental approximations using Big O notation:
 \textbf{Cosine Function:}
 \[\cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + O(x^6) \quad \text{as } x \to 0\]
 
+\subsubsection{Practical Examples: The "Secret Weapon" in Action}
+
+% \textbf{Example 1: Avoiding the L'Hopital Marathon}
+
+\begin{example}[Avoiding the L'Hopital Marathon]
+Consider the classic limit:
+\[ L = \lim_{x \to 0} \frac{x - \sin(x)}{x^3} \]
+\textit{The Hard Way:} Applying L'Hopital's Rule three separate times until the $x^3$ vanishes.
+\textit{The Big O Way:} Substitute $\sin(x) = x - \frac{x^3}{6} + O(x^5)$.
+\begin{align*}
+    \frac{x - \sin(x)}{x^3} &= \frac{x - \left(x - \frac{x^3}{6} + O(x^5)\right)}{x^3} \\
+    &= \frac{\frac{x^3}{6} - O(x^5)}{x^3} \\
+    &= \frac{1}{6} - O(x^2)
+\end{align*}
+As $x \to 0$, the term $O(x^2) \to 0$. Thus, $L = \frac{1}{6}$.
+\end{example}
+
+\vspace{1em}
+
+\begin{example}[Mixed Function Simplification]
+
+Evaluate the limit involving both Logarithms and Trigonometry:
+\[ L = \lim_{x \to 0} \frac{\ln(1+x) - \sin(x) + \frac{1}{2}x^2}{x^3} \]
+\textit{The Hard Way:} Differentiating this repeatedly is messy due to the quotient and chain rules.
+\textit{The Big O Way:} Use the known expansions:
+\begin{itemize}
+    \item $\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} + O(x^4)$
+    \item $\sin(x) = x - \frac{x^3}{6} + O(x^5)$
+\end{itemize}
+Substitute these into the numerator:
+\begin{align*}
+    \text{Num} &= \left(x - \frac{x^2}{2} + \frac{x^3}{3} + \dots\right) - \left(x - \frac{x^3}{6} + \dots\right) + \frac{x^2}{2} \\
+    &= \left(x - x\right) + \left(-\frac{x^2}{2} + \frac{x^2}{2}\right) + \left(\frac{x^3}{3} - (-\frac{x^3}{6})\right) + O(x^4) \\
+    &= \frac{3x^3}{6} + O(x^4) = \frac{1}{2}x^3 + O(x^4)
+\end{align*}
+Now, divide by the denominator $x^3$:
+\[ L = \lim_{x \to 0} \left( \frac{1}{2} + O(x) \right) = \frac{1}{2} \]
+\end{example}
+
 \subsubsection{Connection with Taylor Series}
 The Big O notation naturally connects with Taylor series expansions. The Taylor series represents a function as an infinite sum of terms calculated from the function's derivatives at a single point. The $O(x^n)$ term represents all the remaining terms of order $n$ and higher, giving us a precise way to express truncation error.
 
