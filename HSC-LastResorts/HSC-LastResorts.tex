@@ -185,6 +185,7 @@ Additionally, they satisfy:
 These polynomials appear frequently in Problem~16 when dealing with bounded polynomial coefficients and optimal approximations.
 
 \subsection{Optimization Techniques}
+
 \subsubsection{Lagrange Multipliers (Conceptual)}
 
 \begin{definition}[Method of Lagrange Multipliers]
@@ -210,6 +211,38 @@ Here is how you could use it to attack the problems:
   \item Identify the "Target Inequality": Once you know the values that achieve the optimum (e.g., $x=2, y=2$), you know exactly what the right-hand side of your inequality should look like.
   \item Reverse-engineer the formal proof: Work backward from that optimum using standard HSC tools—most commonly by setting up AM-GM terms or choosing the vectors for Cauchy-Schwarz that align with your discovered ratios.
 \end{itemize}
+
+\begin{example}[Constrained Optimization on an Ellipse]
+Find the maximum value of $f(x,y) = x + y$ subject to the constraint $2x^2 + 3y^2 = 1$.
+
+\textbf{Solution:}
+Let $f(x,y) = x + y$ and $g(x,y) = 2x^2 + 3y^2 - 1 = 0$.
+The Lagrange multiplier condition $\nabla f = \lambda \nabla g$ gives:
+\begin{align*}
+1 &= 4\lambda x \implies x = \frac{1}{4\lambda} \\
+1 &= 6\lambda y \implies y = \frac{1}{6\lambda}
+\end{align*}
+From these, $y = \frac{2}{3}x$. Substituting into the constraint:
+\[2x^2 + 3\left(\frac{2}{3}x\right)^2 = 1 \implies \frac{10}{3}x^2 = 1 \implies x = \sqrt{\frac{3}{10}}\]
+Then $y = \frac{2}{3}\sqrt{\frac{3}{10}} = \sqrt{\frac{4}{30}} = \sqrt{\frac{2}{15}}$.
+The maximum value is $f_{\max} = \sqrt{\frac{3}{10}} + \sqrt{\frac{2}{15}} = \sqrt{\frac{5}{6}}$.
+
+\textit{Connection to HSC:} This identifies the correct vectors for Cauchy-Schwarz: $(\sqrt{2}x, \sqrt{3}y) \cdot (1/\sqrt{2}, 1/\sqrt{3})$.
+\end{example}
+
+\begin{example}[Proving AM-GM Type Inequalities]
+Maximize the product $xyz$ for $x, y, z > 0$ subject to $x + y + z = k$ (where $k$ is a constant).
+
+\textbf{Solution:}
+Let $f(x,y,z) = xyz$ and $g(x,y,z) = x + y + z - k = 0$.
+The condition $\nabla f = \lambda \nabla g$ gives:
+\[(yz, xz, xy) = \lambda(1, 1, 1)\]
+This implies $yz = xz = xy$, so $x = y = z$ (since all are positive).
+Substituting into the constraint: $3x = k \implies x = k/3$.
+The maximum value of the product is $(k/3)^3 = k^3/27$.
+
+This confirms that for any fixed sum, the product is maximized when the terms are equal, which is the geometric intuition behind AM-GM: $\frac{x+y+z}{3} \geq \sqrt[3]{xyz}$.
+\end{example}
 
 \subsection{The Big O Notation}
 \subsubsection{What is Big O?}
