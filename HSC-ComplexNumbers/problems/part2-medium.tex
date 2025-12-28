@@ -109,6 +109,153 @@ Draw vertical lines at $x=1$ (dashed, excluded) and $x=3$ (solid, included). Dra
 
 \end{solution}
 
+
+\begin{problem}[The Spira Mirabilis - Eadem mutata resurgo]
+% \section*{Problem Statement}
+
+\begin{quote}
+  	\textit{"Eadem mutata resurgo"} --- "Changed, I rise again the same." \\
+  This phrase was chosen by mathematician Jacob Bernoulli to describe the Logarithmic Spiral, a curve that retains its shape as it scales.
+\end{quote}
+
+In this problem, you will explore the properties of a (discrete) logarithmic spiral defined in the complex plane, which exhibits self-similarity and convergent path length, a pattern often seen in nature such as in shells, storm systems, and galaxies.
+
+\vspace{0.5em}
+
+Let $\{z_n\}$ be a sequence of complex numbers defined by the initial value $z_0 = 1$ and the recurrence relation:
+\[
+z_{n+1} = \left( \frac{1 + i}{2} \right) z_n
+\]
+
+\begin{enumerate}
+  \item[(i)] Prove that for all $n \ge 0$, the triangle formed by the origin $O$ and two consecutive terms, $\triangle O z_n z_{n+1}$, is similar to the triangle $\triangle O z_{n+1} z_{n+2}$.
+    
+  \item[(ii)] Find the length of the polygonal spiral path connecting the points $z_0, z_1, z_2, \dots$:
+  \[ L = \sum_{n=0}^{\infty} |z_{n+1} - z_n| \]
+    
+  \item[(iii)] Show that the points $z_n$ lie on the continuous logarithmic spiral defined by the polar equation:
+  \[ r = e^{-k\theta} \]
+  and find the exact value of the constant $k$.
+    
+  \item[(iv)] Let $R = |z_0|$. Prove that the ratio of the total path length to the initial radius is given by:
+  \[ \frac{L}{R} = \cot\left(\frac{\pi}{8}\right) \]
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=3]
+  \draw[->] (-0.5,0) -- (1.2,0) node[right] {Re};
+  \draw[->] (0,-0.5) -- (0,1) node[above] {Im};
+    
+  \coordinate (O) at (0,0);
+  \coordinate (Z0) at (1,0);
+  \coordinate (Z1) at (0.5, 0.5);
+  \coordinate (Z2) at (0, 0.5);
+  \coordinate (Z3) at (-0.25, 0.25);
+  \coordinate (Z4) at (-0.25, 0);
+  % Additional points along the discrete spiral (z_n = ((1+i)/2)^n)
+  \coordinate (Z5) at (-0.125, -0.125);
+  \coordinate (Z6) at (0, -0.125);
+  \coordinate (Z7) at (0.0625, -0.0625);
+  \coordinate (Z8) at (0.0625, 0);
+  \coordinate (Z9) at (0.03125, 0.03125);
+  \coordinate (Z10) at (0, 0.03125);
+    
+  \draw[thick, blue] (Z0) -- (Z1) -- (Z2) -- (Z3) -- (Z4) -- (Z5) -- (Z6) -- (Z7) -- (Z8) -- (Z9) -- (Z10);
+  \draw[dashed, gray] (O) -- (Z0);
+  \draw[dashed, gray] (O) -- (Z1);
+  \draw[dashed, gray] (O) -- (Z2);
+  \draw[dashed, gray] (O) -- (Z3);
+  \draw[dashed, gray] (O) -- (Z4);
+  \draw[dashed, gray] (O) -- (Z5);
+  \draw[dashed, gray] (O) -- (Z6);
+    
+  \fill[blue] (Z0) circle (0.02) node[below right] {$z_0$};
+  \fill[blue] (Z1) circle (0.02) node[above right] {$z_1$};
+  \fill[blue] (Z2) circle (0.02) node[above left] {$z_2$};
+  \fill[blue] (Z3) circle (0.02) node[above left] {$z_3$};
+  \fill[blue] (Z4) circle (0.02) node[below left] {$z_4$};
+  \fill[blue] (Z5) circle (0.02) node[below left] {$z_5$};
+  \fill[blue] (Z6) circle (0.02) node[below] {$z_6$};
+    
+  % Approximate spiral curve
+  \draw[red, domain=0:4, samples=100, smooth] plot ({exp(-0.44*\x)*cos(\x r)}, {exp(-0.44*\x)*sin(\x r)});
+  \node[red] at (0.2, 0.1) {Spiral};
+\end{tikzpicture}
+\end{center}
+
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+  \item \textbf{Part (i):} Use the properties of complex multiplication. If $z_{n+1} = w z_n$, then multiplication by $w$ scales the modulus by $|w|$ and rotates the argument by $\arg(w)$. Compare the ratios of sides and included angles for the two triangles.
+  \item \textbf{Part (ii):} The sequence of segment lengths forms a geometric progression. First, find $|z_{n+1} - z_n|$ in terms of $|z_n|$ and the constant multiplier.
+  \item \textbf{Part (iii):} Express the multiplier in exponential form $r e^{i\phi}$. This allows you to write $z_n$ as a function of $n$. Eliminate $n$ to relate the modulus (radius) directly to the argument (angle).
+  \item \textbf{Part (iv):} Calculate $\cot(\pi/8)$ exactly using half-angle formulae and compare it to your result from Part (ii).
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Detailed]
+Let $w=\frac{1+i}{2}$. Then $|w|=\frac{|1+i|}{2}=\frac{\sqrt{2}}{2}=\frac{1}{\sqrt{2}}$ and $\arg(w)=\frac{\pi}{4}$.
+
+	\textbf{(i) Self-similarity.}
+Since $z_{n+1}=w\,z_n$, multiplication by $w$ maps the vector $Oz_n$ to $Oz_{n+1}$ by scaling all lengths by $|w|$ and rotating all directions by $\arg(w)$. Hence both the included angle $\angle z_nOz_{n+1}$ and the ratio $\frac{|Oz_{n+1}|}{|Oz_n|}$ are constant and equal to $\arg(w)$ and $|w|$, respectively. By SAS, $\triangle Oz_nz_{n+1}\sim\triangle Oz_{n+1}z_{n+2}$.
+
+	\textbf{(ii) Total polygonal length.}
+The $n$-th segment length is
+\[
+\ell_n=|z_{n+1}-z_n|=|wz_n-z_n|=|z_n|\,|w-1|.
+\]
+With $|z_n|=|w|^n=(1/\sqrt{2})^n$ and
+\[
+|w-1|=\left|\frac{1+i}{2}-1\right|=\left|-\frac{1}{2}+\frac{i}{2}\right|=\frac{1}{\sqrt{2}},
+\]
+we get $\ell_n=(1/\sqrt{2})^{n+1}$. Therefore
+\[
+L=\sum_{n=0}^{\infty}\ell_n=\sum_{n=0}^{\infty}\left(\frac{1}{\sqrt{2}}\right)^{n+1}
+=\frac{\frac{1}{\sqrt{2}}}{1-\frac{1}{\sqrt{2}}}
+=\frac{1}{\sqrt{2}-1}
+=\sqrt{2}+1.
+\]
+
+	\textbf{(iii) Continuous spiral form.}
+Write $w=\frac{1}{\sqrt{2}}e^{i\pi/4}$. Then
+\[
+z_n=w^n=\left(\frac{1}{\sqrt{2}}\right)^n e^{in\pi/4},
+\]
+so in polar form $r_n=2^{-n/2}$ and $\theta_n=\frac{n\pi}{4}$. Eliminating $n$ via $n=\frac{4\theta}{\pi}$ gives
+\[
+r=2^{-\frac{1}{2}\cdot\frac{4\theta}{\pi}}=2^{-\frac{2\theta}{\pi}}
+=e^{-\frac{2\ln 2}{\pi}\,\theta},
+\]
+hence $r=e^{-k\theta}$ with $k=\frac{2\ln 2}{\pi}$.
+
+	\textbf{(iv) Ratio as a trig value.}
+With $R=|z_0|=1$, we have $\frac{L}{R}=\sqrt{2}+1$. To link this to $\cot\!\left(\frac{\pi}{8}\right)$, set $t=\tan\!\left(\frac{\pi}{8}\right)$ and use the double-angle identity
+\[
+\tan(2A)=\frac{2\tan A}{1-\tan^2 A},\quad A=\frac{\pi}{8},
+\]
+together with $\tan\!\left(\frac{\pi}{4}\right)=1$. Then
+\[
+1=\frac{2t}{1-t^2}\ \Longrightarrow\ t^2+2t-1=0
+\ \Longrightarrow\ t=\sqrt{2}-1 \quad(\text{positive since } \tfrac{\pi}{8}\in(0,\tfrac{\pi}{4})).
+\]
+Thus
+\[
+\cot\!\left(\frac{\pi}{8}\right)=\frac{1}{\tan\!\left(\frac{\pi}{8}\right)}=\frac{1}{\sqrt{2}-1}
+=\sqrt{2}+1=\frac{L}{R}.
+\]
+\end{solution}
+
+\section*{Takeaways}
+\begin{itemize}
+  \item \textbf{Complex Multiplication is Rotation/Scaling:} This problem visualizes the geometric effect of multiplying by a complex number. $z_{n+1} = wz_n$ rotates the point by $\arg(w)$ and scales it by $|w|$, creating a discrete spiral.
+  \item \textbf{Infinite Geometric Series:} The "length of a spiral" is a classic application of summing a geometric series to infinity. Even though the spiral winds infinitely many times, the total distance traveled is finite.
+  \item \textbf{Discrete vs Continuous:} The problem bridges the gap between discrete sequences (points $z_n$) and continuous calculus concepts (the smooth logarithmic spiral curve).
+  \item The logarithmic spiral appears widely in nature and has various scientific and engineering applications such as animal shells, galaxies, and antenna designs.
+  \item What is the transformation when multiplying by a complex number. In this case: $w = \frac{1+i}{2}$. How does this relate to geometric shapes and patterns in the complex plane?
+\end{itemize}
+
 \begin{problem}[Statement Analysis]
 Which statement about complex numbers is true?
 
