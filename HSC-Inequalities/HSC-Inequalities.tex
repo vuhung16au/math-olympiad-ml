@@ -217,6 +217,83 @@ Equality holds when the $x_i$ are all equal or when $f$ is linear on the convex 
 
 
 \begin{remark}
+\noindent\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+Jensen's inequality generalizes the statement that the secant line of a convex function lies \textit{above} the graph of the function, which is Jensen's inequality for two points: the secant line consists of weighted means of the convex function (for $t \in [0,1]$),
+\[
+ t f(x_1) + (1 - t) f(x_2),
+\]
+while the graph of the function is the convex function of the weighted means,
+\[
+ f(t x_1 + (1 - t) x_2).
+\]
+Thus, Jensen's inequality in this case is
+\[
+ f(t x_1 + (1 - t) x_2) \leq t f(x_1) + (1 - t) f(x_2).
+\]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[>=stealth]
+  % 1. Configuration
+  % Define the function (a simple parabola)
+  \def\func(#1){0.12*(#1-3)^2 + 2}
+
+  % Define the x-coordinates for the points
+  \def\xA{2.5}  % x1
+  \def\xB{7.5}  % x2
+  \def\xM{4}    % The intermediate point (tx1 + (1-t)x2)
+
+  % 2. Calculations
+  % Calculate y-values on the curve
+  \pgfmathsetmacro{\yA}{\func(\xA)}
+  \pgfmathsetmacro{\yB}{\func(\xB)}
+  \pgfmathsetmacro{\yM}{\func(\xM)}
+
+  % Calculate the secant line parameters (slope and y-intercept logic)
+  % Slope m = (y2 - y1) / (x2 - x1)
+  \pgfmathsetmacro{\slope}{(\yB-\yA)/(\xB-\xA)}
+
+  % Calculate y-value on the secant line at xM
+  % y = y1 + m * (x - x1)
+  \pgfmathsetmacro{\ySecant}{\yA + \slope*(\xM-\xA)}
+
+  % 3. Drawing
+  % Draw Axes
+  \draw[->, thick] (-0.5,0) -- (9.5,0);
+  \draw[->, thick] (0,-0.5) -- (0,7.5);
+
+  % Draw the Curve (f(x))
+  \draw[thick, black, samples=100, domain=1.5:8.2]
+    plot (\x, {\func(\x)}) node[above right] {$f(x)$};
+
+  % Draw the Secant Line (Magenta)
+  % We extend the line slightly past the points for visual effect
+  \draw[thick, magenta]
+    (1.5, {\yA + \slope*(1.5-\xA)}) -- (9, {\yA + \slope*(9-\xA)});
+
+  % Draw Dashed Projections
+  % Vertical lines
+  \draw[dashed] (\xA, 0) -- (\xA, \yA);
+  \draw[dashed] (\xB, 0) -- (\xB, \yB);
+  \draw[dashed] (\xM, 0) -- (\xM, \ySecant);
+
+  % Horizontal lines
+  \draw[dashed] (0, \yM) -- (\xM, \yM);
+  \draw[dashed] (0, \ySecant) -- (\xM, \ySecant);
+
+  % 4. Labeling
+  % X-axis labels
+  \node[below] at (\xA, 0) {$x_1$};
+  \node[below] at (\xB, 0) {$x_2$};
+  \node[below] at (\xM, 0) {$tx_1 + (1-t)x_2$};
+
+  % Y-axis labels
+  \node[left] at (0, \yM) {$f(tx_1 + (1-t)x_2)$};
+  \node[left] at (0, \ySecant) {$tf(x_1) + (1-t)f(x_2)$};
+
+\end{tikzpicture}%
+}
+\end{minipage}
 
 \begin{itemize}
 
