@@ -1,5 +1,9 @@
 # HSC Mathematics Extension 2: Mechanics Mastery
 
+## Attribution
+© 2025 Vu Hung Nguyen
+Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Mechanics. Available at https://github.com/vuhung16au/math-olympiad-ml/"
+
 This project presents a comprehensive collection of mechanics problems for HSC Mathematics Extension 2 students. Every problem demonstrates key mathematical techniques including integration methods, differential equations, Newton's laws applications, and limiting behavior analysis.
 
 ## Overview

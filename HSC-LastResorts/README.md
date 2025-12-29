@@ -1,5 +1,9 @@
 # HSC Mathematics Extension 2: Last Resorts Mastery
 
+## Attribution
+© 2025 Vu Hung Nguyen
+Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-LastResorts. Available at https://github.com/vuhung16au/math-olympiad-ml/"
+
 This project curates the most challenging problems from HSC Mathematics Extension 2 examinations---the notorious Problem 16, known as "Last Resorts." Every problem represents the pinnacle of high school mathematics, combining multiple advanced topics and requiring sophisticated problem-solving techniques.
 
 ## Overview

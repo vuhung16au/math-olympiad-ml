@@ -1,5 +1,9 @@
 # HSC Mathematics Extension 2: Vectors Mastery
 
+## Attribution
+© 2025 Vu Hung Nguyen
+Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Vectors. Available at https://github.com/vuhung16au/math-olympiad-ml/"
+
 This project curates high-quality vector problems tailored to HSC Mathematics Extension 2 students. Every problem covers essential 3D vector concepts with solutions that demonstrate both algebraic rigor and geometric intuition.
 
 ## Overview

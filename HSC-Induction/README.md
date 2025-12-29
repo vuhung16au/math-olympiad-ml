@@ -1,6 +1,17 @@
 # HSC Mathematics Extension 2: Induction Mastery
 
+## Attribution
+© 2025 Vu Hung Nguyen
+Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Induction. Available at https://github.com/vuhung16au/math-olympiad-ml/"
+
 This project curates mathematical induction problems tailored to HSC Mathematics Extension 2 students. Every problem is solved with induction and written so motivated high-school learners can follow each step.
+
+## Licensing
+Non-code content in this folder is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0). See [LICENSE.md](LICENSE.md).
+
+CC links: https://creativecommons.org/licenses/by/4.0/ and https://creativecommons.org/licenses/by/4.0/legalcode
+
+Software/code remains MIT-licensed per the repository root LICENSE.
 
 ## Overview
 

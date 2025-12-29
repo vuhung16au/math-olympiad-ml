@@ -1,5 +1,9 @@
 # HSC Mathematics Extension 2: Polynomials Mastery
 
+## Attribution
+© 2025 Vu Hung Nguyen
+Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Polynomials. Available at https://github.com/vuhung16au/math-olympiad-ml/"
+
 This project curates polynomial problems tailored to HSC Mathematics Extension 2 students. Every problem covers essential polynomial techniques including complex numbers, roots of unity, Vieta's formulas, De Moivre's theorem, and transformations of roots, written so motivated high-school learners can follow each step.
 
 ## Overview

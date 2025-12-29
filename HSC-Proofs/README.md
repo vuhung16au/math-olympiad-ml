@@ -1,5 +1,9 @@
 # HSC Mathematics Extension 2: Mathematical Proofs
 
+## Attribution
+© 2025 Vu Hung Nguyen
+Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Proofs. Available at https://github.com/vuhung16au/math-olympiad-ml/"
+
 This project presents a comprehensive collection of mathematical proof problems for HSC Mathematics Extension 2 students. Every problem demonstrates key proof techniques including direct proof, proof by contradiction, mathematical induction, and proof by cases across fundamental number theory and algebra topics.
 
 ## Overview
