@@ -211,11 +211,22 @@ If $f$ is concave, the inequality is reversed.
 Equality holds when the $x_i$ are all equal or when $f$ is linear on the convex hull of the points.
 \end{theorembox}
 
-Remark: This is a so powerful Inequality and you should use it with care. 
+
+\begin{remark}
+
+This is a so powerful Inequality and you should use it with care. 
 To use Jensen's inequality, prove a function $f(x)$ is convex 
 by showing $f''(x)\ge 0$ on the interval of interest, 
 then state clearly "By Jensen's Inequality, since $f(x)$ is convex...".
 The risk is you many loose "working marks" if the markers feels you bypassed the intended "nature of proof" technique.
+
+\begin{itemize}
+  \item Keep Jensen's inequality as your last resort, or not use it at all if simpler inequalities (AM-GM, Cauchy-Schwarz) suffice.
+  % \item When using Jensen, explicitly state the convexity of $f$ and the weights used.
+  % \item Clearly identify equality conditions based on the function's properties.
+  \item Always verify the convexity or concavity of the function before applying Jensen's inequality.
+\end{itemize}
+\end{remark}
 
 \begin{theorembox}[title={\bfseries Triangle Inequality (Real Numbers)}]
 For real numbers $a$ and $b$:
@@ -238,13 +249,15 @@ Notes: (i) The polygonal inequality generalizes the triangle inequality to sums 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: Basic AM-GM Application}]
 Prove that for positive real numbers $a$ and $b$, we have $a + b \ge 2\sqrt{ab}$.
 
-	\textit{Solution:}
+\end{examplebox}
+
+\begin{solution}
 By the AM-GM inequality with $x = a$ and $y = b$:
 \[
 \frac{a + b}{2} \ge \sqrt{ab}
 \]
 Multiplying both sides by 2 yields $a + b \ge 2\sqrt{ab}$, with equality when $a = b$. \qed
-\end{examplebox}
+\end{solution}
 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: Bernoulli's Inequality via Jensen}]
 Prove Bernoulli's inequality: for $x\ge -1$ and $r\ge 1$,
@@ -252,7 +265,9 @@ Prove Bernoulli's inequality: for $x\ge -1$ and $r\ge 1$,
   (1+x)^r \ge 1 + r x.
 \]
 
-		\textit{Solution:}
+\end{examplebox}
+
+\begin{solution}
 Consider $f(t) = (1+t)^r$ on $[-1,\infty)$. For $r\ge 1$, we have
 \[
   f''(t) = r(r-1)(1+t)^{r-2} \ge 0,
@@ -265,56 +280,66 @@ Taking $x=0$ and $y=x$ (note the re-use of $x$ as the variable),
 \[
   (1+x)^r = f(x) \ge f(0) + f'(0)\,x = 1 + r x,
 \]
-which is Bernoulli's inequality. Equality occurs at $x=0$.
-\medskip
-	\textbf{Takeaways:} Use convexity of $f(t)=(1+t)^r$ for $r\ge 1$ and the tangent-line corollary of Jensen at $t=0$ to obtain $(1+x)^r\ge 1+rx$; equality at $x=0$.
-\end{examplebox}
+which is Bernoulli's inequality. Equality occurs at $x=0$. \qed
+\end{solution}
+
+\begin{takeaways}
+  \item Use convexity of $f(t)=(1+t)^r$ for $r\ge 1$ and the tangent-line corollary of Jensen at $t=0$ to obtain $(1+x)^r\ge 1+rx$; equality at $x=0$.
+\end{takeaways}
 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: Cauchy-Schwarz with Constraint}]
 Given $x^2 + y^2 = 1$, find the maximum value of $3x + 4y$.
 
-	\textit{Solution:}
+\end{examplebox}
+
+\begin{solution}
 By Cauchy-Schwarz inequality:
 \[
 (3x + 4y)^2 \le (3^2 + 4^2)(x^2 + y^2) = 25 \cdot 1 = 25
 \]
 Therefore $3x + 4y \le 5$, with equality when $(x, y) = \left(\frac{3}{5}, \frac{4}{5}\right)$. The maximum value is $5$. \qed
-\end{examplebox}
+\end{solution}
 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: Triangle Inequality}]
 Prove that for any complex number $z$ with $|z| = 1$, we have $|z^2 + z + 1| \le 3$.
 
-	\textit{Solution:}
+\end{examplebox}
+
+\begin{solution}
 Using the triangle inequality repeatedly:
 \[
 |z^2 + z + 1| \le |z^2| + |z| + |1| = 1 + 1 + 1 = 3
 \]
 with equality when $z = 1$. \qed
-\end{examplebox}
+\end{solution}
 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: Integration Inequality}]
 Prove that $\displaystyle\int_0^1 x^2 \, dx < \int_0^1 x \, dx$.
 
-	\textit{Solution:}
+\end{examplebox}
+
+\begin{solution}
 For $x \in [0, 1]$, we have $x^2 \le x$ (with equality only at $x = 0$ and $x = 1$). Therefore:
 \[
 \int_0^1 x^2 \, dx < \int_0^1 x \, dx
 \]
-\end{examplebox}
+\end{solution}
 
 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: Induction with Inequality}]
 Prove by induction that $2^n > n$ for all integers $n \ge 1$.
 
-	\textit{Solution:}
-	\textit{Base case ($n = 1$):} $2^1 = 2 > 1$. \checkmark
+\end{examplebox}
 
-	\textit{Inductive step:} Assume $2^k > k$ for some $k \ge 1$. Then:
+\begin{solution}
+  extit{Base case ($n = 1$):} $2^1 = 2 > 1$. \checkmark
+
+  extit{Inductive step:} Assume $2^k > k$ for some $k \ge 1$. Then:
 \[
 2^{k+1} = 2 \cdot 2^k > 2k
 \]
 Since $k \ge 1$, we have $2k = k + k \ge k + 1$. Therefore $2^{k+1} > k + 1$. By induction, the result holds for all $n \ge 1$. \qed
-\end{examplebox}
+\end{solution}
 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: AM-GM via Jensen}]
 Prove that for positive real numbers $x_1, x_2, \ldots, x_n$,
@@ -322,7 +347,9 @@ Prove that for positive real numbers $x_1, x_2, \ldots, x_n$,
   \frac{x_1 + x_2 + \cdots + x_n}{n} \ge \sqrt[n]{x_1 x_2 \cdots x_n}.
 \]
 
-	\textit{Solution:}
+\end{examplebox}
+
+\begin{solution}
 Consider the function $f(x) = -\ln(x)$, which is convex for $x > 0$ because $f''(x) = \tfrac{1}{x^2} > 0$.
 By Jensen's inequality with equal weights $\lambda_i = \tfrac{1}{n}$,
 \[
@@ -333,9 +360,11 @@ Substituting $f(x) = -\ln(x)$ gives
   -\ln\Big(\tfrac{x_1 + \cdots + x_n}{n}\Big) \le -\tfrac{1}{n}\sum_{i=1}^n \ln(x_i) = -\ln\Big((x_1 x_2 \cdots x_n)^{1/n}\Big).
 \]
 Multiplying both sides by $-1$ reverses the inequality and exponentiating yields the AM-GM inequality. \qed
-\medskip
-	\textbf{Takeaways:} Choose convex $f(x)=-\ln x$ and equal weights $\lambda_i=\tfrac{1}{n}$; equality occurs when all $x_i$ are equal.
-\end{examplebox}
+\end{solution}
+
+\begin{takeaways}
+  \item Choose convex $f(x)=-\ln x$ and equal weights $\lambda_i=\tfrac{1}{n}$; equality occurs when all $x_i$ are equal.
+\end{takeaways}
 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: Cauchy--Schwarz via Jensen}]
 Use Jensen's inequality to prove the Cauchy--Schwarz inequality: for real numbers $a_1,\dots,a_n$ and $b_1,\dots,b_n$,
@@ -343,7 +372,9 @@ Use Jensen's inequality to prove the Cauchy--Schwarz inequality: for real number
   \Big(\sum_{i=1}^n a_i b_i\Big)^2 \le \Big(\sum_{i=1}^n a_i^2\Big)\Big(\sum_{i=1}^n b_i^2\Big).
 \]
 
-		\textit{Solution:}
+\end{examplebox}
+
+\begin{solution}
 Assume not all $b_i$ are zero. Consider the convex function $f(t)=t^2$ on $\mathbb{R}$. Define weights and points
 \[
   \lambda_i = \frac{b_i^2}{\sum_{j=1}^n b_j^2}\quad(\lambda_i\ge0,\ \sum \lambda_i=1),\qquad x_i = \frac{a_i}{b_i}\ (\text{for } b_i\ne0).
@@ -361,14 +392,16 @@ Simplifying,
 \[
   \left(\frac{\sum_{i=1}^n a_i b_i}{\sum_{j=1}^n b_j^2}\right)^2 \le \frac{\sum_{i=1}^n a_i^2}{\sum_{j=1}^n b_j^2}.
 \]
-Multiplying both sides by $\big(\sum_{j=1}^n b_j^2\big)^2$ yields
+Multiplying both sides by $(\sum_{j=1}^n b_j^2)^2$ yields
 \[
   \Big(\sum_{i=1}^n a_i b_i\Big)^2 \le \Big(\sum_{i=1}^n a_i^2\Big)\Big(\sum_{i=1}^n b_i^2\Big),
 \]
 which is the Cauchy--Schwarz inequality. Equality holds if and only if $x_i=\frac{a_i}{b_i}$ are all equal, i.e., the sequences are proportional. \qed
-\medskip
-	\textbf{Takeaways:} Apply Jensen to $f(t)=t^2$ with points $x_i=a_i/b_i$ and weights $\lambda_i=\dfrac{b_i^2}{\sum_j b_j^2}$; equality occurs when $a_i/b_i$ is constant (sequences proportional).
-\end{examplebox}
+\end{solution}
+
+\begin{takeaways}
+  \item Apply Jensen to $f(t)=t^2$ with points $x_i=a_i/b_i$ and weights $\lambda_i=\dfrac{b_i^2}{\sum_j b_j^2}$; equality occurs when $a_i/b_i$ is constant (sequences proportional).
+\end{takeaways}
 
 \subsection{Notation and Conventions}
 \begin{itemize}[leftmargin=*]
