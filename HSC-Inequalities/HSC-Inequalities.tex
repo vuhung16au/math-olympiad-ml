@@ -157,7 +157,7 @@ For non-negative real numbers $x$, $y$, and $z$:
 with equality if and only if $x = y = z$.
 \end{theorembox}
 
-\begin{remark}[Two Approaches to Proving AM-GM]
+\begin{remark}[Two Approaches to Proving General Inequality]AM-GM]
 The AM-GM inequality states that for positive reals $x_1, x_2, \ldots, x_n$:
 \[ \frac{x_1 + x_2 + \cdots + x_n}{n} \geq \sqrt[n]{x_1 x_2 \cdots x_n} \]
 
@@ -169,14 +169,18 @@ The AM-GM inequality states that for positive reals $x_1, x_2, \ldots, x_n$:
 \end{enumerate}
 
 \textbf{(b) Proof using Convex Functions:}
-\begin{enumerate}
-    \item Consider $f(x) = -\ln(x)$, which is convex for $x > 0$ (since $f''(x) = \frac{1}{x^2} > 0$)
-    \item By Jensen's inequality for convex functions:
-    \[ f\left(\frac{x_1 + x_2 + \cdots + x_n}{n}\right) \leq \frac{f(x_1) + f(x_2) + \cdots + f(x_n)}{n} \]
-    \item Substituting $f(x) = -\ln(x)$:
-    \[ -\ln\left(\frac{x_1 + \cdots + x_n}{n}\right) \leq \frac{-\ln(x_1) - \cdots - \ln(x_n)}{n} = -\ln(\sqrt[n]{x_1 \cdots x_n}) \]
-    \item Multiply by $-1$ and exponentiate to obtain AM-GM
-\end{enumerate}
+
+ Consider $f(t) = -\ln(t)$, which is convex for $t > 0$. Apply Jensen's inequality to $f$ with equal weights $\lambda_i = \frac{1}{n}$:
+ See the worked example below for details.
+
+% \begin{enumerate}
+%     \item Consider $f(x) = -\ln(x)$, which is convex for $x > 0$ (since $f''(x) = \frac{1}{x^2} > 0$)
+%     \item By Jensen's inequality for convex functions:
+%     \[ f\left(\frac{x_1 + x_2 + \cdots + x_n}{n}\right) \leq \frac{f(x_1) + f(x_2) + \cdots + f(x_n)}{n} \]
+%     \item Substituting $f(x) = -\ln(x)$:
+%     \[ -\ln\left(\frac{x_1 + \cdots + x_n}{n}\right) \leq \frac{-\ln(x_1) - \cdots - \ln(x_n)}{n} = -\ln(\sqrt[n]{x_1 \cdots x_n}) \]
+%     \item Multiply by $-1$ and exponentiate to obtain AM-GM
+% \end{enumerate}
 \end{remark}
 
 \begin{theorembox}[title={\bfseries Cauchy-Schwarz Inequality}]
