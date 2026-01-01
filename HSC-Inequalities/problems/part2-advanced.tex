@@ -147,18 +147,45 @@ which can be proved using AM-GM or Cauchy-Schwarz.
 % ------------------------------------------------------------------------------
 
 \begin{problem}[Power Mean, Young's, and AM-GM]
-The numbers $p, q$ and $s$ are fixed and positive. Also $p > 1, q > 1$ and $p = \frac{q}{q-1}$.
-\begin{enumerate}[label=(\roman*)]
-    \item What positive value of $t$ minimises the expression
-    \[ f(t) = \frac{s^p}{p} + \frac{t^q}{q} - st \ ? \]
-    \item Show that for all $t > 0$,
-    \[ \frac{s^p}{p} + \frac{t^q}{q} \geq st . \]
-    \item Prove by induction that
-    \[ (x_1 x_2 \cdots x_n)^{\frac{1}{n}} \leq \frac{x_1 + x_2 + \cdots + x_n}{n} \]
-    for all $x_1, \dots, x_n > 0$.
-    \item Deduce that, for all $y_1, y_2, \dots, y_n > 0$,
-    \[ \frac{y_1}{y_2} + \frac{y_2}{y_3} + \cdots + \frac{y_{n-1}}{y_n} + \frac{y_n}{y_1} \geq n . \]
+
+\section*{Problem 3.26: Power Mean, Young's, and AM-GM}
+
+Let $p, q,$ and $s$ be fixed positive real numbers with $p > 1$ and $q > 1$. \\
+These constants satisfy the relationship $\frac{1}{p} + \frac{1}{q} = 1$.
+
+\begin{enumerate}
+    \item[(i)] Consider the function defined for $t > 0$:
+    \[ f(t) = \frac{s^p}{p} + \frac{t^q}{q} - st \]
+    Find the positive value of $t$ (in terms of $s$) that minimises $f(t)$.
+
+    \item[(ii)] Hence, show that for all $t > 0$:
+    \[ \frac{s^p}{p} + \frac{t^q}{q} \ge st \]
+    \textit{(This result is known as Young's Inequality).}
+
+    \item[(iii)] Prove by mathematical induction that:
+    \[ (x_1 x_2 \cdots x_n)^{\frac{1}{n}} \le \frac{x_1 + x_2 + \cdots + x_n}{n} \]
+    for all positive real numbers $x_1, x_2, \dots, x_n$.
+    \textit{(This result is known as the Arithmetic Mean - Geometric Mean Inequality).}
+
+    \item[(iv)] Using the result from part (iii), deduce that for all positive real numbers $y_1, y_2, \dots, y_n$:
+    \[ \frac{y_1}{y_2} + \frac{y_2}{y_3} + \cdots + \frac{y_{n-1}}{y_n} + \frac{y_n}{y_1} \ge n \]
 \end{enumerate}
+
+% The numbers $p, q$ and $s$ are fixed and positive constants. 
+% Also $p > 1, q > 1$ and  $1/p + 1/q = 1$.
+% % $p = \frac{q}{q-1}$.
+% \begin{enumerate}[label=(\roman*)]
+%     \item What positive value of $t$ minimises the expression
+%     \[ f(t) = \frac{s^p}{p} + \frac{t^q}{q} - st \ ? \]
+%     \item Show that for all $t > 0$,
+%     \[ \frac{s^p}{p} + \frac{t^q}{q} \geq st . \]
+%     \item Prove by induction that
+%     \[ (x_1 x_2 \cdots x_n)^{\frac{1}{n}} \leq \frac{x_1 + x_2 + \cdots + x_n}{n} \]
+%     for all $x_1, \dots, x_n > 0$.
+%     \item Deduce that, for all $y_1, y_2, \dots, y_n > 0$,
+%     \[ \frac{y_1}{y_2} + \frac{y_2}{y_3} + \cdots + \frac{y_{n-1}}{y_n} + \frac{y_n}{y_1} \geq n . \]
+% \end{enumerate}
+
 \end{problem}
 
 \begin{hint}
@@ -182,6 +209,24 @@ For (i), find the stationary point of $f(t)$. For (ii), evaluate $f$ at the mini
 \item Young's inequality generalizes AM-GM
 \item Induction is a powerful tool for inequalities. And convexity applied for Inequalities. 
 \item Cyclic sums often reduce to AM-GM
+\item Pay close attention to how the product of cyclic terms ($\frac{y_1}{y_2} \dots \frac{y_n}{y_1}$) cancels to 1; this is a common technique in harder inequality proofs.
+\item \textbf{{General Young's Inequality}:} 
+
+Let $a_1, a_2, \dots, a_n$ be non-negative real numbers. Let $p_1, p_2, \dots, p_n$ be positive real numbers satisfying the condition:
+\[
+\sum_{i=1}^{n} \frac{1}{p_i} = 1
+\]
+Then the product of these numbers is bounded by the sum of their powers:
+\[
+\prod_{i=1}^{n} a_i \le \sum_{i=1}^{n} \frac{a_i^{p_i}}{p_i}
+\]
+Or written explicitly:
+\[
+a_1 a_2 \cdots a_n \le \frac{a_1^{p_1}}{p_1} + \frac{a_2^{p_2}}{p_2} + \cdots + \frac{a_n^{p_n}}{p_n}
+\]
+\textit{Equality holds if and only if } $a_1^{p_1} = a_2^{p_2} = \cdots = a_n^{p_n}$.
+
+Link this inequality to weighted AM-GM inequalities.
 \end{takeaways}
 
 % ------------------------------------------------------------------------------
