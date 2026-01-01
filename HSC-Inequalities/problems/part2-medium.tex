@@ -79,9 +79,10 @@ Square both sides and simplify to reduce to $k+1\ge0$, which holds; thus the ind
 % -----------------------------------------
 
 \begin{problem}[Matrix Recurrence and Contraction Mapping]
-Define $a_1=0$ and the sequence $a_n$ be defined by the matrix relation:
-
-$$\begin{pmatrix} a_n \\ 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 1 & 3 \end{pmatrix} \begin{pmatrix} a_{n-1} \\ 1 \end{pmatrix}$$
+Define $a_1=0$ and, for $n\ge 2$, define the sequence by the scalar recurrence
+\[
+a_n=\frac{a_{n-1}+2}{a_{n-1}+3}.
+\]
 
 
 \begin{enumerate}
@@ -98,6 +99,10 @@ Express $a_n-L$ in terms of $a_{n-1}-L$ to find the contraction constant.
 \end{hint}
 
 \begin{solution}
+We will use the explicit recurrence
+\[
+a_n=\frac{a_{n-1}+2}{a_{n-1}+3}.
+\]
 For (1) base case $a_1=0$ lies in the interval. If $0\le a_k< L$ then applying increasing $f$ gives $f(0)\le a_{k+1}<f(L)=L$, so $0\le a_{k+1}<L$. 
 
 For (2) compute
