@@ -518,3 +518,112 @@ So: $2I = I - \frac{\pi}{2}\ln 2 \implies I = -\frac{\pi}{2}\ln 2$ $\checkmark$
 \begin{takeaways}
 King's plus clever substitution creates self-referential equation. Solve algebraically.
 \end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 16: Differentiation under integral — Dirichlet integral
+% =============================================================================
+\begin{problem}[Feynman’s Favorite Trick Solving the Dirichlet Integral]
+   
+Consider the function $I(t)$ defined for $t \ge 0$ by:
+\[
+I(t) = \int_{0}^{\infty} e^{-tx} \frac{\sin x}{x} \, dx
+\]
+You may assume without proof that the derivative of $I(t)$ can be found by differentiating the term inside the integral with respect to $t$:
+\[
+I'(t) = \int_{0}^{\infty} \frac{d}{dt} \left( e^{-tx} \frac{\sin x}{x} \right) \, dx
+\]
+(Note: When performing the differentiation inside the integral, treat $x$ as a constant).
+
+You are also given that $\lim_{t \to \infty} I(t) = 0$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that differentiating $e^{-tx} \frac{\sin x}{x}$ with respect to $t$ (treating $x$ as a constant) results in $-e^{-tx} \sin x$. 
+    % \hfill \textbf{(1 mark)}
+    
+    \item Use integration by parts twice, or otherwise, to show that:
+    \[
+    \int_{0}^{\infty} e^{-tx} \sin x \, dx = \frac{1}{t^2 + 1},   \text{for} \quad t > 0. 
+    \]
+    % for $t > 0$. 
+    % \hfill \textbf{(3 marks)}
+    
+    \item Hence, find an explicit expression for $I(t)$ involving an inverse trigonometric function. 
+    % \hfill \textbf{(3 marks)}
+    
+    \item Deduce the value of the Dirichlet Integral:
+    \[
+    \int_{-\infty}^{\infty} \frac{\sin x}{x} \, dx
+    \]
+    % \hfill \textbf{(2 marks)}
+\end{enumerate}
+    
+% Consider the function $I(t)$ defined for $t \ge 0$ by:
+% \[
+% I(t) = \int_{0}^{\infty} e^{-tx} \frac{\sin x}{x} \, dx
+% \]
+% Assume you may differentiate under the integral sign with respect to $t$.
+
+% (i) Show that $\displaystyle \frac{d}{dt}\big(e^{-tx}\frac{\sin x}{x}\big) = -e^{-tx}\sin x$.
+
+% (ii) Use integration by parts (twice) to show that $\displaystyle \int_{0}^{\infty} e^{-tx}\sin x \, dx = \frac{1}{t^2+1}$ for $t>0$.
+
+% (iii) Hence find an explicit expression for $I(t)$.
+
+% (iv) Deduce the value of $\displaystyle \int_{-\infty}^{\infty} \frac{\sin x}{x} \, dx$. \textit{This integral is called Dirichlet Integral}
+
+\end{problem}
+
+\vspace{0.5cm}
+
+\begin{hint}
+
+\begin{itemize}
+    \item \textbf{Part (i):} You are differentiating with respect to $t$. This means any term containing only $x$ (like $\sin x$ or $x$ itself) acts exactly like a number (a coefficient). Recall that the derivative of $e^{at}$ is $a e^{at}$.
+    \item \textbf{Part (ii):} Let $J = \int e^{-tx} \sin x \, dx$. Use Integration by Parts with $u = e^{-tx}$ and $v' = \sin x$. You will need to apply Integration by Parts a second time to simplify the integral.
+    \item \textbf{Part (iii):} From part (i) and the given formula, you know that $I'(t) = \int_{0}^{\infty} -e^{-tx} \sin x \, dx$. Substitute the result from part (ii) into this to get a simple expression for $I'(t)$. Then integrate with respect to $t$ to find $I(t)$. Don't forget the constant of integration $C$, and use the fact that $I(t) \to 0$ as $t \to \infty$ to find it.
+    \item \textbf{Part (iv):} Evaluate your result from (iii) at $t=0$. Notice that the graph of $y = \frac{\sin x}{x}$ is symmetrical across the y-axis (an even function), so the area from $-\infty$ to $\infty$ is double the area from $0$ to $\infty$.
+\end{itemize}
+
+    % \item (i) Differentiate $e^{-tx}$ with respect to $t$: $\frac{d}{dt}e^{-tx} = -x e^{-tx}$; treat $x$ as constant. 
+    % \item (ii) Let $J = \int_0^{\infty} e^{-tx}\sin x\,dx$. IBP with $u=e^{-tx}$, $v'=\sin x$; apply twice to obtain $J = \frac{1}{t^2+1}$. 
+    % \item (iii) From (i): $I'(t) = -J = -\frac{1}{t^2+1}$, so $I(t) = -\arctan t + C$; use $\lim_{t\to\infty}I(t)=0$ to get $C=\frac{\pi}{2}$, hence $I(t)=\frac{\pi}{2}-\arctan t$. 
+    % \item (iv) Even integrand: $\int_{-\infty}^{\infty}\frac{\sin x}{x}dx = 2\int_0^{\infty}\frac{\sin x}{x}dx = 2I(0) = \pi$.}}
+\end{hint}
+
+% \rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (i) Differentiate $e^{-tx}$ with respect to $t$: $\frac{d}{dt}e^{-tx} = -x e^{-tx}$; treat $x$ as constant. (ii) Let $J = \int_0^{\infty} e^{-tx}\sin x\,dx$. IBP with $u=e^{-tx}$, $v'=\sin x$; apply twice to obtain $J = \frac{1}{t^2+1}$. (iii) From (i): $I'(t) = -J = -\frac{1}{t^2+1}$, so $I(t) = -\arctan t + C$; use $\lim_{t\to\infty}I(t)=0$ to get $C=\frac{\pi}{2}$, hence $I(t)=\frac{\pi}{2}-\arctan t$. (iv) Even integrand: $\int_{-\infty}^{\infty}\frac{\sin x}{x}dx = 2\int_0^{\infty}\frac{\sin x}{x}dx = 2I(0) = \pi$.}}
+
+\begin{solution}
+	\textbf{(i)} Treat $x$ as constant: $\dfrac{d}{dt}\Big(e^{-tx}\dfrac{\sin x}{x}\Big) = \dfrac{\sin x}{x}(-x e^{-tx}) = -e^{-tx}\sin x$.
+
+	\textbf{(ii)} Let $J=\int_{0}^{\infty} e^{-tx}\sin x\,dx$. By parts: $u=e^{-tx}$, $dv=\sin x\,dx$ gives
+\[
+J = \big[-e^{-tx}\cos x\big]_0^{\infty} - \int_0^{\infty}(-t e^{-tx})(-\cos x)\,dx = 1 - t\int_0^{\infty} e^{-tx}\cos x\,dx.
+\]
+Apply parts again to $\int e^{-tx}\cos x\,dx$ to get $\int_0^{\infty} e^{-tx}\cos x\,dx = tJ$. Hence $J(1+t^2)=1$, so $\boxed{J=\dfrac{1}{t^2+1}}$.
+
+	\textbf{(iii)} From (i): $I'(t)=-J=-\dfrac{1}{t^2+1}$. Integrate in $t$:
+\[
+I(t) = -\arctan t + C.
+\]
+Using $\lim_{t\to\infty} I(t)=0$ gives $C=\dfrac{\pi}{2}$, so $\boxed{I(t)=\dfrac{\pi}{2}-\arctan t}$.
+
+	\textbf{(iv)} Evenness of $\dfrac{\sin x}{x}$ yields
+\[
+\int_{-\infty}^{\infty}\frac{\sin x}{x}\,dx = 2\int_0^{\infty}\frac{\sin x}{x}\,dx = 2I(0) = \pi.
+\]
+	\textbf{Answer:} $\boxed{\pi}$.
+\end{solution}
+
+\begin{takeaways}
+
+\begin{itemize}
+    \item \textbf{Differentiation Under the Integral:} This advanced technique allows us to solve a difficult constant integral (like $\int \frac{\sin x}{x} dx$) by turning it into a function of a variable $t$, differentiating that function to simplify the integrand, and then integrating back.
+    \item \textbf{Symmetry in Integration:} Recognizing that a function is even (symmetric about the y-axis) is a standard Extension 2 tool to relate integrals over different domains (e.g., transforming a calculation from $0 \to \infty$ into a result for $-\infty \to \infty$).
+    \item \textbf{Damping Parameters:} Adding a term like $e^{-tx}$ is a common mathematical strategy to make an integral "behave better" (converge) so we can manipulate it, before setting $t=0$ at the end to get the original answer.
+    \item Prove that $\lim_{t \to \infty} I(t) = 0$. This is often done by noting that as $t$ becomes very large, the exponential term $e^{-tx}$ decays very quickly, making the entire integrand approach zero for all $x > 0$.
+\end{itemize}
+
+% Differentiation under the integral simplifies tough constants; damping $e^{-tx}$ ensures convergence. IBP twice for $\int e^{-tx}\sin x$ yields a solvable self-referential form. Symmetry of even integrands connects $[0,\infty)$ to $(-\infty,\infty)$.
+\end{takeaways}
