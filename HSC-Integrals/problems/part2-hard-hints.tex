@@ -137,6 +137,82 @@ Repeated linear factor needs $\frac{A}{x} + \frac{B}{x^2}$. Split quadratic nume
 \vspace{1cm}
 
 % =============================================================================
+% PROBLEM 16: The Beta Function and Rational Integrals
+% =============================================================================
+\begin{problem}[The Beta Function Level 4: The Symmetry Trap]
+	% \textbf{Historical Context}\\
+The \textbf{Beta function}, also known as the Euler integral of the first kind, was first studied by Leonhard Euler and Adrien-Marie Legendre in the 18th century. It acts as a bridge between discrete factorials and continuous analysis. While integer inputs connect to combinatorics, fractional inputs often yield deep connections to circle geometry and trigonometry.
+
+\vspace{0.5em}
+The function $B(m, n)$ is defined for $m > 0$ and $n > 0$ by the integral:
+$$ B(m, n) = \int_0^1 x^{m-1} (1-x)^{n-1} \, dx $$
+
+\begin{enumerate}
+    \item[(i)] By using the substitution $x = \frac{u}{1+u}$, show that:
+    $$ B(m, n) = \int_0^\infty \frac{u^{m-1}}{(1+u)^{m+n}} \, du $$
+    %\hfill \textbf{(3 marks)}
+
+    \item[(ii)] Consider the case where $m = \frac{1}{4}$ and $n = \frac{3}{4}$.
+    Using the substitution $u = t^4$, show that:
+    $$ B\left(\frac{1}{4}, \frac{3}{4}\right) = 4 \int_0^\infty \frac{1}{1+t^4} \, dt $$
+    % \hfill \textbf{(2 marks)}
+
+    \item[(iii)] Verify the algebraic identity for $t \neq 0$:
+    $$ \frac{2}{1+t^4} = \frac{1+\frac{1}{t^2}}{\left(t-\frac{1}{t}\right)^2+2} - \frac{1-\frac{1}{t^2}}{\left(t+\frac{1}{t}\right)^2-2} $$
+    % \hfill \textbf{(3 marks)}
+
+    \item[(iv)] Hence, using appropriate substitutions in the result from part (iii), evaluate the exact value of $B\left(\frac{1}{4}, \frac{3}{4}\right)$.
+    % \hfill \textbf{(7 marks)}
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} \textbf{Part (i):} This is a standard transformation. Calculate $dx$ carefully and update limits. The term $1-x$ becomes $\frac{1}{1+u}$.\\
+	extbf{Part (ii):} Substitute $m$ and $n$ first to simplify the powers ($m+n=1$). Then apply the substitution $u=t^4$.\\
+	extbf{Part (iii):} Work from the Right Hand Side (RHS). Expand the squares in the denominators (e.g., $(t-1/t)^2 + 2 = t^2 + 1/t^2$) and combine the fractions.\\
+	extbf{Part (iv):} The integral splits into two parts. For the first term, let $v = t - \frac{1}{t}$. Notice that the numerator $(1+\frac{1}{t^2})dt$ is exactly $dv$. For the second term, let $w = t + \frac{1}{t}$. Be very careful with the limits of integration for $v$ and $w$. One integral yields a standard result; the other requires checking the limits.}}
+
+\begin{solution}
+\begin{enumerate}
+    \item[(i)] Let $x = \frac{u}{1+u}$, then $dx = \frac{1}{(1+u)^2} \, du$. Range: $x \in (0,1) \implies u \in (0, \infty)$.
+    $$ B(m,n) = \int_0^\infty \left(\frac{u}{1+u}\right)^{m-1} \left(\frac{1}{1+u}\right)^{n-1} \frac{1}{(1+u)^2} \, du = \int_0^\infty \frac{u^{m-1}}{(1+u)^{m+n}} \, du $$
+
+    \item[(ii)] Substitute $m=\frac{1}{4}, n=\frac{3}{4} \implies m+n=1$.
+    $$ B\left(\tfrac{1}{4}, \tfrac{3}{4}\right) = \int_0^\infty \frac{u^{-3/4}}{1+u} \, du $$
+    Let $u = t^4$, then $du = 4t^3 \, dt$.
+    $$ = \int_0^\infty \frac{(t^4)^{-3/4}}{1+t^4} (4t^3) \, dt = \int_0^\infty \frac{t^{-3} \cdot 4t^3}{1+t^4} \, dt = 4 \int_0^\infty \frac{1}{1+t^4} \, dt $$
+
+    \item[(iii)] Simplify the denominators on the RHS:
+    $$ \left(t-\frac{1}{t}\right)^2 + 2 = t^2 - 2 + \frac{1}{t^2} + 2 = t^2 + \frac{1}{t^2} $$
+    $$ \left(t+\frac{1}{t}\right)^2 - 2 = t^2 + 2 + \frac{1}{t^2} - 2 = t^2 + \frac{1}{t^2} $$
+    RHS $= \frac{1+1/t^2}{t^2+1/t^2} - \frac{1-1/t^2}{t^2+1/t^2} = \frac{(1+1/t^2) - (1-1/t^2)}{t^2+1/t^2} = \frac{2/t^2}{t^2+1/t^2} = \frac{2}{t^4+1}.$
+
+    \item[(iv)] We have $B\left(\frac{1}{4}, \frac{3}{4}\right) = 4 \int_0^\infty \frac{1}{1+t^4} \, dt = 2 \int_0^\infty \frac{2}{1+t^4} \, dt$.
+    Split into $2(I_1 - I_2)$:
+    \begin{itemize}
+        \item \textbf{$I_1$:} Let $v = t - \frac{1}{t}$. Limits: $t \to 0 \implies v \to -\infty$; $t \to \infty \implies v \to \infty$.
+        $$ I_1 = \int_{-\infty}^\infty \frac{dv}{v^2+2} = \left[ \frac{1}{\sqrt{2}} \tan^{-1}\frac{v}{\sqrt{2}} \right]_{-\infty}^\infty = \frac{1}{\sqrt{2}} \left( \frac{\pi}{2} - (-\frac{\pi}{2}) \right) = \frac{\pi}{\sqrt{2}} $$
+        \item \textbf{$I_2$:} Let $w = t + \frac{1}{t}$. Limits: $t \to 0 \implies w \to \infty$; $t \to \infty \implies w \to \infty$.
+        $$ I_2 = \int_{\infty}^\infty \frac{dw}{w^2-2} = 0 $$
+    \end{itemize}
+    Final Value $= 2 \left( \frac{\pi}{\sqrt{2}} - 0 \right) = \pi\sqrt{2}$.
+\end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Technique Comparison:}
+    \begin{itemize}
+        \item \textbf{Case $m=1/3$ ($1+t^3$):} We use Partial Fractions because the denominator factorizes nicely into linear and quadratic terms.
+        \item \textbf{Case $m=1/4$ ($1+t^4$):} Factorization is messy (involving $\sqrt{2}$). Instead, we use the algebraic trick of dividing numerator and denominator by $t^2$ and substituting $v = t \pm \frac{1}{t}$. This is a classic Extension 2 technique for reciprocal degree-4 polynomials.
+    \end{itemize}
+    \item \textbf{Symmetry:} The second integral $I_2$ vanishes because the limits of integration are identical ($\infty$ to $\infty$), implying the signed area cancels out perfectly or the domain is traversed and reversed.
+    \item \textbf{Infinite Limits:} Correctly identifying that $t - 1/t$ spans $(-\infty, \infty)$ while $t + 1/t$ spans $(\infty, \infty)$ (effectively bouncing off min value 2) is critical.
+\end{enumerate}
+\end{takeaways}
+
+
+% =============================================================================
 % PROBLEM 4: Volume with washer method
 % =============================================================================
 \begin{problem}

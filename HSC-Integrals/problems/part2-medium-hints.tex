@@ -440,3 +440,97 @@ Real part: $\frac{e^x(\cos x + \sin x)}{2}$
 \begin{takeaways}
 Complex exponentials simplify products of exponential and trig. Take real part for result.
 \end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 16: The Beta Function and Fractional Recurrence
+% =============================================================================
+\begin{problem}[The Beta Function of the Third Degree]
+	% \textbf{Historical Context}\\
+The \textbf{Beta function}, also known as the Euler integral of the first kind, was first studied by Leonhard Euler and Adrien-Marie Legendre in the 18th century. It is a fundamental special function in mathematical analysis that generalizes the concept of factorials and binomial coefficients to non-integer values. In this problem, we explore its recursive properties and its application to evaluating complex integrals.
+
+This problem will guide you through deriving a recurrence relation for the Beta function and using it to evaluate a specific integral.
+
+\vspace{0.5em}
+For $m > 0$ and $n > 0$, we define the function $B(m, n)$ by the definite integral:
+$$ B(m, n) = \int_0^1 x^{m-1} (1-x)^{n-1} \, dx $$
+
+\vspace{0.5em}
+
+\begin{enumerate}
+	\item[(i)] Use the substitution $x = \sin^2 \theta$ to show that $B\left(\frac{1}{2}, \frac{1}{2}\right) = \pi$.
+    % \hfill \textbf{(2 marks)}
+    
+	\item[(ii)] Use integration by parts to show that for $m > 0$ and $n > 0$:
+	$$ B(m, n+1) = \frac{n}{m+n} B(m, n) $$
+	% \hfill \textbf{(3 marks)}
+    
+	\item[(iii)] Use the substitution $x = \frac{u}{1+u}$ to show that:
+	$$ B(m, n) = \int_0^\infty \frac{u^{m-1}}{(1+u)^{m+n}} \, du $$
+	% \hfill \textbf{(3 marks)}
+    
+	\item[(iv)] Hence, evaluate the exact value of:
+	$$ \int_0^\infty \frac{\sqrt{x}}{(1+x)^3} \, dx $$
+	% \hfill \textbf{(7 marks)}
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} \textbf{Part (i):} Recall that the domain of integration changes from $x \in [0,1]$ to $\theta \in [0, \frac{\pi}{2}]$. Don't forget to calculate $dx$ in terms of $d\theta$. The integrand should simplify to a constant.\\
+	extbf{Part (ii):} Apply Integration by Parts with $u = (1-x)^n$ and $dv = x^{m-1} \, dx$. You will arrive at an expression involving $\int x^m (1-x)^{n-1} \, dx$. To relate this back to $B(m,n)$, try writing $x^m = x^{m-1} \cdot x$ or substitute $x = 1 - (1-x)$ to split the integral.\\
+	extbf{Part (iii):} Be careful with the limits of integration. As $x \to 1$, notice that $u = \frac{x}{1-x} \to \infty$. Algebraic simplification of the powers is key.\\
+	extbf{Part (iv):} First, match the given integral to the form in Part (iii) to determine the specific values of $m$ and $n$. You will need to use the recurrence relation from Part (ii). Note that the Beta function is symmetric, i.e., $B(m,n) = B(n,m)$, which allows you to switch indices if needed to apply the reduction formula.}}
+
+\begin{solution}
+\begin{enumerate}
+	\item[(i)] Let $x = \sin^2\theta$, then $dx = 2\sin\theta\cos\theta \, d\theta$.
+	\begin{align*}
+		B(\tfrac{1}{2}, \tfrac{1}{2}) &= \int_0^{\pi/2} (\sin^2\theta)^{-1/2} (1-\sin^2\theta)^{-1/2} \cdot 2\sin\theta\cos\theta \, d\theta \\
+		&= \int_0^{\pi/2} \frac{1}{\sin\theta \cos\theta} \cdot 2\sin\theta\cos\theta \, d\theta = \int_0^{\pi/2} 2 \, d\theta = [2\theta]_0^{\pi/2} = \pi
+	\end{align*}
+
+	\item[(ii)] Let $I = B(m, n+1) = \int_0^1 x^{m-1}(1-x)^n \, dx$.
+	\begin{itemize}
+		\item Let $u = (1-x)^n \implies du = -n(1-x)^{n-1} \, dx$.
+		\item Let $dv = x^{m-1} \, dx \implies v = \frac{x^m}{m}$.
+	\end{itemize}
+	$$ I = \left[ \frac{x^m}{m}(1-x)^n \right]_0^1 + \frac{n}{m} \int_0^1 x^m (1-x)^{n-1} \, dx $$
+	The boundary term vanishes. For the integral, use $x^m = x^{m-1} - x^{m-1}(1-x)$:
+
+	\begin{align*}
+	\int_0^1 x^m (1-x)^{n-1} \, dx &= \int_0^1 x^{m-1}(1-x)^{n-1} \, dx 
+	\, - \int_0^1 x^{m-1}(1-x)^n \, dx \\
+	&= B(m,n) - B(m, n+1)
+	\end{align*}
+    
+	Substituting back:
+	$$ B(m, n+1) = \frac{n}{m} \left( B(m,n) - B(m, n+1) \right) $$
+	$$ B(m, n+1) \left( 1 + \frac{n}{m} \right) = \frac{n}{m} B(m,n) \implies B(m, n+1) = \frac{n}{m+n} B(m,n) $$
+
+	\item[(iii)] Let $x = \frac{u}{1+u}$, then $dx = \frac{1}{(1+u)^2} \, du$. Also $1-x = \frac{1}{1+u}$.
+	$$ B(m,n) = \int_0^\infty \left( \frac{u}{1+u} \right)^{m-1} \left( \frac{1}{1+u} \right)^{n-1} \frac{1}{(1+u)^2} \, du $$
+	Combining the powers of $(1+u)$ in the denominator: $(m-1) + (n-1) + 2 = m+n$.
+	$$ = \int_0^\infty \frac{u^{m-1}}{(1+u)^{m+n}} \, du $$
+
+	\item[(iv)] Comparing $\int_0^\infty \frac{x^{1/2}}{(1+x)^3} dx$ with Part (iii):
+	$m-1 = \frac{1}{2} \implies m = \frac{3}{2}$. $m+n = 3 \implies n = \frac{3}{2}$.
+	Target: Evaluate $B(\frac{3}{2}, \frac{3}{2})$.
+	\begin{itemize}
+		\item Apply recurrence (Part ii): $B(\frac{3}{2}, \frac{3}{2}) = B(\frac{3}{2}, \frac{1}{2} + 1) = \frac{1/2}{3/2 + 1/2} B(\frac{3}{2}, \frac{1}{2}) = \frac{1}{4} B(\frac{3}{2}, \frac{1}{2})$.
+		\item By symmetry, $B(\frac{3}{2}, \frac{1}{2}) = B(\frac{1}{2}, \frac{3}{2})$.
+		\item Apply recurrence again: $B(\frac{1}{2}, \frac{3}{2}) = B(\frac{1}{2}, \frac{1}{2} + 1) = \frac{1/2}{1/2 + 1/2} B(\frac{1}{2}, \frac{1}{2}) = \frac{1}{2} \pi$.
+		\item Final Result: $\frac{1}{4} \times \frac{\pi}{2} = \frac{\pi}{8}$.
+	\end{itemize}
+\end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+	\item \textbf{Generalization:} The Beta function generalizes the concept of binomial coefficients to non-integer values.
+	\item \textbf{Technique:} Transforming a finite integral on $[0,1]$ to an infinite integral on $[0, \infty)$ is a standard technique for evaluating complex rational integrals.
+	\item \textbf{Structure:} Recursive relationships allow us to compute values for higher indices (like $3/2$) by reducing them to a known "base case" (like $1/2$).
+	\item For integer values of $m$ and $n$, the Beta function relates to factorials via:
+            $$ B(m, n) = \frac{(m-1)!(n-1)!}{(m+n-1)!} $$ 
+\end{itemize}
+\end{takeaways}
