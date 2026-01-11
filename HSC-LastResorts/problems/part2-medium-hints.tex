@@ -495,6 +495,117 @@ Since $a_n b_n=2$ for all $n$, it follows $b_n\to\sqrt2$ as well. Therefore the 
     \item AM-GM Utility: The arithmetic mean of a number and its reciprocal (scaled) 
     is a classic way to generate a value closer to the root, 
     bounded below by the root itself.
+    \item Similar techniques can be used to find the cube root of any positive real number $x$: 
+
+    $a_{n+1} = \frac{a_n + b_n}{2}, \quad b_{n+1} = \frac{x}{a_{n+1}}$
+    with any $a_1 \ge x$ and $b_1 = x/a_1$.
+
+    The speed of convergence is quadratic, like the square root case.
+
+\end{enumerate}
+\end{takeaways}
+
+% Problem 6b: Sequence of Prisms (Cube Root — Newton's Method)
+\begin{problem}[Converging Prisms — Newton's Method for $2^{1/3}$]
+Consider a sequence of rectangular prisms with a square base of side length $a_n$ and height $b_n$. The first prism has $a_1=1$ and $b_1=2$. For integers $n\ge1$ define
+\[
+a_{n+1}=\frac{2a_n+b_n}{3},\qquad b_{n+1}=\frac{2}{a_{n+1}^2}.
+\]
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that every prism in the sequence has volume $2$.
+    \item Prove that $a_n\ge\sqrt[3]{2}$ for all $n\ge2$.
+    \item Show by induction that for $n\ge2$,
+    \[a_n-\sqrt[3]{2}\le\frac{1}{3^{n-2}}\left(a_2-\sqrt[3]{2}\right).
+    \]
+    \item Deduce that the prisms approach a cube (where $a_n=b_n=\sqrt[3]{2}$) as $n\to\infty$.
+    \item (Optional) Use a calculator to find the first five terms of the sequence $a_n$ and discuss the speed of convergence to $\sqrt[3]{2}$.
+\end{enumerate}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tikzpicture}[
+    x={(0.8cm,0cm)},
+    y={(0cm,0.8cm)},
+    z={(0.35cm,0.25cm)},
+    >=stealth]
+    % Axes
+    \draw[->] (0,0,0) -- (4,0,0) node[right] {$a_n$};
+    \draw[->] (0,0,0) -- (0,4,0) node[above] {$a_n$};
+    \draw[->] (0,0,0) -- (0,0,5) node[below left] {$b_n$};
+    
+    % Prism edges
+    \draw[thick] (0,0,0) -- (3,0,0);
+    \draw[thick] (0,0,0) -- (0,3,0);
+    \draw[thick] (0,0,0) -- (0,0,4);
+    
+    % Base square
+    \draw[thick] (3,0,0) -- (3,3,0) -- (0,3,0);
+    
+    % Vertical edges
+    \draw[thick] (3,0,0) -- (3,0,4);
+    \draw[thick] (0,3,0) -- (0,3,4);
+    \draw[thick] (3,3,0) -- (3,3,4);
+    
+    % Top face
+    \draw[thick] (3,0,4) -- (3,3,4) -- (0,3,4);
+    \draw[thick,dashed] (0,0,4) -- (3,0,4);
+    \draw[thick,dashed] (0,0,4) -- (0,3,4);
+    
+    % Labels
+    \node[below] at (1.5,0,0) {$a_n$};
+    \node[left] at (0,1.5,0) {$a_n$};
+    \node[left] at (0,0,2) {$b_n$};
+    \node at (1.5,1.5,2) {$V=2$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+For (i) compute $V_{n+1}=a_{n+1}^2 b_{n+1}$ directly. For (ii) apply AM--GM to the three dimensions $a_n, a_n, b_n$ and use the volume from (i). For (iii) express $a_{k+1}-\sqrt[3]{2}$ in terms of $a_k-\sqrt[3]{2}$ and use the fact that $a_k\ge\sqrt[3]{2}$ to bound the error by a constant multiple of the previous error. For (iv) use the squeeze theorem together with the bound in (iii).
+\end{hint}
+
+\begin{solution}
+	\textbf{(i)} The volume is $V_n=a_n^2 b_n$. Using the recursion,
+\[V_{n+1}=a_{n+1}^2 b_{n+1}=a_{n+1}^2\cdot\frac{2}{a_{n+1}^2}=2,
+\]
+so $V_n\equiv2$ for all $n$.
+
+	\textbf{(ii)} By AM--GM applied to $a_n, a_n, b_n$:
+\[a_{n+1}=\frac{a_n+a_n+b_n}{3}\ge\sqrt[3]{a_n^2 b_n}=\sqrt[3]{2}.\]
+Since $a_1^2 b_1=2$, we have $a_2\ge\sqrt[3]{2}$. By induction, $a_n\ge\sqrt[3]{2}$ for all $n\ge2$.
+
+	\textbf{(iii)} From $b_k=2/a_k^2$ we get $a_{k+1}=\frac{2a_k^3+2}{3a_k^2}$. Let $\epsilon_k=a_k-\sqrt[3]{2}$. Then:
+\[a_{k+1}-\sqrt[3]{2}=\frac{2a_k^3+2-3\sqrt[3]{2}a_k^2}{3a_k^2}.
+\]
+Using $a_k^3-(\sqrt[3]{2})^3=\epsilon_k(a_k^2+a_k\sqrt[3]{2}+(\sqrt[3]{2})^2)$ and $a_k^2-(\sqrt[3]{2})^2=\epsilon_k(a_k+\sqrt[3]{2})$, we simplify the numerator:
+\begin{align*}
+2a_k^3+2-3\sqrt[3]{2}a_k^2 &= 2(a_k^3-(\sqrt[3]{2})^3)-3\sqrt[3]{2}(a_k^2-(\sqrt[3]{2})^2) \\
+&= 2\epsilon_k(a_k^2+a_k\sqrt[3]{2}+(\sqrt[3]{2})^2)-3\sqrt[3]{2}\epsilon_k(a_k+\sqrt[3]{2}) \\
+&= \epsilon_k(2a_k^2-a_k\sqrt[3]{2}-(\sqrt[3]{2})^2) = \epsilon_k^2(2a_k+\sqrt[3]{2}).
+\end{align*}
+Hence $\epsilon_{k+1}=\frac{\epsilon_k^2(2a_k+\sqrt[3]{2})}{3a_k^2}$. For $k\ge2$, we have $\sqrt[3]{2}\le a_k\le a_2=\frac{4}{3}$. Since $\epsilon_k\le\frac{4}{3}-\sqrt[3]{2}<\frac{1}{12}$ and $\frac{2a_k+\sqrt[3]{2}}{3a_k^2}\le\frac{2\cdot\frac{4}{3}+\sqrt[3]{2}}{3(\sqrt[3]{2})^2}<\frac{14}{9}$, we get:
+\[\epsilon_{k+1}\le\frac{14\epsilon_k^2}{9}<\frac{14\epsilon_k}{9}\cdot\frac{1}{12}=\frac{14\epsilon_k}{108}<\frac{\epsilon_k}{3}.
+\]
+By induction, $a_n-\sqrt[3]{2}\le\frac{1}{3^{n-2}}(a_2-\sqrt[3]{2})$ for $n\ge2$.
+
+	\textbf{(iv)} From (ii) and (iii), $0\le a_n-\sqrt[3]{2}\le\frac{1}{3^{n-2}}(a_2-\sqrt[3]{2})\to0$ as $n\to\infty$. Since $a_n^2 b_n=2$, we have $b_n\to\sqrt[3]{2}$ as well. Therefore the prisms approach a cube.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Newton's General Method:} This problem demonstrates Newton's method in its general form for finding roots. The recurrence $a_{n+1} = \frac{2a_n + b_n}{3}$ where $b_n = \frac{2}{a_n^2}$ is equivalent to applying Newton's method to the function $f(x) = x^3 - 2$ to find $\sqrt[3]{2}$. The general Newton iteration $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$ yields $x_{n+1} = \frac{2x_n^3 + 2}{3x_n^2} = \frac{2x_n + \frac{2}{x_n^2}}{3}$, which matches our geometric construction.
+    
+    \item \textbf{Relevance to Taylor Expansion:} The quadratic convergence of Newton's method can be understood through Taylor expansion. If $r$ is the root and $\epsilon_n = a_n - r$ is the error, then expanding $f(a_n) = f(r + \epsilon_n)$ around $r$ gives $f(a_n) \approx f'(r)\epsilon_n + \frac{1}{2}f''(r)\epsilon_n^2$. Since $f(r) = 0$, Newton's iteration yields $\epsilon_{n+1} \approx \frac{f''(r)}{2f'(r)}\epsilon_n^2$, showing the error is proportional to the square of the previous error.
+    
+    \item \textbf{Speed of Convergence: Quadratic:} Newton's method exhibits quadratic convergence, meaning $\epsilon_{n+1} \approx C \cdot \epsilon_n^2$ for some constant $C$. This is dramatically faster than linear methods (like bisection) where errors only decrease by a constant factor each step. In practice, the number of correct digits roughly doubles with each iteration, making Newton's method one of the most efficient root-finding algorithms.
+    
+    \item \textbf{Geometric Interpretation:} Just as the square root problem used rectangles converging to a square, this cube root problem uses rectangular prisms (with square bases) converging to a cube. The weighted average $\frac{2a_n + b_n}{3}$ represents the arithmetic mean of the three dimensions, which by AM--GM must be at least the cube root of their product.
+    \item Similar techniques can be used to find the cube root of any positive real number $x$: 
+
+    $a_{n+1} = \frac{2a_n + b_n}{3}, \quad b_{n+1} = \frac{x}{a_{n+1}^2}$
+
 \end{enumerate}
 \end{takeaways}
 
