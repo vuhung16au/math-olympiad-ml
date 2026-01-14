@@ -783,6 +783,89 @@ Multiply by $\tfrac{\pi^2}{(2m+1)^2}$ and let $m\to\infty$ to obtain $\sum_{k=1}
 - Basel via squeeze: trigonometric bounds on $\cot$ lead to $\sum 1/k^2=\pi^2/6$.
 \end{takeaways}
 
+% Added: Advanced problem from samples2/03.tex (Mandelbrot escape criterion)
+
+\begin{problem}[Hard — Mandelbrot Escape Criterion]
+\textbf{Topic: Complex Dynamics, Inequalities, Mathematical Induction}
+
+For a given complex constant $c\in\mathbb{C}$, define the Mandelbrot sequence by
+\[
+  z_0=0,\qquad z_{n+1}=z_n^2+c\quad(n\ge 0).
+\]
+The Mandelbrot set $\mathcal{M}$ is the set of all $c\in\mathbb{C}$ for which the sequence of moduli $\bigl(|z_n|\bigr)_{n\ge 0}$ remains bounded.
+
+\begin{enumerate}[label=(\roman*)]
+  \item Suppose $c\in\mathbb{R}$ and $c>\tfrac{1}{4}$. By induction, prove that for all $n\ge 0$, $z_n\in\mathbb{R}$ and
+  \[
+    z_{n+1}-z_n = z_n^2 - z_n + c > 0.
+  \]
+  Hence, deduce that if $c>\tfrac{1}{4}$ then $c\notin\mathcal{M}$.
+
+  \item Recall the reverse triangle inequality $|u-v|\ge\bigl||u|-|v|\bigr|$. Let $z\in\mathbb{C}$ with $|z|\ge 1$. Prove that
+  \[
+    |z^2 - z| \ge |z|\,(|z|-1).
+  \]
+
+  \item Let $c\in\mathbb{C}$ with $|c|>2$, and define $z_0=0$, $z_{n+1}=z_n^2+c$. Note that $|z_1|=|c|>2$. Using the estimate in (ii) as the base idea, prove by induction that for all $n\ge 1$ with $|z_n|\ge 2$ we have
+  \[
+    |z_{n+1}| \ge |z_n|^2 - |c| \ge |z_n|^2 - |z_n| = |z_n|\,(|z_n|-1).
+  \]
+  Hence, conclude that if $|c|>2$, then $c\notin\mathcal{M}$.
+
+  \item Determine, using the results above, whether $c=2+i$ belongs to $\mathcal{M}$. Justify your answer rigorously.
+\end{enumerate}
+
+% Optional quick illustration: escape radius 2 and c=2+i outside
+\begin{center}
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  % Axes
+  \draw[->,thick] (-3,0) -- (3.2,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-2) -- (0,2.2) node[above,font=\small] {Im};
+  % Circle of radius 2
+  \draw[dashed,acu circle] (0,0) circle (2);
+  \node[font=\scriptsize] at (1.35,1.6) {radius $2$};
+  % Point c = 2 + i
+  \coordinate (C) at (2,1);
+  \fill[bookred] (C) circle (1.8pt);
+  \node[above right,font=\small] at (C) {$c=2+i$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}[Part (i)]
+If $c\in\mathbb{R}$, then $z_n\in\mathbb{R}$ for all $n$ by induction. Note $z_{n+1}-z_n = z_n^2 - z_n + c$. The quadratic $q(x)=x^2-x+c$ has discriminant $1-4c<0$ when $c>\tfrac{1}{4}$, so $q(x)>0$ for all real $x$, hence $z_{n+1}>z_n$. Monotone increase with unbounded increments implies divergence, so $c\notin\mathcal{M}$.
+\end{hint}
+
+\begin{hint}[Part (ii)]
+Factor $z^2 - z = z(z-1)$. Then $|z^2 - z| = |z|\,|z-1| \ge |z|\,\bigl||z|-1\bigr| = |z|(|z|-1)$ when $|z|\ge 1$.
+\end{hint}
+
+\begin{hint}[Part (iii)]
+For $|z_n|\ge 2$, the triangle inequality gives $|z_{n+1}|=|z_n^2+c|\ge \bigl||z_n|^2 - |c|\bigr|$. Show inductively that $|z_n|\ge |c|$ for $n\ge 1$, so $|z_{n+1}|\ge |z_n|^2 - |z_n| = |z_n|(|z_n|-1)$, which grows super-geometrically.
+\end{hint}
+
+\begin{hint}[Part (iv)]
+$|2+i|=\sqrt{5}>2$, so by (iii) the orbit escapes; hence $2+i\notin\mathcal{M}$.
+\end{hint}
+
+\begin{solution}[Brief]
+(i) Real $c$ implies all $z_n$ are real. Since $z_{n+1}-z_n=z_n^2-z_n+c$ and $1-4c<0$ for $c>\tfrac{1}{4}$, the quadratic is strictly positive on $\mathbb{R}$; thus $(z_n)$ is strictly increasing and unbounded, so $c\notin\mathcal{M}$.
+
+(ii) $|z^2-z|=|z|\,|z-1|\ge |z|\,\bigl||z|-1\bigr|=|z|(|z|-1)$ for $|z|\ge 1$.
+
+(iii) If $|z_n|\ge 2$, then $|z_{n+1}|=|z_n^2+c|\ge |z_n|^2-|c|$. For $n\ge 1$, $|z_n|\ge |z_1|=|c|$, so $|z_{n+1}|\ge |z_n|^2-|z_n|=|z_n|(|z_n|-1)$. Hence $|z_n|$ increases rapidly and diverges; thus $|c|>2\Rightarrow c\notin\mathcal{M}$.
+
+(iv) $|2+i|=\sqrt{5}>2$, so by (iii) the orbit is unbounded and $2+i\notin\mathcal{M}$.
+\end{solution}
+
+\begin{takeaways}
+- Escape setup: $z_{n+1}=z_n^2+c$, $z_0=0$, and $c\in\mathcal{M}$ iff $(|z_n|)$ is bounded.
+- Real-axis threshold: if $c>\tfrac{1}{4}$ (real), then $z_{n+1}-z_n>0$ always, so the orbit diverges.
+- Key bound: $|z^2-z|\ge |z|(|z|-1)$ via reverse triangle inequality.
+- Escape radius: if $|c|>2$, then the orbit eventually grows at least like $r\mapsto r(r-1)$, hence escapes; $\mathcal{M}\subset\{c:|c|\le 2\}$.
+- Example: $c=2+i$ lies outside $\mathcal{M}$ since $|c|=\sqrt{5}>2$.
+\end{takeaways}
+
 \section{Conclusion}
 Complex numbers are a core component of the HSC Mathematics Extension~2 course. Mastery comes from repeated, reflective practice across all forms---Cartesian, polar, and exponential---and understanding their geometric interpretations. Use these problems to sharpen the ability to convert between forms, apply De Moivre's theorem, interpret loci geometrically, and communicate complete mathematical reasoning. Best of luck with your studies and HSC examinations!
 
