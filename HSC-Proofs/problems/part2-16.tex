@@ -1,0 +1,77 @@
+% Part 2 Problem 16 (Hard): Logistic Map, Trig Form, Product Identity, Periodicity
+% Source: samples/01.tex (adapted)
+% Technique: Induction, Telescoping Product, Trig Identities
+% Topic: Sequences/Trigonometry/Dynamics
+
+\begin{problem}[Hard]
+Consider the sequence defined by $x_0 \in (0,1)$ and the recurrence
+\[
+  x_{n+1} = 4x_n(1-x_n), \quad n \ge 0.
+\]
+
+Known as the logistic map, this deceptively simple rule from dynamical systems models feedback in real contexts (population growth, supply–demand, etc.) and is a classic gateway to chaos. Even tiny changes in $x_0$ can produce dramatically different long-term behavior, making it a fascinating playground for exploration.
+
+\quad
+
+This problem guides you through key properties of this sequence using trigonometric substitutions, product identities, and periodicity analysis.
+
+\quad
+
+(i) Let $x_0 = \sin^2\theta$ for some $\theta \in \bigl(0,\tfrac{\pi}{2}\bigr)$. Prove by induction that for all $n\ge0$,
+\[
+  x_n = \sin^2\bigl(2^n\theta\bigr).
+\]
+
+(ii) Using the result from (i), show that for $n\ge1$,
+\[
+  x_n = 4^n x_0 \prod_{k=0}^{n-1} (1-x_k).
+\]
+
+(iii) Take $x_0 = \sin^2\!\left(\tfrac{\pi}{7}\right)$. Show the sequence is periodic with period $3$. Hence evaluate
+\[
+  P = \cos\!\left(\tfrac{\pi}{7}\right) \cos\!\left(\tfrac{2\pi}{7}\right) \cos\!\left(\tfrac{4\pi}{7}\right).
+\]
+
+(iv) A sequence is periodic if it eventually repeats values. Show that the sequence $x_n$ is periodic (or eventually periodic) if the starting angle $\theta_0$ is a rational multiple of $\pi$. 
+That means, if $x_0 = \sin^2(\theta_0)$, then a sufficient condition is $\theta_0 = \tfrac{p}{q}\pi$ with $p,q\in\mathbb{Z}$ for $x_n$ to be eventually periodic. 
+
+\textit{Note that proving the reverse direction (the "only if" part) is more challenging.}
+
+(v) Discuss the behaviour when 
+
+$x_0 = \tfrac{1}{2}$ or $x_0 = \tfrac{3}{4}$.  
+
+Determine whether the sequence is periodic, eventually periodic, or convergent.
+\end{problem}
+
+\begin{hint}
+For (i), aim to express $x_{k+1}$ in terms of $x_k$ in a squared-trigonometric form and use induction. For (ii), turn the recurrence into a ratio to build a telescoping product. For (iii), use the angle-doubling description in (i) to show $x_3=x_0$ when $\theta_0=\tfrac{\pi}{7}$, and recall the classical identity involving $\cos\tfrac{\pi}{7},\cos\tfrac{2\pi}{7},\cos\tfrac{4\pi}{7}$. For (v), compute a few terms explicitly and look for eventual repetition or a fixed point.
+\end{hint}
+
+\begin{solutionsketch}
+(i) Base: $x_0 = \sin^2\theta$. Inductive step: if $x_k = \sin^2(2^k\theta)$, then
+\[
+  x_{k+1} = 4x_k(1-x_k) = 4\sin^2(2^k\theta)\cos^2(2^k\theta) = \sin^2(2^{k+1}\theta).
+\]
+
+(ii) From $x_{k+1}=4x_k(1-x_k)$, rearrange $(1-x_k) = \dfrac{x_{k+1}}{4x_k}$ and telescope:
+\[
+  \prod_{k=0}^{n-1}(1-x_k) = \frac{1}{4^n}\,\frac{x_n}{x_0} \;\Rightarrow\; x_n = 4^n x_0 \prod_{k=0}^{n-1}(1-x_k).
+\]
+
+(iii) With $\theta_0=\tfrac{\pi}{7}$, we have $x_3=\sin^2\bigl(2^3\tfrac{\pi}{7}\bigr)=\sin^2\bigl(\tfrac{8\pi}{7}\bigr)=\sin^2\bigl(\tfrac{\pi}{7}\bigr)=x_0$, so the period is $3$. The classical identity yields
+\[
+  \cos\!\left(\tfrac{\pi}{7}\right)\cos\!\left(\tfrac{2\pi}{7}\right)\cos\!\left(\tfrac{4\pi}{7}\right) = -\tfrac{1}{8}.
+\]
+
+(iv) If $\theta_0=\tfrac{p}{q}\pi$, the map $\theta\mapsto 2\theta$ cycles modulo $\pi$, so $x_q=x_0$; proving the converse (only-if) direction is subtler.
+
+(v) With $x_0=\tfrac{1}{2}$, $x_1=1$, $x_2=0$, and thereafter $x_n=0$ for $n\ge2$; hence the sequence is eventually periodic (fixed point $0$).
+\end{solutionsketch}
+
+\begin{takeaways}
+- Trig substitution $x_n=\sin^2(2^n\theta)$ linearizes the logistic map.
+- The product identity follows from a telescoping ratio across iterates.
+- Rational multiples of $\pi$ lead to periodic (or eventually periodic) behaviour; proving the converse is harder.
+- Classical identities like $\cos\tfrac{\pi}{7}\cos\tfrac{2\pi}{7}\cos\tfrac{4\pi}{7}=-\tfrac{1}{8}$ connect dynamics with trigonometric products.
+\end{takeaways}
