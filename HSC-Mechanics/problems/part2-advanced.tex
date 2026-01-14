@@ -732,3 +732,93 @@ Correct approach: Multiply by integrating factor or note that $\frac{d}{dx}\left
 \item \textbf{Problem verification:} Always check that proposed solutions are logically consistent and satisfy initial conditions
 \end{takeaways}
 
+% --- New problem: samples/01.tex (The Ghost Artillery) ---
+\begin{problem}[The Ghost Artillery]
+An enemy artillery installation is located at the origin $O$. It fires a shell with initial speed $V$ at an angle of elevation $\theta$ to the horizontal. The shell moves through the air subject to gravity $g$ and a resistive force proportional to its velocity ($R = mkv$).
+
+The equations of motion are given by:
+$$\ddot{x} = -k\dot{x} \quad \text{and} \quad \ddot{y} = -g - k\dot{y}$$
+where $k > 0$ is a constant representing air resistance, and position $(x,y)$ is measured in meters.
+
+A friendly counter-battery radar detects the shell exactly at its \textbf{apex} (the highest point of the trajectory). The radar records the coordinates of this apex as $A(X, Y)$ and the instantaneous horizontal velocity at the apex as $u_{apex}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+  % Axes
+  \draw[->, thick] (-0.5, 0) -- (8, 0) node[right] {$x$ (Distance)};
+  \draw[->, thick] (0, -0.5) -- (0, 5) node[above] {$y$ (Height)};
+  
+  % Origin
+  \node[below left] at (0, 0) {$O$};
+  
+  % Trajectory (Asymmetric for air resistance - steeper on the way down)
+  \draw[very thick, blue] plot [smooth] coordinates {(0,0) (1,2.2) (3, 3.5) (5.5, 2.5) (7, 0)};
+  
+  % Apex lines
+  \draw[dashed] (3, 3.5) -- (3, 0) node[below] {$X$};
+  \draw[dashed] (3, 3.5) -- (0, 3.5) node[left] {$Y$};
+  \filldraw[black] (3, 3.5) circle (2pt) node[above] {$A(X,Y)$};
+  \node[right, font=\footnotesize] at (3, 3.7) {$u_{apex}$};
+  \draw[->, thick] (3, 3.5) -- (4, 3.5);
+
+  % Initial Vector
+  \draw[->, ultra thick, red] (0,0) -- (1.5, 2.5) node[midway, left] {$V$};
+  \draw[thick] (0.7, 0) arc (0:58:0.7);
+  \node at (1.0, 0.4) {$\theta$};
+  
+  % Gravity and Resistive Force Label
+  \node[align=left, font=\footnotesize] at (6, 4) {Air Resistance: \\ $R \propto -k\mathbf{v}$};
+\end{tikzpicture}
+\end{center}
+
+\noindent \textbf{(i)} Show that the horizontal and vertical positions at time $t$ are given by:
+$$x(t) = \frac{V \cos \theta}{k} (1 - e^{-kt}), \quad y(t) = \frac{kV \sin \theta + g}{k^2} (1 - e^{-kt}) - \frac{gt}{k}$$
+
+\noindent \textbf{(ii)} Show that the Cartesian equation of the trajectory (the path of the shell) is:
+$$y = x \tan \theta + \frac{g}{k^2} \ln\left(1 - \frac{kx}{V \cos \theta}\right) + \frac{gx}{kV \cos \theta}$$
+
+\noindent \textbf{(iii)} The counter-battery computer must calculate the enemy's firing angle $\theta$ to return fire. Show that the firing angle satisfies:
+$$\tan \theta = \frac{gX}{u_{apex}(u_{apex} + kX)}$$
+\textit{(Hint: Use the horizontal velocity relation $u_{apex} = V \cos \theta - kX$ derived from the equations of motion).}
+
+\noindent \textbf{(iv)} In the theoretical case where air resistance becomes negligible ($k \to 0$), the shell follows a standard parabolic path.
+
+Use the result from part (iii) and limits to show that as $k \to 0$:
+$$\tan \theta = \frac{2Y}{X}$$
+Discuss the geometric meaning of this result.
+\end{problem}
+
+\begin{hint}
+\textbf{Part (i):} Use separation of variables. Remember the initial conditions at $t=0$: $x=0, y=0, \dot{x} = V\cos\theta, \dot{y} = V\sin\theta$.
+
+\textbf{Part (ii):} Make $t$ the subject of the $x(t)$ equation ($t = -\frac{1}{k}\ln(\dots)$). Substitute this into $y(t)$.
+
+\textbf{Part (iii):} Recall that at the apex, $\frac{dy}{dx} = 0$. Differentiate your result from (ii) with respect to $x$ and set it to 0 at $x=X$. Use the relationship between initial horizontal velocity and apex velocity.
+
+\textbf{Part (iv):} Look for the limit as $k \to 0$. Recall that for a parabola, horizontal velocity is constant, so $u_{apex} \to V \cos \theta$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} From $\ddot{x} = -k\dot{x}$: $\dot{x} = V \cos \theta e^{-kt}$, so $x = \frac{V \cos \theta}{k}(1 - e^{-kt})$.
+
+From $\ddot{y} = -g - k\dot{y}$: $\dot{y} = \frac{g + kV \sin \theta}{k}e^{-kt} - \frac{g}{k}$, so $y = \frac{g + kV \sin \theta}{k^2}(1 - e^{-kt}) - \frac{gt}{k}$.
+
+\textbf{(ii)} From $x(t)$: $1 - e^{-kt} = \frac{kx}{V \cos \theta}$ and $t = -\frac{1}{k}\ln\left(1 - \frac{kx}{V \cos \theta}\right)$. Substituting into $y(t)$:
+$$y = \frac{g + kV \sin \theta}{k^2} \cdot \frac{kx}{V \cos \theta} + \frac{g}{k^2}\ln\left(1 - \frac{kx}{V \cos \theta}\right) = x \tan \theta + \frac{g}{k^2} \ln\left(1 - \frac{kx}{V \cos \theta}\right) + \frac{gx}{kV \cos \theta}$$
+
+\textbf{(iii)} At apex, $\frac{dy}{dx} = 0$ at $x=X$. From the hint, $u_{apex} = V \cos \theta - kX$, so $V \cos \theta = u_{apex} + kX$. Substituting into the differentiated trajectory and simplifying: $\tan \theta = \frac{gX}{u_{apex}(u_{apex} + kX)}$.
+
+\textbf{(iv)} As $k \to 0$, $u_{apex} \to V \cos \theta$, so $\tan \theta \to \frac{gX}{(V \cos \theta)^2}$. For parabolic motion, $Y = \frac{(V \sin \theta)^2}{2g}$ and $X = \frac{V^2 \sin \theta \cos \theta}{g}$, giving $\frac{2Y}{X} = \tan \theta$. Geometrically, this means the firing angle equals the angle from the origin to the point $(X, 2Y)$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Separable differential equations:} For $\ddot{x} = -k\dot{x}$, use $\frac{d\dot{x}}{\dot{x}} = -k \, dt$ to integrate and find velocity, then integrate again for position
+\item \textbf{Exponential decay in horizontal motion:} With linear resistance, horizontal velocity decays as $\dot{x} = V \cos \theta e^{-kt}$, leading to bounded horizontal range $\frac{V \cos \theta}{k}$ as $t \to \infty$
+\item \textbf{Vertical motion with resistance:} The equation $\ddot{y} = -g - k\dot{y}$ combines gravity and resistance, requiring integration of $\frac{d\dot{y}}{g + k\dot{y}} = -dt$
+\item \textbf{Eliminating parameter:} To find Cartesian trajectory, solve $x(t)$ for $t$ and substitute into $y(t)$, often involving logarithmic expressions
+\item \textbf{Apex conditions:} At maximum height, $\frac{dy}{dx} = 0$ and vertical velocity is zero, but horizontal velocity continues to decay
+\item \textbf{Horizontal velocity relation:} From $x = \frac{V \cos \theta}{k}(1 - e^{-kt})$, we get $V \cos \theta e^{-kt} = V \cos \theta - kx$, giving $u_{apex} = V \cos \theta - kX$ at the apex
+\item \textbf{Limiting behavior:} As $k \to 0$, exponential terms approach linear terms, and the trajectory approaches a parabola with standard projectile motion formulas
+\item \textbf{Geometric interpretation:} The limit $\tan \theta = \frac{2Y}{X}$ connects the firing angle to the geometry of the trajectory apex, showing that in the no-resistance case, the angle relates to the triangle formed by origin, ground point, and apex
+\item \textbf{Counter-battery applications:} This problem demonstrates how radar data (apex position and velocity) can determine firing parameters, a practical military application of mechanics
+\end{takeaways}

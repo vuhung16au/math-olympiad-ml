@@ -445,6 +445,8 @@ a_{n+1}=\frac{a_n+b_n}{2},\qquad b_{n+1}=\frac{2}{a_{n+1}}.
     \item Deduce that the rectangles approach a square as $n\to\infty$.
     \item (Optional, no points) Use a calculator to find the first five terms of the sequence $a_n$ and comment on the speed of convergence to the actual value of $\sqrt{2}$.
 \end{enumerate}
+\medskip
+	A sequence $a_n$ \emph{converges} to a number $L$ if, for large $n$, the terms $a_n$ get and stay as close to $L$ as we want; we write $a_n\to L$. (The term \emph{limiting sum} refers to series; here we only need the sequence idea.)
 \end{problem}
 
 \begin{hint}
@@ -477,6 +479,14 @@ Applying the inductive hypothesis gives the claimed bound.
 \]
 Since $a_n b_n=2$ for all $n$, it follows $b_n\to\sqrt2$ as well. Therefore the side lengths both tend to $\sqrt2$ and the rectangles approach a square.
 \end{solution}
+
+\begin{remark}[What we mean by “converge”]
+	\textbf{Sequences:} A sequence $a_n$ \emph{converges} to a number $L$ if, for all large $n$, the terms $a_n$ get and stay as close to $L$ as we want. We write $a_n \to L$.
+
+	\textbf{Series / Limiting Sum:} A series $\sum u_n$ has \emph{limiting sum} $S$ if its partial sums $S_N=\sum_{n=1}^N u_n$ get and stay as close to $S$ as we want when $N$ is large; in this case we say the series \emph{converges} to $S$ and write $\sum u_n=S$.
+
+In this book, phrases like “approaches”, “converges to”, and “has limiting sum” all mean “gets and stays very close eventually”. You don’t need the formal $\varepsilon$-definition here—just read “converges” as “gets and stays very close for large $n$”.
+\end{remark}
 
 
 
@@ -538,15 +548,15 @@ Since $a_n b_n=2$ for all $n$, it follows $b_n\to\sqrt2$ as well. Therefore the 
 
 % Problem 6b: Sequence of Prisms (Cube Root — Newton's Method)
 \begin{problem}[Converging Prisms — Newton's Method for $2^{1/3}$]
-Consider a sequence of rectangular prisms with a square base of side length $a_n$ and height $b_n$. The first prism has $a_1=1$ and $b_1=2$. For integers $n\ge1$ define
+Consider a sequence of rectangular prisms with a square base of side length $a_n$ and height $b_n$. The first prism has $a_1=2$ and $b_1=1$. For integers $n\ge1$ define
 \[
 a_{n+1}=\frac{2a_n+b_n}{3},\qquad b_{n+1}=\frac{2}{a_{n+1}^2}.
 \]
 
 \begin{enumerate}[label=(\roman*)]
-    \item Show that every prism in the sequence has volume $2$.
+    \item Show that for $n\ge2$ every prism in the sequence has volume $2$.
     \item Prove that $a_n\ge\sqrt[3]{2}$ for all $n\ge2$.
-    \item Show by induction that for $n\ge2$,
+    \item Show by induction that for $n\ge1$,
     \[a_n-\sqrt[3]{2}\le\frac{1}{3^{n-2}}\left(a_2-\sqrt[3]{2}\right).
     \]
     \item Deduce that the prisms approach a cube (where $a_n=b_n=\sqrt[3]{2}$) as $n\to\infty$.
@@ -601,11 +611,11 @@ For (i) compute $V_{n+1}=a_{n+1}^2 b_{n+1}$ directly. For (ii) apply AM--GM to t
 	\textbf{(i)} The volume is $V_n=a_n^2 b_n$. Using the recursion,
 \[V_{n+1}=a_{n+1}^2 b_{n+1}=a_{n+1}^2\cdot\frac{2}{a_{n+1}^2}=2,
 \]
-so $V_n\equiv2$ for all $n$.
+so $V_n\equiv2$ for all $n\ge2$.
 
 	\textbf{(ii)} By AM--GM applied to $a_n, a_n, b_n$:
 \[a_{n+1}=\frac{a_n+a_n+b_n}{3}\ge\sqrt[3]{a_n^2 b_n}=\sqrt[3]{2}.\]
-Since $a_1^2 b_1=2$, we have $a_2\ge\sqrt[3]{2}$. By induction, $a_n\ge\sqrt[3]{2}$ for all $n\ge2$.
+Since $a_2^2 b_2=2$, we have $a_2\ge\sqrt[3]{2}$. By induction, $a_n\ge\sqrt[3]{2}$ for all $n\ge2$.
 
 	\textbf{(iii)} From $b_k=2/a_k^2$ we get $a_{k+1}=\frac{2a_k^3+2}{3a_k^2}$. Let $\epsilon_k=a_k-\sqrt[3]{2}$. Then:
 \[a_{k+1}-\sqrt[3]{2}=\frac{2a_k^3+2-3\sqrt[3]{2}a_k^2}{3a_k^2}.
@@ -619,7 +629,7 @@ Using $a_k^3-(\sqrt[3]{2})^3=\epsilon_k(a_k^2+a_k\sqrt[3]{2}+(\sqrt[3]{2})^2)$ a
 Hence $\epsilon_{k+1}=\frac{\epsilon_k^2(2a_k+\sqrt[3]{2})}{3a_k^2}$. For $k\ge2$, we have $\sqrt[3]{2}\le a_k\le a_2=\frac{4}{3}$. Since $\epsilon_k\le\frac{4}{3}-\sqrt[3]{2}<\frac{1}{12}$ and $\frac{2a_k+\sqrt[3]{2}}{3a_k^2}\le\frac{2\cdot\frac{4}{3}+\sqrt[3]{2}}{3(\sqrt[3]{2})^2}<\frac{14}{9}$, we get:
 \[\epsilon_{k+1}\le\frac{14\epsilon_k^2}{9}<\frac{14\epsilon_k}{9}\cdot\frac{1}{12}=\frac{14\epsilon_k}{108}<\frac{\epsilon_k}{3}.
 \]
-By induction, $a_n-\sqrt[3]{2}\le\frac{1}{3^{n-2}}(a_2-\sqrt[3]{2})$ for $n\ge2$.
+By induction, $a_n-\sqrt[3]{2}\le\frac{1}{3^{n-2}}(a_2-\sqrt[3]{2})$ for $n\ge1$.
 
 	\textbf{(iv)} From (ii) and (iii), $0\le a_n-\sqrt[3]{2}\le\frac{1}{3^{n-2}}(a_2-\sqrt[3]{2})\to0$ as $n\to\infty$. Since $a_n^2 b_n=2$, we have $b_n\to\sqrt[3]{2}$ as well. Therefore the prisms approach a cube.
 \end{solution}
