@@ -674,6 +674,9 @@ Part~1 contains three sets of problems---basic, medium, and advanced. Each set p
 \section{Part 2: Problems and Solutions (Concise + Hints)}
 Part~2 revisits three new sets of problems. Solutions are intentionally briefer to encourage student ownership, and every problem includes an upside-down hint.
 
+\paragraph{Difficulty Legend}
+\emph{We tag problems by difficulty to guide practice:} [Easy] routine conversions and identities; [Medium] multi-step with one key idea; [Hard] extended reasoning connecting multiple techniques (e.g., roots of unity, Vieta, asymptotics).
+
 \subsection{Basic Complex Numbers Problems}
 \input{problems/part2-basic}
 
@@ -682,6 +685,103 @@ Part~2 revisits three new sets of problems. Solutions are intentionally briefer 
 
 \subsection{Advanced Complex Numbers Problems}
 \input{problems/part2-advanced}
+
+% Added: Advanced problem from samples2/02.tex with concise solution, hints, and takeaways
+
+\begin{problem}[Hard — Polynomials, Roots of Unity, and Basel Sum]
+\textbf{Topic: Polynomials, Complex Numbers, and The Infinite Sum}
+
+Let $n=2m+1$ be a positive odd integer. Consider the equation in $z$:
+\[
+  (z+i)^n - (z-i)^n = 0.
+\]
+
+\begin{enumerate}[label=(\roman*)]
+  \item Show that the roots are
+  \[
+    z_k = \cot\!\left(\frac{k\pi}{n}\right),\quad k=1,2,\dots,n-1,
+  \]
+  and explain why there are $n-1$ (not $n$) roots.
+
+  \item Expand $(z+i)^n-(z-i)^n$ via the Binomial Theorem and show the roots satisfy
+  \[
+    \binom{n}{1}z^{n-1} - \binom{n}{3}z^{n-3} + \binom{n}{5}z^{n-5} - \cdots + (-1)^m = 0.
+  \]
+
+  \item Using Vieta's formulas, prove that
+  \[
+    \sum_{k=1}^{m} \cot^2\!\left(\frac{k\pi}{2m+1}\right) = \frac{m(2m-1)}{3}.
+  \]
+
+  \item Using $\cot^2\theta < \dfrac{1}{\theta^2} < \cot^2\theta + 1$ for $0<\theta<\tfrac{\pi}{2}$, deduce
+  \[
+    \sum_{k=1}^{\infty} \frac{1}{k^2} = \frac{\pi^2}{6}.
+  \]
+\end{enumerate}
+
+% Small illustrative diagram: mapping to n-th roots of unity
+\begin{center}
+\begin{tikzpicture}[scale=1.4,>=Stealth]
+  % Axes
+  \draw[->,thick] (-1.2,0) -- (1.3,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-1.2) -- (0,1.3) node[above,font=\small] {Im};
+  % Unit circle
+  \draw[acu circle] (0,0) circle (1);
+  % One root of unity at angle 2πk/n
+  \def\n{9}
+  \def\k{2}
+  \def\ang{360*\k/\n}
+  \coordinate (W) at ({cos(\ang)},{sin(\ang)});
+  \draw[->,acu vector] (0,0) -- (W);
+  \fill[acu point] (W) circle (1.2pt);
+  \draw[acu angle,->] (0.35,0) arc (0:\ang:0.35);
+  \node[bookred,font=\scriptsize] at ({0.48*cos(0.5*\ang)},{0.48*sin(0.5*\ang)}) {$\tfrac{2\pi k}{n}$};
+  % Annotation
+  \node[font=\scriptsize,align=center] at (0,-1.45) {$\left(\dfrac{z+i}{z-i}\right)^n=1\;\Rightarrow\;\dfrac{z+i}{z-i}=e^{2\pi i k/n}$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}[Part (i)]
+Set $\dfrac{z+i}{z-i}=\omega$ with $\omega^n=1$. Solve $z+i=\omega(z-i)$ to get
+\(z=-i\dfrac{1+\omega}{1-\omega}=\cot\!\left(\tfrac{\arg\omega}{2}\right)\).
+Note $k=0$ gives no finite $z$ (contradiction $i=-i$), hence $n-1$ roots.
+\end{hint}
+
+\begin{hint}[Part (ii)]
+Expand both binomials. Even-$r$ terms cancel; odd-$r$ terms double. Divide by $2i$ and use $i^{2j+1}=(-1)^j i$ to get the alternating odd-coefficient polynomial.
+\end{hint}
+
+\begin{hint}[Part (iii)]
+Let $x=z^2$. The polynomial in (ii) becomes degree-$m$ in $x$ with roots $\cot^2\!\left(\tfrac{k\pi}{n}\right)$, $k=1,\dots,m$. Apply Vieta: $\sum x_k=\dfrac{\binom{n}{3}}{\binom{n}{1}}$ and substitute $n=2m+1$.
+\end{hint}
+
+\begin{hint}[Part (iv)]
+Take $\theta_k=\tfrac{k\pi}{2m+1}$. Sum the inequality and use (iii) to squeeze $\dfrac{(2m+1)^2}{\pi^2}\sum_{k=1}^m \tfrac{1}{k^2}$ between $\dfrac{m(2m-1)}{3}$ and $\dfrac{m(2m-1)}{3}+m$; then let $m\to\infty$.
+\end{hint}
+
+\begin{solution}[Brief]
+(i) $(z+i)^n=(z-i)^n\Rightarrow\big(\tfrac{z+i}{z-i}\big)^n=1$. With $\omega_k=e^{2\pi i k/n}$, solve
+\(z=-i\dfrac{1+\omega_k}{1-\omega_k}=\cot\!\left(\tfrac{k\pi}{n}\right)\). The case $k=0$ is invalid, so $n-1$ roots.
+
+(ii) Binomial expansion yields cancellation of even powers of $i$ and doubling of odd powers; dividing by $2i$ gives
+\(\binom{n}{1}z^{n-1}-\binom{n}{3}z^{n-3}+\cdots+(-1)^m=0\).
+
+(iii) Put $x=z^2$. Then $A x^m - B x^{m-1}+\cdots=0$ with $A=\binom{n}{1}$, $B=\binom{n}{3}$. Roots are $x_k=\cot^2\!\left(\tfrac{k\pi}{n}\right)$ for $k=1,\dots,m$. By Vieta,
+\(\sum_{k=1}^m x_k = B/A = \dfrac{(n-1)(n-2)}{6}=\dfrac{m(2m-1)}{3}\).
+
+(iv) With $\theta_k=\tfrac{k\pi}{2m+1}$ and $0<\theta_k<\tfrac{\pi}{2}$,
+$\cot^2\theta_k<\tfrac{1}{\theta_k^2}<\cot^2\theta_k+1$. Summing and using (iii) gives
+\[\frac{m(2m-1)}{3}<\frac{(2m+1)^2}{\pi^2}\sum_{k=1}^m\frac{1}{k^2}<\frac{m(2m-1)}{3}+m.\]
+Multiply by $\tfrac{\pi^2}{(2m+1)^2}$ and let $m\to\infty$ to obtain $\sum_{k=1}^{\infty}\tfrac{1}{k^2}=\tfrac{\pi^2}{6}$.
+\end{solution}
+
+\begin{takeaways}
+- Roots via symmetry: $(z+i)/(z-i)$ maps solutions onto $n$-th roots of unity; angles halve to produce $\cot(\cdot)$.
+- Odd-index binomial terms survive: even powers cancel, yielding an alternating polynomial in $z$ with odd exponents.
+- Vieta link: converting to $x=z^2$ makes the sum of $\cot^2$ values a clean rational expression.
+- Basel via squeeze: trigonometric bounds on $\cot$ lead to $\sum 1/k^2=\pi^2/6$.
+\end{takeaways}
 
 \section{Conclusion}
 Complex numbers are a core component of the HSC Mathematics Extension~2 course. Mastery comes from repeated, reflective practice across all forms---Cartesian, polar, and exponential---and understanding their geometric interpretations. Use these problems to sharpen the ability to convert between forms, apply De Moivre's theorem, interpret loci geometrically, and communicate complete mathematical reasoning. Best of luck with your studies and HSC examinations!
