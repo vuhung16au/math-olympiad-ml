@@ -1,0 +1,421 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{url}
+
+% Page geometry settings
+\geometry{a4paper, margin=1.5cm}
+
+% Title formatting
+\title{\textbf{A Proof that Euler Missed...\\Apéry's Proof of the Irrationality of $\zeta(3)$}\\ \large An Informal Report}
+\author{\textbf{Alfred van der Poorten}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% \begin{center}
+%     \textbf{195}
+% \end{center}
+
+\section{Journées Arithmétiques de Marseille-Luminy, June 1978}
+
+The board of programme changes informed us that R. Apéry (Caen) would speak Thursday, 14.00 ``Sur l'irrationnalité de $\zeta(3)$''. Though there had been earlier rumours of his claiming a proof, scepticism was general. The lecture tended to strengthen this view to rank disbelief. Those who listened casually, or who were afflicted with being non-Francophone, appeared to hear only a sequence of unlikely assertions.
+
+\begin{quote}
+\textbf{Exercise}
+
+Prove the following amazing claims:
+
+\begin{enumerate}[label=\textcircled{\scriptsize \arabic*}]
+    \item For all $a_1, a_2, \dots$
+    \[ \sum_{k=1}^{\infty} \frac{a_1 a_2 \dots a_{k-1}}{(x+a_1)\dots(x+a_k)} = \frac{1}{x}. \]
+    \item $\zeta(3) =: \sum_{n=1}^{\infty} \frac{1}{n^3} = \frac{5}{2} \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n^3 \binom{2n}{n}}$.
+    \item Consider the recursion:
+    \begin{equation} \label{eq:recurrence3}
+    n^3 u_n + (n-1)^3 u_{n-2} = (34n^3 - 51n^2 + 27n - 5)u_{n-1}, \quad n \ge 2. 
+    \end{equation}
+    Let $\{b_n\}$ be the sequence defined by $b_0=1, b_1=5$, and $b_n = u_n$ for all $n$; then the $b_n$ all are integers! Let $\{a_n\}$ be the sequence defined by $a_0=0, a_1=6$, and $a_n = u_n$ for all $n$; then the $a_n$ are rational numbers with denominator dividing $2[1, 2, \dots, n]^3$ (here $[1, 2, \dots, n]$ is the lcm (lowest common multiple) of $1, \dots, n$).
+    \item $a_n/b_n \to \zeta(3)$; indeed the convergence is so fast as to prove that $\zeta(3)$ cannot be rational. To be precise, for all integers $p, q$ with $q$ sufficiently large relative to $\epsilon > 0$,
+    \[ \left| \zeta(3) - \frac{p}{q} \right| > \frac{1}{q^{\theta + \epsilon}}, \quad \theta = 13.41782\dots \]
+\end{enumerate}
+\end{quote}
+
+Moreover, analogous claims were made for $\zeta(2)$:
+
+\begin{quote}
+\textbf{Exercise (continued)}
+
+\begin{enumerate}[label=\textcircled{\scriptsize \arabic*}, start=5]
+    \item $\zeta(2) = \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6} = 3 \sum_{n=1}^{\infty} \frac{1}{n^2 \binom{2n}{n}}$.
+    \item Consider the recursion:
+    \begin{equation} \label{eq:recurrence2}
+    n^2 u_n - (n-1)^2 u_{n-2} = (11n^2 - 11n + 3)u_{n-1}, \quad n \ge 2.
+    \end{equation}
+    Let $\{b'_n\}$ be the sequence defined by $b'_0=1, b'_1=3$ and the recursion; then the $b'_n$ all are integers! Let $\{a'_n\}$ be the sequence defined by $a'_0=0, a'_1=5$ and the recursion; then the $a'_n$ are rational numbers with denominator dividing $[1, 2, \dots, n]^2$.
+    \[ a'_n/b'_n \to \zeta(2) = \pi^2/6; \]
+    indeed the convergence is so fast as to imply that for all integers $p, q$ with $q$ sufficiently large relative to $\epsilon > 0$
+    \[ \left| \pi^2 - \frac{p}{q} \right| > \frac{1}{q^{\theta' + \epsilon}}, \quad \theta' = 11.85078\dots \]
+\end{enumerate}
+\end{quote}
+
+I heard with some incredulity that, for one, Henri Cohen (Bordeaux, now Grenoble) believed that these claims might well be valid. Very much intrigued, I joined Hendrik Lenstra (Amsterdam) and Cohen in an evening's discussion in which Cohen explained and demonstrated most of the details of the proof. We came away convinced that Professeur Apéry had indeed found a quite miraculous and magnificent demonstration of the irrationality of $\zeta(3)$. But we remained unable to prove a critical step.
+
+\section{For the Nonexpert Reader}
+
+A number $\beta$ is irrational if it is not of the form $p_0/q_0$, $p_0, q_0$ integers $(\in \mathbb{Z})$. A rational number $b$ is characterised by the property that for $p, q \in \mathbb{Z} (q > 0)$ and $b \ne p/q$ there exists an integer $q_0 (> 0, \text{of course})$ such that $|b - p/q| \ge 1/qq_0$.
+
+On the other hand for irrational $\beta$ there are always infinitely many $p/q$ (for instance, the convergents of the continued fraction expansion of $\beta$) such that $|\beta - p/q| < 1/q^2$.
+
+Plainly this yields a criterion for irrationality. If there is a $\delta > 0$ and a sequence $\{p_n/q_n\}$ of rational numbers such that $p_n/q_n \ne \beta$ and
+\[ \left| \beta - \frac{p_n}{q_n} \right| < \frac{1}{q_n^{1+\delta}} \quad n = 1, 2, \dots \]
+then $\beta$ is irrational. A successful application of the criterion may yield a measure of irrationality: If $|\beta - (p_n/q_n)| < 1/q_n^{1+\delta}$, and the $q_n$ are monotonic increasing with $q_n < q_{n-1}^{1+\kappa}$ (for $n$ sufficiently large relative to $\kappa > 0$), then for all integers $p, q > 0$ sufficiently large relative to $\epsilon > 0$, $|\beta - (p/q)| > (1/q^{(1+\delta)/(\delta-\kappa)+\epsilon})$. For example if the sequence $\{q_n\}$ increases geometrically we may take $\kappa > 0$ arbitrarily small so that $1+(1/\delta)$ becomes an irrationality degree for $\beta$. To see the claim suppose that $|\beta - (p/q)| \le 1/q^\tau$ and select $n$ so that $q_{n-1}^{1+\delta} \le q^\tau < q_n^{1+\delta}$. Then
+\[ \frac{1}{qq_n} \le \left| \frac{p}{q} - \frac{p_n}{q_n} \right| \le \left| \beta - \frac{p_n}{q_n} \right| + \left| \beta - \frac{p}{q} \right| \le \frac{1}{q_n^{1+\delta}} + \frac{1}{q^\tau} < \frac{2}{q^\tau}. \]
+Hence $\frac{1}{2}q^\tau \le qq_n < qq_{n-1}^{1+\kappa} < q^{1+\tau(1+\kappa)/(1+\delta)}$ or $\tau < (1+\delta)/(\delta-\kappa) + \epsilon$ as claimed. This argument is effective (the ``sufficiently large'' requirements can be made explicit).
+
+It is well-known (the theorem of Thue-Siegel-Roth) that for $\beta$ algebraic (a zero of a polynomial $a_0 X^n + \dots + a_n, a_i \in \mathbb{Z}$) always: $|\beta - (p/q)| > 1/q^{2+\epsilon}$, for $q$ sufficiently large relative to $\epsilon > 0$. So if $\beta$ is too well approximable by rationals ($\delta > 1$ above) then $\beta$ is not algebraic, but transcendental. Unfortunately only a set of measure zero of transcendental numbers can be detected in this way, whilst, since the set of algebraic numbers is countable, almost all numbers are transcendental.
+
+It is notoriously difficult to prove that any given naturally occurring number is irrational, let alone transcendental. One may be fortunate: for example the usual series for $e$ implies immediately (easy exercise) that $e$ is irrational. In the case of the (Riemann) $\zeta$-function: $\zeta(s) =: \sum_1^\infty n^{-s} (\text{Re } s > 1)$ there is the quite well-known fact that
+\begin{equation} \label{eq:zeta2k}
+\zeta(2k) =: \sum_{1}^{\infty} n^{-2k} = (-1)^{k-1} \frac{(2\pi)^{2k}}{2 \cdot (2k)!} B_{2k}, \quad k=1,2,\dots
+\end{equation}
+where the Bernoulli numbers, $B_m$, are rational ($\zeta(2) = \pi^2/6, \zeta(4) = \pi^4/90, \zeta(6) = \pi^6/945, \dots$). There are some classical techniques\footnote{See for example I. Niven: \textit{Irrational Numbers} (Carus Monographs \#11, MAA-Wiley, 1967).} for detecting the irrationality of powers of $\pi$, but it is most useful to appeal to the theorem of Hermite-Lindemann (whereby $e^\alpha$ is transcendental for algebraic $\alpha \ne 0$) whence $\pi$ is transcendental (because $e^{\pi i} = -1$) and so a fortiori its powers are irrational. So it has long been known that $\zeta(2k)$ is irrational, $k=1, 2, \dots$. On the other hand there are no useful analogous closed evaluations of $\zeta$ at odd arguments.\footnote{There is however a famous formula of Ramanujan: let $\alpha$ and $\beta$ be positive numbers such that $\alpha\beta = \pi^2$. Then if $n$ is any positive integer
+\[ \alpha^{-n} \left\{ \frac{1}{2}\zeta(2n+1) + \sum_{k=1}^{\infty} \frac{k^{-2n-1}}{e^{2\alpha k}-1} \right\} = (-\beta)^{-n} \left\{ \frac{1}{2}\zeta(2n+1) + \sum_{k=1}^{\infty} \frac{k^{-2n-1}}{e^{2\beta k}-1} \right\} - 2^{2n} \sum_{k=0}^{n-1} (-1)^k \frac{B_{2k}}{(2k)!} \frac{B_{2n+2-2k}}{(2n+2-2k)!} \alpha^{n+1-k} \beta^k. \]
+Taking $\alpha$ a rational multiple of $\pi$ one sees that $\zeta(2n+1)$ is given as a rational multiple of $\pi^{2n+1}$ plus two very rapidly convergent series. See for example: Bruce C. Berndt: Modular transformations and generalizations of several formulae of Ramanujan: \textit{Rocky Mountain J. of Maths.} 7 (1977) 147--189. Indeed the above formula is the natural analogue of Euler's formula (\ref{eq:zeta2k}). The cited paper gives many other formulas and detailed references.} Incidentally, (\ref{eq:zeta2k}) is demonstrated quite easily. The Bernoulli numbers are defined by the generating function (a nontrivial example of an even function!)
+\[ \frac{z}{e^z - 1} + \frac{1}{2}z = \sum_{m=0}^{\infty} \frac{B_{2m}}{(2m)!} z^{2m}; \]
+hence by the recursion
+\[ \binom{n+1}{0}B_0 + \binom{n+1}{1}B_1 + \dots + \binom{n+1}{n}B_n = 0, \]
+$n=2, 3, \dots, B_0=1, B_1 = -1/2$. On the other hand it is well-known that
+\[ \sin \pi z = \pi z \prod_{n=1}^{\infty} \left(1 - \frac{z^2}{n^2}\right) \]
+so
+\[ \frac{\pi \cos \pi z}{\sin \pi z} = \pi \cot \pi z = \frac{1}{z} - \sum_{n=1}^{\infty} \left( \frac{2z}{n^2 - z^2} \right). \]
+But
+\begin{align*}
+\pi z \cot \pi z &= \pi iz \frac{e^{\pi iz} + e^{-\pi iz}}{e^{\pi iz} - e^{-\pi iz}} = \frac{2\pi iz}{e^{2\pi iz} - 1} + \pi iz \\
+&= \sum_{m=0}^{\infty} (-1)^m \frac{(2\pi)^{2m}}{(2m)!} B_{2m} z^{2m},
+\end{align*}
+and on the other hand
+\[ \pi z \cot \pi z = 1 - 2 \sum_{m=1}^{\infty} \left( \sum_{n=1}^{\infty} \frac{1}{n^{2m}} \right) z^{2m}. \]
+Comparing coefficients one has (\ref{eq:zeta2k}). With a little ingenuity one can avoid a direct appeal to the infinite product for $\sin \pi z$ or to the expansion for $\pi \cot \pi z$.\footnote{For a detailed set of references, and some new proofs, see Bruce C. Berndt: Elementary evaluation of $\zeta(2n)$. \textit{Maths Mag.} 48 (1975), 148--153.}
+
+Indeed, proving the irrationality of $\zeta(2n+1)$ $n=1, 2, \dots$ constitutes one of the outstanding problems of the theory (ranking with the arithmetic nature of $\gamma =: \lim_{n\to\infty} (1 + \dots + (1/n) - \log n)$, and of $e + \pi, e\pi \dots$ which are yet undetermined). It is some measure of Apéry's achievement that these questions have been considered by mathematicians of the top rank over the past few centuries without much success being achieved.
+
+\section{Some Irrelevant Explanations}
+
+For much of the following details I am indebted to Henri Cohen. All this due to Apéry, of course.
+
+The identity
+\[ \sum_{k=1}^{K} \frac{a_1 a_2 \dots a_{k-1}}{(x+a_1)\dots(x+a_k)} = \frac{1}{x} - \frac{a_1 a_2 \dots a_K}{x(x+a_1)\dots(x+a_K)} \]
+follows easily on writing the right-hand side as $A_0 - A_K$ and noting that each term on the left is $A_{k-1} - A_k$. This explains \textcircled{\scriptsize 1}. Now put $x=n^2, a_k = -k^2$, and take $k \le K \le n-1$, to obtain
+\begin{align*}
+& \sum_{k=1}^{n-1} \frac{(-1)^{k-1} (k-1)!^2}{(n^2 - 1^2)\dots(n^2 - k^2)} \\
+&= \frac{1}{n^2} - \frac{(-1)^{n-1}(n-1)!^2}{n^2(n^2-1^2)\dots(n^2-(n-1)^2)} \\
+&= \frac{1}{n^2} - \frac{2(-1)^{n-1}}{n^2 \binom{2n}{n}}.
+\end{align*}
+Writing
+\[ \epsilon_{n,k} = \frac{1}{2} \frac{k!^2 (n-k)!}{k^3 (n+k)!} \]
+because
+\[ (-1)^k n (\epsilon_{n,k} - \epsilon_{n-1,k}) = \frac{(-1)^{k-1}(k-1)!^2}{(n^2-1^2)\dots(n^2-k^2)}, \]
+we have
+\begin{align*}
+\sum_{n=1}^{N} \sum_{k=1}^{n-1} (-1)^k (\epsilon_{n,k} - \epsilon_{n-1,k}) &= \sum_{n=1}^{N} \frac{1}{n^3} - 2\sum_{n=1}^{N} \frac{(-1)^{n-1}}{n^3 \binom{2n}{n}} \\
+&= \sum_{k=1}^{N} (-1)^k (\epsilon_{N,k} - \epsilon_{k,k}) \\
+&= \sum_{k=1}^{N} \frac{(-1)^k}{2k^3 \binom{N+k}{k} \binom{N}{k}} + \frac{1}{2} \sum_{k=1}^{N} \frac{(-1)^{k-1}}{k^3 \binom{2k}{k}}
+\end{align*}
+and on noting that as $N \to \infty$ the first term on the right vanishes, we have \textcircled{\scriptsize 2}.\footnote{Actually the formula \textcircled{\scriptsize 2} is quite well known: it was observed some years ago by Raymond Ayoub (Penn State) and it in fact appears in print: Margrethe Munthe Hjortnaes: Overføring av rekken $\sum_{k=1}^{\infty} (1/k^3)$ til et bestemt integral \textit{Proc. 12th Cong. Scand. Maths}, Lund 10--15 Aug. 1953 (Lund 1954); independently again it was noticed by R. William Gosper, Jr. (Palo Alto), see Gosper's paper: A calculus of series rearrangements \textit{Algorithms and Complexity, New Directions and Recent Results}, ed. J. Traub (Academic Press, 1976) 121--151, for relevant techniques. Henri Cohen remarked that the formula is:
+\[ \zeta(3) = \frac{5}{4} Li_3 \omega^{-2} + \frac{2\pi^2}{15} \log \omega - \frac{2}{3} \log^3 \omega \]
+(with $\omega = \frac{1}{2}(1+\sqrt{5})$ and $Li_3(x) = \sum x^3/n^3$, the trilogarithm). Hjortnaes and Ayoub, and respectively Gosper note the integral representations (easily shown equivalent)
+\[ \zeta(3) = 10 \int_{0}^{\log \omega} t^2 \coth t \, dt, \quad \zeta(3) = 10 \int_{0}^{1/2} \frac{(\text{arcsinh } t)^2}{t} \, dt. \]
+In the case $\zeta(2)$ the formula \textcircled{\scriptsize 5} is even better known. It is, for example, referred to by Z. R. Melzak: \textit{Introduction to Concrete Mathematics} (Wiley, 1973), p. 85 (but the suggested proof is not quite appropriate). \textcircled{\scriptsize 5} may be proved by slightly varying the argument in Section 3: multiply by $(-1)^{n-1}$ instead of dividing by $n$. Many formulas similar to \textcircled{\scriptsize 2} and \textcircled{\scriptsize 5} appear in the literature and the folklore.}
+
+\section{Some Nearly Relevant Explanations}
+
+All this is quite irrelevant to the proof. It would suffice to introduce the quantities $(k \le n)$
+\begin{equation} \label{eq:cnk}
+c_{n,k} = \sum_{m=1}^{n} \frac{1}{m^3} + \sum_{m=1}^{k} \frac{(-1)^{m-1}}{2m^3 \binom{n}{m} \binom{n+m}{m}},
+\end{equation}
+and to remark that plainly $c_{n,k} \to \zeta(3)$ as $n \to \infty$, uniformly in $k$. One might hope that a sequence $c_{n,k}$ already implies the irrationality of $\zeta(3)$ (say, the diagonal, with $k=n$) but this is not quite so. To see this, it is useful to prove a lemma:
+
+\textbf{Lemma.}
+\[ 2 c_{n,k} \binom{n+k}{k} \in \mathbb{Z} + \frac{\mathbb{Z}}{2^3} + \dots + \frac{\mathbb{Z}}{n^3} = \frac{\mathbb{Z}}{[1, 2, \dots, n]^3} \]
+(equivalently: $2[1, 2, \dots, n]^3 c_{n,k} \binom{n+k}{k}$ is an integer).
+
+\textit{Proof.} We check the number of times that any given prime $p$ divides the denominator. But
+\[ \binom{n+k}{k} \Bigg/ \binom{n+m}{m} = \binom{n+k}{k-m} \Bigg/ \binom{k}{m} \]
+so, because
+\[ \text{ord}_p \left( \binom{n}{m} \right) \le \left[ \frac{\log n}{\log p} \right] - \text{ord}_p m = \text{ord}_p [1, \dots, n] - \text{ord}_p m, \]
+we have
+\begin{align*}
+\text{ord}_p &\left( m^3 \binom{n}{m} \binom{n+m}{m} \Bigg/ \binom{n+k}{k} \right) = \text{ord}_p \left( m^3 \binom{n}{m} \binom{k}{m} \Bigg/ \binom{n+k}{k-m} \right) \\
+&\le 3(\text{ord}_p m) + \left[ \frac{\log n}{\log p} \right] + \left[ \frac{\log k}{\log p} \right] - 2(\text{ord}_p m),
+\end{align*}
+which yields the assertion, because $m \le k \le n$. $\hfill \square$
+
+We remark that those who know it well know that for $n$ sufficiently large relative to $\epsilon > 0$,
+\[ [1, 2, \dots, n] \le e^{n(1+\epsilon)} \]
+(roughly: $[1, 2, \dots, n] = \prod_{p<n} p^{[\log n / \log p]} \le \prod_{p<n} n \simeq n^{n/\log n} = e^n$). It will turn out that the $c_{n,k}$ have too large a denominator relative to their closeness to $\zeta(3)$.\footnote{Those who know it really well write $\log [1, \dots, n] = \sum_{m=1}^{\infty} \theta(n^{1/m}) = \Psi(n)$ where $\theta(n) = \sum_{p<n} \log p$. Then it is known that $\psi(n)/n < 1.03883\dots$ (with maximum at $n=113$) and indeed $\psi(n) - n < (0.0242334\dots)n/\log n$ for $n > 525 752$; See J. Barkley Rosser and Lowell Schoenfeld: \textit{Math. Comp.} 29 (1975), 243--269.} Hence to apply the irrationality criterion we must somehow accelerate the convergence. Apéry described this process as follows:
+
+Consider two triangular arrays (defined for $k \le n$) with entries $d_{n,k}^{(0)} = c_{n,k} \binom{n+k}{k}$ and $\binom{n+k}{k}$ respectively. We recall that the arrays have the property that their ``quotient'' converges to $\zeta(3)$ in the sense that given any ``diagonal'' $\{n, k(n)\}$, the quotient of the corresponding elements of the two arrays converges to $\zeta(3)$. Now apply the following transformations to each array:
+\begin{align*}
+d_{n,k}^{(0)} &\to d_{n, n-k}^{(0)} = d_{n,k}^{(1)} \\
+d_{n,k}^{(1)} &\to \binom{n}{k} d_{n,k}^{(1)} = d_{n,k}^{(2)} \\
+d_{n,k}^{(2)} &\to \sum_{k'=0}^{k} \binom{k}{k'} d_{n, k'}^{(2)} = d_{n,k}^{(3)} \\
+d_{n,k}^{(3)} &\to \binom{n}{k} d_{n,k}^{(3)} = d_{n,k}^{(4)} \\
+d_{n,k}^{(4)} &\to \sum_{k'=0}^{k} \binom{k}{k'} d_{n, k'}^{(4)} = d_{n,k}^{(5)}
+\end{align*}
+\begin{align*}
+\binom{n+k}{k} &\to \binom{2n-k}{n} \\
+&\to \binom{n}{k} \binom{2n-k}{n} \\
+&\to \sum_{k_1=0}^{k} \binom{k}{k_1} \binom{n}{k_1} \binom{2n-k_1}{n} \\
+&\to \sum_{k_1=0}^{k} \binom{k}{k_1} \binom{n}{k_1} \binom{n}{k} \binom{2n-k_1}{n} \\
+&\to \sum_{k_2=0}^{k} \sum_{k_1=0}^{k_2} \binom{k}{k_2} \binom{k_2}{k_1} \binom{n}{k_1} \binom{n}{k_2} \binom{2n-k_1}{n}.
+\end{align*}
+Of course the arrays have retained the property that their ``quotient'' converges to $\zeta(3)$, and we still have $2[1, 2, \dots, n]^3 d_{n,k} \in \mathbb{Z}$. We now take the main diagonals $(k=n)$ of the arrays, calling them respectively $\{a_n\}$ and $\{b_n\}$ and make the fantastic assertions embodied in \textcircled{\scriptsize 3}! That is, each sequence satisfies the recurrence (\ref{eq:recurrence3})! This is plainly absurd since surely \textit{inter alia} a solution $\{u_n\}$ of (\ref{eq:recurrence3}) (with integral initial values $u_0, u_1$) will have $u_n$ with denominator more like $n!^3$ than like 1 (or even $2[1, 2, \dots, n]^3$). In Marseille, our amazement was total when our HP-67s, calculating $\{b_n\}$ on the one hand from the definition above, and on the other hand by the recurrence (\ref{eq:recurrence3}), kept on producing the same values!
+
+\section{It Seems that Apéry Has Shown that $\zeta(3)$ Is Irrational}
+
+We were quite unable to prove that the sequences $\{a_n\}$ defined above did satisfy the recurrence (\ref{eq:recurrence3}) (Apéry rather tartly pointed out to me in Helsinki that he regarded this more a compliment than a criticism of his method). But empirically (numerically) the evidence in favour was utterly compelling. It seemed indeed that $\zeta(3)$ had been proved irrational, because the rest, thus \textcircled{\scriptsize 4} follows quite easily:
+
+Given (with $P(n-1) = 34n^3 - 51n^2 + 27n - 5$),
+\begin{align*}
+n^3 a_n - P(n-1)a_{n-1} + (n-1)^3 a_{n-2} &= 0, \\
+n^3 b_n - P(n-1)b_{n-1} + (n-1)^3 b_{n-2} &= 0,
+\end{align*}
+one multiplies the first equation by $b_{n-1}$, the second by $a_{n-1}$, to obtain
+\[ n^3 (a_n b_{n-1} - a_{n-1} b_n) = (n-1)^3 (a_{n-1} b_{n-2} - a_{n-2} b_{n-1}). \]
+Recalling $a_1 b_0 - a_0 b_1 = 6 \times 1 - 0 \times 5 = 6$, this cleverly yields
+\[ a_n b_{n-1} - a_{n-1} b_n = \frac{6}{n^3}. \]
+Seeing that $\zeta(3) - a_0/b_0 = \zeta(3)$, it is easily induced that
+\[ \zeta(3) - \frac{a_n}{b_n} = \sum_{k=n+1}^{\infty} \frac{6}{k^3 b_k b_{k-1}} \]
+so
+\begin{equation} \label{eq:asymp_diff}
+\zeta(3) - \frac{a_n}{b_n} = O(b_n^{-2}).
+\end{equation}\footnote{Write $\zeta(3) - a_n/b_n = x_n$ and note that we have $x_n - x_{n-1} = 6/n^3 b_n b_{n-1}$ and $x_{\infty} = 0$.}
+On the other hand the recurrence relation makes it easy to estimate $b_n$ at any rate asymptotically. We have
+\[ b_n - (34 - 51n^{-1} + 27n^{-2} - 5n^{-3})b_{n-1} + (1 - 3n^{-1} + 3n^{-2} - n^{-3})b_{n-2} = 0, \]
+and since the polynomial $x^2 - 34x + 1$ has zeros $17 \pm 12\sqrt{2} = (1 \pm \sqrt{2})^4$ we readily conclude that $b_n = O(\alpha^n)$ $\alpha = (1 + \sqrt{2})^4$. In fact Cohen has, more precisely, calculated that
+\begin{equation} \label{eq:Cohen_approx}
+b_n = \frac{(1+\sqrt{2})^2}{(2\pi\sqrt{2})^{3/2}} \frac{(1+\sqrt{2})^{4n}}{n^{3/2}} \left( 1 - \frac{48 - 15\sqrt{2}}{64n} + O(n^{-2}) \right).
+\end{equation}
+We have to recall that the $a_n$ are not integers. But writing
+\[ p_n = 2[1, 2, \dots, n]^3 a_n, \quad q_n = 2[1, 2, \dots, n]^3 b_n \]
+we have $p_n, q_n \in \mathbb{Z}$ and
+\[ q_n = O(\alpha^n e^{3n}), \]
+\[ \zeta(3) - \frac{p_n}{q_n} = O(\alpha^{-2n}) = O(q_n^{-(1+\delta)}), \]
+with
+\[ \delta = \frac{\log \alpha - 3}{\log \alpha + 3} = 0.080529\dots > 0. \]
+Hence, by the irrationality criterion, $\zeta(3)$ is indeed irrational, and moreover, because $\delta^{-1} = 12.417820\dots$ we have: For all integers $p, q > 0$ sufficiently large relative to $\epsilon > 0$
+\[ \left| \zeta(3) - \frac{p}{q} \right| > \frac{1}{q^{\theta + \epsilon}}, \quad \theta = 13.417820\dots \]
+
+\section{Some Trivial Verifications}
+
+To convince ourselves of the validity of Apéry's proof we need only complete the following exercise.
+
+\begin{quote}
+\textbf{Exercise}
+
+Prove the following identities:
+
+\begin{enumerate}[label=\textcircled{\scriptsize \arabic*}, start=5]
+\item Let
+\begin{align*}
+b_n &= \sum_{k=0}^{n} \binom{n}{k}^2 \binom{n+k}{k}^2, \\
+a_n &= \sum_{k=0}^{n} \binom{n}{k}^2 \binom{n+k}{k}^2 c_{n,k},
+\end{align*}
+\[ c_{n,k} = \sum_{m=1}^{n} \frac{1}{m^3} + \sum_{m=1}^{k} \frac{(-1)^{m-1}}{2m^3 \binom{n}{m} \binom{n+m}{m}}. \]
+Then $a_0 = 0, a_1 = 6, b_0 = 1, b_1 = 5$ and each sequence $\{a_n\}$ and $\{b_n\}$ satisfies the recurrence (\ref{eq:recurrence3}).
+
+In the same spirit, the case of $\zeta(2)$ requires:
+\item Let
+\begin{align*}
+b'_n &= \sum_{k=0}^{n} \binom{n}{k}^2 \binom{n+k}{k}, \\
+a'_n &= \sum_{k=0}^{n} \binom{n}{k}^2 \binom{n+k}{k} c'_{n,k},
+\end{align*}
+\[ c'_{n,k} = 2\sum_{m=1}^{n} \frac{(-1)^{m-1}}{m^2} + \sum_{m=1}^{k} \frac{(-1)^{n+m-1}}{m^2 \binom{n}{m} \binom{n+m}{m}}. \]
+Then $a'_0 = 0, a'_1 = 5, b'_0 = 1, b'_1 = 3$ and each sequence $\{a'_n\}$ and $\{b'_n\}$ satisfies the recurrence (\ref{eq:recurrence2}).
+\end{enumerate}
+\end{quote}
+
+It is useful to notice that very little more than just proving these claims is required for Apéry's proof. After all, it is quite plain that $a_n/b_n \to \zeta(3)$; the $b_n$ are integers, and the lemma of Section 4 shows that the $a_n$ are ``near-integers.'' In Section 5 we showed that given that the sequences satisfy the recursion (\ref{eq:recurrence3}) the irrationality of $\zeta(3)$ follows because from $\log \alpha > 3 (\alpha = (1+\sqrt{2})^4)$ we obtain $\delta > 0$. Thus, as implied in various asides, most of the earlier argument is quite irrelevant. Indeed I am indebted to John Conway for the remark that even \textcircled{\scriptsize 4} is irrelevant.
+
+\begin{quote}
+\textbf{Exercise}
+
+Be the first in your block to prove by a 2-line argument that \textcircled{\scriptsize 5} (3) is irrational.
+
+\begin{enumerate}[label=\textcircled{\scriptsize \arabic*}, start=6]
+    \item Given the definitions of \textcircled{\scriptsize 5} show that $a_n b_{n-1} - a_{n-1} b_n = 6 b_n^{-3}$ and $b_n = O(\alpha^n)$ with $\alpha = (1+\sqrt{2})^4$. Conclude that $\zeta(3)$ is irrational because $\log \alpha > 3$.\footnote{The author does not pretend to be able to do this. Notice that in fact even less is needed: it is sufficient to show $a_n b_{n-1} - a_{n-1} b_n = O(\gamma^n)$ and $b_n = O(\beta^n)$, with $\log \beta - \log \gamma > 3$.}
+\end{enumerate}
+\end{quote}
+
+Apéry then made some remarks on the status of the French language, and alluded to the underlying motivation (as mentioned in Section 3) for his astonishing proof.
+
+\begin{quote}
+\textbf{Exercise}
+
+Astound your friends with an excellent irrationality measure for $\pi^2$.
+
+\begin{enumerate}[label=\textcircled{\scriptsize \arabic*}, start=6]
+    \item Given the definitions of \textcircled{\scriptsize 5} show that $a'_n b'_{n-1} - a'_{n-1} b'_n = 5(-1)^{n-1}n^{-2}$ and $b'_n = O(\alpha^n)$ with $\alpha = (\frac{1}{2}(1+\sqrt{5}))^5$. Conclude that $|\pi^2 - (p/q)| > q^{-(\theta + \epsilon)}$ with $\theta = 11.850782\dots$ for all integers $p, q > Q(\epsilon)$.\footnote{Though we have long known that $\zeta(2)$ is irrational, Apéry's result in this case is significant. The irrationality degree for $\pi^2$ is the best known; the irrationality degree implied for $\pi$ is $23.701564\dots$. These results compare very favourably with those of Mahler: $|\pi - (p/q)| > q^{-42}$: On the approximation of $\pi$, \textit{Proc. K. Ned. Akad. Wet. Amsterdam A}, 56 (= Indag. Math. 15) (1953) 29--42, and an indication that $|\pi - (p/q)| > q^{-30}$; see also K. Mahler: Applications of some formulae by Hermite to the approximation of exponentials and logarithms. \textit{Math. Annalen} 168 (1967) 200--227. Wirsing announced $|\pi - (p/q)| > q^{-21}$ and Mignotte proved that (for $q$ sufficiently large) $|\pi - (p/q)| > q^{-20}$; this is the best known result. It should be noted that the cited results depend on deep techniques and complicated estimations in transcendence theory as contrasted with the essentially elementary methods in Apéry's proof. Mignotte (op. cit.) also shows that $|\pi^2 - (p/q)| > q^{-18}$, which is weaker than Apéry's result.}
+\end{enumerate}
+\end{quote}
+
+\section{ICM '78, Helsinki, August 1978}
+
+Neither Cohen nor I had been able to prove \textcircled{\scriptsize 5} or \textcircled{\scriptsize 5} in the intervening 2 months. After a few days of fruitless effort the specific problem was mentioned to Don Zagier (Bonn), and with irritating speed he showed that indeed the sequence $\{b'_n\}$ satisfies the recurrence (\ref{eq:recurrence2}). This more or less broke the dam and \textcircled{\scriptsize 5} and \textcircled{\scriptsize 5} were quickly conquered. Henri Cohen addressed a very well-attended meeting at 17.00 on Friday, August 18 in the language of the majority, proving \textcircled{\scriptsize 5} and explaining how this implied the irrationality of $\zeta(3)$.
+
+\begin{quote}
+\textbf{Exercise}
+
+A red herring?
+
+\begin{enumerate}[label=\textcircled{\scriptsize \arabic*}, start=7]
+    \item Show that
+    \[ 6 \zeta(3) = \frac{1}{1} \dots \frac{1}{117} - \frac{64}{535} - \frac{729}{1436} - \frac{4096}{3105} - \dots - \frac{n^6}{34n^3 + 51n^2 + 27n + 5} \dots \]
+    and deduce that $\zeta(3) = 1.202 056 903\dots$ is irrational.
+    
+    Show that
+    \[ 5 \zeta(2) = \frac{1}{1} \dots \frac{1}{25} + \frac{16}{69} + \frac{81}{135} + \frac{256}{223} + \dots + \frac{n^4}{11n^2 + 11n + 3} + \dots \]
+    and deduce that $\pi^2$ has irrationality degree at most $11.850 782\dots$.
+\end{enumerate}
+\end{quote}
+
+\section{Some Rather Complicated but Ingenious Explanations}
+
+According to a dictum of Littlewood any identity, once verified, is trivial. Surely \textcircled{\scriptsize 5} is very nearly a counterexample. The following is principally due to Zagier and Cohen. Incidentally, we first considered \textcircled{\scriptsize 5} which appeared simpler, but this was because we had failed to notice that
+\[ \sum_{k=0}^{n} \sum_{l=0}^{k} \binom{n}{k}^2 \binom{n}{l} \binom{k}{l} \binom{2n-l}{n} = \sum_{k=0}^{n} \binom{n}{k}^2 \binom{2n-k}{n}^2. \]
+Now writing $n-k$ for $k$ links the arrays of Section 4 to \textcircled{\scriptsize 5}. It is quite convenient to write:
+\[ b_{nk} = \binom{n}{k}^2 \binom{n+k}{k}^2, \quad a_{nk} = b_{nk} c_{nk}, \]
+\[ (b_n = \sum_{k=0}^{n} b_{nk}, \quad a_n = \sum_{k=0}^{n} b_{nk} c_{nk}). \]
+Then we wish to show that
+\[ \sum_{k} \{(n+1)^3 b_{n+1,k} - (34n^3 + 51n^2 + 27n + 5)b_{n,k} + n^3 b_{n-1,k}\} = 0. \]
+We cleverly construct
+\[ B_{n,k} = 4(2n+1)(k(2k+1) - (2n+1)^2) \binom{n}{k}^2 \binom{n+k}{k}^2 \]
+with the motive that
+\begin{align*}
+B_{n,k} - B_{n,k-1} &= (n+1)^3 \binom{n+1}{k}^2 \binom{n+1+k}{k}^2 \\
+&- (34n^3 + 51n^2 + 27n + 5) \binom{n}{k}^2 \binom{n+k}{k}^2 \\
+&+ n^3 \binom{n-1}{k}^2 \binom{n-1+k}{k}^2,
+\end{align*}
+and, O \textit{mirabile dictu}, the sequence $\{b_n\}$ does indeed satisfy the recurrence (\ref{eq:recurrence3}) by virtue of the method of creative telescoping (by the usual conventions: $B_{nk} = 0$ for $k < 0$ or $k > n$; note also that $P(n) = 34n^3 + 51n^2 + 27n + 5$ implies $P(n-1) = -P(-n)$).
+
+The rest is plain sailing (or is it plane sailing?). We notice that
+\begin{align*}
+(n+1)^3 & b_{n+1,k} c_{n+1,k} - P(n) b_{n,k} c_{n,k} + n^3 b_{n-1,k} c_{n-1,k} \\
+&= (B_{n,k} - B_{n,k-1}) c_{n,k} + (n+1)^3 b_{n+1,k} (c_{n+1,k} - c_{n,k}) \\
+&- n^3 b_{n-1,k} (c_{n,k} - c_{n-1,k}).
+\end{align*}
+Clearly
+\begin{align*} \label{eq:diff_c}
+c_{n,k} - c_{n-1,k} &= \frac{1}{n^3} + \sum_{m=1}^{k} \frac{(-1)^m (m-1)!^2 (n-m-1)!}{(n+m)!} \\
+&= \frac{1}{n^3} + \sum_{m=1}^{k} \left( \frac{(-1)^m m!^2 (n-m-k)!}{n^2 (n+m)!} - \frac{(-1)^{m-1} (m-1)!}{n^2 (n+m+1)!} \right) \\
+&= \frac{(-1)^k k!^2 (n-k-1)!}{n^2 (n+k)!}
+\end{align*}
+whilst not even a minor miracle is required to write down $c_{n,k} - c_{n,k-1}$. After some massive reorganisation the expression becomes $A_{n,k} - A_{n,k-1}$ with
+\[ A_{n,k} = B_{n,k} c_{n,k} + \frac{5(2n+1)(-1)^{k-1}k}{n(n+1)} \binom{n}{k} \binom{n+k}{k} \]
+and we have completed \textcircled{\scriptsize 5}, and, in passing, proved \textcircled{\scriptsize 3}. This of course verifies Apéry's claim to have proved $\zeta(3)$ irrational.
+
+\section{The Case of $\zeta(2)$}
+
+The arguments required to deal with the exercises \textcircled{\scriptsize 5} are quite similar to those already described. It may however be a kindness to the reader to reveal that it would be wise to take
+\[ B_{n,k} = (k^2 + 3(2n+1)k - 11n^2 - 9n - 2) \binom{n}{k}^2 \binom{n+k}{k}, \]
+\[ A_{n,k} = B_{n,k} c_{n,k} + 3(-1)^{n+k-1} \frac{(n-1)!}{(k-1)!} \]
+Moreover
+\[ c_{n,k} - c_{n-1,k} = 2(-1)^{n+k-1} \frac{k!^2 (n-k-1)!}{n(n+k)!} \]
+and
+\begin{equation} \label{eq:b_n_zeta2}
+b_n = \frac{(\frac{1}{2}(1+\sqrt{5}))^4}{2\pi\sqrt{5+2\sqrt{5}}} \frac{(\frac{1}{2}(1+\sqrt{5}))^{5n}}{n} (1+O(n^{-1}));
+\end{equation}
+(also note that if $Q(n) = 11n^2 + 11n + 3$ then $Q(n-1) = -Q(-n)$).
+
+\section{What on Earth is Going on Here?}
+
+Apéry's incredible proof appears to be a mixture of miracles and mysteries. The dominating question is how to generalise all this, down to the Euler constant $\gamma$ and up to the general $\zeta(t)$? Here we have, apparently, the tip of an iceberg which relates $(1+\sqrt{2})^4$ to $\zeta(3)$ and $(\frac{1}{2}(1+\sqrt{5}))^5$ to $\zeta(2)$; we have surprising identities \textcircled{\scriptsize 2} and \textcircled{\scriptsize 5}, and startling continued fractions (produced by Cohen for his Helsinki talk), and \textcircled{\scriptsize 7}. Does the complete berg look like this?
+
+For my part I incline to the view that much of what has been presented constitutes a mystification rather than an explanation. For example Richard Askey (Madison, Wisconsin) has pointed out to me that the sequences $\{b_n\}$ and $\{b'_n\}$ may be recognized as special values of certain hypergeometric polynomials; immediately the recurrences (\ref{eq:recurrence3}) and (\ref{eq:recurrence2}) become identities relating hypergeometric functions and much of the magic fades away. Unfortunately the difficulties remain, because not all that much is known about the higher generalisations of the classical hypergeometric functions. For this, and other reasons, it is however likely that one should think about recurrences of order greater than 2. This, incidentally, means that the continued fractions constitute a red herring. In any event \textcircled{\scriptsize 7} obscures a fundamental miracle. Its convergents $P_n/Q_n$ are of course such that the sequences $\{P_n\}$ and $\{Q_n\}$ both satisfy
+\[ U_{n+1} = (34n^3 + 51n^2 + 27n + 5)U_n - n^6 U_{n-1}. \]
+The proof works (not because the continued fraction does not terminate; that only works for regular continued fractions, but) because if $U_0=1, U_1=5$ then it happens that $(n!)^3$ divides the integers $U_n$; more honestly: it is already enough (and is necessary) that for any initial integer values $U_0, U_1$, $(n!)^3$ always divides $2[1, \dots, n]^3 U_n$. An analogous miracle makes the recurrence
+\[ U_{n+1} = (11n^2 + 11n + 3)U_n + n^4 U_{n-1} \]
+useful in proving the irrationality of $\zeta(2)$. These surprises generalise the following quite well known fact (to which I was alerted by Frits Beukers (Leiden)): the recurrence
+\[ U_{n+1} = (6n+3)U_n - n^2 U_{n-1} \]
+is such that $n!$ divides $U_n$ if $U_0=1, U_1=3$; and $n!$ divides $[1, \dots, n]U_n$ for all integer initial values $U_0, U_1$.
+
+\begin{quote}
+\textbf{Exercise}
+
+What are the higher analogues?
+
+\begin{enumerate}[label=\textcircled{\scriptsize \arabic*}, start=8]
+    \item Show that if
+    \[ B(z) = (1-6z+z^2)^{-1/2} = \sum_{n=0}^{\infty} b_n z^n, \]
+    then the $b_n = \sum_{k=0}^{n} \binom{n}{k} \binom{n+k}{k}$, and all are integers. Find an expression for the $a_n$ in
+    \[ A(z) = (1-6z+z^2)^{-1/2} \int_{0}^{z} (1-6t+t^2)^{-1/2} \, dt = \sum_{n=0}^{\infty} a_n z^n \]
+    and notice that the $[1, \dots, n]a_n$ all are integers. Show that sequences $\{a_n\} (a_0=0, a_1=1)$ and $\{b_n\} (b_0=1, b_1=3)$ both satisfy
+    \[ nu_n + (n-1)u_{n-2} = (6n-3)u_{n-1}. \]
+    Now prove that there is a constant $\lambda$ such that $A(z) - \lambda B(z) = \sum_{n=0}^{\infty} c_n z^n$ has no singularity at $3-2\sqrt{2}$. Deduce that then $c_n = O(\alpha^{-n})$ with $\alpha = (1+\sqrt{2})^2$ and conclude that it follows that $\log 2$ has irrationality degree at most $4.622 100 83\dots$
+\end{enumerate}
+\end{quote}
+
+Of course Exercise \textcircled{\scriptsize 6} should remind us that recurrences may be quite irrelevant to the proof. The vital thing then is suitable definition of the $c_{n,k}$, so one is brought back to looking for generalisations of \textcircled{\scriptsize 2}. But, for the present, generalisation of Apéry's work remains, as they say, a mystery wrapped in an enigma.\footnote{Tom Cusick (Buffalo) has noticed that the following recurrences also yield continued fractions converging to $\pi^2/6$:
+\[ n^2 u_n = (7n^2 - 7n + 2)u_{n-1} + 8(n-1)^2 u_{n-2} \]
+(one solution of which is $\sum \binom{n}{k}^3$), and
+\[ n^3 u_n = 2(2n-1)(3n^2 - 3n + 1)u_{n-1} + (4n-3)(4n-4)(4n-5)u_{n-2} \]
+(A solution is $\sum \binom{n}{k}^4$). On first impression the first yields a worse irrationality degree for $\pi^2$ than that obtained by Apéry, and the second does not yield irrationality at all. Apéry's results are indeed remarkable.}\footnote{Well, not really. It is just that it is not at all clear where to go. A numerical test (suggested by Cohen) implies that $\zeta(4) = \pi^4/90 = (36/17) \sum_{n=1}^{\infty} (1/n^4 \binom{2n}{n})$ (so this is true for all practical purposes) and it has been shown by Gosper that
+\[ \zeta(5) = \frac{5}{2} \sum_{n=1}^{\infty} \left( \frac{1}{1^2} + \frac{1}{2^2} + \dots + \frac{1}{(n-1)^2} - \frac{4}{5n^2} \right) \frac{(-1)^n}{n^3 \binom{2n}{n}}. \]
+David Hawkins (Boulder) suggests similar formulas. Apparently such expressions can be generated virtually at will on using appropriate series accelerator identities.
+\[ \sum_{n=1}^{\infty} \frac{1}{n^2 \binom{2n}{n}} = \frac{\pi^2}{18}; \quad \sum_{n=1}^{\infty} \frac{1}{n^4 \binom{2n}{n}} = \frac{17\pi^4}{3,240} \]
+Seeing that
+\[ \sum_{n=1}^{\infty} \frac{x^{2n}}{n^2 \binom{2n}{n}} = 2(\sin^{-1} \frac{x}{2})^2 \]
+(see for example Melzak op cit p. 108) the first three formulae (and the one with the trilogarithm) become quite accessible to proof, but I had not detected anyone able to prove the expression for $\zeta(4)$, until I proved it in March 1979 after noticing a remark of Lewin that also
+\[ 2 \int_{0}^{\pi/3} x(\log(2\sin \frac{x}{2}))^2 \, dx = \frac{17\pi^4}{3,240}. \]
+Sam Wagstaff (Illinois) and Andrew Odlyzko (Bell Labs) have mentioned to me that numerical evidence suggests that there are formulae of the shape \textcircled{\scriptsize 2} or \textcircled{\scriptsize 5} only for $t=2, 3, 4$ and this is verified by my studies in a current manuscript \textit{Some wonderful formulae...} The recurrences are long known, see Comtet op cit p. 90. One can recognise the $b_n$ as $b_n = {}_4F_3(n+1, -n, n+1, -n; 1, 1, 1; 1)$ and determine the recurrence \textcircled{\scriptsize 3} by way of three term relations with contiguous balanced series; see J. A. Wilson \textit{Hypergeometric series, recurrence relations and some new orthogonal functions} (Ph. D. thesis; U. Wisconsin-Madison, 1978).}
+
+Most startling of all though should be the fact that Apéry's proof has no aspect that would not have been accessible to a mathematician of 200 years ago. The proof we have seen is one that many mathematicians could have found, but missed.
+
+\vspace{0.5cm}
+\noindent \small{This note was written at Queen's University, Kingston, Ontario whilst the author was on study leave from the University of New South Wales, Sydney, Australia.}
+
+\vspace{0.2cm}
+\noindent \small{October, 1978}
+
+\section*{Postscripts}
+See L. Lewin \textit{Dilogarithms and associated functions} (Macdonald, London, 1958) for many delightful facts, including the trilogarithm formula of \textcircled{\scriptsize 2} which is given at p. 139. At p. 89 of Louis Comtet \textit{Advanced Combinatorics} (D. Reidel, Dordrecht, 1974) one is astonished to be asked to prove as an exercise that
+\[ \sum_{n=1}^{\infty} \frac{1}{\binom{2n}{n}} = \frac{1}{3} + \frac{2\pi\sqrt{3}}{27}; \quad \sum_{n=1}^{\infty} \frac{1}{n\binom{2n}{n}} = \frac{\pi\sqrt{3}}{9}; \]
+Frits Beukers (Leiden) \textit{A note on the irrationality of $\zeta(2)$ and $\zeta(3)$} (J. Lond. Math. Soc. to appear) has found an elegant approach to Apéry's proofs which entirely avoids explicit identities, recurrences and other magic. Instead just consider
+\[ I = -1/2 \int_{0}^{1} \int_{0}^{1} \frac{P_n(x)P_n(y)\log xy}{1-xy} \, dxdy = b_n \zeta(3) - a_n \]
+noticing that the $b_n$ are integers and the $a_n$ are rationals with the $2[1, \dots, n]^3 a_n$ integral, whilst
+\[ |I| \le \zeta(3)(1-\sqrt{2})^{4n} \]
+here $P_n(z) = \frac{1}{n!} \frac{d^n}{dz^n}(z^n(1-z)^n)$ is the Legendre polynomial. Again, there is no obvious way to generalise the proof.
+
+In retrospect it seems clear that exercise \textcircled{\scriptsize 8} really is useful; implications are being considered by Bombieri et al (at Princeton). For example, one's intuition is just wrong in feeling incredulity at the facts of \textcircled{\scriptsize 3}. All that these report is that the differential equation
+\begin{align*}
+\frac{d}{dX} & \left\{ (X^4 - 34X^3 + X^2) \frac{d^3y}{dX^3} \right. \\
+&+ (6X^3 - 103X^2 + 3X) \frac{d^2y}{dX^2} \\
+&+ (7X^2 - 112X + 1) \frac{dy}{dX} \\
+&+ \left. (X-5)y - (u_1 - 5u_0) \right\} = 0
+\end{align*}
+has two G-function solutions, namely $a(X) = 6X + a_2 X^2 + \dots$; $b(X) = 1 + b_1 X + b_2 X^2 + \dots$ and $a(X) - \zeta(3)b(X)$ is regular (in fact vanishes) at $\alpha' = (1-\sqrt{2})^4$. This is interesting, but no longer incredible; and it is readily generalisable... All this too is an idea of Beukers.
+
+In keeping with the bizarre nature of the events reported here \textit{La Recherche} No. 97 (France's \textit{Scientific American}) contained a report \textit{Roger Apéry et l'irrationnel} by Michel Mendès-France; the report includes a lively description of the lecture at Marseille (politely suppressed here) although Mendès-France was in the U.S.A. at the time.
+
+Some officious readers have been critical of my casual use of the O-symbol; the fault is mine, not Apéry's. No harm is done. Similarly it has been claimed that Apéry's proof was not missed by Euler -- `Euler did not know the prime number theorem'; to me it seems hypercritical to suggest that $[1, \dots, n] = O((1+\sqrt{2})^{4n/3})$ could not have been noticed at the time, had it been needed. Anyhow, I considered it a racy title. It arose after Cohen's report at Helsinki, with someone sourly commenting `A victory for the French peasant...'; to this Nick Katz retorted: `No...! No! This is marvellous! It is something Euler could have done...'
+
+\vspace{0.5cm}
+\noindent \textbf{School of Mathematics and Physics}\\
+\textbf{Macquarie University}\\
+\textbf{North Ryde, New South Wales}\\
+\textbf{Australia 2113}
+
+This document was converted from the original printed version that can be found at 
+\url{https://mwolf.pracownicy.uksw.edu.pl/Poorten_MI_195_0.pdf}
+
+\vspace{0.2cm}
+\noindent \small{March 1979}
+
+\end{document}
