@@ -9,6 +9,7 @@
 # *.pdf
 __pycache__/
 
+Prompts.md
 
 samples/
 samples2/

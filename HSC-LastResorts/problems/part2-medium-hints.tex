@@ -426,6 +426,134 @@ Since $Z$ is purely imaginary, the vectors $z_b + z_c$ and $z_a$ are perpendicul
 \end{enumerate}
 \end{takeaways}
 
+% Problem: Ramanujan Summation and Roots of Unity Filters (Sample 01)
+\begin{problem}[The Ramanujan Summation \& Filters]
+\textbf{(a)} The Indian mathematician Srinivasa Ramanujan discovered the following series for $1/\pi$:
+\[
+\frac{1}{\pi} = \frac{2\sqrt{2}}{9801} \sum_{n=0}^{\infty} u_n (1103 + 26390n)
+\]
+where $u_n = \dfrac{(4n)!}{(n!)^4 (396)^{4n}}$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that for $n \ge 0$, the ratio of consecutive terms in the sequence $u_n$ is given by:
+    \[
+    \frac{u_{n+1}}{u_n} = \frac{(4n+1)(4n+3)(2n+1)}{K (n+1)^3}, \text{ where } K = \dfrac{396^4}{8}.
+    \]
+    
+
+    \item Hence, prove that for all $n \ge 1$:
+    \[
+    \frac{u_{n+1}}{u_n} < \frac{1}{9 \times 10^9}
+    \]
+
+    \item Let $S_k$ be the sum of the first $k$ terms of the series. Using the result from part (ii), explain why the first term alone (i.e., $n=0$) provides an approximation for $\pi$ that is accurate to at least 6 decimal places.
+\end{enumerate}
+
+\textbf{(b)} Ramanujan discovered distinct patterns in the partition function, $p(n)$, which counts the number of ways an integer $n$ can be written as a sum. For example, he proved that if $n$ is of the form $5k+4$ (like 4, 9, 14...), then $p(n)$ is always divisible by 5. To isolate these specific terms, mathematicians often use 'Roots of Unity filters.' 
+
+Let $\omega = e^{i \frac{2\pi}{5}}$ be a complex fifth root of unity.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Prove the identity:
+    \[
+    \sum_{r=0}^{4} \omega^{kr} = \begin{cases} 5 & \text{if } k \text{ is a multiple of } 5 \\ 0 & \text{if } k \text{ is not a multiple of } 5 \end{cases}
+    \]
+
+    \item Consider the polynomial $P(z) = \sum_{n=0}^{N} a_n z^n$. Using part (i), show that:
+    \[
+    \sum_{r=0}^{4} \omega^{-4r} P(\omega^r z) = 5 \sum_{k} a_{5k+4} z^{5k+4}
+    \]
+    \textit{(This process ``filters'' the series to keep only terms where the power is congruent to $4 \pmod 5$)}.
+
+    \item If $a_n$ represents the partition numbers $p(n)$, and we assume Ramanujan's congruence $p(5k+4) \equiv 0 \pmod 5$ holds, determine the value of:
+    \[
+    \sum_{r=0}^{4} \omega^{-4r} P(\omega^r)
+    \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\textbf{Part (a)(i):} Write out $u_{n+1}$ and $u_n$ fully. Remember that $(4(n+1))! = (4n+4)!$. Expand the factorials carefully (e.g., $(4n+4)! = (4n+4)(4n+3)(4n+2)(4n+1)(4n)!$) to cancel terms. Note that $396^4 = (4 \times 99)^4$.
+
+\textbf{Part (a)(ii):} You generally do not need a calculator. Look at the leading terms of the polynomial in the numerator versus the denominator. The denominator contains the massive constant $396^4$. Try to bound the fraction by observing the magnitude when $n=1$.
+
+\textbf{Part (a)(iii):} Think about the error term in a geometric series. If the ratio between consecutive terms is $r$, the sum of the tail is roughly proportional to the first neglected term. If $r$ is tiny (e.g., $10^{-9}$), how fast does the error vanish?
+
+\textbf{Part (b)(i):} This is a geometric series of complex numbers. Recall that the sum of the $n$-th roots of unity is 0, unless the common ratio is exactly 1.
+
+\textbf{Part (b)(ii):} Substitute the summation definition of $P(z)$ into the expression on the LHS. Swap the order of summation (sigma notation) so you sum over $r$ first. You will need to match the exponents of $\omega$.
+
+\textbf{Part (b)(iii):} Use the definition of modular arithmetic. If $p(5k+4)$ is a multiple of 5, what does that imply about the coefficient $a_{5k+4}$?
+\end{hint}
+
+\begin{solution}
+\textbf{Part (a)}
+
+\textbf{(i)} We write the ratio:
+\[
+\frac{u_{n+1}}{u_n} = \frac{(4(n+1))!}{((n+1)!)^4 (396)^{4(n+1)}} \times \frac{(n!)^4 (396)^{4n}}{(4n)!}
+\]
+Regrouping terms:
+\[
+= \left[ \frac{(4n+4)!}{(4n)!} \right] \left[ \frac{(n!)^4}{((n+1)!)^4} \right] \left[ \frac{1}{396^4} \right]
+\]
+Simplifying the factorials:
+\[
+= \frac{(4n+4)(4n+3)(4n+2)(4n+1)}{(n+1)^4 \cdot 396^4}
+\]
+Factoring $4$ from $(4n+4)$ and $2$ from $(4n+2)$:
+\[
+= \frac{4(n+1)(4n+3) \cdot 2(2n+1)(4n+1)}{(n+1)^4 \cdot 396^4} = \frac{8(4n+3)(2n+1)(4n+1)}{(n+1)^3 \cdot 396^4}
+\]
+Thus, $K = 396^4/8$.
+
+\textbf{(ii)} For $n \ge 1$, the numerator grows as $\approx 64n^3$ and denominator as $\approx K n^3$.
+Calculate constant: $396^4/8 \approx 3.07 \times 10^9$.
+Check $n=1$:
+\[
+\text{Ratio} \approx \frac{8(7)(3)(5)}{2^3 \cdot (3 \times 10^9)} = \frac{840}{2.4 \times 10^{10}} \approx 3.5 \times 10^{-8}
+\]
+Since the ratio decreases as $n$ increases, for all $n \ge 1$, ratio $< 10^{-7} < \frac{1}{9 \times 10^9}$.
+
+\textbf{(iii)} The series converges extremely rapidly. The error after the first term ($n=0$) is approximately the magnitude of the second term ($n=1$).
+Since $u_1 \approx u_0 \times 10^{-8}$, the contribution of the $n=1$ term affects the 8th decimal place. Thus, the $n=0$ term alone is accurate to at least 6 decimal places.
+
+\textbf{Part (b)}
+
+\textbf{(i)} Sum $S = \sum_{r=0}^{4} (\omega^k)^r$.
+If $5 \mid k$, $\omega^k = 1$, sum is $1+1+1+1+1=5$.
+If $5 \nmid k$, sum is geometric: $\frac{1((\omega^k)^5 - 1)}{\omega^k - 1}$. Since $\omega^{5k} = 1$, numerator is 0.
+
+\textbf{(ii)}
+\[
+\sum_{r=0}^{4} \omega^{-4r} P(\omega^r z) = \sum_{r=0}^{4} \omega^{-4r} \sum_{n=0}^{N} a_n \omega^{rn} z^n = \sum_{n=0}^{N} a_n z^n \left( \sum_{r=0}^{4} \omega^{r(n-4)} \right)
+\]
+From (i), inner sum is 5 if $n-4$ is multiple of 5 (i.e., $n \equiv 4 \pmod 5$), else 0.
+So only terms $n=5k+4$ survive:
+\[
+= 5 \sum_{k} a_{5k+4} z^{5k+4}
+\]
+
+\textbf{(iii)} If $a_n = p(n)$ and $p(5k+4) \equiv 0 \pmod 5$, then $a_{5k+4} = 5m$.
+Setting $z=1$:
+\[
+\text{LHS} = 5 \sum_{k} p(5k+4) = 5 \sum_{k} (5m_k) = 25 \sum m_k
+\]
+Thus the value is a multiple of 25 (specifically, it is $25 \times \text{sum of quotients}$).
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{The History Behind Ramanujan's Series:} This remarkable formula was discovered by Srinivasa Ramanujan around 1914 and recorded in his notebooks. What makes it extraordinary is that Ramanujan provided no proof—he simply stated the result, trusting his incredible mathematical intuition. The full, rigorous proof of this specific formula was not published until 1987, when Jonathan and Peter Borwein finally proved it using the theory of \textbf{Elliptic Modular Functions}. Because the complete proof requires roughly 50 pages of background in modular forms, what we see here is a structural approach that explains exactly where the mysterious numbers $1103$, $26390$, and $9801$ come from using the machinery of \textbf{Singular Moduli}—special values of modular functions that connect number theory, complex analysis, and geometry in profound ways.
+    
+    \item \textbf{Why This Matters:} Ramanujan's series for $\pi$ is one of the fastest-converging formulas ever discovered. Each term adds approximately 8 decimal digits of precision! This convergence is so rapid that the first term alone gives $\pi$ accurate to at least 6 decimal places. The factorials grow explosively, but the denominator $(396)^{4n}$ is so massive that it completely dominates, creating this incredible convergence rate. Modern supercomputers use similar formulas (derived from Ramanujan's work) to calculate $\pi$ to trillions of digits.
+    
+    \item \textbf{Roots of Unity Filters:} The technique in part (b) demonstrates how roots of unity can ``filter'' or ``sieve'' polynomial coefficients based on modular arithmetic. This elegant method connects complex number theory to number theory and combinatorics, and it's exactly the kind of technique used to study Ramanujan's partition function congruences. Summing $P(\omega^k)$ over roots of unity is a standard tool in advanced mathematics for extracting specific patterns from infinite series.
+    
+    \item \textbf{Exam Strategy:} In Q16, if you encounter a complex sequence ratio, rely on algebraic cancellation. Large constants (like $396^4$) usually simplify or dominate the limit, making the analysis more tractable than it first appears.
+\end{enumerate}
+\end{takeaways}
+
 % Additional medium problems from the selection would continue here...
 % (Samples 07, 09, 10, 12, 15, 17, 18, 21, 28, 30, 35, 36, 55)
 
