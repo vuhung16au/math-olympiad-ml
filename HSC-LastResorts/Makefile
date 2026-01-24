@@ -1,6 +1,6 @@
 # Makefile for HSC-LastResorts
 
-LATEX=pdflatex
+LATEX=lualatex
 TEX=HSC-LastResorts.tex
 
 all:

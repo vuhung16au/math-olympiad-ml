@@ -5,7 +5,9 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{geometry}
-\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Linux Libertine O}
 
 % Define theorem environments via DL101 theorem boxes (ensure chapter counter exists first)
 \newcounter{chapter} % required because dl101-theorems numbers by chapter
@@ -24,6 +26,9 @@
 % Custom styles shared with HSC projects
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
+
+% Define Samarkan font for special text
+\newfontfamily\samanfont{Samarkan}
 
 % TikZ libraries for diagrams
 \usetikzlibrary{arrows.meta, calc, patterns, decorations.pathreplacing}
