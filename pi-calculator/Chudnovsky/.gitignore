@@ -1,0 +1,80 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories
+vendor/
+
+# Go workspace file
+go.work
+
+# Compiled binaries (project-specific)
+Chudnovsky
+compare_pi
+*.bin
+
+# Build artifacts
+/dist/
+/build/
+
+# Results and output files
+results/
+*.txt
+!correct-pi/**/*.txt
+!*.md
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+/tmp/
+*.tmp
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Test coverage
+coverage.txt
+coverage.html
+*.coverprofile
+
+# Air (live reload tool)
+tmp/
+
+# Debug files
+debug
+*.debug
+
+# Profiling data
+*.prof
+cpu.prof
+mem.prof
