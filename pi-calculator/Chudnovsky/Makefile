@@ -1,4 +1,4 @@
-.PHONY: clean clean-result help build build-tools test1k test10k test100k test1m test10m
+.PHONY: clean clean-result help build build-tools test1k test10k test100k test1m test10m unitest
 
 # Binary names
 BINARY_NAME := Chudnovsky
@@ -44,6 +44,7 @@ help:
 	@echo "  make test100k  - Calculate pi to 100,000 digits"
 	@echo "  make test1m    - Calculate pi to 1,000,000 digits"
 	@echo "  make test10m   - Calculate pi to 10,000,000 digits"
+	@echo "  make unitest   - Run unit tests with coverage (min 60%)"
 	@echo "  make help      - Show this help message"
 	@echo ""
 
@@ -86,3 +87,27 @@ test10m: build-tools
 	@echo ""
 	@echo "Note: Comparing with first 1,250,000 digits from Pi125MDP.txt (file contains 1.25M digits)"
 	@./$(COMPARE_TOOL) results/pi-10m.txt correct-pi/Pi/Pi125MDP.txt 1250000
+
+# Run unit tests with coverage (only main.go, excluding compare_pi.go)
+unitest:
+	@echo "Running unit tests with coverage..."
+	@go test -tags=test -v -coverprofile=coverage.out -covermode=atomic .
+	@echo ""
+	@echo "Coverage report:"
+	@go tool cover -func=coverage.out | tail -1
+	@echo ""
+	@coverage=$$(go tool cover -func=coverage.out | tail -1 | awk '{print $$3}' | sed 's/%//'); \
+	if [ -z "$$coverage" ]; then \
+		echo "Error: Could not determine coverage"; \
+		exit 1; \
+	fi; \
+	coverage_int=$$(echo "$$coverage" | cut -d. -f1); \
+	if [ "$$coverage_int" -lt 60 ]; then \
+		echo "Error: Coverage is $$coverage% which is below the required 60%"; \
+		exit 1; \
+	else \
+		echo "✓ Coverage is $$coverage% (meets minimum requirement of 60%)"; \
+	fi
+	@echo ""
+	@echo "Detailed coverage report saved to coverage.out"
+	@echo "View with: go tool cover -html=coverage.out"

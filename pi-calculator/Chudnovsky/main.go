@@ -49,6 +49,8 @@ type WorkerPool struct {
 	wg         sync.WaitGroup
 	ctx        context.Context
 	cancel     context.CancelFunc
+	closed     bool
+	closeMutex sync.Mutex
 }
 
 // NewWorkerPool creates a new worker pool
@@ -93,6 +95,17 @@ func (wp *WorkerPool) worker(id int) {
 // Submit submits work to the pool
 func (wp *WorkerPool) Submit(start, end int64) <-chan Result {
 	resultChan := make(chan Result, 1)
+	
+	// Check if pool is closed
+	wp.closeMutex.Lock()
+	closed := wp.closed
+	wp.closeMutex.Unlock()
+	
+	if closed {
+		close(resultChan)
+		return resultChan
+	}
+	
 	select {
 	case wp.workChan <- WorkItem{Start: start, End: end, Result: resultChan}:
 	case <-wp.ctx.Done():
@@ -101,10 +114,21 @@ func (wp *WorkerPool) Submit(start, end int64) <-chan Result {
 	return resultChan
 }
 
-// Close shuts down the worker pool
+// Close shuts down the worker pool (idempotent)
 func (wp *WorkerPool) Close() {
+	if wp == nil {
+		return
+	}
+	wp.closeMutex.Lock()
+	defer wp.closeMutex.Unlock()
+	
+	if wp.closed {
+		return // Already closed
+	}
+	wp.closed = true
+	
 	wp.cancel()  // Signal workers to stop first
-	close(wp.workChan)  // Then close the channel
+	close(wp.workChan)  // Close the channel
 	wp.wg.Wait()  // Wait for all workers to finish
 }
 
