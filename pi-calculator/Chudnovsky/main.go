@@ -299,7 +299,7 @@ func formatPiOutput(digits int, piStr string) string {
 	// Write header
 	result.WriteString(digitLabel + "\n")
 	result.WriteString("collected by Vu Hung\n")
-	result.WriteString("https://github.com/vuhung16au\n")
+	result.WriteString("https://github.com/vuhung16au/math-olympiad-ml/tree/main/pi-calculator/Chudnovsky\n")
 	result.WriteString("\n")
 	
 	// Extract digits after decimal point

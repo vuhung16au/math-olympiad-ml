@@ -1,6 +1,6 @@
 100 Thousand Digits of Pi
 collected by Vu Hung
-https://github.com/vuhung16au
+https://github.com/vuhung16au/math-olympiad-ml/tree/main/pi-calculator/Chudnovsky
 
 3.
 14159265358979323846264338327950288419716939937510
