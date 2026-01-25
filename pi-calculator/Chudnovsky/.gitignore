@@ -29,7 +29,7 @@ compare_pi
 # Results and output files
 # results/
 # *.txt
-!correct-pi/**/*.txt
+# !correct-pi/**/*.txt
 !*.md
 
 # IDE and editor files
