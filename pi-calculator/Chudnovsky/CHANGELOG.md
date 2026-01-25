@@ -7,30 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-01-25
+
 ### Added
-- Modular architecture with internal packages (calculator, workerpool, formatter, security)
-- Structured logging using log/slog
-- Configuration struct for centralized settings
-- Interfaces for better testability
-- Benchmark tests with execution time reporting
-- CPU and memory profiling support
-- CI/CD pipeline with GitHub Actions
-- Code linter configuration (golangci-lint)
-- Comprehensive GoDoc documentation
-- Error wrapping with fmt.Errorf %w
-- Context support for cancellation
-- Security scanning tools (gosec, govulncheck)
+- CI test script (`scripts/test-ci.sh`) for local CI workflow testing
+- `make test-ci` target to run all CI checks locally
+- Enhanced `.gitignore` with coverage files, benchmark outputs, and project binaries
+- Updated `AGENTS.md` with current codebase structure and implementation examples
 
 ### Changed
-- Refactored code into modular packages following Go best practices
-- Replaced fmt.Printf with structured logging
-- Improved error handling with proper error wrapping
-- Updated module name to use proper Go module path
+- Moved `test-ci.sh` to `scripts/` directory for better organization
+- Updated Makefile to reference `scripts/test-ci.sh`
+- Enhanced `.golangci.yml` with exclusion rules for Go 1.24 compatibility
+- Updated `AGENTS.md` to reflect actual package structure (calculator, workerpool, config, formatter, security)
 
 ### Fixed
-- Worker pool cleanup to prevent hangs
-- Path sanitization security improvements
-- Test coverage improvements
+- Linter configuration to handle Go 1.24+ typecheck compatibility issues
+- `.gitignore` patterns to properly exclude all build artifacts and test outputs
 
 ## [1.0.0] - 2026-01-25
 
