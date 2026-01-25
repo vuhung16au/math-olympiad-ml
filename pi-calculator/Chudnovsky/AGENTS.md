@@ -89,57 +89,69 @@ This file is maintained for backward compatibility. For detailed guidelines, ple
 
 ### Multi-Threading Example
 ```go
-// Use worker pools for parallel processing
-type WorkerPool struct {
-    workers  int
-    workChan chan WorkItem
-    wg       sync.WaitGroup
+// Use worker pools for parallel processing (from internal/workerpool/pool.go)
+type Pool struct {
+    workers    int
+    wg         sync.WaitGroup
+    ctx        context.Context
+    cancel     context.CancelFunc
+    closed     bool
+    closeMutex sync.Mutex
 }
 
-func (wp *WorkerPool) worker() {
-    defer wp.wg.Done()
-    for work := range wp.workChan {
-        processWork(work)
-        runtime.Gosched() // Yield to scheduler
-    }
+func (p *Pool) Submit(ctx context.Context, work func() (interface{}, error)) <-chan Result {
+    // Submit work to pool for parallel execution
+    // Uses channels for safe communication between goroutines
 }
 ```
 
 ### Multi-Core Example
 ```go
-// Detect and utilize all CPU cores
+// Detect and utilize all CPU cores (from cmd/chudnovsky/main.go)
 func init() {
-    numCPU := runtime.NumCPU()
+    numCPU := calculator.GetNumCPU()
     runtime.GOMAXPROCS(numCPU)
-    // Create worker pool with one worker per core
-    workerPool = NewWorkerPool(numCPU)
+    logger.Info("Initialized", "cpu_cores", numCPU)
+}
+
+// Auto-detect workers from CPU count (from internal/workerpool/pool.go)
+func New(workers int) *Pool {
+    if workers <= 0 {
+        workers = runtime.NumCPU()
+        if workers < 1 {
+            workers = 1
+        }
+    }
+    // ... create pool with workers
 }
 ```
 
 ### Modular Architecture Example
 ```go
 // Separate concerns into different packages
-package calculator
-package workerpool
-package progress
-package fileio
+package calculator    // Chudnovsky algorithm implementation
+package workerpool    // Parallel computation worker pool
+package config        // Configuration management
+package formatter     // Output formatting utilities
+package security      // Security utilities (path sanitization)
 ```
 
 ### OOP Example
 ```go
-// Use structs with methods
+// Use structs with methods (from internal/calculator/chudnovsky.go)
 type Calculator struct {
-    precision uint
-    workers   int
+    cfg  *config.Config
+    pool PoolInterface
 }
 
-func (c *Calculator) Compute(input Input) (Output, error) {
-    // Implementation
+func (c *Calculator) ComputePi(ctx context.Context, digits int64) (string, error) {
+    // Implementation with context support and error handling
 }
 
-// Use interfaces for polymorphism
-type Processor interface {
-    Process(data Data) Result
+// Use interfaces for polymorphism (from internal/config/interfaces.go)
+type PoolInterface interface {
+    Submit(ctx context.Context, work func() (interface{}, error)) <-chan Result
+    Close()
 }
 ```
 
@@ -168,13 +180,23 @@ func parseNumber(s string) (int64, error) {
     return strconv.ParseInt(s, 10, 64)
 }
 
-// Sanitize file paths to prevent directory traversal
-func sanitizePath(path string) (string, error) {
+// Sanitize file paths to prevent directory traversal (from internal/security/path.go)
+func SanitizePath(path string) (string, error) {
     // Remove any ".." or absolute path components
     cleaned := filepath.Clean(path)
-    if filepath.IsAbs(cleaned) {
-        return "", fmt.Errorf("absolute paths not allowed")
+    
+    // Check for directory traversal attempts
+    if strings.Contains(cleaned, "..") {
+        return "", fmt.Errorf("path contains directory traversal: %s", path)
     }
+    
+    // Validate path stays within working directory
+    absPath, err := filepath.Abs(cleaned)
+    if err != nil {
+        return "", fmt.Errorf("invalid path: %w", err)
+    }
+    
+    // Additional security checks...
     return cleaned, nil
 }
 ```
@@ -189,9 +211,37 @@ func sanitizePath(path string) (string, error) {
 6. **Error Handling**: Handle errors explicitly and gracefully
 7. **Security**: Always validate input, check bounds, and protect against common vulnerabilities
 
+## Current Codebase Structure
+
+This project implements the Chudnovsky algorithm for computing π (pi) to arbitrary precision. The codebase follows all the principles outlined above:
+
+### Package Organization
+- **`internal/calculator`**: Core Chudnovsky algorithm implementation with parallel computation support
+- **`internal/workerpool`**: Worker pool implementation for efficient multi-core utilization
+- **`internal/config`**: Centralized configuration management
+- **`internal/formatter`**: Output formatting utilities
+- **`internal/security`**: Security utilities including path sanitization to prevent directory traversal attacks
+- **`cmd/chudnovsky`**: Command-line interface application
+
+### Key Features
+- ✅ Multi-threading via worker pools (`internal/workerpool`)
+- ✅ Multi-core utilization with auto-detection (`runtime.NumCPU()`, `runtime.GOMAXPROCS()`)
+- ✅ Modular architecture with clear separation of concerns
+- ✅ OOP design with structs, methods, and interfaces
+- ✅ Security measures (path sanitization, input validation, bounds checking)
+- ✅ Most files under 500 lines (test files may exceed this for comprehensive coverage)
+
+### Implementation Highlights
+- Worker pool automatically scales to available CPU cores
+- Context-based cancellation for long-running computations
+- Progress callbacks for user feedback
+- Comprehensive error handling and validation
+- Security-first approach with path sanitization
+
 ## Notes
 
 - These guidelines should be followed whenever practical
 - Some exceptions may be necessary for specific use cases
 - Always prioritize correctness over performance optimizations
 - Profile and measure before optimizing
+- Test files may exceed 500 lines for comprehensive test coverage

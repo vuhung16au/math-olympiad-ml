@@ -32,3 +32,16 @@ issues:
   exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
+  # Exclude typecheck errors due to Go version mismatch with golangci-lint
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - typecheck
+    # Exclude typecheck errors for progressbar (known issue with version mismatch)
+    - text: "undefined: progressbar"
+      linters:
+        - typecheck
+    # Exclude typecheck errors for sync/atomic (known issue with Go 1.24+)
+    - text: "could not import sync/atomic"
+      linters:
+        - typecheck

@@ -19,6 +19,7 @@ go.work
 
 # Compiled binaries (project-specific)
 Chudnovsky
+chudnovsky
 compare_pi
 *.bin
 
@@ -38,7 +39,6 @@ results/
 *.swp
 *.swo
 *~
-.DS_Store
 *.sublime-project
 *.sublime-workspace
 
@@ -63,12 +63,15 @@ Thumbs.db
 desktop.ini
 
 # Test coverage
+coverage.out
 coverage.txt
 coverage.html
 *.coverprofile
+*.cover
 
-# Air (live reload tool)
-tmp/
+# Benchmark output files
+/tmp/bench.out
+bench.out
 
 # Debug files
 debug

@@ -1,4 +1,4 @@
-.PHONY: clean clean-result help build build-tools test1k test10k test100k test1m test10m unitest lint bench security
+.PHONY: clean clean-result help build build-tools test1k test10k test100k test1m test10m unitest lint bench security test-ci
 
 # Binary names
 BINARY_NAME := Chudnovsky
@@ -55,6 +55,7 @@ help:
 	@echo "  make lint        - Run code linters (golangci-lint)"
 	@echo "  make bench       - Run benchmark tests with execution time"
 	@echo "  make security    - Run security scans (gosec, govulncheck)"
+	@echo "  make test-ci     - Run all CI checks locally (unitest, lint, test1k, format)"
 	@echo ""
 	@echo "  make help        - Show this help message"
 	@echo ""
@@ -164,3 +165,8 @@ security:
 	@$$(go env GOPATH)/bin/govulncheck ./... 2>&1 || govulncheck ./... 2>&1 || echo "govulncheck not available, skipping"
 	@echo ""
 	@echo "Security scan complete!"
+
+# Run all CI checks locally (same as GitHub Actions workflow)
+test-ci:
+	@echo "Running CI checks locally..."
+	@./scripts/test-ci.sh
