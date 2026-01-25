@@ -27,7 +27,7 @@ compare_pi
 /build/
 
 # Results and output files
-# results/
+results/
 # *.txt
 # !correct-pi/**/*.txt
 !*.md

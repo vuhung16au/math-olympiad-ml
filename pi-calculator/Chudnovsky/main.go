@@ -274,6 +274,47 @@ func computePQT(a, b int64) (P, Q, T *big.Int) {
 	return computePQTSequential(a, b)
 }
 
+// sanitizePath sanitizes file paths to prevent directory traversal attacks
+func sanitizePath(path string) (string, error) {
+	// Security: Sanitize file paths to prevent directory traversal
+	// Remove any ".." or absolute path components
+	cleaned := filepath.Clean(path)
+	
+	// Check if the cleaned path still contains ".." (directory traversal)
+	// filepath.Clean should remove these, but we check for safety
+	if strings.Contains(cleaned, "..") {
+		return "", fmt.Errorf("path contains directory traversal: %s", path)
+	}
+	
+	// Check if path resolves outside the current working directory
+	// Get absolute path to detect traversal
+	absPath, err := filepath.Abs(cleaned)
+	if err != nil {
+		return "", fmt.Errorf("invalid path: %v", err)
+	}
+	
+	// Get current working directory
+	cwd, err := os.Getwd()
+	if err != nil {
+		// If we can't get CWD, just use cleaned path (less secure but functional)
+		return cleaned, nil
+	}
+	
+	// Check if the absolute path is outside the current directory
+	// This prevents writing to /etc, /root, etc.
+	relPath, err := filepath.Rel(cwd, absPath)
+	if err != nil {
+		return "", fmt.Errorf("path outside working directory: %s", path)
+	}
+	
+	// If relative path starts with "..", it's outside the current directory
+	if strings.HasPrefix(relPath, "..") {
+		return "", fmt.Errorf("path outside working directory: %s", path)
+	}
+	
+	return cleaned, nil
+}
+
 // formatPiOutput formats the pi string to match the correct-pi format
 func formatPiOutput(digits int, piStr string) string {
 	var result strings.Builder
@@ -310,8 +351,14 @@ func formatPiOutput(digits int, piStr string) string {
 			result.WriteString("3.\n")
 			digitsAfterDecimal = parts[1]
 		} else {
-			result.WriteString(piStr[:2] + "\n")
-			digitsAfterDecimal = piStr[2:]
+			// Security: Bounds check before string slicing
+			if len(piStr) >= 2 {
+				result.WriteString(piStr[:2] + "\n")
+				digitsAfterDecimal = piStr[2:]
+			} else {
+				result.WriteString(piStr + "\n")
+				return result.String()
+			}
 		}
 	} else {
 		// If no decimal point, assume it starts with "3"
@@ -324,15 +371,19 @@ func formatPiOutput(digits int, piStr string) string {
 		}
 	}
 	
-	// Format digits in groups of 50 per line
-	digitsPerLine := 50
-	for i := 0; i < len(digitsAfterDecimal); i += digitsPerLine {
-		end := i + digitsPerLine
-		if end > len(digitsAfterDecimal) {
-			end = len(digitsAfterDecimal)
+		// Format digits in groups of 50 per line
+		// Security: Bounds are already checked in the loop condition and end calculation
+		digitsPerLine := 50
+		for i := 0; i < len(digitsAfterDecimal); i += digitsPerLine {
+			end := i + digitsPerLine
+			if end > len(digitsAfterDecimal) {
+				end = len(digitsAfterDecimal)
+			}
+			// Additional safety check (though already ensured by condition above)
+			if i < len(digitsAfterDecimal) && end <= len(digitsAfterDecimal) {
+				result.WriteString(digitsAfterDecimal[i:end] + "\n")
+			}
 		}
-		result.WriteString(digitsAfterDecimal[i:end] + "\n")
-	}
 	
 	return result.String()
 }
@@ -357,6 +408,18 @@ func main() {
 	digits, err := strconv.ParseInt(args[0], 10, 64)
 	if err != nil {
 		fmt.Printf("Error: invalid digits value: %v\n", err)
+		return
+	}
+
+	// Security: Validate input to prevent memory exhaustion
+	// Set reasonable maximum (1 billion digits) to prevent resource exhaustion
+	const maxDigits = 1000000000 // 1 billion digits
+	if digits < 1 {
+		fmt.Printf("Error: digits must be at least 1, got %d\n", digits)
+		return
+	}
+	if digits > maxDigits {
+		fmt.Printf("Error: digits exceeds maximum allowed (%d), got %d\n", maxDigits, digits)
 		return
 	}
 
@@ -407,7 +470,14 @@ func main() {
 	formattedOutput := formatPiOutput(int(digits), piStr)
 
 	// Save to file
-	outputDir := filepath.Dir(outputPath)
+	// Security: Sanitize file path to prevent directory traversal attacks
+	sanitizedPath, err := sanitizePath(outputPath)
+	if err != nil {
+		fmt.Printf("Error: invalid output path: %v\n", err)
+		return
+	}
+	
+	outputDir := filepath.Dir(sanitizedPath)
 	if outputDir != "." && outputDir != "" {
 		if err := os.MkdirAll(outputDir, 0755); err != nil {
 			fmt.Printf("Error creating output directory: %v\n", err)
@@ -415,12 +485,12 @@ func main() {
 		}
 	}
 
-	if err := os.WriteFile(outputPath, []byte(formattedOutput), 0644); err != nil {
+	if err := os.WriteFile(sanitizedPath, []byte(formattedOutput), 0644); err != nil {
 		fmt.Printf("Error writing to file: %v\n", err)
 		return
 	}
 
-	fmt.Printf("Pi saved to: %s\n", outputPath)
+	fmt.Printf("Pi saved to: %s\n", sanitizedPath)
 
 	// Print to stdout if requested
 	if printStdout {
