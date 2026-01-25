@@ -1,4 +1,4 @@
-.PHONY: clean help build build-tools test1k test10k test100k test1m test10m
+.PHONY: clean clean-result help build build-tools test1k test10k test100k test1m test10m
 
 # Binary names
 BINARY_NAME := Chudnovsky
@@ -19,21 +19,27 @@ build-tools: build
 	@go build -o $(COMPARE_TOOL) compare_pi.go
 	@echo "Tools build complete!"
 
-# Clean build artifacts and results
+# Clean build artifacts (keeps results/)
 clean:
-	@echo "Cleaning..."
+	@echo "Cleaning build artifacts..."
 	@rm -f $(BINARY_NAME) $(COMPARE_TOOL)
-	@rm -rf results/
 	@echo "Clean complete!"
+
+# Clean results directory
+clean-result:
+	@echo "Cleaning results directory..."
+	@rm -rf results/
+	@echo "Results directory cleaned!"
 
 # Show help message
 help:
 	@echo "Chudnovsky Pi Calculator - Makefile"
 	@echo ""
 	@echo "Available targets:"
-	@echo "  make build     - Build the Chudnovsky binary"
-	@echo "  make clean     - Remove binary and results directory"
-	@echo "  make test1k    - Calculate pi to 1,000 digits"
+	@echo "  make build       - Build the Chudnovsky binary"
+	@echo "  make clean       - Remove binaries (keeps results/)"
+	@echo "  make clean-result - Remove results/ directory"
+	@echo "  make test1k      - Calculate pi to 1,000 digits"
 	@echo "  make test10k   - Calculate pi to 10,000 digits"
 	@echo "  make test100k  - Calculate pi to 100,000 digits"
 	@echo "  make test1m    - Calculate pi to 1,000,000 digits"

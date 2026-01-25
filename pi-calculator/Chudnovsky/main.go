@@ -77,7 +77,11 @@ func (wp *WorkerPool) worker(id int) {
 		select {
 		case <-wp.ctx.Done():
 			return
-		case work := <-wp.workChan:
+		case work, ok := <-wp.workChan:
+			if !ok {
+				// Channel closed, exit
+				return
+			}
 			// Yield to scheduler before starting work
 			runtime.Gosched()
 			p, q, t := computePQTSequential(work.Start, work.End)
@@ -99,9 +103,9 @@ func (wp *WorkerPool) Submit(start, end int64) <-chan Result {
 
 // Close shuts down the worker pool
 func (wp *WorkerPool) Close() {
-	close(wp.workChan)
-	wp.cancel()
-	wp.wg.Wait()
+	wp.cancel()  // Signal workers to stop first
+	close(wp.workChan)  // Then close the channel
+	wp.wg.Wait()  // Wait for all workers to finish
 }
 
 func init() {
