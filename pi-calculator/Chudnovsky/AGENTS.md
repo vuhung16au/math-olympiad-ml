@@ -1,6 +1,19 @@
 # Agent Coding Guidelines
 
-This document outlines the coding standards and best practices for development in this project.
+> **Note**: This document has been refactored into separate policy files.  
+> See [docs/agents/README.md](docs/agents/README.md) for the complete guidelines.
+
+## Quick Reference
+
+This file is maintained for backward compatibility. For detailed guidelines, please refer to the individual policy files in `docs/agents/`:
+
+- [Multi-Threading](docs/agents/multi-threading.md)
+- [Multi-Core Utilization](docs/agents/multi-core.md)
+- [Modular Architecture](docs/agents/modular-architecture.md)
+- [Object-Oriented Programming](docs/agents/oop.md)
+- [File Size Management](docs/agents/file-size-management.md)
+- [Security](docs/agents/security.md)
+- [Best Practices](docs/agents/best-practices.md)
 
 ## Core Principles
 
