@@ -14,7 +14,7 @@ import (
 // 2. Old format: just digits starting with "3.14159..." or "14159..."
 func extractDigitsFromFile(content string) string {
 	lines := strings.Split(content, "\n")
-	
+
 	// Find the line with "3." (exactly "3." on its own line)
 	digitsStart := -1
 	for i, line := range lines {
@@ -27,7 +27,7 @@ func extractDigitsFromFile(content string) string {
 			}
 		}
 	}
-	
+
 	// If we found "3." line, collect digits from next lines
 	if digitsStart >= 0 {
 		var digits strings.Builder
@@ -45,20 +45,14 @@ func extractDigitsFromFile(content string) string {
 		}
 		return digits.String()
 	}
-	
+
 	// Fallback: look for lines starting with digits (old format)
 	for i, line := range lines {
 		line = strings.TrimSpace(line)
 		if len(line) > 0 && line[0] >= '0' && line[0] <= '9' {
 			// Found a line starting with digits
 			var digits strings.Builder
-			// Check if it starts with "3."
-			if strings.HasPrefix(line, "3.") {
-				line = line[2:] // Remove "3." prefix
-			} else if strings.HasPrefix(line, "3") && len(line) > 1 {
-				line = line[1:] // Remove "3" prefix
-			}
-			// Collect all digit lines from here
+			// Collect all digit lines from here (prefix removal not needed here)
 			for j := i; j < len(lines); j++ {
 				digLine := strings.TrimSpace(lines[j])
 				if len(digLine) == 0 {
@@ -74,7 +68,7 @@ func extractDigitsFromFile(content string) string {
 			return digits.String()
 		}
 	}
-	
+
 	// Last fallback: extract all digits from content
 	var digits strings.Builder
 	for _, r := range content {
@@ -83,12 +77,10 @@ func extractDigitsFromFile(content string) string {
 		}
 	}
 	result := digits.String()
-	
+
 	// Remove "3" prefix if present (for old format)
-	if strings.HasPrefix(result, "3") {
-		result = result[1:]
-	}
-	
+	result = strings.TrimPrefix(result, "3")
+
 	return result
 }
 
@@ -103,7 +95,7 @@ func main() {
 
 	calculatedFile := os.Args[1]
 	correctFile := os.Args[2]
-	
+
 	var maxDigits int = -1
 	if len(os.Args) >= 4 {
 		_, err := fmt.Sscanf(os.Args[3], "%d", &maxDigits)
@@ -114,6 +106,7 @@ func main() {
 	}
 
 	// Read calculated pi
+	// #nosec G304 -- calculatedFile is a command-line argument for comparison
 	calculatedBytes, err := os.ReadFile(calculatedFile)
 	if err != nil {
 		fmt.Printf("Error reading calculated file: %v\n", err)
@@ -122,6 +115,7 @@ func main() {
 	calculated := extractDigitsFromFile(string(calculatedBytes))
 
 	// Read correct pi
+	// #nosec G304 -- correctFile is a command-line argument for comparison
 	correctBytes, err := os.ReadFile(correctFile)
 	if err != nil {
 		fmt.Printf("Error reading correct file: %v\n", err)
@@ -148,14 +142,14 @@ func main() {
 	// Compare up to third-to-last digit (ignore last 2 digits for rounding tolerance)
 	compareLen := minLen
 	if compareLen > 2 {
-		compareLen = compareLen - 2 // Ignore last 2 digits for rounding tolerance
+		compareLen -= 2 // Ignore last 2 digits for rounding tolerance
 	} else if compareLen > 1 {
-		compareLen = compareLen - 1 // If only 2 digits, ignore just the last one
+		compareLen-- // If only 2 digits, ignore just the last one
 	}
 
 	matchCount := 0
 	firstMismatch := -1
-	
+
 	for i := 0; i < compareLen; i++ {
 		if calculated[i] == correct[i] {
 			matchCount++
@@ -163,7 +157,7 @@ func main() {
 			firstMismatch = i
 		}
 	}
-	
+
 	// Check last 2 digits separately (for informational purposes only)
 	lastDigitsDiff := false
 	if minLen >= 2 && len(calculated) >= 2 && len(correct) >= 2 {
@@ -184,20 +178,20 @@ func main() {
 	fmt.Printf("  Correct length:    %d digits\n", len(correct))
 	fmt.Printf("  Compared:          %d digits (last 2 digits ignored for rounding tolerance)\n", compareLen)
 	fmt.Printf("  Matches:            %d digits\n", matchCount)
-	
+
 	if compareLen > 0 {
 		accuracy := float64(matchCount) / float64(compareLen) * 100.0
 		fmt.Printf("  Accuracy:          %.2f%%\n", accuracy)
 	}
-	
+
 	// Note about last digits if different
 	if lastDigitsDiff && minLen >= 2 {
 		last2Calc := calculated[minLen-2:]
 		last2Corr := correct[minLen-2:]
-		fmt.Printf("  Note: Last 2 digits differ (acceptable rounding): calculated=%s, correct=%s\n", 
+		fmt.Printf("  Note: Last 2 digits differ (acceptable rounding): calculated=%s, correct=%s\n",
 			last2Calc, last2Corr)
 	} else if lastDigitsDiff && minLen >= 1 {
-		fmt.Printf("  Note: Last digit differs (acceptable rounding): calculated=%c, correct=%c\n", 
+		fmt.Printf("  Note: Last digit differs (acceptable rounding): calculated=%c, correct=%c\n",
 			calculated[minLen-1], correct[minLen-1])
 	}
 
@@ -215,12 +209,12 @@ func main() {
 		if end > len(correct) {
 			end = len(correct)
 		}
-		
+
 		fmt.Printf("    Calculated: %c\n", calculated[firstMismatch])
 		fmt.Printf("    Correct:    %c\n", correct[firstMismatch])
 		fmt.Printf("    Context:    ...%s...\n", calculated[start:end])
 		fmt.Printf("    Context:    ...%s...\n", correct[start:end])
-		
+
 		// Show last few digits if mismatch is near the end
 		if firstMismatch >= compareLen-20 {
 			fmt.Printf("\n  Last 20 digits:\n")
@@ -231,12 +225,12 @@ func main() {
 			fmt.Printf("    Calculated: ...%s\n", calculated[lastStart:])
 			fmt.Printf("    Correct:    ...%s\n", correct[lastStart:])
 		}
-		
+
 		os.Exit(1)
 	} else {
 		// All compared digits match (last digit was ignored)
 		if len(calculated) != len(correct) {
-			fmt.Printf("\n  ⚠ Length mismatch: calculated has %d digits, correct has %d digits\n", 
+			fmt.Printf("\n  ⚠ Length mismatch: calculated has %d digits, correct has %d digits\n",
 				len(calculated), len(correct))
 			os.Exit(1)
 		} else {
