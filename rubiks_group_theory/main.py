@@ -227,13 +227,32 @@ class RubiksApp:
         self.cube_3d_renderer = Cube3DRenderer(self.width, self.height)
         self.current_renderer = self.flat_renderer  # Start with flat view
         
+        # Helper for efficient move lookup
+        self.move_map = {
+            pygame.K_u: ('U', "U'"),
+            pygame.K_d: ('D', "D'"),
+            pygame.K_r: ('R', "R'"),
+            pygame.K_l: ('L', "L'"),
+            pygame.K_f: ('F', "F'"),
+            pygame.K_b: ('B', "B'"),
+        }
+
+        # Animation state
+        self.animating = False
+        self.animation_move_name = None
+        self.animation_progress = 0.0
+        self.animation_speed = 0.05 * (60.0 / 60.0) # Base speed adjusted for frame rate
+        # Make animation slower as requested ("so human eyes can see")
+        self.animation_speed = 0.01 # 100 frames per move = ~1.66s at 60fps
+        
         # Solver
         self.solver = BeginnerSolver()
         self.solving = False
         self.solution_moves = []
         self.current_move_index = 0
-        self.move_timer = 0
-        self.move_delay = 800  # milliseconds between moves
+        self.solution_timer = 0
+        self.solution_delay = 500  # ms delay between moves (after animation finishes)
+
         
         # UI
         self.font = pygame.font.Font(None, 36)
@@ -289,53 +308,19 @@ class RubiksApp:
                 elif event.key == pygame.K_v:
                     self.toggle_view()
                 
-                # Cube moves
-                elif event.key == pygame.K_u:
+                # Cube moves keys
+                elif event.key in self.move_map:
+                    if self.animating:
+                        continue # Ignore inputs while animating manual move
+                        
+                    cw_move, ccw_move = self.move_map[event.key]
                     if event.mod & pygame.KMOD_SHIFT:
-                        move = "U'"
+                        move = ccw_move
                     else:
-                        move = "U"
-                    apply_move(self.cube, move)
-                    self.manual_moves.append(move)
-                    self.logger.info(f"Manual move: {move}")
-                elif event.key == pygame.K_d:
-                    if event.mod & pygame.KMOD_SHIFT:
-                        move = "D'"
-                    else:
-                        move = "D"
-                    apply_move(self.cube, move)
-                    self.manual_moves.append(move)
-                    self.logger.info(f"Manual move: {move}")
-                elif event.key == pygame.K_r:
-                    if event.mod & pygame.KMOD_SHIFT:
-                        move = "R'"
-                    else:
-                        move = "R"
-                    apply_move(self.cube, move)
-                    self.manual_moves.append(move)
-                    self.logger.info(f"Manual move: {move}")
-                elif event.key == pygame.K_l:
-                    if event.mod & pygame.KMOD_SHIFT:
-                        move = "L'"
-                    else:
-                        move = "L"
-                    apply_move(self.cube, move)
-                    self.manual_moves.append(move)
-                    self.logger.info(f"Manual move: {move}")
-                elif event.key == pygame.K_f:
-                    if event.mod & pygame.KMOD_SHIFT:
-                        move = "F'"
-                    else:
-                        move = "F"
-                    apply_move(self.cube, move)
-                    self.manual_moves.append(move)
-                    self.logger.info(f"Manual move: {move}")
-                elif event.key == pygame.K_b:
-                    if event.mod & pygame.KMOD_SHIFT:
-                        move = "B'"
-                    else:
-                        move = "B"
-                    apply_move(self.cube, move)
+                        move = cw_move
+                    
+                    # Start animation instead of applying immediately
+                    self.start_animation(move)
                     self.manual_moves.append(move)
                     self.logger.info(f"Manual move: {move}")
         
@@ -440,32 +425,55 @@ class RubiksApp:
         self.logger.info(f"Solution generated: {len(self.solution_moves)} moves (reverse of scramble)")
         self.logger.info(f"Solution sequence: {' '.join(self.solution_moves)}")
         self.logger.info("=" * 60)
+        self.logger.info("=" * 60)
         self.current_move_index = 0
-        self.move_timer = 0
+        self.solution_timer = 0
+        
+    def start_animation(self, move_name: str):
+        """Start animating a move."""
+        self.animating = True
+        self.animation_move_name = move_name
+        self.animation_progress = 0.0
+
+    def update_animation(self):
+        """Update animation progress."""
+        if not self.animating:
+            return
+
+        self.animation_progress += self.animation_speed
+        
+        # Finish animation
+        if self.animation_progress >= 1.0:
+            self.animation_progress = 1.0
+            apply_move(self.cube, self.animation_move_name)
+            self.animating = False
+            self.animation_move_name = None
+            self.animation_progress = 0.0
     
     def update_solver(self, dt: int):
-        """Update solver animation.
-        
-        Args:
-            dt: Time delta in milliseconds
-        """
+        """Update solver logic."""
         if not self.solving or not self.solution_moves:
             return
+            
+        # If currently animating a move, just let it finish
+        if self.animating:
+            return
+
+        # Wait for delay before starting next move
+        self.solution_timer += dt
         
-        self.move_timer += dt
-        
-        if self.move_timer >= self.move_delay:
-            # Apply next move
+        if self.solution_timer >= self.solution_delay:
+            # Start next move
             if self.current_move_index < len(self.solution_moves):
                 move = self.solution_moves[self.current_move_index]
-                apply_move(self.cube, move)
-                # Fix: current_move_index is 0-based, so display is index+1
+                self.start_animation(move)
+                
                 step_num = self.current_move_index + 1
                 self.logger.info(f"Solver move [{step_num}/{len(self.solution_moves)}]: {move}")
                 self.current_move_index += 1
-                self.move_timer = 0
+                self.solution_timer = 0
             else:
-                # Done solving - all moves applied
+                # Done solving
                 self.logger.info("=" * 60)
                 self.logger.info("Solving completed!")
                 if self.cube.is_solved():
@@ -573,7 +581,22 @@ class RubiksApp:
         self.screen.fill(COLORS['canvasgray'])
         
         # Draw cube (centered, leaving space for UI)
-        self.current_renderer.draw(self.screen, self.cube)
+        # Draw cube (centered, leaving space for UI)
+        # Construct animation state dict if animating
+        anim_state = None
+        if self.animating:
+            anim_state = {
+                'move': self.animation_move_name,
+                'progress': self.animation_progress
+            }
+            
+        # Flat renderer supports animation
+        if self.current_renderer == self.flat_renderer:
+            self.current_renderer.draw(self.screen, self.cube, anim_state)
+        else:
+            # Graph renderer doesn't support animation yet
+            self.current_renderer.draw(self.screen, self.cube)
+
         
         # Draw 3D cube on right side when in graph view
         if self.current_renderer == self.graph_renderer:
@@ -616,6 +639,9 @@ class RubiksApp:
             
             running = self.handle_events()
             
+            if self.animating:
+                self.update_animation()
+            
             if self.solving:
                 self.update_solver(dt)
             
@@ -637,4 +663,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nApplication interrupted by user. Exiting...")
+        pygame.quit()
+        sys.exit(0)
