@@ -5,6 +5,8 @@ import sys
 import os
 import logging
 import random
+import json
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -17,6 +19,8 @@ if str(project_root) not in sys.path:
 from core.cube_state import CubeState
 from core.permutations import apply_move, MOVES
 from core.move_metrics import compute_move_metrics, build_compare_report
+from core.profile_presets import get_profile_settings
+from core.queue_controls import compute_queue_button_states
 from visualization.flat_renderer import FlatRenderer, COLORS
 from visualization.graph_renderer import GraphRenderer
 from visualization.cube_3d_renderer import Cube3DRenderer
@@ -98,7 +102,7 @@ def setup_logging():
     return logger, log_buffer
 
 
-def scramble_cube(cube: CubeState, num_moves: int = 25):
+def scramble_cube(cube: CubeState, num_moves: int = 25, rng: Optional[random.Random] = None):
     """Scramble the cube by applying random moves.
     
     Args:
@@ -111,8 +115,9 @@ def scramble_cube(cube: CubeState, num_moves: int = 25):
     move_list = list(MOVES.keys())
     applied_moves = []
     
+    rng = rng or random.Random()
     for _ in range(num_moves):
-        move = random.choice(move_list)
+        move = rng.choice(move_list)
         apply_move(cube, move)
         applied_moves.append(move)
     
@@ -211,10 +216,12 @@ class RubiksApp:
         self.fullscreen = False
         self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
         pygame.display.set_caption("Rubik's Cube Group Theory Solver")
+        # Initialize seed mode before first scramble.
+        self.scramble_seed = None  # None means non-deterministic
         
         # Cube state - start with scrambled cube
         self.cube = CubeState()
-        scramble_moves = scramble_cube(self.cube, num_moves=25)
+        scramble_moves = scramble_cube(self.cube, num_moves=25, rng=self._get_scramble_rng())
         self.logger.info(f"Cube initialized and scrambled with {len(scramble_moves)} random moves")
         self.logger.info(f"Scramble sequence: {' '.join(scramble_moves)}")
         
@@ -277,6 +284,11 @@ class RubiksApp:
         self.profile_mode = "teaching"  # "teaching" or "speed"
         self.compact_ui = False
         self.show_explanations = True
+        self.benchmark_report = None
+        self.last_validation = None
+        self.last_solution_moves = []
+        self.last_solution_start_cube = None
+        self.timeline_click_regions = []
         self.solve_start_ms = 0
         self.pause_started_ms = 0
         self.paused_total_ms = 0
@@ -367,6 +379,26 @@ class RubiksApp:
                 if event.key == pygame.K_ESCAPE:
                     self.cancel_current_action()
                     continue
+                if event.key == pygame.K_F9:
+                    if not self.solving and not self.animating:
+                        self.run_benchmark()
+                    continue
+                if event.key == pygame.K_k:
+                    if not self.solving and not self.animating:
+                        self.cycle_scramble_seed()
+                    continue
+                if event.key == pygame.K_e:
+                    if not self.solving and not self.animating:
+                        self.export_current_state()
+                    continue
+                if event.key == pygame.K_i:
+                    if not self.solving and not self.animating:
+                        self.import_state_from_file()
+                    continue
+                if event.key == pygame.K_c:
+                    result = self.validate_cube_state()
+                    self.logger.info(f"Validate: {'OK' if result['ok'] else 'INVALID'} ({result['reason']})")
+                    continue
 
                 if self.solving:
                     continue  # Ignore input while solving
@@ -452,6 +484,11 @@ class RubiksApp:
             self.step_once()
         elif self.cancel_button.update(mouse_pos, mouse_clicked):
             self.cancel_current_action()
+        elif mouse_clicked and self.timeline_click_regions and not self.solving and not self.animating:
+            for idx, rect in self.timeline_click_regions:
+                if rect.collidepoint(mouse_pos):
+                    self.jump_to_solution_index(idx)
+                    break
 
         # Main controls
         if not self.solving:
@@ -480,22 +517,12 @@ class RubiksApp:
             self.profile_button.state = "disabled"
 
         # Control button availability/status.
-        if self.solving or self.animating:
-            # Keep current pause label based on state.
-            self.pause_button.state = "normal"
-        else:
-            self.pause_button.state = "disabled"
+        control_states = compute_queue_button_states(self.solving, self.animating, self.solving_paused)
+        self.pause_button.state = "normal" if control_states["pause_enabled"] else "disabled"
+        self.step_button.state = "normal" if control_states["step_enabled"] else "disabled"
+        self.cancel_button.state = "normal" if control_states["cancel_enabled"] else "disabled"
+        if not control_states["pause_enabled"]:
             self.pause_button.text = "Pause"
-
-        if self.solving and self.solving_paused:
-            self.step_button.state = "normal"
-        else:
-            self.step_button.state = "disabled"
-
-        if self.solving or self.animating:
-            self.cancel_button.state = "normal"
-        else:
-            self.cancel_button.state = "disabled"
         
         return True
     
@@ -550,30 +577,257 @@ class RubiksApp:
 
     def _apply_profile_mode(self, mode: str, log: bool = True):
         """Apply profile presets for pacing and UI density."""
+        settings = get_profile_settings(mode)
         self.profile_mode = mode
-        if mode == "speed":
-            self.animation_duration_ms = 120
-            self.solution_delay = 120
-            self.overlay_duration = 300
-            self.compact_ui = True
-            self.show_explanations = False
-            self.profile_button.text = "Profile: SPD"
-            if log:
-                self.logger.info("Profile set: Speed mode")
-        else:
-            self.animation_duration_ms = 320
-            self.solution_delay = 650
-            self.overlay_duration = 1000
-            self.compact_ui = False
-            self.show_explanations = True
-            self.profile_button.text = "Profile: Teach"
-            if log:
-                self.logger.info("Profile set: Teaching mode")
+        self.animation_duration_ms = settings["animation_duration_ms"]  # type: ignore[index]
+        self.solution_delay = settings["solution_delay"]  # type: ignore[index]
+        self.overlay_duration = settings["overlay_duration"]  # type: ignore[index]
+        self.compact_ui = settings["compact_ui"]  # type: ignore[index]
+        self.show_explanations = settings["show_explanations"]  # type: ignore[index]
+        self.profile_button.text = settings["button_text"]  # type: ignore[index]
+        if log:
+            self.logger.info(f"Profile set: {settings['label']} mode")
 
     def toggle_profile_mode(self):
         """Toggle between Teaching and Speed presets."""
         next_mode = "speed" if self.profile_mode == "teaching" else "teaching"
         self._apply_profile_mode(next_mode, log=True)
+
+    def _get_scramble_rng(self) -> random.Random:
+        """Return RNG honoring deterministic seed mode."""
+        if self.scramble_seed is None:
+            return random.Random()
+        return random.Random(self.scramble_seed)
+
+    def cycle_scramble_seed(self):
+        """Cycle deterministic scramble seed modes."""
+        if self.scramble_seed is None:
+            self.scramble_seed = 42
+        elif self.scramble_seed == 42:
+            self.scramble_seed = 2026
+        else:
+            self.scramble_seed = None
+        label = "auto" if self.scramble_seed is None else str(self.scramble_seed)
+        self.logger.info(f"Scramble seed mode: {label}")
+
+    def validate_cube_state(self):
+        """Basic cube validity checks for user safety before solving."""
+        counts = {c: 0 for c in "WYGBOR"}
+        for s in self.cube.stickers:
+            if s not in counts:
+                self.last_validation = {"ok": False, "reason": f"invalid color '{s}'"}
+                return self.last_validation
+            counts[s] += 1
+
+        bad_counts = {k: v for k, v in counts.items() if v != 9}
+        if bad_counts:
+            self.last_validation = {"ok": False, "reason": f"color counts invalid: {bad_counts}"}
+            return self.last_validation
+
+        centers = {
+            "top": self.cube.get_face("top")[1][1],
+            "bottom": self.cube.get_face("bottom")[1][1],
+            "front": self.cube.get_face("front")[1][1],
+            "back": self.cube.get_face("back")[1][1],
+            "left": self.cube.get_face("left")[1][1],
+            "right": self.cube.get_face("right")[1][1],
+        }
+        if len(set(centers.values())) != 6:
+            self.last_validation = {"ok": False, "reason": "duplicate center colors detected"}
+            return self.last_validation
+
+        self.last_validation = {"ok": True, "reason": "basic validity checks passed"}
+        return self.last_validation
+
+    def _cube_to_facelet_string(self):
+        """Export current cube to URFDLB facelet order."""
+        color_to_face = {"W": "U", "R": "R", "G": "F", "Y": "D", "O": "L", "B": "B"}
+        order = ["top", "right", "front", "bottom", "left", "back"]
+        out = []
+        for face_name in order:
+            face = self.cube.get_face(face_name)
+            for row in face:
+                for color in row:
+                    out.append(color_to_face[color])
+        return "".join(out)
+
+    def _set_cube_from_facelet(self, facelets: str):
+        """Import cube from URFDLB facelet order."""
+        if len(facelets) != 54:
+            raise ValueError("Facelet string must be 54 chars")
+        mapping = {"U": "W", "R": "R", "F": "G", "D": "Y", "L": "O", "B": "B"}
+        order = ["top", "right", "front", "bottom", "left", "back"]
+        idx = 0
+        for face_name in order:
+            face_data = []
+            for _ in range(3):
+                row = []
+                for _ in range(3):
+                    ch = facelets[idx]
+                    if ch not in mapping:
+                        raise ValueError(f"Invalid facelet character: {ch}")
+                    row.append(mapping[ch])
+                    idx += 1
+                face_data.append(row)
+            self.cube.set_face(face_name, face_data)
+
+    def export_current_state(self):
+        """Export current state to JSON and notation files."""
+        exports_dir = project_root / "exports"
+        exports_dir.mkdir(exist_ok=True)
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        data = {
+            "timestamp": ts,
+            "facelets": self._cube_to_facelet_string(),
+            "stickers": self.cube.stickers,
+            "scramble_sequence": self.scramble_sequence,
+            "manual_moves": self.manual_moves,
+            "profile_mode": self.profile_mode,
+            "solver_mode": self.solver_mode,
+        }
+        json_path = exports_dir / f"state_{ts}.json"
+        latest_path = exports_dir / "state_latest.json"
+        text_path = exports_dir / f"state_{ts}.txt"
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+        with open(latest_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+        with open(text_path, "w", encoding="utf-8") as f:
+            f.write(f"FACELETS {data['facelets']}\n")
+            f.write(f"SCRAMBLE {' '.join(self.scramble_sequence)}\n")
+            f.write(f"MANUAL {' '.join(self.manual_moves)}\n")
+        self.logger.info(f"Exported state: {json_path}")
+
+    def export_session_report(self):
+        """Export a solve session report to reports/."""
+        if not self.last_solve_report:
+            return
+        reports_dir = project_root / "reports"
+        reports_dir.mkdir(exist_ok=True)
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        report = {
+            "timestamp": ts,
+            "profile_mode": self.profile_mode,
+            "solver_mode": self.solver_mode,
+            "scramble_seed": self.scramble_seed,
+            "scramble_sequence": self.scramble_sequence,
+            "manual_moves": self.manual_moves,
+            "last_solve": self.last_solve_report,
+            "comparison": self.last_compare_report,
+        }
+        out_path = reports_dir / f"session_{ts}.json"
+        latest_path = reports_dir / "session_latest.json"
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2)
+        with open(latest_path, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2)
+        self.logger.info(f"Session report exported: {out_path}")
+
+    def import_state_from_file(self):
+        """Import state from exports/import_state.txt or exports/state_latest.json."""
+        imports_dir = project_root / "exports"
+        txt_path = imports_dir / "import_state.txt"
+        latest_path = imports_dir / "state_latest.json"
+        if txt_path.exists():
+            raw = txt_path.read_text(encoding="utf-8").strip()
+            if raw.startswith("{"):
+                data = json.loads(raw)
+                self._set_cube_from_facelet(data["facelets"])
+            elif len(raw.replace(" ", "")) == 54 and set(raw.replace(" ", "")).issubset(set("URFDLB")):
+                self._set_cube_from_facelet(raw.replace(" ", ""))
+            else:
+                self.cube = CubeState()
+                moves = raw.split()
+                for m in moves:
+                    apply_move(self.cube, m)
+            self.scramble_sequence = []
+            self.manual_moves = []
+            self.logger.info(f"Imported state from {txt_path}")
+            return
+        if latest_path.exists():
+            data = json.loads(latest_path.read_text(encoding="utf-8"))
+            self._set_cube_from_facelet(data["facelets"])
+            self.scramble_sequence = data.get("scramble_sequence", [])
+            self.manual_moves = data.get("manual_moves", [])
+            self.logger.info(f"Imported state from {latest_path}")
+            return
+        self.logger.info("No import source found (exports/import_state.txt or exports/state_latest.json)")
+
+    def run_benchmark(self, num_scrambles: int = 20):
+        """Run quick benchmark and store report for dashboard display."""
+        reverse_qtm, reverse_htm = [], []
+        two_qtm, two_htm = [], []
+        reverse_time_ms, two_time_ms = [], []
+
+        base_seed = self.scramble_seed if self.scramble_seed is not None else random.randint(1, 10_000_000)
+        two_available = self.two_phase_solver.is_available()
+
+        for i in range(num_scrambles):
+            cube = CubeState()
+            rng = random.Random(base_seed + i)
+            scramble = scramble_cube(cube, num_moves=25, rng=rng)
+            reverse_moves = [m[:-1] if m.endswith("'") else f"{m}'" for m in reversed(scramble)]
+
+            t0 = time.perf_counter()
+            reverse_metrics = self._compute_move_metrics(reverse_moves)
+            reverse_time_ms.append((time.perf_counter() - t0) * 1000.0)
+            reverse_qtm.append(reverse_metrics["qtm"])
+            reverse_htm.append(reverse_metrics["htm"])
+
+            if two_available:
+                t1 = time.perf_counter()
+                try:
+                    two_moves = self.two_phase_solver.solve(cube.copy())
+                    two_metrics = self._compute_move_metrics(two_moves)
+                    two_time_ms.append((time.perf_counter() - t1) * 1000.0)
+                    two_qtm.append(two_metrics["qtm"])
+                    two_htm.append(two_metrics["htm"])
+                except Exception:
+                    two_available = False
+
+        def avg(vals):
+            return (sum(vals) / len(vals)) if vals else None
+
+        self.benchmark_report = {
+            "n": num_scrambles,
+            "reverse": {"qtm": avg(reverse_qtm), "htm": avg(reverse_htm), "ms": avg(reverse_time_ms)},
+            "two_phase": {"qtm": avg(two_qtm), "htm": avg(two_htm), "ms": avg(two_time_ms)} if two_qtm else None,
+        }
+        self.logger.info(f"Benchmark completed on {num_scrambles} scrambles")
+
+    def _get_move_explanation(self, move: str) -> str:
+        """Human-readable explanation for a move token."""
+        face_map = {
+            "U": "Top layer",
+            "D": "Bottom layer",
+            "L": "Left layer",
+            "R": "Right layer",
+            "F": "Front layer",
+            "B": "Back layer",
+        }
+        if not move:
+            return ""
+        face = face_map.get(move[0], move[0])
+        direction = "clockwise"
+        if move.endswith("'"):
+            direction = "counter-clockwise"
+        elif move.endswith("2"):
+            direction = "180-degree turn"
+        return f"{face}: {direction}"
+
+    def jump_to_solution_index(self, idx: int):
+        """Jump cube to state after idx-th move in last solution timeline."""
+        if self.last_solution_start_cube is None or not self.last_solution_moves:
+            return
+        idx = max(-1, min(idx, len(self.last_solution_moves) - 1))
+        self.cancel_current_action()
+        self.cube = self.last_solution_start_cube.copy()
+        for m in self.last_solution_moves[: idx + 1]:
+            apply_move(self.cube, m)
+        # Branch from this state.
+        self.scramble_sequence = []
+        self.manual_moves = []
+        self.logger.info(f"Timeline jump to move {idx + 1}/{len(self.last_solution_moves)}")
 
     def _reset_interruption_state(self):
         """Reset pause/step state."""
@@ -729,7 +983,7 @@ class RubiksApp:
         self.cube = CubeState()
         
         # Apply random scramble
-        scramble_moves = scramble_cube(self.cube, num_moves=25)
+        scramble_moves = scramble_cube(self.cube, num_moves=25, rng=self._get_scramble_rng())
         self.scramble_sequence = scramble_moves.copy()
         self.manual_moves = []  # Reset manual moves
         
@@ -811,6 +1065,15 @@ class RubiksApp:
         # Generate solution by reversing all moves (scramble + manual)
         self.logger.info("=" * 60)
         self.logger.info("Starting auto-solver")
+        validity = self.validate_cube_state()
+        if not validity["ok"]:
+            self.logger.warning(f"Cannot solve invalid cube: {validity['reason']}")
+            self.solving = False
+            self.solve_button.state = "normal"
+            self.patterns_button.state = "normal"
+            self.solver_button.state = "normal"
+            self._reset_interruption_state()
+            return
 
         self.solution_moves = []
         reverse_moves = self._build_reverse_solution()
@@ -857,6 +1120,8 @@ class RubiksApp:
         self.active_solution_metrics = self._compute_move_metrics(self.solution_moves)
         self.last_compare_report = self._build_compare_report(reverse_moves, two_phase_moves)
         self._start_solve_timer()
+        self.last_solution_start_cube = self.cube.copy()
+        self.last_solution_moves = self.solution_moves.copy()
 
         self.logger.info(f"Solution generated: {len(self.solution_moves)} moves")
         self.logger.info(f"Solution sequence: {' '.join(self.solution_moves)}")
@@ -945,6 +1210,7 @@ class RubiksApp:
                     f"Metrics [{self.solver_name}]: HTM={active['htm']} "
                     f"QTM={qtm} Time={elapsed_s:.2f}s TPS={tps:.2f}"
                 )
+                self.export_session_report()
                 self.logger.info("=" * 60)
                 self.solving = False
                 self.solve_button.state = "normal"
@@ -966,6 +1232,7 @@ class RubiksApp:
         small_font = pygame.font.Font(None, 20)
         
         if self.compact_ui:
+            seed_label = "auto" if self.scramble_seed is None else str(self.scramble_seed)
             instructions = [
                 ("MODE:", COLORS['bookred']),
                 ("Speed (compact UI)", COLORS['warmstone']),
@@ -973,11 +1240,16 @@ class RubiksApp:
                 ("ALGO:", COLORS['bookred']),
                 (self.solver_name, COLORS['warmstone']),
                 ("", COLORS['softivory']),
+                ("SEED:", COLORS['bookred']),
+                (seed_label, COLORS['warmstone']),
+                ("", COLORS['softivory']),
                 ("SHORTCUTS:", COLORS['bookred']),
                 ("Space pause/resume", COLORS['warmstone']),
                 ("N step, Esc cancel", COLORS['warmstone']),
+                ("F9 benchmark, K seed", COLORS['warmstone']),
             ]
         else:
+            seed_label = "auto" if self.scramble_seed is None else str(self.scramble_seed)
             instructions = [
                 ("HOW TO USE:", COLORS['bookred']),
                 ("• Keys: U/D/R/L/F/B (rotations)", COLORS['warmstone']),
@@ -1001,6 +1273,14 @@ class RubiksApp:
                 ("• Profile: Toggle preset", COLORS['warmstone']),
                 ("• Pause/Step/Cancel: control queue", COLORS['warmstone']),
                 ("• View: Toggle display", COLORS['warmstone']),
+                ("", COLORS['softivory']),
+                ("DATA:", COLORS['bookred']),
+                (f"Seed mode: {seed_label}", COLORS['warmstone']),
+                ("• E: Export state", COLORS['warmstone']),
+                ("• I: Import state", COLORS['warmstone']),
+                ("• C: Validate state", COLORS['warmstone']),
+                ("• F9: Run benchmark", COLORS['warmstone']),
+                ("• K: Cycle seed", COLORS['warmstone']),
                 ("", COLORS['softivory']),
                 ("SHORTCUTS:", COLORS['bookred']),
                 ("• Space: Pause/Resume", COLORS['warmstone']),
@@ -1073,6 +1353,66 @@ class RubiksApp:
             else:
                 compare_text = f"Compare QTM Rev:{rev['qtm']} vs 2P:N/A"
             screen.blit(tiny_font.render(compare_text, True, COLORS['deepcharcoal']), (x + 8, line_y))
+
+        line_y += line_h
+        if self.last_validation:
+            val = self.last_validation
+            val_text = f"Validate: {'OK' if val['ok'] else 'INVALID'}"
+            screen.blit(tiny_font.render(val_text, True, COLORS['deepcharcoal']), (x + 8, line_y))
+            line_y += line_h
+
+        if self.benchmark_report:
+            br = self.benchmark_report
+            rev = br["reverse"]
+            if br["two_phase"]:
+                two = br["two_phase"]
+                bench_text = (
+                    f"Bench({br['n']}): RevQ {rev['qtm']:.1f} vs 2PQ {two['qtm']:.1f}"
+                )
+            else:
+                bench_text = f"Bench({br['n']}): RevQ {rev['qtm']:.1f} vs 2P N/A"
+            screen.blit(tiny_font.render(bench_text, True, COLORS['deepcharcoal']), (x + 8, line_y))
+
+    def draw_timeline_panel(self, screen):
+        """Draw clickable move timeline for the last solve."""
+        self.timeline_click_regions = []
+        if not self.last_solution_moves:
+            return
+        x = 250
+        y = self.height - 125
+        w = self.width - 420
+        h = 38
+        rect = pygame.Rect(x, y, max(100, w), h)
+        pygame.draw.rect(screen, COLORS['softivory'], rect)
+        pygame.draw.rect(screen, COLORS['deepcharcoal'], rect, 2)
+
+        tiny_font = pygame.font.Font(None, 18)
+        moves = self.last_solution_moves
+        slots = min(len(moves), 18)
+        if slots <= 0:
+            return
+        slot_w = max(24, (rect.width - 10) // slots)
+        step = max(1, len(moves) // slots)
+        shown = [i for i in range(0, len(moves), step)][:slots]
+
+        for pos, idx in enumerate(shown):
+            mx = rect.x + 6 + pos * slot_w
+            mrect = pygame.Rect(mx, rect.y + 5, slot_w - 4, rect.height - 10)
+            color = COLORS['canvasgray']
+            if self.current_move_index > idx:
+                color = COLORS['warmstone']
+            pygame.draw.rect(screen, color, mrect)
+            pygame.draw.rect(screen, COLORS['deepcharcoal'], mrect, 1)
+            token = moves[idx]
+            txt = tiny_font.render(token, True, COLORS['deepcharcoal'])
+            screen.blit(txt, (mrect.x + 3, mrect.y + 5))
+            self.timeline_click_regions.append((idx, mrect))
+
+        if self.show_explanations and self.solving and self.current_move_index < len(self.solution_moves):
+            current = self.solution_moves[self.current_move_index]
+            explain = self._get_move_explanation(current)
+            expl_text = tiny_font.render(f"Now: {current} - {explain}", True, COLORS['bookred'])
+            screen.blit(expl_text, (rect.x, rect.y - 18))
     
     def draw_log_display(self, screen):
         """Draw recent log entries at the bottom of the screen."""
@@ -1154,6 +1494,7 @@ class RubiksApp:
         # Draw left-side instructions
         self.draw_instructions(self.screen)
         self.draw_metrics_panel(self.screen)
+        self.draw_timeline_panel(self.screen)
         
         # Draw UI buttons
         self.solve_button.draw(self.screen)

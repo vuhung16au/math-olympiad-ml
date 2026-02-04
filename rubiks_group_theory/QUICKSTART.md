@@ -56,6 +56,10 @@ For more installation options, visit: https://github.com/astral-sh/uv
    ```bash
    uv pip install -e ".[test]"
    ```
+   Run tests:
+   ```bash
+   python3 -m pytest -q
+   ```
 
 ## Running the Application
 

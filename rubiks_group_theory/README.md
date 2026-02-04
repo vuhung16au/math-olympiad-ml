@@ -18,6 +18,8 @@ This project combines abstract mathematics (Group Theory), solving algorithms, a
 - **Queue Controls**: Pause/Resume, Step, and Cancel (buttons + shortcuts: `Space`, `N`, `Esc`)
 - **Profile Presets**: Teaching mode (slower, explanatory) and Speed mode (faster, compact UI)
 - **Move Metrics Panel**: HTM, QTM, solve time, TPS, and Reverse vs Two-Phase comparison
+- **State Tools**: Export/import cube state, deterministic scramble seeds, and state validation checks
+- **Benchmark Mode**: Compare algorithm quality over multiple scrambles
 - **Custom Color Palette**: Beautiful, consistent color scheme
 - **16:9 Resolution Support**: Fullscreen mode with aspect ratio preservation
 
