@@ -249,9 +249,8 @@ class RubiksApp:
         self.animating = False
         self.animation_move_name = None
         self.animation_progress = 0.0
-        self.animation_speed = 0.05 * (60.0 / 60.0) # Base speed adjusted for frame rate
-        # Make animation slower as requested ("so human eyes can see")
-        self.animation_speed = 0.01 # 100 frames per move = ~1.66s at 60fps
+        # Smooth move animation timing (milliseconds per move).
+        self.animation_duration_ms = 220
         
         # Overlay state
         self.overlay_text = None
@@ -326,11 +325,11 @@ class RubiksApp:
                 
                 # Speed control
                 elif event.key == pygame.K_LEFTBRACKET: # [ Slower
-                    self.animation_speed = max(0.005, self.animation_speed / 1.5)
-                    self.logger.info(f"Speed decreased to {self.animation_speed:.4f}")
+                    self.animation_duration_ms = min(1200, int(self.animation_duration_ms * 1.25))
+                    self.logger.info(f"Speed decreased: {self.animation_duration_ms} ms/move")
                 elif event.key == pygame.K_RIGHTBRACKET: # ] Faster
-                    self.animation_speed = min(0.5, self.animation_speed * 1.5)
-                    self.logger.info(f"Speed increased to {self.animation_speed:.4f}")
+                    self.animation_duration_ms = max(120, int(self.animation_duration_ms / 1.25))
+                    self.logger.info(f"Speed increased: {self.animation_duration_ms} ms/move")
                 
                 # Visualization mode switch
                 elif event.key == pygame.K_v:
@@ -598,12 +597,15 @@ class RubiksApp:
         self.overlay_text = move_name
         self.overlay_timer = self.overlay_duration
 
-    def update_animation(self):
+    def update_animation(self, dt: int):
         """Update animation progress."""
         if not self.animating:
             return
 
-        self.animation_progress += self.animation_speed
+        if self.animation_duration_ms <= 0:
+            self.animation_progress = 1.0
+        else:
+            self.animation_progress += dt / self.animation_duration_ms
         
         # Finish animation
         if self.animation_progress >= 1.0:
@@ -769,7 +771,7 @@ class RubiksApp:
         
         # Draw 3D cube on right side when in graph view
         if self.current_renderer == self.graph_renderer:
-            self.cube_3d_renderer.draw(self.screen, self.cube)
+            self.cube_3d_renderer.draw(self.screen, self.cube, anim_state)
         
         # Draw left-side instructions
         self.draw_instructions(self.screen)
@@ -842,7 +844,7 @@ class RubiksApp:
             running = self.handle_events()
             
             if self.animating:
-                self.update_animation()
+                self.update_animation(dt)
             
             if self.solving:
                 self.update_solver(dt)
