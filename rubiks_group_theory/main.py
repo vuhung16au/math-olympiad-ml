@@ -245,6 +245,12 @@ class RubiksApp:
         # Make animation slower as requested ("so human eyes can see")
         self.animation_speed = 0.01 # 100 frames per move = ~1.66s at 60fps
         
+        # Overlay state
+        self.overlay_text = None
+        self.overlay_timer = 0
+        self.overlay_duration = 1000 # ms to show overlay
+        self.overlay_font = pygame.font.Font(None, 120)
+        
         # Solver
         self.solver = BeginnerSolver()
         self.solving = False
@@ -266,6 +272,9 @@ class RubiksApp:
         self.view_button = SolveButton(self.width - 150, 120, 120, 40)
         self.view_button.set_font(self.font)
         self.view_button.text = "View"  # Will toggle between "View" and "Graph"
+        self.patterns_button = SolveButton(self.width - 150, 170, 120, 40)
+        self.patterns_button.set_font(self.font)
+        self.patterns_button.text = "Pattern"
         
         # Clock
         self.clock = pygame.time.Clock()
@@ -304,6 +313,14 @@ class RubiksApp:
                 if event.key == pygame.K_F11:
                     self.toggle_fullscreen()
                 
+                # Speed control
+                elif event.key == pygame.K_LEFTBRACKET: # [ Slower
+                    self.animation_speed = max(0.005, self.animation_speed / 1.5)
+                    self.logger.info(f"Speed decreased to {self.animation_speed:.4f}")
+                elif event.key == pygame.K_RIGHTBRACKET: # ] Faster
+                    self.animation_speed = min(0.5, self.animation_speed * 1.5)
+                    self.logger.info(f"Speed increased to {self.animation_speed:.4f}")
+                
                 # Visualization mode switch
                 elif event.key == pygame.K_v:
                     self.toggle_view()
@@ -332,10 +349,13 @@ class RubiksApp:
                 self.scramble_cube()
             elif self.view_button.update(mouse_pos, mouse_clicked):
                 self.toggle_view()
+            elif self.patterns_button.update(mouse_pos, mouse_clicked):
+                self.apply_next_pattern()
         else:
             # Disable buttons while solving
             self.scramble_button.state = "disabled"
             self.view_button.state = "disabled"
+            self.patterns_button.state = "disabled"
         
         return True
     
@@ -356,6 +376,7 @@ class RubiksApp:
         self.solve_button.rect.x = self.width - 150
         self.scramble_button.rect.x = self.width - 150
         self.view_button.rect.x = self.width - 150
+        self.patterns_button.rect.x = self.width - 150
     
     def toggle_view(self):
         """Toggle between flat and graph visualization modes."""
@@ -392,7 +413,52 @@ class RubiksApp:
         self.logger.info("Cube scrambled with 25 random moves")
         self.logger.info(f"Scramble sequence: {' '.join(scramble_moves)}")
         self.logger.info("=" * 60)
-    
+
+    def apply_next_pattern(self):
+        """Apply a preset pattern."""
+        if self.solving:
+            return
+            
+        # Pattern cycle: Checkerboard -> Superflip -> Solved (Scramble to Solved)
+        # Actually simplest is just to apply Checkerboard.
+        # Let's verify start state.
+        
+        # Checkerboard algorithm: R2 L2 U2 D2 F2 B2
+        # Apply instantly? Or animate?
+        # User implies "Presets".
+        # Let's just solve first (reset), then apply pattern.
+        
+        self.cube = CubeState() # Reset to solved
+        
+        # Use a simple toggle state or random choice?
+        # Let's cycle.
+        if not hasattr(self, '_pattern_idx'):
+            self._pattern_idx = 0
+        
+        patterns = [
+            ("Checkerboard", ["R", "R", "L", "L", "U", "U", "D", "D", "F", "F", "B", "B"]),
+            ("Wire", ["R", "L", "F", "B", "U", "D", "R", "L", "F", "B", "U", "D"]), 
+             # Superflip is long, maybe skip for now or find shorter
+            ("Anaconda", ["L", "U", "B'", "U'", "R", "L'", "B", "R'", "F", "B'", "D", "R", "D'", "F'"]),
+        ]
+        
+        name, moves = patterns[self._pattern_idx]
+        self._pattern_idx = (self._pattern_idx + 1) % len(patterns)
+        
+        self.logger.info(f"Applying pattern: {name}")
+        
+        # Animate the pattern moves
+        # We can reuse the solver logic!
+        self.solution_moves = moves
+        self.current_move_index = 0
+        self.solution_timer = 0
+        self.solving = True # This enables the update loop to process moves
+        
+        # Disable buttons
+        self.solve_button.state = "disabled"
+        self.scramble_button.state = "disabled"
+        self.patterns_button.state = "disabled"
+
     def start_solving(self):
         """Start the solving process."""
         if self.solving:
@@ -400,6 +466,7 @@ class RubiksApp:
         
         self.solving = True
         self.solve_button.state = "disabled"
+        self.patterns_button.state = "disabled"
         
         # Generate solution by reversing all moves (scramble + manual)
         self.logger.info("=" * 60)
@@ -434,6 +501,10 @@ class RubiksApp:
         self.animating = True
         self.animation_move_name = move_name
         self.animation_progress = 0.0
+        
+        # Show overlay
+        self.overlay_text = move_name
+        self.overlay_timer = self.overlay_duration
 
     def update_animation(self):
         """Update animation progress."""
@@ -485,6 +556,7 @@ class RubiksApp:
                 self.solve_button.state = "normal"
                 self.scramble_button.state = "normal"
                 self.view_button.state = "normal"
+                self.patterns_button.state = "normal"
                 self.solution_moves = []
                 self.current_move_index = 0
     
@@ -510,7 +582,12 @@ class RubiksApp:
             ("BUTTONS:", COLORS['bookred']),
             ("• Solve: Auto-solve cube", COLORS['warmstone']),
             ("• Scramble: Randomize", COLORS['warmstone']),
+            ("• Pattern: Cool designs", COLORS['warmstone']),
             ("• View: Toggle display", COLORS['warmstone']),
+            ("", COLORS['softivory']),
+            ("SPEED:", COLORS['bookred']),
+            ("• [ : Slower", COLORS['warmstone']),
+            ("• ] : Faster", COLORS['warmstone']),
         ]
         
         y = y_start
@@ -609,6 +686,7 @@ class RubiksApp:
         self.solve_button.draw(self.screen)
         self.scramble_button.draw(self.screen)
         self.view_button.draw(self.screen)
+        self.patterns_button.draw(self.screen)
         
         # Draw log display at bottom
         self.draw_log_display(self.screen)
@@ -624,9 +702,26 @@ class RubiksApp:
         # Draw solved indicator
         if self.cube.is_solved():
             solved_text = "SOLVED!"
-            text_surface = self.font.render(solved_text, True, COLORS['bookred'])
             text_rect = text_surface.get_rect(center=(self.width // 2, 50))
             self.screen.blit(text_surface, text_rect)
+            
+        # Draw move overlay
+        if self.overlay_text and self.overlay_timer > 0:
+            # Fade out calculation
+            alpha = max(0, min(255, int(255 * (self.overlay_timer / self.overlay_duration))))
+            if alpha > 0:
+                text_surface = self.overlay_font.render(self.overlay_text, True, COLORS['softivory'])
+                text_surface.set_alpha(alpha)
+                text_rect = text_surface.get_rect(center=(self.width // 2, self.height // 2))
+                # Create a shadow/outline for readability
+                shadow_surface = self.overlay_font.render(self.overlay_text, True, COLORS['bookblack'])
+                shadow_surface.set_alpha(alpha)
+                shadow_rect = shadow_surface.get_rect(center=(self.width // 2 + 2, self.height // 2 + 2))
+                
+                self.screen.blit(shadow_surface, shadow_rect)
+                self.screen.blit(text_surface, text_rect)
+                
+            self.overlay_timer -= 16 # Approx 1 frame at 60fps
         
         pygame.display.flip()
     
