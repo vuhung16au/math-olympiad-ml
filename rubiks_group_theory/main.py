@@ -221,6 +221,14 @@ class RubiksApp:
         # Track manual moves made by user
         self.manual_moves = []
         
+        # Undo/Redo Stacks
+        self.move_history = [] # List of moves, e.g. ['U', "R'"]
+        self.redo_stack = []   # List of moves to redo
+        
+        # 3D Interaction
+        self.rotating_3d = False
+        self.last_mouse_pos = (0, 0)
+        
         # Renderers
         self.flat_renderer = FlatRenderer(self.width, self.height)
         self.graph_renderer = GraphRenderer(self.width, self.height)
@@ -269,6 +277,9 @@ class RubiksApp:
         self.scramble_button = SolveButton(self.width - 150, 70, 120, 40)
         self.scramble_button.set_font(self.font)
         self.scramble_button.text = "Scramble"
+        self.reset_view_button = SolveButton(self.width - 150, 220, 120, 40)
+        self.reset_view_button.set_font(self.small_font)
+        self.reset_view_button.text = "Reset 3D"
         self.view_button = SolveButton(self.width - 150, 120, 120, 40)
         self.view_button.set_font(self.font)
         self.view_button.text = "View"  # Will toggle between "View" and "Graph"
@@ -339,10 +350,54 @@ class RubiksApp:
                     # Start animation instead of applying immediately
                     self.start_animation(move)
                     self.manual_moves.append(move)
+                    self.move_history.append(move)
+                    self.redo_stack.clear() # Clear redo on new move
                     self.logger.info(f"Manual move: {move}")
+                
+                # Undo/Redo
+                elif event.key == pygame.K_z and (event.mod & pygame.KMOD_CTRL or event.mod & pygame.KMOD_META):
+                    if event.mod & pygame.KMOD_SHIFT: # Redo (Ctrl+Shift+Z)
+                        self.input_redo()
+                    else: # Undo (Ctrl+Z)
+                        self.input_undo()
+                elif event.key == pygame.K_y and (event.mod & pygame.KMOD_CTRL or event.mod & pygame.KMOD_META): # Redo (Ctrl+Y)
+                    self.input_redo()
+            
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1: # Left click
+                    # Check 3D interaction (if in graph view or valid area)
+                    # Let's say right half of screen is valid for 3D rotation if in Graph Mode
+                    # Or anywhere not on buttons.
+                    if self.current_renderer == self.graph_renderer:
+                        # Simple check: clicked on right side? or anywhere?
+                        # Let's allow anywhere for now as long as not buttons
+                        self.rotating_3d = True
+                        self.last_mouse_pos = mouse_pos
+            
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    self.rotating_3d = False
+            
+            elif event.type == pygame.MOUSEMOTION:
+                if self.rotating_3d and self.current_renderer == self.graph_renderer:
+                    dx = mouse_pos[0] - self.last_mouse_pos[0]
+                    dy = mouse_pos[1] - self.last_mouse_pos[1]
+                    
+                    # Update rotation
+                    # Sensitivity factor
+                    sens = 0.5
+                    new_ry = self.cube_3d_renderer.rot_y + dx * sens
+                    new_rx = self.cube_3d_renderer.rot_x + dy * sens
+                    # Constrain pitch to avoid flipping
+                    new_rx = max(-90, min(90, new_rx))
+                    
+                    self.cube_3d_renderer.set_rotation(new_rx, new_ry)
+                    self.last_mouse_pos = mouse_pos
         
         # Check button clicks
         if not self.solving:
+            # Re-fetch mouse state because we might have handled events
+            # But the update() methed takes mouse_pos
             if self.solve_button.update(mouse_pos, mouse_clicked):
                 self.start_solving()
             elif self.scramble_button.update(mouse_pos, mouse_clicked):
@@ -351,6 +406,8 @@ class RubiksApp:
                 self.toggle_view()
             elif self.patterns_button.update(mouse_pos, mouse_clicked):
                 self.apply_next_pattern()
+            elif self.reset_view_button.update(mouse_pos, mouse_clicked):
+                self.cube_3d_renderer.set_rotation(30, -45)
         else:
             # Disable buttons while solving
             self.scramble_button.state = "disabled"
@@ -375,8 +432,43 @@ class RubiksApp:
         self.cube_3d_renderer.set_screen_size(self.width, self.height)
         self.solve_button.rect.x = self.width - 150
         self.scramble_button.rect.x = self.width - 150
+        self.solve_button.rect.x = self.width - 150
+        self.scramble_button.rect.x = self.width - 150
         self.view_button.rect.x = self.width - 150
         self.patterns_button.rect.x = self.width - 150
+        self.reset_view_button.rect.x = self.width - 150
+    
+    def input_undo(self):
+        """Undo last move."""
+        if not self.move_history or self.animating:
+            return
+            
+        last_move = self.move_history.pop()
+        
+        # Inverse move
+        invert_map = {
+            'U': "U'", "U'": 'U', 'D': "D'", "D'": 'D',
+            'R': "R'", "R'": 'R', 'L': "L'", "L'": 'L',
+            'F': "F'", "F'": 'F', 'B': "B'", "B'": 'B'
+        }
+        inv_move = invert_map[last_move]
+        
+        # Animate
+        self.start_animation(inv_move)
+        # We don't append this undo-action to move_history
+        # But we push the ORIGINAL move to redo_stack
+        self.redo_stack.append(last_move)
+        self.logger.info(f"Undo: {last_move} -> {inv_move}")
+
+    def input_redo(self):
+        """Redo last undone move."""
+        if not self.redo_stack or self.animating:
+            return
+            
+        move = self.redo_stack.pop()
+        self.start_animation(move)
+        self.move_history.append(move)
+        self.logger.info(f"Redo: {move}")
     
     def toggle_view(self):
         """Toggle between flat and graph visualization modes."""
@@ -687,12 +779,26 @@ class RubiksApp:
         self.scramble_button.draw(self.screen)
         self.view_button.draw(self.screen)
         self.patterns_button.draw(self.screen)
+        if self.current_renderer == self.graph_renderer:
+            self.reset_view_button.draw(self.screen)
         
         # Draw log display at bottom
         self.draw_log_display(self.screen)
         
         # Draw progress (above log area)
         if self.solving and self.solution_moves:
+            # Determine current phase
+            if hasattr(self.solver, 'phases'):
+                current_phase = "Solving..."
+                # Find the last phase that starts before or at current_move_index
+                for start_idx, desc in self.solver.phases:
+                    if self.current_move_index >= start_idx:
+                        current_phase = desc
+                
+                # Draw phase description
+                phase_surface = self.font.render(current_phase, True, COLORS['bookred'])
+                self.screen.blit(phase_surface, (20, self.height - 130))
+
             # Fix: show current_move_index (0-based) + 1, but cap at total moves
             step_num = min(self.current_move_index + 1, len(self.solution_moves))
             progress_text = f"Solving step {step_num}/{len(self.solution_moves)}"
@@ -702,6 +808,7 @@ class RubiksApp:
         # Draw solved indicator
         if self.cube.is_solved():
             solved_text = "SOLVED!"
+            text_surface = self.font.render(solved_text, True, COLORS['bookred'])
             text_rect = text_surface.get_rect(center=(self.width // 2, 50))
             self.screen.blit(text_surface, text_rect)
             

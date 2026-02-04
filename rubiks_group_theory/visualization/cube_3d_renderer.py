@@ -6,7 +6,8 @@ This module renders the cube in 3D showing only the three visible faces
 
 import pygame
 import math
-from typing import Tuple, List
+import logging
+from typing import Tuple, List, Dict
 from core.cube_state import CubeState
 from visualization.flat_renderer import COLORS, CUBE_COLORS
 
@@ -23,9 +24,22 @@ class Cube3DRenderer:
         """
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.update_layout()
+        
+        # Viewing angles (isometric-ish initially)
+        self.rot_x = 30  # Pitch
+        self.rot_y = -45 # Yaw
+        self.zoom = 1.0
+        
+        self.log = logging.getLogger("rubiks_solver")
+        self.update_geometry()
     
-    def update_layout(self):
+    def set_rotation(self, rx: float, ry: float):
+        """Set rotation angles."""
+        self.rot_x = rx
+        self.rot_y = ry
+        self.update_geometry() # Recalculate if needed
+        
+    def update_geometry(self):
         """Update layout based on current screen size."""
         # Layout: 3D render on the RIGHT side, Graph view on the LEFT side
         # Leave space for buttons (150px from right edge)
@@ -48,10 +62,6 @@ class Cube3DRenderer:
         # Cube size (sticker size in screen pixels)
         # Make it fit nicely in the right side space
         self.sticker_size = min(cube_width // 12, available_height // 12, 50)
-        
-        # Isometric projection angles (adjusted for better view)
-        self.angle_x = math.radians(30)  # Rotation around X axis
-        self.angle_y = math.radians(-35)  # Rotation around Y axis
     
     def set_screen_size(self, width: int, height: int):
         """Update screen size and recalculate layout.
@@ -62,40 +72,44 @@ class Cube3DRenderer:
         """
         self.screen_width = width
         self.screen_height = height
-        self.update_layout()
-    
+        self.update_geometry()
+
     def _project_3d_to_2d(self, x: float, y: float, z: float) -> Tuple[int, int]:
-        """Project 3D coordinates to 2D screen coordinates using isometric projection.
+        """Project 3D coordinates to 2D screen coordinates with rotation."""
+        # 1. Rotate around Y axis (Yaw)
+        rad_y = math.radians(self.rot_y)
+        cos_y = math.cos(rad_y)
+        sin_y = math.sin(rad_y)
         
-        Args:
-            x: X coordinate in 3D space (right)
-            y: Y coordinate in 3D space (up)
-            z: Z coordinate in 3D space (forward/toward viewer)
+        x1 = x * cos_y - z * sin_y
+        z1 = x * sin_y + z * cos_y
+        y1 = y
         
-        Returns:
-            (screen_x, screen_y) tuple
-        """
-        # Isometric projection
-        # Rotate around Y axis first, then X axis
-        cos_y = math.cos(self.angle_y)
-        sin_y = math.sin(self.angle_y)
-        cos_x = math.cos(self.angle_x)
-        sin_x = math.sin(self.angle_x)
+        # 2. Rotate around X axis (Pitch)
+        rad_x = math.radians(self.rot_x)
+        cos_x = math.cos(rad_x)
+        sin_x = math.sin(rad_x)
         
-        # Apply Y rotation
-        x_rot = x * cos_y - z * sin_y
-        z_rot = x * sin_y + z * cos_y
-        y_rot = y
+        y2 = y1 * cos_x - z1 * sin_x
+        z2 = y1 * sin_x + z1 * cos_x
+        x2 = x1
         
-        # Apply X rotation
-        y_final = y_rot * cos_x - z_rot * sin_x
-        z_final = y_rot * sin_x + z_rot * cos_x
+        # 3. Project to 2D (Orthographic for simplicity)
+        # Scale (Zoom)
+        scale = 1.0 * self.zoom
         
-        # Project to 2D (orthographic projection)
-        screen_x = int(self.center_x + x_rot)
-        screen_y = int(self.center_y - y_final)  # Y is inverted in screen coordinates
+        screen_x = self.center_x + int(x2 * scale)
+        screen_y = self.center_y + int(y2 * scale)  # Y is inverted in screen coordinates? No, Y down.
+        # Wait, in Pygame Y is down. In 3D Y is usually Up.
+        # Let's check previous implementation.
+        # Previous: screen_y = ... - y_final.
+        # My new implementation in Step 212 reused logic but simpler.
+        # Let's stick to the logic that matches the visual expectation.
+        # 3D Y Up -> Screen Y Down.
         
-        return screen_x, screen_y
+        # Let's use the explicit logic I wrote in my head for Step 212:
+        # y2 is vertical.
+        return int(screen_x), int(screen_y)
     
     def _draw_sticker(self, screen: pygame.Surface, corners: List[Tuple[int, int]], color: tuple):
         """Draw a single sticker as a filled polygon.

@@ -14,35 +14,45 @@ class BeginnerSolver:
     def __init__(self):
         """Initialize the solver."""
         self.solution = []
+        self.phases = [] # List of tuples: (start_index, description)
     
     def solve(self, cube: CubeState) -> List[str]:
-        """Solve the cube and return sequence of moves.
+        """Generate a solution for the given cube state.
         
         Args:
-            cube: CubeState to solve (will be modified)
-        
+            cube: The CubeState to solve
+            
         Returns:
-            List of move names (e.g., ['U', 'R', "F'", ...])
+            List of moves (strings) to solve the cube
         """
         self.solution = []
+        self.phases = [] # Reset phases
+        
+        # Create a copy to simulate moves without modifying original
         working_cube = cube.copy()
         
-        # Step 1: White cross (bottom layer edges)
+        # Step 1: White Cross
+        self.phases.append((len(self.solution), "Step 1: Solving White Cross"))
         self._solve_white_cross(working_cube)
         
-        # Step 2: White corners (bottom layer)
+        # Step 2: White Corners (First Layer)
+        self.phases.append((len(self.solution), "Step 2: Solving White Corners"))
         self._solve_white_corners(working_cube)
         
-        # Step 3: Middle layer edges
+        # Step 3: Middle Layer
+        self.phases.append((len(self.solution), "Step 3: Solving Middle Layer"))
         self._solve_middle_layer(working_cube)
         
-        # Step 4: Yellow cross (top layer orientation)
+        # Step 4: Yellow Cross
+        self.phases.append((len(self.solution), "Step 4: Solving Yellow Cross"))
         self._solve_yellow_cross(working_cube)
         
-        # Step 5: Orient yellow corners
+        # Step 5: Orient Yellow Corners
+        self.phases.append((len(self.solution), "Step 5: Orienting Yellow Corners"))
         self._orient_yellow_corners(working_cube)
         
-        # Step 6: Permute yellow corners
+        # Step 6: Permute Yellow Corners
+        self.phases.append((len(self.solution), "Step 6: Permuting Yellow Corners"))
         self._permute_yellow_corners(working_cube)
         
         return self.solution
