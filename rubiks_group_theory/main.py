@@ -490,19 +490,19 @@ class RubiksApp:
         
         instructions = [
             ("HOW TO USE:", COLORS['bookred']),
-            ("• Keys: U/D/R/L/F/B (rotations)", COLORS['softivory']),
-            ("• Shift+Key: counter-clockwise", COLORS['softivory']),
-            ("• F11: Fullscreen", COLORS['softivory']),
-            ("• V: Toggle view", COLORS['softivory']),
+            ("• Keys: U/D/R/L/F/B (rotations)", COLORS['warmstone']),
+            ("• Shift+Key: counter-clockwise", COLORS['warmstone']),
+            ("• F11: Fullscreen", COLORS['warmstone']),
+            ("• V: Toggle view", COLORS['warmstone']),
             ("", COLORS['softivory']),
             ("ALGORITHM:", COLORS['bookred']),
             ("Beginner's Method", COLORS['warmstone']),
             ("(Layer-by-layer)", COLORS['warmstone']),
             ("", COLORS['softivory']),
             ("BUTTONS:", COLORS['bookred']),
-            ("• Solve: Auto-solve cube", COLORS['softivory']),
-            ("• Scramble: Randomize", COLORS['softivory']),
-            ("• View: Toggle display", COLORS['softivory']),
+            ("• Solve: Auto-solve cube", COLORS['warmstone']),
+            ("• Scramble: Randomize", COLORS['warmstone']),
+            ("• View: Toggle display", COLORS['warmstone']),
         ]
         
         y = y_start
@@ -569,7 +569,8 @@ class RubiksApp:
     def draw(self):
         """Draw everything."""
         # Clear screen
-        self.screen.fill(COLORS['bookblack'])
+        # Keep canvas distinct from white stickers for better contrast.
+        self.screen.fill(COLORS['canvasgray'])
         
         # Draw cube (centered, leaving space for UI)
         self.current_renderer.draw(self.screen, self.cube)

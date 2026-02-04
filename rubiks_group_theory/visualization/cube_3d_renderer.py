@@ -1,11 +1,12 @@
 """3D renderer for Rubik's Cube - isometric/perspective visualization.
 
-This module renders the cube in 3D using isometric projection.
+This module renders the cube in 3D showing only the three visible faces
+(front, left, top) like a real Rubik's Cube.
 """
 
 import pygame
 import math
-from typing import Tuple
+from typing import Tuple, List
 from core.cube_state import CubeState
 from visualization.flat_renderer import COLORS, CUBE_COLORS
 
@@ -44,13 +45,13 @@ class Cube3DRenderer:
         self.center_x = cube_left + cube_width // 2
         self.center_y = self.screen_height // 2  # Vertical center
         
-        # Cube size (in 3D units, before projection)
+        # Cube size (sticker size in screen pixels)
         # Make it fit nicely in the right side space
-        self.cube_size = min(cube_width // 2, available_height // 3)
+        self.sticker_size = min(cube_width // 12, available_height // 12, 50)
         
-        # Isometric projection angles
+        # Isometric projection angles (adjusted for better view)
         self.angle_x = math.radians(30)  # Rotation around X axis
-        self.angle_y = math.radians(45)  # Rotation around Y axis
+        self.angle_y = math.radians(-35)  # Rotation around Y axis
     
     def set_screen_size(self, width: int, height: int):
         """Update screen size and recalculate layout.
@@ -67,9 +68,9 @@ class Cube3DRenderer:
         """Project 3D coordinates to 2D screen coordinates using isometric projection.
         
         Args:
-            x: X coordinate in 3D space
+            x: X coordinate in 3D space (right)
             y: Y coordinate in 3D space (up)
-            z: Z coordinate in 3D space (depth)
+            z: Z coordinate in 3D space (forward/toward viewer)
         
         Returns:
             (screen_x, screen_y) tuple
@@ -96,135 +97,122 @@ class Cube3DRenderer:
         
         return screen_x, screen_y
     
-    def _get_face_vertices(self, face_name: str) -> list:
-        """Get 3D vertices for a cube face.
+    def _draw_sticker(self, screen: pygame.Surface, corners: List[Tuple[int, int]], color: tuple):
+        """Draw a single sticker as a filled polygon.
         
         Args:
-            face_name: One of 'top', 'bottom', 'front', 'back', 'left', 'right'
-        
-        Returns:
-            List of 4 (x, y, z) tuples representing face corners
+            screen: Pygame surface to draw on
+            corners: List of (x, y) screen coordinates for the 4 corners
+            color: RGB color tuple
         """
-        s = self.cube_size / 2  # Half cube size
-        
-        # Define cube vertices in 3D space
-        # Cube centered at origin, with size from -s to +s
-        faces_3d = {
-            'front': [  # Z = +s
-                (-s, -s, s), (s, -s, s), (s, s, s), (-s, s, s)
-            ],
-            'back': [  # Z = -s
-                (s, -s, -s), (-s, -s, -s), (-s, s, -s), (s, s, -s)
-            ],
-            'right': [  # X = +s
-                (s, -s, s), (s, -s, -s), (s, s, -s), (s, s, s)
-            ],
-            'left': [  # X = -s
-                (-s, -s, -s), (-s, -s, s), (-s, s, s), (-s, s, -s)
-            ],
-            'top': [  # Y = +s
-                (-s, s, s), (s, s, s), (s, s, -s), (-s, s, -s)
-            ],
-            'bottom': [  # Y = -s
-                (-s, -s, -s), (s, -s, -s), (s, -s, s), (-s, -s, s)
-            ],
-        }
-        
-        return faces_3d.get(face_name, [])
+        # Draw filled polygon
+        pygame.draw.polygon(screen, color, corners)
+        # Draw black border
+        pygame.draw.polygon(screen, COLORS['deepcharcoal'], corners, 2)
     
-    def _get_sticker_3d_pos(self, face_name: str, row: int, col: int) -> Tuple[float, float, float]:
-        """Get 3D position of a sticker within a face.
+    def _draw_face_stickers(self, screen: pygame.Surface, face_name: str, face_colors: List[List[str]]):
+        """Draw all stickers on a given face.
         
         Args:
-            face_name: Face name
-            row: Row within face (0-2)
-            col: Column within face (0-2)
+            screen: Pygame surface to draw on
+            face_name: 'top', 'front', or 'left'
+            face_colors: 3x3 array of color characters
+        """
+        s = self.sticker_size
+        gap = s * 0.05  # Small gap between stickers
+        
+        for row in range(3):
+            for col in range(3):
+                color_char = face_colors[row][col]
+                color = CUBE_COLORS.get(color_char, COLORS['bookblack'])
+                
+                # Calculate sticker position in 3D
+                # Each sticker is a small square on the face
+                corners_3d = self._get_sticker_corners_3d(face_name, row, col, s, gap)
+                
+                # Project to 2D
+                corners_2d = [self._project_3d_to_2d(x, y, z) for x, y, z in corners_3d]
+                
+                # Draw the sticker
+                self._draw_sticker(screen, corners_2d, color)
+    
+    def _get_sticker_corners_3d(self, face_name: str, row: int, col: int, 
+                                 sticker_size: float, gap: float) -> List[Tuple[float, float, float]]:
+        """Get 3D coordinates of the 4 corners of a sticker.
+        
+        Args:
+            face_name: 'top', 'front', or 'left'
+            row: Row index (0-2)
+            col: Column index (0-2)
+            sticker_size: Size of one sticker
+            gap: Gap between stickers
         
         Returns:
-            (x, y, z) tuple in 3D space
+            List of 4 (x, y, z) tuples representing corners
         """
-        s = self.cube_size / 2
-        sticker_size = self.cube_size / 3
-        # Position within face (from -s+sticker_size/2 to s-sticker_size/2)
-        # Map col (0-2) to position (-1, 0, 1) in normalized coordinates
-        local_x_norm = (col - 1) * (2/3)  # -2/3, 0, 2/3
-        local_y_norm = (1 - row) * (2/3)  # 2/3, 0, -2/3 (invert row)
+        s = sticker_size
+        g = gap
         
-        # Scale to actual size
-        local_x = local_x_norm * s
-        local_y = local_y_norm * s
+        # Calculate position within the face
+        # Face is 3x3 stickers, centered at origin
+        # Map col/row to position
+        x_offset = (col - 1) * s  # -s, 0, s
+        y_offset = (1 - row) * s  # s, 0, -s (invert row for top-to-bottom)
         
-        # Map to actual 3D position based on face
-        # Cube faces are at positions: x=±s, y=±s, z=±s
-        if face_name == 'front':  # z = +s
-            return (local_x, local_y, s)
-        elif face_name == 'back':  # z = -s
-            return (-local_x, local_y, -s)
-        elif face_name == 'right':  # x = +s
-            return (s, local_y, -local_x)
-        elif face_name == 'left':  # x = -s
-            return (-s, local_y, local_x)
-        elif face_name == 'top':  # y = +s
-            return (local_x, s, -local_y)
-        elif face_name == 'bottom':  # y = -s
-            return (local_x, -s, local_y)
+        # Sticker corners (local to face, before positioning)
+        half = (s - g) / 2
+        local_corners = [
+            (x_offset - half, y_offset + half),  # Top-left
+            (x_offset + half, y_offset + half),  # Top-right
+            (x_offset + half, y_offset - half),  # Bottom-right
+            (x_offset - half, y_offset - half),  # Bottom-left
+        ]
         
-        return (0, 0, 0)
+        # Position the cube so that its center is at origin
+        # Each face is at distance 1.5*s from center
+        face_offset = 1.5 * s
+        
+        corners_3d = []
+        if face_name == 'front':
+            # Front face: z = +face_offset, x varies, y varies
+            for lx, ly in local_corners:
+                corners_3d.append((lx, ly, face_offset))
+        elif face_name == 'left':
+            # Left face: x = -face_offset, y varies, z varies
+            # Flip local x so face orientation stays consistent.
+            for lx, ly in local_corners:
+                corners_3d.append((-face_offset, ly, -lx))
+        elif face_name == 'top':
+            # Top face: y = +face_offset, x varies, z varies
+            # Top face should show stickers facing up with correct orientation
+            for lx, ly in local_corners:
+                corners_3d.append((lx, face_offset, ly))
+        
+        return corners_3d
     
     def draw(self, screen: pygame.Surface, cube: CubeState):
-        """Draw the cube in 3D.
+        """Draw the cube in 3D showing only the three visible faces.
         
         Args:
             screen: Pygame surface to draw on
             cube: CubeState to render
         """
-        # Draw faces in back-to-front order for proper depth
-        # Order: back, left, bottom, right, top, front
-        face_order = ['back', 'left', 'bottom', 'right', 'top', 'front']
+        # In standard orientation, we show:
+        # - Front face (green)
+        # - Left face (orange in solved state)
+        # - Top face (white)
         
-        for face_name in face_order:
-            # Draw stickers on this face
-            face = cube.get_face(face_name)
-            for row in range(3):
-                for col in range(3):
-                    color_char = face[row][col]
-                    color = CUBE_COLORS.get(color_char, COLORS['bookblack'])
-                    
-                    # Get 3D position and project to 2D
-                    x, y, z = self._get_sticker_3d_pos(face_name, row, col)
-                    screen_x, screen_y = self._project_3d_to_2d(x, y, z)
-                    
-                    # Calculate sticker size in screen space
-                    sticker_size_3d = self.cube_size / 3
-                    # Project a point slightly offset to estimate screen size
-                    offset = sticker_size_3d * 0.4
-                    x2, y2, z2 = x + offset, y, z
-                    screen_x2, screen_y2 = self._project_3d_to_2d(x2, y2, z2)
-                    screen_sticker_size = max(6, int(math.sqrt((screen_x2 - screen_x)**2 + (screen_y2 - screen_y)**2)))
-                    
-                    # Draw sticker as a small square (more visible than circle)
-                    sticker_rect = pygame.Rect(
-                        screen_x - screen_sticker_size // 2,
-                        screen_y - screen_sticker_size // 2,
-                        screen_sticker_size,
-                        screen_sticker_size
-                    )
-                    pygame.draw.rect(screen, color, sticker_rect)
-                    pygame.draw.rect(screen, COLORS['deepcharcoal'], sticker_rect, 1)
-            
-            # Draw face edges (optional, for better visibility)
-            vertices = self._get_face_vertices(face_name)
-            if vertices:
-                projected_vertices = [self._project_3d_to_2d(v[0], v[1], v[2]) for v in vertices]
-                # Draw edges (only for visible faces)
-                if face_name in ['front', 'right', 'top']:  # Most visible faces
-                    for i in range(4):
-                        start = projected_vertices[i]
-                        end = projected_vertices[(i + 1) % 4]
-                        pygame.draw.line(
-                            screen,
-                            COLORS['deepcharcoal'],
-                            start,
-                            end,
-                            1
-                        )
+        # Draw in back-to-front order for proper layering
+        # Order: top, left, front (front is closest to viewer)
+        
+        # 1. Draw top face
+        top_face = cube.get_face('top')
+        self._draw_face_stickers(screen, 'top', top_face)
+        
+        # 2. Draw left face
+        left_face = cube.get_face('left')
+        self._draw_face_stickers(screen, 'left', left_face)
+        
+        # 3. Draw front face
+        front_face = cube.get_face('front')
+        self._draw_face_stickers(screen, 'front', front_face)

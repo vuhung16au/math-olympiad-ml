@@ -20,6 +20,7 @@ COLORS = {
     'warmstone': (145, 139, 131),
     'deepcharcoal': (48, 44, 42),
     'softivory': (242, 239, 235),
+    'canvasgray': (224, 220, 214),
 }
 
 # Rubik's cube color mapping to palette

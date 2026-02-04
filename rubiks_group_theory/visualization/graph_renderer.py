@@ -166,14 +166,14 @@ class GraphRenderer:
         self.sticker_positions = []
         
         # Face order: Top=0, Bottom=1, Front=2, Back=3, Left=4, Right=5
-        # Arrange 6 faces in a circle with better spacing
+        # Arrange 6 faces in a regular hexagon pattern
         face_angles = [
             -math.pi / 2,           # 0: Top (up)
             math.pi / 2,            # 1: Bottom (down)
-            math.pi / 6,            # 2: Front (slightly down-right)
-            -5 * math.pi / 6,       # 3: Back (slightly up-left)
-            -math.pi / 2 - math.pi / 3,  # 4: Left (upper-left)
-            -math.pi / 2 + math.pi / 3,  # 5: Right (upper-right)
+            0,                      # 2: Front (right)
+            math.pi,                # 3: Back (left)
+            -math.pi / 3,           # 4: Left (lower-right)
+            -2 * math.pi / 3,       # 5: Right (lower-left)
         ]
         
         # Distance from center for face centers - make it larger for better separation
