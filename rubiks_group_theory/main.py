@@ -266,6 +266,9 @@ class RubiksApp:
         self.solver_mode = "reverse"  # "reverse" or "two_phase"
         self.solver_name = "Reverse Sequence"
         self.solving = False
+        self.solving_paused = False
+        self.step_budget = 0
+        self.step_allow_finish_current = False
         self.solution_moves = []
         self.current_move_index = 0
         self.solution_timer = 0
@@ -293,6 +296,15 @@ class RubiksApp:
         self.solver_button = SolveButton(self.width - 150, 220, 120, 40)
         self.solver_button.set_font(self.small_font)
         self._refresh_solver_button_text()
+        self.pause_button = SolveButton(self.width - 150, 320, 120, 40)
+        self.pause_button.set_font(self.small_font)
+        self.pause_button.text = "Pause"
+        self.step_button = SolveButton(self.width - 150, 370, 120, 40)
+        self.step_button.set_font(self.small_font)
+        self.step_button.text = "Step"
+        self.cancel_button = SolveButton(self.width - 150, 420, 120, 40)
+        self.cancel_button.set_font(self.small_font)
+        self.cancel_button.text = "Cancel"
         
         # Clock
         self.clock = pygame.time.Clock()
@@ -326,6 +338,9 @@ class RubiksApp:
                 self.patterns_button.rect.x = self.width - 150
                 self.solver_button.rect.x = self.width - 150
                 self.reset_view_button.rect.x = self.width - 150
+                self.pause_button.rect.x = self.width - 150
+                self.step_button.rect.x = self.width - 150
+                self.cancel_button.rect.x = self.width - 150
             
             elif event.type == pygame.KEYDOWN:
                 if self.solving:
@@ -405,7 +420,15 @@ class RubiksApp:
                     self.cube_3d_renderer.set_rotation(new_rx, new_ry)
                     self.last_mouse_pos = mouse_pos
         
-        # Check button clicks
+        # Interruption controls are always available when active.
+        if self.pause_button.update(mouse_pos, mouse_clicked):
+            self.toggle_pause_resume()
+        elif self.step_button.update(mouse_pos, mouse_clicked):
+            self.step_once()
+        elif self.cancel_button.update(mouse_pos, mouse_clicked):
+            self.cancel_current_action()
+
+        # Main controls
         if not self.solving:
             # Re-fetch mouse state because we might have handled events
             # But the update() methed takes mouse_pos
@@ -427,6 +450,24 @@ class RubiksApp:
             self.view_button.state = "disabled"
             self.patterns_button.state = "disabled"
             self.solver_button.state = "disabled"
+
+        # Control button availability/status.
+        if self.solving or self.animating:
+            # Keep current pause label based on state.
+            self.pause_button.state = "normal"
+        else:
+            self.pause_button.state = "disabled"
+            self.pause_button.text = "Pause"
+
+        if self.solving and self.solving_paused:
+            self.step_button.state = "normal"
+        else:
+            self.step_button.state = "disabled"
+
+        if self.solving or self.animating:
+            self.cancel_button.state = "normal"
+        else:
+            self.cancel_button.state = "disabled"
         
         return True
     
@@ -452,6 +493,9 @@ class RubiksApp:
         self.patterns_button.rect.x = self.width - 150
         self.solver_button.rect.x = self.width - 150
         self.reset_view_button.rect.x = self.width - 150
+        self.pause_button.rect.x = self.width - 150
+        self.step_button.rect.x = self.width - 150
+        self.cancel_button.rect.x = self.width - 150
 
     def _refresh_solver_button_text(self):
         """Update solver label from selected mode."""
@@ -474,6 +518,61 @@ class RubiksApp:
             )
         else:
             self.logger.info(f"Solver mode changed to: {self.solver_name}")
+
+    def _reset_interruption_state(self):
+        """Reset pause/step state."""
+        self.solving_paused = False
+        self.step_budget = 0
+        self.step_allow_finish_current = False
+        self.pause_button.text = "Pause"
+
+    def toggle_pause_resume(self):
+        """Pause or resume queued solving/animation."""
+        if not self.solving and not self.animating:
+            return
+        self.solving_paused = not self.solving_paused
+        self.pause_button.text = "Resume" if self.solving_paused else "Pause"
+        if not self.solving_paused:
+            self.step_allow_finish_current = False
+        self.logger.info("Paused solving" if self.solving_paused else "Resumed solving")
+
+    def step_once(self):
+        """Advance exactly one queued move while paused."""
+        if not self.solving:
+            return
+        if not self.solving_paused:
+            self.solving_paused = True
+            self.pause_button.text = "Resume"
+
+        if self.animating:
+            # Finish the in-flight move only.
+            self.step_allow_finish_current = True
+        else:
+            # Start exactly one move from queue.
+            self.step_budget = 1
+            self.solution_timer = self.solution_delay
+        self.logger.info("Step requested")
+
+    def cancel_current_action(self):
+        """Cancel solving or any in-progress animation."""
+        if not self.solving and not self.animating:
+            return
+
+        self.solving = False
+        self.animating = False
+        self.animation_move_name = None
+        self.animation_progress = 0.0
+        self.solution_moves = []
+        self.current_move_index = 0
+        self.solution_timer = 0
+        self._reset_interruption_state()
+
+        self.solve_button.state = "normal"
+        self.scramble_button.state = "normal"
+        self.view_button.state = "normal"
+        self.patterns_button.state = "normal"
+        self.solver_button.state = "normal"
+        self.logger.info("Solve/animation canceled")
     
     def input_undo(self):
         """Undo last move."""
@@ -533,10 +632,12 @@ class RubiksApp:
         
         # Reset solver state
         self.solving = False
+        self.animating = False
         self.solution_moves = []
         self.current_move_index = 0
         self.solve_button.state = "normal"
         self.solver_button.state = "normal"
+        self._reset_interruption_state()
         
         # Log the scramble
         self.logger.info("=" * 60)
@@ -583,6 +684,7 @@ class RubiksApp:
         self.current_move_index = 0
         self.solution_timer = 0
         self.solving = True # This enables the update loop to process moves
+        self._reset_interruption_state()
         
         # Disable buttons
         self.solve_button.state = "disabled"
@@ -599,6 +701,7 @@ class RubiksApp:
         self.solve_button.state = "disabled"
         self.patterns_button.state = "disabled"
         self.solver_button.state = "disabled"
+        self._reset_interruption_state()
         
         # Generate solution by reversing all moves (scramble + manual)
         self.logger.info("=" * 60)
@@ -617,6 +720,7 @@ class RubiksApp:
                 self.solve_button.state = "normal"
                 self.patterns_button.state = "normal"
                 self.solver_button.state = "normal"
+                self._reset_interruption_state()
                 return
             try:
                 self.solution_moves = self.two_phase_solver.solve(self.cube.copy())
@@ -628,6 +732,7 @@ class RubiksApp:
                 self.solve_button.state = "normal"
                 self.patterns_button.state = "normal"
                 self.solver_button.state = "normal"
+                self._reset_interruption_state()
                 return
         else:
             all_moves = self.scramble_sequence + self.manual_moves
@@ -682,6 +787,10 @@ class RubiksApp:
         """Update solver logic."""
         if not self.solving or not self.solution_moves:
             return
+
+        # While paused, only allow starting a queued single step.
+        if self.solving_paused and self.step_budget <= 0:
+            return
             
         # If currently animating a move, just let it finish
         if self.animating:
@@ -695,6 +804,9 @@ class RubiksApp:
             if self.current_move_index < len(self.solution_moves):
                 move = self.solution_moves[self.current_move_index]
                 self.start_animation(move)
+                if self.solving_paused and self.step_budget > 0:
+                    self.step_budget -= 1
+                    self.step_allow_finish_current = True
                 
                 step_num = self.current_move_index + 1
                 self.logger.info(f"Solver move [{step_num}/{len(self.solution_moves)}]: {move}")
@@ -717,6 +829,7 @@ class RubiksApp:
                 self.solver_button.state = "normal"
                 self.solution_moves = []
                 self.current_move_index = 0
+                self._reset_interruption_state()
     
     def draw_instructions(self, screen):
         """Draw usage instructions and algorithm info on the left side."""
@@ -742,6 +855,7 @@ class RubiksApp:
             ("• Scramble: Randomize", COLORS['warmstone']),
             ("• Pattern: Cool designs", COLORS['warmstone']),
             ("• Solver: Switch algorithm", COLORS['warmstone']),
+            ("• Pause/Step/Cancel: control queue", COLORS['warmstone']),
             ("• View: Toggle display", COLORS['warmstone']),
             ("", COLORS['softivory']),
             ("SPEED:", COLORS['bookred']),
@@ -847,6 +961,9 @@ class RubiksApp:
         self.view_button.draw(self.screen)
         self.patterns_button.draw(self.screen)
         self.solver_button.draw(self.screen)
+        self.pause_button.draw(self.screen)
+        self.step_button.draw(self.screen)
+        self.cancel_button.draw(self.screen)
         if self.current_renderer == self.graph_renderer:
             self.reset_view_button.draw(self.screen)
         
@@ -910,7 +1027,10 @@ class RubiksApp:
             running = self.handle_events()
             
             if self.animating:
-                self.update_animation(dt)
+                if (not self.solving_paused) or self.step_allow_finish_current:
+                    self.update_animation(dt)
+                    if self.step_allow_finish_current and not self.animating:
+                        self.step_allow_finish_current = False
             
             if self.solving:
                 self.update_solver(dt)
