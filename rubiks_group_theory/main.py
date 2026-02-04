@@ -273,6 +273,12 @@ class RubiksApp:
         self.current_move_index = 0
         self.solution_timer = 0
         self.solution_delay = 500  # ms delay between moves (after animation finishes)
+        self.solve_start_ms = 0
+        self.pause_started_ms = 0
+        self.paused_total_ms = 0
+        self.active_solution_metrics = None
+        self.last_solve_report = None
+        self.last_compare_report = None
 
         
         # UI
@@ -524,6 +530,7 @@ class RubiksApp:
         self.solving_paused = False
         self.step_budget = 0
         self.step_allow_finish_current = False
+        self.pause_started_ms = 0
         self.pause_button.text = "Pause"
 
     def toggle_pause_resume(self):
@@ -532,6 +539,11 @@ class RubiksApp:
             return
         self.solving_paused = not self.solving_paused
         self.pause_button.text = "Resume" if self.solving_paused else "Pause"
+        if self.solving_paused:
+            self.pause_started_ms = pygame.time.get_ticks()
+        elif self.pause_started_ms:
+            self.paused_total_ms += max(0, pygame.time.get_ticks() - self.pause_started_ms)
+            self.pause_started_ms = 0
         if not self.solving_paused:
             self.step_allow_finish_current = False
         self.logger.info("Paused solving" if self.solving_paused else "Resumed solving")
@@ -543,6 +555,7 @@ class RubiksApp:
         if not self.solving_paused:
             self.solving_paused = True
             self.pause_button.text = "Resume"
+            self.pause_started_ms = pygame.time.get_ticks()
 
         if self.animating:
             # Finish the in-flight move only.
@@ -565,6 +578,8 @@ class RubiksApp:
         self.solution_moves = []
         self.current_move_index = 0
         self.solution_timer = 0
+        self.active_solution_metrics = None
+        self.solve_start_ms = 0
         self._reset_interruption_state()
 
         self.solve_button.state = "normal"
@@ -573,6 +588,92 @@ class RubiksApp:
         self.patterns_button.state = "normal"
         self.solver_button.state = "normal"
         self.logger.info("Solve/animation canceled")
+
+    def _start_solve_timer(self):
+        """Initialize timing state for the current solve."""
+        self.solve_start_ms = pygame.time.get_ticks()
+        self.pause_started_ms = 0
+        self.paused_total_ms = 0
+
+    def _get_elapsed_solve_seconds(self) -> float:
+        """Return elapsed solve time in seconds, excluding paused periods."""
+        if not self.solve_start_ms:
+            return 0.0
+        now = pygame.time.get_ticks()
+        paused_now = 0
+        if self.solving_paused and self.pause_started_ms:
+            paused_now = now - self.pause_started_ms
+        elapsed_ms = max(0, now - self.solve_start_ms - self.paused_total_ms - paused_now)
+        return elapsed_ms / 1000.0
+
+    def _build_reverse_solution(self):
+        """Build reverse-sequence solve path from scramble + manual moves."""
+        all_moves = self.scramble_sequence + self.manual_moves
+        inverse_moves = {
+            'U': "U'", "U'": 'U',
+            'D': "D'", "D'": 'D',
+            'R': "R'", "R'": 'R',
+            'L': "L'", "L'": 'L',
+            'F': "F'", "F'": 'F',
+            'B': "B'", "B'": 'B',
+        }
+        return [inverse_moves[move] for move in reversed(all_moves)]
+
+    def _parse_move_amount(self, move: str):
+        """Convert a move token to (face, quarter-turn amount mod 4)."""
+        if move.endswith("2"):
+            return move[0], 2
+        if move.endswith("'"):
+            return move[0], 3
+        return move[0], 1
+
+    def _canonicalize_for_metrics(self, moves):
+        """Reduce adjacent same-face moves for HTM/QTM counting."""
+        reduced = []
+        for move in moves:
+            face, amt = self._parse_move_amount(move)
+            if reduced and reduced[-1][0] == face:
+                prev_face, prev_amt = reduced[-1]
+                new_amt = (prev_amt + amt) % 4
+                if new_amt == 0:
+                    reduced.pop()
+                else:
+                    reduced[-1] = (prev_face, new_amt)
+            else:
+                reduced.append((face, amt % 4))
+
+        out = []
+        for face, amt in reduced:
+            if amt == 1:
+                out.append(face)
+            elif amt == 2:
+                out.append(f"{face}2")
+            elif amt == 3:
+                out.append(f"{face}'")
+        return out
+
+    def _compute_move_metrics(self, moves):
+        """Return HTM/QTM metrics for a move list."""
+        canonical = self._canonicalize_for_metrics(moves)
+        htm = len(canonical)
+        qtm = sum(2 if token.endswith("2") else 1 for token in canonical)
+        return {"htm": htm, "qtm": qtm}
+
+    def _build_compare_report(self, reverse_moves, two_phase_moves):
+        """Build side-by-side algorithm comparison report."""
+        reverse_metrics = self._compute_move_metrics(reverse_moves)
+        report = {
+            "reverse": reverse_metrics,
+            "two_phase": None,
+            "delta_qtm": None,
+            "delta_htm": None,
+        }
+        if two_phase_moves is not None:
+            two_phase_metrics = self._compute_move_metrics(two_phase_moves)
+            report["two_phase"] = two_phase_metrics
+            report["delta_qtm"] = two_phase_metrics["qtm"] - reverse_metrics["qtm"]
+            report["delta_htm"] = two_phase_metrics["htm"] - reverse_metrics["htm"]
+        return report
     
     def input_undo(self):
         """Undo last move."""
@@ -637,6 +738,8 @@ class RubiksApp:
         self.current_move_index = 0
         self.solve_button.state = "normal"
         self.solver_button.state = "normal"
+        self.active_solution_metrics = None
+        self.solve_start_ms = 0
         self._reset_interruption_state()
         
         # Log the scramble
@@ -708,45 +811,50 @@ class RubiksApp:
         self.logger.info("Starting auto-solver")
 
         self.solution_moves = []
+        reverse_moves = self._build_reverse_solution()
+        two_phase_moves = None
 
-        # Respect explicit algorithm selection.
-        if self.solver_mode == "two_phase":
-            if not self.two_phase_solver.is_available():
-                self.logger.warning(
-                    f"Two-Phase unavailable: {self.two_phase_solver.availability_reason()}. "
-                    "Install with: uv pip install -e \".[fast-solver]\""
-                )
-                self.solving = False
-                self.solve_button.state = "normal"
-                self.patterns_button.state = "normal"
-                self.solver_button.state = "normal"
-                self._reset_interruption_state()
-                return
+        if self.two_phase_solver.is_available():
             try:
-                self.solution_moves = self.two_phase_solver.solve(self.cube.copy())
-                self.solver = self.two_phase_solver
-                self.logger.info("Using Two-Phase (Kociemba) solver")
+                two_phase_moves = self.two_phase_solver.solve(self.cube.copy())
             except Exception as exc:
-                self.logger.warning(f"Two-phase solve failed: {exc}")
-                self.solving = False
-                self.solve_button.state = "normal"
-                self.patterns_button.state = "normal"
-                self.solver_button.state = "normal"
-                self._reset_interruption_state()
-                return
+                if self.solver_mode == "two_phase":
+                    self.logger.warning(f"Two-phase solve failed: {exc}")
+                    self.solving = False
+                    self.solve_button.state = "normal"
+                    self.patterns_button.state = "normal"
+                    self.solver_button.state = "normal"
+                    self.active_solution_metrics = None
+                    self.solve_start_ms = 0
+                    self._reset_interruption_state()
+                    return
+                self.logger.info(f"Two-phase comparison unavailable: {exc}")
+        elif self.solver_mode == "two_phase":
+            self.logger.warning(
+                f"Two-Phase unavailable: {self.two_phase_solver.availability_reason()}. "
+                "Install with: uv pip install -e \".[fast-solver]\""
+            )
+            self.solving = False
+            self.solve_button.state = "normal"
+            self.patterns_button.state = "normal"
+            self.solver_button.state = "normal"
+            self.active_solution_metrics = None
+            self.solve_start_ms = 0
+            self._reset_interruption_state()
+            return
+
+        if self.solver_mode == "two_phase":
+            self.solution_moves = two_phase_moves or []
+            self.solver = self.two_phase_solver
+            self.logger.info("Using Two-Phase (Kociemba) solver")
         else:
-            all_moves = self.scramble_sequence + self.manual_moves
-            inverse_moves = {
-                'U': "U'", "U'": 'U',
-                'D': "D'", "D'": 'D',
-                'R': "R'", "R'": 'R',
-                'L': "L'", "L'": 'L',
-                'F': "F'", "F'": 'F',
-                'B': "B'", "B'": 'B',
-            }
-            self.solution_moves = [inverse_moves[move] for move in reversed(all_moves)]
+            self.solution_moves = reverse_moves
             self.solver = self.beginner_solver
             self.logger.info("Using Reverse Sequence solver")
+
+        self.active_solution_metrics = self._compute_move_metrics(self.solution_moves)
+        self.last_compare_report = self._build_compare_report(reverse_moves, two_phase_moves)
+        self._start_solve_timer()
 
         self.logger.info(f"Solution generated: {len(self.solution_moves)} moves")
         self.logger.info(f"Solution sequence: {' '.join(self.solution_moves)}")
@@ -814,12 +922,27 @@ class RubiksApp:
                 self.solution_timer = 0
             else:
                 # Done solving
+                elapsed_s = self._get_elapsed_solve_seconds()
+                active = self.active_solution_metrics or {"htm": 0, "qtm": 0}
+                qtm = active["qtm"]
+                tps = (qtm / elapsed_s) if elapsed_s > 0 else 0.0
+                self.last_solve_report = {
+                    "algorithm": self.solver_name,
+                    "htm": active["htm"],
+                    "qtm": qtm,
+                    "time_s": elapsed_s,
+                    "tps": tps,
+                }
                 self.logger.info("=" * 60)
                 self.logger.info("Solving completed!")
                 if self.cube.is_solved():
                     self.logger.info("Cube is now SOLVED!")
                 else:
                     self.logger.info("Warning: Cube state indicates not fully solved")
+                self.logger.info(
+                    f"Metrics [{self.solver_name}]: HTM={active['htm']} "
+                    f"QTM={qtm} Time={elapsed_s:.2f}s TPS={tps:.2f}"
+                )
                 self.logger.info("=" * 60)
                 self.solving = False
                 self.solve_button.state = "normal"
@@ -829,6 +952,7 @@ class RubiksApp:
                 self.solver_button.state = "normal"
                 self.solution_moves = []
                 self.current_move_index = 0
+                self.active_solution_metrics = None
                 self._reset_interruption_state()
     
     def draw_instructions(self, screen):
@@ -874,6 +998,60 @@ class RubiksApp:
                 text_surface = tiny_font.render(line, True, color)
             screen.blit(text_surface, (x_start, y))
             y += line_height
+
+    def draw_metrics_panel(self, screen):
+        """Draw move/time metrics and algorithm comparison."""
+        x = 20
+        y = 430
+        w = 340
+        h = 115
+        panel_rect = pygame.Rect(x, y, w, h)
+        pygame.draw.rect(screen, COLORS['softivory'], panel_rect)
+        pygame.draw.rect(screen, COLORS['deepcharcoal'], panel_rect, 2)
+
+        title_font = pygame.font.Font(None, 20)
+        tiny_font = pygame.font.Font(None, 18)
+        screen.blit(title_font.render("METRICS:", True, COLORS['bookred']), (x + 8, y + 6))
+
+        line_y = y + 30
+        line_h = 18
+
+        if self.solving and self.active_solution_metrics:
+            elapsed = self._get_elapsed_solve_seconds()
+            moved_qtm = self.current_move_index
+            live_tps = (moved_qtm / elapsed) if elapsed > 0 else 0.0
+            target = self.active_solution_metrics
+            lines = [
+                f"{self.solver_name}",
+                f"Target HTM/QTM: {target['htm']}/{target['qtm']}",
+                f"Time: {elapsed:.2f}s  TPS: {live_tps:.2f}",
+            ]
+        elif self.last_solve_report:
+            r = self.last_solve_report
+            lines = [
+                f"Last: {r['algorithm']}",
+                f"HTM/QTM: {r['htm']}/{r['qtm']}",
+                f"Time: {r['time_s']:.2f}s  TPS: {r['tps']:.2f}",
+            ]
+        else:
+            lines = ["No solve metrics yet"]
+
+        for line in lines:
+            screen.blit(tiny_font.render(line, True, COLORS['deepcharcoal']), (x + 8, line_y))
+            line_y += line_h
+
+        if self.last_compare_report:
+            rev = self.last_compare_report["reverse"]
+            two = self.last_compare_report["two_phase"]
+            if two:
+                delta_q = self.last_compare_report["delta_qtm"]
+                better = "2P better" if delta_q < 0 else "Rev better" if delta_q > 0 else "Equal"
+                compare_text = (
+                    f"Compare QTM Rev:{rev['qtm']} vs 2P:{two['qtm']} ({better})"
+                )
+            else:
+                compare_text = f"Compare QTM Rev:{rev['qtm']} vs 2P:N/A"
+            screen.blit(tiny_font.render(compare_text, True, COLORS['deepcharcoal']), (x + 8, line_y))
     
     def draw_log_display(self, screen):
         """Draw recent log entries at the bottom of the screen."""
@@ -954,6 +1132,7 @@ class RubiksApp:
         
         # Draw left-side instructions
         self.draw_instructions(self.screen)
+        self.draw_metrics_panel(self.screen)
         
         # Draw UI buttons
         self.solve_button.draw(self.screen)
