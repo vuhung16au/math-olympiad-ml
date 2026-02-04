@@ -20,6 +20,7 @@ from visualization.flat_renderer import FlatRenderer, COLORS
 from visualization.graph_renderer import GraphRenderer
 from visualization.cube_3d_renderer import Cube3DRenderer
 from solvers.basic_algo import BeginnerSolver
+from solvers.two_phase_solver import TwoPhaseSolver
 
 
 # Default resolution (16:9)
@@ -258,8 +259,12 @@ class RubiksApp:
         self.overlay_duration = 1000 # ms to show overlay
         self.overlay_font = pygame.font.Font(None, 120)
         
-        # Solver
-        self.solver = BeginnerSolver()
+        # Solvers and selected mode.
+        self.beginner_solver = BeginnerSolver()
+        self.two_phase_solver = TwoPhaseSolver()
+        self.solver = self.beginner_solver
+        self.solver_mode = "reverse"  # "reverse" or "two_phase"
+        self.solver_name = "Reverse Sequence"
         self.solving = False
         self.solution_moves = []
         self.current_move_index = 0
@@ -276,7 +281,7 @@ class RubiksApp:
         self.scramble_button = SolveButton(self.width - 150, 70, 120, 40)
         self.scramble_button.set_font(self.font)
         self.scramble_button.text = "Scramble"
-        self.reset_view_button = SolveButton(self.width - 150, 220, 120, 40)
+        self.reset_view_button = SolveButton(self.width - 150, 270, 120, 40)
         self.reset_view_button.set_font(self.small_font)
         self.reset_view_button.text = "Reset 3D"
         self.view_button = SolveButton(self.width - 150, 120, 120, 40)
@@ -285,6 +290,9 @@ class RubiksApp:
         self.patterns_button = SolveButton(self.width - 150, 170, 120, 40)
         self.patterns_button.set_font(self.font)
         self.patterns_button.text = "Pattern"
+        self.solver_button = SolveButton(self.width - 150, 220, 120, 40)
+        self.solver_button.set_font(self.small_font)
+        self._refresh_solver_button_text()
         
         # Clock
         self.clock = pygame.time.Clock()
@@ -314,6 +322,10 @@ class RubiksApp:
                 self.cube_3d_renderer.set_screen_size(self.width, self.height)
                 self.solve_button.rect.x = self.width - 150
                 self.scramble_button.rect.x = self.width - 150
+                self.view_button.rect.x = self.width - 150
+                self.patterns_button.rect.x = self.width - 150
+                self.solver_button.rect.x = self.width - 150
+                self.reset_view_button.rect.x = self.width - 150
             
             elif event.type == pygame.KEYDOWN:
                 if self.solving:
@@ -405,6 +417,8 @@ class RubiksApp:
                 self.toggle_view()
             elif self.patterns_button.update(mouse_pos, mouse_clicked):
                 self.apply_next_pattern()
+            elif self.solver_button.update(mouse_pos, mouse_clicked):
+                self.toggle_solver_mode()
             elif self.reset_view_button.update(mouse_pos, mouse_clicked):
                 self.cube_3d_renderer.set_rotation(30, -45)
         else:
@@ -412,6 +426,7 @@ class RubiksApp:
             self.scramble_button.state = "disabled"
             self.view_button.state = "disabled"
             self.patterns_button.state = "disabled"
+            self.solver_button.state = "disabled"
         
         return True
     
@@ -435,7 +450,30 @@ class RubiksApp:
         self.scramble_button.rect.x = self.width - 150
         self.view_button.rect.x = self.width - 150
         self.patterns_button.rect.x = self.width - 150
+        self.solver_button.rect.x = self.width - 150
         self.reset_view_button.rect.x = self.width - 150
+
+    def _refresh_solver_button_text(self):
+        """Update solver label from selected mode."""
+        if self.solver_mode == "two_phase":
+            self.solver_button.text = "Solver: 2P"
+            self.solver_name = "Two-Phase (Kociemba)"
+        else:
+            self.solver_button.text = "Solver: Rev"
+            self.solver_name = "Reverse Sequence"
+
+    def toggle_solver_mode(self):
+        """Switch between old and new solver algorithms."""
+        if self.solving:
+            return
+        self.solver_mode = "two_phase" if self.solver_mode == "reverse" else "reverse"
+        self._refresh_solver_button_text()
+        if self.solver_mode == "two_phase" and not self.two_phase_solver.is_available():
+            self.logger.info(
+                f"Two-Phase selected but unavailable ({self.two_phase_solver.availability_reason()})"
+            )
+        else:
+            self.logger.info(f"Solver mode changed to: {self.solver_name}")
     
     def input_undo(self):
         """Undo last move."""
@@ -498,6 +536,7 @@ class RubiksApp:
         self.solution_moves = []
         self.current_move_index = 0
         self.solve_button.state = "normal"
+        self.solver_button.state = "normal"
         
         # Log the scramble
         self.logger.info("=" * 60)
@@ -549,6 +588,7 @@ class RubiksApp:
         self.solve_button.state = "disabled"
         self.scramble_button.state = "disabled"
         self.patterns_button.state = "disabled"
+        self.solver_button.state = "disabled"
 
     def start_solving(self):
         """Start the solving process."""
@@ -558,29 +598,52 @@ class RubiksApp:
         self.solving = True
         self.solve_button.state = "disabled"
         self.patterns_button.state = "disabled"
+        self.solver_button.state = "disabled"
         
         # Generate solution by reversing all moves (scramble + manual)
         self.logger.info("=" * 60)
         self.logger.info("Starting auto-solver")
-        
-        # Combine scramble and manual moves
-        all_moves = self.scramble_sequence + self.manual_moves
-        
-        # Reverse the move sequence to solve
-        # For each move, apply its inverse in reverse order
-        inverse_moves = {
-            'U': "U'", "U'": 'U',
-            'D': "D'", "D'": 'D',
-            'R': "R'", "R'": 'R',
-            'L': "L'", "L'": 'L',
-            'F': "F'", "F'": 'F',
-            'B': "B'", "B'": 'B',
-        }
-        
-        # Create solution by reversing all moves and inverting each move
-        self.solution_moves = [inverse_moves[move] for move in reversed(all_moves)]
-        
-        self.logger.info(f"Solution generated: {len(self.solution_moves)} moves (reverse of scramble)")
+
+        self.solution_moves = []
+
+        # Respect explicit algorithm selection.
+        if self.solver_mode == "two_phase":
+            if not self.two_phase_solver.is_available():
+                self.logger.warning(
+                    f"Two-Phase unavailable: {self.two_phase_solver.availability_reason()}. "
+                    "Install with: uv pip install -e \".[fast-solver]\""
+                )
+                self.solving = False
+                self.solve_button.state = "normal"
+                self.patterns_button.state = "normal"
+                self.solver_button.state = "normal"
+                return
+            try:
+                self.solution_moves = self.two_phase_solver.solve(self.cube.copy())
+                self.solver = self.two_phase_solver
+                self.logger.info("Using Two-Phase (Kociemba) solver")
+            except Exception as exc:
+                self.logger.warning(f"Two-phase solve failed: {exc}")
+                self.solving = False
+                self.solve_button.state = "normal"
+                self.patterns_button.state = "normal"
+                self.solver_button.state = "normal"
+                return
+        else:
+            all_moves = self.scramble_sequence + self.manual_moves
+            inverse_moves = {
+                'U': "U'", "U'": 'U',
+                'D': "D'", "D'": 'D',
+                'R': "R'", "R'": 'R',
+                'L': "L'", "L'": 'L',
+                'F': "F'", "F'": 'F',
+                'B': "B'", "B'": 'B',
+            }
+            self.solution_moves = [inverse_moves[move] for move in reversed(all_moves)]
+            self.solver = self.beginner_solver
+            self.logger.info("Using Reverse Sequence solver")
+
+        self.logger.info(f"Solution generated: {len(self.solution_moves)} moves")
         self.logger.info(f"Solution sequence: {' '.join(self.solution_moves)}")
         self.logger.info("=" * 60)
         self.logger.info("=" * 60)
@@ -651,6 +714,7 @@ class RubiksApp:
                 self.scramble_button.state = "normal"
                 self.view_button.state = "normal"
                 self.patterns_button.state = "normal"
+                self.solver_button.state = "normal"
                 self.solution_moves = []
                 self.current_move_index = 0
     
@@ -670,13 +734,14 @@ class RubiksApp:
             ("• V: Toggle view", COLORS['warmstone']),
             ("", COLORS['softivory']),
             ("ALGORITHM:", COLORS['bookred']),
-            ("Beginner's Method", COLORS['warmstone']),
-            ("(Layer-by-layer)", COLORS['warmstone']),
+            (self.solver_name, COLORS['warmstone']),
+            ("(Choose via Solver button)", COLORS['warmstone']),
             ("", COLORS['softivory']),
             ("BUTTONS:", COLORS['bookred']),
             ("• Solve: Auto-solve cube", COLORS['warmstone']),
             ("• Scramble: Randomize", COLORS['warmstone']),
             ("• Pattern: Cool designs", COLORS['warmstone']),
+            ("• Solver: Switch algorithm", COLORS['warmstone']),
             ("• View: Toggle display", COLORS['warmstone']),
             ("", COLORS['softivory']),
             ("SPEED:", COLORS['bookred']),
@@ -781,6 +846,7 @@ class RubiksApp:
         self.scramble_button.draw(self.screen)
         self.view_button.draw(self.screen)
         self.patterns_button.draw(self.screen)
+        self.solver_button.draw(self.screen)
         if self.current_renderer == self.graph_renderer:
             self.reset_view_button.draw(self.screen)
         

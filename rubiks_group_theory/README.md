@@ -13,6 +13,7 @@ This project combines abstract mathematics (Group Theory), solving algorithms, a
   - Flat renderer: Standard "unfolded cross" view
   - Graph renderer: Planar graph representation (foundation)
 - **Auto Solver**: Beginner's method (layer-by-layer) solver with step-by-step animation
+- **Fast Solver (Optional)**: Kociemba Two-Phase integration for shorter/faster solutions (`kociemba` package)
 - **Interactive Controls**: Keyboard controls for all 12 basic moves
 - **Custom Color Palette**: Beautiful, consistent color scheme
 - **16:9 Resolution Support**: Fullscreen mode with aspect ratio preservation

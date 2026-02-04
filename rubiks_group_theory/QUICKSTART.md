@@ -47,6 +47,11 @@ For more installation options, visit: https://github.com/astral-sh/uv
    uv pip install -e .
    ```
 
+3. **(Optional) Enable fast Two-Phase solving (Kociemba):**
+   ```bash
+   uv pip install -e ".[fast-solver]"
+   ```
+
 ## Running the Application
 
 1. **If you're in a virtual environment, activate it first:**
