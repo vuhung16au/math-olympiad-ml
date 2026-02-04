@@ -52,6 +52,11 @@ For more installation options, visit: https://github.com/astral-sh/uv
    uv pip install -e ".[fast-solver]"
    ```
 
+4. **(Optional) Install test dependencies:**
+   ```bash
+   uv pip install -e ".[test]"
+   ```
+
 ## Running the Application
 
 1. **If you're in a virtual environment, activate it first:**

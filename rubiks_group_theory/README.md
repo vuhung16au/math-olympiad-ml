@@ -15,6 +15,9 @@ This project combines abstract mathematics (Group Theory), solving algorithms, a
 - **Auto Solver**: Beginner's method (layer-by-layer) solver with step-by-step animation
 - **Fast Solver (Optional)**: Kociemba Two-Phase integration for shorter/faster solutions (`kociemba` package)
 - **Interactive Controls**: Keyboard controls for all 12 basic moves
+- **Queue Controls**: Pause/Resume, Step, and Cancel (buttons + shortcuts: `Space`, `N`, `Esc`)
+- **Profile Presets**: Teaching mode (slower, explanatory) and Speed mode (faster, compact UI)
+- **Move Metrics Panel**: HTM, QTM, solve time, TPS, and Reverse vs Two-Phase comparison
 - **Custom Color Palette**: Beautiful, consistent color scheme
 - **16:9 Resolution Support**: Fullscreen mode with aspect ratio preservation
 

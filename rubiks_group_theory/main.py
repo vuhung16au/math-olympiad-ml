@@ -16,6 +16,7 @@ if str(project_root) not in sys.path:
 
 from core.cube_state import CubeState
 from core.permutations import apply_move, MOVES
+from core.move_metrics import compute_move_metrics, build_compare_report
 from visualization.flat_renderer import FlatRenderer, COLORS
 from visualization.graph_renderer import GraphRenderer
 from visualization.cube_3d_renderer import Cube3DRenderer
@@ -273,6 +274,9 @@ class RubiksApp:
         self.current_move_index = 0
         self.solution_timer = 0
         self.solution_delay = 500  # ms delay between moves (after animation finishes)
+        self.profile_mode = "teaching"  # "teaching" or "speed"
+        self.compact_ui = False
+        self.show_explanations = True
         self.solve_start_ms = 0
         self.pause_started_ms = 0
         self.paused_total_ms = 0
@@ -311,6 +315,9 @@ class RubiksApp:
         self.cancel_button = SolveButton(self.width - 150, 420, 120, 40)
         self.cancel_button.set_font(self.small_font)
         self.cancel_button.text = "Cancel"
+        self.profile_button = SolveButton(self.width - 150, 470, 120, 40)
+        self.profile_button.set_font(self.small_font)
+        self._apply_profile_mode(self.profile_mode, log=False)
         
         # Clock
         self.clock = pygame.time.Clock()
@@ -347,8 +354,20 @@ class RubiksApp:
                 self.pause_button.rect.x = self.width - 150
                 self.step_button.rect.x = self.width - 150
                 self.cancel_button.rect.x = self.width - 150
+                self.profile_button.rect.x = self.width - 150
             
             elif event.type == pygame.KEYDOWN:
+                # Queue control shortcuts (always available when active).
+                if event.key == pygame.K_SPACE:
+                    self.toggle_pause_resume()
+                    continue
+                if event.key == pygame.K_n:
+                    self.step_once()
+                    continue
+                if event.key == pygame.K_ESCAPE:
+                    self.cancel_current_action()
+                    continue
+
                 if self.solving:
                     continue  # Ignore input while solving
                 
@@ -448,6 +467,8 @@ class RubiksApp:
                 self.apply_next_pattern()
             elif self.solver_button.update(mouse_pos, mouse_clicked):
                 self.toggle_solver_mode()
+            elif self.profile_button.update(mouse_pos, mouse_clicked):
+                self.toggle_profile_mode()
             elif self.reset_view_button.update(mouse_pos, mouse_clicked):
                 self.cube_3d_renderer.set_rotation(30, -45)
         else:
@@ -456,6 +477,7 @@ class RubiksApp:
             self.view_button.state = "disabled"
             self.patterns_button.state = "disabled"
             self.solver_button.state = "disabled"
+            self.profile_button.state = "disabled"
 
         # Control button availability/status.
         if self.solving or self.animating:
@@ -502,6 +524,7 @@ class RubiksApp:
         self.pause_button.rect.x = self.width - 150
         self.step_button.rect.x = self.width - 150
         self.cancel_button.rect.x = self.width - 150
+        self.profile_button.rect.x = self.width - 150
 
     def _refresh_solver_button_text(self):
         """Update solver label from selected mode."""
@@ -524,6 +547,33 @@ class RubiksApp:
             )
         else:
             self.logger.info(f"Solver mode changed to: {self.solver_name}")
+
+    def _apply_profile_mode(self, mode: str, log: bool = True):
+        """Apply profile presets for pacing and UI density."""
+        self.profile_mode = mode
+        if mode == "speed":
+            self.animation_duration_ms = 120
+            self.solution_delay = 120
+            self.overlay_duration = 300
+            self.compact_ui = True
+            self.show_explanations = False
+            self.profile_button.text = "Profile: SPD"
+            if log:
+                self.logger.info("Profile set: Speed mode")
+        else:
+            self.animation_duration_ms = 320
+            self.solution_delay = 650
+            self.overlay_duration = 1000
+            self.compact_ui = False
+            self.show_explanations = True
+            self.profile_button.text = "Profile: Teach"
+            if log:
+                self.logger.info("Profile set: Teaching mode")
+
+    def toggle_profile_mode(self):
+        """Toggle between Teaching and Speed presets."""
+        next_mode = "speed" if self.profile_mode == "teaching" else "teaching"
+        self._apply_profile_mode(next_mode, log=True)
 
     def _reset_interruption_state(self):
         """Reset pause/step state."""
@@ -619,61 +669,13 @@ class RubiksApp:
         }
         return [inverse_moves[move] for move in reversed(all_moves)]
 
-    def _parse_move_amount(self, move: str):
-        """Convert a move token to (face, quarter-turn amount mod 4)."""
-        if move.endswith("2"):
-            return move[0], 2
-        if move.endswith("'"):
-            return move[0], 3
-        return move[0], 1
-
-    def _canonicalize_for_metrics(self, moves):
-        """Reduce adjacent same-face moves for HTM/QTM counting."""
-        reduced = []
-        for move in moves:
-            face, amt = self._parse_move_amount(move)
-            if reduced and reduced[-1][0] == face:
-                prev_face, prev_amt = reduced[-1]
-                new_amt = (prev_amt + amt) % 4
-                if new_amt == 0:
-                    reduced.pop()
-                else:
-                    reduced[-1] = (prev_face, new_amt)
-            else:
-                reduced.append((face, amt % 4))
-
-        out = []
-        for face, amt in reduced:
-            if amt == 1:
-                out.append(face)
-            elif amt == 2:
-                out.append(f"{face}2")
-            elif amt == 3:
-                out.append(f"{face}'")
-        return out
-
     def _compute_move_metrics(self, moves):
         """Return HTM/QTM metrics for a move list."""
-        canonical = self._canonicalize_for_metrics(moves)
-        htm = len(canonical)
-        qtm = sum(2 if token.endswith("2") else 1 for token in canonical)
-        return {"htm": htm, "qtm": qtm}
+        return compute_move_metrics(moves)
 
     def _build_compare_report(self, reverse_moves, two_phase_moves):
         """Build side-by-side algorithm comparison report."""
-        reverse_metrics = self._compute_move_metrics(reverse_moves)
-        report = {
-            "reverse": reverse_metrics,
-            "two_phase": None,
-            "delta_qtm": None,
-            "delta_htm": None,
-        }
-        if two_phase_moves is not None:
-            two_phase_metrics = self._compute_move_metrics(two_phase_moves)
-            report["two_phase"] = two_phase_metrics
-            report["delta_qtm"] = two_phase_metrics["qtm"] - reverse_metrics["qtm"]
-            report["delta_htm"] = two_phase_metrics["htm"] - reverse_metrics["htm"]
-        return report
+        return build_compare_report(reverse_moves, two_phase_moves)
     
     def input_undo(self):
         """Undo last move."""
@@ -963,29 +965,48 @@ class RubiksApp:
         tiny_font = pygame.font.Font(None, 18)
         small_font = pygame.font.Font(None, 20)
         
-        instructions = [
-            ("HOW TO USE:", COLORS['bookred']),
-            ("• Keys: U/D/R/L/F/B (rotations)", COLORS['warmstone']),
-            ("• Shift+Key: counter-clockwise", COLORS['warmstone']),
-            ("• F11: Fullscreen", COLORS['warmstone']),
-            ("• V: Toggle view", COLORS['warmstone']),
-            ("", COLORS['softivory']),
-            ("ALGORITHM:", COLORS['bookred']),
-            (self.solver_name, COLORS['warmstone']),
-            ("(Choose via Solver button)", COLORS['warmstone']),
-            ("", COLORS['softivory']),
-            ("BUTTONS:", COLORS['bookred']),
-            ("• Solve: Auto-solve cube", COLORS['warmstone']),
-            ("• Scramble: Randomize", COLORS['warmstone']),
-            ("• Pattern: Cool designs", COLORS['warmstone']),
-            ("• Solver: Switch algorithm", COLORS['warmstone']),
-            ("• Pause/Step/Cancel: control queue", COLORS['warmstone']),
-            ("• View: Toggle display", COLORS['warmstone']),
-            ("", COLORS['softivory']),
-            ("SPEED:", COLORS['bookred']),
-            ("• [ : Slower", COLORS['warmstone']),
-            ("• ] : Faster", COLORS['warmstone']),
-        ]
+        if self.compact_ui:
+            instructions = [
+                ("MODE:", COLORS['bookred']),
+                ("Speed (compact UI)", COLORS['warmstone']),
+                ("", COLORS['softivory']),
+                ("ALGO:", COLORS['bookred']),
+                (self.solver_name, COLORS['warmstone']),
+                ("", COLORS['softivory']),
+                ("SHORTCUTS:", COLORS['bookred']),
+                ("Space pause/resume", COLORS['warmstone']),
+                ("N step, Esc cancel", COLORS['warmstone']),
+            ]
+        else:
+            instructions = [
+                ("HOW TO USE:", COLORS['bookred']),
+                ("• Keys: U/D/R/L/F/B (rotations)", COLORS['warmstone']),
+                ("• Shift+Key: counter-clockwise", COLORS['warmstone']),
+                ("• F11: Fullscreen", COLORS['warmstone']),
+                ("• V: Toggle view", COLORS['warmstone']),
+                ("", COLORS['softivory']),
+                ("ALGORITHM:", COLORS['bookred']),
+                (self.solver_name, COLORS['warmstone']),
+                ("(Choose via Solver button)", COLORS['warmstone']),
+                ("", COLORS['softivory']),
+                ("PROFILE:", COLORS['bookred']),
+                ("Teaching: slower + explanations", COLORS['warmstone']),
+                ("Speed: faster + compact UI", COLORS['warmstone']),
+                ("", COLORS['softivory']),
+                ("BUTTONS:", COLORS['bookred']),
+                ("• Solve: Auto-solve cube", COLORS['warmstone']),
+                ("• Scramble: Randomize", COLORS['warmstone']),
+                ("• Pattern: Cool designs", COLORS['warmstone']),
+                ("• Solver: Switch algorithm", COLORS['warmstone']),
+                ("• Profile: Toggle preset", COLORS['warmstone']),
+                ("• Pause/Step/Cancel: control queue", COLORS['warmstone']),
+                ("• View: Toggle display", COLORS['warmstone']),
+                ("", COLORS['softivory']),
+                ("SHORTCUTS:", COLORS['bookred']),
+                ("• Space: Pause/Resume", COLORS['warmstone']),
+                ("• N: Step", COLORS['warmstone']),
+                ("• Esc: Cancel", COLORS['warmstone']),
+            ]
         
         y = y_start
         for line, color in instructions:
@@ -1143,6 +1164,7 @@ class RubiksApp:
         self.pause_button.draw(self.screen)
         self.step_button.draw(self.screen)
         self.cancel_button.draw(self.screen)
+        self.profile_button.draw(self.screen)
         if self.current_renderer == self.graph_renderer:
             self.reset_view_button.draw(self.screen)
         
@@ -1152,7 +1174,7 @@ class RubiksApp:
         # Draw progress (above log area)
         if self.solving and self.solution_moves:
             # Determine current phase
-            if hasattr(self.solver, 'phases'):
+            if self.show_explanations and hasattr(self.solver, 'phases'):
                 current_phase = "Solving..."
                 # Find the last phase that starts before or at current_move_index
                 for start_idx, desc in self.solver.phases:

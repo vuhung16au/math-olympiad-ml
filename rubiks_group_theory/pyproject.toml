@@ -11,6 +11,9 @@ dependencies = [
 fast-solver = [
     "kociemba>=1.2.1",
 ]
+test = [
+    "pytest>=8.0.0",
+]
 
 [build-system]
 requires = ["hatchling"]
