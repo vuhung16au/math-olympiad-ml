@@ -18,6 +18,7 @@ from core.cube_state import CubeState
 from core.permutations import apply_move, MOVES
 from visualization.flat_renderer import FlatRenderer, COLORS
 from visualization.graph_renderer import GraphRenderer
+from visualization.cube_3d_renderer import Cube3DRenderer
 from solvers.basic_algo import BeginnerSolver
 
 
@@ -223,6 +224,7 @@ class RubiksApp:
         # Renderers
         self.flat_renderer = FlatRenderer(self.width, self.height)
         self.graph_renderer = GraphRenderer(self.width, self.height)
+        self.cube_3d_renderer = Cube3DRenderer(self.width, self.height)
         self.current_renderer = self.flat_renderer  # Start with flat view
         
         # Solver
@@ -271,6 +273,7 @@ class RubiksApp:
                 self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
                 self.flat_renderer.set_screen_size(self.width, self.height)
                 self.graph_renderer.set_screen_size(self.width, self.height)
+                self.cube_3d_renderer.set_screen_size(self.width, self.height)
                 self.solve_button.rect.x = self.width - 150
                 self.scramble_button.rect.x = self.width - 150
             
@@ -364,6 +367,7 @@ class RubiksApp:
         
         self.flat_renderer.set_screen_size(self.width, self.height)
         self.graph_renderer.set_screen_size(self.width, self.height)
+        self.cube_3d_renderer.set_screen_size(self.width, self.height)
         self.solve_button.rect.x = self.width - 150
         self.scramble_button.rect.x = self.width - 150
         self.view_button.rect.x = self.width - 150
@@ -569,6 +573,10 @@ class RubiksApp:
         
         # Draw cube (centered, leaving space for UI)
         self.current_renderer.draw(self.screen, self.cube)
+        
+        # Draw 3D cube on right side when in graph view
+        if self.current_renderer == self.graph_renderer:
+            self.cube_3d_renderer.draw(self.screen, self.cube)
         
         # Draw left-side instructions
         self.draw_instructions(self.screen)
