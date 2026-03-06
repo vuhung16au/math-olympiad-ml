@@ -41,6 +41,7 @@ $$ f(x) = \frac{x^n(1-x)^n}{n!} $$
     
     Finally, by establishing an upper bound for $I_n$, derive a contradiction for sufficiently large $n$. Conclude that $\pi^2$ is irrational.
 \end{enumerate}
+
 \end{problem}
 
 \begin{hint}
@@ -103,3 +104,41 @@ $\therefore \pi^2$ is irrational.
     \item \textbf{Transcendence of $\pi$:} $\pi$ is not only irrational but also transcendental, meaning it is not a root of any non-zero polynomial equation with rational coefficients. This was proven later by Ferdinand von Lindemann in 1882.
 \end{enumerate}
 \end{takeaways}
+
+
+\begin{remark}[Original HSC Mathematics Extension 2 (2003), Question 8]
+    If you enjoyed this style of proof, you are encouraged to challenge the \textbf{original} HSC Mathematics Extension~2 (2003) Question~8 (part (b))!
+    
+    \medskip
+    
+    (b) Suppose that $\pi$ could be written in the form $\frac{p}{q}$, where $p$ and $q$ are positive integers.
+    
+    Define the family of integrals $I_n$ for $n = 0, 1, 2, \dots$ by
+    \[
+    I_n = \frac{q^{2n}}{n!} \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \left(\frac{\pi^2}{4} - x^2\right)^n \cos x \, dx.
+    \]
+    
+    You are given that $I_0 = 2$ and $I_1 = 4q^2$. (Do NOT prove this.)
+    
+    \begin{enumerate}[label=(\roman*)]
+      \item Use integration by parts twice to show that, for $n \ge 2$,
+      \begin{align*}
+        I_n &= \frac{2q^{2n}}{(n-1)!} \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \left(\frac{\pi^2}{4} - x^2\right)^{n-1} \cos x \, dx \\
+        &\quad - \frac{4q^{2n}}{(n-2)!} \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} x^2 \left(\frac{\pi^2}{4} - x^2\right)^{n-2} \cos x \, dx.
+      \end{align*}
+    
+      \item By writing $x^2$ as $\frac{\pi^2}{4} - \left(\frac{\pi^2}{4} - x^2\right)$ where appropriate, deduce that
+      \[
+        I_n = (4n-2)q^2 I_{n-1} - p^2 q^2 I_{n-2}, \quad \text{for } n \ge 2.
+      \]
+    
+      \item Explain briefly why $I_n$ is an integer for $n = 0, 1, 2, \dots$
+    
+      \item Prove that
+      \[
+        0 < I_n < \frac{p}{q}\left(\frac{p}{2}\right)^{2n}\frac{1}{n!} \quad \text{for } n = 0, 1, 2, \dots
+      \]
+    
+      \item Given that $\frac{p}{q}\left(\frac{p}{2}\right)^{2n}\frac{1}{n!} < 1$, if $n$ is sufficiently large, deduce that $\pi$ is irrational.
+    \end{enumerate}
+    \end{remark}
