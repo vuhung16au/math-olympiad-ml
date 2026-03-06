@@ -15,3 +15,6 @@ samples2/
 problems/extracted/
 
 !release/*.pdf
+
+# See fonts/README.md for more information
+# fonts/SAMAN___.TTF

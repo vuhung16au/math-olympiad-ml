@@ -3,6 +3,10 @@
 LATEX=pdflatex
 TEX=HSC-LastResorts.tex
 
+# Font support: allow TrueType/OpenType via fontspec.
+# Use LuaLaTeX so fonts/SAMAN___.TTF can be embedded.
+LATEX=lualatex
+
 
 all:
 	$(LATEX) $(TEX)

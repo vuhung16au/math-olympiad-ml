@@ -5,7 +5,19 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{geometry}
-\usepackage[utf8]{inputenc}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  % Fallback: keep builds working under pdfLaTeX.
+  \newcommand{\ramanujanfont}{}
+\else
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \newfontfamily\ramanujanfont{SAMAN___}[
+    Path=fonts/,
+    Extension=.TTF
+  ]
+\fi
 
 % Define theorem environments via DL101 theorem boxes (ensure chapter counter exists first)
 \newcounter{chapter} % required because dl101-theorems numbers by chapter
