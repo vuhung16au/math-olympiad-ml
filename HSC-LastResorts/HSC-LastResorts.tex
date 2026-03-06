@@ -101,6 +101,47 @@ This booklet is designed for Extension~2 students who want to:
 \newpage
 \section{Fundamentals Review}
 
+\subsection{Limit Tools for Sequences}
+
+\subsubsection{The Squeeze (Pinching) Theorem}
+\begin{theorem}[Squeeze Theorem for Sequences]
+Let $(a_n)$, $(b_n)$ and $(c_n)$ be real sequences such that
+\[
+  a_n \le b_n \le c_n
+\]
+for all sufficiently large $n$. If
+\[
+  \lim_{n\to\infty} a_n = L
+  \quad\text{and}\quad
+  \lim_{n\to\infty} c_n = L,
+\]
+then
+\[
+  \lim_{n\to\infty} b_n = L.
+\]
+\end{theorem}
+
+\begin{remark}[Extension 2 application]
+In the problem proving $\pi^2$ is irrational, we introduced the integral sequence $(I_n)$ and showed
+\[
+  0 < I_n < \text{(a quantity that tends to }0\text{ as }n\to\infty).
+\]
+The Squeeze Theorem then forces $I_n \to 0$, even though $I_n$ itself is not evaluated in closed form.
+\end{remark}
+
+\subsubsection{The Monotone Convergence Theorem}
+\begin{theorem}[Monotone Convergence for Sequences]
+Let $(x_n)$ be a real sequence.
+\begin{itemize}[leftmargin=*]
+  \item If $(x_n)$ is increasing (i.e.\ $x_{n+1} \ge x_n$ for all $n$) and bounded above (there exists $M$ with $x_n \le M$ for all $n$), then $(x_n)$ converges to a finite limit $L \le M$.
+  \item If $(x_n)$ is decreasing and bounded below, then $(x_n)$ converges to a finite limit $L \ge m$.
+\end{itemize}
+\end{theorem}
+
+\begin{remark}[Extension 2 application]
+This theorem underpins many recursive–sequence problems. In the Mandelbrot escape problem, to show that a sequence diverges instead of converging, we proved it was strictly increasing and \emph{unbounded above}, so no finite limit can exist. In other problems (especially those involving iteration to a root), one typically shows a sequence is monotone and bounded to deduce convergence, then identifies the limit by solving the fixed–point equation.
+\end{remark}
+
 \subsection{Key Inequalities}
 Problem~16 frequently employs fundamental inequalities as building blocks for more complex arguments.
 
@@ -154,6 +195,20 @@ For a polynomial with roots $\alpha_1, \alpha_2, \ldots, \alpha_n$, if $S_k = \s
 \[S_k - e_1 S_{k-1} + e_2 S_{k-2} - \cdots + (-1)^{k-1} e_{k-1} S_1 + (-1)^k k e_k = 0\]
 \end{theorem}
 
+\begin{remark}[Quadratic and cubic cases (Viète's formulas)]
+For low degrees, Newton's identities reduce to the familiar Viète relations:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Degree 2:} For $P(x) = x^2 - sx + p$ with roots $\alpha,\beta$, we have $e_1 = \alpha+\beta = s$ and $e_2 = \alpha\beta = p$. Newton's identities give $S_1 = \alpha+\beta = e_1$ and $S_2 = \alpha^2+\beta^2 = e_1^2 - 2e_2 = s^2 - 2p$.
+  \item \textbf{Degree 3:} For $P(x) = x^3 - sx^2 + px - q$ with roots $\alpha,\beta,\gamma$, we have $e_1 = \alpha+\beta+\gamma = s$, $e_2 = \alpha\beta+\beta\gamma+\gamma\alpha = p$, and $e_3 = \alpha\beta\gamma = q$. Newton's identities yield
+  \[
+    S_1 = e_1 = s,\qquad
+    S_2 = e_1 S_1 - 2e_2 = s^2 - 2p,\qquad
+    S_3 = e_1 S_2 - e_2 S_1 + 3e_3 = s^3 - 3sp + 3q,
+  \]
+  which express power sums like $\alpha^2+\beta^2+\gamma^2$ and $\alpha^3+\beta^3+\gamma^3$ purely in terms of the coefficients—exactly the spirit of Viète's formulas.
+\end{itemize}
+\end{remark}
+
 \subsection{Chebyshev Polynomials (First Kind)}
 The Chebyshev polynomials of the first kind $T_n(x)$ are a family of orthogonal polynomials on $[-1,1]$ with the defining trigonometric identity:
 \[ T_n(x) = \cos\big(n\arccos x\big). \]
@@ -163,9 +218,34 @@ They satisfy the three-term recurrence for $n\ge 1$:
 \[ T_{n+1}(x) = 2x\,T_n(x) - T_{n-1}(x), \quad T_0(x)=1,\; T_1(x)=x. \]
 
 \subsubsection{Explicit Low-Degree Polynomials}
-\[ T_0(x) = 1, \quad T_1(x) = x, \quad T_2(x) = 2x^2 - 1, \quad T_3(x) = 4x^3 - 3x. \]
+\begin{center}
+\begin{tabular}{c|l|l}
+  $n$ & $T_n(x)$ & $\cos(n\theta)$ as a polynomial in $\cos\theta$ \\ \hline
+  0 & $1$ & $1$ \\
+  1 & $x$ & $\cos\theta$ \\
+  2 & $2x^2 - 1$ & $2\cos^2\theta - 1$ \\
+  3 & $4x^3 - 3x$ & $4\cos^3\theta - 3\cos\theta$ \\
+  4 & $8x^4 - 8x^2 + 1$ & $8\cos^4\theta - 8\cos^2\theta + 1$ \\
+  5 & $16x^5 - 20x^3 + 5x$ & $16\cos^5\theta - 20\cos^3\theta + 5\cos\theta$
+\end{tabular}
+\end{center}
+Notice that the leading coefficient doubles each time, so $\deg T_n = n$ and the coefficient of $x^n$ is $2^{n-1}$ for $n\ge1$.
 
-These identities are frequently useful for transforming certain cubic equations by matching the structure of $T_3(x)$.
+\subsubsection{Zeros and Extremal Points}
+From $T_n(\cos\theta) = \cos(n\theta)$ we see:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Zeros:} $T_n(x) = 0$ at the $n$ points
+  \[
+    x_k = \cos\frac{(2k-1)\pi}{2n}, \quad k = 1,2,\dots,n,
+  \]
+  all lying in $(-1,1)$.
+  \item \textbf{Extremal points when $n=5$:} Since $\cos(5\theta)$ takes values $\pm1$ at $\theta = k\pi/5$, the polynomial $T_5(x)$ attains its maxima and minima
+  \[
+    T_5(\cos\tfrac{k\pi}{5}) = \cos(5\cdot\tfrac{k\pi}{5}) = \cos(k\pi) \in \{1,-1\},\quad k=0,1,2,3,4,5.
+  \]
+  Thus $T_5(x)$ oscillates between $-1$ and $1$ at the six points $x = \cos(k\pi/5)$ on $[-1,1]$.
+\end{itemize}
+
 
 \subsection{Chebyshev Polynomials (Second Kind)}
 The Chebyshev polynomials of the second kind $U_n(x)$ form another family of orthogonal polynomials on $[-1,1]$, closely related to the first kind. They are defined by the trigonometric identity:
@@ -179,7 +259,24 @@ The second kind Chebyshev polynomials satisfy the same three-term recurrence as 
 \[ U_{n+1}(x) = 2x\,U_n(x) - U_{n-1}(x), \quad U_0(x)=1,\; U_1(x)=2x. \]
 
 \subsubsection{Explicit Low-Degree Polynomials}
-\[ U_0(x) = 1, \quad U_1(x) = 2x, \quad U_2(x) = 4x^2 - 1, \quad U_3(x) = 8x^3 - 4x. \]
+\begin{center}
+\begin{tabular}{c|l|l}
+  $n$ & $U_n(x)$ & $\dfrac{\sin((n+1)\theta)}{\sin\theta}$ as a polynomial in $\cos\theta$ \\ \hline
+  0 & $1$ & $1$ \\
+  1 & $2x$ & $2\cos\theta$ \\
+  2 & $4x^2 - 1$ & $4\cos^2\theta - 1$ \\
+  3 & $8x^3 - 4x$ & $8\cos^3\theta - 4\cos\theta$ \\
+  4 & $16x^4 - 12x^2 + 1$ & $16\cos^4\theta - 12\cos^2\theta + 1$ \\
+  5 & $32x^5 - 32x^3 + 6x$ & $32\cos^5\theta - 32\cos^3\theta + 6\cos\theta$
+\end{tabular}
+\end{center}
+
+\subsubsection{Zeros}
+Using $U_n(\cos\theta) = \dfrac{\sin((n+1)\theta)}{\sin\theta}$, the zeros of $U_n$ occur when the numerator vanishes but $\sin\theta \neq 0$, i.e.
+\[
+  U_n(x_k) = 0 \quad\text{for}\quad x_k = \cos\frac{k\pi}{n+1},\quad k = 1,2,\dots,n.
+\]
+All these zeros lie strictly inside the interval $(-1,1)$.
 
 \subsubsection{Relationship to First Kind}
 The Chebyshev polynomials of the first and second kind are related by:
