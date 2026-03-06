@@ -4,7 +4,7 @@ This project uses the **Samarkan** TrueType font for the `\ramanujanfont` macro 
 
 ## How to get the font
 
-- **Download**: get “Samarkan Font” from `https://www.fontmagic.com/samarkan.font`
+- **Download**: get “Samarkan Font” from `https://www.fontmagic.com/samarkan.font` or `https://www.dafont.com/font-comment.php?file=samarkan`
 - **Place it here**: copy the `.ttf` into this folder: `HSC-LastResorts/fonts/`
 - **Filename expected by the TeX source**: `SAMAN___.TTF` (keep this exact name)
 
