@@ -1,0 +1,86 @@
+% Problem 16: Ramanujan Summation and Roots of Unity Filters
+\begin{problem}[Ramanujan Summation \& Filters]
+\begin{enumerate}
+    \item[\textbf{(a)}] The Indian mathematician Srinivasa Ramanujan discovered the series for $1/\pi$:
+    \[
+    \frac{1}{\pi} = \frac{2\sqrt{2}}{9801} \sum_{n=0}^{\infty} u_n(1103 + 26390n), \text{ where } u_n = \frac{(4n)!}{(n!)^4(396)^{4n}}. \text{ Do NOT prove this.}
+    \]
+
+    \begin{enumerate}
+        \item[(i)] Show that for $n \ge 0$, the ratio of consecutive terms in the sequence $u_n$ is given by:
+        \[
+        \frac{u_{n+1}}{u_n} = \frac{(4n + 1)(4n + 3)(2n + 1)}{K(n + 1)^3}, \text{ where } K = \frac{396^4}{8}.
+        \]
+
+        \item[(ii)] Hence, prove that for all $n \ge 1$:
+        \[
+        \frac{u_{n+1}}{u_n} < \frac{1}{9 \times 10^9}
+        \]
+
+        \item[(iii)] Let $S_k$ be the sum of the first $k$ terms of the series. Using the result from part (ii), explain why the first term alone (i.e., $n = 0$) provides an approximation for $\pi$ that is accurate to at least 6 decimal places.
+    \end{enumerate}
+
+    \smallskip
+    \item[\textbf{(b)}] Ramanujan discovered distinct patterns in the partition function, $p(n)$, which counts the number of ways an integer $n$ can be written as a sum. For example, he proved that if $n$ is of the form $5k + 4$ (like 4, 9, 14...), then $p(n)$ is always divisible by 5. To isolate these specific terms, mathematicians often use roots of unity filters.
+
+    \noindent Let $\omega = e^{i\frac{2\pi}{5}}$ be a complex fifth root of unity.
+
+    \begin{enumerate}
+        \item[(i)] Prove the identity:
+        \[
+        \sum_{r=0}^{4} \omega^{kr} = 
+        \begin{cases} 
+        5 & \text{if } k \text{ is a multiple of } 5 \\ 
+        0 & \text{if } k \text{ is not a multiple of } 5 
+        \end{cases}
+        \]
+
+        \item[(ii)] Consider the polynomial $P(z) = \sum_{n=0}^{N} a_n z^n$. Using part (i), show that:
+        \[
+        \sum_{r=0}^{4} \omega^{-4r} P(\omega^r z) = 5 \sum_{k} a_{5k+4} z^{5k+4}
+        \]
+        \textit{Here, the symbol $\sum_{k}$ means we are summing over all integers $k$ so that $5k+4$ is an integer in the range from $0$ to $N$.}
+
+        \item[(iii)] If $a_n$ represents the partition numbers $p(n)$, and we assume Ramanujan's congruence $p(5k+4) \equiv 0 \pmod 5$ holds, determine the value of:
+        \[
+        \sum_{r=0}^{4} \omega^{-4r} P(\omega^r)
+        \]
+        \textit{Here, the symbol $\equiv$ means ``is congruent to'' (acting like an equals sign), and $\pmod 5$ means we are looking at the remainder when divided by 5; together, $\equiv 0 \pmod 5$ simply means ``is divisible by 5.''}
+    \end{enumerate}
+\end{enumerate}
+
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{(a)(i)} When substituting $n+1$, remember that $(4(n+1))! = (4n+4)!$, which expands to $(4n+4)(4n+3)(4n+2)(4n+1)(4n)!$. Write out the ratio carefully and cancel common factorial terms.
+    \item \textbf{(a)(ii)} The expression for the ratio is strictly decreasing for $n \ge 1$. Evaluate the ratio at its maximum possible value (when $n=1$) and compare it to the given bound.
+    \item \textbf{(a)(iii)} If each subsequent term is less than $10^{-9}$ times the previous term, how fast is the error shrinking? Think about geometric progressions and decimal place accuracy.
+    \item \textbf{(b)(i)} Recognize this as a finite geometric series with a common ratio of $\omega^k$. Apply the geometric sum formula for the case where $\omega^k \neq 1$.
+    \item \textbf{(b)(ii)} Expand $P(\omega^r z)$ into its sum form. Swap the order of summation so you evaluate the sum over $r$ first. Notice that $\omega^{-4r} \omega^{rn} = \omega^{r(n-4)}$. Apply the result from (b)(i).
+    \item \textbf{(b)(iii)} Substitute $z=1$ into your result from (b)(ii). Relate $a_n$ to the partition function $p(n)$, and use the fact that $p(5k+4)$ is a multiple of 5.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)(i)} $\frac{u_{n+1}}{u_n} = \frac{(4n+4)!}{((n+1)!)^4 396^{4n+4}} \times \frac{(n!)^4 396^{4n}}{(4n)!}$. Expanding the factorials gives $\frac{(4n+4)(4n+3)(4n+2)(4n+1)}{(n+1)^4 396^4}$. Factoring out $4(n+1)$ from the first term and $2(2n+1)$ from the third gives $\frac{8(n+1)(4n+3)(2n+1)(4n+1)}{(n+1)(n+1)^3 396^4}$. Canceling $(n+1)$ and moving the 8 to the denominator of $396^4$ yields the required result with $K = 396^4/8$.
+
+\textbf{(a)(ii)} The numerator terms grow linearly, while the denominator grows cubicly, meaning the ratio decreases as $n$ increases. The maximum value for $n \ge 1$ occurs at $n=1$. Substituting $n=1$ yields $\frac{5 \times 7 \times 3}{K(2^3)} = \frac{105}{396^4}$. Calculating $396^4$ shows it is approximately $2.4 \times 10^{10}$. Since $105 / (2.4 \times 10^{10}) \approx 4.2 \times 10^{-9}$, it is strictly less than $1 / (9 \times 10^9) \approx 1.1 \times 10^{-10}$.
+
+\textbf{(a)(iii)} Because the ratio between consecutive terms is incredibly small (less than $10^{-9}$), the sequence of terms converges to zero faster than a geometric series with ratio $r = 10^{-9}$. The second term $n=1$ is so small it only affects the 9th or 10th decimal place, meaning $S_0$ alone secures at least 6 decimal places of accuracy for $1/\pi$.
+
+\textbf{(b)(i)} Let $S = \sum_{r=0}^{4} (\omega^k)^r$. If $k$ is a multiple of 5, $\omega^k = e^{i 2\pi m} = 1$, so the sum is $1+1+1+1+1 = 5$. If $k$ is not a multiple of 5, $\omega^k \neq 1$. Using the geometric sum formula, $S = \frac{1 - (\omega^k)^5}{1 - \omega^k} = \frac{1 - (\omega^5)^k}{1 - \omega^k} = \frac{1 - 1^k}{1 - \omega^k} = 0$.
+
+\textbf{(b)(ii)} $\sum_{r=0}^{4} \omega^{-4r} \sum_{n=0}^{N} a_n (\omega^r z)^n = \sum_{n=0}^{N} a_n z^n \sum_{r=0}^{4} \omega^{r(n-4)}$. By part (i), the inner sum is 5 if $n-4$ is a multiple of 5 (i.e., $n = 5k+4$), and 0 otherwise. Thus, the sum collapses to $5 \sum_{k} a_{5k+4} z^{5k+4}$.
+
+\textbf{(b)(iii)} Substituting $z=1$ into the result from (ii), we get $5 \sum_{k} a_{5k+4}$. Since $a_n = p(n)$, this is $5 \sum_{k} p(5k+4)$. Ramanujan's congruence tells us $p(5k+4) = 5m$ for some integer $m$. Therefore, the sum becomes $5 \sum_{k} 5m = 25 \sum_{k} m$. The value of the expression is an exact multiple of 25.
+
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Hyper-Fast Convergence:} Ramanujan's series for $1/\pi$ demonstrates that analyzing the ratio of consecutive terms is key to proving how fast an infinite series converges to its target value.
+    \item \textbf{Roots of Unity Filter:} This is an elegant and immensely powerful algebraic tool. By summing over roots of unity, you cause unwanted terms to perfectly cancel each other out (summing to 0), cleanly isolating periodic sequences within a polynomial or power series.
+    \item \textbf{Modular Arithmetic in Combinatorics:} Ramanujan's congruences reveal that the partition function $p(n)$, despite simply counting additive combinations, contains deep, predictable algebraic structures when viewed through the lens of modular arithmetic.
+\end{enumerate}
+\end{takeaways}
