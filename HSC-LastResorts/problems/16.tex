@@ -83,5 +83,21 @@
     \item \textbf{Roots of Unity Filter:} This is an elegant and immensely powerful algebraic tool. By summing over roots of unity, you cause unwanted terms to perfectly cancel each other out (summing to 0), cleanly isolating periodic sequences within a polynomial or power series.
     % \item \textbf{Modular Arithmetic in Combinatorics:} Ramanujan's congruences reveal that the partition function $p(n)$, despite simply counting additive combinations, contains deep, predictable algebraic structures when viewed through the lens of modular arithmetic.
     \item \textbf{Connecting Universes:} Factorials, complex numbers, modular arithmetic, and $\pi$ shouldn't logically sit in the same problem. This is a masterclass in how seemingly isolated topics weave together to solve otherwise impossible problems.
+    \item \textbf{Roots of unity and filters (standard identity):} For a primitive $n$th root of unity $\omega = e^{2\pi i/n}$, the sum
+    \[
+      \sum_{r=0}^{n-1} \omega^{kr} =
+      \begin{cases}
+        n & \text{if } n \mid k,\\
+        0 & \text{otherwise,}
+      \end{cases}
+    \]
+    acts like an on/off switch: it is $n$ exactly when the exponent index $k$ is a multiple of $n$, and $0$ otherwise.
+    \item \textbf{Mini-example (polynomial filter):} If $P(z) = \sum_{m=0}^{N} a_m z^m$ and $\omega$ is a primitive $n$th root of unity, then
+    \[
+      \sum_{r=0}^{n-1} P(\omega^r z)
+      = \sum_{m=0}^{N} a_m z^m \sum_{r=0}^{n-1} \omega^{rm}
+      = n \sum_{k} a_{kn} z^{kn},
+    \]
+    because the inner sum is $n$ only when $m$ is a multiple of $n$ and $0$ otherwise. In other words, this sum ``filters out'' and keeps only the coefficients whose indices are multiples of $n$—exactly the mechanism used in part (b) to isolate the $5k+4$ terms.
 \end{enumerate}
 \end{takeaways}
