@@ -3,6 +3,7 @@
 LATEX=pdflatex
 TEX=HSC-LastResorts.tex
 
+
 all:
 	$(LATEX) $(TEX)
 	$(LATEX) $(TEX)
