@@ -1,0 +1,99 @@
+% Problem 15: Mandelbrot Escape Criterion
+\begin{problem}[Mandelbrot Escape Criterion]
+\noindent \textbf{Topic: Complex Dynamics, Inequalities, Mathematical Induction}
+
+\medskip
+
+For a given complex constant $c \in \mathbb{C}$, define the Mandelbrot sequence by
+\[
+z_0 = 0, \qquad z_{n+1} = z_n^2 + c \quad (n \ge 0).
+\]
+The Mandelbrot set $\mathcal{M}$ is the set of all $c \in \mathbb{C}$ for which the sequence of moduli $(|z_n|)_{n\ge 0}$ remains bounded.
+
+\begin{enumerate}
+    \item[(i)] Suppose $c \in \mathbb{R}$ and $c > \frac{1}{4}$. By induction, prove that for all $n \ge 0$, $z_n \in \mathbb{R}$ and
+    \[
+    z_{n+1} - z_n = z_n^2 - z_n + c > 0.
+    \]
+    Hence, deduce that if $c > \frac{1}{4}$ then $c \notin \mathcal{M}$.
+
+    \item[(ii)] Recall the reverse triangle inequality $|u - v| \ge \big| |u| - |v| \big|$. Let $z \in \mathbb{C}$ with $|z| \ge 1$. Prove that
+    \[
+    |z^2 - z| \ge |z|(|z| - 1).
+    \]
+
+    \item[(iii)] Let $c \in \mathbb{C}$ with $|c| > 2$, and define $z_0 = 0, z_{n+1} = z_n^2 + c$. Note that $|z_1| = |c| > 2$. Using the estimate in (ii) as the base idea, prove by induction that for all $n \ge 1$ with $|z_n| \ge 2$ we have
+    \[
+    |z_{n+1}| \ge |z_n|^2 - |c| \ge |z_n|^2 - |z_n| = |z_n|(|z_n| - 1).
+    \]
+    Hence, conclude that if $|c| > 2$, then $c \notin \mathcal{M}$.
+
+    \item[(iv)] Determine, using the results above, whether $c = 2 + i$ belongs to $\mathcal{M}$. Justify your answer rigorously.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Axes
+    \draw[->, thick] (-2.5,0) -- (3,0) node[right] {Re};
+    \draw[->, thick] (0,-2.5) -- (0,2.5) node[above] {Im};
+    
+    % Dashed circle of radius 2
+    \draw[dashed, red, thick] (0,0) circle (2);
+    
+    % Label for radius
+    \node[right] at (0.8, 1.8) {\footnotesize radius 2};
+    
+    % Point c = 2 + i
+    \filldraw[red] (2,1) circle (1.5pt);
+    \node[right] at (2.1, 1.1) {$c = 2 + i$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{(i)} Try completing the square for the quadratic $x^2 - x + c$. What does $c > \frac{1}{4}$ guarantee about its minimum value?
+    \item \textbf{(ii)} Factorize $z^2 - z$ into $z(z - 1)$. Apply the multiplicative property of absolute values, then use the reverse triangle inequality on $|z - 1|$.
+    \item \textbf{(iii)} Use $|z_{n+1}| = |z_n^2 + c| \ge |z_n|^2 - |c|$ (reverse triangle inequality). When $|z_n| \ge 2$ and $|c| > 2$, show $|z_n| \ge |c|$ to get $|z_n|^2 - |c| \ge |z_n|(|z_n|-1)$. Conclude $|z_{n+1}| \ge |z_n|$ so $|z_n| \ge 2$ for all $n \ge 1$ and the sequence grows.
+    \item \textbf{(iv)} Compute $|2 + i|$. Which result from (i)--(iii) applies?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Base case: $z_0 = 0 \in \mathbb{R}$. Inductive step: if $z_n \in \mathbb{R}$, then $z_{n+1} = z_n^2 + c \in \mathbb{R}$.
+
+Complete the square: $z_n^2 - z_n + c = (z_n - \tfrac{1}{2})^2 + c - \tfrac{1}{4}$. For $c > \tfrac{1}{4}$, we have $c - \tfrac{1}{4} > 0$, so $z_n^2 - z_n + c > 0$ for all $z_n \in \mathbb{R}$. Thus $z_{n+1} - z_n > 0$ for all $n$, so $(z_n)$ is strictly increasing. If the sequence were bounded, it would converge to a real fixed point $L$ satisfying $L = L^2 + c$, i.e.\ $L^2 - L + c = 0$. The discriminant is $1 - 4c < 0$ when $c > \tfrac{1}{4}$, so no such $L$ exists. Hence $(z_n)$ diverges to $+\infty$ and $c \notin \mathcal{M}$.
+
+\textbf{(ii)} Write $z^2 - z = z(z-1)$. Then $|z^2 - z| = |z|\,|z-1|$. By the reverse triangle inequality, $|z-1| \ge \big| |z| - 1 \big|$. For $|z| \ge 1$, we have $|z| - 1 \ge 0$, so $\big| |z| - 1 \big| = |z| - 1$. Thus $|z^2 - z| \ge |z|(|z| - 1)$.
+
+\textbf{(iii)} By the reverse triangle inequality, $|z_{n+1}| = |z_n^2 + c| \ge |z_n|^2 - |c|$. For $n \ge 1$ with $|z_n| \ge 2$ and $|c| > 2$, we have $|z_n| \ge |c|$ (since $|z_1| = |c| > 2$ and the recurrence increases modulus). So $|z_n|^2 - |c| \ge |z_n|^2 - |z_n| = |z_n|(|z_n| - 1)$. Since $|z_n| \ge 2$, we get $|z_{n+1}| \ge |z_n|(|z_n|-1) \ge |z_n|$, so $|z_{n+1}| \ge 2$. By induction, $|z_n| \ge 2$ for all $n \ge 1$ and $|z_{n+1}| \ge |z_n|(|z_n|-1) \ge |z_n|$, hence $(|z_n|)$ grows without bound. Thus $c \notin \mathcal{M}$.
+
+\textbf{(iv)} We have $|2 + i| = \sqrt{4 + 1} = \sqrt{5} > 2$. By part (iii), if $|c| > 2$ then $c \notin \mathcal{M}$. Therefore $c = 2 + i \notin \mathcal{M}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Axes
+    \draw[->, thick] (-2.5,0) -- (3,0) node[right] {Re};
+    \draw[->, thick] (0,-2.5) -- (0,2.5) node[above] {Im};
+    
+    % Dashed circle of radius 2
+    \draw[dashed, red, thick] (0,0) circle (2);
+    
+    % Label for radius
+    \node[right] at (0.8, 1.8) {\footnotesize radius 2};
+    
+    % Point c = 2 + i
+    \filldraw[red] (2,1) circle (1.5pt);
+    \node[right] at (2.1, 1.1) {$c = 2 + i$};
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Escape Criterion:} If $|c| > 2$, the Mandelbrot sequence escapes to infinity; such $c$ lie outside the Mandelbrot set. The diagram shows $c = 2 + i$ outside the circle of radius 2.
+    \item \textbf{Reverse Triangle Inequality:} $|u - v| \ge \big| |u| - |v| \big|$ is essential for modulus estimates in complex dynamics.
+    \item \textbf{Completing the Square:} For real $c > \tfrac{1}{4}$, the quadratic $x^2 - x + c$ has no real roots, so no fixed point exists and the sequence diverges.
+    \item \textbf{Induction on Modulus:} When $|z_n| \ge 2$, the recurrence $z_{n+1} = z_n^2 + c$ amplifies the modulus; induction shows unbounded growth.
+\end{enumerate}
+\end{takeaways}
