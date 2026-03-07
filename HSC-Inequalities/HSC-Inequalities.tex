@@ -186,6 +186,70 @@ The AM-GM inequality states that for positive reals $x_1, x_2, \ldots, x_n$:
 % \end{enumerate}
 \end{remark}
 
+\begin{theorembox}[title={\bfseries Weighted AM-GM Inequality}]
+For positive real numbers $x_1, x_2, \ldots, x_n$ and positive weights $\lambda_1, \lambda_2, \ldots, \lambda_n$ with $\sum_{i=1}^n \lambda_i = 1$:
+\[
+\lambda_1 x_1 + \lambda_2 x_2 + \cdots + \lambda_n x_n \ge x_1^{\lambda_1} x_2^{\lambda_2} \cdots x_n^{\lambda_n}
+\]
+with equality if and only if all $x_i$ are equal.
+\end{theorembox}
+
+\begin{remark}[Lopsided/Majorising AM-GM]
+A powerful technique for Extension~2 is to intentionally repeat variables to match target powers. For example, to prove $a^3 + b^3 + c^3 \ge a^2b + b^2c + c^2a$, apply AM-GM to $(a^3, a^3, b^3)$ to obtain:
+\[
+\frac{a^3 + a^3 + b^3}{3} \ge \sqrt[3]{a^3 \cdot a^3 \cdot b^3} = a^2b
+\]
+Then cycle through the other variables and sum the resulting inequalities. This ``weighting'' strategy manufactures the exact asymmetric powers needed.
+\end{remark}
+
+\begin{theorembox}[title={\bfseries AM-GM-HM Inequality Chain}]
+For positive real numbers $x_1, x_2, \ldots, x_n$, the Arithmetic Mean (AM), Geometric Mean (GM), and Harmonic Mean (HM) satisfy:
+\[
+\frac{x_1 + x_2 + \cdots + x_n}{n} \ge \sqrt[n]{x_1 x_2 \cdots x_n} \ge \frac{n}{\frac{1}{x_1} + \frac{1}{x_2} + \cdots + \frac{1}{x_n}}
+\]
+Equality holds throughout if and only if all $x_i$ are equal.
+\end{theorembox}
+
+\begin{remark}[Fundamental AM-HM Application]
+A particularly useful consequence is that for positive $a, b, c$:
+\[
+(a+b+c)\left(\frac{1}{a}+\frac{1}{b}+\frac{1}{c}\right) \ge 9
+\]
+This follows by multiplying the AM and HM inequalities for $\{a,b,c\}$.
+\end{remark}
+
+\begin{theorembox}[title={\bfseries Sum of Squares (SOS) Method}]
+For any real numbers $a, b, c$:
+\[
+(a-b)^2 + (b-c)^2 + (c-a)^2 \ge 0
+\]
+This fundamental non-negativity property can be used to derive many symmetric inequalities.
+\end{theorembox}
+
+\begin{examplebox}[title={\bfseries SOS Application}]
+Prove that for real numbers $a, b, c$:
+\[
+a^2 + b^2 + c^2 \ge ab + bc + ca
+\]
+\end{examplebox}
+
+\begin{solution}
+Consider the sum of squared differences:
+\begin{align*}
+(a-b)^2 + (b-c)^2 + (c-a)^2 &\ge 0
+\end{align*}
+Expanding the left side:
+\begin{align*}
+&(a^2 - 2ab + b^2) + (b^2 - 2bc + c^2) + (c^2 - 2ca + a^2) \ge 0\\
+&2a^2 + 2b^2 + 2c^2 - 2ab - 2bc - 2ca \ge 0
+\end{align*}
+Dividing by 2:
+\[
+a^2 + b^2 + c^2 - ab - bc - ca \ge 0
+\]
+Rearranging gives $a^2 + b^2 + c^2 \ge ab + bc + ca$. Equality holds when $a = b = c$. \qed
+\end{solution}
+
 \begin{theorembox}[title={\bfseries Cauchy-Schwarz Inequality}]
 For real numbers $a_1, a_2, \ldots, a_n$ and $b_1, b_2, \ldots, b_n$:
 \[
@@ -313,6 +377,10 @@ For real numbers $a$ and $b$:
 \[
 |a + b| \le |a| + |b|
 \]
+\textbf{Reverse Triangle Inequality:} For real numbers $a$ and $b$:
+\[
+\big||a| - |b|\big| \le |a - b|
+\]
 \end{theorembox}
 
 \begin{theorembox}[title={\bfseries Triangle Inequality (Complex Numbers)}]
@@ -320,9 +388,48 @@ For complex numbers $z$ and $w$:
 \[
 |z + w| \le |z| + |w|
 \]
+\textbf{Reverse Triangle Inequality:} For complex numbers $z$ and $w$:
+\[
+\big||z| - |w|\big| \le |z - w|
+\]
 \end{theorembox}
 
-Notes: (i) The polygonal inequality generalizes the triangle inequality to sums of more than two terms by repeated application. (ii) The geometric interpretation is that in any triangle, the length of one side is less than or equal to the sum of the lengths of the other two sides, which can be applied in 2-D and 3-D geometry problems.
+\begin{remark}[Applications of Triangle Inequalities]
+\begin{itemize}[leftmargin=*]
+\item The \textbf{standard} triangle inequality provides upper bounds on sums: $|a+b| \le |a| + |b|$
+\item The \textbf{reverse} triangle inequality provides lower bounds on differences: $||a|-|b|| \le |a-b|$
+\item The polygonal inequality generalizes to sums of more than two terms by repeated application
+\item Geometric interpretation: in any triangle, the length of one side is less than or equal to the sum of the lengths of the other two sides
+\end{itemize}
+\end{remark}
+
+\subsubsection{Strategic Techniques}
+
+The following techniques are essential for solving advanced inequality problems in Extension~2:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Cyclic Sums and Symmetry:} For symmetric inequalities, prove one instance (e.g., for variable $a$), then generate identical inequalities by cycling variables ($a \to b \to c \to a$), and sum them vertically. Example: To prove $\sum_{\text{cyc}} a^3 \ge \sum_{\text{cyc}} a^2b$, first show $2a^3 + b^3 \ge 3a^2b$, then cycle and add.
+
+\item \textbf{WLOG (Without Loss of Generality):} For symmetric inequalities, assume an ordering like $a \ge b \ge c$ to simplify the proof. This is valid because the inequality holds for any permutation of variables. Always state ``WLOG, assume $a \ge b \ge c$'' clearly.
+
+\item \textbf{Homogenization:} For homogeneous inequalities (where all terms have the same total degree), introduce a constraint to reduce variables. For example, if proving $f(x,y,z) \ge 0$ where $f$ is homogeneous of degree $d$, set $xyz = 1$ or $x+y+z = c$ to reduce from three variables to two. Then use substitution like $u = x/y$.
+
+\item \textbf{Normalization:} Scale variables by setting a constraint. For instance, in proving $\frac{a}{b+c} + \frac{b}{c+a} + \frac{c}{a+b} \ge \frac{3}{2}$, you can assume $a+b+c=1$ or $a+b+c=3$ without loss of generality (by homogeneity).
+
+\item \textbf{Equality Analysis:} Always determine when equality holds. This often reveals the extremal configuration and can guide the proof strategy. For AM-GM, equality occurs when all terms are equal; for Cauchy-Schwarz, when sequences are proportional.
+
+\item \textbf{Strategic Pairing:} Group terms strategically before applying inequalities. For example, to prove $(a+b)(b+c)(c+a) \ge 8abc$, apply AM-GM to each factor separately: $a+b \ge 2\sqrt{ab}$, etc.
+\end{itemize}
+
+\begin{remark}[Advanced Techniques Beyond Syllabus]
+For more advanced techniques that go beyond the HSC Extension~2 syllabus (such as Lagrange multipliers, calculus of variations, and other optimization methods), see the companion document:
+
+\vspace{0.5em}
+\noindent\textbf{HSC Last Resorts:} {\small\href{https://github.com/vuhung16au/math-olympiad-ml/blob/main/HSC-LastResorts/releases/HSC-LastResorts.pdf}{https://github.com/vuhung16au/math-olympiad-ml/blob/main/HSC-LastResorts/releases/HSC-LastResorts.pdf}}
+
+\vspace{0.5em}
+\noindent These techniques should only be used for exploration and verification, not in HSC exams where you must use syllabus-based methods.
+\end{remark}
 
 \subsection{Worked Examples}
 
