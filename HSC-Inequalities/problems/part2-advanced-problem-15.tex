@@ -1,0 +1,33 @@
+\begin{problem}[Strict Bernoulli via Induction]
+\begin{enumerate}
+    \item[(i)] Prove that $(1+x)^n > 1+nx$ for $n \ge 1$ and $x > -1$.
+    \item[(ii)] Hence, deduce that $\left(1 - \frac{1}{2n}\right)^n > \frac{1}{2}$ for $n > 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Prove by math induction.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} By induction. Base case $n=1$: equality holds.
+
+Inductive step: Assume $(1+x)^k \ge 1+kx$. Then:
+\begin{align*}
+(1+x)^{k+1} &= (1+x)(1+x)^k \ge (1+x)(1+kx)\\
+&= 1 + kx + x + kx^2 = 1 + (k+1)x + kx^2
+\end{align*}
+Since $k \ge 1$ and $x^2 \ge 0$, we have $kx^2 \ge 0$, so $(1+x)^{k+1} \ge 1+(k+1)x$.
+For $n > 1$ and $x \neq 0$, strict inequality holds since $kx^2 > 0$.
+
+\textbf{Part (ii):} Let $x = -\frac{1}{2n}$. Check $x > -1$: $-\frac{1}{2n} > -1$ holds for $n > \frac{1}{2}$.
+Apply (i):
+\begin{align*}
+\left(1 - \frac{1}{2n}\right)^n &> 1 + n\left(-\frac{1}{2n}\right) = 1 - \frac{1}{2} = \frac{1}{2}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item Induction proves Bernoulli; strict inequality when $kx^2 > 0$
+\item Negative substitutions require careful domain checking
+\end{takeaways}

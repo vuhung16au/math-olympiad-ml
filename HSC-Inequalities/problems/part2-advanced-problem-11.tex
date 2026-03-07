@@ -1,0 +1,31 @@
+\begin{problem}[Problem 40: Harmonic-Arithmetic Mean Inequality]
+Let $a, b, c$ be positive real numbers such that $\frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1$.
+Using the fact that $x+y \ge 2\sqrt{xy}$ for positive $x, y$, prove that:
+\[ a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \le abc \]
+\end{problem}
+
+\begin{hint}
+Use the given condition to show that $ab + bc + ac = abc$.
+\end{hint}
+
+\begin{solution}
+Multiply given condition by $abc$: $bc + ac + ab = abc$.
+
+Apply AM-GM to pairs:
+\begin{align*}
+ab + ac &\ge 2\sqrt{a^2bc} = 2a\sqrt{bc}\\
+ab + bc &\ge 2\sqrt{ab^2c} = 2b\sqrt{ac}\\
+ac + bc &\ge 2\sqrt{abc^2} = 2c\sqrt{ab}
+\end{align*}
+Sum the three inequalities:
+\begin{align*}
+2(ab + bc + ac) &\ge 2(a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab})\\
+ab + bc + ac &\ge a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab}
+\end{align*}
+Substitute $ab + bc + ac = abc$: $abc \ge a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab}$.
+\end{solution}
+
+\begin{takeaways}
+\item Convert harmonic condition to algebraic form first
+\item Apply AM-GM systematically to all pairs
+\end{takeaways}

@@ -1,0 +1,27 @@
+\begin{problem}[Reciprocal Polynomial with AM-GM]
+Let $a, b, c$ be real numbers. Suppose that $P(x) = x^4 + ax^3 + bx^2 + cx + 1$ has roots $\alpha, \frac{1}{\alpha}, \beta, \frac{1}{\beta}$, where $\alpha > 0$ and $\beta > 0$.
+\begin{enumerate}
+    \item[(i)] Prove that $a = c$.
+    \item[(ii)] Using the inequality, show that $b \ge 6$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+$P(x)$ is a reciprocal polynomial.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Consider $Q(x) = x^4 P(1/x) = x^4 + cx^3 + bx^2 + ax + 1$. The roots of $P(1/x)$ are reciprocals of roots of $P(x)$, which are $\frac{1}{\alpha}, \alpha, \frac{1}{\beta}, \beta$ - the same set. Since $P$ and $Q$ are monic with same roots, $P \equiv Q$. Comparing coefficients: $a = c$.
+
+\textbf{Part (ii):} By Vieta's formulas, $b$ equals sum of products of roots taken two at a time:
+\begin{align*}
+b &= \alpha \cdot \frac{1}{\alpha} + \alpha\beta + \frac{\alpha}{\beta} + \frac{\beta}{\alpha} + \frac{1}{\alpha\beta} + \beta \cdot \frac{1}{\beta}\\
+&= 2 + \left(\alpha\beta + \frac{1}{\alpha\beta}\right) + \left(\frac{\alpha}{\beta} + \frac{\beta}{\alpha}\right)
+\end{align*}
+Apply AM-GM: $\alpha\beta + \frac{1}{\alpha\beta} \ge 2$ and $\frac{\alpha}{\beta} + \frac{\beta}{\alpha} \ge 2$. Thus $b \ge 2 + 2 + 2 = 6$.
+\end{solution}
+
+\begin{takeaways}
+\item Reciprocal polynomials satisfy $P(x) = x^n P(1/x)$
+\item AM-GM applies to sum of reciprocals: $x + \frac{1}{x} \ge 2$
+\end{takeaways}

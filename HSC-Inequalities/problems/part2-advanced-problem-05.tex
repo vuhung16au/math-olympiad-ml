@@ -1,0 +1,29 @@
+\begin{problem}[Inductive Proof of AM-GM]
+The real numbers $a_1, a_2, \dots$ are all positive. For each positive $n$, $A_n$ and $G_n$ are defined by:
+\[ A_n = \frac{a_1 + a_2 + \dots + a_n}{n} \quad \text{and} \quad G_n = (a_1 a_2 \dots a_n)^{1/n} \]
+\begin{enumerate}[label=(\roman*)]
+    \item Show that, for any positive integer $k$,
+    \[ \text{if } (\lambda_k)^{k+1} - (k+1)\lambda_k + k \geq 0, \text{ where } \lambda_k = \left( \frac{a_{k+1}}{G_k} \right)^{1/(k+1)} \]
+    \[ \text{then } (k+1)(A_{k+1} - G_{k+1}) \geq k(A_k - G_k) \]
+    \item Let $f(x) = x^{k+1} - (k+1)x + k$, $x > 0$, $k \in \mathbb{Z}^+$. Show $f(x) \geq 0$.
+    \item Hence prove by induction $A_n \geq G_n$ for all $n \in \mathbb{Z}^+$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (i), manipulate the given inequality and substitute $\lambda_k$. For (ii), analyze $f(x)$ using calculus. For (iii), use induction and results from (i) and (ii).
+\end{hint}
+
+\begin{solution}
+	\textbf{(i)} Given $\lambda_k^{k+1} + k \geq (k+1)\lambda_k$. Multiply by $G_k > 0$ and substitute $\lambda_k$ to relate $A_{k+1}$ and $G_{k+1}$. (See sample for full algebraic steps.)
+
+	\textbf{(ii)} $f'(x) = (k+1)x^k - (k+1)$. Minimum at $x=1$, $f(1)=0$. So $f(x) \geq 0$ for $x > 0$.
+
+	\textbf{(iii)} Induction: Base case $n=1$ is trivial. Assume for $k$, use (i) and (ii) to show $A_{k+1} \geq G_{k+1}$.
+\end{solution}
+
+\begin{takeaways}
+\item Inductive proofs can be structured using auxiliary inequalities
+\item Calculus can establish non-negativity for all $x > 0$
+\item AM-GM is a fundamental result for all $n$
+\end{takeaways}

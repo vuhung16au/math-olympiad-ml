@@ -1,0 +1,46 @@
+\begin{problem}[Cauchy-Schwarz and Sums]
+Let $a, b, A$ and $B$ be positive numbers.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+    \item Prove that
+    \[ \frac{ab}{AB} \leq \frac{1}{2} \left( \frac{a^2}{A^2} + \frac{b^2}{B^2} \right) \]
+    \item Let $A = \sqrt{\sum_{k=1}^n a_k^2}$ and $B = \sqrt{\sum_{k=1}^n b_k^2}$, where $a_k$ and $b_k$ are positive real numbers.
+    Use (i) to prove that
+    \[ \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) \]
+    \item Let $S = x_1 + x_2 + x_3 + \dots + x_n$, where $x_k > 0$ for all $1 \leq k \leq n$. Use (ii) to prove that
+    \[ \frac{S}{S-x_1} + \frac{S}{S-x_2} + \cdots + \frac{S}{S-x_n} \geq \frac{n^2}{n-1} \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (i), use $(x-y)^2 \geq 0$ with $x = \frac{a}{A}$, $y = \frac{b}{B}$. For (ii), sum the result from (i). For (iii), apply Cauchy-Schwarz with suitable choices.
+\end{hint}
+
+\begin{solution}
+	\textbf{(i)} $(x-y)^2 \geq 0 \implies x^2 + y^2 \geq 2xy$. Let $x = \frac{a}{A}$, $y = \frac{b}{B}$:
+\[ \frac{a^2}{A^2} + \frac{b^2}{B^2} \geq 2\frac{ab}{AB} \implies \frac{ab}{AB} \leq \frac{1}{2}\left(\frac{a^2}{A^2} + \frac{b^2}{B^2}\right) \]
+
+	\textbf{(ii)} Apply (i) for each $k$:
+\[ \frac{a_k b_k}{AB} \leq \frac{1}{2}\left(\frac{a_k^2}{A^2} + \frac{b_k^2}{B^2}\right) \]
+Sum over $k$:
+\[ \frac{1}{AB} \sum_{k=1}^n a_k b_k \leq 1 \implies \sum_{k=1}^n a_k b_k \leq AB \]
+Square both sides:
+\[ \left(\sum_{k=1}^n a_k b_k\right)^2 \leq \left(\sum_{k=1}^n a_k^2\right)\left(\sum_{k=1}^n b_k^2\right) \]
+
+	\textbf{(iii)} Let $a_k = \sqrt{S-x_k}$, $b_k = \frac{1}{\sqrt{S-x_k}}$.
+\[ \left(\sum_{k=1}^n 1\right)^2 = n^2 \leq (S(n-1)) \sum_{k=1}^n \frac{1}{S-x_k} \]
+So 
+
+$$\sum_{k=1}^n \frac{S}{S-x_k} \geq \frac{n^2}{n-1}$$.
+
+\end{solution}
+
+\begin{takeaways}
+\item Cauchy-Schwarz can be derived from simple quadratic inequalities
+\item Summing pairwise inequalities yields the general form
+\item Clever substitutions can turn Cauchy-Schwarz into other inequalities
+\item The similar-looking, Nesbitt's Inequality, states that for positive numbers $a, b, c$, the following holds: 
+
+$$\frac{a}{b+c} + \frac{b}{a+c} + \frac{c}{a+b} \geq \frac{3}{2}$$
+
+which can be proved using AM-GM or Cauchy-Schwarz.
+\end{takeaways}

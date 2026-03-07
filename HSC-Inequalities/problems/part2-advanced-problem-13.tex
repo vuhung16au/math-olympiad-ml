@@ -1,0 +1,29 @@
+\begin{problem}[Cauchy-Schwarz with Homogenization]
+Prove that for all positive real numbers $a, b, c$:
+\[ \frac{a^2}{3a+2b} + \frac{b^2}{3b+2c} + \frac{c^2}{3c+2a} \ge \frac{a+b+c}{5} \]
+\end{problem}
+
+\begin{hint}
+Apply Cauchy-Schwarz.
+\end{hint}
+
+\begin{solution}
+Apply Cauchy-Schwarz: $\left(\sum \frac{u_i^2}{v_i}\right)\left(\sum v_i\right) \ge \left(\sum u_i\right)^2$.
+
+Let $u_i = (a, b, c)$ and $v_i = (3a+2b, 3b+2c, 3c+2a)$:
+\begin{align*}
+\left(\frac{a^2}{3a+2b} + \frac{b^2}{3b+2c} + \frac{c^2}{3c+2a}\right) &\cdot [(3a+2b) + (3b+2c) + (3c+2a)]\\
+&\ge (a+b+c)^2
+\end{align*}
+Simplify denominator sum:
+\begin{align*}
+(3a+2b) + (3b+2c) + (3c+2a) &= 3(a+b+c) + 2(a+b+c) = 5(a+b+c)
+\end{align*}
+Therefore:
+\[ \text{LHS} \cdot 5(a+b+c) \ge (a+b+c)^2 \implies \text{LHS} \ge \frac{a+b+c}{5} \]
+\end{solution}
+
+\begin{takeaways}
+\item Cauchy-Schwarz in Titu's Lemma form: $\sum \frac{x_i^2}{y_i} \ge \frac{(\sum x_i)^2}{\sum y_i}$
+\item Check that denominators sum to simple multiple of numerator sum
+\end{takeaways}

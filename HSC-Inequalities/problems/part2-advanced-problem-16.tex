@@ -1,0 +1,33 @@
+\begin{problem}[Summation Inequality via Induction]
+Given that for $k > 0$, $2k + 3 > 2\sqrt{(k+1)(k+2)}$, prove that:
+\[ \sum_{r=1}^{n} \frac{1}{\sqrt{r}} > 2\left(\sqrt{n+1} - 1\right) \]
+for all positive integers $n$.
+\end{problem}
+
+\begin{hint}
+Prove by induction. Use the given inequality.
+\end{hint}
+
+\begin{solution}
+\textbf{Base case} ($n=1$): LHS $= 1$, RHS $= 2(\sqrt{2}-1) \approx 0.828$. True.
+
+\textbf{Inductive step:} Assume $\sum_{r=1}^{k} \frac{1}{\sqrt{r}} > 2(\sqrt{k+1} - 1)$.
+Then:
+\begin{align*}
+\sum_{r=1}^{k+1} \frac{1}{\sqrt{r}} &= \sum_{r=1}^{k} \frac{1}{\sqrt{r}} + \frac{1}{\sqrt{k+1}}\\
+&> 2(\sqrt{k+1} - 1) + \frac{1}{\sqrt{k+1}}\\
+&= 2\sqrt{k+1} + \frac{1}{\sqrt{k+1}} - 2\\
+&= \frac{2(k+1) + 1}{\sqrt{k+1}} - 2 = \frac{2k+3}{\sqrt{k+1}} - 2
+\end{align*}
+Given $2k+3 > 2\sqrt{(k+1)(k+2)}$:
+\begin{align*}
+\frac{2k+3}{\sqrt{k+1}} - 2 &> \frac{2\sqrt{(k+1)(k+2)}}{\sqrt{k+1}} - 2\\
+&= 2\sqrt{k+2} - 2 = 2(\sqrt{k+2} - 1)
+\end{align*}
+Thus the inequality holds for $n = k+1$.
+\end{solution}
+
+\begin{takeaways}
+\item Use given auxiliary inequality in inductive step
+\item Algebraic manipulation converts sum to target form
+\end{takeaways}

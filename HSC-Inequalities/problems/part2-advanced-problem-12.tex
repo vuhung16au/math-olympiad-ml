@@ -1,0 +1,31 @@
+\begin{problem}[Logarithmic Inequality with Factorial]
+\begin{enumerate}
+\item[(i)] Prove that $x > \ln(x)$ for all positive real numbers $x$.
+\item[(ii)] Hence, show that for all positive integers $n$:
+\[ e^{n^2+n} > (n!)^2 \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Consider $f(x) = x - \ln(x)$.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Let $f(x) = x - \ln(x)$. Then $f'(x) = 1 - \frac{1}{x}$.
+Setting $f'(x) = 0$ gives $x = 1$. Since $f''(x) = \frac{1}{x^2} > 0$, point $(1,1)$ is a minimum.
+Thus $f(x) \ge f(1) = 1 - \ln(1) = 1 > 0$, so $x > \ln(x)$.
+
+\textbf{Part (ii):} Apply (i) to $k = 1, 2, \ldots, n$ and sum:
+\begin{align*}
+\sum_{k=1}^{n} k &> \sum_{k=1}^{n} \ln(k)\\
+\frac{n(n+1)}{2} &> \ln(n!)\\
+\frac{n^2 + n}{2} &> \ln(n!)\\
+n^2 + n &> 2\ln(n!) = \ln((n!)^2)
+\end{align*}
+Exponentiating: $e^{n^2+n} > (n!)^2$.
+\end{solution}
+
+\begin{takeaways}
+\item Calculus proves $x > \ln(x)$ via minimization
+\item Sum inequalities to relate arithmetic to logarithmic sums
+\end{takeaways}

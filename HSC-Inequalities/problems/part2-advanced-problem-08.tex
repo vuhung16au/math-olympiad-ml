@@ -1,0 +1,35 @@
+\begin{problem}[Triangle Inequality - Quadratic Forms]
+Let $p, q, r$ be the lengths of the three sides of a triangle.
+\begin{enumerate}
+    \item[(a)] Show that: $p^2 + q^2 + r^2 \ge pq + pr + qr$
+    \item[(b)] Show that: $3(pq + pr + qr) \le (p + q + r)^2 < 4(pq + pr + qr)$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Consider sum of squares of differences.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (a):} Consider $(p-q)^2 + (q-r)^2 + (p-r)^2 \ge 0$:
+\begin{align*}
+2p^2 + 2q^2 + 2r^2 - 2pq - 2qr - 2pr &\ge 0\\
+p^2 + q^2 + r^2 &\ge pq + pr + qr
+\end{align*}
+
+\textbf{Part (b):} Expand $(p+q+r)^2 = p^2 + q^2 + r^2 + 2(pq+pr+qr)$. Using (a):
+\begin{align*}
+(p+q+r)^2 &\ge (pq+pr+qr) + 2(pq+pr+qr) = 3(pq+pr+qr)
+\end{align*}
+For the upper bound, use triangle inequalities $p < q+r$, $q < p+r$, $r < p+q$:
+\begin{align*}
+p^2 < pq + pr, \quad q^2 < pq + qr, \quad r^2 < pr + qr\\
+p^2 + q^2 + r^2 &< 2(pq + pr + qr)
+\end{align*}
+Add $2(pq+pr+qr)$ to both sides: $(p+q+r)^2 < 4(pq+pr+qr)$.
+\end{solution}
+
+\begin{takeaways}
+\item Sum of squares of differences always non-negative
+\item Triangle inequality crucial for strict upper bound
+\end{takeaways}

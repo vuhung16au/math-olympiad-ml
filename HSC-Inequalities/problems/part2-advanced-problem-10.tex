@@ -1,0 +1,28 @@
+\begin{problem}[Complex Modulus with Constraint]
+Given $|z| < \frac{1}{2}$, show that:
+\[ |(1+i)z^3 + iz| < \frac{3}{4} \]
+\end{problem}
+
+\begin{hint}
+Apply the complex triangle inequality.
+\end{hint}
+
+\begin{solution}
+Apply triangle inequality:
+\begin{align*}
+|(1+i)z^3 + iz| &\le |(1+i)z^3| + |iz|\\
+&= |1+i||z|^3 + |i||z|\\
+&= \sqrt{2}|z|^3 + |z|
+\end{align*}
+Since $|z| < \frac{1}{2}$ and $f(x) = \sqrt{2}x^3 + x$ is increasing for $x > 0$:
+\begin{align*}
+|(1+i)z^3 + iz| &< \sqrt{2}\left(\frac{1}{2}\right)^3 + \frac{1}{2}\\
+&= \frac{\sqrt{2}}{8} + \frac{4}{8} = \frac{4 + \sqrt{2}}{8}
+\end{align*}
+Since $\sqrt{2} < 2$: $\frac{4 + \sqrt{2}}{8} < \frac{6}{8} = \frac{3}{4}$.
+\end{solution}
+
+\begin{takeaways}
+\item Triangle inequality: $|w_1 + w_2| \le |w_1| + |w_2|$
+\item Evaluate at boundary of constraint for tight bounds
+\end{takeaways}

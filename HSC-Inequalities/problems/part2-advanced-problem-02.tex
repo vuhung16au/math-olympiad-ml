@@ -1,0 +1,47 @@
+\begin{problem}[Convexity and Product Constraints (Jensen)]
+
+\begin{quote}
+\textbf{Jensen's Inequality:}
+Let $f(x)$ be a convex function on an interval $I$. For any $x_1, x_2, \dots, x_n \in I$:
+
+\[ \frac{f(x_1) + f(x_2) + \dots + f(x_n)}{n} \geq f\left( \frac{x_1 + x_2 + \dots + x_n}{n} \right) \]
+
+\textit{Note: You may use this inequality in the following problem without proof.}
+
+\end{quote}
+
+Let $a_1,\dots,a_n>0$ satisfy $\prod_{i=1}^n a_i = a_1 a_2 \cdots a_n = 1$ and set $x_i=\ln a_i$. 
+
+Let $f(x)=\ln(1+e^x)$.
+
+\begin{enumerate}
+    \item[(i)] Show $f''(x)=\tfrac{e^x}{(1+e^x)^2}>0$, so $f$ is convex on $\mathbb{R}$.
+    \item[(ii)] Using Jensen's inequality deduce
+    \[ \prod_{i=1}^n(1+a_i)\ge 2^n. \]
+    \item[(iii)] Let $g(k)=\sum_{i=1}^n f(kx_i)$ for $k\ge0$. Show $g'(0)=0$ and $g''(k)\ge0$.
+    \item[(iv)] Conclude the cyclic inequality
+    \[ \prod_{i=1}^n(1+a_i)\ge\prod_{i=1}^n\big(1+a_i^{1/n}\big). \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (ii) use $\sum x_i=0$ (since $\prod a_i=1$) so Jensen at the average gives $\sum f(x_i)\ge n f(0)=n\ln2$. For (iii) compute derivatives by the chain rule and use $f''>0$. For (iv) compare $g(1)$ and $g(1/n)$.
+\end{hint}
+
+\begin{solution}
+(i) Differentiate: $f'(x)=\tfrac{e^x}{1+e^x}$ and $f''(x)=\tfrac{e^x}{(1+e^x)^2}>0$. 
+
+(ii) Since $\sum x_i=0$, Jensen gives $\frac{1}{n}\sum f(x_i)\ge f(0)=\ln2$, so $\sum\ln(1+a_i)\ge n\ln2$ and exponentiating gives $\prod(1+a_i)\ge2^n$.
+
+(iii) $g'(k)=\sum x_i f'(kx_i)$ so $g'(0)=f'(0)\sum x_i=\tfrac12\cdot0=0$. Also $g''(k)=\sum x_i^2 f''(kx_i)\ge0$ since each term is nonnegative.
+
+(iv) Convexity of $g$ on $[0,\infty)$ (from $g''\ge0$) implies $g(1)\ge g(1/n)$, i.e. $\sum\ln(1+a_i)\ge\sum\ln(1+a_i^{1/n})$. Exponentiate to obtain the cyclic inequality.
+\end{solution}
+
+\begin{takeaways}
+\item Log-space transformations turn products into sums that are amenable to Jensen and calculus.
+% \item Convexity plus scaling gives monotonicity in the parameter; comparing parameters yields useful cyclic bounds.
+\item Convexity is Key: In Extension 2, proving convexity ($f'' > 0$) is often the "hidden" first step to solving complex inequalities.
+\item The Power of $k$: By introducing a scaling factor $k$, we can show that an inequality isn't just a "one-off" truth, but part of a continuous growth pattern.
+\item Logarithmic Limits: This problem proves that the closer the $a_i$ values are to each other (and thus to 1), the smaller the product becomes, reaching its minimum at $2^n$.
+\end{takeaways}

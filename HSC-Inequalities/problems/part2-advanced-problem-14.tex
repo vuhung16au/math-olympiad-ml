@@ -1,0 +1,24 @@
+\begin{problem}[Bernoulli's Inequality - Power Form]
+Prove the following inequality for all integers $n \ge 1$:
+\[ \left(1 + \frac{1}{\sqrt{n}}\right)^n \ge 1 + \sqrt{n} \]
+\end{problem}
+
+\begin{hint}
+Apply Bernoulli directly.
+\end{hint}
+
+\begin{solution}
+Let $x = \frac{1}{\sqrt{n}}$. Since $n \ge 1$, we have $x > 0 > -1$.
+
+Apply Bernoulli's inequality $(1+x)^n \ge 1+nx$:
+\begin{align*}
+\left(1 + \frac{1}{\sqrt{n}}\right)^n &\ge 1 + n \cdot \frac{1}{\sqrt{n}}\\
+&= 1 + \frac{n}{\sqrt{n}}\\
+&= 1 + \sqrt{n}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item Bernoulli's inequality: $(1+x)^n \ge 1+nx$ for $x > -1$, $n \ge 1$
+\item Choose substitution to match target form
+\end{takeaways}

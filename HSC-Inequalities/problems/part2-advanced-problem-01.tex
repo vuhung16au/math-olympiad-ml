@@ -1,0 +1,42 @@
+\begin{problem}[Bernoulli's Inequality - Weighted AM-GM]
+Let $n$ be a positive integer and let $x$ be a positive real number.
+\begin{enumerate}
+    \item[(i)] Show that $x^n - 1 - n(x-1) = (x-1)(1+x+x^2+\dots+x^{n-1}-n)$.
+    \item[(ii)] Hence show that $x^n \ge 1 + n(x-1)$.
+    \item[(iii)] Deduce that for positive real numbers $a$ and $b$,
+    \[ a^n b^{1-n} \ge na + (1-n)b. \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use the standard factorization for difference of powers.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Use standard factorization: $x^n - 1 = (x-1)(1 + x + \dots + x^{n-1})$. Then
+\begin{align*}
+x^n - 1 - n(x-1) &= (x-1)(1 + x + \dots + x^{n-1}) - n(x-1)\\
+&= (x-1)(1 + x + \dots + x^{n-1} - n)
+\end{align*}
+
+\textbf{Part (ii):} Analyze sign of $(x-1)(1+x+\dots+x^{n-1}-n)$:
+\begin{itemize}
+\item If $x=1$: expression equals 0
+\item If $x>1$: both factors positive $\implies$ product $> 0$
+\item If $0<x<1$: both factors negative $\implies$ product $> 0$
+\end{itemize}
+Thus $x^n - 1 - n(x-1) \ge 0 \implies x^n \ge 1 + n(x-1)$.
+
+\textbf{Part (iii):} Substitute $x = \frac{a}{b}$ into (ii):
+\begin{align*}
+\left(\frac{a}{b}\right)^n &\ge 1 + n\left(\frac{a}{b} - 1\right)\\
+\frac{a^n}{b^n} &\ge 1 + \frac{na - nb}{b}
+\end{align*}
+Multiply by $b$: $\frac{a^n}{b^{n-1}} \ge na + b(1-n)$, giving $a^n b^{1-n} \ge na + (1-n)b$.
+\end{solution}
+
+\begin{takeaways}
+\item Bernoulli's inequality extends to weighted AM-GM forms
+\item Sign analysis crucial when $x$ varies around 1
+\item The inequality can be generalized when $n$ is not an integer 
+\end{takeaways}

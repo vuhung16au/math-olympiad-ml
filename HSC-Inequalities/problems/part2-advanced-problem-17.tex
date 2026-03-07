@@ -1,0 +1,97 @@
+\begin{problem}[Asymmetric Cubic Inequality]
+For any positive real numbers $a, b,$ and $c$, prove that:
+\[
+a^3 + b^3 + c^3 \ge a^2b + b^2c + c^2a
+\]
+\end{problem}
+
+\begin{hint}
+\begin{enumerate}
+\item Standard AM-GM on $a^3 + b^3 + c^3$ will just give you $3\sqrt[3]{abc}$, which doesn't help you reach the right-hand side. You need to break the sum apart and attack it in smaller, strategic blocks.
+\item Look at the target term $a^2b$. If you were to use the 3-variable AM-GM inequality, what combination of $a^3$ and $b^3$ terms would you need to put under the cube root to perfectly output an $a^2b$?
+\item Try writing out an AM-GM inequality for the sum $a^3 + a^3 + b^3$. Once you see what happens, ``cycle'' the variables to create two more identical inequalities for the other terms, and sum them all vertically.
+\end{enumerate}
+\end{hint}
+
+\begin{solution}
+\textbf{Step 1: Construct the Lopsided AM-GM.}
+Apply the 3-variable AM-GM inequality to the terms $a^3, a^3,$ and $b^3$:
+\begin{align*}
+    \frac{a^3 + a^3 + b^3}{3} &\ge \sqrt[3]{a^3 \cdot a^3 \cdot b^3} = \sqrt[3]{a^6b^3} = a^2b
+\end{align*}
+Multiply by 3:
+\[
+2a^3 + b^3 \ge 3a^2b
+\]
+
+\textbf{Step 2: Cycle the Variables.}
+Repeat this exact same logical grouping for the other two target terms on the right-hand side ($b^2c$ and $c^2a$):
+\begin{align*}
+    2b^3 + c^3 &\ge 3b^2c \\
+    2c^3 + a^3 &\ge 3c^2a
+\end{align*}
+
+\textbf{Step 3: Sum and Simplify.}
+Add the three inequalities together vertically:
+\begin{align*}
+    (2a^3 + b^3) + (2b^3 + c^3) + (2c^3 + a^3) &\ge 3a^2b + 3b^2c + 3c^2a \\
+    3a^3 + 3b^3 + 3c^3 &\ge 3(a^2b + b^2c + c^2a)
+\end{align*}
+Divide by 3 to complete the proof:
+\[
+    a^3 + b^3 + c^3 \ge a^2b + b^2c + c^2a
+\]
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Majorising / Cycling AM-GM:} When the target inequality looks asymmetric (like $a^2b$), you can intentionally ``weight'' the left-hand side of your AM-GM setup by doubling up on one variable ($a^3 + a^3 + b^3$) to manufacture the exact powers you need. This is a powerful technique for Extension 2.
+\item \textbf{The Vertical Sum:} Proving a massive inequality in one shot is often impossible. Building three smaller, identical-logic inequalities and stacking them is one of the most reliable proof architectures.
+\item \textbf{Equality Condition:} Equality holds when $a = b = c$ (when all three inequalities have equality simultaneously).
+\item \textbf{Weighted AM-GM:} is what actually used in the solution.
+\end{takeaways}
+
+\begin{remark}[The Rearrangement Inequality]
+This problem can be solved in one step using the out-of-syllabus \textbf{Rearrangement Inequality}. 
+
+\textbf{Theorem:} If two sequences are similarly ordered (both increasing or both decreasing), then the sum obtained by pairing them in order is maximal.
+
+\textbf{Proof outline:}
+\begin{itemize}
+    \item Without loss of generality, assume $a \ge b \ge c > 0$.
+    \item Then $a^2 \ge b^2 \ge c^2$ (sequences $(a, b, c)$ and $(a^2, b^2, c^2)$ are similarly ordered).
+    \item The Rearrangement Inequality states that the ``order-preserving'' pairing $a^2 \cdot a + b^2 \cdot b + c^2 \cdot c = a^3 + b^3 + c^3$ is maximal.
+    \item Any permutation, such as the cyclic shift $a^2 \cdot b + b^2 \cdot c + c^2 \cdot a$, must be less than or equal to the perfectly matched sum.
+    \item Therefore $a^3 + b^3 + c^3 \ge a^2b + b^2c + c^2a$.
+\end{itemize}
+\end{remark}
+
+\begin{remark}[H\"older's Inequality]
+For an alternative approach using more sophisticated machinery, we can apply \textbf{H\"older's Inequality}, which generalizes Cauchy-Schwarz to multiple sequences.
+
+\textbf{Theorem:} For positive reals $a_i, b_i, c_i$ and exponents $p, q, r$ with $\frac{1}{p} + \frac{1}{q} + \frac{1}{r} = 1$:
+\[
+\sum_{i=1}^n a_i b_i c_i \le \left(\sum_{i=1}^n a_i^p\right)^{1/p} \left(\sum_{i=1}^n b_i^q\right)^{1/q} \left(\sum_{i=1}^n c_i^r\right)^{1/r}
+\]
+
+
+\textbf{Proof outline:}
+\begin{itemize}
+    \item Set $p = q = r = 3$ (so $\frac{1}{3} + \frac{1}{3} + \frac{1}{3} = 1$).
+    \item Consider sequences: $(a, b, c)$, $(a, b, c)$, and $(b, c, a)$ (cyclic shift).
+    \item Applying H\"older's inequality:
+    \[
+    a^2b + b^2c + c^2a = \sum ab \cdot a \cdot b_{\text{shifted}} \le (a^3+b^3+c^3)^{1/3} (a^3+b^3+c^3)^{1/3} (b^3+c^3+a^3)^{1/3}
+    \]
+    \item Simplifying: $a^2b + b^2c + c^2a \le a^3 + b^3 + c^3$.
+\end{itemize}
+
+\textit{Note:} H\"older's inequality is beyond Extension 2 but provides elegant connections to higher mathematics.
+\end{remark}
+
+\begin{remark}[Using Lagrange Multipliers]
+Another method to solve this problem is to use \textbf{Lagrange Multipliers}.
+\end{remark}
+
+\begin{remark}[Using Cauchy-Schwarz inequality]
+This problem can also be solved using the Cauchy-Schwarz inequality.
+\end{remark}

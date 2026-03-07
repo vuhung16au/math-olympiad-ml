@@ -1,0 +1,30 @@
+\begin{problem}[Complex Triangle Inequality]
+Prove that for any two complex numbers $z_1, z_2 \in \mathbb{C}$:
+\[ |z_1 + z_2| \le |z_1| + |z_2| \]
+\end{problem}
+
+\begin{hint}
+Use the property that $|w| \ge \text{Re}(w)$.
+\end{hint}
+
+\begin{solution}
+Square the modulus: $|z_1 + z_2|^2 = (z_1 + z_2)(\overline{z_1 + z_2})$:
+\begin{align*}
+|z_1 + z_2|^2 &= z_1\bar{z}_1 + z_1\bar{z}_2 + z_2\bar{z}_1 + z_2\bar{z}_2\\
+&= |z_1|^2 + (z_1\bar{z}_2 + \overline{z_1\bar{z}_2}) + |z_2|^2\\
+&= |z_1|^2 + 2\text{Re}(z_1\bar{z}_2) + |z_2|^2
+\end{align*}
+Use $\text{Re}(w) \le |w|$:
+\begin{align*}
+|z_1 + z_2|^2 &\le |z_1|^2 + 2|z_1\bar{z}_2| + |z_2|^2\\
+&= |z_1|^2 + 2|z_1||z_2| + |z_2|^2 = (|z_1| + |z_2|)^2
+\end{align*}
+Taking square roots: $|z_1 + z_2| \le |z_1| + |z_2|$.
+\end{solution}
+
+\begin{takeaways}
+\item Key identity: $z\bar{z} = |z|^2$ and $w + \bar{w} = 2\text{Re}(w)$
+\item $\text{Re}(w) \le |w|$ fundamental for complex inequalities
+\item This is the triangle inequality in the complex plane, analogous to the geometric triangle inequality.
+\item The Inequality can be proven using other methods, such as geometric interpretations, where the modulus represents the distance from the origin in the complex plane.
+\end{takeaways}
