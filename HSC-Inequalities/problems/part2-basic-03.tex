@@ -1,0 +1,36 @@
+\begin{problem}[Algebraic Factorization Method]
+Show that $x\sqrt{x} + 1 \ge x + \sqrt{x}$, for $x \ge 0$.
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+Rearrange to $(x-1)(\sqrt{x}-1) \ge 0$. Factor further using difference of squares: $x-1 = (\sqrt{x}-1)(\sqrt{x}+1)$.
+}}
+\end{hint}
+
+\begin{solution}
+Rearrange to show LHS $-$ RHS $\ge 0$:
+\begin{align*}
+x\sqrt{x} + 1 - x - \sqrt{x} &= x\sqrt{x} - x - \sqrt{x} + 1 \\
+&= x(\sqrt{x} - 1) - (\sqrt{x} - 1) \\
+&= (x - 1)(\sqrt{x} - 1)
+\end{align*}
+
+Using the difference of squares: $x - 1 = (\sqrt{x} - 1)(\sqrt{x} + 1)$
+
+Substituting:
+\[ (x - 1)(\sqrt{x} - 1) = (\sqrt{x} - 1)^2(\sqrt{x} + 1) \]
+
+For $x \ge 0$: $\sqrt{x} + 1 > 0$ and $(\sqrt{x} - 1)^2 \ge 0$
+
+Therefore: $(\sqrt{x} + 1)(\sqrt{x} - 1)^2 \ge 0$
+
+Thus $x\sqrt{x} + 1 \ge x + \sqrt{x}$.
+\end{solution}
+
+\begin{takeaways}
+
+\item Factorization reveals hidden perfect squares
+\item Difference of squares simplifies radical expressions
+
+\end{takeaways}

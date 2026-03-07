@@ -1,0 +1,46 @@
+\begin{problem}[Substitution with Constrained Variables]
+If $0 < a < 1$, $0 < b < 1$, $0 < c < 1$, and $a + b + c = 2$, prove that:
+\[ \frac{a}{1-a} \cdot \frac{b}{1-b} \cdot \frac{c}{1-c} \ge 8 \]
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+Substitute $x = 1-a$, $y = 1-b$, $z = 1-c$. Then $x+y+z = 1$ and $a = y+z$. Apply AM-GM to products.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{Substitution:} Let $x = 1-a$, $y = 1-b$, $z = 1-c$ where $x,y,z > 0$.
+
+Since $a+b+c = 2$:
+\[ x+y+z = 3-(a+b+c) = 3-2 = 1 \]
+
+Express numerators: $a = 1-x = y+z$ (since $x+y+z=1$)
+
+Similarly: $b = x+z$, $c = x+y$
+
+The inequality becomes:
+\[ \frac{y+z}{x} \cdot \frac{x+z}{y} \cdot \frac{x+y}{z} \ge 8 \]
+
+\textbf{Apply AM-GM:} For positive reals, $u+v \ge 2\sqrt{uv}$:
+\begin{align*}
+y+z &\ge 2\sqrt{yz} \\
+x+z &\ge 2\sqrt{xz} \\
+x+y &\ge 2\sqrt{xy}
+\end{align*}
+
+Multiplying:
+\[ (y+z)(x+z)(x+y) \ge 8\sqrt{(yz)(xz)(xy)} = 8xyz \]
+
+Dividing by $xyz$:
+\[ \frac{(y+z)(x+z)(x+y)}{xyz} \ge 8 \]
+
+Equality when $x=y=z=\frac{1}{3}$, i.e., $a=b=c=\frac{2}{3}$.
+\end{solution}
+
+\begin{takeaways}
+
+\item Substitution transforms constraints into simpler forms
+\item AM-GM on products of sums yields multiplicative bounds
+
+\end{takeaways}

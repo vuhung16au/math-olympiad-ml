@@ -1,0 +1,48 @@
+\begin{problem}[Triangle Inequality for Complex Polynomials]
+Let $\beta$ be a root of the monic polynomial $P(z) = z^n + a_{n-1}z^{n-1} + \dots + a_1z + a_0$.
+
+Let $M = \max\{|a_{n-1}|, |a_{n-2}|, \dots, |a_0|\}$.
+
+\begin{enumerate}
+    \item[(i)] Show that $|\beta|^n \le M(|\beta|^{n-1} + |\beta|^{n-2} + \dots + |\beta| + 1)$.
+    \item[(ii)] Hence show that $|\beta| < 1 + M$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+(i) Use $\beta^n = -(a_{n-1}\beta^{n-1} + \dots + a_0)$ and triangle inequality. (ii) Consider cases $|\beta| \le 1$ and $|\beta| > 1$ separately.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since $P(\beta) = 0$:
+\[ \beta^n = -(a_{n-1}\beta^{n-1} + \dots + a_1\beta + a_0) \]
+
+Taking modulus and using triangle inequality:
+\begin{align*}
+|\beta^n| &= |a_{n-1}\beta^{n-1} + \dots + a_0| \\
+&\le |a_{n-1}||\beta|^{n-1} + \dots + |a_1||\beta| + |a_0| \\
+&\le M(|\beta|^{n-1} + \dots + |\beta| + 1)
+\end{align*}
+
+\textbf{(ii)} \textbf{Case 1:} If $|\beta| \le 1$, then clearly $|\beta| < 1 + M$ (since $M \ge 0$).
+
+\textbf{Case 2:} If $|\beta| > 1$, the sum in (i) is a geometric series:
+\[ |\beta|^{n-1} + \dots + |\beta| + 1 = \frac{|\beta|^n - 1}{|\beta| - 1} \]
+
+From (i):
+\[ |\beta|^n \le M \cdot \frac{|\beta|^n - 1}{|\beta| - 1} < M \cdot \frac{|\beta|^n}{|\beta| - 1} \]
+
+Dividing by $|\beta|^n$:
+\[ 1 < \frac{M}{|\beta| - 1} \implies |\beta| - 1 < M \implies |\beta| < 1 + M \]
+
+Therefore $|\beta| < 1 + M$ in all cases.
+\end{solution}
+
+\begin{takeaways}
+
+\item Triangle inequality bounds polynomial roots
+\item Case analysis handles different regimes effectively
+
+\end{takeaways}

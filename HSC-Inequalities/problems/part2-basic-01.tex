@@ -1,0 +1,48 @@
+\begin{problem}[Induction with Exponential Growth]
+Use mathematical induction to prove that $2^n \ge n^2 - 2$, for all integers $n \ge 3$.
+
+\textbf{Hint:} First show that $k^2 - 2k - 3 \ge 0$ for $k \ge 3$.
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+Base case: $n=3$ gives $8 \ge 7$. For induction, use $k^2 - 2k - 3 \ge 0$ to show $(k+1)^2 - 2 \le 2k^2 - 2$.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{Step 1:} Show the helper inequality $k^2 - 2k - 3 \ge 0$ for $k \ge 3$.
+
+Factoring: $k^2 - 2k - 3 = (k-3)(k+1) \ge 0$ for $k \ge 3$.
+
+\textbf{Step 2: Base Case} ($n=3$)
+
+LHS: $2^3 = 8$, RHS: $3^2 - 2 = 7$. Since $8 \ge 7$, base case holds.
+
+\textbf{Step 3: Inductive Hypothesis}
+
+Assume $2^k \ge k^2 - 2$ for some $k \ge 3$.
+
+\textbf{Step 4: Inductive Step}
+
+Need to show: $2^{k+1} \ge (k+1)^2 - 2$
+
+\begin{align*}
+2^{k+1} &= 2 \cdot 2^k \\
+&\ge 2(k^2 - 2) \quad \text{(by IH)} \\
+&= 2k^2 - 4
+\end{align*}
+
+Expanding RHS: $(k+1)^2 - 2 = k^2 + 2k + 1 - 2 = k^2 + 2k - 1$
+
+Need: $2k^2 - 4 \ge k^2 + 2k - 1$, i.e., $k^2 - 2k - 3 \ge 0$, which is true by Step 1.
+
+Therefore $2^{k+1} \ge (k+1)^2 - 2$. By induction, $2^n \ge n^2 - 2$ for all $n \ge 3$.
+\end{solution}
+
+\begin{takeaways}
+
+\item Helper inequalities strengthen inductive steps
+\item Doubling exponentials grow faster than quadratics for $n \ge 3$
+
+\end{takeaways}

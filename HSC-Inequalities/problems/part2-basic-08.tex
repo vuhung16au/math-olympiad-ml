@@ -1,0 +1,52 @@
+\begin{problem}[Problem 22: Central Binomial Coefficient Bound]
+\begin{enumerate}
+    \item[(i)] Prove for any integer $k \ge 0$ that $\frac{2k+1}{2k+2} < \frac{\sqrt{2k+1}}{\sqrt{2k+3}}$.
+    \item[(ii)] Prove by induction on $n \ge 0$ that the central binomial coefficient satisfies
+    \[ \binom{2n}{n} \le \frac{4^n}{\sqrt{2n+1}} \]
+\end{enumerate}
+
+Here, $\binom{2n}{n} = \frac{(2n)!}{(n!)^2}$.
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+(i) Square both sides and cross-multiply. (ii) Use recurrence $\binom{2n+2}{n+1} = \frac{2(2n+1)}{n+1}\binom{2n}{n}$ with part (i).
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Square both sides (all terms positive):
+\[ \left(\frac{2k+1}{2k+2}\right)^2 < \frac{2k+1}{2k+3} \]
+
+Cross-multiply:
+\[ (2k+1)^2(2k+3) < (2k+1)(2k+2)^2 \]
+
+Divide by $(2k+1)$:
+\[ (2k+1)(2k+3) < (2k+2)^2 \]
+\[ 4k^2 + 8k + 3 < 4k^2 + 8k + 4 \]
+\[ 3 < 4 \quad \checkmark \]
+
+\textbf{(ii)} \textbf{Base case} ($n=0$): $\binom{0}{0} = 1 \le \frac{1}{1} = 1$. True.
+
+\textbf{Inductive step:} Assume $\binom{2k}{k} \le \frac{4^k}{\sqrt{2k+1}}$.
+
+Using the recurrence:
+\[ \binom{2k+2}{k+1} = \frac{(2k+2)(2k+1)}{(k+1)^2}\binom{2k}{k} = \frac{2(2k+1)}{k+1}\binom{2k}{k} \]
+
+By IH:
+\[ \binom{2k+2}{k+1} \le \frac{2(2k+1)}{k+1} \cdot \frac{4^k}{\sqrt{2k+1}} = \frac{2(2k+1)4^k}{(k+1)\sqrt{2k+1}} \]
+
+Need to show this $\le \frac{4^{k+1}}{\sqrt{2k+3}}$, i.e.,
+\[ \frac{2(2k+1)}{(k+1)\sqrt{2k+1}} \le \frac{4}{\sqrt{2k+3}} \]
+\[ \frac{2k+1}{(k+1)} \cdot \frac{1}{\sqrt{2k+1}} \le \frac{4}{\sqrt{2k+3}} \]
+\[ \frac{2k+1}{2(k+1)} \le \frac{\sqrt{2k+1}}{\sqrt{2k+3}} \]
+
+This is exactly part (i). By induction, the result holds.
+\end{solution}
+
+\begin{takeaways}
+
+\item Algebraic inequalities prepare for inductive steps
+\item Binomial recurrences simplify with strategic bounds
+
+\end{takeaways}

@@ -1,0 +1,47 @@
+\begin{problem}[Problem 23: AM-GM for Prism Volume Optimization]
+Given that for positive numbers $x_1, \dots, x_n$ with arithmetic mean $A$,
+\[ \frac{x_1 \times \dots \times x_n}{A^n} \le 1 \]
+
+Let a rectangular prism have dimensions $a, b, c$ and surface area $S$.
+
+\begin{enumerate}
+    \item[(i)] Show that $abc \le \left(\frac{S}{6}\right)^{3/2}$.
+    \item[(ii)] Show the prism has maximum volume when it is a cube.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+(i) Apply AM-GM to $x_1=ab, x_2=bc, x_3=ca$ with $A = S/6$. (ii) Equality when $ab=bc=ca$, i.e., $a=b=c$.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Surface area: $S = 2(ab + bc + ca) \implies ab + bc + ca = \frac{S}{2}$
+
+Set $x_1 = ab$, $x_2 = bc$, $x_3 = ca$. Arithmetic mean:
+\[ A = \frac{ab + bc + ca}{3} = \frac{S/2}{3} = \frac{S}{6} \]
+
+Apply given inequality with $n=3$:
+\[ \frac{(ab)(bc)(ca)}{A^3} \le 1 \]
+\[ \frac{(abc)^2}{(S/6)^3} \le 1 \]
+\[ (abc)^2 \le \left(\frac{S}{6}\right)^3 \]
+
+Taking square roots: $abc \le \left(\frac{S}{6}\right)^{3/2}$.
+
+\textbf{(ii)} Volume $V = abc$ is maximized when equality holds in AM-GM, i.e., when:
+\[ ab = bc = ca \]
+
+From $ab = bc$: $a = c$ (since $b > 0$)
+
+From $bc = ca$: $b = a$ (since $c > 0$)
+
+Therefore $a = b = c$, which defines a cube.
+\end{solution}
+
+\begin{takeaways}
+
+\item AM-GM optimizes volumes under surface area constraints
+\item Equality conditions reveal optimal geometric shapes
+
+\end{takeaways}

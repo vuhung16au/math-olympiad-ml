@@ -1,0 +1,39 @@
+\begin{problem}[Problem 21: Constrained AM-GM with Reciprocals]
+It is known that for all positive real numbers $x$ and $y$, $x + y \ge 2\sqrt{xy}$.
+
+Show that if $a, b, c$ are positive real numbers with $\frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1$, then
+\[ a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \le abc \]
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+Apply AM-GM to pairs, then sum. Use the constraint to show $ab + bc + ca = abc$, which equals LHS bound.
+}}
+\end{hint}
+
+\begin{solution}
+Apply AM-GM ($x+y \ge 2\sqrt{xy}$) to pairs and multiply by appropriate terms:
+
+\begin{align*}
+a+b &\ge 2\sqrt{ab} \implies c(a+b) \ge 2c\sqrt{ab} \\
+b+c &\ge 2\sqrt{bc} \implies a(b+c) \ge 2a\sqrt{bc} \\
+a+c &\ge 2\sqrt{ac} \implies b(a+c) \ge 2b\sqrt{ac}
+\end{align*}
+
+Summing:
+\[ ac + bc + ab + ac + ab + bc \ge 2c\sqrt{ab} + 2a\sqrt{bc} + 2b\sqrt{ac} \]
+\[ 2(ab + bc + ca) \ge 2(a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab}) \]
+\[ ab + bc + ca \ge a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \]
+
+From the constraint $\frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1$:
+\[ \frac{bc + ac + ab}{abc} = 1 \implies ab + bc + ca = abc \]
+
+Therefore: $a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \le abc$.
+\end{solution}
+
+\begin{takeaways}
+
+\item Multiply AM-GM by strategic factors before summing
+\item Reciprocal constraints convert to product relations
+
+\end{takeaways}
