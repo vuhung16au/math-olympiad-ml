@@ -142,3 +142,38 @@ $\therefore \pi^2$ is irrational.
       \item Given that $\frac{p}{q}\left(\frac{p}{2}\right)^{2n}\frac{1}{n!} < 1$, if $n$ is sufficiently large, deduce that $\pi$ is irrational.
     \end{enumerate}
     \end{remark}
+
+\newpage
+
+\begin{remark}[The Original Proof by Ivan Niven (1947)]
+\textbf{A SIMPLE PROOF THAT $\pi$ IS IRRATIONAL}
+
+\medskip
+
+Let $\pi = a/b$, the quotient of positive integers. We define the polynomials
+\[
+f(x) = \frac{x^n(a - bx)^n}{n!},
+\]
+\[
+F(x) = f(x) - f^{(2)}(x) + f^{(4)}(x) - \dots + (-1)^n f^{(2n)}(x),
+\]
+the positive integer $n$ being specified later. Since $n!f(x)$ has integral coefficients and terms in $x$ of degree not less than $n$, $f(x)$ and its derivatives $f^{(i)}(x)$ have integral values for $x=0$; also for $x=\pi=a/b$, since $f(x) = f(a/b - x)$. By elementary calculus we have
+\[
+\frac{d}{dx} \{F'(x) \sin x - F(x) \cos x\} = F''(x) \sin x + F(x) \sin x = f(x) \sin x
+\]
+and
+\begin{equation}
+\int_0^\pi f(x) \sin x \, dx = \Big[F'(x) \sin x - F(x) \cos x \Big]_0^\pi = F(\pi) + F(0). \tag{*}
+\end{equation}
+
+Now $F(\pi) + F(0)$ is an integer, since $f^{(i)}(\pi)$ and $f^{(i)}(0)$ are integers. But for $0 < x < \pi$,
+\[
+0 < f(x) \sin x < \frac{\pi^n a^n}{n!},
+\]
+so that the integral in (*) is positive, but arbitrarily small for $n$ sufficiently large. Thus (*) is false, and so is our assumption that $\pi$ is rational.
+
+\medskip
+
+\textit{This elegant proof was published by Ivan Niven in the Bulletin of the American Mathematical Society in 1947. It demonstrates the power of combining calculus with number theory to establish fundamental results about irrational numbers.}
+\end{remark}
+
