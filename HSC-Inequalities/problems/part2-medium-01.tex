@@ -1,0 +1,38 @@
+\begin{problem}[AM-GM with Harmonic Constraint]
+Let $a, b, c$ be positive real numbers such that $\frac{1}{a}+\frac{1}{b}+\frac{1}{c}=1$. 
+It is known that for all positive real numbers $x, y$:
+\[ x+y \geq 2\sqrt{xy} \]
+Prove that:
+\[ a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \leq abc \]
+\end{problem}
+
+\begin{hint}
+Apply AM-GM then divide both sides by abc.
+\end{hint}
+
+\begin{solution}
+Divide both sides by $abc$ (positive):
+\begin{align*}
+\frac{a\sqrt{bc}}{abc} + \frac{b\sqrt{ac}}{abc} + \frac{c\sqrt{ab}}{abc} &\leq 1 \\
+\frac{1}{\sqrt{bc}} + \frac{1}{\sqrt{ac}} + \frac{1}{\sqrt{ab}} &\leq 1
+\end{align*}
+
+Apply AM-GM to pairs: $\frac{1}{\sqrt{xy}} \leq \frac{1}{2}\left(\frac{1}{x} + \frac{1}{y}\right)$
+
+\begin{align*}
+\frac{1}{\sqrt{bc}} &\leq \frac{1}{2}\left(\frac{1}{b} + \frac{1}{c}\right) \\
+\frac{1}{\sqrt{ac}} &\leq \frac{1}{2}\left(\frac{1}{a} + \frac{1}{c}\right) \\
+\frac{1}{\sqrt{ab}} &\leq \frac{1}{2}\left(\frac{1}{a} + \frac{1}{b}\right)
+\end{align*}
+
+Sum all three:
+\begin{align*}
+\frac{1}{\sqrt{bc}} + \frac{1}{\sqrt{ac}} + \frac{1}{\sqrt{ab}} &\leq \frac{1}{2} \cdot 2\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) \\
+&= \frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item Divide by positive terms to simplify before applying AM-GM
+\item Use AM-GM on reciprocals: $\frac{1}{\sqrt{xy}} \leq \frac{1}{2}(\frac{1}{x} + \frac{1}{y})$
+\end{takeaways}

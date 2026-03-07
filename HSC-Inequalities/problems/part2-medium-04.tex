@@ -1,0 +1,40 @@
+\begin{problem}[Binomial Inequality via Induction]
+Use mathematical induction to prove that ${}^{2n}C_n < 2^{2n-2}$ for all integers $n \geq 5$.
+
+Here, ${}^{2n}C_n = \frac{(2n)!}{(n!)^2}$.
+
+\end{problem}
+
+\begin{hint}
+Use binomial formula, express k+1 case in terms of case k.
+\end{hint}
+
+\begin{solution}
+\textbf{Base Case ($n=5$):}
+\begin{align*}
+{}^{10}C_5 &= \frac{10!}{5!5!} = 252 \\
+2^{2(5)-2} &= 2^8 = 256
+\end{align*}
+Since $252 < 256$, base case holds.
+
+\textbf{Inductive Hypothesis:} Assume ${}^{2k}C_k < 2^{2k-2}$ for some $k \geq 5$.
+
+\textbf{Inductive Step:} Show ${}^{2(k+1)}C_{k+1} < 2^{2(k+1)-2}$, i.e., ${}^{2k+2}C_{k+1} < 2^{2k}$.
+
+Express in terms of ${}^{2k}C_k$:
+\begin{align*}
+{}^{2k+2}C_{k+1} &= \frac{(2k+2)!}{(k+1)!(k+1)!} = \frac{2(2k+1)}{k+1} \cdot {}^{2k}C_k
+\end{align*}
+
+Since $\frac{2(2k+1)}{k+1} = 4 - \frac{2}{k+1} < 4$ for $k \geq 5$:
+\begin{align*}
+{}^{2k+2}C_{k+1} &< 4 \cdot {}^{2k}C_k < 4 \cdot 2^{2k-2} = 2^2 \cdot 2^{2k-2} = 2^{2k}
+\end{align*}
+
+By induction, the inequality holds for all $n \geq 5$.
+\end{solution}
+
+\begin{takeaways}
+\item Express ${}^{2k+2}C_{k+1}$ as a multiple of ${}^{2k}C_k$ using binomial identities
+\item Show the multiplier $\frac{2(2k+1)}{k+1} < 4$ when $k \geq 5$
+\end{takeaways}

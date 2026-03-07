@@ -1,0 +1,52 @@
+\begin{problem}[Reciprocal Sum Inequality via AM-HM]
+Let $a, b, c$ be positive real numbers.
+\begin{enumerate}
+    \item[(i)] Prove the AM-HM inequality: $\frac{a+b+c}{3} \ge \frac{3}{\frac{1}{a} + \frac{1}{b} + \frac{1}{c}}$.
+    \item[(ii)] Hence show that $(a+b+c)\left(\frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a}\right) \ge \frac{9}{2}$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\rotatebox{180}{\parbox{0.9\textwidth}{
+For (i): Apply AM-GM to $\{a,b,c\}$ and $\{\frac{1}{a},\frac{1}{b},\frac{1}{c}\}$, then multiply. For (ii): Use the form $(x+y+z)\left(\frac{1}{x}+\frac{1}{y}+\frac{1}{z}\right) \ge 9$ with substitution $x=a+b$, $y=b+c$, $z=c+a$.
+}}
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Apply AM-GM to $a, b, c$:
+\[ a+b+c \ge 3\sqrt[3]{abc} \]
+
+Apply AM-GM to $\frac{1}{a}, \frac{1}{b}, \frac{1}{c}$:
+\[ \frac{1}{a} + \frac{1}{b} + \frac{1}{c} \ge 3\sqrt[3]{\frac{1}{abc}} \]
+
+Multiply these inequalities:
+\begin{align*}
+(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) &\ge 9\sqrt[3]{abc} \cdot \sqrt[3]{\frac{1}{abc}} \\
+&= 9
+\end{align*}
+
+Divide by $3\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right)$ to obtain:
+\[ \frac{a+b+c}{3} \ge \frac{3}{\frac{1}{a} + \frac{1}{b} + \frac{1}{c}} \]
+
+\textbf{Part (ii):} From (i), we have $(x+y+z)\left(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}\right) \ge 9$ for positive $x, y, z$.
+
+Let $x = a+b$, $y = b+c$, $z = c+a$. Then:
+\[ ((a+b) + (b+c) + (c+a)) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge 9 \]
+
+Simplify the left factor:
+\[ 2(a+b+c) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge 9 \]
+
+Divide by 2:
+\[ (a+b+c) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge \frac{9}{2} \]
+\end{solution}
+
+\begin{takeaways}
+\item The AM-HM inequality follows from applying AM-GM to both a set and its reciprocals
+\item The inequality $(x+y+z)(\frac{1}{x}+\frac{1}{y}+\frac{1}{z}) \ge 9$ is fundamental and versatile
+\item Strategic substitution (e.g., $x=a+b$) transforms complex expressions into standard forms
+\item Equality holds when $a=b=c$, giving $3a \cdot \frac{3}{2a} = \frac{9}{2}$
+\item AM, GM, and HM inequalities: Arithmetic Mean is always greater than or equal to Geometric Mean, which is always greater than or equal to Harmonic Mean. The equalities hold when all numbers are equal.
+\item For non-negative real numbers $x_1, x_2, \ldots, x_n$, the power mean of order $p$ is defined as:
+\[M_p = \left( \frac{x_1^p + x_2^p + \cdots + x_n^p}{n} \right)^{1/p}\]
+For $p > q$, we have $M_p \geq M_q$. This generalizes the AM-GM-HM inequalities.
+\end{takeaways}

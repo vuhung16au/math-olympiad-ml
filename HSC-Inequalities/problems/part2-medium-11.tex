@@ -1,0 +1,27 @@
+\begin{problem}[Bernoulli's Inequality Application]
+Without using a calculator, apply Bernoulli's Inequality to prove:
+\[ (1.005)^{200} > 2 \]
+\end{problem}
+
+\begin{hint}
+Write 1.005 as 1.00x, x = 0.005.
+\end{hint}
+
+\begin{solution}
+Express $1.005 = 1 + 0.005$. Let $x = 0.005$ and $n = 200$.
+
+Check conditions: $x > -1$ and $n$ is a positive integer, so Bernoulli's Inequality applies:
+\[ (1 + x)^n \geq 1 + nx \]
+
+Since $n > 1$ and $x \neq 0$, the inequality is strict:
+\begin{align*}
+(1 + 0.005)^{200} &> 1 + 200(0.005) \\
+(1.005)^{200} &> 1 + 1 \\
+(1.005)^{200} &> 2
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item Bernoulli: $(1+x)^n \geq 1 + nx$ for $x > -1$ and $n \in \mathbb{Z}^+$
+\item Strict inequality when $n > 1$ and $x \neq 0$
+\end{takeaways}

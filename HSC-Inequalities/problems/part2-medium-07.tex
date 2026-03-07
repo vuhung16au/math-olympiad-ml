@@ -1,0 +1,38 @@
+\begin{problem}[Product of Sums via AM-GM]
+Let $a, b, c > 0$. 
+\begin{enumerate}
+    \item[(a)] Prove that $a + b \ge 2\sqrt{ab}$.
+    \item[(b)] Hence, or otherwise, show that $(a + b)(b + c)(a + c) \ge 8abc$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Multiply three inequalities since all terms are positive.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (a):} Consider $(\sqrt{a} - \sqrt{b})^2 \geq 0$:
+\begin{align*}
+a - 2\sqrt{ab} + b &\geq 0 \\
+a + b &\geq 2\sqrt{ab}
+\end{align*}
+
+\textbf{Part (b):} Apply part (a) to each pair:
+\begin{align*}
+a + b &\geq 2\sqrt{ab} \\
+b + c &\geq 2\sqrt{bc} \\
+a + c &\geq 2\sqrt{ac}
+\end{align*}
+
+Multiply all three inequalities (all terms positive):
+\begin{align*}
+(a + b)(b + c)(a + c) &\geq 2\sqrt{ab} \cdot 2\sqrt{bc} \cdot 2\sqrt{ac} \\
+&= 8\sqrt{ab \cdot bc \cdot ac} \\
+&= 8\sqrt{a^2b^2c^2} = 8abc
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\item AM-GM for two variables: $(x-y)^2 \geq 0 \Rightarrow x + y \geq 2\sqrt{xy}$
+\item Can multiply inequalities when all terms are positive
+\end{takeaways}

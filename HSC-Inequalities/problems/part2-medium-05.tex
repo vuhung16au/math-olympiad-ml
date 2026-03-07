@@ -1,0 +1,43 @@
+\begin{problem}[Surface Area to Volume Optimization]
+It is given that for positive numbers $x_1, x_2, x_3, \dots, x_n$ with arithmetic mean $A$:
+\[
+\frac{x_1 \times x_2 \times x_3 \times \dots \times x_n}{A^n} \le 1
+\]
+Suppose a rectangular prism has dimensions $a, b, c$ and surface area $S$.
+\begin{enumerate}
+    \item[(i)] Show that $abc \le \left(\frac{S}{6}\right)^{\frac{3}{2}}$.
+    \item[(ii)] Using part (i), show that when the rectangular prism with surface area $S$ is a cube, it has maximum volume.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Let the numbers be the face areas bc, ca, ab.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Surface area $S = 2(ab + bc + ca)$. Let $x_1 = ab$, $x_2 = bc$, $x_3 = ca$.
+
+Arithmetic mean:
+\[ A = \frac{ab + bc + ca}{3} = \frac{S/2}{3} = \frac{S}{6} \]
+
+Apply given inequality with $n=3$:
+\begin{align*}
+\frac{(ab)(bc)(ca)}{A^3} &\leq 1 \\
+\frac{(abc)^2}{A^3} &\leq 1 \\
+(abc)^2 &\leq A^3 = \left(\frac{S}{6}\right)^3
+\end{align*}
+
+Taking square root: $abc \leq \left(\frac{S}{6}\right)^{\frac{3}{2}}$.
+
+\textbf{Part (ii):} Volume $V = abc \leq \left(\frac{S}{6}\right)^{\frac{3}{2}}$. 
+
+Maximum occurs when equality holds, which requires $x_1 = x_2 = x_3$:
+\[ ab = bc = ca \implies a = b = c \]
+
+A rectangular prism with all equal dimensions is a cube.
+\end{solution}
+
+\begin{takeaways}
+\item Apply AM-GM to face areas, not edge lengths
+\item Equality in AM-GM occurs when all terms are equal ($ab = bc = ca \Rightarrow a = b = c$)
+\end{takeaways}

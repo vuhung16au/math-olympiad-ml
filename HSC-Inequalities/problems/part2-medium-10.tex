@@ -1,0 +1,32 @@
+\begin{problem}[Cauchy-Schwarz with Constraint]
+Let $x, y, z$ be real numbers such that $x^2 + y^2 + z^2 = 25$. Prove that:
+\[
+3x + 4y + 5z \le 25\sqrt{2}
+\]
+\end{problem}
+
+\begin{hint}
+Apply Cauchy-Schwarz to sequences (x,y,z) and (3,4,5).
+\end{hint}
+
+\begin{solution}
+Apply Cauchy-Schwarz inequality to $(x, y, z)$ and $(3, 4, 5)$:
+\[ (x^2 + y^2 + z^2)(3^2 + 4^2 + 5^2) \geq (3x + 4y + 5z)^2 \]
+
+Substitute $x^2 + y^2 + z^2 = 25$:
+\begin{align*}
+(25)(9 + 16 + 25) &\geq (3x + 4y + 5z)^2 \\
+(25)(50) &\geq (3x + 4y + 5z)^2 \\
+1250 &\geq (3x + 4y + 5z)^2
+\end{align*}
+
+Take square root:
+\[ \sqrt{1250} = \sqrt{625 \times 2} = 25\sqrt{2} \geq 3x + 4y + 5z \]
+\end{solution}
+
+\begin{takeaways}
+\item Cauchy-Schwarz: $(a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2) \geq (a_1b_1 + a_2b_2 + a_3b_3)^2$.
+\item Choose coefficient sequence to match linear form on RHS.
+\item The choosen vectors are (x,y,z) and (3,4,5) and they are parallel when equality holds.
+\item 
+\end{takeaways}

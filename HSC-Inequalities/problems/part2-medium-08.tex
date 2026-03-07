@@ -1,0 +1,33 @@
+\begin{problem}[Nested Inequalities]
+Let $a, b, c > 0$.
+\begin{enumerate}
+    \item[(i)] Show that $\frac{a}{b} + \frac{b}{a} \ge 2$.
+    \item[(ii)] Show that $(a+b)\left(\frac{1}{a} + \frac{1}{b}\right) \ge 4$.
+    \item[(iii)] Hence, or otherwise, show that $(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) \ge 9$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Expand, apply AM-GM to each part.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Apply AM-GM with $x = \frac{a}{b}$, $y = \frac{b}{a}$:
+\[ \frac{a}{b} + \frac{b}{a} \geq 2\sqrt{\frac{a}{b} \cdot \frac{b}{a}} = 2 \]
+
+\textbf{Part (ii):} Expand:
+\[ (a+b)\left(\frac{1}{a} + \frac{1}{b}\right) = 1 + \frac{b}{a} + \frac{a}{b} + 1 = 2 + \left(\frac{a}{b} + \frac{b}{a}\right) \]
+By part (i): $\geq 2 + 2 = 4$.
+
+\textbf{Part (iii):} Expand:
+\begin{align*}
+(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) &= 3 + \frac{a}{b} + \frac{b}{a} + \frac{b}{c} + \frac{c}{b} + \frac{a}{c} + \frac{c}{a}
+\end{align*}
+Apply part (i) to each pair:
+\[ \geq 3 + 2 + 2 + 2 = 9 \]
+\end{solution}
+
+\begin{takeaways}
+\item Expand products before applying AM-GM to identify reciprocal pairs
+\item Each pair $\frac{x}{y} + \frac{y}{x} \geq 2$ contributes 2 to the bound
+\end{takeaways}

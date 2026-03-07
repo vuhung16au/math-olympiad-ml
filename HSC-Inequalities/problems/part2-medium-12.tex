@@ -1,0 +1,35 @@
+\begin{problem}[Exponential Inequality via Induction]
+\begin{enumerate}
+    \item[(i)] By considering $f'(x)$ where $f(x) = e^x - x$, show that $e^x > x$ for $x \ge 0$.
+    \item[(ii)] Hence, use Mathematical Induction to show that for $x \ge 0$, $e^x > \frac{x^n}{n!}$ for all positive integers $n \ge 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+The derivative of P(n+1) comes directly from P(n).
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i):} Let $f(x) = e^x - x$. Then $f'(x) = e^x - 1 > 0$ for $x > 0$.
+
+Since $f(0) = 1 > 0$ and $f$ is increasing for $x \geq 0$, we have $f(x) \geq 1 > 0$, so $e^x > x$.
+
+\textbf{Part (ii):} 
+\textit{Base Case ($n=1$):} From part (i), $e^x > x = \frac{x^1}{1!}$.
+
+\textit{Inductive Hypothesis:} Assume $e^x > \frac{x^k}{k!}$ for some $k \geq 1$.
+
+\textit{Inductive Step:} Let $g(x) = e^x - \frac{x^{k+1}}{(k+1)!}$. Then:
+\[ g'(x) = e^x - \frac{x^k}{k!} > 0 \]
+by the inductive hypothesis.
+
+Since $g(0) = 1 > 0$ and $g$ is increasing, $g(x) > 0$ for $x \geq 0$, so:
+\[ e^x > \frac{x^{k+1}}{(k+1)!} \]
+
+By induction, $e^x > \frac{x^n}{n!}$ for all $n \geq 1$ and $x \geq 0$.
+\end{solution}
+
+\begin{takeaways}
+\item Use derivative to show function is increasing, combined with initial value
+\item In induction step, derivative of $g(x)$ involves inductive hypothesis directly
+\end{takeaways}

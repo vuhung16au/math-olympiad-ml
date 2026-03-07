@@ -1,0 +1,34 @@
+\begin{problem}[Refining the Wallis Product Bound]
+Let
+\[
+P_n=\frac{1}{2}\cdot\frac{3}{4}\cdot\frac{5}{6}\cdots\frac{2n-1}{2n}.
+\]
+
+\begin{enumerate}
+    \item Show that for any positive integer $k$, $\frac{2k-1}{2k}<\frac{2k}{2k+1}$ and use this to prove
+    \[ P_n<\frac{1}{\sqrt{2n+1}}. \]
+    \item Prove by induction the lower bound
+    \[ P_n\ge\frac{1}{2\sqrt{n}}\quad\text{for all }n\ge1. \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (1) compare termwise with $Q_n=\frac{2}{3}\cdot\frac{4}{5}\cdots\frac{2n}{2n+1}$ and telescope the product $P_nQ_n$. For (2) use the inductive step
+$P_{k+1}=P_k\cdot\frac{2k+1}{2k+2}$ and square where helpful.
+\end{hint}
+
+\begin{solution}
+For (1) observe $(2k-1)(2k+1)<(2k)^2$, so each term of $P_n$ is less than the corresponding term of $Q_n$. The product $P_nQ_n$ telescopes to $\frac{1}{2n+1}$, hence $P_n^2<\frac{1}{2n+1}$ and $P_n<\frac{1}{\sqrt{2n+1}}$.
+
+For (2) base case $n=1$ holds. Assume $P_k\ge\tfrac{1}{2\sqrt{k}}$. Then
+\[P_{k+1}=P_k\frac{2k+1}{2k+2}\ge\frac{1}{2\sqrt{k}}\cdot\frac{2k+1}{2k+2}.
+\]
+Square both sides and simplify to reduce to $k+1\ge0$, which holds; thus the inductive claim follows.
+\end{solution}
+
+\begin{takeaways}
+\item Telescoping products are useful to produce sharp bounds.
+\item Careful inductive algebra (squaring when necessary) yields lower bounds.
+\item Let $Q_n = \frac{2}{3} \cdot \frac{4}{5} \cdots \frac{2n}{2n+1}$. $P_n Q_n = \frac{1}{2n+1}$ and $P_n < \frac{1}{2n + 1}$
+\item The Stirling's approximation gives $P_n \sim \frac{1}{\sqrt{\pi n}}$ as $n \to \infty$.
+\end{takeaways}

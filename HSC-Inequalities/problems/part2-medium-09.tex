@@ -1,0 +1,29 @@
+\begin{problem}[Cauchy-Schwarz Bound]
+Let $x, y$ be real numbers such that $x^2 + y^2 \neq 0$. Prove that:
+\[
+\frac{(x+y)^2}{x^2 + y^2} \le 2
+\]
+\end{problem}
+
+\begin{hint}
+Start with $(x-y)^2 \ge 0$.
+\end{hint}
+
+\begin{solution}
+Start with $(x - y)^2 \geq 0$:
+\begin{align*}
+x^2 - 2xy + y^2 &\geq 0 \\
+x^2 + y^2 &\geq 2xy
+\end{align*}
+
+Add $x^2 + y^2$ to both sides:
+\[ 2(x^2 + y^2) \geq x^2 + 2xy + y^2 = (x + y)^2 \]
+
+Divide by $x^2 + y^2 > 0$:
+\[ 2 \geq \frac{(x + y)^2}{x^2 + y^2} \]
+\end{solution}
+
+\begin{takeaways}
+\item Use $(x-y)^2 \geq 0$ to establish $x^2 + y^2 \geq 2xy$
+\item Add equal term to both sides to create perfect square on RHS
+\end{takeaways}

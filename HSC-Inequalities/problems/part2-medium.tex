@@ -1,542 +1,66 @@
-% ==========================================
+% ==============================================================================
 % PART 2: MEDIUM PROBLEMS (Problems 24-33)
-% ==========================================
+% ==============================================================================
 
-\begin{problem}[AM-GM with Harmonic Constraint]
-Let $a, b, c$ be positive real numbers such that $\frac{1}{a}+\frac{1}{b}+\frac{1}{c}=1$. 
-It is known that for all positive real numbers $x, y$:
-\[ x+y \geq 2\sqrt{xy} \]
-Prove that:
-\[ a\sqrt{bc} + b\sqrt{ac} + c\sqrt{ab} \leq abc \]
-\end{problem}
-
-\begin{hint}
-Apply AM-GM then divide both sides by abc.
-\end{hint}
-
-\begin{solution}
-Divide both sides by $abc$ (positive):
-\begin{align*}
-\frac{a\sqrt{bc}}{abc} + \frac{b\sqrt{ac}}{abc} + \frac{c\sqrt{ab}}{abc} &\leq 1 \\
-\frac{1}{\sqrt{bc}} + \frac{1}{\sqrt{ac}} + \frac{1}{\sqrt{ab}} &\leq 1
-\end{align*}
-
-Apply AM-GM to pairs: $\frac{1}{\sqrt{xy}} \leq \frac{1}{2}\left(\frac{1}{x} + \frac{1}{y}\right)$
-
-\begin{align*}
-\frac{1}{\sqrt{bc}} &\leq \frac{1}{2}\left(\frac{1}{b} + \frac{1}{c}\right) \\
-\frac{1}{\sqrt{ac}} &\leq \frac{1}{2}\left(\frac{1}{a} + \frac{1}{c}\right) \\
-\frac{1}{\sqrt{ab}} &\leq \frac{1}{2}\left(\frac{1}{a} + \frac{1}{b}\right)
-\end{align*}
-
-Sum all three:
-\begin{align*}
-\frac{1}{\sqrt{bc}} + \frac{1}{\sqrt{ac}} + \frac{1}{\sqrt{ab}} &\leq \frac{1}{2} \cdot 2\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) \\
-&= \frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 1
-\end{align*}
-\end{solution}
-
-\begin{takeaways}
-\item Divide by positive terms to simplify before applying AM-GM
-\item Use AM-GM on reciprocals: $\frac{1}{\sqrt{xy}} \leq \frac{1}{2}(\frac{1}{x} + \frac{1}{y})$
-\end{takeaways}
+% Problem 01: AM-GM with Harmonic Constraint
+\input{problems/part2-medium-01.tex}
 
 % ==========================================
 
-\begin{problem}[Refining the Wallis Product Bound]
-Let
-\[
-P_n=\frac{1}{2}\cdot\frac{3}{4}\cdot\frac{5}{6}\cdots\frac{2n-1}{2n}.
-\]
-
-\begin{enumerate}
-    \item Show that for any positive integer $k$, $\frac{2k-1}{2k}<\frac{2k}{2k+1}$ and use this to prove
-    \[ P_n<\frac{1}{\sqrt{2n+1}}. \]
-    \item Prove by induction the lower bound
-    \[ P_n\ge\frac{1}{2\sqrt{n}}\quad\text{for all }n\ge1. \]
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-For (1) compare termwise with $Q_n=\frac{2}{3}\cdot\frac{4}{5}\cdots\frac{2n}{2n+1}$ and telescope the product $P_nQ_n$. For (2) use the inductive step
-$P_{k+1}=P_k\cdot\frac{2k+1}{2k+2}$ and square where helpful.
-\end{hint}
-
-\begin{solution}
-For (1) observe $(2k-1)(2k+1)<(2k)^2$, so each term of $P_n$ is less than the corresponding term of $Q_n$. The product $P_nQ_n$ telescopes to $\frac{1}{2n+1}$, hence $P_n^2<\frac{1}{2n+1}$ and $P_n<\frac{1}{\sqrt{2n+1}}$.
-
-For (2) base case $n=1$ holds. Assume $P_k\ge\tfrac{1}{2\sqrt{k}}$. Then
-\[P_{k+1}=P_k\frac{2k+1}{2k+2}\ge\frac{1}{2\sqrt{k}}\cdot\frac{2k+1}{2k+2}.
-\]
-Square both sides and simplify to reduce to $k+1\ge0$, which holds; thus the inductive claim follows.
-\end{solution}
-
-\begin{takeaways}
-\item Telescoping products are useful to produce sharp bounds.
-\item Careful inductive algebra (squaring when necessary) yields lower bounds.
-\item Let $Q_n = \frac{2}{3} \cdot \frac{4}{5} \cdots \frac{2n}{2n+1}$. $P_n Q_n = \frac{1}{2n+1}$ and $P_n < \frac{1}{2n + 1}$
-\item The Stirling's approximation gives $P_n \sim \frac{1}{\sqrt{\pi n}}$ as $n \to \infty$.
-\end{takeaways}
+% Problem 02: Refining the Wallis Product Bound
+\input{problems/part2-medium-02.tex}
 
 % -----------------------------------------
 
-\begin{problem}[Matrix Recurrence and Contraction Mapping]
-Define $a_1=0$ and, for $n\ge 2$, define the sequence by the scalar recurrence
-\[
-a_n=\frac{a_{n-1}+2}{a_{n-1}+3}.
-\]
-
-
-\begin{enumerate}
-    \item Prove by induction that $0\le a_n<\sqrt{3}-1$ for all $n\ge1$.
-    \item Let $L=\sqrt{3}-1$. Prove the convergence rate
-    \[ |a_n-L|<\left(\tfrac{1}{3}\right)^{n-1}|a_1-L|. \]
-    \item Determine whether the series $\sum_{n=1}^\infty (L-a_n)$ converges.
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-Show $L$ is the positive fixed point of $f(x)=\tfrac{x+2}{x+3}$ and note $f'(x)=\tfrac{1}{(x+3)^2}>0$. 
-Express $a_n-L$ in terms of $a_{n-1}-L$ to find the contraction constant.
-\end{hint}
-
-\begin{solution}
-We will use the explicit recurrence
-\[
-a_n=\frac{a_{n-1}+2}{a_{n-1}+3}.
-\]
-For (1) base case $a_1=0$ lies in the interval. If $0\le a_k< L$ then applying increasing $f$ gives $f(0)\le a_{k+1}<f(L)=L$, so $0\le a_{k+1}<L$. 
-
-For (2) compute
-\[
-a_n-L=\frac{a_{n-1}+2}{a_{n-1}+3}-\frac{L+2}{L+3}=(a_{n-1}-L)\cdot\frac{1}{(a_{n-1}+3)(L+3)}.
-\]
-Because $a_{n-1}\ge0$ and $L+3>3$, the multiplier is $<\tfrac{1}{3}$, so iterating yields the claimed geometric bound.
-
-For (3) set $u_n=L-a_n$. From (2) $|u_n|\le C(\tfrac{1}{3})^{n-1}$ for some constant $C$, so $\sum u_n$ is dominated by a convergent geometric series; hence the series converges absolutely.
-\end{solution}
-
-\begin{takeaways}
-    \item A fixed point of a recurrence can be found by solving $x=f(x)$ (or the sequence: $x=\frac{x+2}{x+3}$). The behavior of the derivative $f'(x)$ determines monotonicity and depends on the fixed point(s).
-\item Fixed-point iteration and derivative bounds give convergence rates.
-\item Comparison with geometric series proves absolute convergence of the error series.
-\item Fixed Points are Attractors: In sequences $a_n = f(a_{n-1})$, if $|f'(L)| < 1$, the sequence converges to $L$ (You can prove this)
-\item Do you see the connection between this problem and eigenvalues of the matrix? 
-\end{takeaways}
-
-
-\begin{problem}[Binomial Inequality via Induction]
-Use mathematical induction to prove that ${}^{2n}C_n < 2^{2n-2}$ for all integers $n \geq 5$.
-
-Here, ${}^{2n}C_n = \frac{(2n)!}{(n!)^2}$.
-
-\end{problem}
-
-\begin{hint}
-Use binomial formula, express k+1 case in terms of case k.
-\end{hint}
-
-\begin{solution}
-\textbf{Base Case ($n=5$):}
-\begin{align*}
-{}^{10}C_5 &= \frac{10!}{5!5!} = 252 \\
-2^{2(5)-2} &= 2^8 = 256
-\end{align*}
-Since $252 < 256$, base case holds.
-
-\textbf{Inductive Hypothesis:} Assume ${}^{2k}C_k < 2^{2k-2}$ for some $k \geq 5$.
-
-\textbf{Inductive Step:} Show ${}^{2(k+1)}C_{k+1} < 2^{2(k+1)-2}$, i.e., ${}^{2k+2}C_{k+1} < 2^{2k}$.
-
-Express in terms of ${}^{2k}C_k$:
-\begin{align*}
-{}^{2k+2}C_{k+1} &= \frac{(2k+2)!}{(k+1)!(k+1)!} = \frac{2(2k+1)}{k+1} \cdot {}^{2k}C_k
-\end{align*}
-
-Since $\frac{2(2k+1)}{k+1} = 4 - \frac{2}{k+1} < 4$ for $k \geq 5$:
-\begin{align*}
-{}^{2k+2}C_{k+1} &< 4 \cdot {}^{2k}C_k < 4 \cdot 2^{2k-2} = 2^2 \cdot 2^{2k-2} = 2^{2k}
-\end{align*}
-
-By induction, the inequality holds for all $n \geq 5$.
-\end{solution}
-
-\begin{takeaways}
-\item Express ${}^{2k+2}C_{k+1}$ as a multiple of ${}^{2k}C_k$ using binomial identities
-\item Show the multiplier $\frac{2(2k+1)}{k+1} < 4$ when $k \geq 5$
-\end{takeaways}
+% Problem 03: Matrix Recurrence and Contraction Mapping
+\input{problems/part2-medium-03.tex}
 
 % ==========================================
 
-\begin{problem}[Surface Area to Volume Optimization]
-It is given that for positive numbers $x_1, x_2, x_3, \dots, x_n$ with arithmetic mean $A$:
-\[
-\frac{x_1 \times x_2 \times x_3 \times \dots \times x_n}{A^n} \le 1
-\]
-Suppose a rectangular prism has dimensions $a, b, c$ and surface area $S$.
-\begin{enumerate}
-    \item[(i)] Show that $abc \le \left(\frac{S}{6}\right)^{\frac{3}{2}}$.
-    \item[(ii)] Using part (i), show that when the rectangular prism with surface area $S$ is a cube, it has maximum volume.
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-Let the numbers be the face areas bc, ca, ab.
-\end{hint}
-
-\begin{solution}
-\textbf{Part (i):} Surface area $S = 2(ab + bc + ca)$. Let $x_1 = ab$, $x_2 = bc$, $x_3 = ca$.
-
-Arithmetic mean:
-\[ A = \frac{ab + bc + ca}{3} = \frac{S/2}{3} = \frac{S}{6} \]
-
-Apply given inequality with $n=3$:
-\begin{align*}
-\frac{(ab)(bc)(ca)}{A^3} &\leq 1 \\
-\frac{(abc)^2}{A^3} &\leq 1 \\
-(abc)^2 &\leq A^3 = \left(\frac{S}{6}\right)^3
-\end{align*}
-
-Taking square root: $abc \leq \left(\frac{S}{6}\right)^{\frac{3}{2}}$.
-
-\textbf{Part (ii):} Volume $V = abc \leq \left(\frac{S}{6}\right)^{\frac{3}{2}}$. 
-
-Maximum occurs when equality holds, which requires $x_1 = x_2 = x_3$:
-\[ ab = bc = ca \implies a = b = c \]
-
-A rectangular prism with all equal dimensions is a cube.
-\end{solution}
-
-\begin{takeaways}
-\item Apply AM-GM to face areas, not edge lengths
-\item Equality in AM-GM occurs when all terms are equal ($ab = bc = ca \Rightarrow a = b = c$)
-\end{takeaways}
-
-% \begin{remark}[Two Approaches to Proving AM-GM]
-% The AM-GM inequality states that for positive reals $x_1, x_2, \ldots, x_n$:
-% \[ \frac{x_1 + x_2 + \cdots + x_n}{n} \geq \sqrt[n]{x_1 x_2 \cdots x_n} \]
-
-% \textbf{(a) Proof by Induction on $n$:}
-% \begin{enumerate}
-%     \item \textit{Base case:} $n=2$ follows from $(\sqrt{x_1} - \sqrt{x_2})^2 \geq 0$
-%     \item \textit{Forward-backward step:} Prove $n=2^k \Rightarrow n=2^{k+1}$ by grouping pairs
-%     \item \textit{Backward step:} Show $n=k \Rightarrow n=k-1$ by setting $x_k = \frac{x_1 + \cdots + x_{k-1}}{k-1}$ and applying the $n=k$ case
-% \end{enumerate}
-
-% \textbf{(b) Proof using Convex Functions:}
-% \begin{enumerate}
-%     \item Consider $f(x) = -\ln(x)$, which is convex for $x > 0$ (since $f''(x) = \frac{1}{x^2} > 0$)
-%     \item By Jensen's inequality for convex functions:
-%     \[ f\left(\frac{x_1 + x_2 + \cdots + x_n}{n}\right) \leq \frac{f(x_1) + f(x_2) + \cdots + f(x_n)}{n} \]
-%     \item Substituting $f(x) = -\ln(x)$:
-%     \[ -\ln\left(\frac{x_1 + \cdots + x_n}{n}\right) \leq \frac{-\ln(x_1) - \cdots - \ln(x_n)}{n} = -\ln(\sqrt[n]{x_1 \cdots x_n}) \]
-%     \item Multiply by $-1$ and exponentiate to obtain AM-GM
-% \end{enumerate}
-% \end{remark}
+% Problem 04: Binomial Inequality via Induction
+\input{problems/part2-medium-04.tex}
 
 % ==========================================
 
-\begin{problem}[Cubic Sum Inequality]
-Let $a, b > 0$. Prove that:
-\[
-a^3 + b^3 \geq \frac{(a + b)^3}{4}
-\]
-\end{problem}
-
-\begin{hint}
-Expand, cancel out, then factor into a product.
-\end{hint}
-
-\begin{solution}
-Multiply both sides by 4:
-\[ 4(a^3 + b^3) \geq (a + b)^3 \]
-
-Expand RHS:
-\[ 4a^3 + 4b^3 \geq a^3 + 3a^2b + 3ab^2 + b^3 \]
-
-Rearrange:
-\[ 3a^3 - 3a^2b - 3ab^2 + 3b^3 \geq 0 \]
-
-Factor:
-\begin{align*}
-3(a^3 - a^2b - ab^2 + b^3) &\geq 0 \\
-3[a^2(a - b) - b^2(a - b)] &\geq 0 \\
-3(a - b)(a^2 - b^2) &\geq 0 \\
-3(a - b)(a - b)(a + b) &\geq 0 \\
-3(a - b)^2(a + b) &\geq 0
-\end{align*}
-
-Since $(a - b)^2 \geq 0$ and $(a + b) > 0$ for $a, b > 0$, the inequality holds.
-\end{solution}
-
-\begin{takeaways}
-\item Clear denominators first, then expand and factor
-\item Factor as $(a-b)^2(a+b) \geq 0$ where perfect square ensures non-negativity
-\end{takeaways}
+% Problem 05: Surface Area to Volume Optimization
+\input{problems/part2-medium-05.tex}
 
 % ==========================================
 
-\begin{problem}[Product of Sums via AM-GM]
-Let $a, b, c > 0$. 
-\begin{enumerate}
-    \item[(a)] Prove that $a + b \ge 2\sqrt{ab}$.
-    \item[(b)] Hence, or otherwise, show that $(a + b)(b + c)(a + c) \ge 8abc$.
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-Multiply three inequalities since all terms are positive.
-\end{hint}
-
-\begin{solution}
-\textbf{Part (a):} Consider $(\sqrt{a} - \sqrt{b})^2 \geq 0$:
-\begin{align*}
-a - 2\sqrt{ab} + b &\geq 0 \\
-a + b &\geq 2\sqrt{ab}
-\end{align*}
-
-\textbf{Part (b):} Apply part (a) to each pair:
-\begin{align*}
-a + b &\geq 2\sqrt{ab} \\
-b + c &\geq 2\sqrt{bc} \\
-a + c &\geq 2\sqrt{ac}
-\end{align*}
-
-Multiply all three inequalities (all terms positive):
-\begin{align*}
-(a + b)(b + c)(a + c) &\geq 2\sqrt{ab} \cdot 2\sqrt{bc} \cdot 2\sqrt{ac} \\
-&= 8\sqrt{ab \cdot bc \cdot ac} \\
-&= 8\sqrt{a^2b^2c^2} = 8abc
-\end{align*}
-\end{solution}
-
-\begin{takeaways}
-\item AM-GM for two variables: $(x-y)^2 \geq 0 \Rightarrow x + y \geq 2\sqrt{xy}$
-\item Can multiply inequalities when all terms are positive
-\end{takeaways}
+% Problem 06: Cubic Sum Inequality
+\input{problems/part2-medium-06.tex}
 
 % ==========================================
 
-\begin{problem}[Nested Inequalities]
-Let $a, b, c > 0$.
-\begin{enumerate}
-    \item[(i)] Show that $\frac{a}{b} + \frac{b}{a} \ge 2$.
-    \item[(ii)] Show that $(a+b)\left(\frac{1}{a} + \frac{1}{b}\right) \ge 4$.
-    \item[(iii)] Hence, or otherwise, show that $(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) \ge 9$.
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-Expand, apply AM-GM to each part.
-\end{hint}
-
-\begin{solution}
-\textbf{Part (i):} Apply AM-GM with $x = \frac{a}{b}$, $y = \frac{b}{a}$:
-\[ \frac{a}{b} + \frac{b}{a} \geq 2\sqrt{\frac{a}{b} \cdot \frac{b}{a}} = 2 \]
-
-\textbf{Part (ii):} Expand:
-\[ (a+b)\left(\frac{1}{a} + \frac{1}{b}\right) = 1 + \frac{b}{a} + \frac{a}{b} + 1 = 2 + \left(\frac{a}{b} + \frac{b}{a}\right) \]
-By part (i): $\geq 2 + 2 = 4$.
-
-\textbf{Part (iii):} Expand:
-\begin{align*}
-(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) &= 3 + \frac{a}{b} + \frac{b}{a} + \frac{b}{c} + \frac{c}{b} + \frac{a}{c} + \frac{c}{a}
-\end{align*}
-Apply part (i) to each pair:
-\[ \geq 3 + 2 + 2 + 2 = 9 \]
-\end{solution}
-
-\begin{takeaways}
-\item Expand products before applying AM-GM to identify reciprocal pairs
-\item Each pair $\frac{x}{y} + \frac{y}{x} \geq 2$ contributes 2 to the bound
-\end{takeaways}
+% Problem 07: Product of Sums via AM-GM
+\input{problems/part2-medium-07.tex}
 
 % ==========================================
 
-\begin{problem}[Cauchy-Schwarz Bound]
-Let $x, y$ be real numbers such that $x^2 + y^2 \neq 0$. Prove that:
-\[
-\frac{(x+y)^2}{x^2 + y^2} \le 2
-\]
-\end{problem}
-
-\begin{hint}
-Start with $(x-y)^2 \ge 0$.
-\end{hint}
-
-\begin{solution}
-Start with $(x - y)^2 \geq 0$:
-\begin{align*}
-x^2 - 2xy + y^2 &\geq 0 \\
-x^2 + y^2 &\geq 2xy
-\end{align*}
-
-Add $x^2 + y^2$ to both sides:
-\[ 2(x^2 + y^2) \geq x^2 + 2xy + y^2 = (x + y)^2 \]
-
-Divide by $x^2 + y^2 > 0$:
-\[ 2 \geq \frac{(x + y)^2}{x^2 + y^2} \]
-\end{solution}
-
-\begin{takeaways}
-\item Use $(x-y)^2 \geq 0$ to establish $x^2 + y^2 \geq 2xy$
-\item Add equal term to both sides to create perfect square on RHS
-\end{takeaways}
+% Problem 08: Nested Inequalities
+\input{problems/part2-medium-08.tex}
 
 % ==========================================
 
-\begin{problem}[Cauchy-Schwarz with Constraint]
-Let $x, y, z$ be real numbers such that $x^2 + y^2 + z^2 = 25$. Prove that:
-\[
-3x + 4y + 5z \le 25\sqrt{2}
-\]
-\end{problem}
-
-\begin{hint}
-Apply Cauchy-Schwarz to sequences (x,y,z) and (3,4,5).
-\end{hint}
-
-\begin{solution}
-Apply Cauchy-Schwarz inequality to $(x, y, z)$ and $(3, 4, 5)$:
-\[ (x^2 + y^2 + z^2)(3^2 + 4^2 + 5^2) \geq (3x + 4y + 5z)^2 \]
-
-Substitute $x^2 + y^2 + z^2 = 25$:
-\begin{align*}
-(25)(9 + 16 + 25) &\geq (3x + 4y + 5z)^2 \\
-(25)(50) &\geq (3x + 4y + 5z)^2 \\
-1250 &\geq (3x + 4y + 5z)^2
-\end{align*}
-
-Take square root:
-\[ \sqrt{1250} = \sqrt{625 \times 2} = 25\sqrt{2} \geq 3x + 4y + 5z \]
-\end{solution}
-
-\begin{takeaways}
-\item Cauchy-Schwarz: $(a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2) \geq (a_1b_1 + a_2b_2 + a_3b_3)^2$.
-\item Choose coefficient sequence to match linear form on RHS.
-\item The choosen vectors are (x,y,z) and (3,4,5) and they are parallel when equality holds.
-\item 
-\end{takeaways}
+% Problem 09: Cauchy-Schwarz Bound
+\input{problems/part2-medium-09.tex}
 
 % ==========================================
 
-\begin{problem}[Bernoulli's Inequality Application]
-Without using a calculator, apply Bernoulli's Inequality to prove:
-\[ (1.005)^{200} > 2 \]
-\end{problem}
-
-\begin{hint}
-Write 1.005 as 1.00x, x = 0.005.
-\end{hint}
-
-\begin{solution}
-Express $1.005 = 1 + 0.005$. Let $x = 0.005$ and $n = 200$.
-
-Check conditions: $x > -1$ and $n$ is a positive integer, so Bernoulli's Inequality applies:
-\[ (1 + x)^n \geq 1 + nx \]
-
-Since $n > 1$ and $x \neq 0$, the inequality is strict:
-\begin{align*}
-(1 + 0.005)^{200} &> 1 + 200(0.005) \\
-(1.005)^{200} &> 1 + 1 \\
-(1.005)^{200} &> 2
-\end{align*}
-\end{solution}
-
-\begin{takeaways}
-\item Bernoulli: $(1+x)^n \geq 1 + nx$ for $x > -1$ and $n \in \mathbb{Z}^+$
-\item Strict inequality when $n > 1$ and $x \neq 0$
-\end{takeaways}
+% Problem 10: Cauchy-Schwarz with Constraint
+\input{problems/part2-medium-10.tex}
 
 % ==========================================
 
-\begin{problem}[Exponential Inequality via Induction]
-\begin{enumerate}
-    \item[(i)] By considering $f'(x)$ where $f(x) = e^x - x$, show that $e^x > x$ for $x \ge 0$.
-    \item[(ii)] Hence, use Mathematical Induction to show that for $x \ge 0$, $e^x > \frac{x^n}{n!}$ for all positive integers $n \ge 1$.
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-The derivative of P(n+1) comes directly from P(n).
-\end{hint}
-
-\begin{solution}
-\textbf{Part (i):} Let $f(x) = e^x - x$. Then $f'(x) = e^x - 1 > 0$ for $x > 0$.
-
-Since $f(0) = 1 > 0$ and $f$ is increasing for $x \geq 0$, we have $f(x) \geq 1 > 0$, so $e^x > x$.
-
-\textbf{Part (ii):} 
-\textit{Base Case ($n=1$):} From part (i), $e^x > x = \frac{x^1}{1!}$.
-
-\textit{Inductive Hypothesis:} Assume $e^x > \frac{x^k}{k!}$ for some $k \geq 1$.
-
-\textit{Inductive Step:} Let $g(x) = e^x - \frac{x^{k+1}}{(k+1)!}$. Then:
-\[ g'(x) = e^x - \frac{x^k}{k!} > 0 \]
-by the inductive hypothesis.
-
-Since $g(0) = 1 > 0$ and $g$ is increasing, $g(x) > 0$ for $x \geq 0$, so:
-\[ e^x > \frac{x^{k+1}}{(k+1)!} \]
-
-By induction, $e^x > \frac{x^n}{n!}$ for all $n \geq 1$ and $x \geq 0$.
-\end{solution}
-
-\begin{takeaways}
-\item Use derivative to show function is increasing, combined with initial value
-\item In induction step, derivative of $g(x)$ involves inductive hypothesis directly
-\end{takeaways}
+% Problem 11: Bernoulli's Inequality Application
+\input{problems/part2-medium-11.tex}
 
 % ==========================================
 
-\begin{problem}[Reciprocal Sum Inequality via AM-HM]
-Let $a, b, c$ be positive real numbers.
-\begin{enumerate}
-    \item[(i)] Prove the AM-HM inequality: $\frac{a+b+c}{3} \ge \frac{3}{\frac{1}{a} + \frac{1}{b} + \frac{1}{c}}$.
-    \item[(ii)] Hence show that $(a+b+c)\left(\frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a}\right) \ge \frac{9}{2}$.
-\end{enumerate}
-\end{problem}
+% Problem 12: Exponential Inequality via Induction
+\input{problems/part2-medium-12.tex}
 
-\begin{hint}
-\rotatebox{180}{\parbox{0.9\textwidth}{
-For (i): Apply AM-GM to $\{a,b,c\}$ and $\{\frac{1}{a},\frac{1}{b},\frac{1}{c}\}$, then multiply. For (ii): Use the form $(x+y+z)\left(\frac{1}{x}+\frac{1}{y}+\frac{1}{z}\right) \ge 9$ with substitution $x=a+b$, $y=b+c$, $z=c+a$.
-}}
-\end{hint}
+% ==========================================
 
-\begin{solution}
-\textbf{Part (i):} Apply AM-GM to $a, b, c$:
-\[ a+b+c \ge 3\sqrt[3]{abc} \]
-
-Apply AM-GM to $\frac{1}{a}, \frac{1}{b}, \frac{1}{c}$:
-\[ \frac{1}{a} + \frac{1}{b} + \frac{1}{c} \ge 3\sqrt[3]{\frac{1}{abc}} \]
-
-Multiply these inequalities:
-\begin{align*}
-(a+b+c)\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right) &\ge 9\sqrt[3]{abc} \cdot \sqrt[3]{\frac{1}{abc}} \\
-&= 9
-\end{align*}
-
-Divide by $3\left(\frac{1}{a} + \frac{1}{b} + \frac{1}{c}\right)$ to obtain:
-\[ \frac{a+b+c}{3} \ge \frac{3}{\frac{1}{a} + \frac{1}{b} + \frac{1}{c}} \]
-
-\textbf{Part (ii):} From (i), we have $(x+y+z)\left(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}\right) \ge 9$ for positive $x, y, z$.
-
-Let $x = a+b$, $y = b+c$, $z = c+a$. Then:
-\[ ((a+b) + (b+c) + (c+a)) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge 9 \]
-
-Simplify the left factor:
-\[ 2(a+b+c) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge 9 \]
-
-Divide by 2:
-\[ (a+b+c) \left( \frac{1}{a+b} + \frac{1}{b+c} + \frac{1}{c+a} \right) \ge \frac{9}{2} \]
-\end{solution}
-
-\begin{takeaways}
-\item The AM-HM inequality follows from applying AM-GM to both a set and its reciprocals
-\item The inequality $(x+y+z)(\frac{1}{x}+\frac{1}{y}+\frac{1}{z}) \ge 9$ is fundamental and versatile
-\item Strategic substitution (e.g., $x=a+b$) transforms complex expressions into standard forms
-\item Equality holds when $a=b=c$, giving $3a \cdot \frac{3}{2a} = \frac{9}{2}$
-\item AM, GM, and HM inequalities: Arithmetic Mean is always greater than or equal to Geometric Mean, which is always greater than or equal to Harmonic Mean. The equalities hold when all numbers are equal.
-\item For non-negative real numbers $x_1, x_2, \ldots, x_n$, the power mean of order $p$ is defined as:
-\[M_p = \left( \frac{x_1^p + x_2^p + \cdots + x_n^p}{n} \right)^{1/p}\]
-For $p > q$, we have $M_p \geq M_q$. This generalizes the AM-GM-HM inequalities.
-\end{takeaways}
+% Problem 13: Reciprocal Sum Inequality via AM-HM
+\input{problems/part2-medium-13.tex}
