@@ -17,20 +17,20 @@ Software/code remains MIT-licensed per the repository root LICENSE.
 
 The booklet `HSC-Inequalities.tex` is organised in two parts:
 
-- **Part 1**: Detailed walk-throughs (15 problems) with complete step-by-step solutions and comprehensive takeaways highlighting key techniques and strategic insights. Divided into basic (5), medium (5), and advanced (5) difficulty levels.
-- **Part 2**: Concise write-ups with hints and solution sketches (30 problems). Each problem includes an upside-down hint rendered via `styles/dl101-hints` before a brief solution, followed by concise takeaways. Divided into basic (8), medium (10), and advanced (12) difficulty levels.
+- **Part 1**: Detailed walk-throughs with complete step-by-step solutions and comprehensive takeaways highlighting key techniques and strategic insights. Divided into basic (5), medium (5), and advanced (5) difficulty levels.
+- **Part 2**: Concise write-ups with hints and solution sketches. Each problem includes an upside-down hint rendered via `styles/dl101-hints` before a brief solution, followed by concise takeaways. Divided into basic, medium, and advanced difficulty levels.
 
-The collection contains **45 total problems** covering all major inequality techniques in the HSC Extension 2 syllabus.
+The collection covers all major inequality techniques in the HSC Extension 2 syllabus.
 
 ## What This Collection Focuses On
 
 ### The Five Key Inequality Types
 
-1. **AM-GM Inequality**: Arithmetic mean-geometric mean applications including weighted forms, constrained optimization, and cyclic symmetric expressions (21 problems, ~48%)
-2. **Cauchy-Schwarz Inequality**: Vector and algebraic forms, applications with constraints and sum-of-squares techniques (5 problems, ~11%)
-3. **Integration Inequalities**: Comparison theorems, bound estimation, and limit applications including the definition of $e$ (3 problems, ~7%)
-4. **Triangle Inequality**: Real and complex number variants, polynomial root bounds, and modulus inequalities (4 problems, ~9%)
-5. **Inequalities via Induction**: Including Bernoulli's inequality, exponential bounds, and factorial estimates (11 problems, ~25%)
+1. **AM-GM Inequality**: Arithmetic mean-geometric mean applications including weighted forms, constrained optimization, and cyclic symmetric expressions
+2. **Cauchy-Schwarz Inequality**: Vector and algebraic forms, applications with constraints and sum-of-squares techniques
+3. **Integration Inequalities**: Comparison theorems, bound estimation, and limit applications including the definition of $e$
+4. **Triangle Inequality**: Real and complex number variants, polynomial root bounds, and modulus inequalities
+5. **Inequalities via Induction**: Including Bernoulli's inequality, exponential bounds, and factorial estimates
 
 ### Problem Characteristics
 
@@ -143,36 +143,40 @@ make pdf && make open
 - `Makefile`: Docker-based build automation.
 - `README.md`: Project overview (this file).
 - `.gitignore`: Filters LaTeX artefacts, keeps `releases/HSC-Inequalities.pdf`.
-- `samples/`: 45 inequality problems sourced from HSC past papers, textbooks, and competition problems (00-basic.tex through 44.tex).
+- `samples/`: Inequality problems sourced from HSC past papers, textbooks, and competition problems.
 - `problems/`: Part-wise problem+solution+takeaways snippets organized by difficulty that are `\input` into the main TeX file:
-  - `part1-basic.tex`, `part1-medium.tex`, `part1-advanced.tex` (5 problems each with detailed solutions and full takeaways)
-  - `part2-basic.tex`, `part2-medium.tex`, `part2-advanced.tex` (8, 10, and 12 problems respectively with hints and brief takeaways)
+  - `part1-basic.tex`, `part1-medium.tex`, `part1-advanced.tex` (detailed solutions and full takeaways)
+  - `part2-basic-01.tex` through `part2-basic-09.tex` (with hints and brief takeaways)
+  - `part2-medium-01.tex` through `part2-medium-13.tex` (with hints and brief takeaways)
+  - `part2-advanced-01.tex` through `part2-advanced-17.tex` (with hints and brief takeaways)
+  - `part2-basic.tex`, `part2-medium.tex`, `part2-advanced.tex` (master files that `\input` the individual problem files)
 - `solutions/`: Reserved for future standalone solution files.
 - `styles/`: Shared LaTeX style files (colors, hint box, problem environments):
   - `dl101-colors.sty`: Color definitions for consistent formatting
   - `dl101-hints.sty`: Upside-down hint environment for Part 2 problems
   - `dl101-hsc-problems.sty`: Problem, solution, and takeaways environment definitions
   - `dl101-boxes.sty`: Custom box styling for visual clarity
+  - `dl101-theorems.sty`: Theorem box styling for fundamental inequalities
 - `releases/`: Compiled PDFs (empty until you run `make release`).
 - `TODO/`: Reference materials including inequality guides and YouTube resources.
 
 ## Difficulty Progression
 
-### Easy Problems (13 total: 5 in Part 1, 8 in Part 2)
+### Easy Problems
 
 Direct application of AM-GM, Cauchy-Schwarz, triangle inequality, or basic induction. Single-step reasoning with clear technique identification.
 
-### Medium Problems (15 total: 5 in Part 1, 10 in Part 2)
+### Medium Problems
 
 Multi-step problems requiring combination of 2-3 techniques, algebraic manipulation, substitution methods, or constrained optimization.
 
-### Hard Problems (17 total: 5 in Part 1, 12 in Part 2)
+### Hard Problems
 
 Advanced problems requiring creative approaches, multiple complex techniques, sophisticated substitutions, or integration of calculus with inequalities.
 
 ## Conclusion
 
-Inequalities are a cornerstone of the HSC Mathematics Extension 2 course, testing both technical skill and strategic thinking. By working through these 45 carefully curated problems, you will develop:
+Inequalities are a cornerstone of the HSC Mathematics Extension 2 course, testing both technical skill and strategic thinking. By working through these carefully curated problems, you will develop:
 
 - **Pattern recognition**: Identifying which technique applies to each problem type
 - **Proof-writing clarity**: Communicating mathematical arguments with precision

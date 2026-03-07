@@ -23,20 +23,19 @@
 
 % Define the hint environment (upside-down)
 \NewEnviron{hint}[1][]{%
-\noindent
-\rotatebox[origin=c]{180}{%
-\noindent
-\begin{minipage}[t]{\linewidth}
+\par\noindent
 \begin{mdframed}[style=hintstyle]
+\rotatebox[origin=c]{180}{%
+\begin{minipage}[t]{0.95\linewidth}
 \ifstrempty{#1}{%
   \textbf{Hint:}%
 }{%
   \textbf{Hint:} #1%
 }%
 \BODY
-\end{mdframed}%
 \end{minipage}%
 }%
+\end{mdframed}%
 }
 
 % Alternative: If you want to keep hints right-side up but with special styling
