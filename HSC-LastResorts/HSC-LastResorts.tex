@@ -287,6 +287,58 @@ Thus $\cos^2\!\left(\frac{3\pi}{10}\right)$ is the smaller of the two values, gi
 \]
 \end{example}
 
+\begin{example}[Evaluate $\tan^2\!\frac{\pi}{14}+\tan^2\!\frac{3\pi}{14}+\tan^2\!\frac{5\pi}{14}$]
+Expand $(\cos\theta+i\sin\theta)^7$ (De Moivre) to obtain
+\[
+  \cos(7\theta)=64\cos^7\theta-112\cos^5\theta+56\cos^3\theta-7\cos\theta.
+\]
+Let $x=\cos\theta$. Then
+\[
+  \cos(7\theta)=0
+  \Longrightarrow
+  x\left(64x^6-112x^4+56x^2-7\right)=0.
+\]
+For $0<\theta<\pi$, the solutions of $\cos(7\theta)=0$ are
+\[
+  \theta=\frac{(2k+1)\pi}{14},\quad k=0,1,\dots,6.
+\]
+The nonzero $x=\cos\theta$ values therefore satisfy
+\[
+  64x^6-112x^4+56x^2-7=0.
+\]
+Set $u=x^2$. Then
+\[
+  64u^3-112u^2+56u-7=0,
+\]
+whose three roots are
+\[
+  u_1=\cos^2\frac{\pi}{14},\quad
+  u_2=\cos^2\frac{3\pi}{14},\quad
+  u_3=\cos^2\frac{5\pi}{14}.
+\]
+
+Now put $y=\frac1u$. Substituting $u=\frac1y$ gives
+\[
+  64-112y+56y^2-7y^3=0
+  \Longleftrightarrow
+  7y^3-56y^2+112y-64=0.
+\]
+So for $y_i=\frac1{u_i}$, Vi\`ete gives
+\[
+  y_1+y_2+y_3=\frac{56}{7}=8.
+\]
+Hence
+\[
+  \tan^2\alpha=\frac{1-\cos^2\alpha}{\cos^2\alpha}=\frac1u-1=y-1,
+\]
+and therefore
+\[
+  \tan^2\frac{\pi}{14}+\tan^2\frac{3\pi}{14}+\tan^2\frac{5\pi}{14}
+  =(y_1+y_2+y_3)-3
+  =8-3=5.
+\]
+\end{example}
+
 
 \subsection{Chebyshev Polynomials (Second Kind)}
 The Chebyshev polynomials of the second kind $U_n(x)$ form another family of orthogonal polynomials on $[-1,1]$, closely related to the first kind. They are defined by the trigonometric identity:

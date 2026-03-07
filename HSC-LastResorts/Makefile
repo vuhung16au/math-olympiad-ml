@@ -1,28 +1,28 @@
 # Makefile for HSC-LastResorts
 
-LATEX=pdflatex
 TEX=HSC-LastResorts.tex
 
 # Font support: allow TrueType/OpenType via fontspec.
 # Use LuaLaTeX so fonts/SAMAN___.TTF can be embedded.
 LATEX=lualatex
+LATEXFLAGS=-interaction=nonstopmode -halt-on-error -file-line-error
 
 
 all:
-	$(LATEX) $(TEX)
-	$(LATEX) $(TEX)
+	$(LATEX) $(LATEXFLAGS) $(TEX)
+	$(LATEX) $(LATEXFLAGS) $(TEX)
 
 clean:
 	rm -f *.aux *.log *.out *.toc *.fdb_latexmk *.fls *.synctex.gz *.pdf
 
 release:
-	$(LATEX) $(TEX)
+	$(LATEX) $(LATEXFLAGS) $(TEX)
 	mv HSC-LastResorts.pdf releases/
 final: clean pdf release
 open:
 	open HSC-LastResorts.pdf
 pdf:
-	$(LATEX) $(TEX)
+	$(LATEX) $(LATEXFLAGS) $(TEX)
 
 help:
 	@echo "Available targets:"
