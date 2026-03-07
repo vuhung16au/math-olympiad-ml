@@ -246,6 +246,47 @@ From $T_n(\cos\theta) = \cos(n\theta)$ we see:
   Thus $T_5(x)$ oscillates between $-1$ and $1$ at the six points $x = \cos(k\pi/5)$ on $[-1,1]$.
 \end{itemize}
 
+\begin{example}[Solve $\cos(5\theta)=0$ and deduce an exact value]
+Solve
+\[
+  \cos(5\theta)=0.
+\]
+Since $\cos\phi=0$ when $\phi=\frac{\pi}{2}+k\pi$ ($k\in\mathbb Z$), we get
+\[
+  5\theta=\frac{\pi}{2}+k\pi
+  \quad\Longrightarrow\quad
+  \theta=\frac{\pi}{10}+\frac{k\pi}{5},\quad k\in\mathbb Z.
+\]
+
+Now let $x=\cos\theta$. Using $T_5(x)=\cos(5\theta)$,
+\[
+  0=T_5(x)=16x^5-20x^3+5x
+  =x(16x^4-20x^2+5).
+\]
+For nonzero roots, set $y=x^2$:
+\[
+  16y^2-20y+5=0
+  \quad\Longrightarrow\quad
+  y=\frac{20\pm\sqrt{400-320}}{32}
+  =\frac{5\pm\sqrt5}{8}.
+\]
+Hence
+\[
+  \cos^2\theta\in\left\{\frac{5+\sqrt5}{8},\frac{5-\sqrt5}{8}\right\}
+\]
+for solutions of $\cos(5\theta)=0$ with $\cos\theta\ne0$.
+
+Take $\theta=\frac{3\pi}{10}$ (since $5\cdot\frac{3\pi}{10}=\frac{3\pi}{2}$, so it is a solution). Also $\frac{3\pi}{10}\in\left(0,\frac{\pi}{2}\right)$, so
+\[
+  \cos\frac{3\pi}{10}>0,\qquad
+  \cos\frac{3\pi}{10}<\cos\frac{\pi}{10}.
+\]
+Thus $\cos^2\!\left(\frac{3\pi}{10}\right)$ is the smaller of the two values, giving
+\[
+  \cos^2\!\left(\frac{3\pi}{10}\right)=\frac{5-\sqrt5}{8}.
+\]
+\end{example}
+
 
 \subsection{Chebyshev Polynomials (Second Kind)}
 The Chebyshev polynomials of the second kind $U_n(x)$ form another family of orthogonal polynomials on $[-1,1]$, closely related to the first kind. They are defined by the trigonometric identity:
