@@ -1173,6 +1173,97 @@ Therefore: $\sum_{k=1}^{n-1} \frac{1}{1 - \omega^k} = \frac{n-1}{2}$.
 \end{enumerate}
 \end{takeaways}
 
+% Problem 17: Squaring the Circle (The Transcendence of π) (Sample 17)
+\begin{problem}[Squaring the Circle --- The Transcendence of $\pi$]
+
+\textbf{The History:} \\
+For over 2,000 years, mathematicians chased the holy grail of ancient geometry: ``Squaring the Circle.'' The challenge was to construct a square with the exact same area as a given circle using only a compass and a straightedge. In 1882, Ferdinand von Lindemann finally put the ancient problem to rest. He didn't find a way to do it; he proved it was mathematically impossible. To do this, he proved that $\pi$ is \textbf{transcendental}---meaning it can never be the root of any polynomial equation with rational coefficients. A number that is called \textbf{algebraic} is a root of some polynomial with rational coefficients (e.g., $\sqrt{2}$)
+
+\vspace{0.3cm}
+\textbf{The Problem:} \\
+Assume, for the purpose of contradiction, that $\pi$ is algebraic. It follows that $i\pi$ is also algebraic. Let $\alpha_1 = i\pi$, and let $\alpha_2, \alpha_3, \dots, \alpha_m$ be its conjugate roots from a polynomial with integer coefficients. 
+
+\begin{enumerate}
+    \item[\textbf{(i)}] Using Euler's Identity, briefly explain why:
+    \[
+    (e^{\alpha_1} + 1)(e^{\alpha_2} + 1) \dots (e^{\alpha_m} + 1) = 0
+    \]
+
+    \item[\textbf{(ii)}] When the brackets in part (i) are expanded, the equation can be simplified into the form:
+    \[
+    k + e^{\beta_1} + e^{\beta_2} + \dots + e^{\beta_r} = 0
+    \]
+    where $k$ is a positive integer, and $\beta_1, \dots, \beta_r$ are the non-zero sums of various combinations of the $\alpha$ roots. \\
+    Let $p$ be a large prime number. We define the Niven-Lindemann polynomial $f(x)$ and its operator $F(x)$ as:
+    \[
+    f(x) = \frac{x^{p-1}(x-\beta_1)^p(x-\beta_2)^p \dots (x-\beta_r)^p}{(p-1)!}
+    \]
+    \[
+    F(x) = f(x) + f'(x) + f''(x) + \dots
+    \]
+    By differentiating, show that $\frac{d}{dx} \left[ e^{-x} F(x) \right] = -e^{-x} f(x)$.
+
+    \item[\textbf{(iii)}] By integrating the result of part (ii) from $0$ to $\beta_j$, deduce that:
+    \[
+    -k F(0) - \sum_{j=1}^r F(\beta_j) = \sum_{j=1}^r e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx
+    \]
+
+    \item[\textbf{(iv)}] You are given the following two advanced algebraic theorems. \textbf{(Do NOT prove these):}
+    \begin{itemize}
+        \item \textbf{Fact 1:} For a sufficiently large prime $p$, the left-hand side of the equation in part (iii) evaluates to a \textbf{non-zero integer}.
+        \item \textbf{Fact 2:} Because of the $(p-1)!$ in the denominator of $f(x)$, as $p \to \infty$, the right-hand side of the equation approaches \textbf{zero}.
+    \end{itemize}
+    Using these facts, complete the proof by contradiction to deduce that $\pi$ is transcendental.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{(i)} What is $e^{i\pi} + 1$? If one of the brackets in a massive product evaluates to exactly zero, what happens to the entire product?
+    \item \textbf{(ii)} Use the product rule on $e^{-x} F(x)$. Remember that $F'(x)$ is just $f'(x) + f''(x) + f'''(x) \dots$, which means $F(x) - F'(x) = f(x)$. Watch your negative signs carefully!
+    \item \textbf{(iii)} Integrate both sides of the identity you found in part (ii) with respect to $x$. When you evaluate the bounds, you will get an equation linking $F(\beta_j)$ and $F(0)$. Rearrange this to make $F(\beta_j)$ the subject. Then, sum this across all roots from $j=1$ to $r$, and substitute the fact that $e^{\beta_1} + \dots + e^{\beta_r} = -k$ from the prompt.
+    \item \textbf{(iv)} You have an equation where LHS = RHS. Fact 1 tells you the LHS is an integer like $1, -2, 7,$ etc. Fact 2 tells you the RHS is getting crushed infinitely close to $0$. What is the only integer that can equal $0$? Why does this break the universe?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} By Euler's Identity, $e^{i\pi} + 1 = 0$. Since $\alpha_1 = i\pi$, the very first bracket is $(0)$. Zero multiplied by any finite number is zero, so the entire product must equal zero.
+
+\textbf{(ii)} Let $y = e^{-x} F(x)$. Using the product rule: \\
+$\frac{dy}{dx} = -e^{-x} F(x) + e^{-x} F'(x)$ \\
+$\frac{dy}{dx} = -e^{-x} (F(x) - F'(x))$ \\
+Since $F(x) = f(x) + f'(x) + f''(x) + \dots$ and $F'(x) = f'(x) + f''(x) + \dots$, it follows that $F(x) - F'(x) = f(x)$. \\
+Therefore, $\frac{d}{dx} \left[ e^{-x} F(x) \right] = -e^{-x} f(x)$.
+
+\textbf{(iii)} Integrating both sides from $0$ to $\beta_j$: \\
+$\left[ e^{-x} F(x) \right]_0^{\beta_j} = -\int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
+$e^{-\beta_j} F(\beta_j) - F(0) = -\int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
+Multiply both sides by $e^{\beta_j}$: \\
+$F(\beta_j) - e^{\beta_j} F(0) = -e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
+Summing this for $j=1$ to $r$: \\
+$\sum_{j=1}^r F(\beta_j) - F(0) \sum_{j=1}^r e^{\beta_j} = -\sum_{j=1}^r e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
+From the prompt, $\sum_{j=1}^r e^{\beta_j} = -k$. Substituting this gives: \\
+$\sum_{j=1}^r F(\beta_j) + k F(0) = -\sum_{j=1}^r e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
+Multiply by $-1$ to arrive at the required result: \\
+$-k F(0) - \sum_{j=1}^r F(\beta_j) = \sum_{j=1}^r e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx$.
+
+\textbf{(iv)} From Fact 1, the LHS is a non-zero integer. From Fact 2, the RHS approaches $0$ as $p \to \infty$. \\
+For a sufficiently large prime $p$, the absolute value of the RHS will be strictly less than $1$. \\
+This means we have a non-zero integer strictly bounded between $-1$ and $1$. The only integer in this range is $0$, which contradicts Fact 1 (that the LHS is non-zero). \\
+Since the logic is sound, our initial assumption must be false. Therefore, $\pi$ is not algebraic; it is transcendental.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{The Power of the Black Box:} In high-level mathematics, you often use theorems proved by others as ``black boxes'' (like Fact 1 and Fact 2) to build a larger argument. Ext 2 examiners love doing this to test your logical reasoning without making you do three pages of abstract algebra.
+    \item \textbf{Telescoping Derivatives:} The Niven operator $F(x) - F'(x) = f(x)$ is the ultimate trick to bypass integration by parts. 
+    \item \textbf{The Geometry Connection:} Because $\pi$ is transcendental, it is impossible to construct a line segment of length $\pi$ using just a compass and straightedge (which can only solve algebraic equations). This single calculus proof killed a 2,000-year-old Greek geometry problem!
+    \item \textbf{Historical Significance:} Lindemann's proof (1882) settled one of the oldest problems in mathematics. Before this proof, mathematicians spent millennia trying to square the circle.
+    \item \textbf{Proof Technique:} This is a masterclass in proof by contradiction combined with asymptotic analysis. The contradiction arises from the tension between algebraic properties (integer values) and analytic properties (limits going to zero).
+    \item \textbf{The Power of Powers:} $\pi^n$ is transcendental for any positive integer $n$. If $\pi^n$ were algebraic, we could substitute $x^n$ into its polynomial and accidentally prove $\pi$ is algebraic, which is impossible!
+\end{enumerate}
+\end{takeaways}
+
 % Problem 12: Wallis Integrals and the Gaussian Integral
 \input{problems/12}
 

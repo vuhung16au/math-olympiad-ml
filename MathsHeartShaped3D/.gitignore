@@ -37,3 +37,4 @@ outputs/
 bloggings/
 *.json
 
+.cursor/

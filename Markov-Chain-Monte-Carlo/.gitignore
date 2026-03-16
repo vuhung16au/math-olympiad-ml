@@ -1,0 +1,118 @@
+
+
+# Project specific files 
+TODO.md
+TODO/
+books/
+refs-priv/
+
+# LaTeX auxiliary files
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# LaTeX intermediate files
+*.dvi
+*.xdv
+*-converted-to.*
+
+# BibTeX files
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+# Build tool files
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+# LaTeX build directories
+*.latexmain
+
+# Makeindex
+*.idx
+*.ilg
+*.ind
+
+# Nomenclature
+*.nlo
+*.nls
+*.nlg
+
+# Glossaries
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.lzo
+*.lzs
+
+# Hyperref
+*.brf
+
+# Listings
+*.lol
+
+# Algorithm packages
+*.alg
+*.loa
+
+# Theorems
+*.thm
+
+# Beamer
+*.nav
+*.pre
+*.snm
+*.vrb
+
+# Changes tracking
+*.soc
+
+# Comment package
+*.cut
+
+# Enumitem
+*.ent
+
+# Standalone packages
+*.sta
+
+# Generated files
+*.el
+*.ps
+*.eps
+*.dvi
+
+# Editors and IDEs
+*~
+*.swp
+*.swo
+*.bak
+*.backup
+.DS_Store
+.vscode/
+.idea/
+
+# Output (uncomment if you don't want to track PDFs)
+# *.pdf
+
+references.bib
