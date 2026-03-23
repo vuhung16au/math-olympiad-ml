@@ -1,0 +1,123 @@
+\documentclass[12pt,openany]{book}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \newcommand{\ramanujanfont}{}
+\else
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \newfontfamily\ramanujanfont{SAMAN___}[
+    Path=fonts/,
+    Extension=.TTF
+  ]
+\fi
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-boxes}
+\usepackage{styles/dl101-theorems}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=bookpurple,
+  urlcolor=bookred,
+  citecolor=lawpurple
+}
+
+\titleformat{\part}[display]
+  {\centering\Huge\bfseries\color{bookpurple}}
+  {Part \thepart}
+  {0.5em}
+  {\Huge}
+
+\titleformat{\chapter}[display]
+  {\centering\huge\bfseries\color{deepcharcoal}}
+  {\chaptertitlename\ \thechapter}
+  {0.5em}
+  {\Huge}
+
+\newcommand{\booktitle}{HSC Maths Extension 2\\Core, Enrichment and Last Resorts}
+
+\newcommand{\bookletchapter}[3]{%
+  \chapter{#1}
+  \label{#3}
+  \includepdf[pages=-,pagecommand={},width=\textwidth]{#2}
+}
+
+\author{Vu Hung Nguyen}
+\title{\booktitle}
+\date{}
+
+\begin{document}
+
+\frontmatter
+
+\begin{titlepage}
+  \centering
+  \vspace*{0.16\textheight}
+  {\Huge\bfseries \booktitle\par}
+  \vspace{1.5cm}
+  {\Large Vu Hung Nguyen\par}
+  \vfill
+  {\large Copyright \copyright\ Vu Hung Nguyen, 2025\par}
+  \vspace{0.4cm}
+  {\small This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par}
+  \vspace{1.2cm}
+\end{titlepage}
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+This volume brings together the existing HSC Mathematics Extension 2 booklets into a single reference text. It is designed as a practical study companion: core syllabus topics come first, enrichment topics follow, then a curated problem collection, and finally the most demanding ``last resort'' problems.
+
+\medskip
+The goal of this combined book is not to replace the original topic booklets, but to make them easier to study as one continuous resource. The original booklet content is reused as much as possible so each chapter preserves the style, pacing, and mathematical detail of its source.
+
+\medskip
+Students can read this book in sequence, or jump directly to a part that matches their current revision focus. Teachers and tutors may also use the chapter boundaries to assign topic-specific practice while still keeping the wider Extension 2 landscape in view.
+
+\tableofcontents
+
+\mainmatter
+
+\part{Core Theory and Techniques}
+\bookletchapter{Proofs}{../HSC-Proofs/releases/HSC-Proofs.pdf}{ch:proofs}
+\bookletchapter{Vectors}{../HSC-Vectors/releases/HSC-Vectors.pdf}{ch:vectors}
+\bookletchapter{Complex Numbers}{../HSC-ComplexNumbers/releases/HSC-ComplexNumbers.pdf}{ch:complex}
+\bookletchapter{Integrals}{../HSC-Integrals/releases/HSC-Integrals.pdf}{ch:integrals}
+\bookletchapter{Mechanics}{../HSC-Mechanics/releases/HSC-Mechanics.pdf}{ch:mechanics}
+
+\part{Advanced Methods and Enrichment}
+\bookletchapter{Induction}{../HSC-Induction/releases/HSC-Induction.pdf}{ch:induction}
+\bookletchapter{Inequalities}{../HSC-Inequalities/releases/HSC-Inequalities.pdf}{ch:inequalities}
+\bookletchapter{Polynomials}{../HSC-Polynomials/releases/HSC-Polynomials.pdf}{ch:polynomials}
+
+\part{Curated HSC Problem Sets}
+\chapter{Collections}
+\label{ch:collections}
+\noindent\textit{A curated collection of HSC problems.}
+\par\medskip
+\includepdf[pages=-,pagecommand={},width=\textwidth]{../HSC-Collections/releases/HSC-Collections.pdf}
+
+\part{The Last Resorts}
+\bookletchapter{Last Resorts}{../HSC-LastResorts/releases/HSC-LastResorts.pdf}{ch:lastresorts}
+
+\end{document}
