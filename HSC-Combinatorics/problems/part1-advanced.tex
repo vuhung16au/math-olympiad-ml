@@ -360,7 +360,7 @@ A license plate involves $2$ digits, followed by $2$ letters, followed by $2$ mo
 \begin{enumerate}[label=\alph*)]
 \item How many different license plates are possible?
 \item What is the probability that the last digit is prime?
-\item Find the probability that the plate says \texttt{COP789}.
+\item Find the probability that the plate says \texttt{12AB34}.
 \end{enumerate}
 \end{problem}
 
@@ -379,15 +379,18 @@ So the number of license plates is $\boxed{6760000}$.
 \]
 Thus the probability is $\boxed{\frac{2}{5}}$.
 
-\textbf{c)} Under the stated format, a plate has the pattern digit-digit-letter-letter-digit-digit. The string \texttt{COP789} has three letters followed by three digits, so it cannot occur.
+\textbf{c)} There is exactly one favourable plate, namely \texttt{12AB34}, out of all possible license plates. Therefore
 \[
-\boxed{0}
+\frac{1}{6760000}.
+\]
+\[
+\boxed{\frac{1}{6760000}}
 \]
 \end{solution}
 
 \begin{takeaways}
 \item Before counting, check the format carefully.
-\item If a requested outcome is impossible under the stated rules, its probability is $0$.
+\item If a question asks for one exact plate, the probability is usually $\frac{1}{\text{total number of plates}}$.
 \item When repetition is not forbidden, assume repeated digits or letters are allowed.
 \end{takeaways}
 
