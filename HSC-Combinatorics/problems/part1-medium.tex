@@ -1,0 +1,101 @@
+\begin{problem}[Seating around a circle]
+How many different ways can $9$ people be seated in a circle if $2$ people have already chosen their seats?
+\end{problem}
+
+\begin{solution}
+Once the two chosen seats are fixed, those two people no longer move. We only need to arrange the remaining $7$ people in the remaining $7$ seats.
+\[
+7! = 5040
+\]
+Therefore, the number of possible seatings is $\boxed{5040}$.
+\end{solution}
+
+\begin{takeaways}
+\item Circular arrangements usually reduce by one factor because rotations are equivalent.
+\item If some seats are already fixed, the circular symmetry has already been broken.
+\end{takeaways}
+
+\begin{problem}[Selections from URGOATED]
+Five letters are chosen from the letters of the word \texttt{URGOATED}, without ordering them. How many selections are there if the choice:
+\begin{enumerate}[label=\alph*)]
+\item has no restriction?
+\item must contain all four vowels?
+\item must contain the letter \texttt{R}?
+\item must contain the letter \texttt{U}, but not \texttt{D}?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+All $8$ letters in \texttt{URGOATED} are distinct: $U, R, G, O, A, T, E, D$.
+
+\textbf{a)} No restriction:
+\[
+\binom{8}{5} = 56
+\]
+
+\textbf{b)} Must contain all four vowels $U, O, A, E$:
+We must choose $1$ more letter from the remaining $4$ consonants $R, G, T, D$.
+\[
+\binom{4}{1} = 4
+\]
+
+\textbf{c)} Must contain \texttt{R}:
+Fix \texttt{R}, then choose $4$ more letters from the remaining $7$ letters.
+\[
+\binom{7}{4} = 35
+\]
+
+\textbf{d)} Must contain \texttt{U}, but not \texttt{D}:
+Fix \texttt{U}, exclude \texttt{D}, then choose $4$ more letters from $R, G, O, A, T, E$.
+\[
+\binom{6}{4} = 15
+\]
+
+So the answers are:
+\[
+\boxed{56,\ 4,\ 35,\ 15}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Restriction questions are often easiest if you first force required letters in, or remove forbidden letters.
+\item After handling the restriction, finish with a simple combination count.
+\end{takeaways}
+
+\begin{problem}[Forming a Dota 2 e-sport team]
+\begin{enumerate}[label=\alph*)]
+\item How many different ways can a Dota 2 e-sport team of $8$ students be chosen from a class of $30$ students?
+\item The team must have $3$ girls and $5$ boys. If the class contains $12$ girls and $18$ boys, how many teams are possible?
+\item Find the probability that Vu and Zachary are both chosen on the team.
+\item Find the probability that neither Vu nor Zachary is chosen.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{a)} Choose any $8$ students from $30$:
+\[
+\binom{30}{8} = 5852925
+\]
+
+\textbf{b)} Choose $3$ girls from $12$ and $5$ boys from $18$:
+\[
+\binom{12}{3}\binom{18}{5} = 220 \times 8568 = 1884960
+\]
+
+\textbf{c)} If Vu and Zachary must both be chosen, then choose the remaining $6$ team members from the other $28$ students:
+\[
+\frac{\binom{28}{6}}{\binom{30}{8}} = \frac{376740}{5852925} = \frac{28}{145}
+\]
+So the probability is $\boxed{\frac{28}{145}}$.
+
+\textbf{d)} If neither Vu nor Zachary is chosen, then all $8$ team members must come from the other $28$ students:
+\[
+\frac{\binom{28}{8}}{\binom{30}{8}} = \frac{3108105}{5852925} = \frac{161}{303}
+\]
+So the probability is $\boxed{\frac{161}{303}}$.
+\end{solution}
+
+\begin{takeaways}
+\item For probabilities in equally likely team selections, count favourable teams over total teams.
+\item ``Both chosen'' means fix those people first; ``neither chosen'' means remove them from the pool.
+\end{takeaways}

@@ -1,0 +1,40 @@
+Prompt.md
+privs/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdy
+*.tdo
+*.auxlock
+
+# PDF files
+HSC-Combinatorics.pdf
+
+# Keep released PDF if generated
+!releases/HSC-Combinatorics.pdf
+
+samples/
+samples2/
+bloggings/
+docs/
+TODO/
+PLAN.md
+Prompts.md

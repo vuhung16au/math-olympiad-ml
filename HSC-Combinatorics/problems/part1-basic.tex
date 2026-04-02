@@ -1,0 +1,56 @@
+\begin{problem}[Four-digit numbers from 1 to 8]
+How many $4$-digit numbers can you make using the digits $1$ to $8$ if no digit is repeated?
+\end{problem}
+
+\begin{solution}
+There are $8$ choices for the thousands digit, then $7$ choices for the hundreds digit, $6$ for the tens digit, and $5$ for the units digit.
+\[
+8 \times 7 \times 6 \times 5 = 1680
+\]
+So the number of such $4$-digit numbers is $\boxed{1680}$.
+\end{solution}
+
+\begin{takeaways}
+\item When order matters and repetition is not allowed, use a permutation count.
+\item The multiplication principle is often the fastest method for straightforward arrangement questions.
+\end{takeaways}
+
+\begin{problem}[Rearranging the letters of COOKED]
+How many different arrangements of the letters in the word \texttt{COOKED} are possible?
+\end{problem}
+
+\begin{solution}
+The word \texttt{COOKED} has $6$ letters in total, with:
+\[
+O \text{ repeated } 2 \text{ times}.
+\]
+If all letters were distinct, there would be $6!$ arrangements. We divide by $2!$ for the repeated $O$'s:
+\[
+\frac{6!}{2!} = \frac{720}{2} = 360.
+\]
+Hence the number of different arrangements is $\boxed{360}$.
+\end{solution}
+
+\begin{takeaways}
+\item For repeated letters, start with the total factorial and divide by the factorial of each repeated group.
+\item This is the standard multiset permutation formula.
+\end{takeaways}
+
+\begin{problem}[Choosing three coloured balls]
+A bag contains six different coloured balls.
+
+How many different ways can three balls be selected?
+\end{problem}
+
+\begin{solution}
+Since the order of selection does not matter, we use combinations:
+\[
+\binom{6}{3} = \frac{6 \cdot 5 \cdot 4}{3 \cdot 2 \cdot 1} = 20.
+\]
+So the number of different selections is $\boxed{20}$.
+\end{solution}
+
+\begin{takeaways}
+\item Use combinations when order does not matter.
+\item The phrase ``select two balls'' usually signals a combination, not a permutation.
+\end{takeaways}

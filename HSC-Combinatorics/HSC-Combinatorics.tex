@@ -1,0 +1,138 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\providecolor{warmstone}{RGB}{208,184,168}
+
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
+  title={\bfseries Remark~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{remark}[1][]{%
+  \begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{remarkbox}%
+}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Mathematics Extension 1: Combinatorics Practice}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\itshape
+Mathematics may be defined as the economy of counting. There is no problem in the whole of mathematics which cannot be solved by direct counting.
+
+\vspace{0.75em}
+\normalfont Ernst Mach
+\end{center}
+
+\vspace{1em}
+
+\begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet is a starter collection of combinatorics problems for NSW HSC Mathematics Extension~1 students. It focuses on core syllabus ideas such as permutations, combinations, circular arrangements, committee selection, and simple probability through counting.
+
+\subsection{Target Audience}
+This resource is written for students who want extra practice with combinatorics in a clear, classroom-friendly format. The solutions are intentionally brief, but each one points out the key counting idea behind the answer.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the short summary of the core formulas first.
+  \item Attempt each problem before reading the solution.
+  \item Pay attention to whether each question is a selection or an arrangement.
+  \item Use the takeaways to build pattern recognition for future HSC questions.
+\end{itemize}
+
+\subsection{Core Counting Ideas}
+
+\textbf{Fundamental Counting Principle.} If a task is completed in stages with $a$ choices for the first stage, $b$ for the second, and $c$ for the third, then the total number of outcomes is
+\[
+a \times b \times c.
+\]
+
+\textbf{Permutations without repetition.} The number of ways to arrange $r$ objects chosen from $n$ distinct objects is
+\[
+{}^{n}P_r = \frac{n!}{(n-r)!}.
+\]
+
+\textbf{Combinations.} The number of ways to choose $r$ objects from $n$ distinct objects is
+\[
+\binom{n}{r} = \frac{n!}{r!(n-r)!}.
+\]
+
+\textbf{Permutations with repeated objects.} If there are $n$ objects in total, with repetitions of sizes $a,b,c,\dots$, then the number of distinct arrangements is
+\[
+\frac{n!}{a!\,b!\,c!\cdots}.
+\]
+
+\begin{remark}
+The most common combinatorics mistake is using a permutation when the problem is actually a combination, or vice versa. A good first question is always: \emph{Does order matter?}
+\end{remark}
+
+\section{Part 1: Worked Problems}
+
+\subsection{Basic}
+\input{problems/part1-basic.tex}
+
+\subsection{Medium}
+\input{problems/part1-medium.tex}
+
+\subsection{Advanced}
+\input{problems/part1-advanced.tex}
+
+\section{Part 2: Future Expansion}
+
+\subsection{Basic Practice}
+\input{problems/part2-basic.tex}
+
+\subsection{Medium Practice}
+\input{problems/part2-medium.tex}
+
+\subsection{Advanced Practice}
+\input{problems/part2-advanced.tex}
+
+\section{Conclusion}
+
+Combinatorics rewards careful reading as much as technical skill. Many HSC questions become much easier once you decide whether the task is an arrangement, a selection, or a probability question built from counting. As this booklet grows, it can become a compact reference for the most common combinatorics patterns students meet in Extension~1.
+
+\end{document}

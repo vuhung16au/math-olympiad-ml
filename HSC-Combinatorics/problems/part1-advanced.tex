@@ -1,0 +1,92 @@
+\begin{problem}[Committee selection]
+A committee containing $4$ men and $4$ women is to be formed from a group of $10$ men and $8$ women.
+
+In how many different ways can the committee be formed?
+\end{problem}
+
+\begin{solution}
+Choose the men and women independently:
+\[
+\binom{10}{4}\binom{8}{4} = 210 \times 70 = 14700
+\]
+Hence the number of possible committees is $\boxed{14700}$.
+\end{solution}
+
+\begin{takeaways}
+\item When categories are separate, count each category and multiply.
+\item Committee questions are combination questions because order is irrelevant.
+\end{takeaways}
+
+\begin{problem}[License plates and careful reading]
+A license plate involves $2$ digits, followed by $2$ letters, followed by $2$ more digits, all chosen at random.
+\begin{enumerate}[label=\alph*)]
+\item How many different license plates are possible?
+\item What is the probability that the last digit is prime?
+\item Find the probability that the plate says \texttt{COP789}.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+We interpret ``all chosen at random'' to mean repetition is allowed.
+
+\textbf{a)} There are $10$ choices for each digit and $26$ choices for each letter:
+\[
+10 \times 10 \times 26 \times 26 \times 10 \times 10 = 10^4 \cdot 26^2 = 6760000
+\]
+So the number of license plates is $\boxed{6760000}$.
+
+\textbf{b)} The last digit can be any of $0$ to $9$. The prime digits are $2,3,5,7$, so there are $4$ favourable digits out of $10$:
+\[
+\frac{4}{10} = \frac{2}{5}
+\]
+Thus the probability is $\boxed{\frac{2}{5}}$.
+
+\textbf{c)} Under the stated format, a plate has the pattern digit-digit-letter-letter-digit-digit. The string \texttt{COP789} has three letters followed by three digits, so it cannot occur.
+\[
+\boxed{0}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Before counting, check the format carefully.
+\item If a requested outcome is impossible under the stated rules, its probability is $0$.
+\item When repetition is not forbidden, assume repeated digits or letters are allowed.
+\end{takeaways}
+
+\begin{problem}[A mixed combinatorics review]
+\begin{enumerate}[label=\arabic*.]
+\item How many different ways can $5$ letters be chosen from \texttt{URGOATED} if all $4$ vowels must be included?
+\item How many different ways could the letters of \texttt{COOKED} be arranged?
+\item How many $4$-digit numbers can be made from the digits $1$ to $8$ without repetition?
+\end{enumerate}
+
+Explain briefly which parts are combinations and which parts are permutations.
+\end{problem}
+
+\begin{solution}
+\textbf{1.} This is a combination because order does not matter. We must take $U, O, A, E$ and then choose $1$ more letter from the remaining $4$ consonants:
+\[
+\binom{4}{1} = 4
+\]
+
+\textbf{2.} This is a permutation with repeated letters:
+\[
+\frac{6!}{2!} = 360
+\]
+
+\textbf{3.} This is a permutation without repetition:
+\[
+8 \times 7 \times 6 \times 5 = 1680
+\]
+
+So the answers are:
+\[
+\boxed{4,\ 360,\ 1680}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Combinations are for selections where order does not matter.
+\item Permutations are for arrangements where order does matter.
+\item Repeated objects in a permutation require division by factorials of repeated counts.
+\end{takeaways}
