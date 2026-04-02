@@ -329,6 +329,8 @@ TSWLatexianTemp*
 
 # Project specific files:
 TODO.md
+TODO/
+TODOs/
 Prompt.md
 Prompts/
 docs-priv/

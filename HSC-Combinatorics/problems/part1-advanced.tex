@@ -17,6 +17,436 @@ Hence the number of possible committees is $\boxed{14700}$.
 \item Committee questions are combination questions because order is irrelevant.
 \end{takeaways}
 
+\begin{problem}[Pascal's triangle and a telescoping sum]
+\begin{enumerate}[label=\roman*)]
+\item The Pascal's triangle relation can be expressed as
+\[
+\binom{n}{r} = \binom{n-1}{r-1} + \binom{n-1}{r}.
+\]
+Do not prove this relation. Show that
+\[
+\binom{m}{R} = \binom{m+1}{R+1} - \binom{m}{R+1}.
+\]
+
+\item Hence, or otherwise, prove that
+\[
+\binom{2000}{2000} + \binom{2001}{2000} + \binom{2002}{2000} + \dots + \binom{2050}{2000} = \binom{2051}{2001}.
+\]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{i)} Apply Pascal's triangle with $n=m+1$ and $r=R+1$:
+\[
+\binom{m+1}{R+1} = \binom{m}{R} + \binom{m}{R+1}.
+\]
+Rearranging gives
+\[
+\binom{m}{R} = \binom{m+1}{R+1} - \binom{m}{R+1}.
+\]
+
+\textbf{ii)} Using part (i) with $R=2000$,
+\[
+\binom{m}{2000} = \binom{m+1}{2001} - \binom{m}{2001}.
+\]
+Now let $m=2000,2001,\dots,2050$ and add:
+\begin{align*}
+\binom{2000}{2000} + \binom{2001}{2000} + \cdots + \binom{2050}{2000}
+&= \left(\binom{2001}{2001} - \binom{2000}{2001}\right) \\
+&\quad + \left(\binom{2002}{2001} - \binom{2001}{2001}\right) \\
+&\quad + \cdots \\
+&\quad + \left(\binom{2051}{2001} - \binom{2050}{2001}\right).
+\end{align*}
+
+This is a telescoping sum, so all middle terms cancel. Also,
+\[
+\binom{2000}{2001} = 0
+\]
+because we cannot choose $2001$ objects from $2000$.
+
+Hence the sum becomes
+\[
+\binom{2051}{2001}.
+\]
+Therefore,
+\[
+\binom{2000}{2000} + \binom{2001}{2000} + \binom{2002}{2000} + \dots + \binom{2050}{2000} = \boxed{\binom{2051}{2001}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Pascal's triangle identities are often most useful after rearranging them into a subtraction form.
+\item A telescoping sum is one in which most terms cancel after expansion.
+\item In binomial coefficients, $\binom{n}{r}=0$ when $r>n$, and that can clean up endpoint terms neatly.
+\end{takeaways}
+
+\begin{problem}[Combining binomial coefficients]
+It is known that
+\[
+\binom{n}{r}=\binom{n-1}{r-1}+\binom{n-1}{r}
+\]
+for all integers such that $1\le r\le n-1$. Do not prove this.
+
+Find one possible set of values for $p$ and $q$ such that
+\[
+\binom{2022}{80}+\binom{2022}{81}+\binom{2023}{1943}=\binom{p}{q}.
+\]
+\end{problem}
+
+\begin{solution}
+Using Pascal's triangle identity,
+\[
+\binom{2022}{80}+\binom{2022}{81}=\binom{2023}{81}.
+\]
+
+Also,
+\[
+\binom{2023}{1943}=\binom{2023}{2023-1943}=\binom{2023}{80}
+\]
+by the symmetry property of binomial coefficients.
+
+So the given expression becomes
+\[
+\binom{2023}{81}+\binom{2023}{80}.
+\]
+Applying Pascal's triangle identity again,
+\[
+\binom{2023}{80}+\binom{2023}{81}=\binom{2024}{81}.
+\]
+
+Therefore one possible answer is
+\[
+\boxed{p=2024,\ q=81}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item When two binomial coefficients have the same upper index and consecutive lower indices, try Pascal's triangle immediately.
+\item The symmetry identity $\binom{n}{r}=\binom{n}{n-r}$ is often the key step before applying Pascal's triangle.
+\item In HSC multiple-step identities, simplify one pair at a time.
+\end{takeaways}
+
+\begin{problem}[A sum of squares binomial identity]
+Use the identity
+\[
+(1+x)^{2n}=(1+x)^n(1+x)^n
+\]
+to show that
+\[
+\binom{2n}{n}=\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2,
+\]
+where $n$ is a positive integer.
+\end{problem}
+
+\begin{solution}
+Expand the left-hand side using the binomial theorem:
+\[
+(1+x)^{2n}=\binom{2n}{0}+\binom{2n}{1}x+\cdots+\binom{2n}{n}x^n+\cdots+\binom{2n}{2n}x^{2n}.
+\]
+So the coefficient of $x^n$ on the left-hand side is
+\[
+\binom{2n}{n}.
+\]
+
+Now expand the right-hand side:
+\[
+(1+x)^n(1+x)^n
+=\left(\sum_{r=0}^n \binom{n}{r}x^r\right)\left(\sum_{s=0}^n \binom{n}{s}x^s\right).
+\]
+
+To obtain an $x^n$ term in the product, we must choose $x^r$ from the first bracket and $x^{n-r}$ from the second bracket. So the coefficient of $x^n$ is
+\[
+\binom{n}{0}\binom{n}{n}+\binom{n}{1}\binom{n}{n-1}+\cdots+\binom{n}{n}\binom{n}{0}.
+\]
+
+Using the symmetry identity
+\[
+\binom{n}{n-r}=\binom{n}{r},
+\]
+this becomes
+\[
+\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2.
+\]
+
+Since both expressions are the coefficient of $x^n$ in the same polynomial, they are equal. Therefore,
+\[
+\boxed{\binom{2n}{n}=\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item A standard way to prove combinatorial identities is to expand the same expression in two different ways.
+\item When proving binomial identities, coefficient matching is often the key idea.
+\item The symmetry $\binom{n}{n-r}=\binom{n}{r}$ frequently simplifies the final expression.
+\end{takeaways}
+
+\begin{problem}[Equal numbers of men and women]
+A club has $2n$ members, with $n$ women and $n$ men.
+
+A group consisting of an even number $(0,2,4,\dots,2n)$ of members is chosen, with the number of men equal to the number of women.
+
+Show, giving reasons, that the number of ways to do this is
+\[
+\binom{2n}{n}.
+\]
+\end{problem}
+
+\begin{solution}
+Suppose the group contains $r$ women. Since the number of men must equal the number of women, the group must also contain $r$ men.
+
+For a fixed value of $r$, the number of ways to choose the group is
+\[
+\binom{n}{r}\binom{n}{r}.
+\]
+This is because we choose $r$ women from the $n$ women and $r$ men from the $n$ men.
+
+Now $r$ can take any value from $0$ to $n$. So the total number of possible groups is
+\[
+\sum_{r=0}^{n}\binom{n}{r}^2.
+\]
+
+But from the identity
+\[
+\binom{2n}{n}=\binom{n}{0}^2+\binom{n}{1}^2+\cdots+\binom{n}{n}^2,
+\]
+this sum is equal to
+\[
+\binom{2n}{n}.
+\]
+
+Therefore, the number of ways to choose such a group is
+\[
+\boxed{\binom{2n}{n}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item When a selection has balanced categories, fix the number chosen from one category first.
+\item A total count can often be written as a sum over all allowable cases.
+\item This problem is a direct application of the identity $\sum_{r=0}^n \binom{n}{r}^2=\binom{2n}{n}$.
+\end{takeaways}
+
+\begin{problem}[A binomial identity and double counting capstone]
+\begin{enumerate}[label=\roman*)]
+\item Use the identity
+\[
+(1+x)^{2n}=(1+x)^n(1+x)^n
+\]
+to show that
+\[
+\binom{2n}{n}=\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2,
+\]
+where $n$ is a positive integer.
+
+\item A club has $2n$ members, with $n$ women and $n$ men.
+
+A group consisting of an even number $(0,2,4,\dots,2n)$ of members is chosen, with the number of men equal to the number of women.
+
+Show, giving reasons, that the number of ways to do this is
+\[
+\binom{2n}{n}.
+\]
+
+\item From the group chosen in part (ii), one of the men and one of the women are selected as leaders.
+
+Show, giving reasons, that the number of ways to choose the even number of people and then the leaders is
+\[
+1^2\binom{n}{1}^2+2^2\binom{n}{2}^2+\dots+n^2\binom{n}{n}^2.
+\]
+
+\item The process is now reversed so that the leaders, one man and one woman, are chosen first. The rest of the group is then selected, still made up of an equal number of women and men.
+
+By considering this reversed process and using part (ii), find a simple expression for the sum in part (iii).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{i)} Expanding the left-hand side,
+\[
+(1+x)^{2n}=\sum_{k=0}^{2n}\binom{2n}{k}x^k,
+\]
+so the coefficient of $x^n$ is $\binom{2n}{n}$.
+
+Now expand the right-hand side:
+\[
+(1+x)^n(1+x)^n
+=\left(\sum_{r=0}^n \binom{n}{r}x^r\right)\left(\sum_{s=0}^n \binom{n}{s}x^s\right).
+\]
+To obtain an $x^n$ term, we choose $x^r$ from the first factor and $x^{n-r}$ from the second. So the coefficient of $x^n$ is
+\[
+\binom{n}{0}\binom{n}{n}+\binom{n}{1}\binom{n}{n-1}+\dots+\binom{n}{n}\binom{n}{0}.
+\]
+Using $\binom{n}{n-r}=\binom{n}{r}$, this becomes
+\[
+\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2.
+\]
+Hence
+\[
+\binom{2n}{n}=\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2.
+\]
+
+\textbf{ii)} Suppose the chosen group contains $r$ women. Then it must also contain $r$ men.
+
+For this fixed value of $r$, the number of choices is
+\[
+\binom{n}{r}\binom{n}{r}=\binom{n}{r}^2.
+\]
+Summing over all possible $r$ from $0$ to $n$ gives
+\[
+\sum_{r=0}^n \binom{n}{r}^2.
+\]
+By part (i), this equals
+\[
+\binom{2n}{n}.
+\]
+
+\textbf{iii)} If the chosen group contains $r$ men and $r$ women, then after choosing the group there are
+\[
+r\times r=r^2
+\]
+ways to choose one male leader and one female leader.
+
+The number of ways to choose such a group is $\binom{n}{r}^2$, so for a fixed $r$ the number of outcomes is
+\[
+r^2\binom{n}{r}^2.
+\]
+Summing from $r=1$ to $n$ gives
+\[
+1^2\binom{n}{1}^2+2^2\binom{n}{2}^2+\dots+n^2\binom{n}{n}^2.
+\]
+
+\textbf{iv)} Now reverse the process.
+
+First choose the male leader and the female leader. This can be done in
+\[
+n\times n=n^2
+\]
+ways.
+
+After choosing the leaders, there remain $n-1$ men and $n-1$ women. The rest of the group must still contain equal numbers of men and women, so by part (ii) the number of ways to choose the remaining people is
+\[
+\binom{2n-2}{n-1}.
+\]
+
+Therefore the total number of outcomes is
+\[
+n^2\binom{2n-2}{n-1}.
+\]
+
+Since this counts the same process as in part (iii), we obtain
+\[
+1^2\binom{n}{1}^2+2^2\binom{n}{2}^2+\dots+n^2\binom{n}{n}^2
+=\boxed{n^2\binom{2n-2}{n-1}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item This is a strong example of counting the same set of outcomes in two different ways.
+\item In part (iii), the count is grouped by the number of men and women selected.
+\item In part (iv), choosing the leaders first turns the same problem into a much simpler count.
+\item Double counting is a powerful way to derive closed forms for complicated sums.
+\end{takeaways}
+
+\begin{problem}[Students and teachers in a circle]
+A group with $5$ students and $3$ teachers is to be arranged in a circle.
+
+In how many ways can this be done if no more than $2$ students can sit together?
+\begin{enumerate}[label=\Alph*.]
+\item $4!\times 3!$
+\item $5!\times 3!$
+\item $2!\times 5!\times 3!$
+\item $2!\times 2!\times 2!\times 3!$
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Arrange the $3$ teachers in a circle first. The number of circular arrangements is
+\[
+(3-1)! = 2!.
+\]
+
+These $3$ teachers create $3$ gaps between them. To ensure that no more than $2$ students sit together, the $5$ students must be split across these $3$ gaps with at most $2$ students in each gap.
+
+We need
+\[
+x_1+x_2+x_3=5
+\]
+with each $x_i\le 2$.
+
+The only possible distribution is
+\[
+2,2,1.
+\]
+There are
+\[
+3
+\]
+ways to choose which gap gets the single student.
+
+Now arrange the $5$ distinct students in the chosen student positions:
+\[
+5!
+\]
+ways.
+
+Hence the total number of arrangements is
+\[
+2!\times 3\times 5! = 2!\times 3!\times 5! = 5!\times 3!.
+\]
+So the correct answer is
+\[
+\boxed{\text{B. }5!\times 3!}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item For circular arrangement problems with mixed groups, it is often best to fix one category first and then place the other category into the gaps.
+\item Restriction questions often become gap-distribution problems.
+\item After handling the pattern of slots, place the distinct people into those slots at the end.
+\end{takeaways}
+
+\begin{problem}[Guests who refuse to sit together]
+Eight guests are to be seated at a round table. If two of these guests refuse to sit next to each other, how many seating arrangements are possible?
+\end{problem}
+
+\begin{solution}
+First count all circular seating arrangements of $8$ distinct guests:
+\[
+(8-1)! = 7! = 5040.
+\]
+
+Now count the arrangements in which the two particular guests do sit next to each other.
+
+Treat those two guests as a single block. Then we have $7$ objects around the table: the block plus the other $6$ guests. The number of circular arrangements is
+\[
+(7-1)! = 6!.
+\]
+
+Within the block, the two guests can switch places in
+\[
+2!
+\]
+ways.
+
+So the number of arrangements in which they sit together is
+\[
+2 \times 6! = 1440.
+\]
+
+Therefore, the number of arrangements in which they do \emph{not} sit next to each other is
+\[
+7! - 2\cdot 6! = 5040 - 1440 = 3600.
+\]
+
+Hence the required number of seating arrangements is $\boxed{3600}$.
+\end{solution}
+
+\begin{takeaways}
+\item In circular arrangement questions with a restriction like ``not next to each other'', complementary counting is often the cleanest method.
+\item To count adjacent people, bind them into one block and arrange the block with the remaining people.
+\item For circular permutations of $n$ distinct objects, use $(n-1)!$.
+\end{takeaways}
+
 \begin{problem}[License plates and careful reading]
 A license plate involves $2$ digits, followed by $2$ letters, followed by $2$ more digits, all chosen at random.
 \begin{enumerate}[label=\alph*)]

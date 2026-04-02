@@ -54,3 +54,24 @@ So the number of different selections is $\boxed{20}$.
 \item Use combinations when order does not matter.
 \item The phrase ``select two balls'' usually signals a combination, not a permutation.
 \end{takeaways}
+
+\begin{problem}[Rearranging the letters of CONDOBOLIN]
+In how many different ways can all the letters of the word \texttt{CONDOBOLIN} be arranged in a line?
+\end{problem}
+
+\begin{solution}
+The word \texttt{CONDOBOLIN} has $10$ letters in total, with:
+\[
+O \text{ repeated } 3 \text{ times}, \qquad N \text{ repeated } 2 \text{ times}.
+\]
+If all letters were distinct, there would be $10!$ arrangements. We divide by $3!$ for the repeated $O$'s and by $2!$ for the repeated $N$'s:
+\[
+\frac{10!}{3!\,2!}=\frac{3628800}{12}=302400.
+\]
+Hence the number of different arrangements is $\boxed{302400}$.
+\end{solution}
+
+\begin{takeaways}
+\item This is another multiset permutation problem: start with $n!$ and divide by repeated factorials.
+\item Always count repeated letters carefully before substituting into the formula.
+\end{takeaways}

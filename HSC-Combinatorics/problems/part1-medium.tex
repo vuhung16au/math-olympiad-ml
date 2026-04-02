@@ -99,3 +99,270 @@ So the probability is $\boxed{\frac{161}{303}}$.
 \item For probabilities in equally likely team selections, count favourable teams over total teams.
 \item ``Both chosen'' means fix those people first; ``neither chosen'' means remove them from the pool.
 \end{takeaways}
+
+\begin{problem}[Triangles from points on the sides of a triangle]
+The diagram shows triangle $ABC$ with points chosen on each of the sides. On side $AB$, $3$ points are chosen. On side $AC$, $4$ points are chosen. On side $BC$, $5$ points are chosen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \coordinate (A) at (1,3);
+    \coordinate (B) at (0,0);
+    \coordinate (C) at (6,0.8);
+
+    \draw (A) -- (B) -- (C) -- cycle;
+
+    \node[above left] at (A) {$A$};
+    \node[below left] at (B) {$B$};
+    \node[right] at (C) {$C$};
+
+    \foreach \i in {1,2,3}
+        \filldraw [black] ($(A)!\i/4!(B)$) circle (1.5pt);
+
+    \foreach \i in {1,2,3,4}
+        \filldraw [black] ($(A)!\i/5!(C)$) circle (1.5pt);
+
+    \foreach \i in {1,2,3,4,5}
+        \filldraw [black] ($(B)!\i/6!(C)$) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+
+How many triangles can be formed using the chosen points as vertices?
+\end{problem}
+
+\begin{solution}
+There are
+\[
+3+4+5=12
+\]
+chosen points in total.
+
+If no three points were collinear, the number of triangles would be
+\[
+\binom{12}{3}=220.
+\]
+
+However, any $3$ points chosen on the same side do not form a triangle.
+
+On side $AB$, there are
+\[
+\binom{3}{3}=1
+\]
+collinear triple.
+
+On side $AC$, there are
+\[
+\binom{4}{3}=4
+\]
+collinear triples.
+
+On side $BC$, there are
+\[
+\binom{5}{3}=10
+\]
+collinear triples.
+
+So the number of valid triangles is
+\[
+\binom{12}{3}-\binom{3}{3}-\binom{4}{3}-\binom{5}{3}
+=220-1-4-10
+=205.
+\]
+
+Hence the number of triangles is $\boxed{205}$.
+\end{solution}
+
+\begin{takeaways}
+\item Start by counting all possible triples of points.
+\item Then subtract the triples that are collinear, since they do not form triangles.
+\item Geometric counting problems often reduce to combinations plus careful exclusion.
+\end{takeaways}
+
+\begin{problem}[Age-limit check across teams]
+A sports association manages $13$ junior teams. It decides to check the age of all players. Any team that has more than $3$ players above the age limit will be penalised.
+
+A total of $41$ players are found to be above the age limit.
+
+Will any team be penalised? Justify your answer.
+\end{problem}
+
+\begin{solution}
+Yes, at least one team must be penalised.
+
+Suppose no team were penalised. Then each of the $13$ teams would have at most $3$ players above the age limit.
+
+So the greatest possible total number of above-limit players would be
+\[
+13 \times 3 = 39.
+\]
+
+But the actual total is $41$, and
+\[
+41 > 39.
+\]
+
+This is impossible if every team has at most $3$ above-limit players.
+
+Therefore, at least one team must have more than $3$ players above the age limit, so at least one team will be penalised.
+\end{solution}
+
+\begin{takeaways}
+\item This is a pigeonhole-principle style argument: if every group had the maximum allowed amount, the total would still be too small.
+\item A good way to prove that something \emph{must} happen is to assume it does not, then show the numbers do not work.
+\item In combinatorics, ``justify your answer'' often means giving a short contradiction argument like this one.
+\end{takeaways}
+
+\begin{problem}[Expected score with replacement]
+A game consists of randomly selecting $4$ balls from a bag. After each ball is selected it is replaced in the bag. The bag contains $3$ red balls and $7$ green balls.
+
+For each red ball selected, $10$ points are earned and for each green ball selected, $5$ points are deducted. For instance, if a player picks $3$ red balls and $1$ green ball, the score will be
+\[
+3\times 10 - 1\times 5 = 25
+\]
+points.
+
+What is the expected score in the game?
+\end{problem}
+
+\begin{solution}
+For one draw,
+\[
+P(\text{red})=\frac{3}{10}, \qquad P(\text{green})=\frac{7}{10}.
+\]
+
+So the expected score from one draw is
+\begin{align*}
+E(\text{score per draw})
+&= 10\left(\frac{3}{10}\right) + (-5)\left(\frac{7}{10}\right) \\
+&= 3 - \frac{35}{10} \\
+&= 3 - 3.5 \\
+&= -0.5.
+\end{align*}
+
+Since there are $4$ draws with replacement, the expected total score is
+\[
+4\times (-0.5) = -2.
+\]
+
+Therefore, the expected score in the game is $\boxed{-2}$ points.
+\end{solution}
+
+\begin{takeaways}
+\item With replacement, each draw has the same probabilities.
+\item The expected value of a total is the sum of the expected values of the individual draws.
+\item A negative expected value means that, on average, the game favours the house rather than the player.
+\end{takeaways}
+
+\begin{problem}[Minimum votes needed to win]
+The members of a club voted for a new president. There were $15$ candidates for the position of president and $3543$ members voted. Each member voted for one candidate only.
+
+One candidate received more votes than anyone else and so became the new president.
+
+What is the smallest number of votes the new president could have received?
+\end{problem}
+
+\begin{solution}
+To make the winner's vote total as small as possible, we want the other $14$ candidates to receive as many votes as possible, while still having fewer votes than the winner.
+
+Suppose the winner received $x$ votes. Then each of the other $14$ candidates can receive at most $x-1$ votes.
+
+So the greatest possible total number of votes is
+\[
+x + 14(x-1).
+\]
+This must be at least $3543$:
+\begin{align*}
+x + 14(x-1) &\ge 3543 \\
+15x - 14 &\ge 3543 \\
+15x &\ge 3557 \\
+x &\ge \frac{3557}{15} = 237.13\ldots
+\end{align*}
+
+So the smallest possible integer value of $x$ is
+\[
+\boxed{238}.
+\]
+
+This value is achievable, since if the winner gets $238$ votes then the other $14$ candidates can together receive up to
+\[
+14\times 237 = 3318
+\]
+votes, and
+\[
+3318 + 238 = 3556 > 3543,
+\]
+so the $3543$ votes can be distributed with the winner still strictly ahead.
+\end{solution}
+
+\begin{takeaways}
+\item To minimize a maximum, try making all competitors as large as possible without overtaking it.
+\item This is a classic ``worst-case'' or extremal counting argument.
+\item After finding the bound, always check that it is actually achievable.
+\end{takeaways}
+
+\begin{problem}[Selecting finalists and awarding places]
+Out of $10$ contestants, six are to be selected for the final round of a competition. Four of those six will be placed $1$st, $2$nd, $3$rd and $4$th.
+
+In how many ways can this process be carried out?
+\end{problem}
+
+\begin{solution}
+First choose the $6$ finalists from the $10$ contestants:
+\[
+\binom{10}{6} = 210.
+\]
+
+Now choose and order the $4$ placed contestants from those $6$ finalists:
+\[
+{}^6P_4 = 6\times 5\times 4\times 3 = 360.
+\]
+
+So the total number of ways is
+\[
+\binom{10}{6}\times {}^6P_4 = 210\times 360 = 75600.
+\]
+
+Hence the process can be carried out in $\boxed{75600}$ ways.
+\end{solution}
+
+\begin{takeaways}
+\item Break the process into stages: first select, then arrange.
+\item Use combinations for choosing the finalists because order does not matter there.
+\item Use permutations for the placings because $1$st, $2$nd, $3$rd, and $4$th are ordered positions.
+\end{takeaways}
+
+\begin{problem}[Using the pigeonhole principle with topic choices]
+To complete a course, a student must choose and pass exactly three topics. There are eight topics from which to choose.
+
+Last year $400$ students completed the course.
+
+Explain, using the pigeonhole principle, why at least eight students passed exactly the same three topics.
+\end{problem}
+
+\begin{solution}
+The number of different ways to choose exactly $3$ topics from $8$ is
+\[
+\binom{8}{3} = 56.
+\]
+
+So there are only $56$ possible topic combinations.
+
+Now distribute the $400$ students among these $56$ combinations. If at most $7$ students had any one particular combination, then the total number of students could be at most
+\[
+56\times 7 = 392.
+\]
+
+But in fact there are $400$ students, and
+\[
+400 > 392.
+\]
+
+Therefore, by the pigeonhole principle, at least one of the $56$ topic combinations must have been chosen by at least $8$ students.
+
+So at least eight students passed exactly the same three topics.
+\end{solution}
+
+\begin{takeaways}
+\item Start by counting the number of possible categories, or ``pigeonholes''.
+\item If the total number of objects exceeds the maximum possible without overlap, then one category must contain more than that maximum.
+\item In these questions, the pigeonhole principle often appears as: ``If every group had at most $k$, the total would be too small.'' 
+\end{takeaways}

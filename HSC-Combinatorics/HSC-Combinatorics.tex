@@ -8,6 +8,8 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
 
 \usepackage{styles/dl101-colors}
 \usepackage{styles/dl101-hints}
@@ -70,7 +72,7 @@ Mathematics may be defined as the economy of counting. There is no problem in th
 \section{Introduction}
 
 \subsection{Project Overview}
-This booklet is a starter collection of combinatorics problems for NSW HSC Mathematics Extension~1 students. It focuses on core syllabus ideas such as permutations, combinations, circular arrangements, committee selection, and simple probability through counting.
+This booklet is a growing collection of combinatorics problems for NSW HSC Mathematics Extension~1 students. It now covers a wider range of syllabus ideas including permutations, combinations, Pascal's triangle, circular arrangements, committee selection, simple probability, expected value, the pigeonhole principle, geometric counting, and proof-style binomial identities.
 
 \subsection{Target Audience}
 This resource is written for students who want extra practice with combinatorics in a clear, classroom-friendly format. The solutions are intentionally brief, but each one points out the key counting idea behind the answer.
@@ -80,10 +82,36 @@ This resource is written for students who want extra practice with combinatorics
   \item Read the short summary of the core formulas first.
   \item Attempt each problem before reading the solution.
   \item Pay attention to whether each question is a selection or an arrangement.
+  \item Look for structure: gaps in circles, repeated objects, complementary counting, or balanced groups.
   \item Use the takeaways to build pattern recognition for future HSC questions.
 \end{itemize}
 
-\subsection{Core Counting Ideas}
+\subsection{Extension 1 Knowledge Needed}
+Most problems in this booklet can be solved using standard HSC Mathematics Extension~1 ideas rather than advanced university mathematics. The key background knowledge is:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Factorials and notation:} understanding $n!$, permutation notation ${}^nP_r$, and combination notation $\binom{n}{r}$.
+  \item \textbf{The multiplication principle:} breaking a problem into stages and multiplying the number of choices at each stage.
+  \item \textbf{Order versus selection:} recognising when order matters (permutations) and when it does not (combinations).
+  \item \textbf{Repeated objects:} dividing by repeated factorials when arranging words such as \texttt{COOKED} or \texttt{CONDOBOLIN}.
+  \item \textbf{Circular permutations:} using $(n-1)!$ for arrangements around a circle and handling restrictions by fixing seats, using blocks, or using gaps.
+  \item \textbf{Complementary counting:} counting all cases first, then subtracting the unwanted ones.
+  \item \textbf{Casework and restrictions:} splitting problems into clean cases such as fixed numbers of girls and boys, men and women, or chosen leaders.
+  \item \textbf{Pascal's triangle and binomial coefficients:} using identities such as
+  \[
+  \binom{n}{r}=\binom{n-1}{r-1}+\binom{n-1}{r}
+  \]
+  and the symmetry rule
+  \[
+  \binom{n}{r}=\binom{n}{n-r}.
+  \]
+  \item \textbf{The binomial theorem:} expanding $(1+x)^n$ and comparing coefficients when proving identities.
+  \item \textbf{Pigeonhole principle reasoning:} proving that some outcome must happen because the total is too large to avoid repetition or overload.
+  \item \textbf{Basic probability and expectation:} counting favourable outcomes, dividing by total outcomes, and using expected value as an average score or average outcome.
+  \item \textbf{Double counting:} counting the same set of outcomes in two different ways to derive a useful identity.
+\end{itemize}
+
+\subsection{Core Formulas and Ideas}
 
 \textbf{Fundamental Counting Principle.} If a task is completed in stages with $a$ choices for the first stage, $b$ for the second, and $c$ for the third, then the total number of outcomes is
 \[
@@ -104,6 +132,36 @@ a \times b \times c.
 \[
 \frac{n!}{a!\,b!\,c!\cdots}.
 \]
+
+\textbf{Circular permutations.} The number of ways to arrange $n$ distinct objects around a circle is
+\[
+(n-1)!.
+\]
+
+\textbf{Pascal's triangle identity.}
+\[
+\binom{n}{r}=\binom{n-1}{r-1}+\binom{n-1}{r}.
+\]
+
+\textbf{Binomial symmetry.}
+\[
+\binom{n}{r}=\binom{n}{n-r}.
+\]
+
+\textbf{Expected value.} If a random variable takes values $x_1,x_2,\dots$ with probabilities $p_1,p_2,\dots$, then
+\[
+E(X)=x_1p_1+x_2p_2+\cdots.
+\]
+
+\subsection{Problem-Solving Habits for This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Ask first: \emph{Does order matter?}
+  \item Check whether repetition is allowed or forbidden.
+  \item In circle problems, decide whether to use a fixed reference point, a block, or a gap method.
+  \item In identity questions, look for Pascal's triangle, symmetry, coefficient matching, or telescoping.
+  \item In probability questions, decide whether the experiment is with replacement or without replacement.
+  \item In ``must happen'' questions, test whether the pigeonhole principle or a contradiction argument applies.
+\end{itemize}
 
 \begin{remark}
 The most common combinatorics mistake is using a permutation when the problem is actually a combination, or vice versa. A good first question is always: \emph{Does order matter?}
