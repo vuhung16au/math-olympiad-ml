@@ -89,34 +89,34 @@ for all integers such that $1\le r\le n-1$. Do not prove this.
 
 Find one possible set of values for $p$ and $q$ such that
 \[
-\binom{2022}{80}+\binom{2022}{81}+\binom{2023}{1943}=\binom{p}{q}.
+\binom{2025}{86}+\binom{2025}{87}+\binom{2026}{1940}=\binom{p}{q}.
 \]
 \end{problem}
 
 \begin{solution}
 Using Pascal's triangle identity,
 \[
-\binom{2022}{80}+\binom{2022}{81}=\binom{2023}{81}.
+\binom{2025}{86}+\binom{2025}{87}=\binom{2026}{87}.
 \]
 
 Also,
 \[
-\binom{2023}{1943}=\binom{2023}{2023-1943}=\binom{2023}{80}
+\binom{2026}{1940}=\binom{2026}{2026-1940}=\binom{2026}{86}
 \]
 by the symmetry property of binomial coefficients.
 
 So the given expression becomes
 \[
-\binom{2023}{81}+\binom{2023}{80}.
+\binom{2026}{87}+\binom{2026}{86}.
 \]
 Applying Pascal's triangle identity again,
 \[
-\binom{2023}{80}+\binom{2023}{81}=\binom{2024}{81}.
+\binom{2026}{86}+\binom{2026}{87}=\binom{2027}{87}.
 \]
 
 Therefore one possible answer is
 \[
-\boxed{p=2024,\ q=81}.
+\boxed{p=2027,\ q=87}.
 \]
 \end{solution}
 
@@ -124,60 +124,6 @@ Therefore one possible answer is
 \item When two binomial coefficients have the same upper index and consecutive lower indices, try Pascal's triangle immediately.
 \item The symmetry identity $\binom{n}{r}=\binom{n}{n-r}$ is often the key step before applying Pascal's triangle.
 \item In HSC multiple-step identities, simplify one pair at a time.
-\end{takeaways}
-
-\begin{problem}[A sum of squares binomial identity]
-Use the identity
-\[
-(1+x)^{2n}=(1+x)^n(1+x)^n
-\]
-to show that
-\[
-\binom{2n}{n}=\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2,
-\]
-where $n$ is a positive integer.
-\end{problem}
-
-\begin{solution}
-Expand the left-hand side using the binomial theorem:
-\[
-(1+x)^{2n}=\binom{2n}{0}+\binom{2n}{1}x+\cdots+\binom{2n}{n}x^n+\cdots+\binom{2n}{2n}x^{2n}.
-\]
-So the coefficient of $x^n$ on the left-hand side is
-\[
-\binom{2n}{n}.
-\]
-
-Now expand the right-hand side:
-\[
-(1+x)^n(1+x)^n
-=\left(\sum_{r=0}^n \binom{n}{r}x^r\right)\left(\sum_{s=0}^n \binom{n}{s}x^s\right).
-\]
-
-To obtain an $x^n$ term in the product, we must choose $x^r$ from the first bracket and $x^{n-r}$ from the second bracket. So the coefficient of $x^n$ is
-\[
-\binom{n}{0}\binom{n}{n}+\binom{n}{1}\binom{n}{n-1}+\cdots+\binom{n}{n}\binom{n}{0}.
-\]
-
-Using the symmetry identity
-\[
-\binom{n}{n-r}=\binom{n}{r},
-\]
-this becomes
-\[
-\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2.
-\]
-
-Since both expressions are the coefficient of $x^n$ in the same polynomial, they are equal. Therefore,
-\[
-\boxed{\binom{2n}{n}=\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2}.
-\]
-\end{solution}
-
-\begin{takeaways}
-\item A standard way to prove combinatorial identities is to expand the same expression in two different ways.
-\item When proving binomial identities, coefficient matching is often the key idea.
-\item The symmetry $\binom{n}{n-r}=\binom{n}{r}$ frequently simplifies the final expression.
 \end{takeaways}
 
 \begin{problem}[Equal numbers of men and women]
@@ -261,79 +207,41 @@ By considering this reversed process and using part (ii), find a simple expressi
 \end{problem}
 
 \begin{solution}
-\textbf{i)} Expanding the left-hand side,
+\textbf{i)} Compare coefficients of $x^n$ in
 \[
-(1+x)^{2n}=\sum_{k=0}^{2n}\binom{2n}{k}x^k,
+(1+x)^{2n}=(1+x)^n(1+x)^n.
 \]
-so the coefficient of $x^n$ is $\binom{2n}{n}$.
-
-Now expand the right-hand side:
+The coefficient of $x^n$ on the left is $\binom{2n}{n}$. On the right it is
 \[
-(1+x)^n(1+x)^n
-=\left(\sum_{r=0}^n \binom{n}{r}x^r\right)\left(\sum_{s=0}^n \binom{n}{s}x^s\right).
-\]
-To obtain an $x^n$ term, we choose $x^r$ from the first factor and $x^{n-r}$ from the second. So the coefficient of $x^n$ is
-\[
-\binom{n}{0}\binom{n}{n}+\binom{n}{1}\binom{n}{n-1}+\dots+\binom{n}{n}\binom{n}{0}.
-\]
-Using $\binom{n}{n-r}=\binom{n}{r}$, this becomes
-\[
-\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2.
+\sum_{r=0}^n \binom{n}{r}\binom{n}{n-r}
+=\sum_{r=0}^n \binom{n}{r}^2.
 \]
 Hence
 \[
 \binom{2n}{n}=\binom{n}{0}^2+\binom{n}{1}^2+\dots+\binom{n}{n}^2.
 \]
 
-\textbf{ii)} Suppose the chosen group contains $r$ women. Then it must also contain $r$ men.
+\textbf{ii)} If the group contains $r$ women, it must also contain $r$ men, so for each $r$ there are
+\[
+\binom{n}{r}\binom{n}{r}=\binom{n}{r}^2
+\]
+choices. Summing over $r=0,1,\dots,n$ gives
+\[
+\sum_{r=0}^n \binom{n}{r}^2=\binom{2n}{n}
+\]
+by part (i).
 
-For this fixed value of $r$, the number of choices is
+\textbf{iii)} For a fixed $r$, after choosing $r$ women and $r$ men there are $r^2$ ways to choose one male leader and one female leader. So the total number of outcomes is
 \[
-\binom{n}{r}\binom{n}{r}=\binom{n}{r}^2.
-\]
-Summing over all possible $r$ from $0$ to $n$ gives
-\[
-\sum_{r=0}^n \binom{n}{r}^2.
-\]
-By part (i), this equals
-\[
-\binom{2n}{n}.
-\]
-
-\textbf{iii)} If the chosen group contains $r$ men and $r$ women, then after choosing the group there are
-\[
-r\times r=r^2
-\]
-ways to choose one male leader and one female leader.
-
-The number of ways to choose such a group is $\binom{n}{r}^2$, so for a fixed $r$ the number of outcomes is
-\[
-r^2\binom{n}{r}^2.
-\]
-Summing from $r=1$ to $n$ gives
-\[
-1^2\binom{n}{1}^2+2^2\binom{n}{2}^2+\dots+n^2\binom{n}{n}^2.
+\sum_{r=1}^n r^2\binom{n}{r}^2
+=1^2\binom{n}{1}^2+2^2\binom{n}{2}^2+\dots+n^2\binom{n}{n}^2.
 \]
 
-\textbf{iv)} Now reverse the process.
-
-First choose the male leader and the female leader. This can be done in
+\textbf{iv)} Reverse the process. Choose the leaders first in $n^2$ ways. Then choose the rest of the group from the remaining $n-1$ men and $n-1$ women, with equal numbers of each. By part (ii), this can be done in
 \[
-n\times n=n^2
+\binom{2n-2}{n-1}
 \]
-ways.
-
-After choosing the leaders, there remain $n-1$ men and $n-1$ women. The rest of the group must still contain equal numbers of men and women, so by part (ii) the number of ways to choose the remaining people is
-\[
-\binom{2n-2}{n-1}.
-\]
-
-Therefore the total number of outcomes is
-\[
-n^2\binom{2n-2}{n-1}.
-\]
-
-Since this counts the same process as in part (iii), we obtain
+ways. Therefore
 \[
 1^2\binom{n}{1}^2+2^2\binom{n}{2}^2+\dots+n^2\binom{n}{n}^2
 =\boxed{n^2\binom{2n-2}{n-1}}.
