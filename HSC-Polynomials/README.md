@@ -10,10 +10,8 @@ This project curates polynomial problems tailored to HSC Mathematics Extension 2
 
 The booklet `HSC-Polynomials.tex` is organised in two parts:
 
-- **Part 1**: Detailed walk-throughs (15 problems) with comprehensive strategy explanations, step-by-step solutions, and key takeaways. Divided into basic (5), medium (5), and advanced (5) difficulty levels.
-- **Part 2**: Concise write-ups with upside-down hints and solution sketches (23 problems). Each problem includes a rotated hint before a concise solution. Divided into basic (5), medium (13), and advanced (5) difficulty levels.
-
-The collection contains **38 total problems** covering a comprehensive range of polynomial techniques and applications.
+- **Part 1**: Detailed walk-throughs with comprehensive strategy explanations, step-by-step solutions, and key takeaways. Divided into basic, medium, and advanced difficulty levels.
+- **Part 2**: Concise write-ups with upside-down hints and solution sketches. Each problem includes a rotated hint before a concise solution. Divided into basic, medium, and advanced difficulty levels.
 
 ## What This Collection Focuses On
 
@@ -116,13 +114,13 @@ make pdf && make open
 - `README.md`: Project overview (this file).
 - `.gitignore`: Filters LaTeX artefacts, keeps `releases/HSC-Polynomials.pdf`.
 - `PLAN.md`: Comprehensive implementation plan documenting project structure and decisions.
-- `PROBLEM_CLASSIFICATION.md`: Detailed classification of all 38 problems by difficulty, topics, and techniques.
+- `PROBLEM_CLASSIFICATION.md`: Detailed classification of the booklet problems by difficulty, topics, and techniques.
 - `SELECTION_SUMMARY.md`: Problem selection rationale and distribution across Part 1 and Part 2.
-- `samples/`: Reference problems (01.tex through 38.tex, plus 00-basic.tex) from HSC past papers and resources.
+- `samples/`: Numbered reference problem files, plus `00-basic.tex`, collected from HSC past papers and resources.
 - `problems/`: Part-wise problem+solution files organized by difficulty, `\input` into the main TeX file:
   - `fundamentals.tex`: Comprehensive review of polynomial theory with expanded Vieta's Formulas and De Moivre's Theorem coverage
-  - `part1-easy.tex`, `part1-medium.tex`, `part1-hard.tex` (5 problems each)
-  - `part2-easy-hints.tex`, `part2-medium-hints.tex`, `part2-hard-hints.tex` (5, 13, and 5 problems respectively)
+  - `part1-easy.tex`, `part1-medium.tex`, `part1-hard.tex`
+- `part2-easy-hints.tex`, `part2-medium-hints.tex`, `part2-hard-hints.tex`
 - `solutions/`: Reserved for future standalone solution files.
 - `styles/`: Shared LaTeX style files (colors, hint box, problem environments):
   - `dl101-colors.sty`: Color definitions for consistent formatting

@@ -1,4 +1,4 @@
-% Part 2: Medium Problems (13 problems with hints - upside-down format)
+% Part 2: Medium Problems (14 problems with hints - upside-down format)
 % Students attempt first, then rotate page 180° to read hint
 
 % =============================================================================
@@ -270,7 +270,70 @@ Conjugate root theorem constrains complex roots; Vieta's formulas connect roots 
 \vspace{1cm}
 
 % =============================================================================
-% PROBLEM 30: Conjugate root theorem
+% PROBLEM 30: Even and odd coefficient sums
+% =============================================================================
+\begin{problem}
+Consider a polynomial $P(x)$ written as $P(x) = E(x) + O(x)$, where $E(x)$ contains only even powers of $x$ and $O(x)$ contains only odd powers of $x$.
+\begin{enumerate}
+    \item[(i)] Show that $P(x)P(-x) = E(x)^2 - O(x)^2$.
+    \item[(ii)] Explain why the difference between the squares of the sum of the even-powered coefficients and the sum of the odd-powered coefficients of $P(x)$ is $P(1)P(-1)$.
+    \item[(iii)] Hence, for $(2x + \sqrt{5})^{2026}$, prove that this difference is exactly $1$.
+\end{enumerate}
+\end{problem}
+
+\vspace{0.5cm}
+\begin{hintbox}
+(i) Use $P(-x)=E(x)-O(x)$. (ii) At $x=1$, $E(1)$ is the sum of even-powered coefficients and $O(1)$ is the sum of odd-powered coefficients. (iii) Evaluate $P(1)$ and $P(-1)$ and multiply.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Since $E(x)$ has only even powers, $E(-x)=E(x)$. Since $O(x)$ has only odd powers, $O(-x)=-O(x)$.
+
+So
+$$
+P(-x)=E(-x)+O(-x)=E(x)-O(x)
+$$
+and hence
+$$
+P(x)P(-x)=(E(x)+O(x))(E(x)-O(x))=E(x)^2-O(x)^2.
+$$
+
+\textbf{(ii)} Let $S_e$ be the sum of the even-powered coefficients and $S_o$ be the sum of the odd-powered coefficients.
+
+At $x=1$, we get $E(1)=S_e$ and $O(1)=S_o$, so
+$$
+P(1)=E(1)+O(1)=S_e+S_o,\qquad P(-1)=E(1)-O(1)=S_e-S_o.
+$$
+Therefore
+$$
+P(1)P(-1)=(S_e+S_o)(S_e-S_o)=S_e^2-S_o^2,
+$$
+which is the required difference.
+
+\textbf{(iii)} Let $P(x)=(2x+\sqrt{5})^{2026}$. Then by part (ii) the required difference is
+$$
+P(1)P(-1).
+$$
+Now
+$$
+P(1)=(2+\sqrt{5})^{2026}, \qquad P(-1)=(\sqrt{5}-2)^{2026}.
+$$
+So
+$$
+P(1)P(-1)=\bigl((2+\sqrt{5})(\sqrt{5}-2)\bigr)^{2026}=(5-4)^{2026}=1^{2026}=1.
+$$
+
+\textbf{Answer:} The difference between the squares is $1$.
+\end{solution}
+
+\begin{takeaways}
+Evaluating a polynomial at $x=1$ and $x=-1$ neatly separates even-powered and odd-powered coefficient sums.
+\end{takeaways}
+
+\vspace{1cm}
+
+% =============================================================================
+% PROBLEM 31: Conjugate root theorem
 % =============================================================================
 \begin{problem}
 \begin{enumerate}
@@ -308,7 +371,7 @@ Conjugate root theorem: complex roots of real polynomials come in conjugate pair
 \vspace{1cm}
 
 % =============================================================================
-% PROBLEM 31: Primitive roots of unity
+% PROBLEM 32: Primitive roots of unity
 % =============================================================================
 \begin{problem}
 The roots of $z^n = 1$ are $z_k = e^{2\pi ik/n}$, $k = 1, \dots, n$. If $z_k^m$ generates all roots for $m=1,\ldots,n$, then $z_k$ is a primitive root.
