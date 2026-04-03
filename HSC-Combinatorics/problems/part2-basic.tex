@@ -133,12 +133,12 @@ P(\text{guessing the correct order})=\frac{1}{24}.
 \item Ordered arrangements of $4$ distinct objects are counted by $4!$.
 \end{takeaways}
 
-\begin{problem}[Rectangles in a $4\times 5$ grid]
-How many rectangles, including all squares, can be found in the $4\times 5$ grid below?
+\begin{problem}[Counting rectangles in a $5\times 6$ grid]
+How many rectangles can be found in the $5\times 6$ grid below? Remember that squares should also be counted, since every square is a rectangle.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
-    \draw[step=1cm, black] (0,0) grid (5,4);
+    \draw[step=1cm, black] (0,0) grid (6,5);
 \end{tikzpicture}
 \end{center}
 \end{problem}
@@ -150,16 +150,16 @@ Choose any $2$ of the vertical grid lines and any $2$ of the horizontal grid lin
 \begin{solution}
 A rectangle is determined by choosing:
 \begin{itemize}[leftmargin=*]
-  \item $2$ of the $6$ vertical grid lines
-  \item $2$ of the $5$ horizontal grid lines.
+  \item $2$ of the $7$ vertical grid lines
+  \item $2$ of the $6$ horizontal grid lines.
 \end{itemize}
 
 So the total number of rectangles is
 \[
-\binom{6}{2}\binom{5}{2}=15\times 10=150.
+\binom{7}{2}\binom{6}{2}=21\times 15=315.
 \]
 
-Hence the number of rectangles is $\boxed{150}$.
+Hence the number of rectangles is $\boxed{315}$.
 \end{solution}
 
 \begin{takeaways}
