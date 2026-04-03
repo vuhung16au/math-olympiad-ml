@@ -1,3 +1,283 @@
-\begin{remark}
-Future advanced problems may cover restricted arrangements, overcounting, and harder HSC-style probability arguments.
-\end{remark}
+\begin{problem}[Comparing coefficients in $(1+x)^{m+n}$]
+Use
+\[
+(1+x)^{m+n}=(1+x)^m(1+x)^n
+\]
+and compare coefficients of $x^r$ to show that
+\[
+\binom{m+n}{r}=\binom{m}{0}\binom{n}{r}+\binom{m}{1}\binom{n}{r-1}+\cdots+\binom{m}{r}\binom{n}{0},
+\]
+where terms with impossible binomial coefficients are taken to be $0$.
+\end{problem}
+
+\begin{hint}
+Find the coefficient of $x^r$ on the left first. Then, on the right, think about all the ways to obtain $x^r$ by multiplying a term from $(1+x)^m$ with a term from $(1+x)^n$.
+\end{hint}
+
+\begin{solution}
+From the binomial theorem,
+\[
+(1+x)^{m+n}=\sum_{k=0}^{m+n}\binom{m+n}{k}x^k,
+\]
+so the coefficient of $x^r$ on the left is
+\[
+\binom{m+n}{r}.
+\]
+
+Also,
+\[
+(1+x)^m=\sum_{i=0}^m \binom{m}{i}x^i,
+\qquad
+(1+x)^n=\sum_{j=0}^n \binom{n}{j}x^j.
+\]
+To obtain an $x^r$ term in the product, we must choose $x^i$ from the first factor and $x^{r-i}$ from the second. Hence the coefficient of $x^r$ on the right is
+\[
+\sum_{i=0}^r \binom{m}{i}\binom{n}{r-i}.
+\]
+
+Since both expressions are the coefficient of $x^r$ in the same polynomial,
+\[
+\binom{m+n}{r}=\sum_{i=0}^r \binom{m}{i}\binom{n}{r-i}.
+\]
+That is,
+\[
+\boxed{
+\binom{m+n}{r}
+=\binom{m}{0}\binom{n}{r}
++\binom{m}{1}\binom{n}{r-1}
++\cdots
++\binom{m}{r}\binom{n}{0}
+}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Expanding the same expression in two ways is a standard way to prove combinatorial identities.
+\item Comparing coefficients is especially useful when a problem involves powers of $(1+x)$.
+\item This identity is often called Vandermonde's identity.
+\end{takeaways}
+
+\begin{problem}[Repeated draws of green counters]
+A bag contains counters, some of which are green.
+
+One hundred trials of an experiment are run. In each trial, one counter is selected from the bag at random and its colour noted. The counter is then returned to the bag.
+
+Let $X$ be the random variable representing the number of times that a green counter is selected.
+
+Given that $E(X)=20$, identify the distribution of $X$ and find the probability that a green counter is selected exactly $20$ times.
+\end{problem}
+
+\begin{hint}
+The experiment consists of repeated independent trials with only two outcomes on each trial: green or not green.
+\end{hint}
+
+\begin{solution}
+Since each trial is independent and each draw is with replacement, $X$ follows a binomial distribution:
+\[
+X\sim \operatorname{Bin}(100,p),
+\]
+where $p$ is the probability of selecting a green counter on any one draw.
+
+For a binomial random variable,
+\[
+E(X)=np.
+\]
+Given that $E(X)=20$, we have
+\[
+100p=20 \quad \Rightarrow \quad p=0.2.
+\]
+
+So
+\[
+X\sim \operatorname{Bin}(100,0.2).
+\]
+Therefore,
+\[
+P(X=20)=\binom{100}{20}(0.2)^{20}(0.8)^{80}.
+\]
+
+Hence the required probability is
+\[
+\boxed{\binom{100}{20}(0.2)^{20}(0.8)^{80}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Repeated draws with replacement lead naturally to a binomial model.
+\item For $X\sim \operatorname{Bin}(n,p)$, the mean is $E(X)=np$.
+\item Once $p$ is known, exact probabilities are found using the binomial formula.
+\end{takeaways}
+
+\begin{problem}[Arrangement formulas for $x$ people]
+Find the number of arrangements possible if $x$ people are
+\begin{enumerate}[label=\alph*)]
+\item in a straight line
+\item in a circle
+\item in a circle with $2$ particular people together
+\item in a straight line with $3$ particular people together
+\item in a circle with $2$ particular people not together.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use $x!$ for a line and $(x-1)!$ for a circle. For ``together'' questions, bind people into a block. For ``not together'', subtract from the total.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} In a straight line:
+\[
+\boxed{x!}
+\]
+
+\textbf{b)} In a circle:
+\[
+\boxed{(x-1)!}
+\]
+
+\textbf{c)} In a circle with $2$ particular people together:
+Treat the $2$ people as one block. Then there are $(x-1)$ objects in a circle, giving
+\[
+(x-2)!
+\]
+arrangements, and the pair can switch places in $2!$ ways. So
+\[
+\boxed{2(x-2)!}
+\]
+
+\textbf{d)} In a straight line with $3$ particular people together:
+Treat the $3$ people as one block. Then there are $(x-2)$ objects in a line, giving
+\[
+(x-2)!
+\]
+arrangements, and the $3$ people inside the block can be arranged in $3!$ ways. So
+\[
+\boxed{3!(x-2)! = 6(x-2)!}
+\]
+
+\textbf{e)} In a circle with $2$ particular people not together:
+Start with all circular arrangements:
+\[
+(x-1)!.
+\]
+Subtract the arrangements where the two particular people are together:
+\[
+2(x-2)!.
+\]
+Hence
+\[
+\boxed{(x-1)! - 2(x-2)!}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item The standard counts are $x!$ for a line and $(x-1)!$ for a circle.
+\item ``Together'' usually suggests treating people as a single block.
+\item ``Not together'' is often easiest by complementary counting.
+\end{takeaways}
+
+\begin{problem}[A pair summing to $21$]
+Eleven numbers are randomly chosen from the set of integers
+\[
+S=\{1,2,3,4,\dots,20\}.
+\]
+
+Prove that the sum of two of the eleven numbers selected must equal $21$.
+\end{problem}
+
+\begin{hint}
+Pair the numbers in the set so that each pair sums to $21$.
+\end{hint}
+
+\begin{solution}
+The set $S$ can be split into the following $10$ pairs:
+\[
+(1,20),\ (2,19),\ (3,18),\ \dots,\ (10,11).
+\]
+Each pair sums to $21$.
+
+Now suppose $11$ numbers are chosen from the $20$ numbers in $S$.
+
+There are only $10$ such pairs, but we have chosen $11$ numbers. By the pigeonhole principle, at least one complete pair must be selected.
+
+Therefore, among the $11$ chosen numbers, there must be two numbers whose sum is $21$.
+\end{solution}
+
+\begin{takeaways}
+\item A strong first step in pigeonhole problems is to group objects into meaningful boxes.
+\item Here, the natural boxes are the pairs that sum to $21$.
+\item Choosing more objects than there are boxes forces one box to contain two chosen objects.
+\end{takeaways}
+
+\begin{problem}[Unlocking a phone by trial and error]
+To unlock a phone, we need to enter a $4$-digit PIN.
+
+We know that the four digits are $1,2,3,4$, used distinctly, but we do not know the correct order.
+
+If we enter a wrong PIN:
+\begin{itemize}[leftmargin=*]
+  \item after the first wrong attempt, the phone locks the next input for $4$ seconds
+  \item after the second wrong attempt, the phone locks the next input for $4\times 2$ seconds
+  \item after the third wrong attempt, the phone locks the next input for $4\times 2\times 2$ seconds
+  \item and so on.
+\end{itemize}
+
+Find the average time needed to unlock the phone by trial and error, assuming each possible PIN order is equally likely to be the correct one and the time to type each PIN is negligible.
+\end{problem}
+
+\begin{hint}
+How many possible PINs are there? If the correct PIN is found on the $m$th attempt, how much total waiting time has occurred before that attempt?
+\end{hint}
+
+\begin{solution}
+The digits $1,2,3,4$ can be arranged in
+\[
+4!=24
+\]
+different ways, so if we test PINs one by one, the correct PIN is equally likely to appear in positions
+\[
+1,2,3,\dots,24.
+\]
+
+If the correct PIN is found on the $m$th attempt, then there have been $(m-1)$ wrong attempts before success.
+
+The waiting times after the wrong attempts are
+\[
+4,\ 8,\ 16,\ \dots,\ 4\cdot 2^{m-2}.
+\]
+So the total waiting time before the $m$th attempt is
+\[
+4+8+16+\cdots+4\cdot 2^{m-2}
+=4(2^{m-1}-1).
+\]
+
+Therefore the average waiting time is
+\[
+\frac{1}{24}\sum_{m=1}^{24}4(2^{m-1}-1).
+\]
+Now
+\[
+\sum_{m=1}^{24}2^{m-1}=2^{24}-1,
+\]
+so
+\begin{align*}
+\frac{1}{24}\sum_{m=1}^{24}4(2^{m-1}-1)
+&= \frac{4}{24}\left((2^{24}-1)-24\right) \\
+&= \frac{1}{6}(2^{24}-25) \\
+&= \frac{16777191}{6}.
+\end{align*}
+
+Hence the average time needed is
+\[
+\boxed{\frac{16777191}{6}\text{ seconds}}
+\]
+which is about
+\[
+\boxed{2796198.5\text{ seconds}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item When all possible arrangements are equally likely, the correct one is equally likely to occur in any position of your trial order.
+\item Exponentially growing waiting times often lead to a geometric series.
+\item Expected-value questions can often be solved by averaging over all possible positions of success.
+\end{takeaways}

@@ -64,35 +64,35 @@ So the answers are:
 
 \begin{problem}[Forming a Dota 2 e-sport team]
 \begin{enumerate}[label=\alph*)]
-\item How many different ways can a Dota 2 e-sport team of $8$ students be chosen from a class of $30$ students?
-\item The team must have $3$ girls and $5$ boys. If the class contains $12$ girls and $18$ boys, how many teams are possible?
-\item Find the probability that Vu and Zachary are both chosen on the team.
+\item How many different ways can a Dota 2 e-sport team of $5$ students be chosen from a class of $30$ students?
+\item The team must have $2$ girls and $3$ boys. If the class contains $12$ girls and $18$ boys, how many teams are possible?
+\item Suppose Vu and Zachary are both students in the class. Find the probability that both Vu and Zachary are chosen on the team.
 \item Find the probability that neither Vu nor Zachary is chosen.
 \end{enumerate}
 \end{problem}
 
 \begin{solution}
-\textbf{a)} Choose any $8$ students from $30$:
+\textbf{a)} Choose any $5$ students from $30$:
 \[
-\binom{30}{8} = 5852925
+\binom{30}{5} = 142506
 \]
 
-\textbf{b)} Choose $3$ girls from $12$ and $5$ boys from $18$:
+\textbf{b)} Choose $2$ girls from $12$ and $3$ boys from $18$:
 \[
-\binom{12}{3}\binom{18}{5} = 220 \times 8568 = 1884960
+\binom{12}{2}\binom{18}{3} = 66 \times 816 = 53856
 \]
 
-\textbf{c)} If Vu and Zachary must both be chosen, then choose the remaining $6$ team members from the other $28$ students:
+\textbf{c)} If Vu and Zachary must both be chosen, then choose the remaining $3$ team members from the other $28$ students:
 \[
-\frac{\binom{28}{6}}{\binom{30}{8}} = \frac{376740}{5852925} = \frac{28}{145}
+\frac{\binom{28}{3}}{\binom{30}{5}} = \frac{3276}{142506} = \frac{2}{87}
 \]
-So the probability is $\boxed{\frac{28}{145}}$.
+So the probability is $\boxed{\frac{2}{87}}$.
 
-\textbf{d)} If neither Vu nor Zachary is chosen, then all $8$ team members must come from the other $28$ students:
+\textbf{d)} If neither Vu nor Zachary is chosen, then all $5$ team members must come from the other $28$ students:
 \[
-\frac{\binom{28}{8}}{\binom{30}{8}} = \frac{3108105}{5852925} = \frac{161}{303}
+\frac{\binom{28}{5}}{\binom{30}{5}} = \frac{98280}{142506} = \frac{460}{667}
 \]
-So the probability is $\boxed{\frac{161}{303}}$.
+So the probability is $\boxed{\frac{460}{667}}$.
 \end{solution}
 
 \begin{takeaways}

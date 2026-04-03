@@ -1,3 +1,168 @@
-\begin{remark}
-Part 2 is reserved for future short-answer combinatorics drills with hints.
-\end{remark}
+\begin{problem}[Expanding a binomial surd expression]
+Expand
+\[
+(1-\sqrt{2})^5=a+b\sqrt{2},
+\]
+where $a$ and $b$ are integers. Find $a$ and $b$.
+\end{problem}
+
+\begin{hint}
+Use the binomial theorem, then simplify powers of $\sqrt{2}$ carefully: $(\sqrt{2})^2=2$, $(\sqrt{2})^3=2\sqrt{2}$, and so on.
+\end{hint}
+
+\begin{solution}
+Using the binomial theorem,
+\begin{align*}
+(1-\sqrt{2})^5
+&= 1 - 5\sqrt{2} + 10(\sqrt{2})^2 - 10(\sqrt{2})^3 + 5(\sqrt{2})^4 - (\sqrt{2})^5 \\
+&= 1 - 5\sqrt{2} + 20 - 20\sqrt{2} + 20 - 4\sqrt{2} \\
+&= 41 - 29\sqrt{2}.
+\end{align*}
+Hence
+\[
+\boxed{a=41,\quad b=-29}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item After expanding, separate the rational terms from the $\sqrt{2}$ terms.
+\item Powers of $\sqrt{2}$ alternate between integer multiples and surd multiples.
+\end{takeaways}
+
+\begin{problem}[PINs with numbers and letters]
+The number of possible different PINs with a combination of $4$ numbers and $2$ letters is:
+\begin{enumerate}[label=\Alph*.]
+\item $4435236$
+\item $6760000$
+\item $1000000$
+\item $10676$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use the multiplication principle: count the choices for the $4$ digits and the $2$ letters separately, then multiply.
+\end{hint}
+
+\begin{solution}
+Assume the PIN has $4$ digits followed by $2$ letters, with repetition allowed.
+
+There are $10$ choices for each digit and $26$ choices for each letter, so the total number of PINs is
+\[
+10^4 \times 26^2 = 10000 \times 676 = 6760000.
+\]
+So the correct answer is
+\[
+\boxed{\text{B. }6760000}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item If each position can be chosen independently, multiply the number of choices for each position.
+\item Unless a question says otherwise, repetition is usually allowed in code or PIN questions.
+\end{takeaways}
+
+\begin{problem}[Two coins of the same metal]
+A bag contains $n$ metal coins, where $n \ge 3$. There are $k$ silver coins in the bag and the rest are bronze.
+
+Two coins are drawn at random from the bag, without replacement.
+
+Find an expression for the probability that the two coins drawn are made of the same metal.
+\end{problem}
+
+\begin{hint}
+The two coins are the same metal if they are both silver or both bronze.
+\end{hint}
+
+\begin{solution}
+There are two favourable cases:
+
+\textbf{Both silver:}
+\[
+\frac{k}{n}\cdot \frac{k-1}{n-1}.
+\]
+
+\textbf{Both bronze:}
+There are $n-k$ bronze coins, so
+\[
+\frac{n-k}{n}\cdot \frac{n-k-1}{n-1}.
+\]
+
+Hence the required probability is
+\[
+\boxed{
+\frac{k(k-1)}{n(n-1)}+\frac{(n-k)(n-k-1)}{n(n-1)}
+}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item For ``same type'' probability questions, split into mutually exclusive cases and add.
+\item Without replacement means the denominator changes on the second draw.
+\end{takeaways}
+
+\begin{problem}[Probabilities with the four jacks]
+In a pack of cards, the $4$ jacks are taken out and shuffled.
+\begin{enumerate}[label=\alph*)]
+\item What is the probability of picking out the jack of diamonds at random?
+\item If all the jacks are arranged in order, what is the probability of guessing the correct order?
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (a), all four jacks are equally likely. For part (b), count the total number of possible orders of the four jacks.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} There are $4$ jacks, and only one of them is the jack of diamonds. So
+\[
+P(\text{jack of diamonds})=\frac{1}{4}.
+\]
+
+\textbf{b)} The $4$ jacks can be arranged in
+\[
+4!=24
+\]
+different orders. Only one of these is the correct order, so
+\[
+P(\text{guessing the correct order})=\frac{1}{24}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item If all outcomes are equally likely, probability is favourable outcomes over total outcomes.
+\item Ordered arrangements of $4$ distinct objects are counted by $4!$.
+\end{takeaways}
+
+\begin{problem}[Rectangles in a $4\times 5$ grid]
+How many rectangles, including all squares, can be found in the $4\times 5$ grid below?
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+    \draw[step=1cm, black] (0,0) grid (5,4);
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+Choose any $2$ of the vertical grid lines and any $2$ of the horizontal grid lines.
+\end{hint}
+
+\begin{solution}
+A rectangle is determined by choosing:
+\begin{itemize}[leftmargin=*]
+  \item $2$ of the $6$ vertical grid lines
+  \item $2$ of the $5$ horizontal grid lines.
+\end{itemize}
+
+So the total number of rectangles is
+\[
+\binom{6}{2}\binom{5}{2}=15\times 10=150.
+\]
+
+Hence the number of rectangles is $\boxed{150}$.
+\end{solution}
+
+\begin{takeaways}
+\item Grid-rectangle questions are usually solved by choosing boundary lines, not by listing shapes one by one.
+\item Squares are already included, since every square is also a rectangle.
+\end{takeaways}

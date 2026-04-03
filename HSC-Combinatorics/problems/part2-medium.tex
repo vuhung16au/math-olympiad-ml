@@ -1,3 +1,173 @@
-\begin{remark}
-Future additions will include multi-step counting, complementary counting, and probability questions with brief hints.
-\end{remark}
+\begin{problem}[Term independent of $x$]
+Find the term independent of $x$ in the expansion of
+\[
+\left(11x-\frac{4}{x^2}\right)^{15}.
+\]
+\end{problem}
+
+\begin{hint}
+Use the general term in the binomial expansion. Then make the power of $x$ equal to $0$.
+\end{hint}
+
+\begin{solution}
+The general term is
+\[
+T_{r+1}=\binom{15}{r}(11x)^{15-r}\left(-\frac{4}{x^2}\right)^r.
+\]
+So the power of $x$ is
+\[
+x^{15-r}x^{-2r}=x^{15-3r}.
+\]
+For the term independent of $x$, we need
+\[
+15-3r=0 \quad \Rightarrow \quad r=5.
+\]
+Hence the required term is
+\begin{align*}
+\binom{15}{5}(11x)^{10}\left(-\frac{4}{x^2}\right)^5
+&= \binom{15}{5}\cdot 11^{10}\cdot (-4)^5 \\
+&= 3003 \cdot 11^{10}\cdot (-1024).
+\end{align*}
+Therefore, the term independent of $x$ is
+\[
+\boxed{-3003\cdot 1024\cdot 11^{10}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item For ``term independent of $x$'' questions, write the general term first.
+\item The key step is solving the exponent equation that makes the power of $x$ equal to $0$.
+\end{takeaways}
+
+\begin{problem}[Five-letter words from \texttt{Mamungkukumpurangkuntjunya}]
+How many $5$-``letter'' ``words'' can be made from the word \texttt{Mamungkukumpurangkuntjunya}?
+\end{problem}
+
+\begin{hint}
+Treat this as an arrangement problem with repeated letters. Split into cases according to the repetition pattern of the $5$ letters.
+\end{hint}
+
+\begin{solution}
+The word \texttt{Mamungkukumpurangkuntjunya} contains the letter types
+\[
+a,g,j,k,m,n,p,r,t,u,y
+\]
+with frequencies
+\[
+u^6,\ n^4,\ m^3,\ a^3,\ k^3,\ g^2,
+\]
+and $p,r,t,j,y$ each occurring once.
+
+We count by repetition pattern.
+
+\textbf{1. All $5$ letters distinct:}
+\[
+\binom{11}{5}5! = 55440.
+\]
+
+\textbf{2. One pair and $3$ singles:}
+\[
+6\cdot \binom{10}{3}\cdot \frac{5!}{2!}=43200.
+\]
+
+\textbf{3. Two pairs and $1$ single:}
+\[
+\binom{6}{2}\cdot 9 \cdot \frac{5!}{2!2!}=4050.
+\]
+
+\textbf{4. One triple and $2$ singles:}
+\[
+5\cdot \binom{10}{2}\cdot \frac{5!}{3!}=4500.
+\]
+
+\textbf{5. One triple and one pair:}
+\[
+5\cdot 5\cdot \frac{5!}{3!2!}=250.
+\]
+
+\textbf{6. Four of one letter and one single:}
+\[
+2\cdot 10\cdot \frac{5!}{4!}=100.
+\]
+
+\textbf{7. Five of one letter:}
+\[
+1.
+\]
+
+Therefore, the total number of $5$-letter words is
+\[
+55440+43200+4050+4500+250+100+1=107541.
+\]
+
+Hence the answer is $\boxed{107541}$.
+\end{solution}
+
+\begin{takeaways}
+\item When letters repeat, count by repetition pattern such as $(2,1,1,1)$ or $(3,2)$.
+\item After choosing the letters, use multinomial arrangements such as $\frac{5!}{2!}$ or $\frac{5!}{3!2!}$.
+\end{takeaways}
+
+\begin{problem}[Triangles from points on a circle]
+Seven points $P_1,P_2,\dots,P_7$ are arranged in order around a circle, as shown below.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+    \draw (0,0) circle (2);
+    \foreach \i/\ang in {
+        1/90,
+        2/38.57,
+        3/-12.86,
+        4/-64.29,
+        5/-115.71,
+        6/-167.14,
+        7/141.43
+    }{
+        \filldraw ({2*cos(\ang)},{2*sin(\ang)}) circle (1.6pt);
+        \node at ({2.35*cos(\ang)},{2.35*sin(\ang)}) {$P_{\i}$};
+    }
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=\roman*)]
+\item How many triangles can be drawn using these points as vertices?
+\item How many pairs of triangles can be drawn, where the vertices of each triangle are distinct points?
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), choose any $3$ of the $7$ points. For part (ii), choose $6$ points, then split them into two groups of $3$.
+\end{hint}
+
+\begin{solution}
+\textbf{i)} Any $3$ of the $7$ points form a triangle, so the number of triangles is
+\[
+\binom{7}{3}=35.
+\]
+
+\textbf{ii)} First choose the $6$ points that will be used:
+\[
+\binom{7}{6}=7.
+\]
+Now split those $6$ points into two groups of $3$ to make two triangles:
+\[
+\binom{6}{3}=20.
+\]
+This counts each pair of triangles twice, because choosing Triangle A first or Triangle B first gives the same pair. So divide by $2$:
+\[
+\frac{\binom{7}{6}\binom{6}{3}}{2}
+=\frac{7\cdot 20}{2}
+=70.
+\]
+
+Hence the answers are
+\[
+\boxed{35 \text{ and } 70}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item On a circle, any choice of $3$ distinct points gives a triangle.
+\item When counting pairs of groups, check whether the order of the groups matters.
+\item If the pair is unordered, divide by $2$ after choosing the first and second groups.
+\end{takeaways}

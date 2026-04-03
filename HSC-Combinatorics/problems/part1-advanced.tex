@@ -355,6 +355,48 @@ Hence the required number of seating arrangements is $\boxed{3600}$.
 \item For circular permutations of $n$ distinct objects, use $(n-1)!$.
 \end{takeaways}
 
+\begin{problem}[Australian Powerball counting]
+In Australian Powerball, a single standard game consists of choosing $7$ regular numbers from $35$, and then choosing $1$ Powerball from $20$.
+
+\begin{enumerate}[label=\roman*)]
+\item How many different standard Powerball game lines are possible?
+\item Hence show that the probability of winning Division~1 (all $7$ regular numbers and the Powerball) is
+\[
+\frac{1}{134490400}.
+\]
+\item For a fixed winning draw, in how many different game lines would a player match exactly $3$ regular numbers and the Powerball? Hence show that this probability is about $1$ in $188$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{i)} Choose $7$ regular numbers from $35$, then choose $1$ Powerball from $20$:
+\[
+\binom{35}{7}\times 20=6724520\times 20=134490400.
+\]
+So there are $\boxed{134490400}$ standard game lines.
+
+\textbf{ii)} For a fixed draw, exactly one line wins Division~1, so
+\[
+P(\text{Division 1})=\frac{1}{134490400}.
+\]
+
+\textbf{iii)} To match exactly $3$ regular numbers, choose $3$ of the $7$ winning regular numbers and $4$ of the $28$ non-winning regular numbers. The Powerball must also be correct:
+\[
+\binom{7}{3}\binom{28}{4}=35\times 20475=716625.
+\]
+Hence
+\[
+P(3+\text{Powerball})=\frac{716625}{134490400}\approx 0.005328 \approx \frac{1}{188}.
+\]
+So the probability is about $\boxed{1 \text{ in } 188}$.
+\end{solution}
+
+\begin{takeaways}
+\item Lottery questions often split naturally into ``choose the regular numbers'' and ``choose the Powerball''.
+\item ``Exactly $k$ matches'' means choose some winning numbers and the rest from the non-winning numbers.
+\item Published lottery odds are often rounded, so a combinatorial answer may be an approximation rather than a perfect exact fraction.
+\end{takeaways}
+
 \begin{problem}[License plates and careful reading]
 A license plate involves $2$ digits, followed by $2$ letters, followed by $2$ more digits, all chosen at random.
 \begin{enumerate}[label=\alph*)]
