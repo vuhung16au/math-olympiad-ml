@@ -314,6 +314,175 @@ Hence the required number of lines is
 \item A block of $k$ collinear points contributes $\binom{k}{2}$ pairs but only $1$ line.
 \end{takeaways}
 
+\begin{problem}[Dota knockout bracket]
+Suppose a college Dota tournament consists of $64$ teams playing head-to-head in a knockout tournament. There are $6$ rounds: the round of $64$, round of $32$, round of $16$, round of $8$, the final four teams, and the grand final.
+
+Suppose you are filling out a bracket that specifies which team will win each match in each round.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=0.18cm,line cap=round,line join=round]
+  % Left bracket: 32 teams
+  \foreach \i in {0,...,31} {
+    \draw (0,\i) -- (0.6,\i);
+  }
+  \foreach \a/\b/\m in {
+    0/1/0.5,2/3/2.5,4/5/4.5,6/7/6.5,8/9/8.5,10/11/10.5,12/13/12.5,14/15/14.5,
+    16/17/16.5,18/19/18.5,20/21/20.5,22/23/22.5,24/25/24.5,26/27/26.5,28/29/28.5,30/31/30.5} {
+    \draw (0.6,\a) -- (1.2,\a);
+    \draw (0.6,\b) -- (1.2,\b);
+    \draw (1.2,\a) -- (1.2,\b);
+    \draw (1.2,\m) -- (1.8,\m);
+  }
+  \foreach \a/\b/\m in {0.5/2.5/1.5,4.5/6.5/5.5,8.5/10.5/9.5,12.5/14.5/13.5,16.5/18.5/17.5,20.5/22.5/21.5,24.5/26.5/25.5,28.5/30.5/29.5} {
+    \draw (1.8,\a) -- (2.4,\a);
+    \draw (1.8,\b) -- (2.4,\b);
+    \draw (2.4,\a) -- (2.4,\b);
+    \draw (2.4,\m) -- (3.0,\m);
+  }
+  \foreach \a/\b/\m in {1.5/5.5/3.5,9.5/13.5/11.5,17.5/21.5/19.5,25.5/29.5/27.5} {
+    \draw (3.0,\a) -- (3.6,\a);
+    \draw (3.0,\b) -- (3.6,\b);
+    \draw (3.6,\a) -- (3.6,\b);
+    \draw (3.6,\m) -- (4.2,\m);
+  }
+  \foreach \a/\b/\m in {3.5/11.5/7.5,19.5/27.5/23.5} {
+    \draw (4.2,\a) -- (4.8,\a);
+    \draw (4.2,\b) -- (4.8,\b);
+    \draw (4.8,\a) -- (4.8,\b);
+    \draw (4.8,\m) -- (5.4,\m);
+  }
+  \draw (5.4,7.5) -- (6.0,7.5);
+  \draw (5.4,23.5) -- (6.0,23.5);
+  \draw (6.0,7.5) -- (6.0,23.5);
+  \draw (6.0,15.5) -- (6.6,15.5);
+
+  % Right bracket: 32 teams
+  \foreach \i in {0,...,31} {
+    \draw (13.8,\i) -- (14.4,\i);
+  }
+  \foreach \a/\b/\m in {
+    0/1/0.5,2/3/2.5,4/5/4.5,6/7/6.5,8/9/8.5,10/11/10.5,12/13/12.5,14/15/14.5,
+    16/17/16.5,18/19/18.5,20/21/20.5,22/23/22.5,24/25/24.5,26/27/26.5,28/29/28.5,30/31/30.5} {
+    \draw (13.2,\a) -- (13.8,\a);
+    \draw (13.2,\b) -- (13.8,\b);
+    \draw (13.2,\a) -- (13.2,\b);
+    \draw (12.6,\m) -- (13.2,\m);
+  }
+  \foreach \a/\b/\m in {0.5/2.5/1.5,4.5/6.5/5.5,8.5/10.5/9.5,12.5/14.5/13.5,16.5/18.5/17.5,20.5/22.5/21.5,24.5/26.5/25.5,28.5/30.5/29.5} {
+    \draw (12.0,\a) -- (12.6,\a);
+    \draw (12.0,\b) -- (12.6,\b);
+    \draw (12.0,\a) -- (12.0,\b);
+    \draw (11.4,\m) -- (12.0,\m);
+  }
+  \foreach \a/\b/\m in {1.5/5.5/3.5,9.5/13.5/11.5,17.5/21.5/19.5,25.5/29.5/27.5} {
+    \draw (10.8,\a) -- (11.4,\a);
+    \draw (10.8,\b) -- (11.4,\b);
+    \draw (10.8,\a) -- (10.8,\b);
+    \draw (10.2,\m) -- (10.8,\m);
+  }
+  \foreach \a/\b/\m in {3.5/11.5/7.5,19.5/27.5/23.5} {
+    \draw (9.6,\a) -- (10.2,\a);
+    \draw (9.6,\b) -- (10.2,\b);
+    \draw (9.6,\a) -- (9.6,\b);
+    \draw (9.0,\m) -- (9.6,\m);
+  }
+  \draw (8.4,7.5) -- (9.0,7.5);
+  \draw (8.4,23.5) -- (9.0,23.5);
+  \draw (8.4,7.5) -- (8.4,23.5);
+  \draw (7.8,15.5) -- (8.4,15.5);
+
+  % Final connector
+  \draw (6.6,15.5) -- (7.8,15.5);
+\end{tikzpicture}
+\end{center}
+
+How many possible brackets can you make?
+\end{problem}
+
+\begin{hint}
+A completed bracket is determined by choosing the winner of every match. How many matches are played in a $64$-team knockout tournament?
+\end{hint}
+
+\begin{solution}
+In a knockout tournament, each match eliminates exactly one team.
+
+Starting with $64$ teams, we must eliminate $63$ teams to get one champion. So the tournament contains
+\[
+63
+\]
+matches in total.
+
+For each match, there are $2$ possible winners. Therefore the total number of possible completed brackets is
+\[
+2^{63}.
+\]
+
+Hence the number of possible brackets is
+\[
+\boxed{2^{63}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item In a knockout tournament with $n$ teams, there are $n-1$ matches.
+\item A bracket is determined by the winner of each match.
+\item Once the number of matches is known, use the multiplication principle.
+\end{takeaways}
+
+\begin{problem}[Dividing a class into equal groups]
+A class has $28$ students.
+
+The teacher wants to divide them into $7$ groups for an assignment task, with each group containing $4$ students.
+
+\begin{enumerate}
+  \item[(i)] How many different ways can this be done if the $7$ groups are unlabeled?
+  \item[(ii)] How many different ways can this be done if the groups are labeled Group $1$, Group $2$, \dots, Group $7$?
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Start by arranging all $28$ students, then correct for the fact that order within each group does not matter. In part (i), the order of the groups also does not matter, but in part (ii) it does.
+\end{hint}
+
+\begin{solution}
+If we arrange all $28$ students in a line, there are
+\[
+28!
+\]
+ways.
+
+Now split this line into $7$ consecutive blocks of $4$.
+
+\textbf{(i)} If the groups are unlabeled, this overcounts in two ways:
+\begin{itemize}[leftmargin=*]
+  \item within each group, the $4$ students can be arranged in $4!$ ways without changing the group
+  \item the $7$ groups themselves can be arranged in $7!$ ways without changing the division.
+\end{itemize}
+
+So the number of different unlabeled groupings is
+\[
+\frac{28!}{(4!)^7\,7!}.
+\]
+
+Hence
+\[
+\boxed{\frac{28!}{(4!)^7\,7!}}.
+\]
+
+\textbf{(ii)} If the groups are labeled, we still divide by $(4!)^7$ because order within each group does not matter, but we do \emph{not} divide by $7!$ because the groups are now distinguishable.
+
+Hence
+\[
+\boxed{\frac{28!}{(4!)^7}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item When dividing people into equal-sized groups, first count all arrangements, then divide by repeated internal orders.
+\item If the groups are unlabeled, also divide by the number of ways to reorder the groups.
+\item The difference between labeled and unlabeled groups here is exactly a factor of $7!$.
+\end{takeaways}
+
 \begin{problem}[Triangles from points on a circle]
 Seven points $P_1,P_2,\dots,P_7$ are arranged in order around a circle, as shown below.
 

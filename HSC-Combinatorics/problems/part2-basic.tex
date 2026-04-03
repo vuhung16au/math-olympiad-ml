@@ -166,3 +166,36 @@ Hence the number of rectangles is $\boxed{315}$.
 \item Grid-rectangle questions are usually solved by choosing boundary lines, not by listing shapes one by one.
 \item Squares are already included, since every square is also a rectangle.
 \end{takeaways}
+
+\begin{problem}[How fast does brute force grow?]
+A password is made from $n$ binary digits, each of which is either $0$ or $1$.
+
+\begin{enumerate}[label=\alph*)]
+\item How many possible passwords are there when $n=5$?
+\item How many possible passwords are there when $n=10$?
+\item Explain briefly why checking every possible password becomes difficult when $n$ is large.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Each position has $2$ choices, so use the multiplication principle.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} For $n=5$, the number of passwords is
+\[
+2^5=32.
+\]
+
+\textbf{b)} For $n=10$, the number of passwords is
+\[
+2^{10}=1024.
+\]
+
+\textbf{c)} The total number of possibilities doubles each time one more digit is added. So the number of passwords grows exponentially, and brute-force checking quickly becomes impractical for large $n$.
+\end{solution}
+
+\begin{takeaways}
+\item Some counting problems grow exponentially, even when the rule looks simple.
+\item This is one reason efficient counting methods matter.
+\end{takeaways}

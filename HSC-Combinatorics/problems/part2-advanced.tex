@@ -208,6 +208,288 @@ Therefore, among the $11$ chosen numbers, there must be two numbers whose sum is
 \item Choosing more objects than there are boxes forces one box to contain two chosen objects.
 \end{takeaways}
 
+\begin{problem}[Positive integer solutions]
+Show that there are
+\[
+\binom{n-1}{k-1}
+\]
+distinct positive integer-valued vectors $(x_1,\dots,x_k)$ satisfying
+\[
+x_1+\cdots+x_k=n,
+\qquad x_i>0 \text{ for all } i=1,\dots,k.
+\]
+\end{problem}
+
+\begin{hint}
+Think of writing $n$ as a row of $n$ identical objects, then inserting dividers to split them into $k$ positive groups.
+\end{hint}
+
+\begin{solution}
+Represent $n$ as $n$ identical stars:
+\[
+\underbrace{*\,*\,*\,\cdots\,*}_{n \text{ stars}}.
+\]
+To split these into $k$ positive parts, we must place $k-1$ dividers into the gaps between consecutive stars.
+
+There are
+\[
+n-1
+\]
+gaps between the $n$ stars, and we choose
+\[
+k-1
+\]
+of them for the dividers.
+
+Hence the number of positive integer solutions is
+\[
+\boxed{\binom{n-1}{k-1}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item This is the standard stars-and-bars count for positive integer solutions.
+\item Positivity means every group must contain at least one star, so dividers can only go in the internal gaps.
+\end{takeaways}
+
+\begin{problem}[Non-negative integer solutions]
+Show that there are
+\[
+\binom{n+k-1}{k-1}
+\]
+distinct non-negative integer-valued vectors $(x_1,\dots,x_k)$ satisfying
+\[
+x_1+\cdots+x_k=n,
+\qquad x_i\ge 0 \text{ for all } i=1,\dots,k.
+\]
+\end{problem}
+
+\begin{hint}
+Use the same stars-and-bars idea, but now allow some groups to be empty.
+\end{hint}
+
+\begin{solution}
+Again represent $n$ as $n$ identical stars. This time we want to split them into $k$ groups, but some groups may be empty.
+
+So we place $k-1$ dividers among the $n$ stars, allowing dividers to appear at the ends or next to each other.
+
+This is equivalent to arranging
+\[
+n \text{ stars and } k-1 \text{ dividers}
+\]
+in a row. The total number of symbols is
+\[
+n+k-1.
+\]
+We simply choose the positions of the $k-1$ dividers:
+\[
+\boxed{\binom{n+k-1}{k-1}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item This is the standard stars-and-bars count for non-negative integer solutions.
+\item Allowing zero means dividers may be adjacent or may appear at the ends.
+\end{takeaways}
+
+\begin{problem}[Three identities from $(1+x)^n$]
+Consider the binomial expansion
+\[
+(1+x)^n=\binom{n}{0}+\binom{n}{1}x+\binom{n}{2}x^2+\cdots+\binom{n}{n}x^n.
+\]
+
+\begin{enumerate}[label=\roman*)]
+\item Let $x=-1$ and deduce that
+\[
+\binom{n}{0}-\binom{n}{1}+\binom{n}{2}-\cdots+(-1)^n\binom{n}{n}=0
+\]
+for $n\ge 1$.
+
+\item Integrate both sides with respect to $x$ from $0$ to $1$, and deduce that
+\[
+\sum_{r=0}^n \frac{1}{r+1}\binom{n}{r}=\frac{2^{n+1}-1}{n+1}.
+\]
+
+\item Differentiate both sides with respect to $x$, then let $x=1$, and deduce that
+\[
+\binom{n}{1}+2\binom{n}{2}+3\binom{n}{3}+\cdots+n\binom{n}{n}=n2^{n-1}.
+\]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For each part, start from the same binomial expansion and apply the requested operation directly to both sides.
+\end{hint}
+
+\begin{solution}
+\textbf{i)} Substituting $x=-1$ into
+\[
+(1+x)^n=\sum_{r=0}^n \binom{n}{r}x^r
+\]
+gives
+\[
+0^n=\sum_{r=0}^n \binom{n}{r}(-1)^r.
+\]
+For $n\ge 1$, this becomes
+\[
+\boxed{\binom{n}{0}-\binom{n}{1}+\binom{n}{2}-\cdots+(-1)^n\binom{n}{n}=0.}
+\]
+
+\textbf{ii)} Integrating from $0$ to $1$,
+\[
+\int_0^1 (1+x)^n\,dx=\int_0^1 \sum_{r=0}^n \binom{n}{r}x^r\,dx.
+\]
+The left-hand side is
+\[
+\left[\frac{(1+x)^{n+1}}{n+1}\right]_0^1=\frac{2^{n+1}-1}{n+1}.
+\]
+The right-hand side is
+\[
+\sum_{r=0}^n \binom{n}{r}\int_0^1 x^r\,dx
+=\sum_{r=0}^n \binom{n}{r}\frac{1}{r+1}.
+\]
+Hence
+\[
+\boxed{\sum_{r=0}^n \frac{1}{r+1}\binom{n}{r}=\frac{2^{n+1}-1}{n+1}.}
+\]
+
+\textbf{iii)} Differentiating,
+\[
+n(1+x)^{n-1}=\binom{n}{1}+2\binom{n}{2}x+3\binom{n}{3}x^2+\cdots+n\binom{n}{n}x^{n-1}.
+\]
+Now let $x=1$:
+\[
+n2^{n-1}=\binom{n}{1}+2\binom{n}{2}+3\binom{n}{3}+\cdots+n\binom{n}{n}.
+\]
+So
+\[
+\boxed{\binom{n}{1}+2\binom{n}{2}+3\binom{n}{3}+\cdots+n\binom{n}{n}=n2^{n-1}.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item A single binomial expansion can produce several useful identities by substitution, integration, and differentiation.
+\item Setting $x=-1$ often produces alternating-sign identities.
+\item Integrating or differentiating term-by-term can turn coefficients into new weighted sums.
+\end{takeaways}
+
+\begin{problem}[Making an amount of money with Australian denominations]
+Suppose we use the simplified Australian denominations (coins less than $\$1$ are not used): 
+\[
+\$1,\ \ \$2,\ \ \$5,\ \ \$10,\ \ \$20,\ \ \$50,\ \ \$100.
+\]
+
+For a fixed positive integer amount $M$, let $N(M)$ be the number of ways to express $\$M$ using these coins and notes, where order does \emph{not} matter.
+
+\begin{enumerate}[label=\roman*)]
+\item Write down a generating function whose coefficient of $x^M$ is $N(M)$.
+\item Hence explain how the problem of finding $N(M)$ can be turned into a coefficient problem.
+\end{enumerate}
+
+\smallskip
+\noindent\textit{Enrichment note:} This problem is outside the HSC Mathematics Extension~1 syllabus, but it is a very useful example of how generating functions turn a counting problem into algebra.
+\end{problem}
+
+\begin{hint}
+For each denomination $d$, think about the possible contributions $0,d,2d,3d,\dots$.
+\end{hint}
+
+\begin{solution}
+For each denomination, we write a generating function for how many of that denomination may be used:
+\[
+1+x+x^2+x^3+\cdots \qquad \text{for } \$1,
+\]
+\[
+1+x^2+x^4+x^6+\cdots \qquad \text{for } \$2,
+\]
+and similarly for the other notes.
+
+So the full generating function is
+\[
+G(x)=
+(1+x+x^2+\cdots)
+(1+x^2+x^4+\cdots)
+(1+x^5+x^{10}+\cdots)
+(1+x^{10}+x^{20}+\cdots)
+\]
+\[
+\qquad\qquad
+(1+x^{20}+x^{40}+\cdots)
+(1+x^{50}+x^{100}+\cdots)
+(1+x^{100}+x^{200}+\cdots).
+\]
+
+The coefficient of $x^M$ in $G(x)$ is exactly the number of ways to make $\$M$, because each chosen power of $x$ records how much each denomination contributes, and multiplying the choices combines them.
+
+So
+\[
+N(M)=[x^M]\,G(x),
+\]
+where $[x^M]\,G(x)$ means ``the coefficient of $x^M$ in $G(x)$.'' 
+
+\textbf{Outline of method.} To solve a specific case, such as $M=20$ or $M=50$, expand only as far as needed and collect the coefficient of $x^M$. In practice, this is often done using recurrence methods or computer algebra, because the coefficients grow quickly.
+\end{solution}
+
+\begin{takeaways}
+\item A generating function is a power series in which the coefficient of $x^M$ stores the number of ways to make the amount $M$.
+\item For a sequence of numbers $a_0,a_1,a_2,\dots$, the generating function is
+\[a_0+a_1x+a_2x^2+\cdots.
+\]
+\item For the $\$1$ denomination, the generating function is
+\[
+1+x+x^2+x^3+\cdots
+\]
+because we may use $0,1,2,3,\dots$ one-dollar coins, contributing $\$0,\$1,\$2,\$3,\dots$ respectively.
+
+\item The full generating function is the product of the generating functions for each denomination, because we can choose how many of each denomination to use independently.
+\item Each other denomination contributes a similar series, and multiplying these series combines the choices from all denominations.
+\item This is a standard higher-level combinatorics technique and is excellent enrichment beyond the HSC course.
+\end{takeaways}
+
+\begin{remark}[Algorithmic note]
+We can also compute $N(M)$ using dynamic programming. This is the algorithmic version of finding the coefficient of $x^M$ in the generating function.
+\end{remark}
+
+\begin{lstlisting}[language=Python,numbers=left,basicstyle=\ttfamily\small,keywordstyle=\color{bookpurple}\bfseries,commentstyle=\color{bookred},stringstyle=\color{blue!60!black},showstringspaces=false,breaklines=true]
+def calculate_coin_combinations(target_amount, denominations):
+    """
+    Calculates the number of ways to make a target amount using given denominations.
+    This is the algorithmic equivalent of finding the coefficient of x^M
+    in our generating function.
+    """
+    # dp is an array where dp[i] will store the number of ways to make amount i.
+    # We initialize an array of zeros from 0 up to our target_amount.
+    dp = [0] * (target_amount + 1)
+
+    # Base case: There is exactly 1 way to make $0 (by choosing no coins)
+    dp[0] = 1
+
+    # Outer loop: We process one denomination bracket at a time.
+    # This is exactly like multiplying the next bracket in our generating function:
+    # (1 + x^2 + x^4...) * (1 + x^5 + x^10...)
+    for coin in denominations:
+
+        # Inner loop: We update the combinations for every amount
+        # from 'coin' up to the target.
+        for amount in range(coin, target_amount + 1):
+
+            # The number of ways to make the current 'amount' increases by the
+            # number of ways we could make the amount WITHOUT this current coin.
+            dp[amount] += dp[amount - coin]
+
+    # The final answer is stored at the index of our target amount
+    return dp[target_amount]
+
+
+# --- Example Usage ---
+australian_denominations = [1, 2, 5, 10, 20, 50, 100]
+M = 10
+
+ways = calculate_coin_combinations(M, australian_denominations)
+print(f"To make ${M}, there are {ways} combinations.")
+# Output: To make $10, there are 47 combinations.
+\end{lstlisting}
+
 \begin{problem}[Unlocking a phone by trial and error]
 To unlock a phone, we need to enter a $4$-digit PIN.
 
@@ -281,3 +563,13 @@ which is about
 \item Exponentially growing waiting times often lead to a geometric series.
 \item Expected-value questions can often be solved by averaging over all possible positions of success.
 \end{takeaways}
+
+\begin{remark}
+\begin{center}
+\itshape
+``Space is big. Really big. You just won't believe how vastly, hugely, mind-bogglingly big it is.
+I mean, you may think it's a long way down the road to the chemist, but that's just peanuts to
+space.''\\
+\normalfont Douglas Adams
+\end{center}
+\end{remark}

@@ -132,6 +132,12 @@ Most problems in this booklet can be solved using standard HSC Mathematics Exten
 a \times b \times c.
 \]
 
+\textbf{Generalized counting principle.} Suppose that $k$ experiments are to be performed, with the number of possible outcomes being $n_i$ for the $i$th experiment. Then there are
+\[
+n_1\cdot n_2\cdot \dots \cdot n_k
+\]
+possible outcomes of all $k$ experiments together.
+
 \textbf{Permutations versus combinations.} A \textbf{permutation} is an arrangement, so order matters. A \textbf{combination} is a selection, so order does not matter.
 
 \textit{Worked example.} Suppose $3$ students are Alice, Ben, and Chloe.
@@ -159,9 +165,30 @@ a \times b \times c.
 \binom{n}{r} = \frac{n!}{r!(n-r)!}.
 \]
 
-\textbf{Permutations with repeated objects.} If there are $n$ objects in total, with repetitions of sizes $a,b,c,\dots$, then the number of distinct arrangements is
+\textbf{Multinomial coefficients.} If there are $n$ objects in total, divided into groups of sizes $a,b,c,\dots$ with
+\[
+n=a+b+c+\cdots,
+\]
+then the number of distinct arrangements is
 \[
 \frac{n!}{a!\,b!\,c!\cdots}.
+\]
+
+\textbf{Multinomial expansion note.} In the expansion of
+\[
+(x_1+x_2+\cdots+x_k)^m,
+\]
+the coefficient of a term
+\[
+x_1^{a_1}x_2^{a_2}\cdots x_k^{a_k}
+\]
+with
+\[
+a_1+a_2+\cdots+a_k=m
+\]
+is the multinomial coefficient
+\[
+\frac{m!}{a_1!a_2!\cdots a_k!}.
 \]
 
 \textbf{Circular permutations.} The number of ways to arrange $n$ distinct objects around a circle is
@@ -265,6 +292,137 @@ P(X=2)=\binom{5}{2}(0.2)^2(0.8)^3.
 
 This idea appears in repeated-draw questions later in the booklet.
 
+\subsection{A Brief Extension: Gamma and Beta Functions}
+Although this booklet focuses on HSC Mathematics Extension~1, it is worth knowing that factorials and combinations have important extensions in higher mathematics.
+
+\textbf{Gamma function.} The Gamma function is defined for suitable real or complex inputs by
+\[
+\Gamma(z)=\int_0^\infty t^{z-1}e^{-t}\,dt.
+\]
+It satisfies the recurrence
+\[
+\Gamma(z+1)=z\Gamma(z),
+\]
+which mirrors the factorial rule $n!=n(n-1)!$. In fact,
+\[
+\Gamma(n)=(n-1)!,
+\qquad\text{so}\qquad
+n!=\Gamma(n+1).
+\]
+This means the Gamma function is the natural continuous extension of the factorial function.
+
+\textbf{Beta function.} The Beta function is closely related to Gamma and is defined by
+\[
+B(x,y)=\frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}.
+\]
+Since combinations are built from factorials,
+\[
+\binom{n}{r}=\frac{n!}{r!(n-r)!}
+=\frac{\Gamma(n+1)}{\Gamma(r+1)\Gamma(n-r+1)}.
+\]
+So Gamma and Beta functions provide a continuous version of the factorial and binomial-coefficient ideas that appear throughout combinatorics.
+
+\textit{Why this matters.} These functions form a bridge between discrete counting and continuous mathematics. They are useful in advanced probability, statistics, asymptotics, and areas such as machine learning.
+
+\subsection{A Brief Extension: The Inclusion-Exclusion Principle}
+The inclusion-exclusion principle is used when counting objects that may belong to overlapping sets.
+
+For two sets $A$ and $B$,
+\[
+|A\cup B|=|A|+|B|-|A\cap B|.
+\]
+
+For three sets $A$, $B$, and $C$,
+\[
+|A\cup B\cup C|
+=
+|A|+|B|+|C|
+-|A\cap B|-|A\cap C|-|B\cap C|
++|A\cap B\cap C|.
+\]
+
+The idea is simple: when we add the sizes of sets, elements in overlaps are counted more than once, so we must correct for this.
+
+Also note that this is an important topic when you learn probability.
+
+This principle is very useful in restricted counting problems, probability, and Venn diagram questions.
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \fill[red!18] (-0.8,0) circle (1.3);
+  \fill[blue!18] (0.8,0) circle (1.3);
+  \fill[green!18] (0,1.0) circle (1.3);
+  \draw (-0.8,0) circle (1.3);
+  \draw (0.8,0) circle (1.3);
+  \draw (0,1.0) circle (1.3);
+  \node at (-1.7,-1.1) {$A$};
+  \node at (1.7,-1.1) {$B$};
+  \node at (0,2.35) {$C$};
+  \node at (0,0.15) {$A\cap B\cap C$};
+  \node at (0,-0.95) {$A\cap B$};
+  \node at (-0.78,0.8) {$A\cap C$};
+  \node at (0.78,0.8) {$B\cap C$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{A Brief Extension: Stars and Bars}
+Stars and bars is a method for counting integer solutions to equations such as
+\[
+x_1+x_2+\cdots+x_k=n.
+\]
+
+The idea is to represent the total $n$ by $n$ stars and use $k-1$ bars to divide the stars into $k$ groups.
+
+\begin{center}
+\begin{tikzpicture}[baseline=(current bounding box.center),scale=1]
+  \foreach \x in {0,0.45,0.9,1.35,1.8,2.25,2.7} {
+    \node at (\x,0) {$*$};
+  }
+  \draw[thick] (0.65,-0.35) -- (0.65,0.35);
+  \draw[thick] (2.05,-0.35) -- (2.05,0.35);
+  \node at (1.35,-0.9) {$2\mid 3\mid 2$};
+\end{tikzpicture}
+\end{center}
+
+If the variables are required to be positive, then each group must contain at least one star, so the number of solutions is
+\[
+\binom{n-1}{k-1}.
+\]
+
+If the variables are allowed to be zero, then empty groups are allowed, so the number of solutions is
+\[
+\binom{n+k-1}{k-1}.
+\]
+
+Stars and bars is a standard combinatorial technique for turning algebraic equations into counting problems. It is directly connected to the two Part~2 challenge problems on positive and non-negative integer solutions.
+
+\textit{Exam note.} Recent HSC Mathematics Extension~1 exams do not usually ask this type of problem directly. However, it is still very good to know, because it is a powerful counting technique to keep as a mathematical ``weapon'' for olympiad-style problems, extension work, and future university study.
+
+\subsection{A Brief Extension: Algorithmic Counting and Complexity}
+Algorithmic counting is the study of methods for counting objects systematically. Complexity asks how difficult a counting problem becomes as the size of the problem grows.
+
+Some counting problems have simple closed formulas, such as
+\[
+\binom{n}{r},\qquad n!,\qquad 2^n.
+\]
+However, many counting problems grow extremely quickly and cannot be solved efficiently by checking every possibility one by one.
+
+For example:
+\[
+\begin{array}{c|c|c}
+n & n! & 2^n \\ \hline
+5 & 120 & 32 \\
+10 & 3628800 & 1024 \\
+20 & 2432902008176640000 & 1048576
+\end{array}
+\]
+
+So even a simple arrangement problem can become enormous very quickly.
+
+This is one reason why combinatorics is important: good counting methods, symmetry arguments, recurrences, and identities help us avoid brute force.
+
+\textit{Syllabus note.} This topic is outside the HSC Mathematics Extension~1 syllabus. However, it is very useful for higher education, especially in areas such as computer science, discrete mathematics, and algorithm design.
+
 \subsection{Problem-Solving Habits for This Booklet}
 \begin{itemize}[leftmargin=*]
   \item Ask first: \emph{Does order matter?}
@@ -277,6 +435,14 @@ This idea appears in repeated-draw questions later in the booklet.
 
 \begin{remark}
 The most common combinatorics mistake is using a permutation when the problem is actually a combination, or vice versa. A good first question is always: \emph{Does order matter?}
+\end{remark}
+
+\begin{remark}[How fast counting grows]
+A $19\times 19$ Go board has $361$ points. If each point is allowed to be black, white, or empty, then a rough count of possible board states is
+\[
+3^{361}\approx 10^{172}.
+\]
+Even after restricting to legal positions, the number is still about $10^{170}$, which is unimaginably large. This is one of the best reminders that counting problems can grow far beyond ordinary intuition.
 \end{remark}
 
 \section{Part 1: Worked Problems}
