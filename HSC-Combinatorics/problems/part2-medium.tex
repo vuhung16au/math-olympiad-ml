@@ -115,6 +115,205 @@ Hence the answer is $\boxed{107541}$.
 \item After choosing the letters, use multinomial arrangements such as $\frac{5!}{2!}$ or $\frac{5!}{3!2!}$.
 \end{takeaways}
 
+\begin{problem}[Constant term from a product of two expansions]
+Find the term independent of $x$ in the expansion of
+\[
+\left(x+\frac{1}{x}\right)^5\left(2x^2-\frac{3}{x}\right)^6.
+\]
+\end{problem}
+
+\begin{hint}
+Write the general term from each bracket, then find which pair of terms gives a total power of $x$ equal to $0$.
+\end{hint}
+
+\begin{solution}
+From
+\[
+\left(x+\frac{1}{x}\right)^5,
+\]
+the general term is
+\[
+\binom{5}{r}x^{5-r}\left(\frac{1}{x}\right)^r=\binom{5}{r}x^{5-2r}.
+\]
+
+From
+\[
+\left(2x^2-\frac{3}{x}\right)^6,
+\]
+the general term is
+\[
+\binom{6}{s}(2x^2)^{6-s}\left(-\frac{3}{x}\right)^s
+=\binom{6}{s}2^{6-s}(-3)^s x^{12-3s}.
+\]
+
+So in the product, the power of $x$ is
+\[
+(5-2r)+(12-3s)=17-2r-3s.
+\]
+For a constant term, we need
+\[
+17-2r-3s=0.
+\]
+
+With $0\le r\le 5$ and $0\le s\le 6$, the only solution is
+\[
+r=1,\quad s=5.
+\]
+
+So the constant term is
+\begin{align*}
+\binom{5}{1}\binom{6}{5}\cdot 1 \cdot 2^{1}(-3)^5
+&= 5\cdot 6\cdot 2\cdot (-243) \\
+&= -14580.
+\end{align*}
+
+Hence the term independent of $x$ is
+\[
+\boxed{-14580}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item In products of expansions, add the exponents from the chosen terms.
+\item The constant term occurs when the total exponent of $x$ is $0$.
+\item After finding the exponent condition, substitute the matching values back into the coefficients.
+\end{takeaways}
+
+\begin{problem}[Adults and children at the cinema]
+Three adults and five children go to the cinema and are seated next to each other in a row of eight seats.
+
+How many ways can these eight people sit so that at least two of the adults sit next to each other?
+\end{problem}
+
+\begin{hint}
+Count all seatings first, then subtract the seatings in which no two adults sit together.
+\end{hint}
+
+\begin{solution}
+There are
+\[
+8!
+\]
+ways to seat the $8$ distinct people in a row.
+
+Now count the arrangements in which no two adults sit together.
+
+First arrange the $5$ children:
+\[
+5!
+\]
+ways.
+
+This creates $6$ gaps where adults could be placed:
+\[
+\_ \ C \ \_ \ C \ \_ \ C \ \_ \ C \ \_ \ C \ \_ 
+\]
+Choose $3$ of these $6$ gaps for the adults:
+\[
+\binom{6}{3}
+\]
+ways.
+
+Then arrange the $3$ adults in those chosen gaps:
+\[
+3!
+\]
+ways.
+
+So the number of seatings with no two adults together is
+\[
+5!\binom{6}{3}3! = 120 \cdot 20 \cdot 6 = 14400.
+\]
+
+Therefore, the number of seatings in which at least two adults sit together is
+\[
+8! - 14400 = 40320 - 14400 = 25920.
+\]
+
+Hence the required number of ways is
+\[
+\boxed{25920}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item ``At least'' often suggests complementary counting.
+\item To keep certain people apart, arrange the others first and then place people into the gaps.
+\item Gap methods are especially useful for adjacency restrictions in line arrangements.
+\end{takeaways}
+
+\begin{problem}[Lines determined by points on a line and a circle]
+There are $11$ points on the plane.
+
+\begin{itemize}[leftmargin=*]
+\item $4$ of them lie on the line $y=0$
+\item $7$ of them lie on the circle
+\[
+x^2+(y-2)^2=1.
+\]
+\end{itemize}
+
+% Assume that, apart from the $4$ points on $y=0$, no other three of the $11$ points are collinear.
+
+How many different lines can be formed that pass through at least two of the $11$ points?
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[->] (-3.2,0) -- (3.2,0) node[right] {$x$};
+    \draw[->] (0,-0.6) -- (0,3.6) node[above] {$y$};
+    \draw[dashed] (-3,0) -- (3,0) node[right] {$y=0$};
+    \draw (0,2) circle (1);
+    \node[right] at (1,2.15) {$x^2+(y-2)^2=1$};
+
+    % Four points on the line
+    \foreach \x in {-2.4,-1.0,0.9,2.3}
+        \filldraw (\x,0) circle (1.5pt);
+
+    % Seven points on the circle
+    \foreach \ang in {90,35,-10,-55,-120,165,130}
+        \filldraw ({cos(\ang)},{2+sin(\ang)}) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+Start with all pairs of points, then correct for the overcount caused by the $4$ collinear points on $y=0$.
+\end{hint}
+
+\begin{solution}
+If no three points were collinear, the number of lines would be
+\[
+\binom{11}{2}=55.
+\]
+
+However, the $4$ points on the line $y=0$ are collinear. The pairs among these $4$ points are
+\[
+\binom{4}{2}=6,
+\]
+but they produce only \emph{one} line.
+
+So among these $6$ counted pairs, we have overcounted by
+\[
+6-1=5.
+\]
+
+Therefore, the number of distinct lines is
+\[
+\binom{11}{2}-5 = 55-5 = 50.
+\]
+
+Hence the required number of lines is
+\[
+\boxed{50}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item The usual starting point is $\binom{n}{2}$, because each pair of points determines a line.
+\item If several points are collinear, those pairs all represent the same line and must be adjusted.
+\item A block of $k$ collinear points contributes $\binom{k}{2}$ pairs but only $1$ line.
+\end{takeaways}
+
 \begin{problem}[Triangles from points on a circle]
 Seven points $P_1,P_2,\dots,P_7$ are arranged in order around a circle, as shown below.
 
