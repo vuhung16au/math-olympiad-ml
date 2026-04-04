@@ -546,3 +546,117 @@ Hence the answers are
 \item When counting pairs of groups, check whether the order of the groups matters.
 \item If the pair is unordered, divide by $2$ after choosing the first and second groups.
 \end{takeaways}
+
+\begin{problem}[Triangles from a regular octagon and its centre]
+On the unit circle with centre $O$, there are $8$ equally spaced vertices $A_1,A_2,\dots,A_8$.
+
+How many triangles can be formed using the $9$ points
+\[
+A_1,A_2,\dots,A_8,O
+\]
+as vertices?
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    \draw (0,0) circle (2);
+    \foreach \i/\ang in {
+        1/90,
+        2/45,
+        3/0,
+        4/-45,
+        5/-90,
+        6/-135,
+        7/180,
+        8/135
+    }{
+        \filldraw ({2*cos(\ang)},{2*sin(\ang)}) circle (1.6pt);
+        \node at ({2.28*cos(\ang)},{2.28*sin(\ang)}) {$A_{\i}$};
+    }
+    \filldraw (0,0) circle (1.6pt);
+    \node[below right] at (0,0) {$O$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+Choose any $3$ of the $9$ points, then subtract the choices that are collinear.
+\end{hint}
+
+\begin{solution}
+If there were no collinear triples, the number of triangles would be
+\[
+\binom{9}{3}=84.
+\]
+
+Now identify the collinear triples.
+
+No line can contain three of the points on the circle, because a line meets a circle in at most two points.
+
+However, the centre $O$ lies on each diameter, so the following four triples are collinear:
+\[
+(A_1,O,A_5),\quad (A_2,O,A_6),\quad (A_3,O,A_7),\quad (A_4,O,A_8).
+\]
+
+These $4$ triples do not form triangles, so we subtract them:
+\[
+84-4=80.
+\]
+
+Hence the number of triangles is
+\[
+\boxed{80}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Start with $\binom{n}{3}$ when counting triangles from points, then subtract collinear triples.
+\item On a circle, the only collinear triples here come from diameters passing through the centre.
+\item Geometry counting problems often reduce to one small structural observation.
+\end{takeaways}
+
+\begin{problem}[Pigeons and pigeonholes]
+A flock of $41$ pigeons fly into $10$ different pigeonholes.
+
+\begin{enumerate}[label=\alph*)]
+\item Show that there is at least one pigeonhole with at least $5$ pigeons.
+\item Show that there is at least one pair of pigeonholes in which there are at least $9$ pigeons altogether.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (a), divide $41$ by $10$. For part (b), group the $10$ pigeonholes into $5$ pairs.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} If every pigeonhole had at most $4$ pigeons, then the total number of pigeons would be at most
+\[
+10\times 4=40.
+\]
+But there are actually $41$ pigeons, so this is impossible.
+
+Therefore, at least one pigeonhole must contain at least
+\[
+\boxed{5}
+\]
+pigeons.
+
+\textbf{b)} Group the $10$ pigeonholes into $5$ pairs.
+
+If every pair of pigeonholes had at most $8$ pigeons altogether, then the total number of pigeons would be at most
+\[
+5\times 8=40.
+\]
+Again, this is impossible because there are $41$ pigeons.
+
+Therefore, at least one pair of pigeonholes must contain at least
+\[
+\boxed{9}
+\]
+pigeons altogether.
+\end{solution}
+
+\begin{takeaways}
+\item The pigeonhole principle often begins with: ``Suppose every group had at most this many.''
+\item If the resulting total is too small, then some group must exceed that bound.
+\item For part (b), the key idea is to create larger pigeonholes by pairing the original ones.
+\end{takeaways}

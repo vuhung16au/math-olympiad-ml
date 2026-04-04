@@ -1,2 +1,42 @@
 refs/
 refs.md
+refs/*
+
+TODO/
+TODOs/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdy
+*.tdo
+*.auxlock
+
+# Local TeX cache
+.texlive-cache/
+
+# Generated PDF from local builds
+HSC-Math-Extension-2-Book.pdf
+
+# Keep released PDF if generated
+!releases/HSC-Math-Extension-2-Book.pdf
+
+# Editor files
+.vscode/

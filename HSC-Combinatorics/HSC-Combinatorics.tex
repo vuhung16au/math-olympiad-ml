@@ -138,6 +138,19 @@ n_1\cdot n_2\cdot \dots \cdot n_k
 \]
 possible outcomes of all $k$ experiments together.
 
+\textbf{What is a set?} A \textbf{set} is a collection of distinct objects. In a set, order does not matter, and repeated copies are not listed separately. For example,
+\[
+\{1,2,3\}=\{3,2,1\},
+\]
+and writing $\{1,1,2\}$ does not create a new $3$-element set; as a set, it is just $\{1,2\}$.
+
+In counting problems, this usually means:
+\begin{itemize}[leftmargin=*]
+  \item the objects in the set are treated as distinct unless the question says some are equal or repeated
+  \item repetition is \emph{not} automatically allowed just because we are arranging or choosing from a set
+  \item if repetition \emph{is} allowed, the question should say so explicitly.
+\end{itemize}
+
 \textbf{Permutations versus combinations.} A \textbf{permutation} is an arrangement, so order matters. A \textbf{combination} is a selection, so order does not matter.
 
 \textit{Worked example.} Suppose $3$ students are Alice, Ben, and Chloe.
@@ -291,6 +304,26 @@ P(X=2)=\binom{5}{2}(0.2)^2(0.8)^3.
 \]
 
 This idea appears in repeated-draw questions later in the booklet.
+
+\subsection{A Brief Note: The Pigeonhole Principle and Remainders}
+Suppose that $n$ objects are placed into $d$ boxes. If we divide $n$ by $d$, we can write
+\[
+n=qd+r,
+\qquad \text{where } 0\le r<d.
+\]
+
+This helps us read the pigeonhole principle more precisely:
+\begin{itemize}[leftmargin=*]
+  \item if $r=0$, then at least one box contains at least $q$ objects
+  \item if $r>0$, then at least one box contains at least $q+1$ objects.
+\end{itemize}
+
+In particular, the smallest number of objects that guarantees at least one box contains at least $q+1$ objects is
+\[
+qd+1.
+\]
+
+This point of view is especially useful in ``must happen'' questions, where the boxes may be teams, remainders after division, topic choices, or vote totals.
 
 \subsection{A Brief Extension: Gamma and Beta Functions}
 Although this booklet focuses on HSC Mathematics Extension~1, it is worth knowing that factorials and combinations have important extensions in higher mathematics.

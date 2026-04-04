@@ -513,6 +513,37 @@ Exponentiate both sides:
 \end{enumerate}
 \end{takeaways}
 
+\begin{remark}[How good is Stirling's approximation?]
+For reference, the table below compares Stirling's approximation
+\[
+n! \approx \sqrt{2\pi n}\left(\frac{n}{e}\right)^n
+\]
+with the exact value of $n!$ for $n=1,2,\dots,10$. The error shown is the absolute error
+\[
+\bigl|\,\sqrt{2\pi n}(n/e)^n-n!\,\bigr|.
+\]
+
+\begin{center}
+\small
+\begin{tabular}{c|r|r|r}
+$n$ & Stirling approximation & exact $n!$ & absolute error \\ \hline
+1 & 0.922137 & 1 & 0.077863 \\
+2 & 1.919004 & 2 & 0.080996 \\
+3 & 5.836210 & 6 & 0.163790 \\
+4 & 23.506175 & 24 & 0.493825 \\
+5 & 118.019168 & 120 & 1.980832 \\
+6 & 710.078185 & 720 & 9.921815 \\
+7 & 4980.395832 & 5040 & 59.604168 \\
+8 & 39902.395453 & 40320 & 417.604547 \\
+9 & 359536.872842 & 362880 & 3343.127158 \\
+10 & 3598695.618741 & 3628800 & 30104.381259
+\end{tabular}
+\normalsize
+\end{center}
+
+Although the absolute error grows, the \emph{relative} accuracy improves quickly, which is why Stirling's formula is so useful for large $n$.
+\end{remark}
+
 % Problem 8: Logarithmic Harmonic Bounds (Sample 32)
 \begin{problem}[The Logarithmic Bound]
 (i) Prove that for $x > 0$, 

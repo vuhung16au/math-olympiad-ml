@@ -57,6 +57,173 @@ That is,
 \item This identity is often called Vandermonde's identity.
 \end{takeaways}
 
+\begin{problem}[Grid paths and binomial identities]
+The diagram shows a $6\times 8$ grid. The aim is to walk from the point $A$ in the top left-hand corner to the point $B$ in the bottom right-hand corner by moving along the grid lines either downwards or to the right. Let
+\[
+C
+\]
+be the grid point that is $3$ steps to the right and $2$ steps down from $A$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    \draw[step=1cm, black] (0,0) grid (8,6);
+    \filldraw (0,6) circle (2pt);
+    \node[above left] at (0,6) {$A$};
+    \filldraw (8,0) circle (2pt);
+    \node[below right] at (8,0) {$B$};
+    \filldraw (3,4) circle (2pt);
+    \node[right] at (3.1,4) {$C$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+\item Find how many different routes are possible:
+\begin{enumerate}[label=\roman*)]
+\item without restriction
+\item if you must pass through $C$.
+\end{enumerate}
+
+\item Consider the diagonal of grid points
+\[
+(0,6),(1,5),(2,4),\dots,(6,0).
+\]
+Explain why every route from $A$ to $B$ passes through exactly one of these points, and hence prove that
+\[
+\binom{14}{6}
+=
+\binom{8}{0}\binom{6}{6}
++\binom{8}{1}\binom{6}{5}
++\cdots
++\binom{8}{6}\binom{6}{0}.
+\]
+
+\item Generalise part (b) to prove that
+\[
+\binom{m+n}{n}
+=
+\binom{m}{0}\binom{n}{n}
++\binom{m}{1}\binom{n}{n-1}
++\cdots
++\binom{m}{n}\binom{n}{0},
+\]
+for integers $m\ge n\ge 0$.
+
+\item By considering an $n\times n$ square grid and the corresponding diagonal, prove that
+\[
+\binom{2n}{n}
+=
+\binom{n}{0}^2+\binom{n}{1}^2+\cdots+\binom{n}{n}^2.
+\]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (a), count the number of right and down moves. For part (b), split each route at the unique point where it meets the diagonal. Parts (c) and (d) are the corresponding general forms of the same idea.
+\end{hint}
+
+\begin{solution}
+\textbf{a)(i)} A route from $A$ to $B$ uses $8$ right moves and $6$ down moves, so
+\[
+\binom{14}{6}=\binom{14}{8}.
+\]
+
+\textbf{a)(ii)} Split the route at $C$. From $A$ to $C$ we need $3$ right and $2$ down moves:
+\[
+\binom{5}{2}=10.
+\]
+From $C$ to $B$ we need $5$ right and $4$ down moves:
+\[
+\binom{9}{4}=126.
+\]
+Hence
+\[
+\binom{5}{2}\binom{9}{4}=10\cdot 126=1260.
+\]
+
+\textbf{b)} Every move decreases $x+y$ by $1$, so each route meets the diagonal
+\[
+x+y=6
+\]
+exactly once, at one of
+\[
+(0,6),(1,5),\dots,(6,0).
+\]
+If the meeting point is $(k,6-k)$, then the number of paths from $A$ to this point is
+\[
+\binom{6}{k}.
+\]
+From $(k,6-k)$ to $B$, the number of paths is
+\[
+\binom{8}{k}.
+\]
+So the number through this point is
+\[
+\binom{6}{k}\binom{8}{k}
+=
+\binom{8}{k}\binom{6}{6-k}.
+\]
+Summing over $k=0,1,\dots,6$ gives
+\[
+\binom{14}{6}
+=
+\binom{8}{0}\binom{6}{6}
++\binom{8}{1}\binom{6}{5}
++\cdots
++\binom{8}{6}\binom{6}{0}.
+\]
+
+\textbf{c)} In an $n\times m$ grid with $m\ge n$, the total number of routes is
+\[
+\binom{m+n}{n}.
+\]
+Split routes by the unique point where they meet
+\[
+x+y=n.
+\]
+If this occurs after $k$ right moves, then there are
+\[
+\binom{n}{k}
+\]
+ways to reach the diagonal point and
+\[
+\binom{m}{k}
+\]
+ways to complete the route. Hence
+\[
+\binom{m+n}{n}
+=
+\sum_{k=0}^{n}\binom{m}{k}\binom{n}{n-k}.
+\]
+
+\textbf{d)} For an $n\times n$ square grid,
+\[
+\binom{2n}{n}
+=
+\sum_{k=0}^{n}\binom{n}{k}\binom{n}{n-k}.
+\]
+Using the symmetry identity
+\[
+\binom{n}{n-k}=\binom{n}{k},
+\]
+we obtain
+\[
+\boxed{
+\binom{2n}{n}
+=
+\binom{n}{0}^2+\binom{n}{1}^2+\cdots+\binom{n}{n}^2.
+}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Grid-path counting gives a very natural combinatorial proof of Vandermonde-type identities.
+\item Splitting paths at a suitable diagonal point is a standard and powerful technique.
+\item The square-grid case leads directly to the classic identity
+\[
+\binom{2n}{n}=\sum_{k=0}^n \binom{n}{k}^2.
+\]
+\end{takeaways}
+
 \begin{problem}[A coefficient identity for $\binom{4n}{2n}$]
 \begin{enumerate}
   \item[(i)] Write down the coefficient of $x^{2n}$ in the binomial expansion of $(1+x)^{4n}$.
@@ -69,7 +236,8 @@ That is,
   \item[(iii)] It is known that
   \[
   x^{2n-k}(x+2)^{2n-k}
-  =\binom{2n-k}{0}2^{2n-k}x^{2n-k}
+  =
+  \binom{2n-k}{0}2^{2n-k}x^{2n-k}
   +\binom{2n-k}{1}2^{2n-k-1}x^{2n-k+1}
   +\cdots
   +\binom{2n-k}{2n-k}2^0x^{4n-2k}.
@@ -91,67 +259,48 @@ For part (ii), rewrite $1+x^2+2x$ as $1+x(x+2)$. For part (iii), compare the coe
 \begin{solution}
 \textbf{(i)} From the binomial theorem,
 \[
-(1+x)^{4n}=\sum_{r=0}^{4n}\binom{4n}{r}x^r,
+\left(1+x\right)^{4n}=\sum_{r=0}^{4n}\binom{4n}{r}x^r,
 \]
-so the coefficient of $x^{2n}$ is
+so the coefficient of $x^{2n}$ is $\binom{4n}{2n}$.
 \[
 \boxed{\binom{4n}{2n}}.
 \]
 
-\textbf{(ii)} Since
+\textbf{(ii)} Since $1+x^2+2x=1+x(x+2)$,
 \[
-1+x^2+2x=1+x(x+2),
-\]
-we have
-\[
-(1+x^2+2x)^{2n}=(1+x(x+2))^{2n}.
-\]
-Applying the binomial theorem gives
-\[
-(1+x(x+2))^{2n}
-=\sum_{k=0}^{2n}\binom{2n}{k}1^k[x(x+2)]^{2n-k}
+\left(1+x^2+2x\right)^{2n}
+=\left(1+x(x+2)\right)^{2n}
 =\sum_{k=0}^{2n}\binom{2n}{k}x^{2n-k}(x+2)^{2n-k}.
 \]
 
-\textbf{(iii)} Observe that
+\textbf{(iii)} Also,
 \[
 (1+x^2+2x)^{2n}=((1+x)^2)^{2n}=(1+x)^{4n},
 \]
-so its coefficient of $x^{2n}$ must be
-\[
-\binom{4n}{2n}.
-\]
+so its coefficient of $x^{2n}$ is again $\binom{4n}{2n}$.
 
-From part (ii), we now look for the coefficient of $x^{2n}$ in
+Now in
 \[
-\sum_{k=0}^{2n}\binom{2n}{k}x^{2n-k}(x+2)^{2n-k}.
+\sum_{k=0}^{2n}\binom{2n}{k}x^{2n-k}(x+2)^{2n-k},
 \]
-Using the given expansion, a typical term in
+a typical term from
 \[
 x^{2n-k}(x+2)^{2n-k}
 \]
-has the form
+is
 \[
 \binom{2n-k}{r}2^{2n-k-r}x^{2n-k+r}.
 \]
-To obtain $x^{2n}$, we need
+For an $x^{2n}$ term we need
 \[
 2n-k+r=2n,
+\qquad \text{so } r=k.
 \]
-so
+Hence the contribution from the $k$th summand is
 \[
-r=k.
+\binom{2n}{k}\binom{2n-k}{k}2^{2n-2k}.
 \]
-Therefore the coefficient of $x^{2n}$ from this part is
-\[
-\binom{2n-k}{k}2^{2n-2k}.
-\]
-Multiplying by the outer coefficient $\binom{2n}{k}$ gives the contribution
-\[
-2^{2n-2k}\binom{2n}{k}\binom{2n-k}{k}.
-\]
-
-This only makes sense when $k\le 2n-k$, so $k\le n$. Hence
+This is possible only when $k\le 2n-k$, i.e. $k\le n$. Therefore
 \[
 \binom{4n}{2n}
 =\sum_{k=0}^{n}2^{2n-2k}\binom{2n}{k}\binom{2n-k}{k}.
@@ -406,11 +555,12 @@ Consider the binomial expansion
 \]
 
 \begin{enumerate}[label=\roman*)]
-\item Let $x=-1$ and deduce that
+\item Deduce that
 \[
-\binom{n}{0}-\binom{n}{1}+\binom{n}{2}-\cdots+(-1)^n\binom{n}{n}=0
+\binom{2n}{0}+\binom{2n}{2}+\cdots+\binom{2n}{2n}
+=
+\binom{2n}{1}+\binom{2n}{3}+\cdots+\binom{2n}{2n-1}.
 \]
-for $n\ge 1$.
 
 \item Integrate both sides with respect to $x$ from $0$ to $1$, and deduce that
 \[
@@ -429,17 +579,25 @@ For each part, start from the same binomial expansion and apply the requested op
 \end{hint}
 
 \begin{solution}
-\textbf{i)} Substituting $x=-1$ into
+\textbf{i)} Apply the identity
 \[
-(1+x)^n=\sum_{r=0}^n \binom{n}{r}x^r
+(1+x)^{2n}=\sum_{r=0}^{2n} \binom{2n}{r}x^r
 \]
-gives
+and let $x=-1$. Then
 \[
-0^n=\sum_{r=0}^n \binom{n}{r}(-1)^r.
+\sum_{r=0}^{2n}\binom{2n}{r}(-1)^r=0.
 \]
-For $n\ge 1$, this becomes
+So
 \[
-\boxed{\binom{n}{0}-\binom{n}{1}+\binom{n}{2}-\cdots+(-1)^n\binom{n}{n}=0.}
+\binom{2n}{0}-\binom{2n}{1}+\binom{2n}{2}-\binom{2n}{3}+\cdots+\binom{2n}{2n}=0.
+\]
+Hence the sum of the even-index terms equals the sum of the odd-index terms:
+\[
+\boxed{
+\binom{2n}{0}+\binom{2n}{2}+\cdots+\binom{2n}{2n}
+=
+\binom{2n}{1}+\binom{2n}{3}+\cdots+\binom{2n}{2n-1}.
+}
 \]
 
 \textbf{ii)} Integrating from $0$ to $1$,
@@ -680,3 +838,623 @@ space.''\\
 \normalfont Douglas Adams
 \end{center}
 \end{remark}
+
+\begin{problem}[Polynomial derivatives and a power-series expansion]
+Show that if
+\[
+f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0
+\]
+is any polynomial, then
+\[
+f^{(k)}(0)=
+\begin{cases}
+a_k\,k!, & \text{for } k=0,1,2,\dots,n,\\
+0, & \text{for } k>n.
+\end{cases}
+\]
+
+Hence explain why
+\[
+f(x)=\frac{f(0)}{0!}+\frac{f'(0)}{1!}x+\frac{f''(0)}{2!}x^2+\frac{f^{(3)}(0)}{3!}x^3+\cdots.
+\]
+
+\noindent\textit{Enrichment note:} This problem is outside the HSC Mathematics Extension~1 syllabus, but it is a very useful first step toward power series and Taylor series.
+\end{problem}
+
+\begin{hint}
+Differentiate a general term $a_r x^r$ exactly $k$ times, then substitute $x=0$. Most terms vanish.
+\end{hint}
+
+\begin{solution}
+Write
+\[
+f(x)=\sum_{r=0}^{n} a_r x^r.
+\]
+If we differentiate $k$ times, then
+\[
+\frac{d^k}{dx^k}(a_r x^r)=
+\begin{cases}
+a_r\,r(r-1)\cdots (r-k+1)x^{r-k}, & r\ge k,\\
+0, & r<k.
+\end{cases}
+\]
+
+Now substitute $x=0$. Every term with $r>k$ still contains a factor of $x$ and becomes $0$. The only surviving term is the one with $r=k$, giving
+\[
+f^{(k)}(0)=a_k\,k!
+\]
+for $k=0,1,2,\dots,n$.
+
+If $k>n$, every term has already vanished after enough differentiations, so
+\[
+f^{(k)}(0)=0.
+\]
+
+Therefore
+\[
+a_k=\frac{f^{(k)}(0)}{k!},
+\]
+so the polynomial can be rewritten as
+\[
+f(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n
+=\frac{f(0)}{0!}+\frac{f'(0)}{1!}x+\frac{f''(0)}{2!}x^2+\cdots+\frac{f^{(n)}(0)}{n!}x^n.
+\]
+Since $f$ is a polynomial, this series has only finitely many nonzero terms.
+\end{solution}
+
+\begin{takeaways}
+\item Repeated derivatives at $x=0$ recover the coefficients of a polynomial.
+\item The factor of $k!$ appears because differentiating $x^k$ exactly $k$ times gives $k!$.
+\item This is the polynomial version of the idea behind Taylor series, so it is a natural enrichment topic beyond the HSC course.
+\end{takeaways}
+
+\begin{problem}[Binary strings and a binomial identity]
+Computing is based on binary strings, which are sequences of $0$s and $1$s, such as $00101$ and $1001110$.
+
+The problem in this question is to find the number $N$ of binary strings that contain exactly $a$ zeros and at most $b$ ones, where $a$ and $b$ are whole numbers. We will count such strings in two different ways, and hence prove an identity.
+
+\begin{enumerate}[label=\alph*)]
+\item Using ${}^nC_r$ notation, find how many binary strings with exactly $a$ zeros contain:
+\begin{enumerate}[label=\roman*)]
+\item no $1$s
+\item one $1$
+\item two $1$s
+\item three $1$s
+\item $r$ $1$s.
+\end{enumerate}
+
+\item Hence prove that
+\[
+N=\binom{a}{0}+\binom{a+1}{1}+\binom{a+2}{2}+\cdots+\binom{a+b}{b}.
+\]
+
+\item Let $S$ be a binary string consisting of $a$ zeros and $r$ ones, where $r\le b$. Extend $S$ to a longer binary string $S01\cdots 1$ by adding $0$ on the right, and then adding $b-r$ ones. How many $0$s and $1$s are there in the resulting string, and what is its total length?
+
+\item Describe the inverse process by which a string of $(a+1)$ zeros and $b$ ones can be converted to a string of $a$ zeros and at most $b$ ones, and show that the two processes are one-to-one correspondences.
+
+\item Hence prove that
+\[
+N=\binom{a+b+1}{b}.
+\]
+
+\item Deduce that
+\[
+\binom{a}{0}+\binom{a+1}{1}+\binom{a+2}{2}+\cdots+\binom{a+b}{b}
+=
+\binom{a+b+1}{b}.
+\]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (a), if a string has exactly $a$ zeros and $r$ ones, then its length is $a+r$, and you only need to choose where the $r$ ones go. For parts (c) and (d), build a bijection between the two families of strings.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} If a binary string has exactly $a$ zeros and exactly $r$ ones, then its total length is
+\[
+a+r.
+\]
+We may choose the positions of the $r$ ones (or equivalently the $a$ zeros), so the number of such strings is
+\[
+\binom{a+r}{r}.
+\]
+Hence:
+\[
+\text{i) } \binom{a}{0},\qquad
+\text{ii) } \binom{a+1}{1},\qquad
+\text{iii) } \binom{a+2}{2},\qquad
+\text{iv) } \binom{a+3}{3},\qquad
+\text{v) } \binom{a+r}{r}.
+\]
+
+\textbf{b)} Since the number of ones can be $0,1,2,\dots,b$, summing these cases gives
+\[
+N=\binom{a}{0}+\binom{a+1}{1}+\binom{a+2}{2}+\cdots+\binom{a+b}{b}.
+\]
+
+\textbf{c)} Start with a binary string $S$ containing $a$ zeros and $r$ ones, where $r\le b$.
+Append one extra $0$, then append $(b-r)$ ones. The resulting string has
+\[
+a+1
+\]
+zeros and
+\[
+r+(b-r)=b
+\]
+ones, so its total length is
+\[
+a+b+1.
+\]
+
+\textbf{d)} Conversely, given a binary string with $(a+1)$ zeros and $b$ ones, locate the last zero in the string and delete it together with all the ones to its right.
+
+What remains is a binary string with exactly $a$ zeros and at most $b$ ones.
+
+This process is the inverse of the construction in part (c), so the two sets of strings are in one-to-one correspondence.
+
+\textbf{e)} Therefore, the number $N$ is equal to the number of binary strings with $(a+1)$ zeros and $b$ ones.
+Such strings have length
+\[
+a+b+1,
+\]
+and we choose the positions of the $b$ ones, so
+\[
+N=\binom{a+b+1}{b}.
+\]
+
+\textbf{f)} Equating the two expressions for $N$ gives
+\[
+\boxed{
+\binom{a}{0}+\binom{a+1}{1}+\binom{a+2}{2}+\cdots+\binom{a+b}{b}
+=
+\binom{a+b+1}{b}.
+}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item This is a nice example of proving an identity by counting the same set in two different ways.
+\item Strings with fixed numbers of zeros and ones are counted by choosing positions.
+\item Bijections are powerful: if two families of objects can be matched one-to-one, then they have the same size.
+\end{takeaways}
+
+\begin{problem}[Derangements]
+A \emph{derangement} of $n$ distinct letters is a permutation of them so that no letter appears in its original position. For example, DABC is a derangement of ABCD, but DACB is not. Denote the number of derangements of $n$ letters by $D(n)$.
+
+\begin{enumerate}[label=\alph*)]
+\item By listing all the derangements of A, AB, ABC and ABCD, find the values of $D(1)$, $D(2)$, $D(3)$ and $D(4)$.
+
+\item Suppose that we have formed a derangement of the five letters ABCDE. Let the last letter in the derangement be $X$, and exchange $X$ with E. This puts E back into its original position. Either $X$ is now also in its original position so that three letters are away from their original positions, or $X$ is not in its original position so that four letters are away from their original positions. Hence explain why
+\[
+D(5)=4D(4)+4D(3).
+\]
+
+\item Use this formula to evaluate $D(5)$. Then apply the corresponding arguments and formulae to evaluate $D(6)$, $D(7)$ and $D(8)$.
+
+\item Explain how this can be generalised to
+\[
+D(n)=n!\left(\frac{1}{0!}-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\cdots+\frac{(-1)^n}{n!}\right).
+\]
+
+\item The alternating sum in part (d) approaches $\dfrac1e$ as $n\to\infty$. Explain what this means for the ratio
+\[
+\frac{D(n)}{n!}
+\]
+and give both a combinatorial and a probabilistic interpretation of this result.
+\end{enumerate}
+
+\noindent\textit{Enrichment note:} Derangements are a classic higher-level counting topic. They are not part of the standard HSC Mathematics Extension~1 syllabus, but they are an excellent example of recurrence relations in combinatorics.
+\end{problem}
+
+\begin{hint}
+For part (a), list small cases directly. For parts (b) and (c), fix where E goes, then split into the two cases described in the question. For part (d), think about inclusion-exclusion: start from all permutations and subtract those with one or more fixed points.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} By direct listing:
+\[
+D(1)=0,\qquad D(2)=1,\qquad D(3)=2,\qquad D(4)=9.
+\]
+
+\textbf{b)} In a derangement of ABCDE, the letter E cannot stay in the last position, so it has $4$ possible positions. Let the last letter be $X$, and swap E with $X$.
+Either $X$ lands in its own position, giving $D(3)$ possibilities, or it does not, giving $D(4)$ possibilities. Hence
+\[
+D(5)=4D(4)+4D(3).
+\]
+
+\textbf{c)} Using $D(4)=9$ and $D(3)=2$,
+\[
+D(5)=4\cdot 9+4\cdot 2=44.
+\]
+
+More generally,
+\[
+D(n)=(n-1)\bigl(D(n-1)+D(n-2)\bigr).
+\]
+Thus
+
+% \[
+% D(6)=5(D(5)+D(4))=5(44+9)=265,
+% \]
+% \[
+% D(7)=6(D(6)+D(5))=6(265+44)=1854,
+% \]
+% \[
+% D(8)=7(D(7)+D(6))=7(1854+265)=14833.
+% \]
+\[
+\boxed{D(5)=44,\quad D(6)=265,\quad D(7)=1854,\quad D(8)=14833.}
+\]
+
+\textbf{d)} Let $A_i$ be the set of permutations in which the $i$th letter stays fixed. Then
+\[
+|A_i|=(n-1)!,
+\qquad
+|A_i\cap A_j|=(n-2)!,
+\]
+and in general fixing $k$ specified letters leaves
+\[
+(n-k)!
+\]
+permutations. Hence, by inclusion-exclusion,
+\[
+D(n)=n!-\binom{n}{1}(n-1)!+\binom{n}{2}(n-2)!-\cdots+(-1)^n\binom{n}{n}(n-n)!.
+\]
+Using $\binom{n}{k}(n-k)!=\dfrac{n!}{k!}$, we can conclude that,
+
+% \[
+% D(n)=n!\left(1-\frac1{1!}+\frac1{2!}-\frac1{3!}+\cdots+\frac{(-1)^n}{n!}\right),
+% \]
+% that is,
+\[
+\boxed{
+D(n)=n!\left(\frac{1}{0!}-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\cdots+\frac{(-1)^n}{n!}\right).
+}
+\]
+
+\textbf{e)} Dividing by $n!$ gives
+\[
+\frac{D(n)}{n!}
+=
+\frac{1}{0!}-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+\cdots+\frac{(-1)^n}{n!}.
+\]
+As $n\to\infty$, the right-hand side approaches $\dfrac1e$, so
+\[
+\boxed{\frac{D(n)}{n!}\to \sum_{n=0}^{\infty} \frac{(-1)^n}{n!} = \frac1e.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item \textit{Combinatorially,} about a fraction $\dfrac1e$ of all permutations are derangements for large $n$.
+\item \textit{Probabilistically,} a random permutation has no fixed points with probability approaching $\dfrac1e$.
+\item A derangement is a permutation with no fixed points.
+\item Small cases are often best handled by direct listing before a general pattern appears.
+\item This problem is a good example of a recurrence relation arising from careful casework.
+\item Inclusion-exclusion gives a closed formula for $D(n)$ by counting permutations with fixed points.
+\item The ratio $\dfrac{D(n)}{n!}$ approaching $\dfrac1e$ means derangements make up about $\dfrac1e$ of all permutations when $n$ is large.
+
+\item The Taylor series for $e^x$ is
+\[
+e^{x}= \sum_{n=0}^{\infty} \frac{x^n}{n!}.
+\]
+
+\end{takeaways}
+
+\begin{problem}[A monochromatic triangle on six vertices]
+A regular octahedron has $6$ vertices. Label them $A_0,A_1,\dots,A_5$. Each pair of vertices is joined by a rod, and each rod is coloured either yellow or blue.
+
+\begin{enumerate}[label=\alph*)]
+\item Explain why there are $15$ rods.
+\item Each set of three vertices, together with the rods joining them, forms a triangle. Explain why there are $20$ such triangles.
+\item Explain why there must be at least one triangle whose rods all have the same colour.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+    \coordinate (A0) at (0,2.2);
+    \coordinate (A1) at (-1.8,0.9);
+    \coordinate (A2) at (1.8,0.9);
+    \coordinate (A3) at (-1.8,-0.9);
+    \coordinate (A4) at (1.8,-0.9);
+    \coordinate (A5) at (0,-2.2);
+
+    % All rods
+    \draw[yellow!70!orange, line width=1.1pt] (A0) -- (A1);
+    \draw[blue!70!black,   line width=1.1pt] (A0) -- (A2);
+    \draw[yellow!70!orange, line width=1.1pt] (A0) -- (A3);
+    \draw[blue!70!black,   line width=1.1pt] (A0) -- (A4);
+    \draw[yellow!70!orange, line width=1.1pt] (A0) -- (A5);
+
+    \draw[blue!70!black,   line width=1.1pt] (A1) -- (A2);
+    \draw[yellow!70!orange, line width=1.1pt] (A1) -- (A3);
+    \draw[blue!70!black,   line width=1.1pt] (A1) -- (A4);
+    \draw[yellow!70!orange, line width=1.1pt] (A1) -- (A5);
+
+    \draw[yellow!70!orange, line width=1.1pt] (A2) -- (A3);
+    \draw[blue!70!black,   line width=1.1pt] (A2) -- (A4);
+    \draw[yellow!70!orange, line width=1.1pt] (A2) -- (A5);
+
+    \draw[blue!70!black,   line width=1.1pt] (A3) -- (A4);
+    \draw[yellow!70!orange, line width=1.1pt] (A3) -- (A5);
+    \draw[blue!70!black,   line width=1.1pt] (A4) -- (A5);
+
+    % Vertices
+    \foreach \P/\Lbl in {A0/A_0,A1/A_1,A2/A_2,A3/A_3,A4/A_4,A5/A_5}{
+        \filldraw[black] (\P) circle (1.8pt);
+        \node[fill=white, inner sep=1pt] at ($(\P)+(0.25,0.22)$) {$\Lbl$};
+    }
+\end{tikzpicture}
+\end{center}
+
+\noindent\textit{Enrichment note:} This is a small and beautiful example of a Ramsey-type idea. It is beyond the standard HSC Mathematics Extension~1 syllabus, but it is a great illustration of how counting and the pigeonhole principle can force structure.
+\end{problem}
+
+\begin{hint}
+For part (c), focus on one vertex, say $A_0$, and look at the $5$ rods from that vertex. Use the pigeonhole principle on their colours.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} A rod joins a pair of distinct vertices. Since there are $6$ vertices, the number of rods is
+\[
+\binom{6}{2}=15.
+\]
+
+\textbf{b)} Any choice of $3$ vertices determines a triangle. So the number of triangles is
+\[
+\binom{6}{3}=20.
+\]
+
+\textbf{c)} Focus on the vertex $A_0$. It is joined to the other $5$ vertices by $5$ rods, and each rod is coloured either yellow or blue.
+
+By the pigeonhole principle, at least $3$ of these $5$ rods must have the same colour. Without loss of generality, suppose
+\[
+A_0A_1,\ A_0A_2,\ A_0A_3
+\]
+are all yellow.
+
+Now consider the triangle formed by $A_1,A_2,A_3$.
+\begin{itemize}[leftmargin=*]
+  \item If one of the rods $A_1A_2$, $A_1A_3$, or $A_2A_3$ is yellow, then together with $A_0$ it forms a yellow triangle.
+  \item If none of those rods is yellow, then all three are blue, so $A_1A_2A_3$ is a blue triangle.
+\end{itemize}
+
+In either case, there is at least one triangle whose rods all have the same colour.
+\end{solution}
+
+\begin{takeaways}
+\item This is a classic example of combining counting with the pigeonhole principle.
+\item Looking at all edges from one vertex is the key step that forces a repeated colour.
+\item This is the first nontrivial case of a famous Ramsey-theory fact: in any two-colouring of the edges of $K_6$, there is a monochromatic triangle.
+\end{takeaways}
+
+\begin{problem}[A more general form of the binomial theorem]
+The classical binomial theorem expands
+\[
+(1+x)^n
+\]
+when $n$ is a non-negative integer. In more advanced mathematics, a similar expansion can be used when $n$ is negative, fractional, or any real number, provided we interpret the right-hand side as an infinite power series.
+
+\begin{enumerate}[label=\alph*)]
+\item Show that for a non-negative integer $n$, the binomial expansion can be written as
+\[
+(1+x)^n
+=
+1+nx+\frac{n(n-1)}{2!}x^2+\frac{n(n-1)(n-2)}{3!}x^3+\cdots.
+\]
+
+\item Assuming the same pattern continues for more general values of $n$, generate the power-series expansions of:
+\begin{enumerate}[label=\roman*)]
+\item $\dfrac{1}{1-x}$
+\item $\dfrac{1}{(1-x)^2}$
+\item $\dfrac{1}{(1+x)^2}$
+\item $\sqrt{1+x}$.
+\end{enumerate}
+
+\item Verify, using your expansions in parts (b)(i) and (b)(ii), that
+\[
+\frac{d}{dx}\left(\frac{1}{1-x}\right)=\frac{1}{(1-x)^2},
+\]
+assuming that the power series may be differentiated term-by-term.
+\end{enumerate}
+
+\noindent\textit{Enrichment note:} This problem is outside the HSC Mathematics Extension~1 syllabus. It connects the classical binomial theorem to infinite power series, Taylor series, and later to Gamma-function ideas that allow binomial coefficients to be extended beyond whole numbers.
+\end{problem}
+
+\begin{hint}
+In part (a), rewrite the usual binomial coefficients in factorial form. In part (b), substitute values such as $n=-1$, $n=-2$, and $n=\tfrac12$ into the general pattern.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} For a non-negative integer $n$, the usual binomial theorem gives
+\[
+(1+x)^n=\sum_{r=0}^{n}\binom{n}{r}x^r.
+\]
+Now
+\[
+\binom{n}{r}=\frac{n!}{r!(n-r)!}
+=\frac{n(n-1)(n-2)\cdots (n-r+1)}{r!},
+\]
+so the expansion may be written as
+\[
+(1+x)^n
+=
+1+nx+\frac{n(n-1)}{2!}x^2+\frac{n(n-1)(n-2)}{3!}x^3+\cdots.
+\]
+
+\textbf{b)(i)} Take $n=-1$:
+\[
+(1-x)^{-1}=1+x+x^2+x^3+\cdots.
+\]
+So
+\[
+\boxed{\frac{1}{1-x}=1+x+x^2+x^3+\cdots.}
+\]
+
+\textbf{b)(ii)} Take $n=-2$:
+\[
+(1-x)^{-2}=1+2x+3x^2+4x^3+\cdots.
+\]
+So
+\[
+\boxed{\frac{1}{(1-x)^2}=1+2x+3x^2+4x^3+\cdots.}
+\]
+
+\textbf{b)(iii)} Replace $x$ by $-x$ in part (ii):
+\[
+\boxed{\frac{1}{(1+x)^2}=1-2x+3x^2-4x^3+\cdots.}
+\]
+
+\textbf{b)(iv)} Take $n=\tfrac12$:
+\[
+(1+x)^{1/2}
+=1+\frac12x+\frac{\frac12(-\frac12)}{2!}x^2+\frac{\frac12(-\frac12)(-\frac32)}{3!}x^3+\cdots.
+\]
+So
+\[
+\boxed{
+\sqrt{1+x}
+=1+\frac12x-\frac18x^2+\frac1{16}x^3-\frac{5}{128}x^4+\cdots
+}.
+\]
+
+\textbf{c)} From part (b)(i),
+\[
+\frac{1}{1-x}=1+x+x^2+x^3+\cdots.
+\]
+Differentiating term-by-term gives
+\[
+\frac{d}{dx}\left(\frac{1}{1-x}\right)=1+2x+3x^2+4x^3+\cdots.
+\]
+But this is exactly the expansion found in part (b)(ii), so
+\[
+\boxed{
+\frac{d}{dx}\left(\frac{1}{1-x}\right)=\frac{1}{(1-x)^2}.
+}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item The usual finite binomial theorem is the beginning of a much more general power-series expansion.
+\item For any real number $n$, and for $|x|<1$,
+\[
+(1+x)^n
+=
+\sum_{r=0}^{\infty}\binom{n}{r}x^r
+=
+1+nx+\frac{n(n-1)}{2!}x^2+\frac{n(n-1)(n-2)}{3!}x^3+\cdots.
+\]
+\item When $n$ is not a non-negative integer, the binomial expansion usually becomes an infinite Taylor-style series rather than a finite polynomial.
+\item The generalized coefficient may be written using Gamma functions:
+\[
+\binom{n}{r}
+=
+\frac{\Gamma(n+1)}{\Gamma(r+1)\Gamma(n-r+1)},
+\]
+which extends the factorial formula to non-integer values of $n$.
+\item This topic is outside HSC Mathematics Extension~1, but it is excellent enrichment for students interested in university mathematics.
+\end{takeaways}
+
+\begin{problem}[Isomers --- a possible computing project]
+Because of branching, it is difficult to count the number of possible hydrocarbons with, say, $20$ carbon atoms.
+
+For example, for butane $\mathrm{C}_4\mathrm{H}_{10}$ there are two carbon chains, and for pentane $\mathrm{C}_5\mathrm{H}_{12}$ there are three carbon chains.
+
+Investigate the number of possible carbon chains for hydrocarbons with increasing numbers of carbon atoms.
+
+\begin{enumerate}[label=\alph*)]
+\item Explain why this is a counting problem about \emph{connected graphs} with no cycles, where each carbon atom has degree at most $4$.
+\item Find the numbers of possible carbon chains for $n=1,2,3,4,5,6,7$ carbon atoms.
+\item If you can write code, design a program to generate all possible carbon chains for a given $n$ and remove duplicates up to relabelling.
+\end{enumerate}
+
+\noindent\textit{Enrichment note:} This is a hard problem. Writing code is strongly recommended. It is outside the HSC Mathematics Extension~1 syllabus, but it is an excellent project linking combinatorics, graph theory, chemistry, and computing.
+\end{problem}
+
+\begin{hint}
+Model each carbon chain as a tree: vertices are carbon atoms and edges are carbon-carbon bonds. Two drawings represent the same chain if they are the same up to relabelling of the vertices.
+\end{hint}
+
+\begin{solution}
+\textbf{a)} A carbon chain can be modelled by a graph in which:
+\begin{itemize}[leftmargin=*]
+  \item each vertex represents a carbon atom
+  \item each edge represents a carbon-carbon bond.
+\end{itemize}
+
+For an alkane chain, the carbon skeleton is connected and has no cycles, so it is a tree. Also, each carbon atom can make at most $4$ bonds, so each vertex has degree at most $4$.
+
+\textbf{b)} The numbers of possible carbon chains for small $n$ are:
+\[
+\begin{array}{c|ccccccc}
+n & 1 & 2 & 3 & 4 & 5 & 6 & 7\\ \hline
+\text{number of chains} & 1 & 1 & 1 & 2 & 3 & 5 & 9
+\end{array}
+\]
+
+These are the counts of non-isomorphic trees on $n$ vertices with maximum degree at most $4$. For small $n$, the degree restriction does not yet exclude any tree.
+
+\textbf{c)} A practical computational approach is:
+\begin{itemize}[leftmargin=*]
+  \item generate trees on $n$ vertices by adding one new vertex at a time
+  \item reject any graph with a vertex of degree more than $4$
+  \item identify graphs that are the same up to relabelling by converting them to a canonical form
+  \item count the distinct canonical forms.
+\end{itemize}
+\end{solution}
+
+\begin{remark}[Python idea]
+The following Python snippet generates non-isomorphic trees on $n$ vertices by adding one new vertex at a time and keeping one canonical representative of each isomorphism class. It is suitable for small values such as $n\le 7$.
+\end{remark}
+
+\begin{lstlisting}[language=Python,numbers=left,basicstyle=\ttfamily\small,keywordstyle=\color{bookpurple}\bfseries,commentstyle=\color{bookred},stringstyle=\color{blue!60!black},showstringspaces=false,breaklines=true]
+from itertools import permutations
+
+
+def canonical_form(adj):
+    n = len(adj)
+    best = None
+    for perm in permutations(range(n)):
+        bits = []
+        for i in range(n):
+            for j in range(i + 1, n):
+                bits.append("1" if perm[j] in adj[perm[i]] else "0")
+        code = "".join(bits)
+        if best is None or code < best:
+            best = code
+    return best
+
+
+def generate_trees(n):
+    if n == 1:
+        return [tuple([frozenset()])]
+
+    previous = generate_trees(n - 1)
+    seen = {}
+
+    for tree in previous:
+        base = [set(neighbours) for neighbours in tree]
+        for v in range(n - 1):
+            if len(base[v]) >= 4:
+                continue
+
+            graph = [set(neighbours) for neighbours in base] + [set()]
+            graph[v].add(n - 1)
+            graph[n - 1].add(v)
+
+            key = canonical_form(graph)
+            seen[key] = tuple(frozenset(x) for x in graph)
+
+    return list(seen.values())
+
+
+for n in range(1, 8):
+    print(n, len(generate_trees(n)))
+\end{lstlisting}
+
+\begin{takeaways}
+\item This problem is better viewed as a graph-theory and computing project than as a routine exam question.
+\item \textbf{Combinatorial explosion} means the number of possible structures grows extremely quickly as $n$ increases, so direct listing soon becomes impractical.
+\item Because of this explosion, writing code is often the most realistic way to investigate the problem.
+\item This is outside the HSC Mathematics Extension~1 syllabus, but it is an excellent example of how combinatorics connects to chemistry and computer science.
+\end{takeaways}

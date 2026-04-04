@@ -29,6 +29,67 @@ Hence
 \item Powers of $\sqrt{2}$ alternate between integer multiples and surd multiples.
 \end{takeaways}
 
+\begin{problem}[When is a conjugate surd sum rational?]
+For what integer values of $n$ is
+\[
+(1-\sqrt{2})^n+(1+\sqrt{2})^n
+\]
+rational?
+\end{problem}
+
+\begin{hint}
+Expand both powers using the binomial theorem and compare the terms involving odd and even powers of $\sqrt{2}$. Also think about what happens for negative integers.
+\end{hint}
+
+\begin{solution}
+For a non-negative integer $n$, expand both terms by the binomial theorem:
+\[
+(1+\sqrt{2})^n=\binom{n}{0}+\binom{n}{1}\sqrt{2}+\binom{n}{2}(\sqrt{2})^2+\cdots,
+\]
+\[
+(1-\sqrt{2})^n=\binom{n}{0}-\binom{n}{1}\sqrt{2}+\binom{n}{2}(\sqrt{2})^2-\cdots.
+\]
+
+When we add these two expansions, all terms involving odd powers of $\sqrt{2}$ cancel, while the even-power terms remain. Since
+\[
+(\sqrt{2})^{2k}=2^k,
+\]
+all remaining terms are rational.
+
+Therefore, for every non-negative integer $n$,
+\[
+(1-\sqrt{2})^n+(1+\sqrt{2})^n
+\]
+is rational.
+
+Now consider negative integers. Since
+\[
+(1+\sqrt{2})(1-\sqrt{2})=1-2=-1,
+\]
+we have
+\[
+1-\sqrt{2}=-\frac{1}{1+\sqrt{2}}.
+\]
+So for any positive integer $n$,
+\[
+(1-\sqrt{2})^{-n}+(1+\sqrt{2})^{-n}
+=(-1)^n(1+\sqrt{2})^n+(-1)^n(1-\sqrt{2})^n
+=(-1)^n\Big((1+\sqrt{2})^n+(1-\sqrt{2})^n\Big),
+\]
+which is also rational.
+
+Hence the expression is rational for
+\[
+\boxed{\text{all integers } n.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Conjugate surds often become much simpler when added or multiplied.
+\item In binomial expansions of $(a+b)^n$ and $(a-b)^n$, the odd-power terms cancel when the expansions are added.
+\item Here that cancellation shows the expression is rational for every integer $n$.
+\end{takeaways}
+
 \begin{problem}[PINs with numbers and letters]
 The number of possible different PINs with a combination of $4$ numbers and $2$ letters is:
 \begin{enumerate}[label=\Alph*.]
@@ -198,4 +259,172 @@ Each position has $2$ choices, so use the multiplication principle.
 \begin{takeaways}
 \item Some counting problems grow exponentially, even when the rule looks simple.
 \item This is one reason efficient counting methods matter.
+\end{takeaways}
+
+\begin{problem}[Repeated derivatives of $\frac{1}{x}$]
+If
+\[
+f(x)=\frac{1}{x},
+\]
+find:
+\begin{enumerate}[label=\roman*)]
+\item $f'(x)$
+\item $f''(x)$
+\item $f^{(5)}(x)$
+\item $f^{(n)}(x)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Write
+\[
+f(x)=x^{-1}
+\]
+and differentiate a few times to spot the pattern.
+\end{hint}
+
+\begin{solution}
+Using the power rule,
+\[
+f(x)=x^{-1}.
+\]
+
+\textbf{i)}
+\[
+f'(x)=-x^{-2}=-\frac{1}{x^2}.
+\]
+
+\textbf{ii)}
+\[
+f''(x)=2x^{-3}=\frac{2}{x^3}.
+\]
+
+\textbf{iii)}
+Continuing the pattern,
+\[
+f^{(3)}(x)=-\frac{6}{x^4},\qquad
+f^{(4)}(x)=\frac{24}{x^5},
+\]
+so
+\[
+f^{(5)}(x)=-\frac{120}{x^6}.
+\]
+
+\textbf{iv)}
+Each differentiation introduces:
+\begin{itemize}[leftmargin=*]
+  \item one extra factor in the numerator
+  \item one extra power of $x$ in the denominator
+  \item alternating signs.
+\end{itemize}
+
+Therefore
+\[
+\boxed{
+f^{(n)}(x)=(-1)^n\frac{n!}{x^{n+1}}
+}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Repeated differentiation often reveals a pattern after the first few derivatives.
+\item Here the coefficients are factorials: $1,1,2,6,24,120,\dots$.
+\item This is more of a calculus enrichment problem than a core combinatorics problem, but it connects nicely to factorial notation.
+\end{takeaways}
+
+\begin{problem}[Using Pascal's triangle to differentiate $x^4$]
+\begin{enumerate}[label=\roman*)]
+\item Use Pascal's triangle to expand
+\[
+(x+h)^4.
+\]
+
+\item If
+\[
+f(x)=x^4,
+\]
+simplify
+\[
+f(x+h)-f(x).
+\]
+
+\item Hence use the definition
+\[
+f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}
+\]
+to differentiate $x^4$.
+
+\item For the general case
+\[
+f(x)=x^n,
+\]
+write down the expansion of $(x+h)^n$, and hence show that
+\[
+\frac{d}{dx}(x^n)=nx^{n-1}.
+\]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use row $4$ of Pascal's triangle for the specific case, then use the binomial theorem for $(x+h)^n$. In both cases, factor out $h$ before taking the limit.
+\end{hint}
+
+\begin{solution}
+\textbf{i)} Using Pascal's triangle or the binomial theorem,
+\[
+(x+h)^4=x^4+4x^3h+6x^2h^2+4xh^3+h^4.
+\]
+
+\textbf{ii)} Since $f(x)=x^4$,
+\[
+f(x+h)-f(x)
+=(x+h)^4-x^4
+=4x^3h+6x^2h^2+4xh^3+h^4.
+\]
+
+\textbf{iii)} Therefore,
+\begin{align*}
+f'(x)
+&=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to 0}\frac{4x^3h+6x^2h^2+4xh^3+h^4}{h}\\
+&=\lim_{h\to 0}\left(4x^3+6x^2h+4xh^2+h^3\right)\\
+&=4x^3.
+\end{align*}
+
+Hence
+\[
+\boxed{f'(x)=4x^3.}
+\]
+
+\textbf{iv)} In general, the binomial theorem gives
+\[
+(x+h)^n=x^n+\binom{n}{1}x^{n-1}h+\binom{n}{2}x^{n-2}h^2+\cdots+h^n.
+\]
+So if
+\[
+f(x)=x^n,
+\]
+then
+\[
+f(x+h)-f(x)=nx^{n-1}h+\binom{n}{2}x^{n-2}h^2+\cdots+h^n.
+\]
+Therefore,
+\begin{align*}
+f'(x)
+&=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\\
+&=\lim_{h\to 0}\left(nx^{n-1}+\binom{n}{2}x^{n-2}h+\cdots+h^{n-1}\right)\\
+&=nx^{n-1}.
+\end{align*}
+
+Hence
+\[
+\boxed{\frac{d}{dx}(x^n)=nx^{n-1}.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Pascal's triangle gives the coefficients in expansions such as $(x+h)^4$.
+\item In the derivative definition, the key step is to factor out $h$ before taking the limit.
+\item The same idea works in general: the binomial theorem for $(x+h)^n$ leads to the power rule $\dfrac{d}{dx}(x^n)=nx^{n-1}$.
+\item This is a calculus enrichment problem, but it shows one way algebra and Pascal's triangle support differentiation.
 \end{takeaways}
