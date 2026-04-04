@@ -127,49 +127,29 @@ For part (a), count the number of right and down moves. For part (b), split each
 \binom{14}{6}=\binom{14}{8}.
 \]
 
-\textbf{a)(ii)} Split the route at $C$. From $A$ to $C$ we need $3$ right and $2$ down moves:
+\textbf{a)(ii)} Split the route at $C$. Then
 \[
-\binom{5}{2}=10.
+\#(A\to C)=\binom{5}{2}=10,
+\qquad
+\#(C\to B)=\binom{9}{4}=126,
 \]
-From $C$ to $B$ we need $5$ right and $4$ down moves:
 \[
-\binom{9}{4}=126.
-\]
-Hence
-\[
-\binom{5}{2}\binom{9}{4}=10\cdot 126=1260.
+\therefore\ \#(A\to C\to B)=\binom{5}{2}\binom{9}{4}=1260.
 \]
 
-\textbf{b)} Every move decreases $x+y$ by $1$, so each route meets the diagonal
-\[
-x+y=6
-\]
-exactly once, at one of
+\textbf{b)} Every move decreases $x+y$ by $1$, so each route meets $x+y=6$ exactly once, at one of
 \[
 (0,6),(1,5),\dots,(6,0).
 \]
-If the meeting point is $(k,6-k)$, then the number of paths from $A$ to this point is
 \[
-\binom{6}{k}.
+\text{At }(k,6-k):\quad \#(A\to(k,6-k))=\binom{6}{k},\qquad \#((k,6-k)\to B)=\binom{8}{k}.
 \]
-From $(k,6-k)$ to $B$, the number of paths is
-\[
-\binom{8}{k}.
-\]
-So the number through this point is
-\[
-\binom{6}{k}\binom{8}{k}
-=
-\binom{8}{k}\binom{6}{6-k}.
-\]
-Summing over $k=0,1,\dots,6$ gives
 \[
 \binom{14}{6}
 =
-\binom{8}{0}\binom{6}{6}
-+\binom{8}{1}\binom{6}{5}
-+\cdots
-+\binom{8}{6}\binom{6}{0}.
+\sum_{k=0}^{6}\binom{6}{k}\binom{8}{k}
+=
+\sum_{k=0}^{6}\binom{8}{k}\binom{6}{6-k}.
 \]
 
 \textbf{c)} In an $n\times m$ grid with $m\ge n$, the total number of routes is
@@ -180,15 +160,12 @@ Split routes by the unique point where they meet
 \[
 x+y=n.
 \]
-If this occurs after $k$ right moves, then there are
+If this happens after $k$ right moves, then
 \[
-\binom{n}{k}
+\#(\text{first part})=\binom{n}{k},
+\qquad
+\#(\text{second part})=\binom{m}{k}.
 \]
-ways to reach the diagonal point and
-\[
-\binom{m}{k}
-\]
-ways to complete the route. Hence
 \[
 \binom{m+n}{n}
 =
@@ -905,6 +882,10 @@ Since $f$ is a polynomial, this series has only finitely many nonzero terms.
 \begin{takeaways}
 \item Repeated derivatives at $x=0$ recover the coefficients of a polynomial.
 \item The factor of $k!$ appears because differentiating $x^k$ exactly $k$ times gives $k!$.
+\item For any function $f(x)$ that can be expressed as a power series, the same idea gives the Taylor series at $0$:
+\[
+f(x)=\frac{f(0)}{0!}+\frac{f'(0)}{1!}x+\frac{f''(0)}{2!}x^2+\cdots.
+\]
 \item This is the polynomial version of the idea behind Taylor series, so it is a natural enrichment topic beyond the HSC course.
 \end{takeaways}
 
@@ -1344,7 +1325,13 @@ But this is exactly the expansion found in part (b)(ii), so
 =
 1+nx+\frac{n(n-1)}{2!}x^2+\frac{n(n-1)(n-2)}{3!}x^3+\cdots.
 \]
-\item When $n$ is not a non-negative integer, the binomial expansion usually becomes an infinite Taylor-style series rather than a finite polynomial.
+\item When $n$ is not a non-negative integer, the binomial expansion usually becomes an infinite Taylor-style series rather than a finite polynomial. For any real value of $n$,
+\[
+(1+x)^n = \sum_{r=0}^{\infty} \frac{f^{(r)}(0)}{r!} x^r,
+\qquad \text{where } f(x)=(1+x)^n.
+\]
+Refer to the problem ``Polynomial derivatives and a power-series expansion'' for the idea of finding these coefficients using derivatives at $0$.
+
 \item The generalized coefficient may be written using Gamma functions:
 \[
 \binom{n}{r}
