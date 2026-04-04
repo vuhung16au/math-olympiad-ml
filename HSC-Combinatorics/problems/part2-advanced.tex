@@ -57,6 +57,113 @@ That is,
 \item This identity is often called Vandermonde's identity.
 \end{takeaways}
 
+\begin{problem}[A coefficient identity for $\binom{4n}{2n}$]
+\begin{enumerate}
+  \item[(i)] Write down the coefficient of $x^{2n}$ in the binomial expansion of $(1+x)^{4n}$.
+
+  \item[(ii)] Show that
+  \[
+  (1+x^2+2x)^{2n}=\sum_{k=0}^{2n}\binom{2n}{k}x^{2n-k}(x+2)^{2n-k}.
+  \]
+
+  \item[(iii)] It is known that
+  \[
+  x^{2n-k}(x+2)^{2n-k}
+  =\binom{2n-k}{0}2^{2n-k}x^{2n-k}
+  +\binom{2n-k}{1}2^{2n-k-1}x^{2n-k+1}
+  +\cdots
+  +\binom{2n-k}{2n-k}2^0x^{4n-2k}.
+  \]
+  Do \emph{not} prove this.
+
+  Show that
+  \[
+  \binom{4n}{2n}
+  =\sum_{k=0}^{n}2^{2n-2k}\binom{2n}{k}\binom{2n-k}{k}.
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (ii), rewrite $1+x^2+2x$ as $1+x(x+2)$. For part (iii), compare the coefficient of $x^{2n}$ on both sides and identify which term in the inner expansion produces that power.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} From the binomial theorem,
+\[
+(1+x)^{4n}=\sum_{r=0}^{4n}\binom{4n}{r}x^r,
+\]
+so the coefficient of $x^{2n}$ is
+\[
+\boxed{\binom{4n}{2n}}.
+\]
+
+\textbf{(ii)} Since
+\[
+1+x^2+2x=1+x(x+2),
+\]
+we have
+\[
+(1+x^2+2x)^{2n}=(1+x(x+2))^{2n}.
+\]
+Applying the binomial theorem gives
+\[
+(1+x(x+2))^{2n}
+=\sum_{k=0}^{2n}\binom{2n}{k}1^k[x(x+2)]^{2n-k}
+=\sum_{k=0}^{2n}\binom{2n}{k}x^{2n-k}(x+2)^{2n-k}.
+\]
+
+\textbf{(iii)} Observe that
+\[
+(1+x^2+2x)^{2n}=((1+x)^2)^{2n}=(1+x)^{4n},
+\]
+so its coefficient of $x^{2n}$ must be
+\[
+\binom{4n}{2n}.
+\]
+
+From part (ii), we now look for the coefficient of $x^{2n}$ in
+\[
+\sum_{k=0}^{2n}\binom{2n}{k}x^{2n-k}(x+2)^{2n-k}.
+\]
+Using the given expansion, a typical term in
+\[
+x^{2n-k}(x+2)^{2n-k}
+\]
+has the form
+\[
+\binom{2n-k}{r}2^{2n-k-r}x^{2n-k+r}.
+\]
+To obtain $x^{2n}$, we need
+\[
+2n-k+r=2n,
+\]
+so
+\[
+r=k.
+\]
+Therefore the coefficient of $x^{2n}$ from this part is
+\[
+\binom{2n-k}{k}2^{2n-2k}.
+\]
+Multiplying by the outer coefficient $\binom{2n}{k}$ gives the contribution
+\[
+2^{2n-2k}\binom{2n}{k}\binom{2n-k}{k}.
+\]
+
+This only makes sense when $k\le 2n-k$, so $k\le n$. Hence
+\[
+\binom{4n}{2n}
+=\sum_{k=0}^{n}2^{2n-2k}\binom{2n}{k}\binom{2n-k}{k}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item This is another example of proving an identity by expanding the same expression in two different ways.
+\item The key step is to compare coefficients of a carefully chosen power of $x$.
+\item Bounds matter: the upper limit drops from $2n$ to $n$ because terms with $k>n$ cannot contribute to the coefficient of $x^{2n}$.
+\end{takeaways}
+
 \begin{problem}[Repeated draws of green counters]
 A bag contains counters, some of which are green.
 
