@@ -57,6 +57,7 @@ make open
 - The booklet combines the natural Extension 1 sequence of `Probability` and `Discrete probability distributions`.
 - The progression is concept-driven rather than page-by-page textbook imitation.
 - Binomial distribution is treated as the capstone discrete model for repeated independent trials.
+- Recent official HSC Mathematics Extension 1 papers from 2020 to 2025 have informed several of the newer exam-style probability questions in the booklet.
 
 ## Licensing
 

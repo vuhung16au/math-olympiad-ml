@@ -16,11 +16,78 @@ When outcomes are equally likely,
 P(E)=\frac{\text{number of favourable outcomes}}{\text{number of possible outcomes}}.
 \]
 
+\subsection{Set Language Refresher}
+
+Probability uses the language of sets, so it is worth recalling a few basic terms.
+
+\textbf{Subsets.} If every element of a set $A$ also belongs to a set $B$, then $A$ is a \textbf{subset} of $B$, written
+\[
+A\subseteq B.
+\]
+In probability, an event is always a subset of the sample space.
+
+\textbf{The universal set and complement.} The \textbf{universal set} is the set containing all objects under discussion. In probability, this role is usually played by the sample space $S$. If $A$ is a set, then its \textbf{complement} is the set of elements in the universal set that are not in $A$. It may be written as $\overline{A}$ or $A^c$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  \draw[thick] (0,0) rectangle (7,4);
+  \draw[thick, fill=softivory] (3.7,2) ellipse (1.9 and 1.1);
+  \node at (3.3,2.35) {$A$};
+  \node at (6.25,0.35) {$S$};
+  \node at (0.95,3.1) {$\overline{A}$ or $A^c$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Intersection and union.} For two sets $A$ and $B$:
+\begin{itemize}[leftmargin=*]
+  \item $A\cap B$ is the \textbf{intersection}, meaning the elements common to both sets
+  \item $A\cup B$ is the \textbf{union}, meaning the elements in $A$ or $B$ or both
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  \draw[thick] (0,0) rectangle (8,4.3);
+  \begin{scope}
+    \clip (2.9,2.1) circle (1.3);
+    \fill[softivory] (5.1,2.1) circle (1.3);
+  \end{scope}
+  \fill[bookred!18] (2.9,2.1) circle (1.3);
+  \fill[bookpurple!18] (5.1,2.1) circle (1.3);
+  \draw[thick] (2.9,2.1) circle (1.3);
+  \draw[thick] (5.1,2.1) circle (1.3);
+  \node at (2.1,2.1) {$A$};
+  \node at (5.9,2.1) {$B$};
+  \node at (4,2.1) {$A\cap B$};
+  \node at (7.2,0.45) {$S$};
+\end{tikzpicture}
+\end{center}
+
+In a Venn diagram, the union is the whole region covered by the two circles, while the intersection is the overlap in the middle.
+
 \subsection{Complements, Unions, and Intersections}
 
-If $A$ is an event, then its complement $A^c$ means ``not $A$''.
+If $A$ is an event, then its complement means ``not $A$''. It may be written as $A^c$ or $\overline{A}$.
 \[
 P(A^c)=1-P(A).
+\]
+
+\textbf{Complementary events and the word ``not''.} In probability questions, the word ``not'' often signals a complement. If $E$ is an event, then the complement of $E$ is the event ``$E$ does not occur''. It is written as $E^c$ or sometimes $\overline{E}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \draw[thick] (0,0) rectangle (7,4);
+  \draw[thick, fill=softivory] (3.8,2) ellipse (1.8 and 1.1);
+  \node at (3.2,2.4) {$E$};
+  \node at (6.2,0.4) {$S$};
+  \node at (0.8,3.2) {$E^c$};
+\end{tikzpicture}
+\end{center}
+
+In the diagram, the rectangle is the sample space $S$. The oval is the event $E$. Everything \emph{outside} the oval but still inside the rectangle represents $E^c$, meaning ``not $E$''.
+
+\textit{Example.} If $E$ is ``rolling a $6$ on a fair die'', then $E^c$ is ``not rolling a $6$'', so
+\[
+P(E^c)=1-P(E)=1-\frac16=\frac56.
 \]
 
 For two events $A$ and $B$:
@@ -211,6 +278,29 @@ The standard deviation is
 
 \textit{Transition remark.} This same story continues in continuous probability. Expected value still represents a long-run average, and variance still measures spread, but the formulas move from sums such as $\sum xP(X=x)$ to integrals over a probability density function. So continuous random variables are best thought of as the next version of the same ideas, not a completely different topic.
 
+\subsection{Enrichment Note: A First Glimpse of Measure Theory}
+
+\textit{Syllabus note.} This subsection is enrichment only. Measure theory is \textbf{outside} the HSC Mathematics Extension 1 and Extension 2 syllabuses.
+
+At a very high level, measure theory gives a systematic way to assign ``size'' to sets. In elementary probability, that ``size'' becomes probability after normalising so that the whole sample space has total size $1$.
+
+For a \textbf{discrete} random variable with values $x=0,1,2,\dots$, the measurement is a sum of point masses:
+\[
+P(X\in A)=\sum_{x\in A} P(X=x).
+\]
+
+For a single \textbf{continuous} random variable $X$, the measurement is described by a density function, and probabilities are found by integration:
+\[
+P(a\le X\le b)=\int_a^b f(x)\,dx.
+\]
+
+For \textbf{two variables} $X$ and $Y$, probability is measured over regions in the plane. This is why some geometric probability questions can be solved using areas:
+\[
+P\big((X,Y)\in R\big)=\iint_R f(x,y)\,dA.
+\]
+
+The same idea extends to higher dimensions $\mathbb{R}^n$, where probability is measured over more complicated regions. So the discrete, one-variable continuous, and area-based probability ideas in this booklet can all be viewed as early examples of one larger measuring framework.
+
 \subsection{A Worked Variance Example}
 
 Suppose
@@ -263,6 +353,61 @@ The expected number of heads is
 \[
 E(X)=np=4(0.6)=2.4.
 \]
+
+\subsection{Sample Proportion as a Random Variable}
+
+Suppose a Bernoulli trial has probability of success $p$, and it is repeated $n$ times independently. If $X$ is the number of successes, then
+\[
+X\sim \mathrm{Bin}(n,p).
+\]
+
+The \textbf{sample proportion} of successes is
+\[
+\hat p=\frac{X}{n}.
+\]
+
+This is also a random variable. Its mean is
+\[
+E(\hat p)=p,
+\]
+and its variance is
+\[
+\mathrm{Var}(\hat p)=\frac{p(1-p)}{n}.
+\]
+
+\textit{Interpretation note.} The sample proportion fluctuates from sample to sample, but on average it centres around the true population proportion $p$.
+
+\subsection{Normal Approximation to the Binomial}
+
+When $n$ is large and the binomial distribution is not too skewed, a binomial random variable can often be approximated by a normal distribution.
+
+If
+\[
+X\sim \mathrm{Bin}(n,p),
+\]
+then a standard approximation is
+\[
+X \approx N\big(np,\ np(1-p)\big).
+\]
+
+Equivalently, for the sample proportion,
+\[
+\hat p \approx N\left(p,\ \frac{p(1-p)}{n}\right).
+\]
+
+This lets us use standard normal methods to estimate probabilities that would otherwise require many separate binomial terms.
+
+\textit{Continuity-correction note.} When approximating a discrete variable such as $X$ by a continuous normal model, it is often better to shift endpoints by $0.5$. For example,
+\[
+P(55\le X\le 65)
+\]
+is often approximated by
+\[
+P(54.5\le Y\le 65.5),
+\]
+where $Y$ is the corresponding normal random variable.
+
+\textit{Validity warning.} A normal approximation may be poor if the sample size is small or if the success probability is very close to $0$ or $1$. In that case the binomial distribution can be too skewed for the normal curve to be reliable.
 
 \subsection{Common Language Triggers}
 

@@ -130,6 +130,187 @@ So
 \]
 \end{solution}
 
+\begin{problem}[Distribution table from draws without replacement]
+A bag contains six balls marked
+\[
+0,1,2,3,4,5.
+\]
+Three balls are drawn in succession, without replacement, and the number of odd-numbered balls drawn is recorded. Let $X$ be the number of odd-numbered balls chosen.
+
+Draw up a probability distribution table for $X$.
+\end{problem}
+
+\begin{hint}
+There are $3$ odd-numbered balls and $3$ even-numbered balls. Use combinations:
+\[
+P(X=r)=\frac{\binom{3}{r}\binom{3}{3-r}}{\binom{6}{3}}.
+\]
+\end{hint}
+
+\begin{solution}
+The odd-numbered balls are
+\[
+1,3,5,
+\]
+and the even-numbered balls are
+\[
+0,2,4.
+\]
+
+Since $3$ balls are drawn, the possible values of $X$ are
+\[
+0,1,2,3.
+\]
+
+There are
+\[
+\binom63=20
+\]
+equally likely selections of $3$ balls.
+
+\textbf{When $X=0$:} all $3$ chosen balls are even, so
+\[
+P(X=0)=\frac{\binom30\binom33}{\binom63}=\frac1{20}.
+\]
+
+\textbf{When $X=1$:} choose $1$ odd and $2$ even, so
+\[
+P(X=1)=\frac{\binom31\binom32}{\binom63}=\frac9{20}.
+\]
+
+\textbf{When $X=2$:} choose $2$ odd and $1$ even, so
+\[
+P(X=2)=\frac{\binom32\binom31}{\binom63}=\frac9{20}.
+\]
+
+\textbf{When $X=3$:} all $3$ chosen balls are odd, so
+\[
+P(X=3)=\frac{\binom33\binom30}{\binom63}=\frac1{20}.
+\]
+
+Therefore the probability distribution table is
+\[
+\begin{array}{c|cccc}
+x & 0 & 1 & 2 & 3 \\
+\hline
+P(X=x) & \frac1{20} & \frac9{20} & \frac9{20} & \frac1{20}
+\end{array}
+\]
+\end{solution}
+
+\begin{problem}[A first binomial distribution table]
+A fair coin is tossed $4$ times and the number of heads is recorded. Construct a table showing the probability distribution of $X$, the number of heads, and calculate $E(X)$.
+
+\medskip
+\noindent\textit{Note.} This is an example of a binomial distribution: a multi-stage experiment with identical stages, where at each stage there are two possible outcomes. Here there are $4$ stages because the coin is tossed $4$ times, and each stage has two possible outcomes, heads or tails.
+\end{problem}
+
+\begin{hint}
+For a fair coin,
+\[
+X\sim \mathrm{Bin}\left(4,\frac12\right).
+\]
+Use
+\[
+P(X=r)=\binom{4}{r}\left(\frac12\right)^4.
+\]
+\end{hint}
+
+\begin{solution}
+Since the coin is fair and tossed $4$ times independently,
+\[
+X\sim \mathrm{Bin}\left(4,\frac12\right).
+\]
+
+So for $r=0,1,2,3,4$,
+\[
+P(X=r)=\binom{4}{r}\left(\frac12\right)^r\left(\frac12\right)^{4-r}
+=\binom{4}{r}\left(\frac12\right)^4
+=\frac{\binom{4}{r}}{16}.
+\]
+
+Therefore
+\[
+\begin{array}{c|ccccc}
+x & 0 & 1 & 2 & 3 & 4 \\
+\hline
+P(X=x) & \frac1{16} & \frac4{16} & \frac6{16} & \frac4{16} & \frac1{16}
+\end{array}
+\]
+
+Now
+\[
+E(X)=0\left(\frac1{16}\right)+1\left(\frac4{16}\right)+2\left(\frac6{16}\right)+3\left(\frac4{16}\right)+4\left(\frac1{16}\right).
+\]
+So
+\[
+E(X)=\frac{0+4+12+12+4}{16}=\frac{32}{16}=2.
+\]
+
+Hence the expected number of heads is
+\[
+\boxed{2}.
+\]
+\end{solution}
+
+\begin{problem}[A first hypergeometric distribution table]
+Two cards are drawn in succession from a standard deck, without replacement, and the number of hearts is recorded. Construct a table showing the probability distribution of $X$, the number of hearts drawn, and calculate $E(X)$.
+
+\medskip
+\noindent\textit{Note.} This is an example of a hypergeometric distribution: a multi-stage experiment with two possible outcomes at each stage, where selection is made without replacement. Here there are $2$ stages because two cards are drawn.
+\end{problem}
+
+\begin{hint}
+The possible values are $0$, $1$, and $2$. Use combinations, or count the three cases directly.
+\end{hint}
+
+\begin{solution}
+There are $13$ hearts and $39$ non-hearts in a standard deck of $52$ cards.
+
+The possible values of $X$ are
+\[
+0,1,2.
+\]
+
+Using combinations,
+\[
+P(X=0)=\frac{\binom{39}{2}}{\binom{52}{2}}=\frac{741}{1326}=\frac{247}{442},
+\]
+\[
+P(X=1)=\frac{\binom{13}{1}\binom{39}{1}}{\binom{52}{2}}=\frac{507}{1326}=\frac{169}{442},
+\]
+and
+\[
+P(X=2)=\frac{\binom{13}{2}}{\binom{52}{2}}=\frac{78}{1326}=\frac{13}{221}.
+\]
+
+Therefore the probability distribution table is
+\[
+\begin{array}{c|ccc}
+x & 0 & 1 & 2 \\
+\hline
+P(X=x) & \frac{247}{442} & \frac{169}{442} & \frac{13}{221}
+\end{array}
+\]
+
+Now
+\[
+E(X)=0\left(\frac{247}{442}\right)+1\left(\frac{169}{442}\right)+2\left(\frac{13}{221}\right).
+\]
+So
+\[
+E(X)=\frac{169}{442}+\frac{26}{221}
+=\frac{169}{442}+\frac{52}{442}
+=\frac{221}{442}
+=\frac12.
+\]
+
+Hence the expected number of hearts is
+\[
+\boxed{\frac12}.
+\]
+\end{solution}
+
 \begin{problem}[At least two heads]
 A biased coin lands heads with probability $0.4$. It is tossed $4$ times. Find the probability of at least two heads.
 \end{problem}
@@ -188,5 +369,184 @@ X\sim \mathrm{Bin}\left(9,\frac12\right),
 so
 \[
 E(X)=np=9\cdot \frac12=\frac92=4.5.
+\]
+\end{solution}
+
+\begin{problem}[Fair coin tossed $n$ times]
+If a fair coin is tossed $n$ times, where $n>1$, find the probability of obtaining:
+\begin{enumerate}[(i)]
+  \item $n$ tails,
+  \item at least two tails,
+  \item no more than half of the tosses as tails.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Let $X$ be the number of tails, so $X\sim \mathrm{Bin}\left(n,\frac12\right)$. For part (iii), use symmetry about the middle and treat odd and even $n$ separately.
+\end{hint}
+
+\begin{solution}
+Let
+\[
+X\sim \mathrm{Bin}\left(n,\frac12\right),
+\]
+where $X$ is the number of tails.
+
+\textbf{(i)} Getting $n$ tails means every toss is a tail, so
+\[
+P(X=n)=\left(\frac12\right)^n.
+\]
+
+\textbf{(ii)} ``At least two tails'' means $X\ge 2$, so
+\[
+P(X\ge 2)=1-[P(X=0)+P(X=1)].
+\]
+Now
+\[
+P(X=0)=\left(\frac12\right)^n
+\]
+and
+\[
+P(X=1)=\binom n1 \left(\frac12\right)^n = \frac{n}{2^n}.
+\]
+Hence
+\[
+P(X\ge 2)=1-\frac{1+n}{2^n}.
+\]
+
+\textbf{(iii)} We want
+\[
+P\left(X\le \frac n2\right).
+\]
+Because the coin is fair, the binomial distribution is symmetric.
+
+If $n$ is odd, there is no middle value, so exactly half the outcomes lie on each side:
+\[
+P\left(X\le \frac n2\right)=\frac12.
+\]
+
+If $n$ is even, the middle value $X=\frac n2$ must be shared equally between the two sides, so
+\[
+P\left(X\le \frac n2\right)=\frac12+\frac12 P\left(X=\frac n2\right).
+\]
+Therefore
+\[
+P\left(X\le \frac n2\right)=\frac12+\frac12\binom{n}{n/2}\left(\frac12\right)^n
+=\frac12+\frac{1}{2^{n+1}}\binom{n}{n/2}.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2024-style: Driver test]
+To pass a driver knowledge test, a learner must answer at least $9$ out of $10$ questions correctly.
+
+A learner already knows the answers to $5$ questions and guesses randomly on the remaining $5$ questions. Each guessed question has $4$ options, with exactly one correct answer.
+
+Find the probability that the learner passes the test.
+\end{problem}
+
+\begin{hint}
+The learner already has $5$ marks, so passing means getting at least $4$ of the $5$ guessed questions correct.
+\end{hint}
+
+\begin{solution}
+Let $X$ be the number of guessed questions answered correctly. Then
+\[
+X\sim \mathrm{Bin}\left(5,\frac14\right).
+\]
+
+To pass, the learner needs at least $4$ correct guesses:
+\[
+P(\text{pass})=P(X\ge 4)=P(X=4)+P(X=5).
+\]
+
+\[
+P(X=4)=\binom54\left(\frac14\right)^4\left(\frac34\right)
+=5\cdot \frac1{256}\cdot \frac34=\frac{15}{1024},
+\]
+and
+\[
+P(X=5)=\left(\frac14\right)^5=\frac1{1024}.
+\]
+
+So
+\[
+P(\text{pass})=\frac{15}{1024}+\frac1{1024}=\frac{16}{1024}=\frac1{64}.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2024-style: Same-metal coins]
+A bag contains $7$ silver coins and $3$ bronze coins. Two coins are drawn without replacement. Find the probability that both coins are made of the same metal.
+\end{problem}
+
+\begin{hint}
+Add the probabilities of both silver and both bronze.
+\end{hint}
+
+\begin{solution}
+\[
+P(\text{same metal})=P(\text{both silver})+P(\text{both bronze}).
+\]
+
+\[
+P(\text{both silver})=\frac7{10}\cdot\frac69=\frac{42}{90},
+\qquad
+P(\text{both bronze})=\frac3{10}\cdot\frac29=\frac6{90}.
+\]
+
+Therefore
+\[
+P(\text{same metal})=\frac{42}{90}+\frac6{90}=\frac{48}{90}=\frac{8}{15}.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2023-style: Mixed equipment probabilities]
+A gym has $5$ treadmills and $4$ rowing machines. On average, each treadmill is in use with probability $0.65$ and each rowing machine is in use with probability $0.40$, independently of the others.
+\begin{enumerate}[(a)]
+  \item Find an expression for the probability that exactly $3$ treadmills are in use.
+  \item Find an expression for the probability that exactly $3$ treadmills are in use and no rowing machines are in use.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use a binomial expression for the treadmills, then multiply by the rowing-machine condition.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} For the $5$ treadmills,
+\[
+P(\text{exactly 3 in use})=\binom53(0.65)^3(0.35)^2.
+\]
+
+\textbf{(b)} The probability that no rowing machines are in use is
+\[
+(0.60)^4.
+\]
+So the required expression is
+\[
+\binom53(0.65)^3(0.35)^2(0.60)^4.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2021-style: A Bernoulli complement]
+The random variable $X$ represents the number of successes in $10$ independent Bernoulli trials, where the probability of success in each trial is $0.9$.
+
+If
+\[
+r=P(X\ge 1),
+\]
+determine whether $r$ is greater than, equal to, or less than $0.9$.
+\end{problem}
+
+\begin{hint}
+Use the complement $P(X\ge 1)=1-P(X=0)$.
+\end{hint}
+
+\begin{solution}
+\[
+r=P(X\ge 1)=1-P(X=0)=1-(0.1)^{10}.
+\]
+Since $(0.1)^{10}$ is extremely small,
+\[
+r=1-(0.1)^{10}>0.9.
 \]
 \end{solution}

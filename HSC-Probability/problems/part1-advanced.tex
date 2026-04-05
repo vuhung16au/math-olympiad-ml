@@ -1,7 +1,7 @@
 \begin{problem}[A probability table with unknown constant]
-A discrete random variable $X$ has probability distribution
+A discrete random variable $X$ can take only the values $1,2,3,4$, with probability distribution
 \[
-P(X=0)=k,\qquad P(X=1)=2k,\qquad P(X=2)=3k,\qquad P(X=3)=4k.
+P(X=1)=k,\qquad P(X=2)=2k,\qquad P(X=3)=3k,\qquad P(X=4)=4k.
 \]
 \begin{enumerate}[(a)]
   \item Find $k$.
@@ -22,26 +22,26 @@ k=\frac1{10}.
 
 \textbf{(b)} Then
 \[
-P(X=0)=\frac1{10},\quad
-P(X=1)=\frac2{10},\quad
-P(X=2)=\frac3{10},\quad
-P(X=3)=\frac4{10}.
+P(X=1)=\frac1{10},\quad
+P(X=2)=\frac2{10},\quad
+P(X=3)=\frac3{10},\quad
+P(X=4)=\frac4{10}.
 \]
 
 Now
 \[
-E(X)=0\cdot \frac1{10}+1\cdot \frac2{10}+2\cdot \frac3{10}+3\cdot \frac4{10}
-=\frac{0+2+6+12}{10}=2.
+E(X)=1\cdot \frac1{10}+2\cdot \frac2{10}+3\cdot \frac3{10}+4\cdot \frac4{10}
+=\frac{1+4+9+16}{10}=3.
 \]
 
 \textbf{(c)} Next,
 \[
-E(X^2)=0^2\cdot \frac1{10}+1^2\cdot \frac2{10}+2^2\cdot \frac3{10}+3^2\cdot \frac4{10}
-=\frac{0+2+12+36}{10}=5.
+E(X^2)=1^2\cdot \frac1{10}+2^2\cdot \frac2{10}+3^2\cdot \frac3{10}+4^2\cdot \frac4{10}
+=\frac{1+8+27+64}{10}=10.
 \]
 Therefore,
 \[
-\mathrm{Var}(X)=E(X^2)-[E(X)]^2=5-2^2=1.
+\mathrm{Var}(X)=E(X^2)-[E(X)]^2=10-3^2=1.
 \]
 \end{solution}
 
@@ -204,4 +204,124 @@ Therefore Game B has the higher expected profit.
 \item Separate payout from profit when a game has an entry cost.
 \item Expected value gives a fair comparison over many plays.
 \item A game can have an attractive top prize and still have poor expected profit.
+\end{takeaways}
+
+\begin{problem}[HSC 2020-style: Biased coin and normal approximation]
+When a particular biased coin is tossed, the probability of obtaining a head is
+\[
+\frac35.
+\]
+This coin is tossed $100$ times. Let $X$ be the number of heads obtained.
+\begin{enumerate}[(a)]
+  \item Find $E(X)$.
+  \item By finding $\mathrm{Var}(X)$, show that the standard deviation of $X$ is approximately $5$.
+  \item Use a normal approximation to estimate
+  \[
+  P(55\le X\le 65).
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Since each toss is independent and the probability of a head is constant,
+\[
+X\sim \mathrm{Bin}\left(100,\frac35\right).
+\]
+
+\textbf{(a)} The expected value is
+\[
+E(X)=np=100\cdot \frac35=60.
+\]
+
+\textbf{(b)} The variance is
+\[
+\mathrm{Var}(X)=np(1-p)=100\cdot \frac35\cdot \frac25=24.
+\]
+Therefore
+\[
+\sigma=\sqrt{24}\approx 4.90,
+\]
+which is approximately $5$.
+
+\textbf{(c)} We use the normal approximation
+\[
+X \approx N(60,24).
+\]
+Applying a continuity correction,
+\[
+P(55\le X\le 65)\approx P(54.5\le Y\le 65.5),
+\]
+where $Y\sim N(60,24)$.
+
+So
+\[
+P(55\le X\le 65)\approx
+P\left(\frac{54.5-60}{\sqrt{24}}\le Z\le \frac{65.5-60}{\sqrt{24}}\right).
+\]
+
+Since
+\[
+\frac{5.5}{\sqrt{24}}\approx 1.12,
+\]
+we get
+\[
+P(55\le X\le 65)\approx P(-1.12\le Z\le 1.12).
+\]
+
+Using symmetry,
+\[
+P(-1.12\le Z\le 1.12)\approx 2(0.8686)-1=0.7372.
+\]
+
+Hence the required probability is approximately
+\[
+\boxed{0.74}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Large binomial distributions are often approximated well by normal distributions.
+\item Mean and variance provide the centre and spread of the approximating normal model.
+\item Continuity correction improves the match between a discrete count and a continuous curve.
+\end{takeaways}
+
+\begin{problem}[HSC 2022-style: When a normal approximation may fail]
+A manufacturer produces chocolate bars. Each bar has probability $0.3$ of being underweight, independently of the others.
+
+Sixteen bars are selected at random.
+\begin{enumerate}[(a)]
+  \item Let $X$ be the number of underweight bars. State the distribution of $X$.
+  \item A student suggests using a normal approximation to estimate
+  \[
+  P(X\ge 8).
+  \]
+  Explain why this approximation may be unreliable.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} Since there are $16$ independent trials, each with two outcomes and constant success probability $0.3$,
+\[
+X\sim \mathrm{Bin}(16,0.3).
+\]
+
+\textbf{(b)} A normal approximation may be unreliable because the sample size is not especially large and the distribution is not close to symmetric. Here
+\[
+np=16(0.3)=4.8,
+\qquad
+n(1-p)=16(0.7)=11.2.
+\]
+The value of $np$ is fairly small, so the binomial distribution is still noticeably skewed rather than well modelled by a symmetric normal curve.
+
+Therefore the approximation to
+\[
+P(X\ge 8)
+\]
+may be poor, and an exact binomial calculation would be safer.
+\end{solution}
+
+\begin{takeaways}
+\item Before using a normal approximation, check whether the binomial model is sufficiently well behaved.
+\item Small or skewed binomial distributions are not always approximated well by a normal curve.
+\item HSC questions may ask you to judge the model, not just calculate with it.
 \end{takeaways}

@@ -60,6 +60,82 @@ E(X)=1(0.4)+2(0.1)+4(0.5)=0.4+0.2+2=2.6.
 \]
 \end{solution}
 
+\begin{problem}[Hannah and the snack boxes]
+Hannah may choose one item from a snack shop. The shop has:
+\begin{itemize}[leftmargin=*]
+  \item $6$ boxes of muffins, each muffin costing \$3.20
+  \item $5$ boxes of cookies, each cookie costing \$2.40
+  \item $4$ boxes of juice boxes, each juice box costing \$2.80
+\end{itemize}
+
+Hannah chooses a box at random, then takes one item from that box. Find the expected cost of the item she takes.
+\end{problem}
+
+\begin{hint}
+First write down the probability of choosing each type of box. Then use a weighted average.
+\end{hint}
+
+\begin{solution}
+There are
+\[
+6+5+4=15
+\]
+boxes in total.
+
+So
+\[
+P(\text{muffin})=\frac6{15},\qquad
+P(\text{cookie})=\frac5{15},\qquad
+P(\text{juice box})=\frac4{15}.
+\]
+
+Let $X$ be the cost of the item chosen. Then
+\[
+E(X)=3.20\left(\frac6{15}\right)+2.40\left(\frac5{15}\right)+2.80\left(\frac4{15}\right).
+\]
+
+\[
+E(X)=1.28+0.80+\frac{11.2}{15}=1.28+0.80+0.746\overline{6}=2.826\overline{6}.
+\]
+
+Therefore the expected cost is
+\[
+\$2.83 \text{ (approximately)}.
+\]
+\end{solution}
+
+\begin{problem}[Reading probabilities from a table]
+A random variable $X$ has the following probability distribution:
+\[
+\begin{array}{c|cccccc}
+x & 0 & 1 & 2 & 3 & 4 & 5 \\
+\hline
+P(X=x) & 0.1 & 0.2 & 0.3 & 0.25 & 0.05 & 0.1
+\end{array}
+\]
+Find:
+\begin{enumerate}[(i)]
+  \item $P(X \text{ is odd})$,
+  \item $P(X\ge 2)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Add the probabilities of all outcomes that satisfy each condition.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} The odd values are $1$, $3$, and $5$, so
+\[
+P(X \text{ is odd})=P(X=1)+P(X=3)+P(X=5)=0.2+0.25+0.1=0.55.
+\]
+
+\textbf{(ii)} The values at least $2$ are $2$, $3$, $4$, and $5$, so
+\[
+P(X\ge 2)=P(X=2)+P(X=3)+P(X=4)+P(X=5)=0.3+0.25+0.05+0.1=0.7.
+\]
+\end{solution}
+
 \begin{problem}[Complement of an impossible pair]
 Two fair dice are rolled. Find the probability that the sum is not $7$.
 \end{problem}
@@ -132,5 +208,71 @@ Either count blue directly or use the complement of red.
 \begin{solution}
 \[
 P(\text{not red})=1-\frac37=\frac47.
+\]
+\end{solution}
+
+\begin{problem}[A letter from MIRANDA]
+A letter is chosen at random from the word \texttt{MIRANDA}. Find the probability that it is:
+\begin{enumerate}[(i)]
+  \item an A,
+  \item a vowel,
+  \item a letter of the word \texttt{HACKING}.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+There are $7$ letters in total. Count favourable letters carefully, including repeated letters when they appear in the word.
+\end{hint}
+
+\begin{solution}
+The word \texttt{MIRANDA} has $7$ letters:
+\[
+\texttt{M, I, R, A, N, D, A}.
+\]
+
+\textbf{(i)} There are $2$ A's, so
+\[
+P(\text{A})=\frac27.
+\]
+
+\textbf{(ii)} The vowels are \texttt{I, A, A}, so there are $3$ vowels. Thus
+\[
+P(\text{vowel})=\frac37.
+\]
+
+\textbf{(iii)} The letters in \texttt{HACKING} are
+\[
+\texttt{H, A, C, K, I, N, G}.
+\]
+Among the letters of \texttt{MIRANDA}, the ones that belong to \texttt{HACKING} are
+\[
+\texttt{I, A, N, A},
+\]
+so there are $4$ favourable letters. Hence
+\[
+P(\text{a letter of \texttt{HACKING}})=\frac47.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2025-style: Bernoulli mean and variance]
+A Bernoulli random variable $X$ has
+\[
+P(X=1)=\frac23,
+\qquad
+P(X=0)=\frac13.
+\]
+Find $E(X)$ and $\mathrm{Var}(X)$.
+\end{problem}
+
+\begin{hint}
+For a Bernoulli random variable with success probability $p$, use $E(X)=p$ and $\mathrm{Var}(X)=p(1-p)$.
+\end{hint}
+
+\begin{solution}
+Here $p=\frac23$, so
+\[
+E(X)=\frac23,
+\qquad
+\mathrm{Var}(X)=\frac23\cdot \frac13=\frac29.
 \]
 \end{solution}

@@ -91,6 +91,46 @@ the events are independent.
 \item Small sample spaces are often easiest to list completely.
 \end{takeaways}
 
+\begin{problem}[Why independence does not depend on order]
+In higher studies of probability, statistics, and measure theory, independence is treated as a relationship between events rather than a directional process. So it should not depend on whether we name $A$ first or $B$ first.
+
+Suppose event $B$ is independent of event $A$, meaning that
+\[
+P(B\cap A)=P(B)P(A).
+\]
+Prove that event $A$ is independent of event $B$.
+\end{problem}
+
+\begin{solution}
+Intersection is commutative, so
+\[
+B\cap A=A\cap B.
+\]
+Also, multiplication of real numbers is commutative, so
+\[
+P(B)P(A)=P(A)P(B).
+\]
+
+Therefore, from
+\[
+P(B\cap A)=P(B)P(A),
+\]
+we immediately get
+\[
+P(A\cap B)=P(A)P(B).
+\]
+
+This is exactly the condition for $A$ to be independent of $B$.
+
+Hence independence is symmetric.
+\end{solution}
+
+\begin{takeaways}
+\item Independence is a relationship between events, not a directional action.
+\item The proof works because both intersection and multiplication are commutative.
+\item This symmetry is one reason independence extends naturally to random variables and more advanced probability structures.
+\end{takeaways}
+
 \begin{problem}[Expected score of a game]
 A spinner gives scores according to the following distribution:
 \[
@@ -121,6 +161,167 @@ Therefore the expected score is
 \item The expectation need not be an actual score on a single play.
 \end{takeaways}
 
+\begin{problem}[A fair $n$-sided spinner]
+A spinner has $n$ equal sectors labelled
+\[
+1,2,3,\dots,n.
+\]
+Let $X$ be the score obtained when the spinner is spun once.
+\begin{enumerate}[(a)]
+  \item Write down $P(X=k)$ for $1\le k\le n$.
+  \item Find $E(X)$.
+  \item Find $\mathrm{Var}(X)$.
+  \item Interpret your result for $E(X)$ in terms of symmetry.
+\end{enumerate}
+
+You may use
+\[
+1+2+\cdots+n=\frac{n(n+1)}{2},
+\qquad
+1^2+2^2+\cdots+n^2=\frac{n(n+1)(2n+1)}{6}.
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} Since the spinner is fair, each score is equally likely. Therefore
+\[
+P(X=k)=\frac1n
+\qquad \text{for } k=1,2,\dots,n.
+\]
+
+\textbf{(b)} The expected value is
+\[
+E(X)=\sum xP(X=x)
+=\sum_{k=1}^n k\cdot \frac1n
+=\frac1n\sum_{k=1}^n k.
+\]
+Using
+\[
+\sum_{k=1}^n k=\frac{n(n+1)}{2},
+\]
+we get
+\[
+E(X)=\frac1n\cdot \frac{n(n+1)}{2}=\frac{n+1}{2}.
+\]
+
+\textbf{(c)} First find
+\[
+E(X^2)=\sum x^2P(X=x)
+=\sum_{k=1}^n k^2\cdot \frac1n
+=\frac1n\sum_{k=1}^n k^2.
+\]
+Using
+\[
+\sum_{k=1}^n k^2=\frac{n(n+1)(2n+1)}{6},
+\]
+we have
+\[
+E(X^2)=\frac{(n+1)(2n+1)}{6}.
+\]
+
+So
+\[
+\mathrm{Var}(X)=E(X^2)-[E(X)]^2
+=\frac{(n+1)(2n+1)}{6}-\left(\frac{n+1}{2}\right)^2.
+\]
+Simplifying,
+\[
+\mathrm{Var}(X)=\frac{(n+1)(2n+1)}{6}-\frac{(n+1)^2}{4}
+=\frac{n^2-1}{12}.
+\]
+
+\textbf{(d)} The value
+\[
+E(X)=\frac{n+1}{2}
+\]
+is exactly halfway between the smallest and largest possible scores, namely $1$ and $n$. This matches the symmetry of a fair spinner: the distribution is balanced evenly around the centre.
+\end{solution}
+
+\begin{takeaways}
+\item A fair finite model often leads to a discrete uniform distribution.
+\item Uniform distributions are natural examples where symmetry helps predict the mean.
+\item Variance can still be found systematically using $E(X^2)-[E(X)]^2$.
+\end{takeaways}
+
+\begin{problem}[A random sum from a multiset]
+A student has six cards with values
+\[
+4,\ 5,\ 6,\ 6,\ 7,\ 8.
+\]
+Three cards are chosen at random without replacement, and their sum is recorded as the random variable $X$.
+\begin{enumerate}[(a)]
+  \item Construct the probability distribution table for $X$.
+  \item Find $E(X)$.
+  \item Without calculating $\mathrm{Var}(X)$ fully, explain whether you would expect the spread of this distribution to be larger or smaller than if the six cards were
+  \[
+  4,\ 5,\ 6,\ 7,\ 8,\ 9.
+  \]
+  \item Comment briefly on why repeated values in the population affect the shape of the sampling distribution.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} Since $3$ cards are chosen from $6$, the number of equally likely selections is
+\[
+\binom63=20.
+\]
+
+Using the repeated value $6$, we count how many selections produce each sum:
+\[
+\begin{array}{c|c}
+\text{Sum} & \text{Selections} \\
+\hline
+15 & (4,5,6)\text{ in }2\text{ ways} \\
+16 & (4,5,7),\ (4,6,6) \\
+17 & (4,5,8),\ (4,6,7)\text{ in }2\text{ ways},\ (5,6,6) \\
+18 & (4,6,8)\text{ in }2\text{ ways},\ (5,6,7)\text{ in }2\text{ ways} \\
+19 & (4,7,8),\ (5,6,8)\text{ in }2\text{ ways},\ (6,6,7) \\
+20 & (5,7,8),\ (6,6,8) \\
+21 & (6,7,8)\text{ in }2\text{ ways}
+\end{array}
+\]
+
+So the distribution table is
+\[
+\begin{array}{c|ccccccc}
+x & 15 & 16 & 17 & 18 & 19 & 20 & 21 \\
+\hline
+P(X=x) & \frac{2}{20} & \frac{2}{20} & \frac{4}{20} & \frac{3}{20} & \frac{4}{20} & \frac{2}{20} & \frac{2}{20}
+\end{array}
+\]
+This simplifies to
+\[
+\begin{array}{c|ccccccc}
+x & 15 & 16 & 17 & 18 & 19 & 20 & 21 \\
+\hline
+P(X=x) & \frac{1}{10} & \frac{1}{10} & \frac{1}{5} & \frac{3}{20} & \frac{1}{5} & \frac{1}{10} & \frac{1}{10}
+\end{array}
+\]
+
+\textbf{(b)} The expected value is
+\[
+E(X)=15\left(\frac{1}{10}\right)+16\left(\frac{1}{10}\right)+17\left(\frac{1}{5}\right)+18\left(\frac{3}{20}\right)+19\left(\frac{1}{5}\right)+20\left(\frac{1}{10}\right)+21\left(\frac{1}{10}\right).
+\]
+This gives
+\[
+E(X)=18.
+\]
+
+\textbf{(c)} The spread should be \textbf{smaller} than for the cards
+\[
+4,\ 5,\ 6,\ 7,\ 8,\ 9.
+\]
+That is because the repeated value $6$ creates more selections with central sums and fewer selections with widely spread values. Repetition pulls the distribution inward.
+
+\textbf{(d)} Repeated values make some totals occur more often than others. This changes the shape of the sampling distribution by increasing clustering around certain sums. In higher studies of probability and statistics, this is an example of how the structure of a population affects the distribution of a statistic computed from a random sample.
+\end{solution}
+
+\begin{takeaways}
+\item A random variable can be created by applying a rule, here ``add the chosen cards'', to a combinatorial experiment.
+\item Equal-likelihood of selections does not mean equal-likelihood of the resulting sums.
+\item Repeated values in the underlying population can make the sampling distribution more concentrated around the centre.
+\end{takeaways}
+
 \begin{problem}[Selection probability via combinations]
 From $6$ girls and $4$ boys, a committee of $3$ students is chosen at random. Find the probability that the committee contains exactly $2$ girls.
 \end{problem}
@@ -146,4 +347,70 @@ P(\text{exactly 2 girls})=\frac{60}{120}=\frac12.
 \item When order does not matter, combinations usually give the cleanest probability model.
 \item Count favourable selections and total selections in the same style.
 \item ``Exactly'' often suggests one precise combination pattern.
+\end{takeaways}
+
+\begin{problem}[HSC 2023-style: Sample proportion and normal approximation]
+A recent census found that $30\%$ of Australians were born overseas. A sample of $900$ randomly selected Australians is surveyed.
+
+Let $\hat p$ be the sample proportion of surveyed people who were born overseas.
+\begin{enumerate}[(a)]
+  \item Show that
+  \[
+  \mathrm{Var}(\hat p)=\frac{7}{30000}.
+  \]
+  \item Use a normal approximation to estimate
+  \[
+  P(\hat p\le 0.31).
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Let $X$ be the number of surveyed people who were born overseas. Then
+\[
+X\sim \mathrm{Bin}(900,0.3),
+\qquad
+\hat p=\frac{X}{900}.
+\]
+
+\textbf{(a)} Using the variance formula for a sample proportion,
+\[
+\mathrm{Var}(\hat p)=\frac{p(1-p)}{n}
+=\frac{0.3(0.7)}{900}
+=\frac{0.21}{900}
+=\frac{21}{90000}
+=\frac7{30000}.
+\]
+
+\textbf{(b)} Since $n$ is large, we approximate
+\[
+\hat p \approx N\left(0.3,\frac7{30000}\right).
+\]
+
+So
+\[
+\sigma_{\hat p}=\sqrt{\frac7{30000}}\approx 0.01528.
+\]
+
+Now
+\[
+P(\hat p\le 0.31)\approx P\left(Z\le \frac{0.31-0.30}{0.01528}\right)
+=P(Z\le 0.654).
+\]
+
+Hence
+\[
+P(\hat p\le 0.31)\approx 0.74.
+\]
+
+So the required probability is approximately
+\[
+\boxed{0.74}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Sample proportion is itself a random variable.
+\item Its mean is $p$ and its variance is $\frac{p(1-p)}{n}$.
+\item For large samples, normal approximation turns proportion questions into standard normal questions.
 \end{takeaways}

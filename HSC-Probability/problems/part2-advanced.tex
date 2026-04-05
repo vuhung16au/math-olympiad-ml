@@ -208,3 +208,326 @@ Hence
 P(\text{second good}\mid \text{first defective})=\frac9{12}=\frac34.
 \]
 \end{solution}
+
+\begin{problem}[Geometric probability in a rectangular field]
+An $11\text{ m}\times 16\text{ m}$ rectangular field is considered, and a sheep wanders randomly around the field.
+
+Find the probability that the sheep is:
+\begin{enumerate}[(a)]
+  \item more than $8\text{ m}$ from the edge of the field,
+  \item not more than $8\text{ m}$ from a corner of the field.
+\end{enumerate}
+
+\noindent\textit{Note.} This is a geometric probability question. If every point in the field is equally likely, then
+\[
+P(\text{event})=\frac{\text{favourable area}}{\text{total area}}.
+\]
+\end{problem}
+
+\begin{hint}
+For part (a), imagine shrinking the rectangle by $8\text{ m}$ from every edge and check whether any region remains.
+
+For part (b), draw quarter-circles of radius $8$ centred at the four corners. The required region is their union inside the field.
+\end{hint}
+
+\begin{solution}
+The total area of the field is
+\[
+11\times 16=176\text{ m}^2.
+\]
+
+\textbf{(a)} Being more than $8\text{ m}$ from the edge means being inside the inner rectangle left after removing an $8\text{ m}$ strip from each side.
+
+Its dimensions would be
+\[
+11-16=-5
+\qquad \text{and} \qquad
+16-16=0,
+\]
+so no such region exists.
+
+Therefore,
+\[
+P(\text{more than }8\text{ m from the edge})=0.
+\]
+
+\textbf{(b)} The favourable region is the set of points within $8\text{ m}$ of at least one corner. This is the union of four quarter-circles of radius $8$.
+
+If there were no overlap, the total area would be
+\[
+4\times \frac14\pi(8)^2=64\pi.
+\]
+
+However, the two quarter-circles along the bottom overlap, and the two quarter-circles along the top overlap. Together these overlaps equal the overlap area of two full circles of radius $8$ whose centres are $11$ metres apart.
+
+For two equal circles of radius $8$ and centre distance $11$, the overlap area is
+\[
+2(8)^2\cos^{-1}\left(\frac{11}{16}\right)-\frac{11}{2}\sqrt{4(8)^2-11^2}.
+\]
+So the favourable area is
+\[
+64\pi-\left(128\cos^{-1}\left(\frac{11}{16}\right)-\frac{11}{2}\sqrt{135}\right).
+\]
+
+Hence
+\[
+P(\text{not more than }8\text{ m from a corner})
+=\frac{64\pi-128\cos^{-1}\left(\frac{11}{16}\right)+\frac{11}{2}\sqrt{135}}{176}.
+\]
+
+Numerically, this is
+\[
+\approx 0.914.
+\]
+\end{solution}
+
+\begin{problem}[Coin on a square grid]
+A coin with radius $1\text{ cm}$ is thrown down on a square grid whose lines are $6\text{ cm}$ apart. Find the probability that the coin does not intersect any grid line.
+\end{problem}
+
+\noindent\textit{Note.} This is a geometric probability question. By symmetry, it is enough to study the position of the centre of the coin inside one $6\text{ cm}\times 6\text{ cm}$ square.
+
+\begin{hint}
+The coin avoids all grid lines exactly when its centre lands more than $1\text{ cm}$ away from every side of the square.
+\end{hint}
+
+\begin{solution}
+Consider one square cell of the grid, with side length $6$ cm. The centre of the coin is equally likely to land anywhere in this square.
+
+For the coin not to touch a grid line, its centre must be at least $1$ cm from each side. So the centre must lie inside the inner square obtained by removing a strip of width $1$ cm from each edge.
+
+That inner square has side length
+\[
+6-2(1)=4,
+\]
+so its area is
+\[
+4^2=16.
+\]
+
+The total area of the square cell is
+\[
+6^2=36.
+\]
+
+Therefore
+\[
+P(\text{coin does not intersect a grid line})
+=\frac{16}{36}
+=\frac49.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2024-style: Sample size from standard deviation]
+Suppose $\hat p$ is the sample proportion of successes from $n$ independent Bernoulli trials with success probability $p=0.5$.
+
+Find the smallest value of $n$ such that the standard deviation of $\hat p$ is less than $0.06$.
+\end{problem}
+
+\begin{hint}
+Use
+\[
+\mathrm{Var}(\hat p)=\frac{p(1-p)}{n}.
+\]
+\end{hint}
+
+\begin{solution}
+Since $p=0.5$,
+\[
+\mathrm{Var}(\hat p)=\frac{0.5(0.5)}{n}=\frac{0.25}{n}.
+\]
+So
+\[
+\sigma_{\hat p}=\sqrt{\frac{0.25}{n}}=\frac{0.5}{\sqrt n}.
+\]
+
+We require
+\[
+\frac{0.5}{\sqrt n}<0.06.
+\]
+Hence
+\[
+\sqrt n>\frac{0.5}{0.06}=\frac{25}{3},
+\]
+so
+\[
+n>\frac{625}{9}\approx 69.44.
+\]
+
+Therefore the smallest integer value is
+\[
+\boxed{70}.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2024-style: Charity donations]
+A charity worker talks to exactly $100$ people in a day. The probability that any given person makes a donation is $0.31$, independently of the others.
+
+Use a normal approximation to estimate the probability that at least $35$ people make a donation.
+\end{problem}
+
+\begin{hint}
+Model the number of donations as binomial, then approximate with a normal distribution and use a continuity correction.
+\end{hint}
+
+\begin{solution}
+Let $X$ be the number of donations. Then
+\[
+X\sim \mathrm{Bin}(100,0.31).
+\]
+
+So
+\[
+\mu=np=31,
+\qquad
+\sigma^2=np(1-p)=100(0.31)(0.69)=21.39.
+\]
+Thus
+\[
+\sigma\approx 4.63.
+\]
+
+We want
+\[
+P(X\ge 35).
+\]
+Using a continuity correction,
+\[
+P(X\ge 35)\approx P(Y\ge 34.5),
+\]
+where
+\[
+Y\sim N(31,21.39).
+\]
+
+Then
+\[
+P(X\ge 35)\approx P\left(Z\ge \frac{34.5-31}{4.63}\right)
+=P(Z\ge 0.76).
+\]
+
+Hence
+\[
+P(X\ge 35)\approx 1-0.7764=0.2236.
+\]
+
+So the required probability is approximately
+\[
+\boxed{0.22}.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2025-style: Inverse-tail green-counter problem]
+A bag contains counters, some of which are green. One hundred trials are run. In each trial, one counter is selected at random, its colour is noted, and the counter is returned to the bag.
+
+Let $X$ be the number of times that a green counter is selected. It is known that
+\[
+E(X)=20
+\]
+and
+\[
+P(X\ge k)=0.0668.
+\]
+Find the value of $k$ using a normal approximation.
+\end{problem}
+
+\begin{hint}
+From $E(X)=20$ with $100$ trials, find $p$, then approximate the binomial distribution by a normal distribution and work backwards from the tail probability.
+\end{hint}
+
+\begin{solution}
+Since
+\[
+E(X)=np=100p=20,
+\]
+we have
+\[
+p=0.2.
+\]
+So
+\[
+X\sim \mathrm{Bin}(100,0.2).
+\]
+
+Hence
+\[
+\mu=np=20,
+\qquad
+\sigma^2=np(1-p)=100(0.2)(0.8)=16,
+\]
+so
+\[
+\sigma=4.
+\]
+
+Now
+\[
+P(X\ge k)=0.0668.
+\]
+Using the standard normal distribution, this corresponds to an upper-tail $z$-value of about $1.5$, since
+\[
+P(Z\ge 1.5)\approx 0.0668.
+\]
+
+Using a continuity correction,
+\[
+\frac{k-0.5-20}{4}\approx 1.5.
+\]
+So
+\[
+k-0.5\approx 26
+\]
+and therefore
+\[
+k\approx 26.5.
+\]
+
+Hence the required integer value is
+\[
+\boxed{27}.
+\]
+\end{solution}
+
+\begin{problem}[HSC 2022-style: Airline overbooking threshold]
+An airline has $350$ seats on a flight. Historical data suggests that each booked passenger independently fails to show up with probability $0.05$.
+
+The airline wants to sell the largest number $N$ of tickets such that the probability of more passengers arriving than there are seats is less than $0.01$.
+
+Explain how this can be modelled, and identify the inequality that $N$ must satisfy.
+\end{problem}
+
+\begin{hint}
+Model the number of passengers who arrive, or equivalently the number who do not show up.
+\end{hint}
+
+\begin{solution}
+Let $X$ be the number of passengers who arrive. Then each passenger arrives with probability
+\[
+0.95,
+\]
+so
+\[
+X\sim \mathrm{Bin}(N,0.95).
+\]
+
+If more passengers arrive than there are seats, then
+\[
+X>350.
+\]
+
+So the airline wants the largest value of $N$ such that
+\[
+P(X>350)<0.01.
+\]
+
+Equivalently, if $Y$ is the number of no-shows, then
+\[
+Y\sim \mathrm{Bin}(N,0.05)
+\]
+and the condition becomes
+\[
+P(Y<N-350)<0.01.
+\]
+
+This sets up the threshold problem, which can then be solved approximately using a normal model.
+\end{solution}
