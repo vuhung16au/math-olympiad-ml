@@ -12,6 +12,11 @@ P(\text{no sixes})=\left(\frac56\right)^6=\frac{15625}{46656}.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Repeated independent failures multiply.
+\item ``No sixes'' means using the failure probability $\frac56$ on every roll.
+\end{takeaways}
+
 \begin{problem}[At most two successes]
 If
 \[
@@ -41,6 +46,11 @@ Hence
 P(X\le 2)=1-0.0756-0.0081=0.9163.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item For tail probabilities, complements often reduce the amount of arithmetic.
+\item In binomial questions, choose the shorter side of the distribution to sum.
+\end{takeaways}
 
 \begin{problem}[Game value]
 A game costs \$3 to play. A fair die is rolled. If a $6$ appears, the player receives \$10. Otherwise the player receives nothing. Find the expected profit for the player.
@@ -78,6 +88,11 @@ Thus the expected profit is
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Expected profit is not the same as expected payout.
+\item Always define the random variable carefully before finding its mean.
+\end{takeaways}
+
 \begin{problem}[Variance from a small distribution]
 A discrete random variable $X$ has
 \[
@@ -105,6 +120,11 @@ Therefore,
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Variance measures spread, so it is built from both the first and second moments.
+\item A clean table method is $E(X^2)-[E(X)]^2$.
+\end{takeaways}
+
 \begin{problem}[Exactly three correct guesses]
 A student guesses on $7$ true-false questions independently. Find the probability of getting exactly $3$ correct.
 \end{problem}
@@ -118,6 +138,11 @@ This is binomial with $p=\frac12$.
 P(X=3)=\binom73\left(\frac12\right)^7=35\cdot \frac1{128}=\frac{35}{128}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item A true-false guessing model is binomial with $p=\frac12$.
+\item The combination counts where the $3$ correct answers occur.
+\end{takeaways}
 
 \begin{problem}[Expected number of red balls]
 A box contains $5$ red balls and $7$ white balls. Three balls are drawn with replacement. Let $X$ be the number of red balls drawn. Find $E(X)$ and $\mathrm{Var}(X)$.
@@ -142,6 +167,11 @@ and
 \]
 \end{solution}
 
+\begin{takeaways}
+\item With replacement, the trials are independent, so a binomial model is appropriate.
+\item Mean and variance both come from the same success probability $p=\frac5{12}$.
+\end{takeaways}
+
 \begin{problem}[A fair game check]
 A game pays \$12 with probability $0.15$, \$5 with probability $0.25$, and \$0 otherwise. What entry fee would make the game fair?
 \end{problem}
@@ -160,6 +190,11 @@ So the fair entry fee is
 \boxed{\$3.05}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item A fair game has expected profit $0$, so the fee must equal the expected payout.
+\item Fair in the mathematical sense does not mean players always break even in practice.
+\end{takeaways}
 
 \begin{problem}[More than half successes]
 If
@@ -193,6 +228,11 @@ P(X>2)=0.0512+0.0064+0.00032=0.05792.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item ``More than half'' becomes a right-tail binomial probability.
+\item Writing the relevant values first helps avoid missing a term.
+\end{takeaways}
+
 \begin{problem}[Conditional probability after a draw]
 A box contains $4$ defective bulbs and $9$ good bulbs. Two bulbs are drawn without replacement. Given that the first bulb drawn is defective, find the probability that the second bulb is good.
 \end{problem}
@@ -209,25 +249,49 @@ P(\text{second good}\mid \text{first defective})=\frac9{12}=\frac34.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Once a condition is given, update the contents before calculating.
+\item Conditional probability after a draw is often just a revised fraction.
+\end{takeaways}
+
 \begin{problem}[Geometric probability in a rectangular field]
 An $11\text{ m}\times 16\text{ m}$ rectangular field is considered, and a sheep wanders randomly around the field.
 
 Find the probability that the sheep is:
 \begin{enumerate}[(a)]
-  \item more than $8\text{ m}$ from the edge of the field,
-  \item not more than $8\text{ m}$ from a corner of the field.
+  \item more than $2\text{ m}$ from the edge of the field,
 \end{enumerate}
 
 \noindent\textit{Note.} This is a geometric probability question. If every point in the field is equally likely, then
 \[
 P(\text{event})=\frac{\text{favourable area}}{\text{total area}}.
 \]
+
+\begin{center}
+\begin{tikzpicture}[x=0.38cm,y=0.38cm]
+  \fill[softivory] (0,0) rectangle (16,11);
+  \draw[line width=0.9pt] (0,0) rectangle (16,11);
+
+  % Inner rectangle: more than 2 m from every edge.
+  \fill[bookpurple!16] (2,2) rectangle (14,9);
+  \draw[bookpurple, line width=0.8pt] (2,2) rectangle (14,9);
+
+  % Dimension labels
+  \node[below] at (8,0) {$16\text{ m}$};
+  \node[rotate=90] at (16.9,5.5) {$11\text{ m}$};
+
+  % Distance markers
+  \draw[<->, bookpurple, line width=0.7pt] (0,1.2) -- (2,1.2);
+  \node[bookpurple, below] at (1,1.2) {\scriptsize $2\text{ m}$};
+  \draw[<->, bookpurple, line width=0.7pt] (1.2,0) -- (1.2,2);
+
+  \node[bookpurple] at (8,5.5) {\scriptsize more than $2\text{ m}$ from every edge};
+\end{tikzpicture}
+\end{center}
 \end{problem}
 
 \begin{hint}
-For part (a), imagine shrinking the rectangle by $8\text{ m}$ from every edge and check whether any region remains.
-
-For part (b), draw quarter-circles of radius $8$ centred at the four corners. The required region is their union inside the field.
+For part (a), imagine shrinking the rectangle by $2\text{ m}$ from every edge.
 \end{hint}
 
 \begin{solution}
@@ -236,50 +300,29 @@ The total area of the field is
 11\times 16=176\text{ m}^2.
 \]
 
-\textbf{(a)} Being more than $8\text{ m}$ from the edge means being inside the inner rectangle left after removing an $8\text{ m}$ strip from each side.
+\textbf{(a)} Being more than $2\text{ m}$ from the edge means being inside the inner rectangle left after removing a $2\text{ m}$ strip from each side.
 
 Its dimensions would be
 \[
-11-16=-5
+11-4=7
 \qquad \text{and} \qquad
-16-16=0,
+16-4=12,
 \]
-so no such region exists.
+so its area is
+\[
+7\times 12=84\text{ m}^2.
+\]
 
 Therefore,
 \[
-P(\text{more than }8\text{ m from the edge})=0.
-\]
-
-\textbf{(b)} The favourable region is the set of points within $8\text{ m}$ of at least one corner. This is the union of four quarter-circles of radius $8$.
-
-If there were no overlap, the total area would be
-\[
-4\times \frac14\pi(8)^2=64\pi.
-\]
-
-However, the two quarter-circles along the bottom overlap, and the two quarter-circles along the top overlap. Together these overlaps equal the overlap area of two full circles of radius $8$ whose centres are $11$ metres apart.
-
-For two equal circles of radius $8$ and centre distance $11$, the overlap area is
-\[
-2(8)^2\cos^{-1}\left(\frac{11}{16}\right)-\frac{11}{2}\sqrt{4(8)^2-11^2}.
-\]
-So the favourable area is
-\[
-64\pi-\left(128\cos^{-1}\left(\frac{11}{16}\right)-\frac{11}{2}\sqrt{135}\right).
-\]
-
-Hence
-\[
-P(\text{not more than }8\text{ m from a corner})
-=\frac{64\pi-128\cos^{-1}\left(\frac{11}{16}\right)+\frac{11}{2}\sqrt{135}}{176}.
-\]
-
-Numerically, this is
-\[
-\approx 0.914.
+P(\text{more than }2\text{ m from the edge})=\frac{84}{176}=\frac{21}{44}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item Geometric probability replaces counting by comparing favourable area with total area.
+\item When a point must stay a fixed distance from every edge, the favourable region is an inner rectangle.
+\end{takeaways}
 
 \begin{problem}[Coin on a square grid]
 A coin with radius $1\text{ cm}$ is thrown down on a square grid whose lines are $6\text{ cm}$ apart. Find the probability that the coin does not intersect any grid line.
@@ -317,6 +360,11 @@ P(\text{coin does not intersect a grid line})
 =\frac49.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item In grid problems, track the position of the centre rather than the whole object.
+\item The probability comes from the area of the safe inner region inside one cell.
+\end{takeaways}
 
 \begin{problem}[HSC 2024-style: Sample size from standard deviation]
 Suppose $\hat p$ is the sample proportion of successes from $n$ independent Bernoulli trials with success probability $p=0.5$.
@@ -359,6 +407,11 @@ Therefore the smallest integer value is
 \boxed{70}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item Sample proportion questions often reduce to controlling the standard deviation.
+\item After solving the inequality, round up because the sample size must be an integer.
+\end{takeaways}
 
 \begin{problem}[HSC 2024-style: Charity donations]
 A charity worker talks to exactly $100$ people in a day. The probability that any given person makes a donation is $0.31$, independently of the others.
@@ -416,6 +469,162 @@ So the required probability is approximately
 \boxed{0.22}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item A normal approximation needs the binomial mean and variance first.
+\item Continuity correction is part of the model, not an optional decoration.
+\end{takeaways}
+
+\begin{problem}[Designing the ``Lucky 3'' lottery game]
+A local club is designing a new lottery game called \textit{Lucky 3}. A player selects $3$ distinct numbers from
+\[
+\{1,2,3,4,5,6,7,8,9\},
+\]
+and the host then draws $3$ distinct winning numbers from the same set.
+
+Tier 1 pays when all $3$ numbers match, in any order. Tier 2 pays when exactly $2$ numbers match.
+
+\begin{enumerate}[(i)]
+  \item Show that the total number of possible selections is $84$.
+  \item Let $X$ be the number of matches. Find $P(X=3)$ and show that
+  \[
+  P(X=2)=\frac{3}{14}.
+  \]
+  \item If the prizes are \$40 for $3$ matches, \$10 for exactly $2$ matches, and \$0 otherwise, find the expected payout for a single game.
+  \item If the ticket price is \$5, find the expected profit per ticket for the club and the expected total profit on $1000$ tickets.
+  \item Explain why increasing the Tier 2 prize from \$10 to \$15 could be risky for the club, even if the game still has positive expected profit.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Use combinations for the matching probabilities, then separate \emph{expected payout} from \emph{expected profit}. For the final part, think about how a smaller margin affects risk.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} The total number of selections is
+\[
+\binom93=84.
+\]
+
+\textbf{(ii)} For $3$ matches,
+\[
+P(X=3)=\frac1{84}.
+\]
+For exactly $2$ matches,
+\[
+P(X=2)=\frac{\binom32\binom61}{\binom93}
+=\frac{18}{84}
+=\frac{3}{14}.
+\]
+
+\textbf{(iii)} If $P$ is the payout, then
+\[
+E(P)=40\left(\frac1{84}\right)+10\left(\frac3{14}\right)
+=\frac{220}{84}
+=\frac{55}{21}
+\approx \$2.62.
+\]
+
+\textbf{(iv)} Expected profit per ticket:
+\[
+5-\frac{55}{21}=\frac{50}{21}\approx \$2.38.
+\]
+For $1000$ tickets, the expected total profit is
+\[
+1000\cdot \frac{50}{21}\approx \$2381.
+\]
+
+\textbf{(v)} If the Tier 2 prize becomes \$15, then
+\[
+E(P)=40\left(\frac1{84}\right)+15\left(\frac3{14}\right)
+=\frac{310}{84}
+\approx \$3.69.
+\]
+So the expected profit per ticket drops to about
+\[
+5-3.69=\$1.31.
+\]
+The game still favours the club on average, but the profit margin is much smaller, so a run of extra Tier 2 winners would create more financial pressure. The game becomes riskier even though the mean profit remains positive.
+\end{solution}
+
+\begin{takeaways}
+\item Expected payout and expected profit are different quantities and should be kept separate.
+\item A positive mean profit does not remove short-run financial risk when prizes are volatile.
+\end{takeaways}
+
+\begin{problem}[The truncated St Petersburg game]
+A fair coin is tossed until a head appears. If the first head appears on toss number $k$, the prize is
+\[
+W=2^k \text{ dollars.}
+\]
+The casino caps the game at $n$ tosses. If no head has appeared by the $n$th toss, the game ends and the player is paid the maximum prize
+\[
+2^n.
+\]
+
+\begin{enumerate}[(i)]
+  \item Suppose $n=10$.
+  \begin{enumerate}[(a)]
+    \item List the possible values of $W$ and their probabilities.
+    \item Show that the expected payout is \$11.
+    \item If the entry fee is \$40, find the casino's expected profit per game.
+  \end{enumerate}
+  \item Let $E_n$ be the expected payout for a game capped at $n$ tosses.
+  Show that $E_n=n+1$, then find the value of $n$ for which the expected payout is exactly \$40 and the corresponding maximum jackpot in scientific notation.
+  \item Using the version with expected payout \$40:
+  \begin{enumerate}[(a)]
+    \item Find the probability that a player wins more than the \$40 entry fee.
+    \item Comment on the difference between expected value and the most likely outcome for the player.
+  \end{enumerate}
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For the capped game, the first $n-1$ payouts have the usual probabilities $\left(\frac12\right)^k$, but the final payout $2^n$ includes both ``first head on toss $n$'' and ``no head in the first $n$ tosses''.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} For $n=10$, the payouts are $2,4,8,\dots,2^{10}$. For $k=1,\dots,9$,
+\[
+P(W=2^k)=\left(\frac12\right)^k,
+\qquad
+P(W=2^{10})=\left(\frac12\right)^9.
+\]
+Hence
+\[
+E(W)=\sum_{k=1}^{9}2^k\left(\frac12\right)^k+2^{10}\left(\frac12\right)^9
+=9+2=11,
+\]
+so the casino's expected profit at a \$40 entry fee is
+\[
+40-11=\$29.
+\]
+
+\textbf{(ii)} In general,
+\[
+E_n=\sum_{k=1}^{n-1}2^k\left(\frac12\right)^k+2^n\left(\frac12\right)^{n-1}
+=(n-1)+2=n+1.
+\]
+So $E_n=40$ gives
+\[
+n+1=40 \implies n=39.
+\]
+The maximum jackpot is
+\[
+2^{39}=549755813888\approx 5.50\times 10^{11}\text{ dollars.}
+\]
+
+\textbf{(iii)} To win more than \$40, the player needs $2^k>40$, so $k\ge 6$. Therefore
+\[
+P(W>40)=P(\text{no head in the first 5 tosses})=\left(\frac12\right)^5=\frac1{32}\approx 3.1\%.
+\]
+So even when the expected payout is \$40, the player wins more than the entry fee only about $3.1\%$ of the time; the expectation is supported by a tiny chance of a huge jackpot, while the most likely practical outcome is a loss.
+\end{solution}
+
+\begin{takeaways}
+\item Expected value can be dominated by very rare, very large outcomes.
+\item This is a classic reminder that ``fair on average'' and ``likely to feel fair'' are not the same idea.
+\end{takeaways}
 
 \begin{problem}[HSC 2025-style: Inverse-tail green-counter problem]
 A bag contains counters, some of which are green. One hundred trials are run. In each trial, one counter is selected at random, its colour is noted, and the counter is returned to the bag.
@@ -488,6 +697,11 @@ Hence the required integer value is
 \]
 \end{solution}
 
+\begin{takeaways}
+\item In inverse-tail questions, work backward from the normal tail to a $z$-score.
+\item Continuity correction is important when converting the binomial threshold to a normal one.
+\end{takeaways}
+
 \begin{problem}[HSC 2022-style: Airline overbooking threshold]
 An airline has $350$ seats on a flight. Historical data suggests that each booked passenger independently fails to show up with probability $0.05$.
 
@@ -531,3 +745,8 @@ P(Y<N-350)<0.01.
 
 This sets up the threshold problem, which can then be solved approximately using a normal model.
 \end{solution}
+
+\begin{takeaways}
+\item Modelling is the main goal here: define the random variable and write the correct threshold inequality.
+\item Overbooking questions connect expectation ideas to decision-making under risk.
+\end{takeaways}

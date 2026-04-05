@@ -13,6 +13,11 @@ P(\text{king or diamond})=\frac{4+13-1}{52}=\frac{16}{52}=\frac4{13}.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item For a union, add the two probabilities and subtract the overlap once.
+\item The overlap here is the king of diamonds, which belongs to both events.
+\end{takeaways}
+
 \begin{problem}[Three coin tosses]
 Three fair coins are tossed. Find the probability of getting exactly two heads.
 \end{problem}
@@ -28,6 +33,11 @@ P(\text{exactly two heads})=\binom32\left(\frac12\right)^3=\frac38.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item In a repeated yes-no experiment, count the successful patterns before multiplying by the common probability.
+\item This is a small binomial-style question with $n=3$ and $p=\frac12$.
+\end{takeaways}
+
 \begin{problem}[Without replacement]
 A box contains $5$ white counters and $2$ black counters. Two counters are drawn without replacement. Find the probability that both are white.
 \end{problem}
@@ -41,6 +51,11 @@ Multiply the changing fractions directly.
 P(\text{both white})=\frac57\cdot\frac46=\frac{20}{42}=\frac{10}{21}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item Without replacement, the second probability changes because the box contents change.
+\item Multiplying stage-by-stage is often the quickest method for short draws.
+\end{takeaways}
 
 \begin{problem}[Expected value from a table]
 A random variable $X$ has
@@ -59,6 +74,11 @@ Multiply each outcome by its probability and add.
 E(X)=1(0.4)+2(0.1)+4(0.5)=0.4+0.2+2=2.6.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item Expected value is a weighted average, not just an ordinary mean of the outcomes.
+\item Multiply each value by its probability, then add.
+\end{takeaways}
 
 \begin{problem}[Hannah and the snack boxes]
 Hannah may choose one item from a snack shop. The shop has:
@@ -104,6 +124,11 @@ Therefore the expected cost is
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Turn the box counts into probabilities before finding the expected cost.
+\item In modelling questions, keep the distinction clear between an item's cost and its selection probability.
+\end{takeaways}
+
 \begin{problem}[Reading probabilities from a table]
 A random variable $X$ has the following probability distribution:
 \[
@@ -136,6 +161,11 @@ P(X\ge 2)=P(X=2)+P(X=3)+P(X=4)+P(X=5)=0.3+0.25+0.05+0.1=0.7.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item When a distribution table is given, answer event questions by adding the probabilities of all matching outcomes.
+\item Read the condition carefully: ``odd'' and ``at least $2$'' select different sets of $x$-values.
+\end{takeaways}
+
 \begin{problem}[Complement of an impossible pair]
 Two fair dice are rolled. Find the probability that the sum is not $7$.
 \end{problem}
@@ -154,6 +184,11 @@ P(\text{sum not }7)=1-\frac16=\frac56.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item ``Not'' often signals a complement.
+\item If the complement is easier to count, find it first and subtract from $1$.
+\end{takeaways}
+
 \begin{problem}[Single-stage conditional probability]
 In a box there are $3$ green counters and $5$ yellow counters. One counter is drawn. Given that it is not yellow, find the probability that it is green.
 \end{problem}
@@ -169,6 +204,11 @@ P(\text{green}\mid \text{not yellow})=1.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item In conditional probability, first reduce the sample space to the given condition.
+\item If only one outcome remains possible, the conditional probability is $1$.
+\end{takeaways}
+
 \begin{problem}[Binomial single success]
 A fair coin is tossed $5$ times. Find the probability of exactly one head.
 \end{problem}
@@ -182,6 +222,11 @@ Use $\binom51\left(\frac12\right)^5$.
 P(X=1)=\binom51\left(\frac12\right)^5=5\cdot \frac1{32}=\frac5{32}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item ``Exactly one'' in repeated trials usually leads to a binomial coefficient.
+\item The coefficient counts where the single success can occur.
+\end{takeaways}
 
 \begin{problem}[One coin and one die]
 A fair coin and a fair die are used. Find the probability of getting a head and an even number.
@@ -197,6 +242,11 @@ P(\text{head and even})=\frac12\cdot\frac36=\frac12\cdot\frac12=\frac14.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item For independent devices, multiply the separate probabilities.
+\item A coin-and-die question is a classic independence model.
+\end{takeaways}
+
 \begin{problem}[No red counter]
 A bag contains $3$ red counters and $4$ blue counters. One counter is drawn. Find the probability that it is not red.
 \end{problem}
@@ -210,6 +260,11 @@ Either count blue directly or use the complement of red.
 P(\text{not red})=1-\frac37=\frac47.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item Complements are especially efficient in one-draw questions.
+\item Here ``not red'' is the same event as drawing blue.
+\end{takeaways}
 
 \begin{problem}[A letter from MIRANDA]
 A letter is chosen at random from the word \texttt{MIRANDA}. Find the probability that it is:
@@ -254,6 +309,11 @@ P(\text{a letter of \texttt{HACKING}})=\frac47.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item In equally likely letter questions, each position in the word counts, including repeated letters.
+\item Be careful not to switch from counting letters to counting distinct symbols.
+\end{takeaways}
+
 \begin{problem}[HSC 2025-style: Bernoulli mean and variance]
 A Bernoulli random variable $X$ has
 \[
@@ -276,3 +336,8 @@ E(X)=\frac23,
 \mathrm{Var}(X)=\frac23\cdot \frac13=\frac29.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item A Bernoulli random variable takes only the values $0$ and $1$.
+\item Its mean and variance are controlled entirely by the success probability $p$.
+\end{takeaways}

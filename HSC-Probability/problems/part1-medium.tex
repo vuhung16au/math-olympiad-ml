@@ -167,6 +167,30 @@ A spinner has $n$ equal sectors labelled
 1,2,3,\dots,n.
 \]
 Let $X$ be the score obtained when the spinner is spun once.
+
+\medskip
+\noindent\textit{Example.} For $n=6$, a fair spinner could look like this:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \def\r{2.1}
+  \foreach \i/\lab/\col in {
+    0/1/bookpurple!12,
+    60/2/yellow!25,
+    120/3/bookpurple!20,
+    180/4/yellow!35,
+    240/5/bookpurple!12,
+    300/6/yellow!25
+  }{
+    \filldraw[fill=\col, draw=black, line width=0.6pt] (0,0) -- (\i:\r) arc (\i:\i+60:\r) -- cycle;
+    \node at (\i+30:1.2) {\large $\lab$};
+  }
+  \draw[line width=0.8pt] (0,0) circle (\r);
+  \fill (0,0) circle (0.06);
+  \draw[-Latex, line width=1pt, bookpurple] (0,0) -- (78:1.65);
+\end{tikzpicture}
+\end{center}
+
 \begin{enumerate}[(a)]
   \item Write down $P(X=k)$ for $1\le k\le n$.
   \item Find $E(X)$.
@@ -347,6 +371,59 @@ P(\text{exactly 2 girls})=\frac{60}{120}=\frac12.
 \item When order does not matter, combinations usually give the cleanest probability model.
 \item Count favourable selections and total selections in the same style.
 \item ``Exactly'' often suggests one precise combination pattern.
+\end{takeaways}
+
+\begin{problem}[Leading digit of a height measurement]
+An anthropometric study measures the height of randomly selected adults in centimetres.
+
+Let $H$ be the height of a randomly selected adult, and let $X$ be the leading digit of $H$. For example, if
+\[
+H=175,
+\]
+then
+\[
+X=1.
+\]
+
+Assume all measured adults are between $100$ cm and $250$ cm tall.
+\begin{enumerate}[(a)]
+  \item State whether $X$ is a discrete random variable, a continuous random variable, or neither. Justify your answer.
+  \item State the realistic sample space for $X$.
+  \item A student argues that because almost every adult has a leading height digit of $1$, the value of $X$ is highly predictable and therefore $X$ is not a valid random variable. Evaluate this claim.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} The variable $X$ is a \textbf{discrete random variable}.
+
+It is a random variable because its value is determined by a chance process: choosing an adult at random. It is discrete because it can take only separated whole-number values rather than a continuous range.
+
+\textbf{(b)} Since all adults are between $100$ cm and $250$ cm tall, the leading digit can only be
+\[
+1 \text{ or } 2.
+\]
+So the sample space for $X$ is
+\[
+\{1,2\}.
+\]
+
+\textbf{(c)} The student's claim is incorrect.
+
+A random variable does \emph{not} need to be uniformly distributed or hard to predict. It only needs to be determined by chance. Even if
+\[
+P(X=1)
+\]
+is very large, there is still some chance that
+\[
+X=2
+\]
+when a taller adult is selected. Since the exact outcome is not known with certainty before the selection is made, $X$ remains a valid random variable.
+\end{solution}
+
+\begin{takeaways}
+\item In mathematics, ``random'' means determined by chance, not necessarily evenly spread or highly unpredictable.
+\item A discrete random variable may still have a very skewed distribution.
+\item This problem also gives a useful contrast with Benford's Law: Benford behaviour often appears in data sets spread across several powers of ten, but adult human heights are trapped in a narrow range, so their leading digits are dominated by $1$.
 \end{takeaways}
 
 \begin{problem}[HSC 2023-style: Sample proportion and normal approximation]

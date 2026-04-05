@@ -13,6 +13,11 @@ P(\text{queen}\mid \text{red})=\frac2{26}=\frac1{13}.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Conditional probability starts by shrinking the sample space to the given condition.
+\item After conditioning on ``red'', only the red cards matter.
+\end{takeaways}
+
 \begin{problem}[Independence check]
 A fair die is rolled once. Let
 \[
@@ -44,6 +49,11 @@ Since
 the events are not independent.
 \end{solution}
 
+\begin{takeaways}
+\item To test independence, compare $P(A\cap B)$ with $P(A)P(B)$.
+\item Similar-looking events are not automatically independent.
+\end{takeaways}
+
 \begin{problem}[Finding a missing probability]
 A random variable $X$ has
 \[
@@ -70,6 +80,11 @@ E(X)=0(0.2)+1(0.35)+2(0.30)+3(0.15)=0.35+0.60+0.45=1.40.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item A probability distribution must add to $1$ before any expectation calculation is valid.
+\item Solve for missing probabilities first, then use the weighted-average formula.
+\end{takeaways}
+
 \begin{problem}[Binomial mean and variance]
 If
 \[
@@ -91,6 +106,11 @@ E(X)=np=12(0.25)=3.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Once a binomial model is identified, mean and variance come straight from the standard formulas.
+\item Always check that both $n$ and $p$ have been read correctly from the question.
+\end{takeaways}
+
 \begin{problem}[A union from a survey table]
 In a group of $40$ students, $24$ study French, $18$ study Music, and $10$ study both. One student is selected at random. Find the probability that the student studies French or Music.
 \end{problem}
@@ -104,6 +124,11 @@ Use the addition rule with counts.
 P(F\cup M)=\frac{24+18-10}{40}=\frac{32}{40}=\frac45.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item For a union, add the two groups and subtract the overlap once.
+\item Counts can be handled first, then converted to probability at the end.
+\end{takeaways}
 
 \begin{problem}[Variance from a probability table]
 A random variable $X$ has
@@ -129,6 +154,11 @@ So
 \mathrm{Var}(X)=4.4-(1.4)^2=4.4-1.96=2.44.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item Variance from a table usually needs both $E(X)$ and $E(X^2)$.
+\item Keep the square on the value of $X$, not on the probability.
+\end{takeaways}
 
 \begin{problem}[Distribution table from draws without replacement]
 A bag contains six balls marked
@@ -198,6 +228,11 @@ P(X=x) & \frac1{20} & \frac9{20} & \frac9{20} & \frac1{20}
 \]
 \end{solution}
 
+\begin{takeaways}
+\item This is a without-replacement counting problem, so combinations are the natural tool.
+\item A full distribution table should list all possible values of $X$ and probabilities that add to $1$.
+\end{takeaways}
+
 \begin{problem}[A first binomial distribution table]
 A fair coin is tossed $4$ times and the number of heads is recorded. Construct a table showing the probability distribution of $X$, the number of heads, and calculate $E(X)$.
 
@@ -252,6 +287,11 @@ Hence the expected number of heads is
 \boxed{2}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item A binomial distribution table comes from choosing where the heads occur.
+\item The expected value matches the shortcut formula $E(X)=np$.
+\end{takeaways}
 
 \begin{problem}[A first hypergeometric distribution table]
 Two cards are drawn in succession from a standard deck, without replacement, and the number of hearts is recorded. Construct a table showing the probability distribution of $X$, the number of hearts drawn, and calculate $E(X)$.
@@ -311,6 +351,11 @@ Hence the expected number of hearts is
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Hypergeometric questions model sampling without replacement.
+\item This contrasts with binomial models, where trials are independent and replacement is implicit.
+\end{takeaways}
+
 \begin{problem}[At least two heads]
 A biased coin lands heads with probability $0.4$. It is tossed $4$ times. Find the probability of at least two heads.
 \end{problem}
@@ -338,6 +383,11 @@ P(X\ge 2)=1-0.1296-0.3456=0.5248.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item ``At least'' questions are often quickest by using the complement.
+\item For binomial probabilities, check whether adding a few terms or subtracting a few terms is shorter.
+\end{takeaways}
+
 \begin{problem}[Exactly one black card]
 Two cards are drawn from a standard deck without replacement. Find the probability that exactly one card is black.
 \end{problem}
@@ -353,6 +403,11 @@ P(\text{exactly one black})=\frac{\binom{26}{1}\binom{26}{1}}{\binom{52}{2}}
 =\frac{676}{1326}=\frac{26}{51}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item ``Exactly one of each type'' is a strong sign to use combinations.
+\item Without replacement, the order does not matter when you count selections with combinations.
+\end{takeaways}
 
 \begin{problem}[Expected number of tails]
 A fair coin is tossed $9$ times. Let $X$ be the number of tails. Find $E(X)$.
@@ -371,6 +426,11 @@ so
 E(X)=np=9\cdot \frac12=\frac92=4.5.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item For binomial counts, the mean is the number of trials times the success probability.
+\item The expected number of tails need not be an integer outcome.
+\end{takeaways}
 
 \begin{problem}[Fair coin tossed $n$ times]
 If a fair coin is tossed $n$ times, where $n>1$, find the probability of obtaining:
@@ -436,6 +496,11 @@ P\left(X\le \frac n2\right)=\frac12+\frac12\binom{n}{n/2}\left(\frac12\right)^n
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Symmetry is a powerful shortcut for $\mathrm{Bin}\!\left(n,\frac12\right)$.
+\item Odd and even $n$ behave differently because only even $n$ has a central term at $X=\frac n2$.
+\end{takeaways}
+
 \begin{problem}[HSC 2024-style: Driver test]
 To pass a driver knowledge test, a learner must answer at least $9$ out of $10$ questions correctly.
 
@@ -474,6 +539,11 @@ P(\text{pass})=\frac{15}{1024}+\frac1{1024}=\frac{16}{1024}=\frac1{64}.
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Translate the real situation into a binomial count before calculating.
+\item Here the known answers shift the target: passing means at least $4$ correct guesses, not $9$ guessed questions.
+\end{takeaways}
+
 \begin{problem}[HSC 2024-style: Same-metal coins]
 A bag contains $7$ silver coins and $3$ bronze coins. Two coins are drawn without replacement. Find the probability that both coins are made of the same metal.
 \end{problem}
@@ -498,6 +568,11 @@ Therefore
 P(\text{same metal})=\frac{42}{90}+\frac6{90}=\frac{48}{90}=\frac{8}{15}.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item ``Same metal'' splits naturally into two disjoint cases: both silver or both bronze.
+\item When cases cannot happen together, their probabilities can be added directly.
+\end{takeaways}
 
 \begin{problem}[HSC 2023-style: Mixed equipment probabilities]
 A gym has $5$ treadmills and $4$ rowing machines. On average, each treadmill is in use with probability $0.65$ and each rowing machine is in use with probability $0.40$, independently of the others.
@@ -527,6 +602,11 @@ So the required expression is
 \]
 \end{solution}
 
+\begin{takeaways}
+\item Mixed-device questions may need more than one model in the same expression.
+\item Independence lets you multiply the treadmill event by the rowing-machine event.
+\end{takeaways}
+
 \begin{problem}[HSC 2021-style: A Bernoulli complement]
 The random variable $X$ represents the number of successes in $10$ independent Bernoulli trials, where the probability of success in each trial is $0.9$.
 
@@ -550,3 +630,8 @@ Since $(0.1)^{10}$ is extremely small,
 r=1-(0.1)^{10}>0.9.
 \]
 \end{solution}
+
+\begin{takeaways}
+\item ``At least one'' is often easiest through the complement ``none''.
+\item A large success probability over many trials pushes $P(X\ge 1)$ very close to $1$.
+\end{takeaways}
