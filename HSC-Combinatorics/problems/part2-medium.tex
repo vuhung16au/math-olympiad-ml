@@ -242,6 +242,59 @@ Hence the required number of ways is
 \item Gap methods are especially useful for adjacency restrictions in line arrangements.
 \end{takeaways}
 
+\begin{problem}[The alternating row constraint]
+Four boys, including Bob, and four girls, including Grace, are to stand in a row.
+
+Find the number of distinct arrangements if the boys and girls must alternate positions and Bob must stand immediately next to Grace.
+\end{problem}
+
+\begin{hint}
+Count all alternating arrangements first. Then use symmetry: in an alternating row, each specific boy-girl pairing appears equally often.
+\end{hint}
+
+\begin{solution}
+There are two alternating patterns:
+\[
+\text{B G B G B G B G}
+\qquad \text{or} \qquad
+\text{G B G B G B G B}.
+\]
+For each pattern, the boys can be arranged in $4!$ ways and the girls in $4!$ ways. So the total number of alternating arrangements is
+\[
+2\cdot 4!\cdot 4!=1152.
+\]
+
+Now impose the condition that Bob is next to Grace.
+
+In any alternating row of $8$ people, there are $7$ adjacent boy-girl pairs. On the other hand, Bob can be paired with any of the $4$ girls, and Grace can be paired with any of the $4$ boys, giving
+\[
+4\times 4=16
+\]
+possible boy-girl pairings in total.
+
+By symmetry, each specific boy-girl pairing occurs equally often among the alternating arrangements, so the fraction in which Bob and Grace are adjacent is
+\[
+\frac{7}{16}.
+\]
+
+Hence the required number of arrangements is
+\[
+1152\cdot \frac{7}{16}=72\cdot 7=504.
+\]
+
+Therefore the number of distinct arrangements is
+\[
+\boxed{504}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item With equal group sizes, alternating rows always begin from exactly two templates.
+\item Count the full structured sample space first, then apply the extra adjacency restriction.
+\item This problem is a good example of symmetry simplifying what would otherwise be a messy case split.
+\item Numbering the positions from $1$ to $8$. There are $7$ adjacent pairs for Bob and Grace: $(1,2),(2,3),\dots,(7,8)$. 
+\end{takeaways}
+
 \begin{problem}[Lines determined by points on a line and a circle]
 There are $11$ points on the plane.
 
