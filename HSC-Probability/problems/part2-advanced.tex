@@ -1,0 +1,210 @@
+\begin{problem}[No sixes in repeated rolls]
+A fair die is rolled $6$ times. Find the probability that no six appears.
+\end{problem}
+
+\begin{hint}
+This is repeated independent failure with probability $\frac56$ each time.
+\end{hint}
+
+\begin{solution}
+\[
+P(\text{no sixes})=\left(\frac56\right)^6=\frac{15625}{46656}.
+\]
+\end{solution}
+
+\begin{problem}[At most two successes]
+If
+\[
+X\sim \mathrm{Bin}(4,0.3),
+\]
+find $P(X\le 2)$.
+\end{problem}
+
+\begin{hint}
+Either add $P(X=0)$, $P(X=1)$, and $P(X=2)$, or subtract the complement.
+\end{hint}
+
+\begin{solution}
+\[
+P(X\le 2)=1-[P(X=3)+P(X=4)].
+\]
+Now
+\[
+P(X=3)=\binom43(0.3)^3(0.7)=4(0.027)(0.7)=0.0756,
+\]
+and
+\[
+P(X=4)=(0.3)^4=0.0081.
+\]
+Hence
+\[
+P(X\le 2)=1-0.0756-0.0081=0.9163.
+\]
+\end{solution}
+
+\begin{problem}[Game value]
+A game costs \$3 to play. A fair die is rolled. If a $6$ appears, the player receives \$10. Otherwise the player receives nothing. Find the expected profit for the player.
+\end{problem}
+
+\begin{hint}
+Define profit, not payout.
+\end{hint}
+
+\begin{solution}
+Let $X$ be the player's profit.
+
+If a $6$ appears, profit is
+\[
+10-3=7
+\]
+with probability $\frac16$.
+
+Otherwise profit is
+\[
+-3
+\]
+with probability $\frac56$.
+
+So
+\[
+E(X)=7\left(\frac16\right)+(-3)\left(\frac56\right)
+=\frac76-\frac{15}{6}
+=-\frac86=-\frac43.
+\]
+
+Thus the expected profit is
+\[
+\boxed{-\frac43\text{ dollars}}.
+\]
+\end{solution}
+
+\begin{problem}[Variance from a small distribution]
+A discrete random variable $X$ has
+\[
+P(X=1)=0.2,\qquad P(X=3)=0.5,\qquad P(X=5)=0.3.
+\]
+Find $\mathrm{Var}(X)$.
+\end{problem}
+
+\begin{hint}
+Compute $E(X)$ and $E(X^2)$ separately.
+\end{hint}
+
+\begin{solution}
+\[
+E(X)=1(0.2)+3(0.5)+5(0.3)=0.2+1.5+1.5=3.2.
+\]
+
+\[
+E(X^2)=1^2(0.2)+3^2(0.5)+5^2(0.3)=0.2+4.5+7.5=12.2.
+\]
+
+Therefore,
+\[
+\mathrm{Var}(X)=12.2-(3.2)^2=12.2-10.24=1.96.
+\]
+\end{solution}
+
+\begin{problem}[Exactly three correct guesses]
+A student guesses on $7$ true-false questions independently. Find the probability of getting exactly $3$ correct.
+\end{problem}
+
+\begin{hint}
+This is binomial with $p=\frac12$.
+\end{hint}
+
+\begin{solution}
+\[
+P(X=3)=\binom73\left(\frac12\right)^7=35\cdot \frac1{128}=\frac{35}{128}.
+\]
+\end{solution}
+
+\begin{problem}[Expected number of red balls]
+A box contains $5$ red balls and $7$ white balls. Three balls are drawn with replacement. Let $X$ be the number of red balls drawn. Find $E(X)$ and $\mathrm{Var}(X)$.
+\end{problem}
+
+\begin{hint}
+With replacement, the number of reds is binomial.
+\end{hint}
+
+\begin{solution}
+Here
+\[
+X\sim \mathrm{Bin}\left(3,\frac5{12}\right).
+\]
+Therefore
+\[
+E(X)=np=3\cdot \frac5{12}=\frac54,
+\]
+and
+\[
+\mathrm{Var}(X)=np(1-p)=3\cdot \frac5{12}\cdot \frac7{12}=\frac{35}{48}.
+\]
+\end{solution}
+
+\begin{problem}[A fair game check]
+A game pays \$12 with probability $0.15$, \$5 with probability $0.25$, and \$0 otherwise. What entry fee would make the game fair?
+\end{problem}
+
+\begin{hint}
+A fair game has expected profit $0$, so the fee must equal expected payout.
+\end{hint}
+
+\begin{solution}
+The expected payout is
+\[
+12(0.15)+5(0.25)+0(0.60)=1.8+1.25=3.05.
+\]
+So the fair entry fee is
+\[
+\boxed{\$3.05}.
+\]
+\end{solution}
+
+\begin{problem}[More than half successes]
+If
+\[
+X\sim \mathrm{Bin}(5,0.2),
+\]
+find $P(X>2)$.
+\end{problem}
+
+\begin{hint}
+Add $P(X=3)$, $P(X=4)$, and $P(X=5)$.
+\end{hint}
+
+\begin{solution}
+\[
+P(X>2)=P(X=3)+P(X=4)+P(X=5).
+\]
+Now
+\[
+P(X=3)=\binom53(0.2)^3(0.8)^2=10(0.008)(0.64)=0.0512,
+\]
+\[
+P(X=4)=\binom54(0.2)^4(0.8)=5(0.0016)(0.8)=0.0064,
+\]
+\[
+P(X=5)=(0.2)^5=0.00032.
+\]
+Therefore
+\[
+P(X>2)=0.0512+0.0064+0.00032=0.05792.
+\]
+\end{solution}
+
+\begin{problem}[Conditional probability after a draw]
+A box contains $4$ defective bulbs and $9$ good bulbs. Two bulbs are drawn without replacement. Given that the first bulb drawn is defective, find the probability that the second bulb is good.
+\end{problem}
+
+\begin{hint}
+Condition on the first draw and update the box contents.
+\end{hint}
+
+\begin{solution}
+If the first bulb is defective, then $3$ defective and $9$ good bulbs remain, so $12$ bulbs remain in total.
+Hence
+\[
+P(\text{second good}\mid \text{first defective})=\frac9{12}=\frac34.
+\]
+\end{solution}

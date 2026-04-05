@@ -1,0 +1,89 @@
+\noindent This appendix is designed as a last-minute revision sheet. The formulas matter, but the real skill is knowing when each one applies.
+
+\subsubsection*{Event Probability}
+If all outcomes are equally likely, then
+\[
+P(A)=\frac{n(A)}{n(S)}.
+\]
+
+\subsubsection*{Complement Rule}
+\[
+P(A^c)=1-P(A).
+\]
+
+\subsubsection*{Addition Rule}
+\[
+P(A\cup B)=P(A)+P(B)-P(A\cap B).
+\]
+If $A$ and $B$ are mutually exclusive, then
+\[
+P(A\cup B)=P(A)+P(B).
+\]
+
+\subsubsection*{Conditional Probability}
+\[
+P(A\mid B)=\frac{P(A\cap B)}{P(B)},
+\qquad P(B)>0.
+\]
+
+\subsubsection*{Multiplication Rule}
+\[
+P(A\cap B)=P(A)P(B\mid A)=P(B)P(A\mid B).
+\]
+
+\subsubsection*{Independence}
+If $A$ and $B$ are independent, then
+\[
+P(A\cap B)=P(A)P(B).
+\]
+
+\subsubsection*{Expectation and Variance}
+For a discrete random variable $X$,
+\[
+E(X)=\sum xP(X=x),
+\]
+\[
+E(X^2)=\sum x^2P(X=x),
+\]
+\[
+\mathrm{Var}(X)=E(X^2)-[E(X)]^2.
+\]
+
+\subsubsection*{Binomial Distribution}
+If
+\[
+X\sim \mathrm{Bin}(n,p),
+\]
+then
+\[
+P(X=r)=\binom{n}{r}p^r(1-p)^{n-r},
+\qquad r=0,1,\dots,n,
+\]
+\[
+E(X)=np,
+\qquad
+\mathrm{Var}(X)=np(1-p).
+\]
+
+\subsubsection*{Counting Formulas}
+\[
+{}^nP_r=\frac{n!}{(n-r)!},
+\qquad
+\binom{n}{r}=\frac{n!}{r!(n-r)!}.
+\]
+
+\subsubsection*{When to Use What}
+\begin{center}
+\begin{tabular}{p{5cm} p{9cm}}
+\toprule
+\textbf{Question wording} & \textbf{Likely method} \\
+\midrule
+at least one & complement rule \\
+given that & conditional probability \\
+without replacement & multiplication rule with changing fractions \\
+committee or selection & combinations \\
+exactly $r$ successes in repeated trials & binomial formula \\
+fair game or average return & expected value \\
+\bottomrule
+\end{tabular}
+\end{center}

@@ -1,0 +1,136 @@
+\begin{problem}[One card from a deck]
+A card is chosen at random from a standard deck. Find the probability that it is a king or a diamond.
+\end{problem}
+
+\begin{hint}
+Use the addition rule and subtract the overlap only once.
+\end{hint}
+
+\begin{solution}
+There are $4$ kings and $13$ diamonds, with one overlap: the king of diamonds.
+\[
+P(\text{king or diamond})=\frac{4+13-1}{52}=\frac{16}{52}=\frac4{13}.
+\]
+\end{solution}
+
+\begin{problem}[Three coin tosses]
+Three fair coins are tossed. Find the probability of getting exactly two heads.
+\end{problem}
+
+\begin{hint}
+List the successful patterns or use the binomial idea with $n=3$ and $p=\frac12$.
+\end{hint}
+
+\begin{solution}
+There are $\binom32=3$ ways to place two heads among three tosses.
+\[
+P(\text{exactly two heads})=\binom32\left(\frac12\right)^3=\frac38.
+\]
+\end{solution}
+
+\begin{problem}[Without replacement]
+A box contains $5$ white counters and $2$ black counters. Two counters are drawn without replacement. Find the probability that both are white.
+\end{problem}
+
+\begin{hint}
+Multiply the changing fractions directly.
+\end{hint}
+
+\begin{solution}
+\[
+P(\text{both white})=\frac57\cdot\frac46=\frac{20}{42}=\frac{10}{21}.
+\]
+\end{solution}
+
+\begin{problem}[Expected value from a table]
+A random variable $X$ has
+\[
+P(X=1)=0.4,\qquad P(X=2)=0.1,\qquad P(X=4)=0.5.
+\]
+Find $E(X)$.
+\end{problem}
+
+\begin{hint}
+Multiply each outcome by its probability and add.
+\end{hint}
+
+\begin{solution}
+\[
+E(X)=1(0.4)+2(0.1)+4(0.5)=0.4+0.2+2=2.6.
+\]
+\end{solution}
+
+\begin{problem}[Complement of an impossible pair]
+Two fair dice are rolled. Find the probability that the sum is not $7$.
+\end{problem}
+
+\begin{hint}
+There are six outcomes with sum $7$.
+\end{hint}
+
+\begin{solution}
+\[
+P(\text{sum }7)=\frac6{36}=\frac16.
+\]
+So
+\[
+P(\text{sum not }7)=1-\frac16=\frac56.
+\]
+\end{solution}
+
+\begin{problem}[Single-stage conditional probability]
+In a box there are $3$ green counters and $5$ yellow counters. One counter is drawn. Given that it is not yellow, find the probability that it is green.
+\end{problem}
+
+\begin{hint}
+If it is not yellow, what possibilities remain?
+\end{hint}
+
+\begin{solution}
+If the counter is not yellow, it must be green. Therefore
+\[
+P(\text{green}\mid \text{not yellow})=1.
+\]
+\end{solution}
+
+\begin{problem}[Binomial single success]
+A fair coin is tossed $5$ times. Find the probability of exactly one head.
+\end{problem}
+
+\begin{hint}
+Use $\binom51\left(\frac12\right)^5$.
+\end{hint}
+
+\begin{solution}
+\[
+P(X=1)=\binom51\left(\frac12\right)^5=5\cdot \frac1{32}=\frac5{32}.
+\]
+\end{solution}
+
+\begin{problem}[One coin and one die]
+A fair coin and a fair die are used. Find the probability of getting a head and an even number.
+\end{problem}
+
+\begin{hint}
+These two devices act independently, so multiply the probabilities.
+\end{hint}
+
+\begin{solution}
+\[
+P(\text{head and even})=\frac12\cdot\frac36=\frac12\cdot\frac12=\frac14.
+\]
+\end{solution}
+
+\begin{problem}[No red counter]
+A bag contains $3$ red counters and $4$ blue counters. One counter is drawn. Find the probability that it is not red.
+\end{problem}
+
+\begin{hint}
+Either count blue directly or use the complement of red.
+\end{hint}
+
+\begin{solution}
+\[
+P(\text{not red})=1-\frac37=\frac47.
+\]
+\end{solution}

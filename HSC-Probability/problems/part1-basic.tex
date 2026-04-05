@@ -1,0 +1,127 @@
+\begin{problem}[Two dice and a sum of at least $10$]
+Two fair six-sided dice are rolled. Find the probability that the sum is at least $10$.
+\end{problem}
+
+\begin{solution}
+There are $36$ equally likely ordered outcomes.
+
+The sums at least $10$ are:
+\[
+10:(4,6),(5,5),(6,4),
+\]
+\[
+11:(5,6),(6,5),
+\]
+\[
+12:(6,6).
+\]
+So there are $6$ favourable outcomes.
+
+Hence
+\[
+P(\text{sum at least }10)=\frac{6}{36}=\frac16.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Start by checking whether outcomes are equally likely.
+\item With dice, ordered pairs are usually the cleanest sample space.
+\item ``At least'' often means grouping several cases together.
+\end{takeaways}
+
+\begin{problem}[A card that is a heart or a face card]
+A card is chosen at random from a standard deck of $52$ cards. Find the probability that the card is a heart or a face card.
+\end{problem}
+
+\begin{solution}
+Let
+\[
+H=\{\text{heart}\},
+\qquad
+F=\{\text{face card}\}.
+\]
+
+There are $13$ hearts and $12$ face cards. The overlap consists of the heart face cards:
+\[
+J\heartsuit,\ Q\heartsuit,\ K\heartsuit,
+\]
+so
+\[
+n(H\cap F)=3.
+\]
+
+By the addition rule,
+\[
+P(H\cup F)=\frac{13+12-3}{52}=\frac{22}{52}=\frac{11}{26}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Use the addition rule when two descriptions can overlap.
+\item Subtract the intersection once to avoid double-counting.
+\item Drawing a quick Venn diagram is often helpful.
+\end{takeaways}
+
+\begin{problem}[At least one blue marble]
+A bag contains $4$ red marbles and $3$ blue marbles. Two marbles are drawn without replacement. Find the probability that at least one marble is blue.
+\end{problem}
+
+\begin{solution}
+The complement of ``at least one blue'' is ``no blue'', which means both marbles are red.
+
+So
+\[
+P(\text{both red})=\frac{4}{7}\cdot\frac{3}{6}=\frac{12}{42}=\frac27.
+\]
+
+Therefore,
+\[
+P(\text{at least one blue})=1-\frac27=\frac57.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item ``At least one'' is often easiest through a complement.
+\item Without replacement, multiply changing fractions.
+\item The complement method reduces casework.
+\end{takeaways}
+
+\begin{problem}[Mutually exclusive or independent?]
+One card is drawn from a standard deck. Let
+\[
+A=\{\text{the card is an ace}\},
+\qquad
+B=\{\text{the card is a spade}\}.
+\]
+Find $P(A\cap B)$ and decide whether $A$ and $B$ are independent.
+\end{problem}
+
+\begin{solution}
+The only card that is both an ace and a spade is the ace of spades, so
+\[
+P(A\cap B)=\frac1{52}.
+\]
+
+Also,
+\[
+P(A)=\frac4{52}=\frac1{13},
+\qquad
+P(B)=\frac{13}{52}=\frac14.
+\]
+
+Thus
+\[
+P(A)P(B)=\frac1{13}\cdot\frac14=\frac1{52}.
+\]
+Since
+\[
+P(A\cap B)=P(A)P(B),
+\]
+the events are independent.
+\end{solution}
+
+\begin{takeaways}
+\item Events can overlap and still be independent.
+\item Independence is a probability test, not a visual one.
+\item A single shared outcome does not automatically mean dependence.
+\end{takeaways}

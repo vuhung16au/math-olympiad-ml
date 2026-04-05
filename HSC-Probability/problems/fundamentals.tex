@@ -1,0 +1,288 @@
+\subsection{Core Language}
+
+A \textbf{sample space} is the set of all possible outcomes of an experiment. An \textbf{event} is a subset of that sample space.
+
+\textit{Example.} If a fair die is rolled, then
+\[
+S=\{1,2,3,4,5,6\}.
+\]
+The event ``an even number is rolled'' is
+\[
+E=\{2,4,6\}.
+\]
+
+When outcomes are equally likely,
+\[
+P(E)=\frac{\text{number of favourable outcomes}}{\text{number of possible outcomes}}.
+\]
+
+\subsection{Complements, Unions, and Intersections}
+
+If $A$ is an event, then its complement $A^c$ means ``not $A$''.
+\[
+P(A^c)=1-P(A).
+\]
+
+For two events $A$ and $B$:
+\begin{itemize}[leftmargin=*]
+  \item $A\cup B$ means ``$A$ or $B$ or both''
+  \item $A\cap B$ means ``$A$ and $B$''
+\end{itemize}
+
+The addition rule is
+\[
+P(A\cup B)=P(A)+P(B)-P(A\cap B).
+\]
+The subtraction avoids double-counting the outcomes common to both events.
+
+\subsection{Mutually Exclusive Events}
+
+Events are \textbf{mutually exclusive} if they cannot happen together. Then
+\[
+P(A\cap B)=0,
+\]
+so the addition rule simplifies to
+\[
+P(A\cup B)=P(A)+P(B).
+\]
+
+\textit{Warning.} Mutually exclusive does \textbf{not} mean independent. In fact, non-trivial mutually exclusive events are usually dependent.
+
+\subsection{Multiplication Rule and Conditional Probability}
+
+Conditional probability means the probability of an event given that another event has already happened:
+\[
+P(A\mid B)=\frac{P(A\cap B)}{P(B)},
+\qquad P(B)>0.
+\]
+
+Rearranging gives the multiplication rule:
+\[
+P(A\cap B)=P(B)\,P(A\mid B)=P(A)\,P(B\mid A).
+\]
+
+This is especially useful for selection without replacement.
+
+\subsection{Independence}
+
+Events $A$ and $B$ are \textbf{independent} if knowing that one occurred does not change the probability of the other. Algebraically,
+\[
+P(A\cap B)=P(A)P(B).
+\]
+Equivalently, if $P(B)>0$,
+\[
+P(A\mid B)=P(A).
+\]
+
+\textit{Common trap.} ``Independent'' is about probabilities staying unchanged. It is not the same as ``different'' or ``mutually exclusive''.
+
+\subsection{Counting Links}
+
+Some probability questions are easiest when written as counting problems. Common tools include:
+\begin{itemize}[leftmargin=*]
+  \item permutations when order matters
+  \item combinations when order does not matter
+  \item complementary counting when ``at least one'' is awkward
+\end{itemize}
+
+\textit{Example.} The probability that at least one head appears in three fair coin tosses is
+\[
+1-P(\text{no heads})=1-\left(\frac12\right)^3=\frac78.
+\]
+
+If a question involves selecting objects, it is often worth translating the numerator and denominator into combinations. For example, if $2$ cards are chosen from a deck and we want both cards to be aces, then
+\[
+P(\text{both aces})=\frac{\binom42}{\binom{52}{2}}.
+\]
+This method is especially clean when order does not matter.
+
+\subsection{Tree Diagrams and Staged Experiments}
+
+Tree diagrams are useful when an experiment happens in stages. Each branch shows a probability, and the probability of a complete path is found by multiplying along the path.
+
+\textit{Example.} Suppose a bag contains $2$ red counters and $1$ blue counter, and two counters are drawn without replacement. The tree diagram is:
+
+\begin{center}
+\begin{tikzpicture}[
+  x=1cm,
+  y=1cm,
+  >=Latex,
+  every node/.style={font=\small},
+  stage/.style={circle, draw=bookpurple, thick, fill=softivory, minimum size=7mm},
+  leaf/.style={rounded corners, draw=bookred, thick, fill=softivory, inner sep=4pt, align=left}
+]
+\node[stage] (start) at (0,0) {};
+
+\node (r1) at (3,1.6) {Red};
+\node (b1) at (3,-1.6) {Blue};
+
+\node (rr) at (6,2.5) {Red};
+\node (rb) at (6,0.7) {Blue};
+\node (br) at (6,-1.6) {Red};
+
+\node[leaf] (p_rr) at (10,2.5) {$RR:\ \frac23\cdot\frac12=\frac13$};
+\node[leaf] (p_rb) at (10,0.7) {$RB:\ \frac23\cdot\frac12=\frac13$};
+\node[leaf] (p_br) at (10,-1.6) {$BR:\ \frac13\cdot 1=\frac13$};
+
+\draw[->, thick] (start) -- (r1) node[midway, above] {$\frac23$};
+\draw[->, thick] (start) -- (b1) node[midway, below] {$\frac13$};
+
+\draw[->, thick] (r1) -- (rr) node[midway, above] {$\frac12$};
+\draw[->, thick] (r1) -- (rb) node[midway, below] {$\frac12$};
+\draw[->, thick] (b1) -- (br) node[midway, below] {$1$};
+
+\draw[->, thick] (rr) -- (p_rr);
+\draw[->, thick] (rb) -- (p_rb);
+\draw[->, thick] (br) -- (p_br);
+
+\node[above=2pt of start] {Start};
+\node[above=2pt of r1] {1st draw};
+\node[above=2pt of rr] {2nd draw};
+\end{tikzpicture}
+\end{center}
+
+The path probabilities add to $1$, which is a good quick check.
+
+\subsection{Two-Way Tables}
+
+Two-way tables are helpful when events are described by two classifications at once, such as subject choices, gender, or transport method.
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+ & $B$ & $B^c$ & Total \\
+\midrule
+$A$ & $n(A\cap B)$ & $n(A\cap B^c)$ & $n(A)$ \\
+$A^c$ & $n(A^c\cap B)$ & $n(A^c\cap B^c)$ & $n(A^c)$ \\
+Total & $n(B)$ & $n(B^c)$ & $n(S)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Conditional probabilities then become quick to read. For example,
+\[
+P(A\mid B)=\frac{n(A\cap B)}{n(B)}.
+\]
+
+\subsection{Discrete Random Variables}
+
+A \textbf{discrete random variable} takes specific numerical values, each with an associated probability. The probabilities must satisfy:
+\[
+0\le P(X=x)\le 1
+\qquad \text{and} \qquad
+\sum P(X=x)=1.
+\]
+
+These are often shown in a table.
+
+\begin{center}
+\begin{tabular}{>{\centering\arraybackslash}m{2cm} >{\centering\arraybackslash}m{3cm} >{\centering\arraybackslash}m{7cm}}
+\toprule
+\textbf{$x$} & \textbf{$P(X=x)$} & \textbf{Interpretation} \\
+\midrule
+0 & 0.2 & no successes \\
+1 & 0.5 & one success \\
+2 & 0.3 & two successes \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Bridge note.} In this booklet, the random variable takes separate values such as $0,1,2,\dots$, so we can list probabilities in a table. In continuous probability, the possible values fill intervals instead of isolated points, so the table is replaced by a density curve and sums are replaced by integrals. The central ideas stay the same: we still describe how likely values are, and we still study averages and spread.
+
+\subsection{Expected Value and Variance}
+
+The expected value of a discrete random variable is its weighted average:
+\[
+E(X)=\sum xP(X=x).
+\]
+
+The variance measures spread:
+\[
+\mathrm{Var}(X)=E(X^2)-[E(X)]^2,
+\qquad \text{where } E(X^2)=\sum x^2P(X=x).
+\]
+
+The standard deviation is
+\[
+\sigma=\sqrt{\mathrm{Var}(X)}.
+\]
+
+\textit{Interpretation note.} The expected value is not necessarily an outcome that must actually occur. It is the long-run average value.
+
+\textit{Transition remark.} This same story continues in continuous probability. Expected value still represents a long-run average, and variance still measures spread, but the formulas move from sums such as $\sum xP(X=x)$ to integrals over a probability density function. So continuous random variables are best thought of as the next version of the same ideas, not a completely different topic.
+
+\subsection{A Worked Variance Example}
+
+Suppose
+\[
+P(X=0)=0.25,\qquad P(X=1)=0.50,\qquad P(X=2)=0.25.
+\]
+Then
+\[
+E(X)=0(0.25)+1(0.50)+2(0.25)=1.
+\]
+Also,
+\[
+E(X^2)=0^2(0.25)+1^2(0.50)+2^2(0.25)=1.5.
+\]
+So
+\[
+\mathrm{Var}(X)=1.5-1^2=0.5.
+\]
+This example shows that a random variable can have average value $1$ while still spreading around that centre.
+
+\subsection{Binomial Distribution}
+
+A random variable $X$ has a \textbf{binomial distribution} when:
+\begin{itemize}[leftmargin=*]
+  \item there are a fixed number $n$ of trials
+  \item each trial has two outcomes, success or failure
+  \item the probability of success is constant, say $p$
+  \item the trials are independent
+\end{itemize}
+
+Then
+\[
+P(X=r)=\binom{n}{r}p^r(1-p)^{n-r}
+\qquad \text{for } r=0,1,2,\dots,n.
+\]
+
+Also,
+\[
+E(X)=np,
+\qquad
+\mathrm{Var}(X)=np(1-p).
+\]
+
+\textit{Worked example.} If a biased coin has probability $0.6$ of landing heads and is tossed $4$ times, then the probability of exactly $3$ heads is
+\[
+\binom43(0.6)^3(0.4)=4(0.216)(0.4)=0.3456.
+\]
+
+The expected number of heads is
+\[
+E(X)=np=4(0.6)=2.4.
+\]
+
+\subsection{Common Language Triggers}
+
+The wording of a probability question often suggests the method:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{at least one}: usually try a complement
+  \item \textbf{given that}: conditional probability
+  \item \textbf{independent}: check whether probabilities stay unchanged
+  \item \textbf{exactly}: count one precise case
+  \item \textbf{at most}: add cases up to a bound or subtract a complement
+  \item \textbf{without replacement}: probabilities usually change from stage to stage
+\end{itemize}
+
+\subsection{Method Selection Checklist}
+
+Before calculating, ask:
+\begin{itemize}[leftmargin=*]
+  \item Is this a plain event probability, a conditional probability, or a random-variable question?
+  \item Are the outcomes equally likely?
+  \item Is replacement involved?
+  \item Would a complement be quicker?
+  \item Is this genuinely binomial, or do the trial conditions fail?
+\end{itemize}

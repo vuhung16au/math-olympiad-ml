@@ -1,0 +1,207 @@
+\begin{problem}[A probability table with unknown constant]
+A discrete random variable $X$ has probability distribution
+\[
+P(X=0)=k,\qquad P(X=1)=2k,\qquad P(X=2)=3k,\qquad P(X=3)=4k.
+\]
+\begin{enumerate}[(a)]
+  \item Find $k$.
+  \item Find $E(X)$.
+  \item Find $\mathrm{Var}(X)$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} The probabilities must sum to $1$, so
+\[
+k+2k+3k+4k=10k=1.
+\]
+Hence
+\[
+k=\frac1{10}.
+\]
+
+\textbf{(b)} Then
+\[
+P(X=0)=\frac1{10},\quad
+P(X=1)=\frac2{10},\quad
+P(X=2)=\frac3{10},\quad
+P(X=3)=\frac4{10}.
+\]
+
+Now
+\[
+E(X)=0\cdot \frac1{10}+1\cdot \frac2{10}+2\cdot \frac3{10}+3\cdot \frac4{10}
+=\frac{0+2+6+12}{10}=2.
+\]
+
+\textbf{(c)} Next,
+\[
+E(X^2)=0^2\cdot \frac1{10}+1^2\cdot \frac2{10}+2^2\cdot \frac3{10}+3^2\cdot \frac4{10}
+=\frac{0+2+12+36}{10}=5.
+\]
+Therefore,
+\[
+\mathrm{Var}(X)=E(X^2)-[E(X)]^2=5-2^2=1.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item A probability table must add to $1$ before anything else.
+\item Variance is often quickest via $E(X^2)-[E(X)]^2$.
+\item Keep expectation and variance conceptually separate: centre versus spread.
+\end{takeaways}
+
+\begin{problem}[Exactly two successes in a binomial setting]
+A biased coin lands heads with probability $0.7$. The coin is tossed $5$ times. Find the probability of getting exactly $2$ heads.
+\end{problem}
+
+\begin{solution}
+Let $X$ be the number of heads. Then
+\[
+X\sim \mathrm{Bin}(5,0.7).
+\]
+
+We want
+\[
+P(X=2)=\binom52(0.7)^2(0.3)^3.
+\]
+
+Since
+\[
+\binom52=10,
+\]
+we obtain
+\[
+P(X=2)=10(0.49)(0.027)=0.1323.
+\]
+
+Hence the probability is
+\[
+\boxed{0.1323}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Check the four binomial conditions before applying the formula.
+\item The combination counts where the successes are placed.
+\item Keep the success probability attached to the event being counted.
+\end{takeaways}
+
+\begin{problem}[At least one defective item]
+Each item produced by a machine is defective with probability $0.04$, independently of other items. A sample of $8$ items is chosen.
+\begin{enumerate}[(a)]
+  \item Find the probability that exactly one item is defective.
+  \item Find the probability that at least one item is defective.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Let $X$ be the number of defective items. Then
+\[
+X\sim \mathrm{Bin}(8,0.04).
+\]
+
+\textbf{(a)} For exactly one defective item,
+\[
+P(X=1)=\binom81(0.04)^1(0.96)^7.
+\]
+So
+\[
+P(X=1)=8(0.04)(0.96)^7\approx 0.2409.
+\]
+
+\textbf{(b)} For at least one defective item, use the complement:
+\[
+P(X\ge 1)=1-P(X=0)=1-(0.96)^8\approx 0.2786.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item In binomial questions, ``at least one'' is usually a complement.
+\item Exact values and cumulative values often call for different tactics.
+\item Binomial modelling becomes natural when defect decisions are repeated independently.
+\end{takeaways}
+
+\begin{problem}[A binomial distribution from a target score]
+In a multiple-choice quiz, each question has four options and exactly one correct answer. A student guesses every answer independently on $6$ questions.
+\begin{enumerate}[(a)]
+  \item Find the probability that the student answers exactly $4$ questions correctly.
+  \item Find the probability that the student answers at least $1$ question correctly.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Let $X$ be the number of correct answers. Since each question is guessed independently and
+\[
+P(\text{correct})=\frac14,
+\]
+we have
+\[
+X\sim \mathrm{Bin}\left(6,\frac14\right).
+\]
+
+\textbf{(a)} Then
+\[
+P(X=4)=\binom64\left(\frac14\right)^4\left(\frac34\right)^2.
+\]
+Since
+\[
+\binom64=15,
+\]
+we get
+\[
+P(X=4)=15\cdot \frac1{256}\cdot \frac9{16}
+=\frac{135}{4096}.
+\]
+
+\textbf{(b)} Using a complement,
+\[
+P(X\ge 1)=1-P(X=0)=1-\left(\frac34\right)^6.
+\]
+Hence
+\[
+P(X\ge 1)=1-\frac{729}{4096}=\frac{3367}{4096}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Guessing questions independently creates a natural binomial model.
+\item Exact counts use the binomial formula directly.
+\item ``At least one'' remains a complement even in a binomial setting.
+\end{takeaways}
+
+\begin{problem}[Comparing two games by expectation]
+Game A pays \$8 with probability $0.2$ and \$0 otherwise. Game B pays according to:
+\[
+P(Y=1)=0.3,\qquad P(Y=4)=0.4,\qquad P(Y=7)=0.3.
+\]
+Each game costs \$2 to play once. Determine which game has the higher expected profit.
+\end{problem}
+
+\begin{solution}
+Let $A$ be the payout from Game A. Then
+\[
+E(A)=8(0.2)+0(0.8)=1.6.
+\]
+So the expected profit from Game A is
+\[
+1.6-2=-0.4.
+\]
+
+Now let $Y$ be the payout from Game B. Then
+\[
+E(Y)=1(0.3)+4(0.4)+7(0.3)=0.3+1.6+2.1=4.
+\]
+So the expected profit from Game B is
+\[
+4-2=2.
+\]
+
+Therefore Game B has the higher expected profit.
+\end{solution}
+
+\begin{takeaways}
+\item Separate payout from profit when a game has an entry cost.
+\item Expected value gives a fair comparison over many plays.
+\item A game can have an attractive top prize and still have poor expected profit.
+\end{takeaways}

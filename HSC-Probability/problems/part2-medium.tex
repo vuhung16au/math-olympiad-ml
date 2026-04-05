@@ -1,0 +1,192 @@
+\begin{problem}[Conditional selection]
+From a standard deck, one card is selected. Given that the card is red, find the probability that it is a queen.
+\end{problem}
+
+\begin{hint}
+Restrict the sample space to the red cards first.
+\end{hint}
+
+\begin{solution}
+There are $26$ red cards and $2$ red queens.
+\[
+P(\text{queen}\mid \text{red})=\frac2{26}=\frac1{13}.
+\]
+\end{solution}
+
+\begin{problem}[Independence check]
+A fair die is rolled once. Let
+\[
+A=\{\text{an even number}\},\qquad B=\{\text{a number greater than }3\}.
+\]
+Determine whether $A$ and $B$ are independent.
+\end{problem}
+
+\begin{hint}
+Compute $P(A)$, $P(B)$, and $P(A\cap B)$, then compare.
+\end{hint}
+
+\begin{solution}
+\[
+P(A)=\frac36=\frac12,\qquad P(B)=\frac36=\frac12.
+\]
+Also,
+\[
+A\cap B=\{4,6\},
+\]
+so
+\[
+P(A\cap B)=\frac26=\frac13.
+\]
+Since
+\[
+\frac13\ne \frac12\cdot\frac12=\frac14,
+\]
+the events are not independent.
+\end{solution}
+
+\begin{problem}[Finding a missing probability]
+A random variable $X$ has
+\[
+P(X=0)=0.2,\qquad P(X=1)=0.35,\qquad P(X=2)=p,\qquad P(X=3)=0.15.
+\]
+Find $p$ and then find $E(X)$.
+\end{problem}
+
+\begin{hint}
+Probabilities must add to $1$ before you calculate expectation.
+\end{hint}
+
+\begin{solution}
+\[
+0.2+0.35+p+0.15=1
+\]
+gives
+\[
+p=0.30.
+\]
+Then
+\[
+E(X)=0(0.2)+1(0.35)+2(0.30)+3(0.15)=0.35+0.60+0.45=1.40.
+\]
+\end{solution}
+
+\begin{problem}[Binomial mean and variance]
+If
+\[
+X\sim \mathrm{Bin}(12,0.25),
+\]
+find $E(X)$ and $\mathrm{Var}(X)$.
+\end{problem}
+
+\begin{hint}
+Use the standard formulas for a binomial random variable.
+\end{hint}
+
+\begin{solution}
+\[
+E(X)=np=12(0.25)=3.
+\]
+\[
+\mathrm{Var}(X)=np(1-p)=12(0.25)(0.75)=2.25.
+\]
+\end{solution}
+
+\begin{problem}[A union from a survey table]
+In a group of $40$ students, $24$ study French, $18$ study Music, and $10$ study both. One student is selected at random. Find the probability that the student studies French or Music.
+\end{problem}
+
+\begin{hint}
+Use the addition rule with counts.
+\end{hint}
+
+\begin{solution}
+\[
+P(F\cup M)=\frac{24+18-10}{40}=\frac{32}{40}=\frac45.
+\]
+\end{solution}
+
+\begin{problem}[Variance from a probability table]
+A random variable $X$ has
+\[
+P(X=0)=0.5,\qquad P(X=2)=0.3,\qquad P(X=4)=0.2.
+\]
+Find $\mathrm{Var}(X)$.
+\end{problem}
+
+\begin{hint}
+First find $E(X)$ and $E(X^2)$.
+\end{hint}
+
+\begin{solution}
+\[
+E(X)=0(0.5)+2(0.3)+4(0.2)=1.4.
+\]
+\[
+E(X^2)=0^2(0.5)+2^2(0.3)+4^2(0.2)=4.4.
+\]
+So
+\[
+\mathrm{Var}(X)=4.4-(1.4)^2=4.4-1.96=2.44.
+\]
+\end{solution}
+
+\begin{problem}[At least two heads]
+A biased coin lands heads with probability $0.4$. It is tossed $4$ times. Find the probability of at least two heads.
+\end{problem}
+
+\begin{hint}
+Add $P(X=2)$, $P(X=3)$, and $P(X=4)$, or subtract $P(X=0)$ and $P(X=1)$.
+\end{hint}
+
+\begin{solution}
+Let $X\sim \mathrm{Bin}(4,0.4)$. Then
+\[
+P(X\ge 2)=1-[P(X=0)+P(X=1)].
+\]
+Now
+\[
+P(X=0)=(0.6)^4=0.1296,
+\]
+and
+\[
+P(X=1)=\binom41(0.4)(0.6)^3=4(0.4)(0.216)=0.3456.
+\]
+Hence
+\[
+P(X\ge 2)=1-0.1296-0.3456=0.5248.
+\]
+\end{solution}
+
+\begin{problem}[Exactly one black card]
+Two cards are drawn from a standard deck without replacement. Find the probability that exactly one card is black.
+\end{problem}
+
+\begin{hint}
+Count one black and one red in either order, or use combinations.
+\end{hint}
+
+\begin{solution}
+Using combinations,
+\[
+P(\text{exactly one black})=\frac{\binom{26}{1}\binom{26}{1}}{\binom{52}{2}}
+=\frac{676}{1326}=\frac{26}{51}.
+\]
+\end{solution}
+
+\begin{problem}[Expected number of tails]
+A fair coin is tossed $9$ times. Let $X$ be the number of tails. Find $E(X)$.
+\end{problem}
+
+\begin{hint}
+Recognise a binomial model.
+\end{hint}
+
+\begin{solution}
+\[
+X\sim \mathrm{Bin}\left(9,\frac12\right),
+\]
+so
+\[
+E(X)=np=9\cdot \frac12=\frac92=4.5.
+\]
+\end{solution}

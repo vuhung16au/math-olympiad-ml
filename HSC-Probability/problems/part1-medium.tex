@@ -1,0 +1,149 @@
+\begin{problem}[Conditional probability from a class survey]
+In a class, $18$ students study Mathematics Extension~1, $14$ study Chemistry, and $8$ study both subjects. One student is selected at random from the class, knowing that the student studies Chemistry. Find the probability that the student also studies Mathematics Extension~1.
+\end{problem}
+
+\begin{solution}
+Let
+\[
+M=\{\text{studies Extension~1}\},
+\qquad
+C=\{\text{studies Chemistry}\}.
+\]
+
+We are asked to find
+\[
+P(M\mid C).
+\]
+
+Using conditional probability,
+\[
+P(M\mid C)=\frac{P(M\cap C)}{P(C)}.
+\]
+Because every student is equally likely to be chosen, we may use counts:
+\[
+P(M\mid C)=\frac{8}{14}=\frac47.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item ``Given that'' signals conditional probability.
+\item Once the condition is imposed, the reduced sample space becomes the relevant denominator.
+\item Counts often make conditional probability faster than decimal probabilities.
+\end{takeaways}
+
+\begin{problem}[Checking independence]
+A fair coin is tossed twice. Let
+\[
+A=\{\text{exactly one head}\},
+\qquad
+B=\{\text{the first toss is a head}\}.
+\]
+Determine whether $A$ and $B$ are independent.
+\end{problem}
+
+\begin{solution}
+The sample space is
+\[
+\{HH,HT,TH,TT\}.
+\]
+
+Event $A$ is
+\[
+A=\{HT,TH\},
+\]
+so
+\[
+P(A)=\frac24=\frac12.
+\]
+
+Event $B$ is
+\[
+B=\{HH,HT\},
+\]
+so
+\[
+P(B)=\frac24=\frac12.
+\]
+
+The intersection is
+\[
+A\cap B=\{HT\},
+\]
+thus
+\[
+P(A\cap B)=\frac14.
+\]
+
+Now
+\[
+P(A)P(B)=\frac12\cdot\frac12=\frac14.
+\]
+Since
+\[
+P(A\cap B)=P(A)P(B),
+\]
+the events are independent.
+\end{solution}
+
+\begin{takeaways}
+\item Independence is tested by comparing $P(A\cap B)$ with $P(A)P(B)$.
+\item Always define the events explicitly before testing.
+\item Small sample spaces are often easiest to list completely.
+\end{takeaways}
+
+\begin{problem}[Expected score of a game]
+A spinner gives scores according to the following distribution:
+\[
+P(X=0)=0.2,\qquad P(X=2)=0.5,\qquad P(X=5)=0.3.
+\]
+Find the expected score.
+\end{problem}
+
+\begin{solution}
+The expected value is
+\[
+E(X)=\sum xP(X=x).
+\]
+So
+\[
+E(X)=0(0.2)+2(0.5)+5(0.3)=0+1+1.5=2.5.
+\]
+
+Therefore the expected score is
+\[
+\boxed{2.5}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Expected value is a weighted average.
+\item Multiply each outcome by its probability, then add.
+\item The expectation need not be an actual score on a single play.
+\end{takeaways}
+
+\begin{problem}[Selection probability via combinations]
+From $6$ girls and $4$ boys, a committee of $3$ students is chosen at random. Find the probability that the committee contains exactly $2$ girls.
+\end{problem}
+
+\begin{solution}
+The total number of committees is
+\[
+\binom{10}{3}=120.
+\]
+
+To have exactly $2$ girls, choose $2$ of the $6$ girls and $1$ of the $4$ boys:
+\[
+\binom62\binom41=15\cdot 4=60.
+\]
+
+Therefore,
+\[
+P(\text{exactly 2 girls})=\frac{60}{120}=\frac12.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item When order does not matter, combinations usually give the cleanest probability model.
+\item Count favourable selections and total selections in the same style.
+\item ``Exactly'' often suggests one precise combination pattern.
+\end{takeaways}

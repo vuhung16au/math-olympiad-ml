@@ -1,0 +1,135 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[shortlabels]{enumitem}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage[most,skins]{tcolorbox}
+
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\usetikzlibrary{arrows.meta, calc, positioning}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Mathematics Extension 1: Probability}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet is a focused probability companion for NSW HSC Mathematics Extension~1 students. It combines the main ideas from probability and discrete probability distributions into one coherent practice resource. The goal is to help students move smoothly from event-based reasoning to random variables, expectation, and binomial models.
+
+\subsection{Target Audience}
+This resource is written for Extension~1 students who want more structured probability practice than a standard textbook chapter usually offers. It is also suitable for tutors and teachers who want a compact booklet with model solutions in one place.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the fundamentals review first to refresh notation, rules, and common traps.
+  \item Work through Part~1 carefully because the detailed solutions model the standard reasoning expected in HSC-style written responses.
+  \item Use Part~2 for repetition and fluency. Try each problem before turning the page to read the upside-down hint.
+  \item Pay attention to wording such as \textit{at least}, \textit{exactly}, \textit{given that}, and \textit{independent}, since these phrases determine the method.
+  \item Keep checking whether a problem is about events, counting, or a random variable. Many errors come from mixing these levels.
+\end{itemize}
+
+\subsection{Topics Covered}
+The booklet develops the following Extension~1 ideas:
+\begin{itemize}[leftmargin=*]
+  \item sample spaces and equally likely outcomes
+  \item events, complements, unions, and intersections
+  \item addition and multiplication rules
+  \item conditional probability and independence
+  \item counting-based probability links
+  \item discrete random variables and probability tables
+  \item expected value and variance
+  \item binomial distributions and repeated trials
+\end{itemize}
+
+\newpage
+\section{Fundamentals Review}
+This section collects the main rules and interpretations used throughout the booklet. It is not meant to replace understanding; it is meant to make that understanding easier to apply under exam pressure.
+
+\input{problems/fundamentals}
+
+\newpage
+\section{Part 1: Problems and Solutions (Detailed)}
+Part~1 contains fully worked model solutions. The emphasis is on method selection, clean notation, and explaining why each rule is appropriate.
+
+\subsection{Basic Probability Problems}
+\input{problems/part1-basic}
+
+\subsection{Medium Probability Problems}
+\input{problems/part1-medium}
+
+\subsection{Advanced Probability Problems}
+\input{problems/part1-advanced}
+
+\newpage
+\section{Part 2: Problems with Hints and Solutions (Concise)}
+Part~2 gives additional practice with shorter solutions. Each problem includes an upside-down hint so that you can choose how much support you want before checking the answer.
+
+\subsection{Basic Probability Problems}
+\input{problems/part2-basic}
+
+\subsection{Medium Probability Problems}
+\input{problems/part2-medium}
+
+\subsection{Advanced Probability Problems}
+\input{problems/part2-advanced}
+
+\newpage
+\section{Appendices}
+
+\subsection{Appendix A: Formula Sheet}
+\input{problems/appendix-a-formulas}
+
+\subsection{Appendix B: Common Probability Traps}
+\input{problems/appendix-b-traps}
+
+\newpage
+\section{Conclusion}
+Probability in Extension~1 is about much more than substituting into formulas. Strong students learn to identify the sample space carefully, translate words into events, and choose the right model for repeated trials or random variables.
+
+The key habits to build are:
+\begin{itemize}[leftmargin=*]
+  \item define events clearly before calculating
+  \item use complements whenever direct counting is messy
+  \item distinguish conditional probability from ordinary probability
+  \item treat expectation as a weighted average, not a guaranteed outcome
+  \item recognise binomial structure only when the repeated-trial conditions really hold
+\end{itemize}
+
+With steady practice, probability becomes one of the most readable parts of the course. Best of luck with your Extension~1 studies and HSC preparation.
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Probability}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Probability}
+
+\end{document}
