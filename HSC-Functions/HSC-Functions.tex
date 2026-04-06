@@ -1,6 +1,5 @@
 \documentclass[12pt]{article}
 
-% Core math packages
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -8,19 +7,40 @@
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage[shortlabels]{enumitem}
+\usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usetikzlibrary{arrows.meta, calc, patterns, decorations.pathreplacing}
+\pgfplotsset{compat=1.18}
 \usepackage[most,skins]{tcolorbox}
 
-% Custom styles shared with other HSC projects
 \usepackage{styles/dl101-colors}
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
 
-% TikZ libraries for diagrams
-\usetikzlibrary{arrows.meta, calc, patterns, decorations.pathreplacing}
-\pgfplotsset{compat=1.18}
+\providecolor{warmstone}{RGB}{208,184,168}
+
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
+  title={\bfseries Remark~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{remark}[1][]{%
+  \begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{remarkbox}%
+}
 
 \geometry{
   a4paper,
@@ -30,7 +50,7 @@
 }
 
 \author{Vu Hung Nguyen}
-\title{HSC Math Extension 1 \& 2: Functions}
+\title{HSC Mathematics Extension 1 \& 2: Functions Practice}
 \date{}
 
 \begin{document}
@@ -39,53 +59,183 @@
 
 \begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
 
+\newpage
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\itshape
+A function is a rule that assigns to each element of one set\\
+exactly one element of another set.
+
+\vspace{1em}
+\normalfont ---Mathematical Folklore
+\end{center}
+\vspace*{\fill}
+
+\newpage
+
 \tableofcontents
 \newpage
 
+% ============================================================
 \section{Introduction}
+% ============================================================
 
 \subsection{Project Overview}
-This booklet compiles high-quality function problems curated specifically for the HSC Mathematics Extension 1 and Extension 2 syllabuses. 
+This booklet is a growing collection of functions problems for NSW HSC Mathematics Extension~1 and Extension~2 students. It covers the major themes of the syllabus: understanding what a function is, working with inverses, composing functions, and analysing their graphs. The problems are designed to build fluency with algebraic manipulation and geometric reasoning side by side.
 
-\newpage
-\section{Functions and Their Properties}
-\input{problems/01-Functions-and-their-properties}
+\subsection{Target Audience}
+This resource is written for students who want extra practice with functions in a clear, classroom-friendly format. Solutions are intentionally concise, but each one highlights the key idea---whether that is a domain restriction, a symmetry argument, or a composition rule. Both Extension~1 and Extension~2 students will find material at an appropriate level.
 
-\newpage
-\section{The Inverse of a Function}
-\input{problems/02-The-inverse-of-a-function}
-
-\newpage
-\section{Graphing the Inverse of a Function}
-\input{problems/03-Graphing-the-inverse-of-a-function}
-
-\newpage
-\section{Composite Functions}
-\input{problems/04-Composite-functions}
-
-\newpage
-\section{Inverse Functions}
-\input{problems/05-Inverse-functions}
-
-\newpage
-\section{Graphs of Inverse Functions}
-\input{problems/06-Graphs-of-inverse-functions}
-
-\newpage
-\section{Trigonometric Functions}
-\input{problems/07-Trigonometric-functions}
-
-\newpage
-\section{Conclusion}
-
-\subsection{Final Thoughts}
-Mastering functions in HSC Mathematics requires practice and a deep understanding of their graphical properties, inverses, and algebraic manipulations.
-
-\subsection{Contact Information}
+\subsection{How to Use This Booklet}
 \begin{itemize}[leftmargin=*]
-  \item \textbf{LinkedIn:} \url{https://www.linkedin.com/in/vuhung16au/}
-  \item \textbf{GitHub:} \url{https://github.com/vuhung16au}
-  \item \textbf{Repository:} \url{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Functions}
+  \item Read the short summary of the core definitions and ideas first.
+  \item Attempt each problem before reading the solution.
+  \item Pay attention to domains and ranges: they are often where mistakes happen.
+  \item Look for symmetry: the graph of an inverse is the reflection of the original in the line $y=x$.
+  \item Use the takeaways to build pattern recognition for future HSC questions.
 \end{itemize}
+
+\subsection{Extension 1 Knowledge Needed}
+Most problems in this booklet are accessible with standard HSC Mathematics Extension~1 knowledge. The key background ideas are:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Function notation:} writing $f(x)$, understanding that $f$ is the rule and $f(x)$ is the value, and reading expressions such as $f(a+h)$ or $f(f(x))$.
+  \item \textbf{Domain and range:} identifying the largest possible domain (the natural domain) and the corresponding range, and applying domain restrictions when stated.
+  \item \textbf{One-to-one functions:} recognising that a function has an inverse if and only if it passes the horizontal line test.
+  \item \textbf{Inverse functions:} swapping $x$ and $y$ to find $f^{-1}$, and understanding that $f(f^{-1}(x))=x$ and $f^{-1}(f(x))=x$.
+  \item \textbf{Graphs of inverse functions:} reflecting the graph of $f$ in the line $y=x$ to obtain $f^{-1}$.
+  \item \textbf{Composite functions:} forming $f(g(x))$ by substituting one function into another, and identifying the correct domain of the composition.
+  \item \textbf{Even and odd functions:} $f$ is even if $f(-x)=f(x)$ for all $x$ (the graph has $y$-axis symmetry); $f$ is odd if $f(-x)=-f(x)$ for all $x$ (the graph has rotational symmetry about the origin).
+  \item \textbf{Transformations:} translations, reflections, dilations, and their effect on the equation and graph of a function.
+\end{itemize}
+
+\subsection{Core Formulas and Ideas}
+
+\textbf{Definition of a function.} A function $f: A \to B$ assigns to every element $x \in A$ exactly one element $f(x) \in B$. The set $A$ is called the \textbf{domain} and the set $B$ the \textbf{codomain}. The \textbf{range} is the set of all actual output values:
+\[
+\operatorname{range}(f) = \{f(x) : x \in A\} \subseteq B.
+\]
+
+\textbf{Vertical line test.} A curve in the plane is the graph of a function if and only if every vertical line meets the curve at most once.
+
+\textbf{Horizontal line test.} A function is one-to-one (injective) if and only if every horizontal line meets its graph at most once. Only one-to-one functions have an inverse that is also a function.
+
+\textbf{Inverse function.} If $f$ is one-to-one with domain $A$ and range $B$, then its inverse $f^{-1}: B \to A$ satisfies
+\[
+f^{-1}(f(x)) = x \quad \text{for all } x \in A,
+\qquad
+f(f^{-1}(y)) = y \quad \text{for all } y \in B.
+\]
+To find $f^{-1}$: write $y = f(x)$, swap $x$ and $y$, then solve for $y$.
+
+\textbf{Reflection principle.} The graph of $f^{-1}$ is the reflection of the graph of $f$ in the line $y = x$.
+
+\textbf{Composite function.} Given $f: B \to C$ and $g: A \to B$, the composite $f \circ g: A \to C$ is defined by
+\[
+(f \circ g)(x) = f(g(x)).
+\]
+Note that in general $f \circ g \neq g \circ f$.
+
+\textbf{Domain of a composite.} For $f(g(x))$ to be defined, $x$ must be in the domain of $g$ \emph{and} $g(x)$ must be in the domain of $f$:
+\[
+\operatorname{dom}(f \circ g) = \{x \in \operatorname{dom}(g) : g(x) \in \operatorname{dom}(f)\}.
+\]
+
+\textbf{Even and odd functions.}
+\[
+f \text{ is even} \iff f(-x) = f(x) \text{ for all } x.
+\qquad
+f \text{ is odd} \iff f(-x) = -f(x) \text{ for all } x.
+\]
+
+\subsection{Key Transformations}
+
+Given a base function $y = f(x)$, the standard transformations are:
+
+\begin{itemize}[leftmargin=*]
+  \item $y = f(x) + c$: shift up by $c$ (down if $c < 0$).
+  \item $y = f(x - h)$: shift right by $h$ (left if $h < 0$).
+  \item $y = af(x)$: vertical dilation by factor $|a|$; reflection in $x$-axis if $a < 0$.
+  \item $y = f(bx)$: horizontal dilation by factor $\tfrac{1}{|b|}$; reflection in $y$-axis if $b < 0$.
+\end{itemize}
+
+These transformations combine: $y = af(bx - h) + c$ is the general form.
+
+\subsection{Piecewise-Defined Functions}
+A piecewise function assigns a different rule to different parts of the domain. For example:
+\[
+f(x) = \begin{cases} x^2 & x < 0, \\ 2x+1 & x \ge 0. \end{cases}
+\]
+Key skills are: evaluating at a given $x$, finding the range piece by piece, and drawing the graph with correct open/closed endpoints.
+
+\subsection{Absolute Value as a Piecewise Function}
+\[
+|x| = \begin{cases} x & x \ge 0, \\ -x & x < 0. \end{cases}
+\]
+The graph of $y = |f(x)|$ reflects any portion of $y = f(x)$ that lies \emph{below} the $x$-axis up above it. The graph of $y = f(|x|)$ keeps the right half of $y = f(x)$ and reflects it to create an even function.
+
+\subsection{Continuity and Limits (Extension 2 Note)}
+For Extension~2 students, a function is \textbf{continuous} at $x = a$ if
+\[
+\lim_{x \to a} f(x) = f(a).
+\]
+Piecewise functions need this checked at the break-points. Many function questions at Extension~2 level involve verifying continuity or using limits to determine parameters.
+
+\subsection{Problem-Solving Habits for This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Always state the domain and range of your answer, not just the rule.
+  \item When finding an inverse, restrict the domain of $f$ first if the function is not one-to-one.
+  \item When composing, work from the inside out: compute $g(x)$ first, then apply $f$.
+  \item Sketch the graph whenever the question involves domains, ranges, or inverses.
+  \item In even/odd questions, substitute $-x$ and simplify fully before drawing a conclusion.
+\end{itemize}
+
+\begin{remark}
+The most common functions mistake is forgetting to adjust the domain when restricting a function to make it one-to-one before finding its inverse. Always check that your inverse has the correct domain and range.
+\end{remark}
+
+\begin{remark}[Notation warning]
+$f^{-1}(x)$ means the inverse \emph{function}, not $\dfrac{1}{f(x)}$. If you mean the reciprocal, write $[f(x)]^{-1}$ or $\dfrac{1}{f(x)}$ explicitly.
+\end{remark}
+
+% ============================================================
+\section{Part 1: Worked Problems}
+% ============================================================
+
+\subsection{Basic}
+\input{problems/part1-basic.tex}
+
+\subsection{Medium}
+\input{problems/part1-medium.tex}
+
+\subsection{Advanced}
+\input{problems/part1-advanced.tex}
+
+% ============================================================
+\section{Part 2: Practice and Challenge Bank}
+% ============================================================
+
+\subsection{Warm-Up Drills}
+\input{problems/part2-basic.tex}
+
+\subsection{Stretch Problems}
+\input{problems/part2-medium.tex}
+
+\subsection{Challenge Corner}
+\input{problems/part2-advanced.tex}
+
+% ============================================================
+\section{Conclusion}
+% ============================================================
+
+Functions are one of the most unifying ideas in all of mathematics. Mastering the language of functions---domain, range, composition, and inverse---gives you the tools to read and write mathematics fluently across every topic in HSC Extension~1 and Extension~2. As this booklet grows, it will become a compact reference for the patterns and techniques that appear most often in HSC examinations.
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Functions}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Functions}
 
 \end{document}

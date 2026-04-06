@@ -17,16 +17,15 @@ all: pdf
 # Compile PDF using latexmk for multiple passes
 pdf:
 	$(LATEXMK) -pdf $(PROJECT).tex
-	cp $(PROJECT).pdf releases/$(PROJECT)-$$(date +%Y%m%d).pdf
 
 # Clean auxiliary files
 clean:
 	$(LATEXMK) -C $(PROJECT).tex
 	rm -f *.aux *.log *.toc *.out *.fls *.fdb_latexmk
 
-release:
-	$(LATEXMK) -pdf $(PROJECT).tex
-	cp $(PROJECT).pdf releases/
+release: pdf
+	mkdir -p releases
+	cp $(PROJECT).pdf releases/$(PROJECT).pdf
 
 open:
 	open $(PROJECT).pdf
