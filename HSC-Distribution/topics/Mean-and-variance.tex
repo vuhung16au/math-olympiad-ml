@@ -1,0 +1,26 @@
+% Mean-and-variance.tex
+% Topic: Mean and Variance of a Distribution
+
+\textbf{Mean (Expected Value).} The mean of a continuous random variable $X$ with pdf $f(x)$ is
+\[
+\mu = E(X) = \int_{-\infty}^{\infty} x\,f(x)\,dx.
+\]
+
+\textbf{Variance.} The variance measures the spread of the distribution:
+\[
+\sigma^2 = \mathrm{Var}(X) = E\!\left[(X - \mu)^2\right] = \int_{-\infty}^{\infty} (x-\mu)^2\,f(x)\,dx.
+\]
+An equivalent and often more convenient formula is
+\[
+\mathrm{Var}(X) = E(X^2) - [E(X)]^2.
+\]
+
+\textbf{Standard deviation.} $\sigma = \sqrt{\mathrm{Var}(X)}.$
+
+\textbf{Properties of expectation:}
+\begin{itemize}[leftmargin=*]
+  \item $E(aX + b) = aE(X) + b$ for constants $a$, $b$.
+  \item $\mathrm{Var}(aX + b) = a^2\,\mathrm{Var}(X)$.
+\end{itemize}
+
+% Placeholder: worked examples to be added.

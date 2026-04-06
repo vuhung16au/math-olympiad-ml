@@ -1,0 +1,25 @@
+% General-normal-distributions.tex
+% Topic: General Normal Distributions
+
+If $X \sim N(\mu, \sigma^2)$, the pdf of $X$ is
+\[
+f(x) = \frac{1}{\sigma\sqrt{2\pi}}\,\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right).
+\]
+
+\textbf{Standardising.} To compute probabilities, convert $X$ to the standard normal variable $Z$:
+\[
+Z = \frac{X - \mu}{\sigma} \sim N(0,1).
+\]
+Then
+\[
+P(a \leq X \leq b) = P\!\left(\frac{a-\mu}{\sigma} \leq Z \leq \frac{b-\mu}{\sigma}\right).
+\]
+
+\textbf{The 68-95-99.7 rule.} For any normal distribution:
+\begin{itemize}[leftmargin=*]
+  \item approximately $68\%$ of values lie within one standard deviation of the mean.
+  \item approximately $95\%$ of values lie within two standard deviations of the mean.
+  \item approximately $99.7\%$ of values lie within three standard deviations of the mean.
+\end{itemize}
+
+% Placeholder: examples and diagrams to be added.

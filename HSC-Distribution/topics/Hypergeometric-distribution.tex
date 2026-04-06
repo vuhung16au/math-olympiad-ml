@@ -1,0 +1,25 @@
+% Hypergeometric-distribution.tex
+% Topic: Hypergeometric Distribution
+% (Advanced topic — outside the HSC Mathematics Extension 2 syllabus)
+
+The \textbf{hypergeometric distribution} models the number of successes in a sample drawn \emph{without replacement} from a finite population.
+
+\textbf{Setup.} A population of $N$ items contains $K$ successes (and $N-K$ failures). A sample of $n$ items is drawn without replacement. Let $X$ be the number of successes in the sample.
+
+\textbf{Probability formula:}
+\[
+P(X = k) = \frac{\dbinom{K}{k}\dbinom{N-K}{n-k}}{\dbinom{N}{n}}, \qquad \max(0,\,n-(N-K)) \leq k \leq \min(n,K).
+\]
+
+\textbf{Mean and variance:}
+\[
+E(X) = \frac{nK}{N}, \qquad \mathrm{Var}(X) = \frac{nK(N-K)(N-n)}{N^2(N-1)}.
+\]
+
+\textbf{Contrast with binomial.} The binomial distribution models sampling \emph{with replacement}; the hypergeometric distribution models sampling \emph{without replacement}. For large $N$, the two distributions are approximately the same.
+
+\begin{remark}
+The hypergeometric distribution arises naturally in quality control, card problems, and ecological sampling.
+\end{remark}
+
+% Placeholder: examples to be added.

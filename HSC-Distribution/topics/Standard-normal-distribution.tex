@@ -1,0 +1,26 @@
+% Standard-normal-distribution.tex
+% Topic: The Standard Normal Distribution
+
+The \textbf{standard normal distribution} is denoted $Z \sim N(0,1)$. It has mean $\mu = 0$ and standard deviation $\sigma = 1$.
+
+Its pdf is
+\[
+\phi(z) = \frac{1}{\sqrt{2\pi}}\,e^{-z^2/2}, \qquad -\infty < z < \infty.
+\]
+
+The cumulative distribution function is
+\[
+\Phi(z) = P(Z \leq z) = \int_{-\infty}^{z} \phi(t)\,dt.
+\]
+Values of $\Phi(z)$ are read from the standard normal table.
+
+\textbf{Symmetry property:} $P(Z \leq -z) = 1 - P(Z \leq z)$, or equivalently $\Phi(-z) = 1 - \Phi(z)$.
+
+\textbf{Key values:}
+\begin{itemize}[leftmargin=*]
+  \item $P(-1 \leq Z \leq 1) \approx 0.6827$
+  \item $P(-2 \leq Z \leq 2) \approx 0.9545$
+  \item $P(-3 \leq Z \leq 3) \approx 0.9973$
+\end{itemize}
+
+% Placeholder: normal table, diagrams, and examples to be added.

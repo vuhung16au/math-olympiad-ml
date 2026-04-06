@@ -1,0 +1,21 @@
+% Continuous-distributions.tex
+% Topic: Continuous Distributions
+
+A \textbf{continuous random variable} $X$ can take any value in an interval (or union of intervals) of real numbers. Instead of assigning probability to individual values, we use a \textbf{probability density function} (pdf) $f(x)$.
+
+\textbf{Properties of a pdf:}
+\begin{itemize}[leftmargin=*]
+  \item $f(x) \geq 0$ for all $x$.
+  \item $\displaystyle\int_{-\infty}^{\infty} f(x)\,dx = 1$.
+  \item $P(a \leq X \leq b) = \displaystyle\int_a^b f(x)\,dx$.
+\end{itemize}
+
+Note that for a continuous random variable, $P(X = c) = 0$ for any particular value $c$. This means $P(a \leq X \leq b) = P(a < X < b)$.
+
+\textbf{Cumulative distribution function (CDF).} The CDF is defined by
+\[
+F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t)\,dt.
+\]
+The pdf is the derivative of the CDF: $f(x) = F'(x)$.
+
+% Placeholder: detailed examples and diagrams to be added.

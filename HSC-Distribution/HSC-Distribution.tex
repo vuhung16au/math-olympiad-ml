@@ -1,0 +1,266 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{calc}
+\pgfplotsset{compat=1.18}
+
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+
+\providecolor{warmstone}{RGB}{208,184,168}
+
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
+  title={\bfseries Remark~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{remark}[1][]{%
+  \begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{remarkbox}%
+}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Mathematics Extension 2: Probability Distributions}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% QR Code Page (Page 2)
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \includegraphics[width=0.25\textwidth]{assets/qrcode.png}
+    \\[0.3cm]
+    \small \textit{Download PDF and resources:} \\
+    \footnotesize \url{https://github.com/vuhung16au/math-olympiad-ml}
+\end{center}
+\vspace*{\fill}
+
+\begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
+
+\newpage
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\itshape
+The theory of probabilities is at bottom nothing but common sense\\
+reduced to calculus; it enables us to appreciate with exactness that\\
+which accurate minds feel with a sort of instinct.
+
+\vspace{1em}
+\normalfont Pierre-Simon Laplace
+\end{center}
+\vspace*{\fill}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+%% ============================================================
+\section{Introduction}
+%% ============================================================
+
+\subsection{Project Overview}
+This booklet is a growing collection of probability distribution problems for NSW HSC Mathematics Extension~2 students. It covers continuous probability distributions (including the normal distribution), binomial distributions, and selected advanced topics such as Monte Carlo simulations and the hypergeometric distribution.
+
+\subsection{Target Audience}
+This resource is written for students who want extra practice with probability distributions in a clear, classroom-friendly format. Full worked solutions are provided for Part~1 problems, with hints for Part~2 problems. Each problem contains a takeaways box summarising the key idea.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the introductory theory for each topic before attempting problems.
+  \item Attempt each problem before reading the solution.
+  \item Pay attention to whether a question involves a discrete or continuous distribution.
+  \item Use the takeaways to build pattern recognition for future HSC questions.
+\end{itemize}
+
+\subsection{Extension 1 Knowledge Needed}
+To work through this booklet, students should be comfortable with:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Basic probability:} sample spaces, complementary events, conditional probability.
+  \item \textbf{Algebra:} solving equations, working with exponentials and logarithms.
+  \item \textbf{Calculus:} integration, including integration by substitution.
+  \item \textbf{Binomial theorem:} expansion of $(1+x)^n$ and binomial coefficients $\binom{n}{r}$.
+  \item \textbf{Statistics basics:} mean, variance, standard deviation.
+\end{itemize}
+
+\subsection{Core Formulas and Ideas}
+
+\textbf{Probability density function (pdf).} A function $f(x)$ is a probability density function if
+\[
+f(x) \geq 0 \quad \text{for all } x, \qquad \text{and} \qquad \int_{-\infty}^{\infty} f(x)\,dx = 1.
+\]
+The probability that $X$ lies in the interval $[a,b]$ is
+\[
+P(a \leq X \leq b) = \int_a^b f(x)\,dx.
+\]
+
+\textbf{Mean (expected value).} For a continuous random variable with pdf $f(x)$,
+\[
+\mu = E(X) = \int_{-\infty}^{\infty} x\,f(x)\,dx.
+\]
+
+\textbf{Variance.}
+\[
+\sigma^2 = \mathrm{Var}(X) = E(X^2) - [E(X)]^2 = \int_{-\infty}^{\infty} x^2 f(x)\,dx - \mu^2.
+\]
+
+\textbf{Standard deviation.} $\sigma = \sqrt{\mathrm{Var}(X)}$.
+
+\textbf{Standard normal distribution.} The standard normal distribution $Z \sim N(0,1)$ has pdf
+\[
+\phi(z) = \frac{1}{\sqrt{2\pi}}\,e^{-z^2/2}.
+\]
+
+\textbf{General normal distribution.} If $X \sim N(\mu, \sigma^2)$, then
+\[
+Z = \frac{X - \mu}{\sigma} \sim N(0,1).
+\]
+
+\textbf{Binomial distribution.} If $X \sim B(n, p)$, then
+\[
+P(X = r) = \binom{n}{r} p^r (1-p)^{n-r}, \quad r = 0, 1, \ldots, n.
+\]
+The mean is $\mu = np$ and the variance is $\sigma^2 = np(1-p)$.
+
+\textbf{Normal approximation to binomial.} For large $n$,
+\[
+X \sim B(n,p) \approx N\!\left(np,\, np(1-p)\right).
+\]
+
+\textbf{Sample proportion.} For a sample of size $n$ from a population with proportion $p$,
+\[
+\hat{p} = \frac{X}{n}, \qquad E(\hat{p}) = p, \qquad \mathrm{Var}(\hat{p}) = \frac{p(1-p)}{n}.
+\]
+
+%% ============================================================
+\section{Continuous Probability Distributions}
+%% ============================================================
+
+\subsection{Relative Frequency}
+\input{topics/Relative-frequency}
+
+\subsection{Continuous Distributions}
+\input{topics/Continuous-distributions}
+
+\subsection{Mean and Variance of a Distribution}
+\input{topics/Mean-and-variance}
+
+\subsection{The Standard Normal Distribution}
+\input{topics/Standard-normal-distribution}
+
+\subsection{General Normal Distributions}
+\input{topics/General-normal-distributions}
+
+\subsection{Applications of the Normal Distribution}
+\input{topics/Applications-of-normal-distribution}
+
+\subsection{Investigations Using the Normal Distribution}
+\input{topics/Investigations-normal-distribution}
+
+%% ============================================================
+\section{Binomial Distributions}
+%% ============================================================
+
+\subsection{Binomial Probability}
+\input{topics/Binomial-probability}
+
+\subsection{Binomial Distributions}
+\input{topics/Binomial-distributions}
+
+\subsection{Normal Approximations to a Binomial}
+\input{topics/Normal-approximations-to-binomial}
+
+\subsection{Sample Proportions}
+\input{topics/Sample-proportions}
+
+%% ============================================================
+\section{Advanced Topics}
+\label{sec:advanced}
+(These topics are outside the HSC Mathematics Extension~2 syllabus but provide valuable enrichment.)
+%% ============================================================
+
+\subsection{Monte Carlo Simulations}
+\input{topics/Monte-Carlo-simulations}
+
+\subsection{Hypergeometric Distribution}
+\input{topics/Hypergeometric-distribution}
+
+%% ============================================================
+\section{Part 1: Worked Problems}
+%% ============================================================
+
+Part~1 contains three sets of problems with detailed solutions. Each solution includes a strategy note, step-by-step working, and a takeaways box.
+
+\subsection{Basic}
+\input{problems/part1-basic}
+
+\subsection{Medium}
+\input{problems/part1-medium}
+
+\subsection{Advanced}
+\input{problems/part1-advanced}
+
+%% ============================================================
+\section{Part 2: Practice and Challenge Bank}
+%% ============================================================
+
+Part~2 presents additional problems. Try each problem first, then check the hint if needed.
+
+\subsection{Warm-Up Drills}
+\input{problems/part2-basic}
+
+\subsection{Stretch Problems}
+\input{problems/part2-medium}
+
+\subsection{Challenge Corner}
+\input{problems/part2-advanced}
+
+%% ============================================================
+\section{Conclusion}
+%% ============================================================
+
+Probability distributions are at the heart of statistics and data science. The techniques covered in this booklet --- from reading a normal distribution table to applying the binomial model --- appear regularly in HSC examinations and in real-world applications such as quality control, risk analysis, and machine learning.
+
+Keep practising with a variety of problems, and remember: understanding the shape and parameters of a distribution is often the key to unlocking the solution.
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Distribution}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Distribution}
+
+\end{document}

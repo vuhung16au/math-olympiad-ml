@@ -1,0 +1,25 @@
+% Sample-proportions.tex
+% Topic: Sample Proportions
+
+Given a random sample of size $n$ from a population with true proportion $p$, the \textbf{sample proportion} is
+\[
+\hat{p} = \frac{X}{n},
+\]
+where $X \sim B(n,p)$ is the number of successes in the sample.
+
+\textbf{Mean and variance of $\hat{p}$:}
+\[
+E(\hat{p}) = p, \qquad \mathrm{Var}(\hat{p}) = \frac{p(1-p)}{n}.
+\]
+
+\textbf{Approximate distribution.} For large $n$,
+\[
+\hat{p} \approx N\!\left(p,\, \frac{p(1-p)}{n}\right).
+\]
+
+\textbf{Confidence intervals.} An approximate $95\%$ confidence interval for $p$ is
+\[
+\hat{p} \pm 1.96\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
+\]
+
+% Placeholder: examples to be added.

@@ -1,0 +1,23 @@
+% Monte-Carlo-simulations.tex
+% Topic: Monte Carlo Simulations
+% (Advanced topic — outside the HSC Mathematics Extension 2 syllabus)
+
+\textbf{Monte Carlo simulation} is a computational technique that uses random sampling to approximate numerical results. It is particularly useful when a problem is too complex to solve analytically.
+
+\textbf{Basic idea:}
+\begin{enumerate}[leftmargin=*]
+  \item Define a random experiment whose outcome is related to the quantity you want to estimate.
+  \item Simulate the experiment a large number of times (e.g.\ $N = 10{,}000$ trials).
+  \item Estimate the quantity as the proportion (or average) of the simulated outcomes.
+\end{enumerate}
+
+\textbf{Estimating $\pi$ by Monte Carlo.} Consider a unit square with an inscribed quarter-circle of radius $1$.
+\begin{itemize}[leftmargin=*]
+  \item Generate $N$ random points $(x_i, y_i)$ with $x_i, y_i \in [0,1]$.
+  \item Count the number $M$ of points satisfying $x_i^2 + y_i^2 \leq 1$.
+  \item Then $\pi \approx 4M/N$.
+\end{itemize}
+
+\textbf{Why it works.} The probability that a random point in the unit square lies inside the quarter-circle is $\pi/4$, since the area of the quarter-circle is $\pi/4$ and the area of the square is $1$.
+
+% Placeholder: further examples and simulations to be added.

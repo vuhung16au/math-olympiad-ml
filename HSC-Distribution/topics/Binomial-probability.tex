@@ -1,0 +1,22 @@
+% Binomial-probability.tex
+% Topic: Binomial Probability
+
+A \textbf{binomial experiment} has the following properties:
+\begin{itemize}[leftmargin=*]
+  \item A fixed number $n$ of trials.
+  \item Each trial has exactly two outcomes: \textit{success} or \textit{failure}.
+  \item The probability of success $p$ is the same on every trial.
+  \item The trials are independent.
+\end{itemize}
+
+If $X$ is the number of successes in $n$ independent trials with probability $p$ of success, then
+\[
+P(X = r) = \binom{n}{r}\,p^r\,(1-p)^{n-r}, \qquad r = 0, 1, 2, \ldots, n.
+\]
+
+\textbf{Cumulative binomial probability:}
+\[
+P(X \leq k) = \sum_{r=0}^{k} \binom{n}{r}\,p^r\,(1-p)^{n-r}.
+\]
+
+% Placeholder: worked examples to be added.

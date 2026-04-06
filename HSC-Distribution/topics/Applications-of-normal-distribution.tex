@@ -1,0 +1,24 @@
+% Applications-of-normal-distribution.tex
+% Topic: Applications of the Normal Distribution
+
+The normal distribution models many naturally occurring quantities, including:
+\begin{itemize}[leftmargin=*]
+  \item heights and weights in a population,
+  \item measurement errors in scientific experiments,
+  \item scores on standardised tests,
+  \item lifetimes of manufactured components.
+\end{itemize}
+
+\textbf{Finding probabilities.} To find $P(X \leq k)$ for $X \sim N(\mu, \sigma^2)$:
+\begin{enumerate}[leftmargin=*]
+  \item Standardise: compute $z = \dfrac{k - \mu}{\sigma}$.
+  \item Read $\Phi(z)$ from the standard normal table.
+\end{enumerate}
+
+\textbf{Finding cut-off values.} Given $P(X \leq k) = p$, find $k$:
+\begin{enumerate}[leftmargin=*]
+  \item Find $z$ such that $\Phi(z) = p$ (using the inverse normal table or technology).
+  \item Convert back: $k = \mu + z\sigma$.
+\end{enumerate}
+
+% Placeholder: detailed worked examples to be added.

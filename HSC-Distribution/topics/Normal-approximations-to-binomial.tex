@@ -1,0 +1,20 @@
+% Normal-approximations-to-binomial.tex
+% Topic: Normal Approximations to a Binomial
+
+When $n$ is large, the binomial distribution $B(n,p)$ can be approximated by a normal distribution. Specifically,
+\[
+X \sim B(n,p) \approx N\!\left(\mu, \sigma^2\right), \qquad \mu = np, \quad \sigma^2 = np(1-p).
+\]
+
+\textbf{When is the approximation valid?} A common guideline is that both $np \geq 5$ and $n(1-p) \geq 5$.
+
+\textbf{Continuity correction.} Because the binomial is discrete and the normal is continuous, a continuity correction improves accuracy:
+\[
+P(X = k) \approx P\!\left(k - \tfrac{1}{2} \leq X \leq k + \tfrac{1}{2}\right).
+\]
+For example:
+\[
+P(X \leq k) \approx P\!\left(X \leq k + \tfrac{1}{2}\right) \quad \text{(normal approximation)}.
+\]
+
+% Placeholder: examples to be added.
