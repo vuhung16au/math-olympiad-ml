@@ -29,6 +29,30 @@
   top=20mm,
 }
 
+\providecolor{warmstone}{RGB}{208,184,168}
+
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
+  title={\bfseries Remark~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{remark}[1][]{%
+  \begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{remarkbox}%
+}
+
 \author{Vu Hung Nguyen}
 \title{HSC Math Extension 1: Polynomials Mastery}
 \date{}
@@ -39,35 +63,238 @@
 
 \begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
 
+\newpage
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\itshape
+The theory of equations is one of the most beautiful and important branches of\\
+mathematics. Every polynomial equation holds a secret waiting to be factored out.
+
+\vspace{1em}
+\normalfont Adapted from classical algebra
+\end{center}
+\vspace*{\fill}
+
+\newpage
+
 \tableofcontents
 \newpage
 
+% ============================================================
 \section{Introduction}
+% ============================================================
 
-This booklet covers the topics of polynomials for the HSC Mathematics Extension 1 syllabus. In this booklet, we review these fundamentals and solve sample problems.
+\subsection{Project Overview}
+This booklet is a growing collection of polynomial problems for NSW HSC Mathematics Extension~1 students. It covers the full polynomial strand of the Extension~1 syllabus, including the language and notation of polynomials, graphs of polynomial functions, division algorithms, the remainder and factor theorems, consequences of the factor theorem, sums and products of zeroes (roots), and multiple zeroes. The problems range from straightforward skill-drill questions to multi-step challenge problems suitable for exam preparation.
 
-\newpage
-\input{01-The-language-of-polynomials}
+\subsection{Target Audience}
+This resource is written for students who want focused, exam-oriented practice with polynomials in a clear, classroom-friendly format. Solutions are intentionally concise but each one highlights the key algebraic idea behind the answer. Students who work systematically through Parts~1 and~2 should gain both fluency and deeper conceptual understanding of the polynomial topics tested in Extension~1.
 
-\newpage
-\input{02-Graphs-of-polynomial-functions}
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the core formulas and theory summaries in this introduction first.
+  \item Attempt each problem before reading the solution.
+  \item Pay attention to the \emph{type} of question: is it a factoring question, a root-extraction question, or a proof using identities?
+  \item Look for structure: symmetry among roots, repeated factors, or relationships that allow the factor theorem to be applied efficiently.
+  \item Use the remarks and takeaways to build pattern recognition for future HSC questions.
+\end{itemize}
 
-\newpage
-\input{03-Division-of-polynomials}
+\subsection{Extension 1 Knowledge Needed}
+Most problems in this booklet can be solved using standard HSC Mathematics Extension~1 knowledge. The key background material is:
 
-\newpage
-\input{04-The-remainder-and-factor-theorems}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Polynomial notation:} understanding degree, leading coefficient, constant term, and the standard form
+  \[
+    P(x) = a_n x^n + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0, \quad a_n \neq 0.
+  \]
+  \item \textbf{Equality of polynomials:} two polynomials are equal if and only if all corresponding coefficients are equal.
+  \item \textbf{Division algorithm:} for polynomials $P(x)$ and $D(x)$ with $\deg D \leq \deg P$, there exist unique $Q(x)$ and $R(x)$ with $\deg R < \deg D$ such that $P(x) = D(x)Q(x) + R(x)$.
+  \item \textbf{Remainder theorem:} when $P(x)$ is divided by $(x-a)$, the remainder equals $P(a)$.
+  \item \textbf{Factor theorem:} $(x-a)$ is a factor of $P(x)$ if and only if $P(a) = 0$.
+  \item \textbf{Vieta's formulas (sums and products of roots):} for $P(x) = x^n + p_{n-1}x^{n-1} + \cdots + p_0$, the elementary symmetric functions of the roots $\alpha_1, \ldots, \alpha_n$ are expressible in terms of the coefficients.
+  \item \textbf{Multiple zeroes:} $a$ is a zero of multiplicity $m$ when $(x-a)^m \mid P(x)$ but $(x-a)^{m+1} \nmid P(x)$; equivalently, $P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0$ and $P^{(m)}(a) \neq 0$.
+  \item \textbf{Graph behaviour near roots:} the curve crosses the $x$-axis at simple roots and touches (but does not cross) at even-multiplicity roots.
+  \item \textbf{Long division and synthetic division:} systematic methods for finding quotients and remainders.
+  \item \textbf{Sketching polynomial graphs:} leading-term behaviour, $y$-intercept, $x$-intercepts, and turning points.
+\end{itemize}
 
-\newpage
-\input{05-Consequences-of-the-factor-theorem}
+\subsection{Core Formulas and Ideas}
 
-\newpage
-\input{06-Sums-and-products-of-zeroes}
+\textbf{Definition of a Polynomial.}  A \textbf{polynomial} in $x$ of degree $n$ is an expression of the form
+\[
+  P(x) = a_n x^n + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0,
+\]
+where $a_n, a_{n-1}, \ldots, a_0$ are real (or complex) constants and $a_n \neq 0$.
+The highest power $n$ is the \textbf{degree} of $P$, and $a_n$ is its \textbf{leading coefficient}.
 
-\newpage
-\input{07-Multiple-zeroes}
+\textbf{Polynomial Equality.}  Two polynomials are equal if and only if they have the same degree and all corresponding coefficients are equal:
+\[
+  a_n x^n + \cdots + a_0 = b_n x^n + \cdots + b_0
+  \;\Longleftrightarrow\;
+  a_k = b_k \text{ for all } k.
+\]
 
-\newpage
-\input{08-Geometry-using-polynomial-techniques}
+\textbf{Division Algorithm for Polynomials.} Given polynomials $P(x)$ and $D(x)$ with $D(x) \neq 0$ and $\deg D \leq \deg P$, there exist unique polynomials $Q(x)$ (the \emph{quotient}) and $R(x)$ (the \emph{remainder}) such that
+\[
+  P(x) = D(x)\,Q(x) + R(x), \qquad \deg R < \deg D \text{ (or } R = 0\text{)}.
+\]
+
+\textbf{Remainder Theorem.}  When the polynomial $P(x)$ is divided by the linear factor $(x - a)$, the remainder is
+\[
+  R = P(a).
+\]
+
+\textbf{Factor Theorem.}  $(x - a)$ is a factor of $P(x)$ if and only if
+\[
+  P(a) = 0.
+\]
+More generally, $(ax - b)$ is a factor of $P(x)$ if and only if $P\!\left(\tfrac{b}{a}\right) = 0$.
+
+\subsection{Vieta's Formulas (Sums and Products of Roots)}
+
+Let $P(x) = a_n x^n + a_{n-1}x^{n-1} + \cdots + a_0$ have roots $\alpha_1, \alpha_2, \ldots, \alpha_n$. Then:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Sum of roots:}
+  \[
+    \alpha_1 + \alpha_2 + \cdots + \alpha_n = -\frac{a_{n-1}}{a_n}.
+  \]
+  \item \textbf{Sum of products of pairs:}
+  \[
+    \sum_{i<j} \alpha_i\alpha_j = \frac{a_{n-2}}{a_n}.
+  \]
+  \item \textbf{Product of all roots:}
+  \[
+    \alpha_1\,\alpha_2\cdots\alpha_n = (-1)^n\,\frac{a_0}{a_n}.
+  \]
+\end{enumerate}
+
+\textit{Quadratic case.} If $P(x) = x^2 + bx + c$ has roots $\alpha, \beta$:
+\[
+  \alpha + \beta = -b, \qquad \alpha\beta = c.
+\]
+
+\textit{Cubic case.} If $P(x) = x^3 + px^2 + qx + r$ has roots $\alpha, \beta, \gamma$:
+\[
+  \alpha+\beta+\gamma = -p, \qquad
+  \alpha\beta+\beta\gamma+\gamma\alpha = q, \qquad
+  \alpha\beta\gamma = -r.
+\]
+
+\subsection{Multiple Zeroes and Graph Behaviour}
+
+A number $a$ is a zero of \textbf{multiplicity} $m$ of the polynomial $P(x)$ if
+\[
+  (x-a)^m \mid P(x) \quad\text{but}\quad (x-a)^{m+1} \nmid P(x).
+\]
+An equivalent characterisation using derivatives:
+\[
+  P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0, \quad P^{(m)}(a) \neq 0.
+\]
+
+\textbf{Graph shape at a zero:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Simple zero} ($m = 1$): the graph \emph{crosses} the $x$-axis.
+  \item \textbf{Double zero} ($m = 2$): the graph \emph{touches} the $x$-axis and turns back (like $y = x^2$ at the origin).
+  \item \textbf{Triple zero} ($m = 3$): the graph \emph{flattens} and crosses the $x$-axis (like $y = x^3$ at the origin).
+\end{itemize}
+
+\subsection{Sketching Polynomial Graphs}
+
+Key features to determine when sketching $y = P(x)$:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Degree and leading coefficient:} determines end behaviour.
+  \begin{itemize}[leftmargin=*]
+    \item Even degree, positive leading coefficient: both ends go to $+\infty$.
+    \item Even degree, negative leading coefficient: both ends go to $-\infty$.
+    \item Odd degree, positive leading coefficient: left end $\to -\infty$, right end $\to +\infty$.
+    \item Odd degree, negative leading coefficient: left end $\to +\infty$, right end $\to -\infty$.
+  \end{itemize}
+  \item \textbf{$y$-intercept:} $P(0) = a_0$.
+  \item \textbf{$x$-intercepts:} the real roots of $P(x) = 0$, taking multiplicities into account.
+  \item \textbf{Turning points:} at most $n-1$ turning points for a degree-$n$ polynomial.
+\end{enumerate}
+
+\subsection{Consequences of the Factor Theorem}
+
+\begin{itemize}[leftmargin=*]
+  \item If a polynomial $P(x)$ of degree $n$ has $n$ distinct real roots $\alpha_1, \ldots, \alpha_n$, then
+  \[
+    P(x) = a_n(x - \alpha_1)(x - \alpha_2)\cdots(x - \alpha_n).
+  \]
+  \item A polynomial of degree $n$ has \emph{at most} $n$ roots (counted with multiplicity) unless it is the zero polynomial.
+  \item If two polynomials of degree $\leq n$ agree at $n+1$ distinct points, they must be identical.
+  \item \textbf{Finding factors:} to factor $P(x)$, test rational candidates $\pm\frac{p}{q}$ where $p \mid a_0$ and $q \mid a_n$ (rational root theorem), then use polynomial division to find the remaining factors.
+\end{itemize}
+
+\subsection{Division Techniques}
+
+\textbf{Long division.} Systematically divide the leading term of the dividend by the leading term of the divisor, multiply, subtract, and repeat until the degree of the remainder is less than the degree of the divisor.
+
+\textbf{Synthetic division (for linear divisors).} A streamlined numerical method for dividing $P(x)$ by $(x - a)$; it records only the coefficients and uses the value $a$ as the divisor.
+
+\textit{Example.} To divide $P(x) = 2x^3 - 3x^2 + x - 5$ by $(x - 2)$ using synthetic division:
+\[
+\begin{array}{c|cccc}
+  2 & 2 & -3 & 1 & -5 \\\hline
+    &   & 4  & 2 & 6 \\\hline
+    & 2 & 1  & 3 & 1
+\end{array}
+\]
+So $P(x) = (x-2)(2x^2 + x + 3) + 1$, and the remainder is $P(2) = 1$. \checkmark
+
+\subsection{Problem-Solving Habits for This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Always identify the \emph{degree} and \emph{leading coefficient} first.
+  \item When using the factor theorem, try $x = \pm 1, \pm 2, \ldots$ before turning to the rational root theorem.
+  \item For root-sum/product problems, write out Vieta's formulas explicitly before attempting algebra.
+  \item For multiple-zero problems, consider taking derivatives to set up a system of equations.
+  \item For graph sketching, mark each intercept with its multiplicity and check end behaviour.
+  \item In proof questions, compare coefficients or use the identity principle for polynomials.
+\end{itemize}
+
+\begin{remark}
+The most common polynomial mistake is forgetting to account for multiplicity: a polynomial of degree $n$ may have \emph{fewer} than $n$ distinct real roots, but it always has \emph{exactly} $n$ roots when complex roots and multiplicities are counted together (Fundamental Theorem of Algebra).
+\end{remark}
+
+% ============================================================
+\section{Part 1: Worked Problems}
+% ============================================================
+
+\subsection{Basic}
+\input{problems/part1-basic}
+
+\subsection{Medium}
+\input{problems/part1-medium}
+
+\subsection{Advanced}
+\input{problems/part1-advanced}
+
+% ============================================================
+\section{Part 2: Practice and Challenge Bank}
+% ============================================================
+
+\subsection{Warm-Up Drills}
+\input{problems/part2-basic}
+
+\subsection{Stretch Problems}
+\input{problems/part2-medium}
+
+\subsection{Challenge Corner}
+\input{problems/part2-advanced}
+
+% ============================================================
+\section{Conclusion}
+% ============================================================
+
+Polynomials reward systematic thinking as much as algebraic fluency. Many HSC Extension~1 questions become far more tractable once you identify the correct strategy: applying the factor theorem, writing out Vieta's formulas, or reading the graph multiplicity from first principles. As this booklet grows, it will serve as a compact reference for the most important polynomial patterns students encounter in Extension~1 examinations and beyond.
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Polynomials-Extension1}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Polynomials-Extension1}
 
 \end{document}
