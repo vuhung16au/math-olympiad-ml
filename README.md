@@ -31,6 +31,17 @@ Below is a list of the main sub-projects in this repository. Each folder contain
 - **[sequence_a_n](./sequence_a_n/):** Problem T6-219 - A sequence analysis problem involving recursive sequences and limit inferior proofs. Contains problem statement (PDF), LaTeX source, and analysis notes.
 - **[StrangeNestSquareRoots](./StrangeNestSquareRoots/):** Explorations of nested square root problems. See the [external repository](https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/StrangeNestSquareRoots) for more details.
 
+## QR Code Generation
+
+QR code scripts are in [scripts](./scripts/).
+
+- Generate/update QR images only:
+	- `python scripts/generate_qrcodes.py`
+- Generate/update QR images and insert a QR page into booklet `.tex` files (if missing):
+	- `python scripts/setup_qrcodes.py`
+
+Run these commands from the repository root.
+
 
 ## Contributing
 
