@@ -29,8 +29,32 @@
   top=20mm,
 }
 
+\providecolor{warmstone}{RGB}{208,184,168}
+
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
+  title={\bfseries Remark~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{remark}[1][]{%
+  \begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{remarkbox}%
+}
+
 \author{Vu Hung Nguyen}
-\title{HSC Math Extension 1 \& 2: Trigonometry}
+\title{HSC Mathematics Extension 1 \& 2: Trigonometry Mastery}
 \date{}
 
 \begin{document}
@@ -39,97 +63,279 @@
 
 \begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
 
+\newpage
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\itshape
+Trigonometry is not merely about angles and ratios.\\
+It is the language in which the universe whispers its periodic secrets.
+
+\vspace{1em}
+\normalfont Adapted from classical analysis
+\end{center}
+\vspace*{\fill}
+
+\newpage
+
 \tableofcontents
 \newpage
 
+% ============================================================
 \section{Introduction}
+% ============================================================
 
 \subsection{Project Overview}
-This booklet compiles high-quality trigonometry problems curated specifically for the HSC Mathematics Extension 1 and Extension 2 syllabuses. 
+This booklet is a growing collection of trigonometry problems for NSW HSC Mathematics Extension~1 and Extension~2 students. It covers the full trigonometry strand across both syllabuses, including right-angled triangles, trigonometric functions of a general angle, trigonometric identities and equations, the sine and cosine rules, inverse trigonometric functions, compound and double-angle formulae, the $t$-formulae, and products-to-sums conversions. The problems range from straightforward skill-drill questions to multi-step challenge problems suitable for exam preparation and beyond.
 
-\newpage
-\section{Trigonometry With Right-Angled Triangles}
-\input{problems/01-Trigonometry-with-right-angled-triangles}
+\subsection{Target Audience}
+This resource is written for students who want focused, exam-oriented practice with trigonometry in a clear, classroom-friendly format. Solutions are intentionally concise but each one highlights the key idea behind the answer. Students who work systematically through Parts~1 and~2 should gain both fluency and a deeper conceptual understanding of the trigonometry topics tested in Extension~1 and Extension~2.
 
-\newpage
-\section{Problems Involving Right-Angled Triangles}
-\input{problems/02-Problems-involving-right-angled-triangles}
-
-\newpage
-\section{Three-Dimensional Trigonometry}
-\input{problems/03-Three-dimensional-trigonometry}
-
-\newpage
-\section{Trigonometric Functions Of A General Angle}
-\input{problems/04-Trigonometric-functions-of-a-general-angle}
-
-\newpage
-\section{Quadrant, Sign, And Related Acute Angle}
-\input{problems/05-Quadrant-sign-and-related-acute-angle}
-
-\newpage
-\section{Given One Trigonometric Function, Find Another}
-\input{problems/06-Given-one-trigonometric-function-find-another}
-
-\newpage
-\section{Trigonometric Identities}
-\input{problems/07-Trigonometric-identities}
-
-\newpage
-\section{Trigonometric Equations}
-\input{problems/08-Trigonometric-equations}
-
-\newpage
-\section{The Sine Rule And The Area Formula}
-\input{problems/09-The-sine-rule-and-the-area-formula}
-
-\newpage
-\section{The Cosine Rule}
-\input{problems/10-The-cosine-rule}
-
-\newpage
-\section{Problems Involving General Triangles}
-\input{problems/11-Problems-involving-general-triangles}
-
-\newpage
-\section{Restricting The Domain}
-\input{problems/12-Restricting-the-domain}
-
-\newpage
-\section{Defining The Inverse Trigonometric Functions}
-\input{problems/13-Defining-the-inverse-trigonometric-functions}
-
-\newpage
-\section{Graphs Involving Inverse Trigonometric Functions}
-\input{problems/14-Graphs-involving-inverse-trigonometric-functions}
-
-\newpage
-\section{Trigonometric Functions Of Compound Angles}
-\input{problems/15-Trigonometric-functions-of-compound-angles}
-
-\newpage
-\section{The Double-Angle Formulae}
-\input{problems/16-The-double-angle-formulae}
-
-\newpage
-\section{The t-Formulae}
-\input{problems/17-The-t-formulae}
-
-\newpage
-\section{Products To Sums}
-\input{problems/18-Products-to-sums}
-
-\newpage
-\section{Conclusion}
-
-\subsection{Final Thoughts}
-Mastering trigonometry in HSC Mathematics requires practice and a deep understanding of its graphical properties, inversions, equations, and advanced compound identities.
-
-\subsection{Contact Information}
+\subsection{How to Use This Booklet}
 \begin{itemize}[leftmargin=*]
-  \item \textbf{LinkedIn:} \url{https://www.linkedin.com/in/vuhung16au/}
-  \item \textbf{GitHub:} \url{https://github.com/vuhung16au}
-  \item \textbf{Repository:} \url{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Trigonometry}
+  \item Read the core formulas and theory summaries in this introduction first.
+  \item Attempt each problem before reading the solution.
+  \item Pay attention to the \emph{type} of question: is it an identity, an equation, a geometry application, or an inverse trigonometry question?
+  \item Look for structure: symmetry, compound-angle patterns, Pythagorean identities, or opportunities to substitute $t = \tan(\theta/2)$.
+  \item Use the remarks and takeaways to build pattern recognition for future HSC questions.
 \end{itemize}
+
+\subsection{Extension 1 Knowledge Needed}
+Most problems in this booklet can be solved using standard HSC Mathematics Extension~1 and Extension~2 knowledge. The key background material is:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Right-angled trigonometry:} definitions of $\sin\theta$, $\cos\theta$, $\tan\theta$ as ratios of opposite, adjacent, and hypotenuse; exact values for $30^\circ$, $45^\circ$, $60^\circ$.
+  \item \textbf{ASTC rule (quadrant signs):} All, Sine, Tangent, Cosine are positive in quadrants~I, II, III, IV respectively.
+  \item \textbf{Trigonometric functions of a general angle:} converting angles to the related acute angle and applying the correct sign.
+  \item \textbf{Fundamental identity:} $\sin^2\theta + \cos^2\theta = 1$ and its derived forms $1 + \tan^2\theta = \sec^2\theta$ and $1 + \cot^2\theta = \csc^2\theta$.
+  \item \textbf{Double and symmetry identities:} supplementary ($\pi - \theta$), complementary ($\pi/2 - \theta$), and reflex ($2\pi - \theta$) angle reductions.
+  \item \textbf{The sine rule and cosine rule:} applied to general (non-right-angled) triangles, including the ambiguous case.
+  \item \textbf{Area formula:} $\text{Area} = \tfrac{1}{2}ab\sin C$.
+  \item \textbf{Inverse trigonometric functions:} restricted domains for $\arcsin$, $\arccos$, $\arctan$ and graphical properties.
+  \item \textbf{Compound-angle identities:} $\sin(\alpha \pm \beta)$, $\cos(\alpha \pm \beta)$, $\tan(\alpha \pm \beta)$.
+  \item \textbf{Double-angle formulae:} $\sin 2\theta$, $\cos 2\theta$ (all three forms), $\tan 2\theta$.
+  \item \textbf{The $t$-formulae:} expressing $\sin\theta$, $\cos\theta$, $\tan\theta$ in terms of $t = \tan(\theta/2)$.
+  \item \textbf{Products-to-sums and sums-to-products:} converting between products and sums of trigonometric functions.
+\end{itemize}
+
+\subsection{Core Formulas and Ideas}
+
+\textbf{Exact Values.}
+\[
+\begin{array}{c|ccc}
+\theta & \sin\theta & \cos\theta & \tan\theta \\[2pt]\hline\\[-8pt]
+0^\circ & 0 & 1 & 0 \\[4pt]
+30^\circ & \dfrac{1}{2} & \dfrac{\sqrt{3}}{2} & \dfrac{1}{\sqrt{3}} \\[10pt]
+45^\circ & \dfrac{1}{\sqrt{2}} & \dfrac{1}{\sqrt{2}} & 1 \\[10pt]
+60^\circ & \dfrac{\sqrt{3}}{2} & \dfrac{1}{2} & \sqrt{3} \\[10pt]
+90^\circ & 1 & 0 & \text{undefined}
+\end{array}
+\]
+
+\textbf{Pythagorean Identities.}
+\[
+\sin^2\theta + \cos^2\theta = 1, \qquad
+1 + \tan^2\theta = \sec^2\theta, \qquad
+1 + \cot^2\theta = \csc^2\theta.
+\]
+
+\textbf{Sine Rule.}
+\[
+\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R,
+\]
+where $R$ is the circumradius of the triangle.
+
+\textbf{Cosine Rule.}
+\[
+c^2 = a^2 + b^2 - 2ab\cos C, \qquad
+\cos C = \frac{a^2+b^2-c^2}{2ab}.
+\]
+
+\textbf{Area Formula.}
+\[
+\text{Area} = \tfrac{1}{2}ab\sin C.
+\]
+
+\subsection{Angle Reduction Identities}
+
+For all angles $\theta$:
+\[
+\sin(\pi - \theta) = \sin\theta, \qquad \cos(\pi-\theta) = -\cos\theta, \qquad \tan(\pi-\theta) = -\tan\theta.
+\]
+\[
+\sin(\pi + \theta) = -\sin\theta, \qquad \cos(\pi+\theta) = -\cos\theta, \qquad \tan(\pi+\theta) = \tan\theta.
+\]
+\[
+\sin(2\pi - \theta) = -\sin\theta, \qquad \cos(2\pi - \theta) = \cos\theta.
+\]
+\[
+\sin\!\left(\tfrac{\pi}{2}-\theta\right) = \cos\theta, \qquad \cos\!\left(\tfrac{\pi}{2}-\theta\right) = \sin\theta.
+\]
+
+\subsection{Compound Angle Identities}
+\[
+\sin(\alpha \pm \beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta.
+\]
+\[
+\cos(\alpha \pm \beta) = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta.
+\]
+\[
+\tan(\alpha \pm \beta) = \frac{\tan\alpha \pm \tan\beta}{1 \mp \tan\alpha\tan\beta}.
+\]
+
+\subsection{Double-Angle Formulae}
+\[
+\sin 2\theta = 2\sin\theta\cos\theta.
+\]
+\[
+\cos 2\theta = \cos^2\theta - \sin^2\theta = 1 - 2\sin^2\theta = 2\cos^2\theta - 1.
+\]
+\[
+\tan 2\theta = \frac{2\tan\theta}{1 - \tan^2\theta}.
+\]
+
+The power-reduction forms (useful for integration in Extension~2):
+\[
+\sin^2\theta = \frac{1-\cos 2\theta}{2}, \qquad \cos^2\theta = \frac{1+\cos 2\theta}{2}.
+\]
+
+\subsection{The $t$-Formulae}
+
+Let $t = \tan\!\left(\dfrac{\theta}{2}\right)$. Then:
+\[
+\sin\theta = \frac{2t}{1+t^2}, \qquad
+\cos\theta = \frac{1-t^2}{1+t^2}, \qquad
+\tan\theta = \frac{2t}{1-t^2}.
+\]
+These substitutions convert trigonometric equations into polynomial equations in $t$, a powerful technique for solving equations of the form $a\sin\theta + b\cos\theta = c$.
+
+\begin{remark}
+The $t$-substitution introduces the extraneous restriction $\theta \neq \pi + 2k\pi$ (where $\tan(\theta/2)$ is undefined). Always check that solutions from the $t$-substitution are valid in the original equation, and consider separately whether $\theta = \pi$ is a solution.
+\end{remark}
+
+\subsection{Products-to-Sums and Sums-to-Products}
+
+\textbf{Products to sums:}
+\[
+\sin\alpha\cos\beta = \tfrac{1}{2}[\sin(\alpha+\beta)+\sin(\alpha-\beta)].
+\]
+\[
+\cos\alpha\cos\beta = \tfrac{1}{2}[\cos(\alpha-\beta)+\cos(\alpha+\beta)].
+\]
+\[
+\sin\alpha\sin\beta = \tfrac{1}{2}[\cos(\alpha-\beta)-\cos(\alpha+\beta)].
+\]
+
+\textbf{Sums to products:}
+\[
+\sin A + \sin B = 2\sin\!\left(\frac{A+B}{2}\right)\cos\!\left(\frac{A-B}{2}\right).
+\]
+\[
+\sin A - \sin B = 2\cos\!\left(\frac{A+B}{2}\right)\sin\!\left(\frac{A-B}{2}\right).
+\]
+\[
+\cos A + \cos B = 2\cos\!\left(\frac{A+B}{2}\right)\cos\!\left(\frac{A-B}{2}\right).
+\]
+\[
+\cos A - \cos B = -2\sin\!\left(\frac{A+B}{2}\right)\sin\!\left(\frac{A-B}{2}\right).
+\]
+
+\subsection{Inverse Trigonometric Functions}
+
+The three principal inverse functions and their restricted domains are:
+\[
+\arcsin : [-1,1] \to \left[-\tfrac{\pi}{2}, \tfrac{\pi}{2}\right], \qquad
+\arccos : [-1,1] \to [0, \pi], \qquad
+\arctan : \mathbb{R} \to \left(-\tfrac{\pi}{2}, \tfrac{\pi}{2}\right).
+\]
+
+\textbf{Key identities:}
+\[
+\arcsin(-x) = -\arcsin x, \qquad \arccos(-x) = \pi - \arccos x, \qquad \arctan(-x) = -\arctan x.
+\]
+\[
+\arcsin x + \arccos x = \frac{\pi}{2} \quad \text{for } x \in [-1,1].
+\]
+
+\subsection{Auxiliary Angle Form}
+
+Any expression of the form $a\sin\theta + b\cos\theta$ can be written as a single sinusoid:
+\[
+a\sin\theta + b\cos\theta = R\sin(\theta + \varphi),
+\]
+where
+\[
+R = \sqrt{a^2+b^2}, \qquad \tan\varphi = \frac{b}{a}.
+\]
+Similarly, $a\sin\theta + b\cos\theta = R\cos(\theta - \psi)$ where $\tan\psi = a/b$.
+
+This form is extremely useful for finding the maximum and minimum values of weighted combinations of sine and cosine, and for solving equations of the form $a\sin\theta + b\cos\theta = c$.
+
+\subsection{Three-Dimensional Trigonometry}
+
+Many HSC problems extend two-dimensional trigonometry to three-dimensional figures (pyramids, prisms, slanted poles, etc.). A reliable method is:
+\begin{enumerate}[leftmargin=*]
+  \item Draw a clear diagram and label all known lengths and angles.
+  \item Identify the right-angled triangles embedded in the figure.
+  \item Work systematically from known information, using the sine rule or cosine rule where required.
+  \item Use the angle of elevation or depression carefully: it is always measured from the horizontal.
+\end{enumerate}
+
+\subsection{Problem-Solving Habits for This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Always write down the domain of $\theta$ before solving a trigonometric equation.
+  \item Check whether the identity or formula requires degrees or radians.
+  \item For the sine rule, always check the ambiguous case when the given angle is acute.
+  \item In identity proofs, start from the more complex side and aim to simplify.
+  \item For inverse trigonometric function questions, sketch the graph to confirm the range.
+  \item In $t$-substitution problems, remember to check $\theta = \pi$ separately.
+\end{itemize}
+
+\begin{remark}
+The most common trigonometry mistake is ignoring the full solution set when solving equations. For example, $\sin\theta = \tfrac{1}{2}$ has infinitely many solutions; always write the general solution and then restrict to the given domain.
+\end{remark}
+
+\begin{remark}[Why trigonometry matters beyond the HSC]
+Trigonometric functions appear throughout mathematics, physics, engineering, and data science. Fourier analysis decomposes any periodic signal -- sound, images, electrical waveforms -- into sums of sines and cosines. The $t$-substitution and product-to-sum identities that appear in HSC Extension~2 are the same tools used in signal processing, control theory, and quantum mechanics.
+\end{remark}
+
+% ============================================================
+\section{Part 1: Worked Problems}
+% ============================================================
+
+\subsection{Basic}
+\input{problems/part1-basic}
+
+\subsection{Medium}
+\input{problems/part1-medium}
+
+\subsection{Advanced}
+\input{problems/part1-advanced}
+
+% ============================================================
+\section{Part 2: Practice and Challenge Bank}
+% ============================================================
+
+\subsection{Warm-Up Drills}
+\input{problems/part2-basic}
+
+\subsection{Stretch Problems}
+\input{problems/part2-medium}
+
+\subsection{Challenge Corner}
+\input{problems/part2-advanced}
+
+% ============================================================
+\section{Conclusion}
+% ============================================================
+
+Trigonometry rewards careful attention to detail as much as formula recall. Many HSC questions become far more tractable once you identify the correct strategy: choosing the right form of $\cos 2\theta$, recognising a products-to-sums pattern, or knowing instinctively when the $t$-substitution will linearise an equation. As this booklet grows, it will serve as a compact reference for the most important trigonometric patterns students encounter in Extension~1 and Extension~2 examinations and beyond.
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Trigonometry}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Trigonometry}
 
 \end{document}
