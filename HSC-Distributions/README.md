@@ -1,4 +1,4 @@
-# HSC-Distribution
+# HSC-Distributions
 
 **HSC Mathematics Extension 2: Probability Distributions**
 
@@ -42,7 +42,7 @@ make final    # Clean, build, and release
 Vu Hung Nguyen  
 LinkedIn: <https://www.linkedin.com/in/nguyenvuhung/>  
 GitHub: <https://github.com/vuhung16au/>  
-Repository: <https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Distribution>
+Repository: <https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Distributions>
 
 ## Licence
 

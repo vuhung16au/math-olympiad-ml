@@ -1,4 +1,4 @@
-TEXFILE = HSC-Distribution
+TEXFILE = HSC-Distributions
 PDFFILE = $(TEXFILE).pdf
 RELEASE_DIR = releases
 

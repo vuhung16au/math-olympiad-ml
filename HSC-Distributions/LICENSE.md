@@ -2,7 +2,7 @@
 
 © 2025 Vu Hung Nguyen
 
-Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Distribution. Available at https://github.com/vuhung16au/math-olympiad-ml/"
+Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Distributions. Available at https://github.com/vuhung16au/math-olympiad-ml/"
 
 Except where otherwise noted, all non-code content in this folder (e.g., LaTeX sources, problems, solutions, images) is licensed under the Creative Commons Attribution 4.0 International License.
 
