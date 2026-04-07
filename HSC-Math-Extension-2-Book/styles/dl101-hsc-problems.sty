@@ -1,6 +1,6 @@
-\ProvidesPackage{dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
+\ProvidesPackage{styles/dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
 
-% tcolorbox already loaded with [most] in dl101-theorems
+\RequirePackage{extramarks}
 \RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
 
@@ -28,6 +28,7 @@
   fonttitle=\bfseries,
   before skip=15pt,
   after skip=10pt,
+  before upper={\extramarks{}{Problem~\thetcbcounter}},
   phantom={\ifstrempty{#1}{}{\addcontentsline{toc}{subsubsection}{Problem~\thetcbcounter: #1}}}
 }
 

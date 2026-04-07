@@ -20,6 +20,7 @@
 \usepackage{styles/dl101-colors}
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
+\usepackage{styles/dl101-layout}
 
 % Simple vector macro to support \vect{...} usage
 \newcommand{\vect}[1]{\vec{#1}}
@@ -35,13 +36,6 @@
 % Make \textdegree safe in math mode
 \renewcommand{\textdegree}{\ensuremath{^\circ}}
 
-\geometry{
-  a4paper,
-  total={170mm,257mm},
-  left=20mm,
-  top=20mm,
-}
-
 \author{Vu Hung Nguyen}
 \title{HSC Math Extension 2: Mechanics Mastery}
 \date{}
@@ -49,6 +43,7 @@
 \begin{document}
 
 \maketitle
+\thispagestyle{empty}
 
 % QR Code Page (Page 2)
 \newpage
@@ -60,7 +55,6 @@
     \footnotesize \url{https://github.com/vuhung16au/math-olympiad-ml}
 \end{center}
 \vspace*{\fill}
-
 
 \begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
 

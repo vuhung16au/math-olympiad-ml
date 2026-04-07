@@ -1,7 +1,8 @@
-\ProvidesPackage{dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
+\ProvidesPackage{styles/dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
 
-\RequirePackage[most]{tcolorbox}
+\RequirePackage{extramarks}
 \RequirePackage{etoolbox}
+\RequirePackage[most]{tcolorbox}
 
 % Ensure colors are defined (provide fallbacks if not already defined)
 \providecolor{bookpurple}{RGB}{60,16,83}
@@ -25,7 +26,8 @@
   boxed title style={size=small,colback=bookpurple,coltitle=white},
   fonttitle=\bfseries,
   before skip=15pt,
-  after skip=10pt
+  after skip=10pt,
+  before upper={\extramarks{}{Problem~\thetcbcounter}}
 }
 
 % Solution box

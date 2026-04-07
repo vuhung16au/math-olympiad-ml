@@ -1,5 +1,7 @@
 \ProvidesPackage{dl101-hsc-problems}[2025/11/18 HSC problem, hint, and solution styles]
 
+\RequirePackage{extramarks}
+
 % tcolorbox already loaded with [most] in dl101-theorems
 \RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
@@ -47,7 +49,8 @@
   boxed title style={size=small,colback=bookred,coltitle=white},
   fonttitle=\bfseries,
   before skip=15pt,
-  after skip=10pt
+  after skip=10pt,
+  before upper={\extramarks{}{Problem~\thetcbcounter}}
 }
 
 % Hint box (only define if not provided elsewhere)

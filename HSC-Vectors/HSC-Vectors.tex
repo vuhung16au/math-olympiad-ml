@@ -16,13 +16,7 @@
 \usepackage{styles/dl101-colors}
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
-
-\geometry{
-  a4paper,
-  total={170mm,257mm},
-  left=20mm,
-  top=20mm,
-}
+\usepackage{styles/dl101-layout}
 
 % Compact notation macros for A4 constraint compliance
 \newcommand{\cvec}[3]{\begin{psmallmatrix}#1\\#2\\#3\end{psmallmatrix}}
@@ -37,6 +31,7 @@
 \begin{document}
 
 \maketitle
+\thispagestyle{empty}
 
 % QR Code Page (Page 2)
 \newpage
@@ -48,7 +43,6 @@
     \footnotesize \url{https://github.com/vuhung16au/math-olympiad-ml}
 \end{center}
 \vspace*{\fill}
-
 
 \begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
 
@@ -129,7 +123,6 @@ Throughout this booklet, we use the following standard mathematical notations:
 \end{itemize}
 
 \subsection{Vectors Primer}
-
 
 % --- Brief Introductions to Key Topics ---
 \subsubsection{Coordinates in 3D}
@@ -403,7 +396,6 @@ Extension 2 uses vector form rather than $y=mx+b$.
   \node[below left] at (0,0,0) {$O$};
 \end{tikzpicture}
 \hspace{1cm}
-
 
 \begin{tikzpicture}[scale=1.1]
   % 2D illustration for clarity

@@ -14,6 +14,7 @@
 \usepackage{styles/dl101-colors}
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
+\usepackage{styles/dl101-layout}
 
 % Define remarkbox and remark environment (dl101-hsc-problems already loads tcolorbox)
 \providecolor{warmstone}{RGB}{208,184,168}
@@ -91,13 +92,6 @@
   #1
 }
 
-\geometry{
-  a4paper,
-  total={170mm,257mm},
-  left=20mm,
-  top=20mm,
-}
-
 \author{Vu Hung Nguyen}
 \title{HSC Math Extension 2: Inequalities Mastery}
 \date{}
@@ -105,6 +99,7 @@
 \begin{document}
 
 \maketitle
+\thispagestyle{empty}
 
 % QR Code Page (Page 2)
 \newpage
@@ -116,7 +111,6 @@
     \footnotesize \url{https://github.com/vuhung16au/math-olympiad-ml}
 \end{center}
 \vspace*{\fill}
-
 
 \begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
 
@@ -293,7 +287,6 @@ In the equal-weight case ($\lambda_i = \tfrac{1}{n}$), this specializes to
 If $f$ is concave, the inequality is reversed. 
 Equality holds when the $x_i$ are all equal or when $f$ is linear on the convex hull of the points.
 \end{theorembox}
-
 
 \begin{remark}
 \noindent\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
@@ -523,7 +516,6 @@ For $x \in [0, 1]$, we have $x^2 \le x$ (with equality only at $x = 0$ and $x = 
 \int_0^1 x^2 \, dx < \int_0^1 x \, dx
 \]
 \end{solution}
-
 
 \begin{examplebox}[title={\bfseries Example~\thetcbcounter: Induction with Inequality}]
 Prove by induction that $2^n > n$ for all integers $n \ge 1$.

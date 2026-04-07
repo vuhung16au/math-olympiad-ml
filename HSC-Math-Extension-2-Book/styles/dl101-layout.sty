@@ -1,0 +1,40 @@
+\ProvidesPackage{styles/dl101-layout}
+\RequirePackage{fancyhdr}
+\RequirePackage{geometry}
+\RequirePackage{extramarks}
+\RequirePackage{url}
+
+% Page Geometry
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=25mm,
+  headheight=15pt,
+  headsep=10pt,
+  footskip=30pt
+}
+
+% Header and Footer Style
+\pagestyle{fancy}
+\fancyhf{}
+
+% Mark processing: clear problem mark when a section/chapter starts
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}\extramarks{}{}}
+\ifdefined\chapter
+  \renewcommand{\chaptermark}[1]{\markboth{#1}{}\extramarks{}{}}
+\fi
+
+% Header
+\makeatletter
+\fancyhead[L]{\small\bfseries HSC Mathematics: \@title}
+\makeatother
+\fancyhead[R]{\small\itshape\leftmark\ifstrempty{\lastxmark}{}{ | \lastxmark}}
+
+% Footer
+\fancyfoot[L]{\footnotesize\url{https://github.com/vuhung16au/math-olympiad-ml}}
+\fancyfoot[C]{\small\thepage}
+\fancyfoot[R]{\footnotesize Vu Hung Nguyen \(\cdot\) CC BY 4.0}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
