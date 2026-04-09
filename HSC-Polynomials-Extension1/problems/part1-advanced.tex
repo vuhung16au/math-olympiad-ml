@@ -4,4 +4,518 @@
 %         complex roots in conjugate pairs, geometry via polynomials
 % ============================================================
 
-% Problems will be added here.
+\begin{problem}[A Similar Sum-of-Squares Quartic]
+Consider the polynomial
+\[
+P(x)=x^4-7x^2+6x+25.
+\]
+\begin{enumerate}[label=(\roman*)]
+\item Show that $P(x)$ can be expressed in the form $(x^2-a)^2+(x-b)^2$.
+\item How many $x$-intercepts does the graph of $P(x)$ have?
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Expand $(x^2-a)^2+(x-b)^2$ and compare coefficients.
+\end{hintbox}
+
+\begin{solution}
+Expand:
+\[
+(x^2-a)^2+(x-b)^2=x^4+(-2a+1)x^2-2bx+(a^2+b^2).
+\]
+Comparing with $x^4-7x^2+6x+25$ gives
+\[
+-2a+1=-7,\qquad -2b=6.
+\]
+So
+\[
+a=4,\qquad b=-3.
+\]
+Also
+\[
+a^2+b^2=16+9=25,
+\]
+so
+\[
+P(x)=(x^2-4)^2+(x+3)^2.
+\]
+As a sum of two squares, $P(x)\ge 0$ for all $x$, and equality would require
+\[
+x^2-4=0\quad\text{and}\quad x+3=0
+\]
+at the same time, which is impossible. Thus $P(x)>0$ for all $x$.
+Hence the graph has
+\[
+\boxed{0\text{ x-intercepts}.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Writing a polynomial as a sum of squares is a strong non-negativity argument.
+\item If the sum of squares can never be zero, the graph never meets the $x$-axis.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Intersections of $(x+1)^n$ and $(x+1)^m$]
+At what points do the graphs of
+\[
+f(x)=(x+1)^n,\qquad g(x)=(x+1)^m
+\]
+intersect, where $m\ne n$?
+\end{problem}
+
+\begin{hintbox}
+Let $t=x+1$ and solve $t^n=t^m$.
+\end{hintbox}
+
+\begin{solution}
+Set $t=x+1$. Then intersections satisfy
+\[
+t^n=t^m.
+\]
+If $t=0$, then both sides are $0$, giving
+\[
+x=-1 \Rightarrow (-1,0).
+\]
+If $t\ne 0$, then
+\[
+t^{n-m}=1.
+\]
+Over the reals this gives $t=1$, and sometimes $t=-1$.
+
+\begin{itemize}[leftmargin=*]
+\item $t=1 \Rightarrow x=0$, so $(0,1)$ is always an intersection.
+\item $t=-1 \Rightarrow x=-2$. This works exactly when $(-1)^n=(-1)^m$, i.e. when $m$ and $n$ have the same parity.
+\end{itemize}
+
+Hence the graphs always intersect at
+\[
+\boxed{(-1,0)\text{ and }(0,1),}
+\]
+and they also intersect at $x=-2$ when $m$ and $n$ have the same parity. The corresponding point is $(-2,1)$ if both are even, and $(-2,-1)$ if both are odd.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The substitution $t=x+1$ exposes the real structure immediately.
+\item In power equations, always check $t=0$, $1$, and $-1$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Factor-Theorem Identity in Three Variables]
+Use the factor theorem to prove that
+\[
+x+y+z
+\]
+is a factor of
+\[
+x^3+y^3+z^3-3xyz.
+\]
+Hence find the other factor.
+\end{problem}
+
+\begin{hintbox}
+Treat the expression as a polynomial in $x$ and substitute $x=-(y+z)$.
+\end{hintbox}
+
+\begin{solution}
+Let
+\[
+F(x)=x^3+y^3+z^3-3xyz,
+\]
+where $y$ and $z$ are constants. Then
+\begin{align*}
+F(-(y+z))
+&=-(y+z)^3+y^3+z^3+3yz(y+z)\\
+&=0.
+\end{align*}
+So $x+y+z$ is a factor.
+
+The full factorisation is
+\[
+x^3+y^3+z^3-3xyz=(x+y+z)(x^2+y^2+z^2-xy-yz-zx).
+\]
+Hence the other factor is
+\[
+\boxed{x^2+y^2+z^2-xy-yz-zx.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The factor theorem also works when the coefficients involve other variables.
+\item This is a standard factorisation worth remembering.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Common Quadratic Factor]
+If $a$ and $b$ are non-zero and $a+b=0$, prove that
+\[
+A(x)=x^3+ax^2-x+b
+\]
+and
+\[
+B(x)=x^3+bx^2-x+a
+\]
+have a common factor of degree $2$ but are not identical. What is the common factor?
+\end{problem}
+
+\begin{hintbox}
+Replace $b$ by $-a$ and factor by grouping.
+\end{hintbox}
+
+\begin{solution}
+Since $a+b=0$, we have $b=-a$.
+Then
+\[
+A(x)=x^3+ax^2-x-a=x^2(x+a)-1(x+a)=(x+a)(x^2-1),
+\]
+and
+\[
+B(x)=x^3-ax^2-x+a=x^2(x-a)-1(x-a)=(x-a)(x^2-1).
+\]
+Therefore the common quadratic factor is
+\[
+\boxed{x^2-1.}
+\]
+They are not identical because $a\ne0$, so their linear factors are different.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A condition like $a+b=0$ should be used immediately.
+\item Grouping is often enough to reveal a hidden common factor.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Intersections via $P(x)-Q(x)$]
+By factoring
+\[
+F(x)=P(x)-Q(x),
+\]
+describe the intersections between the curves
+\[
+P(x)=x^4+2x^3+4x-1
+\]
+and
+\[
+Q(x)=x^4+3x^2+5x-4.
+\]
+\end{problem}
+
+\begin{hintbox}
+The curves intersect exactly when $P(x)-Q(x)=0$.
+\end{hintbox}
+
+\begin{solution}
+\[
+F(x)=P(x)-Q(x)=2x^3-3x^2-x+3.
+\]
+Factor by grouping:
+\[
+2x^3-3x^2-x+3=x^2(2x-3)-1(2x-3)=(x^2-1)(2x-3).
+\]
+So the intersection $x$-coordinates are
+\[
+x=-1,\quad x=1,\quad x=\frac32.
+\]
+Now
+\[
+P(-1)=Q(-1)=-4,\qquad P(1)=Q(1)=6,\qquad P\!\left(\frac32\right)=Q\!\left(\frac32\right)=\frac{77}{16}.
+\]
+Hence the curves intersect at
+\[
+\boxed{(-1,-4),\ \left(1,6\right),\ \left(\frac32,\frac{77}{16}\right).}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item To compare two curves, subtract first and solve one equation.
+\item The factorisation of the difference controls the number of intersections.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Reversal Transformation]
+Consider the cubic equation
+\[
+x^3+ax^2+bx+c=0,
+\]
+where $c\ne0$, with roots $\alpha,\beta,\gamma$.
+\begin{enumerate}[label=(\roman*)]
+\item By using the substitution $y=\frac{1}{x}$, find a cubic equation in $y$ whose roots are $\frac1\alpha,\frac1\beta,\frac1\gamma$.
+\item Hence, or otherwise, find the roots of
+\[
+cx^3-bx^2+ax-1=0
+\]
+in terms of $\alpha,\beta,\gamma$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+First substitute $x=\frac1y$. Then compare your new equation with the target equation by replacing the variable with its negative.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Let
+\[
+y=\frac1x,
+\]
+so
+\[
+x=\frac1y.
+\]
+Substitute into
+\[
+x^3+ax^2+bx+c=0:
+\]
+\[
+\left(\frac1y\right)^3+a\left(\frac1y\right)^2+b\left(\frac1y\right)+c=0.
+\]
+Thus
+\[
+\frac1{y^3}+\frac{a}{y^2}+\frac{b}{y}+c=0.
+\]
+Multiply by $y^3$:
+\[
+1+ay+by^2+cy^3=0.
+\]
+So the required cubic is
+\[
+\boxed{cy^3+by^2+ay+1=0,}
+\]
+whose roots are
+\[
+\boxed{\frac1\alpha,\ \frac1\beta,\ \frac1\gamma.}
+\]
+
+\textbf{(ii)} From part (i), the equation
+\[
+cx^3+bx^2+ax+1=0
+\]
+has roots
+\[
+\frac1\alpha,\ \frac1\beta,\ \frac1\gamma.
+\]
+Now replace $x$ by $-z$:
+\[
+c(-z)^3+b(-z)^2+a(-z)+1=0.
+\]
+This gives
+\[
+-cz^3+bz^2-az+1=0.
+\]
+Multiply by $-1$:
+\[
+cz^3-bz^2+az-1=0.
+\]
+So the roots of the target equation are the negatives of the reciprocal roots. Therefore the roots are
+\[
+\boxed{-\frac1\alpha,\ -\frac1\beta,\ -\frac1\gamma.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The substitution $x=\frac1y$ reverses the order of the coefficients.
+\item The substitution $x=-y$ flips the signs of the odd-power terms.
+\item When a new polynomial looks like a reversed or sign-altered version of an old one, a substitution is usually the intended method.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Cosine-Polynomial Bridge]
+Use the identity
+\[
+\cos(3\theta)=4\cos^3\theta-3\cos\theta,
+\]
+but do not prove it.
+
+Start with
+\[
+\cos(3\theta)=\frac12.
+\]
+Rewrite this equation using only $\cos\theta$. Then let
+\[
+x=\cos\theta
+\]
+and show that the equation becomes
+\[
+8x^3-6x-1=0.
+\]
+
+Hence show that:
+\begin{enumerate}[label=(\roman*)]
+\item $\cos\frac{\pi}{9}=\cos\frac{2\pi}{9}+\cos\frac{4\pi}{9}$
+\item $\sec\frac{\pi}{9}\sec\frac{2\pi}{9}\sec\frac{4\pi}{9}=8$
+\item $\sec^2\frac{\pi}{9}+\sec^2\frac{2\pi}{9}+\sec^2\frac{4\pi}{9}=36$
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Solve $\cos(3\theta)=\frac12$ first. Then rewrite obtuse-angle cosines using $\cos(\pi-\alpha)=-\cos\alpha$ before applying Vieta.
+\end{hintbox}
+
+\begin{solution}
+From
+\[
+\cos(3\theta)=4\cos^3\theta-3\cos\theta=\frac12,
+\]
+we get
+\[
+8\cos^3\theta-6\cos\theta-1=0.
+\]
+Let $x=\cos\theta$. Then
+\[
+\boxed{8x^3-6x-1=0.}
+\]
+
+Now $\cos(3\theta)=\frac12$ gives
+\[
+3\theta=\frac{\pi}{3},\ \frac{5\pi}{3},\ \frac{7\pi}{3},
+\]
+so the roots are
+\[
+\cos\frac{\pi}{9},\ \cos\frac{5\pi}{9},\ \cos\frac{7\pi}{9}
+=\cos\frac{\pi}{9},\ -\cos\frac{4\pi}{9},\ -\cos\frac{2\pi}{9}.
+\]
+
+\textbf{(i)} Since the $x^2$ coefficient is $0$,
+\[
+\cos\frac{\pi}{9}-\cos\frac{4\pi}{9}-\cos\frac{2\pi}{9}=0,
+\]
+hence
+\[
+\boxed{\cos\frac{\pi}{9}=\cos\frac{2\pi}{9}+\cos\frac{4\pi}{9}.}
+\]
+
+\textbf{(ii)} The product of the roots is
+\[
+-\frac{-1}{8}=\frac18,
+\]
+so
+\[
+\cos\frac{\pi}{9}\cos\frac{2\pi}{9}\cos\frac{4\pi}{9}=\frac18.
+\]
+Taking reciprocals,
+\[
+\boxed{\sec\frac{\pi}{9}\sec\frac{2\pi}{9}\sec\frac{4\pi}{9}=8.}
+\]
+
+\textbf{(iii)} For reciprocal roots, let $y=\frac1x$. Then
+\[
+8\left(\frac1y\right)^3-6\left(\frac1y\right)-1=0
+\quad\Rightarrow\quad
+y^3+6y^2-8=0.
+\]
+Its roots are
+\[
+\sec\frac{\pi}{9},\ -\sec\frac{4\pi}{9},\ -\sec\frac{2\pi}{9}.
+\]
+So
+\[
+\sum y=-6,\qquad \sum y_iy_j=0,
+\]
+and therefore
+\[
+\sum y^2=(\sum y)^2-2\sum y_iy_j=36.
+\]
+Hence
+\[
+\boxed{\sec^2\frac{\pi}{9}+\sec^2\frac{2\pi}{9}+\sec^2\frac{4\pi}{9}=36.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A multiple-angle identity can turn a trigonometric equation into a polynomial equation.
+\item Once the trigonometric values are identified as roots, Vieta can produce elegant identities quickly.
+\item Reciprocal-root substitutions are especially useful for secant and cosecant expressions.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Tangent Cubic]
+It is known that
+\[
+\tan 3\theta=\frac{3\tan\theta-\tan^3\theta}{1-3\tan^2\theta}.
+\]
+\begin{enumerate}[label=(\roman*)]
+\item By letting $x=\tan\theta$, solve the equation
+\[
+x^3-3x^2-3x+1=0.
+\]
+\item Hence find the exact value of
+\[
+\tan\frac{\pi}{12}+\tan\frac{5\pi}{12}.
+\]
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Rewrite the cubic so that the numerator and denominator in the $\tan 3\theta$ identity appear naturally. Then use Vieta for part (ii).
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Let
+\[
+x=\tan\theta.
+\]
+Then
+\[
+\tan^3\theta-3\tan^2\theta-3\tan\theta+1=0.
+\]
+Rearrange:
+\[
+3\tan\theta-\tan^3\theta=1-3\tan^2\theta.
+\]
+So
+\[
+\frac{3\tan\theta-\tan^3\theta}{1-3\tan^2\theta}=1,
+\]
+hence
+\[
+\tan 3\theta=1.
+\]
+Take three distinct solutions:
+\[
+3\theta=\frac{\pi}{4},\ \frac{5\pi}{4},\ \frac{9\pi}{4}.
+\]
+Thus
+\[
+\theta=\frac{\pi}{12},\ \frac{5\pi}{12},\ \frac{3\pi}{4}.
+\]
+Therefore the roots are
+\[
+\boxed{\tan\frac{\pi}{12},\ \tan\frac{5\pi}{12},\ \tan\frac{3\pi}{4}}
+\]
+that is,
+\[
+\boxed{\tan\frac{\pi}{12},\ \tan\frac{5\pi}{12},\ -1.}
+\]
+
+\textbf{(ii)} By Vieta, the sum of the roots of
+\[
+x^3-3x^2-3x+1=0
+\]
+is
+\[
+-\frac{-3}{1}=3.
+\]
+So
+\[
+\tan\frac{\pi}{12}+\tan\frac{5\pi}{12}+(-1)=3.
+\]
+Hence
+\[
+\boxed{\tan\frac{\pi}{12}+\tan\frac{5\pi}{12}=4.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Some cubics are designed to match a trigonometric identity after a smart substitution.
+\item Once the roots are known in trigonometric form, Vieta can evaluate sums very quickly.
+\item A simple root like $-1$ is a useful check that the transformed solutions make sense.
+\end{itemize}
+\end{takeaways}

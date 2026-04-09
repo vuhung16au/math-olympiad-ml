@@ -75,11 +75,10 @@
 \vspace*{\fill}
 \begin{center}
 \itshape
-The theory of equations is one of the most beautiful and important branches of\\
-mathematics. Every polynomial equation holds a secret waiting to be factored out.
+``My method to overcome a difficulty is to go round it.''
 
 \vspace{1em}
-\normalfont Adapted from classical algebra
+\normalfont Poly\'a, George
 \end{center}
 \vspace*{\fill}
 
@@ -122,8 +121,10 @@ Most problems in this booklet can be solved using standard HSC Mathematics Exten
   \item \textbf{Vieta's formulas (sums and products of roots):} for $P(x) = x^n + p_{n-1}x^{n-1} + \cdots + p_0$, the elementary symmetric functions of the roots $\alpha_1, \ldots, \alpha_n$ are expressible in terms of the coefficients.
   \item \textbf{Multiple zeroes:} $a$ is a zero of multiplicity $m$ when $(x-a)^m \mid P(x)$ but $(x-a)^{m+1} \nmid P(x)$; equivalently, $P(a) = P'(a) = \cdots = P^{(m-1)}(a) = 0$ and $P^{(m)}(a) \neq 0$.
   \item \textbf{Graph behaviour near roots:} the curve crosses the $x$-axis at simple roots and touches (but does not cross) at even-multiplicity roots.
+  \item \textbf{Even and odd polynomials:} $P$ is even if $P(-x)=P(x)$ and odd if $P(-x)=-P(x)$. Even polynomials contain only even powers, while odd polynomials contain only odd powers and have constant term $0$.
   \item \textbf{Long division and synthetic division:} systematic methods for finding quotients and remainders.
   \item \textbf{Sketching polynomial graphs:} leading-term behaviour, $y$-intercept, $x$-intercepts, and turning points.
+  \item \textbf{Coefficient extraction:} in a product of sums, the coefficient of $x^r$ can often be found by counting exponent pairs whose total is $r$.
 \end{itemize}
 
 \subsection{Core Formulas and Ideas}
@@ -157,6 +158,13 @@ The highest power $n$ is the \textbf{degree} of $P$, and $a_n$ is its \textbf{le
   P(a) = 0.
 \]
 More generally, $(ax - b)$ is a factor of $P(x)$ if and only if $P\!\left(\tfrac{b}{a}\right) = 0$.
+
+\textbf{Even/Odd Test.}
+\[
+P(-x)=P(x)\iff P \text{ is even},\qquad
+P(-x)=-P(x)\iff P \text{ is odd}.
+\]
+This is especially useful when symmetry reduces the number of unknown coefficients.
 
 \subsection{Vieta's Formulas (Sums and Products of Roots)}
 
@@ -240,6 +248,12 @@ Key features to determine when sketching $y = P(x)$:
 \textbf{Long division.} Systematically divide the leading term of the dividend by the leading term of the divisor, multiply, subtract, and repeat until the degree of the remainder is less than the degree of the divisor.
 
 \textbf{Synthetic division (for linear divisors).} A streamlined numerical method for dividing $P(x)$ by $(x - a)$; it records only the coefficients and uses the value $a$ as the divisor.
+
+\textbf{Repeated-root test.} If $r$ is a repeated zero of $P(x)$, then
+\[
+P(r)=0\qquad\text{and}\qquad P'(r)=0.
+\]
+This is a standard way to attack parameter questions involving double roots.
 
 \textit{Example.} To divide $P(x) = 2x^3 - 3x^2 + x - 5$ by $(x - 2)$ using synthetic division:
 \[

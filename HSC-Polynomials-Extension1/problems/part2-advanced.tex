@@ -6,4 +6,99 @@
 %   extension/competition-level questions
 % ============================================================
 
-% Problems will be added here.
+\begin{problem}[No Multiple Zeroes in a Truncated Exponential]
+Prove that
+\[
+P(x)=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots+\frac{x^n}{n!},
+\qquad n\ge 2,
+\]
+has no multiple zeroes.
+\end{problem}
+
+\begin{hintbox}
+If $\alpha$ were a multiple zero, then both $P(\alpha)$ and $P'(\alpha)$ would vanish.
+\end{hintbox}
+
+\begin{solution}
+Assume $\alpha$ is a multiple zero. Then
+\[
+P(\alpha)=0,\qquad P'(\alpha)=0.
+\]
+Now
+\[
+P'(x)=1+x+\frac{x^2}{2!}+\cdots+\frac{x^{n-1}}{(n-1)!},
+\]
+so
+\[
+P(x)-P'(x)=\frac{x^n}{n!}.
+\]
+At $x=\alpha$ this gives
+\[
+0-0=\frac{\alpha^n}{n!},
+\]
+hence $\alpha=0$. But $P(0)=1\ne0$, a contradiction. Therefore $P(x)$ has no multiple zeroes.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The repeated-root test is the main idea.
+\item Comparing $P$ and $P'$ can collapse the argument immediately.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Cubic with a Double Root]
+The equation
+\[
+x^3-5x^2+mx-3=0
+\]
+has a double root. Find $m$.
+\end{problem}
+
+\begin{hintbox}
+Use $P(r)=0$ and $P'(r)=0$ for a double root $r$.
+\end{hintbox}
+
+\begin{solution}
+Let
+\[
+P(x)=x^3-5x^2+mx-3.
+\]
+If $r$ is a double root, then
+\[
+P(r)=0,\qquad P'(r)=0.
+\]
+Since
+\[
+P'(x)=3x^2-10x+m,
+\]
+we have
+\[
+m=10r-3r^2.
+\]
+Substitute into $P(r)=0$:
+\[
+r^3-5r^2+r(10r-3r^2)-3=0.
+\]
+So
+\[
+2r^3-5r^2+3=0.
+\]
+Factor:
+\[
+(r-1)(2r^2-3r-3)=0.
+\]
+The easy integer root is $r=1$, so
+\[
+\boxed{m=10(1)-3(1)^2=7.}
+\]
+\[
+\text{Indeed, }x^3-5x^2+7x-3=(x-1)^2(x-3).
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Repeated-root parameter questions naturally produce a system in $r$ and the parameter.
+\item A well-chosen repeated root often gives a simple integer value for the parameter.
+\end{itemize}
+\end{takeaways}

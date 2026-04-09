@@ -4,4 +4,695 @@
 %         Vieta's with manipulation, double/triple roots
 % ============================================================
 
-% Problems will be added here.
+\begin{problem}[Parity and Derivatives]
+Suppose $P(x)$ is a polynomial. Prove or disprove:
+\[
+P(x)\text{ is even if and only if }P'(x)\text{ is odd.}
+\]
+\end{problem}
+
+\begin{hintbox}
+Prove each direction separately. For the reverse direction, examine $P(x)-P(-x)$.
+\end{hintbox}
+
+\begin{solution}
+If $P$ is even, then $P(-x)=P(x)$. Differentiating gives
+\[
+-P'(-x)=P'(x),
+\]
+so
+\[
+P'(-x)=-P'(x).
+\]
+Hence $P'$ is odd.
+
+Conversely, suppose $P'$ is odd, so $P'(-x)=-P'(x)$. Let
+\[
+F(x)=P(x)-P(-x).
+\]
+Then
+\[
+F'(x)=P'(x)+P'(-x)=0.
+\]
+So $F$ is constant. But $F(0)=0$, hence $F(x)=0$ for all $x$. Therefore
+\[
+P(x)=P(-x),
+\]
+so $P$ is even.
+
+The statement is \textbf{true}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Differentiating a symmetry identity is often the quickest proof.
+\item If a polynomial has derivative $0$, it must be constant.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Behaviour Near Repeated Zeroes]
+Let
+\[
+P(x)=(x+1)^3x^2(x-1)^2.
+\]
+Discuss the behaviour of $P(x)$ around $-\infty$, $+\infty$, $-1$, $0$ and $1$. Summarise it in a table and hence sketch the graph roughly.
+\end{problem}
+
+\begin{hintbox}
+Use the degree and leading coefficient for end behaviour, and multiplicity for the local shape at each zero.
+\end{hintbox}
+
+\begin{solution}
+The degree is $7$ and the leading coefficient is positive, so
+\[
+x\to-\infty \Rightarrow P(x)\to-\infty,\qquad
+x\to+\infty \Rightarrow P(x)\to+\infty.
+\]
+The real zeroes are
+\[
+x=-1 \text{ (multiplicity }3),\quad x=0 \text{ (multiplicity }2),\quad x=1 \text{ (multiplicity }2).
+\]
+Hence
+\[
+\begin{array}{c|c}
+\text{Point} & \text{Behaviour}\\ \hline
+x\to-\infty & P(x)\to-\infty\\
+x=-1 & \text{crosses with flattening}\\
+x=0 & \text{touches and turns}\\
+x=1 & \text{touches and turns}\\
+x\to+\infty & P(x)\to+\infty
+\end{array}
+\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  xmin=-2.2,xmax=2.2,
+  ymin=-8,ymax=8,
+  samples=300,
+  width=0.8\linewidth,
+  height=6cm,
+  xtick={-1,0,1},
+  ytick=\empty
+]
+\addplot[thick,bookpurple,domain=-2.2:2.2]{(x+1)^3*x^2*(x-1)^2};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Odd multiplicity means the graph crosses the axis.
+\item Even multiplicity means the graph touches and turns.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Same Axes, Different Quadratics]
+Sketch the following graphs on the same $xy$-diagram, using a different colour for each:
+\[
+P(x)=x^2,\qquad Q(x)=(x+1)(x-2),\qquad R(x)=(x-2)^2,\qquad S(x)=4-x^2.
+\]
+\end{problem}
+
+\begin{hintbox}
+Find the vertex and intercepts of each quadratic first.
+\end{hintbox}
+
+\begin{solution}
+Useful features:
+\[
+P(x)=x^2 \text{ has vertex }(0,0),
+\]
+\[
+Q(x)=x^2-x-2 \text{ has roots }-1,2 \text{ and vertex }\left(\frac12,-\frac94\right),
+\]
+\[
+R(x)=(x-2)^2 \text{ has vertex }(2,0),
+\]
+\[
+S(x)=4-x^2 \text{ has vertex }(0,4)\text{ and roots }\pm2.
+\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  xmin=-3.2,xmax=3.2,
+  ymin=-3.5,ymax=5,
+  samples=300,
+  width=0.85\linewidth,
+  height=7cm,
+  legend style={draw=none,fill=none,at={(0.98,0.98)},anchor=north east}
+]
+\addplot[thick,blue,domain=-3.2:3.2]{x^2};
+\addlegendentry{$x^2$}
+\addplot[thick,red,domain=-3.2:3.2]{(x+1)*(x-2)};
+\addlegendentry{$(x+1)(x-2)$}
+\addplot[thick,teal!70!black,domain=-3.2:3.2]{(x-2)^2};
+\addlegendentry{$(x-2)^2$}
+\addplot[thick,orange!90!black,domain=-3.2:3.2]{4-x^2};
+\addlegendentry{$4-x^2$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Related quadratics are easiest to compare on the same set of axes.
+\item Vertex form and factor form both give quick sketching information.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[An Odd Cubic from Two Conditions]
+$P(x)$ is an odd polynomial of degree $3$. It has $x+2$ as a factor, and when divided by $x-3$ the remainder is $2$. Find $P(x)$.
+\end{problem}
+
+\begin{hintbox}
+An odd cubic has the form $ax^3+bx$.
+\end{hintbox}
+
+\begin{solution}
+Let
+\[
+P(x)=ax^3+bx.
+\]
+Since $x+2$ is a factor,
+\[
+P(-2)=0 \Rightarrow -8a-2b=0 \Rightarrow 4a+b=0.
+\]
+Since the remainder on division by $x-3$ is $2$,
+\[
+P(3)=2 \Rightarrow 27a+3b=2.
+\]
+Using $b=-4a$,
+\[
+27a-12a=2 \Rightarrow 15a=2 \Rightarrow a=\frac{2}{15}.
+\]
+Then
+\[
+b=-\frac{8}{15}.
+\]
+So
+\[
+\boxed{P(x)=\frac{2}{15}x^3-\frac{8}{15}x=\frac{2}{15}x(x+2)(x-2).}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Symmetry conditions reduce the number of unknown coefficients.
+\item Factor and remainder conditions become linear equations.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Quadratic Roots and Symmetric Expressions]
+If $\alpha$ and $\beta$ are the roots of
+\[
+x^2-5x+1=0,
+\]
+find:
+\begin{enumerate}[label=(\roman*)]
+\item $\left(\alpha+\frac{2}{\alpha}\right)\left(\beta+\frac{2}{\beta}\right)$
+\item $\alpha^2+\beta^2$
+\item $\alpha^3+\beta^3$
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Use $\alpha+\beta=5$ and $\alpha\beta=1$.
+\end{hintbox}
+
+\begin{solution}
+By Vieta,
+\[
+\alpha+\beta=5,\qquad \alpha\beta=1.
+\]
+
+\textbf{(ii)}
+\[
+\alpha^2+\beta^2=(\alpha+\beta)^2-2\alpha\beta=25-2=23.
+\]
+
+\textbf{(iii)}
+\[
+\alpha^3+\beta^3=(\alpha+\beta)^3-3\alpha\beta(\alpha+\beta)=125-15=110.
+\]
+
+\textbf{(i)}
+\begin{align*}
+\left(\alpha+\frac{2}{\alpha}\right)\left(\beta+\frac{2}{\beta}\right)
+&=\alpha\beta+2\frac{\alpha}{\beta}+2\frac{\beta}{\alpha}+\frac{4}{\alpha\beta}\\
+&=1+2(\alpha^2+\beta^2)+4\\
+&=1+46+4=51.
+\end{align*}
+
+Hence
+\[
+\boxed{51,\quad 23,\quad 110.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Vieta is the fastest route for symmetric expressions in the roots.
+\item Compute the simpler expressions first and reuse them.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Cubic Root Product Sum]
+Let $\alpha,\beta,\gamma$ be the roots of
+\[
+x^3-5x^2+5x-1=0.
+\]
+Find
+\begin{enumerate}[label=(\roman*)]
+\item $\alpha^2\beta\gamma+\alpha\beta^2\gamma+\alpha\beta\gamma^2$
+\item $\alpha^3\beta\gamma+\alpha\beta^3\gamma+\alpha\beta\gamma^3$
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Factor out $\alpha\beta\gamma$. Then use $\alpha+\beta+\gamma$ and $\alpha^2+\beta^2+\gamma^2$.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)}
+\[
+\alpha^2\beta\gamma+\alpha\beta^2\gamma+\alpha\beta\gamma^2
+=\alpha\beta\gamma(\alpha+\beta+\gamma).
+\]
+By Vieta,
+\[
+\alpha+\beta+\gamma=5,\qquad \alpha\beta\gamma=1.
+\]
+So the value is
+\[
+\boxed{5.}
+\]
+
+\textbf{(ii)}
+\[
+\alpha^3\beta\gamma+\alpha\beta^3\gamma+\alpha\beta\gamma^3
+=\alpha\beta\gamma(\alpha^2+\beta^2+\gamma^2).
+\]
+Now
+\[
+\alpha^2+\beta^2+\gamma^2=(\alpha+\beta+\gamma)^2-2(\alpha\beta+\beta\gamma+\gamma\alpha).
+\]
+By Vieta for
+\[
+\alpha+\beta+\gamma=5,\qquad \alpha\beta+\beta\gamma+\gamma\alpha=5,\qquad \alpha\beta\gamma=1.
+\]
+So
+\[
+\alpha^2+\beta^2+\gamma^2=25-10=15.
+\]
+Hence
+\[
+\alpha^3\beta\gamma+\alpha\beta^3\gamma+\alpha\beta\gamma^3
+=1\cdot 15
+=\boxed{15.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Factor the target expression before applying Vieta.
+\item Many cubic root-sum questions become one line after the right factorisation.
+\item Symmetric root expressions are usually the ones that give a single definite answer.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Opposite Roots]
+Consider the cubic polynomial
+\[
+P(x)=x^3-4x^2+kx+16,
+\]
+where $k$ is a real constant. It is known that the sum of two of the roots of $P(x)=0$ is zero.
+\begin{enumerate}[label=(\roman*)]
+\item Find the value of $k$.
+\item Hence find all three roots of the polynomial.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+If two roots sum to zero, write them as $\alpha$ and $-\alpha$. Then use the sum of roots first.
+\end{hintbox}
+
+\begin{solution}
+Let the roots be $\alpha,\beta,\gamma$, with
+\[
+\alpha+\beta=0.
+\]
+So we may write the roots as
+\[
+\alpha,\ -\alpha,\ \gamma.
+\]
+
+\textbf{(i)} By Vieta, the sum of the roots is
+\[
+\alpha+(-\alpha)+\gamma=4,
+\]
+so
+\[
+\gamma=4.
+\]
+Hence $x=4$ is a root, and therefore
+\[
+P(4)=0.
+\]
+Substitute into the polynomial:
+\[
+4^3-4\cdot 4^2+4k+16=0.
+\]
+This gives
+\[
+64-64+4k+16=0 \Rightarrow 4k=-16 \Rightarrow \boxed{k=-4.}
+\]
+
+\textbf{(ii)} Now
+\[
+P(x)=x^3-4x^2-4x+16.
+\]
+Factor by grouping:
+\[
+P(x)=x^2(x-4)-4(x-4)=(x^2-4)(x-4).
+\]
+So
+\[
+P(x)=(x-2)(x+2)(x-4).
+\]
+Hence the three roots are
+\[
+\boxed{4,\ 2,\ -2.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The phrase ``two roots sum to zero'' should immediately suggest a pair of opposite roots.
+\item Once one root is identified, the factor theorem is often the fastest way to find the parameter.
+\item Before using division, always check whether the cubic factors neatly by grouping.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Shifting Exponents]
+Consider the polynomial
+\[
+P(x)=x^n+2x^{n-1}+k,
+\]
+where $n$ is an integer greater than $1$, and $k$ is a real constant.
+\begin{enumerate}[label=(\roman*)]
+\item If $n$ is odd, find the value of $k$ such that $(x+1)$ is a factor of $P(x)$.
+\item Suppose instead that $n$ is even and $k=-3$. Find the remainder when $P(x)$ is divided by $x^2-1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Use $x=-1$ for part (i). For part (ii), write the remainder as $ax+b$ and use the roots $x=1$ and $x=-1$ of $x^2-1$.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} If $(x+1)$ is a factor, then by the factor theorem
+\[
+P(-1)=0.
+\]
+So
+\[
+(-1)^n+2(-1)^{n-1}+k=0.
+\]
+Since $n$ is odd,
+\[
+(-1)^n=-1,\qquad (-1)^{n-1}=1.
+\]
+Hence
+\[
+-1+2+k=0 \Rightarrow 1+k=0,
+\]
+so
+\[
+\boxed{k=-1.}
+\]
+
+\textbf{(ii)} Now let $n$ be even and $k=-3$, so
+\[
+P(x)=x^n+2x^{n-1}-3.
+\]
+When dividing by $x^2-1$, the remainder has the form
+\[
+R(x)=ax+b.
+\]
+Since $x^2-1=(x-1)(x+1)$, we use $x=1$ and $x=-1$.
+
+At $x=1$:
+\[
+P(1)=1+2-3=0,
+\]
+so
+\[
+R(1)=a+b=0.
+\]
+
+At $x=-1$: since $n$ is even, $(-1)^n=1$ and $(-1)^{n-1}=-1$, so
+\[
+P(-1)=1+2(-1)-3=-4.
+\]
+Thus
+\[
+R(-1)=-a+b=-4.
+\]
+Solving
+\[
+a+b=0,\qquad -a+b=-4
+\]
+gives
+\[
+a=2,\qquad b=-2.
+\]
+Therefore the remainder is
+\[
+\boxed{2x-2.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item When substituting $x=-1$, the parity of the exponent completely controls the sign.
+\item For division by a quadratic, use a general linear remainder.
+\item If the divisor factors nicely, substituting its roots is usually the fastest way to determine the remainder.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Parity of Powers]
+Consider the polynomial
+\[
+P(x)=x^n+c^n,
+\]
+where $n$ is a positive integer and $c$ is a non-zero real constant.
+\begin{enumerate}[label=(\roman*)]
+\item By considering the cases where $n$ is odd and even separately, determine whether $(x+c)$ and $(x-c)$ are factors of $P(x)$.
+\item Suppose $n$ is odd. Find an expression for the remainder when $P(x)$ is divided by $x^2-c^2$, in terms of $c$ and $n$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Test $(x-c)$ using $P(c)$ and test $(x+c)$ using $P(-c)$. For part (ii), let the remainder be $Ax+B$.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} To test $(x-c)$, evaluate
+\[
+P(c)=c^n+c^n=2c^n.
+\]
+Since $c\ne0$, this is not zero. So
+\[
+\boxed{(x-c)\text{ is never a factor}.}
+\]
+
+To test $(x+c)$, evaluate
+\[
+P(-c)=(-c)^n+c^n.
+\]
+If $n$ is even, then $(-c)^n=c^n$, so
+\[
+P(-c)=2c^n\ne0.
+\]
+If $n$ is odd, then $(-c)^n=-c^n$, so
+\[
+P(-c)=0.
+\]
+Therefore
+\[
+\boxed{(x+c)\text{ is a factor if and only if }n\text{ is odd}.}
+\]
+
+\textbf{(ii)} Now suppose $n$ is odd. When dividing by $x^2-c^2$, the remainder has the form
+\[
+R(x)=Ax+B.
+\]
+Since
+\[
+x^2-c^2=(x-c)(x+c),
+\]
+we use $x=c$ and $x=-c$.
+
+At $x=-c$, part (i) gives
+\[
+P(-c)=0,
+\]
+so
+\[
+R(-c)=-Ac+B=0.
+\]
+Hence
+\[
+B=Ac.
+\]
+
+At $x=c$,
+\[
+P(c)=2c^n,
+\]
+so
+\[
+R(c)=Ac+B=2c^n.
+\]
+Substitute $B=Ac$:
+\[
+2Ac=2c^n.
+\]
+Since $c\ne0$,
+\[
+A=c^{n-1}.
+\]
+Then
+\[
+B=Ac=c^n.
+\]
+So the remainder is
+\[
+\boxed{R(x)=c^{n-1}x+c^n=c^{n-1}(x+c).}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Powers of $-c$ must always be split into even and odd cases.
+\item Once the divisor factors, its roots give the fastest route to the linear remainder.
+\item Part (ii) becomes easier because the result from part (i) gives one of the remainder equations immediately.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Cascading Powers]
+The cubic equation
+\[
+x^3-3x^2+4x-5=0
+\]
+has roots $\alpha,\beta,\gamma$.
+\begin{enumerate}[label=(\roman*)]
+\item Find the exact value of $\alpha^2+\beta^2+\gamma^2$.
+\item By noting that $P(\alpha)=0$, or otherwise, find the value of $\alpha^3+\beta^3+\gamma^3$.
+\item Hence evaluate $\alpha^4+\beta^4+\gamma^4$.
+\item Let
+\[
+S_k=\alpha^k+\beta^k+\gamma^k.
+\]
+Express $S_k$ in terms of $S_{k-1}$, $S_{k-2}$ and $S_{k-3}$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Start with Vieta. For higher powers, rewrite the equation as a recurrence for powers of a root.
+\end{hintbox}
+
+\begin{solution}
+By Vieta,
+\[
+\alpha+\beta+\gamma=3,\qquad
+\alpha\beta+\beta\gamma+\gamma\alpha=4,\qquad
+\alpha\beta\gamma=5.
+\]
+
+\textbf{(i)} Use
+\[
+\alpha^2+\beta^2+\gamma^2=(\alpha+\beta+\gamma)^2-2(\alpha\beta+\beta\gamma+\gamma\alpha).
+\]
+So
+\[
+\alpha^2+\beta^2+\gamma^2=3^2-2(4)=9-8=\boxed{1.}
+\]
+
+\textbf{(ii)} Since $\alpha$ is a root,
+\[
+\alpha^3-3\alpha^2+4\alpha-5=0,
+\]
+so
+\[
+\alpha^3=3\alpha^2-4\alpha+5.
+\]
+Similarly,
+\[
+\beta^3=3\beta^2-4\beta+5,\qquad
+\gamma^3=3\gamma^2-4\gamma+5.
+\]
+Adding,
+\[
+\alpha^3+\beta^3+\gamma^3
+=3(\alpha^2+\beta^2+\gamma^2)-4(\alpha+\beta+\gamma)+15.
+\]
+Hence
+\[
+\alpha^3+\beta^3+\gamma^3=3(1)-4(3)+15=\boxed{6.}
+\]
+
+\textbf{(iii)} Multiply the original equation by $x$:
+\[
+x^4-3x^3+4x^2-5x=0.
+\]
+So for each root,
+\[
+\alpha^4=3\alpha^3-4\alpha^2+5\alpha,
+\]
+and similarly for $\beta,\gamma$. Summing,
+\[
+\alpha^4+\beta^4+\gamma^4
+=3(\alpha^3+\beta^3+\gamma^3)-4(\alpha^2+\beta^2+\gamma^2)+5(\alpha+\beta+\gamma).
+\]
+Therefore
+\[
+\alpha^4+\beta^4+\gamma^4=3(6)-4(1)+5(3)=18-4+15=\boxed{29.}
+\]
+
+\textbf{(iv)} Since each root satisfies
+\[
+x^3-3x^2+4x-5=0,
+\]
+we have, for any root $r\in\{\alpha,\beta,\gamma\}$,
+\[
+r^3=3r^2-4r+5.
+\]
+Multiply by $r^{k-3}$:
+\[
+r^k=3r^{k-1}-4r^{k-2}+5r^{k-3}.
+\]
+Now do this for $r=\alpha,\beta,\gamma$ and add. Then
+\[
+S_k=3S_{k-1}-4S_{k-2}+5S_{k-3}.
+\]
+So the required recurrence is
+\[
+\boxed{S_k=3S_{k-1}-4S_{k-2}+5S_{k-3}\qquad (k\ge 3).}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Vieta gives the starting symmetric sums.
+\item A polynomial equation satisfied by each root can be reused to generate higher powers.
+\item When summing three root equations, remember to add the constant term three times.
+\item The same idea gives a recurrence for all higher power sums $S_k$.
+\end{itemize}
+\end{takeaways}

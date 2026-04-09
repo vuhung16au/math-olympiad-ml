@@ -4,4 +4,217 @@
 %         straightforward Vieta's, basic graph sketching
 % ============================================================
 
-% Problems will be added here.
+\begin{problem}[Identically Equal Polynomials]
+Find $a$, $b$ and $c$ given that
+\[
+a(x-2)^2+b(x-2)+c=x^2+x+1
+\quad\text{for all }x.
+\]
+\end{problem}
+
+\begin{hintbox}
+Expand the left-hand side and compare coefficients.
+\end{hintbox}
+
+\begin{solution}
+\[
+a(x-2)^2+b(x-2)+c=ax^2+(-4a+b)x+(4a-2b+c).
+\]
+Comparing with $x^2+x+1$ gives
+\[
+a=1,\qquad -4a+b=1,\qquad 4a-2b+c=1.
+\]
+Hence
+\[
+\boxed{a=1,\quad b=5,\quad c=7.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Polynomial identities are solved by coefficient comparison.
+\item Expanding around $(x-2)$ is still just an ordinary polynomial identity.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Odd Polynomial Coefficients]
+Suppose
+\[
+P(x)=ax^5+bx^4+cx^3+dx^2+ex+f
+\]
+is an odd function, so $P(-x)=-P(x)$ for all $x$. Show that $b=d=f=0$.
+\end{problem}
+
+\begin{hintbox}
+Write down $P(-x)$ and compare it with $-P(x)$ term by term.
+\end{hintbox}
+
+\begin{solution}
+\[
+P(-x)=-ax^5+bx^4-cx^3+dx^2-ex+f,
+\]
+while
+\[
+-P(x)=-ax^5-bx^4-cx^3-dx^2-ex-f.
+\]
+Since these are identical,
+\[
+b=-b,\qquad d=-d,\qquad f=-f.
+\]
+So
+\[
+\boxed{b=d=f=0.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Odd polynomials contain only odd powers of $x$.
+\item The constant term of an odd polynomial must be $0$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Central Coefficient]
+What is the coefficient of $x^n$ in
+\[
+G(x)=\left(1+x+x^2+\cdots+x^n\right)^2?
+\]
+\end{problem}
+
+\begin{hintbox}
+Count the pairs $(i,j)$ with $0\le i,j\le n$ and $i+j=n$.
+\end{hintbox}
+
+\begin{solution}
+Write
+\[
+G(x)=\left(\sum_{i=0}^{n}x^i\right)\left(\sum_{j=0}^{n}x^j\right).
+\]
+The term $x^n$ appears whenever $x^i\cdot x^j=x^n$, that is, whenever $i+j=n$.
+The possible pairs are
+\[
+(0,n),(1,n-1),\ldots,(n,0),
+\]
+which gives $n+1$ choices. Therefore the coefficient is
+\[
+\boxed{n+1.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Coefficient questions in products often reduce to counting exponent pairs.
+\item The coefficient of $x^r$ is the number of ways to split $r$ as a sum of exponents.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Easy Zeroes First]
+Solve
+\[
+x^3-x^2-4x+4=0
+\]
+by first factoring the left-hand side.
+\end{problem}
+
+\begin{hintbox}
+Factor by grouping.
+\end{hintbox}
+
+\begin{solution}
+\[
+x^3-x^2-4x+4=x^2(x-1)-4(x-1)=(x-1)(x^2-4).
+\]
+So
+\[
+(x-1)(x-2)(x+2)=0.
+\]
+Hence
+\[
+\boxed{x=1,\ 2,\ -2.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Before using heavier tools, try grouping or simple integer roots.
+\item Cubics designed for students often hide an obvious factor.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Factors of $x^n+1$]
+Is either $x+1$ or $x-1$ a factor of $x^n+1$, where $n$ is a positive integer?
+\end{problem}
+
+\begin{hintbox}
+Use the factor theorem at $x=1$ and $x=-1$.
+\end{hintbox}
+
+\begin{solution}
+Let $P(x)=x^n+1$.
+
+For $x-1$ to be a factor we need $P(1)=0$, but
+\[
+P(1)=2\ne 0.
+\]
+So $x-1$ is never a factor.
+
+For $x+1$ to be a factor we need $P(-1)=0$:
+\[
+P(-1)=(-1)^n+1.
+\]
+If $n$ is odd, this is $0$. If $n$ is even, this is $2$.
+
+Therefore
+\[
+\boxed{x+1\text{ is a factor iff }n\text{ is odd, and }x-1\text{ is never a factor}.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The factor theorem turns factor questions into substitutions.
+\item Powers of $-1$ almost always split into odd and even cases.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Simple Partial Fractions]
+Given
+\[
+\frac{1}{x^3-1}=\frac{A}{x-1}+\frac{Bx+C}{x^2+x+1},
+\]
+find $A$, $B$ and $C$.
+\end{problem}
+
+\begin{hintbox}
+Use $x^3-1=(x-1)(x^2+x+1)$, then clear denominators.
+\end{hintbox}
+
+\begin{solution}
+Since
+\[
+x^3-1=(x-1)(x^2+x+1),
+\]
+we have
+\[
+1=A(x^2+x+1)+(Bx+C)(x-1).
+\]
+Expand:
+\[
+1=(A+B)x^2+(A-B+C)x+(A-C).
+\]
+Comparing coefficients gives
+\[
+A+B=0,\qquad A-B+C=0,\qquad A-C=1.
+\]
+Solving,
+\[
+\boxed{A=\frac13,\qquad B=-\frac13,\qquad C=-\frac23.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Clear denominators before comparing coefficients.
+\item Partial fractions are another good place to use polynomial identities.
+\end{itemize}
+\end{takeaways}

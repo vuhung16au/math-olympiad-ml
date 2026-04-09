@@ -5,4 +5,48 @@
 %   graphs with multiple roots, HSC-style exam questions
 % ============================================================
 
-% Problems will be added here.
+\begin{problem}[A Family Determined by Four Intersections]
+Interpret the intended question as follows: the horizontal line $y=k$ meets the quartic
+\[
+y=ax^4+bx^3+cx^2+dx+k
+\]
+at $x=-1,1,2,3$. Find $b$, $c$ and $d$ in terms of $a$.
+\end{problem}
+
+\begin{hintbox}
+The intersections with $y=k$ are the roots of $ax^4+bx^3+cx^2+dx$.
+\end{hintbox}
+
+\begin{solution}
+Since the curve meets $y=k$ at $x=-1,1,2,3$, the polynomial
+\[
+ax^4+bx^3+cx^2+dx
+\]
+has roots $-1,1,2,3$. So
+\[
+ax^4+bx^3+cx^2+dx=a(x+1)(x-1)(x-2)(x-3).
+\]
+Now
+\[
+(x+1)(x-1)=x^2-1,\qquad (x-2)(x-3)=x^2-5x+6,
+\]
+so
+\[
+(x^2-1)(x^2-5x+6)=x^4-5x^3+5x^2+5x-6.
+\]
+Therefore
+\[
+ax^4+bx^3+cx^2+dx=a(x^4-5x^3+5x^2+5x-6).
+\]
+Comparing coefficients,
+\[
+\boxed{b=-5a,\qquad c=5a,\qquad d=5a.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Intersections with a horizontal line come from the shifted polynomial $P(x)-k$.
+\item Once the roots are known, the factorised form is immediate up to scale.
+\end{itemize}
+\end{takeaways}

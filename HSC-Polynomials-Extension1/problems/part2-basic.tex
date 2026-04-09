@@ -5,4 +5,227 @@
 %   quick remainder-theorem calculations, simple factorisation
 % ============================================================
 
-% Problems will be added here.
+\begin{problem}[Multiplicity Table and Sketch]
+Let
+\[
+P(x)=x^3(x-2)^4(x^2-x+1).
+\]
+Discuss the behaviour of $P(x)$ around $-\infty$, $+\infty$, $0$ and $2$. Summarise it in a table and hence sketch the graph roughly.
+\end{problem}
+
+\begin{hintbox}
+Note that $x^2-x+1>0$ for all real $x$.
+\end{hintbox}
+
+\begin{solution}
+The degree is $9$ and the leading coefficient is positive, so
+\[
+x\to-\infty \Rightarrow P(x)\to-\infty,\qquad
+x\to+\infty \Rightarrow P(x)\to+\infty.
+\]
+Also
+\[
+x^2-x+1=\left(x-\frac12\right)^2+\frac34>0
+\]
+for all real $x$.
+
+So the only real zeroes are
+\[
+x=0 \text{ with multiplicity }3,\qquad x=2 \text{ with multiplicity }4.
+\]
+Hence
+\[
+\begin{array}{c|c}
+\text{Point} & \text{Behaviour}\\ \hline
+x\to-\infty & P(x)\to-\infty\\
+x=0 & \text{crosses with flattening}\\
+x=2 & \text{touches and turns}\\
+x\to+\infty & P(x)\to+\infty
+\end{array}
+\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  xmin=-2.2,xmax=4,
+  ymin=-120,ymax=250,
+  samples=400,
+  width=0.82\linewidth,
+  height=6.5cm,
+  xtick={0,2},
+  ytick=\empty
+]
+\addplot[thick,bookpurple,domain=-2.2:4]{x^3*(x-2)^4*(x^2-x+1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A factor that is always positive does not change the sign pattern.
+\item Even very complicated sketches are manageable once the multiplicities are identified.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Reading a Cubic from Its Sketch]
+The graph below belongs to one of the following polynomials. Which one is correct?
+\[
+\text{(a) }(x-2)^2(x+1)\qquad
+\text{(b) }(x-2)(x+1)^2
+\]
+\[
+\text{(c) }(x-2)(x+1)\qquad
+\text{(d) }(x+2)^2(x+1)
+\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  xmin=-2.5,xmax=3.2,
+  ymin=-6,ymax=8,
+  samples=300,
+  width=0.78\linewidth,
+  height=6cm,
+  xtick={-1,2},
+  ytick=\empty
+]
+\addplot[thick,bookpurple,domain=-2.5:3.2]{(x-2)^2*(x+1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hintbox}
+One intercept is a crossing and the other is a touch.
+\end{hintbox}
+
+\begin{solution}
+The graph crosses the axis at $x=-1$, so that root has multiplicity $1$.
+It touches and turns at $x=2$, so that root has multiplicity $2$.
+Therefore the correct choice is
+\[
+\boxed{\text{(a) }(x-2)^2(x+1).}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Root multiplicity can be read directly from the graph.
+\item A correct factor form must match both the intercepts and the local shape.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Quartic with Paired Root Sums]
+Consider the polynomial equation
+\[
+x^4-8x^3+20x^2+kx+3=0,
+\]
+where $k$ is real. It is given that the sum of two of the roots equals the sum of the other two roots.
+\begin{enumerate}[label=(\roman*)]
+\item Find $k$.
+\item Hence find all four roots.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+If each pair has the same sum, use two quadratic factors with the same $x$-coefficient.
+\end{hintbox}
+
+\begin{solution}
+Let the roots be $\alpha,\beta,\gamma,\delta$ with
+\[
+\alpha+\beta=\gamma+\delta.
+\]
+Since the sum of all four roots is $8$, each pair sums to $4$. So write
+\[
+x^4-8x^3+20x^2+kx+3=(x^2-4x+A)(x^2-4x+B).
+\]
+Expanding,
+\[
+x^4-8x^3+(A+B+16)x^2-4(A+B)x+AB.
+\]
+Therefore
+\[
+A+B=4,\qquad AB=3,\qquad k=-4(A+B)=-16.
+\]
+So
+\[
+\boxed{k=-16.}
+\]
+Now $\{A,B\}=\{1,3\}$, hence
+\[
+x^4-8x^3+20x^2-16x+3=(x^2-4x+1)(x^2-4x+3).
+\]
+Thus the roots are
+\[
+\boxed{2-\sqrt3,\ 1,\ 3,\ 2+\sqrt3.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A condition on the roots often suggests a useful factorisation pattern.
+\item This is a good example of Vieta plus coefficient comparison working together.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Reading the Degree from a Graph]
+The graph below is the graph of a polynomial.
+% \[
+% P(x)=(x^2-3x+2)(x^2-3x+1).
+% \]
+What could be the degree of the polynomial? Explain your answer.
+
+\begin{enumerate}[label=\textnormal{(\alph*)}]
+\item $1$
+\item $2$
+\item $3$
+\item $4$
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  axis line style={black},
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-0.2,xmax=3.7,
+  ymin=-0.9,ymax=2.6,
+  samples=400,
+  width=0.54\linewidth,
+  height=4.2cm,
+  xtick=\empty,
+  ytick=\empty,
+  enlargelimits=false,
+  clip=true,
+  scale only axis=true
+]
+\addplot[thick,bookpurple,domain=-0.2:3.7]{(x^2-3*x+2)*(x^2-3*x+1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hintbox}
+Look at the end behaviour and count the maximum possible number of turning points.
+\end{hintbox}
+
+\begin{solution}
+The graph has both ends rising, so the degree is even with positive leading coefficient.
+Also, the curve has the shape of a quartic and can have up to $3$ turning points.
+Among the options given, the only suitable degree is
+\[
+\boxed{\text{(d) }4.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A polynomial of degree $n$ has at most $n-1$ turning points.
+\item If both ends of the graph go up, the degree must be even and the leading coefficient positive.
+\end{itemize}
+\end{takeaways}
