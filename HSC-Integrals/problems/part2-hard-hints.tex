@@ -244,26 +244,64 @@ Washer method: subtract inner from outer squared radii.
 % PROBLEM 5: Substitution transformation proof
 % =============================================================================
 \begin{problem}
-Show that $\displaystyle \int_0^1 \ln(1 + x) \, dx = \int_0^1 \frac{x}{1 + x} \, dx$
+Show that
+\[
+\int_0^1 \ln(1 + x) \, dx = \ln 2 - \int_0^1 \frac{x}{1 + x} \, dx
+\]
 \end{problem}
 
 \vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = 1 + x$ in LHS. Then $x = u - 1$, $dx = du$. Limits: $u=1$ to $u=2$. LHS $= \int_1^2 \ln u \, du$. By parts: $\int \ln u \, du = u\ln u - u$. Evaluate and simplify to show both equal $2\ln 2 - 1$.}}
+\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Apply integration by parts to $\int_0^1 \ln(1+x)\,dx$ with $u=\ln(1+x)$ and $dv=dx$. Then $du=\frac{1}{1+x}\,dx$ and $v=x$, giving
+\[
+\int_0^1 \ln(1+x)\,dx = [x\ln(1+x)]_0^1 - \int_0^1 \frac{x}{1+x}\,dx.
+\]
+Now evaluate the boundary term.}}
 
 \begin{solution}
-LHS: Let $u=1+x$, then $\int_1^2\ln u\,du$
+Use integration by parts on
+\[
+I=\int_0^1 \ln(1+x)\,dx
+\]
+with
+\[
+u=\ln(1+x), \qquad dv=dx.
+\]
+Then
+\[
+du=\frac{1}{1+x}\,dx, \qquad v=x.
+\]
+So
+\[
+I=[x\ln(1+x)]_0^1-\int_0^1 \frac{x}{1+x}\,dx.
+\]
+Evaluating the boundary term,
+\[
+[x\ln(1+x)]_0^1 = 1\cdot \ln 2 - 0 = \ln 2.
+\]
+Hence
+\[
+\int_0^1 \ln(1+x)\,dx = \ln 2 - \int_0^1 \frac{x}{1+x}\,dx.
+\]
 
-By parts: $[u\ln u - u]_1^2 = 2\ln 2 - 2 - (0 - 1) = 2\ln 2 - 1$
+To check consistency, we can evaluate each integral separately:
+\[
+\int_0^1 \ln(1+x)\,dx = 2\ln 2 - 1
+\]
+and
+\[
+\int_0^1 \frac{x}{1+x}\,dx = 1-\ln 2.
+\]
+Indeed,
+\[
+\ln 2 - (1-\ln 2)=2\ln 2 - 1,
+\]
+so the stated identity is correct.
 
-RHS: $\int_0^1\frac{x}{1+x}dx = \int_0^1\left(1-\frac{1}{1+x}\right)dx = [x-\ln(1+x)]_0^1 = 1-\ln 2$
-
-Wait, check calculation... Both should equal same value.
-
-\textbf{Result:} Both integrals equal $\boxed{2\ln 2 - 1}$
+\textbf{Result:} $\displaystyle \boxed{\int_0^1 \ln(1+x)\,dx = \ln 2 - \int_0^1 \frac{x}{1+x}\,dx}$
 \end{solution}
 
 \begin{takeaways}
-Substitution transforms integrals. Verify by computing both sides independently.
+Integration by parts can reveal exact relationships between two different definite integrals, even when the integrals themselves are not equal.
 \end{takeaways}
 
 \vspace{1cm}
