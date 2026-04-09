@@ -1,54 +1,44 @@
-\ProvidesPackage{dl101-hints}[2025/11/02 DL101 upside-down hint style]
+\ProvidesPackage{dl101-hints}[2026/04/09 DL101 upside-down boxed hint style]
 
 \RequirePackage{etoolbox}
 \RequirePackage{rotating}
 \RequirePackage{environ}
-\RequirePackage[framemethod=tikz]{mdframed}
+\RequirePackage[most]{tcolorbox}
 \RequirePackage{xcolor}
 
-% Define hint style with mdframed
 % Use providecolor to avoid errors if colors aren't defined yet
 \providecolor{bookpurple}{RGB}{60,16,83}
 \providecolor{softivory}{RGB}{242,239,235}
 
-\mdfdefinestyle{hintstyle}{
-  linecolor=bookpurple,
-  backgroundcolor=softivory,
-  linewidth=1pt,
-  innerleftmargin=8pt,
-  innerrightmargin=8pt,
-  innertopmargin=8pt,
-  innerbottommargin=8pt,
+\newtcolorbox{hintbox}{
+  enhanced,
+  colback=softivory,
+  colframe=bookpurple,
+  boxrule=1.2pt,
+  arc=0pt,
+  left=12pt,
+  right=12pt,
+  top=10pt,
+  bottom=10pt,
+  before skip=8pt,
+  after skip=10pt,
 }
 
-% Define the hint environment (upside-down)
+% Define the hint environment (upside-down boxed style)
 \NewEnviron{hint}[1][]{%
-\noindent
+\par\noindent
 \rotatebox[origin=c]{180}{%
-\noindent
-\begin{minipage}[t]{\linewidth}
-\begin{mdframed}[style=hintstyle]
+\begin{minipage}{\linewidth}
+\begin{hintbox}
+\small
 \ifstrempty{#1}{%
-  \textbf{Hint:}%
+  \textbf{Hint:} %
 }{%
-  \textbf{Hint:} #1%
+  \textbf{Hint:} #1\ %
 }%
 \BODY
-\end{mdframed}%
+\end{hintbox}
 \end{minipage}%
 }%
+\par
 }
-
-% Alternative: If you want to keep hints right-side up but with special styling
-% Uncomment this and comment out the above if needed
-% \NewEnviron{hint}[1][]{%
-% \begin{mdframed}[style=hintstyle]
-% \ifstrempty{#1}{%
-%   \textbf{Hint:}%
-% }{%
-%   \textbf{Hint:} #1%
-% }%
-% \BODY
-% \end{mdframed}%
-% }
-

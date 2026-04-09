@@ -18,7 +18,7 @@ Software/code remains MIT-licensed per the repository root LICENSE.
 The booklet `HSC-Integrals.tex` is organised in two parts:
 
 - **Part 1**: Detailed walk-throughs (15 problems) with strategy paragraphs, complete step-by-step solutions, takeaways boxes, and alternative approaches where relevant. Divided into basic (5), medium (5), and advanced (5) difficulty levels.
-- **Part 2**: Concise write-ups with hints and solution sketches (~45 problems). Each problem includes an upside-down hint rendered via `styles/dl101-hints` before a short solution sketch. Divided into basic (~15), medium (~15), and advanced (~15) difficulty levels.
+- **Part 2**: Concise write-ups with boxed hints and solution sketches (~45 problems). Each problem includes a boxed hint styled with `styles/dl101-hints`, keeping the presentation aligned with the boxed guidance used throughout Part 1, before a short solution sketch. Divided into basic (~15), medium (~15), and advanced (~15) difficulty levels.
 
 The collection contains **~60 total problems** covering a comprehensive range of integration techniques and applications.
 
@@ -99,7 +99,7 @@ make pdf && make open
 
 1. Review the fundamentals section to refresh integration techniques.
 2. Attempt each problem without looking at solutions first.
-3. For Part 2, only check the upside-down hint if you need a nudge.
+3. For Part 2, only check the boxed hint if you need a nudge.
 4. Compare your reasoning with the detailed Part 1 solutions, paying attention to technique selection and justification.
 5. Re-work problems without notes to cement understanding and build speed.
 
@@ -127,11 +127,12 @@ make pdf && make open
   - `01.tex` - `64.tex`: Sample problems from various sources
 - `problems/`: Part-wise problem+solution snippets organized by difficulty that are `\input` into the main TeX file:
   - `part1-easy.tex`, `part1-medium.tex`, `part1-hard.tex` (5 problems each)
-  - `part2-easy.tex`, `part2-medium.tex`, `part2-hard.tex` (~15 problems each)
+  - `part2-easy-hints.tex`, `part2-medium-hints.tex`, `part2-hard-hints.tex` (~15 problems each, boxed-hint format used by the booklet)
   - `appendix-a-formulas.tex`: Formula sheet
   - `appendix-b-index.tex`: Problem index by technique
   - `appendix-c-substitutions.tex`: Common substitutions guide
   - `appendix-d-flowchart.tex`: Integration by parts decision tree
+- `archive/`: Retired source variants that are no longer compiled by the current booklet.
 - `solutions/`: Reserved for future standalone solution files.
 - `styles/`: Shared LaTeX style files (colors, hint box, problem environments):
   - `dl101-colors.sty`: Color definitions for consistent formatting
@@ -162,7 +163,7 @@ Each problem includes:
 ### Part 2 (Hints and Sketches)
 Each problem includes:
 - **Boxed problem statement**
-- **Upside-down hint** suggesting the approach or technique
+- **Boxed hint** suggesting the approach or technique
 - **Concise solution sketch** with key steps
 - **Brief takeaways box** with essential insights
 - **Boxed final answer**

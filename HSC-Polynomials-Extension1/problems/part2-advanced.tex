@@ -6,43 +6,81 @@
 %   extension/competition-level questions
 % ============================================================
 
-\begin{problem}[No Multiple Zeroes in a Truncated Exponential]
-Prove that
+\begin{problem}[The Alternating Roots of $e^x$]
+Let
 \[
-P(x)=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots+\frac{x^n}{n!},
-\qquad n\ge 2,
+P_n(x)=\sum_{k=0}^{n}\frac{x^k}{k!}
 \]
-has no multiple zeroes.
+be the $n$th Maclaurin polynomial for $e^x$.
+\begin{enumerate}[label=(\roman*)]
+\item Assuming that for some even integer $2k$, the polynomial $P_{2k}(x)>0$ for all real $x$, prove that $P_{2k+1}(x)=0$ has exactly one real root.
+\item Let $\alpha$ be the unique real root of $P_{2k+1}(x)=0$. By finding the global minimum of $P_{2k+2}(x)$, prove that $P_{2k+2}(x)>0$ for all real $x$.
+\item Hence deduce the number of real roots of $P_n(x)=0$ when $n$ is even, and when $n$ is odd.
+\end{enumerate}
 \end{problem}
 
 \begin{hintbox}
-If $\alpha$ were a multiple zero, then both $P(\alpha)$ and $P'(\alpha)$ would vanish.
+Use
+\[
+P_n'(x)=P_{n-1}(x)
+\]
+and
+\[
+P_n(x)=P_{n-1}(x)+\frac{x^n}{n!}.
+\]
 \end{hintbox}
 
 \begin{solution}
-Assume $\alpha$ is a multiple zero. Then
+Use
 \[
-P(\alpha)=0,\qquad P'(\alpha)=0.
+P_n'(x)=P_{n-1}(x).
 \]
+
+\textbf{(i)} If $P_{2k}(x)>0$ for all real $x$, then
+\[
+P_{2k+1}'(x)=P_{2k}(x)>0,
+\]
+so $P_{2k+1}$ is strictly increasing. Since it has odd degree,
+\[
+P_{2k+1}(x)\to -\infty \text{ as }x\to -\infty,\qquad
+P_{2k+1}(x)\to \infty \text{ as }x\to \infty.
+\]
+Hence $P_{2k+1}(x)=0$ has exactly one real root.
+
+\textbf{(ii)} Let that root be $\alpha$. Then
+\[
+P_{2k+2}'(x)=P_{2k+1}(x),
+\]
+so $x=\alpha$ is the only stationary point of $P_{2k+2}$, hence its global minimum.
 Now
 \[
-P'(x)=1+x+\frac{x^2}{2!}+\cdots+\frac{x^{n-1}}{(n-1)!},
+P_{2k+2}(x)=P_{2k+1}(x)+\frac{x^{2k+2}}{(2k+2)!},
 \]
 so
 \[
-P(x)-P'(x)=\frac{x^n}{n!}.
+P_{2k+2}(\alpha)=\frac{\alpha^{2k+2}}{(2k+2)!}>0
 \]
-At $x=\alpha$ this gives
+because $P_{2k+1}(\alpha)=0$, $\alpha\ne0$, and $2k+2$ is even.
+Thus
 \[
-0-0=\frac{\alpha^n}{n!},
+P_{2k+2}(x)>0
 \]
-hence $\alpha=0$. But $P(0)=1\ne0$, a contradiction. Therefore $P(x)$ has no multiple zeroes.
+for all real $x$.
+
+\textbf{(iii)} Starting from $P_0(x)=1>0$, parts (i) and (ii) give an induction chain:
+\[
+\boxed{P_n(x)=0\text{ has no real roots when }n\text{ is even,}}
+\]
+\[
+\boxed{P_n(x)=0\text{ has exactly one real root when }n\text{ is odd.}}
+\]
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}[leftmargin=*]
-\item The repeated-root test is the main idea.
-\item Comparing $P$ and $P'$ can collapse the argument immediately.
+\item The derivative relation $P_n'=P_{n-1}$ links consecutive Maclaurin polynomials.
+\item Evaluating the even polynomial at the odd polynomial’s root makes the summation collapse to one positive term.
+\item This creates an induction pattern: even cases have no real roots, odd cases have exactly one.
 \end{itemize}
 \end{takeaways}
 

@@ -8,8 +8,9 @@
 Evaluate $\displaystyle \int \frac{x^2}{\sqrt{x^2 + 9}} \, dx$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $x = 3\tan\theta$, $dx = 3\sec^2\theta \, d\theta$. Then $\sqrt{x^2+9} = 3\sec\theta$. Use $\tan^2\theta\sec\theta = \sec^3\theta - \sec\theta$. Answer involves $\frac{x\sqrt{x^2+9}}{2} - \frac{9}{2}\ln|x + \sqrt{x^2+9}|$.}}
+\begin{hint}
+Let $x = 3\tan\theta$, $dx = 3\sec^2\theta \, d\theta$. Then $\sqrt{x^2+9} = 3\sec\theta$. Use $\tan^2\theta\sec\theta = \sec^3\theta - \sec\theta$. Answer involves $\frac{x\sqrt{x^2+9}}{2} - \frac{9}{2}\ln|x + \sqrt{x^2+9}|$.
+\end{hint}
 
 \begin{solution}
 Let $x=3\tan\theta \implies dx=3\sec^2\theta\,d\theta$, $\sqrt{x^2+9}=3\sec\theta$
@@ -44,8 +45,9 @@ Let $I_n = \displaystyle \int_0^{\pi/2} \cos^n x \, dx$.\\\
 (b) Hence find $I_6$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) $I_n = \int \cos^{n-1}x \cdot \cos x \, dx$. By parts: $u = \cos^{n-1}x$, $dv = \cos x \, dx$. (b) $I_0 = \frac{\pi}{2}$, $I_2 = \frac{\pi}{4}$, $I_4 = \frac{3\pi}{16}$, $I_6 = \frac{5}{6} \cdot \frac{3\pi}{16} = \frac{5\pi}{32}$.}}
+\begin{hint}
+(a) $I_n = \int \cos^{n-1}x \cdot \cos x \, dx$. By parts: $u = \cos^{n-1}x$, $dv = \cos x \, dx$. (b) $I_0 = \frac{\pi}{2}$, $I_2 = \frac{\pi}{4}$, $I_4 = \frac{3\pi}{16}$, $I_6 = \frac{5}{6} \cdot \frac{3\pi}{16} = \frac{5\pi}{32}$.
+\end{hint}
 
 \begin{solution}
 \textbf{(a)} We apply integration by parts to $I_n = \int_0^{\pi/2}\cos^n x\,dx$.
@@ -111,8 +113,9 @@ Reduction via parts. Check boundaries—trig functions at $0, \pi/2$ simplify.
 Evaluate $\displaystyle \int \frac{x^3 + 2x + 1}{x^2(x^2 + 1)} \, dx$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{x^3 + 2x + 1}{x^2(x^2+1)} = \frac{A}{x} + \frac{B}{x^2} + \frac{Cx + D}{x^2+1}$. Solve: $A=0$, $B=1$, $C=1$, $D=1$. Answer: $-\frac{1}{x} + \frac{\ln(x^2+1)}{2} + \arctan x + C$.}}
+\begin{hint}
+$\frac{x^3 + 2x + 1}{x^2(x^2+1)} = \frac{A}{x} + \frac{B}{x^2} + \frac{Cx + D}{x^2+1}$. Solve: $A=0$, $B=1$, $C=1$, $D=1$. Answer: $-\frac{1}{x} + \frac{\ln(x^2+1)}{2} + \arctan x + C$.
+\end{hint}
 
 \begin{solution}
 Partial fractions: $x^3+2x+1 = Ax(x^2+1) + B(x^2+1) + (Cx+D)x^2$
@@ -166,11 +169,12 @@ $$ B(m, n) = \int_0^1 x^{m-1} (1-x)^{n-1} \, dx $$
 \end{enumerate}
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} \textbf{Part (i):} This is a standard transformation. Calculate $dx$ carefully and update limits. The term $1-x$ becomes $\frac{1}{1+u}$.\\
+\begin{hint}
+\textbf{Part (i):} This is a standard transformation. Calculate $dx$ carefully and update limits. The term $1-x$ becomes $\frac{1}{1+u}$.\\
 	extbf{Part (ii):} Substitute $m$ and $n$ first to simplify the powers ($m+n=1$). Then apply the substitution $u=t^4$.\\
 	extbf{Part (iii):} Work from the Right Hand Side (RHS). Expand the squares in the denominators (e.g., $(t-1/t)^2 + 2 = t^2 + 1/t^2$) and combine the fractions.\\
-	extbf{Part (iv):} The integral splits into two parts. For the first term, let $v = t - \frac{1}{t}$. Notice that the numerator $(1+\frac{1}{t^2})dt$ is exactly $dv$. For the second term, let $w = t + \frac{1}{t}$. Be very careful with the limits of integration for $v$ and $w$. One integral yields a standard result; the other requires checking the limits.}}
+	extbf{Part (iv):} The integral splits into two parts. For the first term, let $v = t - \frac{1}{t}$. Notice that the numerator $(1+\frac{1}{t^2})dt$ is exactly $dv$. For the second term, let $w = t + \frac{1}{t}$. Be very careful with the limits of integration for $v$ and $w$. One integral yields a standard result; the other requires checking the limits.
+\end{hint}
 
 \begin{solution}
 \begin{enumerate}
@@ -219,8 +223,9 @@ $$ B(m, n) = \int_0^1 x^{m-1} (1-x)^{n-1} \, dx $$
 Find the volume when the region between $y = x^2$ and $y = \sqrt{x}$ for $0 \leq x \leq 1$ is rotated about the $x$-axis.
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Washer: $V = \pi\int_0^1 [(\sqrt{x})^2 - (x^2)^2]dx = \pi\int_0^1 (x - x^4)dx = \pi\left[\frac{x^2}{2} - \frac{x^5}{5}\right]_0^1 = \pi\left(\frac{1}{2} - \frac{1}{5}\right) = \frac{3\pi}{10}$.}}
+\begin{hint}
+Washer: $V = \pi\int_0^1 [(\sqrt{x})^2 - (x^2)^2]dx = \pi\int_0^1 (x - x^4)dx = \pi\left[\frac{x^2}{2} - \frac{x^5}{5}\right]_0^1 = \pi\left(\frac{1}{2} - \frac{1}{5}\right) = \frac{3\pi}{10}$.
+\end{hint}
 
 \begin{solution}
 Washer method: $V = \pi\int_a^b[R^2(x) - r^2(x)]dx$
@@ -250,12 +255,13 @@ Show that
 \]
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Apply integration by parts to $\int_0^1 \ln(1+x)\,dx$ with $u=\ln(1+x)$ and $dv=dx$. Then $du=\frac{1}{1+x}\,dx$ and $v=x$, giving
+\begin{hint}
+Apply integration by parts to $\int_0^1 \ln(1+x)\,dx$ with $u=\ln(1+x)$ and $dv=dx$. Then $du=\frac{1}{1+x}\,dx$ and $v=x$, giving
 \[
 \int_0^1 \ln(1+x)\,dx = [x\ln(1+x)]_0^1 - \int_0^1 \frac{x}{1+x}\,dx.
 \]
-Now evaluate the boundary term.}}
+Now evaluate the boundary term.
+\end{hint}
 
 \begin{solution}
 Use integration by parts on
@@ -313,8 +319,9 @@ Integration by parts can reveal exact relationships between two different defini
 Evaluate $\displaystyle \int e^x \sin x \, dx$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int e^x \sin x \, dx$. By parts twice creates: $I = e^x\sin x - e^x\cos x - I$. Solve: $2I = e^x(\sin x - \cos x)$, so $I = \frac{e^x(\sin x - \cos x)}{2} + C$.}}
+\begin{hint}
+Let $I = \int e^x \sin x \, dx$. By parts twice creates: $I = e^x\sin x - e^x\cos x - I$. Solve: $2I = e^x(\sin x - \cos x)$, so $I = \frac{e^x(\sin x - \cos x)}{2} + C$.
+\end{hint}
 
 \begin{solution}
 Let $I = \int e^x\sin x\,dx$
@@ -342,8 +349,9 @@ Cyclic integration: integral reappears after two applications. Solve algebraical
 Find $\displaystyle \int \frac{\sqrt{9 - x^2}}{x} \, dx$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $x = 3\sin\theta$, $dx = 3\cos\theta \, d\theta$. Then $\sqrt{9-x^2} = 3\cos\theta$. Integral: $\int \frac{3\cos\theta}{3\sin\theta} \cdot 3\cos\theta \, d\theta = 3\int\cot\theta\cos\theta \, d\theta$. Use $\cot\theta = \frac{\cos\theta}{\sin\theta}$.}}
+\begin{hint}
+Let $x = 3\sin\theta$, $dx = 3\cos\theta \, d\theta$. Then $\sqrt{9-x^2} = 3\cos\theta$. Integral: $\int \frac{3\cos\theta}{3\sin\theta} \cdot 3\cos\theta \, d\theta = 3\int\cot\theta\cos\theta \, d\theta$. Use $\cot\theta = \frac{\cos\theta}{\sin\theta}$.
+\end{hint}
 
 \begin{solution}
 Let $x=3\sin\theta \implies dx=3\cos\theta\,d\theta$, $\sqrt{9-x^2}=3\cos\theta$
@@ -376,8 +384,9 @@ For $\frac{\sqrt{a^2-x^2}}{x}$: trig sub creates $\csc$ integral. Use identities
 Evaluate $\displaystyle \int_0^{\pi} \frac{x \sin x}{1 + \cos^2 x} \, dx$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int_0^{\pi} \frac{x\sin x}{1+\cos^2 x}dx$. King's: $I = \int_0^{\pi} \frac{(\pi-x)\sin x}{1+\cos^2 x}dx$. Add: $2I = \pi\int_0^{\pi}\frac{\sin x}{1+\cos^2 x}dx$. Let $u = \cos x$. Answer: $\frac{\pi^2}{4}$.}}
+\begin{hint}
+Let $I = \int_0^{\pi} \frac{x\sin x}{1+\cos^2 x}dx$. King's: $I = \int_0^{\pi} \frac{(\pi-x)\sin x}{1+\cos^2 x}dx$. Add: $2I = \pi\int_0^{\pi}\frac{\sin x}{1+\cos^2 x}dx$. Let $u = \cos x$. Answer: $\frac{\pi^2}{4}$.
+\end{hint}
 
 \begin{solution}
 King's property: $I = \int_0^{\pi}\frac{(\pi-x)\sin x}{1+\cos^2 x}dx$
@@ -408,8 +417,9 @@ Let $I_n = \displaystyle \int_0^1 x^n e^x \, dx$ for $n \geq 0$.\\
 (b) Find $I_4$ and use it to find $\displaystyle \sum_{k=0}^{4} \frac{4!}{k!}$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) By parts: $u = x^n$, $dv = e^x dx$. (b) Calculate: $I_0 = e-1$, $I_1 = 1$, $I_2 = e-2$, $I_3 = 6-2e$, $I_4 = 9e - 24$. Pattern: $I_n = e\sum_{k=0}^{n}(-1)^k\frac{n!}{k!} + (-1)^{n+1}n!$.}}
+\begin{hint}
+(a) By parts: $u = x^n$, $dv = e^x dx$. (b) Calculate: $I_0 = e-1$, $I_1 = 1$, $I_2 = e-2$, $I_3 = 6-2e$, $I_4 = 9e - 24$. Pattern: $I_n = e\sum_{k=0}^{n}(-1)^k\frac{n!}{k!} + (-1)^{n+1}n!$.
+\end{hint}
 
 \begin{solution}
 \textbf{(a)} By parts: $u=x^n$, $dv=e^xdx$
@@ -434,8 +444,9 @@ Reduction formulae for exponential integrals. Pattern emerges from recursion.
 Evaluate $\displaystyle \int \frac{x^2 - 3x + 5}{(x-1)(x^2 + 4)} \, dx$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} $\frac{x^2-3x+5}{(x-1)(x^2+4)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+4}$. Solve: $A=\frac{3}{5}$, $B=\frac{2}{5}$, $C=-\frac{6}{5}$. Integrate separately: ln, ln, arctan terms.}}
+\begin{hint}
+$\frac{x^2-3x+5}{(x-1)(x^2+4)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+4}$. Solve: $A=\frac{3}{5}$, $B=\frac{2}{5}$, $C=-\frac{6}{5}$. Integrate separately: ln, ln, arctan terms.
+\end{hint}
 
 \begin{solution}
 Partial fractions: Solve for $A$, $B$, $C$
@@ -462,8 +473,9 @@ Irreducible quadratic: use $\frac{Bx+C}{x^2+a^2}$ form. Split into $\ln$ and $\a
 Find $\displaystyle \int (\ln x)^2 \, dx$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $u = (\ln x)^2$, $dv = dx$. Then $du = \frac{2\ln x}{x}dx$, $v = x$. Apply by parts again to $\int \ln x \, dx$. Answer: $x(\ln x)^2 - 2x\ln x + 2x + C = x[(\ln x)^2 - 2\ln x + 2] + C$.}}
+\begin{hint}
+Let $u = (\ln x)^2$, $dv = dx$. Then $du = \frac{2\ln x}{x}dx$, $v = x$. Apply by parts again to $\int \ln x \, dx$. Answer: $x(\ln x)^2 - 2x\ln x + 2x + C = x[(\ln x)^2 - 2\ln x + 2] + C$.
+\end{hint}
 
 \begin{solution}
 By parts: $u=(\ln x)^2$, $dv=dx \implies du=\frac{2\ln x}{x}dx$, $v=x$
@@ -496,8 +508,9 @@ A particle moves along a straight line such that its acceleration is given by $\
 (b) Find the time taken for the particle to first reach position $x = 1$ meter
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} (a) This is simple harmonic motion about center $c=3$. From $\omega^2=4$, we get $\omega=2$. Since $x(0)=8$, amplitude $A=|8-3|=5$. Period $T=\frac{2\pi}{\omega}=\pi$. (b) General solution: $x(t) = 3 + 5\cos(2t)$. Solve $1 = 3 + 5\cos(2t)$ to get $\cos(2t) = -\frac{2}{5}$, so $t = \frac{1}{2}\arccos(-\frac{2}{5}) \approx 0.58$s.}}
+\begin{hint}
+(a) This is simple harmonic motion about center $c=3$. From $\omega^2=4$, we get $\omega=2$. Since $x(0)=8$, amplitude $A=|8-3|=5$. Period $T=\frac{2\pi}{\omega}=\pi$. (b) General solution: $x(t) = 3 + 5\cos(2t)$. Solve $1 = 3 + 5\cos(2t)$ to get $\cos(2t) = -\frac{2}{5}$, so $t = \frac{1}{2}\arccos(-\frac{2}{5}) \approx 0.58$s.
+\end{hint}
 
 \begin{solution}
 \textbf{(a)} Center: $c=3$, $\omega^2=4 \implies \omega=2$
@@ -529,8 +542,9 @@ Let $I_n = \displaystyle \int \frac{1}{(x^2 + 1)^n} \, dx$ for $n \geq 1$.\\
 Show that $(2n-1)I_n = \frac{x}{(x^2+1)^{n-1}} + (2n-2)I_{n-1}$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Write $I_n = \int \frac{x^2 + 1 - x^2}{(x^2+1)^n}dx = I_{n-1} - \int\frac{x^2}{(x^2+1)^n}dx$. By parts on second term: $u = x$, $dv = \frac{x}{(x^2+1)^n}dx$. Rearrange to get reduction formula.}}
+\begin{hint}
+Write $I_n = \int \frac{x^2 + 1 - x^2}{(x^2+1)^n}dx = I_{n-1} - \int\frac{x^2}{(x^2+1)^n}dx$. By parts on second term: $u = x$, $dv = \frac{x}{(x^2+1)^n}dx$. Rearrange to get reduction formula.
+\end{hint}
 
 \begin{solution}
 We start with $I_n = \displaystyle \int \frac{1}{(x^2+1)^n}dx$.
@@ -586,8 +600,9 @@ Add/subtract technique creates reduction. Parts on algebraic portion.
 Find the volume when the region bounded by $y = x^2$, $y = 0$, $x = 2$ is rotated about the $y$-axis.
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Shell method: $V = 2\pi\int_0^2 x \cdot x^2 \, dx = 2\pi\int_0^2 x^3 dx = 2\pi \cdot \frac{16}{4} = 8\pi$ cubic units.}}
+\begin{hint}
+Shell method: $V = 2\pi\int_0^2 x \cdot x^2 \, dx = 2\pi\int_0^2 x^3 dx = 2\pi \cdot \frac{16}{4} = 8\pi$ cubic units.
+\end{hint}
 
 \begin{solution}
 Shell method: $V = 2\pi\int_a^b x\cdot f(x)\,dx$
@@ -614,8 +629,9 @@ Shell method (rotation about $y$-axis): $V=2\pi\int x\cdot f(x)dx$.
 Prove that $\displaystyle \int_0^{\pi/2} \ln(\sin x) \, dx = -\frac{\pi}{2}\ln 2$
 \end{problem}
 
-\vspace{0.5cm}
-\rotatebox{180}{\parbox{\textwidth}{\small \textbf{Hint:} Let $I = \int_0^{\pi/2} \ln(\sin x)dx$. King's: $I = \int_0^{\pi/2}\ln(\cos x)dx$. Add: $2I = \int_0^{\pi/2}[\ln(\sin x) + \ln(\cos x)]dx = \int_0^{\pi/2}\ln(\sin x\cos x)dx$. Use $\sin x\cos x = \frac{\sin 2x}{2}$. Substitute $u = 2x$.}}
+\begin{hint}
+Let $I = \int_0^{\pi/2} \ln(\sin x)dx$. King's: $I = \int_0^{\pi/2}\ln(\cos x)dx$. Add: $2I = \int_0^{\pi/2}[\ln(\sin x) + \ln(\cos x)]dx = \int_0^{\pi/2}\ln(\sin x\cos x)dx$. Use $\sin x\cos x = \frac{\sin 2x}{2}$. Substitute $u = 2x$.
+\end{hint}
 
 \begin{solution}
 King's property: $I = \int_0^{\pi/2}\ln(\cos x)dx$
