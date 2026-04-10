@@ -754,7 +754,7 @@ U_n(x)=\frac{\sin((n+1)\theta)}{\sin\theta}\qquad (x=\cos\theta).
 % \]
 
 
-The Gaussian function, $f(x) = e^{-x^2}$, is the mathematical foundation of the famous "Bell Curve" used in probability and statistics. By taking successive derivatives of this curve, we generate a family of functions known as the "Physicist's Hermite Polynomials," denoted as $H_n(x)$.They are defined explicitly by Rodrigues' Formula:
+The Gaussian function, $f(x) = e^{-x^2}$, is the mathematical foundation of the famous "Bell Curve" used in probability and statistics. By taking successive derivatives of this curve, we generate a family of functions known as the "Physicist's Hermite Polynomials" denoted as $H_n(x)$.They are defined explicitly by Rodrigues' Formula:
 
 \[ H_n(x) = (-1)^n e^{x^2} \frac{d^n}{dx^n} \left( e^{-x^2} \right) \quad \text{for } n \ge 0. \]
 
@@ -774,12 +774,16 @@ prove that
 \[
 H_{n+1}(x)=2xH_n(x)-H_n'(x).
 \]
-\item Use the recurrence to find $H_4(x)$.
+\item \textbf{Quantum Mechanics Application:} In quantum physics, the probability of finding a vibrating particle at position $x$ in its $n$th energy state is proportional to
+\[
+P_n(x)=e^{-x^2}[H_n(x)]^2.
+\]
+For the second excited state ($n=2$), use your formula for $H_2(x)$ to build $P_2(x)$, find $P_2'(x)$, and determine the exact $x$-coordinates of the local maxima.
 \end{enumerate}
 \end{problem}
 
 \begin{hintbox}
-Differentiate step by step in part (i). In part (iii), differentiate both sides and use the product rule carefully.
+Differentiate step by step in part (i). In part (iii), differentiate both sides and use the product rule carefully. Part (iv) is left as an extension challenge for readers curious about quantum mechanics.
 \end{hintbox}
 
 \begin{solution}
@@ -849,18 +853,7 @@ Divide by $-e^{-x^2}$:
 \boxed{H_{n+1}(x)=2xH_n(x)-H_n'(x).}
 \]
 
-\textbf{(iv)} Use the recurrence with $n=3$:
-\[
-H_4(x)=2xH_3(x)-H_3'(x).
-\]
-Since
-\[
-H_3(x)=8x^3-12x,\qquad H_3'(x)=24x^2-12,
-\]
-we get
-\[
-H_4(x)=2x(8x^3-12x)-(24x^2-12)=\boxed{16x^4-48x^2+12}.
-\]
+\textbf{(iv)} Left as a challenge problem. This is a lovely invitation to explore quantum mechanics, where Hermite polynomials describe the quantum harmonic oscillator.
 \end{solution}
 
 \begin{takeaways}
@@ -868,6 +861,7 @@ H_4(x)=2x(8x^3-12x)-(24x^2-12)=\boxed{16x^4-48x^2+12}.
 \item A good recurrence can replace repeated heavy differentiation.
 \item Hermite polynomials alternate parity: even index gives an even polynomial, odd index gives an odd polynomial.
 \item Rodrigues' formula is a powerful bridge between calculus and polynomial structure.
+\item Hermite polynomials also appear naturally in quantum mechanics.
 \end{itemize}
 \end{takeaways}
 
@@ -1036,12 +1030,31 @@ P_0(x) = 1,\quad P_1(x) = x,\quad P_2(x) = \frac{1}{2}(3x^2 - 1).
 (n+1)P_{n+1}(x)=(2n+1)xP_n(x)-nP_{n-1}(x),
 \]
 (do NOT prove this) find $P_3(x)$.
-\item Show that $P_3(x)$ is odd. Hence explain why $P_3$ is automatically orthogonal to both $P_0$ and $P_2$.
+\item \textbf{Application to Numerical Analysis:} 
+% The two-point Gaussian Quadrature rule estimates
+
+ In computer science, numerical integration usually provides an estimate rather than a perfect answer. The two-point Gaussian Quadrature rule estimates the integral of a general function $g(x)$ by sampling it at the roots of the Legendre polynomial $P_2(x)$:
+
+\[
+\int_{-1}^{1} g(x)\,dx \approx g(\alpha)+g(\beta),
+\]
+where $\alpha$ and $\beta$ are the roots of $P_2(x)=0$.
+
+Remarkably, the theorem guarantees that this is not just an approximation, but an exact equality for any polynomial of degree 3 or less.
+
+Verify that for every cubic
+\[
+f(x)=ax^3+bx^2+cx+d,
+\]
+the formula is exact:
+\[
+\int_{-1}^{1} f(x)\,dx=f(\alpha)+f(\beta).
+\]
 \end{enumerate}
 \end{problem}
 
 \begin{hintbox}
-For part (ii), write down the two orthogonality integrals and simplify. For part (iv), use odd/even symmetry on the interval $[-1,1]$.
+For part (ii), write down the two orthogonality integrals and simplify. For part (iv), first solve $P_2(x)=0$, then use the symmetry $\beta=-\alpha$ to simplify the odd-power terms.
 \end{hintbox}
 
 \begin{solution}
@@ -1085,16 +1098,27 @@ so
 \boxed{P_3(x)=\frac12(5x^3-3x).}
 \]
 
-\textbf{(iv)} Since
+\textbf{(iv)} The roots of $P_2(x)=\frac12(3x^2-1)$ are 
+$\alpha=\frac{1}{\sqrt3},\qquad \beta=-\frac{1}{\sqrt3}.$
+Now
 \[
-P_3(-x)=\frac12(5(-x)^3-3(-x))=-P_3(x),
+\int_{-1}^{1}(ax^3+bx^2+cx+d)\,dx=\frac{2b}{3}+2d,
 \]
-$P_3$ is odd. Now $P_0$ and $P_2$ are even, so $P_3P_0$ and $P_3P_2$ are odd. Therefore
+while
 \[
-\int_{-1}^{1}P_3(x)P_0(x)\,dx=0,\qquad
-\int_{-1}^{1}P_3(x)P_2(x)\,dx=0.
+f(\alpha)+f(\beta)
+=a(\alpha^3+\beta^3)+b(\alpha^2+\beta^2)+c(\alpha+\beta)+2d
+=\frac{2b}{3}+2d,
 \]
-Hence $P_3$ is orthogonal to both $P_0$ and $P_2$.
+because $\beta=-\alpha$, so the odd-power terms cancel and
+\[
+\alpha^2+\beta^2=\frac13+\frac13=\frac23.
+\]
+Hence
+\[
+\boxed{\int_{-1}^{1} f(x)\,dx=f(\alpha)+f(\beta).}
+\]
+This is a beautiful example of Gaussian quadrature. The general theory needs more heavy lifting and quite a bit of manual calculation.
 \end{solution}
 
 \begin{takeaways}
@@ -1102,7 +1126,7 @@ Hence $P_3$ is orthogonal to both $P_0$ and $P_2$.
 \item Orthogonality of functions is the continuous version of a dot product being zero.
 \item Symmetry on $[-1,1]$ is a powerful shortcut: odd integrands integrate to zero.
 \item Legendre, Chebyshev, and Hermite polynomials are all examples of orthogonal polynomial families.
+\item The roots of orthogonal polynomials also power Gaussian quadrature, one of the most important ideas in numerical integration.
 \item \textit{Calculus Meets Vectors}: In the HSC syllabus, you learn the dot product as $\vec{u} \cdot \vec{v} = u_1v_1 + u_2v_2 + u_3v_3 = 0$. An integral is simply an infinite sum of tiny slices. Therefore, $\int f(x)g(x) \, dx = 0$ is literally the dot product of two continuous functions with infinitely many dimensions!
-\item 
 \end{itemize}
 \end{takeaways}
