@@ -519,3 +519,589 @@ Hence
 \item A simple root like $-1$ is a useful check that the transformed solutions make sense.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[The Fibonacci Polynomial Remainder]
+Consider the quadratic polynomial
+\[
+P(x)=x^2-x-1.
+\]
+Let $\alpha$ and $\beta$ be the roots of $P(x)=0$, where $\alpha$ is the positive root.
+
+\begin{enumerate}[label=(\roman*)]
+\item Using the Polynomial Division Algorithm, explain why for any integer $n\ge 1$, we can write
+\[
+x^n=Q_n(x)(x^2-x-1)+(F_nx+G_n),
+\]
+where $Q_n(x)$ is a polynomial and $F_n,G_n$ are integers.
+\item By substituting $x=\alpha$, show that
+\[
+\alpha^n=F_n\alpha+G_n.
+\]
+\item Multiply both sides of the equation in part (ii) by $\alpha$. Using $\alpha^2=\alpha+1$, show that
+\[
+\alpha^{n+1}=(F_n+G_n)\alpha+F_n.
+\]
+\item Given that $F_n$ and $G_n$ are integers, and $\alpha=\frac{1+\sqrt5}{2}$ is irrational, deduce that
+\[
+F_{n+1}=F_n+G_n,\qquad G_{n+1}=F_n.
+\]
+Hence prove that
+\[
+F_{n+1}=F_n+F_{n-1}.
+\]
+\item Find the remainder when $x^{2026}$ is divided by $x^2-x-1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Treat $x^2=x+1$ as a reduction rule. For part (iv), compare two expressions of the form $A\alpha+B$ and use the irrationality of $\alpha$.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Dividing $x^n$ by the quadratic $x^2-x-1$, the remainder must have degree less than $2$. So
+\[
+x^n=Q_n(x)(x^2-x-1)+(F_nx+G_n)
+\]
+for some polynomial $Q_n(x)$ and constants $F_n,G_n$.
+
+\textbf{(ii)} Since $\alpha$ is a root of $x^2-x-1=0$, substituting $x=\alpha$ gives
+\[
+\alpha^n=Q_n(\alpha)\cdot 0+F_n\alpha+G_n=F_n\alpha+G_n.
+\]
+
+\textbf{(iii)} Multiply by $\alpha$:
+\[
+\alpha^{n+1}=F_n\alpha^2+G_n\alpha.
+\]
+Using $\alpha^2=\alpha+1$,
+\[
+\alpha^{n+1}=F_n(\alpha+1)+G_n\alpha=(F_n+G_n)\alpha+F_n.
+\]
+
+\textbf{(iv)} But also
+\[
+\alpha^{n+1}=F_{n+1}\alpha+G_{n+1}.
+\]
+Comparing with part (iii),
+\[
+F_{n+1}\alpha+G_{n+1}=(F_n+G_n)\alpha+F_n.
+\]
+Since $\alpha$ is irrational and all coefficients are integers,
+\[
+F_{n+1}=F_n+G_n,\qquad G_{n+1}=F_n.
+\]
+Now replace $n$ by $n-1$ in the second relation:
+\[
+G_n=F_{n-1}.
+\]
+Hence
+\[
+\boxed{F_{n+1}=F_n+F_{n-1}.}
+\]
+
+\textbf{(v)} For $n=1$,
+\[
+x=1\cdot x+0,
+\]
+so $F_1=1$, $G_1=0$.
+For $n=2$,
+\[
+x^2=x+1,
+\]
+so $F_2=1$, $G_2=1$.
+From part (iv),
+\[
+F_{n+1}=F_n+F_{n-1}
+\quad\text{and}\quad
+G_n=F_{n-1}.
+\]
+Therefore the remainder when $x^{2026}$ is divided by $x^2-x-1$ is
+\[
+\boxed{F_{2026}x+F_{2025}.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Dividing by a quadratic always leaves a linear remainder.
+\item A polynomial relation such as $x^2=x+1$ can reduce high powers recursively.
+\item The golden ratio, Fibonacci numbers, and polynomial remainders are tightly connected by the equation $x^2-x-1=0$.
+\item \textit{Math is Interconnected}: The golden ratio, polynomial remainders, and the Fibonacci sequence are all just different languages describing the exact same underlying mathematical structure: $x^2 - x - 1 = 0$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Chebyshev Recurrence]
+Let $x=\cos\theta$ for $0\le \theta\le \pi$, so $x\in[-1,1]$. Define
+\[
+T_n(x)=\cos(n\theta)
+\]
+for integers $n\ge 0$.
+
+\begin{enumerate}[label=(\roman*)]
+\item Find $T_0(x)$ and $T_1(x)$. Using the double-angle formula, show that
+\[
+T_2(x)=2x^2-1.
+\]
+\item By expanding $\cos(n\theta+\theta)$ and $\cos(n\theta-\theta)$, prove that
+\[
+T_{n+1}(x)=2xT_n(x)-T_{n-1}(x).
+\]
+\item Use the recurrence to find $T_3(x)$ and $T_4(x)$.
+\item Find the three roots of $T_3(x)=0$, and verify them by solving $\cos(3\theta)=0$ for $0\le \theta\le \pi$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Add the expansions of $\cos(n\theta+\theta)$ and $\cos(n\theta-\theta)$ so the sine terms cancel.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Since
+\[
+T_0(x)=\cos 0=1,\qquad T_1(x)=\cos\theta=x,
+\]
+we have
+\[
+\boxed{T_0(x)=1,\qquad T_1(x)=x.}
+\]
+Also
+\[
+T_2(x)=\cos(2\theta)=2\cos^2\theta-1=2x^2-1.
+\]
+
+\textbf{(ii)} Using the sum and difference formulas,
+\[
+\cos(n\theta+\theta)=\cos(n\theta)\cos\theta-\sin(n\theta)\sin\theta,
+\]
+\[
+\cos(n\theta-\theta)=\cos(n\theta)\cos\theta+\sin(n\theta)\sin\theta.
+\]
+Add them:
+\[
+\cos((n+1)\theta)+\cos((n-1)\theta)=2\cos(n\theta)\cos\theta.
+\]
+Substitute $T_n(x)=\cos(n\theta)$ and $x=\cos\theta$:
+\[
+T_{n+1}(x)+T_{n-1}(x)=2xT_n(x),
+\]
+so
+\[
+\boxed{T_{n+1}(x)=2xT_n(x)-T_{n-1}(x).}
+\]
+
+\textbf{(iii)} Apply the recurrence:
+\[
+T_3(x)=2x(2x^2-1)-x=4x^3-3x,
+\]
+\[
+T_4(x)=2x(4x^3-3x)-(2x^2-1)=8x^4-8x^2+1.
+\]
+
+\textbf{(iv)} Solve
+\[
+T_3(x)=4x^3-3x=0.
+\]
+Then
+\[
+x(4x^2-3)=0,
+\]
+so the roots are
+\[
+\boxed{x=0,\ \pm\frac{\sqrt3}{2}.}
+\]
+
+Now solve $\cos(3\theta)=0$ for $0\le \theta\le \pi$:
+\[
+3\theta=\frac{\pi}{2},\ \frac{3\pi}{2},\ \frac{5\pi}{2}.
+\]
+Hence
+\[
+\theta=\frac{\pi}{6},\ \frac{\pi}{2},\ \frac{5\pi}{6},
+\]
+and therefore
+\[
+x=\cos\theta=\frac{\sqrt3}{2},\ 0,\ -\frac{\sqrt3}{2}.
+\]
+This agrees with the algebraic roots.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The substitution $x=\cos\theta$ turns trigonometric identities into polynomial recurrences.
+\item The Chebyshev polynomials of the first kind are defined by
+\[
+T_n(x)=\cos(n\theta)\qquad (x=\cos\theta).
+\]
+\item The Chebyshev polynomials of the second kind are defined by
+\[
+U_n(x)=\frac{\sin((n+1)\theta)}{\sin\theta}\qquad (x=\cos\theta).
+\]
+\item These recurrences give fast formulas for $\cos(n\theta)$ without repeated expansion.
+\item \textit{Roots are Predictable}: Because these polynomials are born from a cosine wave, their roots will always be real, distinct, and trapped strictly between $-1$ and $1$. In higher mathematics, these roots (called "Chebyshev Nodes") are the optimal points to pick when trying to curve-fit data!
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Hermite and the Bell Curve]
+
+    % The Gaussian function
+% \[
+% f(x)=e^{-x^2}
+% \]
+% generates the physicist's Hermite polynomials
+% \[
+% H_n(x)=(-1)^n e^{x^2}\frac{d^n}{dx^n}\left(e^{-x^2}\right),\qquad n\ge 0.
+% \]
+
+
+The Gaussian function, $f(x) = e^{-x^2}$, is the mathematical foundation of the famous "Bell Curve" used in probability and statistics. By taking successive derivatives of this curve, we generate a family of functions known as the "Physicist's Hermite Polynomials," denoted as $H_n(x)$.They are defined explicitly by Rodrigues' Formula:
+
+\[ H_n(x) = (-1)^n e^{x^2} \frac{d^n}{dx^n} \left( e^{-x^2} \right) \quad \text{for } n \ge 0. \]
+
+(Note: $\frac{d^0}{dx^0}$ implies no differentiation, so $H_0(x) = 1$)
+
+
+\begin{enumerate}[label=(\roman*)]
+\item By manually applying the Chain Rule and Product Rule, find explicit formulas for $H_1(x)$, $H_2(x)$, and $H_3(x)$.
+
+\item Find the roots of $H_3(x)=0$. Hence state a conjecture about the parity of $H_n(x)$ when $n$ is even or odd.
+
+\item Starting from
+\[
+(-1)^n\frac{d^n}{dx^n}\left(e^{-x^2}\right)=e^{-x^2}H_n(x),
+\]
+prove that
+\[
+H_{n+1}(x)=2xH_n(x)-H_n'(x).
+\]
+\item Use the recurrence to find $H_4(x)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Differentiate step by step in part (i). In part (iii), differentiate both sides and use the product rule carefully.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} First,
+\[
+H_1(x)=-e^{x^2}\frac{d}{dx}(e^{-x^2})
+=-e^{x^2}(-2xe^{-x^2})
+=\boxed{2x}.
+\]
+
+Next,
+\[
+\frac{d^2}{dx^2}(e^{-x^2})
+=\frac{d}{dx}(-2xe^{-x^2})
+=-2e^{-x^2}+4x^2e^{-x^2}.
+\]
+So
+\[
+H_2(x)=e^{x^2}e^{-x^2}(4x^2-2)=\boxed{4x^2-2}.
+\]
+
+Then
+\[
+\frac{d^3}{dx^3}(e^{-x^2})
+=\frac{d}{dx}\bigl(e^{-x^2}(4x^2-2)\bigr)
+=e^{-x^2}(-8x^3+12x).
+\]
+Hence
+\[
+H_3(x)=-e^{x^2}e^{-x^2}(-8x^3+12x)=\boxed{8x^3-12x}.
+\]
+
+\textbf{(ii)} Solve
+\[
+8x^3-12x=0
+\Rightarrow 4x(2x^2-3)=0.
+\]
+So the roots are
+\[
+\boxed{x=0,\ \pm\sqrt{\frac32}.}
+\]
+Also $H_1$ and $H_3$ are odd, while $H_0$ and $H_2$ are even. So the natural conjecture is:
+\[
+\boxed{H_n(x)\text{ is even if }n\text{ is even, and odd if }n\text{ is odd}.}
+\]
+
+\textbf{(iii)} Differentiate
+\[
+(-1)^n\frac{d^n}{dx^n}(e^{-x^2})=e^{-x^2}H_n(x).
+\]
+The left-hand side becomes
+\[
+(-1)^n\frac{d^{n+1}}{dx^{n+1}}(e^{-x^2})
+=-e^{-x^2}H_{n+1}(x).
+\]
+The right-hand side gives
+\[
+\frac{d}{dx}\bigl(e^{-x^2}H_n(x)\bigr)
+=(-2xe^{-x^2})H_n(x)+e^{-x^2}H_n'(x).
+\]
+So
+\[
+-e^{-x^2}H_{n+1}(x)=e^{-x^2}\bigl(-2xH_n(x)+H_n'(x)\bigr).
+\]
+Divide by $-e^{-x^2}$:
+\[
+\boxed{H_{n+1}(x)=2xH_n(x)-H_n'(x).}
+\]
+
+\textbf{(iv)} Use the recurrence with $n=3$:
+\[
+H_4(x)=2xH_3(x)-H_3'(x).
+\]
+Since
+\[
+H_3(x)=8x^3-12x,\qquad H_3'(x)=24x^2-12,
+\]
+we get
+\[
+H_4(x)=2x(8x^3-12x)-(24x^2-12)=\boxed{16x^4-48x^2+12}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A good recurrence can replace repeated heavy differentiation.
+\item Hermite polynomials alternate parity: even index gives an even polynomial, odd index gives an odd polynomial.
+\item Rodrigues' formula is a powerful bridge between calculus and polynomial structure.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Bernoulli Polynomials and the Beta Distribution]
+
+    % The Bernoulli polynomials start with $B_0(x)=1$ and satisfy, for $n\ge 1$:
+% \[
+% \frac{d}{dx}B_n(x)=nB_{n-1}(x),
+% \qquad
+% \int_0^1 B_n(x)\,dx=0.
+% \]
+% Given
+% \[
+% B_2(x)=x^2-x+\frac16,
+% \]
+% answer the following:
+
+The Bernoulli polynomials, $B_n(x)$, were discovered by Swiss mathematician Jacob Bernoulli in the early 1700s (published posthumously in his masterwork Ars Conjectandi). Originally developed to solve centuries-old number theory puzzles, these polynomials have become surprisingly crucial in modern applied mathematics. In higher education, they form the foundation of the Euler-Maclaurin formula (used in numerical analysis to approximate complex integrals) and frequently appear in advanced statistics to define the moments, cumulants, and error bounds of Probability Density Functions (PDFs).
+
+They are defined by a starting seed $B_0(x) = 1$, and two strict calculus rules for all integers $n \ge 1$:
+
+(1) The Derivative Rule: $\frac{d}{dx} B_n(x) = n B_{n-1}(x)$
+(2) The Integral Rule: $\int_0^1 B_n(x) \, dx = 0$
+
+Given that $B_2(x) = x^2 - x + \frac{1}{6}$
+
+\begin{enumerate}[label=(\roman*)]
+\item Use the Derivative and Integral rules to find the explicit algebraic expressions for $B_3(x)$ and $B_4(x)$.
+\item A remarkable property of Bernoulli polynomials is their symmetry. Verify algebraically that $B_3(1-x) = -B_3(x)$. Hence, without further calculation, state the three roots of the cubic equation $B_3(x) = 0$.
+\item In probability theory, a valid Probability Density Function (PDF) defined on the interval $0 \le x \le 1$ must satisfy two conditions: $f(x) \ge 0$ for all $x$, and $\int_0^1 f(x) \, dx = 1$.
+Consider the function $f(x) = k \left( B_4(x) + \frac{1}{30} \right)$.
+Use the Integral Rule to quickly determine the value of the constant $k$. Then, use your polynomial $B_4(x)$ from part (i) to factorise $f(x)$ and explicitly justify why $f(x) \ge 0$ on this domain.
+% Let
+% \[
+% f(x)=k\left(B_4(x)+\frac{1}{30}\right).
+% \]
+% Find $k$, factorise $f(x)$, and justify that $f(x)\ge 0$ on $0\le x\le 1$.
+\item The distribution defined in part (iii) is a special case of the Beta Distribution, a continuous probability distribution widely used in higher-level statistics to model random proportions (such as the reliability of a mechanical system or the conversion rate of a website).
+Using your factorised form of $f(x)$, calculate the Expected Value, $E(X)$, of this distribution.
+
+% Find the expected value
+% \[
+% E(X)=\int_0^1 x f(x)\,dx.
+% \]
+
+
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Integrate to get $B_3$ and $B_4$, then use the condition $\int_0^1 B_n(x)\,dx=0$ to find the constants. In part (iii), do not integrate $B_4$ directly: use the rule you were given.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Since
+\[
+B_3'(x)=3B_2(x)=3x^2-3x+\frac12,
+\]
+integration gives
+\[
+B_3(x)=x^3-\frac32x^2+\frac12x+C.
+\]
+Using $\int_0^1 B_3(x)\,dx=0$ gives $C=0$, so
+\[
+\boxed{B_3(x)=x^3-\frac32x^2+\frac12x.}
+\]
+
+Next,
+\[
+B_4'(x)=4B_3(x)=4x^3-6x^2+2x,
+\]
+so
+\[
+B_4(x)=x^4-2x^3+x^2+D.
+\]
+Using $\int_0^1 B_4(x)\,dx=0$ gives $D=-\frac1{30}$, hence
+\[
+\boxed{B_4(x)=x^4-2x^3+x^2-\frac1{30}.}
+\]
+
+\textbf{(ii)} Substitute $1-x$ into $B_3$:
+\[
+B_3(1-x)=-(x^3-\tfrac32x^2+\tfrac12x)=-B_3(x).
+\]
+Also
+\[
+B_3(x)=x\left(x^2-\frac32x+\frac12\right)=x(x-1)\left(x-\frac12\right),
+\]
+so the roots are
+\[
+\boxed{0,\ \frac12,\ 1.}
+\]
+
+\textbf{(iii)} Since $\int_0^1 f(x)\,dx=1$,
+\[
+k\int_0^1\left(B_4(x)+\frac1{30}\right)dx=1.
+\]
+Using $\int_0^1 B_4(x)\,dx=0$,
+\[
+\frac{k}{30}=1 \Rightarrow \boxed{k=30.}
+\]
+Now
+\[
+f(x)=30\left(x^4-2x^3+x^2\right)=30x^2(x-1)^2.
+\]
+This is non-negative on $[0,1]$, since it is a product of squares.
+
+\textbf{(iv)} 
+\[
+E(X)=\int_0^1 x f(x)\,dx
+=30\int_0^1 x^3(x-1)^2\,dx.
+\]
+So
+\[
+E(X)=30\int_0^1 (x^5-2x^4+x^3)\,dx
+=30\left(\frac16-\frac25+\frac14\right)
+=\boxed{\frac12.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The derivative and zero-integral rules determine Bernoulli polynomials recursively.
+\item Symmetry can reveal roots quickly.
+\item \textit{Beta Distributions} is a family of continuous probability distributions defined on the interval $[0, 1]$. They are parameterized by two positive shape parameters, $\alpha$ and $\beta$, which determine the shape of the distribution. The Beta distribution is widely used in statistics to model random variables that represent proportions or probabilities, such as the success rate of a process or the proportion of a population with a certain characteristic. It is defined by the probability density function:
+\[f(x; \alpha, \beta) = \frac{x^{\alpha - 1}(1 - x)^{\beta - 1}}{B(\alpha, \beta)}\]
+where $B(\alpha, \beta)$ is the Beta function, which serves as a normalization constant to ensure that the total area under the curve is 1 and is given by:
+\[B(\alpha, \beta) = \int_0^1 t^{\alpha - 1}(1 - t)^{\beta - 1} dt.\]
+\item \textit{Beta Distributions in the Real World}: The function $f(x) = 30x^2(1-x)^2$ is formally known as a $\text{Beta}(3,3)$ distribution. Because its domain is strictly $[0,1]$, university statisticians use it to model percentages and probabilities, such as predicting the batting average of a baseball player or the defect rate in a manufacturing plant!
+\item \textit{Interconnected Math}: This problem beautifully demonstrates that pure calculus (polynomial derivation) and applied statistics (Probability Density Functions) are not isolated topics. The algebraic properties of a polynomial directly dictate its viability as a statistical model.
+
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Legendre Polynomials and the Infinite Dot Product]
+
+
+% For functions on $[-1,1]$, define the inner product by
+% \[
+% \langle f,g\rangle=\int_{-1}^{1}f(x)g(x)\,dx.
+% \]
+% Two functions are orthogonal if this integral is $0$.
+
+% The first three Legendre polynomials are
+% \[
+% P_0(x)=1,\qquad P_1(x)=x,\qquad P_2(x)=\frac12(3x^2-1).
+% \]
+
+
+In the study of vectors, two vectors are defined as orthogonal (perpendicular) if their dot product is zero: $\vec{u} \cdot \vec{v} = 0$.
+
+In advanced calculus, we can apply this exact same concept to functions. We define the "inner product" of two functions $f(x)$ and $g(x)$ over the interval $[-1, 1]$ as the definite integral of their product. Thus, two functions are \textbf{orthogonal} if:
+\[
+\int_{-1}^{1} f(x)g(x) \, dx = 0.
+\]
+The \textbf{Legendre Polynomials}, denoted $P_n(x)$, form a sequence of orthogonal polynomials. The first three are:
+\[
+P_0(x) = 1,\quad P_1(x) = x,\quad P_2(x) = \frac{1}{2}(3x^2 - 1).
+\]
+
+\begin{enumerate}[label=(\roman*)]
+\item Verify that $P_0$ and $P_1$ are orthogonal, and that $P_1$ and $P_2$ are orthogonal.
+\item Let $Q(x)=ax^2+bx+c$. Show that if $Q$ is orthogonal to both $P_0$ and $P_1$, then $Q$ is a scalar multiple of $P_2$.
+\item Using
+\[
+(n+1)P_{n+1}(x)=(2n+1)xP_n(x)-nP_{n-1}(x),
+\]
+(do NOT prove this) find $P_3(x)$.
+\item Show that $P_3(x)$ is odd. Hence explain why $P_3$ is automatically orthogonal to both $P_0$ and $P_2$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+For part (ii), write down the two orthogonality integrals and simplify. For part (iv), use odd/even symmetry on the interval $[-1,1]$.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} 
+\[
+\int_{-1}^{1}P_0(x)P_1(x)\,dx=\int_{-1}^{1}x\,dx=0.
+\]
+Also
+\[
+\int_{-1}^{1}P_1(x)P_2(x)\,dx
+=\frac12\int_{-1}^{1}(3x^3-x)\,dx=0,
+\]
+since the integrand is odd.
+
+\textbf{(ii)} Let $Q(x)=ax^2+bx+c$.
+Orthogonal to $P_0$:
+\[
+\int_{-1}^{1}(ax^2+bx+c)\,dx=\frac{2a}{3}+2c=0
+\Rightarrow c=-\frac{a}{3}.
+\]
+Orthogonal to $P_1$:
+\[
+\int_{-1}^{1}(ax^2+bx+c)x\,dx=\int_{-1}^{1}(ax^3+bx^2+cx)\,dx=\frac{2b}{3}=0,
+\]
+so $b=0$. Hence
+\[
+Q(x)=ax^2-\frac{a}{3}=\frac{a}{3}(3x^2-1)=\frac{2a}{3}P_2(x).
+\]
+So $Q$ is a scalar multiple of $P_2$.
+
+\textbf{(iii)} Put $n=2$:
+\[
+3P_3(x)=5xP_2(x)-2P_1(x).
+\]
+Thus
+\[
+3P_3(x)=5x\cdot \frac12(3x^2-1)-2x=\frac{15x^3-9x}{2},
+\]
+so
+\[
+\boxed{P_3(x)=\frac12(5x^3-3x).}
+\]
+
+\textbf{(iv)} Since
+\[
+P_3(-x)=\frac12(5(-x)^3-3(-x))=-P_3(x),
+\]
+$P_3$ is odd. Now $P_0$ and $P_2$ are even, so $P_3P_0$ and $P_3P_2$ are odd. Therefore
+\[
+\int_{-1}^{1}P_3(x)P_0(x)\,dx=0,\qquad
+\int_{-1}^{1}P_3(x)P_2(x)\,dx=0.
+\]
+Hence $P_3$ is orthogonal to both $P_0$ and $P_2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Orthogonality of functions is the continuous version of a dot product being zero.
+\item Symmetry on $[-1,1]$ is a powerful shortcut: odd integrands integrate to zero.
+\item Legendre, Chebyshev, and Hermite polynomials are all examples of orthogonal polynomial families.
+\item \textit{Calculus Meets Vectors}: In the HSC syllabus, you learn the dot product as $\vec{u} \cdot \vec{v} = u_1v_1 + u_2v_2 + u_3v_3 = 0$. An integral is simply an infinite sum of tiny slices. Therefore, $\int f(x)g(x) \, dx = 0$ is literally the dot product of two continuous functions with infinitely many dimensions!
+\item 
+\end{itemize}
+\end{takeaways}

@@ -696,3 +696,164 @@ So the required recurrence is
 \item The same idea gives a recurrence for all higher power sums $S_k$.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[Sketching a Cubic with Derivatives]
+Sketch the graph of
+\[
+f(x)=x^3-2x^2-3x.
+\]
+
+Start by:
+\begin{itemize}[leftmargin=*]
+\item finding $f'(x)$ and solving $f'(x)=0$,
+\item analysing the sign of $f'(x)$ and the turning points,
+\item summarising the behaviour in a table,
+\item then drawing the graph.
+\end{itemize}
+\end{problem}
+
+\begin{hintbox}
+Factor both $f(x)$ and $f'(x)$. The derivative tells you where the graph is increasing or decreasing.
+\end{hintbox}
+
+\begin{solution}
+Differentiate:
+\[
+f'(x)=3x^2-4x-3.
+\]
+Solve
+\[
+3x^2-4x-3=0.
+\]
+Using the quadratic formula,
+\[
+x=\frac{4\pm\sqrt{16+36}}{6}
+=\frac{4\pm2\sqrt{13}}{6}
+=\frac{2\pm\sqrt{13}}{3}.
+\]
+
+Since $f'(x)$ is an upward-opening quadratic,
+\[
+f'(x)>0 \text{ for } x<\frac{2-\sqrt{13}}{3}
+\quad\text{and}\quad
+x>\frac{2+\sqrt{13}}{3},
+\]
+and
+\[
+f'(x)<0 \text{ for } \frac{2-\sqrt{13}}{3}<x<\frac{2+\sqrt{13}}{3}.
+\]
+Therefore:
+\begin{itemize}[leftmargin=*]
+\item $f$ is increasing, then decreasing, then increasing;
+\item there is a local maximum at $x=\dfrac{2-\sqrt{13}}{3}$;
+\item there is a local minimum at $x=\dfrac{2+\sqrt{13}}{3}$.
+\end{itemize}
+
+Also
+\[
+f(x)=x(x-3)(x+1),
+\]
+so the $x$-intercepts are
+\[
+x=-1,\ 0,\ 3.
+\]
+
+The behaviour table is:
+\[
+\begin{array}{c|ccccc}
+x & -\infty & \frac{2-\sqrt{13}}{3} &  & \frac{2+\sqrt{13}}{3} & +\infty\\ \hline
+f'(x) & + & 0 & - & 0 & +\\ \hline
+f(x) & \nearrow & \text{local max} & \searrow & \text{local min} & \nearrow
+\end{array}
+\]
+
+A rough sketch is:
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  axis lines=middle,
+  xmin=-2.2,xmax=4.2,
+  ymin=-10,ymax=8,
+  samples=400,
+  width=0.78\linewidth,
+  height=6.2cm,
+  xtick={-1,0,3},
+  ytick=\empty,
+  xlabel={$x$},
+  ylabel={$y$}
+]
+\addplot[thick,bookpurple,domain=-2.2:4.2]{x^3-2*x^2-3*x};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item To sketch a cubic accurately, use both the intercepts and the derivative.
+\item The sign of $f'(x)$ tells you where the graph is increasing or decreasing.
+\item A local maximum occurs where $f'(x)$ changes from positive to negative; a local minimum occurs where it changes from negative to positive.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Divisibility by $(x+1)^2$]
+Consider the polynomial
+\[
+P(x)=ax^8+bx^7+1,
+\]
+where $a$ and $b$ are non-zero real numbers. Find the values of $a$ and $b$ for which $P(x)$ is divisible by $(x+1)^2$.
+\end{problem}
+
+\begin{hintbox}
+If $(x+1)^2$ divides $P(x)$, then $x=-1$ is a repeated root. So use $P(-1)=0$ and $P'(-1)=0$.
+\end{hintbox}
+
+\begin{solution}
+For $(x+1)^2$ to divide $P(x)$, we need
+\[
+P(-1)=0\qquad\text{and}\qquad P'(-1)=0.
+\]
+Now
+\[
+P(-1)=a-b+1,
+\]
+so
+\[
+a-b+1=0. \tag{1}
+\]
+
+Also
+\[
+P'(x)=8ax^7+7bx^6,
+\]
+hence
+\[
+P'(-1)=-8a+7b=0. \tag{2}
+\]
+
+From (2),
+\[
+7b=8a \Rightarrow b=\frac{8a}{7}.
+\]
+Substitute into (1):
+\[
+a-\frac{8a}{7}+1=0
+\Rightarrow -\frac{a}{7}+1=0
+\Rightarrow a=7.
+\]
+Then
+\[
+b=\frac{8a}{7}=8.
+\]
+Therefore
+\[
+\boxed{a=7,\qquad b=8.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item If $(x-r)^2$ is a factor, then both $P(r)$ and $P'(r)$ must be zero.
+\item Repeated-factor questions usually become a pair of simultaneous equations in the unknown coefficients.
+\end{itemize}
+\end{takeaways}

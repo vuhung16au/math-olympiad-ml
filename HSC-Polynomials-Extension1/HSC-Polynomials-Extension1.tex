@@ -247,6 +247,37 @@ Key features to determine when sketching $y = P(x)$:
 
 \textbf{Long division.} Systematically divide the leading term of the dividend by the leading term of the divisor, multiply, subtract, and repeat until the degree of the remainder is less than the degree of the divisor.
 
+\begin{remark}[Comparing Number Division and Polynomial Division]
+The same idea is used in both arithmetic and algebra:
+\[
+\text{dividend}=\text{divisor}\times\text{quotient}+\text{remainder}.
+\]
+
+\textbf{Number example.} Dividing $2048$ by $15$ gives quotient $136$ and remainder $8$:
+\[
+2048=15\times 136+8,
+\qquad 0\le 8<15.
+\]
+
+\textbf{Polynomial example.} Dividing
+\[
+x^3+x^2+2x-1
+\quad\text{by}\quad
+x-3
+\]
+gives quotient $x^2+4x+14$ and remainder $41$:
+\[
+x^3+x^2+2x-1=(x-3)(x^2+4x+14)+41.
+\]
+Here the remainder is a constant, which is allowed because its degree is less than the degree of $x-3$.
+
+So the \emph{structure} is identical:
+\[
+\boxed{\text{Dividend}=\text{Divisor}\times\text{Quotient}+\text{Remainder}.}
+\]
+The only difference is that for polynomials the remainder must have lower degree than the divisor.
+\end{remark}
+
 \textbf{Synthetic division (for linear divisors).} A streamlined numerical method for dividing $P(x)$ by $(x - a)$; it records only the coefficients and uses the value $a$ as the divisor.
 
 \textbf{Repeated-root test.} If $r$ is a repeated zero of $P(x)$, then

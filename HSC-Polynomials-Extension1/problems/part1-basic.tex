@@ -218,3 +218,153 @@ Solving,
 \item Partial fractions are another good place to use polynomial identities.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[Partial Fractions with a Repeated Linear Factor]
+Let
+\[
+P(x)=x^2(x-1)(x+1).
+\]
+Find constants $A,B,C,D$ such that
+\[
+\frac{1}{P(x)}=\frac{A}{x}+\frac{B}{x^2}+\frac{C}{x-1}+\frac{D}{x+1}
+\]
+for all $x$ for which the expression is defined.
+\end{problem}
+
+\begin{hintbox}
+Multiply through by $x^2(x-1)(x+1)$, then use convenient values such as $x=0,1,-1$ before comparing coefficients.
+\end{hintbox}
+
+\begin{solution}
+We want
+\[
+\frac{1}{x^2(x-1)(x+1)}=\frac{A}{x}+\frac{B}{x^2}+\frac{C}{x-1}+\frac{D}{x+1}.
+\]
+Multiply by $x^2(x-1)(x+1)$:
+\[
+1=Ax(x-1)(x+1)+B(x-1)(x+1)+Cx^2(x+1)+Dx^2(x-1).
+\]
+Now substitute convenient values:
+\[
+x=0 \Rightarrow 1=-B \Rightarrow B=-1,
+\]
+\[
+x=1 \Rightarrow 1=2C \Rightarrow C=\frac12,
+\]
+\[
+x=-1 \Rightarrow 1=2D \Rightarrow D=\frac12.
+\]
+Use $x=2$:
+\[
+1=6A+3B+12C+4D.
+\]
+Substituting $B=-1$, $C=D=\frac12$ gives
+\[
+1=6A-3+6+2=6A+5,
+\]
+so
+\[
+A=-\frac23.
+\]
+Hence
+\[
+\boxed{A=-\frac23,\quad B=-1,\quad C=\frac12,\quad D=\frac12.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A repeated linear factor $(x-a)^2$ contributes two terms: $\dfrac{A}{x-a}+\dfrac{B}{(x-a)^2}$.
+\item Substituting the roots of the denominator is usually faster than comparing every coefficient immediately.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Partial Fractions with an Irreducible Quadratic]
+Let
+\[
+Q(x)=(x^2+1)(x-1)^2.
+\]
+Find constants $A,B,C,D$ such that
+\[
+\frac{1}{Q(x)}=\frac{Ax+B}{x^2+1}+\frac{C}{x-1}+\frac{D}{(x-1)^2}
+\]
+for all $x$ for which the expression is defined.
+\end{problem}
+
+\begin{hintbox}
+Clear denominators first. Use $x=1$, then compare coefficients or substitute more values.
+\end{hintbox}
+
+\begin{solution}
+We require
+\[
+\frac{1}{(x^2+1)(x-1)^2}=\frac{Ax+B}{x^2+1}+\frac{C}{x-1}+\frac{D}{(x-1)^2}.
+\]
+Multiply by $(x^2+1)(x-1)^2$:
+\[
+1=(Ax+B)(x-1)^2+C(x^2+1)(x-1)+D(x^2+1).
+\]
+Expand:
+\[
+1=(Ax+B)(x^2-2x+1)+C(x^3-x^2+x-1)+D(x^2+1).
+\]
+So
+\[
+\begin{aligned}
+1={}&(A+C)x^3+(-2A+B-C+D)x^2\\
+&+(A-2B+C)x+(B-C+D).
+\end{aligned}
+\]
+Compare coefficients:
+\[
+\begin{cases}
+A+C=0,\\
+-2A+B-C+D=0,\\
+A-2B+C=0,\\
+B-C+D=1.
+\end{cases}
+\]
+From $A+C=0$, we get $C=-A$. Then
+\[
+\;A-2B+C=0 \Rightarrow -2B=0 \Rightarrow B=0.
+\]
+\[
+\;-2A+B-C+D=0 \Rightarrow -A+D=0 \Rightarrow D=A.
+\]
+Finally,
+\[
+\;B-C+D=1 \Rightarrow A+A=1 \Rightarrow A=\frac12.
+\]
+So
+\[
+\boxed{A=\frac12,\quad B=0,\quad C=-\frac12,\quad D=\frac12.}
+\]
+\[
+\frac{1}{(x^2+1)(x-1)^2}
+=\frac{x}{2(x^2+1)}-\frac{1}{2(x-1)}+\frac{1}{2(x-1)^2}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Integrals of the form $\int \dfrac{1}{(x^2+1)(x-1)^2}\,dx$ can be evaluated using partial fractions.
+\item An irreducible quadratic factor $(ax^2+bx+c)$ contributes a numerator of the form $Mx+N$ in the fully general case.
+\item General rule: if
+\[
+P(x)=\prod (L_i(x))^{r_i}\prod (Q_j(x))^{s_j},
+\]
+where each $L_i$ is linear and each $Q_j$ is an irreducible quadratic, then
+\[
+\frac{1}{P(x)}
+\]
+is expanded using
+\[
+\frac{A_1}{L_i}+\frac{A_2}{L_i^2}+\cdots+\frac{A_{r_i}}{L_i^{r_i}}
+\]
+for each repeated linear factor, and
+\[
+\frac{M_1x+N_1}{Q_j}+\frac{M_2x+N_2}{Q_j^2}+\cdots+\frac{M_{s_j}x+N_{s_j}}{Q_j^{s_j}}
+\]
+for each repeated irreducible quadratic factor.
+\end{itemize}
+\end{takeaways}
