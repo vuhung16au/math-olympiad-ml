@@ -141,12 +141,12 @@ then $P(x)$ has exactly two distinct real roots. Interpret this geometrically.
 \addplot[thick,bookpurple,domain=-1.2:-0.28] {1/x};
 \addplot[thick,bookpurple,domain=0.28:2.4] {1/x};
 \addplot[thick,blue!70!black,domain=0:360,samples=240] ({0.5 + 0.5*cos(x)},{0.5*sin(x)});
-\addplot[thick,orange!90!black,domain=0:360,samples=240] ({(16/27)^(1.0/3.0) + (16/27)^(1.0/3.0)*cos(x)},{(16/27)^(1.0/3.0)*sin(x)});
+\addplot[thick,orange!90!black,domain=0:360,samples=240] ({(16/27)^(1.0/4.0) + (16/27)^(1.0/4.0)*cos(x)},{(16/27)^(1.0/4.0)*sin(x)});
 \addplot[thick,red!75!black,domain=0:360,samples=240] ({1 + cos(x)},{sin(x)});
 \end{axis}
 \end{tikzpicture}
 
-\small Hyperbola $\mathcal H$ in purple. Circles shown for $c=\frac12$ (blue), $c=\sqrt[3]{\frac{16}{27}}\approx 0.84$ (orange), and $c=1$ (red).
+\small Hyperbola $\mathcal H$ in purple. Circles shown for $c=\frac12$ (blue), $c=\sqrt[4]{\frac{16}{27}}\approx 0.87738$ (orange), and $c=1$ (red).
 \end{center}
 
 \begin{center}
@@ -165,12 +165,12 @@ then $P(x)$ has exactly two distinct real roots. Interpret this geometrically.
   enlargelimits=false
 ]
 \addplot[thick,blue!70!black,domain=-1.2:3.1]{x^4 - x^3 + 1};
-\addplot[thick,orange!90!black,domain=-1.2:3.1]{x^4 - 2*((16/27)^(1.0/3.0))*x^3 + 1};
+\addplot[thick,orange!90!black,domain=-1.2:3.1]{x^4 - 2*((16/27)^(1.0/4.0))*x^3 + 1};
 \addplot[thick,red!75!black,domain=-1.2:3.1]{x^4 - 2*x^3 + 1};
 \end{axis}
 \end{tikzpicture}
 
-\small Quartics $P(x)=x^4-2cx^3+1$ for $c=\frac12$ (blue), $c=\sqrt[3]{\frac{16}{27}}\approx 0.84$ (orange), and $c=1$ (red).
+\small Quartics $P(x)=x^4-2cx^3+1$ for $c=\frac12$ (blue), $c=\sqrt[4]{\frac{16}{27}}\approx 0.87738$ (orange), and $c=1$ (red).
 \end{center}
 
 \begin{hintbox}

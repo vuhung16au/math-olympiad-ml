@@ -770,6 +770,10 @@ f(x) & \nearrow & \text{local max} & \searrow & \text{local min} & \nearrow
 A rough sketch is:
 \begin{center}
 \begin{tikzpicture}
+\pgfmathsetmacro{\xone}{(2 - sqrt(13))/3}
+\pgfmathsetmacro{\xtwo}{(2 + sqrt(13))/3}
+\pgfmathsetmacro{\yone}{(\xone)^3 - 2*(\xone)^2 - 3*(\xone)}
+\pgfmathsetmacro{\ytwo}{(\xtwo)^3 - 2*(\xtwo)^2 - 3*(\xtwo)}
 \begin{axis}[
   axis lines=middle,
   xmin=-2.2,xmax=4.2,
@@ -783,6 +787,34 @@ A rough sketch is:
   ylabel={$y$}
 ]
 \addplot[thick,bookpurple,domain=-2.2:4.2]{x^3-2*x^2-3*x};
+\addplot[dashed,gray] coordinates {(\xone,-10) (\xone,8)};
+\addplot[dashed,gray] coordinates {(\xtwo,-10) (\xtwo,8)};
+\addplot[dashed,gray] coordinates {(-2.2,\yone) (4.2,\yone)};
+\addplot[dashed,gray] coordinates {(-2.2,\ytwo) (4.2,\ytwo)};
+\addplot[only marks,mark=*,mark size=2.5pt,bookred] coordinates {(\xone,\yone)};
+\addplot[only marks,mark=*,mark size=2.5pt,bookred] coordinates {(\xtwo,\ytwo)};
+
+% \node[
+%   font=\small,
+%   anchor=south east,
+%   fill=white,
+%   draw=gray!50,
+%   rounded corners=1pt,
+%   inner sep=3pt,
+%   text width=4.3cm,
+%   align=center
+% ] at (axis cs:\xone,\yone) {local max at $x\approx -0.53518$};
+% \node[
+%   font=\small,
+%   anchor=north west,
+%   fill=white,
+%   draw=gray!50,
+%   rounded corners=1pt,
+%   inner sep=3pt,
+%   text width=4.3cm,
+%   align=center
+% ] at (axis cs:\xtwo,\ytwo) {local min at $x\approx 1.86852$};
+
 \end{axis}
 \end{tikzpicture}
 \end{center}

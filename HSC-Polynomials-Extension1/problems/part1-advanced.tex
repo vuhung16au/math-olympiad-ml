@@ -528,7 +528,7 @@ P(x)=x^2-x-1.
 Let $\alpha$ and $\beta$ be the roots of $P(x)=0$, where $\alpha$ is the positive root.
 
 \begin{enumerate}[label=(\roman*)]
-\item Using the Polynomial Division Algorithm, explain why for any integer $n\ge 1$, we can write
+\item Using the Polynomial Division Algorithm, or otherwise, explain why for any integer $n\ge 1$, we can write
 \[
 x^n=Q_n(x)(x^2-x-1)+(F_nx+G_n),
 \]
@@ -970,10 +970,19 @@ The Bernoulli polynomials, $B_n(x)$, were discovered by Swiss mathematician Jaco
 
 They are defined by a starting seed $B_0(x) = 1$, and two strict calculus rules for all integers $n \ge 1$:
 
-(1) The Derivative Rule: $\frac{d}{dx} B_n(x) = n B_{n-1}(x)$
-(2) The Integral Rule: $\int_0^1 B_n(x) \, dx = 0$
+(1) The Derivative Rule: 
 
-Given that $B_2(x) = x^2 - x + \frac{1}{6}$
+\[ \frac{d}{dx} B_n(x) = n B_{n-1}(x) \]
+
+(2) The Integral Rule: 
+
+\[ \int_0^1 B_n(x) \, dx = 0 \]
+
+Given that 
+
+\[
+B_0(x) = 1, \quad B_1(x) = x - \frac{1}{2}, \quad \text{and} \quad B_2(x) = x^2 - x + \frac{1}{6}
+\]
 
 \begin{enumerate}[label=(\roman*)]
 \item Use the Derivative and Integral rules to find the explicit algebraic expressions for $B_3(x)$ and $B_4(x)$.
