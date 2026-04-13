@@ -1,2 +1,82 @@
 % Part 1 -- Advanced Worked Problems
-% Problems will be added here.
+
+\begin{problem}[The Exponential Functional Equation]
+Let $f:\mathbb{R}\to\mathbb{R}$ be a function such that $f(x)>0$ for all real numbers $x$ and
+\[
+f(x+y)=f(x)f(y)
+\qquad \text{for all } x,y\in\mathbb{R}.
+\]
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $f(0)=1$ and deduce that $f(-x)=\dfrac{1}{f(x)}$.
+    \item By using mathematical induction, show that $f(nx)=[f(x)]^n$ for all $n\in\mathbb{Z}^+$.
+    \item Prove that $f(rx)=[f(x)]^r$ for all rational numbers $r$.
+    \item Suppose that $f$ is continuous on $\mathbb{R}$. Prove that $f(tx)=[f(x)]^t$ for all real numbers $t$. Hence deduce that $f(x)=a^x$ for some constant $a$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+This is a variation of Cauchy's functional equation and is the standard route to exponential functions.
+\begin{itemize}[leftmargin=*]
+    \item For (i), substitute $y=0$, then choose $y=-x$.
+    \item For (ii), write $f((k+1)x)$ as $f(kx+x)$.
+    \item For (iii), let $r=\dfrac{p}{q}$ and compare $f(px)$ with $f\!\left(q\cdot \dfrac{p}{q}x\right)$.
+    \item For (iv), approximate a real number $t$ by rationals $r_n\to t$ and use continuity to pass to the limit.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} From $f(x)=f(x+0)=f(x)f(0)$ and $f(x)>0$, we get $f(0)=1$. Then
+\[
+1=f(0)=f(x+(-x))=f(x)f(-x),
+\]
+so $f(-x)=\dfrac{1}{f(x)}$.
+
+\textbf{(ii)} Induct on $n\in\mathbb{Z}^+$. The case $n=1$ is trivial. If $f(kx)=[f(x)]^k$, then
+\[
+f((k+1)x)=f(kx+x)=f(kx)f(x)=[f(x)]^{k+1}.
+\]
+Hence $f(nx)=[f(x)]^n$ for all $n\in\mathbb{Z}^+$.
+
+\textbf{(iii)} Using (i) and (ii), the formula extends to all integers:
+\[
+f(0x)=f(0)=1=[f(x)]^0,\qquad
+f(-nx)=\frac{1}{f(nx)}=[f(x)]^{-n}.
+\]
+Now let $r=\dfrac{p}{q}$ with $p\in\mathbb{Z}$ and $q\in\mathbb{Z}^+$. Then
+\[
+[f(x)]^p=f(px)=f\!\left(q\cdot \frac{p}{q}x\right)=\left[f\!\left(\frac{p}{q}x\right)\right]^q.
+\]
+Since $f>0$, taking the positive $q$th root gives
+\[
+f\!\left(\frac{p}{q}x\right)=[f(x)]^{p/q}.
+\]
+Thus $f(rx)=[f(x)]^r$ for all $r\in\mathbb{Q}$.
+
+\textbf{(iv)} Let $t\in\mathbb{R}$ and choose rationals $r_n\to t$. By continuity of $f$,
+\[
+f(tx)=\lim_{n\to\infty} f(r_nx).
+\]
+Using (iii),
+\[
+f(r_nx)=[f(x)]^{r_n}.
+\]
+Since $f(x)>0$, the map $u\mapsto [f(x)]^u$ is continuous, so
+\[
+f(tx)=\lim_{n\to\infty}[f(x)]^{r_n}=[f(x)]^t.
+\]
+Now put $x=1$. If we let $a=f(1)>0$, then
+\[
+f(t)=f(t\cdot 1)=[f(1)]^t=a^t.
+\]
+Hence $f(x)=a^x$ for some constant $a>0$.
+\end{solution}
+
+\begin{takeaways}
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{Foundation of exponentials:} Once continuity is added, the functional equation $f(a+b)=f(a)f(b)$ forces the function to be exponential. In particular, if $f(1)=c$, then part (iv) shows that $f(t)=c^t$ for every real number $t$.
+        \item \textbf{Variation of Cauchy's functional equation:} This is the multiplicative analogue of the classical additive equation. A common linear version says that if a continuous function $f:\mathbb{R}\to\mathbb{R}$ satisfies $f(x)+f(y)=f(x+y)$ for all real numbers $x$ and $y$, then $f(x)=ax$ for some constant $a$.
+        \item \textbf{Density plus continuity:} The key step is to prove the rule first for integers, then rationals, and finally extend it from $\mathbb{Q}$ to all real numbers by using the density of the rationals together with continuity.
+        \item \textbf{Difficulty note:} This is an olympiad-style problem. You may find a variation of it in a strong trial exam from a top school, but it is unlikely to appear in an official HSC Mathematics Extension 1 or Extension 2 examination in this full form.
+    \end{itemize}
+\end{takeaways}

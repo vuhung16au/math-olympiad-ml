@@ -1,0 +1,66 @@
+% Part 1, Problem 4: sqrt{a} irrational for non-square a - Proof by Contradiction
+% Easy
+
+\begin{problem}[Easy]
+Let $a$ be a positive integer. If $a$ is not a perfect square, prove that $\sqrt{a}$ is irrational.
+\end{problem}
+
+\begin{solution}
+\textbf{Proof by Contradiction}
+
+\textbf{Step 1: Assume the negation}
+
+Assume, for contradiction, that $\sqrt{a}$ is rational.
+Then we can write
+\[
+\sqrt{a} = \frac{p}{q}
+\]
+where $p, q \in \mathbb{Z}$, $q \neq 0$, and $\gcd(p,q) = 1$.
+
+\textbf{Step 2: Square both sides}
+
+\begin{align*}
+a &= \frac{p^2}{q^2} \\
+p^2 &= aq^2
+\end{align*}
+
+\textbf{Step 3: Compare prime factorizations}
+
+By the Fundamental Theorem of Arithmetic, every positive integer has a unique prime factorization.
+
+When an integer is squared, every prime exponent in its factorization becomes even.
+So:
+\begin{itemize}
+    \item in $p^2$, every prime appears with an even exponent;
+    \item in $q^2$, every prime appears with an even exponent.
+\end{itemize}
+
+Now the equation
+\[
+p^2 = aq^2
+\]
+shows that $aq^2$ must also have only even prime exponents.
+
+Since $q^2$ already contributes only even exponents, this is possible only if every prime appearing in $a$ also has an even exponent.
+
+\textbf{Step 4: Derive the contradiction}
+
+But if every prime in the factorization of $a$ has an even exponent, then $a$ is a perfect square.
+
+This contradicts the hypothesis that $a$ is \emph{not} a perfect square.
+
+\textbf{Conclusion}
+
+Therefore, our assumption was false, and $\sqrt{a}$ must be irrational.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Parity of Prime Exponents:} A perfect square has only even exponents in its prime factorization
+\item \textbf{Why the Method Works:} Squaring forces all prime exponents in $p^2$ and $q^2$ to be even, so the same must be true for $a$
+\item \textbf{Generalization:} This extends proofs like ``$\sqrt{2}$ is irrational'' or ``$\sqrt{23}$ is irrational'' to any positive integer that is not a square
+\item \textbf{Key Tool:} The argument relies on the Fundamental Theorem of Arithmetic and uniqueness of prime factorization
+\end{itemize}
+\end{takeaways}

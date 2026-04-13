@@ -1,2 +1,80 @@
 % Part 1 -- Medium Worked Problems
-% Problems will be added here.
+
+\begin{problem}[The Nested Quadratic Chain]
+Consider the quadratic function
+\[
+f(x)=x^2-6x+7.
+\]
+Find all real values of $x$ satisfying
+\[
+f(f(x))=-1.
+\]
+\end{problem}
+
+\begin{hint}
+Do not expand $f(f(x))$ into a quartic straight away.
+\begin{itemize}[leftmargin=*]
+    \item Let $u=f(x)$ and solve $f(u)=-1$ first.
+    \item Then set $f(x)=u$ for each value of $u$ you find.
+    \item Completing the square is a clean way to solve the resulting quadratics.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Let $u=f(x)$. Then $f(f(x))=-1$ becomes
+\[
+f(u)=-1,
+\]
+so
+\[
+u^2-6u+7=-1
+\quad\Longrightarrow\quad
+u^2-6u+8=0
+\quad\Longrightarrow\quad
+(u-4)(u-2)=0.
+\]
+Hence
+\[
+u=4 \quad \text{or} \quad u=2.
+\]
+
+So we solve the two equations:
+
+\textbf{Case 1:} $f(x)=4$
+\[
+x^2-6x+7=4
+\quad\Longrightarrow\quad
+x^2-6x+3=0.
+\]
+Thus
+\[
+x=\frac{6\pm\sqrt{36-12}}{2}=3\pm\sqrt6.
+\]
+
+\textbf{Case 2:} $f(x)=2$
+\[
+x^2-6x+7=2
+\quad\Longrightarrow\quad
+x^2-6x+5=0
+\quad\Longrightarrow\quad
+(x-1)(x-5)=0.
+\]
+So
+\[
+x=1 \quad \text{or} \quad x=5.
+\]
+
+Therefore, the real solutions are
+\[
+\boxed{x=1,\ 5,\ 3-\sqrt6,\ 3+\sqrt6.}
+\]
+\end{solution}
+
+\begin{takeaways}
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{Level-by-level solving:} Although $f(f(x))$ would expand to a quartic, it is much better to treat it as a quadratic in disguise by introducing a substitution.
+        \item \textbf{Composition structure:} For a composite equation $f(g(x))=c$, solve the outer layer first, then feed those answers back into the inner layer.
+        \item \textbf{Root count intuition:} A quadratic composed with another quadratic can produce up to four real solutions, which is exactly what happens here.
+        \item \textbf{Higher-ed connection:} Problems involving $f(f(x))$, $f(f(f(x)))$, and beyond are the first step toward iterated functions, dynamical systems, and fixed-point ideas.
+    \end{itemize}
+\end{takeaways}

@@ -10,10 +10,10 @@ This project presents a comprehensive collection of mathematical proof problems 
 
 The booklet `HSC-Proofs.tex` is organized in two parts:
 
-- **Part 1**: Detailed step-by-step solutions (15 problems) with every logical step, algebraic manipulation, and proof technique fully explained. Includes comprehensive Takeaways sections. Divided into Easy (5), Medium (5), and Hard (5) difficulty levels.
+- **Part 1**: Detailed step-by-step solutions (16 problems) with every logical step, algebraic manipulation, and proof technique fully explained. Includes comprehensive Takeaways sections. Divided into Easy (6), Medium (5), and Hard (5) difficulty levels.
 - **Part 2**: Problems with strategic hints and solution sketches (15 problems). Each problem includes a hint (using `styles/dl101-hints`) to guide approach, followed by a condensed solution sketch showing key steps without full exposition. Divided into Easy (5), Medium (5), and Hard (5) difficulty levels.
 
-The collection contains **30 total problems** covering essential proof techniques for HSC Extension 2 mathematics.
+The collection contains **31 total problems** covering essential proof techniques for HSC Extension 2 mathematics.
 
 ## What This Collection Focuses On
 
@@ -141,11 +141,11 @@ make pdf && make open
 
 ## Problem Distribution
 
-### Part 1: Detailed Solutions (15 problems)
+### Part 1: Detailed Solutions (16 problems)
 
 | Difficulty | Count | Topics Covered |
 |------------|-------|----------------|
-| Easy | 5 | Consecutive integers, difference of squares, simple divisibility, irrationality proofs |
+| Easy | 6 | Consecutive integers, difference of squares, simple divisibility, irrationality proofs |
 | Medium | 5 | Modular arithmetic, biconditional proofs, parity arguments, conditional divisibility |
 | Hard | 5 | Diophantine equations, nested radical induction, logarithm irrationality, complex divisibility |
 
