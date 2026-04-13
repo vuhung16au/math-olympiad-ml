@@ -1,0 +1,64 @@
+% Part 1, Problem 16: Density of rationals - Existence Proof
+% Hard
+
+\begin{problem}[Hard]
+Prove that for any real numbers $x$ and $y$ with $x < y$, there exists a rational number $q$ such that
+\[
+x < q < y.
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{Existence Proof}
+
+Since $y-x>0$, we can choose a positive integer $n$ such that
+\[
+n(y-x)>1.
+\]
+Equivalently,
+\[
+ny-nx>1.
+\]
+
+Now let $m$ be the smallest integer greater than $nx$. Then
+\[
+m-1 \le nx < m.
+\]
+So in particular,
+\[
+nx < m \le nx+1.
+\]
+
+But $ny-nx>1$ gives
+\[
+nx+1<ny.
+\]
+Hence
+\[
+nx<m\le nx+1<ny,
+\]
+so
+\[
+nx<m<ny.
+\]
+
+Dividing through by $n>0$,
+\[
+x<\frac{m}{n}<y.
+\]
+
+Therefore, with $q=\frac{m}{n}$, we have found a rational number satisfying $x<q<y$.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Magnification Idea:} Multiply the interval by a large integer so its length becomes greater than $1$
+\item \textbf{Key Step:} Once the gap exceeds $1$, an integer can be placed between the endpoints
+\item \textbf{Density of $\mathbb{Q}$:} Rational numbers occur between every two distinct real numbers
+\item \textbf{Big Picture:} This is an existence proof rather than a constructive formula for a specific rational
+\item For any real numbers $x$ and $y$ with $x < y$, there exists infinitely many rational numbers $q$ such that $x < q < y$.
+
+\end{itemize}
+\end{takeaways}

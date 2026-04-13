@@ -1,0 +1,61 @@
+% Part 1, Problem 17: Density of irrationals - Constructive Proof
+% Hard
+
+\begin{problem}[Hard]
+Prove that for any two distinct rational numbers $p$ and $q$, there exists an irrational number $x$ such that
+\[
+p < x < q
+\]
+or
+\[
+q < x < p.
+\]
+\end{problem}
+
+\begin{solution}
+\textbf{Constructive Proof}
+
+Without loss of generality, assume $p<q$.
+Define
+\[
+x=p+\frac{\sqrt{2}}{2}(q-p).
+\]
+
+Since $0<\frac{\sqrt{2}}{2}<1$ and $q-p>0$, multiplying by $(q-p)$ gives
+\[
+0<\frac{\sqrt{2}}{2}(q-p)<q-p.
+\]
+Adding $p$ throughout,
+\[
+p<x<q.
+\]
+
+It remains to show that $x$ is irrational. Suppose, for contradiction, that $x$ is rational.
+Then $x-p$ is rational, so
+\[
+x-p=\frac{\sqrt{2}}{2}(q-p)
+\]
+is rational.
+Since $q-p$ is a nonzero rational number, dividing by it gives
+\[
+\frac{\sqrt{2}}{2}=\frac{x-p}{q-p},
+\]
+which is rational. Hence $\sqrt{2}$ would be rational, a contradiction.
+
+Therefore $x$ is irrational, and we have found an irrational number strictly between $p$ and $q$.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Constructive Method:} The proof gives an explicit irrational number between the two rationals
+\item \textbf{Scaling Trick:} Multiply the rational gap $(q-p)$ by an irrational factor between $0$ and $1$
+\item \textbf{Density of Irrationals:} Irrational numbers occur between any two distinct rationals
+\item \textbf{Companion Result:} Together with density of rationals, this shows the two sets are interwoven on the real line
+\item For any two distinct rational numbers $p$ and $q$, there exists infinitely many irrational numbers $x$ such that $p < x < q$ or $q < x < p$.
+\item Because the two sets ($\mathbb{Q}$ and $\mathbb{R} \setminus \mathbb{Q}$) of numbers are interwoven, no matter how closely you zoom in on the real line, you will always find both rational and irrational numbers.
+\item While they are perfectly interwoven and mutually dense, they are not equal. The rationals are countable, meaning the set of all rational numbers can be put into a one-to-one correspondence with the natural numbers, while the irrationals are uncountable, meaning there are "more" irrationals than rationals in a precise mathematical sense.
+\item The probability of randomly selecting a rational number the interval $[0, 1]$ is zero! Learn "Measure Theory" to understand this concept of "size" of sets in a more rigorous way.
+\end{itemize}
+\end{takeaways}

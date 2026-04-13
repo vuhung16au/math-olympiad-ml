@@ -1,0 +1,71 @@
+% Part 1, Problem 13: Continued fraction for sqrt{2} via recursive sequence
+% Hard
+
+\begin{problem}[Hard]
+Let $a = 1 + \sqrt{2}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $a^2 - 2a - 1 = 0$.
+    \item Define $x_1 = 2$ and $x_{n+1} = 2 + \frac{1}{x_n}$ for $n \geq 1$. Assuming $x_n \to L$ for some positive limit $L$, prove that $L = a$.
+    \item Show that $1 + \frac{1}{a} = \sqrt{2}$.
+    \item Hence deduce that
+    \[
+    \sqrt{2} = 1 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2 + \dots}}}.
+    \]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} Since $a = 1+\sqrt{2}$, we have $a-1=\sqrt{2}$. Squaring:
+\[
+(a-1)^2=2 \implies a^2-2a+1=2 \implies a^2-2a-1=0.
+\]
+
+\textbf{(ii)} If $x_n \to L$, then also $x_{n+1} \to L$. Taking limits in
+\[
+x_{n+1}=2+\frac{1}{x_n}
+\]
+gives
+\[
+L=2+\frac{1}{L}.
+\]
+So
+\[
+L^2-2L-1=0.
+\]
+By part (i), $a$ satisfies the same quadratic. The roots are $1\pm\sqrt{2}$, and since $L>0$, we get
+\[
+L=1+\sqrt{2}=a.
+\]
+
+\textbf{(iii)} Using $a=1+\sqrt{2}$,
+\[
+1+\frac{1}{a}=1+\frac{1}{1+\sqrt{2}}
+=1+\frac{1-\sqrt{2}}{(1+\sqrt{2})(1-\sqrt{2})}
+=1-(1-\sqrt{2})=\sqrt{2}.
+\]
+
+\textbf{(iv)} The recursion generates
+\[
+x_1=2,\quad x_2=2+\frac{1}{2},\quad x_3=2+\frac{1}{2+\frac{1}{2}},\ \dots
+\]
+Hence its limit is exactly
+\[
+2+\frac{1}{2+\frac{1}{2+\dots}}.
+\]
+By part (ii), this limit is $a$, so part (iii) gives
+\[
+\sqrt{2}=1+\frac{1}{a}
+=1+\frac{1}{2+\frac{1}{2+\frac{1}{2+\dots}}}.
+\]
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Limit Method:} Infinite continued fractions are handled by defining finite approximations and taking a limit
+\item \textbf{Fixed Point Idea:} A convergent recursive sequence often leads to an equation satisfied by its limit
+\item \textbf{Quadratic Link:} The continued fraction for $\sqrt{2}$ comes from solving a simple quadratic
+\item \textbf{Representation:} This gives a classic infinite continued fraction expansion for $\sqrt{2}$
+\end{itemize}
+\end{takeaways}

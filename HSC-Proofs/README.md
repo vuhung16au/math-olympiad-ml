@@ -10,10 +10,10 @@ This project presents a comprehensive collection of mathematical proof problems 
 
 The booklet `HSC-Proofs.tex` is organized in two parts:
 
-- **Part 1**: Detailed step-by-step solutions (16 problems) with every logical step, algebraic manipulation, and proof technique fully explained. Includes comprehensive Takeaways sections. Divided into Easy (6), Medium (5), and Hard (5) difficulty levels.
-- **Part 2**: Problems with strategic hints and solution sketches (15 problems). Each problem includes a hint (using `styles/dl101-hints`) to guide approach, followed by a condensed solution sketch showing key steps without full exposition. Divided into Easy (5), Medium (5), and Hard (5) difficulty levels.
+- **Part 1**: Detailed step-by-step solutions with every logical step, algebraic manipulation, and proof technique fully explained. Includes comprehensive Takeaways sections. Divided into Easy, Medium, and Hard difficulty levels.
+- **Part 2**: Problems with strategic hints and solution sketches. Each problem includes a hint (using `styles/dl101-hints`) to guide approach, followed by a condensed solution sketch showing key steps without full exposition. Divided into Easy, Medium, and Hard difficulty levels.
 
-The collection contains **31 total problems** covering essential proof techniques for HSC Extension 2 mathematics.
+The collection covers essential proof techniques for HSC Extension 2 mathematics.
 
 ## What This Collection Focuses On
 
@@ -124,14 +124,14 @@ make pdf && make open
 - `README.md`: Project overview (this file).
 - `.gitignore`: Filters LaTeX artifacts, keeps `releases/HSC-Proofs.pdf`.
 - `PLAN.md`: Comprehensive implementation plan with phases, tasks, and success criteria.
-- `PROBLEM_CLASSIFICATION.md`: Detailed analysis of all 30 sample problems by difficulty, proof technique, topic, and pedagogical value.
+- `PROBLEM_CLASSIFICATION.md`: Detailed analysis of the sample problems by difficulty, proof technique, topic, and pedagogical value.
 - `SELECTION_SUMMARY.md`: Strategic selection justification for Part 1 and Part 2 problems with technique coverage verification.
-- `samples/`: Original problem files (30 problems):
+- `samples/`: Original problem files:
   - `00-basic.tex`: Fundamental number theory concepts and proof technique reference
   - `01.tex` through `30.tex`: Individual proof problems
 - `problems/`: Organized problem files by part and number that are `\input` into main TeX:
-  - **Part 1 (Detailed Solutions)**: `part1-01.tex` through `part1-15.tex` (complete with solutions and takeaways)
-  - **Part 2 (Hints + Sketches)**: `part2-01.tex` through `part2-15.tex` (with hints and solution sketches)
+  - **Part 1 (Detailed Solutions)**: `part1-*.tex` files with full solutions and takeaways
+  - **Part 2 (Hints + Sketches)**: `part2-*.tex` files with hints and solution sketches
 - `solutions/`: Reserved for future standalone solution files.
 - `styles/`: Shared LaTeX style files (copied from HSC-Induction):
   - `dl101-colors.sty`: Color palette (bookpurple, bookred, bookblack, softivory)
@@ -141,21 +141,21 @@ make pdf && make open
 
 ## Problem Distribution
 
-### Part 1: Detailed Solutions (16 problems)
+### Part 1: Detailed Solutions
 
 | Difficulty | Count | Topics Covered |
 |------------|-------|----------------|
-| Easy | 6 | Consecutive integers, difference of squares, simple divisibility, irrationality proofs |
-| Medium | 5 | Modular arithmetic, biconditional proofs, parity arguments, conditional divisibility |
-| Hard | 5 | Diophantine equations, nested radical induction, logarithm irrationality, complex divisibility |
+| Easy | Varies | Consecutive integers, difference of squares, simple divisibility, irrationality proofs |
+| Medium | Varies | Modular arithmetic, biconditional proofs, parity arguments, conditional divisibility |
+| Hard | Varies | Diophantine equations, nested radical induction, continued fractions, logarithm irrationality, complex divisibility, existence proofs on the real line |
 
-### Part 2: Hints + Solution Sketches (15 problems) ✓ Complete
+### Part 2: Hints + Solution Sketches
 
 | Difficulty | Count | Topics Covered |
 |------------|-------|----------------|
-| Easy | 5 | Parity arguments (a³-a+1), rational+irrational sums, non-constructive existence, divisibility constraints, Mersenne contrapositive |
-| Medium | 5 | Exponential divisibility, factorization (x²-y²=1), divisibility by 9 rule, complex number geometry, biconditional parity |
-| Hard | 5 | Irrational products counterexample, Pythagorean parity contradiction, exponential inequalities, sandwich inequality induction, advanced divisibility induction |
+| Easy | Varies | Parity arguments (a³-a+1), rational+irrational sums, non-constructive existence, divisibility constraints, Mersenne contrapositive |
+| Medium | Varies | Exponential divisibility, factorization (x²-y²=1), divisibility by 9 rule, complex number geometry, biconditional parity |
+| Hard | Varies | Irrational products counterexample, Pythagorean parity contradiction, exponential inequalities, sandwich inequality induction, advanced divisibility induction |
 
 ## Proof Techniques Covered
 
@@ -163,34 +163,30 @@ make pdf && make open
 - Starting from assumptions and deriving conclusion through logical steps
 - Algebraic manipulation and substitution
 - Using known properties and theorems
-- **Problems**: 7 total across all difficulties
 
 ### Proof by Contradiction
 - Assuming negation and deriving a contradiction
 - Proving irrationality through reductio ad absurdum
 - Logical impossibility arguments
-- **Problems**: 8 total, especially for irrationality proofs
 
 ### Mathematical Induction
 - Base case verification
 - Inductive hypothesis and step
 - Strong induction variants
-- **Problems**: 6 total, including divisibility and nested radicals
 
 ### Proof by Cases
 - Exhaustive case analysis (odd/even, remainder classes)
 - Combining results from all cases
 - Systematic consideration of scenarios
-- **Problems**: 9 total, often combined with other techniques
 
 ## Key Topics Covered
 
-- **Divisibility**: 10 problems covering multiples, factors, and divisibility rules
-- **Irrationality**: 5 problems proving numbers cannot be expressed as fractions
-- **Modular Arithmetic**: 6 problems using congruence and remainder analysis
-- **Parity**: 4 problems exploiting odd/even properties
-- **Logic**: 2 problems on logical structure and biconditionals
-- **Mixed Techniques**: 3 problems requiring multiple approaches
+- **Divisibility**: Multiples, factors, and divisibility rules
+- **Irrationality**: Proofs that numbers cannot be expressed as fractions
+- **Modular Arithmetic**: Congruence and remainder analysis
+- **Parity**: Odd/even arguments and consequences
+- **Logic**: Logical structure and biconditionals
+- **Mixed Techniques**: Problems requiring multiple approaches
 
 ## Author
 
