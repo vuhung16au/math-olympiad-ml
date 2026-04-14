@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { IFS, radial } from '../src/ifs';
 import { LSystem } from '../src/l';
 import { FractalControls } from './components/FractalControls';
@@ -8,6 +9,94 @@ import { PRESETS } from './presets';
 import type { FormState, FractalType } from './types';
 
 type PresetMap = Record<FractalType, Record<string, any>>;
+
+const FRACTAL_TYPE_SLUGS: Record<FractalType, string> = {
+  ifs: 'ifs',
+  lsystem: 'lsystem',
+  escapeTime: 'escape-time',
+  newton: 'newton',
+  attractor: 'strange-attractor',
+  inversion: 'circle-inversion',
+};
+
+const SLUG_TO_FRACTAL_TYPE: Record<string, FractalType> = {
+  ifs: 'ifs',
+  lsystem: 'lsystem',
+  'l-system': 'lsystem',
+  escape: 'escapeTime',
+  'escape-time': 'escapeTime',
+  newton: 'newton',
+  attractor: 'attractor',
+  'strange-attractor': 'attractor',
+  inversion: 'inversion',
+  'circle-inversion': 'inversion',
+};
+
+const URL_PARAM_TO_FORM: Record<FractalType, Record<string, string>> = {
+  ifs: { iterations: 'ifsIterations', density: 'ifsDensity', pointSize: 'ifsPointSize', color: 'ifsColor' },
+  lsystem: {
+    iterations: 'lsIterations',
+    distance: 'lsDistance',
+    angle: 'lsAngle',
+    lengthScale: 'lsScale',
+    lineWidth: 'lsLineWidth',
+    lineColor: 'lsColor',
+    axiom: 'lsAxiom',
+    rules: 'lsRules',
+  },
+  escapeTime: {
+    maxIterations: 'etMaxIterations',
+    bailout: 'etBailout',
+    power: 'etPower',
+    juliaRe: 'etJuliaRe',
+    juliaIm: 'etJuliaIm',
+  },
+  newton: { maxIterations: 'ntMaxIterations', epsilon: 'ntEpsilon' },
+  attractor: {
+    iterations: 'atIterations',
+    discard: 'atDiscard',
+    a: 'atA',
+    b: 'atB',
+    c: 'atC',
+    d: 'atD',
+  },
+  inversion: { depth: 'ivDepth', minRadius: 'ivMinRadius' },
+};
+
+function fractalTypeToSlug(fractalType: FractalType): string {
+  return FRACTAL_TYPE_SLUGS[fractalType];
+}
+
+function parsePathSelection(pathname: string): {
+  type?: FractalType;
+  preset?: string;
+  paramEntries: Array<[string, string]>;
+} {
+  const segments = pathname
+    .split('/')
+    .map((segment) => segment.trim())
+    .filter(Boolean)
+    .map((segment) => decodeURIComponent(segment));
+  if (segments.length < 2) {
+    return { paramEntries: [] };
+  }
+  const type = SLUG_TO_FRACTAL_TYPE[segments[0].toLowerCase()];
+  if (!type) {
+    return { paramEntries: [] };
+  }
+  const preset = segments[1].replace(/:+$/, '');
+  const rawPairs = segments
+    .slice(2)
+    .flatMap((part) => part.split(','))
+    .map((part) => part.trim())
+    .filter(Boolean);
+  const paramEntries = rawPairs.flatMap((pair) => {
+    const idx = pair.indexOf('=');
+    if (idx <= 0) return [];
+    return [[decodeURIComponent(pair.slice(0, idx)), decodeURIComponent(pair.slice(idx + 1))] as [string, string]];
+  });
+  return { type, preset, paramEntries };
+}
 
 function parseRules(text: string): Record<string, string> {
   return Object.fromEntries(
@@ -95,6 +184,8 @@ function buildRandomIfsMatrices(config: { seed?: number; count?: number } = {}):
 }
 
 export default function HomePage() {
+  const router = useRouter();
+  const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [presets, setPresets] = useState<PresetMap>(PRESETS as PresetMap);
   const [fractalType, setFractalType] = useState<FractalType>('ifs');
@@ -115,11 +206,24 @@ export default function HomePage() {
         if (cancelled || !data?.presets) return;
         const nextPresets = data.presets as PresetMap;
         setPresets(nextPresets);
-        const first = Object.keys(nextPresets.ifs ?? {})[0];
-        if (first) {
-          setFractalType('ifs');
-          setPreset(first);
-          loadPresetWith(nextPresets, 'ifs', first);
+        const selection = parsePathSelection(pathname);
+        const initialType = selection.type && nextPresets[selection.type] ? selection.type : 'ifs';
+        const initialPreset = selection.preset && nextPresets[initialType]?.[selection.preset]
+          ? selection.preset
+          : Object.keys(nextPresets[initialType] ?? {})[0];
+        if (initialPreset) {
+          setFractalType(initialType);
+          setPreset(initialPreset);
+          const nextForm = loadPresetWith(nextPresets, initialType, initialPreset);
+          if (nextForm && selection.paramEntries.length) {
+            const mapping = URL_PARAM_TO_FORM[initialType];
+            const merged = { ...nextForm };
+            selection.paramEntries.forEach(([urlKey, urlValue]) => {
+              const formKey = mapping[urlKey];
+              if (formKey) merged[formKey] = urlValue;
+            });
+            setForm(merged);
+          }
         }
       })
       .catch(() => {
@@ -130,6 +234,27 @@ export default function HomePage() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const selection = parsePathSelection(pathname);
+    if (!selection.type || !selection.preset || !presets[selection.type]?.[selection.preset]) {
+      return;
+    }
+    if (selection.type === fractalType && selection.preset === preset) {
+      return;
+    }
+    setFractalType(selection.type);
+    setPreset(selection.preset);
+    const nextForm = buildFormFromPreset(presets, selection.type, selection.preset, form);
+    if (!nextForm) return;
+    const mapping = URL_PARAM_TO_FORM[selection.type];
+    selection.paramEntries.forEach(([urlKey, urlValue]) => {
+      const formKey = mapping[urlKey];
+      if (formKey) nextForm[formKey] = urlValue;
+    });
+    setForm(nextForm);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, presets, fractalType, preset]);
 
   const presetOptions = useMemo(
     () => Object.entries(presets[fractalType] ?? {}).map(([key, value]) => ({ key, label: value.label })),
@@ -199,6 +324,33 @@ export default function HomePage() {
     return next;
   };
   const loadPreset = (type: FractalType, key: string) => loadPresetWith(presets, type, key);
+
+  const buildPathForState = (
+    type: FractalType,
+    presetKey: string,
+    nextForm?: FormState,
+    includeParams = false,
+  ): string => {
+    const basePath = `/${fractalTypeToSlug(type)}/${encodeURIComponent(presetKey)}`;
+    if (!includeParams || !nextForm) return basePath;
+    const defaultForPreset = buildFormFromPreset(presets, type, presetKey, defaultForm());
+    if (!defaultForPreset) return basePath;
+    const mapping = URL_PARAM_TO_FORM[type];
+    const encodedParams = Object.entries(mapping).flatMap(([urlKey, formKey]) => {
+      const current = String(nextForm[formKey] ?? '');
+      const initial = String(defaultForPreset[formKey] ?? '');
+      if (current === initial) return [];
+      return [`${encodeURIComponent(urlKey)}=${encodeURIComponent(current)}`];
+    });
+    if (!encodedParams.length) return basePath;
+    return `${basePath}/${encodedParams.join('/')}`;
+  };
+
+  const replacePathIfNeeded = (nextPath: string): void => {
+    if (pathname !== nextPath) {
+      router.replace(nextPath, { scroll: false });
+    }
+  };
 
   const draw = async (override?: { type: FractalType; preset: string; nextForm: FormState }) => {
     const activeType = override?.type ?? fractalType;
@@ -289,6 +441,7 @@ export default function HomePage() {
             setPreset(first);
             const nextForm = loadPreset(nextType, first);
             if (nextForm) {
+              replacePathIfNeeded(buildPathForState(nextType, first));
               void draw({ type: nextType, preset: first, nextForm });
             }
           },
@@ -296,14 +449,20 @@ export default function HomePage() {
             setPreset(nextPreset);
             const nextForm = loadPreset(fractalType, nextPreset);
             if (nextForm) {
+              replacePathIfNeeded(buildPathForState(fractalType, nextPreset));
               void draw({ type: fractalType, preset: nextPreset, nextForm });
             }
           },
           onFormChange: (key, value) => setForm((prev) => ({ ...prev, [key]: value })),
           onGenerate: () => {
+            replacePathIfNeeded(buildPathForState(fractalType, preset, form, true));
             void draw();
           },
-          onReset: () => loadPreset(fractalType, preset),
+          onReset: () => {
+            const nextForm = loadPreset(fractalType, preset);
+            replacePathIfNeeded(buildPathForState(fractalType, preset));
+            return nextForm;
+          },
         }}
       />
       <section className="viewer">
