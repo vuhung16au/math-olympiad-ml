@@ -1,12 +1,9 @@
 type AnyRecord = Record<string, any>;
 
-function loadScriptPresets(): AnyRecord {
-  const dynamicRequire = eval('require') as (target: string) => AnyRecord;
-  return dynamicRequire(`${process.cwd()}/scripts/generate-all-fractals.js`);
-}
+const scriptPresets = require('../../scripts/generate-all-fractals.js') as AnyRecord;
 
 export function getAppPresets(): AnyRecord {
-  const mod = loadScriptPresets();
+  const mod = scriptPresets;
   return {
     ifs: mapIfsPresets(mod.IFS_PRESETS || {}),
     lsystem: { ...(mod.LSYSTEM_PRESETS || {}) },
