@@ -8,9 +8,9 @@ export function getAppPresets(): AnyRecord {
     ifs: mapIfsPresets(mod.IFS_PRESETS || {}),
     lsystem: { ...(mod.LSYSTEM_PRESETS || {}) },
     escapeTime: mapWith(mod.ESCAPE_TIME_PRESETS || {}, mapEscapePreset),
-    newton: mapWith(mod.NEWTON_PRESETS || {}, mapNewtonPreset),
+    newton: normalizeNewtonKeys(mapWith(mod.NEWTON_PRESETS || {}, mapNewtonPreset)),
     attractor: mapWith(mod.ATTRACTOR_PRESETS || {}, mapAttractorPreset),
-    inversion: mapWith(mod.INVERSION_PRESETS || {}, mapInversionPreset),
+    inversion: normalizeInversionKeys(mapWith(mod.INVERSION_PRESETS || {}, mapInversionPreset)),
   };
 }
 
@@ -105,4 +105,33 @@ function mapInversionPreset(value: any): AnyRecord {
       viewport: value.viewport,
     },
   };
+}
+
+function normalizeNewtonKeys(input: AnyRecord): AnyRecord {
+  const aliases: Record<string, string> = {
+    newtonCubic: 'cubic',
+    newtonQuartic: 'quartic',
+  };
+  return normalizeKeys(input, aliases);
+}
+
+function normalizeInversionKeys(input: AnyRecord): AnyRecord {
+  const aliases: Record<string, string> = {
+    apollonianGasket: 'apollonian',
+    kleinianSchottkyClassic: 'kleinianClassic',
+    kleinianSchottkyNecklace: 'kleinianNecklace',
+    kleinianSchottkySymmetric: 'kleinianSymmetric',
+  };
+  return normalizeKeys(input, aliases);
+}
+
+function normalizeKeys(input: AnyRecord, aliases: Record<string, string>): AnyRecord {
+  const out = { ...input };
+  Object.entries(aliases).forEach(([sourceKey, targetKey]) => {
+    if (!out[targetKey] && out[sourceKey]) {
+      out[targetKey] = out[sourceKey];
+      delete out[sourceKey];
+    }
+  });
+  return out;
 }
