@@ -78,3 +78,592 @@ Therefore, the real solutions are
         \item \textbf{Higher-ed connection:} Problems involving $f(f(x))$, $f(f(f(x)))$, and beyond are the first step toward iterated functions, dynamical systems, and fixed-point ideas.
     \end{itemize}
 \end{takeaways}
+
+\begin{problem}[Composites with a Parameter]
+Given the functions
+\[
+f(x)=x^2-k \qquad (k\in\mathbb{R}), \qquad g(x)=2x+1,
+\]
+\begin{enumerate}[label=(\alph*)]
+\item find simplified algebraic expressions for $f(g(x))$ and $g(f(x))$,
+\item find the exact value of $k$ such that the graphs of $y=f(g(x))$ and $y=g(f(x))$ intersect at exactly one point,
+\item for this value of $k$, find the coordinates of the intersection point.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+First compute the two composites. Then set them equal and use the discriminant condition for a quadratic to have exactly one real solution.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} Since $g(x)=2x+1$,
+\[
+f(g(x))=(2x+1)^2-k=4x^2+4x+1-k.
+\]
+Also
+\[
+g(f(x))=2(x^2-k)+1=2x^2-2k+1.
+\]
+
+\textbf{(b)} Intersection points satisfy
+\[
+f(g(x))=g(f(x)).
+\]
+So
+\[
+4x^2+4x+1-k=2x^2-2k+1
+\]
+which simplifies to
+\[
+2x^2+4x+k=0.
+\]
+For exactly one point of intersection, this quadratic must have exactly one real root:
+\[
+\Delta=4^2-4(2)(k)=16-8k=0.
+\]
+Hence
+\[
+\boxed{k=2.}
+\]
+
+\textbf{(c)} Substituting $k=2$,
+\[
+2x^2+4x+2=0
+\quad\Longrightarrow\quad
+x^2+2x+1=0
+\quad\Longrightarrow\quad
+(x+1)^2=0,
+\]
+so $x=-1$.
+
+Then
+\[
+y=f(g(-1))=f(-1)=(-1)^2-2=-1.
+\]
+Therefore the intersection point is
+\[
+\boxed{(-1,-1).}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Composite functions are often compared by setting their outputs equal.
+\item “Exactly one intersection” usually leads to a discriminant equal to $0$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Relation That Splits into Two Functions]
+Consider the relation
+\[
+y^2-4xy+5x^2=9.
+\]
+\begin{enumerate}[label=(\alph*)]
+\item By treating the equation as a quadratic in $y$, use the quadratic formula to express $y$ in terms of $x$.
+\item Hence explain why this relation does not represent a single function, but rather two separate function branches.
+\item Determine the maximum domain of $x$ for which this relation is defined.
+\item Find the exact points where the two branches meet.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Think of the equation as
+\[
+y^2+(-4x)y+(5x^2-9)=0.
+\]
+The two branches meet when the square-root part becomes zero.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} Viewing the equation as a quadratic in $y$,
+\[
+y^2-4xy+(5x^2-9)=0.
+\]
+So
+\[
+y=\frac{4x\pm\sqrt{(-4x)^2-4(1)(5x^2-9)}}{2}.
+\]
+This gives
+\[
+y=\frac{4x\pm\sqrt{16x^2-20x^2+36}}{2}
+=\frac{4x\pm\sqrt{36-4x^2}}{2}
+=2x\pm\sqrt{9-x^2}.
+\]
+
+\textbf{(b)} Since
+\[
+y=2x+\sqrt{9-x^2}
+\qquad \text{or} \qquad
+y=2x-\sqrt{9-x^2},
+\]
+the relation gives two possible $y$-values for most allowed $x$-values. Therefore it is not a single function, but two branches:
+\[
+f_1(x)=2x+\sqrt{9-x^2},
+\qquad
+f_2(x)=2x-\sqrt{9-x^2}.
+\]
+
+\textbf{(c)} For the square root to be defined,
+\[
+9-x^2\ge 0
+\quad\Longrightarrow\quad
+x^2\le 9
+\quad\Longrightarrow\quad
+-3\le x\le 3.
+\]
+So the maximum domain is
+\[
+\boxed{[-3,3].}
+\]
+
+\textbf{(d)} The branches meet when
+\[
+\sqrt{9-x^2}=0,
+\]
+so
+\[
+x=\pm 3.
+\]
+Then $y=2x$, giving the points
+\[
+\boxed{(-3,-6)\quad \text{and}\quad (3,6).}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Some algebraic relations split naturally into two branches after solving for $y$.
+\item A square root creates a domain restriction and often reveals where branches meet.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Family of Lines Through an Intersection Point]
+Consider two distinct, non-parallel lines
+\[
+L_1: a_1x+b_1y+c_1=0,
+\qquad
+L_2: a_2x+b_2y+c_2=0,
+\]
+with unique intersection point $P(x_0,y_0)$.
+\begin{enumerate}[label=(\alph*)]
+\item Prove that for any real constant $k$, the equation $L_1+kL_2=0$ also passes through $P$.
+\item Explain algebraically why $L_1+kL_2=0$ can represent every line through $P$, except for the line $L_2$ itself.
+\item The lines $3x-4y+2=0$ and $x+2y-4=0$ intersect at a point $P$. Without finding the coordinates of $P$, find the equation of the line that passes through both $P$ and the origin.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+At the intersection point $P$, both $L_1$ and $L_2$ equal $0$. In part (c), force the family line to pass through $(0,0)$.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} Since $P$ lies on both lines,
+\[
+L_1(x_0,y_0)=0
+\qquad \text{and} \qquad
+L_2(x_0,y_0)=0.
+\]
+Therefore
+\[
+\bigl(L_1+kL_2\bigr)(x_0,y_0)=L_1(x_0,y_0)+kL_2(x_0,y_0)=0+k\cdot 0=0.
+\]
+So $L_1+kL_2=0$ passes through $P$ for every real $k$.
+
+\textbf{(b)} Any line through $P$ in this family can be written more generally as
+\[
+\lambda L_1+\mu L_2=0,
+\]
+where $\lambda$ and $\mu$ are not both zero. If $\lambda\ne 0$, divide through by $\lambda$ to obtain
+\[
+L_1+\left(\frac{\mu}{\lambda}\right)L_2=0.
+\]
+Thus every such line can be written in the form $L_1+kL_2=0$, except the special case $\lambda=0$, which gives precisely the line
+\[
+L_2=0.
+\]
+
+\textbf{(c)} Write the required line as
+\[
+(3x-4y+2)+k(x+2y-4)=0.
+\]
+Since it passes through the origin,
+\[
+2+k(-4)=0
+\quad\Longrightarrow\quad
+2-4k=0
+\quad\Longrightarrow\quad
+k=\frac12.
+\]
+Hence
+\[
+(3x-4y+2)+\frac12(x+2y-4)=0.
+\]
+Multiplying by $2$ gives
+\[
+6x-8y+4+x+2y-4=0,
+\]
+so the line is
+\[
+\boxed{7x-6y=0.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The linear combination $L_1+kL_2=0$ is a standard way to describe a whole pencil of lines through a common point.
+\item This method often avoids solving for the actual intersection point.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Why a Quadratic Cannot Have Three Distinct Roots]
+Show that the quadratic equation
+\[
+ax^2+bx+c=0
+\qquad (a\ne 0)
+\]
+cannot have more than two distinct roots.
+
+\textit{Hint provided in the question: suppose the equation has three distinct roots $\alpha,\beta,\gamma$, then substitute them into the equation and derive a contradiction. Also explain the result visually using the graph of a quadratic function.}
+\end{problem}
+
+\begin{hint}
+Write down the three equations obtained from $\alpha,\beta,\gamma$. Subtract pairs of equations to eliminate $c$.
+\end{hint}
+
+\begin{solution}
+Suppose, for contradiction, that
+\[
+ax^2+bx+c=0
+\]
+has three distinct roots $\alpha,\beta,\gamma$.
+
+Then
+\[
+a\alpha^2+b\alpha+c=0,
+\qquad
+a\beta^2+b\beta+c=0,
+\qquad
+a\gamma^2+b\gamma+c=0.
+\]
+Subtract the first two equations:
+\[
+a(\alpha^2-\beta^2)+b(\alpha-\beta)=0.
+\]
+Since $\alpha\ne\beta$,
+\[
+(\alpha-\beta)\bigl(a(\alpha+\beta)+b\bigr)=0
+\quad\Longrightarrow\quad
+a(\alpha+\beta)+b=0.
+\]
+Similarly,
+\[
+a(\beta+\gamma)+b=0.
+\]
+Subtracting these gives
+\[
+a(\alpha-\gamma)=0.
+\]
+But $\alpha\ne\gamma$, so this forces
+\[
+a=0,
+\]
+which contradicts the assumption $a\ne 0$.
+
+Therefore a quadratic cannot have three distinct roots.
+
+\textbf{Visual explanation.} The graph of $y=ax^2+bx+c$ is a parabola. A parabola can intersect the $x$-axis at at most two points, so the equation $ax^2+bx+c=0$ can have at most two real roots.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A degree-$2$ polynomial has at most two distinct roots.
+\item The algebra matches the geometry: a parabola meets the $x$-axis at most twice.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Symmetry About the Vertex]
+Consider the quadratic function
+\[
+f(x)=x^2-2x-8.
+\]
+\begin{enumerate}[label=(\alph*)]
+\item By completing the square, express $f(x)$ in vertex form and state the coordinates of the vertex.
+\item Let $x=v$ be the $x$-coordinate of the vertex. Simplify $f(v+h)$ and $f(v-h)$.
+\item What does the result prove about the geometric shape of the parabola relative to its vertex?
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Complete the square first. Then use the vertex $x$-coordinate $v$ as the centre of the two shifted inputs.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)}
+\[
+f(x)=x^2-2x-8=(x-1)^2-9.
+\]
+So the vertex is
+\[
+\boxed{(1,-9).}
+\]
+
+\textbf{(b)} Here $v=1$. Then
+\[
+f(1+h)=(1+h)^2-2(1+h)-8=h^2-9,
+\]
+and
+\[
+f(1-h)=(1-h)^2-2(1-h)-8=h^2-9.
+\]
+Hence
+\[
+\boxed{f(v+h)=f(v-h).}
+\]
+
+\textbf{(c)} Since points equally spaced to the left and right of $x=v$ give the same $y$-value, the parabola is symmetric about the vertical line
+\[
+\boxed{x=v=x_{\text{vertex}}.}
+\]
+So the axis of symmetry is $x=1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Completing the square reveals the vertex and axis of symmetry immediately.
+\item The identity $f(v+h)=f(v-h)$ is a precise algebraic expression of mirror symmetry for a quadratic.
+\item \textbf{The Cubic Connection:} A strikingly similar observation is seen with cubic functions. While a quadratic has line symmetry perfectly balanced around its vertex, a cubic polynomial has point symmetry (rotational symmetry) balanced perfectly around its point of inflection. If $\mu$ is the $x$-coordinate of a cubic's inflection point, stepping $h$ units left and right reveals the identity $f(\mu+h)+f(\mu-h)=2f(\mu)$. The algebraic logic of exploring symmetry through $+h$ and $-h$ shifts remains exactly the same.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Family of Quadratics and the Locus of the Vertex]
+Consider the family
+\[
+y=x^2-2kx+(k^2+k-2),
+\]
+where $k$ is a real parameter.
+\begin{enumerate}[label=(\alph*)]
+\item Express the function in vertex form.
+\item Hence write down the vertex in terms of $k$.
+\item Find the Cartesian equation of the locus of the vertex as $k$ varies, and describe it geometrically.
+\item Find the $x$-intercepts in terms of $k$, and state the restriction on $k$ for which they exist.
+\item Find the exact range of $k$ for which the parabola has one strictly positive and one strictly negative $x$-intercept.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Complete the square in $x$. For part (e), think about what the signs of the two roots tell you about their product.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)}
+\[
+y=x^2-2kx+k^2+k-2=(x-k)^2+k-2.
+\]
+
+\textbf{(b)} Therefore the vertex is
+\[
+\boxed{(k,\ k-2).}
+\]
+
+\textbf{(c)} Let the vertex be $(x,y)$. Since $x=k$, we have
+\[
+y=k-2=x-2.
+\]
+So the locus is
+\[
+\boxed{y=x-2,}
+\]
+which is a straight line.
+
+\textbf{(d)} Put $y=0$:
+\[
+x^2-2kx+(k^2+k-2)=0.
+\]
+Using the completed-square form,
+\[
+(x-k)^2=2-k.
+\]
+Hence
+\[
+x=k\pm \sqrt{2-k}.
+\]
+These are real only when
+\[
+2-k\ge 0
+\quad\Longrightarrow\quad
+\boxed{k\le 2.}
+\]
+
+\textbf{(e)} For one root to be positive and the other negative, their product must be negative:
+\[
+k^2+k-2<0.
+\]
+Factorising,
+\[
+(k+2)(k-1)<0.
+\]
+Therefore
+\[
+\boxed{-2<k<1.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A parameter family often becomes much clearer after completing the square.
+\item Tracking the vertex is a standard route to finding a locus.
+\item Opposite-sign roots correspond to a negative product.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Composition of One-to-One Functions]
+Prove or disprove the statement:
+
+\begin{center}
+\emph{The composition of two one-to-one functions is always another one-to-one function.}
+\end{center}
+\end{problem}
+
+\begin{hint}
+To prove a function is one-to-one, start from
+\[
+(f\circ g)(x_1)=(f\circ g)(x_2)
+\]
+and use the fact that both $f$ and $g$ are one-to-one.
+\end{hint}
+
+\begin{solution}
+The statement is \textbf{true}.
+
+Let $f$ and $g$ be one-to-one functions. We want to show that
+\[
+f\circ g
+\]
+is also one-to-one.
+
+Assume
+\[
+(f\circ g)(x_1)=(f\circ g)(x_2).
+\]
+Then
+\[
+f(g(x_1))=f(g(x_2)).
+\]
+Since $f$ is one-to-one, equal outputs imply equal inputs. Therefore
+\[
+g(x_1)=g(x_2).
+\]
+Now use the fact that $g$ is one-to-one. Again, equal outputs imply equal inputs, so
+\[
+x_1=x_2.
+\]
+Hence
+\[
+(f\circ g)(x_1)=(f\circ g)(x_2)\implies x_1=x_2,
+\]
+which proves that $f\circ g$ is one-to-one.
+
+Therefore, the composition of two one-to-one functions is always one-to-one.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item To prove a composition is one-to-one, peel the functions off from the outside in.
+\item Injective functions preserve distinctions: different inputs cannot collapse to the same output.
+\item This result helps explain why inverse functions behave well under composition.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Domain Overlaps and One-to-One Testing]
+Consider the following two relations, defined for all real numbers $x$:
+
+\[
+S(x)=
+\begin{cases}
+2x & \text{for } x \text{ rational},\\
+x^3 & \text{for } x \text{ irrational},
+\end{cases}
+\]
+
+\[
+T(x)=
+\begin{cases}
+x & \text{for } x^2 \text{ rational},\\
+-x & \text{for } x \text{ irrational}.
+\end{cases}
+\]
+
+\begin{enumerate}[label=(\alph*)]
+\item Determine whether $S(x)$ and $T(x)$ are valid functions. Give reasons.
+\item For any relation from part (a) that is a valid function, decide whether it is one-to-one or many-to-one.
+\item For any valid function, find all values of $x$ such that $f(x)=x$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For a valid function, every input must produce exactly one output. In $T(x)$, check whether the two conditions can overlap. In part (b), try to find two different inputs for $S(x)$ that both produce the same output.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} Since every real number is either rational or irrational, but not both, the two cases of $S(x)$ are disjoint and cover all real numbers. Hence
+\[
+\boxed{S(x)\text{ is a valid function}.}
+\]
+
+For $T(x)$, take $x=\sqrt2$. Then $x$ is irrational, so one rule gives
+\[
+T(\sqrt2)=-\sqrt2.
+\]
+But $x^2=2$ is rational, so the other rule gives
+\[
+T(\sqrt2)=\sqrt2.
+\]
+One input gives two outputs, so
+\[
+\boxed{T(x)\text{ is not a valid function}.}
+\]
+
+\textbf{(b)} To classify $S(x)$, note that
+\[
+S(1)=2
+\]
+and, since $\sqrt[3]{2}$ is irrational,
+\[
+S(\sqrt[3]{2})=(\sqrt[3]{2})^3=2.
+\]
+Thus
+\[
+S(1)=S(\sqrt[3]{2}) \quad \text{with} \quad 1\ne \sqrt[3]{2},
+\]
+so $S(x)$ is not one-to-one. Therefore
+\[
+\boxed{S(x)\text{ is many-to-one}.}
+\]
+
+\textbf{(c)} Solve $S(x)=x$ branch by branch.
+
+If $x$ is rational, then
+\[
+2x=x \implies x=0,
+\]
+and this is valid since $0$ is rational.
+
+If $x$ is irrational, then
+\[
+x^3=x \implies x(x^2-1)=0 \implies x=0,\pm1.
+\]
+But these are all rational, so none is allowed in the irrational branch.
+
+Hence the only fixed point is
+\[
+\boxed{x=0.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item In a piecewise definition, the cases must give exactly one output for each input.
+\item It is not enough for the rules to look different; you must check whether their conditions overlap.
+\item When solving within a branch of a piecewise function, always test whether the solution really belongs to that branch.
+\end{itemize}
+\end{takeaways}

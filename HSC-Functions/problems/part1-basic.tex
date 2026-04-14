@@ -1,2 +1,414 @@
 % Part 1 -- Basic Worked Problems
-% Problems will be added here.
+
+\begin{problem}[Rearranging a Relation into a Function]
+Write the equation
+\[
+1+2xy=0
+\]
+as a function with dependent variable $y$.
+\end{problem}
+
+\begin{hint}
+Solve the equation for $y$ by isolating the term containing $y$ first.
+\end{hint}
+
+\begin{solution}
+Starting from
+\[
+1+2xy=0,
+\]
+we get
+\[
+2xy=-1.
+\]
+If $x\ne 0$, divide both sides by $2x$:
+\[
+y=-\frac{1}{2x}.
+\]
+So the relation can be written as the function
+\[
+\boxed{y=-\frac{1}{2x}}, \qquad x\ne 0.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item To write a relation as a function of $x$, solve explicitly for $y$.
+\item Always state any domain restriction created by division. Here $x\ne 0$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Difference Quotient]
+If
+\[
+f(x)=x^2+2x,
+\]
+express
+\[
+\frac{f(x+h)-f(x)}{h}
+\]
+in simplest form.
+\end{problem}
+
+\begin{hint}
+Expand $f(x+h)$ carefully, then subtract $f(x)$ before dividing by $h$.
+\end{hint}
+
+\begin{solution}
+\[
+f(x+h)=(x+h)^2+2(x+h)=x^2+2xh+h^2+2x+2h.
+\]
+So
+\begin{align*}
+\frac{f(x+h)-f(x)}{h}
+&=\frac{(x^2+2xh+h^2+2x+2h)-(x^2+2x)}{h}\\
+&=\frac{2xh+h^2+2h}{h}\\
+&=2x+h+2.
+\end{align*}
+Hence
+\[
+\boxed{\frac{f(x+h)-f(x)}{h}=2x+h+2}
+\]
+for $h\ne 0$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Subtracting $f(x)$ often causes many terms to cancel.
+\item The quotient $\dfrac{f(x+h)-f(x)}{h}$ is the starting point of differentiation in Extension~2.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Table and a Quadratic Graph]
+Given the function
+\[
+y=x^2-3x+2,
+\]
+\begin{enumerate}[label=(\roman*)]
+\item fill the table for $x=-2,-1,0,1,2$,
+\item draw the graph of $y$ on an $xy$-diagram for $-3\le x\le 3$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Substitute each $x$-value directly into the formula. For the graph, plot the points and join them smoothly to form a parabola.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Substituting each value of $x$:
+\[
+\begin{array}{c|ccccc}
+x & -2 & -1 & 0 & 1 & 2\\ \hline
+y=x^2-3x+2 & 12 & 6 & 2 & 0 & 0
+\end{array}
+\]
+
+\textbf{(ii)} The graph is an upward-opening parabola. It crosses the $x$-axis at $(1,0)$ and $(2,0)$ and crosses the $y$-axis at $(0,2)$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.78\linewidth,
+    height=6.2cm,
+    axis lines=middle,
+    xmin=-3,xmax=3,
+    ymin=-1,ymax=14,
+    grid=both,
+    samples=200,
+    xlabel={$x$},
+    ylabel={$y$},
+    xtick={-3,-2,-1,0,1,2,3},
+    ytick={0,2,4,6,8,10,12,14}
+]
+\addplot[blue, thick, domain=-3:3] {x^2-3*x+2};
+\addplot[only marks, mark=*, mark size=2pt] coordinates {(-2,12) (-1,6) (0,2) (1,0) (2,0)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A table of values is often the fastest way to begin sketching a graph.
+\item Quadratic graphs are parabolas, and intercepts are especially important points to plot.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Which Quadratic Matches the Graph?]
+The graph below is a parabola with vertex $(-1,0)$, touching the $x$-axis at $(-1,0)$ and crossing the $y$-axis at $(0,1)$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.62\linewidth,
+    height=6cm,
+    axis lines=middle,
+    xmin=-4,xmax=2,
+    ymin=-1,ymax=6,
+    grid=both,
+    samples=200,
+    xlabel={$x$},
+    ylabel={$y$},
+    xtick={-4,-3,-2,-1,0,1,2},
+    ytick={0,1,2,3,4,5,6}
+]
+\addplot[blue, thick, domain=-4:2] {(x+1)^2};
+\addplot[only marks, mark=*, mark size=2pt] coordinates {(-1,0) (0,1)};
+\node[anchor=south west] at (axis cs:-1,0) {$(-1,0)$};
+\node[anchor=west] at (axis cs:0,1) {$(0,1)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Which equation matches the graph?
+\begin{enumerate}[label=\textbf{\Alph*.}]
+\item $y=(x-1)^2$
+\item $y=x^2+1$
+\item $y=(x+1)^2$
+\item $y=-(x+1)^2$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Read the vertex first. Then check whether the parabola opens upward or downward.
+\end{hint}
+
+\begin{solution}
+The graph has vertex $(-1,0)$, so the equation must be of the form
+\[
+y=a(x+1)^2.
+\]
+Since the graph opens upward, $a>0$. Also the $y$-intercept is $(0,1)$, which matches
+\[
+y=(0+1)^2=1.
+\]
+Therefore the correct choice is
+\[
+\boxed{\textbf{C. } y=(x+1)^2.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Vertex form $y=a(x-h)^2+k$ reveals the vertex $(h,k)$ immediately.
+\item A parabola touching the $x$-axis at its vertex has a repeated root.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Four Familiar Functions]
+Given
+\[
+f_1(x)=\frac1x,\qquad f_2(x)=x,\qquad f_3(x)=x^2,\qquad f_4(x)=x^3,
+\]
+\begin{enumerate}[label=(\roman*)]
+\item fill the table for $x=-3,-2,-1,0,1,2,3$,
+\item draw the graphs of $f_1,f_2,f_3,f_4$ on the same $xy$-diagram, using different colours.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Remember that $\frac{1}{x}$ is undefined at $x=0$. Compare the symmetries of the four functions as you graph them.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} The table is
+\[
+\begin{array}{c|ccccccc}
+x & -3 & -2 & -1 & 0 & 1 & 2 & 3\\ \hline
+f_1(x)=\frac1x & -\frac13 & -\frac12 & -1 & \text{undefined} & 1 & \frac12 & \frac13\\
+f_2(x)=x & -3 & -2 & -1 & 0 & 1 & 2 & 3\\
+f_3(x)=x^2 & 9 & 4 & 1 & 0 & 1 & 4 & 9\\
+f_4(x)=x^3 & -27 & -8 & -1 & 0 & 1 & 8 & 27
+\end{array}
+\]
+
+\textbf{(ii)} A combined sketch is shown below.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=10cm,
+    axis lines=middle,
+    xmin=-4,xmax=4,
+    ymin=-10,ymax=10,
+    axis equal image,
+    grid=both,
+    xlabel={$x$},
+    ylabel={$y$},
+    clip=false,
+    legend style={at={(1.05,0.5)},anchor=west,fill=white,draw=black},
+    samples=300
+]
+\addplot[red, thick, domain=-4:-0.15] {1/x};
+\addplot[red, thick, domain=0.15:4] {1/x};
+\addlegendentry{$f_1(x)=1/x$}
+\addplot[orange!90!black, thick, domain=-4:4] {x};
+\addlegendentry{$f_2(x)=x$}
+\addplot[blue, thick, domain=-3.2:3.2] {x^2};
+\addlegendentry{$f_3(x)=x^2$}
+\addplot[green!60!black, thick, domain=-2.15:2.15] {x^3};
+\addlegendentry{$f_4(x)=x^3$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item These four graphs are among the most important basic shapes in HSC mathematics.
+\item $x$ and $x^3$ are odd functions; $x^2$ is even; $\frac1x$ is odd with asymptotes.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Zeroes and a Sign Table for a Cubic]
+Given
+\[
+y=(x+2)(x-1)(x-3),
+\]
+\begin{enumerate}[label=(\roman*)]
+\item how many zeroes does it have? List them.
+\item Fill the sign table for $y$.
+\item Discuss the behaviour of the function as $x\to -\infty$ and $x\to +\infty$, and sketch the graph roughly.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Each linear factor gives one zero. For the sign table, test one value in each interval determined by the zeroes.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} The zeroes occur when one factor is zero:
+\[
+x=-2,\qquad x=1,\qquad x=3.
+\]
+So the function has \textbf{three} zeroes.
+
+\textbf{(ii)} The critical intervals are $(-\infty,-2)$, $(-2,1)$, $(1,3)$, and $(3,\infty)$.
+
+\[
+\begin{array}{c|ccccccc}
+x & (-\infty,-2) & -2 & (-2,1) & 1 & (1,3) & 3 & (3,\infty)\\ \hline
+y & - & 0 & + & 0 & - & 0 & +
+\end{array}
+\]
+
+\textbf{(iii)} Since the leading term is $x^3$ with positive coefficient,
+\[
+y\to -\infty \text{ as } x\to -\infty,
+\qquad
+y\to +\infty \text{ as } x\to +\infty.
+\]
+The graph crosses the $x$-axis at $x=-2,1,3$ and alternates sign across these simple roots.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.78\linewidth,
+    height=6.2cm,
+    axis lines=middle,
+    xmin=-4,xmax=4.5,
+    ymin=-18,ymax=18,
+    grid=both,
+    xlabel={$x$},
+    ylabel={$y$},
+    samples=300
+]
+\addplot[blue, thick, domain=-4:4.3] {(x+2)*(x-1)*(x-3)};
+\addplot[only marks, mark=*, mark size=2pt] coordinates {(-2,0) (1,0) (3,0)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A factored form reveals zeroes immediately.
+\item A sign table helps you understand where a function is above or below the $x$-axis.
+\item For odd-degree polynomials with positive leading coefficient, the graph falls left and rises right.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Circle Graph Matching Question]
+\textbf{Question:}
+Four graphs of circles are given below, labelled 1 to 4. Four multiple-choice options present pairings of a specific circle graph with an equation. Only one of these pairings is mathematically correct. Which option shows the correct graph-and-equation pair?
+
+\begin{center}
+\begin{tabular}{cc}
+    \begin{tikzpicture}[scale=0.6]
+        \draw[thick, ->] (-2.5,0) -- (4.5,0) node[right] {$x$};
+        \draw[thick, ->] (0,-3.5) -- (0,3.5) node[above] {$y$};
+        \draw[thick, blue] (1,0) circle ({sqrt(5)});
+        \filldraw[black] (0,2) circle (2.5pt) node[above right] {$2$};
+        \filldraw[black] (0,-2) circle (2.5pt) node[below right] {$-2$};
+        \node at (1,-4.5) {\textbf{Graph 1}};
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}[scale=0.6]
+        \draw[thick, ->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+        \draw[thick, ->] (0,-2.5) -- (0,4.5) node[above] {$y$};
+        \draw[thick, blue] (0,1) circle ({sqrt(5)});
+        \filldraw[black] (2,0) circle (2.5pt) node[above right] {$2$};
+        \filldraw[black] (-2,0) circle (2.5pt) node[above left] {$-2$};
+        \node at (0,-3.5) {\textbf{Graph 2}};
+    \end{tikzpicture} \\[0.8cm]
+    \begin{tikzpicture}[scale=0.6]
+        \draw[thick, ->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+        \draw[thick, ->] (0,-3.5) -- (0,3.5) node[above] {$y$};
+        \draw[thick, blue] (0,0) circle ({sqrt(5)});
+        \filldraw[black] (2,1) circle (2.5pt) node[above right] {$(2,1)$};
+        \node at (0,-4.5) {\textbf{Graph 3}};
+    \end{tikzpicture}
+    &
+    \begin{tikzpicture}[scale=0.45]
+        \draw[thick, ->] (-6.5,0) -- (6.5,0) node[right] {$x$};
+        \draw[thick, ->] (0,-7.5) -- (0,5.5) node[above] {$y$};
+        \draw[thick, blue] (0,-1) circle (5);
+        \filldraw[black] (0,4) circle (3pt) node[above right] {$4$};
+        \filldraw[black] (0,-6) circle (3pt) node[below right] {$-6$};
+        \node at (0,-9) {\textbf{Graph 4}};
+    \end{tikzpicture}
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\textbf{\Alph*.}]
+\item Graph 1 is represented by $x^2+(y-1)^2=5$
+\item Graph 2 is represented by $x^2+(y-1)^2=5$
+\item Graph 3 is represented by $x^2+(y-1)^2=5$
+\item Graph 4 is represented by $x^2+(y+1)^2=5$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For a circle, identify its centre and radius first. The equation
+\[
+(x-a)^2+(y-b)^2=r^2
+\]
+has centre $(a,b)$ and radius $r$.
+\end{hint}
+
+\begin{solution}
+The equation
+\[
+x^2+(y-1)^2=5
+\]
+represents a circle with centre $(0,1)$ and radius $\sqrt5$.
+
+Graph 2 is centred at $(0,1)$ and passes through $(2,0)$ and $(-2,0)$. Since
+\[
+(2-0)^2+(0-1)^2=4+1=5,
+\]
+its radius is indeed $\sqrt5$.
+
+Therefore the correct option is
+\[
+\boxed{\textbf{B}.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The equation $(x-a)^2+(y-b)^2=r^2$ is the standard form of a circle.
+\item Matching graphs to equations becomes much easier once you identify centre and radius separately.
+\end{itemize}
+\end{takeaways}

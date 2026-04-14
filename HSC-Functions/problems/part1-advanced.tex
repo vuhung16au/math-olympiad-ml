@@ -80,3 +80,263 @@ Hence $f(x)=a^x$ for some constant $a>0$.
         \item \textbf{Difficulty note:} This is an olympiad-style problem. You may find a variation of it in a strong trial exam from a top school, but it is unlikely to appear in an official HSC Mathematics Extension 1 or Extension 2 examination in this full form.
     \end{itemize}
 \end{takeaways}
+
+\begin{problem}[The Harmonic Conjugates of the Golden Segment]
+The interval $PQ$ has length $p$. A point $A$ lies internally between $P$ and $Q$ such that
+\[
+PQ\cdot QA=PA^2.
+\]
+A second point $B$ lies externally on the extension of $PQ$ beyond $Q$, and $A$ and $B$ are harmonic conjugates with respect to $P$ and $Q$, meaning
+\[
+\frac{PA}{AQ}=\frac{PB}{BQ}.
+\]
+\begin{enumerate}[label=(\roman*)]
+\item Let $PA=x$. Show that
+\[
+x=\frac{p(\sqrt5-1)}{2}.
+\]
+\item Let $PB=y$. Use the harmonic-conjugate ratio to find $y$ in terms of $p$.
+\item Hence prove that
+\[
+AB=2PQ.
+\]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Write $AQ$ and $BQ$ in terms of $x$, $y$, and $p$. In part (ii), substitute the value of $x$ from part (i) into the ratio equation.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Let $PA=x$. Then $AQ=p-x$, so
+\[
+p(p-x)=x^2
+\quad\Longrightarrow\quad
+x^2+px-p^2=0.
+\]
+Thus
+\[
+x=\frac{-p\pm p\sqrt5}{2}.
+\]
+Since $x>0$,
+\[
+\boxed{x=\frac{p(\sqrt5-1)}{2}.}
+\]
+
+\textbf{(ii)} Let $PB=y$. Then $BQ=y-p$, and
+\[
+\frac{x}{p-x}=\frac{y}{y-p}.
+\]
+Using
+\[
+x=\frac{p(\sqrt5-1)}{2},
+\qquad
+p-x=\frac{p(3-\sqrt5)}{2},
+\]
+we get
+\[
+\frac{x}{p-x}=\frac{\sqrt5-1}{3-\sqrt5}=\frac{1+\sqrt5}{2}.
+\]
+Hence
+\[
+\frac{y}{y-p}=\frac{1+\sqrt5}{2}.
+\]
+So
+\[
+2y=(1+\sqrt5)(y-p)
+\quad\Longrightarrow\quad
+y(\sqrt5-1)=p(1+\sqrt5),
+\]
+and therefore
+\[
+\boxed{y=\frac{p(3+\sqrt5)}{2}.}
+\]
+
+\textbf{(iii)} Now
+\[
+AB=PB-PA=y-x
+=\frac{p(3+\sqrt5)}{2}-\frac{p(\sqrt5-1)}{2}
+=2p.
+\]
+Since $PQ=p$,
+\[
+\boxed{AB=2PQ.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The golden-ratio equation often appears as a quadratic relation in a length variable.
+\item Harmonic division turns a geometry problem into a ratio equation that can be solved algebraically.
+\item This is a good example of functions and algebra supporting classical Euclidean geometry.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Four-Function Cycle and Composite Inverses]
+Let $f(x)$, $g(x)$, $h(x)$, and $t(x)$ be linear functions.
+
+\begin{enumerate}[label=(\roman*)]
+\item Suppose that $f(x)$ and $g(x)$ are inverse functions, and $h(x)$ and $t(x)$ are also inverse functions. Let
+\[
+P(x)=f(h(x)).
+\]
+Prove algebraically that the inverse of $P(x)$ is
+\[
+Q(x)=t(g(x)).
+\]
+\item Find four distinct linear functions $f(x)$, $g(x)$, $h(x)$, and $t(x)$ such that
+\[
+f(g(h(t(x))))=x,
+\]
+and all of the following are true:
+\begin{itemize}[leftmargin=*]
+\item none of the graphs passes through the origin,
+\item all four graphs have different gradients,
+\item no two functions in your set are inverses of each other.
+\end{itemize}
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), use only the defining property of inverse functions and the associativity of composition. For part (ii), make the product of the four gradients equal to $1$, then choose non-zero intercepts so that the overall constant term becomes $0$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since $f$ and $g$ are inverses, and $h$ and $t$ are inverses,
+\[
+f(g(x))=x
+\qquad \text{and} \qquad
+h(t(x))=x.
+\]
+Now
+\[
+P(Q(x))=f\bigl(h(t(g(x)))\bigr).
+\]
+Since $h(t(g(x)))=g(x)$, we get
+\[
+P(Q(x))=f(g(x))=x.
+\]
+Hence $Q(x)=t(g(x))$ is the inverse of $P(x)=f(h(x))$.
+
+\textbf{(ii)} Choose gradients
+\[
+m_1=2,\qquad m_2=3,\qquad m_3=\frac12,\qquad m_4=\frac13,
+\]
+so that
+\[
+m_1m_2m_3m_4=2\cdot 3\cdot \frac12\cdot \frac13=1.
+\]
+Take
+\[
+c_1=-1,\qquad c_2=2,\qquad c_3=-1,\qquad c_4=1.
+\]
+Then
+\[
+f(x)=2x-1,\qquad g(x)=3x+2,\qquad h(x)=\frac12x-1,\qquad t(x)=\frac13x+1.
+\]
+
+\[
+h(t(x))=\frac12\left(\frac13x+1\right)-1=\frac16x-\frac12,
+\]
+\[
+g(h(t(x)))=3\left(\frac16x-\frac12\right)+2=\frac12x+\frac12,
+\]
+\[
+f(g(h(t(x))))=2\left(\frac12x+\frac12\right)-1=x.
+\]
+So indeed
+\[
+\boxed{f(g(h(t(x))))=x.}
+\]
+
+Also, none passes through the origin, the gradients are all different, and
+\[
+f^{-1}(x)=\frac12x+\frac12\ne h(x),\qquad
+g^{-1}(x)=\frac13x-\frac23\ne t(x).
+\]
+Hence all conditions are satisfied.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{The shoes-and-socks rule:} The inverse of a composition is the composition of the inverses in reverse order:
+\[
+(f\circ h)^{-1}=h^{-1}\circ f^{-1}.
+\]
+\item \textbf{Associativity matters:} In general $f(g(x))\ne g(f(x))$, but you may regroup a long composition in any convenient way.
+\item \textbf{University preview:} This same inverse-in-reverse-order law appears later in abstract algebra, matrix theory, and group theory.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Newton's Serpentine and the Hyperbolic Locus]
+Consider the family of functions
+\[
+f(x)=\frac{2x}{x^2+c^2},
+\]
+where $c>0$ is a real parameter.
+
+\begin{enumerate}[label=(\alph*)]
+\item Determine the horizontal asymptote of $f(x)$, and find the exact point where the curve crosses this asymptote.
+\item Use calculus to find the coordinates of the local maximum and local minimum in terms of $c$.
+\item As $c$ varies, find the Cartesian equation of the locus traced by the local maximum point, and state its geometric shape.
+\item By finding $f''(x)$, prove that the origin is a point of inflection for every curve in this family.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For the asymptote, compare degrees or divide top and bottom by $x^2$. For the turning points, use the quotient rule and set the numerator of $f'(x)$ equal to zero. In the second derivative, factor early instead of fully expanding.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} As $x\to\pm\infty$, $\dfrac{2x}{x^2+c^2}\to 0$, so the horizontal asymptote is
+\[
+\boxed{y=0}.
+\]
+Since $f(x)=0 \iff 2x=0$, the curve crosses it at
+\[
+\boxed{(0,0)}.
+\]
+
+\textbf{(b)}
+\[
+f'(x)=\frac{2(x^2+c^2)-(2x)(2x)}{(x^2+c^2)^2}
+=\frac{2(c^2-x^2)}{(x^2+c^2)^2}.
+\]
+So $f'(x)=0 \iff x=\pm c$. Then
+\[
+f(c)=\frac1c,\qquad f(-c)=-\frac1c.
+\]
+Hence the turning points are
+\[
+\boxed{\left(c,\frac1c\right)}\quad \text{and} \quad \boxed{\left(-c,-\frac1c\right)}.
+\]
+
+\textbf{(c)} For the local maximum, $(X,Y)=\left(c,\frac1c\right)$. Eliminating $c$ gives
+\[
+Y=\frac1X,
+\]
+and since $c>0$, $X>0$. Therefore the locus is
+\[
+\boxed{y=\frac1x\ (x>0)},
+\]
+the first-quadrant branch of a rectangular hyperbola.
+
+\textbf{(d)} Differentiating again gives
+\[
+f''(x)=\frac{4x(x^2-3c^2)}{(x^2+c^2)^3}.
+\]
+So $f''(0)=0$. Also $(x^2+c^2)^3>0$ for all $x$, and for sufficiently small $|x|$, $x^2-3c^2<0$. Hence for small $h>0$,
+\[
+f''(-h)>0,\qquad f''(h)<0,
+\]
+so concavity changes at $x=0$. Therefore $(0,0)$ is a point of inflection for every $c>0$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A horizontal asymptote describes end behaviour only; a curve may still cross it at a finite point.
+\item The turning points $\left(c,\frac1c\right)$ and $\left(-c,-\frac1c\right)$ show a beautiful link between calculus and loci.
+\item Factoring early is often the cleanest way to simplify second-derivative expressions.
+\item This curve is a special case of Newton's serpentine family, a nice example of how classical curve theory connects with modern function study.
+\end{itemize}
+\end{takeaways}

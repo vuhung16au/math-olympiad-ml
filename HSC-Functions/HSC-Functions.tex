@@ -90,10 +90,10 @@ exactly one element of another set.
 % ============================================================
 
 \subsection{Project Overview}
-This booklet is a growing collection of functions problems for NSW HSC Mathematics Extension~1 and Extension~2 students. It covers the major themes of the syllabus: understanding what a function is, working with inverses, composing functions, and analysing their graphs. The problems are designed to build fluency with algebraic manipulation and geometric reasoning side by side.
+This booklet is a growing collection of functions problems for NSW HSC Mathematics Extension~1 students, with a few short Extension~2 preview notes where they help build mathematical maturity. It covers the major themes of the syllabus: understanding what a function is, working with inverses, composing functions, and analysing their graphs. The problems are designed to build fluency with algebraic manipulation and geometric reasoning side by side.
 
 \subsection{Target Audience}
-This resource is written for students who want extra practice with functions in a clear, classroom-friendly format. Solutions are intentionally concise, but each one highlights the key idea---whether that is a domain restriction, a symmetry argument, or a composition rule. Both Extension~1 and Extension~2 students will find material at an appropriate level.
+This resource is written for students who want extra practice with functions in a clear, classroom-friendly format. Solutions are intentionally concise, but each one highlights the key idea---whether that is a domain restriction, a symmetry argument, or a composition rule. The main focus is Extension~1, while some comments point ahead to Extension~2 or university mathematics.
 
 \subsection{How to Use This Booklet}
 \begin{itemize}[leftmargin=*]
@@ -118,16 +118,186 @@ Most problems in this booklet are accessible with standard HSC Mathematics Exten
   \item \textbf{Transformations:} translations, reflections, dilations, and their effect on the equation and graph of a function.
 \end{itemize}
 
-\subsection{Core Formulas and Ideas}
+\subsection{Core Language of Functions}
 
-\textbf{Definition of a function.} A function $f: A \to B$ assigns to every element $x \in A$ exactly one element $f(x) \in B$. The set $A$ is called the \textbf{domain} and the set $B$ the \textbf{codomain}. The \textbf{range} is the set of all actual output values:
+\textbf{Function.} A function $f: A \to B$ assigns to every element $x \in A$ exactly one element $f(x) \in B$. The set $A$ is the \textbf{domain}, the set $B$ is the \textbf{codomain}, and the \textbf{range} is the set of outputs that actually occur:
 \[
 \operatorname{range}(f) = \{f(x) : x \in A\} \subseteq B.
 \]
 
+\textbf{The empty function.} If the domain is the empty set $\varnothing$, then there is exactly one function
+\[
+f:\varnothing \to B,
+\]
+called the \textbf{empty function}. It has no inputs and therefore no outputs. Its range is also empty. This is mainly a set-theoretic idea, but it is good to know that it is still a perfectly valid function.
+
+\textbf{Variable.} A variable is a symbol, such as $x$ or $t$, that stands for a value that may change. In $y=f(x)$, the variable $x$ is the input and the variable $y$ is the output.
+
+\textbf{Map or mapping.} A map is another name for a function or relation that pairs elements of one set with elements of another set.
+
+\subsection{Relations and Mappings}
+
+A \textbf{relation} between sets $A$ and $B$ is any collection of ordered pairs $(a,b)$ with $a \in A$ and $b \in B$. A function is a special kind of relation in which each input has exactly one output.
+
+The most common mapping types are shown below.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,>=Latex]
+  % One-to-one
+  \begin{scope}[shift={(0,0)}]
+    \draw[rounded corners] (0,0) rectangle (1.6,3.4);
+    \draw[rounded corners] (3.0,0) rectangle (4.6,3.4);
+    \node at (0.8,3.7) {\small Domain};
+    \node at (3.8,3.7) {\small Codomain};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Aone) at (0.8,2.8) {$a$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Atwo) at (0.8,1.9) {$b$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Athree) at (0.8,1.0) {$c$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Bone) at (3.8,2.8) {$1$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Btwo) at (3.8,1.9) {$2$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Bthree) at (3.8,1.0) {$3$};
+    \draw[->] (Aone) -- (Bone);
+    \draw[->] (Atwo) -- (Btwo);
+    \draw[->] (Athree) -- (Bthree);
+    \node[align=center] at (2.3,-0.5) {\small One-to-one\\[-1mm]\small (injective)};
+  \end{scope}
+
+  % One-to-many
+  \begin{scope}[shift={(5.7,0)}]
+    \draw[rounded corners] (0,0) rectangle (1.6,3.4);
+    \draw[rounded corners] (3.0,0) rectangle (4.6,3.4);
+    \node at (0.8,3.7) {\small Domain};
+    \node at (3.8,3.7) {\small Codomain};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Cone) at (0.8,2.3) {$a$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Ctwo) at (0.8,1.1) {$b$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Done) at (3.8,2.8) {$1$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Dtwo) at (3.8,1.9) {$2$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Dthree) at (3.8,1.0) {$3$};
+    \draw[->] (Cone) -- (Done);
+    \draw[->] (Cone) -- (Dthree);
+    \draw[->] (Ctwo) -- (Dtwo);
+    \node[align=center] at (2.3,-0.5) {\small One-to-many\\[-1mm]\small (not a function)};
+  \end{scope}
+
+  % Many-to-one
+  \begin{scope}[shift={(0,-5.1)}]
+    \draw[rounded corners] (0,0) rectangle (1.6,3.4);
+    \draw[rounded corners] (3.0,0) rectangle (4.6,3.4);
+    \node at (0.8,3.7) {\small Domain};
+    \node at (3.8,3.7) {\small Codomain};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Eone) at (0.8,2.8) {$a$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Etwo) at (0.8,1.9) {$b$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Ethree) at (0.8,1.0) {$c$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Fone) at (3.8,2.3) {$1$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Ftwo) at (3.8,1.1) {$2$};
+    \draw[->] (Eone) -- (Fone);
+    \draw[->] (Etwo) -- (Fone);
+    \draw[->] (Ethree) -- (Ftwo);
+    \node[align=center] at (2.3,-0.5) {\small Many-to-one\\[-1mm]\small (a function)};
+  \end{scope}
+
+  % Many-to-many
+  \begin{scope}[shift={(5.7,-5.1)}]
+    \draw[rounded corners] (0,0) rectangle (1.6,3.4);
+    \draw[rounded corners] (3.0,0) rectangle (4.6,3.4);
+    \node at (0.8,3.7) {\small Domain};
+    \node at (3.8,3.7) {\small Codomain};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Gone) at (0.8,2.8) {$a$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Gtwo) at (0.8,1.9) {$b$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Gthree) at (0.8,1.0) {$c$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Hone) at (3.8,2.8) {$1$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Htwo) at (3.8,1.9) {$2$};
+    \node[circle,draw,fill=white,inner sep=1.3pt] (Hthree) at (3.8,1.0) {$3$};
+    \draw[->] (Gone) -- (Hone);
+    \draw[->] (Gone) -- (Htwo);
+    \draw[->] (Gtwo) -- (Htwo);
+    \draw[->] (Gthree) -- (Htwo);
+    \draw[->] (Gthree) -- (Hthree);
+    \node[align=center] at (2.3,-0.5) {\small Many-to-many\\[-1mm]\small (not a function)};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+One-to-one and many-to-one relations can be functions. One-to-many and many-to-many relations are not functions because at least one input has more than one output.
+
+\subsection{Domain, Range, and Basic Tests}
+
+\textbf{Domain.} The domain is the set of allowed input values.
+
+\textbf{Range.} The range is the set of actual output values.
+
 \textbf{Vertical line test.} A curve in the plane is the graph of a function if and only if every vertical line meets the curve at most once.
 
 \textbf{Horizontal line test.} A function is one-to-one (injective) if and only if every horizontal line meets its graph at most once. Only one-to-one functions have an inverse that is also a function.
+
+\subsection{Important Number Sets}
+
+We often write:
+\[
+\mathbb{N} = \{1,2,3,\dots\}, \qquad
+\mathbb{Z} = \{\dots,-2,-1,0,1,2,\dots\},
+\]
+\[
+\mathbb{Q} = \left\{\frac{a}{b} : a,b \in \mathbb{Z},\, b \ne 0\right\}, \qquad
+\mathbb{R} = \text{the set of real numbers}.
+\]
+
+Good to know for later: the set of complex numbers is written $\mathbb{C}$, not $\mathbb{Z}$. Complex numbers are studied in Extension~2, so in this booklet they appear only as short preview notes.
+
+\subsection{Important Families of Functions}
+
+\textbf{Linear function.} A linear function has the form
+\[
+f(x)=mx+c,
+\]
+where $m$ is the gradient and $c$ is the $y$-intercept. Its graph is a straight line.
+
+\textbf{Quadratic function.} A quadratic function has the form
+\[
+f(x)=ax^2+bx+c, \qquad a \ne 0.
+\]
+Its graph is a parabola.
+
+\textbf{Polynomial.} A polynomial over $\mathbb{R}$ is an expression of the form
+\[
+P(x)=a_nx^n+a_{n-1}x^{n-1}+\dots+a_1x+a_0,
+\]
+where the coefficients $a_0,a_1,\dots,a_n$ are real numbers. If the coefficients are allowed to be complex numbers, then $P$ is a polynomial over $\mathbb{C}$. This is a good-to-know Extension~2 idea.
+
+\textbf{Cubic function.} A cubic function has the form
+\[
+f(x)=ax^3+bx^2+cx+d, \qquad a \ne 0.
+\]
+
+\textbf{Reciprocal function.} A basic reciprocal function is
+\[
+f(x)=\frac{1}{x},
+\]
+which is undefined at $x=0$.
+
+\subsection{Continuity and Differentiation Preview}
+
+\textbf{Continuity.} Informally, a function is continuous if its graph can be drawn without lifting your pen. More precisely, $f$ is continuous at $x=a$ if small changes in $x$ produce small changes in $f(x)$.
+
+\textbf{Continuous function.} A function is continuous on an interval if it is continuous at every point of that interval.
+
+\textbf{Extension~2 preview.} In more formal Extension~2 language, $f$ is continuous at $x=a$ if
+\[
+\lim_{x \to a} f(x) = f(a).
+\]
+
+\textbf{Derivative.} The derivative $f'(x)$ measures the instantaneous rate of change of $f$ and the gradient of the tangent to the graph.
+
+\textbf{Differentiation.} Differentiation is the process of finding the derivative. This is Extension~2 material, but it is good to know because many important functions are later studied through their derivatives.
+
+\subsection{Symmetry, Inverses, and Composition}
+
+\textbf{Even and odd functions.}
+\[
+f \text{ is even} \iff f(-x) = f(x) \text{ for all } x.
+\qquad
+f \text{ is odd} \iff f(-x) = -f(x) \text{ for all } x.
+\]
+An even function has symmetry about the $y$-axis. An odd function has rotational symmetry about the origin.
 
 \textbf{Inverse function.} If $f$ is one-to-one with domain $A$ and range $B$, then its inverse $f^{-1}: B \to A$ satisfies
 \[
@@ -150,13 +320,6 @@ Note that in general $f \circ g \neq g \circ f$.
 \operatorname{dom}(f \circ g) = \{x \in \operatorname{dom}(g) : g(x) \in \operatorname{dom}(f)\}.
 \]
 
-\textbf{Even and odd functions.}
-\[
-f \text{ is even} \iff f(-x) = f(x) \text{ for all } x.
-\qquad
-f \text{ is odd} \iff f(-x) = -f(x) \text{ for all } x.
-\]
-
 \subsection{Key Transformations}
 
 Given a base function $y = f(x)$, the standard transformations are:
@@ -166,6 +329,9 @@ Given a base function $y = f(x)$, the standard transformations are:
   \item $y = f(x - h)$: shift right by $h$ (left if $h < 0$).
   \item $y = af(x)$: vertical dilation by factor $|a|$; reflection in $x$-axis if $a < 0$.
   \item $y = f(bx)$: horizontal dilation by factor $\tfrac{1}{|b|}$; reflection in $y$-axis if $b < 0$.
+  \item Replacing $y$ by $-f(x)$ reflects the graph in the $x$-axis.
+  \item Replacing $x$ by $-x$ gives $y=f(-x)$, which reflects the graph in the $y$-axis.
+  \item Rotations can also be studied, but they are less central in HSC Extension~1 function questions because a rotated graph need not remain a function.
 \end{itemize}
 
 These transformations combine: $y = af(bx - h) + c$ is the general form.
@@ -183,21 +349,116 @@ Key skills are: evaluating at a given $x$, finding the range piece by piece, and
 \]
 The graph of $y = |f(x)|$ reflects any portion of $y = f(x)$ that lies \emph{below} the $x$-axis up above it. The graph of $y = f(|x|)$ keeps the right half of $y = f(x)$ and reflects it to create an even function.
 
-\subsection{Continuity and Limits (Extension 2 Note)}
-For Extension~2 students, a function is \textbf{continuous} at $x = a$ if
+\textbf{Absolute value of a real number.} For a real number $x$, the absolute value $|x|$ is its distance from $0$ on the number line.
+
+\textbf{Absolute value of a complex number.} Good to know for Extension~2 and beyond: if $z=a+bi$, then
 \[
-\lim_{x \to a} f(x) = f(a).
+|z|=\sqrt{a^2+b^2}.
 \]
-Piecewise functions need this checked at the break-points. Many function questions at Extension~2 level involve verifying continuity or using limits to determine parameters.
+This is the distance of $z$ from the origin in the complex plane. Complex numbers belong to Extension~2, not Extension~1, so this booklet only mentions them briefly.
+
+\subsection{Reciprocals, Asymptotes, and Sign Tables}
+
+\textbf{Reciprocal of a function.} The reciprocal of $f(x)$ is
+\[
+\frac{1}{f(x)},
+\]
+provided that $f(x) \ne 0$.
+
+\textbf{Asymptotes.} An asymptote is a line that the graph approaches. For example, $y=\frac{1}{x}$ has vertical asymptote $x=0$ and horizontal asymptote $y=0$.
+
+\textbf{Table of signs.} A table of signs records where an expression is positive, zero, or negative. It is especially useful for rational functions, inequalities, and sketching graphs.
+
+\subsection{Parametric and Multivariable Functions}
+
+\textbf{Parametric definition.} Sometimes a relation is defined by a third variable, called a parameter. For example,
+\[
+x=t, \qquad y=\frac{1}{t}, \qquad t \ne 0.
+\]
+This defines the curve $y=\frac{1}{x}$ in parametric form.
+
+\textbf{Multiple-variable functions.} A function can also take more than one input, such as
+\[
+f(x,y)=x^2+y^2.
+\]
+These are important in higher mathematics but are outside the main Extension~1 and Extension~2 syllabuses.
+
+\subsection{Important HSC Functions}
+
+The most important functions to recognise quickly in HSC mathematics are:
+
+\begin{itemize}[leftmargin=*]
+  \item linear functions $mx+c$,
+  \item quadratic functions $ax^2+bx+c$,
+  \item cubic functions,
+  \item reciprocal functions such as $\frac{1}{x}$ and more general rational functions,
+  \item absolute value functions,
+  \item exponential functions such as $a^x$ with $a>0$ and $a \ne 1$,
+  \item logarithmic functions such as $\log_a x$,
+  \item trigonometric functions such as $\sin x$, $\cos x$, and $\tan x$.
+\end{itemize}
+
+In Extension~1, the main emphasis is on algebraic, exponential, logarithmic, and trigonometric functions. In Extension~2, ideas such as continuity, differentiation, and later complex-number-based viewpoints become more important.
+
+\subsection{A Brief Note on Big $O$ Notation}
+Big $O$ notation is a way of comparing how fast functions grow. It is widely used in university mathematics and computer science.
+
+If we write
+\[
+f(x)=O(g(x)) \quad \text{as } x\to\infty,
+\]
+we mean that for sufficiently large $x$, the function $f(x)$ grows no faster than a constant multiple of $g(x)$.
+
+This topic is \textbf{outside the HSC Mathematics Extension~1 and Extension~2 syllabuses}, but it is very good to know for later university studies.
+
+\textbf{Examples.}
+\begin{itemize}[leftmargin=*]
+  \item If $f(x)=3x^2+5x+7$, then $f(x)=O(x^2)$ because the $x^2$ term dominates for large $x$.
+  \item If $f(x)=x^5-2x^3+1$, then $f(x)=O(x^5)$.
+  \item If $f(x)=\log x$, then $f(x)=O(\log x)$.
+  \item If $f(x)=2^x+100x^4$, then $f(x)=O(2^x)$ because the exponential term eventually dominates the polynomial term.
+\end{itemize}
+
+\textbf{Growth comparison to remember.} As $x\to\infty$,
+\[
+\log x \text{ grows more slowly than any positive power of } x,
+\]
+\[
+x^n \text{ grows more slowly than } a^x \quad \text{for any fixed } n\in\mathbb{N} \text{ and } a>1.
+\]
+So in rough order of growth:
+\[
+\log x \quad < \quad x,\ x^2,\ x^3,\dots \quad < \quad 2^x,\ 3^x,\dots
+\]
+
+\textbf{Polynomial example.} If
+\[
+P(x)=a_nx^n+a_{n-1}x^{n-1}+\dots+a_0
+\]
+with $a_n\ne 0$, then
+\[
+P(x)=O(x^n).
+\]
+So the degree of the polynomial tells you its dominant growth rate.
 
 \subsection{Problem-Solving Habits for This Booklet}
 \begin{itemize}[leftmargin=*]
   \item Always state the domain and range of your answer, not just the rule.
   \item When finding an inverse, restrict the domain of $f$ first if the function is not one-to-one.
   \item When composing, work from the inside out: compute $g(x)$ first, then apply $f$.
-  \item Sketch the graph whenever the question involves domains, ranges, or inverses.
+  \item Sketch the graph whenever the question involves domains, ranges, inverses, or asymptotes.
   \item In even/odd questions, substitute $-x$ and simplify fully before drawing a conclusion.
+  \item For rational expressions, locate any zeroes and undefined points before making a sign table.
 \end{itemize}
+
+\subsection{A Small Extension~2 Preview}
+This booklet is mainly about HSC Mathematics Extension~1. When complex numbers, formal limits, or derivatives are mentioned, they should be read as \textbf{good to know} ideas that will appear properly in Extension~2 or in later university mathematics.
+
+\textbf{Continuity in formal language.} For Extension~2 students, a function is \textbf{continuous} at $x = a$ if
+\[
+\lim_{x \to a} f(x) = f(a).
+\]
+Piecewise functions need this checked at the break-points. Many Extension~2 questions later ask you to verify continuity or use derivatives to study turning points and behaviour.
 
 \begin{remark}
 The most common functions mistake is forgetting to adjust the domain when restricting a function to make it one-to-one before finding its inverse. Always check that your inverse has the correct domain and range.
