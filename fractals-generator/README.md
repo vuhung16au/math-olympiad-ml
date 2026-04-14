@@ -7,6 +7,14 @@ This repository now supports two products:
 - a publishable npm package (`IFS`, `LSystem`) from `src/`
 - a Vercel-ready Next.js web app with six fractal families
 
+## Demo & Screenshot
+
+[Julia set](http://localhost:3000/escape-time/juliaClassic/maxIterations=401)
+
+---
+
+![JuliaSet.png](images/JuliaSet.png)
+
 ## Fractal Families
 
 - `ifs`
