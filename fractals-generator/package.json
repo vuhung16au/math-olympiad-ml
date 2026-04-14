@@ -1,0 +1,64 @@
+{
+  "name": "fractals",
+  "version": "1.0.0",
+  "description": "Tiny, dependency free library to easily generate fractals",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:4031651/fractals.git"
+  },
+  "homepage": "https://github.com/4031651/fractals#readme",
+  "author": "Sergey Tsapenko",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "typings": "lib/index.d.ts",
+  "keywords": [
+    "fractals",
+    "grahpics",
+    "IFS",
+    "L-system",
+    "Lindenmayer"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "dev:next": "next dev",
+    "build:web": "next build",
+    "start": "next start",
+    "clean": "rimraf lib esm",
+    "lint": "eslint \"src/**/*.ts\" --cache",
+    "compile:common": "tsc -p tsconfig.lib.json",
+    "compile:esm": "tsc -p tsconfig.modules.json",
+    "build": "npm run lint && npm run clean && npm run compile:common && npm run compile:esm",
+    "docs:fractals": "node scripts/generate-fractals-docs.js",
+    "test:fractals:playwright": "PLAYWRIGHT_BROWSERS_PATH=0 node scripts/generate-all-fractals-playwright.js",
+    "verify:release-gates": "node scripts/verify-release-gates.js",
+    "version": "git add -A .",
+    "postversion": "git push && git push --tags"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@tailwindcss/postcss": "^4.1.14",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "playwright": "^1.59.1",
+    "postcss": "^8.5.6",
+    "pngjs": "^7.0.0",
+    "prettier": "^3.8.2",
+    "rimraf": "^6.1.3",
+    "tailwindcss": "^4.1.14",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "fractals": "^1.0.0",
+    "next": "^15.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}

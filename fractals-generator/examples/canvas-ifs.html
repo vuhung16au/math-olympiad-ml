@@ -1,0 +1,1856 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fractals - Interactive Canvas Lab</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+      :root {
+        color-scheme: light;
+        --paper: #f7f6f2;
+        --ink: #1f2328;
+        --muted: #6a737d;
+        --line: #d4d6da;
+        --panel: #fffdf8;
+        --accent: #005f73;
+        --accent-soft: #e2f1f4;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Space Grotesk", "Avenir Next", sans-serif;
+        background:
+          radial-gradient(circle at 20% 10%, #fff 0 2px, transparent 3px),
+          radial-gradient(circle at 80% 25%, #fff 0 2px, transparent 3px),
+          linear-gradient(140deg, #f0efe9 0%, #e6ebee 100%);
+        background-size: 60px 60px, 80px 80px, auto;
+        color: var(--ink);
+        min-height: 100vh;
+      }
+
+      .layout {
+        width: min(1280px, 96vw);
+        margin: 22px auto;
+        display: grid;
+        grid-template-columns: minmax(280px, 360px) 1fr;
+        gap: 16px;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
+      }
+
+      .panel h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+      }
+
+      .sub {
+        margin: 0 0 16px;
+        font-size: 0.94rem;
+        color: var(--muted);
+      }
+
+      .group {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 12px;
+        background: #fff;
+      }
+
+      .group-title {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #4b5563;
+        margin: 0 0 10px;
+      }
+
+      .field {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+
+      .field:last-child {
+        margin-bottom: 0;
+      }
+
+      label {
+        font-size: 0.86rem;
+        color: #334155;
+      }
+
+      input,
+      select,
+      textarea,
+      button {
+        font: inherit;
+      }
+
+      input,
+      select,
+      textarea {
+        border: 1px solid #b9c2cb;
+        border-radius: 8px;
+        padding: 8px 10px;
+        background: #fff;
+      }
+
+      textarea {
+        min-height: 95px;
+        resize: vertical;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.82rem;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn {
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 14px;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: var(--accent-soft);
+        color: #123744;
+      }
+
+      .viewer {
+        background: #fcfdff;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
+      }
+
+      .viewer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .viewer-title {
+        margin: 0;
+        font-size: clamp(1rem, 2vw, 1.5rem);
+      }
+
+      .meta {
+        margin: 0;
+        color: #425466;
+        font-size: 0.9rem;
+      }
+
+      .canvas-wrap {
+        border: 1px solid #d4dae0;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      canvas {
+        width: 100%;
+        height: auto;
+        display: block;
+        background: #fff;
+      }
+
+      .inline {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <aside class="panel">
+        <h1>Fractal Controls</h1>
+        <p class="sub">Select a fractal family, tweak parameters, then generate.</p>
+
+        <section class="group">
+          <p class="group-title">Type</p>
+          <div class="field">
+            <label for="fractalType">Fractal Type</label>
+            <select id="fractalType">
+              <option value="ifs">IFS</option>
+              <option value="lsystem">L-system</option>
+              <option value="escapeTime">Escape-time</option>
+              <option value="newton">Newton</option>
+              <option value="attractor">Strange Attractor</option>
+              <option value="inversion">Circle Inversion</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="preset">Preset</label>
+            <select id="preset"></select>
+          </div>
+        </section>
+
+        <section class="group" id="ifsFields">
+          <p class="group-title">IFS Parameters</p>
+          <div class="inline">
+            <div class="field">
+              <label for="ifsIterations">Iterations</label>
+              <input id="ifsIterations" type="number" min="1000" max="600000" step="1000" />
+            </div>
+            <div class="field">
+              <label for="ifsDensity">Density</label>
+              <input id="ifsDensity" type="number" min="1" max="150" step="1" />
+            </div>
+          </div>
+          <div class="inline">
+            <div class="field">
+              <label for="ifsPointSize">Point Size</label>
+              <input id="ifsPointSize" type="number" min="0.5" max="4" step="0.1" />
+            </div>
+            <div class="field">
+              <label for="ifsColor">Color Mode</label>
+              <select id="ifsColor">
+                <option value="matrix">By Matrix</option>
+                <option value="emerald">Emerald</option>
+                <option value="ink">Black Ink</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="group" id="lsysFields" hidden>
+          <p class="group-title">L-system Parameters</p>
+          <div class="inline">
+            <div class="field">
+              <label for="lsIterations">Iterations</label>
+              <input id="lsIterations" type="number" min="0" max="13" step="1" />
+            </div>
+            <div class="field">
+              <label for="lsDistance">Distance</label>
+              <input id="lsDistance" type="number" min="0.1" max="40" step="0.1" />
+            </div>
+          </div>
+          <div class="inline">
+            <div class="field">
+              <label for="lsAngle">Angle</label>
+              <input id="lsAngle" type="number" min="0" max="360" step="0.1" />
+            </div>
+            <div class="field">
+              <label for="lsScale">Length Scale</label>
+              <input id="lsScale" type="number" min="0.1" max="2" step="0.01" />
+            </div>
+          </div>
+          <div class="inline">
+            <div class="field">
+              <label for="lsLineWidth">Line Width</label>
+              <input id="lsLineWidth" type="number" min="0.2" max="5" step="0.1" />
+            </div>
+            <div class="field">
+              <label for="lsColor">Line Color</label>
+              <input id="lsColor" type="color" value="#14532d" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="lsAxiom">Axiom</label>
+            <input id="lsAxiom" type="text" />
+          </div>
+          <div class="field">
+            <label for="lsRules">Rules (one per line, format: X=F+X)</label>
+            <textarea id="lsRules"></textarea>
+          </div>
+        </section>
+
+        <section class="group" id="escapeFields" hidden>
+          <p class="group-title">Escape-time Parameters</p>
+          <div class="inline">
+            <div class="field">
+              <label for="etMaxIterations">Max Iterations</label>
+              <input id="etMaxIterations" type="number" min="20" max="4000" step="10" />
+            </div>
+            <div class="field">
+              <label for="etBailout">Bailout Radius</label>
+              <input id="etBailout" type="number" min="2" max="100" step="1" />
+            </div>
+          </div>
+          <div class="inline">
+            <div class="field">
+              <label for="etPower">Power</label>
+              <input id="etPower" type="number" min="2" max="8" step="1" />
+            </div>
+            <div class="field">
+              <label for="etJuliaRe">Julia c (real)</label>
+              <input id="etJuliaRe" type="number" min="-2" max="2" step="0.001" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="etJuliaIm">Julia c (imag)</label>
+            <input id="etJuliaIm" type="number" min="-2" max="2" step="0.001" />
+          </div>
+        </section>
+
+        <section class="group" id="newtonFields" hidden>
+          <p class="group-title">Newton Parameters</p>
+          <div class="inline">
+            <div class="field">
+              <label for="ntMaxIterations">Max Iterations</label>
+              <input id="ntMaxIterations" type="number" min="5" max="200" step="1" />
+            </div>
+            <div class="field">
+              <label for="ntEpsilon">Epsilon</label>
+              <input id="ntEpsilon" type="number" min="0.00000001" max="0.1" step="0.000001" />
+            </div>
+          </div>
+        </section>
+
+        <section class="group" id="attractorFields" hidden>
+          <p class="group-title">Attractor Parameters</p>
+          <div class="inline">
+            <div class="field">
+              <label for="atIterations">Iterations</label>
+              <input id="atIterations" type="number" min="10000" max="2000000" step="10000" />
+            </div>
+            <div class="field">
+              <label for="atDiscard">Discard</label>
+              <input id="atDiscard" type="number" min="0" max="50000" step="100" />
+            </div>
+          </div>
+          <div class="inline">
+            <div class="field">
+              <label for="atA">a</label>
+              <input id="atA" type="number" min="-5" max="5" step="0.001" />
+            </div>
+            <div class="field">
+              <label for="atB">b</label>
+              <input id="atB" type="number" min="-5" max="5" step="0.001" />
+            </div>
+          </div>
+          <div class="inline">
+            <div class="field">
+              <label for="atC">c</label>
+              <input id="atC" type="number" min="-5" max="5" step="0.001" />
+            </div>
+            <div class="field">
+              <label for="atD">d</label>
+              <input id="atD" type="number" min="-5" max="5" step="0.001" />
+            </div>
+          </div>
+        </section>
+
+        <section class="group" id="inversionFields" hidden>
+          <p class="group-title">Inversion Parameters</p>
+          <div class="inline">
+            <div class="field">
+              <label for="ivDepth">Depth</label>
+              <input id="ivDepth" type="number" min="1" max="12" step="1" />
+            </div>
+            <div class="field">
+              <label for="ivMinRadius">Min Radius</label>
+              <input id="ivMinRadius" type="number" min="0.0001" max="0.2" step="0.0001" />
+            </div>
+          </div>
+        </section>
+
+        <section class="actions">
+          <button id="generateBtn" class="btn btn-primary" type="button">Generate</button>
+          <button id="resetBtn" class="btn btn-secondary" type="button">Reset Preset</button>
+        </section>
+      </aside>
+
+      <section class="viewer">
+        <div class="viewer-header">
+          <h2 class="viewer-title" id="viewerTitle">Fractal Render</h2>
+          <p class="meta" id="meta">Ready</p>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="canvas" width="980" height="760"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      const [{ IFS, radial }, { LSystem }] = await Promise.all([
+        import("../esm/ifs.js"),
+        import("../esm/l.js")
+      ]);
+
+      const PRESETS = {
+        ifs: {
+          fern: {
+            label: "Fern",
+            matrices: [
+              { a: 0, b: 0, c: 0, d: 0.16, e: 0, f: 0, p: 0.01 },
+              { a: 0.85, b: 0.04, c: -0.04, d: 0.85, e: 0, f: 1.6, p: 0.85 },
+              { a: 0.2, b: -0.26, c: 0.23, d: 0.22, e: 0, f: 1.6, p: 0.07 },
+              { a: -0.15, b: 0.28, c: 0.26, d: 0.24, e: 0, f: 0.44, p: 0.07 }
+            ],
+            defaults: { iterations: 120000, density: 65, pointSize: 1.4, colorMode: "matrix" }
+          },
+          ifsTree: {
+            label: "IFS Tree",
+            matrices: [
+              { a: 0.05, b: 0, c: 0, d: 0.6, e: 0, f: 0, p: 0.2 },
+              { a: 0.05, b: 0, c: 0, d: -0.5, e: 0, f: 1, p: 0.1 },
+              { a: 0.46, b: -0.32, c: 0.39, d: 0.38, e: 0, f: 0.6, p: 0.4 },
+              { a: 0.47, b: -0.15, c: 0.17, d: 0.42, e: 0, f: 1.1, p: 0.3 }
+            ],
+            defaults: { iterations: 120000, density: 72, pointSize: 1.2, colorMode: "matrix" }
+          },
+          weed: {
+            label: "Weed",
+            matrices: [
+              { a: 0.14, b: 0.01, c: 0, d: 0.51, e: -0.08, f: -1.31, p: 0.1 },
+              { a: 0.43, b: 0.52, c: -0.45, d: 0.5, e: 1.49, f: -0.75, p: 0.35 },
+              { a: 0.45, b: -0.49, c: 0.47, d: 0.47, e: -1.62, f: -0.74, p: 0.35 },
+              { a: 0.49, b: 0, c: 0, d: 0.51, e: 0.02, f: 1.62, p: 0.2 }
+            ],
+            defaults: { iterations: 125000, density: 58, pointSize: 1.1, colorMode: "emerald" }
+          },
+          mapleLeaf: {
+            label: "Maple Leaf",
+            matrices: [
+              { a: 0.14, b: 0.01, c: 0, d: 0.51, e: -0.08, f: -1.31, p: 0.1 },
+              { a: 0.43, b: 0.52, c: -0.45, d: 0.5, e: 1.49, f: -0.75, p: 0.35 },
+              { a: 0.45, b: -0.49, c: 0.47, d: 0.47, e: -1.62, f: -0.74, p: 0.35 },
+              { a: 0.49, b: 0, c: 0, d: 0.51, e: 0.02, f: 1.62, p: 0.2 }
+            ],
+            defaults: { iterations: 125000, density: 64, pointSize: 1.1, colorMode: "matrix" }
+          },
+          spiral: {
+            label: "Spiral",
+            matrices: [
+              { a: 0.787879, b: -0.424242, c: 0.242424, d: 0.859848, e: 1.758647, f: 1.408065, p: 0.9 },
+              { a: -0.121212, b: 0.257576, c: 0.151515, d: 0.05303, e: -6.721654, f: 1.377236, p: 0.05 },
+              { a: 0.181818, b: -0.136364, c: 0.090909, d: 0.181818, e: 6.086107, f: 1.568035, p: 0.05 }
+            ],
+            defaults: { iterations: 150000, density: 55, pointSize: 1.1, colorMode: "matrix" }
+          },
+          ifsPythagorasTree: {
+            label: "IFS Pythagoras Tree",
+            matrices: [
+              { a: 0.6, b: 0, c: 0, d: 0.6, e: 0, f: 0, p: 0.5 },
+              { a: 0.5, b: -0.5, c: 0.5, d: 0.5, e: 0.6, f: 0.6, p: 0.25 },
+              { a: 0.5, b: 0.5, c: -0.5, d: 0.5, e: 0.1, f: 0.6, p: 0.25 }
+            ],
+            defaults: { iterations: 100000, density: 130, pointSize: 1.1, colorMode: "emerald" }
+          },
+          radial1: {
+            label: "Radial 1",
+            equation: "radial",
+            matrices: [
+              { a: 0.6, b: 0.6, t: 0.4, e: 0, f: 0, p: 0.34 },
+              { a: 0.6, b: 0.6, t: 2.4, e: 1.2, f: 0.1, p: 0.33 },
+              { a: 0.6, b: 0.6, t: 4.2, e: 0.2, f: 1.1, p: 0.33 }
+            ],
+            defaults: { iterations: 120000, density: 70, pointSize: 1.1, colorMode: "matrix" }
+          },
+          radial2: {
+            label: "Radial 2",
+            equation: "radial",
+            matrices: [
+              { a: 0.52, b: 0.52, t: 0.8, e: 0.1, f: 0.1, p: 0.34 },
+              { a: 0.52, b: 0.52, t: 2.9, e: 0.9, f: 0.2, p: 0.33 },
+              { a: 0.52, b: 0.52, t: 4.7, e: 0.35, f: 1.0, p: 0.33 }
+            ],
+            defaults: { iterations: 120000, density: 76, pointSize: 1.1, colorMode: "matrix" }
+          },
+          radial3: {
+            label: "Radial 3",
+            equation: "radial",
+            matrices: [
+              { a: 0.5, b: 0.55, t: 1.2, e: 0.2, f: 0.05, p: 0.34 },
+              { a: 0.5, b: 0.55, t: 3.4, e: 1.0, f: 0.25, p: 0.33 },
+              { a: 0.5, b: 0.55, t: 5.5, e: 0.35, f: 1.05, p: 0.33 }
+            ],
+            defaults: { iterations: 120000, density: 80, pointSize: 1.1, colorMode: "matrix" }
+          },
+          sierpinskiTriangleIFS: {
+            label: "Sierpinski Triangle IFS",
+            matrices: [
+              { a: 0.5, b: 0, c: 0, d: 0.5, e: 0, f: 0, p: 0.33 },
+              { a: 0.5, b: 0, c: 0, d: 0.5, e: 0.5, f: 0, p: 0.33 },
+              { a: 0.5, b: 0, c: 0, d: 0.5, e: 0.25, f: 0.433, p: 0.34 }
+            ],
+            defaults: { iterations: 100000, density: 520, pointSize: 1.2, colorMode: "ink" }
+          },
+          coral: {
+            label: "Coral",
+            matrices: [
+              { a: 0.307692, b: 0.531469, c: -0.461538, d: -0.293706, e: 5.401953, f: 8.655175, p: 0.4 },
+              { a: 0.307692, b: -0.076923, c: 0.153846, d: -0.447552, e: -1.295248, f: 4.15299, p: 0.15 },
+              { a: 0.0, b: 0.545455, c: 0.692308, d: -0.195804, e: -4.893637, f: 7.269794, p: 0.45 }
+            ],
+            defaults: { iterations: 145000, density: 44, pointSize: 1, colorMode: "matrix" }
+          },
+          fernDense: {
+            label: "Fern Dense",
+            matrices: [
+              { a: 0, b: 0, c: 0, d: 0.25, e: 0, f: -0.4, p: 0.02 },
+              { a: 0.95, b: 0.005, c: -0.005, d: 0.93, e: -0.002, f: 0.5, p: 0.84 },
+              { a: 0.035, b: -0.2, c: 0.16, d: 0.04, e: -0.09, f: 0.02, p: 0.07 },
+              { a: -0.04, b: 0.2, c: 0.16, d: 0.04, e: 0.083, f: 0.12, p: 0.07 }
+            ],
+            defaults: { iterations: 180000, density: 62, pointSize: 1, colorMode: "emerald" }
+          },
+          shellSpiral: {
+            label: "Shell Spiral",
+            equation: "radial",
+            matrices: [
+              { a: 0.62, b: 0.62, t: 0.2, e: 0.1, f: 0, p: 0.5 },
+              { a: 0.62, b: 0.62, t: 2.3, e: 0.9, f: 0.2, p: 0.25 },
+              { a: 0.62, b: 0.62, t: 4.6, e: 0.35, f: 0.95, p: 0.25 }
+            ],
+            defaults: { iterations: 150000, density: 68, pointSize: 1, colorMode: "matrix" }
+          },
+          cantorDust: {
+            label: "Cantor Dust",
+            matrices: [
+              { a: 1 / 3, b: 0, c: 0, d: 1 / 3, e: 0, f: 0, p: 0.25 },
+              { a: 1 / 3, b: 0, c: 0, d: 1 / 3, e: 2 / 3, f: 0, p: 0.25 },
+              { a: 1 / 3, b: 0, c: 0, d: 1 / 3, e: 0, f: 2 / 3, p: 0.25 },
+              { a: 1 / 3, b: 0, c: 0, d: 1 / 3, e: 2 / 3, f: 2 / 3, p: 0.25 }
+            ],
+            defaults: { iterations: 160000, density: 95, pointSize: 1, colorMode: "ink" }
+          },
+          randomIfsGenerator: {
+            label: "Random IFS Generator",
+            randomGenerator: { seed: 1337, count: 4 },
+            defaults: { iterations: 170000, density: 64, pointSize: 1, colorMode: "matrix" }
+          }
+        },
+        lsystem: {
+          pythagorasTree: {
+            label: "Pythagoras Tree",
+            axiom: "F",
+            rules: { F: "F[+F][-F]F" },
+            defaults: { iterations: 6, distance: 4, angle: 45, lengthScale: 1, lineWidth: 1, lineColor: "#14532d" }
+          },
+          lTree: {
+            label: "L Tree",
+            axiom: "X",
+            rules: { X: "F[+X]F[-X]+X", F: "FF" },
+            defaults: { iterations: 6, distance: 4.2, angle: 20, lengthScale: 1, lineWidth: 1, lineColor: "#166534" }
+          },
+          lTree2: {
+            label: "L Tree 2",
+            axiom: "X",
+            rules: { X: "F-[[X]+X]+F[+FX]-X", F: "FF" },
+            defaults: { iterations: 5, distance: 4.8, angle: 24, lengthScale: 1, lineWidth: 1.1, lineColor: "#15803d" }
+          },
+          seg32Curve: {
+            label: "32 Segment Curve",
+            axiom: "F+F+F+F",
+            rules: { F: "F+F-F-FF+F+F-F" },
+            defaults: { iterations: 3, distance: 3.2, angle: 90, lengthScale: 1, lineWidth: 1, lineColor: "#0f766e" }
+          },
+          boxFractal: {
+            label: "Box Fractal",
+            axiom: "F-F-F-F",
+            rules: { F: "F-F+F+FF-F-F+F" },
+            defaults: { iterations: 3, distance: 4, angle: 90, lengthScale: 1, lineWidth: 1, lineColor: "#1d4ed8" }
+          },
+          dragonCurve: {
+            label: "Dragon Curve",
+            axiom: "FX",
+            rules: { X: "X+YF+", Y: "-FX-Y" },
+            defaults: { iterations: 12, distance: 6, angle: 90, lengthScale: 1, lineWidth: 1, lineColor: "#7c2d12" }
+          },
+          twinDragonCurve: {
+            label: "Twin Dragon Curve",
+            axiom: "FX+FX+",
+            rules: { X: "X+YF+", Y: "-FX-Y" },
+            defaults: { iterations: 10, distance: 5.5, angle: 90, lengthScale: 1, lineWidth: 1, lineColor: "#9a3412" }
+          },
+          threeDragonCurve: {
+            label: "Three Dragon Curve",
+            axiom: "FX+FX+FX",
+            rules: { X: "X+YF+", Y: "-FX-Y" },
+            defaults: { iterations: 9, distance: 5.2, angle: 120, lengthScale: 1, lineWidth: 1, lineColor: "#92400e" }
+          },
+          terDragonCurve: {
+            label: "Ter Dragon Curve",
+            axiom: "F+F+F",
+            rules: { F: "F-F+F" },
+            defaults: { iterations: 8, distance: 4.5, angle: 120, lengthScale: 1, lineWidth: 1, lineColor: "#b45309" }
+          },
+          levyCCurve: {
+            label: "Levy C Curve",
+            axiom: "F",
+            rules: { F: "+F--F+" },
+            defaults: { iterations: 12, distance: 6, angle: 45, lengthScale: 1, lineWidth: 1, lineColor: "#1e3a8a" }
+          },
+          hilbertsCurve: {
+            label: "Hilberts Curve",
+            axiom: "A",
+            rules: { A: "-BF+AFA+FB-", B: "+AF-BFB-FA+" },
+            defaults: { iterations: 6, distance: 6, angle: 90, lengthScale: 1, lineWidth: 1, lineColor: "#0c4a6e" }
+          },
+          hilbertCurve2: {
+            label: "Hilbert Curve II",
+            axiom: "LFL+F+LFL",
+            rules: { L: "-RF+LFL+FR-", R: "+LF-RFR-FL+" },
+            defaults: { iterations: 4, distance: 6, angle: 90, lengthScale: 1, lineWidth: 1, lineColor: "#075985" }
+          },
+          kochSnowflake: {
+            label: "Koch Snowflake",
+            axiom: "F--F--F",
+            rules: { F: "F+F--F+F" },
+            defaults: { iterations: 5, distance: 4, angle: 60, lengthScale: 1, lineWidth: 1, lineColor: "#1d4ed8" }
+          },
+          peanoCurve: {
+            label: "Peano Curve",
+            axiom: "X",
+            rules: { X: "XFYFX+F+YFXFY-F-XFYFX", Y: "YFXFY-F-XFYFX+F+YFXFY" },
+            defaults: { iterations: 3, distance: 4.5, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#0f766e" }
+          },
+          peanoGosperCurve: {
+            label: "Peano Gosper Curve",
+            axiom: "FX",
+            rules: { X: "X+YF++YF-FX--FXFX-YF+", Y: "-FX+YFYF++YF+FX--FX-Y" },
+            defaults: { iterations: 4, distance: 4.2, angle: 60, lengthScale: 1, lineWidth: 0.9, lineColor: "#0f766e" }
+          },
+          quadraticKochIsland: {
+            label: "Quadratic Koch Island",
+            axiom: "F+F+F+F",
+            rules: { F: "F+F-F-FFF+F+F-F" },
+            defaults: { iterations: 3, distance: 3.5, angle: 90, lengthScale: 1, lineWidth: 1, lineColor: "#047857" }
+          },
+          sierpinskiArrowhead: {
+            label: "Sierpinski Arrowhead",
+            axiom: "A",
+            rules: { A: "B-A-B", B: "A+B+A" },
+            defaults: { iterations: 8, distance: 6, angle: 60, lengthScale: 1, lineWidth: 0.9, lineColor: "#166534" }
+          },
+          sierpinskiCurve: {
+            label: "Sierpinski Curve",
+            axiom: "F--XF--F--XF",
+            rules: { X: "XF+F+XF--F--XF+F+X" },
+            defaults: { iterations: 4, distance: 4, angle: 45, lengthScale: 1, lineWidth: 0.9, lineColor: "#14532d" }
+          },
+          siepinskiSieve: {
+            label: "Siepinski Sieve",
+            axiom: "FXF--FF--FF",
+            rules: { X: "--FXF++FXF++FXF--" },
+            defaults: { iterations: 6, distance: 4, angle: 60, lengthScale: 1, lineWidth: 0.9, lineColor: "#1e40af" }
+          },
+          quadraticSnowflake: {
+            label: "Quadratic Snowflake",
+            axiom: "F",
+            rules: { F: "F+F-F-F+F" },
+            defaults: { iterations: 5, distance: 3.8, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#1d4ed8" }
+          },
+          board: {
+            label: "Board",
+            axiom: "F+F+F+F",
+            rules: { F: "FF+F+F+F+FF" },
+            defaults: { iterations: 3, distance: 2.8, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#334155" }
+          },
+          cross: {
+            label: "Cross",
+            axiom: "F+F+F+F",
+            rules: { F: "F+F-F+F+F" },
+            defaults: { iterations: 4, distance: 3, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#374151" }
+          },
+          cross2: {
+            label: "Cross 2",
+            axiom: "F+F+F+F",
+            rules: { F: "F+F-F-F+F" },
+            defaults: { iterations: 4, distance: 3, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#1f2937" }
+          },
+          pentaplexity: {
+            label: "Pentaplexity",
+            axiom: "F++F++F++F++F",
+            rules: { F: "F++F++F+++++F-F++F" },
+            defaults: { iterations: 3, distance: 3.6, angle: 36, lengthScale: 1, lineWidth: 0.9, lineColor: "#7c3aed" }
+          },
+          tiles: {
+            label: "Tiles",
+            axiom: "F+F+F+F",
+            rules: { F: "FF+F-F+F+FF" },
+            defaults: { iterations: 3, distance: 3, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#0369a1" }
+          },
+          rings: {
+            label: "Rings",
+            axiom: "F+F+F+F",
+            rules: { F: "F+F-F+F" },
+            defaults: { iterations: 5, distance: 2.2, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#0f766e" }
+          },
+          krishnaAnklets: {
+            label: "Krishna Anklets",
+            axiom: "X",
+            rules: { X: "XFX--XFX" },
+            defaults: { iterations: 6, distance: 3, angle: 45, lengthScale: 1, lineWidth: 1, lineColor: "#9f1239" }
+          },
+          triangle: {
+            label: "Triangle",
+            axiom: "F-F-F",
+            rules: { F: "F-F+F" },
+            defaults: { iterations: 7, distance: 4.5, angle: 120, lengthScale: 1, lineWidth: 0.9, lineColor: "#0f766e" }
+          },
+          quadraticGosper: {
+            label: "Quadratic Gosper",
+            axiom: "-YF",
+            rules: {
+              X: "XFX-YF-YF+FX+FXYF+YF-XFX-YF+FX+FXYFYF-",
+              Y: "+FXFX-YF-YF+FX+FXYF-YF-XFXYFYF-"
+            },
+            defaults: { iterations: 3, distance: 4, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#0c4a6e" }
+          },
+          crystal: {
+            label: "Crystal",
+            axiom: "F+F+F+F",
+            rules: { F: "FF+F++F+F" },
+            defaults: { iterations: 4, distance: 2.7, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#1d4ed8" }
+          },
+          mooreCurve: {
+            label: "Moore Curve",
+            axiom: "LFL+F+LFL",
+            rules: { L: "-RF+LFL+FR-", R: "+LF-RFR-FL+" },
+            defaults: { iterations: 5, distance: 5.3, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#0369a1" }
+          },
+          fractalBush: {
+            label: "Fractal Bush",
+            axiom: "F",
+            rules: { F: "FF-[-F+F+F]+[+F-F-F]" },
+            defaults: { iterations: 4, distance: 3.8, angle: 22.5, lengthScale: 1, lineWidth: 1, lineColor: "#166534" }
+          },
+          minkowskiSausage: {
+            label: "Minkowski Sausage",
+            axiom: "F",
+            rules: { F: "F+F-F-FF+F+F-F" },
+            defaults: { iterations: 4, distance: 3.1, angle: 90, lengthScale: 1, lineWidth: 0.9, lineColor: "#0f766e" }
+          },
+          cesaroFractal: {
+            label: "Cesaro Fractal",
+            axiom: "F",
+            rules: { F: "F+F--F+F" },
+            defaults: { iterations: 6, distance: 4.2, angle: 85, lengthScale: 1, lineWidth: 0.9, lineColor: "#1d4ed8" }
+          },
+          gosperIsland: {
+            label: "Gosper Island",
+            axiom: "FX",
+            rules: {
+              X: "X+YF++YF-FX--FXFX-YF+",
+              Y: "-FX+YFYF++YF+FX--FX-Y"
+            },
+            defaults: { iterations: 4, distance: 3.9, angle: 60, lengthScale: 1, lineWidth: 0.9, lineColor: "#0c4a6e" }
+          },
+          hexDragon: {
+            label: "Hex Dragon",
+            axiom: "FX",
+            rules: { X: "X+YF++YF-FX--FXFX-YF+", Y: "-FX+YFYF++YF+FX--FX-Y" },
+            defaults: { iterations: 3, distance: 5, angle: 60, lengthScale: 1, lineWidth: 0.9, lineColor: "#7c2d12" }
+          },
+          sierpinskiCarpetPath: {
+            label: "Sierpinski Carpet Path",
+            axiom: "F+F+F+F",
+            rules: { F: "F+F-F-F-F+F+F+F-F" },
+            defaults: { iterations: 3, distance: 2.8, angle: 90, lengthScale: 1, lineWidth: 0.8, lineColor: "#1f2937" }
+          },
+          stochasticPlants: {
+            label: "Stochastic Plants",
+            axiom: "F",
+            rules: { F: "F[+F]F[-F]F" },
+            stochasticRules: {
+              F: [
+                { replacement: "F[+F]F[-F]F", probability: 0.33 },
+                { replacement: "F[+F]F", probability: 0.33 },
+                { replacement: "F[-F]F", probability: 0.34 }
+              ]
+            },
+            defaults: { iterations: 5, distance: 5, angle: 25, lengthScale: 0.93, lineWidth: 1, lineColor: "#166534" }
+          },
+          parametricWeeds: {
+            label: "Parametric Weeds",
+            axiom: "F",
+            rules: { F: "F[+F<][-F<]F<" },
+            defaults: { iterations: 5, distance: 6, angle: 22.5, lengthScale: 0.84, lineWidth: 1, lineColor: "#15803d" }
+          }
+        }
+      };
+
+      const EXTRA_PRESETS = {
+        escapeTime: {
+          mandelbrot: {
+            label: "Mandelbrot Set",
+            type: "mandelbrot",
+            viewport: { minX: -2.4, maxX: 1.0, minY: -1.2, maxY: 1.2 },
+            defaults: { maxIterations: 300, bailout: 4, power: 2, cRe: -0.8, cIm: 0.156 }
+          },
+          juliaClassic: {
+            label: "Julia Set (c=-0.8+0.156i)",
+            type: "julia",
+            viewport: { minX: -1.7, maxX: 1.7, minY: -1.2, maxY: 1.2 },
+            defaults: { maxIterations: 300, bailout: 4, power: 2, cRe: -0.8, cIm: 0.156 }
+          },
+          burningShip: {
+            label: "Burning Ship",
+            type: "burning-ship",
+            viewport: { minX: -2.2, maxX: 1.3, minY: -2.0, maxY: 0.7 },
+            defaults: { maxIterations: 300, bailout: 4, power: 2, cRe: 0, cIm: 0 }
+          },
+          multibrot: {
+            label: "Multibrot (d=3)",
+            type: "mandelbrot",
+            viewport: { minX: -2.2, maxX: 1.2, minY: -1.4, maxY: 1.4 },
+            defaults: { maxIterations: 320, bailout: 4, power: 3, cRe: 0, cIm: 0 }
+          }
+        },
+        newton: {
+          cubic: {
+            label: "Newton Fractal (z^3-1)",
+            type: "newton-cubic",
+            viewport: { minX: -2, maxX: 2, minY: -1.4, maxY: 1.4 },
+            defaults: { maxIterations: 40, epsilon: 0.000001 }
+          },
+          quartic: {
+            label: "Newton Fractal (z^4-1)",
+            type: "newton-quartic",
+            viewport: { minX: -2, maxX: 2, minY: -1.4, maxY: 1.4 },
+            defaults: { maxIterations: 40, epsilon: 0.000001 }
+          }
+        },
+        attractor: {
+          clifford: {
+            label: "Clifford Attractor",
+            type: "clifford",
+            defaults: { iterations: 500000, discard: 1000, a: -1.7, b: 1.8, c: -1.9, d: -0.4 }
+          },
+          peterDeJong: {
+            label: "Peter de Jong Attractor",
+            type: "peter-de-jong",
+            defaults: { iterations: 500000, discard: 1000, a: 2.01, b: -2.53, c: 1.61, d: -0.33 }
+          },
+          henon: {
+            label: "Henon Map",
+            type: "henon",
+            defaults: { iterations: 650000, discard: 1000, a: 1.4, b: 0.3, c: 0, d: 0 }
+          },
+          ikeda: {
+            label: "Ikeda Map",
+            type: "ikeda",
+            defaults: { iterations: 650000, discard: 1000, a: 0.918, b: 0, c: 0, d: 0 }
+          },
+          hopalong: {
+            label: "Hopalong Attractor",
+            type: "hopalong",
+            defaults: { iterations: 650000, discard: 1000, a: 0.7, b: 0.9998, c: 0.2, d: 0 }
+          },
+          lorenz: {
+            label: "Lorenz Attractor (Projected)",
+            type: "lorenz",
+            defaults: { iterations: 650000, discard: 1500, a: 10, b: 28, c: 2.6666667, d: 0.005 }
+          }
+        },
+        inversion: {
+          apollonian: {
+            label: "Apollonian Gasket",
+            type: "apollonian-gasket",
+            defaults: { depth: 8, minRadius: 0.003 }
+          },
+          kleinianClassic: {
+            label: "Kleinian Group (Schottky Classic)",
+            type: "kleinian-schottky",
+            defaults: {
+              style: "denser-dust",
+              depth: 8,
+              minRadius: 0.003,
+              iterations: 520000,
+              discard: 180,
+              viewport: { minX: -1.4, maxX: 1.4, minY: -1.05, maxY: 1.05 },
+              circles: [
+                { x: -0.9, y: 0, r: 0.33 },
+                { x: -0.22, y: 0, r: 0.23 },
+                { x: 0.22, y: 0, r: 0.23 },
+                { x: 0.9, y: 0, r: 0.33 }
+              ],
+              seed: { x: 0.02, y: 0.01 }
+            }
+          },
+          kleinianNecklace: {
+            label: "Kleinian Group (Schottky Necklace)",
+            type: "kleinian-schottky",
+            defaults: {
+              style: "chain-necklace",
+              depth: 8,
+              minRadius: 0.003,
+              iterations: 540000,
+              discard: 120,
+              viewport: { minX: -2.0, maxX: 2.0, minY: -1.25, maxY: 1.25 },
+              circles: [
+                { x: -1.15, y: 0.04, r: 0.5 },
+                { x: -0.18, y: 0, r: 0.2 },
+                { x: 0.58, y: 0.4, r: 0.25 },
+                { x: 0.58, y: -0.4, r: 0.25 }
+              ],
+              seed: { x: 0.06, y: -0.04 }
+            }
+          },
+          kleinianSymmetric: {
+            label: "Kleinian Group (Symmetric Limit Set)",
+            type: "kleinian-schottky",
+            defaults: {
+              style: "symmetric-limit-set",
+              depth: 8,
+              minRadius: 0.003,
+              iterations: 560000,
+              discard: 140,
+              viewport: { minX: -1.6, maxX: 1.6, minY: -1.2, maxY: 1.2 },
+              circles: [
+                { x: -0.86, y: 0.44, r: 0.34 },
+                { x: -0.86, y: -0.44, r: 0.34 },
+                { x: 0.86, y: 0.44, r: 0.34 },
+                { x: 0.86, y: -0.44, r: 0.34 }
+              ],
+              seed: { x: 0.01, y: 0.03 }
+            }
+          }
+        }
+      };
+
+      const ui = {
+        fractalType: document.getElementById("fractalType"),
+        preset: document.getElementById("preset"),
+        ifsFields: document.getElementById("ifsFields"),
+        lsysFields: document.getElementById("lsysFields"),
+        escapeFields: document.getElementById("escapeFields"),
+        newtonFields: document.getElementById("newtonFields"),
+        attractorFields: document.getElementById("attractorFields"),
+        inversionFields: document.getElementById("inversionFields"),
+        ifsIterations: document.getElementById("ifsIterations"),
+        ifsDensity: document.getElementById("ifsDensity"),
+        ifsPointSize: document.getElementById("ifsPointSize"),
+        ifsColor: document.getElementById("ifsColor"),
+        lsIterations: document.getElementById("lsIterations"),
+        lsDistance: document.getElementById("lsDistance"),
+        lsAngle: document.getElementById("lsAngle"),
+        lsScale: document.getElementById("lsScale"),
+        lsLineWidth: document.getElementById("lsLineWidth"),
+        lsColor: document.getElementById("lsColor"),
+        lsAxiom: document.getElementById("lsAxiom"),
+        lsRules: document.getElementById("lsRules"),
+        etMaxIterations: document.getElementById("etMaxIterations"),
+        etBailout: document.getElementById("etBailout"),
+        etPower: document.getElementById("etPower"),
+        etJuliaRe: document.getElementById("etJuliaRe"),
+        etJuliaIm: document.getElementById("etJuliaIm"),
+        ntMaxIterations: document.getElementById("ntMaxIterations"),
+        ntEpsilon: document.getElementById("ntEpsilon"),
+        atIterations: document.getElementById("atIterations"),
+        atDiscard: document.getElementById("atDiscard"),
+        atA: document.getElementById("atA"),
+        atB: document.getElementById("atB"),
+        atC: document.getElementById("atC"),
+        atD: document.getElementById("atD"),
+        ivDepth: document.getElementById("ivDepth"),
+        ivMinRadius: document.getElementById("ivMinRadius"),
+        generateBtn: document.getElementById("generateBtn"),
+        resetBtn: document.getElementById("resetBtn"),
+        viewerTitle: document.getElementById("viewerTitle"),
+        meta: document.getElementById("meta"),
+        canvas: document.getElementById("canvas")
+      };
+
+      const ctx = ui.canvas.getContext("2d");
+
+      function getPresetCollection(type) {
+        if (type === "ifs" || type === "lsystem") {
+          return PRESETS[type];
+        }
+        return EXTRA_PRESETS[type];
+      }
+
+      function toRuleText(rules) {
+        return Object.entries(rules)
+          .map(([key, value]) => `${key}=${value}`)
+          .join("\n");
+      }
+
+      function parseRules(text) {
+        const entries = text
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .map((line) => {
+            const idx = line.indexOf("=");
+            if (idx <= 0) {
+              throw new Error(`Invalid rule line: \"${line}\"`);
+            }
+            return [line.slice(0, idx).trim(), line.slice(idx + 1).trim()];
+          });
+
+        return Object.fromEntries(entries);
+      }
+
+      function seededRandom(seed) {
+        let state = seed >>> 0;
+        return () => {
+          state = (1664525 * state + 1013904223) >>> 0;
+          return state / 0x100000000;
+        };
+      }
+
+      function buildRandomIfsMatrices(config = {}) {
+        const count = Math.max(3, Math.min(6, Math.round(config.count ?? 4)));
+        const random = seededRandom(config.seed ?? 1337);
+        const matrices = [];
+        const p = 1 / count;
+        for (let i = 0; i < count; i += 1) {
+          matrices.push({
+            a: random() * 0.62 - 0.31,
+            b: random() * 0.62 - 0.31,
+            c: random() * 0.62 - 0.31,
+            d: random() * 0.62 - 0.31,
+            e: random() * 2 - 1,
+            f: random() * 2 - 1,
+            p
+          });
+        }
+        return matrices;
+      }
+
+      function clearCanvas() {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, ui.canvas.width, ui.canvas.height);
+      }
+
+      function setPixel(imageData, x, y, r, g, b, a = 255) {
+        if (x < 0 || y < 0 || x >= imageData.width || y >= imageData.height) {
+          return;
+        }
+        const idx = (y * imageData.width + x) * 4;
+        imageData.data[idx] = r;
+        imageData.data[idx + 1] = g;
+        imageData.data[idx + 2] = b;
+        imageData.data[idx + 3] = a;
+      }
+
+      function gradientColor(t) {
+        const stops = [
+          [9, 10, 38],
+          [45, 78, 140],
+          [98, 187, 255],
+          [255, 236, 130],
+          [255, 140, 66]
+        ];
+
+        const clamped = Math.max(0, Math.min(1, t));
+        const scaled = clamped * (stops.length - 1);
+        const i = Math.floor(scaled);
+        const f = scaled - i;
+        const c1 = stops[i];
+        const c2 = stops[Math.min(stops.length - 1, i + 1)];
+        return [
+          Math.round(c1[0] + (c2[0] - c1[0]) * f),
+          Math.round(c1[1] + (c2[1] - c1[1]) * f),
+          Math.round(c1[2] + (c2[2] - c1[2]) * f)
+        ];
+      }
+
+      function mapPixelToComplex(x, y, viewport) {
+        const re = viewport.minX + (x / (ui.canvas.width - 1)) * (viewport.maxX - viewport.minX);
+        const im = viewport.maxY - (y / (ui.canvas.height - 1)) * (viewport.maxY - viewport.minY);
+        return [re, im];
+      }
+
+      function drawEscapeTime(preset, params) {
+        const imageData = ctx.createImageData(ui.canvas.width, ui.canvas.height);
+        const maxIterations = params.maxIterations;
+        const bailout = params.bailout;
+        const power = params.power;
+
+        for (let y = 0; y < ui.canvas.height; y += 1) {
+          for (let x = 0; x < ui.canvas.width; x += 1) {
+            const [u, v] = mapPixelToComplex(x, y, preset.viewport);
+            let zr;
+            let zi;
+            let cr;
+            let ci;
+
+            if (preset.type === "julia") {
+              zr = u;
+              zi = v;
+              cr = params.cRe;
+              ci = params.cIm;
+            } else {
+              zr = 0;
+              zi = 0;
+              cr = u;
+              ci = v;
+            }
+
+            let escaped = false;
+            let iter = 0;
+            for (; iter < maxIterations; iter += 1) {
+              let ar = zr;
+              let ai = zi;
+              if (preset.type === "burning-ship") {
+                ar = Math.abs(ar);
+                ai = Math.abs(ai);
+              }
+
+              let nextR;
+              let nextI;
+              if (power === 2) {
+                nextR = ar * ar - ai * ai + cr;
+                nextI = 2 * ar * ai + ci;
+              } else {
+                const mag = Math.sqrt(ar * ar + ai * ai);
+                const angle = Math.atan2(ai, ar);
+                const magPow = mag ** power;
+                nextR = magPow * Math.cos(power * angle) + cr;
+                nextI = magPow * Math.sin(power * angle) + ci;
+              }
+
+              zr = nextR;
+              zi = nextI;
+
+              if (zr * zr + zi * zi > bailout * bailout) {
+                escaped = true;
+                break;
+              }
+            }
+
+            if (!escaped) {
+              setPixel(imageData, x, y, 6, 7, 15, 255);
+              continue;
+            }
+
+            const [r, g, b] = gradientColor(iter / maxIterations);
+            setPixel(imageData, x, y, r, g, b, 255);
+          }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+        ui.meta.textContent = `Rendered ${ui.canvas.width * ui.canvas.height} pixels`;
+      }
+
+      function closestRootIndex(zr, zi, roots) {
+        let idx = 0;
+        let best = Number.POSITIVE_INFINITY;
+        for (let i = 0; i < roots.length; i += 1) {
+          const dr = zr - roots[i][0];
+          const di = zi - roots[i][1];
+          const d2 = dr * dr + di * di;
+          if (d2 < best) {
+            best = d2;
+            idx = i;
+          }
+        }
+        return idx;
+      }
+
+      function drawNewton(preset, params) {
+        const imageData = ctx.createImageData(ui.canvas.width, ui.canvas.height);
+        const roots = preset.type === "newton-cubic"
+          ? [[1, 0], [-0.5, Math.sqrt(3) / 2], [-0.5, -Math.sqrt(3) / 2]]
+          : [[1, 0], [0, 1], [-1, 0], [0, -1]];
+
+        const palette = [[239, 68, 68], [59, 130, 246], [34, 197, 94], [234, 179, 8]];
+
+        for (let y = 0; y < ui.canvas.height; y += 1) {
+          for (let x = 0; x < ui.canvas.width; x += 1) {
+            let [zr, zi] = mapPixelToComplex(x, y, preset.viewport);
+            let iter = 0;
+
+            for (; iter < params.maxIterations; iter += 1) {
+              let fr;
+              let fi;
+              let dfr;
+              let dfi;
+
+              if (preset.type === "newton-cubic") {
+                const z2r = zr * zr - zi * zi;
+                const z2i = 2 * zr * zi;
+                const z3r = z2r * zr - z2i * zi;
+                const z3i = z2r * zi + z2i * zr;
+                fr = z3r - 1;
+                fi = z3i;
+                dfr = 3 * z2r;
+                dfi = 3 * z2i;
+              } else {
+                const z2r = zr * zr - zi * zi;
+                const z2i = 2 * zr * zi;
+                const z3r = z2r * zr - z2i * zi;
+                const z3i = z2r * zi + z2i * zr;
+                const z4r = z2r * z2r - z2i * z2i;
+                const z4i = 2 * z2r * z2i;
+                fr = z4r - 1;
+                fi = z4i;
+                dfr = 4 * z3r;
+                dfi = 4 * z3i;
+              }
+
+              const denom = dfr * dfr + dfi * dfi;
+              if (denom < 1e-14) {
+                break;
+              }
+              const qr = (fr * dfr + fi * dfi) / denom;
+              const qi = (fi * dfr - fr * dfi) / denom;
+              zr -= qr;
+              zi -= qi;
+              if (qr * qr + qi * qi < params.epsilon * params.epsilon) {
+                break;
+              }
+            }
+
+            const rootIndex = closestRootIndex(zr, zi, roots);
+            const base = palette[rootIndex % palette.length];
+            const shade = 0.35 + 0.65 * (1 - iter / params.maxIterations);
+            setPixel(
+              imageData,
+              x,
+              y,
+              Math.round(base[0] * shade),
+              Math.round(base[1] * shade),
+              Math.round(base[2] * shade),
+              255
+            );
+          }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+        ui.meta.textContent = `Rendered ${ui.canvas.width * ui.canvas.height} pixels`;
+      }
+
+      function iterateAttractor(type, state, p) {
+        const x = state.x;
+        const y = state.y;
+        const z = state.z ?? 0;
+        if (type === "clifford") {
+          return {
+            x: Math.sin(p.a * y) + p.c * Math.cos(p.a * x),
+            y: Math.sin(p.b * x) + p.d * Math.cos(p.b * y),
+            z
+          };
+        }
+        if (type === "peter-de-jong") {
+          return {
+            x: Math.sin(p.a * y) - Math.cos(p.b * x),
+            y: Math.sin(p.c * x) - Math.cos(p.d * y),
+            z
+          };
+        }
+        if (type === "henon") {
+          return {
+            x: 1 - p.a * x * x + y,
+            y: p.b * x,
+            z
+          };
+        }
+        if (type === "ikeda") {
+          const t = 0.4 - 6 / (1 + x * x + y * y);
+          return {
+            x: 1 + p.a * (x * Math.cos(t) - y * Math.sin(t)),
+            y: p.a * (x * Math.sin(t) + y * Math.cos(t)),
+            z
+          };
+        }
+        if (type === "hopalong") {
+          const sign = x < 0 ? -1 : 1;
+          return {
+            x: y - sign * Math.sqrt(Math.abs(p.b * x - p.c)),
+            y: p.a - x,
+            z
+          };
+        }
+        if (type === "lorenz") {
+          const dt = p.d ?? 0.005;
+          const nextX = x + p.a * (y - x) * dt;
+          const nextY = y + (x * (p.b - z) - y) * dt;
+          const nextZ = z + (x * y - p.c * z) * dt;
+          return {
+            x: nextX,
+            y: nextY,
+            z: nextZ
+          };
+        }
+        return {
+          x,
+          y,
+          z
+        };
+      }
+
+      function projectAttractor(type, state) {
+        if (type === "lorenz") {
+          return { px: state.x, py: state.z };
+        }
+        return { px: state.x, py: state.y };
+      }
+
+      function drawAttractor(preset, params) {
+        const width = ui.canvas.width;
+        const height = ui.canvas.height;
+        let state = {
+          x: preset.type === "lorenz" ? 0.1 : 0,
+          y: 0,
+          z: 0
+        };
+        let minX = Number.POSITIVE_INFINITY;
+        let minY = Number.POSITIVE_INFINITY;
+        let maxX = Number.NEGATIVE_INFINITY;
+        let maxY = Number.NEGATIVE_INFINITY;
+
+        for (let i = 0; i < params.iterations; i += 1) {
+          state = iterateAttractor(preset.type, state, params);
+          if (i < params.discard) {
+            continue;
+          }
+          const { px: x, py: y } = projectAttractor(preset.type, state);
+          minX = Math.min(minX, x);
+          minY = Math.min(minY, y);
+          maxX = Math.max(maxX, x);
+          maxY = Math.max(maxY, y);
+        }
+
+        const hist = new Uint32Array(width * height);
+        state = {
+          x: preset.type === "lorenz" ? 0.1 : 0,
+          y: 0,
+          z: 0
+        };
+        const sx = (width - 1) / Math.max(1e-9, maxX - minX);
+        const sy = (height - 1) / Math.max(1e-9, maxY - minY);
+        let maxCount = 0;
+
+        for (let i = 0; i < params.iterations; i += 1) {
+          state = iterateAttractor(preset.type, state, params);
+          if (i < params.discard) {
+            continue;
+          }
+          const { px: x, py: y } = projectAttractor(preset.type, state);
+
+          const px = Math.floor((x - minX) * sx);
+          const py = Math.floor((maxY - y) * sy);
+          if (px < 0 || py < 0 || px >= width || py >= height) {
+            continue;
+          }
+
+          const idx = py * width + px;
+          hist[idx] += 1;
+          if (hist[idx] > maxCount) {
+            maxCount = hist[idx];
+          }
+        }
+
+        const imageData = ctx.createImageData(width, height);
+        for (let py = 0; py < height; py += 1) {
+          for (let px = 0; px < width; px += 1) {
+            const count = hist[py * width + px];
+            if (!count) {
+              continue;
+            }
+            const [r, g, b] = gradientColor(Math.log(count + 1) / Math.log(maxCount + 1));
+            setPixel(imageData, px, py, r, g, b, 255);
+          }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+        ui.meta.textContent = `Rendered ${(params.iterations - params.discard).toLocaleString()} orbit points`;
+      }
+
+      function drawPixelLine(x0, y0, x1, y1, color) {
+        let x = x0;
+        let y = y0;
+        const dx = Math.abs(x1 - x0);
+        const sx = x0 < x1 ? 1 : -1;
+        const dy = -Math.abs(y1 - y0);
+        const sy = y0 < y1 ? 1 : -1;
+        let err = dx + dy;
+
+        while (true) {
+          ctx.fillStyle = color;
+          ctx.fillRect(x, y, 1, 1);
+          if (x === x1 && y === y1) {
+            break;
+          }
+          const e2 = 2 * err;
+          if (e2 >= dy) {
+            err += dy;
+            x += sx;
+          }
+          if (e2 <= dx) {
+            err += dx;
+            y += sy;
+          }
+        }
+      }
+
+      function drawCircleOutline(cx, cy, r, color) {
+        const samples = Math.max(24, Math.round(2 * Math.PI * r));
+        for (let i = 0; i < samples; i += 1) {
+          const t1 = (i / samples) * Math.PI * 2;
+          const t2 = ((i + 1) / samples) * Math.PI * 2;
+          const x1 = Math.round(cx + r * Math.cos(t1));
+          const y1 = Math.round(cy + r * Math.sin(t1));
+          const x2 = Math.round(cx + r * Math.cos(t2));
+          const y2 = Math.round(cy + r * Math.sin(t2));
+          drawPixelLine(x1, y1, x2, y2, color);
+        }
+      }
+
+      function drawInversion(preset, params) {
+        function drawApollonianInversion() {
+          const circles = [];
+          const seen = new Set();
+
+          function key(c) {
+            return `${Math.round(c.k * 1e6)}:${Math.round(c.x * 1e6)}:${Math.round(c.y * 1e6)}`;
+          }
+
+          function addCircle(c) {
+            const k = key(c);
+            if (seen.has(k)) {
+              return false;
+            }
+            seen.add(k);
+            circles.push(c);
+            return true;
+          }
+
+          const c1 = { k: -1, x: 0, y: 0 };
+          const c2 = { k: 2, x: -0.5, y: 0 };
+          const c3 = { k: 2, x: 0.5, y: 0 };
+          const c4 = { k: 3, x: 0, y: 2 / 3 };
+          [c1, c2, c3, c4].forEach(addCircle);
+
+          function recurse(a, b, c, d, depth) {
+            if (depth <= 0) {
+              return;
+            }
+            const combos = [[b, c, d, a], [a, c, d, b], [a, b, d, c], [a, b, c, d]];
+
+            for (const [u, v, w, old] of combos) {
+              const k = 2 * (u.k + v.k + w.k) - old.k;
+              if (Math.abs(k) < 1e-9) {
+                continue;
+              }
+              const x = (2 * (u.k * u.x + v.k * v.x + w.k * w.x) - old.k * old.x) / k;
+              const y = (2 * (u.k * u.y + v.k * v.y + w.k * w.y) - old.k * old.y) / k;
+              const r = Math.abs(1 / k);
+              if (r < params.minRadius) {
+                continue;
+              }
+              const circle = { k, x, y };
+              if (!addCircle(circle)) {
+                continue;
+              }
+              recurse(u, v, w, circle, depth - 1);
+            }
+          }
+
+          recurse(c1, c2, c3, c4, params.depth);
+
+          const margin = 18;
+          const scale = Math.min((ui.canvas.width - margin * 2) / 2, (ui.canvas.height - margin * 2) / 2);
+          const centerX = Math.round(ui.canvas.width / 2);
+          const centerY = Math.round(ui.canvas.height / 2);
+
+          for (const c of circles) {
+            const r = Math.abs(1 / c.k) * scale;
+            const px = Math.round(centerX + c.x * scale);
+            const py = Math.round(centerY - c.y * scale);
+            drawCircleOutline(px, py, r, "#111827");
+          }
+
+          ui.meta.textContent = `Rendered ${circles.length.toLocaleString()} circles`;
+        }
+
+        function invertPoint(point, circle) {
+          const dx = point.x - circle.x;
+          const dy = point.y - circle.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < 1e-14) {
+            return null;
+          }
+          const scale = (circle.r * circle.r) / d2;
+          return {
+            x: circle.x + dx * scale,
+            y: circle.y + dy * scale
+          };
+        }
+
+        function composeInversions(point, first, second) {
+          const p1 = invertPoint(point, first);
+          if (!p1) {
+            return null;
+          }
+          return invertPoint(p1, second);
+        }
+
+        function drawKleinianInversion() {
+          const defaults = preset.defaults;
+          const circles = defaults.circles;
+          const iterations = defaults.iterations;
+          const discard = defaults.discard;
+          const points = [];
+          let minX = Number.POSITIVE_INFINITY;
+          let minY = Number.POSITIVE_INFINITY;
+          let maxX = Number.NEGATIVE_INFINITY;
+          let maxY = Number.NEGATIVE_INFINITY;
+
+          const generators = [
+            (point) => composeInversions(point, circles[0], circles[1]),
+            (point) => composeInversions(point, circles[1], circles[0]),
+            (point) => composeInversions(point, circles[2], circles[3]),
+            (point) => composeInversions(point, circles[3], circles[2])
+          ];
+          const inverseGenerator = [1, 0, 3, 2];
+
+          let point = { ...defaults.seed };
+          let previousGenerator = -1;
+          let maxCount = 0;
+          let plotted = 0;
+
+          for (let i = 0; i < iterations + discard; i += 1) {
+            let generatorIndex = Math.floor(Math.random() * generators.length);
+            if (previousGenerator >= 0) {
+              while (generatorIndex === inverseGenerator[previousGenerator]) {
+                generatorIndex = Math.floor(Math.random() * generators.length);
+              }
+            }
+
+            const next = generators[generatorIndex](point);
+            previousGenerator = generatorIndex;
+
+            if (!next || !Number.isFinite(next.x) || !Number.isFinite(next.y)) {
+              point = { x: 0.02, y: 0.02 };
+              previousGenerator = -1;
+              continue;
+            }
+
+            point = next;
+
+            if (i < discard) {
+              continue;
+            }
+            points.push([point.x, point.y]);
+            minX = Math.min(minX, point.x);
+            minY = Math.min(minY, point.y);
+            maxX = Math.max(maxX, point.x);
+            maxY = Math.max(maxY, point.y);
+          }
+
+          if (points.length === 0) {
+            ui.meta.textContent = "Rendered 0 points";
+            return;
+          }
+
+          const hist = new Uint32Array(ui.canvas.width * ui.canvas.height);
+          const pad = 0.03;
+          const spanX = Math.max(1e-9, maxX - minX);
+          const spanY = Math.max(1e-9, maxY - minY);
+          const loX = minX - spanX * pad;
+          const hiX = maxX + spanX * pad;
+          const loY = minY - spanY * pad;
+          const hiY = maxY + spanY * pad;
+
+          for (let i = 0; i < points.length; i += 1) {
+            const x = points[i][0];
+            const y = points[i][1];
+            const px = Math.floor(((x - loX) / (hiX - loX)) * (ui.canvas.width - 1));
+            const py = Math.floor(((hiY - y) / (hiY - loY)) * (ui.canvas.height - 1));
+            if (px < 0 || py < 0 || px >= ui.canvas.width || py >= ui.canvas.height) {
+              continue;
+            }
+            const idx = py * ui.canvas.width + px;
+            hist[idx] += 1;
+            plotted += 1;
+            if (hist[idx] > maxCount) {
+              maxCount = hist[idx];
+            }
+          }
+
+          const imageData = ctx.createImageData(ui.canvas.width, ui.canvas.height);
+          for (let py = 0; py < ui.canvas.height; py += 1) {
+            for (let px = 0; px < ui.canvas.width; px += 1) {
+              const value = hist[py * ui.canvas.width + px];
+              if (value === 0) {
+                continue;
+              }
+              const [r, g, b] = gradientColor(Math.log(value + 1) / Math.log(maxCount + 1));
+              setPixel(imageData, px, py, r, g, b, 255);
+            }
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+          ui.meta.textContent = `Rendered ${plotted.toLocaleString()} points`;
+        }
+
+        if (preset.type === "apollonian-gasket") {
+          drawApollonianInversion();
+          return;
+        }
+        if (preset.type === "kleinian-schottky") {
+          drawKleinianInversion();
+          return;
+        }
+        throw new Error(`Unsupported inversion preset type: ${preset.type}`);
+      }
+
+      function getTransform(bounds, padding = 28) {
+        const [maxX, maxY, minX, minY] = bounds;
+        const width = Math.max(1, maxX - minX);
+        const height = Math.max(1, maxY - minY);
+        const sx = (ui.canvas.width - padding * 2) / width;
+        const sy = (ui.canvas.height - padding * 2) / height;
+        const scale = Math.min(sx, sy);
+        const offsetX = (ui.canvas.width - width * scale) / 2;
+        const offsetY = (ui.canvas.height - height * scale) / 2;
+
+        return (x, y) => [
+          (x - minX) * scale + offsetX,
+          ui.canvas.height - ((y - minY) * scale + offsetY)
+        ];
+      }
+
+      function populatePresetOptions() {
+        const type = ui.fractalType.value;
+        const presets = getPresetCollection(type);
+        const keys = Object.keys(presets);
+
+        ui.preset.innerHTML = "";
+        keys.forEach((key) => {
+          const option = document.createElement("option");
+          option.value = key;
+          option.textContent = presets[key].label;
+          ui.preset.append(option);
+        });
+      }
+
+      function applyPresetToForm() {
+        const type = ui.fractalType.value;
+        const preset = getPresetCollection(type)[ui.preset.value];
+
+        if (type === "ifs") {
+          ui.ifsIterations.value = String(preset.defaults.iterations);
+          ui.ifsDensity.value = String(preset.defaults.density);
+          ui.ifsPointSize.value = String(preset.defaults.pointSize);
+          ui.ifsColor.value = preset.defaults.colorMode;
+        } else if (type === "lsystem") {
+          ui.lsIterations.value = String(preset.defaults.iterations);
+          ui.lsDistance.value = String(preset.defaults.distance);
+          ui.lsAngle.value = String(preset.defaults.angle);
+          ui.lsScale.value = String(preset.defaults.lengthScale);
+          ui.lsLineWidth.value = String(preset.defaults.lineWidth);
+          ui.lsColor.value = preset.defaults.lineColor;
+          ui.lsAxiom.value = preset.axiom;
+          ui.lsRules.value = toRuleText(preset.rules);
+        } else if (type === "escapeTime") {
+          ui.etMaxIterations.value = String(preset.defaults.maxIterations);
+          ui.etBailout.value = String(preset.defaults.bailout);
+          ui.etPower.value = String(preset.defaults.power);
+          ui.etJuliaRe.value = String(preset.defaults.cRe);
+          ui.etJuliaIm.value = String(preset.defaults.cIm);
+        } else if (type === "newton") {
+          ui.ntMaxIterations.value = String(preset.defaults.maxIterations);
+          ui.ntEpsilon.value = String(preset.defaults.epsilon);
+        } else if (type === "attractor") {
+          ui.atIterations.value = String(preset.defaults.iterations);
+          ui.atDiscard.value = String(preset.defaults.discard);
+          ui.atA.value = String(preset.defaults.a);
+          ui.atB.value = String(preset.defaults.b);
+          ui.atC.value = String(preset.defaults.c);
+          ui.atD.value = String(preset.defaults.d);
+        } else if (type === "inversion") {
+          ui.ivDepth.value = String(preset.defaults.depth ?? 8);
+          ui.ivMinRadius.value = String(preset.defaults.minRadius ?? 0.003);
+        }
+      }
+
+      function syncVisibleFields() {
+        const type = ui.fractalType.value;
+        ui.ifsFields.hidden = type !== "ifs";
+        ui.lsysFields.hidden = type !== "lsystem";
+        ui.escapeFields.hidden = type !== "escapeTime";
+        ui.newtonFields.hidden = type !== "newton";
+        ui.attractorFields.hidden = type !== "attractor";
+        ui.inversionFields.hidden = type !== "inversion";
+      }
+
+      function drawIFS(fractal, params) {
+        const mapPoint = getTransform(fractal.bounds);
+
+        for (let i = 0; i < fractal.points.length; i += 1) {
+          const [x, y, { matrixNum }] = fractal.points[i];
+          const [px, py] = mapPoint(x, y);
+
+          if (params.colorMode === "matrix") {
+            const hue = 120 + matrixNum * 20;
+            ctx.fillStyle = `hsl(${hue}, 76%, 42%)`;
+          } else if (params.colorMode === "emerald") {
+            ctx.fillStyle = "#059669";
+          } else {
+            ctx.fillStyle = "#111827";
+          }
+
+          ctx.fillRect(px, py, params.pointSize, params.pointSize);
+        }
+
+        ui.meta.textContent = `Rendered ${fractal.points.length.toLocaleString()} points`;
+      }
+
+      function drawLSystem(fractal, params) {
+        const mapPoint = getTransform(fractal.bounds, 36);
+
+        ctx.lineWidth = params.lineWidth;
+        ctx.strokeStyle = params.lineColor;
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.beginPath();
+
+        for (let i = 0; i < fractal.points.length; i += 1) {
+          const [x, y, meta] = fractal.points[i];
+          const [px, py] = mapPoint(x, y);
+          if (meta.paintable) {
+            ctx.lineTo(px, py);
+          } else {
+            ctx.moveTo(px, py);
+          }
+        }
+
+        ctx.stroke();
+        ui.meta.textContent = `Rendered ${fractal.points.length.toLocaleString()} points`;
+      }
+
+      function generate() {
+        clearCanvas();
+        ui.meta.style.color = "#425466";
+
+        try {
+          const type = ui.fractalType.value;
+          const preset = getPresetCollection(type)[ui.preset.value];
+
+          if (type === "ifs") {
+            const params = {
+              iterations: Number(ui.ifsIterations.value),
+              density: Number(ui.ifsDensity.value),
+              pointSize: Number(ui.ifsPointSize.value),
+              colorMode: ui.ifsColor.value
+            };
+
+            const matrices = preset.randomGenerator ? buildRandomIfsMatrices(preset.randomGenerator) : preset.matrices;
+            const fractal = new IFS({
+              matrices,
+              iterations: params.iterations,
+              density: params.density,
+              equation: preset.equation === "radial" ? radial : undefined
+            });
+
+            fractal.run();
+            ui.viewerTitle.textContent = `IFS - ${preset.label}`;
+            drawIFS(fractal, params);
+          } else if (type === "lsystem") {
+            const params = {
+              iterations: Number(ui.lsIterations.value),
+              distance: Number(ui.lsDistance.value),
+              angle: Number(ui.lsAngle.value),
+              lengthScale: Number(ui.lsScale.value),
+              lineWidth: Number(ui.lsLineWidth.value),
+              lineColor: ui.lsColor.value,
+              axiom: ui.lsAxiom.value.trim(),
+              rules: parseRules(ui.lsRules.value)
+            };
+
+            const fractal = new LSystem({
+              axiom: params.axiom,
+              rules: params.rules,
+              iterations: params.iterations,
+              distance: params.distance,
+              angle: params.angle,
+              lengthScale: params.lengthScale
+            });
+
+            fractal.run();
+            ui.viewerTitle.textContent = `L-system - ${preset.label}`;
+            drawLSystem(fractal, params);
+          } else if (type === "escapeTime") {
+            const params = {
+              maxIterations: Number(ui.etMaxIterations.value),
+              bailout: Number(ui.etBailout.value),
+              power: Number(ui.etPower.value),
+              cRe: Number(ui.etJuliaRe.value),
+              cIm: Number(ui.etJuliaIm.value)
+            };
+            ui.viewerTitle.textContent = `Escape-time - ${preset.label}`;
+            drawEscapeTime(preset, params);
+          } else if (type === "newton") {
+            const params = {
+              maxIterations: Number(ui.ntMaxIterations.value),
+              epsilon: Number(ui.ntEpsilon.value)
+            };
+            ui.viewerTitle.textContent = `Newton - ${preset.label}`;
+            drawNewton(preset, params);
+          } else if (type === "attractor") {
+            const params = {
+              iterations: Number(ui.atIterations.value),
+              discard: Number(ui.atDiscard.value),
+              a: Number(ui.atA.value),
+              b: Number(ui.atB.value),
+              c: Number(ui.atC.value),
+              d: Number(ui.atD.value)
+            };
+            ui.viewerTitle.textContent = `Attractor - ${preset.label}`;
+            drawAttractor(preset, params);
+          } else if (type === "inversion") {
+            const params = {
+              depth: Number(ui.ivDepth.value),
+              minRadius: Number(ui.ivMinRadius.value)
+            };
+            ui.viewerTitle.textContent = `Inversion - ${preset.label}`;
+            drawInversion(preset, params);
+          }
+        } catch (error) {
+          ui.meta.style.color = "#9f1239";
+          ui.meta.textContent = `Render failed: ${error instanceof Error ? error.message : String(error)}`;
+          console.error(error);
+        }
+      }
+
+      ui.fractalType.addEventListener("change", () => {
+        syncVisibleFields();
+        populatePresetOptions();
+        applyPresetToForm();
+        generate();
+      });
+
+      ui.preset.addEventListener("change", () => {
+        applyPresetToForm();
+        generate();
+      });
+
+      ui.generateBtn.addEventListener("click", generate);
+      ui.resetBtn.addEventListener("click", () => {
+        applyPresetToForm();
+        generate();
+      });
+
+      syncVisibleFields();
+      populatePresetOptions();
+      applyPresetToForm();
+      generate();
+    </script>
+  </body>
+</html>
