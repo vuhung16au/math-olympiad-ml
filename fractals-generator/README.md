@@ -92,3 +92,8 @@ Library outputs:
 - `docs/techstack.md`
 - `docs/use-cases.md`
 - `docs/fractals.md`
+
+## License 
+
+- This project reuses the exiting `fractals` package. However, it will be migrated to a new package with different architecture
+- See `LICENSE.md` the the license of the Next.js renderer. 
