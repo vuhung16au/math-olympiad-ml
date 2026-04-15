@@ -19,7 +19,7 @@ all: pdf
 pdf: $(PDFFILE)
 
 $(PDFFILE): $(TEXFILE).tex
-	docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
+	-docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
 		pdflatex -interaction=nonstopmode $(TEXFILE).tex
 	docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
 		pdflatex -interaction=nonstopmode $(TEXFILE).tex

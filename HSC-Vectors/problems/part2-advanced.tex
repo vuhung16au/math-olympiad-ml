@@ -171,6 +171,75 @@ Summing: $RHS = 3(b^2 + c^2 + d^2) - 2(\mathbf{b}\cdot\mathbf{c} + \mathbf{b}\cd
 
 \vspace{1em}
 
+\begin{problem}[Concurrent Medians of a Tetrahedron]
+In a tetrahedron $ABCD$, define a \emph{median} as the segment from a vertex to the centroid of the opposite face.
+
+Let the position vectors of $A,B,C,D$ be $\mathbf{a},\mathbf{b},\mathbf{c},\mathbf{d}$ relative to origin $O$.
+Let $M_A, M_B, M_C, M_D$ be centroids of faces $BCD, ACD, ABD, ABC$ respectively.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that
+    \[
+    \mathbf{m}_A=\frac{\mathbf{b}+\mathbf{c}+\mathbf{d}}{3},
+    \quad
+    \mathbf{m}_B=\frac{\mathbf{a}+\mathbf{c}+\mathbf{d}}{3},
+    \quad
+    \mathbf{m}_C=\frac{\mathbf{a}+\mathbf{b}+\mathbf{d}}{3},
+    \quad
+    \mathbf{m}_D=\frac{\mathbf{a}+\mathbf{b}+\mathbf{c}}{3}.
+    \]
+    \item Define
+    \[
+    \mathbf{g}=\frac{\mathbf{a}+\mathbf{b}+\mathbf{c}+\mathbf{d}}{4}.
+    \]
+    Prove that $G$ lies on all four medians $AM_A, BM_B, CM_C, DM_D$.
+    \item Deduce the internal division ratio on each median.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Rewrite $\mathbf{g}$ by isolating one vertex and grouping the other three. For example:
+$\mathbf{g}=\frac{\mathbf{a}+(\mathbf{b}+\mathbf{c}+\mathbf{d})}{4}
+=\frac{1}{4}\mathbf{a}+\frac{3}{4}\mathbf{m}_A$.
+Then repeat by symmetry for $B,C,D$.
+\end{hint}
+
+\begin{solution}[Sketch]
+(i) Each face centroid is the average of its three vertex vectors, so the four formulas follow directly.
+
+(ii) Start with:
+\[
+\mathbf{g}=\frac{\mathbf{a}+\mathbf{b}+\mathbf{c}+\mathbf{d}}{4}
+=\frac{\mathbf{a}+(\mathbf{b}+\mathbf{c}+\mathbf{d})}{4}
+=\frac{\mathbf{a}+3\mathbf{m}_A}{4}
+=\frac{1}{4}\mathbf{a}+\frac{3}{4}\mathbf{m}_A.
+\]
+So $G$ lies on $AM_A$ by the section formula.
+
+By symmetry:
+\[
+\mathbf{g}=\frac{1}{4}\mathbf{b}+\frac{3}{4}\mathbf{m}_B
+=\frac{1}{4}\mathbf{c}+\frac{3}{4}\mathbf{m}_C
+=\frac{1}{4}\mathbf{d}+\frac{3}{4}\mathbf{m}_D,
+\]
+so $G$ lies on $BM_B, CM_C, DM_D$ as well. Therefore all four medians are concurrent.
+
+(iii) From $\mathbf{g}=\frac{1}{4}\mathbf{a}+\frac{3}{4}\mathbf{m}_A$, point $G$ divides $AM_A$ internally in ratio
+\[
+AG:GM_A=3:1.
+\]
+Similarly:
+\[
+BG:GM_B=CG:GM_C=DG:GM_D=3:1.
+\]
+\end{solution}
+
+\begin{takeaways}
+This is the 3D analogue of triangle centroid concurrency. In 2D, averaging 3 vertices gives ratio $2:1$ on each median; in 3D, averaging 4 vertices gives ratio $3:1$ on each tetrahedron median. The symmetry of the averaged vector is the key idea that avoids solving multiple line equations.
+\end{takeaways}
+
+\vspace{1em}
+
 \begin{problem}[Triangle Intersection Ratios]
 The diagram shows triangle $OQA$.
 
