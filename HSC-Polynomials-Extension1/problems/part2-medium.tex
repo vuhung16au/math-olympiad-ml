@@ -50,3 +50,63 @@ Comparing coefficients,
 \item Once the roots are known, the factorised form is immediate up to scale.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[A Surd Expression from Quadratic Roots]
+Let $x_1$ and $x_2$ be the distinct roots of
+\[
+x^2-7x+3=0.
+\]
+Calculate the exact value of
+\[
+A=\sqrt{11x_1+1}+\sqrt{13x_2+6}.
+\]
+\end{problem}
+
+\begin{hintbox}
+For each root $x$, use $x^2-7x+3=0$ to rewrite the expression under each square root as a perfect square.
+\end{hintbox}
+
+\begin{solution}
+Since $x_1,x_2$ are roots of
+\[
+x^2-7x+3=0,
+\]
+Vieta gives
+\[
+x_1+x_2=7,\qquad x_1x_2=3.
+\]
+So both roots are positive.
+
+Now use $x_i^2-7x_i+3=0$.
+
+For $x_1$:
+\[
+11x_1+1=(11x_1+1)+(x_1^2-7x_1+3)=x_1^2+4x_1+4=(x_1+2)^2.
+\]
+
+For $x_2$:
+\[
+13x_2+6=(13x_2+6)+(x_2^2-7x_2+3)=x_2^2+6x_2+9=(x_2+3)^2.
+\]
+
+Hence
+\[
+A=\sqrt{(x_1+2)^2}+\sqrt{(x_2+3)^2}.
+\]
+Because $x_1,x_2>0$, we have $x_1+2>0$ and $x_2+3>0$, so
+\[
+A=(x_1+2)+(x_2+3)=x_1+x_2+5=7+5=\boxed{12}.
+\]
+
+Therefore:
+\[
+\text{exact value }=12,\qquad \text{approximate value }=12.0.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Adding the root equation $x^2-7x+3=0$ can turn linear expressions into perfect squares.
+\item Vieta then collapses the final expression to a simple constant.
+\end{itemize}
+\end{takeaways}
