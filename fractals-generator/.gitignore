@@ -55,3 +55,8 @@ TODOs/
 
 artifacts-playwright/
 artifacts/
+.vercel
+.env*.local
+
+.env*
+

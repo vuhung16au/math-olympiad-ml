@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { renderFractalImage } from '../../lib/server-render';
 import { getAppPresets } from '../../lib/server-presets';
+import type { FractalType } from '../../types';
 
 export const runtime = 'nodejs';
 
@@ -22,9 +23,21 @@ function parsePayload(body: any): RenderPayload {
   };
 }
 
+function isFractalType(value: string): value is FractalType {
+  return value === 'ifs'
+    || value === 'lsystem'
+    || value === 'escapeTime'
+    || value === 'newton'
+    || value === 'attractor'
+    || value === 'inversion';
+}
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const payload = parsePayload(await request.json());
-  const family = payload.family as keyof ReturnType<typeof getAppPresets>;
+  if (!isFractalType(payload.family)) {
+    return NextResponse.json({ error: `Unknown family ${payload.family}` }, { status: 400 });
+  }
+  const family = payload.family;
   const presets = getAppPresets();
   const preset = presets[family]?.[payload.preset];
   if (!preset) {

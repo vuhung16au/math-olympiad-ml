@@ -1407,8 +1407,8 @@ async function writePng(filePath, png) {
 
 async function loadFractalClasses() {
   try {
-    const ifsModule = require(path.resolve(__dirname, '../lib/ifs.js'));
-    const lModule = require(path.resolve(__dirname, '../lib/l.js'));
+    const ifsModule = require('../lib/ifs.js');
+    const lModule = require('../lib/l.js');
     return {
       IFS: ifsModule.IFS,
       radial: ifsModule.radial,

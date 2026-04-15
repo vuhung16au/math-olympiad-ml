@@ -68,8 +68,9 @@ export async function GET(
   const png = new PNG({ width: size.width, height: size.height });
   png.data = Buffer.from(image);
   const output = PNG.sync.write(png);
+  const body = new Uint8Array(output);
 
-  return new NextResponse(output, {
+  return new NextResponse(body, {
     status: 200,
     headers: {
       'content-type': 'image/png',
