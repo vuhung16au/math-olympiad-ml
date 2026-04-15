@@ -30,6 +30,29 @@ flowchart LR
 - `POST /api/render`
   - request: family + preset + params + width/height
   - response: image pixel array + render metadata
+- `GET /api/v1/[family]/[preset]`
+  - response: PNG bytes (`image/png`)
+  - supports all families and all presets from `/api/presets`
+  - query params:
+    - `width`, `height` in pixels (default `1280x720`)
+    - `backgroundColor` (default `white`, supports `white`, `black`, hex like `#0f172a`)
+    - `mainColorScheme` (default `acu`, supported: `acu`, `matrix`, `emerald`, `ink`)
+    - family-specific params (for example `etMaxIterations`, `ifsIterations`, `lsIterations`)
+  - errors:
+    - `400` invalid width/height
+    - `404` unknown family or preset
+
+## Rendering Flow (`/api/v1`)
+
+```mermaid
+flowchart LR
+  request[HttpGetRequest] --> route[V1RouteHandler]
+  route --> family[FamilyResolver]
+  route --> preset[PresetLookup]
+  route --> renderer[SharedRenderer]
+  renderer --> encoder[PngEncoder]
+  encoder --> response[PngHttpResponse]
+```
 
 ## Boundaries
 

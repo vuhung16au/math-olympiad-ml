@@ -30,6 +30,8 @@
     "compile:esm": "tsc -p tsconfig.modules.json",
     "build": "npm run lint && npm run clean && npm run compile:common && npm run compile:esm",
     "docs:fractals": "node scripts/generate-fractals-docs.js",
+    "test:api:v1:quick": "node scripts/test-api-v1-quick.mjs",
+    "test:api:v1:full": "node scripts/test-api-v1-full.mjs",
     "test:fractals:playwright": "PLAYWRIGHT_BROWSERS_PATH=0 node scripts/generate-all-fractals-playwright.js",
     "verify:release-gates": "node scripts/verify-release-gates.js",
     "version": "git add -A .",
