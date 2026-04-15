@@ -1,6 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { SiteFooter } from './components/SiteFooter';
+import { ThemeInit } from './components/ThemeInit';
 
 export const metadata: Metadata = {
   title: 'Fractals Generator',
@@ -9,18 +11,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <body>
-        {children}
-        <footer className="site-footer">
-          <p>
-            Source code available on github:{' '}
-            <a href="https://github.com/vuhung16au/math-olympiad-ml/tree/main/fractals-generator">
-              https://github.com/vuhung16au/math-olympiad-ml/tree/main/fractals-generator
-            </a>
-          </p>
-          <p>Author: Vu Hung Nguyen, License: MIT</p>
-        </footer>
+        <div className="app-root">
+          <ThemeInit />
+          <div className="app-content">{children}</div>
+          <div className="site-footer-shell">
+            <SiteFooter />
+          </div>
+        </div>
       </body>
     </html>
   );

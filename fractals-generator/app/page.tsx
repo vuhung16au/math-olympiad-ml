@@ -4,7 +4,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { IFS, radial } from '../src/ifs';
 import { LSystem } from '../src/l';
+import { AppHeader } from './components/AppHeader';
+import { ThemeToggle } from './components/ThemeToggle';
 import { FractalControls } from './components/FractalControls';
+import { ViewerOverlay } from './components/ViewerOverlay';
 import { PRESETS } from './presets';
 import type { FormState, FractalType } from './types';
 
@@ -61,6 +64,15 @@ const URL_PARAM_TO_FORM: Record<FractalType, Record<string, string>> = {
     d: 'atD',
   },
   inversion: { depth: 'ivDepth', minRadius: 'ivMinRadius' },
+};
+
+const FRACTAL_TYPE_LABELS: Record<FractalType, string> = {
+  ifs: 'IFS',
+  lsystem: 'L-system',
+  escapeTime: 'Escape-time',
+  newton: 'Newton',
+  attractor: 'Strange Attractor',
+  inversion: 'Circle Inversion',
 };
 
 function fractalTypeToSlug(fractalType: FractalType): string {
@@ -192,6 +204,67 @@ export default function HomePage() {
   const [preset, setPreset] = useState('fern');
   const [meta, setMeta] = useState('Ready');
   const [form, setForm] = useState<FormState>(defaultForm());
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const [isRendering, setIsRendering] = useState(false);
+  const CANONICAL_BASE = 'https://fractals-generator-beta.vercel.app';
+
+  const formatTimestamp = (): string => {
+    const d = new Date();
+    const pad2 = (n: number) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}${pad2(d.getMonth() + 1)}${pad2(d.getDate())}-${pad2(d.getHours())}${pad2(d.getMinutes())}${pad2(d.getSeconds())}`;
+  };
+
+  const downloadPng = async (): Promise<void> => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const blob: Blob | null = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+    if (!blob) return;
+    const filename = `fractals-${fractalTypeToSlug(fractalType)}-${preset}-${formatTimestamp()}.png`;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  const copyLink = async (): Promise<void> => {
+    const link = `${CANONICAL_BASE}${pathname}`;
+    try {
+      await navigator.clipboard.writeText(link);
+      setToast('Link copied');
+    } catch {
+      setToast('Copy failed');
+    }
+  };
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = window.setTimeout(() => setToast(null), 1600);
+    return () => window.clearTimeout(t);
+  }, [toast]);
+
+  useEffect(() => {
+    document.body.dataset.fullscreen = isFullscreen ? 'true' : 'false';
+    return () => {
+      document.body.dataset.fullscreen = 'false';
+    };
+  }, [isFullscreen]);
+
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 980px)');
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -365,7 +438,10 @@ export default function HomePage() {
     const height = canvas.height;
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, width, height);
+    setIsRendering(true);
     setMeta('Rendering...');
+    // Let the browser paint the loading overlay before heavy work begins.
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
     try {
       if (activeType === 'ifs') {
         const matrices = activePreset.randomGenerator
@@ -424,56 +500,173 @@ export default function HomePage() {
       setMeta(data.meta ?? 'Rendered');
     } catch (error) {
       setMeta(`Render failed: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      setIsRendering(false);
     }
   };
 
   return (
-    <main className="layout">
-      <FractalControls
-        fractalType={fractalType}
-        preset={preset}
-        presetOptions={presetOptions}
-        form={form}
-        handlers={{
-          onTypeChange: (nextType) => {
-            setFractalType(nextType);
-            const first = Object.keys(presets[nextType] ?? {})[0];
-            setPreset(first);
-            const nextForm = loadPreset(nextType, first);
-            if (nextForm) {
-              replacePathIfNeeded(buildPathForState(nextType, first));
-              void draw({ type: nextType, preset: first, nextForm });
-            }
-          },
-          onPresetChange: (nextPreset) => {
-            setPreset(nextPreset);
-            const nextForm = loadPreset(fractalType, nextPreset);
-            if (nextForm) {
-              replacePathIfNeeded(buildPathForState(fractalType, nextPreset));
-              void draw({ type: fractalType, preset: nextPreset, nextForm });
-            }
-          },
-          onFormChange: (key, value) => setForm((prev) => ({ ...prev, [key]: value })),
-          onGenerate: () => {
-            replacePathIfNeeded(buildPathForState(fractalType, preset, form, true));
-            void draw();
-          },
-          onReset: () => {
-            const nextForm = loadPreset(fractalType, preset);
-            replacePathIfNeeded(buildPathForState(fractalType, preset));
-            return nextForm;
-          },
-        }}
-      />
-      <section className="viewer">
-        <div className="viewer-head">
-          <h2 id="viewerTitle">Fractal Render - {currentPreset.label}</h2>
-          <p id="meta">{meta}</p>
+    <>
+      {!isFullscreen ? (
+        <AppHeader
+          title="Fractals Generator"
+          breadcrumbs={`${FRACTAL_TYPE_LABELS[fractalType]} > ${currentPreset.label}`}
+          rightSlot={
+            <>
+              <button
+                type="button"
+                className="icon-button"
+                onClick={() => setIsDrawerOpen(true)}
+                aria-label="Open controls"
+                title="Controls"
+                data-show-on-mobile
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M4 7a1 1 0 0 1 1-1h6a1 1 0 0 1 0 2H5a1 1 0 0 1-1-1zm0 10a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1zm12-6a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M13 12a1 1 0 0 1 1-1h1V9a2 2 0 1 0-4 0v2H8a2 2 0 1 0 0 4h3v2a2 2 0 1 0 4 0v-2h-1a1 1 0 0 1-1-1z"
+                    opacity=".15"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                className="icon-button"
+                onClick={() => void copyLink()}
+                aria-label="Copy link"
+                title="Copy link"
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M10.6 13.4a1 1 0 0 1 0-1.4l2.8-2.8a3 3 0 0 1 4.2 4.2l-1.6 1.6a1 1 0 1 1-1.4-1.4l1.6-1.6a1 1 0 1 0-1.4-1.4l-2.8 2.8a1 1 0 0 1-1.4 0z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M13.4 10.6a1 1 0 0 1 0 1.4l-2.8 2.8a3 3 0 0 1-4.2-4.2l1.6-1.6A1 1 0 0 1 9.4 10L7.8 11.6a1 1 0 1 0 1.4 1.4l2.8-2.8a1 1 0 0 1 1.4 0z"
+                  />
+                </svg>
+              </button>
+              <ThemeToggle />
+            </>
+          }
+        />
+      ) : null}
+      <main className={`layout ${isSidebarCollapsed ? 'layout--collapsed' : ''} ${isFullscreen ? 'layout--fullscreen' : ''}`}>
+        {!isMobile ? (
+          <FractalControls
+            fractalType={fractalType}
+            preset={preset}
+            presetOptions={presetOptions}
+            form={form}
+            isRendering={isRendering}
+            isCollapsed={isSidebarCollapsed}
+            onToggleCollapsed={() => setIsSidebarCollapsed((v) => !v)}
+            handlers={{
+              onTypeChange: (nextType) => {
+                setFractalType(nextType);
+                const first = Object.keys(presets[nextType] ?? {})[0];
+                setPreset(first);
+                const nextForm = loadPreset(nextType, first);
+                if (nextForm) {
+                  replacePathIfNeeded(buildPathForState(nextType, first));
+                  void draw({ type: nextType, preset: first, nextForm });
+                }
+              },
+              onPresetChange: (nextPreset) => {
+                setPreset(nextPreset);
+                const nextForm = loadPreset(fractalType, nextPreset);
+                if (nextForm) {
+                  replacePathIfNeeded(buildPathForState(fractalType, nextPreset));
+                  void draw({ type: fractalType, preset: nextPreset, nextForm });
+                }
+              },
+              onFormChange: (key, value) => setForm((prev) => ({ ...prev, [key]: value })),
+              onGenerate: () => {
+                replacePathIfNeeded(buildPathForState(fractalType, preset, form, true));
+                void draw();
+              },
+              onReset: () => {
+                const nextForm = loadPreset(fractalType, preset);
+                replacePathIfNeeded(buildPathForState(fractalType, preset));
+                return nextForm;
+              },
+            }}
+          />
+        ) : null}
+
+        {isMobile && isDrawerOpen ? (
+          <div className="drawer-backdrop" role="presentation" onClick={() => setIsDrawerOpen(false)}>
+            <div className="drawer" role="dialog" aria-label="Fractal controls" onClick={(e) => e.stopPropagation()}>
+              <FractalControls
+                fractalType={fractalType}
+                preset={preset}
+                presetOptions={presetOptions}
+                form={form}
+                isRendering={isRendering}
+                isDrawer
+                onCloseDrawer={() => setIsDrawerOpen(false)}
+                handlers={{
+                  onTypeChange: (nextType) => {
+                    setFractalType(nextType);
+                    const first = Object.keys(presets[nextType] ?? {})[0];
+                    setPreset(first);
+                    const nextForm = loadPreset(nextType, first);
+                    if (nextForm) {
+                      replacePathIfNeeded(buildPathForState(nextType, first));
+                      void draw({ type: nextType, preset: first, nextForm });
+                    }
+                  },
+                  onPresetChange: (nextPreset) => {
+                    setPreset(nextPreset);
+                    const nextForm = loadPreset(fractalType, nextPreset);
+                    if (nextForm) {
+                      replacePathIfNeeded(buildPathForState(fractalType, nextPreset));
+                      void draw({ type: fractalType, preset: nextPreset, nextForm });
+                    }
+                  },
+                  onFormChange: (key, value) => setForm((prev) => ({ ...prev, [key]: value })),
+                  onGenerate: () => {
+                    replacePathIfNeeded(buildPathForState(fractalType, preset, form, true));
+                    void draw();
+                    setIsDrawerOpen(false);
+                  },
+                  onReset: () => {
+                    const nextForm = loadPreset(fractalType, preset);
+                    replacePathIfNeeded(buildPathForState(fractalType, preset));
+                    return nextForm;
+                  },
+                }}
+              />
+            </div>
+          </div>
+        ) : null}
+
+        <section className="viewer">
+          <div className="viewer-head">
+            <h2 id="viewerTitle">Fractal Render - {currentPreset.label}</h2>
+            <p id="meta">{meta}</p>
+          </div>
+          <div className="canvas-wrap">
+            <canvas id="canvas" ref={canvasRef} width={980} height={760} />
+            <ViewerOverlay
+              isRendering={isRendering}
+              onDownloadPng={() => void downloadPng()}
+              onFullscreenToggle={() => setIsFullscreen((v) => !v)}
+              isFullscreen={isFullscreen}
+            />
+          </div>
+        </section>
+      </main>
+      {!isFullscreen && toast ? (
+        <div className="toast" role="status" aria-live="polite">
+          {toast}
         </div>
-        <div className="canvas-wrap">
-          <canvas id="canvas" ref={canvasRef} width={980} height={760} />
-        </div>
-      </section>
-    </main>
+      ) : null}
+    </>
   );
 }
