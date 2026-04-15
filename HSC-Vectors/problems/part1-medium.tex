@@ -1,4 +1,4 @@
-% Part 1 Medium Problems (5 problems)
+% Part 1 Medium Problems (6 problems)
 % Problems: 49, 32, 45, 12, 23
 
 \begin{problem}[Line Tangent to Sphere]
@@ -199,6 +199,72 @@ Shortest distance to sphere: $\sqrt{|\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d
 
 \begin{takeaways}
 Point-to-line distance problems use calculus (minimize squared distance) or projection (subtract parallel component). The perpendicularity in part (ii) confirms the minimum—the shortest path is always perpendicular to the line. For sphere-line distance, first find line-to-centre distance, then subtract radius. The identity $|\mathbf{a} - (\mathbf{a} \cdot \mathbf{d})\mathbf{d}|^2 = |\mathbf{a}|^2 - (\mathbf{a} \cdot \mathbf{d})^2$ (when $|\mathbf{d}|=1$) represents the perpendicular component of $\mathbf{a}$ to the line, which can also be expressed as $|\mathbf{a} \times \mathbf{d}|^2$ using the cross product.
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Elegant Vector Proof of Concurrent Medians]
+Let the vertices of $\triangle ABC$ have position vectors $\mathbf{a}, \mathbf{b},$ and $\mathbf{c}$ relative to an origin $O$. Let $D, E,$ and $F$ be the midpoints of sides $BC, AC,$ and $AB$ respectively.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that
+    \[
+    \mathbf{d} = \frac{\mathbf{b} + \mathbf{c}}{2}, \quad
+    \mathbf{e} = \frac{\mathbf{a} + \mathbf{c}}{2}, \quad
+    \mathbf{f} = \frac{\mathbf{a} + \mathbf{b}}{2}.
+    \]
+    \item Define
+    \[
+    \mathbf{g} = \frac{\mathbf{a} + \mathbf{b} + \mathbf{c}}{3}.
+    \]
+    Prove that $G$ lies on all three medians $AD, BE,$ and $CF$.
+    \item Hence show that the medians of a triangle are concurrent and that the common point divides each median in the ratio $2:1$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)} By the midpoint formula for position vectors:
+\[
+\mathbf{d} = \frac{\mathbf{b} + \mathbf{c}}{2}, \quad
+\mathbf{e} = \frac{\mathbf{a} + \mathbf{c}}{2}, \quad
+\mathbf{f} = \frac{\mathbf{a} + \mathbf{b}}{2}.
+\]
+
+\textbf{(ii)} Start from
+\[
+\mathbf{g} = \frac{\mathbf{a} + \mathbf{b} + \mathbf{c}}{3}
+= \frac{\mathbf{a} + (\mathbf{b} + \mathbf{c})}{3}.
+\]
+Since $\mathbf{b} + \mathbf{c} = 2\mathbf{d}$, we get
+\[
+\mathbf{g} = \frac{\mathbf{a} + 2\mathbf{d}}{3}
+= \frac{1}{3}\mathbf{a} + \frac{2}{3}\mathbf{d}.
+\]
+So $G$ lies on line segment $AD$. By the section formula, $AG:GD = 2:1$.
+
+Now use symmetry of $\mathbf{g}$:
+\[
+\mathbf{g} = \frac{\mathbf{b} + (\mathbf{a} + \mathbf{c})}{3}
+= \frac{\mathbf{b} + 2\mathbf{e}}{3}
+= \frac{1}{3}\mathbf{b} + \frac{2}{3}\mathbf{e},
+\]
+so $G$ lies on $BE$ and divides it in ratio $2:1$.
+
+Similarly,
+\[
+\mathbf{g} = \frac{\mathbf{c} + (\mathbf{a} + \mathbf{b})}{3}
+= \frac{\mathbf{c} + 2\mathbf{f}}{3}
+= \frac{1}{3}\mathbf{c} + \frac{2}{3}\mathbf{f},
+\]
+so $G$ lies on $CF$ and divides it in ratio $2:1$.
+
+\textbf{(iii)} The same point $G$ lies on all three medians $AD, BE, CF$, so the medians are concurrent. The coefficient form in each case gives the same internal division ratio:
+\[
+AG:GD = BG:GE = CG:GF = 2:1.
+\]
+\end{solution}
+
+\begin{takeaways}
+This proof is a model vector-geometry argument: define a symmetric candidate point $\mathbf{g}=\tfrac{\mathbf{a}+\mathbf{b}+\mathbf{c}}{3}$, then rewrite it in section-form along each median. Symmetry avoids repeating heavy calculations and guarantees all three medians meet at one point (the centroid). The coefficient pattern $\tfrac{1}{3}$ and $\tfrac{2}{3}$ immediately encodes the $2:1$ division property.
 \end{takeaways}
 
 \vspace{1em}
