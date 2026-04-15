@@ -264,72 +264,58 @@ The points $A(1, 0, 0)$, $B(0, 1, 0)$, and $C(0, 0, 1)$ form an equilateral tria
 \begin{solution}
 \textbf{(i)}
 \[
-\vec{DA}=\begin{pmatrix}1-x\\-y\\-z\end{pmatrix},\quad
-\vec{DB}=\begin{pmatrix}-x\\1-y\\-z\end{pmatrix},\quad
-\vec{DC}=\begin{pmatrix}-x\\-y\\1-z\end{pmatrix}.
+\vec{DA}=(1-x,-y,-z),\quad
+\vec{DB}=(-x,1-y,-z),\quad
+\vec{DC}=(-x,-y,1-z).
 \]
 \[
-|\vec{DA}|^2=(1-x)^2+y^2+z^2,\qquad |\vec{DB}|^2=x^2+(1-y)^2+z^2.
+|\vec{DA}|^2=(1-x)^2+y^2+z^2,\quad
+|\vec{DB}|^2=x^2+(1-y)^2+z^2,\quad
+|\vec{DC}|^2=x^2+y^2+(1-z)^2.
 \]
-Since $|\vec{DA}|=|\vec{DB}|$,
+Hence $x=y$ and $x=z$, so $x=y=z=\lambda$. Thus
 \[
-(1-x)^2+y^2+z^2=x^2+(1-y)^2+z^2 \implies x=y.
+\vec{OD}=(\lambda,\lambda,\lambda)=\lambda(\mathbf{i}+\mathbf{j}+\mathbf{k}),
 \]
-Similarly, $|\vec{DA}|=|\vec{DC}| \implies x=z$, hence $x=y=z=\lambda$. So
-\[
-\vec{OD}=\begin{pmatrix}\lambda\\\lambda\\\lambda\end{pmatrix}
-=\lambda(\mathbf{i}+\mathbf{j}+\mathbf{k}),
-\]
-and $D$ lies on $\mathbf{r}=\lambda(\mathbf{i}+\mathbf{j}+\mathbf{k})$.
+so $D$ lies on $\mathbf{r}=\lambda(\mathbf{i}+\mathbf{j}+\mathbf{k})$.
 
 \textbf{(ii)} Let $D=(a,a,a)$. Then
 \[
-|\vec{AB}|^2=2,\qquad |\vec{DA}|^2=(1-a)^2+a^2+a^2=1-2a+3a^2.
+|\vec{AB}|^2=2,\quad |\vec{DA}|^2=1-2a+3a^2
+\implies 3a^2-2a-1=0
+\implies a=1 \text{ or } -\frac13,
 \]
-Equating:
 \[
-1-2a+3a^2=2 \implies 3a^2-2a-1=0 \implies (3a+1)(a-1)=0.
-\]
-Thus
-\[
-a=1 \quad \text{or} \quad a=-\frac13,
-\]
-so
-\[
-D=(1,1,1)\quad \text{or}\quad \left(-\frac13,-\frac13,-\frac13\right).
+\therefore\ D=(1,1,1)\text{ or }\left(-\frac13,-\frac13,-\frac13\right).
 \]
 
 \textbf{(iii)} $D_1=(1,1,1)$,
 \[
-M=\left(\frac12,\frac12,0\right),\qquad N=\left(\frac12,\frac12,1\right),
+M=\left(1/2,1/2,0\right),\quad N=\left(1/2,1/2,1\right),
 \]
-so
 \[
-\vec{MN}=\begin{pmatrix}0\\0\\1\end{pmatrix},\qquad
-\vec{AB}=\begin{pmatrix}-1\\1\\0\end{pmatrix},\qquad
-\vec{CD_1}=\begin{pmatrix}1\\1\\0\end{pmatrix}.
+\vec{MN}=(0,0,1),\qquad
+\vec{AB}=(-1,1,0),\qquad
+\vec{CD_1}=(1,1,0).
 \]
-Now
 \[
 \vec{MN}\cdot\vec{AB}=0,\qquad \vec{MN}\cdot\vec{CD_1}=0,
 \]
-so $\vec{MN}$ is the common perpendicular to $AB$ and $CD_1$.
+hence $\vec{MN}$ is the common perpendicular to $AB$ and $CD_1$.
 
 \textbf{(iv)} The circumsphere centre is the centroid:
 \[
 \mathbf{c}=\frac14(\mathbf{a}+\mathbf{b}+\mathbf{c}+\mathbf{d}_1)
-=\frac14\begin{pmatrix}2\\2\\2\end{pmatrix}
-=\begin{pmatrix}\frac12\\\frac12\\\frac12\end{pmatrix}.
+=\frac14(2,2,2)=(1/2,1/2,1/2).
 \]
-Using vertex $A$,
 \[
-R=\left|\begin{pmatrix}1\\0\\0\end{pmatrix}-\begin{pmatrix}\frac12\\\frac12\\\frac12\end{pmatrix}\right|
-=\left|\begin{pmatrix}\frac12\\-\frac12\\-\frac12\end{pmatrix}\right|
+R=|(1,0,0)-(1/2,1/2,1/2)|
+=|(1/2,-1/2,-1/2)|
 =\frac{\sqrt3}{2}.
 \]
 Hence
 \[
-\left|\mathbf{r}-\begin{pmatrix}\frac12\\\frac12\\\frac12\end{pmatrix}\right|=\frac{\sqrt3}{2}.
+|\mathbf{r}-(1/2,1/2,1/2)|=\frac{\sqrt3}{2}.
 \]
 \end{solution}
 
