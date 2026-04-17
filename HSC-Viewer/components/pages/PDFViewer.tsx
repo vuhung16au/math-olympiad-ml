@@ -165,22 +165,10 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const currentPageRef = useRef(1);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(Math.max(1, Math.floor(initialPage)));
-  const [viewMode, setViewMode] = useState<"single" | "continuous">(() => {
-    const saved = getPref(PREF_KEYS.viewMode);
-    return saved === "single" || saved === "continuous" ? saved : "continuous";
-  });
-  const [readingTheme, setReadingTheme] = useState<ReadingTheme>(() => {
-    const saved = getPref(PREF_KEYS.readingTheme);
-    return saved === "light" || saved === "dark" || saved === "sepia" ? saved : "light";
-  });
-  const [scale, setScale] = useState(() => {
-    const saved = getPref(PREF_KEYS.scale);
-    if (saved) {
-      const parsed = parseFloat(saved);
-      return validateScale(Number.isFinite(parsed) ? parsed : PDF_DEFAULTS.defaultScale);
-    }
-    return PDF_DEFAULTS.defaultScale;
-  });
+  const [viewMode, setViewMode] = useState<"single" | "continuous">("continuous");
+  const [readingTheme, setReadingTheme] = useState<ReadingTheme>("light");
+  const [scale, setScale] = useState(PDF_DEFAULTS.defaultScale);
+  const [arePrefsHydrated, setArePrefsHydrated] = useState(false);
   const [containerWidth, setContainerWidth] = useState(900);
   const [containerHeight, setContainerHeight] = useState(700);
   const [error, setError] = useState<string | null>(null);
@@ -197,10 +185,42 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     currentPageRef.current = currentPage;
   }, [currentPage]);
 
+  // Hydrate client-only toolbar preferences after mount to avoid SSR hydration mismatches.
+  useEffect(() => {
+    const savedViewMode = getPref(PREF_KEYS.viewMode);
+    if (savedViewMode === "single" || savedViewMode === "continuous") {
+      setViewMode(savedViewMode);
+    }
+
+    const savedReadingTheme = getPref(PREF_KEYS.readingTheme);
+    if (savedReadingTheme === "light" || savedReadingTheme === "dark" || savedReadingTheme === "sepia") {
+      setReadingTheme(savedReadingTheme);
+    }
+
+    const savedScale = getPref(PREF_KEYS.scale);
+    if (savedScale) {
+      const parsed = parseFloat(savedScale);
+      setScale(validateScale(Number.isFinite(parsed) ? parsed : PDF_DEFAULTS.defaultScale));
+    }
+
+    setArePrefsHydrated(true);
+  }, []);
+
   // Persist toolbar preferences to cookies
-  useEffect(() => { setPref(PREF_KEYS.viewMode, viewMode); }, [viewMode]);
-  useEffect(() => { setPref(PREF_KEYS.readingTheme, readingTheme); }, [readingTheme]);
-  useEffect(() => { setPref(PREF_KEYS.scale, String(scale)); }, [scale]);
+  useEffect(() => {
+    if (!arePrefsHydrated) return;
+    setPref(PREF_KEYS.viewMode, viewMode);
+  }, [arePrefsHydrated, viewMode]);
+
+  useEffect(() => {
+    if (!arePrefsHydrated) return;
+    setPref(PREF_KEYS.readingTheme, readingTheme);
+  }, [arePrefsHydrated, readingTheme]);
+
+  useEffect(() => {
+    if (!arePrefsHydrated) return;
+    setPref(PREF_KEYS.scale, String(scale));
+  }, [arePrefsHydrated, scale]);
 
   useEffect(() => {
     trackBookletOpened(booklet.title);

@@ -23,11 +23,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
-    return getPref(PREF_KEYS.sidebarCollapsed) === "1";
-  });
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const currentTitle = useMemo(() => getCurrentTitle(pathname), [pathname]);
   const isReaderRoute = pathname.startsWith("/booklets/");
+
+  // Load persisted sidebar preference only after mount to keep SSR and hydration output identical.
+  useEffect(() => {
+    setIsSidebarCollapsed(getPref(PREF_KEYS.sidebarCollapsed) === "1");
+  }, []);
 
   // Redirect to last visited booklet when landing on the home page
   useEffect(() => {
