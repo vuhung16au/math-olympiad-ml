@@ -16,14 +16,24 @@ export default function Footer() {
           </a>
           .
         </p>
-        <a
-          href={REPO_LINKS.github}
-          target="_blank"
-          rel="noreferrer"
-          className="font-medium text-[var(--color-purple)]"
-        >
-          Source repository
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href={REPO_LINKS.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-[var(--color-purple)]"
+          >
+            LinkedIn
+          </a>
+          <a
+            href={REPO_LINKS.github}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-[var(--color-purple)]"
+          >
+            Source repository
+          </a>
+        </div>
       </div>
     </footer>
   );

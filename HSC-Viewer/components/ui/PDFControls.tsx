@@ -10,7 +10,9 @@ import {
   Palette,
   Plus,
   Printer,
+  RectangleHorizontal,
   RotateCcw,
+  Rows3,
   Sun,
 } from "lucide-react";
 
@@ -89,9 +91,9 @@ export default function PDFControls({
   onPageInputEditingChange,
 }: PDFControlsProps) {
   return (
-    <div className="flex flex-col gap-3 border-b border-black/8 px-4 py-4 sm:px-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
+    <div className="fixed bottom-[calc(env(safe-area-inset-bottom)+0.5rem)] left-1/2 z-40 flex w-[calc(100%-1rem)] max-w-[1100px] -translate-x-1/2 flex-col gap-3 rounded-[24px] border border-white/45 bg-white/75 px-4 py-4 shadow-[0_16px_45px_rgba(39,18,67,0.2)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/65 sm:w-[calc(100%-2rem)] sm:px-6 lg:bottom-4 lg:left-auto lg:right-4 lg:w-[260px] lg:max-w-[260px] lg:translate-x-0 lg:gap-2 lg:rounded-[20px] lg:px-3 lg:py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 lg:flex-col lg:items-stretch lg:gap-2">
+        <div className="lg:hidden">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-red)]">
             Active booklet
           </p>
@@ -100,29 +102,30 @@ export default function PDFControls({
           </h1>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 lg:grid lg:grid-cols-2 lg:gap-2">
           <button
             type="button"
             onClick={onFitWidth}
-            className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-[var(--color-purple)] shadow-sm"
+            className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-[var(--color-purple)] shadow-sm lg:col-span-2"
           >
             Fit width
           </button>
           {/* View mode toggle */}
-          <div className="flex overflow-hidden rounded-full border border-black/10 bg-white shadow-sm">
+          <div className="flex overflow-hidden rounded-full border border-black/10 bg-white shadow-sm lg:col-span-2">
             <button
               type="button"
               onClick={viewMode === "single" ? onToggleViewMode : undefined}
               aria-label="Continuous page view"
               title="Continuous page view"
               aria-pressed={viewMode === "continuous"}
-              className={`px-4 py-2 text-sm font-medium transition ${
+              className={`inline-flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-medium transition ${
                 viewMode === "continuous"
                   ? "bg-[var(--color-purple)] text-white"
                   : "text-[var(--color-purple)] hover:bg-black/5"
               }`}
             >
-              Continuous
+              <Rows3 className="h-4 w-4 shrink-0" />
+              <span className="hidden sm:inline">Continuous</span>
             </button>
             <button
               type="button"
@@ -130,16 +133,17 @@ export default function PDFControls({
               aria-label="Single page view"
               title="Single page view"
               aria-pressed={viewMode === "single"}
-              className={`px-4 py-2 text-sm font-medium transition ${
+              className={`inline-flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-medium transition ${
                 viewMode === "single"
                   ? "bg-[var(--color-purple)] text-white"
                   : "text-[var(--color-purple)] hover:bg-black/5"
               }`}
             >
-              Single Page
+              <RectangleHorizontal className="h-4 w-4 shrink-0" />
+              <span className="hidden sm:inline">Single Page</span>
             </button>
           </div>
-          <div className="flex overflow-hidden rounded-full border border-black/10 bg-white shadow-sm">
+          <div className="flex overflow-hidden rounded-full border border-black/10 bg-white shadow-sm lg:col-span-2">
             <button
               type="button"
               onClick={() => onReadingThemeChange("light")}
@@ -189,25 +193,27 @@ export default function PDFControls({
           <button
             type="button"
             onClick={onPrint}
-            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-[var(--color-purple)] shadow-sm"
+            aria-label="Print"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-[var(--color-purple)] shadow-sm"
           >
             <Printer className="h-4 w-4" />
-            Print
+            <span className="lg:hidden">Print</span>
           </button>
           <a
             href={pdfUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-[var(--color-purple)] px-4 py-2 text-sm font-medium text-white shadow-sm"
+            aria-label="Download PDF"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-black/10 bg-[var(--color-purple)] px-4 py-2 text-sm font-medium text-white shadow-sm"
           >
             <Download className="h-4 w-4" />
-            Download PDF
+            <span className="lg:hidden">Download PDF</span>
           </a>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-3 lg:flex-col lg:items-stretch lg:gap-2">
+        <div className="flex items-center gap-2 lg:justify-between">
           <IconButton label="Previous page" onClick={onPreviousPage} disabled={!canGoPrevious}>
             <ChevronLeft className="h-4 w-4" />
           </IconButton>
@@ -239,7 +245,7 @@ export default function PDFControls({
           </IconButton>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 lg:justify-between">
           <IconButton label="Zoom out" onClick={onZoomOut}>
             <Minus className="h-4 w-4" />
           </IconButton>

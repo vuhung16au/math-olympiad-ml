@@ -23,28 +23,38 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const currentTitle = useMemo(() => getCurrentTitle(pathname), [pathname]);
+  const isReaderRoute = pathname.startsWith("/booklets/");
 
   return (
     <div className="min-h-screen bg-[var(--color-ivory)] text-[var(--color-charcoal)]">
-      <Header
-        currentTitle={currentTitle}
-        onOpenMenu={() => setIsMobileMenuOpen(true)}
-      />
+      {!isReaderRoute ? (
+        <Header
+          currentTitle={currentTitle}
+          onOpenMenu={() => setIsMobileMenuOpen(true)}
+        />
+      ) : null}
       {isSidebarCollapsed ? (
         <button
           type="button"
           onClick={() => setIsSidebarCollapsed(false)}
-          className="fixed left-4 top-20 z-30 hidden items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-purple)] shadow-sm transition hover:border-[var(--color-purple)] lg:inline-flex"
+          className={[
+            "fixed left-4 z-30 hidden items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-purple)] shadow-sm transition hover:border-[var(--color-purple)] lg:inline-flex",
+            isReaderRoute ? "top-4" : "top-20",
+          ].join(" ")}
           aria-label="Expand sidebar"
         >
           <PanelLeftOpen className="h-4 w-4" />
           Menu
         </button>
       ) : null}
-      <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-[1600px]">
+      <div className={[
+        "mx-auto flex w-full max-w-[1600px]",
+        isReaderRoute ? "min-h-screen" : "min-h-[calc(100vh-4rem)]",
+      ].join(" ")}>
         <Sidebar
           pathname={pathname}
           isCollapsed={isSidebarCollapsed}
+          isReaderMode={isReaderRoute}
           onToggleCollapse={() => setIsSidebarCollapsed((value) => !value)}
         />
         <MobileMenu

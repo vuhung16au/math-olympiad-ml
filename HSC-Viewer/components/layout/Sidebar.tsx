@@ -5,10 +5,12 @@ import { BOOKLETS } from "@/lib/booklets";
 export default function Sidebar({
   pathname,
   isCollapsed,
+  isReaderMode,
   onToggleCollapse,
 }: {
   pathname: string;
   isCollapsed: boolean;
+  isReaderMode: boolean;
   onToggleCollapse: () => void;
 }) {
   if (isCollapsed) {
@@ -16,7 +18,12 @@ export default function Sidebar({
   }
 
   return (
-    <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-[var(--sidebar-width)] shrink-0 overflow-y-auto border-r border-black/10 bg-[color:color-mix(in_srgb,var(--color-purple)_92%,white)] px-4 py-6 text-white lg:block">
+    <aside
+      className={[
+        "sticky hidden w-[var(--sidebar-width)] shrink-0 overflow-y-auto border-r border-black/10 bg-[color:color-mix(in_srgb,var(--color-purple)_92%,white)] px-4 py-6 text-white lg:block",
+        isReaderMode ? "top-0 h-screen" : "top-16 h-[calc(100vh-4rem)]",
+      ].join(" ")}
+    >
       <div className="mb-4 flex items-center justify-between gap-2 px-3">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/70">
           Booklets
