@@ -73,7 +73,7 @@ export default function MobileMenu({
                 className={[
                   "block rounded-2xl px-3 py-3 text-sm font-medium transition",
                   isActive
-                    ? "bg-white text-[var(--color-purple)]"
+                    ? "bg-white/25 text-white ring-1 ring-white/40"
                     : "bg-white/5 text-white/88 hover:bg-white/12 hover:text-white",
                 ].join(" ")}
               >

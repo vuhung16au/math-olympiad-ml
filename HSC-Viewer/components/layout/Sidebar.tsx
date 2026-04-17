@@ -34,7 +34,7 @@ export default function Sidebar({ pathname }: { pathname: string }) {
               className={[
                 "group flex items-center rounded-2xl px-3 py-3 text-sm font-medium transition",
                 isActive
-                  ? "bg-white text-[var(--color-purple)] shadow-sm"
+                  ? "bg-white/25 text-white shadow-sm ring-1 ring-white/40"
                   : "text-white/84 hover:bg-white/10 hover:text-white",
               ].join(" ")}
             >
