@@ -17,6 +17,7 @@ import {
   trackPdfZoom,
 } from "@/lib/analytics";
 import { validatePageNumber, validateScale } from "@/lib/pdf-helpers";
+import { getPref, setPref, PREF_KEYS } from "@/lib/preferences";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
 
@@ -164,9 +165,22 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const currentPageRef = useRef(1);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(Math.max(1, Math.floor(initialPage)));
-  const [viewMode, setViewMode] = useState<"single" | "continuous">("continuous");
-  const [readingTheme, setReadingTheme] = useState<ReadingTheme>("light");
-  const [scale, setScale] = useState(PDF_DEFAULTS.defaultScale);
+  const [viewMode, setViewMode] = useState<"single" | "continuous">(() => {
+    const saved = getPref(PREF_KEYS.viewMode);
+    return saved === "single" || saved === "continuous" ? saved : "continuous";
+  });
+  const [readingTheme, setReadingTheme] = useState<ReadingTheme>(() => {
+    const saved = getPref(PREF_KEYS.readingTheme);
+    return saved === "light" || saved === "dark" || saved === "sepia" ? saved : "light";
+  });
+  const [scale, setScale] = useState(() => {
+    const saved = getPref(PREF_KEYS.scale);
+    if (saved) {
+      const parsed = parseFloat(saved);
+      return validateScale(Number.isFinite(parsed) ? parsed : PDF_DEFAULTS.defaultScale);
+    }
+    return PDF_DEFAULTS.defaultScale;
+  });
   const [containerWidth, setContainerWidth] = useState(900);
   const [containerHeight, setContainerHeight] = useState(700);
   const [error, setError] = useState<string | null>(null);
@@ -182,6 +196,11 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   useEffect(() => {
     currentPageRef.current = currentPage;
   }, [currentPage]);
+
+  // Persist toolbar preferences to cookies
+  useEffect(() => { setPref(PREF_KEYS.viewMode, viewMode); }, [viewMode]);
+  useEffect(() => { setPref(PREF_KEYS.readingTheme, readingTheme); }, [readingTheme]);
+  useEffect(() => { setPref(PREF_KEYS.scale, String(scale)); }, [scale]);
 
   useEffect(() => {
     trackBookletOpened(booklet.title);
@@ -553,6 +572,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
 
       syncUrlTimerRef.current = window.setTimeout(() => {
         window.history.replaceState(null, "", nextPath);
+        setPref(PREF_KEYS.lastUrl, nextPath);
         syncUrlTimerRef.current = null;
       }, 220);
 
@@ -560,6 +580,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     }
 
     window.history.replaceState(null, "", nextPath);
+    setPref(PREF_KEYS.lastUrl, nextPath);
   }, [booklet.slug, currentPage, displayPage, isPageInputEditing, numPages, viewMode]);
 
   useEffect(() => {

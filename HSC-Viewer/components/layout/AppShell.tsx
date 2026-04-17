@@ -1,13 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { PanelLeftOpen } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileMenu from "@/components/layout/MobileMenu";
 import Footer from "@/components/common/Footer";
 import { getBookletBySlug } from "@/lib/booklets";
+import { getPref, setPref, PREF_KEYS } from "@/lib/preferences";
 
 function getCurrentTitle(pathname: string): string | null {
   if (!pathname.startsWith("/booklets/")) {
@@ -20,10 +21,30 @@ function getCurrentTitle(pathname: string): string | null {
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
+    return getPref(PREF_KEYS.sidebarCollapsed) === "1";
+  });
   const currentTitle = useMemo(() => getCurrentTitle(pathname), [pathname]);
   const isReaderRoute = pathname.startsWith("/booklets/");
+
+  // Redirect to last visited booklet when landing on the home page
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const lastUrl = getPref(PREF_KEYS.lastUrl);
+    if (lastUrl && lastUrl.startsWith("/booklets/")) {
+      router.replace(lastUrl);
+    }
+  }, [pathname, router]);
+
+  const handleToggleSidebar = () => {
+    setIsSidebarCollapsed((prev) => {
+      const next = !prev;
+      setPref(PREF_KEYS.sidebarCollapsed, next ? "1" : "0");
+      return next;
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[var(--color-ivory)] text-[var(--color-charcoal)]">
@@ -36,7 +57,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       {isSidebarCollapsed ? (
         <button
           type="button"
-          onClick={() => setIsSidebarCollapsed(false)}
+          onClick={handleToggleSidebar}
           className={[
             "fixed left-4 z-30 hidden items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-purple)] shadow-sm transition hover:border-[var(--color-purple)] lg:inline-flex",
             isReaderRoute ? "top-4" : "top-20",
@@ -55,7 +76,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           pathname={pathname}
           isCollapsed={isSidebarCollapsed}
           isReaderMode={isReaderRoute}
-          onToggleCollapse={() => setIsSidebarCollapsed((value) => !value)}
+          onToggleCollapse={handleToggleSidebar}
         />
         <MobileMenu
           isOpen={isMobileMenuOpen}
