@@ -68,7 +68,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           aria-label="Expand sidebar"
         >
           <PanelLeftOpen className="h-4 w-4" />
-          Menu
+          Booklets
         </button>
       ) : null}
       <div className={[

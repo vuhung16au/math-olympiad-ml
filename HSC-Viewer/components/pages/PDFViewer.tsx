@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { FileText, ListTree } from "lucide-react";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -158,9 +159,11 @@ async function extractOutlineItems(pdf: PdfDocumentLike, totalPages: number): Pr
 
 export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) {
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const navigatorRef = useRef<HTMLElement | null>(null);
   const lastWheelNavigationRef = useRef(0);
   const syncUrlTimerRef = useRef<number | null>(null);
   const didInitialJumpRef = useRef(false);
+  const navigatorDragOffsetRef = useRef<{ x: number; y: number } | null>(null);
   const pageRefs = useRef<Map<number, HTMLDivElement>>(new Map());
   const currentPageRef = useRef(1);
   const [numPages, setNumPages] = useState(0);
@@ -179,6 +182,27 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const [outlineItems, setOutlineItems] = useState<OutlineItem[]>([]);
   const [isOutlineLoading, setIsOutlineLoading] = useState(false);
   const [outlineError, setOutlineError] = useState<string | null>(null);
+  const [navigatorPosition, setNavigatorPosition] = useState<{ x: number; y: number } | null>(null);
+  const [isDraggingNavigator, setIsDraggingNavigator] = useState(false);
+
+  // PDF.js frequently cancels in-flight text layer tasks during rerenders/navigation.
+  // Filter this known benign warning while the viewer is mounted.
+  useEffect(() => {
+    const originalWarn = console.warn;
+
+    console.warn = (...args: unknown[]) => {
+      const firstArg = args[0];
+      const message = typeof firstArg === "string" ? firstArg : "";
+      if (message.includes("AbortException: TextLayer task cancelled")) {
+        return;
+      }
+      originalWarn(...args);
+    };
+
+    return () => {
+      console.warn = originalWarn;
+    };
+  }, []);
 
   // Keep ref in sync so effects can read latest value without stale closures
   useEffect(() => {
@@ -565,6 +589,16 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     trackPdfAction(booklet.title, "print");
   };
 
+  const handleTextLayerError = useCallback((textLayerError: Error) => {
+    // PDF.js cancels in-flight text layer tasks when pages rerender quickly.
+    // Treat AbortException as expected behavior to avoid noisy console warnings.
+    if (textLayerError?.name === "AbortException") {
+      return;
+    }
+
+    console.error("Text layer render failed:", textLayerError);
+  }, []);
+
   // Keep URL in sync with the current page using replaceState — no Next.js navigation,
   // so the component never remounts and TextLayer tasks are never aborted.
   useEffect(() => {
@@ -610,6 +644,74 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!isDraggingNavigator) {
+      return;
+    }
+
+    const onMouseMove = (event: MouseEvent) => {
+      const panel = navigatorRef.current;
+      const dragOffset = navigatorDragOffsetRef.current;
+
+      if (!panel || !dragOffset) {
+        return;
+      }
+
+      const panelWidth = panel.offsetWidth;
+      const panelHeight = panel.offsetHeight;
+      const margin = 8;
+
+      const nextX = Math.min(
+        Math.max(event.clientX - dragOffset.x, margin),
+        window.innerWidth - panelWidth - margin,
+      );
+      const nextY = Math.min(
+        Math.max(event.clientY - dragOffset.y, margin),
+        window.innerHeight - panelHeight - margin,
+      );
+
+      setNavigatorPosition({ x: nextX, y: nextY });
+    };
+
+    const onMouseUp = () => {
+      setIsDraggingNavigator(false);
+      navigatorDragOffsetRef.current = null;
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+  }, [isDraggingNavigator]);
+
+  const handleNavigatorDragStart = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (event.button !== 0) {
+      return;
+    }
+
+    if (!window.matchMedia("(min-width: 1024px)").matches) {
+      return;
+    }
+
+    const panel = navigatorRef.current;
+
+    if (!panel) {
+      return;
+    }
+
+    const rect = panel.getBoundingClientRect();
+    navigatorDragOffsetRef.current = {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    };
+    setNavigatorPosition({ x: rect.left, y: rect.top });
+    setIsDraggingNavigator(true);
+    event.preventDefault();
+  };
 
   return (
     <ErrorBoundary>
@@ -680,7 +782,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
           ) : null}
 
           <div ref={stageRef} data-pdf-stage className="min-h-[70vh] bg-[color:color-mix(in_srgb,var(--color-ivory)_72%,white)] p-3 pb-[calc(env(safe-area-inset-bottom)+7.5rem)] sm:p-5 sm:pb-[calc(env(safe-area-inset-bottom)+7rem)] lg:pb-5">
-            <div className="grid min-h-[66vh] gap-4 lg:grid-cols-[minmax(0,1fr)_290px]">
+            <div className="grid min-h-[66vh] gap-4 lg:grid-cols-[minmax(0,1fr)_260px]">
               <div className="order-2 lg:order-1">
                 <Document
                   file={booklet.pdfUrl}
@@ -737,6 +839,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                             loading={pageNum === 1 ? <LoadingSpinner label="Rendering page" /> : undefined}
                             renderTextLayer
                             renderAnnotationLayer
+                            onRenderTextLayerError={handleTextLayerError}
                             className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
                           />
                         </div>
@@ -757,6 +860,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                           loading={<LoadingSpinner label="Rendering page" />}
                           renderTextLayer
                           renderAnnotationLayer
+                          onRenderTextLayerError={handleTextLayerError}
                           className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
                         />
                         {isTwoPageSpread && displayPage + 1 <= numPages ? (
@@ -767,6 +871,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                             loading={<LoadingSpinner label="Rendering page" />}
                             renderTextLayer
                             renderAnnotationLayer
+                            onRenderTextLayerError={handleTextLayerError}
                             className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
                           />
                         ) : null}
@@ -776,7 +881,34 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                 </Document>
               </div>
 
-              <aside className="order-1 max-h-[66vh] overflow-hidden rounded-[20px] border border-black/10 bg-white/88 lg:order-2" aria-label="PDF navigation sidebar">
+              <aside
+                ref={navigatorRef}
+                style={navigatorPosition
+                  ? {
+                    position: "fixed",
+                    left: `${navigatorPosition.x}px`,
+                    top: `${navigatorPosition.y}px`,
+                    right: "auto",
+                    transform: "none",
+                    zIndex: 45,
+                  }
+                  : undefined}
+                className="order-1 max-h-[66vh] overflow-hidden rounded-[20px] border border-black/10 bg-white/88 lg:order-2 lg:sticky lg:top-5 lg:self-start lg:max-h-[calc(100vh-18rem)] lg:w-[260px]"
+                aria-label="PDF navigation sidebar"
+              >
+                <div
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Drag navigator"
+                  title="Drag navigator"
+                  onMouseDown={handleNavigatorDragStart}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                    }
+                  }}
+                  className={`hidden h-2 cursor-move rounded-full bg-[color:color-mix(in_srgb,var(--color-purple)_20%,white)] lg:mx-2 lg:mt-2 lg:block ${isDraggingNavigator ? "opacity-90" : "opacity-60"}`}
+                />
                 <div className="border-b border-black/8 p-2">
                   <div className="grid grid-cols-2 gap-2">
                     <button
@@ -809,7 +941,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                 </div>
 
                 {outlineTab === "pages" ? (
-                  <div className="max-h-[calc(66vh-58px)] overflow-y-auto p-3">
+                  <div className="max-h-[calc(66vh-58px)] overflow-y-auto p-3 lg:max-h-[calc(100vh-21.5rem)]">
                     {numPages > 0 ? (
                       <div className="grid grid-cols-4 gap-2">
                         {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
@@ -817,7 +949,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                             key={`page-jump-${pageNum}`}
                             type="button"
                             onClick={() => handlePageChange(pageNum)}
-                            className={`rounded-lg border px-2 py-2 text-sm font-medium transition ${
+                            className={`rounded-lg border px-1.5 py-1.5 text-xs font-medium transition ${
                               pageNum === currentPage
                                 ? "border-[var(--color-purple)] bg-[color:color-mix(in_srgb,var(--color-purple)_90%,white)] text-white"
                                 : "border-black/10 bg-white text-[var(--color-purple)] hover:border-[var(--color-purple)]"
@@ -835,7 +967,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                     )}
                   </div>
                 ) : (
-                  <div className="max-h-[calc(66vh-58px)] overflow-y-auto p-3">
+                  <div className="max-h-[calc(66vh-58px)] overflow-y-auto p-3 lg:max-h-[calc(100vh-21.5rem)]">
                     {isOutlineLoading ? (
                       <p className="text-sm text-[color:color-mix(in_srgb,var(--color-charcoal)_66%,white)]">
                         Reading PDF chapters and bookmarks...
