@@ -355,13 +355,15 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     return () => observer.disconnect();
   }, []);
 
-  const safePage = useMemo(
+  const safeCurrentPage = useMemo(
     () => validatePageNumber(currentPage, numPages),
     [currentPage, numPages],
   );
 
   const isTwoPageSpread = isFullscreenStage && isDesktopLandscape;
-  const displayPage = isTwoPageSpread && safePage % 2 === 0 ? safePage - 1 : safePage;
+  const spreadStartPage = isTwoPageSpread && safeCurrentPage % 2 === 0
+    ? safeCurrentPage - 1
+    : safeCurrentPage;
   const spreadPageHeight = Math.max(320, Math.floor(containerHeight - 36));
 
   const pageStep = isTwoPageSpread ? 2 : 1;
@@ -379,11 +381,11 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     return "none";
   }, [readingTheme]);
 
-  const canGoPrevious = viewMode === "continuous" ? currentPage > 1 : displayPage > 1;
+  const canGoPrevious = viewMode === "continuous" ? currentPage > 1 : spreadStartPage > 1;
   const canGoNext =
     viewMode === "continuous"
       ? numPages > 0 && currentPage < numPages
-      : numPages > 0 && displayPage + pageStep <= numPages;
+      : numPages > 0 && spreadStartPage + pageStep <= numPages;
 
   const handlePageChange = useCallback(
     (page: number) => {
@@ -392,11 +394,10 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
         scrollToPage(rawPage);
         return;
       }
-      const nextPage = isTwoPageSpread && rawPage % 2 === 0 ? rawPage - 1 : rawPage;
-      setCurrentPage(nextPage);
-      trackPdfNavigation(booklet.title, nextPage, numPages);
+      setCurrentPage(rawPage);
+      trackPdfNavigation(booklet.title, rawPage, numPages);
     },
-    [booklet.title, isTwoPageSpread, numPages, scrollToPage, viewMode],
+    [booklet.title, numPages, scrollToPage, viewMode],
   );
 
   const handleNextPage = useCallback(() => {
@@ -408,8 +409,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     if (!canGoNext) {
       return;
     }
-    handlePageChange(displayPage + pageStep);
-  }, [canGoNext, currentPage, displayPage, handlePageChange, numPages, pageStep, scrollToPage, viewMode]);
+    handlePageChange(spreadStartPage + pageStep);
+  }, [canGoNext, currentPage, handlePageChange, numPages, pageStep, scrollToPage, spreadStartPage, viewMode]);
 
   const handlePreviousPage = useCallback(() => {
     if (viewMode === "continuous") {
@@ -420,8 +421,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     if (!canGoPrevious) {
       return;
     }
-    handlePageChange(displayPage - pageStep);
-  }, [canGoPrevious, currentPage, displayPage, handlePageChange, pageStep, scrollToPage, viewMode]);
+    handlePageChange(spreadStartPage - pageStep);
+  }, [canGoPrevious, currentPage, handlePageChange, pageStep, scrollToPage, spreadStartPage, viewMode]);
 
   useEffect(() => {
     const updateViewportMode = () => {
@@ -610,9 +611,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       return;
     }
 
-    const pageForUrl = viewMode === "continuous"
-      ? validatePageNumber(currentPage, numPages)
-      : validatePageNumber(displayPage, numPages);
+    const pageForUrl = validatePageNumber(currentPage, numPages);
     const nextPath = `/booklets/${booklet.slug}/${pageForUrl}`;
 
     if (window.location.pathname === nextPath) {
@@ -635,7 +634,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
 
     window.history.replaceState(null, "", nextPath);
     setPref(PREF_KEYS.lastUrl, nextPath);
-  }, [booklet.slug, currentPage, displayPage, isPageInputEditing, numPages, viewMode]);
+  }, [booklet.slug, currentPage, isPageInputEditing, numPages, viewMode]);
 
   useEffect(() => {
     return () => {
@@ -720,7 +719,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
           <PDFControls
             bookletTitle={booklet.title}
             pdfUrl={booklet.pdfUrl}
-            currentPage={viewMode === "continuous" ? currentPage : displayPage}
+            currentPage={viewMode === "continuous" ? currentPage : safeCurrentPage}
             totalPages={numPages}
             scale={scale}
             canGoPrevious={canGoPrevious}
@@ -853,7 +852,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                         style={{ filter: pdfFilter }}
                       >
                         <Page
-                          pageNumber={displayPage}
+                          pageNumber={spreadStartPage}
                           scale={isTwoPageSpread ? 1 : scale}
                           width={isTwoPageSpread ? undefined : Math.min(containerWidth, 1080)}
                           height={isTwoPageSpread ? spreadPageHeight : undefined}
@@ -863,9 +862,9 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                           onRenderTextLayerError={handleTextLayerError}
                           className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
                         />
-                        {isTwoPageSpread && displayPage + 1 <= numPages ? (
+                        {isTwoPageSpread && spreadStartPage + 1 <= numPages ? (
                           <Page
-                            pageNumber={displayPage + 1}
+                            pageNumber={spreadStartPage + 1}
                             scale={1}
                             height={spreadPageHeight}
                             loading={<LoadingSpinner label="Rendering page" />}
