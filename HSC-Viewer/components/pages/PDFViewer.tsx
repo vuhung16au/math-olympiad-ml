@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
+import { FileText, ListTree } from "lucide-react";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import type { Booklet } from "@/lib/booklets";
@@ -26,6 +27,134 @@ type PDFViewerProps = {
 
 type ReadingTheme = "light" | "dark" | "sepia";
 
+type OutlineTab = "pages" | "outline";
+
+type OutlineItem = {
+  id: string;
+  title: string;
+  page: number;
+  level: number;
+};
+
+type PdfReference = {
+  num: number;
+  gen: number;
+};
+
+type PdfOutlineNode = {
+  title?: string;
+  dest?: unknown;
+  items?: PdfOutlineNode[];
+};
+
+type PdfDocumentLike = {
+  getOutline: () => Promise<PdfOutlineNode[] | null>;
+  getDestination: (destination: string) => Promise<unknown>;
+  getPageIndex: (ref: PdfReference) => Promise<number>;
+};
+
+function isPdfReference(value: unknown): value is PdfReference {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const maybeRef = value as Partial<PdfReference>;
+  return typeof maybeRef.num === "number" && typeof maybeRef.gen === "number";
+}
+
+async function resolveOutlinePage(
+  pdf: PdfDocumentLike,
+  destination: unknown,
+  namedDestinationCache: Map<string, number>,
+  referenceCache: Map<string, number>,
+): Promise<number | null> {
+  if (!destination) {
+    return null;
+  }
+
+  let explicitDestination: unknown = destination;
+
+  if (typeof destination === "string") {
+    const cachedPage = namedDestinationCache.get(destination);
+    if (cachedPage) {
+      return cachedPage;
+    }
+
+    explicitDestination = await pdf.getDestination(destination);
+    if (!explicitDestination) {
+      return null;
+    }
+  }
+
+  if (!Array.isArray(explicitDestination) || explicitDestination.length === 0) {
+    return null;
+  }
+
+  const target = explicitDestination[0];
+
+  if (typeof target === "number" && Number.isFinite(target)) {
+    return target + 1;
+  }
+
+  if (!isPdfReference(target)) {
+    return null;
+  }
+
+  const refKey = `${target.num}_${target.gen}`;
+  const cachedRefPage = referenceCache.get(refKey);
+
+  if (cachedRefPage) {
+    return cachedRefPage;
+  }
+
+  const pageIndex = await pdf.getPageIndex(target);
+  const page = pageIndex + 1;
+  referenceCache.set(refKey, page);
+
+  return page;
+}
+
+async function extractOutlineItems(pdf: PdfDocumentLike, totalPages: number): Promise<OutlineItem[]> {
+  const rawOutline = await pdf.getOutline();
+  if (!rawOutline || rawOutline.length === 0) {
+    return [];
+  }
+
+  const outline: OutlineItem[] = [];
+  const namedDestinationCache = new Map<string, number>();
+  const referenceCache = new Map<string, number>();
+  let idCounter = 0;
+
+  const walk = async (nodes: PdfOutlineNode[], level: number) => {
+    for (const node of nodes) {
+      const resolvedPage = await resolveOutlinePage(
+        pdf,
+        node.dest,
+        namedDestinationCache,
+        referenceCache,
+      );
+
+      if (resolvedPage && resolvedPage >= 1 && resolvedPage <= totalPages) {
+        outline.push({
+          id: `outline-${idCounter}`,
+          title: (node.title ?? "Untitled section").trim() || "Untitled section",
+          page: resolvedPage,
+          level,
+        });
+        idCounter += 1;
+      }
+
+      if (node.items && node.items.length > 0) {
+        await walk(node.items, level + 1);
+      }
+    }
+  };
+
+  await walk(rawOutline, 0);
+
+  return outline;
+}
+
 export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const lastWheelNavigationRef = useRef(0);
@@ -44,9 +173,15 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const [isPageInputEditing, setIsPageInputEditing] = useState(false);
   const [isFullscreenStage, setIsFullscreenStage] = useState(false);
   const [isDesktopLandscape, setIsDesktopLandscape] = useState(false);
+  const [outlineTab, setOutlineTab] = useState<OutlineTab>("pages");
+  const [outlineItems, setOutlineItems] = useState<OutlineItem[]>([]);
+  const [isOutlineLoading, setIsOutlineLoading] = useState(false);
+  const [outlineError, setOutlineError] = useState<string | null>(null);
 
   // Keep ref in sync so effects can read latest value without stale closures
-  currentPageRef.current = currentPage;
+  useEffect(() => {
+    currentPageRef.current = currentPage;
+  }, [currentPage]);
 
   useEffect(() => {
     trackBookletOpened(booklet.title);
@@ -135,8 +270,6 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
         if (el) el.scrollIntoView({ block: "start" });
       }, 80);
     }
-    // Only run when viewMode or numPages changes, not on every page change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viewMode, numPages]);
 
   useEffect(() => {
@@ -506,76 +639,202 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
           ) : null}
 
           <div ref={stageRef} data-pdf-stage className="min-h-[70vh] bg-[color:color-mix(in_srgb,var(--color-ivory)_72%,white)] p-3 sm:p-5">
-            <Document
-              file={booklet.pdfUrl}
-              loading={<LoadingSpinner label="Loading PDF document" />}
-              onLoadSuccess={({ numPages: loadedPages }) => {
-                setNumPages(loadedPages);
-                setCurrentPage((page) => validatePageNumber(page, loadedPages));
-                setError(null);
-              }}
-              onLoadError={() => {
-                setError("load-error");
-              }}
-              error={null}
-              className="max-w-full"
-            >
-              {viewMode === "continuous" ? (
-                /* Continuous mode: all pages stacked, native browser scroll */
-                <div className="flex flex-col items-center gap-6 py-2">
-                  {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
-                    <div
-                      key={pageNum}
-                      ref={(el) => {
-                        if (el) pageRefs.current.set(pageNum, el);
-                        else pageRefs.current.delete(pageNum);
-                      }}
-                      style={{ filter: pdfFilter }}
-                    >
-                      <Page
-                        pageNumber={pageNum}
-                        scale={scale}
-                        width={Math.min(containerWidth, 1080)}
-                        loading={pageNum === 1 ? <LoadingSpinner label="Rendering page" /> : undefined}
-                        renderTextLayer
-                        renderAnnotationLayer
-                        className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
-                      />
+            <div className="grid min-h-[66vh] gap-4 lg:grid-cols-[minmax(0,1fr)_290px]">
+              <div className="order-2 lg:order-1">
+                <Document
+                  file={booklet.pdfUrl}
+                  loading={<LoadingSpinner label="Loading PDF document" />}
+                  onLoadSuccess={(loadedDocument) => {
+                    const { numPages: loadedPages } = loadedDocument;
+
+                    setNumPages(loadedPages);
+                    setCurrentPage((page) => validatePageNumber(page, loadedPages));
+                    setError(null);
+                    setOutlineTab("pages");
+                    setOutlineItems([]);
+                    setOutlineError(null);
+                    setIsOutlineLoading(true);
+
+                    void (async () => {
+                      try {
+                        const outline = await extractOutlineItems(
+                          loadedDocument.pdf as unknown as PdfDocumentLike,
+                          loadedPages,
+                        );
+                        setOutlineItems(outline);
+                      } catch {
+                        setOutlineError("outline-error");
+                      } finally {
+                        setIsOutlineLoading(false);
+                      }
+                    })();
+                  }}
+                  onLoadError={() => {
+                    setError("load-error");
+                    setOutlineItems([]);
+                    setIsOutlineLoading(false);
+                  }}
+                  error={null}
+                  className="max-w-full"
+                >
+                  {viewMode === "continuous" ? (
+                    /* Continuous mode: all pages stacked, native browser scroll */
+                    <div className="flex flex-col items-center gap-6 py-2">
+                      {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
+                        <div
+                          key={pageNum}
+                          ref={(el) => {
+                            if (el) pageRefs.current.set(pageNum, el);
+                            else pageRefs.current.delete(pageNum);
+                          }}
+                          style={{ filter: pdfFilter }}
+                        >
+                          <Page
+                            pageNumber={pageNum}
+                            scale={scale}
+                            width={Math.min(containerWidth, 1080)}
+                            loading={pageNum === 1 ? <LoadingSpinner label="Rendering page" /> : undefined}
+                            renderTextLayer
+                            renderAnnotationLayer
+                            className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              ) : (
-                /* Single page mode (original behavior) */
-                <div className="mx-auto flex max-w-full justify-center overflow-auto">
-                  <div
-                    className={`flex max-w-full ${isTwoPageSpread ? "items-start justify-center gap-5 -mt-2" : "justify-center"}`}
-                    style={{ filter: pdfFilter }}
-                  >
-                    <Page
-                      pageNumber={displayPage}
-                      scale={isTwoPageSpread ? 1 : scale}
-                      width={isTwoPageSpread ? undefined : Math.min(containerWidth, 1080)}
-                      height={isTwoPageSpread ? spreadPageHeight : undefined}
-                      loading={<LoadingSpinner label="Rendering page" />}
-                      renderTextLayer
-                      renderAnnotationLayer
-                      className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
-                    />
-                    {isTwoPageSpread && displayPage + 1 <= numPages ? (
-                      <Page
-                        pageNumber={displayPage + 1}
-                        scale={1}
-                        height={spreadPageHeight}
-                        loading={<LoadingSpinner label="Rendering page" />}
-                        renderTextLayer
-                        renderAnnotationLayer
-                        className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
-                      />
-                    ) : null}
+                  ) : (
+                    /* Single page mode (original behavior) */
+                    <div className="mx-auto flex max-w-full justify-center overflow-auto">
+                      <div
+                        className={`flex max-w-full ${isTwoPageSpread ? "items-start justify-center gap-5 -mt-2" : "justify-center"}`}
+                        style={{ filter: pdfFilter }}
+                      >
+                        <Page
+                          pageNumber={displayPage}
+                          scale={isTwoPageSpread ? 1 : scale}
+                          width={isTwoPageSpread ? undefined : Math.min(containerWidth, 1080)}
+                          height={isTwoPageSpread ? spreadPageHeight : undefined}
+                          loading={<LoadingSpinner label="Rendering page" />}
+                          renderTextLayer
+                          renderAnnotationLayer
+                          className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                        />
+                        {isTwoPageSpread && displayPage + 1 <= numPages ? (
+                          <Page
+                            pageNumber={displayPage + 1}
+                            scale={1}
+                            height={spreadPageHeight}
+                            loading={<LoadingSpinner label="Rendering page" />}
+                            renderTextLayer
+                            renderAnnotationLayer
+                            className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                          />
+                        ) : null}
+                      </div>
+                    </div>
+                  )}
+                </Document>
+              </div>
+
+              <aside className="order-1 max-h-[66vh] overflow-hidden rounded-[20px] border border-black/10 bg-white/88 lg:order-2" aria-label="PDF navigation sidebar">
+                <div className="border-b border-black/8 p-2">
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setOutlineTab("pages")}
+                      aria-pressed={outlineTab === "pages"}
+                      className={`inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition ${
+                        outlineTab === "pages"
+                          ? "bg-[var(--color-purple)] text-white"
+                          : "text-[var(--color-purple)] hover:bg-[color:color-mix(in_srgb,var(--color-purple)_10%,white)]"
+                      }`}
+                    >
+                      <FileText className="h-4 w-4" />
+                      Pages
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setOutlineTab("outline")}
+                      aria-pressed={outlineTab === "outline"}
+                      className={`inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition ${
+                        outlineTab === "outline"
+                          ? "bg-[var(--color-purple)] text-white"
+                          : "text-[var(--color-purple)] hover:bg-[color:color-mix(in_srgb,var(--color-purple)_10%,white)]"
+                      }`}
+                    >
+                      <ListTree className="h-4 w-4" />
+                      Outline
+                    </button>
                   </div>
                 </div>
-              )}
-            </Document>
+
+                {outlineTab === "pages" ? (
+                  <div className="max-h-[calc(66vh-58px)] overflow-y-auto p-3">
+                    {numPages > 0 ? (
+                      <div className="grid grid-cols-4 gap-2">
+                        {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
+                          <button
+                            key={`page-jump-${pageNum}`}
+                            type="button"
+                            onClick={() => handlePageChange(pageNum)}
+                            className={`rounded-lg border px-2 py-2 text-sm font-medium transition ${
+                              pageNum === currentPage
+                                ? "border-[var(--color-purple)] bg-[color:color-mix(in_srgb,var(--color-purple)_90%,white)] text-white"
+                                : "border-black/10 bg-white text-[var(--color-purple)] hover:border-[var(--color-purple)]"
+                            }`}
+                            aria-label={`Jump to page ${pageNum}`}
+                          >
+                            {pageNum}
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-[color:color-mix(in_srgb,var(--color-charcoal)_66%,white)]">
+                        Page navigation will appear after the document loads.
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="max-h-[calc(66vh-58px)] overflow-y-auto p-3">
+                    {isOutlineLoading ? (
+                      <p className="text-sm text-[color:color-mix(in_srgb,var(--color-charcoal)_66%,white)]">
+                        Reading PDF chapters and bookmarks...
+                      </p>
+                    ) : outlineError ? (
+                      <p className="text-sm text-[color:color-mix(in_srgb,var(--color-charcoal)_66%,white)]">
+                        Outline could not be read for this file.
+                      </p>
+                    ) : outlineItems.length === 0 ? (
+                      <p className="text-sm text-[color:color-mix(in_srgb,var(--color-charcoal)_66%,white)]">
+                        No embedded outline found in this PDF.
+                      </p>
+                    ) : (
+                      <ul className="space-y-1" aria-label="PDF outline list">
+                        {outlineItems.map((item) => (
+                          <li key={item.id}>
+                            <button
+                              type="button"
+                              onClick={() => handlePageChange(item.page)}
+                              className={`w-full rounded-lg border px-3 py-2 text-left text-sm transition ${
+                                currentPage === item.page
+                                  ? "border-[var(--color-purple)] bg-[color:color-mix(in_srgb,var(--color-purple)_8%,white)] text-[var(--color-purple)]"
+                                  : "border-transparent text-[color:color-mix(in_srgb,var(--color-charcoal)_86%,white)] hover:border-black/10 hover:bg-white"
+                              }`}
+                              style={{ paddingLeft: `${12 + item.level * 14}px` }}
+                              aria-label={`Jump to ${item.title} on page ${item.page}`}
+                            >
+                              <span className="block truncate font-medium">{item.title}</span>
+                              <span className="block text-xs text-[color:color-mix(in_srgb,var(--color-charcoal)_58%,white)]">
+                                Page {item.page}
+                              </span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
+              </aside>
+            </div>
           </div>
         </div>
       </section>
