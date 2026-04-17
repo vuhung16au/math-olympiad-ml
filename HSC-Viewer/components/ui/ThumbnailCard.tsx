@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { Clock3 } from "lucide-react";
 import type { Booklet } from "@/lib/booklets";
 
 export default function ThumbnailCard({ booklet }: { booklet: Booklet }) {
@@ -21,8 +22,16 @@ export default function ThumbnailCard({ booklet }: { booklet: Booklet }) {
       <div className="absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_top_left,rgba(242,18,12,0.18),transparent_58%),linear-gradient(135deg,rgba(60,16,83,0.96),rgba(181,24,37,0.86))]" />
       <div className="relative flex min-h-[300px] flex-col justify-between gap-6">
         <div>
-          <div className="mb-6 inline-flex rounded-full border border-white/25 bg-white/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm">
-            {booklet.isAvailable ? "Available now" : "Coming soon"}
+          <div
+            className={[
+              "mb-6 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] backdrop-blur-sm",
+              booklet.isAvailable
+                ? "border-white/25 bg-white/12 text-white"
+                : "border-white/35 bg-white/85 text-[var(--color-charcoal)]",
+            ].join(" ")}
+          >
+            {!booklet.isAvailable && <Clock3 size={12} aria-hidden="true" />}
+            <span>{booklet.isAvailable ? "Available now" : "Coming soon"}</span>
           </div>
           <h2 className="max-w-[15ch] text-2xl font-semibold leading-tight text-white">
             {booklet.title}

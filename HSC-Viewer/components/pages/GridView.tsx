@@ -2,6 +2,9 @@ import { BOOKLETS } from "@/lib/booklets";
 import ThumbnailCard from "@/components/ui/ThumbnailCard";
 
 export default function GridView() {
+  const availableBooklets = BOOKLETS.filter((booklet) => booklet.isAvailable);
+  const comingSoonBooklets = BOOKLETS.filter((booklet) => !booklet.isAvailable);
+
   return (
     <section className="px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <div className="mx-auto max-w-[1200px]">
@@ -18,10 +21,26 @@ export default function GridView() {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {BOOKLETS.map((booklet) => (
+          {availableBooklets.map((booklet) => (
             <ThumbnailCard key={booklet.id} booklet={booklet} />
           ))}
         </div>
+
+        {comingSoonBooklets.length > 0 && (
+          <div className="mt-10 border-t border-black/10 pt-8">
+            <h2 className="text-lg font-semibold tracking-tight text-[var(--color-purple)]">
+              Coming Soon
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-[color:color-mix(in_srgb,var(--color-charcoal)_74%,white)]">
+              These modules are not published yet and will appear in the active collection once released.
+            </p>
+            <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {comingSoonBooklets.map((booklet) => (
+                <ThumbnailCard key={booklet.id} booklet={booklet} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
