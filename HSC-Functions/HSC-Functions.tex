@@ -525,4 +525,31 @@ LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.
 GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
 Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Functions}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Functions}
 
+% ============================================================
+\section{Appendix}
+% ============================================================
+
+\subsection{Strict Definitions of Continuity}
+
+These strict definitions are very helpful for higher studies and for understanding mathematics, functions, and continuity in a rigorous way.
+
+\textbf{1. The limit definition (calculus).} A function $f(x)$ is continuous at a point $x=c$ if and only if all three conditions hold:
+\begin{itemize}[leftmargin=*]
+  \item $f(c)$ exists.
+  \item $\lim_{x\to c}f(x)$ exists (that is, the left-hand and right-hand limits both exist and are equal).
+  \item $\lim_{x\to c}f(x)=f(c)$.
+\end{itemize}
+
+If even one condition fails at $x=c$ (for example, a hole, a jump, or a vertical asymptote), then $f$ is discontinuous at $c$.
+
+\textbf{2. The $\epsilon$-$\delta$ definition (real analysis).} Let $f$ be defined on a domain $D$, and let $c\in D$. We say $f$ is continuous at $c$ if:
+\begin{quote}
+For every real number $\epsilon>0$, there exists a real number $\delta>0$ such that for all $x\in D$,
+\[
+|x-c|<\delta \implies |f(x)-f(c)|<\epsilon.
+\]
+\end{quote}
+
+This is the most rigorous standard definition of continuity. It replaces informal language like ``$x$ approaches $c$'' with precise inequalities.
+
 \end{document}
