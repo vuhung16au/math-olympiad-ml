@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
+import { PanelLeftOpen } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileMenu from "@/components/layout/MobileMenu";
@@ -20,6 +21,7 @@ function getCurrentTitle(pathname: string): string | null {
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const currentTitle = useMemo(() => getCurrentTitle(pathname), [pathname]);
 
   return (
@@ -28,8 +30,23 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         currentTitle={currentTitle}
         onOpenMenu={() => setIsMobileMenuOpen(true)}
       />
+      {isSidebarCollapsed ? (
+        <button
+          type="button"
+          onClick={() => setIsSidebarCollapsed(false)}
+          className="fixed left-4 top-20 z-30 hidden items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-purple)] shadow-sm transition hover:border-[var(--color-purple)] lg:inline-flex"
+          aria-label="Expand sidebar"
+        >
+          <PanelLeftOpen className="h-4 w-4" />
+          Menu
+        </button>
+      ) : null}
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-[1600px]">
-        <Sidebar pathname={pathname} />
+        <Sidebar
+          pathname={pathname}
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapse={() => setIsSidebarCollapsed((value) => !value)}
+        />
         <MobileMenu
           isOpen={isMobileMenuOpen}
           pathname={pathname}

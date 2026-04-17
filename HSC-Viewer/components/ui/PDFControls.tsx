@@ -28,6 +28,9 @@ interface PDFControlsProps {
   onFitWidth: () => void;
   onFullscreen: () => void;
   onPrint: () => void;
+  viewMode: "single" | "continuous";
+  onToggleViewMode: () => void;
+  onPageInputEditingChange: (isEditing: boolean) => void;
 }
 
 function IconButton({
@@ -72,6 +75,9 @@ export default function PDFControls({
   onFitWidth,
   onFullscreen,
   onPrint,
+  viewMode,
+  onToggleViewMode,
+  onPageInputEditingChange,
 }: PDFControlsProps) {
   return (
     <div className="flex flex-col gap-3 border-b border-black/8 px-4 py-4 sm:px-6">
@@ -93,6 +99,37 @@ export default function PDFControls({
           >
             Fit width
           </button>
+          {/* View mode toggle */}
+          <div className="flex overflow-hidden rounded-full border border-black/10 bg-white shadow-sm">
+            <button
+              type="button"
+              onClick={viewMode === "single" ? onToggleViewMode : undefined}
+              aria-label="Continuous page view"
+              title="Continuous page view"
+              aria-pressed={viewMode === "continuous"}
+              className={`px-4 py-2 text-sm font-medium transition ${
+                viewMode === "continuous"
+                  ? "bg-[var(--color-purple)] text-white"
+                  : "text-[var(--color-purple)] hover:bg-black/5"
+              }`}
+            >
+              Continuous
+            </button>
+            <button
+              type="button"
+              onClick={viewMode === "continuous" ? onToggleViewMode : undefined}
+              aria-label="Single page view"
+              title="Single page view"
+              aria-pressed={viewMode === "single"}
+              className={`px-4 py-2 text-sm font-medium transition ${
+                viewMode === "single"
+                  ? "bg-[var(--color-purple)] text-white"
+                  : "text-[var(--color-purple)] hover:bg-black/5"
+              }`}
+            >
+              Single Page
+            </button>
+          </div>
           <button
             type="button"
             onClick={onPrint}
@@ -128,6 +165,13 @@ export default function PDFControls({
               max={Math.max(totalPages, 1)}
               value={currentPage}
               onChange={(event) => onPageChange(Number(event.target.value) || 1)}
+              onFocus={() => onPageInputEditingChange(true)}
+              onBlur={() => onPageInputEditingChange(false)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  (event.currentTarget as HTMLInputElement).blur();
+                }
+              }}
               className="w-14 bg-transparent text-center font-semibold text-[var(--color-purple)] outline-none"
             />
             <span className="ml-2 text-[color:color-mix(in_srgb,var(--color-charcoal)_70%,white)]">

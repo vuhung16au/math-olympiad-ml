@@ -1,12 +1,35 @@
 import Link from "next/link";
+import { PanelLeftClose } from "lucide-react";
 import { BOOKLETS } from "@/lib/booklets";
 
-export default function Sidebar({ pathname }: { pathname: string }) {
+export default function Sidebar({
+  pathname,
+  isCollapsed,
+  onToggleCollapse,
+}: {
+  pathname: string;
+  isCollapsed: boolean;
+  onToggleCollapse: () => void;
+}) {
+  if (isCollapsed) {
+    return null;
+  }
+
   return (
     <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-[var(--sidebar-width)] shrink-0 overflow-y-auto border-r border-black/10 bg-[color:color-mix(in_srgb,var(--color-purple)_92%,white)] px-4 py-6 text-white lg:block">
-      <p className="mb-4 px-3 text-xs font-semibold uppercase tracking-[0.24em] text-white/70">
-        Booklets
-      </p>
+      <div className="mb-4 flex items-center justify-between gap-2 px-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/70">
+          Booklets
+        </p>
+        <button
+          type="button"
+          onClick={onToggleCollapse}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition hover:border-white/50 hover:bg-white/20"
+          aria-label="Collapse sidebar"
+        >
+          <PanelLeftClose className="h-4 w-4" />
+        </button>
+      </div>
       <nav className="space-y-1.5" aria-label="Booklet navigation">
         {BOOKLETS.map((booklet) => {
           const isActive = pathname === `/booklets/${booklet.slug}`;
@@ -31,11 +54,12 @@ export default function Sidebar({ pathname }: { pathname: string }) {
             <Link
               key={booklet.id}
               href={`/booklets/${booklet.slug}`}
+              aria-current={isActive ? "page" : undefined}
               className={[
-                "group flex items-center rounded-2xl px-3 py-3 text-sm font-medium transition",
+                "group flex items-center rounded-2xl border-l-4 px-3 py-3 text-sm font-medium transition",
                 isActive
-                  ? "bg-white/25 text-white shadow-sm ring-1 ring-white/40"
-                  : "text-white/84 hover:bg-white/10 hover:text-white",
+                  ? "border-l-[var(--color-red)] bg-white text-[var(--color-purple)] shadow-md ring-1 ring-white/60"
+                  : "border-l-transparent text-white/84 hover:bg-white/10 hover:text-white",
               ].join(" ")}
             >
               <span className="truncate">{booklet.title}</span>

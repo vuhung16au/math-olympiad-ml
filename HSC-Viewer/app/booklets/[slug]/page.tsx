@@ -33,5 +33,5 @@ export default async function BookletPage({ params }: BookletPageProps) {
     notFound();
   }
 
-  return <PDFViewer booklet={booklet} />;
+  return <PDFViewer booklet={booklet} initialPage={1} />;
 }

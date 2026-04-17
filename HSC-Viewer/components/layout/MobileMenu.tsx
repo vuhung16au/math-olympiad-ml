@@ -70,11 +70,12 @@ export default function MobileMenu({
                 key={booklet.id}
                 href={`/booklets/${booklet.slug}`}
                 onClick={onClose}
+                aria-current={isActive ? "page" : undefined}
                 className={[
-                  "block rounded-2xl px-3 py-3 text-sm font-medium transition",
+                  "block rounded-2xl border-l-4 px-3 py-3 text-sm font-medium transition",
                   isActive
-                    ? "bg-white/25 text-white ring-1 ring-white/40"
-                    : "bg-white/5 text-white/88 hover:bg-white/12 hover:text-white",
+                    ? "border-l-[var(--color-red)] bg-white text-[var(--color-purple)] ring-1 ring-white/60"
+                    : "border-l-transparent bg-white/5 text-white/88 hover:bg-white/12 hover:text-white",
                 ].join(" ")}
               >
                 {booklet.title}
