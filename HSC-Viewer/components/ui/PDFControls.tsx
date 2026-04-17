@@ -5,11 +5,16 @@ import {
   ChevronRight,
   Download,
   Expand,
+  Moon,
   Minus,
+  Palette,
   Plus,
   Printer,
   RotateCcw,
+  Sun,
 } from "lucide-react";
+
+type ReadingTheme = "light" | "dark" | "sepia";
 
 interface PDFControlsProps {
   bookletTitle: string;
@@ -30,6 +35,8 @@ interface PDFControlsProps {
   onPrint: () => void;
   viewMode: "single" | "continuous";
   onToggleViewMode: () => void;
+  readingTheme: ReadingTheme;
+  onReadingThemeChange: (theme: ReadingTheme) => void;
   onPageInputEditingChange: (isEditing: boolean) => void;
 }
 
@@ -77,6 +84,8 @@ export default function PDFControls({
   onPrint,
   viewMode,
   onToggleViewMode,
+  readingTheme,
+  onReadingThemeChange,
   onPageInputEditingChange,
 }: PDFControlsProps) {
   return (
@@ -128,6 +137,53 @@ export default function PDFControls({
               }`}
             >
               Single Page
+            </button>
+          </div>
+          <div className="flex overflow-hidden rounded-full border border-black/10 bg-white shadow-sm">
+            <button
+              type="button"
+              onClick={() => onReadingThemeChange("light")}
+              aria-label="Light reading theme"
+              title="Light reading theme"
+              aria-pressed={readingTheme === "light"}
+              className={`inline-flex items-center gap-2 px-3 py-2 text-sm font-medium transition ${
+                readingTheme === "light"
+                  ? "bg-[var(--color-purple)] text-white"
+                  : "text-[var(--color-purple)] hover:bg-black/5"
+              }`}
+            >
+              <Sun className="h-4 w-4" />
+              <span className="hidden sm:inline">Light</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onReadingThemeChange("dark")}
+              aria-label="Dark reading theme"
+              title="Dark reading theme"
+              aria-pressed={readingTheme === "dark"}
+              className={`inline-flex items-center gap-2 px-3 py-2 text-sm font-medium transition ${
+                readingTheme === "dark"
+                  ? "bg-[var(--color-purple)] text-white"
+                  : "text-[var(--color-purple)] hover:bg-black/5"
+              }`}
+            >
+              <Moon className="h-4 w-4" />
+              <span className="hidden sm:inline">Dark</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onReadingThemeChange("sepia")}
+              aria-label="Sepia reading theme"
+              title="Sepia reading theme"
+              aria-pressed={readingTheme === "sepia"}
+              className={`inline-flex items-center gap-2 px-3 py-2 text-sm font-medium transition ${
+                readingTheme === "sepia"
+                  ? "bg-[var(--color-purple)] text-white"
+                  : "text-[var(--color-purple)] hover:bg-black/5"
+              }`}
+            >
+              <Palette className="h-4 w-4" />
+              <span className="hidden sm:inline">Sepia</span>
             </button>
           </div>
           <button

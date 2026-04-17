@@ -24,6 +24,8 @@ type PDFViewerProps = {
   initialPage?: number;
 };
 
+type ReadingTheme = "light" | "dark" | "sepia";
+
 export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const lastWheelNavigationRef = useRef(0);
@@ -34,6 +36,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(Math.max(1, Math.floor(initialPage)));
   const [viewMode, setViewMode] = useState<"single" | "continuous">("continuous");
+  const [readingTheme, setReadingTheme] = useState<ReadingTheme>("light");
   const [scale, setScale] = useState(PDF_DEFAULTS.defaultScale);
   const [containerWidth, setContainerWidth] = useState(900);
   const [containerHeight, setContainerHeight] = useState(700);
@@ -166,6 +169,19 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const spreadPageHeight = Math.max(320, Math.floor(containerHeight - 36));
 
   const pageStep = isTwoPageSpread ? 2 : 1;
+
+  const pdfFilter = useMemo(() => {
+    if (readingTheme === "dark") {
+      // Invert + hue-rotate keeps black text readable on dark backgrounds.
+      return "invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.93)";
+    }
+
+    if (readingTheme === "sepia") {
+      return "sepia(0.82) saturate(0.8) brightness(0.94) contrast(0.92)";
+    }
+
+    return "none";
+  }, [readingTheme]);
 
   const canGoPrevious = viewMode === "continuous" ? currentPage > 1 : displayPage > 1;
   const canGoNext =
@@ -438,6 +454,11 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
             onNextPage={handleNextPage}
             viewMode={viewMode}
             onToggleViewMode={() => setViewMode((m) => (m === "continuous" ? "single" : "continuous"))}
+            readingTheme={readingTheme}
+            onReadingThemeChange={(theme) => {
+              setReadingTheme(theme);
+              trackPdfAction(booklet.title, `reading_theme_${theme}`);
+            }}
             onPageInputEditingChange={setIsPageInputEditing}
             onZoomIn={() => {
               setScale((current) => {
@@ -509,6 +530,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                         if (el) pageRefs.current.set(pageNum, el);
                         else pageRefs.current.delete(pageNum);
                       }}
+                      style={{ filter: pdfFilter }}
                     >
                       <Page
                         pageNumber={pageNum}
@@ -527,6 +549,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                 <div className="mx-auto flex max-w-full justify-center overflow-auto">
                   <div
                     className={`flex max-w-full ${isTwoPageSpread ? "items-start justify-center gap-5 -mt-2" : "justify-center"}`}
+                    style={{ filter: pdfFilter }}
                   >
                     <Page
                       pageNumber={displayPage}
