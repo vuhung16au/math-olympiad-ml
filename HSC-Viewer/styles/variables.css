@@ -1,0 +1,69 @@
+:root {
+  /* Primary colors from HSC-LastResorts */
+  --color-purple: rgb(60, 16, 83);
+  --color-red: rgb(242, 18, 12);
+  --color-black: rgb(0, 0, 0);
+  --color-white: rgb(255, 255, 255);
+
+  /* Secondary colors */
+  --color-law-purple: rgb(181, 24, 37);
+  --color-stone: rgb(145, 139, 131);
+  --color-charcoal: rgb(48, 44, 42);
+  --color-ivory: rgb(242, 239, 235);
+
+  /* Spacing */
+  --spacing-unit: 1rem;
+  --sidebar-width: 280px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --sidebar-width: 0;
+  }
+}
+
+/* Smooth transitions */
+* {
+  @apply transition-colors transition-transform;
+}
+
+/* PDF Viewer specific */
+.pdf-viewer-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.pdf-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f3f3;
+}
+
+/* Mobile menu animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.menu-slide-in {
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.menu-slide-out {
+  animation: slideOut 0.3s ease-in-out;
+}

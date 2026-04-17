@@ -1,0 +1,42 @@
+{
+  "name": "hsc-math-hub",
+  "version": "1.0.0",
+  "description": "HSC Mathematics Booklets Viewer - A Next.js app to view PDF booklets from HSC-Collections repository",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "thumbnails": "node scripts/generate-thumbnails.js"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "lucide-react": "^0.344.0",
+    "next": "16.2.4",
+    "pdfjs-dist": "^4.0.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-pdf": "^9.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "pdf2pic": "^2.2.0",
+    "sharp": "^0.33.0"
+  },
+  "ignoreScripts": [
+    "sharp",
+    "unrs-resolver"
+  ],
+  "trustedDependencies": [
+    "sharp",
+    "unrs-resolver"
+  ]
+}
