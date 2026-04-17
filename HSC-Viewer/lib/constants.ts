@@ -22,6 +22,7 @@ export const PDF_DEFAULTS = {
   maxScale: 3,
   defaultScale: 1.5,
   scaleStep: 0.2,
+  desktopSpreadMinWidth: 1024,
 };
 
 export const REPO_LINKS = {

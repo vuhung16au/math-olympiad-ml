@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -21,11 +21,15 @@ pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pd
 
 export default function PDFViewer({ booklet }: { booklet: Booklet }) {
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const lastWheelNavigationRef = useRef(0);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [scale, setScale] = useState(PDF_DEFAULTS.defaultScale);
   const [containerWidth, setContainerWidth] = useState(900);
+  const [containerHeight, setContainerHeight] = useState(700);
   const [error, setError] = useState<string | null>(null);
+  const [isFullscreenStage, setIsFullscreenStage] = useState(false);
+  const [isDesktopLandscape, setIsDesktopLandscape] = useState(false);
 
   useEffect(() => {
     trackBookletOpened(booklet.title);
@@ -44,6 +48,7 @@ export default function PDFViewer({ booklet }: { booklet: Booklet }) {
         return;
       }
       setContainerWidth(Math.max(280, Math.floor(entry.contentRect.width - 32)));
+      setContainerHeight(Math.max(360, Math.floor(entry.contentRect.height - 24)));
     });
 
     observer.observe(node);
@@ -55,8 +60,58 @@ export default function PDFViewer({ booklet }: { booklet: Booklet }) {
     [currentPage, numPages],
   );
 
-  const canGoPrevious = safePage > 1;
-  const canGoNext = numPages > 0 && safePage < numPages;
+  const isTwoPageSpread = isFullscreenStage && isDesktopLandscape;
+  const displayPage = isTwoPageSpread && safePage % 2 === 0 ? safePage - 1 : safePage;
+  const spreadPageHeight = Math.max(320, Math.floor(containerHeight - 36));
+
+  const pageStep = isTwoPageSpread ? 2 : 1;
+
+  const canGoPrevious = displayPage > 1;
+  const canGoNext = numPages > 0 && displayPage + pageStep <= numPages;
+
+  const handlePageChange = useCallback(
+    (page: number) => {
+      const rawPage = validatePageNumber(page, numPages);
+      const nextPage = isTwoPageSpread && rawPage % 2 === 0 ? rawPage - 1 : rawPage;
+      setCurrentPage(nextPage);
+      trackPdfNavigation(booklet.title, nextPage, numPages);
+    },
+    [booklet.title, isTwoPageSpread, numPages],
+  );
+
+  const handleNextPage = useCallback(() => {
+    if (!canGoNext) {
+      return;
+    }
+    handlePageChange(displayPage + pageStep);
+  }, [canGoNext, displayPage, handlePageChange, pageStep]);
+
+  const handlePreviousPage = useCallback(() => {
+    if (!canGoPrevious) {
+      return;
+    }
+    handlePageChange(displayPage - pageStep);
+  }, [canGoPrevious, displayPage, handlePageChange, pageStep]);
+
+  useEffect(() => {
+    const updateViewportMode = () => {
+      const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+      const isDesktop = window.matchMedia(`(min-width: ${PDF_DEFAULTS.desktopSpreadMinWidth}px)`).matches;
+      setIsDesktopLandscape(isLandscape && isDesktop);
+      setIsFullscreenStage(document.fullscreenElement === stageRef.current);
+    };
+
+    updateViewportMode();
+    window.addEventListener("resize", updateViewportMode);
+    window.addEventListener("orientationchange", updateViewportMode);
+    document.addEventListener("fullscreenchange", updateViewportMode);
+
+    return () => {
+      window.removeEventListener("resize", updateViewportMode);
+      window.removeEventListener("orientationchange", updateViewportMode);
+      document.removeEventListener("fullscreenchange", updateViewportMode);
+    };
+  }, []);
 
   const handleFitWidth = () => {
     if (!containerWidth) {
@@ -68,20 +123,120 @@ export default function PDFViewer({ booklet }: { booklet: Booklet }) {
     trackPdfAction(booklet.title, "fit_width");
   };
 
-  const handleFullscreen = async () => {
+  const handleFullscreen = useCallback(async () => {
     if (!stageRef.current) {
       return;
     }
 
-    if (document.fullscreenElement) {
-      await document.exitFullscreen();
-      trackPdfAction(booklet.title, "exit_fullscreen");
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+        trackPdfAction(booklet.title, "exit_fullscreen");
+        return;
+      }
+
+      await stageRef.current.requestFullscreen();
+      trackPdfAction(booklet.title, "enter_fullscreen");
+    } catch {
+      // Fullscreen can fail when blocked by browser settings or unsupported contexts.
+    }
+  }, [booklet.title]);
+
+  useEffect(() => {
+    const isInteractiveElement = (target: EventTarget | null): boolean => {
+      if (!(target instanceof HTMLElement)) {
+        return false;
+      }
+      const tagName = target.tagName;
+      return (
+        target.isContentEditable ||
+        tagName === "INPUT" ||
+        tagName === "TEXTAREA" ||
+        tagName === "SELECT" ||
+        tagName === "BUTTON"
+      );
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (isInteractiveElement(event.target)) {
+        return;
+      }
+
+      if (event.metaKey || event.ctrlKey || event.altKey) {
+        return;
+      }
+
+      if (
+        event.key === "ArrowRight" ||
+        event.key === "ArrowDown" ||
+        event.key === "PageDown" ||
+        event.key === " " ||
+        event.code === "Space"
+      ) {
+        event.preventDefault();
+        handleNextPage();
+        return;
+      }
+
+      if (event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "PageUp") {
+        event.preventDefault();
+        handlePreviousPage();
+        return;
+      }
+
+      if (event.key.toLowerCase() === "f") {
+        if (event.repeat) {
+          return;
+        }
+        event.preventDefault();
+        void handleFullscreen();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [handleFullscreen, handleNextPage, handlePreviousPage]);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+
+    if (!stage) {
       return;
     }
 
-    await stageRef.current.requestFullscreen();
-    trackPdfAction(booklet.title, "enter_fullscreen");
-  };
+    const onWheel = (event: WheelEvent) => {
+      if (document.fullscreenElement !== stage) {
+        return;
+      }
+
+      if (Math.abs(event.deltaY) < 12) {
+        return;
+      }
+
+      const now = Date.now();
+      if (now - lastWheelNavigationRef.current < 220) {
+        event.preventDefault();
+        return;
+      }
+
+      const isScrollDown = event.deltaY > 0;
+      if (isScrollDown && canGoNext) {
+        event.preventDefault();
+        lastWheelNavigationRef.current = now;
+        handleNextPage();
+        return;
+      }
+
+      if (!isScrollDown && canGoPrevious) {
+        event.preventDefault();
+        lastWheelNavigationRef.current = now;
+        handlePreviousPage();
+      }
+    };
+
+    stage.addEventListener("wheel", onWheel, { passive: false });
+    return () => stage.removeEventListener("wheel", onWheel);
+  }, [canGoNext, canGoPrevious, handleNextPage, handlePreviousPage]);
 
   const handlePrint = () => {
     const printWindow = window.open(booklet.pdfUrl, "_blank", "noopener,noreferrer");
@@ -96,16 +251,14 @@ export default function PDFViewer({ booklet }: { booklet: Booklet }) {
           <PDFControls
             bookletTitle={booklet.title}
             pdfUrl={booklet.pdfUrl}
-            currentPage={safePage}
+            currentPage={displayPage}
             totalPages={numPages}
             scale={scale}
             canGoPrevious={canGoPrevious}
             canGoNext={canGoNext}
-            onPageChange={(page) => {
-              const nextPage = validatePageNumber(page, numPages);
-              setCurrentPage(nextPage);
-              trackPdfNavigation(booklet.title, nextPage, numPages);
-            }}
+            onPageChange={handlePageChange}
+            onPreviousPage={handlePreviousPage}
+            onNextPage={handleNextPage}
             onZoomIn={() => {
               setScale((current) => {
                 const nextScale = validateScale(current + PDF_DEFAULTS.scaleStep);
@@ -125,7 +278,9 @@ export default function PDFViewer({ booklet }: { booklet: Booklet }) {
               trackPdfZoom(booklet.title, Math.round(PDF_DEFAULTS.defaultScale * 100));
             }}
             onFitWidth={handleFitWidth}
-            onFullscreen={handleFullscreen}
+            onFullscreen={() => {
+              void handleFullscreen();
+            }}
             onPrint={handlePrint}
           />
 
@@ -165,15 +320,35 @@ export default function PDFViewer({ booklet }: { booklet: Booklet }) {
                 error={null}
                 className="max-w-full"
               >
-                <Page
-                  pageNumber={safePage}
-                  scale={scale}
-                  width={Math.min(containerWidth, 1080)}
-                  loading={<LoadingSpinner label="Rendering page" />}
-                  renderTextLayer
-                  renderAnnotationLayer
-                  className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
-                />
+                <div
+                  className={`flex max-w-full ${isTwoPageSpread ? "items-start justify-center gap-5 -mt-2" : "justify-center"}`}
+                >
+                  <Page
+                    pageNumber={displayPage}
+                    scale={isTwoPageSpread ? 1 : scale}
+                    width={
+                      isTwoPageSpread
+                        ? undefined
+                        : Math.min(containerWidth, 1080)
+                    }
+                    height={isTwoPageSpread ? spreadPageHeight : undefined}
+                    loading={<LoadingSpinner label="Rendering page" />}
+                    renderTextLayer
+                    renderAnnotationLayer
+                    className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                  />
+                  {isTwoPageSpread && displayPage + 1 <= numPages ? (
+                    <Page
+                      pageNumber={displayPage + 1}
+                      scale={1}
+                      height={spreadPageHeight}
+                      loading={<LoadingSpinner label="Rendering page" />}
+                      renderTextLayer
+                      renderAnnotationLayer
+                      className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                    />
+                  ) : null}
+                </div>
               </Document>
             </div>
           </div>

@@ -20,6 +20,8 @@ interface PDFControlsProps {
   canGoPrevious: boolean;
   canGoNext: boolean;
   onPageChange: (page: number) => void;
+  onPreviousPage: () => void;
+  onNextPage: () => void;
   onZoomIn: () => void;
   onZoomOut: () => void;
   onResetZoom: () => void;
@@ -62,6 +64,8 @@ export default function PDFControls({
   canGoPrevious,
   canGoNext,
   onPageChange,
+  onPreviousPage,
+  onNextPage,
   onZoomIn,
   onZoomOut,
   onResetZoom,
@@ -111,7 +115,7 @@ export default function PDFControls({
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <IconButton label="Previous page" onClick={() => onPageChange(currentPage - 1)} disabled={!canGoPrevious}>
+          <IconButton label="Previous page" onClick={onPreviousPage} disabled={!canGoPrevious}>
             <ChevronLeft className="h-4 w-4" />
           </IconButton>
           <div className="rounded-full border border-black/10 bg-white px-3 py-2 text-sm shadow-sm">
@@ -130,7 +134,7 @@ export default function PDFControls({
               / {totalPages || "-"}
             </span>
           </div>
-          <IconButton label="Next page" onClick={() => onPageChange(currentPage + 1)} disabled={!canGoNext}>
+          <IconButton label="Next page" onClick={onNextPage} disabled={!canGoNext}>
             <ChevronRight className="h-4 w-4" />
           </IconButton>
         </div>
