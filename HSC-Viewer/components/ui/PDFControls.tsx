@@ -331,6 +331,7 @@ export default function PDFControls({
           </IconButton>
           <div className="rounded-full border border-black/10 bg-white px-3 py-2 text-sm shadow-sm">
             <input
+              data-testid="page-number-input"
               type="number"
               min={1}
               max={Math.max(totalPages, 1)}
@@ -371,7 +372,7 @@ export default function PDFControls({
             <Minus className="h-4 w-4" />
           </IconButton>
           <div className="rounded-full border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-[var(--color-purple)] shadow-sm">
-            {Math.round(scale * 100)}%
+            <span data-testid="zoom-percentage">{Math.round(scale * 100)}%</span>
           </div>
           <IconButton label="Zoom in" onClick={onZoomIn}>
             <Plus className="h-4 w-4" />

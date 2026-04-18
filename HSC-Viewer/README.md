@@ -34,3 +34,22 @@ make dev
 ```
 
 For deployment and thumbnail generation details, see [QUICKSTART.md](./QUICKSTART.md).
+
+## Testing
+
+This project uses Playwright for browser-level end-to-end testing.
+
+```bash
+cd HSC-Viewer
+bunx playwright install chromium
+make test
+```
+
+Useful commands:
+
+- `make test` runs the e2e suite.
+- `make test-headed` runs tests in headed mode.
+- `make test-ui` opens Playwright UI mode.
+- `bun run test:e2e` runs Playwright directly.
+
+Detailed testing strategy and test case structure are documented in [docs/TESTING.md](./docs/TESTING.md).

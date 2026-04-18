@@ -1,4 +1,4 @@
-.PHONY: dev build deploy thumbnails clean install help
+.PHONY: dev build deploy thumbnails clean install lint test test-headed test-ui help
 
 help:
 	@echo "HSC Math Hub - Available commands:"
@@ -10,6 +10,9 @@ help:
 	@echo "  make deploy       - Deploy to Vercel"
 	@echo "  make thumbnails   - Generate thumbnails from PDFs"
 	@echo "  make lint         - Run ESLint"
+	@echo "  make test         - Run Playwright e2e tests"
+	@echo "  make test-headed  - Run Playwright e2e tests in headed mode"
+	@echo "  make test-ui      - Open Playwright UI mode"
 	@echo "  make clean        - Clean build artifacts"
 
 install:
@@ -34,6 +37,15 @@ thumbnails:
 
 lint:
 	bun run lint
+
+test:
+	bun run test:e2e
+
+test-headed:
+	bun run test:e2e:headed
+
+test-ui:
+	bun run test:e2e:ui
 
 clean:
 	rm -rf .next

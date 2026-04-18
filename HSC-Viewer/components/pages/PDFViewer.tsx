@@ -38,6 +38,18 @@ type OutlineItem = {
   level: number;
 };
 
+type E2EPdfMockMode = "off" | "success" | "error";
+
+const E2E_MOCK_TOTAL_PAGES = 8;
+const E2E_MOCK_OUTLINE: OutlineItem[] = [
+  { id: "e2e-outline-1", title: "Introduction", page: 1, level: 0 },
+  { id: "e2e-outline-2", title: "Chapter 1", page: 2, level: 0 },
+  { id: "e2e-outline-3", title: "Chapter 2", page: 4, level: 0 },
+  { id: "e2e-outline-4", title: "Worked Example", page: 5, level: 1 },
+  { id: "e2e-outline-5", title: "Exercises", page: 7, level: 0 },
+];
+const IS_E2E_PDF_MOCK_ENABLED = process.env.NEXT_PUBLIC_E2E_MOCK_PDF === "1";
+
 type PdfReference = {
   num: number;
   gen: number;
@@ -184,6 +196,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const [outlineError, setOutlineError] = useState<string | null>(null);
   const [navigatorPosition, setNavigatorPosition] = useState<{ x: number; y: number } | null>(null);
   const [isDraggingNavigator, setIsDraggingNavigator] = useState(false);
+  const [e2ePdfMockMode, setE2EPdfMockMode] = useState<E2EPdfMockMode>("off");
 
   // PDF.js frequently cancels in-flight text layer tasks during rerenders/navigation.
   // Filter this known benign warning while the viewer is mounted.
@@ -208,6 +221,48 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   useEffect(() => {
     currentPageRef.current = currentPage;
   }, [currentPage]);
+
+  useEffect(() => {
+    const requestedMode = new URLSearchParams(window.location.search).get("e2ePdfMock");
+    if (requestedMode === "success") {
+      setE2EPdfMockMode("success");
+      return;
+    }
+
+    if (requestedMode === "off") {
+      setE2EPdfMockMode("off");
+      return;
+    }
+
+    if (requestedMode === "error") {
+      setE2EPdfMockMode("error");
+      return;
+    }
+
+    setE2EPdfMockMode(IS_E2E_PDF_MOCK_ENABLED ? "success" : "off");
+  }, []);
+
+  useEffect(() => {
+    if (e2ePdfMockMode === "off") {
+      return;
+    }
+
+    if (e2ePdfMockMode === "error") {
+      setNumPages(0);
+      setError("load-error");
+      setOutlineItems([]);
+      setIsOutlineLoading(false);
+      setOutlineError(null);
+      return;
+    }
+
+    setNumPages(E2E_MOCK_TOTAL_PAGES);
+    setError(null);
+    setCurrentPage((page) => validatePageNumber(page, E2E_MOCK_TOTAL_PAGES));
+    setOutlineItems(E2E_MOCK_OUTLINE);
+    setIsOutlineLoading(false);
+    setOutlineError(null);
+  }, [e2ePdfMockMode]);
 
   // Hydrate client-only toolbar preferences after mount to avoid SSR hydration mismatches.
   useEffect(() => {
@@ -783,101 +838,150 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
           <div ref={stageRef} data-pdf-stage className="min-h-[70vh] bg-[color:color-mix(in_srgb,var(--color-ivory)_72%,white)] p-3 pb-[calc(env(safe-area-inset-bottom)+7.5rem)] sm:p-5 sm:pb-[calc(env(safe-area-inset-bottom)+7rem)] lg:pb-5">
             <div className="grid min-h-[66vh] gap-4 lg:grid-cols-[minmax(0,1fr)_260px]">
               <div className="order-2 lg:order-1">
-                <Document
-                  file={booklet.pdfUrl}
-                  loading={<LoadingSpinner label="Loading PDF document" />}
-                  onLoadSuccess={(loadedDocument) => {
-                    const { numPages: loadedPages } = loadedDocument;
-
-                    setNumPages(loadedPages);
-                    setCurrentPage((page) => validatePageNumber(page, loadedPages));
-                    setError(null);
-                    setOutlineTab("pages");
-                    setOutlineItems([]);
-                    setOutlineError(null);
-                    setIsOutlineLoading(true);
-
-                    void (async () => {
-                      try {
-                        const outline = await extractOutlineItems(
-                          loadedDocument as unknown as PdfDocumentLike,
-                          loadedPages,
-                        );
-                        setOutlineItems(outline);
-                      } catch {
-                        setOutlineError("outline-error");
-                      } finally {
-                        setIsOutlineLoading(false);
-                      }
-                    })();
-                  }}
-                  onLoadError={() => {
-                    setError("load-error");
-                    setOutlineItems([]);
-                    setIsOutlineLoading(false);
-                  }}
-                  error={null}
-                  className="max-w-full"
-                >
-                  {viewMode === "continuous" ? (
-                    /* Continuous mode: all pages stacked, native browser scroll */
+                {e2ePdfMockMode === "success" ? (
+                  viewMode === "continuous" ? (
                     <div className="flex flex-col items-center gap-6 py-2">
                       {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
                         <div
-                          key={pageNum}
+                          key={`mock-page-${pageNum}`}
                           ref={(el) => {
                             if (el) pageRefs.current.set(pageNum, el);
                             else pageRefs.current.delete(pageNum);
                           }}
                           style={{ filter: pdfFilter }}
+                          className="w-full max-w-[1080px]"
                         >
-                          <Page
-                            pageNumber={pageNum}
-                            scale={scale}
-                            width={Math.min(containerWidth, 1080)}
-                            loading={pageNum === 1 ? <LoadingSpinner label="Rendering page" /> : undefined}
-                            renderTextLayer
-                            renderAnnotationLayer
-                            onRenderTextLayerError={handleTextLayerError}
-                            className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
-                          />
+                          <div
+                            data-testid={`mock-pdf-page-${pageNum}`}
+                            className="flex min-h-[520px] items-center justify-center rounded-[20px] border border-black/10 bg-white/95 text-sm font-semibold text-[var(--color-purple)] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                          >
+                            Mock PDF Page {pageNum}
+                          </div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    /* Single page mode (original behavior) */
                     <div className="mx-auto flex max-w-full justify-center overflow-auto">
                       <div
                         className={`flex max-w-full ${isTwoPageSpread ? "items-start justify-center gap-5 -mt-2" : "justify-center"}`}
                         style={{ filter: pdfFilter }}
                       >
-                        <Page
-                          pageNumber={spreadStartPage}
-                          scale={isTwoPageSpread ? 1 : scale}
-                          width={isTwoPageSpread ? undefined : Math.min(containerWidth, 1080)}
-                          height={isTwoPageSpread ? spreadPageHeight : undefined}
-                          loading={<LoadingSpinner label="Rendering page" />}
-                          renderTextLayer
-                          renderAnnotationLayer
-                          onRenderTextLayerError={handleTextLayerError}
-                          className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
-                        />
+                        <div
+                          data-testid={`mock-pdf-page-${spreadStartPage}`}
+                          className="flex min-h-[520px] w-[min(1080px,100%)] items-center justify-center rounded-[20px] border border-black/10 bg-white/95 text-sm font-semibold text-[var(--color-purple)] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                        >
+                          Mock PDF Page {spreadStartPage}
+                        </div>
                         {isTwoPageSpread && spreadStartPage + 1 <= numPages ? (
+                          <div
+                            data-testid={`mock-pdf-page-${spreadStartPage + 1}`}
+                            className="flex min-h-[520px] w-[min(1080px,100%)] items-center justify-center rounded-[20px] border border-black/10 bg-white/95 text-sm font-semibold text-[var(--color-purple)] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                          >
+                            Mock PDF Page {spreadStartPage + 1}
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                  )
+                ) : e2ePdfMockMode === "error" ? (
+                  <div className="h-[2px] w-full" aria-hidden="true" />
+                ) : (
+                  <Document
+                    file={booklet.pdfUrl}
+                    loading={<LoadingSpinner label="Loading PDF document" />}
+                    onLoadSuccess={(loadedDocument) => {
+                      const { numPages: loadedPages } = loadedDocument;
+
+                      setNumPages(loadedPages);
+                      setCurrentPage((page) => validatePageNumber(page, loadedPages));
+                      setError(null);
+                      setOutlineTab("pages");
+                      setOutlineItems([]);
+                      setOutlineError(null);
+                      setIsOutlineLoading(true);
+
+                      void (async () => {
+                        try {
+                          const outline = await extractOutlineItems(
+                            loadedDocument as unknown as PdfDocumentLike,
+                            loadedPages,
+                          );
+                          setOutlineItems(outline);
+                        } catch {
+                          setOutlineError("outline-error");
+                        } finally {
+                          setIsOutlineLoading(false);
+                        }
+                      })();
+                    }}
+                    onLoadError={() => {
+                      setError("load-error");
+                      setOutlineItems([]);
+                      setIsOutlineLoading(false);
+                    }}
+                    error={null}
+                    className="max-w-full"
+                  >
+                    {viewMode === "continuous" ? (
+                      /* Continuous mode: all pages stacked, native browser scroll */
+                      <div className="flex flex-col items-center gap-6 py-2">
+                        {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
+                          <div
+                            key={pageNum}
+                            ref={(el) => {
+                              if (el) pageRefs.current.set(pageNum, el);
+                              else pageRefs.current.delete(pageNum);
+                            }}
+                            style={{ filter: pdfFilter }}
+                          >
+                            <Page
+                              pageNumber={pageNum}
+                              scale={scale}
+                              width={Math.min(containerWidth, 1080)}
+                              loading={pageNum === 1 ? <LoadingSpinner label="Rendering page" /> : undefined}
+                              renderTextLayer
+                              renderAnnotationLayer
+                              onRenderTextLayerError={handleTextLayerError}
+                              className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      /* Single page mode (original behavior) */
+                      <div className="mx-auto flex max-w-full justify-center overflow-auto">
+                        <div
+                          className={`flex max-w-full ${isTwoPageSpread ? "items-start justify-center gap-5 -mt-2" : "justify-center"}`}
+                          style={{ filter: pdfFilter }}
+                        >
                           <Page
-                            pageNumber={spreadStartPage + 1}
-                            scale={1}
-                            height={spreadPageHeight}
+                            pageNumber={spreadStartPage}
+                            scale={isTwoPageSpread ? 1 : scale}
+                            width={isTwoPageSpread ? undefined : Math.min(containerWidth, 1080)}
+                            height={isTwoPageSpread ? spreadPageHeight : undefined}
                             loading={<LoadingSpinner label="Rendering page" />}
                             renderTextLayer
                             renderAnnotationLayer
                             onRenderTextLayerError={handleTextLayerError}
                             className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
                           />
-                        ) : null}
+                          {isTwoPageSpread && spreadStartPage + 1 <= numPages ? (
+                            <Page
+                              pageNumber={spreadStartPage + 1}
+                              scale={1}
+                              height={spreadPageHeight}
+                              loading={<LoadingSpinner label="Rendering page" />}
+                              renderTextLayer
+                              renderAnnotationLayer
+                              onRenderTextLayerError={handleTextLayerError}
+                              className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                            />
+                          ) : null}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </Document>
+                    )}
+                  </Document>
+                )}
               </div>
 
               <aside

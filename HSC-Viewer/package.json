@@ -8,7 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "thumbnails": "node scripts/generate-thumbnails.js"
+    "thumbnails": "node scripts/generate-thumbnails.js",
+    "test": "playwright test",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -20,16 +24,17 @@
     "react-pdf": "^9.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
-    "tailwindcss": "^4",
-    "typescript": "^5",
     "pdf2pic": "^2.2.0",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   },
   "ignoreScripts": [
     "sharp",
