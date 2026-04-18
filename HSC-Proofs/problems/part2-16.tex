@@ -1,0 +1,72 @@
+% Part 2 Problem 16 (Hard): The Pigeonhole Principle and Leading Digits
+% Source: TODO/Kronecker.tex
+% Technique: Fractional Parts + Pigeonhole Principle
+% Topic: Leading Digits / Logarithms
+
+\begin{problem}[Hard]
+\textbf{The Pigeonhole Principle and Leading Digits}
+
+For any real number $x$, the fractional part of $x$ is denoted by $\{x\}$ and is defined as $\{x\} = x - \lfloor x \rfloor$, where $\lfloor x \rfloor$ is the greatest integer less than or equal to $x$. Note that $0 \le \{x\} < 1$.
+
+For example, $\{3.14\} = 0.14$, $\{2026\} = 0$.
+
+\begin{enumerate}
+    \item[\textbf{(i)}] Show that for any positive integer $M$, the ordinary decimal representation of $2^M$ begins with the digits $2025$ (i.e., $2^M = 2025\dots$) if and only if:
+    \[
+    \log_{10} 2.025 \le \{M \log_{10} 2\} < \log_{10} 2.026
+    \]
+
+    \item[\textbf{(ii)}] Let $\alpha$ be an irrational number. Prove that for any two distinct integers $m$ and $n$, the fractional parts $\{m\alpha\}$ and $\{n\alpha\}$ must be strictly distinct.
+
+    \item[\textbf{(iii)}] Let $N$ be a positive integer. By dividing the interval $[0,1)$ into $N$ equal subintervals, use the Pigeonhole Principle to prove that there exists a positive integer $k \le N$ such that:
+    \[
+    0 < \{k\alpha\} < \frac{1}{N}
+    \]
+
+    \item[\textbf{(iv)}] Given that $\alpha = \log_{10} 2$ is an irrational number, let
+    \[
+    \delta = \log_{10} 2.026 - \log_{10} 2.025.
+    \]
+    By choosing an integer $N$ such that $\frac{1}{N} < \delta$, or otherwise, deduce that there exists at least one positive integer $M$ such that $2^M$ begins with the digits $2025$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{(i)} Write $2^M$ in scientific notation: $2^M = c \times 10^K$. If the number starts with 2025, what is $c$ bounded between? Take the base-10 logarithm.
+    \item \textbf{(ii)} Proof by contradiction. Assume $\{m\alpha\} = \{n\alpha\}$. Expand using the definition $\{x\} = x - \lfloor x \rfloor$ and isolate $\alpha$.
+    \item \textbf{(iii)} Consider the $N+1$ fractional parts $\{0\}, \{\alpha\}, \{2\alpha\}, \dots, \{N\alpha\}$. Place these ``pigeons'' into the $N$ ``holes'' (subintervals).
+    \item \textbf{(iv)} Think of the interval as a target of width $\delta$. Part (iii) guarantees a ``step size'' $\{k\alpha\}$ strictly smaller than $\delta$. Can consecutive steps jump over the target without landing inside it?
+\end{itemize}
+\end{hint}
+
+\begin{solutionsketch}
+\textbf{Part (i):} $2^M$ begins with 2025 if and only if $2^M = c \times 10^K$ for some integer $K \ge 0$ and $2.025 \le c < 2.026$. Taking logarithms yields $M \log_{10} 2 = K + \log_{10} c$. Since $0 \le \log_{10} c < 1$, we must have $K = \lfloor M \log_{10} 2 \rfloor$ and $\log_{10} c = \{M \log_{10} 2\}$. Substituting this into the inequality for $c$ yields the required result.
+
+\vspace{0.2cm}
+\textbf{Part (ii):} Assume $\{m\alpha\} = \{n\alpha\}$ for integers $m \ne n$. Then $m\alpha - \lfloor m\alpha \rfloor = n\alpha - \lfloor n\alpha \rfloor$, which implies
+\[
+\alpha = \frac{\lfloor m\alpha \rfloor - \lfloor n\alpha \rfloor}{m - n}.
+\]
+Since the numerator is an integer and the denominator is a non-zero integer, this forces $\alpha$ to be rational, contradicting the premise. Thus, the fractional parts are distinct.
+
+\vspace{0.2cm}
+\textbf{Part (iii):} Divide $[0,1)$ into $N$ equal intervals of width $1/N$. By (ii), the $N+1$ values $\{0\}, \{\alpha\}, \dots, \{N\alpha\}$ are strictly distinct. By the Pigeonhole Principle, two values $\{i\alpha\} > \{j\alpha\}$ must fall in the same interval. Thus, $0 < \{i\alpha\} - \{j\alpha\} < 1/N$. Since
+\[
+\{i\alpha\} - \{j\alpha\} = (i-j)\alpha - (\lfloor i\alpha \rfloor - \lfloor j\alpha \rfloor)
+\]
+lies in $(0,1)$, it is exactly $\{(i-j)\alpha\}$. Let $k = i-j$ (where $0 < k \le N$) to obtain $0 < \{k\alpha\} < 1/N$.
+
+\vspace{0.2cm}
+\textbf{Part (iv):} Choose $N$ such that $1/N < \delta$. From (iii), let our step size be $s = \{k\alpha\}$, noting $0 < s < \delta$. Consider the sequence of multiples $s, 2s, 3s, \dots$. Because $s$ is strictly smaller than the target interval width $\delta$, a multiple $ps$ must eventually land inside $[\log_{10} 2.025, \log_{10} 2.026) \subset [0,1)$. Therefore, $\{pk\alpha\} = ps$ satisfies the bounds. By letting $M = pk$, we satisfy the condition from (i).
+
+\vspace{0.3cm}
+
+\end{solutionsketch}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Kronecker's Theorem:} This problem is a guided proof demonstrating that the orbit of an irrational rotation is dense. It guarantees that by doubling a number enough times, you can eventually generate a power of 2 that starts with any sequence of digits you desire.
+    \item \textbf{The Continuous Pigeonhole:} By dividing a continuous number line into physical subintervals, we can force infinite irrational sequences to behave predictably.
+\end{itemize}
+\end{takeaways}
