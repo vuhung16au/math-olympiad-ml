@@ -82,11 +82,11 @@ function ShareButton({
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/75 ${className}`}
+      className={`inline-flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm transition hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/75 sm:h-9 sm:w-9 ${className}`}
       aria-label={label}
       title={label}
     >
-      <span className="inline-flex h-5 w-5 items-center justify-center">{icon}</span>
+      <span className="inline-flex h-3.5 w-3.5 items-center justify-center sm:h-4 sm:w-4">{icon}</span>
     </button>
   );
 }
@@ -400,7 +400,7 @@ export default function PDFControls({
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">
               Share this page
             </p>
-            <div className="mt-2 flex flex-wrap items-center gap-2">
+            <div className="mt-2 grid grid-cols-5 items-center gap-1">
               <ShareButton
                 label="Facebook"
                 onClick={handleFacebookShare}
