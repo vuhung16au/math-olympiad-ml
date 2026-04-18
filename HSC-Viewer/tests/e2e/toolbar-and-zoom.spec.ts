@@ -35,7 +35,7 @@ test("toolbar actions expose tooltips and zoom state persists through cookie", a
   await expect.poll(async () => readZoomPercentage(page)).toBe(150);
 });
 
-test("icon-only share buttons trigger Facebook popup, native share for Instagram/TikTok, Discord, and copy link", async ({ page }) => {
+test("icon-only share buttons trigger Facebook popup, native share for Instagram/TikTok, and copy link", async ({ page }) => {
   await gotoViewer(page, { mockMode: "success" });
 
   await page.evaluate(() => {
@@ -70,20 +70,17 @@ test("icon-only share buttons trigger Facebook popup, native share for Instagram
 
   const facebookButton = page.getByRole("button", { name: "Facebook" });
   const instagramButton = page.getByRole("button", { name: "Instagram" });
-  const discordButton = page.getByRole("button", { name: "Discord" });
   const tiktokButton = page.getByRole("button", { name: "TikTok" });
   const copyLinkButton = page.getByRole("button", { name: "Copy link" });
 
   await expect(facebookButton).toBeVisible();
   await expect(instagramButton).toBeVisible();
-  await expect(discordButton).toBeVisible();
   await expect(tiktokButton).toBeVisible();
   await expect(copyLinkButton).toBeVisible();
 
   // Buttons are icon-only in the toolbar; names exist in aria labels, not visible text.
   await expect(page.getByText("Facebook", { exact: true })).toHaveCount(0);
   await expect(page.getByText("Instagram", { exact: true })).toHaveCount(0);
-  await expect(page.getByText("Discord", { exact: true })).toHaveCount(0);
   await expect(page.getByText("TikTok", { exact: true })).toHaveCount(0);
   await expect(page.getByText("Copy link", { exact: true })).toHaveCount(0);
 
@@ -102,18 +99,7 @@ test("icon-only share buttons trigger Facebook popup, native share for Instagram
   expect(facebookParsed.searchParams.get("quote")).toContain("Check out this awesome HSC math booklet on HSC Collections");
 
   await instagramButton.click();
-  await discordButton.click();
   await tiktokButton.click();
-
-  const discordOpenUrl = await page.evaluate(() => {
-    const win = window as Window & { __openCalls: unknown[][] };
-    // Discord is opened as the second last call (after other buttons)
-    const calls = win.__openCalls;
-    const discordCall = calls.find((call) => typeof call?.[0] === "string" && call[0].includes("discord.gg"));
-    return typeof discordCall?.[0] === "string" ? discordCall[0] : "";
-  });
-
-  expect(discordOpenUrl).toBe("https://discord.gg/MPT3FFkg");
 
   const shareCalls = await page.evaluate(() => {
     const win = window as Window & { __shareCalls: unknown[] };

@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
-import dynamic from "next/dynamic";
 import { Document, Page, pdfjs } from "react-pdf";
 import { FileText, ListTree } from "lucide-react";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import type { Booklet } from "@/lib/booklets";
+import PDFControls from "@/components/ui/PDFControls";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import { PDF_DEFAULTS } from "@/lib/constants";
@@ -59,10 +59,6 @@ type OutlineItem = {
 };
 
 type E2EPdfMockMode = "off" | "success" | "error";
-
-const PDFControls = dynamic(() => import("@/components/ui/PDFControls"), {
-  ssr: false,
-});
 
 const E2E_MOCK_TOTAL_PAGES = 8;
 const E2E_MOCK_OUTLINE: OutlineItem[] = [

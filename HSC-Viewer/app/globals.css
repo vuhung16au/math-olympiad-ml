@@ -44,41 +44,10 @@ button {
 }
 
 .react-pdf__Page {
-  display: inline-block;
-  width: fit-content;
   max-width: 100%;
 }
 
 .react-pdf__Page__canvas {
-  display: block;
-}
-
-/* Keep PDF text and annotation layers tightly aligned with canvas geometry. */
-.react-pdf__Page__textContent,
-.react-pdf__Page__textContent *,
-.react-pdf__Page__annotations,
-.react-pdf__Page__annotations * {
-  transition: none !important;
-}
-
-/* PDFs can embed visible link borders for table-of-contents annotations. */
-.react-pdf__Page__annotations .linkAnnotation,
-.annotationLayer .linkAnnotation {
-  border: 0 !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-}
-
-.react-pdf__Page__annotations .linkAnnotation > a:hover,
-.annotationLayer .linkAnnotation > a:hover {
-  opacity: 1 !important;
-  background: color-mix(in srgb, var(--color-red) 14%, transparent) !important;
-  box-shadow: none !important;
-}
-
-.react-pdf__Page__annotations .linkAnnotation > a:focus-visible,
-.annotationLayer .linkAnnotation > a:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--color-red) 70%, white) !important;
-  outline-offset: 1px;
-  border-radius: 2px;
+  max-width: 100%;
+  height: auto !important;
 }
