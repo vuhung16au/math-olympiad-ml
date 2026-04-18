@@ -18,7 +18,13 @@ import {
   trackPdfZoom,
 } from "@/lib/analytics";
 import { validatePageNumber, validateScale } from "@/lib/pdf-helpers";
-import { getPref, setPref, PREF_KEYS } from "@/lib/preferences";
+import {
+  getLastPageForSlug,
+  getPref,
+  PREF_KEYS,
+  setLastPageForSlug,
+  setPref,
+} from "@/lib/preferences";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
 
@@ -282,8 +288,31 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       setScale(validateScale(Number.isFinite(parsed) ? parsed : PDF_DEFAULTS.defaultScale));
     }
 
+    const savedOutlineTab = getPref(PREF_KEYS.outlineTab);
+    if (savedOutlineTab === "pages" || savedOutlineTab === "outline") {
+      setOutlineTab(savedOutlineTab);
+    }
+
+    const savedNavPanelPos = getPref(PREF_KEYS.navPanelPos);
+    if (savedNavPanelPos && window.matchMedia("(min-width: 1024px)").matches) {
+      const [rawX, rawY] = savedNavPanelPos.split(",");
+      const x = Number(rawX);
+      const y = Number(rawY);
+
+      if (Number.isFinite(x) && Number.isFinite(y)) {
+        setNavigatorPosition({ x, y });
+      }
+    }
+
+    if (initialPage === 1) {
+      const savedPageForBooklet = getLastPageForSlug(booklet.slug);
+      if (savedPageForBooklet) {
+        setCurrentPage(Math.max(1, Math.floor(savedPageForBooklet)));
+      }
+    }
+
     setArePrefsHydrated(true);
-  }, []);
+  }, [booklet.slug, initialPage]);
 
   // Persist toolbar preferences to cookies
   useEffect(() => {
@@ -300,6 +329,19 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     if (!arePrefsHydrated) return;
     setPref(PREF_KEYS.scale, String(scale));
   }, [arePrefsHydrated, scale]);
+
+  useEffect(() => {
+    if (!arePrefsHydrated) return;
+    setPref(PREF_KEYS.outlineTab, outlineTab);
+  }, [arePrefsHydrated, outlineTab]);
+
+  useEffect(() => {
+    if (!arePrefsHydrated || !navigatorPosition || isDraggingNavigator) {
+      return;
+    }
+
+    setPref(PREF_KEYS.navPanelPos, `${Math.round(navigatorPosition.x)},${Math.round(navigatorPosition.y)}`);
+  }, [arePrefsHydrated, isDraggingNavigator, navigatorPosition]);
 
   useEffect(() => {
     trackBookletOpened(booklet.title);
@@ -681,6 +723,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       syncUrlTimerRef.current = window.setTimeout(() => {
         window.history.replaceState(null, "", nextPath);
         setPref(PREF_KEYS.lastUrl, nextPath);
+        setPref(PREF_KEYS.lastSlug, booklet.slug);
+        setLastPageForSlug(booklet.slug, pageForUrl);
         syncUrlTimerRef.current = null;
       }, 220);
 
@@ -689,6 +733,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
 
     window.history.replaceState(null, "", nextPath);
     setPref(PREF_KEYS.lastUrl, nextPath);
+    setPref(PREF_KEYS.lastSlug, booklet.slug);
+    setLastPageForSlug(booklet.slug, pageForUrl);
   }, [booklet.slug, currentPage, isPageInputEditing, numPages, viewMode]);
 
   useEffect(() => {
@@ -895,7 +941,6 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                       setNumPages(loadedPages);
                       setCurrentPage((page) => validatePageNumber(page, loadedPages));
                       setError(null);
-                      setOutlineTab("pages");
                       setOutlineItems([]);
                       setOutlineError(null);
                       setIsOutlineLoading(true);

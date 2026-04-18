@@ -8,7 +8,13 @@ import Sidebar from "@/components/layout/Sidebar";
 import MobileMenu from "@/components/layout/MobileMenu";
 import Footer from "@/components/common/Footer";
 import { getBookletBySlug } from "@/lib/booklets";
-import { getPref, setPref, PREF_KEYS } from "@/lib/preferences";
+import {
+  getLastPageForSlug,
+  getPref,
+  getResumeMode,
+  PREF_KEYS,
+  setPref,
+} from "@/lib/preferences";
 
 function getCurrentTitle(pathname: string): string | null {
   if (!pathname.startsWith("/booklets/")) {
@@ -17,6 +23,44 @@ function getCurrentTitle(pathname: string): string | null {
 
   const slug = pathname.replace("/booklets/", "").split("/")[0];
   return getBookletBySlug(slug)?.title ?? null;
+}
+
+function resolveResumeTarget(pathname: string): string | null {
+  const resumeMode = getResumeMode();
+  if (resumeMode === "off") {
+    return null;
+  }
+
+  if (pathname === "/") {
+    const lastUrl = getPref(PREF_KEYS.lastUrl);
+    if (lastUrl && lastUrl.startsWith("/booklets/")) {
+      return lastUrl;
+    }
+
+    const lastSlug = getPref(PREF_KEYS.lastSlug);
+    if (!lastSlug) {
+      return null;
+    }
+
+    const savedPage = getLastPageForSlug(lastSlug);
+    return savedPage && savedPage > 1
+      ? `/booklets/${lastSlug}/${savedPage}`
+      : `/booklets/${lastSlug}`;
+  }
+
+  const slugRouteMatch = pathname.match(/^\/booklets\/([^/]+)$/);
+  if (!slugRouteMatch) {
+    return null;
+  }
+
+  const slug = slugRouteMatch[1];
+  const savedPage = getLastPageForSlug(slug);
+
+  if (!savedPage || savedPage <= 1) {
+    return null;
+  }
+
+  return `/booklets/${slug}/${savedPage}`;
 }
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
@@ -32,13 +76,22 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     setIsSidebarCollapsed(getPref(PREF_KEYS.sidebarCollapsed) === "1");
   }, []);
 
-  // Redirect to last visited booklet when landing on the home page
+  // Restore last visited route for home and per-booklet landing routes.
   useEffect(() => {
-    if (pathname !== "/") return;
-    const lastUrl = getPref(PREF_KEYS.lastUrl);
-    if (lastUrl && lastUrl.startsWith("/booklets/")) {
-      router.replace(lastUrl);
+    const target = resolveResumeTarget(pathname);
+    if (!target || target === pathname) {
+      return;
     }
+
+    const resumeMode = getResumeMode();
+    if (resumeMode === "prompt") {
+      const shouldResume = window.confirm("Resume where you left off?");
+      if (!shouldResume) {
+        return;
+      }
+    }
+
+    router.replace(target);
   }, [pathname, router]);
 
   const handleToggleSidebar = () => {

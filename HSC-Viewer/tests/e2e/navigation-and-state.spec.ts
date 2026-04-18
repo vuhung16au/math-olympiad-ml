@@ -27,4 +27,10 @@ test("next/previous/page input updates route and last-url cookie", async ({ page
 
   const lastUrl = await getCookieValue(context, PREF_KEYS.lastUrl);
   expect(lastUrl).toContain("/booklets/hsc-collections/5");
+
+  const lastSlug = await getCookieValue(context, PREF_KEYS.lastSlug);
+  expect(lastSlug).toBe("hsc-collections");
+
+  const lastPageBySlug = await getCookieValue(context, PREF_KEYS.lastPageBySlug);
+  expect(lastPageBySlug).toContain("hsc-collections:5");
 });

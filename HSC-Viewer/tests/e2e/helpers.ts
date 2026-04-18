@@ -5,7 +5,12 @@ export const ALT_BOOKLET_SLUG = "hsc-vectors";
 
 export const PREF_KEYS = {
   lastUrl: "hsc_last_url",
+  lastPageBySlug: "hsc_last_page_by_slug",
+  lastSlug: "hsc_last_slug",
+  resumeMode: "hsc_resume_mode",
   scale: "hsc_scale",
+  outlineTab: "hsc_outline_tab",
+  navPanelPos: "hsc_nav_panel_pos",
 };
 
 type PdfResponseMode = "success" | "error";
