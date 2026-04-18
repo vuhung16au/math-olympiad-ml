@@ -75,7 +75,7 @@ export default function MobileMenu({
                   "block rounded-2xl border-l-4 px-3 py-3 text-sm font-medium transition",
                   isActive
                     ? "border-l-[var(--color-red)] bg-white text-[var(--color-purple)] ring-1 ring-white/60"
-                    : "border-l-transparent bg-white/5 text-white/88 hover:bg-white/12 hover:text-white",
+                    : "border-l-transparent bg-white/5 text-white/88 hover:bg-white/12 hover:text-white active:bg-white active:text-[var(--color-purple)]",
                 ].join(" ")}
               >
                 {booklet.title}

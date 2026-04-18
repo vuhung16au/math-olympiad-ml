@@ -28,6 +28,20 @@ import {
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
 
+// PDF.js frequently cancels in-flight text layer tasks during rerenders/navigation.
+// Suppress this known benign warning at module scope so it is filtered before
+// any pdf.js rendering begins (useEffect fires too late).
+if (typeof window !== "undefined") {
+  const _filterTextLayerWarning = (original: (...a: unknown[]) => void) =>
+    (...args: unknown[]) => {
+      const msg = typeof args[0] === "string" ? args[0] : "";
+      if (msg.includes("AbortException: TextLayer task cancelled")) return;
+      original(...args);
+    };
+  console.warn = _filterTextLayerWarning(console.warn);
+  console.error = _filterTextLayerWarning(console.error);
+}
+
 type PDFViewerProps = {
   booklet: Booklet;
   initialPage?: number;
@@ -203,25 +217,6 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const [navigatorPosition, setNavigatorPosition] = useState<{ x: number; y: number } | null>(null);
   const [isDraggingNavigator, setIsDraggingNavigator] = useState(false);
   const [e2ePdfMockMode, setE2EPdfMockMode] = useState<E2EPdfMockMode>("off");
-
-  // PDF.js frequently cancels in-flight text layer tasks during rerenders/navigation.
-  // Filter this known benign warning while the viewer is mounted.
-  useEffect(() => {
-    const originalWarn = console.warn;
-
-    console.warn = (...args: unknown[]) => {
-      const firstArg = args[0];
-      const message = typeof firstArg === "string" ? firstArg : "";
-      if (message.includes("AbortException: TextLayer task cancelled")) {
-        return;
-      }
-      originalWarn(...args);
-    };
-
-    return () => {
-      console.warn = originalWarn;
-    };
-  }, []);
 
   // Keep ref in sync so effects can read latest value without stale closures
   useEffect(() => {

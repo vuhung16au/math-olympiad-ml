@@ -66,7 +66,7 @@ export default function Sidebar({
                 "group flex items-center rounded-2xl border-l-4 px-3 py-3 text-sm font-medium transition",
                 isActive
                   ? "border-l-[var(--color-red)] bg-white text-[var(--color-purple)] shadow-md ring-1 ring-white/60"
-                  : "border-l-transparent text-white/84 hover:bg-white/10 hover:text-white",
+                  : "border-l-transparent text-white/84 hover:bg-white/10 hover:text-white active:bg-white active:text-[var(--color-purple)]",
               ].join(" ")}
             >
               <span className="truncate">{booklet.title}</span>

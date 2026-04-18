@@ -7,6 +7,7 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileMenu from "@/components/layout/MobileMenu";
 import Footer from "@/components/common/Footer";
+import OfflineBanner from "@/components/common/OfflineBanner";
 import { getBookletBySlug } from "@/lib/booklets";
 import {
   getLastPageForSlug,
@@ -104,6 +105,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[var(--color-ivory)] text-[var(--color-charcoal)]">
+      <OfflineBanner />
       {!isReaderRoute ? (
         <Header
           currentTitle={currentTitle}
