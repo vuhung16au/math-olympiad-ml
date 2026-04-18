@@ -8,6 +8,9 @@ import {
   ChevronRight,
   Download,
   Expand,
+  Facebook,
+  Instagram,
+  Link2,
   Moon,
   Minus,
   Palette,
@@ -23,6 +26,7 @@ type ReadingTheme = "light" | "dark" | "sepia";
 
 interface PDFControlsProps {
   bookletTitle: string;
+  bookletSlug: string;
   pdfUrl: string;
   currentPage: number;
   totalPages: number;
@@ -43,6 +47,39 @@ interface PDFControlsProps {
   readingTheme: ReadingTheme;
   onReadingThemeChange: (theme: ReadingTheme) => void;
   onPageInputEditingChange: (isEditing: boolean) => void;
+  onShareAction?: (action: string) => void;
+}
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M16.49 4.25c.49 1.4 1.61 2.52 3.01 3.01v3.21a8.1 8.1 0 0 1-3.01-.74v5.36a6.49 6.49 0 1 1-6.49-6.49c.26 0 .52.02.78.05v3.2a3.31 3.31 0 1 0 2.5 3.24V1h3.21v3.25Z" />
+    </svg>
+  );
+}
+
+function ShareButton({
+  label,
+  onClick,
+  icon,
+  className,
+}: {
+  label: string;
+  onClick: () => void;
+  icon: React.ReactNode;
+  className: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/75 ${className}`}
+      aria-label={label}
+      title={label}
+    >
+      <span className="inline-flex h-5 w-5 items-center justify-center">{icon}</span>
+    </button>
+  );
 }
 
 function IconButton({
@@ -72,6 +109,7 @@ function IconButton({
 
 export default function PDFControls({
   bookletTitle,
+  bookletSlug,
   pdfUrl,
   currentPage,
   totalPages,
@@ -92,12 +130,132 @@ export default function PDFControls({
   readingTheme,
   onReadingThemeChange,
   onPageInputEditingChange,
+  onShareAction,
 }: PDFControlsProps) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const dragOffsetRef = useRef<{ x: number; y: number } | null>(null);
   const [pageDraft, setPageDraft] = useState(String(currentPage));
   const [panelPosition, setPanelPosition] = useState<{ x: number; y: number } | null>(null);
   const [isDraggingPanel, setIsDraggingPanel] = useState(false);
+  const [shareMessage, setShareMessage] = useState<string | null>(null);
+
+  const shareUrl = typeof window === "undefined"
+    ? ""
+    : `${window.location.origin}/booklets/${bookletSlug}/${Math.max(1, currentPage)}`;
+
+  const shareTitle = `${bookletTitle} - HSC Maths Booklet`;
+  const shareText = `Check out this awesome HSC math booklet on ${bookletTitle}! Perfect for students preparing for their exams.`;
+
+  const openPopup = (url: string) => {
+    const width = 640;
+    const height = 640;
+    const left = Math.round(window.screenX + (window.outerWidth - width) / 2);
+    const top = Math.round(window.screenY + (window.outerHeight - height) / 2);
+
+    window.open(
+      url,
+      "hsc-share",
+      `width=${width},height=${height},left=${left},top=${top},noopener,noreferrer`,
+    );
+  };
+
+  const showShareMessage = (message: string) => {
+    setShareMessage(message);
+  };
+
+  const copyToClipboard = async (content: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const copySharePayload = async () => {
+    const copied = await copyToClipboard(`${shareText} ${shareUrl}`.trim());
+    if (!copied) {
+      showShareMessage("Could not access clipboard. Please copy the URL manually.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleFacebookShare = () => {
+    const intent = new URL("https://www.facebook.com/sharer/sharer.php");
+    intent.searchParams.set("u", shareUrl);
+    intent.searchParams.set("quote", `${shareText} ${shareUrl}`.trim());
+    openPopup(intent.toString());
+    onShareAction?.("share_facebook");
+  };
+
+  const handleInstagramShare = async () => {
+    const canUseNativeShare = typeof navigator.share === "function";
+    if (canUseNativeShare) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        onShareAction?.("share_instagram_native");
+        return;
+      } catch {
+        // User may cancel native share; fallback handled below.
+      }
+    }
+
+    const copied = await copySharePayload();
+    window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
+    showShareMessage(
+      copied
+        ? "Caption and link copied. Paste it into your Instagram post."
+        : "Instagram opened. Copy the link from the address bar.",
+    );
+    onShareAction?.("share_instagram_link");
+  };
+
+  const handleTikTokShare = async () => {
+    const canUseNativeShare = typeof navigator.share === "function";
+    if (canUseNativeShare) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        onShareAction?.("share_tiktok_native");
+        return;
+      } catch {
+        // User may cancel native share; fallback handled below.
+      }
+    }
+
+    const copied = await copySharePayload();
+    window.open("https://www.tiktok.com/upload", "_blank", "noopener,noreferrer");
+    showShareMessage(
+      copied
+        ? "Caption and link copied. Paste it into your TikTok caption."
+        : "TikTok opened. Copy the link from the address bar.",
+    );
+    onShareAction?.("share_tiktok_link");
+  };
+
+  const handleCopyLink = async () => {
+    const copied = await copyToClipboard(shareUrl);
+    showShareMessage(copied ? "Link copied to clipboard!" : "Unable to copy. Please copy the URL manually.");
+    onShareAction?.("share_copy_link");
+  };
+
+  useEffect(() => {
+    if (!shareMessage) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => setShareMessage(null), 2200);
+    return () => window.clearTimeout(timer);
+  }, [shareMessage]);
 
   useEffect(() => {
     setPageDraft(String(currentPage));
@@ -218,6 +376,49 @@ export default function PDFControls({
         </div>
 
         <div className="flex w-full flex-col gap-2">
+          <div className="rounded-2xl border border-white/70 bg-[linear-gradient(115deg,rgba(80,67,154,0.95),rgba(224,83,114,0.92))] px-3 py-3 text-white shadow-[0_12px_30px_rgba(54,20,86,0.26)]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">
+              Share this page
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <ShareButton
+                label="Facebook"
+                onClick={handleFacebookShare}
+                icon={<Facebook className="h-4 w-4" />}
+                className="bg-[#1877F2]"
+              />
+              <ShareButton
+                label="Instagram"
+                onClick={() => {
+                  void handleInstagramShare();
+                }}
+                icon={<Instagram className="h-4 w-4" />}
+                className="bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)]"
+              />
+              <ShareButton
+                label="TikTok"
+                onClick={() => {
+                  void handleTikTokShare();
+                }}
+                icon={<TikTokIcon className="h-4 w-4" />}
+                className="bg-[#111111]"
+              />
+              <ShareButton
+                label="Copy link"
+                onClick={() => {
+                  void handleCopyLink();
+                }}
+                icon={<Link2 className="h-4 w-4" />}
+                className="bg-[color:color-mix(in_srgb,var(--color-purple)_86%,black)]"
+              />
+            </div>
+            {shareMessage ? (
+              <p className="mt-2 text-xs font-medium text-white/90" role="status" aria-live="polite">
+                {shareMessage}
+              </p>
+            ) : null}
+          </div>
+
           <button
             type="button"
             onClick={onFitWidth}

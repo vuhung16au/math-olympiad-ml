@@ -819,6 +819,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
         <div className="mx-auto max-w-[1280px] overflow-hidden rounded-[32px] border border-black/8 bg-white shadow-[0_24px_70px_rgba(60,16,83,0.08)]">
           <PDFControls
             bookletTitle={booklet.title}
+            bookletSlug={booklet.slug}
             pdfUrl={booklet.pdfUrl}
             currentPage={viewMode === "continuous" ? currentPage : safeCurrentPage}
             totalPages={numPages}
@@ -859,6 +860,9 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
               void handleFullscreen();
             }}
             onPrint={handlePrint}
+            onShareAction={(action) => {
+              trackPdfAction(booklet.title, action);
+            }}
           />
 
           {error ? (
