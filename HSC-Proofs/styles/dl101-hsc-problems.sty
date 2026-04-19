@@ -2,6 +2,8 @@
 
 \RequirePackage{extramarks}
 
+% Keep [most] here so this package remains standalone in projects
+% that do not preload tcolorbox libraries via other style files.
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{etoolbox}
 
@@ -13,7 +15,8 @@
 \providecolor{softivory}{RGB}{242,239,235}
 
 % Problem statement box
-\newtcolorbox[auto counter,number within=section]{problembox}[1][]{
+\newtcolorbox[auto counter,number within=section]{problembox}[1][]
+{
   title={\bfseries Problem~\thetcbcounter\ifstrempty{#1}{}{: #1}},
   enhanced,
   drop shadow={black!30!white},
@@ -28,11 +31,12 @@
   fonttitle=\bfseries,
   before skip=15pt,
   after skip=10pt,
-  before upper={\extramarks{}{Problem~\thetcbcounter}}
+  phantom={\ifstrempty{#1}{}{\addcontentsline{toc}{subsubsection}{Problem~\thetcbcounter: #1}}}
 }
 
 % Solution box
-\newtcolorbox[auto counter,number within=section]{solutionbox}[1][]{
+\newtcolorbox[auto counter,number within=section]{solutionbox}[1][]
+{
   title={\bfseries Solution~\thetcbcounter\ifstrempty{#1}{}{: #1}},
   enhanced,
   drop shadow={black!20!white},
@@ -46,11 +50,36 @@
   boxed title style={size=small,colback=bookred,coltitle=white},
   fonttitle=\bfseries,
   before skip=15pt,
-  after skip=10pt
+  after skip=10pt,
+  before upper={\extramarks{}{Problem~\thetcbcounter}}
 }
 
+% Hint box (only define if not provided elsewhere)
+\makeatletter
+\@ifundefined{hintbox}{%
+  \newtcolorbox[auto counter,number within=section]{hintbox}[1][]
+  {
+    title={\bfseries Hint~\thetcbcounter\ifstrempty{#1}{}{: #1}},
+    enhanced,
+    drop shadow={black!30!white},
+    coltitle=bookwhite,
+    colback=softivory,
+    colframe=blue!70!black,
+    boxrule=1.5pt,
+    arc=4pt,
+    left=12pt,right=12pt,top=12pt,bottom=12pt,
+    attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,colback=blue!70!black,coltitle=white},
+    fonttitle=\bfseries,
+    before skip=15pt,
+    after skip=10pt
+  }
+}{}
+\makeatother
+
 % Takeaways box (reusing from dl101-boxes.sty style but with section numbering)
-\newtcolorbox[auto counter,number within=section]{takeawaysbox}[1][]{
+\newtcolorbox[auto counter,number within=section]{takeawaysbox}[1][]
+{
   title={\bfseries Takeaways~\thetcbcounter\ifstrempty{#1}{}{: #1}},
   enhanced,
   drop shadow={black!50!white},
@@ -67,8 +96,9 @@
   after skip=10pt
 }
 
-% Solution Sketch box (for Part 2 problems - condensed solutions)
-\newtcolorbox[auto counter,number within=section]{solutionsketchbox}[1][]{
+% Backwards-compatibility for existing HSC-Proofs Part 2 content.
+\newtcolorbox[auto counter,number within=section]{solutionsketchbox}[1][]
+{
   title={\bfseries Solution Sketch~\thetcbcounter\ifstrempty{#1}{}{: #1}},
   enhanced,
   drop shadow={black!20!white},
@@ -87,6 +117,7 @@
 
 % Convenience environments
 \newenvironment{problem}[1][]{\begin{problembox}[#1]}{\end{problembox}}
+% Note: hint environment conflicts with dl101-hints.sty, so we use hintbox directly
 \newenvironment{solution}[1][]{\begin{solutionbox}[#1]}{\end{solutionbox}}
 \newenvironment{takeaways}[1][]{\begin{takeawaysbox}[#1]}{\end{takeawaysbox}}
 \newenvironment{solutionsketch}[1][]{\begin{solutionsketchbox}[#1]}{\end{solutionsketchbox}}
