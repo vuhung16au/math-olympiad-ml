@@ -3,7 +3,7 @@
 % Technique: Proof by Contradiction
 % Topic: Divisibility
 
-\begin{problem}[Easy]
+\begin{problem}[Consecutive Divisibility Is Impossible]
 Prove that for positive integers $a, b$ with $a > 1$, either $b$ is not divisible by $a$ or $b + 1$ is not divisible by $a$ (or both).
 \end{problem}
 
@@ -11,7 +11,7 @@ Prove that for positive integers $a, b$ with $a > 1$, either $b$ is not divisibl
 Use proof by contradiction. Assume both $a|b$ and $a|(b+1)$. What does this tell you about $a|[(b+1) - b]$? What can you conclude about $a$?
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 \textbf{Proof by Contradiction:}
 
 The statement is equivalent to: "It is not the case that both $a|b$ and $a|(b+1)$."
@@ -39,4 +39,11 @@ Since $a$ is a positive integer, the only positive divisor of $1$ is $1$ itself.
 This \textbf{contradicts} the given condition that $a > 1$.
 
 Hence, our assumption must be false, and at least one of $b$ or $b+1$ is not divisible by $a$. $\qed$
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

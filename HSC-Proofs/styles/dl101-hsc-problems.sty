@@ -31,6 +31,7 @@
   fonttitle=\bfseries,
   before skip=15pt,
   after skip=10pt,
+  before upper={\extramarks{}{Problem~\thetcbcounter}},
   phantom={\ifstrempty{#1}{}{\addcontentsline{toc}{subsubsection}{Problem~\thetcbcounter: #1}}}
 }
 
@@ -50,8 +51,7 @@
   boxed title style={size=small,colback=bookred,coltitle=white},
   fonttitle=\bfseries,
   before skip=15pt,
-  after skip=10pt,
-  before upper={\extramarks{}{Problem~\thetcbcounter}}
+  after skip=10pt
 }
 
 % Hint box (only define if not provided elsewhere)
@@ -96,7 +96,7 @@
   after skip=10pt
 }
 
-% Backwards-compatibility for existing HSC-Proofs Part 2 content.
+% Backwards-compatibility environment retained for legacy files.
 \newtcolorbox[auto counter,number within=section]{solutionsketchbox}[1][]
 {
   title={\bfseries Solution Sketch~\thetcbcounter\ifstrempty{#1}{}{: #1}},

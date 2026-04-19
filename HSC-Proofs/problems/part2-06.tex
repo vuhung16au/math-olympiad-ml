@@ -3,7 +3,7 @@
 % Technique: Direct Proof
 % Topic: Divisibility/Exponents
 
-\begin{problem}[Medium]
+\begin{problem}[Divisibility of a Shifted Power Expression]
 Prove that $(2^m - 1)^2 - 1$ is divisible by $2^{m+1}$ for all integers $m \geq 1$.
 \end{problem}
 
@@ -11,7 +11,7 @@ Prove that $(2^m - 1)^2 - 1$ is divisible by $2^{m+1}$ for all integers $m \geq 
 Expand the perfect square $(2^m - 1)^2$ algebraically, then simplify. Try to factor out $2^{m+1}$ from the resulting expression.
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 Let $E = (2^m - 1)^2 - 1$.
 
 \textbf{Step 1:} Expand the square:
@@ -38,4 +38,11 @@ Since $m \geq 1$, we have $m - 1 \geq 0$, so $2^{m-1}$ is an integer. Thus $(2^{
 Therefore, $E = 2^{m+1} \cdot k$ where $k = 2^{m-1} - 1 \in \mathbb{Z}$.
 
 By definition, $(2^m - 1)^2 - 1$ is divisible by $2^{m+1}$. $\qed$
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

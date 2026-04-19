@@ -3,7 +3,7 @@
 % Technique: Proof by Contrapositive
 % Topic: Number Theory/Primes
 
-\begin{problem}[Easy]
+\begin{problem}[Mersenne Prime Exponent Cannot Be Even]
 Prove that for all integers $n \geq 3$, if $2^n - 1$ is prime, then $n$ cannot be even.
 \end{problem}
 
@@ -15,7 +15,7 @@ That is, prove: "If $n$ is even (and $n \geq 3$), then $2^n - 1$ is composite."
 Write $n = 2k$ and factor $2^{2k} - 1$ as a difference of squares.
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 \textbf{Proof by Contrapositive:}
 
 We prove the contrapositive: If $n$ is even (with $n \geq 3$), then $2^n - 1$ is composite.
@@ -51,4 +51,11 @@ By contrapositive, if $2^n - 1$ is prime, then $n$ cannot be even. $\qed$
 \vspace{0.3cm}
 
 \textit{Note: This is why Mersenne primes have the form $2^p - 1$ where $p$ itself is prime (though not all such numbers are prime).}
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

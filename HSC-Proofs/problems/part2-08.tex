@@ -3,7 +3,7 @@
 % Technique: Direct Proof (Biconditional)
 % Topic: Divisibility Rules/Modular Arithmetic
 
-\begin{problem}[Medium]
+\begin{problem}[Divisibility by 9 via Digit Sum]
 Prove that a three-digit number is divisible by $9$ if and only if the sum of its digits is divisible by $9$.
 \end{problem}
 
@@ -15,7 +15,7 @@ Rewrite this as $N = 9(11a + b) + (a + b + c)$ to establish the relationship bet
 Then prove both directions of the biconditional using this relationship.
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 Let $N = 100a + 10b + c$ be a three-digit number with digits $a, b, c$.
 
 Let $S = a + b + c$ be the sum of digits.
@@ -57,4 +57,11 @@ Both directions proven, so the biconditional holds. $\qed$
 \vspace{0.3cm}
 
 \textit{Note: This proof generalizes to all positive integers and divisibility by 9. The key is the modular relationship $N \equiv S \pmod{9}$.}
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

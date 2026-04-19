@@ -3,7 +3,7 @@
 % Technique: Fractional Parts + Pigeonhole Principle
 % Topic: Leading Digits / Logarithms
 
-\begin{problem}[Hard]
+\begin{problem}[Leading Digits of Powers of Two]
 \textbf{The Pigeonhole Principle and Leading Digits}
 
 For any real number $x$, the fractional part of $x$ is denoted by $\{x\}$ and is defined as $\{x\} = x - \lfloor x \rfloor$, where $\lfloor x \rfloor$ is the greatest integer less than or equal to $x$. Note that $0 \le \{x\} < 1$.
@@ -40,7 +40,7 @@ For example, $\{3.14\} = 0.14$, $\{2026\} = 0$.
 \end{itemize}
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 \textbf{Part (i):} $2^M$ begins with 2025 if and only if $2^M = c \times 10^K$ for some integer $K \ge 0$ and $2.025 \le c < 2.026$. Taking logarithms yields $M \log_{10} 2 = K + \log_{10} c$. Since $0 \le \log_{10} c < 1$, we must have $K = \lfloor M \log_{10} 2 \rfloor$ and $\log_{10} c = \{M \log_{10} 2\}$. Substituting this into the inequality for $c$ yields the required result.
 
 \vspace{0.2cm}
@@ -62,7 +62,7 @@ lies in $(0,1)$, it is exactly $\{(i-j)\alpha\}$. Let $k = i-j$ (where $0 < k \l
 
 \vspace{0.3cm}
 
-\end{solutionsketch}
+\end{solution}
 
 \begin{takeaways}
 \begin{itemize}

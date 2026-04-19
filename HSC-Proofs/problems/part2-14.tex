@@ -3,7 +3,7 @@
 % Technique: Mathematical Induction (two inequalities)
 % Topic: Induction/Inequalities
 
-\begin{problem}[Hard]
+\begin{problem}[Cubic Sums Bound a Quartic Term]
 Prove by induction that for all integers $n \geq 2$:
 \[
 1^3 + 2^3 + \cdots + (n-1)^3 < \frac{n^4}{4} < 1^3 + 2^3 + \cdots + n^3
@@ -22,7 +22,7 @@ Recall: $\sum_{k=1}^{n} k^3 = \left[\frac{n(n+1)}{2}\right]^2 = \frac{n^2(n+1)^2
 For the LHS induction step, you'll need to show $\frac{k^4}{4} + k^3 < \frac{(k+1)^4}{4}$, which simplifies to $0 < 6k^2 + 4k + 1$.
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 \textbf{Part 1: RHS Inequality (Direct Proof)}
 
 Show $\frac{n^4}{4} < \sum_{k=1}^{n} k^3$ for $n \geq 2$.
@@ -83,4 +83,11 @@ This is true for all $m \geq 2$. \checkmark
 \vspace{0.3cm}
 
 By induction, LHS proven. Combining both parts, the full sandwich inequality holds. $\qed$
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

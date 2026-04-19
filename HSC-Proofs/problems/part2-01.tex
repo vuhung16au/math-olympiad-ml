@@ -3,7 +3,7 @@
 % Technique: Direct Proof or Proof by Cases
 % Topic: Parity
 
-\begin{problem}[Easy]
+\begin{problem}[Parity of a Cubed Minus a Plus One]
 Prove that the expression $a^3 - a + 1$ is odd for all positive integer values of $a$.
 \end{problem}
 
@@ -13,7 +13,7 @@ Consider factoring $a^3 - a$ as a product of consecutive integers. What can you 
 Alternatively, try proof by cases: analyze when $a$ is even and when $a$ is odd separately.
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 \textbf{Method 1 (Factorization - Elegant):}
 
 Factor the expression:
@@ -36,4 +36,11 @@ Therefore, $a^3 - a + 1 = 2k + 1$, which is odd by definition.
 \textit{Case 2:} If $a = 2m+1$ (odd), then expanding shows $a^3 - a + 1 = 2(\text{integer}) + 1$ (odd).
 
 In both cases, the expression is odd. $\qed$
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

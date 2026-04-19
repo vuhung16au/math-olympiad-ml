@@ -3,7 +3,7 @@
 % Technique: Proof by Contradiction
 % Topic: Parity/Number Theory
 
-\begin{problem}[Hard]
+\begin{problem}[Parity Obstruction in Pythagorean Triples]
 Prove that there is no Pythagorean triple $(a, b, c)$ where $a$ and $b$ (the two smallest numbers) are both even and $c$ (the largest number) is odd.
 \end{problem}
 
@@ -13,7 +13,7 @@ Use proof by contradiction. Assume such a triple exists with $a = 2k$ and $b = 2
 Substitute into the Pythagorean equation $a^2 + b^2 = c^2$ and analyze the parity of $c^2$. What can you conclude about the parity of $c$?
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 \textbf{Proof by Contradiction:}
 
 Assume there exists a Pythagorean triple $(a, b, c)$ where:
@@ -61,4 +61,11 @@ Therefore, $c$ must be \textbf{even}.
 We derived that $c$ must be even, which contradicts our assumption that $c$ is odd.
 
 Hence, no such Pythagorean triple exists. $\qed$
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

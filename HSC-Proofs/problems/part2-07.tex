@@ -3,7 +3,7 @@
 % Technique: Direct Proof + Case Analysis
 % Topic: Divisibility/Factorization
 
-\begin{problem}[Medium]
+\begin{problem}[Difference of Squares Cannot Equal 1]
 Prove that there are no positive integers $x, y$ such that $x^2 - y^2 = 1$.
 \end{problem}
 
@@ -13,7 +13,7 @@ Factor the left side as a difference of squares: $(x-y)(x+y) = 1$.
 For this product to equal $1$, what must be true about the integer factors $(x-y)$ and $(x+y)$? Consider all possible integer factor pairs of $1$.
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 Factor the equation:
 \[
 x^2 - y^2 = 1 \implies (x-y)(x+y) = 1
@@ -48,4 +48,11 @@ Since $x = -1$ is not a positive integer, this case fails.
 \textbf{Conclusion:} Neither case yields a solution with both $x$ and $y$ positive integers.
 
 Therefore, there are no positive integers $x, y$ such that $x^2 - y^2 = 1$. $\qed$
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

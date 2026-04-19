@@ -3,7 +3,7 @@
 % Technique: Existence Proof (by example and analysis)
 % Topic: Inequalities/Analysis
 
-\begin{problem}[Hard]
+\begin{problem}[Exponential Comparison of Three Four and Five]
 Prove or disprove: There exists a real number $n$ such that $3^n + 4^n < 5^n$.
 \end{problem}
 
@@ -15,7 +15,7 @@ Try $n = 3$: Is $3^3 + 4^3 < 5^3$? Calculate $27 + 64$ vs $125$.
 Alternatively, divide by $5^n$ to get $(3/5)^n + (4/5)^n < 1$ and analyze the function behavior.
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 The statement is \textbf{true}.
 
 \vspace{0.3cm}
@@ -59,4 +59,11 @@ Thus, the inequality holds for all $n > 2$. In particular, it holds for $n = 3$ 
 \vspace{0.3cm}
 
 \textit{Note: This shows the power of the "divide by largest term" technique in inequality problems. The critical point is $n = 2$ where equality holds (Pythagorean triple: $3^2 + 4^2 = 5^2$).}
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}

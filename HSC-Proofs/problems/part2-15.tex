@@ -3,7 +3,7 @@
 % Technique: Mathematical Induction
 % Topic: Divisibility/Induction
 
-\begin{problem}[Hard]
+\begin{problem}[Induction for a Divisibility Pattern Modulo Ten]
 Prove by induction that $4^{n+1} + 6^n$ is divisible by $10$ when $n$ is an even positive integer.
 \end{problem}
 
@@ -18,7 +18,7 @@ For the inductive step:
 \end{itemize}
 \end{hint}
 
-\begin{solutionsketch}
+\begin{solution}
 Since $n$ is an even positive integer, let $n = 2k$ where $k \in \mathbb{Z}^+$.
 
 We prove by induction on $k$ that $P(k)$: "$4^{2k+1} + 6^{2k}$ is divisible by $10$" holds for all $k \geq 1$.
@@ -69,4 +69,11 @@ Therefore, $4^{2(k+1)+1} + 6^{2(k+1)}$ is divisible by $10$. \checkmark
 By the principle of mathematical induction, $P(k)$ holds for all $k \geq 1$.
 
 Therefore, $4^{n+1} + 6^n$ is divisible by $10$ for all even positive integers $n$. $\qed$
-\end{solutionsketch}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
+\item Check edge cases and verify where each assumption is used in the argument.
+\end{itemize}
+\end{takeaways}
