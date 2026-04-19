@@ -48,8 +48,31 @@
 
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+\newgeometry{margin=0pt}
 \thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=south west,inner sep=0] at (current page.south west) {
+    \includegraphics[width=\paperwidth,height=\paperheight]{assets/matte.png}
+  };
+  \node[
+    align=center,
+    text=white,
+    fill=black,
+    fill opacity=0.45,
+    text opacity=1,
+    rounded corners=2pt,
+    inner xsep=10pt,
+    inner ysep=8pt
+  ] at ([yshift=-0.34\paperheight]current page.center) {
+    \bfseries\fontsize{28}{34}\selectfont
+    HSC Math Extension 2\\
+    Last Resorts Mastery
+  };
+\end{tikzpicture}
+\null
+\restoregeometry
+\end{titlepage}
 
 % QR Code Page (Page 2)
 \newpage
