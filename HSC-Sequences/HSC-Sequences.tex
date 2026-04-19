@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[shortlabels]{enumitem}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage[most,skins]{tcolorbox}
+
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+\usepackage{styles/dl101-layout}
+
+\usetikzlibrary{arrows.meta, calc, positioning}
+
+\author{Vu Hung Nguyen}
+\title{HSC Mathematics Extension 1: Sequences and Series}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% QR Code Page (Page 2)
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \includegraphics[width=0.25\textwidth]{assets/qrcode.png}
+    \\[0.3cm]
+    \small \textit{Download PDF and resources:} \\
+    \footnotesize \url{https://github.com/vuhung16au/math-olympiad-ml}
+\end{center}
+\vspace*{\fill}
+
+\begingroup\small\noindent This work is licensed under CC BY 4.0, see the LICENSE file on the github page for more info.\par\endgroup
+
+% Quote Page (Page 3)
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\itshape
+"Sometimes it is the people no one imagines anything of who do the things that no one can imagine."
+
+\vspace{1em}
+\normalfont Alan Turing
+\end{center}
+\vspace*{\fill}
+
+% Table of Contents (Page 4)
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+This booklet is a focused companion for NSW HSC Mathematics Extension 1 students studying sequences and series. It is designed to connect core sequence skills to exam-style problem solving with clear methods and structured solutions.
+
+\subsection{Target Audience}
+This resource is written for Year 12 students in Extension 1, and for tutors and teachers who want a compact booklet with consistent notation and worked examples.
+
+\subsection{How to Use This Booklet}
+\begin{itemize}[leftmargin=*]
+  \item Read the fundamentals review first, then attempt the detailed problems in Part 1.
+  \item Use Part 2 for timed practice and fluency, using hints only when needed.
+  \item Keep a formula sheet while you work, but always justify each step from first principles.
+  \item Track common slips, especially sign errors in geometric sums and indexing mistakes in sigma notation.
+\end{itemize}
+
+\subsection{Topics Covered}
+This booklet develops the following Extension 1 ideas:
+\begin{itemize}[leftmargin=*]
+  \item defining sequences by term formula, recursion, and context
+  \item arithmetic sequences and arithmetic series
+  \item geometric sequences and geometric series
+  \item finite sum formulas and sigma notation
+  \item limiting sum of a geometric series when $|r|<1$
+  \item links between recurring decimals and geometric series
+  \item mixed AP/GP problem solving in HSC-style questions
+\end{itemize}
+
+\subsection{Where This Leads Next}
+Sequence fluency supports later work in calculus, proof, and Extension 2 style reasoning. In particular, convergence arguments and recursive definitions form a bridge to harder topics such as iterative methods and infinite processes.
+
+\newpage
+\section{Fundamentals Review}
+This section is a compact reference for notation, formulas, and common reasoning patterns used throughout the booklet.
+
+\input{problems/fundamentals}
+
+\newpage
+\section{Part 1: Problems and Solutions (Detailed)}
+Part 1 contains full solutions with method explanations.
+
+\subsection{Basic Sequence Problems}
+\input{problems/part1-basic}
+
+\subsection{Medium Sequence Problems}
+\input{problems/part1-medium}
+
+\subsection{Advanced Sequence Problems}
+\input{problems/part1-advanced}
+
+\newpage
+\section{Part 2: Problems with Hints and Solutions (Concise)}
+Part 2 gives extra practice with upside-down hints and concise solutions.
+
+\subsection{Basic Sequence Problems}
+\input{problems/part2-basic}
+
+\subsection{Medium Sequence Problems}
+\input{problems/part2-medium}
+
+\subsection{Advanced Sequence Problems}
+\input{problems/part2-advanced}
+
+\newpage
+\section{Conclusion}
+Strong sequence work in Extension 1 is not just memorizing formulas. It is about choosing the right model, controlling notation, and checking whether each step is logically justified.
+
+The key habits are:
+\begin{itemize}[leftmargin=*]
+  \item define terms clearly, including first term and common difference or ratio
+  \item check indexing before and after every sigma manipulation
+  \item identify whether a question is about terms, partial sums, or limits
+  \item test answers for reasonableness by checking growth and sign behavior
+\end{itemize}
+
+With steady practice, sequences become one of the most reliable scoring areas in Extension 1.
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Sequences}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Sequences}
+
+\newpage
+\section{Appendices}
+
+\subsection{Appendix A: Formula Sheet}
+\input{problems/appendix-a-formulas}
+
+\subsection{Appendix B: Common Sequence Traps}
+\input{problems/appendix-b-traps}
+
+\end{document}

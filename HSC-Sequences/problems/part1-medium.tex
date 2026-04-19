@@ -1,0 +1,39 @@
+\begin{problem}[Mixed AP constraints]
+An arithmetic sequence has $a_3=11$ and $a_{12}=47$. Find $a_1$ and $d$, then determine $S_{25}$.
+\end{problem}
+\begin{solution}
+Use $a_n=a+(n-1)d$:
+\[
+a+2d=11,\qquad a+11d=47.
+\]
+Subtract:
+\[
+9d=36 \implies d=4,
+\]
+then $a=11-8=3$.
+Now
+\[
+a_{25}=3+24\cdot 4=99,
+\]
+so
+\[
+S_{25}=\frac{25}{2}(3+99)=\frac{25}{2}\cdot 102=1275.
+\]
+\end{solution}
+
+\begin{problem}[Finite GP with unknown index]
+For the geometric sequence with first term $5$ and ratio $2$, find $n$ such that
+\[
+S_n=2555.
+\]
+\end{problem}
+\begin{solution}
+\[
+S_n=5\frac{2^n-1}{2-1}=5(2^n-1)=2555.
+\]
+So
+\[
+2^n-1=511 \implies 2^n=512=2^9.
+\]
+Hence $n=9$.
+\end{solution}

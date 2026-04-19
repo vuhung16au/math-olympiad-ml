@@ -1,0 +1,64 @@
+\begin{problem}[Recursive sequence and limiting value]
+Let $(x_n)$ be defined by
+\[
+x_1=16,\qquad x_{n+1}=2+\frac{1}{x_n}\quad (n\ge 1).
+\]
+\begin{enumerate}[(i)]
+\item Find exact values of $x_2,x_3,x_4$.
+\item Assuming $x_n\to L>0$, show that $L=1+\sqrt{2}$.
+\item Prove that
+\[
+|x_{n+1}-L|=\frac{|x_n-L|}{Lx_n},
+\]
+and deduce that for $n\ge 2$,
+\[
+|x_{n+1}-L|<\frac14|x_n-L|.
+\]
+\item Hence show $x_n\to 1+\sqrt{2}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(i)}
+\[
+x_2=2+\frac1{16}=\frac{33}{16},\quad
+x_3=2+\frac{16}{33}=\frac{82}{33},\quad
+x_4=2+\frac{33}{82}=\frac{197}{82}.
+\]
+For $n\ge 2$, we have $x_n>2$ because each term is $2+\frac{1}{x_{n-1}}$ with positive second part.
+
+\textbf{(ii)} If $x_n\to L$, then taking limits in the recurrence gives
+\[
+L=2+\frac1L \implies L^2-2L-1=0.
+\]
+So $L=1\pm\sqrt2$. Since terms are positive and $>2$ from $n\ge2$, we take
+\[
+L=1+\sqrt2.
+\]
+
+\textbf{(iii)}
+\[
+x_{n+1}-L=\left(2+\frac1{x_n}\right)-\left(2+\frac1L\right)
+=\frac{L-x_n}{Lx_n},
+\]
+thus
+\[
+|x_{n+1}-L|=\frac{|x_n-L|}{Lx_n}.
+\]
+Now $L=1+\sqrt2>2$ and $x_n>2$ for $n\ge2$, so $Lx_n>4$. Hence
+\[
+|x_{n+1}-L|<\frac14|x_n-L|,\quad n\ge2.
+\]
+
+\textbf{(iv)} Repeatedly applying the inequality gives geometric decay of the error:
+\[
+|x_{n}-L|\le \left(\frac14\right)^{n-2}|x_2-L|\to 0.
+\]
+Therefore $x_n\to L=1+\sqrt2$.
+\end{solution}
+
+\begin{takeaways}
+\item For recursive limits, first solve the fixed-point equation.
+\item A contraction inequality gives a rigorous convergence proof.
+\item The same method works for many rational recursions.
+\end{takeaways}

@@ -1,0 +1,133 @@
+\subsection{How Sequences Are Specified}
+A sequence is an ordered list of numbers, usually written as $(a_n)_{n\ge 1}$.
+Common ways to define a sequence are:
+\begin{itemize}[leftmargin=*]
+  \item explicit formula: $a_n$ written directly in terms of $n$
+  \item recursive formula: each term written using previous terms
+  \item contextual rule: terms generated from a worded process
+\end{itemize}
+
+\textit{Examples.}
+\[
+a_n = 3n-1,\quad b_1=2,\ b_{n+1}=b_n+5,\quad c_n = (-1)^n.
+\]
+
+\subsection{Arithmetic Sequences (AP)}
+An arithmetic sequence has constant difference $d$:
+\[
+a_{n+1}-a_n=d.
+\]
+If the first term is $a$, then
+\[
+a_n = a + (n-1)d.
+\]
+
+\begin{problem}[Recognizing an AP]
+Given $a_1=7$ and $a_{n+1}=a_n-3$, find $a_{10}$.
+\end{problem}
+\begin{solution}
+Here $d=-3$, so
+\[
+a_{10}=7+(10-1)(-3)=7-27=-20.
+\]
+\end{solution}
+
+\subsection{Arithmetic Series}
+The sum of the first $n$ terms of an AP is:
+\[
+S_n = \frac{n}{2}\bigl(2a+(n-1)d\bigr)=\frac{n}{2}(a+l),
+\]
+where $l$ is the $n$th term.
+
+\begin{problem}[AP Sum]
+Find $\sum_{k=1}^{20}(5+2(k-1))$.
+\end{problem}
+\begin{solution}
+This is an AP with $a=5$, $d=2$, and $n=20$. The 20th term is
+\[
+l=5+19\cdot 2=43.
+\]
+So
+\[
+S_{20}=\frac{20}{2}(5+43)=10\cdot 48=480.
+\]
+\end{solution}
+
+\subsection{Geometric Sequences (GP)}
+A geometric sequence has constant ratio $r$:
+\[
+\frac{a_{n+1}}{a_n}=r \quad (a_n\ne 0).
+\]
+If the first term is $a$, then
+\[
+a_n = ar^{n-1}.
+\]
+
+\begin{problem}[Recognizing a GP]
+If $a_1=81$ and $r=\frac13$, find $a_5$.
+\end{problem}
+\begin{solution}
+\[
+a_5 = 81\left(\frac13\right)^4 = 81\cdot\frac{1}{81}=1.
+\]
+\end{solution}
+
+\subsection{Geometric Series}
+For $r\ne 1$, the sum of the first $n$ terms is
+\[
+S_n = a\frac{1-r^n}{1-r} = a\frac{r^n-1}{r-1}.
+\]
+Use the form that keeps signs clean for your $r$ value.
+
+\begin{problem}[Finite GP Sum]
+Find $\sum_{k=0}^{6}3\cdot 2^k$.
+\end{problem}
+\begin{solution}
+This is $a=3$, $r=2$, $n=7$ terms (from $k=0$ to $6$):
+\[
+S_7 = 3\frac{2^7-1}{2-1}=3(128-1)=381.
+\]
+\end{solution}
+
+\subsection{Limiting Sum of a Geometric Series}
+If $|r|<1$, then $r^n\to 0$ as $n\to\infty$, and the infinite sum exists:
+\[
+S_\infty = \frac{a}{1-r}.
+\]
+If $|r|\ge 1$, the geometric series does not converge to a finite limiting sum.
+
+\begin{problem}[Infinite GP]
+Evaluate $2+\frac{2}{3}+\frac{2}{9}+\frac{2}{27}+\cdots$.
+\end{problem}
+\begin{solution}
+Here $a=2$, $r=\frac13$, and $|r|<1$, so
+\[
+S_\infty=\frac{2}{1-\frac13}=\frac{2}{\frac23}=3.
+\]
+\end{solution}
+
+\subsection{Recurring Decimals and Geometric Series}
+Recurring decimals can be written as geometric series.
+For example,
+\[
+0.\overline{7}=0.7+0.07+0.007+\cdots
+\]
+is geometric with $a=0.7$ and $r=0.1$. So
+\[
+0.\overline{7}=\frac{0.7}{1-0.1}=\frac{0.7}{0.9}=\frac79.
+\]
+
+\subsection{Sigma Notation Quick Rules}
+\[
+\sum_{k=1}^{n}(u_k+v_k)=\sum_{k=1}^{n}u_k+\sum_{k=1}^{n}v_k,
+\quad
+\sum_{k=1}^{n}cu_k = c\sum_{k=1}^{n}u_k.
+\]
+Index shifts must preserve both the expression and bounds consistently.
+
+\begin{takeaways}
+\item Always identify whether the question asks for a term $a_n$, a finite sum $S_n$, or a limit.
+\item AP questions depend on constant difference; GP questions depend on constant ratio.
+\item For infinite geometric sums, check $|r|<1$ before using $S_\infty=\frac{a}{1-r}$.
+\item Track indexing carefully in sigma notation to avoid off-by-one errors.
+\end{takeaways}

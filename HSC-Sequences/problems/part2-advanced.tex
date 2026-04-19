@@ -1,0 +1,48 @@
+\begin{problem}[Convergence condition]
+Consider the geometric series
+\[
+\sum_{n=0}^{\infty} 7\left(\frac{m-1}{3}\right)^n.
+\]
+Find all real values of $m$ for which the series converges, and then state its sum.
+\end{problem}
+\begin{hint}
+Use the condition $|r|<1$ for convergence of an infinite GP.
+\end{hint}
+\begin{solution}
+Here
+\[
+r=\frac{m-1}{3}.
+\]
+Convergence requires
+\[
+\left|\frac{m-1}{3}\right|<1 \implies |m-1|<3 \implies -2<m<4.
+\]
+For these values,
+\[
+S_\infty=\frac{7}{1-\frac{m-1}{3}}=\frac{21}{4-m}.
+\]
+\end{solution}
+
+\begin{problem}[AP and GP crossover]
+A sequence is both arithmetic and geometric. Given $a_1=6$ and $a_3=6$, find all possible sequences.
+\end{problem}
+\begin{hint}
+Let AP difference be $d$ and GP ratio be $r$. Use both models on $a_3$.
+\end{hint}
+\begin{solution}
+AP gives
+\[
+a_3=a_1+2d=6+2d=6 \implies d=0,
+\]
+so AP is constant: $a_n=6$.
+For GP,
+\[
+a_3=a_1r^2=6r^2=6 \implies r^2=1 \implies r=\pm 1.
+\]
+If $r=-1$, terms alternate $6,-6,6,\ldots$ and are not arithmetic.
+Hence the only sequence that is both AP and GP is
+\[
+a_n=6\quad \text{for all }n,
+\]
+with $d=0$ and $r=1$.
+\end{solution}
