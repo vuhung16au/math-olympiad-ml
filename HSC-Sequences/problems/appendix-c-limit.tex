@@ -1,0 +1,78 @@
+% Appendix C: Rigorous Definition of the Limit of a Sequence
+
+\begin{definition}[$\epsilon$-$N$ Definition of a Limit]
+Let $(a_n)$ be a sequence of real numbers. We say that $(a_n)$ \textbf{converges to a limit $L$}, written
+\[
+  \lim_{n \to \infty} a_n = L,
+\]
+if for every real number $\epsilon > 0$ there exists a positive integer $N$ such that
+\[
+  n > N \implies |a_n - L| < \epsilon.
+\]
+In formal logical notation:
+\[
+  \forall\, \epsilon > 0,\; \exists\, N \in \mathbb{N} \text{ such that } n > N \implies |a_n - L| < \epsilon.
+\]
+If no such $L$ exists, the sequence is said to \textbf{diverge}.
+\end{definition}
+
+\medskip
+\noindent\textbf{Unpacking the definition.}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{$\epsilon > 0$ is the ``margin of error.''} The challenger picks any strictly positive number,
+        no matter how small. A smaller $\epsilon$ places a tighter band around $L$.
+
+  \item \textbf{$N$ is the ``cutoff index.''} The responder must produce a concrete $N$ that works for the
+        chosen $\epsilon$. Typically, smaller $\epsilon$ forces a larger $N$.
+
+  \item \textbf{Only the \emph{tail} matters.} The condition $n > N$ means the first $N$ terms may behave
+        arbitrarily; only the infinite tail of the sequence is constrained.
+
+  \item \textbf{$|a_n - L| < \epsilon$ is the ``closeness'' condition.} Every term beyond index $N$ must
+        lie strictly inside the interval $(L - \epsilon,\; L + \epsilon)$.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Visual interpretation (the ``$\epsilon$-tube'').}
+
+Plot the sequence on a graph with the index $n$ on the horizontal axis and $a_n$ on the vertical axis.
+Draw a horizontal dashed line at $y = L$. Choosing $\epsilon > 0$ creates a horizontal band
+$\bigl(L - \epsilon,\; L + \epsilon\bigr)$ of total width $2\epsilon$ around the limit.
+The definition states that for every such band there is a vertical line $x = N$ such that
+\emph{every point of the sequence to the right of that line lies inside the band}.
+
+\bigskip
+\noindent\textbf{Example: Proving $\displaystyle\lim_{n \to \infty} \dfrac{1}{n} = 0$.}
+
+\begin{proof}
+Let $\epsilon > 0$ be given.
+
+\medskip
+\noindent\textit{Scratchwork.} We require
+\[
+  \left|\frac{1}{n} - 0\right| < \epsilon.
+\]
+Since $n \in \mathbb{N}$ is positive, this simplifies to $\dfrac{1}{n} < \epsilon$, i.e.\ $n > \dfrac{1}{\epsilon}$.
+
+\medskip
+\noindent\textit{Choice of $N$.} Let $N$ be any positive integer satisfying $N > \dfrac{1}{\epsilon}$.
+(Such an integer exists by the Archimedean property of $\mathbb{R}$.)
+
+\medskip
+\noindent\textit{Verification.} Suppose $n > N$. Then
+\[
+  n > N > \frac{1}{\epsilon}
+  \implies \frac{1}{n} < \epsilon
+  \implies \left|\frac{1}{n} - 0\right| = \frac{1}{n} < \epsilon.
+\]
+Since $\epsilon > 0$ was arbitrary, the definition is satisfied and
+$\displaystyle\lim_{n \to \infty} \frac{1}{n} = 0$.
+\end{proof}
+
+\medskip
+\noindent\textbf{Concrete illustration.}
+
+For $\epsilon = 0.01$ we need $N > 100$, so we may take $N = 101$.
+Every term $a_n = \tfrac{1}{n}$ with $n \ge 102$ satisfies
+$\tfrac{1}{102} < 0.01$, placing all those terms inside the band $(-0.01,\, 0.01)$.
