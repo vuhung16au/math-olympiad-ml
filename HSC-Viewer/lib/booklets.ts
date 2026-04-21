@@ -135,10 +135,9 @@ export const BOOKLETS: Booklet[] = [
     id: "hsc-sequences",
     title: "HSC Sequences",
     slug: "hsc-sequences",
-    pdfUrl: "",
+    pdfUrl: `${GITHUB_RAW_URL}/HSC-Sequences/releases/HSC-Sequences.pdf`,
     thumbnailPath: "/thumbnails/hsc-sequences.png",
-    isAvailable: false,
-    comingSoon: true,
+    isAvailable: true,
   },
   {
     id: "hsc-trigonometry",
