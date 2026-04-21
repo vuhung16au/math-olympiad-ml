@@ -41,3 +41,179 @@ So
 0.4\overline{2}=\frac{2}{5}+\frac{1}{45}=\frac{18}{45}+\frac{1}{45}=\frac{19}{45}.
 \]
 \end{solution}
+
+\begin{problem}[Second-kind Chebyshev recurrence]
+The second-kind Chebyshev polynomials satisfy
+\[
+U_0(x)=1,\qquad U_1(x)=2x,\qquad U_{n+1}(x)=2xU_n(x)-U_{n-1}(x).
+\]
+Use this recurrence to find $U_3(x)$ and $U_4(x)$.
+\end{problem}
+\begin{hint}
+First find $U_2(x)$, then continue to $U_3(x)$ and $U_4(x)$.
+\end{hint}
+\begin{solution}
+\[
+U_2(x)=2x(2x)-1=4x^2-1.
+\]
+\[
+U_3(x)=2x(4x^2-1)-2x=8x^3-4x.
+\]
+\[
+U_4(x)=2x(8x^3-4x)-(4x^2-1)=16x^4-12x^2+1.
+\]
+\end{solution}
+\begin{takeaways}
+\item The first-kind and second-kind Chebyshev polynomials use the same recurrence form.
+\item The starting values determine which family is produced.
+\item Organize recurrence work line by line to avoid algebra slips.
+\end{takeaways}
+
+\begin{problem}[Alternative telescoping patterns]
+\begin{enumerate}[(i)]
+\item Evaluate $\sum_{n=0}^{4}(-1)^{n+1}(n+5)$.
+\item Show $\frac{1}{n(n+1)}=\frac1n-\frac1{n+1}$.
+\item Hence find
+\[
+S_N=\sum_{n=1}^N\left(\frac1n-\frac1{n+1}\right)
+\]
+and $\lim_{N\to\infty}S_N$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Part (iii) is a direct telescoping sum after part (ii).
+\end{hint}
+\begin{solution}
+\[
+\sum_{n=0}^{4}(-1)^{n+1}(n+5)=-7.
+\]
+Also
+\[
+\frac1{n(n+1)}=\frac{(n+1)-n}{n(n+1)}=\frac1n-\frac1{n+1}.
+\]
+So
+\[
+S_N=1-\frac1{N+1},\qquad \lim_{N\to\infty}S_N=1.
+\]
+\end{solution}
+
+\begin{problem}[Surd telescoping]
+Let
+\[
+a_k=\frac1{\sqrt{k+1}+\sqrt{k}},\qquad S_n=\sum_{k=1}^n a_k.
+\]
+\begin{enumerate}[(i)]
+\item Show $a_k=\sqrt{k+1}-\sqrt{k}$.
+\item Find $S_n$.
+\item Evaluate $S_{99}$.
+\item Find the smallest integer $N$ such that $S_N>10$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Rationalize with the conjugate and then telescope.
+\end{hint}
+\begin{solution}
+\[
+a_k=\frac{\sqrt{k+1}-\sqrt{k}}{(k+1)-k}=\sqrt{k+1}-\sqrt{k}.
+\]
+Hence
+\[
+S_n=(\sqrt2-\sqrt1)+\cdots+(\sqrt{n+1}-\sqrt n)=\sqrt{n+1}-1.
+\]
+So $S_{99}=10-1=9$.
+For $S_N>10$:
+\[
+\sqrt{N+1}-1>10 \implies N>120,
+\]
+smallest such integer is $N=121$.
+\end{solution}
+
+\begin{problem}[Central symmetry in a GP]
+In a GP, define $P_n=T_1T_2\cdots T_n$.
+\begin{enumerate}[(i)]
+\item Show $P_n=a^n r^{\frac{n(n-1)}2}$.
+\item Show $T_kT_{n-k+1}=T_1T_n$.
+\item If $n=11$ and middle term $T_6=5$, find $P_{11}$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Use $T_k=ar^{k-1}$ and pair symmetric terms.
+\end{hint}
+\begin{solution}
+\[
+P_n=a(ar)\cdots(ar^{n-1})=a^n r^{0+1+\cdots+(n-1)}=a^n r^{\frac{n(n-1)}2}.
+\]
+Also
+\[
+T_kT_{n-k+1}=ar^{k-1}\cdot ar^{n-k}=a^2r^{n-1}=T_1T_n.
+\]
+For odd $n=11$, the product is middle-term power:
+\[
+P_{11}=T_6^{11}=5^{11}.
+\]
+\end{solution}
+
+\begin{problem}[Fibonacci and Lucas]
+Define
+\[
+F_1=1,\ F_2=1,\ F_n=F_{n-1}+F_{n-2},
+\]
+\[
+L_1=1,\ L_2=3,\ L_n=L_{n-1}+L_{n-2}.
+\]
+Show that
+\[
+L_n=F_{n-1}+F_{n+1}.
+\]
+\end{problem}
+\begin{hint}
+Set $A_n=L_n+F_n$ and $B_n=L_n-F_n$, then compare with Fibonacci terms.
+\end{hint}
+\begin{solution}
+From initial terms and recurrence,
+\[
+A_n=L_n+F_n=2F_{n+1},\qquad B_n=L_n-F_n=2F_{n-1}.
+\]
+Adding gives
+\[
+2L_n=2F_{n+1}+2F_{n-1},
+\]
+so
+\[
+L_n=F_{n-1}+F_{n+1}.
+\]
+\end{solution}
+
+\begin{problem}[Linear combinations of two GPs]
+Let $T_n=ar^{n-1}$ and $U_n=AR^{n-1}$.
+Define $W_n=T_n+U_n$.
+\begin{enumerate}[(i)]
+\item Show $(W_n)$ satisfies
+\[
+W_{n+2}-(r+R)W_{n+1}+rRW_n=0.
+\]
+\item Solve
+\[
+X_{n+2}-5X_{n+1}+6X_n=0,\quad X_1=5,\ X_2=13.
+\]
+\end{enumerate}
+\end{problem}
+\begin{hint}
+For (ii), the characteristic roots are $2$ and $3$.
+\end{hint}
+\begin{solution}
+Substitute $W_n=ar^{n-1}+AR^{n-1}$ directly to verify (i).
+For (ii), write
+\[
+X_n=\alpha 2^{n-1}+\beta 3^{n-1}.
+\]
+Using $X_1=5,\ X_2=13$:
+\[
+\alpha+\beta=5,\quad 2\alpha+3\beta=13
+\]
+gives $\alpha=2,\ \beta=3$.
+Hence
+\[
+X_n=2^n+3^n.
+\]
+\end{solution}

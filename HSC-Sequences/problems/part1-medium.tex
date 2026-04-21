@@ -37,3 +37,394 @@ So
 \]
 Hence $n=9$.
 \end{solution}
+
+\begin{problem}[Consecutive cubes and induction]
+Prove by induction that
+\[
+(n-1)^3+n^3+(n+1)^3
+\]
+is divisible by $3$ for every integer $n$.
+\end{problem}
+\begin{hint}
+First prove the result for $n\ge 0$. In the inductive step, compare the expression at $n=k+1$ with the expression at $n=k$.
+\end{hint}
+\begin{solution}
+Let
+\[
+P(n)=(n-1)^3+n^3+(n+1)^3.
+\]
+We first prove that $P(n)$ is divisible by $3$ for all integers $n\ge0$.
+
+\textbf{Base case.} For $n=0$,
+\[
+P(0)=(-1)^3+0^3+1^3=0,
+\]
+which is divisible by $3$.
+
+\textbf{Inductive step.} Suppose $P(k)$ is divisible by $3$ for some integer $k\ge0$. Then
+\[
+\begin{aligned}
+P(k+1)-P(k)
+&=k^3+(k+1)^3+(k+2)^3-\left((k-1)^3+k^3+(k+1)^3\right)\\
+&=(k+2)^3-(k-1)^3\\
+&=9k^2+9k+9\\
+&=9(k^2+k+1),
+\end{aligned}
+\]
+which is divisible by $3$. Since $P(k)$ is divisible by $3$, it follows that $P(k+1)$ is also divisible by $3$.
+
+Thus $P(n)$ is divisible by $3$ for all integers $n\ge0$. For a negative integer $n=-m$, where $m>0$,
+\[
+P(-m)=(-m-1)^3+(-m)^3+(-m+1)^3=-P(m),
+\]
+so $P(-m)$ is also divisible by $3$. Therefore $P(n)$ is divisible by $3$ for every integer $n$.
+\end{solution}
+\begin{takeaways}
+\item Induction can prove divisibility by comparing consecutive cases.
+\item After proving the non-negative cases, symmetry can extend the result to negative integers.
+\item Direct expansion gives $P(n)=3n^3+6n$, which is a useful check on the induction proof.
+\end{takeaways}
+
+\newpage
+\begin{problem}[Financial sequences and geometric sums]
+A loan of $\$L$ is taken out at an interest rate of $r$ per period. At the end of each period, a constant repayment of $\$P$ is made after interest has been added to the balance. Let $M_n$ be the balance owing after $n$ periods.
+
+\begin{enumerate}[(i)]
+\item Write down expressions for $M_1$ and $M_2$ in terms of $L,r,$ and $P$.
+\item Show that the balance after $n$ periods can be written as
+\[
+M_n=L(1+r)^n-P\left[1+(1+r)+(1+r)^2+\cdots+(1+r)^{n-1}\right].
+\]
+\item Using the formula for the sum of a geometric progression, prove that
+\[
+M_n=L(1+r)^n-\frac{P((1+r)^n-1)}{r}.
+\]
+\item A car loan of $\$20\,000$ is taken at $1\%$ interest per month. Calculate the monthly repayment $P$ required to reduce the balance to zero at the end of $24$ months.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+\begin{itemize}
+\item \textbf{For (i):} Add interest first, then subtract the repayment.
+\item \textbf{For (ii):} Expand the first few balances and look for the pattern.
+\item \textbf{For (iii):} The bracket is a finite GP with first term $1$ and ratio $1+r$.
+\item \textbf{For (iv):} Set $M_{24}=0$, with $L=20000$ and $r=0.01$.
+\end{itemize}
+\end{hint}
+\begin{solution}
+\textbf{(i)} After one period,
+\[
+M_1=L(1+r)-P.
+\]
+After two periods,
+\[
+M_2=(L(1+r)-P)(1+r)-P=L(1+r)^2-P(1+r)-P.
+\]
+
+\textbf{(ii)} Continuing this pattern gives
+\[
+M_n=L(1+r)^n-P\left[(1+r)^{n-1}+(1+r)^{n-2}+\cdots+(1+r)+1\right].
+\]
+Reordering the bracket,
+\[
+M_n=L(1+r)^n-P\left[1+(1+r)+(1+r)^2+\cdots+(1+r)^{n-1}\right].
+\]
+
+\textbf{(iii)} The bracket is a finite GP with first term $1$, ratio $1+r$, and $n$ terms:
+\[
+1+(1+r)+\cdots+(1+r)^{n-1}
+=\frac{(1+r)^n-1}{(1+r)-1}
+=\frac{(1+r)^n-1}{r}.
+\]
+Hence
+\[
+M_n=L(1+r)^n-\frac{P((1+r)^n-1)}{r}.
+\]
+
+\textbf{(iv)} Here $L=20000$, $r=0.01$, and $n=24$. Set $M_{24}=0$:
+\[
+0=20000(1.01)^{24}-\frac{P((1.01)^{24}-1)}{0.01}.
+\]
+Thus
+\[
+P=\frac{20000(1.01)^{24}(0.01)}{(1.01)^{24}-1}.
+\]
+Using $(1.01)^{24}\approx1.269735$,
+\[
+P\approx \$941.47.
+\]
+\end{solution}
+\begin{takeaways}
+\item Loan balances can be modelled by applying interest and repayment recursively.
+\item Repeated repayments form a finite geometric sum after compounding.
+\item Setting the final balance to zero gives the repayment required to clear a loan.
+\end{takeaways}
+
+\newpage
+\begin{problem}[Telescoping sums and inductive proof]
+Consider the sequence
+\[
+a_k=\frac{2}{k(k+1)(k+2)}\qquad (k\ge 1).
+\]
+Define the partial sums
+\[
+S_n=\sum_{k=1}^n a_k.
+\]
+
+\begin{enumerate}[(i)]
+\item Show, using partial fractions, that
+\[
+\frac{2}{k(k+1)(k+2)}
+=\frac{1}{k(k+1)}-\frac{1}{(k+1)(k+2)}.
+\]
+\item Demonstrate that the sequence of partial sums telescopes. Hence find a simplified expression for $S_n$ in terms of $n$.
+\item Prove the expression for $S_n$ found in part (ii) by mathematical induction for all $n\ge 1$.
+\item Determine the limiting sum of the series as $n\to\infty$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+\begin{itemize}
+\item \textbf{For (i):} Put the two fractions over the common denominator $k(k+1)(k+2)$.
+\item \textbf{For (ii):} Write out the first few terms of $S_n$ and look for cancellation.
+\item \textbf{For (iii):} Use $S_{m+1}=S_m+a_{m+1}$ in the induction step.
+\item \textbf{For (iv):} Take the limit of the closed form for $S_n$.
+\end{itemize}
+\end{hint}
+\begin{solution}
+\textbf{(i)}
+\[
+\frac{1}{k(k+1)}-\frac{1}{(k+1)(k+2)}
+=\frac{k+2-k}{k(k+1)(k+2)}
+=\frac{2}{k(k+1)(k+2)}.
+\]
+
+\textbf{(ii)} Therefore
+\[
+a_k=\frac{1}{k(k+1)}-\frac{1}{(k+1)(k+2)}.
+\]
+So
+\[
+\begin{aligned}
+S_n
+&=\left(\frac1{1\cdot2}-\frac1{2\cdot3}\right)
++\left(\frac1{2\cdot3}-\frac1{3\cdot4}\right)
++\cdots
++\left(\frac1{n(n+1)}-\frac1{(n+1)(n+2)}\right)\\
+&=\frac12-\frac{1}{(n+1)(n+2)}.
+\end{aligned}
+\]
+
+\textbf{(iii)} We prove
+\[
+S_n=\frac12-\frac{1}{(n+1)(n+2)}.
+\]
+For $n=1$,
+\[
+S_1=\frac{2}{1\cdot2\cdot3}=\frac13
+\]
+and
+\[
+\frac12-\frac1{2\cdot3}=\frac12-\frac16=\frac13.
+\]
+Now assume the formula holds for $n=m$. Then
+\[
+\begin{aligned}
+S_{m+1}
+&=S_m+\frac{2}{(m+1)(m+2)(m+3)}\\
+&=\frac12-\frac1{(m+1)(m+2)}
++\left(\frac1{(m+1)(m+2)}-\frac1{(m+2)(m+3)}\right)\\
+&=\frac12-\frac1{(m+2)(m+3)}.
+\end{aligned}
+\]
+This is the required formula with $n=m+1$, so the result holds for all $n\ge1$.
+
+\textbf{(iv)}
+\[
+\lim_{n\to\infty}S_n
+=\lim_{n\to\infty}\left(\frac12-\frac{1}{(n+1)(n+2)}\right)
+=\frac12.
+\]
+\end{solution}
+\begin{takeaways}
+\item Telescoping sums work by rewriting terms so that most neighbouring parts cancel.
+\item Induction is a useful way to verify a closed form found by pattern spotting.
+\item A finite partial-sum formula can make the limiting sum immediate.
+\end{takeaways}
+
+\begin{problem}[Binomial coefficients and partial sums]
+Let
+\[
+S_n=\sum_{k=0}^n \binom{n}{k}
+\]
+be the sum of the binomial coefficients for a fixed integer $n\ge1$.
+
+\begin{enumerate}[(i)]
+\item Use the binomial theorem expansion of $(1+x)^n$ to prove that $S_n=2^n$.
+\item Use Pascal's identity
+\[
+\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}
+\]
+to prove the recurrence relation $S_n=2S_{n-1}$.
+\item Evaluate the alternating partial sum
+\[
+A_n=\sum_{k=0}^n (-1)^k\binom{n}{k}
+\]
+and explain why the sum of even-indexed coefficients equals the sum of odd-indexed coefficients.
+\item By differentiating the expansion of $(1+x)^n$ with respect to $x$, show that
+\[
+\sum_{k=1}^n k\binom{n}{k}=n2^{n-1}.
+\]
+\end{enumerate}
+\end{problem}
+\begin{hint}
+\begin{itemize}
+\item \textbf{For (i):} Substitute $x=1$ into the binomial theorem.
+\item \textbf{For (ii):} Sum Pascal's identity over the appropriate range of $k$.
+\item \textbf{For (iii):} Substitute $x=-1$ into the binomial theorem.
+\item \textbf{For (iv):} Differentiate first, then substitute $x=1$.
+\end{itemize}
+\end{hint}
+\begin{solution}
+\textbf{(i)} By the binomial theorem,
+\[
+(1+x)^n=\sum_{k=0}^n \binom{n}{k}x^k.
+\]
+Putting $x=1$ gives
+\[
+2^n=\sum_{k=0}^n \binom{n}{k}=S_n.
+\]
+
+\textbf{(ii)} Using Pascal's identity,
+\[
+\begin{aligned}
+S_n
+&=\sum_{k=0}^n\binom{n}{k}\\
+&=\sum_{k=0}^n\binom{n-1}{k}+\sum_{k=0}^n\binom{n-1}{k-1}.
+\end{aligned}
+\]
+The out-of-range terms are zero, so each sum equals $S_{n-1}$. Hence
+\[
+S_n=2S_{n-1}.
+\]
+
+\textbf{(iii)} By the binomial theorem again,
+\[
+A_n=\sum_{k=0}^n(-1)^k\binom{n}{k}=(1-1)^n=0.
+\]
+Therefore
+\[
+\sum_{\substack{0\le k\le n\\ k\text{ even}}}\binom{n}{k}
+-
+\sum_{\substack{0\le k\le n\\ k\text{ odd}}}\binom{n}{k}
+=0,
+\]
+so the even-indexed and odd-indexed sums are equal.
+
+\textbf{(iv)} Differentiate
+\[
+(1+x)^n=\sum_{k=0}^n\binom{n}{k}x^k
+\]
+to get
+\[
+n(1+x)^{n-1}=\sum_{k=1}^n k\binom{n}{k}x^{k-1}.
+\]
+Putting $x=1$ gives
+\[
+\sum_{k=1}^n k\binom{n}{k}=n2^{n-1}.
+\]
+\end{solution}
+\begin{takeaways}
+\item Substituting special values into the binomial theorem turns an expansion into a sum identity.
+\item Pascal's identity explains why the total sum of coefficients doubles from one row to the next.
+\item Differentiating a generating expansion is a powerful way to evaluate weighted sums.
+\end{takeaways}
+
+\begin{problem}[The Recursive Geometry of Chebyshev Sequences]
+Let a sequence of functions $(T_n(x))$ be defined for $n \ge 0$ by the recurrence relation
+\[
+T_{n+1}(x)=2xT_n(x)-T_{n-1}(x),
+\]
+with initial terms $T_0(x)=1$ and $T_1(x)=x$.
+
+\begin{enumerate}[(i)]
+\item Calculate the explicit polynomial expressions for $T_2(x)$ and $T_3(x)$.
+\item Using the identity
+\[
+\cos(A+B)+\cos(A-B)=2\cos A\cos B,
+\]
+prove by mathematical induction that for all $n \ge 0$,
+\[
+T_n(\cos\theta)=\cos(n\theta).
+\]
+\item Let $x_0$ be a root of $T_n(x)$. Show that $|x_0|\le 1$. Hence, determine the exact values of the $n$ distinct roots of $T_n(x)$ in terms of $n$.
+\item Consider the sequence of values $v_n=T_n(1.5)$. Show that $(v_n)$ satisfies a linear recurrence relation with constant coefficients. Find a closed-form expression for $v_n$ and determine the value of the limit
+\[
+\lim_{n\to\infty}\frac{v_{n+1}}{v_n}.
+\]
+\end{enumerate}
+\end{problem}
+\begin{hint}
+\begin{itemize}
+\item \textbf{For (i):} Substitute the previous two polynomials into the recurrence formula.
+\item \textbf{For (ii):} Use the sum-to-product identity with $A=k\theta$ and $B=\theta$.
+\item \textbf{For (iii):} Solve $\cos(n\theta)=0$ for $\theta$, then use $x=\cos\theta$.
+\item \textbf{For (iv):} Solve the characteristic equation for the recurrence $v_{n+1}=3v_n-v_{n-1}$.
+\end{itemize}
+\end{hint}
+\newpage
+\begin{solution}
+\textbf{(i)} Directly from the recurrence,
+\[
+T_2(x)=2x^2-1,\qquad
+T_3(x)=2x(2x^2-1)-x=4x^3-3x.
+\]
+
+\textbf{(ii)} The cases $n=0,1$ give $1=\cos0$ and $T_1(\cos\theta)=\cos\theta$. Suppose
+\[
+T_k(\cos\theta)=\cos(k\theta),\qquad
+T_{k-1}(\cos\theta)=\cos((k-1)\theta).
+\]
+Then
+\[
+\begin{aligned}
+T_{k+1}(\cos\theta)
+&=2\cos\theta\,T_k(\cos\theta)-T_{k-1}(\cos\theta)\\
+&=2\cos\theta\cos(k\theta)-\cos((k-1)\theta)\\
+&=\cos((k+1)\theta),
+\end{aligned}
+\]
+using $\cos((k+1)\theta)+\cos((k-1)\theta)=2\cos(k\theta)\cos\theta$. Hence $T_n(\cos\theta)=\cos(n\theta)$ for all $n\ge0$.
+
+\textbf{(iii)} If $x>1$, write $x=\cosh u$; then $T_n(x)=\cosh(nu)>0$. If $x<-1$, write $x=-\cosh u$; then $T_n(x)=(-1)^n\cosh(nu)\ne0$. Thus every real root satisfies $|x_0|\le1$.
+
+Now write $x=\cos\theta$. The roots satisfy
+\[
+T_n(\cos\theta)=0\iff \cos(n\theta)=0
+\iff n\theta=\frac{(2k-1)\pi}{2}.
+\]
+So the $n$ distinct roots are
+\[
+x_k=\cos\left(\frac{(2k-1)\pi}{2n}\right),\qquad k=1,2,\ldots,n.
+\]
+
+\textbf{(iv)} With $v_n=T_n(1.5)$,
+\[
+v_{n+1}=3v_n-v_{n-1},\qquad v_0=1,\quad v_1=\frac32.
+\]
+The characteristic equation is $\lambda^2-3\lambda+1=0$, with roots
+\[
+\alpha=\frac{3+\sqrt5}{2},\qquad \beta=\frac{3-\sqrt5}{2}.
+\]
+Hence $v_n=A\alpha^n+B\beta^n$. From $v_0=1$ and $v_1=\frac32$, $A=B=\frac12$, so
+\[
+v_n=\frac12\alpha^n+\frac12\beta^n.
+\]
+Since $|\beta|<\alpha$, the dominant term is $\alpha^n$, and therefore
+\[
+\lim_{n\to\infty}\frac{v_{n+1}}{v_n}=\alpha=\frac{3+\sqrt5}{2}.
+\]
+\end{solution}
+\begin{takeaways}
+\item The recurrence produces the Chebyshev polynomials one term at a time.
+\item The identity $T_n(\cos\theta)=\cos(n\theta)$ turns polynomial roots into trigonometric roots.
+\item Evaluating a polynomial recurrence at a fixed value gives an ordinary numerical recurrence.
+\end{takeaways}

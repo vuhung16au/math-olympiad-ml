@@ -46,3 +46,261 @@ a_n=6\quad \text{for all }n,
 \]
 with $d=0$ and $r=1$.
 \end{solution}
+
+\begin{problem}[Chebyshev roots]
+The first-kind Chebyshev polynomial of degree $5$ is
+\[
+T_5(x)=16x^5-20x^3+5x.
+\]
+Use the identity $T_5(\cos\theta)=\cos(5\theta)$ to find all roots of $T_5(x)$ in the interval $[-1,1]$.
+\end{problem}
+\begin{hint}
+Set $\cos(5\theta)=0$, then convert the resulting angles back to $x=\cos\theta$.
+\end{hint}
+\begin{solution}
+Let $x=\cos\theta$. We need
+\[
+\cos(5\theta)=0.
+\]
+Thus
+\[
+5\theta=\frac{(2k+1)\pi}{2},\qquad k=0,1,2,3,4.
+\]
+So
+\[
+\theta=\frac{(2k+1)\pi}{10},
+\]
+and the five roots are
+\[
+x=\cos\frac{\pi}{10},\ \cos\frac{3\pi}{10},\ \cos\frac{5\pi}{10},\ \cos\frac{7\pi}{10},\ \cos\frac{9\pi}{10}.
+\]
+\end{solution}
+\begin{takeaways}
+\item Roots of $T_n(x)$ on $[-1,1]$ come from zeros of $\cos(n\theta)$.
+\item The substitution $x=\cos\theta$ is natural because $\cos\theta$ covers $[-1,1]$.
+\item Degree $5$ gives five roots, which is a useful check.
+\end{takeaways}
+
+\begin{problem}[Architecture of GP sums]
+Let a GP have first term $a\neq0$, ratio $r\neq 0,\pm1$, and partial sums $S_n$.
+\begin{enumerate}[(i)]
+\item Prove $\dfrac{S_{2n}}{S_n}=r^n+1$.
+\item Given $S_{12}=65S_6$ and second term $ar=12$, find possible $(a,r)$.
+\item If $\Sigma_n$ is the partial-sum sequence of a GP with first term $a$ and ratio $r^2$, show
+\[
+\frac{\Sigma_n}{S_n}=\frac{r^n+1}{r+1}.
+\]
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Use $S_n=\dfrac{a(r^n-1)}{r-1}$ and difference-of-squares factorization.
+\end{hint}
+\begin{solution}
+\[
+\frac{S_{2n}}{S_n}=\frac{r^{2n}-1}{r^n-1}=r^n+1.
+\]
+So $r^6+1=65\implies r^6=64\implies r=\pm2$.
+Since $ar=12$, possible pairs are $(a,r)=(6,2)$ or $(-6,-2)$.
+Also
+\[
+\Sigma_n=\frac{a(r^{2n}-1)}{r^2-1},
+\]
+thus
+\[
+\frac{\Sigma_n}{S_n}
+=\frac{r^{2n}-1}{(r+1)(r^n-1)}
+=\frac{r^n+1}{r+1}.
+\]
+\end{solution}
+
+\begin{problem}[AP space and difference operator]
+Let $\mathcal{A}(a,d)$ denote an AP. Define
+\[
+\mathcal{I}=\mathcal{A}(1,0),\qquad \mathcal{J}=\mathcal{A}(0,1).
+\]
+\begin{enumerate}[(i)]
+\item Show any AP is uniquely $a\mathcal{I}+d\mathcal{J}$.
+\item Let $\Delta x_n=x_{n+1}-x_n$. Show $\Delta\mathcal{I}=0$ and $\Delta\mathcal{J}=\mathcal{I}$.
+\item Deduce $\Delta(a\mathcal{I}+d\mathcal{J})=d\mathcal{I}$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Compare first term and common difference.
+\end{hint}
+\begin{solution}
+An AP has $n$th term $a+(n-1)d=a\cdot1+d(n-1)$, so $X=a\mathcal{I}+d\mathcal{J}$, unique by matching $(a,d)$.
+Also $\mathcal{I}=(1,1,1,\dots)$ so $\Delta\mathcal{I}=0$, and $\mathcal{J}=(0,1,2,\dots)$ so $\Delta\mathcal{J}=(1,1,1,\dots)=\mathcal{I}$.
+Hence
+\[
+\Delta(a\mathcal{I}+d\mathcal{J})=a\Delta\mathcal{I}+d\Delta\mathcal{J}=d\mathcal{I}.
+\]
+\end{solution}
+
+\begin{problem}[Basis and projection in AP space]
+Let $\mathcal{E}_1=\mathcal{A}(1,1)$ and $\mathcal{E}_2=\mathcal{A}(1,-1)$.
+\begin{enumerate}[(i)]
+\item Express any AP $\mathcal{A}(a,d)$ as $\lambda\mathcal{E}_1+\mu\mathcal{E}_2$.
+\item Decompose $P=(5,8,11,14,\dots)$ in this basis.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Match first terms and differences:
+$\lambda+\mu=a,\ \lambda-\mu=d$.
+\end{hint}
+\begin{solution}
+Solving
+\[
+\lambda+\mu=a,\qquad \lambda-\mu=d
+\]
+gives
+\[
+\lambda=\frac{a+d}{2},\qquad \mu=\frac{a-d}{2}.
+\]
+For $P$, $a=5,\ d=3$, so $\lambda=4,\ \mu=1$.
+\end{solution}
+
+\begin{problem}[Countable and uncountable sets]
+\begin{enumerate}[(i)]
+\item Explain why positive rationals are countable by diagonal listing.
+\item Use Cantor's diagonal argument to show reals in $[0,1)$ are uncountable.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Construct a new decimal differing from the $n$th listed decimal at position $n$.
+\end{hint}
+\begin{solution}
+Rationals can be arranged in an infinite grid $\frac{p}{q}$ and traversed by diagonals, skipping duplicates after simplification; this yields a sequence listing all positive rationals.
+For reals in $[0,1)$, assume a list $T_1,T_2,\dots$ exists. Build $x$ so its $n$th digit differs from the $n$th digit of $T_n$. Then $x\neq T_n$ for every $n$, contradicting completeness of the list. Hence uncountable.
+\end{solution}
+
+\begin{problem}[Prime denominators and cycle length]
+Let $p$ be prime, $p\neq2,5$, and $L$ be period length of $\frac1p$.
+\begin{enumerate}[(i)]
+\item Show $L$ is the least positive integer with $10^L\equiv1\pmod p$.
+\item Deduce $L\mid(p-1)$.
+\item Find periods for $\frac1{37}$ and $\frac1{41}$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Use Fermat's theorem and first occurrence of $p\mid(10^n-1)$.
+\end{hint}
+\begin{solution}
+Recurring block theory gives $(10^L-1)/p\in\mathbb{Z}$, hence $10^L\equiv1\pmod p$; minimality gives least such $L$.
+By Fermat, $10^{p-1}\equiv1\pmod p$, so the order $L$ divides $p-1$.
+Since $37\mid(10^3-1)$ and not $10^1-1,10^2-1$, period is $3$.
+Since $41\mid(10^5-1)$ and not $10^1-1$, period is $5$.
+\end{solution}
+
+\begin{problem}[Pythagorean means]
+For $0<a<b$, define
+\[
+A=\frac{a+b}{2},\quad G=\sqrt{ab},\quad H=\frac{2ab}{a+b}.
+\]
+\begin{enumerate}[(i)]
+\item Prove $H<G<A$.
+\item Find $\frac ba$ such that $a,G,A$ is an AP.
+\item Show $H,G,A$ cannot be an AP unless $a=b$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Use $(\sqrt a-\sqrt b)^2>0$ and $G^2=AH$.
+\end{hint}
+\begin{solution}
+From $(\sqrt a-\sqrt b)^2>0$, get $A>G$. Also
+\[
+AH=\frac{a+b}{2}\cdot\frac{2ab}{a+b}=ab=G^2,
+\]
+so $H,G,A$ form a GP and therefore $H<G<A$.
+For $a,G,A$ in AP:
+\[
+2G=a+A \implies 4\sqrt{ab}=3a+b.
+\]
+Let $x=b/a$; then $(x-9)(x-1)=0$, and $x>1$ gives $x=9$.
+If $H,G,A$ were AP, then $2G=H+A=G^2/A+A$, forcing $A=G$, contradiction for $a\ne b$.
+\end{solution}
+
+\begin{problem}[Recurring decimals and modular structure]
+Let $p$ be prime ($p\neq2,5$), and let $n$ be the period of $\frac1p$.
+\begin{enumerate}[(i)]
+\item Show $n\mid (p-1)$.
+\item If $n=2k$, prove $10^k\equiv-1\pmod p$ and the two half-blocks of the repetend sum to $10^k-1$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Factor $10^{2k}-1=(10^k-1)(10^k+1)$ and use minimality of $n$.
+\end{hint}
+\begin{solution}
+From order arguments, $n$ is the multiplicative order of $10$ mod $p$, so $n\mid(p-1)$.
+If $n=2k$, then $p\mid(10^{2k}-1)$. Since $2k$ is minimal, $p\nmid(10^k-1)$, hence $p\mid(10^k+1)$, so $10^k\equiv-1\pmod p$.
+Writing repetend as two $k$-digit blocks $A,B$ gives Midy's theorem:
+\[
+A+B=10^k-1.
+\]
+\end{solution}
+
+\begin{problem}[Sissa and arithmetico-geometric sums]
+\begin{enumerate}[(i)]
+\item Evaluate $S_{64}=1+2+4+\cdots+2^{63}$.
+\item Let
+\[
+T=\sum_{n=1}^{64} n2^{n-1}.
+\]
+Use shift-and-subtract to find a closed form.
+\item Evaluate
+\[
+\sum_{n=1}^{\infty}\frac{n}{2^n}.
+\]
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Use $T-2T$ for the finite AGP, and similarly $S-\frac12S$ for the infinite one.
+\end{hint}
+\begin{solution}
+\[
+S_{64}=2^{64}-1.
+\]
+Also
+\[
+T-2T=\sum_{n=1}^{64}2^{n-1}-64\cdot2^{64}
+=(2^{64}-1)-64\cdot2^{64},
+\]
+so
+\[
+T=63\cdot2^{64}+1.
+\]
+For $S=\sum_{n=1}^\infty \frac{n}{2^n}$:
+\[
+S-\frac12S=\frac12+\frac14+\frac18+\cdots=1,
+\]
+hence $S=2$.
+\end{solution}
+
+\begin{problem}[Discrete calculus and sums of powers]
+\begin{enumerate}[(i)]
+\item Show $n^3-(n-1)^3=3n^2-3n+1$.
+\item Sum this identity from $1$ to $N$ to derive
+\[
+\sum_{n=1}^N n^2=\frac{N(N+1)(2N+1)}{6}.
+\]
+\item Evaluate $\nabla^3(n^3)$ for $\nabla f(n)=f(n)-f(n-1)$.
+\item State the leading term of $\sum_{n=1}^N n^k$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Use telescoping on the left and known formulas for $\sum n$.
+\end{hint}
+\begin{solution}
+Expansion gives part (i). Summing:
+\[
+N^3=3\sum_{n=1}^N n^2-3\sum_{n=1}^N n+N,
+\]
+which simplifies to
+\[
+\sum_{n=1}^N n^2=\frac{N(N+1)(2N+1)}{6}.
+\]
+Also $\nabla^3(n^3)=6$.
+In general,
+\[
+\sum_{n=1}^N n^k=\frac{1}{k+1}N^{k+1}+\text{(lower powers of }N\text{)}.
+\]
+\end{solution}

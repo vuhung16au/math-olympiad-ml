@@ -35,6 +35,7 @@
 \newtcolorbox[auto counter,number within=section]{solutionbox}[1][]{
   title={\bfseries Solution~\thetcbcounter\ifstrempty{#1}{}{: #1}},
   enhanced,
+  breakable,
   drop shadow={black!20!white},
   coltitle=bookwhite,
   colback=softivory,
@@ -71,4 +72,3 @@
 \newenvironment{problem}[1][]{\begin{problembox}[#1]}{\end{problembox}}
 \newenvironment{solution}[1][]{\begin{solutionbox}[#1]}{\end{solutionbox}}
 \newenvironment{takeaways}[1][]{\begin{takeawaysbox}[#1]\begin{itemize}}{\end{itemize}\end{takeawaysbox}}
-

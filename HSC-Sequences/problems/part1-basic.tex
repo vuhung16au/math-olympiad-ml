@@ -55,3 +55,32 @@ A geometric view is
 \]
 with first term $\frac{23}{100}$ and ratio $\frac{1}{100}$.
 \end{solution}
+
+\begin{problem}[Chebyshev recurrence: first kind]
+The Chebyshev polynomials of the first kind satisfy
+\[
+T_0(x)=1,\qquad T_1(x)=x,\qquad T_{n+1}(x)=2xT_n(x)-T_{n-1}(x).
+\]
+Use the recurrence to find $T_2(x)$ and $T_3(x)$, then evaluate $T_3\left(\frac12\right)$.
+\end{problem}
+\begin{hint}
+Build the polynomials one at a time: first use $T_2=2xT_1-T_0$, then use $T_3=2xT_2-T_1$.
+\end{hint}
+\begin{solution}
+\[
+T_2(x)=2x^2-1.
+\]
+Then
+\[
+T_3(x)=2x(2x^2-1)-x=4x^3-3x.
+\]
+So
+\[
+T_3\left(\frac12\right)=4\left(\frac18\right)-3\left(\frac12\right)=\frac12-\frac32=-1.
+\]
+\end{solution}
+\begin{takeaways}
+\item Chebyshev polynomials can be generated recursively from two starting values.
+\item Work in order; each new polynomial depends on the previous two.
+\item Substitution is easiest after simplifying the polynomial.
+\end{takeaways}

@@ -62,3 +62,251 @@ Therefore $x_n\to L=1+\sqrt2$.
 \item A contraction inequality gives a rigorous convergence proof.
 \item The same method works for many rational recursions.
 \end{takeaways}
+
+\begin{problem}[The Dynamics of Iteration]
+Consider the function
+\[
+g(x)=\sqrt{x+2}.
+\]
+We define an iterative sequence by
+\[
+x_{n+1}=g(x_n),\qquad x_1=1.
+\]
+
+\begin{enumerate}[(i)]
+\item Calculate $x_2,x_3,$ and $x_4$ to three decimal places. By solving
+\[
+L=\sqrt{L+2},
+\]
+determine the exact positive limit $L$ that the sequence appears to be approaching.
+\item Show that
+\[
+0<g'(x)<\frac12
+\]
+for all $x>0$.
+\item Prove that
+\[
+|x_{n+1}-L|<\frac12|x_n-L|.
+\]
+Hence deduce that the sequence converges to $L$ for any initial value $x_1>0$.
+\item Define a function $f(x)$ such that Newton's method would converge to the same limit $L$ found in part (i), and write down the specific iterative formula for this $f(x)$.
+\end{enumerate}
+\end{problem}
+\newpage
+\begin{hint}
+\begin{itemize}
+\item \textbf{For (i):} Substitute repeatedly into $x_{n+1}=\sqrt{x_n+2}$, then solve the fixed-point equation.
+\item \textbf{For (ii):} Differentiate $g(x)=\sqrt{x+2}$ and note where the derivative is largest for $x>0$.
+\item \textbf{For (iii):} Use either the mean value theorem or rationalise $\sqrt{x_n+2}-\sqrt{L+2}$.
+\item \textbf{For (iv):} Rearrange $L=\sqrt{L+2}$ into a polynomial equation.
+\end{itemize}
+\end{hint}
+\begin{solution}
+\textbf{(i)}
+\[
+x_2=\sqrt3\approx1.732,\quad
+x_3=\sqrt{2+\sqrt3}\approx1.932,\quad
+x_4\approx1.983.
+\]
+If $x_n\to L>0$, then
+\[
+L=\sqrt{L+2}\implies L^2-L-2=0
+\implies (L-2)(L+1)=0.
+\]
+Thus the positive limit is
+\[
+L=2.
+\]
+
+\textbf{(ii)}
+\[
+g'(x)=\frac{1}{2\sqrt{x+2}}.
+\]
+For $x>0$, this is positive and
+\[
+g'(x)<\frac{1}{2\sqrt2}<\frac12.
+\]
+
+\textbf{(iii)} Since $L=2$ and $g(L)=L$,
+\[
+\begin{aligned}
+|x_{n+1}-L|
+&=\left|\sqrt{x_n+2}-\sqrt{L+2}\right|\\
+&=\frac{|x_n-L|}{\sqrt{x_n+2}+\sqrt{L+2}}\\
+&<\frac12|x_n-L|,
+\end{aligned}
+\]
+because $x_n>0$ and $\sqrt{L+2}=2$. Repeating this inequality gives
+\[
+|x_n-L|<\left(\frac12\right)^{n-1}|x_1-L|\to0,
+\]
+so $x_n\to L=2$ for any $x_1>0$.
+
+\textbf{(iv)} From the fixed-point equation,
+\[
+L^2-L-2=0.
+\]
+So take
+\[
+f(x)=x^2-x-2.
+\]
+Newton's method gives
+\[
+x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}
+=x_n-\frac{x_n^2-x_n-2}{2x_n-1}.
+\]
+\end{solution}
+\begin{takeaways}
+\item Fixed points often reveal the likely limit of an iterative sequence.
+\item A contraction inequality proves convergence by forcing errors to shrink geometrically.
+\item Newton's method can target the same limit by solving the fixed-point equation as a root problem.
+\end{takeaways}
+
+\begin{problem}[The Geometry of Harmonic Means]
+A sequence $(h_n)$ is in harmonic progression (HP) if the sequence of reciprocals
+\[
+x_n=\frac{1}{h_n}
+\]
+forms an arithmetic progression (AP).
+
+\begin{enumerate}[(i)]
+\item Given that the third term of an HP is $1$ and the sixth term is $\frac12$, find the first term $h_1$ and the common difference $d$ of the underlying AP.
+\item The harmonic mean $H$ of two positive numbers $a$ and $b$ is defined so that $a,H,b$ is an HP. Show algebraically that
+\[
+H=\frac{2ab}{a+b}.
+\]
+\item Let
+\[
+A=\frac{a+b}{2},\qquad G=\sqrt{ab}
+\]
+be the arithmetic and geometric means of $a$ and $b$. Prove that $G^2=AH$. Hence prove that, for distinct positive real numbers $a$ and $b$,
+\[
+H<G<A.
+\]
+\item Consider the infinite harmonic series
+\[
+\sum_{n=1}^{\infty}\frac1n.
+\]
+By comparing the sum of the first $2^k$ terms to blocks of constant lower bounds, prove that this harmonic series does not have a finite limiting sum.
+\end{enumerate}
+\end{problem}
+\newpage
+\begin{hint}
+\begin{itemize}
+\item \textbf{For (i):} Convert the HP terms into AP terms $x_3$ and $x_6$, then use $x_n=a+(n-1)d$.
+\item \textbf{For (ii):} If $a,H,b$ is an HP, then $\frac1a,\frac1H,\frac1b$ is an AP.
+\item \textbf{For (iii):} Multiply $A$ and $H$. For the inequality, use $(a-b)^2>0$ or $(\sqrt a-\sqrt b)^2>0$.
+\item \textbf{For (iv):} Group terms as $\left(\frac13+\frac14\right)$, then $\left(\frac15+\cdots+\frac18\right)$, and so on.
+\end{itemize}
+\end{hint}
+\begin{solution}
+\textbf{(i)} Since $x_n=\frac1{h_n}$,
+\[
+x_3=1,\qquad x_6=2.
+\]
+For the underlying AP,
+\[
+x_6-x_3=3d \implies 2-1=3d \implies d=\frac13.
+\]
+Also
+\[
+x_1=x_3-2d=1-\frac23=\frac13,
+\]
+so
+\[
+h_1=\frac1{x_1}=3.
+\]
+
+\textbf{(ii)} Since $\frac1a,\frac1H,\frac1b$ is an AP, the middle term is the average of the outer terms:
+\[
+\frac1H=\frac12\left(\frac1a+\frac1b\right)=\frac{a+b}{2ab}.
+\]
+Therefore
+\[
+H=\frac{2ab}{a+b}.
+\]
+
+\textbf{(iii)} Using the formulas for $A$ and $H$,
+\[
+AH=\frac{a+b}{2}\cdot\frac{2ab}{a+b}=ab=G^2.
+\]
+For $a\ne b$,
+\[
+(\sqrt a-\sqrt b)^2>0
+\implies a+b>2\sqrt{ab}
+\implies A>G.
+\]
+Since $G^2=AH$ and all quantities are positive, $A>G$ gives
+\[
+H=\frac{G^2}{A}<G.
+\]
+Hence
+\[
+H<G<A.
+\]
+
+\textbf{(iv)} Group the harmonic series into dyadic blocks:
+\[
+1+\frac12+\left(\frac13+\frac14\right)+\left(\frac15+\cdots+\frac18\right)+\cdots.
+\]
+Each block after the first has sum greater than or equal to $\frac12$:
+\[
+\frac13+\frac14>\frac14+\frac14=\frac12,\qquad
+\frac15+\cdots+\frac18>4\cdot\frac18=\frac12,
+\]
+and similarly
+\[
+\frac1{2^{j-1}+1}+\cdots+\frac1{2^j}>2^{j-1}\cdot\frac1{2^j}=\frac12.
+\]
+Thus the partial sums exceed
+\[
+1+\frac12+\underbrace{\frac12+\frac12+\cdots+\frac12}_{\text{arbitrarily many terms}},
+\]
+so they grow without bound. Therefore the harmonic series has no finite limiting sum.
+\end{solution}
+\begin{takeaways}
+\item Harmonic progressions are arithmetic progressions viewed through reciprocals.
+\item For positive distinct numbers, the classical means satisfy $H<G<A$.
+\item A sequence can have terms tending to zero while its infinite series still diverges.
+\end{takeaways}
+
+\begin{problem}[Chebyshev composition]
+
+The first-kind Chebyshev polynomials $T_n(x)$ are defined by the recurrence
+\[
+T_0(x)=1,\quad T_1(x)=x,\quad T_{n+1}(x)=2xT_n(x)-T_{n-1}(x).
+\]
+
+It is given that $T_n(\cos\theta)=\cos(n\theta)$ for all $n\ge0$ and $\theta\in\R$. (Do NOT prove this fact.)
+
+For first-kind Chebyshev polynomials, prove that
+\[
+T_m(T_n(x))=T_{mn}(x)
+\]
+for all $x$ of the form $x=\cos\theta$. Then use this result to find
+\[
+T_2(T_3(x)).
+\]
+\end{problem}
+\begin{hint}
+Use $T_n(\cos\theta)=\cos(n\theta)$. For the explicit polynomial, use $T_6(x)$.
+\end{hint}
+\begin{solution}
+Let $x=\cos\theta$. Then
+\[
+T_m(T_n(x))=T_m(\cos(n\theta))=\cos(mn\theta)=T_{mn}(\cos\theta)=T_{mn}(x).
+\]
+Therefore
+\[
+T_2(T_3(x))=T_6(x).
+\]
+Using the recurrence after $T_5(x)=16x^5-20x^3+5x$,
+\[
+T_6(x)=2xT_5(x)-T_4(x)=32x^6-48x^4+18x^2-1.
+\]
+\end{solution}
+\begin{takeaways}
+\item The trigonometric definition makes Chebyshev composition simple.
+\item Composition of first-kind Chebyshev polynomials multiplies the indices.
+\item Hard-looking polynomial composition can often be avoided by using structure.
+\end{takeaways}
