@@ -38,52 +38,7 @@ So
 Hence $n=9$.
 \end{solution}
 
-\begin{problem}[Consecutive cubes and induction]
-Prove by induction that
-\[
-(n-1)^3+n^3+(n+1)^3
-\]
-is divisible by $3$ for every integer $n$.
-\end{problem}
-\begin{hint}
-First prove the result for $n\ge 0$. In the inductive step, compare the expression at $n=k+1$ with the expression at $n=k$.
-\end{hint}
-\begin{solution}
-Let
-\[
-P(n)=(n-1)^3+n^3+(n+1)^3.
-\]
-We first prove that $P(n)$ is divisible by $3$ for all integers $n\ge0$.
 
-\textbf{Base case.} For $n=0$,
-\[
-P(0)=(-1)^3+0^3+1^3=0,
-\]
-which is divisible by $3$.
-
-\textbf{Inductive step.} Suppose $P(k)$ is divisible by $3$ for some integer $k\ge0$. Then
-\[
-\begin{aligned}
-P(k+1)-P(k)
-&=k^3+(k+1)^3+(k+2)^3-\left((k-1)^3+k^3+(k+1)^3\right)\\
-&=(k+2)^3-(k-1)^3\\
-&=9k^2+9k+9\\
-&=9(k^2+k+1),
-\end{aligned}
-\]
-which is divisible by $3$. Since $P(k)$ is divisible by $3$, it follows that $P(k+1)$ is also divisible by $3$.
-
-Thus $P(n)$ is divisible by $3$ for all integers $n\ge0$. For a negative integer $n=-m$, where $m>0$,
-\[
-P(-m)=(-m-1)^3+(-m)^3+(-m+1)^3=-P(m),
-\]
-so $P(-m)$ is also divisible by $3$. Therefore $P(n)$ is divisible by $3$ for every integer $n$.
-\end{solution}
-\begin{takeaways}
-\item Induction can prove divisibility by comparing consecutive cases.
-\item After proving the non-negative cases, symmetry can extend the result to negative integers.
-\item Direct expansion gives $P(n)=3n^3+6n$, which is a useful check on the induction proof.
-\end{takeaways}
 
 \newpage
 \begin{problem}[Financial sequences and geometric sums]

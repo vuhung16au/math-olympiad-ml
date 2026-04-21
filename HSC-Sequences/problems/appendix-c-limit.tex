@@ -76,3 +76,36 @@ $\displaystyle\lim_{n \to \infty} \frac{1}{n} = 0$.
 For $\epsilon = 0.01$ we need $N > 100$, so we may take $N = 101$.
 Every term $a_n = \tfrac{1}{n}$ with $n \ge 102$ satisfies
 $\tfrac{1}{102} < 0.01$, placing all those terms inside the band $(-0.01,\, 0.01)$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\noindent\textit{Note: The following advanced theorems are outside the scope of the regular HSC syllabus, but they are extremely good-to-know fundamentals for higher education and university mathematics.}
+
+\subsection*{1. Bolzano-Weierstrass Theorem}
+
+The Bolzano-Weierstrass Theorem is a ``guarantee of stability.'' It tells us that as long as a sequence doesn't head off to infinity, it must contain at least one ``hidden'' convergent behavior.
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Intuition:} Imagine a sequence as a set of points trapped inside a finite box (bounded). Even if the points bounce around randomly and never settle on one spot as a whole (like $a_n = (-1)^n$), the points must eventually start ``clustering'' somewhere because they have nowhere else to go.
+\item \textbf{Subsequences:} A subsequence is formed by picking infinitely many terms from the original sequence in their original order.
+    \begin{itemize}
+    \item \textit{Example:} Take $a_n = (-1)^n \rightarrow \{-1, 1, -1, 1, \dots\}$. The sequence itself oscillates and diverges. However, if we pick only the even terms, we get $\{1, 1, 1, \dots\}$, which converges to $1$.
+    \end{itemize}
+\item \textbf{The Utility:} In proofs, if you know a sequence is bounded, you can immediately ``extract'' a convergent subsequence to use for further logical steps.
+\end{itemize}
+
+\subsection*{2. Cauchy Criterion for Convergence}
+
+The Cauchy Criterion is the ultimate ``internal'' test for convergence. 
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Definition:} In a standard limit, we say terms get close to a \textbf{limit $L$}. In a Cauchy sequence, we say the terms get \textbf{close to each other}. 
+\item \textbf{Formal Statement:} For every $\epsilon > 0$, there exists an $N$ such that for all $m, n > N$:
+    \[
+    |a_n - a_m| < \epsilon
+    \]
+\item \textbf{Why it Matters:} Usually, to prove a sequence converges, you first have to \emph{guess} what the limit $L$ is. The Cauchy Criterion removes this requirement. If you can prove that the terms of the sequence eventually ``huddle together'' and the gaps between them shrink to zero, the sequence \textbf{must} converge to some real number.
+\item \textbf{The ``Completeness'' of Real Numbers:} This theorem works because the Real Number line has no ``holes.'' If the terms are huddling together, they are guaranteed to be huddling around a real number. (This is not true in the Rational numbers, where a sequence of fractions could huddle around an ``irrational hole'' like $\sqrt{2}$).
+\end{itemize}

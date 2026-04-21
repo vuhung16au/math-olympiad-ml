@@ -304,3 +304,39 @@ In general,
 \sum_{n=1}^N n^k=\frac{1}{k+1}N^{k+1}+\text{(lower powers of }N\text{)}.
 \]
 \end{solution}
+
+\begin{problem}[The Fibonacci Generating Function]
+Let $F_n$ be the $n$-th Fibonacci number ($F_1=1, F_2=1, F_n = F_{n-1} + F_{n-2}$). We define the power series $S(x)$ as:
+\[
+S(x) = \sum_{n=1}^\infty F_n x^{n+1}
+\]
+
+\begin{enumerate}[(i)]
+    \item By expanding $S(x) - xS(x) - x^2S(x)$ and using the recurrence property of Fibonacci numbers, prove that:
+    \[
+    S(x) = \frac{x^2}{1 - x - x^2}
+    \]
+    \item Given the growth rate of Fibonacci numbers, explain why this series converges for $x = 0.1$.
+    \item Show that $S(0.1) = \frac{1}{89}$.
+    \item The decimal expansion of $\frac{1}{89}$ is $0.011235955\dots$. Explain why the digit in the $10^{-7}$ place is $9$ rather than the expected Fibonacci number $F_6 = 8$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+Consider the definition of $S(x)$ term by term for (i). For (iv), look closely at how the next Fibonacci number $F_7=13$ interacts with the decimal places.
+\end{hint}
+\begin{solution}
+\textbf{(i)} Substitution into $S(x)(1-x-x^2)$ cancels out all terms except the first, leaving $F_1 x^2 = x^2$. Hence $S(x) = \frac{x^2}{1-x-x^2}$.
+
+\textbf{(ii)} Fibonacci numbers grow roughly geometrically by the golden ratio $\phi \approx 1.618$. Because $1.618 \dots \times 0.1 < 1$, the series converges.
+
+\textbf{(iii)} Substitute $x=0.1$:
+\[
+S(0.1) = \frac{0.1^2}{1 - 0.1 - 0.1^2} = \frac{0.01}{1 - 0.1 - 0.01} = \frac{0.01}{0.89} = \frac{1}{89}.
+\]
+
+\textbf{(iv)} The required sum gives $F_6 \times (0.1)^7 + F_7 \times (0.1)^8$. $F_6 = 8$ and $F_7 = 13$, so the sum overlapping the $10^{-7}$ place includes the carry-over from $F_7$: $8 + 1 = 9$.
+\end{solution}
+\begin{takeaways}
+\item Power series generating functions can be explicitly derived using recurrence relations.
+\item The decimal expansion of fractions naturally encodes the base-10 carry-over of power series evaluations.
+\end{takeaways}

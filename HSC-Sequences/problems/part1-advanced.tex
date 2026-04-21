@@ -61,6 +61,12 @@ Therefore $x_n\to L=1+\sqrt2$.
 \item For recursive limits, first solve the fixed-point equation.
 \item A contraction inequality gives a rigorous convergence proof.
 \item The same method works for many rational recursions.
+\item The sequence $x_n$ is related to the continued fraction of $1+\sqrt{2}$. It can be expressed as 
+
+
+\[ x_{n+1} = 2 + \frac{1}{x_n} = 2 + \frac{1}{2 + \frac{1}{x_{n-1}}} = \dots = 2 + \frac{1}{2 + \frac{1}{2 + \dots + \frac{1}{x_1}}} \]
+
+
 \end{takeaways}
 
 \begin{problem}[The Dynamics of Iteration]
@@ -157,6 +163,7 @@ x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}
 \]
 \end{solution}
 \begin{takeaways}
+\item Fixed point is the value of $x$ such that $f(x)=x$.
 \item Fixed points often reveal the likely limit of an iterative sequence.
 \item A contraction inequality proves convergence by forcing errors to shrink geometrically.
 \item Newton's method can target the same limit by solving the fixed-point equation as a root problem.

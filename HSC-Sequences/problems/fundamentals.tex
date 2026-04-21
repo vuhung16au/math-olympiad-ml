@@ -117,13 +117,49 @@ is geometric with $a=0.7$ and $r=0.1$. So
 0.\overline{7}=\frac{0.7}{1-0.1}=\frac{0.7}{0.9}=\frac79.
 \]
 
-\subsection{Sigma Notation Quick Rules}
+The ``Cyclic'' Magic of $\frac{1}{7}$
+
+The fraction $\frac{1}{7}$ produces the most famous repeating pattern in elementary number theory.
+
+The Pattern:
+
+$\frac{1}{7} = 0.\dot{1}4285\dot{7}$ (a 6-digit period).
+
+\subsection{Sequence Convergence Theorems}
+
+\textbf{Monotone Convergence Theorem (MCT)}
+The MCT provides a ``shortcut'' for proving a sequence converges by looking at its overall behavior rather than its specific terms.
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Rule:} If a sequence is monotone (always increasing or always decreasing) and it is bounded (it never goes past a certain value), then it must converge.
+\end{itemize}
+
+\textbf{The Squeeze Theorem (Sandwich Theorem)}
+The Squeeze Theorem is used when a sequence is ``messy'' (like one containing a sine or cosine function) but is trapped between two ``cleaner'' sequences that share the same limit.
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Rule:} Suppose we have three sequences $(a_n)$, $(b_n)$, and $(c_n)$ such that for all $n$ beyond a certain point:
+\[
+a_n \le b_n \le c_n
+\]
+\item \textbf{The Result:} If $\lim_{n \to \infty} a_n = L$ and $\lim_{n \to \infty} c_n = L$, then the ``squeezed'' sequence in the middle must also have that limit: $\lim_{n \to \infty} b_n = L$.
+\end{itemize}
+
+\subsection{Sigma and Pi Notation Quick Rules}
+
+\textbf{Summation ($\Sigma$):}
 \[
 \sum_{k=1}^{n}(u_k+v_k)=\sum_{k=1}^{n}u_k+\sum_{k=1}^{n}v_k,
 \quad
 \sum_{k=1}^{n}cu_k = c\sum_{k=1}^{n}u_k.
 \]
 Index shifts must preserve both the expression and bounds consistently.
+
+\textbf{Product ($\Pi$):}
+\[
+\prod_{k=1}^{n}(u_k v_k)=\left(\prod_{k=1}^{n}u_k\right)\left(\prod_{k=1}^{n}v_k\right),
+\quad
+\prod_{k=1}^{n}cu_k = c^n\prod_{k=1}^{n}u_k.
+\]
+Note that a constant $c$ is raised to the power of the number of terms when pulled outside a product, unlike sums where it acts as a simple multiplier.
 
 \begin{takeaways}
 \item Always identify whether the question asks for a term $a_n$, a finite sum $S_n$, or a limit.
