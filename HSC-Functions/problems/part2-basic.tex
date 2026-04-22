@@ -1,2 +1,131 @@
 % Part 2 -- Warm-Up Drills
-% Problems will be added here.
+
+\begin{problem}[Evaluation \& Domains]
+Find the maximal natural domain and range of the following functions:
+\begin{enumerate}[label=(\roman*)]
+\item $f(x) = \sqrt{4-x}$
+\item $g(x) = \frac{1}{x+2}$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For square roots, the inside must be non-negative. For fractions, the denominator cannot be zero.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} We require $4-x \ge 0 \implies x \le 4$.
+Domain: $(-\infty, 4]$. 
+Since the principal square root is non-negative, Range: $[0, \infty)$.
+
+\textbf{(ii)} We require $x+2 \ne 0 \implies x \ne -2$.
+Domain: $\mathbb{R} \setminus \{-2\}$.
+Since the numerator is $1$, $g(x)$ can never be $0$. Range: $\mathbb{R} \setminus \{0\}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Check for division by zero and square roots of negative numbers to find the domain.
+\item Realise what outputs are impossible (like 0 in a basic rational function) to establish the range.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Function Tests]
+Below are two graphs. Use the vertical and horizontal line tests to determine which graph represents a valid function, and whether it is a one-to-one function.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.45\linewidth, height=5cm,
+    axis lines=middle, xmin=-3, xmax=3, ymin=-3, ymax=3,
+    title={Graph A}, xtick=\empty, ytick=\empty
+]
+\addplot[blue, thick, domain=-2:2] {x^2-2};
+\end{axis}
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.45\linewidth, height=5cm,
+    axis lines=middle, xmin=-3, xmax=3, ymin=-3, ymax=3,
+    title={Graph B}, xtick=\empty, ytick=\empty,
+    axis equal image
+]
+\addplot[red, thick, samples=100, domain=-90:90] ({2*sin(x)}, {2*cos(x)});
+\addplot[red, thick, samples=100, domain=90:270] ({2*sin(x)}, {2*cos(x)});
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+If any vertical line crosses the graph more than once, it's not a function. If any horizontal line crosses it more than once, it is not one-to-one.
+\end{hint}
+
+\begin{solution}
+\textbf{Graph A:} A parabola opening upwards. It passes the vertical line test, so it is a valid function. However, any horizontal line above the vertex intersects it twice, so it is \textbf{not} one-to-one.
+
+\textbf{Graph B:} A circle. A vertical line (e.g., the $y$-axis) intersects the curve at two points. Therefore, Graph B does \textbf{not} represent a valid function.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Vertical line test confirms $y=f(x)$ is single-valued mapping.
+\item Horizontal line test confirms injectivity (one-to-one).
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Parity of Functions]
+Determine algebraically whether the following functions are even, odd, or neither:
+\begin{enumerate}[label=(\roman*)]
+\item $f(x) = x^3 - x$
+\item $g(x) = x^2 \cos(x)$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Substitute $-x$ into the function. If it yields exactly $f(x)$, it's even. If it yields $-f(x)$, it's odd.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Substitute $-x$:
+$f(-x) = (-x)^3 - (-x) = -x^3 + x = -(x^3 - x) = -f(x)$.
+Because $f(-x) = -f(x)$, the function $f(x)$ is \textbf{odd}.
+
+\textbf{(ii)} Substitute $-x$:
+$g(-x) = (-x)^2 \cos(-x) = x^2 \cos(x) = g(x)$ (since cosine is an even function).
+Because $g(-x) = g(x)$, the function $g(x)$ is \textbf{even}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Always simplify carefully, paying attention to the signs on odd and even powers.
+\item Standard trig functions have known parities: $\cos x$ is even, $\sin x$ is odd.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Basic Composition]
+Given the functions $f(x) = 2x+1$ and $g(x) = x^2$, find the rules for:
+\begin{enumerate}[label=(\roman*)]
+\item $f(g(x))$
+\item $g(f(x))$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Substitute the entire expression of one function into the input variable of the other.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Replace $x$ in $f$ with $g(x)$:
+\[ f(g(x)) = 2(x^2) + 1 = \boxed{2x^2+1}. \]
+
+\textbf{(ii)} Replace $x$ in $g$ with $f(x)$:
+\[ g(f(x)) = (2x+1)^2 = \boxed{4x^2+4x+1}. \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Function composition is generally \textbf{not} commutative: $f(g(x)) \neq g(f(x))$.
+\item Keep parentheses around substituted expressions to prevent expansion errors.
+\end{itemize}
+\end{takeaways}

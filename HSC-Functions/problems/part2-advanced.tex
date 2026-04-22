@@ -1,2 +1,91 @@
 % Part 2 -- Challenge Corner
-% Problems will be added here.
+
+\begin{problem}[Self-Inverse Rational Functions]
+Prove that any rational function of the form
+\[ f(x) = \frac{ax+b}{cx-a} \]
+where $a, b, c$ are constants and $a^2+bc \neq 0$, is its own inverse.
+\end{problem}
+
+\begin{hint}
+Set $y = f(x)$, swap $x$ and $y$, and algebraically solve for the new $y$. What happens when $a^2+bc = 0$?
+\end{hint}
+
+\begin{solution}
+Let $y = \frac{ax+b}{cx-a}$.
+Swap variables to find $f^{-1}(x)$:
+\[ x = \frac{ay+b}{cy-a}. \]
+Solve for $y$:
+\begin{align*}
+x(cy-a) &= ay+b \\
+cxy - ax &= ay + b \\
+cxy - ay &= ax + b \\
+y(cx - a) &= ax + b \\
+y &= \frac{ax+b}{cx-a}.
+\end{align*}
+Since $y$ evaluates back to the exact same expression as $f(x)$, we have $f^{-1}(x) = f(x)$. Hence, the function is its own inverse.
+(Note: $a^2+bc \neq 0$ is required so the function is not just a constant, ensuring it is a one-to-one function.)
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item A function that equals its own inverse is called an involution.
+\item Geometrically, $f(f(x))=x$ implies the graph is perfectly symmetrical across the line $y=x$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Linear Function Composition]
+Find all linear functions $f(x) = mx + c$ such that $f(f(x)) = 4x - 9$.
+\end{problem}
+
+\begin{hint}
+Compute $f(f(x))$ algebraically without replacing constants, then expand and equate coefficients with $4x-9$.
+\end{hint}
+
+\begin{solution}
+Given $f(x) = mx+c$, evaluate $f(f(x))$:
+\[
+f(f(x)) = m(mx+c) + c = m^2x + mc + c.
+\]
+We are given that $f(f(x)) = 4x - 9$. Equating coefficients:
+1) $m^2 = 4 \implies m = 2 \text{ or } m = -2$.
+2) $mc + c = -9 \implies c(m+1) = -9$.
+
+Case 1: $m = 2$.
+$c(2+1) = -9 \implies 3c = -9 \implies c = -3$.
+This yields the function $\boxed{f(x) = 2x - 3}$.
+
+Case 2: $m = -2$.
+$c(-2+1) = -9 \implies -c = -9 \implies c = 9$.
+This yields the function $\boxed{f(x) = -2x + 9}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Equating coefficients is a powerful technique whenever polynomial degrees match.
+\item Remembering that quadratic equations ($m^2=4$) yield dual solutions protects against losing potential answers.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Advanced Composition Domain]
+Find the valid geometric domain of the composite function $f(g(x))$ where $f(x) = \sqrt{x}$ and $g(x) = 1 - x^2$.
+\end{problem}
+
+\begin{hint}
+The domain of a composite function comprises the restrictions of the inner function, further constrained so the output of the inner function fits within the domain of the outer function.
+\end{hint}
+
+\begin{solution}
+For $f(g(x))$ to exist:
+1. $x$ must be in the domain of $g(x)$. The domain of $g(x) = 1-x^2$ is $\mathbb{R}$.
+2. The output $g(x)$ must lie within the domain of $f(x)$, which is $x \ge 0$.
+So we require $g(x) \ge 0$:
+\[ 1 - x^2 \ge 0 \implies x^2 \le 1 \implies -1 \le x \le 1. \]
+Comparing the two conditions, the overall domain is the intersection, which is simply $\boxed{[-1, 1]}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item It often helps to evaluate $\operatorname{dom}(f\circ g) = \{x \in \operatorname{dom}(g) \mid g(x) \in \operatorname{dom}(f)\}$.
+\item Even if the simplified formula $\sqrt{1-x^2}$ implies a domain, relying on checking the intersection of inner outputs with outer domains avoids errors with more convoluted functions.
+\end{itemize}
+\end{takeaways}

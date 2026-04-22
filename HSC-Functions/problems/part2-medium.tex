@@ -1,2 +1,101 @@
 % Part 2 -- Stretch Problems
-% Problems will be added here.
+
+\begin{problem}[Domain Restriction for Inverse]
+Consider the quadratic function $f(x) = x^2 - 4x + 3$.
+\begin{enumerate}[label=(\roman*)]
+\item Determine the vertex and sketch the graph.
+\item Restrict the domain of $f(x)$ minimally such that it becomes a one-to-one function including $x=5$.
+\item Find the rule and domain for the inverse function $f^{-1}(x)$ for your restriction.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Complete the square to find the vertex. For the inverse to exist, you need to pick a branch (left or right of the vertex) that includes $x=5$. Then swap $x$ and $y$ and solve for $y$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Completing the square gives $f(x) = (x-2)^2 - 1$. The vertex is $(2, -1)$.
+
+\textbf{(ii)} To make $f(x)$ one-to-one and include $x=5$, we must restrict the domain to the right branch originating from the vertex. The restricted domain is $[2, \infty)$.
+
+\textbf{(iii)} Let $y = (x-2)^2 - 1$, where $x \ge 2$, so $y \ge -1$.
+Swap $x$ and $y$ to find the inverse:
+\[ x = (y-2)^2 - 1 \implies x + 1 = (y-2)^2. \]
+Since the original domain had $x \ge 2$, our new $y$ must be $\ge 2$, so we take the positive square root:
+\[ y-2 = \sqrt{x+1} \implies y = 2 + \sqrt{x+1}. \]
+Rule: $\boxed{f^{-1}(x) = 2 + \sqrt{x+1}}$.
+Domain of $f^{-1}$ is the range of restricted $f$: $\boxed{[-1, \infty)}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Quadratics must be split at the vertex to secure a one-to-one mapping.
+\item Selecting the $\pm$ sign when taking the square root determines which branch of the parabola the inverse describes.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Piecewise Functions]
+A function is defined as:
+\[
+h(x) = \begin{cases} 
+2x+3, & \text{if } x < -1 \\
+x^2, & \text{if } x \ge -1 
+\end{cases}
+\]
+Find the range of $h(x)$ and determine whether the function is continuous at the break point $x = -1$.
+\end{problem}
+
+\begin{hint}
+Sketch the function or analyze the output of each piece. For continuity, check if the limits from the left and right match the function's value at $x=-1$.
+\end{hint}
+
+\begin{solution}
+\textbf{Range:} 
+For $x < -1$, the graph is a line $y = 2x+3$ with an open endpoint at $(-1, 1)$. Thus, this piece sweeps out values in $(-\infty, 1)$.
+For $x \ge -1$, the graph is a parabola $y = x^2$ restricted to $x \ge -1$. The minimum is at $(0,0)$, and at $x=-1$, $y=1$. This piece sweeps out values in $[0, \infty)$.
+The union of $(-\infty, 1)$ and $[0, \infty)$ is all real numbers. Thus, the range is $\boxed{\mathbb{R}}$. 
+
+\textbf{Continuity:}
+Left limit as $x \to -1^-$ uses the rule $2x+3 \to 1$.
+Right limit as $x \to -1^+$ uses the rule $x^2 \to 1$.
+The function value at $x=-1$ is $(-1)^2 = 1$.
+Since all three agree, the function is $\boxed{\text{continuous}}$ at $x=-1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The overall range of a piecewise function is the union of the ranges of its constituent parts.
+\item Ensuring left and right limits equate at break points is the core test for continuity.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Abstract Transformations]
+Given the graph of a generic function $y = f(x)$, describe the sequence of geometric transformations required to obtain the graph of:
+\begin{enumerate}[label=(\roman*)]
+\item $y = 2f(1-x) - 3$
+\item Describe the difference in graphing $y = |f(x)|$ compared to $y = f(|x|)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), rewrite the input as $-(x-1)$. For part (ii), think about which parts of the inputs/outputs are forced to be positive.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Rewrite the equation as $y = 2f(-(x-1)) - 3$. The transformations from $y=f(x)$ are:
+1. Reflection across the $y$-axis: $f(-x)$
+2. Horizontal translation right by 1 unit: $f(-(x-1))$
+3. Vertical dilation by a factor of 2: $2f(1-x)$
+4. Vertical translation down by 3 units: $2f(1-x) - 3$
+
+\textbf{(ii)} 
+To graph $y=|f(x)|$, apply the absolute value to the outputs: take any part of the graph below the $x$-axis and reflect it up across the $x$-axis.
+To graph $y=f(|x|)$, apply the absolute value to the inputs: discard the left side of the graph ($x < 0$), keep the right side ($x \ge 0$), and reflect the right side across the $y$-axis to create an even function.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Factoring out coefficients in the input parameter prevents translation errors (e.g., $f(1-x) \to f(-(x-1))$).
+\item Absolute value outside affects $y$-values (folding up), inside affects $x$-values (mirroring right to left).
+\end{itemize}
+\end{takeaways}
