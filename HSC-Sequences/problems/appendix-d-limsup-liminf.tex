@@ -1,0 +1,40 @@
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Note on Syllabus]
+The concepts of limit superior ($\limsup$) and limit inferior ($\liminf$) are strictly \textbf{outside the scope} of the HSC Mathematics Extension 1 and Extension 2 syllabuses. However, they provide an excellent bridge into higher mathematics (such as university-level real analysis) and serve as useful tools to "estimate a boundary" for the limits of sequences and functions.
+\end{tcolorbox}
+
+\subsubsection*{Estimating Boundaries with Limsup and Liminf}
+In standard mathematics, the limit of a sequence $a_n$ as $n \to \infty$ describes the exact value the sequence settles on. However, many sequences do not settle on a single value; they might oscillate or jump around (for example, $a_n = (-1)^n$). 
+
+Instead of asking "What is the exact limit?", we can ask "What are the ultimate upper and lower boundaries of this sequence?"
+\begin{itemize}
+    \item \textbf{Limit Superior ($\limsup_{n \to \infty} a_n$):} The eventual upper bound of the sequence. It describes the maximum value that the sequence continues to reach or approach as $n$ becomes arbitrarily large.
+    \item \textbf{Limit Inferior ($\liminf_{n \to \infty} a_n$):} The eventual lower bound of the sequence. It describes the minimum value that the sequence continues to reach or approach as $n$ becomes arbitrarily large.
+\end{itemize}
+
+A sequence $(a_n)$ converges to a limit $L$ if and only if both its limit superior and limit inferior are equal to that same expected limit $L$. That is:
+\[ \lim_{n \to \infty} a_n = L \iff \limsup_{n \to \infty} a_n = \liminf_{n \to \infty} a_n = L \]
+
+\subsubsection*{Simple Examples}
+
+\textbf{Example 1: A Converging Sequence}\\
+Consider the sequence $a_n = \frac{1}{n}$.
+The terms are $1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \ldots$
+As $n \to \infty$, the sequence approaches $0$.
+Here, the eventual upper boundary and lower boundary are the same.
+\[ \limsup_{n \to \infty} \frac{1}{n} = 0 \quad \text{and} \quad \liminf_{n \to \infty} \frac{1}{n} = 0 \]
+Since they are equal, the standard limit exists and $\lim_{n \to \infty} \frac{1}{n} = 0$.
+
+\textbf{Example 2: An Oscillating Sequence}\\
+Consider the sequence $a_n = (-1)^n$.
+The terms are $-1, 1, -1, 1, -1, 1, \ldots$
+This sequence never settles on a single converging value, so the standard limit does not exist. However, the sequence is clearly bounded.
+\begin{itemize}
+    \item The highest value the sequence keeps hitting as $n \to \infty$ is $1$. Thus, $\limsup_{n \to \infty} (-1)^n = 1$.
+    \item The lowest value the sequence keeps hitting as $n \to \infty$ is $-1$. Thus, $\liminf_{n \to \infty} (-1)^n = -1$.
+\end{itemize}
+
+\textbf{Example 3: A Sequence with Growth and Oscillation}\\
+Consider $a_n = 5 + \frac{(-1)^n}{n}$.
+The sequence oscillates slightly above and below $5$, getting closer and closer to $5$.
+\[ \limsup_{n \to \infty} \left(5 + \frac{(-1)^n}{n}\right) = 5 \quad \text{and} \quad \liminf_{n \to \infty} \left(5 + \frac{(-1)^n}{n}\right) = 5 \]
+Both estimates boundary conditions pinch together at $5$, confirming the exact limit is $5$.
