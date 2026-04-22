@@ -276,13 +276,34 @@ hence $S=2$.
 \end{solution}
 
 \begin{problem}[Discrete calculus and sums of powers]
+
+$\nabla$ is the backward difference operator, defined as $\nabla f(n)=f(n)-f(n-1)$ for discrete functions $f(n)$.
+In this problem, you will explore the properties of the backward difference operator and its applications to sums of powers.
+
+For example, 
+The first order of $\nabla$ is 
+
+$$\nabla(n^2)=n^2-(n-1)^2=2n-1$$.
+
+The second order of $\nabla$ is 
+$$\nabla^2 f(n)=\nabla(\nabla f(n))=\nabla(f(n)-f(n-1))=f(n)-2f(n-1)+f(n-2)$$ 
+and the third order of $\nabla$ is 
+$$\nabla^3 f(n)=\nabla(\nabla^2 f(n))=\nabla(f(n)-2f(n-1)+f(n-2))=f(n)-3f(n-1)+3f(n-2)-f(n-3)$$.
+
+In this problem, we use the $\nabla$ operator to derive formulas for sums of powers.
+
 \begin{enumerate}[(i)]
 \item Show $n^3-(n-1)^3=3n^2-3n+1$.
 \item Sum this identity from $1$ to $N$ to derive
 \[
 \sum_{n=1}^N n^2=\frac{N(N+1)(2N+1)}{6}.
 \]
-\item Evaluate $\nabla^3(n^3)$ for $\nabla f(n)=f(n)-f(n-1)$.
+\item Evaluate $\nabla^3(n^3)$ 
+
+% where $\nabla f(n)=f(n)-f(n-1)$ is the backward difference operator 
+% $\nabla^3 = \nabla \circ \nabla \circ \nabla$ is the third-order backward difference operator, 
+% e.g. $\nabla^3(n^3) = n^3 - 3(n-1)^3 + 3(n-2)^2 - (n-3)^3$.
+
 \item State the leading term of $\sum_{n=1}^N n^k$.
 \end{enumerate}
 \end{problem}
