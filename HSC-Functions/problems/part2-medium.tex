@@ -133,21 +133,23 @@ Therefore, $f(x) \approx x + 1$ for very large positive or negative values of $x
 The graph is a hyperbola-like shape. To the right of $x=2$, the curve is above the asymptote ($x+1 + \text{positive}$). To the left, it is below.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
+\begin{tikzpicture}[xscale=1, yscale=0.45]
+    \clip (-3.5, -5.5) rectangle (4.5, 10.5);
+    
     \draw[->] (-3,0) -- (4,0) node[right] {$x$};
-    \draw[->] (0,-4) -- (0,10) node[above] {$y$};
+    \draw[->] (0,-5) -- (0,10) node[above] {$y$};
     
     % Asymptotes
-    \draw[dashed, red] (2,-4) -- (2,10) node[below right] {$x=2$};
+    \draw[dashed, red] (2,-5) -- (2,10) node[below right] {$x=2$};
     \draw[dashed, red, domain=-3:4] plot (\x, {\x+1});
     \node[red, right] at (3.5, 4.5) {$y=x+1$};
     
     % Curve branches
     \draw[thick, blue, samples=100, domain=-2:1.6] plot (\x, {\x + 1 + 4/(\x - 2)});
-    \draw[thick, blue, samples=100, domain=2.4:3] plot (\x, {\x + 1 + 4/(\x - 2)});
+    \draw[thick, blue, samples=100, domain=2.4:4] plot (\x, {\x + 1 + 4/(\x - 2)});
     
     % y-intercept
-    \filldraw (0,-1) circle (1.5pt) node[left] {$-1$};
+    \filldraw (0,-1) circle (2pt) node[left] {$-1$};
 \end{tikzpicture}
 \end{center}
 \end{solution}
@@ -231,6 +233,9 @@ The curve is a "valley" shape. The line is a simple downward slope. Between $x=0
 
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
+    % Clip the drawing area to prevent asymptotes from shooting to infinity
+    \clip (-4.5, -2.5) rectangle (7.5, 6);
+
     \draw[->] (-4,0) -- (7,0) node[right] {$x$};
     \draw[->] (0,-2) -- (0,5) node[above] {$y$};
     
@@ -248,9 +253,9 @@ The curve is a "valley" shape. The line is a simple downward slope. Between $x=0
     \draw[dashed, gray] (4.71239, -2) -- (4.71239, 5);
     
     % The curve y = 1 / (1 + sin(x))
-    \draw[thick, blue, samples=100, domain=-3.14159:-1.75] plot (\x, {1/(1 + sin(\x r))});
-    \draw[thick, blue, samples=100, domain=-1.35:4.55] plot (\x, {1/(1 + sin(\x r))});
-    \draw[thick, blue, samples=100, domain=4.95:6.28318] plot (\x, {1/(1 + sin(\x r))});
+    \draw[thick, blue, samples=150, domain=-3.14159:-1.65] plot (\x, {1/(1 + sin(\x r))});
+    \draw[thick, blue, samples=200, domain=-1.45:4.6] plot (\x, {1/(1 + sin(\x r))});
+    \draw[thick, blue, samples=150, domain=4.8:6.28318] plot (\x, {1/(1 + sin(\x r))});
     
     \node[blue, right] at (1.5, 2.5) {$y = \frac{1}{1+\sin x}$};
 \end{tikzpicture}

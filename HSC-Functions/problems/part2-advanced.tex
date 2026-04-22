@@ -208,17 +208,20 @@ Investigate the number of real solutions to the equation $a^x = \log_a x$ for $a
 \end{enumerate}
 
 \begin{center}
-\begin{tikzpicture}[scale=1]
+\begin{tikzpicture}[scale=0.8]
+    % Clip the drawing area to prevent the logarithm curve from rendering wildly above the y-axis
+    \clip (-1, -1) rectangle (5.5, 5.5);
+
     \draw[->] (-0.5,0) -- (5,0) node[right] {$x$};
     \draw[->] (0,-0.5) -- (0,5) node[above] {$y$};
     \draw[dashed, gray] (0,0) -- (4.5,4.5) node[right] {$y=x$};
     
     % a = 1.2 (Two solutions)
-    \draw[thick, blue, domain=0:3.5, samples=100] plot (\x, {1.2^\x});
-    \draw[thick, red, domain=0.5:4.5, samples=100] plot (\x, {log2(\x)/log2(1.2)});
+    \draw[thick, blue, domain=0:4.8, samples=100] plot (\x, {1.2^\x});
+    \draw[thick, red, domain=0.5:4.8, samples=100] plot (\x, {ln(\x)/ln(1.2)});
     
-    \node[blue] at (3.8, 1.8) {$a^x$};
-    \node[red] at (1.8, 3.8) {$\log_a x$};
+    \node[blue] at (4.4, 1.8) {$a^x$};
+    \node[red] at (1.8, 4.4) {$\log_a x$};
 \end{tikzpicture}
 \end{center}
 \end{problem}
@@ -253,67 +256,3 @@ If $1 < a < e^{1/e}$: $2$ solutions.
 \end{itemize}
 \end{takeaways}
 
-\begin{problem}[The Exponential Functional Equation]
-A function $f(x)$ is defined such that $f(x) > 0$ for all real numbers $x$ and $f(a + b) = f(a)f(b)$ for any real numbers $a$ and $b$.
-
-\begin{enumerate}[label=(\roman*)]
-\item Show that $f(0) = 1$ and deduce that $f(-x) = \frac{1}{f(x)}$.
-\item By using mathematical induction, show that $f(nx) = [f(x)]^n$ for $n \in \mathbb{Z}^+$.
-\item Prove that $f(rx) = [f(x)]^r$ for all rational numbers $r$.
-\item Suppose the function $f(x)$ is continuous over $\mathbb{R}$. Prove that $f(tx) = [f(x)]^t$ for all real numbers $t$.
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-For part (i), plug in $a=x$ and $b=0$, as well as $a=x$ and $b=-x$. For the extension into rationals, remember any rational is $\frac{p}{q}$.
-\end{hint}
-
-\begin{solution}
-\textbf{Part (i)}
-\begin{itemize}[leftmargin=*]
-\item Let $a = x$ and $b = 0$. 
-\item $f(x + 0) = f(x)f(0) \implies f(x) = f(x)f(0)$.
-\item Since $f(x) > 0$, divide both sides by $f(x)$ to yield $f(0) = 1$.
-\item Next, let $a = x$ and $b = -x$.
-\item $f(x + (-x)) = f(x)f(-x) \implies f(0) = f(x)f(-x)$.
-\item Substituting $f(0) = 1$ gives $1 = f(x)f(-x) \implies f(-x) = \frac{1}{f(x)}$.
-\end{itemize}
-
-\textbf{Part (ii)}
-\begin{itemize}[leftmargin=*]
-\item \textbf{Base Case ($n=1$):} $f(1x) = [f(x)]^1$, which is true.
-\item \textbf{Assumption:} Assume true for $n=k$: $f(kx) = [f(x)]^k$.
-\item \textbf{Step ($n=k+1$):} \\
-$f((k+1)x) = f(kx + x)$ \\
-$= f(kx)f(x)$ \quad (using given property) \\
-$= [f(x)]^k f(x)$ \quad (using assumption) \\
-$= [f(x)]^{k+1}$
-\item By mathematical induction, the statement is true for all $n \in \mathbb{Z}^+$.
-\end{itemize}
-
-\textbf{Part (iii)}
-\begin{itemize}[leftmargin=*]
-\item Extend the rule to all integers: $f(0x) = f(0) = 1 = [f(x)]^0$, and $f(-nx) = \frac{1}{f(nx)} = \frac{1}{[f(x)]^n} = [f(x)]^{-n}$. Thus, $f(nx) = [f(x)]^n$ for all $n \in \mathbb{Z}$.
-\item Let $r = \frac{p}{q}$, where $p \in \mathbb{Z}$ and $q \in \mathbb{Z}^+$.
-\item Consider the expression $f(px) = f\left(q \cdot \frac{p}{q} x\right)$.
-\item Using the integer rule on both sides: $[f(x)]^p = \left[ f\left(\frac{p}{q}x\right) \right]^q$.
-\item Taking the $q$-th root (valid as $f(x)>0$): $[f(x)]^{\frac{p}{q}} = f\left(\frac{p}{q}x\right)$.
-\item Therefore, $f(rx) = [f(x)]^r$.
-\end{itemize}
-
-\textbf{Part (iv)}
-\begin{itemize}[leftmargin=*]
-\item Let $t \in \mathbb{R}$. There exists a sequence of rational numbers $\{r_n\}$ such that $\lim_{n \to \infty} r_n = t$.
-\item By continuity of $f$: $f(tx) = f\left(\lim_{n \to \infty} r_n x\right) = \lim_{n \to \infty} f(r_n x)$.
-\item Using part (iii): $\lim_{n \to \infty} f(r_n x) = \lim_{n \to \infty} [f(x)]^{r_n}$.
-\item By continuity of exponential functions: $\lim_{n \to \infty} [f(x)]^{r_n} = [f(x)]^{\lim_{n \to \infty} r_n} = [f(x)]^t$.
-\item Therefore, $f(tx) = [f(x)]^t$.
-\end{itemize}
-\end{solution}
-
-\begin{takeaways}
-\begin{itemize}[leftmargin=*]
-\item \textbf{The Foundation of Exponentials:} This proof rigorously shows that any continuous function satisfying $f(a+b) = f(a)f(b)$ is an exponential function. If you let $x=1$ and define $f(1) = c$, then part (iv) proves that $f(t) = c^t$. 
-\item \textbf{The Power of Density:} Because rational numbers are "dense", if you know how a continuous function behaves on all fractions, you automatically lock in its behavior for all irrational numbers as well!
-\end{itemize}
-\end{takeaways}
