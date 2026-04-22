@@ -89,3 +89,231 @@ Comparing the two conditions, the overall domain is the intersection, which is s
 \item Even if the simplified formula $\sqrt{1-x^2}$ implies a domain, relying on checking the intersection of inner outputs with outer domains avoids errors with more convoluted functions.
 \end{itemize}
 \end{takeaways}
+
+
+\begin{problem}[Investigation of $f(x) = |x + 1| + \frac{1}{x - 1}$]
+Analyze the function $f(x) = |x + 1| + \frac{1}{x - 1}$ for $x \neq 1$.
+\begin{enumerate}[label=(\roman*)]
+\item Define $f(x)$ as a piecewise function for the intervals $(-\infty, -1)$, $[-1, 1)$, and $(1, \infty)$.
+\item State the equations of all asymptotes.
+\item Find the coordinates of the local minimum for $x > 1$.
+\item Sketch the graph of the function.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    \draw[->] (-5,0) -- (5,0) node[right] {$x$};
+    \draw[->] (0,-4) -- (0,6) node[above] {$y$};
+    \draw[dashed, gray] (1,-4) -- (1,6);
+    \draw[dashed, gray] (-5,4) -- (-1,0) -- (4,5);
+    \draw[thick, blue, samples=100, domain=1.22:4.5] plot (\x, {abs(\x+1) + 1/(\x-1)});
+    \draw[thick, blue, samples=100, domain=-0.9:0.78] plot (\x, {abs(\x+1) + 1/(\x-1)});
+    \draw[thick, blue, samples=100, domain=-4.5:-1.1] plot (\x, {abs(\x+1) + 1/(\x-1)});
+    \filldraw (2,4) circle (2pt) node[right] {$(2,4)$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+The modulus $|x+1|$ flips at $x = -1$, but the vertical asymptote lies at $x = 1$. Differentiate for $x>1$ ignoring the absolute value sign since $x+1 > 0$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Piecewise Definition:}\\
+$x < -1$: $f(x) = -(x+1) + \frac{1}{x-1}$\\
+$-1 \le x < 1$: $f(x) = (x+1) + \frac{1}{x-1}$\\
+$x > 1$: $f(x) = (x+1) + \frac{1}{x-1}$
+
+\textbf{(ii) Asymptotes:}\\
+Vertical: $x = 1$.\\
+Oblique ($x \to \infty$): $y = x + 1$.\\
+Oblique ($x \to -\infty$): $y = -x - 1$.
+
+\textbf{(iii) Stationary Point ($x > 1$):}\\
+$f'(x) = 1 - \frac{1}{(x-1)^2}$. \\
+Set $f'(x) = 0 \implies (x-1)^2 = 1 \implies x-1 = 1 \implies x = 2$.
+$f(2) = |2+1| + \frac{1}{2-1} = 4$. Local minimum at $(2, 4)$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Independent Shifts:} The V-shape vertex was shifted left to $x = -1$, while the vertical asymptote was shifted right to $x = 1$.
+\item \textbf{Asymptote Interaction:} The oblique asymptotes are no longer symmetric about the $y$-axis; they are symmetric about the line $x = -1$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Hyperbolic Divide]
+Investigate the region $R$ defined by the simultaneous inequalities:
+\[ \frac{1}{x} > \frac{1}{y} \quad \text{and} \quad x + y < 2 \]
+\begin{enumerate}[label=(\roman*)]
+\item Show that the inequality $\frac{1}{x} > \frac{1}{y}$ is equivalent to $\frac{y - x}{xy} > 0$.
+\item Identify the regions in the four quadrants that satisfy $\frac{y - x}{xy} > 0$.
+\item Sketch the region $R$, showing the boundary lines $y = x$, $x + y = 2$, and the coordinate axes.
+\item Algebraically determine if the point $(1, 0.5)$ lies within the region $R$.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Grids and Axes
+    \draw[gray!20, very thin] (-4,-4) grid (4,4);
+    \draw[->] (-4,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-4) -- (0,4) node[above] {$y$};
+
+    % Shading the complicated regions
+    \fill[blue!20, opacity=0.5] (0,0) -- (1,1) -- (0,2) -- cycle;
+    \fill[blue!20, opacity=0.5] (0,0) -- (2,0) -- (3,-1) -- (0,-4) -- cycle;
+    \fill[blue!20, opacity=0.5] (0,0) -- (-4,0) -- (-4,-4) -- cycle;
+
+    % Boundaries
+    \draw[dashed, red] (-3.5,-3.5) -- (3.5,3.5) node[right] {$y=x$};
+    \draw[dashed, thick] (-2,4) -- (4,-2) node[right] {$x+y=2$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+You cannot simply cross-multiply. Instead, move both terms to one side. The "correct" region will be the intersection of the hyperbolic zones and the area "below" the line.
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Algebraic Logic:}\\
+$\frac{1}{x} - \frac{1}{y} > 0 \implies \frac{y-x}{xy} > 0$.
+
+\textbf{(ii) Quadrant Analysis:}\\
+Q1 ($x,y > 0$): Satisfied when $y > x$.\\
+Q2 ($x < 0, y > 0$): Impossible, as $y$ is pos and $x$ is neg.\\
+Q3 ($x,y < 0$): Satisfied when $y > x$ (e.g., $-1 > -2$).\\
+Q4 ($x > 0, y < 0$): Always true.
+
+\textbf{(iii) Intersection:}\\
+The line $x+y=2$ intersects $y=x$ at $(1, 1)$. The region $R$ consists of the triangle in Q1 bounded by $y=x$, $x+y=2$, and the $y$-axis; all of Q4 below the line $x+y=2$; all of Q3 where $y > x$.
+
+\textbf{(iv) Test Point:}\\
+At $(1, 0.5)$: $\frac{1}{1} > \frac{1}{0.5} \implies 1 > 2$ (FALSE). The point does not lie in the region.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Danger of Cross-Multiplication:} In inequalities, multiplying by a variable is dangerous because you don't know if you need to flip the inequality sign.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Intersection of $a^x$ and $\log_a x$]
+Investigate the number of real solutions to the equation $a^x = \log_a x$ for $a > 1$.
+\begin{enumerate}[label=(\roman*)]
+\item Explain why the intersection points of these two inverse functions must lie on the line $y = x$.
+\item Show that for $a = e$, there are no real solutions.
+\item Find the value of $a$ and the corresponding value of $x$ for which the two curves are tangential to each other.
+\item Determine the range of values for $a > 1$ such that the equation has exactly two distinct real solutions.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    \draw[->] (-0.5,0) -- (5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,5) node[above] {$y$};
+    \draw[dashed, gray] (0,0) -- (4.5,4.5) node[right] {$y=x$};
+    
+    % a = 1.2 (Two solutions)
+    \draw[thick, blue, domain=0:3.5, samples=100] plot (\x, {1.2^\x});
+    \draw[thick, red, domain=0.5:4.5, samples=100] plot (\x, {log2(\x)/log2(1.2)});
+    
+    \node[blue] at (3.8, 1.8) {$a^x$};
+    \node[red] at (1.8, 3.8) {$\log_a x$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+At the point of tangency on the line $y=x$, we must have $f(x) = x$ and $f'(x) = 1$. Use these two equations to solve for $x$ and then find $a$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Reflection Property:}\\
+Since $g(x)$ is the inverse of $f(x)$, their graphs are reflections across $y=x$. For strictly increasing functions, if $a^x = x$ has a solution, then $\log_a(x) = x$ must share that same solution.
+
+\textbf{(ii) The Case for $a=e$:}\\
+The function $h(x) = e^x - x$ has a minimum at $x=0$, where $h(0) = 1$. Since $e^x > x$ for all real $x$, the curves $e^x$ and $\ln(x)$ never intersect.
+
+\textbf{(iii) The Critical Tangent:}\\
+We need $a^x = x$ and $\frac{d}{dx}(a^x) = 1$.
+$a^x \ln a = 1$. Since $a^x = x$, we have $x \ln a = 1 \implies a = e^{1/x}$.
+Substitute into $a^x = x$: $(e^{1/x})^x = x \implies e^1 = x$.
+Thus, $x = e$. The point of tangency is $(e, e)$ and $a = e^{1/e}$.
+
+\textbf{(iv) Number of Solutions ($a > 1$):}\\
+If $a > e^{1/e}$: $0$ solutions.
+If $a = e^{1/e}$: $1$ solution.
+If $1 < a < e^{1/e}$: $2$ solutions.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Power of Symmetry:} You don't need to solve $\log_a(x) = a^x$. You only need to solve $a^x = x$.
+\item \textbf{Inverse Behavior:} If $f(x)$ is increasing, $f(x) \cap f^{-1}(x)$ occurs on $y=x$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Exponential Functional Equation]
+A function $f(x)$ is defined such that $f(x) > 0$ for all real numbers $x$ and $f(a + b) = f(a)f(b)$ for any real numbers $a$ and $b$.
+
+\begin{enumerate}[label=(\roman*)]
+\item Show that $f(0) = 1$ and deduce that $f(-x) = \frac{1}{f(x)}$.
+\item By using mathematical induction, show that $f(nx) = [f(x)]^n$ for $n \in \mathbb{Z}^+$.
+\item Prove that $f(rx) = [f(x)]^r$ for all rational numbers $r$.
+\item Suppose the function $f(x)$ is continuous over $\mathbb{R}$. Prove that $f(tx) = [f(x)]^t$ for all real numbers $t$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For part (i), plug in $a=x$ and $b=0$, as well as $a=x$ and $b=-x$. For the extension into rationals, remember any rational is $\frac{p}{q}$.
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i)}
+\begin{itemize}[leftmargin=*]
+\item Let $a = x$ and $b = 0$. 
+\item $f(x + 0) = f(x)f(0) \implies f(x) = f(x)f(0)$.
+\item Since $f(x) > 0$, divide both sides by $f(x)$ to yield $f(0) = 1$.
+\item Next, let $a = x$ and $b = -x$.
+\item $f(x + (-x)) = f(x)f(-x) \implies f(0) = f(x)f(-x)$.
+\item Substituting $f(0) = 1$ gives $1 = f(x)f(-x) \implies f(-x) = \frac{1}{f(x)}$.
+\end{itemize}
+
+\textbf{Part (ii)}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Base Case ($n=1$):} $f(1x) = [f(x)]^1$, which is true.
+\item \textbf{Assumption:} Assume true for $n=k$: $f(kx) = [f(x)]^k$.
+\item \textbf{Step ($n=k+1$):} \\
+$f((k+1)x) = f(kx + x)$ \\
+$= f(kx)f(x)$ \quad (using given property) \\
+$= [f(x)]^k f(x)$ \quad (using assumption) \\
+$= [f(x)]^{k+1}$
+\item By mathematical induction, the statement is true for all $n \in \mathbb{Z}^+$.
+\end{itemize}
+
+\textbf{Part (iii)}
+\begin{itemize}[leftmargin=*]
+\item Extend the rule to all integers: $f(0x) = f(0) = 1 = [f(x)]^0$, and $f(-nx) = \frac{1}{f(nx)} = \frac{1}{[f(x)]^n} = [f(x)]^{-n}$. Thus, $f(nx) = [f(x)]^n$ for all $n \in \mathbb{Z}$.
+\item Let $r = \frac{p}{q}$, where $p \in \mathbb{Z}$ and $q \in \mathbb{Z}^+$.
+\item Consider the expression $f(px) = f\left(q \cdot \frac{p}{q} x\right)$.
+\item Using the integer rule on both sides: $[f(x)]^p = \left[ f\left(\frac{p}{q}x\right) \right]^q$.
+\item Taking the $q$-th root (valid as $f(x)>0$): $[f(x)]^{\frac{p}{q}} = f\left(\frac{p}{q}x\right)$.
+\item Therefore, $f(rx) = [f(x)]^r$.
+\end{itemize}
+
+\textbf{Part (iv)}
+\begin{itemize}[leftmargin=*]
+\item Let $t \in \mathbb{R}$. There exists a sequence of rational numbers $\{r_n\}$ such that $\lim_{n \to \infty} r_n = t$.
+\item By continuity of $f$: $f(tx) = f\left(\lim_{n \to \infty} r_n x\right) = \lim_{n \to \infty} f(r_n x)$.
+\item Using part (iii): $\lim_{n \to \infty} f(r_n x) = \lim_{n \to \infty} [f(x)]^{r_n}$.
+\item By continuity of exponential functions: $\lim_{n \to \infty} [f(x)]^{r_n} = [f(x)]^{\lim_{n \to \infty} r_n} = [f(x)]^t$.
+\item Therefore, $f(tx) = [f(x)]^t$.
+\end{itemize}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Foundation of Exponentials:} This proof rigorously shows that any continuous function satisfying $f(a+b) = f(a)f(b)$ is an exponential function. If you let $x=1$ and define $f(1) = c$, then part (iv) proves that $f(t) = c^t$. 
+\item \textbf{The Power of Density:} Because rational numbers are "dense", if you know how a continuous function behaves on all fractions, you automatically lock in its behavior for all irrational numbers as well!
+\end{itemize}
+\end{takeaways}

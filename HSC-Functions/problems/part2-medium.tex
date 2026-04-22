@@ -99,3 +99,228 @@ To graph $y=f(|x|)$, apply the absolute value to the inputs: discard the left si
 \item Absolute value outside affects $y$-values (folding up), inside affects $x$-values (mirroring right to left).
 \end{itemize}
 \end{takeaways}
+
+
+\begin{problem}[Rational Decomposition and Asymptotic Behavior]
+Consider the rational function $f(x) = \frac{x^2 - x + 2}{x - 2}$.
+\begin{enumerate}[label=(\roman*)]
+\item Use polynomial division to show that:
+\[ f(x) = x + 1 + \frac{4}{x - 2} \]
+\item Deduce that $y = x + 1$ is an oblique asymptote for the graph of $y = f(x)$. Explain the behavior of the function as $x \to \infty$ in terms of this line.
+\item State the equation of the vertical asymptote and find the coordinates of the $y$-intercept.
+\item Sketch the graph of $y = f(x)$, showing all asymptotes and intercepts.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+When dividing, the quotient represents the linear part of the asymptote, and the remainder forms the fractional part that vanishes at infinity. Consider the limit as $x \to \pm\infty$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Division:} \\
+Dividing $x^2 - x + 2$ by $x - 2$: \\
+Quotient is $x+1$, remainder is $4$. Thus, $f(x) = x + 1 + \frac{4}{x-2}$.
+
+\textbf{(ii) Asymptote Logic:} \\
+As $x \to \pm\infty$, the term $\frac{4}{x-2} \to 0$. \\
+Therefore, $f(x) \approx x + 1$ for very large positive or negative values of $x$. The line $y = x + 1$ is the oblique asymptote.
+
+\textbf{(iii) Intercepts and Asymptotes:} \\
+\textbf{Vertical Asymptote:} $x = 2$. \\
+\textbf{$y$-intercept:} $f(0) = \frac{0-0+2}{0-2} = -1$, yielding point $(0, -1)$.
+
+\textbf{(iv) Sketching:} \\
+The graph is a hyperbola-like shape. To the right of $x=2$, the curve is above the asymptote ($x+1 + \text{positive}$). To the left, it is below.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    \draw[->] (-3,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-4) -- (0,10) node[above] {$y$};
+    
+    % Asymptotes
+    \draw[dashed, red] (2,-4) -- (2,10) node[below right] {$x=2$};
+    \draw[dashed, red, domain=-3:4] plot (\x, {\x+1});
+    \node[red, right] at (3.5, 4.5) {$y=x+1$};
+    
+    % Curve branches
+    \draw[thick, blue, samples=100, domain=-2:1.6] plot (\x, {\x + 1 + 4/(\x - 2)});
+    \draw[thick, blue, samples=100, domain=2.4:3] plot (\x, {\x + 1 + 4/(\x - 2)});
+    
+    % y-intercept
+    \filldraw (0,-1) circle (1.5pt) node[left] {$-1$};
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Decomposition is Key:} Writing a rational function as $\text{Polynomial} + \text{Proper Fraction}$ immediately reveals its "end-game" behavior.
+\item \textbf{Oblique vs. Horizontal:} An oblique asymptote occurs when the degree of the numerator is exactly \textbf{one higher} than the degree of the denominator. 
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Geometry of the Modulus Plateau]
+Analyze the function $f(x) = |x + 1| + |x - 1| - 2$.
+\begin{enumerate}[label=(\roman*)]
+\item Define $f(x)$ as a piecewise function for the intervals $x < -1$, $-1 \le x \le 1$, and $x > 1$.
+\item Sketch the graph of $y = f(x)$. Describe the behavior of the function on the interval $[-1, 1]$.
+\item Solve the inequality $|x + 1| + |x - 1| - 2 \le 4$ using your graph.
+\item Calculate the definite integral $\int_{-2}^{2} f(x) \, dx$.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    \draw[->] (-4,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-1) -- (0,5) node[above] {$y$};
+    \draw[thick, blue] (-3,4) -- (-1,0) -- (1,0) -- (3,4);
+    \node[below] at (-1,0) {$-1$};
+    \node[below] at (1,0) {$1$};
+    \draw[dashed, gray] (-3,4) -- (3,4) node[right] {$y=4$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+The region between the critical points often results in the variable $x$ canceling out, creating a horizontal line segment. For the integral, use the geometry of the area under the curve.
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Piecewise Definition:}\\
+\textbf{$x < -1$:} $f(x) = -(x+1) - (x-1) - 2 = -2x - 2$.\\
+\textbf{$-1 \le x \le 1$:} $f(x) = (x+1) - (x-1) - 2 = 0$.\\
+\textbf{$x > 1$:} $f(x) = (x+1) + (x-1) - 2 = 2x - 2$.
+
+\textbf{(ii) The Graph:}\\
+The graph is "V-shaped" but with a flat base. It sits flat on the $x$-axis between $x=-1$ and $x=1$.
+
+\textbf{(iii) Inequality:}\\
+To solve $f(x) \le 4$: On the right branch: $2x - 2 = 4 \implies x = 3$. On the left branch: $-2x - 2 = 4 \implies x = -3$. The solution is $-3 \le x \le 3$.
+
+\textbf{(iv) Definite Integral:}\\
+From $x=-1$ to $x=1$, the area is $0$. From $x=1$ to $x=2$, $f(2) = 2$. The area is a triangle: $\frac{1}{2} \times 1 \times 2 = 1$. Total integral is $2$ by symmetry.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Plateau Effect:} When you sum two modulus terms with the same coefficient, the "inner" region always results in a constant value.
+\item \textbf{Critical Point Analysis:} Most complex modulus problems are solved by simply "breaking" the number line at the points where the behavior changes.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Inequalities of Sine Reciprocals]
+Consider the equation: $\dfrac{1}{1 + \sin x} = 1 - \dfrac{x}{\pi}$
+\begin{enumerate}[label=(\roman*)]
+\item Verify that $x = 0$ and $x = \frac{\pi}{2}$ satisfy the equation.
+\item Sketch $y = 1 - \frac{x}{\pi}$ and $y = \frac{1}{1 + \sin x}$ for $0 \le x \le \pi$.
+\item Using the relative positions of the graphs, show that $\dfrac{1}{1 + \sin x} < \dfrac{\pi - x}{\pi}$ for $0 < x < \frac{\pi}{2}$.
+\item Hence, prove that $\left(\sin \frac{x}{2} + \cos \frac{x}{2}\right)^2 > \dfrac{\pi}{\pi - x}$ for $0 < x < \frac{\pi}{2}$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+The curve $y = \frac{1}{1+\sin x}$ starts at $(0, 1)$, dips to $( \frac{\pi}{2}, \frac{1}{2})$, and rises back to $(\pi, 1)$. For part (iv), take the reciprocal of both sides (flipping the inequality sign).
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Verification:}\\
+At $x = 0$: LHS $= \frac{1}{1+0} = 1$; RHS $= 1 - 0 = 1$. Correct.\\
+At $x = \frac{\pi}{2}$: LHS $= \frac{1}{1+1} = \frac{1}{2}$; RHS $= 1 - \frac{\pi/2}{\pi} = 1 - \frac{1}{2} = \frac{1}{2}$. Correct.
+
+\textbf{(ii) The Sketch:}\\
+The curve is a "valley" shape. The line is a simple downward slope. Between $x=0$ and $x=\pi/2$, the curve drops faster than the line.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    \draw[->] (-4,0) -- (7,0) node[right] {$x$};
+    \draw[->] (0,-2) -- (0,5) node[above] {$y$};
+    
+    % Pi points on x-axis
+    \foreach \n/\t in {-3.14159/-\pi, -1.5708/-\frac{\pi}{2}, 1.5708/\frac{\pi}{2}, 3.14159/\pi, 4.71239/\frac{3\pi}{2}, 6.28318/2\pi} {
+        \draw (\n,0.1) -- (\n,-0.1) node[below] {$\t$};
+    }
+    
+    % The line y = 1 - x/pi
+    \draw[thick, red, domain=-3.14159:6.28318] plot (\x, {1 - \x/pi});
+    \node[red, above right] at (-3, 2) {$y = 1 - \frac{x}{\pi}$};
+    
+    % Asymptotes
+    \draw[dashed, gray] (-1.5708, -2) -- (-1.5708, 5);
+    \draw[dashed, gray] (4.71239, -2) -- (4.71239, 5);
+    
+    % The curve y = 1 / (1 + sin(x))
+    \draw[thick, blue, samples=100, domain=-3.14159:-1.75] plot (\x, {1/(1 + sin(\x r))});
+    \draw[thick, blue, samples=100, domain=-1.35:4.55] plot (\x, {1/(1 + sin(\x r))});
+    \draw[thick, blue, samples=100, domain=4.95:6.28318] plot (\x, {1/(1 + sin(\x r))});
+    
+    \node[blue, right] at (1.5, 2.5) {$y = \frac{1}{1+\sin x}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{(iii) Inequality:}\\
+Since the curve lies below the line on that interval:
+\[ \frac{1}{1 + \sin x} < \frac{\pi - x}{\pi} \]
+
+\textbf{(iv) Derivation:}\\
+Take the reciprocal of both sides: $1 + \sin x > \frac{\pi}{\pi - x}$.\\
+Use the identity $1+\sin x = (\sin \frac{x}{2} + \cos \frac{x}{2})^2$. Substituting this yields the desired result.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Linear Approximation:} Problems like this show how trig functions can be bounded by straight lines.
+\item \textbf{The Power of $1+\sin x$:} This denominator is a favorite in Extension 2 because it can be rewritten as a perfect square: $(\sin \frac{x}{2} + \cos \frac{x}{2})^2$.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Rotated Modulus Region]
+Sketch and define the region $R$ in the Cartesian plane specified by the inequality $x + 1 > |y - 1|$.
+\begin{enumerate}[label=(\roman*)]
+\item Describe the boundary of the region and find the coordinates of its "vertex."
+\item Determine whether the origin $(0, 0)$ is an interior point of the region $R$.
+\item Write the definition of the region $R$ using a system of two piecewise linear inequalities.
+\item Sketch the region $R$, clearly showing asymptotes, intercepts, and vertex.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \clip (-2,-3.2) rectangle (4,5.2);
+    % Shading
+    \fill[blue!20] (-1,1) -- (5,7) -- (5,-5) -- cycle;
+    % Axes
+    \draw[->] (-2,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-3) -- (0,5) node[above] {$y$};
+    \node[below left] at (0,0) {$0$};
+    % Dashed boundaries
+    \draw[thick, dashed, gray, domain=-1:3.5] plot (\x, {\x+2});
+    \draw[thick, dashed, gray, domain=-1:3.5] plot (\x, {-\x});
+    % Vertex
+    \filldraw (-1,1) circle (1.5pt) node[left] {$(-1,1)$};
+    % Label
+    \node[blue] at (3.5, 1) {$R$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+The shape is not a parabola but a "V" shape rotated $90^\circ$ clockwise. Test $(0,0)$ to see if it makes the inequality true.
+\end{hint}
+
+\begin{solution}
+\textbf{(i) The Boundary:}\\
+The boundary is $x = |y - 1| - 1$. This is a V-shaped graph shifted left 1 unit and up 1 unit. Vertex: $(-1, 1)$.
+
+\textbf{(ii) Test Point:}\\
+Substitute $(0, 0)$: $0 + 1 > |0 - 1| \implies 1 > 1$. This is false. Therefore, the origin $(0, 0)$ is not in the region $R$.
+
+\textbf{(iii) Piecewise Inequalities:}\\
+For $y \ge 1$: $x > (y - 1) - 1 \implies x > y - 2$.\\
+For $y < 1$: $x > -(y - 1) - 1 \implies x > -y$.\\
+Combined: $R = \{x > y - 2\} \cap \{x > -y\} \cap \{y \neq 1\}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Rotated Perspective:} The absolute value on the $y$-variable means the "sharp point" is oriented horizontally. 
+\item \textbf{Region Logic:} Visually, $y > |x|$ is "above the V," whereas $x > |y|$ is "to the right of the V."
+\end{itemize}
+\end{takeaways}

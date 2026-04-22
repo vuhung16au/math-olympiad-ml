@@ -129,3 +129,135 @@ Substitute the entire expression of one function into the input variable of the 
 \item Keep parentheses around substituted expressions to prevent expansion errors.
 \end{itemize}
 \end{takeaways}
+
+
+\begin{problem}[Parity of Composite Sine Functions]
+Consider the function $f(x) = \sin(x^5 + x)$. Which of the following statements regarding the parity of $f(x)$ is correct?
+
+\textbf{A)} $f(x)$ is an even function because the graph of a sine wave is symmetric. \\
+\textbf{B)} $f(x)$ is an even function because $(-x)^5 + (-x)$ becomes positive when squared. \\
+\textbf{C)} $f(x)$ is an odd function because both the inner function and the sine function are odd. \\
+\textbf{D)} $f(x)$ is neither even nor odd.
+\end{problem}
+
+\begin{hint}
+Inner Parity: Check $u(x) = x^5 + x$ again. Is $u(-x)$ equal to $u(x)$ or $-u(x)$? Recall the identity for sine. If you have an odd function inside another odd function, what happens?
+\end{hint}
+
+\begin{solution}
+\textbf{The correct answer is C.}
+
+\textbf{1. Test the inner function:} \\
+Let $u(x) = x^5 + x$. \\
+$u(-x) = (-x)^5 + (-x) = -(x^5 + x) = -u(x)$. \\
+The inner function is \textbf{odd}.
+
+\textbf{2. Apply the outer function:} \\
+$f(-x) = \sin(u(-x)) = \sin(-u(x))$. \\
+Using the property that sine is an odd function: \\
+$\sin(-u(x)) = -\sin(u(x)) = -f(x)$.
+
+\textbf{3. Conclusion:} \\
+Since $f(-x) = -f(x)$, the function is \textbf{odd}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Odd + Odd = Odd:} When an odd function is composed with another odd function, the result remains odd.
+\item \textbf{Contrast with Cosine:} This is why $\cos(x^5+x)$ was even but $\sin(x^5+x)$ is odd. Cosine "swallows" the negative sign; Sine "spits it out."
+\item \textbf{Visual Check:} Odd functions have \textbf{rotational symmetry} of 180$^\circ$ about the origin.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Structural Property of Functional Associativity]
+Prove that function composition is always associative. That is, for any three functions $f, g,$ and $h$ where the compositions are well-defined, show that:
+\[ ((f \circ g) \circ h)(x) = (f \circ (g \circ h))(x) \]
+for all $x$ in the common domain.
+\end{problem}
+
+\begin{hint}
+Treat $(f \circ g)$ as a single composite function, say $u(x)$, and expand the LHS. Do the same for $(g \circ h)$ on the RHS. Your objective is to show that both sides collapse into $f(g(h(x)))$.
+\end{hint}
+
+\begin{solution}
+\textbf{1. Analyze the Left-Hand Side (LHS):} \\
+By the definition of composition, we treat the grouped term $(f \circ g)$ as the outer function:
+\[ ((f \circ g) \circ h)(x) = (f \circ g)(h(x)) \]
+Applying the definition again to the term $(f \circ g)$ with the input $h(x)$:
+\[ (f \circ g)(h(x)) = f(g(h(x))) \]
+
+\textbf{2. Analyze the Right-Hand Side (RHS):} \\
+By the definition of composition, we treat the grouped term $(g \circ h)$ as the inner function:
+\[ (f \circ (g \circ h))(x) = f((g \circ h)(x)) \]
+Applying the definition again to the term $(g \circ h)(x)$ inside the brackets:
+\[ f((g \circ h)(x)) = f(g(h(x))) \]
+
+\textbf{Conclusion:} \\
+Since both expressions evaluate to the same sequential mapping $f(g(h(x)))$, the identity holds:
+\[ ((f \circ g) \circ h)(x) = (f \circ (g \circ h))(x) \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{The Sequential Nature of Functions:} This proof demonstrates that function composition is fundamentally about the \textbf{order of application}. 
+\item \textbf{Mapping Chains:} You can visualize this as a chain of sets. The associativity simply confirms that the "path" through these sets remains unchanged regardless of how we algebraically "chunk" the steps.
+\item \textbf{Abstract Rigor:} We did not need to know what $f, g,$ or $h$ actually \emph{do}. The proof relies solely on the \textbf{structure} of the operation.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Functional Dilation and Stretching]
+Consider the base function $f(x) = x(x-1)$. The following two functions are defined as transformations of $f(x)$:
+\[ g(x) = 2f(x) \quad \text{and} \quad h(x) = f\left(\frac{x}{2}\right) \]
+
+\begin{enumerate}[label=(\roman*)]
+    \item Sketch $y = f(x)$ on a Cartesian plane, clearly labeling the $x$-intercepts and the stationary point (vertex).
+    \item On the same diagram, sketch $y = g(x)$. Geometrically describe the dilation from $f(x)$ to $g(x)$. State any points that remain invariant under this transformation.
+    \item On the same diagram, sketch $y = h(x)$. Define $h(x)$ algebraically and calculate the coordinates of its stationary point.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Axes
+    \draw[->] (-1.5,0) -- (4,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,5) node[above] {$y$};
+    
+    % y = f(x) (Black, thick)
+    \draw[thick, black, samples=100, domain=-1.2:2.2] plot (\x, {\x*(\x-1)});
+    \node[black] at (2.4,2.5) {$f(x)$};
+    \filldraw (0.5,-0.25) circle (1pt) node[below] {$(\frac{1}{2}, -\frac{1}{4})$};
+
+    % y = g(x) = 2f(x) (Blue)
+    \draw[thick, blue, samples=100, domain=-1:2] plot (\x, {2*\x*(\x-1)});
+    \node[blue] at (1.8,4.5) {$g(x)$};
+
+    % y = h(x) = f(x/2) (Red)
+    \draw[thick, red, samples=100, domain=-1.5:3.5] plot (\x, {(\x/2)*(\x/2 - 1)});
+    \node[red] at (3.5, 1.2) {$h(x)$};
+    \filldraw (1,-0.25) circle (1.5pt); % New vertex
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+For $g(x)$, every $y$-value is doubled while the $x$-values remain constant. For $h(x)$, the input variable is "halved", so to achieve the same output, $x$ must be doubled (horizontal stretch).
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Base Function:} \\
+$f(x) = x^2 - x$. Intercepts at $(0, 0)$ and $(1, 0)$. Vertex at $(0.5, -0.25)$.
+
+\textbf{(ii) Vertical Dilation:} \\
+$g(x) = 2x^2 - 2x$. This is a \textbf{vertical dilation} from the $x$-axis by a factor of 2. 
+Invariant points are the intercepts $(0, 0)$ and $(1, 0)$ because their $y$-values are zero.
+
+\textbf{(iii) Horizontal Dilation:} \\
+$h(x) = \frac{x^2}{4} - \frac{x}{2}$. This is a \textbf{horizontal dilation} from the $y$-axis by a factor of $2$. 
+The $y$-value of the vertex remains $-0.25$, but the $x$-coordinate is dilated from $0.5$ to $1$. New vertex at $(1, -0.25)$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Direction of Change:} Changes outside the function (like $2f(x)$) affect the $y$-axis (vertical). Changes inside the function (like $f(x/2)$) affect the $x$-axis (horizontal).
+\item \textbf{The Scale Factor Paradox:} Note that in $f(x/k)$, the horizontal stretch factor is actually $k$. Students often mistakenly think $f(x/2)$ is a compression, but it is actually a stretch.
+\end{itemize}
+\end{takeaways}
