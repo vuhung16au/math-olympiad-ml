@@ -516,4 +516,121 @@ LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.
 GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
 Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Combinatorics}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Combinatorics}
 
+\newpage
+\appendix
+\section{Appendices}
+
+\subsection{Concepts: Injective, Surjective, and Bijective}
+
+Understanding these concepts is incredibly important for combinatorics, particularly when answering ``how many'' or proving that two sets have the same number of elements without actually counting them one by one. In combinatorics, formalizing a counting process as a function provides powerful insights:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Injective (One-to-one) tracking:} If you can construct an injective mapping from set $X$ to set $Y$, you instantly prove that $|X| \le |Y|$ (the size of $X$ is less than or equal to $Y$). If you try to map more elements into fewer targets, an injection is impossible---this is the formal basis of the \textbf{Pigeonhole Principle}. When counting arrangements, injections describe ways to assign objects to distinct slots without repetition (like ${}^nP_r$).
+  \item \textbf{Surjective (Onto) coverage:} If you can construct a surjective mapping from set $X$ to set $Y$, you prove that $|X| \ge |Y|$. In counting, surjections are used when we want to count the number of ways to distribute objects into boxes where \emph{no box is left empty}. 
+  \item \textbf{Bijective (Perfect pairing) counting:} If you can construct a bijection between set $X$ and set $Y$, you prove that $|X| = |Y|$. This is called \textbf{Bijective Proof} and it is one of the most elegant techniques in combinatorics. If set $X$ is very hard to count, but you can link it perfectly to set $Y$ which is easy to count, then you have solved the problem! (For instance, stars and bars is a bijection between dividing items and placing dividers).
+\end{itemize}
+
+Here is the complete breakdown of how these mappings work mathematically.
+
+\begin{remark}[Syllabus Note]
+These concepts are outside the HSC Mathematics Extension 1 and 2 syllabus, but they are very good to know for higher education. In combinatorics, they help formalize counting by pairing elements perfectly between sets. In functions, bijections define exactly when an inverse function exists.
+\end{remark}
+
+\subsubsection*{Injective / One-to-one}
+A function is injective if every output is mapped by \emph{at most} one input. In other words, no two different inputs will ever give you the same output. 
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+  % Domain
+  \draw[thick, fill=blue!10] (-2,0) ellipse (1 and 2);
+  \node at (-2,2.5) {Domain $X$};
+  \node[circle,fill,inner sep=1.5pt, label=left:$a$] (x1) at (-2,1) {};
+  \node[circle,fill,inner sep=1.5pt, label=left:$b$] (x2) at (-2,0) {};
+  \node[circle,fill,inner sep=1.5pt, label=left:$c$] (x3) at (-2,-1) {};
+  
+  % Codomain
+  \draw[thick, fill=red!10] (2,0) ellipse (1 and 2.5);
+  \node at (2,3) {Codomain $Y$};
+  \node[circle,fill,inner sep=1.5pt, label=right:$1$] (y1) at (2,1.5) {};
+  \node[circle,fill,inner sep=1.5pt, label=right:$2$] (y2) at (2,0.5) {};
+  \node[circle,fill,inner sep=1.5pt, label=right:$3$] (y3) at (2,-0.5) {};
+  \node[circle,fill,inner sep=1.5pt, label=right:$4$] (y4) at (2,-1.5) {};
+  
+  % Mappings
+  \draw[->, thick, shorten >=2pt] (x1) -- (y1);
+  \draw[->, thick, shorten >=2pt] (x2) -- (y3);
+  \draw[->, thick, shorten >=2pt] (x3) -- (y4);
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Formal Definition:} If $f(a) = f(b)$, then it must be true that $a = b$.
+  \item \textbf{Visualizing it:} Imagine a group of people (domain) and a group of chairs (codomain). An injective mapping means no two people are sitting in the same chair. There might be empty chairs left over, but no chair is double-occupied.
+  \item \textbf{Math Example:} $f(x) = 2x$ is injective. Every unique $x$ produces a unique $y$. However, $f(x) = x^2$ is \emph{not} injective because $f(2) = 4$ and $f(-2) = 4$ (two different inputs hit the same output).
+\end{itemize}
+
+\subsubsection*{Surjective / Onto}
+
+A function is surjective if every possible output in the target set (codomain) is hit by \emph{at least} one input. There are no ``leftover'' or unreachable outputs.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+  % Domain
+  \draw[thick, fill=blue!10] (-2,0) ellipse (1 and 2.5);
+  \node at (-2,3) {Domain $X$};
+  \node[circle,fill,inner sep=1.5pt, label=left:$a$] (x1) at (-2,1.5) {};
+  \node[circle,fill,inner sep=1.5pt, label=left:$b$] (x2) at (-2,0.5) {};
+  \node[circle,fill,inner sep=1.5pt, label=left:$c$] (x3) at (-2,-0.5) {};
+  \node[circle,fill,inner sep=1.5pt, label=left:$d$] (x4) at (-2,-1.5) {};
+  
+  % Codomain
+  \draw[thick, fill=red!10] (2,0) ellipse (1 and 2);
+  \node at (2,2.5) {Codomain $Y$};
+  \node[circle,fill,inner sep=1.5pt, label=right:$1$] (y1) at (2,1) {};
+  \node[circle,fill,inner sep=1.5pt, label=right:$2$] (y2) at (2,0) {};
+  \node[circle,fill,inner sep=1.5pt, label=right:$3$] (y3) at (2,-1) {};
+  
+  % Mappings
+  \draw[->, thick, shorten >=2pt] (x1) -- (y1);
+  \draw[->, thick, shorten >=2pt] (x2) -- (y1);
+  \draw[->, thick, shorten >=2pt] (x3) -- (y2);
+  \draw[->, thick, shorten >=2pt] (x4) -- (y3);
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Visualizing it:} Every chair in the room has at least one person sitting in it. (Some chairs might have two people squeezing into them, but no chair is empty).
+\end{itemize}
+
+\subsubsection*{Bijective / One-to-one correspondence}
+A function is bijective if it is \textbf{both} injective and surjective. Every input maps to a unique output, and every possible output is mapped to by an input. 
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+  % Domain
+  \draw[thick, fill=blue!10] (-2,0) ellipse (1 and 2);
+  \node at (-2,2.5) {Domain $X$};
+  \node[circle,fill,inner sep=1.5pt, label=left:$a$] (x1) at (-2,1) {};
+  \node[circle,fill,inner sep=1.5pt, label=left:$b$] (x2) at (-2,0) {};
+  \node[circle,fill,inner sep=1.5pt, label=left:$c$] (x3) at (-2,-1) {};
+  
+  % Codomain
+  \draw[thick, fill=red!10] (2,0) ellipse (1 and 2);
+  \node at (2,2.5) {Codomain $Y$};
+  \node[circle,fill,inner sep=1.5pt, label=right:$1$] (y1) at (2,1) {};
+  \node[circle,fill,inner sep=1.5pt, label=right:$2$] (y2) at (2,0) {};
+  \node[circle,fill,inner sep=1.5pt, label=right:$3$] (y3) at (2,-1) {};
+  
+  % Mappings
+  \draw[->, thick, shorten >=2pt] (x1) -- (y2);
+  \draw[->, thick, shorten >=2pt] (x2) -- (y1);
+  \draw[->, thick, shorten >=2pt] (x3) -- (y3);
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Visualizing it:} It is a perfect pairing. There is exactly one person for every chair, and exactly one chair for every person. No empty chairs, no double-occupied chairs. 
+  \item \textbf{Why it matters:} Bijective functions are incredibly important in mathematics because they are the \textbf{only} functions that have a perfect \textbf{inverse function} ($f^{-1}$). Because the mapping is a perfect two-way street, you can flawlessly travel backward from the output to the exact input. 
+  \item \textbf{Math Example:} $f(x) = 2x + 1$ (where $x$ is any real number) is a bijection. You can easily find its inverse: $f^{-1}(x) = \frac{x - 1}{2}$.
+\end{itemize}
+
 \end{document}
