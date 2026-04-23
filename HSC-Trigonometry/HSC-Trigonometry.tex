@@ -110,7 +110,7 @@ This resource is written for students who want focused, exam-oriented practice w
 Most problems in this booklet can be solved using standard HSC Mathematics Extension~1 and Extension~2 knowledge. The key background material is:
 
 \begin{itemize}[leftmargin=*]
-  \item \textbf{Right-angled trigonometry:} definitions of $\sin\theta$, $\cos\theta$, $\tan\theta$ as ratios of opposite, adjacent, and hypotenuse; exact values for $30^\circ$, $45^\circ$, $60^\circ$.
+  \item \textbf{Right-angled trigonometry:} definitions of $\sin\theta$, $\cos\theta$, $\tan\theta$ as ratios of opposite, adjacent, and hypotenuse; exact values for $\pi/6$, $\pi/4$, $\pi/3$.
   \item \textbf{ASTC rule (quadrant signs):} All, Sine, Tangent, Cosine are positive in quadrants~I, II, III, IV respectively.
   \item \textbf{Trigonometric functions of a general angle:} converting angles to the related acute angle and applying the correct sign.
   \item \textbf{Fundamental identity:} $\sin^2\theta + \cos^2\theta = 1$ and its derived forms $1 + \tan^2\theta = \sec^2\theta$ and $1 + \cot^2\theta = \csc^2\theta$.
@@ -124,17 +124,100 @@ Most problems in this booklet can be solved using standard HSC Mathematics Exten
   \item \textbf{Products-to-sums and sums-to-products:} converting between products and sums of trigonometric functions.
 \end{itemize}
 
+\subsection{Special Angles}
+
+The exact values of the trigonometric functions for the special angles
+$0$, $\pi/6$, $\pi/4$, $\pi/3$, and $\pi/2$ come from two standard
+right-angled triangles and the unit circle.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.35, line cap=round, line join=round]
+  \coordinate (B) at (0,0);
+  \coordinate (C) at (-2.1,0);
+  \coordinate (A) at (0,2.1);
+
+  \draw[thick] (C)--(B)--(A)--cycle;
+  \draw[dashed, gray] (C)--(-2.1,2.1)--(A);
+  \draw ($(B)+(-0.22,0)$)--++(0,0.22)--++(0.22,0);
+  \draw (C) ++(0.45,0) arc (0:45:0.45);
+  \draw (A) ++(0,-0.45) arc (-90:-135:0.45);
+
+  \node[left] at (C) {$C$};
+  \node[right] at (B) {$B$};
+  \node[above right] at (A) {$A$};
+  \node[below] at ($(C)!0.5!(B)$) {$1$};
+  \node[right] at ($(B)!0.5!(A)$) {$1$};
+  \node[above left] at ($(C)!0.5!(A)$) {$\sqrt2$};
+  \node at ($(C)+(0.55,0.18)$) {$\pi/4$};
+  \node at ($(A)+(-0.28,-0.55)$) {$\pi/4$};
+
+  \begin{scope}[xshift=5.1cm]
+    \coordinate (Q) at (0,0);
+    \coordinate (R) at (1.45,0);
+    \coordinate (P) at (0,2.51);
+    \coordinate (S) at (-1.45,0);
+
+    \draw[thick] (P)--(Q)--(R)--cycle;
+    \draw[dashed, gray] (P)--(S)--(Q);
+    \draw ($(Q)+(0,0.22)$)--++(0.22,0)--++(0,-0.22);
+    \draw (P) ++(0,-0.5) arc (-90:-60:0.5);
+    \draw (R) ++(-0.5,0) arc (180:120:0.5);
+
+    \node[above] at (P) {$P$};
+    \node[below] at (Q) {$Q$};
+    \node[below right] at (R) {$R$};
+    \node[below] at ($(Q)!0.5!(R)$) {$1$};
+    \node[left] at ($(P)!0.5!(Q)$) {$\sqrt3$};
+    \node[right] at ($(P)!0.5!(R)$) {$2$};
+    \node at ($(P)+(0.42,-0.42)$) {$\pi/6$};
+    \node at ($(R)+(-0.5,0.35)$) {$\pi/3$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[leftmargin=*]
+  \item The $\pi/4$ triangle is half of a square with side length $1$, so its
+        hypotenuse is $\sqrt2$.
+  \item The $\pi/6$ and $\pi/3$ triangle is half of an equilateral triangle
+        with side length $2$, so its altitude is $\sqrt3$.
+  \item The angles $0$ and $\pi/2$ are read directly from the unit circle.
+\end{itemize}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.7}
+\setlength{\tabcolsep}{10pt}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$\theta$ & $\sin\theta$ & $\cos\theta$ & $\tan\theta$
+& $\csc\theta$ & $\sec\theta$ & $\cot\theta$ \\
+\hline
+$0$ & $0$ & $1$ & $0$ & undefined & $1$ & undefined \\
+\hline
+$\dfrac{\pi}{6}$ & $\dfrac12$ & $\dfrac{\sqrt3}{2}$ & $\dfrac1{\sqrt3}$
+& $2$ & $\dfrac2{\sqrt3}$ & $\sqrt3$ \\
+\hline
+$\dfrac{\pi}{4}$ & $\dfrac1{\sqrt2}$ & $\dfrac1{\sqrt2}$ & $1$
+& $\sqrt2$ & $\sqrt2$ & $1$ \\
+\hline
+$\dfrac{\pi}{3}$ & $\dfrac{\sqrt3}{2}$ & $\dfrac12$ & $\sqrt3$
+& $\dfrac2{\sqrt3}$ & $2$ & $\dfrac1{\sqrt3}$ \\
+\hline
+$\dfrac{\pi}{2}$ & $1$ & $0$ & undefined & $1$ & undefined & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
 \subsection{Core Formulas and Ideas}
 
 \textbf{Exact Values.}
 \[
 \begin{array}{c|ccc}
 \theta & \sin\theta & \cos\theta & \tan\theta \\[2pt]\hline\\[-8pt]
-0^\circ & 0 & 1 & 0 \\[4pt]
-30^\circ & \dfrac{1}{2} & \dfrac{\sqrt{3}}{2} & \dfrac{1}{\sqrt{3}} \\[10pt]
-45^\circ & \dfrac{1}{\sqrt{2}} & \dfrac{1}{\sqrt{2}} & 1 \\[10pt]
-60^\circ & \dfrac{\sqrt{3}}{2} & \dfrac{1}{2} & \sqrt{3} \\[10pt]
-90^\circ & 1 & 0 & \text{undefined}
+0 & 0 & 1 & 0 \\[4pt]
+\dfrac{\pi}{6} & \dfrac{1}{2} & \dfrac{\sqrt{3}}{2} & \dfrac{1}{\sqrt{3}} \\[10pt]
+\dfrac{\pi}{4} & \dfrac{1}{\sqrt{2}} & \dfrac{1}{\sqrt{2}} & 1 \\[10pt]
+\dfrac{\pi}{3} & \dfrac{\sqrt{3}}{2} & \dfrac{1}{2} & \sqrt{3} \\[10pt]
+\dfrac{\pi}{2} & 1 & 0 & \text{undefined}
 \end{array}
 \]
 
@@ -400,5 +483,119 @@ $\cot\theta$ has the same sign as $\tan\theta$.}
     \draw[->, gray!70, thin] (0,0) -- (\angle:1.25);
 \end{tikzpicture}
 \end{minipage}
+
+\subsection{Triple-Angle Formulae}
+
+The double-angle formulae in the Introduction are often enough for routine
+questions. In harder Extension~1 and Extension~2 problems, it is also useful to
+recognise the triple-angle formulae:
+\[
+\sin(3\theta)=3\sin\theta-4\sin^3\theta,
+\]
+\[
+\cos(3\theta)=4\cos^3\theta-3\cos\theta.
+\]
+
+These follow by writing $3\theta=2\theta+\theta$ and applying the compound-angle
+formulae together with the double-angle formulae. For example,
+\[
+\begin{aligned}
+\cos(3\theta)
+&=\cos(2\theta+\theta)\\
+&=\cos2\theta\cos\theta-\sin2\theta\sin\theta\\
+&=(2\cos^2\theta-1)\cos\theta-(2\sin\theta\cos\theta)\sin\theta\\
+&=4\cos^3\theta-3\cos\theta.
+\end{aligned}
+\]
+
+Similarly,
+\[
+\begin{aligned}
+\sin(3\theta)
+&=\sin(2\theta+\theta)\\
+&=\sin2\theta\cos\theta+\cos2\theta\sin\theta\\
+&=3\sin\theta-4\sin^3\theta.
+\end{aligned}
+\]
+
+\begin{remark}[Connection with Chebyshev polynomials]
+The identity
+\[
+\cos(3\theta)=4\cos^3\theta-3\cos\theta
+\]
+is the third Chebyshev polynomial in disguise:
+\[
+T_3(x)=4x^3-3x,
+\qquad
+T_3(\cos\theta)=\cos(3\theta).
+\]
+More generally, Chebyshev polynomials satisfy
+$T_n(\cos\theta)=\cos(n\theta)$. This connection is useful when an algebraic
+polynomial problem can be transformed into a trigonometric equation, as in
+iterated-polynomial and root-counting questions.
+\end{remark}
+
+For HSC problem solving, the triple-angle formulae are especially helpful when:
+\begin{itemize}[leftmargin=*]
+  \item a cubic expression such as $4x^3-3x$ appears and suggests the
+        substitution $x=\cos\theta$;
+  \item an equation involving $\sin3\theta$ or $\cos3\theta$ needs to be reduced
+        to powers of $\sin\theta$ or $\cos\theta$;
+  \item a problem asks for exact values or root counts that are difficult to see
+        from algebra alone.
+\end{itemize}
+
+\subsection{Derivatives of Inverse Trigonometric Functions}
+
+The standard derivative formulae for the inverse trigonometric functions are:
+\[
+\frac{d}{dx}\bigl(\arcsin x\bigr)=\frac{1}{\sqrt{1-x^2}},
+\qquad -1<x<1,
+\]
+\[
+\frac{d}{dx}\bigl(\arccos x\bigr)=-\frac{1}{\sqrt{1-x^2}},
+\qquad -1<x<1,
+\]
+\[
+\frac{d}{dx}\bigl(\arctan x\bigr)=\frac{1}{1+x^2},
+\qquad x\in\mathbb{R}.
+\]
+
+These are useful in Extension~2 calculus questions involving inverse
+trigonometric functions, especially when differentiating composite functions.
+For example,
+\[
+\frac{d}{dx}\arcsin(2x-1)
+=
+\frac{2}{\sqrt{1-(2x-1)^2}},
+\]
+where the expression is defined.
+
+\subsection{Taylor Series for Sine and Cosine}
+
+The following Maclaurin series are out of the HSC syllabus, but they are very
+useful in university mathematics, physics, engineering, and numerical methods:
+\[
+\sin x
+=
+\sum_{n=0}^{\infty}\frac{(-1)^n x^{2n+1}}{(2n+1)!}
+=
+x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots,
+\]
+\[
+\cos x
+=
+\sum_{n=0}^{\infty}\frac{(-1)^n x^{2n}}{(2n)!}
+=
+1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\cdots.
+\]
+
+These expansions show how trigonometric functions can be approximated by
+polynomials near $x=0$. For instance, when $x$ is small,
+\[
+\sin x\approx x,
+\qquad
+\cos x\approx 1-\frac{x^2}{2}.
+\]
 
 \end{document}

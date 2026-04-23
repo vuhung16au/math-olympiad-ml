@@ -340,3 +340,70 @@ so concavity changes at $x=0$. Therefore $(0,0)$ is a point of inflection for ev
 \item This curve is a special case of Newton's serpentine family, a nice example of how classical curve theory connects with modern function study.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[Inverse Rates for a Quintic Function]
+Consider the function
+\[
+y=f(x)=x^5-1.
+\]
+\begin{enumerate}[label=(\roman*)]
+\item Write down $\dfrac{dy}{dx}$ for the function $f(x)$.
+\item Make $x$ the subject (express $x$ in terms of $y$) and hence find $\dfrac{dx}{dy}$.
+\item Hence show that
+\[
+\frac{dy}{dx}\cdot \frac{dx}{dy}=1
+\]
+where both derivatives are defined.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+Differentiate $y=x^5-1$ first. Then rearrange the equation to write $x$ as a function of $y$, and differentiate this inverse rule with respect to $y$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since
+\[
+y=x^5-1,
+\]
+we have
+\[
+\frac{dy}{dx}=5x^4.
+\]
+
+\textbf{(ii)} Make $x$ the subject:
+\[
+y+1=x^5
+\quad\Longrightarrow\quad
+x=(y+1)^{1/5}.
+\]
+Therefore
+\[
+\frac{dx}{dy}=\frac15(y+1)^{-4/5}
+=\frac{1}{5(y+1)^{4/5}}.
+\]
+
+\textbf{(iii)} Since $y+1=x^5$, we have
+\[
+(y+1)^{4/5}=(x^5)^{4/5}=x^4.
+\]
+Thus, for $x\ne 0$,
+\[
+\frac{dx}{dy}=\frac{1}{5x^4}.
+\]
+Hence
+\[
+\frac{dy}{dx}\cdot \frac{dx}{dy}
+=5x^4\cdot \frac{1}{5x^4}
+=\boxed{1}.
+\]
+At $x=0$, the inverse derivative is not defined, so the product statement is only made where both derivatives exist.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item For inverse functions, the gradients are reciprocal where both gradients exist and the original gradient is non-zero.
+\item The identity $\dfrac{dy}{dx}\cdot\dfrac{dx}{dy}=1$ is powerful, but it must be used with attention to points where a derivative is zero or undefined.
+\item This is mainly an Extension~2 calculus idea, but it connects naturally with inverse functions from Extension~1.
+\end{itemize}
+\end{takeaways}

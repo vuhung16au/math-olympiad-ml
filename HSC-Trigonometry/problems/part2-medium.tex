@@ -4,4 +4,494 @@
 %         3D trigonometry, multi-step equation solving
 % ============================================================
 
-% Problems will be added here.
+% ------------------------------------------------------------------
+\begin{problem}[Telescoping Cosines and Periodic Constants]
+\begin{enumerate}[(i)]
+  \item Use $2\sin A\cos B=\sin(A+B)+\sin(A-B)$ to show that
+  \[
+  2\sin x(\cos2x+\cos4x+\cos6x)=\sin7x-\sin x.
+  \]
+  \item By substituting $x=\pi/7$, deduce that
+  \[
+  \cos\frac{2\pi}{7}+\cos\frac{4\pi}{7}+\cos\frac{6\pi}{7}
+  =-\frac12.
+  \]
+  \item Use supplementary angles to show that
+  \[
+  \cos\frac{6\pi}{7}=-\cos\frac{\pi}{7},\quad
+  \cos\frac{4\pi}{7}=-\cos\frac{3\pi}{7},\quad
+  \cos\frac{2\pi}{7}=-\cos\frac{5\pi}{7}.
+  \]
+  \item Hence evaluate
+  \[
+  \cos\frac{\pi}{7}+\cos\frac{3\pi}{7}+\cos\frac{5\pi}{7}.
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Distribute $2\sin x$ and watch terms such as $\sin3x$ and $\sin5x$ cancel.
+Then use $\sin\pi=0$ and $\sin(\pi/7)\ne0$.
+\end{hintbox}
+
+\begin{solution}
+\[
+\begin{aligned}
+2\sin x(\cos2x+\cos4x+\cos6x)
+&=(\sin3x-\sin x)+(\sin5x-\sin3x)\\
+&\quad+(\sin7x-\sin5x)\\
+&=\sin7x-\sin x.
+\end{aligned}
+\]
+Putting $x=\pi/7$ gives
+\[
+2\sin\frac{\pi}{7}
+\left(
+\cos\frac{2\pi}{7}+\cos\frac{4\pi}{7}+\cos\frac{6\pi}{7}
+\right)
+=-\sin\frac{\pi}{7}.
+\]
+Since $\sin(\pi/7)\ne0$,
+\[
+\cos\frac{2\pi}{7}+\cos\frac{4\pi}{7}+\cos\frac{6\pi}{7}
+=-\frac12.
+\]
+Using $\cos(\pi-\theta)=-\cos\theta$,
+\[
+\cos\frac{6\pi}{7}=-\cos\frac{\pi}{7},
+\quad
+\cos\frac{4\pi}{7}=-\cos\frac{3\pi}{7},
+\quad
+\cos\frac{2\pi}{7}=-\cos\frac{5\pi}{7}.
+\]
+Therefore
+\[
+-\left(
+\cos\frac{\pi}{7}+\cos\frac{3\pi}{7}+\cos\frac{5\pi}{7}
+\right)
+=-\frac12,
+\]
+so the required sum is $\frac12$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Multiplying by a carefully chosen sine can turn a cosine sum into a
+        telescoping expression.
+  \item Regular polygon angle sums often hide cancellation.
+  \item Supplementary angles convert even seventh-angle cosines into odd
+        seventh-angle cosines.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[The Summation of Even Sine Multiples]
+Let
+\[
+S_n=\sin2x+\sin4x+\sin6x+\cdots+\sin(2nx).
+\]
+\begin{enumerate}[(i)]
+  \item Use $2\sin A\sin B=\cos(A-B)-\cos(A+B)$ to show that
+  \[
+  2\sin(2kx)\sin x=\cos(2k-1)x-\cos(2k+1)x.
+  \]
+  \item Hence prove that
+  \[
+  \sin2x+\sin4x+\cdots+\sin(2nx)
+  =
+  \frac{\sin(nx)\sin((n+1)x)}{\sin x},
+  \]
+  for $\sin x\ne0$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Write out the first few terms of $2\sin x\,S_n$. Only the first and last cosine
+terms survive.
+\end{hintbox}
+
+\begin{solution}
+\[
+2\sin(2kx)\sin x
+=\cos(2kx-x)-\cos(2kx+x)
+=\cos(2k-1)x-\cos(2k+1)x.
+\]
+Thus
+\[
+\begin{aligned}
+2\sin x\,S_n
+&=\sum_{k=1}^{n}\{\cos(2k-1)x-\cos(2k+1)x\}\\
+&=(\cos x-\cos3x)+(\cos3x-\cos5x)+\cdots\\
+&\quad+(\cos(2n-1)x-\cos(2n+1)x)\\
+&=\cos x-\cos(2n+1)x.
+\end{aligned}
+\]
+Now
+\[
+\cos x-\cos(2n+1)x
+=
+-2\sin((n+1)x)\sin(-nx)
+=2\sin(nx)\sin((n+1)x).
+\]
+Dividing by $2\sin x$ gives
+\[
+S_n=\frac{\sin(nx)\sin((n+1)x)}{\sin x}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Telescoping trigonometric sums often begin by multiplying by
+        $2\sin$ of half the step size.
+  \item The remaining endpoint terms are then simplified with a sum-to-product
+        identity.
+  \item Always state any division restriction, here $\sin x\ne0$.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Root Analysis of High-Frequency Oscillations]
+Consider
+\[
+f(x)=\cos(2025x)-\cos(2026x).
+\]
+Determine the total number of roots of $f(x)=0$ in the closed interval
+$[0,\pi]$.
+\end{problem}
+
+\begin{hintbox}
+Use $\cos P-\cos Q=-2\sin\frac{P+Q}{2}\sin\frac{P-Q}{2}$. Count distinct
+solutions from the two sine factors.
+\end{hintbox}
+
+\begin{solution}
+\[
+\begin{aligned}
+f(x)
+&=-2\sin\left(\frac{2025x+2026x}{2}\right)
+       \sin\left(\frac{2025x-2026x}{2}\right)\\
+&=2\sin\left(\frac{4051x}{2}\right)\sin\left(\frac{x}{2}\right).
+\end{aligned}
+\]
+Therefore $f(x)=0$ when
+\[
+\sin\left(\frac{x}{2}\right)=0
+\quad\text{or}\quad
+\sin\left(\frac{4051x}{2}\right)=0.
+\]
+On $[0,\pi]$, the first factor gives only $x=0$.
+
+The second factor gives
+\[
+\frac{4051x}{2}=k\pi
+\quad\Longrightarrow\quad
+x=\frac{2k\pi}{4051}.
+\]
+The condition $0\le x\le\pi$ becomes
+\[
+0\le k\le \frac{4051}{2}=2025.5.
+\]
+Thus $k=0,1,2,\ldots,2025$, giving $2026$ distinct roots. The root $x=0$ is
+already included.
+\[
+\boxed{2026}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item A high-frequency difference of cosines is much easier to count in
+        product form.
+  \item Closed intervals require careful endpoint counting.
+  \item Count the parameter values first, then check for duplicate roots.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Bounds and Inequalities of Trigonometric Ratios]
+\begin{enumerate}[(i)]
+  \item Using areas in a unit circle, or otherwise, prove that
+  \[
+  \tan\theta>\theta,
+  \qquad 0<\theta<\frac{\pi}{2}.
+  \]
+  \item Hence, or otherwise, show that
+  \[
+  \frac{\tan\theta}{\theta}
+  >
+  \frac{\theta}{\sin\theta},
+  \qquad 0<\theta<\frac{\pi}{2}.
+  \]
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=2.4, >=Stealth]
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (1,0);
+  \coordinate (B) at (35:1);
+  \coordinate (T) at (1,{tan(35)});
+  \fill[bookpurple!8] (O)--(A) arc (0:35:1)--cycle;
+  \fill[bookred!8] (O)--(A)--(T)--cycle;
+  \draw[thick] (O) circle (1);
+  \draw[->, thick] (-0.1,0)--(1.35,0);
+  \draw[->, thick] (0,-0.1)--(0,1.05);
+  \draw[thick] (O)--(B);
+  \draw[thick] (A)--(T);
+  \draw[bookred, thick] (O)--(T);
+  \draw (0.32,0) arc (0:35:0.32);
+  \node at (0.42,0.13) {$\theta$};
+  \node[below left] at (O) {$O$};
+  \node[below] at (A) {$A$};
+  \node[above right] at (B) {$B$};
+  \node[right] at (T) {$T$};
+  \node[below] at ($(O)!0.5!(A)$) {$1$};
+  \node[right] at ($(A)!0.5!(T)$) {$\tan\theta$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hintbox}
+For part (i), compare the sector $OAB$ with the tangent triangle $OAT$. For
+part (ii), one concise path is to prove
+$\sin\theta\tan\theta-\theta^2>0$ by calculus.
+\end{hintbox}
+
+\begin{solution}
+In the unit circle diagram, the sector $OAB$ has area $\theta/2$, while the
+tangent triangle $OAT$ has area $\tan\theta/2$. Since the sector lies strictly
+inside the tangent triangle for $0<\theta<\pi/2$,
+\[
+\frac{\theta}{2}<\frac{\tan\theta}{2},
+\]
+so $\tan\theta>\theta$.
+
+For the second inequality, it is equivalent to prove
+\[
+\sin\theta\tan\theta>\theta^2.
+\]
+Define
+\[
+F(\theta)=\sin\theta\tan\theta-\theta^2.
+\]
+Then $F(0)=0$ in the limiting sense, and
+\[
+F'(\theta)=\sin\theta+\sin\theta\sec^2\theta-2\theta.
+\]
+Differentiating again,
+\[
+F''(\theta)
+=\cos\theta+\sec\theta+2\sin^2\theta\sec^3\theta-2.
+\]
+Since $\cos\theta+\sec\theta\ge2$ for $0<\theta<\pi/2$, and the final term is
+positive,
+\[
+F''(\theta)>0.
+\]
+Thus $F'(\theta)>F'(0)=0$, and hence $F(\theta)>F(0)=0$ for
+$0<\theta<\pi/2$. Therefore
+\[
+\sin\theta\tan\theta>\theta^2,
+\]
+which gives
+\[
+\frac{\tan\theta}{\theta}>\frac{\theta}{\sin\theta}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Area comparisons give elegant proofs of basic trigonometric
+        inequalities.
+  \item Some stronger inequalities need a more precise tool, such as a
+        derivative sign argument.
+  \item Before proving a ratio inequality, cross-multiply carefully and check
+        all quantities are positive.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Graphical Analysis of Harmonic Functions]
+Let
+\[
+f(x)=a\sin x-b\cos x,
+\]
+where $a>0$ and $b>0$. Which of the following curves could represent $f$ near
+the origin?
+
+\begin{center}
+\begin{tikzpicture}[scale=0.72, >=Stealth]
+  \begin{scope}[shift={(0,0)}]
+    \draw[->] (-3,0)--(3,0) node[right] {$x$};
+    \draw[->] (0,-2)--(0,2) node[above] {$y$};
+    \draw[thick,bookred] plot[domain=-2.5:2.5, samples=120]
+      (\x,{1.2*sin(\x r)-0.8*cos(\x r)});
+    \fill[bookpurple] (0,-0.8) circle (2pt);
+    \node[below] at (0,-2.25) {Graph A};
+  \end{scope}
+  \begin{scope}[shift={(7.2,0)}]
+    \draw[->] (-3,0)--(3,0) node[right] {$x$};
+    \draw[->] (0,-2)--(0,2) node[above] {$y$};
+    \draw[thick,black] plot[domain=-2.5:2.5, samples=120]
+      (\x,{-1.2*sin(\x r)+0.8*cos(\x r)});
+    \fill[bookpurple] (0,0.8) circle (2pt);
+    \node[below] at (0,-2.25) {Graph B};
+  \end{scope}
+  \begin{scope}[shift={(0,-5.2)}]
+    \draw[->] (-3,0)--(3,0) node[right] {$x$};
+    \draw[->] (0,-2)--(0,2) node[above] {$y$};
+    \draw[thick,black] plot[domain=-2.5:2.5, samples=120]
+      (\x,{1.2*sin(\x r)+0.8*cos(\x r)});
+    \fill[bookpurple] (0,0.8) circle (2pt);
+    \node[below] at (0,-2.25) {Graph C};
+  \end{scope}
+  \begin{scope}[shift={(7.2,-5.2)}]
+    \draw[->] (-3,0)--(3,0) node[right] {$x$};
+    \draw[->] (0,-2)--(0,2) node[above] {$y$};
+    \draw[thick,black] plot[domain=-2.5:2.5, samples=120]
+      (\x,{-1.2*sin(\x r)-0.8*cos(\x r)});
+    \fill[bookpurple] (0,-0.8) circle (2pt);
+    \node[below] at (0,-2.25) {Graph D};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hintbox}
+Use the $y$-intercept and the derivative at $x=0$. These two quick tests often
+identify the correct graph before any full phase-shift calculation is needed.
+\end{hintbox}
+
+\begin{solution}
+At the origin,
+\[
+f(0)=a\sin0-b\cos0=-b.
+\]
+Since $b>0$, the graph must have a negative $y$-intercept.
+
+Next,
+\[
+f'(x)=a\cos x+b\sin x,
+\]
+so
+\[
+f'(0)=a>0.
+\]
+Thus the curve must be increasing at $x=0$.
+
+Among the four sketches, the only graph with a negative $y$-intercept and a
+positive gradient at $x=0$ is Graph A.
+\[
+\boxed{\text{Graph A}}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The intercept $f(0)$ is a fast way to eliminate graph options.
+  \item The sign of $f'(0)$ tells whether the curve is rising or falling at the
+        $y$-axis.
+  \item Auxiliary-angle form confirms that a sine-cosine combination is still a
+        shifted sinusoid.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Simplifying an Inverse Trigonometric Difference]
+Simplify
+\[
+\arcsin(\cos x)-\arccos(\sin x),
+\]
+where $x$ is a real number.
+\end{problem}
+
+\begin{hintbox}
+Because inverse trigonometric functions return principal values, the answer is
+piecewise. First solve it on $0\le x\le2\pi$, then extend periodically.
+\end{hintbox}
+
+\begin{solution}
+Both $\arcsin(\cos x)$ and $\arccos(\sin x)$ are $2\pi$-periodic, so it is
+enough to work on $0\le x\le2\pi$.
+
+On this interval,
+\[
+\arcsin(\cos x)-\arccos(\sin x)
+=
+\begin{cases}
+0, & 0\le x\le \dfrac{\pi}{2},\\[6pt]
+\pi-2x, & \dfrac{\pi}{2}\le x\le \pi,\\[6pt]
+-\pi, & \pi\le x\le \dfrac{3\pi}{2},\\[6pt]
+2x-4\pi, & \dfrac{3\pi}{2}\le x\le2\pi.
+\end{cases}
+\]
+For all real $x$, reduce $x$ modulo $2\pi$ and apply this piecewise formula.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Expressions like $\arcsin(\sin x)$ and $\arccos(\cos x)$ are governed by
+        principal ranges.
+  \item A single simple-looking inverse-trigonometric expression can require a
+        piecewise answer.
+  \item Periodicity lets us solve on one full period and extend to all real
+        $x$.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[A Numerical Trigonometric Equation]
+Solve numerically for $0\le x\le2\pi$:
+\[
+4\sin^3x+8\sin^2x-19x+7=0.
+\]
+\end{problem}
+
+\begin{hintbox}
+The linear term in $x$ means this is not a standard ``let $u=\sin x$''
+equation. Use sign changes and a numerical method.
+\end{hintbox}
+
+\begin{solution}
+Let
+\[
+F(x)=4\sin^3x+8\sin^2x-19x+7.
+\]
+Then
+\[
+F(0)=7>0,
+\qquad
+F(1)\approx -3.95<0,
+\]
+so there is at least one root in $(0,1)$.
+
+Also,
+\[
+F'(x)=12\sin^2x\cos x+16\sin x\cos x-19
+=4\sin x\cos x(3\sin x+4)-19.
+\]
+When $\sin x\cos x(3\sin x+4)$ is positive, it is at most
+$\frac12\cdot7=\frac72$, so
+\[
+F'(x)\le 4\cdot\frac72-19=-5<0.
+\]
+Hence $F$ is strictly decreasing on $[0,2\pi]$, so the root is unique.
+
+Using Newton's method or a graphing calculator,
+\[
+x\approx0.478018.
+\]
+Therefore, to three decimal places,
+\[
+\boxed{x\approx0.478}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Not every trigonometric equation has an exact HSC-style solution.
+  \item A linear term in $x$ prevents the substitution $u=\sin x$ from reducing
+        the equation to a polynomial in $u$.
+  \item Numerical solving should still be supported by interval and reasonableness
+        checks.
+\end{itemize}
+\end{takeaways}

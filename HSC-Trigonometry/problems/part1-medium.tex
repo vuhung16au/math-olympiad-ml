@@ -4,4 +4,358 @@
 %         compound angle identities, general triangles
 % ============================================================
 
-% Problems will be added here.
+% ------------------------------------------------------------------
+\begin{problem}[The Geometry of a 10 cm Cube]
+A solid cube $ABCDEFGH$ has side length $10$ cm. The base is the square
+$ABCD$, the top face is $EFGH$, and $E$ is directly above $A$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.72, line join=round, line cap=round]
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (4,0);
+  \coordinate (C) at (5.45,1.35);
+  \coordinate (D) at (1.45,1.35);
+  \coordinate (E) at (0,4);
+  \coordinate (F) at (4,4);
+  \coordinate (G) at (5.45,5.35);
+  \coordinate (H) at (1.45,5.35);
+  \coordinate (M) at (3.45,5.35);
+
+  \fill[bookpurple!5] (A)--(B)--(C)--(D)--cycle;
+  \fill[bookred!5] (E)--(F)--(G)--(H)--cycle;
+  \draw[dashed, gray] (A)--(D)--(C) (D)--(H);
+  \draw[thick] (A)--(B)--(C)--(G)--(F)--(B);
+  \draw[thick] (F)--(E)--(H)--(G);
+  \draw[thick] (A)--(E);
+  \draw[bookred, dashed, thick] (A)--(C);
+  \draw[blue!70!black, very thick] (A)--(G);
+  \draw[orange!90!black, very thick] (A)--(M);
+  \fill (M) circle (2pt);
+
+  \node[below left] at (A) {$A$};
+  \node[below] at (B) {$B$};
+  \node[right] at (C) {$C$};
+  \node[left] at (D) {$D$};
+  \node[left] at (E) {$E$};
+  \node[above] at (F) {$F$};
+  \node[above right] at (G) {$G$};
+  \node[above left] at (H) {$H$};
+  \node[above] at (M) {$M$};
+  \node[below] at ($(A)!0.5!(B)$) {$10$ cm};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[(i)]
+  \item By considering $\triangle ABC$, calculate the exact length of the face
+        diagonal $AC$.
+  \item The space diagonal $AG$ passes through the centre of the cube. By
+        considering $\triangle ACG$, show that $AG = 10\sqrt{3}$ cm.
+  \item Find $\angle GAC$, the angle the space diagonal makes with the base, to
+        the nearest degree.
+  \item Let $M$ be the midpoint of $GH$. Calculate $AM$ and find
+        $\angle MAC$ to the nearest tenth of a degree.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Use two-dimensional slices of the cube. First work in the base square, then use
+the right-angled triangle containing $A$, $C$, and $G$. For the midpoint $M$,
+coordinates such as $A=(0,0,0)$ are the cleanest way to find the needed lengths.
+\end{hintbox}
+
+\begin{solution}
+\begin{enumerate}[(i)]
+  \item In the square base,
+  \[
+  AC^2 = 10^2+10^2=200,
+  \qquad AC=10\sqrt{2}\text{ cm}.
+  \]
+  \item Since $CG=10$ cm and $CG$ is perpendicular to the base,
+  \[
+  AG^2=AC^2+CG^2=(10\sqrt2)^2+10^2=300,
+  \]
+  so $AG=10\sqrt3$ cm.
+  \item In $\triangle ACG$,
+  \[
+  \tan\angle GAC=\frac{CG}{AC}=\frac{10}{10\sqrt2}=\frac1{\sqrt2}.
+  \]
+  Hence $\angle GAC\approx 35^\circ$.
+  \item Put $A=(0,0,0)$, $C=(10,10,0)$, $G=(10,10,10)$ and
+  $H=(0,10,10)$. Then $M=(5,10,10)$, so
+  \[
+  AM=\sqrt{5^2+10^2+10^2}=15\text{ cm}.
+  \]
+  Also
+  \[
+  CM=\sqrt{(10-5)^2+(10-10)^2+(0-10)^2}=5\sqrt5.
+  \]
+  Applying the cosine rule in $\triangle AMC$,
+  \[
+  \cos\angle MAC
+  =\frac{AM^2+AC^2-CM^2}{2(AM)(AC)}
+  =\frac{225+200-125}{2(15)(10\sqrt2)}
+  =\frac1{\sqrt2}.
+  \]
+  Therefore $\angle MAC=45.0^\circ$.
+\end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item In 3D trigonometry, find the two-dimensional triangle containing the
+        length or angle you need.
+  \item Coordinates are especially useful when midpoints or non-face diagonals
+        are involved.
+  \item A cuboid with dimensions $a$, $b$, and $c$ has space diagonal
+        $\sqrt{a^2+b^2+c^2}$.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Domain of Trigonometric Crossover Compositions]
+Consider
+\[
+f(x)=\arcsin(2x-3),
+\qquad
+g(x)=\arccos\!\left(\frac{x}{2}\right).
+\]
+\begin{enumerate}[(i)]
+  \item Determine the domains of $f$ and $g$ separately.
+  \item Let $h(x)=g(f(x))$. Find the largest possible domain of $h$.
+  \item Determine the range of $h$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+For a composite function $g(f(x))$, the output of $f$ must lie in the domain of
+$g$. Use the principal range
+$\arcsin u\in[-\pi/2,\pi/2]$ and remember that $\pi/2<2$.
+\end{hintbox}
+
+\begin{solution}
+For $f$ to be defined,
+\[
+-1\le 2x-3\le 1
+\quad\Longrightarrow\quad
+1\le x\le 2.
+\]
+For $g$ to be defined,
+\[
+-1\le \frac{x}{2}\le 1
+\quad\Longrightarrow\quad
+-2\le x\le 2.
+\]
+
+Now $f$ maps $[1,2]$ onto $[-\pi/2,\pi/2]$. Since
+\[
+\left[-\frac{\pi}{2},\frac{\pi}{2}\right]\subset [-2,2],
+\]
+every output of $f$ is a valid input for $g$. Hence the domain of $h$ is
+$[1,2]$.
+
+As $x$ runs from $1$ to $2$, $f(x)$ runs from $-\pi/2$ to $\pi/2$. Since
+$g(u)=\arccos(u/2)$ is decreasing in $u$,
+\[
+\operatorname{range}(h)
+=
+\left[
+\arccos\!\left(\frac{\pi}{4}\right),
+\arccos\!\left(-\frac{\pi}{4}\right)
+\right].
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The domain of $g(f(x))$ is controlled by both the domain of $f$ and the
+        requirement that $f(x)$ lies in the domain of $g$.
+  \item Inverse trigonometric functions have restricted principal ranges; those
+        ranges matter in composite functions.
+  \item Monotonicity helps prevent endpoint reversals when finding a range.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Overlapping Shadows]
+Two right-angled triangles share a common horizontal base of length $12$. The
+smaller triangle has angle of elevation $\pi/4$, while the larger triangle has
+angle of elevation $\pi/3$. Let $x$ be the vertical distance between the two
+peaks. Show that
+\[
+x=12(\sqrt3-1).
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.36, line cap=round, line join=round]
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (12,0);
+  \coordinate (P) at (12,12);
+  \coordinate (Q) at (12,20.784);
+
+  \draw[thick] (A)--(B) node[midway, below] {$12$};
+  \draw[thick] (B)--(Q);
+  \draw[thick, bookpurple] (A)--(P);
+  \draw[thick, bookred] (A)--(Q);
+  \draw ($(B)+(-0.8,0)$)--++(0,0.8)--++(0.8,0);
+
+  \draw (2.3,0) arc (0:45:2.3);
+  \node at (3.2,1.1) {$\pi/4$};
+  \draw (4.0,0) arc (0:60:4.0);
+  \node at (4.2,3.0) {$\pi/3$};
+
+  \draw[<->, thick] (13.0,12)--(13.0,20.784);
+  \node[right] at (13.0,16.4) {$x$};
+  \node[below left] at (A) {$A$};
+  \node[below right] at (B) {$B$};
+  \node[right] at (P) {$P$};
+  \node[right] at (Q) {$Q$};
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hintbox}
+Find the two vertical heights separately using $\tan\theta=\frac{\text{opposite}}{\text{adjacent}}$,
+then subtract them.
+\end{hintbox}
+
+\begin{solution}
+For the smaller triangle,
+\[
+\tan\frac{\pi}{4}=\frac{BP}{12}.
+\]
+Since $\tan(\pi/4)=1$,
+\[
+BP=12.
+\]
+For the larger triangle,
+\[
+\tan\frac{\pi}{3}=\frac{BQ}{12}.
+\]
+Since $\tan(\pi/3)=\sqrt3$,
+\[
+BQ=12\sqrt3.
+\]
+The vertical distance between the peaks is therefore
+\[
+x=BQ-BP=12\sqrt3-12=12(\sqrt3-1).
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Shared-base height problems often reduce to two tangent ratios.
+  \item Keep exact values in surd form for ``show that'' questions.
+  \item Trigonometric functions are not linear: increasing the angle does not
+        increase the height by the same factor.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Inscribed Triangles and the Extended Sine Rule]
+A triangle is inscribed in a circle. One side has length $12$ and passes through
+the centre of the circle. Another side has length $7$.
+
+\begin{enumerate}[(i)]
+  \item A point $P$ is moved along the major arc of the circle. If the angle at
+        $P$ is denoted by $\alpha$, explain why $\alpha$ remains constant and
+        find $\cos\alpha$.
+  \item Now suppose the triangle is changed so that its side lengths are
+        $7$, $8$, and $10$. Find the angle $\theta$ opposite the side of length
+        $8$, and determine the radius of its circumcircle.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.62, line cap=round, line join=round]
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (-4,0);
+  \coordinate (B) at (4,0);
+  \coordinate (P) at (0,4);
+  \draw[thick] (O) circle (4);
+  \draw[thick, bookpurple] (A)--(B)--(P)--cycle;
+  \draw[dashed] (O)--(A) (O)--(B);
+  \fill (O) circle (2pt);
+  \draw ($(P)+(0,-0.45)$) arc (-90:-135:0.45);
+  \draw ($(P)+(0,-0.45)$) arc (-90:-45:0.45);
+  \node[below] at (O) {$O$};
+  \node[left] at (A) {$A$};
+  \node[right] at (B) {$B$};
+  \node[above] at (P) {$P$};
+  \node[below] at ($(A)!0.5!(B)$) {$12$};
+  \node[right] at ($(B)!0.5!(P)$) {$7$};
+  \node at (0,3.25) {$\alpha$};
+
+  \begin{scope}[xshift=10.5cm, scale=0.72]
+    \coordinate (C) at (0,0);
+    \coordinate (D) at (10,0);
+    \coordinate (E) at (6.25,7.071);
+    \draw[thick] (5,2.209) circle (5.467);
+    \draw[thick, bookred] (C)--(D)--(E)--cycle;
+    \node[below] at ($(C)!0.5!(D)$) {$10$};
+    \node[right] at ($(D)!0.5!(E)$) {$8$};
+    \node[left] at ($(E)!0.5!(C)$) {$7$};
+    \draw (C) ++(0.9,0) arc (0:48.6:0.9);
+    \node at (1.25,0.55) {$\theta$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hintbox}
+Part (i) uses the angle in a semicircle theorem. Part (ii) uses the cosine rule
+first, then the extended sine rule $\frac{a}{\sin A}=2R$.
+\end{hintbox}
+
+\begin{solution}
+Since the side of length $12$ passes through the centre, it is a diameter.
+The angle subtended by a diameter at the circumference is a right angle, so
+\[
+\alpha=\frac{\pi}{2},
+\qquad
+\cos\alpha=0.
+\]
+The angle is constant because angles subtended by the same chord in the same
+segment are equal.
+
+For the triangle with side lengths $7$, $8$, and $10$, let $\theta$ be opposite
+the side of length $8$. By the cosine rule,
+\[
+8^2=7^2+10^2-2(7)(10)\cos\theta.
+\]
+Thus
+\[
+64=149-140\cos\theta,
+\qquad
+\cos\theta=\frac{17}{28}.
+\]
+So
+\[
+\theta=\arccos\left(\frac{17}{28}\right)\approx0.919\text{ radians}.
+\]
+Also,
+\[
+\sin\theta
+=\sqrt{1-\left(\frac{17}{28}\right)^2}
+=\frac{\sqrt{495}}{28}
+=\frac{3\sqrt{55}}{28}.
+\]
+Using the extended sine rule,
+\[
+2R=\frac{8}{\sin\theta}
+=\frac{8}{3\sqrt{55}/28}
+=\frac{224}{3\sqrt{55}},
+\]
+so
+\[
+R=\frac{112}{3\sqrt{55}}\approx5.03.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item A diameter subtends a right angle at the circumference.
+  \item The cosine rule handles non-right-angled triangles when three sides are
+        known.
+  \item The extended sine rule links a triangle's side-angle data to its
+        circumradius.
+\end{itemize}
+\end{takeaways}

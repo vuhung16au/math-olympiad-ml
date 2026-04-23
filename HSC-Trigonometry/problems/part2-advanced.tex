@@ -4,4 +4,164 @@
 %         olympiad-style trigonometric inequalities and proofs
 % ============================================================
 
-% Problems will be added here.
+% ------------------------------------------------------------------
+\begin{problem}[The Iterated Polynomial]
+Let $f(x)=2x^2-1$ for $-1\le x\le1$. Let $f^n(x)$ denote the $n$th iterate of
+$f$, so $f^2(x)=f(f(x))$, $f^3(x)=f(f(f(x)))$, and so on.
+
+\begin{enumerate}[(i)]
+  \item Using $x=\cos\theta$, where $0\le\theta\le\pi$, show that
+        $f(x)=\cos2\theta$.
+  \item Prove by induction that, for every integer $n\ge1$,
+        \[
+        f^n(x)=\cos(2^n\theta).
+        \]
+  \item Hence determine the exact number of distinct real solutions of
+        \[
+        f^3(x)=x.
+        \]
+  \item Deduce the number of distinct real roots of
+        \[
+        f^n(x)=0
+        \]
+        in terms of $n$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+The identity $2\cos^2\theta-1=\cos2\theta$ is doing all the work. For
+$\cos A=\cos B$, use $A=2k\pi\pm B$. The restriction $0\le\theta\le\pi$ makes
+$x=\cos\theta$ one-to-one.
+\end{hintbox}
+
+\begin{solution}
+If $x=\cos\theta$, then
+\[
+f(x)=2\cos^2\theta-1=\cos2\theta.
+\]
+
+We prove the iterate formula by induction. For $n=1$ it is exactly the result
+above. Suppose
+\[
+f^k(x)=\cos(2^k\theta).
+\]
+Then
+\[
+f^{k+1}(x)
+=f(f^k(x))
+=f(\cos(2^k\theta))
+=2\cos^2(2^k\theta)-1
+=\cos(2^{k+1}\theta).
+\]
+Hence, by induction,
+\[
+f^n(x)=\cos(2^n\theta)
+\]
+for all $n\ge1$.
+
+For $f^3(x)=x$, we solve
+\[
+\cos8\theta=\cos\theta,
+\qquad 0\le\theta\le\pi.
+\]
+Thus
+\[
+8\theta=2k\pi+\theta
+\quad\text{or}\quad
+8\theta=2k\pi-\theta.
+\]
+The first family gives
+\[
+\theta=\frac{2k\pi}{7},
+\]
+so $k=0,1,2,3$, giving $4$ values in $[0,\pi]$. The second gives
+\[
+\theta=\frac{2k\pi}{9},
+\]
+so $k=0,1,2,3,4$, giving $5$ values, but $\theta=0$ has already been counted.
+Therefore there are $4+4=8$ distinct values of $\theta$. Since $\cos\theta$ is
+one-to-one on $[0,\pi]$, there are exactly
+\[
+\boxed{8}
+\]
+distinct real solutions for $x$.
+
+Finally, $f^n(x)=0$ becomes
+\[
+\cos(2^n\theta)=0.
+\]
+So
+\[
+2^n\theta=\frac{(2k+1)\pi}{2},
+\qquad
+\theta=\frac{(2k+1)\pi}{2^{n+1}}.
+\]
+We need $0\le\theta\le\pi$, which is equivalent to
+\[
+0\le 2k+1\le 2^{n+1}.
+\]
+There are exactly $2^n$ positive odd integers not exceeding $2^{n+1}$. Hence
+$f^n(x)=0$ has
+\[
+\boxed{2^n}
+\]
+distinct real roots.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Some high-degree polynomial equations become simple after the
+        substitution $x=\cos\theta$.
+  \item The restriction $0\le\theta\le\pi$ prevents double-counting values of
+        $x$.
+  \item Root-counting often matters more than explicitly writing every root.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[A Cubic Trigonometric Equation]
+Use the triple-angle formula to solve
+\[
+4\cos^3x-3\cos x=\frac12
+\]
+for $0\le x\le2\pi$.
+\end{problem}
+
+\begin{hintbox}
+Recognise $4\cos^3x-3\cos x$ as $\cos3x$. Then solve a standard cosine
+equation, remembering that $3x$ ranges over a longer interval.
+\end{hintbox}
+
+\begin{solution}
+Using
+\[
+\cos3x=4\cos^3x-3\cos x,
+\]
+the equation becomes
+\[
+\cos3x=\frac12.
+\]
+Since $0\le x\le2\pi$, we have $0\le3x\le6\pi$. Therefore
+\[
+3x=\frac{\pi}{3},\frac{5\pi}{3},\frac{7\pi}{3},\frac{11\pi}{3},
+\frac{13\pi}{3},\frac{17\pi}{3}.
+\]
+Dividing by $3$ gives
+\[
+\boxed{
+x=\frac{\pi}{9},\frac{5\pi}{9},\frac{7\pi}{9},\frac{11\pi}{9},
+\frac{13\pi}{9},\frac{17\pi}{9}
+}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The cubic expression $4u^3-3u$ is a signal to look for
+        $\cos3x$ or the Chebyshev polynomial $T_3(u)$.
+  \item Triple-angle formulae can turn cubic-looking equations into simple
+        trigonometric equations.
+  \item When the argument is $3x$, solve over $0\le3x\le6\pi$ before dividing
+        by $3$.
+\end{itemize}
+\end{takeaways}

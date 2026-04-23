@@ -4,4 +4,403 @@
 %         restricting domains, multi-step proof problems
 % ============================================================
 
-% Problems will be added here.
+% ------------------------------------------------------------------
+\begin{problem}[Proving Pythagoras via the $t$-Formulae]
+In a right-angled triangle, let one acute angle be $\theta$. If the hypotenuse
+is $c$, the legs may be written as
+\[
+a=c\sin\theta,
+\qquad
+b=c\cos\theta.
+\]
+Let $t=\tan(\theta/2)$.
+
+\begin{enumerate}[(i)]
+  \item Express $\sin\theta$ and $\cos\theta$ in terms of $t$.
+  \item Substitute these expressions into $a^2+b^2$ and simplify.
+  \item Hence verify that $a^2+b^2=c^2$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Use
+$\sin\theta=\dfrac{2t}{1+t^2}$ and
+$\cos\theta=\dfrac{1-t^2}{1+t^2}$. After squaring, the numerator should become
+a perfect square.
+\end{hintbox}
+
+\begin{solution}
+The $t$-formulae give
+\[
+\sin\theta=\frac{2t}{1+t^2},
+\qquad
+\cos\theta=\frac{1-t^2}{1+t^2}.
+\]
+Therefore
+\[
+a^2+b^2
+=c^2\left[
+\left(\frac{2t}{1+t^2}\right)^2+
+\left(\frac{1-t^2}{1+t^2}\right)^2
+\right].
+\]
+Combining the fractions,
+\[
+a^2+b^2
+=c^2\left[
+\frac{4t^2+(1-t^2)^2}{(1+t^2)^2}
+\right]
+=c^2\left[
+\frac{4t^2+1-2t^2+t^4}{(1+t^2)^2}
+\right].
+\]
+The numerator is
+\[
+1+2t^2+t^4=(1+t^2)^2.
+\]
+Hence
+\[
+a^2+b^2=c^2.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The $t$-formulae rationalise sine and cosine using one algebraic
+        parameter.
+  \item The identity $\sin^2\theta+\cos^2\theta=1$ appears here as the algebraic
+        simplification
+        $4t^2+(1-t^2)^2=(1+t^2)^2$.
+  \item Good substitutions should reduce trigonometry to ordinary algebra.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[The Cosine Sum-to-Product Identity in a Triangle]
+Let $A$, $B$, and $C$ be the interior angles of a triangle, so
+$A+B+C=180^\circ$.
+
+\begin{enumerate}[(i)]
+  \item Using
+  \[
+  \cos P+\cos Q
+  =2\cos\frac{P+Q}{2}\cos\frac{P-Q}{2},
+  \]
+  show that
+  \[
+  \cos2A+\cos2B=-2\cos C\cos(A-B).
+  \]
+  \item Use $\cos2C=2\cos^2C-1$ to show that
+  \[
+  \cos2A+\cos2B+\cos2C
+  =
+  -2\cos C[\cos(A-B)-\cos C]-1.
+  \]
+  \item Hence prove that
+  \[
+  \cos2A+\cos2B+\cos2C
+  =
+  -1-4\cos A\cos B\cos C.
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Use $A+B=180^\circ-C$, so $\cos(A+B)=-\cos C$. In the final part, simplify
+$\cos(A-B)+\cos(A+B)$.
+\end{hintbox}
+
+\begin{solution}
+Using the sum-to-product identity with $P=2A$ and $Q=2B$,
+\[
+\cos2A+\cos2B=2\cos(A+B)\cos(A-B).
+\]
+Since $A+B=180^\circ-C$, $\cos(A+B)=-\cos C$, and hence
+\[
+\cos2A+\cos2B=-2\cos C\cos(A-B).
+\]
+
+Adding $\cos2C=2\cos^2C-1$ gives
+\[
+\cos2A+\cos2B+\cos2C
+=-2\cos C\cos(A-B)+2\cos^2C-1,
+\]
+so
+\[
+\cos2A+\cos2B+\cos2C
+=-2\cos C[\cos(A-B)-\cos C]-1.
+\]
+
+Now $\cos C=\cos(180^\circ-(A+B))=-\cos(A+B)$, so the bracket is
+\[
+\cos(A-B)+\cos(A+B)=2\cos A\cos B.
+\]
+Therefore
+\[
+\cos2A+\cos2B+\cos2C
+=-2\cos C(2\cos A\cos B)-1
+=-1-4\cos A\cos B\cos C.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Triangle identities often use $A+B=180^\circ-C$ as the key move.
+  \item Choosing the right double-angle form can create a useful factor.
+  \item Scaffolded proofs usually reveal the structure of the final identity.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[The Triple Tangent Identity and Angle Deduction]
+\begin{enumerate}[(i)]
+  \item Using
+  \[
+  \tan(X+Y)=\frac{\tan X+\tan Y}{1-\tan X\tan Y},
+  \]
+  prove
+  \[
+  \tan(A+B+C)
+  =
+  \frac{\tan A+\tan B+\tan C-\tan A\tan B\tan C}
+       {1-\tan A\tan B-\tan B\tan C-\tan C\tan A}.
+  \]
+  \item In any triangle $ABC$, show that $\tan(A+B+C)=0$.
+  \item Hence prove that, for any non-right-angled triangle,
+  \[
+  \tan A+\tan B+\tan C=\tan A\tan B\tan C.
+  \]
+  \item In an acute triangle, $\tan A=2$ and $\tan B=3$. Find the exact size of
+        $\angle ACB$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Group the angles as $(A+B)+C$. In part (iii), a fraction is zero when its
+numerator is zero, provided the expression is defined.
+\end{hintbox}
+
+\begin{solution}
+Let $x=\tan A$, $y=\tan B$, and $z=\tan C$. Then
+\[
+\tan(A+B)=\frac{x+y}{1-xy}.
+\]
+Applying the addition formula again,
+\[
+\tan(A+B+C)
+=
+\frac{\frac{x+y}{1-xy}+z}
+     {1-\frac{x+y}{1-xy}z}.
+\]
+Multiplying numerator and denominator by $1-xy$ gives
+\[
+\tan(A+B+C)=
+\frac{x+y+z-xyz}{1-xy-yz-zx},
+\]
+which is the required identity.
+
+In a triangle, $A+B+C=180^\circ$, so
+\[
+\tan(A+B+C)=\tan180^\circ=0.
+\]
+For a non-right-angled triangle the tangent expressions are defined, so the
+numerator must be zero:
+\[
+\tan A+\tan B+\tan C-\tan A\tan B\tan C=0.
+\]
+Thus
+\[
+\tan A+\tan B+\tan C=\tan A\tan B\tan C.
+\]
+
+Finally,
+\[
+2+3+\tan C=2\cdot3\cdot\tan C,
+\]
+so $5+\tan C=6\tan C$ and $\tan C=1$. Since the triangle is acute,
+\[
+\angle ACB=45^\circ.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The tangent addition formula can be iterated to handle three angles.
+  \item In a triangle, $A+B+C=180^\circ$ turns the triple-angle tangent into
+        zero.
+  \item The identity
+        $\tan A+\tan B+\tan C=\tan A\tan B\tan C$ is valid only when none of the
+        triangle's angles is $90^\circ$.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Harmonic Addition and Equations]
+\begin{enumerate}[(i)]
+  \item Express $\cos x-\sin x$ in the form
+        \[
+        R\cos(x+\alpha),
+        \]
+        where $R>0$ and $0<\alpha<\pi/2$.
+  \item Hence solve
+        \[
+        \cos x-\sin x=\frac{\sqrt2}{2},
+        \qquad 0\le x\le2\pi.
+        \]
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Expand $R\cos(x+\alpha)$ and match the coefficients of $\cos x$ and $\sin x$.
+\end{hintbox}
+
+\begin{solution}
+Using
+\[
+R\cos(x+\alpha)=R\cos x\cos\alpha-R\sin x\sin\alpha,
+\]
+we need
+\[
+R\cos\alpha=1,
+\qquad
+R\sin\alpha=1.
+\]
+Thus
+\[
+R=\sqrt{1^2+1^2}=\sqrt2,
+\qquad
+\tan\alpha=1,
+\]
+so $\alpha=\pi/4$. Therefore
+\[
+\cos x-\sin x=\sqrt2\cos\left(x+\frac{\pi}{4}\right).
+\]
+
+The equation becomes
+\[
+\sqrt2\cos\left(x+\frac{\pi}{4}\right)=\frac{\sqrt2}{2},
+\]
+so
+\[
+\cos\left(x+\frac{\pi}{4}\right)=\frac12.
+\]
+For $0\le x\le2\pi$, the argument $x+\pi/4$ lies in
+$[\pi/4,9\pi/4]$. Hence
+\[
+x+\frac{\pi}{4}=\frac{\pi}{3},\frac{5\pi}{3},\frac{7\pi}{3}.
+\]
+Therefore
+\[
+x=\frac{\pi}{12},\frac{17\pi}{12},\frac{25\pi}{12}.
+\]
+Only the first two lie in $[0,2\pi]$, so
+\[
+\boxed{x=\frac{\pi}{12},\frac{17\pi}{12}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item A linear combination of $\sin x$ and $\cos x$ can be rewritten as one
+        shifted sinusoid.
+  \item Coefficient matching determines both the amplitude $R$ and the phase
+        angle.
+  \item Solve the transformed equation in the shifted argument, then convert
+        back to $x$.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[The Symmetry of Auxiliary Angles]
+For $a,b>0$, write
+\[
+a\cos x+b\sin x
+\]
+in the four forms
+\[
+R\sin(x+\alpha),\qquad
+R\sin(x-\beta),\qquad
+R\cos(x+\gamma),\qquad
+R\cos(x-\delta),
+\]
+where $R=\sqrt{a^2+b^2}$ and
+$0\le\alpha,\beta,\gamma,\delta<2\pi$.
+
+\begin{enumerate}[(i)]
+  \item For $a=b=1$, find $\alpha,\beta,\gamma,\delta$.
+  \item For general $a,b>0$, show that $\alpha+\delta$ and $\beta+\gamma$ are
+        constant, and find their values.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Expand each auxiliary-angle form and compare the coefficients of $\cos x$ and
+$\sin x$. Be careful with the signs in the minus forms.
+\end{hintbox}
+
+\begin{solution}
+For $a=b=1$,
+\[
+\cos x+\sin x=\sqrt2\sin\left(x+\frac{\pi}{4}\right),
+\]
+so $\alpha=\pi/4$. Also
+\[
+\sqrt2\sin(x-\beta)
+=\sqrt2(\sin x\cos\beta-\cos x\sin\beta).
+\]
+Matching coefficients gives $\cos\beta=1/\sqrt2$ and
+$-\sin\beta=1/\sqrt2$, hence $\beta=7\pi/4$.
+
+Similarly,
+\[
+\sqrt2\cos(x+\gamma)
+=\sqrt2(\cos x\cos\gamma-\sin x\sin\gamma),
+\]
+so $\gamma=7\pi/4$, and
+\[
+\sqrt2\cos(x-\delta)
+=\sqrt2(\cos x\cos\delta+\sin x\sin\delta),
+\]
+so $\delta=\pi/4$.
+
+For general $a,b>0$, matching coefficients gives
+\[
+\sin\alpha=\frac{a}{R},
+\qquad
+\cos\alpha=\frac{b}{R},
+\]
+and
+\[
+\cos\delta=\frac{a}{R},
+\qquad
+\sin\delta=\frac{b}{R}.
+\]
+Thus $\alpha$ and $\delta$ are complementary acute angles, so
+\[
+\alpha+\delta=\frac{\pi}{2}.
+\]
+
+For the two negative-shift forms, the coefficient matching places
+\[
+\beta=2\pi-\alpha,
+\qquad
+\gamma=2\pi-\delta.
+\]
+Therefore
+\[
+\beta+\gamma
+=4\pi-(\alpha+\delta)
+=4\pi-\frac{\pi}{2}
+=\frac{7\pi}{2}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The four auxiliary-angle forms describe the same sinusoid from
+        different phase-shift conventions.
+  \item The sine and cosine forms differ by a phase shift of $\pi/2$.
+  \item For $a,b>0$, complementary-angle relationships explain the constant
+        sums.
+\end{itemize}
+\end{takeaways}

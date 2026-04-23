@@ -4,4 +4,290 @@
 % identification, basic identities, and sine/cosine rule
 % ============================================================
 
-% Problems will be added here.
+% ------------------------------------------------------------------
+\begin{problem}[Principal Value of an Inverse Sine]
+Calculate
+\[
+\sin^{-1}\!\left(\sin\frac{5}{2}\right),
+\]
+rounding your answer to $3$ decimal places. Angles are measured in radians.
+\end{problem}
+
+\begin{hintbox}
+The range of $\sin^{-1}x$ is $[-\pi/2,\pi/2]$. The angle $\frac{5}{2}$ radians
+is not in that interval, but $\pi-\frac{5}{2}$ is.
+\end{hintbox}
+
+\begin{solution}
+Since $\frac{5}{2}\in(\pi/2,\pi)$,
+\[
+\sin\frac{5}{2}=\sin\left(\pi-\frac{5}{2}\right).
+\]
+The angle $\pi-\frac{5}{2}$ lies in the principal range of $\arcsin$, because
+$0<\pi-\frac{5}{2}<\pi/2$. Hence
+\[
+\sin^{-1}\!\left(\sin\frac{5}{2}\right)
+=\pi-\frac{5}{2}
+\approx 0.642.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item $\sin^{-1}(\sin x)$ does not always equal $x$.
+  \item Always return the principal value in $[-\pi/2,\pi/2]$.
+  \item Supplementary angles have equal sine values.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[A Sine-Cosine Equation]
+Solve
+\[
+\sin(3x)=\cos\!\left(2x-\frac{\pi}{4}\right)
+\]
+for $0\le x\le 2\pi$.
+\end{problem}
+
+\begin{hintbox}
+Convert cosine to sine using $\cos u=\sin(\pi/2-u)$, then solve
+$\sin\alpha=\sin\beta$.
+\end{hintbox}
+
+\begin{solution}
+\[
+\cos\!\left(2x-\frac{\pi}{4}\right)
+=
+\sin\!\left(\frac{\pi}{2}-2x+\frac{\pi}{4}\right)
+=
+\sin\!\left(\frac{3\pi}{4}-2x\right).
+\]
+Thus
+\[
+\sin(3x)=\sin\!\left(\frac{3\pi}{4}-2x\right).
+\]
+For $\sin A=\sin B$,
+\[
+A=B+2k\pi
+\quad\text{or}\quad
+A=\pi-B+2k\pi.
+\]
+Hence
+\[
+3x=\frac{3\pi}{4}-2x+2k\pi
+\quad\Longrightarrow\quad
+x=\frac{3\pi}{20}+\frac{2k\pi}{5},
+\]
+or
+\[
+3x=\pi-\left(\frac{3\pi}{4}-2x\right)+2k\pi
+\quad\Longrightarrow\quad
+x=\frac{\pi}{4}+2k\pi.
+\]
+Restricting to $0\le x\le 2\pi$ gives
+\[
+x=
+\frac{3\pi}{20},\frac{11\pi}{20},\frac{19\pi}{20},
+\frac{27\pi}{20},\frac{35\pi}{20},\frac{\pi}{4}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Convert mixed sine-cosine equations into one trigonometric function.
+  \item The equation $\sin A=\sin B$ has two families of solutions.
+  \item Restrict the final answer to the requested interval.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Secant-Tangent Convergence]
+Let $0\le A\le\pi$.
+\begin{enumerate}[(i)]
+  \item Prove that
+  \[
+  \frac{1}{1-\tan A}
+  -
+  \frac{1}{1+\tan A}
+  +
+  \frac{2\tan A}{\sec^2A-2\tan^2A}
+  =
+  2\tan2A,
+  \]
+  where both sides are defined.
+  \item Hence find all values of $A$ such that
+  \[
+  \frac{1}{1-\tan A}
+  -
+  \frac{1}{1+\tan A}
+  =1.
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+Combine the first two fractions. For the third term, use
+$\sec^2A=1+\tan^2A$.
+\end{hintbox}
+
+\begin{solution}
+The first two terms combine to
+\[
+\frac{(1+\tan A)-(1-\tan A)}{(1-\tan A)(1+\tan A)}
+=
+\frac{2\tan A}{1-\tan^2A}
+=\tan2A.
+\]
+Also,
+\[
+\sec^2A-2\tan^2A
+=1+\tan^2A-2\tan^2A
+=1-\tan^2A,
+\]
+so
+\[
+\frac{2\tan A}{\sec^2A-2\tan^2A}
+=
+\frac{2\tan A}{1-\tan^2A}
+=\tan2A.
+\]
+Therefore the full expression is $2\tan2A$.
+
+For part (ii), the left side is $\tan2A$, so
+\[
+\tan2A=1.
+\]
+Since $0\le A\le\pi$, we have $0\le2A\le2\pi$. Thus
+\[
+2A=\frac{\pi}{4},\frac{5\pi}{4},
+\]
+and
+\[
+A=\frac{\pi}{8},\frac{5\pi}{8}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Expressions involving $1-\tan^2A$ often point to $\tan2A$.
+  \item Reciprocal identities can reveal hidden double-angle forms.
+  \item When solving $\tan2A$, double the interval before listing solutions.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[An Inverse Sine and Cosine Identity]
+Prove or disprove the statement:
+\[
+\arcsin x+\arccos x=\frac{\pi}{2}
+\]
+for any real number $x$ for which the left-hand side is defined.
+\end{problem}
+
+\begin{hintbox}
+First check the domain. Both $\arcsin x$ and $\arccos x$ require
+$-1\le x\le 1$.
+\end{hintbox}
+
+\begin{solution}
+The left-hand side is defined exactly when both inverse trigonometric functions
+are defined, so we must have
+\[
+-1\le x\le1.
+\]
+For such an $x$, let
+\[
+\theta=\arcsin x.
+\]
+Then $\theta\in[-\pi/2,\pi/2]$ and $\sin\theta=x$. Hence
+\[
+\cos\left(\frac{\pi}{2}-\theta\right)=\sin\theta=x.
+\]
+Since $\frac{\pi}{2}-\theta\in[0,\pi]$, this angle lies in the principal range
+of $\arccos$. Therefore
+\[
+\arccos x=\frac{\pi}{2}-\theta.
+\]
+Thus
+\[
+\arcsin x+\arccos x
+=\theta+\left(\frac{\pi}{2}-\theta\right)
+=\frac{\pi}{2}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Always check the domain before deciding whether an identity is true.
+  \item The identity $\arcsin x+\arccos x=\pi/2$ is valid exactly for
+        $x\in[-1,1]$.
+  \item Principal ranges are part of the definition of inverse trigonometric
+        functions.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Counting Roots with a Sum-to-Product Identity]
+How many distinct solutions are there to
+\[
+\cos4x+\cos2x=0
+\]
+in the interval $0\le x\le2\pi$?
+\[
+\text{A. }4
+\qquad
+\text{B. }6
+\qquad
+\text{C. }8
+\qquad
+\text{D. }12
+\]
+\end{problem}
+
+\begin{hintbox}
+Use $\cos P+\cos Q=2\cos\frac{P+Q}{2}\cos\frac{P-Q}{2}$, then check whether
+the solution sets overlap.
+\end{hintbox}
+
+\begin{solution}
+Using the sum-to-product identity,
+\[
+\cos4x+\cos2x
+=2\cos3x\cos x.
+\]
+Thus
+\[
+2\cos3x\cos x=0,
+\]
+so either $\cos x=0$ or $\cos3x=0$.
+
+For $\cos x=0$ on $[0,2\pi]$,
+\[
+x=\frac{\pi}{2},\frac{3\pi}{2}.
+\]
+For $\cos3x=0$,
+\[
+3x=\frac{\pi}{2}+k\pi.
+\]
+Since $0\le3x\le6\pi$, we have
+\[
+3x=\frac{\pi}{2},\frac{3\pi}{2},\frac{5\pi}{2},
+\frac{7\pi}{2},\frac{9\pi}{2},\frac{11\pi}{2},
+\]
+giving six values of $x$.
+
+The two roots from $\cos x=0$ are already included in the roots from
+$\cos3x=0$, so the total number of distinct solutions is
+\[
+\boxed{6}.
+\]
+The correct answer is B.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Sum-to-product identities convert some equations into factored form.
+  \item When solving $\cos(nx)=0$, scale the argument interval carefully.
+  \item Count distinct roots; do not double-count roots shared by two factors.
+\end{itemize}
+\end{takeaways}
