@@ -79,6 +79,87 @@ Therefore, the real solutions are
     \end{itemize}
 \end{takeaways}
 
+\begin{problem}[Deriving Functional Rules Through Substitution]
+Let $f$ be a function such that
+\[
+f:\mathbb{R}\setminus\{1\}\to\mathbb{R}.
+\]
+The function satisfies
+\[
+f\!\left(\frac{x+1}{x-1}\right)=\frac{x}{x+1}
+\]
+for all real numbers $x\ne \pm 1$.
+\begin{enumerate}[label=(\roman*)]
+\item Find the value of $x$ such that $\dfrac{x+1}{x-1}=2$. Hence calculate $f(2)$.
+\item By using the substitution $u=\dfrac{x+1}{x-1}$, express $f(x)$ in terms of $x$ wherever the rule is determined.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For (i), solve the inner equation first, then substitute that value of $x$ into the right-hand side. For (ii), solve
+\[
+u=\frac{x+1}{x-1}
+\]
+for $x$ in terms of $u$, then substitute into $\dfrac{x}{x+1}$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Solve
+\[
+\frac{x+1}{x-1}=2.
+\]
+Then
+\[
+x+1=2x-2
+\quad\Longrightarrow\quad
+x=3.
+\]
+Substitute $x=3$ into the original equation:
+\[
+f(2)=\frac{3}{3+1}=\boxed{\frac34}.
+\]
+
+\textbf{(ii)} Let
+\[
+u=\frac{x+1}{x-1}.
+\]
+Solving for $x$,
+\[
+u(x-1)=x+1
+\quad\Longrightarrow\quad
+x(u-1)=u+1
+\quad\Longrightarrow\quad
+x=\frac{u+1}{u-1}.
+\]
+Hence
+\[
+f(u)=\frac{\frac{u+1}{u-1}}{\frac{u+1}{u-1}+1}
+=\frac{\frac{u+1}{u-1}}{\frac{2u}{u-1}}
+=\frac{u+1}{2u}.
+\]
+Replacing $u$ by $x$ gives
+\[
+\boxed{f(x)=\frac{x+1}{2x}}
+\]
+for $x\ne 0,1$.
+
+The value $f(0)$ is not determined by the given equation, because the input $0$ would require
+\[
+\frac{x+1}{x-1}=0
+\quad\Longrightarrow\quad
+x=-1,
+\]
+but $x=-1$ is excluded.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item The input to $f$ is the whole expression inside the brackets, not the parameter $x$ itself.
+\item To recover a hidden function rule, invert the inner expression and substitute back into the output side.
+\item Always check which inputs are actually covered by the substitution; here the equation determines $f(x)$ for $x\ne 0,1$, but not $f(0)$.
+\end{itemize}
+\end{takeaways}
+
 \begin{problem}[Composites with a Parameter]
 Given the functions
 \[

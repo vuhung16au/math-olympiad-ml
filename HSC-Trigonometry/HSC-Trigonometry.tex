@@ -343,4 +343,62 @@ LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.
 GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
 Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Trigonometry}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Trigonometry}
 
+% ============================================================
+\appendix
+\section{Appendices}
+% ============================================================
+
+\subsection{The Signs of the Trigonometric Functions}
+
+The signs of the trigonometric functions depend only on the signs of $x$ and $y$. (The radius $r$ is always positive.) The signs of $x$ and $y$ depend in turn only on the quadrant in which the ray lies. The table below summarises the sign of each function in each quadrant; the accompanying diagram shows the coordinate signs on the unit circle.
+
+\vspace{0.8em}
+
+\noindent
+\begin{minipage}[c]{0.62\textwidth}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Function} & \textbf{1st} & \textbf{2nd} & \textbf{3rd} & \textbf{4th} \\
+\hline
+$x$            & $+$ & $-$ & $-$ & $+$ \\
+$y$            & $+$ & $+$ & $-$ & $-$ \\
+$r$            & $+$ & $+$ & $+$ & $+$ \\
+\hline
+$\sin\theta$   & $+$ & $+$ & $-$ & $-$ \\
+$\cos\theta$   & $+$ & $-$ & $-$ & $+$ \\
+$\tan\theta$   & $+$ & $-$ & $+$ & $-$ \\
+\hline
+$\csc\theta$   & $+$ & $+$ & $-$ & $-$ \\
+$\sec\theta$   & $+$ & $-$ & $-$ & $+$ \\
+$\cot\theta$   & $+$ & $-$ & $+$ & $-$ \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+{\small
+$\csc\theta$ has the same sign as $\sin\theta$;
+$\sec\theta$ has the same sign as $\cos\theta$;
+$\cot\theta$ has the same sign as $\tan\theta$.}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.34\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.5, >=stealth]
+  % Unit circle
+  \draw[thick] (0,0) circle (1);
+  % Axes
+  \draw[->, thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+  \draw[->, thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+  % Quadrant labels (coordinate signs)
+  \node[font=\small] at ( 0.6, 0.65) {$(+,+)$};
+  \node[font=\small] at (-0.65, 0.65) {$(-,+)$};
+  \node[font=\small] at (-0.65,-0.65) {$(-,-)$};
+  \node[font=\small] at ( 0.6,-0.65) {$(+,-)$};
+  % Rays at 45-degree intervals (representative)
+  \foreach \angle in {45,135,225,315}
+    \draw[->, gray!70, thin] (0,0) -- (\angle:1.25);
+\end{tikzpicture}
+\end{minipage}
+
 \end{document}
