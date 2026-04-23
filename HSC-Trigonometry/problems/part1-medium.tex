@@ -287,8 +287,7 @@ the centre of the circle. Another side has length $7$.
   \begin{scope}[xshift=10.5cm, scale=0.72]
     \coordinate (C) at (0,0);
     \coordinate (D) at (10,0);
-    \coordinate (E) at (6.25,7.071);
-    \draw[thick] (5,2.209) circle (5.467);
+    \coordinate (E) at (6.25,{5*sqrt(2)});
     \draw[thick, bookred] (C)--(D)--(E)--cycle;
     \node[below] at ($(C)!0.5!(D)$) {$10$};
     \node[right] at ($(D)!0.5!(E)$) {$8$};
