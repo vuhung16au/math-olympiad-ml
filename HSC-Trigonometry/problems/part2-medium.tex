@@ -440,58 +440,56 @@ For all real $x$, reduce $x$ modulo $2\pi$ and apply this piecewise formula.
 % ------------------------------------------------------------------
 
 \begin{problem}[A Numerical Trigonometric Equation]
-Solve numerically for $0\le x\le2\pi$:
+Solve for $0\le x\le2\pi$:
 \[
-4\sin^3x+8\sin^2x-19x+7=0.
+4\sin^3x+8\sin^2x-19\sin x+7=0.
 \]
 \end{problem}
 
 \begin{hintbox}
-The linear term in $x$ means this is not a standard ``let $u=\sin x$''
-equation. Use sign changes and a numerical method.
+Put $u=\sin x$. Notice that the resulting cubic has the root $u=1$.
 \end{hintbox}
 
 \begin{solution}
-Let
+Put $u=\sin x$. The equation becomes
 \[
-F(x)=4\sin^3x+8\sin^2x-19x+7.
+4u^3+8u^2-19u+7=0.
 \]
-Then
+Since $u=1$ is a root,
 \[
-F(0)=7>0,
+4u^3+8u^2-19u+7=(u-1)(4u^2+12u-7).
+\]
+Thus
+\[
+u=1,
 \qquad
-F(1)\approx -3.95<0,
+4u^2+12u-7=0.
 \]
-so there is at least one root in $(0,1)$.
-
-Also,
+The quadratic gives
 \[
-F'(x)=12\sin^2x\cos x+16\sin x\cos x-19
-=4\sin x\cos x(3\sin x+4)-19.
+u=\frac{-12\pm16}{8},
+\quad\text{so}\quad
+u=\frac12 \quad\text{or}\quad u=-\frac72.
 \]
-When $\sin x\cos x(3\sin x+4)$ is positive, it is at most
-$\frac12\cdot7=\frac72$, so
+Because $u=\sin x$, the value $u=-\frac72$ is impossible. Hence
 \[
-F'(x)\le 4\cdot\frac72-19=-5<0.
+\sin x=1
+\quad\text{or}\quad
+\sin x=\frac12.
 \]
-Hence $F$ is strictly decreasing on $[0,2\pi]$, so the root is unique.
-
-Using Newton's method or a graphing calculator,
+For $0\le x\le2\pi$, the solutions are
 \[
-x\approx0.478018.
-\]
-Therefore, to three decimal places,
-\[
-\boxed{x\approx0.478}.
+\boxed{x=\frac{\pi}{6},\ \frac{\pi}{2},\ \frac{5\pi}{6}}.
 \]
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}[leftmargin=*]
-  \item Not every trigonometric equation has an exact HSC-style solution.
-  \item A linear term in $x$ prevents the substitution $u=\sin x$ from reducing
-        the equation to a polynomial in $u$.
-  \item Numerical solving should still be supported by interval and reasonableness
-        checks.
+  \item If an equation is a polynomial in $\sin x$, try the substitution
+        $u=\sin x$.
+  \item After solving for $u$, reject any values outside the range
+        $-1\le u\le1$.
+  \item Convert the remaining sine values back to all angles in the required
+        interval.
 \end{itemize}
 \end{takeaways}
