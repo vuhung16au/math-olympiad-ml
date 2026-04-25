@@ -388,6 +388,112 @@ The most common trigonometry mistake is ignoring the full solution set when solv
 Trigonometric functions appear throughout mathematics, physics, engineering, and data science. Fourier analysis decomposes any periodic signal -- sound, images, electrical waveforms -- into sums of sines and cosines. The $t$-substitution and product-to-sum identities that appear in HSC Extension~2 are the same tools used in signal processing, control theory, and quantum mechanics.
 \end{remark}
 
+\subsection{Fundamental Trigonometric Limits}
+
+Two fundamental limits underpin all of differential calculus for trigonometric functions:
+\[
+\lim_{x \to 0} \frac{\sin x}{x} = 1,
+\qquad
+\lim_{x \to 0} \frac{\tan x}{x} = 1.
+\]
+
+\textbf{Why $\lim_{x \to 0} \dfrac{\sin x}{x} = 1$.}
+A geometric squeeze argument confirms this. For small $x > 0$, the unit-circle geometry gives the area inequality
+\[
+\tfrac{1}{2}\sin x \;\le\; \tfrac{1}{2}x \;\le\; \tfrac{1}{2}\tan x,
+\]
+which after dividing by $\tfrac{1}{2}\sin x$ becomes
+\[
+1 \;\le\; \frac{x}{\sin x} \;\le\; \frac{1}{\cos x}.
+\]
+Taking reciprocals (reversing inequalities):
+\[
+\cos x \;\le\; \frac{\sin x}{x} \;\le\; 1.
+\]
+Since $\cos x \to 1$ as $x \to 0^+$, the Squeeze Theorem gives $\dfrac{\sin x}{x} \to 1$. The limit for $x < 0$ follows by symmetry ($\sin x$ is odd).
+
+The tangent limit follows immediately:
+\[
+\frac{\tan x}{x}
+= \frac{\sin x}{x}\cdot\frac{1}{\cos x}
+\;\longrightarrow\; 1\cdot 1 = 1.
+\]
+
+\textbf{Connection to the Maclaurin series.}
+The Taylor series for $\sin x$ is
+\[
+\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots
+\]
+Dividing by $x$ ($x\neq 0$):
+\[
+\frac{\sin x}{x} = 1 - \frac{x^2}{3!} + \frac{x^4}{5!} - \cdots \;\xrightarrow{x\to 0}\; 1.
+\]
+This confirms the geometric result and shows that $x$ is the best linear approximation to $\sin x$ near the origin.
+
+\begin{remark}
+The limit $\lim_{x\to 0}\dfrac{\sin x}{x}=1$ holds only when $x$ is measured in \emph{radians}. In degrees, $\sin(x^\circ)=\sin\!\left(\tfrac{\pi x}{180}\right)$, so the analogous limit becomes $\dfrac{\pi}{180}\approx 0.0175$.
+\end{remark}
+
+\subsection{Derivatives and Integrals of Trigonometric Functions}
+
+\textbf{(i) Derivatives.}
+
+The standard differentiation results are:
+\[
+\frac{d}{dx}\sin x = \cos x,
+\qquad
+\frac{d}{dx}\cos x = -\sin x,
+\qquad
+\frac{d}{dx}\tan x = \sec^2 x.
+\]
+
+\textbf{Why $(\sin x)' = \cos x$.}
+By the definition of the derivative and the compound-angle formula:
+\[
+\frac{d}{dx}\sin x
+= \lim_{h\to 0}\frac{\sin(x+h)-\sin x}{h}
+= \lim_{h\to 0}\frac{\cos x\sin h + \sin x(\cos h - 1)}{h}.
+\]
+Using $\displaystyle\lim_{h\to 0}\frac{\sin h}{h}=1$ and $\displaystyle\lim_{h\to 0}\frac{\cos h-1}{h}=0$:
+\[
+= \cos x \cdot 1 + \sin x \cdot 0 = \cos x.
+\]
+The limit $\dfrac{\cos h - 1}{h} \to 0$ follows from the Maclaurin series: $1 - \cos h \approx h^2/2$, so $\dfrac{\cos h - 1}{h} \approx -h/2 \to 0$.
+
+\textbf{Connection to Taylor series.}
+Differentiating the Maclaurin series term by term confirms these results:
+\[
+\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots
+\;\implies\;
+(\sin x)' = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots = \cos x.
+\]
+\[
+\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots
+\;\implies\;
+(\cos x)' = -x + \frac{x^3}{3!} - \cdots = -\sin x.
+\]
+
+
+\textbf{(ii) Integrals.}
+
+The antiderivatives follow directly from the derivative rules:
+\[
+\int \sin x \, dx = -\cos x + C,
+\qquad
+\int \cos x \, dx = \sin x + C,
+\qquad
+\int \tan x \, dx = -\ln|\cos x| + C.
+\]
+
+For $\tan x$, write $\tan x = \dfrac{\sin x}{\cos x}$ and use the substitution $u = \cos x$, $du = -\sin x\,dx$:
+\[
+\int \tan x \, dx
+= \int \frac{\sin x}{\cos x}\, dx
+= -\int \frac{du}{u}
+= -\ln|u|+C
+= -\ln|\cos x|+C.
+\]
+
 % ============================================================
 \section{Part 1: Worked Problems}
 % ============================================================
@@ -597,5 +703,34 @@ polynomials near $x=0$. For instance, when $x$ is small,
 \qquad
 \cos x\approx 1-\frac{x^2}{2}.
 \]
+
+\subsection{Introduction to the Laplace Transform}
+
+\begin{remark}
+The Laplace transform is beyond the NSW HSC Extension~1 and Extension~2 syllabuses. It is included here as enrichment for students considering university mathematics, engineering, or physics.
+\end{remark}
+
+The \textbf{Laplace transform} converts a function of time $t$ into a function of a parameter $s$, turning differential equations into algebraic ones. For a function $f(t)$ defined for $t \ge 0$:
+\[
+\mathcal{L}\{f(t)\} = F(s) = \int_0^\infty e^{-st}\,f(t)\,dt,
+\]
+provided the improper integral converges (which requires $s$ to be sufficiently large).
+
+\textbf{Example 1: Laplace transform of $\cos(at)$.}
+For $a > 0$ and $s > 0$:
+\[
+\mathcal{L}\{\cos(at)\} = \int_0^\infty e^{-st}\cos(at)\,dt = \frac{s}{s^2+a^2}.
+\]
+The derivation uses integration by parts twice (the ``looping'' integral), or Euler's formula. See the worked problem in Part~1 Advanced for the full derivation.
+
+\textbf{Example 2: Laplace transform of $\sin(at)$.}
+\[
+\mathcal{L}\{\sin(at)\} = \int_0^\infty e^{-st}\sin(at)\,dt = \frac{a}{s^2+a^2}.
+\]
+This follows simultaneously from the complex-exponential method: the imaginary part of
+$\mathcal{L}\{e^{iat}\} = \dfrac{1}{s-ia}$
+gives the sine transform for free.
+
+\textbf{Why it matters.} The Laplace transform turns the differential equation $y'' + \omega^2 y = 0$ (simple harmonic motion) into the algebraic equation $(s^2+\omega^2)Y(s) = \text{initial conditions}$. Inverting using the table above recovers $y(t) = A\cos(\omega t) + B\sin(\omega t)$---exactly the sinusoidal solutions that arise throughout HSC physics.
 
 \end{document}

@@ -322,35 +322,35 @@ the origin?
 \begin{tikzpicture}[scale=0.72, >=Stealth]
   \begin{scope}[shift={(0,0)}]
     \draw[->] (-3,0)--(3,0) node[right] {$x$};
-    \draw[->] (0,-2)--(0,2) node[above] {$y$};
+    \draw[->] (0,-2)--(0,2.4) node[above] {$y$};
     \draw[thick,bookred] plot[domain=-2.5:2.5, samples=120]
       (\x,{1.2*sin(\x r)-0.8*cos(\x r)});
-    \fill[bookpurple] (0,-0.8) circle (2pt);
-    \node[below] at (0,-2.25) {Graph A};
+    \fill[bookred] (0,-0.8) circle (2pt);
+    \node[below=6pt] at (0,-2) {Graph A};
   \end{scope}
-  \begin{scope}[shift={(7.2,0)}]
+  \begin{scope}[shift={(7.5,0)}]
     \draw[->] (-3,0)--(3,0) node[right] {$x$};
-    \draw[->] (0,-2)--(0,2) node[above] {$y$};
-    \draw[thick,black] plot[domain=-2.5:2.5, samples=120]
+    \draw[->] (0,-2)--(0,2.4) node[above] {$y$};
+    \draw[thick,bookpurple] plot[domain=-2.5:2.5, samples=120]
       (\x,{-1.2*sin(\x r)+0.8*cos(\x r)});
     \fill[bookpurple] (0,0.8) circle (2pt);
-    \node[below] at (0,-2.25) {Graph B};
+    \node[below=6pt] at (0,-2) {Graph B};
   \end{scope}
-  \begin{scope}[shift={(0,-5.2)}]
+  \begin{scope}[shift={(0,-6.4)}]
     \draw[->] (-3,0)--(3,0) node[right] {$x$};
-    \draw[->] (0,-2)--(0,2) node[above] {$y$};
-    \draw[thick,black] plot[domain=-2.5:2.5, samples=120]
+    \draw[->] (0,-2)--(0,2.4) node[above] {$y$};
+    \draw[thick,teal] plot[domain=-2.5:2.5, samples=120]
       (\x,{1.2*sin(\x r)+0.8*cos(\x r)});
-    \fill[bookpurple] (0,0.8) circle (2pt);
-    \node[below] at (0,-2.25) {Graph C};
+    \fill[teal] (0,0.8) circle (2pt);
+    \node[below=6pt] at (0,-2) {Graph C};
   \end{scope}
-  \begin{scope}[shift={(7.2,-5.2)}]
+  \begin{scope}[shift={(7.5,-6.4)}]
     \draw[->] (-3,0)--(3,0) node[right] {$x$};
-    \draw[->] (0,-2)--(0,2) node[above] {$y$};
-    \draw[thick,black] plot[domain=-2.5:2.5, samples=120]
+    \draw[->] (0,-2)--(0,2.4) node[above] {$y$};
+    \draw[thick,orange!80!black] plot[domain=-2.5:2.5, samples=120]
       (\x,{-1.2*sin(\x r)-0.8*cos(\x r)});
-    \fill[bookpurple] (0,-0.8) circle (2pt);
-    \node[below] at (0,-2.25) {Graph D};
+    \fill[orange!80!black] (0,-0.8) circle (2pt);
+    \node[below=6pt] at (0,-2) {Graph D};
   \end{scope}
 \end{tikzpicture}
 \end{center}

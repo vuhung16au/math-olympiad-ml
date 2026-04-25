@@ -404,3 +404,298 @@ Therefore
         sums.
 \end{itemize}
 \end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Integration of Mixed Trigonometric Products]
+\begin{enumerate}[(a)]
+  \item Show that $\sin(A + B) + \sin(A - B) = 2\sin A \cos B$.
+  \item Hence find:
+    \begin{enumerate}[(i)]
+      \item $\displaystyle\int_0^{\pi/2} 2\sin 3x\cos 2x\,dx$
+      \item $\displaystyle\int_0^{\pi} \sin 2x\cos 4x\,dx$
+    \end{enumerate}
+  \item Find the indefinite integral $\int \sin mx\cos nx\,dx$, where $m$ and $n$ are:
+    \begin{enumerate}[(i)]
+      \item distinct positive integers ($m \neq n$),
+      \item equal positive integers ($m = n$).
+    \end{enumerate}
+  \item Show that for all positive integers $m$ and $n$:
+  \[
+  \int_{-\pi}^{\pi}\sin mx\cos nx\,dx = 0.
+  \]
+  Explain how this result can be deduced without performing any integration.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+\textbf{(a)} Expand $\sin(A+B)$ and $\sin(A-B)$ using compound-angle formulae, then add.
+
+\textbf{(b)} Apply the identity from (a) in reverse with the product on the right-hand side.
+Note $\sin(-\theta) = -\sin\theta$.
+
+\textbf{(c)(ii)} Substitute $m = n$ first; $\sin mx\cos mx = \tfrac{1}{2}\sin 2mx$ via the
+double-angle formula.
+
+\textbf{(d)} Show the integrand is an odd function.  The integral of any odd function over a
+symmetric interval $[-a,a]$ is zero.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(a)} Expanding the compound-angle formulae:
+\[
+\sin(A+B) = \sin A\cos B + \cos A\sin B,
+\qquad
+\sin(A-B) = \sin A\cos B - \cos A\sin B.
+\]
+Adding: $\sin(A+B)+\sin(A-B) = 2\sin A\cos B$.\hfill$\square$
+
+\textbf{(b)(i)} Set $A = 3x$, $B = 2x$: $2\sin 3x\cos 2x = \sin 5x + \sin x$.
+\[
+\int_0^{\pi/2}(\sin 5x+\sin x)\,dx
+= \left[-\tfrac{1}{5}\cos 5x - \cos x\right]_0^{\pi/2}
+= (0-0) - \!\left(-\tfrac{1}{5}-1\right) = \frac{6}{5}.
+\]
+
+\textbf{(b)(ii)} Set $A = 2x$, $B = 4x$: $\sin 2x\cos 4x = \tfrac{1}{2}[\sin 6x + \sin(-2x)]
+= \tfrac{1}{2}(\sin 6x - \sin 2x)$.
+\[
+\int_0^{\pi}\tfrac{1}{2}(\sin 6x - \sin 2x)\,dx
+= \tfrac{1}{2}\!\left[-\tfrac{1}{6}\cos 6x + \tfrac{1}{2}\cos 2x\right]_0^{\pi}
+= \tfrac{1}{2}\!\left[\left(-\tfrac{1}{6}+\tfrac{1}{2}\right)-\left(-\tfrac{1}{6}+\tfrac{1}{2}\right)\right]
+= 0.
+\]
+
+\textbf{(c)(i) $m \neq n$:}
+\[
+\int\sin mx\cos nx\,dx
+= \tfrac{1}{2}\int\bigl[\sin(m+n)x + \sin(m-n)x\bigr]\,dx
+= -\frac{\cos(m+n)x}{2(m+n)} - \frac{\cos(m-n)x}{2(m-n)} + C.
+\]
+
+\textbf{(c)(ii) $m = n$:} $\sin mx\cos mx = \tfrac{1}{2}\sin 2mx$, so
+\[
+\int\sin mx\cos mx\,dx = \frac{1}{2}\int\sin 2mx\,dx = -\frac{\cos 2mx}{4m} + C.
+\]
+
+\textbf{(d)} Let $f(x) = \sin mx\cos nx$. Then
+\[
+f(-x) = \sin(-mx)\cos(-nx) = (-\sin mx)(\cos nx) = -f(x),
+\]
+so $f$ is odd. The integral of any odd function over a symmetric interval $[-\pi,\pi]$ is zero.
+
+Alternatively, using (c)(i): $\cos(k\pi) = \cos(-k\pi)$ for any integer $k$, so the upper and
+lower limit evaluations are equal and their difference is zero.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The identity $2\sin A\cos B = \sin(A+B)+\sin(A-B)$ converts products into sums that
+        are straightforward to integrate.
+  \item When $m = n$, the double-angle shortcut $\sin(mx)\cos(mx) = \tfrac{1}{2}\sin(2mx)$
+        avoids the product-to-sum formula altogether.
+  \item Recognising an integrand as an odd function over a symmetric interval immediately gives
+        a zero result---a cornerstone of Fourier analysis.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Establishing the Lower Bound of $\sin x$]
+Let $f(x) = \sin x - x + \dfrac{x^3}{6}$ for $x \ge 0$.
+
+\begin{enumerate}[(i)]
+  \item Find $f'(x)$, $f''(x)$, $f'''(x)$, and $f^{(4)}(x)$.
+  \item By considering the values of these derivatives at $x = 0$ and their signs for $x > 0$,
+        prove that
+        \[
+        \sin x \ge x - \frac{x^3}{6}
+        \]
+        for all $x \ge 0$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+\textbf{Chain of Logic:} If $g'(x) \ge 0$ for all $x \ge 0$ and $g(0) = 0$, then $g(x) \ge 0$
+for all $x \ge 0$.
+
+Start from $f^{(4)}(x)$ and work downwards: show $f'''(x) \ge 0$, then $f''(x) \ge 0$, then
+$f'(x) \ge 0$, and finally $f(x) \ge 0$.  Each step uses only the sign of the derivative above
+it and the initial condition at $x = 0$.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i) Derivatives.}
+\[
+f'(x) = \cos x - 1 + \tfrac{x^2}{2},\quad
+f''(x) = -\sin x + x,\quad
+f'''(x) = -\cos x + 1,\quad
+f^{(4)}(x) = \sin x.
+\]
+
+\textbf{(ii) Proof by successive monotonicity.}
+
+\textit{Step 1.} For $x \in [0, \pi]$, $f^{(4)}(x) = \sin x \ge 0$.
+
+\textit{Step 2.} Since $f^{(4)} \ge 0$, $f'''$ is non-decreasing on $[0,\infty)$.
+Since $f'''(0) = -\cos 0 + 1 = 0$, we have $f'''(x) \ge 0$ for all $x \ge 0$.
+
+\textit{Step 3.} Since $f''' \ge 0$, $f''$ is non-decreasing.
+Since $f''(0) = -\sin 0 + 0 = 0$, we have $f''(x) \ge 0$ for all $x \ge 0$.
+
+\textit{Step 4.} Since $f'' \ge 0$, $f'$ is non-decreasing.
+Since $f'(0) = \cos 0 - 1 + 0 = 0$, we have $f'(x) \ge 0$ for all $x \ge 0$.
+
+\textit{Step 5.} Since $f' \ge 0$, $f$ is non-decreasing.
+Since $f(0) = \sin 0 - 0 + 0 = 0$, we have $f(x) \ge 0$ for all $x \ge 0$.
+
+Therefore $\sin x - x + \dfrac{x^3}{6} \ge 0$, which rearranges to
+\[
+\sin x \ge x - \frac{x^3}{6}.\qquad\square
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item This ``successive monotonicity'' technique proves polynomial bounds on transcendental
+        functions without invoking the Taylor series formula directly.
+  \item The initial conditions $f(0)=f'(0)=f''(0)=f'''(0)=0$ allow each inequality to
+        propagate upward from the origin.
+  \item Along the way, Step~3 proves the classical inequality $\sin x \le x$ (since $f''(x)\ge0$
+        means $x - \sin x \ge 0$).
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Polynomial Bounds and the Cosine Series]
+The Maclaurin series for $\cos x$ is
+\[
+\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots
+\]
+
+\begin{enumerate}[(i)]
+  \item It is known geometrically that $\sin t \le t$ for $t \ge 0$.  Integrate this inequality
+        over $[0, x]$ (with $x > 0$) to show that $\cos x \ge 1 - \dfrac{x^2}{2!}$.
+  \item Rearrange the inequality from (i) to the form $1 - \dfrac{t^2}{2!} \le \cos t$.
+        Integrate this inequality twice over $[0, x]$ to show that
+        \[
+        \cos x \le 1 - \frac{x^2}{2!} + \frac{x^4}{4!}.
+        \]
+  \item By continuing this process of repeated integration, the pattern alternates between upper
+        and lower bounds.  Write down the compound inequality bounding $\cos x$ between its
+        degree-$(4n+2)$ lower bound and degree-$4n$ upper bound, for any integer $n \ge 0$.
+  \item Use the concept of even functions to explain briefly why the series converges to
+        $\cos x$ for \emph{all} real $x$, not just $x \ge 0$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+\textbf{(i)} Recall $\int_0^x \sin t\,dt = 1 - \cos x$.  Be careful with the signs.
+
+\textbf{(ii)} First integrate $1 - t^2/2 \le \cos t$ to obtain a bound on $\sin x$, then
+integrate the sine bound to return to a bound on $\cos x$.
+
+\textbf{(iii)} When the highest-power term is $x^{4n+2}$ the sign is negative (lower bound);
+when it is $x^{4n}$ the sign is positive (upper bound).
+
+\textbf{(iv)} What does substituting $-x$ do to all even powers $x^{2k}$?
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Integrating $\sin t \le t$ from $0$ to $x$:
+\[
+\int_0^x \sin t\,dt \le \int_0^x t\,dt
+\;\implies\; [-\cos t]_0^x \le \tfrac{x^2}{2}
+\;\implies\; 1-\cos x \le \tfrac{x^2}{2!},
+\]
+so $\cos x \ge 1 - \dfrac{x^2}{2!}$.
+
+\textbf{(ii)} From (i), $1 - \dfrac{t^2}{2!} \le \cos t$.  Integrate from $0$ to $x$:
+\[
+x - \frac{x^3}{3!} \le \sin x.
+\]
+Now integrate $t - \dfrac{t^3}{3!} \le \sin t$ from $0$ to $x$:
+\[
+\frac{x^2}{2!} - \frac{x^4}{4!} \le [-\cos t]_0^x = 1-\cos x,
+\]
+so $\cos x \le 1 - \dfrac{x^2}{2!} + \dfrac{x^4}{4!}$.
+
+\textbf{(iii)} Continuing the pattern:
+\[
+1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots-\frac{x^{4n+2}}{(4n+2)!}
+\;\le\; \cos x \;\le\;
+1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots+\frac{x^{4n}}{(4n)!}.
+\]
+As $n\to\infty$, factorials grow faster than any exponential, so both bounds converge to
+$\cos x$ for all $x > 0$.
+
+\textbf{(iv)} Since $\cos x$ is an even function and every term $x^{2k}$ satisfies
+$(-x)^{2k} = x^{2k}$, substituting $-x$ leaves the series unchanged.  The bounds established
+for $x > 0$ therefore hold identically for $x < 0$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Repeated integration is a rigorous way to derive Taylor polynomial bounds from a single
+        geometric inequality ($\sin t \le t$), without invoking the Taylor formula itself.
+  \item The factorials in the denominators arise naturally from repeated integration of powers:
+        $\int t^n\,dt = t^{n+1}/(n+1)$.
+  \item The even-function argument extends results from the non-negative half-axis to the full
+        real line without any extra calculation.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[The Laplace Transform of Cosine]
+% \begin{remark}
+% This problem involves improper integrals and complex exponentials, which lie beyond the NSW HSC
+% syllabus.  It is included as enrichment for students interested in university-level mathematics.
+% \end{remark}
+
+Let $a > 0$.  Consider the improper integral $\displaystyle I = \int_0^\infty e^{-ax}\cos x\,dx$.
+Using integration by parts twice, show that $I = \dfrac{a}{a^2+1}$.
+\end{problem}
+
+\begin{hintbox}
+Let $u = \cos x$, $dv = e^{-ax}dx$.  After two applications of parts, the original integral $I$
+reappears on the right-hand side; collect it algebraically.  Recall $e^{-ax}\to 0$ as
+$x\to\infty$ (since $a>0$).
+\end{hintbox}
+
+\begin{solution}
+Let $u = \cos x$, $dv = e^{-ax}dx$, so $du = -\sin x\,dx$, $v = -\tfrac{1}{a}e^{-ax}$.
+\[
+I = \left[-\frac{e^{-ax}\cos x}{a}\right]_0^\infty
+  - \int_0^\infty \frac{e^{-ax}\sin x}{a}\,dx
+= \frac{1}{a} - \frac{1}{a}\int_0^\infty e^{-ax}\sin x\,dx.
+\]
+Apply parts to $\int e^{-ax}\sin x\,dx$ with $u = \sin x$, $dv = e^{-ax}dx$:
+\[
+\int_0^\infty e^{-ax}\sin x\,dx
+= \left[-\frac{e^{-ax}\sin x}{a}\right]_0^\infty
++ \frac{1}{a}\int_0^\infty e^{-ax}\cos x\,dx
+= 0 + \frac{I}{a}.
+\]
+Substituting back:
+\[
+I = \frac{1}{a} - \frac{1}{a}\cdot\frac{I}{a} = \frac{1}{a} - \frac{I}{a^2}.
+\]
+Solving: $I\!\left(1+\tfrac{1}{a^2}\right) = \tfrac{1}{a}$, so
+\[
+\mathbf{I = \frac{a}{a^2+1}}.\qquad\square
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The ``looping'' integration by parts technique works whenever the integrand reproduces
+        itself after an even number of applications---as it does for $e^{ax}\sin(bx)$ and
+        $e^{ax}\cos(bx)$.
+  \item This integral is the \textbf{Laplace transform} of $\cos x$, written
+        $\mathcal{L}\{\cos x\}(a) = \dfrac{a}{a^2+1}$, a fundamental tool for solving
+        differential equations at university level.
+  \item \textbf{Euler's formula shortcut (Extension~2 / university):} Consider the complex
+        integral $Z = \int_0^\infty e^{-(a-i)x}\,dx = \dfrac{1}{a-i}$.  Rationalizing gives
+        $Z = \dfrac{a+i}{a^2+1}$.  By Euler's formula $e^{ix}=\cos x+i\sin x$, the real
+        part of $Z$ equals $I$, yielding $I = \dfrac{a}{a^2+1}$ immediately---and the
+        imaginary part gives $\int_0^\infty e^{-ax}\sin x\,dx = \dfrac{1}{a^2+1}$ for free.
+\end{itemize}
+\end{takeaways}

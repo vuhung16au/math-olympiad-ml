@@ -358,3 +358,295 @@ R=\frac{112}{3\sqrt{55}}\approx5.03.
         circumradius.
 \end{itemize}
 \end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[The Triple-Beat Sine Enclosures]
+Consider the curves $y = \sin x$ and $y = \sin 3x$.
+Calculate the total bounded area enclosed between these two curves over the interval $0 \le x \le \pi$.
+
+\begin{center}
+\begin{tikzpicture}[xscale=1.7, yscale=1.4, >=stealth]
+    \draw[->] (-0.2, 0) -- (3.5, 0) node[right] {$x$};
+    \draw[->] (0, -1.3) -- (0, 1.4) node[above] {$y$};
+
+    \fill[cyan!30] plot[domain=0:pi/4, samples=100] (\x, {sin(3*\x r)})
+                -- plot[domain=pi/4:0, samples=100] (\x, {sin(\x r)}) -- cycle;
+    \fill[cyan!30] plot[domain=pi/4:3*pi/4, samples=100] (\x, {sin(\x r)})
+                -- plot[domain=3*pi/4:pi/4, samples=100] (\x, {sin(3*\x r)}) -- cycle;
+    \fill[cyan!30] plot[domain=3*pi/4:pi, samples=100] (\x, {sin(3*\x r)})
+                -- plot[domain=pi:3*pi/4, samples=100] (\x, {sin(\x r)}) -- cycle;
+
+    \draw[thick, samples=100, domain=0:pi] plot (\x, {sin(\x r)});
+    \draw[thick, dashed, samples=100, domain=0:pi] plot (\x, {sin(3*\x r)});
+
+    \node[above] at (1.3, 0.95) {$y = \sin x$};
+    \node[below] at (1.1, -0.95) {$y = \sin 3x$};
+
+    \draw[dashed, thin] (pi/4, 0) -- (pi/4, {sin(pi/4 r)});
+    \draw[dashed, thin] (3*pi/4, 0) -- (3*pi/4, {sin(3*pi/4 r)});
+
+    \node[below] at (pi/4, 0) {$\frac{\pi}{4}$};
+    \node[below] at (pi/2, 0) {$\frac{\pi}{2}$};
+    \node[below] at (3*pi/4, 0) {$\frac{3\pi}{4}$};
+    \node[below] at (pi, 0) {$\pi$};
+    \filldraw (pi, 0) circle (0.8pt);
+
+    \node[left] at (0, 1) {$1$};
+    \node[left] at (0, -1) {$-1$};
+    \draw (-0.04, 1) -- (0.04, 1);
+    \draw (-0.04, -1) -- (0.04, -1);
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hintbox}
+\textbf{Find the Intersections:} Set $\sin 3x = \sin x$, then use the sum-to-product identity
+$\sin A - \sin B = 2\cos\!\left(\frac{A+B}{2}\right)\sin\!\left(\frac{A-B}{2}\right)$
+to factor the equation cleanly.
+
+\textbf{Split the Integral:} The curves cross inside $(0, \pi)$, so the top and bottom functions
+swap at each crossing.  Integrate the positive difference over each sub-interval separately.
+
+\textbf{Use Symmetry:} The graph has reflective symmetry about $x = \pi/2$.  You can integrate
+over $[0, \pi/2]$ and double the result.
+\end{hintbox}
+
+\begin{solution}
+\textbf{1.\ Points of Intersection.}
+
+Set $\sin 3x - \sin x = 0$. Using sum-to-product:
+\[
+2\cos(2x)\sin(x) = 0.
+\]
+For $x \in [0, \pi]$:
+\begin{itemize}[leftmargin=*]
+  \item $\sin x = 0 \implies x = 0,\, \pi$.
+  \item $\cos 2x = 0 \implies x = \dfrac{\pi}{4},\, \dfrac{3\pi}{4}$.
+\end{itemize}
+
+\textbf{2.\ Setting Up Integrals.}
+
+Testing $x = \pi/8$: $\sin(3\pi/8) > \sin(\pi/8)$, so $\sin 3x$ is the top curve on
+$[0, \pi/4]$ and $[3\pi/4, \pi]$, while $\sin x$ is on top on $[\pi/4, 3\pi/4]$.
+By symmetry about $x = \pi/2$, the total area is $2A_{\mathrm{half}}$, where
+\[
+A_{\mathrm{half}}
+= \int_0^{\pi/4}(\sin 3x - \sin x)\,dx
++ \int_{\pi/4}^{\pi/2}(\sin x - \sin 3x)\,dx.
+\]
+
+\textbf{3.\ Evaluating.}
+\[
+\int_0^{\pi/4}(\sin 3x - \sin x)\,dx
+= \left[-\tfrac{1}{3}\cos 3x + \cos x\right]_0^{\pi/4}
+= \frac{\sqrt{2}}{6} + \frac{\sqrt{2}}{2} - \left(-\tfrac{1}{3}+1\right)
+= \frac{4\sqrt{2}-4}{6}.
+\]
+\[
+\int_{\pi/4}^{\pi/2}(\sin x - \sin 3x)\,dx
+= \left[-\cos x + \tfrac{1}{3}\cos 3x\right]_{\pi/4}^{\pi/2}
+= (0+0)-\!\left(-\tfrac{\sqrt{2}}{2}+\tfrac{1}{3}\!\cdot\!\left(-\tfrac{\sqrt{2}}{2}\right)\right)
+= \frac{4\sqrt{2}}{6}.
+\]
+
+$A_{\mathrm{half}} = \dfrac{4\sqrt{2}-4}{6} + \dfrac{4\sqrt{2}}{6} = \dfrac{8\sqrt{2}-4}{6}$.
+
+\textbf{4.\ Total Area.}
+\[
+\text{Total Area} = 2\times\frac{8\sqrt{2}-4}{6} = \frac{8\sqrt{2}-4}{3}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item Sum-to-product is the efficient tool for $\sin(mx) = \sin(nx)$; expanding via the
+        triple-angle formula instead produces a messy cubic equation.
+  \item When finding the area between two curves that cross, always split the integral at each
+        crossing point and take the positive difference on each sub-interval.
+  \item Reflective symmetry can halve the integration effort; test a representative point to
+        confirm which curve is on top before integrating.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Sketching a Trigonometric Composite via Calculus]
+Let $f(x) = \sin x + 2\cos 2x$ for $0 \le x \le 2\pi$.
+\begin{enumerate}[(i)]
+  \item Calculate $f'(x)$.
+  \item Set $f'(x) = 0$ and solve for $x$ in $[0, 2\pi]$.
+  \item Construct a sign table for $f'(x)$ and hence determine the nature (local maximum or
+        local minimum) of each stationary point.
+  \item Use the values found above to sketch the graph of $y = f(x)$ for $0 \le x \le 2\pi$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+For part (i), differentiate term by term, remembering the chain rule for $\cos 2x$.
+For part (ii), use $\sin 2x = 2\sin x\cos x$ to factor $f'(x)$, then set each factor to zero.
+For part (iv), compute $f$ at each stationary point and at the endpoints $x = 0$ and $x = 2\pi$
+to anchor the sketch.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i) Derivative.}
+\[
+f'(x) = \cos x - 4\sin 2x = \cos x - 8\sin x\cos x = \cos x\,(1 - 8\sin x).
+\]
+
+\textbf{(ii) Stationary Points.}
+
+Set $\cos x\,(1 - 8\sin x) = 0$:
+\begin{itemize}[leftmargin=*]
+  \item $\cos x = 0 \implies x = \dfrac{\pi}{2},\, \dfrac{3\pi}{2}$.
+  \item $\sin x = \dfrac{1}{8} \implies x = \arcsin\!\left(\tfrac{1}{8}\right) \approx 0.125$
+        or $x = \pi - \arcsin\!\left(\tfrac{1}{8}\right) \approx 3.017$.
+\end{itemize}
+
+\textbf{(iii) Sign Table.}
+
+Let $x_1 = \arcsin(1/8) \approx 0.125$ and $x_2 = \pi - x_1 \approx 3.017$.
+
+\medskip
+\noindent
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|cccccc}
+$x$ & $(0,x_1)$ & $x_1$ & $(x_1,\frac{\pi}{2})$ & $\frac{\pi}{2}$ & $(\frac{\pi}{2},x_2)$ & $x_2$ \\
+\hline
+$\cos x$       & $+$ & $+$ & $+$ & $0$ & $-$ & $-$ \\
+$1-8\sin x$    & $+$ & $0$ & $-$ & $-$ & $-$ & $0$ \\
+$f'(x)$        & $+$ & $0$ & $-$ & $0$ & $+$ & $0$ \\
+shape          & $\nearrow$ & max & $\searrow$ & min & $\nearrow$ & max \\
+\end{tabular}
+\end{center}
+
+\medskip
+For $x \in (x_2, 3\pi/2)$: $\cos x < 0$ and $1-8\sin x > 0$, so $f' < 0$ ($\searrow$).
+At $x = 3\pi/2$: local minimum.  For $x \in (3\pi/2, 2\pi)$: $f' > 0$ ($\nearrow$).
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{l c r}
+\hline
+\textbf{Point} & \textbf{Nature} & $\boldsymbol{f(x)}$ \\
+\hline
+$x = 0$ & endpoint & $2$ \\
+$x_1 \approx 0.125$ & local max & $\approx 2.09$ \\
+$x = \dfrac{\pi}{2}$ & local min & $-1$ \\
+$x_2 \approx 3.017$ & local max & $\approx 2.09$ \\
+$x = \dfrac{3\pi}{2}$ & local min & $-3$ \\
+$x = 2\pi$ & endpoint & $2$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{(iv) Sketch.}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=10cm, height=6.5cm,
+  xmin=0, xmax=6.6,
+  ymin=-3.8, ymax=2.9,
+  xlabel={$x$}, ylabel={$f(x)$},
+  axis x line=center,
+  axis y line=left,
+  xtick={0, 1.5708, 3.1416, 4.7124, 6.2832},
+  xticklabels={$0$, $\dfrac{\pi}{2}$, $\pi$, $\dfrac{3\pi}{2}$, $2\pi$},
+  ytick={-3,-2,-1,0,1,2},
+  every axis x label/.style={at={(ticklabel* cs:1.02)}, anchor=west},
+  every axis y label/.style={at={(ticklabel* cs:1.02)}, anchor=south},
+  samples=300,
+  domain=0:6.2832,
+]
+% Main curve
+\addplot[thick, blue!70!black] {sin(deg(x)) + 2*cos(2*deg(x))};
+% Dashed guides to local minima
+\addplot[dashed, gray!60, thin] coordinates {(1.5708, 0) (1.5708, -1)};
+\addplot[dashed, gray!60, thin] coordinates {(0, -1) (1.5708, -1)};
+\addplot[dashed, gray!60, thin] coordinates {(4.7124, 0) (4.7124, -3)};
+\addplot[dashed, gray!60, thin] coordinates {(0, -3) (4.7124, -3)};
+% Stationary points
+\addplot[only marks, mark=*, mark size=2.5pt, blue!70!black] coordinates {
+  (0.1253, 2.094)  % local max x1
+  (3.0171, 2.094)  % local max x2
+};
+\addplot[only marks, mark=*, mark size=2.5pt, red!70!black] coordinates {
+  (1.5708, -1)     % local min pi/2
+  (4.7124, -3)     % local min 3pi/2
+};
+% Endpoints
+\addplot[only marks, mark=*, mark size=2.5pt, black] coordinates {
+  (0, 2) (6.2832, 2)
+};
+% Annotations
+\node[above right, font=\small] at (axis cs:0.1253, 2.094) {max};
+\node[above right, font=\small] at (axis cs:3.0171, 2.094) {max};
+\node[below right, font=\small] at (axis cs:1.5708, -1)    {min};
+\node[below right, font=\small] at (axis cs:4.7124, -3)    {min};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The double-angle identity $\sin 2x = 2\sin x\cos x$ converts $f'(x)$ into a product,
+        making sign analysis straightforward.
+  \item Amplitude is not preserved when two sinusoids are added; the combined function can
+        exhibit local extrema that neither constituent possesses individually.
+  \item Always compute function values at stationary points and at the endpoints to scale
+        the sketch accurately.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[A Periodic Integral for 2026]
+\begin{enumerate}[(i)]
+  \item Show that $\displaystyle\int_0^{2\pi} |\sin x|\,dx = 4$.
+  \item Hence evaluate $\displaystyle\int_0^{2026\pi} |\sin x|\,dx$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+For part (i), split $[0, 2\pi]$ at $x = \pi$: on $[0,\pi]$, $\sin x \ge 0$; on $[\pi, 2\pi]$,
+$\sin x \le 0$.  Remove the absolute value appropriately on each sub-interval.
+
+For part (ii), note that $|\sin x|$ has period $\pi$ (not $2\pi$):
+$|\sin(x+\pi)| = |-\sin x| = |\sin x|$.  Use part (i) to find the integral over each period
+of $\pi$, then count how many complete periods fit in $[0, 2026\pi]$.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Split the integral at $x = \pi$:
+\[
+\int_0^{2\pi}|\sin x|\,dx
+= \int_0^{\pi}\sin x\,dx + \int_{\pi}^{2\pi}(-\sin x)\,dx.
+\]
+\[
+= \bigl[-\cos x\bigr]_0^{\pi} + \bigl[\cos x\bigr]_{\pi}^{2\pi}
+= (1+1) + (1+1) = 4.
+\]
+
+\textbf{(ii)} The function $|\sin x|$ has period $\pi$, since
+\[
+|\sin(x+\pi)| = |\sin x\cos\pi + \cos x\sin\pi| = |-\sin x| = |\sin x|.
+\]
+From part (i), the integral over two consecutive half-periods $[0,2\pi]$ equals $4$, so the
+integral over one half-period $[0,\pi]$ equals $2$.  The interval $[0, 2026\pi]$ contains
+exactly $2026$ sub-intervals of length $\pi$, giving
+\[
+\int_0^{2026\pi}|\sin x|\,dx = 2026 \times 2 = \boxed{4052}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The function $|\sin x|$ has period $\pi$, half the period of $\sin x$ itself.
+  \item To remove an absolute value, split the domain at every zero of the integrand and flip
+        the sign of the function on the intervals where it is negative.
+  \item For integrals over a large multiple of the period, compute the integral over one period
+        and multiply by the number of complete periods.
+\end{itemize}
+\end{takeaways}
