@@ -6,8 +6,9 @@
 
 % ------------------------------------------------------------------
 \begin{problem}[The Iterated Polynomial]
-Let $f(x)=2x^2-1$ for $-1\le x\le1$. Let $f^n(x)$ denote the $n$th iterate of
-$f$, so $f^2(x)=f(f(x))$, $f^3(x)=f(f(f(x)))$, and so on.
+Define $f(x)=2x^2-1$ on the interval $-1\le x\le1$. The \emph{$n$th iterate}
+$f^n(x)$ means $f$ applied $n$ times in succession; for example,
+$f^2(x)=f(f(x))$ and $f^3(x)=f(f(f(x)))$.
 
 \begin{enumerate}[(i)]
   \item Using $x=\cos\theta$, where $0\le\theta\le\pi$, show that
@@ -120,6 +121,8 @@ distinct real roots.
 % ------------------------------------------------------------------
 
 \begin{problem}[A Cubic Trigonometric Equation]
+The \textbf{triple-angle formula} states that $\cos 3x = 4\cos^3 x - 3\cos x$.
+
 Use the triple-angle formula to solve
 \[
 4\cos^3x-3\cos x=\frac12
@@ -168,7 +171,11 @@ x=\frac{\pi}{9},\frac{5\pi}{9},\frac{7\pi}{9},\frac{11\pi}{9},
 % ------------------------------------------------------------------
 
 \begin{problem}[Jensen's Inequality Applied to Sine]
-Note: Jensen's inequality is out of syllabus for HSC. You are welcome to attempt this problem by visiting the "Inequalities" booklet.
+\textbf{Jensen's Inequality} (stated without proof): For any concave function $f$ and three numbers $a_1, a_2, a_3$,
+\[
+f(a_1) + f(a_2) + f(a_3) \le 3\,f\!\left(\frac{a_1+a_2+a_3}{3}\right).
+\]
+Since $\sin$ is concave on $(0,\pi)$, this inequality applies to $\sin$ when $a_1, a_2, a_3$ are angles of a triangle.
 
 
 Let $A$, $B$, $C$ be the interior angles of a triangle. Prove that

@@ -193,9 +193,11 @@ x=12(\sqrt3-1).
   \coordinate (Q) at (12,20.784);
 
   \draw[thick] (A)--(B) node[midway, below] {$12$};
-  \draw[thick] (B)--(Q);
+  \draw[thick] (B)--(P);
   \draw[thick, bookpurple] (A)--(P);
   \draw[thick, bookred] (A)--(Q);
+  % PQ segment drawn explicitly in a distinct colour on top
+  \draw[line width=2pt, teal] (P)--(Q);
   \draw ($(B)+(-0.8,0)$)--++(0,0.8)--++(0.8,0);
 
   \draw (2.3,0) arc (0:45:2.3);
@@ -203,12 +205,15 @@ x=12(\sqrt3-1).
   \draw (4.0,0) arc (0:60:4.0);
   \node at (4.2,3.0) {$\pi/3$};
 
-  \draw[<->, thick] (13.0,12)--(13.0,20.784);
-  \node[right] at (13.0,16.4) {$x$};
+  % x indicator shifted right to avoid overlapping with P/Q labels
+  \draw[<->, thick] (14.5,12)--(14.5,20.784);
+  \draw[dashed, thin] (P)--(14.5,12);
+  \draw[dashed, thin] (Q)--(14.5,20.784);
+  \node[right] at (14.5,16.4) {$x$};
   \node[below left] at (A) {$A$};
   \node[below right] at (B) {$B$};
-  \node[right] at (P) {$P$};
-  \node[right] at (Q) {$Q$};
+  \node[left] at (P) {$P$};
+  \node[left] at (Q) {$Q$};
 \end{tikzpicture}
 \end{center}
 \end{problem}
@@ -276,7 +281,7 @@ the centre of the circle. Another side has length $7$.
   \fill (O) circle (2pt);
   \draw ($(P)+(0,-0.45)$) arc (-90:-135:0.45);
   \draw ($(P)+(0,-0.45)$) arc (-90:-45:0.45);
-  \node[below] at (O) {$O$};
+  \node[above] at (O) {$O$};
   \node[left] at (A) {$A$};
   \node[right] at (B) {$B$};
   \node[above] at (P) {$P$};
