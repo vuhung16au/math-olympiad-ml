@@ -392,3 +392,88 @@ whose right-hand side tends to $0$ as $n\to\infty$. This contradicts $|X_n|\ge \
     \item \textbf{Assumption Management:} Treat given constructions (LCM growth, integral identity) as black boxes and connect them via inequalities.
 \end{enumerate}
 \end{takeaways}
+
+% Problem 7: Tetris Tile Tiling (Combinatorics + Complex Numbers + Limits)
+\begin{problem}[Tetris Tile Tiling]
+A puzzle game requires you to completely tile a $2 \times n$ rectangular grid using three specific types of polyomino blocks:
+\begin{enumerate}
+    \item \textbf{The I-Domino:} A $2 \times 1$ vertical tile.
+    \item \textbf{The O-Tetromino:} A $2 \times 2$ square tile.
+    \item \textbf{The L-Pairs:} A $2 \times 3$ rectangular block formed by interlocking two L-trominoes. There are exactly two distinct patterns to form this $2 \times 3$ block, shown below.
+\end{enumerate}
+
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+  \begin{tikzpicture}[scale=0.75]
+    \draw[thick] (0,0) rectangle (1,2);
+  \end{tikzpicture}
+  &
+  \begin{tikzpicture}[scale=0.75]
+    \draw[thick] (0,0) rectangle (2,2);
+    \draw (1,0) -- (1,2);
+    \draw (0,1) -- (2,1);
+  \end{tikzpicture}
+  &
+  \begin{tikzpicture}[scale=0.75]
+    \draw[thick] (0,0) rectangle (3,2);
+    \draw (1,0) -- (1,2);
+    \draw (2,0) -- (2,2);
+    \draw (0,1) -- (3,1);
+    \draw[ultra thick] (1,0) -- (1,1) -- (2,1) -- (2,2);
+  \end{tikzpicture}
+  &
+  \begin{tikzpicture}[scale=0.75]
+    \draw[thick] (0,0) rectangle (3,2);
+    \draw (1,0) -- (1,2);
+    \draw (2,0) -- (2,2);
+    \draw (0,1) -- (3,1);
+    \draw[ultra thick] (1,2) -- (1,1) -- (2,1) -- (2,0);
+  \end{tikzpicture}
+  \\[4pt]
+  \small I-Domino & \small O-Tetromino & \small L-Pair (Pattern 1) & \small L-Pair (Pattern 2)
+\end{tabular}
+\end{center}
+
+\noindent Let $W_n$ be the total number of valid ways to tile a $2 \times n$ grid using only these blocks.
+
+\begin{enumerate}
+    \item[(i)] By considering the possible rightmost blocks of the grid, explain why the sequence satisfies the recurrence relation $W_n = W_{n-1} + W_{n-2} + 2W_{n-3}$ for all $n \ge 3$.
+
+    \item[(ii)] The sequence can be expressed in the explicit form $W_n = A\alpha^n + B\beta^n + C\gamma^n$, where $\alpha, \beta, \gamma$ are the roots of the characteristic polynomial $P(z) = z^3 - z^2 - z - 2 = 0$.
+    Show that the roots are $z = 2$ and $z = \operatorname{cis}\!\left(\pm \dfrac{2\pi}{3}\right)$.
+
+    \item[(iii)] Given $W_0 = 1$, $W_1 = 1$, $W_2 = 2$, establish a system of equations for $n = 0, 1, 2$. By summing these equations and utilising the properties of the complex cube roots of unity, prove that $A = \dfrac{4}{7}$.
+
+    \item[(iv)] Hence, deduce the exact closed-form expression for $W_n$ purely in terms of real numbers, and formally show that $\displaystyle\lim_{n \to \infty} \frac{W_{n+1}}{W_n} = 2$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+\textbf{(i)} Think about how any valid tiling \emph{must} end. It can only end in one of the defined fundamental blocks. How much width does each block take up? Are the ending scenarios mutually exclusive?\\[4pt]
+\textbf{(ii)} Use the Rational Root Theorem to guess a small integer root (try factors of 2). Once you factor out the linear term, use the quadratic formula for the remaining roots. Do you recognise the resulting complex numbers?\\[4pt]
+\textbf{(iii)} Let the complex roots be $\omega$ and $\bar{\omega}$. Add the three equations for $n=0,1,2$ together vertically. What happens to the $B$ and $C$ coefficients when you factor out $(1 + \omega + \omega^2)$?\\[4pt]
+\textbf{(iv)} Since $W_n$ is a sequence of real integers, the coefficients $B$ and $C$ must be complex conjugates. Let $B = u + vi$ and $C = u - vi$, and solve for $u$ and $v$ using the $W_0$ and $W_1$ equations. For the limit, identify which term dominates as $n \to \infty$.
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Any valid tiling must end with one of the three block types (mutually exclusive and exhaustive): an I-Domino (width 1) leaves $W_{n-1}$ tilings; an O-Tetromino (width 2) leaves $W_{n-2}$; an L-Pair (width 3) has 2 patterns, contributing $2W_{n-3}$. Hence $W_n = W_{n-1} + W_{n-2} + 2W_{n-3}$.
+
+\smallskip\textbf{(ii)} $P(2) = 8-4-2-2=0$, so $(z-2)$ is a factor, giving $P(z)=(z-2)(z^2+z+1)$. The roots of $z^2+z+1=0$ are the primitive cube roots of unity $\omega=\operatorname{cis}\!\tfrac{2\pi}{3}$ and $\bar\omega=\operatorname{cis}\!\left(-\tfrac{2\pi}{3}\right)$, so the three roots are $2,\,\operatorname{cis}\!\tfrac{2\pi}{3},\,\operatorname{cis}\!\left(-\tfrac{2\pi}{3}\right)$.
+
+\smallskip\textbf{(iii)} Write $W_n = A\cdot 2^n + B\omega^n + C\bar\omega^n$ and substitute $n=0,1,2$:
+\[A+B+C=1,\quad 2A+B\omega+C\bar\omega=1,\quad 4A+B\omega^2+C\bar\omega^2=2.\]
+Summing: $7A + B(1+\omega+\omega^2)+C(1+\bar\omega+\bar\omega^2)=4$. Since $1+\omega+\omega^2=0$, this gives $7A=4$, so $A=\tfrac{4}{7}$.
+
+\smallskip\textbf{(iv)} Since $W_n\in\mathbb{R}$, write $B=u+vi$, $C=u-vi$. From $n=0$: $\tfrac{4}{7}+2u=1\Rightarrow u=\tfrac{3}{14}$. From $n=1$: $B\omega+C\bar\omega=2\operatorname{Re}(B\omega)=-u-v\sqrt{3}=-\tfrac{1}{7}$, so $v=\tfrac{-1}{14\sqrt{3}}$. By De Moivre's Theorem:
+\[\boxed{W_n = \frac{4}{7}\cdot 2^n + \frac{3}{7}\cos\frac{2n\pi}{3} + \frac{\sqrt{3}}{21}\sin\frac{2n\pi}{3}.}\]
+The trig terms are bounded while $2^n\to\infty$, so $W_n\sim\tfrac{4}{7}\cdot 2^n$ and
+$\displaystyle\lim_{n\to\infty}\frac{W_{n+1}}{W_n}=\lim_{n\to\infty}\frac{\frac{4}{7}\cdot 2^{n+1}}{\frac{4}{7}\cdot 2^n}=2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{Combinatorics as Linear Recurrences:} Any tiling problem where tiles have fixed widths generates a linear recurrence; the characteristic polynomial technique converts geometric counting into root-finding.
+    \item \textbf{The Magic of Roots of Unity:} Whenever a characteristic polynomial factors to expose cube roots of unity, the identity $1 + \omega + \omega^2 = 0$ is a powerful tool for eliminating unwanted variables from systems of equations.
+    \item \textbf{Dominant Term Determines Growth Rate:} In a sequence whose closed form is a sum of exponentials, the term with the largest base dominates; this immediately yields the ratio limit without computing the exact coefficients of the subdominant terms.
+\end{enumerate}
+\end{takeaways}
