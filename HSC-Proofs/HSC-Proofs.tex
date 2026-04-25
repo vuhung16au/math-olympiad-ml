@@ -203,6 +203,67 @@ Beyond the standard induction framework, several specialized variants frequently
     \item Contradict $\gcd(p,q) = 1$
 \end{enumerate}
 
+\subsection{The Language of Logic: Reading Quantifier Statements}
+
+A key skill in proof writing is translating symbolic logic into plain English and back. The two most important quantifiers are:
+\begin{itemize}
+  \item $\forall$ --- ``for all'' / ``for every'' / ``for each'' (the \textit{universal} quantifier)
+  \item $\exists$ --- ``there exists'' / ``there is at least one'' (the \textit{existential} quantifier)
+\end{itemize}
+
+The examples below show both a \textit{literal, symbol-by-symbol} translation and a \textit{natural English} paraphrase. Being able to move fluently between these two registers is essential for understanding what a statement actually claims before you attempt to prove (or disprove) it.
+
+\medskip
+
+\noindent\textbf{Statement 1} \quad $\forall x \in \mathbb{R},\ x^2 \ge 0$
+
+\begin{itemize}
+  \item \textit{Literal:} For all $x$ in the real numbers, $x$ squared is greater than or equal to zero.
+  \item \textit{Natural English:} The square of any real number is always non-negative.
+\end{itemize}
+
+\medskip
+
+\noindent\textbf{Statement 2} \quad $\forall n \in \mathbb{Z},\ \exists m \in \mathbb{Z},\ m = n + 5$
+
+\begin{itemize}
+  \item \textit{Literal:} For every integer $n$, there exists an integer $m$ such that $m$ equals $n$ plus $5$.
+  \item \textit{Natural English:} Given any integer, you can always find another integer that is exactly $5$ greater than it. \emph{(True.)}
+\end{itemize}
+
+\medskip
+
+\noindent\textbf{Statement 3} \quad $\exists a \in \mathbb{R},\ \forall x \in \mathbb{R},\ ax = x$
+
+\begin{itemize}
+  \item \textit{Literal:} There exists a real number $a$ such that for all real numbers $x$, $a$ times $x$ equals $x$.
+  \item \textit{Natural English:} There is a specific real number that, when multiplied by any real number, leaves that number unchanged. \emph{(True; that number is $a = 1$, the multiplicative identity.)}
+\end{itemize}
+
+\medskip
+
+\noindent\textbf{Statement 4} \quad $\exists m \in \mathbb{Z},\ \forall n \in \mathbb{Z},\ m = n + 5$
+
+\begin{itemize}
+  \item \textit{Literal:} There exists an integer $m$ such that for every integer $n$, $m$ equals $n$ plus $5$.
+  \item \textit{Natural English:} There is a single ``magic'' integer that is simultaneously exactly $5$ greater than \emph{every} other integer. \emph{(False.)}
+\end{itemize}
+
+\bigskip
+
+\noindent\textbf{Key Takeaway: Order of quantifiers matters.}
+
+Statements~2 and~4 use \emph{identical symbols} arranged in a slightly different order, yet they have opposite truth values. This is one of the most common traps in the language of proof:
+
+\begin{itemize}
+  \item \textbf{Statement~2} ($\forall$ first, then $\exists$): the choice of $m$ is allowed to \emph{depend} on $n$. You name an $n$, and only then do you pick a matching $m$. This makes the statement true.
+  \item \textbf{Statement~4} ($\exists$ first, then $\forall$): the $m$ must be chosen \emph{before} $n$ is known. It claims one fixed constant $m$ works for every single $n$ simultaneously --- which is impossible.
+\end{itemize}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black, title=Quantifier Rule of Thumb]
+Swapping the order of $\forall$ and $\exists$ completely changes the mathematical meaning of a sentence. Always read quantifiers left-to-right and ask: \emph{who gets to choose first?}
+\end{tcolorbox}
+
 \newpage
 
 \section{Part 1: Problems with Detailed Solutions}
