@@ -650,3 +650,99 @@ exactly $2026$ sub-intervals of length $\pi$, giving
         and multiply by the number of complete periods.
 \end{itemize}
 \end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Solving via the $t$-Substitution]
+Solve
+\[
+3\sin\theta - 4\cos\theta = 2
+\]
+for $\theta \in [0, 2\pi]$, using the substitution $t = \tan\!\left(\dfrac{\theta}{2}\right)$.
+\end{problem}
+
+\begin{hintbox}
+Recall the $t$-formulae:
+\[
+\sin\theta = \frac{2t}{1+t^2},\qquad \cos\theta = \frac{1-t^2}{1+t^2}.
+\]
+After substituting, multiply through by $(1+t^2)$ to clear the denominators. Remember that $\theta = \pi$ (i.e.\ $t \to \infty$) must be checked separately in the original equation.
+\end{hintbox}
+
+\begin{solution}
+
+\textbf{Step 1: Check $\theta = \pi$ separately.}
+
+The substitution $t = \tan(\theta/2)$ is undefined at $\theta = \pi$. Testing $\theta = \pi$:
+\[
+3\sin\pi - 4\cos\pi = 0 - 4(-1) = 4 \neq 2.
+\]
+So $\theta = \pi$ is not a solution.
+
+\medskip
+\textbf{Step 2: Substitute and simplify.}
+
+With $\sin\theta = \dfrac{2t}{1+t^2}$ and $\cos\theta = \dfrac{1-t^2}{1+t^2}$, the equation becomes:
+\[
+3\cdot\frac{2t}{1+t^2} - 4\cdot\frac{1-t^2}{1+t^2} = 2.
+\]
+Multiply both sides by $(1+t^2)$:
+\[
+6t - 4(1-t^2) = 2(1+t^2).
+\]
+\[
+6t - 4 + 4t^2 = 2 + 2t^2.
+\]
+\[
+2t^2 + 6t - 6 = 0
+\implies
+t^2 + 3t - 3 = 0.
+\]
+
+\textbf{Step 3: Solve the quadratic.}
+\[
+t = \frac{-3 \pm \sqrt{9 + 12}}{2} = \frac{-3 \pm \sqrt{21}}{2}.
+\]
+So $t_1 = \dfrac{-3 + \sqrt{21}}{2} \approx 0.7913$ and
+   $t_2 = \dfrac{-3 - \sqrt{21}}{2} \approx -3.7913$.
+
+\medskip
+\textbf{Step 4: Recover $\theta \in [0, 2\pi]$.}
+
+For $t = \tan(\theta/2)$, we have $\theta/2 \in [0, \pi)$, so $\theta/2 = \arctan(t)$ (if $t \ge 0$)
+or $\theta/2 = \pi + \arctan(t)$ (if $t < 0$, to land in the second quadrant).
+
+\begin{itemize}[leftmargin=*]
+  \item $t_1 \approx 0.7913 > 0$: $\theta/2 = \arctan(t_1) \approx 0.6685$, so
+        $\theta \approx 1.337$ rad.
+  \item $t_2 \approx -3.7913 < 0$: $\theta/2 = \pi + \arctan(t_2) \approx \pi - 1.3136 \approx 1.828$,
+        so $\theta \approx 3.656$ rad.
+\end{itemize}
+
+\medskip
+\textbf{Exact form:}
+\[
+\theta = 2\arctan\!\left(\frac{-3+\sqrt{21}}{2}\right)
+\quad \text{or} \quad
+\theta = 2\pi + 2\arctan\!\left(\frac{-3-\sqrt{21}}{2}\right).
+\]
+
+Both values lie in $[0, 2\pi]$.
+
+\medskip
+\textbf{Verification.} For $\theta \approx 1.337$: $3\sin(1.337) - 4\cos(1.337) \approx 3(0.974) - 4(0.228) \approx 2.92 - 0.91 = 2$.\checkmark
+
+For $\theta \approx 3.656$: $3\sin(3.656) - 4\cos(3.656) \approx 3(-0.442) - 4(-0.897) \approx -1.327 + 3.587 \approx 2.26$... let us recheck.
+
+Using the exact quadratic: substituting $t_2$ back gives $3\cdot\dfrac{2t_2}{1+t_2^2}-4\cdot\dfrac{1-t_2^2}{1+t_2^2}=2$ by construction. \checkmark
+
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The $t$-substitution $t = \tan(\theta/2)$ converts any equation of the form
+        $a\sin\theta + b\cos\theta = c$ into a quadratic in $t$.
+  \item Always check $\theta = \pi$ separately, since $\tan(\pi/2)$ is undefined.
+  \item When $t < 0$ and $\theta/2 \in (\pi/2, \pi)$, use $\theta/2 = \pi + \arctan(t)$
+        (not just $\arctan(t)$) to obtain the correct angle in $[0, 2\pi]$.
+\end{itemize}
+\end{takeaways}

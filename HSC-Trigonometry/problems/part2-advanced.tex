@@ -165,3 +165,142 @@ x=\frac{\pi}{9},\frac{5\pi}{9},\frac{7\pi}{9},\frac{11\pi}{9},
         by $3$.
 \end{itemize}
 \end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Jensen's Inequality Applied to Sine]
+Note: Jensen's inequality is out of syllabus for HSC. You are welcome to attempt this problem by visiting the "Inequalities" booklet.
+
+
+Let $A$, $B$, $C$ be the interior angles of a triangle. Prove that
+\[
+\sin A + \sin B + \sin C \le \frac{3\sqrt{3}}{2},
+\]
+with equality if and only if the triangle is equilateral.
+\end{problem}
+
+\begin{hintbox}
+\textbf{Step 1.} Show that $f(x) = \sin x$ is concave on $(0, \pi)$ by computing $f''(x)$.
+
+\textbf{Step 2.} Apply Jensen's inequality: for a concave function $f$ and weights summing to $1$,
+\[
+f\!\left(\frac{x_1+x_2+x_3}{3}\right) \ge \frac{f(x_1)+f(x_2)+f(x_3)}{3}.
+\]
+Use $A + B + C = \pi$.
+\end{hintbox}
+
+\begin{solution}
+
+\textbf{Step 1: Concavity of $\sin$ on $(0, \pi)$.}
+
+Let $f(x) = \sin x$. Then $f''(x) = -\sin x$. For $x \in (0, \pi)$, $\sin x > 0$, so
+$f''(x) < 0$ throughout $(0, \pi)$. Hence $\sin x$ is \textbf{strictly concave} on $(0, \pi)$.
+
+\medskip
+\textbf{Step 2: Apply Jensen's Inequality.}
+
+For a strictly concave function $f$ and points $x_1, x_2, x_3$ in its domain,
+Jensen's inequality states:
+\[
+\frac{f(x_1) + f(x_2) + f(x_3)}{3} \le f\!\left(\frac{x_1+x_2+x_3}{3}\right).
+\]
+Since $A, B, C \in (0, \pi)$ and $A + B + C = \pi$, we apply this with $x_1 = A$, $x_2 = B$,
+$x_3 = C$:
+\[
+\frac{\sin A + \sin B + \sin C}{3}
+\le \sin\!\left(\frac{A+B+C}{3}\right)
+= \sin\!\left(\frac{\pi}{3}\right)
+= \frac{\sqrt{3}}{2}.
+\]
+Multiplying both sides by $3$:
+\[
+\sin A + \sin B + \sin C \le \frac{3\sqrt{3}}{2}. \qquad\square
+\]
+
+\medskip
+\textbf{Equality condition.} Since $\sin x$ is \emph{strictly} concave, Jensen's inequality
+becomes an equality if and only if $A = B = C$. Combined with $A + B + C = \pi$, this means
+$A = B = C = \pi/3$, i.e.\ the triangle is equilateral. $\square$
+
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item A function $f$ is concave on an interval whenever $f''(x) \le 0$ throughout that interval.
+  \item Jensen's inequality for a concave $f$ says the average of the function values is at most
+        the function of the average: $\overline{f(x_i)} \le f(\bar x)$.
+  \item This technique gives tight, elegant bounds on symmetric expressions involving
+        angles of a triangle — a recurring olympiad theme.
+\end{itemize}
+\end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Roots of Unity and the Cosine Sum]
+Let $n \ge 2$ be a positive integer and let $\omega = e^{2\pi i/n}$ be a primitive $n$th
+root of unity.
+\begin{enumerate}[(i)]
+  \item By summing the geometric series $1 + \omega + \omega^2 + \cdots + \omega^{n-1}$,
+        prove that
+        \[
+        \sum_{k=0}^{n-1} \cos\!\left(\frac{2\pi k}{n}\right) = 0.
+        \]
+  \item Hence evaluate
+        \[
+        \cos\!\left(\frac{2\pi}{7}\right) + \cos\!\left(\frac{4\pi}{7}\right)
+        + \cos\!\left(\frac{6\pi}{7}\right).
+        \]
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+For part (i), use the fact that $1 + r + r^2 + \cdots + r^{n-1} = \dfrac{r^n - 1}{r - 1}$
+for $r \ne 1$. Since $\omega^n = 1$ by definition, the sum equals zero. Take the real part.
+
+For part (ii), split the $n=7$ sum using the identity from (i), then use $\cos(\pi - x) = -\cos x$.
+\end{hintbox}
+
+\begin{solution}
+
+\textbf{(i)} The powers $1, \omega, \omega^2, \ldots, \omega^{n-1}$ form a geometric series
+with ratio $\omega$ and first term $1$. Since $\omega \ne 1$ (as $n \ge 2$) and $\omega^n = 1$:
+\[
+\sum_{k=0}^{n-1} \omega^k = \frac{\omega^n - 1}{\omega - 1} = \frac{1-1}{\omega-1} = 0.
+\]
+By Euler's formula, $\omega^k = e^{2\pi i k/n} = \cos\!\left(\dfrac{2\pi k}{n}\right) + i\sin\!\left(\dfrac{2\pi k}{n}\right)$.
+Taking the real part of both sides of the sum:
+\[
+\sum_{k=0}^{n-1} \cos\!\left(\frac{2\pi k}{n}\right) = \operatorname{Re}(0) = 0. \qquad\square
+\]
+
+\medskip
+\textbf{(ii)} Apply part (i) with $n = 7$:
+\[
+\sum_{k=0}^{6} \cos\!\left(\frac{2\pi k}{7}\right) = 0.
+\]
+The $k = 0$ term is $\cos 0 = 1$. The terms for $k = 4, 5, 6$ satisfy
+\[
+\cos\!\frac{8\pi}{7} = \cos\!\!\left(2\pi - \frac{6\pi}{7}\right) = \cos\!\frac{6\pi}{7}, \quad
+\cos\!\frac{10\pi}{7} = \cos\!\frac{4\pi}{7}, \quad
+\cos\!\frac{12\pi}{7} = \cos\!\frac{2\pi}{7}.
+\]
+(Using $\cos(2\pi - x) = \cos x$.) So:
+\[
+1 + 2\!\left[\cos\!\frac{2\pi}{7} + \cos\!\frac{4\pi}{7} + \cos\!\frac{6\pi}{7}\right] = 0.
+\]
+Therefore:
+\[
+\cos\!\frac{2\pi}{7} + \cos\!\frac{4\pi}{7} + \cos\!\frac{6\pi}{7}
+= -\frac{1}{2}. \qquad\square
+\]
+
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The $n$th roots of unity $\{e^{2\pi i k/n} : k = 0, \ldots, n-1\}$ always sum to zero;
+        taking real and imaginary parts gives useful trigonometric identities for free.
+  \item The symmetry $\cos(2\pi - x) = \cos x$ pairs up the terms $k$ and $n-k$ in the sum,
+        halving the work for even and odd $n$.
+  \item This method is the natural Extension~2 companion to the ``telescoping cosines'' product
+        approach for sums of cosines at equally spaced angles.
+\end{itemize}
+\end{takeaways}

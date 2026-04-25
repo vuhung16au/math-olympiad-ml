@@ -169,3 +169,123 @@ The completed graph (curve shown in {\color{blue!70!black}blue}):
         feature on $y = \sin x$.
 \end{itemize}
 \end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[Sketching a Transformed Cosine]
+Consider the function
+\[
+y = 2\cos\!\left(x - \frac{\pi}{3}\right), \qquad x \in [0, 2\pi].
+\]
+\begin{enumerate}[(i)]
+  \item State the amplitude, period, and phase shift of this function.
+  \item Find all $x$-intercepts in $[0, 2\pi]$.
+  \item Sketch the graph for $x \in [0, 2\pi]$, clearly marking the intercepts,
+        the maximum, and the minimum.
+\end{enumerate}
+\end{problem}
+% ------------------------------------------------------------------
+
+\begin{solution}
+
+\textbf{(i) Key features.}
+
+Comparing $y = 2\cos\!\left(x - \dfrac{\pi}{3}\right)$ with the standard form
+$y = A\cos(bx + c) + d$, we read off $A = 2$, $b = 1$, $c = -\pi/3$, $d = 0$:
+\[
+\text{Amplitude} = |A| = 2, \qquad
+\text{Period} = \frac{2\pi}{|b|} = 2\pi, \qquad
+\text{Phase shift} = -\frac{c}{b} = \frac{\pi}{3} \text{ (right)}.
+\]
+
+\medskip
+\textbf{(ii) $x$-intercepts.}
+
+Set $y = 0$:
+\[
+2\cos\!\left(x - \frac{\pi}{3}\right) = 0
+\implies
+\cos\!\left(x - \frac{\pi}{3}\right) = 0.
+\]
+The cosine is zero when its argument equals $\dfrac{\pi}{2} + k\pi$ for integer $k$:
+\[
+x - \frac{\pi}{3} = \frac{\pi}{2} + k\pi
+\implies
+x = \frac{\pi}{3} + \frac{\pi}{2} + k\pi = \frac{5\pi}{6} + k\pi.
+\]
+For $x \in [0, 2\pi]$: $k = 0$ gives $x = \dfrac{5\pi}{6}$, and $k = 1$ gives
+$x = \dfrac{5\pi}{6} + \pi = \dfrac{11\pi}{6}$.
+
+The $x$-intercepts are $\boldsymbol{x = \dfrac{5\pi}{6}}$ and $\boldsymbol{x = \dfrac{11\pi}{6}}$.
+
+\medskip
+\textbf{Key points on $[0, 2\pi]$:}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c|ccccc}
+$x$ & $0$ & $\dfrac{\pi}{3}$ & $\dfrac{5\pi}{6}$ & $\dfrac{4\pi}{3}$ & $\dfrac{11\pi}{6}$ \\[6pt]\hline
+$x - \pi/3$ & $-\pi/3$ & $0$ & $\pi/2$ & $\pi$ & $3\pi/2$ \\[4pt]
+$y$ & $1$ & $2$ & $0$ & $-2$ & $0$
+\end{tabular}
+\end{center}
+
+The maximum value of $2$ occurs at $x = \dfrac{\pi}{3}$ (where $\cos 0 = 1$),
+and the minimum of $-2$ occurs at $x = \dfrac{4\pi}{3}$ (where $\cos\pi = -1$).
+The curve also passes through $(0, 1)$ and $(2\pi, 1)$ as endpoints.
+
+\medskip
+\textbf{(iii) Sketch.}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=13cm, height=6.5cm,
+  xmin=-0.3, xmax=6.8,
+  ymin=-2.7, ymax=2.7,
+  xtick={0, 1.0472, 2.6180, 3.1416, 4.1888, 5.2360, 6.2832},
+  xticklabels={$0$, $\dfrac{\pi}{3}$, $\dfrac{5\pi}{6}$, $\pi$,
+               $\dfrac{4\pi}{3}$, $\dfrac{11\pi}{6}$, $2\pi$},
+  ytick={-2,-1,0,1,2},
+  axis lines=center,
+  axis line style={->, thick, black},
+  xlabel={$x$}, ylabel={$y$},
+  xlabel style={anchor=north west, font=\small},
+  ylabel style={anchor=south east, font=\small},
+  tick label style={font=\small},
+  clip=false,
+]
+\addplot[blue!70!black, very thick, domain=0:6.2832, samples=400]
+    {2*cos(deg(x - pi/3))};
+\node[blue!70!black, font=\small\itshape, above right]
+    at (axis cs:4.5,1.5) {$y=2\cos\!\left(x-\tfrac{\pi}{3}\right)$};
+% Maximum
+\addplot[only marks, mark=*, mark size=2.5pt, red!70!black]
+    coordinates {(1.0472, 2)};
+\node[above right, font=\small] at (axis cs:1.0472, 2) {max $2$};
+% Minimum
+\addplot[only marks, mark=*, mark size=2.5pt, red!70!black]
+    coordinates {(4.1888, -2)};
+\node[below right, font=\small] at (axis cs:4.1888, -2) {min $-2$};
+% x-intercepts
+\addplot[only marks, mark=o, mark size=2.5pt, black]
+    coordinates {(2.6180, 0) (5.7596, 0)};
+% dashed guides
+\addplot[dashed, gray!60, thin] coordinates {(1.0472,0)(1.0472,2)};
+\addplot[dashed, gray!60, thin] coordinates {(4.1888,0)(4.1888,-2)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\end{solution}
+% ------------------------------------------------------------------
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item For $y = A\cos(bx + c) + d$: amplitude $= |A|$, period $= 2\pi/|b|$,
+        phase shift $= -c/b$ (positive means shift right).
+  \item To find $x$-intercepts, set the cosine expression equal to zero and use the
+        general solution $\cos u = 0 \Rightarrow u = \pi/2 + k\pi$.
+  \item A phase shift of $\pi/3$ moves every feature of $y = 2\cos x$ exactly
+        $\pi/3$ units to the right; the shape and scale are unchanged.
+\end{itemize}
+\end{takeaways}

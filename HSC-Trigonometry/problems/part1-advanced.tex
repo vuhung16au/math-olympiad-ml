@@ -699,3 +699,59 @@ Solving: $I\!\left(1+\tfrac{1}{a^2}\right) = \tfrac{1}{a}$, so
         imaginary part gives $\int_0^\infty e^{-ax}\sin x\,dx = \dfrac{1}{a^2+1}$ for free.
 \end{itemize}
 \end{takeaways}
+% ------------------------------------------------------------------
+
+\begin{problem}[De Moivre's Theorem and $\cos 5\theta$]
+\begin{enumerate}[(i)]
+  \item Using De Moivre's theorem, show that
+        \[
+        \cos 5\theta = 16\cos^5\theta - 20\cos^3\theta + 5\cos\theta.
+        \]
+  \item Hence find all real roots of the equation
+        \[
+        16x^5 - 20x^3 + 5x = 1
+        \]
+        in exact form, and express them as cosines of rational multiples of $\pi$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+
+\textbf{(i)} Write $c=\cos\theta$, $s=\sin\theta$. By De Moivre's theorem and the binomial theorem:
+\[
+(c+is)^5 = c^5+5ic^4s-10c^3s^2-10ic^2s^3+5cs^4+is^5.
+\]
+Taking the real part and substituting $s^2=1-c^2$:
+\[
+\cos 5\theta = c^5-10c^3s^2+5cs^4
+= c^5-10c^3(1-c^2)+5c(1-c^2)^2
+= 16c^5-20c^3+5c. \quad\square
+\]
+
+\textbf{(ii)} Substitute $x=\cos\theta$: the equation becomes $\cos5\theta=1$, so
+$5\theta=2k\pi$, giving $\theta=\tfrac{2k\pi}{5}$.
+For $\theta\in[0,2\pi)$ the five values are $k=0,1,2,3,4$; using $\cos(2\pi-\alpha)=\cos\alpha$:
+\[
+\cos\tfrac{6\pi}{5}=\cos\tfrac{4\pi}{5},\qquad \cos\tfrac{8\pi}{5}=\cos\tfrac{2\pi}{5}.
+\]
+Hence the three distinct real roots are:
+\[
+\boxed{x=1,\quad x=\cos\!\tfrac{2\pi}{5}=\tfrac{\sqrt{5}-1}{4},\quad x=\cos\!\tfrac{4\pi}{5}=-\tfrac{\sqrt{5}+1}{4}.}
+\]
+($x=\cos(2\pi/5)$ and $x=\cos(4\pi/5)$ are each double roots of the degree-5 polynomial.)
+
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item De Moivre's theorem $(\cos\theta + i\sin\theta)^n = \cos n\theta + i\sin n\theta$
+        converts $\cos n\theta$ into a polynomial in $\cos\theta$ by taking the real part and
+        using $\sin^2\theta = 1 - \cos^2\theta$.
+  \item The fifth-degree Chebyshev polynomial $T_5(x) = 16x^5 - 20x^3 + 5x$ satisfies
+        $T_5(\cos\theta) = \cos 5\theta$; this is the general pattern behind the triple-angle
+        formulae in the appendix.
+  \item Solving $\cos n\theta = c$ geometrically by listing all $n$ values of $\theta$ in
+        $[0, 2\pi)$ automatically produces all roots, including repeated ones, of the
+        corresponding polynomial equation.
+\end{itemize}
+\end{takeaways}

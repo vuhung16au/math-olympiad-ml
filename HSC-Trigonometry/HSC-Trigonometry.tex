@@ -288,6 +288,41 @@ The power-reduction forms (useful for integration in Extension~2):
 \sin^2\theta = \frac{1-\cos 2\theta}{2}, \qquad \cos^2\theta = \frac{1+\cos 2\theta}{2}.
 \]
 
+\subsection{Half-Angle Formulae}
+
+The double-angle identities for $\cos 2\alpha$ can be rearranged to express
+$\sin^2\!\alpha$ and $\cos^2\!\alpha$ in terms of $\cos 2\alpha$.
+Replacing $\alpha$ by $\theta/2$ gives the \textbf{half-angle formulae}:
+\[
+\sin^2\!\frac{\theta}{2} = \frac{1-\cos\theta}{2}, \qquad
+\cos^2\!\frac{\theta}{2} = \frac{1+\cos\theta}{2}.
+\]
+Taking square roots (with sign determined by the quadrant of $\theta/2$):
+\[
+\sin\frac{\theta}{2} = \pm\sqrt{\frac{1-\cos\theta}{2}}, \qquad
+\cos\frac{\theta}{2} = \pm\sqrt{\frac{1+\cos\theta}{2}}.
+\]
+Dividing gives two equivalent forms for the half-angle tangent:
+\[
+\tan\frac{\theta}{2} = \frac{\sin\theta}{1+\cos\theta} = \frac{1-\cos\theta}{\sin\theta}.
+\]
+
+\textbf{Typical uses.}
+\begin{itemize}[leftmargin=*]
+  \item Finding exact values such as $\cos(\pi/8)$ or $\sin(\pi/12)$ from the
+        known values of $\cos(\pi/4)$ and $\cos(\pi/6)$.
+  \item Simplifying integrals and proving identities when a half-angle appears
+        inside a trigonometric expression.
+  \item Deriving the $t$-formulae (see the next subsection).
+\end{itemize}
+
+\begin{remark}
+The sign $\pm$ in the half-angle formulae must be chosen according to the
+quadrant in which $\theta/2$ lies. For example, if $\theta = 3\pi/2$ then
+$\theta/2 = 3\pi/4$, which is in the second quadrant, so $\sin(\theta/2) > 0$
+but $\cos(\theta/2) < 0$.
+\end{remark}
+
 \subsection{The $t$-Formulae}
 
 Let $t = \tan\!\left(\dfrac{\theta}{2}\right)$. Then:
@@ -345,6 +380,76 @@ The three principal inverse functions and their restricted domains are:
 \[
 \arcsin x + \arccos x = \frac{\pi}{2} \quad \text{for } x \in [-1,1].
 \]
+
+\subsection{General Solutions of Trigonometric Equations}
+
+When solving a trigonometric equation, the \textbf{general solution} gives all solutions
+for $\theta \in \mathbb{R}$. The three standard templates are:
+
+\[
+\sin\theta = a \;\Rightarrow\; \theta = \arcsin a + 2k\pi \;\text{ or }\; \pi - \arcsin a + 2k\pi, \quad k \in \mathbb{Z}.
+\]
+\[
+\cos\theta = a \;\Rightarrow\; \theta = \pm\arccos a + 2k\pi, \quad k \in \mathbb{Z}.
+\]
+\[
+\tan\theta = a \;\Rightarrow\; \theta = \arctan a + k\pi, \quad k \in \mathbb{Z}.
+\]
+
+\textbf{Procedure for finding solutions in a given interval.}
+\begin{enumerate}[leftmargin=*]
+  \item Write the general solution.
+  \item Substitute consecutive integers $k = \ldots, -1, 0, 1, 2, \ldots$ until all
+        solutions in the given interval are found.
+  \item Always verify each solution in the original equation if the equation was
+        manipulated (e.g.\ squared or multiplied through).
+\end{enumerate}
+
+\begin{remark}
+These templates assume $a$ is in the valid range for the inverse function
+($|a| \le 1$ for $\arcsin$ and $\arccos$; any real $a$ for $\arctan$).
+If $|a| > 1$, then $\sin\theta = a$ or $\cos\theta = a$ has no real solutions.
+\end{remark}
+
+\subsection{Amplitude, Period, and Phase Shift}
+
+For the general sinusoidal functions
+\[
+y = A\sin(bx + c) + d \qquad \text{or} \qquad y = A\cos(bx + c) + d,
+\]
+the key parameters are:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Formula} & \textbf{Meaning} \\
+\hline
+Amplitude & $|A|$ & Half the distance from minimum to maximum \\
+Period & $\dfrac{2\pi}{|b|}$ & Horizontal length of one complete cycle \\
+Phase shift & $-\dfrac{c}{b}$ & Horizontal translation (positive = right) \\
+Vertical shift & $d$ & Shifts the midline from $y=0$ to $y=d$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{How to sketch $y = A\sin(bx + c) + d$:}
+\begin{enumerate}[leftmargin=*]
+  \item Identify amplitude, period, phase shift, and vertical shift.
+  \item Mark the midline $y = d$ as a horizontal guide.
+  \item The maximum is $d + |A|$ and the minimum is $d - |A|$.
+  \item One full cycle starts at $x = -c/b$ (the phase shift) and ends at
+        $x = -c/b + 2\pi/|b|$.
+  \item Divide the cycle into four equal quarters to place the key
+        zero-crossings, maxima, and minima.
+\end{enumerate}
+
+\begin{remark}
+For $\tan$ functions, $y = A\tan(bx + c) + d$, the period is $\pi/|b|$
+(not $2\pi/|b|$), and there is no amplitude in the usual sense since $\tan$ is
+unbounded.
+\end{remark}
 
 \subsection{Auxiliary Angle Form}
 
