@@ -101,7 +101,19 @@ export async function expectViewerShell(page: Page): Promise<void> {
 }
 
 export async function readZoomPercentage(page: Page): Promise<number> {
-  const value = await page.getByTestId("zoom-percentage").innerText();
+  const items = page.getByTestId("zoom-percentage");
+  const count = await items.count();
+  let value = "";
+  for (let i = 0; i < count; i += 1) {
+    const nth = items.nth(i);
+    if (await nth.isVisible()) {
+      value = await nth.innerText();
+      break;
+    }
+  }
+  if (!value && count > 0) {
+    value = await items.first().innerText();
+  }
 
   const parsed = Number.parseInt(value.replace("%", ""), 10);
   if (Number.isNaN(parsed)) {

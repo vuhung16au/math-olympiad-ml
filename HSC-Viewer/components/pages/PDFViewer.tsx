@@ -880,7 +880,11 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
             </div>
           ) : null}
 
-          <div ref={stageRef} data-pdf-stage className="min-h-[70vh] bg-[color:color-mix(in_srgb,var(--color-ivory)_72%,white)] p-3 pb-[calc(env(safe-area-inset-bottom)+7.5rem)] sm:p-5 sm:pb-[calc(env(safe-area-inset-bottom)+7rem)] lg:pb-5">
+          <div
+            ref={stageRef}
+            data-pdf-stage
+            className="min-h-[70vh] bg-[color:color-mix(in_srgb,var(--color-ivory)_72%,white)] p-3 pb-[calc(env(safe-area-inset-bottom)+4.25rem)] sm:p-5 sm:pb-[calc(env(safe-area-inset-bottom)+4rem)] lg:pb-5"
+          >
             <div className="grid min-h-[66vh] gap-4 lg:grid-cols-[minmax(0,1fr)_260px]">
               <div className="order-2 lg:order-1">
                 {e2ePdfMockMode === "success" ? (

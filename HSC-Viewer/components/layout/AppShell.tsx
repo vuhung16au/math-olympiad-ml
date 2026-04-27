@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { PanelLeftOpen } from "lucide-react";
 import Header from "@/components/layout/Header";
+import ReaderMobileTopBar from "@/components/layout/ReaderMobileTopBar";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileMenu from "@/components/layout/MobileMenu";
 import Footer from "@/components/common/Footer";
@@ -111,7 +112,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           currentTitle={currentTitle}
           onOpenMenu={() => setIsMobileMenuOpen(true)}
         />
-      ) : null}
+      ) : (
+        <ReaderMobileTopBar
+          bookletTitle={currentTitle}
+          onOpenMenu={() => setIsMobileMenuOpen(true)}
+        />
+      )}
       {isSidebarCollapsed ? (
         <button
           type="button"
