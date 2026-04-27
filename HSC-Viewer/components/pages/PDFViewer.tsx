@@ -1044,7 +1044,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                     zIndex: 45,
                   }
                   : undefined}
-                className="order-1 max-h-[66vh] overflow-hidden rounded-[20px] border border-black/10 bg-white/88 lg:order-2 lg:sticky lg:top-5 lg:self-start lg:max-h-[calc(100vh-18rem)] lg:w-[260px]"
+                className="order-1 hidden max-h-[66vh] overflow-hidden rounded-[20px] border border-black/10 bg-white/88 lg:order-2 lg:block lg:sticky lg:top-5 lg:self-start lg:max-h-[calc(100vh-18rem)] lg:w-[260px]"
                 aria-label="PDF navigation sidebar"
               >
                 <div

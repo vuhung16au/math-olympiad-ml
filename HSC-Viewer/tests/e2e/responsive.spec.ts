@@ -14,9 +14,14 @@ for (const viewport of viewports) {
 
     await expect(page.getByRole("button", { name: "Previous page" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Next page" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Pages" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Outline" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Next page" })).toBeEnabled();
+
+    if (viewport.name === "desktop") {
+      await expect(page.getByRole("button", { name: "Pages" })).toBeVisible();
+      await expect(page.getByRole("button", { name: "Outline" })).toBeVisible();
+    } else {
+      await expect(page.getByLabel("PDF navigation sidebar")).toBeHidden();
+    }
 
     await page.getByRole("button", { name: "Next page" }).click();
     await expect(page).toHaveURL(/\/booklets\/hsc-collections\/2(\?.*)?$/);

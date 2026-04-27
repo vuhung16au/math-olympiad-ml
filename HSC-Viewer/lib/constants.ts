@@ -33,3 +33,6 @@ export const REPO_LINKS = {
 
 export const APP_NAME = 'HSC Math Hub';
 export const APP_DESCRIPTION = 'View HSC Mathematics booklets directly in your browser';
+
+/** Google Analytics 4 measurement ID (gtag.js). */
+export const GOOGLE_ANALYTICS_MEASUREMENT_ID = 'G-7DN8JFW2QH';
