@@ -1,67 +1,47 @@
-% Part 2 Problem 08 (Medium): Divisibility by 9 iff sum of digits divisible by 9
-% Source: samples/21.tex
-% Technique: Direct Proof (Biconditional)
-% Topic: Divisibility Rules/Modular Arithmetic
+% Part 2 Problem 08 (Trap / Medium): Euclid's Lemma with "prime" omitted — pedagogical trap
+% Technique: Disproof by Counterexample
+% Topic: Divisibility / Logic
 
-\begin{problem}[Divisibility by 9 via Digit Sum]
-Prove that a three-digit number is divisible by $9$ if and only if the sum of its digits is divisible by $9$.
+\begin{problem}[Divisibility of a Product]
+Prove that for all positive integers $a, b,$ and $c$, if $a$ divides the product $bc$, then $a$ divides $b$ or $a$ divides $c$.
 \end{problem}
 
 \begin{hint}
-Let $N = 100a + 10b + c$ where $a, b, c$ are the digits.
+Attempt to set up a direct proof using the definition of divisibility: $bc = ak$ for some integer $k$. Can you algebraically force $a$ to divide $b$ or $c$?
 
-Rewrite this as $N = 9(11a + b) + (a + b + c)$ to establish the relationship between $N$ and the digit sum.
+Wait—is this statement actually true? Try testing it with some small integer values. What happens if $a$ is a composite number (like $4$ or $6$) rather than a prime number?
 
-Then prove both directions of the biconditional using this relationship.
+\textbf{Exam Strategy:} If you ever encounter an exam question that seems fundamentally incorrect or impossible, do not leave the page blank! A blank page guarantees 0 marks. Instead, prove that the statement is false. The absolute best way to completely destroy a ``for all'' statement is to provide a single, concrete \textbf{counterexample}.
 \end{hint}
 
 \begin{solution}
-Let $N = 100a + 10b + c$ be a three-digit number with digits $a, b, c$.
+The problem statement is strictly \textbf{false}. We will disprove it by providing a counterexample.
 
-Let $S = a + b + c$ be the sum of digits.
+To disprove the statement ``if $a$ divides $bc$, then $a|b$ or $a|c$'', we must find specific positive integers $a, b,$ and $c$ such that $a$ divides $bc$, but $a \nmid b$ and $a \nmid c$.
 
-\vspace{0.3cm}
+Let $a = 6$, $b = 2$, and $c = 3$.
 
-\textbf{Key Relationship:}
+Check the condition (the premise):
+\[
+bc = 2 \times 3 = 6
+\]
+Since $6$ divides $6$, the premise that $a$ divides $bc$ is satisfied.
 
-Rewrite $N$:
-\begin{align*}
-N &= 100a + 10b + c \\
-&= (99a + a) + (9b + b) + c \\
-&= 9(11a + b) + (a + b + c) \\
-&= 9(11a + b) + S
-\end{align*}
+Check the conclusion:
+\begin{itemize}
+    \item Does $a$ divide $b$? No, $6$ does not divide $2$.
+    \item Does $a$ divide $c$? No, $6$ does not divide $3$.
+\end{itemize}
 
-Therefore: $N - S = 9(11a + b)$, which means $N \equiv S \pmod{9}$.
+Since both parts of the conclusion are false, the entire statement is invalid.
 
-\vspace{0.3cm}
-
-\textbf{Direction 1 ($\Rightarrow$):} If $9|N$, then $9|S$.
-
-If $N \equiv 0 \pmod{9}$, then from $N \equiv S \pmod{9}$, we get $S \equiv 0 \pmod{9}$.
-
-Thus $9|S$.
-
-\vspace{0.3cm}
-
-\textbf{Direction 2 ($\Leftarrow$):} If $9|S$, then $9|N$.
-
-If $S \equiv 0 \pmod{9}$, then from $N \equiv S \pmod{9}$, we get $N \equiv 0 \pmod{9}$.
-
-Thus $9|N$.
-
-\vspace{0.3cm}
-
-Both directions proven, so the biconditional holds. $\qed$
-
-\vspace{0.3cm}
-
-\textit{Note: This proof generalizes to all positive integers and divisibility by 9. The key is the modular relationship $N \equiv S \pmod{9}$.}
+Therefore, it is not true for all positive integers $a, b, c$ that $a|bc \implies a|b \text{ or } a|c$. $\qed$
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}[leftmargin=*]
-\item Reconstruct the full proof from the hint and the solution outline, and justify every transformation explicitly.
-\item Check edge cases and verify where each assumption is used in the argument.
+\item \textbf{Trust Your Math, Not the Paper:} Examiners are human and occasionally make mistakes. If you leave a flawed question blank, you receive 0 marks. If you mathematically prove that the question is flawed, you demonstrate mastery and will be awarded marks.
+\item \textbf{The Power of Counterexamples:} To prove a universal statement (``for all $x$\ldots'') you must prove it algebraically for every number in existence. But to \textit{disprove} it, you only need to find \textbf{one} single case where it fails.
+\item \textbf{Euclid's Lemma:} The statement in this problem becomes completely true if we add one crucial condition: $a$ must be a \textit{prime} number. Composite numbers can have their factors split across $b$ and $c$, which is why $a=6$ failed above.
 \end{itemize}
 \end{takeaways}
