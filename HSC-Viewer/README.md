@@ -23,7 +23,7 @@ The viewer loads PDFs directly from `raw.githubusercontent.com` so the browser r
 
 ## License
 
-The content and project are distributed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+The content and project are distributed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Development
 

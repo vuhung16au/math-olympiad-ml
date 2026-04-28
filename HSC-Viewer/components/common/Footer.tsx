@@ -12,7 +12,7 @@ export default function Footer() {
             rel="noreferrer"
             className="font-semibold text-[var(--color-purple)] underline decoration-[var(--color-red)] decoration-2 underline-offset-4"
           >
-            CC BY-SA 4.0
+            CC BY 4.0
           </a>
           .
         </p>

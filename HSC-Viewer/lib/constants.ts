@@ -28,7 +28,7 @@ export const PDF_DEFAULTS = {
 export const REPO_LINKS = {
   github: 'https://github.com/vuhung16au/math-olympiad-ml',
   linkedin: 'https://www.linkedin.com/in/nguyenvuhung/',
-  license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  license: 'https://creativecommons.org/licenses/by/4.0/',
 };
 
 export const APP_NAME = 'HSC Math Hub';
