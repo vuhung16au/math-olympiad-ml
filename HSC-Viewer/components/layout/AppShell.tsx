@@ -8,6 +8,7 @@ import ReaderMobileTopBar from "@/components/layout/ReaderMobileTopBar";
 import Sidebar from "@/components/layout/Sidebar";
 import MobileMenu from "@/components/layout/MobileMenu";
 import Footer from "@/components/common/Footer";
+import CookieConsentBanner from "@/components/common/CookieConsentBanner";
 import OfflineBanner from "@/components/common/OfflineBanner";
 import { getBookletBySlug } from "@/lib/booklets";
 import {
@@ -106,6 +107,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[var(--color-ivory)] text-[var(--color-charcoal)]">
+      <CookieConsentBanner />
       <OfflineBanner />
       {!isReaderRoute ? (
         <Header

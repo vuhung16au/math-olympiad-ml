@@ -29,6 +29,7 @@ function getCookie(name: string): string | null {
 }
 
 export const PREF_KEYS = {
+  cookieConsent: "hsc_cookie_consent",
   sidebarCollapsed: "hsc_sidebar_collapsed",
   lastUrl: "hsc_last_url",
   lastPageBySlug: "hsc_last_page_by_slug",

@@ -41,6 +41,7 @@ bunx playwright test tests/e2e/my-spec.spec.ts
 | `error-and-recovery.spec.ts` | PDF load failure shows user-facing error state |
 | `responsive.spec.ts` | Key controls usable at mobile/tablet/desktop viewports |
 | `restore-last-session.spec.ts` | Home route restores last booklet via cookie |
+| `cookie-consent.spec.ts` | One-time cookie notice; consent cookie suppresses repeat |
 | `helpers.ts` | Shared test utilities |
 
 ## PDF mocking

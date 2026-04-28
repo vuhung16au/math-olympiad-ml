@@ -4,6 +4,7 @@ export const BOOKLET_SLUG = "hsc-collections";
 export const ALT_BOOKLET_SLUG = "hsc-vectors";
 
 export const PREF_KEYS = {
+  cookieConsent: "hsc_cookie_consent",
   lastUrl: "hsc_last_url",
   lastPageBySlug: "hsc_last_page_by_slug",
   lastSlug: "hsc_last_slug",

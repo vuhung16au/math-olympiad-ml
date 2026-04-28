@@ -15,6 +15,7 @@ Agents may only read/write the following keys:
 | `zoom-level` | Cookie | `string` (e.g. `"fit-width"`, `"125%"`) | 30 days | Persist zoom preference |
 | `theme` | Cookie | `"light"` \| `"dark"` \| `"sepia"` | 365 days | Persist theme preference |
 | `shortcuts-seen` | Cookie | `"1"` | 365 days | Suppress first-visit shortcut hint after dismissal |
+| `hsc_cookie_consent` | Cookie | `"1"` | 365 days | Suppress the one-time functional-cookie notice after the user accepts |
 | `session-state` | `sessionStorage` | JSON object | Session (tab close) | Transient viewer state (scroll position, outline open/closed) |
 
 ## Rules for agents
@@ -27,7 +28,7 @@ Agents may only read/write the following keys:
 3. **Do not create new cookie keys** without adding them to the table above and updating this document.
 4. **Cookie values must be validated** on read before use — treat them as untrusted input (a user may have manually edited them). Always clamp numeric values to valid ranges (e.g., page number within `[1, totalPages]`).
 5. **`sessionStorage` only for transient state.** Do not persist data that should survive page reloads to `sessionStorage`.
-6. **Consent.** These cookies are strictly functional (no tracking, no analytics). They do not require a consent banner under ePrivacy Directive exemptions. Do not add tracking or advertising cookies without a separate privacy review.
+6. **Consent.** These cookies are strictly functional (no tracking, no advertising). A one-time in-app notice explains this and is dismissed when the user accepts; acceptance is stored in `hsc_cookie_consent`. Do not add tracking or advertising cookies without a separate privacy review.
 
 ## Cookie helper location
 
@@ -36,5 +37,6 @@ Cookie read/write logic lives in `lib/cookies.ts` (or equivalent). Agents must u
 ## Testing
 
 - `tests/e2e/restore-last-session.spec.ts` — verifies `last-url` cookie restore behavior.
+- `tests/e2e/cookie-consent.spec.ts` — verifies the one-time notice and `hsc_cookie_consent` persistence.
 - `tests/e2e/toolbar-and-zoom.spec.ts` — verifies zoom cookie persistence.
 - Any new cookie behavior added by agents must have a corresponding e2e test.
