@@ -87,19 +87,35 @@ Therefore
 Simulate $B(10,\tfrac12)$ as the count of heads in ten fair coin flips. One simulated experiment consists of ten flips; the recorded value is the number of heads. By repeating that experiment many times, you can see the empirical histogram cluster around the theoretical mean $np=5$.
 
 \begin{verbatim}
-import random
-N = 20000            # number of simulated experiments
-results = []
-for _ in range(N):
-    heads = sum(random.random() < 0.5 for _ in range(10))
-    results.append(heads)
 
-# Optional: print mean and rough histogram
-from collections import Counter
-c = Counter(results)
-print("mean count", sum(results)/N)
-print("counts", dict(sorted(c.items())))
+    import random
+    N = 20000 # number of simulated experiments
+    results = []
+    for _ in range(N):
+        heads = sum(random.random() < 0.5 for _ in range(10))
+        results.append(heads)
+    # Optional: print mean and rough histogram
+    from collections import Counter
+    c = Counter(results)
+    print("mean count", sum(results)/N)
+    print("counts", dict(sorted(c.items())))
+
 \end{verbatim}
+
+% \begin{verbatim}
+% import random
+% N = 20000            # number of simulated experiments
+% results = []
+% for _ in range(N):
+%     heads = sum(random.random() < 0.5 for _ in range(10))
+%     results.append(heads)
+
+% # Optional: print mean and rough histogram
+% from collections import Counter
+% c = Counter(results)
+% print("mean count", sum(results)/N)
+% print("counts", dict(sorted(c.items())))
+% \end{verbatim}
 
 \textbf{Task.} Run the script, for example in Google Colab. Report the sample mean and comment on how close it is to $np=5$. Explain why increasing $N$, the number of simulated experiments, sharpens the agreement between simulation and theory.
 \end{problem}
@@ -117,6 +133,19 @@ Each simulated experiment has expected count
 E(X)=np=10\cdot\frac12=5.
 \]
 Your printed sample mean will not usually equal $5$ exactly, because the simulation itself is random. However, it should be close to $5$ when $N=20000$. If $N$ is increased, the average is taken over more independent experiments, so the random simulation error tends to shrink. This is a computational version of the Law of Large Numbers.
+
+
+Expected result: 
+
+\begin{verbatim}
+
+    mean count 5.00115
+    counts {0: 16, 1: 184, 2: 879, 3: 2339, 4: 4055, 
+            5: 4997, 6: 4128, 7: 2322, 
+            8: 900, 9: 163, 10: 17}
+
+\end{verbatim}
+
 \end{solution}
 
 \begin{takeaways}
@@ -131,8 +160,8 @@ Your printed sample mean will not usually equal $5$ exactly, because the simulat
 Assume IQ scores in a population are modelled by $X\sim N(100,15^{2})$. The value $115$ is one standard deviation above the mean. Use Python to compute the left-tail probability $P(X\le115)$, and compare the result with the standard normal table value $\Phi(1)$.
 
 \begin{verbatim}
-from scipy.stats import norm
-print(norm.cdf(115, loc=100, scale=15))
+    from scipy.stats import norm
+    print(norm.cdf(115, loc=100, scale=15))
 \end{verbatim}
 
 Compare the output to $\Phi(1)=0{.}8413$.
@@ -155,6 +184,14 @@ Therefore
 P(X\le115)=P(Z\le1)=\Phi(1)\approx0{.}8413.
 \]
 The Python command \texttt{norm.cdf(115, loc=100, scale=15)} applies the same calculation directly using the original mean and standard deviation, so it should print approximately $0{.}8413$.
+
+
+Expected result: 
+
+\begin{verbatim}
+    0.8413447460685429
+\end{verbatim}
+
 \end{solution}
 
 \begin{takeaways}

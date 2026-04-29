@@ -1,0 +1,109 @@
+% Appendix E: Formal Definition of the Riemann Integral
+
+\subsubsection*{1. Partitions and norms}
+
+Let $[a, b]$ be a closed interval in $\mathbb{R}$. A \textbf{partition} $P$ of $[a, b]$ is a finite, ordered sequence of points $x_i$ such that:
+\[
+  a = x_0 < x_1 < x_2 < \dots < x_{n-1} < x_n = b
+\]
+The partition divides the interval $[a, b]$ into $n$ subintervals $[x_{i-1}, x_i]$ for $i = 1, 2, \dots, n$.
+
+The length of the $i$-th subinterval is denoted by $\Delta x_i = x_i - x_{i-1}$.
+The \textbf{norm} (or mesh) of the partition $P$, denoted by $\|P\|$, is the length of the longest subinterval:
+\[
+  \|P\| = \max_{1 \le i \le n} \Delta x_i
+\]
+
+\subsubsection*{2. Riemann sums}
+
+Let $f \colon [a, b] \to \mathbb{R}$ be a bounded function. For each subinterval $[x_{i-1}, x_i]$, choose an arbitrary \textbf{sample point} $x_i^* \in [x_{i-1}, x_i]$.
+A \textbf{Riemann sum} of $f$ over $[a, b]$ with respect to the partition $P$ and sample points $x_i^*$ is defined as:
+\[
+  S(P, f) = \sum_{i=1}^{n} f(x_i^*) \Delta x_i
+\]
+Geometrically, this sum represents the total area of $n$ rectangles, where the $i$-th rectangle has base $\Delta x_i$ and height $f(x_i^*)$.
+
+\subsubsection*{3. The Riemann integral}
+
+A function $f$ is \textbf{Riemann integrable} on $[a, b]$ if there exists a real number $L$ such that for every $\epsilon > 0$, there exists a $\delta > 0$ such that for any partition $P$ with $\|P\| < \delta$ and any choice of sample points $x_i^*$, we have:
+\[
+  |S(P, f) - L| < \epsilon
+\]
+If this limit exists, $L$ is the Riemann integral of $f$ from $a$ to $b$, denoted by:
+\[
+  \int_a^b f(x) \, dx = \lim_{\|P\| \to 0} \sum_{i=1}^{n} f(x_i^*) \Delta x_i = L
+\]
+
+\vspace{0.5cm}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\subsubsection*{Worked example: integrating $f(x) = x$ on $[0,1]$}
+
+We will compute $\int_0^1 x \, dx$ using the formal limit of a Riemann sum.
+
+\textbf{Step 1: Choose a regular partition}\par\noindent
+Divide the interval $[0, 1]$ into $n$ equal subintervals.
+The width of each subinterval is:
+\[
+  \Delta x = \frac{1 - 0}{n} = \frac{1}{n}
+\]
+The grid points of the partition are $x_i = a + i\Delta x = 0 + i\left(\frac{1}{n}\right) = \frac{i}{n}$.
+
+\textbf{Step 2: Choose sample points}\par\noindent
+For convenience, we choose the \textbf{right endpoint} of each subinterval as our sample point:
+\[
+  x_i^* = x_i = \frac{i}{n}
+\]
+
+\textbf{Step 3: Construct the Riemann sum}\par\noindent
+The Riemann sum $S_n$ for $n$ rectangles is:
+\[
+  S_n = \sum_{i=1}^{n} f(x_i^*) \Delta x = \sum_{i=1}^{n} \left( \frac{i}{n} \right) \left( \frac{1}{n} \right)
+\]
+\[
+  S_n = \frac{1}{n^2} \sum_{i=1}^{n} i
+\]
+
+\textbf{Step 4: Evaluate the sum and take the limit}\par\noindent
+Using the standard sum formula for the first $n$ integers, $\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$:
+\[
+  S_n = \frac{1}{n^2} \left( \frac{n(n+1)}{2} \right) = \frac{n^2 + n}{2n^2} = \frac{1}{2} + \frac{1}{2n}
+\]
+To find the exact integral, take the limit as $n \to \infty$ (which is equivalent to $\|P\| \to 0$):
+\[
+  \int_0^1 x \, dx = \lim_{n \to \infty} S_n = \lim_{n \to \infty} \left( \frac{1}{2} + \frac{1}{2n} \right) = \frac{1}{2}
+\]
+
+\vspace{0.5cm}
+\textbf{Visual representation: right Riemann sum for $f(x)=x$ ($n=5$)}
+
+\begin{center}
+\begin{tikzpicture}[scale=4]
+    % Axes
+    \draw[->, thick] (-0.1, 0) -- (1.2, 0) node[right] {$x$};
+    \draw[->, thick] (0, -0.1) -- (0, 1.2) node[above] {$f(x)$};
+
+    % Function line
+    \draw[thick, blue] (0,0) -- (1,1) node[pos=0.8, above left] {$f(x)=x$};
+
+    % Rectangles (Right Riemann Sum n=5)
+    \foreach \i in {1, 2, 3, 4, 5} {
+        \pgfmathsetmacro{\x}{\i/5}
+        \pgfmathsetmacro{\xprev}{(\i-1)/5}
+        \draw[fill=blue!20, fill opacity=0.5, draw=blue, thick] (\xprev, 0) rectangle (\x, \x);
+    }
+
+    % Ticks and labels (\ticklab avoids conflict with LaTeX \label)
+    \foreach \x/\ticklab in {0.2/x_1, 0.4/x_2, 0.6/x_3, 0.8/x_4, 1.0/x_5} {
+        \draw (\x, -0.02) -- (\x, 0.02);
+        \node[below] at (\x, -0.02) {$\ticklab$};
+    }
+    \node[below left] at (0,0) {$0$};
+
+    % Dashed line to 1 on y-axis
+    \draw[dashed] (0, 1) -- (1, 1);
+    \draw (-0.02, 1) -- (0.02, 1);
+    \node[left] at (-0.02, 1) {$1$};
+\end{tikzpicture}
+\end{center}
