@@ -1,0 +1,31 @@
+% topics/CLT-spreadsheet-enrichment.tex
+% Enrichment lab (not HSC-examinable): Google Sheets Central Limit Theorem simulation
+
+\subsection{Simulating the Central Limit Theorem (spreadsheet lab)}
+\label{subsec:clt-sheets}
+
+\textit{This activity is enrichment and is not part of the HSC Mathematics Extension~2 examination. It illustrates the Central Limit Theorem by simulation in Google Sheets.}
+
+In this challenge you use Google Sheets to build a highly skewed ``population'', draw repeated random samples, and see that the \emph{distribution of sample means} becomes approximately normal.
+
+\textbf{Generating the population.} In a new sheet, label \texttt{A1} \texttt{Population}. In cell \texttt{A2} enter
+
+\texttt{\small =INT(-LN(RAND())*20)}
+
+\noindent Fill down to row 1001. This mimics nonnegative ``waiting times'' (roughly exponential and strongly right-skewed).
+
+\textbf{Tasks.}
+\begin{enumerate}[label=\textbf{\alph*}., leftmargin=*]
+  \item In \texttt{C1:C3}, report the population mean (\texttt{AVERAGE}), population standard deviation (\texttt{STDEV.P}), and skewness (\texttt{SKEW}) of column~\texttt{A}. Skew above about~1 indicates a heavy right tail.
+  \item Draw samples of size $n=30$ with replacement from the thousand rows. In \texttt{E2} enter the following (one line in the sheet):
+  \begin{verbatim}
+=AVERAGE(ARRAYFORMULA(INDEX($A$2:$A$1001, RANDARRAY(30, 1, 1, 1000, TRUE))))
+  \end{verbatim}
+  Fill from \texttt{E2} down to \texttt{E201} to obtain 200 sample means.
+  \item In \texttt{G1:G2}, compute the mean and sample standard deviation of the 200 means in column~\texttt{E}. Compare to the CLT predictions $\mu_{\bar{x}}=\mu$ and $\sigma_{\bar{x}}=\sigma/\sqrt{n}$ with $n=30$ (use $\mu,\sigma$ from part~(a)).
+  \item List bin edges in column~\texttt{I} (e.g.\ $0,1,\ldots,20$). In \texttt{J2} enter \texttt{FREQUENCY} for the range \texttt{E2:E201} with those bins, then build a column histogram. The means should follow a bell-shaped curve even though the raw data in~\texttt{A} are skewed.
+\end{enumerate}
+
+\textbf{What to expect.} The mean of the 200 sample means should match the population mean closely; the spread of those means should match $\sigma/\sqrt{30}$. The histogram of means is much more symmetric than the original population --- typical CLT behaviour for moderate~$n$.
+
+\textbf{Notes for teachers.} \texttt{RANDARRAY} returns random indices; \texttt{INDEX} pulls population values; \texttt{AVERAGE} forms each mean. \texttt{FREQUENCY} is an array function in Sheets; enter it once and let results spill, or use your spreadsheet's equivalent.

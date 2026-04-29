@@ -1,16 +1,38 @@
-% part2-basic.tex
-% Part 2: Practice and Challenge Bank — Warm-Up Drills
-% Problems to be added.
+% Part 2 — Warm-Up Drills
 
-% Placeholder problem
-\begin{problem}[Placeholder --- Warm-Up Drill 1]
-This problem will be added later.
+\begin{problem}[Two spinners]
+A toy wheel is labelled with the integers $1,2,\ldots,10$. On each spin, every label is equally likely, and a trial records the number shown. This warm-up checks that you can write a simple discrete uniform distribution and then use it to predict a count over repeated trials.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Write the probability mass function for one spin, and find the probability that the label is divisible by $3$.
+\item If the wheel is spun independently $30$ times, what is the expected number of spins that show a multiple of $3$?
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
-Hint to be added.
+\begin{itemize}[leftmargin=*]
+\item List residues $\bmod 3$ among $\{1,\ldots,10\}$.
+\item Expected count $=$ trials $\times P(\text{event})$.
+\end{itemize}
 \end{hint}
 
 \begin{solution}
-Solution to be added.
+\textbf{(i)} Let $X$ be the label shown on one spin. Since all ten labels are equally likely,
+\[
+P(X=k)=\frac{1}{10},\qquad k=1,2,\ldots,10.
+\]
+The multiples of $3$ in this set are $3,6,9$, so
+\[
+P(\text{multiple of }3)=\frac{3}{10}.
+\]
+
+\textbf{(ii)} If $Y$ is the number of multiples of $3$ in $30$ spins, then $Y\sim B(30,\frac{3}{10})$. Therefore
+\[
+E(Y)=np=30\cdot\frac{3}{10}=\boxed{9}.
+\]
 \end{solution}
+
+\begin{takeaways}
+\item A discrete uniform distribution gives equal probability to each listed outcome.
+\item Count favourable labels first, then divide by the total number of labels.
+\item For repeated independent trials, the expected count is $np$.
+\end{takeaways}

@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usetikzlibrary{calc}
@@ -43,7 +44,7 @@
 }
 
 \author{Vu Hung Nguyen}
-\title{HSC Mathematics Extension 2: Probability Distributions}
+\title{HSC Mathematics Extension 1 \& 2: Probability Distributions}
 \date{}
 
 \begin{document}
@@ -91,14 +92,14 @@ which accurate minds feel with a sort of instinct.
 This booklet is a growing collection of probability distribution problems for NSW HSC Mathematics Extension~2 students. It covers continuous probability distributions (including the normal distribution), binomial distributions, and selected advanced topics such as Monte Carlo simulations and the hypergeometric distribution.
 
 \subsection{Target Audience}
-This resource is written for students who want extra practice with probability distributions in a clear, classroom-friendly format. Full worked solutions are provided for Part~1 problems, with hints for Part~2 problems. Each problem contains a takeaways box summarising the key idea.
+This resource is written for students who want extra practice with probability distributions in a clear, classroom-friendly format. Every problem begins with an upside-down \textbf{Hints} panel and ends with full worked solutions followed by short takeaways.
 
 \subsection{How to Use This Booklet}
 \begin{itemize}[leftmargin=*]
   \item Read the introductory theory for each topic before attempting problems.
-  \item Attempt each problem before reading the solution.
+  \item Attempt each problem before checking the hint box, then read the solution.
   \item Pay attention to whether a question involves a discrete or continuous distribution.
-  \item Use the takeaways to build pattern recognition for future HSC questions.
+  \item Use the takeaways after each solution to reinforce key ideas.
 \end{itemize}
 
 \subsection{Extension 1 Knowledge Needed}
@@ -110,6 +111,8 @@ To work through this booklet, students should be comfortable with:
   \item \textbf{Binomial theorem:} expansion of $(1+x)^n$ and binomial coefficients $\binom{n}{r}$.
   \item \textbf{Statistics basics:} mean, variance, standard deviation.
 \end{itemize}
+
+\input{introduction/set01-intro}
 
 \subsection{Core Formulas and Ideas}
 
@@ -213,6 +216,8 @@ X \sim B(n,p) \approx N\!\left(np,\, np(1-p)\right).
 \subsection{Hypergeometric Distribution}
 \input{topics/Hypergeometric-distribution}
 
+\input{topics/CLT-spreadsheet-enrichment}
+
 %% ============================================================
 \section{Part 1: Worked Problems}
 %% ============================================================
@@ -232,7 +237,7 @@ Part~1 contains three sets of problems with detailed solutions. Each solution in
 \section{Part 2: Practice and Challenge Bank}
 %% ============================================================
 
-Part~2 presents additional problems. Try each problem first, then check the hint if needed.
+Part~2 presents additional problems. Try each problem first, then check the hint if needed. Each worked solution is followed by a short takeaways box to help you consolidate the main idea.
 
 \subsection{Warm-Up Drills}
 \input{problems/part2-basic}
@@ -256,5 +261,9 @@ Keep practising with a variety of problems, and remember: understanding the shap
 LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
 GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
 Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Distributions}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Distributions}
+
+\clearpage
+\appendix
+\input{appendix/standard-normal}
 
 \end{document}

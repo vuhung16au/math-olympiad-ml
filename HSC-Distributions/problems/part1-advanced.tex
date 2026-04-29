@@ -1,16 +1,181 @@
-% part1-advanced.tex
-% Part 1: Worked Problems — Advanced
-% Problems and solutions to be added.
+% Part 1 — Advanced (set01)
 
-% Placeholder problem
-\begin{problem}[Placeholder --- Advanced Problem 1]
-This problem will be added later.
+\begin{problem}[The exponential distribution and higher moments]
+Let $X$ have the exponential density $f(x)=e^{-x}$ for $x\ge0$ and $f(x)=0$ otherwise. This distribution is often used to model waiting times. In this problem, you will compute its moments using a reduction formula rather than evaluating each integral from scratch.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+  \item For $I_{n}=\int_{0}^{\infty}x^{n}e^{-x}\,dx$, prove $I_{n}=nI_{n-1}$ for $n\ge 1$.
+  \item Deduce $E(X^{n})$, hence $E(X)$ and $\mathrm{Var}(X)$.
+  \item Skewness measures asymmetry and is defined by $E[(X-\mu)^{3}]/\sigma^{3}$. Compute its exact value here.
+  \item For $Y=\sqrt{X}$, show $E(Y)=\frac{\sqrt{\pi}}{2}$.
+\end{enumerate}
 \end{problem}
 
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+  \item Integrate by parts with $u=x^{n}$, $dv=e^{-x}dx$.
+  \item Moments equal factorials once $I_{0}=1$ is grounded.
+  \item Expand cubic about $\mu$.
+  \item Substitute $u=\sqrt{x}$ and finish with Gaussian integrals; an integration by parts step gives $\int_0^\infty u^2e^{-u^2}\,du=\frac{\sqrt{\pi}}{4}$.
+\end{itemize}
+\end{hint}
+
 \begin{solution}
-Solution to be added.
+\textbf{(i)} Use integration by parts with $u=x^n$ and $dv=e^{-x}\,dx$. Then $du=nx^{n-1}\,dx$ and $v=-e^{-x}$, so
+\[
+I_n=\big[-x^ne^{-x}\big]_0^\infty+n\int_0^\infty x^{n-1}e^{-x}\,dx.
+\]
+The boundary term is $0$: at $x=0$ it is zero for $n\ge1$, and as $x\to\infty$ the exponential decay dominates $x^n$. Hence $I_n=nI_{n-1}$.
+
+\textbf{(ii)} Since $I_0=\int_0^\infty e^{-x}\,dx=1$, repeated use of the reduction formula gives
+\[
+I_n=n(n-1)\cdots 1\,I_0=n!.
+\]
+Therefore $E(X^n)=n!$. In particular,
+\[
+E(X)=1!,\qquad E(X^2)=2!,
+\]
+so
+\[
+\mathrm{Var}(X)=E(X^2)-[E(X)]^2=2-1=1.
+\]
+
+\textbf{(iii)} Here $\mu=1$ and $\sigma=1$. Expand the central cubic:
+\[
+E[(X-1)^3]=E(X^3)-3E(X^2)+3E(X)-1.
+\]
+Using $E(X^3)=3!=6$, $E(X^2)=2$, and $E(X)=1$,
+\[
+E[(X-1)^3]=6-3(2)+3(1)-1=2.
+\]
+Dividing by $\sigma^3=1$ gives skewness $\boxed{2}$.
+
+\textbf{(iv)} Since $Y=\sqrt X$,
+\[
+E(Y)=\int_0^\infty \sqrt{x}\,e^{-x}\,dx.
+\]
+Let $u=\sqrt{x}$, so $x=u^2$ and $dx=2u\,du$. Then
+\[
+E(Y)=\int_0^\infty 2u^2e^{-u^2}\,du.
+\]
+Using the standard Gaussian integral result $\int_0^\infty u^2e^{-u^2}\,du=\frac{\sqrt{\pi}}{4}$, we obtain
+\[
+E(Y)=\boxed{\frac{\sqrt{\pi}}{2}}.
+\]
 \end{solution}
 
 \begin{takeaways}
-\item Key insight to be added.
+\item Reduction formulae replace one-off integration tricks.
+\item Polynomial moments encode factorial growth for this law.
+\item $\Gamma$-function values link $\mathbb{E}[\sqrt{X}]$ with Gaussian tails.
+\end{takeaways}
+
+\begin{problem}[Moments and kurtosis of the standard normal]
+Kurtosis is a numerical measure of how much probability sits in the tails of a distribution compared with its centre. It matters because two distributions can have the same mean and variance but very different chances of producing extreme values. The normal distribution has kurtosis $3$, which is often used as a benchmark when comparing tail behaviour.
+
+Let $Z\sim N(0,1)$ with density $\phi(z)=\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2}$. For each integer $n\ge0$, define
+\[
+I_n=\int_{-\infty}^{\infty}z^n\phi(z)\,dz=E(Z^n).
+\]
+This problem shows how symmetry and integration by parts generate the key normal moments.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+  \item Argue $I_{n}=0$ for odd $n$.
+  \item For even $n\ge 2$, derive $I_{n}=(n-1)I_{n-2}$ by parts.
+  \item Compute $\mathrm{Var}(Z)$ and $E(Z^{4})$.
+  \item Kurtosis $\dfrac{E[(Z-\mu)^{4}]}{\sigma^{4}}$ for $Z\sim N(0,1)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+  \item Odd integrand $\times$ even $\phi$ is odd.
+  \item Choose $u=z^{n-1}$, $dv=z\phi(z)dz$ with $v=-\phi(z)$.
+  \item Start from $I_{0}=1$, step to $I_{2},I_{4}$.
+  \item Here $\mu=0$, $\sigma=1$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} The density $\phi(z)$ is an even function because $\phi(-z)=\phi(z)$. If $n$ is odd, then $z^n$ is odd, so $z^n\phi(z)$ is odd. The integral of an odd function over the symmetric interval $(-\infty,\infty)$ is $0$, hence $I_n=0$ for odd $n$.
+
+\textbf{(ii)} For even $n\ge2$, write
+\[
+I_n=\int_{-\infty}^{\infty}z^{n-1}\,z\phi(z)\,dz.
+\]
+Since $\phi'(z)=-z\phi(z)$, we have $z\phi(z)\,dz=-d\phi(z)$. Integration by parts gives
+\[
+I_n=\big[-z^{n-1}\phi(z)\big]_{-\infty}^{\infty}
++(n-1)\int_{-\infty}^{\infty}z^{n-2}\phi(z)\,dz.
+\]
+The boundary term vanishes, so $I_n=(n-1)I_{n-2}$.
+
+\textbf{(iii)} Since $I_0=1$, the recursion gives
+\[
+I_2=(2-1)I_0=1,\qquad I_4=(4-1)I_2=3.
+\]
+Also $E(Z)=0$, so
+\[
+\mathrm{Var}(Z)=E(Z^2)-[E(Z)]^2=1-0=1.
+\]
+
+\textbf{(iv)} For the standard normal, $\mu=0$ and $\sigma=1$. Therefore
+\[
+\frac{E[(Z-\mu)^4]}{\sigma^4}=E(Z^4)=\boxed{3}.
+\]
+This value is the reference kurtosis for a normal distribution.
+\end{solution}
+
+\begin{takeaways}
+\item Gaussian moment recursion mirrors calculus reduction schemes.
+\item Symmetry zeros out odd moments instantly.
+\item Kurtosis $3$ is the benchmark ``mesokurtic'' normal reference.
+\end{takeaways}
+
+\begin{problem}[Statistical analysis of heart rates]
+Pulse rates vary from person to person and are often modelled approximately by normal distributions. Let $M\sim N(71,9^{2})$ model male pulse rate and $F\sim N(76,9{.}5^{2})$ model female pulse rate, with independence assumed where two people are compared. Let $\Phi$ be the standard normal cdf.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+  \item Bradycardia: pulse $<60$. Which sex has the larger population proportion below $60$? Compare $z$-scores only.
+  \item Tachycardia: pulse $>100$. Express $P(M>100)$ using $\Phi$. If mean becomes $71-c$ and sd $\sigma_{\mathrm{new}}$, state the equation keeping the same upper-tail probability as before.
+  \item Why is $P(\bar{M}>100)<P(M>100)$ for sample mean $\bar{M}$ of $n>1$ males?
+  \item With $D=F-M$, find $E(D)$, $\mathrm{Var}(D)$, and $P(F<M)$ using $\Phi$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+  \item Compare standardized positions of $60$ under both models.
+  \item Tail probability $=1-\Phi(z)$; unchanged tail $\Rightarrow$ same $z$-threshold.
+  \item Means have variance scaled by $1/n$.
+  \item $F<M \iff D<0$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} $z_{M}=\dfrac{60-71}{9}=-\dfrac{11}{9}$ and $z_{F}=\dfrac{60-76}{9{.}5}=-\dfrac{32}{19}$ with $z_{M}>z_{F}$ (less extreme left tail for males). Thus $\Phi(z_{M})>\Phi(z_{F})$, i.e.\ males carry a larger proportion below $60$\,bpm.
+
+\textbf{(ii)} $P(M>100)=1-\Phi\big(\tfrac{29}{9}\big)$ ; unchanged tachycardia rate requires $\displaystyle\frac{100-(71-c)}{\sigma_{\mathrm{new}}}=\frac{29}{9}$ i.e.\ $\displaystyle\frac{29+c}{\sigma_{\mathrm{new}}}=\frac{29}{9}$.
+
+\textbf{(iii)} For a sample mean of $n$ independent male pulse rates,
+\[
+\bar M\sim N\!\left(71,\frac{81}{n}\right).
+\]
+The centre is still $71$, but the standard deviation is $9/\sqrt n$, which is smaller than $9$ for $n>1$. Since $100$ is far above the mean, the narrower sampling distribution places less area in the upper tail beyond $100$. Hence $P(\bar M>100)<P(M>100)$.
+
+\textbf{(iv)} Define $D=F-M$. Then
+\[
+E(D)=E(F)-E(M)=76-71=5.
+\]
+Because $F$ and $M$ are independent, variances add even though the variables are subtracted:
+\[
+\mathrm{Var}(D)=9{.}5^2+9^2=171{.}25.
+\]
+The event that a randomly chosen female has a lower pulse rate than a randomly chosen male is $F<M$, or $D<0$. Therefore
+\[
+P(F<M)=P(D<0)=\Phi\!\left(\frac{0-5}{\sqrt{171{.}25}}\right).
+\]
+\end{solution}
+
+\begin{takeaways}
+\item $z$-scores rank extremity across different normal models.
+\item Averages have tighter sampling distributions than singleton draws.
+\item Differences add variances even when subtracting independent variables.
 \end{takeaways}

@@ -1,16 +1,152 @@
-% part2-advanced.tex
-% Part 2: Practice and Challenge Bank — Challenge Corner
-% Problems to be added.
+% Part 2 — Challenge Corner
 
-% Placeholder problem
-\begin{problem}[Placeholder --- Challenge Problem 1]
-This problem will be added later.
+\begin{problem}[The mathematics of Benford's law]
+Many real-world data sets, such as populations, lengths, financial amounts, and physical constants, have leading digits that are not uniformly distributed. Benford's law models the leading digit $D\in\{1,\ldots,9\}$ by
+\[
+P(D=d)=\log_{10}\!\left(1+\frac1d\right).
+\]
+In this problem you will verify that this formula really defines a probability distribution and then connect it to a simple continuous model.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Show that $\sum_{d=1}^{9}P(D=d)=1$, so the formula is a valid probability mass function.
+\item Show that the probability of a leading digit $1$, $2$, or $3$ is greater than $60\%$.
+\item By expanding $\sum dP(D=d)$ and regrouping logarithmic terms, prove that the mean leading digit is $\mu=9-\log_{10}(9!)$.
+\item If $U\sim \mathrm{Unif}[0,1)$ and $Y=10^{U}$, show that the leading digit of $Y$ follows Benford's law.
+\end{enumerate}
 \end{problem}
 
 \begin{hint}
-Hint to be added.
+\begin{itemize}[leftmargin=*]
+\item $\log(1+\tfrac1d)=\log(d+1)-\log d$.
+\item Sum three explicit logs to compare to $\log 4$.
+\item Expand expectations and regroup coefficients of $\log k$.
+\item Leading digit $d$ iff $d\le Y<d+1$; take $\log_{10}$.
+\end{itemize}
 \end{hint}
 
 \begin{solution}
-Solution to be added.
+\textbf{(i)} Rewrite each probability as
+\[
+\log_{10}\!\left(1+\frac1d\right)
+=\log_{10}\!\left(\frac{d+1}{d}\right)
+=\log_{10}(d+1)-\log_{10}d.
+\]
+Therefore the sum telescopes:
+\[
+\sum_{d=1}^{9}P(D=d)
+=\log_{10}2-\log_{10}1+\cdots+\log_{10}10-\log_{10}9
+=\log_{10}10-\log_{10}1=1.
+\]
+
+\textbf{(ii)} The same telescoping idea gives
+\[
+P(D\in\{1,2,3\})=\log_{10}2+\log_{10}\frac32+\log_{10}\frac43
+=\log_{10}4\approx0{.}602.
+\]
+Thus the first three digits account for slightly more than $60\%$ of all leading digits under Benford's law.
+
+\textbf{(iii)} The mean is
+\[
+E(D)=\sum_{d=1}^{9}d\log_{10}\!\left(\frac{d+1}{d}\right)
+=\sum_{d=1}^{9}d\bigl(\log_{10}(d+1)-\log_{10}d\bigr).
+\]
+Expanding shows that most logarithms appear twice with neighbouring coefficients:
+\[
+E(D)=1\log_{10}2+2\log_{10}3-2\log_{10}2+\cdots+9\log_{10}10-9\log_{10}9.
+\]
+After regrouping, this becomes
+\[
+E(D)=9\log_{10}10-\log_{10}(1\cdot2\cdots9)
+=9-\log_{10}(9!).
+\]
+
+\textbf{(iv)} The leading digit of $Y$ is $d$ precisely when
+\[
+d\le Y<d+1.
+\]
+Since $Y=10^U$, taking $\log_{10}$ gives
+\[
+\log_{10}d\le U<\log_{10}(d+1).
+\]
+Because $U$ is uniform on $[0,1)$, the probability is the length of this interval:
+\[
+P(D=d)=\log_{10}(d+1)-\log_{10}d
+=\log_{10}\!\left(1+\frac1d\right).
+\]
 \end{solution}
+
+\begin{takeaways}
+\item Logarithm differences often telescope into compact probability sums.
+\item Benford leading digits are heavily weighted toward smaller digits.
+\item Uniformity on a logarithmic scale produces Benford's law on the original scale.
+\end{takeaways}
+
+\begin{problem}[The squared Cauchy distribution]
+Let
+\[
+g(x)=\frac{1}{(1+x^2)^2},\qquad -\infty<x<\infty.
+\]
+This density-like curve has heavier tails than a normal distribution but still has finite mean and variance. The aim is to normalise it into a probability density function and then compute its first two moments carefully.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item Show $\displaystyle\int_{-\infty}^{\infty}g(x)\,dx=\frac{\pi}{2}$ using the substitution $x=\tan\theta$.
+\item Verify that $f(x)=\dfrac{2}{\pi(1+x^2)^2}$ is a valid probability density function on the real line.
+\item Show $E(X)=0$, and justify why the improper integral converges before using symmetry.
+\item Show that the variance is defined and that $\mathrm{Var}(X)=1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+\item Half-angle formulas after angular substitution.
+\item Non-negativity and total mass $(2/\pi)\cdot\pi/2=1$.
+\item Split $[0,\infty)$, substitute $u=1+x^{2}$ for the positive half before symmetrising.
+\item $E[X^{2}]$ via same substitution yields $1$, then subtract $0^{2}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Let $x=\tan\theta$. Then $dx=\sec^2\theta\,d\theta$ and $1+x^2=\sec^2\theta$. As $x$ runs from $-\infty$ to $\infty$, $\theta$ runs from $-\frac{\pi}{2}$ to $\frac{\pi}{2}$. Hence
+\[
+\int_{-\infty}^{\infty}\frac{1}{(1+x^2)^2}\,dx
+=\int_{-\pi/2}^{\pi/2}\frac{\sec^2\theta}{\sec^4\theta}\,d\theta
+=\int_{-\pi/2}^{\pi/2}\cos^2\theta\,d\theta
+=\frac{\pi}{2}.
+\]
+
+\textbf{(ii)} The function is non-negative for all real $x$. Also,
+\[
+\int_{-\infty}^{\infty}f(x)\,dx
+=\frac{2}{\pi}\int_{-\infty}^{\infty}\frac{1}{(1+x^2)^2}\,dx
+=\frac{2}{\pi}\cdot\frac{\pi}{2}=1.
+\]
+So $f$ is a valid pdf.
+
+\textbf{(iii)} The integrand for the mean is
+\[
+xf(x)=\frac{2x}{\pi(1+x^2)^2},
+\]
+which is odd. Before using symmetry, check convergence on the positive half-line:
+\[
+\int_0^\infty \frac{2x}{\pi(1+x^2)^2}\,dx
+=\frac{1}{\pi}\int_1^\infty u^{-2}\,du
+=\frac1\pi,
+\]
+where $u=1+x^2$. The corresponding negative-half integral is finite and equal to $-\frac1\pi$, so $E(X)=0$.
+
+\textbf{(iv)} Since $E(X)=0$, the variance is $E(X^2)$. Compute
+\[
+E(X^2)=\int_{-\infty}^{\infty}\frac{2x^2}{\pi(1+x^2)^2}\,dx.
+\]
+Using $x=\tan\theta$ again,
+\[
+\frac{2}{\pi}\int_{-\pi/2}^{\pi/2}\tan^2\theta\cos^2\theta\,d\theta
+=\frac{2}{\pi}\int_{-\pi/2}^{\pi/2}\sin^2\theta\,d\theta
+=1.
+\]
+Therefore $\mathrm{Var}(X)=1-0^2=\boxed{1}$.
+\end{solution}
+
+\begin{takeaways}
+\item A normalising constant is chosen so the total area under a pdf is exactly $1$.
+\item Symmetry is powerful, but improper integrals still need convergence checks.
+\item The substitution $x=\tan\theta$ is natural whenever $1+x^2$ appears.
+\end{takeaways}
