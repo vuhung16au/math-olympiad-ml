@@ -17,4 +17,102 @@ For example:
 P(X \leq k) \approx P\!\left(X \leq k + \tfrac{1}{2}\right) \quad \text{(normal approximation)}.
 \]
 
-% Placeholder: examples to be added.
+\subsubsection*{Illustration ($p=\tfrac{1}{2}$, $\mu=np$, $\sigma^2=np(1-p)$)}
+We fix $p=\frac{1}{2}$ so the binomial is symmetric---the histogram of $P(X=k)$ is easier to compare to the bell-shaped curve. For each $n$, the matching normal density is $N(np,\ np(1-p))$ (plotted as a curve on the same $k$-axis). Only for larger $n$ does the guideline $np\ge 5$, $n(1-p)\ge 5$ hold; the diagrams show visually why the approximation is guarded for small~$n$.
+
+\begin{center}\small
+\begin{tikzpicture}
+\begin{groupplot}[
+    group style={
+        group size=1 by 3,
+        vertical sep=48pt,
+        y descriptions at=edge left,
+    },
+    width=0.88\textwidth,
+    height=3.55cm,
+    axis lines=left,
+    enlarge x limits=0.06,
+    ymin=0,
+    grid=both,
+    major grid style={gray!22},
+    tick label style={font=\footnotesize},
+    label style={font=\small},
+    title style={font=\normalsize\bfseries, yshift=2pt},
+    every axis plot/.append style={semithick},
+    clip mode=individual,
+    legend style={
+        font=\footnotesize,
+        anchor=south,
+        legend columns=-1,
+        column sep=0.55em,
+    },
+    legend to name=binomnormalapproachlegend,
+]
+
+% --- Top: n = 2 ---
+\nextgroupplot[
+    title={$n=2$;\quad $\mu=1$, $\sigma^2=\tfrac12$},
+    xmin=-0.45, xmax=2.45,
+    ymax=0.58,
+    xtick={0,1,2},
+    xticklabels={,,},
+    ytick={0,0.1,0.2,0.3,0.4,0.5},
+    scaled ticks=false,
+    ylabel={$P(X=k)$},
+]
+
+\addplot+[ycomb, thick, mark=*, mark size=1.35pt, blue!75!black]
+coordinates {(0,0.25)(1,0.5)(2,0.25)};
+\addplot+[thick, samples=140, smooth, blue!65!cyan, dashed, domain=-0.45:2.45]
+{1/(sqrt(0.5)*sqrt(2*pi))*exp(-(x-1)^2/(2*0.5))};
+\addlegendentry{binomial pmf}
+\addlegendentry{$N(np,npq)$ pdf}
+
+% --- Middle: n = 5 ---
+\nextgroupplot[
+    title={$n=5$;\quad $\mu=\tfrac52$, $\sigma^2=\tfrac54$},
+    xmin=-0.45, xmax=5.45,
+    ymax=0.38,
+    xtick={0,1,...,5},
+    xticklabels={,,,,, },
+    ytick={0,0.1,0.2,0.3},
+    ylabel={$P(X=k)$},
+]
+
+\addplot+[ycomb, thick, mark=*, mark size=1.2pt, green!55!black, forget plot]
+coordinates {
+(0,0.03125)(1,0.15625)(2,0.3125)(3,0.3125)(4,0.15625)(5,0.03125)
+};
+\addplot+[thick, samples=160, smooth, green!45!gray, dashed, domain=-0.45:5.45, forget plot]
+{1/(sqrt(1.25)*sqrt(2*pi))*exp(-(x-2.5)^2/(2*1.25))};
+
+% --- Bottom: n = 20 ---
+\nextgroupplot[
+    title={$n=20$;\quad $\mu=10$, $\sigma^2=5$},
+    xmin=-0.6, xmax=20.6,
+    ymax=0.20,
+    xtick={0,5,...,20},
+    ytick={0,0.05,0.10,0.15,0.20},
+    xlabel={successes $k$},
+    ylabel={$P(X=k)$},
+]
+
+\addplot+[ycomb, thick, mark=*, mark size=0.9pt, red!72!black, forget plot]
+coordinates {
+(0,0.000001)(1,0.000019)(2,0.000181)(3,0.001087)(4,0.004621)
+(5,0.014786)(6,0.036964)(7,0.073929)(8,0.120134)(9,0.160179)
+(10,0.176197)(11,0.160179)(12,0.120134)(13,0.073929)(14,0.036964)
+(15,0.014786)(16,0.004621)(17,0.001087)(18,0.000181)(19,0.000019)
+(20,0.000001)
+};
+\addplot+[thick, samples=220, smooth, red!40!orange, dashed, domain=-0.6:20.6, forget plot]
+{1/(sqrt(5)*sqrt(2*pi))*exp(-(x-10)^2/(2*5))};
+
+\end{groupplot}
+\end{tikzpicture}
+\vspace{0.65em}
+\pgfplotslegendfromname{binomnormalapproachlegend}
+\vspace{0.45em}
+\noindent\footnotesize\textit{Increasing $n$ (reading downward): the pmf becomes more bell-shaped and tracks the $N(np,npq)$ curve more closely. Here $p=\frac12$ so $pq=\frac14$ and $\mathrm{Var}(X)=npq$.}
+\end{center}
+
