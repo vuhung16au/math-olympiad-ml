@@ -1,0 +1,23 @@
+\begin{center}\small
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      width=0.94\textwidth,
+      height=3.95cm,
+      xmin=-0.2, xmax=12.8,
+      ymin=0, ymax=0.36,
+      xlabel={class},
+      ylabel={proportion},
+      enlarge x limits=0.03,
+      xtick=\empty,
+    ]
+    % stylised coarse histogram bars
+    \addplot+[ybar, bar width=9pt, fill=blue!40!gray, fill opacity=0.55, draw=blue!65!black]
+      coordinates {(1,0.05)(3,0.18)(5,0.31)(7,0.26)(9,0.12)(11,0.05)};
+    % smoothed surrogate density
+    \addplot+[smooth, very thick, red!72!black, domain=0:12, samples=80]
+      {0.045 + 0.28*exp(-(x-5.2)^2/7)};
+  \end{axis}
+\end{tikzpicture}\\[0.35em]
+\noindent\footnotesize\textit{Relative frequencies bar-chart a distribution; narrower bins with more data approach a smooth curve (pdf analogue).}
+\end{center}

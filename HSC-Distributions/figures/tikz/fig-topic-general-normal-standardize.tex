@@ -1,0 +1,56 @@
+\begin{center}\small
+\begin{tikzpicture}[x=0.42cm,y=1cm]
+  % Example: mu=10, sigma=2  =>  x=8 -> z=-1,  x=13 -> z=1.5
+  \coordinate (Zl) at (-1,2.2);
+  \coordinate (Zr) at (1.5,2.2);
+
+  \draw[-stealth] (-4,2.2) -- (5,2.2) node[right, font=\small] {$z$};
+  \foreach \z in {-3,-2,-1,0,1,2,3}{
+    \draw (\z,2.07) -- (\z,2.33);
+  }
+  \foreach \z/\t in {-3/$-3$,-2/$-2$,-1/$-1$,0/$0$,1/$1$,2/$2$,3/$3$}{
+    \node[below=7pt, font=\scriptsize] at (\z,2.07) {\t};
+  }
+
+  \draw[orange!85!black, line width=1.05pt]
+    ($(Zl)-(0.12,0)$) -- ($(Zr)+(0.12,0)$);
+  \fill[orange!85!black] (Zl) circle (2pt);
+  \fill[orange!85!black] (Zr) circle (2pt);
+
+  \path (Zl) ++(-0.22, 0.92)
+    node[
+      anchor=south east,
+      font=\scriptsize,
+      align=right,
+    ] {$z_a=-1$\\[-2pt]{\tiny when $a=8$}};
+
+  \path (Zr) ++(0.28, 0.92)
+    node[
+      anchor=south west,
+      font=\scriptsize,
+      align=left,
+    ] {$z_b=1{.}5$\\[-2pt]{\tiny when $b=13$}};
+
+  \draw[-stealth] (6,4.35) -- (22,4.35) node[right, font=\small] {$x$};
+  \foreach \xx in {6,8,...,20}{
+    \draw (\xx,4.22) -- (\xx,4.48);
+  }
+
+  % Label only noteworthy ticks to avoid empties conflicting
+  \node[above=9pt, font=\scriptsize] at (8,4.48) {$a$};
+  \node[above=9pt, font=\scriptsize] at (10,4.48) {$\mu$};
+  \node[above=9pt, font=\scriptsize] at (13,4.48) {$b$};
+
+  \draw[blue!70!black, line width=1.05pt] (13,4.35) -- (13,4.62);
+  \draw[blue!70!black, line width=1.05pt] (8,4.35) -- (8,4.62);
+
+  \draw[decorate, decoration={brace, amplitude=5pt}]
+    ($(8,4.68)$) -- ($(13,4.68)$);
+
+  \node[font=\footnotesize, align=center] at (14.85, 5.22)
+    {$P(a\le X\le b)$ matches this $z$-interval after $Z=\tfrac{X-\mu}{\sigma}$};
+  \draw[densely dashed] (10,4.05) -- (10,4.74);
+\end{tikzpicture}\\[0.5em]
+
+\noindent\footnotesize\textit{Sketch for $\mu=10$, $\sigma=2$: the segment $x\in[8,13]$ maps to $z\in[-1,1{.}5]$. Tables give $\Phi(\cdot)$ for $z$.}
+\end{center}

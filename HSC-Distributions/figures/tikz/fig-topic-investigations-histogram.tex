@@ -1,0 +1,23 @@
+\begin{center}\small
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      width=0.94\textwidth,
+      height=3.95cm,
+      xmin=0.5,
+      xmax=11.8,
+      ymin=0,
+      ymax=0.28,
+      xlabel={value},
+      ylabel={relative freq.},
+    ]
+    \addplot+[ycomb, ultra thick, mark=*, fill=blue!40!gray, fill opacity=0.75, blue!62!black, mark size=1.85pt]
+      coordinates {(1,0.025)(3,0.08)(5,0.19)(7,0.235)(9,0.215)(11,0.06)(13,0.03)};
+
+    \addplot[thick, dashed, purple!73!black, smooth, samples=121, domain=0.5:12.5]
+      { 0.04 + 0.22*exp(-(x-6.85)^2/7.75) };
+  \end{axis}
+\end{tikzpicture}\\[0.4em]
+
+\noindent\footnotesize\textit{Informal normality checks often compare symmetric, bell-ish histogram shapes with a normal curve.}
+\end{center}

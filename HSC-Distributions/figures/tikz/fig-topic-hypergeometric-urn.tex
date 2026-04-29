@@ -1,0 +1,37 @@
+\begin{center}\footnotesize
+\begin{tikzpicture}[scale=0.98]
+  % Urn: $N$ balls, $K$ successes (green), $N-K$ failures (gray)
+  \def\Ntot{12}
+
+  \draw[thick, fill=softivory!95!white, rounded corners=3pt] (-0.35,-0.45) rectangle (10.5,3.95);
+
+  % Headline only at the top of the panel
+  \node[font=\small\bfseries] at (5,3.62) {population of $N=\Ntot$ items};
+
+  \foreach \i in {0,1,2,3,4}{
+    \pgfmathsetmacro{\xi}{mod(\i,5)*0.85 + 0.55}
+    \pgfmathsetmacro{\yi}{div(\i,5)*0.78 + 0.45}
+    \shade[ball color=green!58!black] (\xi,\yi) circle (0.32);
+  }
+  \node[font=\footnotesize, align=center] at (2.15,1.28) {$K=5$\\successes};
+
+  \foreach \j in {0,1,2,3,4,5,6}{
+    \pgfmathsetmacro{\xj}{mod(\j,5)*0.85 + 5.75}
+    \pgfmathsetmacro{\yj}{div(\j,5)*0.78 + 0.45}
+    \shade[ball color=gray!65] (\xj,\yj) circle (0.32);
+  }
+  \node[font=\footnotesize, align=center] at (8.1,1.32) {$N{-}K$\\failures};
+
+  % Brace under the headline; caption sits fully between headline and brace
+  \draw[decorate, decoration={brace, amplitude=4pt}, thick]
+    (5.08,2.48) -- (9.38,2.48);
+  \node[
+    align=center,
+    font=\footnotesize,
+  ] at (7.23,3.06)
+    {draw a sample of size $n$\\without replacement};
+
+\end{tikzpicture}\\[0.35em]
+
+\noindent\footnotesize\textit{Hypergeometric setting: population $N$ with $K$ ``successes''; sample $n$ items without replacement (unlike binomial i.i.d.\ sampling with replacement).}
+\end{center}

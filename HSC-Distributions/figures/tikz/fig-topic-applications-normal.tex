@@ -1,0 +1,59 @@
+\begin{center}\small
+\begin{minipage}[t]{0.47\textwidth}\centering
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      width=\linewidth,
+      height=3.45cm,
+      xmin=-1, xmax=7.8,
+      ymin=0,
+      ymax=0.54,
+      xlabel={$x$},
+      title={\footnotesize\textbf{$P(X\le k)$ (left-tail area)}},
+    ]
+    \def\myf{
+      exp(-((x-2.8)^2)/(2*(1.08)^2))/(1.08*sqrt(2*pi))
+    }
+    \addplot[blue!72!black, draw=none, fill=blue!75!black, fill opacity=0.22, thick, samples=260, smooth, domain=-1:5.72]
+      {\myf}\closedcycle;
+    \addplot[blue!72!black, thick, samples=260, smooth, domain=-1:8]
+      {\myf};
+    \addplot+[const plot, densely dashed]
+      coordinates {(5.72,0.54)(5.72,0)};
+    \node[below left,font=\footnotesize,xshift=-0.15cm,yshift=-0.05cm]
+      at (axis cs:5.72,-0){$k$};
+  \end{axis}
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}\centering
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      width=\linewidth,
+      height=3.45cm,
+      xmin=-1, xmax=7.8,
+      ymin=0,
+      ymax=0.54,
+      xlabel={$x$},
+      title={\footnotesize\textbf{Find cutoff $k$ from a prescribed tail}},
+    ]
+    \def\myfTwo{
+      exp(-((x-2.8)^2)/(2*(1.08)^2))/(1.08*sqrt(2*pi))
+    }
+    \addplot[orange!78!black, thick, samples=260, smooth, domain=-1:8]
+      {\myfTwo};
+    \addplot[
+      orange!92!black, draw=orange!72!black, fill opacity=0.26, thick, samples=200, smooth, domain=5.94:8
+    ]
+      {\myfTwo}\closedcycle;
+
+    \addplot+[const plot, densely dashed]
+      coordinates {(5.94,0.54)(5.94,0)};
+    \node[below left,font=\footnotesize,xshift=-0.15cm,yshift=-0.05cm]
+      at (axis cs:5.94,-0){$k$};
+  \end{axis}
+\end{tikzpicture}
+\end{minipage}\\[0.45em]
+
+\noindent\footnotesize\textit{Left-tail probability uses $\displaystyle\Phi\!\bigl(\dfrac{k-\mu}{\sigma}\bigr)$ once $X\sim N(\mu,\sigma^2)$ is standardised. Cutoff problems invert that step (inverse normal / $\Phi^{-1}$).}
+\end{center}

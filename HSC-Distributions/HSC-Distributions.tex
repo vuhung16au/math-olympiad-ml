@@ -9,15 +9,18 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{booktabs}
+\PassOptionsToPackage{table}{xcolor}
 \usepackage{tikz}
 \usepackage{pgfplots}
-\usetikzlibrary{calc}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{calc,decorations.pathreplacing}
 \pgfplotsset{compat=1.18}
 
 \usepackage{styles/dl101-colors}
 \usepackage{styles/dl101-hints}
 \usepackage{styles/dl101-hsc-problems}
 \usepackage{styles/dl101-layout}
+\input{figures/tikz/tikz-macros}
 
 \providecolor{warmstone}{RGB}{208,184,168}
 
@@ -265,5 +268,6 @@ Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-D
 \clearpage
 \appendix
 \input{appendix/standard-normal}
+\input{appendix/university-preview-t-chi}
 
 \end{document}

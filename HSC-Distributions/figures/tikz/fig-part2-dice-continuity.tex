@@ -1,0 +1,42 @@
+\begin{center}\small
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      width=0.92\textwidth,
+      height=3.6cm,
+      xmin=18.5,
+      xmax=41.5,
+      ymin=0,
+      ymax=0.12,
+      enlargelimits=false,
+      xlabel={success count (normal approx.\ $Y$)},
+    ]
+    \def\normy{exp(-((x-30)^2)/(2*25))/sqrt(2*pi*25)}
+
+    \addplot[green!55!black, draw=none, fill=green!55!black, fill opacity=0.25, samples=220, smooth, domain=29.5:30.5]
+      {\normy}\closedcycle;
+
+    \addplot[green!45!black, thick, samples=240, smooth, domain=18.5:41.5]
+      {\normy};
+
+    \addplot[densely dashed, gray!75, mark=none, forget plot]
+      coordinates {(29.5,0)(29.5,0.11)};
+    \addplot[densely dashed, gray!75, mark=none, forget plot]
+      coordinates {(30.5,0)(30.5,0.11)};
+
+    \node[
+      font=\scriptsize,
+      align=left,
+      fill=white,
+      draw=gray!68,
+      rounded corners=2pt,
+      inner sep=4pt,
+      anchor=north east,
+      text width=4.95cm,
+    ] at (axis cs:41, 0.115)
+      {$\displaystyle P(\mu-\tfrac12\le Y\le\mu+\tfrac12)$\\[3pt]{\footnotesize continuity}};
+  \end{axis}
+\end{tikzpicture}\\[0.35em]
+
+\noindent\footnotesize\textit{Dice problem ($n=180$, $\mu=30$, $\sigma=5$): ``exactly $30$ successes'' uses the continuity band $[29{.}5,30{.}5]$ on the approximating normal.}
+\end{center}

@@ -1,0 +1,42 @@
+\begin{center}\small
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      width=0.92\textwidth,
+      height=3.65cm,
+      xmin=78,
+      xmax=123,
+      ymin=0,
+      ymax=0.062,
+      enlargelimits=false,
+      xlabel={crimson count $C$ (normal approx.)},
+    ]
+    \def\nc{exp(-((x-100)^2)/(2*75))/sqrt(2*pi*75)}
+
+    \addplot[cyan!55!black, draw=none, fill=cyan!55!black, fill opacity=0.22, samples=280, smooth, domain=89.5:110.5]
+      {\nc}\closedcycle;
+
+    \addplot[cyan!45!black, thick, samples=360, smooth, domain=78:123]
+      {\nc};
+
+    \addplot[densely dashed, gray!78, mark=none, forget plot]
+      coordinates {(89.5,0)(89.5,0.06)};
+    \addplot[densely dashed, gray!78, mark=none, forget plot]
+      coordinates {(110.5,0)(110.5,0.06)};
+
+    \node[
+      font=\scriptsize,
+      align=left,
+      fill=white,
+      draw=gray!68,
+      rounded corners=2pt,
+      inner sep=4pt,
+      anchor=north east,
+      text width=6.9cm,
+    ] at (axis cs:122, 0.059)
+      {$P(90\le C\le110)$\\[3pt]{\footnotesize$\displaystyle \approx P(89{.}5\le Y\le110{.}5)$}};
+  \end{axis}
+\end{tikzpicture}\\[0.35em]
+
+\noindent\footnotesize\textit{Inheritance (iii): inclusive binomial counts $90$--$110$ become the continuity window $[89{.}5,110{.}5]$ on $N(100,75)$.}
+\end{center}

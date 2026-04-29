@@ -1,0 +1,25 @@
+% Shared TikZ helpers for figures under figures/tikz/ (included once from preamble).
+\pgfplotsset{
+  DLfigaxis/.style={
+    axis lines=left,
+    enlarge x limits=auto,
+    enlarge y limits=upper,
+    tick label style={font=\footnotesize},
+    label style={font=\small},
+    grid=both,
+    major grid style={gray!22},
+    every axis plot/.append style={semithick},
+  },
+}
+\tikzset{
+  DLgaussStd/.style={
+    declare function={
+      gauss(\x) = exp(-0.5*(\x)^2)/(sqrt(2*pi));
+    },
+  },
+  DLgaussMuSigma/.style={
+    declare function={
+      gnorm(\x,\m,\s) = 1/(\s*sqrt(2*pi))*exp(-((\x)-(\m))^2/(2*(\s)^2));
+    },
+  },
+}

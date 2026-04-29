@@ -1,0 +1,29 @@
+\begin{center}\small
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      width=0.94\textwidth,
+      height=3.95cm,
+      xmin=0, xmax=1,
+      ymin=0,
+      ymax=20,
+      xlabel={$\hat{p}$},
+      ylabel={approx.\ pdf},
+      legend style={
+        font=\footnotesize, at={(0.5,1.02)}, anchor=south,
+        legend columns=3,
+      },
+    ]
+    \addplot[green!55!black, thick, domain=0.02:0.98, samples=200]
+      ({x},{ (1/sqrt(2*pi*(0.21/50)))*exp(-((x-0.3)^2)/(2*(0.21/50))) });
+    \addplot[blue!70!black, thick, domain=0.02:0.98, samples=200]
+      ({x},{ (1/sqrt(2*pi*(0.21/150)))*exp(-((x-0.3)^2)/(2*(0.21/150))) });
+    \addplot[orange!72!black, thick, domain=0.02:0.98, samples=200]
+      ({x},{ (1/sqrt(2*pi*(0.21/420)))*exp(-((x-0.3)^2)/(2*(0.21/420))) });
+    \addplot+[const plot, dashed, gray!70, forget plot] coordinates {(0.3,20)(0.3,0)};
+    \legend{$n=50$,$n=150$,$n=420$}
+  \end{axis}
+\end{tikzpicture}\\[0.25em]
+
+\noindent\footnotesize\textit{Illustration with $p=0{.}30$: as $n$ increases, the sampling distribution of $\hat{p}$ becomes tighter around $p$ (normal approximation for moderate/large $n$).}
+\end{center}

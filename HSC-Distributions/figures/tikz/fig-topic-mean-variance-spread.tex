@@ -1,0 +1,32 @@
+\begin{center}\small
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      width=0.94\textwidth,
+      height=3.45cm,
+      xmin=-4, xmax=13,
+      ymin=0,
+      ymax=0.47,
+      ytick distance=0.1,
+      xlabel={$x$},
+      ylabel={pdf},
+      legend style={font=\footnotesize},
+    ]
+    % Peaks: 1/(sigma*sqrt(2*pi)) gives ~0.43 (sigma=0.92) and ~0.19 (sigma=2.06)
+    \addplot[blue!75!black, very thick, domain=-4:13, samples=160]
+      {exp(-((x-3)^2)/(2*(0.92)^2))/(0.92*sqrt(2*pi))};
+    \addplot[orange!74!black, thick, densely dashed, domain=-4:13, samples=160]
+      {exp(-((x-3)^2)/(2*(2.06)^2))/(2.06*sqrt(2*pi))};
+
+    % mean marker (keep within axis top)
+    \addplot+[const plot,densely dashed,gray!72,forget plot]
+      coordinates {(3,0.47)(3,0)};
+
+    \legend{{$\sigma_1$: narrower pdf}, {$\sigma_2$: wider pdf}}
+    \node[below, font=\scriptsize, yshift=-0.06cm]
+      at (axis cs:3,0){$\mu$};
+  \end{axis}
+\end{tikzpicture}\\[0.2em]
+
+\noindent\footnotesize\textit{Same mean $\mu=3$: a larger variance flattens the pdf (greater spread around $\mu$).}
+\end{center}

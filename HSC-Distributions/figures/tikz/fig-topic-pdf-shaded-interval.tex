@@ -1,0 +1,25 @@
+\begin{center}\small
+\begin{tikzpicture}[DLgaussStd, x=1.1cm, y=5cm]
+  \newcommand{\shadea}{-1}
+  \newcommand{\shadeb}{1.15}
+  \fill[blue!70!black, opacity=0.22]
+    (\shadea,0) -- plot[domain=\shadea:\shadeb, samples=54] (\x,{gauss(\x)}) -- (\shadeb,0) -- cycle;
+  \fill[orange!85!black, opacity=0.12]
+    (-2.85,0) -- plot[domain=-2.85:-1, samples=34] (\x,{gauss(\x)}) -- (-1,0) -- cycle;
+  \fill[orange!85!black, opacity=0.12]
+    (1.15,0) -- plot[domain=1.15:2.85, samples=34] (\x,{gauss(\x)}) -- (2.85,0) -- cycle;
+
+  \draw[->] (-3.05,0) -- (3.15,0) node[right, font=\small] {$x$};
+  \draw[->] (0,0) -- (0,0.52) node[above left, font=\small] {$f(x)$};
+  \draw[thick, domain=-3:3, samples=140] plot (\x,{gauss(\x)});
+
+  \draw[densely dashed, gray] (\shadea,0) -- (\shadea,{gauss(\shadea)})
+    node[below=2pt, font=\scriptsize] {$a$};
+  \draw[densely dashed, gray] (\shadeb,0) -- (\shadeb,{gauss(\shadeb)})
+    node[below=2pt, font=\scriptsize] {$b$};
+
+  \node[align=left, anchor=west, font=\footnotesize] at (-2.98,0.46) {$P(a\le X\le b)$\\
+    \footnotesize(area under $f$)};
+\end{tikzpicture}\\[0.35em]
+\noindent\footnotesize\textit{Probability for a continuous $X$: the shaded interval has $P(a\le X\le b)=\displaystyle\int_a^b f(x)\,dx$; point masses have probability $0$.}
+\end{center}

@@ -1,0 +1,26 @@
+\begin{center}\small
+\begin{tikzpicture}
+  \begin{axis}[
+      DLfigaxis,
+      ybar,
+      bar width=8.5pt,
+      width=0.92\textwidth,
+      height=4.05cm,
+      ymin=0,
+      ymax=0.35,
+      xlabel={leading digit $d$},
+      ylabel={probability},
+      ymin=0,
+      enlarge x limits=0.06,
+      ytick distance=0.05,
+      xtick={1,...,9},
+      xticklabels={1,2,3,4,5,6,7,8,9},
+    ]
+    \addplot[fill=blue!62!cyan, fill opacity=0.65, draw=blue!73!black, thick]
+      coordinates {(1,0.301030)(2,0.176091)(3,0.124939)(4,0.096910)(5,0.079181)
+                   (6,0.066947)(7,0.057992)(8,0.051153)(9,0.045757)};
+  \end{axis}
+\end{tikzpicture}\\[0.25em]
+
+\noindent\footnotesize\textit{Benford first-digit probabilities $P(D=d)=\log_{10}(1+1/d)$.}
+\end{center}

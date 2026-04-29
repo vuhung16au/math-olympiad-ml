@@ -1,0 +1,45 @@
+% appendix/university-preview-t-chi.tex — Student's t and chi-squared (university preview; outside HSC syllabus)
+\section{University preview: advanced continuous distributions}
+
+\noindent
+\textit{\textbf{Note to Students:} The distributions in this section are \textbf{strictly outside the NSW HSC Mathematics syllabus}. You will not be tested on them. However, if you plan to study engineering, data science, economics, or any empirical science at university, these are the fundamental distributions you will use to analyze real-world data.}
+
+\vspace{0.5cm}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\subsection*{1.\ Student's $t$-distribution}
+
+While the Normal distribution ($Z \sim N(0,1)$) is the theoretical gold standard, it requires knowing the exact population standard deviation ($\sigma$). In reality, we almost never know $\sigma$ and must estimate it from a small sample.
+
+The \textbf{Student's $t$-distribution} solves this problem. It is used to estimate population parameters when the sample size is small and the population variance is unknown. It looks like a standard normal curve but has ``heavier tails,'' meaning it accounts for the greater uncertainty of small samples.
+
+\textbf{Mathematical Definition.}
+Let $Z$ be a standard normal random variable and $V$ be a chi-squared random variable with $\nu$ degrees of freedom. If $Z$ and $V$ are independent, then the random variable $T$ is defined as:
+\[
+    T = \frac{Z}{\sqrt{V/\nu}}.
+\]
+The probability density function (PDF) for a $t$-distribution with $\nu$ degrees of freedom is given by:
+\[
+    f(t) = \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sqrt{\nu\pi} \, \Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{t^2}{\nu}\right)^{-\frac{\nu+1}{2}},
+\]
+where $\Gamma$ is the Gamma function. As the sample size grows ($\nu \to \infty$), the $t$-distribution converges exactly to the standard Normal distribution.
+
+\vspace{0.5cm}
+
+\subsection*{2.\ Chi-squared ($\chi^2$) distribution}
+
+The \textbf{Chi-squared distribution} is the cornerstone of hypothesis testing. It is primarily used to test ``goodness of fit'' (e.g., does our observed experimental data match our theoretical HSC probability models?) and to determine if two categorical variables are independent.
+
+\textbf{Mathematical Definition.}
+If $Z_1, Z_2, \dots, Z_k$ are independent, standard normal random variables (where $Z_i \sim N(0,1)$), then the sum of their squares is distributed according to the Chi-squared distribution with $k$ degrees of freedom.
+
+Let $Q$ be the random variable:
+\[
+    Q = \sum_{i=1}^{k} Z_i^2.
+\]
+Then $Q \sim \chi^2(k)$. The probability density function for $x \ge 0$ is given by:
+\[
+    f(x; k) = \frac{x^{(k/2)-1} e^{-x/2}}{2^{k/2} \Gamma\left(\frac{k}{2}\right)}.
+\]
+Unlike the Normal and $t$-distributions, the $\chi^2$ distribution is strictly positive (since it is a sum of squares) and is heavily skewed to the right for small values of~$k$.
