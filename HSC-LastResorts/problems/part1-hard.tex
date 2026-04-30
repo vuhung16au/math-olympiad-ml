@@ -184,85 +184,60 @@ L_2: \quad \mathbf{r}_2(t) &= (0, 1, -1) + t(1, 1, -2)
 \textbf{(a) Verifying skew lines:}
 Direction vectors: $\mathbf{d}_1 = (2, -1, 1)$ and $\mathbf{d}_2 = (1, 1, -2)$.
 
-To test parallelism, compare components:
+To test parallelism, compare component ratios:
 \[
 \frac{2}{1} = 2,\qquad \frac{-1}{1} = -1,\qquad \frac{1}{-2} = -\frac12.
 \]
-These are not equal, so the direction vectors are not scalar multiples. Hence the lines are not parallel.
+These are not equal, so the lines are not parallel.
 
-Check if intersecting: Set $\mathbf{r}_1(s) = \mathbf{r}_2(t)$:
-$(1, 2, 3) + s(2, -1, 1) = (0, 1, -1) + t(1, 1, -2)$
-
-This gives the system:
-$1 + 2s = t$
-$2 - s = 1 + t$
-$3 + s = -1 - 2t$
-
-From equations 1 and 2: $t = 1 + 2s$ and $t = 1 - s$
-So $1 + 2s = 1 - s \Rightarrow 3s = 0 \Rightarrow s = 0$
-Then $t = 1$.
-
-Checking equation 3: $3 + 0 = -1 - 2(1) \Rightarrow 3 = -3$ (contradiction)
-
-Therefore, the lines are skew.
+To test intersection, set
+\[
+(1, 2, 3) + s(2, -1, 1) = (0, 1, -1) + t(1, 1, -2).
+\]
+Equating coordinates gives
+\[
+1+2s=t,\qquad 2-s=1+t,\qquad 3+s=-1-2t.
+\]
+From the first two equations, $t=1+2s=1-s$, so $s=0$ and $t=1$. Substituting into the third gives $3=-3$, a contradiction. Therefore, the lines are skew.
 
 \textbf{(b) and (c) Finding the shortest distance and closest points:}
-Let
-\[
-\mathbf{w} = \mathbf{r}_2(t) - \mathbf{r}_1(s).
-\]
-For the shortest distance, $\mathbf{w}$ must be perpendicular to both direction vectors:
+Let $\mathbf{w} = \mathbf{r}_2(t) - \mathbf{r}_1(s)$. For the shortest distance, $\mathbf{w}$ must satisfy
 \[
 \mathbf{w}\cdot \mathbf{d}_1 = 0,
 \qquad
 \mathbf{w}\cdot \mathbf{d}_2 = 0.
 \]
-Now
 \[
 \mathbf{w} = (0, 1, -1) + t(1, 1, -2) - (1, 2, 3) - s(2, -1, 1)
 = (-1 + t - 2s, -1 + t + s, -4 - 2t - s).
 \]
 So
 \begin{align*}
-\mathbf{w}\cdot \mathbf{d}_1 = 0
-&\implies 2(-1 + t - 2s) - (-1 + t + s) + (-4 - 2t - s) = 0 \\
-&\implies t + 6s = -5,
+\mathbf{w}\cdot \mathbf{d}_1 = 0 &\implies t + 6s = -5,\\
+\mathbf{w}\cdot \mathbf{d}_2 = 0 &\implies 6t + s = -6,
 \end{align*}
-and
-\begin{align*}
-\mathbf{w}\cdot \mathbf{d}_2 = 0
-&\implies (-1 + t - 2s) + (-1 + t + s) - 2(-4 - 2t - s) = 0 \\
-&\implies 6t + s = -6.
-\end{align*}
-Solving,
+giving
 \[
-t = -\frac{31}{35},
-\qquad
-s = -\frac{24}{35}.
+\qquad t = -\frac{31}{35},\qquad s = -\frac{24}{35}.
 \]
-Hence the closest points are
-\begin{align*}
-P_1 &= (1,2,3) + \left(-\frac{24}{35}\right)(2,-1,1)
-= \left(-\frac{13}{35}, \frac{94}{35}, \frac{81}{35}\right),\\
-P_2 &= (0,1,-1) + \left(-\frac{31}{35}\right)(1,1,-2)
-= \left(-\frac{31}{35}, \frac{4}{35}, \frac{27}{35}\right).
-\end{align*}
-Therefore
 \[
-\overrightarrow{P_1P_2}
-= P_2 - P_1
+P_1 = \left(-\frac{13}{35}, \frac{94}{35}, \frac{81}{35}\right),\qquad
+P_2 = \left(-\frac{31}{35}, \frac{4}{35}, \frac{27}{35}\right).
+\]
+\[
+\overrightarrow{P_1P_2}=P_2-P_1
 = \left(-\frac{18}{35}, -\frac{90}{35}, -\frac{54}{35}\right),
 \]
-so the minimum distance is
-\[
+so
+\begin{align*}
 |P_1P_2|
-= \frac{18}{35}\sqrt{1+25+9}
+&= \frac{18}{35}\sqrt{1+25+9}
 = \frac{18}{\sqrt{35}}
 = \frac{18\sqrt{35}}{35}.
-\]
+\end{align*}
 
 \textbf{(d) Perpendicularity verification:}
-By construction in part (c), $\mathbf{w} \perp \mathbf{d}_1$ and $\mathbf{w} \perp \mathbf{d}_2$.
+By construction, $\mathbf{w} \perp \mathbf{d}_1$ and $\mathbf{w} \perp \mathbf{d}_2$, so the segment $P_1P_2$ is perpendicular to both lines.
 \end{solution}
 
 \begin{takeaways}
@@ -289,48 +264,50 @@ Consider the polynomial $P(x) = x^4 - 6x^3 + 11x^2 - 6x + 1$ with roots $r_1, r_
 \end{problem}
 
 \begin{solution}
-\textbf{(a) Elementary symmetric polynomials:}
-For $P(x) = x^4 - 6x^3 + 11x^2 - 6x + 1$:
-$e_1 = r_1 + r_2 + r_3 + r_4 = 6$
-$e_2 = \sum_{i<j} r_i r_j = 11$
-$e_3 = \sum_{i<j<k} r_i r_j r_k = 6$
-$e_4 = r_1 r_2 r_3 r_4 = 1$
+\textbf{(a) Elementary symmetric polynomials:}  
+By Vi\`ete's formulas for $P(x)=x^4-6x^3+11x^2-6x+1$,
+\[
+e_1=r_1+r_2+r_3+r_4=6,\quad
+e_2=\sum_{i<j}r_ir_j=11,\quad
+e_3=\sum_{i<j<k}r_ir_jr_k=6,
+\]
+\[
+e_4=r_1r_2r_3r_4=1.
+\]
 
-\textbf{(b) Newton's identities:}
-The Newton's identities relate power sums to elementary symmetric polynomials:
-$S_1 - e_1 = 0 \Rightarrow S_1 = e_1 = 6$
+\textbf{(b) Newton's identities:}  
+Let $S_k=r_1^k+r_2^k+r_3^k+r_4^k$. Newton's identities give
+\begin{align*}
+S_1-e_1&=0 &&\Rightarrow\quad S_1=6,\\
+S_2-e_1S_1+2e_2&=0 &&\Rightarrow\quad S_2=6\cdot6-2\cdot11=14,\\
+S_3-e_1S_2+e_2S_1-3e_3&=0 &&\Rightarrow\quad S_3=6\cdot14-11\cdot6+3\cdot6=36,\\
+S_4-e_1S_3+e_2S_2-e_3S_1+4e_4&=0 &&\Rightarrow\quad S_4=6\cdot36-11\cdot14+6\cdot6-4=94.
+\end{align*}
 
-$S_2 - e_1 S_1 + 2e_2 = 0 \Rightarrow S_2 = 6 \cdot 6 - 2 \cdot 11 = 36 - 22 = 14$
+\textbf{(c) Recurrence relation:}  
+For $k\ge4$,
+\[
+S_k-e_1S_{k-1}+e_2S_{k-2}-e_3S_{k-3}+e_4S_{k-4}=0,
+\]
+so
+\[
+S_k-6S_{k-1}+11S_{k-2}-6S_{k-3}+S_{k-4}=0,
+\qquad
+S_k=6S_{k-1}-11S_{k-2}+6S_{k-3}-S_{k-4}.
+\]
 
-$S_3 - e_1 S_2 + e_2 S_1 - 3e_3 = 0$
-$S_3 = 6 \cdot 14 - 11 \cdot 6 + 3 \cdot 6 = 84 - 66 + 18 = 36$
+\textbf{(d) Computing $S_5$ and $S_6$:}  
+Using the recurrence,
+\[
+S_5=6S_4-11S_3+6S_2-S_1=6\cdot94-11\cdot36+6\cdot14-6=246,
+\]
+and
+\[
+S_6=6S_5-11S_4+6S_3-S_2=6\cdot246-11\cdot94+6\cdot36-14=644.
+\]
 
-$S_4 - e_1 S_3 + e_2 S_2 - e_3 S_1 + 4e_4 = 0$
-$S_4 = 6 \cdot 36 - 11 \cdot 14 + 6 \cdot 6 - 4 \cdot 1 = 216 - 154 + 36 - 4 = 94$
-
-\textbf{(c) Recurrence relation:}
-For $k \geq 4$:
-$S_k - e_1 S_{k-1} + e_2 S_{k-2} - e_3 S_{k-3} + e_4 S_{k-4} = 0$
-
-Substituting our values:
-$S_k - 6S_{k-1} + 11S_{k-2} - 6S_{k-3} + S_{k-4} = 0$
-
-Therefore: $S_k = 6S_{k-1} - 11S_{k-2} + 6S_{k-3} - S_{k-4}$
-
-\textbf{(d) Computing $S_5$ and $S_6$:}
-$S_5 = 6 \cdot 94 - 11 \cdot 36 + 6 \cdot 14 - 6 = 564 - 396 + 84 - 6 = 246$
-
-$S_6 = 6 \cdot 246 - 11 \cdot 94 + 6 \cdot 36 - 14 = 1476 - 1034 + 216 - 14 = 644$
-
-\textbf{(e) Self-reciprocal property:}
-The polynomial $P(x) = x^4 - 6x^3 + 11x^2 - 6x + 1$ satisfies $x^4 P(1/x) = P(x)$.
-
-This means if $r$ is a root, then $1/r$ is also a root. We can pair roots as $(r_1, 1/r_1)$ and $(r_2, 1/r_2)$.
-
-This property can be used to establish relations like:
-$S_k + S_{-k} = $ (expression in lower power sums)
-
-For verification: $r_1 r_2 r_3 r_4 = 1$ confirms the self-reciprocal nature.
+\textbf{(e) Self-reciprocal property:}  
+The polynomial satisfies $x^4P(1/x)=P(x)$, so it is self-reciprocal. Hence if $r$ is a root, then $1/r$ is also a root, and the roots may be paired as $(r_1,1/r_1)$ and $(r_2,1/r_2)$. This symmetry can simplify expressions involving positive and negative powers, for example relations of the form $S_k+S_{-k}$. Also, $r_1r_2r_3r_4=1$ is consistent with this self-reciprocal structure.
 \end{solution}
 
 \begin{takeaways}

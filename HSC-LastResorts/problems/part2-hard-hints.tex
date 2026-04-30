@@ -343,13 +343,40 @@ Use trigonometric substitution $x = 2\cos\theta$ to transform the cubic equation
 \end{hint}
 
 \begin{solution}
-Substitute $x = \cos\theta$:
-$4\cos^3\theta - 3\cos\theta = \frac{1}{2}$
-Using the triple angle identity $\cos(3\theta) = 4\cos^3\theta - 3\cos\theta$:
-$\cos(3\theta) = \frac{1}{2}$
-Solving: $3\theta = \pm \frac{\pi}{3} + 2\pi k$
-Therefore: $\theta = \pm \frac{\pi}{9} + \frac{2\pi k}{3}$
-The solutions are: $x = \cos\left(\frac{\pi}{9}\right), \cos\left(\frac{5\pi}{9}\right), \cos\left(\frac{7\pi}{9}\right)$
+\[
+\text{Let }x=\cos\theta.
+\]
+Then the equation becomes
+\[
+4\cos^3\theta-3\cos\theta=\frac12.
+\]
+Using the triple-angle identity
+\[
+\cos(3\theta)=4\cos^3\theta-3\cos\theta,
+\]
+we obtain
+\[
+\cos(3\theta)=\frac12.
+\]
+Hence
+\[
+3\theta=\pm\frac{\pi}{3}+2\pi k,
+\qquad k\in\mathbb{Z},
+\]
+so
+\[
+\theta=\pm\frac{\pi}{9}+\frac{2\pi k}{3}.
+\]
+Taking the three distinct values of $\theta$ modulo $2\pi$ gives
+\[
+\theta=\frac{\pi}{9},\quad \frac{5\pi}{9},\quad \frac{7\pi}{9}.
+\]
+Therefore,
+\[
+x=\cos\left(\frac{\pi}{9}\right),\quad
+\cos\left(\frac{5\pi}{9}\right),\quad
+\cos\left(\frac{7\pi}{9}\right).
+\]
 \end{solution}
 
 \begin{takeaways}
@@ -389,45 +416,52 @@ For part (a), use the maximum modulus principle. For part (b), apply the interme
 \end{hint}
 
 \begin{solution}
-\textbf{(a) Maximum modulus bound:}
-If all roots satisfy $|z_k| \leq 1$, then by Vieta's formulas:
-$e = (-1)^5 \prod_{k=1}^5 z_k = -z_1 z_2 z_3 z_4 z_5$
+\textbf{(a) Maximum modulus bound:} Let the roots be $z_1,z_2,z_3,z_4,z_5$. By Vi\`ete's formulas,
+\[
+e=(-1)^5\prod_{k=1}^5 z_k=-z_1z_2z_3z_4z_5,
+\]
+so
+\[
+|e|=\prod_{k=1}^5|z_k|\le 1^5=1
+\]
+whenever every root satisfies $|z_k|\le 1$.
 
-Therefore: $|e| = |z_1 z_2 z_3 z_4 z_5| = \prod_{k=1}^5 |z_k| \leq 1^5 = 1$
+\textbf{(b) Continuity argument:} If exactly three roots lie in $|z|<1$ and two lie outside, then the number of roots inside the circle can change only when a root crosses the boundary. Hence at least one root must lie on the unit circle, so there exists $\alpha$ such that $|\alpha|=1$.
 
-\textbf{(b) Continuity argument:}
-Let $f(r) = $ number of roots in $|z| < r$. By assumption:
-- $f(1^-) = 3$ (three roots inside)
-- $f(1^+) = 3$ (same three roots, since two are outside)
+\textbf{(c) Vi\`ete's analysis:} From Vi\`ete's formulas,
+\[
+a=-(r_1+r_2+r_3+r_4+r_5).
+\]
+Since $|r_1|=|r_2|=|r_3|=1$, write $r_j=e^{i\theta_j}$ for $j=1,2,3$. Then
+\[
+\begin{aligned}
+a+\overline{r_4}+\overline{r_5}
+&=-(e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3}+r_4+r_5)+\overline{r_4}+\overline{r_5}\\
+&=-(e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3})+(r_4-\overline{r_4})+(r_5-\overline{r_5})\\
+&=-(e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3})+2i\bigl(\operatorname{Im}(r_4)+\operatorname{Im}(r_5)\bigr).
+\end{aligned}
+\]
+Therefore, by the reverse triangle inequality,
+\[
+|a+\overline{r_4}+\overline{r_5}|
+\ge
+\left|e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3}\right|
+-2\left|\operatorname{Im}(r_4)+\operatorname{Im}(r_5)\right|.
+\]
+For three points on the unit circle, the minimum of $\left|e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3}\right|$ occurs when they are equally spaced, giving $3\cos(\pi/3)=3/2$. Also, $|r_4|,|r_5|<1$ implies $|\operatorname{Im}(r_4)|<1$ and $|\operatorname{Im}(r_5)|<1$. Combining these geometric constraints gives
+\[
+|a+\overline{r_4}+\overline{r_5}|\ge 3.
+\]
 
-By continuity of root locations and the fact that roots cannot "jump" across boundaries without crossing them, there must exist a root exactly on $|z| = 1$.
-
-\textbf{(c) Vieta's analysis:}
-From Vieta's formulas: $a = -(r_1 + r_2 + r_3 + r_4 + r_5)$
-
-Since $|r_1| = |r_2| = |r_3| = 1$, we can write $r_j = e^{i\theta_j}$ for $j = 1,2,3$.
-
-$a + \overline{r_4} + \overline{r_5} = -(e^{i\theta_1} + e^{i\theta_2} + e^{i\theta_3} + r_4 + r_5) + \overline{r_4} + \overline{r_5}$
-$= -(e^{i\theta_1} + e^{i\theta_2} + e^{i\theta_3}) + (r_4 - \overline{r_4}) + (r_5 - \overline{r_5})$
-$= -(e^{i\theta_1} + e^{i\theta_2} + e^{i\theta_3}) + 2i(\text{Im}(r_4) + \text{Im}(r_5))$
-
-Using the reverse triangle inequality and properties of complex numbers on the unit circle:
-$|a + \overline{r_4} + \overline{r_5}| \geq |e^{i\theta_1} + e^{i\theta_2} + e^{i\theta_3}| - 2|\text{Im}(r_4) + \text{Im}(r_5)|$
-
-For three points on the unit circle, the minimum value of $|e^{i\theta_1} + e^{i\theta_2} + e^{i\theta_3}|$ occurs when they form an equilateral triangle, giving minimum value $3\cos(\pi/3) = 3/2$.
-
-Since $|r_4|, |r_5| < 1$, we have $|\text{Im}(r_4)|, |\text{Im}(r_5)| < 1$.
-
-Through careful analysis of the geometric constraints, we obtain $|a + \overline{r_4} + \overline{r_5}| \geq 3$.
-
-\textbf{(d) Rouché's theorem application:}
-To find conditions for exactly $k$ roots in $|z| < R$, compare $P(z)$ with $z^k$ on $|z| = R$.
-
-By Rouché's theorem, if $|P(z) - z^k| < |z^k| = R^k$ on $|z| = R$, then $P(z)$ and $z^k$ have the same number of zeros inside $|z| < R$.
-
-This requires: $|az^4 + bz^3 + cz^2 + dz + e| < R^k$ for $|z| = R$
-
-Leading to coefficient conditions involving $R$ and the desired root count $k$.
+\textbf{(d) Rouch\'e's theorem application:} To guarantee exactly $k$ roots in $|z|<R$, compare $P(z)$ with $z^k$ on $|z|=R$. If
+\[
+|P(z)-z^k|<|z^k|=R^k\qquad\text{for all }|z|=R,
+\]
+then Rouch\'e's theorem shows that $P(z)$ and $z^k$ have the same number of zeros inside $|z|<R$. Here this means requiring
+\[
+|az^4+bz^3+cz^2+dz+e|<R^k\qquad (|z|=R),
+\]
+which leads to coefficient conditions in terms of $R$ and the desired root count $k$.
 \end{solution}
 
 \begin{takeaways}
@@ -1166,35 +1200,56 @@ be an $n$-th root of unity.
 \end{hint}
 
 \begin{solution}
-\textbf{(i)} $z^n - 1 = (z-1)(z-\omega)(z-\omega^2)\dots(z-\omega^{n-1})$.
+\textbf{(i)} Since the $n$th roots of unity are $1,\omega,\omega^2,\dots,\omega^{n-1}$, they are precisely the roots of $z^n-1$. Hence
+\[
+z^n-1=(z-1)(z-\omega)(z-\omega^2)\cdots(z-\omega^{n-1}).
+\]
 
-\textbf{(ii)} Let $f(z) = \ln(z^n - 1) = \sum \ln (z-\omega^k)$.
+\textbf{(ii)} Take logarithms of the factorisation in part (i):
+\[
+\ln(z^n-1)=\sum_{k=0}^{n-1}\ln(z-\omega^k).
+\]
+Differentiating both sides gives
+\[
+\frac{n z^{n-1}}{z^n-1}=\sum_{k=0}^{n-1}\frac{1}{z-\omega^k}.
+\]
 
-Differentiate both sides:
-$f'(z) = \frac{n z^{n-1}}{z^n - 1} = \sum_{k=0}^{n-1} \frac{1}{z - \omega^k}$.
-
-\textbf{(iii)} Isolate $k=0$ term on RHS:
-
-
-$\frac{n z^{n-1}}{z^n - 1} = \frac{1}{z-1} + \sum_{k=1}^{n-1} \frac{1}{z - \omega^k}$.
-
-
-$\sum_{k=1}^{n-1} \frac{1}{z - \omega^k} = \frac{n z^{n-1}}{z^n - 1} - \frac{1}{z-1}$.
-
-
-Limit as $z \to 1$ using L'Hôpital or Taylor expansion:
-
-
-Let $z = 1+h$. 
-
-Using Taylor:
-
-
-$\frac{n(1+h)^{n-1}}{(1+h)^n - 1} \approx \frac{n(1+(n-1)h)}{nh} = \frac{1}{h}(1 + \frac{n-1}{n}h) \approx \frac{1}{h} + \frac{n-1}{n}$.
-
-$\lim_{z \to 1} \left( \frac{n z^{n-1}}{z^n - 1} - \frac{1}{z-1} \right) = \frac{n-1}{2}$.
-
-Therefore: $\sum_{k=1}^{n-1} \frac{1}{1 - \omega^k} = \frac{n-1}{2}$.
+\textbf{(iii)} Separate the $k=0$ term from the sum:
+\[
+\frac{n z^{n-1}}{z^n-1}=\frac{1}{z-1}+\sum_{k=1}^{n-1}\frac{1}{z-\omega^k}.
+\]
+Therefore,
+\[
+\sum_{k=1}^{n-1}\frac{1}{z-\omega^k}
+=\frac{n z^{n-1}}{z^n-1}-\frac{1}{z-1}.
+\]
+Now let $z\to1$. Then
+\[
+\sum_{k=1}^{n-1}\frac{1}{1-\omega^k}
+=\lim_{z\to1}\left(\frac{n z^{n-1}}{z^n-1}-\frac{1}{z-1}\right).
+\]
+To evaluate this limit, write $z=1+h$. Then
+\[
+\frac{n(1+h)^{n-1}}{(1+h)^n-1}-\frac{1}{h}.
+\]
+Using the expansions
+\[
+(1+h)^{n-1}=1+(n-1)h+O(h^2),\qquad
+(1+h)^n-1=nh+\frac{n(n-1)}{2}h^2+O(h^3),
+\]
+we obtain
+\[
+\frac{n(1+h)^{n-1}}{(1+h)^n-1}
+=\frac{1}{h}+\frac{n-1}{2}+O(h).
+\]
+Hence
+\[
+\lim_{z\to1}\left(\frac{n z^{n-1}}{z^n-1}-\frac{1}{z-1}\right)=\frac{n-1}{2}.
+\]
+Therefore,
+\[
+\sum_{k=1}^{n-1}\frac{1}{1-\omega^k}=\frac{n-1}{2}.
+\]
 \end{solution}
 
 \begin{takeaways}
@@ -1258,30 +1313,55 @@ Assume, for the purpose of contradiction, that $\pi$ is algebraic. It follows th
 \end{hint}
 
 \begin{solution}
-\textbf{(i)} By Euler's Identity, $e^{i\pi} + 1 = 0$. Since $\alpha_1 = i\pi$, the very first bracket is $(0)$. Zero multiplied by any finite number is zero, so the entire product must equal zero.
+\textbf{(i)} By Euler's identity,
+\[
+e^{i\pi}+1=0.
+\]
+Since $\alpha_1=i\pi$, the first factor is $e^{\alpha_1}+1=0$. Hence the entire product is $0$.
 
-\textbf{(ii)} Let $y = e^{-x} F(x)$. Using the product rule: \\
-$\frac{dy}{dx} = -e^{-x} F(x) + e^{-x} F'(x)$ \\
-$\frac{dy}{dx} = -e^{-x} (F(x) - F'(x))$ \\
-Since $F(x) = f(x) + f'(x) + f''(x) + \dots$ and $F'(x) = f'(x) + f''(x) + \dots$, it follows that $F(x) - F'(x) = f(x)$. \\
-Therefore, $\frac{d}{dx} \left[ e^{-x} F(x) \right] = -e^{-x} f(x)$.
+\textbf{(ii)} Let $y=e^{-x}F(x)$. Then
+\[
+\frac{dy}{dx}
+=-e^{-x}F(x)+e^{-x}F'(x)
+=-e^{-x}\bigl(F(x)-F'(x)\bigr).
+\]
+Since $F(x)=f(x)+f'(x)+f''(x)+\cdots$ and $F'(x)=f'(x)+f''(x)+\cdots$, we have
+\[
+F(x)-F'(x)=f(x).
+\]
+Therefore,
+\[
+\frac{d}{dx}\bigl[e^{-x}F(x)\bigr]=-e^{-x}f(x).
+\]
 
-\textbf{(iii)} Integrating both sides from $0$ to $\beta_j$: \\
-$\left[ e^{-x} F(x) \right]_0^{\beta_j} = -\int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
-$e^{-\beta_j} F(\beta_j) - F(0) = -\int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
-Multiply both sides by $e^{\beta_j}$: \\
-$F(\beta_j) - e^{\beta_j} F(0) = -e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
-Summing this for $j=1$ to $r$: \\
-$\sum_{j=1}^r F(\beta_j) - F(0) \sum_{j=1}^r e^{\beta_j} = -\sum_{j=1}^r e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
-From the prompt, $\sum_{j=1}^r e^{\beta_j} = -k$. Substituting this gives: \\
-$\sum_{j=1}^r F(\beta_j) + k F(0) = -\sum_{j=1}^r e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx$ \\
-Multiply by $-1$ to arrive at the required result: \\
-$-k F(0) - \sum_{j=1}^r F(\beta_j) = \sum_{j=1}^r e^{\beta_j} \int_0^{\beta_j} e^{-x} f(x) \, dx$.
+\textbf{(iii)} Integrating from $0$ to $\beta_j$,
+\begin{align*}
+\left[e^{-x}F(x)\right]_0^{\beta_j}
+&=-\int_0^{\beta_j} e^{-x}f(x)\,dx,\\
+e^{-\beta_j}F(\beta_j)-F(0)
+&=-\int_0^{\beta_j} e^{-x}f(x)\,dx,\\
+F(\beta_j)-e^{\beta_j}F(0)
+&=-e^{\beta_j}\int_0^{\beta_j} e^{-x}f(x)\,dx.
+\end{align*}
+Summing for $j=1,2,\dots,r$ gives
+\[
+\sum_{j=1}^r F(\beta_j)-F(0)\sum_{j=1}^r e^{\beta_j}
+=-\sum_{j=1}^r e^{\beta_j}\int_0^{\beta_j} e^{-x}f(x)\,dx.
+\]
+Since $\sum_{j=1}^r e^{\beta_j}=-k$, this becomes
+\[
+\sum_{j=1}^r F(\beta_j)+kF(0)
+=-\sum_{j=1}^r e^{\beta_j}\int_0^{\beta_j} e^{-x}f(x)\,dx.
+\]
+Multiplying by $-1$,
+\[
+-kF(0)-\sum_{j=1}^r F(\beta_j)
+=\sum_{j=1}^r e^{\beta_j}\int_0^{\beta_j} e^{-x}f(x)\,dx.
+\]
 
-\textbf{(iv)} From Fact 1, the LHS is a non-zero integer. From Fact 2, the RHS approaches $0$ as $p \to \infty$. \\
-For a sufficiently large prime $p$, the absolute value of the RHS will be strictly less than $1$. \\
-This means we have a non-zero integer strictly bounded between $-1$ and $1$. The only integer in this range is $0$, which contradicts Fact 1 (that the LHS is non-zero). \\
-Since the logic is sound, our initial assumption must be false. Therefore, $\pi$ is not algebraic; it is transcendental.
+\textbf{(iv)} By Fact 1, the left-hand side is a non-zero integer. By Fact 2, the right-hand side tends to $0$ as $p\to\infty$. Hence, for a sufficiently large prime $p$, the absolute value of the right-hand side is less than $1$.
+
+So the left-hand side must be a non-zero integer whose absolute value is less than $1$. That is impossible, because the only integer between $-1$ and $1$ is $0$. This contradiction shows that our original assumption was false. Therefore, $\pi$ is transcendental.
 \end{solution}
 
 \begin{takeaways}
