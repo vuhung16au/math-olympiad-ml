@@ -86,12 +86,27 @@ Library outputs:
   - generates catalog images to `artifacts/`
   - writes summary `artifacts/index.json`
 
+- `npm run export:tex` (see [docs/CLI.md](docs/CLI.md)):
+  - exports TikZ (`.tikz`) and/or standalone LaTeX (`.tex`) for presets
+  - default mode: one preset per fractal family; advanced flags select families, presets, colors, and extra params
+
+## TeX / TikZ export
+
+- **Web UI**: use the viewer overlay buttons to download a **TikZ snippet** (`.tikz`) or a **standalone** LaTeX document (`.tex`). Current form settings are sent as query parameters.
+- **HTTP API** (`GET /api/v1/[family]/[preset]`):
+  - `format=png` (default) — PNG image
+  - `format=tikz` — TikZ `tikzpicture` fragment (`text/plain`, attachment `.tikz`)
+  - `format=tex` — full standalone compilable document (`text/plain`, attachment `.tex`)
+  - Optional: `texMaxDim=<px>` caps internal raster size for escape-time, Newton, attractor, and inversion exports (IFS / L-system use vector TikZ).
+  - Other query params match the existing PNG endpoint (`width`, `height`, `mainColorScheme`, `backgroundColor`, and fractal-specific overrides).
+
 ## Documentation
 
 - `docs/architecture.md`
 - `docs/techstack.md`
 - `docs/use-cases.md`
 - `docs/fractals.md`
+- `docs/CLI.md`
 
 ## License 
 

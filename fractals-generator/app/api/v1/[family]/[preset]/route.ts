@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PNG } from 'pngjs';
+import { exportFractalTex } from '../../../../lib/server-export-tex';
 import { parseColor, renderFractalImage, resolveFractalFamily } from '../../../../lib/server-render';
 import { getAppPresets } from '../../../../lib/server-presets';
 
@@ -10,6 +11,14 @@ const DEFAULT_HEIGHT = 720;
 const MIN_SIZE = 32;
 const MAX_SIZE = 4096;
 const ALLOWED_SCHEMES = new Set(['acu', 'matrix', 'emerald', 'ink']);
+const RESERVED_QUERY_KEYS = new Set([
+  'format',
+  'width',
+  'height',
+  'maincolorscheme',
+  'backgroundcolor',
+  'texmaxdim',
+]);
 
 function parseDimension(input: string | null, fallback: number): number {
   if (!input) return fallback;
@@ -39,6 +48,34 @@ function readParams(url: URL): Record<string, string> {
   return params;
 }
 
+function fractalRenderParams(url: URL): Record<string, string> {
+  const raw = readParams(url);
+  const out: Record<string, string> = {};
+  for (const [key, value] of Object.entries(raw)) {
+    if (!RESERVED_QUERY_KEYS.has(key.toLowerCase())) {
+      out[key] = value;
+    }
+  }
+  return out;
+}
+
+type ExportFormat = 'png' | 'tikz' | 'tex';
+
+function normalizeExportFormat(url: URL): ExportFormat {
+  const raw = (url.searchParams.get('format') ?? 'png').trim().toLowerCase();
+  if (raw === 'tikz') return 'tikz';
+  if (raw === 'tex' || raw === 'latex' || raw === 'standalone') return 'tex';
+  return 'png';
+}
+
+function parseTexMaxDim(url: URL): number | undefined {
+  const raw = url.searchParams.get('texMaxDim');
+  if (!raw) return undefined;
+  const n = Number.parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 32) return undefined;
+  return Math.min(n, MAX_SIZE);
+}
+
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ family: string; preset: string }> },
@@ -60,9 +97,54 @@ export async function GET(
     return NextResponse.json({ error: `Unknown preset ${familyRaw}/${presetKey}` }, { status: 404 });
   }
 
-  const params = readParams(request.nextUrl);
+  const exportFormat = normalizeExportFormat(request.nextUrl);
+  const params = fractalRenderParams(request.nextUrl);
   const mainColorScheme = normalizeMainColorScheme(request.nextUrl);
   const backgroundColor = parseColor(request.nextUrl.searchParams.get('backgroundColor'), [255, 255, 255]);
+
+  if (exportFormat === 'tikz') {
+    const text = exportFractalTex(
+      family,
+      size.width,
+      size.height,
+      preset,
+      params,
+      mainColorScheme,
+      backgroundColor,
+      'tikz',
+      { rasterMaxDim: parseTexMaxDim(request.nextUrl) },
+    );
+    return new NextResponse(text, {
+      status: 200,
+      headers: {
+        'content-type': 'text/plain; charset=utf-8',
+        'cache-control': 'public, max-age=3600, s-maxage=86400',
+        'content-disposition': `attachment; filename="${familyRaw}-${presetKey}.tikz"`,
+      },
+    });
+  }
+
+  if (exportFormat === 'tex') {
+    const text = exportFractalTex(
+      family,
+      size.width,
+      size.height,
+      preset,
+      params,
+      mainColorScheme,
+      backgroundColor,
+      'standalone',
+      { rasterMaxDim: parseTexMaxDim(request.nextUrl) },
+    );
+    return new NextResponse(text, {
+      status: 200,
+      headers: {
+        'content-type': 'text/plain; charset=utf-8',
+        'cache-control': 'public, max-age=3600, s-maxage=86400',
+        'content-disposition': `attachment; filename="${familyRaw}-${presetKey}.tex"`,
+      },
+    });
+  }
 
   const image = renderFractalImage(family, size.width, size.height, preset, params, mainColorScheme, backgroundColor);
   const png = new PNG({ width: size.width, height: size.height });

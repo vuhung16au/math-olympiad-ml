@@ -234,6 +234,43 @@ export default function HomePage() {
     URL.revokeObjectURL(url);
   };
 
+  const downloadTex = async (kind: 'tikz' | 'standalone'): Promise<void> => {
+    const canvas = canvasRef.current;
+    const w = canvas?.width ?? 980;
+    const h = canvas?.height ?? 760;
+    const qs = new URLSearchParams();
+    qs.set('format', kind === 'standalone' ? 'tex' : 'tikz');
+    qs.set('width', String(w));
+    qs.set('height', String(h));
+    for (const [k, v] of Object.entries(form)) {
+      if (v !== '') qs.set(k, v);
+    }
+    const familySlug = fractalTypeToSlug(fractalType);
+    try {
+      const response = await fetch(
+        `/api/v1/${encodeURIComponent(familySlug)}/${encodeURIComponent(preset)}?${qs.toString()}`,
+      );
+      if (!response.ok) {
+        setToast('TeX export failed');
+        return;
+      }
+      const blob = await response.blob();
+      const ext = kind === 'standalone' ? 'tex' : 'tikz';
+      const filename = `fractals-${fractalTypeToSlug(fractalType)}-${preset}-${formatTimestamp()}.${ext}`;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      setToast(kind === 'standalone' ? 'Downloaded .tex' : 'Downloaded .tikz');
+    } catch {
+      setToast('TeX export failed');
+    }
+  };
+
   const copyLink = async (): Promise<void> => {
     const link = `${CANONICAL_BASE}${pathname}`;
     try {
@@ -656,6 +693,8 @@ export default function HomePage() {
             <ViewerOverlay
               isRendering={isRendering}
               onDownloadPng={() => void downloadPng()}
+              onDownloadTikz={() => void downloadTex('tikz')}
+              onDownloadTex={() => void downloadTex('standalone')}
               onFullscreenToggle={() => setIsFullscreen((v) => !v)}
               isFullscreen={isFullscreen}
             />

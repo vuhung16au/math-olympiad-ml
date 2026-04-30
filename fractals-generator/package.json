@@ -34,6 +34,8 @@
     "test:api:v1:full": "node scripts/test-api-v1-full.mjs",
     "test:fractals:playwright": "PLAYWRIGHT_BROWSERS_PATH=0 node scripts/generate-all-fractals-playwright.js",
     "verify:release-gates": "node scripts/verify-release-gates.js",
+    "export:tex": "tsx scripts/export-fractals-tex.ts",
+    "generate:booklet-mattes": "node scripts/generate-20-fractals-for-booklets.js",
     "version": "git add -A .",
     "postversion": "git push && git push --tags"
   },
@@ -54,6 +56,7 @@
     "prettier": "^3.8.2",
     "rimraf": "^6.1.3",
     "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.2"
   },

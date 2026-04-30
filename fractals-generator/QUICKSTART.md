@@ -70,3 +70,23 @@ node scripts/generate-all-fractals.js
 ```
 
 Generates static fractal assets and summary index in `artifacts/`.
+
+## 7) TeX / TikZ export (CLI)
+
+Export TikZ and/or standalone LaTeX for presets (same engine as the web/API):
+
+```bash
+npm run export:tex
+```
+
+Default: writes one default preset per family under `artifacts/tex/`. See [docs/CLI.md](docs/CLI.md) for `--family`, `--preset`, `--format`, `--param`, etc.
+
+## 8) TeX / TikZ export (web & API)
+
+- In the running app (`npm run dev`), use the **TikZ** and **TeX** buttons on the viewer to download `.tikz` / `.tex` from the current fractal and form settings.
+- Or call the v1 route directly, for example:
+
+```text
+GET /api/v1/ifs/fern?format=tikz&width=980&height=760
+GET /api/v1/escape-time/mandelbrot?format=tex&width=640&height=480&texMaxDim=256
+```
