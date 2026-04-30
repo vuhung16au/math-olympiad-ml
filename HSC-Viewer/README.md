@@ -35,6 +35,17 @@ make dev
 
 For deployment and thumbnail generation details, see [QUICKSTART.md](./QUICKSTART.md).
 
+## Bulk release (all HSC booklet PDFs)
+
+From the repository root there is nothing extra to configure. The script resolves the monorepo root from its path, then enters each listed `HSC-*` folder and runs the booklet pipeline (`make clean && make pdf && make release`). `HSC-Viewer` has no LaTeX PDF targets; there the script runs `make clean` only so Next.js build artifacts stay consistent with other passes.
+
+```bash
+cd HSC-Viewer
+sh scripts/release-all-HSC-booklets.sh
+```
+
+You can instead run `./scripts/release-all-HSC-booklets.sh` if the script is executable.
+
 ## Testing
 
 This project uses Playwright for browser-level end-to-end testing.
