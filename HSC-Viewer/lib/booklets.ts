@@ -85,7 +85,7 @@ export const BOOKLETS: Booklet[] = [
   },
   {
     id: "hsc-math-extension-2-book",
-    title: "HSC Math Extension 2 Book",
+    title: "HSC MX2 Full",
     slug: "hsc-math-extension-2-book",
     pdfUrl: `${GITHUB_RAW_URL}/HSC-Math-Extension-2-Book/releases/HSC-Math-Extension-2-Book.pdf`,
     thumbnailPath: "/thumbnails/hsc-math-extension-2-book.png",
@@ -109,7 +109,7 @@ export const BOOKLETS: Booklet[] = [
   },
   {
     id: "hsc-polynomials-extension1",
-    title: "HSC Polynomials Extension 1",
+    title: "HSC Polys Ext 1",
     slug: "hsc-polynomials-extension1",
     pdfUrl: `${GITHUB_RAW_URL}/HSC-Polynomials-Extension1/releases/HSC-Polynomials-Extension1.pdf`,
     thumbnailPath: "/thumbnails/hsc-polynomials-extension1.png",
