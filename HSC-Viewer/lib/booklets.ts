@@ -4,7 +4,7 @@ export interface Booklet {
   slug: string;            // URL slug
   pdfUrl: string;          // Raw GitHub URL
   thumbnailPath: string;   // Local path to thumbnail
-  isAvailable: boolean;    // false for HSC-Sequences
+  isAvailable: boolean;    // false: no link / reader; shows Soon in nav and home grid
   comingSoon?: boolean;
 }
 
@@ -89,7 +89,7 @@ export const BOOKLETS: Booklet[] = [
     slug: "hsc-math-extension-2-book",
     pdfUrl: `${GITHUB_RAW_URL}/HSC-Math-Extension-2-Book/releases/HSC-Math-Extension-2-Book.pdf`,
     thumbnailPath: "/thumbnails/hsc-math-extension-2-book.png",
-    isAvailable: true,
+    isAvailable: false,
   },
   {
     id: "hsc-mechanics",
