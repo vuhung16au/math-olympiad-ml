@@ -9,9 +9,24 @@ Takeaway: Cauchy-Schwarz is essential for bounding expressions in vector geometr
 
 % Problem 12 Solution
 \section*{Solution to Problem 12}
-(i) $\vec{AB} = (-a, b, 0)$, $\vec{AC} = (-a, 0, c)$, $\vec{AB} \times \vec{AC} = (bc, ac, ab)$, $|\vec{AB} \times \vec{AC}| = \sqrt{b^2c^2 + a^2c^2 + a^2b^2}$, so area $= \frac{1}{2} \sqrt{b^2c^2 + a^2c^2 + a^2b^2}$.
+(i) $\vec{AB} = (-a, b, 0)$ and $\vec{AC} = (-a, 0, c)$. Using
+\[
+4S^2 = |\vec{AB}|^2 |\vec{AC}|^2 - (\vec{AB}\cdot\vec{AC})^2,
+\]
+we have
+\[
+|\vec{AB}|^2 = a^2+b^2,\quad |\vec{AC}|^2 = a^2+c^2,\quad \vec{AB}\cdot\vec{AC}=a^2.
+\]
+Therefore
+\[
+4S^2 = (a^2+b^2)(a^2+c^2)-a^4 = a^2b^2 + a^2c^2 + b^2c^2,
+\]
+so
+\[
+S = \frac{1}{2} \sqrt{b^2c^2 + a^2c^2 + a^2b^2}.
+\]
 
-Takeaway: Cross products are powerful for area calculations in 3D geometry.
+Takeaway: Dot-product identities are powerful for area calculations in 3D geometry.
 
 % Problem 13 Solution
 \section*{Solution to Problem 13}

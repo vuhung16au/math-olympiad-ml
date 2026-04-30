@@ -71,7 +71,7 @@
 \section{Introduction}
 
 \subsection{Project Overview}
-This booklet compiles high quality vector problems curated specifically for the HSC Mathematics Extension~2 syllabus. The collection covers all essential topics in 3D vectors including geometric proofs, line equations, dot and cross products, spheres, planes, and distance calculations. Each problem is selected to challenge students while building toward exam readiness.
+This booklet compiles high quality vector problems curated specifically for the HSC Mathematics Extension~2 syllabus. The collection covers core 3D vector topics including geometric proofs, line equations, dot products, spheres, planes, projections, and distance calculations. Each problem is selected to challenge students while building toward exam readiness.
 
 \subsection{Target Audience}
 These problems are designed for Extension~2 students who want to master vectors through systematic practice. Part~1 provides detailed solutions showing complete algebraic steps, geometric intuition, and key takeaways. Part~2 offers hints and concise solutions to encourage independent problem-solving.
@@ -87,6 +87,9 @@ These problems are designed for Extension~2 students who want to master vectors 
 
 \subsubsection{Notations}
 Throughout this booklet, we use the following standard mathematical notations:
+
+\vspace{0.4em}
+\noindent\textbf{Syllabus Note.} In the current NESA Mathematics Extension~1 and Extension~2 syllabuses, the cross product is \emph{not} prescribed content. When it appears later in this booklet, it is clearly marked as optional enrichment only. It can still be useful background knowledge for later university study in areas such as mathematics, physics, and engineering.
 
 \vspace{0.3em}
 \noindent\textbf{Vectors:}
@@ -105,7 +108,6 @@ Throughout this booklet, we use the following standard mathematical notations:
 \noindent\textbf{Vector Operations:}
 \begin{itemize}[leftmargin=*]
   \item $\mathbf{a} \cdot \mathbf{b}$ --- dot product (scalar product) of vectors $\mathbf{a}$ and $\mathbf{b}$
-  \item $\mathbf{a} \times \mathbf{b}$ --- cross product (vector product) of vectors $\mathbf{a}$ and $\mathbf{b}$
   \item $\mathbf{a} \perp \mathbf{b}$ --- vectors $\mathbf{a}$ and $\mathbf{b}$ are perpendicular
   \item $\mathbf{a} \parallel \mathbf{b}$ --- vectors $\mathbf{a}$ and $\mathbf{b}$ are parallel
   \item $\text{proj}_{\mathbf{b}}\mathbf{a}$ --- projection of vector $\mathbf{a}$ onto vector $\mathbf{b}$
@@ -298,22 +300,32 @@ The dot product is the central algebraic tool for vectors in Extension 2.
 \vspace{0.3em}
 \noindent\textbf{Remark (Useful Identity for Vector Proofs):}
 
-A powerful formula relating the dot product and cross product is:
-$$|\mathbf{a} \times \mathbf{b}|^2 = |\mathbf{a}|^2 |\mathbf{b}|^2 - (\mathbf{a} \cdot \mathbf{b})^2$$
+For any vectors $\mathbf{a}$ and $\mathbf{b}$, the squared length of the component of $\mathbf{a}$ perpendicular to $\mathbf{b}$ is
+\[
+\left|\mathbf{a} - \text{proj}_{\mathbf{b}}\mathbf{a}\right|^2
+= |\mathbf{a}|^2 - \frac{(\mathbf{a} \cdot \mathbf{b})^2}{|\mathbf{b}|^2}.
+\]
 
-\textit{Derivation:} Using $\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\theta$ and $|\mathbf{a} \times \mathbf{b}| = |\mathbf{a}||\mathbf{b}|\sin\theta$:
+\textit{Derivation:} Let $\mathbf{p} = \text{proj}_{\mathbf{b}}\mathbf{a} = \dfrac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{b}|^2}\mathbf{b}$. Then
 \begin{align*}
-|\mathbf{a} \times \mathbf{b}|^2 &= |\mathbf{a}|^2|\mathbf{b}|^2\sin^2\theta \\
-&= |\mathbf{a}|^2|\mathbf{b}|^2(1 - \cos^2\theta) \quad \text{(using } \sin^2\theta + \cos^2\theta = 1\text{)}\\
-&= |\mathbf{a}|^2|\mathbf{b}|^2 - |\mathbf{a}|^2|\mathbf{b}|^2\cos^2\theta \\
-&= |\mathbf{a}|^2|\mathbf{b}|^2 - (\mathbf{a} \cdot \mathbf{b})^2
+\left|\mathbf{a} - \mathbf{p}\right|^2
+&= (\mathbf{a} - \mathbf{p}) \cdot (\mathbf{a} - \mathbf{p}) \\
+&= |\mathbf{a}|^2 - 2\mathbf{a} \cdot \mathbf{p} + |\mathbf{p}|^2 \\
+&= |\mathbf{a}|^2 - 2\frac{(\mathbf{a} \cdot \mathbf{b})^2}{|\mathbf{b}|^2} + \frac{(\mathbf{a} \cdot \mathbf{b})^2}{|\mathbf{b}|^2} \\
+&= |\mathbf{a}|^2 - \frac{(\mathbf{a} \cdot \mathbf{b})^2}{|\mathbf{b}|^2}.
 \end{align*}
 
-\textit{Connection to Cauchy-Schwarz:} This identity is equivalent to the Cauchy-Schwarz inequality in 3D:
-$$(\mathbf{a} \cdot \mathbf{b})^2 \leq |\mathbf{a}|^2 |\mathbf{b}|^2$$
-Since $|\mathbf{a} \times \mathbf{b}|^2 \geq 0$, the identity immediately gives the Cauchy-Schwarz inequality. Equality holds when vectors are parallel (cross product is zero).
+\textit{Connection to Cauchy-Schwarz:} Since the left-hand side is always non-negative,
+\[
+|\mathbf{a}|^2 - \frac{(\mathbf{a} \cdot \mathbf{b})^2}{|\mathbf{b}|^2} \ge 0
+\]
+which rearranges to
+\[
+(\mathbf{a} \cdot \mathbf{b})^2 \le |\mathbf{a}|^2 |\mathbf{b}|^2.
+\]
+Equality holds exactly when $\mathbf{a}$ is parallel to $\mathbf{b}$, because then the perpendicular component is zero.
 
-\textit{Applications:} This formula is particularly useful in geometric proofs involving perpendicular distances, areas, and relationships between dot and cross products without explicitly computing angles.
+\textit{Applications:} This identity is useful in geometric proofs involving projections, perpendicular distances, and shortest-distance arguments without needing any out-of-syllabus techniques.
 
 \begin{center}
 \begin{tikzpicture}[scale=1.2]
@@ -578,8 +590,8 @@ Extension 2 uses vector form rather than $y=mx+b$.
 \subsubsection{Geometric Proofs}
 Use pure vector logic (without coordinates) to prove theorems about parallelograms, triangles, centroids, medians, and 3D shapes like tetrahedrons.
 
-\subsubsection{The Cross Product (Optional Advanced Technique)}
-While not explicitly in the NESA syllabus, the cross product is a powerful tool for certain problems.
+\subsubsection{The Cross Product (Optional Enrichment, Not in the NESA Syllabus)}
+This subsection is included only as optional enrichment. The cross product is \textbf{not} prescribed in the current NESA Mathematics Extension~1 or Extension~2 syllabus, so none of the core worked methods earlier in this booklet depend on it. It is included here because students may meet it later in university mathematics, physics, or engineering, and it can help connect familiar vector ideas to further study.
 
 \textbf{Definition:} For $\mathbf{a} = (a_1, a_2, a_3)$ and $\mathbf{b} = (b_1, b_2, b_3)$:
 \[
@@ -618,9 +630,9 @@ While not explicitly in the NESA syllabus, the cross product is a powerful tool 
   \fill[blue!20,opacity=0.4] (O) -- (A) -- (P) -- (B) -- cycle;
   
   % Right angle indicators (showing perpendicularity)
-  % Between a and cross product
+  % Between a and green vector
   \draw[thick,green!60!black] (0.3,0.1,0) -- (0.3,0.1,0.3) -- (0,0.1,0.3);
-  % Between b and cross product
+  % Between b and green vector
   \draw[thick,green!60!black] (0.1,0.3,0) -- (0.1,0.3,0.3) -- (0.1,0,0.3);
   
   % Angle theta between a and b
@@ -696,12 +708,12 @@ Using the cross product:
 
 Distance: $d = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2}$ units.
 
-\textit{Comparison with Dot Product Method:}
-The dot product method uses projection. The component of $\vec{AP}$ perpendicular to the line is found by:
+\textit{Comparison with the Syllabus Method:}
+The in-syllabus method uses projection. The component of $\vec{AP}$ perpendicular to the line is found by:
 \[
 \vec{AP}_{\perp} = \vec{AP} - \text{proj}_{\mathbf{d}}\vec{AP} = \vec{AP} - \tfrac{\vec{AP} \cdot \mathbf{d}}{\mathbf{d} \cdot \mathbf{d}}\mathbf{d}
 \]
-Then $d = |\vec{AP}_{\perp}|$. Both methods yield the same result, but cross product is often more direct for distance calculations.
+Then $d = |\vec{AP}_{\perp}|$. Both methods yield the same result; for HSC purposes, the projection method is the syllabus-aligned approach to remember.
 
 \subsection{Conic Sections Reference (Enrichment)}
 \begin{center}

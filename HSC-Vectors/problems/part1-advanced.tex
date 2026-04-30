@@ -418,10 +418,26 @@ Consider the line $\ell$ with equation $\mathbf{r} = \begin{pmatrix} 1 \\ 0 \\ 1
 
 \begin{solution}
 \textbf{(i)} Let $A(1, 0, 1)$ be on $\ell$, direction $\mathbf{d} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$.
-$$\vec{AP} = \begin{pmatrix} 0 \\ 2 \\ -1 \end{pmatrix}$$
-Cross product:
-$$\vec{AP} \times \mathbf{d} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 0 & 2 & -1 \\ 0 & 1 & 1 \end{vmatrix} = \mathbf{i}(2 + 1) = 3\mathbf{i}$$
-Distance: $d = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2}$ units.
+\[
+\vec{AP} = \begin{pmatrix} 0 \\ 2 \\ -1 \end{pmatrix}.
+\]
+Project $\vec{AP}$ onto $\mathbf{d}$:
+\[
+\text{proj}_{\mathbf{d}}\vec{AP}
+= \frac{\vec{AP} \cdot \mathbf{d}}{|\mathbf{d}|^2}\mathbf{d}
+= \frac{1}{2}\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}
+= \begin{pmatrix} 0 \\ \tfrac12 \\ \tfrac12 \end{pmatrix}.
+\]
+So the perpendicular component is
+\[
+\vec{AP}_{\perp}
+= \vec{AP} - \text{proj}_{\mathbf{d}}\vec{AP}
+= \begin{pmatrix} 0 \\ \tfrac32 \\ -\tfrac32 \end{pmatrix},
+\]
+and therefore
+\[
+d = |\vec{AP}_{\perp}| = \sqrt{\tfrac{9}{4} + \tfrac{9}{4}} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2}\text{ units}.
+\]
 \vspace{-2mm}
 
 \textbf{(ii)} Use projection method. Let $\vec{OA} = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}$.
@@ -447,7 +463,7 @@ For $\lambda_2 = \tfrac{-1-\sqrt{5}}{2}$: $(1, \tfrac{-1-\sqrt{5}}{2}, \tfrac{1-
 \end{solution}
 
 \begin{takeaways}
-Three key distance techniques demonstrated: (1) \textbf{cross product} for point-to-line (geometric), (2) \textbf{projection} for point-to-line (algebraic), (3) \textbf{substitution} for line-sphere intersection. Both methods in (i)-(ii) should give same result (verify as practice). For intersections, substitute parametric equations into the surface equation to get a quadratic—the number of real solutions indicates the geometric relationship. The golden ratio $\phi = \tfrac{1+\sqrt{5}}{2}$ appearing in $\lambda$ is a nice coincidence!
+Three key distance techniques demonstrated: (1) \textbf{projection} for point-to-line from a given point, (2) \textbf{projection} again for the distance from the origin, and (3) \textbf{substitution} for line-sphere intersection. Both distance questions rely on the same idea: resolve the relevant vector into components parallel and perpendicular to the line direction. For intersections, substitute parametric equations into the surface equation to get a quadratic; the number of real solutions indicates the geometric relationship. The golden ratio $\phi = \tfrac{1+\sqrt{5}}{2}$ appearing in $\lambda$ is a nice coincidence!
 \end{takeaways}
 
 \vspace{1em}

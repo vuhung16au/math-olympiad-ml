@@ -59,42 +59,77 @@ $\mathbf{r}_2 = \begin{pmatrix} 2 \\ 0 \\ 0 \end{pmatrix} + \mu \begin{pmatrix} 
 \end{align*}
 %   \vspace{-2mm}
 
-\textbf{(iii)} Let $A(1,0,1)$ be on line $\mathbf{r}_1$, direction $\mathbf{d} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$.
-$$\vec{AP} = \begin{pmatrix} 0 \\ 2 \\ -1 \end{pmatrix}$$
-% \vspace{-2mm}
-Cross product: $\vec{AP} \times \mathbf{d} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 0 & 2 & -1 \\ 0 & 1 & 1 \end{vmatrix} = \mathbf{i}(2+1) = 3\mathbf{i}$
-\vspace{-2mm}
-$$D = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2} \text{ units}$$
+\textbf{(iii)} Let $A(1,0,1)$ be on line $\mathbf{r}_1$, direction $\mathbf{d} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$, and
+\[
+\vec{AP} = \begin{pmatrix} 0 \\ 2 \\ -1 \end{pmatrix}.
+\]
+Project $\vec{AP}$ onto $\mathbf{d}$:
+\[
+\text{proj}_{\mathbf{d}}\vec{AP}
+= \frac{\vec{AP} \cdot \mathbf{d}}{\mathbf{d} \cdot \mathbf{d}}\mathbf{d}
+= \frac{1}{2}\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}
+= \begin{pmatrix} 0 \\ \tfrac{1}{2} \\ \tfrac{1}{2} \end{pmatrix}.
+\]
+So the perpendicular component is
+\[
+\vec{AP}_{\perp}
+= \vec{AP} - \text{proj}_{\mathbf{d}}\vec{AP}
+= \begin{pmatrix} 0 \\ \tfrac{3}{2} \\ -\tfrac{3}{2} \end{pmatrix}.
+\]
+Hence
+\[
+D = |\vec{AP}_{\perp}| = \sqrt{\left(\tfrac{3}{2}\right)^2 + \left(-\tfrac{3}{2}\right)^2}
+= \sqrt{\tfrac{9}{2}} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2} \text{ units}.
+\]
 \end{solution}
 
 \begin{takeaways}
-To find line intersection in 3D: equate components and solve the system (3 equations, 2 unknowns). Consistent solution means intersection; inconsistent means skew lines. The \textbf{cross product method} for point-to-line distance is efficient: $d = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|}$ where $A$ is any point on the line. This uses the geometric interpretation that $|\vec{AP} \times \mathbf{d}|$ equals the area of a parallelogram with base $|\mathbf{d}|$ and height $d$.
+To find line intersection in 3D: equate components and solve the system (3 equations, 2 unknowns). Consistent solution means intersection; inconsistent means skew lines. For point-to-line distance, use projection: subtract the component of $\vec{AP}$ parallel to the direction vector, then take the magnitude of the perpendicular remainder. This approach is fully syllabus-aligned and reinforces the idea of resolving a vector into parallel and perpendicular parts.
 \end{takeaways}
 
 \vspace{1em}
 
-\begin{problem}[Parallelogram Area via Cross Product]
+\begin{problem}[Parallelogram Area via Dot-Product Identity]
 The adjacent sides of a parallelogram are represented by vectors 
 $\mathbf{a} = 4\mathbf{i} + 3\mathbf{j} - \mathbf{k}$ and $\mathbf{b} = 2\mathbf{i} - \mathbf{j} + 3\mathbf{k}$.
 Show that the area of the parallelogram is $6\sqrt{10}$ square units.
 \end{problem}
 
 \begin{solution}
-Area of parallelogram $= |\mathbf{a} \times \mathbf{b}|$. Calculate the cross product:
-\vspace{-2mm}
+If $\theta$ is the angle between $\mathbf{a}$ and $\mathbf{b}$, then the area of the parallelogram is
+\[
+|\mathbf{a}|\,|\mathbf{b}|\sin\theta.
+\]
+Using $\sin^2\theta = 1 - \cos^2\theta$ and
+\[
+\cos\theta = \frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}|\,|\mathbf{b}|},
+\]
+we get
+\[
+\text{Area}^2 = |\mathbf{a}|^2 |\mathbf{b}|^2 - (\mathbf{a} \cdot \mathbf{b})^2.
+\]
+Now compute:
 \begin{align*}
-\mathbf{a} \times \mathbf{b} &= \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 4 & 3 & -1 \\ 2 & -1 & 3 \end{vmatrix}\\
-&= \mathbf{i}(3 \cdot 3 - (-1)(-1)) - \mathbf{j}(4 \cdot 3 - (-1)(2)) + \mathbf{k}(4(-1) - 3 \cdot 2)\\
-&= \mathbf{i}(9-1) - \mathbf{j}(12+2) + \mathbf{k}(-4-6)\\
-&= 8\mathbf{i} - 14\mathbf{j} - 10\mathbf{k}
+|\mathbf{a}|^2 &= 4^2 + 3^2 + (-1)^2 = 26,\\
+|\mathbf{b}|^2 &= 2^2 + (-1)^2 + 3^2 = 14,\\
+\mathbf{a} \cdot \mathbf{b} &= (4)(2) + (3)(-1) + (-1)(3) = 2.
 \end{align*}
-\vspace{-2mm}
-Magnitude:
-$$|\mathbf{a} \times \mathbf{b}| = \sqrt{64 + 196 + 100} = \sqrt{360} = \sqrt{36 \cdot 10} = 6\sqrt{10}$$
+Therefore
+\[
+\text{Area}^2 = (26)(14) - 2^2 = 360,
+\]
+so
+\[
+\text{Area} = \sqrt{360} = 6\sqrt{10}.
+\]
 \end{solution}
 
 \begin{takeaways}
-The \textbf{cross product} $\mathbf{a} \times \mathbf{b}$ produces a vector perpendicular to both $\mathbf{a}$ and $\mathbf{b}$, with magnitude equal to the area of the parallelogram they span. Key properties: (1) anticommutative: $\mathbf{a} \times \mathbf{b} = -\mathbf{b} \times \mathbf{a}$; (2) $|\mathbf{a} \times \mathbf{b}| = |\mathbf{a}||\mathbf{b}|\sin\theta$. For area calculations, only the magnitude matters. Remember the determinant pattern for $3 \times 3$ cross products.
+For vectors $\mathbf{a}$ and $\mathbf{b}$, the area formula
+\[
+\text{Area}^2 = |\mathbf{a}|^2 |\mathbf{b}|^2 - (\mathbf{a} \cdot \mathbf{b})^2
+\]
+comes directly from the dot-product definition of angle. It is a convenient in-syllabus way to find 3D areas without introducing any extra vector operation.
 \end{takeaways}
 
 \vspace{1em}

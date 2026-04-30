@@ -89,11 +89,18 @@ Find a unit vector perpendicular to both $\mathbf{u} = \mathbf{i} + \mathbf{j}$ 
 \end{problem}
 
 \begin{hint}
-Use the cross product $\mathbf{u} \times \mathbf{v}$, then normalize.
+Let the required vector be $(x,y,z)$ and use perpendicularity with both given vectors.
 \end{hint}
 
 \begin{solution}[Sketch]
-$\mathbf{u} \times \mathbf{v} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 1 & 1 & 0 \\ 1 & 0 & 1 \end{vmatrix} = \mathbf{i}(1) - \mathbf{j}(1) + \mathbf{k}(-1) = \mathbf{i} - \mathbf{j} - \mathbf{k}$. Magnitude: $|\mathbf{w}| = \sqrt{1 + 1 + 1} = \sqrt{3}$. Unit vector: $\frac{1}{\sqrt{3}}(\mathbf{i} - \mathbf{j} - \mathbf{k})$.
+Let $\mathbf{w} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$. Since $\mathbf{w}$ is perpendicular to both vectors,
+\[
+\mathbf{w} \cdot \mathbf{u} = x + y = 0, \qquad \mathbf{w} \cdot \mathbf{v} = x + z = 0.
+\]
+So $y = -x$ and $z = -x$, giving $\mathbf{w} = x(\mathbf{i} - \mathbf{j} - \mathbf{k})$. Choosing $x = 1$ gives a convenient perpendicular vector $\mathbf{i} - \mathbf{j} - \mathbf{k}$, whose magnitude is $\sqrt{3}$. Hence a unit vector is
+\[
+\frac{1}{\sqrt{3}}(\mathbf{i} - \mathbf{j} - \mathbf{k}).
+\]
 \end{solution}
 
 \vspace{1em}
@@ -257,11 +264,32 @@ Find a unit vector perpendicular to $\begin{bmatrix} 3 \\ -2 \\ 1 \end{bmatrix}$
 \end{problem}
 
 \begin{hint}
-Compute the cross product and normalize the result.
+Let the required vector be $(x,y,z)$ and solve two perpendicularity equations.
 \end{hint}
 
 \begin{solution}[Sketch]
-Cross product: $\mathbf{a} \times \mathbf{b} = \begin{bmatrix} (-2)(-1) - (1)(4) \\ (1)(1) - (3)(-1) \\ (3)(4) - (-2)(1) \end{bmatrix} = \begin{bmatrix} -2 \\ 4 \\ 14 \end{bmatrix}$. Magnitude: $\sqrt{4 + 16 + 196} = 6\sqrt{6}$. Unit vector: $\frac{1}{6\sqrt{6}}\begin{bmatrix} -2 \\ 4 \\ 14 \end{bmatrix} = \frac{1}{3\sqrt{6}}\begin{bmatrix} -1 \\ 2 \\ 7 \end{bmatrix}$.
+Let $\mathbf{w} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}$. Then
+\[
+\mathbf{w} \cdot \begin{bmatrix} 3 \\ -2 \\ 1 \end{bmatrix} = 0
+\quad \text{and} \quad
+\mathbf{w} \cdot \begin{bmatrix} 1 \\ 4 \\ -1 \end{bmatrix} = 0.
+\]
+So
+\[
+3x - 2y + z = 0, \qquad x + 4y - z = 0.
+\]
+Adding gives $4x + 2y = 0$, so $y = -2x$. Substituting into $x + 4y - z = 0$ gives
+\[
+x - 8x - z = 0 \implies z = -7x.
+\]
+Thus $\mathbf{w} = x\begin{bmatrix} 1 \\ -2 \\ -7 \end{bmatrix}$. Taking $x = 1$, a convenient perpendicular vector is $\begin{bmatrix} 1 \\ -2 \\ -7 \end{bmatrix}$, whose magnitude is
+\[
+\sqrt{1 + 4 + 49} = 3\sqrt{6}.
+\]
+Hence a unit vector is
+\[
+\frac{1}{3\sqrt{6}}\begin{bmatrix} 1 \\ -2 \\ -7 \end{bmatrix}.
+\]
 \end{solution}
 
 \vspace{1em}

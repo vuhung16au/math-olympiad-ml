@@ -19,7 +19,7 @@ The collection contains **58 total problems** covering the full spectrum of Prob
 ## What This Collection Focuses On
 
 - **Complex Numbers**: Geometric applications, polynomial analysis, roots of unity, argument/modulus regions
-- **Vector Algebra & 3D Geometry**: Optimization on surfaces, cross products, projections, distance problems
+- **Vector Algebra & 3D Geometry**: Optimization on surfaces, projections, distance problems, coordinate methods
 - **Advanced Inequalities**: AM-GM applications, Cauchy-Schwarz techniques, optimization constraints
 - **Calculus & Analysis**: Integration techniques, function analysis, curvature, infinite series
 - **Polynomial Theory**: Newton's sums, root bounds, symmetric functions

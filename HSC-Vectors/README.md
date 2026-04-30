@@ -113,7 +113,7 @@ make pdf && make open
 
 - Embed problems into lesson sequences covering different vector topics.
 - Use the comprehensive primer as a reference or revision resource.
-- Highlight the cross product section for advanced students or extension activities.
+- If using the optional enrichment section, make it clear that it sits outside the current NESA syllabus and is included only for later study.
 - Assign problem sets targeting specific topics (projections, geometric proofs, sphere intersections, etc.).
 
 ## Repository Layout

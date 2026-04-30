@@ -1,13 +1,29 @@
 % Solutions for Medium Problems (Part 1)
 % Problem 6 Solution
 \section*{Solution to Problem 6}
-(i) The area of triangle $ABC$ with $A(a,0,0)$, $B(0,b,0)$, $C(0,0,c)$ is given by half the magnitude of the cross product of vectors $\vec{AB}$ and $\vec{AC}$:
+(i) Let $\vec{AB} = (-a,b,0)$ and $\vec{AC} = (-a,0,c)$. If $\theta$ is the angle between these two sides of the triangle, then
 \[
-S = \frac{1}{2} |\vec{AB} \times \vec{AC}| = \frac{1}{2} \sqrt{b^2 c^2 + a^2 c^2 + a^2 b^2}
+S = \frac12 |\vec{AB}|\,|\vec{AC}|\sin\theta.
+\]
+Using $\cos\theta = \dfrac{\vec{AB}\cdot\vec{AC}}{|\vec{AB}|\,|\vec{AC}|}$, we obtain
+\[
+4S^2 = |\vec{AB}|^2 |\vec{AC}|^2 - (\vec{AB}\cdot\vec{AC})^2.
+\]
+Now
+\[
+|\vec{AB}|^2 = a^2+b^2,\quad |\vec{AC}|^2 = a^2+c^2,\quad \vec{AB}\cdot\vec{AC}=a^2,
+\]
+so
+\[
+4S^2 = (a^2+b^2)(a^2+c^2)-a^4 = a^2b^2+a^2c^2+b^2c^2.
+\]
+Hence
+\[
+S = \frac{1}{2} \sqrt{b^2 c^2 + a^2 c^2 + a^2 b^2}.
 \]
 (ii) The projections onto coordinate planes yield $S_{xy} = \frac{1}{2} ab$, $S_{yz} = \frac{1}{2} bc$, $S_{zx} = \frac{1}{2} ca$. Then $S^2 = S_{xy}^2 + S_{yz}^2 + S_{zx}^2$.
 
-Takeaway: Cross products and projections are powerful tools in 3D geometry.
+Takeaway: Dot products and projections are powerful tools in 3D geometry.
 
 % Problem 7 Solution
 \section*{Solution to Problem 7}
