@@ -113,10 +113,71 @@ Most problems in this booklet are accessible with standard HSC Mathematics Exten
   \item \textbf{Function notation:} writing $f(x)$, understanding that $f$ is the rule and $f(x)$ is the value, and reading expressions such as $f(a+h)$ or $f(f(x))$.
   \item \textbf{Domain and range:} identifying the largest possible domain (the natural domain) and the corresponding range, and applying domain restrictions when stated.
   \item \textbf{One-to-one functions:} recognising that a function has an inverse if and only if it passes the horizontal line test.
-  \item \textbf{Inverse functions:} swapping $x$ and $y$ to find $f^{-1}$, and understanding that $f(f^{-1}(x))=x$ and $f^{-1}(f(x))=x$.
+  \item \textbf{Inverse functions:} swapping $x$ and $y$ to find $f^{-1}$, and understanding that $f(f^{-1}(x))=x$ and $f^{-1}(f(x))=x$. For $x\ge 0$, restricting $f(x)=x^2$ gives inverse $f^{-1}(x)=\sqrt{x}$, illustrated below on $[0,5]$ with $y=x$ (reflection line for the two graphs):
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=0.62\textwidth,
+        height=4.6cm,
+        xmin=0, xmax=5,
+        ymin=0, ymax=26,
+        axis lines=left,
+        xtick={0,1,2,3,4,5},
+        ytick={0,10,20},
+        minor y tick num=1,
+        legend style={font=\small, at={(0.98,0.03)}, anchor=south east, fill=none, draw=none},
+        legend cell align=left,
+      ]
+        \addplot[thick, blue, domain=0:5, samples=80] {x^2};
+        \addlegendentry{$y=x^2$}
+        \addplot[thick, red, domain=0:5, samples=80] {sqrt(x)};
+        \addlegendentry{$y=\sqrt{x}$}
+        \addplot[dashed, black, thick, domain=0:5] {x};
+        \addlegendentry{$y=x$}
+      \end{axis}
+    \end{tikzpicture}
+  \end{center}
   \item \textbf{Graphs of inverse functions:} reflecting the graph of $f$ in the line $y=x$ to obtain $f^{-1}$.
   \item \textbf{Composite functions:} forming $f(g(x))$ by substituting one function into another, and identifying the correct domain of the composition.
-  \item \textbf{Even and odd functions:} $f$ is even if $f(-x)=f(x)$ for all $x$ (the graph has $y$-axis symmetry); $f$ is odd if $f(-x)=-f(x)$ for all $x$ (the graph has rotational symmetry about the origin).
+  \item \textbf{Even and odd functions:} $f$ is even if $f(-x)=f(x)$ for all $x$ (the graph has $y$-axis symmetry); $f$ is odd if $f(-x)=-f(x)$ for all $x$ (the graph has rotational symmetry about the origin). For example, on $[-1,1]$, $y=x^4-x^2$ is even and $y=x^3-x$ is odd:
+  \begin{center}
+    \begin{minipage}[t]{0.45\textwidth}
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=\linewidth,
+          height=3.4cm,
+          xmin=-1, xmax=1,
+          ymin=-0.28, ymax=0.08,
+          axis lines=middle,
+          xtick={-1,0,1},
+          ytick={-0.25,0},
+          title={\small $y=x^4-x^2$ \textnormal{(even)}},
+          title style={yshift=-3pt, font=\small},
+        ]
+          \addplot[thick, smooth, domain=-1:1, samples=60] {x^4 - x^2};
+        \end{axis}
+      \end{tikzpicture}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\textwidth}
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=\linewidth,
+          height=3.4cm,
+          xmin=-1, xmax=1,
+          ymin=-0.42, ymax=0.42,
+          axis lines=middle,
+          xtick={-1,0,1},
+          ytick={-0.4,0,0.4},
+          title={\small $y=x^3-x$ \textnormal{(odd)}},
+          title style={yshift=-3pt, font=\small},
+        ]
+          \addplot[thick, smooth, domain=-1:1, samples=60] {x^3 - x};
+        \end{axis}
+      \end{tikzpicture}
+    \end{minipage}
+  \end{center}
   \item \textbf{Transformations:} translations, reflections, dilations, and their effect on the equation and graph of a function.
 \end{itemize}
 
