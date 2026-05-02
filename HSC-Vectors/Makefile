@@ -19,13 +19,12 @@ all: pdf
 pdf: $(PDFFILE)
 
 $(PDFFILE): $(TEXFILE).tex
-	-docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
-		pdflatex -interaction=nonstopmode $(TEXFILE).tex
 	docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
-		pdflatex -interaction=nonstopmode $(TEXFILE).tex
+		latexmk -pdf -interaction=nonstopmode -file-line-error $(TEXFILE).tex
 
 clean:
-	rm -f $(TEXFILE).aux $(TEXFILE).log $(TEXFILE).out $(TEXFILE).toc $(TEXFILE).pdf
+	rm -f $(TEXFILE).aux $(TEXFILE).log $(TEXFILE).out $(TEXFILE).toc $(TEXFILE).pdf \
+		$(TEXFILE).fdb_latexmk $(TEXFILE).fls
 
 release: $(PDFFILE)
 	mkdir -p $(RELEASE_DIR)
