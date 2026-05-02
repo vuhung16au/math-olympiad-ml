@@ -44,10 +44,18 @@
   colframe=bookred,
   boxrule=1.5pt,
   arc=4pt,
-  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  left=10pt,right=10pt,top=10pt,bottom=10pt,
   attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
   boxed title style={size=small,colback=bookred,coltitle=white},
   fonttitle=\bfseries,
+  fontupper=\footnotesize,
+  before upper={
+    \setlength{\abovedisplayskip}{4pt}%
+    \setlength{\belowdisplayskip}{4pt}%
+    \setlength{\abovedisplayshortskip}{3pt}%
+    \setlength{\belowdisplayshortskip}{3pt}%
+    \setlength{\jot}{2pt}%
+  },
   before skip=15pt,
   after skip=10pt
 }

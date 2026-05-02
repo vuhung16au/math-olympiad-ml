@@ -1,13 +1,692 @@
-\subsubsection*{Problems}
-\begin{itemize}[leftmargin=*]
-  \item Placeholder: Warm-Up Problem 1
-  \item Placeholder: Warm-Up Problem 2
-  \item Placeholder: Warm-Up Problem 3
-\end{itemize}
+% Warm-Up problems
 
-\subsubsection*{Solutions}
-\begin{itemize}[leftmargin=*]
-  \item Placeholder: Warm-Up Solution 1
-  \item Placeholder: Warm-Up Solution 2
-  \item Placeholder: Warm-Up Solution 3
+% Section 1: Verifying Solutions
+\begin{problem}[Verifying Solutions by Substitution]
+Verify by substitution that the given function is a solution to the differential equation for all values of the constants $A, B,$ and $C$.
+
+\begin{enumerate}
+    \item[\textbf{a}] $y''' = 12$; \qquad $y = 2x^3 + Ax^2 + Bx + C$
+    \item[\textbf{b}] $y'' - 5y' + 6y = 0$; \qquad $y = Ae^{2x} + Be^{3x}$
+    \item[\textbf{c}] $y'' + 9y = 18$; \qquad $y = A\cos(3x) + B\sin(3x) + 2$
+    \item[\textbf{d}] $y'' - 4y' + 4y = 0$; \qquad $y = (Ax + B)e^{2x}$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{General Strategy:} Do not attempt to integrate or "solve" the differential equation from scratch. Instead, calculate the necessary derivatives ($y'$, $y''$, $y'''$) from the given solution $y$, and substitute them into the Left Hand Side (LHS) of the differential equation. Simplify the algebra to show it perfectly equals the Right Hand Side (RHS).
+    \item \textbf{For (c):} Remember the chain rule for trigonometric functions: $\frac{d}{dx}[\cos(kx)] = -k\sin(kx)$.
+    \item \textbf{For (d):} You must use the \textbf{Product Rule} ($y' = u'v + uv'$) to differentiate $y$, treating $(Ax + B)$ as $u$ and $e^{2x}$ as $v$. Factor out $e^{2x}$ at each step to make the algebra manageable.
 \end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} Given $y = 2x^3 + Ax^2 + Bx + C$. \\
+Differentiating with respect to $x$:
+\begin{align*}
+    y' &= 6x^2 + 2Ax + B \\
+    y'' &= 12x + 2A \\
+    y''' &= 12
+\end{align*}
+Substitute into the LHS of the differential equation: \\
+$\text{LHS} = y''' = 12$. \\
+Since $\text{LHS} = \text{RHS}$, the function is verified as a solution. $\qed$
+
+\vspace{0.3cm}
+
+\textbf{(b)} Given $y = Ae^{2x} + Be^{3x}$. 
+\begin{align*}
+    y' &= 2Ae^{2x} + 3Be^{3x} \\
+    y'' &= 4Ae^{2x} + 9Be^{3x}
+\end{align*}
+Substitute into the LHS of the differential equation ($y'' - 5y' + 6y$):
+\begin{align*}
+    \text{LHS} &= (4Ae^{2x} + 9Be^{3x}) - 5(2Ae^{2x} + 3Be^{3x}) + 6(Ae^{2x} + Be^{3x}) \\
+    &= 4Ae^{2x} + 9Be^{3x} - 10Ae^{2x} - 15Be^{3x} + 6Ae^{2x} + 6Be^{3x} \\
+    &= e^{2x}(4A - 10A + 6A) + e^{3x}(9B - 15B + 6B) \\
+    &= e^{2x}(0) + e^{3x}(0) = 0
+\end{align*}
+Since $\text{LHS} = \text{RHS}$, the function is verified as a solution. $\qed$
+
+\vspace{0.3cm}
+
+\textbf{(c)} Given $y = A\cos(3x) + B\sin(3x) + 2$.
+\begin{align*}
+    y' &= -3A\sin(3x) + 3B\cos(3x) \\
+    y'' &= -9A\cos(3x) - 9B\sin(3x)
+\end{align*}
+Substitute into the LHS of the differential equation ($y'' + 9y$):
+\begin{align*}
+    \text{LHS} &= (-9A\cos(3x) - 9B\sin(3x)) + 9(A\cos(3x) + B\sin(3x) + 2) \\
+    &= -9A\cos(3x) - 9B\sin(3x) + 9A\cos(3x) + 9B\sin(3x) + 18 \\
+    &= 18
+\end{align*}
+Since $\text{LHS} = \text{RHS}$, the function is verified as a solution. $\qed$
+
+\vspace{0.3cm}
+
+\textbf{(d)} Given $y = (Ax + B)e^{2x}$. \\
+Using the product rule ($u = Ax+B, v = e^{2x}$):
+\begin{align*}
+    y' &= (A)(e^{2x}) + (Ax + B)(2e^{2x}) \\
+    &= e^{2x}(A + 2Ax + 2B) \\[1ex]
+    y'' &= (2e^{2x})(A + 2Ax + 2B) + (e^{2x})(2A) \\
+    &= e^{2x}(2A + 4Ax + 4B + 2A) \\
+    &= e^{2x}(4A + 4B + 4Ax)
+\end{align*}
+Substitute into the LHS of the differential equation ($y'' - 4y' + 4y$):
+\begin{align*}
+    \text{LHS} &= e^{2x}(4A + 4B + 4Ax) - 4\left[e^{2x}(A + 2B + 2Ax)\right] + 4\left[(Ax + B)e^{2x}\right]
+\end{align*}
+Factor out the common $e^{2x}$ term:
+\begin{align*}
+    \text{LHS} &= e^{2x} \left[ (4A + 4B + 4Ax) - (4A + 8B + 8Ax) + (4Ax + 4B) \right] \\
+    &= e^{2x} \left[ A(4 - 4) + B(4 - 8 + 4) + Ax(4 - 8 + 4) \right] \\
+    &= e^{2x} [ 0 ] = 0
+\end{align*}
+Since $\text{LHS} = \text{RHS}$, the function is verified as a solution. $\qed$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item ``Solving'' a differential equation from scratch can be very complex, but ``verifying'' a solution is simply an exercise in standard differential calculus. If an exam question asks to ``Show that $y = \dots$ is a solution,'' always use substitution.
+    \item When verifying differential equations involving exponentials (like parts b and d), factoring out the exponential term ($e^{kx}$) makes the algebraic cancellation much easier to spot and less prone to simple arithmetic errors.
+\end{itemize}
+\end{takeaways}
+
+% Section 2: Initial Value Problems
+\begin{problem}[Solving Initial Value Problems by Direct Integration]
+Solve these initial value problems. In each case, use integration to find the general solution, then use the initial condition to evaluate the constant.
+
+\begin{enumerate}
+    \item[\textbf{a}] $y' = -2$; \qquad $y(1) = 4$
+    \item[\textbf{b}] $y' = 4x + 1$; \qquad $y(0) = -3$
+    \item[\textbf{c}] $y' = 6x^2 - 2x + 5$; \qquad $y(-1) = 2$
+    \item[\textbf{d}] $y' = \cos(2x)$; \qquad $y\left(\frac{\pi}{4}\right) = 1$
+    \item[\textbf{e}] $y' = 4e^{-x}$; \qquad $y(0) = 2$
+    \item[\textbf{f}] $y' = \frac{4}{x^2}$; \qquad $y(2) = 1$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{The Two-Step Process:} Every differential equation of the form $y' = f(x)$ can be solved by direct integration: $y = \int f(x) \, dx$. Do not forget to add the constant of integration ($+ C$) immediately after integrating. This creates the \textbf{general solution}. 
+    \item \textbf{Evaluating $C$:} Once you have the general solution, substitute the given $x$ and $y$ values from the initial condition to solve for $C$. Finally, rewrite the complete equation with your newly found $C$ value to get the \textbf{particular solution}.
+    \item \textbf{For (f):} Rewrite $\frac{4}{x^2}$ using negative index laws ($4x^{-2}$) before attempting to apply the power rule for integration.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} $\;y=-2x+C,\; 4=-2(1)+C \Rightarrow C=6$, so $\boxed{y=-2x+6}$.
+
+\textbf{(b)} $\;y=2x^2+x+C,\; -3=C$, so $\boxed{y=2x^2+x-3}$.
+
+\textbf{(c)} $\;y=2x^3-x^2+5x+C$. Using $y(-1)=2$ gives $2=-2-1-5+C$, hence $C=10$ and
+\[
+\boxed{y=2x^3-x^2+5x+10}.
+\]
+
+\textbf{(d)} $\;y=\frac12\sin(2x)+C$. Since $y\!\left(\frac{\pi}{4}\right)=1$,
+\[
+1=\frac12\sin\frac{\pi}{2}+C=\frac12+C \Rightarrow C=\frac12,
+\]
+so $\boxed{y=\frac12\sin(2x)+\frac12}$.
+
+\textbf{(e)} $\;y=-4e^{-x}+C,\; 2=-4+C \Rightarrow C=6$, so $\boxed{y=-4e^{-x}+6}$.
+
+\textbf{(f)} $\;y=\int4x^{-2}\,dx=-\frac4x+C$. Using $y(2)=1$ gives $1=-2+C$, so $C=3$ and
+\[
+\boxed{y=-\frac4x+3}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{General vs. Particular:} An indefinite integral always produces a family of curves (the general solution). An initial value problem ``pins down'' exactly one of those curves (the particular solution) by forcing it to pass through a specific $(x, y)$ coordinate.
+    \item \textbf{Always write $+C$ immediately:} A common student error is to integrate, evaluate the numbers, and \textit{then} try to add $C$. The constant must be written on the exact same line the integral sign disappears.
+\end{itemize}
+\end{takeaways}
+
+% Section: Implicit Differentiation
+\begin{problem}[Implicit Differentiation and Conic Sections]
+\textbf{a} 
+\begin{enumerate}
+    \item[\textbf{i}] Differentiate both sides of the ellipse equation $4x^2 + 9y^2 = 36$ with respect to $x$, using the chain rule where necessary.
+    \item[\textbf{ii}] Hence show that $\frac{dy}{dx} = -\frac{4x}{9y}$ at each point on the ellipse.
+    \item[\textbf{iii}] Part \textbf{ii} needs qualification. Where is the differential equation undefined and what does this mean geometrically for the curve?
+\end{enumerate}
+
+\textbf{b} Likewise, find $\frac{dy}{dx}$ for these curves:
+\begin{enumerate}
+    \item[\textbf{i}] the parabola $y^2 = 12x$
+    \item[\textbf{ii}] the hyperbola $xy = 8$
+    \item[\textbf{iii}] the circle $x^2 + y^2 = r^2$
+    \item[\textbf{iv}] the hyperbola $y^2 - x^2 = 1$
+    \item[\textbf{v}] the curve $x^2y + xy^2 = 10$
+    \item[\textbf{vi}] the astroid $x^{\frac{2}{3}} + y^{\frac{2}{3}} = a^{\frac{2}{3}}$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{The Golden Rule of Implicit Differentiation:} Differentiate $x$ terms normally. When you differentiate a $y$ term with respect to $x$, differentiate it normally as if it were an $x$, but immediately multiply it by $\frac{dy}{dx}$. (This is just an application of the Chain Rule: $\frac{d}{dx}[f(y)] = f'(y) \cdot \frac{dy}{dx}$).
+    \item \textbf{For Parts b(ii) and b(v):} Be careful! Terms like $xy$ and $x^2y$ require the \textbf{Product Rule} ($u'v + uv'$). For example, to differentiate $xy$, let $u=x$ and $v=y$. 
+    \item \textbf{For Part a(iii):} A fraction is mathematically undefined when its denominator is zero. Set the denominator to zero, find the $y$-value, and substitute it back into the original ellipse equation to find the corresponding $x$-coordinates. 
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{a(i)} Differentiating both sides with respect to $x$:
+\begin{align*}
+    \frac{d}{dx}(4x^2) + \frac{d}{dx}(9y^2) &= \frac{d}{dx}(36) \\
+    8x + 18y \frac{dy}{dx} &= 0
+\end{align*}
+
+\textbf{a(ii)} Rearranging to make $\frac{dy}{dx}$ the subject:
+\begin{align*}
+    18y \frac{dy}{dx} &= -8x \\
+    \frac{dy}{dx} &= -\frac{8x}{18y} = -\frac{4x}{9y} \quad \qed
+\end{align*}
+
+\textbf{a(iii)} The differential equation is undefined when the denominator is $0$, which occurs when $9y = 0 \implies y = 0$. \\
+Substituting $y = 0$ into the original equation:
+\[ 4x^2 + 9(0)^2 = 36 \implies 4x^2 = 36 \implies x^2 = 9 \implies x = \pm 3 \]
+The derivative is undefined at the points $(3, 0)$ and $(-3, 0)$. Geometrically, this is expected because these are the $x$-intercepts of the ellipse, where the curve has \textbf{vertical tangents} (infinite gradient).
+
+\vspace{0.3cm}
+\textbf{b(i) Parabola $y^2 = 12x$}
+\[ 2y \frac{dy}{dx} = 12 \implies \frac{dy}{dx} = \frac{12}{2y} = \frac{6}{y} \]
+
+\textbf{b(ii) Hyperbola $xy = 8$} (Use Product Rule: $u=x, v=y$)
+\begin{align*}
+    (1)(y) + (x)\left(\frac{dy}{dx}\right) &= 0 \\
+    x \frac{dy}{dx} &= -y \implies \frac{dy}{dx} = -\frac{y}{x}
+\end{align*}
+
+\textbf{b(iii) Circle $x^2 + y^2 = r^2$} (Note: $r^2$ is a constant)
+\[ 2x + 2y \frac{dy}{dx} = 0 \implies 2y \frac{dy}{dx} = -2x \implies \frac{dy}{dx} = -\frac{x}{y} \]
+
+\textbf{b(iv) Hyperbola $y^2 - x^2 = 1$}
+\[ 2y \frac{dy}{dx} - 2x = 0 \implies 2y \frac{dy}{dx} = 2x \implies \frac{dy}{dx} = \frac{x}{y} \]
+
+\textbf{b(v) Curve $x^2y + xy^2 = 10$} (Use Product Rule on both terms)
+\begin{align*}
+    \left[ (2x)(y) + (x^2)\left(\frac{dy}{dx}\right) \right] + \left[ (1)(y^2) + (x)\left(2y \frac{dy}{dx}\right) \right] &= 0 \\
+    2xy + x^2 \frac{dy}{dx} + y^2 + 2xy \frac{dy}{dx} &= 0
+\end{align*}
+Factor out $\frac{dy}{dx}$:
+\begin{align*}
+    \frac{dy}{dx}(x^2 + 2xy) &= -2xy - y^2 \\
+    \frac{dy}{dx} &= -\frac{2xy + y^2}{x^2 + 2xy} = -\frac{y(2x+y)}{x(x+2y)}
+\end{align*}
+
+\textbf{b(vi) Astroid $x^{\frac{2}{3}} + y^{\frac{2}{3}} = a^{\frac{2}{3}}$} (Note: $a^{\frac{2}{3}}$ is a constant)
+\begin{align*}
+    \frac{2}{3}x^{-\frac{1}{3}} + \frac{2}{3}y^{-\frac{1}{3}} \frac{dy}{dx} &= 0 \\
+    \frac{2}{3}y^{-\frac{1}{3}} \frac{dy}{dx} &= -\frac{2}{3}x^{-\frac{1}{3}} \\
+    \frac{dy}{dx} &= -\frac{x^{-\frac{1}{3}}}{y^{-\frac{1}{3}}} = -\frac{y^{\frac{1}{3}}}{x^{\frac{1}{3}}} = -\sqrt[3]{\frac{y}{x}}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Why use Implicit Differentiation?} For closed curves like circles and ellipses, making $y$ the subject results in messy $\pm$ square root equations. Implicit differentiation bypasses this, allowing you to find the gradient function directly from the original relation.
+    \item \textbf{Coordinate Dependency:} Notice that almost all the gradient functions ($\frac{dy}{dx}$) in this exercise contain \textit{both} $x$ and $y$. This means you cannot find the slope of a tangent just by knowing the $x$-value; you must know the full $(x, y)$ coordinate point on the curve.
+\end{itemize}
+\end{takeaways}
+
+% Section: Repeated Integration and Polynomial Families
+\begin{problem}[Repeated Integration and Polynomial Families]
+Consider the $n$-th order differential equation $\frac{d^n y}{dx^n} = n!$, where $n$ is a positive integer.
+
+\begin{enumerate}
+    \item[\textbf{i}] By integrating repeatedly, find the general solution for $n=3$.
+    \item[\textbf{ii}] Hence, write down the general solution for the $n$-th order equation $\frac{d^n y}{dx^n} = n!$. Express your answer using summation notation ($\sum$) with arbitrary constants $c_k$.
+    \item[\textbf{iii}] For $n=3$, a particular solution $y = P(x)$ has a stationary point of inflection at $(1, 2)$. Find the explicit algebraic equation for $P(x)$.
+    \item[\textbf{iv}] For a general $n$, suppose a solution $y = Q(x)$ satisfies the initial conditions $Q^{(k)}(a) = 0$ for all integers $0 \le k \le n-1$. Prove that $Q(x) = (x-a)^n$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Integrate $3! = 6$ three times. Remember to add a new constant of integration (like $C_1$, $C_2$, etc.) each time, and don't forget to integrate those constants in the subsequent steps!
+    \item \textbf{For ii:} Look at the pattern of the terms from part \textbf{i}. A polynomial of degree $n$ generated this way will have $n$ arbitrary constants for the lower-degree terms. 
+    \item \textbf{For iii:} A ``stationary point of inflection'' at $x=1$ means both the first derivative $y'(1) = 0$ and the second derivative $y''(1) = 0$. Substitute $x=1$ into your derivatives to solve for the constants sequentially.
+    \item \textbf{For iv:} Think about the Factor Theorem and root multiplicity. If a polynomial and its first derivative are both zero at $x=a$, what does that mean for the root $(x-a)$? Extend this logic up to the $(n-1)$-th derivative. Alternatively, use the Taylor Series expansion centered at $x=a$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} For $n=3$, the differential equation is $\frac{d^3 y}{dx^3} = 3! = 6$. \\
+Integrate once:
+\[ y'' = \int 6 \, dx = 6x + A \]
+Integrate twice:
+\[ y' = \int (6x + A) \, dx = 3x^2 + Ax + B \]
+Integrate a third time:
+\[ y = \int (3x^2 + Ax + B) \, dx = x^3 + \frac{A}{2}x^2 + Bx + C \]
+To make the notation cleaner, let $c_2 = \frac{A}{2}$, $c_1 = B$, and $c_0 = C$. \\
+\textbf{General Solution:} $y = x^3 + c_2x^2 + c_1x + c_0$
+
+\vspace{0.3cm}
+\textbf{ii} Following the pattern from part \textbf{i}, integrating $n!$ exactly $n$ times produces the term $x^n$. Each integration introduces a new constant that eventually becomes the coefficient for a lower power of $x$. \\
+Thus, the general solution is a monic polynomial of degree $n$:
+\[ y = x^n + c_{n-1}x^{n-1} + c_{n-2}x^{n-2} + \dots + c_1x + c_0 \]
+Using summation notation: \\
+\textbf{$y = x^n + \sum_{k=0}^{n-1} c_k x^k$}
+
+\vspace{0.3cm}
+\textbf{iii} From part \textbf{i}, $P(x) = x^3 + c_2x^2 + c_1x + c_0$. \\
+We are given a stationary point of inflection at $(1, 2)$. \\
+This means $P(1) = 2$, $P'(1) = 0$, and $P''(1) = 0$. \\
+The derivatives are:
+\begin{align*}
+    P'(x) &= 3x^2 + 2c_2x + c_1 \\
+    P''(x) &= 6x + 2c_2
+\end{align*}
+Use $P''(1) = 0$:
+\[ 6(1) + 2c_2 = 0 \implies c_2 = -3 \]
+Use $P'(1) = 0$:
+\[ 3(1)^2 + 2(-3)(1) + c_1 = 0 \implies 3 - 6 + c_1 = 0 \implies c_1 = 3 \]
+Use $P(1) = 2$:
+\[ 1^3 - 3(1)^2 + 3(1) + c_0 = 2 \implies 1 - 3 + 3 + c_0 = 2 \implies c_0 = 1 \]
+Therefore, the explicit equation is: \\
+\textbf{$P(x) = x^3 - 3x^2 + 3x + 1$} (which factors elegantly to $P(x) = (x-1)^3 + 2$).
+
+\vspace{0.3cm}
+\textbf{iv} \textit{Method 1 (Multiplicity of Roots):} \\
+Since $Q^{(n)}(x) = n!$, integrating $n$ times tells us $Q(x)$ is a monic polynomial of degree $n$ (from part \textbf{ii}). \\
+We are given $Q(a) = 0, Q'(a) = 0, \dots, Q^{(n-1)}(a) = 0$. \\
+By the properties of polynomials, if a polynomial and its first $n-1$ derivatives evaluate to $0$ at $x=a$, then $x=a$ is a root of multiplicity $n$. \\
+Therefore, $Q(x) = c(x-a)^n$. \\
+Since $Q(x)$ is a monic polynomial (its leading term is $1x^n$), the constant $c$ must be $1$. \\
+Thus, $Q(x) = (x-a)^n$. $\qed$
+
+\vspace{0.2cm}
+\textit{Method 2 (Taylor Series):} \\
+Any polynomial of degree $n$ can be expressed exactly as a Taylor expansion centered at $x=a$:
+\[ Q(x) = \sum_{k=0}^{n} \frac{Q^{(k)}(a)}{k!} (x-a)^k \]
+We are given $Q^{(k)}(a) = 0$ for all $0 \le k \le n-1$. Therefore, all terms in the sum are zero except the final $n$-th term.
+\[ Q(x) = \frac{Q^{(n)}(a)}{n!} (x-a)^n \]
+Since $Q^{(n)}(x) = n!$ for all $x$, $Q^{(n)}(a) = n!$.
+\[ Q(x) = \frac{n!}{n!} (x-a)^n = (x-a)^n. \quad \qed \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Connecting Integration to Polynomials:} Repeated integration of a constant mathematically generates the family of all polynomials. The constants of integration directly correspond to the polynomial's coefficients.
+    \item \textbf{Boundary Conditions as Geometry:} Initial value problems don't just have to be written as $y(0)=1$. They can be phrased geometrically, like ``has a stationary point of inflection.''
+    \item \textbf{The Foundation of Taylor Series:} Part \textbf{iv} is a sneak peek into Taylor Polynomials, a crucial university calculus concept where entire functions are constructed based purely on the values of their derivatives at a single point!
+\end{itemize}
+\end{takeaways}
+
+% Section: Graphical Properties of Differential Equations
+\begin{problem}[Analyzing Solution Curves via Implicit Differentiation]
+Consider the initial value problem $y' = x^2 - y^2$ with the initial condition $y(1) = 1$. Suppose that the function $y = f(x)$ is a valid solution to this equation.
+
+\begin{enumerate}
+    \item[\textbf{i}] Calculate the gradient of the curve $y = f(x)$ at the point $(1, 1)$.
+    \item[\textbf{ii}] Differentiate the differential equation implicitly with respect to $x$ to show that $y'' = 2x - 2x^2 y + 2y^3$.
+    \item[\textbf{iii}] Hence, determine the concavity of the curve at $(1, 1)$ and state whether this point is a local maximum, local minimum, or neither.
+    \item[\textbf{iv}] Determine the exact value of $f'''(1)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Substitute $x=1$ and $y=1$ directly into the given differential expression for $y'$.
+    \item \textbf{For ii:} Use implicit differentiation. Remember that $\frac{d}{dx}(y^2) = 2y \cdot y'$. Then, substitute the original expression for $y'$ back into your result and expand the brackets to get the required ``show that'' form.
+    \item \textbf{For iii:} Use the value of $y''$ at $(1,1)$ to determine concavity (positive = concave up, negative = concave down). Combine this with your gradient result from part \textbf{i} to classify the nature of the stationary point.
+    \item \textbf{For iv:} Differentiate the expanded expression for $y''$ from part \textbf{ii} with respect to $x$. You will need to use the \textbf{Product Rule} for the $-2x^2 y$ term.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given $y' = x^2 - y^2$. \\
+At the point $(1, 1)$, substitute $x=1, y=1$:
+\[ y'(1) = 1^2 - 1^2 = 0 \]
+The gradient of the curve at $(1,1)$ is $0$.
+
+\vspace{0.3cm}
+\textbf{ii} Differentiating both sides of $y' = x^2 - y^2$ with respect to $x$:
+\begin{align*}
+    y'' &= \frac{d}{dx}(x^2) - \frac{d}{dx}(y^2) \\
+    y'' &= 2x - 2y \cdot y'
+\end{align*}
+Substitute the original differential equation $y' = x^2 - y^2$ into this expression:
+\begin{align*}
+    y'' &= 2x - 2y(x^2 - y^2) \\
+    y'' &= 2x - 2x^2 y + 2y^3 \quad \qed
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{iii} To find the concavity, evaluate $y''$ at $x=1, y=1$:
+\begin{align*}
+    y''(1) &= 2(1) - 2(1)^2(1) + 2(1)^3 \\
+    y''(1) &= 2 - 2 + 2 = 2
+\end{align*}
+Since $y''(1) > 0$, the curve is \textbf{concave up} at this point. \\
+Because the gradient $y'(1) = 0$ (from part i) and the concavity is positive, the point $(1, 1)$ is a \textbf{local minimum}.
+
+\vspace{0.3cm}
+\textbf{iv} We need to differentiate $y'' = 2x - 2x^2 y + 2y^3$ with respect to $x$. \\
+Using the product rule on the middle term ($u = 2x^2$, $v = y$):
+\begin{align*}
+    y''' &= 2 - \left[4x \cdot y + 2x^2 \cdot y'\right] + 6y^2 \cdot y' \\
+    y''' &= 2 - 4xy - 2x^2 y' + 6y^2 y'
+\end{align*}
+Now, evaluate at $x=1, y=1$, and crucially, substitute $y'(1) = 0$:
+\begin{align*}
+    f'''(1) &= 2 - 4(1)(1) - 2(1)^2(0) + 6(1)^2(0) \\
+    f'''(1) &= 2 - 4 - 0 + 0 = -2
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Extracting Geometry from DEs:} Differential equations don't just ask us to ``find $y$''; they contain a wealth of geometric information. We can find gradients, concavities, and classify turning points without ever knowing the explicit algebraic equation of the curve!
+    \item \textbf{Strategic Substitution:} When evaluating higher-order derivatives at a specific point (like in part iv), substitute the known values of the lower-order derivatives (e.g., $y'=0$) \textit{immediately} after differentiating. Trying to simplify the algebra before substituting the numbers often leads to unnecessary errors.
+\end{itemize}
+\end{takeaways}
+
+% Section: Non-linear Slope Fields and Isoclines
+\begin{problem}[Non-linear Slope Fields and Isoclines]
+Some differential equations cannot be solved algebraically. Instead, we must rely on geometric analysis (slope fields) and numerical approximations to understand their solution curves. 
+
+Consider the differential equation $\frac{dy}{dx} = x - y^2$ and the particular solution $y = f(x)$ that passes through the origin $(0,0)$.
+
+\begin{enumerate}
+    \item[\textbf{i}] An \textit{isocline} is a curve along which the gradient of the solution curves is constant. Find the Cartesian equation of the zero-isocline (where $\frac{dy}{dx} = 0$). Sketch this isocline and clearly shade the region in the plane where the solution curves are strictly increasing.
+    \item[\textbf{ii}] By differentiating the differential equation implicitly with respect to $x$, find an expression for $\frac{d^2y}{dx^2}$.
+    \item[\textbf{iii}] Hence, prove that any stationary point on \textit{any} solution curve for this differential equation must be a local minimum.
+    \item[\textbf{iv}] Since the exact algebraic function $y = f(x)$ cannot be found, use Euler's method with a step size of $h = 0.5$ to estimate the value of $f(1)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Set $\frac{dy}{dx} = 0$ to find the equation of the isocline. For the shaded region, consider the inequality $x - y^2 > 0$.
+    \item \textbf{For ii:} Use implicit differentiation. Remember that $\frac{d}{dx}(y^2) = 2y \cdot \frac{dy}{dx}$. 
+    \item \textbf{For iii:} At a stationary point, what is the value of $\frac{dy}{dx}$? Substitute this into your expression from part \textbf{ii} to determine the concavity.
+    \item \textbf{For iv:} Set up an Euler's method table with columns for $x_n$, $y_n$, $y'_n$, and $y_{n+1} = y_n + h \cdot y'_n$. Start your first row at $(x_0, y_0) = (0,0)$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} To find the zero-isocline, set the gradient to zero:
+\[ \frac{dy}{dx} = 0 \implies x - y^2 = 0 \implies x = y^2 \]
+This is a sideways parabola opening to the right, with its vertex at the origin. \\
+The solution curves are strictly increasing when their gradient is positive:
+\[ \frac{dy}{dx} > 0 \implies x - y^2 > 0 \implies x > y^2 \]
+Therefore, the curves are increasing in the region ``inside'' the sideways parabola (to the right of the boundary $x=y^2$).
+
+\vspace{0.3cm}
+\textbf{ii} Differentiating $\frac{dy}{dx} = x - y^2$ implicitly with respect to $x$:
+\begin{align*}
+    \frac{d^2y}{dx^2} &= \frac{d}{dx}(x) - \frac{d}{dx}(y^2) \\
+    \frac{d^2y}{dx^2} &= 1 - 2y \frac{dy}{dx} \quad \qed
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{iii} At any stationary point on a solution curve, the gradient is zero ($\frac{dy}{dx} = 0$). \\
+Substituting this into the second derivative from part \textbf{ii}:
+\[ \frac{d^2y}{dx^2} = 1 - 2y(0) = 1 \]
+Because $\frac{d^2y}{dx^2} = 1 > 0$ constantly at all stationary points, the curve is strictly \textbf{concave up} whenever it flattens out. Therefore, any turning point must be a \textbf{local minimum}. $\qed$
+
+\vspace{0.3cm}
+\textbf{iv} Using Euler's method with $h = 0.5$, starting at $(x_0, y_0) = (0,0)$: \\
+\textit{Step 1:}
+\begin{align*}
+    y'_0 &= x_0 - (y_0)^2 = 0 - 0^2 = 0 \\
+    y_1 &= y_0 + h(y'_0) = 0 + 0.5(0) = 0
+\end{align*}
+The new point is $(x_1, y_1) = (0.5, 0)$.
+
+\textit{Step 2:}
+\begin{align*}
+    y'_1 &= x_1 - (y_1)^2 = 0.5 - 0^2 = 0.5 \\
+    y_2 &= y_1 + h(y'_1) = 0 + 0.5(0.5) = 0.25
+\end{align*}
+The new point is $(x_2, y_2) = (1.0, 0.25)$. \\
+Therefore, the estimated value is \textbf{$f(1) \approx 0.25$}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Geometric Power:} Even when integration totally fails us, calculus still provides a roadmap. We found the exact nature of the turning points without ever knowing the curve's equation!
+    \item \textbf{Isoclines vs. Solution Curves:} Don't confuse them. The parabola $x=y^2$ is \textit{not} a solution curve itself; it is simply the invisible ``ridge'' where all the actual solution curves hit their local minimums as they pass through it.
+\end{itemize}
+\end{takeaways}
+
+% Section: The Geometry of Isoclines
+\begin{problem}[The Geometry of Isoclines and Invariant Solutions]
+An \textit{isocline} is a curve along which every solution to a differential equation has the same gradient $c$. That is, it is the contour line defined by $\frac{dy}{dx} = c$. Prove the following statements regarding the geometry of isoclines.
+
+\begin{enumerate}
+    \item[\textbf{i}] Prove that for any differential equation of the form $\frac{dy}{dx} = f(x^2 + y^2)$, the isoclines form a family of concentric circles centered at the origin.
+    \item[\textbf{ii}] Prove that for any differential equation of the form $\frac{dy}{dx} = g\left(\frac{y}{x}\right)$, the isoclines form a family of straight lines passing through the origin (excluding the origin itself).
+    \item[\textbf{iii}] Suppose a straight line $y = mx + b$ is an isocline corresponding to a gradient $c$ for a given differential equation. Prove that this line is \textit{also} a solution curve to the differential equation if and only if $m = c$.
+    \item[\textbf{iv}] Consider the differential equation $\frac{dy}{dx} = \frac{x-y}{x+y}$. Using the results from parts \textbf{ii} and \textbf{iii}, find the exact Cartesian equations of the two straight lines that are both isoclines and solution curves for this differential equation.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i \& ii:} Start by setting $\frac{dy}{dx} = c$. You are looking to show that the resulting equation defines a circle (for part i) or a line through the origin (for part ii). Treat $c$ as a constant, meaning $f^{-1}(c)$ or $g^{-1}(c)$ is just another constant $k$.
+    \item \textbf{For iii:} If a line is a solution curve, its actual derivative $\left(\frac{d}{dx}(mx+b)\right)$ must perfectly match the gradient prescribed by the differential equation ($c$) everywhere on that line.
+    \item \textbf{For iv:} Divide the numerator and the denominator of the DE by $x$ to show it fits the form from part \textbf{ii}. Since its isoclines are $y=mx$, substitute $y=mx$ into the DE to find the gradient $c$ of the slope field along that line. Finally, apply part \textbf{iii} to find the specific values of $m$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Let the isocline correspond to the gradient $c$. Then:
+\[ \frac{dy}{dx} = c \implies f(x^2 + y^2) = c \]
+Let $k$ be a constant such that $f(k) = c$. Then:
+\[ x^2 + y^2 = k \]
+For $k > 0$, this is the standard Cartesian equation for a circle centered at the origin with radius $\sqrt{k}$. Thus, the isoclines form a family of concentric circles. $\qed$
+
+\vspace{0.3cm}
+\textbf{ii} Let the isocline correspond to the gradient $c$. Then:
+\[ \frac{dy}{dx} = c \implies g\left(\frac{y}{x}\right) = c \]
+Let $m$ be a constant such that $g(m) = c$. Then:
+\[ \frac{y}{x} = m \implies y = mx \quad (x \neq 0) \]
+This is the standard equation of a straight line passing through the origin. Thus, the isoclines form a family of radial lines. $\qed$
+
+\vspace{0.3cm}
+\textbf{iii} Let the differential equation be $\frac{dy}{dx} = F(x,y)$. \\
+We are given that $y = mx + b$ is an isocline for gradient $c$. This means $F(x, mx+b) = c$ for all $x$. \\
+For the line $y = mx + b$ to \textit{also} be a solution curve, it must satisfy the differential equation:
+\begin{align*}
+    \frac{d}{dx}(mx + b) &= F(x, mx+b) \\
+    m &= c
+\end{align*}
+Therefore, the line is a solution curve if and only if its physical slope ($m$) equals the gradient prescribed by the DE ($c$). $\qed$
+
+\vspace{0.3cm}
+\textbf{iv} Given $\frac{dy}{dx} = \frac{x-y}{x+y}$. \\
+Divide the numerator and denominator by $x$:
+\[ \frac{dy}{dx} = \frac{1 - \frac{y}{x}}{1 + \frac{y}{x}} \]
+This fits the form $g\left(\frac{y}{x}\right)$ from part \textbf{ii}, so its isoclines are straight lines of the form $y = mx$. \\
+Substitute $y = mx$ into the DE to find the gradient $c$ along this isocline:
+\[ c = \frac{x - mx}{x + mx} = \frac{1 - m}{1 + m} \]
+By part \textbf{iii}, for this isocline to also be a solution curve, its slope $m$ must equal $c$:
+\begin{align*}
+    m &= \frac{1 - m}{1 + m} \\
+    m(1 + m) &= 1 - m \\
+    m^2 + m &= 1 - m \\
+    m^2 + 2m - 1 &= 0
+\end{align*}
+Using the quadratic formula:
+\[ m = \frac{-2 \pm \sqrt{4 - 4(1)(-1)}}{2} = \frac{-2 \pm \sqrt{8}}{2} = \frac{-2 \pm 2\sqrt{2}}{2} = -1 \pm \sqrt{2} \]
+Therefore, the two straight lines that are both isoclines and solution curves are: \\
+\textbf{$y = (-1 + \sqrt{2})x \quad \text{and} \quad y = (-1 - \sqrt{2})x$}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The ``Skeleton'' of a Slope Field:} Recognizing algebraic forms like $f(x^2+y^2)$ or $g(y/x)$ immediately tells you the geometric layout (circles or radial lines) of the slope field without calculating a single vector.
+    \item \textbf{Invariant Lines:} Finding straight-line solutions to complex differential equations is a common high-level technique. It represents the perfect intersection where the geometry of the curve perfectly aligns with the underlying ``current'' of the differential equation.
+\end{itemize}
+\end{takeaways}
+
+% Problem 2.1: Trigonometric Curves and Auxiliary Angles
+\begin{problem}[Trigonometric Curves and Auxiliary Angles]
+A curve $y = f(x)$ passes through the origin $(0,0)$. The gradient function of the curve is given by the differential equation $\frac{dy}{dx} = \sin x - \cos x$.
+
+\begin{enumerate}
+    \item[\textbf{i}] Find the exact coordinates of the stationary point in the interval $0 \le x \le \pi$, and determine its nature.
+    \item[\textbf{ii}] Find the explicit equation of the curve $y = f(x)$.
+    \item[\textbf{iii}] By using the auxiliary angle method, express the equation of the curve in the form $y = C - \sqrt{2}\sin(x + \alpha)$, where $\alpha$ is an acute angle.
+    \item[\textbf{iv}] Hence, or otherwise, find the exact global maximum value of $y$ and the first positive value of $x$ at which it occurs.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} A stationary point occurs where $\frac{dy}{dx} = 0$. Solve $\sin x - \cos x = 0$ by dividing both sides by $\cos x$ to create a $\tan x$ equation. Use the second derivative to test its nature.
+    \item \textbf{For ii:} Integrate the gradient function. Be careful with signs: $\int \sin x \, dx = -\cos x$ and $\int -\cos x \, dx = -\sin x$. Substitute $(0,0)$ to find the constant $C$.
+    \item \textbf{For iii:} Take the $-\cos x - \sin x$ part of your equation and factor out a negative. Then, expand $\sin(x + \alpha) = \sin x \cos \alpha + \cos x \sin \alpha$ to find the matching angle $\alpha$.
+    \item \textbf{For iv:} Look at your equation from part \textbf{iii}. For $y$ to be a maximum, the term being subtracted ($\sqrt{2}\sin(x + \alpha)$) must be at its absolute minimum. What is the minimum value of a sine function?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Stationary points occur when $\frac{dy}{dx} = 0$:
+\begin{align*}
+    \sin x - \cos x &= 0 \\
+    \sin x &= \cos x
+\end{align*}
+Divide by $\cos x$ (assuming $\cos x \neq 0$):
+\[ \tan x = 1 \]
+In the interval $0 \le x \le \pi$, $x = \frac{\pi}{4}$. \\
+To find the $y$-coordinate, we need to integrate first (or we can state the nature first). Let's find the nature:
+\[ \frac{d^2y}{dx^2} = \cos x + \sin x \]
+When $x = \frac{\pi}{4}$:
+\[ \frac{d^2y}{dx^2} = \cos\left(\frac{\pi}{4}\right) + \sin\left(\frac{\pi}{4}\right) = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} = \sqrt{2} \]
+Since $\frac{d^2y}{dx^2} > 0$, the curve has a \textbf{local minimum} at $x = \frac{\pi}{4}$. 
+\textit{(We will find the exact $y$-coordinate in part ii).}
+
+\vspace{0.3cm}
+\textbf{ii} Integrate to find $y$:
+\begin{align*}
+    y &= \int (\sin x - \cos x) \, dx \\
+    y &= -\cos x - \sin x + C
+\end{align*}
+Substitute the initial condition $x=0, y=0$:
+\begin{align*}
+    0 &= -\cos(0) - \sin(0) + C \\
+    0 &= -1 - 0 + C \implies C = 1
+\end{align*}
+Therefore, the equation of the curve is \textbf{$y = 1 - \cos x - \sin x$}. \\
+\textit{(Returning to part i, the coordinates of the minimum are $(\frac{\pi}{4}, 1 - \sqrt{2})$).}
+
+\vspace{0.3cm}
+\textbf{iii} We want to express $y = 1 - (\sin x + \cos x)$ in the form $y = C - \sqrt{2}\sin(x + \alpha)$. \\
+Expand the target form:
+\[ \sqrt{2}\sin(x + \alpha) = \sqrt{2}(\sin x \cos \alpha + \cos x \sin \alpha) \]
+Equating this to $\sin x + \cos x$:
+\begin{align*}
+    \sqrt{2}\cos \alpha &= 1 \implies \cos \alpha = \frac{1}{\sqrt{2}} \\
+    \sqrt{2}\sin \alpha &= 1 \implies \sin \alpha = \frac{1}{\sqrt{2}}
+\end{align*}
+Since both sine and cosine are positive, $\alpha$ is in the first quadrant: $\alpha = \frac{\pi}{4}$. \\
+Therefore, the equation can be written as: \\
+\textbf{$y = 1 - \sqrt{2}\sin\left(x + \frac{\pi}{4}\right)$}
+
+\vspace{0.3cm}
+\textbf{iv} Using the form $y = 1 - \sqrt{2}\sin\left(x + \frac{\pi}{4}\right)$: \\
+The maximum value of $y$ occurs when the sine term is at its minimum, i.e., when $\sin\left(x + \frac{\pi}{4}\right) = -1$. \\
+Maximum value: $y = 1 - \sqrt{2}(-1) = \mathbf{1 + \sqrt{2}}$. \\
+This occurs when:
+\begin{align*}
+    x + \frac{\pi}{4} &= \frac{3\pi}{2} \\
+    x &= \frac{3\pi}{2} - \frac{\pi}{4} = \frac{6\pi}{4} - \frac{\pi}{4} = \mathbf{\frac{5\pi}{4}}
+\end{align*}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Auxiliary Angle:} Whenever a differential equation yields a mix of $\sin x$ and $\cos x$ with the same frequency, combining them into a single trigonometric wave is the best way to determine amplitude, max/min values, and phase shifts.
+    \item \textbf{Sign Traps:} Integrating $\sin x$ to $-\cos x$ and differentiating $\sin x$ to $\cos x$ is a classic source of careless errors. Always double-check your signs!
+\end{itemize}
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 2.2: Separable Equations and Exponentials
+\begin{problem}[Separable Equations and Exponentials]
+Consider the differential equation $\frac{dy}{dx} = (x-1)(y+1)$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By separating the variables, show that the general solution can be written in the form $y = A e^{\frac{x^2}{2} - x} - 1$, where $A$ is an arbitrary constant.
+    \item[\textbf{ii}] Find the particular solution given the curve passes through the point $(1, 2)$. Show that your solution can be written as $y = 3e^{\frac{1}{2}(x-1)^2} - 1$.
+    \item[\textbf{iii}] Find the coordinates of the turning point of this particular solution and determine its nature.
+    \item[\textbf{iv}] For this particular solution, describe the behavior of $y$ as $x \to \infty$ and as $x \to -\infty$. Does the curve have any horizontal asymptotes?
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Move the $(y+1)$ term to the left with $dy$ and leave the $(x-1)$ term on the right with $dx$. Integrate both sides. Remember that $e^{\dots + C} = e^C \cdot e^{\dots} = A \cdot e^{\dots}$.
+    \item \textbf{For ii:} Substitute $x=1$ and $y=2$ into your general solution to solve for $A$. Once you substitute $A$ back in, use index laws to combine the powers of $e$, and complete the square in the exponent.
+    \item \textbf{For iii:} You don't need to differentiate your ugly exponential function! Look back at the original differential equation. A turning point occurs when $\frac{dy}{dx} = 0$.
+    \item \textbf{For iv:} Look at the exponent $\frac{1}{2}(x-1)^2$. Because it is squared, what happens to this value when $x$ becomes a massive positive number OR a massive negative number? 
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given $\frac{dy}{dx} = (x-1)(y+1)$. \\
+Separate the variables:
+\begin{align*}
+    \int \frac{1}{y+1} \, dy &= \int (x-1) \, dx \\
+    \ln|y+1| &= \frac{x^2}{2} - x + C
+\end{align*}
+Convert to exponential form:
+\[ y+1 = e^{\frac{x^2}{2} - x + C} = e^C e^{\frac{x^2}{2} - x} \]
+Let $A = \pm e^C$ (allowing for positive or negative branches):
+\[ \mathbf{y = A e^{\frac{x^2}{2} - x} - 1 \quad \qed} \]
+
+\vspace{0.3cm}
+\textbf{ii} Substitute the point $x=1, y=2$:
+\begin{align*}
+    2 &= A e^{\frac{1^2}{2} - 1} - 1 \\
+    3 &= A e^{-1/2}
+\end{align*}
+Multiply both sides by $e^{1/2}$:
+\[ A = 3e^{1/2} \]
+Substitute $A$ back into the general solution:
+\[ y = 3e^{1/2} e^{\frac{x^2}{2} - x} - 1 \]
+Using index laws to combine the base $e$ terms:
+\[ y = 3e^{\frac{x^2}{2} - x + \frac{1}{2}} - 1 \]
+Factor out the $\frac{1}{2}$ in the exponent:
+\begin{align*}
+    y &= 3e^{\frac{1}{2}(x^2 - 2x + 1)} - 1 \\
+    \mathbf{y} &\mathbf{= 3e^{\frac{1}{2}(x-1)^2} - 1 \quad \qed}
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{iii} A turning point occurs where $\frac{dy}{dx} = 0$. \\
+From the original DE: $(x-1)(y+1) = 0$. \\
+So either $x = 1$ or $y = -1$. \\
+For our particular solution, $y = 3e^{\dots} - 1$, which means $y > -1$ always. Therefore, the turning point must be at $x = 1$. \\
+When $x=1$, we already know $y=2$ (from our initial condition). \\
+To determine its nature, look at the derivative $\frac{dy}{dx} = (x-1)(y+1)$. \\
+Since $y+1$ is always positive for this curve:
+\begin{itemize}
+    \item If $x < 1$, $(x-1)$ is negative, so $\frac{dy}{dx} < 0$.
+    \item If $x > 1$, $(x-1)$ is positive, so $\frac{dy}{dx} > 0$.
+\end{itemize}
+Therefore, the point \textbf{$(1, 2)$ is a local minimum}.
+
+\vspace{0.3cm}
+\textbf{iv} Look at the exponent in $y = 3e^{\frac{1}{2}(x-1)^2} - 1$. \\
+As $x \to \infty$, $(x-1)^2 \to \infty$, so $e^{\frac{1}{2}(x-1)^2} \to \infty$, meaning \textbf{$y \to \infty$}. \\
+As $x \to -\infty$, $(x-1)^2 \to \infty$ (since a negative squared becomes positive), so $e^{\frac{1}{2}(x-1)^2} \to \infty$, meaning \textbf{$y \to \infty$}. \\
+Because the curve shoots off to infinity in both directions, \textbf{it does not have any horizontal asymptotes}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Power of the Original DE:} Notice in part \textbf{iii} how much faster it is to find the stationary point using the un-integrated differential equation rather than trying to use the chain rule on $3e^{\frac{1}{2}(x-1)^2}$.
+    \item \textbf{Completing the Square:} Grouping terms in an exponent to form a perfect square is a fantastic way to instantly determine a function's symmetry and behavior at infinity. 
+\end{itemize}
+\end{takeaways}

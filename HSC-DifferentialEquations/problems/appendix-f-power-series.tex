@@ -1,0 +1,50 @@
+\textit{Note: This section is out of syllabus for NSW HSC Mathematics Extension~1 and Extension~2. It is included for enrichment and to show one way mathematicians handle differential equations that resist standard integration.}
+
+\subsubsection*{The basic idea}
+Sometimes an ordinary differential equation has no simple closed-form solution. One strategy is to assume the solution can be written as a power series and then determine its coefficients.
+
+For a Maclaurin series,
+\[
+y(x)=y(0)+y'(0)x+\frac{y''(0)}{2!}x^2+\frac{y'''(0)}{3!}x^3+\cdots
+\]
+the differential equation itself can be used to compute successive derivatives at $x=0$.
+
+\subsubsection*{Example 1: $\boldsymbol{y'=y,\; y(0)=1}$}
+From the differential equation,
+\[
+y'(0)=y(0)=1.
+\]
+Differentiating again gives $y''=y'$, so $y''(0)=1$, and similarly every higher derivative at $0$ is also $1$.
+
+Therefore,
+\[
+y(x)=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots=e^x.
+\]
+
+\subsubsection*{Example 2: $\boldsymbol{y'=x+y,\; y(0)=1}$}
+We have
+\[
+y'(0)=0+y(0)=1.
+\]
+Differentiate the equation:
+\[
+y''=1+y',
+\]
+so
+\[
+y''(0)=2.
+\]
+Differentiate again:
+\[
+y'''=y'',
+\]
+so $y'''(0)=2$, and the same pattern continues.
+
+This gives the beginning of the series
+\[
+y(x)=1+x+x^2+\frac{x^3}{3}+\frac{x^4}{12}+\cdots
+\]
+which matches the exact solution obtained by more advanced methods.
+
+\subsubsection*{Takeaway}
+Power-series methods turn a differential equation into a coefficient-finding problem. They are one of the main tools used when exact antiderivatives are not enough.

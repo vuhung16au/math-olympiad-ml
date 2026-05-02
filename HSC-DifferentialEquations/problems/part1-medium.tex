@@ -1,13 +1,1194 @@
-\subsubsection*{Problems}
-\begin{itemize}[leftmargin=*]
-  \item Placeholder: Medium Problem 1
-  \item Placeholder: Medium Problem 2
-  \item Placeholder: Medium Problem 3
-\end{itemize}
+% Medium problems
 
-\subsubsection*{Solutions}
-\begin{itemize}[leftmargin=*]
-  \item Placeholder: Medium Solution 1
-  \item Placeholder: Medium Solution 2
-  \item Placeholder: Medium Solution 3
+% Section: Transformations and Orthogonal Trajectories
+\begin{problem}[Transformations and Orthogonal Trajectories]
+A family of curves can be represented by a single differential equation independent of its defining parameter. Furthermore, geometric transformations on the curves correspond to precise algebraic transformations on their differential equations.
+
+\begin{enumerate}
+    \item[\textbf{i}] By differentiating implicitly, show that the family of rectangular hyperbolas $x^2 - y^2 = C$ (where $C$ is an arbitrary constant) satisfies the differential equation $\frac{dy}{dx} = \frac{x}{y}$.
+    \item[\textbf{ii}] \textit{Orthogonal trajectories} are a second family of curves that intersect the original family at right angles. Because their gradients are the negative reciprocals of the original curves, their differential equation is found by replacing $\frac{dy}{dx}$ with $-\frac{dx}{dy}$. \\
+    Find the differential equation for the orthogonal trajectories of $x^2 - y^2 = C$, and solve it to find their Cartesian equations. Describe this new family of curves.
+    \item[\textbf{iii}] Suppose the original family $x^2 - y^2 = C$ is translated $h$ units to the right and $k$ units up. Write down the Cartesian equation of the translated family and show that it satisfies the differential equation $\frac{dy}{dx} = \frac{x-h}{y-k}$.
+    \item[\textbf{iv}] Instead of a translation, suppose a curve satisfying the general DE $\frac{dy}{dx} = f(x, y)$ is dilated horizontally by a factor of $\alpha$ and vertically by a factor of $\beta$ (i.e., replacing $x$ with $\frac{x}{\alpha}$ and $y$ with $\frac{y}{\beta}$ in its Cartesian equation). Prove that the differential equation of this new dilated curve is $\frac{dy}{dx} = \frac{\beta}{\alpha} f\left(\frac{x}{\alpha}, \frac{y}{\beta}\right)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Differentiate both sides of $x^2 - y^2 = C$ with respect to $x$. Remember that the derivative of an arbitrary constant $C$ is $0$, which is how the parameter disappears.
+    \item \textbf{For ii:} The gradient of the original family is $m_1 = \frac{x}{y}$. The gradient of the orthogonal family must be $m_2 = -\frac{y}{x}$. Set $\frac{dy}{dx} = -\frac{y}{x}$ and solve this new separable differential equation.
+    \item \textbf{For iii:} Apply the standard translation transformations to $x$ and $y$ in the Cartesian equation first (replace $x$ with $(x-h)$, etc.), then differentiate implicitly just like in part \textbf{i}.
+    \item \textbf{For iv:} Let the coordinates of the new dilated curve be $X$ and $Y$, where $X = \alpha x$ and $Y = \beta y$. Use differentials to find $\frac{dY}{dX}$. Substitute $\frac{dy}{dx} = f(x,y)$ and then replace the old $x$ and $y$ variables with their $X$ and $Y$ equivalents.
 \end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given the family of curves $x^2 - y^2 = C$. \\
+Differentiating implicitly with respect to $x$:
+\begin{align*}
+    \frac{d}{dx}(x^2) - \frac{d}{dx}(y^2) &= \frac{d}{dx}(C) \\
+    2x - 2y \frac{dy}{dx} &= 0 \\
+    2y \frac{dy}{dx} &= 2x \implies \frac{dy}{dx} = \frac{x}{y} \quad \qed
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{ii} The differential equation for the original family is $\frac{dy}{dx} = \frac{x}{y}$. \\
+For the orthogonal trajectories, the gradient is the negative reciprocal:
+\[ \frac{dy}{dx} = -\frac{y}{x} \]
+This is a separable differential equation. Rearranging:
+\begin{align*}
+    \int \frac{1}{y} \, dy &= \int -\frac{1}{x} \, dx \\
+    \ln|y| &= -\ln|x| + C_1 \\
+    \ln|y| + \ln|x| &= C_1 \implies \ln|xy| = C_1 \\
+    xy &= \pm e^{C_1}
+\end{align*}
+Let $A = \pm e^{C_1}$, which is just another arbitrary constant. \\
+\textbf{Solution:} $xy = A$. \\
+\textbf{Description:} This new family of curves is also a set of rectangular hyperbolas, but they are rotated by $45^\circ$ so that the $x$ and $y$ axes act as their asymptotes.
+
+\vspace{0.3cm}
+\textbf{iii} Translating $x^2 - y^2 = C$ by $h$ right and $k$ up gives: \\
+\textbf{Cartesian equation:} $(x-h)^2 - (y-k)^2 = C$ \\
+Differentiating implicitly with respect to $x$:
+\begin{align*}
+    2(x-h)\cdot 1 - 2(y-k) \frac{dy}{dx} &= 0 \\
+    2(y-k) \frac{dy}{dx} &= 2(x-h) \\
+    \frac{dy}{dx} &= \frac{x-h}{y-k} \quad \qed
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{iv} Let a point on the original curve be $(x, y)$, satisfying $\frac{dy}{dx} = f(x,y)$. \\
+Let a point on the dilated curve be $(X, Y)$. \\
+The dilation maps $X = \alpha x$ and $Y = \beta y$. \\
+Therefore, $x = \frac{X}{\alpha}$ and $y = \frac{Y}{\beta}$. \\
+We want to find the gradient of the new curve, $\frac{dY}{dX}$. \\
+Using differentials:
+\begin{align*}
+    dY &= d(\beta y) = \beta \, dy \\
+    dX &= d(\alpha x) = \alpha \, dx
+\end{align*}
+Therefore:
+\[ \frac{dY}{dX} = \frac{\beta \, dy}{\alpha \, dx} = \frac{\beta}{\alpha} \left(\frac{dy}{dx}\right) \]
+Since the original curve satisfies $\frac{dy}{dx} = f(x,y)$, we substitute this in:
+\[ \frac{dY}{dX} = \frac{\beta}{\alpha} f(x, y) \]
+Finally, write the equation purely in terms of the new variables $X$ and $Y$:
+\[ \frac{dY}{dX} = \frac{\beta}{\alpha} f\left(\frac{X}{\alpha}, \frac{Y}{\beta}\right) \]
+Replacing the dummy variables $X$ and $Y$ back with $x$ and $y$ yields the required result:
+\[ \frac{dy}{dx} = \frac{\beta}{\alpha} f\left(\frac{x}{\alpha}, \frac{y}{\beta}\right) \quad \qed \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Orthogonal Trajectories:} This is a powerful application of DEs. If you know the ``flow lines'' of an electric field ($x^2-y^2=C$), the orthogonal trajectories ($xy=A$) perfectly map the equipotential lines where voltage is constant!
+    \item \textbf{The Geometry of Calculus:} Part \textbf{iv} proves a beautiful, generalized rule. If you stretch a graph vertically by $3$, all its slopes get $3$ times steeper (the $\frac{\beta}{\alpha}$ multiplier), but those slopes now occur at stretched coordinates (the $\frac{x}{\alpha}, \frac{y}{\beta}$ inputs). 
+\end{itemize}
+\end{takeaways}
+
+% Section: Separable Equations, Conics, and Domains
+\begin{problem}[Separable Equations, Conics, and Domains]
+Consider the differential equation $\frac{dy}{dx} = \frac{4 - 2x}{y + 3}$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By separating the variables, integrate to find the general solution in implicit form.
+    \item[\textbf{ii}] By completing the square, show that the general solution represents a family of ellipses, and state the coordinates of their common centre.
+    \item[\textbf{iii}] Find the explicit particular solution, $y = f(x)$, that satisfies the initial condition $y(2) = 1$.
+    \item[\textbf{iv}] State the maximal domain of the particular solution found in part \textbf{iii}, and explain geometrically why the domain is restricted.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Multiply both sides by $(y + 3)$ and $dx$ to group the $y$'s on the left and the $x$'s on the right. Integrate both sides using the standard power rule.
+    \item \textbf{For ii:} Move the $x^2$ and $x$ terms to the same side as the $y$ terms. Factor out any coefficients in front of $x^2$, and use the ``completing the square'' method ($x^2 + bx + (\frac{b}{2})^2$). Remember to balance the equation by adding the equivalent value to the constant $C$ on the right-hand side.
+    \item \textbf{For iii:} Substitute $x = 2$ and $y = 1$ into your implicit equation from part \textbf{ii} to find the exact value of your constant. Then, rearrange the equation to make $y$ the subject. You will get a $\pm$ square root; test the initial condition $(2,1)$ again to determine whether to keep the positive or negative branch.
+    \item \textbf{For iv:} For a real-valued function, the expression inside a square root must be non-negative ($\ge 0$). Solve this inequality for $x$. Geometrically, think about the shape of an ellipse and vertical tangent lines.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given $\frac{dy}{dx} = \frac{4 - 2x}{y + 3}$. \\
+Separate the variables:
+\[ (y + 3) \, dy = (4 - 2x) \, dx \]
+Integrate both sides:
+\begin{align*}
+    \int (y + 3) \, dy &= \int (4 - 2x) \, dx \\
+    \frac{1}{2}(y + 3)^2 &= 4x - x^2 + C_1
+\end{align*}
+Multiply by $2$ to clear the fraction (let $C_2 = 2C_1$):
+\[ (y + 3)^2 = 8x - 2x^2 + C_2 \]
+
+\vspace{0.3cm}
+\textbf{ii} Rearrange to group the variables on the left side:
+\[ 2x^2 - 8x + (y + 3)^2 = C_2 \]
+Factor out the $2$ from the $x$ terms to prepare for completing the square:
+\[ 2(x^2 - 4x) + (y + 3)^2 = C_2 \]
+Complete the square inside the bracket by adding $(\frac{-4}{2})^2 = 4$. Since this $4$ is multiplied by the $2$ outside the bracket, we must add $8$ to the right side to maintain balance:
+\begin{align*}
+    2(x^2 - 4x + 4) + (y + 3)^2 &= C_2 + 8 \\
+    2(x - 2)^2 + (y + 3)^2 &= K \quad (\text{where } K = C_2 + 8)
+\end{align*}
+Dividing by $K$ gives the standard form $\frac{(x-2)^2}{K/2} + \frac{(y+3)^2}{K} = 1$, which represents a family of \textbf{ellipses} with a common centre at \textbf{$(2, -3)$}.
+
+\vspace{0.3cm}
+\textbf{iii} We are given the initial condition $y=1$ when $x=2$. \\
+Substitute into the general implicit equation to find $K$:
+\begin{align*}
+    2(2 - 2)^2 + (1 + 3)^2 &= K \\
+    2(0)^2 + (4)^2 &= K \implies K = 16
+\end{align*}
+The implicit particular solution is $2(x - 2)^2 + (y + 3)^2 = 16$. \\
+Now, solve explicitly for $y$:
+\begin{align*}
+    (y + 3)^2 &= 16 - 2(x - 2)^2 \\
+    y + 3 &= \pm\sqrt{16 - 2(x - 2)^2} \\
+    y &= -3 \pm\sqrt{16 - 2(x - 2)^2}
+\end{align*}
+We must choose the correct branch. Since $y(2) = 1$: \\
+$y(2) = -3 \pm \sqrt{16 - 0} = -3 \pm 4$. \\
+To get $+1$, we must take the positive root. \\
+Therefore, the explicit particular solution is: \\
+\textbf{$y = -3 + \sqrt{16 - 2(x - 2)^2}$}
+
+\vspace{0.3cm}
+\textbf{iv} For the function to be defined over the real numbers, the expression under the square root must be non-negative:
+\begin{align*}
+    16 - 2(x - 2)^2 &\ge 0 \\
+    2(x - 2)^2 &\le 16 \\
+    (x - 2)^2 &\le 8 \\
+    -\sqrt{8} &\le x - 2 \le \sqrt{8} \\
+    2 - 2\sqrt{2} &\le x \le 2 + 2\sqrt{2}
+\end{align*}
+Therefore, the maximal domain is \textbf{$[2 - 2\sqrt{2}, 2 + 2\sqrt{2}]$}. \\
+\textit{Geometric explanation:} The integral curve is an ellipse. An explicit function $y=f(x)$ must pass the vertical line test. The positive square root represents only the ``top half'' of the ellipse. The domain is restricted because the curve ceases to exist beyond its left and right vertices, where the ellipse has vertical tangents.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Power of Implicit Curves:} First-order differential equations of the form $\frac{dy}{dx} = \frac{ax+b}{cy+d}$ almost always map to conic sections (circles, ellipses, hyperbolas, or parabolas).
+    \item \textbf{Functions vs. Relations:} A differential equation describes the \textit{entire} geometric shape (the relation). However, when you solve an Initial Value Problem to find $y=f(x)$, you are often carving out a single, valid \textit{functional branch} (like the top half of an ellipse) that obeys the vertical line test.
+\end{itemize}
+\end{takeaways}
+
+% Section: Singular Points and Self-Intersecting Curves
+\begin{problem}[Singular Points and Self-Intersecting Curves]
+Normally, a solution curve to a first-order differential equation cannot cross itself. If it did, it would have two different gradients at the intersection point, contradicting the nature of a function. However, this rule breaks down at a \textbf{singular point}, where the gradient expression becomes undefined in the form $\frac{0}{0}$. 
+
+Consider the curve defined by the equation $y^2 = x^2 - x^4$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By differentiating implicitly, show that the differential equation for this curve is $\frac{dy}{dx} = \frac{x(1 - 2x^2)}{y}$.
+    \item[\textbf{ii}] Find the coordinates of all points where the curve has a horizontal tangent, and all points where it has a vertical tangent. (Exclude the origin for now).
+    \item[\textbf{iii}] The origin $(0,0)$ is a singular point. Substitute $y=mx$ into the original Cartesian equation and analyze the behavior as $x \to 0$ to find the two exact gradients at which the curve crosses itself at the origin.
+    \item[\textbf{iv}] The curve can be parameterized by $x = \sin(t)$. Find the corresponding parametric equation for $y$ in terms of $t$. Hence, verify your two gradients from part \textbf{iii} by calculating $\frac{dy}{dt} \div \frac{dx}{dt}$ at the two different $t$-values that map to the origin.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Remember the chain rule for $y^2$. Differentiate both sides with respect to $x$.
+    \item \textbf{For ii:} Horizontal tangents occur where the numerator of the gradient is $0$ (and the denominator is not). Vertical tangents occur where the denominator is $0$ (and the numerator is not). Once you find the $x$-values, substitute them back into the \textit{original equation} to find the $y$-values!
+    \item \textbf{For iii:} If you substitute $y=mx$ into $y^2 = x^2 - x^4$, you are essentially finding the intersection of the curve with a straight line through the origin. Divide by $x^2$ and see what happens to $m^2$ as $x$ approaches $0$.
+    \item \textbf{For iv:} If $x = \sin(t)$, substitute this into $x^2 - x^4$. Factor it out and use a trigonometric identity to find a simple expression for $y^2$. Be careful with signs when taking the square root. What values of $t$ (in the interval $[-\pi, \pi]$) give $x=0$? 
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given $y^2 = x^2 - x^4$. \\
+Differentiating both sides implicitly with respect to $x$:
+\begin{align*}
+    2y \frac{dy}{dx} &= 2x - 4x^3 \\
+    \frac{dy}{dx} &= \frac{2x - 4x^3}{2y} = \frac{x(1 - 2x^2)}{y} \quad \qed
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{ii} \textbf{Horizontal Tangents ($\frac{dy}{dx} = 0$):} \\
+The numerator must be $0$: $x(1 - 2x^2) = 0$. \\
+Since we are excluding the origin ($x=0$), we have $1 - 2x^2 = 0 \implies x^2 = \frac{1}{2} \implies x = \pm \frac{1}{\sqrt{2}}$. \\
+Substitute these $x$-values back into the original equation:
+\[ y^2 = \left(\frac{1}{\sqrt{2}}\right)^2 - \left(\frac{1}{\sqrt{2}}\right)^4 = \frac{1}{2} - \frac{1}{4} = \frac{1}{4} \implies y = \pm \frac{1}{2} \]
+This gives four points with horizontal tangents: \textbf{$\left(\frac{1}{\sqrt{2}}, \frac{1}{2}\right), \left(\frac{1}{\sqrt{2}}, -\frac{1}{2}\right), \left(-\frac{1}{\sqrt{2}}, \frac{1}{2}\right), \left(-\frac{1}{\sqrt{2}}, -\frac{1}{2}\right)$}.
+
+\textbf{Vertical Tangents ($\frac{dx}{dy} = 0$):} \\
+The denominator must be $0$: $y = 0$. \\
+Substitute $y = 0$ into the original equation:
+\[ 0 = x^2 - x^4 = x^2(1 - x^2) \]
+Excluding $x=0$, we have $1 - x^2 = 0 \implies x = \pm 1$. \\
+This gives two points with vertical tangents: \textbf{$(1, 0)$ and $(-1, 0)$}.
+
+\vspace{0.3cm}
+\textbf{iii} To find the crossing gradients at the origin, substitute the line $y = mx$ into $y^2 = x^2 - x^4$:
+\begin{align*}
+    (mx)^2 &= x^2 - x^4 \\
+    m^2x^2 &= x^2(1 - x^2)
+\end{align*}
+For $x \neq 0$, we can divide by $x^2$:
+\[ m^2 = 1 - x^2 \]
+As we approach the origin ($x \to 0$), the gradients of the intersecting lines approach the gradients of the tangents:
+\begin{align*}
+    m^2 &= \lim_{x \to 0} (1 - x^2) = 1 \\
+    m &= \pm 1
+\end{align*}
+Therefore, the curve crosses itself at the origin with gradients of \textbf{$1$ and $-1$}.
+
+\vspace{0.3cm}
+\textbf{iv} Given $x = \sin(t)$. \\
+Substitute into the RHS of the original equation:
+\[ x^2 - x^4 = \sin^2(t) - \sin^4(t) = \sin^2(t)[1 - \sin^2(t)] = \sin^2(t)\cos^2(t) \]
+Therefore, $y^2 = (\sin(t)\cos(t))^2$, so we can parameterize $y$ as \textbf{$y = \sin(t)\cos(t)$}. \\
+\textit{(Note: Using the double angle formula, this is $y = \frac{1}{2}\sin(2t)$).}
+
+To find the gradients using parameters:
+\begin{align*}
+    \frac{dx}{dt} &= \cos(t) \\
+    \frac{dy}{dt} &= \cos(2t) \\
+    \frac{dy}{dx} &= \frac{\frac{dy}{dt}}{\frac{dx}{dt}} = \frac{\cos(2t)}{\cos(t)}
+\end{align*}
+
+The curve passes through the origin ($x=0, y=0$) when $\sin(t) = 0$. \\
+In the domain $[-\pi, \pi]$, this occurs at $t = 0, t = \pi,$ and $t = -\pi$. \\
+Let's check the gradients at the two main ``passes'' through the origin:
+\begin{itemize}
+    \item At $t = 0$: $\frac{dy}{dx} = \frac{\cos(0)}{\cos(0)} = \frac{1}{1} = \mathbf{1}$.
+    \item At $t = \pi$: $\frac{dy}{dx} = \frac{\cos(2\pi)}{\cos(\pi)} = \frac{1}{-1} = \mathbf{-1}$.
+\end{itemize}
+This perfectly verifies the gradients found algebraically in part \textbf{iii}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Anatomy of $\frac{0}{0}$:} When both the numerator and denominator of a differential equation are zero, it doesn't mean the curve stops existing. It means the geometry is complex—usually a self-intersection, a cusp, or an isolated point.
+    \item \textbf{Parametrization as a Loophole:} Implicit equations are notoriously difficult to analyze at singular points because $y$ is not a true function of $x$ (it fails the vertical line test). Parametric equations solve this by making $x$ and $y$ functions of time ($t$), allowing the ``particle'' tracing the curve to peacefully pass through the origin twice at different times!
+\end{itemize}
+\end{takeaways}
+
+% Section: Homogeneous Differential Equations and Domain Boundaries
+\begin{problem}[Homogeneous Differential Equations and Domain Boundaries]
+Consider the non-linear differential equation $x \frac{dy}{dx} = y + \sqrt{x^2 - y^2}$ defined for $x > 0$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By using the substitution $y = ux$, where $u$ is an unknown function of $x$, show that the differential equation transforms into the separable equation $x \frac{du}{dx} = \sqrt{1 - u^2}$.
+    \item[\textbf{ii}] Solve this separable differential equation to find the general solution for $y$ in implicit form.
+    \item[\textbf{iii}] Find the explicit particular solution $y = f(x)$ given the initial condition $y(1) = 0$.
+    \item[\textbf{iv}] Determine the maximal domain of the particular solution found in part \textbf{iii}. Explain geometrically what happens to the solution curve at the endpoints of this domain.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Use the product rule on $y=ux$ to find $\frac{dy}{dx}$. Substitute both $y$ and $\frac{dy}{dx}$ into the original equation. Factor $x^2$ out of the square root, noting that since $x>0$, $\sqrt{x^2} = x$.
+    \item \textbf{For ii:} Rearrange the equation to group all $u$ terms with $du$ and all $x$ terms with $dx$. You will need to recall the standard integral $\int \frac{1}{\sqrt{a^2-x^2}} \, dx$.
+    \item \textbf{For iii:} Substitute $x=1$ and $y=0$ into your implicit equation to find the constant of integration, then rearrange to make $y$ the subject.
+    \item \textbf{For iv:} Look closely at your integration step involving the inverse trigonometric function. What is the range of $\arcsin(\theta)$? Apply this inequality to the right-hand side of your equation to find the permissible values of $x$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Let $y = ux$. \\
+Differentiating with respect to $x$ using the product rule:
+\[ \frac{dy}{dx} = u \cdot (1) + x \cdot \frac{du}{dx} = u + x\frac{du}{dx} \]
+
+Substitute $y$ and $\frac{dy}{dx}$ into the original differential equation:
+\begin{align*}
+    x \left( u + x\frac{du}{dx} \right) &= ux + \sqrt{x^2 - (ux)^2} \\
+    xu + x^2\frac{du}{dx} &= ux + \sqrt{x^2(1 - u^2)}
+\end{align*}
+
+Since $x > 0$, we can simplify $\sqrt{x^2}$ to exactly $x$:
+\[ xu + x^2\frac{du}{dx} = xu + x\sqrt{1 - u^2} \]
+
+Subtract $xu$ from both sides:
+\[ x^2\frac{du}{dx} = x\sqrt{1 - u^2} \]
+
+Divide by $x$ (since $x > 0$, $x \neq 0$):
+\[ x\frac{du}{dx} = \sqrt{1 - u^2} \quad \qed \]
+
+\vspace{0.3cm}
+\textbf{ii} Separate the variables $u$ and $x$:
+\[ \frac{1}{\sqrt{1 - u^2}} \, du = \frac{1}{x} \, dx \]
+
+Integrate both sides:
+\begin{align*}
+    \int \frac{1}{\sqrt{1 - u^2}} \, du &= \int \frac{1}{x} \, dx \\
+    \arcsin(u) &= \ln(x) + C \quad \textit{(Note: absolute value on $x$ is not needed as $x > 0$)}
+\end{align*}
+
+Substitute $u = \frac{y}{x}$ back into the equation:
+\[ \mathbf{\arcsin\left(\frac{y}{x}\right) = \ln(x) + C} \]
+
+\vspace{0.3cm}
+\textbf{iii} Apply the initial condition $y(1) = 0$:
+\begin{align*}
+    \arcsin\left(\frac{0}{1}\right) &= \ln(1) + C \\
+    0 &= 0 + C \implies C = 0
+\end{align*}
+
+The implicit equation is $\arcsin\left(\frac{y}{x}\right) = \ln(x)$. \\
+Taking the sine of both sides to make $y$ the subject:
+\begin{align*}
+    \frac{y}{x} &= \sin(\ln x) \\
+    \mathbf{y} &\mathbf{= x \sin(\ln x)}
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{iv} From the integration step, we have the relation $\arcsin\left(\frac{y}{x}\right) = \ln(x)$. \\
+The principal range of the arcsine function is $\left[ -\frac{\pi}{2}, \frac{\pi}{2} \right]$. Therefore, the right-hand side must satisfy this restriction for the equation to hold:
+\[ -\frac{\pi}{2} \le \ln(x) \le \frac{\pi}{2} \]
+
+Exponentiating all parts of the inequality (base $e$):
+\[ e^{-\pi/2} \le x \le e^{\pi/2} \]
+The maximal domain is \textbf{$[e^{-\pi/2}, e^{\pi/2}]$}.
+
+\textit{Geometric Explanation:} The original differential equation contains the term $\sqrt{x^2 - y^2}$, which requires $x^2 \ge y^2$, meaning the solution must be trapped in the region between the lines $y = x$ and $y = -x$. At the endpoints of the domain ($x = e^{\pm\pi/2}$), $\ln(x) = \pm\frac{\pi}{2}$, causing $\sin(\ln x) = \pm 1$. This means $\frac{y}{x} = \pm 1 \implies y = \pm x$. The solution curve terminates precisely because it collides with these boundary lines, where it becomes tangent to them.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Homogeneous Equations:} Differential equations where every term can be written as a function of $(y/x)$ are called \textit{homogeneous} first-order DEs. The substitution $y = ux$ is the universal key to transforming them into simple separable equations.
+    \item \textbf{Hidden Domain Restrictions:} Algebraic manipulation can sometimes hide restrictions. Even though the final function $y = x \sin(\ln x)$ seems like it should be valid for all $x > 0$, the integration step involving $\arcsin(u)$ acts as a mathematical ``funnel,'' enforcing a strict boundary on the domain.
+\end{itemize}
+\end{takeaways}
+
+% Section: Inverse Trigonometric Identities and Restricted Domains
+\begin{problem}[Inverse Trigonometric Identities and Restricted Domains]
+Consider the differential equation $\sqrt{1-x^2} \frac{dy}{dx} + \sqrt{1-y^2} = 0$.
+Suppose that $y = f(x)$ is a solution curve passing through the point $\left(\frac{1}{2}, \frac{\sqrt{3}}{2}\right)$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By separating the variables, integrate to find the general solution in the form $\arcsin y + \arcsin x = C$.
+    \item[\textbf{ii}] By taking the sine of both sides of your general solution, and using the compound angle expansion for $\sin(A+B)$, show that the general solution is algebraically equivalent to $y\sqrt{1-x^2} + x\sqrt{1-y^2} = k$, where $k$ is a constant.
+    \item[\textbf{iii}] Find the explicit values of $C$ and $k$ for the given initial condition to establish the particular solution.
+    \item[\textbf{iv}] By rearranging your inverse trigonometric equation from part \textbf{i}, make $y$ the explicit subject of the equation. State the maximal valid domain for $x$ and describe the geometric shape of this specific solution curve.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Move the $x$ and $y$ terms to opposite sides of the equation. Recall the standard integral $\int \frac{1}{\sqrt{1-x^2}} \, dx = \arcsin x$.
+    \item \textbf{For ii:} Let $A = \arcsin y$ and $B = \arcsin x$. This means $\sin A = y$ and $\sin B = x$. To use the expansion $\sin(A+B) = \sin A \cos B + \cos A \sin B$, you will need to find expressions for $\cos A$ and $\cos B$ by drawing right-angled triangles or using the identity $\sin^2\theta + \cos^2\theta = 1$.
+    \item \textbf{For iii:} Substitute $x = \frac{1}{2}$ and $y = \frac{\sqrt{3}}{2}$ into your equations. Note that $\arcsin\left(\frac{1}{2}\right) = \frac{\pi}{6}$ and $\arcsin\left(\frac{\sqrt{3}}{2}\right) = \frac{\pi}{3}$.
+    \item \textbf{For iv:} Make $\arcsin y$ the subject, then take the sine of both sides. You will need to use the complementary angle property $\sin\left(\frac{\pi}{2} - \theta\right) = \cos\theta$. Critically, think about the range of $\arcsin y \in [-\frac{\pi}{2}, \frac{\pi}{2}]$ to determine the valid domain for $x$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given $\sqrt{1-x^2} \frac{dy}{dx} + \sqrt{1-y^2} = 0$. \\
+Separate the variables:
+\[ \frac{dy}{dx} = -\frac{\sqrt{1-y^2}}{\sqrt{1-x^2}} \]
+\[ \int \frac{1}{\sqrt{1-y^2}} \, dy = -\int \frac{1}{\sqrt{1-x^2}} \, dx \]
+Evaluating the integrals yields:
+\begin{align*}
+    \arcsin y &= -\arcsin x + C \\
+    \arcsin y + \arcsin x &= C \quad \qed
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{ii} Take the sine of both sides of the general solution:
+\[ \sin(\arcsin y + \arcsin x) = \sin C \]
+Let $k = \sin C$. Apply the compound angle formula $\sin(A+B) = \sin A \cos B + \cos A \sin B$:
+\[ \sin(\arcsin y)\cos(\arcsin x) + \cos(\arcsin y)\sin(\arcsin x) = k \]
+We know that $\sin(\arcsin y) = y$ and $\sin(\arcsin x) = x$. \\
+To find $\cos(\arcsin x)$, let $\theta = \arcsin x$. Then $\sin\theta = x$. \\
+Since the range of arcsin is $[-\frac{\pi}{2}, \frac{\pi}{2}]$, $\cos\theta \ge 0$, so $\cos\theta = \sqrt{1 - \sin^2\theta} = \sqrt{1-x^2}$. \\
+Similarly, $\cos(\arcsin y) = \sqrt{1-y^2}$. \\
+Substituting these back into the expansion gives:
+\[ y\sqrt{1-x^2} + x\sqrt{1-y^2} = k \quad \qed \]
+
+\vspace{0.3cm}
+\textbf{iii} Apply the initial condition $y = \frac{\sqrt{3}}{2}$ when $x = \frac{1}{2}$ to the equation from part \textbf{i}:
+\begin{align*}
+    C &= \arcsin\left(\frac{\sqrt{3}}{2}\right) + \arcsin\left(\frac{1}{2}\right) \\
+    C &= \frac{\pi}{3} + \frac{\pi}{6} = \frac{\pi}{2}
+\end{align*}
+Therefore, $k = \sin\left(\frac{\pi}{2}\right) = 1$. \\
+The particular solution is $y\sqrt{1-x^2} + x\sqrt{1-y^2} = 1$.
+
+\vspace{0.3cm}
+\textbf{iv} Start with the particular solution from part \textbf{i}:
+\begin{align*}
+    \arcsin y + \arcsin x &= \frac{\pi}{2} \\
+    \arcsin y &= \frac{\pi}{2} - \arcsin x
+\end{align*}
+Take the sine of both sides to make $y$ the explicit subject:
+\[ y = \sin\left(\frac{\pi}{2} - \arcsin x\right) \]
+Using the complementary angle identity $\sin(\frac{\pi}{2} - \theta) = \cos\theta$:
+\[ y = \cos(\arcsin x) \]
+Using the result proven in part \textbf{ii}, $\cos(\arcsin x) = \sqrt{1-x^2}$. \\
+Therefore, \textbf{$y = \sqrt{1-x^2}$}.
+
+\vspace{0.2cm}
+\textbf{Domain Restriction:} \\
+The principal range of $\arcsin y$ is strictly $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$. \\
+Therefore, we must have $-\frac{\pi}{2} \le \frac{\pi}{2} - \arcsin x \le \frac{\pi}{2}$. \\
+Solving this inequality for $\arcsin x$:
+\[ -\pi \le -\arcsin x \le 0 \implies 0 \le \arcsin x \le \pi \]
+However, the maximal output of $\arcsin x$ itself is $\frac{\pi}{2}$. Thus, the overlapping valid range is $0 \le \arcsin x \le \frac{\pi}{2}$, which means \textbf{$0 \le x \le 1$}.
+
+\textit{Geometric Description:} Although $y = \sqrt{1-x^2}$ generally represents the upper half of a unit circle, the domain restriction forces $x \in [0, 1]$. Therefore, the true solution curve is specifically the \textbf{quarter of the unit circle located in the first quadrant}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Trigonometry in Calculus:} Differential equations are rarely purely algebraic. Memorizing how to simplify expressions like $\cos(\arcsin x)$ using right-angled triangles or Pythagorean identities is essential for Extension 2.
+    \item \textbf{The Danger of Algebraic Forms:} Notice how the explicit answer $y = \sqrt{1-x^2}$ looks like it should be valid for $-1 \le x \le 1$. However, tracking the inverse trigonometric functions reveals a hidden domain restriction ($0 \le x \le 1$). Always check the range of the original functions before simplifying!
+\end{itemize}
+\end{takeaways}
+
+% Section: Picard Iterations and Series Convergence
+\begin{problem}[Picard Iterations and Series Convergence]
+The existence and uniqueness of solutions to first-order differential equations $y' = f(x,y)$ can be proven constructively using Picard iterations. The sequence of approximation functions is defined by:
+\[ y_{n+1}(x) = y_0 + \int_{x_0}^x f(t, y_n(t)) \, dt \]
+where $y(x_0) = y_0$ is the initial condition, and $y_0(x) = y_0$ is the constant initial guess.
+
+Consider the non-separable linear differential equation $y' = x + y$ with the initial condition $y(0) = 1$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By rearranging the equation and using the method of integrating factors, find the exact analytical solution $y(x)$ to this Initial Value Problem.
+    \item[\textbf{ii}] Compute the first four Picard iterates: $y_1(x)$, $y_2(x)$, $y_3(x)$, and $y_4(x)$.
+    \item[\textbf{iii}] Write down the Maclaurin series expansion for your exact solution from part \textbf{i} up to the term involving $x^4$. Compare this expansion term-by-term with $y_4(x)$. What do you observe about the behaviour of the Picard sequence as $n$ increases?
+    \item[\textbf{iv}] The exact solution evaluated at $x=1$ allows us to express Euler's number $e$ in terms of $y(1)$. Rearrange your exact solution to make $e$ the subject. Then, use $y_4(1)$ as an approximation for $y(1)$ to estimate the value of $e$. Without using a calculator, explain whether your approximation is an over-estimate or an under-estimate.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Rearrange to $\frac{dy}{dx} - y = x$. The integrating factor is $e^{\int -1 dx} = e^{-x}$. Multiply both sides, use the reverse product rule on the left, and use integration by parts for the right-hand side ($\int xe^{-x} dx$).
+    \item \textbf{For ii:} For this DE, $f(t, y) = t + y$. Start with $y_0(x) = 1$. Then $y_1(x) = 1 + \int_0^x (t + 1) \, dt$. To find $y_2(x)$, substitute your result for $y_1(t)$ back into the integral: $y_2(x) = 1 + \int_0^x (t + y_1(t)) \, dt$.
+    \item \textbf{For iii:} Use the standard series $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots$ and substitute it into your exact solution $y(x)$. Expand and group the like terms.
+    \item \textbf{For iv:} Calculate $y(1)$ using your exact formula and solve for $e$. Then plug $x=1$ into your $y_4(x)$ polynomial. Compare the terms of your polynomial to the infinite Maclaurin series to deduce if pieces are missing.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Using integrating factor $e^{-x}$,
+\[
+\frac{d}{dx}(ye^{-x})=xe^{-x}.
+\]
+Since $\int xe^{-x}\,dx=-xe^{-x}-e^{-x}+C$, we obtain
+\[
+y=-x-1+Ce^x.
+\]
+From $y(0)=1$, $C=2$, so $\boxed{y=2e^x-x-1}$.
+
+\textbf{ii} Starting with $y_0=1$,
+\[
+y_1=1+x+\frac{x^2}{2},\qquad
+y_2=1+x+x^2+\frac{x^3}{6},
+\]
+\[
+y_3=1+x+x^2+\frac{x^3}{3}+\frac{x^4}{24},\qquad
+y_4=1+x+x^2+\frac{x^3}{3}+\frac{x^4}{12}+\frac{x^5}{120}.
+\]
+
+\textbf{iii} From $y=2e^x-x-1$,
+\[
+y=2\left(1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}+\cdots\right)-x-1
+=1+x+x^2+\frac{x^3}{3}+\frac{x^4}{12}+\cdots
+\]
+so $y_4$ agrees with the exact series through the $x^4$ term.
+
+\textbf{iv} Since $y(1)=2e-2$, we have $e=\dfrac{y(1)+2}{2}$. Also
+\[
+y_4(1)=1+1+1+\frac13+\frac1{12}+\frac1{120}=\frac{137}{40}.
+\]
+Hence
+\[
+\boxed{e\approx \frac{\frac{137}{40}+2}{2}=\frac{217}{80}=2.7125.}
+\]
+This is an under-estimate because the omitted terms in the exponential series are positive.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Magic of Picard Iterations:} This method doesn't just give you a ``close'' curve; it mechanically derives the exact Taylor Polynomial of the solution without ever requiring you to know the actual function! 
+    \item \textbf{Self-Correction:} Notice in part \textbf{ii} how the $x^3$ term changed from $x^3/6$ in $y_2$ to $x^3/3$ in $y_3$, and then stayed $x^3/3$ in $y_4$. Picard iterations continuously refine the outer terms until they settle into their permanent, correct Taylor coefficients.
+\end{itemize}
+\end{takeaways}
+
+% Section: Advanced Characteristic Equations (Real Roots)
+\begin{problem}[Higher-Order Differential Equations and Real Roots]
+\textbf{1.} For the following differential equations, use substitution to find all real values of $\lambda$ that make the function $y = ke^{\lambda x}$ a solution for all values of the constant $k$. \\
+\textit{(Note: $y^{(4)}$ denotes the fourth derivative of $y$ with respect to $x$)}.
+
+\begin{enumerate}
+    \item[\textbf{i}] $y''' - 4y'' - 7y' + 10y = 0$
+    \item[\textbf{ii}] $y^{(4)} - 13y'' + 36y = 0$
+    \item[\textbf{iii}] $y''' - 3y'' + 4y = 0$
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{2.} \\
+\textbf{iv} Consider the differential equation $y'' + 2cy' + 9y = 0$. Find the possible values of the real constant $c$ such that substituting $y = ke^{\lambda x}$ yields exactly one repeated real root for $\lambda$. 
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For (i):} The third derivative is $y''' = k\lambda^3 e^{\lambda x}$. After factoring out the exponential, use the Factor Theorem (testing factors of 10) to find the first root, then use polynomial long division.
+    \item \textbf{For (ii):} You will get a degree-4 polynomial, but notice there are no odd powers of $\lambda$. Treat it as a quadratic ``in disguise'' by letting $u = \lambda^2$.
+    \item \textbf{For (iii):} Be careful with missing terms! The characteristic equation is a cubic with no $\lambda$ term. Once you find the first root, the remaining quadratic will yield a repeated root.
+    \item \textbf{For (iv):} Find the characteristic equation in terms of $\lambda$ and $c$. What must the discriminant ($\Delta = b^2 - 4ac$) of a quadratic equal for it to have exactly one repeated root?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} $\quad y''' - 4y'' - 7y' + 10y = 0$ \\
+Let $y = ke^{\lambda x}$. The derivatives are $y' = k\lambda e^{\lambda x}$, $y'' = k\lambda^2 e^{\lambda x}$, and $y''' = k\lambda^3 e^{\lambda x}$. \\
+Substitute into the DE:
+\[ k\lambda^3 e^{\lambda x} - 4(k\lambda^2 e^{\lambda x}) - 7(k\lambda e^{\lambda x}) + 10(ke^{\lambda x}) = 0 \]
+\[ ke^{\lambda x}(\lambda^3 - 4\lambda^2 - 7\lambda + 10) = 0 \]
+Since $ke^{\lambda x} \neq 0$ (for $k \neq 0$), we solve:
+\[ P(\lambda) = \lambda^3 - 4\lambda^2 - 7\lambda + 10 = 0 \]
+By inspection, $P(1) = 1 - 4 - 7 + 10 = 0$, so $(\lambda - 1)$ is a factor. \\
+Using polynomial division or grouping:
+\begin{align*}
+    (\lambda - 1)(\lambda^2 - 3\lambda - 10) &= 0 \\
+    (\lambda - 1)(\lambda - 5)(\lambda + 2) &= 0
+\end{align*}
+\textbf{$\lambda = 1, \lambda = 5, \text{ or } \lambda = -2$}
+
+\vspace{0.3cm}
+\textbf{ii} $\quad y^{(4)} - 13y'' + 36y = 0$ \\
+Substitute $y = ke^{\lambda x}$ and $y^{(4)} = k\lambda^4 e^{\lambda x}$:
+\begin{align*}
+    ke^{\lambda x}(\lambda^4 - 13\lambda^2 + 36) &= 0 \\
+    \lambda^4 - 13\lambda^2 + 36 &= 0
+\end{align*}
+Let $u = \lambda^2$. Then $u^2 - 13u + 36 = 0$.
+\begin{align*}
+    (u - 9)(u - 4) &= 0 \implies (\lambda^2 - 9)(\lambda^2 - 4) = 0 \\
+    (\lambda - 3)(\lambda + 3)(\lambda - 2)(\lambda + 2) &= 0
+\end{align*}
+\textbf{$\lambda = 3, \lambda = -3, \lambda = 2, \text{ or } \lambda = -2$}
+
+\vspace{0.3cm}
+\textbf{iii} $\quad y''' - 3y'' + 4y = 0$ \\
+Substitute the derivatives:
+\begin{align*}
+    ke^{\lambda x}(\lambda^3 - 3\lambda^2 + 4) &= 0 \\
+    P(\lambda) &= \lambda^3 - 3\lambda^2 + 4 = 0
+\end{align*}
+By inspection, $P(-1) = -1 - 3 + 4 = 0$, so $(\lambda + 1)$ is a factor. \\
+By polynomial division:
+\begin{align*}
+    (\lambda + 1)(\lambda^2 - 4\lambda + 4) &= 0 \\
+    (\lambda + 1)(\lambda - 2)^2 &= 0
+\end{align*}
+\textbf{$\lambda = -1 \text{ or } \lambda = 2$}
+
+\vspace{0.3cm}
+\textbf{iv} $\quad y'' + 2cy' + 9y = 0$ \\
+Substitute $y, y', y''$:
+\[ ke^{\lambda x}(\lambda^2 + 2c\lambda + 9) = 0 \]
+The characteristic equation is $\lambda^2 + 2c\lambda + 9 = 0$. \\
+For a quadratic to have exactly one repeated real root, its discriminant must be zero ($\Delta = 0$):
+\begin{align*}
+    \Delta = b^2 - 4ac &= 0 \\
+    (2c)^2 - 4(1)(9) &= 0 \\
+    4c^2 - 36 &= 0 \\
+    4c^2 &= 36 \implies c^2 = 9
+\end{align*}
+\textbf{$c = 3 \text{ or } c = -3$} \\
+\textit{(Note: If $c=3$, the root is $\lambda = -3$. If $c=-3$, the root is $\lambda = 3$.)}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Polynomial Masterclass:} Higher-order differential equations are the perfect playground for the polynomials topic. You must confidently switch between the Factor Theorem, polynomial division, and recognizing quadratic forms hidden in degree-4 equations.
+    \item \textbf{The Power of Notation:} Notice how elegantly the $ke^{\lambda x}$ term factors out of every single derivative, leaving behind a clean polynomial? This property is unique to $e^x$, making it the most important function in all of calculus.
+    \item \textbf{Repeated Roots (Part iii):} When you get a repeated root like $\lambda = 2$, it means $y = ke^{2x}$ is a valid solution, but there's a missing piece to the puzzle. In advanced differential equations, you will learn that the ``missing'' second solution is actually $y = kxe^{2x}$!
+\end{itemize}
+\end{takeaways}
+
+% Section: Advanced Initial Value Problems
+\begin{problem}[Advanced Initial Value Problems]
+Solve these initial value problems. In each case, use integration to find the general solution, then use the initial condition to evaluate the constant. Where possible, express $y$ explicitly as a function of $x$.
+
+\begin{enumerate}
+    \item[\textbf{i}] $y' = y^2 \cos x$, with $y(\pi) = 1$
+    \item[\textbf{ii}] $y' = x e^{x-y}$, with $y(0) = 0$
+    \item[\textbf{iii}] $y' = \frac{x}{y\sqrt{1-x^2}}$, with $y(0) = -2$
+    \item[\textbf{iv}] $(1+x^2)y' = xy(1+y)$, with $y(0) = 1$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Separate the variables to get $\frac{1}{y^2} \, dy = \cos x \, dx$. Be careful with negative signs when integrating $y^{-2}$.
+    \item \textbf{For ii:} Use exponent laws to split $e^{x-y}$ into $e^x e^{-y}$ before separating variables. You will need to use \textbf{Integration by Parts} to integrate the right-hand side ($\int x e^x \, dx$).
+    \item \textbf{For iii:} Integrate both sides. When you rearrange to make $y$ the explicit subject, you will need to take a square root, which yields a $\pm$ case. Check your initial condition $y(0) = -2$ to determine which branch is correct.
+    \item \textbf{For iv:} Separating variables yields $\frac{1}{y(y+1)} \, dy = \frac{x}{1+x^2} \, dx$. You must use \textbf{Partial Fractions} to integrate the left-hand side. Use logarithm laws to combine the resulting terms before applying the exponential function to isolate $y$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} $\int y^{-2}\,dy=\int\cos x\,dx$ gives $-\frac1y=\sin x+C$.  
+Using $y(\pi)=1$ gives $C=-1$, so $\boxed{y=\frac{1}{1-\sin x}}$.
+
+\textbf{ii} Since $y'=xe^{x-y}=xe^xe^{-y}$,
+\[
+\int e^y\,dy=\int xe^x\,dx=x e^x-e^x+C.
+\]
+From $y(0)=0$, $1=-1+C$, so $C=2$. Hence
+\[
+e^y=e^x(x-1)+2
+\quad\Rightarrow\quad
+\boxed{y=\ln\!\bigl(e^x(x-1)+2\bigr)}.
+\]
+
+\textbf{iii} $\int y\,dy=\int \frac{x}{\sqrt{1-x^2}}\,dx$ gives
+\[
+\frac12y^2=-\sqrt{1-x^2}+C.
+\]
+Using $y(0)=-2$ gives $C=3$, so
+\[
+y^2=6-2\sqrt{1-x^2}.
+\]
+The initial condition selects the negative branch:
+\[
+\boxed{y=-\sqrt{6-2\sqrt{1-x^2}}}.
+\]
+
+\textbf{iv} Since $\frac1{y(y+1)}=\frac1y-\frac1{y+1}$,
+\[
+\ln\left|\frac{y}{y+1}\right|=\frac12\ln(1+x^2)+C.
+\]
+Using $y(0)=1$ gives $C=\ln\frac12$, hence
+\[
+\frac{y}{y+1}=\frac{\sqrt{1+x^2}}{2}.
+\]
+Solving for $y$,
+\[
+\boxed{y=\frac{\sqrt{1+x^2}}{2-\sqrt{1+x^2}}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Calculus is the easy part, Algebra is the hard part:} Notice in part \textbf{iv} that the actual integration takes two lines, but cleanly isolating $y$ requires strong algebraic manipulation and logarithm law fluency. This is a hallmark of Extension 2.
+    \item \textbf{The Importance of Branch Selection:} In part \textbf{iii}, lazily writing $y = \sqrt{\dots}$ without acknowledging the $\pm$ case will result in a solution curve that physically violates the given initial condition. Always look back at the starting coordinates when taking an even root.
+    \item \textbf{Logarithmic Constants:} When an equation is dominated by logarithms (like part \textbf{iv}), leaving the constant as $C$ makes isolation difficult. Finding $C$ as a specific logarithmic value (e.g., $C = \ln(0.5)$) allows you to merge it cleanly using $\log A + \log B = \log(AB)$.
+\end{itemize}
+\end{takeaways}
+
+% Section: Non-Linear Autonomous Initial Value Problems
+\begin{problem}[Non-Linear Autonomous Initial Value Problems]
+Find the explicit solutions $y = f(x)$ for the following autonomous initial value problems. 
+
+\begin{enumerate}
+    \item[\textbf{i}] $y' = -2y^2$, with $y(0) = 1$
+    \item[\textbf{ii}] $y' = y^2 + 1$, with $y(0) = 1$
+    \item[\textbf{iii}] $y' = 4 - y^2$, with $y(0) = 0$
+    \item[\textbf{iv}] $y' = y \ln y$, with $y(0) = e$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Separate the variables to get $\int y^{-2} \, dy = \int -2 \, dx$. Be careful with negative signs when integrating.
+    \item \textbf{For ii:} When you separate the variables, you should recognize a standard inverse trigonometric integral on the left-hand side.
+    \item \textbf{For iii:} Separating the variables yields $\int \frac{1}{4 - y^2} \, dy$. You must use \textbf{Partial Fractions} (difference of two squares) to integrate this. Combine the resulting logarithms before using the exponential function to isolate $y$.
+    \item \textbf{For iv:} Separate the variables to get $\int \frac{1}{y \ln y} \, dy = \int 1 \, dx$. To integrate the left side, use the substitution $u = \ln y$. 
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} $y'=-2y^2$. Then
+\[
+\int y^{-2}\,dy=\int -2\,dx
+\implies -\frac1y=-2x+C.
+\]
+Using $y(0)=1$ gives $C=-1$, so
+\[
+\boxed{y=\frac{1}{2x+1}}.
+\]
+
+\textbf{ii} $y'=y^2+1$. Hence
+\[
+\int \frac{dy}{1+y^2}=\int dx
+\implies \arctan y=x+C.
+\]
+Since $y(0)=1$, we get $C=\frac{\pi}{4}$, so
+\[
+\boxed{y=\tan\left(x+\frac{\pi}{4}\right)}.
+\]
+
+\textbf{iii} $y'=4-y^2$. Separating variables,
+\[
+\int \frac{dy}{4-y^2}=x+C.
+\]
+Using
+\[
+\frac{1}{4-y^2}=\frac14\left(\frac{1}{2+y}+\frac{1}{2-y}\right),
+\]
+we obtain
+\[
+\ln\left|\frac{2+y}{2-y}\right|=4x+K.
+\]
+Now $y(0)=0$ gives $K=0$, so
+\[
+\frac{2+y}{2-y}=e^{4x}.
+\]
+Solving for $y$,
+\[
+y=\frac{2(e^{4x}-1)}{e^{4x}+1}=\boxed{2\tanh(2x)}.
+\]
+
+\textbf{iv} $y'=y\ln y$. Then
+\[
+\int \frac{dy}{y\ln y}=\int dx.
+\]
+Let $u=\ln y$, so $du=\dfrac{1}{y}\,dy$. This gives
+\[
+\ln|\ln y|=x+C.
+\]
+Since $y(0)=e$, we have $C=0$, hence
+\[
+\ln y=e^x
+\quad\Rightarrow\quad
+\boxed{y=e^{e^x}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Geometry of Autonomous DEs:} An autonomous differential equation lacks an independent variable ($x$) on the right-hand side. Geometrically, this means that the slope of the curve depends \textit{only} on its vertical height ($y$). If you draw a horizontal line across the slope field, every single vector on that line will point at the exact same angle!
+    \item \textbf{Integration Toolkit:} When separating variables for $y' = g(y)$, the integral $\int \frac{1}{g(y)} dy$ dictates the shape. A quadratic $g(y)$ usually leads to inverse trigonometric functions (if roots are complex) or logarithms/hyperbolic functions via partial fractions (if roots are real).
+\end{itemize}
+\end{takeaways}
+
+% Section: Innovation Diffusion and Logistic Models
+\begin{problem}[Innovation Diffusion and Logistic Models]
+The NSW Education Standards Authority (NESA) is rolling out a new ``AI Pedagogical Twin'' system to assist high school mathematics teachers across the state. The maximum capacity (total number of target teachers) is $M = 12\,000$.
+
+Let $N(t)$ be the number of teachers who have adopted the system at time $t$ months after its initial release. The adoption rate is proportional to both the number of current users and the number of teachers who have yet to adopt it. This is modelled by the differential equation:
+\[ \frac{dN}{dt} = k N (M - N) \]
+where $k$ is a positive constant.
+
+\begin{enumerate}
+    \item[\textbf{i}] By using partial fractions to integrate $\frac{M}{N(M-N)}$, show that the explicit solution for $N(t)$ can be written in the form $N(t) = \frac{M}{1 + A e^{-Mkt}}$, where $A$ is a constant.
+    \item[\textbf{ii}] At the initial launch ($t=0$), exactly $100$ early adopters are using the system. After $6$ months, the number of users has grown to $1\,000$. Find the exact value of $A$, and show that $Mk = \frac{1}{6} \ln\left(\frac{119}{11}\right)$.
+    \item[\textbf{iii}] The ``tipping point'' of a technology rollout occurs when the adoption rate $\frac{dN}{dt}$ is at its absolute maximum. Determine the exact time $t$ (in months) when this tipping point is reached for the AI Pedagogical Twin.
+    \item[\textbf{iv}] Suppose NESA realizes that teachers are also retiring or leaving the profession at a constant rate of $R$ teachers per month, altering the model to $\frac{dN}{dt} = kN(M-N) - R$. \\
+    Show mathematically that if the departure rate $R$ exceeds $\frac{kM^2}{4}$, the rollout will inevitably fail (i.e., the number of users will always decrease regardless of the current adoption numbers).
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Start by showing that $\frac{M}{N(M-N)} = \frac{1}{N} + \frac{1}{M-N}$. Separate the variables in the original DE, multiply both sides by $M$, and integrate. Use logarithm laws to combine terms before exponentiating. 
+    \item \textbf{For ii:} Substitute $t=0, N=100$, and $M=12000$ to solve for $A$. Then substitute $t=6$ and $N=1000$ to isolate the expression $e^{-6Mk}$, which will allow you to solve for $Mk$.
+    \item \textbf{For iii:} Do not differentiate the ugly $N(t)$ fraction! Instead, look at the original differential equation. The rate is a downward-opening quadratic function in terms of $N$. Find the value of $N$ that maximizes this quadratic, and then substitute that $N$ back into your part \textbf{i} equation to find $t$.
+    \item \textbf{For iv:} Expand the modified differential equation into a quadratic in terms of $N$: $\frac{dN}{dt} = -kN^2 + kMN - R$. For the rate to be strictly negative for \textit{all} possible values of $N$, what must be true about the discriminant ($\Delta = b^2 - 4ac$) of this quadratic?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Since $\dfrac{M}{N(M-N)}=\dfrac1N+\dfrac1{M-N}$,
+\[
+\int\left(\frac1N+\frac1{M-N}\right)dN=\int Mk\,dt
+\]
+gives
+\[
+\ln\frac{N}{M-N}=Mkt+C.
+\]
+Solving for $N$,
+\[
+\boxed{N(t)=\frac{M}{1+Ae^{-Mkt}}}.
+\]
+
+\textbf{ii} With $M=12000$,
+\[
+100=\frac{12000}{1+A}\Rightarrow A=119.
+\]
+Then
+\[
+1000=\frac{12000}{1+119e^{-6Mk}}
+\Rightarrow e^{-6Mk}=\frac{11}{119},
+\]
+so
+\[
+\boxed{Mk=\frac16\ln\frac{119}{11}}.
+\]
+
+\textbf{iii} The rate $kN(M-N)$ is maximal at $N=M/2=6000$. Hence
+\[
+6000=\frac{12000}{1+119e^{-Mkt}}
+\Rightarrow 119e^{-Mkt}=1
+\Rightarrow Mkt=\ln 119.
+\]
+Therefore
+\[
+\boxed{t=\frac{6\ln 119}{\ln(119/11)}}.
+\]
+
+\textbf{iv} The modified rate is $-kN^2+kMN-R$. For it to be negative for all $N$, its discriminant must be negative:
+\[
+(kM)^2-4(-k)(-R)<0
+\Rightarrow k^2M^2-4kR<0.
+\]
+Since $k>0$,
+\[
+\boxed{R>\frac{kM^2}{4}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Beyond Biology:} The logistic equation $y' = ky(P-y)$ isn't just for animals on an island. It is the fundamental mathematics behind viral marketing, technology adoption (like AI tools in schools), and the spread of rumors.
+    \item \textbf{The Point of Inflection:} Part \textbf{iii} asks for the maximum \textit{rate}, which translates graphically to the point of inflection on the S-curve. Noticing that you can maximize the quadratic DE itself rather than taking the second derivative of the complex fraction saves massive amounts of exam time.
+    \item \textbf{Calculus meets Quadratics:} Part \textbf{iv} is a brilliant demonstration of Extension 2 synthesis. You are using the Discriminant from Year 11 polynomial theory to prove a physical constraint on a complex differential equation model!
+\end{itemize}
+\end{takeaways}
+
+% Section: Newton's Law of Cooling in the Blue Mountains
+\begin{problem}[Newton's Law of Cooling in the Blue Mountains]
+A freshly baked meat pie is purchased from a famous bakery in Katoomba in the Blue Mountains. It is taken out of the pie warmer at a temperature of $95^\circ\text{C}$ and placed outside, where the ambient temperature on a crisp winter day is a constant $5^\circ\text{C}$. 
+
+According to Newton's Law of Cooling, the rate of change of the pie's temperature $T$ with respect to time $t$ (in minutes) is proportional to the difference between its temperature and the ambient temperature. This is modelled by the differential equation:
+\[ \frac{dT}{dt} = -k(T - 5) \]
+where $k$ is an unknown positive constant.
+
+\begin{enumerate}
+    \item[\textbf{i}] By separating the variables and integrating, show that the temperature of the pie is given by $T(t) = 5 + A e^{-kt}$, and determine the value of the constant $A$.
+    \item[\textbf{ii}] After $10$ minutes, the pie has cooled to $65^\circ\text{C}$. Show that $e^{-10k} = \frac{2}{3}$, and hence write $T(t)$ in the alternative form $T(t) = 5 + 90 \left(\frac{2}{3}\right)^{\frac{t}{10}}$.
+    \item[\textbf{iii}] A local bushwalker considers the pie ``safe to eat'' without burning their mouth when it reaches $50^\circ\text{C}$. Calculate exactly how many minutes it takes to reach this temperature. Leave your answer in terms of natural logarithms.
+    \item[\textbf{iv}] Evaluate the exact rate at which the pie is cooling at the instant it becomes safe to eat. Briefly explain, referring to the differential equation, why this rate is exactly half of its initial cooling rate.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Separate the variables to get $\int \frac{1}{T-5} \, dT = \int -k \, dt$. After integrating to get a natural logarithm, exponentiate both sides. Remember that the initial temperature at $t=0$ is $95^\circ\text{C}$.
+    \item \textbf{For ii:} Substitute $t=10$ and $T=65$ into your equation from part \textbf{i} to solve for the term $e^{-10k}$. Then, use index laws to rewrite $e^{-kt}$ as $(e^{-10k})^{\frac{t}{10}}$ to perform the substitution.
+    \item \textbf{For iii:} Set $T=50$ using the equation you derived in part \textbf{ii}. You will end up with an equation like $\frac{1}{2} = \left(\frac{2}{3}\right)^{\frac{t}{10}}$. Take the natural logarithm ($\ln$) of both sides and use log laws to make $t$ the subject.
+    \item \textbf{For iv:} You do not need to differentiate your complex equation from part \textbf{ii}! Simply use the original differential equation $\frac{dT}{dt} = -k(T-5)$. Find the exact value of $k$ from part \textbf{ii} ($\ln(e^{-10k}) = \ln(2/3)$), and substitute $T=50$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Separating variables gives $\ln(T-5)=-kt+C$, so
+\[
+T(t)=5+Ae^{-kt}.
+\]
+Using $T(0)=95$ gives $A=90$, hence $\boxed{T(t)=5+90e^{-kt}}$.
+
+\textbf{ii} From $T(10)=65$,
+\[
+65=5+90e^{-10k}\Rightarrow e^{-10k}=\frac23.
+\]
+Therefore
+\[
+e^{-kt}=(e^{-10k})^{t/10}=\left(\frac23\right)^{t/10},
+\]
+so
+\[
+\boxed{T(t)=5+90\left(\frac23\right)^{t/10}}.
+\]
+
+\textbf{iii} Set $T=50$:
+\[
+50=5+90\left(\frac23\right)^{t/10}
+\Rightarrow \frac12=\left(\frac23\right)^{t/10}.
+\]
+Taking logs,
+\[
+\boxed{t=\frac{10\ln2}{\ln3-\ln2}\text{ min}}.
+\]
+
+\textbf{iv} Since $e^{-10k}=\frac23$,
+\[
+k=\frac{1}{10}\ln\frac32.
+\]
+At $T=50$,
+\[
+\frac{dT}{dt}=-k(T-5)=-45k=-\frac92\ln\frac32.
+\]
+So
+\[
+\boxed{\frac{dT}{dt}=-\frac92\ln\frac32\ ^\circ\text{C/min}}.
+\]
+This is half the initial cooling rate because $T-5$ has fallen from $90$ to $45$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Base Conversions:} Part \textbf{ii} tests a crucial HSC skill. Exponential decay doesn't always have to be written with base $e$. Changing the base to a fraction like $\frac{2}{3}$ often makes the equation much easier to use for future calculations!
+    \item \textbf{Logarithm Laws:} In part \textbf{iii}, using the identity $\ln(a/b) = \ln(a) - \ln(b)$ allows you to present your final exact answer cleanly without negative signs floating in the numerator.
+    \item \textbf{Calculus Shortcuts:} Part \textbf{iv} reminds you that you don't always need to differentiate $T(t)$ to find a rate. The differential equation \textit{is} the rate! Plugging values directly into $\frac{dT}{dt}$ saves massive amounts of time.
+\end{itemize}
+\end{takeaways}
+
+% Section: Torricelli's Law and the Hurstville Plaza Basin
+\begin{problem}[Torricelli's Law and the Hurstville Plaza Basin]
+Hurstville City Council is draining the large hemispherical water basin in the main plaza for routine maintenance. The basin has a radius of 2 metres and is initially completely full.
+
+Water drains from a hole at the bottom of the basin. According to Torricelli's Law, the volume $V$ of water in the basin decreases at a rate proportional to the square root of the depth $h$ of the water. Thus, $\frac{dV}{dt} = -k\sqrt{h}$ for some positive constant $k$.
+
+\begin{enumerate}
+    \item[\textbf{i}] Given that the volume of a spherical cap is $V = \frac{\pi}{3}h^2(3R - h)$, use the chain rule to show that the height of the water satisfies the differential equation $\frac{dh}{dt} = \frac{-c}{\sqrt{h}(4-h)}$, where $c$ is a positive constant.
+    \item[\textbf{ii}] By separating the variables, find an implicit solution relating the time $t$ and the height $h$.
+    \item[\textbf{iii}] The council engineers observe that it takes exactly $28\sqrt{2}$ minutes for the basin to drain completely. Find the exact value of $c$, and determine exactly how many minutes it takes for the water level to drop to a height of 1 metre.
+    \item[\textbf{iv}] Explain mathematically why the rate at which the water level falls is not constant, and determine the exact depth $h$ at which the water level is falling at its \textit{slowest} rate.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Start by finding the derivative $\frac{dV}{dh}$ using the given volume formula (remember to substitute $R=2$). Then, apply the chain rule: $\frac{dh}{dt} = \frac{dh}{dV} \cdot \frac{dV}{dt}$.
+    \item \textbf{For ii:} Isolate the $h$ terms with $dh$ and the constant with $dt$. You will need to expand $\sqrt{h}(4-h)$ into fractional powers ($h^{1/2}$ and $h^{3/2}$) before integrating.
+    \item \textbf{For iii:} First, use the initial condition ($t=0, h=2$) to find the constant of integration. Then use the empty condition ($t=28\sqrt{2}, h=0$) to find $c$. Finally, substitute $h=1$ to find $t$.
+    \item \textbf{For iv:} The rate of change of height is $\frac{dh}{dt}$. To find when the water falls slowest, you need to minimize the magnitude of this rate. This is equivalent to maximizing the denominator of your $\frac{dh}{dt}$ expression. Use calculus to find the stationary point of the denominator.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} With $R=2$,
+\[
+V=\frac{\pi}{3}h^2(6-h),\qquad \frac{dV}{dh}=4\pi h-\pi h^2=\pi h(4-h).
+\]
+Hence
+\[
+\frac{dh}{dt}=\frac{dh}{dV}\frac{dV}{dt}
+=\frac{1}{\pi h(4-h)}(-k\sqrt h)
+=-\frac{k}{\pi\sqrt h(4-h)}.
+\]
+So, with $c=\frac{k}{\pi}$,
+\[
+\boxed{\frac{dh}{dt}=-\frac{c}{\sqrt h(4-h)}}.
+\]
+
+\textbf{ii} Separating variables,
+\[
+\sqrt h(4-h)\,dh=-c\,dt,
+\]
+so
+\[
+\boxed{\frac83 h^{3/2}-\frac25 h^{5/2}=-ct+C}.
+\]
+
+\textbf{iii} Using $h(0)=2$,
+\[
+C=\frac83(2)^{3/2}-\frac25(2)^{5/2}=\frac{56\sqrt2}{15}.
+\]
+Using $h=0$ at $t=28\sqrt2$,
+\[
+0=-c(28\sqrt2)+\frac{56\sqrt2}{15}\Rightarrow \boxed{c=\frac{2}{15}}.
+\]
+For $h=1$,
+\[
+\frac83-\frac25=-\frac{2}{15}t+\frac{56\sqrt2}{15}
+\Rightarrow 34=-2t+56\sqrt2,
+\]
+so
+\[
+\boxed{t=28\sqrt2-17\text{ min}}.
+\]
+
+\textbf{iv} Since
+\[
+\left|\frac{dh}{dt}\right|=\frac{c}{\sqrt h(4-h)},
+\]
+the fall is slowest when $D(h)=\sqrt h(4-h)$ is largest. Now
+\[
+D'(h)=\frac{2}{\sqrt h}-\frac{3}{2}\sqrt h.
+\]
+Setting $D'(h)=0$ gives $4=3h$, so
+\[
+\boxed{h=\frac43}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Geometry Matters:} In a perfect cylinder, water level drops according to $h(t) \propto t^2$ because the surface area is constant. In a hemisphere, the changing surface area competes with the dropping pressure head, creating a complex non-linear curve.
+    \item \textbf{Physical Intuition:} Notice part \textbf{iv}. The water falls very fast at the beginning (because the pressure is highest) AND very fast at the end (because the cross-sectional area approaches zero). It slows down in the middle where these two competing geometric factors balance out!
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Wollemi Bushfire Spread]
+A bushfire breaks out in a contained valley within Wollemi National Park. The total combustible area is $1200$ hectares. If $A(t)$ is the burnt area after $t$ hours, the spread is modelled by
+\[
+\frac{dA}{dt}=kA(1200-A),
+\]
+where $k>0$.
+
+\begin{enumerate}
+    \item[\textbf{i}] Show that $\dfrac{1200}{A(1200-A)}=\dfrac1A+\dfrac{1}{1200-A}$, and hence prove that the general solution can be written as
+    \[
+    A(t)=\frac{1200}{1+Ce^{-1200kt}},
+    \]
+    where $C$ is a constant.
+    \item[\textbf{ii}] When the fire was first detected, $A(0)=20$. Four hours later, $A(4)=100$. Find $C$, and show that
+    \[
+    1200k=\frac14\ln\left(\frac{59}{11}\right).
+    \]
+    \item[\textbf{iii}] Determine the exact time when the fire is spreading at its maximum rate.
+    \item[\textbf{iv}] An Emergency Warning is triggered if more than $80\%$ of the valley is projected to burn within $12$ hours. Based on this model, should the warning be issued?
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{For i:} Separate variables first, then multiply by $1200$ so the given partial fraction identity applies immediately.
+    \item \textbf{For ii:} Use $A(0)=20$ to find $C$, then substitute $A(4)=100$ to isolate $e^{-4800k}$.
+    \item \textbf{For iii:} The rate equation $kA(1200-A)$ is a downward-opening quadratic in $A$, so its maximum occurs at the vertex.
+    \item \textbf{For iv:} Compare $A(12)$ with $0.8\times 1200=960$, and simplify the exponential exactly before approximating.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Since
+\[
+\frac{1200}{A(1200-A)}=\frac1A+\frac{1}{1200-A},
+\]
+separating variables gives
+\[
+\int \frac{1200}{A(1200-A)}\,dA=\int 1200k\,dt.
+\]
+Hence
+\[
+\int\left(\frac1A+\frac{1}{1200-A}\right)dA=1200kt+C
+\]
+so
+\[
+\ln\left(\frac{A}{1200-A}\right)=1200kt+C.
+\]
+Solving for $A$,
+\[
+\boxed{A(t)=\frac{1200}{1+Ce^{-1200kt}}}.
+\]
+
+\textbf{ii} From $A(0)=20$,
+\[
+20=\frac{1200}{1+C}\Rightarrow C=59.
+\]
+Then $A(4)=100$ gives
+\[
+100=\frac{1200}{1+59e^{-4800k}}
+\Rightarrow e^{-4800k}=\frac{11}{59},
+\]
+so
+\[
+\boxed{1200k=\frac14\ln\left(\frac{59}{11}\right)}.
+\]
+
+\textbf{iii} The rate $kA(1200-A)$ is maximal when $A=600$. Thus
+\[
+600=\frac{1200}{1+59e^{-1200kt}}
+\Rightarrow 59e^{-1200kt}=1
+\Rightarrow 1200kt=\ln 59.
+\]
+Using part \textbf{ii},
+\[
+\boxed{t=\frac{4\ln 59}{\ln(59/11)}\text{ hours}}.
+\]
+
+\textbf{iv} The warning threshold is $0.8(1200)=960$. At $t=12$,
+\[
+e^{-1200k(12)}=e^{-12(1200k)}=e^{-3\ln(59/11)}=\left(\frac{11}{59}\right)^3.
+\]
+So
+\[
+A(12)=\frac{1200}{1+59(11/59)^3}
+=\frac{1200}{1+\frac{1331}{3481}}
+=\frac{1200\cdot 3481}{4812}\approx 868.1.
+\]
+Since $868.1<960$, \textbf{no Emergency Warning is triggered}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Contextual Flexibility:} The logistic equation isn't just for biology. It perfectly describes any system (like fire or rumors) that spreads quickly through a medium but eventually slows down as it runs out of ``fuel'' or ``uninformed people.''
+    \item \textbf{The Point of Inflection:} A classic trap is trying to differentiate the complex fraction $A(t)$ twice to find the point of maximum growth. Recognizing that the original differential equation \textit{is} the rate equation allows you to use simple Year 9 parabolas to find the maximum instantly.
+    \item \textbf{Exact Value Discipline:} In part \textbf{iv}, dealing with the exponent $e^{-3\ln(59/11)}$ tests your index and logarithm laws. Relying on early decimal rounding often leads to significant errors in exponential growth models.
+\end{itemize}
+\end{takeaways}
+
+% Section: The Rooftop Solar Boom in Western Sydney
+\begin{problem}[The Rooftop Solar Boom in Western Sydney]
+The adoption of rooftop solar panels in a specific Western Sydney municipality is modeled using a logistic differential equation. The local network has a maximum grid capacity to support solar installations on $150$ thousand homes. 
+
+Let $S(t)$ be the number of homes (in thousands) with rooftop solar, where $t$ is the number of years after 2010. The rate of new installations is proportional to both the number of homes that already have solar and the remaining capacity of homes that do not. This is governed by:
+\[ \frac{dS}{dt} = kS(150 - S) \]
+for some positive constant $k$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By using the substitution $S(t) = \frac{150}{1 + u(t)}$, where $u(t)$ is an unknown function of time, show that the non-linear differential equation transforms into the simple linear decay equation $\frac{du}{dt} = -150ku$. 
+    \item[\textbf{ii}] In 2010 ($t=0$), there were exactly $10$ thousand homes with solar. By 2015 ($t=5$), this number had grown to $50$ thousand. By first solving the differential equation for $u(t)$, show that the explicit equation for $S(t)$ is $S(t) = \frac{150}{1 + 14(7)^{-t/5}}$.
+    \item[\textbf{iii}] The local council defines the ``solar boom'' as the period during which the \textit{rate} of new installations is strictly increasing. Find the exact value of $t$ when this boom ends.
+    \item[\textbf{iv}] Suppose a new government rebate is introduced that guarantees a constant minimum of $R$ thousand new installations per year, modifying the model to $\frac{dS}{dt} = kS(150-S) + R$. Without solving the new differential equation, prove mathematically that the new theoretical maximum limit of solar installations will exceed $150$ thousand, and find an expression for this new limit in terms of $k$ and $R$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Start by differentiating your substitution $S = 150(1+u)^{-1}$ with respect to $t$ using the chain rule to find $\frac{dS}{dt}$. Substitute both $S$ and $\frac{dS}{dt}$ into the original differential equation and simplify the algebraic fractions until you isolate $\frac{du}{dt}$.
+    \item \textbf{For ii:} Solve $\frac{du}{dt} = -150ku$ to get $u(t) = A e^{-150kt}$. Substitute $t=0, S=10$ to find $A$. Then substitute $t=5, S=50$ to find the exact value of the exponential term $e^{-750k}$. Use index laws to rewrite the general equation cleanly with base $7$.
+    \item \textbf{For iii:} The rate of installations is $\frac{dS}{dt}$. For this rate to stop increasing, it must reach its maximum, which occurs at the point of inflection of $S(t)$. For a logistic curve, the maximum rate always occurs at exactly half the carrying capacity. 
+    \item \textbf{For iv:} The theoretical maximum limit of a system occurs when it reaches equilibrium, meaning the rate of change is zero ($\frac{dS}{dt} = 0$). Set the modified differential equation to zero, which forms a quadratic equation in terms of $S$. Solve for $S$ using the quadratic formula and analyze the roots.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} With $S=150(1+u)^{-1}$,
+\[
+\frac{dS}{dt}=-\frac{150}{(1+u)^2}\frac{du}{dt}.
+\]
+Also,
+\[
+kS(150-S)=k\frac{150}{1+u}\left(150-\frac{150}{1+u}\right)
+=\frac{150^2ku}{(1+u)^2}.
+\]
+Hence
+\[
+\boxed{\frac{du}{dt}=-150ku}.
+\]
+
+\textbf{ii} So $u=Ae^{-150kt}$ and
+\[
+S(t)=\frac{150}{1+Ae^{-150kt}}.
+\]
+Using $S(0)=10$ gives $A=14$. Using $S(5)=50$ gives
+\[
+50=\frac{150}{1+14e^{-750k}}
+\Rightarrow e^{-750k}=\frac17.
+\]
+Therefore $e^{-150kt}=(e^{-750k})^{t/5}=7^{-t/5}$, so
+\[
+\boxed{S(t)=\frac{150}{1+14\cdot 7^{-t/5}}}.
+\]
+
+\textbf{iii} The rate $kS(150-S)$ is maximal at $S=75$. Thus
+\[
+75=\frac{150}{1+14\cdot 7^{-t/5}}
+\Rightarrow 14\cdot 7^{-t/5}=1
+\Rightarrow 7^{t/5}=14.
+\]
+Hence
+\[
+\boxed{t=5\log_7(14)=5+5\log_7 2}.
+\]
+
+\textbf{iv} At equilibrium,
+\[
+kS(150-S)+R=0
+\;\Longleftrightarrow\;
+kS^2-150kS-R=0.
+\]
+So
+\[
+S=75\pm\sqrt{75^2+\frac{R}{k}}.
+\]
+Taking the positive equilibrium,
+\[
+\boxed{S_{\max}=75+\sqrt{75^2+\frac{R}{k}}}.
+\]
+Since $R>0$, the square root exceeds $75$, hence $S_{\max}>150$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Alternative Methods:} Partial fractions is the standard way to integrate the logistic equation. However, part \textbf{i} demonstrates a powerful Extension 2 substitution technique ($S \propto 1/(1+u)$) that instantly reduces a complex non-linear system into standard Year 11 exponential decay. 
+    \item \textbf{Exact Value Precision:} Part \textbf{ii} requires careful manipulation of exponential bases. Recognising that $e^{-150kt}$ is just the fifth root of $(e^{-750k})^t$ allows you to bypass messy natural logs and create a clean, exact equation using base $7$.
+    \item \textbf{Equilibrium Analysis:} Part \textbf{iv} tests a deep understanding of what a differential equation represents physically. You don't always need to solve a DE to understand the system's eventual fate; setting the derivative to zero yields the equilibrium states directly.
+\end{itemize}
+\end{takeaways}

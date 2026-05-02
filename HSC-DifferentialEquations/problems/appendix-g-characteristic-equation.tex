@@ -1,0 +1,79 @@
+\textit{Note: This section is provided for enrichment only. It is out of syllabus for NSW HSC Mathematics Extension~1 and Extension~2, but it is an important method in higher mathematics, engineering, and physics.}
+
+\subsubsection*{Rigorous definitions}
+Consider a linear homogeneous differential equation with constant coefficients:
+\[
+a_n y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y=0.
+\]
+If we try a solution of the form $y=e^{\lambda x}$, substitution gives
+\[
+\left(a_n\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_1\lambda+a_0\right)e^{\lambda x}=0.
+\]
+Since $e^{\lambda x}\neq 0$, the polynomial factor must vanish.
+
+\begin{itemize}[leftmargin=*]
+  \item The polynomial
+  \[
+  P(\lambda)=a_n\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_1\lambda+a_0
+  \]
+  is the \textbf{characteristic polynomial}.
+  \item The equation
+  \[
+  P(\lambda)=0
+  \]
+  is the \textbf{characteristic equation}.
+\end{itemize}
+
+\subsubsection*{Example 1: First order}
+Solve
+\[
+y'-5y=0.
+\]
+The characteristic equation is
+\[
+\lambda-5=0,
+\]
+so $\lambda=5$ and
+\[
+y=Ce^{5x}.
+\]
+
+\subsubsection*{Example 2: Second order}
+Solve
+\[
+y''+3y'+2y=0.
+\]
+The characteristic equation is
+\[
+\lambda^2+3\lambda+2=0=(\lambda+1)(\lambda+2),
+\]
+so the roots are $-1$ and $-2$. Hence
+\[
+y=Ae^{-x}+Be^{-2x}.
+\]
+
+\subsubsection*{Example 3: Third order}
+Solve
+\[
+y'''=y.
+\]
+The characteristic equation is
+\[
+\lambda^3-1=0=(\lambda-1)(\lambda^2+\lambda+1).
+\]
+This gives one real root $\lambda=1$ and two complex roots
+\[
+\lambda=-\frac12\pm \frac{\sqrt{3}}{2}i.
+\]
+Therefore the general solution is
+\[
+y=C_1e^x+C_2e^{-x/2}\cos\left(\frac{\sqrt{3}}{2}x\right)+C_3e^{-x/2}\sin\left(\frac{\sqrt{3}}{2}x\right).
+\]
+
+\subsubsection*{Key takeaways}
+\begin{itemize}[leftmargin=*]
+  \item The method converts a differential-equation problem into an algebra problem about polynomial roots.
+  \item Distinct real roots give exponential terms.
+  \item Complex roots produce oscillatory sine and cosine terms multiplied by exponentials.
+  \item The number and type of roots determine the shape of the general solution.
+\end{itemize}

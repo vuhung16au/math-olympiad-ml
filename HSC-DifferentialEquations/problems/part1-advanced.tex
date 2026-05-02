@@ -1,13 +1,757 @@
-\subsubsection*{Problems}
-\begin{itemize}[leftmargin=*]
-  \item Placeholder: Advanced Problem 1
-  \item Placeholder: Advanced Problem 2
-  \item Placeholder: Advanced Problem 3
-\end{itemize}
+% Advanced problems
 
-\subsubsection*{Solutions}
-\begin{itemize}[leftmargin=*]
-  \item Placeholder: Advanced Solution 1
-  \item Placeholder: Advanced Solution 2
-  \item Placeholder: Advanced Solution 3
+% Section: The Hyperbolic Tangent and Resisted Motion
+\begin{problem}[The Hyperbolic Tangent and Resisted Motion]
+Consider the hyperbolic tangent function, defined as $y = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$.
+
+\begin{enumerate}
+    \item[\textbf{i}] Show that $y$ can be rewritten in the form $y = \frac{2}{1+e^{-2x}} - 1$, and hence state the equations of its horizontal asymptotes.
+    \item[\textbf{ii}] Prove that $y = \tanh(x)$ is a solution to the non-linear differential equation $\frac{dy}{dx} = 1 - y^2$.
+    \item[\textbf{iii}] Using the differential equation from part \textbf{ii} (without differentiating the original fraction again), find an expression for $\frac{d^2y}{dx^2}$ strictly in terms of $y$. Hence, find the coordinates of the unique point of inflection.
+    \item[\textbf{iv}] In a physics model, a falling object subject to quadratic air resistance has a velocity $v(t)$ satisfying $\frac{dv}{dt} = g - \frac{g}{V^2}v^2$, where $g$ and $V$ are positive constants. Given the object is dropped from rest ($v(0) = 0$), solve this differential equation by separating the variables to show that $v(t) = V \tanh\left(\frac{gt}{V}\right)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} To convert between the forms, try multiplying the numerator and denominator of the original definition by $e^{-x}$, then perform algebraic manipulation.
+    \item \textbf{For ii:} Differentiate the form you derived in part \textbf{i} using the chain rule. Separately, calculate $1 - y^2$ by substituting the algebraic fraction, and show the two results are identical. 
+    \item \textbf{For iii:} Use implicit differentiation on the equation $\frac{dy}{dx} = 1 - y^2$. Remember that $\frac{d}{dx}(y^2) = 2y \frac{dy}{dx}$. Set the second derivative to zero, but be sure to verify that the root you find is actually on the curve.
+    \item \textbf{For iv:} Factor out $\frac{g}{V^2}$ to get $\frac{dv}{dt} = \frac{g}{V^2}(V^2 - v^2)$. Separate the variables and use partial fractions to integrate $\frac{1}{V^2 - v^2}$.
 \end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Multiply top and bottom by $e^{-x}$:
+\[
+y=\frac{e^x-e^{-x}}{e^x+e^{-x}}=\frac{1-e^{-2x}}{1+e^{-2x}}
+=\frac{2}{1+e^{-2x}}-1.
+\]
+Hence $y\to 1$ as $x\to\infty$ and $y\to -1$ as $x\to-\infty$, so the horizontal asymptotes are $\boxed{y=1}$ and $\boxed{y=-1}$.
+
+\textbf{ii} From the form above,
+\[
+y'= -2(1+e^{-2x})^{-2}(-2e^{-2x})=\frac{4e^{-2x}}{(1+e^{-2x})^2}.
+\]
+Also
+\[
+1-y^2
+=1-\left(\frac{1-e^{-2x}}{1+e^{-2x}}\right)^2
+=\frac{(1+e^{-2x})^2-(1-e^{-2x})^2}{(1+e^{-2x})^2}
+=\frac{4e^{-2x}}{(1+e^{-2x})^2}.
+\]
+Thus $\boxed{y'=1-y^2}$.
+
+\textbf{iii} Differentiate the DE:
+\[
+y''=\frac{d}{dx}(1-y^2)=-2yy'=-2y(1-y^2)=2y^3-2y.
+\]
+Set $y''=0$:
+\[
+-2y(1-y^2)=0 \implies y=0,\pm1.
+\]
+The values $\pm1$ are asymptotes, so the actual inflection point occurs at $y=0$. Since $\tanh x=0$ gives $x=0$, the unique point of inflection is $\boxed{(0,0)}$.
+
+\textbf{iv} Write
+\[
+\frac{dv}{dt}=\frac{g}{V^2}(V^2-v^2), \qquad
+\int \frac{dv}{V^2-v^2}=\int \frac{g}{V^2}\,dt.
+\]
+Using
+\[
+\frac{1}{V^2-v^2}=\frac{1}{2V}\left(\frac{1}{V+v}+\frac{1}{V-v}\right),
+\]
+we get
+\[
+\ln\left(\frac{V+v}{V-v}\right)=\frac{2gt}{V}+C.
+\]
+Since $v(0)=0$, we have $C=0$. Therefore
+\[
+\frac{V+v}{V-v}=e^{2gt/V}
+\implies
+v=V\frac{e^{2gt/V}-1}{e^{2gt/V}+1}
+=V\tanh\left(\frac{gt}{V}\right).
+\]
+\[
+\boxed{v(t)=V\tanh\left(\frac{gt}{V}\right)}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Power of the DE:} Part \textbf{iii} highlights a crucial Extension 2 strategy. Differentiating an ugly fraction twice is a nightmare. Using the first-order DE to implicitly find the second derivative is incredibly fast and efficient.
+    \item \textbf{Mechanics Connections:} Pure mathematics and mechanics often overlap. The generic logistic/hyperbolic curves you study algebraically perfectly describe terminal velocity $V$ in quadratic drag models. Notice how the mathematical asymptote $y=1$ transforms into the physical speed limit $v=V$!
+\end{itemize}
+\end{takeaways}
+
+% Section: The Non-Linear Oscillator and Separatrix Curves
+\begin{problem}[The Non-Linear Oscillator and Separatrix Curves]
+Consider a particle moving along the $y$-axis where its acceleration is defined by the non-linear, autonomous differential equation $\frac{d^2y}{dx^2} = 2y^3 - 2y$. 
+The particle is subject to the initial conditions $y(0) = 0$ and $y'(0) = 1$. Let $v = \frac{dy}{dx}$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By using the substitution $\frac{d^2y}{dx^2} = v \frac{dv}{dy}$, show that the phase space trajectory of this specific solution is given by $v^2 = (1-y^2)^2$.
+    \item[\textbf{ii}] Explain carefully why, for this particular particle, the first-order differential equation simplifies strictly to $\frac{dy}{dx} = 1 - y^2$, and not $y^2 - 1$.
+    \item[\textbf{iii}] By separating the variables and using partial fractions, solve this first-order differential equation to find $x$ as a function of $y$.
+    \item[\textbf{iv}] Hence, show that the explicit solution for $y$ is given by the hyperbolic tangent function, $y = \tanh(x)$, and state the equations of its horizontal asymptotes.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Use the chain rule $y'' = v \frac{dv}{dy}$ and integrate both sides with respect to $y$. Don't forget to use the given initial conditions ($x=0, y=0, v=1$) to find the exact value of the constant of integration, then factor the resulting polynomial into a perfect square.
+    \item \textbf{For ii:} Taking the square root of $v^2 = (1-y^2)^2$ yields $v = \pm(1-y^2)$. Test the initial conditions again to determine which sign mathematically must be chosen.
+    \item \textbf{For iii:} Rearrange to $\int \frac{1}{1-y^2} dy = \int 1 \, dx$. You can use the algebraic identity $\frac{1}{1-y^2} = \frac{1}{2}\left(\frac{1}{1-y} + \frac{1}{1+y}\right)$ to integrate. Remember that integrating $\frac{1}{1-y}$ produces a negative logarithm!
+    \item \textbf{For iv:} Once you have $x = \frac{1}{2}\ln(\dots)$, multiply by 2, exponentiate both sides to remove the logarithm, and use algebra to group all the $y$ terms on one side. Remember the definition: $\tanh(x) = \frac{e^x-e^{-x}}{e^x+e^{-x}} = \frac{e^{2x}-1}{e^{2x}+1}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} With $v=\dfrac{dy}{dx}$, we have $y''=v\dfrac{dv}{dy}$, so
+\[
+v\frac{dv}{dy}=2y^3-2y.
+\]
+Integrating,
+\[
+\frac12v^2=\frac12y^4-y^2+C
+\implies
+v^2=y^4-2y^2+C.
+\]
+Using $y(0)=0$ and $v(0)=1$ gives $C=1$, hence
+\[
+v^2=y^4-2y^2+1=(1-y^2)^2.
+\]
+
+\textbf{ii} So $v=\pm(1-y^2)$. At $x=0$, $y=0$ and $v=1$, so the positive branch is forced:
+\[
+\boxed{\frac{dy}{dx}=1-y^2}.
+\]
+
+\textbf{iii} Separate variables:
+\[
+\int \frac{dy}{1-y^2}=\int dx.
+\]
+Since
+\[
+\frac{1}{1-y^2}=\frac12\left(\frac{1}{1+y}+\frac{1}{1-y}\right),
+\]
+we obtain
+\[
+\frac12\ln\left|\frac{1+y}{1-y}\right|=x+C.
+\]
+Using $(x,y)=(0,0)$ gives $C=0$, so
+\[
+\boxed{x=\frac12\ln\left(\frac{1+y}{1-y}\right)}.
+\]
+
+\textbf{iv} Exponentiating,
+\[
+e^{2x}=\frac{1+y}{1-y}
+\implies
+y=\frac{e^{2x}-1}{e^{2x}+1}
+=\frac{e^x-e^{-x}}{e^x+e^{-x}}
+=\tanh x.
+\]
+Thus
+\[
+\boxed{y=\tanh x},
+\]
+with horizontal asymptotes $\boxed{y=1}$ and $\boxed{y=-1}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Power of $v \frac{dv}{dy}$:} This substitution is the master key for solving \textit{any} autonomous second-order differential equation (where $x$ is missing). It essentially allows you to integrate an acceleration function to find an energy/velocity equation.
+    \item \textbf{Beware the Square Root:} In part \textbf{ii}, lazily writing $v = \pm \sqrt{(y^2-1)^2}$ without checking the initial conditions will doom the rest of the problem. Always verify your branch cuts in differential equations!
+    \item \textbf{Separatrix Curves:} In physics, the curve $y = \tanh(x)$ represents a ``separatrix'' in phase space. It is the exact boundary trajectory between a particle that is trapped oscillating in a potential well, and a particle that has enough energy to escape entirely.
+\end{itemize}
+\end{takeaways}
+
+% Problem 2.3: Damped Harmonic Motion (Easy)
+\begin{problem}[Damped Harmonic Motion]
+Consider the function $y = e^{-x}(A \cos 2x + B \sin 2x)$, where $A$ and $B$ are arbitrary constants.
+
+\begin{enumerate}
+    \item[\textbf{i}] Use the product rule to find the first derivative, $y'$, and the second derivative, $y''$, simplifying your answers by grouping the sine and cosine terms.
+    \item[\textbf{ii}] Verify that the given function is a general solution to the differential equation $y'' + 2y' + 5y = 0$.
+    \item[\textbf{iii}] Find the exact values of $A$ and $B$ given the initial conditions $y(0) = 2$ and $y'(0) = -2$.
+    \item[\textbf{iv}] Using the values of $A$ and $B$ found in part \textbf{iii}, describe the behavior of the solution curve as $x \to \infty$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Let $u = e^{-x}$ and $v = A \cos 2x + B \sin 2x$. When finding the second derivative, be careful with the negative signs from the chain rule. 
+    \item \textbf{For ii:} Substitute your expressions for $y, y'$, and $y''$ into the left-hand side of the differential equation. Group all the $e^{-x}\cos 2x$ terms together and all the $e^{-x}\sin 2x$ terms together to show they sum to zero.
+    \item \textbf{For iii:} Substitute $x=0$ into your original equation for $y$ to easily find $A$. Then substitute $x=0$ and your value for $A$ into your equation for $y'$ from part \textbf{i} to solve for $B$.
+    \item \textbf{For iv:} Consider the limits of the exponential and trigonometric components separately. What happens to $e^{-x}$ as $x$ gets infinitely large?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given $y = e^{-x}(A \cos 2x + B \sin 2x)$. \\
+Using the product rule:
+\begin{align*}
+    y' &= -e^{-x}(A \cos 2x + B \sin 2x) + e^{-x}(-2A \sin 2x + 2B \cos 2x) \\
+    y' &= e^{-x}[(-A + 2B)\cos 2x + (-2A - B)\sin 2x]
+\end{align*}
+
+Differentiating again using the product rule:
+\[ y'' = -e^{-x}[(-A + 2B)\cos 2x + (-2A - B)\sin 2x] + e^{-x}[-2(-A + 2B)\sin 2x + 2(-2A - B)\cos 2x] \]
+Grouping the cosine terms: $-(-A + 2B) + 2(-2A - B) = A - 2B - 4A - 2B = -3A - 4B$ \\
+Grouping the sine terms: $-(-2A - B) - 2(-A + 2B) = 2A + B + 2A - 4B = 4A - 3B$
+\[ y'' = e^{-x}[(-3A - 4B)\cos 2x + (4A - 3B)\sin 2x] \]
+
+\vspace{0.3cm}
+\textbf{ii} Substitute $y, y'$, and $y''$ into the LHS of $y'' + 2y' + 5y = 0$:
+\[ \text{LHS} = e^{-x}[(-3A - 4B)\cos 2x + (4A - 3B)\sin 2x] + 2e^{-x}[(-A + 2B)\cos 2x + (-2A - B)\sin 2x] + 5e^{-x}[A \cos 2x + B \sin 2x] \]
+Factor out $e^{-x}$ and group by trig function: \\
+$\cos 2x$ coefficient: $(-3A - 4B) + 2(-A + 2B) + 5A = -3A - 4B - 2A + 4B + 5A = 0$ \\
+$\sin 2x$ coefficient: $(4A - 3B) + 2(-2A - B) + 5B = 4A - 3B - 4A - 2B + 5B = 0$
+\[ \text{LHS} = e^{-x}[0 \cos 2x + 0 \sin 2x] = 0 = \text{RHS} \quad \qed \]
+
+\vspace{0.3cm}
+\textbf{iii} Apply $y(0) = 2$:
+\[ 2 = e^0(A \cos 0 + B \sin 0) \implies 2 = 1(A + 0) \implies \mathbf{A = 2} \]
+Apply $y'(0) = -2$ using the formula from part \textbf{i}:
+\begin{align*}
+    -2 &= e^0[(-A + 2B)\cos 0 + (-2A - B)\sin 0] \\
+    -2 &= 1[-A + 2B]
+\end{align*}
+Substitute $A = 2$:
+\[ -2 = -2 + 2B \implies 0 = 2B \implies \mathbf{B = 0} \]
+
+\vspace{0.3cm}
+\textbf{iv} With $A=2$ and $B=0$, the particular solution is $y = 2e^{-x}\cos 2x$. \\
+As $x \to \infty$, the trigonometric term $\cos 2x$ oscillates continuously between $-1$ and $1$. However, the exponential decay term $e^{-x} \to 0$. \\
+Therefore, the amplitude of the oscillation approaches zero, and \textbf{$y \to 0$ as $x \to \infty$}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item A damped oscillation combines periodic behavior with exponential decay.
+    \item Verifying a second-order solution is often faster than solving the differential equation from scratch.
+    \item Initial conditions usually determine the phase constants most cleanly when evaluated at $x=0$.
+\end{itemize}
+\end{takeaways}
+
+\vspace{1cm}
+
+% Problem 2.4: Fourth-Order Verification (Medium)
+\begin{problem}[Fourth-Order Verification]
+Consider the function $y = Ae^x + Be^{-x} + C\cos 2x + D\sin 2x$, where $A, B, C$, and $D$ are arbitrary constants.
+
+\begin{enumerate}
+    \item[\textbf{i}] Find the second derivative $y''$ and the fourth derivative $y^{(4)}$. 
+    \item[\textbf{ii}] Verify that the given function is a general solution to the fourth-order differential equation $y^{(4)} + 3y'' - 4y = 0$.
+    \item[\textbf{iii}] A specific physical system modeled by this equation requires the solution $y(x)$ to remain bounded (finite) as $x \to \infty$ and also as $x \to -\infty$. Deduce the necessary values of the constants $A$ and $B$.
+    \item[\textbf{iv}] Using your findings from part \textbf{iii}, and given the initial conditions $y(0) = 3$ and $y'(0) = 4$, find the exact particular solution for the system.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} The derivatives of exponential functions cycle simply, and trigonometric functions cycle every four derivatives. 
+    \item \textbf{For ii:} Substitute $y^{(4)}, y''$, and $y$ into the left-hand side of the equation. Group the terms by their function type ($e^x, e^{-x}, \cos 2x, \sin 2x$).
+    \item \textbf{For iii:} Analyze the limits. What happens to $Ae^x$ as $x \to \infty$? What happens to $Be^{-x}$ as $x \to -\infty$? If the solution must be bounded, these terms cannot be allowed to grow infinitely.
+    \item \textbf{For iv:} Set $A$ and $B$ to the values you deduced, leaving a much simpler equation with only $C$ and $D$. Substitute $x=0$ into your simplified $y$ and $y'$ to find the remaining constants.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given $y = Ae^x + Be^{-x} + C\cos 2x + D\sin 2x$. \\
+First derivative:
+\[ y' = Ae^x - Be^{-x} - 2C\sin 2x + 2D\cos 2x \]
+Second derivative:
+\[ y'' = Ae^x + Be^{-x} - 4C\cos 2x - 4D\sin 2x \]
+Third derivative:
+\[ y''' = Ae^x - Be^{-x} + 8C\sin 2x - 8D\cos 2x \]
+Fourth derivative:
+\[ y^{(4)} = Ae^x + Be^{-x} + 16C\cos 2x + 16D\sin 2x \]
+
+\vspace{0.3cm}
+\textbf{ii} Substitute into the LHS of $y^{(4)} + 3y'' - 4y = 0$:
+\[ \text{LHS} = (Ae^x + Be^{-x} + 16C\cos 2x + 16D\sin 2x) + 3(Ae^x + Be^{-x} - 4C\cos 2x - 4D\sin 2x) - 4(Ae^x + Be^{-x} + C\cos 2x + D\sin 2x) \]
+Group the terms: \\
+$e^x$ terms: $A + 3A - 4A = 0$ \\
+$e^{-x}$ terms: $B + 3B - 4B = 0$ \\
+$\cos 2x$ terms: $16C - 12C - 4C = 0$ \\
+$\sin 2x$ terms: $16D - 12D - 4D = 0$
+\[ \text{LHS} = 0 = \text{RHS} \quad \qed \]
+
+\vspace{0.3cm}
+\textbf{iii} Consider the behavior of the terms as $x \to \pm \infty$: \\
+The trigonometric terms $C\cos 2x$ and $D\sin 2x$ are always bounded between $-|C|$ and $|C|$, and $-|D|$ and $|D|$. \\
+As $x \to \infty$, the term $Ae^x \to \pm \infty$ unless $A = 0$. Therefore, to remain bounded as $x$ gets infinitely large, we must have \textbf{$A = 0$}. \\
+As $x \to -\infty$, the term $Be^{-x} \to \pm \infty$ unless $B = 0$. Therefore, to remain bounded as $x$ gets infinitely negative, we must have \textbf{$B = 0$}.
+
+\vspace{0.3cm}
+\textbf{iv} Given $A = 0$ and $B = 0$, the general solution simplifies to $y = C\cos 2x + D\sin 2x$. \\
+The first derivative is $y' = -2C\sin 2x + 2D\cos 2x$. \\
+Apply $y(0) = 3$:
+\[ 3 = C\cos 0 + D\sin 0 \implies \mathbf{C = 3} \]
+Apply $y'(0) = 4$:
+\[ 4 = -2(3)\sin 0 + 2D\cos 0 \implies 4 = 2D \implies \mathbf{D = 2} \]
+The exact particular solution is:
+\[ \mathbf{y = 3\cos 2x + 2\sin 2x} \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Higher-order verification still follows the same pattern: differentiate, substitute, and group like terms.
+    \item Boundedness conditions can eliminate entire exponential branches immediately.
+    \item Even a fourth-order model can collapse to a short system for the remaining constants once the physical constraints are used.
+\end{itemize}
+\end{takeaways}
+
+% Section: The Vibrating Cantilever Beam
+\begin{problem}[The Vibrating Cantilever Beam]
+In the study of vibrating cantilever beams (such as a diving board or an airplane wing), the vertical deflection $y(x)$ satisfies the fourth-order differential equation $\frac{d^4y}{dx^4} = \lambda^4 y$, where $\lambda$ is a positive constant related to the beam's material and frequency. The general solution is given by:
+\[ y(x) = C_1 \cosh(\lambda x) + C_2 \sinh(\lambda x) + C_3 \cos(\lambda x) + C_4 \sin(\lambda x) \]
+A cantilever beam of length $L$ is clamped firmly into a wall at $x=0$ and is completely free at $x=L$. 
+
+\begin{enumerate}
+    \item[\textbf{i}] At the clamped end ($x=0$), there is zero deflection ($y=0$) and zero slope ($y'=0$). Use these boundary conditions to show that $C_3 = -C_1$ and $C_4 = -C_2$, reducing the solution to $y(x) = C_1(\cosh \lambda x - \cos \lambda x) + C_2(\sinh \lambda x - \sin \lambda x)$.
+    \item[\textbf{ii}] At the free end ($x=L$), there is no bending moment and no shear force, which mathematically requires $y''(L) = 0$ and $y'''(L) = 0$. Calculate $y''(x)$ and $y'''(x)$, and write down the two equations that $C_1$ and $C_2$ must satisfy at $x=L$.
+    \item[\textbf{iii}] For the beam to actually vibrate, it must have a non-trivial solution (meaning $C_1$ and $C_2$ cannot both be zero). By eliminating $C_1$ and $C_2$ from your equations in part \textbf{ii}, prove that $\lambda L$ must satisfy the characteristic equation $\cos(\lambda L)\cosh(\lambda L) = -1$.
+    \item[\textbf{iv}] Let the amplitude constant be $A = C_1$. Using your equations from part \textbf{ii}, express $C_2$ in terms of $A$, $\lambda$, and $L$. Hence, write down the final equation for the mode shape of the vibrating beam, $y(x)$, entirely in terms of $A, \lambda, L$, and $x$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Remember that $\cosh(0)=1, \sinh(0)=0, \cos(0)=1$, and $\sin(0)=0$. When differentiating, recall that $\frac{d}{dx}\cosh(\lambda x) = \lambda\sinh(\lambda x)$ and $\frac{d}{dx}\sinh(\lambda x) = \lambda\cosh(\lambda x)$.
+    \item \textbf{For ii:} Differentiate the reduced equation from part \textbf{i} twice more. Set $x=L$ and equate both expressions to $0$. You can divide out the common $\lambda^2$ and $\lambda^3$ factors since $\lambda > 0$.
+    \item \textbf{For iii:} You have a system of two linear equations. Solve the first equation for $C_2$ in terms of $C_1$, and substitute it into the second equation. Since $C_1 \neq 0$, you can divide it out. Expand the brackets carefully and use the fundamental identities $\cosh^2 \theta - \sinh^2 \theta = 1$ and $\cos^2 \theta + \sin^2 \theta = 1$ to simplify the massive resulting fraction down to $-1$.
+    \item \textbf{For iv:} Rearrange either of the boundary equations from part \textbf{ii} to make $C_2$ the subject, and simply substitute it back into the equation from part \textbf{i}.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Given $y(x) = C_1 \cosh(\lambda x) + C_2 \sinh(\lambda x) + C_3 \cos(\lambda x) + C_4 \sin(\lambda x)$. \\
+Apply $y(0) = 0$:
+\[ 0 = C_1(1) + C_2(0) + C_3(1) + C_4(0) \implies C_3 = -C_1 \]
+Differentiate to find $y'(x)$:
+\[ y'(x) = \lambda C_1 \sinh(\lambda x) + \lambda C_2 \cosh(\lambda x) - \lambda C_3 \sin(\lambda x) + \lambda C_4 \cos(\lambda x) \]
+Apply $y'(0) = 0$:
+\[ 0 = \lambda[C_1(0) + C_2(1) - C_3(0) + C_4(1)] \implies C_4 = -C_2 \]
+Substitute $C_3$ and $C_4$ back into the general solution and factor:
+\begin{align*}
+    y(x) &= C_1 \cosh(\lambda x) + C_2 \sinh(\lambda x) - C_1 \cos(\lambda x) - C_2 \sin(\lambda x) \\
+    y(x) &= C_1(\cosh \lambda x - \cos \lambda x) + C_2(\sinh \lambda x - \sin \lambda x) \quad \qed
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{ii} Differentiate $y(x)$ from part \textbf{i} to find the second and third derivatives:
+\begin{align*}
+    y'(x) &= \lambda [C_1(\sinh \lambda x + \sin \lambda x) + C_2(\cosh \lambda x - \cos \lambda x)] \\
+    y''(x) &= \lambda^2 [C_1(\cosh \lambda x + \cos \lambda x) + C_2(\sinh \lambda x + \sin \lambda x)] \\
+    y'''(x) &= \lambda^3 [C_1(\sinh \lambda x - \sin \lambda x) + C_2(\cosh \lambda x + \cos \lambda x)]
+\end{align*}
+Applying the boundary conditions at $x=L$:
+\begin{align*}
+    y''(L) = 0 &\implies \mathbf{C_1(\cosh \lambda L + \cos \lambda L) + C_2(\sinh \lambda L + \sin \lambda L) = 0} \quad \textit{(Eq. 1)} \\
+    y'''(L) = 0 &\implies \mathbf{C_1(\sinh \lambda L - \sin \lambda L) + C_2(\cosh \lambda L + \cos \lambda L) = 0} \quad \textit{(Eq. 2)}
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{iii} From (Eq. 1), isolate $C_2$:
+\[ C_2 = -C_1 \frac{\cosh \lambda L + \cos \lambda L}{\sinh \lambda L + \sin \lambda L} \]
+Substitute this expression for $C_2$ into (Eq. 2):
+\[ C_1(\sinh \lambda L - \sin \lambda L) - C_1 \frac{(\cosh \lambda L + \cos \lambda L)^2}{\sinh \lambda L + \sin \lambda L} = 0 \]
+Since we seek a non-trivial solution, $C_1 \neq 0$, so we can divide it out. Multiply the entire equation by $(\sinh \lambda L + \sin \lambda L)$ to clear the denominator:
+\[ (\sinh \lambda L - \sin \lambda L)(\sinh \lambda L + \sin \lambda L) - (\cosh \lambda L + \cos \lambda L)^2 = 0 \]
+Expand using difference of two squares and perfect squares:
+\[ (\sinh^2 \lambda L - \sin^2 \lambda L) - (\cosh^2 \lambda L + 2\cosh \lambda L \cos \lambda L + \cos^2 \lambda L) = 0 \]
+Group the hyperbolic and trigonometric terms together:
+\[ (\sinh^2 \lambda L - \cosh^2 \lambda L) - (\sin^2 \lambda L + \cos^2 \lambda L) - 2\cosh \lambda L \cos \lambda L = 0 \]
+Using the identities $\cosh^2 \theta - \sinh^2 \theta = 1 \implies \sinh^2 \theta - \cosh^2 \theta = -1$, and $\sin^2 \theta + \cos^2 \theta = 1$:
+\begin{align*}
+    -1 - 1 - 2\cosh \lambda L \cos \lambda L &= 0 \\
+    -2 &= 2\cosh \lambda L \cos \lambda L \\
+    \cos(\lambda L)\cosh(\lambda L) &= -1 \quad \qed
+\end{align*}
+
+\vspace{0.3cm}
+\textbf{iv} Using the substitution from part \textbf{iii} and letting $C_1 = A$:
+\[ C_2 = -A \frac{\cosh \lambda L + \cos \lambda L}{\sinh \lambda L + \sin \lambda L} \]
+Substitute $C_1$ and $C_2$ into the equation from part \textbf{i}:
+\[ \mathbf{y(x) = A \left[ (\cosh \lambda x - \cos \lambda x) - \frac{\cosh \lambda L + \cos \lambda L}{\sinh \lambda L + \sin \lambda L} (\sinh \lambda x - \sin \lambda x) \right]} \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Eigenvalue Problems:} The equation $\cos(\lambda L)\cosh(\lambda L) = -1$ cannot be solved algebraically. It has infinitely many discrete roots (eigenvalues), which correspond to the fundamental frequency and the higher harmonics (overtones) of the vibrating beam. 
+    \item \textbf{Linear Algebra meets Calculus:} In part \textbf{iii}, finding a ``non-trivial solution'' to a system of two equations equal to zero is equivalent to saying the determinant of their coefficients must be zero. Setting the determinant of the coefficient matrix to zero yields the exact same characteristic equation much faster!
+\end{itemize}
+\end{takeaways}
+
+% Section: Pharmacokinetics and Two-Compartment Diffusion
+\begin{problem}[Pharmacokinetics and Two-Compartment Diffusion]
+According to Fick's law, diffusion across a semi-permeable membrane is driven by the concentration gradient. The classic model assumes the surrounding concentration is constant. However, in closed medical systems, this is not true. 
+
+A drug is injected into a patient's bloodstream. The blood has a volume of $V_B = 4$ Litres, and the drug diffuses into a target organ with a volume of $V_O = 1$ Litre. Let $B(t)$ and $C(t)$ be the concentration of the drug (in mg/L) in the blood and the organ respectively, at time $t$ hours.
+
+A total mass of $100$ mg of the drug is injected into the bloodstream at $t=0$, meaning $B(0) = 25$ mg/L and $C(0) = 0$ mg/L. The total mass of the drug in the system is conserved such that $4B(t) + 1C(t) = 100$ for all $t \ge 0$. 
+
+The rate at which the drug diffuses into the organ is governed by Fick's Law:
+\[ \frac{dC}{dt} = k(B - C) \]
+where $k$ is a positive constant of permeability.
+
+\begin{enumerate}
+    \item[\textbf{i}] Use the conservation of mass equation to express $B$ in terms of $C$, and hence show that the differential equation can be written purely in terms of $C$ as $\frac{dC}{dt} = \frac{5k}{4}(20 - C)$.
+    \item[\textbf{ii}] By separating the variables, solve this initial value problem to find an explicit formula for the concentration of the drug in the organ, $C(t)$.
+    \item[\textbf{iii}] Determine the limiting values of both $C(t)$ and $B(t)$ as $t \to \infty$. Explain the physical significance of this result in the context of diffusion.
+    \item[\textbf{iv}] Suppose medical imaging shows that it takes exactly $2$ hours for the concentration in the organ to reach $10$ mg/L. Find the exact value of $k$. Hence, determine the exact rate of diffusion ($\frac{dC}{dt}$) at this instant.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Rearrange the linear equation $4B + C = 100$ to make $B$ the subject. Substitute this expression for $B$ into the original differential equation and factorise the right-hand side.
+    \item \textbf{For ii:} Separate the variables to get $\int \frac{1}{20 - C} \, dC = \int \frac{5k}{4} \, dt$. Be very careful with the negative sign when integrating the left side! Apply the initial condition $C(0) = 0$ to find your constant.
+    \item \textbf{For iii:} Consider the behaviour of the exponential term $e^{-rt}$ as time goes to infinity. Once you find the limit of $C(t)$, use the conservation equation to find the corresponding limit of $B(t)$.
+    \item \textbf{For iv:} Substitute $t=2$ and $C=10$ into your explicit function from part \textbf{ii} and use logarithms to solve for $k$. To find the rate, you do not need to differentiate your function—simply substitute your values for $k$ and $C$ back into the differential equation from part \textbf{i}.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} From $4B+C=100$,
+\[
+B=25-\frac C4.
+\]
+Substituting into $\dfrac{dC}{dt}=k(B-C)$ gives
+\[
+\frac{dC}{dt}=k\left(25-\frac54C\right)=\frac{5k}{4}(20-C).
+\]
+
+\textbf{ii} Separate variables:
+\[
+\int \frac{dC}{20-C}=\int \frac{5k}{4}\,dt.
+\]
+Hence
+\[
+-\ln(20-C)=\frac{5k}{4}t+A
+\]
+and, using $C(0)=0$,
+\[
+20-C=20e^{-5kt/4}.
+\]
+Therefore
+\[
+\boxed{C(t)=20\left(1-e^{-5kt/4}\right)}.
+\]
+
+\textbf{iii} As $t\to\infty$, the exponential term vanishes, so
+\[
+\lim_{t\to\infty}C(t)=20.
+\]
+Then $4B+20=100$, giving
+\[
+\lim_{t\to\infty}B(t)=20.
+\]
+So both compartments approach the same concentration, and diffusion stops at equilibrium.
+
+\textbf{iv} Since $C(2)=10$,
+\[
+10=20\left(1-e^{-5k/2}\right)
+\implies e^{-5k/2}=\frac12
+\implies \boxed{k=\frac{2}{5}\ln 2}.
+\]
+At that instant,
+\[
+\frac{dC}{dt}=\frac{5k}{4}(20-C)
+=\frac{5}{4}\cdot \frac{2\ln 2}{5}\cdot 10
+=\boxed{5\ln 2\text{ mg/L/hr}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Coupled Systems:} In real life, biological compartments aren't infinite. As the organ absorbs the drug, the blood loses it. This problem shows how to use a secondary relationship (conservation of mass) to collapse a two-variable system into a solvable, single-variable differential equation.
+    \item \textbf{Equilibrium isn't just zero:} In exponential decay problems, things usually drop to zero. In coupled diffusion, the system shifts until the \textit{gradient} is zero. Calculating the limits proves that diffusion stops exactly when the concentrations match.
+    \item \textbf{Work Smarter:} In part \textbf{iv}, calculating the rate directly from the $\frac{dC}{dt}$ equation is much faster and less prone to algebraic errors than differentiating the explicit solution $C(t)$. Always look back to the original DE!
+\end{itemize}
+\end{takeaways}
+
+% Section: Radiosonde Telemetry in the Snowy Mountains
+\begin{problem}[Radiosonde Telemetry in the Snowy Mountains]
+A Bureau of Meteorology (BOM) radiosonde balloon is launched from a station near the Snowy Mountains. The atmospheric pressure $P$ (in kPa) at altitude $h$ (in meters) decreases at a rate proportional to the current pressure, governed by the differential equation $\frac{dP}{dh} = -kP$, for some positive constant $k$.
+
+\begin{enumerate}
+    \item[\textbf{i}] By separating the variables, find the general solution for $P$ in terms of $h$, initial pressure $P_0$, and $k$.
+    \item[\textbf{ii}] Tracking data shows that the pressure at an altitude of $2\,000$ m is $80$ kPa, and at $6\,000$ m it is $40$ kPa. Find the exact value of the decay constant $k$, and show that the ground-level pressure at the launch station ($h=0$) is exactly $80\sqrt{2}$ kPa.
+    \item[\textbf{iii}] The balloon ascends at a constant vertical velocity of $5$ m/s. Let $t$ be the time in seconds after launch. Use the chain rule to formulate a differential equation for $\frac{dP}{dt}$, and hence express $P$ explicitly as a function of time $t$.
+    \item[\textbf{iv}] The radiosonde's pressure sensor requires the magnitude of the depressurization rate ($\left|\frac{dP}{dt}\right|$) to remain above $0.05$ kPa/s to calibrate its internal altimeter accurately. Calculate the exact altitude $h$ at which the sensor loses accurate calibration.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For i:} Move $P$ to the left and $dh$ to the right. Integrate both sides to get a natural logarithm, then exponentiate. Apply the condition that at $h=0$, $P=P_0$.
+    \item \textbf{For ii:} Set up two equations using the two data points. Divide the $6\,000$ m equation by the $2\,000$ m equation to eliminate $P_0$ and solve for $k$. To find $P_0$, substitute $k$ back into the first equation and use index laws like $e^{A \ln B} = B^A$.
+    \item \textbf{For iii:} The vertical velocity is $\frac{dh}{dt} = 5$. Apply the chain rule: $\frac{dP}{dt} = \frac{dP}{dh} \cdot \frac{dh}{dt}$. Solve this new differential equation with respect to $t$. 
+    \item \textbf{For iv:} The magnitude of depressurization is simply the positive version of your rate from part \textbf{iii}. Set $5kP = 0.05$ to find the exact pressure $P$ at which failure occurs. Then, equate this $P$ to your altitude equation $P(h)$ to find $h$. You will need to use logarithm laws carefully, resulting in a nested logarithm $\ln(\ln 2)$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Separating variables,
+\[
+\int \frac{1}{P}\,dP=\int -k\,dh
+\implies \ln P=-kh+C.
+\]
+If $P(0)=P_0$, then $e^C=P_0$, so
+\[
+\boxed{P(h)=P_0e^{-kh}}.
+\]
+
+\textbf{ii} Using $P(2000)=80$ and $P(6000)=40$,
+\[
+80=P_0e^{-2000k}, \qquad 40=P_0e^{-6000k}.
+\]
+Dividing gives
+\[
+\frac12=e^{-4000k}
+\implies
+\boxed{k=\frac{\ln 2}{4000}}.
+\]
+Then
+\[
+80=P_0e^{-(1/2)\ln 2}=P_0\cdot \frac{1}{\sqrt2},
+\]
+so
+\[
+\boxed{P_0=80\sqrt2\text{ kPa}}.
+\]
+
+\textbf{iii} Since $\dfrac{dh}{dt}=5$,
+\[
+\frac{dP}{dt}=\frac{dP}{dh}\frac{dh}{dt}=-kP\cdot 5=-5kP
+=-\frac{\ln 2}{800}P.
+\]
+Hence
+\[
+P(t)=P_0e^{-(\ln 2)t/800}
+=\boxed{80\sqrt2\cdot 2^{-t/800}}.
+\]
+
+\textbf{iv} The calibration fails when
+\[
+\left|\frac{dP}{dt}\right|=5kP=0.05
+\implies
+P=\frac{0.01}{k}=\frac{40}{\ln 2}.
+\]
+Now solve
+\[
+80\sqrt2\,e^{-kh}=\frac{40}{\ln 2}
+\implies
+e^{-kh}=\frac{1}{2\sqrt2\,\ln 2}.
+\]
+Taking logs,
+\[
+-kh=-\frac32\ln 2-\ln(\ln 2),
+\]
+so
+\[
+h=\frac{\frac32\ln 2+\ln(\ln 2)}{k}
+=\boxed{6000+4000\frac{\ln(\ln 2)}{\ln 2}\text{ m}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Linking Variables via Chain Rule:} Differential equations in textbooks often stick to just two variables (like $y$ and $x$). In reality, systems move through time \textit{and} space. Part \textbf{iii} demonstrates how the chain rule allows you to transform a spatial differential equation ($\frac{dP}{dh}$) into a temporal one ($\frac{dP}{dt}$).
+    \item \textbf{Exact Value Discipline:} Decimals will ruin your accuracy in exponential models. Learning to manipulate terms like $e^{-0.5 \ln 2}$ into $\frac{1}{\sqrt{2}}$ is a crucial algebraic skill for high-level HSC Mathematics.
+    \item \textbf{Nested Logarithms:} Don't panic if you see $\ln(\ln x)$. It behaves exactly like any other term algebraically. Just trust the logarithm laws!
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Non-Linear Differential Equations and Trigonometric Families]
+The non-linear differential equation
+\[
+(y')^2=4y(1-y)
+\]
+has non-constant solution families
+\[
+y_1(x)=\sin^2(x+\alpha), \qquad y_2(x)=\cos^2(x+\beta).
+\]
+
+\begin{enumerate}
+    \item[\textbf{i}] Find the constant solutions and explain their geometric significance.
+    \item[\textbf{ii}] Verify that both $y_1$ and $y_2$ satisfy the differential equation.
+    \item[\textbf{iii}] Show that the two families are the same up to a phase shift, and find a relation between $\alpha$ and $\beta$.
+    \item[\textbf{iv}] If $y(0)=\frac34$ and $y'(0)<0$, determine $\alpha$ and $\beta$ in the interval $0\le \alpha,\beta<\pi$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Set $y'=0$ first to find constant solutions.
+    \item Differentiate the trial solutions carefully and square only at the end.
+    \item Use $\sin^2\theta=\frac12(1-\cos 2\theta)$ and $\cos^2\theta=\frac12(1+\cos 2\theta)$.
+    \item The sign condition on $y'(0)$ selects the correct branch.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} If $y=c$ is constant, then $y'=0$, so
+\[
+0=4c(1-c).
+\]
+Hence the constant solutions are
+\[
+\boxed{y=0 \quad \text{and} \quad y=1.}
+\]
+They act as horizontal envelope curves because the non-constant trigonometric solutions stay between $0$ and $1$.
+
+\textbf{ii} For $y_1(x)=\sin^2(x+\alpha)$,
+\[
+y_1'=2\sin(x+\alpha)\cos(x+\alpha)=\sin(2x+2\alpha),
+\]
+so
+\[
+(y_1')^2=\sin^2(2x+2\alpha)=4\sin^2(x+\alpha)\cos^2(x+\alpha)=4y_1(1-y_1).
+\]
+Similarly, for $y_2(x)=\cos^2(x+\beta)$,
+\[
+y_2'=-\sin(2x+2\beta), \qquad (y_2')^2=4y_2(1-y_2).
+\]
+
+\textbf{iii} Rewrite both families:
+\[
+y_1(x)=\frac12\bigl(1-\cos(2x+2\alpha)\bigr), \qquad
+y_2(x)=\frac12\bigl(1+\cos(2x+2\beta)\bigr).
+\]
+For the families to describe the same curves we need
+\[
+-\cos(2x+2\alpha)=\cos(2x+2\beta).
+\]
+Using $-\cos\theta=\cos(\theta+\pi)$ gives
+\[
+2\beta=2\alpha\pm\pi
+\qquad \Longrightarrow \qquad
+\boxed{\beta=\alpha\pm\frac{\pi}{2}.}
+\]
+
+\textbf{iv} From $y_1(0)=\sin^2\alpha=\frac34$, we get $\alpha=\frac{\pi}{3}$ or $\alpha=\frac{2\pi}{3}$. Also
+\[
+y_1'(0)=\sin(2\alpha).
+\]
+The condition $y'(0)<0$ forces $\sin(2\alpha)<0$, so
+\[
+\boxed{\alpha=\frac{2\pi}{3}.}
+\]
+Then
+\[
+\beta=\alpha-\frac{\pi}{2}=\frac{2\pi}{3}-\frac{\pi}{2}=\boxed{\frac{\pi}{6}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Non-linear equations can admit envelope solutions such as $y=0$ and $y=1$.
+    \item Squaring a derivative hides sign information, so initial conditions matter.
+    \item Two different-looking trigonometric answers may represent the same family up to phase shift.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Non-Dimensionalisation and the Richards Growth Model]
+Let $A(t)$ satisfy
+\[
+\frac{dA}{dt}=kA(M^2-A^2), \qquad A(0)=A_0,
+\]
+where $k>0$ and $M>0$ are constants.
+
+\begin{enumerate}
+    \item[\textbf{i}] Use the substitution $A=M\sqrt{y}$ to show that $y$ satisfies
+    \[
+    \frac{dy}{dt}=2kM^2y(1-y).
+    \]
+    \item[\textbf{ii}] Define $\tau=2kM^2t$ and show that the equation reduces to
+    \[
+    \frac{dy}{d\tau}=y(1-y).
+    \]
+    \item[\textbf{iii}] Use $v=\frac1y$ to transform this into a linear equation for $v$, and solve it.
+    \item[\textbf{iv}] Hence find an explicit formula for $A(t)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Differentiate $A=My^{1/2}$ using the chain rule.
+    \item The substitution $\tau=2kM^2t$ removes all parameters from the equation.
+    \item If $v=y^{-1}$, then $\dfrac{dv}{d\tau}=-y^{-2}\dfrac{dy}{d\tau}$.
+    \item Apply $A(0)=A_0$ only after converting back from $v$ to $y$ and then to $A$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{i} Let $A=M\sqrt{y}$. Then
+\[
+\frac{dA}{dt}=\frac12My^{-1/2}\frac{dy}{dt}.
+\]
+Substituting into the original equation gives
+\[
+\frac12My^{-1/2}\frac{dy}{dt}=k(My^{1/2})(M^2-M^2y).
+\]
+After simplifying,
+\[
+\boxed{\frac{dy}{dt}=2kM^2y(1-y).}
+\]
+
+\textbf{ii} If $\tau=2kM^2t$, then
+\[
+\frac{dy}{dt}=\frac{dy}{d\tau}\frac{d\tau}{dt}=2kM^2\frac{dy}{d\tau},
+\]
+so
+\[
+\boxed{\frac{dy}{d\tau}=y(1-y).}
+\]
+
+\textbf{iii} Set $v=\dfrac1y$. Then
+\[
+\frac{dv}{d\tau}=-y^{-2}\frac{dy}{d\tau}=-y^{-2}(y-y^2)=-\frac1y+1=-v+1.
+\]
+Hence
+\[
+\frac{dv}{d\tau}+v=1.
+\]
+Using the integrating factor $e^\tau$,
+\[
+\frac{d}{d\tau}(ve^\tau)=e^\tau,
+\]
+so after integrating,
+\[
+\boxed{v(\tau)=1+Ce^{-\tau}.}
+\]
+
+\textbf{iv} Since $y=\dfrac1v$,
+\[
+y(\tau)=\frac{1}{1+Ce^{-\tau}}.
+\]
+Therefore
+\[
+A(t)=M\sqrt{y}=\frac{M}{\sqrt{1+Ce^{-2kM^2t}}}.
+\]
+Use $A(0)=A_0$:
+\[
+A_0=\frac{M}{\sqrt{1+C}}
+\qquad \Longrightarrow \qquad
+C=\frac{M^2-A_0^2}{A_0^2}.
+\]
+Hence
+\[
+\boxed{
+A(t)=\frac{MA_0}{\sqrt{A_0^2+(M^2-A_0^2)e^{-2kM^2t}}}.
+}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Non-dimensionalisation strips away parameters and reveals the universal structure of a model.
+    \item A substitution can reduce a non-linear growth law to a standard logistic form.
+    \item Reciprocal substitutions such as $v=\frac1y$ are a powerful linearisation tool.
+\end{itemize}
+\end{takeaways}

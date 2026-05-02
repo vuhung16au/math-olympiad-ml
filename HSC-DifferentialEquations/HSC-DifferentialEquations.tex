@@ -111,6 +111,28 @@ Before working through this booklet, students should be comfortable with:
   \item graph sketching and the interpretation of gradients.
 \end{itemize}
 
+\subsection{Extension 2 Mechanics Connections}
+These topics form the backbone of the \textbf{Mechanics} and \textbf{Calculus} components of HSC Mathematics Extension~2. Even when a question is presented as a mechanics problem, the mathematics often reduces to setting up the correct differential equation and then choosing the right substitution.
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Exponential growth and decay:} $\dfrac{dy}{dt}=ky$ leads to $y=Ae^{kt}$.
+  \item \textbf{Water tanks and Torricelli-style models:} $\dfrac{dh}{dt}=-k\sqrt{h}$ is a standard separable form.
+  \item \textbf{Resistive motion:} equations such as $m\dfrac{dv}{dt}=mg-kv$ lead to terminal velocity and approach-to-limit behavior.
+  \item \textbf{Escape velocity and gravitation:} the substitution $a=v\dfrac{dv}{dx}$ turns force laws into equations in $v$ and $x$.
+  \item \textbf{Simple harmonic motion and spring motion:} equations such as $\ddot{x}+n^2x=0$ connect differential equations to oscillation and period.
+\end{itemize}
+
+\subsection{Choosing the Right Substitution}
+One of the most important Extension~2 habits is choosing the form of acceleration that matches the information given.
+
+\begin{itemize}[leftmargin=*]
+  \item Use $\dfrac{dv}{dt}$ when the equation is naturally written in terms of time.
+  \item Use $v\dfrac{dv}{dx}$ when the question connects velocity and displacement directly.
+  \item Use $\dfrac{d}{dx}\!\left(\dfrac{1}{2}v^2\right)$ when an energy-style integral is the cleanest route.
+\end{itemize}
+
+These are not separate tricks. They are equivalent ways of rewriting acceleration so that the problem becomes integrable.
+
 \subsection{Core Syllabus vs Enrichment}
 \textbf{Core HSC focus:}
 \begin{itemize}[leftmargin=*]
@@ -153,7 +175,7 @@ The key shift in thinking is this: instead of asking for a single value, we are 
 \]
 
 \[
-\text{Initial condition example: } y(0)=2.
+\text{Initial condition example: } y(0)=11.
 \]
 
 \subsection{Interpretation Notes}
@@ -194,6 +216,79 @@ This gives a qualitative picture of the equation before any algebraic solving be
   \item A particular solution must follow the local tangent directions shown by the field.
   \item If nearby segments steer curves toward a horizontal line, that line behaves like a long-run level.
   \item A full answer may require both a sketch and a written description of behavior as $x \to \infty$ or $x \to -\infty$.
+\end{itemize}
+
+\subsection{Worked Slope-Field Examples}
+The mini-fields below show how very different differential equations produce very different local patterns.
+
+\begin{center}
+\begin{minipage}[t]{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.72]
+  \draw[->] (-2.6,0) -- (2.6,0) node[right] {$x$};
+  \draw[->] (0,-2.6) -- (0,2.6) node[above] {$y$};
+  \foreach \X in {-2,-1,0,1,2} {
+    \foreach \Y in {-2,-1,1,2} {
+      \pgfmathsetmacro{\M}{-(\X)/(\Y)}
+      \pgfmathsetmacro{\A}{atan(\M)}
+      \draw[blue, line width=0.5pt]
+        ({\X-0.22*cos(\A)},{\Y-0.22*sin(\A)})
+        --
+        ({\X+0.22*cos(\A)},{\Y+0.22*sin(\A)});
+    }
+  }
+  \draw[dashed, red!70!black] (-2.4,0) -- (2.4,0);
+\end{tikzpicture}
+
+\small $\displaystyle yy' + x = 0$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.72]
+  \draw[->] (-2.6,0) -- (2.6,0) node[right] {$x$};
+  \draw[->] (0,-2.6) -- (0,2.6) node[above] {$y$};
+  \foreach \X in {-2,-1,0,1,2} {
+    \foreach \Y in {-2,-1,0,1,2} {
+      \pgfmathsetmacro{\M}{-(\X)-(\Y)}
+      \pgfmathsetmacro{\A}{atan(\M)}
+      \draw[blue, line width=0.5pt]
+        ({\X-0.22*cos(\A)},{\Y-0.22*sin(\A)})
+        --
+        ({\X+0.22*cos(\A)},{\Y+0.22*sin(\A)});
+    }
+  }
+  \draw[dashed, red!70!black] (-2.3,2.3) -- (2.3,-2.3);
+\end{tikzpicture}
+
+\small $\displaystyle y'=-x-y$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.72]
+  \draw[->] (-2.6,0) -- (2.6,0) node[right] {$x$};
+  \draw[->] (0,-2.6) -- (0,2.6) node[above] {$y$};
+  \foreach \X in {-2,-1,0,1,2} {
+    \foreach \Y in {-2,-1,0,1,2} {
+      \pgfmathsetmacro{\M}{(\X)*(\Y)}
+      \pgfmathsetmacro{\A}{atan(\M)}
+      \draw[blue, line width=0.5pt]
+        ({\X-0.22*cos(\A)},{\Y-0.22*sin(\A)})
+        --
+        ({\X+0.22*cos(\A)},{\Y+0.22*sin(\A)});
+    }
+  }
+  \draw[dashed, red!70!black] (0,-2.4) -- (0,2.4);
+  \draw[dashed, red!70!black] (-2.4,0) -- (2.4,0);
+\end{tikzpicture}
+
+\small $\displaystyle y'=xy$
+\end{minipage}
+\end{center}
+
+\begin{itemize}[leftmargin=*]
+  \item For $yy'+x=0$, the line $y=0$ is a singular row where the slope formula $y'=-x/y$ is undefined.
+  \item For $y'=-x-y$, the line $y=-x$ is an isocline of zero slope.
+  \item For $y'=xy$, both axes are zero-slope lines, and the sign of $xy$ controls whether the local segments tilt up or down.
 \end{itemize}
 
 \subsection{Typical Mistakes}
@@ -281,42 +376,43 @@ The logistic equation is a central example because it combines growth with a lim
 The language of stable and unstable equilibria becomes very important in engineering, dynamical systems, and mathematical biology. The logistic equation is often a student's first real encounter with this kind of thinking.
 \end{enrichmentbox}
 
-\section{Applications of Differential Equations}
 
-\subsection{Concept Overview}
-Differential equations are useful because many real-world relationships are naturally phrased in terms of rates. Once a rate law is written down, calculus turns the model into a function that can be analyzed and interpreted.
+% \section{Applications of Differential Equations}
 
-\subsection{Common Contexts}
-\begin{itemize}[leftmargin=*]
-  \item growth and decay,
-  \item population models,
-  \item cooling or approach-to-limit models,
-  \item motion and velocity-style rate models,
-  \item simple contextual problems from science, economics, or engineering.
-\end{itemize}
+% \subsection{Concept Overview}
+% Differential equations are useful because many real-world relationships are naturally phrased in terms of rates. Once a rate law is written down, calculus turns the model into a function that can be analyzed and interpreted.
 
-\subsection{Interpretation Notes}
-\begin{itemize}[leftmargin=*]
-  \item Always define what each variable represents.
-  \item State what constants mean in words, not only symbols.
-  \item Check whether the units and long-run behavior make sense.
-  \item A mathematically valid answer may still be a poor model if the interpretation is unrealistic.
-\end{itemize}
+% \subsection{Common Contexts}
+% \begin{itemize}[leftmargin=*]
+%   \item growth and decay,
+%   \item population models,
+%   \item cooling or approach-to-limit models,
+%   \item motion and velocity-style rate models,
+%   \item simple contextual problems from science, economics, or engineering.
+% \end{itemize}
 
-\subsection{Typical Mistakes}
-\begin{itemize}[leftmargin=*]
-  \item Translating a word statement into the wrong differential equation.
-  \item Ignoring the meaning of the initial condition.
-  \item Giving a symbolic answer without any contextual interpretation.
-\end{itemize}
+% \subsection{Interpretation Notes}
+% \begin{itemize}[leftmargin=*]
+%   \item Always define what each variable represents.
+%   \item State what constants mean in words, not only symbols.
+%   \item Check whether the units and long-run behavior make sense.
+%   \item A mathematically valid answer may still be a poor model if the interpretation is unrealistic.
+% \end{itemize}
 
-\begin{enrichmentbox}
-In Extension~2 mechanics and later university study, many modelling problems are still driven by the same habit: express a rate law clearly, solve the resulting equation carefully, and then return to the physical meaning of the answer.
-\end{enrichmentbox}
+% \subsection{Typical Mistakes}
+% \begin{itemize}[leftmargin=*]
+%   \item Translating a word statement into the wrong differential equation.
+%   \item Ignoring the meaning of the initial condition.
+%   \item Giving a symbolic answer without any contextual interpretation.
+% \end{itemize}
+
+% \begin{enrichmentbox}
+% In Extension~2 mechanics and later university study, many modelling problems are still driven by the same habit: express a rate law clearly, solve the resulting equation carefully, and then return to the physical meaning of the answer.
+% \end{enrichmentbox}
 
 \newpage
 \section{Problems}
-This section is scaffolded only for now. The tier structure is in place so problems and solutions can be added in a later iteration without changing the overall booklet layout.
+% This section is scaffolded only for now. The tier structure is in place so problems and solutions can be added in a later iteration without changing the overall booklet layout.
 
 \subsection{Warm-Up}
 \input{problems/part1-basic}
@@ -339,8 +435,20 @@ This section is scaffolded only for now. The tier structure is in place so probl
 \subsection{Appendix C: Modelling Workflow}
 \input{problems/appendix-c-modelling-workflow}
 
-\subsection{Appendix D: Enrichment and Where This Goes Next}
-\input{problems/appendix-d-enrichment}
+\subsection{Appendix D: Enrichment --- Vector Fields and Trajectories}
+\input{problems/appendix-d-vector-fields}
+
+\subsection{Appendix E: Enrichment --- Partial Differentiation and PDEs}
+\input{problems/appendix-e-partial-differentiation}
+
+\subsection{Appendix F: Enrichment --- Power Series Methods}
+\input{problems/appendix-f-power-series}
+
+\subsection{Appendix G: Enrichment --- The Characteristic Equation}
+\input{problems/appendix-g-characteristic-equation}
+
+\subsection{Appendix H: Enrichment and Where This Goes Next}
+% \input{problems/appendix-d-enrichment}
 
 \newpage
 \section{Conclusion}
