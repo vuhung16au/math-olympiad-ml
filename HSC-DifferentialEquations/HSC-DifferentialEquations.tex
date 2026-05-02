@@ -70,87 +70,52 @@
 \section{Introduction}
 
 \subsection{Project Overview}
-Differential equations sit at an important meeting point between algebra, calculus, graphs, and mathematical modelling. A differential equation does not ask only for a number: it asks for a whole function whose rate of change satisfies a given rule. This makes the topic especially powerful, because many real situations are naturally described by rates. Population growth, cooling, motion, and the spread of a quantity through time can all be framed in this language.
 
-This booklet is written as a syllabus-aligned guide for HSC Mathematics Extension~1 students, with clear Extension~2 connections and a small amount of carefully signposted enrichment for students who want to move further toward university mathematics, engineering, or mathematical modelling. The core emphasis is on first-order differential equations, slope fields, separable forms, and logistic-style models.
+This is a short, exam-focused booklet to help you revise differential equations with solid fundamentals, challenging enrichment problems, and useful appendices for HSC prep.
 
 \subsection{Where This Topic Sits in the NESA Pathway}
-In the NSW Stage~6 pathway used for the current HSC cycle, differential equations are part of the \textbf{Mathematics Extension~1} calculus strand. They are examinable there as a core topic alongside applications of calculus. Students studying \textbf{Mathematics Extension~2} meet the ideas again through concurrent study, especially when rates of change are used in mechanics and higher modelling contexts.
-
-That means the main body of this booklet treats differential equations as \textbf{Extension~1 core material}. When an idea goes beyond that level, it is labelled as enrichment so students can clearly separate examinable HSC content from helpful mathematical extension.
+This booklet helps you connect differential equations across \textbf{Mathematics Extension~1} and \textbf{Mathematics Extension~2}, especially for \textbf{Mechanics} in Extension~2.
 
 \subsection{Who This Booklet Is For}
 This resource is intended for:
 \begin{itemize}[leftmargin=*]
-  \item Extension~1 students who want a focused and readable guide to differential equations,
-  \item Extension~2 students who want to connect calculus ideas more strongly with modelling and mechanics,
-  \item motivated learners who want a first look at how school calculus grows into university mathematics and engineering.
+  \item Extension~1 students who want a clear, focused differential equations guide,
+  \item Extension~2 students who want stronger links between calculus, modelling, and mechanics,
+  \item motivated learners who want an early look at how school calculus grows into university maths and engineering,
+  \item teachers and tutors who want a concise reference plus enrichment material to stretch stronger students.
 \end{itemize}
 
-Teachers and tutors can also use the structure as a teaching sequence: start with meaning, move to slope fields, then solve algebraically, and finally interpret solutions in context.
-
 \subsection{How to Use This Booklet}
-Differential equations are easiest to learn when the graphical and algebraic viewpoints are developed together. A good rhythm is:
-\begin{enumerate}[leftmargin=*]
-  \item read the short concept summary,
-  \item sketch what the slope field or long-run behavior suggests,
-  \item solve the equation carefully,
-  \item apply any initial condition,
-  \item interpret what the solution means in the original context.
-\end{enumerate}
-
-Try to resist the temptation to treat every question as pure symbol manipulation. In this topic, the best answers usually connect three viewpoints at once: the equation, the graph, and the interpretation.
+\begin{itemize}[leftmargin=*]
+  \item Review the fundamentals.
+  \item Try problems first without hints, then check and retry. Practice makes progress.
+  \item Review yourself using the appendices.
+\end{itemize}
 
 \subsection{Prerequisite Knowledge}
-Before working through this booklet, students should be comfortable with:
+To use this book well, make sure you:
 \begin{itemize}[leftmargin=*]
-  \item derivatives as rates of change,
-  \item anti-derivatives and basic integration,
-  \item separation of variables in simple algebraic settings,
-  \item exponential and logarithmic functions,
-  \item graph sketching and the interpretation of gradients.
+  \item have a good understanding of derivatives and anti-derivatives,
+  \item are comfortable with basic integrals,
+  \item have seen some Year 10--12 physics ideas; if you are rusty, this booklet will refresh what you need as you go.
 \end{itemize}
 
 \subsection{Extension 2 Mechanics Connections}
-These topics form the backbone of the \textbf{Mechanics} and \textbf{Calculus} components of HSC Mathematics Extension~2. Even when a question is presented as a mechanics problem, the mathematics often reduces to setting up the correct differential equation and then choosing the right substitution.
+These ideas show up a lot in \textbf{Mechanics} and \textbf{Calculus} in Extension~2, and many questions come down to setting up the right differential equation and substitution.
 
 \begin{itemize}[leftmargin=*]
   \item \textbf{Exponential growth and decay:} $\dfrac{dy}{dt}=ky$ leads to $y=Ae^{kt}$.
-  \item \textbf{Water tanks and Torricelli-style models:} $\dfrac{dh}{dt}=-k\sqrt{h}$ is a standard separable form.
   \item \textbf{Resistive motion:} equations such as $m\dfrac{dv}{dt}=mg-kv$ lead to terminal velocity and approach-to-limit behavior.
   \item \textbf{Escape velocity and gravitation:} the substitution $a=v\dfrac{dv}{dx}$ turns force laws into equations in $v$ and $x$.
   \item \textbf{Simple harmonic motion and spring motion:} equations such as $\ddot{x}+n^2x=0$ connect differential equations to oscillation and period.
+  \item \textbf{Water tanks and Torricelli-style models:} $\dfrac{dh}{dt}=-k\sqrt{h}$ is a standard separable form.
 \end{itemize}
 
 \subsection{Choosing the Right Substitution}
-One of the most important Extension~2 habits is choosing the form of acceleration that matches the information given.
-
-\begin{itemize}[leftmargin=*]
-  \item Use $\dfrac{dv}{dt}$ when the equation is naturally written in terms of time.
-  \item Use $v\dfrac{dv}{dx}$ when the question connects velocity and displacement directly.
-  \item Use $\dfrac{d}{dx}\!\left(\dfrac{1}{2}v^2\right)$ when an energy-style integral is the cleanest route.
-\end{itemize}
-
-These are not separate tricks. They are equivalent ways of rewriting acceleration so that the problem becomes integrable.
+Choose the acceleration form that matches the data: use $\dfrac{dv}{dt}$ for time-based equations, $v\dfrac{dv}{dx}$ for velocity-displacement links, and $\dfrac{d}{dx}\!\left(\dfrac{1}{2}v^2\right)$ for energy-style methods. They are equivalent rewrites, so pick the one that makes integration cleaner.
 
 \subsection{Core Syllabus vs Enrichment}
-\textbf{Core HSC focus:}
-\begin{itemize}[leftmargin=*]
-  \item recognizing a differential equation,
-  \item interpreting a slope field,
-  \item solving simple first-order equations,
-  \item working with equations of the forms $y'=f(x)$, $y'=g(y)$, and $y'=f(x)g(y)$,
-  \item using initial conditions,
-  \item interpreting logistic-style growth models.
-\end{itemize}
-
-\textbf{Enrichment focus:}
-\begin{itemize}[leftmargin=*]
-  \item more formal stability language,
-  \item broader modelling ideas,
-  \item links to mechanics and engineering,
-  \item first-order linear equations beyond the main HSC treatment.
-\end{itemize}
+This booklet builds strong \textbf{core HSC differential equations skills} and then pushes you with \textbf{hard enrichment problems}, so you can aim for high marks now and be ready for higher maths later.
 
 \newpage
 \section{Fundamentals Review}
@@ -447,7 +412,7 @@ The language of stable and unstable equilibria becomes very important in enginee
 \subsection{Appendix G: Enrichment --- The Characteristic Equation}
 \input{problems/appendix-g-characteristic-equation}
 
-\subsection{Appendix H: Enrichment and Where This Goes Next}
+% \subsection{Appendix H: Enrichment and Where This Goes Next}
 % \input{problems/appendix-d-enrichment}
 
 \newpage
