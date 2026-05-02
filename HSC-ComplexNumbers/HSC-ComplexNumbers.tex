@@ -1,5 +1,11 @@
 \documentclass[12pt]{article}
 
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{Complex Numbers Mastery}
+
 % Core math packages
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -17,7 +23,7 @@
 \DeclareUnicodeCharacter{00B0}{\ensuremath{^\circ}}
 
 % Custom styles shared with HSC-Collections
-\usepackage{styles/dl101-colors}
+\usepackage{dl101-colors}
 
 % TikZ color styles using ACU/DL101 color scheme
 \tikzset{
@@ -41,9 +47,9 @@
   acu fill/.style={fill=softivory!50},
   acu region/.style={fill=bookpurple!10, opacity=0.3},
 }
-\usepackage{styles/dl101-hints}
-\usepackage{styles/dl101-hsc-problems}
-\usepackage{styles/dl101-layout}
+\usepackage{dl101-hints}
+\usepackage{dl101-hsc-problems}
+\usepackage{dl101-layout}
 
 \author{Vu Hung Nguyen}
 \title{HSC Math Extension 2: Complex Numbers Mastery}

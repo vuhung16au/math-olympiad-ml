@@ -15,21 +15,24 @@ endif
 
 all: pdf
 
-pdf: $(PDFFILE)
-
-$(PDFFILE): $(TEXFILE).tex
-	docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
-		latexmk -pdf -interaction=nonstopmode -file-line-error $(TEXFILE).tex
+pdf:
+	@if command -v latexmk >/dev/null 2>&1; then \
+		latexmk -pdf -interaction=nonstopmode -file-line-error $(TEXFILE).tex; \
+	else \
+		docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
+			latexmk -pdf -interaction=nonstopmode -file-line-error $(TEXFILE).tex; \
+	fi
+	@test -f $(PDFFILE)
 
 clean:
 	rm -f $(TEXFILE).aux $(TEXFILE).log $(TEXFILE).out $(TEXFILE).toc $(TEXFILE).pdf \
 		$(TEXFILE).fdb_latexmk $(TEXFILE).fls
 
-release: $(PDFFILE)
+release: pdf
 	mkdir -p $(RELEASE_DIR)
 	cp $(PDFFILE) $(RELEASE_DIR)/
 
-open: $(PDFFILE)
+open: pdf
 	$(OPEN_CMD) $(PDFFILE)
 
 final: clean pdf release
@@ -37,7 +40,7 @@ final: clean pdf release
 help:
 	@echo "Available targets:"
 	@echo "  all     - Build the main PDF (default)"
-	@echo "  pdf     - Compile .tex file to .pdf using Docker"
+	@echo "  pdf     - Compile PDF (local latexmk, or Docker fallback)"
 	@echo "  clean   - Remove build artifacts"
 	@echo "  release - Copy PDF to releases/"
 	@echo "  open    - Open the generated PDF"

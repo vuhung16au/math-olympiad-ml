@@ -1,5 +1,11 @@
 \documentclass[12pt]{article}
 
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{Inequalities Mastery}
+
 % Core math packages
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -13,10 +19,10 @@
 \usepackage{enumitem}
 
 % Custom styles shared with other HSC projects
-\usepackage{styles/dl101-colors}
-\usepackage{styles/dl101-hints}
-\usepackage{styles/dl101-hsc-problems}
-\usepackage{styles/dl101-layout}
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage[takeawaysitemize]{dl101-hsc-problems}
+\usepackage{dl101-layout}
 
 % Define remarkbox and remark environment (dl101-hsc-problems already loads tcolorbox)
 \providecolor{warmstone}{RGB}{208,184,168}

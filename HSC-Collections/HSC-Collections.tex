@@ -1,5 +1,11 @@
 \documentclass[12pt]{article}
 
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{Collection of Hard Problems}
+
 % Load style packages
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -12,12 +18,12 @@
 \usepackage{graphicx}
 
 % Load custom styles
-\usepackage{styles/dl101-colors}
-\usepackage{styles/dl101-hints}
-\usepackage{styles/dl101-boxes}
-\usepackage{styles/dl101-theorems}
-\usepackage{styles/dl101-hsc-problems}
-\usepackage{styles/dl101-layout}
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage{dl101-boxes}
+\usepackage{dl101-theorems}
+\usepackage{dl101-hsc-problems}
+\usepackage{dl101-layout}
 
 \author{Vu Hung Nguyen}
 \title{HSC Math Extension 2: Collection of Hard Problems}

@@ -1,5 +1,11 @@
 \documentclass[12pt]{article}
 
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{Last Resorts Mastery}
+
 % Core math packages
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -14,16 +20,17 @@
   \usepackage{fontspec}
   \defaultfontfeatures{Ligatures=TeX}
   \newfontfamily\ramanujanfont{SAMAN___}[
-    Path=fonts/,
+    Path=../HSC-Common/fonts/,
     Extension=.TTF
   ]
 \fi
 
 % Define theorem environments via DL101 theorem boxes (ensure chapter counter exists first)
 \newcounter{chapter} % required because dl101-theorems numbers by chapter
-\usepackage{styles/dl101-colors}
-\usepackage{styles/dl101-boxes}
-\usepackage{styles/dl101-theorems}
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage{dl101-boxes}
+\usepackage{dl101-theorems}
 \usepackage{chngcntr}
 \counterwithin{theorem}{section} % keep theorem numbering tied to sections
 \usepackage{graphicx}
@@ -32,10 +39,9 @@
 \usepackage{tikz-3dplot}
 \usepackage{pgfplots}
 
-% Custom styles shared with HSC projects
-\usepackage{styles/dl101-hints}
-\usepackage{styles/dl101-hsc-problems}
-\usepackage{styles/dl101-layout}
+% Problem / solution styles (after theorem box setup)
+\usepackage{dl101-hsc-problems}
+\usepackage{dl101-layout}
 
 % Links without visible rectangles (TOC and cross-refs remain clickable).
 \usepackage[hidelinks]{hyperref}
@@ -59,7 +65,7 @@
 \thispagestyle{empty}
 \begin{tikzpicture}[remember picture,overlay]
   \node[anchor=south west,inner sep=0] at (current page.south west) {
-    \includegraphics[width=\paperwidth,height=\paperheight]{assets/matte.png}
+    \includegraphics[width=\paperwidth,height=\paperheight]{../HSC-Common/assets/matte.png}
   };
   \node[
     align=center,

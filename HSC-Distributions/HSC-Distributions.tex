@@ -1,5 +1,11 @@
 \documentclass[12pt]{article}
 
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{Probability Distributions}
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -18,10 +24,10 @@
 \usetikzlibrary{calc,decorations.pathreplacing}
 \pgfplotsset{compat=1.18}
 
-\usepackage{styles/dl101-colors}
-\usepackage{styles/dl101-hints}
-\usepackage{styles/dl101-hsc-problems}
-\usepackage{styles/dl101-layout}
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage[takeawaysitemize]{dl101-hsc-problems}
+\usepackage{dl101-layout}
 \input{figures/tikz/tikz-macros}
 
 \providecolor{warmstone}{RGB}{208,184,168}

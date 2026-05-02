@@ -1,5 +1,11 @@
 \documentclass[12pt]{article}
 
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{Mechanics Mastery}
+
 % Core math packages
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -19,10 +25,10 @@
 \usetikzlibrary{arrows.meta, positioning, calc, decorations.markings}
 
 % Custom styles
-\usepackage{styles/dl101-colors}
-\usepackage{styles/dl101-hints}
-\usepackage{styles/dl101-hsc-problems}
-\usepackage{styles/dl101-layout}
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage[takeawaysitemize]{dl101-hsc-problems}
+\usepackage{dl101-layout}
 
 % Simple vector macro to support \vect{...} usage
 \newcommand{\vect}[1]{\vec{#1}}

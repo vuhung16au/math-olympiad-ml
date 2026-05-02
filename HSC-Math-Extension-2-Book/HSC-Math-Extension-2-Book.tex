@@ -1,5 +1,11 @@
 \documentclass[12pt,openany]{book}
 
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{HSC Maths Extension 2: Core, Enrichment and Last Resorts}
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -12,7 +18,7 @@
   \usepackage{fontspec}
   \defaultfontfeatures{Ligatures=TeX}
   \newfontfamily\ramanujanfont{SAMAN___}[
-    Path=fonts/,
+    Path=../HSC-Common/fonts/,
     Extension=.TTF
   ]
 \fi
@@ -25,12 +31,12 @@
 \usepackage{titlesec}
 \usepackage{xcolor}
 
-\usepackage{styles/dl101-colors}
-\usepackage{styles/dl101-boxes}
-\usepackage{styles/dl101-theorems}
-\usepackage{styles/dl101-hints}
-\usepackage{styles/dl101-hsc-problems}
-\usepackage{styles/dl101-layout}
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage{dl101-boxes}
+\usepackage{dl101-theorems}
+\usepackage{dl101-hsc-problems}
+\usepackage{dl101-layout}
 
 \hypersetup{
   colorlinks=true,

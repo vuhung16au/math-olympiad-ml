@@ -1,0 +1,32 @@
+\ProvidesPackage{dl101-theorems}[2025/10/20 DL101 theorem environments]
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{amsthm}
+\colorlet{theoremblue}{bookpurple!80}
+\colorlet{theoremgray}{softivory}
+\colorlet{definitionblue}{bookpurple!70}
+
+\makeatletter
+\ifcsname c@chapter\endcsname
+  \newtheorem{theorem}{Theorem}[chapter]
+\else
+  \newtheorem{theorem}{Theorem}[section]
+\fi
+\makeatother
+\theoremstyle{plain}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\makeatletter
+\renewenvironment{theorem}[1][]{\begin{theorembox}[title={\bfseries Theorem~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{theorembox}}
+\renewenvironment{example}[1][]{\begin{examplebox}[title={\bfseries Example~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{examplebox}}
+\renewenvironment{remark}[1][]{\begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{remarkbox}}
+\renewenvironment{definition}[1][]{\begin{definitionbox}[title={\bfseries Definition~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]}{\end{definitionbox}}
+\makeatother

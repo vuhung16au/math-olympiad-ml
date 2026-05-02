@@ -1,5 +1,11 @@
 \documentclass[12pt]{article}
 
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{The Nature of Proof}
+
 % Core math packages
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -14,10 +20,10 @@
 \usepackage{booktabs}
 
 % Custom styles
-\usepackage{styles/dl101-colors}
-\usepackage{styles/dl101-hints}
-\usepackage{styles/dl101-hsc-problems}
-\usepackage{styles/dl101-layout}
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage{dl101-hsc-problems}
+\usepackage{dl101-layout}
 
 \author{Vu Hung Nguyen}
 \title{HSC Math Extension 2: The Nature of Proof}
