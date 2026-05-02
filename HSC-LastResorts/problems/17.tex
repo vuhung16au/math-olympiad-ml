@@ -1,0 +1,98 @@
+% Problem 17: Uniform Convergence and Integration
+\begin{problem}[Uniform Convergence and Integration]
+
+This problem explores the relationship between sequences of functions, their limits, and integration, focusing on the critical concept of \textbf{Uniform Convergence}.
+
+\subsection*{Introduction to Uniform Convergence}
+A sequence of functions $\{f_n\}$ defined on a set $B$ is said to \textbf{converge uniformly} to a function $f$ if for every $\epsilon > 0$, there exists an integer $N$ such that $|f(x) - f_n(x)| < \epsilon$ for all $n \geq N$ and for all $x \in B$. 
+
+The key feature of uniform convergence is that the integer $N$ depends only on the tolerance $\epsilon$ and must work \textit{simultaneously} for every $x$ in the domain $B$. This is a stronger requirement than merely having each individual $f_n(x)$ approach $f(x)$ for each fixed $x$, where different values of $x$ might require different values of $N$. The word ``uniform'' emphasizes that a single $N$ works uniformly across the entire domain.
+
+Two fundamental theorems regarding uniform convergence are:
+\begin{itemize}
+    \item \textbf{Theorem 1:} If $\{f_n\}$ converges uniformly to $f$ on $B$, then the limit and integral can be swapped: 
+    $$\int_B f(x) \, dx = \lim_{n \to \infty} \int_B f_n(x) \, dx$$
+    \item \textbf{Theorem 2:} If there exists a positive convergent series $\sum_{n=1}^\infty a_n$ such that $|f_n(x) - f_{n-1}(x)| \leq a_n$ for all $n$ and all $x \in B$, then $\{f_n\}$ converges uniformly to some function $f$.
+\end{itemize}
+
+(Do NOT prove these theorems; they are given as tools for solving the problem.)
+
+\subsection*{Problem Statement}
+
+Consider the interval $B = [0, 1]$.
+
+\textbf{(i)} Let $f_n(x) = n^2 x (1-x)^n$ for $n = 1, 2, 3, \dots$
+
+Show that for any fixed $x \in [0, 1]$, the pointwise limit $f(x) = \lim_{n \to \infty} f_n(x)$ is $0$.
+
+\textbf{(ii)} For the sequence in part \textbf{(i)}, show that:
+$$\lim_{n \to \infty} \int_0^1 f_n(x) \, dx \neq \int_0^1 \left( \lim_{n \to \infty} f_n(x) \right) dx$$
+Briefly explain, with reference to the definition of uniform convergence, why this result does not contradict Theorem 1.
+
+\textbf{(iii)} Now consider a different sequence $\{g_n\}$ on $[0, 1]$ defined by the partial sums:
+$$g_n(x) = \sum_{k=1}^n \frac{x^k}{k^2}$$
+By considering the difference $|g_n(x) - g_{n-1}(x)|$, use Theorem 2 and the fact that $\sum_{k=1}^\infty \frac{1}{k^2}$ converges to prove that $\{g_n\}$ converges uniformly to some function $g(x)$ on $[0, 1]$.
+
+\textbf{(iv)} Deduce that:
+$$\int_0^1 g(x) \, dx = \sum_{k=1}^\infty \frac{1}{k^2(k+1)}$$
+
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{For (i):} For $0 < x < 1$, consider the growth rate of $n^2$ versus the decay rate of $(1-x)^n$. Recall that for $r > 1$, $\lim_{n \to \infty} \frac{n^k}{r^n} = 0$.
+    \item \textbf{For (ii):} Use the substitution $u = 1-x$ to evaluate the integral $\int_0^1 x(1-x)^n \, dx$. Compare the resulting limit as $n \to \infty$ with the integral of the pointwise limit found in part \textbf{(i)}.
+    \item \textbf{For (iii):} Apply Theorem 2 directly by finding a convergent series $\sum a_n$ that bounds the difference between successive terms for all $x \in [0, 1]$.
+    \item \textbf{For (iv):} Apply Theorem 1. Term-by-term integration is permitted if the sequence of partial sums converges uniformly.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+
+\textbf{(i)} 
+\begin{itemize}
+    \item If $x = 0$, $f_n(0) = 0$ for all $n$, so $\lim_{n \to \infty} f_n(0) = 0$.
+    \item If $x = 1$, $f_n(1) = 0$ for all $n$, so $\lim_{n \to \infty} f_n(1) = 0$.
+    \item For $0 < x < 1$, let $1-x = \frac{1}{r}$ where $r > 1$. Then $f_n(x) = \frac{n^2 x}{r^n}$. Since exponential growth dominates polynomial growth, $\lim_{n \to \infty} \frac{n^2 x}{r^n} = 0$.
+    \item Thus, the pointwise limit is $f(x) = 0$.
+\end{itemize}
+
+\textbf{(ii)} 
+\begin{itemize}
+    \item Integral of the limit: $\int_0^1 0 \, dx = 0$.
+    \item Limit of the integral: 
+    $\int_0^1 n^2 x (1-x)^n \, dx$. Let $u = 1-x$, $du = -dx$.
+    \begin{align*}
+    &= n^2 \int_0^1 (1-u)u^n \, du = n^2 \left( \int_0^1 u^n \, du - \int_0^1 u^{n+1} \, du \right)\\
+    &= n^2 \left( \frac{1}{n+1} - \frac{1}{n+2} \right) = \frac{n^2}{(n+1)(n+2)}
+    \end{align*}
+    \item $\lim_{n \to \infty} \frac{n^2}{n^2+3n+2} = 1$.
+    \item Since $1 \neq 0$, the swap failed. This is because $\{f_n\}$ does not converge uniformly. The maximum value of $f_n(x)$ occurs at $x = \frac{1}{n+1}$, where $f_n(\frac{1}{n+1}) \approx \frac{n}{e}$, which tends to $\infty$. Thus, no $N$ can be found that works for all $x$ simultaneously.
+\end{itemize}
+
+\textbf{(iii)} 
+\begin{itemize}
+    \item $|g_n(x) - g_{n-1}(x)| = \left| \frac{x^n}{n^2} \right| = \frac{x^n}{n^2}$.
+    \item On the interval $[0, 1]$, $x^n \leq 1$, so $\frac{x^n}{n^2} \leq \frac{1}{n^2}$ for all $x \in B$.
+    \item Let $a_n = \frac{1}{n^2}$. Since $\sum \frac{1}{n^2}$ is a positive convergent series, by Theorem 2, $\{g_n\}$ converges uniformly to $g(x)$.
+\end{itemize}
+
+\textbf{(iv)} 
+\begin{itemize}
+    \item By Theorem 1, since $\{g_n\}$ converges uniformly to $g$, the integral of the limit is the limit of the integrals:
+    $\int_0^1 g(x) \, dx = \lim_{n \to \infty} \int_0^1 g_n(x) \, dx$.
+    \item $\int_0^1 \sum_{k=1}^n \frac{x^k}{k^2} \, dx = \sum_{k=1}^n \int_0^1 \frac{x^k}{k^2} \, dx = \sum_{k=1}^n \left[ \frac{x^{k+1}}{k^2(k+1)} \right]_0^1 = \sum_{k=1}^n \frac{1}{k^2(k+1)}$.
+    \item As $n \to \infty$, $\int_0^1 g(x) \, dx = \sum_{k=1}^\infty \frac{1}{k^2(k+1)}$.
+\end{itemize}
+
+\end{solution}
+
+\begin{takeaways}
+\begin{enumerate}
+    \item \textbf{The Global Requirement:} Uniform convergence requires a ``global'' $N$ that forces the entire function sequence into an $\epsilon$-tube around the limit function $f(x)$.
+    \item \textbf{Pointwise is Insufficient:} Part \textbf{(ii)} proves that simple pointwise convergence is not strong enough to preserve properties like the value of an integral through a limit process.
+    \item \textbf{The M-Test Logic:} Theorem 2 (often called the Weierstrass M-test) is the standard way to prove uniform convergence for series of functions by bounding them with a convergent numerical series.
+    \item \textbf{Integration and Limits:} Understanding when limits and integrals can be interchanged is crucial in advanced calculus and analysis.
+    \item \textbf{Exponential Dominance:} Exponential decay $(1-x)^n$ always dominates polynomial growth $n^2$ for $0 < x < 1$, a key observation in analyzing sequences.
+\end{enumerate}
+\end{takeaways}
