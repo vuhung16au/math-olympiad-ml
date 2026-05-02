@@ -1,0 +1,20 @@
+\ProvidesPackage{styles/dl101-diffeq-enrichment}[2026/05/02 Differential equations enrichment box]
+\RequirePackage[most,skins]{tcolorbox}
+
+\providecolor{steadyblue}{RGB}{85,113,140}
+
+\newtcolorbox{enrichmentbox}[1][] {
+  title={\bfseries Enrichment},
+  enhanced,
+  drop shadow={black!15!white},
+  coltitle=white,
+  colback=blue!4!white,
+  colframe=steadyblue,
+  boxrule=1.2pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=10pt,bottom=10pt,
+  attach boxed title to top left={xshift=1.2em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=steadyblue,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
