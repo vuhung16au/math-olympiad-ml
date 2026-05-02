@@ -36,6 +36,14 @@ export const BOOKLETS: Booklet[] = [
     isAvailable: true,
   },
   {
+    id: "hsc-differential-equations",
+    title: "HSC Differential Equations",
+    slug: "hsc-differential-equations",
+    pdfUrl: `${GITHUB_RAW_URL}/HSC-DifferentialEquations/releases/HSC-DifferentialEquations.pdf`,
+    thumbnailPath: "/thumbnails/hsc-differential-equations.png",
+    isAvailable: true,
+  },
+  {
     id: "hsc-functions",
     title: "HSC Functions",
     slug: "hsc-functions",

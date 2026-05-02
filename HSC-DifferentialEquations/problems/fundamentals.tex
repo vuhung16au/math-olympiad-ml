@@ -1,0 +1,56 @@
+\subsection{Differential equations and solutions}
+A differential equation is an equation involving an unknown function and one or more of its derivatives. In this booklet, the focus is on first-order differential equations, where the highest derivative is $y'$.
+
+\begin{itemize}[leftmargin=*]
+  \item A \textbf{general solution} contains an arbitrary constant such as $C$.
+  \item A \textbf{particular solution} is found after applying a condition such as $y(0)=3$.
+  \item An \textbf{initial condition} selects one curve from a whole family of solutions.
+\end{itemize}
+
+\[
+\frac{dy}{dx} = 2x
+\qquad \Longrightarrow \qquad
+y = x^2 + C.
+\]
+
+\subsection{Direction fields and equilibrium solutions}
+For an equation of the form $\frac{dy}{dx} = F(x,y)$, a slope field places a short line segment at each point $(x,y)$ with slope $F(x,y)$. This gives a visual picture of possible solution curves.
+
+\begin{itemize}[leftmargin=*]
+  \item If the slope is positive, solution curves rise from left to right.
+  \item If the slope is negative, solution curves fall from left to right.
+  \item If the slope is zero along a line $y=k$, then $y=k$ is an equilibrium solution.
+\end{itemize}
+
+\subsection{Separable structure}
+The separable forms most relevant to HSC Extension 1 are:
+\[
+\frac{dy}{dx} = f(x), \qquad
+\frac{dy}{dx} = g(y), \qquad
+\frac{dy}{dx} = f(x)g(y).
+\]
+
+When variables can be separated, the usual workflow is:
+\begin{enumerate}[leftmargin=*]
+  \item Rearrange so all $y$ terms are with $dy$ and all $x$ terms are with $dx$.
+  \item Integrate both sides.
+  \item Apply any initial condition.
+  \item Interpret the result in context.
+\end{enumerate}
+
+\subsection{Logistic-style models}
+The logistic equation is commonly written as
+\[
+\frac{dy}{dx} = ky(M-y),
+\]
+or equivalently
+\[
+\frac{dy}{dx} = ry\left(1-\frac{y}{M}\right),
+\]
+where $M$ is the carrying capacity.
+
+\begin{itemize}[leftmargin=*]
+  \item $y=0$ and $y=M$ are equilibrium values.
+  \item If $0<y<M$, growth is positive.
+  \item If $y>M$, the model predicts decay back toward the carrying capacity.
+\end{itemize}

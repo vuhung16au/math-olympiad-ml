@@ -11,6 +11,7 @@ DIRS='
 HSC-Collections
 HSC-Combinatorics
 HSC-ComplexNumbers
+HSC-DifferentialEquations
 HSC-Distributions
 HSC-Functions
 HSC-Induction

@@ -37,6 +37,12 @@ const booklets = [
     outputFile: "hsc-distributions.png",
   },
   {
+    id: "hsc-differential-equations",
+    title: "HSC Differential Equations",
+    pdfUrl: "https://raw.githubusercontent.com/vuhung16au/math-olympiad-ml/main/HSC-DifferentialEquations/releases/HSC-DifferentialEquations.pdf",
+    outputFile: "hsc-differential-equations.png",
+  },
+  {
     id: "hsc-functions",
     title: "HSC Functions",
     pdfUrl: "https://raw.githubusercontent.com/vuhung16au/math-olympiad-ml/main/HSC-Functions/releases/HSC-Functions.pdf",

@@ -1,0 +1,21 @@
+Many differential equations begin with language such as "the rate of change is proportional to..." or "the rate depends on the current amount." A clean modelling workflow helps turn those words into mathematics.
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Define the variable.} State what $y$ represents and what the independent variable is. For example, $y$ could be a population and $x$ could be time in years.
+  \item \textbf{Translate the rate statement.} If the growth rate is proportional to the amount present, write
+  \[
+  \frac{dy}{dx}=ky.
+  \]
+  If the rate depends on both the amount present and remaining capacity, write a logistic-style equation.
+  \item \textbf{Solve the differential equation.} Use separation of variables or a known standard form.
+  \item \textbf{Apply the condition.} Use initial data such as $y(0)=y_0$ to determine the constant.
+  \item \textbf{Interpret constants.} Explain what $k$, $r$, or $M$ mean in the situation.
+  \item \textbf{Check the answer against the story.} Ask whether the function stays positive when it should, whether units are sensible, and whether the long-run behavior is realistic.
+\end{enumerate}
+
+\subsubsection*{Useful sentence patterns}
+\begin{itemize}[leftmargin=*]
+  \item "Rate proportional to the current amount" usually leads to $\dfrac{dy}{dx}=ky$.
+  \item "Rate proportional to the difference from a limiting value" often leads to $\dfrac{dy}{dx}=k(M-y)$.
+  \item "Growth slows as the population approaches a maximum level" suggests a logistic model.
+\end{itemize}

@@ -1,0 +1,367 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{hidelinks}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[most,skins]{tcolorbox}
+\usetikzlibrary{arrows.meta, calc, patterns, decorations.pathreplacing}
+\pgfplotsset{compat=1.18}
+
+\usepackage{styles/dl101-colors}
+\usepackage{styles/dl101-hints}
+\usepackage{styles/dl101-hsc-problems}
+\usepackage{styles/dl101-layout}
+
+\providecolor{steadyblue}{RGB}{85,113,140}
+
+\newtcolorbox{enrichmentbox}[1][]{
+  title={\bfseries Enrichment},
+  enhanced,
+  drop shadow={black!15!white},
+  coltitle=white,
+  colback=blue!4!white,
+  colframe=steadyblue,
+  boxrule=1.2pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=10pt,bottom=10pt,
+  attach boxed title to top left={xshift=1.2em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=steadyblue,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\author{Vu Hung Nguyen}
+\title{Differential Equations (Ext 1 \& 2)}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \includegraphics[width=0.25\textwidth]{assets/qrcode.png}
+    \\[0.5cm]
+    \small \textit{Booklet repository:} \\[0.2cm]
+    \footnotesize \texttt{\detokenize{https://github.com/vuhung16au/math-olympiad-ml/}}
+\end{center}
+\vspace*{\fill}
+
+\begingroup\small\noindent This work is licensed under CC BY 4.0. See LICENSE file in the github repo for details.\par\endgroup
+
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\itshape
+"Talent is important, but how one develops and nurtures it is even more so."
+
+\vspace{1em}
+\normalfont Terence Tao
+\end{center}
+\vspace*{\fill}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+Differential equations sit at an important meeting point between algebra, calculus, graphs, and mathematical modelling. A differential equation does not ask only for a number: it asks for a whole function whose rate of change satisfies a given rule. This makes the topic especially powerful, because many real situations are naturally described by rates. Population growth, cooling, motion, and the spread of a quantity through time can all be framed in this language.
+
+This booklet is written as a syllabus-aligned guide for HSC Mathematics Extension~1 students, with clear Extension~2 connections and a small amount of carefully signposted enrichment for students who want to move further toward university mathematics, engineering, or mathematical modelling. The core emphasis is on first-order differential equations, slope fields, separable forms, and logistic-style models.
+
+\subsection{Where This Topic Sits in the NESA Pathway}
+In the NSW Stage~6 pathway used for the current HSC cycle, differential equations are part of the \textbf{Mathematics Extension~1} calculus strand. They are examinable there as a core topic alongside applications of calculus. Students studying \textbf{Mathematics Extension~2} meet the ideas again through concurrent study, especially when rates of change are used in mechanics and higher modelling contexts.
+
+That means the main body of this booklet treats differential equations as \textbf{Extension~1 core material}. When an idea goes beyond that level, it is labelled as enrichment so students can clearly separate examinable HSC content from helpful mathematical extension.
+
+\subsection{Who This Booklet Is For}
+This resource is intended for:
+\begin{itemize}[leftmargin=*]
+  \item Extension~1 students who want a focused and readable guide to differential equations,
+  \item Extension~2 students who want to connect calculus ideas more strongly with modelling and mechanics,
+  \item motivated learners who want a first look at how school calculus grows into university mathematics and engineering.
+\end{itemize}
+
+Teachers and tutors can also use the structure as a teaching sequence: start with meaning, move to slope fields, then solve algebraically, and finally interpret solutions in context.
+
+\subsection{How to Use This Booklet}
+Differential equations are easiest to learn when the graphical and algebraic viewpoints are developed together. A good rhythm is:
+\begin{enumerate}[leftmargin=*]
+  \item read the short concept summary,
+  \item sketch what the slope field or long-run behavior suggests,
+  \item solve the equation carefully,
+  \item apply any initial condition,
+  \item interpret what the solution means in the original context.
+\end{enumerate}
+
+Try to resist the temptation to treat every question as pure symbol manipulation. In this topic, the best answers usually connect three viewpoints at once: the equation, the graph, and the interpretation.
+
+\subsection{Prerequisite Knowledge}
+Before working through this booklet, students should be comfortable with:
+\begin{itemize}[leftmargin=*]
+  \item derivatives as rates of change,
+  \item anti-derivatives and basic integration,
+  \item separation of variables in simple algebraic settings,
+  \item exponential and logarithmic functions,
+  \item graph sketching and the interpretation of gradients.
+\end{itemize}
+
+\subsection{Core Syllabus vs Enrichment}
+\textbf{Core HSC focus:}
+\begin{itemize}[leftmargin=*]
+  \item recognizing a differential equation,
+  \item interpreting a slope field,
+  \item solving simple first-order equations,
+  \item working with equations of the forms $y'=f(x)$, $y'=g(y)$, and $y'=f(x)g(y)$,
+  \item using initial conditions,
+  \item interpreting logistic-style growth models.
+\end{itemize}
+
+\textbf{Enrichment focus:}
+\begin{itemize}[leftmargin=*]
+  \item more formal stability language,
+  \item broader modelling ideas,
+  \item links to mechanics and engineering,
+  \item first-order linear equations beyond the main HSC treatment.
+\end{itemize}
+
+\newpage
+\section{Fundamentals Review}
+This short review gathers the basic language, notation, and standard forms that appear throughout the booklet.
+
+\input{problems/fundamentals}
+
+\newpage
+\section{Differential Equations}
+
+\subsection{Concept Overview}
+A differential equation is an equation involving an unknown function and one or more of its derivatives. In the HSC setting, we mainly work with first-order equations, where the derivative $y'$ describes the slope of the solution curve at each point.
+
+The key shift in thinking is this: instead of asking for a single value, we are looking for a function whose rate of change matches the given rule. Often there is not just one answer, but a family of answers.
+
+\subsection{Key Forms}
+\[
+\frac{dy}{dx} = F(x,y), \qquad
+\frac{dy}{dx} = f(x), \qquad
+\frac{dy}{dx} = g(y), \qquad
+\frac{dy}{dx} = f(x)g(y).
+\]
+
+\[
+\text{Initial condition example: } y(0)=2.
+\]
+
+\subsection{Interpretation Notes}
+\begin{itemize}[leftmargin=*]
+  \item A general solution usually contains a constant of integration.
+  \item An initial condition turns a family of curves into one particular solution.
+  \item The derivative tells us the local behavior of the solution: whether it rises, falls, or stays flat.
+\end{itemize}
+
+\subsection{Typical Mistakes}
+\begin{itemize}[leftmargin=*]
+  \item Forgetting the constant of integration.
+  \item Applying an initial condition too early or incorrectly.
+  \item Treating the derivative as a disconnected algebraic symbol rather than a rate or slope.
+\end{itemize}
+
+\begin{enrichmentbox}
+In higher mathematics, one also studies whether a solution exists, whether it is unique, and how sensitive it is to the starting condition. At HSC level, the main emphasis is on recognizing the structure, solving standard forms, and interpreting the result clearly.
+\end{enrichmentbox}
+
+\section{Slope Fields}
+
+\subsection{Concept Overview}
+A slope field, also called a direction field, is a visual way to display the differential equation $y'=F(x,y)$. At each point in the plane, a short line segment is drawn with slope $F(x,y)$. Solution curves then thread through those segments.
+
+This gives a qualitative picture of the equation before any algebraic solving begins. It is especially useful for identifying equilibrium solutions and predicting long-run behavior.
+
+\subsection{Key Ideas}
+\begin{itemize}[leftmargin=*]
+  \item If the segment is horizontal, then the slope is zero.
+  \item If the segment tilts upward, then the solution increases locally.
+  \item If the segment tilts downward, then the solution decreases locally.
+  \item A constant solution $y=k$ is an equilibrium if the slope is zero there.
+\end{itemize}
+
+\subsection{Interpretation Notes}
+\begin{itemize}[leftmargin=*]
+  \item A particular solution must follow the local tangent directions shown by the field.
+  \item If nearby segments steer curves toward a horizontal line, that line behaves like a long-run level.
+  \item A full answer may require both a sketch and a written description of behavior as $x \to \infty$ or $x \to -\infty$.
+\end{itemize}
+
+\subsection{Typical Mistakes}
+\begin{itemize}[leftmargin=*]
+  \item Drawing curves that cut across the local directions.
+  \item Ignoring the given starting point.
+  \item Describing long-run behavior only on the graph and not in words.
+\end{itemize}
+
+\begin{enrichmentbox}
+Slope fields are an early example of qualitative analysis. Even when an equation is hard to solve exactly, the field can still reveal equilibrium levels, monotonic behavior, and asymptotic trends.
+\end{enrichmentbox}
+
+\section{Separable Differential Equations}
+
+\subsection{Concept Overview}
+Many HSC differential equations are separable, meaning the $y$ terms and $x$ terms can be placed on opposite sides before integrating. This is the main algebraic technique students are expected to master.
+
+\subsection{Canonical Forms}
+\[
+\frac{dy}{dx}=f(x),
+\qquad
+\frac{dy}{dx}=g(y),
+\qquad
+\frac{dy}{dx}=f(x)g(y).
+\]
+
+For a separable equation, we aim for a structure like
+\[
+A(y)\,dy = B(x)\,dx.
+\]
+
+\subsection{Interpretation Notes}
+\begin{itemize}[leftmargin=*]
+  \item The form $y'=f(x)$ means the slope depends only on $x$.
+  \item The form $y'=g(y)$ means the slope depends only on the current value of $y$.
+  \item The form $y'=f(x)g(y)$ mixes both influences and is often the richest case.
+\end{itemize}
+
+\subsection{Typical Mistakes}
+\begin{itemize}[leftmargin=*]
+  \item Separating variables incorrectly.
+  \item Dropping absolute values when integrating logarithmic forms.
+  \item Forgetting to substitute the initial condition back into the integrated solution.
+\end{itemize}
+
+\begin{enrichmentbox}
+At university level, students later meet equations that are not separable and need different methods. Learning to recognize separable structure now builds the pattern-recognition needed for those later techniques.
+\end{enrichmentbox}
+
+\section{Autonomous Equations and the Logistic Model}
+
+\subsection{Concept Overview}
+An autonomous differential equation has the form $y'=g(y)$, so the slope depends only on the current value of $y$. These equations often have visible equilibrium values and clear long-run behavior.
+
+The logistic equation is a central example because it combines growth with a limiting effect. It models a quantity that grows when small but slows as it approaches a carrying capacity.
+
+\subsection{Key Forms}
+\[
+\frac{dy}{dx}=g(y)
+\]
+
+\[
+\frac{dy}{dx}=ky(M-y)
+\qquad \text{or} \qquad
+\frac{dy}{dx}=ry\left(1-\frac{y}{M}\right).
+\]
+
+\subsection{Interpretation Notes}
+\begin{itemize}[leftmargin=*]
+  \item Equilibrium values occur where $g(y)=0$.
+  \item In the logistic model, $y=0$ and $y=M$ are equilibrium values.
+  \item If $0<y<M$, growth is positive.
+  \item If $y>M$, the rate is negative and the model pushes back toward $M$.
+\end{itemize}
+
+\subsection{Typical Mistakes}
+\begin{itemize}[leftmargin=*]
+  \item Treating the carrying capacity as just another constant without explaining its meaning.
+  \item Forgetting to check what happens above and below each equilibrium.
+  \item Solving correctly but failing to interpret whether the answer is realistic in context.
+\end{itemize}
+
+\begin{enrichmentbox}
+The language of stable and unstable equilibria becomes very important in engineering, dynamical systems, and mathematical biology. The logistic equation is often a student's first real encounter with this kind of thinking.
+\end{enrichmentbox}
+
+\section{Applications of Differential Equations}
+
+\subsection{Concept Overview}
+Differential equations are useful because many real-world relationships are naturally phrased in terms of rates. Once a rate law is written down, calculus turns the model into a function that can be analyzed and interpreted.
+
+\subsection{Common Contexts}
+\begin{itemize}[leftmargin=*]
+  \item growth and decay,
+  \item population models,
+  \item cooling or approach-to-limit models,
+  \item motion and velocity-style rate models,
+  \item simple contextual problems from science, economics, or engineering.
+\end{itemize}
+
+\subsection{Interpretation Notes}
+\begin{itemize}[leftmargin=*]
+  \item Always define what each variable represents.
+  \item State what constants mean in words, not only symbols.
+  \item Check whether the units and long-run behavior make sense.
+  \item A mathematically valid answer may still be a poor model if the interpretation is unrealistic.
+\end{itemize}
+
+\subsection{Typical Mistakes}
+\begin{itemize}[leftmargin=*]
+  \item Translating a word statement into the wrong differential equation.
+  \item Ignoring the meaning of the initial condition.
+  \item Giving a symbolic answer without any contextual interpretation.
+\end{itemize}
+
+\begin{enrichmentbox}
+In Extension~2 mechanics and later university study, many modelling problems are still driven by the same habit: express a rate law clearly, solve the resulting equation carefully, and then return to the physical meaning of the answer.
+\end{enrichmentbox}
+
+\newpage
+\section{Problems}
+This section is scaffolded only for now. The tier structure is in place so problems and solutions can be added in a later iteration without changing the overall booklet layout.
+
+\subsection{Warm-Up}
+\input{problems/part1-basic}
+
+\subsection{Medium}
+\input{problems/part1-medium}
+
+\subsection{Advanced}
+\input{problems/part1-advanced}
+
+\newpage
+\section{Appendices}
+
+\subsection{Appendix A: Differential Equations Quick Reference}
+\input{problems/appendix-a-quick-reference}
+
+\subsection{Appendix B: Reading Slope Fields}
+\input{problems/appendix-b-slope-fields}
+
+\subsection{Appendix C: Modelling Workflow}
+\input{problems/appendix-c-modelling-workflow}
+
+\subsection{Appendix D: Enrichment and Where This Goes Next}
+\input{problems/appendix-d-enrichment}
+
+\newpage
+\section{Conclusion}
+Differential equations are one of the clearest examples of how calculus becomes a modelling language. The topic asks students to do more than differentiate and integrate: it asks them to connect rate, graph, formula, and interpretation in a single chain of reasoning. That combination is exactly why the topic is so useful later in Extension~2, mechanics, engineering, and university mathematics.
+
+As you work through this booklet, aim to build two habits together: solve carefully, and explain what the solution means. Strong HSC answers usually do both. Once the problem bank is filled in, this booklet will become a natural place to practice that full cycle repeatedly.
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \texttt{\detokenize{https://www.linkedin.com/in/nguyenvuhung/}}\\[0.3em]
+GitHub: \texttt{\detokenize{https://github.com/vuhung16au/}}
+
+\end{document}
