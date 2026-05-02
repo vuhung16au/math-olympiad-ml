@@ -256,3 +256,91 @@ If $1 < a < e^{1/e}$: $2$ solutions.
 \end{itemize}
 \end{takeaways}
 
+\begin{problem}[Uniform Convergence and the Limit--Integral Trap]
+
+In standard calculus, we often assume that "the limit of an integral is the integral of the limit." 
+However, this is only guaranteed under \textbf{Uniform Convergence}. A sequence of functions $\{f_n\}$ defined on a set $B$ converges uniformly to a function $f$ if for all $\epsilon > 0$, 
+there exists an $N$ such that $|f(x) - f_n(x)| < \epsilon$ for all $n \ge N$ and all $x \in B$. 
+If a sequence converges to $f$ for each $x$ individually but doesn't meet this "global" $N$ requirement, it is called \textbf{pointwise convergence}.
+
+
+Consider the sequence of functions
+\[
+f_n(x)=n^2x(1-x)^n, \qquad 0\le x\le 1.
+\]
+
+defined on the interval $x \in [0, 1]$ for $n = 1, 2, 3, \dots$.
+
+\begin{enumerate}[label=(\roman*)]
+\item Show that for each fixed $x\in[0,1]$, we have $f_n(x)\to 0$ as $n\to\infty$.
+\item Find the stationary point (the point where $f_n'(x) = 0$) of $f_n$ on $[0,1]$ and hence determine its maximum value. Use this to show that $\{f_n\}$ does not converge uniformly to $0$.
+\item Evaluate
+\[
+\int_0^1 \left(\lim_{n\to\infty} f_n(x)\right)\,dx
+\qquad \text{and} \qquad
+\lim_{n\to\infty}\int_0^1 f_n(x)\,dx.
+\]
+Comment on the result.
+\item Now consider $g_n(x)=\dfrac{x^n}{n}$ on $[0,1]$. Prove that $g_n\to 0$ uniformly.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+For $0<x<1$, write $(1-x)^n=r^{-n}$ for some $r>1$. In part (ii), differentiate and evaluate $f_n$ at its critical point. In part (iii), use the substitution $u=1-x$. For part (iv), find the largest value of $x^n/n$ on $[0,1]$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} If $x=0$ or $x=1$, then $f_n(x)=0$ for all $n$. If $0<x<1$, then $0<1-x<1$, so $(1-x)^n\to 0$ exponentially fast and therefore $n^2x(1-x)^n\to 0$. Hence $f_n(x)\to 0$ pointwise on $[0,1]$.
+
+\textbf{(ii)}
+\[
+f_n'(x)=n^2(1-x)^{n-1}\bigl(1-(n+1)x\bigr).
+\]
+So the stationary point is at $x=\dfrac{1}{n+1}$, which gives the maximum
+\[
+M_n=f_n\!\left(\frac{1}{n+1}\right)=\frac{n^2}{n+1}\left(\frac{n}{n+1}\right)^n.
+\]
+Since $\left(\dfrac{n}{n+1}\right)^n\to e^{-1}$, we get $M_n\sim \dfrac{n}{e}\to\infty$. In particular, $\max_{x\in[0,1]}|f_n(x)-0| \leq M_n$ does not tend to $0$, so the convergence is not uniform.
+
+\textbf{(iii)} Since the pointwise limit is $0$,
+\[
+\int_0^1 \left(\lim_{n\to\infty} f_n(x)\right)\,dx=\int_0^1 0\,dx=0.
+\]
+Also,
+\[
+\int_0^1 f_n(x)\,dx=n^2\int_0^1 x(1-x)^n\,dx.
+\]
+Let $u=1-x$. Then
+\[
+n^2\int_0^1 (u^n-u^{n+1})\,du
+=n^2\left(\frac{1}{n+1}-\frac{1}{n+2}\right)
+=\frac{n^2}{(n+1)(n+2)}\to 1.
+\]
+Thus
+\[
+\int_0^1 \left(\lim_{n\to\infty} f_n(x)\right)\,dx=0
+\qquad \text{but} \qquad
+\lim_{n\to\infty}\int_0^1 f_n(x)\,dx=1.
+\]
+So here taking limits and integrating cannot be interchanged.
+
+\textbf{(iv)} For $0\le x\le 1$,
+\[
+0\le g_n(x)=\frac{x^n}{n}\le \frac{1}{n},
+\]
+with equality at $x=1$. Hence
+\[
+\max_{x\in[0,1]}|g_n(x)-0|=\frac{1}{n}\to 0.
+\]
+Therefore $g_n\to 0$ uniformly on $[0,1]$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item Pointwise convergence checks each fixed input separately, whereas uniform convergence controls the whole interval at once through the supremum error.
+\item A sequence can converge pointwise to $0$ while still developing a narrow spike whose total area does not vanish.
+\item Uniform convergence is a safe condition for swapping limits and integrals; this example shows what can go wrong when uniform convergence fails.
+\item Uniform convergence links to differential equations and series expansions, where controlling the error across an entire domain is crucial for valid approximations.
+\end{itemize}
+\end{takeaways}
+
