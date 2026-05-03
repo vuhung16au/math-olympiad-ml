@@ -376,12 +376,12 @@ In this problem you will show $\zeta(3)$ is irrational using a sequence of integ
 
 \end{problem}
 
-\begin{hintbox}
+\begin{hint}
 	\textbf{(a)} $A\frac{p}{q}-B=\frac{Ap-Bq}{q}$ and use that a nonzero integer has magnitude at least 1.\\
 	\textbf{(b)} Set $y=x$, maximize in $z$ to get $z=\frac{1}{1+x}$, then maximize in $x\in[0,1]$.\\
 	\textbf{(c)} Bound the integrand by $g_{\max}^n$ and pull it outside the integral.\\
 	\textbf{(d)} Compare the fixed lower bound $1/q$ with the upper bound decaying like $\big(27(\sqrt{2}-1)^4\big)^n$.
-\end{hintbox}
+\end{hint}
 
 
 \begin{solution}
@@ -465,12 +465,12 @@ A puzzle game requires you to completely tile a $2 \times n$ rectangular grid us
 \end{enumerate}
 \end{problem}
 
-\begin{hintbox}
+\begin{hint}
 \textbf{(i)} Think about how any valid tiling \emph{must} end. It can only end in one of the defined fundamental blocks. How much width does each block take up? Are the ending scenarios mutually exclusive?\\[4pt]
 \textbf{(ii)} Use the Rational Root Theorem to guess a small integer root (try factors of 2). Once you factor out the linear term, use the quadratic formula for the remaining roots. Do you recognise the resulting complex numbers?\\[4pt]
 \textbf{(iii)} Let the complex roots be $\omega$ and $\bar{\omega}$. Add the three equations for $n=0,1,2$ together vertically. What happens to the $B$ and $C$ coefficients when you factor out $(1 + \omega + \omega^2)$?\\[4pt]
 \textbf{(iv)} Since $W_n$ is a sequence of real integers, the coefficients $B$ and $C$ must be complex conjugates. Let $B = u + vi$ and $C = u - vi$, and solve for $u$ and $v$ using the $W_0$ and $W_1$ equations. For the limit, identify which term dominates as $n \to \infty$.
-\end{hintbox}
+\end{hint}
 
 \begin{solution}
 \textbf{(i)} Any valid tiling must end with one of the three block types (mutually exclusive and exhaustive): an I-Domino (width 1) leaves $W_{n-1}$ tilings; an O-Tetromino (width 2) leaves $W_{n-2}$; an L-Pair (width 3) has 2 patterns, contributing $2W_{n-3}$. Hence $W_n = W_{n-1} + W_{n-2} + 2W_{n-3}$.

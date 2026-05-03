@@ -96,12 +96,12 @@ The point $P(x, y, z)$ lies on the surface of the ellipsoid defined by:
 \end{center}
 \end{problem}
 
-\begin{hintbox}
+\begin{hint}
 The standard Cauchy-Schwarz inequality is $|\mathbf{a} \cdot \mathbf{b}| \le |\mathbf{a}| |\mathbf{b}|$.
 You cannot define $\mathbf{u} = (x, y, z)$ directly because the sum of squares is not 1.
 Instead, define $\mathbf{u}$ such that $|\mathbf{u}|^2$ exactly matches the left-hand side of the ellipsoid equation.
 Then, choose a constant vector $\mathbf{v}$ such that the dot product $\mathbf{u} \cdot \mathbf{v}$ recovers the expression $x + y + z$.
-\end{hintbox}
+\end{hint}
 
 \begin{solution}
 \textbf{(i)} Let $\mathbf{u} = \begin{pmatrix} \frac{x}{2} \\ \frac{y}{3} \\ \frac{z}{5} \end{pmatrix}$. We are given $|\mathbf{u}|^2 = \frac{x^2}{4} + \frac{y^2}{9} + \frac{z^2}{25} = 1$, so $|\mathbf{u}|=1$.
@@ -147,12 +147,12 @@ Show that the sum of the cosines of the angles between all distinct pairs is $-2
 \end{center}
 \end{problem}
 
-\begin{hintbox}
+\begin{hint}
 Consider the squared magnitude of the vector sum.
 Since $\sum \mathbf{v}_i = \mathbf{0}$, it follows that $|\sum \mathbf{v}_i|^2 = 0$.
 Expand the dot product $(\mathbf{v}_1 + \dots + \mathbf{v}_4) \cdot (\mathbf{v}_1 + \dots + \mathbf{v}_4)$.
 Separate the expansion into diagonal terms ($\mathbf{v}_i \cdot \mathbf{v}_i$) and mixed terms ($\mathbf{v}_i \cdot \mathbf{v}_j$ for $i \ne j$).
-\end{hintbox}
+\end{hint}
 
 \begin{solution}
 Let $S = \mathbf{v}_1 + \mathbf{v}_2 + \mathbf{v}_3 + \mathbf{v}_4 = \mathbf{0}$.
@@ -187,11 +187,11 @@ Three complex numbers $z_1, z_2, z_3$ satisfy:
 Show that $z_1, z_2, z_3$ represent the vertices of an equilateral triangle inscribed in the circle $|z|=r$.
 \end{problem}
 
-\begin{hintbox}
+\begin{hint}
 To prove a triangle is equilateral, you can prove the sides are equal: $|z_1-z_2|^2 = |z_2-z_3|^2 = |z_3-z_1|^2$.
 Expand $|z_1-z_2|^2 = (z_1-z_2)(\overline{z_1}-\overline{z_2})$.
 Use the fact that $z_1+z_2+z_3=0 \implies z_1+z_2 = -z_3$.
-\end{hintbox}
+\end{hint}
 
 \begin{solution}
 Consider the squared side length $|z_1 - z_2|^2$:
@@ -231,11 +231,11 @@ Two particles $A$ and $B$ move in space such that their position vectors at time
 (ii) Find the minimum distance between the particles and the time at which this occurs.
 \end{problem}
 
-\begin{hintbox}
+\begin{hint}
 Find the displacement vector $\mathbf{d}(t) = \mathbf{r}_A - \mathbf{r}_B$.
 Compute the dot product $\mathbf{d} \cdot \mathbf{d}$ to get the squared magnitude.
 You will get a quadratic expression $At^2 + Bt + C$. Find the vertex of this parabola ($t = -B/2A$).
-\end{hintbox}
+\end{hint}
 
 \begin{solution}
 \textbf{(i)} The vector connecting them is:
@@ -329,12 +329,12 @@ You are given the series definition
     \item[(iv)] Conclude that $e$ is irrational.
 \end{enumerate}
 
-\begin{hintbox}
+\begin{hint}
 	\textbf{(i)} Write the tail $e-S_k=\tfrac{1}{(k+1)!}+\tfrac{1}{(k+2)!}+\cdots$ and bound it by a geometric progression with ratio $\tfrac{1}{k+1}$.\\
 	\textbf{(ii)} Note $q!/n!\in\mathbb{Z}$ for all $0\le n\le q$, so $q!S_q$ is an integer while $q!e= (q-1)!\,p$.\\
 	\textbf{(iii)} Multiply the inequality from (i) by $q!$.\\
 	\textbf{(iv)} There is no integer strictly between $0$ and $1$.
-\end{hintbox}
+\end{hint}
 \end{problem}
 
 \begin{solution}
