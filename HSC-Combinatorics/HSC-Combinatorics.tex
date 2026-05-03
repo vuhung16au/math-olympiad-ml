@@ -19,6 +19,28 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 
+\makeatletter
+\newcommand\binomialCoefficient[2]{%
+  \c@pgf@counta=#1% n
+  \c@pgf@countb=#2% k
+  \c@pgf@countc=\c@pgf@counta%
+  \advance\c@pgf@countc by-\c@pgf@countb%
+  \ifnum\c@pgf@countb>\c@pgf@countc%
+    \c@pgf@countb=\c@pgf@countc%
+  \fi%
+  \c@pgf@countc=1%
+  \c@pgf@countd=0%
+  \pgfmathloop
+    \ifnum\c@pgf@countd<\c@pgf@countb%
+    \multiply\c@pgf@countc by\c@pgf@counta%
+    \advance\c@pgf@counta by-1%
+    \advance\c@pgf@countd by1%
+    \divide\c@pgf@countc by\c@pgf@countd%
+  \repeatpgfmathloop%
+  \the\c@pgf@countc%
+}
+\makeatother
+
 \usepackage{dl101-colors}
 \usepackage{dl101-hints}
 \usepackage[takeawaysitemize]{dl101-hsc-problems}
@@ -236,17 +258,43 @@ is the multinomial coefficient
 \subsection{Pascal's Triangle}
 Pascal's triangle is a triangular arrangement of binomial coefficients. For HSC Extension~1, it is useful both for quick coefficient reading and for proving combinatorial identities.
 
-For $n=0,1,2,3,4,5$, Pascal's triangle begins as follows:
-\[
-\begin{array}{ccccccccccc}
-&&&&&1&&&&& \\
-&&&&1&&1&&&& \\
-&&&1&&2&&1&&& \\
-&&1&&3&&3&&1&& \\
-&1&&4&&6&&4&&1& \\
-1&&5&&10&&10&&5&&1
-\end{array}
-\]
+For $n=0,1,2,\dots,9$ (10 rows), Pascal's triangle can be shown with stacked hexagons:
+\begin{center}
+\def\HexR{0.43cm}
+\begin{tikzpicture}[line width=0.75pt]
+  \foreach \k in {0,...,9}{
+    \begin{scope}[shift={(-60:{sqrt(3)*\HexR*\k})}]
+      \pgfmathtruncatemacro\ystart{9-\k}
+      \foreach \n in {0,...,\ystart}{
+        \pgfmathtruncatemacro\row{\n+\k}
+        \def\hexbase{softivory}
+
+        % Color diagonals with explicit if/then logic.
+        \ifnum\k=0\relax\def\hexbase{warmstone!18!bookwhite}\fi
+         \ifnum\k=1\relax\def\hexbase{warmstone!72!bookwhite}\fi
+         \ifnum\k=2\relax\def\hexbase{warmstone!40!bookpurple}\fi
+         \ifnum\k=3\relax\def\hexbase{warmstone!35!bookred}\fi
+        \ifnum\k=8\relax
+          \ifnum\n<2\relax\def\hexbase{softivory!35!lawpurple}\fi
+        \fi
+        \ifnum\k=9\relax
+          \ifnum\n=0\relax\def\hexbase{softivory!35!lawpurple}\fi
+        \fi
+
+        \begin{scope}[shift={(-120:{sqrt(3)*\HexR*\n})}]
+          \draw[draw=deepcharcoal!80,
+                top color=\hexbase!25!bookwhite,
+                bottom color=\hexbase!90!warmstone]
+            (30:\HexR)
+            \foreach \x in {90,150,...,330} { -- (\x:\HexR) }
+            -- cycle
+            node at (0,0) {\scriptsize\bfseries\color{deepcharcoal}\binomialCoefficient{\row}{\k}};
+        \end{scope}
+      }
+    \end{scope}
+  }
+\end{tikzpicture}
+\end{center}
 
 \textbf{Three facts to remember:}
 \begin{itemize}[leftmargin=*]
