@@ -1,47 +1,45 @@
-\begin{itemize}[leftmargin=*]
-  \item \textbf{General first-order form:} $\dfrac{dy}{dx} = F(x,y)$.
-  \item \textbf{Initial condition:} a value such as $y(x_0)=y_0$ used to pick out one particular solution.
-  \item \textbf{Separable forms:}
-  \[
-  \frac{dy}{dx}=f(x), \qquad
-  \frac{dy}{dx}=g(y), \qquad
-  \frac{dy}{dx}=f(x)g(y).
-  \]
-  \item \textbf{Core integration idea:} if variables can be separated, rewrite the equation in the form
-  \[
-  A(y)\,dy = B(x)\,dx
-  \]
-  and integrate both sides.
-  \item \textbf{Equilibrium solution:} a constant solution $y=k$ for which $\dfrac{dy}{dx}=0$.
-  \item \textbf{Slope field reading rule:} each small segment shows the local tangent direction of a solution curve.
-  \item \textbf{Exponential-style model:}
-  \[
-  \frac{dy}{dx}=ky
-  \qquad \Longrightarrow \qquad
-  y=Ae^{kx}.
-  \]
-  \item \textbf{Logistic model:}
-  \[
-  \frac{dy}{dx}=ry\left(1-\frac{y}{M}\right),
-  \]
-  where $M$ is the carrying capacity and the equilibrium values are $y=0$ and $y=M$.
-  \item \textbf{Newton's law of cooling:}
-  \[
-  \frac{dT}{dt}=-k(T-T_a)
-  \qquad \Longrightarrow \qquad
-  T(t)=T_a+Ce^{-kt}.
-  \]
-  \item \textbf{Torricelli-style draining model:}
-  \[
-  \frac{dh}{dt}=-k\sqrt{h}
-  \qquad \Longrightarrow \qquad
-  2\sqrt{h}=-kt+C.
-  \]
-  \item \textbf{Particle moving on a curve:}
-  \[
-  \mathbf{r}(t)=x(t)\mathbf{i}+y(t)\mathbf{j}, \qquad
-  \mathbf{v}(t)=\dot{x}\mathbf{i}+\dot{y}\mathbf{j}, \qquad
-  \mathbf{a}(t)=\ddot{x}\mathbf{i}+\ddot{y}\mathbf{j}.
-  \]
-  % \item \textbf{Interpretation checklist:} identify units, define constants clearly, apply the initial condition, and state what the long-run behavior means in context.
-\end{itemize}
+\renewcommand{\arraystretch}{1.35}
+\begin{center}
+\begin{tabular}{|p{0.22\textwidth}|p{0.38\textwidth}|p{0.32\textwidth}|}
+\hline
+\textbf{Concept / Model} & \textbf{Key Form / Formula} & \textbf{Key Interpretation} \\
+\hline
+General first-order DE & $\dfrac{dy}{dx} = F(x,y)$ & One unknown function; need one condition to fix the solution. \\
+\hline
+Initial condition & $y(x_0)=y_0$ & Picks out one particular solution from the family. \\
+\hline
+Separable DE & $A(y)\,dy = B(x)\,dx$ & Separate variables, then integrate both sides. \\
+\hline
+Equilibrium solution & $\dfrac{dy}{dx}=0 \;\Rightarrow\; y=k$ & Constant solution; solution curve is a horizontal line. \\
+\hline
+Slope field &
+\begin{tikzpicture}[scale=0.28, baseline=(current bounding box.center)]
+  \foreach \xi in {-2,-1,0,1,2}{
+    \foreach \yi in {-2,-1,0,1,2}{
+      \pgfmathsetmacro{\sl}{\xi+\yi}
+      \pgfmathsetmacro{\ang}{atan(\sl)}
+      \pgfmathsetmacro{\dx}{0.32*cos(\ang)}
+      \pgfmathsetmacro{\dy}{0.32*sin(\ang)}
+      \draw[gray!70,thin] (\xi-\dx,\yi-\dy)--(\xi+\dx,\yi+\dy);
+    }
+  }
+  \draw[->] (-2.6,0)--(2.6,0) node[right,font=\tiny]{$x$};
+  \draw[->] (0,-2.6)--(0,2.6) node[above,font=\tiny]{$y$};
+  \node[font=\tiny,below] at (0,-2.6) {$\tfrac{dy}{dx}=x+y$};
+\end{tikzpicture}
+& Each segment shows the tangent direction of a solution curve at that point. \\
+\hline
+Exponential growth/decay & $\dfrac{dy}{dx}=ky \;\Rightarrow\; y=Ae^{kx}$ & $k>0$: growth; $k<0$: decay. $y=0$ is the only equilibrium. \\
+\hline
+Logistic growth & $\dfrac{dy}{dt}=ry\!\left(1-\dfrac{y}{M}\right)$ & Equilibria $y=0$ (unstable) and $y=M$ (stable); $M$ = carrying capacity. \\
+\hline
+Logistic with harvesting & $\dfrac{dy}{dt}=ry\!\left(1-\dfrac{y}{M}\right)-h$ & High $h$ removes the positive equilibrium; population can collapse. \\
+\hline
+Newton's law of cooling & $\dfrac{dT}{dt}=-k(T-T_a) \;\Rightarrow\; T=T_a+Ce^{-kt}$ & $T\to T_a$ as $t\to\infty$; $T_a$ is the only stable equilibrium. \\
+\hline
+Torricelli draining & $\dfrac{dh}{dt}=-k\sqrt{h} \;\Rightarrow\; 2\sqrt{h}=-kt+C$ & Draining rate slows as water level $h$ falls; empties in finite time. \\
+\hline
+Particle on a curve & $\mathbf{r}=x\,\mathbf{i}+y\,\mathbf{j}$,\quad $\mathbf{v}=\dot x\,\mathbf{i}+\dot y\,\mathbf{j}$,\quad $\mathbf{a}=\ddot x\,\mathbf{i}+\ddot y\,\mathbf{j}$ & Differentiate position to get velocity; differentiate again for acceleration. \\
+\hline
+\end{tabular}
+\end{center}

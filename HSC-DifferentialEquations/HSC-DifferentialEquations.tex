@@ -119,54 +119,22 @@ This booklet builds strong \textbf{core HSC differential equations skills} and t
 
 \newpage
 \section{Fundamentals Review}
-This short review gathers the basic language, notation, and standard forms that appear throughout the booklet.
+This quick review covers the core language, notation, and standard forms you will use throughout the booklet.
 
 \input{problems/fundamentals}
 
 \newpage
 \section{Differential Equations}
+The core language and notation were introduced in the Fundamentals Review. From here, the focus shifts to using those ideas in practice: reading behavior from slope fields, solving separable forms, and interpreting autonomous models such as logistic growth.
 
-\subsection{Concept Overview}
-A differential equation is an equation involving an unknown function and one or more of its derivatives. In the HSC setting, we mainly work with first-order equations, where the derivative $y'$ describes the slope of the solution curve at each point.
-
-The key shift in thinking is this: instead of asking for a single value, we are looking for a function whose rate of change matches the given rule. Often there is not just one answer, but a family of answers.
-
-\subsection{Key Forms}
-\[
-\frac{dy}{dx} = F(x,y), \qquad
-\frac{dy}{dx} = f(x), \qquad
-\frac{dy}{dx} = g(y), \qquad
-\frac{dy}{dx} = f(x)g(y).
-\]
-
-\[
-\text{Initial condition example: } y(0)=11.
-\]
-
-\subsection{Interpretation Notes}
-\begin{itemize}[leftmargin=*]
-  \item A general solution usually contains a constant of integration.
-  \item An initial condition turns a family of curves into one particular solution.
-  \item The derivative tells us the local behavior of the solution: whether it rises, falls, or stays flat.
-\end{itemize}
-
-\subsection{Typical Mistakes}
-\begin{itemize}[leftmargin=*]
-  \item Forgetting the constant of integration.
-  \item Applying an initial condition too early or incorrectly.
-  \item Treating the derivative as a disconnected algebraic symbol rather than a rate or slope.
-\end{itemize}
-
-\begin{enrichmentbox}
-In higher mathematics, one also studies whether a solution exists, whether it is unique, and how sensitive it is to the starting condition. At HSC level, the main emphasis is on recognizing the structure, solving standard forms, and interpreting the result clearly.
-\end{enrichmentbox}
+We begin with slope fields, where local gradient information helps us predict solution behavior before full symbolic solving.
 
 \section{Slope Fields}
 
 \subsection{Concept Overview}
-A slope field, also called a direction field, is a visual way to display the differential equation $y'=F(x,y)$. At each point in the plane, a short line segment is drawn with slope $F(x,y)$. Solution curves then thread through those segments.
+A slope field (also called a direction field) is a visual map of the differential equation $y'=F(x,y)$. At each point, you draw a short segment with slope $F(x,y)$, and solution curves follow those local directions.
 
-This gives a qualitative picture of the equation before any algebraic solving begins. It is especially useful for identifying equilibrium solutions and predicting long-run behavior.
+This lets you read behavior before doing heavy algebra. It is especially useful for spotting equilibrium solutions and predicting long-run trends.
 
 \subsection{Key Ideas}
 \begin{itemize}[leftmargin=*]
@@ -184,7 +152,7 @@ This gives a qualitative picture of the equation before any algebraic solving be
 \end{itemize}
 
 \subsection{Worked Slope-Field Examples}
-The mini-fields below show how very different differential equations produce very different local patterns.
+The mini-fields below show how different differential equations create different local patterns.
 
 \begin{center}
 \begin{minipage}[t]{0.32\textwidth}
@@ -256,12 +224,12 @@ The mini-fields below show how very different differential equations produce ver
   \item For $y'=xy$, both axes are zero-slope lines, and the sign of $xy$ controls whether the local segments tilt up or down.
 \end{itemize}
 
-\subsection{Typical Mistakes}
-\begin{itemize}[leftmargin=*]
-  \item Drawing curves that cut across the local directions.
-  \item Ignoring the given starting point.
-  \item Describing long-run behavior only on the graph and not in words.
-\end{itemize}
+% \subsection{Typical Mistakes}
+% \begin{itemize}[leftmargin=*]
+%   \item Drawing curves that cut across the local directions.
+%   \item Ignoring the given starting point.
+%   \item Describing long-run behavior only on the graph and not in words.
+% \end{itemize}
 
 \begin{enrichmentbox}
 Slope fields are an early example of qualitative analysis. Even when an equation is hard to solve exactly, the field can still reveal equilibrium levels, monotonic behavior, and asymptotic trends.
@@ -270,7 +238,7 @@ Slope fields are an early example of qualitative analysis. Even when an equation
 \section{Separable Differential Equations}
 
 \subsection{Concept Overview}
-Many HSC differential equations are separable, meaning the $y$ terms and $x$ terms can be placed on opposite sides before integrating. This is the main algebraic technique students are expected to master.
+Many HSC differential equations are separable, which means you can move the $y$ terms and $x$ terms to opposite sides before integrating. This is one of the main algebraic techniques you need to master.
 
 \subsection{Canonical Forms}
 \[
@@ -293,23 +261,32 @@ A(y)\,dy = B(x)\,dx.
   \item The form $y'=f(x)g(y)$ mixes both influences and is often the richest case.
 \end{itemize}
 
-\subsection{Typical Mistakes}
-\begin{itemize}[leftmargin=*]
-  \item Separating variables incorrectly.
-  \item Dropping absolute values when integrating logarithmic forms.
-  \item Forgetting to substitute the initial condition back into the integrated solution.
-\end{itemize}
+% \subsection{Typical Mistakes}
+% \begin{itemize}[leftmargin=*]
+%   \item Separating variables incorrectly.
+%   \item Dropping absolute values when integrating logarithmic forms.
+%   \item Forgetting to substitute the initial condition back into the integrated solution.
+% \end{itemize}
 
 \begin{enrichmentbox}
 At university level, students later meet equations that are not separable and need different methods. Learning to recognize separable structure now builds the pattern-recognition needed for those later techniques.
 \end{enrichmentbox}
 
-\section{Autonomous Equations and the Logistic Model}
+\section{Autonomous Equations, Equilibria, and the Logistic Model}
 
 \subsection{Concept Overview}
-An autonomous differential equation has the form $y'=g(y)$, so the slope depends only on the current value of $y$. These equations often have visible equilibrium values and clear long-run behavior.
+An autonomous differential equation has the form $y'=g(y)$, so the slope depends only on the current value of $y$. These equations often make equilibrium values and long-run behavior easier to see.
 
-The logistic equation is a central example because it combines growth with a limiting effect. It models a quantity that grows when small but slows as it approaches a carrying capacity.
+This section focuses on equilibrium and stability analysis for autonomous equations. The logistic equation is a key worked example because it combines growth with a limiting effect: a quantity grows when small, then slows as it approaches a carrying capacity.
+
+\subsection{Equilibria and Stability (Phase-Line Thinking)}
+For an autonomous equation $y'=g(y)$, equilibrium values occur where $g(y)=0$. To classify behavior, check the sign of $g(y)$ in intervals between equilibrium values:
+\begin{itemize}[leftmargin=*]
+  \item if $g(y)>0$, solutions increase;
+  \item if $g(y)<0$, solutions decrease;
+  \item if nearby arrows point toward an equilibrium, it is stable;
+  \item if nearby arrows point away, it is unstable.
+\end{itemize}
 
 \subsection{Key Forms}
 \[
@@ -324,21 +301,29 @@ The logistic equation is a central example because it combines growth with a lim
 
 \subsection{Interpretation Notes}
 \begin{itemize}[leftmargin=*]
-  \item Equilibrium values occur where $g(y)=0$.
   \item In the logistic model, $y=0$ and $y=M$ are equilibrium values.
   \item If $0<y<M$, growth is positive.
   \item If $y>M$, the rate is negative and the model pushes back toward $M$.
 \end{itemize}
 
-\subsection{Typical Mistakes}
+\subsection{Other Common Autonomous Models}
+The logistic equation is one important model, but not the only one. Other standard autonomous forms include:
 \begin{itemize}[leftmargin=*]
-  \item Treating the carrying capacity as just another constant without explaining its meaning.
-  \item Forgetting to check what happens above and below each equilibrium.
-  \item Solving correctly but failing to interpret whether the answer is realistic in context.
+  \item Exponential growth/decay: $\dfrac{dy}{dt}=ky$.
+  \item Newton cooling/approach-to-ambient: $\dfrac{dT}{dt}=-k(T-T_a)$.
+  \item Logistic with harvesting: $\dfrac{dy}{dt}=ry\left(1-\dfrac{y}{M}\right)-h$.
 \end{itemize}
+These can all be analysed with the same equilibrium-and-sign method used for logistic growth.
+
+% \subsection{Typical Mistakes}
+% \begin{itemize}[leftmargin=*]
+%   \item Treating the carrying capacity as just another constant without explaining its meaning.
+%   \item Forgetting to check what happens above and below each equilibrium.
+%   \item Solving correctly but failing to interpret whether the answer is realistic in context.
+% \end{itemize}
 
 \begin{enrichmentbox}
-The language of stable and unstable equilibria becomes very important in engineering, dynamical systems, and mathematical biology. The logistic equation is often a student's first real encounter with this kind of thinking.
+Stable/unstable equilibrium language and phase-line analysis become very important in engineering, dynamical systems, and mathematical biology. The logistic equation is often a student's first encounter with these ideas, but the same framework extends to many other models.
 \end{enrichmentbox}
 
 
@@ -394,7 +379,7 @@ The language of stable and unstable equilibria becomes very important in enginee
 \subsection{Appendix A: Differential Equations Quick Reference}
 \input{problems/appendix-a-quick-reference}
 
-\subsection{Appendix B: Reading Slope Fields}
+\subsection{Appendix B: Reading and Drawing Slope Fields}
 \input{problems/appendix-b-slope-fields}
 
 \subsection{Appendix C: Modelling Workflow}
