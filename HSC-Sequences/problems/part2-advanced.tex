@@ -357,7 +357,52 @@ S(0.1) = \frac{0.1^2}{1 - 0.1 - 0.1^2} = \frac{0.01}{1 - 0.1 - 0.01} = \frac{0.0
 
 \textbf{(iv)} The required sum gives $F_6 \times (0.1)^7 + F_7 \times (0.1)^8$. $F_6 = 8$ and $F_7 = 13$, so the sum overlapping the $10^{-7}$ place includes the carry-over from $F_7$: $8 + 1 = 9$.
 \end{solution}
+
+
+
 \begin{takeaways}
 \item Power series generating functions can be explicitly derived using recurrence relations.
 \item The decimal expansion of fractions naturally encodes the base-10 carry-over of power series evaluations.
+\item Fibonacci recursion can also be visualised geometrically via a quarter-turn spiral whose radii follow consecutive Fibonacci numbers.
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}
+    % Fibonacci spiral with radii = F_n mm (1,1,2,3,5,8,13,21,34,55).
+    % All arcs computed analytically; no counters needed.
+    % Tiling spans x: 0..89 mm, y: -15..40 mm.  Origin placed at (65,0).
+    \fill[softivory] (-4mm,-20mm) rectangle (93mm,44mm);
+
+    % --- Square dividing lines (one L-path per square boundary) ---
+    \draw[deepcharcoal, line width=0.6pt]
+        (65mm,0mm)   -| (64mm,1mm)
+        (64mm,1mm)   |- (63mm,0mm)
+        (63mm,0mm)   -| (65mm,-2mm)
+        (65mm,-2mm)  |- (68mm,1mm)
+        (68mm,1mm)   -| (63mm,6mm)
+        (63mm,6mm)   |- (55mm,-2mm)
+        (55mm,-2mm)  -| (68mm,-15mm)
+        (68mm,-15mm) |- (89mm,6mm)
+        (89mm,6mm)   -| (55mm,40mm)
+        (55mm,40mm)  -- (55mm,-15mm);
+
+    % --- Spiral arcs ---
+    \draw[bookred, line width=1.2pt]
+        ( 65mm,  0mm) arc (  0: 90:  1mm)
+        ( 64mm,  1mm) arc ( 90:180:  1mm)
+        ( 63mm,  0mm) arc (180:270:  2mm)
+        ( 65mm, -2mm) arc (270:360:  3mm)
+        ( 68mm,  1mm) arc (  0: 90:  5mm)
+        ( 63mm,  6mm) arc ( 90:180:  8mm)
+        ( 55mm, -2mm) arc (180:270: 13mm)
+        ( 68mm,-15mm) arc (270:360: 21mm)
+        ( 89mm,  6mm) arc (  0: 90: 34mm)
+        ( 55mm, 40mm) arc ( 90:180: 55mm);
+
+    % Formula label in the empty interior of the outer arc
+    \node[bookpurple, font=\large, align=left] at (12mm,-9mm)
+        {$F_1=1,\;F_2=1,\;F_n=F_{n-1}+F_{n-2}$};
+\end{tikzpicture}%
+}
+\end{center}
 \end{takeaways}
