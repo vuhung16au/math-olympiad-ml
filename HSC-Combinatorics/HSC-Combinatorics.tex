@@ -152,41 +152,50 @@ Most problems in this booklet can be solved using standard HSC Mathematics Exten
 
 \subsection{Core Formulas and Ideas}
 
-\textbf{Fundamental Counting Principle.} If a task is completed in stages with $a$ choices for the first stage, $b$ for the second, and $c$ for the third, then the total number of outcomes is
+\textbf{Fundamental Counting Principle.} If a task has stages with $a$, $b$, and $c$ choices, then the total number of outcomes is
 \[
 a \times b \times c.
 \]
+\textit{Short example.} A meal has $2$ drink choices, $3$ main choices, and $2$ dessert choices, so the number of meals is
+\[
+2\times 3\times 2=12.
+\]
 
-\textbf{Generalized counting principle.} Suppose that $k$ experiments are to be performed, with the number of possible outcomes being $n_i$ for the $i$th experiment. Then there are
+\textbf{Generalized counting principle.} If $k$ experiments are performed, and experiment $i$ has $n_i$ outcomes, then the total number of outcomes is
 \[
 n_1\cdot n_2\cdot \dots \cdot n_k
 \]
-possible outcomes of all $k$ experiments together.
+for all $k$ experiments together.
+\textit{Short example.} A code has $4$ characters, each chosen from $10$ digits. The total number of codes is
+\[
+10\cdot 10\cdot 10\cdot 10=10^4=10000.
+\]
 
 \textbf{What is a set?} A \textbf{set} is a collection of distinct objects. In a set, order does not matter, and repeated copies are not listed separately. For example,
 \[
 \{1,2,3\}=\{3,2,1\},
 \]
 and writing $\{1,1,2\}$ does not create a new $3$-element set; as a set, it is just $\{1,2\}$.
+\textit{Short example.} The selections $\{\text{red, blue}\}$ and $\{\text{blue, red}\}$ are the same set.
 
 In counting problems, this usually means:
 \begin{itemize}[leftmargin=*]
-  \item the objects in the set are treated as distinct unless the question says some are equal or repeated
-  \item repetition is \emph{not} automatically allowed just because we are arranging or choosing from a set
-  \item if repetition \emph{is} allowed, the question should say so explicitly.
+  \item treat objects as distinct unless the question says some are identical
+  \item do not assume repetition is allowed
+  \item if repetition is allowed, the question should state it.
 \end{itemize}
 
 \textbf{Permutations versus combinations.} A \textbf{permutation} is an arrangement, so order matters. A \textbf{combination} is a selection, so order does not matter.
 
-\textit{Worked example.} Suppose $3$ students are Alice, Ben, and Chloe.
+\textit{Short example.} Suppose $3$ students are Alice, Ben, and Chloe.
 \begin{itemize}[leftmargin=*]
-  \item If we choose a captain and vice-captain, order matters, so this is a permutation:
+  \item Captain and vice-captain: order matters, so this is a permutation:
   \[
   {}^3P_2 = 3\times 2 = 6.
   \]
-  For example, ``Alice then Ben'' is different from ``Ben then Alice''.
+  ``Alice then Ben'' is different from ``Ben then Alice''.
 
-  \item If we simply choose a team of $2$, order does not matter, so this is a combination:
+  \item Team of $2$: order does not matter, so this is a combination:
   \[
   \binom{3}{2}=3.
   \]
@@ -259,26 +268,23 @@ For $n=0,1,2,\dots,9$ (10 rows), Pascal's triangle can be shown with stacked hex
 \end{tikzpicture}
 \end{center}
 
-\textbf{Three facts to remember:}
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Pascal rule:}
-  \[
-  \binom{n}{r}=\binom{n-1}{r-1}+\binom{n-1}{r}.
-  \]
-  Each interior entry is the sum of the two entries above it.
+% \textbf{Three facts to remember:}
 
-  \item \textbf{Symmetry:}
-  \[
-  \binom{n}{r}=\binom{n}{n-r}.
-  \]
-  Each row reads the same from left to right and from right to left.
-
-  \item \textbf{Row sum:}
-  \[
-  \binom{n}{0}+\binom{n}{1}+\cdots+\binom{n}{n}=2^n.
-  \]
-  The sum of the entries in row $n$ is a power of $2$.
-\end{itemize}
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|p{0.24\textwidth}|p{0.68\textwidth}|}
+\hline
+\textbf{Pascal rule} &
+$\binom{n}{r}=\binom{n-1}{r-1}+\binom{n-1}{r}$. Each interior entry is the sum of the two entries above it. \\
+\hline
+\textbf{Symmetry} &
+$\binom{n}{r}=\binom{n}{n-r}$. Each row reads the same from left to right and from right to left. \\
+\hline
+\textbf{Row sum} &
+$\binom{n}{0}+\binom{n}{1}+\cdots+\binom{n}{n}=2^n$. The sum of the entries in row $n$ is a power of $2$. \\
+\hline
+\end{tabular}
+\end{center}
 
 \subsection{The Binomial Theorem}
 For a positive integer $n$,
