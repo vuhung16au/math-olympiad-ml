@@ -18,34 +18,13 @@ For $y'=f(x,y)$:
   \item Sketch solution curves as smooth paths tangent to the local segments.
 \end{enumerate}
 
-\subsubsection*{Two compact visual examples}
+\subsubsection*{Three compact visual examples}
 \begin{center}
-\begin{minipage}[t]{0.48\textwidth}
+\begin{minipage}[t]{0.32\textwidth}
 \centering
-\begin{tikzpicture}[scale=0.8]
-  \draw[->] (-2.6,0) -- (2.6,0) node[right] {$x$};
-  \draw[->] (0,-2.6) -- (0,2.6) node[above] {$y$};
-  \foreach \X in {-2,-1,0,1,2} {
-    \foreach \Y in {-2,-1,0,1,2} {
-      \pgfmathsetmacro{\M}{(\X)*(\Y)}
-      \pgfmathsetmacro{\A}{atan(\M)}
-      \draw[blue, line width=0.5pt]
-        ({\X-0.22*cos(\A)},{\Y-0.22*sin(\A)})
-        --
-        ({\X+0.22*cos(\A)},{\Y+0.22*sin(\A)});
-    }
-  }
-  \draw[dashed, red!70!black] (0,-2.4) -- (0,2.4);
-  \draw[dashed, red!70!black] (-2.4,0) -- (2.4,0);
-\end{tikzpicture}
-
-\small \textbf{Example 1:} $y'=xy$
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\centering
-\begin{tikzpicture}[scale=0.8]
-  \draw[->] (-2.6,0) -- (2.6,0) node[right] {$x$};
-  \draw[->] (0,-2.6) -- (0,2.6) node[above] {$y$};
+\begin{tikzpicture}[scale=0.62]
+  \draw[->] (-2.8,0) -- (2.8,0) node[right] {$x$};
+  \draw[->] (0,-2.8) -- (0,2.8) node[above] {$y$};
   \foreach \X in {-2,-1,0,1,2} {
     \foreach \Y in {-2,-1,0,1,2} {
       \pgfmathsetmacro{\M}{-(\X)-(\Y)}
@@ -56,16 +35,64 @@ For $y'=f(x,y)$:
         ({\X+0.22*cos(\A)},{\Y+0.22*sin(\A)});
     }
   }
-  \draw[dashed, red!70!black] (-2.3,2.3) -- (2.3,-2.3);
+  \draw[dashed, red!70!black] (-2.4,2.4) -- (2.4,-2.4);
+  \node[red!70!black, fill=white, inner sep=1pt] at (1.1,1.6) {$y=-x$};
 \end{tikzpicture}
 
-\small \textbf{Example 2:} $y'=-x-y$
+\small \textbf{Example 1:} $y'=-x-y$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.62]
+  \draw[->] (-2.8,0) -- (2.8,0) node[right] {$x$};
+  \draw[->] (0,-2.8) -- (0,2.8) node[above] {$y$};
+  \foreach \X in {-2,-1,0,1,2} {
+    \foreach \Y in {-2,-1,0,1,2} {
+      \pgfmathsetmacro{\M}{(\X)*(\Y)}
+      \pgfmathsetmacro{\A}{atan(\M)}
+      \draw[blue, line width=0.5pt]
+        ({\X-0.22*cos(\A)},{\Y-0.22*sin(\A)})
+        --
+        ({\X+0.22*cos(\A)},{\Y+0.22*sin(\A)});
+    }
+  }
+  \draw[dashed, red!70!black] (0,-2.5) -- (0,2.5);
+  \draw[dashed, red!70!black] (-2.5,0) -- (2.5,0);
+  \node[red!70!black, fill=white, inner sep=1pt] at (1.45,0.45) {$y=0$};
+  \node[red!70!black, fill=white, inner sep=1pt, rotate=90] at (0.42,1.55) {$x=0$};
+\end{tikzpicture}
+
+\small \textbf{Example 2:} $y'=xy$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.62]
+  \draw[->] (-2.8,0) -- (2.8,0) node[right] {$x$};
+  \draw[->] (0,-2.8) -- (0,2.8) node[above] {$y$};
+  \foreach \X in {-2,-1,0,1,2} {
+    \foreach \Y in {-2,-1.5,-1,-0.5,0.5,1,1.5,2} {
+      \pgfmathsetmacro{\M}{-(\X)/(\Y)}
+      \pgfmathsetmacro{\A}{atan(\M)}
+      \draw[blue, line width=0.5pt]
+        ({\X-0.2*cos(\A)},{\Y-0.2*sin(\A)})
+        --
+        ({\X+0.2*cos(\A)},{\Y+0.2*sin(\A)});
+    }
+  }
+  \draw[dashed, red!70!black] (0,-2.5) -- (0,2.5);
+  \draw[densely dashed, orange!90!black] (-2.5,0) -- (2.5,0);
+  \node[red!70!black, fill=white, inner sep=1pt, rotate=90] at (0.35,1.55) {$x=0$};
+  \node[orange!90!black, fill=white, inner sep=1pt] at (1.3,0.35) {$y=0$ undefined};
+\end{tikzpicture}
+
+\small \textbf{Example 3:} $yy'+x=0$
 \end{minipage}
 \end{center}
 
 \begin{itemize}[leftmargin=*]
-  \item \textbf{Example 1:} the axes are zero-slope guides ($x=0$ or $y=0$), and signs of $xy$ determine up/down tilt in each quadrant.
-  \item \textbf{Example 2:} $y=-x$ is the zero-slope isocline; above it slopes are negative, below it slopes are positive.
+  \item \textbf{Example 1:} $y=-x$ is the zero-slope isocline. Above it slopes are negative; below it slopes are positive.
+  \item \textbf{Example 2:} the axes are zero-slope guide lines because $xy=0$ whenever $x=0$ or $y=0$.
+  \item \textbf{Example 3:} rewriting as $y'=-\dfrac{x}{y}$ shows a zero-slope isocline at $x=0$ and an undefined line at $y=0$.
 \end{itemize}
 
 \subsubsection*{Common mistakes}

@@ -690,3 +690,508 @@ Because the curve shoots off to infinity in both directions, \textbf{it does not
     \item \textbf{Completing the Square:} Grouping terms in an exponent to form a perfect square is a fantastic way to instantly determine a function's symmetry and behavior at infinity. 
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[Identifying the Vector Flow]
+Examine the slope field shown below and decide which differential equation it represents.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=8.5cm,
+    height=8cm,
+    xmin=-3.4, xmax=3.4,
+    ymin=-3.4, ymax=3.4,
+    view={0}{90},
+    axis lines=center,
+    xlabel={$x$},
+    ylabel={$y$},
+    ticks=none,
+    domain=-3:3,
+    y domain=-3:3,
+    samples=11,
+    axis equal image
+]
+    \addplot3 [gray!75, quiver={u={1}, v={x+y}, scale arrows=0.18}, -stealth] {0};
+    \addplot [dashed, red!70!black, domain=-3.2:3.2] {-x};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item[(A)] $\dfrac{dy}{dx}=x-y$
+    \item[(B)] $\dfrac{dy}{dx}=x+y$
+    \item[(C)] $\dfrac{dy}{dx}=xy$
+    \item[(D)] $\dfrac{dy}{dx}=y^2$
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Find the line where the segments are horizontal. That is where $\dfrac{dy}{dx}=0$.
+    \item Check a simple point such as $(1,0)$ and compare the visible slope with each option.
+    \item Eliminate any equation whose sign pattern does not match the first and third quadrants.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+The correct choice is \textbf{(B)}. The field has zero slope along the diagonal $y=-x$, and only
+\[
+x+y=0 \iff y=-x
+\]
+matches that observation. It also gives slope $1$ at $(1,0)$, consistent with the diagram. The other options fail quickly:
+\[
+x-y=0 \Rightarrow y=x,\qquad xy=0 \Rightarrow x=0 \text{ or } y=0,\qquad y^2\ge 0.
+\]
+Hence the slope field represents
+\[
+\boxed{\frac{dy}{dx}=x+y.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item The fastest slope-field test is usually the \textbf{zero-slope line}. It removes most wrong options immediately.
+    \item A differential equation in $x$ and $y$ creates a geometric fingerprint: nullclines, sign regions, and steepness patterns.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Periodic Flow]
+Which of the following slope fields best represents
+\[
+\frac{dy}{dx}=\sin x \, ?
+\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{tiny}
+    \begin{scope}[shift={(0,0)}]
+    \begin{axis}[width=5cm, height=5cm, title={(A)}, xmin=-3.2, xmax=3.2, ymin=-3.2, ymax=3.2, axis lines=center, ticks=none]
+        \addplot3 [blue, quiver={u={1}, v={sin(deg(x))}, scale arrows=0.2}, -stealth, domain=-3:3, y domain=-3:3, samples=10] {0};
+    \end{axis}
+    \end{scope}
+
+    \begin{scope}[shift={(6,0)}]
+    \begin{axis}[width=5cm, height=5cm, title={(B)}, xmin=-3.2, xmax=3.2, ymin=-3.2, ymax=3.2, axis lines=center, ticks=none]
+        \addplot3 [red, quiver={u={1}, v={cos(deg(x))}, scale arrows=0.2}, -stealth, domain=-3:3, y domain=-3:3, samples=10] {0};
+    \end{axis}
+    \end{scope}
+
+    \begin{scope}[shift={(0,-6)}]
+    \begin{axis}[width=5cm, height=5cm, title={(C)}, xmin=-3.2, xmax=3.2, ymin=-3.2, ymax=3.2, axis lines=center, ticks=none]
+        \addplot3 [black, quiver={u={1}, v={x}, scale arrows=0.2}, -stealth, domain=-3:3, y domain=-3:3, samples=10] {0};
+    \end{axis}
+    \end{scope}
+
+    \begin{scope}[shift={(6,-6)}]
+    \begin{axis}[width=5cm, height=5cm, title={(D)}, xmin=-3.2, xmax=3.2, ymin=-3.2, ymax=3.2, axis lines=center, ticks=none]
+        \addplot3 [orange, quiver={u={1}, v={sin(deg(y))}, scale arrows=0.2}, -stealth, domain=-3:3, y domain=-3:3, samples=10] {0};
+    \end{axis}
+    \end{scope}
+\end{tiny}
+\end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Because $\sin x$ depends only on $x$, every vertical line should have identical slope segments.
+    \item At $x=0$, the slope must be $0$, so the $y$-axis should consist of horizontal dashes.
+    \item The pattern should repeat periodically as $x$ moves left or right.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+The correct field is \textbf{(A)}. Since $\dfrac{dy}{dx}=\sin x$ depends only on $x$, the slope is constant along each vertical line, which rules out \textbf{(D)}. Also,
+\[
+\sin 0=0,
+\]
+so the segments on the line $x=0$ must be horizontal; this excludes \textbf{(B)}. Field \textbf{(A)} also shows the expected periodic rise-and-fall pattern for the antiderivative
+\[
+y=-\cos x+C.
+\]
+Therefore the best match is
+\[
+\boxed{\text{(A)}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item If $y'=f(x)$ only, then slope patterns repeat along \textbf{vertical} lines. If $y'=g(y)$ only, they repeat along \textbf{horizontal} lines.
+    \item Matching a slope field to a DE is often about structure first, not detailed algebra.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Conic Sections from Differential Equations]
+\begin{enumerate}
+    \item[\textbf{i}] Find the general solution to
+    \[
+    \frac{dy}{dx}=-\frac{2x}{y}.
+    \]
+    \item[\textbf{ii}] Find the particular solution through $(1,2)$, identify the curve, and state its intercepts.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Separate the variables first, then integrate.
+    \item After finding the constant, divide by the right number to compare with the standard ellipse form.
+    \item Intercepts come from setting one variable to zero at a time.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Separating variables,
+\[
+y\,dy=-2x\,dx
+\]
+so
+\[
+\frac{y^2}{2}=-x^2+C \;\Longrightarrow\; \boxed{2x^2+y^2=C_1}.
+\]
+
+\textbf{(ii)} Using $(1,2)$ gives
+\[
+2(1)^2+(2)^2=C_1 \Rightarrow C_1=6.
+\]
+Hence
+\[
+2x^2+y^2=6
+\quad\Longrightarrow\quad
+\frac{x^2}{3}+\frac{y^2}{6}=1,
+\]
+so the curve is an \textbf{ellipse}. Its intercepts are
+\[
+y=0 \Rightarrow x=\pm\sqrt{3}, \qquad x=0 \Rightarrow y=\pm\sqrt{6}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Some separable DEs generate whole families of conic sections rather than explicit functions.
+    \item When $y=0$, the original DE is undefined, which matches the vertical tangents at the ellipse's $x$-intercepts.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Direction Field Features and Hyperbolic Solutions]
+Consider
+\[
+\frac{dy}{dx}=\frac{2x}{y-1}.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Identify where the slopes are zero, undefined, positive, and negative.
+    \item[\textbf{ii}] Solve the DE and identify the family of curves.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item A fraction is zero when its numerator is zero and undefined when its denominator is zero.
+    \item Separate variables, integrate, then complete the square in $y$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Zero slope occurs at $x=0$, and the field is undefined at $y=1$. The slope is positive when $x$ and $y-1$ have the same sign, and negative otherwise.
+
+\textbf{(ii)} Separating variables,
+\[
+(y-1)\,dy=2x\,dx.
+\]
+Integrating gives
+\[
+\frac12y^2-y=x^2+C,
+\]
+so
+\[
+(y-1)^2-2x^2=K.
+\]
+Thus
+\[
+\boxed{(y-1)^2-2x^2=K},
+\]
+a family of hyperbolas centred at $(0,1)$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Numerator-zero and denominator-zero lines are the quickest way to sketch a direction field.
+    \item Completing the square after separation often reveals the hidden geometry of the solutions.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Initial Value Problem with a Square-Root Branch]
+Consider
+\[
+\frac{dy}{dx}=\frac{x}{2y}.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the general solution.
+    \item[\textbf{ii}] Find the particular solution satisfying $y(2)=-\sqrt3$.
+    \item[\textbf{iii}] Determine its maximal domain of validity.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Separate variables first.
+    \item The initial condition chooses the sign of the square root.
+    \item Check both the explicit formula and the original DE when deciding the domain.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} From
+\[
+2y\,dy=x\,dx
+\]
+we get
+\[
+y^2=\frac{x^2}{2}+C.
+\]
+
+\textbf{(ii)} Using $(2,-\sqrt3)$ gives $3=2+C$, so $C=1$. Hence
+\[
+y^2=\frac{x^2}{2}+1,
+\]
+and the negative branch is required:
+\[
+\boxed{y=-\sqrt{\frac{x^2}{2}+1}}.
+\]
+
+\textbf{(iii)} Since $\frac{x^2}{2}+1>0$ and $y\neq0$ for all $x$, the DE is defined for every real $x$. Thus the maximal domain is
+\[
+\boxed{(-\infty,\infty)}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item A general implicit solution can split into multiple explicit branches.
+    \item The initial condition selects the correct branch.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Separable Equation and Horizontal Asymptote]
+Consider
+\[
+\frac{dy}{dx}=xy^2e^{-x^2/2}, \qquad y(0)=\frac12.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the particular solution.
+    \item[\textbf{ii}] Determine $\lim\limits_{x\to\infty}y(x)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Integrate $y^{-2}$ on the left.
+    \item On the right, use $u=-\frac12x^2$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Separating variables gives
+\[
+y^{-2}\,dy=xe^{-x^2/2}\,dx.
+\]
+Hence
+\[
+-\frac1y=-e^{-x^2/2}+C.
+\]
+Using $y(0)=\frac12$ gives $2=1-C$, so $C=-1$. Therefore
+\[
+\boxed{y(x)=\frac{1}{1+e^{-x^2/2}}}.
+\]
+As $x\to\infty$, $e^{-x^2/2}\to0$, so
+\[
+\lim_{x\to\infty}y(x)=1.
+\]
+Thus the curve approaches the horizontal asymptote $y=1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item A separable equation can still require substitution inside one of the integrals.
+    \item Long-run limits expose horizontal asymptotes quickly.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Domain and Range from an Exponential DE]
+Find the exact domain and range of the solution through the origin for
+\[
+\frac{dy}{dx}=e^{2x+y}.
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Write $e^{2x+y}=e^{2x}e^y$ and separate variables.
+    \item The logarithm in the final answer controls the domain.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Separating variables,
+\[
+e^{-y}\,dy=e^{2x}\,dx.
+\]
+Integrating gives
+\[
+-e^{-y}=\frac12e^{2x}+C.
+\]
+Using $(0,0)$ gives $C=-\frac32$, so
+\[
+e^{-y}=\frac{3-e^{2x}}{2}
+\]
+and
+\[
+\boxed{y=\ln 2-\ln(3-e^{2x})}.
+\]
+For this to exist we need $3-e^{2x}>0$, so
+\[
+\boxed{x<\frac12\ln3}.
+\]
+As $x\to-\infty$, $y\to\ln(2/3)$; as $x\to(\frac12\ln3)^-$, $y\to\infty$. Therefore
+\[
+\boxed{\text{Domain } \left(-\infty,\frac12\ln3\right), \qquad \text{Range } \left(\ln\frac23,\infty\right).}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Solving the DE is only part of the job; logarithms can restrict the domain afterwards.
+    \item Endpoint limits often reveal both vertical and horizontal asymptotes.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Reconstructing a Polynomial from a Direction Field]
+An unknown differential equation has the form $y'=P(x)$, where $P(x)$ is monic. Its slope field has horizontal tangents only at $x=\pm2$, is negative on $(-2,2)$, and positive elsewhere.
+\begin{enumerate}
+    \item[\textbf{i}] Find the simplest such polynomial $P(x)$.
+    \item[\textbf{ii}] Find the solution satisfying $f(0)=4$.
+    \item[\textbf{iii}] Determine the $x$-coordinates of all local extrema using only the field information.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Roots of $P$ come from the horizontal-tangent lines.
+    \item The sign pattern determines whether the parabola opens upward or downward.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+The roots are $\pm2$, and the sign pattern is positive outside and negative inside, so
+\[
+\boxed{P(x)=(x-2)(x+2)=x^2-4}.
+\]
+Integrating,
+\[
+y=\frac{x^3}{3}-4x+C.
+\]
+Using $f(0)=4$ gives
+\[
+\boxed{f(x)=\frac{x^3}{3}-4x+4}.
+\]
+Since $y'$ changes from positive to negative at $x=-2$, every solution has a local maximum there. Since $y'$ changes from negative to positive at $x=2$, every solution has a local minimum there.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item A direction field can determine a differential equation qualitatively before any integration happens.
+    \item Sign changes in $y'$ are enough to classify extrema.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Implicit Curves and Domain of an IVP]
+Consider
+\[
+\frac{dy}{dx}=\frac{5}{y}.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the general solution and identify the family of curves.
+    \item[\textbf{ii}] Find the particular solution satisfying $f(0)=-4$.
+    \item[\textbf{iii}] Determine its maximal domain of validity.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Separate variables.
+    \item The initial condition chooses one square-root branch.
+    \item The DE fails when $y=0$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Separating variables,
+\[
+y\,dy=5\,dx
+\]
+gives
+\[
+\boxed{y^2=10x+C},
+\]
+a family of right-opening parabolas. Using $f(0)=-4$ gives $C=16$, so
+\[
+\boxed{f(x)=-\sqrt{10x+16}}.
+\]
+The square root needs $10x+16\ge0$, but the DE requires $y\neq0$. Since $y=0$ occurs at $x=-\frac85$, the maximal domain containing $0$ is
+\[
+\boxed{\left(-\frac85,\infty\right)}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item The domain of an IVP is controlled by the original DE, not only the explicit formula.
+    \item A vertical tangent often marks the endpoint of the valid interval.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Abstract Related Rates and Sign Analysis]
+Suppose
+\[
+\frac{dR}{dt}=-k^2,\qquad \frac{dP}{dt}=-l^2\frac{dR}{dt},\qquad \frac{dP}{dt}=m^2\frac{dQ}{dt},
+\]
+where $k,l,m\neq0$.
+\begin{enumerate}
+    \item[\textbf{i}] Express $\dfrac{dP}{dt}$ and $\dfrac{dQ}{dt}$ in terms of $k,l,m$.
+    \item[\textbf{ii}] State whether $P$ and $Q$ are increasing or decreasing.
+    \item[\textbf{iii}] Find $\dfrac{dQ}{dR}$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Substitute sequentially.
+    \item Squares of non-zero reals are positive.
+    \item Use $\dfrac{dQ}{dt}=\dfrac{dQ}{dR}\dfrac{dR}{dt}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+From $\dfrac{dR}{dt}=-k^2$,
+\[
+\frac{dP}{dt}=-l^2(-k^2)=k^2l^2.
+\]
+Then
+\[
+\frac{dQ}{dt}=\frac{1}{m^2}\frac{dP}{dt}=\boxed{\frac{k^2l^2}{m^2}}.
+\]
+Since $k^2,l^2,m^2>0$, both $\dfrac{dP}{dt}$ and $\dfrac{dQ}{dt}$ are positive, so $P$ and $Q$ are increasing.
+Finally,
+\[
+\frac{dQ}{dR}=\frac{dQ/dt}{dR/dt}
+=\frac{k^2l^2/m^2}{-k^2}
+=\boxed{-\frac{l^2}{m^2}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Related-rate chains can often be solved by algebra before any heavier calculus is needed.
+    \item Sign analysis is just as important as the exact magnitude.
+\end{itemize}
+\end{takeaways}

@@ -1,0 +1,92 @@
+\textit{Syllabus note: This section is provided for enrichment only. Complex-valued methods for mechanics are outside the scope of NSW HSC Mathematics Extension~1 and Extension~2, but they give a useful preview of undergraduate mathematics, physics, and engineering.}
+
+\subsubsection*{1. The complex exponential $e^z$}
+In Extension~2, the exponential function is first met for real inputs. If we extend the exponent to a complex number $z=x+iy$, Euler's formula gives
+\[
+e^{iy}=\cos y+i\sin y.
+\]
+Hence
+\[
+e^z=e^{x+iy}=e^x(\cos y+i\sin y).
+\]
+This is the bridge between oscillation and exponential form: sine-cosine motion can be packaged into one algebraically convenient object.
+
+\subsubsection*{2. Homogeneous differential equations and imaginary roots}
+Consider the simple harmonic motion equation
+\[
+\frac{d^2y}{dx^2}+n^2y=0.
+\]
+Its characteristic equation is
+\[
+\lambda^2+n^2=0,
+\]
+so the roots are $\lambda=\pm ni$. The complex-form solution is
+\[
+y=C_1e^{inx}+C_2e^{-inx}.
+\]
+Applying Euler's formula turns this back into the familiar real form
+\[
+y=A\cos(nx)+B\sin(nx).
+\]
+So the HSC trigonometric answer is really the real-valued version of a compact exponential calculation.
+
+\subsubsection*{3. Streamlining 2D resistive motion}
+In projectile motion with linear resistance $R=-mkv$, the standard Extension~2 approach solves
+\[
+\ddot{x}=-k\dot{x},
+\qquad
+\ddot{y}=-g-k\dot{y}
+\]
+as two separate equations. If we instead define the complex displacement
+\[
+z=x+iy,
+\]
+then the complex velocity is $\dot{z}=\dot{x}+i\dot{y}$ and
+\[
+\ddot{z}=\ddot{x}+i\ddot{y}=-k(\dot{x}+i\dot{y})-ig.
+\]
+Therefore
+\[
+\ddot{z}=-k\dot{z}-ig.
+\]
+This combines the whole 2D system into one linear equation for the complex velocity.
+
+\subsubsection*{Case study: the elegance of the complex plane}
+\textbf{Traditional split:}
+\[
+\dot{x}(t)=u\cos\theta\,e^{-kt},\qquad
+\dot{y}(t)=\left(u\sin\theta+\frac{g}{k}\right)e^{-kt}-\frac{g}{k}.
+\]
+
+\textbf{Complex method:} Let $W=\dot{z}$. Then
+\[
+\dot{W}+kW=-ig.
+\]
+Using the integrating factor $e^{kt}$,
+\[
+\frac{d}{dt}(We^{kt})=-ig\,e^{kt}
+\]
+so
+\[
+W(t)=Ce^{-kt}-\frac{ig}{k}.
+\]
+Since
+\[
+W(0)=u(\cos\theta+i\sin\theta)=ue^{i\theta},
+\]
+we get
+\[
+C=ue^{i\theta}+\frac{ig}{k}.
+\]
+Hence the full complex velocity is
+\[
+\boxed{W(t)=\left(ue^{i\theta}+\frac{ig}{k}\right)e^{-kt}-\frac{ig}{k}}.
+\]
+Taking the real and imaginary parts recovers the horizontal and vertical velocity components at once.
+
+\subsubsection*{Why this matters}
+\begin{itemize}[leftmargin=*]
+  \item Complex numbers are not just abstract algebra; they can compress a two-equation mechanics problem into one line.
+  \item Imaginary roots in differential equations are the reason sine and cosine appear in oscillation models.
+  \item This style of thinking becomes standard in university differential equations, control, waves, and electrical engineering.
+\end{itemize}

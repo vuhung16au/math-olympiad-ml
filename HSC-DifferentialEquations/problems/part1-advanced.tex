@@ -271,7 +271,10 @@ Fourth derivative:
 
 \vspace{0.3cm}
 \textbf{ii} Substitute into the LHS of $y^{(4)} + 3y'' - 4y = 0$:
-\[ \text{LHS} = (Ae^x + Be^{-x} + 16C\cos 2x + 16D\sin 2x) + 3(Ae^x + Be^{-x} - 4C\cos 2x - 4D\sin 2x) - 4(Ae^x + Be^{-x} + C\cos 2x + D\sin 2x) \]
+\begin{multline*}
+\text{LHS} = (Ae^x + Be^{-x} + 16C\cos 2x + 16D\sin 2x) + 3(Ae^x + Be^{-x} - 4C\cos 2x - 4D\sin 2x) \\
+- 4(Ae^x + Be^{-x} + C\cos 2x + D\sin 2x)
+\end{multline*}
 Group the terms: \\
 $e^x$ terms: $A + 3A - 4A = 0$ \\
 $e^{-x}$ terms: $B + 3B - 4B = 0$ \\
@@ -383,6 +386,7 @@ Substitute $C_1$ and $C_2$ into the equation from part \textbf{i}:
 \begin{itemize}[leftmargin=*]
     \item \textbf{Eigenvalue Problems:} The equation $\cos(\lambda L)\cosh(\lambda L) = -1$ cannot be solved algebraically. It has infinitely many discrete roots (eigenvalues), which correspond to the fundamental frequency and the higher harmonics (overtones) of the vibrating beam. 
     \item \textbf{Linear Algebra meets Calculus:} In part \textbf{iii}, finding a ``non-trivial solution'' to a system of two equations equal to zero is equivalent to saying the determinant of their coefficients must be zero. Setting the determinant of the coefficient matrix to zero yields the exact same characteristic equation much faster!
+    \item Using complex exponentials $e^{i\theta} = \cos \theta + i \sin \theta$ and $e^{\lambda x} = \cosh \lambda x + \sinh \lambda x$ can often simplify the algebra in problems like this, but note that it is out of syllabus for MX1 and MX2.
 \end{itemize}
 \end{takeaways}
 
@@ -753,5 +757,291 @@ A(t)=\frac{MA_0}{\sqrt{A_0^2+(M^2-A_0^2)e^{-2kM^2t}}}.
     \item Non-dimensionalisation strips away parameters and reveals the universal structure of a model.
     \item A substitution can reduce a non-linear growth law to a standard logistic form.
     \item Reciprocal substitutions such as $v=\frac1y$ are a powerful linearisation tool.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Verification of a Third-Order Solution]
+% \textit{This problem is for enrichment only and is outside the NESA syllabus.}
+
+Consider
+\[
+y'''-y=0.
+\]
+Verify that
+\[
+y=C_1e^x+C_2e^{-x/2}\cos\!\left(\frac{\sqrt3}{2}x\right)+C_3e^{-x/2}\sin\!\left(\frac{\sqrt3}{2}x\right)
+\]
+is a general solution.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Let $\omega=\dfrac{\sqrt3}{2}$ and keep the common factor $e^{-x/2}$ outside.
+    \item Differentiate the oscillatory part in grouped cosine-sine form instead of expanding everything.
+    \item Because the equation is linear, it is enough to show that the full expression reproduces itself after three derivatives.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Let
+\[
+\omega=\frac{\sqrt3}{2}, \qquad
+u=e^{-x/2}(C_2\cos\omega x+C_3\sin\omega x).
+\]
+Then $y=C_1e^x+u$. A tidy regrouping gives
+\[
+u'=e^{-x/2}\!\left[\left(-\frac12C_2+\omega C_3\right)\cos\omega x+\left(-\omega C_2-\frac12C_3\right)\sin\omega x\right],
+\]
+\[
+u''=e^{-x/2}\!\left[\left(-\frac12C_2-\omega C_3\right)\cos\omega x+\left(\omega C_2-\frac12C_3\right)\sin\omega x\right].
+\]
+Differentiating once more and using $\omega^2=\dfrac34$ returns
+\[
+u'''=e^{-x/2}(C_2\cos\omega x+C_3\sin\omega x)=u.
+\]
+Also $(C_1e^x)'''=C_1e^x$, so $y'''=y$. Therefore
+\[
+\boxed{y'''-y=0},
+\]
+which verifies the proposed general solution.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Complex roots of characteristic equations naturally produce exponentially damped sine-cosine terms.
+    \item Grouping terms before the next derivative keeps higher-order verification manageable.
+    \item Refer to the Appendix for a more info about linear differential equations.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[The Fourth-Order Oscillator (Enrichment)]
+\textit{This problem is for enrichment only and is outside the NESA syllabus.}
+
+Verify that
+\[
+y=C_1e^x+C_2e^{-x}+C_3\cos x+C_4\sin x
+\]
+solves
+\[
+y^{(4)}-y=0.
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Exponentials and trigonometric functions cycle predictably under repeated differentiation.
+    \item Use linearity and check the four building blocks separately.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Differentiate each component four times:
+\[
+\frac{d^4}{dx^4}(e^x)=e^x,\qquad
+\frac{d^4}{dx^4}(e^{-x})=e^{-x},
+\]
+\[
+\frac{d^4}{dx^4}(\cos x)=\cos x,\qquad
+\frac{d^4}{dx^4}(\sin x)=\sin x.
+\]
+Therefore
+\[
+y^{(4)}=C_1e^x+C_2e^{-x}+C_3\cos x+C_4\sin x=y,
+\]
+so
+\[
+\boxed{y^{(4)}-y=0.}
+\]
+This verifies the proposed general solution.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item The roots of $r^4-1=0$ explain why exponentials and trig functions appear together.
+    \item Fourth-order verification is often shorter than expected because the derivative cycles are simple.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Integrating Factor with Oscillatory Forcing]
+For $x>0$, consider
+\[
+x\frac{dy}{dx}-2y=x^4\sin x.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the general solution.
+    \item[\textbf{ii}] Find the particular solution satisfying $y(\pi)=0$.
+    \item[\textbf{iii}] Find two simple bounding curves for that particular solution.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Divide by $x$ first.
+    \item The integrating factor is $x^{-2}$.
+    \item Group the final answer as $x^2(\sin x-x\cos x-\pi)$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Writing the equation as
+\[
+y'-\frac{2}{x}y=x^3\sin x,
+\]
+the integrating factor is
+\[
+\mu(x)=e^{\int -2/x\,dx}=x^{-2}.
+\]
+Hence
+\[
+\frac{d}{dx}\left(\frac{y}{x^2}\right)=x\sin x.
+\]
+Integrating by parts,
+\[
+\frac{y}{x^2}=-x\cos x+\sin x+C,
+\]
+so
+\[
+y=-x^3\cos x+x^2\sin x+Cx^2.
+\]
+Using $y(\pi)=0$ gives
+\[
+0=\pi^3+C\pi^2 \Rightarrow C=-\pi.
+\]
+Thus
+\[
+\boxed{y=-x^3\cos x+x^2\sin x-\pi x^2}.
+\]
+Since $-1\le \sin x,\cos x\le 1$, we have
+\[
+-x^3-(\pi+1)x^2\le y\le x^3+(1-\pi)x^2.
+\]
+These give convenient envelope curves.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item With a non-unit coefficient of $y'$, putting the equation into standard form is essential.
+    \item Bounding trig terms by $\pm1$ is a quick way to control oscillatory solutions.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Isoclines and Optimisation on the Unit Circle]
+Consider
+\[
+\frac{dy}{dx}=\frac{x-2y}{x^2+y^2}.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the curve on which all slopes are horizontal.
+    \item[\textbf{ii}] Show that the isocline of slope $k\neq0$ is a circle.
+    \item[\textbf{iii}] Find the maximum and minimum slopes on $x^2+y^2=1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Set the numerator to zero for horizontal tangents.
+    \item For isoclines, set the whole fraction equal to $k$ and complete the square.
+    \item On the unit circle, parametrize $x=\cos\theta$, $y=\sin\theta$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Horizontal slopes satisfy $x-2y=0$, so
+\[
+\boxed{y=\frac{x}{2}},
+\]
+excluding the origin, where the DE is undefined.
+
+\textbf{(ii)} Setting the slope equal to $k$ gives
+\[
+\frac{x-2y}{x^2+y^2}=k
+\Rightarrow
+kx^2-x+ky^2+2y=0.
+\]
+Dividing by $k$ and completing the square,
+\[
+\left(x-\frac{1}{2k}\right)^2+\left(y+\frac1k\right)^2=\frac{5}{4k^2}.
+\]
+So the isocline is a circle with centre
+\[
+\left(\frac{1}{2k},-\frac1k\right)
+\]
+and radius
+\[
+\frac{\sqrt5}{2|k|}.
+\]
+
+\textbf{(iii)} On $x^2+y^2=1$, the slope is $x-2y$. Writing $x=\cos\theta$ and $y=\sin\theta$,
+\[
+x-2y=\cos\theta-2\sin\theta=\sqrt5\cos(\theta+\alpha).
+\]
+Hence the extreme values are
+\[
+\boxed{\sqrt5 \text{ and } -\sqrt5.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Isoclines convert a DE question into an algebraic locus question.
+    \item Parametrising a circle is often the cleanest route to constrained extrema.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Logistic Growth and the Uniqueness Barrier]
+Consider
+\[
+\frac{dP}{dt}=\frac1{500}P(2000-P), \qquad P(0)=500.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Explain why the solution can never reach $P=2500$.
+    \item[\textbf{ii}] Find the exact point $(t,P)$ where the population grows fastest.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Use the equilibrium solutions and uniqueness.
+    \item The fastest growth occurs at the inflection point $P=1000$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} The equilibrium solutions are $P=0$ and $P=2000$. Since $P=2000$ is itself a solution, uniqueness implies that a solution starting below it cannot cross it. Because $P(0)=500<2000$, the population can never reach $2500$.
+
+\textbf{(ii)} Differentiate implicitly:
+\[
+P''=\frac1{500}(2000-2P)P'.
+\]
+Maximum growth occurs when $P''=0$ and $P'>0$, so
+\[
+\boxed{P=1000}.
+\]
+Now solve the logistic DE:
+\[
+\int \frac{500}{P(2000-P)}\,dP=\int dt.
+\]
+This gives
+\[
+\frac14\ln\left(\frac{P}{2000-P}\right)=t+C.
+\]
+Using $P(0)=500$ gives
+\[
+C=-\frac14\ln3.
+\]
+At $P=1000$,
+\[
+t=\frac14\ln1+\frac14\ln3=\frac14\ln3.
+\]
+So the point of fastest growth is
+\[
+\boxed{\left(\frac{\ln3}{4},1000\right)}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Equilibrium solutions can act as impenetrable barriers when uniqueness applies.
+    \item In logistic models, the inflection point combines qualitative analysis with exact integration.
 \end{itemize}
 \end{takeaways}

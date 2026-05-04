@@ -1192,3 +1192,597 @@ Since $R>0$, the square root exceeds $75$, hence $S_{\max}>150$.
     \item \textbf{Equilibrium Analysis:} Part \textbf{iv} tests a deep understanding of what a differential equation represents physically. You don't always need to solve a DE to understand the system's eventual fate; setting the derivative to zero yields the equilibrium states directly.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[Modelling Fish Population in a Protected Lake]
+In a wildlife reserve, the fish population is $N=2000$ when $x=0$. It is modelled by
+\[
+\frac{dN}{dx}=0.2N\left(\frac{M-N}{M}\right),
+\]
+where $M$ is the carrying capacity.
+
+\begin{enumerate}
+    \item[\textbf{i}] Use
+    \[
+    \frac{M}{N(M-N)}=\frac1N+\frac1{M-N}
+    \]
+    to show that
+    \[
+    \frac{N}{M-N}=\left(\frac{2000}{M-2000}\right)e^{0.2x}.
+    \]
+    \item[\textbf{ii}] If $N(10)=6000$, find $M$ correct to the nearest hundred.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Multiply through by $\dfrac{M}{N(M-N)}$ before integrating.
+    \item Use the initial condition only after writing the exponential form.
+    \item In part \textbf{ii}, substitute $x=10$ and $N=6000$, then solve the resulting linear equation in $M$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Rearranging,
+\[
+\frac{M}{N(M-N)}\,dN=0.2\,dx.
+\]
+Hence
+\[
+\int\left(\frac1N+\frac1{M-N}\right)dN=\int 0.2\,dx
+\]
+which gives
+\[
+\ln\left(\frac{N}{M-N}\right)=0.2x+C.
+\]
+So
+\[
+\frac{N}{M-N}=Ae^{0.2x}.
+\]
+Using $N(0)=2000$,
+\[
+A=\frac{2000}{M-2000},
+\]
+and therefore
+\[
+\boxed{\frac{N}{M-N}=\left(\frac{2000}{M-2000}\right)e^{0.2x}}.
+\]
+
+\textbf{(ii)} Substitute $x=10$ and $N=6000$:
+\[
+\frac{6000}{M-6000}=\left(\frac{2000}{M-2000}\right)e^2.
+\]
+So
+\[
+\frac{3}{M-6000}=\frac{e^2}{M-2000}
+\]
+and
+\[
+3(M-2000)=e^2(M-6000).
+\]
+Hence
+\[
+M=\frac{6000(e^2-1)}{e^2-3}\approx 8734,
+\]
+so the carrying capacity is
+\[
+\boxed{M\approx 8700}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item The logistic equation keeps the same calculus structure even when the variables are renamed or reinterpreted.
+    \item Two measurements can be enough to estimate a model's long-run limit.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Logistic Growth and Maximum Population Increase]
+A population of wild horses satisfies
+\[
+\frac{dP}{dt}=kP\left(1-\frac{P}{C}\right).
+\]
+Initially $P(0)=150000$, the carrying capacity is $C=1200000$, and $P(20)=300000$.
+\begin{enumerate}
+    \item[\textbf{i}] Show that the general solution can be written as $P(t)=\dfrac{C}{1+Ae^{-kt}}$.
+    \item[\textbf{ii}] Find the exact value of $k$.
+    \item[\textbf{iii}] Find the exact time when the population is growing fastest.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Use the standard logistic partial fraction identity.
+    \item The fastest growth occurs at the vertex of the quadratic rate law in $P$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Separating variables gives
+\[
+\int \frac{C}{P(C-P)}\,dP=\int k\,dt,
+\]
+so
+\[
+\ln\left(\frac{P}{C-P}\right)=kt+C_1.
+\]
+Rearranging,
+\[
+\boxed{P(t)=\frac{C}{1+Ae^{-kt}}}.
+\]
+
+\textbf{(ii)} From $P(0)=150000$ and $C=1200000$,
+\[
+150000=\frac{1200000}{1+A}\Rightarrow A=7.
+\]
+Using $P(20)=300000$,
+\[
+300000=\frac{1200000}{1+7e^{-20k}}
+\Rightarrow e^{-20k}=\frac37.
+\]
+Hence
+\[
+\boxed{k=\frac1{20}\ln\frac73}.
+\]
+
+\textbf{(iii)} The rate $kP(1-P/C)$ is maximal at $P=C/2=600000$. So
+\[
+600000=\frac{1200000}{1+7e^{-kt}}
+\Rightarrow e^{-kt}=\frac17.
+\]
+Therefore
+\[
+\boxed{t=\frac{\ln 7}{k}=\frac{20\ln 7}{\ln(7/3)}}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Logistic models often become computationally easy once the standard form is recognised.
+    \item The maximum growth rate occurs at half the carrying capacity.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Autonomous DE with Equilibria and Concavity]
+Consider
+\[
+\frac{dy}{dx}=1+\sin y.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the equilibrium solutions.
+    \item[\textbf{ii}] Determine where solution curves are concave up and concave down on $\left[-\frac{\pi}{2},\frac{3\pi}{2}\right]$.
+    \item[\textbf{iii}] If $f(0)=0$, find $\lim\limits_{x\to\infty}f(x)$ and $\lim\limits_{x\to-\infty}f(x)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Set $1+\sin y=0$ for equilibria.
+    \item Differentiate implicitly and factor the result.
+    \item Use the fact that solutions cannot cross equilibrium lines.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Equilibria satisfy $\sin y=-1$, so
+\[
+\boxed{y=-\frac{\pi}{2}+2n\pi}.
+\]
+
+\textbf{(ii)} Differentiate implicitly:
+\[
+y''=\cos y\,y'=\cos y(1+\sin y).
+\]
+Since $1+\sin y\ge0$, the sign of $y''$ matches $\cos y$. Hence the curves are concave up on
+\[
+\left(-\frac{\pi}{2},\frac{\pi}{2}\right)
+\]
+and concave down on
+\[
+\left(\frac{\pi}{2},\frac{3\pi}{2}\right).
+\]
+
+\textbf{(iii)} The solution through $y=0$ is increasing and trapped between the nearest equilibria below and above it. Therefore
+\[
+\boxed{\lim_{x\to\infty}f(x)=\frac{3\pi}{2},\qquad \lim_{x\to-\infty}f(x)=-\frac{\pi}{2}.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Autonomous equations can often be analysed deeply without solving them explicitly.
+    \item Equilibrium solutions act like barriers for nearby trajectories.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Separable IVP with Logarithmic Domain Issues]
+Consider
+\[
+(x^2-4)\frac{dy}{dx}=xy^2,\qquad y(0)=1.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the particular solution.
+    \item[\textbf{ii}] Determine its maximal domain of validity.
+    \item[\textbf{iii}] Describe the behaviour near the domain endpoints.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Separate variables and use $u=x^2-4$.
+    \item The logarithm forces an interval split at $x=\pm2$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Separating variables,
+\[
+y^{-2}\,dy=\frac{x}{x^2-4}\,dx.
+\]
+Integrating,
+\[
+-\frac1y=\frac12\ln|x^2-4|+C.
+\]
+Using $y(0)=1$ gives
+\[
+-1=\frac12\ln4+C \Rightarrow C=-1-\ln2.
+\]
+So
+\[
+\frac1y=1+\frac12\ln\left(\frac{4}{|x^2-4|}\right),
+\]
+and
+\[
+\boxed{y=\frac{2}{2+\ln\!\left(\frac{4}{|x^2-4|}\right)}}.
+\]
+Since the initial point is at $x=0$, the maximal interval avoiding the singular lines $x=\pm2$ is
+\[
+\boxed{(-2,2)}.
+\]
+As $x\to\pm2$ from inside this interval, the logarithm tends to $-\infty$ and the denominator tends to $-\infty$, so $y\to0^-$. The solution stays finite on $(-2,2)$ but cannot be continued through $x=\pm2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item The DE itself can force a maximal interval even when the explicit formula looks harmless.
+    \item Absolute values inside logarithms are essential when integrating rational expressions of this type.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Linear DE, Isoclines, and Local Minima]
+Consider
+\[
+\frac{dy}{dx}=x+y.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the particular solution through $(-1,1)$ and its $y$-intercept.
+    \item[\textbf{ii}] Express $y''$ in terms of $x$ and $y$.
+    \item[\textbf{iii}] Show that any solution crossing the zero-slope isocline has a local minimum there.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Solve the linear equation with an integrating factor.
+    \item Differentiate $y'=x+y$ directly.
+    \item The zero-slope isocline is where $x+y=0$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Writing $y'-y=x$, the integrating factor is $e^{-x}$. Then
+\[
+\frac{d}{dx}(ye^{-x})=xe^{-x}.
+\]
+Integrating gives
+\[
+y=-x-1+Ce^x.
+\]
+Using $(-1,1)$ gives $C=e$, so
+\[
+\boxed{f(x)=-x-1+e^{x+1}}.
+\]
+Hence
+\[
+f(0)=e-1.
+\]
+
+\textbf{(ii)} Differentiate the DE:
+\[
+y''=1+y'=1+x+y.
+\]
+
+\textbf{(iii)} On the zero-slope isocline $x+y=0$, we have $y'=0$ and
+\[
+y''=1+(x+y)=1>0.
+\]
+Therefore every solution that crosses this isocline has a stationary point with positive second derivative, so it is a local minimum.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item The DE itself can reveal universal geometric facts about all solutions.
+    \item Isoclines are a useful bridge between algebra and graph shape.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Orthogonal Trajectories of an Elliptic Family]
+Consider
+\[
+\frac{dy}{dx}=-\frac{x}{4y}.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Solve the DE and identify the family of curves.
+    \item[\textbf{ii}] Find the DE for the orthogonal trajectories.
+    \item[\textbf{iii}] Solve for the orthogonal family.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Separate variables for both families.
+    \item Orthogonal slopes are negative reciprocals.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Separating variables,
+\[
+4y\,dy=-x\,dx
+\]
+gives
+\[
+x^2+4y^2=C,
+\]
+so the original family is a set of ellipses centred at the origin.
+
+\textbf{(ii)} The orthogonal slope is
+\[
+m_2=-\frac{1}{-x/(4y)}=\frac{4y}{x},
+\]
+so the new DE is
+\[
+\frac{dy}{dx}=\frac{4y}{x}.
+\]
+
+\textbf{(iii)} Separating variables,
+\[
+\frac{1}{y}\,dy=\frac{4}{x}\,dx
+\]
+gives
+\[
+\ln|y|=4\ln|x|+C
+\]
+and hence
+\[
+\boxed{y=Ax^4}.
+\]
+These are quartic curves through the origin.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Orthogonal trajectories convert a geometric condition into a new differential equation.
+    \item Negative reciprocal slopes are the key link.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[A Tank-Filling Model with Evaporation]
+A paraboloid tank is formed by rotating $y=x^2$ about the $y$-axis. Water is poured in at rate $2\pi$ and evaporates at rate $k\pi h$, where $h$ is the water depth.
+\begin{enumerate}
+    \item[\textbf{i}] Show that $V=\dfrac{\pi}{2}h^2$.
+    \item[\textbf{ii}] Show that $\dfrac{dh}{dt}=\dfrac{2-kh}{h}$.
+    \item[\textbf{iii}] If $k=1$, find the exact time to reach depth $1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Use the disc method for volume.
+    \item Then apply $\dfrac{dV}{dt}=\dfrac{dV}{dh}\dfrac{dh}{dt}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since $x^2=y$, the volume is
+\[
+V=\int_0^h \pi x^2\,dy=\int_0^h \pi y\,dy=\boxed{\frac{\pi}{2}h^2}.
+\]
+
+\textbf{(ii)} Net inflow is
+\[
+\frac{dV}{dt}=2\pi-k\pi h=\pi(2-kh).
+\]
+Also
+\[
+\frac{dV}{dh}=\pi h.
+\]
+Hence
+\[
+\boxed{\frac{dh}{dt}=\frac{dV/dt}{dV/dh}=\frac{2-kh}{h}}.
+\]
+
+\textbf{(iii)} With $k=1$,
+\[
+\frac{dt}{dh}=\frac{h}{2-h}=-1+\frac{2}{2-h}.
+\]
+Integrating,
+\[
+t=-h-2\ln|2-h|+C.
+\]
+Using $t=0$ at $h=0$ gives $C=2\ln2$. So at $h=1$,
+\[
+\boxed{t=2\ln2-1}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Modelling often combines geometry, related rates, and DE solving in one chain.
+    \item Rewriting a rational integrand before integrating can save a lot of work.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Qualitative Analysis of an Allee-Type Population Model]
+Consider
+\[
+\frac{dP}{dt}=\frac1{100}(P-20)(80-P),
+\]
+where $P$ is measured in thousands.
+\begin{enumerate}
+    \item[\textbf{i}] Identify and classify the equilibrium solutions.
+    \item[\textbf{ii}] Find $P''$ in terms of $P$ and $P'$.
+    \item[\textbf{iii}] If $P(0)=30$, find the population where growth is maximal and decide the concavity at $P=60$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Sign analysis around the equilibria determines stability.
+    \item Differentiate the right-hand side after expanding.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Equilibria are $P=20$ and $P=80$. For $P<20$, $P'<0$; for $20<P<80$, $P'>0$; and for $P>80$, $P'<0$. So $P=20$ is unstable and $P=80$ is stable.
+
+\textbf{(ii)} Expanding first,
+\[
+P'=\frac1{100}(-P^2+100P-1600).
+\]
+Therefore
+\[
+\boxed{P''=\frac1{50}(50-P)P'}.
+\]
+
+\textbf{(iii)} Maximum growth occurs when $P''=0$ and $P'>0$, so
+\[
+\boxed{P=50}.
+\]
+At $P=60$, we have $50-P<0$ while $P'>0$, hence $P''<0$. The graph is concave down there.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Many population questions can be answered from equilibrium and sign analysis alone.
+    \item The inflection point of a logistic-style curve is where the growth rate peaks.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Inverse-Trigonometric IVP and Validity Interval]
+Consider
+\[
+\frac{dy}{dx}=x\sqrt{9-y^2},\qquad y(0)=\frac{3\sqrt3}{2}.
+\]
+\begin{enumerate}
+    \item[\textbf{i}] Find the particular solution.
+    \item[\textbf{ii}] Determine its maximal domain of validity.
+    \item[\textbf{iii}] Find its absolute maximum and minimum values on that domain.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Use the standard $\arcsin$ integral.
+    \item The principal range of $\arcsin$ restricts the valid interval.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Separating variables,
+\[
+\int\frac{dy}{\sqrt{9-y^2}}=\int x\,dx
+\]
+gives
+\[
+\arcsin\left(\frac{y}{3}\right)=\frac{x^2}{2}+C.
+\]
+Using the initial condition,
+\[
+C=\arcsin\left(\frac{\sqrt3}{2}\right)=\frac{\pi}{3}.
+\]
+So
+\[
+\boxed{y=3\sin\left(\frac{x^2}{2}+\frac{\pi}{3}\right)}.
+\]
+For this $\arcsin$ form to remain valid,
+\[
+-\frac{\pi}{2}\le \frac{x^2}{2}+\frac{\pi}{3}\le \frac{\pi}{2}.
+\]
+Only the upper bound matters, giving
+\[
+x^2\le \frac{\pi}{3}.
+\]
+Hence the maximal domain is
+\[
+\boxed{\left[-\sqrt{\frac{\pi}{3}},\sqrt{\frac{\pi}{3}}\right]}.
+\]
+On this interval the angle runs from $\frac{\pi}{3}$ to $\frac{\pi}{2}$, so the minimum occurs at $x=0$ and the maximum at the endpoints:
+\[
+\boxed{y_{\min}=\frac{3\sqrt3}{2},\qquad y_{\max}=3.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Inverse-trig solutions come with hidden validity restrictions from principal ranges.
+    \item The explicit sine form is useful, but the $\arcsin$ form explains the true interval of validity.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Exponential Blow-Up and a Vertical Asymptote]
+Consider
+\[
+\frac{dy}{dx}=e^{2y}
+\]
+and the solution through $(0,0)$.
+\begin{enumerate}
+    \item[\textbf{i}] Find the general solution with $x$ expressed in terms of $y$.
+    \item[\textbf{ii}] Find the particular solution $y=f(x)$.
+    \item[\textbf{iii}] Determine the maximal domain and the vertical asymptote.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Write the left side as $e^{-2y}\,dy$.
+    \item The logarithm form makes the domain obvious.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Separating variables,
+\[
+e^{-2y}\,dy=dx.
+\]
+Integrating,
+\[
+-\frac12e^{-2y}=x+C.
+\]
+Using $(0,0)$ gives $C=-\frac12$, so
+\[
+e^{-2y}=1-2x.
+\]
+Hence
+\[
+\boxed{f(x)=-\frac12\ln(1-2x)}.
+\]
+The logarithm requires
+\[
+1-2x>0 \Rightarrow x<\frac12,
+\]
+so the maximal domain is
+\[
+\boxed{\left(-\infty,\frac12\right)}.
+\]
+As $x\to\left(\frac12\right)^-$, $\ln(1-2x)\to-\infty$, so $f(x)\to\infty$. Thus the vertical asymptote is
+\[
+\boxed{x=\frac12}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item Some DE solutions blow up to infinity in finite $x$.
+    \item Writing the answer in logarithmic form makes the asymptote immediate.
+\end{itemize}
+\end{takeaways}
