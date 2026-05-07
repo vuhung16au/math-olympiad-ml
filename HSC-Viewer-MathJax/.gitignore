@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Build output and caches
+.next/
+out/
+.turbo/
+
+# Test artifacts
+playwright-report/
+test-results/
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Generated booklet HTML and conversion artifacts
+.generated/*
+!.generated/.gitkeep
+
+# Bun binary lockfile (text lockfile `bun.lock` is tracked)
+bun.lockb

@@ -1,0 +1,22 @@
+:root {
+  --color-purple: rgb(60, 16, 83);
+  --color-red: rgb(242, 18, 12);
+  --color-black: rgb(0, 0, 0);
+  --color-white: rgb(255, 255, 255);
+  --color-law-purple: rgb(181, 24, 37);
+  --color-stone: rgb(145, 139, 131);
+  --color-charcoal: rgb(48, 44, 42);
+  --color-ivory: rgb(242, 239, 235);
+  --spacing-unit: 1rem;
+  --sidebar-width: 280px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --sidebar-width: 0;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}

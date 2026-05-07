@@ -1,0 +1,39 @@
+{
+  "name": "hsc-viewer-mathjax",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web-based HSC booklet viewer powered by Next.js, MathJax, and make4ht",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "generate": "bun scripts/generate-booklets.ts",
+    "generate:one": "bun scripts/generate-booklet.ts",
+    "generate:html:all": "sh scripts/generate-html-all.sh",
+    "generate:html:one": "sh scripts/generate-html-one.sh",
+    "benchmark:html:one": "sh scripts/benchmark-html-one.sh",
+    "watch": "bun scripts/watch-booklets.ts",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "cheerio": "^1.1.2",
+    "chokidar": "^4.0.3",
+    "lucide-react": "^0.544.0",
+    "next": "16.2.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^24.7.2",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "eslint": "^9.38.0",
+    "eslint-config-next": "16.2.4",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
+  }
+}
