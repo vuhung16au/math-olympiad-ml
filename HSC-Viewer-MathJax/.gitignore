@@ -26,3 +26,4 @@ pnpm-debug.log*
 
 # Bun binary lockfile (text lockfile `bun.lock` is tracked)
 bun.lockb
+.vercel

@@ -1,4 +1,4 @@
-.PHONY: help install dev build start lint test generate generate-one generate-html-all generate-html-one benchmark-html-one watch clean deploy deploy-vercel verify
+.PHONY: help install dev build start lint test generate generate-one generate-html-all generate-html-one benchmark-html-one watch clean deploy deploy-vercel deploy-collections deploy-all-prebuilt verify
 
 help:
 	@echo "HSC-Viewer-MathJax commands:"
@@ -15,8 +15,10 @@ help:
 	@echo "  make benchmark-html-one BOOKLET=HSC-Collections"
 	@echo "  make watch                   - Watch LaTeX files and regenerate"
 	@echo "  make clean                   - Remove local generated/build artifacts"
-	@echo "  make deploy                  - Alias for make deploy-vercel"
-	@echo "  make deploy-vercel           - Deploy to Vercel"
+	@echo "  make deploy                  - Deploy current artifacts to Vercel"
+	@echo "  make deploy-vercel           - Deploy current artifacts to Vercel"
+	@echo "  make deploy-collections      - Prebuilt deploy for HSC-Collections only"
+	@echo "  make deploy-all-prebuilt     - Prebuilt deploy for all booklets"
 	@echo "  make verify                  - Lint, test, and build"
 
 install:
@@ -70,8 +72,14 @@ clean:
 
 deploy: deploy-vercel
 
-deploy-vercel: build
+deploy-vercel:
 	bunx vercel --prod
+
+deploy-collections:
+	sh scripts/deploy-collections.sh
+
+deploy-all-prebuilt:
+	sh scripts/deploy-all-prebuilt.sh
 
 verify: lint test build
 

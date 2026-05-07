@@ -15,13 +15,34 @@ import {
 } from "@/scripts/lib/paths";
 import { postprocessHtml } from "@/scripts/lib/postprocess";
 
+const FALLBACK_MARKER = "Generated fallback";
+const generatedTmpRoot = path.join(generatedRoot, "tmp");
+const generatedBuildRoot = path.join(generatedRoot, "build");
+
 async function runMake4ht(
   booklet: BookletSourceConfig,
   buildDir: string,
   outputDir: string,
-): Promise<{ success: boolean; stdout: string; stderr: string }> {
+): Promise<{
+  success: boolean;
+  stdout: string;
+  stderr: string;
+  timedOut: boolean;
+  exitCode: number | null;
+}> {
   const bookletDir = path.join(repoRoot, booklet.sourceDir);
   const timeoutMs = Number.parseInt(process.env.MAKE4HT_TIMEOUT_MS ?? "3000", 10);
+  const pathEntries = new Set([
+    "/opt/homebrew/bin",
+    "/usr/local/bin",
+    ...(process.env.PATH ?? "").split(":").filter((entry) => entry.length > 0),
+  ]);
+  const env = {
+    ...process.env,
+    GS: process.env.GS ?? "/opt/homebrew/bin/gs",
+    LIBGS: process.env.LIBGS ?? "/opt/homebrew/lib/libgs.dylib",
+    PATH: Array.from(pathEntries).join(":"),
+  };
 
   return new Promise((resolve) => {
     const child = spawn(
@@ -36,7 +57,7 @@ async function runMake4ht(
         booklet.entryTex,
         "mathjax",
       ],
-      { cwd: bookletDir, stdio: ["ignore", "pipe", "pipe"] },
+      { cwd: bookletDir, env, stdio: ["ignore", "pipe", "pipe"] },
     );
 
     let stdout = "";
@@ -61,7 +82,13 @@ async function runMake4ht(
         stderr += `\nmake4ht timed out after ${timeoutMs}ms.`;
       }
 
-      resolve({ success: code === 0 && !timedOut, stdout, stderr });
+      resolve({
+        success: code === 0 && !timedOut,
+        stdout,
+        stderr,
+        timedOut,
+        exitCode: code,
+      });
     });
   });
 }
@@ -162,14 +189,52 @@ async function copyGeneratedAssets(
   await copyDirContents(tempBuildDir, true);
 }
 
+function isFallbackHtml(html: string) {
+  return html.includes(FALLBACK_MARKER);
+}
+
+async function readPreservableExistingHtml(booklet: BookletSourceConfig) {
+  const htmlPath = path.join(generatedBookletsRoot, `${booklet.slug}.html`);
+
+  try {
+    const existingHtml = await fs.readFile(htmlPath, "utf8");
+    if (isFallbackHtml(existingHtml)) {
+      return null;
+    }
+
+    return existingHtml;
+  } catch {
+    return null;
+  }
+}
+
 async function createFallbackResult(
   booklet: BookletSourceConfig,
   reason: string,
 ): Promise<ConversionResult> {
+  const existingHtml = await readPreservableExistingHtml(booklet);
+  const relativeHtmlPath = `.generated/booklets/${booklet.slug}.html`;
+
+  if (existingHtml) {
+    logWarn(`Preserving existing converted HTML for ${booklet.slug}; fallback output was skipped.`);
+
+    return {
+      booklet: {
+        ...booklet,
+        htmlPath: relativeHtmlPath,
+        assetBasePath: `/_generated/assets/${booklet.slug}`,
+        conversionWarnings: [
+          `${reason} Existing converted HTML was preserved.`,
+        ],
+        lastGeneratedAt: new Date().toISOString(),
+      },
+      html: existingHtml,
+    };
+  }
+
   const entryPath = path.join(repoRoot, booklet.sourceDir, booklet.entryTex);
   const preview = await fs.readFile(entryPath, "utf8").catch(() => "");
   const html = buildFallbackHtml(booklet, reason, preview.slice(0, 4000));
-  const relativeHtmlPath = `.generated/booklets/${booklet.slug}.html`;
 
   await writeTextFile(path.join(generatedRoot, "booklets", `${booklet.slug}.html`), html);
 
@@ -183,6 +248,15 @@ async function createFallbackResult(
     },
     html,
   };
+}
+
+async function readGeneratedHtml(htmlPath: string) {
+  try {
+    const html = await fs.readFile(htmlPath, "utf8");
+    return html.trim().length > 0 ? html : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function convertBooklet(booklet: BookletSourceConfig): Promise<ConversionResult> {
@@ -222,6 +296,31 @@ export async function convertBooklet(booklet: BookletSourceConfig): Promise<Conv
   );
 
   if (!result.success) {
+    const salvagedHtml = !result.timedOut ? await readGeneratedHtml(htmlPath) : null;
+
+    if (salvagedHtml) {
+      logWarn(`make4ht reported errors for ${booklet.slug}; salvaging generated HTML.`);
+      const processedHtml = postprocessHtml(salvagedHtml, booklet.slug);
+      await copyGeneratedAssets(booklet, tempOutputDir, tempBuildDir);
+
+      const relativeHtmlPath = `.generated/booklets/${booklet.slug}.html`;
+      await writeTextFile(path.join(generatedBookletsRoot, `${booklet.slug}.html`), processedHtml);
+
+      return {
+        booklet: {
+          ...booklet,
+          htmlPath: relativeHtmlPath,
+          assetBasePath: `/_generated/assets/${booklet.slug}`,
+          conversionWarnings: [
+            `make4ht exited with code ${result.exitCode ?? "unknown"}, but generated HTML was salvaged.`,
+            ...getWarnings(result.stdout, result.stderr),
+          ].slice(0, 20),
+          lastGeneratedAt: new Date().toISOString(),
+        },
+        html: processedHtml,
+      };
+    }
+
     logWarn(`make4ht failed for ${booklet.slug}; writing fallback HTML.`);
     return createFallbackResult(
       booklet,
@@ -229,10 +328,8 @@ export async function convertBooklet(booklet: BookletSourceConfig): Promise<Conv
     );
   }
 
-  let html = "";
-  try {
-    html = await fs.readFile(htmlPath, "utf8");
-  } catch {
+  const html = await readGeneratedHtml(htmlPath);
+  if (!html) {
     return createFallbackResult(
       booklet,
       `make4ht completed without producing ${path.basename(htmlPath)}.`,
@@ -295,8 +392,10 @@ export function resolveBooklets(selection?: string) {
 }
 
 export async function cleanGeneratedArtifacts() {
-  await removeDir(generatedRoot);
   await ensureDir(generatedRoot);
+  await removeDir(generatedTmpRoot);
+  await removeDir(generatedBuildRoot);
+  await removeDir(generatedLogsRoot);
   await ensureDir(generatedBookletsRoot);
   await ensureDir(generatedAssetsRoot);
   await ensureDir(generatedLogsRoot);

@@ -5,6 +5,20 @@ import type { BookletManifestEntry, GeneratedBookletDocument } from "@/lib/bookl
 
 const projectRoot = /* turbopackIgnore: true */ process.cwd();
 
+function getVisibleBookletFilter() {
+  const raw = process.env.VISIBLE_BOOKLETS?.trim();
+  if (!raw) {
+    return null;
+  }
+
+  const slugs = raw
+    .split(",")
+    .map((entry) => entry.trim().toLowerCase())
+    .filter((entry) => entry.length > 0);
+
+  return slugs.length > 0 ? new Set(slugs) : null;
+}
+
 async function readJsonFile<T>(filePath: string): Promise<T | null> {
   try {
     const content = await fs.readFile(path.join(projectRoot, filePath), "utf8");
@@ -15,7 +29,14 @@ async function readJsonFile<T>(filePath: string): Promise<T | null> {
 }
 
 export async function getGeneratedManifest(): Promise<BookletManifestEntry[]> {
-  return (await readJsonFile<BookletManifestEntry[]>(GENERATED_MANIFEST)) ?? [];
+  const manifest = (await readJsonFile<BookletManifestEntry[]>(GENERATED_MANIFEST)) ?? [];
+  const visibleFilter = getVisibleBookletFilter();
+
+  if (!visibleFilter) {
+    return manifest;
+  }
+
+  return manifest.filter((entry) => visibleFilter.has(entry.slug.toLowerCase()));
 }
 
 export async function getGeneratedBookletBySlug(

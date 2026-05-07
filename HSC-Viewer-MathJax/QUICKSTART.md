@@ -19,6 +19,7 @@ Common commands:
 make build
 make test
 make deploy
+make deploy-all-prebuilt
 ```
 
 Short docs:
