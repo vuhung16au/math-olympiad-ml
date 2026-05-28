@@ -34,6 +34,121 @@ Domain of $f^{-1}$ is the range of restricted $f$: $\boxed{[-1, \infty)}$.
 \end{itemize}
 \end{takeaways}
 
+\begin{problem}[The Sigmoid Function and Its Inverse]
+In artificial intelligence, the Sigmoid function is widely used as an activation function in neural networks to map any real-valued input into a strictly bounded output between $0$ and $1$. The standard Sigmoid function is defined by
+\[
+\sigma(x)=\frac{1}{1+e^{-x}}.
+\]
+
+The graph of $\sigma(x)$ is an S-shaped curve that approaches $0$ as $x \to -\infty$ and approaches $1$ as $x \to \infty$, as shown below.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \begin{axis}[
+        width=11cm,
+        height=6cm,
+        xmin=-6, xmax=6,
+        ymin=-0.2, ymax=1.2,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        domain=-6:6,
+        samples=200,
+        grid=both,
+        minor tick num=1,
+        xtick={0},
+        ytick={0,0.5,1},
+        yticklabels={$0$,$\frac12$,$1$},
+        legend style={at={(1.02,0.5)},anchor=west,draw=none,fill=none},
+        clip=true
+    ]
+        \addplot[dashed,gray] coordinates {(-6,0) (6,0)};
+        \addplot[dashed,gray] coordinates {(-6,1) (6,1)};
+        \addplot[thick,blue] {1/(1+exp(-x))};
+        \addlegendentry{$y=\sigma(x)=\dfrac{1}{1+e^{-x}}$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[label=(\roman*)]
+\item Using the rules of differentiation, prove that
+\[
+\sigma'(x)=\sigma(x)\bigl(1-\sigma(x)\bigr).
+\]
+\item Hence, or otherwise, determine the exact coordinates of the point of inflection (i.e. the point where the curve changes concavity, or in other words, where the second derivative equals zero) of the curve $y=\sigma(x)$.
+\item Find an algebraic expression for the inverse function $\sigma^{-1}(x)$ and state its domain.
+\end{enumerate}
+\end{problem}
+
+
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+\item For (i), rewrite $\sigma(x)=(1+e^{-x})^{-1}$ and apply the chain rule. Then compute $1-\sigma(x)$ and compare.
+\item For (ii), the inflection point occurs where $\sigma''(x)=0$. Differentiate $\sigma'(x)=\sigma(x)\bigl(1-\sigma(x)\bigr)$ using the product rule.
+\item For (iii), set $y=\sigma(x)$, swap $x$ and $y$, and solve for $y$ using logarithms. The domain of $\sigma^{-1}$ is the range of $\sigma$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Write $\sigma(x)=(1+e^{-x})^{-1}$. Then by the chain rule,
+\[
+\sigma'(x)=-(1+e^{-x})^{-2}\cdot(-e^{-x})=\frac{e^{-x}}{(1+e^{-x})^2}.
+\]
+Also,
+\[
+1-\sigma(x)=1-\frac{1}{1+e^{-x}}=\frac{e^{-x}}{1+e^{-x}},
+\]
+so
+\[
+\sigma(x)\bigl(1-\sigma(x)\bigr)=\frac{1}{1+e^{-x}}\cdot\frac{e^{-x}}{1+e^{-x}}
+=\frac{e^{-x}}{(1+e^{-x})^2}=\sigma'(x).
+\]
+
+\textbf{(ii)} Let $y=\sigma(x)$. From (i), $y'=y(1-y)$. Differentiate:
+\[
+y''=y'(1-y)-yy'=y'(1-2y).
+\]
+Since $y'=\dfrac{e^{-x}}{(1+e^{-x})^2}>0$ for all $x$, the inflection point satisfies $1-2y=0$, so $y=\tfrac12$.
+Then
+\[
+\frac12=\frac{1}{1+e^{-x}}
+\Longrightarrow
+1+e^{-x}=2
+\Longrightarrow
+e^{-x}=1
+\Longrightarrow
+x=0.
+\]
+So the point of inflection is $\boxed{\left(0,\frac12\right)}$.
+
+\textbf{(iii)} Let $y=\dfrac{1}{1+e^{-x}}$. Then
+\[
+\frac{1}{y}=1+e^{-x}
+\Longrightarrow
+e^{-x}=\frac{1-y}{y}.
+\]
+Taking $\ln$,
+\[
+-x=\ln\!\left(\frac{1-y}{y}\right)
+\Longrightarrow
+x=\ln\!\left(\frac{y}{1-y}\right).
+\]
+Hence
+\[
+\boxed{\sigma^{-1}(x)=\ln\!\left(\frac{x}{1-x}\right)}
+\]
+with domain $\boxed{x\in(0,1)}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Self-referential derivative:} The identity $\sigma'=\sigma(1-\sigma)$ is a classic example where the derivative can be written purely in terms of the original function.
+\item \textbf{Inflection from structure:} Once $\sigma'=\sigma(1-\sigma)$ is known, $\sigma''$ factors cleanly, making the inflection point quick to locate.
+\item \textbf{Logit link:} The inverse $\sigma^{-1}(x)=\ln\!\left(\dfrac{x}{1-x}\right)$ (the \emph{logit} function) naturally has domain $(0,1)$, matching probability outputs.
+\end{itemize}
+\end{takeaways}
+
 \begin{problem}[Piecewise Functions]
 A function is defined as:
 \[
