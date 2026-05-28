@@ -5,6 +5,7 @@
     "": {
       "name": "hsc-viewer-temp",
       "dependencies": {
+        "@napi-rs/canvas": "^0.1.78",
         "@vercel/analytics": "^2.0.1",
         "lucide-react": "^0.344.0",
         "next": "16.2.4",
@@ -30,6 +31,7 @@
   },
   "trustedDependencies": [
     "sharp",
+    "@napi-rs/canvas",
     "unrs-resolver",
   ],
   "packages": {

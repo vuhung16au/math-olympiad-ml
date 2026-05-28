@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
+    "@napi-rs/canvas": "^0.1.78",
     "lucide-react": "^0.344.0",
     "next": "16.2.4",
     "pdfjs-dist": "^4.0.0",
@@ -41,6 +42,7 @@
     "unrs-resolver"
   ],
   "trustedDependencies": [
+    "@napi-rs/canvas",
     "sharp",
     "unrs-resolver"
   ]

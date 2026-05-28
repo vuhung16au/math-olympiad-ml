@@ -8,6 +8,7 @@ type BookletPageProps = {
 };
 
 const SITE_URL = "https://hsc-math-hub.vercel.app";
+const OG_IMAGE_VERSION = "3";
 
 function clampDescription(description: string): string {
   const trimmed = description.trim();
@@ -53,7 +54,7 @@ export async function generateMetadata({ params }: BookletPageProps): Promise<Me
 
   const title = `${booklet.title} — Page 1`;
   const description = clampDescription(booklet.description || `View Page 1 of ${booklet.title} on HSC Math Hub.`);
-  const imageUrl = `${SITE_URL}/og/booklets/${booklet.slug}/1.png`;
+  const imageUrl = `${SITE_URL}/og/booklets/${booklet.slug}/1.png?v=${OG_IMAGE_VERSION}`;
 
   return {
     title,
