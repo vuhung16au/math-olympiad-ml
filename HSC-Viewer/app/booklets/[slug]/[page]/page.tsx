@@ -8,7 +8,7 @@ type BookletPageWithPageProps = {
 };
 
 const SITE_URL = "https://hsc-math-hub.vercel.app";
-const OG_IMAGE_VERSION = "3";
+const OG_IMAGE_VERSION = "4";
 
 function clampDescription(description: string): string {
   const trimmed = description.trim();
