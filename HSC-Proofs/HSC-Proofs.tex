@@ -413,6 +413,40 @@ Swapping the order of $\forall$ and $\exists$ completely changes the mathematica
 
 \section{Appendix}
 
+\subsection{De Morgan's Laws}
+
+Formal logic is now part of the HSC Extension~2 syllabus. \textbf{De Morgan's Laws} tell you how to push a negation ($\neg$) through brackets when a statement uses \textbf{AND} ($\land$) or \textbf{OR} ($\lor$). Get this wrong and a proof by contradiction starts from the wrong assumption.
+
+\medskip
+\noindent\textbf{The laws.} For statements $P$ and $Q$:
+\begin{align*}
+  \neg(P \land Q) &\equiv \neg P \lor \neg Q \\
+  \neg(P \lor Q)  &\equiv \neg P \land \neg Q
+\end{align*}
+\noindent\textbf{Memory trick:} distribute $\neg$ inside the brackets and \emph{flip} $\land$ to $\lor$ (or $\lor$ to $\land$).
+
+\medskip
+\noindent\textbf{Negation of an implication} (often tested with contradiction):
+\[
+  \neg(P \implies Q) \equiv P \land \neg Q
+\]
+The negation of ``if $P$ then $Q$'' is \emph{not} another if-then. It is: $P$ happens, but $Q$ fails.
+
+\medskip
+\noindent\textbf{Example 1 (negating OR).} ``$a \leq 2$ or $b \leq 2$'' has negation ``$a > 2$ \textbf{and} $b > 2$''---Law~2 with $P$: $a \leq 2$, $Q$: $b \leq 2$. This is exactly the opening move in Part~1, Problem~8.
+
+\medskip
+\noindent\textbf{Example 2 (contradiction).} Prove: if $x^2$ is even, then $x$ is even ($P \implies Q$).
+
+Assume, for contradiction, the \emph{exact} negation:
+\[
+  x^2 \text{ is even} \quad \land \quad x \text{ is odd}
+\]
+Write $x = 2k+1$. Then $x^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1$, which is odd---contradicting $x^2$ even. Without $\neg(P \implies Q) \equiv P \land \neg Q$, many students incorrectly assume ``$x^2$ even and $x$ even'' or invent an invalid if-then negation.
+
+\medskip
+\noindent\textbf{Why this matters.} Rigorous proof is not only algebra; it is \emph{precise logic}. Contradiction, contrapositive, and quantified statements all depend on correct negation. University mathematics (analysis, algebra, computer science) treats these equivalences as standard tools---not optional extras. Mastering De Morgan's Laws now prevents silent logical errors later.
+
 \vspace{2em}
 \noindent\textbf{Contact Information:}\\[0.5em]
 LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
