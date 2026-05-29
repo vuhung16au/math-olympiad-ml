@@ -1,26 +1,7 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { buildNotFoundMetadata, SITE_URL } from "@/lib/og-metadata";
 
-const SITE_URL = "https://hsc-math-hub.vercel.app";
-
-export const metadata: Metadata = {
-  title: "Page not found — HSC Math Hub",
-  description: "This page does not exist. Browse booklets on HSC Math Hub.",
-  openGraph: {
-    title: "Page not found — HSC Math Hub",
-    description: "This page does not exist. Browse booklets on HSC Math Hub.",
-    url: SITE_URL,
-    type: "website",
-    siteName: "HSC Math Hub",
-    images: [
-      {
-        url: `${SITE_URL}/og/site-fallback.png`,
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
-};
+export const metadata = buildNotFoundMetadata(SITE_URL);
 
 export default function NotFound() {
   return (
@@ -43,4 +24,3 @@ export default function NotFound() {
     </main>
   );
 }
-

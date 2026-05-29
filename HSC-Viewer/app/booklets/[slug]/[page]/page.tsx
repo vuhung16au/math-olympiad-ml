@@ -1,43 +1,19 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PDFViewer from "@/components/pages/PDFViewer";
 import { getBookletBySlug, isValidBookletPage } from "@/lib/booklets";
+import {
+  bookletOgImageUrl,
+  bookletPageCanonicalUrl,
+  buildBookletPageMetadata,
+  buildNotFoundMetadata,
+  clampOgDescription,
+  OG_SHARE_QUERY_KEY,
+} from "@/lib/og-metadata";
 
 type BookletPageWithPageProps = {
   params: Promise<{ slug: string; page: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
-
-const SITE_URL = "https://hsc-math-hub.vercel.app";
-const OG_IMAGE_VERSION = "4";
-
-function clampDescription(description: string): string {
-  const trimmed = description.trim();
-  return trimmed.length > 200 ? `${trimmed.slice(0, 197)}...` : trimmed;
-}
-
-function getNotFoundMetadata(url: string): Metadata {
-  const title = "Page not found — HSC Math Hub";
-  const description = "This page does not exist. Browse booklets on HSC Math Hub.";
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      url,
-      type: "website",
-      siteName: "HSC Math Hub",
-      images: [
-        {
-          url: `${SITE_URL}/og/site-fallback.png`,
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
-  };
-}
 
 function parsePageParam(pageParam: string): number | null {
   if (!/^\d+$/.test(pageParam)) {
@@ -52,32 +28,45 @@ function parsePageParam(pageParam: string): number | null {
   return page;
 }
 
-export async function generateMetadata({ params }: BookletPageWithPageProps): Promise<Metadata> {
+function readShareQueryVersion(
+  searchParams: Record<string, string | string[] | undefined>,
+): string | undefined {
+  const raw = searchParams[OG_SHARE_QUERY_KEY];
+  if (typeof raw === "string") {
+    return raw;
+  }
+  if (Array.isArray(raw) && typeof raw[0] === "string") {
+    return raw[0];
+  }
+  return undefined;
+}
+
+export async function generateMetadata({ params, searchParams }: BookletPageWithPageProps) {
   const { slug, page: pageParam } = await params;
+  const resolvedSearchParams = await searchParams;
   const booklet = getBookletBySlug(slug);
   const page = parsePageParam(pageParam);
-  const url = `${SITE_URL}/booklets/${slug}/${pageParam}`;
+  const shareVersion = readShareQueryVersion(resolvedSearchParams);
+  const canonicalUrl =
+    booklet && page
+      ? bookletPageCanonicalUrl(booklet.slug, page, shareVersion)
+      : bookletPageCanonicalUrl(slug, parsePageParam(pageParam) ?? 1, shareVersion);
 
   if (!booklet || !page || !isValidBookletPage(booklet, page)) {
-    return getNotFoundMetadata(url);
+    return buildNotFoundMetadata(canonicalUrl);
   }
 
   const title = `${booklet.title} — Page ${page}`;
-  const description = clampDescription(booklet.description || `View Page ${page} of ${booklet.title} on HSC Math Hub.`);
-  const imageUrl = `${SITE_URL}/og/booklets/${booklet.slug}/${page}.png?v=${OG_IMAGE_VERSION}`;
+  const description = clampOgDescription(
+    booklet.description || `View Page ${page} of ${booklet.title} on HSC Math Hub.`,
+  );
 
-  return {
+  return buildBookletPageMetadata({
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      url,
-      type: "website",
-      siteName: "HSC Math Hub",
-      images: [{ url: imageUrl, width: 1200, height: 630 }],
-    },
-  };
+    canonicalUrl,
+    imageUrl: bookletOgImageUrl(booklet.slug, page),
+  });
 }
 
 export default async function BookletPageWithPage({ params }: BookletPageWithPageProps) {

@@ -24,6 +24,8 @@ import {
   Sun,
 } from "lucide-react";
 
+import { OG_IMAGE_VERSION, OG_SHARE_QUERY_KEY } from "@/lib/og-metadata";
+
 type ReadingTheme = "light" | "dark" | "sepia";
 
 interface PDFControlsProps {
@@ -142,9 +144,18 @@ export default function PDFControls({
   const [shareMessage, setShareMessage] = useState<string | null>(null);
   const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
 
-  const shareUrl = typeof window === "undefined"
-    ? ""
-    : `${window.location.origin}/booklets/${bookletSlug}/${Math.max(1, currentPage)}`;
+  const shareUrl =
+    typeof window === "undefined"
+      ? ""
+      : (() => {
+          const url = new URL(
+            `/booklets/${bookletSlug}/${Math.max(1, currentPage)}`,
+            window.location.origin,
+          );
+          // Bust Meta link-preview cache when sharing (Messenger caches per URL).
+          url.searchParams.set(OG_SHARE_QUERY_KEY, OG_IMAGE_VERSION);
+          return url.toString();
+        })();
 
   const shareTitle = `${bookletTitle} - HSC Maths Booklet`;
   const shareText = `Check out this awesome HSC math booklet on ${bookletTitle}! Perfect for students preparing for their exams.`;

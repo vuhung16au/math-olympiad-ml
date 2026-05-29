@@ -6,6 +6,7 @@ import AppShell from "@/components/layout/AppShell";
 import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 import ServiceWorkerRegistration from "@/components/common/ServiceWorkerRegistration";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
+import { SITE_URL } from "@/lib/og-metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: APP_NAME,
   description: APP_DESCRIPTION,
 };

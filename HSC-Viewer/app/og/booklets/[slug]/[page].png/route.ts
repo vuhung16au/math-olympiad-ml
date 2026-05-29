@@ -1,10 +1,11 @@
 import sharp from "sharp";
 import { getBookletBySlug, isValidBookletPage } from "@/lib/booklets";
+import { SITE_URL } from "@/lib/og-metadata";
 import path from "path";
 
 export const runtime = "nodejs";
-
-const SITE_URL = "https://hsc-math-hub.vercel.app";
+/** Allow cold PDF render on first Facebook/Messenger scrape (Vercel default is 10s on hobby). */
+export const maxDuration = 60;
 const CACHE_CONTROL = "public, s-maxage=604800, stale-while-revalidate=2592000";
 const IS_E2E_PDF_MOCK_ENABLED = process.env.NEXT_PUBLIC_E2E_MOCK_PDF === "1";
 

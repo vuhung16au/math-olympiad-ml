@@ -44,7 +44,14 @@ test("booklet page includes OG meta in initial HTML and image endpoint returns P
 
   expect(ogImage).toBeTruthy();
   expect(ogImage?.startsWith("https://")).toBe(true);
-  expect(ogImage).toContain("/og/booklets/hsc-last-resorts/97.png");
+  expect(ogImage).toContain("/og/preview-6/booklets/hsc-last-resorts/97.png");
+  expect(ogImage).not.toContain("?v=");
+
+  // Facebook/Messenger expect secure_url and type for HTTPS images.
+  const ogSecureUrl = getOgMeta(html, "og:image:secure_url");
+  const ogImageType = getOgMeta(html, "og:image:type");
+  expect(ogSecureUrl).toBe(ogImage);
+  expect(ogImageType).toBe("image/png");
 
   // Width/height can be rendered as og:image:width / og:image:height or name equivalents.
   const ogWidth = getOgMeta(html, "og:image:width") ?? getOgName(html, "og:image:width");
