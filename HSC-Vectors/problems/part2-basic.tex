@@ -238,7 +238,46 @@ Use dot products with unit vectors $\mathbf{i}, \mathbf{j}, \mathbf{k}$ to find 
 \end{hint}
 
 \begin{solution}[Sketch]
-$\cos\alpha = \frac{a}{|\mathbf{r}|}$, $\cos\beta = \frac{b}{|\mathbf{r}|}$, $\cos\gamma = \frac{c}{|\mathbf{r}|}$. Therefore $\cos^2\alpha + \cos^2\beta + \cos^2\gamma = \frac{a^2 + b^2 + c^2}{|\mathbf{r}|^2} = \frac{|\mathbf{r}|^2}{|\mathbf{r}|^2} = 1$.
+Here $\alpha$, $\beta$, and $\gamma$ are the angles between $\mathbf{r}$ and the \emph{positive} $x$-, $y$-, and $z$-axes. Their cosines are the \textbf{direction cosines} of $\mathbf{r}$.
+
+\vspace{0.3em}
+\textbf{Step 1: Use the dot product with a unit axis vector}
+
+For any two vectors $\mathbf{u}$ and $\mathbf{v}$, $\mathbf{u}\cdot\mathbf{v} = |\mathbf{u}||\mathbf{v}|\cos\theta$, where $\theta$ is the angle between them. The axis unit vectors have length $|\mathbf{i}| = |\mathbf{j}| = |\mathbf{k}| = 1$.
+
+\vspace{0.3em}
+\textbf{Step 2: Find each direction cosine}
+
+Dot $\mathbf{r} = a\mathbf{i} + b\mathbf{j} + c\mathbf{k}$ with $\mathbf{i}$:
+\[
+\mathbf{r}\cdot\mathbf{i} = a
+\quad\text{and}\quad
+\mathbf{r}\cdot\mathbf{i} = |\mathbf{r}||\mathbf{i}|\cos\alpha = |\mathbf{r}|\cos\alpha.
+\]
+So $\cos\alpha = \dfrac{a}{|\mathbf{r}|}$. The same idea with $\mathbf{j}$ and $\mathbf{k}$ gives
+\[
+\cos\beta = \frac{b}{|\mathbf{r}|}, \qquad \cos\gamma = \frac{c}{|\mathbf{r}|}.
+\]
+
+\vspace{0.3em}
+\textbf{Step 3: Square and add}
+
+\[
+\cos^2\alpha + \cos^2\beta + \cos^2\gamma
+= \frac{a^2}{|\mathbf{r}|^2} + \frac{b^2}{|\mathbf{r}|^2} + \frac{c^2}{|\mathbf{r}|^2}
+= \frac{a^2 + b^2 + c^2}{|\mathbf{r}|^2}.
+\]
+
+\vspace{0.3em}
+\textbf{Step 4: Replace with the magnitude}
+
+By definition, $|\mathbf{r}| = \sqrt{a^2 + b^2 + c^2}$, so $|\mathbf{r}|^2 = a^2 + b^2 + c^2$. Hence
+\[
+\cos^2\alpha + \cos^2\beta + \cos^2\gamma
+= \frac{|\mathbf{r}|^2}{|\mathbf{r}|^2} = 1. \quad \square
+\]
+
+\textit{Geometric meaning:} the direction cosines tell you how much of $\mathbf{r}$ points along each axis; squaring and adding recovers the full length of the vector.
 \end{solution}
 
 \vspace{1em}

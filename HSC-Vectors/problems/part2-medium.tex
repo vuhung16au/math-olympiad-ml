@@ -676,24 +676,37 @@ Step 6: Check constraint: Since the RHS is positive, we need $1-a > 0$, so $a < 
 
 \vspace{1em}
 
-\begin{problem}[Direction Cosines Sum]
-Let $\mathbf{r}$ be a non-zero position vector in three-dimensional space with magnitude $r = |\mathbf{r}|$. Suppose $\mathbf{r}$ makes angles $\alpha$, $\beta$, and $\gamma$ with the positive $x$-axis, $y$-axis, and $z$-axis respectively.
+\begin{problem}[Direction Cosines — Compute and Verify]
+Let $\mathbf{r} = 6\mathbf{i} + 2\mathbf{j} + 3\mathbf{k}$. The \textbf{direction cosines} of $\mathbf{r}$ are
+\[
+l = \cos\alpha, \quad m = \cos\beta, \quad n = \cos\gamma,
+\]
+where $\alpha$, $\beta$, and $\gamma$ are the angles between $\mathbf{r}$ and the positive $x$-, $y$-, and $z$-axes.
 
-The \textbf{direction cosines} of $\mathbf{r}$ are defined as:
-$$l = \cos\alpha, \quad m = \cos\beta, \quad n = \cos\gamma$$
-
-Prove that:
-$$l^2 + m^2 + n^2 = 1$$
-
-That is, prove that $\cos^2\alpha + \cos^2\beta + \cos^2\gamma = 1$.
+Find $l$, $m$, and $n$, and verify that $l^2 + m^2 + n^2 = 1$.
 \end{problem}
 
 \begin{hint}
-Express direction cosines as ratios of components to magnitude.
+First find $|\mathbf{r}|$, then use $l = \dfrac{6}{|\mathbf{r}|}$, $m = \dfrac{2}{|\mathbf{r}|}$, $n = \dfrac{3}{|\mathbf{r}|}$ (see the direction-cosines proof in Problem~3.9).
 \end{hint}
 
 \begin{solution}[Sketch]
-$\cos\alpha = \frac{a}{|\mathbf{r}|}$, $\cos\beta = \frac{b}{|\mathbf{r}|}$, $\cos\gamma = \frac{c}{|\mathbf{r}|}$. Sum: $\frac{a^2 + b^2 + c^2}{|\mathbf{r}|^2} = \frac{|\mathbf{r}|^2}{|\mathbf{r}|^2} = 1$.
+$|\mathbf{r}| = \sqrt{6^2 + 2^2 + 3^2} = \sqrt{49} = 7$.
+
+The direction cosines are the component-to-length ratios:
+\[
+l = \frac{6}{7}, \qquad m = \frac{2}{7}, \qquad n = \frac{3}{7}.
+\]
+
+Check the identity:
+\[
+l^2 + m^2 + n^2
+= \frac{36 + 4 + 9}{49}
+= \frac{49}{49}
+= 1.
+\]
+
+So the direction cosines are $\left(\dfrac{6}{7}, \dfrac{2}{7}, \dfrac{3}{7}\right)$, and they satisfy $l^2 + m^2 + n^2 = 1$ as expected from Problem~3.9.
 \end{solution}
 
 \vspace{1em}
@@ -909,17 +922,17 @@ Three vertices of a parallelogram are $O(0,0,0)$, $A(2,2,1)$, $B(1,2,2)$. Find a
     % Draw Case 1: OABC1 (C1 opposite to O) - blue
     \draw[thick, blue!60] (O) -- (A) -- (C1) -- (B) -- cycle;
     \fill[blue!60] (C1) circle (2pt);
-    \node[above right, blue!60, font=\small] at (C1) {$C_1(3,4,3)$};
+    \node[above right, blue!60, font=\small] at (C1) {$C_1$};
     
     % Draw Case 2: OACB (C2 opposite to B) - red
     \draw[thick, red!60] (O) -- (A) -- (C2) -- (B) -- cycle;
     \fill[red!60] (C2) circle (2pt);
-    \node[below left, red!60, font=\small] at (C2) {$C_2(1,0,-1)$};
+    \node[below left, red!60, font=\small] at (C2) {$C_2$};
     
     % Draw Case 3: OBAC3 (C3 opposite to A) - green
     \draw[thick, green!60!black] (O) -- (B) -- (C3) -- (A) -- cycle;
     \fill[green!60!black] (C3) circle (2pt);
-    \node[below left, green!60!black, font=\small] at (C3) {$C_3(-1,0,1)$};
+    \node[below left, green!60!black, font=\small] at (C3) {$C_3$};
     
     % Draw and label the three given points
     \fill[black] (O) circle (2.5pt);
