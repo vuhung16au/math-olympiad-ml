@@ -637,4 +637,131 @@ An interval is \emph{closed} if it contains all of its endpoints, and \emph{open
   An interval is closed if it contains \emph{all} of its endpoints. Since it has zero endpoints, there are no endpoints missing from the set. Therefore, it vacuously contains all of its endpoints. In topology, spaces with this property are considered both open and closed (clopen).
 \end{enumerate}
 
+\subsection{Table of Variation}
+
+\textbf{Outside the NESA syllabus.} The \emph{Table of Variation} (also called a \emph{variation table}) is \textbf{not part of the NSW HSC Mathematics Extension~1 or Extension~2 syllabuses}. For HSC work, stay with the simpler \textbf{sign tables} you already use to locate zeroes, test intervals, and decide whether a stationary point is a maximum or minimum.
+
+At university level, however, the Table of Variation is a standard tool: a structured matrix that records the full global behaviour of a differentiable function \emph{before} you sketch its graph. Where a high-school sign table might only track the sign of an expression, a variation table also records critical values, limits at boundaries and asymptotes, and the direction of increase or decrease on every interval.
+
+\textbf{Typical rows.}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Domain ($x$):} from $-\infty$ to $+\infty$, listing stationary points ($f'(x)=0$), points where $f'$ is undefined, and vertical asymptotes (often marked with a double line $\|$ through the table).
+  \item \textbf{First derivative ($f'(x)$):} signs $+$, $0$, or $-$ on each interval.
+  \item \textbf{Variation ($f(x)$):} arrows $\nearrow$ (increasing) and $\searrow$ (decreasing), with exact values $f(c)$ at extrema and evaluated limits at $\pm\infty$ and near asymptotes.
+\end{itemize}
+A fourth row for $f''(x)$ (concavity and inflection) appears in more advanced courses; it is optional here.
+
+Once the table is complete, sketching the graph is largely a matter of following the arrows and plotting the key coordinates.
+
+\medskip
+\noindent\textbf{Example (a).} $y=x^4+2x^2-2$.
+
+Differentiate:
+\[
+f'(x)=4x^3+4x=4x(x^2+1).
+\]
+Since $x^2+1>0$ for all real $x$, we have $f'(x)=0$ only at $x=0$, and
+\[
+f'(x)<0 \text{ for } x<0,
+\qquad
+f'(x)>0 \text{ for } x>0.
+\]
+Also $f(0)=-2$, and as $x\to\pm\infty$, the $x^4$ term dominates so $f(x)\to+\infty$. The graph is even (only even powers of $x$).
+
+\medskip
+\noindent
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{c|ccccc}
+$x$ & $-\infty$ & $(-\infty,0)$ & $0$ & $(0,\infty)$ & $+\infty$ \\ \hline
+$f'(x)$ & & $-$ & $0$ & $+$ & \\ \hline
+$f(x)$ & $+\infty$ & $\searrow$ & $-2$ & $\nearrow$ & $+\infty$
+\end{tabular}
+\end{center}
+
+\medskip
+\noindent\textbf{Sketch.} A symmetric ``U-shaped'' curve with a single minimum at $(0,-2)$, falling from $+\infty$ as $x\to-\infty$ and rising back to $+\infty$ as $x\to+\infty$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.72\linewidth,
+    height=6cm,
+    axis lines=middle,
+    xmin=-2.2,xmax=2.2,
+    ymin=-3.5,ymax=14,
+    grid=both,
+    xlabel={$x$},
+    ylabel={$y$},
+    samples=200
+]
+\addplot[blue, thick, domain=-2.2:2.2] {x^4 + 2*x^2 - 2};
+\addplot[only marks, mark=*, mark size=2.5pt] coordinates {(0,-2)};
+\node[anchor=south west] at (axis cs:0.08,-2) {\small $(0,-2)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\medskip
+\noindent\textbf{Example (b).} $y=\dfrac{x+1}{x-1}$.
+
+Domain: $x\ne 1$. Rewrite as $y=1+\dfrac{2}{x-1}$ to read off the horizontal asymptote $y=1$ and vertical asymptote $x=1$. The zero is $x=-1$. Differentiate:
+\[
+f'(x)=\frac{(x-1)-(x+1)}{(x-1)^2}=\frac{-2}{(x-1)^2}<0
+\]
+for all $x$ in the domain, so $f$ is strictly decreasing on $(-\infty,1)$ and on $(1,\infty)$---there are no turning points.
+
+Limits:
+\[
+\lim_{x\to-\infty}f(x)=1^-,
+\quad
+\lim_{x\to 1^-}f(x)=-\infty,
+\quad
+\lim_{x\to 1^+}f(x)=+\infty,
+\quad
+\lim_{x\to+\infty}f(x)=1^+.
+\]
+Key values: $f(-1)=0$ and $f(0)=-1$.
+
+\medskip
+\noindent
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{c|ccccccccc}
+$x$ & $-\infty$ & $(-\infty,-1)$ & $-1$ & $(-1,1)$ & $\|$ & $1$ & $\|$ & $(1,\infty)$ & $+\infty$ \\ \hline
+$f'(x)$ & & $-$ & & $-$ & & & & $-$ & \\ \hline
+$f(x)$ & $1^-$ & $\searrow$ & $0$ & $\searrow$ & & $-\infty\;/\;+\infty$ & & $\searrow$ & $1^+$
+\end{tabular}
+\end{center}
+
+\medskip
+\noindent\textbf{Sketch.} Two decreasing branches separated by the vertical asymptote $x=1$. The left branch passes through $(-1,0)$ and $(0,-1)$, approaches $y=1$ from below as $x\to-\infty$, and drops to $-\infty$ as $x\to 1^-$. The right branch comes down from $+\infty$ as $x\to 1^+$ and approaches $y=1$ from above as $x\to+\infty$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.78\linewidth,
+    height=6.5cm,
+    axis lines=middle,
+    xmin=-6,xmax=8,
+    ymin=-8,ymax=8,
+    grid=both,
+    xlabel={$x$},
+    ylabel={$y$},
+    samples=300,
+    restrict y to domain=-12:12
+]
+\addplot[blue, thick, domain=-6:0.92] {(x+1)/(x-1)};
+\addplot[blue, thick, domain=1.08:8] {(x+1)/(x-1)};
+\addplot[dashed, gray] coordinates {(-6,1) (8,1)};
+\draw[dashed, gray] (axis cs:1,-8) -- (axis cs:1,8);
+\addplot[only marks, mark=*, mark size=2pt] coordinates {(-1,0) (0,-1)};
+\node[anchor=south west] at (axis cs:-0.9,0.15) {\small $(-1,0)$};
+\node[anchor=north east] at (axis cs:0.1,-1) {\small $(0,-1)$};
+\node[anchor=west, gray] at (axis cs:4.5,1.35) {\small $y=1$};
+\node[anchor=south, gray] at (axis cs:1,-7) {\small $x=1$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
 \end{document}
