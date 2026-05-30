@@ -1,10 +1,11 @@
-import { expect, type BrowserContext, type Page } from "@playwright/test";
+import { expect, type BrowserContext, type ConsoleMessage, type Page } from "@playwright/test";
 
 export const BOOKLET_SLUG = "hsc-collections";
 export const ALT_BOOKLET_SLUG = "hsc-vectors";
 
 export const PREF_KEYS = {
   cookieConsent: "hsc_cookie_consent",
+  viewMode: "hsc_view_mode",
   lastUrl: "hsc_last_url",
   lastPageBySlug: "hsc_last_page_by_slug",
   lastSlug: "hsc_last_slug",
@@ -20,6 +21,7 @@ type ViewerUrlOptions = {
   slug?: string;
   page?: number;
   mockMode?: "off" | "success" | "error";
+  viewMode?: "single" | "continuous";
 };
 
 const MINIMAL_PDF = `%PDF-1.1
@@ -87,9 +89,38 @@ export async function mockPdfRequests(page: Page, mode: PdfResponseMode = "succe
   });
 }
 
+export const DEFAULT_SHARE_PAGE_URL = `http://localhost:3000/booklets/${BOOKLET_SLUG}/1?m=6`;
+
+export async function ensureCookieConsent(page: Page): Promise<void> {
+  await page.context().addCookies([
+    {
+      name: PREF_KEYS.cookieConsent,
+      value: "1",
+      domain: "localhost",
+      path: "/",
+    },
+  ]);
+}
+
 export async function gotoViewer(page: Page, options: ViewerUrlOptions = {}): Promise<void> {
+  const viewMode = options.viewMode ?? "single";
+
+  await ensureCookieConsent(page);
+  await page.context().addCookies([
+    {
+      name: PREF_KEYS.viewMode,
+      value: viewMode,
+      domain: "localhost",
+      path: "/",
+    },
+  ]);
   await page.goto(viewerUrl(options));
+  await expect(page.getByTestId("cookie-consent-banner")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Previous page" })).toBeVisible();
+}
+
+export function visiblePageNumberInput(page: Page) {
+  return page.locator('[data-testid="page-number-input"]:visible').first();
 }
 
 export async function expectViewerShell(page: Page): Promise<void> {
@@ -128,4 +159,79 @@ export async function getCookieValue(context: BrowserContext, name: string): Pro
   const cookies = await context.cookies();
   const match = cookies.find((cookie) => cookie.name === name);
   return match ? decodeURIComponent(match.value) : null;
+}
+
+const HYDRATION_MISMATCH_MARKERS = [
+  /hydration/i,
+  /hydrated but/i,
+  /server rendered HTML/i,
+  /didn't match/i,
+  /did not match/i,
+  /Hydration failed/i,
+] as const;
+
+export function isHydrationMismatchMessage(text: string): boolean {
+  if (text.includes("chrome-extension://")) {
+    return false;
+  }
+
+  return HYDRATION_MISMATCH_MARKERS.some((pattern) => pattern.test(text));
+}
+
+export type HydrationMismatchGuard = {
+  readonly messages: string[];
+  clear: () => void;
+  dispose: () => void;
+  assertNone: () => Promise<void>;
+};
+
+export function attachHydrationMismatchGuard(page: Page): HydrationMismatchGuard {
+  const messages: string[] = [];
+
+  const onConsole = (msg: ConsoleMessage) => {
+    const type = msg.type();
+    if (type !== "error" && type !== "warning") {
+      return;
+    }
+
+    const text = msg.text();
+    if (isHydrationMismatchMessage(text)) {
+      messages.push(text);
+    }
+  };
+
+  page.on("console", onConsole);
+
+  return {
+    get messages() {
+      return [...messages];
+    },
+    clear() {
+      messages.length = 0;
+    },
+    dispose() {
+      page.off("console", onConsole);
+    },
+    async assertNone() {
+      await expect
+        .poll(() => messages.length, {
+          message: "Console should stay free of hydration mismatch errors after navigation",
+          timeout: 5_000,
+        })
+        .toBe(0);
+
+      expect(messages).toEqual([]);
+    },
+  };
+}
+
+export async function gotoAndAssertNoHydrationMismatch(
+  page: Page,
+  guard: HydrationMismatchGuard,
+  url: string,
+): Promise<void> {
+  guard.clear();
+  await page.goto(url);
+  await page.waitForLoadState("domcontentloaded");
+  await guard.assertNone();
 }

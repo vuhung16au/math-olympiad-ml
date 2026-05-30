@@ -86,10 +86,12 @@ Always use the `@/` path alias for imports from the project root. Never use rela
 - Mark components that use browser APIs, hooks, or event handlers with `"use client"` at the top of the file.
 - Components that are purely data-driven and renderable on the server must **not** carry `"use client"`.
 - Do not import server-only modules (`fs`, `path`, etc.) in client components.
-- Dynamic imports for heavy client components:
+- Dynamic imports for heavy or browser-only client components:
   ```ts
   const PDFViewer = dynamic(() => import('@/components/pages/PDFViewer'), { ssr: false });
+  const MobileMenu = dynamic(() => import('@/components/layout/MobileMenu'), { ssr: false });
   ```
+- **Hydration:** SSR and client first paint must match. See [hydration.md](hydration.md) — no `className` toggles on mount, no empty strings in `className` arrays, defer cookie/`window` reads to `useEffect`.
 
 ## Formatting
 

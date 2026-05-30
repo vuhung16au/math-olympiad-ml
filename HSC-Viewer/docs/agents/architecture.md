@@ -34,7 +34,7 @@ lib/booklets.ts (BOOKLETS array)
 | `components/layout/AppShell.tsx` | Outer shell: sidebar + main content area |
 | `components/layout/Header.tsx` | Top bar with title and toolbar toggle |
 | `components/layout/Sidebar.tsx` | Booklet list navigation |
-| `components/layout/MobileMenu.tsx` | Slide-in menu for narrow viewports |
+| `components/layout/MobileMenu.tsx` | Slide-in menu for narrow viewports (loaded via `dynamic(..., { ssr: false })` in `AppShell`) |
 | `components/pages/GridView.tsx` | Home grid of booklet cards |
 | `components/pages/PDFViewer.tsx` | Full PDF reader: state, controls, canvas |
 | `components/ui/PDFControls.tsx` | Toolbar buttons (zoom, nav, fullscreen, etc.) |

@@ -1,5 +1,11 @@
 import { expect, test } from "@playwright/test";
-import { PREF_KEYS, getCookieValue, gotoViewer, readZoomPercentage } from "./helpers";
+import {
+  DEFAULT_SHARE_PAGE_URL,
+  PREF_KEYS,
+  getCookieValue,
+  gotoViewer,
+  readZoomPercentage,
+} from "./helpers";
 
 test("toolbar actions expose tooltips and zoom state persists through cookie", async ({ page, context }) => {
   await gotoViewer(page, { mockMode: "success" });
@@ -95,7 +101,7 @@ test("icon-only share buttons trigger Facebook popup, native share for Instagram
   const facebookParsed = new URL(facebookOpenUrl);
   expect(facebookParsed.origin).toBe("https://www.facebook.com");
   expect(facebookParsed.pathname).toBe("/sharer/sharer.php");
-  expect(facebookParsed.searchParams.get("u")).toBe("http://localhost:3000/booklets/hsc-collections/1");
+  expect(facebookParsed.searchParams.get("u")).toBe(DEFAULT_SHARE_PAGE_URL);
   expect(facebookParsed.searchParams.get("quote")).toContain("Check out this awesome HSC math booklet on HSC Collections");
 
   await instagramButton.click();
@@ -110,7 +116,7 @@ test("icon-only share buttons trigger Facebook popup, native share for Instagram
   for (const payload of shareCalls) {
     expect(payload.title).toBe("HSC Collections - HSC Maths Booklet");
     expect(payload.text).toContain("Check out this awesome HSC math booklet on HSC Collections");
-    expect(payload.url).toBe("http://localhost:3000/booklets/hsc-collections/1");
+    expect(payload.url).toBe(DEFAULT_SHARE_PAGE_URL);
   }
 
   await copyLinkButton.click();
@@ -120,5 +126,5 @@ test("icon-only share buttons trigger Facebook popup, native share for Instagram
     const win = window as Window & { __copiedText: string };
     return win.__copiedText;
   });
-  expect(copiedText).toBe("http://localhost:3000/booklets/hsc-collections/1");
+  expect(copiedText).toBe(DEFAULT_SHARE_PAGE_URL);
 });

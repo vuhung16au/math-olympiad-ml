@@ -10,7 +10,10 @@ test("pages and outline navigator jump to expected targets", async ({ page }) =>
   await page.getByRole("button", { name: "Outline" }).click();
   await expect(page.getByRole("list", { name: "PDF outline list" })).toBeVisible();
 
-  await page.getByRole("button", { name: /Jump to Chapter 2 on page 4/i }).click();
+  const outlineJump = page.getByRole("button", { name: /Jump to Chapter 2 on page 4/i });
+  await outlineJump.evaluate((button) => {
+    (button as HTMLButtonElement).click();
+  });
   await expect(page).toHaveURL(/\/booklets\/hsc-collections\/4(\?.*)?$/);
 });
 

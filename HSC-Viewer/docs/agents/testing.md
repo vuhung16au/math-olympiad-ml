@@ -42,7 +42,8 @@ bunx playwright test tests/e2e/my-spec.spec.ts
 | `responsive.spec.ts` | Key controls usable at mobile/tablet/desktop viewports |
 | `restore-last-session.spec.ts` | Home route restores last booklet via cookie |
 | `cookie-consent.spec.ts` | One-time cookie notice; consent cookie suppresses repeat |
-| `helpers.ts` | Shared test utilities |
+| `hydration-mismatch.spec.ts` | Core routes must not log React hydration mismatch console errors |
+| `helpers.ts` | Shared test utilities (includes hydration console guard) |
 
 ## PDF mocking
 
@@ -57,6 +58,24 @@ Tests use `NEXT_PUBLIC_E2E_MOCK_PDF=1`. Control behavior via query parameter:
 For network-level control, intercept `*.pdf` requests:
 ```ts
 await page.route('**/*.pdf', route => route.fulfill({ status: 500 }));
+```
+
+## Hydration mismatch guard
+
+React hydration errors appear in the browser console when SSR HTML does not match the client’s first render. The suite fails if any matched error is logged while visiting core routes.
+
+```bash
+bunx playwright test tests/e2e/hydration-mismatch.spec.ts
+```
+
+When adding a new layout, shell, or client overlay route, extend `CORE_HYDRATION_ROUTES` in `hydration-mismatch.spec.ts` and read [hydration.md](hydration.md).
+
+Reuse in other specs:
+
+```ts
+const guard = attachHydrationMismatchGuard(page);
+await gotoAndAssertNoHydrationMismatch(page, guard, "/booklets/hsc-collections/1");
+guard.dispose();
 ```
 
 ## Rules for agents
@@ -85,6 +104,7 @@ New interactive UI must be tested at:
 3. Use `test.describe` to group related cases.
 4. Run `make test` locally and confirm all tests pass before submitting.
 5. Update the table above in this document.
+6. **Layout or shell changes:** run `hydration-mismatch.spec.ts` and follow [hydration.md](hydration.md).
 
 ## CI
 

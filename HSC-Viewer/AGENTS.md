@@ -34,6 +34,8 @@ This file is read automatically by AI coding agents (GitHub Copilot, Codex, Clau
 | Performance | [docs/agents/performance.md](docs/agents/performance.md) | Budget targets agents must not regress |
 | Offline/caching | [docs/agents/offline-caching.md](docs/agents/offline-caching.md) | Service worker strategy |
 | Testing | [docs/agents/testing.md](docs/agents/testing.md) | Playwright e2e requirements for new features |
+| Hydration | [docs/agents/hydration.md](docs/agents/hydration.md) | SSR/client first paint must match; no console hydration errors |
+| Contributor hydration guide | [docs/Hydration.md](docs/Hydration.md) | PR checklist, CI, local dev habits |
 | Coding conventions | [docs/agents/coding-conventions.md](docs/agents/coding-conventions.md) | Naming, TypeScript rules, import order |
 | Architecture | [docs/agents/architecture.md](docs/agents/architecture.md) | File placement, data flow, component responsibilities |
 | Libraries | [docs/agents/libraries.md](docs/agents/libraries.md) | Approved deps, disallowed packages, how to add a dep |
@@ -50,3 +52,4 @@ This file is read automatically by AI coding agents (GitHub Copilot, Codex, Clau
 6. **New features require Playwright e2e tests before the PR is considered complete.**
 7. **Do not regress performance budgets** (see [docs/agents/performance.md](docs/agents/performance.md)).
 8. **Read `node_modules/next/dist/docs/` before writing any Next.js code.**
+9. **No hydration mismatches.** Server and client first paint must match; run `tests/e2e/hydration-mismatch.spec.ts` and follow [docs/agents/hydration.md](docs/agents/hydration.md).

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { ALT_BOOKLET_SLUG, PREF_KEYS } from "./helpers";
+import { ALT_BOOKLET_SLUG, PREF_KEYS, ensureCookieConsent } from "./helpers";
 
 test("home route restores last opened booklet from cookie", async ({ page, context }) => {
   await context.addCookies([
@@ -16,7 +16,14 @@ test("home route restores last opened booklet from cookie", async ({ page, conte
 });
 
 test("booklet landing route resumes to saved page for that slug", async ({ page, context }) => {
+  await ensureCookieConsent(page);
   await context.addCookies([
+    {
+      name: PREF_KEYS.viewMode,
+      value: "single",
+      domain: "localhost",
+      path: "/",
+    },
     {
       name: PREF_KEYS.lastPageBySlug,
       value: `${ALT_BOOKLET_SLUG}:6,hsc-collections:2`,
@@ -25,12 +32,19 @@ test("booklet landing route resumes to saved page for that slug", async ({ page,
     },
   ]);
 
-  await page.goto(`/booklets/${ALT_BOOKLET_SLUG}`);
-  await expect(page).toHaveURL(new RegExp(`/booklets/${ALT_BOOKLET_SLUG}/6`));
+  await page.goto(`/booklets/${ALT_BOOKLET_SLUG}?e2ePdfMock=success`);
+  await expect(page).toHaveURL(new RegExp(`/booklets/${ALT_BOOKLET_SLUG}/6(\\?.*)?$`));
 });
 
 test("home route falls back to last slug/page map when last-url is missing", async ({ page, context }) => {
+  await ensureCookieConsent(page);
   await context.addCookies([
+    {
+      name: PREF_KEYS.viewMode,
+      value: "single",
+      domain: "localhost",
+      path: "/",
+    },
     {
       name: PREF_KEYS.lastSlug,
       value: ALT_BOOKLET_SLUG,
@@ -45,7 +59,7 @@ test("home route falls back to last slug/page map when last-url is missing", asy
     },
   ]);
 
-  await page.goto("/");
+  await page.goto(`/?e2ePdfMock=success`);
   await expect(page).toHaveURL(new RegExp(`/booklets/${ALT_BOOKLET_SLUG}/4`));
 });
 
@@ -70,7 +84,14 @@ test("resume mode off keeps booklet landing route at page one", async ({ page, c
 });
 
 test("resume mode prompt asks before redirecting", async ({ page, context }) => {
+  await ensureCookieConsent(page);
   await context.addCookies([
+    {
+      name: PREF_KEYS.viewMode,
+      value: "single",
+      domain: "localhost",
+      path: "/",
+    },
     {
       name: PREF_KEYS.resumeMode,
       value: "prompt",
@@ -86,6 +107,6 @@ test("resume mode prompt asks before redirecting", async ({ page, context }) => 
   ]);
 
   page.once("dialog", (dialog) => dialog.accept());
-  await page.goto(`/booklets/${ALT_BOOKLET_SLUG}`);
+  await page.goto(`/booklets/${ALT_BOOKLET_SLUG}?e2ePdfMock=success`);
   await expect(page).toHaveURL(new RegExp(`/booklets/${ALT_BOOKLET_SLUG}/5`));
 });

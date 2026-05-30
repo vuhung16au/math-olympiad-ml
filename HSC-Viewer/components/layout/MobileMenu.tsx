@@ -4,6 +4,10 @@ import Link from "next/link";
 import { X } from "lucide-react";
 import { BOOKLETS } from "@/lib/booklets";
 
+function joinClasses(...parts: Array<string | false | null | undefined>): string {
+  return parts.filter(Boolean).join(" ");
+}
+
 export default function MobileMenu({
   isOpen,
   pathname,
@@ -16,21 +20,21 @@ export default function MobileMenu({
   return (
     <>
       <div
-        className={[
+        className={joinClasses(
           "fixed inset-0 z-30 bg-black/45 transition lg:hidden",
           isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-        ].join(" ")}
+        )}
         onClick={onClose}
         aria-hidden="true"
       />
       <aside
-        className={[
-          "fixed inset-y-0 left-0 z-40 w-[min(88vw,22rem)] border-r border-black/10 bg-[var(--color-purple)] px-4 py-5 text-white shadow-2xl transition-transform duration-300 lg:hidden",
+        className={joinClasses(
+          "fixed inset-y-0 left-0 z-40 flex w-[min(88vw,22rem)] flex-col overflow-hidden border-r border-black/10 bg-[var(--color-purple)] px-4 py-5 text-white shadow-2xl transition-transform duration-300 lg:hidden",
           isOpen ? "translate-x-0" : "-translate-x-full",
-        ].join(" ")}
+        )}
         aria-label="Mobile booklet navigation"
       >
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex shrink-0 items-center justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.24em] text-white/65">Navigate</p>
             <p className="text-lg font-semibold">HSC Booklets</p>
@@ -45,7 +49,7 @@ export default function MobileMenu({
           </button>
         </div>
 
-        <nav className="space-y-2">
+        <nav className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain">
           {BOOKLETS.map((booklet) => {
             const isActive = pathname === `/booklets/${booklet.slug}`;
 
@@ -71,12 +75,12 @@ export default function MobileMenu({
                 href={`/booklets/${booklet.slug}`}
                 onClick={onClose}
                 aria-current={isActive ? "page" : undefined}
-                className={[
+                className={joinClasses(
                   "block rounded-2xl border-l-4 px-3 py-3 text-sm font-medium transition",
                   isActive
                     ? "border-l-[var(--color-red)] bg-white text-[var(--color-purple)] ring-1 ring-white/60"
                     : "border-l-transparent bg-white/5 text-white/88 hover:bg-white/12 hover:text-white active:bg-white active:text-[var(--color-purple)]",
-                ].join(" ")}
+                )}
               >
                 {booklet.title}
               </Link>

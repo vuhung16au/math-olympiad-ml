@@ -1,12 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { PanelLeftOpen } from "lucide-react";
 import Header from "@/components/layout/Header";
 import ReaderMobileTopBar from "@/components/layout/ReaderMobileTopBar";
 import Sidebar from "@/components/layout/Sidebar";
-import MobileMenu from "@/components/layout/MobileMenu";
+
+const MobileMenu = dynamic(() => import("@/components/layout/MobileMenu"), {
+  ssr: false,
+});
 import Footer from "@/components/common/Footer";
 import CookieConsentBanner from "@/components/common/CookieConsentBanner";
 import OfflineBanner from "@/components/common/OfflineBanner";

@@ -10,9 +10,12 @@ test.describe("Mobile reader (narrow viewport)", () => {
     await gotoViewer(page, { mockMode: "success", slug: BOOKLET_SLUG });
 
     await page.getByRole("button", { name: "Open booklet navigation" }).click();
-    await expect(page.getByRole("navigation", { name: "Mobile booklet navigation" })).toBeVisible();
+    await expect(page.getByRole("complementary", { name: "Mobile booklet navigation" })).toBeVisible();
 
-    await page.getByRole("link", { name: "HSC Vectors", exact: true }).click();
+    const menu = page.getByRole("complementary", { name: "Mobile booklet navigation" });
+    const vectorsLink = menu.getByRole("link", { name: "HSC Vectors", exact: true });
+    await vectorsLink.scrollIntoViewIfNeeded();
+    await vectorsLink.click();
     await expect(page).toHaveURL(new RegExp(`/booklets/${ALT_BOOKLET_SLUG}`));
   });
 
@@ -31,10 +34,14 @@ test.describe("Mobile reader (narrow viewport)", () => {
     await expect(page.getByRole("button", { name: "Zoom in" })).toBeVisible();
 
     await expect(page.getByRole("button", { name: "Show viewer tools" })).toBeVisible();
-    await expect(page.getByText("Share this page")).toHaveCount(0);
+    await expect(
+      page.locator(".lg\\:hidden").getByText("Share this page", { exact: true }),
+    ).toHaveCount(0);
 
     await page.getByRole("button", { name: "Show viewer tools" }).click();
-    await expect(page.getByText("Share this page", { exact: true })).toBeVisible();
+    await expect(
+      page.locator(".lg\\:hidden").getByText("Share this page", { exact: true }),
+    ).toBeVisible();
     await expect(page.getByRole("button", { name: "Hide viewer tools" })).toBeVisible();
   });
 

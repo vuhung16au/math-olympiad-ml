@@ -48,6 +48,10 @@ For network-level behavior, tests may intercept `*.pdf` requests and return:
   - key controls remain usable on mobile/tablet/desktop
 - `tests/e2e/restore-last-session.spec.ts`
   - home route restores last opened booklet via cookie
+- `tests/e2e/hydration-mismatch.spec.ts`
+  - core routes must not log React hydration mismatch console errors
+
+See [Hydration.md](Hydration.md) for PR checklist and prevention habits.
 
 ## Local Run
 

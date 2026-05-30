@@ -5,7 +5,7 @@ test.describe("Continuous PDF view (desktop)", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
   test("lazy-loads only nearby pages in continuous mode", async ({ page }) => {
-    await gotoViewer(page, { mockMode: "success", page: 1 });
+    await gotoViewer(page, { mockMode: "success", page: 1, viewMode: "continuous" });
 
     await expect(page.getByRole("button", { name: "Continuous view" })).toHaveAttribute("aria-pressed", "true");
     await expect(page.getByTestId("mock-pdf-page-1")).toBeVisible();
