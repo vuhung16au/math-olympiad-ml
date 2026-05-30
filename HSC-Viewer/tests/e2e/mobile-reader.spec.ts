@@ -37,4 +37,13 @@ test.describe("Mobile reader (narrow viewport)", () => {
     await expect(page.getByText("Share this page", { exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: "Hide viewer tools" })).toBeVisible();
   });
+
+  test("defaults to single-page mode and renders one mock page", async ({ page }) => {
+    await gotoViewer(page, { mockMode: "success", page: 3 });
+
+    await expect(page.getByTestId("mock-pdf-page-3")).toBeVisible();
+    await expect(page.getByTestId("mock-pdf-page-1")).toHaveCount(0);
+    await expect(page.getByTestId("mock-pdf-page-2")).toHaveCount(0);
+    await expect(page.getByTestId("mock-pdf-page-4")).toHaveCount(0);
+  });
 });

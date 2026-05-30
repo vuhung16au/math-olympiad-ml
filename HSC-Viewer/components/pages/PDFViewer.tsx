@@ -17,7 +17,15 @@ import {
   trackPdfNavigation,
   trackPdfZoom,
 } from "@/lib/analytics";
-import { validatePageNumber, validateScale } from "@/lib/pdf-helpers";
+import {
+  CONTINUOUS_RENDER_BUFFER,
+  expandPageWindow,
+  fitWidthScale,
+  isMobilePdfViewport,
+  PDF_PAGE_ASPECT_RATIO,
+  validatePageNumber,
+  validateScale,
+} from "@/lib/pdf-helpers";
 import {
   getLastPageForSlug,
   getPref,
@@ -200,7 +208,10 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const currentPageRef = useRef(1);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(Math.max(1, Math.floor(initialPage)));
-  const [viewMode, setViewMode] = useState<"single" | "continuous">("continuous");
+  const [viewMode, setViewMode] = useState<"single" | "continuous">("single");
+  const [renderedPages, setRenderedPages] = useState<Set<number>>(() =>
+    new Set([Math.max(1, Math.floor(initialPage))]),
+  );
   const [readingTheme, setReadingTheme] = useState<ReadingTheme>("light");
   const [scale, setScale] = useState(PDF_DEFAULTS.defaultScale);
   const [arePrefsHydrated, setArePrefsHydrated] = useState(false);
@@ -267,9 +278,15 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
 
   // Hydrate client-only toolbar preferences after mount to avoid SSR hydration mismatches.
   useEffect(() => {
+    const isMobile = isMobilePdfViewport();
     const savedViewMode = getPref(PREF_KEYS.viewMode);
-    if (savedViewMode === "single" || savedViewMode === "continuous") {
+    if (isMobile) {
+      // Continuous scroll mounts many canvases and can crash mobile WebKit tabs.
+      setViewMode("single");
+    } else if (savedViewMode === "single" || savedViewMode === "continuous") {
       setViewMode(savedViewMode);
+    } else {
+      setViewMode("continuous");
     }
 
     const savedReadingTheme = getPref(PREF_KEYS.readingTheme);
@@ -281,6 +298,9 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     if (savedScale) {
       const parsed = parseFloat(savedScale);
       setScale(validateScale(Number.isFinite(parsed) ? parsed : PDF_DEFAULTS.defaultScale));
+    } else if (isMobile) {
+      const approxWidth = Math.max(280, window.innerWidth - 64);
+      setScale(fitWidthScale(approxWidth));
     }
 
     const savedOutlineTab = getPref(PREF_KEYS.outlineTab);
@@ -345,10 +365,19 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   // Reset jump state whenever a new booklet/page combination is loaded.
   useEffect(() => {
     didInitialJumpRef.current = false;
-  }, [booklet.slug, initialPage]);
+    setRenderedPages(expandPageWindow(Math.max(1, Math.floor(initialPage)), Math.max(numPages, 1)));
+  }, [booklet.slug, initialPage, numPages]);
 
   // Scroll to a specific page in continuous mode
   const scrollToPage = useCallback((pageNum: number) => {
+    if (numPages > 0) {
+      setRenderedPages((prev) => {
+        const next = new Set(prev);
+        expandPageWindow(pageNum, numPages).forEach((page) => next.add(page));
+        return next;
+      });
+    }
+
     const el = pageRefs.current.get(pageNum);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -357,7 +386,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     trackPdfNavigation(booklet.title, pageNum, numPages);
   }, [booklet.title, numPages]);
 
-  // IntersectionObserver: track the most-visible page in continuous mode
+  // IntersectionObserver: track the most-visible page and lazily mount nearby pages in continuous mode.
   useEffect(() => {
     if (viewMode !== "continuous" || numPages === 0) return;
 
@@ -366,7 +395,19 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       (entries) => {
         for (const entry of entries) {
           const n = Number((entry.target as HTMLElement).dataset.pageNumber);
-          if (n) ratioMap.set(n, entry.intersectionRatio);
+          if (!n) {
+            continue;
+          }
+
+          ratioMap.set(n, entry.intersectionRatio);
+
+          if (entry.isIntersecting) {
+            setRenderedPages((prev) => {
+              const next = new Set(prev);
+              expandPageWindow(n, numPages).forEach((page) => next.add(page));
+              return next;
+            });
+          }
         }
         let maxRatio = -1;
         let mostVisible = currentPageRef.current;
@@ -375,7 +416,10 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
         });
         if (maxRatio > 0) setCurrentPage(mostVisible);
       },
-      { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] },
+      {
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        rootMargin: `${CONTINUOUS_RENDER_BUFFER * 100}% 0px`,
+      },
     );
 
     pageRefs.current.forEach((el, pageNum) => {
@@ -402,6 +446,12 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       return;
     }
 
+    setRenderedPages((prev) => {
+      const next = new Set(prev);
+      expandPageWindow(targetPage, numPages).forEach((page) => next.add(page));
+      return next;
+    });
+
     const timer = window.setTimeout(() => {
       const el = pageRefs.current.get(targetPage);
       if (!el) {
@@ -420,6 +470,11 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   useEffect(() => {
     if (viewMode === "continuous" && numPages > 0) {
       const target = currentPageRef.current;
+      setRenderedPages((prev) => {
+        const next = new Set(prev);
+        expandPageWindow(target, numPages).forEach((page) => next.add(page));
+        return next;
+      });
       setTimeout(() => {
         const el = pageRefs.current.get(target);
         if (el) el.scrollIntoView({ block: "start" });
@@ -457,6 +512,10 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     ? safeCurrentPage - 1
     : safeCurrentPage;
   const spreadPageHeight = Math.max(320, Math.floor(containerHeight - 36));
+  const estimatedContinuousPageHeight = useMemo(() => {
+    const pageWidth = Math.min(containerWidth, 1080);
+    return Math.max(320, Math.round(pageWidth * scale * PDF_PAGE_ASPECT_RATIO));
+  }, [containerWidth, scale]);
 
   const pageStep = isTwoPageSpread ? 2 : 1;
 
@@ -541,7 +600,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       return;
     }
 
-    const fitScale = validateScale(containerWidth / 800);
+    const fitScale = fitWidthScale(containerWidth);
     setScale(fitScale);
     trackPdfAction(booklet.title, "fit_width");
   };
@@ -897,15 +956,24 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                             if (el) pageRefs.current.set(pageNum, el);
                             else pageRefs.current.delete(pageNum);
                           }}
+                          data-page-number={pageNum}
                           style={{ filter: pdfFilter }}
                           className="w-full max-w-[1080px]"
                         >
-                          <div
-                            data-testid={`mock-pdf-page-${pageNum}`}
-                            className="flex min-h-[520px] items-center justify-center rounded-[20px] border border-black/10 bg-white/95 text-sm font-semibold text-[var(--color-purple)] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
-                          >
-                            Mock PDF Page {pageNum}
-                          </div>
+                          {renderedPages.has(pageNum) ? (
+                            <div
+                              data-testid={`mock-pdf-page-${pageNum}`}
+                              className="flex min-h-[520px] items-center justify-center rounded-[20px] border border-black/10 bg-white/95 text-sm font-semibold text-[var(--color-purple)] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                            >
+                              Mock PDF Page {pageNum}
+                            </div>
+                          ) : (
+                            <div
+                              aria-hidden="true"
+                              className="rounded-[20px] border border-black/10 bg-white/80 shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                              style={{ minHeight: estimatedContinuousPageHeight }}
+                            />
+                          )}
                         </div>
                       ))}
                     </div>
@@ -942,6 +1010,14 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                       const { numPages: loadedPages } = loadedDocument;
 
                       setNumPages(loadedPages);
+                      setRenderedPages((prev) => {
+                        const next = new Set(prev);
+                        expandPageWindow(
+                          validatePageNumber(currentPageRef.current, loadedPages),
+                          loadedPages,
+                        ).forEach((page) => next.add(page));
+                        return next;
+                      });
                       setCurrentPage((page) => validatePageNumber(page, loadedPages));
                       setError(null);
                       setOutlineItems([]);
@@ -980,18 +1056,27 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                               if (el) pageRefs.current.set(pageNum, el);
                               else pageRefs.current.delete(pageNum);
                             }}
+                            data-page-number={pageNum}
                             style={{ filter: pdfFilter }}
                           >
-                            <Page
-                              pageNumber={pageNum}
-                              scale={scale}
-                              width={Math.min(containerWidth, 1080)}
-                              loading={pageNum === 1 ? <LoadingSpinner label="Rendering page" /> : undefined}
-                              renderTextLayer
-                              renderAnnotationLayer
-                              onRenderTextLayerError={handleTextLayerError}
-                              className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
-                            />
+                            {renderedPages.has(pageNum) ? (
+                              <Page
+                                pageNumber={pageNum}
+                                scale={scale}
+                                width={Math.min(containerWidth, 1080)}
+                                loading={pageNum === 1 ? <LoadingSpinner label="Rendering page" /> : undefined}
+                                renderTextLayer
+                                renderAnnotationLayer
+                                onRenderTextLayerError={handleTextLayerError}
+                                className="overflow-hidden rounded-[20px] shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                              />
+                            ) : (
+                              <div
+                                aria-hidden="true"
+                                className="overflow-hidden rounded-[20px] bg-white/80 shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
+                                style={{ minHeight: estimatedContinuousPageHeight }}
+                              />
+                            )}
                           </div>
                         ))}
                       </div>
