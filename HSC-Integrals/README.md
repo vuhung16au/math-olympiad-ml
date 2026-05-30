@@ -17,10 +17,10 @@ Software/code remains MIT-licensed per the repository root LICENSE.
 
 The booklet `HSC-Integrals.tex` is organised in two parts:
 
-- **Part 1**: Detailed walk-throughs (15 problems) with strategy paragraphs, complete step-by-step solutions, takeaways boxes, and alternative approaches where relevant. Divided into basic (5), medium (5), and advanced (5) difficulty levels.
-- **Part 2**: Concise write-ups with boxed hints and solution sketches (~45 problems). Each problem includes a boxed hint styled with `styles/dl101-hints`, keeping the presentation aligned with the boxed guidance used throughout Part 1, before a short solution sketch. Divided into basic (~15), medium (~15), and advanced (~15) difficulty levels.
+- **Part 1**: Detailed walk-throughs with strategy paragraphs, complete step-by-step solutions, takeaways boxes, and alternative approaches where relevant. Divided into basic, medium, and advanced difficulty levels.
+- **Part 2**: Concise write-ups with boxed hints and solution sketches. Each problem includes a boxed hint styled with `styles/dl101-hints`, keeping the presentation aligned with the boxed guidance used throughout Part 1, before a short solution sketch. Divided into basic, medium, and advanced difficulty levels.
 
-The collection contains **~60 total problems** covering a comprehensive range of integration techniques and applications.
+The collection covers a comprehensive range of integration techniques and applications.
 
 ## What This Collection Focuses On
 
@@ -126,8 +126,8 @@ make pdf && make open
   - `00-basic.tex`: Comprehensive fundamentals review
   - `01.tex` - `64.tex`: Sample problems from various sources
 - `problems/`: Part-wise problem+solution snippets organized by difficulty that are `\input` into the main TeX file:
-  - `part1-easy.tex`, `part1-medium.tex`, `part1-hard.tex` (5 problems each)
-  - `part2-easy-hints.tex`, `part2-medium-hints.tex`, `part2-hard-hints.tex` (~15 problems each, boxed-hint format used by the booklet)
+  - `part1-easy.tex`, `part1-medium.tex`, `part1-hard.tex` (detailed solutions)
+  - `part2-easy-hints.tex`, `part2-medium-hints.tex`, `part2-hard-hints.tex` (boxed-hint format used by the booklet)
   - `appendix-a-formulas.tex`: Formula sheet
   - `appendix-b-index.tex`: Problem index by technique
   - `appendix-c-substitutions.tex`: Common substitutions guide
