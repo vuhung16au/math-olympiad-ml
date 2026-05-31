@@ -8,7 +8,35 @@ The point $P(a, b)$ is the point of intersection in the first quadrant, so $a>0$
 \vspace{0.5em}
 \noindent
 \begin{center}
-\includegraphics[width=0.7\textwidth]{images/13-01.png}
+    \begin{tikzpicture}[scale=1.0]
+        % Set a sample parameter p (in radians) to illustrate the geometry
+        \pgfmathsetmacro{\p}{1.2}
+        \pgfmathsetmacro{\cosP}{cos(\p r)}
+        \pgfmathsetmacro{\sinP}{sin(\p r)}
+        \pgfmathsetmacro{\k}{\cosP - \p/\sinP}
+        \pgfmathsetmacro{\radius}{sqrt( (\p)^2 + (\cosP-\k)^2 )}
+
+        % Axes
+        \draw[->,gray!80] (-3,0) -- (3,0) node[below right]{$x$};
+        \draw[->,gray!80] (0,-3) -- (0,2.5) node[above left]{$y$};
+
+        % Cosine curve
+        \draw[thick,blue!60] plot[domain=-3:3,samples=200] (\x,{cos(\x r)});
+
+        % Circle centered at C(0,k)
+        \draw[thick,red!60] (0,\k) circle (\radius);
+
+        % Points C and P
+        \fill[red!70] (0,\k) circle (2pt) node[below left]{$C(0,k)$};
+        \fill[green!70!black] (\p,\cosP) circle (2pt) node[above right]{$P(p,\cos p)$};
+
+        % Normal segment CP
+        \draw[very thick,teal!80!black] (0,\k) -- (\p,\cosP);
+
+        % Light guide from P to x-axis for reference
+        \draw[dashed,gray!60] (\p,0) -- (\p,\cosP) node[midway,right]{\small $p$};
+        \draw[dashed,gray!60] (0,\cosP) -- (\p,\cosP) node[midway,above]{\small $\cos p$};
+    \end{tikzpicture}
 \end{center}
 \vspace{0.3em}
 
