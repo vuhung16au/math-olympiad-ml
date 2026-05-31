@@ -38,6 +38,7 @@ bunx playwright test tests/e2e/my-spec.spec.ts
 | `navigation-and-state.spec.ts` | Next/prev/page-input updates route and `last-url` cookie |
 | `toolbar-and-zoom.spec.ts` | Tooltip attributes and zoom cookie persistence |
 | `navigator-outline.spec.ts` | Pages and outline navigation jump to expected targets |
+| `continuous-view.spec.ts` | Continuous lazy loading and fullscreen page/outline navigation |
 | `error-and-recovery.spec.ts` | PDF load failure shows user-facing error state |
 | `responsive.spec.ts` | Key controls usable at mobile/tablet/desktop viewports |
 | `restore-last-session.spec.ts` | Home route restores last booklet via cookie |

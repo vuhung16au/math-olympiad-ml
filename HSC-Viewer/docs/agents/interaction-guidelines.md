@@ -19,6 +19,7 @@ Every interactive control must have a tooltip:
 - Previous/Next buttons must be disabled (not hidden) on the first and last pages respectively, with an `aria-disabled="true"` attribute.
 - The page number input must accept free-text entry; on `Enter` or blur, clamp the value to `[1, totalPages]` and navigate.
 - When navigating, show a loading indicator if the new page takes > 200 ms to render.
+- In **continuous view**, page-grid and outline jumps must scroll the active scroll container. When the PDF stage is fullscreen, scroll the stage element (not the document viewport) and use it as the `IntersectionObserver` root so current-page tracking stays in sync.
 
 ## Zoom
 
@@ -52,3 +53,4 @@ Every interactive control must have a tooltip:
 - [ ] Page input clamps out-of-range values
 - [ ] Sidebar dismisses on outside tap on mobile
 - [ ] Loading spinner has accessible label
+- [ ] Continuous fullscreen page/outline jumps scroll the stage and keep current-page tracking in sync

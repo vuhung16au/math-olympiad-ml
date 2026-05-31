@@ -119,6 +119,31 @@ export async function gotoViewer(page: Page, options: ViewerUrlOptions = {}): Pr
   await expect(page.getByRole("button", { name: "Previous page" })).toBeVisible();
 }
 
+export async function enterStageFullscreen(page: Page): Promise<void> {
+  await page.getByRole("button", { name: "Fullscreen" }).click();
+  await expect.poll(async () =>
+    page.evaluate(() => document.fullscreenElement?.matches("[data-pdf-stage]") ?? false),
+  ).toBe(true);
+}
+
+export async function expectMockPageVisibleInStage(page: Page, pageNumber: number): Promise<void> {
+  await expect.poll(async () =>
+    page.evaluate((targetPage) => {
+      const stage = document.fullscreenElement as HTMLElement | null;
+      const pageEl = document.querySelector(`[data-testid="mock-pdf-page-${targetPage}"]`) as HTMLElement | null;
+      if (!stage || !pageEl) {
+        return false;
+      }
+
+      const stageRect = stage.getBoundingClientRect();
+      const pageRect = pageEl.getBoundingClientRect();
+      const visibleTop = Math.max(stageRect.top, pageRect.top);
+      const visibleBottom = Math.min(stageRect.bottom, pageRect.bottom);
+      return visibleBottom - visibleTop > 40;
+    }, pageNumber),
+  ).toBe(true);
+}
+
 export function visiblePageNumberInput(page: Page) {
   return page.locator('[data-testid="page-number-input"]:visible').first();
 }

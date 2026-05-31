@@ -21,8 +21,10 @@ import {
   CONTINUOUS_RENDER_BUFFER,
   expandPageWindow,
   fitWidthScale,
+  getContinuousScrollRoot,
   isMobilePdfViewport,
   PDF_PAGE_ASPECT_RATIO,
+  scrollContinuousPageIntoView,
   validatePageNumber,
   validateScale,
 } from "@/lib/pdf-helpers";
@@ -206,6 +208,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const navigatorDragOffsetRef = useRef<{ x: number; y: number } | null>(null);
   const pageRefs = useRef<Map<number, HTMLDivElement>>(new Map());
   const currentPageRef = useRef(1);
+  const suppressIntersectionUntilRef = useRef(0);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(Math.max(1, Math.floor(initialPage)));
   const [viewMode, setViewMode] = useState<"single" | "continuous">("single");
@@ -368,6 +371,15 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     setRenderedPages(expandPageWindow(Math.max(1, Math.floor(initialPage)), Math.max(numPages, 1)));
   }, [booklet.slug, initialPage, numPages]);
 
+  const scrollContinuousPage = useCallback((pageNum: number, behavior: ScrollBehavior = "smooth") => {
+    const el = pageRefs.current.get(pageNum);
+    if (!el) {
+      return;
+    }
+
+    scrollContinuousPageIntoView(el, stageRef.current, behavior);
+  }, []);
+
   // Scroll to a specific page in continuous mode
   const scrollToPage = useCallback((pageNum: number) => {
     if (numPages > 0) {
@@ -378,18 +390,21 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       });
     }
 
-    const el = pageRefs.current.get(pageNum);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    suppressIntersectionUntilRef.current = Date.now() + 900;
     setCurrentPage(pageNum);
     trackPdfNavigation(booklet.title, pageNum, numPages);
-  }, [booklet.title, numPages]);
+
+    window.requestAnimationFrame(() => {
+      scrollContinuousPage(pageNum);
+    });
+  }, [booklet.title, numPages, scrollContinuousPage]);
 
   // IntersectionObserver: track the most-visible page and lazily mount nearby pages in continuous mode.
   useEffect(() => {
     if (viewMode !== "continuous" || numPages === 0) return;
 
+    const stage = stageRef.current;
+    const observerRoot = getContinuousScrollRoot(stage);
     const ratioMap = new Map<number, number>();
     const observer = new IntersectionObserver(
       (entries) => {
@@ -409,6 +424,11 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
             });
           }
         }
+
+        if (Date.now() < suppressIntersectionUntilRef.current) {
+          return;
+        }
+
         let maxRatio = -1;
         let mostVisible = currentPageRef.current;
         ratioMap.forEach((ratio, pageNum) => {
@@ -418,6 +438,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       },
       {
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        root: observerRoot,
         rootMargin: `${CONTINUOUS_RENDER_BUFFER * 100}% 0px`,
       },
     );
@@ -428,7 +449,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     });
 
     return () => observer.disconnect();
-  }, [viewMode, numPages]);
+  }, [viewMode, numPages, isFullscreenStage]);
 
   // For deep links like /booklets/:slug/:page, jump once after pages mount in continuous mode.
   useEffect(() => {
@@ -458,7 +479,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
         return;
       }
 
-      el.scrollIntoView({ block: "start" });
+      suppressIntersectionUntilRef.current = Date.now() + 900;
+      scrollContinuousPageIntoView(el, stageRef.current, "auto");
       setCurrentPage(targetPage);
       didInitialJumpRef.current = true;
     }, 120);
@@ -477,7 +499,10 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       });
       setTimeout(() => {
         const el = pageRefs.current.get(target);
-        if (el) el.scrollIntoView({ block: "start" });
+        if (el) {
+          suppressIntersectionUntilRef.current = Date.now() + 900;
+          scrollContinuousPageIntoView(el, stageRef.current, "auto");
+        }
       }, 80);
     }
   }, [viewMode, numPages]);
@@ -942,7 +967,11 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
           <div
             ref={stageRef}
             data-pdf-stage
-            className="min-h-[70vh] bg-[color:color-mix(in_srgb,var(--color-ivory)_72%,white)] p-3 pb-[calc(env(safe-area-inset-bottom)+4.25rem)] sm:p-5 sm:pb-[calc(env(safe-area-inset-bottom)+4rem)] lg:pb-5"
+            className={`bg-[color:color-mix(in_srgb,var(--color-ivory)_72%,white)] p-3 pb-[calc(env(safe-area-inset-bottom)+4.25rem)] sm:p-5 sm:pb-[calc(env(safe-area-inset-bottom)+4rem)] lg:pb-5 ${
+              isFullscreenStage
+                ? "h-full max-h-full min-h-0 overflow-y-auto overscroll-contain"
+                : "min-h-[70vh]"
+            }`}
           >
             <div className="grid min-h-[66vh] gap-4 lg:grid-cols-[minmax(0,1fr)_260px]">
               <div className="order-2 lg:order-1">

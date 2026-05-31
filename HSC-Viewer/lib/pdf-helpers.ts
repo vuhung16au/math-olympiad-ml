@@ -70,3 +70,31 @@ export function isMobilePdfViewport(): boolean {
 export function fitWidthScale(containerWidth: number, referenceWidth = 800): number {
   return validateScale(containerWidth / referenceWidth);
 }
+
+/** Scroll root for continuous PDF view: the fullscreen stage, or the window viewport. */
+export function getContinuousScrollRoot(stage: HTMLElement | null): HTMLElement | null {
+  if (stage && document.fullscreenElement === stage) {
+    return stage;
+  }
+
+  return null;
+}
+
+/** Scroll a continuous-view page into view, using the stage when fullscreen is active. */
+export function scrollContinuousPageIntoView(
+  pageEl: HTMLElement,
+  stage: HTMLElement | null,
+  behavior: ScrollBehavior = "smooth",
+): void {
+  const scrollRoot = getContinuousScrollRoot(stage);
+
+  if (scrollRoot) {
+    const rootRect = scrollRoot.getBoundingClientRect();
+    const pageRect = pageEl.getBoundingClientRect();
+    const targetTop = scrollRoot.scrollTop + (pageRect.top - rootRect.top);
+    scrollRoot.scrollTo({ top: Math.max(0, targetTop), behavior });
+    return;
+  }
+
+  pageEl.scrollIntoView({ behavior, block: "start" });
+}

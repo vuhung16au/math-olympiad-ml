@@ -51,7 +51,7 @@ lib/booklets.ts (BOOKLETS array)
 | `lib/constants.ts` | `COLORS`, `BREAKPOINTS`, `PDF_DEFAULTS`, `REPO_LINKS`, `APP_NAME` |
 | `lib/preferences.ts` | Cookie helpers: `getPref()`, `setPref()`, `PREF_KEYS`, page-by-slug persistence |
 | `lib/analytics.ts` | Thin wrappers around `@vercel/analytics` `track()` |
-| `lib/pdf-helpers.ts` | `fetchPdf()`, `validatePageNumber()`, `validateScale()`, `PDFState` type |
+| `lib/pdf-helpers.ts` | `fetchPdf()`, `validatePageNumber()`, `validateScale()`, continuous scroll helpers (`getContinuousScrollRoot`, `scrollContinuousPageIntoView`) |
 
 ## State management summary
 
@@ -72,6 +72,7 @@ See [docs/agents/state-management.md](state-management.md) for the full policy. 
 - **No authentication.** The app is fully public.
 - **Static export.** The build output is a set of static HTML/JS/CSS files deployed to Vercel. Do not use APIs that require a Node.js server at runtime (e.g., `app/api/` routes are not currently used and should not be added without discussion).
 - **`pdfjs` worker** is loaded from a CDN (`cdnjs.cloudflare.com`). Do not change this without updating CSP headers (see [security.md](security.md)).
+- **Continuous fullscreen scroll.** When `[data-pdf-stage]` is fullscreen, it must be a bounded scroll container (`overflow-y: auto`, `height: 100%`). Page/outline jumps and the continuous-mode `IntersectionObserver` must target the stage — not the document viewport — or navigation will appear broken.
 
 ## Adding a new booklet
 

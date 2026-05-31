@@ -18,7 +18,7 @@ export const BOOKLETS: Booklet[] = [
     title: "HSC Sequences",
     slug: "hsc-sequences",
     pdfUrl: `${GITHUB_RAW_URL}/HSC-Sequences/releases/HSC-Sequences.pdf`,
-    thumbnailPath: "/thumbnails/hsc-sequences.png",
+    thumbnailPath: "/thumbnails/hsc-math-extension-2-book.png",
     description: "Sequences and series techniques for HSC Mathematics, with worked examples and problem-solving strategies.",
     pageCount: 51,
     isAvailable: true,
