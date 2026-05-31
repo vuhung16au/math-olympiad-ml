@@ -102,18 +102,30 @@ export async function ensureCookieConsent(page: Page): Promise<void> {
   ]);
 }
 
-export async function gotoViewer(page: Page, options: ViewerUrlOptions = {}): Promise<void> {
-  const viewMode = options.viewMode ?? "single";
+export async function expectContinuousViewActive(page: Page): Promise<void> {
+  await expect(page.getByRole("button", { name: "Continuous view" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: "Single page view" })).toHaveAttribute("aria-pressed", "false");
+}
 
+export async function expectSinglePageViewActive(page: Page): Promise<void> {
+  await expect(page.getByRole("button", { name: "Single page view" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: "Continuous view" })).toHaveAttribute("aria-pressed", "false");
+}
+
+export async function gotoViewer(page: Page, options: ViewerUrlOptions = {}): Promise<void> {
   await ensureCookieConsent(page);
-  await page.context().addCookies([
-    {
-      name: PREF_KEYS.viewMode,
-      value: viewMode,
-      domain: "localhost",
-      path: "/",
-    },
-  ]);
+
+  if (options.viewMode) {
+    await page.context().addCookies([
+      {
+        name: PREF_KEYS.viewMode,
+        value: options.viewMode,
+        domain: "localhost",
+        path: "/",
+      },
+    ]);
+  }
+
   await page.goto(viewerUrl(options));
   await expect(page.getByTestId("cookie-consent-banner")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Previous page" })).toBeVisible();

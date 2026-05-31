@@ -45,12 +45,11 @@ test.describe("Mobile reader (narrow viewport)", () => {
     await expect(page.getByRole("button", { name: "Hide viewer tools" })).toBeVisible();
   });
 
-  test("defaults to single-page mode and renders one mock page", async ({ page }) => {
+  test("continuous view toggle is available in expanded mobile tools", async ({ page }) => {
     await gotoViewer(page, { mockMode: "success", page: 3 });
 
-    await expect(page.getByTestId("mock-pdf-page-3")).toBeVisible();
-    await expect(page.getByTestId("mock-pdf-page-1")).toHaveCount(0);
-    await expect(page.getByTestId("mock-pdf-page-2")).toHaveCount(0);
-    await expect(page.getByTestId("mock-pdf-page-4")).toHaveCount(0);
+    await page.getByRole("button", { name: "Show viewer tools" }).click();
+    await expect(page.getByRole("button", { name: "Continuous view" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Single page view" })).toBeVisible();
   });
 });

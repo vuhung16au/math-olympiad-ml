@@ -211,7 +211,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const suppressIntersectionUntilRef = useRef(0);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(Math.max(1, Math.floor(initialPage)));
-  const [viewMode, setViewMode] = useState<"single" | "continuous">("single");
+  const [viewMode, setViewMode] = useState<"single" | "continuous">("continuous");
   const [renderedPages, setRenderedPages] = useState<Set<number>>(() =>
     new Set([Math.max(1, Math.floor(initialPage))]),
   );
@@ -283,10 +283,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   useEffect(() => {
     const isMobile = isMobilePdfViewport();
     const savedViewMode = getPref(PREF_KEYS.viewMode);
-    if (isMobile) {
-      // Continuous scroll mounts many canvases and can crash mobile WebKit tabs.
-      setViewMode("single");
-    } else if (savedViewMode === "single" || savedViewMode === "continuous") {
+    if (savedViewMode === "single" || savedViewMode === "continuous") {
       setViewMode(savedViewMode);
     } else {
       setViewMode("continuous");

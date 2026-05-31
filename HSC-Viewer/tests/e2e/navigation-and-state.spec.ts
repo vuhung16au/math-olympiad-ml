@@ -2,10 +2,8 @@ import { expect, test } from "@playwright/test";
 import { PREF_KEYS, getCookieValue, gotoViewer, visiblePageNumberInput } from "./helpers";
 
 test("next/previous/page input updates route and last-url cookie", async ({ page, context }) => {
-  await gotoViewer(page, { page: 1, mockMode: "success" });
-  await expect(page.getByRole("button", { name: "Next page" })).toBeEnabled();
-
-  await page.getByRole("button", { name: "Single page view" }).click();
+  await gotoViewer(page, { page: 1, mockMode: "success", viewMode: "single" });
+  await expect.poll(async () => page.getByRole("button", { name: "Next page" }).isEnabled()).toBe(true);
 
   const pageInput = visiblePageNumberInput(page);
   await pageInput.click();

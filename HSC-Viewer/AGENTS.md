@@ -53,3 +53,4 @@ This file is read automatically by AI coding agents (GitHub Copilot, Codex, Clau
 7. **Do not regress performance budgets** (see [docs/agents/performance.md](docs/agents/performance.md)).
 8. **Read `node_modules/next/dist/docs/` before writing any Next.js code.**
 9. **No hydration mismatches.** Server and client first paint must match; run `tests/e2e/hydration-mismatch.spec.ts` and follow [docs/agents/hydration.md](docs/agents/hydration.md).
+10. **Default PDF view mode is continuous.** On a first visit (no `hsc_view_mode` cookie), the booklet viewer must open in **Continuous view** on desktop and mobile. Only switch to single-page when the user toggles it or a saved cookie says so.
