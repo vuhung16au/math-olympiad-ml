@@ -6,7 +6,56 @@ Let $OPQR$ be a parallelogram with $\vec{OP} = \mathbf{p}$ and $\vec{OR} = \math
 \vspace{0.5em}
 \noindent
 \begin{center}
-\includegraphics[width=0.6\textwidth]{images/32-01.png}
+\begin{tikzpicture}[scale=1.5, >=stealth]
+    % Coordinates of vertices
+    \coordinate (O) at (0,0);
+    \coordinate (R) at (4.5,0);
+    \coordinate (P) at (2,3);
+    \coordinate (Q) at (6.5,3);
+    \coordinate (S) at (5.5,1.5);
+    \coordinate (T) at (3.667,1);
+    
+    % Midpoints for vector arrows
+    \coordinate (midP) at (1,1.5);
+    \coordinate (midR) at (2.25,0);
+    
+    % Draw vector OP (p) with arrow in the middle
+    \draw[->, thick] (O) -- (midP);
+    \draw[thick] (midP) -- (P);
+    
+    % Draw vector OR (r) with arrow in the middle
+    \draw[->, thick] (O) -- (midR);
+    \draw[thick] (midR) -- (R);
+    
+    % Draw rest of the parallelogram sides
+    \draw[thick] (P) -- (Q);
+    \draw[thick] (Q) -- (R);
+    
+    % Draw diagonals and segments
+    \draw[thick] (P) -- (R);
+    \draw[thick] (O) -- (S);
+    
+    % Draw dot at S
+    \fill (S) circle (2pt);
+    
+    % Draw tick marks indicating RS = SQ
+    % Perpendicular direction to QR is (-3, 2).
+    % Tick marks at (5, 0.75) and (6, 2.25).
+    \draw[thick] (5.12, 0.67) -- (4.88, 0.83);
+    \draw[thick] (6.12, 2.17) -- (5.88, 2.33);
+    
+    % Point labels
+    \node[below left] at (O) {$O$};
+    \node[above] at (P) {$P$};
+    \node[above right] at (Q) {$Q$};
+    \node[below right] at (R) {$R$};
+    \node[right] at (S) {$S$};
+    \node[above, yshift=2pt] at (T) {$T$};
+    
+    % Vector labels
+    \node[above left] at (midP) {$\mathbf{p}$};
+    \node[below] at (midR) {$\mathbf{r}$};
+\end{tikzpicture}
 \end{center}
 \vspace{0.3em}
 
