@@ -6,7 +6,30 @@ Let $z_1$ be a complex number and let $z_2 = \left(\cos\frac{\pi}{3} + i\sin\fra
 \vspace{0.5em}
 \noindent
 \begin{center}
-\includegraphics[width=0.6\textwidth]{images/26-01.png}
+\begin{tikzpicture}[scale=1.8, >=stealth]
+    % Draw axes (Argand plane)
+    \draw[->, thick] (-2.0, 0) -- (2.0, 0);
+    \draw[->, thick] (0, -0.8) -- (0, 2.8);
+    
+    % Coordinates of origin, A, and B
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (1,2);
+    \coordinate (B) at (-1.232, 1.866);
+    
+    % Draw lines OA and OB
+    \draw[thick] (O) -- (A);
+    \draw[thick] (O) -- (B);
+    
+    % Draw dots at O, A, and B
+    \fill (O) circle (1.5pt);
+    \fill (A) circle (1.5pt);
+    \fill (B) circle (1.5pt);
+    
+    % Labels
+    \node[below left] at (O) {$O$};
+    \node[right] at (A) {$A(z_1)$};
+    \node[above left] at (B) {$B(z_2)$};
+\end{tikzpicture}
 \end{center}
 \vspace{0.3em}
 
