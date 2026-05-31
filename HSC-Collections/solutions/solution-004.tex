@@ -1,28 +1,39 @@
 \subsection{Solution to Problem 4: Complex Triangle Inequality}
 
 \begin{solution}
-Given $|z - 4/z| = 2$. Applying the triangle inequality in both directions:
+Let $r = |z| > 0$. We are given $\left|z - \dfrac{4}{z}\right| = 2$. Apply the triangle inequality in both directions.
 
-\textbf{Lower bound:} $|z - 4/z| \geq |z| - |4/z| = |z| - 4/|z|$
+\textbf{Lower bound.} For any complex numbers,
+\[
+\left|z - \frac{4}{z}\right| \ge \left||z| - \left|\frac{4}{z}\right|\right| = |r - \tfrac{4}{r}|.
+\]
+So $2 \ge r - \dfrac{4}{r}$ (since $r > 0$ and typically $r \ge \dfrac{4}{r}$ for large $|z|$). Multiplying by $r > 0$,
+\[
+2r \ge r^2 - 4
+\quad\Longrightarrow\quad
+r^2 - 2r - 4 \le 0.
+\]
+The positive root of $r^2 - 2r - 4 = 0$ is $r = 1 + \sqrt{5}$, so
+\[
+|z| \le 1 + \sqrt{5}.
+\]
 
-So $2 \geq |z| - 4/|z|$, which gives $|z|^2 - 2|z| - 4 \leq 0$.
+\textbf{Upper bound.} Also,
+\[
+\left|z - \frac{4}{z}\right| \le |z| + \left|\frac{4}{z}\right| = r + \frac{4}{r}.
+\]
+So $2 \le r + \dfrac{4}{r}$, giving $r^2 - 2r + 4 \ge 0$. This quadratic has discriminant $(-2)^2 - 4(4) = -12 < 0$, so it is always true and gives no further restriction on $|z|$.
 
-Solving: $|z| \leq 1 + \sqrt{5}$.
-
-\textbf{Upper bound:} $|z - 4/z| \leq |z| + |4/z| = |z| + 4/|z|$
-
-So $2 \leq |z| + 4/|z|$, which gives $|z|^2 - 2|z| + 4 \geq 0$.
-
-This quadratic has discriminant $4 - 16 = -12 < 0$, so it's always positive. This gives no upper bound.
-
-Combining both: $|z| \leq 1 + \sqrt{5} = \sqrt{5} + 1$.
+Combining the useful bound,
+\[
+|z| \le 1 + \sqrt{5} = \sqrt{5} + 1.
+\]
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Triangle inequality: $|a - b| \geq ||a| - |b||$ and $|a - b| \leq |a| + |b|$
-    \item Apply both directions to get bounds on $|z|$
-    \item Solve resulting quadratic inequalities
+    \item Triangle inequality: $|a-b| \ge \bigl||a|-|b|\bigr|$ and $|a-b| \le |a|+|b|$
+    \item Substitute $|z|=r$ to obtain quadratic inequalities in $r$
+    \item Only the lower-bound direction produces a finite upper limit on $|z|$
 \end{itemize}
 \end{takeaways}
-

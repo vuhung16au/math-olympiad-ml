@@ -1,41 +1,46 @@
 \subsection{Solution to Problem 21: Complex Numbers and Region Sketching}
 
 \begin{solution}
-	\textit{Note: Exponential form is being removed from the 2024 syllabus; this solution stays in modulus--argument (trigonometric) form, though the shorthand is still handy to know.}
-We have $\frac{xz+yw}{z} = x + y\frac{w}{z}$.
+\textit{Note: Exponential form is being removed from the 2024 syllabus; this solution stays in modulus--argument (trigonometric) form, though the shorthand is still handy to know.}
 
-Since $|w| = |z| = 1$, we have $|\frac{w}{z}| = 1$. Also, $\text{Arg}(\frac{z}{w}) \in (\pi/2, \pi)$ means $\text{Arg}(\frac{w}{z}) = -\text{Arg}(\frac{z}{w}) \in (-\pi, -\pi/2)$.
+First simplify the expression:
+\[
+\frac{xz+yw}{z} = x + y\,\frac{w}{z}.
+\]
+Since $|w| = |z| = 1$, we have $\left|\dfrac{w}{z}\right| = 1$. The given condition
+$\text{Arg}\!\left(\dfrac{z}{w}\right) \in \left(\dfrac{\pi}{2}, \pi\right)$ means
+\[
+\text{Arg}\!\left(\frac{w}{z}\right) = -\text{Arg}\!\left(\frac{z}{w}\right) \in \left(-\pi, -\frac{\pi}{2}\right).
+\]
+Write $\alpha = \text{Arg}\!\left(\dfrac{w}{z}\right)$, so $-\pi < \alpha < -\dfrac{\pi}{2}$ and
+$\dfrac{w}{z} = \cos\alpha + i\sin\alpha$ lies in the third quadrant.
 
-Since we want the principal argument in $(-\pi, \pi]$, and $-\pi < \text{Arg}(\frac{w}{z}) < -\pi/2$, we can write $\text{Arg}(\frac{w}{z}) = \alpha$ where $-\pi < \alpha < -\pi/2$; this places $\frac{w}{z}$ in the third quadrant.
+We want
+\[
+\text{Arg}\!\left(x + y\,\frac{w}{z}\right) \in \left(\frac{\pi}{2}, \pi\right),
+\]
+so $x + y\dfrac{w}{z}$ must lie in the second quadrant. Expanding,
+\[
+x + y\,\frac{w}{z} = (x + y\cos\alpha) + i(y\sin\alpha).
+\]
+For a point in the second quadrant, the real part is negative and the imaginary part is positive:
+\[
+x + y\cos\alpha < 0, \qquad y\sin\alpha > 0.
+\]
+Since $\alpha \in \left(-\pi, -\dfrac{\pi}{2}\right)$, we have $\sin\alpha < 0$, so $y\sin\alpha > 0$ requires $y < 0$.
+Also $\cos\alpha < 0$, so the boundary line $x + y\cos\alpha = 0$ has negative slope.
 
-We want $\text{Arg}(x + y\frac{w}{z}) \in (\pi/2, \pi)$, i.e., $x + y\frac{w}{z}$ should be in the second quadrant.
-
-Let $\frac{w}{z} = \cos\alpha + i\sin\alpha$ where $\alpha \in (-\pi, -\pi/2)$.
-
-Then $x + y\frac{w}{z} = x + y\cos\alpha + iy\sin\alpha$.
-
-For this to be in the second quadrant:
-- Real part $< 0$: $x + y\cos\alpha < 0$, so $x < -y\cos\alpha$
-- Imaginary part $> 0$: $y\sin\alpha > 0$
-
-Since $\alpha \in (-\pi, -\pi/2)$, we have $\sin\alpha < 0$, so we need $y < 0$ for $y\sin\alpha > 0$.
-
-Also, $\cos\alpha < 0$ (since $\alpha$ is in third quadrant), so $-y\cos\alpha > 0$ when $y < 0$.
-
-Therefore, the region is: $y < 0$ and $x < -y\cos\alpha$ where $\alpha = \text{Arg}(\frac{w}{z})$.
-
-Since $\alpha$ is fixed (determined by the given condition), this describes a half-plane.
-
-The boundary is the line $x = -y\cos\alpha$ (a line through the origin with negative slope), and the region is the half-plane below this line (since $y < 0$ and we need $x < -y\cos\alpha$).
-
-More precisely: The region is $\{(x,y) : y < 0 \text{ and } x + y\cos\alpha < 0\}$, which is a half-plane in the lower half of the $xy$-plane, bounded by a line through the origin.
+The required region is therefore
+\[
+\{(x,y) : y < 0 \text{ and } x + y\cos\alpha < 0\},
+\]
+where $\alpha = \text{Arg}\!\left(\dfrac{w}{z}\right)$ is fixed by the given data. This is the half-plane in the lower half of the $xy$-plane below the line through the origin with equation $x = -y\cos\alpha$.
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Simplify complex expressions: $\frac{xz+yw}{z} = x + y\frac{w}{z}$
-    \item Argument conditions: Determine quadrant from argument range
-    \item Region sketching: Identify boundaries and which side satisfies the inequality
+    \item Simplify first: $\dfrac{xz+yw}{z} = x + y\dfrac{w}{z}$
+    \item Argument conditions: Use $\text{Arg}(w/z) = -\text{Arg}(z/w)$ to fix the quadrant of $w/z$
+    \item Region sketching: Second quadrant means negative real part and positive imaginary part
 \end{itemize}
 \end{takeaways}
-

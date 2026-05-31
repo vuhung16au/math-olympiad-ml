@@ -1,36 +1,51 @@
 \subsection{Solution to Problem 25: Complex Numbers with Three Conditions}
 
 \begin{solution}
-Since $|z_1| = |z_2| = |z_3| = r$ (say), write $z_k = r(\cos\theta_k + i\sin\theta_k)$ for $k = 1, 2, 3$.
+Since $|z_1| = |z_2| = |z_3| = r$, write
+\[
+z_k = r(\cos\theta_k + i\sin\theta_k) \qquad (k = 1,2,3).
+\]
+From $z_1 z_2 z_3 = 1$,
+\[
+r^3\bigl[\cos(\theta_1 + \theta_2 + \theta_3) + i\sin(\theta_1 + \theta_2 + \theta_3)\bigr] = 1.
+\]
+The right-hand side is the real number $1$, so the imaginary part is zero and the modulus is $1$. Hence $r^3 = 1$ (so $r = 1$) and
+\[
+\theta_1 + \theta_2 + \theta_3 = 2\pi k \quad \text{for some integer } k.
+\]
+Thus each $z_k$ lies on the unit circle: $z_k = \cos\theta_k + i\sin\theta_k$.
 
-From $z_1 z_2 z_3 = 1$: $r^3[\cos(\theta_1 + \theta_2 + \theta_3) + i\sin(\theta_1 + \theta_2 + \theta_3)] = 1$.
+From $z_1 + z_2 + z_3 = 1$,
+\[
+(\cos\theta_1 + \cos\theta_2 + \cos\theta_3) + i(\sin\theta_1 + \sin\theta_2 + \sin\theta_3) = 1.
+\]
+The imaginary parts must sum to zero. A natural symmetric choice is to take one number real and the other two a conjugate pair: let
+\[
+z_1 = 1, \qquad z_2 = \cos\theta + i\sin\theta, \qquad z_3 = \cos\theta - i\sin\theta.
+\]
+Then
+\[
+z_1 + z_2 + z_3 = 1 + 2\cos\theta = 1
+\quad\Longrightarrow\quad
+\cos\theta = 0,
+\]
+so $\theta = \dfrac{\pi}{2}$ or $\dfrac{3\pi}{2}$.
 
-The right-hand side is real and positive, so $r^3 = 1$ (hence $r = 1$) and $\sin(\theta_1 + \theta_2 + \theta_3) = 0$, $\cos(\theta_1 + \theta_2 + \theta_3) = 1$, giving $\theta_1 + \theta_2 + \theta_3 = 2\pi k$ for some integer $k$.
+For $\theta = \dfrac{\pi}{2}$: $z_1 = 1$, $z_2 = i$, $z_3 = -i$.
 
-Thus all three numbers lie on the unit circle: $z_k = \cos\theta_k + i\sin\theta_k$.
+Check: $|1| = |i| = |-i| = 1$ \checkmark, $1 + i + (-i) = 1$ \checkmark, $1 \cdot i \cdot (-i) = 1$ \checkmark.
 
-From $z_1 + z_2 + z_3 = 1$: $(\cos\theta_1 + \cos\theta_2 + \cos\theta_3) + i(\sin\theta_1 + \sin\theta_2 + \sin\theta_3) = 1$.
+For $\theta = \dfrac{3\pi}{2}$: $z_2 = -i$, $z_3 = i$, giving the same set permuted.
 
-Since the sum is real, the imaginary parts cancel. A symmetric choice is to take a conjugate pair: let $z_1 = 1$ (real), $z_2 = \cos\theta + i\sin\theta$, and $z_3 = \cos\theta - i\sin\theta$.
+By symmetry, any of $z_1$, $z_2$, $z_3$ may be the real number $1$, with the other two equal to $i$ and $-i$.
 
-Then $z_1 + z_2 + z_3 = 1 + 2\cos\theta = 1$, so $\cos\theta = 0$, giving $\theta = \frac{\pi}{2}$ or $\frac{3\pi}{2}$.
-
-For $\theta = \frac{\pi}{2}$: $z_1 = 1$, $z_2 = i$, $z_3 = -i$.
-
-Check: $|1| = |i| = |-i| = 1$ $\checkmark$, $1 + i + (-i) = 1$ $\checkmark$, $1 \cdot i \cdot (-i) = 1$ $\checkmark$.
-
-For $\theta = \frac{3\pi}{2}$: $z_1 = 1$, $z_2 = -i$, $z_3 = i$ (same solution, permuted).
-
-By symmetry, we can also have $z_2 = 1$ or $z_3 = 1$ with the other two being $i$ and $-i$.
-
-Therefore, the solutions are all permutations of $\{1, i, -i\}$.
+Therefore the solutions are all permutations of $\{1, i, -i\}$.
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Unit circle: If $|z| = 1$, use $z = \cos\theta + i\sin\theta$
-    \item Sum and product: Use both conditions to pin down angle relationships
-    \item Symmetry: Look for symmetric solutions (conjugate pairs)
+    \item Equal moduli: Write each number in modulus--argument form with a common radius $r$
+    \item Product condition: $z_1z_2z_3 = 1$ forces $r = 1$ and a sum of arguments equal to $2\pi k$
+    \item Symmetry: A conjugate pair together with a real number simplifies the sum condition
 \end{itemize}
 \end{takeaways}
-

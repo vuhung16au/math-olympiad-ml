@@ -1,0 +1,52 @@
+% Solution 35.3 — parts (h)–(j)
+% Source: samples/01.tex
+% Author: Vu Hung Nguyen
+% Date: November 2025
+
+\subsection{Solution to Problem 35.3 (parts h--j)}
+
+\begin{solution}
+Recall $A_n = \displaystyle\int_{0}^{\frac{\pi}{2}} \cos^{2n} x \, dx$ and $B_n = \displaystyle\int_{0}^{\frac{\pi}{2}} x^2 \cos^{2n} x \, dx$.
+
+\begin{enumerate}
+\item[(h)] Combining parts (f) and (g),
+\[
+B_n \le \frac{\pi^2}{8(n+1)}\int_{0}^{\frac{\pi}{2}} \left(1 - \frac{4x^2}{\pi^2}\right)^{n+1} dx.
+\]
+Substitute $x = \dfrac{\pi}{2}\sin t$, so $dx = \dfrac{\pi}{2}\cos t \, dt$ and $1 - \dfrac{4x^2}{\pi^2} = \cos^2 t$:
+\[
+\int_{0}^{\frac{\pi}{2}} \left(1 - \frac{4x^2}{\pi^2}\right)^{n+1} dx
+= \frac{\pi}{2}\int_{0}^{\frac{\pi}{2}} \cos^{2n+3} t \, dt.
+\]
+Hence
+\[
+B_n \le \frac{\pi^3}{16(n+1)}\int_{0}^{\frac{\pi}{2}} \cos^{2n+3} t \, dt
+\le \frac{\pi^3}{16(n+1)}\,A_n,
+\]
+since $\cos^{2n+3} t \le \cos^{2n} t$ on $\left[0, \frac{\pi}{2}\right]$.
+
+\item[(i)] From part (e),
+\[
+\sum_{k=1}^{n}\frac{1}{k^2} = \frac{\pi^2}{6} - 2\,\frac{B_n}{A_n}.
+\]
+Part (h) gives $\dfrac{B_n}{A_n} \le \dfrac{\pi^3}{16(n+1)}$ and $B_n > 0$, so
+\[
+\frac{\pi^2}{6} - \frac{\pi^3}{8(n+1)}
+\le \sum_{k=1}^{n}\frac{1}{k^2}
+< \frac{\pi^2}{6}.
+\]
+
+\item[(j)] As $n \to \infty$, the error term $\dfrac{\pi^3}{8(n+1)} \to 0$. By the squeeze theorem,
+\[
+\lim_{n\to\infty}\sum_{k=1}^{n}\frac{1}{k^2} = \frac{\pi^2}{6}.
+\]
+\end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item The substitution $x = \dfrac{\pi}{2}\sin t$ converts the bound to a Wallis-type integral
+    \item Part (i) sandwiches the partial sum between two expressions differing by $O(1/n)$
+    \item The squeeze theorem in part (j) gives Euler's value $\pi^2/6$ for the Basel sum
+\end{itemize}
+\end{takeaways}

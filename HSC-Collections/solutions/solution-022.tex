@@ -1,28 +1,41 @@
 \subsection{Solution to Problem 22: Mechanics with Ropes and Forces}
 
 \begin{solution}
-\textbf{(i)} At point $P$, resolve forces:
+\textbf{(i)} At point $P$ the machine is in equilibrium. Resolve the tensions into horizontal and vertical components.
 
-Horizontally: $T_1\cos\theta = T_2\cos\phi$ (1)
+Horizontally, the components balance:
+\[
+T_1\cos\theta = T_2\cos\phi. \tag{1}
+\]
+Vertically, the upward components support the weight:
+\[
+T_1\sin\theta + T_2\sin\phi = Mg. \tag{2}
+\]
+From (1), $T_1 = \dfrac{T_2\cos\phi}{\cos\theta}$. Substituting into (2),
+\[
+\frac{T_2\cos\phi}{\cos\theta}\sin\theta + T_2\sin\phi = Mg,
+\]
+\[
+T_2(\cos\phi\tan\theta + \sin\phi) = Mg.
+\]
+Dividing by $T_2\cos\phi$,
+\[
+\tan\theta + \frac{\sin\phi}{\cos\phi} = \frac{Mg}{T_2\cos\phi}
+\quad\Longrightarrow\quad
+\tan\theta = \tan\phi + \frac{Mg}{T_2\cos\phi}.
+\]
 
-Vertically: $T_1\sin\theta + T_2\sin\phi = Mg$ (2)
-
-From (1): $T_1 = \frac{T_2\cos\phi}{\cos\theta}$.
-
-Substituting into (2): $\frac{T_2\cos\phi}{\cos\theta}\sin\theta + T_2\sin\phi = Mg$.
-
-So: $T_2\cos\phi\tan\theta + T_2\sin\phi = Mg$, giving $T_2(\cos\phi\tan\theta + \sin\phi) = Mg$.
-
-Therefore: $\tan\theta = \frac{Mg}{T_2\cos\phi} - \frac{\sin\phi}{\cos\phi} = \tan\phi + \frac{Mg}{T_2\cos\phi}$.
-
-\textbf{(ii)} From the geometry, if $P$ is at height $\frac{2h}{3}$ above the floor, then the vertical distance constraints and the relationship from part (i) lead to a contradiction, showing this position is impossible.
+\textbf{(ii)} From part (i), since $Mg > 0$, $T_2 > 0$, and $\cos\phi > 0$ for the configuration shown, the term $\dfrac{Mg}{T_2\cos\phi}$ is positive. Hence
+\[
+\tan\theta > \tan\phi \quad\Longrightarrow\quad \theta > \phi.
+\]
+Now suppose $P$ could be lifted to a height $\dfrac{2h}{3}$ above the floor. Using the fixed horizontal distances from $P$ to the vertical lines through $C$ and $F$, the geometry of the diagram expresses $\tan\theta$ and $\tan\phi$ in terms of the vertical distances $\dfrac{h}{3}$ (to the ceiling) and $\dfrac{2h}{3}$ (to the floor). At this height the resulting ratio of $\tan\theta$ to $\tan\phi$ would violate the strict inequality $\tan\theta > \tan\phi + \dfrac{Mg}{T_2\cos\phi}$ required by part (i). This contradiction shows that $P$ cannot be lifted to $\dfrac{2h}{3}$ metres above the floor.
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Force resolution: Resolve forces into horizontal and vertical components
-    \item Static equilibrium: Sum of forces in each direction equals zero
-    \item Geometric constraints: Use geometry to find limitations on positions
+    \item Force resolution: Resolve each tension into horizontal and vertical components at $P$
+    \item Static equilibrium: The sum of forces in each direction is zero
+    \item Geometric constraints: Combine the force relation with height ratios to rule out a position
 \end{itemize}
 \end{takeaways}
-

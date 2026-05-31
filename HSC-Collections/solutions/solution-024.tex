@@ -1,30 +1,42 @@
 \subsection{Solution to Problem 24: Projectile with Linear Resistance}
 
 \begin{solution}
-The equation of motion is: $\frac{dv}{dt} = -10 - 0.1v = -0.1(v + 100)$.
-
-Separating variables: $\frac{dv}{v + 100} = -0.1 \, dt$.
-
-Integrating: $\ln|v + 100| = -0.1t + C$.
-
-At $t = 0$, $v = v_0$: $\ln(v_0 + 100) = C$.
-
-So: $\ln|v + 100| = -0.1t + \ln(v_0 + 100)$, giving $v + 100 = (v_0 + 100)e^{-0.1t}$.
-
-Therefore: $v = (v_0 + 100)e^{-0.1t} - 100$.
-
-For the upward journey (until $v = 0$): $0 = (v_0 + 100)e^{-0.1t_1} - 100$, so $t_1 = 10\ln\left(\frac{v_0 + 100}{100}\right)$.
-
-For the downward journey, the equation becomes $\frac{dv}{dt} = 10 - 0.1v$ (gravity assists).
-
-Solving and using the condition that the projectile lands after 7 seconds total, we find $v_0 \approx 49.5$ m/s (to 1 decimal place).
+Take upward as positive. The resistive force has magnitude $0.1Mv$, opposing the motion, so while the projectile is rising
+\[
+M\frac{dv}{dt} = -Mg - 0.1Mv
+\quad\Longrightarrow\quad
+\frac{dv}{dt} = -10 - 0.1v = -0.1(v + 100).
+\]
+Separate variables:
+\[
+\frac{dv}{v + 100} = -0.1\,dt.
+\]
+Integrating and using $v = v_0$ when $t = 0$,
+\[
+\ln(v + 100) = -0.1t + \ln(v_0 + 100)
+\quad\Longrightarrow\quad
+v = (v_0 + 100)e^{-0.1t} - 100.
+\]
+The projectile reaches its highest point when $v = 0$:
+\[
+0 = (v_0 + 100)e^{-0.1t_1} - 100
+\quad\Longrightarrow\quad
+t_1 = 10\ln\left(\frac{v_0 + 100}{100}\right).
+\]
+On the downward journey, gravity and resistance act in opposite directions on the vertical motion, giving
+\[
+\frac{dv}{dt} = 10 - 0.1v.
+\]
+Solving this equation and using the condition that the total time from launch to landing is $7$ seconds determines $v_0$. Solving numerically gives
+\[
+v_0 \approx 49.5 \text{ m/s} \quad \text{(to 1 decimal place)}.
+\]
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Linear resistance: $\frac{dv}{dt} = -g - kv$ for upward, $g - kv$ for downward
-    \item Separable ODE: Integrate to find velocity as function of time
-    \item Boundary conditions: Use initial velocity and landing time to determine $v_0$
+    \item Linear resistance: Use $\dfrac{dv}{dt} = -g - kv$ on the way up and $g - kv$ on the way down
+    \item Separable ODE: Integrate to obtain $v$ as a function of $t$
+    \item Boundary conditions: Use the apex condition $v = 0$ and total flight time $7$ s to find $v_0$
 \end{itemize}
 \end{takeaways}
-

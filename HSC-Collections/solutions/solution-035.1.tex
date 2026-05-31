@@ -1,0 +1,55 @@
+% Solution 35.1 — parts (a)–(d)
+% Source: samples/01.tex
+% Author: Vu Hung Nguyen
+% Date: November 2025
+
+\subsection{Solution to Problem 35.1 (parts a--d)}
+
+\begin{solution}
+Throughout, $A_n = \displaystyle\int_{0}^{\frac{\pi}{2}} \cos^{2n} x \, dx$ and $B_n = \displaystyle\int_{0}^{\frac{\pi}{2}} x^2 \cos^{2n} x \, dx$.
+
+\begin{enumerate}
+\item[(a)] Write $\cos^{2n} x = \cos^{2n-1} x \cos x$ and integrate by parts with $u = \cos^{2n-1} x$, $dv = \cos x \, dx$:
+\[
+A_n = \Bigl[\cos^{2n-1} x \sin x\Bigr]_{0}^{\frac{\pi}{2}}
++ (2n-1)\int_{0}^{\frac{\pi}{2}} \sin^2 x \cos^{2n-2} x \, dx.
+\]
+The boundary term is zero. Using $\sin^2 x = 1 - \cos^2 x$,
+\[
+A_n = (2n-1)(A_{n-1} - A_n)
+\;\Longrightarrow\;
+nA_n = \frac{2n-1}{2}A_{n-1}.
+\]
+
+\item[(b)] Integrate $A_n$ by parts with $u = \cos^{2n} x$, $dv = dx$:
+\[
+A_n = \Bigl[x\cos^{2n} x\Bigr]_{0}^{\frac{\pi}{2}}
++ 2n\int_{0}^{\frac{\pi}{2}} x\sin x \cos^{2n-1} x \, dx
+= 2n\int_{0}^{\frac{\pi}{2}} x\sin x \cos^{2n-1} x \, dx.
+\]
+
+\item[(c)] From part (b), divide by $n^2$ and integrate
+$\displaystyle\int_{0}^{\frac{\pi}{2}} x\sin x \cos^{2n-1} x \, dx$ by parts with $u = \sin x$, $dv = x\cos^{2n-1} x \, dx$.
+The boundary terms vanish, giving
+\[
+\frac{A_n}{n^2} = \frac{2n-1}{n}B_{n-1} - 2B_n.
+\]
+
+\item[(d)] From part (c), divide by $A_n$ and multiply by $2$:
+\[
+\frac{2}{n^2} = \frac{2(2n-1)}{n}\,\frac{B_{n-1}}{A_n} - 4\,\frac{B_n}{A_n}.
+\]
+Part (a) gives $A_{n-1} = \dfrac{2nA_n}{2n-1}$, so $\dfrac{2(2n-1)}{n}\dfrac{B_{n-1}}{A_n} = 4\dfrac{B_{n-1}}{A_{n-1}}$. Hence
+\[
+\frac{1}{n^2} = 2\left(\frac{B_{n-1}}{A_{n-1}} - \frac{B_n}{A_n}\right).
+\]
+\end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Integration by parts on $\cos^{2n} x$ yields the reduction formula in part (a)
+    \item Parts (b) and (c) link $A_n$ to the auxiliary integral $B_n$
+    \item Part (d) rewrites $1/n^2$ as a telescoping difference of ratios $B_k/A_k$
+\end{itemize}
+\end{takeaways}

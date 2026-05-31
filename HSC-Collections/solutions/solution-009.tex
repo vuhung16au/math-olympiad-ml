@@ -1,26 +1,38 @@
 \subsection{Solution to Problem 9: Three Unit Vectors Optimization}
 
 \begin{solution}
-We want to minimize $\theta$ where $\cos\theta = \frac{\mathbf{a} \cdot (\mathbf{a}+\mathbf{b}+\mathbf{c})}{|\mathbf{a}||\mathbf{a}+\mathbf{b}+\mathbf{c}|} = \frac{1 + \mathbf{a} \cdot \mathbf{b} + \mathbf{a} \cdot \mathbf{c}}{|\mathbf{a}+\mathbf{b}+\mathbf{c}|}$.
-
-Since $\mathbf{a} \perp \mathbf{b}$, we have $\mathbf{a} \cdot \mathbf{b} = 0$. Let $\mathbf{a} \cdot \mathbf{c} = x$ (unknown).
-
-Then $|\mathbf{a}+\mathbf{b}+\mathbf{c}|^2 = |\mathbf{a}|^2 + |\mathbf{b}|^2 + |\mathbf{c}|^2 + 2(\mathbf{a} \cdot \mathbf{b} + \mathbf{a} \cdot \mathbf{c} + \mathbf{b} \cdot \mathbf{c}) = 3 + 2x$ (since $\mathbf{b} \perp \mathbf{c}$ implies $\mathbf{b} \cdot \mathbf{c} = 0$).
-
-So $\cos\theta = \frac{1+x}{\sqrt{3+2x}}$. To maximize this (minimize $\theta$), we differentiate:
+Let $\theta$ be the angle between $\mathbf{a}$ and $\mathbf{a}+\mathbf{b}+\mathbf{c}$. Then
 \[
-\frac{d}{dx}\left(\frac{1+x}{\sqrt{3+2x}}\right) = \frac{\sqrt{3+2x} - (1+x)\frac{1}{\sqrt{3+2x}}}{3+2x} = \frac{3+2x - (1+x)}{(3+2x)^{3/2}} = \frac{2+x}{(3+2x)^{3/2}}
+\cos\theta = \frac{\mathbf{a}\cdot(\mathbf{a}+\mathbf{b}+\mathbf{c})}{|\mathbf{a}|\,|\mathbf{a}+\mathbf{b}+\mathbf{c}|}
+= \frac{1 + \mathbf{a}\cdot\mathbf{b} + \mathbf{a}\cdot\mathbf{c}}{|\mathbf{a}+\mathbf{b}+\mathbf{c}|}.
 \]
-This is always positive, so the maximum occurs at the boundary. Since $|\mathbf{a} \cdot \mathbf{c}| \leq 1$ (Cauchy-Schwarz), and by geometric symmetry, the optimal occurs when the vectors are arranged as an orthonormal basis, giving $x = 0$ and $\cos\theta = \frac{1}{\sqrt{3}}$.
+Since $\mathbf{a}\perp\mathbf{b}$, we have $\mathbf{a}\cdot\mathbf{b}=0$. Write $\mathbf{a}\cdot\mathbf{c}=x$.
 
-Therefore, $\cos\theta = \frac{1}{\sqrt{3}}$ (answer B).
+Because $\mathbf{b}\perp\mathbf{c}$, we have $\mathbf{b}\cdot\mathbf{c}=0$, so
+\[
+|\mathbf{a}+\mathbf{b}+\mathbf{c}|^2
+= |\mathbf{a}|^2 + |\mathbf{b}|^2 + |\mathbf{c}|^2 + 2(\mathbf{a}\cdot\mathbf{b}+\mathbf{a}\cdot\mathbf{c}+\mathbf{b}\cdot\mathbf{c})
+= 3 + 2x.
+\]
+Hence $\cos\theta = \dfrac{1+x}{\sqrt{3+2x}}$.
+
+To minimise $\theta$, maximise $\cos\theta$. Differentiating,
+\[
+\frac{d}{dx}\left(\frac{1+x}{\sqrt{3+2x}}\right)
+= \frac{\sqrt{3+2x} - (1+x)/\sqrt{3+2x}}{3+2x}
+= \frac{2+x}{(3+2x)^{3/2}} > 0 \quad \text{for } x > -2.
+\]
+So $\cos\theta$ is increasing in $x$ on the relevant domain. By Cauchy--Schwarz, $|\mathbf{a}\cdot\mathbf{c}| \le 1$, and by symmetry the optimum occurs when $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$ form an orthonormal set, giving $x=0$ and
+\[
+\cos\theta = \frac{1}{\sqrt{3}}.
+\]
+Therefore the answer is \textbf{(B)}.
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Use dot product to express cosine of angle
-    \item Apply constraints: $\mathbf{a} \perp \mathbf{b}$, $\mathbf{b} \perp \mathbf{c}$
-    \item Optimize using calculus or geometric symmetry
+    \item Dot product: express $\cos\theta$ using $|\mathbf{a}+\mathbf{b}+\mathbf{c}|^2$
+    \item Constraints: $\mathbf{a}\perp\mathbf{b}$ and $\mathbf{b}\perp\mathbf{c}$ simplify the expansion
+    \item Optimisation: differentiate $\cos\theta$ as a function of $x=\mathbf{a}\cdot\mathbf{c}$
 \end{itemize}
 \end{takeaways}
-

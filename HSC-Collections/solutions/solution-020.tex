@@ -1,34 +1,41 @@
 \subsection{Solution to Problem 20: Inequalities with Exponentials and Factorials}
 
 \begin{solution}
-\textbf{(i)} Let $f(x) = x - \ln x$ for $x > 0$.
-
-Then $f'(x) = 1 - \frac{1}{x} = \frac{x-1}{x}$.
-
+\textbf{(i)} Define $f(x) = x - \ln x$ for $x > 0$. Then
+\[
+f'(x) = 1 - \frac{1}{x} = \frac{x-1}{x}.
+\]
 So $f'(x) = 0$ when $x = 1$, $f'(x) < 0$ for $0 < x < 1$, and $f'(x) > 0$ for $x > 1$.
-
-Therefore, $f$ has a minimum at $x = 1$, and $f(1) = 1 - 0 = 1 > 0$.
-
+Thus $f$ has a global minimum at $x = 1$, and
+\[
+f(1) = 1 - \ln 1 = 1 > 0.
+\]
 Since $f(x) > 0$ for all $x > 0$, we have $x > \ln x$ for all $x > 0$.
 
-\textbf{(ii)} Applying the inequality from part (i) to $x = 1, 2, \ldots, n$:
+\textbf{(ii)} Apply the inequality from part (i) with $x = 1, 2, \ldots, n$:
 \[
-1 > \ln 1, \quad 2 > \ln 2, \quad \ldots, \quad n > \ln n
+1 > \ln 1, \quad 2 > \ln 2, \quad \ldots, \quad n > \ln n.
 \]
-Adding: $1 + 2 + \ldots + n > \ln(1 \cdot 2 \cdot \ldots \cdot n) = \ln(n!)$.
-
-Since $1 + 2 + \ldots + n = \frac{n(n+1)}{2} = \frac{n^2+n}{2}$:
+Adding these $n$ inequalities,
 \[
-\frac{n^2+n}{2} > \ln(n!)
+1 + 2 + \cdots + n > \ln 1 + \ln 2 + \cdots + \ln n = \ln(n!).
 \]
-Exponentiating: $e^{(n^2+n)/2} > n!$, so $e^{n^2+n} > (n!)^2$.
+Using $1 + 2 + \cdots + n = \dfrac{n(n+1)}{2} = \dfrac{n^2+n}{2}$,
+\[
+\frac{n^2+n}{2} > \ln(n!).
+\]
+Since the exponential function is increasing, exponentiating both sides gives
+\[
+e^{(n^2+n)/2} > n!
+\quad\Longrightarrow\quad
+e^{n^2+n} > (n!)^2.
+\]
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Function analysis: Find minimum to prove inequalities
-    \item Sum of inequalities: Add multiple inequalities and exponentiate
-    \item Factorial bounds: Relate factorials to exponentials using logarithmic inequalities
+    \item Function analysis: Find the minimum of $f(x)=x-\ln x$ to prove a basic inequality
+    \item Sum of inequalities: Add the same inequality for $x=1,2,\ldots,n$
+    \item Factorial bounds: Exponentiate to relate $(n!)^2$ to an exponential
 \end{itemize}
 \end{takeaways}
-

@@ -1,27 +1,73 @@
 \subsection{Solution to Problem 32: Parallelogram Geometry}
 
 \begin{solution}
-\textbf{(i)} In parallelogram $OPQR$, we have $\vec{OQ} = \vec{OP} + \vec{OR} = \mathbf{p} + \mathbf{r}$.
+\textbf{(i)} We work from $O$ and express every position vector in terms of $\mathbf{p}$ and $\mathbf{r}$.
 
-Since $S$ is the midpoint of $QR$: $\vec{OS} = \vec{OR} + \frac{1}{2}\vec{RQ} = \mathbf{r} + \frac{1}{2}(\mathbf{p} + \mathbf{r} - \mathbf{r}) = \mathbf{r} + \frac{1}{2}\mathbf{p}$.
+Since $OPQR$ is a parallelogram, opposite sides are equal and parallel, so
+\[
+\vec{OQ} = \vec{OP} + \vec{OR} = \mathbf{p} + \mathbf{r}.
+\]
 
-Point $T$ lies on both $PR$ and $OS$.
+Next, $S$ is the midpoint of $QR$. Starting from $R$ and moving halfway along $\vec{RQ}$,
+\[
+\vec{OS} = \vec{OR} + \frac{1}{2}\vec{RQ}
+= \mathbf{r} + \frac{1}{2}(\vec{OQ} - \vec{OR})
+= \mathbf{r} + \frac{1}{2}(\mathbf{p} + \mathbf{r} - \mathbf{r})
+= \mathbf{r} + \frac{1}{2}\mathbf{p}.
+\]
 
-On $PR$: $\vec{OT} = \mathbf{r} + \lambda(\mathbf{p} - \mathbf{r}) = (1-\lambda)\mathbf{r} + \lambda\mathbf{p}$ for some $\lambda$.
+Point $T$ lies on both $PR$ and $OS$, so we write $\vec{OT}$ in two parametric forms and equate them.
 
-On $OS$: $\vec{OT} = \mu\left(\mathbf{r} + \frac{1}{2}\mathbf{p}\right) = \mu\mathbf{r} + \frac{\mu}{2}\mathbf{p}$ for some $\mu$.
+On line $PR$, any point from $R$ towards $P$ has the form
+\[
+\vec{OT} = \vec{OR} + \lambda(\vec{OP} - \vec{OR})
+= (1-\lambda)\mathbf{r} + \lambda\mathbf{p}
+\qquad \text{for some } 0 \le \lambda \le 1.
+\]
 
-Equating: $(1-\lambda)\mathbf{r} + \lambda\mathbf{p} = \mu\mathbf{r} + \frac{\mu}{2}\mathbf{p}$.
+On line $OS$, any point from $O$ towards $S$ has the form
+\[
+\vec{OT} = \mu\,\vec{OS}
+= \mu\left(\mathbf{r} + \frac{1}{2}\mathbf{p}\right)
+= \mu\mathbf{r} + \frac{\mu}{2}\mathbf{p}
+\qquad \text{for some } 0 \le \mu \le 1.
+\]
 
-So: $1-\lambda = \mu$ and $\lambda = \frac{\mu}{2}$.
+Since $\mathbf{p}$ and $\mathbf{r}$ are not parallel (they form two sides of a parallelogram), matching coefficients in
+\[
+(1-\lambda)\mathbf{r} + \lambda\mathbf{p}
+= \mu\mathbf{r} + \frac{\mu}{2}\mathbf{p}
+\]
+gives
+\[
+1-\lambda = \mu \qquad \text{and} \qquad \lambda = \frac{\mu}{2}.
+\]
 
-Substituting: $1 - \frac{\mu}{2} = \mu$, so $1 = \frac{3\mu}{2}$, giving $\mu = \frac{2}{3}$ and $\lambda = \frac{1}{3}$.
+Substituting the second equation into the first,
+\[
+1 - \frac{\mu}{2} = \mu
+\quad\Longrightarrow\quad
+1 = \frac{3\mu}{2}
+\quad\Longrightarrow\quad
+\mu = \frac{2}{3}, \quad \lambda = \frac{1}{3}.
+\]
 
-Therefore: $\vec{OT} = \frac{2}{3}\mathbf{r} + \frac{1}{3}\mathbf{p}$.
+Therefore
+\[
+\vec{OT} = \frac{2}{3}\mathbf{r} + \frac{1}{3}\mathbf{p}.
+\]
 
-\textbf{(ii)} On line $PR$: $\vec{OT} = \frac{1}{3}\mathbf{p} + \frac{2}{3}\mathbf{r}$.
+\textbf{(ii)} From part (i), on line $PR$ we have
+\[
+\vec{OT} = \frac{1}{3}\mathbf{p} + \frac{2}{3}\mathbf{r}.
+\]
 
-This means $T$ divides $PR$ in the ratio $PT : TR = \frac{2}{3} : \frac{1}{3} = 2 : 1$.
+This means $T$ lies one third of the way from $R$ to $P$, so it divides $PR$ internally in the ratio
+\[
+PT : TR = \frac{2}{3} : \frac{1}{3} = 2 : 1.
+\]
+
+Equivalently, $\vec{PT} = \vec{OT} - \vec{OP} = \frac{2}{3}\mathbf{r} - \frac{2}{3}\mathbf{p} = \frac{2}{3}(\mathbf{r} - \mathbf{p})$ and $\vec{TR} = \vec{OR} - \vec{OT} = \frac{1}{3}(\mathbf{r} - \mathbf{p})$, so $\vec{PT} = 2\vec{TR}$.
 \end{solution}
 
 \begin{takeaways}
@@ -31,4 +77,3 @@ This means $T$ divides $PR$ in the ratio $PT : TR = \frac{2}{3} : \frac{1}{3} = 
     \item Section formula: Use to determine division ratio
 \end{itemize}
 \end{takeaways}
-

@@ -1,0 +1,50 @@
+% Solution 35.2 — parts (e)–(g)
+% Source: samples/01.tex
+% Author: Vu Hung Nguyen
+% Date: November 2025
+
+\subsection{Solution to Problem 35.2 (parts e--g)}
+
+\begin{solution}
+Recall $A_n = \displaystyle\int_{0}^{\frac{\pi}{2}} \cos^{2n} x \, dx$ and $B_n = \displaystyle\int_{0}^{\frac{\pi}{2}} x^2 \cos^{2n} x \, dx$.
+
+\begin{enumerate}
+\item[(e)] Summing part (d) from $k = 1$ to $n$ telescopes:
+\[
+\sum_{k=1}^{n}\frac{1}{k^2}
+= 2\left(\frac{B_0}{A_0} - \frac{B_n}{A_n}\right).
+\]
+Now $A_0 = \dfrac{\pi}{2}$, $B_0 = \dfrac{\pi^3}{24}$, so $\dfrac{B_0}{A_0} = \dfrac{\pi^2}{12}$. Hence
+\[
+\sum_{k=1}^{n}\frac{1}{k^2} = \frac{\pi^2}{6} - 2\,\frac{B_n}{A_n}.
+\]
+
+\item[(f)] On $0 \le x \le \frac{\pi}{2}$, $\sin x \ge \dfrac{2}{\pi}x$, so
+\[
+\cos x = \sqrt{1 - \sin^2 x} \le \sqrt{1 - \frac{4x^2}{\pi^2}}
+\quad\Longrightarrow\quad
+\cos^{2n} x \le \left(1 - \frac{4x^2}{\pi^2}\right)^n.
+\]
+Therefore
+\[
+B_n \le \int_{0}^{\frac{\pi}{2}} x^2 \left(1 - \frac{4x^2}{\pi^2}\right)^n dx.
+\]
+
+\item[(g)] Integrate by parts on the right-hand side of (f) with $u = x$, $dv = x\left(1 - \dfrac{4x^2}{\pi^2}\right)^n dx$.
+Since $\displaystyle\int x\left(1 - \frac{4x^2}{\pi^2}\right)^n dx
+= -\dfrac{\pi^2}{8(n+1)}\left(1 - \dfrac{4x^2}{\pi^2}\right)^{n+1}$,
+the boundary term vanishes and
+\[
+\int_{0}^{\frac{\pi}{2}} x^2 \left(1 - \frac{4x^2}{\pi^2}\right)^n dx
+= \frac{\pi^2}{8(n+1)}\int_{0}^{\frac{\pi}{2}} \left(1 - \frac{4x^2}{\pi^2}\right)^{n+1} dx.
+\]
+\end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item Telescoping part (d) expresses the partial sum in terms of $B_n/A_n$
+    \item The inequality $\sin x \ge 2x/\pi$ bounds $\cos^{2n} x$ from above
+    \item Part (g) evaluates the bounding integral by a further integration by parts
+\end{itemize}
+\end{takeaways}

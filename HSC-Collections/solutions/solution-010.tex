@@ -1,28 +1,34 @@
 \subsection{Solution to Problem 10: Complex Numbers with Argument Condition}
 
 \begin{solution}
-Given $\arg(z/w) = -\pi/2$, we have $z/w = -ik$ for some real $k > 0$, so $z = -ikw$.
-
-Then:
+We are given $\arg(z/w) = -\pi/2$, so $z/w$ is a negative purely imaginary number. Write
 \[
-\left|\frac{z-w}{z+w}\right| = \left|\frac{-ikw - w}{-ikw + w}\right| = \left|\frac{-w(1+ik)}{w(1-ik)}\right| = \left|\frac{1+ik}{1-ik}\right| = \frac{|1+ik|}{|1-ik|} = \frac{\sqrt{1+k^2}}{\sqrt{1+k^2}} = 1
+\frac{z}{w} = -ik \qquad \text{for some real } k > 0,
 \]
+giving $z = -ikw$. Then
+\begin{align*}
+\left|\frac{z-w}{z+w}\right|
+&= \left|\frac{-ikw - w}{-ikw + w}\right|
+= \left|\frac{-w(1+ik)}{w(1-ik)}\right| \\
+&= \left|\frac{1+ik}{1-ik}\right|
+= \frac{|1+ik|}{|1-ik|}
+= \frac{\sqrt{1+k^2}}{\sqrt{1+k^2}}
+= 1.
+\end{align*}
 
-Alternatively, since $z/w$ is purely imaginary, $z$ and $w$ are perpendicular in the complex plane. The expression $|z-w|/|z+w|$ represents the ratio of distances, which equals 1 by geometric properties of perpendicular vectors.
+Alternatively, since $z/w$ is purely imaginary, $z$ and $w$ are perpendicular in the Argand plane. The points $z-w$ and $z+w$ are diagonals of a rectangle with sides parallel to the real and imaginary directions, so they have equal length and the ratio is $1$.
 
-Therefore, $\left|\frac{z-w}{z+w}\right| = 1$.
+Therefore $\left|\dfrac{z-w}{z+w}\right| = 1$.
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item $\arg(z/w) = -\pi/2$ means $z/w$ is purely imaginary (negative)
-    \item Write $z = -ikw$ for real $k > 0$
-    \item Simplify the modulus expression
+    \item $\arg(z/w) = -\pi/2$ means $z/w$ is negative purely imaginary
+    \item Write $z = -ikw$ with real $k > 0$ and simplify the modulus
+    \item Geometric view: numerator and denominator are equal diagonals of a rectangle
 \end{itemize}
 \end{takeaways}
 
 \begin{remark}
-    An easy solution was actually geometric. 
-    Note that the numerator and denominator were diagonals of a rectangle.
+An easy solution is geometric: the numerator and denominator are diagonals of a rectangle.
 \end{remark}
-

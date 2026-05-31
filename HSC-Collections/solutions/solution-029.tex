@@ -1,26 +1,30 @@
 \subsection{Solution to Problem 29: Irrationality of Logarithm}
 
 \begin{solution}
-Assume, for contradiction, that $\log_n(n+1) = \frac{p}{q}$ for some integers $p, q > 0$.
+Assume, for contradiction, that $\log_n(n+1)$ is rational. Then we can write
+\[
+\log_n(n+1) = \frac{p}{q}
+\]
+for some positive integers $p$ and $q$. Converting to exponential form,
+\[
+n^{p/q} = n + 1
+\quad\Longrightarrow\quad
+n^p = (n+1)^q.
+\]
+Since $n$ and $n+1$ are consecutive integers, they are coprime: no prime divides both.
 
-Then $n^{p/q} = n+1$, so $n^p = (n+1)^q$.
+Every prime factor of $n^p$ divides $n$, while every prime factor of $(n+1)^q$ divides $n+1$.
+Because $n$ and $n+1$ share no common prime factors, the equality $n^p = (n+1)^q$ can hold only if both sides equal $1$.
 
-Since $n$ and $n+1$ are consecutive integers, they are coprime (their greatest common divisor is 1).
+But $n > 1$, so $n^p \ge 2^p \ge 2 > 1$ and $(n+1)^q \ge 3^q \ge 3 > 1$. This is a contradiction.
 
-The prime factorization of $n^p$ contains only primes dividing $n$, while $(n+1)^q$ contains only primes dividing $n+1$.
-
-Since $n$ and $n+1$ are coprime, no prime can divide both, so $n^p = (n+1)^q$ is impossible unless $n^p = (n+1)^q = 1$.
-
-But $n > 1$, so $n^p \ge 2^p \ge 2 > 1$, and $(n+1)^q \ge 3^q \ge 3 > 1$.
-
-This is a contradiction. Therefore, $\log_n(n+1)$ is irrational.
+Therefore $\log_n(n+1)$ is irrational.
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Proof by contradiction: Assume the number is rational
-    \item Coprime property: Consecutive integers are coprime
-    \item Prime factorization: Use uniqueness of prime factorization to derive contradiction
+    \item Proof by contradiction: Assume the logarithm is rational and write it as $p/q$
+    \item Coprime property: Consecutive integers $n$ and $n+1$ have no common prime factors
+    \item Unique factorisation: Equal powers force the same prime factors on both sides
 \end{itemize}
 \end{takeaways}
-

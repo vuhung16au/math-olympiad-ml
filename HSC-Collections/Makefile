@@ -2,7 +2,7 @@ TEXFILE = HSC-Collections
 PDFFILE = $(TEXFILE).pdf
 RELEASE_DIR = releases
 
-.PHONY: all pdf clean release help final
+.PHONY: all pdf clean release open help final
 
 all: pdf
 
@@ -24,6 +24,14 @@ release: $(PDFFILE)
 	mkdir -p $(RELEASE_DIR)
 	cp $(PDFFILE) $(RELEASE_DIR)/
 
+open: $(PDFFILE)
+	@if [ -f "$(PDFFILE)" ]; then \
+		open "$(PDFFILE)"; \
+	else \
+		echo "PDF not found: $(PDFFILE). Run 'make pdf' first."; \
+		exit 1; \
+	fi
+
 # Final target: clean, build, and release
 final: clean pdf release
 
@@ -33,6 +41,7 @@ help:
 	@echo "  make pdf      - Build the PDF (latexmk)"
 	@echo "  make clean    - Remove build artifacts and the PDF"
 	@echo "  make release  - Copy built PDF to releases/"
+	@echo "  make open     - Open the built PDF"
 	@echo "  make all      - Alias for 'make pdf'"
 	@echo "  make final    - Clean, build PDF, then copy to releases/"
 

@@ -1,28 +1,35 @@
 \subsection{Solution to Problem 13: Circle and Cosine Function}
 
 \begin{solution}
-At point $P(a, b)$, we have $b = \cos(ka)$ and the point lies on a circle centered at origin, so $a^2 + b^2 = r^2$ for some radius $r$.
+At the intersection point $P(a,b)$ in the first quadrant, the point lies on $y=\cos(kx)$ and on a circle centred at the origin, so
+\[
+b = \cos(ka), \qquad a^2 + b^2 = r^2
+\]
+for some radius $r$.
 
-The slope of the radius vector is $b/a$. The slope of the tangent to $y = \cos(kx)$ at $x = a$ is $-k\sin(ka)$.
+The slope of the radius $OP$ is $b/a$. The slope of the tangent to $y=\cos(kx)$ at $x=a$ is $-k\sin(ka)$. Since the radius is perpendicular to the tangent,
+\[
+\frac{b}{a}\cdot\bigl(-k\sin(ka)\bigr) = -1
+\quad\Longrightarrow\quad
+kb\sin(ka) = a.
+\]
+Substituting $b=\cos(ka)$,
+\[
+k\cos(ka)\sin(ka) = a
+\quad\Longrightarrow\quad
+\frac{k}{2}\sin(2ka) = a.
+\]
+Also $r^2 = a^2 + \cos^2(ka)$.
 
-Since they are perpendicular: $\frac{b}{a} \cdot (-k\sin(ka)) = -1$, so $kb\sin(ka) = a$.
+The circle has exactly two intersections with the graph and is never above it, so it is tangent at $P$ in the first quadrant. For this configuration to occur, the cosine curve must complete at least one full oscillation on the interval where the circle meets the axis, which requires period $T = 2\pi/k < 2\pi$, i.e.\ $k > 1$. When $k \le 1$, the geometry of the graph and the tangency condition cannot produce exactly two intersections with the circle always below the curve.
 
-Since $b = \cos(ka)$, we get: $k\cos(ka)\sin(ka) = a$, or $\frac{k}{2}\sin(2ka) = a$.
-
-Also, $a^2 + \cos^2(ka) = r^2$.
-
-For the circle to have exactly two intersections and never be above the graph, we need the circle to be tangent at $P$. This requires $r^2 = a^2 + b^2 = a^2 + \cos^2(ka)$.
-
-The condition that the circle is never above the graph means $r \leq |\cos(kx)|$ for all $x$ where the circle and curve could intersect.
-
-For $k \leq 1$, the period is $\geq 2\pi$, and the geometry doesn't work. For $k > 1$, we can have the required configuration. Therefore $k > 1$.
+Therefore $k > 1$.
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item Perpendicular condition: slopes multiply to $-1$
-    \item Use $b = \cos(ka)$ and the circle equation $a^2 + b^2 = r^2$
-    \item Analyze the geometry to determine constraint on $k$
+    \item Perpendicularity: product of slopes equals $-1$
+    \item Use $b=\cos(ka)$ and the double-angle identity to relate $a$ and $k$
+    \item Geometry: tangency with exactly two intersections requires $k>1$
 \end{itemize}
 \end{takeaways}
-

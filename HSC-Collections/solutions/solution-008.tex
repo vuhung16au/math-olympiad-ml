@@ -1,28 +1,38 @@
 \subsection{Solution to Problem 8: Triangle Inequality and Rectangular Prism}
 
 \begin{solution}
-\textbf{(i)} The surface area is $S = 2(ab + bc + ca)$.
-
-The arithmetic mean of $ab$, $bc$, and $ca$ is $A = \frac{ab + bc + ca}{3} = \frac{S}{6}$.
-
-By the given inequality:
+\textbf{(i)} A rectangular prism with edge lengths $a$, $b$, $c$ has surface area
 \[
-\frac{(ab)(bc)(ca)}{A^3} \leq 1
+S = 2(ab + bc + ca).
 \]
-That is: $\frac{a^2b^2c^2}{(S/6)^3} \leq 1$, so $a^2b^2c^2 \leq (S/6)^3$.
+The three face areas are $ab$, $bc$, and $ca$. Their arithmetic mean is
+\[
+A = \frac{ab + bc + ca}{3} = \frac{S}{6}.
+\]
+The given inequality states that for three positive numbers with arithmetic mean $A$,
+\[
+\frac{(ab)(bc)(ca)}{A^3} \le 1.
+\]
+Substituting $A = S/6$,
+\[
+\frac{a^2b^2c^2}{(S/6)^3} \le 1
+\quad\Longrightarrow\quad
+a^2b^2c^2 \le \left(\frac{S}{6}\right)^3.
+\]
+Taking square roots (all quantities are positive),
+\[
+abc \le \left(\frac{S}{6}\right)^{3/2}.
+\]
 
-Taking square roots: $abc \leq (S/6)^{3/2}$.
+\textbf{(ii)} Equality in the given inequality occurs when $ab = bc = ca$. Since $a$, $b$, $c > 0$, this forces $a = b = c$.
 
-\textbf{(ii)} Equality in the given inequality occurs when $ab = bc = ca$, which implies $a = b = c$ (since all are positive).
-
-When $a = b = c$, the rectangular prism is a cube. Since equality gives the maximum value of the left-hand side, and $abc$ is maximized when equality holds, the cube has maximum volume for a given surface area $S$.
+When $a = b = c$, the prism is a cube. Equality in the inequality means the left-hand side is maximised, so the volume $abc$ is largest when $a = b = c$. Therefore, for fixed surface area $S$, the cube has maximum volume.
 \end{solution}
 
 \begin{takeaways}
 \begin{itemize}
-    \item AM-GM: For $n$ positive numbers, product $\leq$ (arithmetic mean)$^n$
-    \item Equality: Occurs when all numbers are equal
-    \item Optimization: Maximum volume for fixed surface area occurs at equality condition
+    \item Surface area: express $S$ in terms of the three face areas $ab$, $bc$, $ca$
+    \item Given inequality: applied with arithmetic mean $A = S/6$
+    \item Equality: all face areas equal $\Longrightarrow$ $a=b=c$, giving maximum volume
 \end{itemize}
 \end{takeaways}
-
