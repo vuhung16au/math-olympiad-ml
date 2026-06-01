@@ -33,3 +33,29 @@ x^2 + y^2 + z^2
     \item The problem statement is not rigorous when it says "spirals 3 times" as this could be interpreted in different ways, relies entirely on the student's visual intuition
 \end{itemize}
 \end{takeaways}
+
+\begin{remark}[A more rigorous formulation]
+The original problem can be rephrased as follows.
+
+A curve $\mathcal{C}$ lies on the sphere $x^2 + y^2 + z^2 = 9$. A particle moves along $\mathcal{C}$ such that its height is given by $z = t$ for $-3 \le t \le 3$.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item By considering only the $x$ and $y$ coordinates of the particle, show that its path traces a circle in the horizontal plane with a radius of $r(t) = \sqrt{9 - t^2}$.
+    \item The particle rotates around the $z$-axis such that its angle $\theta$ increases linearly with $t$. If the particle completes exactly three full rotations between $t = -3$ and $t = 3$, find $\theta(t)$.
+    \item Hence, write down the parametric equations for the curve $\mathcal{C}$.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Outline of the solution.}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item With $z = t$ on the sphere, $x^2 + y^2 = 9 - t^2$, so at each height the particle lies on the circle $x^2 + y^2 = r(t)^2$ in the plane $z = t$, where $r(t) = \sqrt{9 - t^2}$.
+    \item Three full rotations means $\theta(3) - \theta(-3) = 6\pi$. Since $\theta$ is linear in $t$, write $\theta(t) = at + b$; then $6a = 6\pi$, so $a = \pi$. One convenient choice is $\theta(t) = \pi t$ (any choice of $b$ shifts the starting angle but not the number of turns).
+    \item In cylindrical coordinates, $x(t) = r(t)\cos\theta(t)$, $y(t) = r(t)\sin\theta(t)$, $z(t) = t$, giving
+    \[
+    x(t) = \sqrt{9 - t^2}\cos(\pi t), \qquad
+    y(t) = \sqrt{9 - t^2}\sin(\pi t), \qquad
+    z(t) = t,
+    \qquad -3 \le t \le 3.
+    \]
+    This agrees with the parameterisation above after the substitution $t \mapsto z/3$.
+\end{enumerate}
+\end{remark}
