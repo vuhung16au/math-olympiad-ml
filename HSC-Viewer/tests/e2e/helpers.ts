@@ -112,6 +112,11 @@ export async function expectSinglePageViewActive(page: Page): Promise<void> {
   await expect(page.getByRole("button", { name: "Continuous view" })).toHaveAttribute("aria-pressed", "false");
 }
 
+export async function openMobileViewerTools(page: Page): Promise<void> {
+  await page.getByRole("button", { name: "Show viewer tools" }).click();
+  await expect(page.getByRole("button", { name: "Hide viewer tools" })).toBeVisible();
+}
+
 export async function gotoViewer(page: Page, options: ViewerUrlOptions = {}): Promise<void> {
   await ensureCookieConsent(page);
 

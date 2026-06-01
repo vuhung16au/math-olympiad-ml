@@ -14,6 +14,7 @@ Agents may only read/write the following keys:
 | `last-page-{slug}` | Cookie | `number` (page index) | 30 days | Restore the last viewed page within a booklet |
 | `zoom-level` | Cookie | `string` (e.g. `"fit-width"`, `"125%"`) | 30 days | Persist zoom preference |
 | `theme` | Cookie | `"light"` \| `"dark"` \| `"sepia"` | 365 days | Persist theme preference |
+| `hsc_view_mode` | Cookie | `"continuous"` \| `"single"` | 365 days | Global PDF view mode for all booklets (desktop and mobile) |
 | `shortcuts-seen` | Cookie | `"1"` | 365 days | Suppress first-visit shortcut hint after dismissal |
 | `hsc_cookie_consent` | Cookie | `"1"` | 365 days | Suppress the one-time functional-cookie notice after the user accepts |
 | `session-state` | `sessionStorage` | JSON object | Session (tab close) | Transient viewer state (scroll position, outline open/closed) |

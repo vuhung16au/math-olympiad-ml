@@ -35,7 +35,7 @@ bunx playwright test tests/e2e/my-spec.spec.ts
 | File | Coverage area |
 |---|---|
 | `viewer-smoke.spec.ts` | Shell renders sidebar, toolbar, navigator, footer |
-| `viewer-default-view.spec.ts` | First visit defaults to continuous view (desktop + mobile); saved single preference restores |
+| `viewer-default-view.spec.ts` | First visit defaults to continuous view (desktop + mobile); saved single preference restores; mobile/desktop view mode persists across booklets |
 | `navigation-and-state.spec.ts` | Next/prev/page-input updates route and `last-url` cookie |
 | `toolbar-and-zoom.spec.ts` | Tooltip attributes and zoom cookie persistence |
 | `navigator-outline.spec.ts` | Pages and outline navigation jump to expected targets |

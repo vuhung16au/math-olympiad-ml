@@ -13,7 +13,7 @@ State in HSC-Viewer is simple and deliberately local. There is no global state l
 | Mobile menu open | React `useState` in `AppShell` / `MobileMenu` | UI-local |
 | Outline tab (pages vs outline) | Cookie via `PREF_KEYS.outlineTab` | Persists across refreshes |
 | Reading theme (light/dark/sepia) | Cookie via `PREF_KEYS.readingTheme` | Persists across sessions |
-| View mode (continuous / single page) | Cookie via `PREF_KEYS.viewMode` | Persists across sessions; **default is continuous** when the cookie is absent |
+| View mode (continuous / single page) | Cookie via `PREF_KEYS.viewMode` (`hsc_view_mode`) | **Global across all booklets** on desktop and mobile; persists across sessions; **default is continuous** when the cookie is absent |
 | Zoom / scale | Cookie via `PREF_KEYS.scale` | Persists across sessions |
 | Last visited page per booklet | Cookie via `PREF_KEYS.lastPageBySlug` | Enables resume-on-return |
 | Last opened booklet URL | Cookie via `PREF_KEYS.lastUrl` | Used by home route to restore session |

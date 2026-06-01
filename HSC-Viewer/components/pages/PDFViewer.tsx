@@ -279,7 +279,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     setOutlineError(null);
   }, [e2ePdfMockMode]);
 
-  // Hydrate client-only toolbar preferences after mount to avoid SSR hydration mismatches.
+  // Hydrate global viewer preferences once per mount (shared across all booklets).
   useEffect(() => {
     const isMobile = isMobilePdfViewport();
     const savedViewMode = getPref(PREF_KEYS.viewMode);
@@ -319,14 +319,19 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       }
     }
 
-    if (initialPage === 1) {
-      const savedPageForBooklet = getLastPageForSlug(booklet.slug);
-      if (savedPageForBooklet) {
-        setCurrentPage(Math.max(1, Math.floor(savedPageForBooklet)));
-      }
+    setArePrefsHydrated(true);
+  }, []);
+
+  // Restore last page for this booklet when landing without a deep-linked page.
+  useEffect(() => {
+    if (initialPage !== 1) {
+      return;
     }
 
-    setArePrefsHydrated(true);
+    const savedPageForBooklet = getLastPageForSlug(booklet.slug);
+    if (savedPageForBooklet) {
+      setCurrentPage(Math.max(1, Math.floor(savedPageForBooklet)));
+    }
   }, [booklet.slug, initialPage]);
 
   // Persist toolbar preferences to cookies
@@ -553,6 +558,14 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
 
     return "none";
   }, [readingTheme]);
+
+  const handleToggleViewMode = useCallback(() => {
+    setViewMode((mode) => {
+      const nextMode = mode === "continuous" ? "single" : "continuous";
+      setPref(PREF_KEYS.viewMode, nextMode);
+      return nextMode;
+    });
+  }, []);
 
   const canGoPrevious = viewMode === "continuous" ? currentPage > 1 : spreadStartPage > 1;
   const canGoNext =
@@ -906,7 +919,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
             onPreviousPage={handlePreviousPage}
             onNextPage={handleNextPage}
             viewMode={viewMode}
-            onToggleViewMode={() => setViewMode((m) => (m === "continuous" ? "single" : "continuous"))}
+            onToggleViewMode={handleToggleViewMode}
             readingTheme={readingTheme}
             onReadingThemeChange={(theme) => {
               setReadingTheme(theme);
