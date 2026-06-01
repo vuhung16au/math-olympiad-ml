@@ -30,6 +30,7 @@ export default defineConfig({
     timeout: 120_000,
     env: {
       NEXT_PUBLIC_E2E_MOCK_PDF: "1",
+      NEXT_PUBLIC_IS_E2E: "1",
     },
   },
 });
