@@ -31,6 +31,9 @@ export default defineConfig({
     env: {
       NEXT_PUBLIC_E2E_MOCK_PDF: "1",
       NEXT_PUBLIC_IS_E2E: "1",
+      // Avoid EMFILE on macOS by using polling instead of file watchers.
+      WATCHPACK_POLLING: "true",
+      WATCHPACK_POLLING_INTERVAL: "1000",
     },
   },
 });

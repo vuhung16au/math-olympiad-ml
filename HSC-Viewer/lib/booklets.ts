@@ -214,5 +214,7 @@ export function getAvailableBooklets(): Booklet[] {
 }
 
 export function isValidBookletPage(booklet: Booklet, page: number): boolean {
-  return Number.isSafeInteger(page) && page >= 1 && page <= booklet.pageCount;
+  // Web pages are 0-based: 0 = matte (PDF page 1).
+  // booklet.pageCount is the total PDF page count.
+  return Number.isSafeInteger(page) && page >= 0 && page < booklet.pageCount;
 }

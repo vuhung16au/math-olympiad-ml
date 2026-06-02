@@ -32,7 +32,8 @@ function parsePageParam(pageParam: string): number | null {
   }
 
   const page = Number(normalized);
-  if (!Number.isSafeInteger(page) || page < 1) {
+  // Web pages are 0-based: 0 = matte (PDF page 1).
+  if (!Number.isSafeInteger(page) || page < 0) {
     return null;
   }
 
@@ -251,12 +252,12 @@ export async function GET(
 ) {
   const { slug, page: pageParam } = await context.params;
   const booklet = getBookletBySlug(slug);
-  const page = parsePageParam(pageParam);
+  const webPage = parsePageParam(pageParam);
   let errorStage: string | null = null;
   let pdfjsError: string | null = null;
   let sharpError: string | null = null;
 
-  if (!booklet || !page || !isValidBookletPage(booklet, page)) {
+  if (!booklet || webPage === null || !isValidBookletPage(booklet, webPage)) {
     const fallback = await renderFallbackPng();
     return pngResponse(fallback, {
       status: 200,
@@ -268,7 +269,7 @@ export async function GET(
   }
 
   if (IS_E2E_PDF_MOCK_ENABLED) {
-    const png = await renderE2EMockPng(booklet.slug, page);
+    const png = await renderE2EMockPng(booklet.slug, webPage);
     return pngResponse(png, {
       status: 200,
       headers: {
@@ -280,13 +281,14 @@ export async function GET(
 
   try {
     const pdfArrayBuffer = await fetchArrayBufferWithRetry(booklet.pdfUrl, 3);
+    const pdfPageNumber = webPage + 1; // pdf.js pages are 1-based
 
     let pagePng: Buffer | null = null;
     let renderer: string | null = null;
 
     // Preferred: pdf.js -> canvas -> PNG (more reliable across environments).
     try {
-      pagePng = await renderPdfPageWithPdfjsCanvas(pdfArrayBuffer, page);
+      pagePng = await renderPdfPageWithPdfjsCanvas(pdfArrayBuffer, pdfPageNumber);
       renderer = "pdfjs_canvas";
     } catch (err) {
       pdfjsError = err instanceof Error ? err.message : "unknown";
@@ -298,7 +300,8 @@ export async function GET(
     if (!pagePng) {
       try {
         const pdfBuffer = Buffer.from(pdfArrayBuffer);
-        pagePng = await sharp(pdfBuffer, { density: 200, page: page - 1 })
+        // sharp's PDF page index is 0-based; webPage matches that.
+        pagePng = await sharp(pdfBuffer, { density: 200, page: webPage })
           .png()
           .toBuffer();
         renderer = "sharp_pdf";
@@ -321,8 +324,8 @@ export async function GET(
     // Compose the full 1200×630 image: left = page raster, right = text panel.
     const rightPng = await renderRightPanelPng({
       bookletTitle: booklet.title,
-      page,
-      description: booklet.description || `View Page ${page} of ${booklet.title} on HSC Math Hub.`,
+      page: webPage,
+      description: booklet.description || `View Page ${webPage} of ${booklet.title} on HSC Math Hub.`,
     });
 
     const composedPng = await sharp({
@@ -381,8 +384,9 @@ export async function GET(
         "Cache-Control": CACHE_CONTROL,
         // Helpful for debugging which page was requested.
         "X-OG-Booklet": booklet.slug,
-        "X-OG-Page": String(page),
-        "X-OG-Source": `${SITE_URL}/booklets/${booklet.slug}/${page}`,
+        "X-OG-Page": String(webPage),
+        "X-OG-Pdf-Page": String(pdfPageNumber),
+        "X-OG-Source": `${SITE_URL}/booklets/${booklet.slug}/${webPage}`,
         "X-OG-Renderer": `${renderer ?? "unknown"}_composed`,
         ...(errorStage
           ? {

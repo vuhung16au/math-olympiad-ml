@@ -149,7 +149,7 @@ export default function PDFControls({
       ? ""
       : (() => {
           const url = new URL(
-            `/booklets/${bookletSlug}/${Math.max(1, currentPage)}`,
+            `/booklets/${bookletSlug}/${Math.max(0, currentPage)}`,
             window.location.origin,
           );
           // Bust Meta link-preview cache when sharing (Messenger caches per URL).
@@ -278,7 +278,8 @@ export default function PDFControls({
   const commitPageChange = () => {
     const parsed = Number(pageDraft);
     if (Number.isFinite(parsed)) {
-      onPageChange(parsed);
+      const clamped = Math.min(Math.max(Math.floor(parsed), 0), Math.max(totalPages, 0));
+      onPageChange(clamped);
     }
     setPageDraft(String(currentPage));
     onPageInputEditingChange(false);
@@ -357,8 +358,8 @@ export default function PDFControls({
       <input
         data-testid="page-number-input"
         type="number"
-        min={1}
-        max={Math.max(totalPages, 1)}
+        min={0}
+        max={Math.max(totalPages, 0)}
         value={pageDraft}
         onChange={(event) => setPageDraft(event.target.value)}
         onFocus={() => onPageInputEditingChange(true)}

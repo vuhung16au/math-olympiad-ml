@@ -21,7 +21,7 @@ function parsePageParam(pageParam: string): number | null {
   }
 
   const page = Number(pageParam);
-  if (!Number.isSafeInteger(page) || page < 1) {
+  if (!Number.isSafeInteger(page) || page < 0) {
     return null;
   }
 
@@ -50,9 +50,9 @@ export async function generateMetadata({ params, searchParams }: BookletPageWith
   const canonicalUrl =
     booklet && page
       ? bookletPageCanonicalUrl(booklet.slug, page, shareVersion)
-      : bookletPageCanonicalUrl(slug, parsePageParam(pageParam) ?? 1, shareVersion);
+      : bookletPageCanonicalUrl(slug, parsePageParam(pageParam) ?? 0, shareVersion);
 
-  if (!booklet || !page || !isValidBookletPage(booklet, page)) {
+  if (!booklet || page === null || !isValidBookletPage(booklet, page)) {
     return buildNotFoundMetadata(canonicalUrl);
   }
 
@@ -74,7 +74,7 @@ export default async function BookletPageWithPage({ params }: BookletPageWithPag
   const booklet = getBookletBySlug(slug);
   const page = parsePageParam(pageParam);
 
-  if (!booklet || !booklet.isAvailable || !page || !isValidBookletPage(booklet, page)) {
+  if (!booklet || !booklet.isAvailable || page === null || !isValidBookletPage(booklet, page)) {
     notFound();
   }
 

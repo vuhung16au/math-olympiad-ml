@@ -89,7 +89,7 @@ export async function mockPdfRequests(page: Page, mode: PdfResponseMode = "succe
   });
 }
 
-export const DEFAULT_SHARE_PAGE_URL = `http://localhost:3000/booklets/${BOOKLET_SLUG}/1?m=6`;
+export const DEFAULT_SHARE_PAGE_URL = `http://localhost:3000/booklets/${BOOKLET_SLUG}/0?m=6`;
 
 export async function ensureCookieConsent(page: Page): Promise<void> {
   await page.context().addCookies([

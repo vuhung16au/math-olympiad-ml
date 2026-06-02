@@ -26,16 +26,16 @@ export async function generateMetadata({ params }: BookletPageProps) {
     return buildNotFoundMetadata(canonicalUrl);
   }
 
-  const title = `${booklet.title} — Page 1`;
+  const title = `${booklet.title} — Page 0`;
   const description = clampOgDescription(
-    booklet.description || `View Page 1 of ${booklet.title} on HSC Math Hub.`,
+    booklet.description || `View Page 0 of ${booklet.title} on HSC Math Hub.`,
   );
 
   return buildBookletPageMetadata({
     title,
     description,
     canonicalUrl,
-    imageUrl: bookletOgImageUrl(booklet.slug, 1),
+    imageUrl: bookletOgImageUrl(booklet.slug, 0),
   });
 }
 
@@ -47,5 +47,5 @@ export default async function BookletPage({ params }: BookletPageProps) {
     notFound();
   }
 
-  return <PDFViewer booklet={booklet} initialPage={1} />;
+  return <PDFViewer booklet={booklet} initialPage={0} />;
 }

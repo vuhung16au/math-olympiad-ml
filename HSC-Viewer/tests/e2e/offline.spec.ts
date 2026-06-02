@@ -73,7 +73,7 @@ test.describe("PDF caching (network-first with offline fallback)", () => {
 
     // Seed the cache: load the booklet while online
     await mockPdfRequests(page, "success");
-    await page.goto(`/booklets/${BOOKLET_SLUG}/1`);
+    await page.goto(`/booklets/${BOOKLET_SLUG}/0`);
     // Wait for the PDF route to be intercepted / cached
     await page.waitForTimeout(1500);
 

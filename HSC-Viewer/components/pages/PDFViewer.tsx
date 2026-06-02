@@ -72,11 +72,12 @@ type E2EPdfMockMode = "off" | "success" | "error";
 
 const E2E_MOCK_TOTAL_PAGES = 8;
 const E2E_MOCK_OUTLINE: OutlineItem[] = [
-  { id: "e2e-outline-1", title: "Introduction", page: 1, level: 0 },
-  { id: "e2e-outline-2", title: "Chapter 1", page: 2, level: 0 },
-  { id: "e2e-outline-3", title: "Chapter 2", page: 4, level: 0 },
-  { id: "e2e-outline-4", title: "Worked Example", page: 5, level: 1 },
-  { id: "e2e-outline-5", title: "Exercises", page: 7, level: 0 },
+  // Outline pages are 0-based web pages (PDF page number - 1).
+  { id: "e2e-outline-1", title: "Introduction", page: 0, level: 0 },
+  { id: "e2e-outline-2", title: "Chapter 1", page: 1, level: 0 },
+  { id: "e2e-outline-3", title: "Chapter 2", page: 3, level: 0 },
+  { id: "e2e-outline-4", title: "Worked Example", page: 4, level: 1 },
+  { id: "e2e-outline-5", title: "Exercises", page: 6, level: 0 },
 ];
 const IS_E2E_PDF_MOCK_ENABLED = process.env.NEXT_PUBLIC_E2E_MOCK_PDF === "1";
 
@@ -137,7 +138,8 @@ async function resolveOutlinePage(
   const target = explicitDestination[0];
 
   if (typeof target === "number" && Number.isFinite(target)) {
-    return target + 1;
+    // target is a 0-based page index in the PDF.
+    return target;
   }
 
   if (!isPdfReference(target)) {
@@ -152,18 +154,19 @@ async function resolveOutlinePage(
   }
 
   const pageIndex = await pdf.getPageIndex(target);
-  const page = pageIndex + 1;
+  const page = pageIndex;
   referenceCache.set(refKey, page);
 
   return page;
 }
 
-async function extractOutlineItems(pdf: PdfDocumentLike, totalPages: number): Promise<OutlineItem[]> {
+async function extractOutlineItems(pdf: PdfDocumentLike, totalPdfPages: number): Promise<OutlineItem[]> {
   const rawOutline = await pdf.getOutline();
   if (!rawOutline || rawOutline.length === 0) {
     return [];
   }
 
+  const maxWebPage = Math.max(totalPdfPages - 1, 0);
   const outline: OutlineItem[] = [];
   const namedDestinationCache = new Map<string, number>();
   const referenceCache = new Map<string, number>();
@@ -178,7 +181,7 @@ async function extractOutlineItems(pdf: PdfDocumentLike, totalPages: number): Pr
         referenceCache,
       );
 
-      if (resolvedPage && resolvedPage >= 1 && resolvedPage <= totalPages) {
+      if (resolvedPage !== null && resolvedPage >= 0 && resolvedPage <= maxWebPage) {
         outline.push({
           id: `outline-${idCounter}`,
           title: (node.title ?? "Untitled section").trim() || "Untitled section",
@@ -200,6 +203,9 @@ async function extractOutlineItems(pdf: PdfDocumentLike, totalPages: number): Pr
 }
 
 export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) {
+  // Web pages are 0-based: 0 = matte (PDF page 1).
+  const initialWebPage = Math.max(0, Math.floor(initialPage));
+  const initialPdfPage = initialWebPage + 1;
   const stageRef = useRef<HTMLDivElement | null>(null);
   const navigatorRef = useRef<HTMLElement | null>(null);
   const lastWheelNavigationRef = useRef(0);
@@ -210,10 +216,11 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const currentPageRef = useRef(1);
   const suppressIntersectionUntilRef = useRef(0);
   const [numPages, setNumPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(Math.max(1, Math.floor(initialPage)));
+  // Internal state tracks PDF page numbers (1-based), even though the URL/UI is 0-based.
+  const [currentPage, setCurrentPage] = useState(Math.max(1, Math.floor(initialPdfPage)));
   const [viewMode, setViewMode] = useState<"single" | "continuous">("continuous");
   const [renderedPages, setRenderedPages] = useState<Set<number>>(() =>
-    new Set([Math.max(1, Math.floor(initialPage))]),
+    new Set([Math.max(1, Math.floor(initialPdfPage))]),
   );
   const [readingTheme, setReadingTheme] = useState<ReadingTheme>("light");
   const [scale, setScale] = useState(PDF_DEFAULTS.defaultScale);
@@ -324,15 +331,23 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
 
   // Restore last page for this booklet when landing without a deep-linked page.
   useEffect(() => {
-    if (initialPage !== 1) {
+    if (initialWebPage !== 0) {
       return;
     }
 
-    const savedPageForBooklet = getLastPageForSlug(booklet.slug);
-    if (savedPageForBooklet) {
-      setCurrentPage(Math.max(1, Math.floor(savedPageForBooklet)));
+    // Only restore when landing on the slug root (`/booklets/{slug}`).
+    if (typeof window !== "undefined") {
+      const rootPath = `/booklets/${booklet.slug}`;
+      if (window.location.pathname !== rootPath) {
+        return;
+      }
     }
-  }, [booklet.slug, initialPage]);
+
+    const savedPageForBooklet = getLastPageForSlug(booklet.slug);
+    if (savedPageForBooklet !== null) {
+      setCurrentPage(Math.max(1, Math.floor(savedPageForBooklet) + 1));
+    }
+  }, [booklet.slug, initialWebPage]);
 
   // Persist toolbar preferences to cookies
   useEffect(() => {
@@ -370,8 +385,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   // Reset jump state whenever a new booklet/page combination is loaded.
   useEffect(() => {
     didInitialJumpRef.current = false;
-    setRenderedPages(expandPageWindow(Math.max(1, Math.floor(initialPage)), Math.max(numPages, 1)));
-  }, [booklet.slug, initialPage, numPages]);
+    setRenderedPages(expandPageWindow(Math.max(1, Math.floor(initialPdfPage)), Math.max(numPages, 1)));
+  }, [booklet.slug, initialPdfPage, numPages]);
 
   const scrollContinuousPage = useCallback((pageNum: number, behavior: ScrollBehavior = "smooth") => {
     const el = pageRefs.current.get(pageNum);
@@ -463,7 +478,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       return;
     }
 
-    const targetPage = validatePageNumber(initialPage, numPages);
+    const targetPage = validatePageNumber(initialPdfPage, numPages);
     if (targetPage <= 1) {
       didInitialJumpRef.current = true;
       return;
@@ -488,7 +503,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     }, 120);
 
     return () => window.clearTimeout(timer);
-  }, [initialPage, numPages, viewMode]);
+  }, [initialPdfPage, numPages, viewMode]);
 
   // When switching to continuous mode, scroll to the page that was active in single mode
   useEffect(() => {
@@ -533,6 +548,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     () => validatePageNumber(currentPage, numPages),
     [currentPage, numPages],
   );
+  const safeCurrentWebPage = useMemo(() => Math.max(0, safeCurrentPage - 1), [safeCurrentPage]);
+  const totalWebPages = useMemo(() => Math.max(numPages - 1, 0), [numPages]);
 
   const isTwoPageSpread = isFullscreenStage && isDesktopLandscape;
   const spreadStartPage = isTwoPageSpread && safeCurrentPage % 2 === 0
@@ -584,6 +601,13 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       trackPdfNavigation(booklet.title, rawPage, numPages);
     },
     [booklet.title, numPages, scrollToPage, viewMode],
+  );
+
+  const handleWebPageChange = useCallback(
+    (webPage: number) => {
+      handlePageChange(webPage + 1);
+    },
+    [handlePageChange],
   );
 
   const handleNextPage = useCallback(() => {
@@ -797,10 +821,16 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       return;
     }
 
-    const pageForUrl = validatePageNumber(currentPage, numPages);
-    const nextPath = `/booklets/${booklet.slug}/${pageForUrl}`;
+    const pdfPageForUrl = validatePageNumber(currentPage, numPages);
+    const webPageForUrl = Math.max(0, pdfPageForUrl - 1);
+    const rootPath = `/booklets/${booklet.slug}`;
+    const nextPath = `/booklets/${booklet.slug}/${webPageForUrl}`;
 
     if (window.location.pathname === nextPath) {
+      return;
+    }
+    // Keep the slug root URL stable for page 0 (matte).
+    if (webPageForUrl === 0 && window.location.pathname === rootPath) {
       return;
     }
 
@@ -810,20 +840,22 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       }
 
       syncUrlTimerRef.current = window.setTimeout(() => {
-        window.history.replaceState(null, "", nextPath);
-        setPref(PREF_KEYS.lastUrl, nextPath);
+        const pathToStore = webPageForUrl === 0 ? rootPath : nextPath;
+        window.history.replaceState(null, "", pathToStore);
+        setPref(PREF_KEYS.lastUrl, pathToStore);
         setPref(PREF_KEYS.lastSlug, booklet.slug);
-        setLastPageForSlug(booklet.slug, pageForUrl);
+        setLastPageForSlug(booklet.slug, webPageForUrl);
         syncUrlTimerRef.current = null;
       }, 220);
 
       return;
     }
 
-    window.history.replaceState(null, "", nextPath);
-    setPref(PREF_KEYS.lastUrl, nextPath);
+    const pathToStore = webPageForUrl === 0 ? rootPath : nextPath;
+    window.history.replaceState(null, "", pathToStore);
+    setPref(PREF_KEYS.lastUrl, pathToStore);
     setPref(PREF_KEYS.lastSlug, booklet.slug);
-    setLastPageForSlug(booklet.slug, pageForUrl);
+    setLastPageForSlug(booklet.slug, webPageForUrl);
   }, [booklet.slug, currentPage, isPageInputEditing, numPages, viewMode]);
 
   useEffect(() => {
@@ -910,12 +942,12 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
             bookletTitle={booklet.title}
             bookletSlug={booklet.slug}
             pdfUrl={booklet.pdfUrl}
-            currentPage={viewMode === "continuous" ? currentPage : safeCurrentPage}
-            totalPages={numPages}
+            currentPage={viewMode === "continuous" ? Math.max(0, currentPage - 1) : safeCurrentWebPage}
+            totalPages={totalWebPages}
             scale={scale}
             canGoPrevious={canGoPrevious}
             canGoNext={canGoNext}
-            onPageChange={handlePageChange}
+            onPageChange={handleWebPageChange}
             onPreviousPage={handlePreviousPage}
             onNextPage={handleNextPage}
             viewMode={viewMode}
@@ -1219,13 +1251,13 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                   <div className="max-h-[calc(66vh-58px)] overflow-y-auto p-3 lg:max-h-[calc(100vh-21.5rem)]">
                     {numPages > 0 ? (
                       <div className="grid grid-cols-4 gap-2">
-                        {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
+                        {Array.from({ length: numPages }, (_, i) => i).map((pageNum) => (
                           <button
                             key={`page-jump-${pageNum}`}
                             type="button"
-                            onClick={() => handlePageChange(pageNum)}
+                            onClick={() => handleWebPageChange(pageNum)}
                             className={`rounded-lg border px-1.5 py-1.5 text-xs font-medium transition ${
-                              pageNum === currentPage
+                              pageNum === safeCurrentWebPage
                                 ? "border-[var(--color-purple)] bg-[color:color-mix(in_srgb,var(--color-purple)_90%,white)] text-white"
                                 : "border-black/10 bg-white text-[var(--color-purple)] hover:border-[var(--color-purple)]"
                             }`}
@@ -1261,9 +1293,9 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                           <li key={item.id}>
                             <button
                               type="button"
-                              onClick={() => handlePageChange(item.page)}
+                              onClick={() => handleWebPageChange(item.page)}
                               className={`w-full rounded-lg border px-3 py-2 text-left text-sm transition ${
-                                currentPage === item.page
+                                safeCurrentWebPage === item.page
                                   ? "border-[var(--color-purple)] bg-[color:color-mix(in_srgb,var(--color-purple)_8%,white)] text-[var(--color-purple)]"
                                   : "border-transparent text-[color:color-mix(in_srgb,var(--color-charcoal)_86%,white)] hover:border-black/10 hover:bg-white"
                               }`}

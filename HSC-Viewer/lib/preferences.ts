@@ -9,6 +9,7 @@ export type ResumeMode = "auto" | "prompt" | "off";
 
 const LAST_PAGE_ENTRY_DELIMITER = ",";
 const LAST_PAGE_VALUE_DELIMITER = ":";
+const LAST_PAGE_WEB_PREFIX = "w";
 
 function setCookie(name: string, value: string): void {
   if (typeof document === "undefined") return;
@@ -69,12 +70,15 @@ function parseLastPageBySlugCookie(raw: string | null): Record<string, number> {
     }
 
     const slug = slugPart.trim();
-    const page = Number(pagePart.trim());
-    if (!slug || !Number.isSafeInteger(page) || page < 1) {
+    const pageToken = pagePart.trim();
+    const isWeb = pageToken.startsWith(LAST_PAGE_WEB_PREFIX);
+    const pageNumber = isWeb ? Number(pageToken.slice(1)) : Number(pageToken);
+    if (!slug || !Number.isSafeInteger(pageNumber) || pageNumber < 0) {
       continue;
     }
 
-    map[slug] = page;
+    // Legacy values were stored as 1-based PDF pages (>= 1). Convert to 0-based web pages.
+    map[slug] = isWeb ? pageNumber : Math.max(0, pageNumber - 1);
   }
 
   return map;
@@ -82,8 +86,8 @@ function parseLastPageBySlugCookie(raw: string | null): Record<string, number> {
 
 function serializeLastPageBySlugCookie(map: Record<string, number>): string {
   return Object.entries(map)
-    .filter(([slug, page]) => slug && Number.isSafeInteger(page) && page >= 1)
-    .map(([slug, page]) => `${slug}${LAST_PAGE_VALUE_DELIMITER}${page}`)
+    .filter(([slug, page]) => slug && Number.isSafeInteger(page) && page >= 0)
+    .map(([slug, page]) => `${slug}${LAST_PAGE_VALUE_DELIMITER}${LAST_PAGE_WEB_PREFIX}${page}`)
     .join(LAST_PAGE_ENTRY_DELIMITER);
 }
 
@@ -97,7 +101,8 @@ export function getLastPageForSlug(slug: string): number | null {
 }
 
 export function setLastPageForSlug(slug: string, page: number): void {
-  if (!slug || !Number.isSafeInteger(page) || page < 1) {
+  // Page is 0-based web page index.
+  if (!slug || !Number.isSafeInteger(page) || page < 0) {
     return;
   }
 

@@ -21,7 +21,7 @@ function getOgName(html: string, name: string): string | null {
 }
 
 test("booklet page includes OG meta in initial HTML and image endpoint returns PNG", async ({ request, baseURL }) => {
-  const url = "/booklets/hsc-last-resorts/97";
+  const url = "/booklets/hsc-last-resorts/0";
   const res = await request.get(url);
   expect(res.status(), "expected booklet page to return 200").toBe(200);
   const html = await res.text();
@@ -34,7 +34,7 @@ test("booklet page includes OG meta in initial HTML and image endpoint returns P
   const ogSiteName = getOgMeta(html, "og:site_name");
 
   expect(ogTitle).toContain("HSC Last Resorts");
-  expect(ogTitle).toContain("Page 97");
+  expect(ogTitle).toContain("Page 0");
   expect(ogDescription).toBeTruthy();
   expect(ogType).toBe("website");
   expect(ogSiteName).toBe("HSC Math Hub");
@@ -44,7 +44,7 @@ test("booklet page includes OG meta in initial HTML and image endpoint returns P
 
   expect(ogImage).toBeTruthy();
   expect(ogImage?.startsWith("https://")).toBe(true);
-  expect(ogImage).toContain("/og/preview-6/booklets/hsc-last-resorts/97.png");
+  expect(ogImage).toContain("/og/preview-6/booklets/hsc-last-resorts/0.png");
   expect(ogImage).not.toContain("?v=");
 
   // Facebook/Messenger expect secure_url and type for HTTPS images.
