@@ -216,15 +216,11 @@ This connects exponential form with polar form and is fundamental to many proofs
     \draw[acu angle,->] (0.4,0) arc (0:\thetaAngle:0.4);
     \node[bookred,font=\scriptsize] at ({0.55*cos(\thetaAngle/2)},{0.55*sin(\thetaAngle/2)}) {$\theta$};
     
-    % Label the point with multiple representations
-    \node[above right,font=\small,align=left] at (Z) {
-      $z = a + ib$
-    };
-    
-    \node[font=\scriptsize,align=left,text width=2.5cm] at (2.4,1.5) {
-      $= |z| \cdot (\cos\theta$\\
-      $\quad + i\sin\theta)$\\[0.1em]
-      $= |z| \cdot e^{i\theta}$
+    % Equivalent forms (stacked clear of the vector and projections)
+    \node[anchor=west,font=\small,align=left] at (1.75,2.15) {
+      $z = a + ib$\\[0.25em]
+      $= |z|\bigl(\cos\theta + i\sin\theta\bigr)$\\[0.25em]
+      $= |z|\,e^{i\theta}$
     };
     
     % Origin
