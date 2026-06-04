@@ -789,6 +789,122 @@ For this in Q2 (second quadrant): $x+y\cos\alpha < 0$ and $y\sin\alpha > 0$. Sin
 \end{center}
 \end{solution}
 
+\begin{problem}[Principal Square Root and Argument Locus]
+\textbf{Definition.} Every non-zero complex number $w = re^{i\theta}$ has two square roots. If $\theta$ is the principal argument of $w$ with $-\pi < \theta \le \pi$, the \textbf{principal square root} $\sqrt{w}$ is
+\[
+\sqrt{w} = \sqrt{r}\,e^{i\theta/2}.
+\]
+Let $z$ be a non-zero complex number with principal argument $-\pi < \arg(z) \le \pi$.
+
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+  \item Using the definition above, show that
+  \[
+  \sqrt{-z} =
+  \begin{cases}
+    -i\sqrt{z}, & 0 < \arg(z) \le \pi,\\[4pt]
+    i\sqrt{z}, & -\pi < \arg(z) \le 0.
+  \end{cases}
+  \]
+  \item Hence, solve $\sqrt{z} + \sqrt{-z} = 2$ for $z \in \mathbb{C}$.
+  \item Let $z_1$ and $z_2$ be the solutions from part~(b) with $\text{Im}(z_1) > 0$. A point $P$ represents $w$ on the Argand diagram. The locus of $P$ satisfies
+  \[
+  \arg\left(\frac{w - z_1}{w - z_2}\right) = \frac{\pi}{3}.
+  \]
+  Find the Cartesian equation of this locus, describe its geometric shape, and state any necessary domain restrictions.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{(a)} Write $z = re^{i\theta}$. Multiplying by $-1$ rotates by $\pi$; adjust $\arg(-z)$ into $(-\pi,\pi]$ by adding or subtracting $\pi$ according to the quadrant of $\theta$.
+  \item \textbf{(b)} Split into the two cases from part~(a). Solve for $\sqrt{z}$ first, square to obtain $z$, then verify $\arg(z)$ lies in the case you used.
+  \item \textbf{(c)} Substitute $w = x + iy$ and $z_1 = 2i$, $z_2 = -2i$. Rationalise the denominator. For argument $\pi/3$, require positive real and imaginary parts, then use $\tan(\pi/3) = \sqrt{3}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Full Solution]
+\textbf{Part (a).} Let $z = re^{i\theta}$ with $r > 0$ and $-\pi < \theta \le \pi$, so $\sqrt{z} = \sqrt{r}\,e^{i\theta/2}$.
+
+Multiplying by $-1$ rotates $z$ by $\pi$. To keep the principal argument in $(-\pi,\pi]$:
+\begin{itemize}[leftmargin=*]
+  \item If $0 < \theta \le \pi$, then $\arg(-z) = \theta - \pi$ and
+  \[
+  \sqrt{-z} = \sqrt{r}\,e^{i(\theta-\pi)/2}
+  = \sqrt{r}\,e^{i\theta/2}e^{-i\pi/2} = -i\sqrt{z}.
+  \]
+  \item If $-\pi < \theta \le 0$, then $\arg(-z) = \theta + \pi$ and
+  \[
+  \sqrt{-z} = \sqrt{r}\,e^{i(\theta+\pi)/2}
+  = \sqrt{r}\,e^{i\theta/2}e^{i\pi/2} = i\sqrt{z}.
+  \]
+\end{itemize}
+
+\textbf{Part (b).}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Case 1} ($0 < \arg(z) \le \pi$): $\sqrt{-z} = -i\sqrt{z}$ gives $\sqrt{z}(1-i)=2$, so $\sqrt{z} = \dfrac{2}{1-i} = 1+i$ and $z = (1+i)^2 = 2i$. Check: $\arg(2i)=\pi/2$.
+  \item \textbf{Case 2} ($-\pi < \arg(z) \le 0$): $\sqrt{-z} = i\sqrt{z}$ gives $\sqrt{z}(1+i)=2$, so $\sqrt{z} = 1-i$ and $z = (1-i)^2 = -2i$. Check: $\arg(-2i)=-\pi/2$.
+\end{itemize}
+Hence $z = \pm 2i$.
+
+\textbf{Part (c).} Take $z_1 = 2i$, $z_2 = -2i$, and $w = x + iy$. Then
+\[
+\frac{w-z_1}{w-z_2}
+= \frac{x + i(y-2)}{x + i(y+2)}
+= \frac{x^2 + y^2 - 4 - 4ix}{x^2 + (y+2)^2}.
+\]
+For $\arg(\cdot) = \pi/3$ (first quadrant), need $x^2 + y^2 - 4 > 0$ and $-4x > 0$, so $x < 0$. Also
+\[
+\sqrt{3} = \frac{-4x}{x^2 + y^2 - 4}
+\quad\Longrightarrow\quad
+x^2 + \frac{4\sqrt{3}}{3}x + y^2 = 4.
+\]
+Completing the square in $x$:
+\[
+\left(x + \frac{2\sqrt{3}}{3}\right)^2 + y^2 = \frac{16}{3}.
+\]
+The locus is the major arc of the circle with centre $\left(-\dfrac{2\sqrt{3}}{3},\,0\right)$ and radius $\dfrac{4\sqrt{3}}{3}$, lying in the left half-plane ($x < 0$), with endpoints $(0,2)$ and $(0,-2)$ excluded.
+
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.35,>=Stealth]
+  \pgfmathsetmacro{\R}{4/sqrt(3)}
+  \coordinate (C) at ({-2/sqrt(3)},0);
+
+  \draw[->,thick] (-3.8,0) -- (1.2,0) node[right,font=\small] {Re};
+  \draw[->,thick] (0,-2.8) -- (0,2.8) node[above,font=\small] {Im};
+
+  \draw[acu circle,dashed,warmstone!60] (C) circle ({\R});
+  \draw[very thick,bookpurple] (C) ++ (60:{\R}) arc (60:300:{\R});
+
+  \fill[acu point] (C) circle (1.4pt);
+  \node[below,font=\scriptsize] at (C) {centre};
+
+  \coordinate (Zone) at (0,2);
+  \coordinate (Ztwo) at (0,-2);
+  \fill[lawpurple] (Zone) circle (1.3pt);
+  \fill[lawpurple] (Ztwo) circle (1.3pt);
+  \node[right,font=\scriptsize] at (Zone) {$z_1=2i$};
+  \node[right,font=\scriptsize] at (Ztwo) {$z_2=-2i$};
+  \draw[bookred,thick] (Zone) circle (2.4pt);
+  \draw[bookred,thick] (Ztwo) circle (2.4pt);
+  \node[left,font=\tiny,bookred] at (0,1.55) {excluded};
+
+  \draw[dashed,bookpurple!40] (C) -- (Zone);
+  \node[font=\scriptsize,bookpurple] at ($ (C)!0.55!(Zone) + (0.22,0) $) {$R=\tfrac{4\sqrt{3}}{3}$};
+
+  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (-2.6,2.2) {
+    Circle: $\left(x+\tfrac{2\sqrt{3}}{3}\right)^2+y^2=\tfrac{16}{3}$\\
+    Locus: major arc with $x<0$\\
+    Endpoints $(0,\pm2)$ excluded
+  };
+\end{tikzpicture}
+\end{center}
+\end{solution}
+
+\begin{takeaways}
+The formal definition of a single principal square root is a university-level complex analysis idea and is technically outside the NESA Extension~2 syllabus (which usually expects two roots). Even so, this problem is excellent training: mastering case splits on the principal argument $(-\pi,\pi]$ is the kind of rigour needed for Band~6 Question~16-style work. The locus in part~(c) is a circular arc from an angle condition---the same circle family as Apollonius-type loci, with domain restrictions from the quadrant of the argument.
+\end{takeaways}
+
 \begin{problem}[Geometric Series with $n$-th Roots]
 If $z = \cos \frac{\pi}{n} + i \sin \frac{\pi}{n}$, and $n$ is a positive integer, prove:
 \begin{enumerate}[label=(\roman*),leftmargin=*]

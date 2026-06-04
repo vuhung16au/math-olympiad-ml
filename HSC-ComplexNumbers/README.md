@@ -17,10 +17,10 @@ Software/code remains MIT-licensed per the repository root LICENSE.
 
 The booklet `HSC-ComplexNumbers.tex` is organised in two parts:
 
-- **Part 1**: Detailed walk-throughs (15 problems) with every conversion, application of De Moivre's theorem, and geometric interpretation spelled out. Divided into basic (5), medium (5), and advanced (5) difficulty levels.
-- **Part 2**: Concise write-ups with hints and solution sketches (49 problems). Each problem includes an upside-down hint rendered via `styles/dl101-hints` before a short solution sketch. Divided into basic (17), medium (15), and advanced (17) difficulty levels.
+- **Part 1**: Detailed walk-throughs with every conversion, application of De Moivre's theorem, and geometric interpretation spelled out. Several problems at each of basic, medium, and advanced difficulty.
+- **Part 2**: Concise write-ups with hints and solution sketches. Each problem includes an upside-down hint rendered via `styles/dl101-hints` before a short solution sketch. Again organised into basic, medium, and advanced sets with several problems in each.
 
-The collection contains **64 total problems** covering a comprehensive range of complex number techniques and applications.
+The collection covers a broad range of complex number techniques and applications, and grows over time as new problems are added.
 
 ## What This Collection Focuses On
 
@@ -118,8 +118,8 @@ make pdf && make open
 - `.gitignore`: Filters LaTeX artefacts, keeps `releases/HSC-ComplexNumbers.pdf`.
 - `samples/`: Reference problems and source material from HSC past papers and resources.
 - `problems/`: Part-wise problem+solution snippets organized by difficulty that are `\input` into the main TeX file:
-  - `part1-basic.tex`, `part1-medium.tex`, `part1-advanced.tex` (5 problems each)
-  - `part2-basic.tex`, `part2-medium.tex`, `part2-advanced.tex` (17, 15, and 17 problems respectively)
+  - `part1-basic.tex`, `part1-medium.tex`, `part1-advanced.tex` (Part 1 problem sets by difficulty)
+  - `part2-basic.tex`, `part2-medium.tex`, `part2-advanced.tex` (Part 2 problem sets by difficulty)
 - `solutions/`: Reserved for future standalone solution files.
 - `styles/`: Shared LaTeX style files (colors, hint box, problem environments):
   - `dl101-colors.sty`: Color definitions for consistent formatting
