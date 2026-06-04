@@ -34,28 +34,82 @@ x^2 + y^2 + z^2
 \end{itemize}
 \end{takeaways}
 
-\begin{remark}[A more rigorous formulation]
-The original problem can be rephrased as follows.
-
-A curve $\mathcal{C}$ lies on the sphere $x^2 + y^2 + z^2 = 9$. A particle moves along $\mathcal{C}$ such that its height is given by $z = t$ for $-3 \le t \le 3$.
-\begin{enumerate}[label=\textbf{(\alph*)}]
-    \item By considering only the $x$ and $y$ coordinates of the particle, show that its path traces a circle in the horizontal plane with a radius of $r(t) = \sqrt{9 - t^2}$.
-    \item The particle rotates around the $z$-axis such that its angle $\theta$ increases linearly with $t$. If the particle completes exactly three full rotations between $t = -3$ and $t = 3$, find $\theta(t)$.
-    \item Hence, write down the parametric equations for the curve $\mathcal{C}$.
-\end{enumerate}
+\begin{remark}[Revived problem statement]
+The following is a fixed version keeps the same geometric setup but makes the motion along the curve more explicit.
 
 \medskip
-\noindent\textbf{Outline of the solution.}
-\begin{enumerate}[label=\textbf{(\alph*)}]
-    \item With $z = t$ on the sphere, $x^2 + y^2 = 9 - t^2$, so at each height the particle lies on the circle $x^2 + y^2 = r(t)^2$ in the plane $z = t$, where $r(t) = \sqrt{9 - t^2}$.
-    \item Three full rotations means $\theta(3) - \theta(-3) = 6\pi$. Since $\theta$ is linear in $t$, write $\theta(t) = at + b$; then $6a = 6\pi$, so $a = \pi$. One convenient choice is $\theta(t) = \pi t$ (any choice of $b$ shifts the starting angle but not the number of turns).
-    \item In cylindrical coordinates, $x(t) = r(t)\cos\theta(t)$, $y(t) = r(t)\sin\theta(t)$, $z(t) = t$, giving
-    \[
-    x(t) = \sqrt{9 - t^2}\cos(\pi t), \qquad
-    y(t) = \sqrt{9 - t^2}\sin(\pi t), \qquad
-    z(t) = t,
-    \qquad -3 \le t \le 3.
-    \]
-    This agrees with the parameterisation above after the substitution $t \mapsto z/3$.
-\end{enumerate}
+\noindent\textbf{Problem 18 (revived): Curve on a Sphere}
+
+A curve $C$ spirals 3 times around the sphere centred at the origin and with radius 3, as shown below.
+
+\vspace{0.5em}
+\noindent
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/18-01.png}
+\end{center}
+\vspace{0.3em}
+% \noindent\textit{Figure 1: Curve $C$ spiraling around the sphere}
+
+\vspace{0.5em}
+A particle is initially at the point $(0, 0, -3)$ and moves along the curve $C$ on the surface of the sphere
+\textbf{with constant vertical velocity},
+ending at the point $(0, 0, 3)$.
+
+By using the diagram below, which shows the graphs of the functions
+
+$f_1(t)=\cos(\pi t)$, $f_2(t)=\sin(\pi t)$ and $g(t)=\sqrt{9-t^{2}}$,
+
+and considering the graphs $f_1(t)g(t)$ and $f_2(t)g(t)$.
+
+
+
+Give a possible set of parametric equations that describe the curve $C$.
+
+\vspace{0.5em}
+\noindent
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=stealth]
+    % Grid lines for reference (very thin)
+    \draw[gray!15, very thin, step=1.0] (-4.5, -1.2) grid (4.5, 3.7);
+
+    % Draw axes
+    \draw[->, >=stealth, thick] (-4.5, 0) -- (4.5, 0) node[below right] {$x$};
+    \draw[->, >=stealth, thick] (0, -1.2) -- (0, 3.7) node[above left] {$y$};
+
+    % Draw tick marks on x-axis
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4} {
+        \draw (\x, 0.1) -- (\x, -0.1) node[below, font=\small] {$\x$};
+    }
+    \node[below left, font=\small] at (0,0) {$O$};
+
+    % Draw tick marks on y-axis
+    \foreach \y in {-1,1,2,3} {
+        \draw (0.1, \y) -- (-0.1, \y) node[left, font=\small] {$\y$};
+    }
+
+    % Plot g(t) = sqrt(9-t^2) as a red semicircle
+    \draw[very thick, bookred] (3,0) arc (0:180:3);
+    \node[bookred, above left] at (-1.6, 2.4) {$g(t) = \sqrt{9-t^2}$};
+
+    % Plot f_1(t) = cos(pi t) as a purple cosine curve
+    \draw[very thick, bookpurple, samples=200, domain=-4:4] plot (\x, {cos(\x * 180)});
+    \node[bookpurple, above right] at (3.1, 0.6) {$f_1(t) = \cos(\pi t)$};
+\end{tikzpicture}
+\end{center}
+\vspace{0.3em}
+% \noindent\textit{Figure 2: Graphs of $f_1(t)=\cos(\pi t)$ and $g(t)=\sqrt{9-t^{2}}$}
+
+\vspace{0.5em}
+\noindent
+% \textbf{Note:} The problem statement is not mathematically rigorous; the phrase ``spirals 3 times'' relies entirely on the student's visual intuition to assume that the angular velocity of the particle around the $z$-axis is strictly constant with respect to its vertical displacement.
+
+% \medskip
+% Under the revived wording, a parameterisation matching the diagram is
+% \[
+% x(t) = \sqrt{9-t^2}\cos(\pi t), \qquad
+% y(t) = \sqrt{9-t^2}\sin(\pi t), \qquad
+% z(t) = t,
+% \qquad t \in [-3,3].
+% \]
+% This is equivalent to the solution above: if the revived parameter is $s \in [-3,3]$, then with $t = s/3 \in [-1,1]$ we have $g(s) = 3\sqrt{1-t^2}$ and $\cos(\pi s) = \cos(3\pi t)$.
 \end{remark}
