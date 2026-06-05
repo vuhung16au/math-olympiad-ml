@@ -180,7 +180,7 @@ export const BOOKLETS: Booklet[] = [
     pdfUrl: `${GITHUB_RAW_URL}/HSC-Collections/releases/HSC-Collections.pdf`,
     thumbnailPath: "/thumbnails/hsc-collections.png",
     description: "A curated collection of HSC Mathematics problems and solutions across key topics and techniques.",
-    pageCount: 52,
+    pageCount: 57,
     isAvailable: true,
   },
   {

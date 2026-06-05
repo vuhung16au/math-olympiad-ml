@@ -20,7 +20,6 @@ import {
 import {
   CONTINUOUS_RENDER_BUFFER,
   expandPageWindow,
-  fitWidthScale,
   getContinuousScrollRoot,
   isMobilePdfViewport,
   PDF_PAGE_ASPECT_RATIO,
@@ -207,6 +206,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const initialWebPage = Math.max(0, Math.floor(initialPage));
   const initialPdfPage = initialWebPage + 1;
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const pdfColumnRef = useRef<HTMLDivElement | null>(null);
   const navigatorRef = useRef<HTMLElement | null>(null);
   const lastWheelNavigationRef = useRef(0);
   const syncUrlTimerRef = useRef<number | null>(null);
@@ -306,8 +306,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       const parsed = parseFloat(savedScale);
       setScale(validateScale(Number.isFinite(parsed) ? parsed : PDF_DEFAULTS.defaultScale));
     } else if (isMobile) {
-      const approxWidth = Math.max(280, window.innerWidth - 64);
-      setScale(fitWidthScale(approxWidth));
+      setScale(PDF_DEFAULTS.defaultScale);
     }
 
     const savedOutlineTab = getPref(PREF_KEYS.outlineTab);
@@ -525,22 +524,28 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   }, [viewMode, numPages]);
 
   useEffect(() => {
-    const node = stageRef.current;
+    const pdfColumn = pdfColumnRef.current;
+    const stage = stageRef.current;
 
-    if (!node) {
+    if (!pdfColumn || !stage) {
       return;
     }
 
     const observer = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      if (!entry) {
-        return;
+      for (const entry of entries) {
+        if (entry.target === pdfColumn) {
+          // Measure the PDF column, not the full stage (which includes the sidebar).
+          setContainerWidth(Math.max(280, Math.floor(entry.contentRect.width)));
+        }
+
+        if (entry.target === stage) {
+          setContainerHeight(Math.max(360, Math.floor(entry.contentRect.height - 24)));
+        }
       }
-      setContainerWidth(Math.max(280, Math.floor(entry.contentRect.width - 32)));
-      setContainerHeight(Math.max(360, Math.floor(entry.contentRect.height - 24)));
     });
 
-    observer.observe(node);
+    observer.observe(pdfColumn);
+    observer.observe(stage);
     return () => observer.disconnect();
   }, []);
 
@@ -556,10 +561,16 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     ? safeCurrentPage - 1
     : safeCurrentPage;
   const spreadPageHeight = Math.max(320, Math.floor(containerHeight - 36));
+  const basePageWidth = useMemo(() => Math.min(containerWidth, 1080), [containerWidth]);
+  // react-pdf multiplies width and scale together; use width alone so the text layer
+  // and canvas share the same viewport dimensions.
+  const pageRenderWidth = useMemo(
+    () => Math.round(basePageWidth * (scale / PDF_DEFAULTS.defaultScale)),
+    [basePageWidth, scale],
+  );
   const estimatedContinuousPageHeight = useMemo(() => {
-    const pageWidth = Math.min(containerWidth, 1080);
-    return Math.max(320, Math.round(pageWidth * scale * PDF_PAGE_ASPECT_RATIO));
-  }, [containerWidth, scale]);
+    return Math.max(320, Math.round(pageRenderWidth * PDF_PAGE_ASPECT_RATIO));
+  }, [pageRenderWidth]);
 
   const pageStep = isTwoPageSpread ? 2 : 1;
 
@@ -659,8 +670,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       return;
     }
 
-    const fitScale = fitWidthScale(containerWidth);
-    setScale(fitScale);
+    // At defaultScale the rendered page width matches the container.
+    setScale(PDF_DEFAULTS.defaultScale);
     trackPdfAction(booklet.title, "fit_width");
   };
 
@@ -1016,7 +1027,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
             }`}
           >
             <div className="grid min-h-[66vh] gap-4 lg:grid-cols-[minmax(0,1fr)_260px]">
-              <div className="order-2 lg:order-1">
+              <div ref={pdfColumnRef} className="order-2 lg:order-1">
                 {e2ePdfMockMode === "success" ? (
                   viewMode === "continuous" ? (
                     <div className="flex flex-col items-center gap-6 py-2">
@@ -1133,8 +1144,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                             {renderedPages.has(pageNum) ? (
                               <Page
                                 pageNumber={pageNum}
-                                scale={scale}
-                                width={Math.min(containerWidth, 1080)}
+                                width={pageRenderWidth}
                                 loading={pageNum === 1 ? <LoadingSpinner label="Rendering page" /> : undefined}
                                 renderTextLayer
                                 renderAnnotationLayer
@@ -1160,8 +1170,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                         >
                           <Page
                             pageNumber={spreadStartPage}
-                            scale={isTwoPageSpread ? 1 : scale}
-                            width={isTwoPageSpread ? undefined : Math.min(containerWidth, 1080)}
+                            width={isTwoPageSpread ? undefined : pageRenderWidth}
                             height={isTwoPageSpread ? spreadPageHeight : undefined}
                             loading={<LoadingSpinner label="Rendering page" />}
                             renderTextLayer
@@ -1172,7 +1181,6 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                           {isTwoPageSpread && spreadStartPage + 1 <= numPages ? (
                             <Page
                               pageNumber={spreadStartPage + 1}
-                              scale={1}
                               height={spreadPageHeight}
                               loading={<LoadingSpinner label="Rendering page" />}
                               renderTextLayer

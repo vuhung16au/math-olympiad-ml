@@ -43,14 +43,9 @@ button {
   justify-content: center;
 }
 
-.react-pdf__Page {
-  max-width: 100%;
-}
-
-.react-pdf__Page__canvas {
-  max-width: 100%;
-  height: auto !important;
-}
+/* Do not CSS-resize the canvas separately from the text layer.
+   react-pdf positions selectable text from PDF.js viewport metrics; overriding
+   canvas width/height breaks copy/paste and selection alignment. */
 
 /* Continuous view scrolls inside the fullscreen stage, not the document. */
 [data-pdf-stage]:fullscreen,
