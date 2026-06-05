@@ -345,7 +345,7 @@ For $z = x + iy$:
   \draw[dashed,gray,thick] (Z) -- (Y);
   
   % Draw modulus (as thick blue vector)
-  \draw[->,acu vector] (O) -- (Z) node[midway,above left,font=\small] {$|z| = \sqrt{x^2+y^2}$};
+  \draw[->,acu vector] (O) -- (Z) node[pos=0.55, sloped, above, font=\scriptsize, inner sep=1pt] {$|z| = \sqrt{x^2+y^2}$};
   
   % Draw right angle indicator
   \draw (X) ++(-0.15,0) -- ++(0,0.15) -- ++(0.15,0);
@@ -356,34 +356,32 @@ For $z = x + iy$:
   
   % Draw argument angle
   \draw[green!60!black,very thick,->] (0.8,0) arc (0:37.5:0.8);
-  \node[green!60!black,font=\small] at (1.1,0.35) {$\theta = \arg(z)$};
+  \node[green!60!black,font=\small] at (1.2,0.45) {$\theta = \arg(z)$};
   
   % Mark the complex number point
   \fill[bookpurple] (Z) circle (1.5pt);
-  \node[above right,font=\small] at (Z) {$z = x + iy$};
+  \node[anchor=west,font=\small] at ($(Z)+(0.15,0.1)$) {$z = x + iy$};
   
   % Origin point
   \fill (O) circle (0.8pt);
   \node[below left,font=\scriptsize] at (O) {$0$};
   
-  % Add formula annotations
-  \node[font=\scriptsize,align=left,text width=3.5cm] at (5.5,2.5) {
+  % Legend: Pythagorean theorem with modulus and argument annotations
+  \node[font=\small\bfseries,align=center,text width=3.5cm] at (5.5,3.0) {Pythagorean theorem};
+
+  \node[font=\scriptsize,align=left,text width=3.5cm] at (5.5,2.1) {
     \textbf{Modulus:}\\
     $|z| = \sqrt{x^2 + y^2}$\\[0.3em]
     Represents the \emph{distance}\\
     from origin to $z$
   };
   
-  \node[font=\scriptsize,align=left,text width=3.5cm] at (5.5,1.2) {
+  \node[font=\scriptsize,align=left,text width=3.5cm] at (5.5,0.8) {
     \textbf{Argument:}\\
     $\arg(z) = \tan^{-1}\left(\frac{y}{x}\right)$\\[0.3em]
     Represents the \emph{angle}\\
     from positive real axis
   };
-  
-  % Pythagorean theorem visual hint
-  \node[font=\tiny,gray] at (1.5,1.3) {Pythagorean};
-  \node[font=\tiny,gray] at (1.5,1.1) {theorem};
 \end{tikzpicture}
 \end{center}
 \vspace{1em}
