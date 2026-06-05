@@ -827,10 +827,10 @@ $u$ has modulus 4 and argument $\pi/2$, so $u = 4i$. Plot at $(0,4)$.
   % Draw z
   \draw[->,very thick,bookpurple] (0,0) -- (Z);
   \fill[bookpurple] (Z) circle (2pt);
-  \node[bookpurple,font=\small,right] at (Z) {$z$};
+  \node[bookpurple,font=\small,anchor=west] at ($(Z)+(0.12,0.08)$) {$z$};
   
-  % Label for z
-  \node[bookpurple,font=\scriptsize,align=left] at ($(Z)+(0.5,-0.5)$) {
+  % Label for z (right of the point, clear of the vector and circle)
+  \node[bookpurple,font=\scriptsize,align=left,anchor=west] at ($(Z)+(0.65,0.05)$) {
     $|z|=2$\\
     $\arg(z)=\frac{\pi}{4}$
   };
@@ -838,10 +838,10 @@ $u$ has modulus 4 and argument $\pi/2$, so $u = 4i$. Plot at $(0,4)$.
   % Draw u = z²
   \draw[->,very thick,bookred] (0,0) -- (U);
   \fill[bookred] (U) circle (2pt);
-  \node[bookred,font=\small,left] at (U) {$u=z^2$};
+  \node[bookred,font=\small,anchor=east] at ($(U)+(-0.2,0.05)$) {$u=z^2$};
   
-  % Label for u
-  \node[bookred,font=\scriptsize,align=left] at ($(U)+(-1,0)$) {
+  % Label for u (above the point, clear of the vector and coordinate)
+  \node[bookred,font=\scriptsize,align=left,anchor=south west] at ($(U)+(0.15,0.45)$) {
     $|u|=4$\\
     $\arg(u)=\frac{\pi}{2}$
   };
@@ -859,23 +859,32 @@ $u$ has modulus 4 and argument $\pi/2$, so $u = 4i$. Plot at $(0,4)$.
   \draw[->,thick,lawpurple,dashed] (Z) to[bend left=20] node[midway,right,font=\scriptsize] {square} (U);
   
   % Mark the coordinates
-  \node[bookpurple,font=\tiny,below] at (Z) {$(\sqrt{2},\sqrt{2})$};
-  \node[bookred,font=\tiny,right] at (U) {$(0,4)$};
+  \node[bookpurple,font=\tiny,anchor=north] at ($(Z)+(0.05,-0.25)$) {$(\sqrt{2},\sqrt{2})$};
+  \node[bookred,font=\tiny,anchor=west] at ($(U)+(0.35,-0.2)$) {$(0,4)$};
   
   % Origin
   \fill (0,0) circle (1pt);
   \node[below left,font=\scriptsize] at (0,0) {$O$};
   
-  % Add annotation box
-  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (2.5,2.5) {
+  % Squaring Rule legend (right of diagram, clear of vectors and arcs)
+  \node[
+    anchor=west,
+    font=\scriptsize,
+    align=left,
+    text width=2.8cm,
+    inner sep=4pt,
+    draw=purple!50,
+    fill=white,
+    rounded corners
+  ] at (3.2,2.5) {
     \textbf{Squaring Rule:}\\
     $|z^2| = |z|^2$\\
     $\arg(z^2) = 2\arg(z)$
   };
   
-  % Draw the modulus labels on the circles
-  \node[blue!50,font=\tiny] at (45:{\modulusZ-0.3}) {$r=2$};
-  \node[red!50,font=\tiny] at (120:{\modulusU-0.3}) {$r=4$};
+  % Modulus labels on the circles (left/right, away from vectors)
+  \node[bookpurple!60,font=\tiny] at (160:1.55) {$r=2$};
+  \node[bookred!60,font=\tiny] at (120:3.55) {$r=4$};
   
   % Grid for reference (light)
   \foreach \x in {1,2} {
