@@ -247,13 +247,12 @@ Thus
 \]
 \end{solution}
 
-\section*{Takeaways}
-\begin{itemize}
-  \item \textbf{Complex Multiplication is Rotation/Scaling:} This problem visualizes the geometric effect of multiplying by a complex number. $z_{n+1} = wz_n$ rotates the point by $\arg(w)$ and scales it by $|w|$, creating a discrete spiral.
-  \item \textbf{Infinite Geometric Series:} The "length of a spiral" is a classic application of summing a geometric series to infinity. Even though the spiral winds infinitely many times, the total distance traveled is finite.
-  \item \textbf{Discrete vs Continuous:} The problem bridges the gap between discrete sequences (points $z_n$) and continuous calculus concepts (the smooth logarithmic spiral curve).
-  \item The logarithmic spiral appears widely in nature and has various scientific and engineering applications such as animal shells, galaxies, and antenna designs.
-  \item What is the transformation when multiplying by a complex number. In this case: $w = \frac{1+i}{2}$. How does this relate to geometric shapes and patterns in the complex plane?
+\textbf{Takeaways:}
+\begin{itemize}[leftmargin=*]
+  \item Multiplication by a complex constant produces a fixed rotation and scaling. Here, $z_{n+1} = wz_n$ with $w=\frac{1+i}{2}$ rotates by $\arg(w)=\frac{\pi}{4}$ and scales by $|w|=\frac{1}{\sqrt{2}}$.
+  \item The spiral path length is an infinite geometric series. Although the path has infinitely many segments, the total length is finite.
+  \item The sequence $\{z_n\}$ gives a discrete model of a logarithmic spiral, connecting algebraic recurrence with a continuous polar equation.
+  \item The logarithmic spiral is self-similar and appears in natural and applied contexts, including shells, galaxies, and antenna geometry.
 \end{itemize}
 
 \begin{problem}[Statement Analysis]
@@ -692,8 +691,17 @@ So $T$ is at $(3, 4)$.
   \draw[dashed,warmstone!30,very thin] (T) -- (3,0);
   \draw[dashed,warmstone!30,very thin] (T) -- (0,4);
   
-  % Add annotation box
-  \node[font=\scriptsize,align=left,draw=purple!50,fill=white,rounded corners] at (1.5,0.5) {
+  % Parallelogram Law legend (right of diagram, clear of vectors and labels)
+  \node[
+    anchor=west,
+    font=\scriptsize,
+    align=left,
+    text width=2.8cm,
+    inner sep=4pt,
+    draw=purple!50,
+    fill=white,
+    rounded corners
+  ] at (4.2,2.5) {
     \textbf{Parallelogram Law:}\\
     $z + w$ forms the\\
     fourth vertex $T$
