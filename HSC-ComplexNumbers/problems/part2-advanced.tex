@@ -248,7 +248,8 @@ All external angles equal $\beta$, which means the polygon turns by the same ang
   \node[above right,font=\scriptsize] at (P0) {$P_0$};
   
   \fill[bookred] (P1) circle (1.5pt);
-  \node[above,font=\scriptsize] at (P1) {$P_1$};
+  % Nudge the label to avoid overlapping the adjacent polygon edges.
+  \node[above,font=\scriptsize] at ($(P1)+(0.12,0)$) {$P_1$};
   
   \fill[bookpurple!80!black] (P2) circle (1.5pt);
   \node[above,font=\scriptsize] at (P2) {$P_2$};
@@ -267,9 +268,7 @@ All external angles equal $\beta$, which means the polygon turns by the same ang
   % Labels for angles in the unit circle
   \node[blue!60,font=\tiny] at ({0.5*cos(\alpha+15)}, {0.5*sin(\alpha+15)}) {$\alpha$};
   \node[blue!60,font=\tiny] at ({0.6*cos(\alpha+\beta+20)}, {0.6*sin(\alpha+\beta+20)}) {$\alpha\!+\!\beta$};
-  
-  % Title
-  \node[font=\small,align=center] at (1.7,-0.8) {Vector addition spiral with\\constant external angle $\beta$};
+
 \end{tikzpicture}
 \end{center}
 \vspace{0.5em}
