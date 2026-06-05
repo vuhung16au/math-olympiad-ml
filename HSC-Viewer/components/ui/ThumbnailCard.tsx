@@ -19,12 +19,12 @@ export default function ThumbnailCard({ booklet }: { booklet: Booklet }) {
           : "border-black/6 bg-[color:color-mix(in_srgb,var(--color-stone)_18%,white)] opacity-70",
       ].join(" ")}
     >
-      <div className="absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_top_left,rgba(242,18,12,0.18),transparent_58%),linear-gradient(135deg,rgba(60,16,83,0.96),rgba(181,24,37,0.86))]" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_top_left,rgba(242,18,12,0.18),transparent_58%),linear-gradient(135deg,rgba(60,16,83,0.96),rgba(181,24,37,0.86))]" />
       <div className="relative flex min-h-[300px] flex-col justify-between gap-6">
-        <div>
+        <div className="min-h-[5.5rem]">
           <div
             className={[
-              "mb-6 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] backdrop-blur-sm",
+              "mb-4 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] backdrop-blur-sm",
               booklet.isAvailable
                 ? "border-white/25 bg-white/12 text-white"
                 : "border-white/35 bg-white/85 text-[var(--color-charcoal)]",
@@ -33,7 +33,7 @@ export default function ThumbnailCard({ booklet }: { booklet: Booklet }) {
             {!booklet.isAvailable && <Clock3 size={12} aria-hidden="true" />}
             <span>{booklet.isAvailable ? "Available now" : "Coming soon"}</span>
           </div>
-          <h2 className="max-w-[15ch] text-2xl font-semibold leading-tight text-white">
+          <h2 className="text-lg font-semibold leading-tight text-white sm:text-xl">
             {booklet.title}
           </h2>
         </div>
@@ -61,10 +61,8 @@ export default function ThumbnailCard({ booklet }: { booklet: Booklet }) {
             </div>
           )}
           <div className="p-4">
-            <p className="text-sm leading-6 text-[color:color-mix(in_srgb,var(--color-charcoal)_80%,white)]">
-              {booklet.isAvailable
-                ? "Open the booklet in the full-screen viewer with page controls, download, and print actions."
-                : "This module does not have a published PDF yet. It will appear here once the release is added."}
+            <p className="line-clamp-2 text-sm leading-6 text-[color:color-mix(in_srgb,var(--color-charcoal)_80%,white)]">
+              {booklet.cardBlurb}
             </p>
             <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-purple)]">
               {booklet.isAvailable ? "Open booklet" : "Unavailable"}

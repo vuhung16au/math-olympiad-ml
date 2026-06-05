@@ -32,7 +32,8 @@ export const REPO_LINKS = {
 };
 
 export const APP_NAME = 'HSC Math Hub';
-export const APP_DESCRIPTION = 'View HSC Mathematics booklets directly in your browser';
+export const APP_DESCRIPTION =
+  'HSC Math Hub — browse free HSC Maths Extension 1 and 2 booklets online. Trigonometry, calculus, combinatorics, and more with worked examples. No downloads.';
 
 /** Google Analytics 4 measurement ID (gtag.js). */
 export const GOOGLE_ANALYTICS_MEASUREMENT_ID = 'G-7DN8JFW2QH';

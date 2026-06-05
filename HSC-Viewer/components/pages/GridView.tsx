@@ -13,10 +13,12 @@ export default function GridView() {
             HSC Viewer
           </p>
           <h1 className="text-4xl font-semibold tracking-tight text-[var(--color-purple)] sm:text-5xl">
-            Browse the booklet collection and open any chapter directly in the browser.
+            HSC Maths Extension booklets, all in one place
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-[color:color-mix(in_srgb,var(--color-charcoal)_82%,white)] sm:text-lg">
-            Browse every released booklet from one place. The grid is ready for generated cover thumbnails, and each available title opens in an in-browser PDF reader.
+            Pick a topic below to start reading straight away. Revise for exams, work through
+            examples at your own pace, or share a booklet with your class — no downloads or extra
+            apps required.
           </p>
         </div>
 
