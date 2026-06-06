@@ -41,13 +41,13 @@ $$\int_0^\infty \frac{\sin^2 x}{e^x} \, dx$$
 \end{hint}
 
 \begin{solution}
-\textbf{Part (a)} \\
+\textbf{Part (i)} \\
 Using the double angle identity $\cos 2x = 1 - 2\sin^2 x$, rearrange for $\sin^2 x$:
 $$\sin^2 x = \frac{1}{2}(1 - \cos 2x)$$
 Substitute this into $f(x)$:
 $$f(x) = e^{-x} \left( \frac{1 - \cos 2x}{2} \right) = \frac{1}{2} e^{-x} - \frac{1}{2} e^{-x} \cos 2x$$
 
-\textbf{Part (b)} \\
+\textbf{Part (ii)} \\
 Let $I = \int e^{-x} \cos 2x \, dx$. \\
 Apply integration by parts ($u = \cos 2x, dv = e^{-x}dx$):
 $$I = -e^{-x} \cos 2x - 2 \int e^{-x} \sin 2x \, dx$$
@@ -58,8 +58,8 @@ $$I = -e^{-x} \cos 2x - 2(-e^{-x} \sin 2x + 2I)$$
 $$I = -e^{-x} \cos 2x + 2e^{-x} \sin 2x - 4I$$
 $$5I = e^{-x}(2\sin 2x - \cos 2x) \implies I = \frac{1}{5} e^{-x}(2\sin 2x - \cos 2x) + C$$
 
-\textbf{Part (c)} \\
-Using the identity from (a) and the antiderivative from (b):
+\textbf{Part (iii)} \\
+Using the identity from (i) and the antiderivative from (ii):
 $$\int_0^\infty \frac{\sin^2 x}{e^x} \, dx = \left[ -\frac{1}{2}e^{-x} - \frac{1}{10}e^{-x}(2\sin 2x - \cos 2x) \right]_0^\infty$$
 Evaluate at the bounds $0$ and $\infty$: \\
 \textbf{As $x \to \infty$:} $-\frac{1}{2}e^{-x} - \frac{1}{10}e^{-x}(2\sin 2x - \cos 2x) \to 0$ \\
