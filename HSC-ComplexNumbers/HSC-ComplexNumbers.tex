@@ -387,11 +387,14 @@ For $z = x + iy$:
 
 \subsubsection{Forms of Complex Numbers}
 
-\textbf{Cartesian Form:} $z = x + iy$
-
-\textbf{Polar Form:} $z = r(\cos\theta + i\sin\theta)$ where $r = |z|$ and $\theta = \arg(z)$
-
-\textbf{Exponential Form:} $z = re^{i\theta}$
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\textbf{Form} & \textbf{Definition} \\
+Cartesian & $z = x + iy$ \\
+Polar & $z = r(\cos\theta + i\sin\theta)$, where $r = |z|$ and $\theta = \arg(z)$ \\
+Exponential & $z = re^{i\theta}$
+\end{tabular}
+\end{center}
 
 Conversions between these forms are essential skills tested frequently in Extension~2.
 
@@ -420,15 +423,14 @@ Conversions between these forms are essential skills tested frequently in Extens
   % Draw angle theta
   \draw[green!60!black,thick,->] (0.8,0) arc (0:39.8:0.8) node[midway,right] {$\theta$};
   
-  % Annotations for the three forms
-  \node[align=left,anchor=west,font=\small] at (4.8,2.5) {
-    \textbf{Cartesian:} $z = x + iy$
-  };
-  \node[align=left,anchor=west,font=\small] at (4.8,1.8) {
-    \textbf{Polar:} $z = r(\cos\theta + i\sin\theta)$
-  };
-  \node[align=left,anchor=west,font=\small] at (4.8,1.1) {
-    \textbf{Exponential:} $z = re^{i\theta}$
+  % Table annotation for the three forms
+  \node[anchor=west,font=\small,align=left] at (4.8,1.8) {
+    \begin{tabular}{@{}ll@{}}
+      \textbf{Form} & \textbf{Definition} \\
+      Cartesian & $z = x + iy$ \\
+      Polar & $z = r(\cos\theta + i\sin\theta)$ \\
+      Exponential & $z = re^{i\theta}$
+    \end{tabular}
   };
   
   % Add grid points at origin
@@ -543,10 +545,7 @@ z' &= z \cdot e^{i\phi} = |z|e^{i\theta} \cdot e^{i\phi}\\
 &= \cos\phi \cdot x - \sin\phi \cdot y + i(\sin\phi \cdot x + \cos\phi \cdot y)
 \end{align*}
 
-\textbf{Matrix Form:} This rotation can be expressed as a 2D rotation matrix:
-\[
-\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} \cos\phi & -\sin\phi \\ \sin\phi & \cos\phi \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}
-\]
+\textbf{Coordinate form (Appendix):} An equivalent way to write this rotation using paired real equations is in the Appendix as an out-of-syllabus enrichment note.
 
 \vspace{1em}
 \begin{center}
@@ -705,6 +704,17 @@ Part~2 revisits three new sets of problems. Solutions are intentionally briefer 
 
 \subsection{Advanced Complex Numbers Problems}
 \input{problems/part2-advanced}
+
+\appendix
+\section{Appendix: Out-of-Syllabus Enrichment}
+
+\subsection{Coordinate Form of Complex Rotation}
+\textbf{Syllabus note:} The coordinate formulation below is out of syllabus for HSC Mathematics Extension~1 and Extension~2.
+
+\textbf{Coordinate form (or Matrix form):} Writing $z = x + iy$ and $z' = x' + iy'$, the rotation by angle $\phi$ is equivalent to the pair of equations
+\[
+\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} \cos\phi & -\sin\phi \\ \sin\phi & \cos\phi \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}
+\]
 
 \section{Conclusion}
 Complex numbers are a core component of the HSC Mathematics Extension~2 course. Mastery comes from repeated, reflective practice across all forms---Cartesian, polar, and exponential---and understanding their geometric interpretations. Use these problems to sharpen the ability to convert between forms, apply De Moivre's theorem, interpret loci geometrically, and communicate complete mathematical reasoning. Best of luck with your studies and HSC examinations!
