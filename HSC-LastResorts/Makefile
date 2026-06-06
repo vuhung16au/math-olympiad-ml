@@ -1,6 +1,7 @@
 # Makefile for HSC-LastResorts
 
 TEX=HSC-LastResorts.tex
+STEM=$(TEX:.tex=)
 
 # Font support: allow TrueType/OpenType via fontspec.
 # latexmk drives LuaLaTeX so fonts/SAMAN___.TTF can be embedded; runs until aux is stable.
@@ -8,10 +9,16 @@ LATEXMK=latexmk
 LATEXMKFLAGS=-lualatex -interaction=nonstopmode -halt-on-error -file-line-error
 
 all pdf:
+	@if [ -f $(STEM).aux ] && grep -q $$'\x00' $(STEM).aux 2>/dev/null; then \
+		echo "Removing corrupted $(STEM).aux"; \
+		rm -f $(STEM).aux $(STEM).out $(STEM).toc $(STEM).fdb_latexmk $(STEM).fls; \
+	fi
 	$(LATEXMK) $(LATEXMKFLAGS) $(TEX)
 
 clean:
-	rm -f *.aux *.log *.out *.toc *.fdb_latexmk *.fls *.synctex.gz *.pdf
+	-$(LATEXMK) -C
+	rm -f $(STEM).aux $(STEM).log $(STEM).out $(STEM).toc
+	rm -f $(STEM).fdb_latexmk $(STEM).fls $(STEM).synctex.gz $(STEM).pdf
 
 release: pdf
 	mv HSC-LastResorts.pdf releases/
