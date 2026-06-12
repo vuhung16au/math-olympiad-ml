@@ -467,3 +467,374 @@ Three key distance techniques demonstrated: (1) \textbf{projection} for point-to
 \end{takeaways}
 
 \vspace{1em}
+
+\begin{problem}[3D Helix Projection]
+\begin{minipage}{0.55\textwidth}
+Each point $P$ on a helix has position vector:
+$$ \mathbf{r} = 3\cos\theta \, \mathbf{i} + 3\sin\theta \, \mathbf{j} + \frac{\theta}{\pi} \, \mathbf{k} \quad \text{for } \theta \ge 0. $$
+
+\textbf{(a)} The vector $\mathbf{r}$ is projected into the $xz$-plane to obtain $\mathbf{s} = \text{proj}_{\mathbf{i}} \mathbf{r} + \text{proj}_{\mathbf{k}} \mathbf{r}$, the position vector of point $S$. Write $\mathbf{s}$ in terms of the parameter $\theta$.
+
+\textbf{(b)} Determine the Cartesian equation of the curve traced out by $S$ for $0 \le \theta \le 2\pi$, specifying its domain.
+\end{minipage}%
+\hfill
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+\begin{tikzpicture}[x={(-0.6cm,-0.4cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}, scale=0.5]
+    % Axes
+    \draw[->] (-4,0,0) -- (5,0,0) node[right] {$x$};
+    \draw[->] (0,-4,0) -- (0,5,0) node[right] {$y$};
+    \draw[->] (0,0,-0.5) -- (0,0,4) node[above] {$z$};
+    
+    % Helix
+    \draw[thick, domain=0:3.5*pi, samples=150, smooth] 
+        plot ({3*cos(\x r)}, {3*sin(\x r)}, {\x/pi});
+        
+    % Optional: Draw the shadow on the xz plane to illustrate the projection
+    \draw[dashed, blue, domain=0:3.5*pi, samples=150, smooth] 
+        plot ({3*cos(\x r)}, {0}, {\x/pi});
+        
+    % Node labels
+    \node at (3,0,0) [below] {$3$};
+    \fill (3,0,0) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+\end{problem}
+
+\begin{hint}
+\textbf{(a)} Projecting a 3D vector onto standard basis vectors simply isolates that specific component. What happens to the $\mathbf{j}$ component when projecting onto the $xz$-plane?
+
+\textbf{(b)} Write out the parametric equations for $x$ and $z$ based on your answer from (a). Isolate $\theta$ in the simpler equation and substitute it into the other to eliminate the parameter. Don't forget to convert the domain of $\theta$ into a domain for your new independent variable.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} The projection of $\mathbf{r}$ onto $\mathbf{i}$ is simply the $x$-component, and the projection onto $\mathbf{k}$ is the $z$-component. 
+$$ \mathbf{s} = 3\cos\theta \, \mathbf{i} + \frac{\theta}{\pi} \, \mathbf{k} $$
+\vspace{-2mm}
+
+\textbf{(b)} From the position vector $\mathbf{s}$, we extract the parametric equations:
+$x = 3\cos\theta$, $z = \frac{\theta}{\pi}$. \\
+From the $z$ equation, we isolate $\theta$:
+$\theta = \pi z$. Substitute this into the $x$ equation:
+$$ x = 3\cos(\pi z) $$
+Now, determine the domain. We are given $0 \le \theta \le 2\pi$. \\
+Substitute $\theta = \pi z$ into this inequality:
+$$ 0 \le \pi z \le 2\pi \implies 0 \le z \le 2 $$
+The Cartesian equation is $x = 3\cos(\pi z)$ for $0 \le z \le 2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The "Shadow" Concept:} Vector projection in 3D geometry is exactly the math used in rendering pipelines to cast shadows. By projecting a 3D path ($\mathbf{r}$) onto a 2D plane ($\mathbf{s}$), we are mathematically defining the "shadow" the helix casts on the wall (the $xz$-plane) when a light is shone straight down the $y$-axis. The result is a simple 2D cosine wave! 
+    \item \textbf{Domain Conversion:} A common student error in parametric elimination is forgetting to translate the domain of the parameter ($\theta$) into the domain of the Cartesian variables ($x$ or $z$).
+\end{itemize}
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Parametric Equation of a Helix]
+\begin{minipage}{0.55\textwidth}
+A circular helix spirals around the $y$-axis as shown in the diagram. Every point on the helix is $5$ units from the $y$-axis. The helix completes exactly one full rotation for every $2\pi$ units it travels along the positive $y$-axis, starting from the point $(5, 0, 0)$. 
+
+Write down the position vector, $\mathbf{r}$, for this helix in terms of a parameter $\theta$.
+\end{minipage}%
+\hfill
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+\begin{tikzpicture}[x={(-0.5cm,-0.5cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}, scale=0.35]
+    % Axes
+    \draw[->] (-7,0,0) -- (7,0,0) node[below] {$x$};
+    \draw[->] (0,-1,0) -- (0,9,0) node[right] {$y$};
+    \draw[->] (0,0,-7) -- (0,0,7) node[above] {$z$};
+    
+    % Background/Wireframe circles to illustrate the bounding cylinder
+    \draw[gray, thin, domain=0:2*pi, samples=50, smooth] plot ({5*cos(\x r)}, 0, {5*sin(\x r)});
+    \draw[gray, thin, domain=0:2*pi, samples=50, smooth] plot ({5*cos(\x r)}, {2*pi}, {5*sin(\x r)});
+    
+    % Dashed cylinder connecting lines
+    \draw[gray, dashed] (-5,0,0) -- (-5,{2*pi},0);
+    \draw[gray, dashed] (5,0,0) -- (5,{2*pi},0);
+    
+    % The Helix Curve
+    \draw[thick, domain=0:2.5*pi, samples=150, smooth] 
+        plot ({5*cos(\x r)}, {\x}, {5*sin(\x r)});
+        
+    % Data Points
+    \fill (5,0,0) circle (2.5pt) node[below right] {$(5,0,0)$};
+    \fill (5,{2*pi},0) circle (2.5pt);
+    
+    % Y-axis marker
+    \draw[dashed] (5,{2*pi},0) -- (0,{2*pi},0) node[above left] {$2\pi$};
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Axis of Propagation:} Since the helix moves constantly along the $y$-axis, the $y$-component of your vector will be linear (e.g., just the parameter $\theta$).
+    \item \textbf{The Circular Cross-Section:} If you look straight down the $y$-axis, the shadow of the helix on the $xz$-plane is just a circle of radius $5$. Use sine and cosine for the $x$ and $z$ components. 
+    \item \textbf{Starting Position:} Plug $\theta = 0$ into your proposed sine and cosine components to make sure they yield the correct starting coordinate of $x=5$ and $z=0$. 
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Let the parameter be $\theta$. \\
+\textbf{Linear Component ($y$-axis):} The helix travels along the $y$-axis. Since it completes one rotation ($2\pi$ radians) over a distance of $2\pi$ units, the $y$-component is directly proportional to $\theta$. $y = \theta$. \\
+\textbf{Circular Components ($x$ and $z$ axes):} The distance from the $y$-axis is $5$, meaning $x^2 + z^2 = 5^2$. This is modeled using $5\cos\theta$ and $5\sin\theta$. At $y = 0$ (meaning $\theta = 0$), the position is $(5, 0, 0)$. \\
+For $x$: we need a function where $f(0) = 5$. Since $5\cos(0) = 5$, we set $x = 5\cos\theta$. \\
+For $z$: we need a function where $f(0) = 0$. Since $5\sin(0) = 0$, we set $z = 5\sin\theta$. \\
+\textbf{Final Position Vector:}
+$$ \mathbf{r} = 5\cos\theta \, \mathbf{i} + \theta \, \mathbf{j} + 5\sin\theta \, \mathbf{k} \quad \text{for } \theta \ge 0 $$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Component Separation:} When building 3D parametric equations, it helps to isolate the "movement" vector from the "shape" vectors. The axis with the solitary variable ($y = \theta$) acts as the spine of the shape, while the trigonometric axes wrap around it. 
+    \item \textbf{Initial Value Testing:} The most common mistake is swapping sine and cosine. Always plug $0$ into your parameter to verify it matches the given starting coordinate.
+\end{itemize}
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Curve on a Cylinder and Arc Length]
+\begin{minipage}{0.55\textwidth}
+A graph of $h = 2\sin 2\theta$ for $0 \le \theta \le 2\pi$ is drawn on a rectangular sheet of paper. The ends are then glued together to form a cylinder with only the curve showing. It is found that the cylinder has a radius of $3$ cm. The $xy$-plane corresponds with $h = 0$. The point $(3,0,0)$ corresponds with $\theta = 0$ and $(0,3,0)$ corresponds with $\theta = \frac{\pi}{2}$ on the graph paper.
+
+\textbf{(a)} Suggest a possible parametric vector equation $\mathbf{r}(\theta)$ for this curve. 
+
+\textbf{(b)} Re-write the equation of the curve in terms of the new parameter $\ell$ that is the arc length around the base circle $x^2 + y^2 = 9$, measured anti-clockwise from $(3,0,0)$.
+
+\textbf{(c)} A different design uses the graph $h = 3\cos \theta$. This curve is projected onto the $yz$-plane to obtain $\mathbf{s}(\theta) = \text{proj}_{\mathbf{j}}\mathbf{r} + \text{proj}_{\mathbf{k}}\mathbf{r}$. Find the Cartesian equation of the shape seen in the $yz$-plane.
+\end{minipage}%
+\hfill
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+\begin{tikzpicture}[x={(-0.5cm,-0.4cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}, scale=0.7]
+    % Axes
+    \draw[->] (-5,0,0) -- (5,0,0) node[below] {$x$};
+    \draw[->] (0,-4,0) -- (0,5,0) node[right] {$y$};
+    \draw[->] (0,0,-3) -- (0,0,4) node[above] {$z$};
+    
+    % Background/Wireframe circles to illustrate the bounding cylinder
+    \draw[gray, thin, dashed, domain=0:2*pi, samples=50, smooth] plot ({3*cos(\x r)}, {3*sin(\x r)}, {0});
+    \draw[gray, thin, domain=0:2*pi, samples=50, smooth] plot ({3*cos(\x r)}, {3*sin(\x r)}, {2});
+    \draw[gray, thin, domain=0:2*pi, samples=50, smooth] plot ({3*cos(\x r)}, {3*sin(\x r)}, {-2});
+    
+    % The Curve h = 2sin(2theta)
+    \draw[thick, domain=0:2*pi, samples=150, smooth] 
+        plot ({3*cos(\x r)}, {3*sin(\x r)}, {2*sin(2*\x r)});
+        
+    % Data Point
+    \fill (3,0,0) circle (2.5pt);
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Part (a):} The $x$ and $y$ coordinates form a standard circle of radius $3$. The $z$-coordinate represents the height $h$ directly. 
+    \item \textbf{Part (b):} Recall the formula for the arc length of a circle: $\ell = r\theta$. Express $\theta$ in terms of $\ell$ and substitute it into your vector equation.
+    \item \textbf{Part (c):} Projecting onto the $yz$-plane means you only keep the $\mathbf{j}$ and $\mathbf{k}$ components. Write out the parametric equations for $y$ and $z$, then use a trigonometric identity to eliminate $\theta$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} The base of the cylinder is a circle of radius $3$ in the $xy$-plane. \\
+Given $(3,0,0)$ is at $\theta=0$ and $(0,3,0)$ is at $\theta = \frac{\pi}{2}$, the standard circular parameterisation applies: 
+$x = 3\cos\theta$ and $y = 3\sin\theta$. \\
+The height $z$ is given by $h = 2\sin 2\theta$.
+$$ \mathbf{r}(\theta) = 3\cos\theta \, \mathbf{i} + 3\sin\theta \, \mathbf{j} + 2\sin 2\theta \, \mathbf{k} $$
+
+\textbf{(b)} The arc length around a circle is $\ell = r\theta$. \\
+Since the radius $r = 3$, we have $\ell = 3\theta$, which rearranging gives $\theta = \frac{\ell}{3}$. \\
+Substitute this into the vector equation:
+$$ \mathbf{r}(\ell) = 3\cos\left(\frac{\ell}{3}\right) \mathbf{i} + 3\sin\left(\frac{\ell}{3}\right) \mathbf{j} + 2\sin\left(\frac{2\ell}{3}\right) \mathbf{k} $$
+
+\textbf{(c)} The new curve has the equation:
+$$ \mathbf{r}(\theta) = 3\cos\theta \, \mathbf{i} + 3\sin\theta \, \mathbf{j} + 3\cos\theta \, \mathbf{k} $$
+Projecting onto the $yz$-plane isolates the $y$ and $z$ components:
+$$ \mathbf{s}(\theta) = 3\sin\theta \, \mathbf{j} + 3\cos\theta \, \mathbf{k} $$
+This gives parametric equations $y = 3\sin\theta$ and $z = 3\cos\theta$. \\
+Squaring both equations gives $y^2 = 9\sin^2\theta$ and $z^2 = 9\cos^2\theta$. \\
+Adding them together:
+$$ y^2 + z^2 = 9(\sin^2\theta + \cos^2\theta) = 9 $$
+The Cartesian equation is $y^2 + z^2 = 9$, which is a circle of radius $3$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Read the question carefully}: This problem ask you to write "a possible parametric vector equation", not all.
+    \item \textbf{2D to 3D Mappings:} Wrapping a 2D graph around a cylinder is simply assigning the domain (the horizontal axis) to wrap around a standard parametric circle, and the range (the vertical axis) to the $z$-axis.
+    \item \textbf{Natural Parameterisation:} Using arc length ($\ell$) as a parameter instead of an angle ($\theta$) is a crucial concept in advanced vector calculus. It means the curve is parameterised by the actual physical distance travelled along it.
+    \item \textbf{Orthogonal Projections:} A complex 3D curve (like the tilted ellipse in part c) can look like a perfect circle when viewed exactly side-on. 
+\end{itemize}
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Sketching 3D Parametric Curves]
+\begin{minipage}{0.55\textwidth}
+Sketch the curves defined parametrically by the following vector equations. Ensure you clearly label the axes, starting points, and endpoints.
+\begin{enumerate}
+    \item[\textbf{(a)}] $\mathbf{r}(t) = (2\sin t)\mathbf{i} + (2\cos t)\mathbf{j} + \frac{t}{\pi}\mathbf{k} \quad \text{for } 0 \le t \le 4\pi$
+    \item[\textbf{(b)}] $\mathbf{r}(t) = t\mathbf{i} + t\mathbf{j} + (4 - t^2)\mathbf{k} \quad \text{for } -2 \le t \le 2$
+\end{enumerate}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+\tdplotsetmaincoords{70}{120}
+\begin{tikzpicture}[tdplot_main_coords, scale=0.8]
+    % Empty axes for sketching
+    \draw[thick,->] (0,0,0) -- (4,0,0) node[anchor=north east]{$x$};
+    \draw[thick,->] (0,0,0) -- (0,4,0) node[anchor=north west]{$y$};
+    \draw[thick,->] (0,0,0) -- (0,0,4) node[anchor=south]{$z$};
+    \draw[dashed] (0,0,0) -- (-3,0,0);
+    \draw[dashed] (0,0,0) -- (0,-3,0);
+    \node[below left] at (0,0,0) {$O$};
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Part (a):} Look at the $\mathbf{i}$ and $\mathbf{j}$ components. It traces a circle of radius 2, but pay attention to where it \textit{starts} when $t=0$. 
+    \item \textbf{Part (b):} Notice that the $x$ and $y$ components are identical ($x=t$, $y=t$). This means the entire curve is trapped flat inside the diagonal plane $y=x$. What 2D shape does the $z$ equation make?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a) Circular Helix:} \\
+\begin{minipage}{0.6\textwidth}
+\textbf{Base Shape:} $x^2 + y^2 = 4\sin^2 t + 4\cos^2 t = 4$. This is a circular helix of radius 2. \\
+\textbf{Start/End:} At $t=0$, $\mathbf{r}(0) = (0, 2, 0)$. At $t=4\pi$, $\mathbf{r}(4\pi) = (0, 2, 4)$. \\
+\textbf{Sketch Requirement:} A helix starting on the $y$-axis, spiralling upwards around the $z$-axis, completing exactly two full turns, ending at height $z=4$.
+\end{minipage}%
+\hfill
+\begin{minipage}{0.35\textwidth}
+\begin{center}
+\tdplotsetmaincoords{70}{120}
+\begin{tikzpicture}[tdplot_main_coords, scale=0.5]
+    \draw[thick,->] (0,0,0) -- (3,0,0) node[anchor=north east]{$x$};
+    \draw[thick,->] (0,0,0) -- (0,3,0) node[anchor=north west]{$y$};
+    \draw[thick,->] (0,0,0) -- (0,0,5) node[anchor=south]{$z$};
+    
+    \draw[thick, blue, domain=0:4*pi, samples=150, smooth] 
+        plot ({2*sin(\x r)}, {2*cos(\x r)}, {\x/pi});
+    
+    \fill[red] (0,2,0) circle (2pt) node[right, font=\tiny] {$(0,2,0)$};
+    \fill[red] (0,2,4) circle (2pt) node[right, font=\tiny] {$(0,2,4)$};
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+\vspace{0.3cm}
+\textbf{(b) Parabola on a Plane:} \\
+\begin{minipage}{0.6\textwidth}
+\textbf{Base Shape:} Since $x=t$ and $y=t$, the curve lies completely on the plane $y=x$. \\
+\textbf{Vertical Profile:} $z = 4 - t^2 = 4 - x^2$. This is an inverted parabola. \\
+\textbf{Start/End:} At $t=-2$, position is $(-2, -2, 0)$. At $t=2$, position is $(2, 2, 0)$. The maximum turning point is at $t=0 \implies (0,0,4)$. \\
+\textbf{Sketch Requirement:} A parabola starting on the $xy$-plane in the 3rd quadrant, passing through the $z$-axis at height 4, and dropping back to the $xy$-plane in the 1st quadrant.
+\end{minipage}%
+\hfill
+\begin{minipage}{0.35\textwidth}
+\begin{center}
+\tdplotsetmaincoords{70}{120}
+\begin{tikzpicture}[tdplot_main_coords, scale=0.5]
+    \draw[thick,->] (0,0,0) -- (3,0,0) node[anchor=north east]{$x$};
+    \draw[thick,->] (0,0,0) -- (0,3,0) node[anchor=north west]{$y$};
+    \draw[thick,->] (0,0,0) -- (0,0,5) node[anchor=south]{$z$};
+    \draw[dashed] (0,0,0) -- (-3,0,0);
+    \draw[dashed] (0,0,0) -- (0,-3,0);
+    
+    \draw[thick, orange, domain=-2:2, samples=100, smooth] 
+        plot ({\x}, {\x}, {4 - \x*\x});
+        
+    \fill[red] (-2,-2,0) circle (2pt) node[right, font=\tiny] {$(-2,-2,0)$};
+    \fill[red] (2,2,0) circle (2pt) node[right, font=\tiny] {$(2,2,0)$};
+    \fill[red] (0,0,4) circle (2pt) node[left, font=\tiny] {$(0,0,4)$};
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Reading Traces:} When sketching 3D curves, always look for relationships between pairs of variables. If $x=t$ and $y=t$, the 3D curve is just a 2D curve drawn on a diagonal sheet of glass (a plane).
+    \item Think of the projections of the curve onto the coordinate planes as "shadows". 
+\end{itemize}
+\end{takeaways}
+
+\vspace{1em}
+
+\begin{problem}[Spiral Curve on a Paraboloid]
+\begin{minipage}{0.55\textwidth}
+A curve spirals three times from the origin to the point $(3, 0, 9)$ ascending around the surface of the paraboloid $z = x^2 + y^2$, as shown in the diagram. 
+
+Determine a possible parametric vector equation for this curve, and state the exact restriction on the parameter.
+\end{minipage}%
+\hfill
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.6, x={(-0.5cm,-0.4cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}]
+    % Axes
+    \draw[->] (-4,0,0) -- (5,0,0) node[below] {$x$};
+    \draw[->] (0,-4,0) -- (0,5,0) node[right] {$y$};
+    \draw[->] (0,0,-1) -- (0,0,10) node[above] {$z$};
+    
+    % Paraboloid Wireframe (Back half)
+    \draw[gray, thin, domain=0:pi, samples=50] plot ({3*cos(\x r)}, {3*sin(\x r)}, {9});
+    \foreach \h in {1, 4} {
+        \draw[gray, very thin, domain=0:pi, samples=50] plot ({sqrt(\h)*cos(\x r)}, {sqrt(\h)*sin(\x r)}, {\h});
+    }
+    
+    % Paraboloid vertical ribs
+    \foreach \a in {0, 45, 90, 135, 180, 225, 270, 315} {
+        \draw[gray, very thin, domain=0:3, samples=20] plot ({\x*cos(\a)}, {\x*sin(\a)}, {\x*\x});
+    }
+
+    % The Spiral Curve (3 turns: 0 to 6pi)
+    \draw[thick, domain=0:6*pi, samples=200, smooth] 
+        plot ({\x/(2*pi)*cos(\x r)}, {\x/(2*pi)*sin(\x r)}, {(\x/(2*pi))^2});
+        
+    % Paraboloid Wireframe (Front half)
+    \draw[gray, thin, domain=pi:2*pi, samples=50] plot ({3*cos(\x r)}, {3*sin(\x r)}, {9});
+    \foreach \h in {1, 4} {
+        \draw[gray, very thin, domain=pi:2*pi, samples=50] plot ({sqrt(\h)*cos(\x r)}, {sqrt(\h)*sin(\x r)}, {\h});
+    }
+        
+    % Final point
+    \fill (3,0,9) circle (3pt) node[right] {$(3,0,9)$};
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Let your parameter $\theta$ represent the angle of rotation. If it spirals exactly three times, what is your domain? Find a linear equation for the radius $r$ in terms of $\theta$ so that $r=3$ at the very end of the domain. Finally, substitute $x$ and $y$ into the paraboloid equation to get $z$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+Let the parameter be $\theta$, representing the angle of rotation. \\
+\textbf{1. Domain:} Three full spirals means $\theta$ must range from $0$ to $3 \times 2\pi$. Restriction: $0 \le \theta \le 6\pi$. \\
+\textbf{2. Radius $r(\theta)$:} The curve starts at the origin ($r=0$) and ends at $(3,0,9)$ where $r=3$. Assuming constant outward growth, $r$ is directly proportional to $\theta$. 
+$$ r(\theta) = \frac{\text{Final Radius}}{\text{Final Angle}} \theta = \frac{3}{6\pi} \theta = \frac{\theta}{2\pi} $$
+\textbf{3. $x$ and $y$ Components:} 
+$$ x = r\cos\theta = \frac{\theta}{2\pi}\cos\theta, \quad y = r\sin\theta = \frac{\theta}{2\pi}\sin\theta $$
+\textbf{4. $z$ Component:} The curve lies on $z = x^2 + y^2 = r^2$.
+$$ z = \left(\frac{\theta}{2\pi}\right)^2 = \frac{\theta^2}{4\pi^2} $$
+\textbf{Vector Equation:}
+$$ \mathbf{r}(\theta) = \left(\frac{\theta}{2\pi}\cos\theta\right)\mathbf{i} + \left(\frac{\theta}{2\pi}\sin\theta\right)\mathbf{j} + \left(\frac{\theta^2}{4\pi^2}\right)\mathbf{k} \quad \text{for } 0 \le \theta \le 6\pi $$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Cylindrical Coordinates:} This problem introduces the concept of cylindrical coordinates $(r, \theta, z)$. By writing $x, y,$ and $z$ all in terms of $r$ and $\theta$ first, building complex spiral vector equations becomes a trivial step-by-step process.
+\end{itemize}
+\end{takeaways}
