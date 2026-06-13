@@ -838,3 +838,47 @@ $$ \mathbf{r}(\theta) = \left(\frac{\theta}{2\pi}\cos\theta\right)\mathbf{i} + \
     \item \textbf{Cylindrical Coordinates:} This problem introduces the concept of cylindrical coordinates $(r, \theta, z)$. By writing $x, y,$ and $z$ all in terms of $r$ and $\theta$ first, building complex spiral vector equations becomes a trivial step-by-step process.
 \end{itemize}
 \end{takeaways}
+
+\begin{remark}[Concluding: The Challenge of 3D Parametrics]
+If you find 3D parametric equations conceptually difficult, you are not alone. They are universally considered one of the most challenging topics in the Extension~2 syllabus.
+
+\textbf{Why are they so hard?} Our brains are wired to interpret mathematics through 2D planar relationships, and parametrics force us to break that habit. Instead of a direct geometric relationship between $x$, $y$, and $z$, you juggle three coordinates tied to an ``invisible'' fourth variable (the parameter $t$). Mastering this topic requires you to mentally dismantle a 3D shape into its 2D planar ``shadows''---its projections onto the coordinate planes---to understand the core geometry and behaviour of the curve.
+
+By this point, you should recognise the fundamental difference between a curve that wraps around a 3D volume, and a 3D curve that is actually trapped on a flat, diagonal slice of space.
+
+\vspace{0.4em}
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[x={(-0.5cm,-0.4cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}, scale=0.75]
+        \draw[->] (-1.5,0,0) -- (2,0,0) node[below] {$x$};
+        \draw[->] (0,-1.5,0) -- (0,2,0) node[right] {$y$};
+        \draw[->] (0,0,-0.5) -- (0,0,4.5) node[above] {$z$};
+        \draw[thick, blue, domain=0:4.5*pi, samples=150, smooth]
+            plot ({cos(\x r)}, {sin(\x r)}, {\x/pi});
+    \end{tikzpicture}
+
+    \vspace{0.2cm}
+    \textbf{The Spiral (Helix)} \\
+    $x = \cos t,\ y = \sin t,\ z = t$
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[x={(-0.5cm,-0.4cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}, scale=0.75]
+        \draw[->] (-2.5,0,0) -- (2.5,0,0) node[below] {$x$};
+        \draw[->] (0,-4.5,0) -- (0,4.5,0) node[right] {$y$};
+        \draw[->] (0,0,-0.5) -- (0,0,4.5) node[above] {$z$};
+        \draw[dashed, gray] (-2,-4,0) -- (2,4,0);
+        \draw[thick, orange, domain=-2:2, samples=50, smooth]
+            plot ({\x}, {2*\x}, {\x*\x});
+    \end{tikzpicture}
+
+    \vspace{0.2cm}
+    \textbf{The Planar Parabola} \\
+    $x = t,\ y = 2t,\ z = t^2$
+\end{minipage}
+\end{center}
+\end{remark}
+
+\newpage

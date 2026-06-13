@@ -27,6 +27,32 @@
 \usepackage{dl101-hsc-problems}
 \usepackage{dl101-layout}
 
+% Remark box (closes 3D curve topics in Part 1 Advanced)
+\providecolor{warmstone}{RGB}{208,184,168}
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
+  title={\bfseries Remark~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=10pt,right=10pt,top=10pt,bottom=10pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  fontupper=\small,
+  before skip=10pt,
+  after skip=10pt,
+  #1
+}
+\newenvironment{remark}[1][]{%
+  \begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else: #1\fi}]%
+}{%
+  \end{remarkbox}%
+}
+
 % Compact notation macros for A4 constraint compliance
 \newcommand{\cvec}[3]{\begin{psmallmatrix}#1\\#2\\#3\end{psmallmatrix}}
 \newcommand{\tvec}[3]{#1\mathbf{i}+#2\mathbf{j}+#3\mathbf{k}}
