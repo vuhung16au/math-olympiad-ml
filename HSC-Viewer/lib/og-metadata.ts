@@ -85,6 +85,7 @@ export function buildBookletPageMetadata(input: {
   description: string;
   canonicalUrl: string;
   imageUrl: string;
+  keywords?: string[];
 }): Metadata {
   const description = clampOgDescription(input.description);
 
@@ -92,6 +93,7 @@ export function buildBookletPageMetadata(input: {
     metadataBase: new URL(SITE_URL),
     title: input.title,
     description,
+    keywords: input.keywords,
     alternates: {
       canonical: input.canonicalUrl,
     },

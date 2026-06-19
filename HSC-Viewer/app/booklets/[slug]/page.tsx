@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: BookletPageProps) {
     return buildNotFoundMetadata(canonicalUrl);
   }
 
-  const title = `${booklet.title} — Page 0`;
+  const title = `Page 0 - ${booklet.title} | HSC Math Hub`;
   const description = clampOgDescription(
     booklet.description || `View Page 0 of ${booklet.title} on HSC Math Hub.`,
   );
@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: BookletPageProps) {
     description,
     canonicalUrl,
     imageUrl: bookletOgImageUrl(booklet.slug, 0),
+    keywords: booklet.keywords,
   });
 }
 
