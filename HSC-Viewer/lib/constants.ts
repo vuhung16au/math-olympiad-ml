@@ -33,7 +33,26 @@ export const REPO_LINKS = {
 
 export const APP_NAME = 'HSC Math Hub';
 export const APP_DESCRIPTION =
-  'HSC Math Hub — browse free HSC Maths Extension 1 and 2 booklets online. Trigonometry, calculus, combinatorics, and more with worked examples. No downloads.';
+  'HSC Math Hub — browse and download free HSC Maths Extension 1 and 2 booklets online. Master trigonometry, calculus, combinatorics, mechanics and more with comprehensive worked examples and past paper solutions.';
+
+export const APP_KEYWORDS = [
+  'HSC Maths',
+  'Extension 1',
+  'Extension 2',
+  'HSC Mathematics',
+  'HSC Revision',
+  'Maths Booklets',
+  'Worked Solutions',
+  'Past Papers',
+  'Trigonometry',
+  'Calculus',
+  'Combinatorics',
+  'Mechanics',
+  'Vectors',
+  'Polynomials',
+  'Maths Study Guide',
+  'Free Math Resources'
+];
 
 /** Google Analytics 4 measurement ID (gtag.js). */
 export const GOOGLE_ANALYTICS_MEASUREMENT_ID = 'G-7DN8JFW2QH';
