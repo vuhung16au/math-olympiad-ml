@@ -257,3 +257,76 @@ Thus $\left(1 + \frac{1}{n}\right)^n < \left(1 + \frac{1}{n+1}\right)^{n+1}$, pr
     \item \textbf{Common pitfall:} Verify that Bernoulli's Inequality applies: check that $x > -1$ and that the inequality is strict (not just $\geq$) when needed. Also, be careful with sign changes when $x$ is negative.
 
 \end{takeaways}
+
+\begin{problem}[The Cauchy-Schwarz Inequality for Definite Integrals]
+The Cauchy-Schwarz Inequality is a powerful mathematical principle that is widely known for its application to numbers and discrete vectors. However, it is equally profound and useful when applied to continuous functions through definite integrals.
+
+\textbf{Part (i)}
+Let $f(x)$ and $g(x)$ be continuous real-valued functions on the interval $[a, b]$.
+By considering the fact that $\int_a^b (t f(x) + g(x))^2 \, dx \ge 0$ for all real values of $t$, and analyzing the discriminant of the resulting quadratic equation in terms of $t$, prove the Cauchy-Schwarz inequality for definite integrals:
+
+$$\left( \int_a^b f(x)g(x) \, dx \right)^2 \le \left( \int_a^b (f(x))^2 \, dx \right) \left( \int_a^b (g(x))^2 \, dx \right)$$
+
+\textbf{Part (ii)}
+Let $h(x)$ be a continuous, strictly positive function on the interval $[0, 1]$. By applying the inequality from Part (i), show that:
+
+$$\left( \int_0^1 h(x) \, dx \right) \left( \int_0^1 \frac{1}{h(x)} \, dx \right) \ge 1$$
+
+\textbf{Part (iii)}
+Let $y = P(x)$ be a continuously differentiable function such that $P(0) = 1$ and $P(2) = 5$.
+Prove that $\int_0^2 (P'(x))^2 \, dx \ge 8$.
+\end{problem}
+
+\begin{solution}
+\textit{Hints for solving:}
+\begin{itemize}
+    \item \textbf{(i) Double Integral Method:} Alternatively to the standard method requested, consider the 2D double integral $\int_a^b \int_a^b (f(x)g(y) - f(y)g(x))^2 \, dx \, dy \ge 0$. Expand the square and separate the $x$ and $y$ integrals.
+    \item \textbf{(ii):} You need to choose specific functions for $f(x)$ and $g(x)$ such that their product simplifies to $1$, but their squares yield $h(x)$ and $\frac{1}{h(x)}$.
+    \item \textbf{(iii):} Express the net change $P(2) - P(0)$ as a definite integral of the derivative $P'(x)$ using the Fundamental Theorem of Calculus, then apply Cauchy-Schwarz.
+\end{itemize}
+
+\textbf{Part (i) - Solution 1: The Discriminant Method (Standard)}
+
+Let $t$ be any real number. Since the square of any real number is non-negative, we know that:
+$$\int_a^b (t f(x) + g(x))^2 \, dx \ge 0$$
+
+Expanding the integrand:
+$$\int_a^b \left( t^2 (f(x))^2 + 2t f(x)g(x) + (g(x))^2 \right) \, dx \ge 0$$
+
+Using the linearity of integrals, we can split this into a quadratic in terms of $t$:
+$$t^2 \left( \int_a^b (f(x))^2 \, dx \right) + t \left( 2\int_a^b f(x)g(x) \, dx \right) + \left( \int_a^b (g(x))^2 \, dx \right) \ge 0$$
+
+Let this quadratic be $At^2 + Bt + C \ge 0$.
+Because this quadratic is greater than or equal to zero for all real values of $t$, its graph must never cross below the horizontal axis. Therefore, it must have at most one real root, meaning its discriminant must be less than or equal to zero ($\Delta \le 0$).
+
+$$B^2 - 4AC \le 0$$
+$$\left( 2\int_a^b f(x)g(x) \, dx \right)^2 - 4 \left( \int_a^b (f(x))^2 \, dx \right) \left( \int_a^b (g(x))^2 \, dx \right) \le 0$$
+$$4 \left( \int_a^b f(x)g(x) \, dx \right)^2 \le 4 \left( \int_a^b (f(x))^2 \, dx \right) \left( \int_a^b (g(x))^2 \, dx \right)$$
+
+Dividing by $4$ yields the Cauchy-Schwarz inequality. $\blacksquare$
+
+\textbf{Part (i) - Solution 2: The Double Integral Method (Alternative)}
+
+Consider the following double integral, which must be non-negative since the integrand is squared:
+$$\frac{1}{2} \int_a^b \int_a^b (f(x)g(y) - f(y)g(x))^2 \, dx \, dy \ge 0$$
+Then, expand the inequality and rearrange the terms to directly yield the required result. $\blacksquare$
+
+\textbf{Part (ii)}
+
+Apply the Cauchy-Schwarz inequality using $f(x) = \sqrt{h(x)}$ and $g(x) = \frac{1}{\sqrt{h(x)}}$ on the interval $[0, 1]$. Since $f(x)g(x) = 1$, the inequality directly simplifies to the required result:
+$$1 \le \left( \int_0^1 h(x) \, dx \right) \left( \int_0^1 \frac{1}{h(x)} \, dx \right) \quad \blacksquare$$
+
+\textbf{Part (iii)}
+
+Apply the Cauchy-Schwarz inequality using $f(x) = P'(x)$ and $g(x) = 1$ on the interval $[0, 2]$. Since $\int_0^2 P'(x) \, dx = P(2) - P(0) = 4$ and $\int_0^2 1^2 \, dx = 2$, substituting these values directly yields:
+$$(4)^2 \le \left( \int_0^2 (P'(x))^2 \, dx \right) (2) \implies \int_0^2 (P'(x))^2 \, dx \ge 8 \quad \blacksquare$$
+\end{solution}
+
+\begin{takeaways}
+    \item \textbf{Functions as Vectors:} The Cauchy-Schwarz inequality is mostly taught in high school geometry using discrete 3D vectors: $(\vec{u} \cdot \vec{v})^2 \le |\vec{u}|^2 |\vec{v}|^2$. This problem demonstrates a profound concept in higher mathematics: functions can be treated as infinite-dimensional vectors. In this vector space, taking the definite integral of the product of two functions is the exact mathematical equivalent of taking a dot product!
+    \item \textbf{The "Multiply by 1" Trick:} Part (iii) showcases a classic Extension 2 technique. When you want to bound a single function using Cauchy-Schwarz, you often set $g(x) = 1$. This isolates your primary function while pulling a constant "width" out of the interval integration.
+    \item \textbf{Beyond Cauchy (Hölder's Inequality):} While Cauchy-Schwarz is incredibly powerful, it is actually just a specific case of a much broader theorem called Hölder's Inequality. Cauchy-Schwarz deals strictly with squares ($L_2$ space). Hölder's inequality generalizes this to any complementary powers $p$ and $q$ (where $\frac{1}{p} + \frac{1}{q} = 1$).
+    Hölder states that:
+    $$\int_a^b |f(x)g(x)| \, dx \le \left( \int_a^b |f(x)|^p \, dx \right)^{\frac{1}{p}} \left( \int_a^b |g(x)|^q \, dx \right)^{\frac{1}{q}}$$
+    If you let $p = 2$ and $q = 2$, it collapses beautifully back into the Cauchy-Schwarz inequality you just proved!
+\end{takeaways}
