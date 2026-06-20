@@ -16,11 +16,11 @@
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \tdplotsetmaincoords{70}{120}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.42]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.65]
   \draw[thin,->] (0,0,0) -- (1.6,0,0);
   \draw[thin,->] (0,0,0) -- (0,1.6,0);
   \draw[thin,->] (0,0,0) -- (0,0,3.8);
-  \draw[thick,domain=0:12.566,samples=100,smooth]
+  \draw[very thick,domain=0:12.566,samples=100,smooth]
     plot ({cos(\x r)},{sin(\x r)},{\x/3.14159});
 \end{tikzpicture}\\[-0.1em]
 \textbf{The Helix (Slinky)}\\[-0.1em]
@@ -30,11 +30,11 @@ $x=\cos t$, \quad $y=\sin t$, \quad $z=t$
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \tdplotsetmaincoords{70}{120}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.22]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.45]
   \draw[thin,->] (0,0,0) -- (3.2,0,0);
   \draw[thin,->] (0,0,0) -- (0,3.2,0);
   \draw[thin,->] (0,0,0) -- (0,0,1.2);
-  \draw[thick,domain=0:360,samples=100,smooth]
+  \draw[very thick,domain=0:360,samples=100,smooth]
     plot ({cos(\x)+2*cos(2*\x)},{sin(\x)-2*sin(2*\x)},{-sin(3*\x)});
 \end{tikzpicture}\\[-0.1em]
 \textbf{Torus Knot (Figure-Eight)}\\[-0.1em]
@@ -50,11 +50,11 @@ $y=\sin t-2\sin 2t$, \quad $z=-\sin 3t$
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \tdplotsetmaincoords{70}{120}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.42]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.65]
   \draw[thin,->] (0,0,0) -- (1.2,0,0);
   \draw[thin,->] (0,0,0) -- (0,1.2,0);
   \draw[thin,->] (0,0,0) -- (0,0,1.2);
-  \draw[thick,domain=0:360,samples=100,smooth]
+  \draw[very thick,domain=0:360,samples=100,smooth]
     plot ({cos(4*\x)*cos(\x)},{cos(4*\x)*sin(\x)},{sin(4*\x)});
 \end{tikzpicture}\\[-0.1em]
 \textbf{3D Rose (Rhodonea)}\\[-0.1em]
@@ -64,11 +64,11 @@ $x=\cos(4t)\cos t$, \quad $y=\cos(4t)\sin t$, \quad $z=\sin(4t)$
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \tdplotsetmaincoords{70}{120}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.42]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.65]
   \draw[thin,->] (0,0,0) -- (1.2,0,0);
   \draw[thin,->] (0,0,0) -- (0,1.2,0);
   \draw[thin,->] (0,0,0) -- (0,0,1.2);
-  \draw[thick,domain=0:360,samples=100,smooth]
+  \draw[very thick,domain=0:360,samples=100,smooth]
     plot ({sin(3*\x)},{sin(4*\x)},{sin(\x)});
 \end{tikzpicture}\\[-0.1em]
 \textbf{3D Lissajous Curve}\\[-0.1em]
@@ -83,11 +83,11 @@ $x=\sin(3t)$, \quad $y=\sin(4t)$, \quad $z=\sin t$
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \tdplotsetmaincoords{70}{120}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.42]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.65]
   \draw[thin,->] (0,0,0) -- (1.6,0,0);
   \draw[thin,->] (0,0,0) -- (0,1.6,0);
   \draw[thin,->] (0,0,0) -- (0,0,0.2);
-  \draw[thick,domain=0:360,samples=100,smooth]
+  \draw[very thick,domain=0:360,samples=100,smooth]
     plot ({4*sin(\x)^3},{0.25*(13*cos(\x)-5*cos(2*\x)-2*cos(3*\x)-cos(4*\x))},0);
 \end{tikzpicture}\\[-0.1em]
 \textbf{Heart}\\[-0.1em]
@@ -98,11 +98,11 @@ $y=\tfrac{R}{4}\bigl(13\cos u-5\cos 2u-2\cos 3u-\cos 4u\bigr)$
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \tdplotsetmaincoords{70}{120}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.42]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.65]
   \draw[thin,->] (0,0,0) -- (1.2,0,0);
   \draw[thin,->] (0,0,0) -- (0,1.2,0);
   \draw[thin,->] (0,0,0) -- (0,0,1.2);
-  \draw[thick,domain=0:12.566,samples=100,smooth]
+  \draw[very thick,domain=0:12.566,samples=100,smooth]
     plot ({cos(\x r)},{sin(\x r)},{cos(\x r)});
 \end{tikzpicture}\\[-0.1em]
 \textbf{Spring}\\[-0.1em]
@@ -117,13 +117,13 @@ $x=R\cos t$, \quad $y=R\sin t$, \quad $z=R\cos t$
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \tdplotsetmaincoords{70}{120}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.35]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.55]
   \draw[thin,->] (0,0,0) -- (1.6,0,0);
   \draw[thin,->] (0,0,0) -- (0,1.6,0);
   \draw[thin,->] (0,0,0) -- (0,0,0.8);
-  \draw[thick,domain=0:360,samples=80,smooth]
+  \draw[very thick,domain=0:360,samples=80,smooth]
     plot ({2*cos(\x)},{2*sin(\x)},0);
-  \draw[thick,domain=0:360,samples=80,smooth]
+  \draw[very thick,domain=0:360,samples=80,smooth]
     plot ({2*cos(\x)+0.35*cos(\x/2)*cos(\x)},{2*sin(\x)+0.35*cos(\x/2)*sin(\x)},{0.35*sin(\x/2)});
 \end{tikzpicture}\\[-0.1em]
 \textbf{M\"obius Strip}\\[-0.1em]
@@ -134,11 +134,11 @@ $y=2R\bigl(\sin u+v\cos\tfrac{u}{2}\sin u\bigr)$, \quad $z=2Rv\sin\tfrac{u}{2}$
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \tdplotsetmaincoords{70}{120}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.35]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.55]
   \draw[thin,->] (0,0,0) -- (2.2,0,0);
   \draw[thin,->] (0,0,0) -- (0,2.2,0);
   \draw[thin,->] (0,0,0) -- (0,0,3.8);
-  \draw[thick,domain=0:12.566,samples=100,smooth]
+  \draw[very thick,domain=0:12.566,samples=100,smooth]
     plot ({\x/2*cos(\x r)},{(\x/2)*sin(\x r)},{\x/2});
 \end{tikzpicture}\\[-0.1em]
 \textbf{Cone}\\[-0.1em]
