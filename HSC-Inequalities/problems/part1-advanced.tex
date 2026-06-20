@@ -301,7 +301,7 @@ $$\int_0^2 (P'(x))^2 \, dx \ge 8$$.
 
 \textbf{ (i) - Solution 1: The Discriminant Method (Standard)}
 
-Let $t$ be any real number. Since the square of any real number is non-negative, we know that:
+Let $t$ be any real number. We have: 
 $$\int_a^b (t f(x) + g(x))^2 \, dx \ge 0$$
 
 Expanding the integrand:
@@ -311,20 +311,23 @@ Using the linearity of integrals, we can split this into a quadratic in terms of
 $$t^2 \left( \int_a^b (f(x))^2 \, dx \right) + t \left( 2\int_a^b f(x)g(x) \, dx \right) + \left( \int_a^b (g(x))^2 \, dx \right) \ge 0$$
 
 Let this quadratic be $At^2 + Bt + C \ge 0$.
-Because this quadratic is greater than or equal to zero for all real values of $t$, its graph must never cross below the horizontal axis. Therefore, it must have at most one real root, meaning its discriminant must be less than or equal to zero ($\Delta \le 0$).
+Because this quadratic is greater than or equal to zero for all real values of $t$, its discriminant must be less than or equal to zero ($\Delta \le 0$).
 
 $$B^2 - 4AC \le 0$$
 $$\left( 2\int_a^b f(x)g(x) \, dx \right)^2 - 4 \left( \int_a^b (f(x))^2 \, dx \right) \left( \int_a^b (g(x))^2 \, dx \right) \le 0$$
-$$4 \left( \int_a^b f(x)g(x) \, dx \right)^2 \le 4 \left( \int_a^b (f(x))^2 \, dx \right) \left( \int_a^b (g(x))^2 \, dx \right)$$
+% $$4 \left( \int_a^b f(x)g(x) \, dx \right)^2 \le 4 \left( \int_a^b (f(x))^2 \, dx \right) \left( \int_a^b (g(x))^2 \, dx \right)$$
 
-Dividing by $4$ yields the Cauchy-Schwarz inequality. $\blacksquare$
+By putting the second term to the right and side 
+and dividing by $4$ yields the Cauchy-Schwarz inequality. $\blacksquare$
 
 \vspace*{1em}
 
 \textbf{ (i) - Solution 2: The Double Integral Method (Alternative)}
 
 Consider the following double integral, which must be non-negative since the integrand is squared:
+
 $$\frac{1}{2} \int_a^b \int_a^b (f(x)g(y) - f(y)g(x))^2 \, dx \, dy \ge 0$$
+
 Then, expand the inequality and rearrange the terms to directly yield the required result. $\blacksquare$
 
 \vspace*{1em}
@@ -350,5 +353,5 @@ $$(4)^2 \le \left( \int_0^2 (P'(x))^2 \, dx \right) (2) \implies \int_0^2 (P'(x)
     $$\int_a^b |f(x)g(x)| \, dx \le \left( \int_a^b |f(x)|^p \, dx \right)^{\frac{1}{p}} \left( \int_a^b |g(x)|^q \, dx \right)^{\frac{1}{q}}$$
     If you let $p = 2$ and $q = 2$, it collapses beautifully back into the Cauchy-Schwarz inequality you just proved!
     \item \textbf{Turn Cauchy-Schwarz Inequality for Definite Integrals into  Cauchy-Schwarz Inequality for real numbers} (or complex numbers) can be done by setting up $f, g$ as step functions. Do you see how? 
-    \item When the equality holds in part (i) when $f(x) = k g(x)$ for some constant $k$.
+    \item The equality holds in part (i) when $f(x) = k g(x)$ for some constant $k$.
 \end{takeaways}
