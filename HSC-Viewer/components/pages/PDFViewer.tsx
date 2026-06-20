@@ -402,11 +402,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   // Scroll to a specific page in continuous mode
   const scrollToPage = useCallback((pageNum: number) => {
     if (numPages > 0) {
-      setRenderedPages((prev) => {
-        const next = new Set(prev);
-        expandPageWindow(pageNum, numPages).forEach((page) => next.add(page));
-        return next;
-      });
+      setRenderedPages(expandPageWindow(pageNum, numPages));
     }
 
     suppressIntersectionUntilRef.current = Date.now() + 900;
@@ -435,13 +431,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
 
           ratioMap.set(n, entry.intersectionRatio);
 
-          if (entry.isIntersecting) {
-            setRenderedPages((prev) => {
-              const next = new Set(prev);
-              expandPageWindow(n, numPages).forEach((page) => next.add(page));
-              return next;
-            });
-          }
+
         }
 
         if (Date.now() < suppressIntersectionUntilRef.current) {
@@ -453,7 +443,10 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
         ratioMap.forEach((ratio, pageNum) => {
           if (ratio > maxRatio) { maxRatio = ratio; mostVisible = pageNum; }
         });
-        if (maxRatio > 0) setCurrentPage(mostVisible);
+        if (maxRatio > 0) {
+          setCurrentPage(mostVisible);
+          setRenderedPages(expandPageWindow(mostVisible, numPages));
+        }
       },
       {
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
@@ -486,11 +479,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       return;
     }
 
-    setRenderedPages((prev) => {
-      const next = new Set(prev);
-      expandPageWindow(targetPage, numPages).forEach((page) => next.add(page));
-      return next;
-    });
+    setRenderedPages(expandPageWindow(targetPage, numPages));
 
     const timer = window.setTimeout(() => {
       const el = pageRefs.current.get(targetPage);
@@ -511,11 +500,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   useEffect(() => {
     if (viewMode === "continuous" && numPages > 0) {
       const target = currentPageRef.current;
-      setRenderedPages((prev) => {
-        const next = new Set(prev);
-        expandPageWindow(target, numPages).forEach((page) => next.add(page));
-        return next;
-      });
+      setRenderedPages(expandPageWindow(target, numPages));
       setTimeout(() => {
         const el = pageRefs.current.get(target);
         if (el) {
@@ -537,6 +522,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
     let timeoutId: number | null = null;
 
     const observer = new ResizeObserver((entries) => {
+      suppressIntersectionUntilRef.current = Date.now() + 900;
+
       if (timeoutId !== null) {
         window.clearTimeout(timeoutId);
       }
@@ -587,6 +574,31 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const estimatedContinuousPageHeight = useMemo(() => {
     return Math.max(320, Math.round(pageRenderWidth * PDF_PAGE_ASPECT_RATIO));
   }, [pageRenderWidth]);
+
+  const previousPageRenderWidthRef = useRef(pageRenderWidth);
+
+  useEffect(() => {
+    if (viewMode !== "continuous" || numPages === 0) return;
+    
+    // Only trigger if pageRenderWidth significantly changed
+    if (Math.abs(previousPageRenderWidthRef.current - pageRenderWidth) < 1) {
+      return;
+    }
+    
+    previousPageRenderWidthRef.current = pageRenderWidth;
+
+    const target = currentPageRef.current;
+    
+    // Wait for the DOM wrapper divs (which use estimatedContinuousPageHeight)
+    // to update their heights before scrolling to the anchored page.
+    setTimeout(() => {
+      const el = pageRefs.current.get(target);
+      if (el) {
+        suppressIntersectionUntilRef.current = Date.now() + 900;
+        scrollContinuousPageIntoView(el, stageRef.current, "auto");
+      }
+    }, 50);
+  }, [pageRenderWidth, viewMode, numPages]);
 
   const pageStep = isTwoPageSpread ? 2 : 1;
 
@@ -1115,14 +1127,12 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
                       const { numPages: loadedPages } = loadedDocument;
 
                       setNumPages(loadedPages);
-                      setRenderedPages((prev) => {
-                        const next = new Set(prev);
+                      setRenderedPages(
                         expandPageWindow(
                           validatePageNumber(currentPageRef.current, loadedPages),
                           loadedPages,
-                        ).forEach((page) => next.add(page));
-                        return next;
-                      });
+                        )
+                      );
                       setCurrentPage((page) => validatePageNumber(page, loadedPages));
                       setError(null);
                       setOutlineItems([]);

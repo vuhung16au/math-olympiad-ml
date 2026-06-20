@@ -27,3 +27,26 @@ for (const viewport of viewports) {
     await expect(page).toHaveURL(/\/booklets\/hsc-collections\/2(\?.*)?$/);
   });
 }
+
+test("maintains page number when rotating mobile device", async ({ page }) => {
+  // Start in portrait mode
+  await page.setViewportSize({ width: 390, height: 844 });
+  // The mock PDF has 8 pages, start at page 4
+  await gotoViewer(page, { mockMode: "success", page: 4 });
+
+  await expect(page.getByRole("textbox", { name: "Current page" })).toHaveValue("4");
+
+  // Rotate to landscape
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.waitForTimeout(1000); // Allow ResizeObserver debounce to settle
+
+  // The page should STILL be 4
+  await expect(page.getByRole("textbox", { name: "Current page" })).toHaveValue("4");
+
+  // Rotate back to portrait
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(1000); // Allow ResizeObserver debounce to settle
+
+  // The page should STILL be 4
+  await expect(page.getByRole("textbox", { name: "Current page" })).toHaveValue("4");
+});
