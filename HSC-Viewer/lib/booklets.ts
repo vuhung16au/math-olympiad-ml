@@ -24,7 +24,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Arithmetic and geometric series, sigma notation, and recurrence relations.",
     description:
       "HSC Sequences booklet — arithmetic and geometric series, sigma notation, and recurrence relations with worked examples. Free HSC Maths revision on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Advanced", "Extension 1", "Sequences", "Series", "Sigma Notation", "Recurrence Relations", "Arithmetic Series", "Geometric Series", "Maths Revision"],
+    keywords: ["HSC Mathematics", "Advanced", "Extension 1", "Sequences", "Series", "Sigma Notation", "Recurrence Relations", "Arithmetic Series", "Geometric Series", "Maths Revision", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 51,
     isAvailable: true,
   },
@@ -37,7 +37,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Identities, trig equations, graphs, and inverse functions.",
     description:
       "HSC Trigonometry booklet for Extension 1 and 2 — identities, equations, graphs, and inverse trig with worked examples. Read free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 1", "Extension 2", "Trigonometry", "Trig Identities", "Trig Equations", "Inverse Trig Functions", "Maths Revision"],
+    keywords: ["HSC Mathematics", "Extension 1", "Extension 2", "Trigonometry", "Trig Identities", "Trig Equations", "Inverse Trig Functions", "Maths Revision", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 66,
     isAvailable: true,
   },
@@ -50,7 +50,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Counting, permutations, combinations, and classic Extension 2 problems.",
     description:
       "HSC Combinatorics booklet — counting principles, permutations, combinations, and Extension 2 problems with worked solutions. Free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 2", "Combinatorics", "Permutations", "Combinations", "Counting Principles", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 2", "Combinatorics", "Permutations", "Combinations", "Counting Principles", "Maths Revision", "Worked Solutions", "binomial expansion exercises", "HSC Extension 2 counting problems", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 82,
     isAvailable: true,
   },
@@ -63,7 +63,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "First-order ODEs, modelling, and step-by-step Extension 2 solutions.",
     description:
       "HSC Differential Equations booklet — methods, modelling, and applications with step-by-step worked solutions for Extension 2. Read free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 2", "Differential Equations", "First-order ODEs", "Mathematical Modelling", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 2", "Differential Equations", "First-order ODEs", "Mathematical Modelling", "Maths Revision", "Worked Solutions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 117,
     isAvailable: true,
   },
@@ -76,7 +76,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Transformations, inverses, composition, and function sketching.",
     description:
       "HSC Functions booklet — transformations, inverses, composition, and sketching with worked examples for Extension 1 and 2. Free online on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Advanced", "Extension 1", "Extension 2", "Functions", "Graph Sketching", "Transformations", "Inverse Functions", "Maths Revision"],
+    keywords: ["HSC Mathematics", "Advanced", "Extension 1", "Extension 2", "Functions", "Graph Sketching", "Transformations", "Inverse Functions", "Maths Revision", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 66,
     isAvailable: true,
   },
@@ -89,7 +89,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Discrete and continuous probability distributions for Extension 1 and 2.",
     description:
       "HSC Distributions booklet — discrete and continuous probability models, properties, and worked examples. Free HSC Maths revision on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Advanced", "Extension 1", "Probability Distributions", "Discrete Probability", "Continuous Probability", "Normal Distribution", "Binomial Distribution", "Maths Revision"],
+    keywords: ["HSC Mathematics", "Advanced", "Extension 1", "Probability Distributions", "Discrete Probability", "Continuous Probability", "Normal Distribution", "Binomial Distribution", "Maths Revision", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 54,
     isAvailable: true,
   },
@@ -102,7 +102,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Factorisation, remainder theorem, and polynomial graphs for Ext 1.",
     description:
       "HSC Extension 1 Polynomials booklet — factorisation, remainder theorem, graphs, and algebraic techniques with worked examples. Read free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 1", "Polynomials", "Factorisation", "Remainder Theorem", "Factor Theorem", "Polynomial Graphs", "Maths Revision"],
+    keywords: ["HSC Mathematics", "Extension 1", "Polynomials", "Factorisation", "Remainder Theorem", "Factor Theorem", "Polynomial Graphs", "Maths Revision", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 70,
     isAvailable: true,
   },
@@ -115,7 +115,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Conditional probability, independence, and exam-style questions.",
     description:
       "HSC Probability booklet — events, conditional probability, independence, and common exam-style problems with solutions. Free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Advanced", "Probability", "Conditional Probability", "Independent Events", "Venn Diagrams", "Tree Diagrams", "Maths Revision"],
+    keywords: ["HSC Mathematics", "Advanced", "Probability", "Conditional Probability", "Independent Events", "Venn Diagrams", "Tree Diagrams", "Maths Revision", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 74,
     isAvailable: true,
   },
@@ -128,7 +128,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Proof structure, clear reasoning, and worked examples.",
     description:
       "HSC Proofs booklet — proof structure, rigour, and strategies with worked examples for Extension 1 and 2. Read free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 1", "Extension 2", "Mathematical Proof", "Proof by Contradiction", "Direct Proof", "Logic", "Maths Revision"],
+    keywords: ["HSC Mathematics", "Extension 1", "Extension 2", "Mathematical Proof", "Proof by Contradiction", "Direct Proof", "Logic", "Maths Revision", "HSC mathematical induction proofs", "proof by contradiction examples", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 76,
     isAvailable: true,
   },
@@ -141,7 +141,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Algebra, roots, and graph features for harder polynomial work.",
     description:
       "HSC Polynomials booklet — algebraic manipulation, roots, and graph features with problem-solving approaches and worked solutions. Free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 2", "Polynomials", "Algebra", "Roots of Polynomials", "Complex Roots", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 2", "Polynomials", "Algebra", "Roots of Polynomials", "Complex Roots", "Maths Revision", "Worked Solutions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 53,
     isAvailable: true,
   },
@@ -154,7 +154,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Mathematical induction for inequalities, divisibility, and proofs.",
     description:
       "HSC Mathematical Induction booklet — patterns, inequalities, divisibility, and proof practice for Extension 1. Read free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 1", "Mathematical Induction", "Proof by Induction", "Divisibility Proofs", "Inequality Proofs", "Maths Revision"],
+    keywords: ["HSC Mathematics", "Extension 1", "Mathematical Induction", "Proof by Induction", "Divisibility Proofs", "Inequality Proofs", "Maths Revision", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 41,
     isAvailable: true,
   },
@@ -167,7 +167,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Classic inequality techniques and results for Extension 2.",
     description:
       "HSC Inequalities booklet — common techniques, classic results, and worked examples for Extension 2 preparation. Free online on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 2", "Inequalities", "AM-GM", "Cauchy-Schwarz", "Algebraic Inequalities", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 2", "Inequalities", "AM-GM", "Cauchy-Schwarz", "Algebraic Inequalities", "Maths Revision", "Worked Solutions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 75,
     isAvailable: true,
   },
@@ -180,7 +180,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Algebra, geometry, and modulus–argument form in the complex plane.",
     description:
       "HSC Complex Numbers booklet — algebra, geometry, modulus–argument form, and applications with worked examples. Read free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 2", "Complex Numbers", "Argand Diagram", "Modulus-Argument Form", "De Moivre's Theorem", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 2", "Complex Numbers", "Argand Diagram", "Modulus-Argument Form", "De Moivre's Theorem", "Maths Revision", "Worked Solutions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 68,
     isAvailable: true,
   },
@@ -193,7 +193,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Integration techniques and applications with full worked solutions.",
     description:
       "HSC Integrals booklet — integration techniques, applications, and exam-style problems with step-by-step worked solutions. Free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 1", "Extension 2", "Integration", "Calculus", "Integration by Parts", "Volumes of Solid of Revolution", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 1", "Extension 2", "Integration", "Calculus", "Integration by Parts", "Volumes of Solid of Revolution", "Maths Revision", "Worked Solutions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 82,
     isAvailable: true,
   },
@@ -206,7 +206,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Vectors, motion, forces, and mechanics modelling for Extension 2.",
     description:
       "HSC Mechanics booklet for Extension 2 — vectors, motion, forces, and modelling with worked examples. Read free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 2", "Mechanics", "Motion", "Forces", "Resisted Motion", "Projectile Motion", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 2", "Mechanics", "Motion", "Forces", "Resisted Motion", "Projectile Motion", "Maths Revision", "Worked Solutions", "resisted motion HSC questions", "projectile motion worked examples", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 85,
     isAvailable: true,
   },
@@ -219,7 +219,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Lines, planes, dot and cross products, and 3D geometry.",
     description:
       "HSC Vectors booklet — geometric and algebraic methods, lines, planes, and 3D problems with worked solutions. Free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 1", "Extension 2", "Vectors", "3D Geometry", "Dot Product", "Cross Product", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 1", "Extension 2", "Vectors", "3D Geometry", "Dot Product", "Cross Product", "Maths Revision", "Worked Solutions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 72,
     isAvailable: true,
   },
@@ -232,7 +232,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Mixed-topic problems and solutions across the HSC Maths course.",
     description:
       "HSC Collections — curated problems and solutions across key HSC Maths topics and techniques. Ideal for revision. Read free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Advanced", "Extension 1", "Extension 2", "Past Papers", "Mixed Problems", "Exam Preparation", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Advanced", "Extension 1", "Extension 2", "Past Papers", "Mixed Problems", "Exam Preparation", "Maths Revision", "Worked Solutions", "HSC Maths past papers alternative", "HSC revision questions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 57,
     isAvailable: true,
   },
@@ -245,7 +245,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "Harder problems and creative techniques when usual methods stall.",
     description:
       "HSC Last Resorts booklet — challenging problems with creative techniques and detailed worked solutions for Extension 2. Free on HSC Math Hub.",
-    keywords: ["HSC Mathematics", "Extension 2", "Hard Problems", "Problem Solving Strategies", "Creative Techniques", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 2", "Hard Problems", "Problem Solving Strategies", "Creative Techniques", "Maths Revision", "Worked Solutions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 117,
     isAvailable: true,
   },
@@ -258,7 +258,7 @@ export const BOOKLETS: Booklet[] = [
     cardBlurb: "The complete Extension 2 reference — arriving soon.",
     description:
       "HSC Mathematics Extension 2 full booklet — comprehensive coverage coming soon to HSC Math Hub. Browse other free HSC Maths booklets now.",
-    keywords: ["HSC Mathematics", "Extension 2", "Full Course", "Textbook", "Maths Revision", "Worked Solutions"],
+    keywords: ["HSC Mathematics", "Extension 2", "Full Course", "Textbook", "Maths Revision", "Worked Solutions", "NESA aligned", "past paper practice", "Year 12 Maths", "HSC tutoring alternative"],
     pageCount: 0,
     isAvailable: false,
   },

@@ -48,5 +48,26 @@ export default async function BookletPage({ params }: BookletPageProps) {
     notFound();
   }
 
-  return <PDFViewer booklet={booklet} initialPage={0} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": booklet.title,
+    "description": booklet.description,
+    "provider": {
+      "@type": "Organization",
+      "name": "HSC Math Hub",
+      "sameAs": SITE_URL
+    },
+    "educationalLevel": "NSW HSC"
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PDFViewer booklet={booklet} initialPage={0} />
+    </>
+  );
 }
