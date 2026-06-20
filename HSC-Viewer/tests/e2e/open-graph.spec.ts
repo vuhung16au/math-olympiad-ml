@@ -88,3 +88,16 @@ test("out-of-range page returns 404 but includes Not-found OG meta", async ({ re
   expect(getOgMeta(html, "og:image")).toContain("/og/site-fallback.png");
 });
 
+test("booklet page 5 includes correct OG image URL", async ({ request }) => {
+  const url = "/booklets/hsc-last-resorts/5";
+  const res = await request.get(url);
+  expect(res.status()).toBe(200);
+  const html = await res.text();
+
+  const ogTitle = getOgMeta(html, "og:title");
+  const ogImage = getOgMeta(html, "og:image");
+
+  expect(ogTitle).toContain("Page 5");
+  expect(ogImage).toContain("/og/preview-6/booklets/hsc-last-resorts/5.png");
+});
+

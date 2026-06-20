@@ -11,7 +11,7 @@ test.describe("Continuous PDF view (desktop)", () => {
     await expect(page.getByTestId("mock-pdf-page-1")).toBeVisible();
     await expect(page.getByTestId("mock-pdf-page-2")).toBeVisible();
     await expect(page.getByTestId("mock-pdf-page-3")).toBeVisible();
-    await expect(page.getByTestId("mock-pdf-page-8")).toHaveCount(0);
+    await expect(page.getByTestId("mock-pdf-page-20")).toHaveCount(0);
   });
 
   test("fullscreen pages and outline navigator jump to expected targets", async ({ page }) => {
