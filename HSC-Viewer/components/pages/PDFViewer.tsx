@@ -10,6 +10,7 @@ import type { Booklet } from "@/lib/booklets";
 import PDFControls from "@/components/ui/PDFControls";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
+import SubstackPopup from "@/components/ui/SubstackPopup";
 import { PDF_DEFAULTS } from "@/lib/constants";
 import {
   trackBookletOpened,
@@ -238,6 +239,8 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
   const [navigatorPosition, setNavigatorPosition] = useState<{ x: number; y: number } | null>(null);
   const [isDraggingNavigator, setIsDraggingNavigator] = useState(false);
   const [e2ePdfMockMode, setE2EPdfMockMode] = useState<E2EPdfMockMode>("off");
+  const [showSubstackPopup, setShowSubstackPopup] = useState(false);
+  const [hasSeenSubstackPopup, setHasSeenSubstackPopup] = useState(false);
 
   // Keep ref in sync so effects can read latest value without stale closures
   useEffect(() => {
@@ -586,6 +589,13 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
 
     return "none";
   }, [readingTheme]);
+
+  useEffect(() => {
+    if (numPages > 0 && safeCurrentPage === numPages && !hasSeenSubstackPopup) {
+      setShowSubstackPopup(true);
+      setHasSeenSubstackPopup(true);
+    }
+  }, [safeCurrentPage, numPages, hasSeenSubstackPopup]);
 
   const handleToggleViewMode = useCallback(() => {
     setViewMode((mode) => {
@@ -1325,6 +1335,7 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
             </div>
           </div>
         </div>
+        <SubstackPopup isOpen={showSubstackPopup} onClose={() => setShowSubstackPopup(false)} />
       </section>
     </ErrorBoundary>
   );
