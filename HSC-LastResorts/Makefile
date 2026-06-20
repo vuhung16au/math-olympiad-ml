@@ -8,15 +8,17 @@ STEM=$(TEX:.tex=)
 LATEXMK=latexmk
 LATEXMKFLAGS=-lualatex -interaction=nonstopmode -halt-on-error -file-line-error
 
+DOCKER_RUN=docker run --rm -v "$$PWD":/workdir -v "$$PWD/../HSC-Common":/HSC-Common -w /workdir texlive/texlive:latest
+
 all pdf:
 	@if [ -f $(STEM).aux ] && grep -q $$'\x00' $(STEM).aux 2>/dev/null; then \
 		echo "Removing corrupted $(STEM).aux"; \
 		rm -f $(STEM).aux $(STEM).out $(STEM).toc $(STEM).fdb_latexmk $(STEM).fls; \
 	fi
-	$(LATEXMK) $(LATEXMKFLAGS) $(TEX)
+	$(DOCKER_RUN) $(LATEXMK) $(LATEXMKFLAGS) $(TEX)
 
 clean:
-	-$(LATEXMK) -C
+	-$(DOCKER_RUN) $(LATEXMK) -C
 	rm -f $(STEM).aux $(STEM).log $(STEM).out $(STEM).toc
 	rm -f $(STEM).fdb_latexmk $(STEM).fls $(STEM).synctex.gz $(STEM).pdf
 
