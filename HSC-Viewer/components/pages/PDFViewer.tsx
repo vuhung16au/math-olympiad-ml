@@ -534,22 +534,35 @@ export default function PDFViewer({ booklet, initialPage = 1 }: PDFViewerProps) 
       return;
     }
 
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.target === pdfColumn) {
-          // Measure the PDF column, not the full stage (which includes the sidebar).
-          setContainerWidth(Math.max(280, Math.floor(entry.contentRect.width)));
-        }
+    let timeoutId: number | null = null;
 
-        if (entry.target === stage) {
-          setContainerHeight(Math.max(360, Math.floor(entry.contentRect.height - 24)));
-        }
+    const observer = new ResizeObserver((entries) => {
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
       }
+
+      timeoutId = window.setTimeout(() => {
+        for (const entry of entries) {
+          if (entry.target === pdfColumn) {
+            // Measure the PDF column, not the full stage (which includes the sidebar).
+            setContainerWidth(Math.max(280, Math.floor(entry.contentRect.width)));
+          }
+
+          if (entry.target === stage) {
+            setContainerHeight(Math.max(360, Math.floor(entry.contentRect.height - 24)));
+          }
+        }
+      }, 150);
     });
 
     observer.observe(pdfColumn);
     observer.observe(stage);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   const safeCurrentPage = useMemo(
