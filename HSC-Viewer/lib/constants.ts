@@ -29,6 +29,7 @@ export const REPO_LINKS = {
   github: 'https://github.com/vuhung16au/math-olympiad-ml',
   linkedin: 'https://www.linkedin.com/in/nguyenvuhung/',
   license: 'https://creativecommons.org/licenses/by/4.0/',
+  substack: 'https://vuhung16.substack.com/',
 };
 
 export const APP_NAME = 'HSC Math Hub';

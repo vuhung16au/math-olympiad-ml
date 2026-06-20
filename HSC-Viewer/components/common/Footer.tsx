@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { REPO_LINKS } from "@/lib/constants";
 
 export default function Footer() {
@@ -16,12 +17,26 @@ export default function Footer() {
           </a>
           .
         </p>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
+          <a
+            href={REPO_LINKS.substack}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-[var(--color-purple)] hover:underline"
+          >
+            Substack
+          </a>
+          <Link
+            href="/faq"
+            className="font-medium text-[var(--color-purple)] hover:underline"
+          >
+            FAQ
+          </Link>
           <a
             href={REPO_LINKS.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="font-medium text-[var(--color-purple)]"
+            className="font-medium text-[var(--color-purple)] hover:underline"
           >
             LinkedIn
           </a>
@@ -29,7 +44,7 @@ export default function Footer() {
             href={REPO_LINKS.github}
             target="_blank"
             rel="noreferrer"
-            className="font-medium text-[var(--color-purple)]"
+            className="font-medium text-[var(--color-purple)] hover:underline"
           >
             Source repository
           </a>
