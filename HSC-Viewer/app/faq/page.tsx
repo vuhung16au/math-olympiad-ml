@@ -1,10 +1,28 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { REPO_LINKS } from "@/lib/constants";
+import { REPO_LINKS, APP_KEYWORDS } from "@/lib/constants";
+import { SITE_URL } from "@/lib/og-metadata";
 
 export const metadata: Metadata = {
   title: "FAQ | HSC Math Hub",
-  description: "Frequently Asked Questions about HSC Math Hub",
+  description:
+    "Got questions about HSC Math Hub? Find answers about our free Extension 1 & 2 maths booklets, study pathways, LaTeX resources, and how to prepare for NSW HSC Mathematics exams.",
+  keywords: [
+    ...APP_KEYWORDS,
+    "HSC Maths FAQ",
+    "Math Hub Help",
+    "HSC Mathematics questions",
+    "NSW HSC Preparation",
+    "Free Math Resources FAQ",
+  ],
+  openGraph: {
+    title: "FAQ | HSC Math Hub",
+    description:
+      "Got questions about HSC Math Hub? Find answers about our free Extension 1 & 2 maths booklets, study pathways, LaTeX resources, and how to prepare for NSW HSC Mathematics exams.",
+    url: `${SITE_URL}/faq`,
+    siteName: "HSC Math Hub",
+    type: "website",
+  },
 };
 
 export default function FAQPage() {
@@ -19,7 +37,7 @@ export default function FAQPage() {
     },
     {
       q: "How long have you spent on this math hub?",
-      a: 'Haha, let\'s just say it took a fair few cups of coffee and quite a few late nights! I definitely put a lot of work into curating the booklets to make sure they were actually useful, but I try not to count the hours.',
+      a: '"Haha, let\'s just say it took a fair few cups of coffee and quite a few late nights! I definitely put a lot of work into curating the booklets to make sure they were actually useful, but I try not to count the hours."',
     },
     {
       q: "How can I help?",
@@ -33,6 +51,7 @@ export default function FAQPage() {
           <a href={REPO_LINKS.substack} className="font-semibold text-[var(--color-purple)] hover:underline" target="_blank" rel="noreferrer">Substack</a>.
         </>
       ),
+      aString: "Send me any feedback, suggestions, typos, or grammatical errors. Send me your problems, assessment tasks, and trial papers. Reach me via GitHub issues or LinkedIn, or comment/DM on Substack.",
     },
     {
       q: "Your LaTeX/TikZ is crazy. Teach me!",
@@ -51,7 +70,7 @@ export default function FAQPage() {
       a: "While my schedule is currently full with my uni work and building this hub, I'm always open to brief collaborations or quick questions via GitHub or LinkedIn!",
     },
     {
-      q: "There are so many booklets, where should I start and what is the pathway?",
+      q: "Where should I start my HSC Maths study pathway?",
       a: "In general, start from your pain points and weaknesses. Read the Fundamental Review sections and then attack the easy problems. A tailored assessment or coaching might be needed (and is available).",
     },
     {
@@ -64,15 +83,32 @@ export default function FAQPage() {
     },
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.aString || (typeof faq.a === "string" ? faq.a : ""),
+      },
+    })),
+  };
+
   return (
     <main className="mx-auto max-w-[800px] px-4 py-12 sm:px-6 lg:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mb-8">
         <Link href="/" className="text-sm font-medium text-[var(--color-purple)] hover:underline">
           &larr; Back to Home
         </Link>
       </div>
       <h1 className="mb-8 text-3xl font-bold tracking-tight text-[var(--color-charcoal)]">
-        Frequently Asked Questions
+        Frequently Asked Questions (FAQ) - HSC Mathematics
       </h1>
       <div className="space-y-8">
         {faqs.map((faq, index) => (
