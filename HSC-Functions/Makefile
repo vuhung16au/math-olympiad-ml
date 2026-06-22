@@ -6,7 +6,7 @@
 # Project configuration
 PROJECT = HSC-Functions
 TEX = pdflatex
-LATEXMK = latexmk
+LATEXMK = docker run --rm -v "$(shell dirname $(PWD)):/workspace" -w /workspace/$(shell basename $(PWD)) texlive/texlive latexmk
 
 # Ensure directories exist
 $(shell mkdir -p releases samples)
