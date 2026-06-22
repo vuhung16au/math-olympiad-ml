@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   title: APP_NAME,
   description: APP_DESCRIPTION,
   keywords: APP_KEYWORDS,
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

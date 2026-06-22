@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    
+    <linearGradient id="v-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="110" fill="url(#bg)" />
+
+  <g stroke="rgba(255, 255, 255, 0.04)" stroke-width="3">
+    <circle cx="256" cy="256" r="80" fill="none" />
+    <circle cx="256" cy="256" r="160" fill="none" />
+    <circle cx="256" cy="256" r="240" fill="none" />
+    <line x1="256" y1="0" x2="256" y2="512" />
+    <line x1="0" y1="256" x2="512" y2="256" />
+    <line x1="0" y1="0" x2="512" y2="512" />
+    <line x1="512" y1="0" x2="0" y2="512" />
+  </g>
+
+  <path d="M 110 260 
+           L 160 180 
+           L 256 370 
+           L 402 140" 
+        fill="none" 
+        stroke="url(#v-grad)" 
+        stroke-width="52" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+
+  <circle cx="110" cy="260" r="26" fill="#0ea5e9" />
+  <circle cx="402" cy="140" r="26" fill="#a855f7" />
+</svg>
