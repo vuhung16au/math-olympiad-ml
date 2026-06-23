@@ -407,3 +407,16 @@ At $x=0$, the inverse derivative is not defined, so the product statement is onl
 \item This is mainly an Extension~2 calculus idea, but it connects naturally with inverse functions from Extension~1.
 \end{itemize}
 \end{takeaways}
+
+\begin{remark}
+Let $y = f(x)$ be a real-valued function that is continuous and strictly monotonic on an interval containing $x_0$ (which guarantees the existence of an inverse function, $x = f^{-1}(y)$).
+If $f(x)$ is differentiable at $x_0$ and $f'(x_0) \neq 0$, then the inverse function is differentiable at $y_0 = f(x_0)$, and:
+\[ \left. \frac{dy}{dx} \right|_{x = x_0} \cdot \left. \frac{dx}{dy} \right|_{y = y_0} = 1 \]
+
+This theorem can be rigorously proved or demonstrated using:
+\begin{enumerate}
+    \item The Limit Definition of the Derivative (First Principles)
+    \item The Geometric Interpretation of Gradients
+    \item The Chain Rule
+\end{enumerate}
+\end{remark}
