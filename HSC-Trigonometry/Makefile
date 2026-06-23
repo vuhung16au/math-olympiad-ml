@@ -1,31 +1,26 @@
 # Makefile for HSC Trigonometry Project
 
-# Include common variables if available
-# -include ../common/Makefile.inc
-
-# Project configuration
 PROJECT = HSC-Trigonometry
-TEX = pdflatex
-LATEXMK = latexmk
 
-# Ensure directories exist
 $(shell mkdir -p releases samples)
 
-# Default target
 all: pdf
 
-# Compile PDF using latexmk for multiple passes
 pdf:
-	$(LATEXMK) -pdf $(PROJECT).tex
+	@if command -v latexmk >/dev/null 2>&1; then \
+		latexmk -pdf -interaction=nonstopmode -file-line-error $(PROJECT).tex; \
+	else \
+		docker run --rm -v "$(CURDIR)/..:/workspace" -w /workspace/HSC-Trigonometry texlive/texlive:latest \
+			latexmk -pdf -interaction=nonstopmode -file-line-error $(PROJECT).tex; \
+	fi
 
-# Clean auxiliary files
 clean:
-	$(LATEXMK) -C $(PROJECT).tex
-	rm -f *.aux *.log *.toc *.out *.fls *.fdb_latexmk
+	rm -f $(PROJECT).aux $(PROJECT).log $(PROJECT).out $(PROJECT).toc $(PROJECT).pdf \
+		$(PROJECT).fdb_latexmk $(PROJECT).fls
 
-release:
-	$(LATEXMK) -pdf $(PROJECT).tex
-	cp $(PROJECT).pdf releases/
+release: pdf
+	mkdir -p releases
+	cp $(PROJECT).pdf releases/$(PROJECT).pdf
 
 open:
 	open $(PROJECT).pdf

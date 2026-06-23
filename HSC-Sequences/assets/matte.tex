@@ -1,0 +1,17 @@
+\thispagestyle{empty}%
+\begin{tikzpicture}[remember picture, overlay]
+  % Background Julia Set Matte
+  \node[inner sep=0pt] at (current page.center) {%
+    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio=false]{assets/matte-bg.png}%
+  };
+  
+  % Dark overlay to make text readable
+  \fill[black, opacity=0.3] (current page.south west) rectangle (current page.north east);
+
+  % Foreground Content
+  \node[anchor=center, text=white, align=center, font=\sffamily] at (current page.center) {%
+    {\Huge \bfseries HSC Mathematics Advanced}\\[1.5em]
+    {\LARGE Sequences and Series}\\[3em]
+    {\Large Vu Hung Nguyen}%
+  };
+\end{tikzpicture}
