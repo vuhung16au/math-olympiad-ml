@@ -1,49 +1,28 @@
-TEXFILE = HSC-Polynomials
-PDFFILE = $(TEXFILE).pdf
-RELEASE_DIR = releases
+# Makefile for HSC Polynomials Project
 
-# Detect OS for opening PDFs
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-	OPEN_CMD = open
-else ifeq ($(UNAME_S),Linux)
-	OPEN_CMD = xdg-open
-else
-	OPEN_CMD = start
-endif
+PROJECT = HSC-Polynomials
 
-.PHONY: all pdf clean release open final help
+$(shell mkdir -p releases samples)
 
 all: pdf
 
 pdf:
 	@if command -v latexmk >/dev/null 2>&1; then \
-		latexmk -pdf -interaction=nonstopmode -file-line-error $(TEXFILE).tex; \
+		latexmk -pdf -interaction=nonstopmode -file-line-error $(PROJECT).tex; \
 	else \
-		docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
-			latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode %O %S" -silent $(TEXFILE).tex; \
+		docker run --rm -v "$(CURDIR)/..:/workspace" -w /workspace/HSC-Polynomials texlive/texlive:latest \
+			latexmk -pdf -interaction=nonstopmode -file-line-error $(PROJECT).tex; \
 	fi
-	@test -f $(PDFFILE)
 
 clean:
-	rm -f $(TEXFILE).aux $(TEXFILE).log $(TEXFILE).out $(TEXFILE).toc $(TEXFILE).pdf \
-		$(TEXFILE).fdb_latexmk $(TEXFILE).fls
+	rm -f $(PROJECT).aux $(PROJECT).log $(PROJECT).out $(PROJECT).toc $(PROJECT).pdf \
+		$(PROJECT).fdb_latexmk $(PROJECT).fls
 
 release: pdf
-	mkdir -p $(RELEASE_DIR)
-	cp $(PDFFILE) $(RELEASE_DIR)/
+	mkdir -p releases
+	cp $(PROJECT).pdf releases/$(PROJECT).pdf
 
-open: pdf
-	$(OPEN_CMD) $(PDFFILE)
+open:
+	open $(PROJECT).pdf
 
-final: clean pdf release
-
-help:
-	@echo "Available targets:"
-	@echo "  all     - Build the main PDF (default)"
-	@echo "  pdf     - Compile PDF (local latexmk, or Docker fallback)"
-	@echo "  clean   - Remove build artifacts"
-	@echo "  release - Copy PDF to releases/"
-	@echo "  open    - Open the generated PDF"
-	@echo "  final   - Clean, build PDF, and release"
-	@echo "  help    - Show this help message"
+.PHONY: all pdf clean release open
