@@ -6,3 +6,4 @@
 *.pdf
 *.toc
 !releases/*.pdf
+!matte-generator.pdf
