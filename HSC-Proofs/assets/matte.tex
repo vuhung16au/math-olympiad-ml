@@ -1,0 +1,17 @@
+\thispagestyle{empty}%
+\begin{tikzpicture}[remember picture, overlay]
+  % Background Apollonian Gasket Matte
+  \node[inner sep=0pt] at (current page.center) {%
+    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio=false]{assets/matte-bg.png}%
+  };
+  
+  % Light overlay to make text readable since background is mostly white
+  \fill[white, opacity=0.7] (current page.south west) rectangle (current page.north east);
+
+  % Foreground Content
+  \node[anchor=center, text=black, align=center, font=\sffamily] at (current page.center) {%
+    {\Huge \bfseries HSC Mathematics Extension 2}\\[1.5em]
+    {\LARGE The Nature of Proof}\\[3em]
+    {\Large Vu Hung Nguyen}%
+  };
+\end{tikzpicture}
