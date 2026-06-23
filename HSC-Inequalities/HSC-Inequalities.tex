@@ -17,6 +17,7 @@
 \hypersetup{hidelinks}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{tikz}
 
 % Custom styles shared with other HSC projects
 \usepackage{dl101-colors}
@@ -177,6 +178,66 @@ For non-negative real numbers $x$ and $y$:
 \]
 with equality if and only if $x = y$.
 \end{theorembox}
+
+\begin{center}
+    \vspace*{1cm}
+    
+    {\large \textbf{Geometric Proof of the AM-GM Inequality}}
+    
+    \vspace{1cm}
+    
+    \begin{tikzpicture}[scale=1.2]
+        % 1. Define mathematically perfect coordinates
+        % Radius R = 5. Diameter = 10.
+        % Let x = 3.6 and y = 6.4 (so x+y = 10)
+        % Center O is at (0,0)
+        \coordinate (O) at (0,0);
+        \coordinate (A) at (-5,0); % Left edge
+        \coordinate (B) at (5,0);  % Right edge
+        \coordinate (P) at (-1.4,0); % Split point between x and y (-5 + 3.6 = -1.4)
+        
+        % Height of perpendicular Q from P to the circle:
+        % Using geometric mean theorem: h = sqrt(x*y) = sqrt(3.6 * 6.4) = sqrt(23.04) = 4.8
+        \coordinate (Q) at (-1.4,4.8);
+        
+        % 2. Draw the main circle and horizontal diameter
+        \draw[thick] (O) circle (5);
+        \draw[thick] (A) -- (B);
+        
+        % 3. Draw the dashed triangle connecting the diameter to Q
+        \draw[thick, dashed] (A) -- (Q) -- (B);
+        
+        % 4. Draw the Geometric Mean (perpendicular height)
+        \draw[thick, red, line width=1.2pt] (P) -- (Q) node[midway, left, xshift=-2pt] {\Large $\sqrt{xy}$};
+        
+        % 5. Draw the Arithmetic Mean (radius from center to Q)
+        \draw[thick, green!60!black, line width=1.2pt] (O) -- (Q) node[midway, right, xshift=2pt, yshift=6pt] {\Large $\frac{x+y}{2}$};
+        
+        % 6. Draw the right-angle marker at the base of the height
+        \draw[thick] (-1.4, 0.3) -- (-1.1, 0.3) -- (-1.1, 0);
+        
+        % 7. Draw dimension lines for 'x' and 'y'
+        % Extension lines pointing downwards
+        \draw[gray, thin] (A) -- ++(0, -0.8);
+        \draw[gray, thin] (P) -- ++(0, -0.8);
+        \draw[gray, thin] (B) -- ++(0, -0.8);
+        
+        % 'x' dimension arrow
+        \draw[<->, brown!80!black, thick, >=stealth] (-5, -0.6) -- (-1.4, -0.6) node[midway, fill=white] {\Large $x$};
+        
+        % 'y' dimension arrow
+        \draw[<->, magenta!80!black, thick, >=stealth] (-1.4, -0.6) -- (5, -0.6) node[midway, fill=white] {\Large $y$};
+        
+        % 8. Add points for clarity
+        \filldraw (O) circle (1.5pt);
+        \filldraw (P) circle (1.5pt);
+        \filldraw (Q) circle (1.5pt);
+        
+        % 9. Add the final inequality text at the bottom
+        \node at (0, -2.5) {\Huge $\color{red}\sqrt{xy} \color{black}\le \color{green!60!black}\frac{x+y}{2}$};
+        
+    \end{tikzpicture}
+\end{center}
 
 \begin{theorembox}[title={\bfseries AM-GM Inequality (Three Variables)}]
 For non-negative real numbers $x$, $y$, and $z$:
