@@ -408,6 +408,15 @@ const ESCAPE_TIME_PRESETS = {
     bailout: 4,
     power: 2,
   },
+  mandelbrotDoubleHook: {
+    label: 'Mandelbrot (Double Hook)',
+    family: 'escape-time',
+    type: 'mandelbrot',
+    viewport: { minX: -0.74370119, maxX: -0.74358051, minY: 0.13174483, maxY: 0.13190983 },
+    maxIterations: 800,
+    bailout: 4,
+    power: 2,
+  },
   juliaClassic: {
     label: 'Julia Set (c=-0.8+0.156i)',
     family: 'escape-time',
