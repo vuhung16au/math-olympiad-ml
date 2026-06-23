@@ -418,6 +418,16 @@ const ESCAPE_TIME_PRESETS = {
     bailout: 4,
     power: 2,
   },
+  juliaWikipedia: {
+    label: 'Julia Set (c=-0.743643887037151+0.131825904205330i)',
+    family: 'escape-time',
+    type: 'julia',
+    viewport: { minX: -1.5, maxX: 1.5, minY: -1.2, maxY: 1.2 },
+    c: { re: -0.743643887037151, im: 0.131825904205330 },
+    maxIterations: 800,
+    bailout: 4,
+    power: 2,
+  },
   burningShip: {
     label: 'Burning Ship',
     family: 'escape-time',
