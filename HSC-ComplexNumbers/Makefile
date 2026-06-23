@@ -20,7 +20,7 @@ pdf:
 	@if command -v latexmk >/dev/null 2>&1; then \
 		latexmk -pdf -interaction=nonstopmode -file-line-error $(TEXFILE).tex; \
 	else \
-		docker run --rm -v "$(CURDIR):/workdir" -w /workdir texlive/texlive:latest \
+		docker run --rm -v "$(CURDIR)/..:/workdir" -w /workdir/HSC-ComplexNumbers texlive/texlive:latest \
 			latexmk -pdf -interaction=nonstopmode -file-line-error $(TEXFILE).tex; \
 	fi
 	@test -f $(PDFFILE)

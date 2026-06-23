@@ -247,13 +247,24 @@ Thus
 \]
 \end{solution}
 
-\textbf{Takeaways:}
+% \textbf{Takeaways:}
+% \begin{itemize}[leftmargin=*]
+%   \item Multiplication by a complex constant produces a fixed rotation and scaling. Here, $z_{n+1} = wz_n$ with $w=\frac{1+i}{2}$ rotates by $\arg(w)=\frac{\pi}{4}$ and scales by $|w|=\frac{1}{\sqrt{2}}$.
+%   \item The spiral path length is an infinite geometric series. Although the path has infinitely many segments, the total length is finite.
+%   \item The sequence $\{z_n\}$ gives a discrete model of a logarithmic spiral, connecting algebraic recurrence with a continuous polar equation.
+%   \item The logarithmic spiral is self-similar and appears in natural and applied contexts, including shells, galaxies, and antenna geometry.
+% \end{itemize}
+
+\begin{takeaways}
+
 \begin{itemize}[leftmargin=*]
   \item Multiplication by a complex constant produces a fixed rotation and scaling. Here, $z_{n+1} = wz_n$ with $w=\frac{1+i}{2}$ rotates by $\arg(w)=\frac{\pi}{4}$ and scales by $|w|=\frac{1}{\sqrt{2}}$.
   \item The spiral path length is an infinite geometric series. Although the path has infinitely many segments, the total length is finite.
   \item The sequence $\{z_n\}$ gives a discrete model of a logarithmic spiral, connecting algebraic recurrence with a continuous polar equation.
   \item The logarithmic spiral is self-similar and appears in natural and applied contexts, including shells, galaxies, and antenna geometry.
 \end{itemize}
+
+\end{takeaways}
 
 \begin{problem}[Statement Analysis]
 Which statement about complex numbers is true?
@@ -435,13 +446,23 @@ Completing the square gives $\left(x - \tfrac{5}{4}\right)^2 + y^2 = \left(\tfra
 \end{center}
 \vspace{0.4em}
 
-\textbf{Takeaways:}
+% \textbf{Takeaways:}
+% \begin{itemize}[leftmargin=*]
+%   \item Translating by $1$ then inverting sends vertical lines to circles that pass through the translation point.
+%   \item $\Re\!\left(\frac{1}{z-a}\right) = k \ne 0$ traces a circle through $z = a$ with center shifted by $\frac{1}{2k}$ along the real axis from $a$.
+%   \item Here the circle has center $(\tfrac{5}{4}, 0)$, radius $\tfrac{1}{4}$, and is tangent to the line $x = 1$.
+% \end{itemize}
+\end{solution}
+
+\begin{takeaways}
+ 
 \begin{itemize}[leftmargin=*]
   \item Translating by $1$ then inverting sends vertical lines to circles that pass through the translation point.
   \item $\Re\!\left(\frac{1}{z-a}\right) = k \ne 0$ traces a circle through $z = a$ with center shifted by $\frac{1}{2k}$ along the real axis from $a$.
   \item Here the circle has center $(\tfrac{5}{4}, 0)$, radius $\tfrac{1}{4}$, and is tangent to the line $x = 1$.
 \end{itemize}
-\end{solution}
+
+\end{takeaways}
 
 \begin{problem}[Modulus-Argument Division]
 Given $\frac{1+\sqrt{3}i}{1+i} = \frac{1+\sqrt{3}}{2} + \frac{\sqrt{3}-1}{2}i$, express $\frac{1+i\sqrt{3}}{1+i}$ in modulus-argument form by converting both numerator and denominator.
@@ -1214,4 +1235,112 @@ In square $ABCD$, $\overrightarrow{DC} = i \cdot \overrightarrow{AD}$ (rotation 
 c-d = i(d-a) = id-ia \implies c = d+id-ia = (1+i)d-ia \quad \square
 \]
 \end{solution}
+
+
+\begin{problem}[Region with Modulus and Argument Constraints]
+Sketch the region in the Argand plane defined by the set:
+$$S = \left\{ z \in \mathbb{C} : 1 \le z\bar{z} \le 9 \right\} \cap \left\{ z \in \mathbb{C} : \frac{\pi}{4} \le \arg(z) \le \frac{3\pi}{4} \right\}$$
+\textit{(Use the polar grid scaffold below to draw your solution).}
+
+\vspace{0.5cm}
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        % Radial lines
+        \foreach \angle in {45, 135, 225, 315} {
+            \draw[gray, thin] (0,0) -- (\angle:3.2);
+        }
+        % Concentric circles
+        \draw[gray, thin] (0,0) circle (1);
+        \draw[gray, thin] (0,0) circle (2);
+        \draw[gray, thin] (0,0) circle (3);
+
+        % Axes
+        \draw[->, thick] (-3.5,0) -- (3.5,0) node[right] {$\text{Re}(z)$};
+        \draw[->, thick] (0,-3.5) -- (0,3.5) node[above] {$\text{Im}(z)$};
+
+        % Ticks and Labels
+        \foreach \x in {-3, -2, -1, 1, 2, 3} {
+            \draw[thick] (\x, 0.05) -- (\x, -0.05) node[below right] {$\x$};
+        }
+        \foreach \y in {-3, -2, -1, 1, 2, 3} {
+            \draw[thick] (0.05, \y) -- (-0.05, \y) node[above left] {$\y$};
+        }
+        \node[below left] at (0,0) {$O$};
+    \end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Hint 1:} Recall the fundamental identity $z\bar{z} = |z|^2$. What geometric shape does the boundary $|z|^2 = r^2$ represent?
+    \item \textbf{Hint 2:} The inequality $1 \le |z|^2 \le 9$ forms an annulus (a ring). Determine its inner and outer radii.
+    \item \textbf{Hint 3:} The condition $\frac{\pi}{4} \le \arg(z) \le \frac{3\pi}{4}$ restricts the region to a specific sector.
+    \item \textbf{Hint 4:} Pay attention to the inequality symbols ($\le$). Boundary lines should be solid.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{1. Analyze the Modulus Condition:}\\
+Using $z\bar{z} = |z|^2$, the first condition becomes:
+$$1 \le |z|^2 \le 9 \implies 1 \le |z| \le 3$$
+Geometrically, this represents the closed annulus lying between the circles of radius 1 and 3 centered at the origin.
+
+\textbf{2. Analyze the Argument Condition:}\\
+The condition $\frac{\pi}{4} \le \arg(z) \le \frac{3\pi}{4}$ describes a sector swept between the ray at $45^\circ$ ($\frac{\pi}{4}$) and the ray at $135^\circ$ ($\frac{3\pi}{4}$).
+
+\textbf{3. Combine and Sketch:}\\
+The set $S$ is the intersection ($\cap$) of these two conditions. We shade the portion of the annulus trapped between the two rays. Because all inequalities are inclusive ($\le$), all boundary curves are solid.
+
+\vspace{0.5cm}
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        % Scaffold (Background)
+        \foreach \angle in {45, 135, 225, 315} {
+            \draw[gray!50, thin] (0,0) -- (\angle:3.2);
+        }
+        \draw[gray!50, thin] (0,0) circle (1);
+        \draw[gray!50, thin] (0,0) circle (2);
+        \draw[gray!50, thin] (0,0) circle (3);
+
+        % Shaded Region
+        \fill[blue, opacity=0.2] (45:1) arc (45:135:1) -- (135:3) arc (135:45:3) -- cycle;
+        
+        % Boundary Lines (Solid because of <=)
+        \draw[blue, thick] (45:1) arc (45:135:1);
+        \draw[blue, thick] (135:3) arc (135:45:3);
+        \draw[blue, thick] (45:1) -- (45:3);
+        \draw[blue, thick] (135:1) -- (135:3);
+
+        % Axes
+        \draw[->, thick] (-3.5,0) -- (3.5,0) node[right] {$\text{Re}(z)$};
+        \draw[->, thick] (0,-3.5) -- (0,3.5) node[above] {$\text{Im}(z)$};
+
+        % Ticks and Labels
+        \foreach \x in {-3, -2, -1, 1, 2, 3} {
+            \draw[thick] (\x, 0.05) -- (\x, -0.05) node[below right] {$\x$};
+        }
+        \foreach \y in {-3, -2, -1, 1, 2, 3} {
+            \draw[thick] (0.05, \y) -- (-0.05, \y) node[above left] {$\y$};
+        }
+        \node[below left] at (0,0) {$O$};
+    \end{tikzpicture}
+\end{center}
+
+% \textbf{Takeaways:}
+% \begin{itemize}[leftmargin=*]
+%     \item \textbf{The Modulus-Conjugate Bridge:} The identity $z\bar{z} = |z|^2$ is an essential tool.
+%     \item \textbf{Polar Thinking:} When a problem involves $z\bar{z}$ and $\arg(z)$, thinking in polar coordinates $(r, \theta)$ makes the sketch significantly easier.
+%     \item \textbf{Intersection of Loci:} When dealing with sets intersecting ($\cap$), sketch boundaries lightly first, then boldly outline and shade the overlapping region.
+% \end{itemize}
+\end{solution}
+
+\begin{takeaways}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Modulus-Conjugate Bridge:} The identity $z\bar{z} = |z|^2$ is an essential tool.
+    \item \textbf{Polar Thinking:} When a problem involves $z\bar{z}$ and $\arg(z)$, thinking in polar coordinates $(r, \theta)$ makes the sketch significantly easier.
+    \item \textbf{Intersection of Loci:} When dealing with sets intersecting ($\cap$), sketch boundaries lightly first, then boldly outline and shade the overlapping region.
+\end{itemize}
+  
+\end{takeaways}
 
