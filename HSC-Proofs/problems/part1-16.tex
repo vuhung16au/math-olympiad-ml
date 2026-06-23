@@ -1,0 +1,73 @@
+% Part 1, Problem 20: Rationality of Cube Roots
+% Hard
+
+\begin{problem}[Rationality of Cube Roots]
+\begin{enumerate}[label=(\roman*)]
+    \item Prove that $\sqrt[3]{10}$ is irrational.
+    \item And hence, or otherwise, prove it is not possible for both $\sqrt[3]{2n}$ and $\sqrt[3]{5n}$ to be rational for any positive integer $n$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{(i)} Use a proof by contradiction. Assume $\sqrt[3]{10} = \frac{p}{q}$ where $p$ and $q$ are coprime integers. Cube both sides and analyze the parity (divisibility by 2) of both sides to find a contradiction.
+    \item \textbf{(ii)} If both are rational, set them equal to rational fractions, cube them, and isolate $n$. Equate the two expressions for $n$. Apply the Fundamental Theorem of Arithmetic (specifically looking at the multiplicity of the prime factor 2 or 5) to prove the resulting equation is impossible.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\subsection*{(i) Prove that $\sqrt[3]{10}$ is irrational.}
+
+\textbf{Proof by Contradiction}
+
+Assume for the sake of contradiction that $\sqrt[3]{10}$ is rational. Then it can be expressed in simplest fractional form as $\frac{p}{q}$, where $p, q \in \mathbb{Z}^+$, $q \neq 0$, and $\gcd(p, q) = 1$.
+\begin{align*}
+    10 &= \frac{p^3}{q^3} \\
+    p^3 &= 10q^3 \\
+    p^3 &= 2(5q^3)
+\end{align*}
+Since $5q^3$ is an integer, $p^3$ is a multiple of 2 (it is even). The cube of an odd number is odd, so $p$ must also be even. 
+Let $p = 2k$ for some integer $k$. Substituting this back:
+\begin{align*}
+    (2k)^3 &= 10q^3 \\
+    8k^3 &= 10q^3 \\
+    4k^3 &= 5q^3
+\end{align*}
+The left side, $4k^3 = 2(2k^3)$, is even. Therefore, the right side, $5q^3$, must also be even. Since 5 is odd, $q^3$ must be even, which implies $q$ is even. 
+
+If both $p$ and $q$ are even, they share a common factor of 2. This contradicts our initial assumption that $\gcd(p, q) = 1$. Therefore, $\sqrt[3]{10}$ is irrational.
+
+\hfill $\square$
+
+\subsection*{(ii) Prove it is not possible for both $\sqrt[3]{2n}$ and $\sqrt[3]{5n}$ to be rational.}
+
+\textbf{Proof by Contradiction}
+
+Assume for contradiction that for some positive integer $n$, both expressions are rational. Let $\sqrt[3]{2n} = \frac{a}{b}$ and $\sqrt[3]{5n} = \frac{c}{d}$, where $a, b, c, d \in \mathbb{Z}^+$ and the fractions are in simplest form. Cubing both equations yields:
+\begin{align*}
+    2n = \frac{a^3}{b^3} &\implies n = \frac{a^3}{2b^3} \\
+    5n = \frac{c^3}{d^3} &\implies n = \frac{c^3}{5d^3}
+\end{align*}
+Equating the two expressions for $n$:
+\begin{align*}
+    \frac{a^3}{2b^3} &= \frac{c^3}{5d^3} \\
+    5a^3d^3 &= 2b^3c^3
+\end{align*}
+Let $X = ad$ and $Y = bc$, where $X, Y \in \mathbb{Z}^+$. Thus, $5X^3 = 2Y^3$.
+
+By the Fundamental Theorem of Arithmetic, we analyze the prime factor 2 on both sides:
+\begin{itemize}
+    \item In $X^3$, the prime 2 appears a multiple of 3 times (say, $3k$ times). Since 5 is odd, the left side $5X^3$ has exactly $3k$ prime factors of 2.
+    \item In $Y^3$, the prime 2 appears a multiple of 3 times (say, $3m$ times). The coefficient 2 adds one more, meaning the right side $2Y^3$ has exactly $3m + 1$ prime factors of 2.
+\end{itemize}
+Equating the multiplicities gives $3k = 3m + 1 \implies 3(k - m) = 1$. Since $k$ and $m$ are integers, their difference cannot be $\frac{1}{3}$. This contradiction proves that both expressions cannot be rational simultaneously.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Parity as a Filter:} Part (i) demonstrates that analyzing divisibility (specifically by 2) is a highly efficient mechanism for contradiction proofs involving rational roots.
+    \item \textbf{Fundamental Theorem of Arithmetic:} Part (ii) highlights that comparing the exponents of prime factorizations across an equality is a definitive way to prove impossibility in integer equations. 
+\end{itemize}
+\end{takeaways}
