@@ -290,3 +290,74 @@ The easy integer root is $r=1$, so
 \item A well-chosen repeated root often gives a simple integer value for the parameter.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[No Real Roots via Global Minimum]
+Prove that the polynomial below has no real roots:
+\[
+P(x) = \frac{x^8}{8} + \frac{x^7}{7} + \frac{x^6}{6} + \frac{x^5}{5} + \frac{x^4}{4} + \frac{x^3}{3} + \frac{x^2}{2} + x + \frac{11}{16}
+\]
+\end{problem}
+
+\begin{hintbox}
+\begin{itemize}[leftmargin=*]
+\item Differentiate $P(x)$ to find its stationary points. Do you recognize the geometric progression in $P'(x)$? Rewrite it using the sum formula.
+\item Find the exact $x$-coordinate of the only real turning point.
+\item Evaluate $P(x)$ at this turning point to find the global minimum. If the lowest possible point on an even-degree polynomial sits above the $x$-axis, what does that mean for its roots?
+\end{itemize}
+\end{hintbox}
+
+\begin{solution}
+\textbf{1. Find the derivative to locate stationary points:}\\
+\[
+P'(x) = x^7 + x^6 + x^5 + x^4 + x^3 + x^2 + x + 1
+\]
+Recognizing this as a geometric series with common ratio $x$, we can rewrite it (for $x \neq 1$) as:
+\[
+P'(x) = \frac{x^8 - 1}{x - 1}
+\]
+
+\textbf{2. Solve $P'(x) = 0$ for critical points:}\\
+\[
+\frac{x^8 - 1}{x - 1} = 0 \implies x^8 - 1 = 0 \quad (\text{where } x \neq 1)
+\]
+The real solutions to $x^8 = 1$ are $x = 1$ and $x = -1$.
+Since $x \neq 1$ (which makes the denominator zero), our only valid stationary point is \textbf{$x = -1$}.
+
+\textbf{3. Determine the nature of the stationary point:}\\
+Analyze the sign of $P'(x)$ around $x = -1$:
+\begin{itemize}[leftmargin=*]
+\item For $x < -1$ (e.g., $x = -2$): $P'(-2) = -85 < 0$ (Decreasing)
+\item For $-1 < x < 1$ (e.g., $x = 0$): $P'(0) = 1 > 0$ (Increasing)
+\end{itemize}
+Since the curve changes from decreasing to increasing, $x = -1$ is a local minimum. Because it is the \emph{only} turning point and the polynomial has an even degree with a positive leading coefficient, it is the \textbf{global minimum}.
+
+\textbf{4. Evaluate the global minimum:}\\
+Substitute $x = -1$ into the original polynomial:
+\[
+P(-1) = \frac{(-1)^8}{8} + \frac{(-1)^7}{7} + \dots + \frac{(-1)^2}{2} + (-1) + \frac{11}{16}
+\]
+\[
+P(-1) = \frac{1}{8} - \frac{1}{7} + \frac{1}{6} - \frac{1}{5} + \frac{1}{4} - \frac{1}{3} + \frac{1}{2} - 1 + \frac{11}{16}
+\]
+Find a common denominator for the first eight fraction terms ($840$):
+\[
+P(-1) = \left( \frac{105 - 120 + 140 - 168 + 210 - 280 + 420 - 840}{840} \right) + \frac{11}{16}
+\]
+\[
+P(-1) = -\frac{533}{840} + \frac{11}{16}
+\]
+Find a common denominator ($1680$) to add these final fractions:
+\[
+P(-1) = -\frac{1066}{1680} + \frac{1155}{1680} = \mathbf{\frac{89}{1680}}
+\]
+
+\textbf{Conclusion:}\\
+Since $\frac{89}{1680} > 0$, the absolute lowest point of the curve is strictly above the $x$-axis. Therefore, $P(x) > 0$ for all real $x$, meaning the equation $P(x) = 0$ has \textbf{no real roots}.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Calculus as a Root-Finding Tool:} You do not need to solve an equation to prove it has no solutions. Proving the global minimum is strictly positive is a powerful Extension 1 technique.
+\item \textbf{The Geometric Polynomial:} The expression $x^n + x^{n-1} + \dots + x + 1$ appears frequently. Immediately recognizing it as $\frac{x^{n+1}-1}{x-1}$ saves time and avoids messy factor-by-grouping methods.
+\end{itemize}
+\end{takeaways}
