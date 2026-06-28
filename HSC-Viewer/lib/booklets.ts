@@ -20,7 +20,7 @@ export const BOOKLETS: Booklet[] = [
     title: "HSC Sequences",
     slug: "hsc-sequences",
     pdfUrl: `${GITHUB_RAW_URL}/HSC-Sequences/releases/HSC-Sequences.pdf`,
-    thumbnailPath: "/thumbnails/hsc-math-extension-2-book.png",
+    thumbnailPath: "/thumbnails/hsc-sequences.png",
     cardBlurb: "Arithmetic and geometric series, sigma notation, and recurrence relations.",
     description:
       "HSC Sequences booklet — arithmetic and geometric series, sigma notation, and recurrence relations with worked examples. Free HSC Maths revision on HSC Math Hub.",

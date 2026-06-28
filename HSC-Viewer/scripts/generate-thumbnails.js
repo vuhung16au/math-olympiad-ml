@@ -120,6 +120,12 @@ const booklets = [
     pdfUrl: "https://raw.githubusercontent.com/vuhung16au/math-olympiad-ml/main/HSC-Vectors/releases/HSC-Vectors.pdf",
     outputFile: "hsc-vectors.png",
   },
+  {
+    id: "hsc-sequences",
+    title: "HSC Sequences",
+    pdfUrl: "https://raw.githubusercontent.com/vuhung16au/math-olympiad-ml/main/HSC-Sequences/releases/HSC-Sequences.pdf",
+    outputFile: "hsc-sequences.png",
+  },
 ];
 
 const THUMBNAIL_DIR = path.join(__dirname, '../public/thumbnails');
@@ -186,6 +192,28 @@ async function convertPdfToImage(pdfPath, outputPath) {
   });
 }
 
+const BOOKLET_DIR_MAP = {
+  "hsc-collections": "HSC-Collections",
+  "hsc-combinatorics": "HSC-Combinatorics",
+  "hsc-complex-numbers": "HSC-ComplexNumbers",
+  "hsc-distributions": "HSC-Distributions",
+  "hsc-differential-equations": "HSC-DifferentialEquations",
+  "hsc-functions": "HSC-Functions",
+  "hsc-induction": "HSC-Induction",
+  "hsc-inequalities": "HSC-Inequalities",
+  "hsc-integrals": "HSC-Integrals",
+  "hsc-last-resorts": "HSC-LastResorts",
+  "hsc-math-extension-2-book": "HSC-Math-Extension-2-Book",
+  "hsc-mechanics": "HSC-Mechanics",
+  "hsc-polynomials": "HSC-Polynomials",
+  "hsc-polynomials-extension1": "HSC-Polynomials-Extension1",
+  "hsc-probability": "HSC-Probability",
+  "hsc-proofs": "HSC-Proofs",
+  "hsc-trigonometry": "HSC-Trigonometry",
+  "hsc-vectors": "HSC-Vectors",
+  "hsc-sequences": "HSC-Sequences"
+};
+
 /**
  * Main thumbnail generation function
  */
@@ -202,18 +230,34 @@ async function generateThumbnails() {
       const pdfPath = path.join(TEMP_DIR, `${booklet.id}.pdf`);
       const thumbnailPath = path.join(THUMBNAIL_DIR, booklet.outputFile);
 
-      // Download PDF
-      process.stdout.write('  ↓ Downloading PDF... ');
-      await downloadPdf(booklet.pdfUrl, pdfPath);
-      console.log('✓');
+      const bookletDir = BOOKLET_DIR_MAP[booklet.id];
+      const localPdfPath = bookletDir 
+        ? path.join(__dirname, '../..', bookletDir, 'releases', `${bookletDir}.pdf`)
+        : null;
+
+      let sourcePdfPath = pdfPath;
+      let isLocal = false;
+
+      if (localPdfPath && fs.existsSync(localPdfPath)) {
+        process.stdout.write('  ✓ Using local PDF... ');
+        sourcePdfPath = localPdfPath;
+        isLocal = true;
+      } else {
+        // Download PDF
+        process.stdout.write('  ↓ Downloading PDF... ');
+        await downloadPdf(booklet.pdfUrl, pdfPath);
+        console.log('✓');
+      }
 
       // Convert to thumbnail
       process.stdout.write('  ⚙ Converting to image... ');
-      await convertPdfToImage(pdfPath, thumbnailPath);
+      await convertPdfToImage(sourcePdfPath, thumbnailPath);
       console.log('✓');
 
-      // Clean up temp PDF
-      fs.unlinkSync(pdfPath);
+      // Clean up temp PDF if downloaded
+      if (!isLocal && fs.existsSync(pdfPath)) {
+        fs.unlinkSync(pdfPath);
+      }
 
       console.log(`  ✓ Saved to: ${booklet.outputFile}\n`);
       successCount++;
