@@ -716,6 +716,49 @@ Part~2 revisits three new sets of problems. Solutions are intentionally briefer 
 \begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} \cos\phi & -\sin\phi \\ \sin\phi & \cos\phi \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}
 \]
 
+\section{Partial Fraction Decomposition over \texorpdfstring{$\mathbb{C}$}{C}}
+
+\textbf{Theorem:} By the Fundamental Theorem of Algebra, any polynomial $D(z)$ can be completely factored into linear factors over the complex numbers $\mathbb{C}$. 
+
+Consequently, any proper rational function $\frac{N(z)}{D(z)}$ can be decomposed entirely into partial fractions whose denominators are powers of these linear factors. If a complex root $\alpha$ has a multiplicity of $m$ (i.e., $(z - \alpha)^m$ is a factor of $D(z)$), its decomposition includes $m$ terms:
+
+\[
+\frac{N(z)}{D(z)} = \dots + \frac{A_1}{z - \alpha} + \frac{A_2}{(z - \alpha)^2} + \dots + \frac{A_m}{(z - \alpha)^m} + \dots
+\]
+
+where $A_1, A_2, \dots, A_m \in \mathbb{C}$.
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.3cm}
+
+\subsection{The Contrast: \texorpdfstring{$\mathbb{C}$}{C} vs \texorpdfstring{$\mathbb{R}$}{R}}
+\begin{itemize}
+    \item \textbf{Over the Real set ($\mathbb{R}$):} Polynomials can have irreducible quadratics, sometimes even repeated ones like $(x^2 + x + 1)^2$. This forces the use of numerators in the form $Bx + C$, leading to tedious simultaneous equations.
+    \item \textbf{Over the Complex set ($\mathbb{C}$):} Irreducible quadratics do not exist. Every polynomial breaks down into strictly linear factors $(z - \alpha)^k$. Therefore, \textbf{every numerator is simply a single constant}, even when the roots are repeated.
+\end{itemize}
+
+\subsection{Solution Outline for \texorpdfstring{$f(z) = \frac{1}{z^3 - 1}$}{f(z) = 1/(z3 - 1)}}
+Instead of using the $\mathbb{R}$ decomposition, we solve it over $\mathbb{C}$:
+\begin{enumerate}
+    \item \textbf{Find the roots:} Solve $z^3 - 1 = 0$ to find the three distinct cube roots of unity: $1, \omega, \bar{\omega}$.
+    \item \textbf{Set up the identity:} 
+    \[
+    \frac{1}{z^3 - 1} = \frac{A_1}{z - 1} + \frac{A_2}{z - \omega} + \frac{A_3}{z - \bar{\omega}}
+    \]
+    \item \textbf{Evaluate constants:} Use the Heavyside cover-up method or the derivative rule $A_k = \frac{N(\alpha_k)}{D'(\alpha_k)}$ to rapidly evaluate the complex constants, completely avoiding simultaneous equations. \textit{(Note: This specific derivative rule applies only to distinct, non-repeated roots).}
+\end{enumerate}
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.3cm}
+
+\subsection{Takeaways for HSC Extension 2}
+\begin{itemize}
+    \item \textbf{The Recombination Trick:} If asked to find the partial fractions over $\mathbb{R}$, it is often much faster to decompose over $\mathbb{C}$ first. Once you have the complex fractions, adding the conjugate pairs $\frac{A_2}{x-\omega} + \frac{A_3}{x-\bar{\omega}}$ back together will naturally collapse them into the required real fraction $\frac{Bx+C}{x^2+x+1}$.
+    \item \textbf{Roots of Unity Integration:} When integrating functions involving denominators like $x^n \pm 1$, utilizing complex roots of unity allows you to sidestep brutal algebraic manipulation.
+\end{itemize}
+
 \section{Conclusion}
 Complex numbers are a core component of the HSC Mathematics Extension~2 course. Mastery comes from repeated, reflective practice across all forms---Cartesian, polar, and exponential---and understanding their geometric interpretations. Use these problems to sharpen the ability to convert between forms, apply De Moivre's theorem, interpret loci geometrically, and communicate complete mathematical reasoning. Best of luck with your studies and HSC examinations!
 

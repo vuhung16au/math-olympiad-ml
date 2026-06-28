@@ -21,5 +21,12 @@
       "name": "latexmk",
       "tools": ["latexmk"]
     }
-  ]
+  ],
+  "chat.tools.terminal.autoApprove": {
+    "bun": true,
+    "apply_patch": true,
+    "pushd": true,
+    "vercel": true,
+    "popd": true
+  }
 }
