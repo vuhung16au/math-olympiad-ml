@@ -1,4 +1,4 @@
-.PHONY: dev build deploy deploy-vercel deploy-cloudflare thumbnails clean install lint test test-headed test-ui help
+.PHONY: dev build deploy deploy-vercel deploy-cloudflare deploy-all thumbnails clean install lint test test-headed test-ui help
 
 help:
 	@echo "HSC Math Hub - Available commands:"
@@ -10,6 +10,7 @@ help:
 	@echo "  make deploy            - Deploy to Cloudflare"
 	@echo "  make deploy-cloudflare - Deploy to Cloudflare (alias)"
 	@echo "  make deploy-vercel     - Deploy to Vercel"
+	@echo "  make deploy-all        - Deploy to both Vercel and Cloudflare"
 	@echo "  make thumbnails        - Generate thumbnails from PDFs"
 	@echo "  make lint              - Run ESLint"
 	@echo "  make test              - Run Playwright e2e tests"
@@ -36,7 +37,9 @@ deploy-cloudflare: deploy
 
 deploy-vercel: clean build
 	vercel --prod
-	@echo "✓ Deployment complete - check https://hsc-math-hub.vercel.app"
+	@echo "✓ Deployment current - check https://hsc-math-hub.vercel.app"
+
+deploy-all: deploy-cloudflare deploy-vercel
 
 thumbnails:
 	bun run scripts/generate-thumbnails.js
