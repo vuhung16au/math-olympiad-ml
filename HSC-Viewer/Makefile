@@ -1,19 +1,21 @@
-.PHONY: dev build deploy thumbnails clean install lint test test-headed test-ui help
+.PHONY: dev build deploy deploy-vercel deploy-cloudflare thumbnails clean install lint test test-headed test-ui help
 
 help:
 	@echo "HSC Math Hub - Available commands:"
 	@echo ""
-	@echo "  make install      - Install all dependencies"
-	@echo "  make dev          - Start development server"
-	@echo "  make build        - Build for production"
-	@echo "  make start        - Start production server"
-	@echo "  make deploy       - Deploy to Vercel"
-	@echo "  make thumbnails   - Generate thumbnails from PDFs"
-	@echo "  make lint         - Run ESLint"
-	@echo "  make test         - Run Playwright e2e tests"
-	@echo "  make test-headed  - Run Playwright e2e tests in headed mode"
-	@echo "  make test-ui      - Open Playwright UI mode"
-	@echo "  make clean        - Clean build artifacts"
+	@echo "  make install           - Install all dependencies"
+	@echo "  make dev               - Start development server"
+	@echo "  make build             - Build for production"
+	@echo "  make start             - Start production server"
+	@echo "  make deploy            - Deploy to Cloudflare"
+	@echo "  make deploy-cloudflare - Deploy to Cloudflare (alias)"
+	@echo "  make deploy-vercel     - Deploy to Vercel"
+	@echo "  make thumbnails        - Generate thumbnails from PDFs"
+	@echo "  make lint              - Run ESLint"
+	@echo "  make test              - Run Playwright e2e tests"
+	@echo "  make test-headed       - Run Playwright e2e tests in headed mode"
+	@echo "  make test-ui           - Open Playwright UI mode"
+	@echo "  make clean             - Clean build artifacts"
 
 install:
 	bun install
@@ -27,7 +29,12 @@ build:
 start:
 	bun run next start
 
-deploy: clean build
+deploy:
+	bun run deploy
+
+deploy-cloudflare: deploy
+
+deploy-vercel: clean build
 	vercel --prod
 	@echo "✓ Deployment complete - check https://hsc-math-hub.vercel.app"
 
@@ -50,6 +57,7 @@ test-ui:
 clean:
 	rm -rf .next
 	rm -rf out
+	rm -rf .open-next
 	@echo "✓ Build artifacts cleaned"
 
 .DEFAULT_GOAL := help

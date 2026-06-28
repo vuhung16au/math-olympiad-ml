@@ -12,7 +12,11 @@
     "test": "playwright test",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "preview": "CLOUDFLARE_BUILD=1 opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "CLOUDFLARE_BUILD=1 opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "CLOUDFLARE_BUILD=1 opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -25,6 +29,7 @@
     "react-pdf": "^9.0.0"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.1",
     "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
@@ -35,7 +40,8 @@
     "pdf2pic": "^2.2.0",
     "sharp": "^0.33.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.105.0"
   },
   "ignoreScripts": [
     "sharp",
