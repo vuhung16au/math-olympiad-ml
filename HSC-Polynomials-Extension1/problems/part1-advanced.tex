@@ -1270,3 +1270,97 @@ This is a beautiful example of Gaussian quadrature. The general theory needs mor
 \end{axis}
 \end{tikzpicture}
 \end{center}
+
+\begin{problem}[Telescoping Polynomials and Trigonometry]
+Consider the polynomial $P(x) = 4x^4 - 9x^2 + 2x + 8$.
+
+\begin{enumerate}[label=(\roman*)]
+  \item Find a quadratic polynomial $f(x) = ax^2 + bx$ and a constant $C$ such that
+  \[
+    P(x) = f(2x^2 - 1) - f(x) + C.
+  \]
+  \item By substituting $x = \cos\theta$, deduce that
+  \[
+    P(\cos\theta) = f(\cos 2\theta) - f(\cos\theta) + C.
+  \]
+  \item Let $\theta_k = \dfrac{2^k\pi}{1023}$. Write out $\displaystyle\sum_{k=1}^{10} P(\cos\theta_k)$ using part~(ii), and show it simplifies to
+  \[
+    f(\cos\theta_{11}) - f(\cos\theta_1) + 10C.
+  \]
+  \item Hence, evaluate the exact value of the sum
+  \[
+    \sum_{k=1}^{10} P\!\left(\cos\frac{2^k\pi}{1023}\right).
+  \]
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{(i):} Expand $f(2x^2 - 1) - f(x) + C$ and equate coefficients to $P(x)$.
+  \item \textbf{(iii):} Notice $\theta_{k+1} = 2\theta_k$. Write the first few terms to observe the sum telescoping.
+  \item \textbf{(iv):} Calculate $\theta_{11}$. Since cosine has period $2\pi$, relate $\cos(\theta_{11})$ back to $\cos(\theta_1)$.
+\end{itemize}
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i) The Difference Polynomial} \\
+Let $f(x) = ax^2 + bx$. Expanding $f(2x^2 - 1) - f(x) + C$ yields:
+\[
+  a(2x^2-1)^2 + b(2x^2-1) - ax^2 - bx + C
+  = 4ax^4 + (2b-5a)x^2 - bx + (a - b + C).
+\]
+Equating coefficients with $P(x) = 4x^4 - 9x^2 + 2x + 8$:
+\begin{itemize}[leftmargin=*]
+  \item $x^4$: $\;4a = 4 \implies \mathbf{a = 1}$.
+  \item $x^1$: $\;{-b} = 2 \implies \mathbf{b = -2}$.
+        \quad(Check $x^2$: $2(-2)-5(1)=-9$ \checkmark)
+  \item Constant: $\;1-(-2)+C = 8 \implies \mathbf{C = 5}$.
+\end{itemize}
+Thus $\boxed{f(x) = x^2 - 2x}$ and $\boxed{C = 5}$.
+
+\textbf{(ii) Trigonometric Substitution} \\
+Let $x = \cos\theta$. The double-angle identity $2\cos^2\theta - 1 = \cos(2\theta)$ gives $2x^2 - 1 = \cos(2\theta)$. Substituting into part~(i):
+\[
+  \boxed{P(\cos\theta) = f(\cos 2\theta) - f(\cos\theta) + 5.}
+\]
+
+\textbf{(iii) Telescoping the Sum} \\
+Since $\theta_k = \dfrac{2^k\pi}{1023}$, we have $2\theta_k = \theta_{k+1}$. Applying part~(ii):
+\[
+  \sum_{k=1}^{10} P(\cos\theta_k)
+  = \sum_{k=1}^{10}\bigl[f(\cos\theta_{k+1}) - f(\cos\theta_k) + 5\bigr].
+\]
+This is a telescoping series:
+\begin{align*}
+  &= \bigl[f(\cos\theta_2) - f(\cos\theta_1) + 5\bigr]
+   + \bigl[f(\cos\theta_3) - f(\cos\theta_2) + 5\bigr]
+   + \cdots
+   + \bigl[f(\cos\theta_{11}) - f(\cos\theta_{10}) + 5\bigr] \\
+  &= \boxed{f(\cos\theta_{11}) - f(\cos\theta_1) + 50.}
+\end{align*}
+
+\textbf{(iv) Evaluating the Final Sum} \\
+Compute the final angle:
+\[
+  \theta_{11} = \frac{2^{11}\pi}{1023} = \frac{2048\pi}{1023}
+  = \frac{(2\times1023 + 2)\pi}{1023}
+  = 2\pi + \frac{2\pi}{1023}
+  = 2\pi + \theta_1.
+\]
+Because $\cos(2\pi + \theta) = \cos\theta$, we have $\cos\theta_{11} = \cos\theta_1$. Therefore:
+\[
+  f(\cos\theta_{11}) - f(\cos\theta_1) = 0.
+\]
+Hence the sum evaluates exactly to
+\[
+  \boxed{50.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Polynomial–Trig Duality:} The expression $2x^2 - 1$ is the algebraic form of the double-angle formula $\cos(2\theta) = 2\cos^2\theta - 1$. Recognising this connection converts a polynomial question into a telescoping trigonometric sum.
+  \item \textbf{Telescoping Collapse:} Expressing each term as a difference $f(x_{k+1}) - f(x_k)$ causes a large finite sum to instantly collapse to its two boundary values — a powerful technique whenever the index can be ``stepped'' by a fixed operation.
+  \item \textbf{Periodicity as a Final Weapon:} Once the boundary term $\cos\theta_{11}$ is recognised as $\cos\theta_1$ via the period $2\pi$, the answer reduces to $10C = 50$ with no further calculation.
+\end{itemize}
+\end{takeaways}
