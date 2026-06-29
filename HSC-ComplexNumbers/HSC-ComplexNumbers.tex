@@ -732,25 +732,34 @@ where $A_1, A_2, \dots, A_m \in \mathbb{C}$.
 \hrule
 \vspace{0.3cm}
 
-\subsection{The Contrast: \texorpdfstring{$\mathbb{C}$}{C} vs \texorpdfstring{$\mathbb{R}$}{R}}
+\subsection{The Contrast: $\mathbb{C}$ vs $\mathbb{R}$}
 \begin{itemize}
-    \item \textbf{Over the Real set ($\mathbb{R}$):} Polynomials can have irreducible quadratics, sometimes even repeated ones like $(x^2 + x + 1)^2$. This forces the use of numerators in the form $Bx + C$, leading to tedious simultaneous equations.
-    \item \textbf{Over the Complex set ($\mathbb{C}$):} Irreducible quadratics do not exist. Every polynomial breaks down into strictly linear factors $(z - \alpha)^k$. Therefore, \textbf{every numerator is simply a single constant}, even when the roots are repeated.
+    \item Over $\mathbb{R}$: Irreducible quadratics force linear numerators $Bx+C$.
+    \item Over $\mathbb{C}$: All factors are linear, so numerators are constants.
 \end{itemize}
 
-\subsection{Solution Outline for \texorpdfstring{$f(z) = \frac{1}{z^3 - 1}$}{f(z) = 1/(z3 - 1)}}
-Instead of using the $\mathbb{R}$ decomposition, we solve it over $\mathbb{C}$:
-\begin{enumerate}
-    \item \textbf{Find the roots:} Solve $z^3 - 1 = 0$ to find the three distinct cube roots of unity: $1, \omega, \bar{\omega}$.
-    \item \textbf{Set up the identity:} 
-    \[
-    \frac{1}{z^3 - 1} = \frac{A_1}{z - 1} + \frac{A_2}{z - \omega} + \frac{A_3}{z - \bar{\omega}}
-    \]
-    \item \textbf{Evaluate constants:} Use the Heavyside cover-up method or the derivative rule $A_k = \frac{N(\alpha_k)}{D'(\alpha_k)}$ to rapidly evaluate the complex constants, completely avoiding simultaneous equations. \textit{(Note: This specific derivative rule applies only to distinct, non-repeated roots).}
-\end{enumerate}
+\subsection{Solution Outline for $f(z)=\frac{1}{z^{3}-1}$}
+Factor $z^{3}-1=(z-1)(z-\omega)(z-\bar{\omega})$.
+Write
+\[
+\frac{1}{z^{3}-1}= \frac{A_{1}}{z-1}+\frac{A_{2}}{z-\omega}+\frac{A_{3}}{z-\bar{\omega}},
+\]
+where $A_{k}=\frac{1}{(z^{3}-1)'}\big|_{z=\alpha_{k}} = \frac{1}{3\alpha_{k}^{2}}$. Thus $A_{1}=1/3$, $A_{2}=1/(3\omega^{2})$, $A_{3}=1/(3\bar{\omega}^{2})$. Adding the conjugate pair yields the real partial fraction if required.
 
 \vspace{0.3cm}
 \hrule
+
+\subsection{Solution Outline for $f(x)=\frac{1}{x^{3}-1}$ over $\mathbb{R}$}
+Factor $x^{3}-1=(x-1)(x^{2}+x+1)$.
+Write
+\[
+\frac{1}{x^{3}-1}= \frac{A}{x-1}+\frac{Bx+C}{x^{2}+x+1},
+\]
+Determine $A,B,C$ by equating numerators (or cover‑up for $A$). Results: $A=\tfrac13$, $B=-\tfrac13$, $C=\tfrac23$.
+Thus
+\[
+\frac{1}{x^{3}-1}= \frac{1/3}{x-1}+\frac{-\tfrac13 x+\tfrac23}{x^{2}+x+1}.
+\]
 \vspace{0.3cm}
 
 \subsection{Takeaways for HSC Extension 2}
