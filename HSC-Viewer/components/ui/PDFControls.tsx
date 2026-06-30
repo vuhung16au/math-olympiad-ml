@@ -26,6 +26,8 @@ import {
 
 import { OG_IMAGE_VERSION, OG_SHARE_QUERY_KEY } from "@/lib/og-metadata";
 
+const COMING_SOON_MESSAGE = "Coming soon, please contact the author...";
+
 type ReadingTheme = "light" | "dark" | "sepia";
 
 interface PDFControlsProps {
@@ -86,6 +88,29 @@ function ShareButton({
   );
 }
 
+function ComingSoonIconButton({
+  actionLabel,
+  onShowMessage,
+  children,
+}: {
+  actionLabel: string;
+  onShowMessage: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onShowMessage}
+      aria-label={`${actionLabel} — ${COMING_SOON_MESSAGE}`}
+      aria-disabled="true"
+      title={COMING_SOON_MESSAGE}
+      className="inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-full border border-black/10 bg-white text-[var(--color-purple)] opacity-40 shadow-sm"
+    >
+      {children}
+    </button>
+  );
+}
+
 function IconButton({
   children,
   label,
@@ -128,7 +153,7 @@ export default function PDFControls({
   onResetZoom,
   onFitWidth,
   onFullscreen,
-  onPrint,
+  onPrint: _onPrint,
   viewMode,
   onToggleViewMode,
   readingTheme,
@@ -519,19 +544,18 @@ export default function PDFControls({
         </div>
 
         <div className="flex items-center gap-2">
-          <IconButton label="Print PDF" onClick={onPrint}>
+          <ComingSoonIconButton
+            actionLabel="Print PDF"
+            onShowMessage={() => showShareMessage(COMING_SOON_MESSAGE)}
+          >
             <Printer className="h-4 w-4" />
-          </IconButton>
-          <a
-            href={pdfUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Download PDF"
-            title="Download PDF"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-[var(--color-purple)] shadow-sm transition hover:border-[var(--color-purple)]"
+          </ComingSoonIconButton>
+          <ComingSoonIconButton
+            actionLabel="Download PDF"
+            onShowMessage={() => showShareMessage(COMING_SOON_MESSAGE)}
           >
             <Download className="h-4 w-4" />
-          </a>
+          </ComingSoonIconButton>
           <IconButton label="Fullscreen" onClick={onFullscreen}>
             <Expand className="h-4 w-4" />
           </IconButton>
