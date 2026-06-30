@@ -1,5 +1,9 @@
 # Fractals Generator
 
+Notes: 
+- Pls use the [new repo](https://github.com/vuhung16au/fractals-generator): https://github.com/vuhung16au/fractals-generator
+- This repo will be archived and no longer maintained.
+- 
 TypeScript fractal engine + Next.js web app.
 
 This repository now supports two products:
