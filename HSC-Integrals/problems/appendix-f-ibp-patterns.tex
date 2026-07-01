@@ -1,0 +1,56 @@
+% Appendix F: IBP Patterns with Polynomials, Exponentials, and Trig Functions
+
+When applying Integration by Parts (IBP), $\int u \, dv = uv - \int v \, du$, choosing the correct $u$ and $dv$ is crucial. Understanding how specific functions behave under differentiation reveals a clear, repeatable strategy.
+
+\subsubsection*{Key Observations}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Cyclic/Repeating Functions:} Exponentials and trigonometric functions do not simplify when differentiated; they loop endlessly.
+  \begin{align*}
+    \frac{d}{dx}(e^x) &= e^x \\
+    \frac{d}{dx}(\sin x) &= \cos x \\
+    \frac{d}{dx}(\cos x) &= -\sin x
+  \end{align*}
+  \item \textbf{Polynomials $P(x)$:} Differentiating a polynomial reduces its degree by 1. That is, $\deg(P'(x)) = \deg(P(x)) - 1$. If $n = \deg(P(x))$, differentiating $n$ times reduces the polynomial to a constant. Here $\deg(P(x))$ is the degree of the polynomial $P(x)$.
+\end{itemize}
+
+\subsubsection*{The Strategy}
+
+When integrating a product of a polynomial and an exponential or trigonometric function (e.g., $x e^x$ or $x^2 \sin x$):\\
+\textbf{Always let $u = P(x)$ and $dv = e^x, \sin x, \text{or } \cos x \, dx$.}
+
+Differentiating $u$ will shrink the polynomial down to a constant over repeated applications of IBP, while integrating $dv$ will simply cycle the exponential/trig function without making it more complicated.
+
+\subsubsection*{Worked Examples}
+
+\begin{example}[$\int x e^x \, dx$]
+Let $u = x \implies du = dx$ \\
+Let $dv = e^x \, dx \implies v = e^x$
+\begin{align*}
+  \int x e^x \, dx &= x e^x - \int e^x \, dx \\
+  &= x e^x - e^x + C
+\end{align*}
+\end{example}
+
+\begin{example}[$\int x \sin x \, dx$]
+Let $u = x \implies du = dx$ \\
+Let $dv = \sin x \, dx \implies v = -\cos x$
+\begin{align*}
+  \int x \sin x \, dx &= -x \cos x - \int (-\cos x) \, dx \\
+  &= -x \cos x + \int \cos x \, dx \\
+  &= -x \cos x + \sin x + C
+\end{align*}
+\end{example}
+
+\begin{example}[Repeated IBP for higher degrees --- $\int x^2 e^x \, dx$]
+Let $u = x^2 \implies du = 2x \, dx$ \\
+Let $dv = e^x \, dx \implies v = e^x$
+\begin{align*}
+  \int x^2 e^x \, dx &= x^2 e^x - 2\int x e^x \, dx
+\end{align*}
+\textit{Notice we have reduced the degree from $x^2$ to $x$. We substitute the result from Example 1 for the remaining integral:}
+\begin{align*}
+  \int x^2 e^x \, dx &= x^2 e^x - 2(x e^x - e^x) + C \\
+  &= x^2 e^x - 2x e^x + 2e^x + C
+\end{align*}
+\end{example}
