@@ -889,3 +889,74 @@ Therefore
 \item Repeated-factor questions usually become a pair of simultaneous equations in the unknown coefficients.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[A Functional Equation for a Polynomial]
+Let $P(x)$ be a polynomial with real coefficients such that for all real $x$,
+\[
+(x-3)P(x+1)=(x-1)P(x).
+\]
+You are given that $P(0)=16$.
+\begin{enumerate}[label=(\roman*)]
+\item By choosing appropriate values of $x$, find two roots of $P(x)$.
+\item Hence, express $P(x)$ in terms of another polynomial $Q(x)$, and prove that $Q(x)$ must be a constant.
+\item Determine the explicit polynomial $P(x)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Part (i):} Substitute values for $x$ that zero out the $(x-3)$ and $(x-1)$ multipliers.
+\item \textbf{Part (ii):} Apply the Factor Theorem using your roots, substitute the general form back into the equation, and simplify to show $Q(x+1)=Q(x)$.
+\item \textbf{Part (iii):} Use $P(0)=16$ to evaluate the constant from Part (ii).
+\end{itemize}
+\end{hintbox}
+
+\begin{solution}
+\textbf{(i)} Let $x=3$:
+\[
+0=2P(3) \implies P(3)=0.
+\]
+Let $x=1$:
+\[
+-2P(2)=0 \implies P(2)=0.
+\]
+The two roots are
+\[
+\boxed{x=2,\qquad x=3.}
+\]
+
+\textbf{(ii)} By the factor theorem, write
+\[
+P(x)=(x-2)(x-3)Q(x).
+\]
+Substituting into the original equation,
+\[
+(x-3)[(x-1)(x-2)Q(x+1)]=(x-1)[(x-2)(x-3)Q(x)].
+\]
+Dividing by $(x-1)(x-2)(x-3)$ for $x\notin\{1,2,3\}$ yields
+\[
+Q(x+1)=Q(x).
+\]
+Since $Q(x)$ is a polynomial, the identity $Q(x+1)=Q(x)$ forces $Q$ to be constant. Let $Q(x)=C$.
+
+\textbf{(iii)} From Part (ii),
+\[
+P(x)=C(x-2)(x-3).
+\]
+Given $P(0)=16$,
+\[
+C(-2)(-3)=16 \implies 6C=16 \implies C=\frac{8}{3}.
+\]
+Therefore
+\[
+\boxed{P(x)=\frac{8}{3}(x-2)(x-3)=\frac{8}{3}x^2-\frac{40}{3}x+16.}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Strategic substitution:} Annihilating factors is the fastest way to extract roots from functional equations.
+\item \textbf{The factor theorem:} Converting roots into linear factors isolates the unknown components of the polynomial.
+\item \textbf{Periodic polynomials:} The condition $Q(x+1)=Q(x)$ is a standard proof that a polynomial is a constant.
+\end{itemize}
+\end{takeaways}
