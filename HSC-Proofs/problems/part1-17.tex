@@ -1,0 +1,74 @@
+% Part 1, Problem 21: Sum of surds irrational - Proof by Contradiction
+% Hard (Question 16 style)
+
+\begin{problem}[Irrationality of $\sqrt{2} + \sqrt{3} + \sqrt{5}$]
+Prove by contradiction that the real number $x = \sqrt{2} + \sqrt{3} + \sqrt{5}$ is irrational.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{The Setup:} Begin with the standard assumption for contradiction: let $x \in \mathbb{Q}$.
+    \item \textbf{Strategic Isolation:} Do not square the expression as it is. Squaring a trinomial creates a mess of cross-terms. Isolate one of the surds (e.g., move $\sqrt{5}$ to the left) before squaring.
+    \item \textbf{The Double Square:} Squaring once will leave you with a $\sqrt{5}$ term on the left and a $\sqrt{6}$ term on the right. Isolate the $\sqrt{6}$ term and square a second time to eliminate it.
+    \item \textbf{The Contradiction Engine:} Rearrange your final equation to make $\sqrt{5}$ the subject. Rely on the closure property of rational numbers (addition, subtraction, multiplication, and non-zero division of rationals always yield a rational) to force the contradiction.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{Proof by Contradiction}
+
+\textbf{Step 1: Assume the negation}
+
+Assume, for the purpose of contradiction, that $x$ is a rational number ($x \in \mathbb{Q}$).
+
+\textbf{Step 2: Isolate one surd}
+
+Rearrange the equation to isolate one surd:
+\[
+x - \sqrt{5} = \sqrt{2} + \sqrt{3}
+\]
+
+\textbf{Step 3: Square both sides}
+
+\begin{align*}
+(x - \sqrt{5})^2 &= (\sqrt{2} + \sqrt{3})^2 \\
+x^2 - 2x\sqrt{5} + 5 &= 2 + 2\sqrt{6} + 3 \\
+x^2 - 2x\sqrt{5} &= 2\sqrt{6}
+\end{align*}
+
+\textbf{Step 4: Square a second time}
+
+\begin{align*}
+(x^2 - 2x\sqrt{5})^2 &= (2\sqrt{6})^2 \\
+x^4 - 4x^3\sqrt{5} + 20x^2 &= 24
+\end{align*}
+
+\textbf{Step 5: Make $\sqrt{5}$ the subject}
+
+\begin{align*}
+4x^3\sqrt{5} &= x^4 + 20x^2 - 24 \\
+\sqrt{5} &= \frac{x^4 + 20x^2 - 24}{4x^3}
+\end{align*}
+
+Since $x > 0$, division by $4x^3$ is valid.
+
+\textbf{Step 6: Derive the contradiction}
+
+Because the rational numbers are closed under addition, subtraction, multiplication, and non-zero division, the right-hand side evaluates to a rational number. However, the left-hand side, $\sqrt{5}$, is known to be irrational.
+
+\textbf{Conclusion}
+
+A rational number cannot equal an irrational number. This is a contradiction. Therefore, the initial assumption is false, and $x = \sqrt{2} + \sqrt{3} + \sqrt{5}$ must be irrational.
+
+\hfill $\square$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Algebraic Foresight:} Recognising that squaring $(a + b + c)^2$ yields too many irrational cross-terms is the key separator for top-band students. Isolate one surd before squaring.
+\item \textbf{The Power of Closure:} The entire proof hinges on knowing that manipulating rational $x$ through integer powers and coefficients guarantees a rational output on the right-hand side.
+\item \textbf{Structured Argumentation:} The proof demands a clear logical flow from the initial assumption to an explicit statement of why the final line constitutes a mathematical contradiction.
+\item \textbf{Double Squaring Technique:} This method extends the squaring strategy used in simpler surd proofs (such as comparing $\sqrt{3} + \sqrt{5}$ with $\sqrt{11}$) to irrationality arguments involving multiple surds.
+\item You are encouraged to prove that $\sqrt{2} + \sqrt{3} + \sqrt{6}$ is irrational using a different method, which can be smarter thant the technique used here. Note that $6 = 2 \cdot 3$, which may be useful.
+\end{itemize}
+\end{takeaways}
