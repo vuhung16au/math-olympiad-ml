@@ -31,7 +31,7 @@
   before skip=15pt,
   after skip=10pt,
   before upper={\extramarks{}{Problem~\thetcbcounter}},
-  phantom={\ifstrempty{#1}{}{\addcontentsline{toc}{subsubsection}{Problem~\thetcbcounter: #1}}}
+  phantom={\addcontentsline{toc}{subsubsection}{\ifstrempty{#1}{Problem~\thetcbcounter}{Problem~\thetcbcounter: #1}}}
 }
 
 \newtcolorbox[auto counter,number within=section]{solutionbox}[1][]
