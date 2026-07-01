@@ -317,3 +317,67 @@ T_6(x)=2xT_5(x)-T_4(x)=32x^6-48x^4+18x^2-1.
 \item Composition of first-kind Chebyshev polynomials multiplies the indices.
 \item Hard-looking polynomial composition can often be avoided by using structure.
 \end{takeaways}
+
+\begin{problem}[Bounding a sigma sum]
+Let the sequence $u_n$ be defined by
+\[
+u_n = \frac{1^2}{n^3 + 1} + \frac{2^2}{n^3 + 2} + \dots + \frac{n^2}{n^3 + n}
+\]
+for integers $n \ge 1$.
+You may assume the standard result 
+
+$$\sum_{k=1}^n k^2 = \frac{n(n+1)(2n+1)}{6}. \text{(Do NOT prove this.)}$$
+\begin{enumerate}[(i)]
+\item Explain why, for all integers $k$ such that $1 \le k \le n$,
+\[
+\frac{k^2}{n^3 + n} \le \frac{k^2}{n^3 + k} \le \frac{k^2}{n^3 + 1}.
+\]
+\item Hence, evaluate $\lim_{n \to \infty} u_n$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Part (i):} Since $k$ is positive, compare the sizes of $n^3+1$, $n^3+k$, and $n^3+n$.
+\item \textbf{Part (ii):} Sum the inequality from part (i) over $k=1$ to $n$. Factor out denominators independent of $k$, substitute the sum-of-squares formula, and apply the Squeeze Theorem.
+\end{itemize}
+\end{hint}
+\begin{solution}
+\textbf{(i)} For $1 \le k \le n$, the denominators satisfy
+\[
+n^3 + 1 \le n^3 + k \le n^3 + n.
+\]
+Taking reciprocals reverses the inequality (all terms are positive):
+\[
+\frac{1}{n^3 + n} \le \frac{1}{n^3 + k} \le \frac{1}{n^3 + 1}.
+\]
+Multiplying through by the positive term $k^2$ gives
+\[
+\frac{k^2}{n^3 + n} \le \frac{k^2}{n^3 + k} \le \frac{k^2}{n^3 + 1}.
+\]
+
+\textbf{(ii)} Summing from $k=1$ to $n$,
+\[
+\sum_{k=1}^n \frac{k^2}{n^3 + n} \le u_n \le \sum_{k=1}^n \frac{k^2}{n^3 + 1}.
+\]
+Factoring out the $k$-independent denominators,
+\[
+\frac{1}{n^3 + n} \sum_{k=1}^n k^2 \le u_n \le \frac{1}{n^3 + 1} \sum_{k=1}^n k^2.
+\]
+Substituting the given formula,
+\[
+\frac{n(n+1)(2n+1)}{6(n^3+n)} \le u_n \le \frac{n(n+1)(2n+1)}{6(n^3+1)}.
+\]
+As $n \to \infty$, the highest power in numerator and denominator is $n^3$, so both bounds tend to
+\[
+\frac{2}{6}=\frac{1}{3}.
+\]
+By the Squeeze Theorem,
+\[
+\lim_{n \to \infty} u_n = \frac{1}{3}.
+\]
+\end{solution}
+\begin{takeaways}
+\item Bounding by manipulating denominators is a core technique for rigorous sequence limits.
+\item Denominators independent of the summation index $k$ can be factored out of sigma notation.
+\item This style of question links algebraic series manipulation with limit evaluation via the Squeeze Theorem.
+\end{takeaways}
