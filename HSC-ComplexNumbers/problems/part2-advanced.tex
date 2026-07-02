@@ -1042,3 +1042,52 @@ e^{in\theta} + e^{-in\theta} = 2\cos(n\theta) \quad \square
 \textbf{(iii)} $\displaystyle \int_0^{\pi/2} \cos^4\theta \, d\theta = \frac{1}{8}\left[\frac{\sin 4\theta}{4}+2\sin 2\theta+3\theta\right]_0^{\pi/2} = \frac{1}{8}\cdot\frac{3\pi}{2} = \boxed{\frac{3\pi}{16}}$
 \end{solution}
 
+\begin{problem}[Bounding Complex Magnitude]
+Let $z$ be a complex number such that $|z| = 1$. Let $z = \cos\theta + i\sin\theta$.
+
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+    \item Show that $|z^3 - z + 2|^2 = 6 - 2\cos2\theta + 4\cos3\theta - 4\cos\theta$.
+    \item Letting $x = \cos\theta$, show that $|z^3 - z + 2|^2$ can be expressed as the polynomial $P(x)$, where $P(x) = 16x^3 - 4x^2 - 16x + 8$. \\
+    \textit{(You are given that $\cos3\theta = 4\cos^3\theta - 3\cos\theta$)}
+    \item Find the critical values of the polynomial $P(x)$ in the domain $-1 \le x \le 1$.
+    \item Hence, or otherwise, determine the maximum value of $|z^3 - z + 2|$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{(i)} Use De Moivre's Theorem to express $z^3$, separate into real and imaginary parts, and apply $|w|^2 = \text{Re}(w)^2 + \text{Im}(w)^2$. The compound angle formula $\cos(A-B)$ cleans up the cross-terms.
+    \item \textbf{(ii)} Substitute the given identity for $\cos3\theta$, and use $\cos2\theta = 2x^2 - 1$.
+    \item \textbf{(iii)} Differentiate $P(x)$, set $P'(x) = 0$, and factor the quadratic to find turning points.
+    \item \textbf{(iv)} Test critical values and the domain endpoints ($x = 1, -1$) in $P(x)$. Remember to take the square root of the maximum value.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{(i)} $z^3 = \cos3\theta + i\sin3\theta$. \\
+$z^3 - z + 2 = (\cos3\theta - \cos\theta + 2) + i(\sin3\theta - \sin\theta)$. \\
+$|z^3 - z + 2|^2 = (\cos3\theta - \cos\theta + 2)^2 + (\sin3\theta - \sin\theta)^2$ \\
+$= (\cos^23\theta + \sin^23\theta) + (\cos^2\theta + \sin^2\theta) + 4 - 2(\cos3\theta\cos\theta + \sin3\theta\sin\theta) + 4\cos3\theta - 4\cos\theta$ \\
+$= 6 - 2\cos(3\theta - \theta) + 4\cos3\theta - 4\cos\theta$ \\
+$= 6 - 2\cos2\theta + 4\cos3\theta - 4\cos\theta$
+
+\textbf{(ii)} Substitute $\cos2\theta = 2x^2 - 1$ and $\cos3\theta = 4x^3 - 3x$: \\
+$P(x) = 6 - 2(2x^2 - 1) + 4(4x^3 - 3x) - 4x$ \\
+$P(x) = 6 - 4x^2 + 2 + 16x^3 - 12x - 4x$ \\
+$P(x) = 16x^3 - 4x^2 - 16x + 8$
+
+\textbf{(iii)} $P'(x) = 48x^2 - 8x - 16$. \\
+Set $P'(x) = 0 \implies 6x^2 - x - 2 = 0 \implies (3x - 2)(2x + 1) = 0$. \\
+Critical values: $x = \frac{2}{3}, -\frac{1}{2}$, both in $[-1, 1]$.
+
+\textbf{(iv)} Test endpoints and critical values: \\
+$P(1) = 4$, $P(-1) = 4$, $P\left(\frac{2}{3}\right) = \frac{8}{27}$, $P\left(-\frac{1}{2}\right) = 13$. \\
+Maximum $|z^3 - z + 2|^2 = 13$. Maximum value of $|z^3 - z + 2|$ is $\sqrt{13}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Bridging Domains:} Converting a complex magnitude problem into a real-variable calculus problem is a powerful technique for bounding.
+    \item \textbf{Endpoint Checks:} Reinforces that students must check domain endpoints for global maximums.
+\end{itemize}
+\end{takeaways}
