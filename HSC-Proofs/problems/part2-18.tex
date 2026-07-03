@@ -1,0 +1,48 @@
+\begin{problem}[Rationality of $\cos(n\theta)$ and $\cos 1^\circ$]
+\textbf{(i)} Let $\theta$ be an angle such that $\cos \theta$ is a rational number. Prove by mathematical induction that $\cos(n\theta)$ is a rational number for all positive integers $n$.
+
+\vspace{10pt}
+
+\textbf{(ii)} Hence, or otherwise, prove that $\cos 1^\circ$ is irrational.
+\end{problem}
+
+\begin{hint}
+\textbf{Part (i):} You will need a way to relate $\cos((n+1)\theta)$ to smaller multiples of $\theta$. Recall the product-to-sum trigonometric identity (or the sum formulas for cosine): $\cos(A+B) + \cos(A-B) = 2\cos A \cos B$. Try setting $A = n\theta$ and $B = \theta$. Because you need to rely on the two previous terms, strong induction is the best approach.
+
+\textbf{Part (ii):} Proof by contradiction is your friend here. If you assume $\cos 1^\circ$ is rational, what does the result from part (i) imply about larger angles? Think of an integer multiple of $1^\circ$ where the exact cosine value is well-known and demonstrably irrational.
+\end{hint}
+
+\begin{solution}[Brief]
+\textbf{(i)} \\
+We use strong mathematical induction. \\
+\textbf{Base cases:} \\
+For $n=1$, $\cos \theta \in \mathbb{Q}$ by our initial assumption. \\
+For $n=2$, we use the double angle identity: $\cos(2\theta) = 2\cos^2\theta - 1$. Since $\cos\theta \in \mathbb{Q}$ and the rational numbers are closed under multiplication and subtraction, $\cos(2\theta) \in \mathbb{Q}$.
+
+\vspace{10pt}
+\textbf{Inductive step:} \\
+Assume $\cos(m\theta) \in \mathbb{Q}$ for all integers $1 \le m \le k$. We want to show $\cos((k+1)\theta) \in \mathbb{Q}$. \\
+Using the sum-to-product identity:
+\[ \cos((k+1)\theta) + \cos((k-1)\theta) = 2\cos(k\theta)\cos\theta \]
+Rearranging to isolate $\cos((k+1)\theta)$:
+\[ \cos((k+1)\theta) = 2\cos(k\theta)\cos\theta - \cos((k-1)\theta) \]
+By our inductive hypothesis, $\cos(k\theta)$ and $\cos((k-1)\theta)$ are rational. Since $\cos \theta$ is also rational, the entire right side of the equation consists of rational numbers undergoing multiplication and subtraction. Therefore, $\cos((k+1)\theta) \in \mathbb{Q}$. \\
+By strong induction, $\cos(n\theta) \in \mathbb{Q}$ for all integers $n \ge 1$.
+
+\vspace{15pt}
+
+\textbf{(ii)} \\
+Assume, for the sake of contradiction, that $\cos 1^\circ$ is rational. \\
+By setting $\theta = 1^\circ$, the result from part (i) implies that $\cos(n^\circ) \in \mathbb{Q}$ for any positive integer $n$. \\
+Let $n = 30$. This requires $\cos 30^\circ$ to be rational. \\
+However, we know that $\cos 30^\circ = \frac{\sqrt{3}}{2}$, which is an irrational number. \\
+This is a contradiction. Therefore, our initial assumption must be false, meaning $\cos 1^\circ$ is irrational.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Recursive Trigonometry:} Trigonometric identities (specifically product-to-sum) are incredibly powerful for establishing recursive algebraic relationships between angles. 
+    \item \textbf{Strong Induction:} When a sequence or recurrence relation depends on more than just the immediately preceding term (here, $k$ and $k-1$), strong induction is the necessary framework.
+    \item \textbf{Strategic Contradiction:} Choosing the right "well-known" counterexample (like $30^\circ$ or $45^\circ$) elegantly collapses a complex irrationality problem without requiring you to evaluate the roots of high-degree polynomials (such as Chebyshev polynomials).
+\end{itemize}
+\end{takeaways}

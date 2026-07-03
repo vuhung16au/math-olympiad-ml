@@ -1443,3 +1443,57 @@ for n in range(1, 8):
 \item Because of this explosion, writing code is often the most realistic way to investigate the problem.
 \item This is outside the HSC Mathematics Extension~1 syllabus, but it is an excellent example of how combinatorics connects to chemistry and computer science.
 \end{takeaways}
+
+\begin{problem}[Fractional part of a binomial expansion]
+For any real number $x$, the fractional part of $x$ is defined as the value remaining after subtracting its integer part (for example, the fractional part of $1.414$ is $0.414$). 
+
+Let $f_n$ denote the fractional part of $(\sqrt{2} + 1)^{2n}$, where $n$ is a positive integer.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Let $M_n = (3 + 2\sqrt{2})^n + (3 - 2\sqrt{2})^n$. Prove that $M_n$ is an integer for all positive integers $n$.
+    \item By considering the value of $3 - 2\sqrt{2}$, deduce that $f_n = 1 - (3 - 2\sqrt{2})^n$.
+    \item Hence, evaluate $\lim_{n \to \infty} f_n$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{(i)} Note the simplification of the original base first. Expand both terms using the binomial theorem and observe which terms cancel out and which remain.
+    \item \textbf{(ii)} Establish the bounds of the conjugate term $(3 - 2\sqrt{2})^n$. How does subtracting a small positive fraction from an integer $M_n$ dictate the fractional part of the remaining value?
+    \item \textbf{(iii)} Consider the limit of a sequence where the base $r$ satisfies $0 < r < 1$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+First, note that $(\sqrt{2} + 1)^{2n} = (3 + 2\sqrt{2})^n$. \\
+Expanding $M_n$ using the binomial theorem:
+\[M_n = \sum_{k=0}^{n} \binom{n}{k} 3^{n-k} (2\sqrt{2})^k + \sum_{k=0}^{n} \binom{n}{k} 3^{n-k} (-2\sqrt{2})^k\]
+The odd powers of $k$ cancel out. Let $k = 2m$:
+\[M_n = 2 \sum_{m=0}^{\lfloor n/2 \rfloor} \binom{n}{2m} 3^{n-2m} (2\sqrt{2})^{2m}\]
+Since $(2\sqrt{2})^{2m} = 8^m$, all terms in the sum are integers. Therefore, $M_n \in \mathbb{Z}$.
+
+\vspace{0.3cm}
+\textbf{(ii)} \\
+We can rearrange the expression from (i) to isolate our sequence:
+\[(3 + 2\sqrt{2})^n = M_n - (3 - 2\sqrt{2})^n\]
+Since $\sqrt{8} \approx 2.828$, we know $0 < 3 - 2\sqrt{2} < 1$. Therefore, for any positive integer $n$:
+\[0 < (3 - 2\sqrt{2})^n < 1\]
+We are subtracting a value strictly between $0$ and $1$ from an integer $M_n$. This means the integer part (floor) of $(3 + 2\sqrt{2})^n$ is $M_n - 1$. \\
+The fractional part is the original value minus its integer part:
+\[f_n = \left(M_n - (3 - 2\sqrt{2})^n\right) - (M_n - 1)\]
+\[f_n = 1 - (3 - 2\sqrt{2})^n\]
+
+\vspace{0.3cm}
+\textbf{(iii)} \\
+Applying the limit:
+\[\lim_{n \to \infty} f_n = \lim_{n \to \infty} \left( 1 - (3 - 2\sqrt{2})^n \right)\]
+Since $0 < 3 - 2\sqrt{2} < 1$, the term $(3 - 2\sqrt{2})^n \to 0$ as $n \to \infty$.
+\[\lim_{n \to \infty} f_n = 1 - 0 = 1\]
+\end{solution}
+
+\begin{takeaways}
+    \item \textbf{Conjugate Pairs:} Introducing a conjugate sequence is a standard, highly effective mechanism to extract integer properties from irrational bases.
+    \item \textbf{Fractional Parts from Integers:} When an expression evaluates to an integer minus a small fraction, the fractional part is always $1$ minus that small fraction. 
+    \item \textbf{Limit Behavior:} The limit of the fractional part approaching $1$ implies that as $n$ grows, the original irrational sequence gets infinitely close to the \textit{next} whole integer without ever reaching it.
+\end{takeaways}

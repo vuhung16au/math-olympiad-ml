@@ -311,3 +311,51 @@ Therefore:
         approach for sums of cosines at equally spaced angles.
 \end{itemize}
 \end{takeaways}
+
+% ------------------------------------------------------------------
+\begin{problem}[Rationality of Trigonometric Sum Recurrence]
+Let $\theta$ be a real number such that $\cos \theta + \sin \theta = q$, where $q$ is a rational number. 
+For any positive integer $n$, let $S_n = \cos^n \theta + \sin^n \theta$.
+
+\begin{enumerate}[(i)]
+    \item Show that $\cos \theta \sin \theta = \frac{q^2 - 1}{2}$.
+    \item By considering the product $S_k \times S_1$, or otherwise, show that for all integers $k \ge 2$:
+    \[ S_{k+1} = q S_k - \left(\frac{q^2 - 1}{2}\right)S_{k-1} \]
+    \item Hence, use induction or otherwise to prove that $S_n$ is a rational number for all integers $n \ge 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+\begin{itemize}
+    \item \textbf{(i)} Square the initial given equation for $S_1$ and apply the fundamental Pythagorean identity.
+    \item \textbf{(ii)} Expand the expression $(\cos^k \theta + \sin^k \theta)(\cos \theta + \sin \theta)$. Group the resulting terms of degree $k+1$ and factor the remaining middle terms to reveal $S_{k-1}$.
+    \item \textbf{(iii)} Because the recurrence relation relies on both the $k$-th and $(k-1)$-th terms, you must establish \textit{two} consecutive base cases ($n=1$ and $n=2$) before assuming the hypothesis for $k$ and $k-1$. 
+\end{itemize}
+\end{hintbox}
+
+\begin{solution}
+\begin{itemize}
+    \item \textbf{(i)} Squaring both sides of $\cos \theta + \sin \theta = q$ gives $\cos^2 \theta + 2\cos \theta \sin \theta + \sin^2 \theta = q^2$. Since $\cos^2 \theta + \sin^2 \theta = 1$, we have $1 + 2\cos \theta \sin \theta = q^2$. Rearranging yields $\cos \theta \sin \theta = \frac{q^2 - 1}{2}$.
+    
+    \item \textbf{(ii)} Evaluating the product $S_k S_1$:
+    \begin{align*}
+        S_k S_1 &= (\cos^k \theta + \sin^k \theta)(\cos \theta + \sin \theta) \\
+        q S_k &= \cos^{k+1} \theta + \sin^{k+1} \theta + \cos \theta \sin \theta(\cos^{k-1} \theta + \sin^{k-1} \theta) \\
+        q S_k &= S_{k+1} + \left(\frac{q^2 - 1}{2}\right)S_{k-1}
+    \end{align*}
+    Rearranging makes $S_{k+1}$ the subject, proving the result.
+    
+    \item \textbf{(iii)} Base cases: $S_1 = q \in \mathbb{Q}$. $S_2 = \cos^2 \theta + \sin^2 \theta = 1 \in \mathbb{Q}$. \\
+    Assume $S_i \in \mathbb{Q}$ for all integers $i \le k$, where $k \ge 2$. In particular, $S_k$ and $S_{k-1}$ are rational. \\
+    From (ii), $S_{k+1} = q S_k - \left(\frac{q^2 - 1}{2}\right)S_{k-1}$. \\
+    Since $q$ is rational, $\frac{q^2 - 1}{2}$ is rational. Because the rational numbers are closed under multiplication and subtraction, $S_{k+1}$ is formed entirely by rational operations on rational numbers, so $S_{k+1} \in \mathbb{Q}$. By strong mathematical induction, $S_n \in \mathbb{Q}$ for all $n \ge 1$.
+\end{itemize}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Hidden Second-Order Recurrence:} This problem tests the ability to algebraically manipulate abstract terms to uncover a recurrence relation, a crucial skill for high-band Extension 2 students.
+    \item \textbf{Proof Strategy:} Relaxing the prompt to "induction or otherwise" evaluates whether the student understands \textit{why} strong induction is required (the dependence on two preceding terms) rather than just blindly applying a given algorithm.
+    \item \textbf{Closure Properties:} The final step elegantly checks the student's understanding of rational number properties (closure under standard arithmetic operations).
+\end{itemize}
+\end{takeaways}
