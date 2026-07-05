@@ -711,14 +711,21 @@ A function is bijective if it is \textbf{both} injective and surjective. Every i
 This is an enrichment topic and is outside the NESA syllabus.
 \end{remark}
 
-\begin{theorem}[Multinomial Theorem]
 The Multinomial Theorem is a fundamental principle in algebra and combinatorics. It acts as the direct generalization of the well-known Binomial Theorem. While the Binomial Theorem provides a shortcut for expanding a sum of two terms raised to a power, like $(x + y)^n$, the Multinomial Theorem provides the formula for expanding a sum of any number of terms raised to a power, such as $(x_1 + x_2 + \dots + x_m)^n$.
+
+\begin{theorem}[Multinomial Theorem]
 
 For any positive integer $n$ and a sum of $m$ terms, the algebraic expansion is given by:
 \[
 (x_1 + x_2 + \dots + x_m)^n = \sum_{k_1+k_2+\dots+k_m=n} \frac{n!}{k_1!k_2!\dots k_m!} x_1^{k_1} x_2^{k_2} \dots x_m^{k_m}
 \]
+
+
 \end{theorem}
+
+Here, $\sum_{k_1+k_2+\dots+k_m=n}$ means all possible combinations of 
+non-negative integers $k_1, k_2, \dots, k_m$ that sum to $n$.
+
 
 \begin{problembox*}[Worked example]
 Find the last 3 digits of the coefficient of $x^{17}$ in the expansion of $(1 + x^3 + x^5 + x^7)^{97}$.
