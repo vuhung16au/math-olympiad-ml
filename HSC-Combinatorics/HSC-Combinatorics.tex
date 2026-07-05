@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\newtheorem*{theorem}{Theorem}
 \usepackage{geometry}
 \usepackage[utf8]{inputenc}
 % Links without visible rectangles (TOC and cross-refs remain clickable).
@@ -661,5 +662,160 @@ A function is bijective if it is \textbf{both} injective and surjective. Every i
   \item \textbf{Why it matters:} Bijective functions are incredibly important in mathematics because they are the \textbf{only} functions that have a perfect \textbf{inverse function} ($f^{-1}$). Because the mapping is a perfect two-way street, you can flawlessly travel backward from the output to the exact input. 
   \item \textbf{Math Example:} $f(x) = 2x + 1$ (where $x$ is any real number) is a bijection. You can easily find its inverse: $f^{-1}(x) = \frac{x - 1}{2}$.
 \end{itemize}
+
+\newtcolorbox{problembox*}[1][]
+{
+  title={\bfseries \ifstrempty{#1}{Problem}{#1}},
+  enhanced,
+  drop shadow={black!30!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookpurple,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookpurple,coltitle=white},
+  fonttitle=\bfseries,
+  before skip=15pt,
+  after skip=10pt
+}
+\newtcolorbox{solutionbox*}[1][]
+{
+  title={\bfseries \ifstrempty{#1}{Solution}{#1}},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookred,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=10pt,right=10pt,top=10pt,bottom=10pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookred,coltitle=white},
+  fonttitle=\bfseries,
+  fontupper=\footnotesize,
+  before upper={
+    \setlength{\abovedisplayskip}{4pt}%
+    \setlength{\belowdisplayskip}{4pt}%
+    \setlength{\abovedisplayshortskip}{3pt}%
+    \setlength{\belowdisplayshortskip}{3pt}%
+    \setlength{\jot}{2pt}%
+  },
+  before skip=15pt,
+  after skip=10pt
+}
+
+\subsection{Multinomial Theorem}
+\begin{remark}[Syllabus Note]
+This is an enrichment topic and is outside the NESA syllabus.
+\end{remark}
+
+\begin{theorem}[Multinomial Theorem]
+The Multinomial Theorem is a fundamental principle in algebra and combinatorics. It acts as the direct generalization of the well-known Binomial Theorem. While the Binomial Theorem provides a shortcut for expanding a sum of two terms raised to a power, like $(x + y)^n$, the Multinomial Theorem provides the formula for expanding a sum of any number of terms raised to a power, such as $(x_1 + x_2 + \dots + x_m)^n$.
+
+For any positive integer $n$ and a sum of $m$ terms, the algebraic expansion is given by:
+\[
+(x_1 + x_2 + \dots + x_m)^n = \sum_{k_1+k_2+\dots+k_m=n} \frac{n!}{k_1!k_2!\dots k_m!} x_1^{k_1} x_2^{k_2} \dots x_m^{k_m}
+\]
+\end{theorem}
+
+\begin{problembox*}[Worked example]
+Find the last 3 digits of the coefficient of $x^{17}$ in the expansion of $(1 + x^3 + x^5 + x^7)^{97}$.
+\end{problembox*}
+
+\begin{solutionbox*}[Solution]
+\textbf{1. Set up the General Term}\\
+Using the multinomial theorem, the general term is:
+\[
+T = \frac{97!}{a! b! c! d!} x^{3b + 5c + 7d}
+\]
+
+\textbf{2. Establish Constraints}\\
+Total Power: $a + b + c + d = 97$, Target Exponent: $3b + 5c + 7d = 17$.
+
+\textbf{3. Find Valid $(a, b, c, d)$ Combinations}\\
+Solve $3b + 5c + 7d = 17$ for non-negative integers by testing values of $d$:
+\begin{itemize}[leftmargin=*]
+\item \textbf{If $d = 2$:} $3b + 5c = 3 \implies b = 1, c = 0$. Solution: \textbf{$(94, 1, 0, 2)$}
+\item \textbf{If $d = 1$:} $3b + 5c = 10 \implies b = 0, c = 2$. Solution: \textbf{$(94, 0, 2, 1)$}
+\item \textbf{If $d = 0$:} $3b + 5c = 17 \implies b = 4, c = 1$. Solution: \textbf{$(92, 4, 1, 0)$}
+\end{itemize}
+
+\textbf{4. Calculate Coefficients Modulo 1000}\\
+Evaluate $\frac{97!}{a! b! c! d!}$ for each valid set and find the remainder modulo 1000:
+
+For $(94, 1, 0, 2)$:
+\[
+\frac{97!}{94! 1! 0! 2!} = \frac{97 \times 96 \times 95}{2} = 442320 \equiv \mathbf{320} \pmod{1000}
+\]
+For $(94, 0, 2, 1)$:
+\[
+\frac{97!}{94! 0! 2! 1!} = \frac{97 \times 96 \times 95}{2} = 442320 \equiv \mathbf{320} \pmod{1000}
+\]
+For $(92, 4, 1, 0)$:
+\[
+\frac{97!}{92! 4! 1! 0!} = \frac{97 \times 96 \times 95 \times 94 \times 93}{24} = 97 \times 4 \times 95 \times 94 \times 93
+\]
+*(Note: $97 \times 4 \times 95 = 36860 \equiv 860$, and $94 \times 93 = 8742 \equiv 742$. Then $860 \times 742 = 638120$)*
+\[
+T_3 \equiv \mathbf{120} \pmod{1000}
+\]
+
+\textbf{5. Final Sum}\\
+Add the modulo results together:
+\[
+320 + 320 + 120 = \mathbf{760}
+\]
+The last 3 digits are \textbf{760}.
+\end{solutionbox*}
+
+\begin{problembox*}[Worked example]
+Find the constant term (the term independent of $x$) in the expansion of:
+\[
+\left(2x^2 - \frac{1}{x} + 3\right)^8
+\]
+\end{problembox*}
+
+\begin{solutionbox*}[Solution]
+\textbf{1. Set up the General Term}\\
+Using the multinomial theorem $(A + B + C)^n$, the general term is:
+\[
+T = \left[ \frac{8!}{a! b! c!} 2^a (-1)^b 3^c \right] x^{2a - b}
+\]
+
+\textbf{2. Establish Constraints}\\
+Total Power: $a + b + c = 8$, Constant Term (Exponent = 0): $2a - b = 0 \implies b = 2a$.
+
+\textbf{3. Find Valid $(a, b, c)$ Combinations}\\
+Substitute $b = 2a$ into the total power constraint to get $3a + c = 8$. Test integers for $a \ge 0$ to find non-negative integer solutions for $c$:
+\begin{itemize}[leftmargin=*]
+\item If $a = 0$, then $c = 8$. Solution: \textbf{$(0, 0, 8)$}
+\item If $a = 1$, then $c = 5$. Solution: \textbf{$(1, 2, 5)$}
+\item If $a = 2$, then $c = 2$. Solution: \textbf{$(2, 4, 2)$}
+\item (If $a \ge 3$, $c$ becomes negative, which is \textbf{invalid}.)
+\end{itemize}
+
+\textbf{4. Calculate Coefficients and Sum}\\
+Substitute the valid combinations into the coefficient formula: $\frac{8!}{a! b! c!} 2^a (-1)^b 3^c$.
+
+For $(0, 0, 8)$:
+\[
+\frac{8!}{0! 0! 8!} (2)^0 (-1)^0 (3)^8 = 6561
+\]
+For $(1, 2, 5)$:
+\[
+\frac{8!}{1! 2! 5!} (2)^1 (-1)^2 (3)^5 = 168 \times 2 \times 243 = 81648
+\]
+For $(2, 4, 2)$:
+\[
+\frac{8!}{2! 4! 2!} (2)^2 (-1)^4 (3)^2 = 420 \times 4 \times 9 = 15120
+\]
+
+\textbf{Final Answer:}\\
+\[
+6561 + 81648 + 15120 = \mathbf{103329}
+\]
+\end{solutionbox*}
 
 \end{document}
