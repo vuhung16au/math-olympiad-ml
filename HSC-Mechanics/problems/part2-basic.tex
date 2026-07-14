@@ -1,7 +1,7 @@
 % Basic Level Problems for Part 2
 % These problems introduce fundamental mechanics concepts with guided support
 
-\begin{problem}
+\begin{problem}[Displacement vs Distance]
 A particle moves in a straight line with velocity $v = 2t - 5$ m/s, where $t$ is in seconds. The particle starts at the origin when $t = 0$.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -28,7 +28,7 @@ Consider when the velocity changes sign to determine the motion direction. The p
 \end{takeaways}
 
 % --- New problem: samples3/06.tex (Motion with $v^2$ retardation) ---
-\begin{problem}
+\begin{problem}[Variable acceleration]
 A particle moving in a straight line experiences an acceleration $a = -\dfrac{v^2}{10}$ (m/s$^2$). Initially ($t=0$) it is at the origin with velocity $v(0)=U$. Show that
 \begin{enumerate}[label=\textbf{\alph*.}]
     \item $v(t)=\dfrac{10U}{10+Ut}$
@@ -51,7 +51,7 @@ For displacement, $\dfrac{dx}{dt}=\dfrac{10U}{10+Ut}$. Integrate: $x=10\int\dfra
 \item \textbf{Logarithmic displacement:} Quadratic retardation often leads to logarithmic expressions for displacement; the particle slows but continues moving without a finite stopping distance.
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[SHM Energy Equation]
 A particle moves in simple harmonic motion about the point $x = 3$ m with amplitude 2 m. When $t = 0$, the particle is at $x = 5$ m and moving towards the origin with speed $4$ m/s.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -79,7 +79,7 @@ Correct approach: $n^2 = 4$, so $n = 2$. Motion: $x = 3 + 2\cos(2t + \phi)$. At 
 \item \textbf{General SHM Form:} $x = c + A\cos(nt + \phi)$ for motion about center $c$ with amplitude $A$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Maximum Height]
 A ball is thrown vertically upwards with initial velocity $u$ m/s from ground level. Find expressions for:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The maximum height reached
@@ -104,7 +104,7 @@ Use $v = u - gt$ and $v^2 = u^2 - 2gx$. At maximum height, velocity equals zero.
 \item \textbf{Key Formulas:} $v = u - gt$, $v^2 = u^2 - 2gx$, $x = ut - \frac{1}{2}gt^2$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Double Integration]
 A particle moves with acceleration $\ddot{x} = 6t - 4$ m/s². Initially, the particle is at the origin with velocity 2 m/s.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -130,7 +130,7 @@ Integrate acceleration to find velocity, then integrate velocity to find displac
 \item \textbf{Sequential Process:} Each integration introduces a new constant determined by initial conditions
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Parametric Equations]
 A particle is projected from the origin with velocity $V$ at angle $\alpha$ to the horizontal. Derive the equation of the trajectory in the form $y = x\tan\alpha - \frac{gx^2\sec^2\alpha}{2V^2}$.
 \end{problem}
 
@@ -153,7 +153,7 @@ y &= V\left(\frac{x}{V\cos\alpha}\right)\sin\alpha - \frac{1}{2}g\left(\frac{x}{
 \item \textbf{Trajectory Form:} Final equation $y = x\tan\alpha - \frac{gx^2\sec^2\alpha}{2V^2}$ is parabola in Cartesian coordinates
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Velocity-Displacement]
 A particle moves in a straight line with acceleration inversely proportional to the square of its displacement from a fixed point O, i.e., $\ddot{x} = -\frac{k}{x^2}$ where $k > 0$. The particle starts from rest at $x = a$.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -179,7 +179,7 @@ Use $v\frac{dv}{dx} = \ddot{x}$ to convert the differential equation, then integ
 \item \textbf{Inverse Square Force:} Common in gravitational and electrostatic problems; $F \propto \frac{1}{x^2}$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Separable ODE]
 A particle moves with resistance proportional to its velocity, $\ddot{x} = -kv$ where $k > 0$. Initially, $t = 0$, $x = 0$, and $v = u$.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -205,7 +205,7 @@ For part (i), separate variables in $\frac{dv}{dt} = -kv$. For part (ii), integr
 \item \textbf{Physical Meaning:} Resistance proportional to velocity brings particle to rest in finite distance
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Maximum Height Formula]
 A projectile is fired from ground level with initial speed $V$ at angle $\alpha$ to the horizontal. Show that:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The maximum height is $H = \frac{V^2\sin^2\alpha}{2g}$
@@ -230,7 +230,7 @@ For maximum height, use $v_y = 0$. For range, set $y = 0$ and solve for $x$. Use
 \item \textbf{Maximum Range:} Occurs at $\alpha = 45°$ where $\sin 2\alpha = \sin 90° = 1$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Standard SHM Form]
 A particle is in simple harmonic motion with equation $\ddot{x} = -16x$. When $t = 0$, the particle is at $x = 3$ and has velocity $v = 8$ m/s.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -256,7 +256,7 @@ Compare with $\ddot{x} = -n^2x$ to find $n$. Use $v^2 = n^2(A^2 - x^2)$ with ini
 \item \textbf{Period Formula:} $T = \frac{2\pi}{n}$ independent of amplitude (isochronous property)
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Free Fall]
 A ball is dropped from rest at height $h$ above the ground and rebounds to height $\frac{3h}{4}$ after bouncing.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -282,7 +282,7 @@ Use $v^2 = u^2 + 2as$ for the falling motion. The coefficient of restitution is 
 \item \textbf{Energy Loss:} $e < 1$ indicates inelastic collision; kinetic energy decreases with each bounce
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Integration]
 A particle moves along a straight line with velocity $v = 4\cos(2t)$ m/s. At $t = 0$, the particle is at position $x = 1$ m.
 
 \begin{enumerate}[label=\textbf{\roman*.}]

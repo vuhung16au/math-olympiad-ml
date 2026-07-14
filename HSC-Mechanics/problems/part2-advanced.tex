@@ -1,7 +1,7 @@
 % Advanced Level Problems for Part 2
 % These problems require sophisticated techniques and deeper understanding
 
-\begin{problem}
+\begin{problem}[Shifted SHM center]
 A bungee jumper falls from rest with the cord becoming taut at $x = a$ below the starting point. For $x \ge a$, the equation of motion is $\ddot{x} = g - k(x-a)$ where $k$ is a positive constant.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -32,7 +32,7 @@ Rewrite the equation to identify SHM about a shifted center. Use $v\frac{dv}{dx}
 \end{takeaways}
 
 % --- New problem: samples3/05.tex (Terminal velocity and limiting position for $a=k(1-v^2)$) ---
-\begin{problem}
+\begin{problem}[Mechanics Problem]
 The acceleration of a particle is $a=k(1-v^2)$ with $k>0$ and initial conditions $x=0$, $v=0$. Show:
 \begin{enumerate}[label=\textbf{\alph*.}]
     \item $v(t)=\tanh(kt)$
@@ -54,7 +54,7 @@ Separating: $\int\dfrac{dv}{1-v^2}=\int k\,dt$ gives $\tfrac{1}{2}\ln\left|\dfra
 \item Nonlinear ODEs with form $1-v^2$ often yield hyperbolic function solutions (here $\tanh$).
 \item Terminal velocity can be finite while displacement still grows without bound.
 \end{takeaways}
-\begin{problem}
+\begin{problem}[Hyperbolic functions in mechanics]
 A particle moves with acceleration $\ddot{x} = k(1 - v^2)$ where $k$ is a positive constant. Initially, $x = 0$ and $v = 0$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $v = \tanh(kt)$
@@ -83,7 +83,7 @@ Separate variables: $\frac{dv}{1-v^2} = k\,dt$. Use partial fractions: $\frac{1}
 \item \textbf{Logarithmic integration:} The antiderivative $\int \tanh(kt)\,dt = \frac{1}{k}\ln(\cosh(kt))$ involves hyperbolic cosine, which grows exponentially, confirming the infinite limiting position
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Linear resistance form]
 A particle moves with resisted motion governed by $\ddot{x} = -\lambda(c + v)$ where $\lambda, c > 0$. Initially, $x = 0$ and $v = u$.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -112,7 +112,7 @@ Re-examining: Given that particle comes to rest at specific position, and using 
 \item \textbf{Boundary conditions:} Initial condition $v(0) = u$ and rest condition $v(x_0) = 0$ determine the constants and validate model parameters
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Quadratic resistance upward]
 A particle is projected vertically upward with speed $u$ under gravity with air resistance $\frac{gv^2}{k^2}$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that the maximum height is $H = \frac{k^2}{2g}\ln\left(1 + \frac{u^2}{k^2}\right)$
@@ -138,7 +138,7 @@ Going up: $\ddot{x} = -g - \frac{gv^2}{k^2} = -g\left(1 + \frac{v^2}{k^2}\right)
 \item \textbf{Natural logarithm in mechanics:} The presence of $(1 + v^2/k^2)$ factors leads to logarithmic expressions for displacement, a characteristic signature of quadratic resistance models
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Horizontal quadratic resistance]
 Two particles A and B start simultaneously from the origin. A moves horizontally with constant speed $V$ and experiences resistance $Rv^2$. B falls vertically under gravity and experiences resistance $Rv^2$.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -169,7 +169,7 @@ Setting $v_A = v_B$ and solving numerically or analytically for $t$ when velocit
 \item \textbf{Two resistance models:} Horizontal deceleration follows rational function decay while vertical motion follows hyperbolic tangent growth, illustrating how initial conditions affect resistance dynamics
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Linear resistance horizontal]
 Two particles start from origin with A moving horizontally at constant speed $u$, and B falling vertically under gravity. Both experience resistance $kv$ where $k > 0$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Find the terminal velocities for both particles
@@ -197,7 +197,7 @@ For B: $\frac{dv_B}{dt} = g - kv_B$. At terminal velocity: $0 = g - kv_{TB} \Rig
 \item \textbf{Logarithmic time solution:} The time of equal speeds involves natural logarithm of the ratio of initial and terminal parameters, a typical feature of exponential models
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Inclined plane forces]
 A particle moves on an inclined plane at angle $60°$ with forces $2v$ and $2v^2$ acting down the plane in addition to gravity component $g\sin 60°$.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -226,7 +226,7 @@ Reconsidering: if initial speed is given and forces resist, then $0 = g\sin 60°
 \item \textbf{Quadratic formula application:} Solving $2v^2 + 2v - 5\sqrt{3} = 0$ (taking positive root) gives the physical speed at which forces balance
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Mechanics Problem]
 [Note: Problem 34 from sample is a 3D vector problem about perpendicular distance, not a mechanics problem - likely misclassified]
 
 A vector problem involving finding perpendicular distance from a point to a line in 3D space.
@@ -240,7 +240,7 @@ This appears to be a vectors problem rather than mechanics. Use projection or mi
 [Omitted as this is not a mechanics problem]
 \end{solution}
 
-\begin{problem}
+\begin{problem}[Position-dependent acceleration]
 A particle moves with acceleration $\ddot{x} = x - 1$. Initially, $x = 0$ and $v = 1$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $v = 1 - x$
@@ -266,7 +266,7 @@ Use $v\frac{dv}{dx} = x - 1$ and integrate. Then solve the separable equation $\
 \item \textbf{Separable differential equation:} $\frac{dx}{1-x} = dt$ integrates to $-\ln|1-x| = t$, yielding the exponential form characteristic of first-order linear dynamics
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[SHM parameters from extremities]
 A particle is in simple harmonic motion between $x = 2$ and $x = 6$, taking 8 seconds to move from one extremity to the other. Sketch the graph of acceleration versus displacement.
 \end{problem}
 
@@ -292,7 +292,7 @@ Graph: Line segment from $(2, \frac{\pi^2}{32})$ to $(6, -\frac{\pi^2}{32})$ pas
 \item \textbf{Acceleration extrema:} At $x=2$: $\ddot{x} = \frac{\pi^2}{32}$ (max, toward center); at $x=6$: $\ddot{x} = -\frac{\pi^2}{32}$ (min, toward center)
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Complex acceleration formula]
 A particle has acceleration $\ddot{x} = -\frac{e^x + 1}{e^{2x}}$. Initially at origin with velocity 2 m/s (remaining positive).
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $v = e^{-x} + 1$
@@ -318,7 +318,7 @@ Use $\frac{d}{dx}\left(\frac{v^2}{2}\right) = \ddot{x}$. Integrate and apply ini
 \item \textbf{Logarithmic displacement:} The solution $x = \ln(2e^t - 1)$ shows displacement increases logarithmically with time, slowing as $t$ increases
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[SHM with shifted center]
 A particle in SHM satisfies $\ddot{x} = -4(x+1)$. When passing through origin, speed is 4 m/s. What distance does the particle travel during one complete period?
 \end{problem}
 
@@ -340,7 +340,7 @@ Distance in one period: $4A = 4\sqrt{5}$ meters
 \item \textbf{Amplitude calculation priority:} Finding amplitude is essential before calculating total distance traveled, using the energy equation at any known state
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Trajectory equation application]
 A stone projected from ground clears a fence of height $h$ at distance $d$. Angle of projection is $\theta$, speed is $v$.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -370,7 +370,7 @@ Use trajectory equation and substitute point $(d, h)$. For max height, use $H = 
 \item \textbf{Perfect square condition:} The condition for fence at maximum height results in a perfect square, indicating a unique trajectory (single angle solution)
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Quadratic in tan $\alpha$]
 Projectile fired at angle $\alpha$, speed $V$, passes through point $(m, n)$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Prove $gm^2\tan^2\alpha - 2mV^2\tan\alpha + gm^2 + 2nV^2 = 0$
@@ -396,7 +396,7 @@ Substitute $(m, n)$ into trajectory equation to get quadratic in $\tan\alpha$. T
 \item \textbf{High and low trajectories:} When two solutions exist, they correspond to a high-angle trajectory and a low-angle trajectory, both passing through the same point
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Symmetry at 45°]
 Projectile fired at $45°$ with speed $V$ clears two posts of height $8a^2$ separated by distance $12a^2$. First post at distance $b$ from origin.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -426,7 +426,7 @@ Use symmetry of parabola: midpoint of posts is at axis of symmetry. Apply trajec
 \item \textbf{Quadratic in V²:} Treating as quadratic $u^2 - 32ga^2u - 144g^2a^4 = 0$ (where $u = V^2$) and taking positive root gives $V^2 = 36ga^2$, thus $V = 6a\sqrt{g}$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Inverse cube law]
 In an alien universe with gravity $\propto x^{-3}$, a particle satisfies $\ddot{x} = -\frac{k}{x^3}$. Projected upward with speed $u$ from surface at radius $R$.
 
 \begin{enumerate}[label=\textbf{\roman*.}]
@@ -460,7 +460,7 @@ At surface, $\ddot{x} = -g$ when $x = R$. Use $v\frac{dv}{dx} = \ddot{x}$. For n
 \item \textbf{Quadratic time equation:} The given displacement formula $x = \sqrt{R^2 + 2uRt - (gR-u^2)t^2}$ shows particle motion is governed by quadratic under the radical, with non-return when coefficient of $t^2$ is non-negative
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Complex velocity function]
 For $0 \le t \le \frac{1}{2}$, velocity is $v = \frac{10}{\sqrt{1-t^2}} + \frac{1}{(1-t)^2}$ m/s.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Find distance travelled
@@ -487,7 +487,7 @@ Integrate each term: $\int \frac{1}{\sqrt{1-t^2}}\,dt = \sin^{-1}(t)$ and $\int 
 \item \textbf{Rationalization:} Maximum velocity $v_{\max} = \frac{20}{\sqrt{3}} + 4 = \frac{20\sqrt{3}}{3} + 4$ m/s after rationalizing the denominator
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Cubic resistance]
 A particle of mass $m$ is projected vertically downward with speed $u$ through a medium offering resistance $mkv + mkv^3$, where $k$ is a positive constant. Show that the velocity $v$ at time $t$ is given by:
 \[
 v = \sqrt{\frac{g}{k}} \tanh\left(\sqrt{gk}t + \tanh^{-1}\left(u\sqrt{\frac{k}{g}}\right)\right)
@@ -515,7 +515,7 @@ At $t = 0$, $v = u$: $C = \sqrt{k/g} \cdot \tanh^{-1}(u\sqrt{k/g})$. Thus $v\sqr
 \item \textbf{Terminal velocity:} As $t \to \infty$, $\tanh \to 1$, so $v \to \sqrt{g/k}$, independent of initial speed $u$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Opposing forces]
 A particle of mass $m$ is projected vertically upward with speed $u$ through a medium offering resistance $mkv + mkv^3$. Show that the time to reach maximum height is:
 \[
 t = \frac{1}{\sqrt{gk}} \tanh^{-1}\left(u\sqrt{\frac{k}{g}}\right)
@@ -543,7 +543,7 @@ At maximum height, $v = 0$: $0 = -kt + \sqrt{k/g} \cdot \tanh^{-1}(u\sqrt{k/g})$
 \item \textbf{Physical constraint:} Formula requires $u\sqrt{k/g} < 1$ for $\tanh^{-1}$ to be defined (particle cannot exceed terminal velocity)
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Terminal velocity]
 A rock of mass $m$ is dropped from rest and falls through water with resistance $mkv^2$. Show that the distance fallen when the velocity reaches $\frac{3}{4}$ of terminal velocity is:
 \[
 x = \frac{g}{2k} \ln\left(\frac{16}{7}\right)
@@ -573,7 +573,7 @@ When $v = \frac{3}{4}v_T = \frac{3}{4}\sqrt{g/k}$: $kv^2 = k \cdot \frac{9g}{16k
 \item \textbf{Fraction of terminal velocity:} At $v = \frac{3}{4}v_T$, the particle has fallen $\frac{1}{2k}\ln(16/7) \approx 0.41/k$ meters
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Exponential approach]
 A ball of mass $m$ is dropped from rest through a medium offering resistance $mkv^2$. Show that after falling a distance $h$, the velocity is:
 \[
 v = \sqrt{\frac{g}{k}}\sqrt{1 - e^{-2kh}}
@@ -605,7 +605,7 @@ At distance $h$: $v = \sqrt{\frac{g}{k}}\sqrt{1 - e^{-2kh}}$.
 \item \textbf{Exponential decay:} The term $e^{-2kh}$ represents the fraction of terminal velocity squared not yet achieved
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Component analysis]
 A projectile is launched at $30°$ to the horizontal with speed $V$ through a medium offering resistance $mkv$ where $m$ is the mass and $k$ is a constant. Taking axes with origin at the launch point, $x$ horizontal (positive to the right), and $y$ vertical (positive upward), show that the trajectory satisfies:
 \[
 y = x\tan(30°) - \frac{g}{k^2}\ln\left(1 - \frac{kx}{V\cos(30°)}\right) - \frac{gx}{kV\cos(30°)}
@@ -637,7 +637,7 @@ Simplify: $y = x\tan(30°) + \frac{g}{k^2}\ln\left(1 - \frac{kx}{V\cos(30°)}\ri
 \item \textbf{Logarithmic trajectory:} Unlike parabolic motion without resistance, trajectory involves logarithmic term from exponential time dependence
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Coefficient of restitution]
 A rubber ball is dropped from height $h$ and bounces with coefficient of restitution $e$ (where $0 < e < 1$). If air resistance is proportional to velocity with constant $k$, and $k$ is small, show that the ball will eventually come to rest after traveling a total vertical distance approximately:
 \[
 d \approx h\left(\frac{1 + e^2}{1 - e^2}\right)\left(1 + kh\right)
@@ -669,7 +669,7 @@ Simplify: $d = h\left(\frac{1 - e^2 + 2e^2}{1 - e^2}\right)(1 - kh) = h\left(\fr
 \item \textbf{Total distance:} Includes initial fall plus twice the sum of all bounce heights (up and down)
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Upward projection]
 A particle of mass $m$ is projected vertically upward with speed $u$ through a medium offering resistance $mkv^2$. Show that the maximum height reached is:
 \[
 h = \frac{1}{2k}\ln\left(1 + \frac{ku^2}{g}\right)
@@ -701,7 +701,7 @@ Taking natural log: $2kh = \ln\left(\frac{g + ku^2}{g}\right) = \ln\left(1 + \fr
 \item \textbf{Height comparison:} Without resistance, $h_0 = \frac{u^2}{2g}$; with resistance, $h < h_0$ since $\ln(1+x) < x$ for $x > 0$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Circular equations]
 A particle moves in a straight line such that its acceleration is $\ddot{x} = -n^2x + kv^2$, where $n$ and $k$ are positive constants. If the particle starts from rest at $x = a$, show that:
 \[
 v^2 = \frac{n^2}{k+n^2}(a^2 - x^2) + \frac{k}{k+n^2}v^2

@@ -1,7 +1,7 @@
 % Medium Level Problems for Part 2
 % These problems require stronger problem-solving skills and integration of concepts
 
-\begin{problem}
+\begin{problem}[45° Projectile]
 A projectile is fired at speed $10\sqrt{2}$ m/s at angle $45°$ to the horizontal from ground level. Find:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The maximum height reached
@@ -32,7 +32,7 @@ $V = 10\sqrt{2}$, $\alpha = 45°$. $v_x = v_y = 10$ m/s.
 \end{takeaways}
 
 % --- New problem: samples3/01.tex (Resisted vertical motion: quadratic drag upwards) ---
-\begin{problem}
+\begin{problem}[Mechanics Problem]
 A particle of mass $m$ is projected vertically upwards from the ground with initial velocity $u$. Air resistance is $R = mkv^2$ acting opposite to motion. Let $x$ be upward displacement. Show:
 \begin{enumerate}[label=\textbf{(\roman*)}]
     \item $\ddot{x}=-(g+kv^2)$ while rising
@@ -55,7 +55,7 @@ Newton: $m\ddot{x}=-mg-mkv^2\Rightarrow\ddot{x}=-(g+kv^2)$. Using $v\dfrac{dv}{d
 \end{takeaways}
 
 % --- New problem: samples3/02.tex (Horizontal motion with resistance $R=v+v^3$) ---
-\begin{problem}
+\begin{problem}[Mechanics Problem]
 A particle of unit mass moves against resistance $R=v+v^3$. Initially $x=0$, $v=Q>0$. Show:
 \begin{enumerate}[label=\textbf{\alph*.}]
     \item $x=\arctan(Q)-\arctan(v)$
@@ -79,7 +79,7 @@ For $x$: $\dfrac{dv}{dx}=-(1+v^2)$ so integrate to get $x=\arctan(Q)-\arctan(v)$
 \end{takeaways}
 
 % --- New problem: samples3/03.tex (Piecewise resisted motion; parachute opening) ---
-\begin{problem}
+\begin{problem}[Mechanics Problem]
 A parachutist falls under $\frac{dv}{dt}=g-kv$. For $0\le t\le10$, $k=0.1$; for $t>10$, $k=2.0$ (parachute open). With $v(0)=0$, show:
 \begin{enumerate}[label=\textbf{\alph*.}]
     \item Velocity after 10 s: $v_{10}=98(1-e^{-1})\approx61.95$ m/s
@@ -102,7 +102,7 @@ Stage 1: $v=\dfrac{g}{k}(1-e^{-kt})$ with $k=0.1$ gives $v_{10}=\dfrac{9.8}{0.1}
 \end{takeaways}
 
 % --- New problem: samples3/04.tex (Falling with quadratic resistance; terminal velocity) ---
-\begin{problem}
+\begin{problem}[Mechanics Problem]
 A mass is dropped from rest at height $h$ and experiences resistance $Res = mkv^2$ (downwards positive). Let $x$ be distance fallen. Show:
 \begin{enumerate}[label=\textbf{\alph*.}]
     \item $\ddot{x}=g-kv^2$
@@ -124,7 +124,7 @@ Newton gives $\ddot{x}=g-kv^2$. With $\dfrac{1}{2}\dfrac{d(v^2)}{dx}=g-kv^2$, se
 \item Quadratic drag in vertical fall yields an increasing $v^2$ approaching the constant $g/k$.
 \item Using $v\dfrac{dv}{dx}$ converts the second-order ODE into a first-order separable equation for $v^2(x)$.
 \end{takeaways}
-\begin{problem}
+\begin{problem}[Position-Dependent Acceleration]
 A particle moves in a straight line with acceleration $\ddot{x} = 3x^2$. When $x = 1$, the velocity is $v = 2$ m/s. Find the velocity when $x = 2$.
 \end{problem}
 
@@ -143,7 +143,7 @@ $v\,dv = 3x^2\,dx$. Integrating: $\frac{v^2}{2} = x^3 + C$. At $x=1$, $v=2$: $2 
 \item \textbf{Finding Constant:} Use given condition ($v=2$ at $x=1$) to determine integration constant
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Projectile from Height]
 A stone is thrown from the top of a building 45 m high with velocity 15 m/s at angle $30°$ above horizontal. Taking $g = 10$ m/s², find:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The maximum height above ground
@@ -170,7 +170,7 @@ $v_x = 15\cos 30° = \frac{15\sqrt{3}}{2}$, $v_y = 15\sin 30° = 7.5$ m/s
 \item \textbf{Horizontal Range:} $R = v_x t$ where $v_x = V\cos\alpha$ remains constant
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Converting SHM Forms]
 A particle moves with simple harmonic motion. Its displacement from a fixed point is given by $x = 5\cos(3t) + 5\sin(3t)$ metres. Find:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The amplitude
@@ -198,7 +198,7 @@ Convert $a\cos\theta + b\sin\theta = R\cos(\theta - \alpha)$ where $R = \sqrt{a^
 \item \textbf{Maximum Speed:} In SHM, $v_{max} = nA$ occurs when particle passes through center
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Trajectory as Quadratic]
 A particle is projected with velocity $V$ at angle $\alpha$ to the horizontal. Show that the equation of trajectory is:
 $$y = x\tan\alpha - \frac{gx^2(1 + \tan^2\alpha)}{2V^2}$$
 Hence show that for fixed $V$ and varying $\alpha$, all trajectories touch the parabola $x^2 = \frac{2V^2}{g}\left(\frac{V^2}{g} - y\right)$.
@@ -225,7 +225,7 @@ Simplifying: $x^2 = \frac{2gx^2}{V^2}\left(y + \frac{gx^2}{2V^2}\right) \Rightar
 \item \textbf{Physical Meaning:} Envelope parabola represents maximum reachable region for given launch speed
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Energy Method]
 A particle moves with acceleration $\ddot{x} = -\frac{1}{x^2}$ m/s². When $x = 2$, the particle is at rest.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Find $v$ in terms of $x$
@@ -250,7 +250,7 @@ Use $v\frac{dv}{dx} = \ddot{x}$ for part (i). For part (ii), use $\frac{dx}{dt} 
 \item \textbf{Complex Integrals:} May require substitution or special techniques; some require numerical evaluation
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Integration]
 A particle moving in a straight line has velocity $v = e^{-t} + 1$ m/s. Initially at $t = 0$, the particle is at the origin.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Find the displacement after time $t$
@@ -275,7 +275,7 @@ Integrate the velocity function with respect to time. Evaluate the limit by cons
 \item \textbf{Limiting Behavior:} Analyze each term separately as $t \to \infty$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Trajectory Equation]
 A particle is projected from point A on level ground and just clears a wall 8 m high at horizontal distance 10 m from A. If the angle of projection is $60°$, find the speed of projection (take $g = 10$ m/s²).
 \end{problem}
 
@@ -300,7 +300,7 @@ $V \approx 14.65$ m/s
 \item \textbf{Solving for Speed:} Rearrange to isolate $V^2$, then take square root
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Two Conditions System]
 A particle moves in SHM with center at origin. When displacement is 3 m, velocity is 4 m/s. When displacement is 4 m, velocity is 3 m/s. Find:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The amplitude
@@ -329,7 +329,7 @@ Dividing (1) by (2): $\frac{16}{9} = \frac{A^2 - 9}{A^2 - 16} \Rightarrow 16A^2 
 \item \textbf{Verification:} Always check solution satisfies both original conditions
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Non-Standard Resistance]
 A particle moves with resistance proportional to velocity: $\ddot{x} = 2 - 4v$. Initially, $x = 0$ and $v = 0$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $v = \frac{1}{2}(1 - e^{-4t})$
@@ -357,7 +357,7 @@ Separate variables: $\frac{dv}{2-4v} = dt$. Terminal velocity occurs when $\ddot
 \item \textbf{Logarithmic Integration:} $\int \frac{1}{a-bv}\,dv = -\frac{1}{b}\ln|a-bv|$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Problem Interpretation]
 A particle is in SHM about $x = 2$ with amplitude 3 m and period $2\pi$ seconds. At $t = 0$, the particle is at $x = 5$ and moving towards the center. Find the displacement equation.
 \end{problem}
 
@@ -384,7 +384,7 @@ Assuming problem means "starting at extreme": $x = 2 + 3\cos(t)$
 \item \textbf{Phase Determination:} Sign of velocity indicates direction; use to determine correct $\phi$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Special Angle]
 A particle is projected from ground level to hit a target at horizontal distance $d$ and height $h$. If the angle of projection is $45°$, show that the speed of projection is:
 $$V = \sqrt{\frac{gd^2}{2(d-h)}}$$
 \end{problem}
@@ -414,7 +414,7 @@ Given answer suggests: $V = \sqrt{\frac{gd^2}{2(d-h)}}$ ✓
 \item \textbf{Physical Constraint:} Require $d > h$ for real solution
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Linear Resistance Equation]
 A body falls from rest under gravity with air resistance equal to $kv$ where $k$ is constant.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $v = \frac{g}{k}(1 - e^{-kt})$
@@ -442,7 +442,7 @@ Equation of motion: $\ddot{x} = g - kv$. Separate variables for velocity, then i
 \item \textbf{Distance Formula:} Integration yields $x = \frac{g}{k^2}(kt - 1 + e^{-kt})$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Component of Gravity]
 A particle is projected up a smooth plane inclined at $30°$ to the horizontal with speed 20 m/s parallel to the plane. Find:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The time to reach the highest point
@@ -467,7 +467,7 @@ Acceleration down the plane is $g\sin 30° = 5$ m/s². Use $v = u - at$ and $v^2
 \item \textbf{Key Formulas:} $v = u - at$ and $v^2 = u^2 - 2as$ for constant deceleration
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Vertical Component]
 A projectile is fired at angle $\alpha$ with initial speed $V$. Show that the time taken to reach maximum height is $\frac{V\sin\alpha}{g}$ and that the maximum height is $\frac{V^2\sin^2\alpha}{2g}$.
 \end{problem}
 
@@ -488,7 +488,7 @@ Using $0 = V^2\sin^2\alpha - 2gH \Rightarrow H = \frac{V^2\sin^2\alpha}{2g}$ ✓
 \item \textbf{Derivation Strategy:} Work with vertical motion only; horizontal motion doesn't affect height
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Comparing Forms]
 A particle moves with acceleration $\ddot{x} = -9x$. Initially, $x = 2$ and $\dot{x} = 6$. Find:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The maximum displacement
@@ -513,7 +513,7 @@ This is SHM with $n^2 = 9$. Use $v^2 = n^2(A^2 - x^2)$ to find amplitude.
 \item \textbf{Period Independent:} Period depends only on $n$, not on amplitude or initial conditions
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Rational Function Integration]
 A particle moves with velocity $v = \frac{5}{2-t}$ m/s. At $t = 0$, the particle is at $x = 0$. Find:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The displacement at time $t$
@@ -538,7 +538,7 @@ Integrate using substitution or recognize the standard form $\int \frac{1}{a-t}\
 \item \textbf{Domain Restriction:} Solution valid only for $t < 2$ (velocity undefined at $t=2$)
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Horizontal Projection]
 A stone is projected horizontally from the top of a cliff 80 m high with speed 15 m/s. Find (take $g = 10$ m/s²):
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The time to reach the ground
@@ -566,7 +566,7 @@ Use $y = -\frac{1}{2}gt^2$ for vertical motion. Horizontal distance is $x = v_x 
 \item \textbf{Impact Speed:} $v = \sqrt{v_x^2 + v_y^2}$ using Pythagoras; $v_y = -gt$ at landing
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Initial Values]
 A particle undergoes SHM with equation $x = 4\cos(2t - \frac{\pi}{3})$ metres. Find:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item The initial displacement
@@ -594,7 +594,7 @@ Differentiate to find velocity: $v = -4 \times 2\sin(2t - \frac{\pi}{3})$. Set $
 \item \textbf{Crossing Center:} Particle at origin when $\cos(2t - \frac{\pi}{3}) = 0$; solve for smallest positive $t$
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Period-Angular Frequency Relation]
 A particle moves in Simple Harmonic Motion (SHM) with period $T$ about a centre $O$. Its displacement at any time $t$ is given by $x = A \sin nt$, where $A$ is the amplitude.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $\dot{x} = \frac{2\pi A}{T} \cos \left(\frac{2\pi t}{T}\right)$.
@@ -624,7 +624,7 @@ Use $n = \frac{2\pi}{T}$ and divide displacement by velocity equations to elimin
 \item \textbf{Inverse Tangent Identity:} $\tan^{-1}x + \tan^{-1}(1/x) = \frac{\pi}{2}$ useful for complementary angles
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[SHM Energy Invariant]
 A particle is moving in a straight line and performing simple harmonic motion. At time $t$ seconds it has displacement $x$ metres from a fixed point $O$ on the line, given by $x = 2 \cos \left( 2t - \frac{\pi}{4} \right)$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $v^2 - x\ddot{x} = 16$.
@@ -652,7 +652,7 @@ Find $v = \dot{x}$ and $\ddot{x}$ by differentiation. For part (ii), evaluate $x
 \item \textbf{Distance in SHM:} Total distance per period is $4A$ (amplitude traversed 4 times)
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Double Angle Identity]
 A particle moves such that its displacement $x$ cm from the origin at time $t$ seconds is given by $x = 2 + \cos^2 t$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that acceleration is given by $\ddot{x} = 10 - 4x$
@@ -677,7 +677,7 @@ Use double angle formula: $\cos(2t) = 2\cos^2 t - 1$. For part (ii), use $\ddot{
 \item \textbf{Boundary Conditions:} Use initial values to determine integration constant
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Exponential Approach to Terminal Velocity]
 A fishing boat drifts with a current. The boat's velocity $v$ at time $t$ is given by $v = b - (b - v_0)e^{-\alpha t}$ where $v_0$, $\alpha$, and $b$ are positive constants with $v_0 < b$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $\frac{dv}{dt} = \alpha(b - v)$.
@@ -705,7 +705,7 @@ For part (i), differentiate and factor out $(b-v_0)e^{-\alpha t}$. For part (ii)
 \item \textbf{Physical Interpretation:} $b$ is terminal velocity (current speed), $v_0$ is initial boat velocity
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Linear Air Resistance]
 A rock of mass $m$ is dropped under gravity $g$ from rest. Air resistance is proportional to velocity: $R = -kv$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Explain why $\frac{dv}{dt} = g - \frac{k}{m}v$.
@@ -733,7 +733,7 @@ Apply Newton's Second Law with gravity and resistance forces. Separate variables
 \item \textbf{Position-Velocity Relation:} Use $v\frac{dv}{dx} = \ddot{x}$ to eliminate time variable
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Component Separation]
 A particle of mass $m$ is projected from the origin with velocity $V$ at angle $\theta$ to the horizontal, experiencing gravity and resistance proportional to velocity. Prove:
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item $\dot{x} = V \cos \theta \, e^{-\frac{k}{m}t}$
@@ -764,7 +764,7 @@ Horizontal: $m\ddot{x} = -k\dot{x}$. Vertical: $m\ddot{y} = -mg - k\dot{y}$. Sol
 \item \textbf{Integration Sequence:} Solve for velocities first, then integrate again for positions
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Maximum Height Formula]
 A particle of mass $m$ is projected at $30°$ with speed $V$. Find the speed and direction when horizontal displacement equals maximum height reached.
 \end{problem}
 
@@ -787,7 +787,7 @@ Speed: $v = \sqrt{v_x^2 + v_y^2}$. Direction: $\tan\alpha = \frac{v_y}{v_x}$
 \item \textbf{Velocity Components:} $v_x$ constant, $v_y = V\sin\alpha - gt$ decreases linearly
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Combined Forces]
 A body of unit mass is projected vertically upwards with initial velocity $10(20-g)$ in a medium with resistance $\frac{v}{10}$.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $\frac{dv}{dt} = -g - \frac{v}{10}$.
@@ -818,7 +818,7 @@ For upward motion, both gravity and resistance act downward. Integrate velocity 
 \item \textbf{Energy Dissipation:} Maximum height less than frictionless case due to resistance work
 \end{takeaways}
 
-\begin{problem}
+\begin{problem}[Damped Harmonic Motion]
 A weight oscillates on a spring underwater with damped motion $\ddot{x} = -4x - 2\sqrt{3}\dot{x}$. Initially at equilibrium ($x=0$) moving upwards at $3$ m/s.
 \begin{enumerate}[label=\textbf{\roman*.}]
     \item Show that $x = Ae^{-\sqrt{3}t} \sin t$ satisfies the equation and find $A$.
