@@ -4,7 +4,7 @@
 % =============================================================================
 % PROBLEM 13: Polynomial remainder with complex numbers
 % =============================================================================
-\begin{problem}
+\begin{problem}[Polynomial Remainder with Complex Numbers]
 Suppose that $P(x) = x^3 - x^2 + mx + n$, where $m$ and $n$ are integers.
 \begin{enumerate}
     \item Show that $P(-i) = (1+n) + i(1-m)$.
@@ -43,7 +43,7 @@ Remainder theorem applies to complex divisors; equate real and imaginary parts s
 % =============================================================================
 % PROBLEM 19: De Moivre and complex equations
 % =============================================================================
-\begin{problem}
+\begin{problem}[De Moivre and Complex Equations]
 \begin{enumerate}
     \item Show that $(1 + i \tan \theta)^n + (1 - i \tan \theta)^n = \frac{2 \cos n\theta}{\cos^n \theta}$ where $\cos \theta \neq 0$ and $n$ is a positive integer.
     \item Hence show that if $z$ is purely imaginary, the roots of $(1 + z)^4 + (1 - z)^4 = 0$ are $z = \pm i \tan \frac{\pi}{8}, \pm i \tan \frac{3\pi}{8}$.
@@ -85,7 +85,7 @@ De Moivre's theorem applies to expressions of form $\frac{e^{i\theta}}{\cos^n\th
 % =============================================================================
 % PROBLEM 22: Complex cotangent identity
 % =============================================================================
-\begin{problem}
+\begin{problem}[Complex Cotangent Identity]
 \begin{enumerate}
     \item Show that $\dfrac{1+\cos \theta+i \sin \theta}{1-\cos \theta-i \sin \theta} = i \cot \dfrac{\theta}{2}$.
     \item Hence solve $\left(\dfrac{z-1}{z+1}\right)^8 = -1$.
@@ -124,7 +124,7 @@ Half-angle formulas simplify complex fractions; eighth roots of -1 give eight so
 % =============================================================================
 % PROBLEM 24: Inequality proof by polynomial factorization (a=1 case)
 % =============================================================================
-\begin{problem}
+\begin{problem}[Inequality Proof by Geometric Series]
 Prove that for $0 \le b < 1$:
 $$
 \frac{1 - b^{n+1}}{1-b} < n+1
@@ -160,7 +160,7 @@ Geometric series allow term-by-term comparison; strict inequality holds when $b<
 % =============================================================================
 % PROBLEM 26: Induction with symmetric polynomial
 % =============================================================================
-\begin{problem}
+\begin{problem}[Induction with Symmetric Polynomial]
 Prove by induction:
 $$x^n + x^{n-2} + x^{n-4} + \dots + \frac{1}{x^{n-4}} + \frac{1}{x^{n-2}} + \frac{1}{x^n} \geq n+1$$
 for $x > 0$ and $n \in \mathbb{Z}^+$. [Hint: separate base cases for $n$ even or odd.]
@@ -199,7 +199,7 @@ Two base cases handle parity; inductive step jumps by 2 to preserve parity struc
 % =============================================================================
 % PROBLEM 28: Divisibility proof
 % =============================================================================
-\begin{problem}
+\begin{problem}[Divisibility via Fermat's Little Theorem]
 Prove that $\frac{n^5}{5} + \frac{n^4}{2} + \frac{n^3}{3} - \frac{n}{30}$ is an integer for all integers $n \geq 1$.
 \end{problem}
 
@@ -232,7 +232,7 @@ Fermat's Little Theorem handles prime divisibility; consecutive integers ensure 
 % =============================================================================
 % PROBLEM 29: Cubic with constrained roots
 % =============================================================================
-\begin{problem}
+\begin{problem}[Cubic with Constrained Roots]
 Let $\alpha, \beta, \gamma$ be roots of $x^3 + Ax^2 + Bx + 8 = 0$ (where $A, B$ are real numbers).
 Given $\alpha^2 + \beta^2 = 0$ and $\beta^2 + \gamma^2 = 0$:
 \begin{enumerate}
@@ -272,7 +272,7 @@ Conjugate root theorem constrains complex roots; Vieta's formulas connect roots 
 % =============================================================================
 % PROBLEM 30: Even and odd coefficient sums
 % =============================================================================
-\begin{problem}
+\begin{problem}[Even and Odd Coefficient Sums]
 Consider a polynomial $P(x)$ written as $P(x) = E(x) + O(x)$, where $E(x)$ contains only even powers of $x$ and $O(x)$ contains only odd powers of $x$.
 \begin{enumerate}
     \item[(i)] Show that $P(x)P(-x) = E(x)^2 - O(x)^2$.
@@ -335,7 +335,7 @@ Evaluating a polynomial at $x=1$ and $x=-1$ neatly separates even-powered and od
 % =============================================================================
 % PROBLEM 31: Conjugate root theorem
 % =============================================================================
-\begin{problem}
+\begin{problem}[Conjugate Root Theorem]
 \begin{enumerate}
     \item Given $z$ is a root of $az^3 + bz^2 + cz + d = 0$ (real $a,b,c,d$), prove $\bar{z}$ is also a root.
     \item Find all roots of $z^3 - 6z^2 + 13z - 20 = 0$ given $1 + 2i$ is one root.
@@ -373,7 +373,7 @@ Conjugate root theorem: complex roots of real polynomials come in conjugate pair
 % =============================================================================
 % PROBLEM 32: Primitive roots of unity
 % =============================================================================
-\begin{problem}
+\begin{problem}[Primitive Roots of Unity]
 The roots of $z^n = 1$ are $z_k = e^{2\pi ik/n}$, $k = 1, \dots, n$. If $z_k^m$ generates all roots for $m=1,\ldots,n$, then $z_k$ is a primitive root.
 \begin{enumerate}
     \item Show $z_1$ is a primitive root of $z^n = 1$.
@@ -408,7 +408,7 @@ Primitive roots generate all roots of unity; requires coprimality of index and o
 % =============================================================================
 % PROBLEM 33: Infinite geometric series with complex terms
 % =============================================================================
-\begin{problem}
+\begin{problem}[Infinite Geometric Series with Complex Terms]
 Given $z = \cos \alpha + i \sin \alpha$ with $\sin \alpha \neq 0$:
 \begin{enumerate}
     \item Prove that $\frac{1}{1-z \cos \alpha} = 1 + i \cot \alpha$
@@ -452,7 +452,7 @@ Geometric series with complex terms; separate real/imaginary parts to extract tr
 % =============================================================================
 % PROBLEM 34: Bound on polynomial roots
 % =============================================================================
-\begin{problem}
+\begin{problem}[Bound on Polynomial Roots]
 Let $\beta$ be a root of $P(z) = z^n + a_{n-1}z^{n-1} + \cdots + a_0$ with $M = \max(|a_{n-1}|, \ldots, |a_0|)$.
 \begin{enumerate}
     \item Show that $|\beta|^n \le M(|\beta|^{n-1} + \cdots + |\beta| + 1)$.
@@ -491,7 +491,7 @@ Triangle inequality bounds root moduli; contradiction argument establishes stric
 % =============================================================================
 % PROBLEM 35: Weighted sum of roots of unity
 % =============================================================================
-\begin{problem}
+\begin{problem}[Weighted Sum of Roots of Unity]
 Consider $\omega$ an $n$-th root of unity with $\omega \neq 1$. Given $1 + \omega + \cdots + \omega^{n-1} = 0$:
 \begin{enumerate}
     \item Show that $1 + 2\omega + 3\omega^2 + \cdots + n\omega^{n-1} = \frac{n}{\omega-1}$
@@ -531,7 +531,7 @@ Arithmetic-geometric series via shift-and-subtract; factorization of $z^n-1$ giv
 % =============================================================================
 % PROBLEM 36: Factorization and quadratic formation
 % =============================================================================
-\begin{problem}
+\begin{problem}[Factorization and Quadratic Formation]
 \begin{enumerate}
     \item Show that $z^5 - 1 = (z-1)(z^2 - 2z \cos \frac{2\pi}{5} + 1)(z^2 - 2z \cos \frac{4\pi}{5} + 1)$.
     \item Form a quadratic with roots $\cos \frac{2\pi}{5}$ and $\cos \frac{4\pi}{5}$.
