@@ -9,7 +9,7 @@ The AGM sequences are defined by $a_1=a$, $b_1=b$ and for $n\ge1$:
 a_{n+1}=\frac{a_n+b_n}{2},\qquad b_{n+1}=\sqrt{a_nb_n}.
 \]
 \begin{enumerate}[label=(\roman*)]
-\item Show that
+\item By using the substitution $\sin \theta = \frac{2b \sin \phi}{(a+b) + (a-b)\sin^2 \phi}$, show that
 \[I(a,b)=I\Big(\frac{a+b}{2},\sqrt{ab}\Big).\]
 \item Prove that $a_n$ and $b_n$ converge to the same limit $L$, and deduce
 \[I(a,b)=\frac{\pi}{2L}.\]
@@ -52,7 +52,12 @@ Integrate to obtain the stated bounds; combining with (ii) gives $b<L<a$.
 \begin{align*}
 \int_0^{\infty}\frac{dx}{\sqrt{(x^2+a^2)(x^2+b^2)}}
 &=\int_0^{\pi/2}\frac{a\sec^2\theta\,d\theta}{\sqrt{a^2\tan^2\theta+a^2}\,\sqrt{a^2\tan^2\theta+b^2}}\\
-&=\int_0^{\pi/2}\frac{d\theta}{\sqrt{a^2\cos^2\theta+b^2\sin^2\theta}}=I(a,b).
+&=\int_0^{\pi/2}\frac{d\theta}{\sqrt{a^2\sin^2\theta+b^2\cos^2\theta}}
+\end{align*}
+To match the exact definition of $I(a,b)$, use the complementary angle substitution $\alpha = \frac{\pi}{2} - \theta \implies d\theta = -d\alpha$. The limits $0$ to $\frac{\pi}{2}$ become $\frac{\pi}{2}$ to $0$, and sine and cosine swap:
+\begin{align*}
+&= \int_{\pi/2}^0 \frac{-d\alpha}{\sqrt{a^2\sin^2(\frac{\pi}{2} - \alpha)+b^2\cos^2(\frac{\pi}{2} - \alpha)}} \\
+&= \int_0^{\pi/2} \frac{d\alpha}{\sqrt{a^2\cos^2\alpha+b^2\sin^2\alpha}} = I(a,b).
 \end{align*}
 
 % For $a_1=\sqrt{2}\approx1.41421356$ and $b_1=1$ compute a few AGM steps:

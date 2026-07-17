@@ -7,11 +7,7 @@ Consider the ellipsoid $E$ defined by:
 \[ \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1 \]
 where $a > b > c > 0$.
 
-(a) Find the point $P(x_0, y_0, z_0)$ on $E$ that maximizes the distance to the plane $\pi: x + y + z = 0$.
-
-(b) Let $\mathbf{n} = (1, 1, 1)$ be the normal vector to $\pi$. Show that at the optimal point $P$, the gradient $\nabla f$ is parallel to $\mathbf{n}$, where $f(x,y,z) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2}$.
-
-(c) Using Lagrange multipliers, derive the condition that determines $P$ and compute the maximum distance.
+Find the point $P(x_0, y_0, z_0)$ on $E$ that maximizes the distance to the plane $\pi: x + y + z = 0$, and compute this maximum distance.
 \end{problem}
 
 \begin{solution}
@@ -23,7 +19,7 @@ By Cauchy--Schwarz,
     \le \Big(\tfrac{x^2}{a^2}+\tfrac{y^2}{b^2}+\tfrac{z^2}{c^2}\Big)(a^2+b^2+c^2)
     = a^2+b^2+c^2,
 \]
-so $x+y+z \le \sqrt{a^2+b^2+c^2}$ with equality exactly when $\tfrac{x}{a}=\tfrac{y}{b}=\tfrac{z}{c}=k>0$. Writing $x=ka^2$, $y=kb^2$, $z=kc^2$ in the constraint gives $k^2(a^2+b^2+c^2)=1$, hence $k=1/\sqrt{a^2+b^2+c^2}$ and
+so $x+y+z \le \sqrt{a^2+b^2+c^2}$ with equality exactly when $\tfrac{x}{a}/a = \tfrac{y}{b}/b = \tfrac{z}{c}/c = k > 0$. Writing $x=ka^2$, $y=kb^2$, $z=kc^2$ in the constraint gives $k^2(a^2+b^2+c^2)=1$, hence $k=1/\sqrt{a^2+b^2+c^2}$ and
 \[
     P=\left( \frac{a^2}{\sqrt{a^2+b^2+c^2}},\; \frac{b^2}{\sqrt{a^2+b^2+c^2}},\; \frac{c^2}{\sqrt{a^2+b^2+c^2}} \right),
     \quad d_{\max}=\frac{\sqrt{a^2+b^2+c^2}}{\sqrt{3}}.
@@ -32,16 +28,15 @@ so $x+y+z \le \sqrt{a^2+b^2+c^2}$ with equality exactly when $\tfrac{x}{a}=\tfra
 
 \begin{takeaways}
 \begin{enumerate}
-    \item \textbf{Lagrange Multipliers:} Essential for constrained optimization on curves and surfaces.
-    \item \textbf{Gradient Parallelism:} At optimal points, constraint and objective gradients are parallel.
-    \item \textbf{Geometric Interpretation:} The solution connects algebraic optimization with geometric intuition.
+    \item \textbf{Cauchy-Schwarz Strategy:} To bound a linear expression (like $x+y+z$) given a quadratic constraint, carefully split the linear terms into a dot product that utilizes the constraint.
+    \item \textbf{Equality Condition:} The maximum or minimum in Cauchy-Schwarz is strictly achieved when the proportional vectors are aligned, instantly giving us the coordinate ratios.
 \end{enumerate}
 \end{takeaways}
 
 \begin{remark}[Distance Between Shapes]
 In general, the distance between two shapes $A$ and $B$ is defined as
 \[ d(A,B) = \inf\{\|p-q\| : p\in A,\ q\in B\}. \]
-For an ellipsoid and a plane, this reduces to optimizing the point on the ellipsoid whose normal is aligned with the plane's normal (via Lagrange multipliers), yielding the maximum/minimum perpendicular separation between the surfaces.
+For an ellipsoid and a plane, this reduces to finding the point on the ellipsoid whose normal is aligned with the plane's normal, yielding the maximum/minimum perpendicular separation between the surfaces.
 Here, inf means the greatest lower bound (or minimum if it exists).
 
 \end{remark}
@@ -54,15 +49,19 @@ Hint: Assume $|\zeta| > 1+M$ and compare $|\zeta|^n$ with $\sum_{k=0}^{n-1} |a_k
 \end{problem}
 
 \begin{solution}
-If $P(\zeta)=0$ then
-\[ |\zeta|^n = \Big|\sum_{k=0}^{n-1} a_k \zeta^k\Big| \le \sum_{k=0}^{n-1} |a_k|\,|\zeta|^k \le M \sum_{k=0}^{n-1} |\zeta|^k. \]
-Suppose $|\zeta| > 1+M$. Then $\sum_{k=0}^{n-1} |\zeta|^k < n\,|\zeta|^{n-1}$ and so
-\[ |\zeta|^n \le M\,n\,|\zeta|^{n-1} \quad \Rightarrow \quad |\zeta| \le Mn. \]
-But $|\zeta| > 1+M$ implies $|\zeta|/M > 1 + 1/M \ge 1$ (when $M>0$), and for sufficiently large $n$ this contradicts the inequality $|\zeta| \le Mn$. A standard refinement avoids $n$ entirely by dividing the identity $\zeta^n = -\sum_{k=0}^{n-1} a_k \zeta^k$ by $\zeta^n$ to get
-\[ 1 = -\sum_{k=0}^{n-1} a_k \zeta^{k-n}, \quad \text{hence} \quad 1 \le \sum_{k=0}^{n-1} |a_k|\,|\zeta|^{k-n}. \]
-If $|\zeta| > 1+M$, then $|\zeta|^{k-n} < (1+M)^{k-n} \le (1+M)^{-1}$ for all $k \le n-1$, giving
-\[ 1 < \sum_{k=0}^{n-1} |a_k|\,(1+M)^{-1} \le M\,(1+M)^{-1} < 1, \]
-which is a contradiction. Therefore $|\zeta| \le 1 + M$ for all roots.
+Assume for contradiction that $|\zeta| > 1 + M$. 
+Since $P(\zeta) = 0$, we have $\zeta^n = -\sum_{k=0}^{n-1} a_k \zeta^k$.
+Divide by $\zeta^n$ to get:
+\[ 1 = \left| -\sum_{k=0}^{n-1} a_k \zeta^{k-n} \right| \le \sum_{k=0}^{n-1} |a_k| |\zeta|^{k-n} \]
+Replacing $|a_k|$ with the maximum $M$ and letting $j = n-k$, we get:
+\[ 1 \le M \sum_{j=1}^{n} |\zeta|^{-j} \]
+Since all terms are positive, this finite sum is strictly less than the infinite geometric series:
+\[ 1 < M \sum_{j=1}^{\infty} |\zeta|^{-j} = M \left( \frac{|\zeta|^{-1}}{1 - |\zeta|^{-1}} \right) = \frac{M}{|\zeta| - 1} \]
+From our assumption that $|\zeta| > 1 + M$, we have $|\zeta| - 1 > M$. 
+Therefore:
+\[ \frac{M}{|\zeta| - 1} < \frac{M}{M} = 1 \]
+This implies $1 < 1$, which is a contradiction. 
+Thus, all roots must satisfy $|\zeta| \le 1 + M$.
 \end{solution}
 
 \begin{takeaways}
@@ -110,7 +109,7 @@ Equating coordinates gives
 \]
 From the first two equations, $t=1+2s=1-s$, so $s=0$ and $t=1$. Substituting into the third gives $3=-3$, a contradiction. Therefore, the lines are skew.
 
-\textbf{(b) and (c) Finding the shortest distance and closest points:}
+\textbf{Finding the shortest distance and closest points:}
 Let $\mathbf{w} = \mathbf{r}_2(t) - \mathbf{r}_1(s)$. For the shortest distance, $\mathbf{w}$ must satisfy
 \[
 \mathbf{w}\cdot \mathbf{d}_1 = 0,
@@ -130,10 +129,14 @@ giving
 \[
 \qquad t = -\frac{31}{35},\qquad s = -\frac{24}{35}.
 \]
+
+\textbf{Part (c) Points:}
 \[
 P_1 = \left(-\frac{13}{35}, \frac{94}{35}, \frac{81}{35}\right),\qquad
 P_2 = \left(-\frac{31}{35}, \frac{4}{35}, \frac{27}{35}\right).
 \]
+
+\textbf{Part (b) Distance:}
 \[
 \overrightarrow{P_1P_2}=P_2-P_1
 = \left(-\frac{18}{35}, -\frac{90}{35}, -\frac{54}{35}\right),
@@ -147,7 +150,7 @@ so
 \end{align*}
 
 \textbf{(d) Perpendicularity verification:}
-By construction, $\mathbf{w} \perp \mathbf{d}_1$ and $\mathbf{w} \perp \mathbf{d}_2$, so the segment $P_1P_2$ is perpendicular to both lines.
+Because we found $P_1$ and $P_2$ specifically by enforcing $\mathbf{w} \cdot \mathbf{d}_1 = 0$ and $\mathbf{w} \cdot \mathbf{d}_2 = 0$, the segment $P_1P_2$ is perpendicular to both $L_1$ and $L_2$ by definition of our algebraic setup.
 \end{solution}
 
 \begin{takeaways}
@@ -162,19 +165,17 @@ By construction, $\mathbf{w} \perp \mathbf{d}_1$ and $\mathbf{w} \perp \mathbf{d
 \begin{problem}[Powers of Roots and Recurrence Relations]
 Consider the polynomial $P(x) = x^4 - 6x^3 + 11x^2 - 6x + 1$ with roots $r_1, r_2, r_3, r_4$.
 
-(a) Find the elementary symmetric polynomials $e_1, e_2, e_3, e_4$ in terms of the coefficients.
+(i) Find the elementary symmetric polynomials $e_1, e_2, e_3, e_4$ in terms of the coefficients.
 
-(b) Let $S_k = r_1^k + r_2^k + r_3^k + r_4^k$ be the $k$-th power sum. Use Newton's identities to find $S_1, S_2, S_3, S_4$.
+(ii) Let $S_k = r_1^k + r_2^k + r_3^k + r_4^k$ be the $k$-th power sum. Use Newton's identities to find $S_1, S_2, S_3, S_4$.
 
-(c) Establish the recurrence relation for $S_k$ when $k \geq 4$.
+(iii) Establish the recurrence relation for $S_k$ when $k \geq 4$.
 
-(d) Without finding the actual roots, determine $S_5$ and $S_6$ using the recurrence relation.
-
-(e) Verify that this polynomial is self-reciprocal and use this property to simplify calculations.
+(iv) Without finding the actual roots, determine $S_5$ and $S_6$ using the recurrence relation.
 \end{problem}
 
 \begin{solution}
-\textbf{(a) Elementary symmetric polynomials:}  
+\textbf{(i) Elementary symmetric polynomials:}  
 By Vi\`ete's formulas for $P(x)=x^4-6x^3+11x^2-6x+1$,
 \[
 e_1=r_1+r_2+r_3+r_4=6,\quad
@@ -185,7 +186,7 @@ e_3=\sum_{i<j<k}r_ir_jr_k=6,
 e_4=r_1r_2r_3r_4=1.
 \]
 
-\textbf{(b) Newton's identities:}  
+\textbf{(ii) Newton's identities:}  
 Let $S_k=r_1^k+r_2^k+r_3^k+r_4^k$. Newton's identities give
 \begin{align*}
 S_1-e_1&=0 &&\Rightarrow\quad S_1=6,\\
@@ -194,7 +195,7 @@ S_3-e_1S_2+e_2S_1-3e_3&=0 &&\Rightarrow\quad S_3=6\cdot14-11\cdot6+3\cdot6=36,\\
 S_4-e_1S_3+e_2S_2-e_3S_1+4e_4&=0 &&\Rightarrow\quad S_4=6\cdot36-11\cdot14+6\cdot6-4=94.
 \end{align*}
 
-\textbf{(c) Recurrence relation:}  
+\textbf{(iii) Recurrence relation:}  
 For $k\ge4$,
 \[
 S_k-e_1S_{k-1}+e_2S_{k-2}-e_3S_{k-3}+e_4S_{k-4}=0,
@@ -206,7 +207,7 @@ S_k-6S_{k-1}+11S_{k-2}-6S_{k-3}+S_{k-4}=0,
 S_k=6S_{k-1}-11S_{k-2}+6S_{k-3}-S_{k-4}.
 \]
 
-\textbf{(d) Computing $S_5$ and $S_6$:}  
+\textbf{(iv) Computing $S_5$ and $S_6$:}  
 Using the recurrence,
 \[
 S_5=6S_4-11S_3+6S_2-S_1=6\cdot94-11\cdot36+6\cdot14-6=246,
@@ -216,15 +217,23 @@ and
 S_6=6S_5-11S_4+6S_3-S_2=6\cdot246-11\cdot94+6\cdot36-14=644.
 \]
 
-\textbf{(e) Self-reciprocal property:}  
-The polynomial satisfies $x^4P(1/x)=P(x)$, so it is self-reciprocal. Hence if $r$ is a root, then $1/r$ is also a root, and the roots may be paired as $(r_1,1/r_1)$ and $(r_2,1/r_2)$. This symmetry can simplify expressions involving positive and negative powers, for example relations of the form $S_k+S_{-k}$. Also, $r_1r_2r_3r_4=1$ is consistent with this self-reciprocal structure.
+\textbf{Alternative Method (Self-Reciprocal Trick):}  
+Notice $P(x)$ is self-reciprocal. Divide the equation by $x^2$:
+\[ x^2 - 6x + 11 - \frac{6}{x} + \frac{1}{x^2} = 0 \]
+Substitute $u = x + \frac{1}{x}$, which implies $x^2 + \frac{1}{x^2} = u^2 - 2$:
+\[ (u^2 - 2) - 6u + 11 = 0 \implies u^2 - 6u + 9 = 0 \implies (u - 3)^2 = 0 \]
+Since every root of $P(x)$ satisfies $u=3$, they must satisfy $r^2 - 3r + 1 = 0$.
+Thus, the power sums satisfy the much simpler second-order recurrence: $S_k = 3S_{k-1} - S_{k-2}$.
+We can recompute $S_5$ and $S_6$ trivially:
+\[ S_5 = 3S_4 - S_3 = 3(94) - 36 = 246 \]
+\[ S_6 = 3S_5 - S_4 = 3(246) - 94 = 644 \]
 \end{solution}
 
 \begin{takeaways}
 \begin{enumerate}
     \item \textbf{Newton's Identities:} Fundamental tool connecting power sums to symmetric polynomials.
     \item \textbf{Recurrence Relations:} Enable computation of higher power sums without finding roots.
-    \item \textbf{Self-Reciprocal Polynomials:} Special structure provides additional computational advantages.
+    \item \textbf{Self-Reciprocal Substitution:} Self-reciprocal polynomials of even degree $2n$ can always be reduced to polynomials of degree $n$ using the substitution $u = x + \frac{1}{x}$. This often collapses complex 4th-order recurrence relations into 2nd-order ones.
     \item \textbf{Coefficient Relationships:} Direct connection between polynomial coefficients and root properties.
 \end{enumerate}
 \end{takeaways}
@@ -303,9 +312,9 @@ In this problem you will show $\zeta(3)$ is irrational using a sequence of integ
 \begin{align*}
 0 < I_n &= \iiint g(x,y,z)^n\,\frac{dx\,dy\,dz}{1-(1-xy)z} \\
     &< \big((\sqrt{2}-1)^4\big)^n \iiint \frac{dx\,dy\,dz}{1-(1-xy)z} \\
-    &= C\,(\sqrt{2}-1)^{4n},
+    &= C\,(\sqrt{2}-1)^{4n}.
 \end{align*}
-for some finite constant $C$.
+Note that the remaining integral $C = \iiint \frac{dx\,dy\,dz}{1-(1-xy)z}$ converges to a finite positive constant (it actually evaluates to $2\zeta(3)$). This confirms the upper bound does not blow up to infinity, and $C$ is indeed a valid, independent constant.
 
 	\textbf{(d)} Write $X_n=A_n\,\zeta(3)+B_n=2d_n^3 I_n$. By (a), $|X_n|\ge \tfrac{1}{q}$ if $\zeta(3)$ were rational. But from (c) and $d_n<3^n$ we get
 \[ |X_n|=2d_n^3 I_n < 2\,(3^n)^3\,C\,(\sqrt{2}-1)^{4n} = 2C\,\big(27(\sqrt{2}-1)^4\big)^n, \]
@@ -369,7 +378,7 @@ A puzzle game requires you to completely tile a $2 \times n$ rectangular grid us
     \item[(ii)] The sequence can be expressed in the explicit form $W_n = A\alpha^n + B\beta^n + C\gamma^n$, where $\alpha, \beta, \gamma$ are the roots of the characteristic polynomial $P(z) = z^3 - z^2 - z - 2 = 0$.
     Show that the roots are $z = 2$ and $z = \operatorname{cis}\!\left(\pm \dfrac{2\pi}{3}\right)$.
 
-    \item[(iii)] Given $W_0 = 1$, $W_1 = 1$, $W_2 = 2$, establish a system of equations for $n = 0, 1, 2$. By summing these equations and utilising the properties of the complex cube roots of unity, prove that $A = \dfrac{4}{7}$.
+    \item[(iii)] Given $W_0 = 1$ \textit{(Note: By mathematical convention for the empty grid, $W_0 = 1$)}, $W_1 = 1$, $W_2 = 2$, establish a system of equations for $n = 0, 1, 2$. By summing these equations and utilising the properties of the complex cube roots of unity, prove that $A = \dfrac{4}{7}$.
 
     \item[(iv)] Hence, deduce the exact closed-form expression for $W_n$ purely in terms of real numbers, and formally show that $\displaystyle\lim_{n \to \infty} \frac{W_{n+1}}{W_n} = 2$.
 \end{enumerate}
@@ -391,7 +400,14 @@ A puzzle game requires you to completely tile a $2 \times n$ rectangular grid us
 \[A+B+C=1,\quad 2A+B\omega+C\bar\omega=1,\quad 4A+B\omega^2+C\bar\omega^2=2.\]
 Summing: $7A + B(1+\omega+\omega^2)+C(1+\bar\omega+\bar\omega^2)=4$. Since $1+\omega+\omega^2=0$, this gives $7A=4$, so $A=\tfrac{4}{7}$.
 
-\smallskip\textbf{(iv)} Since $W_n\in\mathbb{R}$, write $B=u+vi$, $C=u-vi$. From $n=0$: $\tfrac{4}{7}+2u=1\Rightarrow u=\tfrac{3}{14}$. From $n=1$: $B\omega+C\bar\omega=2\operatorname{Re}(B\omega)=-u-v\sqrt{3}=-\tfrac{1}{7}$, so $v=\tfrac{-1}{14\sqrt{3}}$. By De Moivre's Theorem:
+\smallskip\textbf{(iv)} Since $W_n\in\mathbb{R}$, write $B=u+vi$, $C=u-vi$. From $n=0$: $\tfrac{4}{7}+2u=1\Rightarrow u=\tfrac{3}{14}$. From $n=1$: $B\omega+C\bar\omega=2\operatorname{Re}(B\omega)=-u-v\sqrt{3}=-\tfrac{1}{7}$, so $v=-\tfrac{1}{14\sqrt{3}}$. 
+
+To convert to real trigonometric functions, we explicitly expand the complex conjugate terms using De Moivre's Theorem:
+\begin{align*}
+B\omega^n + C\bar{\omega}^n &= 2\operatorname{Re}\left( (u+vi)\left(\cos \frac{2n\pi}{3} + i\sin \frac{2n\pi}{3}\right) \right) \\
+&= 2\left(u\cos\frac{2n\pi}{3} - v\sin\frac{2n\pi}{3}\right)
+\end{align*}
+Showing the $i^2 = -1$ explains why the imaginary components produce a $-v\sin\frac{2n\pi}{3}$ term. Substituting $u = \frac{3}{14}$ and $v = -\frac{1}{14\sqrt{3}}$, the negative $v$ value creates a positive sine term in the final answer:
 \[\boxed{W_n = \frac{4}{7}\cdot 2^n + \frac{3}{7}\cos\frac{2n\pi}{3} + \frac{\sqrt{3}}{21}\sin\frac{2n\pi}{3}.}\]
 The trig terms are bounded while $2^n\to\infty$, so $W_n\sim\tfrac{4}{7}\cdot 2^n$ and
 $\displaystyle\lim_{n\to\infty}\frac{W_{n+1}}{W_n}=\lim_{n\to\infty}\frac{\frac{4}{7}\cdot 2^{n+1}}{\frac{4}{7}\cdot 2^n}=2$.

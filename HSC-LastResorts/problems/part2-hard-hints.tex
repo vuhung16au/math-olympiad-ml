@@ -11,10 +11,10 @@ Find the normal line to the curve at a general point. The circle's center lies o
 \end{hint}
 
 \begin{solution}
-Gradient of $y=\cos x$ is $m_T = -\sin p$.
-Gradient of Normal is $m_N = \frac{1}{\sin p} = \csc p$.
-The line $CP$ connects $(0,k)$ and $(p, \cos p)$.
-Slope $m_{CP} = \frac{\cos p - k}{p - 0}$.
+Gradient of $y=\cos x$ at $P$ is $m_T = -\sin p$.
+Gradient of Normal is $m_N = \frac{1}{\sin p} = \csc p$ (assuming $p \neq n\pi$).
+Because the circle and the curve share a tangent at $P$, the circle's radius $CP$ must be perpendicular to that tangent line. Therefore, $CP$ lies precisely on the normal line.
+The line $CP$ connects $(0,k)$ and $(p, \cos p)$, so its slope is $m_{CP} = \frac{\cos p - k}{p - 0}$.
 Equating slopes: $\frac{\cos p - k}{p} = \frac{1}{\sin p}$.
 $\cos p - k = \frac{p}{\sin p} \implies k = \cos p - p \csc p$.
 
@@ -224,7 +224,8 @@ Use integration by parts for the reduction formula (split $x^n=x^{n-1}\cdot x$).
 Let $u=x^{n-1}$ and $dv=\dfrac{x}{\sqrt{1-x^2}}dx$, so $du=(n-1)x^{n-2}dx$ and $v=-\sqrt{1-x^2}$. Integration by parts gives
 \[U_n=\left[-x^{n-1}\sqrt{1-x^2}\right]_0^1+(n-1)\int_0^1 x^{n-2}\sqrt{1-x^2}\,dx.
 \]
-Rewrite $\sqrt{1-x^2}=\dfrac{1-x^2}{\sqrt{1-x^2}}$ in the integral to obtain
+The boundary term evaluates to $0$ at $x=1$ because of the $\sqrt{1-x^2}$ factor, and it evaluates to $0$ at $x=0$ specifically because $n \ge 2$, meaning the $x^{n-1}$ term is at least $x^1$.
+Rewrite $\sqrt{1-x^2}=\dfrac{1-x^2}{\sqrt{1-x^2}}$ in the remaining integral to obtain
 \[U_n=(n-1)(U_{n-2}-U_n),\]
 hence $U_n=\dfrac{n-1}{n}U_{n-2}$.
 
@@ -261,7 +262,7 @@ and taking square roots yields the familiar central binomial asymptotic
     \item \textbf{The Weight Function:} 
     The term $\frac{1}{\sqrt{1-x^2}}$ appearing in the integrand is the 
     characteristic weight that makes Chebyshev polynomials orthogonal.
-    $$\int_{-1}^1 T_n(x) T_m(x) \frac{dx}{\sqrt{1-x^2}} = 0 \quad \text{for } n \neq m$$
+    $$\int_{-1}^1 \frac{T_n(x) T_m(x)}{\sqrt{1-x^2}} \, dx = 0 \quad \text{for } n \neq m$$
 \end{enumerate}
 \end{takeaways}
 
@@ -277,6 +278,7 @@ Use the triangle inequality to bound the polynomial by the sum of absolute value
 \end{hint}
 
 \begin{solution}
+First, note that if $z=0$, then $P(0) = 0$, which contradicts $P(z)=1$. Therefore $z \neq 0$, meaning $|z| > 0$.
 Assume $|z| \le \frac{1}{3}$.
 \[ 1 = |P(z)| = \left| \sum_{k=1}^n a_k z^k \right| \]
 \[ 1 \le \sum_{k=1}^n |a_k| |z|^k \]
@@ -317,7 +319,7 @@ Replace $|c_k|$ with $M$:
 \[ |z|^n \le M (|z|^{n-1} + \dots + |z| + 1) \]
 Sum the geometric progression (ratio $|z| > 1$):
 \[ |z|^n \le M \frac{|z|^n - 1}{|z| - 1} \]
-Since $|z|^n - 1 < |z|^n$:
+Since $|z|^n - 1 < |z|^n$ (which is strictly true because $|z| \ge 1 > 0$):
 \[ |z|^n < M \frac{|z|^n}{|z| - 1} \]
 Divide by $|z|^n$ (which is non-zero):
 \[ 1 < \frac{M}{|z| - 1} \]
@@ -377,6 +379,7 @@ x=\cos\left(\frac{\pi}{9}\right),\quad
 \cos\left(\frac{5\pi}{9}\right),\quad
 \cos\left(\frac{7\pi}{9}\right).
 \]
+Since a polynomial of degree 3 can have at most 3 roots in the complex plane, and we have found 3 distinct real roots, these are all the solutions.
 \end{solution}
 
 \begin{takeaways}
@@ -387,91 +390,6 @@ x=\cos\left(\frac{\pi}{9}\right),\quad
 \end{enumerate}
 \end{takeaways}
 
-% Problem 5: Advanced Polynomial Root Clustering (Sample 23)
-\begin{problem}[Polynomial Root Clustering and Complex Analysis]
-Consider the polynomial $P(z) = z^5 + az^4 + bz^3 + cz^2 + dz + e$ where all coefficients are real.
-
-(a) Suppose all roots of $P(z)$ lie within the unit circle $|z| \leq 1$. Prove that $|e| \leq 1$.
-
-(b) If exactly three roots lie within $|z| < 1$ and two roots lie outside, show that there exists a root $\alpha$ with $|\alpha| = 1$.
-
-(c) Given that $P(z)$ has roots $r_1, r_2, r_3, r_4, r_5$ with $|r_1| = |r_2| = |r_3| = 1$ and $|r_4|, |r_5| < 1$, prove that:
-\[ |a + \overline{r_4} + \overline{r_5}| \geq 3 \]
-
-(d) Use Rouché's theorem to determine conditions on the coefficients ensuring exactly $k$ roots lie in $|z| < R$ for given $k$ and $R$.
-\end{problem}
-
-\textbf{Rouché's Theorem:} 
-Let $f(z)$ and $g(z)$ be analytic functions inside and on a simple closed curve $C$. 
-If $|f(z) - g(z)| < |g(z)|$ for all $z$ on $C$, 
-then $f(z)$ and $g(z)$ have the same number of zeros (counting multiplicities) inside $C$.
-Do \textbf{NOT} prove this theorem - use it as given.
-
-
-
-
-\begin{hint}
-For part (a), use the maximum modulus principle. For part (b), apply the intermediate value theorem to $|P(z)|$ on the unit circle. Part (c) requires careful analysis of Vieta's formulas combined with the triangle inequality. Part (d) involves comparing $P(z)$ with simpler polynomials using Rouché's theorem.
-
-\end{hint}
-
-\begin{solution}
-\textbf{(a) Maximum modulus bound:} Let the roots be $z_1,z_2,z_3,z_4,z_5$. By Vi\`ete's formulas,
-\[
-e=(-1)^5\prod_{k=1}^5 z_k=-z_1z_2z_3z_4z_5,
-\]
-so
-\[
-|e|=\prod_{k=1}^5|z_k|\le 1^5=1
-\]
-whenever every root satisfies $|z_k|\le 1$.
-
-\textbf{(b) Continuity argument:} If exactly three roots lie in $|z|<1$ and two lie outside, then the number of roots inside the circle can change only when a root crosses the boundary. Hence at least one root must lie on the unit circle, so there exists $\alpha$ such that $|\alpha|=1$.
-
-\textbf{(c) Vi\`ete's analysis:} From Vi\`ete's formulas,
-\[
-a=-(r_1+r_2+r_3+r_4+r_5).
-\]
-Since $|r_1|=|r_2|=|r_3|=1$, write $r_j=e^{i\theta_j}$ for $j=1,2,3$. Then
-\[
-\begin{aligned}
-a+\overline{r_4}+\overline{r_5}
-&=-(e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3}+r_4+r_5)+\overline{r_4}+\overline{r_5}\\
-&=-(e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3})+(r_4-\overline{r_4})+(r_5-\overline{r_5})\\
-&=-(e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3})+2i\bigl(\operatorname{Im}(r_4)+\operatorname{Im}(r_5)\bigr).
-\end{aligned}
-\]
-Therefore, by the reverse triangle inequality,
-\[
-|a+\overline{r_4}+\overline{r_5}|
-\ge
-\left|e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3}\right|
--2\left|\operatorname{Im}(r_4)+\operatorname{Im}(r_5)\right|.
-\]
-For three points on the unit circle, the minimum of $\left|e^{i\theta_1}+e^{i\theta_2}+e^{i\theta_3}\right|$ occurs when they are equally spaced, giving $3\cos(\pi/3)=3/2$. Also, $|r_4|,|r_5|<1$ implies $|\operatorname{Im}(r_4)|<1$ and $|\operatorname{Im}(r_5)|<1$. Combining these geometric constraints gives
-\[
-|a+\overline{r_4}+\overline{r_5}|\ge 3.
-\]
-
-\textbf{(d) Rouch\'e's theorem application:} To guarantee exactly $k$ roots in $|z|<R$, compare $P(z)$ with $z^k$ on $|z|=R$. If
-\[
-|P(z)-z^k|<|z^k|=R^k\qquad\text{for all }|z|=R,
-\]
-then Rouch\'e's theorem shows that $P(z)$ and $z^k$ have the same number of zeros inside $|z|<R$. Here this means requiring
-\[
-|az^4+bz^3+cz^2+dz+e|<R^k\qquad (|z|=R),
-\]
-which leads to coefficient conditions in terms of $R$ and the desired root count $k$.
-\end{solution}
-
-\begin{takeaways}
-\begin{enumerate}
-    \item \textbf{Maximum Modulus Principle:} Fundamental tool for bounding polynomial coefficients from root locations.
-    \item \textbf{Rouché's Theorem:} Powerful method for counting roots in regions by comparing with simpler functions.
-    \item \textbf{Root Clustering:} Complex analysis provides deep insights into polynomial root distributions.
-    \item \textbf{Geometric Analysis:} Root locations on the unit circle have geometric interpretations affecting coefficient bounds.
-\end{enumerate}
-\end{takeaways}
 
 % Problem 6: Infinite Series Bounds (Sample 26)
 \begin{problem}[Complex Series and Geometric Bounds]
@@ -732,7 +650,8 @@ By the squeeze theorem, $\displaystyle \lim_{n \to \infty} \prod_{k=1}^{n} \left
 \[ \ln \left(\prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right)\right) = \sum_{k=1}^n \ln\left(1 + \frac{k}{n^2}\right) \]
 For small $x$ (see (i)), $\ln(1+x) \approx x$. With $x = k/n^2$:
 \[ \sum_{k=1}^n \ln\left(1 + \frac{k}{n^2}\right) \approx \sum_{k=1}^n \frac{k}{n^2} = \frac{1}{n^2} \cdot \frac{n(n+1)}{2} = \frac{n+1}{2n} \]
-This is a Riemann sum for $\int_0^1 x \, dx$ with partition width $\Delta x = 1/n$ and sample points $x_k = k/n$:
+This is a Riemann sum for $\int_0^1 x \, dx$ with partition width $\Delta x = 1/n$ and sample points $x_k = k/n$.
+As $n \to \infty$, the limit of the Riemann sum evaluates precisely to the definite integral: $\lim_{n \to \infty} \sum_{k=1}^n \frac{k}{n} \cdot \frac{1}{n} = \int_0^1 x \, dx$.
 \[ \sum_{k=1}^n \frac{k}{n} \cdot \frac{1}{n} = \frac{1}{n^2}\sum_{k=1}^n k \to \int_0^1 x \, dx = \frac{1}{2} \]
 Therefore, $\displaystyle \lim_{n \to \infty} \ln \left(\prod_{k=1}^{n} \left(1 + \frac{k}{n^2}\right)\right) = \int_{0}^{1} x \, dx = \frac{1}{2}$.
 \end{solution}

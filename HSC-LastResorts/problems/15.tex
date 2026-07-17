@@ -87,11 +87,11 @@ If $|z|\ge1$, then $\bigl||z|-1\bigr|=|z|-1$, hence
 \[
 |z_{n+1}|=|z_n^2+c|\ge |z_n|^2-|c|.
 \]
-Now suppose $|z_n|\ge |c|$. Then
+Assume $|z_k|\ge |c|$. Since we are given $|c|>2$, it follows that $|z_k|>2$. Substituting this into our inequality gives:
 \[
-|z_{n+1}|\ge |z_n|^2-|c|\ge |z_n|^2-|z_n|=|z_n|(|z_n|-1).
+|z_{k+1}|\ge |z_k|^2-|c|\ge |z_k|^2-|z_k|=|z_k|(|z_k|-1) > |z_k|(2 - 1) = |z_k| \ge |c|.
 \]
-If also $|z_n|\ge2$, this gives $|z_{n+1}|\ge |z_n|\ge2$. Since $|z_1|=|c|>2$, induction yields $|z_n|\ge2$ for all $n\ge1$, and in fact the moduli are non-decreasing. Therefore $|z_n|$ grows without bound, so $c\notin\mathcal M$.
+This proves $|z_{k+1}| \ge |c|$, completing the induction (since $|z_1| = |c| \ge |c|$ for the base case). Furthermore, because $|z_{k+1}| > |z_k|$, it proves the sequence of moduli strictly increases with every step, and thus grows without bound. Therefore, $c\notin\mathcal M$.
 
 \textbf{(iv)} For $c=2+i$,
 \[

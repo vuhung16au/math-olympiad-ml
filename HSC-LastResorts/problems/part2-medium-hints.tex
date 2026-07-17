@@ -131,8 +131,8 @@ so $1<r/(1-r)$, giving $r>1/2$.
 (a) Let $x, y, z$ be positive real numbers. Prove that:
 \[ (x + y + z)\left(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}\right) \ge 9 \]
 
-(b) A plane passes through the fixed point $P(a, b, c)$ where $a,b,c > 0$. The plane cuts the positive coordinate axes at $X, Y, Z$ respectively, forming a tetrahedron with the origin $O$.
-Show that the minimum volume of the tetrahedron $OXYZ$ is $\frac{9}{2}abc$.
+(b) A plane passes through the fixed point $P(a, b, c)$ where $a,b,c > 0$. The plane cuts the positive coordinate axes at $X(x_0,0,0), Y(0,y_0,0), Z(0,0,z_0)$.
+Show that the minimum sum of the intercepts $S = x_0 + y_0 + z_0$ is $(\sqrt{a} + \sqrt{b} + \sqrt{c})^2$.
 
 \vspace{1cm}
 
@@ -184,40 +184,28 @@ Show that the minimum volume of the tetrahedron $OXYZ$ is $\frac{9}{2}abc$.
 \end{problem}
 
 \begin{hint}
-Apply Cauchy-Schwarz to vectors formed by coordinates and reciprocals. The volume formula involves the product of intercepts.
+Apply Cauchy-Schwarz to vectors formed by coordinates and reciprocals for part (a). For part (b), apply Cauchy-Schwarz directly to the constraint equation to minimize the sum.
 \end{hint}
 
 \begin{solution}
 \textbf{(a) Proof:}
-Apply AM-GM to the sums separately.
-
-1. $(x+y+z) \ge 3\sqrt[3]{xyz}$
-
-2. $(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}) \ge 3\sqrt[3]{\frac{1}{xyz}}$
-
-Multiplying the inequalities (since all terms are positive):
-
-\[ (x+y+z)\left(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}\right) \ge \left(3\sqrt[3]{xyz}\right) \left(\frac{3}{\sqrt[3]{xyz}}\right) = 9 \]
+By Cauchy--Schwarz on vectors $(\sqrt{x}, \sqrt{y}, \sqrt{z})$ and $(\frac{1}{\sqrt{x}}, \frac{1}{\sqrt{y}}, \frac{1}{\sqrt{z}})$:
+\[
+    (x+y+z)\Big(\frac{1}{x}+\frac{1}{y}+\frac{1}{z}\Big) \ge \left( \sqrt{x} \cdot \frac{1}{\sqrt{x}} + \sqrt{y} \cdot \frac{1}{\sqrt{y}} + \sqrt{z} \cdot \frac{1}{\sqrt{z}} \right)^2 = (1+1+1)^2 = 9
+\]
+with equality when $x=y=z$.
 
 \textbf{(b) Application:}
-Let the intercepts be $X(x_0, 0, 0)$, $Y(0, y_0, 0)$, and $Z(0, 0, z_0)$.
-The equation of the plane is:
-\[ \frac{x}{x_0} + \frac{y}{y_0} + \frac{z}{z_0} = 1 \]
+The equation of the plane is $\frac{x}{x_0} + \frac{y}{y_0} + \frac{z}{z_0} = 1$.
 Since the plane passes through $P(a,b,c)$:
 \[ \frac{a}{x_0} + \frac{b}{y_0} + \frac{c}{z_0} = 1 \]
-The Volume of the tetrahedron is $V = \frac{1}{6} x_0 y_0 z_0$. We want to minimize this product.
-Apply AM-GM to the three terms summing to 1:
+We want to minimize the sum $S = x_0 + y_0 + z_0$.
+Applying Cauchy-Schwarz to the vectors $(\sqrt{x_0}, \sqrt{y_0}, \sqrt{z_0})$ and $(\sqrt{\frac{a}{x_0}}, \sqrt{\frac{b}{y_0}}, \sqrt{\frac{c}{z_0}})$:
 \begin{align*}
-    \frac{\frac{a}{x_0} + \frac{b}{y_0} + \frac{c}{z_0}}{3} &\ge \sqrt[3]{\frac{abc}{x_0 y_0 z_0}} \\
-    \frac{1}{3} &\ge \sqrt[3]{\frac{abc}{6V}} \quad (\text{Since } x_0 y_0 z_0 = 6V)
+    (x_0 + y_0 + z_0)\left(\frac{a}{x_0} + \frac{b}{y_0} + \frac{c}{z_0}\right) &\ge (\sqrt{a} + \sqrt{b} + \sqrt{c})^2 \\
+    S \cdot (1) &\ge (\sqrt{a} + \sqrt{b} + \sqrt{c})^2
 \end{align*}
-Cube both sides:
-\begin{align*}
-    \frac{1}{27} &\ge \frac{abc}{6V} \\
-    6V &\ge 27abc \\
-    V &\ge \frac{9}{2}abc
-\end{align*}
-Thus, the minimum volume is $\frac{9}{2}abc$. \hfill $\square$
+Thus, the minimum sum of the intercepts is $(\sqrt{a} + \sqrt{b} + \sqrt{c})^2$. \hfill $\square$
 \end{solution}
 
 \begin{takeaways}
@@ -228,12 +216,11 @@ Thus, the minimum volume is $\frac{9}{2}abc$. \hfill $\square$
 \end{takeaways}
 
 \begin{remark}[Alternate proof for part (a)]
-By Cauchy--Schwarz,
+By AM-GM on $(x+y+z)$ and $(\frac{1}{x}+\frac{1}{y}+\frac{1}{z})$ separately:
 \[
-    (x+y+z)\Big(\tfrac{1}{x}+\tfrac{1}{y}+\tfrac{1}{z}\Big)
-    \ge (1+1+1)^2 = 9,
+    (x+y+z)\left(\frac{1}{x} + \frac{1}{y} + \frac{1}{z}\right) \ge \left(3\sqrt[3]{xyz}\right) \left(\frac{3}{\sqrt[3]{xyz}}\right) = 9
 \]
-with equality at $x=y=z$. This gives the same bound in one step.
+This gives the same bound using products instead of vector projections.
 \end{remark}
 
 % Problem 3: Sphere Inscriptions (Sample 04)
@@ -278,7 +265,7 @@ Let the three terms be $u^2, v^2, w^2$. Applying AM-GM:
 
 \textbf{(b) Application:}
 Let the dimensions of the prism be $x, y, z$.
-The prism is inscribed in a sphere of radius $R$, meaning the space diagonal of the prism equals the diameter of the sphere ($2R$).
+The prism is inscribed in a sphere of radius $R$, meaning the space diagonal of the prism equals the diameter of the sphere ($2R$). By applying the Pythagorean theorem twice (once for the base diagonal, and once using the height to find the space diagonal), the square of the space diagonal is $x^2 + y^2 + z^2$.
 \[ x^2 + y^2 + z^2 = (2R)^2 = 4R^2 \quad (\text{Constant}) \]
 We wish to maximize the Volume $V = xyz$.
 Substitute $u=x, v=y, w=z$ into the inequality from part (a):
@@ -350,7 +337,11 @@ Use De Moivre's theorem to express $\sin(n\theta)$ in terms of $z = e^{i\theta}$
     $$C = \frac{\alpha^{-n}(\alpha^{2n+1} - 1)}{\alpha - 1} = \frac{\alpha^{n+1} - \alpha^{-n}}{\alpha - 1}$$
     Multiply by $\frac{\bar{\alpha} - 1}{\bar{\alpha} - 1}$:
     $$C = \frac{(\alpha^{n+1} - \alpha^{-n})(\bar{\alpha} - 1)}{(\alpha - 1)(\bar{\alpha} - 1)}$$
-    Since $(\alpha - 1)(\bar{\alpha} - 1) = 2(1-\cos\theta)$ and expanding the numerator:
+    Since $|\alpha|=1$, we know $\bar{\alpha} = \alpha^{-1}$. Expanding the numerator yields:
+    $$(\alpha^{n+1} - \alpha^{-n})(\alpha^{-1} - 1) = \alpha^n - \alpha^{n+1} - \alpha^{-n-1} + \alpha^{-n} = \alpha^n + \alpha^{-n} - (\alpha^{n+1} + \alpha^{-(n+1)})$$
+    For the denominator, expanding yields:
+    $$(\alpha - 1)(\bar{\alpha} - 1) = \alpha\bar{\alpha} - \alpha - \bar{\alpha} + 1 = |\alpha|^2 - (\alpha + \bar{\alpha}) + 1 = 1 - 2\cos\theta + 1 = 2(1-\cos\theta)$$
+    Substituting these back into the expression for $C$:
     $$C = \frac{\alpha^n + \alpha^{-n} - (\alpha^{n+1} + \alpha^{-(n+1)})}{(1-\alpha)(1-\bar{\alpha})}$$
 
     \item From the definition: $C = 1 + \sum_{k=1}^n (\alpha^k + \alpha^{-k}) = 1 + 2\sum_{k=1}^n \cos k\theta$
@@ -464,8 +455,8 @@ and the base case $a_1=2\ge\sqrt2$ holds, so $a_n\ge\sqrt2$ for all $n$.
 	\textbf{(iii)} From $b_k=2/a_k$ we get
 \[a_{k+1}=\frac{a_k+\frac{2}{a_k}}{2}=\frac{a_k^2+2}{2a_k}.
 \]
-Subtracting $\sqrt2$ and simplifying yields
-\[a_{k+1}-\sqrt2=\frac{(a_k-\sqrt2)^2}{2a_k}.
+Subtracting $\sqrt2$ and expanding the numerator to form a perfect square yields:
+\[a_{k+1}-\sqrt2 = \frac{a_k^2+2}{2a_k} - \frac{2\sqrt{2}a_k}{2a_k} = \frac{a_k^2 - 2\sqrt{2}a_k + 2}{2a_k} = \frac{(a_k-\sqrt2)^2}{2a_k}.
 \]
 Since $a_k\ge\sqrt2$, the factor $1/(2a_k)\le 1/(2\sqrt2)<\tfrac12$, hence
 \[a_{k+1}-\sqrt2\le \tfrac12 (a_k-\sqrt2).
@@ -562,9 +553,19 @@ For (iv) equate the two expressions for $I_n$ and simplify.
 \end{hint}
 
 \begin{solution}
-	\textbf{(i)} Integration by parts with $u=x^n$, $v=\tfrac{2}{3}(x+1)^{3/2}$ yields after rearrangement
-\[I_n=\frac{-2n}{2n+3}I_{n-1}.
-\]
+	\textbf{(i)} Use integration by parts with $u=x^n$ and $dv=(x+1)^{1/2}\,dx$, which gives $du = n x^{n-1}\,dx$ and $v=\frac{2}{3}(x+1)^{3/2}$.
+\begin{align*}
+I_n &= \left[ \frac{2}{3}x^n(x+1)^{3/2} \right]_{-1}^0 - \int_{-1}^0 \frac{2n}{3} x^{n-1}(x+1)^{3/2}\,dx \\
+&= 0 - \frac{2n}{3} \int_{-1}^0 x^{n-1}(x+1)\sqrt{x+1}\,dx \\
+&= -\frac{2n}{3} \int_{-1}^0 (x^n\sqrt{x+1} + x^{n-1}\sqrt{x+1})\,dx \\
+&= -\frac{2n}{3} (I_n + I_{n-1})
+\end{align*}
+Multiplying by 3 and gathering the $I_n$ terms to the left side:
+\begin{align*}
+3I_n &= -2n I_n - 2n I_{n-1} \\
+(2n+3)I_n &= -2n I_{n-1} \\
+I_n &= \frac{-2n}{2n+3}I_{n-1}.
+\end{align*}
 
 	\textbf{(ii)} $I_0=\int_{-1}^0 (x+1)^{1/2}dx=\tfrac{2}{3}$. Repeated application of the reduction gives the stated closed form.
 	

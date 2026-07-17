@@ -12,8 +12,6 @@ The angular velocity satisfies:
 \]
 where $g$ is the acceleration due to gravity. Let $T$ be the time taken for the pendulum 
 to swing from the horizontal position ($\theta=\tfrac{\pi}{2}$) to the vertical position ($\theta=0$).
-We can note that for small oscillations, $\cos\theta\approx1$, 
-so $T \approx \sqrt{\frac{l}{2g}} \cdot \frac{\pi}{2}$. (Do NOT prove this approximation.)
 
 \begin{enumerate}[label=(\roman*)]
     \item By using the substitution $\sin(\tfrac{\theta}{2}) = \tfrac{1}{\sqrt{2}}\sin\phi$, show that:
@@ -79,7 +77,9 @@ so $T \approx \sqrt{\frac{l}{2g}} \cdot \frac{\pi}{2}$. (Do NOT prove this appro
 \textbf{(i)} From energy, $d\theta/dt=-\sqrt{(2g/l)\cos\theta}$ for the downward swing. Thus
 \[T=\sqrt{\tfrac{l}{2g}}\int_0^{\pi/2}\frac{d\theta}{\sqrt{\cos\theta}}.
 \]
-With $\sin(\theta/2)=\tfrac{1}{\sqrt2}\sin\phi$ one finds $\cos\theta=\cos^2\phi$ and
+With $\sin(\theta/2)=\tfrac{1}{\sqrt2}\sin\phi$, we have $\cos\theta = 1 - 2\sin^2(\theta/2) = 1 - \sin^2\phi = \cos^2\phi$.
+Differentiating the substitution gives $\frac{1}{2}\cos\left(\frac{\theta}{2}\right) d\theta = \frac{1}{\sqrt{2}}\cos\phi \, d\phi$. 
+Since $\cos\left(\frac{\theta}{2}\right) = \sqrt{1 - \sin^2\left(\frac{\theta}{2}\right)} = \sqrt{1 - \frac{1}{2}\sin^2\phi}$, we rearrange to find:
 \[d\theta=\frac{\sqrt{2}\cos\phi}{\sqrt{1-\tfrac{1}{2}\sin^2\phi}}\,d\phi,
 \]
 which yields the stated integral.

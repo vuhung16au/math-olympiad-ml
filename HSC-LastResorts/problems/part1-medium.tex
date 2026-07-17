@@ -69,9 +69,9 @@ Therefore, the prism is a cube. \hfill $\square$
 
 \begin{takeaways}
 \begin{enumerate}
-    \item \textbf{Infinite vs Finite Sums:} Often, calculating the infinite geometric series sum is easier and sufficient. If the infinite sum creates a contradiction ($< 1$), then the finite sum definitely will too.
+    \item \textbf{Factoring Strategy:} Recognizing that factoring out the volume product ($abc$) from the surface area expression ($ab+bc+ca$) perfectly isolates the sum of the reciprocals.
 
-    \item \textbf{Strict Inequalities:} Geometric series of positive terms are always strictly less than their limit at infinity.
+    \item \textbf{The Equality Condition:} Emphasizing that optimization using AM-GM relies entirely on the equality condition—the minimum or maximum is strictly achieved when all terms are equal (i.e., $a=b=c$).
 \end{enumerate}
 \end{takeaways}
 
@@ -188,30 +188,25 @@ Show that $z_1, z_2, z_3$ represent the vertices of an equilateral triangle insc
 \end{problem}
 
 \begin{hint}
-To prove a triangle is equilateral, you can prove the sides are equal: $|z_1-z_2|^2 = |z_2-z_3|^2 = |z_3-z_1|^2$.
-Expand $|z_1-z_2|^2 = (z_1-z_2)(\overline{z_1}-\overline{z_2})$.
-Use the fact that $z_1+z_2+z_3=0 \implies z_1+z_2 = -z_3$.
+For an algebraic approach, use $z_1+z_2 = -z_3$ and apply the parallelogram law relating $|z_1+z_2|^2$ and $|z_1-z_2|^2$.
+For a geometric approach, where is the centroid of this triangle? Where is its circumcenter?
 \end{hint}
 
 \begin{solution}
-Consider the squared side length $|z_1 - z_2|^2$:
-\begin{align*}
-    |z_1 - z_2|^2 &= (z_1 - z_2)(\bar{z}_1 - \bar{z}_2) \\
-    &= z_1\bar{z}_1 + z_2\bar{z}_2 - z_1\bar{z}_2 - z_2\bar{z}_1 \\
-    &= r^2 + r^2 - (z_1\bar{z}_2 + z_2\bar{z}_1) \\
-    &= 2r^2 - 2\text{Re}(z_1\bar{z}_2)
-\end{align*}
-Now consider the condition $(\sum z)(\sum \bar{z}) = 0 \cdot 0 = 0$.
-\[ |z_1|^2 + |z_2|^2 + |z_3|^2 + (z_1\bar{z}_2 + \text{others}) = 0 \]
-\[ 3r^2 + (z_1\bar{z}_2 + z_2\bar{z}_1) + \dots = 0 \]
-Alternatively, simplify the algebra:
-Since $z_1 + z_2 = -z_3$, squaring modulus:
-$|z_1+z_2|^2 = |-z_3|^2 \implies |z_1+z_2|^2 = r^2$.
+\textbf{Method 1 (Algebraic - Parallelogram Law):}
+Since $z_1 + z_2 + z_3 = 0$, we have $z_1 + z_2 = -z_3$. 
+Squaring the modulus of both sides:
+\[ |z_1+z_2|^2 = |-z_3|^2 \implies |z_1+z_2|^2 = r^2 \]
 Using the parallelogram law $|z_1+z_2|^2 + |z_1-z_2|^2 = 2(|z_1|^2+|z_2|^2)$:
 \[ r^2 + |z_1-z_2|^2 = 2(r^2 + r^2) \]
 \[ |z_1-z_2|^2 = 3r^2 \]
 By symmetry, $|z_2-z_3|^2 = 3r^2$ and $|z_3-z_1|^2 = 3r^2$.
-Since all sides are equal ($\sqrt{3}r$), the triangle is equilateral.
+Since all squared side lengths are equal to $3r^2$, the triangle is equilateral.
+
+\textbf{Method 2 (Geometric):}
+The centroid of the triangle is given by $\frac{z_1+z_2+z_3}{3} = 0$, which is the origin.
+The circumcenter is also the origin, since all vertices lie on the circle $|z|=r$.
+In any triangle, if the centroid and the circumcenter coincide, the triangle must be equilateral.
 \end{solution}
 
 \begin{takeaways}
@@ -245,11 +240,25 @@ Squared distance:
 \[ S(t) = (t^2 - 6t + 9) + 4 + (t^2 - 4t + 4) \]
 \[ S(t) = 2t^2 - 10t + 17 \]
 
-\textbf{(ii)} To minimize $S(t)$, find $S'(t) = 4t - 10$.
+\textbf{(ii)} To minimize $S(t)$, we can use calculus or algebra.
+
+\textbf{Method 1 (Calculus):}
+Find $S'(t) = 4t - 10$.
 Set $4t - 10 = 0 \implies t = 2.5$.
 Substitute $t=2.5$ back into $S(t)$:
 \[ S(2.5) = 2(6.25) - 25 + 17 = 12.5 - 25 + 17 = 4.5 \]
-Minimum distance = $\sqrt{4.5} = \sqrt{\frac{9}{2}} = \frac{3}{\sqrt{2}} = \frac{3\sqrt{2}}{2}$.
+
+\textbf{Method 2 (Algebra - Completing the Square):}
+Rewrite $S(t)$ by completing the square:
+\begin{align*}
+    S(t) &= 2(t^2 - 5t) + 17 \\
+    &= 2\left(t^2 - 5t + 6.25\right) - 2(6.25) + 17 \\
+    &= 2(t - 2.5)^2 - 12.5 + 17 \\
+    &= 2(t - 2.5)^2 + 4.5
+\end{align*}
+This instantly yields the vertex at $t = 2.5$ and the minimum squared distance of $4.5$.
+
+In both cases, the minimum distance is $\sqrt{4.5} = \sqrt{\frac{9}{2}} = \frac{3}{\sqrt{2}} = \frac{3\sqrt{2}}{2}$.
 \end{solution}
 
 \begin{takeaways}
@@ -273,29 +282,29 @@ Find all complex numbers $z_1, z_2, z_3$ that satisfy the following system of eq
 
 \begin{hint}
 Do not try to substitute variables directly. Instead, assume $z_1, z_2, z_3$ are the roots of a cubic equation:
-\[ P(z) = z^3 - \sigma_1 z^2 + \sigma_2 z - \sigma_3 = 0 \]
+\[ P(z) = z^3 - e_1 z^2 + e_2 z - e_3 = 0 \]
 Use the identity for the sum of squares: $\sum z^2 = (\sum z)^2 - 2\sum z_1 z_2$.
 Then use Newton's Sums to find the sum of cubes relation:
-\[ S_3 - \sigma_1 S_2 + \sigma_2 S_1 - 3\sigma_3 = 0 \]
+\[ S_3 - e_1 S_2 + e_2 S_1 - 3e_3 = 0 \]
 where $S_k = z_1^k + z_2^k + z_3^k$.
 \end{hint}
 
 \begin{solution}
-Let $\sigma_1, \sigma_2, \sigma_3$ be the elementary symmetric polynomials. Then $z_1, z_2, z_3$ are the roots of 
-\[ P(z) = z^3 - \sigma_1 z^2 + \sigma_2 z - \sigma_3. \]
+Let $e_1, e_2, e_3$ be the elementary symmetric polynomials. Then $z_1, z_2, z_3$ are the roots of 
+\[ P(z) = z^3 - e_1 z^2 + e_2 z - e_3. \]
 
-\textbf{Step 1: Find $\sigma_1$.}
-From the first condition, $\sigma_1 = z_1 + z_2 + z_3 = 3$.
+\textbf{Step 1: Find $e_1$.}
+From the first condition, $e_1 = z_1 + z_2 + z_3 = 3$.
 
-\textbf{Step 2: Find $\sigma_2$.}
+\textbf{Step 2: Find $e_2$.}
 Use the identity $\sum z^2 = (\sum z)^2 - 2\sum z_1 z_2$:
-\[ 3 = 3^2 - 2\sigma_2 = 9 - 2\sigma_2 \]
-\[ 2\sigma_2 = 6 \implies \sigma_2 = 3 \]
+\[ 3 = 3^2 - 2e_2 = 9 - 2e_2 \]
+\[ 2e_2 = 6 \implies e_2 = 3 \]
 
-\textbf{Step 3: Find $\sigma_3$.}
-By Newton's Sums, $S_3 - \sigma_1 S_2 + \sigma_2 S_1 - 3\sigma_3 = 0$, where $S_k = \sum z_i^k$:
-\[ 3 - 3 \cdot 3 + 3 \cdot 3 - 3\sigma_3 = 0 \]
-\[ 3 - 9 + 9 - 3\sigma_3 = 0 \implies 3\sigma_3 = 3 \implies \sigma_3 = 1 \]
+\textbf{Step 3: Find $e_3$.}
+By Newton's Sums, $S_3 - e_1 S_2 + e_2 S_1 - 3e_3 = 0$, where $S_k = \sum z_i^k$:
+\[ 3 - 3 \cdot 3 + 3 \cdot 3 - 3e_3 = 0 \]
+\[ 3 - 9 + 9 - 3e_3 = 0 \implies 3e_3 = 3 \implies e_3 = 1 \]
 
 \textbf{Step 4: Solve the cubic.}
 The polynomial is $P(z) = z^3 - 3z^2 + 3z - 1$. 

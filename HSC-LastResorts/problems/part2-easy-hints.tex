@@ -14,9 +14,11 @@ Consider the geometric interpretation of $|z - z_1|/|z - z_2| < 1$. This represe
 The inequality $\frac{|z - z_1|}{|z - z_2|} < 1$ is equivalent to $|z - z_1| < |z - z_2|$.
 This means point $z$ is closer to $z_1 = 2 + i$ than to $z_2 = -1 + 2i$.
 The locus of points equidistant from two points is the perpendicular bisector of the line segment joining them.
-The midpoint of $z_1z_2$ is $\frac{(2+i) + (-1+2i)}{2} = \frac{1 + 3i}{2}$.
+The midpoint of $z_1z_2$ is $\frac{(2+i) + (-1+2i)}{2} = \frac{1 + 3i}{2}$, which is $M\left(\frac{1}{2}, \frac{3}{2}\right)$.
 The direction vector is $z_2 - z_1 = (-1+2i) - (2+i) = -3 + i$.
-The perpendicular bisector has normal vector $-3 + i$.
+The perpendicular bisector has normal vector $\begin{pmatrix} -3 \\ 1 \end{pmatrix}$.
+The Cartesian equation of the line is $-3(x - 0.5) + 1(y - 1.5) = 0 \implies y = 3x$.
+Because the region inequality is strictly less than ($<$), the boundary line $y=3x$ must be drawn as a \textbf{dashed/dotted line}.
 The region where $|z - z_1| < |z - z_2|$ is the half-plane containing $z_1$.
 \begin{center}
     \begin{tikzpicture}[scale=0.9]
@@ -37,7 +39,7 @@ The region where $|z - z_1| < |z - z_2|$ is the half-plane containing $z_1$.
         \coordinate (mid) at ($(zone)!0.5!(ztwo)$);
         \fill (mid) circle (1.5pt) node[below right]{$M=\left(\tfrac{1}{2},\tfrac{3}{2}\right)$};
         % Direction vector from z2-z1 = (-3,1); perpendicular direction (1,3)
-        \draw[very thick,color=teal!80!black] ($(mid)+(-2, -6)$) -- ($(mid)+(2, 6)$) node[above right]{bisector};
+        \draw[very thick,color=teal!80!black, dashed] ($(mid)+(-2, -6)$) -- ($(mid)+(2, 6)$) node[above right]{bisector};
 
         % Half-plane closer to z1 (shade lightly)
         \path[fill=blue!10] (zone) -- (ztwo) -- ($(mid)+(2,6)$) -- ($(mid)+(-2,-6)$) -- cycle;
@@ -75,8 +77,11 @@ and
 \[\vec{AC}=\vec{OC}-\vec{OA}=\mathbf{c}-\mathbf{a}.
 \]
 Their dot product is
-\[(\mathbf{a}+\mathbf{c})\cdot(\mathbf{c}-\mathbf{a})=|\mathbf{c}|^2-|\mathbf{a}|^2=0,
-\]
+\begin{align*}
+(\mathbf{a}+\mathbf{c})\cdot(\mathbf{c}-\mathbf{a}) &= \mathbf{a}\cdot\mathbf{c} - \mathbf{a}\cdot\mathbf{a} + \mathbf{c}\cdot\mathbf{c} - \mathbf{c}\cdot\mathbf{a} \\
+&= |\mathbf{c}|^2-|\mathbf{a}|^2 \\
+&= 0,
+\end{align*}
 since $|\mathbf{a}|=|\mathbf{c}|$ (both equal the circumradius). Hence $\vec{BH}\perp\vec{AC}$.
 
 \begin{center}
@@ -138,15 +143,15 @@ Let $z = x + iy$, so $\bar{z} = x - iy$.
 \end{align*}
 Therefore, $\text{Im}(2z + 3\bar{z}) = -y$.
 The constraint becomes $-y \ge 1$, which is equivalent to $y \le -1$.
-This is the region below the horizontal line $y = -1$.
+This is the region below the horizontal line $y = -1$. Because the original inequality is inclusive ($\ge$), the boundary line $y = -1$ must be drawn as a \textbf{solid line} (unlike the strict inequality in Problem 4.1).
 \begin{center}
     \begin{tikzpicture}[scale=0.9]
         % Axes
         \draw[->] (-4,0) -- (4,0) node[below right]{$x$};
         \draw[->] (0,-4) -- (0,2.5) node[above left]{$y$};
 
-        % Boundary line y = -1 (dashed)
-        \draw[dashed, thick] (-4,-1) -- (4,-1) node[right]{$y=-1$};
+        % Boundary line y = -1 (solid)
+        \draw[thick] (-4,-1) -- (4,-1) node[right]{$y=-1$};
 
         % Shade half-plane y \le -1
         \path[fill=blue!10] (-4,-4) -- (4,-4) -- (4,-1) -- (-4,-1) -- cycle;
@@ -166,6 +171,7 @@ This is the region below the horizontal line $y = -1$.
 \begin{enumerate}
     \item \textbf{Linear Combinations:} For $az + b\bar{z}$ with $z = x + iy$, substitute and collect real/imaginary parts.
     \item \textbf{Half-Plane Regions:} Constraints on $\text{Im}(...)$ or $\text{Re}(...)$ typically define half-planes.
+    \item \textbf{Boundary Inclusion:} Always check the inequality symbol; inclusive inequalities ($\le, \ge$) require a solid boundary line, while strict inequalities ($<, >$) require a dashed line.
 \end{enumerate}
 \end{takeaways}
 
@@ -210,6 +216,7 @@ This is the region below the horizontal line $y = -1$.
 \begin{solution}
 
 \textbf{(a)} The expression $\sum_{k=0}^{n} (-1)^k x^{2k} = 1 - x^2 + x^4 - \dots + (-1)^n x^{2n}$ is a geometric series.
+Note that the sum from $k=0$ to $n$ contains exactly $n+1$ terms, which is why the exponent in the numerator is $n+1$.
 Using the sum formula $S = \frac{a(1-r^{n+1})}{1-r}$:
 \[
 \sum_{k=0}^{n} (-1)^k x^{2k} = \frac{1 \cdot (1 - (-x^2)^{n+1})}{1 - (-x^2)} = \frac{1 - (-1)^{n+1}x^{2n+2}}{1+x^2}
@@ -245,7 +252,11 @@ Since the integrand is non-negative, the lower bound is 0. Thus:
 0 \le \int_{0}^{1} \frac{x^{2n+2}}{1+x^2} \, dx \le \frac{1}{2n+3}
 \]
 
-\textbf{(d)} As $n \to \infty$, $\frac{1}{2n+3} \to 0$. By the Squeeze Theorem, the remainder integral $\int_{0}^{1} \frac{x^{2n+2}}{1+x^2} \, dx \to 0$.
+\textbf{(d)} By explicitly writing the limits for the inequality from (c):
+\[
+\lim_{n \to \infty} 0 \le \lim_{n \to \infty} \int_0^1 \frac{x^{2n+2}}{1+x^2} \, dx \le \lim_{n \to \infty} \frac{1}{2n+3} \implies 0 \le \lim_{n \to \infty} \int_0^1 \frac{x^{2n+2}}{1+x^2} \, dx \le 0
+\]
+Thus, by the Squeeze Theorem, the remainder integral $\int_{0}^{1} \frac{x^{2n+2}}{1+x^2} \, dx \to 0$.
 Taking the limit $n \to \infty$ in the result from (b):
 \[
 \frac{\pi}{4} = \sum_{k=0}^{\infty} \frac{(-1)^k}{2k+1}
