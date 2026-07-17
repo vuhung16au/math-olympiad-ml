@@ -1,0 +1,62 @@
+\begin{problem}[Logarithmic Bounds on Harmonic Series]
+Let $\lg x$ denote the logarithm of $x$ to the base $10$ (i.e., $\log_{10} x$).
+\begin{enumerate}[label=(\roman*)]
+    \item By considering the graph of $y = \log_2(1+x)$ and $y = x$ for $0 \le x \le 1$, or otherwise, deduce that for all integers $n \ge 2$:
+    \[ \log_2(n+1) > 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n} \]
+    \item Use mathematical induction to prove that for all integers $n \ge 2$:
+    \[ \log_2(n!) \ge n \left( \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n} \right) \]
+    \item Given that $\lg 2 > \frac{3}{10}$, prove that the following inequality holds for any $n \in \mathbb{N}^*$, $n \ge 2$:
+    \[ \lg(n!) > \frac{3n}{10} \left( \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n} \right) \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Establish that $\log_2(1+x) \ge x$ for $x \in [0, 1]$, with equality only at the endpoints. Substitute $x = \frac{1}{k}$ and sum both sides from $k=1$ to $n$. Notice that the left side becomes a telescoping sum.
+    \item \textbf{Part (ii):} Establish the base case for $n=2$ (note that it evaluates to an equality). In the inductive step, add $\log_2(k+1)$ to your assumption and use the strict inequality derived in Part (i) to bridge the algebraic gap. Remember that $1 = (k+1) \cdot \frac{1}{k+1}$.
+    \item \textbf{Part (iii):} Use the change of base formula to express $\lg(n!)$ in terms of $\log_2(n!)$ and $\lg 2$. Then, synthesize the given numerical inequality with the algebraic result from Part (ii).
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief]
+\textbf{(i)} \\
+Let $f(x) = \log_2(1+x) - x$. We evaluate the endpoints: $f(0) = 0$ and $f(1) = \log_2(2) - 1 = 0$. \\
+Because $y = \log_2(1+x)$ is strictly concave on the interval $(-1, \infty)$, it lies above the secant line $y=x$ connecting $(0,0)$ and $(1,1)$ on the open interval $(0, 1)$. \\
+Therefore, $\log_2(1+x) > x$ for $0 < x < 1$. \\
+Substituting $x = \frac{1}{k}$ for integers $k$ from $1$ to $n$:
+\[ \sum_{k=1}^n \log_2\left(1 + \frac{1}{k}\right) = \sum_{k=1}^n \log_2\left(\frac{k+1}{k}\right) \]
+This creates a telescoping sum:
+\[ \log_2\left(\frac{2}{1} \cdot \frac{3}{2} \cdots \frac{n+1}{n}\right) = \log_2(n+1) \]
+Summing the right side of the inequality yields $\sum_{k=1}^n \frac{1}{k}$. Since for $k \ge 2$, we have $0 < \frac{1}{k} < 1$, the strict inequality holds. Thus, for $n \ge 2$:
+\[ \log_2(n+1) > 1 + \frac{1}{2} + \dots + \frac{1}{n} \]
+
+\textbf{(ii)} \\
+\textbf{Base Case ($n=2$):} \\
+LHS = $\log_2(2!) = 1$. RHS = $2\left(\frac{1}{2}\right) = 1$. Since $1 \ge 1$, the base case holds. \\
+\textbf{Inductive Step:} \\
+Assume the inequality holds for $n=k$: $\log_2(k!) \ge k \sum_{i=2}^k \frac{1}{i}$. \\
+For $n=k+1$, consider the LHS:
+\[ \log_2((k+1)!) = \log_2(k!) + \log_2(k+1) \]
+Using the inductive assumption and the result from part (i):
+\[ \log_2((k+1)!) > k \sum_{i=2}^k \frac{1}{i} + \sum_{i=1}^k \frac{1}{i} \]
+\[ = k \sum_{i=2}^k \frac{1}{i} + \left(1 + \sum_{i=2}^k \frac{1}{i}\right) = (k+1) \sum_{i=2}^k \frac{1}{i} + 1 \]
+Rewrite $1$ as $(k+1)\left(\frac{1}{k+1}\right)$:
+\[ = (k+1) \sum_{i=2}^k \frac{1}{i} + (k+1)\left(\frac{1}{k+1}\right) = (k+1) \sum_{i=2}^{k+1} \frac{1}{i} \]
+This matches the RHS for $n=k+1$. By mathematical induction, it is true for all integers $n \ge 2$.
+
+\textbf{(iii)} \\
+Using the change of base formula, $\lg(n!) = \lg(2) \cdot \log_2(n!)$. \\
+From part (ii), we established that $\log_2(n!) \ge n \left( \frac{1}{2} + \dots + \frac{1}{n} \right)$. \\
+We are given that $\lg 2 > \frac{3}{10}$. \\
+Since $n \left( \frac{1}{2} + \dots + \frac{1}{n} \right) > 0$ for $n \ge 2$, we multiply to obtain:
+\[ \lg(n!) \ge \lg(2) \cdot n \left( \frac{1}{2} + \dots + \frac{1}{n} \right) > \frac{3n}{10} \left( \frac{1}{2} + \dots + \frac{1}{n} \right) \]
+This completes the proof.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Telescoping Series via Logarithms:} The sum of logarithms of sequential fractions (i.e., $\log(1 + 1/x)$) is a highly effective mechanism for generating bounds for harmonic sums.
+    \item \textbf{Strict vs. Non-Strict Induction:} Carefully handling equality in base cases and using a strictly greater auxiliary lemma (Part i) is crucial for proving strict inequalities in later inductive steps.
+    \item \textbf{Change of Base Utility:} Recognizing when to swap logarithm bases allows you to separate the algebraic progression (the factorial and harmonic sum) from the required constant scaling factor ($\lg 2$).
+\end{itemize}
+\end{takeaways}

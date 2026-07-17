@@ -1,0 +1,72 @@
+\begin{problem}[Irrationality via Recurrence Relations]
+Let $a$ be an irrational number, and $n$ be an integer greater than $1$. \\
+Let 
+
+$$\alpha = (a + \sqrt{a^2 - 1})^{\frac{1}{n}}$$ and 
+$$\beta = (a - \sqrt{a^2 - 1})^{\frac{1}{n}}$$, 
+
+and let $x = \alpha + \beta$.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $\alpha\beta = 1$ and $\alpha^n + \beta^n = 2a$.
+    \item Let $S_k = \alpha^k + \beta^k$ for integers $k \ge 0$. Show that $S_k = xS_{k-1} - S_{k-2}$ for $k \ge 2$.
+    \item Prove by mathematical induction that if $x$ is a rational number, then $S_k$ is a rational number for all integers $k \ge 0$.
+    \item Hence, or otherwise, deduce that $x$ is an irrational number.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{(i)} Use the difference of two squares expansion on the terms inside the brackets.
+    \item \textbf{(ii)} Expand the product $xS_{k-1} = (\alpha + \beta)(\alpha^{k-1} + \beta^{k-1})$ and rearrange the terms, keeping in mind your result from part (i).
+    \item \textbf{(iii)} Use strong induction. Note that rational numbers are closed under multiplication and subtraction.
+    \item \textbf{(iv)} Set up a proof by contradiction. If $x$ is assumed to be rational, what does part (iii) imply about $S_n$? How does this conflict with the given information about $a$?
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief]
+\textbf{(i)}
+\begin{align*}
+\alpha\beta &= \left( (a + \sqrt{a^2 - 1})(a - \sqrt{a^2 - 1}) \right)^{\frac{1}{n}} \\
+\alpha\beta &= \left( a^2 - (a^2 - 1) \right)^{\frac{1}{n}} = 1^{\frac{1}{n}} = 1 \\
+\alpha^n + \beta^n &= (a + \sqrt{a^2 - 1}) + (a - \sqrt{a^2 - 1}) = 2a
+\end{align*}
+
+\textbf{(ii)} \\
+Start by expanding $xS_{k-1}$:
+\begin{align*}
+xS_{k-1} &= (\alpha + \beta)(\alpha^{k-1} + \beta^{k-1}) \\
+xS_{k-1} &= \alpha^k + \alpha\beta^{k-1} + \beta\alpha^{k-1} + \beta^k
+\end{align*}
+Group the terms and factor out $\alpha\beta$:
+\begin{align*}
+xS_{k-1} &= (\alpha^k + \beta^k) + \alpha\beta(\beta^{k-2} + \alpha^{k-2})
+\end{align*}
+Since $\alpha\beta = 1$ from part (i):
+\begin{align*}
+xS_{k-1} &= S_k + (1)S_{k-2} \\
+S_k &= xS_{k-1} - S_{k-2}
+\end{align*}
+
+\textbf{(iii)} \\
+\textit{Base Cases:} For $k=0$, $S_0 = \alpha^0 + \beta^0 = 2$, which is rational. For $k=1$, $S_1 = \alpha^1 + \beta^1 = x$, which is assumed to be rational. \\
+\textit{Inductive Step:} Assume $S_j$ is rational for all integers $j$ such that $0 \le j \le k-1$. \\
+We need to show $S_k$ is rational. From (ii), $S_k = xS_{k-1} - S_{k-2}$. \\
+Since $x$ is assumed rational, and $S_{k-1}$ and $S_{k-2}$ are rational by our inductive hypothesis, $S_k$ must be rational (as rational numbers are closed under addition and subtraction). \\
+By strong mathematical induction, if $x$ is rational, $S_k$ is rational for all integers $k \ge 0$.
+
+\textbf{(iv)} \\
+Assume for the purpose of contradiction that $x$ is a rational number. \\
+By the result in (iii), $S_k$ must be rational for all $k \ge 0$. Therefore, $S_n$ must be rational. \\
+However, from (i), $S_n = \alpha^n + \beta^n = 2a$. \\
+If $S_n$ is rational, then $2a$ is rational, which implies $a$ is rational. \\
+This contradicts the initial premise that $a$ is an irrational number. \\
+Therefore, our assumption is false, and $x = (a + \sqrt{a^2 - 1})^{\frac{1}{n}} + (a - \sqrt{a^2 - 1})^{\frac{1}{n}}$ must be an irrational number.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Scaffolding Contradictions:} Directly attacking a proof by contradiction with radicals can be algebraically messy. Defining substitutions ($\alpha, \beta$) and demonstrating their sum and product relationships vastly simplifies the logic.
+    \item \textbf{Recurrence Relations:} Using polynomial recurrence relations (like $S_k = xS_{k-1} - S_{k-2}$) is a highly effective way to prove properties about powers of conjugate roots, a technique heavily tied to Newton's Sums and frequently tested in higher-level mathematics.
+\end{itemize}
+\end{takeaways}

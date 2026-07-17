@@ -1,0 +1,63 @@
+\begin{problem}[Inductive Proof of a Polynomial Inequality]
+Let $a$ be a positive real number. Define the expression 
+
+$$P_n = n(1+a^2+\dots+a^{2n}) - (n+1)(a+a^3+\dots+a^{2n-1})$$
+for any positive integer $n \in \mathbb{N}^*$.
+
+\begin{enumerate}
+    \item[\textbf{i)}] Verify that proving $P_n \ge 0$ is equivalent to proving the inequality 
+    
+    $$\frac{1 + a^2 + a^4 + \dots + a^{2n}}{a + a^3 + a^5 + \dots + a^{2n-1}} \ge \frac{n+1}{n}$$, 
+    and show that $P_1 \ge 0$.
+    \item[\textbf{ii)}] For the inductive step, assume $P_k \ge 0$ for some integer $k \ge 1$. Prove that the difference $P_{k+1} - P_k$ can be factored into the form: 
+    \[ P_{k+1} - P_k = (a-1) \left[ (k+1)a^{2k+1} - \sum_{i=0}^{k} a^{2i} \right] \]
+    \item[\textbf{iii)}] By rewriting the second factor as $\sum_{i=0}^k (a^{2k+1} - a^{2i})$ and analyzing its sign for the cases $a \ge 1$ and $0 < a < 1$, prove that $P_{k+1} - P_k \ge 0$. Conclude the proof by mathematical induction.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part i:} Since $a$ is positive, the denominator of the original fraction is positive, allowing you to safely cross-multiply. For $P_1$, plug in $n=1$ and look for a perfect square.
+    \item \textbf{Part ii:} Write out the expanded sums for $P_{k+1}$ and subtract the sums for $P_k$. Group the resulting terms into pairs like $(1-a) + a^2(1-a) + \dots$ to successfully factor out $(1-a)$ before flipping the sign. 
+    \item \textbf{Part iii:} Consider how the size of $a^{2k+1}$ compares to $a^{2i}$ when $a > 1$ versus when $0 < a < 1$. What happens when you multiply two negative numbers together? 
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief]
+\textbf{(i)}
+Because $a$ is positive, $a + a^3 + \dots + a^{2n-1} > 0$. Multiplying both sides of the original inequality by $n(a + a^3 + \dots + a^{2n-1})$ yields:
+\[ n(1 + a^2 + \dots + a^{2n}) \ge (n+1)(a + a^3 + \dots + a^{2n-1}) \]
+Moving all terms to the left side gives $P_n \ge 0$. \\
+For the base case $n=1$:
+\[ P_1 = 1(1+a^2) - 2(a) = a^2 - 2a + 1 = (a-1)^2 \]
+Since the square of any real number is non-negative, $P_1 \ge 0$ holds.
+
+\textbf{(ii)}
+Assume $P_k \ge 0$. Let's evaluate $P_{k+1} - P_k$:
+\[ P_{k+1} - P_k = \left[ (k+1)\sum_{i=0}^{k+1} a^{2i} - (k+2)\sum_{i=1}^{k+1} a^{2i-1} \right] - \left[ k\sum_{i=0}^k a^{2i} - (k+1)\sum_{i=1}^k a^{2i-1} \right] \]
+\[ P_{k+1} - P_k = \left( \sum_{i=0}^k a^{2i} - \sum_{i=1}^k a^{2i-1} \right) + (k+1)a^{2k+2} - (k+2)a^{2k+1} \]
+Group the terms inside the parentheses: $(1-a) + (a^2-a^3) + \dots + a^{2k} = (1-a)\sum_{i=0}^{k-1} a^{2i} + a^{2k}$. \\
+Now add the remaining terms and factor:
+\[ = (1-a)\sum_{i=0}^{k-1} a^{2i} + a^{2k} - a^{2k+1} - (k+1)a^{2k+1} + (k+1)a^{2k+2} \]
+\[ = (1-a)\sum_{i=0}^{k-1} a^{2i} + a^{2k}(1-a) - (k+1)a^{2k+1}(1-a) \]
+\[ = (1-a) \left[ \sum_{i=0}^k a^{2i} - (k+1)a^{2k+1} \right] \]
+Factoring out a negative sign gives the desired form:
+\[ = (a-1) \left[ (k+1)a^{2k+1} - \sum_{i=0}^k a^{2i} \right] \]
+
+\textbf{(iii)}
+Let $\Delta_k = P_{k+1} - P_k$. We can rewrite the bracketed term by distributing $(k+1)a^{2k+1}$ across the $k+1$ terms of the sum:
+\[ \Delta_k = (a-1) \sum_{i=0}^k (a^{2k+1} - a^{2i}) \]
+\begin{itemize}
+    \item \textbf{Case 1 ($a \ge 1$):} $a-1 \ge 0$. Since $2k+1 > 2i$ for all $0 \le i \le k$, it follows that $a^{2k+1} \ge a^{2i}$. Thus, the sum is positive, and positive $\times$ positive yields $\Delta_k \ge 0$.
+    \item \textbf{Case 2 ($0 < a < 1$):} $a-1 < 0$. Since $2k+1 > 2i$ and $a < 1$, higher powers result in smaller numbers, so $a^{2k+1} < a^{2i}$. Thus, the sum is negative. Negative $\times$ negative yields $\Delta_k > 0$.
+\end{itemize}
+In all cases, $\Delta_k \ge 0$, which means $P_{k+1} \ge P_k$. Since we assumed $P_k \ge 0$, it follows that $P_{k+1} \ge 0$. By the principle of mathematical induction, $P_n \ge 0$ for all $n \in \mathbb{N}^*$, proving the original inequality.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Transforming the Goal:} Fractional inequalities involving series are often messy to tackle directly with induction. Cross-multiplying and proving that a corresponding polynomial difference ($P_n \ge 0$) is non-negative provides a much cleaner algebraic foundation.
+    \item \textbf{Analyzing Differences in Induction:} When $P_{k+1}$ isn't easily written as a direct multiple or simple addition of $P_k$, analyzing the isolated difference $P_{k+1} - P_k$ is a highly effective workaround. 
+    \item \textbf{Sign Matching:} A complex polynomial can be proven non-negative by factoring it into terms that share the same sign behavior (e.g., proving both factors are positive when $a>1$ and both are negative when $a<1$).
+\end{itemize}
+\end{takeaways}

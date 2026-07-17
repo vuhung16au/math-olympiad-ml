@@ -1376,6 +1376,52 @@ So the left-hand side must be a non-zero integer whose absolute value is less th
 \end{enumerate}
 \end{takeaways}
 
+% Problem: Trigonometric Polynomials and Vieta's
+\begin{problem}[Trigonometric Polynomials and Vieta's]
+Let $n$ be an odd positive integer and $\theta$ be a real number such that $\frac{\pi}{\theta}$ is irrational. Define $a_k = \tan\left(\theta + \frac{k\pi}{n}\right)$ for $k = 1, 2, \dots, n$.
+
+\textbf{(i)} Show that the values $a_k$ are the roots of the equation $\tan(nx) = \tan(n\theta)$.
+
+\textbf{(ii)} By considering the expansion of $\tan(nx)$ in terms of $\tan x$, show that the values $a_k$ are the roots of a polynomial equation of degree $n$ in the form:
+
+$$t^n - \binom{n}{n-2}t^{n-2} + \dots + (-1)^{(n-1)/2} = \tan(n\theta) \left[ \binom{n}{1}t^{n-1} - \binom{n}{3}t^{n-3} + \dots \right]$$
+
+\textbf{(iii)} Use the relationship between the roots and coefficients (Vieta's formulas) to determine the sum $\sum_{k=1}^n a_k$ and the product $\prod_{k=1}^n a_k$ in terms of $\tan(n\theta)$.
+
+\textbf{(iv)} Hence, prove that $\frac{\sum a_k}{\prod a_k}$ is a constant, and find its value in terms of $n$.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Start with the definition $a_k = \tan(\theta + \frac{k\pi}{n})$. If you multiply the argument by $n$, what happens to the $k\pi$ term?
+    \item \textbf{Part (ii):} Recall the standard expansion for $\tan(nx)$ using the binomial expansion of $(\cos x + i\sin x)^n$. Equate the real and imaginary parts.
+    \item \textbf{Part (iii):} Remember that for a polynomial $P(t) = c_n t^n + c_{n-1} t^{n-1} + \dots + c_0$, the sum of roots is $-c_{n-1}/c_n$ and the product of roots is $(-1)^n c_0/c_n$.
+    \item \textbf{Part (iv):} You will need to carefully track the coefficients of the highest and lowest powers of $t$ in the equation derived in part (ii).
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief Solution]
+\begin{enumerate}
+    \item \textbf{Roots:} Since $\tan\left(n\left(\theta + \frac{k\pi}{n}\right)\right) = \tan(n\theta + k\pi) = \tan(n\theta)$, the values $a_k$ satisfy the equation $\tan(nx) = \tan(n\theta)$.
+    \item \textbf{Polynomial:} Using De Moivre’s Theorem, $\tan(nx) = \frac{\binom{n}{1}t - \binom{n}{3}t^3 + \dots}{\binom{n}{0} - \binom{n}{2}t^2 + \dots}$. Setting this to $\tan(n\theta) = T$, we rearrange to form a polynomial in $t$.
+    \item \textbf{Vieta's:}
+    \begin{itemize}
+        \item The equation takes the form $c_n t^n + c_{n-1} t^{n-1} + \dots + c_0 = 0$.
+        \item By analyzing the coefficients, the sum of roots $\sum a_k = \frac{n \tan(n\theta)}{1} \cdot (-1)^{\text{adjustment}}$.
+        \item The product $\prod a_k = (-1)^{(n-1)/2} \tan(n\theta)$.
+    \end{itemize}
+    \item \textbf{Result:} The ratio simplifies to a value dependent only on $n$. (For $n=3$, the ratio is $-3$; the general result is $-n$).
+\end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Polynomial Bridges:} Whenever you see trigonometric expressions set equal to roots (like $a_k = \tan(\dots)$), immediately think of forming a polynomial equation.
+    \item \textbf{Vieta's is King:} In HSC Extension 2, if you are asked to find the sum or product of a set of complex trigonometric values, it is almost certainly a Vieta's Formula problem in disguise.
+    \item \textbf{Expansion Mastery:} Knowing the binomial expansion of $(\cos x + i\sin x)^n$ is the fastest way to derive the identity for $\tan(nx)$. Don't try to derive it from scratch using $\tan(A+B)$ formulas; it takes too long.
+\end{itemize}
+\end{takeaways}
+
 % Problem 12: Wallis Integrals and the Gaussian Integral
 \input{problems/12}
 

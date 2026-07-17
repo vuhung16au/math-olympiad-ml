@@ -1,0 +1,53 @@
+\begin{problem}[Bounding a Recurrent Sequence]
+Let $a_1 = 1$, $a_2 = 2$, and $a_{n+1} = \frac{a_n a_{n-1} + 1}{a_{n-1}}$ for $n = 2, 3, \dots$. 
+\begin{enumerate}
+    \item[\textbf{i)}] Prove that $a_n > 0$ for all integers $n \ge 1$ and that the sequence is strictly increasing.
+    \item[\textbf{ii)}] Express $a_{n+1}^2$ in terms of $a_n$ and $a_{n-1}$, and show that $a_{n+1}^2 > a_n^2 + 2$ for all integers $n \ge 2$.
+    \item[\textbf{iii)}] Prove by mathematical induction that $a_n > \sqrt{2n}$ holds for any positive integer $n \ge 3$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part i:} Rewrite the recurrence relation (divide the numerator by the denominator) to easily analyze the difference $a_{n+1} - a_n$. What can you observe about the positivity of the terms?
+    \item \textbf{Part ii:} Square the simplified recurrence relation from Part i. Use the strictly increasing property to bound the cross-term fraction $\frac{a_n}{a_{n-1}}$.
+    \item \textbf{Part iii:} Structure your induction on $n$. Use the inequality established in Part ii for the inductive step to show that if the statement holds for $k$, it must hold for $k+1$. 
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief]
+\subsection*{Part i}
+Rewrite the recurrence relation as $a_{n+1} = a_n + \frac{1}{a_{n-1}}$. \\
+Given $a_1 = 1 > 0$ and $a_2 = 2 > 0$, it is clear that adding strictly positive terms yields positive terms, so $a_n > 0$ for all $n \ge 1$. \\
+Consequently, the difference $a_{n+1} - a_n = \frac{1}{a_{n-1}}$ is always strictly greater than zero. Therefore, the sequence $\{a_n\}$ is strictly increasing.
+
+\subsection*{Part ii}
+Squaring both sides of the rewritten relation yields:
+\[ a_{n+1}^2 = \left(a_n + \frac{1}{a_{n-1}}\right)^2 = a_n^2 + \frac{2a_n}{a_{n-1}} + \frac{1}{a_{n-1}^2} \]
+From Part i, we know the sequence is strictly increasing, which means $a_n > a_{n-1}$, and thus $\frac{a_n}{a_{n-1}} > 1$. \\
+Since $\frac{1}{a_{n-1}^2} > 0$, we can substitute these into the equation to establish a lower bound:
+\[ a_{n+1}^2 > a_n^2 + 2(1) + 0 \]
+\[ a_{n+1}^2 > a_n^2 + 2 \]
+
+\subsection*{Part iii}
+We will use mathematical induction.
+\begin{itemize}
+    \item \textbf{Base Case ($n=3$):} $a_3 = a_2 + \frac{1}{a_1} = 2 + 1 = 3$. We want to show $a_3 > \sqrt{2(3)}$, which means $3 > \sqrt{6}$. Squaring both sides gives $9 > 6$, which is true.
+    \item \textbf{Inductive Step:} Assume that for some integer $k \ge 3$, the inequality $a_k > \sqrt{2k}$ holds (which implies $a_k^2 > 2k$). We need to show $a_{k+1} > \sqrt{2(k+1)}$.
+\end{itemize}
+Using the inequality derived in Part ii:
+\[ a_{k+1}^2 > a_k^2 + 2 \]
+Substitute the inductive hypothesis ($a_k^2 > 2k$):
+\[ a_{k+1}^2 > 2k + 2 = 2(k+1) \]
+Since all terms are positive, we can take the square root of both sides without changing the direction of the inequality sign:
+\[ a_{k+1} > \sqrt{2(k+1)} \]
+By the principle of mathematical induction, $a_n > \sqrt{2n}$ holds for any positive integer $n \ge 3$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Simplification Uncovers Properties:} Splitting algebraic fractions in recurrence relations can quickly reveal how a sequence behaves term-to-term (such as basic monotonicity).
+    \item \textbf{Bounding Cross-Terms:} When squaring sums to construct inequalities, look for relationships (like a strictly increasing sequence) to establish clean lower or upper bounds on cross-terms. 
+    \item \textbf{Squares in Induction:} When a problem asks you to prove an inequality involving a square root, it is often simpler to prove the squared version of the inequality via induction to avoid messy radical algebra.
+\end{itemize}
+\end{takeaways}

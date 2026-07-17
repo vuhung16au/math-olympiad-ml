@@ -315,3 +315,330 @@ Let $(F_n)_{n\ge 0}$ be the Fibonacci sequence defined by $F_0=0$, $F_1=1$, and 
 	\item \textbf{Catalan's identity:} Provides structural control over quadratic Fibonacci expressions.
 \end{itemize}
 \end{takeaways}
+
+% --- New Problem: A Trigonometric Inequality via Induction ---
+\begin{problem}[A Trigonometric Inequality via Induction]
+Let $\theta \in \left(0, \frac{\pi}{2}\right)$ and $n$ be a positive integer greater than $1$. Prove that:
+\[
+\left(\frac{1}{\sin^n\theta} - 1\right)\left(\frac{1}{\cos^n\theta} - 1\right) \geqslant 2^n - 2^{\frac{n}{2}+1} + 1
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Proceed with mathematical induction on $n$. First, verify the base case for $n=2$.
+    \item For the inductive step, express the $(n+1)$ case in a way that allows you to substitute your inductive hypothesis. Factoring out $\frac{1}{\sin\theta\cos\theta}$ from the expanded product is a good starting point.
+    \item You will need to establish a lower bound for the remaining terms in your expansion. The AM-GM inequality will be useful here.
+    \item To simplify and bound the resulting symmetric trigonometric expressions, use the substitution $t = \sin\theta + \cos\theta$. Remember to determine the valid range for $t$ given $\theta \in \left(0, \frac{\pi}{2}\right)$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief Solution]
+We proceed by mathematical induction.
+For the base case $n=2$, evaluating both sides yields $1$, so the proposition holds.
+
+Assume the inequality is true for some integer $n \geqslant 2$. For the $n+1$ case, we can expand and algebraically manipulate the left-hand side into the following form:
+
+\[
+\frac{1}{\sin\theta\cos\theta} \left[ \left(\frac{1}{\sin^n\theta} - 1\right)\left(\frac{1}{\cos^n\theta} - 1\right) + \frac{1-\cos\theta}{\sin^n\theta} + \frac{1-\sin\theta}{\cos^n\theta} - 1 \right] + 1
+\]
+
+By applying the inductive hypothesis to the first part of the bracketed expression, and the AM-GM inequality to the middle terms, we establish a lower bound that relies on evaluating $\sqrt{\frac{(1-\cos\theta)(1-\sin\theta)}{\sin^n\theta\cos^n\theta}}$.
+
+Using the property $\sin\theta\cos\theta \leqslant \frac{1}{2}$ and applying the substitution $t = \sin\theta + \cos\theta$ (where $t \in (1, \sqrt{2}]$), we can simplify the numerator and bound this square root term from below by $2^{\frac{n}{2}} - 2^{\frac{n-1}{2}}$.
+
+Substituting these bounds back into our main expression cascades into the exact required form:
+
+\[
+2^{n+1} - 2^{\frac{n+1}{2}+1} + 1
+\]
+
+This completes the inductive step, proving the proposition is true for all $n \geqslant 2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Induction beyond sequences:} Mathematical induction is a highly effective tool for establishing bounds in parameterized inequalities, not just for proving integer sequence formulas.
+    \item \textbf{Bridging steps with classical inequalities:} Combining induction with the AM-GM inequality often bridges the critical algebraic gap between the $n$ and $n+1$ steps in complex proofs.
+    \item \textbf{The power of substitution:} When faced with symmetric trigonometric expressions, the substitution $t = \sin\theta + \cos\theta$ is a powerful technique to translate trigonometric bounds into manageable algebraic polynomials.
+\end{itemize}
+\end{takeaways}
+
+% --- New Problem: Strengthening the Inductive Hypothesis ---
+\begin{problem}[Strengthening the Hypothesis]
+For any positive integer $n$, prove that:
+\[
+\frac{1}{2} \cdot \frac{3}{4} \cdot \dots \cdot \frac{2n-1}{2n} < \frac{1}{\sqrt{3n}}
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Try applying standard mathematical (weak) induction directly. What happens when you try to prove that the inductive step implies the $(n+1)$ case?
+    \item The direct algebraic manipulation breaks down because the hypothesis isn't quite strong enough to bridge the gap to the next step.
+    \item Try proving a \textit{stronger} (tighter) bound. Can you replace the right side of the inequality with something slightly smaller, such as $\frac{1}{\sqrt{3n+1}}$, and apply induction to that new statement instead?
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief Solution]
+If we attempt to prove the inequality directly using induction, the inductive step requires us to show that $\frac{1}{\sqrt{3n}} \cdot \frac{2n+1}{2(n+1)} \leqslant \frac{1}{\sqrt{3(n+1)}}$. However, algebraically, this simplifies to $(n+1)(2n+1)^2 \leqslant n(2n+2)^2$, which is false.
+
+Instead, we prove a strengthened proposition:
+\[
+\frac{1}{2} \cdot \frac{3}{4} \cdot \dots \cdot \frac{2n-1}{2n} \leqslant \frac{1}{\sqrt{3n+1}}
+\]
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Base Case ($n=1$):} The LHS is $\frac{1}{2}$, and the RHS is $\frac{1}{\sqrt{3(1)+1}} = \frac{1}{2}$. Thus, $\frac{1}{2} \leqslant \frac{1}{2}$ holds true.
+    \item \textbf{Inductive Step:} Suppose the strengthened proposition is true for some positive integer $k$. For $k+1$, we must prove:
+    \[
+    \frac{1}{\sqrt{3k+1}} \cdot \frac{2k+1}{2k+2} \leqslant \frac{1}{\sqrt{3(k+1)+1}} = \frac{1}{\sqrt{3k+4}}
+    \]
+    Squaring both sides to remove the radicals and cross-multiplying yields:
+    \[
+    (3k+4)(2k+1)^2 \leqslant (3k+1)(2k+2)^2
+    \]
+    Expanding both sides:
+    \begin{align*}
+    (3k+4)(4k^2+4k+1) &\leqslant (3k+1)(4k^2+8k+4) \\
+    12k^3 + 28k^2 + 19k + 4 &\leqslant 12k^3 + 28k^2 + 20k + 4
+    \end{align*}
+    Subtracting common terms from both sides leaves:
+    \[
+    0 \leqslant k
+    \]
+    Since $k$ is a positive integer ($k \geqslant 1$), this inequality is always true. Thus, by mathematical induction, the strengthened proposition holds for all $n \geqslant 1$.
+\end{itemize}
+
+Finally, because $\frac{1}{\sqrt{3n+1}} < \frac{1}{\sqrt{3n}}$ for all positive integers $n$, it logically follows that the original strict inequality is true.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The Paradox of Strengthening:} Sometimes it is difficult or impossible to realize the inductive step for a proposition $P(n)$. However, proving a \textit{stronger} proposition $Q(n)$ (where $Q(n) \implies P(n)$) can actually be \textit{easier}.
+    \item \textbf{Why it works:} By strengthening the proposition, you are demanding more of what you need to prove, but you also give yourself a much stronger starting assumption (the inductive hypothesis) to use during the algebraic heavy lifting of the inductive step.
+\end{itemize}
+\end{takeaways}
+
+% --- New Problem: Forward-Backward (Cauchy) Induction ---
+\begin{problem}[Forward-Backward (Cauchy) Induction]
+(Jensen's Inequality) Suppose $f(x)$ is a convex function on $[a, b]$ (namely, for any $x, y \in [a, b]$, we always have $f\left(\frac{x+y}{2}\right) \leqslant \frac{1}{2}(f(x) + f(y))$).
+
+Prove by induction, or otherwise, that for any $n$ numbers $x_1, \dots, x_n \in [a, b]$, it is always true that
+\[
+f\left(\frac{x_1 + \dots + x_n}{n}\right) \leqslant \frac{1}{n}(f(x_1) + \dots + f(x_n)).
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item Standard mathematical induction ($n \implies n+1$) is very difficult to apply here. Instead, try jumping forward. Can you easily prove the proposition for powers of 2 (i.e., $n = 2, 4, 8, \dots$)?
+    \item Once you establish that the inequality holds for all $n=2^k$, you need a way to fill in the gaps. Can you prove that if the inequality holds for some integer $k$, it must also hold for $k-1$?
+    \item For the ``backward'' step ($k \implies k-1$), try substituting the average of the first $k-1$ terms as your $k$-th term in the inequality.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief Solution]
+We prove this using Cauchy's Forward-Backward Induction.
+
+\textbf{Part 1: Forward Step (Prove for $n = 2^k$)}
+We use standard induction on $k$.
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Base Case ($k=1, n=2$):} This is given directly by the definition of convexity: $f\left(\frac{x_1+x_2}{2}\right) \leqslant \frac{f(x_1)+f(x_2)}{2}$.
+    \item \textbf{Inductive Step:} Assume true for $n=2^k$. For $n=2^{k+1}$, we can group the terms into two halves of size $2^k$:
+    \[
+    f\left(\frac{x_1 + \dots + x_{2^{k+1}}}{2^{k+1}}\right) = f\left(\frac{\frac{x_1 + \dots + x_{2^k}}{2^k} + \frac{x_{2^k+1} + \dots + x_{2^{k+1}}}{2^k}}{2}\right)
+    \]
+    By the base case, this is $\leqslant \frac{1}{2}\left[ f\left(\frac{x_1 + \dots + x_{2^k}}{2^k}\right) + f\left(\frac{x_{2^k+1} + \dots + x_{2^{k+1}}}{2^k}\right) \right]$.
+    Applying the inductive assumption to each half yields $\leqslant \frac{1}{2^{k+1}}(f(x_1) + \dots + f(x_{2^{k+1}}))$. Thus, it holds for all powers of $2$.
+\end{itemize}
+
+\textbf{Part 2: Backward Step (Prove $n=k \implies n=k-1$)}
+Assume the inequality holds for $k$ terms. We wish to show it holds for $k-1$ terms.
+Let $A = \frac{x_1 + \dots + x_{k-1}}{k-1}$ be the average of the first $k-1$ terms. We apply our $k$-term assumption to the set $\{x_1, \dots, x_{k-1}, A\}$:
+\[
+f\left(\frac{x_1 + \dots + x_{k-1} + A}{k}\right) \leqslant \frac{f(x_1) + \dots + f(x_{k-1}) + f(A)}{k}
+\]
+
+Notice that the left side simplifies: $\frac{x_1 + \dots + x_{k-1} + A}{k} = \frac{(k-1)A + A}{k} = A$.
+So the inequality becomes:
+\[
+f(A) \leqslant \frac{f(x_1) + \dots + f(x_{k-1}) + f(A)}{k}
+\]
+
+Multiplying by $k$ and subtracting $f(A)$ from both sides gives:
+\[
+(k-1)f(A) \leqslant f(x_1) + \dots + f(x_{k-1})
+\]
+
+Dividing by $k-1$ yields:
+\[
+f(A) = f\left(\frac{x_1 + \dots + x_{k-1}}{k-1}\right) \leqslant \frac{1}{k-1}(f(x_1) + \dots + f(x_{k-1}))
+\]
+
+This completes the backward step. Since we can reach any arbitrarily large power of $2$, and step backwards to any integer below it, the inequality holds for all positive integers $n$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Forward-Backward Induction:} When sequential induction fails, jumping to a sparse subset of integers (like powers of 2) and proving a ``step-down'' proposition is a highly effective, albeit unconventional, logical structure.
+    \item \textbf{Jensen's Inequality:} This is a foundational proof in mathematical analysis. This generalized inequality forms the backbone for proving many other famous algebraic bounds, including the Arithmetic Mean-Geometric Mean (AM-GM) inequality.
+\end{itemize}
+\end{takeaways}
+
+% --- New Problem: Discovering Exact Bounds ---
+\begin{problem}[Discovering Exact Bounds]
+The Fibonacci sequence $\{F_n\}$ satisfies: $F_1 = F_2 = 1$, $F_{n+2} = F_{n+1} + F_n$. Prove by induction, or otherwise, that
+\[
+\sum_{i=1}^n \frac{F_i}{2^i} < 2
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Hint 1 (Induction):} If you let $S_n = \sum_{i=1}^n \frac{F_i}{2^i}$, standard weak induction on the inequality $S_n < 2$ will fail because $S_k < 2$ does not give you a tight enough bound to prove $S_{k+1} < 2$. You need to strengthen the hypothesis.
+    \item \textbf{Hint 2 (Induction):} Calculate the first few partial sums ($S_1, S_2, S_3, S_4$) and calculate the exact difference $2 - S_n$. Look very closely at the numerators of these differences. Do you see a familiar sequence?
+    \item \textbf{Hint 3 (Otherwise):} If you choose not to use induction, consider the infinite series $S = \sum_{i=1}^\infty \frac{F_i}{2^i}$. You can use the recursive definition $F_i = F_{i-1} + F_{i-2}$ to split the sum and create an algebraic equation in terms of $S$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief Solution]
+\textbf{Method 1: Strengthened Induction}
+Let $S_n = \sum_{i=1}^n \frac{F_i}{2^i}$. Calculating the first few terms reveals a pattern in the deficit from 2:
+\begin{itemize}[leftmargin=*]
+    \item $S_1 = \frac{1}{2} \implies 2 - S_1 = \frac{3}{2} = \frac{F_4}{2^1}$
+    \item $S_2 = \frac{3}{4} \implies 2 - S_2 = \frac{5}{4} = \frac{F_5}{2^2}$
+    \item $S_3 = 1 \implies 2 - S_3 = 1 = \frac{8}{2^3} = \frac{F_6}{2^3}$
+\end{itemize}
+
+We hypothesize a stronger exact equality: $S_n = 2 - \frac{F_{n+3}}{2^n}$.
+We prove this by induction. The base case ($n=1$) holds as shown above.
+Assume true for some integer $k$: $S_k = 2 - \frac{F_{k+3}}{2^k}$.
+For $k+1$:
+\[
+S_{k+1} = S_k + \frac{F_{k+1}}{2^{k+1}} = 2 - \frac{F_{k+3}}{2^k} + \frac{F_{k+1}}{2^{k+1}}
+\]
+Finding a common denominator for the fractions:
+\[
+S_{k+1} = 2 - \frac{2F_{k+3} - F_{k+1}}{2^{k+1}}
+\]
+Using the Fibonacci recurrence, $F_{k+3} = F_{k+2} + F_{k+1}$, we can rewrite the numerator:
+\[
+2F_{k+3} - F_{k+1} = F_{k+3} + (F_{k+2} + F_{k+1}) - F_{k+1} = F_{k+3} + F_{k+2} = F_{k+4}
+\]
+Thus, $S_{k+1} = 2 - \frac{F_{k+4}}{2^{k+1}}$, completing the induction.
+Since $F_{n+3} > 0$ for all $n \geqslant 1$, it strictly follows that $S_n = 2 - \frac{F_{n+3}}{2^n} < 2$.
+
+\textbf{Method 2: Infinite Series (Otherwise)}
+Let $S = \sum_{i=1}^\infty \frac{F_i}{2^i}$. Assuming the series converges, we can expand it using $F_i = F_{i-1} + F_{i-2}$ for $i \geqslant 3$:
+\[
+S = \frac{1}{2} + \frac{1}{4} + \sum_{i=3}^\infty \frac{F_{i-1} + F_{i-2}}{2^i}
+\]
+\[
+S = \frac{3}{4} + \frac{1}{2}\sum_{i=3}^\infty \frac{F_{i-1}}{2^{i-1}} + \frac{1}{4}\sum_{i=3}^\infty \frac{F_{i-2}}{2^{i-2}}
+\]
+Shifting the indices back yields:
+\[
+S = \frac{3}{4} + \frac{1}{2}\left(S - \frac{F_1}{2}\right) + \frac{1}{4}(S)
+\]
+\[
+S = \frac{3}{4} + \frac{1}{2}S - \frac{1}{4} + \frac{1}{4}S \implies S = \frac{1}{2} + \frac{3}{4}S
+\]
+Solving for $S$ gives $\frac{1}{4}S = \frac{1}{2} \implies S = 2$.
+Since all terms in the sequence are strictly positive, any finite partial sum $S_n$ must be strictly less than the infinite sum. Therefore, $\sum_{i=1}^n \frac{F_i}{2^i} < 2$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Equality over Inequality:} It is often drastically easier to prove an exact equality by induction than an inequality, because inequalities throw away information that you might need for the algebraic manipulations in the next step.
+    \item \textbf{Connecting Recurrences to Series:} The recursive structure of the Fibonacci sequence maps perfectly onto the shift-and-scale techniques used to evaluate infinite series.
+\end{itemize}
+\end{takeaways}
+
+% --- New Problem: Hidden Recurrences ---
+\begin{problem}[Hidden Recurrences]
+Consider the Fibonacci sequence $F_n$, defined as $F_0 = 0$, $F_1 = 1$, $F_2 = 1$, and $F_{n+2} = F_{n+1} + F_n$ for $n \geqslant 0$.
+
+Let $f(x) = \frac{1}{1+x}$.
+
+(i) Find $f(f(x))$ and $f(f(f(x)))$.\\
+(ii) Guess a general formula for $f^{(n)}(x)$ and express it in terms of $F_n$. Prove your hypothesis by induction, or otherwise.\\
+(iii) Let $g_n(x) = x + f(x) + f^{(2)}(x) + \dots + f^{(n)}(x)$. Prove that:
+\[
+g_n(1) = \frac{F_1}{F_2} + \frac{F_2}{F_3} + \dots + \frac{F_{n+1}}{F_{n+2}}
+\]
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Hint 1:} For part (i), simplify the compound fractions completely. Look closely at the coefficients of $x$ and the constant terms; map these directly to the first few terms of the Fibonacci sequence.
+    \item \textbf{Hint 2:} For part (ii), formulate your hypothesis for $f^{(n)}(x)$ as a rational function using $F_n$, $F_{n-1}$, and $F_{n+1}$. Use standard mathematical induction, relying on the definition $F_{n+2} = F_{n+1} + F_n$ for the inductive step.
+    \item \textbf{Hint 3:} For part (iii), you do not need to calculate the sum from scratch. Evaluate your general formula for $f^{(k)}(x)$ from part (ii) at $x=1$. Notice how $F_k + F_{k-1}$ simplifies nicely in both the numerator and denominator.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief Solution]
+\textbf{(i) Functional Iterations:}
+\begin{itemize}[leftmargin=*]
+    \item $f(f(x)) = \frac{1}{1 + \frac{1}{1+x}} = \frac{1}{\frac{1+x+1}{1+x}} = \frac{1+x}{2+x}$
+    \item $f(f(f(x))) = \frac{1}{1 + \frac{1+x}{2+x}} = \frac{1}{\frac{2+x+1+x}{2+x}} = \frac{2+x}{3+2x}$
+\end{itemize}
+
+\textbf{(ii) Hypothesis and Proof:}
+Mapping the coefficients from our iterations to the Fibonacci sequence:
+\begin{itemize}[leftmargin=*]
+    \item $f^{(1)}(x) = \frac{1}{1+x} = \frac{F_1 + F_0 x}{F_2 + F_1 x}$
+    \item $f^{(2)}(x) = \frac{1+x}{2+x} = \frac{F_2 + F_1 x}{F_3 + F_2 x}$
+    \item $f^{(3)}(x) = \frac{2+x}{3+2x} = \frac{F_3 + F_2 x}{F_4 + F_3 x}$
+\end{itemize}
+
+\textbf{Hypothesis:} $f^{(n)}(x) = \frac{F_n + F_{n-1}x}{F_{n+1} + F_n x}$
+
+\textbf{Proof by Induction:}
+The base cases are verified above. Assume the hypothesis holds for some positive integer $k$. We evaluate the $k+1$ iteration:
+\[
+f^{(k+1)}(x) = f(f^{(k)}(x)) = \frac{1}{1 + \frac{F_k + F_{k-1}x}{F_{k+1} + F_k x}}
+\]
+Multiplying the numerator and denominator by $F_{k+1} + F_k x$:
+\[
+f^{(k+1)}(x) = \frac{F_{k+1} + F_k x}{F_{k+1} + F_k x + F_k + F_{k-1}x}
+\]
+Grouping the terms in the denominator and applying the Fibonacci recurrence ($F_{k+2} = F_{k+1} + F_k$):
+\[
+f^{(k+1)}(x) = \frac{F_{k+1} + F_k x}{(F_{k+1} + F_k) + (F_k + F_{k-1})x} = \frac{F_{k+1} + F_k x}{F_{k+2} + F_{k+1}x}
+\]
+By mathematical induction, the general formula holds for all positive integers $n$.
+
+\textbf{(iii) Evaluating the Sum:}
+We are given $g_n(x) = x + f(x) + f^{(2)}(x) + \dots + f^{(n)}(x)$.
+We must evaluate $g_n(1)$, which means evaluating $f^{(k)}(1)$ for each term from $k=0$ to $n$ (where $f^{(0)}(x) = x$).
+
+Using our proven formula from part (ii):
+\[
+f^{(k)}(1) = \frac{F_k + F_{k-1}(1)}{F_{k+1} + F_k(1)}
+\]
+Because $F_k + F_{k-1} = F_{k+1}$ and $F_{k+1} + F_k = F_{k+2}$, this simplifies beautifully to:
+\[
+f^{(k)}(1) = \frac{F_{k+1}}{F_{k+2}}
+\]
+Now, we evaluate each term in the sum $g_n(1)$:
+\begin{itemize}[leftmargin=*]
+    \item $k=0: \quad f^{(0)}(1) = 1 = \frac{1}{1} = \frac{F_1}{F_2}$
+    \item $k=1: \quad f^{(1)}(1) = \frac{1}{2} = \frac{F_2}{F_3}$
+    \item $k=2: \quad f^{(2)}(1) = \frac{2}{3} = \frac{F_3}{F_4}$
+    \item $\dots$
+    \item $k=n: \quad f^{(n)}(1) = \frac{F_{n+1}}{F_{n+2}}$
+\end{itemize}
+Summing these terms together directly yields the required proof:
+\[
+g_n(1) = \frac{F_1}{F_2} + \frac{F_2}{F_3} + \dots + \frac{F_{n+1}}{F_{n+2}}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Connecting Functions and Sequences:} Repeatedly composing a simple fractional transformation elegantly maps onto linear recurrence relations like the Fibonacci sequence.
+    \item \textbf{Evaluation Simplifies Structure:} Substituting a specific value (like $x=1$) into a generalized algebraic formula often collapses complex variables into simpler sequence relationships, making seemingly difficult series proofs straightforward.
+\end{itemize}
+\end{takeaways}
