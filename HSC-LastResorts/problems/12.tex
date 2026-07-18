@@ -48,7 +48,7 @@ Let $W_n = \int_0^{\pi/2} \sin^n x \, dx$ denote the Wallis Integrals. It is giv
    \item \textbf{(ii)}
    From (i), $(1-x^2/n) \le e^{-x^2/n} \le (1+x^2/n)^{-1}$. Raising to power $n$ gives $(1-x^2/n)^n \le e^{-x^2} \le (1+x^2/n)^{-n}$. Integrating over the respective bounds yields the result.
    \item \textbf{(iii)} 
-   $I_{left} = \int_0^{\pi/2} (1-\sin^2\theta)^n \sqrt{n}\cos\theta \, d\theta = \sqrt{n}W_{2n+1}$. $I_{right} = \int_0^{\pi/2} (\sec^2\theta)^{-n} \sqrt{n}\sec^2\theta \, d\theta = \sqrt{n}W_{2n-2}$.
+   $I_{left} = \int_0^{\pi/2} (1-\sin^2\theta)^n \sqrt{n}\cos\theta \, d\theta = \sqrt{n} \int_0^{\pi/2} \cos^{2n+1}\theta \, d\theta = \sqrt{n}W_{2n+1}$ (since $\int_0^{\pi/2} \cos^m \theta \, d\theta = \int_0^{\pi/2} \sin^m \theta \, d\theta = W_m$ by symmetry). $I_{right} = \int_0^{\pi/2} (\sec^2\theta)^{-n} \sqrt{n}\sec^2\theta \, d\theta = \sqrt{n}W_{2n-2}$.
    \item \textbf{(iv)} $\int_{-\infty}^{\infty} k e^{-\frac{x^2}{2\sigma^2}} dx = 2k \int_{0}^{\infty} e^{-\frac{x^2}{2\sigma^2}} dx = 1$. \\
    Let $u = \frac{x}{\sigma\sqrt{2}} \implies dx = \sigma\sqrt{2} du$. \\
    $2k\sigma\sqrt{2} \int_{0}^{\infty} e^{-u^2} du = 2k\sigma\sqrt{2} \left( \frac{\sqrt{\pi}}{2} \right) = 1$. \\

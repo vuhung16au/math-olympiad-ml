@@ -46,7 +46,7 @@ $$ f(x) = \frac{x^n(1-x)^n}{n!} $$
 
 \begin{hint}
 \begin{itemize}
-    \item \textbf{Part (i):} Use the binomial expansion of $(1-x)^n$. Recall that derivatives of $\frac{x^m}{n!}$ at $0$ are zero if $m \neq k$ (for $k$-th derivative) or integers if $m=k$. Use symmetry $f(x)=f(1-x)$ for the $x=1$ case.
+    \item \textbf{Part (i):} Expand $(1-x)^n$ using the binomial theorem. Recall that the $k$-th derivative of $\frac{x^m}{n!}$ evaluated at $x=0$ is $0$ if $m \neq k$, and is an integer if $m=k$. Use the symmetry $f(x)=f(1-x)$ for the $x=1$ case.
     \item \textbf{Part (ii):} Substitute $\pi^{2n-2k} = (\frac{a}{b})^{n-k}$. Combine this with $b^n$ outside the sum to clear the fractions. Observe that $\pi^{2m} = (a/b)^m$. Rewrite the sum to show the coefficients are integers.
     \item \textbf{Part (iii):} Use the product rule on $H(x)$. Group terms by $\sin(\pi x)$ and $\cos(\pi x)$. The $\cos$ terms should cancel. You may assume without proof the algebraic identity: $G''(x) + \pi^2 G(x) = \pi^{2n+2} b^n f(x)$. Note also that $\pi^{2n+2} b^n = \pi^2 a^n$.
     \item \textbf{Part (iv):} Integrate $H'(x)$ from $0$ to $1$. Note that $H(1) = \pi G(1)$ and $H(0) = -\pi G(0)$. Don't forget that $\lim_{n \to \infty} \frac{C^n}{n!} = 0$.
@@ -70,7 +70,14 @@ Since $a, b, f^{(2k)}(0)$ and $f^{(2k)}(1)$ are all integers, $G(0)$ and $G(1)$ 
 
 $H'(x) = G''(x)\sin(\pi x) + \pi G'(x)\cos(\pi x) - \pi G'(x)\cos(\pi x) + \pi^2 G(x)\sin(\pi x)$
 $$ H'(x) = \sin(\pi x) [ G''(x) + \pi^2 G(x) ] $$
-Using the hint $G''(x) + \pi^2 G(x) = \pi^{2n+2} b^n f(x)$:
+To see why this massive sum collapses, we explicitly evaluate $G''(x) + \pi^2 G(x)$:
+\begin{align*}
+G''(x) + \pi^2 G(x) &= b^n \sum_{k=0}^n (-1)^k \pi^{2n-2k} f^{(2k+2)}(x) + \pi^2 b^n \sum_{k=0}^n (-1)^k \pi^{2n-2k} f^{(2k)}(x) \\
+&= b^n \sum_{k=0}^n (-1)^k \pi^{2n-2k} f^{(2k+2)}(x) + b^n \sum_{k=0}^n (-1)^k \pi^{2n-2k+2} f^{(2k)}(x)
+\end{align*}
+By expanding these sums, we see that they perfectly telescope. Every term in the first sum cancels with the subsequent term in the second sum. The only term that survives is the $k=0$ term from the second sum (since $f^{(2n+2)}(x) = 0$, the upper boundary term vanishes). This leaves exactly:
+$$ G''(x) + \pi^2 G(x) = b^n (-1)^0 \pi^{2n+2} f^{(0)}(x) = \pi^{2n+2} b^n f(x) $$
+Substituting this collapsed form back into $H'(x)$:
 $$ H'(x) = \sin(\pi x) [ \pi^{2n+2} b^n f(x) ] $$
 Since $\pi^2 = a/b \implies b \pi^2 = a$, we have $\pi^{2n+2} b^n = \pi^2 (\pi^2)^n b^n = \pi^2 (a/b)^n b^n = \pi^2 a^n$.
 $$ H'(x) = \pi^2 a^n f(x) \sin(\pi x) $$

@@ -688,7 +688,7 @@ Let $g(x) = \frac{\ln x}{x}$. $g'(x) = \frac{1 - \ln x}{x^2}$. Max at $x=e$.
 $g(e) = 1/e \approx 0.368$. The value $\frac{\ln 2}{2} \approx 0.346$.
 Since $0 < 0.346 < 0.368$, the line $y = \frac{\ln 2}{2}$ cuts the curve $y=g(x)$ twice for $x>0$.
 
-For $x<0$: $2^x$ is positive, $x^2$ is positive. Graphs intersect once ($2^x$ flat, $x^2$ steep).
+For $x<0$: $2^x$ is positive, $x^2$ is positive. For $x \le 0$, the function $y = 2^x$ is strictly increasing from $0$ to $1$, while $y = x^2$ is strictly decreasing from $\infty$ to $0$. Since they are continuous, they must intersect exactly once by the Intermediate Value Theorem.
 Total = 3 solutions.
 
 \textbf{(ii)}
@@ -811,7 +811,7 @@ Now consider the triangle $PCP'$. You know sides 3, 4, 5.
    Therefore, $|PP'| = |AP| = 3$.
 
 4. Consider $\triangle PP'C$. The side lengths are $|PP'|=3$, $|P'C|=4$, and $|PC|=5$.
-   Since $3^2 + 4^2 = 5^2$, $\triangle PP'C$ is a right-angled triangle with $\angle PP'C = 90^\circ$.
+   Since $3^2 + 4^2 = 5^2$, $\triangle PP'C$ is a right-angled triangle with $\angle PP'C = 90^\circ$ (by the converse of the Pythagorean theorem).
 
 5. We want the side length of $ABC$, which is $|AC|$.
    In $\triangle AP'C$, we have sides $AP'=3$, $P'C=4$.
@@ -1147,7 +1147,7 @@ Now let $z\to1$. Then
 \sum_{k=1}^{n-1}\frac{1}{1-\omega^k}
 =\lim_{z\to1}\left(\frac{n z^{n-1}}{z^n-1}-\frac{1}{z-1}\right).
 \]
-To evaluate this limit, write $z=1+h$. Then
+To evaluate this limit, write $z=1+h$. Then the expression becomes:
 \[
 \frac{n(1+h)^{n-1}}{(1+h)^n-1}-\frac{1}{h}.
 \]
@@ -1175,6 +1175,7 @@ Therefore,
 \begin{enumerate}
     \item \textbf{Logarithmic Differentiation:} $\frac{P'(z)}{P(z)} = \sum \frac{1}{z - \alpha_i}$. This is a standard identity.
     \item \textbf{Handling Singularities:} When asking for a sum involving roots of unity where one root makes the denominator zero, you usually need to take a limit.
+    \item \textbf{Power of Taylor Series:} Using the binomial expansion (or Taylor series) to evaluate the $0/0$ limit as $h \to 0$ is a brilliant choice. Attempting L'Hôpital's rule here would create a massive mess of quotient and product rules. Binomial expansion is vastly superior for limits involving $(1+h)^n$.
 \end{enumerate}
 \end{takeaways}
 
@@ -1325,9 +1326,13 @@ $$t^n - \binom{n}{n-2}t^{n-2} + \dots + (-1)^{(n-1)/2} = \tan(n\theta) \left[ \b
     \item \textbf{Polynomial:} Using De Moivre’s Theorem, $\tan(nx) = \frac{\binom{n}{1}t - \binom{n}{3}t^3 + \dots}{\binom{n}{0} - \binom{n}{2}t^2 + \dots}$. Setting this to $\tan(n\theta) = T$, we rearrange to form a polynomial in $t$.
     \item \textbf{Vieta's:}
     \begin{itemize}
-        \item The equation takes the form $c_n t^n + c_{n-1} t^{n-1} + \dots + c_0 = 0$.
-        \item By analyzing the coefficients, the sum of roots $\sum a_k = \frac{n \tan(n\theta)}{1} \cdot (-1)^{\text{adjustment}}$.
-        \item The product $\prod a_k = (-1)^{(n-1)/2} \tan(n\theta)$.
+        \item From part (ii), the polynomial is $c_n t^n + c_{n-1}t^{n-1} + \dots + c_0 = 0$.
+        \item Comparing coefficients:
+        \item $c_n = 1$
+        \item $c_{n-1} = -\binom{n}{1}\tan(n\theta) = -n\tan(n\theta)$
+        \item $c_0 = (-1)^{(n-1)/2}\tan(n\theta)$ (since $n$ is odd, the constant term comes from the LHS bracket).
+        \item Therefore, $\sum a_k = -\frac{c_{n-1}}{c_n} = n\tan(n\theta)$.
+        \item The product $\prod a_k = \frac{(-1)^n c_0}{c_n} = (-1)^{(n-1)/2} \tan(n\theta)$ (since $n$ is odd, $(-1)^n = -1$, and multiplying it against the LHS constant sign gives this result).
     \end{itemize}
     \item \textbf{Result:} The ratio simplifies to a value dependent only on $n$. (For $n=3$, the ratio is $-3$; the general result is $-n$).
 \end{enumerate}

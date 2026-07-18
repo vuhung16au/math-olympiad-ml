@@ -64,7 +64,7 @@ $$5I = e^{-x}(2\sin 2x - \cos 2x) \implies I = \frac{1}{5} e^{-x}(2\sin 2x - \co
 Using the identity from (i) and the antiderivative from (ii):
 $$\int_0^\infty \frac{\sin^2 x}{e^x} \, dx = \left[ -\frac{1}{2}e^{-x} - \frac{1}{10}e^{-x}(2\sin 2x - \cos 2x) \right]_0^\infty$$
 Evaluate at the bounds $0$ and $\infty$: \\
-\textbf{As $x \to \infty$:} $-\frac{1}{2}e^{-x} - \frac{1}{10}e^{-x}(2\sin 2x - \cos 2x) \to 0$ \\
+\textbf{As $x \to \infty$:} $-\frac{1}{2}e^{-x} - \frac{1}{10}e^{-x}(2\sin 2x - \cos 2x) \to 0$ (by the Squeeze Theorem, since $(2\sin 2x - \cos 2x)$ is bounded while $e^{-x} \to 0$). \\
 \textbf{At $x = 0$:} $-\frac{1}{2}e^0 - \frac{1}{10}e^0(0 - 1) = -\frac{1}{2} + \frac{1}{10} = -\frac{2}{5}$ \\
 Subtracting the lower bound from the upper bound gives:
 $$= 0 - \left(-\frac{2}{5}\right) = \frac{2}{5}$$
