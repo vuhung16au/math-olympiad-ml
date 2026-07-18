@@ -642,3 +642,81 @@ g_n(1) = \frac{F_1}{F_2} + \frac{F_2}{F_3} + \dots + \frac{F_{n+1}}{F_{n+2}}
     \item \textbf{Evaluation Simplifies Structure:} Substituting a specific value (like $x=1$) into a generalized algebraic formula often collapses complex variables into simpler sequence relationships, making seemingly difficult series proofs straightforward.
 \end{itemize}
 \end{takeaways}
+
+% --- New Problem: Recurrence Relation from Explicit Formula ---
+\begin{problem}[Recurrence Relation from Explicit Formula]
+Consider the sequences $A_n$ and $B_n$ defined by 
+
+$$A_n = (1+\sqrt{2})^n + (1-\sqrt{2})^n$$
+$$B_n = \sqrt{2}\left[(1+\sqrt{2})^n - (1-\sqrt{2})^n\right]$$
+
+for integers $n \ge 0$.
+
+\textbf{(i)} By finding a quadratic equation with roots $\alpha = 1+\sqrt{2}$ and $\beta = 1-\sqrt{2}$, show that both sequences satisfy the linear second-order recurrence relation $U_n = 2U_{n-1} + U_{n-2}$ for $n \ge 2$.
+
+\textbf{(ii)} Using mathematical induction and the recurrence relation, prove that $A_n$ is an even integer for all integers $n \ge 0$.
+
+\textbf{(iii)} Similarly, prove that $B_n$ is a multiple of $4$ for all integers $n \ge 1$, and deduce that $B_n$ is an even integer when $n$ is an even positive integer.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Part (i):} Calculate the sum of the roots ($\alpha + \beta$) and the product of the roots ($\alpha\beta$) to construct a characteristic quadratic equation of the form $x^2 - (\text{sum})x + (\text{product}) = 0$. Multiply this equation by $x^{n-2}$.
+    \item \textbf{Part (ii):} Strong induction requires you to establish two base cases ($n=0$ and $n=1$) because the recurrence relation relies on the two previous terms.
+    \item \textbf{Part (iii):} Calculate $B_1$ and $B_2$ for your base cases. In your inductive step, express the assumption as $B_k = 4P$ and $B_{k-1} = 4Q$ for integers $P$ and $Q$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief]
+\textbf{Part (i)}
+Let $\alpha = 1+\sqrt{2}$ and $\beta = 1-\sqrt{2}$.
+The sum of the roots is $\alpha + \beta = 2$.
+The product of the roots is $\alpha\beta = (1+\sqrt{2})(1-\sqrt{2}) = 1 - 2 = -1$.
+Therefore, $\alpha$ and $\beta$ are roots of the characteristic equation $x^2 - 2x - 1 = 0$.
+Since $\alpha$ is a root, $\alpha^2 = 2\alpha + 1$.
+Multiplying by $\alpha^{n-2}$ gives $\alpha^n = 2\alpha^{n-1} + \alpha^{n-2}$.
+By identical reasoning, $\beta^n = 2\beta^{n-1} + \beta^{n-2}$.
+Since both $A_n = \alpha^n + \beta^n$ and $B_n = \sqrt{2}(\alpha^n - \beta^n)$ are linear combinations of $\alpha^n$ and $\beta^n$, they must both satisfy the recurrence relation:
+
+$$U_n = 2U_{n-1} + U_{n-2}$$
+
+\textbf{Part (ii)}
+\textit{Base cases:}
+For $n=0$: $A_0 = (1+\sqrt{2})^0 + (1-\sqrt{2})^0 = 1 + 1 = 2$, which is an even integer.
+For $n=1$: $A_1 = (1+\sqrt{2})^1 + (1-\sqrt{2})^1 = 2$, which is an even integer.
+\textit{Inductive step:}
+Assume the statement is true for $n=k$ and $n=k-1$ for some integer $k \ge 1$. That is, assume $A_k$ and $A_{k-1}$ are both even integers.
+From the recurrence relation established in (i):
+
+$$A_{k+1} = 2A_k + A_{k-1}$$
+
+Since $A_k$ is an integer, $2A_k$ is an even integer.
+Since $A_{k-1}$ is assumed to be an even integer, the sum of two even integers ($2A_k + A_{k-1}$) is also an even integer.
+Thus, $A_{k+1}$ is an even integer.
+By the principle of strong mathematical induction, $A_n$ is an even integer for all $n \ge 0$.
+
+\textbf{Part (iii)}
+\textit{Base cases:}
+For $n=1$: $B_1 = \sqrt{2}\left[(1+\sqrt{2}) - (1-\sqrt{2})\right] = \sqrt{2}(2\sqrt{2}) = 4 = 4 \times 1$.
+For $n=2$: $B_2 = \sqrt{2}\left[(1+\sqrt{2})^2 - (1-\sqrt{2})^2\right] = \sqrt{2}\left[(3+2\sqrt{2}) - (3-2\sqrt{2})\right] = \sqrt{2}(4\sqrt{2}) = 8 = 4 \times 2$.
+Both are multiples of $4$.
+\textit{Inductive step:}
+Assume true for $n=k$ and $n=k-1$ for some integer $k \ge 2$.
+Let $B_k = 4P$ and $B_{k-1} = 4Q$, where $P$ and $Q$ are integers.
+Using the recurrence relation:
+
+$$B_{k+1} = 2B_k + B_{k-1}$$
+$$B_{k+1} = 2(4P) + 4Q = 4(2P + Q)$$
+
+Since $P$ and $Q$ are integers, $(2P + Q)$ is an integer. Thus, $B_{k+1}$ is a multiple of $4$.
+By strong mathematical induction, $B_n$ is a multiple of $4$ for all $n \ge 1$.
+Since any multiple of $4$ is inherently an even number, $B_n$ is an even integer for all positive integers $n$, which inherently satisfies the condition for all \textit{even} positive integers $n$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Binet's Formula Concept:} This problem introduces the inverse logic of Binet's formula (used for Fibonacci numbers). Instead of solving a recurrence relation to find an explicit surd formula, we use the explicit surd formula to find the much simpler integer-based recurrence relation.
+    \item \textbf{Strong Induction:} Standard induction only requires the $k$th step to prove the $(k+1)$th step. Because second-order recurrence relations look back \textit{two} steps, strong induction is required, necessitating two base cases and assumptions for both $k$ and $k-1$.
+    \item \textbf{Alternative Pathways:} Often in advanced mathematics, combinatorics (Binomial Theorem) and recursive sequences offer two distinct pathways to prove the exact same integer properties.
+\end{itemize}
+\end{takeaways}

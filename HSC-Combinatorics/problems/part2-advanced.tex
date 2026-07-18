@@ -1497,3 +1497,76 @@ Since $0 < 3 - 2\sqrt{2} < 1$, the term $(3 - 2\sqrt{2})^n \to 0$ as $n \to \inf
     \item \textbf{Fractional Parts from Integers:} When an expression evaluates to an integer minus a small fraction, the fractional part is always $1$ minus that small fraction. 
     \item \textbf{Limit Behavior:} The limit of the fractional part approaching $1$ implies that as $n$ grows, the original irrational sequence gets infinitely close to the \textit{next} whole integer without ever reaching it.
 \end{takeaways}
+
+% --- New Problem: Integer Properties of Conjugate Binomial Expansions ---
+\begin{problem}[Integer Properties of Conjugate Binomial Expansions]
+Consider the conjugate surd expressions 
+
+$$A_n = (1+\sqrt{2})^n + (1-\sqrt{2})^n$$
+$$
+B_n = \sqrt{2}\left[(1+\sqrt{2})^n - (1-\sqrt{2})^n\right]
+$$
+
+\textbf{(i)} Using the Binomial Theorem, expand $(1+\sqrt{2})^n$ and $(1-\sqrt{2})^n$ in sigma notation.
+
+\textbf{(ii)} Hence, show that $A_n$ is an even integer for all positive integers $n$.
+
+\textbf{(iii)} Show that $B_n$ is a multiple of $4$ for all positive integers $n$, and deduce that $B_n$ is an even integer for all even positive integers $n$.
+\end{problem}
+
+\begin{hint}
+    \item \textbf{Part (i):} Recall the standard Binomial Theorem formula: $(x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k}y^k$. Be careful with the negative sign in the second expansion.
+    \item \textbf{Part (ii):} When you add the two expansions together, observe what happens to the terms where the index $k$ is odd versus when $k$ is even.
+    \item \textbf{Part (iii):} Subtract the two expansions first. Notice how the odd powers of $\sqrt{2}$ from the binomial expansion interact with the external $\sqrt{2}$ multiplier to form integers.
+\end{hint}
+
+\begin{solution}[Brief]
+\textbf{Part (i)}
+Using the Binomial Theorem:
+
+$$(1+\sqrt{2})^n = \sum_{k=0}^n \binom{n}{k} 1^{n-k} (\sqrt{2})^k = \sum_{k=0}^n \binom{n}{k} (\sqrt{2})^k$$
+
+$$(1-\sqrt{2})^n = \sum_{k=0}^n \binom{n}{k} 1^{n-k} (-\sqrt{2})^k = \sum_{k=0}^n \binom{n}{k} (-1)^k (\sqrt{2})^k$$
+
+\textbf{Part (ii)}
+Adding the two expansions gives:
+
+$$A_n = \sum_{k=0}^n \binom{n}{k} (\sqrt{2})^k [1 + (-1)^k]$$
+
+When $k$ is odd, $[1 + (-1)^k] = 0$. When $k$ is even (let $k = 2m$ for an integer $m \ge 0$), $[1 + (-1)^k] = 2$.
+
+$$A_n = 2 \sum_{0 \le 2m \le n} \binom{n}{2m} (\sqrt{2})^{2m} = 2 \sum_{0 \le 2m \le n} \binom{n}{2m} 2^m$$
+
+Since $\binom{n}{2m}$ and $2^m$ are both integers, their sum is an integer. Let this sum be $M$.
+
+$$A_n = 2M$$
+
+Therefore, $A_n$ is an even integer for all positive integers $n$.
+
+\textbf{Part (iii)}
+Subtracting the expansions gives:
+
+$$(1+\sqrt{2})^n - (1-\sqrt{2})^n = \sum_{k=0}^n \binom{n}{k} (\sqrt{2})^k [1 - (-1)^k]$$
+
+Here, when $k$ is even, $[1 - (-1)^k] = 0$. When $k$ is odd (let $k = 2m+1$ for an integer $m \ge 0$), $[1 - (-1)^k] = 2$.
+
+$$(1+\sqrt{2})^n - (1-\sqrt{2})^n = 2 \sum_{0 \le 2m+1 \le n} \binom{n}{2m+1} (\sqrt{2})^{2m+1}$$
+
+Substitute this back into $B_n$:
+
+$$B_n = \sqrt{2} \left[ 2 \sum_{0 \le 2m+1 \le n} \binom{n}{2m+1} (\sqrt{2})^{2m} \cdot \sqrt{2} \right]$$
+$$B_n = 2 \cdot (\sqrt{2} \cdot \sqrt{2}) \sum_{0 \le 2m+1 \le n} \binom{n}{2m+1} 2^m$$
+$$B_n = 4 \sum_{0 \le 2m+1 \le n} \binom{n}{2m+1} 2^m$$
+
+Since the sum consists of integer terms, let the sum be integer $N$.
+
+$$B_n = 4N$$
+
+Since $B_n$ is a multiple of $4$ for \textit{all} positive integers $n$, it is strictly an even integer. Consequently, this holds true for the specific subset of all \textit{even} positive integers $n$.
+\end{solution}
+
+\begin{takeaways}
+    \item \textbf{Conjugate Expansion Mechanics:} Adding and subtracting conjugate binomial expansions like $(x+y)^n \pm (x-y)^n$ is a standard HSC algebraic tool. Adding them isolates the even-powered terms, while subtracting them isolates the odd-powered terms.
+    \item \textbf{Integer Proofs via Combinatorics:} The Binomial Theorem is not just for finding coefficients; it is a fundamental method for proving divisibility and integer properties in Number Theory.
+    \item \textbf{Domain Clarification:} The original text asks to prove the property for "even positive integers $n$". The proof reveals that $B_n$ is even for \textit{all} positive integers. Recognizing when a property is universally true despite a restricted domain is a sign of strong mathematical maturity.
+\end{takeaways}
