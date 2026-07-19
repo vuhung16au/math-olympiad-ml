@@ -720,3 +720,72 @@ Since any multiple of $4$ is inherently an even number, $B_n$ is an even integer
     \item \textbf{Alternative Pathways:} Often in advanced mathematics, combinatorics (Binomial Theorem) and recursive sequences offer two distinct pathways to prove the exact same integer properties.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[The Paradox of Induction]
+Prove that for every positive integer $n$, the following inequality holds:
+$$ 1 + \frac{1}{2} + \frac{1}{4} + \dots + \frac{1}{2^n} < 2 $$
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Hint 1:} Try proving this directly using standard induction. Notice that assuming the sum for $k$ is $< 2$ only allows you to prove the sum for $k+1$ is $< 2 + \frac{1}{2^{k+1}}$, which doesn't reach the required target of $< 2$.
+    \item \textbf{Hint 2:} Consider the ``Paradox of Induction'': sometimes it is easier to prove a \textit{stronger} statement because it gives you a more powerful inductive hypothesis.
+    \item \textbf{Hint 3:} Instead of an inequality, try to find an exact formula for the series. Prove that $1 + \frac{1}{2} + \frac{1}{4} + \dots + \frac{1}{2^n} = 2 - \frac{1}{2^n}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief]
+Standard induction fails because the inductive step does not preserve the strict $< 2$ bound without extra information. We formulate a stronger proposition $Q(n)$:
+$$ 1 + \frac{1}{2} + \frac{1}{4} + \dots + \frac{1}{2^n} = 2 - \frac{1}{2^n} $$
+\textbf{Base Case ($n=1$):} LHS $= 1 + \frac{1}{2} = \frac{3}{2}$. RHS $= 2 - \frac{1}{2} = \frac{3}{2}$. $Q(1)$ is true.\\
+\textbf{Inductive Step:} Assume $Q(k)$ is true: $1 + \dots + \frac{1}{2^k} = 2 - \frac{1}{2^k}$.\\
+For $n=k+1$, add $\frac{1}{2^{k+1}}$ to the sum:
+$$ \text{Sum} = \left(2 - \frac{1}{2^k}\right) + \frac{1}{2^{k+1}} $$
+Make common denominators for the fractions:
+$$ \text{Sum} = 2 - \frac{2}{2^{k+1}} + \frac{1}{2^{k+1}} = 2 - \frac{1}{2^{k+1}} $$
+Thus, $Q(k+1)$ is true. By induction, $Q(n)$ holds for all positive integers $n$. \\
+Since $\frac{1}{2^n} > 0$ for all positive integers $n$, it follows directly that $2 - \frac{1}{2^n} < 2$, proving the original statement.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{The Paradox of Induction:} Counter-intuitively, a harder (stronger or more specific) theorem can be easier to prove by induction because the inductive hypothesis you get to assume is equally stronger.
+    \item \textbf{Exact formulas beat loose bounds:} If an inequality induction gets stuck, look for an underlying equality that governs the pattern.
+\end{itemize}
+\end{takeaways}
+
+\begin{problem}[Strong Induction with Rational Functions]
+Show that if $x + \frac{1}{x} \in \mathbb{Z}$, then $x^n + \frac{1}{x^n} \in \mathbb{Z}$ for all positive integers $n$.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Hint 1:} This problem requires \textbf{Strong Induction}. To prove the statement for $n+1$, you will need to rely on the assumption that it is true for \textit{both} $n$ and $n-1$.
+    \item \textbf{Hint 2:} You need two base cases: $n=1$ and $n=2$. Calculate $x^2 + \frac{1}{x^2}$ by squaring $(x + \frac{1}{x})$.
+    \item \textbf{Hint 3:} For the inductive step, expand the product $\left(x + \frac{1}{x}\right)\left(x^k + \frac{1}{x^k}\right)$. How does this relate to $x^{k+1} + \frac{1}{x^{k+1}}$?
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief]
+Let $P(n)$ be the statement ``$x^n + \frac{1}{x^n} \in \mathbb{Z}$''.\\
+\textbf{Base Cases:}\\
+$P(1)$ is true by the given hypothesis ($x + \frac{1}{x} \in \mathbb{Z}$).\\
+For $P(2)$, we observe that $x^2 + \frac{1}{x^2} = \left(x + \frac{1}{x}\right)^2 - 2$. Since $x + \frac{1}{x}$ is an integer, its square minus 2 is also an integer. Thus $P(2)$ holds.\\
+\textbf{Inductive Step (Strong Induction):} \\
+Assume $P(k)$ and $P(k-1)$ are true for some integer $k \ge 2$. We examine the term for $k+1$:
+$$ x^{k+1} + \frac{1}{x^{k+1}} = \left(x + \frac{1}{x}\right)\left(x^k + \frac{1}{x^k}\right) - \left(x^{k-1} + \frac{1}{x^{k-1}}\right) $$
+We know:
+\begin{enumerate}
+    \item $x + \frac{1}{x} \in \mathbb{Z}$ (hypothesis)
+    \item $x^k + \frac{1}{x^k} \in \mathbb{Z}$ (by $P(k)$)
+    \item $x^{k-1} + \frac{1}{x^{k-1}} \in \mathbb{Z}$ (by $P(k-1)$)
+\end{enumerate}
+Because integers are closed under multiplication and subtraction, the entire expression $x^{k+1} + \frac{1}{x^{k+1}}$ must be an integer. Thus $P(k+1)$ is true. By the Strong Principle of Mathematical Induction, $P(n)$ is true for all positive integers $n$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Identifying Strong Induction:} Whenever an algebraic sequence or manipulation links the $(k+1)$-th term to multiple preceding terms (not just the $k$-th term), Strong Induction is required.
+    \item \textbf{Multiple Base Cases:} If your inductive step looks back two steps (to $k-1$), you must explicitly prove two consecutive base cases to get the chain started.
+\end{itemize}
+\end{takeaways}

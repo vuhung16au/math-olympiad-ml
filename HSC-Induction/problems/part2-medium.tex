@@ -99,4 +99,36 @@ Add the $(k+1)$-th term $(k+1)\left(\frac{1}{2}\right)^k$ to the hypothesis and 
 Base case: $n=1$ gives $1 = 4 - 3$. Assume the formula holds for $n=k$. Then the sum up to $k+1$ is $4 - \frac{k+2}{2^{k-1}} + (k+1)\left(\frac{1}{2}\right)^k = 4 - \frac{2(k+2)}{2^k} + \frac{k+1}{2^k} = 4 - \frac{2k+4-k-1}{2^k} = 4 - \frac{k+3}{2^k}$.
 \end{solution}
 
+\begin{problem}[Factorial Series]
+Prove by mathematical induction that for any positive integer $n$, the following equality holds:
+$$ (n+1)! = 1 + \frac{1!^2}{0!} + \frac{2!^2}{1!} + \dots + \frac{n!^2}{(n-1)!} $$
+\end{problem}
 
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Hint 1:} Before starting the induction, simplify the general term in the series. What does $\frac{k!^2}{(k-1)!}$ simplify to? Write $k!$ as $k \cdot (k-1)!$.
+    \item \textbf{Hint 2:} For the inductive step, assume the statement holds for $n=k$. When adding the $(k+1)$-th term to both sides, look for a common factor to pull out to achieve $(k+2)!$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Brief]
+Let $P(n)$ be the proposition.\\
+\textbf{Base Case ($n=1$):} LHS $= (1+1)! = 2$. RHS $= 1 + \frac{1!^2}{0!} = 1 + 1 = 2$. $P(1)$ is true.\\
+\textbf{Inductive Step:} Assume $P(k)$ is true for some positive integer $k$:
+$$ (k+1)! = 1 + \frac{1!^2}{0!} + \dots + \frac{k!^2}{(k-1)!} $$
+We want to prove $P(k+1)$. Add the $(k+1)$-th term to both sides:
+$$ \text{RHS of } P(k+1) = (k+1)! + \frac{(k+1)!^2}{k!} $$
+Note that $\frac{(k+1)!^2}{k!} = (k+1)! \cdot \frac{(k+1)!}{k!} = (k+1)!(k+1)$.\\
+Substituting this back in:
+$$ \text{RHS} = (k+1)! + (k+1)!(k+1) $$
+Factor out $(k+1)!$:
+$$ \text{RHS} = (k+1)![1 + (k+1)] = (k+1)!(k+2) = (k+2)! $$
+This is exactly the LHS of $P(k+1)$. Hence, by the principle of mathematical induction, the statement is true for all integers $n \ge 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}
+    \item \textbf{Algebraic simplification before induction:} Simplifying the terms of a series (e.g., recognizing factorials can cancel) drastically reduces the algebraic burden during the inductive step.
+    \item \textbf{Factoring is your friend:} In factorial induction proofs, always look to factor out the lowest common factorial rather than expanding everything.
+\end{itemize}
+\end{takeaways}
