@@ -1,0 +1,64 @@
+\begin{problem}[The Power Series of $\ln(1+x)$]
+Let 
+
+$$P_n(x) = \sum_{k=1}^n (-1)^{k-1} \frac{x^k}{k}$$ be the $n$-th degree polynomial approximation for $\ln(1+x)$.
+Let the remainder function be defined as 
+
+$$R_n(x) = \ln(1+x) - P_n(x)$$.
+
+\begin{enumerate}[label=(\roman*)]
+\item By utilizing the properties of derivatives and mathematical induction, prove that for all integers $n \ge 1$, the following inequality holds for $x > 0$:
+\[0 < (-1)^n R_n(x) < \frac{x^{n+1}}{n+1}\]
+% \textit{(Hint: Consider $h(x) = g(x) - f(x)$, show that $h(0) \ge 0$, and prove that $h'(x) > 0$ for $x > 0$.)}
+
+\item By analyzing the terms of the sequence for a fixed $x$ in the interval $0 < x \le 1$, show that:
+\[\lim_{n \to \infty} \frac{x^{n+1}}{n+1} = 0\]
+
+\item Using the Squeeze Theorem and the results from the previous parts, evaluate $\lim_{n \to \infty} R_n(x)$. Hence, prove that the infinite power series converges to $\ln(1+x)$ for any $0 < x \le 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+\item \textbf{For Part (i) - The Base Case:} For $n = 1$, you need to prove $0 < x - \ln(1+x) < \frac{x^2}{2}$. Split this into two separate proofs using the hint provided: first define $h_1(x) = x - \ln(1+x)$ and then $h_2(x) = \frac{x^2}{2} - h_1(x)$. Evaluate their derivatives.
+\item \textbf{For Part (i) - The Inductive Step:} When finding $R'_n(x)$, remember that $P'_n(x)$ is a finite geometric series: $1 - x + x^2 - \dots + (-1)^{n-1}x^{n-1}$. Use the sum formula for a geometric series to simplify $R'_n(x)$ before proceeding with the induction on the upper bound.
+\item \textbf{For Part (ii):} Consider the maximum possible value of $x^{n+1}$ when $x$ is restricted to the interval $(0, 1]$.
+\item \textbf{For Part (iii):} Recognize that $(-1)^n R_n(x)$ is simply $|R_n(x)|$. If the absolute value of the remainder is squeezed to zero, the polynomial approximation perfectly converges to the function.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i) Proof by Induction:}
+
+\textbf{Base Case ($n=1$):} We must show $0 < x - \ln(1+x) < \frac{x^2}{2}$.
+Let $h_1(x) = x - \ln(1+x)$. Note $h_1(0) = 0$. The derivative is $h'_1(x) = 1 - \frac{1}{1+x} = \frac{x}{1+x}$. For $x > 0$, $h'_1(x) > 0$, hence $h_1(x) > 0$.
+Let $h_2(x) = \frac{x^2}{2} - (x - \ln(1+x))$. Note $h_2(0) = 0$. The derivative is $h'_2(x) = x - \frac{x}{1+x} = \frac{x^2}{1+x}$. For $x > 0$, $h'_2(x) > 0$, hence $h_2(x) > 0$. The base case holds.
+
+\textbf{Inductive Step:} Assume true for $n = k$: $0 < (-1)^k R_k(x) < \frac{x^{k+1}}{k+1}$.
+We must prove for $n = k+1$: $0 < (-1)^{k+1} R_{k+1}(x) < \frac{x^{k+2}}{k+2}$.
+
+First, establish $R'_{k+1}(x) = \frac{1}{1+x} - \sum_{j=1}^{k+1} (-1)^{j-1} x^{j-1}$. The sum is a geometric series equating to $\frac{1 - (-x)^{k+1}}{1+x}$. Thus, $R'_{k+1}(x) = \frac{(-x)^{k+1}}{1+x} = \frac{(-1)^{k+1} x^{k+1}}{1+x}$.
+
+\textit{Lower bound:} $(-1)^{k+1} R_{k+1}(x) = (-1)^{k+1} \left[R_k(x) - (-1)^k \frac{x^{k+1}}{k+1}\right] = \frac{x^{k+1}}{k+1} - (-1)^k R_k(x)$. By the induction hypothesis, this is strictly greater than 0.
+
+\textit{Upper bound:} Let $H(x) = \frac{x^{k+2}}{k+2} - (-1)^{k+1} R_{k+1}(x)$. Note $H(0) = 0$.
+$H'(x) = x^{k+1} - (-1)^{k+1} R'_{k+1}(x) = x^{k+1} - \frac{x^{k+1}}{1+x} = \frac{x^{k+2}}{1+x}$.
+Since $x > 0$, $H'(x) > 0$, meaning $H(x)$ is strictly increasing from 0, so $H(x) > 0$. The proof by induction is complete.
+
+\textbf{(ii) Limit Evaluation:}
+For any fixed $x$ such that $0 < x \le 1$, we know $x^{n+1} \le 1$.
+Therefore, $0 < \frac{x^{n+1}}{n+1} \le \frac{1}{n+1}$.
+As $n \to \infty$, the sequence $\frac{1}{n+1} \to 0$. By comparison, $\lim_{n \to \infty} \frac{x^{n+1}}{n+1} = 0$.
+
+\textbf{(iii) Squeeze Theorem \& Convergence:}
+From (i), we have $0 < |R_n(x)| < \frac{x^{n+1}}{n+1}$ for $x > 0$.
+For $0 < x \le 1$, we established in (ii) that the upper bound approaches 0 as $n \to \infty$.
+By the Squeeze Theorem, $\lim_{n \to \infty} |R_n(x)| = 0$, which implies $\lim_{n \to \infty} R_n(x) = 0$.
+Since $R_n(x) = \ln(1+x) - P_n(x)$, we conclude $\lim_{n \to \infty} P_n(x) = \ln(1+x)$. The power series converges to the function on this interval.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Bridging Calculus and Sequences:} This problem demonstrates how differential calculus (proving inequalities via first derivatives) acts as the engine for establishing rigorous bounds on sequences and series.
+\item \textbf{Error Bounding Intuition:} By treating the remainder as a distinct function to be bounded, it builds an intuitive foundation for understanding Taylor and Maclaurin error terms without relying on Lagrange's error formula out of the gate.
+\item \textbf{Alternating Mechanics:} Handling the $(-1)^n$ term requires careful algebraic bookkeeping during the inductive step, reinforcing the relationship between alternating series and absolute convergence bounds.
+\end{takeaways}

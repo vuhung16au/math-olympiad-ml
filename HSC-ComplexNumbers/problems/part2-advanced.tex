@@ -1091,3 +1091,60 @@ Maximum $|z^3 - z + 2|^2 = 13$. Maximum value of $|z^3 - z + 2|$ is $\sqrt{13}$.
     \item \textbf{Endpoint Checks:} Reinforces that students must check domain endpoints for global maximums.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[Inequality from Complex Number Manipulation]
+Let $z$ be a non-zero complex number such that $|z^3 + z^{-3}| \leq 2$.
+By letting $w = z + z^{-1}$, 
+
+\textbf{(i)} Show that $z^3 + z^{-3} = w^3 - 3w$. \\
+\textbf{(ii)} Hence, using triangle inequality, or otherwise, prove that $|z + z^{-1}| \leq 2$.
+\end{problem}
+
+\begin{hint}
+\textbf{Part (i):} Start by expanding $(z + z^{-1})^3$ using the binomial theorem and group the resulting terms to isolate $z^3 + z^{-3}$. \\
+\textbf{Part (ii):} Recall the reverse triangle inequality: $|a - b| \ge |a| - |b|$. Apply this to $|w^3 - 3w|$ and proceed with a proof by contradiction assuming $|w| > 2$.
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Expand $w^3$:
+\begin{align*}
+w^3 &= (z + z^{-1})^3 \\
+&= z^3 + 3z^2(z^{-1}) + 3z(z^{-2}) + z^{-3} \\
+&= z^3 + 3z + 3z^{-1} + z^{-3} \\
+&= (z^3 + z^{-3}) + 3(z + z^{-1})
+\end{align*}
+Substitute $w = z + z^{-1}$:
+\begin{align*}
+w^3 &= z^3 + z^{-3} + 3w \\
+\therefore z^3 + z^{-3} &= w^3 - 3w
+\end{align*}
+
+\textbf{(ii)} We are given $|z^3 + z^{-3}| \leq 2$.
+Substituting the result from (i):
+\[ |w^3 - 3w| \leq 2 \]
+Using the reverse triangle inequality $|a - b| \ge |a| - |b|$:
+\begin{align*}
+|w^3 - 3w| &\ge |w^3| - |3w| \\
+|w^3 - 3w| &\ge |w|^3 - 3|w| \\
+\implies |w|^3 - 3|w| &\leq |w^3 - 3w| \leq 2
+\end{align*}
+Assume for the sake of contradiction that $|w| > 2$.
+Let $f(x) = x^3 - 3x$, where $x = |w|$. We are analyzing $f(x)$ for $x > 2$.
+\[ f'(x) = 3x^2 - 3 \]
+For $x > 2$, $f'(x) > 0$, so the function is strictly increasing.
+Therefore, if $x > 2$, $f(x) > f(2)$.
+\[ f(2) = 2^3 - 3(2) = 8 - 6 = 2 \]
+Thus, if $|w| > 2$, it must be true that $|w|^3 - 3|w| > 2$.
+However, we have already established that $|w|^3 - 3|w| \leq 2$.
+This directly contradicts our finding.
+Therefore, our assumption must be false, meaning $|w| \leq 2$.
+\[ \therefore |z + z^{-1}| \leq 2 \]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Scaffolding complex proofs:} Defining a strategic intermediate variable ($w = z + z^{-1}$) is a key technique to unlock complex algebraic relationships.
+    \item \textbf{Reverse Triangle Inequality:} Applying $|a - b| \ge |a| - |b|$ in non-standard contexts is a frequent differentiator in high-level HSC exams.
+    \item \textbf{Logical rigor:} Constructing a formal proof by contradiction by combining algebraic manipulation with function analysis (evaluating bounds using derivatives) is essential for solving advanced inequalities.
+\end{itemize}
+\end{takeaways}

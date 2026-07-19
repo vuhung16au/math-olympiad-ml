@@ -9,6 +9,9 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
 \usepackage{geometry}
 \usepackage[utf8]{inputenc}
 % Links without visible rectangles (TOC and cross-refs remain clickable).
@@ -755,5 +758,118 @@ $f(x)$ & $1^-$ & $\searrow$ & $0$ & $\searrow$ & & $-\infty\;/\;+\infty$ & & $\s
 \end{axis}
 \end{tikzpicture}
 \end{center}
+
+\subsection{Periodic Functions}
+
+\begin{definition}
+A function $f(x)$ is \textbf{periodic} if its values repeat at regular intervals. Mathematically, a function has a period $p$ (where $p > 0$) if for all $x$ in the domain of $f$:
+\[
+f(x + p) = f(x)
+\]
+\end{definition}
+
+The \textbf{fundamental period} is the smallest positive value of $p$ for which this equation holds. Visually, if you take the graph of a periodic function over one period and translate it left or right by $p$ units, it will map perfectly onto itself.
+
+\begin{example}
+\textbf{Examples of Periodic Functions:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Trigonometric Functions:} The most common examples.
+  \begin{itemize}
+    \item $f(x) = \sin(x)$ and $f(x) = \cos(x)$ both have a fundamental period of $2\pi$.
+    \item $f(x) = \tan(x)$ has a fundamental period of $\pi$.
+  \end{itemize}
+  \item \textbf{Non-Trigonometric Periodic Functions:} Periodicity is not exclusive to trigonometry.
+  \begin{itemize}
+    \item \textbf{The Fractional Part Function:} $f(x) = x - \lfloor x \rfloor$ (where $\lfloor x \rfloor$ is the greatest integer less than or equal to $x$). This function extracts the decimal part of a number (e.g., $f(2.7) = 0.7$). It forms a repeating "sawtooth" graph and has a fundamental period of $p = 1$.
+    \item \textbf{Square Waves / Step Functions:} Often used in digital electronics to represent binary alternating states (0 and 1) over time.
+  \end{itemize}
+\end{itemize}
+\end{example}
+
+% \textbf{Worked Examples}
+
+\begin{example}
+\textbf{Scaling the Period of a Trigonometric Function}
+
+\textbf{Question:} Find the fundamental period of the function $f(x) = 3\sin(4x - \frac{\pi}{2}) + 1$.
+
+\textbf{Solution:}
+\begin{enumerate}
+  \item Identify the base function and its standard period. The base function is $\sin(x)$, which has a period of $2\pi$.
+  \item Identify the coefficient of $x$. In the expression $4x - \frac{\pi}{2}$, the coefficient $n = 4$. Horizontal shifts (the $-\frac{\pi}{2}$) and vertical shifts/dilations do not affect the period.
+  \item Calculate the new period using the formula $p = \frac{\text{Standard Period}}{|n|}$:
+  \[
+  p = \frac{2\pi}{4} = \frac{\pi}{2}
+  \]
+\end{enumerate}
+The function repeats every $\frac{\pi}{2}$ units.
+\end{example}
+
+\begin{example}
+\textbf{The Sum of Two Periodic Functions}
+
+\textbf{Question:} Determine the fundamental period of the function $g(x) = \sin\left(\frac{2x}{3}\right) + \cos\left(\frac{3x}{4}\right)$.
+
+\textbf{Solution:}
+For a sum of two periodic functions to be periodic, the ratio of their periods must be a rational number. The period of the combined function is the Lowest Common Multiple (LCM) of their individual periods.
+\begin{enumerate}
+  \item Find the period of the first term, $T_1$:
+  \[
+  T_1 = \frac{2\pi}{2/3} = 3\pi
+  \]
+  \item Find the period of the second term, $T_2$:
+  \[
+  T_2 = \frac{2\pi}{3/4} = \frac{8\pi}{3}
+  \]
+  \item Find the LCM of $3\pi$ and $\frac{8\pi}{3}$. To do this easily, express both with a common denominator:
+  \[
+  T_1 = \frac{9\pi}{3}, \quad T_2 = \frac{8\pi}{3}
+  \]
+  \item The LCM of the numerators ($9\pi$ and $8\pi$) is $72\pi$.
+  \[
+  \text{Overall Period } T = \frac{72\pi}{3} = 24\pi
+  \]
+\end{enumerate}
+\textit{(Check: $24\pi$ contains exactly 8 cycles of $T_1$ and exactly 9 cycles of $T_2$.)}
+\end{example}
+
+\begin{example}
+\textbf{Periodicity via Functional Equations (Question 16 Style)}
+
+\textbf{Question:} A function $f(x)$ satisfies the functional equation $f(x+a) = \frac{1 - f(x)}{1 + f(x)}$ for all real $x$, where $a$ is a non-zero constant and $f(x) \neq -1$. Prove that $f(x)$ is periodic and state its period.
+
+\textbf{Solution:}
+To prove periodicity, we need to show that $f(x+p) = f(x)$ for some constant $p$. We can find this by substituting $x+a$ into the functional equation repeatedly.
+\begin{enumerate}
+  \item Start with the given equation:
+  \[
+  f(x+a) = \frac{1 - f(x)}{1 + f(x)}
+  \]
+  \item Find $f(x+2a)$ by replacing $x$ with $x+a$:
+  \[
+  f(x+2a) = f((x+a)+a) = \frac{1 - f(x+a)}{1 + f(x+a)}
+  \]
+  \item Substitute the original expression for $f(x+a)$ into this new equation:
+  \[
+  f(x+2a) = \frac{1 - \left( \frac{1 - f(x)}{1 + f(x)} \right)}{1 + \left( \frac{1 - f(x)}{1 + f(x)} \right)}
+  \]
+  \item Multiply the numerator and denominator by $1 + f(x)$ to simplify the complex fraction:
+  \[
+  f(x+2a) = \frac{(1 + f(x)) - (1 - f(x))}{(1 + f(x)) + (1 - f(x))}
+  \]
+  \item Simplify the algebra:
+  \[
+  f(x+2a) = \frac{1 + f(x) - 1 + f(x)}{1 + f(x) + 1 - f(x)} = \frac{2f(x)}{2} = f(x)
+  \]
+\end{enumerate}
+Since $f(x+2a) = f(x)$ for all $x$, the function is periodic with a period of $2a$.
+\end{example}
+
+\textbf{Real-World Application}
+
+\begin{remark}
+\textbf{Machine Learning (Transformer Architectures):}
+In Large Language Models (LLMs), neural networks don't naturally understand the order of words in a sentence. To solve this, models use \textbf{Positional Encoding}. They add a mix of sine and cosine functions of varying periods to the data of each word. Because these trigonometric functions are strictly periodic and predictable, the AI can decode these overlapping waves to calculate exactly how far apart different words are in a prompt, allowing it to understand syntax and context.
+\end{remark}
 
 \end{document}
