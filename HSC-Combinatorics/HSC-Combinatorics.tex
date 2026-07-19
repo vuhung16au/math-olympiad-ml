@@ -550,6 +550,95 @@ This principle is very useful in restricted counting problems, probability, and 
 \end{tikzpicture}
 \end{center}
 
+For four sets $A, B, C,$ and $D$, we have:
+
+\begin{align*}
+& |A \cup B \cup C \cup D| =
+\sum |A| - \sum |A \cap B| + \sum |A \cap B \cap C| - |A \cap B \cap C \cap D|\\
+& = |A| + |B| + |C| + |D| -(|A \cap B| + |A \cap C| + |A \cap D| + |B \cap C| + |B \cap D| + |C \cap D|)\\
+& \quad +( |A \cap B \cap C| + |A \cap B \cap D| + |A \cap C \cap D| + |B \cap C \cap D|) - |A \cap B \cap C \cap D|.
+\end{align*}
+  
+\subsubsection*{General Case: Theorem}
+
+If $A_1, A_2, \dots, A_n$ are finite sets, then the cardinality of their union is given by:
+
+\begin{align*}
+|A_1 \cup A_2 \cup \dots \cup A_n| &= \sum_{i=1}^n |A_i| - \sum_{1 \le i < j \le n} |A_i \cap A_j| + \dots \\
+&\quad + (-1)^{k-1} \sum_{1 \le i_1 < i_2 < \dots < i_k \le n} |A_{i_1} \cap A_{i_2} \dots \cap A_{i_k}| + \dots + (-1)^{n-1} |A_1 \cap \dots \cap A_n|
+\end{align*}
+
+\subsubsection*{Proof by Mathematical Induction}
+
+\textbf{Step 1: Proposition Definition}\\
+Let $P(n)$ be the statement: "For any sets $A_1 \dots A_n$, we have
+\[
+|A_1 \cup \dots \cup A_n| = \sum_{i} |A_i| - \sum_{i<j} |A_i \cap A_j| + \dots \pm |A_1 \cap A_2 \cap \dots \cap A_n|
+\]
+"
+
+\textbf{Step 2: Base Cases}
+\begin{itemize}
+    \item $P(1)$ is trivially true, as $|A_1| = |A_1|$.
+    \item $P(2)$ is also true, since by basic properties of sets:
+\[
+|A_1 \cup A_2| = |A_1| + |A_2| - |A_1 \cap A_2|
+\]
+\end{itemize}
+
+\textbf{Step 3: Inductive Hypothesis and Step}\\
+Assume now that the result holds for all positive integers less than or equal to some integer $n \ge 2$. We must show that $P(n+1)$ holds for $n+1$ sets.
+
+Given sets $A_1 \dots A_{n+1}$, let us define a new collection of intersections:
+Let $B_i = A_i \cap A_{n+1}$ for $1 \le i \le n$.
+
+From this definition, observe how the intersections of our new $B$ sets correspond to higher-order intersections of our original $A$ sets:
+\begin{itemize}
+    \item $B_i \cap B_j = A_i \cap A_j \cap A_{n+1}$
+    \item $B_i \cap B_j \cap B_k = A_i \cap A_j \cap A_k \cap A_{n+1}$
+\end{itemize}
+
+By treating the first $n$ sets as a single unioned set, and $A_{n+1}$ as the second set, we can apply the $P(2)$ base case:
+\[
+|A_1 \cup A_2 \cup \dots \cup A_{n+1}| = |(A_1 \cup \dots \cup A_n) \cup A_{n+1}|
+\]
+\[
+|A_1 \cup A_2 \cup \dots \cup A_{n+1}| = |A_1 \cup \dots \cup A_n| + |A_{n+1}| - |(A_1 \cup \dots \cup A_n) \cap A_{n+1}|
+\]
+
+Using the distributive law of sets, the subtracted term becomes:
+\[
+(A_1 \cup \dots \cup A_n) \cap A_{n+1} = B_1 \cup \dots \cup B_n
+\]
+
+Substitute this back into our equation:
+\[
+|A_1 \cup A_2 \cup \dots \cup A_{n+1}| = |A_1 \cup \dots \cup A_n| + |A_{n+1}| - |B_1 \cup \dots \cup B_n|
+\]
+
+Now, apply the induction hypothesis to both $|A_1 \cup \dots \cup A_n|$ (which has $n$ sets) and $|B_1 \cup \dots \cup B_n|$ (which also has $n$ sets):
+\[
+= \sum_{i \le n} |A_i| - \sum_{i < j \le n} |A_i \cap A_j| + \dots + |A_{n+1}| - \sum_{i \le n} |B_i| + \sum_{i < j \le n} |B_i \cap B_j| - \dots \quad \text{(Equation 1)}
+\]
+
+\textbf{Step 4: Algebraic Recombination}\\
+Notice that the sum of the single $B$ sets perfectly supplements the pairwise intersections of the $A$ sets that are strictly up to $n$:
+\[
+\sum_{i \le n} |B_i| = \sum_{i \le n} |A_i \cap A_{n+1}|
+\]
+
+Hence, adding this to the existing pairwise sum gives us the complete set of pairwise intersections up to $n+1$:
+\[
+\sum_{i < j \le n} |A_i \cap A_j| + \sum_{i \le n} |B_i| = \sum_{i < j \le n+1} |A_i \cap A_j|
+\]
+
+This same supplementary logic applies perfectly for all higher-order intersections. Substituting these combined terms back into Equation (1), we obtain:
+\[
+|A_1 \cup A_2 \dots \cup A_{n+1}| = \sum_{i \le n+1} |A_i| - \sum_{i < j \le n+1} |A_i \cap A_j| + \dots
+\]
+
+This shows that $P(n+1)$ holds. By the principle of mathematical induction, the Inclusion-Exclusion Principle is true for any finite number of sets $n$.
+
 \subsection{Concepts: Injective, Surjective, and Bijective}
 
 Understanding these concepts is incredibly important for combinatorics, particularly when answering ``how many'' or proving that two sets have the same number of elements without actually counting them one by one. In combinatorics, formalizing a counting process as a function provides powerful insights:
