@@ -366,3 +366,40 @@ So at least eight students passed exactly the same three topics.
 \item If the total number of objects exceeds the maximum possible without overlap, then one category must contain more than that maximum.
 \item In these questions, the pigeonhole principle often appears as: ``If every group had at most $k$, the total would be too small.'' 
 \end{takeaways}
+
+\begin{problem}[Polynomial Coefficient Trap]
+Find the coefficient of $x^{11}$ in the expansion of $P(x) = (1+x)(1+x^5)^{10}(1+x^7)^{16}$.
+\end{problem}
+
+\begin{hint}
+\begin{enumerate}
+    \item \textbf{Set up the general term:} Write out the general term for the binomial expansion of each of the three brackets.
+    \item \textbf{Form an index equation:} Multiply the general terms and equate the sum of the powers to $11$.
+    \item \textbf{Work top-down:} The powers inside the brackets ($5$ and $7$) are quite large relative to our target of $11$. Test the possible integer values for the $x^7$ multiplier first to rapidly eliminate cases.
+\end{enumerate}
+\end{hint}
+
+\begin{solution}
+Let the general terms from each bracket be $x^i$, $\binom{10}{j}x^{5j}$, and $\binom{16}{k}x^{7k}$, where $i \in \{0, 1\}$.
+
+Multiplying these terms means we add the indices to find the target power of $11$:
+\[ i + 5j + 7k = 11 \]
+
+Testing integer values for $k$:
+\begin{itemize}
+    \item \textbf{If $k = 1$:} $i + 5j = 4$. Since $j \ge 0$, if $j=1$ then $i = -1$ (invalid). If $j=0$ then $i=4$ (invalid, as maximum $i=1$). Any $k \ge 1$ yields no solutions.
+    \item \textbf{If $k = 0$:} $i + 5j = 11$. Since $i \in \{0, 1\}$, $5j$ must equal $10$ or $11$. Since $j$ is an integer, $5j = 10 \implies j = 2$. Substituting $j=2$ gives $i = 1$.
+\end{itemize}
+
+The only valid combination is $i = 1$, $j = 2$, $k = 0$.
+
+Substitute these into their respective binomial coefficients:
+\[ 1 \times \binom{10}{2} \times \binom{16}{0} = 1 \times 45 \times 1 = 45 \]
+
+The coefficient of $x^{11}$ is \textbf{45}.
+\end{solution}
+
+\begin{takeaways}
+\item When finding specific coefficients in products of multiple binomials, always look at the largest exponents first (in this case, $x^7$ and $x^5$).
+\item Setting up a simple linear Diophantine equation and bounding it by the largest term turns a potentially messy algebraic expansion into a quick logical elimination problem.
+\end{takeaways}
