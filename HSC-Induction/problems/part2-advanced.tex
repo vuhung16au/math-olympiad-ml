@@ -487,6 +487,179 @@ This completes the backward step. Since we can reach any arbitrarily large power
 \end{itemize}
 \end{takeaways}
 
+% --- New Problem: Cubic Mean--Arithmetic Mean Inequality ---
+\begin{problem}[Cubic Mean--Arithmetic Mean Inequality]
+Let $x_1, x_2, \dots, x_n \in \mathbb{R}^+$ be positive real numbers.
+
+\begin{enumerate}[leftmargin=*]
+    \item[\textbf{(i)}] \textbf{Warm-Up ($n = 2$).} Prove that for any $a, b > 0$:
+    \[
+        \frac{a^3 + b^3}{2} \ge \left(\frac{a + b}{2}\right)^3
+    \]
+
+    \item[\textbf{(ii)}] \textbf{Generalisation ($n$ variables).} Using mathematical induction (Cauchy's forward-backward induction), or otherwise, prove the \textbf{Cubic Mean--Arithmetic Mean (CM-AM)} inequality for all $n \ge 1$:
+    \[
+        \sqrt[3]{\frac{x_1^3 + x_2^3 + \dots + x_n^3}{n}} \ge \frac{x_1 + x_2 + \dots + x_n}{n}
+    \]
+
+    \item[\textbf{(iii)}] \textbf{Equality Condition.} State and justify the necessary and sufficient conditions under which equality holds.
+
+    \item[\textbf{(iv)}] \textbf{Application.} Let $a, b, c > 0$ satisfy $\dfrac{1}{a} + \dfrac{1}{b} + \dfrac{1}{c} = a + b + c$. Prove that
+    \[
+        a^3 + b^3 + c^3 \ge 3,
+    \]
+    and determine the values of $a, b, c$ for which equality is achieved.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Hint for (i):} Compute the difference $\frac{a^3+b^3}{2} - \left(\frac{a+b}{2}\right)^3$ and factorize the numerator.
+    \item \textbf{Hint for (ii):} Use Cauchy's forward-backward induction in two stages.
+    \begin{enumerate}[leftmargin=*]
+        \item \textit{Forward step:} If the inequality holds for $k$ variables, prove it holds for $2k$ by grouping the $2k$ terms into two halves and applying the $n=2$ base case.
+        \item \textit{Backward step:} If it holds for $k$ variables, prove it holds for $k-1$ by substituting the arithmetic mean of the first $k-1$ variables as the $k$-th variable.
+    \end{enumerate}
+    \item \textbf{Hint for (iii):} Trace the equality condition through the $n=2$ base case.
+    \item \textbf{Hint for (iv):} Apply AM-HM (or Cauchy-Schwarz) to the constraint to bound $a+b+c$ from below; then chain with CM-AM.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Part (i).}
+Compute the difference:
+\[
+\frac{a^3 + b^3}{2} - \left(\frac{a+b}{2}\right)^3
+= \frac{4(a^3+b^3)-(a+b)^3}{8}
+= \frac{3(a+b)(a-b)^2}{8} \ge 0,
+\]
+since $a+b>0$ and $(a-b)^2\ge 0$.
+
+\textbf{Part (ii) -- Forward-Backward Induction.}
+
+\textit{Forward step ($k \to 2k$).} Assume the inequality holds for $k$ variables. For $2k$ variables, group them into two equal halves with means $A$ and $B$:
+\[
+\frac{1}{2k}\sum_{i=1}^{2k}x_i^3
+= \frac{1}{2}\!\left[\frac{1}{k}\sum_{i=1}^{k}x_i^3 + \frac{1}{k}\sum_{i=k+1}^{2k}x_i^3\right]
+\ge \frac{A^3+B^3}{2}
+\ge \left(\frac{A+B}{2}\right)^3
+= \left(\frac{1}{2k}\sum_{i=1}^{2k}x_i\right)^3.
+\]
+So the claim holds for all powers of $2$.
+
+\textit{Backward step ($k \to k-1$).} Assume the inequality holds for $k$ variables. Set $M = \frac{1}{k-1}\sum_{i=1}^{k-1}x_i$ and apply the $k$-variable case to $x_1,\dots,x_{k-1},M$:
+\[
+\frac{x_1^3 + \dots + x_{k-1}^3 + M^3}{k} \ge \left(\frac{(k-1)M + M}{k}\right)^3 = M^3.
+\]
+Rearranging: $x_1^3+\dots+x_{k-1}^3 \ge (k-1)M^3$, i.e.\ the inequality holds for $k-1$ variables. Since every integer can be reached from a larger power of $2$ by stepping down, the result holds for all $n\ge 1$.
+
+\textbf{Part (iii).} Equality in (i) requires $a=b$. Tracing through both inductive steps forces all variables to be equal. Equality holds \textbf{if and only if} $x_1 = x_2 = \dots = x_n$.
+
+\textbf{Part (iv).}
+By AM-HM (or Cauchy-Schwarz: $(a+b+c)\!\left(\frac{1}{a}+\frac{1}{b}+\frac{1}{c}\right)\ge 9$):
+\[
+a+b+c \ge \frac{9}{a+b+c} \implies (a+b+c)^2 \ge 9 \implies a+b+c \ge 3.
+\]
+Applying CM-AM for $n=3$ and using this bound:
+\[
+\sqrt[3]{\frac{a^3+b^3+c^3}{3}} \ge \frac{a+b+c}{3} \ge 1,
+\]
+so $a^3+b^3+c^3 \ge 3$. Equality holds when $a=b=c=1$ (both AM-HM and CM-AM are tight).
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Cauchy's Forward-Backward Induction in inequalities:} Proving for powers of $2$ first, then stepping backwards, is the canonical approach for symmetric inequalities when the standard $k\to k+1$ step is unclear.
+    \item \textbf{The backward substitution trick:} Setting the extra variable equal to the average of the rest preserves the mean on the right side and cleanly removes the extra term on the left.
+    \item \textbf{Inequality chaining:} Combining a foundational inequality (AM-HM) to bound a sum, then feeding that bound into CM-AM, is a powerful technique for application problems with mixed constraints.
+\end{itemize}
+\end{takeaways}
+
+% --- New Problem: The Ladder of Powers ---
+\begin{problem}[The Ladder of Powers]
+Let $x_1, x_2, \ldots, x_n$ be positive real numbers.
+
+\begin{enumerate}[leftmargin=*]
+    \item[\textbf{(i)}] Using the Cauchy-Schwarz inequality, prove the Arithmetic Mean -- Quadratic Mean (AM-QM) inequality:
+    \[
+        \frac{x_1 + x_2 + \cdots + x_n}{n} \leq \sqrt{\frac{x_1^2 + x_2^2 + \cdots + x_n^2}{n}}
+    \]
+
+    \item[\textbf{(ii)}] By applying the same argument to the sequence $x_1^2, \ldots, x_n^2$, show that:
+    \[
+        \sqrt{\frac{x_1^2 + \cdots + x_n^2}{n}} \leq \sqrt[4]{\frac{x_1^4 + \cdots + x_n^4}{n}}
+    \]
+
+    \item[\textbf{(iii)}] Apply Cauchy-Schwarz once more to deduce:
+    \[
+        \frac{x_1 + x_2 + \cdots + x_n}{n} \leq \sqrt[8]{\frac{x_1^8 + x_2^8 + \cdots + x_n^8}{n}}
+    \]
+
+    \item[\textbf{(iv)}] Given additionally that $x_1 x_2 \cdots x_n = 1$, prove that
+    \[
+        x_1^8 + x_2^8 + \cdots + x_n^8 \geq n,
+    \]
+    and determine exactly when equality holds.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Hint for (i)--(iii):} Recall the Cauchy-Schwarz inequality: $(a_1b_1 + \dots + a_nb_n)^2 \le (a_1^2 + \dots + a_n^2)(b_1^2 + \dots + b_n^2)$. Try setting all $b_i = 1$ and climbing the ladder by applying the same trick three times.
+    \item \textbf{Hint for (iv):} Recall AM-GM: $\frac{x_1 + \dots + x_n}{n} \ge \sqrt[n]{x_1 \cdots x_n}$. How does the product condition give you a lower bound for the arithmetic mean? Then chain that into Part (iii).
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Sketch]
+\textbf{Part (i).} Apply Cauchy-Schwarz with $a_i = x_i$, $b_i = 1$:
+\[
+    \Bigl(\sum x_i\Bigr)^2 \le \Bigl(\sum x_i^2\Bigr)\cdot n.
+\]
+Dividing by $n^2$ and taking the square root gives AM $\le$ QM.
+
+\textbf{Part (ii).} Replace $x_i$ by $x_i^2$ in the same argument:
+\[
+    \Bigl(\sum x_i^2\Bigr)^2 \le n\sum x_i^4.
+\]
+Divide by $n^2$, take the square root to get $\frac{\sum x_i^2}{n} \le \sqrt{\frac{\sum x_i^4}{n}}$, then take the square root once more.
+
+\textbf{Part (iii).} Replace $x_i$ by $x_i^4$ and repeat:
+\[
+    \Bigl(\sum x_i^4\Bigr)^2 \le n\sum x_i^8.
+\]
+Taking the 4th root gives $\sqrt[4]{\frac{\sum x_i^4}{n}} \le \sqrt[8]{\frac{\sum x_i^8}{n}}$. Chaining (i) $\le$ (ii) $\le$ (iii) yields the result.
+
+\textbf{Alternative for (i)--(iii) via Jensen's Inequality.} Since $f(x) = x^8$ is strictly convex ($f''(x) = 56x^6 > 0$), Jensen's inequality gives immediately:
+\[
+    \left(\frac{\sum x_i}{n}\right)^8 \le \frac{\sum x_i^8}{n}.
+\]
+Taking the 8th root solves Part (iii) in one line.
+
+\textbf{Part (iv).} By AM-GM applied to $x_1, \dots, x_n$ with product $1$:
+\[
+    \frac{x_1 + \cdots + x_n}{n} \ge \sqrt[n]{x_1 \cdots x_n} = 1.
+\]
+Chaining with Part (iii) and raising to the 8th power:
+\[
+    1 \le \left(\frac{\sum x_i}{n}\right)^8 \le \frac{\sum x_i^8}{n} \implies \sum x_i^8 \ge n.
+\]
+
+\textit{Alternative:} Apply AM-GM directly to $x_1^8, \dots, x_n^8$:
+\[
+    \frac{\sum x_i^8}{n} \ge \sqrt[n]{\prod x_i^8} = \bigl(\prod x_i\bigr)^{8/n} = 1.
+\]
+
+Equality in both Cauchy-Schwarz and AM-GM requires all variables to be equal; since their product is $1$, equality holds if and only if $x_1 = x_2 = \cdots = x_n = 1$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{The ``dummy variable'' trick:} Setting $b_i = 1$ in Cauchy-Schwarz is one of the most versatile techniques for converting a single sum into a power mean bound.
+    \item \textbf{The Ladder of Means:} Each application of Cauchy-Schwarz climbs one rung: AM $\le$ QM $\le$ 4th-power mean $\le$ 8th-power mean. This is a specific instance of the Generalized Power Mean Inequality, where $M_p = \left(\frac{\sum x_i^p}{n}\right)^{1/p}$ is increasing in $p$.
+    \item \textbf{Scaffolding vs.\ elegance:} The step-by-step Cauchy-Schwarz approach builds mechanical understanding; Jensen's inequality and direct AM-GM reveal the same result in one or two lines. Both perspectives are valuable.
+\end{itemize}
+\end{takeaways}
+
 % --- New Problem: Discovering Exact Bounds ---
 \begin{problem}[Discovering Exact Bounds]
 The Fibonacci sequence $\{F_n\}$ satisfies: $F_1 = F_2 = 1$, $F_{n+2} = F_{n+1} + F_n$. Prove by induction, or otherwise, that
