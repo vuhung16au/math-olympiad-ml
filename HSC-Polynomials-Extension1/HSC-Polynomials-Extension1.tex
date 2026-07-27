@@ -343,10 +343,41 @@ The most common polynomial mistake is forgetting to account for multiplicity: a 
 
 Polynomials reward systematic thinking as much as algebraic fluency. Many HSC Extension~1 questions become far more tractable once you identify the correct strategy: applying the factor theorem, writing out Vieta's formulas, or reading the graph multiplicity from first principles. As this booklet grows, it will serve as a compact reference for the most important polynomial patterns students encounter in Extension~1 examinations and beyond.
 
+
+\newpage
+\appendix
+% ============================================================
+\section{Appendices}
+% ============================================================
+
+\subsection{Rational Root Theorem}
+
+\textbf{Definition:} The Rational Root Theorem states that if a polynomial 
+\[ P(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 \]
+with integer coefficients has a rational root $x = \frac{p}{q}$ (where $p$ and $q$ are integers with a highest common factor of 1), then $p$ is a factor of the constant term $a_0$ and $q$ is a factor of the leading coefficient $a_n$. (It is provided here as a good tip to find rational or integer roots of a polynomial with integer coefficients.)
+
+\subsection*{How it helps finding roots quickly}
+When solving polynomial equations $P(x) = 0$ or factoring polynomials, guessing a root can be time-consuming. The Rational Root Theorem narrows down the infinite number of possible rational roots to a finite list of candidates $\pm \frac{p}{q}$. By testing these candidates using the Factor Theorem, we can quickly locate a root and then use polynomial division to find the remaining factors.
+
+\subsection*{Examples}
+\textbf{Example 1 (Simple Roots):} Consider the polynomial $P(x) = x^3 - 2x^2 - x + 2$. 
+Here, the leading coefficient is $a_3 = 1$ and the constant term is $a_0 = 2$.
+The factors of $a_0 = 2$ are $p \in \{\pm 1, \pm 2\}$.
+The factors of $a_3 = 1$ are $q \in \{\pm 1\}$.
+The possible rational roots $\frac{p}{q}$ are $\pm 1, \pm 2$.
+Testing $x = 1$, we get $P(1) = 1 - 2 - 1 + 2 = 0$. So $+1$ is a root. 
+Testing $x = -1$, we get $P(-1) = -1 - 2 + 1 + 2 = 0$. So $-1$ is a root.
+
+\textbf{Example 2 (Fractional Roots):} Consider $P(x) = 2x^3 + 3x^2 - 8x + 3$.
+The leading coefficient is $a_3 = 2$ (factors $q \in \{\pm 1, \pm 2\}$) and the constant term is $a_0 = 3$ (factors $p \in \{\pm 1, \pm 3\}$).
+The possible rational roots are $\pm 1, \pm 3, \pm \frac{1}{2}, \pm \frac{3}{2}$.
+Testing $x = 1$, we get $P(1) = 2(1) + 3(1) - 8(1) + 3 = 0$. So $1$ is a root.
+Testing $x = \frac{1}{2}$, we get $P\left(\frac{1}{2}\right) = 2\left(\frac{1}{8}\right) + 3\left(\frac{1}{4}\right) - 8\left(\frac{1}{2}\right) + 3 = \frac{1}{4} + \frac{3}{4} - 4 + 3 = 0$. So $\frac{1}{2}$ is a root.
+
+\end{document}
+
 \vspace{2em}
 \noindent\textbf{Contact Information:}\\[0.5em]
 LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
 GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
 Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Polynomials-Extension1}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Polynomials-Extension1}
-
-\end{document}
