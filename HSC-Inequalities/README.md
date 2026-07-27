@@ -7,9 +7,9 @@ Preferred attribution: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Inequali
 This project curates inequality problems tailored to HSC Mathematics Extension 2 students. Each problem explores fundamental inequality techniques including AM-GM, Cauchy-Schwarz, triangle inequality, integration-based inequalities, and inequalities via mathematical induction. Every solution demonstrates rigorous proof techniques suitable for Extension 2 examinations.
 
 ## Licensing
-Non-code content in this folder is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0). See [LICENSE.md](LICENSE.md).
+Non-code content in this folder is licensed under Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0). See [LICENSE.md](LICENSE.md).
 
-CC links: https://creativecommons.org/licenses/by/4.0/ and https://creativecommons.org/licenses/by/4.0/legalcode
+CC links: https://creativecommons.org/licenses/by-nc/4.0/deed.en and https://creativecommons.org/licenses/by-nc/4.0/deed.enlegalcode
 
 Software/code remains MIT-licensed per the repository root LICENSE.
 

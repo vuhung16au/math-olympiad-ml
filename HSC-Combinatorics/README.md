@@ -7,7 +7,7 @@ Preferred attribution: "Vu Hung Nguyen (2026). math-olympiad-ml — HSC-Combinat
 This booklet curates combinatorics problems for NSW HSC Mathematics Extension 1 students. It focuses on counting principles, permutations, combinations, circular arrangements, committee selection, and basic probability in a style suitable for HSC preparation.
 
 ## Licensing
-Non-code content in this folder is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0). See [LICENSE.md](LICENSE.md).
+Non-code content in this folder is licensed under Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0). See [LICENSE.md](LICENSE.md).
 
 Software/code remains MIT-licensed per the repository root LICENSE.
 

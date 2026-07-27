@@ -46,4 +46,4 @@ Repository: <https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Distri
 
 ## Licence
 
-CC BY 4.0 — see [LICENSE.md](LICENSE.md).
+CC BY-NC 4.0 (Attribution-Non-Commercial) — see [LICENSE.md](LICENSE.md).

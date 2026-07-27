@@ -138,8 +138,8 @@ Vu Hung Nguyen
 For questions, corrections, or suggestions, please open an issue on the GitHub repository.
 
 ## Licensing
-This folder’s educational content (LaTeX sources, PDFs, problems, solutions, images, styles) is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0). You may share and adapt with attribution. See [LICENSE.md](LICENSE.md) for details and attribution requirements. The project’s code, build scripts, and Makefiles remain under the MIT License per the repository root.
+This folder’s educational content (LaTeX sources, PDFs, problems, solutions, images, styles) is licensed under Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0). You may share and adapt with attribution. See [LICENSE.md](LICENSE.md) for details and attribution requirements. The project’s code, build scripts, and Makefiles remain under the MIT License per the repository root.
 
-- CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+- CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/deed.en
 - Folder license: [LICENSE.md](LICENSE.md)
 - Preferred citation: "Vu Hung Nguyen (2025). math-olympiad-ml — HSC-Polynomials. Available at https://github.com/vuhung16au/math-olympiad-ml/"
