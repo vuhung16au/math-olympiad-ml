@@ -55,6 +55,72 @@
   \end{remarkbox}%
 }
 
+\newtcolorbox[auto counter,number within=section]{examplebox}[1][]{
+  title={\bfseries Example~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=white,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{example}[1][]{%
+  \begin{examplebox}[title={\bfseries Example~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{examplebox}%
+}
+
+\newtcolorbox[auto counter,number within=section]{definitionbox}[1][]{
+  title={\bfseries Definition~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=white,
+  colframe=bookpurple!80,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookpurple!80,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{definition}[1][]{%
+  \begin{definitionbox}[title={\bfseries Definition~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{definitionbox}%
+}
+
+\newtcolorbox[auto counter,number within=section]{theorembox}[1][]{
+  title={\bfseries Theorem~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=bookpurple!80,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=bookpurple!80,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{theorem}[1][]{%
+  \begin{theorembox}[title={\bfseries Theorem~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{theorembox}%
+}
+
 \author{Vu Hung Nguyen}
 \title{HSC Math Extension 1: Polynomials Mastery}
 \date{}
@@ -352,27 +418,128 @@ Polynomials reward systematic thinking as much as algebraic fluency. Many HSC Ex
 
 \subsection{Rational Root Theorem}
 
-\textbf{Definition:} The Rational Root Theorem states that if a polynomial 
+\begin{theorem}
+The Rational Root Theorem states that if a polynomial 
 \[ P(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 \]
-with integer coefficients has a rational root $x = \frac{p}{q}$ (where $p$ and $q$ are integers with a highest common factor of 1), then $p$ is a factor of the constant term $a_0$ and $q$ is a factor of the leading coefficient $a_n$. (It is provided here as a good tip to find rational or integer roots of a polynomial with integer coefficients.)
+with integer coefficients has a rational root $x = \frac{p}{q}$ (where $p$ and $q$ are integers with a highest common factor of 1), then $p$ is a factor of the constant term $a_0$ and $q$ is a factor of the leading coefficient $a_n$. 
+\end{theorem}
+
+The theorem is provided here as a good tip to find rational or integer roots of a polynomial with integer coefficients.
 
 \subsection*{How it helps finding roots quickly}
+
 When solving polynomial equations $P(x) = 0$ or factoring polynomials, guessing a root can be time-consuming. The Rational Root Theorem narrows down the infinite number of possible rational roots to a finite list of candidates $\pm \frac{p}{q}$. By testing these candidates using the Factor Theorem, we can quickly locate a root and then use polynomial division to find the remaining factors.
 
 \subsection*{Examples}
-\textbf{Example 1 (Simple Roots):} Consider the polynomial $P(x) = x^3 - 2x^2 - x + 2$. 
+\begin{example}[Simple Roots]
+Consider the polynomial $P(x) = x^3 - 2x^2 - x + 2$. 
 Here, the leading coefficient is $a_3 = 1$ and the constant term is $a_0 = 2$.
 The factors of $a_0 = 2$ are $p \in \{\pm 1, \pm 2\}$.
 The factors of $a_3 = 1$ are $q \in \{\pm 1\}$.
 The possible rational roots $\frac{p}{q}$ are $\pm 1, \pm 2$.
 Testing $x = 1$, we get $P(1) = 1 - 2 - 1 + 2 = 0$. So $+1$ is a root. 
 Testing $x = -1$, we get $P(-1) = -1 - 2 + 1 + 2 = 0$. So $-1$ is a root.
+\end{example}
 
-\textbf{Example 2 (Fractional Roots):} Consider $P(x) = 2x^3 + 3x^2 - 8x + 3$.
+\begin{example}[Fractional Roots]
+Consider $P(x) = 2x^3 + 3x^2 - 8x + 3$.
 The leading coefficient is $a_3 = 2$ (factors $q \in \{\pm 1, \pm 2\}$) and the constant term is $a_0 = 3$ (factors $p \in \{\pm 1, \pm 3\}$).
 The possible rational roots are $\pm 1, \pm 3, \pm \frac{1}{2}, \pm \frac{3}{2}$.
 Testing $x = 1$, we get $P(1) = 2(1) + 3(1) - 8(1) + 3 = 0$. So $1$ is a root.
 Testing $x = \frac{1}{2}$, we get $P\left(\frac{1}{2}\right) = 2\left(\frac{1}{8}\right) + 3\left(\frac{1}{4}\right) - 8\left(\frac{1}{2}\right) + 3 = \frac{1}{4} + \frac{3}{4} - 4 + 3 = 0$. So $\frac{1}{2}$ is a root.
+\end{example}
+
+\subsection{Common Problem-Solving Transformations}
+% \textit{Addresses: Common patterns in problem solving \& Frequently seen problem patterns}
+
+Students often get stuck because they try to solve polynomials via brute force rather than recognising algebraic structures. This appendix details common substitution tricks:
+
+\subsubsection*{1. Reciprocal Polynomials (Palindromic Coefficients)}
+\textbf{Pattern:} Polynomials like $ax^4 + bx^3 + cx^2 + bx + a = 0$.
+
+\textbf{Strategy:} Divide by $x^2$ and use the substitution $u = x + \frac{1}{x}$. This immediately drops a degree-4 equation down to a solvable quadratic.
+
+\begin{example}
+Solve $x^4 - 2x^3 - x^2 - 2x + 1 = 0$.
+
+\textbf{Solution:} Divide by $x^2$ (since $x=0$ is not a root):
+\[
+x^2 - 2x - 1 - \frac{2}{x} + \frac{1}{x^2} = 0 \implies \left(x^2 + \frac{1}{x^2}\right) - 2\left(x + \frac{1}{x}\right) - 1 = 0.
+\]
+Let $u = x + \frac{1}{x}$. Then $u^2 = x^2 + \frac{1}{x^2} + 2 \implies x^2 + \frac{1}{x^2} = u^2 - 2$.
+Substituting into the equation gives:
+\[
+(u^2 - 2) - 2u - 1 = 0 \implies u^2 - 2u - 3 = 0 \implies (u-3)(u+1) = 0.
+\]
+Thus $u = 3$ or $u = -1$.
+Solving $x + \frac{1}{x} = 3 \implies x^2 - 3x + 1 = 0$ gives $x = \frac{3 \pm \sqrt{5}}{2}$.
+Solving $x + \frac{1}{x} = -1 \implies x^2 + x + 1 = 0$ gives no real solutions.
+\end{example}
+
+\subsubsection*{2. Biquadratic Polynomials (Even Powers)}
+\textbf{Pattern:} $P(x) = ax^4 + bx^2 + c$.
+
+\textbf{Strategy:} Substitute $u = x^2$. Simple but highly common in HSC exams.
+
+\begin{example}
+Find all real roots of $x^4 - 5x^2 + 4 = 0$.
+
+\textbf{Solution:} Let $u = x^2$. The equation becomes $u^2 - 5u + 4 = 0$.
+Factoring gives $(u-1)(u-4) = 0$, so $u = 1$ or $u = 4$.
+Substituting back, $x^2 = 1 \implies x = \pm 1$, and $x^2 = 4 \implies x = \pm 2$.
+\end{example}
+
+\subsubsection*{3. Root Transformations (Shifting/Scaling)}
+\textbf{Pattern:} Given roots $\alpha, \beta, \gamma$, find the equation with roots $\frac{1}{\alpha}, \frac{1}{\beta}, \frac{1}{\gamma}$ or $\alpha-k, \beta-k, \gamma-k$.
+
+\textbf{Strategy:} Instead of using Vieta's formulas to calculate the new coefficients, substitute $x = \frac{1}{u}$ or $x = u+k$ directly into the original polynomial.
+
+\begin{example}
+Let $P(x) = x^3 - 4x + 1$ have roots $\alpha, \beta, \gamma$. Find a polynomial with roots $\frac{1}{\alpha}, \frac{1}{\beta}, \frac{1}{\gamma}$.
+
+\textbf{Solution:} Substitute $x = \frac{1}{u}$ into $P(x) = 0$:
+\[
+\left(\frac{1}{u}\right)^3 - 4\left(\frac{1}{u}\right) + 1 = 0.
+\]
+Multiply by $u^3$ to clear the denominators:
+\[
+1 - 4u^2 + u^3 = 0.
+\]
+The required polynomial is $Q(x) = x^3 - 4x^2 + 1$.
+\end{example}
+
+\subsection{Systems of Equations via Multiple Roots}
+% \textit{Addresses: Common patterns in problem solving}
+
+A dedicated section on how to handle unknown coefficients (parameters like $a, b, k$) when given a multiple root.
+
+\textbf{The Pattern:} "Find $a$ and $b$ given that $x^4 + ax^3 + bx - 4$ has a double root at $x = 2$."
+
+\textbf{The Strategy:} Explicitly setting up the system $P(2) = 0$ and $P'(2) = 0$. This demonstrates how using calculus saves students from the nightmare of doing algebraic long division with parameters.
+
+\begin{example}
+Find constants $a$ and $b$ given that $P(x) = x^4 + ax^3 + bx - 4$ has a double root at $x = 2$.
+
+\textbf{Solution:} For a double root at $x = 2$, we require $P(2) = 0$ and $P'(2) = 0$.
+First, $P(2) = 2^4 + a(2^3) + b(2) - 4 = 16 + 8a + 2b - 4 = 12 + 8a + 2b$.
+Setting $P(2) = 0$ yields $4a + b = -6 \quad (1)$.
+
+Next, find the derivative:
+\[
+P'(x) = 4x^3 + 3ax^2 + b.
+\]
+Evaluate at $x=2$:
+$P'(2) = 4(2^3) + 3a(2^2) + b = 32 + 12a + b$.
+Setting $P'(2) = 0$ yields $12a + b = -32 \quad (2)$.
+
+Subtract $(1)$ from $(2)$:
+$(12a - 4a) + (b - b) = -32 - (-6) \implies 8a = -26 \implies a = -\frac{13}{4}$.
+
+Substitute $a = -\frac{13}{4}$ into $(1)$:
+$4(-\frac{13}{4}) + b = -6 \implies -13 + b = -6 \implies b = 7$.
+
+Therefore, $a = -\frac{13}{4}$ and $b = 7$.
+\end{example}
 
 \end{document}
 
