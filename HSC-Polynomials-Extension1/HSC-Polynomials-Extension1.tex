@@ -556,13 +556,27 @@ This technique is most commonly used in calculus to make rational functions easi
 
 The rules: 
 
+For distinct linear factors, if the degree of $P(x)$ is strictly less than the degree of $Q(x)$, and $Q(x)$ has $n$ distinct real roots $\alpha_1, \alpha_2, \dots, \alpha_n$, the decomposition is:
 \[ \frac{P(x)}{Q(x)} = \frac{c_{1}}{x-\alpha_{1}} + \frac{c_{2}}{x-\alpha_{2}} + \cdots + \frac{c_{n}}{x-\alpha_{n}} \]
+where $P(x)$ and $Q(x)$ are polynomials, and $c_1, c_2, \dots, c_n$ are real constants.
 
-\[ f(x) = \frac{p(x)}{q(x)} = P(x) + \sum_{i=1}^{m}\sum_{r=1}^{j_{i}}\frac{A_{ir}}{(x-a_{i})^{r}} + \sum_{i=1}^{n}\sum_{r=1}^{k_{i}}\frac{B_{ir}x+C_{ir}}{(x^{2}+b_{i}x+c_{i})^{r}} \]
+The general form for any rational function over the real numbers is:
+\[ \frac{P(x)}{Q(x)} = p(x) + \sum_{i=1}^{m}\sum_{r=1}^{j_{i}}\frac{A_{ir}}{(x-a_{i})^{r}} + \sum_{i=1}^{n}\sum_{r=1}^{k_{i}}\frac{B_{ir}x+C_{ir}}{(x^{2}+b_{i}x+c_{i})^{r}} \]
+where:
+\begin{itemize}
+    \item $P(x)$ and $Q(x)$ are polynomials with real coefficients.
+    \item $p(x)$ is the quotient polynomial obtained from polynomial long division if $\deg(P) \ge \deg(Q)$ (if $\deg(P) < \deg(Q)$, then $p(x) = 0$).
+    \item $a_i$ are the $m$ distinct real roots of $Q(x)$, each with a multiplicity of $j_i$.
+    \item $x^2+b_ix+c_i$ are the $n$ distinct irreducible quadratic factors of $Q(x)$ (meaning their discriminant is negative, $b_i^2 - 4c_i < 0$), each with a multiplicity of $k_i$.
+    \item $A_{ir}$, $B_{ir}$, and $C_{ir}$ are unique real constants that need to be determined.
+\end{itemize}
 
 \subsubsection*{Examples}
 \begin{example}[Distinct Linear Factors]
-Find the partial fraction decomposition of $f(x) = \frac{1}{x^2+2x-3}$.
+Find the partial fraction decomposition of 
+
+
+$$f(x) = \frac{1}{x^2+2x-3}$$.
     
 \textbf{Solution:} Factor the denominator $x^2+2x-3 = (x+3)(x-1)$. The decomposition is:
 \[ \frac{1}{x^2+2x-3} = \frac{A}{x+3} + \frac{B}{x-1} \]
@@ -574,7 +588,9 @@ So, $f(x) = -\frac{1}{4(x+3)} + \frac{1}{4(x-1)}$.
 \end{example}
 
 \begin{example}[Irreducible Quadratic Factor]
-Find the partial fraction decomposition of $\frac{x^2+1}{(x+2)(x-1)(x^2+x+1)}$.
+Find the partial fraction decomposition of 
+
+$$f(x) = \frac{x^2+1}{(x+2)(x-1)(x^2+x+1)}$$.
 
 \textbf{Solution:} The decomposition takes the form:
 \[ \frac{x^2+1}{(x+2)(x-1)(x^2+x+1)} = \frac{a}{x+2} + \frac{b}{x-1} + \frac{cx+d}{x^2+x+1} \]
@@ -582,7 +598,9 @@ The coefficients can be found by clearing denominators and equating coefficients
 \end{example}
 
 \begin{example}[Repeated Linear Factor]
-Find the partial fraction decomposition of $\frac{3x+5}{(1-2x)^2}$.
+Find the partial fraction decomposition of 
+
+$$ f(x) = \frac{3x+5}{(1-2x)^2}$$.
 
 \textbf{Solution:} The decomposition requires a term for each power of the repeated factor:
 \[ \frac{3x+5}{(1-2x)^2} = \frac{A}{(1-2x)^2} + \frac{B}{1-2x} \]
