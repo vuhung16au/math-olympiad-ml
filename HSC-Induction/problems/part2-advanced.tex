@@ -962,3 +962,150 @@ Because integers are closed under multiplication and subtraction, the entire exp
     \item \textbf{Multiple Base Cases:} If your inductive step looks back two steps (to $k-1$), you must explicitly prove two consecutive base cases to get the chain started.
 \end{itemize}
 \end{takeaways}
+
+% --- New Problem: Second-Order Recurrence and Mersenne Numbers ---
+\begin{problem}[Second-Order Recurrence and Mersenne Numbers]
+Consider the sequence defined by the initial terms $M_1 = 1$ and $M_2 = 3$, and the recurrence relation:
+\[
+M_{n+2} = 3M_{n+1} - 2M_n
+\]
+for all integers $n \ge 1$.
+
+\begin{enumerate}[label=\roman*., leftmargin=*]
+    \item Evaluate $M_3$ and $M_4$.
+    \item Use mathematical induction to prove that $M_n = 2^n - 1$ for all integers $n \ge 1$.
+    \item Hence, or otherwise, show that $M_{n+1}M_{n-1} - M_n^2 = -2^{n-1}$ for all integers $n \ge 2$.
+    \item Prove the identity $M_{m+n+1} = M_{m+1}M_{n+1} - 2M_m M_n$ for all integers $m \ge 1$ and $n \ge 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Part i:} Substitute $n=1$ and $n=2$ directly into the given recurrence relation to build the next terms.
+    \item \textbf{Part ii:} Use strong induction. Because the recurrence relation relies on the two previous terms ($M_{n+1}$ and $M_n$), you must assume the statement is true for both $n=k$ and $n=k+1$ to prove it for $n=k+2$.
+    \item \textbf{Part iii:} Substitute the explicit formula $M_n = 2^n - 1$ into the left-hand side of the equation. Expand the brackets carefully using index laws.
+    \item \textbf{Part iv:} Start with the right-hand side (RHS). Substitute the explicit exponential formula for each $M$ term, expand the expression, and simplify by collecting like powers of 2.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Detailed Solution]
+\textbf{i. Evaluating $M_3$ and $M_4$}\\
+For $n=1$: $M_3 = 3M_2 - 2M_1 = 3(3) - 2(1) = 7$. For $n=2$: $M_4 = 3M_3 - 2M_2 = 3(7) - 2(3) = 15$.
+
+\textbf{ii. Proof by Mathematical Induction}\\
+\textbf{Base Cases:} For $n=1$, $M_1 = 2^1 - 1 = 1$. True. For $n=2$, $M_2 = 2^2 - 1 = 3$. True.\\
+\textbf{Inductive Assumption:} Assume true for $n=k$ and $n=k+1$, where $k \ge 1$: $M_k = 2^k - 1$ and $M_{k+1} = 2^{k+1} - 1$.\\
+\textbf{Inductive Step:} Prove true for $n=k+2$. Using the recurrence relation: $M_{k+2} = 3M_{k+1} - 2M_k$. Substitute the assumptions:
+\begin{align*}
+M_{k+2} &= 3(2^{k+1} - 1) - 2(2^k - 1) \\
+&= 3 \cdot 2^{k+1} - 3 - 2^{k+1} + 2 \\
+&= 2 \cdot 2^{k+1} - 1 \\
+&= 2^{k+2} - 1
+\end{align*}
+\textbf{Conclusion:} By strong mathematical induction, $M_n = 2^n - 1$ for all integers $n \ge 1$.
+
+\textbf{iii. Proving the Quadratic Identity}\\
+Start with the Left-Hand Side (LHS) and use the explicit formula $M_n = 2^n - 1$:
+\begin{align*}
+\text{LHS} &= M_{n+1}M_{n-1} - M_n^2 = (2^{n+1}-1)(2^{n-1}-1) - (2^n-1)^2\\
+&= (2^{2n} - 2^{n+1} - 2^{n-1} + 1) - (2^{2n} - 2(2^n) + 1)\\
+&= 2^{2n} - 2^{n+1} - 2^{n-1} + 1 - 2^{2n} + 2^{n+1} - 1\\
+&= -2^{n-1} = \text{RHS}
+\end{align*}
+
+\textbf{iv. Proving the Addition Identity}\\
+Start with the Right-Hand Side (RHS):
+\begin{align*}
+\text{RHS} &= M_{m+1}M_{n+1} - 2M_m M_n = (2^{m+1}-1)(2^{n+1}-1) - 2(2^m-1)(2^n-1)\\
+&= (2^{m+n+2} - 2^{m+1} - 2^{n+1} + 1) - 2(2^{m+n} - 2^m - 2^n + 1)\\
+&= 2^{m+n+2} - 2^{m+1} - 2^{n+1} + 1 - 2^{m+n+1} + 2^{m+1} + 2^{n+1} - 2\\
+&= 2^{m+n+2} - 2^{m+n+1} - 1 = 2^{m+n+1}(2 - 1) - 1 = 2^{m+n+1} - 1
+\end{align*}
+This fits the explicit formula for $M_{m+n+1}$, so $\text{RHS} = M_{m+n+1} = \text{LHS}$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Strong Induction:} When a sequence's $n$-th term is determined by more than one previous term (a second-order recurrence), standard weak induction is insufficient. You must assume the truth of multiple previous cases (e.g., $k$ and $k+1$) to prove the next step.
+    \item \textbf{The Power of Explicit Formulas:} Recursive formulas are excellent for generating sequences step-by-step, but explicit formulas (like $M_n = 2^n - 1$) are far superior for proving overarching algebraic properties and identities about the sequence.
+    \item \textbf{Index Law Mastery:} Advanced sequences problems heavily test your ability to factorize and expand bases with algebraic powers (e.g., recognizing that $2 \cdot 2^{k+1} = 2^{k+2}$ or factoring $2^{m+n+2} - 2^{m+n+1}$ to form a single term).
+    \item \textbf{Mersenne Numbers:} The sequence $M_n = 2^n - 1$ generates the Mersenne numbers. A Mersenne prime is a Mersenne number that is prime. They have many important properties in number theory, particularly their connection to perfect numbers via the Euclid-Euler theorem.
+\end{itemize}
+\end{takeaways}
+
+% --- New Problem: Pell Sequence and Characteristic Roots ---
+\begin{problem}[Pell Sequence and Characteristic Roots]
+Consider the sequence defined by the initial terms $P_1 = 1$ and $P_2 = 2$, and the recurrence relation:
+\[
+P_{n+2} = 2P_{n+1} + P_n
+\]
+for all integers $n \ge 1$.
+
+Let $\alpha = 1+\sqrt{2}$ and $\beta = 1-\sqrt{2}$.
+
+\begin{enumerate}[label=\roman*., leftmargin=*]
+    \item Evaluate $P_3$ and $P_4$.
+    \item Use mathematical induction to prove that $P_n = \frac{\alpha^n - \beta^n}{\alpha - \beta}$ for all integers $n \ge 1$.
+    \item Hence, show that $P_{n+1}P_{n-1} - P_n^2 = (-1)^n$ for all integers $n \ge 2$.
+    \item Prove the identity $P_{m+n+1} = P_{m+1}P_{n+1} + P_m P_n$ for all integers $m \ge 1$ and $n \ge 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Part i:} Substitute $n=1$ and $n=2$ directly into the recurrence relation to find the subsequent terms.
+    \item \textbf{Part ii:} Use strong induction. To prove the $k+2$ case, substitute the assumptions for $k$ and $k+1$. It will be highly beneficial to first show that $\alpha^2 = 2\alpha + 1$ and $\beta^2 = 2\beta + 1$.
+    \item \textbf{Part iii:} Substitute the explicit formula for $P_n$ from Part ii. Expand the numerators and simplify using the fact that $\alpha\beta = -1$.
+    \item \textbf{Part iv:} Start with the right-hand side. Substitute the explicit formulas, expand, and group the $\alpha$ and $\beta$ terms. Note that $\alpha\beta + 1 = 0$, which will cause the cross-terms to vanish. Use $\alpha(\alpha - \beta) = \alpha^2 + 1$ to simplify the remaining expressions.
+\end{itemize}
+\end{hint}
+
+\begin{solution}[Detailed Solution]
+\textbf{i. Evaluating $P_3$ and $P_4$}\\
+For $n=1$: $P_3 = 2P_2 + P_1 = 2(2) + 1 = 5$. For $n=2$: $P_4 = 2P_3 + P_2 = 2(5) + 2 = 12$.
+
+\textbf{ii. Proof by Mathematical Induction}\\
+\textbf{Base Cases:} Let $D = \alpha - \beta = 2\sqrt{2}$. For $n=1$, $P_1 = \frac{\alpha - \beta}{\alpha - \beta} = 1$. True. For $n=2$, $P_2 = \frac{\alpha^2 - \beta^2}{\alpha - \beta} = \alpha + \beta = (1+\sqrt{2}) + (1-\sqrt{2}) = 2$. True.\\
+\textbf{Inductive Assumption:} Assume true for $n=k$ and $n=k+1$, where $k \ge 1$: $P_k = \frac{\alpha^k - \beta^k}{\alpha - \beta}$ and $P_{k+1} = \frac{\alpha^{k+1} - \beta^{k+1}}{\alpha - \beta}$.\\
+\textbf{Inductive Step:} Prove true for $n=k+2$. $P_{k+2} = 2P_{k+1} + P_k = 2\left(\frac{\alpha^{k+1} - \beta^{k+1}}{\alpha - \beta}\right) + \frac{\alpha^k - \beta^k}{\alpha - \beta} = \frac{\alpha^k(2\alpha + 1) - \beta^k(2\beta + 1)}{\alpha - \beta}$.\\
+Note that $\alpha^2 = (1+\sqrt{2})^2 = 3+2\sqrt{2}$ and $2\alpha + 1 = 2(1+\sqrt{2}) + 1 = 3+2\sqrt{2}$. Thus, $2\alpha + 1 = \alpha^2$. Similarly, $2\beta + 1 = \beta^2$.
+\[
+P_{k+2} = \frac{\alpha^k(\alpha^2) - \beta^k(\beta^2)}{\alpha - \beta} = \frac{\alpha^{k+2} - \beta^{k+2}}{\alpha - \beta}
+\]
+\textbf{Conclusion:} By strong mathematical induction, the statement is true for all integers $n \ge 1$.
+
+\textbf{iii. Proving the Quadratic Identity}\\
+Start with the Left-Hand Side (LHS) and let $D = \alpha - \beta$. Note $\alpha\beta = (1+\sqrt{2})(1-\sqrt{2}) = -1$.
+\begin{align*}
+\text{LHS} &= \left(\frac{\alpha^{n+1} - \beta^{n+1}}{D}\right)\left(\frac{\alpha^{n-1} - \beta^{n-1}}{D}\right) - \left(\frac{\alpha^n - \beta^n}{D}\right)^2\\
+&= \frac{1}{D^2} [(\alpha^{2n} - \alpha^{n+1}\beta^{n-1} - \alpha^{n-1}\beta^{n+1} + \beta^{2n}) - (\alpha^{2n} - 2\alpha^n\beta^n + \beta^{2n})]\\
+&= \frac{1}{D^2} [- (\alpha\beta)^{n-1}(\alpha^2 + \beta^2) + 2(\alpha\beta)^n]
+\end{align*}
+Substitute $\alpha\beta = -1$ and $D^2 = (2\sqrt{2})^2 = 8$. Also calculate $\alpha^2 + \beta^2 = (3+2\sqrt{2}) + (3-2\sqrt{2}) = 6$:
+\[
+\text{LHS} = \frac{1}{8} [- (-1)^{n-1}(6) + 2(-1)^n] = \frac{1}{8} [6(-1)^n + 2(-1)^n] = \frac{8(-1)^n}{8} = (-1)^n = \text{RHS}
+\]
+
+\textbf{iv. Proving the Addition Identity}\\
+Start with the Right-Hand Side (RHS), let $D = \alpha - \beta$.
+\begin{align*}
+\text{RHS} &= \frac{(\alpha^{m+1}-\beta^{m+1})(\alpha^{n+1}-\beta^{n+1})}{D^2} + \frac{(\alpha^m-\beta^m)(\alpha^n-\beta^n)}{D^2}\\
+&= \frac{1}{D^2} [\alpha^{m+n}(\alpha^2 + 1) + \beta^{m+n}(\beta^2 + 1) - \alpha^m\beta^n(\alpha\beta + 1) - \beta^m\alpha^n(\alpha\beta + 1)]
+\end{align*}
+Since $\alpha\beta = -1$, the term $(\alpha\beta + 1) = 0$, meaning the cross-terms disappear:
+\[
+\text{RHS} = \frac{1}{D^2} [\alpha^{m+n}(\alpha^2 + 1) + \beta^{m+n}(\beta^2 + 1)]
+\]
+Observe that $\alpha^2 + 1 = \alpha^2 - \alpha\beta = \alpha(\alpha - \beta) = \alpha D$ and similarly $\beta^2 + 1 = \beta^2 - \alpha\beta = -\beta(\alpha - \beta) = -\beta D$. Substituting these back:
+\[
+\text{RHS} = \frac{1}{D^2} [\alpha^{m+n}(\alpha D) + \beta^{m+n}(-\beta D)] = \frac{D}{D^2} [\alpha^{m+n+1} - \beta^{m+n+1}] = P_{m+n+1} = \text{LHS}
+\]
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Characteristic Roots:} Sequences defined by $x_{n+2} = Ax_{n+1} + Bx_n$ can be expressed explicitly using roots of the characteristic equation $r^2 - Ar - B = 0$. In this case, $\alpha$ and $\beta$ are the roots of $r^2 - 2r - 1 = 0$, which greatly simplifies calculating exact terms.
+    \item \textbf{Vanishing Cross-Terms:} When a sequence formula has a structure containing roots where the product is $-1$ (or $1$), heavy algebraic expansions often collapse elegantly. Identifying $\alpha\beta = -1$ early saves significant time and prevents algebraic errors.
+    \item \textbf{Strong Induction Necessity:} Because the sequence relies on the \textit{two} previous terms, ordinary induction falls short. Assuming $P_k$ and $P_{k+1}$ are both true is the only way to logically bridge the gap to $P_{k+2}$.
+\end{itemize}
+\end{takeaways}
