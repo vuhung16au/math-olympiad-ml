@@ -914,4 +914,95 @@ For $(2, 4, 2)$:
 \]
 \end{solutionbox*}
 
+\subsection{Double Counting (Counting in Two Ways)}
+\begin{remark}[Syllabus Note]
+This is an enrichment topic. Double counting is an elegant combinatorial proof technique often used in counting problems in combinatorics.
+\end{remark}
+
+\textbf{Double counting} is an elegant combinatorial proof technique used to show that two algebraic expressions are equal. The core philosophy is simple: \textbf{if you count the exact same set of items correctly in two completely different ways, the two resulting formulas must be equal.}
+
+In HSC Combinatorics, you will often encounter complex identities involving binomial coefficients. While these can sometimes be proven using algebra or the Binomial Theorem, double counting allows you to prove them by inventing a ``story'' or a real-world scenario (like forming a committee) and counting the outcomes in two distinct ways.
+
+Here are three classic worked examples to illustrate the concept.
+
+\subsubsection*{Worked Example 1: The Sum of all Combinations}
+
+\textbf{Prove the identity:}
+\[
+\sum_{k=0}^{n} \binom{n}{k} = 2^n
+\]
+
+\textbf{The Story:}
+Imagine you have a group of $n$ people, and you want to form a committee. The committee can be of any size---from $0$ people (an empty committee) all the way up to $n$ people (everyone is on the committee). We want to find the total number of possible committees.
+
+\textbf{Method 1: Count by committee size (The Left-Hand Side)}
+Let's break the problem down into mutually exclusive cases based on the size of the committee, $k$:
+\begin{itemize}[leftmargin=*]
+\item Ways to choose a committee of $0$ people: $\binom{n}{0}$
+\item Ways to choose a committee of $1$ person: $\binom{n}{1}$
+\item Ways to choose a committee of $2$ people: $\binom{n}{2}$
+\item ... and so on, up to a committee of $n$ people: $\binom{n}{n}$.
+\end{itemize}
+To find the total, we sum these up: $\binom{n}{0} + \binom{n}{1} + \dots + \binom{n}{n} = \sum_{k=0}^{n} \binom{n}{k}$.
+
+\textbf{Method 2: Count by individual choice (The Right-Hand Side)}
+Instead of looking at the committee as a whole, look at each of the $n$ individuals. Every single person has exactly two independent options: they are either \textbf{IN} the committee or \textbf{OUT} of the committee.
+Since there are $n$ people and 2 choices for each person, the Fundamental Counting Principle tells us the total number of combinations is:
+\[
+2 \times 2 \times 2 \dots \text{($n$ times)} = 2^n
+\]
+
+\textbf{Conclusion:}
+Since both methods count the exact same thing (the total number of possible committees), the two expressions must be equal. Therefore, $\sum_{k=0}^{n} \binom{n}{k} = 2^n$.
+
+\subsubsection*{Worked Example 2: The Committee and the President}
+
+\textbf{Prove the identity:}
+\[
+k\binom{n}{k} = n\binom{n-1}{k-1}
+\]
+
+\textbf{The Story:}
+Suppose you have a group of $n$ people. You need to select a committee of exactly $k$ people, and from that chosen committee, you must appoint exactly one person to be the President. We want to find the total number of ways to form this leadership structure.
+
+\textbf{Method 1: Pick the committee first, then the President (The Left-Hand Side)}
+First, select the $k$ members of the committee from the total $n$ people. There are $\binom{n}{k}$ ways to do this.
+Once the $k$ people are standing in the room, select $1$ of them to be the President. There are $k$ ways to do this.
+Multiplying these steps gives: $k \times \binom{n}{k}$.
+
+\textbf{Method 2: Pick the President first, then the rest of the committee (The Right-Hand Side)}
+Let's reverse the process. First, pick the President directly from the entire group of $n$ people. There are $n$ ways to do this.
+Now, the President needs a team. We still need $k-1$ more people to fill out the rest of the committee, and we must choose them from the remaining $n-1$ people. There are $\binom{n-1}{k-1}$ ways to do this.
+Multiplying these steps gives: $n \times \binom{n-1}{k-1}$.
+
+\textbf{Conclusion:}
+Both methods successfully assemble the exact same committee-and-president structure. Therefore, $k\binom{n}{k} = n\binom{n-1}{k-1}$.
+
+\subsubsection*{Worked Example 3: The Handshaking Lemma}
+
+\textbf{Prove the theorem:}
+At any party, the number of people who shake hands an \textit{odd} number of times must be \textit{even}.
+
+\textit{(Note: This is a classic Graph Theory concept translated into a combinatorics problem!)}
+
+\textbf{The Story:}
+Imagine a party with $n$ people. Some people shake hands with each other. We want to count the total number of ``hands involved in handshakes'' throughout the entire night.
+
+\textbf{Method 1: Ask everyone individually}
+Suppose we go around the room and ask each person, ``How many hands did you shake tonight?'' Person 1 says $d_1$, Person 2 says $d_2$, all the way to Person $n$ who says $d_n$.
+The total number of hands involved is the sum of everyone's answers:
+\[
+\text{Total} = d_1 + d_2 + d_3 + \dots + d_n
+\]
+
+\textbf{Method 2: Observe the handshakes}
+Let $E$ be the total number of actual handshakes that occurred at the party. Every time a handshake happens, exactly \textbf{two} hands are involved. Therefore, the total number of hands involved in handshakes must be exactly $2E$.
+
+\textbf{Conclusion:}
+Equating our two methods, we get:
+\[
+d_1 + d_2 + d_3 + \dots + d_n = 2E
+\]
+Notice that the right side ($2E$) is strictly an \textbf{even number}. For the left side to add up to an even number, you cannot have an odd number of odd terms. Therefore, the count of people who shook an odd number of hands (the odd $d$ values) must be an even amount!
+
 \end{document}
