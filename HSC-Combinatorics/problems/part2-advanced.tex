@@ -1620,6 +1620,29 @@ Since $B_n$ is a multiple of $4$ for \textit{all} positive integers $n$, it is s
   \end{enumerate}
 \end{solution}
 
+\begin{solution}[Alternative Proof 1: Algebraic Substitution]
+\begin{enumerate}[label=\arabic*., leftmargin=*]
+    \item \textbf{Apply Absorption Identity:} Square $k \binom{n}{k} = n \binom{n-1}{k-1}$ to yield $k^2 \binom{n}{k}^2 = n^2 \binom{n-1}{k-1}^2$.
+    \item \textbf{Substitute and Factor:} Replace the terms in the original sum and factor out the constant $n^2$:
+    $$\sum_{k=1}^{n} k^2 \binom{n}{k}^2 = n^2 \sum_{k=1}^{n} \binom{n-1}{k-1}^2$$
+    \item \textbf{Apply Vandermonde's Identity:} Re-index the sum using $j = k - 1$ to get $n^2 \sum_{j=0}^{n-1} \binom{n-1}{j}^2$. Applying Vandermonde's convolution for the sum of squares ($\sum_{j=0}^{m} \binom{m}{j}^2 = \binom{2m}{m}$) with $m = n - 1$ gives the final result:
+    $$n^2 \binom{2n-2}{n-1}$$
+\end{enumerate}
+\end{solution}
+
+\begin{solution}[Alternative Proof 2: Generating Functions \& Calculus]
+\begin{enumerate}[label=\arabic*., leftmargin=*]
+    \item \textbf{Construct Series 1:} Differentiate the expansion $(1+x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k$ and multiply by $x$:
+    $$nx(1+x)^{n-1} = \sum_{k=1}^{n} k \binom{n}{k} x^k$$
+    \item \textbf{Construct Series 2:} Substitute $x$ with $x^{-1}$ in the equation above and simplify the left side:
+    $$nx^{-n}(1+x)^{n-1} = \sum_{j=1}^{n} j \binom{n}{j} x^{-j}$$
+    \item \textbf{Compare Coefficients:} Multiplying the two series yields a constant term ($x^0$) equal to the target sum $\sum_{k=1}^{n} k^2 \binom{n}{k}^2$. Now, multiply their closed-form expressions to find that same constant algebraically:
+    $$\left(nx(1+x)^{n-1}\right) \left(nx^{-n}(1+x)^{n-1}\right) = n^2 x^{1-n} (1+x)^{2n-2}$$
+    To find the constant term of this product, we extract the $x^{n-1}$ coefficient from $n^2(1+x)^{2n-2}$. By the binomial theorem, this evaluates exactly to:
+    $$n^2 \binom{2n-2}{n-1}$$
+\end{enumerate}
+\end{solution}
+
 \begin{takeaways}
       \item \textbf{Counting in two ways} is a highly efficient method to prove complex binomial sums without relying on calculus or heavy algebraic manipulation.
       \item \textbf{Order reversal} (choosing the leaders before the group, rather than the group before the leaders) is the key trick for evaluating weighted sums containing terms like $k$ or $k^2$. 
