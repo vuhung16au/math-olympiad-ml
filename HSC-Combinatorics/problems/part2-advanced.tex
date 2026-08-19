@@ -1570,3 +1570,58 @@ Since $B_n$ is a multiple of $4$ for \textit{all} positive integers $n$, it is s
     \item \textbf{Integer Proofs via Combinatorics:} The Binomial Theorem is not just for finding coefficients; it is a fundamental method for proving divisibility and integer properties in Number Theory.
     \item \textbf{Domain Clarification:} The original text asks to prove the property for "even positive integers $n$". The proof reveals that $B_n$ is even for \textit{all} positive integers. Recognizing when a property is universally true despite a restricted domain is a sign of strong mathematical maturity.
 \end{takeaways}
+
+% --- New Problem: Committees and Co-Captains ---
+\begin{problem}[Committees and Co-Captains]
+  A club consists of $n$ men and $n$ women. 
+  
+  \begin{enumerate}[label=\roman*., leftmargin=*]
+      \item By considering the coefficient of $x^n$ in the expansion of $(1+x)^n(1+x)^n = (1+x)^{2n}$, prove that $$\sum_{k=0}^{n} \binom{n}{k}^2 = \binom{2n}{n}$$
+      \item A committee consisting of an equal number of men and women is to be formed. From this committee, one man and one woman are selected to be co-captains. Show that the total number of ways to form this committee and select its co-captains is given by: $$\sum_{k=1}^{n} k^2 \binom{n}{k}^2$$
+      \item By counting the exact same selection process in a different order---selecting the co-captains first, and then building the remainder of the committee---show that the number of ways is also given by: $$n^2 \binom{2n-2}{n-1}$$
+      \item Hence, prove the identity: $$\sum_{k=1}^{n} k^2 \binom{n}{k}^2 = n^2 \binom{2n-2}{n-1}$$
+  \end{enumerate}
+\end{problem}
+
+\begin{hint}
+  \begin{itemize}[leftmargin=*]
+      \item \textbf{Part i:} Remember the symmetry property of binomial coefficients: $\binom{n}{n-k} = \binom{n}{k}$. How does this help when multiplying the two expansions of $(1+x)^n$?
+      \item \textbf{Part ii:} Assume the committee has exactly $k$ men and $k$ women. How many ways can you choose the members? Once the members are chosen, how many ways can you assign the two captain roles?
+      \item \textbf{Part iii:} Pick the two captains from the entire club first. How many men and women are left? If you need the final committee to have an equal number of men and women, how does the identity proven in part (i) help you choose the remaining members?
+  \end{itemize}
+\end{hint}
+
+\begin{solution}[Full Solution]
+  \begin{enumerate}[label=\roman*., leftmargin=*]
+      \item We know that $(1+x)^{2n} = \sum_{r=0}^{2n} \binom{2n}{r} x^r$. The coefficient of $x^n$ is $\binom{2n}{n}$. 
+      
+      Alternatively, expanding $(1+x)^n(1+x)^n$:
+      $$ \left( \sum_{k=0}^n \binom{n}{k}x^k \right) \left( \sum_{j=0}^n \binom{n}{j}x^j \right) $$
+      The $x^n$ term occurs when $j = n-k$. Thus, the coefficient of $x^n$ is:
+      $$ \sum_{k=0}^n \binom{n}{k}\binom{n}{n-k} $$
+      Using the symmetry $\binom{n}{n-k} = \binom{n}{k}$, this becomes $\sum_{k=0}^n \binom{n}{k}^2$. Equating coefficients yields the result.
+      
+      \item Let the committee have exactly $k$ men and $k$ women, where $1 \le k \le n$. 
+      There are $\binom{n}{k}$ ways to choose the men and $\binom{n}{k}$ ways to choose the women. 
+      From the $k$ chosen men, $1$ is made captain ($k$ ways). From the $k$ chosen women, $1$ is made captain ($k$ ways). 
+      The number of ways for a specific $k$ is $k \times k \times \binom{n}{k} \times \binom{n}{k} = k^2 \binom{n}{k}^2$. 
+      Summing over all possible values of $k$ from $1$ to $n$ gives the total ways:
+      $$ \sum_{k=1}^{n} k^2 \binom{n}{k}^2 $$
+      
+      \item We select the captains first. Choose the male captain from the $n$ men ($n$ ways) and the female captain from the $n$ women ($n$ ways). This gives $n^2$ ways to pick the captains.
+      
+      Now, $n-1$ men and $n-1$ women remain in the club. To ensure the final committee has equal numbers of men and women, we must select an equal number (say $r$) of men and women from the remaining pools to join the captains. 
+      By the identity proven in (i), replacing $n$ with $n-1$, the total number of ways to choose an equal number of men and women from $n-1$ of each is $\binom{2(n-1)}{n-1} = \binom{2n-2}{n-1}$. 
+      Multiplying these steps together, the total number of ways is:
+      $$ n^2 \binom{2n-2}{n-1} $$
+      
+      \item Since the expressions in (ii) and (iii) count the exact same combinatorial outcomes (forming a committee with equal men and women, and identifying a male and female captain), the two expressions must be equal:
+      $$ \sum_{k=1}^{n} k^2 \binom{n}{k}^2 = n^2 \binom{2n-2}{n-1} $$
+  \end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+      \item \textbf{Counting in two ways} is a highly efficient method to prove complex binomial sums without relying on calculus or heavy algebraic manipulation.
+      \item \textbf{Order reversal} (choosing the leaders before the group, rather than the group before the leaders) is the key trick for evaluating weighted sums containing terms like $k$ or $k^2$. 
+      \item Polynomial expansion helps cleanly establish foundational baseline identities (like Vandermonde's Convolution) to anchor the combinatorial story.
+\end{takeaways}
