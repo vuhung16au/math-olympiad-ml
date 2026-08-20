@@ -407,3 +407,80 @@ S(0.1) = \frac{0.1^2}{1 - 0.1 - 0.1^2} = \frac{0.01}{1 - 0.1 - 0.01} = \frac{0.0
 }
 \end{center}
 \end{takeaways}
+
+\begin{problem}[Negative Indices and Strong Induction]
+Let the sequence $f_n$ be defined by $f_0 = 0$, $f_1 = 1$, and the recurrence relation $f_n = f_{n-1} + f_{n-2}$ for all integers $n$. 
+
+\begin{enumerate}
+    \item[(i)] By rearranging the recurrence relation, calculate the values of $f_{-1}$, $f_{-2}$, $f_{-3}$, $f_{-4}$, and $f_{-5}$.
+    \item[(ii)] Show that the identity $5f_n = f_{n+3} + f_{n-1} + f_{n-4}$ holds for $n = -1$ and $n = -2$.
+    \item[(iii)] Prove by mathematical induction that for all negative integers $n$, 
+    \[ 5f_n = f_{n+3} + f_{n-1} + f_{n-4} \]
+    \item[(iv)] Given the property $f_{-k} = (-1)^{k+1}f_k$ for any positive integer $k$, use your result from Part (iii) to deduce an equivalent expression for $5f_m$ in terms of $f_{m+4}$, $f_{m+1}$, and $f_{m-3}$ for all positive integers $m$.
+\end{enumerate}
+\end{problem}
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Rearrange the fundamental Fibonacci equation to isolate the earlier term: $f_{n-2} = f_n - f_{n-1}$. Substitute backwards starting from $n=1$.
+    \item \textbf{Part (ii):} Use the values calculated in Part (i) to evaluate the left-hand side (LHS) and right-hand side (RHS) independently for both base cases. 
+    \item \textbf{Part (iii):} Because the recurrence is second-order, you must use strong induction backwards. Assume the proposition holds for $k$ and $k+1$ (where $k \le -2$), and use the relation $5f_{k-1} = 5f_{k+1} - 5f_k$ to prove it holds for $k-1$. 
+    \item \textbf{Part (iv):} Let $n = -m$ (where $m$ is positive) and substitute this into the identity proven in Part (iii). Apply the given negative-index property to flip the signs of the subscripts, paying close attention to the exponent parity (odd/even) of the $(-1)$ coefficients before dividing through.
+\end{itemize}
+\end{hint}
+\begin{solution}
+\begin{enumerate}
+    \item[(i)] Using $f_{n-2} = f_n - f_{n-1}$:
+    \begin{align*}
+        f_{-1} &= f_1 - f_0 = 1 - 0 = 1 \\
+        f_{-2} &= f_0 - f_{-1} = 0 - 1 = -1 \\
+        f_{-3} &= f_{-1} - f_{-2} = 1 - (-1) = 2 \\
+        f_{-4} &= f_{-2} - f_{-3} = -1 - 2 = -3 \\
+        f_{-5} &= f_{-3} - f_{-4} = 2 - (-3) = 5
+    \end{align*}
+
+    \item[(ii)] 
+    For $n = -1$: 
+    \begin{align*}
+        \text{LHS} &= 5(1) = 5 \\
+        \text{RHS} &= f_2 + f_{-2} + f_{-5} = 1 + (-1) + 5 = 5
+    \end{align*}
+    For $n = -2$:
+    \begin{align*}
+        \text{LHS} &= 5(-1) = -5 \\
+        \text{RHS} &= f_1 + f_{-3} + f_{-6} = 1 + 2 - 8 = -5
+    \end{align*}
+    Since $\text{LHS} = \text{RHS}$ in both instances, the identity holds for $n=-1$ and $n=-2$.
+
+    \item[(iii)] 
+    \textbf{Base cases:} $n=-1$ and $n=-2$ are verified in Part (ii). \\
+    \textbf{Inductive Hypothesis:} Assume true for $k$ and $k+1$ for some integer $k \le -2$. We must prove the statement holds for $k-1$. \\
+    We are given $f_{k-1} = f_{k+1} - f_k$, so multiplying by 5:
+    \[ 5f_{k-1} = 5f_{k+1} - 5f_k \]
+    Substitute the inductive hypotheses:
+    \[ 5f_{k-1} = (f_{k+4} + f_k + f_{k-3}) - (f_{k+3} + f_{k-1} + f_{k-4}) \]
+    Group the terms algebraically:
+    \[ 5f_{k-1} = (f_{k+4} - f_{k+3}) + (f_k - f_{k-1}) + (f_{k-3} - f_{k-4}) \]
+    Apply $f_{m} - f_{m-1} = f_{m-2}$ to each bracketed group:
+    \[ 5f_{k-1} = f_{k+2} + f_{k-2} + f_{k-5} \]
+    This matches the proposition for $n = k-1$. By strong mathematical induction, the identity holds for all negative integers $n$.
+
+    \item[(iv)] Let $n = -m$, where $m$ is a positive integer. Substitute this into the result from Part (iii):
+    \[ 5f_{-m} = f_{-(m-3)} + f_{-(m+1)} + f_{-(m+4)} \]
+    Apply the property $f_{-k} = (-1)^{k+1}f_k$ to all terms:
+    \[ 5(-1)^{m+1}f_m = (-1)^{m-3+1}f_{m-3} + (-1)^{m+1+1}f_{m+1} + (-1)^{m+4+1}f_{m+4} \]
+    \[ 5(-1)^{m+1}f_m = (-1)^{m-2}f_{m-3} + (-1)^{m+2}f_{m+1} + (-1)^{m+5}f_{m+4} \]
+    Factor out $(-1)^m$ from every term:
+    \[ 5(-1)^m(-1)^1 f_m = (-1)^m(-1)^{-2}f_{m-3} + (-1)^m(-1)^2 f_{m+1} + (-1)^m(-1)^5 f_{m+4} \]
+    Simplify the integer powers of $-1$:
+    \[ -5(-1)^m f_m = (-1)^m (1)f_{m-3} + (-1)^m (1)f_{m+1} + (-1)^m (-1)f_{m+4} \]
+    Divide both sides by $(-1)^m$:
+    \[ -5f_m = f_{m-3} + f_{m+1} - f_{m+4} \]
+    Multiply by $-1$:
+    \[ 5f_m = f_{m+4} - f_{m+1} - f_{m-3} \]
+\end{enumerate}
+\end{solution}
+\begin{takeaways}
+    \item \textbf{Sequence Extension:} Linear recurrence relations can seamlessly project backwards into negative indices while maintaining their structural properties.
+    \item \textbf{Strong Induction:} Second-order recurrence relations always require strong induction (and thus two consecutive base cases) to satisfy the logical chain.
+    \item \textbf{Strategic Grouping:} In algebraic proofs involving recursive sequences, expanding and then re-grouping terms into consecutive pairs is a highly reliable mechanism for simplifying expressions.
+\end{takeaways}
