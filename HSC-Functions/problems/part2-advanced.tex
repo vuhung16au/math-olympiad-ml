@@ -344,3 +344,49 @@ Therefore $g_n\to 0$ uniformly on $[0,1]$.
 \end{itemize}
 \end{takeaways}
 
+
+\begin{problem}[Monotonicity and Inverse Derivatives]
+Consider the function $f(x) = x^3 + 11x$.
+\begin{enumerate}
+    \item[(i)] Prove that $f(x)$ is monotonic over $\mathbb{R}$.
+    \item[(ii)] Hence, deduce that the inverse function $f^{-1}(x)$ exists.
+    \item[(iii)] Find the value of $f^{-1}(12)$.
+    \item[(iv)] Let $h(x) = \frac{1}{f^{-1}(x)}$. Find the gradient of the tangent to $h(x)$ at the point where $x = 12$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{(i)} Find the first derivative $f'(x)$. What does its sign tell you about the function's behavior?
+    \item \textbf{(ii)} Recall the relationship between strict monotonicity and one-to-one functions.
+    \item \textbf{(iii)} Instead of finding an algebraic inverse, use trial and error (inspection) to find an $x$ value such that $f(x) = 12$.
+    \item \textbf{(iv)} Rewrite $h(x)$ as $(f^{-1}(x))^{-1}$ and apply the chain rule. You will also need the inverse function derivative rule: $(f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\begin{enumerate}
+    \item[(i)] Differentiating $f(x)$ with respect to $x$ gives $f'(x) = 3x^2 + 11$. Since $x^2 \geq 0$ for all real $x$, $3x^2 \geq 0$, which means $3x^2 + 11 \geq 11 > 0$. Because $f'(x) > 0$ for all $x \in \mathbb{R}$, $f(x)$ is strictly increasing, and therefore monotonic over $\mathbb{R}$.
+    
+    \item[(ii)] Because $f(x)$ is strictly increasing across its entire domain, it passes the horizontal line test. This means it is a one-to-one function, which guarantees that its inverse $f^{-1}(x)$ exists.
+    
+    \item[(iii)] We need to find an $x$ such that $x^3 + 11x = 12$. By inspection, if $x = 1$, then $1^3 + 11(1) = 12$. Therefore, $f(1) = 12$, which means $f^{-1}(12) = 1$.
+    
+    \item[(iv)] We are given $h(x) = (f^{-1}(x))^{-1}$. Differentiating using the chain rule gives:
+    \[ h'(x) = -1 \cdot (f^{-1}(x))^{-2} \cdot (f^{-1})'(x) = -\frac{(f^{-1})'(x)}{(f^{-1}(x))^2} \]
+    First, evaluate the derivative of the inverse at $x = 12$:
+    \[ (f^{-1})'(12) = \frac{1}{f'(f^{-1}(12))} = \frac{1}{f'(1)} \]
+    From part (i), $f'(1) = 3(1)^2 + 11 = 14$. Thus, $(f^{-1})'(12) = \frac{1}{14}$.
+    Now, substitute $x = 12$ into the derivative of $h(x)$:
+    \[ h'(12) = -\frac{1/14}{(1)^2} = -\frac{1}{14} \]
+    The gradient of the tangent at $x = 12$ is $-\frac{1}{14}$.
+\end{enumerate}
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Monotonicity and Inverses:} Proving a function's derivative is strictly positive (or negative) is the standard method to prove a function is one-to-one and has an inverse.
+\item \textbf{Inverse Derivative Rule:} Students do not need to find the algebraic equation of the inverse to find its gradient. The relationship $(f^{-1})'(x) = \frac{1}{f'(y)}$ is highly efficient.
+\item \textbf{Notation Awareness:} Care must be taken to distinguish between $f^{-1}(x)$ (the inverse function) and $(f(x))^{-1}$ (the reciprocal function) when applying the chain rule.
+\end{itemize}
+\end{takeaways}
