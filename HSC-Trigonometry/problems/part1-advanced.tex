@@ -755,3 +755,59 @@ Hence the three distinct real roots are:
         corresponding polynomial equation.
 \end{itemize}
 \end{takeaways}
+
+% ------------------------------------------------------------------
+\begin{problem}[Trigonometric Inequality with Arithmetic Progression]
+Let $A$, $B$, and $C$ be the interior angles of a triangle $\triangle ABC$.
+
+\begin{enumerate}[(i)]
+  \item Assume the angles $A$, $B$, and $C$ form an arithmetic progression such that $A \le B \le C$. Prove that $B = 60^\circ$.
+  \item Given that the angles form the arithmetic progression described in Part (i) with a common difference $d \ge 0$, express the sum $S = \sin A + \sin B + \sin C$ entirely in terms of $d$.
+  \item Using your result from Part (ii) and the geometric constraints on $d$, prove that for this specific triangle:
+  \[
+  \sin A + \sin B + \sin C \le \frac{3\sqrt{3}}{2}
+  \]
+  \item Now, drop the assumption that the angles form an arithmetic progression. For \emph{any} general triangle $\triangle ABC$, use trigonometric sum-to-product identities and calculus to prove the following inequality:
+  \[
+  \sin A + \sin B + \sin C \le \frac{3\sqrt{3}}{2}
+  \]
+  \emph{Also, explicitly state the conditions under which equality holds.}
+\end{enumerate}
+\end{problem}
+
+\begin{hintbox}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{(i)} What do the interior angles of any triangle always sum to? Let the angles be $B-d$, $B$, and $B+d$.
+  \item \textbf{(ii)} Substitute $B = 60^\circ$ into your sequence. You will need to expand the resulting terms using sum-to-product formulas, or by expanding each term using the compound angle formulas.
+  \item \textbf{(iii)} For a valid triangle, all angles must be strictly greater than $0^\circ$. What is the maximum possible value for $d$? Analyze the maximum value of the cosine function within this domain.
+  \item \textbf{(iv)} Apply the sum-to-product formula to $\sin A + \sin B$. Because $A+B = 180^\circ - C$, you can express this part in terms of $C$. Maximize the resulting expression by setting its derivative with respect to $C$ to zero.
+\end{itemize}
+\end{hintbox}
+
+\begin{solution}
+\textbf{Part (i)} Let angles be $A = B - d$ and $C = B + d$ ($d \ge 0$). Since the sum is $180^\circ$, $(B-d) + B + (B+d) = 180^\circ \implies 3B = 180^\circ \implies B = 60^\circ$.
+
+\textbf{Part (ii)} The angles are $60^\circ - d$, $60^\circ$, $60^\circ + d$. Thus $S = \sin(60^\circ - d) + \sin(60^\circ) + \sin(60^\circ + d)$. Grouping the first and third terms:
+\[
+S = \sin(60^\circ) + 2\sin(60^\circ)\cos(-d) = \frac{\sqrt{3}}{2} + 2\left(\frac{\sqrt{3}}{2}\right)\cos d = \frac{\sqrt{3}}{2}(1 + 2\cos d).
+\]
+
+\textbf{Part (iii)} For a valid triangle, $A > 0^\circ \implies 60^\circ - d > 0^\circ \implies 0 \le d < 60^\circ$. On this interval, $\cos d \le \cos(0^\circ) = 1$, so $S \le \frac{\sqrt{3}}{2}(1 + 2) = \frac{3\sqrt{3}}{2}$.
+
+\textbf{Part (iv)} For any $\triangle ABC$, $S = (\sin A + \sin B) + \sin C = 2\sin\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right) + \sin C$. Since $A+B = 180^\circ - C$, $\sin\left(\frac{A+B}{2}\right) = \cos\left(\frac{C}{2}\right)$, yielding $S = 2\cos\left(\frac{C}{2}\right)\cos\left(\frac{A-B}{2}\right) + \sin C$.
+To maximize $S$ for a given $C$, we need $\cos\left(\frac{A-B}{2}\right) = 1 \implies A = B$. Then $S \le 2\cos\left(\frac{C}{2}\right) + \sin C$.
+Let $f(C) = 2\cos\left(\frac{C}{2}\right) + \sin C$. Differentiating gives:
+\[
+f'(C) = -\sin\left(\frac{C}{2}\right) + \cos C = -\sin\left(\frac{C}{2}\right) + 1 - 2\sin^2\left(\frac{C}{2}\right) = -\left(2\sin\left(\frac{C}{2}\right) - 1\right)\left(\sin\left(\frac{C}{2}\right) + 1\right).
+\]
+Setting $f'(C) = 0$ with $0^\circ < \frac{C}{2} < 90^\circ$ gives $\sin\left(\frac{C}{2}\right) = 0.5 \implies \frac{C}{2} = 30^\circ \implies C = 60^\circ$.
+Substituting $C=60^\circ$ gives $f(60^\circ) = 2\left(\frac{\sqrt{3}}{2}\right) + \frac{\sqrt{3}}{2} = \frac{3\sqrt{3}}{2}$. Equality holds when $A=B$ and $C=60^\circ$, so $A=B=C=60^\circ$.
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Linking Topics:} Problems in Extension 1 often require you to draw upon multiple disciplines. Here, properties of arithmetic progressions merge seamlessly with trigonometric identities and differential calculus.
+  \item \textbf{Variable Reduction:} In optimization problems with multiple variables, always look for ways to eliminate them. In part (ii), the common difference $d$ acts as a single parameter. In part (iv), using $A+B = 180^\circ - C$ allows us to define the function solely in terms of $C$.
+  \item \textbf{Bounding with Logic:} Before resorting to calculus, identify the theoretical maximums of trigonometric functions (like $\cos \theta \le 1$) to establish logical bounds, as demonstrated in Part (iii).
+\end{itemize}
+\end{takeaways}
