@@ -31,7 +31,7 @@
   before skip=15pt,
   after skip=10pt,
   before upper={\extramarks{}{Problem~\thetcbcounter}},
-  phantom={\addcontentsline{toc}{subsubsection}{\ifstrempty{#1}{Problem~\thetcbcounter}{Problem~\thetcbcounter: #1}}}
+  phantom={\addcontentsline{toc}{subsubsection}{\ifstrempty{#1}{P~\thetcbcounter}{P~\thetcbcounter: #1}}}
 }
 
 \newtcolorbox[auto counter,number within=section]{solutionbox}[1][]
@@ -57,12 +57,15 @@
     \setlength{\jot}{2pt}%
   },
   before skip=15pt,
-  after skip=10pt
+  after skip=10pt,
+  phantom={\addcontentsline{toc}{subsubsection}{\ifstrempty{#1}{S~\thetcbcounter}{S~\thetcbcounter: #1}}}
 }
 
+\RequirePackage{environ}
+\RequirePackage{graphicx}
 \makeatletter
 \@ifundefined{hintbox}{%
-  \newtcolorbox[auto counter,number within=section]{hintbox}[1][]
+  \newtcolorbox[auto counter,number within=section]{hintinnerbox}[1][]
   {
     title={\bfseries Hint~\thetcbcounter\ifstrempty{#1}{}{: #1}},
     enhanced,
@@ -78,6 +81,11 @@
     fonttitle=\bfseries,
     before skip=15pt,
     after skip=10pt
+  }
+  \NewEnviron{hintbox}[1][]{%
+    \begin{hintinnerbox}[#1]
+      \rotatebox[origin=c]{180}{\parbox{\linewidth}{\BODY}}
+    \end{hintinnerbox}
   }
 }{}%
 \makeatother

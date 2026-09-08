@@ -750,3 +750,82 @@ Hence the only fixed point is
 \item When solving within a branch of a piecewise function, always test whether the solution really belongs to that branch.
 \end{itemize}
 \end{takeaways}
+
+\begin{problem}[One-Sided Limits and Calculus of a Modulus Function]
+Let $f(x) = \dfrac{ax + b|x|}{x}$ for $x \neq 0$, where $a$ and $b$ are real constants.
+\begin{enumerate}[label=(\roman*)]
+    \item Determine the expressions for the one-sided limits $\lim_{x \to 0^+} f(x)$ and $\lim_{x \to 0^-} f(x)$ in terms of $a$ and $b$.
+    \item Determine the condition that must be satisfied for $\lim_{x \to 0} f(x)$ to exist.
+    \item Given $a = 1$ and $b = 1$, evaluate the definite integral $\displaystyle \int_{-2}^{2} f(x) \, dx$.
+    \item Let a new function $h(x)$ be defined by $h(x) = x \cdot f(x)$ for $x \neq 0$, and $h(0) = 0$. Using the formal definition of the derivative, determine whether $h(x)$ is differentiable at $x = 0$ when $a = 2$ and $b = 3$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+    \item For (i), recall the piecewise definition of the absolute value: $|x| = x$ for $x > 0$ and $|x| = -x$ for $x < 0$. Factor and simplify before evaluating the limit.
+    \item For (ii), a two-sided limit exists if and only if the left-hand limit equals the right-hand limit.
+    \item For (iii), substitute the constants $a = 1$ and $b = 1$, simplify $f(x)$ on the intervals $(-2, 0)$ and $(0, 2)$, and split the integral at $x = 0$.
+    \item For (iv), recall the first-principles definition $h'(0) = \lim_{x \to 0} \dfrac{h(x) - h(0)}{x - 0}$. Substitute $h(x) = x f(x)$ and $h(0) = 0$, then evaluate whether the resulting limit exists using your findings from parts (i) and (ii).
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} For $x > 0$, $|x| = x$. Hence, the right-hand limit is:
+\[
+\lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} \frac{ax + bx}{x} = \lim_{x \to 0^+} \frac{(a+b)x}{x} = \boxed{a + b.}
+\]
+For $x < 0$, $|x| = -x$. Hence, the left-hand limit is:
+\[
+\lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} \frac{ax - bx}{x} = \lim_{x \to 0^-} \frac{(a-b)x}{x} = \boxed{a - b.}
+\]
+
+\textbf{(ii)} For the two-sided limit $\lim_{x \to 0} f(x)$ to exist, the left-hand and right-hand limits must be equal:
+\[
+a + b = a - b \iff 2b = 0 \iff b = 0.
+\]
+Thus, the limit exists if and only if $\boxed{b = 0}$. (In this case, the limit is equal to $a$).
+
+\textbf{(iii)} For $a = 1$ and $b = 1$, the function becomes:
+\[
+f(x) = \frac{x + |x|}{x}.
+\]
+From our expressions in part (i):
+\begin{itemize}[leftmargin=*]
+    \item For $x > 0$: $f(x) = \dfrac{x + x}{x} = 2$.
+    \item For $x < 0$: $f(x) = \dfrac{x - x}{x} = 0$.
+\end{itemize}
+Evaluating the definite integral by splitting it at the piecewise boundary $x = 0$:
+\[
+\int_{-2}^{2} f(x) \, dx = \int_{-2}^{0} 0 \, dx + \int_{0}^{2} 2 \, dx = 0 + \Big[ 2x \Big]_0^2 = 2(2) - 2(0) = \boxed{4.}
+\]
+
+\textbf{(iv)} We are given $h(x) = x \cdot f(x)$ for $x \neq 0$ and $h(0) = 0$. Using the formal definition of the derivative from first principles:
+\[
+h'(0) = \lim_{x \to 0} \frac{h(x) - h(0)}{x - 0}.
+\]
+Substituting $h(x) = x \cdot f(x)$ and $h(0) = 0$:
+\[
+h'(0) = \lim_{x \to 0} \frac{x \cdot f(x) - 0}{x} = \lim_{x \to 0} f(x).
+\]
+For $a = 2$ and $b = 3$, we evaluate the one-sided limits of $f(x)$ using part (i):
+\[
+\lim_{x \to 0^+} f(x) = a + b = 2 + 3 = 5,
+\]
+\[
+\lim_{x \to 0^-} f(x) = a - b = 2 - 3 = -1.
+\]
+Since the one-sided limits are not equal ($5 \neq -1$), the two-sided limit $\lim_{x \to 0} f(x)$ does not exist.
+
+Therefore, $h'(0)$ does not exist, which means $\boxed{h(x)\text{ is not differentiable at } x = 0.}$
+\end{solution}
+
+\begin{takeaways}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Unpacking the Modulus:} Expressions of the form $\dfrac{|x|}{x}$ represent the signum function $\operatorname{sgn}(x)$, taking the value $+1$ for $x > 0$ and $-1$ for $x < 0$. Always partition absolute value expressions into positive and negative domains.
+    \item \textbf{Existence of Limits:} A two-sided limit exists if and only if both one-sided limits exist and are strictly equal: $\lim_{x \to c^+} f(x) = \lim_{x \to c^-} f(x)$.
+    \item \textbf{Piecewise Definite Integrals:} When integrating a function with jump discontinuities or piecewise branches across an interval, split the integral at the boundary points.
+    \item \textbf{Differentiability from First Principles:} To test whether a function is differentiable at a boundary or seam point, return directly to the difference quotient limit $h'(0) = \lim_{x \to 0} \dfrac{h(x) - h(0)}{x - 0}$.
+\end{itemize}
+\end{takeaways}
+
