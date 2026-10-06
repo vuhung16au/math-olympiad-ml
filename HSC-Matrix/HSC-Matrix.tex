@@ -1,0 +1,153 @@
+\documentclass[12pt]{article}
+
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{Matrix Practice}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\newtheorem*{theorem}{Theorem}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+% Links without visible rectangles (TOC and cross-refs remain clickable).
+\usepackage[hidelinks]{hyperref}
+\hypersetup{hidelinks}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{nicematrix} % Useful for drawing matrices with blocks/labels
+\usepackage{blkarray}   % Useful for block arrays
+
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage[takeawaysitemize]{dl101-hsc-problems}
+\usepackage{dl101-layout}
+
+\providecolor{warmstone}{RGB}{208,184,168}
+
+\newtcolorbox[auto counter,number within=section]{remarkbox}[1][]{
+  title={\bfseries Remark~\thetcbcounter},
+  enhanced,
+  drop shadow={black!20!white},
+  coltitle=bookwhite,
+  colback=softivory,
+  colframe=warmstone,
+  boxrule=1.5pt,
+  arc=4pt,
+  left=12pt,right=12pt,top=12pt,bottom=12pt,
+  attach boxed title to top left={xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+  boxed title style={size=small,colback=warmstone,coltitle=white},
+  fonttitle=\bfseries,
+  #1
+}
+
+\newenvironment{remark}[1][]{%
+  \begin{remarkbox}[title={\bfseries Remark~\thetcbcounter\ifx\relax#1\relax\else\ (#1)\fi}]%
+}{%
+  \end{remarkbox}%
+}
+
+\author{Vu Hung Nguyen}
+\title{HSC Mathematics: Matrix Practice (QLD Specialist)}
+\date{}
+
+\begin{document}
+
+\input{assets/matte.tex}
+
+% QR Code Page (Page 2)
+\newpage
+\input{../HSC-Common/assets/qrcode-page.tex}
+
+
+\begingroup\small\noindent This work is licensed under CC BY-NC 4.0 (Attribution-Non-Commercial), see the LICENSE file on the github page for more info.\par\endgroup
+
+\newpage
+
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\itshape
+"As for everything else, so for a mathematical theory:\\
+beauty can be perceived but not explained."
+
+\vspace{1em}
+\normalfont Arthur Cayley (Founder of matrix algebra)
+\end{center}
+\vspace*{\fill}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\begin{remark}[Syllabus Note]
+Matrices are not part of the current NSW NESA Mathematics syllabuses. The content in this booklet is adapted from the Queensland (QCAA) Specialist Mathematics syllabus. It serves as an excellent enrichment topic for students interested in linear algebra, computer graphics, and machine learning.
+\end{remark}
+
+\subsection{Project Overview}
+This booklet is a growing collection of matrix problems. It introduces matrix arithmetic, determinants, inverses, and applications to solving systems of linear equations and geometric transformations.
+
+\subsection{Target Audience}
+This resource is written for students who want to explore linear algebra beyond the standard NSW syllabus, in a clear, classroom-friendly format.
+
+\subsection{How to Use This Booklet}
+Read the short summary of the core formulas first, then attempt each problem before reading the solution.
+
+\subsection{Knowledge Needed}
+The key background knowledge is:
+\begin{itemize}[leftmargin=*]
+  \item Basic arithmetic and algebraic manipulation.
+  \item Understanding of systems of linear equations.
+  \item Basic 2D geometry (for geometric transformations).
+\end{itemize}
+
+\subsection{Core Formulas and Ideas}
+% TODO: Add core matrix formulas, properties of determinants, and inverses here.
+
+\section{Part 1: Worked Problems}
+
+\subsection{Basic}
+\input{problems/part1-basic.tex}
+
+\subsection{Medium}
+\input{problems/part1-medium.tex}
+
+\subsection{Advanced}
+\input{problems/part1-advanced.tex}
+
+\section{Part 2: Practice and Challenge Bank}
+
+\subsection{Warm-Up Drills}
+\input{problems/part2-basic.tex}
+
+\subsection{Stretch Problems}
+\input{problems/part2-medium.tex}
+
+\subsection{Challenge Corner}
+\input{problems/part2-advanced.tex}
+
+\section{Conclusion}
+
+Matrices provide a powerful language for describing and solving complex systems. As this booklet grows, it will become a compact reference for matrix operations and transformations.
+
+\vspace{2em}
+\noindent\textbf{Contact Information:}\\[0.5em]
+LinkedIn: \href{https://www.linkedin.com/in/nguyenvuhung/}{https://www.linkedin.com/in/nguyenvuhung/}\\[0.3em]
+GitHub: \href{https://github.com/vuhung16au/}{https://github.com/vuhung16au/}\\[0.3em]
+Repository: \href{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Matrix}{https://github.com/vuhung16au/math-olympiad-ml/tree/main/HSC-Matrix}
+
+\newpage
+\appendix
+\section{Appendices}
+
+\subsection{Further Reading in Linear Algebra}
+% TODO: Add enrichment content here.
+
+\end{document}
