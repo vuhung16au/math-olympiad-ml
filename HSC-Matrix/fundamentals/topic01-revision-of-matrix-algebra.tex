@@ -1,0 +1,177 @@
+% Topic 1: Revision of Matrix Algebra
+% Part of the Matrix Fundamentals section
+
+\subsection{Revision of Matrix Algebra}
+
+A \textbf{matrix} is a rectangular array of numbers arranged in rows and columns. Matrices are used extensively in mathematics, science, economics, and computer science to organise data, represent systems of equations, and describe geometric transformations.
+
+\subsubsection*{Notation and Terminology}
+
+A matrix with $m$ rows and $n$ columns is called an $m \times n$ matrix (read ``$m$ by $n$''). We typically denote matrices by uppercase letters ($A$, $B$, $C$, \ldots) and their individual entries by lowercase letters with subscripts. The entry in row $i$ and column $j$ of matrix $A$ is written $a_{ij}$.
+
+\[
+A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{bmatrix}
+\]
+
+\subsubsection*{Special Types of Matrices}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Row matrix:} A matrix with exactly one row, e.g.\ $\begin{bmatrix} 1 & 2 & 3 \end{bmatrix}$ is a $1 \times 3$ row matrix.
+  \item \textbf{Column matrix:} A matrix with exactly one column, e.g.\ $\begin{bmatrix} 4 \\ 5 \end{bmatrix}$ is a $2 \times 1$ column matrix.
+  \item \textbf{Square matrix:} A matrix where $m = n$ (same number of rows and columns).
+  \item \textbf{Zero matrix} ($O$): A matrix in which every entry is $0$. For example, $O_{2 \times 2} = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}$.
+  \item \textbf{Identity matrix} ($I$): A square matrix with $1$s on the main diagonal and $0$s everywhere else. For any square matrix $A$ of the same size, $AI = IA = A$.
+  \[
+  I_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \qquad
+  I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+  \]
+  \item \textbf{Diagonal matrix:} A square matrix where all off-diagonal entries are $0$, e.g.\ $\begin{bmatrix} 3 & 0 \\ 0 & -7 \end{bmatrix}$.
+  \item \textbf{Symmetric matrix:} A square matrix $A$ where $A = A^T$ (equal to its transpose), e.g.\ $\begin{bmatrix} 1 & 4 \\ 4 & 2 \end{bmatrix}$.
+\end{itemize}
+
+\subsubsection*{Matrix Operations}
+
+\textbf{1. Matrix Addition and Subtraction}
+
+Two matrices can be added (or subtracted) only if they have the \emph{same dimensions}. The operation is performed entry by entry:
+\[
+A + B = \begin{bmatrix} a_{11}+b_{11} & a_{12}+b_{12} \\ a_{21}+b_{21} & a_{22}+b_{22} \end{bmatrix}
+\]
+
+\textbf{2. Scalar Multiplication}
+
+To multiply a matrix by a scalar $k$, multiply every entry by $k$:
+\[
+kA = \begin{bmatrix} ka_{11} & ka_{12} \\ ka_{21} & ka_{22} \end{bmatrix}
+\]
+
+\textbf{3. Matrix Multiplication}
+
+The product $AB$ is defined only when the number of \emph{columns} of $A$ equals the number of \emph{rows} of $B$. If $A$ is $m \times n$ and $B$ is $n \times p$, then $AB$ is $m \times p$.
+
+The entry in row $i$, column $j$ of $AB$ is the dot product of row $i$ of $A$ with column $j$ of $B$:
+\[
+(AB)_{ij} = \sum_{k=1}^{n} a_{ik}\, b_{kj}
+\]
+
+\begin{remark}[Key Properties of Matrix Multiplication]
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Not commutative:} In general, $AB \neq BA$ (even when both products are defined).
+  \item \textbf{Associative:} $(AB)C = A(BC)$.
+  \item \textbf{Distributive:} $A(B+C) = AB + AC$ and $(A+B)C = AC + BC$.
+  \item \textbf{Identity:} $AI = IA = A$.
+  \item \textbf{Zero:} $AO = OA = O$ (where $O$ is the zero matrix of appropriate size).
+\end{itemize}
+\end{remark}
+
+\textbf{4. Transpose}
+
+The \textbf{transpose} of an $m \times n$ matrix $A$, written $A^T$, is the $n \times m$ matrix obtained by swapping its rows and columns: the entry in row $i$, column $j$ of $A^T$ is $a_{ji}$.
+
+Key properties of the transpose:
+\begin{itemize}[leftmargin=*]
+  \item $(A^T)^T = A$
+  \item $(A + B)^T = A^T + B^T$
+  \item $(kA)^T = kA^T$
+  \item $(AB)^T = B^T A^T$ \quad (\emph{note the reversal of order})
+\end{itemize}
+
+\bigskip
+
+% ── Worked Example 1: Basic Operations ──
+\begin{problem}[Matrix Algebra --- Basic Operations]
+Let $A = \begin{bmatrix} 2 & -1 \\ 3 & 4 \end{bmatrix}$, \;
+$B = \begin{bmatrix} 0 & 5 \\ -2 & 1 \end{bmatrix}$, \; and $k = 3$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Calculate $A + B$.
+  \item Calculate $kA$.
+  \item Calculate $AB$.
+  \item Calculate $BA$.
+  \item Is $AB = BA$? What does this tell you about matrix multiplication?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} \\
+$A + B = \begin{bmatrix} 2+0 & -1+5 \\ 3+(-2) & 4+1 \end{bmatrix} = \begin{bmatrix} 2 & 4 \\ 1 & 5 \end{bmatrix}$
+
+\medskip
+\textbf{(b)} \\
+$kA = 3\begin{bmatrix} 2 & -1 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 6 & -3 \\ 9 & 12 \end{bmatrix}$
+
+\medskip
+\textbf{(c)} \\
+$AB = \begin{bmatrix} 2 & -1 \\ 3 & 4 \end{bmatrix}\begin{bmatrix} 0 & 5 \\ -2 & 1 \end{bmatrix}$ \\[6pt]
+Row 1 of $A$ $\cdot$ columns of $B$: \\
+$(2)(0)+(-1)(-2) = 2$, \quad $(2)(5)+(-1)(1) = 9$ \\[3pt]
+Row 2 of $A$ $\cdot$ columns of $B$: \\
+$(3)(0)+(4)(-2) = -8$, \quad $(3)(5)+(4)(1) = 19$ \\[3pt]
+$AB = \begin{bmatrix} 2 & 9 \\ -8 & 19 \end{bmatrix}$
+
+\medskip
+\textbf{(d)} \\
+$BA = \begin{bmatrix} 0 & 5 \\ -2 & 1 \end{bmatrix}\begin{bmatrix} 2 & -1 \\ 3 & 4 \end{bmatrix}$ \\[6pt]
+$(0)(2)+(5)(3) = 15$, \quad $(0)(-1)+(5)(4) = 20$ \\[3pt]
+$(-2)(2)+(1)(3) = -1$, \quad $(-2)(-1)+(1)(4) = 6$ \\[3pt]
+$BA = \begin{bmatrix} 15 & 20 \\ -1 & 6 \end{bmatrix}$
+
+\medskip
+\textbf{(e)} \\
+$AB = \begin{bmatrix} 2 & 9 \\ -8 & 19 \end{bmatrix} \neq \begin{bmatrix} 15 & 20 \\ -1 & 6 \end{bmatrix} = BA$
+
+\medskip
+Matrix multiplication is \textbf{not commutative}. The order in which you multiply matrices matters. This is one of the most important differences between matrix algebra and ordinary number algebra.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Dimension Compatibility:} Always check dimensions before multiplying --- an $m \times n$ matrix can only multiply an $n \times p$ matrix.
+\item \textbf{Non-Commutativity:} $AB \neq BA$ in general. Never assume you can swap the order of matrix multiplication.
+\item \textbf{Entry-by-Entry vs.\ Row-by-Column:} Addition is entry-by-entry (same dimensions required). Multiplication uses the row-by-column dot product rule (inner dimensions must match).
+\end{takeaways}
+
+\bigskip
+
+% ── Worked Example 2: Transpose ──
+\begin{problem}[Matrix Algebra --- Transpose]
+Let $P = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}$ and $Q = \begin{bmatrix} 7 & 8 \\ 9 & 10 \\ 11 & 12 \end{bmatrix}$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Find $P^T$ and state its dimensions.
+  \item Calculate $PQ$ and then find $(PQ)^T$.
+  \item Calculate $Q^T P^T$ and verify that $(PQ)^T = Q^T P^T$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} \\
+$P^T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}$
+
+$P$ is $2 \times 3$, so $P^T$ is $3 \times 2$.
+
+\medskip
+\textbf{(b)} \\
+$P$ is $2 \times 3$ and $Q$ is $3 \times 2$, so $PQ$ is $2 \times 2$. \\[6pt]
+$PQ = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}\begin{bmatrix} 7 & 8 \\ 9 & 10 \\ 11 & 12 \end{bmatrix}$ \\[6pt]
+$(1)(7)+(2)(9)+(3)(11) = 58$, \quad $(1)(8)+(2)(10)+(3)(12) = 64$ \\[3pt]
+$(4)(7)+(5)(9)+(6)(11) = 139$, \quad $(4)(8)+(5)(10)+(6)(12) = 154$ \\[3pt]
+$PQ = \begin{bmatrix} 58 & 64 \\ 139 & 154 \end{bmatrix}$, \quad
+$(PQ)^T = \begin{bmatrix} 58 & 139 \\ 64 & 154 \end{bmatrix}$
+
+\medskip
+\textbf{(c)} \\
+$Q^T = \begin{bmatrix} 7 & 9 & 11 \\ 8 & 10 & 12 \end{bmatrix}$ \quad ($2 \times 3$), \quad
+$P^T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}$ \quad ($3 \times 2$) \\[6pt]
+$Q^T P^T = \begin{bmatrix} 7 & 9 & 11 \\ 8 & 10 & 12 \end{bmatrix}\begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}$ \\[6pt]
+$(7)(1)+(9)(2)+(11)(3) = 58$, \quad $(7)(4)+(9)(5)+(11)(6) = 139$ \\[3pt]
+$(8)(1)+(10)(2)+(12)(3) = 64$, \quad $(8)(4)+(10)(5)+(12)(6) = 154$ \\[3pt]
+$Q^T P^T = \begin{bmatrix} 58 & 139 \\ 64 & 154 \end{bmatrix}$
+
+\medskip
+Confirmed: $(PQ)^T = Q^T P^T = \begin{bmatrix} 58 & 139 \\ 64 & 154 \end{bmatrix}$. \checkmark
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Transpose Reverses Dimensions:} If $A$ is $m \times n$, then $A^T$ is $n \times m$.
+\item \textbf{Shoe--Sock Rule:} The transpose of a product reverses the order: $(AB)^T = B^T A^T$. Think of it like putting on socks then shoes --- to reverse, you remove shoes first, then socks.
+\end{takeaways}

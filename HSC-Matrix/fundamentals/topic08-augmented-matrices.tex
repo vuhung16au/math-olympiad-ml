@@ -1,0 +1,132 @@
+% Topic 8: Using Augmented Matrices for Systems of Equations
+% Part of the Matrix Fundamentals section
+
+\subsection{Using Augmented Matrices for Systems of Equations}
+
+Finding the inverse of a $3 \times 3$ or larger matrix is computationally heavy. Furthermore, if a system has no solutions or infinitely many solutions, the inverse method fails because $\det(A) = 0$. 
+
+A more robust and efficient method is \textbf{Gaussian elimination}, which uses \textbf{augmented matrices} and \textbf{elementary row operations}.
+
+\subsubsection*{The Augmented Matrix}
+
+Instead of writing three separate matrices ($A$, $X$, and $B$), we combine the coefficient matrix $A$ and the constant matrix $B$ into a single matrix, separated by a vertical line. For a $3 \times 3$ system, it looks like this:
+\[
+[A \,|\, B] = \left[ \begin{array}{ccc|c} 
+a_{11} & a_{12} & a_{13} & b_1 \\ 
+a_{21} & a_{22} & a_{23} & b_2 \\ 
+a_{31} & a_{32} & a_{33} & b_3 
+\end{array} \right]
+\]
+
+\subsubsection*{Elementary Row Operations}
+
+Because each row represents an algebraic equation, we can perform operations on the rows without changing the solution to the system. There are three valid \textbf{elementary row operations}:
+\begin{enumerate}
+  \item \textbf{Swap:} Interchange any two rows (e.g., $R_1 \leftrightarrow R_2$).
+  \item \textbf{Scale:} Multiply an entire row by a non-zero scalar (e.g., $R_2 \to \frac{1}{2}R_2$).
+  \item \textbf{Add/Subtract:} Add a multiple of one row to another row (e.g., $R_3 \to R_3 - 2R_1$).
+\end{enumerate}
+
+\subsubsection*{Row Echelon Form (REF)}
+
+The goal of Gaussian elimination is to use these operations to transform the augmented matrix into \textbf{Row Echelon Form}. In REF, the bottom-left corner of the matrix is filled with zeros, creating a "staircase" pattern:
+\[
+\left[ \begin{array}{ccc|c} 
+1 & * & * & * \\ 
+0 & 1 & * & * \\ 
+0 & 0 & 1 & * 
+\end{array} \right]
+\]
+Once in this form, the system can be easily solved from the bottom up using \textbf{back-substitution}.
+
+\bigskip
+
+% ── Worked Example: Gaussian Elimination ──
+\begin{problem}[Gaussian Elimination]
+Solve the following system of linear equations using an augmented matrix and row reduction:
+\begin{align*}
+x + y + z &= 6 \\
+2x - y + 2z &= 6 \\
+x + 2y - z &= 2
+\end{align*}
+\end{problem}
+
+\begin{solution}
+\textbf{Step 1: Write the augmented matrix.}
+\[
+\left[ \begin{array}{ccc|c} 
+1 & 1 & 1 & 6 \\ 
+2 & -1 & 2 & 6 \\ 
+1 & 2 & -1 & 2 
+\end{array} \right]
+\]
+
+\medskip
+\textbf{Step 2: Eliminate the $x$-coefficients in Rows 2 and 3.} \\
+To get a zero in $R_2$, column 1, we subtract $2 \times R_1$ from $R_2$ ($R_2 \to R_2 - 2R_1$):
+\[
+\left[ \begin{array}{ccc|c} 
+1 & 1 & 1 & 6 \\ 
+0 & -3 & 0 & -6 \\ 
+1 & 2 & -1 & 2 
+\end{array} \right]
+\]
+To get a zero in $R_3$, column 1, we subtract $R_1$ from $R_3$ ($R_3 \to R_3 - R_1$):
+\[
+\left[ \begin{array}{ccc|c} 
+1 & 1 & 1 & 6 \\ 
+0 & -3 & 0 & -6 \\ 
+0 & 1 & -2 & -4 
+\end{array} \right]
+\]
+
+\medskip
+\textbf{Step 3: Simplify and eliminate the $y$-coefficient in Row 3.} \\
+Let's simplify $R_2$ by dividing by $-3$ ($R_2 \to -\frac{1}{3}R_2$):
+\[
+\left[ \begin{array}{ccc|c} 
+1 & 1 & 1 & 6 \\ 
+0 & 1 & 0 & 2 \\ 
+0 & 1 & -2 & -4 
+\end{array} \right]
+\]
+Now, eliminate the $y$-coefficient in $R_3$ by subtracting $R_2$ ($R_3 \to R_3 - R_2$):
+\[
+\left[ \begin{array}{ccc|c} 
+1 & 1 & 1 & 6 \\ 
+0 & 1 & 0 & 2 \\ 
+0 & 0 & -2 & -6 
+\end{array} \right]
+\]
+
+\medskip
+\textbf{Step 4: Finalize Row Echelon Form and Back-Substitute.} \\
+Divide $R_3$ by $-2$ ($R_3 \to -\frac{1}{2}R_3$):
+\[
+\left[ \begin{array}{ccc|c} 
+1 & 1 & 1 & 6 \\ 
+0 & 1 & 0 & 2 \\ 
+0 & 0 & 1 & 3 
+\end{array} \right]
+\]
+Translate the matrix back into equations:
+\begin{align*}
+x + y + z &= 6 \quad \text{--- (1)} \\
+y &= 2 \quad \text{--- (2)} \\
+z &= 3 \quad \text{--- (3)}
+\end{align*}
+We already have $y=2$ and $z=3$. Substitute these back into equation (1):
+\begin{align*}
+x + (2) + (3) &= 6 \\
+x + 5 &= 6 \\
+x &= 1
+\end{align*}
+
+The unique solution is $x = 1, y = 2, z = 3$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Computational Efficiency:} Gaussian elimination requires far fewer calculations than finding a $3 \times 3$ inverse, making it the preferred method for solving systems by hand.
+\item \textbf{Detecting Anomalies:} If a system has no solution, row reduction will eventually produce an impossible row like $\left[ \begin{array}{ccc|c} 0 & 0 & 0 & 5 \end{array} \right]$, which algebraically means $0 = 5$. 
+\item \textbf{Infinite Solutions:} If a system has infinite solutions, row reduction will produce a redundant row like $\left[ \begin{array}{ccc|c} 0 & 0 & 0 & 0 \end{array} \right]$, indicating one equation was just a multiple of another.
+\end{takeaways}

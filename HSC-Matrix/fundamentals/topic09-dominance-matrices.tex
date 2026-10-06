@@ -1,0 +1,112 @@
+% Topic 9: Dominance Matrices
+% Part of the Matrix Fundamentals section
+
+\subsection{Dominance Matrices}
+
+Matrices are not only used for solving algebraic equations; they are incredibly powerful tools in discrete mathematics and network theory. A \textbf{dominance matrix} is used to represent and analyze directed relationships, such as the outcomes of a round-robin sports tournament or a ``pecking order'' in a group of animals.
+
+\subsubsection*{Constructing the Dominance Matrix}
+
+If a group of $n$ competitors play each other exactly once (no draws allowed), the results can be stored in an $n \times n$ matrix $D$:
+\begin{itemize}[leftmargin=*]
+  \item $d_{ij} = 1$ if competitor $i$ defeated competitor $j$.
+  \item $d_{ij} = 0$ if competitor $i$ lost to competitor $j$.
+\end{itemize}
+The main diagonal is always entirely zeros, as a competitor cannot play themselves. 
+
+\subsubsection*{Direct and Indirect Wins}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{One-step dominance (Direct wins):} The sum of the elements in row $i$ of matrix $D$ gives the total number of matches won by competitor $i$. However, this often results in ties.
+  \item \textbf{Two-step dominance (Indirect wins):} If Team A beats Team B, and Team B beats Team C, Team A has a two-step dominance over Team C. Mathematically, this is found by squaring the matrix to get $D^2$. This rewards teams for beating \emph{strong} opponents.
+  \item \textbf{Total Dominance Score:} To break ties, we calculate a power score matrix $T = D + D^2$. The row sums of $T$ provide a much more robust ranking system.
+\end{itemize}
+
+\bigskip
+
+% ── Worked Example: Ranking a Tournament ──
+\begin{problem}[Tournament Rankings]
+Four teams (A, B, C, and D) compete in a round-robin tournament. The results are as follows:
+\begin{itemize}
+  \item Team A defeated Teams B and C.
+  \item Team B defeated Teams C and D.
+  \item Team C defeated Team D.
+  \item Team D defeated Team A.
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Construct the $4 \times 4$ dominance matrix $D$. Calculate the row sums to find the direct rankings and identify any ties.
+  \item Calculate $D^2$, the two-step dominance matrix.
+  \item Calculate the total dominance matrix $T = D + D^2$, and use its row sums to determine the final, tie-broken ranking of the four teams.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a) Matrix $D$ and Direct Rankings} \\
+Following the rules, we place a $1$ in row $i$, column $j$ if the row team beat the column team.
+\[
+D = \begin{bmatrix} 
+0 & 1 & 1 & 0 \\ 
+0 & 0 & 1 & 1 \\ 
+0 & 0 & 0 & 1 \\ 
+1 & 0 & 0 & 0 
+\end{bmatrix}
+\]
+Row Sums (Direct Wins):
+\begin{itemize}
+  \item Team A sum = 2
+  \item Team B sum = 2
+  \item Team C sum = 1
+  \item Team D sum = 1
+\end{itemize}
+We have a tie for 1st place (A and B) and a tie for 3rd place (C and D).
+
+\medskip
+\textbf{(b) Matrix $D^2$ (Indirect Wins)} \\
+Multiply $D$ by itself. For example, to find Row 1, Col 4 of $D^2$, we calculate $(0)(0) + (1)(1) + (1)(1) + (0)(0) = 2$. This means Team A has two indirect pathways to beat Team D (via B and via C).
+\[
+D^2 = D \times D = 
+\begin{bmatrix} 0 & 1 & 1 & 0 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \end{bmatrix}
+\begin{bmatrix} 0 & 1 & 1 & 0 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \end{bmatrix}
+=
+\begin{bmatrix} 
+0 & 0 & 1 & 2 \\ 
+1 & 0 & 0 & 1 \\ 
+1 & 0 & 0 & 0 \\ 
+0 & 1 & 1 & 0 
+\end{bmatrix}
+\]
+
+\medskip
+\textbf{(c) Total Dominance and Final Ranking} \\
+Calculate $T = D + D^2$ by adding the corresponding elements:
+\[
+T = 
+\begin{bmatrix} 0 & 1 & 1 & 0 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \end{bmatrix}
++
+\begin{bmatrix} 0 & 0 & 1 & 2 \\ 1 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 1 & 0 \end{bmatrix}
+=
+\begin{bmatrix} 
+0 & 1 & 2 & 2 \\ 
+1 & 0 & 1 & 2 \\ 
+1 & 0 & 0 & 1 \\ 
+1 & 1 & 1 & 0 
+\end{bmatrix}
+\]
+Row Sums of $T$:
+\begin{itemize}
+  \item Team A = $0+1+2+2 = \textbf{5}$
+  \item Team B = $1+0+1+2 = \textbf{4}$
+  \item Team D = $1+1+1+0 = \textbf{3}$
+  \item Team C = $1+0+0+1 = \textbf{2}$
+\end{itemize}
+
+\textbf{Final Ranking:} 1st: Team A, 2nd: Team B, 3rd: Team D, 4th: Team C. \\
+The ties have been successfully broken!
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Quality of Wins:} Team A and B both had 2 direct wins. However, Team A beat Team B (a strong team), giving A more indirect pathways to dominance. The $D+D^2$ method algebraically measures the "quality" of an opponent.
+\item \textbf{Networks and Graphs:} Dominance matrices are adjacency matrices for directed graphs. Squaring the matrix algebraically counts the number of 2-step paths between nodes in a network.
+\item \textbf{Real-World Algorithms:} This logic is the foundational mathematics behind modern search engines (like Google's PageRank algorithm), which rank web pages based on the quantity and quality of incoming links.
+\end{takeaways}

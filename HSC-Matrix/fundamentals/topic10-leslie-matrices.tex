@@ -1,0 +1,116 @@
+% Topic 10: Leslie Matrices
+% Part of the Matrix Fundamentals section
+
+\subsection{Leslie Matrices}
+
+Matrices can model dynamic, real-world systems that change over time. In biology and ecology, the \textbf{Leslie matrix} is a standard model used to predict the population growth of organisms by breaking the population down into distinct age groups (classes). Because females typically drive population reproduction rates, Leslie matrices generally only track the female portion of a population.
+
+\subsubsection*{The Structure of a Leslie Matrix}
+
+Suppose a population is divided into $n$ age classes of equal time duration. 
+\begin{itemize}[leftmargin=*]
+  \item Let $f_i$ be the \textbf{fecundity (fertility) rate}: the average number of female offspring born to a female in age class $i$.
+  \item Let $s_i$ be the \textbf{survival rate}: the probability that a female in age class $i$ survives to enter age class $i+1$.
+\end{itemize}
+
+The Leslie matrix $L$ is a square $n \times n$ matrix built with a very specific layout:
+\begin{itemize}[leftmargin=*]
+  \item The \textbf{first row} contains the fecundity rates ($f_1, f_2, \dots, f_n$).
+  \item The \textbf{sub-diagonal} (the diagonal immediately below the main diagonal) contains the survival rates ($s_1, s_2, \dots, s_{n-1}$).
+  \item All other entries are exactly zero.
+\end{itemize}
+
+For a 3-age-class population, the matrix looks like this:
+\[
+L = \begin{bmatrix} 
+f_1 & f_2 & f_3 \\ 
+s_1 & 0 & 0 \\ 
+0 & s_2 & 0 
+\end{bmatrix}
+\]
+
+\subsubsection*{Population Projection}
+
+If we represent the number of individuals in each age class at time $t$ as a column matrix (a state vector) $\mathbf{n}_t$, we can find the population at the next time interval by multiplying by $L$:
+\[
+\mathbf{n}_{t+1} = L \mathbf{n}_t
+\]
+To project $k$ time periods into the future from an initial population $\mathbf{n}_0$, we use matrix exponentiation:
+\[
+\mathbf{n}_{k} = L^k \mathbf{n}_0
+\]
+
+\bigskip
+
+% ── Worked Example: Population Projection ──
+\begin{problem}[Projecting a Rodent Population]
+A species of rodent is divided into three age classes, each spanning one month: 0--1 month, 1--2 months, and 2--3 months. The maximum lifespan is 3 months.
+\begin{itemize}
+  \item \textbf{Fertility rates:} Class 1 females produce $0$ offspring. Class 2 females produce $2.0$ offspring. Class 3 females produce $1.5$ offspring.
+  \item \textbf{Survival rates:} $40\%$ ($0.4$) of Class 1 survive to Class 2. $30\%$ ($0.3$) of Class 2 survive to Class 3.
+  \item \textbf{Initial Population ($\mathbf{n}_0$):} There are currently 100 females in Class 1, 50 in Class 2, and 20 in Class 3.
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Construct the Leslie matrix, $L$, for this population.
+  \item Calculate the population state vector after 1 month ($\mathbf{n}_1$).
+  \item Calculate the population state vector after 2 months ($\mathbf{n}_2$).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a) Construct the Leslie matrix} \\
+Row 1 contains the fertility rates: $0, 2.0, 1.5$. \\
+The sub-diagonal contains the survival rates: $0.4$ and $0.3$.
+\[
+L = \begin{bmatrix} 
+0 & 2.0 & 1.5 \\ 
+0.4 & 0 & 0 \\ 
+0 & 0.3 & 0 
+\end{bmatrix}
+\]
+
+\medskip
+\textbf{(b) Population after 1 month ($\mathbf{n}_1$)} \\
+Multiply the Leslie matrix by the initial population vector $\mathbf{n}_0$:
+\[
+\mathbf{n}_1 = L \mathbf{n}_0 = 
+\begin{bmatrix} 0 & 2.0 & 1.5 \\ 0.4 & 0 & 0 \\ 0 & 0.3 & 0 \end{bmatrix}
+\begin{bmatrix} 100 \\ 50 \\ 20 \end{bmatrix}
+= 
+\begin{bmatrix} 
+0(100) + 2.0(50) + 1.5(20) \\ 
+0.4(100) + 0(50) + 0(20) \\ 
+0(100) + 0.3(50) + 0(20) 
+\end{bmatrix}
+\]
+\[
+\mathbf{n}_1 = \begin{bmatrix} 0 + 100 + 30 \\ 40 \\ 15 \end{bmatrix} = \begin{bmatrix} 130 \\ 40 \\ 15 \end{bmatrix}
+\]
+After 1 month, there are 130 newborns, 40 adults (1-2 mo), and 15 elders (2-3 mo).
+
+\medskip
+\textbf{(c) Population after 2 months ($\mathbf{n}_2$)} \\
+Multiply the Leslie matrix by the new population vector $\mathbf{n}_1$:
+\[
+\mathbf{n}_2 = L \mathbf{n}_1 = 
+\begin{bmatrix} 0 & 2.0 & 1.5 \\ 0.4 & 0 & 0 \\ 0 & 0.3 & 0 \end{bmatrix}
+\begin{bmatrix} 130 \\ 40 \\ 15 \end{bmatrix}
+= 
+\begin{bmatrix} 
+0(130) + 2.0(40) + 1.5(15) \\ 
+0.4(130) + 0(40) + 0(15) \\ 
+0(130) + 0.3(40) + 0(15) 
+\end{bmatrix}
+\]
+\[
+\mathbf{n}_2 = \begin{bmatrix} 0 + 80 + 22.5 \\ 52 \\ 12 \end{bmatrix} = \begin{bmatrix} 102.5 \\ 52 \\ 12 \end{bmatrix}
+\]
+\emph{(Note: In mathematical biology, it is standard practice to keep decimals during intermediate calculation steps to avoid compounding rounding errors, and only round to whole animals when stating the final interpretive answer. So we have roughly 103 newborns, 52 adults, and 12 elders).}
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Structured Flow:} The rigid structure of the Leslie matrix ensures mathematical logic: the top row calculates all new births and drops them into age class 1, while the sub-diagonal pushes the survivors from class $i$ down into class $i+1$.
+\item \textbf{Iteration:} A system that updates based on its previous state ($\mathbf{n}_{t+1} = L \mathbf{n}_t$) is called a dynamical system. Matrices are perfect for iterating large blocks of data simultaneously.
+\item \textbf{Long-term Behavior:} While outside the scope of this topic, the long-term survival or extinction of a population depends entirely on the largest \emph{eigenvalue} of its Leslie matrix!
+\end{takeaways}
