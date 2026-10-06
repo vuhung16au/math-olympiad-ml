@@ -1,57 +1,3 @@
-\begin{problem}[Matrix Inverses and Matrix Equations]
-Let $A$ and $B$ be $2 \times 2$ matrices defined as $A = \begin{bmatrix} k & 2 \\ -1 & 1 \end{bmatrix}$ and $B = \begin{bmatrix} 1 & -1 \\ 2 & 3 \end{bmatrix}$, where $k$ is a real constant.
-
-\begin{enumerate}[label=\textbf{(\alph*)}]
-    \item Determine the determinant of $A$ in terms of $k$, and hence state the value of $k$ for which matrix $A$ is singular.
-    \item Let $k = 3$. Determine the inverse matrices $A^{-1}$ and $B^{-1}$.
-    \item For $k = 3$, calculate the matrix product $AB$ and hence determine $(AB)^{-1}$.
-    \item Evaluate the product $B^{-1}A^{-1}$ to verify the property $(AB)^{-1} = B^{-1}A^{-1}$. Hence, use this property to make the matrix $X$ the subject of the matrix equation $ABX = C$, where $C$ is a $2 \times 2$ matrix.
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-\begin{itemize}
-    \item \textbf{Part (a):} The determinant of a $2 \times 2$ matrix $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is $ad - bc$. A matrix is singular (has no inverse) when its determinant equals zero.
-    \item \textbf{Part (b):} Use the formula for the inverse of a $2 \times 2$ matrix: $\frac{1}{\det(M)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$.
-    \item \textbf{Part (c):} Multiply matrix $A$ by matrix $B$ using the standard row-by-column method. Then find the inverse of the resulting $2 \times 2$ matrix.
-    \item \textbf{Part (d):} Multiply $B^{-1}$ (on the left) by $A^{-1}$ (on the right) and factor out the scalar multipliers. To solve $ABX = C$, remember that you must multiply both sides of the equation by the inverse of $AB$ on the left.
-\end{itemize}
-\end{hint}
-
-\begin{solution}
-\textbf{(a)} \\
-$\det(A) = (k)(1) - (2)(-1) = k + 2$. \\
-For matrix $A$ to be singular, $\det(A) = 0$. Therefore, $k = -2$.
-
-\medskip
-\textbf{(b)} \\
-Given $k = 3$, $A = \begin{bmatrix} 3 & 2 \\ -1 & 1 \end{bmatrix}$. \\
-$\det(A) = 3 + 2 = 5$. Thus, $A^{-1} = \frac{1}{5}\begin{bmatrix} 1 & -2 \\ 1 & 3 \end{bmatrix}$. \\
-$\det(B) = (1)(3) - (-1)(2) = 3 + 2 = 5$. Thus, $B^{-1} = \frac{1}{5}\begin{bmatrix} 3 & 1 \\ -2 & 1 \end{bmatrix}$.
-
-\medskip
-\textbf{(c)} \\
-$AB = \begin{bmatrix} 3 & 2 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} 1 & -1 \\ 2 & 3 \end{bmatrix} = \begin{bmatrix} 3(1)+2(2) & 3(-1)+2(3) \\ -1(1)+1(2) & -1(-1)+1(3) \end{bmatrix} = \begin{bmatrix} 7 & 3 \\ 1 & 4 \end{bmatrix}$. \\
-$\det(AB) = (7)(4) - (3)(1) = 28 - 3 = 25$. \\
-$(AB)^{-1} = \frac{1}{25}\begin{bmatrix} 4 & -3 \\ -1 & 7 \end{bmatrix}$.
-
-\medskip
-\textbf{(d)} \\
-$B^{-1}A^{-1} = \left( \frac{1}{5}\begin{bmatrix} 3 & 1 \\ -2 & 1 \end{bmatrix} \right) \left( \frac{1}{5}\begin{bmatrix} 1 & -2 \\ 1 & 3 \end{bmatrix} \right) = \frac{1}{25} \begin{bmatrix} 3(1)+1(1) & 3(-2)+1(3) \\ -2(1)+1(1) & -2(-2)+1(3) \end{bmatrix} = \frac{1}{25}\begin{bmatrix} 4 & -3 \\ -1 & 7 \end{bmatrix}$. \\
-This verifies that $(AB)^{-1} = B^{-1}A^{-1}$. \\
-To solve $ABX = C$: \\
-$(AB)^{-1}(AB)X = (AB)^{-1}C$ \\
-$IX = (AB)^{-1}C$ \\
-$X = B^{-1}A^{-1}C$.
-\end{solution}
-
-\begin{takeaways}
-\item \textbf{The "Socks and Shoes" Property:} The inverse of a matrix product reverses the order of the original matrices: $(AB)^{-1} = B^{-1}A^{-1}$.
-\item \textbf{Matrix Algebra in Equations:} When isolating a matrix variable (like $X$ in $ABX=C$), you must respect the non-commutative nature of matrices by multiplying by the inverse on the correct side (in this case, pre-multiplying on the left).
-\item \textbf{Determinant of a Product:} Notice that $\det(AB) = 25$, while $\det(A) = 5$ and $\det(B) = 5$. This verifies another key property: $\det(AB) = \det(A) \times \det(B)$.
-\end{takeaways}
-
-
 \begin{problem}[Matrix Inverses and the Zero Matrix]
 Let $A, B, C,$ and $D$ be $2 \times 2$ matrices, where $O$ is the zero matrix and $I$ is the identity matrix.
 
@@ -293,59 +239,57 @@ In an $n$-team round-robin tournament with no draws, every pair of teams plays e
 \end{takeaways}
 
 
-\begin{problem}[Dominance Matrices and Tournament Ratings]
-Five members of the Onyx Positional chess club—A, B, C, D, and E—compete in a round-robin tournament where no games end in a draw. The results of the matches are as follows:
+\begin{problem}[Adjacency Matrices and Network Paths]
+Consider a small communications network of five computer nodes, labeled $N_1$ to $N_5$. The network has bidirectional links connecting the following pairs of nodes:
 \begin{itemize}
-    \item Player A defeated B and D.
-    \item Player B defeated C and D.
-    \item Player C defeated A and E.
-    \item Player D defeated E.
-    \item Player E defeated A and B.
+    \item $N_1$ is connected to $N_2$ and $N_3$.
+    \item $N_2$ is connected to $N_1$, $N_3$, and $N_4$.
+    \item $N_3$ is connected to $N_1$, $N_2$, and $N_5$.
+    \item $N_4$ is connected to $N_2$ and $N_5$.
+    \item $N_5$ is connected to $N_3$ and $N_4$.
 \end{itemize}
 
 \begin{enumerate}[label=\textbf{(\alph*)}]
-    \item Construct the $5 \times 5$ one-step dominance matrix, $D$, for this tournament, where a $1$ in row $i$ and column $j$ indicates that player $i$ defeated player $j$.
-    \item Calculate the two-step dominance matrix, $D^2$. What does the numerical value located in row 3, column 2 of $D^2$ represent in the context of this chess tournament?
-    \item The club director decides to rank the players using a weighted total power score vector $P$, calculated by the formula $P = (D + 0.5D^2)\mathbf{v}$, where $\mathbf{v}$ is a $5 \times 1$ column vector of ones. Calculate $P$ and state the final ranking of the five players.
-    \item A new player, F, joins the club late, plays against all five original members, and loses every game. Without recalculating the new $6 \times 6$ matrices from scratch, logically deduce how the addition of player F affects the relative total power scores ($P$) and the final rankings of players A through E from part (c). 
+    \item Construct the $5 \times 5$ adjacency matrix, $A$, for this network, where $a_{ij} = 1$ if there is a direct link between $N_i$ and $N_j$, and $0$ otherwise.
+    \item Calculate the matrix $A^2$. What does the entry in row 2, column 3 of $A^2$ represent in the context of this network?
+    \item What is the significance of the entries on the main diagonal of $A^2$? Use these entries to determine the total number of edges in the network.
+    \item Calculate the trace of $A^3$ (the sum of its main diagonal entries). What does this number tell you about the physical structure of the network?
 \end{enumerate}
 \end{problem}
 
 \begin{hint}
 \begin{itemize}
-    \item \textbf{Part (a):} Set up a $5 \times 5$ grid. If A beats B, place a 1 in row A, column B, and a 0 in row B, column A. The main diagonal will contain only zeros.
-    \item \textbf{Part (b):} Multiply matrix $D$ by itself using standard row-by-column multiplication. The resulting values indicate the number of indirect pathways (2-step dominances) between players. 
-    \item \textbf{Part (c):} Adding $D$ and $0.5D^2$ combines the direct wins with half-weighted indirect wins. Multiplying by a column vector of ones simply computes the sum of the rows of the resulting weighted matrix.
-    \item \textbf{Part (d):} Consider how F's performance alters the row sums. F contributes a direct win (1-step dominance) to every other player. Does F contribute to anyone's 2-step dominance score, given that F defeated no one?
+    \item \textbf{Part (a):} Since the links are bidirectional, the matrix $A$ will be symmetric across its main diagonal. A node is not directly connected to itself, so the main diagonal consists of zeros.
+    \item \textbf{Part (b):} The entries of $A^k$ represent the number of walks of exactly length $k$ between two vertices.
+    \item \textbf{Part (c):} A walk of length 2 from a node to itself must go to an adjacent node and immediately return. How does this relate to the degree (number of connections) of that node?
+    \item \textbf{Part (d):} A walk of length 3 from a node to itself is a closed loop of three edges. Think about what geometric shape this forms in the network graph.
 \end{itemize}
 \end{hint}
 
 \begin{solution}
 \textbf{(a)} \\
-$D = \begin{bmatrix} 0 & 1 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix}$
+$A = \begin{bmatrix} 0 & 1 & 1 & 0 & 0 \\ 1 & 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 0 & 1 \\ 0 & 0 & 1 & 1 & 0 \end{bmatrix}$
 
 \medskip
 \textbf{(b)} \\
-$D^2 = \begin{bmatrix} 0 & 1 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 & 1 & 1 & 1 \\ 1 & 0 & 0 & 1 & 2 \\ 1 & 2 & 0 & 1 & 0 \\ 1 & 1 & 0 & 0 & 0 \\ 0 & 1 & 1 & 2 & 0 \end{bmatrix}$ \\
-The value in row 3, column 2 is $2$. This represents the number of 2-step dominances Player C has over Player B. Specifically, Player C defeated two players (A and E), who both subsequently defeated Player B.
+$A^2 = \begin{bmatrix} 2 & 1 & 1 & 1 & 1 \\ 1 & 3 & 1 & 0 & 2 \\ 1 & 1 & 3 & 2 & 0 \\ 1 & 0 & 2 & 2 & 0 \\ 1 & 2 & 0 & 0 & 2 \end{bmatrix}$ \\
+The entry in row 2, column 3 of $A^2$ is 1. This represents the number of 2-step walks from $N_2$ to $N_3$. The single path is $N_2 \to N_1 \to N_3$.
 
 \medskip
 \textbf{(c)} \\
-$D + 0.5D^2 = \begin{bmatrix} 0 & 1 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix} + \begin{bmatrix} 0 & 0 & 0.5 & 0.5 & 0.5 \\ 0.5 & 0 & 0 & 0.5 & 1 \\ 0.5 & 1 & 0 & 0.5 & 0 \\ 0.5 & 0.5 & 0 & 0 & 0 \\ 0 & 0.5 & 0.5 & 1 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0.5 & 1.5 & 0.5 \\ 0.5 & 0 & 1 & 1.5 & 1 \\ 1.5 & 1 & 0 & 0.5 & 1 \\ 0.5 & 0.5 & 0 & 0 & 1 \\ 1 & 1.5 & 0.5 & 1 & 0 \end{bmatrix}$ \\
-Summing the rows yields the total power score vector $P$: \\
-$P = \begin{bmatrix} 3.5 \\ 4.0 \\ 4.0 \\ 2.0 \\ 4.0 \end{bmatrix}$ \\
-The rankings are: Tied 1st: Players B, C, and E (4.0). 4th: Player A (3.5). 5th: Player D (2.0).
+The entries on the main diagonal of $A^2$ represent the number of 2-step walks from a node to itself. In a simple network, this means traveling to a neighbor and returning immediately. Therefore, each diagonal entry represents the degree (number of direct connections) of that node. \\
+The sum of these entries is $2 + 3 + 3 + 2 + 2 = 12$. Since each edge in the network connects two nodes, it contributes 2 to the sum of the degrees. Thus, the total number of edges is $12 / 2 = 6$.
 
 \medskip
 \textbf{(d)} \\
-Player F loses to everyone, so every player from A through E gains exactly $1$ direct win (1-step dominance). \\
-Because Player F defeated no one, defeating F does not grant any indirect wins (2-step dominance) over anyone else. Thus, the 2-step dominance scores for players A through E remain unchanged. \\
-In the formula $P = D + 0.5D^2$, every original player's score increases by exactly $1.0 + 0.5(0) = 1.0$. \\
-Since every player's score increases by the exact same constant amount, the relative power scores and the final rankings of players A through E remain entirely unchanged.
+The main diagonal of $A^3$ represents the number of 3-step walks from a node to itself.
+$(A^3)_{11}=2, (A^3)_{22}=2, (A^3)_{33}=2, (A^3)_{44}=0, (A^3)_{55}=0$. \\
+The trace (sum of the main diagonal) is 6. In a simple graph, a 3-step walk from a node to itself is a triangle (a closed loop of 3 edges). Each triangle $N_i, N_j, N_k$ can be traversed in two directions starting from any of its 3 nodes, so a single triangle is counted $3 \times 2 = 6$ times in the trace of $A^3$. \\
+Therefore, there is exactly $6 / 6 = 1$ triangle in the network structure (which is formed by nodes $N_1, N_2, N_3$).
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{Weighting Indirect Wins:} Standard dominance rankings often use $D + D^2$, but applying a fractional weight (like $0.5$) to $D^2$ is a more realistic rating method that prioritizes direct head-to-head victories over indirect pathways.
-\item \textbf{Interpreting Matrix Elements:} The element $(i, j)$ in $D^2$ physically counts the number of distinct intermediate opponents that player $i$ defeated, who then went on to defeat player $j$.
-\item \textbf{Structural Additions to Graphs:} In discrete math, identifying how adding a "sink" node (a node with only incoming directed edges) affects the adjacency and reachability matrices allows you to bypass tedious brute-force calculations.
+\item \textbf{Adjacency Matrix Powers:} While $A$ records direct connections, its powers $A^k$ count the number of walks of exactly length $k$ between any two nodes. This connects matrix multiplication directly to combinatorial counting.
+\item \textbf{Graph Invariants:} Simple graph properties can be extracted from matrix properties. For example, the sum of the main diagonal of $A^2$ gives twice the number of edges, and the trace of $A^3$ gives six times the number of triangles.
+\item \textbf{Symmetry:} Because the network is undirected (bidirectional links), the adjacency matrix $A$ is symmetric ($A^T = A$), which in turn guarantees that all powers of $A$ are also symmetric.
 \end{takeaways}

@@ -192,64 +192,67 @@ $x = \frac{4}{m+3}$.
 \end{takeaways}
 
 
-\begin{problem}[Matrix Systems and Parametric Constants]
-Consider the following system of linear equations involving a real constant $k$:
-\begin{align*}
-kx + 2y &= k+1 \\
-8x + ky &= 6
-\end{align*}
+\begin{problem}[Determinants, Area and Orientation]
+Consider a triangle $T$ in the Cartesian plane with vertices at the origin $O(0,0)$, $A(2,0)$, and $B(1,3)$. A linear transformation is applied to the plane, defined by the matrix 
+$M_k = \begin{bmatrix} k & 1 \\ 2 & 3 \end{bmatrix}$, where $k$ is a real parameter.
 
 \begin{enumerate}[label=\textbf{(\alph*)}]
-    \item Write this system in the matrix form, as $AX = K$. Determine the values of $k$ for which the coefficient matrix $A$ is not an invertible matrix.
-    \item For the negative value of $k$ found in part (a), determine the geometric relationship between the two linear equations. How many pairs does the solution set contain?
-    \item For the positive value of $k$ found in part (a), demonstrate algebraically whether any solutions can be found for this system of equations. Interpret this result geometrically.
-    \item Let $k = 2$. Calculate $A^{-1}$ and hence find the unique solution pair $(x, y)$ that satisfies the system.
+    \item Determine the coordinates of the transformed vertices $O'$, $A'$, and $B'$ in terms of $k$.
+    \item Calculate the exact area of the original triangle $T$, and show that the area of the transformed image $T'$ is given by $|9k - 6|$.
+    \item Verify algebraically that $\text{Area}(T') = |\det(M_k)| \times \text{Area}(T)$.
+    \item Find the value of $k$ for which the matrix $M_k$ is singular. Describe the geometric effect this specific transformation has on the triangle $T$.
+    \item Determine the range of values for $k$ for which the transformation reverses the orientation of the triangle (i.e., changes the vertex order from counter-clockwise to clockwise).
 \end{enumerate}
 \end{problem}
 
 \begin{hint}
 \begin{itemize}
-    \item \textbf{Part (a):} Matrix $A$ contains the coefficients of $x$ and $y$. It is not invertible (singular) when its determinant, calculated as $ad-bc$, is equal to zero.
-    \item \textbf{Part (b):} Substitute the negative $k$ value back into the original equations. If one equation simplifies to become a direct multiple of the other, they represent the exact same line.
-    \item \textbf{Part (c):} Substitute the positive $k$ value. Try to solve the system using elimination; you will reach a false mathematical statement, indicating parallel lines that never cross.
-    \item \textbf{Part (d):} Use the inverse matrix formula $A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$ and multiply it by the constant column matrix $K$.
+    \item \textbf{Part (a):} Multiply the matrix $M_k$ by the position vectors of each vertex. The origin remains $(0,0)$.
+    \item \textbf{Part (b):} The original area is easily found using $\frac{1}{2} \times \text{base} \times \text{height}$. For the transformed area, you can use the shoelace formula or determinant formula for the area of a triangle given its vertices.
+    \item \textbf{Part (c):} Calculate the determinant of $M_k$, multiply its absolute value by the area from part (b), and compare it to your algebraic expression for Area($T'$).
+    \item \textbf{Part (d):} A matrix is singular when its determinant is zero. If the area of the image is zero, what must the vertices form?
+    \item \textbf{Part (e):} Orientation is reversed when the determinant of the transformation matrix is strictly negative.
 \end{itemize}
 \end{hint}
 
 \begin{solution}
 \textbf{(a)} \\
-Matrix form: $\begin{bmatrix} k & 2 \\ 8 & k \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} k+1 \\ 6 \end{bmatrix}$. \\
-The matrix $A$ is not invertible when $\det(A) = 0$. \\
-$\det(A) = (k)(k) - (2)(8) = k^2 - 16$. \\
-Setting to zero: $k^2 - 16 = 0 \implies k = 4$ or $k = -4$.
+$O' = \begin{bmatrix} k & 1 \\ 2 & 3 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$. \\
+$A' = \begin{bmatrix} k & 1 \\ 2 & 3 \end{bmatrix} \begin{bmatrix} 2 \\ 0 \end{bmatrix} = \begin{bmatrix} 2k \\ 4 \end{bmatrix}$. \\
+$B' = \begin{bmatrix} k & 1 \\ 2 & 3 \end{bmatrix} \begin{bmatrix} 1 \\ 3 \end{bmatrix} = \begin{bmatrix} k+3 \\ 11 \end{bmatrix}$. \\
+The transformed vertices are $O'(0,0)$, $A'(2k, 4)$, and $B'(k+3, 11)$.
 
 \medskip
 \textbf{(b)} \\
-Let $k = -4$. The system becomes: \\
-(1) $-4x + 2y = -3$ \\
-(2) $8x - 4y = 6 \implies -4x + 2y = -3$ \\
-The equations are mathematically identical. Geometrically, they represent \textbf{coincident lines}. Because they overlap entirely, the solution set contains an \textbf{infinite number of pairs}.
+The original triangle has base $2$ (from $(0,0)$ to $(2,0)$) and height $3$ (the $y$-coordinate of $B$). \\
+$\text{Area}(T) = \frac{1}{2} \times 2 \times 3 = 3$. \\
+For the area of the transformed triangle $T'$ with a vertex at the origin, we can use the formula $\frac{1}{2}|x_1y_2 - x_2y_1|$: \\
+$\text{Area}(T') = \frac{1}{2} | (2k)(11) - (k+3)(4) | = \frac{1}{2} | 22k - 4k - 12 | = \frac{1}{2} | 18k - 12 | = | 9k - 6 |$.
 
 \medskip
 \textbf{(c)} \\
-Let $k = 4$. The system becomes: \\
-(1) $4x + 2y = 5$ \\
-(2) $8x + 4y = 6 \implies 4x + 2y = 3$ \\
-Subtracting the simplified second equation from the first gives $0 = 2$, which is a contradiction. Therefore, \textbf{no solutions can be found}. Geometrically, they represent \textbf{distinct parallel lines} that never intersect.
+The determinant of $M_k$ is: \\
+$\det(M_k) = (k)(3) - (1)(2) = 3k - 2$. \\
+Evaluating $|\det(M_k)| \times \text{Area}(T)$: \\
+$|3k - 2| \times 3 = |3(3k - 2)| = |9k - 6|$. \\
+This matches the exact area of $T'$ calculated in part (b), verifying the relationship $\text{Area}(T') = |\det(M_k)| \times \text{Area}(T)$.
 
 \medskip
 \textbf{(d)} \\
-For $k = 2$, $A = \begin{bmatrix} 2 & 2 \\ 8 & 2 \end{bmatrix}$ and $K = \begin{bmatrix} 3 \\ 6 \end{bmatrix}$. \\
-$\det(A) = (2)(2) - (2)(8) = 4 - 16 = -12$. \\
-$A^{-1} = -\frac{1}{12} \begin{bmatrix} 2 & -2 \\ -8 & 2 \end{bmatrix}$. \\
-$X = A^{-1}K = -\frac{1}{12} \begin{bmatrix} 2 & -2 \\ -8 & 2 \end{bmatrix} \begin{bmatrix} 3 \\ 6 \end{bmatrix} = -\frac{1}{12} \begin{bmatrix} 6 - 12 \\ -24 + 12 \end{bmatrix} = -\frac{1}{12} \begin{bmatrix} -6 \\ -12 \end{bmatrix} = \begin{bmatrix} \frac{1}{2} \\ 1 \end{bmatrix}$. \\
-The unique solution pair is $(\frac{1}{2}, 1)$.
+The matrix is singular when $\det(M_k) = 0$. \\
+$3k - 2 = 0 \implies k = \frac{2}{3}$. \\
+Geometrically, when $k = \frac{2}{3}$, the area of the transformed image becomes $|9(\frac{2}{3}) - 6| = 0$. The 2D triangle collapses into a 1D line segment; the points $O'$, $A'$, and $B'$ become collinear.
+
+\medskip
+\textbf{(e)} \\
+A linear transformation reverses orientation if and only if the determinant of the transformation matrix is negative. \\
+$\det(M_k) < 0 \implies 3k - 2 < 0 \implies k < \frac{2}{3}$.
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{Singularity and Geometry:} A non-invertible (singular) coefficient matrix indicates that the system does not have a unique solution; the lines are either parallel or coincident.
-\item \textbf{The Role of Constant Matrices:} The constant terms determine the final state of a singular system. Equivalent ratios across all terms yield infinite solutions (coincident), while differing constant ratios yield zero solutions (parallel).
-\item \textbf{Direct Solutions:} The matrix inverse method provides a direct, algorithmic approach to solving uniquely determined systems without requiring manual substitution or elimination.
+\item \textbf{Geometric Determinant:} The absolute value of the determinant gives the area scaling factor of a linear transformation. This demonstrates that determinants are not just tools for solving equations, but fundamental geometric multipliers.
+\item \textbf{Singular Matrices:} A singular matrix ($\det = 0$) squashes higher-dimensional space into lower-dimensional space (e.g., a 2D plane collapses onto a 1D line), which destroys information and explains why singular matrices cannot be inverted.
+\item \textbf{Orientation and Sign:} The sign of the determinant indicates orientation. A positive determinant preserves the "handedness" or cyclic order of vertices, while a negative determinant flips it (like a reflection).
 \end{takeaways}
 
 
@@ -546,7 +549,7 @@ $\det(M) = 1(3k - (-1)) - 2(2k - 3) + (-1)(-2 - 9) = 3k + 1 - 4k + 6 + 11 = 18 -
 \medskip
 \textbf{(b)} \\
 Matrix $M$ is singular when $\det(M) = 0 \implies 18 - k = 0 \implies k = 18$. \\
-When $k=18$, the system is inconsistent (parallel planes in the row space), meaning no unique solution exists for $ax + by + cz = 1$. Geometrically, this implies the plane containing $A, B$, and $C_{18}$ must pass exactly through the origin, meaning its true equation is of the form $ax + by + cz = 0$, not $1$.
+When $k=18$, applying the row operation $11R_1 - 7R_2 + R_3$ to the augmented matrix gives the row $\begin{bmatrix} 0 & 0 & 0 & | & 5 \end{bmatrix}$, hence $0 = 5$. This contradiction means the system has \textbf{no solution}. Geometrically, this implies the plane containing $A, B$, and $C_{18}$ must pass exactly through the origin, meaning its true equation is of the form $ax + by + cz = 0$, not $1$.
 
 \medskip
 \textbf{(c)} \\
@@ -623,9 +626,10 @@ Because $IA = AI = A$, the middle terms cancel: \\
 $M(I - kA) = I - k^2 A^2$. \\
 Substitute $A^2 = I$: \\
 $M(I - kA) = I - k^2 I = (1 - k^2)I$. \\
-Rearranging this gives $M \left[\frac{1}{1-k^2}(I-kA)\right] = I$. \\
-Matrix $M$ is singular (has no inverse) when the scalar divisor $1 - k^2 = 0$. \\
-Therefore, $M$ cannot have an inverse when $k = 1$ or $k = -1$.
+For $k \neq \pm1$, rearranging gives $M \left[\frac{1}{1-k^2}(I-kA)\right] = I$, proving $M$ is invertible. \\
+At $k=1$, $M = I+A$ and $(I+A)(I-A)=0$. Since $I-A \neq 0$, $I+A$ cannot be invertible. \\
+At $k=-1$, $M = I-A$ and $(I-A)(I+A)=0$. Since $I+A \neq 0$, $I-A$ cannot be invertible. \\
+Thus, $M$ is singular if and only if $k = \pm1$.
 
 \medskip
 \textbf{(d)} \\
@@ -1026,7 +1030,7 @@ Knowing that the sum of the probabilities must always equal $1$ ($s + r = 1$), s
 \textbf{(iii)} The equation $P\mathbf{q} = \mathbf{q}$ can be rewritten as $P\mathbf{q} = 1\mathbf{q}$. This means the steady state is actually an eigenvector corresponding to an eigenvalue of $\lambda = 1$. \\
 Find the characteristic equation of $P$ and solve it to verify that $\lambda = 1$ is an eigenvalue, and find the second eigenvalue, $\lambda_2$. 
 
-\textbf{(iv)} A transition matrix can be diagonalised as $P = M D M^{-1}$, where $D = \begin{bmatrix} 1 & 0 \\ 0 & \lambda_2 \end{bmatrix}$ is the diagonal matrix of eigenvalues, and $M$ is the matrix of corresponding eigenvectors.\\
+\textbf{(iv)} Since this $P$ has two distinct eigenvalues, $1$ and $\lambda_2$, it is diagonalisable as $P = M D M^{-1}$, where $D = \begin{bmatrix} 1 & 0 \\ 0 & \lambda_2 \end{bmatrix}$ is the diagonal matrix of eigenvalues, and $M$ is the matrix of corresponding eigenvectors.\\
 Given that $P^n = M D^n M^{-1}$, use your second eigenvalue $\lambda_2$ from part (iii) to evaluate the limit of the matrix $D^n$ as $n \to \infty$. \\
 Using this limit, mathematically prove that \textit{no matter what} the initial weather state $\mathbf{x}_0 = \begin{bmatrix} s_0 \\ r_0 \end{bmatrix}$ is, the system will always eventually ``forget'' its initial state and arrive at the exact steady state you found in part (ii). 
 \end{problem}
@@ -1079,8 +1083,8 @@ Because the initial probabilities must sum to $1$ ($s_0+r_0 = 1$), the state com
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{The Meaning of ``1'':} In a probability matrix, there is always an eigenvalue of $1$. Its corresponding eigenvector is the ``steady state'' destination of the entire system.
-\item \textbf{Eigenvalues Dictate Decay:} The other eigenvalue ($0.4$ in this case) acts as the system's ``memory''. Because it is smaller than $1$, its powers shrink to zero. This algebraic decay is \textit{why} real-world random systems eventually settle into predictable, long-term averages. 
+\item \textbf{The Meaning of ``1'':} For this transition matrix, eigenvalue 1 gives the steady state, and because the other eigenvalue has $|0.4| < 1$, every probability state converges to it.
+\item \textbf{Eigenvalues Dictate Decay:} The other eigenvalue ($0.4$ in this case) acts as the system's ``memory''. Because its magnitude is less than $1$, its powers shrink to zero. This algebraic decay is \textit{why} this specific system settles into a predictable, long-term average.
 \item \textbf{Overriding Initial Conditions:} The beautiful algebraic collapse in part (iv)—where $(s_0 + r_0)$ is factored out and becomes a $1$—shows mathematically why it doesn't matter if it's sunny or rainy today; next year's probabilities will be exactly the same regardless.
 \end{takeaways}
 
@@ -1169,7 +1173,7 @@ By expanding $P(x+1) = a_0 + a_1(x+1) + a_2(x+1)^2 + a_3(x+1)^3$ and grouping th
 Using your power calculations from part (i), simplify and evaluate the matrix $M$. Compare your final matrix $M$ to your matrix $T$ from part (ii).
 
 \textbf{(iv)} Translate the matrix equivalence you discovered in part (iii) back into the language of polynomial functions. \\
-By replacing $T\mathbf{p}$ and $D^k\mathbf{p}$ with their corresponding function notations, write down the algebraic formula you have just derived. What foundational theorem in calculus have you just proven entirely through matrix arithmetic?
+By replacing $T\mathbf{p}$ and $D^k\mathbf{p}$ with their corresponding function notations, write down the algebraic formula you have just derived. What calculus expansion does this represent?
 \end{problem}
 
 \begin{hint}
@@ -1214,11 +1218,11 @@ Applying this matrix operator equation to our polynomial vector $\mathbf{p}$: \\
 $T\mathbf{p} = \mathbf{p} + D\mathbf{p} + \frac{1}{2!}D^2\mathbf{p} + \frac{1}{3!}D^3\mathbf{p}$. \\
 Translating this back into functions: \\
 \textbf{$P(x+1) = P(x) + P'(x) + \frac{P''(x)}{2!} + \frac{P'''(x)}{3!}$} \\
-This elegantly proves \textbf{Taylor's Theorem} (specifically, the Taylor series expansion for a polynomial shifted by $1$). We have demonstrated that the geometric shift operator is actually the ``matrix exponential'' of the derivative operator!
+This proves the exact Taylor expansion for cubic polynomials with step 1, a finite special case of Taylor's theorem. We have demonstrated that the geometric shift operator is actually the ``matrix exponential'' of the derivative operator!
 \end{solution}
 
 \begin{takeaways}
 \item \textbf{Matrices are Operators:} We usually think of matrices moving geometric points in 2D or 3D space, but they can just as easily move \textit{functions} through calculus operations.
 \item \textbf{Nilpotency acts as a limit:} The fact that a cubic's 4th derivative vanishes to zero directly causes the matrix sequence to terminate. An intimidating infinite series naturally collapses into a finite, exact matrix.
-\item \textbf{Unifying the Syllabus:} This problem shows that polynomial algebra, matrix arithmetic, and calculus/Maclaurin series are not separate topics. They are different languages describing the exact same underlying mathematical truth.
+\item \textbf{Unifying the Syllabus:} This problem shows that polynomial algebra, matrix arithmetic, and calculus/Taylor expansion are not separate topics. They are different languages describing the exact same underlying mathematical truth.
 \end{takeaways}

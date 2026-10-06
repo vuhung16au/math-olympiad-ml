@@ -16,9 +16,9 @@ When dealing with $A\mathbf{x} = \mathbf{b}$, a fundamental question is: \emph{D
 We can answer this by looking at the \textbf{rank} of the matrix (roughly, the number of non-zero rows after performing Gaussian elimination, which is also the number of linearly independent rows).
 
 \begin{enumerate}
-    \item \textbf{Unique Solution:} A unique solution exists if and only if the matrix $A$ is square ($n \times n$) and has a non-zero determinant ($\det(A) \neq 0$). This means $A$ is invertible, and we can theoretically solve it as $\mathbf{x} = A^{-1}\mathbf{b}$.
-    \item \textbf{No Solution (Inconsistent System):} If Gaussian elimination results in a row like $\begin{bmatrix} 0 & 0 & \dots & 0 & | & c \end{bmatrix}$ where $c \neq 0$, the system translates to $0 = c$. This is a contradiction, meaning the lines/planes never intersect at a common point.
-    \item \textbf{Infinitely Many Solutions:} If there are more unknowns than linearly independent equations (e.g., getting a row of all zeros $\begin{bmatrix} 0 & 0 & \dots & 0 & | & 0 \end{bmatrix}$), the system has free variables. Geometrically, the intersection might be a line or a plane rather than a single point.
+    \item \textbf{Unique Solution:} A unique solution exists if and only if $\operatorname{rank}(A) = \operatorname{rank}([A \mid \mathbf{b}]) = n$. As a special case, if $A$ is a square $n \times n$ matrix, a unique solution exists if and only if $\det(A) \neq 0$.
+    \item \textbf{No Solution (Inconsistent System):} A system has no solution if and only if $\operatorname{rank}(A) \neq \operatorname{rank}([A \mid \mathbf{b}])$. In Gaussian elimination, this results in a row like $\begin{bmatrix} 0 & 0 & \dots & 0 & | & c \end{bmatrix}$ where $c \neq 0$, translating to $0 = c$. This contradiction means the lines/planes never intersect.
+    \item \textbf{Infinitely Many Solutions:} A system has infinitely many solutions if and only if $\operatorname{rank}(A) = \operatorname{rank}([A \mid \mathbf{b}]) < n$. The system will have free variables, and geometrically, the intersection might be a line or a plane rather than a single point.
 \end{enumerate}
 
 \subsubsection*{Homogeneous Systems}
@@ -28,7 +28,7 @@ A special case occurs when $\mathbf{b} = \mathbf{0}$, giving the equation:
 This is called a \textbf{homogeneous system}. 
 It is special because it \emph{always} has at least one solution: the \textbf{trivial solution} where $\mathbf{x} = \mathbf{0}$ (i.e., all variables are zero). 
 
-Finding the non-trivial solutions (when there are infinitely many) is a core task in linear algebra, as the set of these solutions forms a subspace called the \textbf{null space} (or kernel) of the matrix $A$.
+Finding the non-trivial solutions (when there are infinitely many) is a core task in linear algebra. The set of all solutions, including the trivial solution, forms a subspace called the \textbf{null space} (or kernel) of the matrix $A$. Its non-zero elements are the non-trivial solutions.
 
 \subsubsection*{Why it matters}
 Viewing equations as $A\mathbf{x} = \mathbf{b}$ shifts our perspective from algebra to geometry. 

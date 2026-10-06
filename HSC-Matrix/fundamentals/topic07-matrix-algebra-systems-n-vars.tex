@@ -3,7 +3,7 @@
 
 \subsection{Using Matrix Algebra for Systems of Linear Equations in More Than Two Variables}
 
-The elegance of matrix algebra is that the fundamental equation used to solve a system, $X = A^{-1}B$, remains exactly the same regardless of whether you are solving a $2 \times 2$ system, a $3 \times 3$ system, or a $100 \times 100$ system. 
+The elegance of matrix algebra is that for a square system with an invertible coefficient matrix, the fundamental equation used to solve it, $X = A^{-1}B$, remains exactly the same regardless of whether you are solving a $2 \times 2$ system, a $3 \times 3$ system, or a $100 \times 100$ system. 
 
 The only difference is the computational effort required to find the inverse matrix, $A^{-1}$.
 
@@ -74,7 +74,7 @@ The prices are \$20 for a chocolate cake, \$15 for a vanilla cake, and \$30 for 
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{Universal Logic:} The framework $X = A^{-1}B$ scales to any number of dimensions. Only the mechanics of finding $A^{-1}$ change.
+\item \textbf{Universal Logic:} For a square system with an invertible coefficient matrix, the framework $X = A^{-1}B$ scales to any number of dimensions. Only the mechanics of finding $A^{-1}$ change.
 \item \textbf{Computational Load:} As systems get larger (e.g., $4 \times 4$), finding inverses by hand becomes highly prone to arithmetic errors. This is why computers and graphics cards are used to solve these systems in real life!
 \item \textbf{Checking your work:} You can easily verify the final solution by substituting the values back into any of the original equations (e.g., $2(20) + 3(15) + 30 = 40 + 45 + 30 = 115$, which matches Monday's total).
 \end{takeaways}

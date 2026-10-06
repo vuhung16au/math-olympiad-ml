@@ -23,9 +23,9 @@ Here are standard matrices for common geometric transformations in the 2D Cartes
 \subsubsection*{Composition of Transformations and Inverses}
 
 If we apply a transformation $A$ and then a transformation $B$, this is equivalent to a single transformation given by the matrix product $BA$. Notice the order: $B(A\mathbf{v}) = (BA)\mathbf{v}$. 
-Because matrix multiplication is generally \textbf{not commutative} ($AB \neq BA$), the order of transformations matters. For example, rotating an object and then translating it is usually different from translating it and then rotating it.
+Because matrix multiplication is generally \textbf{not commutative} ($AB \neq BA$), the order of transformations matters. For example, rotating an object and then reflecting it is usually different from reflecting it and then rotating it.
 
-Furthermore, if a matrix $A$ represents a transformation, its inverse $A^{-1}$ (if it exists) represents \textbf{undoing} that transformation. The determinant $\det(A)$ provides the area scale factor of the transformation. If $\det(A) = 0$, the transformation collapses the 2D plane into a line or a point, making it non-invertible.
+Furthermore, if a matrix $A$ represents a transformation, its inverse $A^{-1}$ (if it exists) represents \textbf{undoing} that transformation. The absolute value $|\det(A)|$ gives the area scale factor; the sign indicates orientation. If $\det(A) = 0$, the transformation collapses the 2D plane into a line or a point, making it non-invertible.
 
 \bigskip
 

@@ -1,56 +1,3 @@
-\begin{problem}[Matrix Properties and Transformations]
-Consider a general $2 \times 2$ matrix $A = \begin{bmatrix} p & q \\ r & s \end{bmatrix}$ and its associated adjugate matrix $A^* = \begin{bmatrix} s & -q \\ -r & p \end{bmatrix}$.
-
-\begin{enumerate}[label=\textbf{(\alph*)}]
-    \item Evaluate the matrix product $A A^*$ and express the result in the form $kI$, where $I$ is the $2 \times 2$ identity matrix and $k$ is a scalar expressed in terms of $p, q, r,$ and $s$.
-    \item Given that $k \neq 0$, use your result from part (a) to algebraically deduce the standard expression for the inverse matrix, $A^{-1}$.
-    \item Evaluate the reverse product $A^* A$ and hence show that for this specific pair of matrices, multiplication is commutative.
-    \item A linear transformation in the plane is represented by the matrix $M = \begin{bmatrix} 2x & 3 \\ 8 & x \end{bmatrix}$. Using the concept of $k$ from part (a), determine the exact possible values of $x$ for which this transformation cannot be reversed (i.e., the matrix is singular).
-\end{enumerate}
-\end{problem}
-
-\begin{hint}
-\begin{itemize}
-    \item \textbf{Part (a):} Perform standard row-by-column matrix multiplication. Expand the terms, simplify the diagonals, and factor out any common algebraic expressions to reveal the identity matrix.
-    \item \textbf{Part (b):} Recall that the definition of an inverse matrix is $A A^{-1} = I$. Take your equation from part (a), $A A^* = kI$, and manipulate it algebraically to isolate $I$ on one side of the equation.
-    \item \textbf{Part (c):} Multiply the matrices again, but this time with $A^*$ on the left and $A$ on the right. Compare the resulting matrix to the one you found in part (a).
-    \item \textbf{Part (d):} A matrix transformation does not have an inverse when its associated scalar $k$ (the determinant) is equal to zero. Set up an equation for $k = 0$ using the elements of matrix $M$ and solve for $x$.
-\end{itemize}
-\end{hint}
-
-\begin{solution}
-\textbf{(a)} \\
-$A A^* = \begin{bmatrix} p & q \\ r & s \end{bmatrix} \begin{bmatrix} s & -q \\ -r & p \end{bmatrix} = \begin{bmatrix} ps-qr & -pq+qp \\ rs-sr & -rq+sp \end{bmatrix} = \begin{bmatrix} ps-qr & 0 \\ 0 & ps-qr \end{bmatrix}$ \\
-Factoring out the common term: $A A^* = (ps-qr)\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = (ps-qr)I$. \\
-Therefore, $k = ps - qr$.
-
-\medskip
-\textbf{(b)} \\
-From part (a), we have $A A^* = (ps-qr)I$. \\
-Assuming $ps-qr \neq 0$, we can divide both sides by this scalar: \\
-$A \left( \frac{1}{ps-qr} A^* \right) = I$ \\
-Since $A A^{-1} = I$, it follows that $A^{-1} = \frac{1}{ps-qr} \begin{bmatrix} s & -q \\ -r & p \end{bmatrix}$.
-
-\medskip
-\textbf{(c)} \\
-$A^* A = \begin{bmatrix} s & -q \\ -r & p \end{bmatrix} \begin{bmatrix} p & q \\ r & s \end{bmatrix} = \begin{bmatrix} sp-qr & sq-qs \\ -rp+pr & -rq+ps \end{bmatrix} = \begin{bmatrix} ps-qr & 0 \\ 0 & ps-qr \end{bmatrix} = (ps-qr)I$ \\
-Since $A A^* = (ps-qr)I$ and $A^* A = (ps-qr)I$, we have shown that $A A^* = A^* A$. Thus, multiplication of a matrix by its adjugate is commutative.
-
-\medskip
-\textbf{(d)} \\
-For the transformation to have no inverse, $k = ps - qr = 0$. \\
-For matrix $M$, $p = 2x$, $q = 3$, $r = 8$, and $s = x$. \\
-$k = (2x)(x) - (3)(8) = 2x^2 - 24$ \\
-Setting $k = 0$: $2x^2 - 24 = 0 \implies x^2 = 12 \implies x = \pm\sqrt{12} = \pm2\sqrt{3}$.
-\end{solution}
-
-\begin{takeaways}
-\item \textbf{Determinant:} The scalar value $k = ps - qr$ derived in part (a) is the determinant of a $2 \times 2$ matrix. It is the fundamental factor that dictates whether a matrix has an inverse.
-\item \textbf{Commutativity of Inverses:} While general matrix multiplication is strictly non-commutative ($AB \neq BA$), a matrix and its adjugate (or inverse) are a special exception where multiplication order does not change the result.
-\item \textbf{Singular Matrices:} Matrices with a determinant of zero are called singular. Geometrically, these matrices represent transformations that collapse 2D space into a 1D line or a point, which is why the mapping cannot be algebraically reversed.
-\end{takeaways}
-
-
 \begin{problem}[Matrix Algebra and Commutativity]
 Consider general $2 \times 2$ matrices $A$ and $B$.
 
@@ -103,3 +50,58 @@ Since $\begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix} \neq \begin{bmatrix} 2 & 0 \
 \item \textbf{Binomial Expansion:} Standard polynomial identities like $(x+y)^2 = x^2+2xy+y^2$ cannot be blindly applied to matrices unless the specific matrices are proven to commute.
 \item \textbf{Geometric Connection:} The algebraic failure of commutativity mirrors the geometric reality of transformations. For instance, applying a reflection then a rotation often results in a different final orientation compared to applying the rotation then the reflection.
 \end{takeaways}
+
+\begin{problem}[Matrix Inverses and Matrix Equations]
+Let $A$ and $B$ be $2 \times 2$ matrices defined as $A = \begin{bmatrix} k & 2 \\ -1 & 1 \end{bmatrix}$ and $B = \begin{bmatrix} 1 & -1 \\ 2 & 3 \end{bmatrix}$, where $k$ is a real constant.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Determine the determinant of $A$ in terms of $k$, and hence state the value of $k$ for which matrix $A$ is singular.
+    \item Let $k = 3$. Determine the inverse matrices $A^{-1}$ and $B^{-1}$.
+    \item For $k = 3$, calculate the matrix product $AB$ and hence determine $(AB)^{-1}$.
+    \item Evaluate the product $B^{-1}A^{-1}$ to verify the property $(AB)^{-1} = B^{-1}A^{-1}$. Hence, use this property to make the matrix $X$ the subject of the matrix equation $ABX = C$, where $C$ is a $2 \times 2$ matrix.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} The determinant of a $2 \times 2$ matrix $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is $ad - bc$. A matrix is singular (has no inverse) when its determinant equals zero.
+    \item \textbf{Part (b):} Use the formula for the inverse of a $2 \times 2$ matrix: $\frac{1}{\det(M)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$.
+    \item \textbf{Part (c):} Multiply matrix $A$ by matrix $B$ using the standard row-by-column method. Then find the inverse of the resulting $2 \times 2$ matrix.
+    \item \textbf{Part (d):} Multiply $B^{-1}$ (on the left) by $A^{-1}$ (on the right) and factor out the scalar multipliers. To solve $ABX = C$, remember that you must multiply both sides of the equation by the inverse of $AB$ on the left.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$\det(A) = (k)(1) - (2)(-1) = k + 2$. \\
+For matrix $A$ to be singular, $\det(A) = 0$. Therefore, $k = -2$.
+
+\medskip
+\textbf{(b)} \\
+Given $k = 3$, $A = \begin{bmatrix} 3 & 2 \\ -1 & 1 \end{bmatrix}$. \\
+$\det(A) = 3 + 2 = 5$. Thus, $A^{-1} = \frac{1}{5}\begin{bmatrix} 1 & -2 \\ 1 & 3 \end{bmatrix}$. \\
+$\det(B) = (1)(3) - (-1)(2) = 3 + 2 = 5$. Thus, $B^{-1} = \frac{1}{5}\begin{bmatrix} 3 & 1 \\ -2 & 1 \end{bmatrix}$.
+
+\medskip
+\textbf{(c)} \\
+$AB = \begin{bmatrix} 3 & 2 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} 1 & -1 \\ 2 & 3 \end{bmatrix} = \begin{bmatrix} 3(1)+2(2) & 3(-1)+2(3) \\ -1(1)+1(2) & -1(-1)+1(3) \end{bmatrix} = \begin{bmatrix} 7 & 3 \\ 1 & 4 \end{bmatrix}$. \\
+$\det(AB) = (7)(4) - (3)(1) = 28 - 3 = 25$. \\
+$(AB)^{-1} = \frac{1}{25}\begin{bmatrix} 4 & -3 \\ -1 & 7 \end{bmatrix}$.
+
+\medskip
+\textbf{(d)} \\
+$B^{-1}A^{-1} = \left( \frac{1}{5}\begin{bmatrix} 3 & 1 \\ -2 & 1 \end{bmatrix} \right) \left( \frac{1}{5}\begin{bmatrix} 1 & -2 \\ 1 & 3 \end{bmatrix} \right) = \frac{1}{25} \begin{bmatrix} 3(1)+1(1) & 3(-2)+1(3) \\ -2(1)+1(1) & -2(-2)+1(3) \end{bmatrix} = \frac{1}{25}\begin{bmatrix} 4 & -3 \\ -1 & 7 \end{bmatrix}$. \\
+This verifies that $(AB)^{-1} = B^{-1}A^{-1}$. \\
+To solve $ABX = C$: \\
+$(AB)^{-1}(AB)X = (AB)^{-1}C$ \\
+$IX = (AB)^{-1}C$ \\
+$X = B^{-1}A^{-1}C$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{The "Socks and Shoes" Property:} The inverse of a matrix product reverses the order of the original matrices: $(AB)^{-1} = B^{-1}A^{-1}$.
+\item \textbf{Matrix Algebra in Equations:} When isolating a matrix variable (like $X$ in $ABX=C$), you must respect the non-commutative nature of matrices by multiplying by the inverse on the correct side (in this case, pre-multiplying on the left).
+\item \textbf{Determinant of a Product:} Notice that $\det(AB) = 25$, while $\det(A) = 5$ and $\det(B) = 5$. This verifies another key property: $\det(AB) = \det(A) \times \det(B)$.
+\end{takeaways}
+
+
