@@ -1,0 +1,88 @@
+% Topic 10: Matrix Powers and Iteration
+% Part of the Matrix Fundamentals section
+
+\subsection{Matrix Powers, Iteration and Dynamical Systems}
+
+We have seen how matrices can transform vectors. A surprising number of mathematical and real-world models rely on applying a transformation repeatedly to see how a system evolves over time. 
+
+If we have an initial state represented by a vector $x_0$, applying a matrix transformation $A$ produces the next state:
+\[
+x_1 = Ax_0
+\]
+If we apply the same transformation again to get the subsequent state:
+\[
+x_2 = Ax_1 = A(Ax_0) = A^2 x_0
+\]
+This pattern continues. The state after $n$ steps is given by explicitly calculating the $n$-th power of the matrix $A$:
+\[
+x_n = A^n x_0
+\]
+
+This relationship $x_{n+1} = A x_n \implies x_n = A^n x_0$ is the foundational idea behind \textbf{dynamical systems}. It forms a conceptual bridge between basic matrix multiplication and advanced applications. 
+
+\subsubsection*{Applications of Matrix Iteration}
+By studying the long-term behaviour of $A^n$ as $n$ becomes very large ($n \to \infty$), we can answer questions about the stability and equilibrium of systems. For example:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Probability and Markov Chains:} Tracking the probabilities of states transitioning over time.
+  \item \textbf{Graph Theory:} Finding the number of pathways of length $n$ between nodes in a network or computing total dominance scores (e.g., $A + A^2$).
+  \item \textbf{Population Models:} Projecting future age demographics (like the Leslie matrix model).
+  \item \textbf{Fibonacci and Recurrence Relations:} Expressing sequential terms compactly to compute the $n$-th term quickly.
+\end{itemize}
+
+\bigskip
+
+\begin{problem}[Iterating a System]
+Suppose the weather in a city is either Sunny (S) or Rainy (R) on a given day. The probability of tomorrow's weather depends only on today's weather, given by the transition rules:
+\begin{itemize}
+  \item If today is Sunny, tomorrow has a $80\%$ chance of being Sunny and $20\%$ chance of being Rainy.
+  \item If today is Rainy, tomorrow has a $60\%$ chance of being Sunny and $40\%$ chance of being Rainy.
+\end{itemize}
+
+Let $x_n = \begin{bmatrix} P(\text{Sunny on day } n) \\ P(\text{Rainy on day } n) \end{bmatrix}$. 
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Construct the transition matrix $A$ such that $x_{n+1} = A x_n$.
+    \item If Monday (day 0) is definitely Sunny, so $x_0 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$, find the probabilities for Wednesday (day 2) by calculating $x_2$.
+    \item Calculate $A^2$ directly, and verify that $x_2 = A^2 x_0$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a) Transition Matrix} \\
+We place the probabilities of transitioning \emph{to} a state in the rows and \emph{from} a state in the columns:
+\[
+\text{To } S \quad \text{To } R \\
+\]
+\[
+A = \begin{bmatrix} 0.8 & 0.6 \\ 0.2 & 0.4 \end{bmatrix} \begin{matrix} \text{From } S \\ \text{From } R \end{matrix}
+\]
+So $x_{n+1} = \begin{bmatrix} 0.8 & 0.6 \\ 0.2 & 0.4 \end{bmatrix} x_n$.
+
+\medskip
+\textbf{(b) Finding $x_2$ iteratively} \\
+First, find $x_1$ (Tuesday):
+\[
+x_1 = A x_0 = \begin{bmatrix} 0.8 & 0.6 \\ 0.2 & 0.4 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 0.8 \\ 0.2 \end{bmatrix}
+\]
+Next, find $x_2$ (Wednesday):
+\[
+x_2 = A x_1 = \begin{bmatrix} 0.8 & 0.6 \\ 0.2 & 0.4 \end{bmatrix} \begin{bmatrix} 0.8 \\ 0.2 \end{bmatrix} = \begin{bmatrix} 0.64 + 0.12 \\ 0.16 + 0.08 \end{bmatrix} = \begin{bmatrix} 0.76 \\ 0.24 \end{bmatrix}
+\]
+There is a $76\%$ chance of sun and $24\%$ chance of rain on Wednesday.
+
+\medskip
+\textbf{(c) Direct calculation via $A^2$} \\
+\[
+A^2 = \begin{bmatrix} 0.8 & 0.6 \\ 0.2 & 0.4 \end{bmatrix} \begin{bmatrix} 0.8 & 0.6 \\ 0.2 & 0.4 \end{bmatrix} = \begin{bmatrix} 0.64+0.12 & 0.48+0.24 \\ 0.16+0.08 & 0.12+0.16 \end{bmatrix} = \begin{bmatrix} 0.76 & 0.72 \\ 0.24 & 0.28 \end{bmatrix}
+\]
+Now calculate $A^2 x_0$:
+\[
+A^2 x_0 = \begin{bmatrix} 0.76 & 0.72 \\ 0.24 & 0.28 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 0.76 \\ 0.24 \end{bmatrix}
+\]
+This perfectly matches our iterative result.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Efficiency:} For small $n$, iterating step-by-step ($x_1$, $x_2$) is easy. But for large $n$, calculating $A^n$ (often using computer software or advanced techniques like diagonalisation) and directly applying $x_n = A^n x_0$ is vastly more efficient.
+\item \textbf{Long-Term Behaviour:} Repeatedly squaring a matrix (e.g., $A \to A^2 \to A^4 \to A^8$) is a quick way to see where a system eventually settles, known as the steady-state or equilibrium.
+\end{takeaways}
