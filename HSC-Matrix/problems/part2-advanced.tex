@@ -188,7 +188,11 @@ $x = \frac{4}{m+3}$.
 \begin{takeaways}
 \item \textbf{The Zero Determinant:} When $\det(A) = 0$, a unique solution does not exist. This algebraically signals that the lines are either parallel or coincident.
 \item \textbf{The Role of Constants:} Once singularity is established by the coefficient matrix $A$, the constant matrix $B$ dictates whether the system collapses into an infinite solution set or an empty set (no solutions).
-\item \textbf{Parametric Simplification:} In matrix algebra, finding a unique parametric solution often leads to rational expressions where the roots of the determinant (e.g., $m-8$) appear as cancellable factors in the numerators.
+\item \textbf{Cancellation Does Not Change the Domain:} Although
+\[
+\frac{4(m-8)}{(m-8)(m+3)}
+\]
+simplifies to $\frac4{m+3}$, the original inverse required $m\neq8,-3$. A cancelled factor does not make a singular parameter value valid again.
 \end{takeaways}
 
 
@@ -311,7 +315,13 @@ Alternatively, $A^5 = A(A^2)^2 = A(4I)^2 = 16A$.
 
 \begin{takeaways}
 \item \textbf{The ``Hence'' Command:} In mathematics, the word ``hence'' dictates that you must use the result of the previous section. Finding the inverse via $A^2 = kI$ is often faster and less prone to arithmetic error than manually calculating a $3 \times 3$ determinant and adjugate matrix.
-\item \textbf{Matrix Power Cycles:} Matrices that satisfy equations like $A^2 = kI$ act similarly to cyclic numbers in modular arithmetic. High powers of the matrix can be drastically simplified without performing tedious sequential multiplication.
+\item \textbf{Power Shortcut:} If $A^2=kI$, then for $k\neq0$,
+\[
+A^{-1}=\frac1kA,\qquad
+A^{2n}=k^nI,\qquad
+A^{2n+1}=k^nA.
+\]
+High matrix powers can therefore be reduced without repeated multiplication.
 \item \textbf{Geometric Inverses:} Algebraically isolating a coordinate vector by multiplying by an inverse matrix geometrically represents reversing the original 3D transformation to find the starting position.
 \end{takeaways}
 
@@ -377,7 +387,7 @@ Geometrically, the three planes intersect along a single common line (forming a 
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{Underdetermined vs. Singular Systems:} The original $2 \times 3$ system implicitly represented infinite solutions because there were more variables than equations. By adding a dependent third equation, we transition to a $3 \times 3$ singular matrix scenario, a core concept in QCAA Specialist Mathematics.
+\item \textbf{Rank and Degrees of Freedom:} For a consistent system in three variables, rank $3$ gives a single point, rank $2$ gives a line with one free parameter, and rank $1$ gives a plane with two free parameters.
 \item \textbf{Singularity and Consistency:} A determinant of zero only tells you a unique solution does not exist. You must verify algebraically whether the planes are parallel/form a prism (inconsistent) or intersect along a line (consistent).
 \item \textbf{Parametric Lines:} The process of setting a free variable to $\lambda$ is exactly how the Cartesian equations of intersecting planes are converted into the vector equation of a 3D line.
 \end{takeaways}
@@ -446,7 +456,10 @@ The unique solution is $(x, y, z, w) = \left(\frac{14}{5}, -\frac{1}{5}, -\frac{
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{Underdetermined Systems:} Matrices representing systems with fewer independent equations than variables yield infinite families of solutions requiring parameters ($\lambda, \mu$).
+\item \textbf{Underdetermined Does Not Automatically Mean Infinite:} Having fewer independent equations than variables gives free parameters only when the system is consistent. For a consistent linear system,
+\[
+\text{number of free variables}=n-\operatorname{rank}(A).
+\]
 \item \textbf{Row Operations for Consistency:} Elementary row operations on augmented matrices quickly reveal inconsistencies (e.g., $0 = c$ where $c \neq 0$). If a row reduces entirely to zero on the left, the right side must also be zero for a solution to exist.
 \item \textbf{Applying Constraints:} Adding constraints to a parametric solution family reduces its degrees of freedom. Each new valid equation removes one parameter, eventually leading to a single unique point if enough constraints are provided.
 \end{takeaways}
@@ -577,7 +590,7 @@ The equation of the plane is $5x - 3y - z = 0$.
 
 \begin{takeaways}
 \item \textbf{Non-Homogeneous vs Homogeneous Form:} Setting a plane's constant $d$ to a non-zero value allows for a quick $3 \times 3$ matrix setup, but it operates on the assumption that the plane does not cross the origin.
-\item \textbf{Geometric Meaning of Singularity:} If the resulting matrix determinant is zero, it algebraically signals that the initial assumption (the plane avoids the origin) is false for that specific set of points.
+\item \textbf{What Singularity Actually Tells You:} $\det M=0$ only tells you that $M\mathbf v=\mathbf1$ has no unique solution. You must check consistency. In this problem the system is inconsistent at $k=18$, showing that the normalisation $ax+by+cz=1$ fails; the required plane instead passes through the origin and must be written in homogeneous form.
 \item \textbf{Gaussian Elimination:} Row reduction is a powerful tool for solving $3 \times 3$ systems without needing to calculate cumbersome matrix inverses or adjugates manually.
 \end{takeaways}
 
@@ -644,8 +657,15 @@ Therefore, $x = 1$, $y = -1$, and $z = 2$.
 
 \begin{takeaways}
 \item \textbf{Abstract Matrix Algebra:} Abstract algebra simplifies complex computational problems. Establishing $A^2=I$ creates a generalized shortcut for inverting any matrix of the parametric form $I+kA$.
-\item \textbf{Polynomial Singularity Proofs:} The QCAA curriculum emphasizes proving invertibility using polynomial identities (like $(I+kA)(I-kA) = (1-k^2)I$) rather than relying exclusively on calculating massive $3 \times 3$ determinants.
-\item \textbf{Idempotent and Involutory Links:} Idempotent matrices ($E^2=E$, which geometrically represent projections) and involutory matrices ($A^2=I$, which geometrically represent reflections) are fundamentally linked via simple algebraic transformations like $E = \frac{1}{2}(I + A)$.
+\item \textbf{Inverse from a Polynomial Identity:} Since $A^2=I$,
+\[
+(I+kA)(I-kA)=(1-k^2)I.
+\]
+Therefore, for $k\neq\pm1$,
+\[
+(I+kA)^{-1}=\frac{I-kA}{1-k^2}.
+\]
+\item \textbf{Idempotent and Involutory Links:} Idempotent matrices ($E^2=E$, which geometrically represent projections) and involutory matrices have eigenvalues $\pm1$, with reflections being an important special case, and are fundamentally linked via simple algebraic transformations like $E = \frac{1}{2}(I + A)$.
 \end{takeaways}
 
 \begin{problem}[The Geometry of Mirrors]
@@ -713,8 +733,12 @@ Equation of the second line: \textbf{$y = -(2+\sqrt{3})x$}.
 
 \begin{takeaways}
 \item \textbf{Matrix Order Matters:} $BA \neq AB$. If you reversed the order of the reflections, the sign inside the sine functions would flip, resulting in a clockwise rotation instead of counter-clockwise.
-\item \textbf{Algebra Proves Geometry:} The messy trigonometric algebra in part (iii) collapses perfectly into the rotation matrix. This proves mathematically a beautiful visual truth: \textit{any rotation can be constructed using just two mirrors}.
-\item \textbf{Relative, not Absolute:} Because the rotation angle relies only on $(\beta - \alpha)$, you can rotate the two mirror lines together around the origin. As long as the angle \textit{between} them remains constant, the resulting rotation matrix remains perfectly identical.
+\item \textbf{Algebra Proves Geometry:} The messy trigonometric algebra in part (iii) collapses perfectly into the rotation matrix. This proves mathematically a beautiful visual truth: \textit{any rotation can be constructed using just two mirrors}. Each reflection has determinant $-1$, while their product has determinant $+1$, consistent with a rotation.
+\item \textbf{Two-Reflection Formula:}
+\[
+M_\beta M_\alpha=R\!\left(2(\beta-\alpha)\right).
+\]
+Thus two reflections produce a rotation through twice the directed angle between the mirror lines. Reversing the order reverses the rotation direction.
 \end{takeaways}
 
 \begin{problem}[The Hidden Bridge]
@@ -775,9 +799,18 @@ T^{12}\mathbf{u} = \begin{bmatrix} 4096 & 0 \\ 0 & 4096 \end{bmatrix} \begin{bma
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{Mathematical Isomorphism:} Complex numbers and a specific subset of $2 \times 2$ matrices are structurally identical (an \textit{isomorphism}). Everything you can do with complex numbers (multiply, divide, conjugate), you can do with these matrices, and vice versa.
+\item \textbf{Complex--Matrix Dictionary:} Under
+\[
+a+bi\longleftrightarrow
+\begin{bmatrix}a&-b\\b&a\end{bmatrix},
+\]
+multiplication is preserved and
+\[
+\det(M_z)=a^2+b^2=|z|^2.
+\]
+Hence $M_z$ is invertible exactly when $z\neq0$, and matrix inversion corresponds to taking the complex reciprocal $1/z$.
 \item \textbf{Multiple Lenses:} A difficult algebra problem (matrix powers) can become trivial when viewed through a geometric lens (polar complex numbers). 
-\item \textbf{The ``Why'' of Matrices:} This explains \textit{why} the rotation matrix formula looks the way it does. It isn't random; it is the exact matrix manifestation of multiplying by a complex number on the unit circle!
+\item \textbf{The ``Why'' of Matrices:} This explains \textit{why} the rotation matrix formula looks the way it does. It isn't random; it is the exact matrix manifestation of multiplying by a complex number on the unit circle! $M_z^n=M_{z^n}$ is the matrix version of \textbf{De Moivre's theorem}.
 \end{takeaways}
 
 \begin{problem}[Linearising Trigonometry]
@@ -854,7 +887,15 @@ Equating the bottom-left elements: \\
 
 \begin{takeaways}
 \item \textbf{Matrices encapsulate complex algebra:} The long, tedious proofs of trigonometric identities found in textbooks disappear when you use matrices. Matrix arithmetic automatically handles the complexities of geometry.
-\item \textbf{The ``Aha!'' of part (iv):} The product-to-sum formulas are notoriously hard to memorize or derive using standard trigonometric algebra. But by simply adding two matrices and multiplying by a third, the identities naturally fall out of the arrays. 
+\item \textbf{Matrices Generate Trigonometric Identities:} $R(\alpha)R(\beta)=R(\alpha+\beta)$ encodes the angle-addition formulas. Also,
+\[
+2\cos\alpha\cos\beta
+=\cos(\alpha+\beta)+\cos(\alpha-\beta),
+\]
+\[
+2\sin\alpha\cos\beta
+=\sin(\alpha+\beta)+\sin(\alpha-\beta).
+\]
 \item \textbf{Linear Transformations:} Trigonometric identities are not arbitrary rules about triangles; they are the fundamental algebraic properties of 2D space undergoing rotational transformations.
 \end{takeaways}
 
@@ -942,8 +983,21 @@ From part (ii), the top right element of $A^n$ is $F_n$. Equating them yields: \
 
 \begin{takeaways}
 \item \textbf{Matrices Encapsulate State:} A sequence like Fibonacci isn't just a list of numbers; it's a vector moving through space. A single matrix $A$ acts as an engine that advances the sequence one step at a time.
-\item \textbf{Determinants Expose Geometric Truth:} What is ordinarily a grueling, messy algebraic proof (Cassini's identity) drops out instantly in one line simply because the determinant of a matrix product is the product of the determinants.
-\item \textbf{The Power of Diagonalisation:} By splitting a matrix into its eigenvalues (diagonal matrix $D$) and eigenvectors (matrix $P$), raising it to a massive power $n$ becomes trivial. This fundamentally bridges discrete recursive algorithms to continuous explicit formulas.
+\[
+A^n=
+\begin{bmatrix}
+F_{n+1}&F_n\\
+F_n&F_{n-1}
+\end{bmatrix}.
+\]
+\item \textbf{Determinants Expose Number-Theoretic Identities:} What is ordinarily a grueling, messy algebraic proof (Cassini's identity) drops out instantly in one line simply because the determinant of a matrix product is the product of the determinants.
+\item \textbf{The Power of Diagonalisation:} By splitting a matrix into its eigenvalues (diagonal matrix $D$) and eigenvectors (matrix $P$), raising it to a massive power $n$ becomes trivial. This fundamentally bridges discrete recursive algorithms to continuous explicit formulas:
+\[
+F_n=\frac{\alpha^n-\beta^n}{\sqrt5},
+\qquad
+\alpha=\frac{1+\sqrt5}{2},\quad
+\beta=\frac{1-\sqrt5}{2}.
+\]
 \end{takeaways}
 
 \begin{problem}[The Nilpotent Shortcut]
@@ -1012,7 +1066,11 @@ This exactly matches our conjecture, derived in seconds without induction!
 
 \begin{takeaways}
 \item \textbf{Multiple Paths to Proof:} Mathematical induction is a reliable ``brute force'' method for proving sequences. However, discovering the underlying algebraic structure (like a binomial expansion) often provides a much faster and more elegant solution.
-\item \textbf{Matrix Algebra Mimics Real Algebra:} The identity matrix $I$ acts exactly like the number $1$. Because $I \times N = N \times I$, matrices can be expanded using the Binomial Theorem just like standard polynomials $(x+y)^n$.
+\item \textbf{Binomial Theorem---Only When Matrices Commute:} The usual binomial expansion works here because $I$ commutes with $N$. Since $N^2=0$,
+\[
+(I+N)^n=I+nN.
+\]
+Do not apply the ordinary binomial theorem blindly to arbitrary non-commuting matrices.
 \item \textbf{The Power of Nilpotency:} Finding a matrix that squares to zero is like finding a mathematical wormhole. It truncates infinite series or complex powers into simple, linear equations. 
 \end{takeaways}
 
@@ -1085,7 +1143,7 @@ Because the initial probabilities must sum to $1$ ($s_0+r_0 = 1$), the state com
 \begin{takeaways}
 \item \textbf{The Meaning of ``1'':} For this transition matrix, eigenvalue 1 gives the steady state, and because the other eigenvalue has $|0.4| < 1$, every probability state converges to it.
 \item \textbf{Eigenvalues Dictate Decay:} The other eigenvalue ($0.4$ in this case) acts as the system's ``memory''. Because its magnitude is less than $1$, its powers shrink to zero. This algebraic decay is \textit{why} this specific system settles into a predictable, long-term average.
-\item \textbf{Overriding Initial Conditions:} The beautiful algebraic collapse in part (iv)—where $(s_0 + r_0)$ is factored out and becomes a $1$—shows mathematically why it doesn't matter if it's sunny or rainy today; next year's probabilities will be exactly the same regardless.
+\item \textbf{Forgetting Is Asymptotic, Not Instant:} The effect of the initial state is multiplied by $0.4^n$, which approaches $0$ as $n\to\infty$. Different initial states are generally not exactly identical after any fixed finite number of days; they converge to the same steady state only in the limit.
 \end{takeaways}
 
 \begin{problem}[The Algebra of Transformations]
@@ -1152,7 +1210,15 @@ $\frac{(x')^2 - (y')^2}{2} = 1$ \\
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{The Inverse Answers ``Why'':} Students often ask why a horizontal stretch of $2$ requires replacing $x$ with $x/2$. Part (ii) proves mathematically why: transforming the \textit{plane} uses $M$, but transforming the \textit{algebraic rule} relies entirely on the inverse matrix $M^{-1}$.
+\item \textbf{Inverse-Substitution Rule:} If
+\[
+\mathbf x'=M\mathbf x,
+\]
+then the equation of the transformed curve is found by substituting
+\[
+\mathbf x=M^{-1}\mathbf x'
+\]
+into the original equation. This explains, for example, why a horizontal stretch by $2$ produces an $x/2$ substitution in the transformed rule.
 \item \textbf{Algebra is Geometry:} An intimidating algebraic process (simultaneously substituting difference-of-squares fractions) is simply the machinery required to pivot the 2D plane. 
 \item \textbf{Unifying the Syllabus:} Functions (Unit 1) and Conic Sections/Matrices (Unit 2) are not isolated topics. $y = 1/x$ and $x^2 - y^2 = 2$ are identically the same shape, just observed from a different angle.
 \end{takeaways}
@@ -1224,5 +1290,15 @@ This proves the exact Taylor expansion for cubic polynomials with step 1, a fini
 \begin{takeaways}
 \item \textbf{Matrices are Operators:} We usually think of matrices moving geometric points in 2D or 3D space, but they can just as easily move \textit{functions} through calculus operations.
 \item \textbf{Nilpotency acts as a limit:} The fact that a cubic's 4th derivative vanishes to zero directly causes the matrix sequence to terminate. An intimidating infinite series naturally collapses into a finite, exact matrix.
-\item \textbf{Unifying the Syllabus:} This problem shows that polynomial algebra, matrix arithmetic, and calculus/Taylor expansion are not separate topics. They are different languages describing the exact same underlying mathematical truth.
+\item \textbf{Shift Operator = Matrix Exponential:} Because $D^4=0$ for cubics,
+\[
+T=e^D=I+D+\frac{D^2}{2!}+\frac{D^3}{3!}.
+\]
+Applied to a polynomial, this gives exactly
+\[
+P(x+1)
+=P(x)+P'(x)+\frac{P''(x)}{2!}
++\frac{P'''(x)}{3!},
+\]
+which is Taylor's formula for a unit shift.
 \end{takeaways}

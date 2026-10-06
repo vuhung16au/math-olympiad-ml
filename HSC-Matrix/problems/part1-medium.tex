@@ -100,7 +100,11 @@ $X = B^{-1}A^{-1}C$.
 
 \begin{takeaways}
 \item \textbf{The "Socks and Shoes" Property:} The inverse of a matrix product reverses the order of the original matrices: $(AB)^{-1} = B^{-1}A^{-1}$.
-\item \textbf{Matrix Algebra in Equations:} When isolating a matrix variable (like $X$ in $ABX=C$), you must respect the non-commutative nature of matrices by multiplying by the inverse on the correct side (in this case, pre-multiplying on the left).
+\item \textbf{Solving Matrix Equations:} For $ABX=C$,
+\[
+X=(AB)^{-1}C=B^{-1}A^{-1}C.
+\]
+Matrix ``division'' is performed using inverses on the correct side, and the order of factors must not be changed.
 \item \textbf{Determinant of a Product:} Notice that $\det(AB) = 25$, while $\det(A) = 5$ and $\det(B) = 5$. This verifies another key property: $\det(AB) = \det(A) \times \det(B)$.
 \end{takeaways}
 

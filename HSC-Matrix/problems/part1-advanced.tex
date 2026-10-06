@@ -50,7 +50,11 @@ $M^2 = \begin{bmatrix} 3 & 2 \\ -4 & -3 \end{bmatrix} \begin{bmatrix} 3 & 2 \\ -
 \begin{takeaways}
 \item \textbf{Zero Product Property Failure:} In real number algebra, $xy=0$ implies $x=0$ or $y=0$. In matrix algebra, $CD=O$ does \textit{not} necessarily mean $C=O$ or $D=O$. Non-zero matrices can multiply to give the zero matrix.
 \item \textbf{Singularity is Key:} For two non-zero matrices to multiply to the zero matrix, they must both be singular (determinant of zero). If either were invertible, the other would be forced to be the zero matrix.
-\item \textbf{Self-Inverse Matrices:} Matrices where $M^{-1} = M$ exist in infinitely many non-trivial forms beyond just the identity matrix. Geometrically, self-inverse (or involutory) matrices often represent reflections, where applying the transformation twice returns all coordinates to their original positions.
+\item \textbf{Self-Inverse Matrices:} $M^{-1}=M$ if and only if $M^2=I$. For
+\[
+M=\begin{bmatrix}a&b\\c&-a\end{bmatrix},
+\]
+this reduces to the single condition $a^2+bc=1$. Such matrices are called involutions.
 \end{takeaways}
 
 
@@ -113,7 +117,7 @@ Unique solution: $x = \frac{k+4}{k+1}$ and $y = \frac{2}{k+1}$.
 \begin{takeaways}
 \item \textbf{Determinant as a Geometric Indicator:} Just as the discriminant reveals the nature of roots in a quadratic, the determinant of a coefficient matrix dictates the geometry of linear systems. A non-zero determinant guarantees intersecting lines (one unique solution).
 \item \textbf{Interpreting Singularity:} A singular matrix ($\det = 0$) means the matrix transformation collapses 2D space. For a system of equations, this means the lines share the exact same gradient, resulting in either parallel lines (no intersection) or coincident lines (infinite intersections).
-\item \textbf{Algebraic Simplification:} When solving parametrically with the matrix inverse method, finding the solution often involves polynomial division or factoring. The non-zero roots of the determinant will frequently appear as cancellable factors in the numerators of your $x$ and $y$ expressions.
+\item \textbf{Do Not Lose Excluded Values:} Cancelling a factor while simplifying $A^{-1}B$ does not remove the original restriction $\det A\neq0$. Here, even though factors cancel, $k=4$ and $k=-1$ must still be excluded from the unique-solution formula.
 \end{takeaways}
 
 
@@ -180,7 +184,15 @@ Since $18 \neq 2$, we have shown that $\det(C+D) \neq \det(C) + \det(D)$.
 \begin{takeaways}
 \item \textbf{Multiplicative Nature of Determinants:} The determinant is a strictly multiplicative function. Matrix exponents and inverses can be evaluated directly through their determinants without calculating the resulting complex matrices first.
 \item \textbf{Non-Linearity of Determinants:} The determinant is \textit{not} a linear operator. $\det(A+B)$ is rarely equal to $\det(A) + \det(B)$.
-\item \textbf{Algebraic Proofs:} Performing brute-force algebraic expansions on $2 \times 2$ matrices (as in part a) is a foundational QCAA syllabus skill for proving matrix properties from first principles.
+\item \textbf{Composite Determinant Shortcut:} Use
+\[
+\det(M^n)=\det(M)^n,\qquad
+\det(M^{-1})=\frac1{\det(M)}
+\]
+to evaluate complicated expressions without calculating the matrices themselves; for example,
+\[
+\det(C^2D^{-1})=\frac{\det(C)^2}{\det(D)}.
+\]
 \end{takeaways}
 
 

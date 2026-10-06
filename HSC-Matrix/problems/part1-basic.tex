@@ -40,7 +40,7 @@ $SG = \begin{bmatrix} 110 & 110 \\ 120 & 105 \\ 140 & 130 \\ 100 & 95 \\ 90 & 85
 \end{solution}
 
 \begin{takeaways}
-\item \textbf{Data Organisation:} Matrices are powerful tools for neatly organising and storing real-world demographic data.
+\item \textbf{Weighted Totals:} Post-multiplying a data matrix by a column of weights forms a weighted sum for each row. Here, $SG$ calculates each year level's grant; the same technique applies to costs, marks, prices and weighted averages.
 \item \textbf{Summation Vectors:} Matrix multiplication using vectors of $1$s is an efficient algebraic method for summing rows or columns of a data matrix without writing out lengthy addition equations.
 \item \textbf{Dimensionality Checks:} Always verify conformability before multiplying matrices. The number of columns in the leading matrix must equal the number of rows in the trailing matrix (e.g., $m \times n$ multiplied by $n \times p$ gives an $m \times p$ matrix).
 \end{takeaways}
@@ -93,7 +93,11 @@ Setting $k = 0$: $2x^2 - 24 = 0 \implies x^2 = 12 \implies x = \pm\sqrt{12} = \p
 
 \begin{takeaways}
 \item \textbf{Determinant:} The scalar value $k = ps - qr$ derived in part (a) is the determinant of a $2 \times 2$ matrix. It is the fundamental factor that dictates whether a matrix has an inverse.
-\item \textbf{Commutativity of Inverses:} While general matrix multiplication is strictly non-commutative ($AB \neq BA$), a matrix and its adjugate (or inverse) are a special exception where multiplication order does not change the result.
+\item \textbf{Adjugate and Inverse Formula:} For $A=\begin{bmatrix}p&q\\r&s\end{bmatrix}$,
+$AA^*=A^*A=\det(A)I$. Hence, if $ps-qr\neq0$,
+\[
+A^{-1}=\frac{1}{ps-qr}\begin{bmatrix}s&-q\\-r&p\end{bmatrix}.
+\]
 \item \textbf{Singular Matrices:} Matrices with a determinant of zero are called singular. Geometrically, these matrices represent transformations that collapse 2D space into a 1D line or a point, which is why the mapping cannot be algebraically reversed.
 \end{takeaways}
 
