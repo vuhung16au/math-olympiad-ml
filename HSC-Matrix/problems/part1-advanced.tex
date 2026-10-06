@@ -236,3 +236,58 @@ Since $18 \neq 2$, we have shown that $\det(C+D) \neq \det(C) + \det(D)$.
 \item \textbf{Non-Linearity of Determinants:} The determinant is \textit{not} a linear operator. $\det(A+B)$ is rarely equal to $\det(A) + \det(B)$.
 \item \textbf{Algebraic Proofs:} Performing brute-force algebraic expansions on $2 \times 2$ matrices (as in part a) is a foundational QCAA syllabus skill for proving matrix properties from first principles.
 \end{takeaways}
+
+
+\begin{problem}[Dominance Arrays and Tournament Rankings]
+Five schools—A, B, C, D, and E—compete in a round-robin hockey tournament where no matches end in a draw. The results are as follows:
+\begin{itemize}
+    \item School A defeated B, C, and D.
+    \item School B defeated C and D.
+    \item School C defeated D and E.
+    \item School D defeated E.
+    \item School E defeated A and B.
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Construct the $5 \times 5$ dominance array, $M$, for this tournament, where a $1$ in row $i$ and column $j$ indicates that team $i$ defeated team $j$.
+    \item Evaluate the squared array $M^2$. What does the numerical value located in row 5, column 3 of $M^2$ represent contextually?
+    \item The tournament committee decides to rank the schools using a total power score vector $P$, calculated by the formula $P = (M + M^2)\mathbf{v}$, where $\mathbf{v}$ is a $5 \times 1$ column vector of ones. Calculate $P$ and state the final ranking of the five schools.
+    \item For any standard $n \times n$ round-robin dominance array (where there are no draws), the sum of all elements in the array is a fixed constant depending only on $n$. Determine this algebraic expression in terms of $n$, and provide a brief logical justification based on the properties of a round-robin tournament.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Set up a $5 \times 5$ grid. If A beats B, place a 1 in the row for A and column for B, and a 0 in the row for B and column for A. The main diagonal will contain only zeros.
+    \item \textbf{Part (b):} Multiply array $M$ by itself using standard row-by-column multiplication. The value in row 5, column 3 corresponds to the pathways from E to C.
+    \item \textbf{Part (c):} Adding $M$ and $M^2$ combines the 1-step and 2-step dominance scores. Multiplying by a column vector of ones simply sums the rows of the resulting array.
+    \item \textbf{Part (d):} In a round-robin tournament, how many total games are played between $n$ teams? Remember that each match results in exactly one '1' being placed somewhere in the dominance array.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$M = \begin{bmatrix} 0 & 1 & 1 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 0 & 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix}$
+
+\medskip
+\textbf{(b)} \\
+$M^2 = \begin{bmatrix} 0 & 0 & 1 & 2 & 2 \\ 0 & 0 & 0 & 1 & 2 \\ 1 & 1 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \\ 0 & 1 & 2 & 2 & 0 \end{bmatrix}$ \\
+The value in row 5, column 3 is $2$. This represents the number of 2-step dominances School E has over School C (i.e., School E defeated two teams—A and B—who both subsequently defeated School C).
+
+\medskip
+\textbf{(c)} \\
+$M + M^2 = \begin{bmatrix} 0 & 1 & 2 & 3 & 2 \\ 0 & 0 & 1 & 2 & 2 \\ 1 & 1 & 0 & 1 & 2 \\ 1 & 1 & 0 & 0 & 1 \\ 1 & 2 & 2 & 2 & 0 \end{bmatrix}$ \\
+Summing the rows yields the total power score vector $P$: \\
+$P = \begin{bmatrix} 8 \\ 5 \\ 5 \\ 3 \\ 7 \end{bmatrix}$ \\
+The rankings are: 1st: A, 2nd: E, Tied 3rd: B and C, 5th: D.
+
+\medskip
+\textbf{(d)} \\
+In an $n$-team round-robin tournament with no draws, every pair of teams plays exactly one match. The number of unique pairs is given by the combination formula $\frac{n(n-1)}{2}$. Since each match contributes exactly one '1' to the dominance array (and '0' to the reverse), the total sum of all elements in the array is exactly $\frac{n(n-1)}{2}$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{2-Step Dominance:} Squaring a dominance array reveals indirect victories, which are crucial for breaking ties or uncovering hidden strengths in a round-robin format.
+\item \textbf{Power Scores:} The expression $(M + M^2)\mathbf{v}$ is a standard algebraic method for calculating a comprehensive ranking score, weighing direct and indirect wins equally.
+\item \textbf{Array Properties:} Recognizing general algebraic properties of tournament structures (like the total sum of elements being $\frac{n(n-1)}{2}$) connects discrete combinatorics with array operations.
+\end{takeaways}
