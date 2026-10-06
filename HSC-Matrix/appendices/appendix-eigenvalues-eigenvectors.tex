@@ -1,0 +1,42 @@
+\subsection{Eigenvalues and Eigenvectors}
+
+\begin{remarkbox}[title={\bfseries Enrichment Material}]
+The topics in this appendix go \textbf{beyond} the Queensland (QCAA) Specialist Mathematics syllabus. They are included to give curious students a preview of the linear algebra they will meet in first- and second-year university courses in mathematics, engineering, computer science, data science, and AI. None of this material is examinable in QLD Year~12 assessments.
+\end{remarkbox}
+
+When a matrix multiplies a vector, it typically changes both the vector's length and its direction. However, for a given square matrix $A$, there are often special vectors whose \emph{direction} remains completely unchanged (or points in the exact opposite direction) after the multiplication. These are called \textbf{eigenvectors}. 
+
+The amount by which the eigenvector is stretched or squashed is called the \textbf{eigenvalue}.
+
+\subsubsection*{The Core Definition}
+
+Let $A$ be an $n \times n$ square matrix. A non-zero vector $\mathbf{v}$ is an eigenvector of $A$ if there exists a scalar (number) $\lambda$ such that:
+\[ A\mathbf{v} = \lambda\mathbf{v} \]
+Here, $\lambda$ is the eigenvalue associated with the eigenvector $\mathbf{v}$.
+
+To find the eigenvalues, we rearrange the equation:
+\[ A\mathbf{v} - \lambda\mathbf{v} = \mathbf{0} \]
+\[ (A - \lambda I)\mathbf{v} = \mathbf{0} \]
+where $I$ is the identity matrix. For a non-zero vector $\mathbf{v}$ to exist, the matrix $(A - \lambda I)$ must not be invertible, which means its determinant must be zero:
+\[ \det(A - \lambda I) = 0 \]
+This equation is called the \textbf{characteristic equation}. Solving it gives the eigenvalues ($\lambda$). We can then substitute each $\lambda$ back into $(A - \lambda I)\mathbf{v} = \mathbf{0}$ to find the corresponding eigenvectors.
+
+\subsubsection*{Example}
+
+Let's find the eigenvalues of $A = \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix}$.
+
+\textbf{Step 1:} Set up the characteristic equation $\det(A - \lambda I) = 0$.
+\[ A - \lambda I = \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix} - \begin{bmatrix} \lambda & 0 \\ 0 & \lambda \end{bmatrix} = \begin{bmatrix} 3 - \lambda & 1 \\ 0 & 2 - \lambda \end{bmatrix} \]
+\[ \det \begin{bmatrix} 3 - \lambda & 1 \\ 0 & 2 - \lambda \end{bmatrix} = (3 - \lambda)(2 - \lambda) - (1)(0) = (3 - \lambda)(2 - \lambda) \]
+
+\textbf{Step 2:} Solve for $\lambda$.
+\[ (3 - \lambda)(2 - \lambda) = 0 \]
+So, the eigenvalues are $\lambda_1 = 3$ and $\lambda_2 = 2$.
+
+\subsubsection*{Why it matters}
+Eigenvalues and eigenvectors are arguably the most important concept in applied linear algebra. They reveal the fundamental internal structure and behavior of a matrix.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Computer Science (PageRank):} Google's original PageRank algorithm models the internet as a giant matrix. The PageRank scores of all websites are the entries of the principal eigenvector of this matrix.
+    \item \textbf{Data Science (PCA):} In Principal Component Analysis, eigenvectors of a covariance matrix point to the directions of maximum variance in a dataset, allowing us to compress images and data efficiently.
+    \item \textbf{Physics \& Engineering:} They are used to find the natural frequencies (harmonics) of buildings and bridges (to avoid resonance and collapse) and are central to the mathematics of Quantum Mechanics (where observables are eigenvalues of operators).
+\end{itemize}

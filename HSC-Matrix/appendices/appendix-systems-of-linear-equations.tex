@@ -1,0 +1,42 @@
+\subsection{Systems of Linear Equations (Revisited)}
+
+\begin{remarkbox}[title={\bfseries Enrichment Material}]
+The topics in this appendix go \textbf{beyond} the Queensland (QCAA) Specialist Mathematics syllabus. They are included to give curious students a preview of the linear algebra they will meet in first- and second-year university courses in mathematics, engineering, computer science, data science, and AI. None of this material is examinable in QLD Year~12 assessments.
+\end{remarkbox}
+
+Earlier in this booklet, we learned how to represent a system of linear equations using an augmented matrix and solve it using inverses or Cramer's Rule (for $2 \times 2$ and $3 \times 3$ systems). In university linear algebra, we formalise this by writing any system of equations as a single matrix equation:
+\[ A\mathbf{x} = \mathbf{b} \]
+where:
+\begin{itemize}[leftmargin=*]
+    \item $A$ is the \textbf{coefficient matrix} (size $m \times n$).
+    \item $\mathbf{x}$ is the \textbf{variable vector} (a column of $n$ unknowns).
+    \item $\mathbf{b}$ is the \textbf{constant vector} (a column of $m$ constants).
+\end{itemize}
+
+\subsubsection*{Existence and Uniqueness of Solutions}
+
+When dealing with $A\mathbf{x} = \mathbf{b}$, a fundamental question is: \emph{Does a solution exist, and if so, is it unique?}
+
+We can answer this by looking at the \textbf{rank} of the matrix (roughly, the number of non-zero rows after performing Gaussian elimination, which is also the number of linearly independent rows).
+
+\begin{enumerate}
+    \item \textbf{Unique Solution:} A unique solution exists if and only if the matrix $A$ is square ($n \times n$) and has a non-zero determinant ($\det(A) \neq 0$). This means $A$ is invertible, and we can theoretically solve it as $\mathbf{x} = A^{-1}\mathbf{b}$.
+    \item \textbf{No Solution (Inconsistent System):} If Gaussian elimination results in a row like $\begin{bmatrix} 0 & 0 & \dots & 0 & | & c \end{bmatrix}$ where $c \neq 0$, the system translates to $0 = c$. This is a contradiction, meaning the lines/planes never intersect at a common point.
+    \item \textbf{Infinitely Many Solutions:} If there are more unknowns than linearly independent equations (e.g., getting a row of all zeros $\begin{bmatrix} 0 & 0 & \dots & 0 & | & 0 \end{bmatrix}$), the system has free variables. Geometrically, the intersection might be a line or a plane rather than a single point.
+\end{enumerate}
+
+\subsubsection*{Homogeneous Systems}
+
+A special case occurs when $\mathbf{b} = \mathbf{0}$, giving the equation:
+\[ A\mathbf{x} = \mathbf{0} \]
+This is called a \textbf{homogeneous system}. 
+It is special because it \emph{always} has at least one solution: the \textbf{trivial solution} where $\mathbf{x} = \mathbf{0}$ (i.e., all variables are zero). 
+
+Finding the non-trivial solutions (when there are infinitely many) is a core task in linear algebra, as the set of these solutions forms a subspace called the \textbf{null space} (or kernel) of the matrix $A$.
+
+\subsubsection*{Why it matters}
+Viewing equations as $A\mathbf{x} = \mathbf{b}$ shifts our perspective from algebra to geometry. 
+\begin{itemize}[leftmargin=*]
+    \item It allows us to view matrix multiplication as a \textbf{linear transformation} mapping a vector $\mathbf{x}$ to a new vector $\mathbf{b}$. 
+    \item This perspective is crucial in programming, where arrays and matrices are the standard data structures. Solving $A\mathbf{x} = \mathbf{b}$ is so common that numerical computing libraries (like NumPy in Python or MATLAB) have highly optimized solvers specifically designed for this single equation.
+\end{itemize}

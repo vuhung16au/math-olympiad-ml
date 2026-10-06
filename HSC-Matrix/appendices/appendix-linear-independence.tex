@@ -1,0 +1,40 @@
+\subsection{Linear Independence}
+
+\begin{remarkbox}[title={\bfseries Enrichment Material}]
+The topics in this appendix go \textbf{beyond} the Queensland (QCAA) Specialist Mathematics syllabus. They are included to give curious students a preview of the linear algebra they will meet in first- and second-year university courses in mathematics, engineering, computer science, data science, and AI. None of this material is examinable in QLD Year~12 assessments.
+\end{remarkbox}
+
+In linear algebra, a set of vectors is \textbf{linearly independent} if no vector in the set can be written as a linear combination of the others. Conversely, if at least one vector can be formed by combining the others (using scalar multiplication and vector addition), the set is \textbf{linearly dependent}.
+
+\subsubsection*{The Core Idea}
+
+Formally, a set of vectors $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}$ is linearly independent if the only solution to the equation:
+\[ c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \dots + c_n\mathbf{v}_n = \mathbf{0} \]
+is $c_1 = 0, c_2 = 0, \dots, c_n = 0$.
+
+If there exists a solution where not all $c_i$ are zero, then the vectors are linearly dependent. This means you can rearrange the equation to express one vector in terms of the others.
+
+\subsubsection*{Geometric Intuition}
+
+Think about vectors in 2D or 3D space:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{In 2D:} Two vectors are linearly independent if they don't point in the same (or exactly opposite) direction. If they point in different directions, they can reach any point in the 2D plane. If they point along the same line, they are linearly dependent.
+    \item \textbf{In 3D:} Three vectors are linearly independent if they don't all lie on the same flat plane. If they do lie on the same plane, the third vector is just a combination of the first two, making the set linearly dependent.
+\end{itemize}
+
+\subsubsection*{Example}
+
+Consider the vectors in $\mathbb{R}^3$:
+\[ \mathbf{v}_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \quad \mathbf{v}_2 = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \quad \mathbf{v}_3 = \begin{bmatrix} 2 \\ 3 \\ 0 \end{bmatrix} \]
+
+Notice that $\mathbf{v}_3 = 2\mathbf{v}_1 + 3\mathbf{v}_2$. Because we can write $\mathbf{v}_3$ as a combination of $\mathbf{v}_1$ and $\mathbf{v}_2$, the set $\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\}$ is linearly \textbf{dependent}. Geometrically, all three vectors lie in the $xy$-plane (where $z=0$).
+
+However, the set $\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_4\}$ where $\mathbf{v}_4 = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$ is linearly \textbf{independent}. They point along the $x$, $y$, and $z$ axes respectively, and no single vector can be made from the other two. These three vectors form a \textbf{basis} for $\mathbb{R}^3$, meaning their span covers the entire 3D space.
+
+\subsubsection*{Why it matters}
+Linear independence is foundational for understanding the structure of mathematical spaces.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Machine Learning \& Data Science:} Linearly dependent features in a dataset are redundant. Removing them reduces dimensionality without losing information (a core concept in Principal Component Analysis, PCA).
+    \item \textbf{Engineering \& Physics:} In structural analysis, linearly independent equations represent distinct physical constraints.
+    \item \textbf{Linear Algebra Fundamentals:} It leads directly to the concepts of \textbf{span}, \textbf{basis}, and \textbf{dimension} (rank), which tell us the "true size" or information content of a matrix.
+\end{itemize}

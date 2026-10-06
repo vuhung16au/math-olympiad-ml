@@ -1,0 +1,86 @@
+\subsection{Gaussian Elimination}
+
+\begin{remarkbox}[title={\bfseries Enrichment Material}]
+The topics in this appendix go \textbf{beyond} the Queensland (QCAA) Specialist Mathematics syllabus. They are included to give curious students a preview of the linear algebra they will meet in first- and second-year university courses in mathematics, engineering, computer science, data science, and AI. None of this material is examinable in QLD Year~12 assessments.
+\end{remarkbox}
+
+Gaussian elimination is a systematic method for solving systems of linear equations. While you may have solved $2 \times 2$ or $3 \times 3$ systems using substitution or elimination, Gaussian elimination provides an algorithmic approach that works for systems of any size and is easily programmable on a computer.
+
+\subsubsection*{The Core Idea}
+
+The goal of Gaussian elimination is to transform an augmented matrix into \textbf{row-echelon form} (where the bottom left corner consists of zeros). Once in this form, the system can be easily solved using a process called \textbf{back-substitution}.
+
+To achieve this, we use \textbf{Elementary Row Operations (EROs)}:
+\begin{enumerate}
+    \item Swap two rows ($R_i \leftrightarrow R_j$).
+    \item Multiply a row by a non-zero scalar ($R_i \to kR_i$).
+    \item Add a multiple of one row to another row ($R_i \to R_i + kR_j$).
+\end{enumerate}
+These operations do not change the solution to the system of equations.
+
+\subsubsection*{Example}
+
+Consider the system of equations:
+\begin{align*}
+    x + 2y + z &= 8 \\
+    2x + y - z &= 1 \\
+    -x + y + 2z &= 7
+\end{align*}
+
+We can represent this as an augmented matrix:
+\[
+\begin{bmatrix}
+    1 & 2 & 1 & | & 8 \\
+    2 & 1 & -1 & | & 1 \\
+    -1 & 1 & 2 & | & 7
+\end{bmatrix}
+\]
+
+\textbf{Step 1:} Eliminate $x$ from Row 2 and Row 3.
+\begin{itemize}
+    \item $R_2 \to R_2 - 2R_1$
+    \item $R_3 \to R_3 + R_1$
+\end{itemize}
+\[
+\begin{bmatrix}
+    1 & 2 & 1 & | & 8 \\
+    0 & -3 & -3 & | & -15 \\
+    0 & 3 & 3 & | & 15
+\end{bmatrix}
+\]
+
+\textbf{Step 2:} Simplify Row 2 (optional, but helpful).
+\begin{itemize}
+    \item $R_2 \to -\frac{1}{3}R_2$
+\end{itemize}
+\[
+\begin{bmatrix}
+    1 & 2 & 1 & | & 8 \\
+    0 & 1 & 1 & | & 5 \\
+    0 & 3 & 3 & | & 15
+\end{bmatrix}
+\]
+
+\textbf{Step 3:} Eliminate $y$ from Row 3.
+\begin{itemize}
+    \item $R_3 \to R_3 - 3R_2$
+\end{itemize}
+\[
+\begin{bmatrix}
+    1 & 2 & 1 & | & 8 \\
+    0 & 1 & 1 & | & 5 \\
+    0 & 0 & 0 & | & 0
+\end{bmatrix}
+\]
+
+\subsubsection*{Interpretation}
+The matrix is now in row-echelon form. Let's translate it back to equations:
+\begin{align*}
+    x + 2y + z &= 8 \\
+    y + z &= 5 \\
+    0 &= 0
+\end{align*}
+The last equation $0 = 0$ is true, which indicates that we have an infinite number of solutions. If we had ended up with something like $0 = 5$, it would mean the system has no solutions.
+
+\subsubsection*{Why it matters}
+Gaussian elimination (and its variants like LU decomposition) is the engine behind numerical computing. Whether it's simulating fluid dynamics in engineering, training machine learning models, or rendering 3D computer graphics, solving large systems of linear equations is a fundamental task, and it often relies on these principles.
