@@ -183,3 +183,65 @@ The value of $k$ disappears during the determinant calculation because expanding
 \item \textbf{Dynamic Matrices:} Real-world matrix models are rarely static. Understanding how to manually manipulate specific elements (like survival rates) allows for the simulation of environmental impacts over discrete time steps.
 \item \textbf{Biological Meaning of Determinants:} The algebraic structure of a Leslie matrix dictates that its determinant is independent of intermediate birth rates. A singular Leslie matrix (determinant of zero) only occurs if an age group has a zero survival rate or if the oldest age group becomes sterile, mathematically erasing historical population data.
 \end{takeaways}
+
+
+\begin{problem}[Leslie Matrices and Stable Populations]
+Consider a certain species of fish divided into three age groups, each one year in length. The fish do not reproduce in their first year, produce an average of $1.5$ offspring in their second year, and produce an unknown average of $k$ offspring in their third year, after which they die. Assume that $40\%$ of the fish survive their first year, and $50\%$ of those survivors make it to their third year. The initial population consists of $1000$ newborns and zero older fish.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Construct the Leslie matrix, $L$, for this fish population and calculate the population state column matrix after 2 years, $P_2$.
+    \item Determine an algebraic expression for the number of newborns present in year 3 in terms of $k$.
+    \item For the population to eventually reach a strict long-term stable size (a long-term growth rate of exactly $1$), determine the required exact value of the parameter $k$.
+    \item Using the value of $k$ determined in part (c), find the long-term stable age distribution of the fish population, expressing the number of fish in each age group as a simplified fraction of the total population.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} The Leslie matrix is a $3 \times 3$ matrix where the first row contains the fecundities (birth rates) and the sub-diagonal contains the survival rates. To find $P_2$, multiply the initial population column matrix by $L$ twice (or by $L^2$).
+    \item \textbf{Part (b):} Multiply your result for $P_2$ by the Leslie matrix $L$ to find $P_3$. The top element of this resulting matrix represents the newborns.
+    \item \textbf{Part (c):} A long-term growth rate of $1$ means the population state eventually satisfies the equation $L P = P$, where $P = \begin{bmatrix} x \\ y \\ z \end{bmatrix}$. Expand this matrix equation into a system of simultaneous linear equations and solve for $k$.
+    \item \textbf{Part (d):} Using the system of equations from part (c), express the number of fish in each age group ($x$, $y$, and $z$) in terms of a single variable, such as $y$. Sum these to find the total population, and then write each age group as a fraction of that total.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+The Leslie matrix is $L = \begin{bmatrix} 0 & 1.5 & k \\ 0.4 & 0 & 0 \\ 0 & 0.5 & 0 \end{bmatrix}$. \\
+The initial population is $P_0 = \begin{bmatrix} 1000 \\ 0 \\ 0 \end{bmatrix}$. \\
+$P_1 = L P_0 = \begin{bmatrix} 0 & 1.5 & k \\ 0.4 & 0 & 0 \\ 0 & 0.5 & 0 \end{bmatrix} \begin{bmatrix} 1000 \\ 0 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 400 \\ 0 \end{bmatrix}$. \\
+$P_2 = L P_1 = \begin{bmatrix} 0 & 1.5 & k \\ 0.4 & 0 & 0 \\ 0 & 0.5 & 0 \end{bmatrix} \begin{bmatrix} 0 \\ 400 \\ 0 \end{bmatrix} = \begin{bmatrix} 600 \\ 0 \\ 200 \end{bmatrix}$.
+
+\medskip
+\textbf{(b)} \\
+$P_3 = L P_2 = \begin{bmatrix} 0 & 1.5 & k \\ 0.4 & 0 & 0 \\ 0 & 0.5 & 0 \end{bmatrix} \begin{bmatrix} 600 \\ 0 \\ 200 \end{bmatrix} = \begin{bmatrix} 0(600) + 1.5(0) + k(200) \\ 0.4(600) + 0 + 0 \\ 0 + 0.5(0) + 0 \end{bmatrix} = \begin{bmatrix} 200k \\ 240 \\ 0 \end{bmatrix}$. \\
+The number of newborns in year 3 is $200k$.
+
+\medskip
+\textbf{(c)} \\
+For a long-term growth rate of $1$, the stable state satisfies $L P = P$: \\
+$\begin{bmatrix} 0 & 1.5 & k \\ 0.4 & 0 & 0 \\ 0 & 0.5 & 0 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}$ \\
+This yields the system of equations: \\
+(1) $1.5y + kz = x$ \\
+(2) $0.4x = y \implies x = 2.5y$ \\
+(3) $0.5y = z$ \\
+Substitute (2) and (3) into (1): \\
+$1.5y + k(0.5y) = 2.5y$ \\
+Assuming a non-zero population, divide by $y$: \\
+$1.5 + 0.5k = 2.5 \implies 0.5k = 1 \implies k = 2$.
+
+\medskip
+\textbf{(d)} \\
+With $k = 2$, the age group relations are $x = 2.5y$ and $z = 0.5y$. \\
+Total population $T = x + y + z = 2.5y + y + 0.5y = 4y$. \\
+Proportion of age group 1: $\frac{x}{T} = \frac{2.5y}{4y} = \frac{2.5}{4} = \frac{5}{8}$. \\
+Proportion of age group 2: $\frac{y}{T} = \frac{1y}{4y} = \frac{1}{4} = \frac{2}{8}$. \\
+Proportion of age group 3: $\frac{z}{T} = \frac{0.5y}{4y} = \frac{0.5}{4} = \frac{1}{8}$. \\
+The stable age distribution is $\frac{5}{8}$ newborns, $\frac{1}{4}$ one-year-olds, and $\frac{1}{8}$ two-year-olds.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Eigenvalues in Context:} A long-term growth rate of $1$ implies that the dominant eigenvalue of the Leslie matrix is $\lambda = 1$. Setting $LP = 1P$ allows you to bypass the characteristic polynomial and directly solve for matrix parameters.
+\item \textbf{Stable Age Distributions:} Once a population reaches its long-term growth trajectory (determined by the dominant eigenvalue), the \textit{ratio} of the age groups remains constant year over year, representing the corresponding eigenvector.
+\item \textbf{Matrix Generality:} Using variables within matrices (like $k$) is a standard QCAA technique to test algebraic manipulation and conceptual understanding of matrix operations simultaneously.
+\end{takeaways}
