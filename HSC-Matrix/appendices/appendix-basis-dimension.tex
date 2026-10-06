@@ -1,0 +1,15 @@
+Not all sets of vectors that span a space are equally useful. Sometimes, a set contains redundant vectors that aren't strictly necessary to reach every point in the space. 
+
+A \textbf{basis} for a vector space is a set of vectors that has two crucial properties:
+\begin{enumerate}
+    \item It \textbf{spans} the space (you can reach every point).
+    \item It is \textbf{linearly independent} (there is no redundancy; no vector can be made from the others).
+\end{enumerate}
+
+Think of a basis as the most efficient set of building blocks for a space. In $\mathbb{R}^3$, the standard basis consists of the unit vectors along the $x$, $y$, and $z$ axes:
+\[ \mathbf{i} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \quad \mathbf{j} = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \quad \mathbf{k} = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \]
+
+\subsubsection*{Dimension}
+The \textbf{dimension} of a vector space is simply the number of vectors in its basis. While you can have many different bases for the same space, every basis will always have exactly the same number of vectors.
+
+For example, any basis for a plane will always contain exactly two vectors, so a plane has a dimension of 2. The entire 3D space requires three vectors in a basis, so it has a dimension of 3.

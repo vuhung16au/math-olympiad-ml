@@ -1,0 +1,14 @@
+A \textbf{linear combination} of a set of vectors is formed by multiplying each vector by a scalar constant and adding the results together. For example, if you have vectors $\mathbf{v}_1$ and $\mathbf{v}_2$, any vector $\mathbf{v}$ of the form:
+\[ \mathbf{v} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2 \]
+is a linear combination of $\mathbf{v}_1$ and $\mathbf{v}_2$, where $c_1$ and $c_2$ are real numbers.
+
+\subsubsection*{Span}
+The \textbf{span} of a set of vectors is the collection of \emph{all possible} linear combinations of those vectors. Think of it as the entire space that can be reached by travelling along those vectors.
+
+\begin{itemize}[leftmargin=*]
+    \item If you have one non-zero vector in $\mathbb{R}^2$ or $\mathbb{R}^3$, its span is a \textbf{line} passing through the origin.
+    \item If you have two vectors pointing in different directions, their span is a flat \textbf{plane}.
+    \item If you have three vectors that do not lie on the same plane, their span is the entire 3D space ($\mathbb{R}^3$).
+\end{itemize}
+
+When we represent a system of equations as a matrix equation $A\mathbf{x} = \mathbf{b}$, we are actually asking a question about span: \emph{"Is the vector $\mathbf{b}$ in the span of the columns of matrix $A$?"} If it is, a solution exists. If not, the system has no solution.
