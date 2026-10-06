@@ -291,3 +291,61 @@ In an $n$-team round-robin tournament with no draws, every pair of teams plays e
 \item \textbf{Power Scores:} The expression $(M + M^2)\mathbf{v}$ is a standard algebraic method for calculating a comprehensive ranking score, weighing direct and indirect wins equally.
 \item \textbf{Array Properties:} Recognizing general algebraic properties of tournament structures (like the total sum of elements being $\frac{n(n-1)}{2}$) connects discrete combinatorics with array operations.
 \end{takeaways}
+
+
+\begin{problem}[Dominance Matrices and Tournament Ratings]
+Five members of the Onyx Positional chess club—A, B, C, D, and E—compete in a round-robin tournament where no games end in a draw. The results of the matches are as follows:
+\begin{itemize}
+    \item Player A defeated B and D.
+    \item Player B defeated C and D.
+    \item Player C defeated A and E.
+    \item Player D defeated E.
+    \item Player E defeated A and B.
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Construct the $5 \times 5$ one-step dominance matrix, $D$, for this tournament, where a $1$ in row $i$ and column $j$ indicates that player $i$ defeated player $j$.
+    \item Calculate the two-step dominance matrix, $D^2$. What does the numerical value located in row 3, column 2 of $D^2$ represent in the context of this chess tournament?
+    \item The club director decides to rank the players using a weighted total power score vector $P$, calculated by the formula $P = (D + 0.5D^2)\mathbf{v}$, where $\mathbf{v}$ is a $5 \times 1$ column vector of ones. Calculate $P$ and state the final ranking of the five players.
+    \item A new player, F, joins the club late, plays against all five original members, and loses every game. Without recalculating the new $6 \times 6$ matrices from scratch, logically deduce how the addition of player F affects the relative total power scores ($P$) and the final rankings of players A through E from part (c). 
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Set up a $5 \times 5$ grid. If A beats B, place a 1 in row A, column B, and a 0 in row B, column A. The main diagonal will contain only zeros.
+    \item \textbf{Part (b):} Multiply matrix $D$ by itself using standard row-by-column multiplication. The resulting values indicate the number of indirect pathways (2-step dominances) between players. 
+    \item \textbf{Part (c):} Adding $D$ and $0.5D^2$ combines the direct wins with half-weighted indirect wins. Multiplying by a column vector of ones simply computes the sum of the rows of the resulting weighted matrix.
+    \item \textbf{Part (d):} Consider how F's performance alters the row sums. F contributes a direct win (1-step dominance) to every other player. Does F contribute to anyone's 2-step dominance score, given that F defeated no one?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$D = \begin{bmatrix} 0 & 1 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix}$
+
+\medskip
+\textbf{(b)} \\
+$D^2 = \begin{bmatrix} 0 & 1 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 & 1 & 1 & 1 \\ 1 & 0 & 0 & 1 & 2 \\ 1 & 2 & 0 & 1 & 0 \\ 1 & 1 & 0 & 0 & 0 \\ 0 & 1 & 1 & 2 & 0 \end{bmatrix}$ \\
+The value in row 3, column 2 is $2$. This represents the number of 2-step dominances Player C has over Player B. Specifically, Player C defeated two players (A and E), who both subsequently defeated Player B.
+
+\medskip
+\textbf{(c)} \\
+$D + 0.5D^2 = \begin{bmatrix} 0 & 1 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 \\ 1 & 1 & 0 & 0 & 0 \end{bmatrix} + \begin{bmatrix} 0 & 0 & 0.5 & 0.5 & 0.5 \\ 0.5 & 0 & 0 & 0.5 & 1 \\ 0.5 & 1 & 0 & 0.5 & 0 \\ 0.5 & 0.5 & 0 & 0 & 0 \\ 0 & 0.5 & 0.5 & 1 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0.5 & 1.5 & 0.5 \\ 0.5 & 0 & 1 & 1.5 & 1 \\ 1.5 & 1 & 0 & 0.5 & 1 \\ 0.5 & 0.5 & 0 & 0 & 1 \\ 1 & 1.5 & 0.5 & 1 & 0 \end{bmatrix}$ \\
+Summing the rows yields the total power score vector $P$: \\
+$P = \begin{bmatrix} 3.5 \\ 4.0 \\ 4.0 \\ 2.0 \\ 4.0 \end{bmatrix}$ \\
+The rankings are: Tied 1st: Players B, C, and E (4.0). 4th: Player A (3.5). 5th: Player D (2.0).
+
+\medskip
+\textbf{(d)} \\
+Player F loses to everyone, so every player from A through E gains exactly $1$ direct win (1-step dominance). \\
+Because Player F defeated no one, defeating F does not grant any indirect wins (2-step dominance) over anyone else. Thus, the 2-step dominance scores for players A through E remain unchanged. \\
+In the formula $P = D + 0.5D^2$, every original player's score increases by exactly $1.0 + 0.5(0) = 1.0$. \\
+Since every player's score increases by the exact same constant amount, the relative power scores and the final rankings of players A through E remain entirely unchanged.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Weighting Indirect Wins:} Standard dominance rankings often use $D + D^2$, but applying a fractional weight (like $0.5$) to $D^2$ is a more realistic rating method that prioritizes direct head-to-head victories over indirect pathways.
+\item \textbf{Interpreting Matrix Elements:} The element $(i, j)$ in $D^2$ physically counts the number of distinct intermediate opponents that player $i$ defeated, who then went on to defeat player $j$.
+\item \textbf{Structural Additions to Graphs:} In discrete math, identifying how adding a "sink" node (a node with only incoming directed edges) affects the adjacency and reachability matrices allows you to bypass tedious brute-force calculations.
+\end{takeaways}
