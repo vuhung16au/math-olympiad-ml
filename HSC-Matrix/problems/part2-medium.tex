@@ -245,3 +245,62 @@ The stable age distribution is $\frac{5}{8}$ newborns, $\frac{1}{4}$ one-year-ol
 \item \textbf{Stable Age Distributions:} Once a population reaches its long-term growth trajectory (determined by the dominant eigenvalue), the \textit{ratio} of the age groups remains constant year over year, representing the corresponding eigenvector.
 \item \textbf{Matrix Generality:} Using variables within matrices (like $k$) is a standard QCAA technique to test algebraic manipulation and conceptual understanding of matrix operations simultaneously.
 \end{takeaways}
+
+
+\begin{problem}[Leslie Matrices and Periodic Populations]
+A particular species of insect has a maximum life span of 3 months. The female insects reproduce only in their third month of life. When the female population is divided into three age groups, each of length one month, the Leslie matrix takes the form:
+$$L = \begin{bmatrix} 0 & 0 & 8 \\ 0.5 & 0 & 0 \\ 0 & 0.25 & 0 \end{bmatrix}$$
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Evaluate $L^3$. Hence, deduce the long-term growth rate of this population and describe the cyclical nature of the population sizes every 3 months.
+    \item Determine the stable age distribution for this population by finding the vector $\mathbf{v} = \begin{bmatrix} 1 \\ c \\ d \end{bmatrix}$ such that $L\mathbf{v} = \mathbf{v}$. Express this stable distribution as fractions of the total population.
+    \item Suppose the initial female population consists purely of newborns: $P_0 = \begin{bmatrix} 1200 \\ 0 \\ 0 \end{bmatrix}$. Calculate the population matrices $P_1$, $P_2$, and $P_3$. Explain why this specific population does not appear to exhibit a stable age distribution over these initial months.
+    \item To stabilize the population immediately, a conservationist proposes adding a specific number of 2nd-month and 3rd-month insects to the initial population $P_0$. Determine the exact number of insects that must be added to age groups 2 and 3 so that the new initial population $P_{\text{new}}$ satisfies $L P_{\text{new}} = P_{\text{new}}$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Multiply $L$ by itself to find $L^2$, and then multiply by $L$ again to find $L^3$. Think about what $P_3 = L^3 P_0$ means if $L^3$ simplifies to a scalar multiple of the identity matrix.
+    \item \textbf{Part (b):} Multiply matrix $L$ by the column vector $\mathbf{v}$ and set the result equal to $\mathbf{v}$. This will give you a system of linear equations to solve for $c$ and $d$. Sum the components to find the fractional distribution.
+    \item \textbf{Part (c):} Use the recursive formula $P_n = L P_{n-1}$. Observe where the non-zero values shift each month.
+    \item \textbf{Part (d):} For $P_{\text{new}}$ to be perfectly stable, it must be a scalar multiple of the stable age vector $\mathbf{v}$ you found in part (b). Since the number of newborns is fixed at 1200, use this to find the scalar multiplier.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$L^2 = \begin{bmatrix} 0 & 0 & 8 \\ 0.5 & 0 & 0 \\ 0 & 0.25 & 0 \end{bmatrix} \begin{bmatrix} 0 & 0 & 8 \\ 0.5 & 0 & 0 \\ 0 & 0.25 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 2 & 0 \\ 0 & 0 & 4 \\ 0.125 & 0 & 0 \end{bmatrix}$. \\
+$L^3 = L^2 L = \begin{bmatrix} 0 & 2 & 0 \\ 0 & 0 & 4 \\ 0.125 & 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 0 & 8 \\ 0.5 & 0 & 0 \\ 0 & 0.25 & 0 \end{bmatrix} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = I$. \\
+Since $L^3 = I$, applying the matrix 3 times leaves the population unchanged ($P_3 = I P_0 = P_0$). The long-term growth rate is 1. The population perfectly cycles every 3 months.
+
+\medskip
+\textbf{(b)} \\
+Setting $L\mathbf{v} = \mathbf{v}$: \\
+$\begin{bmatrix} 0 & 0 & 8 \\ 0.5 & 0 & 0 \\ 0 & 0.25 & 0 \end{bmatrix} \begin{bmatrix} 1 \\ c \\ d \end{bmatrix} = \begin{bmatrix} 1 \\ c \\ d \end{bmatrix} \implies \begin{bmatrix} 8d \\ 0.5 \\ 0.25c \end{bmatrix} = \begin{bmatrix} 1 \\ c \\ d \end{bmatrix}$. \\
+From row 2: $c = 0.5 = 1/2$. \\
+From row 1: $8d = 1 \implies d = 1/8$. \\
+The vector is $\begin{bmatrix} 1 \\ 1/2 \\ 1/8 \end{bmatrix}$. The total parts are $1 + \frac{1}{2} + \frac{1}{8} = \frac{13}{8}$. \\
+Fractions: Age 1 is $\frac{1}{13/8} = \frac{8}{13}$, Age 2 is $\frac{1/2}{13/8} = \frac{4}{13}$, Age 3 is $\frac{1/8}{13/8} = \frac{1}{13}$.
+
+\medskip
+\textbf{(c)} \\
+$P_1 = L P_0 = \begin{bmatrix} 0 & 0 & 8 \\ 0.5 & 0 & 0 \\ 0 & 0.25 & 0 \end{bmatrix} \begin{bmatrix} 1200 \\ 0 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 600 \\ 0 \end{bmatrix}$. \\
+$P_2 = L P_1 = \begin{bmatrix} 0 & 0 & 8 \\ 0.5 & 0 & 0 \\ 0 & 0.25 & 0 \end{bmatrix} \begin{bmatrix} 0 \\ 600 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 150 \end{bmatrix}$. \\
+$P_3 = L P_2 = \begin{bmatrix} 0 & 0 & 8 \\ 0.5 & 0 & 0 \\ 0 & 0.25 & 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 150 \end{bmatrix} = \begin{bmatrix} 1200 \\ 0 \\ 0 \end{bmatrix}$. \\
+The population is not in a stable age distribution because the initial state consisted only of one age group. In a species that only reproduces in its final life stage, a cohort gap creates a traveling demographic wave that never smooths out unless multiple generations overlap initially.
+
+\medskip
+\textbf{(d)} \\
+We need $P_{\text{new}} = \begin{bmatrix} 1200 \\ y \\ z \end{bmatrix}$ to be a scalar multiple of $\mathbf{v} = \begin{bmatrix} 1 \\ 1/2 \\ 1/8 \end{bmatrix}$. \\
+The scalar multiplier is 1200 (since $1 \times 1200 = 1200$). \\
+$y = 1200 \times \frac{1}{2} = 600$. \\
+$z = 1200 \times \frac{1}{8} = 150$. \\
+Therefore, the conservationist must add 600 2nd-month insects and 150 3rd-month insects.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Imprimitive Matrices:} Leslie matrices where reproduction only occurs in a single, final age group are ``imprimitive.'' They do not naturally converge to a stable age distribution from an arbitrary starting point; instead, they oscillate cyclically.
+\item \textbf{Eigenvectors as Proportions:} The steady-state vector (corresponding to a growth multiplier of 1) represents the exact population ratio required to maintain a static, unchanging demographic structure year over year.
+\item \textbf{Matrix Exponents:} Discovering that $L^k = I$ is a powerful algebraic shortcut. It immediately proves that the system is periodic with period $k$ and that the long-term growth multiplier is exactly 1.
+\end{takeaways}
