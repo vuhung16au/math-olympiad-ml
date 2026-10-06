@@ -14,7 +14,7 @@ While languages like C++ or Julia might be faster for extreme performance, \text
 
 Here is a simple example of how to define two matrices and multiply them using NumPy:
 
-\begin{verbatim}
+\begin{lstlisting}[language=Python, style=pythonstyle]
 import numpy as np
 
 # Define two 2x2 matrices
@@ -28,7 +28,7 @@ C = A @ B
 
 print("Matrix C is:")
 print(C)
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection*{Symbolic Algebra with SymPy}
 
@@ -36,7 +36,7 @@ Sometimes we don't just want numerical answers; we want exact algebraic expressi
 
 SymPy can do algebra exactly like you would on paper. Here is an example of finding the inverse of a matrix with exact fractions:
 
-\begin{verbatim}
+\begin{lstlisting}[language=Python, style=pythonstyle]
 import sympy as sp
 
 # Define a matrix
@@ -48,7 +48,7 @@ M_inv = M.inv()
 
 print("The exact inverse of M is:")
 sp.pprint(M_inv)
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection*{Connecting Maths and Software}
 
