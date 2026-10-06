@@ -251,6 +251,49 @@ Geometrically, when $k = \frac{2}{3}$, the area of the transformed image becomes
 \textbf{(e)} \\
 A linear transformation reverses orientation if and only if the determinant of the transformation matrix is negative. \\
 $\det(M_k) < 0 \implies 3k - 2 < 0 \implies k < \frac{2}{3}$.
+
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[scale=0.75, every node/.style={scale=0.8}]
+  % 1. Original
+  \begin{scope}[shift={(0,0)}]
+    \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,2.5) node[above] {$y$};
+    \filldraw[fill=blue!15, draw=blue!80, thick] (0,0) node[below left] {$O$} -- (2,0) node[below] {$A$} -- (1,2) node[above] {$B$} -- cycle;
+    \draw[->, thick, red] (1,0.6) ++(-30:0.3) arc (-30:210:0.3);
+    \node[align=center] at (1, -1.2) {Original $T$\\ (CCW)};
+  \end{scope}
+
+  % 2. det > 0
+  \begin{scope}[shift={(4.5,0)}]
+    \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,2.5) node[above] {$y$};
+    \filldraw[fill=green!15, draw=green!80, thick] (0,0) node[below left] {$O'$} -- (1.5,0.5) node[right] {$A'$} -- (0.5,2) node[above] {$B'$} -- cycle;
+    \draw[->, thick, red] (0.7,0.8) ++(-30:0.3) arc (-30:210:0.3);
+    \node[align=center] at (1, -1.2) {$\det(M_k) > 0$\\ (Preserves orientation)};
+  \end{scope}
+
+  % 3. det < 0
+  \begin{scope}[shift={(9,0)}]
+    \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,2.5) node[above] {$y$};
+    \filldraw[fill=orange!15, draw=orange!80, thick] (0,0) node[below left] {$O'$} -- (1.5,1.5) node[above right] {$A'$} -- (2,0.5) node[right] {$B'$} -- cycle;
+    \draw[->, thick, red] (1.2,0.7) ++(210:0.3) arc (210:-30:0.3);
+    \node[align=center] at (1, -1.2) {$\det(M_k) < 0$\\ (Reverses orientation)};
+  \end{scope}
+
+  % 4. det = 0
+  \begin{scope}[shift={(13.5,0)}]
+    \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,2.5) node[above] {$y$};
+    \draw[thick, purple] (0,0) -- (2,1);
+    \fill (0,0) circle (2pt) node[below left] {$O'$};
+    \fill (2,1) circle (2pt) node[right] {$A'$};
+    \fill (1,0.5) circle (2pt) node[above left] {$B'$};
+    \node[align=center] at (1, -1.2) {$\det(M_k) = 0$\\ (Collapses to 1D)};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
 \end{solution}
 
 \begin{takeaways}
@@ -729,6 +772,27 @@ Using exact values:
 \[\tan(60^\circ + 45^\circ) = \frac{\tan 60^\circ + \tan 45^\circ}{1 - \tan 60^\circ \tan 45^\circ} = \frac{\sqrt{3} + 1}{1 - \sqrt{3}(1)}\]
 Rationalising the denominator yields $-(2+\sqrt{3})$. \\
 Equation of the second line: \textbf{$y = -(2+\sqrt{3})x$}.
+
+\vspace{1.5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.4, >=stealth, thick]
+  \draw[->, gray] (-0.5,0) -- (3,0) node[right, text=black] {$x$};
+  \draw[->, gray] (0,-0.5) -- (0,3) node[above, text=black] {$y$};
+
+  \draw[dashed, blue] (0,0) -- (30:3) node[right] {$L_1$ ($\alpha$)};
+  \draw[dashed, red] (0,0) -- (75:3) node[above] {$L_2$ ($\beta$)};
+  
+  \draw[->, very thick, black] (0,0) -- (10:2) node[right] {$\mathbf{v}$};
+  \draw[->, very thick, blue!80] (0,0) -- (50:2) node[above right] {$\mathbf{v}'$};
+  \draw[->, very thick, red!80] (0,0) -- (100:2) node[above left] {$\mathbf{v}''$};
+
+  \draw[->, thin, blue] (1.2,0) arc (0:30:1.2) node[pos=0.6, right] {$\alpha$};
+  \draw[->, thin, red] (1.5,0) arc (0:75:1.5) node[pos=0.8, above right] {$\beta$};
+  \draw[->, thin, purple] (30:1.7) arc (30:75:1.7) node[midway, above right] {$\beta-\alpha$};
+
+  \draw[->, green!60!black, very thick] (10:2.2) arc (10:100:2.2) node[midway, above left] {$2(\beta-\alpha)$};
+\end{tikzpicture}
+\end{center}
 \end{solution}
 
 \begin{takeaways}

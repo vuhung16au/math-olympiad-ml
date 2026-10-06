@@ -18,6 +18,36 @@ When solving a system of three linear equations in three variables, we are looki
   \item \textbf{No Solution:} There is no single point that belongs to all three planes. For example, two planes might be parallel, or they might form a triangular prism (like a tent) where they intersect in pairs but never all three together.
 \end{itemize}
 
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={scale=0.9}]
+  % 1) Unique point
+  \begin{scope}[shift={(0,0)}]
+    \filldraw[fill=blue!15, draw=blue!80, thick, opacity=0.7] (1.00,-0.30) -- (2.00,0.30) -- (-1.00,0.30) -- (-2.00,-0.30) -- cycle;
+    \filldraw[fill=red!15, draw=red!80, thick, opacity=0.7] (1.50,1.00) -- (-1.50,1.00) -- (-1.50,-1.00) -- (1.50,-1.00) -- cycle;
+    \filldraw[fill=green!15, draw=green!80, thick, opacity=0.7] (-0.50,0.70) -- (0.50,1.30) -- (0.50,-0.70) -- (-0.50,-1.30) -- cycle;
+    \fill[black] (0,0) circle (2pt);
+    \node[align=center, below] at (0,-1.5) {(1) Unique\\common point};
+  \end{scope}
+
+  % 2) Common line
+  \begin{scope}[shift={(5,0)}]
+    \filldraw[fill=blue!15, draw=blue!80, thick, opacity=0.7] (0.75,-0.45) -- (2.25,0.45) -- (-0.75,0.45) -- (-2.25,-0.45) -- cycle;
+    \filldraw[fill=red!15, draw=red!80, thick, opacity=0.7] (0.75,1.05) -- (2.25,1.95) -- (-0.75,-1.05) -- (-2.25,-1.95) -- cycle;
+    \filldraw[fill=green!15, draw=green!80, thick, opacity=0.7] (0.75,-1.95) -- (2.25,-1.05) -- (-0.75,1.95) -- (-2.25,1.05) -- cycle;
+    \draw[black, very thick] (0.75, 0.45) -- (-0.75, -0.45);
+    \node[align=center, below] at (0,-1.5) {(2) Common\\intersection line};
+  \end{scope}
+
+  % 3) Prism (no common intersection)
+  \begin{scope}[shift={(10,0)}]
+    \filldraw[fill=blue!15, draw=blue!80, thick, opacity=0.7] (0.75,-0.45) -- (2.25,0.45) -- (-0.75,0.45) -- (-2.25,-0.45) -- cycle;
+    \filldraw[fill=red!15, draw=red!80, thick, opacity=0.7] (-0.25,0.55) -- (1.25,1.45) -- (0.25,-0.55) -- (-1.25,-1.45) -- cycle;
+    \filldraw[fill=green!15, draw=green!80, thick, opacity=0.7] (-1.25,0.55) -- (0.25,1.45) -- (1.25,-0.55) -- (-0.25,-1.45) -- cycle;
+    \node[align=center, below] at (0,-1.5) {(3) No common\\intersection};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
 \subsubsection*{Setting Up Systems}
 
 To find a unique solution for $n$ unknown variables, you generally need $n$ independent linear equations. A common application is translating real-world scenarios into a $3 \times 3$ system of equations.

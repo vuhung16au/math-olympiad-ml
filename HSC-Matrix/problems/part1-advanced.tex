@@ -261,6 +261,25 @@ Consider a small communications network of five computer nodes, labeled $N_1$ to
     \item $N_5$ is connected to $N_3$ and $N_4$.
 \end{itemize}
 
+\begin{center}
+\begin{tikzpicture}[
+  every node/.style={circle, draw, thick, minimum size=8mm, inner sep=0pt}
+]
+  \node (N1) at (-2, 0) {$N_1$};
+  \node (N2) at (0, 1.2) {$N_2$};
+  \node (N3) at (0, -1.2) {$N_3$};
+  \node (N4) at (2.4, 1.2) {$N_4$};
+  \node (N5) at (2.4, -1.2) {$N_5$};
+
+  \draw[thick] (N1) -- (N2);
+  \draw[thick] (N1) -- (N3);
+  \draw[thick] (N2) -- (N3);
+  \draw[thick] (N2) -- (N4);
+  \draw[thick] (N3) -- (N5);
+  \draw[thick] (N4) -- (N5);
+\end{tikzpicture}
+\end{center}
+
 \begin{enumerate}[label=\textbf{(\alph*)}]
     \item Construct the $5 \times 5$ adjacency matrix, $A$, for this network, where $a_{ij} = 1$ if there is a direct link between $N_i$ and $N_j$, and $0$ otherwise.
     \item Calculate the matrix $A^2$. What does the entry in row 2, column 3 of $A^2$ represent in the context of this network?

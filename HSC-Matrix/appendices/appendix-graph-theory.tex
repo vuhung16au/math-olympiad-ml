@@ -14,6 +14,23 @@ A \textbf{graph} consists of:
 
 For example, suppose four railway stations $A, B, C, D$ are connected as follows:
 \[ A-B, \qquad A-C, \qquad B-C, \qquad C-D. \]
+
+\begin{center}
+\begin{tikzpicture}[
+  every node/.style={circle, draw, thick, minimum size=8mm, inner sep=0pt}
+]
+  \node (A) at (0, 1) {$A$};
+  \node (B) at (0, -1) {$B$};
+  \node (C) at (1.5, 0) {$C$};
+  \node (D) at (3.5, 0) {$D$};
+
+  \draw[thick] (A) -- (B);
+  \draw[thick] (A) -- (C);
+  \draw[thick] (B) -- (C);
+  \draw[thick] (C) -- (D);
+\end{tikzpicture}
+\end{center}
+
 We can think of the vertices as stations and the edges as direct railway connections.
 
 \subsubsection*{The Adjacency Matrix}

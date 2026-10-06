@@ -13,12 +13,33 @@ A linear transformation can be thought of as a function that maps an input vecto
 \subsubsection*{Common 2D Transformations}
 Here are standard matrices for common geometric transformations in the 2D Cartesian plane:
 
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Scaling:} Enlarges or shrinks shapes. A scaling factor of $k_x$ in the $x$-direction and $k_y$ in the $y$-direction is represented by $\begin{bmatrix} k_x & 0 \\ 0 & k_y \end{bmatrix}$.
-  \item \textbf{Reflection (across axes):} Reflecting across the $x$-axis corresponds to $\begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$. Reflecting across the $y$-axis corresponds to $\begin{bmatrix} -1 & 0 \\ 0 & 1 \end{bmatrix}$. Reflecting across the line $y=x$ is $\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$.
-  \item \textbf{Rotation:} A counter-clockwise rotation by an angle $\theta$ around the origin is represented by the rotation matrix $R_\theta = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$.
-  \item \textbf{Shear:} A horizontal shear by a factor $k$ is given by $\begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix}$, and a vertical shear by $\begin{bmatrix} 1 & 0 \\ k & 1 \end{bmatrix}$.
-\end{itemize}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{p{2cm} p{4.5cm} p{6.5cm}}
+\hline
+\textbf{Transform} & \textbf{Matrix} & \textbf{Geometric Effect} \\
+\hline
+\textbf{Scaling} & 
+$\begin{bmatrix} k_x & 0 \\ 0 & k_y \end{bmatrix}$ & 
+Enlarges or shrinks shapes by factor $k_x$ in $x$-dir, $k_y$ in $y$-dir. \\
+
+\textbf{Reflection} & 
+$\begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$ ($x$-axis) \newline 
+$\begin{bmatrix} -1 & 0 \\ 0 & 1 \end{bmatrix}$ ($y$-axis) \newline 
+$\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ ($y=x$) & 
+Flips a shape across the specified line of reflection. \\
+
+\textbf{Rotation} & 
+$\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$ & 
+Rotates counter-clockwise by angle $\theta$ around the origin. \\
+
+\textbf{Shear} & 
+$\begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix}$ (horizontal) \newline 
+$\begin{bmatrix} 1 & 0 \\ k & 1 \end{bmatrix}$ (vertical) & 
+Slants the shape along the axis by a factor $k$. \\
+\hline
+\end{tabular}
+\end{center}
 
 \subsubsection*{Composition of Transformations and Inverses}
 

@@ -29,6 +29,21 @@ s_1 & 0 & 0 \\
 \end{bmatrix}
 \]
 
+\begin{center}
+\begin{tikzpicture}[>=stealth, auto, thick]
+  \node[circle, draw, minimum size=1.2cm, align=center] (A1) at (0,0) {Age\\1};
+  \node[circle, draw, minimum size=1.2cm, align=center] (A2) at (3.5,0) {Age\\2};
+  \node[circle, draw, minimum size=1.2cm, align=center] (A3) at (7,0) {Age\\3};
+
+  \draw[->] (A1) -- node[below] {$s_1$} (A2);
+  \draw[->] (A2) -- node[below] {$s_2$} (A3);
+
+  \draw[->] (A1) to[out=120, in=60, looseness=5] node[above] {$f_1$} (A1);
+  \draw[->] (A2) to[bend right=40] node[above] {$f_2$} (A1);
+  \draw[->] (A3) to[bend right=45] node[above] {$f_3$} (A1);
+\end{tikzpicture}
+\end{center}
+
 \subsubsection*{Population Projection}
 
 If we represent the number of individuals in each age class at time $t$ as a column matrix (a state vector) $\mathbf{n}_t$, we can find the population at the next time interval by multiplying by $L$:

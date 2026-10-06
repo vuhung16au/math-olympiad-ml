@@ -38,6 +38,18 @@ Suppose the weather in a city is either Sunny (S) or Rainy (R) on a given day. T
   \item If today is Rainy, tomorrow has a $60\%$ chance of being Sunny and $40\%$ chance of being Rainy.
 \end{itemize}
 
+\begin{center}
+\begin{tikzpicture}[>=stealth, auto, thick]
+  \node[circle, draw, minimum size=1cm, font=\bfseries] (S) at (0,0) {S};
+  \node[circle, draw, minimum size=1cm, font=\bfseries] (R) at (4,0) {R};
+
+  \draw[->] (S) to[out=120, in=60, looseness=5] node[above] {0.8} (S);
+  \draw[->] (S) to[bend left=20] node[above] {0.2} (R);
+  \draw[->] (R) to[bend left=20] node[below] {0.6} (S);
+  \draw[->] (R) to[out=120, in=60, looseness=5] node[above] {0.4} (R);
+\end{tikzpicture}
+\end{center}
+
 Let $x_n = \begin{bmatrix} P(\text{Sunny on day } n) \\ P(\text{Rainy on day } n) \end{bmatrix}$. 
 
 \begin{enumerate}[label=\textbf{(\alph*)}]
