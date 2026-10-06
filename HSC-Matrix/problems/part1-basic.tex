@@ -1,0 +1,46 @@
+\begin{problem}[School Demographics Matrix]
+Based on the demographic data provided in the school census:
+At a certain school, there are $110$ girls and $110$ boys in Year 7. The numbers of girls and boys in the other year levels are $120$ and $105$ in Year 8, $140$ and $130$ in Year 9, $100$ and $95$ in Year 10, $90$ and $85$ in Year 11, and $60$ and $65$ in Year 12.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+  \item Summarise this information in a $6 \times 2$ matrix, $S$, where the rows represent the year levels (7 to 12) and the columns represent the gender (girls, boys).
+  \item Define a column matrix $C$ such that the matrix product $SC$ results in a $6 \times 1$ matrix representing the total number of students in each year level. Calculate $SC$.
+  \item Define a row matrix $R$ such that the matrix product $RS$ results in a $1 \times 2$ matrix representing the total number of girls and boys in the school overall. Calculate $RS$.
+  \item The school receives an extracurricular grant of $\$50$ per girl and $\$45$ per boy. Write down a column matrix $G$ representing these amounts, and calculate the product $SG$ to find the total grant amount allocated to each year level.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+  \item \textbf{Part (a):} Organise the data sequentially. Ensure your rows correspond to Years 7 through 12, and the first and second columns correspond to girls and boys, respectively.
+  \item \textbf{Part (b):} To sum the elements across the rows of a matrix using matrix multiplication, you need to post-multiply by a column matrix of $1$s. Check your dimensions: a $(6 \times 2)$ matrix multiplied by a $(2 \times 1)$ matrix yields a $(6 \times 1)$ matrix.
+  \item \textbf{Part (c):} To sum the elements down the columns, you must pre-multiply by a row matrix of $1$s. Verify the dimensions: $(1 \times 6)$ multiplied by $(6 \times 2)$.
+  \item \textbf{Part (d):} Matrix multiplication pairs the row elements of the first matrix with the column elements of the second matrix. Make sure the $\$50$ aligns with the girls' column and the $\$45$ aligns with the boys' column.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$S = \begin{bmatrix} 110 & 110 \\ 120 & 105 \\ 140 & 130 \\ 100 & 95 \\ 90 & 85 \\ 60 & 65 \end{bmatrix}$
+
+\medskip
+\textbf{(b)} \\
+$C = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$, \quad
+$SC = \begin{bmatrix} 110 & 110 \\ 120 & 105 \\ 140 & 130 \\ 100 & 95 \\ 90 & 85 \\ 60 & 65 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 220 \\ 225 \\ 270 \\ 195 \\ 175 \\ 125 \end{bmatrix}$
+
+\medskip
+\textbf{(c)} \\
+$R = \begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 \end{bmatrix}$ \\
+$RS = \begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 \end{bmatrix} \begin{bmatrix} 110 & 110 \\ 120 & 105 \\ 140 & 130 \\ 100 & 95 \\ 90 & 85 \\ 60 & 65 \end{bmatrix} = \begin{bmatrix} 620 & 590 \end{bmatrix}$
+
+\medskip
+\textbf{(d)} \\
+$G = \begin{bmatrix} 50 \\ 45 \end{bmatrix}$, \quad
+$SG = \begin{bmatrix} 110 & 110 \\ 120 & 105 \\ 140 & 130 \\ 100 & 95 \\ 90 & 85 \\ 60 & 65 \end{bmatrix} \begin{bmatrix} 50 \\ 45 \end{bmatrix} = \begin{bmatrix} 10450 \\ 10725 \\ 12850 \\ 9275 \\ 8325 \\ 5925 \end{bmatrix}$
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Data Organisation:} Matrices are powerful tools for neatly organising and storing real-world demographic data.
+\item \textbf{Summation Vectors:} Matrix multiplication using vectors of $1$s is an efficient algebraic method for summing rows or columns of a data matrix without writing out lengthy addition equations.
+\item \textbf{Dimensionality Checks:} Always verify conformability before multiplying matrices. The number of columns in the leading matrix must equal the number of rows in the trailing matrix (e.g., $m \times n$ multiplied by $n \times p$ gives an $m \times p$ matrix).
+\end{takeaways}

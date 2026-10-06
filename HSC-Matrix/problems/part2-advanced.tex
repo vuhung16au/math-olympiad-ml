@@ -1,0 +1,579 @@
+\begin{problem}[Parametric Simultaneous Equations and Matrices]
+Consider the simultaneous linear equations involving real constants $m$ and $n$:
+\begin{align*}
+mx + 2y &= 4 \\
+8x + my &= n
+\end{align*}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Express this system as a matrix equation of the form $AX = B$. Hence, determine the inverse matrix $A^{-1}$ in terms of $m$, stating the specific values of $m$ for which $A^{-1}$ is undefined.
+    \item Determine the values of $m$ for which the system does \textit{not} have a unique solution.
+    \item Given that $m$ takes the positive value found in part (b), determine the exact value of $n$ that results in an infinite set of solutions. Furthermore, provide a geometric interpretation of the system if $n = 10$ instead.
+    \item Suppose $n = 2m$. Assuming a unique solution exists, use the matrix inverse method to solve for $x$ and $y$ in terms of $m$, expressing your final answers in their simplest form.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Set up the coefficients of $x$ and $y$ into a $2 \times 2$ matrix. The formula for the inverse includes dividing by the determinant, $ad - bc$. The inverse is undefined when this determinant is equal to zero.
+    \item \textbf{Part (b):} A unique solution exists if and only if the coefficient matrix $A$ is invertible. Therefore, a unique solution does \textit{not} exist when the determinant you found in part (a) is zero.
+    \item \textbf{Part (c):} Substitute the positive value of $m$ into the original equations. For infinite solutions, the two line equations must be mathematically equivalent (one is a scalar multiple of the other). If the lines have the same gradient but different y-intercepts, what does that mean geometrically?
+    \item \textbf{Part (d):} Substitute $n = 2m$ into your column matrix $B$. Multiply $A^{-1}$ by $B$ using standard row-by-column multiplication. Simplify the resulting algebraic expressions for $x$ and $y$ by factoring out common terms.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+Matrix equation: $\begin{bmatrix} m & 2 \\ 8 & m \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} 4 \\ n \end{bmatrix}$. \\
+The determinant is $\det(A) = (m)(m) - (2)(8) = m^2 - 16$. \\
+$A^{-1} = \frac{1}{m^2 - 16} \begin{bmatrix} m & -2 \\ -8 & m \end{bmatrix}$. \\
+The inverse is undefined when $m^2 - 16 = 0$, which occurs when $m = 4$ or $m = -4$.
+
+\medskip
+\textbf{(b)} \\
+The system does not have a unique solution when the coefficient matrix is singular (i.e., $\det(A) = 0$). \\
+From part (a), this occurs when $m = 4$ or $m = -4$.
+
+\medskip
+\textbf{(c)} \\
+Let $m = 4$. The system becomes: \\
+(1) $4x + 2y = 4 \implies 2x + y = 2$ \\
+(2) $8x + 4y = n \implies 2x + y = \frac{n}{4}$ \\
+For an infinite set of solutions, the equations must represent the same line. Therefore, $2 = \frac{n}{4} \implies n = 8$. \\
+If $n = 10$, the equations are $2x + y = 2$ and $2x + y = 2.5$. These equations represent distinct, parallel lines that never intersect, meaning there is no solution.
+
+\medskip
+\textbf{(d)} \\
+Let $n = 2m$. The matrix $B$ becomes $\begin{bmatrix} 4 \\ 2m \end{bmatrix}$. \\
+$X = A^{-1}B = \frac{1}{m^2 - 16} \begin{bmatrix} m & -2 \\ -8 & m \end{bmatrix} \begin{bmatrix} 4 \\ 2m \end{bmatrix}$ \\
+$X = \frac{1}{m^2 - 16} \begin{bmatrix} (m)(4) + (-2)(2m) \\ (-8)(4) + (m)(2m) \end{bmatrix}$ \\
+$X = \frac{1}{m^2 - 16} \begin{bmatrix} 4m - 4m \\ -32 + 2m^2 \end{bmatrix} = \frac{1}{m^2 - 16} \begin{bmatrix} 0 \\ 2(m^2 - 16) \end{bmatrix}$ \\
+$X = \begin{bmatrix} 0 \\ 2 \end{bmatrix}$. \\
+The unique solution simplifies elegantly to $x = 0$ and $y = 2$ (for $m \neq \pm 4$).
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Parametric Determinants:} Using parameters in the coefficient matrix directly links algebraic singularity (determinant = 0) to geometric relationships (parallel or coincident lines).
+\item \textbf{Infinite vs. No Solution:} Once a matrix is singular, comparing the constant terms (the $B$ matrix) dictates whether the lines are coincident (infinite solutions) or strictly parallel (no solution).
+\item \textbf{Power of Matrix Algebra:} Part (d) demonstrates how matrix inverse multiplication can elegantly simplify complex parametric systems into clean integer solutions through algebraic factorization.
+\end{takeaways}
+
+
+\begin{problem}[Matrix Systems and Geometric Transformations]
+Consider the following system of linear equations:
+\begin{align*}
+\sqrt{3}x - y &= 4\sqrt{3} \\
+x + \sqrt{3}y &= 4
+\end{align*}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Write this system in the matrix form $AX = B$, and determine the exact value of $\det(A)$.
+    \item Determine $A^{-1}$, and hence solve the system of equations algebraically for $X = \begin{bmatrix} x \\ y \end{bmatrix}$.
+    \item Express the coefficient matrix $A$ in the form $k \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$, where $k > 0$ and $0 \le \theta \le \frac{\pi}{2}$. Hence, describe the two sequential geometric transformations represented by the matrix $A$.
+    \item The matrix equation $AX = B$ can be interpreted geometrically as finding a pre-image point $(x, y)$ that maps to the image point $(4\sqrt{3}, 4)$ under transformation $A$. Using your geometric description from part (c), deduce the coordinates of $(x, y)$ using polar coordinates and transformations, verifying your algebraic answer from part (b).
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Extract the coefficients of $x$ and $y$ carefully. The determinant is calculated as $ad - bc$. Be mindful of squaring surds and negative signs.
+    \item \textbf{Part (b):} The inverse of a $2 \times 2$ matrix is $\frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$. To solve for $X$, pre-multiply the constant matrix $B$ by $A^{-1}$.
+    \item \textbf{Part (c):} Notice that the determinant of a pure rotation matrix is always $1$. The determinant of $A$ is not $1$, which implies a dilation is present. The dilation factor $k$ is equal to $\sqrt{\det(A)}$. Factor this $k$ out of matrix $A$ to reveal the standard rotation matrix.
+    \item \textbf{Part (d):} Convert the image point $(4\sqrt{3}, 4)$ into polar form $(r, \phi)$. Since applying $A$ dilates and rotates the pre-image \textit{forward}, applying $A^{-1}$ to find the pre-image must do the exact opposite: divide the radius by $k$ and rotate \textit{backwards} by $\theta$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+Matrix form: $\begin{bmatrix} \sqrt{3} & -1 \\ 1 & \sqrt{3} \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} 4\sqrt{3} \\ 4 \end{bmatrix}$ \\
+$\det(A) = (\sqrt{3})(\sqrt{3}) - (-1)(1) = 3 - (-1) = 4$.
+
+\medskip
+\textbf{(b)} \\
+$A^{-1} = \frac{1}{4}\begin{bmatrix} \sqrt{3} & 1 \\ -1 & \sqrt{3} \end{bmatrix}$. \\
+$X = A^{-1}B = \frac{1}{4}\begin{bmatrix} \sqrt{3} & 1 \\ -1 & \sqrt{3} \end{bmatrix}\begin{bmatrix} 4\sqrt{3} \\ 4 \end{bmatrix}$ \\
+$X = \frac{1}{4}\begin{bmatrix} \sqrt{3}(4\sqrt{3}) + 1(4) \\ -1(4\sqrt{3}) + \sqrt{3}(4) \end{bmatrix} = \frac{1}{4}\begin{bmatrix} 12 + 4 \\ -4\sqrt{3} + 4\sqrt{3} \end{bmatrix} = \frac{1}{4}\begin{bmatrix} 16 \\ 0 \end{bmatrix} = \begin{bmatrix} 4 \\ 0 \end{bmatrix}$. \\
+Therefore, $x = 4$ and $y = 0$.
+
+\medskip
+\textbf{(c)} \\
+Since $\det(A) = 4$, the dilation factor is $k = \sqrt{4} = 2$. \\
+Factoring out $2$: 
+$A = 2 \begin{bmatrix} \frac{\sqrt{3}}{2} & -\frac{1}{2} \\ \frac{1}{2} & \frac{\sqrt{3}}{2} \end{bmatrix}$. \\
+We need $\cos\theta = \frac{\sqrt{3}}{2}$ and $\sin\theta = \frac{1}{2}$, which gives $\theta = \frac{\pi}{6}$ (or $30^\circ$). \\
+Thus, $A = 2 \begin{bmatrix} \cos(\frac{\pi}{6}) & -\sin(\frac{\pi}{6}) \\ \sin(\frac{\pi}{6}) & \cos(\frac{\pi}{6}) \end{bmatrix}$. \\
+Geometrically, matrix $A$ represents a \textbf{dilation by a factor of 2} from the origin, followed by an \textbf{anticlockwise rotation of $\frac{\pi}{6}$ radians} about the origin.
+
+\medskip
+\textbf{(d)} \\
+The image point is $(4\sqrt{3}, 4)$. In polar coordinates: \\
+$r = \sqrt{(4\sqrt{3})^2 + 4^2} = \sqrt{48 + 16} = \sqrt{64} = 8$. \\
+Angle $\phi = \tan^{-1}\left(\frac{4}{4\sqrt{3}}\right) = \tan^{-1}\left(\frac{1}{\sqrt{3}}\right) = \frac{\pi}{6}$. \\
+So the image point is $(8, \frac{\pi}{6})$ in polar. \\
+The inverse transformation $A^{-1}$ reverses the effects of $A$: it dilates by $\frac{1}{2}$ and rotates clockwise by $\frac{\pi}{6}$. \\
+New radius $r' = 8 \times \frac{1}{2} = 4$. \\
+New angle $\phi' = \frac{\pi}{6} - \frac{\pi}{6} = 0$. \\
+The pre-image in polar coordinates is $(4, 0)$, which corresponds to the Cartesian coordinates $(4, 0)$. This verifies the algebraic solution $x=4, y=0$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Algebra Meets Geometry:} Solving a system of linear equations is algebraically identical to finding the pre-image of a point under a 2D matrix transformation.
+\item \textbf{Identifying Transformations:} Any matrix of the form $\begin{bmatrix} a & -b \\ b & a \end{bmatrix}$ represents a combined rotation and dilation. The dilation factor is $\sqrt{a^2 + b^2}$ (or $\sqrt{\det(A)}$), and the rotation angle $\theta$ is found using right-triangle trigonometry with $a$ and $b$.
+\item \textbf{Inverse Transformations:} If matrix $A$ scales by $k$ and rotates by $\theta$, its inverse $A^{-1}$ scales by $\frac{1}{k}$ and rotates by $-\theta$.
+\end{takeaways}
+
+
+\begin{problem}[Matrix Determinants and System Solutions]
+Consider the following system of simultaneous linear equations involving the real parameters $m$ and $p$:
+\begin{align*}
+mx + 2y &= p \\
+12x + (m - 5)y &= 6
+\end{align*}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Express this system in the matrix form $AX = B$. Determine the values of $m$ for which matrix $A$ is not an invertible matrix.
+    \item Let $m$ take the positive value found in part (a). Determine the exact value of $p$ required for the system to have an infinite number of solution pairs. Describe the geometric relationship between the two linear equations in this specific case.
+    \item Let $m$ take the negative value found in part (a). Determine the restriction on $p$ such that the system of equations has no solutions. Describe the geometric relationship between the two linear equations in this case.
+    \item Suppose $p = 4$, and assume that $m$ is chosen such that a unique solution exists. Use the matrix inverse method to solve for the $x$-coordinate of the solution in terms of $m$, expressing your final answer as a simplified rational fraction.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} A matrix is not invertible (it is singular) when its determinant equals zero. Extract the coefficients, calculate the determinant using $ad - bc$, set it to zero, and factor the resulting quadratic equation.
+    \item \textbf{Part (b):} Substitute your positive $m$ value into the original system. For a linear system to have infinite solutions, the two equations must be scalar multiples of one another (representing coincident lines).
+    \item \textbf{Part (c):} Substitute your negative $m$ value into the original system. For a linear system to have no solutions, the lines must have identical gradients but different $y$-intercepts. What value must $p$ \textit{not} equal to prevent the lines from overlapping?
+    \item \textbf{Part (d):} The inverse matrix is $A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$. To find $x$, you only need to calculate the top row of the matrix multiplication $A^{-1}B$. Look for common factors in the numerator and denominator to simplify.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+Matrix equation: $\begin{bmatrix} m & 2 \\ 12 & m-5 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} p \\ 6 \end{bmatrix}$. \\
+Matrix $A$ is not invertible when $\det(A) = 0$. \\
+$\det(A) = (m)(m-5) - (2)(12) = m^2 - 5m - 24$. \\
+Setting to zero: $m^2 - 5m - 24 = 0 \implies (m-8)(m+3) = 0$. \\
+Therefore, $A$ is singular when $m = 8$ or $m = -3$.
+
+\medskip
+\textbf{(b)} \\
+Let $m = 8$. The system becomes: \\
+(1) $8x + 2y = p \implies 4x + y = \frac{p}{2}$ \\
+(2) $12x + 3y = 6 \implies 4x + y = 2$ \\
+For infinite solutions, the equations must be equivalent. \\
+Therefore, $\frac{p}{2} = 2 \implies p = 4$. \\
+Geometrically, the equations represent \textbf{coincident (identical) straight lines}.
+
+\medskip
+\textbf{(c)} \\
+Let $m = -3$. The system becomes: \\
+(1) $-3x + 2y = p$ \\
+(2) $12x - 8y = 6 \implies -3x + 2y = -1.5$ \\
+For the system to have no solutions, the equations must be mathematically inconsistent. \\
+Therefore, $p$ can be any real number except $-1.5$ (i.e., $p \neq -1.5$). \\
+Geometrically, the equations represent \textbf{distinct parallel lines} that never intersect.
+
+\medskip
+\textbf{(d)} \\
+Let $p = 4$. For a unique solution, $\det(A) = (m-8)(m+3) \neq 0$. \\
+$X = A^{-1}B = \frac{1}{(m-8)(m+3)} \begin{bmatrix} m-5 & -2 \\ -12 & m \end{bmatrix} \begin{bmatrix} 4 \\ 6 \end{bmatrix}$. \\
+We only need to evaluate the top row for $x$: \\
+$x = \frac{4(m-5) + 6(-2)}{(m-8)(m+3)} = \frac{4m - 20 - 12}{(m-8)(m+3)} = \frac{4m - 32}{(m-8)(m+3)}$. \\
+Factoring the numerator: \\
+$x = \frac{4(m-8)}{(m-8)(m+3)}$. \\
+Since $m \neq 8$, we can cancel the common factor, yielding the simplified solution: \\
+$x = \frac{4}{m+3}$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{The Zero Determinant:} When $\det(A) = 0$, a unique solution does not exist. This algebraically signals that the lines are either parallel or coincident.
+\item \textbf{The Role of Constants:} Once singularity is established by the coefficient matrix $A$, the constant matrix $B$ dictates whether the system collapses into an infinite solution set or an empty set (no solutions).
+\item \textbf{Parametric Simplification:} In matrix algebra, finding a unique parametric solution often leads to rational expressions where the roots of the determinant (e.g., $m-8$) appear as cancellable factors in the numerators.
+\end{takeaways}
+
+
+\begin{problem}[Matrix Systems and Parametric Constants]
+Consider the following system of linear equations involving a real constant $k$:
+\begin{align*}
+kx + 2y &= k+1 \\
+8x + ky &= 6
+\end{align*}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Write this system in the matrix form, as $AX = K$. Determine the values of $k$ for which the coefficient matrix $A$ is not an invertible matrix.
+    \item For the negative value of $k$ found in part (a), determine the geometric relationship between the two linear equations. How many pairs does the solution set contain?
+    \item For the positive value of $k$ found in part (a), demonstrate algebraically whether any solutions can be found for this system of equations. Interpret this result geometrically.
+    \item Let $k = 2$. Calculate $A^{-1}$ and hence find the unique solution pair $(x, y)$ that satisfies the system.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Matrix $A$ contains the coefficients of $x$ and $y$. It is not invertible (singular) when its determinant, calculated as $ad-bc$, is equal to zero.
+    \item \textbf{Part (b):} Substitute the negative $k$ value back into the original equations. If one equation simplifies to become a direct multiple of the other, they represent the exact same line.
+    \item \textbf{Part (c):} Substitute the positive $k$ value. Try to solve the system using elimination; you will reach a false mathematical statement, indicating parallel lines that never cross.
+    \item \textbf{Part (d):} Use the inverse matrix formula $A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$ and multiply it by the constant column matrix $K$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+Matrix form: $\begin{bmatrix} k & 2 \\ 8 & k \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} k+1 \\ 6 \end{bmatrix}$. \\
+The matrix $A$ is not invertible when $\det(A) = 0$. \\
+$\det(A) = (k)(k) - (2)(8) = k^2 - 16$. \\
+Setting to zero: $k^2 - 16 = 0 \implies k = 4$ or $k = -4$.
+
+\medskip
+\textbf{(b)} \\
+Let $k = -4$. The system becomes: \\
+(1) $-4x + 2y = -3$ \\
+(2) $8x - 4y = 6 \implies -4x + 2y = -3$ \\
+The equations are mathematically identical. Geometrically, they represent \textbf{coincident lines}. Because they overlap entirely, the solution set contains an \textbf{infinite number of pairs}.
+
+\medskip
+\textbf{(c)} \\
+Let $k = 4$. The system becomes: \\
+(1) $4x + 2y = 5$ \\
+(2) $8x + 4y = 6 \implies 4x + 2y = 3$ \\
+Subtracting the simplified second equation from the first gives $0 = 2$, which is a contradiction. Therefore, \textbf{no solutions can be found}. Geometrically, they represent \textbf{distinct parallel lines} that never intersect.
+
+\medskip
+\textbf{(d)} \\
+For $k = 2$, $A = \begin{bmatrix} 2 & 2 \\ 8 & 2 \end{bmatrix}$ and $K = \begin{bmatrix} 3 \\ 6 \end{bmatrix}$. \\
+$\det(A) = (2)(2) - (2)(8) = 4 - 16 = -12$. \\
+$A^{-1} = -\frac{1}{12} \begin{bmatrix} 2 & -2 \\ -8 & 2 \end{bmatrix}$. \\
+$X = A^{-1}K = -\frac{1}{12} \begin{bmatrix} 2 & -2 \\ -8 & 2 \end{bmatrix} \begin{bmatrix} 3 \\ 6 \end{bmatrix} = -\frac{1}{12} \begin{bmatrix} 6 - 12 \\ -24 + 12 \end{bmatrix} = -\frac{1}{12} \begin{bmatrix} -6 \\ -12 \end{bmatrix} = \begin{bmatrix} \frac{1}{2} \\ 1 \end{bmatrix}$. \\
+The unique solution pair is $(\frac{1}{2}, 1)$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Singularity and Geometry:} A non-invertible (singular) coefficient matrix indicates that the system does not have a unique solution; the lines are either parallel or coincident.
+\item \textbf{The Role of Constant Matrices:} The constant terms determine the final state of a singular system. Equivalent ratios across all terms yield infinite solutions (coincident), while differing constant ratios yield zero solutions (parallel).
+\item \textbf{Direct Solutions:} The matrix inverse method provides a direct, algorithmic approach to solving uniquely determined systems without requiring manual substitution or elimination.
+\end{takeaways}
+
+
+\begin{problem}[Matrix Algebra and Transformations]
+Consider the $3 \times 3$ matrix $A = \begin{bmatrix} 2 & 0 & 0 \\ 0 & 1 & \sqrt{3} \\ 0 & \sqrt{3} & -1 \end{bmatrix}$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Determine $A^2$ and express your result in the form $kI$, where $I$ is the $3 \times 3$ identity matrix and $k$ is a real constant.
+    \item Hence, algebraically deduce the inverse matrix $A^{-1}$ without calculating the determinant.
+    \item A 3D linear transformation represented by matrix $A$ maps a coordinate point $P(x, y, z)$ to the image point $P'(4, -2, 2\sqrt{3})$. Use your result from part (b) to determine the exact coordinates of the original point $P$.
+    \item Using the properties established in part (a), evaluate $A^3$ and hence determine an expression for $A^5$ strictly in terms of $A$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Perform standard $3 \times 3$ matrix multiplication ($A \times A$). Be careful when multiplying the surds in the second and third rows.
+    \item \textbf{Part (b):} The definition of an inverse matrix is $A A^{-1} = I$. Take your equation from part (a), $A^2 = kI$, and algebraically manipulate it to isolate $I$ on one side of the equation.
+    \item \textbf{Part (c):} The transformation is defined by the equation $AP = P'$. To solve for the pre-image $P$, you must pre-multiply both sides of the equation by $A^{-1}$. 
+    \item \textbf{Part (d):} Do not calculate the matrices manually. Use exponent rules for matrices: $A^3 = A^2 \times A$. Substitute the identity relationship you found in part (a) to simplify the powers.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$A^2 = \begin{bmatrix} 2 & 0 & 0 \\ 0 & 1 & \sqrt{3} \\ 0 & \sqrt{3} & -1 \end{bmatrix} \begin{bmatrix} 2 & 0 & 0 \\ 0 & 1 & \sqrt{3} \\ 0 & \sqrt{3} & -1 \end{bmatrix}$ \\
+$A^2 = \begin{bmatrix} (2)(2)+0+0 & 0+0+0 & 0+0+0 \\ 0+0+0 & (1)(1)+(\sqrt{3})(\sqrt{3})+0 & (1)(\sqrt{3})+(\sqrt{3})(-1)+0 \\ 0+0+0 & (\sqrt{3})(1)+(-1)(\sqrt{3})+0 & (\sqrt{3})(\sqrt{3})+(-1)(-1)+0 \end{bmatrix}$ \\
+$A^2 = \begin{bmatrix} 4 & 0 & 0 \\ 0 & 1+3 & \sqrt{3}-\sqrt{3} \\ 0 & \sqrt{3}-\sqrt{3} & 3+1 \end{bmatrix} = \begin{bmatrix} 4 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 & 4 \end{bmatrix}$ \\
+$A^2 = 4 \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = 4I$. \\
+Therefore, $k = 4$.
+
+\medskip
+\textbf{(b)} \\
+From part (a), $A^2 = 4I$. \\
+$A \cdot A = 4I$ \\
+Dividing both sides by the scalar $4$: \\
+$A \cdot \left(\frac{1}{4}A\right) = I$ \\
+Since $A \cdot A^{-1} = I$, it follows that $A^{-1} = \frac{1}{4}A$. \\
+$A^{-1} = \begin{bmatrix} 1/2 & 0 & 0 \\ 0 & 1/4 & \sqrt{3}/4 \\ 0 & \sqrt{3}/4 & -1/4 \end{bmatrix}$.
+
+\medskip
+\textbf{(c)} \\
+Given $AP = P'$, we have $P = A^{-1}P'$. \\
+Using $A^{-1} = \frac{1}{4}A$: \\
+$P = \frac{1}{4} \begin{bmatrix} 2 & 0 & 0 \\ 0 & 1 & \sqrt{3} \\ 0 & \sqrt{3} & -1 \end{bmatrix} \begin{bmatrix} 4 \\ -2 \\ 2\sqrt{3} \end{bmatrix}$ \\
+$P = \frac{1}{4} \begin{bmatrix} (2)(4) + 0 + 0 \\ 0 + (1)(-2) + (\sqrt{3})(2\sqrt{3}) \\ 0 + (\sqrt{3})(-2) + (-1)(2\sqrt{3}) \end{bmatrix}$ \\
+$P = \frac{1}{4} \begin{bmatrix} 8 \\ -2 + 6 \\ -2\sqrt{3} - 2\sqrt{3} \end{bmatrix} = \frac{1}{4} \begin{bmatrix} 8 \\ 4 \\ -4\sqrt{3} \end{bmatrix} = \begin{bmatrix} 2 \\ 1 \\ -\sqrt{3} \end{bmatrix}$. \\
+The coordinates of $P$ are $(2, 1, -\sqrt{3})$.
+
+\medskip
+\textbf{(d)} \\
+$A^3 = A^2 \cdot A = (4I)A = 4A$. \\
+$A^5 = A^3 \cdot A^2 = (4A)(4I) = 16A$. \\
+Alternatively, $A^5 = A(A^2)^2 = A(4I)^2 = 16A$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{The ``Hence'' Command:} In mathematics, the word ``hence'' dictates that you must use the result of the previous section. Finding the inverse via $A^2 = kI$ is often faster and less prone to arithmetic error than manually calculating a $3 \times 3$ determinant and adjugate matrix.
+\item \textbf{Matrix Power Cycles:} Matrices that satisfy equations like $A^2 = kI$ act similarly to cyclic numbers in modular arithmetic. High powers of the matrix can be drastically simplified without performing tedious sequential multiplication.
+\item \textbf{Geometric Inverses:} Algebraically isolating a coordinate vector by multiplying by an inverse matrix geometrically represents reversing the original 3D transformation to find the starting position.
+\end{takeaways}
+
+
+\begin{problem}[Systems of Linear Equations and 3D Geometry]
+Consider the following system of simultaneous linear equations representing three planes in 3D space, where $k$ is a real constant:
+\begin{align*}
+x + 2y - 3z &= 4 \\
+x + y + z &= 6 \\
+2x + 3y + kz &= 10
+\end{align*}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Express this system in the matrix form $AX = B$. Calculate the determinant of the $3 \times 3$ coefficient matrix $A$ in terms of $k$, and hence determine the value of $k$ for which the matrix is singular.
+    \item For the value of $k$ found in part (a), demonstrate algebraically that the system is consistent (has solutions) rather than inconsistent (no solutions).
+    \item Given that the system is consistent and has infinitely many solutions, let $z = \lambda$. Solve the equations to express $x$ and $y$ in terms of the parameter $\lambda$.
+    \item Express the general solution from part (c) as a vector equation of a line in the form $\mathbf{r} = \mathbf{a} + \lambda\mathbf{d}$, and briefly describe the geometric arrangement of the three planes.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} The determinant of a $3 \times 3$ matrix can be found by expanding across the top row. A matrix is singular when its determinant is equal to zero.
+    \item \textbf{Part (b):} Look for a linear combination of the first two equations that perfectly yields the third equation. If the left-hand side and right-hand side both match, the system is consistent.
+    \item \textbf{Part (c):} Subtract the second equation from the first to eliminate $x$ and find $y$ in terms of $z$. Then substitute this back into the second equation to find $x$. Finally, replace $z$ with $\lambda$.
+    \item \textbf{Part (d):} Separate the constant terms from the terms containing $\lambda$ to form your position vector $\mathbf{a}$ and direction vector $\mathbf{d}$. 
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+Matrix form: $\begin{bmatrix} 1 & 2 & -3 \\ 1 & 1 & 1 \\ 2 & 3 & k \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} 4 \\ 6 \\ 10 \end{bmatrix}$. \\
+$\det(A) = 1(1(k) - 1(3)) - 2(1(k) - 1(2)) + (-3)(1(3) - 1(2))$ \\
+$\det(A) = (k - 3) - 2(k - 2) - 3(1)$ \\
+$\det(A) = k - 3 - 2k + 4 - 3 = -k - 2$. \\
+For $A$ to be singular, $\det(A) = 0 \implies -k - 2 = 0 \implies k = -2$.
+
+\medskip
+\textbf{(b)} \\
+Substitute $k = -2$ into the third equation: $2x + 3y - 2z = 10$. \\
+Let Equation 1 be $x + 2y - 3z = 4$ and Equation 2 be $x + y + z = 6$. \\
+Adding Equation 1 and Equation 2 gives: \\
+$(x + x) + (2y + y) + (-3z + z) = 4 + 6$ \\
+$2x + 3y - 2z = 10$. \\
+Since this perfectly matches the third equation, the third plane contains the line of intersection of the first two planes. The system is consistent.
+
+\medskip
+\textbf{(c)} \\
+Let $z = \lambda$. \\
+Subtracting Eq 2 from Eq 1: \\
+$(x + 2y - 3z) - (x + y + z) = 4 - 6$ \\
+$y - 4z = -2 \implies y = 4z - 2 \implies y = 4\lambda - 2$. \\
+Substitute $y = 4\lambda - 2$ into Eq 2: \\
+$x + (4\lambda - 2) + \lambda = 6$ \\
+$x + 5\lambda - 2 = 6 \implies x = 8 - 5\lambda$.
+
+\medskip
+\textbf{(d)} \\
+From part (c), we have $x = 8 - 5\lambda$, $y = -2 + 4\lambda$, $z = 0 + 1\lambda$. \\
+In vector form: \\
+$\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} 8 \\ -2 \\ 0 \end{bmatrix} + \lambda \begin{bmatrix} -5 \\ 4 \\ 1 \end{bmatrix}$. \\
+Geometrically, the three planes intersect along a single common line (forming a sheaf of planes).
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Underdetermined vs. Singular Systems:} The original $2 \times 3$ system implicitly represented infinite solutions because there were more variables than equations. By adding a dependent third equation, we transition to a $3 \times 3$ singular matrix scenario, a core concept in QCAA Specialist Mathematics.
+\item \textbf{Singularity and Consistency:} A determinant of zero only tells you a unique solution does not exist. You must verify algebraically whether the planes are parallel/form a prism (inconsistent) or intersect along a line (consistent).
+\item \textbf{Parametric Lines:} The process of setting a free variable to $\lambda$ is exactly how the Cartesian equations of intersecting planes are converted into the vector equation of a 3D line.
+\end{takeaways}
+
+
+\begin{problem}[Augmented Matrices and Parametric Solutions]
+Consider the following system of linear equations involving four variables ($x, y, z, w$) and a real constant $k$:
+\begin{align*}
+x + 2y - z + w &= 5 \\
+2x - y + 3z - 2w &= 0 \\
+3x + y + 2z - w &= k
+\end{align*}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Set up the augmented matrix for this system. By applying elementary row operations (specifically, examining $R_1 + R_2$), determine the exact value of $k$ for which this system is consistent (has solutions).
+    \item Given that the system is consistent, it will have a doubly-infinite family of solutions. Let $z = \lambda$ and $w = \mu$. Express $x$ and $y$ strictly in terms of the parameters $\lambda$ and $\mu$.
+    \item A new constraint is added to the system such that $x - y = 3$. Determine the linear relationship that must exist between the parameters $\lambda$ and $\mu$ to satisfy this constraint.
+    \item Using your result from part (c), determine the unique solution for the coordinates $(x, y, z, w)$ when $w = 2$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Write the system as an augmented matrix $[A|B]$. Notice that adding the first two rows together creates a row that has the exact same variable coefficients as the third row. For the system to be consistent, the constant terms must also match.
+    \item \textbf{Part (b):} Since the third equation is redundant when consistent, use only the first two equations. Substitute $z = \lambda$ and $w = \mu$, moving them to the right-hand side. Then use simultaneous elimination on $x$ and $y$.
+    \item \textbf{Part (c):} Substitute your parametric expressions for $x$ and $y$ from part (b) into the equation $x - y = 3$ and group the like parameter terms together.
+    \item \textbf{Part (d):} Substitute $w = \mu = 2$ into your relationship from part (c) to find the value of $\lambda$ (which represents $z$). Then, plug both parameter values back into your expressions for $x$ and $y$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+The augmented matrix is: \\
+$\left[\begin{array}{cccc|c} 1 & 2 & -1 & 1 & 5 \\ 2 & -1 & 3 & -2 & 0 \\ 3 & 1 & 2 & -1 & k \end{array}\right]$ \\
+Performing the row operation $R_1 + R_2 \rightarrow R_{new}$: \\
+$(1+2)x + (2-1)y + (-1+3)z + (1-2)w = 5 + 0 \implies 3x + y + 2z - w = 5$. \\
+Comparing this to Row 3 ($3x + y + 2z - w = k$), we can see that for the system to be mathematically consistent, $k = 5$.
+
+\medskip
+\textbf{(b)} \\
+Let $z = \lambda$ and $w = \mu$. The system reduces to the first two equations: \\
+(1) $x + 2y = 5 + \lambda - \mu$ \\
+(2) $2x - y = -3\lambda + 2\mu$ \\
+Multiply (2) by 2: $4x - 2y = -6\lambda + 4\mu$. \\
+Add to (1): $5x = 5 - 5\lambda + 3\mu \implies x = 1 - \lambda + \frac{3}{5}\mu$. \\
+Multiply (1) by 2: $2x + 4y = 10 + 2\lambda - 2\mu$. \\
+Subtract (2) from this: $5y = 10 + 5\lambda - 4\mu \implies y = 2 + \lambda - \frac{4}{5}\mu$.
+
+\medskip
+\textbf{(c)} \\
+Apply the constraint: $x - y = 3$. \\
+$\left(1 - \lambda + \frac{3}{5}\mu\right) - \left(2 + \lambda - \frac{4}{5}\mu\right) = 3$ \\
+$-1 - 2\lambda + \frac{7}{5}\mu = 3$ \\
+$-2\lambda + \frac{7}{5}\mu = 4$. \\
+Multiplying by 5 yields the linear relationship: $-10\lambda + 7\mu = 20$.
+
+\medskip
+\textbf{(d)} \\
+Given $w = 2$, we have $\mu = 2$. \\
+Substitute into the relationship from (c): \\
+$-10\lambda + 7(2) = 20 \implies -10\lambda + 14 = 20 \implies -10\lambda = 6 \implies \lambda = -\frac{3}{5}$. \\
+So, $z = -0.6$. \\
+Find $x$: $x = 1 - \left(-\frac{3}{5}\right) + \frac{3}{5}(2) = 1 + \frac{3}{5} + \frac{6}{5} = \frac{14}{5} = 2.8$. \\
+Find $y$: $y = 2 + \left(-\frac{3}{5}\right) - \frac{4}{5}(2) = 2 - \frac{3}{5} - \frac{8}{5} = -\frac{1}{5} = -0.2$. \\
+The unique solution is $(x, y, z, w) = \left(\frac{14}{5}, -\frac{1}{5}, -\frac{3}{5}, 2\right)$ or $(2.8, -0.2, -0.6, 2)$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Underdetermined Systems:} Matrices representing systems with fewer independent equations than variables yield infinite families of solutions requiring parameters ($\lambda, \mu$).
+\item \textbf{Row Operations for Consistency:} Elementary row operations on augmented matrices quickly reveal inconsistencies (e.g., $0 = c$ where $c \neq 0$). If a row reduces entirely to zero on the left, the right side must also be zero for a solution to exist.
+\item \textbf{Applying Constraints:} Adding constraints to a parametric solution family reduces its degrees of freedom. Each new valid equation removes one parameter, eventually leading to a single unique point if enough constraints are provided.
+\end{takeaways}
+
+
+\begin{problem}[Advanced Matrix Products and Inverses]
+Let $C = \begin{bmatrix} 2 & -1 & 1 \\ 1 & 0 & 2 \\ -1 & 1 & -1 \end{bmatrix}$ and $D = \begin{bmatrix} -2 & 0 & -2 \\ -1 & -1 & -3 \\ 1 & -1 & 1 \end{bmatrix}$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Evaluate the matrix product $CD$. Hence, determine the inverse matrices $C^{-1}$ and $D^{-1}$ in terms of $C$ and $D$.
+    \item A system of simultaneous linear equations is given by:
+    \begin{align*}
+    -2x - 2z &= 4k \\
+    -x - y - 3z &= 2 \\
+    x - y + z &= -2k
+    \end{align*}
+    Express this system in the form $DX = V$, and hence solve for $x, y,$ and $z$ in terms of the real constant $k$.
+    \item Determine the specific value of $k$ such that the solution point $(x, y, z)$ lies on the plane defined by $x + z = 4$.
+    \item Using the inverse properties established in part (a), solve the matrix equation $C Y D = I$ for the $3 \times 3$ matrix $Y$, where $I$ is the identity matrix.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Multiply rows of $C$ by columns of $D$. The result will be a scalar multiple of the identity matrix, $mI$. Use the definition of an inverse ($M M^{-1} = I$) to isolate $I$.
+    \item \textbf{Part (b):} The coefficient matrix of the system matches matrix $D$. To solve $DX = V$, pre-multiply both sides by $D^{-1}$. Substitute your expression for $D^{-1}$ from part (a) to avoid recalculating an inverse from scratch.
+    \item \textbf{Part (c):} Substitute the expressions for $x$ and $z$ (which you found in terms of $k$ in part b) into the plane equation and solve for $k$.
+    \item \textbf{Part (d):} Do not attempt to define $Y$ with 9 unknown variables. Instead, isolate $Y$ algebraically by pre-multiplying by $C^{-1}$ and post-multiplying by $D^{-1}$. Remember that a matrix commutes with its own inverse (e.g., $CD = mI \implies DC = mI$).
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$CD = \begin{bmatrix} 2 & -1 & 1 \\ 1 & 0 & 2 \\ -1 & 1 & -1 \end{bmatrix} \begin{bmatrix} -2 & 0 & -2 \\ -1 & -1 & -3 \\ 1 & -1 & 1 \end{bmatrix} = \begin{bmatrix} -4+1+1 & 0+1-1 & -4+3+1 \\ -2+0+2 & 0+0-2 & -2+0+2 \\ 2-1-1 & 0-1+1 & 2-3-1 \end{bmatrix}$ \\
+$CD = \begin{bmatrix} -2 & 0 & 0 \\ 0 & -2 & 0 \\ 0 & 0 & -2 \end{bmatrix} = -2I$. \\
+Since $CD = -2I$, we have $C\left(-\frac{1}{2}D\right) = I$, so $C^{-1} = -\frac{1}{2}D$. \\
+Similarly, $\left(-\frac{1}{2}C\right)D = I$, so $D^{-1} = -\frac{1}{2}C$.
+
+\medskip
+\textbf{(b)} \\
+The system is $D \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} 4k \\ 2 \\ -2k \end{bmatrix}$. \\
+$X = D^{-1}V = -\frac{1}{2}C V = -\frac{1}{2} \begin{bmatrix} 2 & -1 & 1 \\ 1 & 0 & 2 \\ -1 & 1 & -1 \end{bmatrix} \begin{bmatrix} 4k \\ 2 \\ -2k \end{bmatrix}$ \\
+$X = -\frac{1}{2} \begin{bmatrix} 2(4k) - 1(2) + 1(-2k) \\ 1(4k) + 0(2) + 2(-2k) \\ -1(4k) + 1(2) - 1(-2k) \end{bmatrix} = -\frac{1}{2} \begin{bmatrix} 6k - 2 \\ 0 \\ -2k + 2 \end{bmatrix} = \begin{bmatrix} 1 - 3k \\ 0 \\ k - 1 \end{bmatrix}$. \\
+Thus, $x = 1 - 3k$, $y = 0$, and $z = k - 1$.
+
+\medskip
+\textbf{(c)} \\
+We require $x + z = 4$. \\
+Substituting the results from (b): \\
+$(1 - 3k) + (k - 1) = 4$ \\
+$-2k = 4 \implies k = -2$.
+
+\medskip
+\textbf{(d)} \\
+Given $CYD = I$. \\
+Pre-multiply by $C^{-1}$ and post-multiply by $D^{-1}$: \\
+$Y = C^{-1} I D^{-1} = C^{-1} D^{-1}$. \\
+Substitute the inverses from part (a): \\
+$Y = \left(-\frac{1}{2}D\right)\left(-\frac{1}{2}C\right) = \frac{1}{4}DC$. \\
+Since $CD = -2I$, it follows that $DC = -2I$ (a matrix and its inverse commute). \\
+$Y = \frac{1}{4}(-2I) = -\frac{1}{2}I = \begin{bmatrix} -0.5 & 0 & 0 \\ 0 & -0.5 & 0 \\ 0 & 0 & -0.5 \end{bmatrix}$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{The ``Hence'' Method:} Calculating $3 \times 3$ inverses from scratch using determinants and adjugates is tedious. Finding a product $AB = mI$ is a standard shortcut to define $A^{-1} = \frac{1}{m}B$.
+\item \textbf{Parametric Systems:} Matrices handle parametric constants (like $k$) effortlessly because matrix multiplication distributes linearly over expressions.
+\item \textbf{Matrix Algebra vs. Arithmetic:} Part (d) demonstrates the power of abstract matrix algebra. Treating matrices as single algebraic entities ($C^{-1}$, $D^{-1}$) avoids massive blocks of arithmetic calculation.
+\end{takeaways}
+
+
+\begin{problem}[Matrix Systems and Planes in 3D Space]
+Consider the points $A(1, 2, -1)$, $B(2, 3, 1)$, and $C_k(3, -1, k)$, where $k$ is a real constant. A plane containing these three points can be modeled by the equation $ax + by + cz = 1$, provided the plane does not pass through the origin.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Substitute the coordinates of the three points into the plane equation to formulate a system of three linear equations in terms of $a$, $b$, and $c$. Express this system as a matrix equation $M \mathbf{v} = \mathbf{u}$, and find $\det(M)$ in terms of $k$.
+    \item Determine the value of $k$ for which the matrix $M$ is singular. Explain why the matrix equation $M \mathbf{v} = \mathbf{u}$ has no solution for this value of $k$, and what this implies about the geometric position of the plane containing $A$, $B$, and $C_k$ relative to the origin.
+    \item Let $k = 2$, corresponding to the specific point $C_2(3, -1, 2)$. Solve the system using Gaussian elimination (row reduction) to find the values of $a, b,$ and $c$, and hence state the unique equation of the plane in the form $ax + by + cz + d = 0$ with integer coefficients.
+    \item For the singular case where $k = 18$, the plane must pass through the origin. Set up a new homogeneous matrix equation for the plane $a'x + b'y + c'z = 0$, and find the specific Cartesian equation of this plane by letting $a' = 5$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Replace $x, y,$ and $z$ with the coordinates of each point to create three distinct equations. Extract the coefficients of $a, b,$ and $c$ to form the $3 \times 3$ matrix $M$. Calculate the determinant by expanding across the top row.
+    \item \textbf{Part (b):} A matrix is singular when its determinant equals zero. If setting $ax+by+cz=1$ yields a singular matrix and an inconsistent system, it means no such plane exists that misses the origin. 
+    \item \textbf{Part (c):} Form the augmented matrix $[M | \mathbf{u}]$ and use elementary row operations to reach upper triangular form. Back-substitute to find $c, b,$ and $a$. Multiply the entire plane equation by the lowest common denominator to remove fractions.
+    \item \textbf{Part (d):} A plane through the origin equates to $0$ rather than $1$. Substitute the points $A$, $B$, and $C_{18}$ to form a homogeneous system $M\mathbf{v} = \mathbf{0}$. Use the first two equations to express $b'$ and $c'$ strictly in terms of $a'$, then substitute $a'=5$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+Substituting the points into $ax + by + cz = 1$: \\
+$A(1, 2, -1) \implies a + 2b - c = 1$ \\
+$B(2, 3, 1) \implies 2a + 3b + c = 1$ \\
+$C_k(3, -1, k) \implies 3a - b + kc = 1$ \\
+Matrix equation: $\begin{bmatrix} 1 & 2 & -1 \\ 2 & 3 & 1 \\ 3 & -1 & k \end{bmatrix} \begin{bmatrix} a \\ b \\ c \end{bmatrix} = \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}$. \\
+$\det(M) = 1(3k - (-1)) - 2(2k - 3) + (-1)(-2 - 9) = 3k + 1 - 4k + 6 + 11 = 18 - k$.
+
+\medskip
+\textbf{(b)} \\
+Matrix $M$ is singular when $\det(M) = 0 \implies 18 - k = 0 \implies k = 18$. \\
+When $k=18$, the system is inconsistent (parallel planes in the row space), meaning no unique solution exists for $ax + by + cz = 1$. Geometrically, this implies the plane containing $A, B$, and $C_{18}$ must pass exactly through the origin, meaning its true equation is of the form $ax + by + cz = 0$, not $1$.
+
+\medskip
+\textbf{(c)} \\
+Let $k = 2$. The augmented matrix is: \\
+$\left[\begin{array}{ccc|c} 1 & 2 & -1 & 1 \\ 2 & 3 & 1 & 1 \\ 3 & -1 & 2 & 1 \end{array}\right]$ \\
+$R_2 \to R_2 - 2R_1 \implies \left[\begin{array}{ccc|c} 1 & 2 & -1 & 1 \\ 0 & -1 & 3 & -1 \\ 3 & -1 & 2 & 1 \end{array}\right]$ \\
+$R_3 \to R_3 - 3R_1 \implies \left[\begin{array}{ccc|c} 1 & 2 & -1 & 1 \\ 0 & -1 & 3 & -1 \\ 0 & -7 & 5 & -2 \end{array}\right]$ \\
+$R_3 \to R_3 - 7R_2 \implies \left[\begin{array}{ccc|c} 1 & 2 & -1 & 1 \\ 0 & -1 & 3 & -1 \\ 0 & 0 & -16 & 5 \end{array}\right]$ \\
+From $R_3$: $-16c = 5 \implies c = -\frac{5}{16}$. \\
+From $R_2$: $-b + 3(-\frac{5}{16}) = -1 \implies b = \frac{1}{16}$. \\
+From $R_1$: $a + 2(\frac{1}{16}) - (-\frac{5}{16}) = 1 \implies a = \frac{9}{16}$. \\
+The equation is $\frac{9}{16}x + \frac{1}{16}y - \frac{5}{16}z = 1$, which simplifies to $9x + y - 5z - 16 = 0$.
+
+\medskip
+\textbf{(d)} \\
+For $k = 18$, the homogeneous system is: \\
+(1) $a' + 2b' - c' = 0$ \\
+(2) $2a' + 3b' + c' = 0$ \\
+(3) $3a' - b' + 18c' = 0$ \\
+Add (1) and (2) to eliminate $c'$: $3a' + 5b' = 0 \implies b' = -\frac{3}{5}a'$. \\
+Let $a' = 5 \implies b' = -3$. \\
+Substitute into (1): $5 + 2(-3) - c' = 0 \implies -1 - c' = 0 \implies c' = -1$. \\
+The equation of the plane is $5x - 3y - z = 0$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Non-Homogeneous vs Homogeneous Form:} Setting a plane's constant $d$ to a non-zero value allows for a quick $3 \times 3$ matrix setup, but it operates on the assumption that the plane does not cross the origin.
+\item \textbf{Geometric Meaning of Singularity:} If the resulting matrix determinant is zero, it algebraically signals that the initial assumption (the plane avoids the origin) is false for that specific set of points.
+\item \textbf{Gaussian Elimination:} Row reduction is a powerful tool for solving $3 \times 3$ systems without needing to calculate cumbersome matrix inverses or adjugates manually.
+\end{takeaways}

@@ -1,0 +1,105 @@
+\begin{problem}[Matrix Properties and Transformations]
+Consider a general $2 \times 2$ matrix $A = \begin{bmatrix} p & q \\ r & s \end{bmatrix}$ and its associated adjugate matrix $A^* = \begin{bmatrix} s & -q \\ -r & p \end{bmatrix}$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Evaluate the matrix product $A A^*$ and express the result in the form $kI$, where $I$ is the $2 \times 2$ identity matrix and $k$ is a scalar expressed in terms of $p, q, r,$ and $s$.
+    \item Given that $k \neq 0$, use your result from part (a) to algebraically deduce the standard expression for the inverse matrix, $A^{-1}$.
+    \item Evaluate the reverse product $A^* A$ and hence show that for this specific pair of matrices, multiplication is commutative.
+    \item A linear transformation in the plane is represented by the matrix $M = \begin{bmatrix} 2x & 3 \\ 8 & x \end{bmatrix}$. Using the concept of $k$ from part (a), determine the exact possible values of $x$ for which this transformation cannot be reversed (i.e., the matrix is singular).
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Perform standard row-by-column matrix multiplication. Expand the terms, simplify the diagonals, and factor out any common algebraic expressions to reveal the identity matrix.
+    \item \textbf{Part (b):} Recall that the definition of an inverse matrix is $A A^{-1} = I$. Take your equation from part (a), $A A^* = kI$, and manipulate it algebraically to isolate $I$ on one side of the equation.
+    \item \textbf{Part (c):} Multiply the matrices again, but this time with $A^*$ on the left and $A$ on the right. Compare the resulting matrix to the one you found in part (a).
+    \item \textbf{Part (d):} A matrix transformation does not have an inverse when its associated scalar $k$ (the determinant) is equal to zero. Set up an equation for $k = 0$ using the elements of matrix $M$ and solve for $x$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$A A^* = \begin{bmatrix} p & q \\ r & s \end{bmatrix} \begin{bmatrix} s & -q \\ -r & p \end{bmatrix} = \begin{bmatrix} ps-qr & -pq+qp \\ rs-sr & -rq+sp \end{bmatrix} = \begin{bmatrix} ps-qr & 0 \\ 0 & ps-qr \end{bmatrix}$ \\
+Factoring out the common term: $A A^* = (ps-qr)\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = (ps-qr)I$. \\
+Therefore, $k = ps - qr$.
+
+\medskip
+\textbf{(b)} \\
+From part (a), we have $A A^* = (ps-qr)I$. \\
+Assuming $ps-qr \neq 0$, we can divide both sides by this scalar: \\
+$A \left( \frac{1}{ps-qr} A^* \right) = I$ \\
+Since $A A^{-1} = I$, it follows that $A^{-1} = \frac{1}{ps-qr} \begin{bmatrix} s & -q \\ -r & p \end{bmatrix}$.
+
+\medskip
+\textbf{(c)} \\
+$A^* A = \begin{bmatrix} s & -q \\ -r & p \end{bmatrix} \begin{bmatrix} p & q \\ r & s \end{bmatrix} = \begin{bmatrix} sp-qr & sq-qs \\ -rp+pr & -rq+ps \end{bmatrix} = \begin{bmatrix} ps-qr & 0 \\ 0 & ps-qr \end{bmatrix} = (ps-qr)I$ \\
+Since $A A^* = (ps-qr)I$ and $A^* A = (ps-qr)I$, we have shown that $A A^* = A^* A$. Thus, multiplication of a matrix by its adjugate is commutative.
+
+\medskip
+\textbf{(d)} \\
+For the transformation to have no inverse, $k = ps - qr = 0$. \\
+For matrix $M$, $p = 2x$, $q = 3$, $r = 8$, and $s = x$. \\
+$k = (2x)(x) - (3)(8) = 2x^2 - 24$ \\
+Setting $k = 0$: $2x^2 - 24 = 0 \implies x^2 = 12 \implies x = \pm\sqrt{12} = \pm2\sqrt{3}$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Determinant:} The scalar value $k = ps - qr$ derived in part (a) is the determinant of a $2 \times 2$ matrix. It is the fundamental factor that dictates whether a matrix has an inverse.
+\item \textbf{Commutativity of Inverses:} While general matrix multiplication is strictly non-commutative ($AB \neq BA$), a matrix and its adjugate (or inverse) are a special exception where multiplication order does not change the result.
+\item \textbf{Singular Matrices:} Matrices with a determinant of zero are called singular. Geometrically, these matrices represent transformations that collapse 2D space into a 1D line or a point, which is why the mapping cannot be algebraically reversed.
+\end{takeaways}
+
+
+\begin{problem}[Matrix Algebra and Commutativity]
+Consider general $2 \times 2$ matrices $A$ and $B$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item By expanding the product, show that $(A+B)^2 = A^2 + AB + BA + B^2$.
+    \item Hence, state the necessary mathematical condition for matrices $A$ and $B$ such that the standard binomial expansion $(A+B)^2 = A^2 + 2AB + B^2$ is valid.
+    \item Let $A = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$ representing a reflection in the x-axis, and $B = \begin{bmatrix} k & 0 \\ 0 & k \end{bmatrix}$ representing a dilation by scale factor $k$. Verify algebraically that for these specific matrices, $(A+B)^2 = A^2 + 2AB + B^2$.
+    \item Let $C = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ and $D = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}$. Evaluate $(C+D)^2$ and $C^2 + 2CD + D^2$, demonstrating they are not equal, and explain why this algebraic difference occurs in terms of matrix multiplication properties.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Write $(A+B)^2$ as $(A+B)(A+B)$ and apply the distributive law carefully, ensuring you maintain the exact left-to-right order of matrix multiplication.
+    \item \textbf{Part (b):} Compare your expanded result from part (a) to the target expression $A^2 + 2AB + B^2$. What must the middle terms $AB + BA$ simplify to?
+    \item \textbf{Part (c):} Calculate the individual products $AB$ and $BA$ first. Check if they satisfy the condition you identified in part (b).
+    \item \textbf{Part (d):} For the first expression, perform the matrix addition $C+D$ before squaring the result. For the second expression, calculate $C^2$, $D^2$, and $CD$ separately before summing them.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$(A+B)^2 = (A+B)(A+B) = A(A+B) + B(A+B) = A^2 + AB + BA + B^2$.
+
+\medskip
+\textbf{(b)} \\
+For $A^2 + AB + BA + B^2$ to equal $A^2 + 2AB + B^2$, we must have: \\
+$AB + BA = 2AB \implies BA = AB$. \\
+The necessary condition is that matrices $A$ and $B$ must commute.
+
+\medskip
+\textbf{(c)} \\
+$AB = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} k & 0 \\ 0 & k \end{bmatrix} = \begin{bmatrix} k & 0 \\ 0 & -k \end{bmatrix}$ \\
+$BA = \begin{bmatrix} k & 0 \\ 0 & k \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} = \begin{bmatrix} k & 0 \\ 0 & -k \end{bmatrix}$ \\
+Since $AB = BA$, the matrices commute, and therefore the binomial expansion $(A+B)^2 = A^2 + 2AB + B^2$ holds valid for this specific pair.
+
+\medskip
+\textbf{(d)} \\
+$C+D = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} + \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 \\ 2 & 0 \end{bmatrix}$. \\
+$(C+D)^2 = \begin{bmatrix} 0 & 0 \\ 2 & 0 \end{bmatrix} \begin{bmatrix} 0 & 0 \\ 2 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}$. \\
+Next, evaluating the components of the expanded form: \\
+$C^2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = I$ and $D^2 = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix} = -I$. \\
+$CD = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$. \\
+$C^2 + 2CD + D^2 = I + 2\begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} - I = \begin{bmatrix} 2 & 0 \\ 0 & -2 \end{bmatrix}$. \\
+Since $\begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix} \neq \begin{bmatrix} 2 & 0 \\ 0 & -2 \end{bmatrix}$, the expressions are unequal. This occurs because general matrix multiplication is non-commutative ($CD \neq DC$), preventing the cross-terms from simplifying to $2CD$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Matrix Non-Commutativity:} The most critical difference between standard real number algebra and matrix algebra is that matrix multiplication is generally non-commutative ($AB \neq BA$).
+\item \textbf{Binomial Expansion:} Standard polynomial identities like $(x+y)^2 = x^2+2xy+y^2$ cannot be blindly applied to matrices unless the specific matrices are proven to commute.
+\item \textbf{Geometric Connection:} The algebraic failure of commutativity mirrors the geometric reality of transformations. For instance, applying a reflection then a rotation often results in a different final orientation compared to applying the rotation then the reflection.
+\end{takeaways}

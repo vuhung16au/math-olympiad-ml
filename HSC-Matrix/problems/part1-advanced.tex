@@ -1,0 +1,171 @@
+\begin{problem}[Matrix Inverses and Matrix Equations]
+Let $A$ and $B$ be $2 \times 2$ matrices defined as $A = \begin{bmatrix} k & 2 \\ -1 & 1 \end{bmatrix}$ and $B = \begin{bmatrix} 1 & -1 \\ 2 & 3 \end{bmatrix}$, where $k$ is a real constant.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Determine the determinant of $A$ in terms of $k$, and hence state the value of $k$ for which matrix $A$ is singular.
+    \item Let $k = 3$. Determine the inverse matrices $A^{-1}$ and $B^{-1}$.
+    \item For $k = 3$, calculate the matrix product $AB$ and hence determine $(AB)^{-1}$.
+    \item Evaluate the product $B^{-1}A^{-1}$ to verify the property $(AB)^{-1} = B^{-1}A^{-1}$. Hence, use this property to make the matrix $X$ the subject of the matrix equation $ABX = C$, where $C$ is a $2 \times 2$ matrix.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} The determinant of a $2 \times 2$ matrix $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is $ad - bc$. A matrix is singular (has no inverse) when its determinant equals zero.
+    \item \textbf{Part (b):} Use the formula for the inverse of a $2 \times 2$ matrix: $\frac{1}{\det(M)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$.
+    \item \textbf{Part (c):} Multiply matrix $A$ by matrix $B$ using the standard row-by-column method. Then find the inverse of the resulting $2 \times 2$ matrix.
+    \item \textbf{Part (d):} Multiply $B^{-1}$ (on the left) by $A^{-1}$ (on the right) and factor out the scalar multipliers. To solve $ABX = C$, remember that you must multiply both sides of the equation by the inverse of $AB$ on the left.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$\det(A) = (k)(1) - (2)(-1) = k + 2$. \\
+For matrix $A$ to be singular, $\det(A) = 0$. Therefore, $k = -2$.
+
+\medskip
+\textbf{(b)} \\
+Given $k = 3$, $A = \begin{bmatrix} 3 & 2 \\ -1 & 1 \end{bmatrix}$. \\
+$\det(A) = 3 + 2 = 5$. Thus, $A^{-1} = \frac{1}{5}\begin{bmatrix} 1 & -2 \\ 1 & 3 \end{bmatrix}$. \\
+$\det(B) = (1)(3) - (-1)(2) = 3 + 2 = 5$. Thus, $B^{-1} = \frac{1}{5}\begin{bmatrix} 3 & 1 \\ -2 & 1 \end{bmatrix}$.
+
+\medskip
+\textbf{(c)} \\
+$AB = \begin{bmatrix} 3 & 2 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} 1 & -1 \\ 2 & 3 \end{bmatrix} = \begin{bmatrix} 3(1)+2(2) & 3(-1)+2(3) \\ -1(1)+1(2) & -1(-1)+1(3) \end{bmatrix} = \begin{bmatrix} 7 & 3 \\ 1 & 4 \end{bmatrix}$. \\
+$\det(AB) = (7)(4) - (3)(1) = 28 - 3 = 25$. \\
+$(AB)^{-1} = \frac{1}{25}\begin{bmatrix} 4 & -3 \\ -1 & 7 \end{bmatrix}$.
+
+\medskip
+\textbf{(d)} \\
+$B^{-1}A^{-1} = \left( \frac{1}{5}\begin{bmatrix} 3 & 1 \\ -2 & 1 \end{bmatrix} \right) \left( \frac{1}{5}\begin{bmatrix} 1 & -2 \\ 1 & 3 \end{bmatrix} \right) = \frac{1}{25} \begin{bmatrix} 3(1)+1(1) & 3(-2)+1(3) \\ -2(1)+1(1) & -2(-2)+1(3) \end{bmatrix} = \frac{1}{25}\begin{bmatrix} 4 & -3 \\ -1 & 7 \end{bmatrix}$. \\
+This verifies that $(AB)^{-1} = B^{-1}A^{-1}$. \\
+To solve $ABX = C$: \\
+$(AB)^{-1}(AB)X = (AB)^{-1}C$ \\
+$IX = (AB)^{-1}C$ \\
+$X = B^{-1}A^{-1}C$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{The "Socks and Shoes" Property:} The inverse of a matrix product reverses the order of the original matrices: $(AB)^{-1} = B^{-1}A^{-1}$.
+\item \textbf{Matrix Algebra in Equations:} When isolating a matrix variable (like $X$ in $ABX=C$), you must respect the non-commutative nature of matrices by multiplying by the inverse on the correct side (in this case, pre-multiplying on the left).
+\item \textbf{Determinant of a Product:} Notice that $\det(AB) = 25$, while $\det(A) = 5$ and $\det(B) = 5$. This verifies another key property: $\det(AB) = \det(A) \times \det(B)$.
+\end{takeaways}
+
+
+\begin{problem}[Matrix Inverses and the Zero Matrix]
+Let $A, B, C,$ and $D$ be $2 \times 2$ matrices, where $O$ is the zero matrix and $I$ is the identity matrix.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Assume $A$ is an invertible matrix and that $AB = O$. Prove algebraically that $B$ must be the zero matrix.
+    \item Suppose instead that $C$ and $D$ are both strictly non-zero matrices, yet their product is the zero matrix ($CD = O$). By referencing your proof in part (a), deduce whether $C$ can be an invertible matrix. Support your answer with logical reasoning.
+    \item A matrix $M$ is defined as being self-inverse if $M^{-1} = M$. By showing this implies $M^2 = I$, determine the algebraic condition on real numbers $a, b,$ and $c$ such that $M = \begin{bmatrix} a & b \\ c & -a \end{bmatrix}$ is a self-inverse matrix.
+    \item Using your condition from part (c), construct a specific matrix $M$ where $a = 3$, and $b$ and $c$ are integers. Verify that your chosen matrix is self-inverse by explicitly evaluating $M^2$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Start with the given equation $AB = O$. Since $A$ is invertible, you are permitted to pre-multiply both sides of the equation by $A^{-1}$. What does $A^{-1}A$ simplify to?
+    \item \textbf{Part (b):} Use a proof by contradiction. What would happen if $C$ \textit{was} invertible? Apply the exact same logic established in part (a) and compare the result to the condition that $D$ is a non-zero matrix.
+    \item \textbf{Part (c):} Multiply both sides of $M^{-1} = M$ by $M$. Then, square the given matrix $M = \begin{bmatrix} a & b \\ c & -a \end{bmatrix}$ using standard row-by-column multiplication and equate the resulting elements to the corresponding elements of the identity matrix, $I$.
+    \item \textbf{Part (d):} Substitute $a=3$ into your condition from part (c). Find two integers $b$ and $c$ that multiply together to satisfy the equation, construct the matrix, and manually multiply $M \times M$ to check it yields $I$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+Given $AB = O$ and $A$ is invertible, $A^{-1}$ exists. Pre-multiplying both sides by $A^{-1}$: \\
+$A^{-1}(AB) = A^{-1}O$ \\
+$(A^{-1}A)B = O$ \\
+$IB = O \implies B = O$.
+
+\medskip
+\textbf{(b)} \\
+Assume for the sake of contradiction that $C$ is invertible. \\
+Then, given $CD = O$, we could pre-multiply by $C^{-1}$ to get $C^{-1}(CD) = C^{-1}O \implies D = O$. \\
+However, the problem states that $D$ is a non-zero matrix. This is a contradiction. Therefore, the assumption that $C$ is invertible must be false; $C$ must be a singular matrix.
+
+\medskip
+\textbf{(c)} \\
+If $M^{-1} = M$, then multiplying both sides by $M$ gives $MM^{-1} = MM \implies I = M^2$. \\
+Evaluating $M^2$: \\
+$M^2 = \begin{bmatrix} a & b \\ c & -a \end{bmatrix} \begin{bmatrix} a & b \\ c & -a \end{bmatrix} = \begin{bmatrix} a^2+bc & ab-ab \\ ac-ac & bc+(-a)^2 \end{bmatrix} = \begin{bmatrix} a^2+bc & 0 \\ 0 & a^2+bc \end{bmatrix}$. \\
+For $M^2 = I = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, we must have the condition: $a^2 + bc = 1$.
+
+\medskip
+\textbf{(d)} \\
+Let $a=3$. From part (c), $3^2 + bc = 1 \implies 9 + bc = 1 \implies bc = -8$. \\
+Choose integers $b = 2$ and $c = -4$ (other integer pairs like $4, -2$ are also valid). \\
+$M = \begin{bmatrix} 3 & 2 \\ -4 & -3 \end{bmatrix}$. \\
+Verification: \\
+$M^2 = \begin{bmatrix} 3 & 2 \\ -4 & -3 \end{bmatrix} \begin{bmatrix} 3 & 2 \\ -4 & -3 \end{bmatrix} = \begin{bmatrix} 9-8 & 6-6 \\ -12+12 & -8+9 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = I$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Zero Product Property Failure:} In real number algebra, $xy=0$ implies $x=0$ or $y=0$. In matrix algebra, $CD=O$ does \textit{not} necessarily mean $C=O$ or $D=O$. Non-zero matrices can multiply to give the zero matrix.
+\item \textbf{Singularity is Key:} For two non-zero matrices to multiply to the zero matrix, they must both be singular (determinant of zero). If either were invertible, the other would be forced to be the zero matrix.
+\item \textbf{Self-Inverse Matrices:} Matrices where $M^{-1} = M$ exist in infinitely many non-trivial forms beyond just the identity matrix. Geometrically, self-inverse (or involutory) matrices often represent reflections, where applying the transformation twice returns all coordinates to their original positions.
+\end{takeaways}
+
+
+\begin{problem}[Matrix Methods for Simultaneous Equations]
+Consider the following system of simultaneous linear equations with real parameter $k$:
+\begin{align*}
+(k - 1)x + 3y &= k + 2 \\
+2x + (k - 2)y &= 4
+\end{align*}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Express this system as a matrix equation of the form $AX = B$, and find a simplified quadratic expression for the determinant of the coefficient matrix $A$.
+    \item Determine the values of $k$ for which the matrix $A$ is singular (i.e., does not have an inverse).
+    \item For each value of $k$ found in part (b), determine whether the system has no solutions or infinitely many solutions. Provide a brief geometric justification for your answers.
+    \item Assuming the matrix $A$ is invertible, use the matrix inverse method to find the unique solution for $x$ and $y$ in terms of $k$, expressing your final answers in their simplest rational form.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} The coefficient matrix $A$ contains the multipliers for $x$ and $y$. The determinant of a $2 \times 2$ matrix $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is calculated as $ad - bc$.
+    \item \textbf{Part (b):} A matrix is singular when its determinant is exactly zero. Set your expression from part (a) to zero and solve the resulting quadratic equation for $k$.
+    \item \textbf{Part (c):} Substitute your $k$ values back into the original system of equations. If the two equations represent distinct parallel lines (e.g., yielding a false statement like $0=5$), there is no solution. If they represent the exact same line, there are infinitely many solutions.
+    \item \textbf{Part (d):} Use the inverse matrix formula $X = A^{-1}B = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix} B$. After multiplying the matrices, factor the resulting numerators to see if they cancel with the determinant in the denominator.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+Matrix equation: 
+$\begin{bmatrix} k-1 & 3 \\ 2 & k-2 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} k+2 \\ 4 \end{bmatrix}$ \\
+$\det(A) = (k-1)(k-2) - (3)(2) = k^2 - 3k + 2 - 6 = k^2 - 3k - 4$. \\
+Factored form: $\det(A) = (k-4)(k+1)$.
+
+\medskip
+\textbf{(b)} \\
+Matrix $A$ is singular when $\det(A) = 0$. \\
+$k^2 - 3k - 4 = 0 \implies (k-4)(k+1) = 0$. \\
+Therefore, $A$ is singular when $k = 4$ or $k = -1$.
+
+\medskip
+\textbf{(c)} \\
+\textbf{Case $k = 4$:} \\
+Equations become $3x + 3y = 6$ (which simplifies to $x+y=2$) and $2x + 2y = 4$ (which simplifies to $x+y=2$). \\
+Because the equations represent coincident (identical) lines, there are \textbf{infinitely many solutions}. \\
+\textbf{Case $k = -1$:} \\
+Equations become $-2x + 3y = 1$ and $2x - 3y = 4$. \\
+Adding the two equations yields $0 = 5$, which is mathematically inconsistent. Because the equations represent distinct parallel lines, there are \textbf{no solutions}.
+
+\medskip
+\textbf{(d)} \\
+For $k \neq 4$ and $k \neq -1$, $A$ is invertible. \\
+$A^{-1} = \frac{1}{(k-4)(k+1)} \begin{bmatrix} k-2 & -3 \\ -2 & k-1 \end{bmatrix}$ \\
+$X = \frac{1}{(k-4)(k+1)} \begin{bmatrix} k-2 & -3 \\ -2 & k-1 \end{bmatrix} \begin{bmatrix} k+2 \\ 4 \end{bmatrix}$ \\
+$x = \frac{(k-2)(k+2) - 12}{(k-4)(k+1)} = \frac{k^2 - 4 - 12}{(k-4)(k+1)} = \frac{k^2 - 16}{(k-4)(k+1)} = \frac{(k-4)(k+4)}{(k-4)(k+1)} = \frac{k+4}{k+1}$ \\
+$y = \frac{-2(k+2) + 4(k-1)}{(k-4)(k+1)} = \frac{-2k - 4 + 4k - 4}{(k-4)(k+1)} = \frac{2k - 8}{(k-4)(k+1)} = \frac{2(k-4)}{(k-4)(k+1)} = \frac{2}{k+1}$ \\
+Unique solution: $x = \frac{k+4}{k+1}$ and $y = \frac{2}{k+1}$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Determinant as a Geometric Indicator:} Just as the discriminant reveals the nature of roots in a quadratic, the determinant of a coefficient matrix dictates the geometry of linear systems. A non-zero determinant guarantees intersecting lines (one unique solution).
+\item \textbf{Interpreting Singularity:} A singular matrix ($\det = 0$) means the matrix transformation collapses 2D space. For a system of equations, this means the lines share the exact same gradient, resulting in either parallel lines (no intersection) or coincident lines (infinite intersections).
+\item \textbf{Algebraic Simplification:} When solving parametrically with the matrix inverse method, finding the solution often involves polynomial division or factoring. The non-zero roots of the determinant will frequently appear as cancellable factors in the numerators of your $x$ and $y$ expressions.
+\end{takeaways}
