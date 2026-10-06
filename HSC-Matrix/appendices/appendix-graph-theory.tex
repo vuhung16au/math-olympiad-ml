@@ -1,0 +1,101 @@
+\subsection{Matrices and Graph Theory}
+
+\begin{remarkbox}[title={\bfseries Enrichment Material}]
+The topics in this appendix go \textbf{beyond} the Queensland (QCAA) Specialist Mathematics syllabus. They are included to give curious students a preview of the linear algebra they will meet in first- and second-year university courses in mathematics, engineering, computer science, data science, and AI. None of this material is examinable in QLD Year~12 assessments.
+\end{remarkbox}
+
+This section connects two areas of mathematics: \textbf{matrices} and \textbf{graph theory}. A graph represents relationships between objects, while a matrix provides a compact numerical way to store and analyse those relationships.
+
+This connection is widely used in computer science, transport networks, social networks and web search.
+
+\subsubsection*{Graphs}
+
+A \textbf{graph} consists of:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{vertices} (or nodes): the objects;
+    \item \textbf{edges}: connections between pairs of vertices.
+\end{itemize}
+
+For example, suppose four railway stations $A, B, C, D$ are connected as follows:
+\[ A-B, \qquad A-C, \qquad B-C, \qquad C-D. \]
+We can think of the vertices as stations and the edges as direct railway connections.
+
+\subsubsection*{The Adjacency Matrix}
+
+A graph can be represented by an \textbf{adjacency matrix}.
+
+Let
+\[
+M_{ij} =
+\begin{cases}
+1, & \text{if vertices } i \text{ and } j \text{ are connected}, \\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+For our railway network,
+\[
+M = 
+\begin{bmatrix}
+0 & 1 & 1 & 0 \\
+1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{bmatrix}.
+\]
+
+The rows and columns correspond to $A, B, C, D$. 
+
+For example,
+\[ M_{AC} = 1 \]
+because $A$ and $C$ are directly connected, while
+\[ M_{AD} = 0 \]
+because there is no direct connection between $A$ and $D$.
+
+Because this graph is \textbf{undirected}, its adjacency matrix is symmetric:
+\[ M = M^T. \]
+
+\subsubsection*{Matrix Powers Reveal Routes}
+
+Here is the surprising connection.
+
+If $M$ is an adjacency matrix, then the entries of
+\[ M^2 = M \times M \]
+count the number of \textbf{two-edge walks} between vertices.
+
+For example, looking at the entry for $A$ to $D$:
+\[ (M^2)_{AD} = M_{AA}M_{AD} + M_{AB}M_{BD} + M_{AC}M_{CD} + M_{AD}M_{DD} \]
+Therefore,
+\[ (M^2)_{AD} = (0)(0) + (1)(0) + (1)(1) + (0)(0) = 1. \]
+
+So there is exactly one two-edge route from $A$ to $D$:
+\[ A \rightarrow C \rightarrow D. \]
+
+More generally,
+\[ \boxed{ (M^k)_{ij} = \text{number of walks of length } k \text{ from } i \text{ to } j. } \]
+
+This gives matrix multiplication a concrete interpretation: multiplying matrices can reveal connectivity in a network. In fact, this example directly reinforces why matrix multiplication is defined as a row-by-column dot product!
+
+\begin{remark}[Note]
+A \emph{walk} may revisit vertices or edges, so it is not necessarily a simple path.
+\end{remark}
+
+\subsubsection*{Why It Matters}
+
+This matrix--graph connection appears in many real systems:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Transport:} stations are vertices and routes are edges.
+    \item \textbf{Social networks:} people are vertices and friendships or follows are edges.
+    \item \textbf{Computer networks:} devices are vertices and communication links are edges.
+    \item \textbf{The Web:} webpages are vertices and hyperlinks form directed edges.
+\end{itemize}
+
+Large graphs can contain millions or billions of connections. Representing them using matrices allows computers to apply linear algebra to analyse these networks.
+
+\vspace{1em}
+\begin{center}
+\fbox{\textbf{Graph} $\longleftrightarrow$ \textbf{Adjacency Matrix} $\longleftrightarrow$ \textbf{Matrix Algebra}}
+\end{center}
+\vspace{0.5em}
+
+\textbf{Takeaway:} Graph theory describes \textbf{who is connected to whom}; matrices turn those connections into numbers that we can calculate with.
