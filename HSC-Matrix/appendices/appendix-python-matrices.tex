@@ -1,0 +1,55 @@
+\subsection{Using Computers for Matrix Calculations}
+
+\begin{remarkbox}[title={\bfseries Enrichment Material}]
+The topics in this appendix go \textbf{beyond} the Queensland (QCAA) Specialist Mathematics syllabus. They are included to show how maths and coding intersect, which is especially helpful for high school students studying Software Engineering. None of this material is examinable in QLD Year~12 assessments.
+\end{remarkbox}
+
+For small matrices, calculating determinants, inverses, and solving equations by hand is good practice. But in the real world, matrices can have thousands or millions of entries. For these numerical calculations, we always use computers as assistants. 
+
+While languages like C++ or Julia might be faster for extreme performance, \textbf{Python} is widely considered the best starting point because its code is highly readable and it has powerful mathematical libraries.
+
+\subsubsection*{Numerical Calculations with NumPy}
+
+\texttt{NumPy} is Python's standard library for numerical computing. It handles large arrays and matrices with high speed. It is ideal for calculating numerical answers quickly.
+
+Here is a simple example of how to define two matrices and multiply them using NumPy:
+
+\begin{verbatim}
+import numpy as np
+
+# Define two 2x2 matrices
+A = np.array([[1, 2], 
+              [3, 4]])
+B = np.array([[5, 6], 
+              [7, 8]])
+
+# Matrix multiplication (using the @ operator)
+C = A @ B
+
+print("Matrix C is:")
+print(C)
+\end{verbatim}
+
+\subsubsection*{Symbolic Algebra with SymPy}
+
+Sometimes we don't just want numerical answers; we want exact algebraic expressions (like keeping $\pi$ or $\sqrt{2}$ exact, or working with variables like $x$). For this, Python has a library called \texttt{SymPy} (Symbolic Python). 
+
+SymPy can do algebra exactly like you would on paper. Here is an example of finding the inverse of a matrix with exact fractions:
+
+\begin{verbatim}
+import sympy as sp
+
+# Define a matrix
+M = sp.Matrix([[4, 7], 
+               [2, 6]])
+
+# Find the exact inverse
+M_inv = M.inv()
+
+print("The exact inverse of M is:")
+sp.pprint(M_inv)
+\end{verbatim}
+
+\subsubsection*{Connecting Maths and Software}
+
+If you are interested in Software Engineering, writing code to automate your maths homework is one of the best ways to learn. By representing matrices in Python, you open the door to building physics engines for video games, writing data analysis scripts, and experimenting with machine learning algorithms.
