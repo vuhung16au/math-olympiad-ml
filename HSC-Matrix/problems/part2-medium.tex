@@ -121,3 +121,65 @@ Geometrically, this means the three planes intersect at a single, unique point, 
 \item \textbf{Singularity and Intersection:} If the determinant of a $3 \times 3$ coefficient matrix is zero, the planes form a dependent system. If consistent, they intersect along a common line (forming a sheaf of planes).
 \item \textbf{Parametric Conversions:} Expressing an infinite solution set algebraically using a parameter ($t$) maps directly to the Cartesian components of a 3D vector line equation.
 \end{takeaways}
+
+
+\begin{problem}[Leslie Matrices and Parametric Population Modeling]
+Based on standard Leslie matrix population modeling principles, consider a modified species of female insect with a maximum life span of 3 months. The population is divided into three age groups of 1 month each. 
+
+The Leslie matrix, $L$, for this population is given by:
+$$L = \begin{bmatrix} 0 & k & 4 \\ 0.5 & 0 & 0 \\ 0 & 0.2 & 0 \end{bmatrix}$$
+where $k$ represents the unknown fecundity (birth rate) of the second age group. Assume that each of the three age groups initially consists of 400 females, represented by the initial population state matrix $P_0$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Express the population column matrix after 1 month, $P_1$, strictly in terms of $k$.
+    \item Given that the total population of female insects after 1 month is exactly $2680$, algebraically determine the value of $k$.
+    \item Using your value of $k$ from part (b), an environmental pesticide is introduced that immediately halves the survival rates of all age groups moving forward. Construct the new Leslie matrix, $L_{\text{new}}$, and calculate the exact population matrix for month 2, $P_2$.
+    \item Evaluate the determinant of the original matrix $L$. Deduce whether the original population transition model is mathematically reversible (invertible), and algebraically explain why the value of the determinant is completely independent of the fecundity parameter $k$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} The initial population matrix is a $3 \times 1$ column vector containing the value 400 in each row. Multiply the $3 \times 3$ Leslie matrix by this vector using standard row-by-column multiplication.
+    \item \textbf{Part (b):} Sum the three row elements of your $P_1$ matrix to find an expression for the total population in terms of $k$. Set this expression equal to 2680 and solve the resulting linear equation.
+    \item \textbf{Part (c):} The survival rates are located on the sub-diagonal of the Leslie matrix (the $0.5$ and $0.2$). Divide these by 2 to create $L_{\text{new}}$. To find $P_2$, multiply $L_{\text{new}}$ by the numerical $P_1$ matrix you found in part (b).
+    \item \textbf{Part (d):} Calculate the determinant of the $3 \times 3$ matrix $L$ by expanding along the first column or the third row, as they contain multiple zeros. A matrix model is reversible (has an inverse) if its determinant is non-zero.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$P_0 = \begin{bmatrix} 400 \\ 400 \\ 400 \end{bmatrix}$ \\
+$P_1 = L P_0 = \begin{bmatrix} 0 & k & 4 \\ 0.5 & 0 & 0 \\ 0 & 0.2 & 0 \end{bmatrix} \begin{bmatrix} 400 \\ 400 \\ 400 \end{bmatrix}$ \\
+$P_1 = \begin{bmatrix} 0(400) + k(400) + 4(400) \\ 0.5(400) + 0 + 0 \\ 0 + 0.2(400) + 0 \end{bmatrix} = \begin{bmatrix} 400k + 1600 \\ 200 \\ 80 \end{bmatrix}$.
+
+\medskip
+\textbf{(b)} \\
+The total population is the sum of the elements in $P_1$: \\
+Total $= (400k + 1600) + 200 + 80 = 400k + 1880$. \\
+We are given that the total population is 2680. \\
+$400k + 1880 = 2680 \implies 400k = 800 \implies k = 2$.
+
+\medskip
+\textbf{(c)} \\
+With $k = 2$, $P_1 = \begin{bmatrix} 2400 \\ 200 \\ 80 \end{bmatrix}$. \\
+The pesticide halves the survival rates ($0.5 \to 0.25$ and $0.2 \to 0.1$). The fecundities in the top row remain unchanged. \\
+$L_{\text{new}} = \begin{bmatrix} 0 & 2 & 4 \\ 0.25 & 0 & 0 \\ 0 & 0.1 & 0 \end{bmatrix}$ \\
+$P_2 = L_{\text{new}} P_1 = \begin{bmatrix} 0 & 2 & 4 \\ 0.25 & 0 & 0 \\ 0 & 0.1 & 0 \end{bmatrix} \begin{bmatrix} 2400 \\ 200 \\ 80 \end{bmatrix}$ \\
+$P_2 = \begin{bmatrix} 0 + 2(200) + 4(80) \\ 0.25(2400) + 0 + 0 \\ 0 + 0.1(200) + 0 \end{bmatrix} = \begin{bmatrix} 400 + 320 \\ 600 \\ 20 \end{bmatrix} = \begin{bmatrix} 720 \\ 600 \\ 20 \end{bmatrix}$. \\
+After 2 months, there are 720 insects in age group 1, 600 in age group 2, and 20 in age group 3.
+
+\medskip
+\textbf{(d)} \\
+Expanding the determinant of $L$ along the first column: \\
+$\det(L) = 0 - 0.5 \det\begin{bmatrix} k & 4 \\ 0.2 & 0 \end{bmatrix} + 0$ \\
+$\det(L) = -0.5 \left( (k)(0) - (4)(0.2) \right) = -0.5(0 - 0.8) = 0.4$. \\
+Since $\det(L) = 0.4 \neq 0$, the matrix $L$ is invertible, meaning the population transition can be mathematically reversed to find past population states. \\
+The value of $k$ disappears during the determinant calculation because expanding the $2 \times 2$ minor matrix forces $k$ to be multiplied by $0$ (the bottom right element of the Leslie matrix). In a standard Leslie matrix, the determinant depends strictly on the product of the survival rates and the final age group's fecundity.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Parametric Modeling:} Using matrices to solve for unknown biological parameters (like fecundity $k$) demonstrates how models are calibrated using empirical field data (e.g., total population counts).
+\item \textbf{Dynamic Matrices:} Real-world matrix models are rarely static. Understanding how to manually manipulate specific elements (like survival rates) allows for the simulation of environmental impacts over discrete time steps.
+\item \textbf{Biological Meaning of Determinants:} The algebraic structure of a Leslie matrix dictates that its determinant is independent of intermediate birth rates. A singular Leslie matrix (determinant of zero) only occurs if an age group has a zero survival rate or if the oldest age group becomes sterile, mathematically erasing historical population data.
+\end{takeaways}
