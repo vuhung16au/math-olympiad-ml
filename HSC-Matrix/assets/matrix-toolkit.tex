@@ -1,0 +1,57 @@
+\section{Matrix Toolkit (Quick Reference)}
+
+This section provides a quick summary of the key matrix definitions, operations, and formulas used throughout this booklet.
+
+\subsection*{1. Notation and Dimensions}
+An $m \times n$ matrix $A$ has $m$ rows and $n$ columns.
+The entry in the $i$-th row and $j$-th column is denoted $a_{ij}$.
+\[
+A = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
+\]
+
+\subsection*{2. Matrix Arithmetic}
+\textbf{Addition/Subtraction (same dimensions only):}
+\[ A \pm B \text{ adds/subtracts corresponding elements.} \]
+\textbf{Scalar Multiplication:}
+\[ kA \text{ multiplies every element of } A \text{ by the scalar } k. \]
+
+\subsection*{3. Matrix Multiplication}
+For the product $AB$ to be defined, the number of columns in $A$ must equal the number of rows in $B$.
+\[
+A_{m\times n} B_{n\times p} \to (AB)_{m\times p}
+\]
+Note: Matrix multiplication is \textbf{not} commutative ($AB \neq BA$ in general).
+
+\subsection*{4. Transpose}
+The transpose $A^T$ is formed by swapping rows and columns.
+\[ (A^T)_{ij} = a_{ji} \]
+Properties: $(A^T)^T = A$, and $(AB)^T = B^T A^T$.
+
+\subsection*{5. Identity and Zero Matrices}
+\textbf{Identity Matrix $I$:} A square matrix with 1s on the main diagonal and 0s elsewhere.
+\[ IA = A \quad \text{and} \quad AI = A \]
+\textbf{Zero Matrix $O$:} A matrix where all entries are 0.
+\[ A + O = A \quad \text{and} \quad AO = O \]
+
+\subsection*{6. Determinant and Inverse ($2 \times 2$)}
+For a $2 \times 2$ matrix $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$:
+\begin{itemize}
+    \item \textbf{Determinant:} $\det(A) = |A| = ad - bc$
+    \item \textbf{Inverse:} If $\det(A) \neq 0$, the inverse exists:
+    \[
+    A^{-1} = \frac{1}{ad - bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+    \]
+\end{itemize}
+Properties: $A A^{-1} = A^{-1} A = I$, and $(AB)^{-1} = B^{-1} A^{-1}$.
+
+\subsection*{7. Solving Matrix Equations}
+To solve a linear system $AX = B$:
+\[
+AX = B \implies X = A^{-1} B \quad \text{(if } A^{-1} \text{ exists)}
+\]
+(Pre-multiply both sides by $A^{-1}$).
