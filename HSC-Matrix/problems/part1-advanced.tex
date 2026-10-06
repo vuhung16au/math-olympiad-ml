@@ -169,3 +169,70 @@ Unique solution: $x = \frac{k+4}{k+1}$ and $y = \frac{2}{k+1}$.
 \item \textbf{Interpreting Singularity:} A singular matrix ($\det = 0$) means the matrix transformation collapses 2D space. For a system of equations, this means the lines share the exact same gradient, resulting in either parallel lines (no intersection) or coincident lines (infinite intersections).
 \item \textbf{Algebraic Simplification:} When solving parametrically with the matrix inverse method, finding the solution often involves polynomial division or factoring. The non-zero roots of the determinant will frequently appear as cancellable factors in the numerators of your $x$ and $y$ expressions.
 \end{takeaways}
+
+
+\begin{problem}[Determinant Properties and Matrix Algebra]
+Let $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ and $B = \begin{bmatrix} p & q \\ r & s \end{bmatrix}$ be arbitrary $2 \times 2$ matrices.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Prove algebraically that $\det(AB) = \det(A)\det(B)$.
+    \item Using the result from part (a), prove that if a matrix $M$ is invertible, then $\det(M^{-1}) = \frac{1}{\det(M)}$.
+    \item Consider the matrices $C = \begin{bmatrix} k & 2 \\ 1 & -1 \end{bmatrix}$ and $D = \begin{bmatrix} 2 & 0 \\ -1 & k \end{bmatrix}$, where $k$ is a non-zero real constant. Using the determinant properties established above, determine the exact values of $k$ for which $\det(C^2 D^{-1}) = \frac{9}{2}$.
+    \item Using the larger value of $k$ found in part (c), calculate $\det(C+D)$ and explicitly show that $\det(C+D) \neq \det(C) + \det(D)$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Multiply the matrices $A$ and $B$ first using standard row-by-column multiplication. Then apply the $ad-bc$ determinant rule to the resulting matrix. Expand all terms and factor them to show the expression matches $(ad-bc)(ps-qr)$.
+    \item \textbf{Part (b):} Start with the fundamental definition of an inverse matrix: $M M^{-1} = I$. Apply the determinant operator to both sides of this equation.
+    \item \textbf{Part (c):} Apply the rules $\det(C^2) = (\det(C))^2$ and $\det(D^{-1}) = 1/\det(D)$. Form an algebraic equation purely in terms of $k$ and solve the resulting quadratic.
+    \item \textbf{Part (d):} Add the matrices $C$ and $D$ element-by-element first to find the matrix $(C+D)$, then find its determinant. Compare this final value to the sum of their individual determinants.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$AB = \begin{bmatrix} a & b \\ c & d \end{bmatrix} \begin{bmatrix} p & q \\ r & s \end{bmatrix} = \begin{bmatrix} ap+br & aq+bs \\ cp+dr & cq+ds \end{bmatrix}$. \\
+$\det(AB) = (ap+br)(cq+ds) - (aq+bs)(cp+dr)$ \\
+$\det(AB) = (apcq + apds + brcq + brds) - (aqcp + aqdr + bscp + bsdr)$ \\
+The terms $apcq$ and $bsdr$ cancel out: \\
+$\det(AB) = apds + brcq - aqdr - bscp$ \\
+Factoring by grouping: \\
+$\det(AB) = ad(ps-qr) - bc(ps-qr) = (ad-bc)(ps-qr)$ \\
+Since $\det(A) = ad-bc$ and $\det(B) = ps-qr$, we have proven $\det(AB) = \det(A)\det(B)$.
+
+\medskip
+\textbf{(b)} \\
+By definition, if $M$ is invertible, $M M^{-1} = I$. \\
+Taking the determinant of both sides: $\det(MM^{-1}) = \det(I)$. \\
+Using the property from part (a): $\det(M)\det(M^{-1}) = 1$. \\
+Because $M$ is invertible, $\det(M) \neq 0$. Thus, we can divide by $\det(M)$ to yield $\det(M^{-1}) = \frac{1}{\det(M)}$.
+
+\medskip
+\textbf{(c)} \\
+$\det(C) = (k)(-1) - (2)(1) = -k - 2$. \\
+$\det(D) = (2)(k) - (0)(-1) = 2k$. \\
+Using the properties: $\det(C^2 D^{-1}) = \det(C)^2 \times \det(D^{-1}) = \frac{\det(C)^2}{\det(D)}$. \\
+$\frac{(-k-2)^2}{2k} = \frac{9}{2} \implies \frac{k^2+4k+4}{2k} = \frac{9}{2}$ \\
+Cross-multiplying: $2(k^2+4k+4) = 18k \implies 2k^2 + 8k + 8 = 18k$ \\
+$2k^2 - 10k + 8 = 0 \implies k^2 - 5k + 4 = 0$. \\
+Factoring gives $(k-4)(k-1) = 0$, so $k = 4$ or $k = 1$.
+
+\medskip
+\textbf{(d)} \\
+Using the larger value $k = 4$: \\
+$C = \begin{bmatrix} 4 & 2 \\ 1 & -1 \end{bmatrix} \implies \det(C) = -4 - 2 = -6$. \\
+$D = \begin{bmatrix} 2 & 0 \\ -1 & 4 \end{bmatrix} \implies \det(D) = 8 - 0 = 8$. \\
+$\det(C) + \det(D) = -6 + 8 = 2$. \\
+Now, finding $C+D$: \\
+$C+D = \begin{bmatrix} 4+2 & 2+0 \\ 1-1 & -1+4 \end{bmatrix} = \begin{bmatrix} 6 & 2 \\ 0 & 3 \end{bmatrix}$. \\
+$\det(C+D) = (6)(3) - (2)(0) = 18$. \\
+Since $18 \neq 2$, we have shown that $\det(C+D) \neq \det(C) + \det(D)$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Multiplicative Nature of Determinants:} The determinant is a strictly multiplicative function. Matrix exponents and inverses can be evaluated directly through their determinants without calculating the resulting complex matrices first.
+\item \textbf{Non-Linearity of Determinants:} The determinant is \textit{not} a linear operator. $\det(A+B)$ is rarely equal to $\det(A) + \det(B)$.
+\item \textbf{Algebraic Proofs:} Performing brute-force algebraic expansions on $2 \times 2$ matrices (as in part a) is a foundational QCAA syllabus skill for proving matrix properties from first principles.
+\end{takeaways}

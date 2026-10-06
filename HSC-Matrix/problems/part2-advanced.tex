@@ -577,3 +577,69 @@ The equation of the plane is $5x - 3y - z = 0$.
 \item \textbf{Geometric Meaning of Singularity:} If the resulting matrix determinant is zero, it algebraically signals that the initial assumption (the plane avoids the origin) is false for that specific set of points.
 \item \textbf{Gaussian Elimination:} Row reduction is a powerful tool for solving $3 \times 3$ systems without needing to calculate cumbersome matrix inverses or adjugates manually.
 \end{takeaways}
+
+
+\begin{problem}[Matrix Polynomials and System Solutions]
+Let $A = \begin{bmatrix} 3 & -2 & -2 \\ 3 & -2 & -3 \\ 1 & -1 & 0 \end{bmatrix}$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Evaluate $A^2$ to show that $A$ is an involutory matrix (i.e., a matrix where $A^2 = I$).
+    \item Let $E = \frac{1}{2}(I + A)$. Using matrix algebra and your result from part (a), prove that $E$ is an idempotent matrix (i.e., $E^2 = E$).
+    \item Consider the matrix $M = I + kA$, where $k$ is a real constant. By expanding the algebraic product $M(I - kA)$, determine the exact values of $k$ for which the matrix $M$ does not have an inverse.
+    \item Let $k = 2$. Use your algebraic result from part (c) to determine $M^{-1}$, and hence solve the following system of linear equations:
+    \begin{align*}
+    7x - 4y - 4z &= 3 \\
+    6x - 3y - 6z &= -3 \\
+    2x - 2y + z &= 6
+    \end{align*}
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Multiply $A$ by itself using standard row-by-column multiplication. Verify that the main diagonal consists of $1$s and all other entries are $0$.
+    \item \textbf{Part (b):} Square the algebraic expression for $E$. Remember that scalar multiples can be factored out, and matrix multiplication distributes over addition. Substitute $A^2 = I$ when simplifying.
+    \item \textbf{Part (c):} Expand $(I + kA)(I - kA)$ as you would a difference of perfect squares, keeping in mind that $I$ commutes with any matrix. For $M$ to be singular, the scalar coefficient of $I$ in your resulting expression must equal zero.
+    \item \textbf{Part (d):} Notice that the coefficient matrix of the system is precisely $M$ when $k=2$. Calculate $M^{-1}$ by setting $k=2$ in the identity from part (c), then pre-multiply the constant column vector by $M^{-1}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+$A^2 = \begin{bmatrix} 3 & -2 & -2 \\ 3 & -2 & -3 \\ 1 & -1 & 0 \end{bmatrix} \begin{bmatrix} 3 & -2 & -2 \\ 3 & -2 & -3 \\ 1 & -1 & 0 \end{bmatrix}$ \\
+$A^2 = \begin{bmatrix} 9-6-2 & -6+4+2 & -6+6+0 \\ 9-6-3 & -6+4+3 & -6+6+0 \\ 3-3+0 & -2+2+0 & -2+3+0 \end{bmatrix} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = I$.
+
+\medskip
+\textbf{(b)} \\
+$E^2 = \left(\frac{1}{2}(I + A)\right)^2 = \frac{1}{4}(I + A)(I + A)$ \\
+$E^2 = \frac{1}{4}(I^2 + IA + AI + A^2)$. \\
+Since $I^2 = I$, $IA = AI = A$, and $A^2 = I$: \\
+$E^2 = \frac{1}{4}(I + A + A + I) = \frac{1}{4}(2I + 2A) = \frac{1}{2}(I + A) = E$.
+
+\medskip
+\textbf{(c)} \\
+$M(I - kA) = (I + kA)(I - kA) = I^2 - kIA + kAI - k^2 A^2$. \\
+Because $IA = AI = A$, the middle terms cancel: \\
+$M(I - kA) = I - k^2 A^2$. \\
+Substitute $A^2 = I$: \\
+$M(I - kA) = I - k^2 I = (1 - k^2)I$. \\
+Rearranging this gives $M \left[\frac{1}{1-k^2}(I-kA)\right] = I$. \\
+Matrix $M$ is singular (has no inverse) when the scalar divisor $1 - k^2 = 0$. \\
+Therefore, $M$ cannot have an inverse when $k = 1$ or $k = -1$.
+
+\medskip
+\textbf{(d)} \\
+Let $k = 2$. The system's coefficient matrix is $M = I + 2A = \begin{bmatrix} 7 & -4 & -4 \\ 6 & -3 & -6 \\ 2 & -2 & 1 \end{bmatrix}$. \\
+From (c), $M^{-1} = \frac{1}{1-2^2}(I - 2A) = -\frac{1}{3}(I - 2A)$. \\
+$I - 2A = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} - \begin{bmatrix} 6 & -4 & -4 \\ 6 & -4 & -6 \\ 2 & -2 & 0 \end{bmatrix} = \begin{bmatrix} -5 & 4 & 4 \\ -6 & 5 & 6 \\ -2 & 2 & 1 \end{bmatrix}$. \\
+$M^{-1} = -\frac{1}{3} \begin{bmatrix} -5 & 4 & 4 \\ -6 & 5 & 6 \\ -2 & 2 & 1 \end{bmatrix}$. \\
+$X = M^{-1}B = -\frac{1}{3} \begin{bmatrix} -5 & 4 & 4 \\ -6 & 5 & 6 \\ -2 & 2 & 1 \end{bmatrix} \begin{bmatrix} 3 \\ -3 \\ 6 \end{bmatrix}$ \\
+$X = -\frac{1}{3} \begin{bmatrix} -15 - 12 + 24 \\ -18 - 15 + 36 \\ -6 - 6 + 6 \end{bmatrix} = -\frac{1}{3} \begin{bmatrix} -3 \\ 3 \\ -6 \end{bmatrix} = \begin{bmatrix} 1 \\ -1 \\ 2 \end{bmatrix}$. \\
+Therefore, $x = 1$, $y = -1$, and $z = 2$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Abstract Matrix Algebra:} Abstract algebra simplifies complex computational problems. Establishing $A^2=I$ creates a generalized shortcut for inverting any matrix of the parametric form $I+kA$.
+\item \textbf{Polynomial Singularity Proofs:} The QCAA curriculum emphasizes proving invertibility using polynomial identities (like $(I+kA)(I-kA) = (1-k^2)I$) rather than relying exclusively on calculating massive $3 \times 3$ determinants.
+\item \textbf{Idempotent and Involutory Links:} Idempotent matrices ($E^2=E$, which geometrically represent projections) and involutory matrices ($A^2=I$, which geometrically represent reflections) are fundamentally linked via simple algebraic transformations like $E = \frac{1}{2}(I + A)$.
+\end{takeaways}

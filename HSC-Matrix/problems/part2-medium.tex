@@ -55,3 +55,69 @@ If $a = 0$, the curve is a straight line $y = -4x + 8$. Geometrically, this impl
 \item \textbf{Parametric Matrix Operations:} Treating unknowns as parameters (like $p$) within a matrix equation allows you to generalize solutions for an entire family of curves at once, rather than re-solving the system from scratch.
 \item \textbf{Geometric Limits:} Setting the leading coefficient of a polynomial to zero algebraically represents flattening the curve's curvature, visually forcing the defining points into a straight line.
 \end{takeaways}
+
+
+\begin{problem}[Matrix Systems and Intersecting Planes]
+Consider the following system of homogeneous linear equations, which represent three planes passing through the origin:
+\begin{align*}
+x - y - z &= 0 \\
+2x + 4y - z &= 0 \\
+3x + 3y + kz &= 0
+\end{align*}
+where $k$ is a real constant.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Write the system in the matrix form $AX = O$, where $O$ is the zero vector. Find the determinant of the coefficient matrix $A$ in terms of $k$, and determine the specific value of $k$ for which $A$ is a singular matrix.
+    \item For the singular value of $k$ found in part (a), show algebraically that the system is consistent. Let $y = -t$ and solve the simultaneous equations for $x$ and $z$ strictly in terms of the parameter $t$.
+    \item Hence, write the vector equation of the line of intersection of these planes in the form $\mathbf{r} = t(a\mathbf{i} + b\mathbf{j} + c\mathbf{k})$. Briefly explain how this line relates to the intersection of just the first two planes in the system.
+    \item If $k = 4$, determine the unique solution to the system algebraically, and explain what this result means about the geometric arrangement of the three planes.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} The coefficient matrix $A$ consists of the multipliers of $x, y,$ and $z$. Calculate the determinant of this $3 \times 3$ matrix by expanding across the top row. A matrix is singular when its determinant is exactly zero.
+    \item \textbf{Part (b):} Substitute the value of $k$ into the third equation. To prove consistency, look for a linear combination of the first two equations (e.g., adding them together) that perfectly matches the third equation. Then, substitute $y = -t$ into the first two equations and solve the resulting system for $x$ and $z$.
+    \item \textbf{Part (c):} Construct a position vector $\mathbf{r} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$ using your parametric expressions from part (b), and factor out $t$. 
+    \item \textbf{Part (d):} If $k = 4$, calculate $\det(A)$ to confirm it is non-zero (meaning the matrix is invertible). Since the constant vector is the zero vector, multiplying it by any inverse matrix will always yield the zero vector. 
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} \\
+The matrix equation is $\begin{bmatrix} 1 & -1 & -1 \\ 2 & 4 & -1 \\ 3 & 3 & k \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$. \\
+$\det(A) = 1(4k - (-3)) - (-1)(2k - (-3)) + (-1)(6 - 12)$ \\
+$\det(A) = (4k + 3) + (2k + 3) - (-6) = 6k + 12$. \\
+For $A$ to be singular, $\det(A) = 0 \implies 6k + 12 = 0 \implies k = -2$.
+
+\medskip
+\textbf{(b)} \\
+Substitute $k = -2$: the third equation is $3x + 3y - 2z = 0$. \\
+Adding Equation 1 and Equation 2 gives: \\
+$(x - y - z) + (2x + 4y - z) = 3x + 3y - 2z = 0$. \\
+Since this perfectly matches the third equation, the system is consistent (the third plane is dependent on the first two). \\
+Let $y = -t$. \\
+Equation 1 becomes: $x - (-t) - z = 0 \implies x - z = -t$. \\
+Equation 2 becomes: $2x + 4(-t) - z = 0 \implies 2x - z = 4t$. \\
+Subtracting Equation 1 from Equation 2: $(2x - z) - (x - z) = 4t - (-t) \implies x = 5t$. \\
+Substituting $x$ back into Equation 1: $5t - z = -t \implies z = 6t$. \\
+The solution is $x = 5t, y = -t, z = 6t$.
+
+\medskip
+\textbf{(c)} \\
+The vector equation is $\mathbf{r} = 5t\mathbf{i} - t\mathbf{j} + 6t\mathbf{k} = t(5\mathbf{i} - \mathbf{j} + 6\mathbf{k})$. \\
+Because the third plane is simply a linear combination of the first two, it contains their line of intersection. Therefore, this vector equation represents the straight line intersection of the planes $x - y - z = 0$ and $2x + 4y - z = 0$ through the origin.
+
+\medskip
+\textbf{(d)} \\
+If $k = 4$, $\det(A) = 6(4) + 12 = 36$. \\
+Since $\det(A) \neq 0$, matrix $A$ is invertible. \\
+$X = A^{-1}O = O \implies x = 0, y = 0, z = 0$. \\
+Geometrically, this means the three planes intersect at a single, unique point, which is the origin $(0,0,0)$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Homogeneous Systems:} A system where all constants are zero always has at least one solution (the trivial solution: the origin). Whether it has \textit{infinite} solutions depends on singularity.
+\item \textbf{Singularity and Intersection:} If the determinant of a $3 \times 3$ coefficient matrix is zero, the planes form a dependent system. If consistent, they intersect along a common line (forming a sheaf of planes).
+\item \textbf{Parametric Conversions:} Expressing an infinite solution set algebraically using a parameter ($t$) maps directly to the Cartesian components of a 3D vector line equation.
+\end{takeaways}
