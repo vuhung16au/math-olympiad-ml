@@ -643,3 +643,582 @@ Therefore, $x = 1$, $y = -1$, and $z = 2$.
 \item \textbf{Polynomial Singularity Proofs:} The QCAA curriculum emphasizes proving invertibility using polynomial identities (like $(I+kA)(I-kA) = (1-k^2)I$) rather than relying exclusively on calculating massive $3 \times 3$ determinants.
 \item \textbf{Idempotent and Involutory Links:} Idempotent matrices ($E^2=E$, which geometrically represent projections) and involutory matrices ($A^2=I$, which geometrically represent reflections) are fundamentally linked via simple algebraic transformations like $E = \frac{1}{2}(I + A)$.
 \end{takeaways}
+
+\begin{problem}[The Geometry of Mirrors]
+Matrices provide a powerful algebraic way to represent geometric transformations in 2D space. The general matrix representing a reflection across a line passing through the origin at an angle $\theta$ to the positive $x$-axis is given by:
+\[M_\theta = \begin{bmatrix} \cos 2\theta & \sin 2\theta \\ \sin 2\theta & -\cos 2\theta \end{bmatrix}\]
+
+\textbf{(i)} Let $A$ be the matrix representing a reflection in the $x$-axis, and $B$ be the matrix representing a reflection in the line $y = x$. Write down matrices $A$ and $B$. Then, calculate the matrix product $BA$ and describe the single geometric transformation this product represents.
+
+\textbf{(ii)} Find the determinant of the general reflection matrix $M_\theta$. Geometrically, what does the sign of this determinant tell us about the orientation of a shape after it undergoes a single reflection?
+
+\textbf{(iii)} Consider two distinct lines, $L_1$ and $L_2$, passing through the origin at angles $\alpha$ and $\beta$ respectively. A vector is first reflected across $L_1$ and then reflected across $L_2$. Using the general matrix $M_\theta$ and trigonometric compound angle identities, derive the single matrix $R$ that represents this combined transformation ($R = M_\beta M_\alpha$). 
+
+\textbf{(iv)} Based on your derived matrix in part (iii), state the general geometric relationship between the two intersecting lines of reflection and the resulting single transformation. \\
+\textit{Application:} In a 2D physics simulation, a graphic needs to be rotated counter-clockwise by exactly $150^\circ$. The engine is temporarily restricted and can \textit{only} perform reflections. If the first reflection must be across the line $y = \frac{1}{\sqrt{3}}x$, determine the exact equation of the line for the second reflection.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Remember that matrix multiplication is read from right to left: $BA$ means ``apply $A$ first, then $B$''. To find $A$ and $B$, look at where the basis vectors $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ end up, or use the $M_\theta$ formula with $\theta = 0^\circ$ and $\theta = 45^\circ$.
+    \item \textbf{Part (ii):} Use the Pythagorean trigonometric identity $\cos^2 x + \sin^2 x = 1$. Think about how a clock face looks in a mirror (standard vs. inverted orientation).
+    \item \textbf{Part (iii):} Write out the full $2 \times 2$ matrix multiplication carefully. You will need the identities for $\cos(A \pm B)$ and $\sin(A \pm B)$ to simplify the four resulting elements.
+    \item \textbf{Part (iv):} Compare your simplified matrix from part (iii) to the standard rotation matrix $\begin{bmatrix} \cos \phi & -\sin \phi \\ \sin \phi & \cos \phi \end{bmatrix}$. What is $\phi$ in terms of $\alpha$ and $\beta$? For the application, use $m = \tan \theta$ to find the angle of the first line.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+$A$ (reflection in x-axis, $\theta=0^\circ$): $A = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$ \\
+$B$ (reflection in $y=x$, $\theta=45^\circ$): $B = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ \\
+Product $BA = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}$. \\
+Geometrically, this is a \textbf{$90^\circ$ counter-clockwise rotation} about the origin.
+
+\medskip
+\textbf{(ii)} \\
+$\det(M_\theta) = (\cos 2\theta)(-\cos 2\theta) - (\sin 2\theta)(\sin 2\theta) = -(\cos^2 2\theta + \sin^2 2\theta) = -1$. \\
+A determinant of $-1$ indicates that the transformation preserves area but \textbf{reverses orientation} (it flips the ``handedness'' of the object, like a mirror image).
+
+\medskip
+\textbf{(iii)} \\
+$M_\beta M_\alpha = \begin{bmatrix} \cos 2\beta & \sin 2\beta \\ \sin 2\beta & -\cos 2\beta \end{bmatrix} \begin{bmatrix} \cos 2\alpha & \sin 2\alpha \\ \sin 2\alpha & -\cos 2\alpha \end{bmatrix}$ \\
+Row 1, Col 1: $\cos 2\beta \cos 2\alpha + \sin 2\beta \sin 2\alpha = \cos(2\beta - 2\alpha)$ \\
+Row 1, Col 2: $\cos 2\beta \sin 2\alpha - \sin 2\beta \cos 2\alpha = -\sin(2\beta - 2\alpha)$ \\
+Row 2, Col 1: $\sin 2\beta \cos 2\alpha - \cos 2\beta \sin 2\alpha = \sin(2\beta - 2\alpha)$ \\
+Row 2, Col 2: $\sin 2\beta \sin 2\alpha + (-\cos 2\beta)(-\cos 2\alpha) = \cos(2\beta - 2\alpha)$ \\
+Result: 
+\[
+R = \begin{bmatrix} \cos(2(\beta - \alpha)) & -\sin(2(\beta - \alpha)) \\ \sin(2(\beta - \alpha)) & \cos(2(\beta - \alpha)) \end{bmatrix}
+\]
+
+\medskip
+\textbf{(iv)} \\
+\textbf{Geometric Relationship:} The composition of two reflections is always a rotation. The angle of rotation is exactly \textbf{twice the angle between the two intersecting lines of reflection} ($2(\beta - \alpha)$). \textit{(This is the ``aha!'' moment: a fundamental theorem of geometry proven with pure algebra)}.
+
+\medskip
+\textbf{Application:} \\
+We need a rotation of $150^\circ$, so $2(\beta - \alpha) = 150^\circ \implies \beta - \alpha = 75^\circ$. \\
+The first line is $y = \frac{1}{\sqrt{3}}x$. Since $m = \tan \alpha = \frac{1}{\sqrt{3}}$, we know $\alpha = 30^\circ$. \\
+Therefore, $\beta = 30^\circ + 75^\circ = 105^\circ$. \\
+The gradient of the second line is $m_2 = \tan(105^\circ)$. \\
+Using exact values: 
+\[\tan(60^\circ + 45^\circ) = \frac{\tan 60^\circ + \tan 45^\circ}{1 - \tan 60^\circ \tan 45^\circ} = \frac{\sqrt{3} + 1}{1 - \sqrt{3}(1)}\]
+Rationalising the denominator yields $-(2+\sqrt{3})$. \\
+Equation of the second line: \textbf{$y = -(2+\sqrt{3})x$}.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Matrix Order Matters:} $BA \neq AB$. If you reversed the order of the reflections, the sign inside the sine functions would flip, resulting in a clockwise rotation instead of counter-clockwise.
+\item \textbf{Algebra Proves Geometry:} The messy trigonometric algebra in part (iii) collapses perfectly into the rotation matrix. This proves mathematically a beautiful visual truth: \textit{any rotation can be constructed using just two mirrors}.
+\item \textbf{Relative, not Absolute:} Because the rotation angle relies only on $(\beta - \alpha)$, you can rotate the two mirror lines together around the origin. As long as the angle \textit{between} them remains constant, the resulting rotation matrix remains perfectly identical.
+\end{takeaways}
+
+\begin{problem}[The Hidden Bridge]
+Any complex number $z = a + bi$ can be uniquely mapped to a $2 \times 2$ matrix of the form $M_z = \begin{bmatrix} a & -b \\ b & a \end{bmatrix}$, where $a, b \in \mathbb{R}$.
+
+\textbf{(i)} Let $w = 1 + i$ and $v = \sqrt{3} - i$. Find the matrices $M_w$ and $M_v$. Calculate the matrix product $M_w M_v$, and show that this product is exactly equal to the matrix representation of the complex product $wv$. 
+
+\textbf{(ii)} For a general, non-zero complex number $z = a + bi$: \\
+a) Prove that the determinant of its matrix representation, $\det(M_z)$, is equal to $\vert{}z\vert{}^2$. \\
+b) Find the matrix inverse $(M_z)^{-1}$ using the standard $2 \times 2$ inverse formula, and show that it maps perfectly to the complex reciprocal $z^{-1}$.
+
+\textbf{(iii)} Consider a complex number on the unit circle, $z = \cos\theta + i\sin\theta$. Write down its matrix representation $M_z$. By interpreting $M_z$ as a geometric transformation, explain why $(M_z)^n$ must equal $M_{z^n}$ for any positive integer $n$. What famous theorem does this matrix equivalence prove?
+
+\textbf{(iv)} The matrix $T = \begin{bmatrix} \sqrt{3} & -1 \\ 1 & \sqrt{3} \end{bmatrix}$ represents a transformation in 2D space. A vector $\mathbf{u} = \begin{bmatrix} 2 \\ 5 \end{bmatrix}$ is transformed by $T$ repeatedly, $12$ times in total. \\
+By leveraging the connection between matrices and complex numbers explored in the previous parts, evaluate $T^{12}\mathbf{u}$ exactly, without performing manual matrix multiplications.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Multiply the complex numbers $w$ and $v$ as usual (remember $i^2 = -1$). Then, perform standard row-by-column matrix multiplication for $M_w M_v$. The resulting matrix should have the real part of $wv$ on the main diagonal and the imaginary part on the anti-diagonal.
+    \item \textbf{Part (ii):} Recall that $\vert{}z\vert{} = \sqrt{a^2 + b^2}$, and $z^{-1} = \frac{\bar{z}}{\vert{}z\vert{}^2}$ where $\bar{z} = a - bi$. Compare this to the matrix inverse formula: $\frac{1}{ad-bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$. 
+    \item \textbf{Part (iii):} What geometric transformation does the matrix $\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$ represent? If you apply this transformation $n$ times, what is the net geometric effect? Compare this to raising $z = \text{cis}(\theta)$ to the power of $n$.
+    \item \textbf{Part (iv):} Matrix $T$ is in the exact form of $M_z$. What is the complex number $z$ that corresponds to $T$? Convert that complex number to polar form ($r\text{cis}\theta$). Use De Moivre's Theorem to evaluate $z^{12}$, map the result \textit{back} to a matrix, and then multiply by the vector $\mathbf{u}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+$w = 1+i \implies M_w = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}$ \\
+$v = \sqrt{3}-i \implies M_v = \begin{bmatrix} \sqrt{3} & 1 \\ -1 & \sqrt{3} \end{bmatrix}$ \\
+$wv = (1+i)(\sqrt{3}-i) = (\sqrt{3}+1) + (\sqrt{3}-1)i$. \\
+$M_w M_v = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} \sqrt{3} & 1 \\ -1 & \sqrt{3} \end{bmatrix} = \begin{bmatrix} \sqrt{3}+1 & -(\sqrt{3}-1) \\ \sqrt{3}-1 & \sqrt{3}+1 \end{bmatrix}$. \\
+This exactly matches $M_{wv}$, proving the mapping holds for multiplication.
+
+\medskip
+\textbf{(ii)} \\
+a) $\det(M_z) = (a)(a) - (-b)(b) = a^2 + b^2$. By definition, $\vert{}z\vert{} = \sqrt{a^2+b^2}$, so $\det(M_z) = \vert{}z\vert{}^2$. \\
+b) $(M_z)^{-1} = \frac{1}{a^2+b^2} \begin{bmatrix} a & b \\ -b & a \end{bmatrix}$. The corresponding complex number is $\frac{a}{a^2+b^2} - \frac{b}{a^2+b^2}i$, which is exactly $\frac{\bar{z}}{\vert{}z\vert{}^2} = z^{-1}$.
+
+\medskip
+\textbf{(iii)} \\
+$M_z = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$. This is the standard 2D rotation matrix by angle $\theta$ counter-clockwise. \\
+Applying this transformation $n$ times ($(M_z)^n$) results in a rotation by $n\theta$, which is geometrically represented by the matrix $\begin{bmatrix} \cos n\theta & -\sin n\theta \\ \sin n\theta & \cos n\theta \end{bmatrix}$. \\
+Because the matrices map uniquely to complex numbers, the complex numbers must match, beautifully proving \textbf{De Moivre's Theorem}: $(\cos\theta + i\sin\theta)^n = \cos n\theta + i\sin n\theta$.
+
+\medskip
+\textbf{(iv)} \textit{(The ``Aha!'' Moment)} \\
+Instead of multiplying $T$ by itself 12 times (which is practically impossible by hand), map $T$ to the complex number $z = \sqrt{3} + i$. \\
+Convert $z$ to polar form: $r = \sqrt{3+1} = 2$. $\theta = \arctan(1/\sqrt{3}) = \pi/6$. \\
+So, $z = 2\text{cis}(\pi/6)$. \\
+We want $T^{12}$, which corresponds to $z^{12}$. \\
+Using De Moivre's Theorem: $z^{12} = 2^{12}\text{cis}\left(12 \times \frac{\pi}{6}\right) = 4096\text{cis}(2\pi) = 4096(1 + 0i) = 4096$. \\
+Map this back to a matrix: $T^{12} = M_{4096} = \begin{bmatrix} 4096 & 0 \\ 0 & 4096 \end{bmatrix}$. \\
+Finally, transform the vector:
+\[
+T^{12}\mathbf{u} = \begin{bmatrix} 4096 & 0 \\ 0 & 4096 \end{bmatrix} \begin{bmatrix} 2 \\ 5 \end{bmatrix} = \begin{bmatrix} 8192 \\ 20480 \end{bmatrix}
+\]
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Mathematical Isomorphism:} Complex numbers and a specific subset of $2 \times 2$ matrices are structurally identical (an \textit{isomorphism}). Everything you can do with complex numbers (multiply, divide, conjugate), you can do with these matrices, and vice versa.
+\item \textbf{Multiple Lenses:} A difficult algebra problem (matrix powers) can become trivial when viewed through a geometric lens (polar complex numbers). 
+\item \textbf{The ``Why'' of Matrices:} This explains \textit{why} the rotation matrix formula looks the way it does. It isn't random; it is the exact matrix manifestation of multiplying by a complex number on the unit circle!
+\end{takeaways}
+
+\begin{problem}[Linearising Trigonometry]
+A rotation about the origin by an angle $\theta$ counter-clockwise is represented by the matrix:
+\[R(\theta) = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}\]
+
+\textbf{(i)} Geometrically, rotating by $\beta$, and then rotating the result by $\alpha$, is equivalent to a single rotation by $(\alpha + \beta)$. Therefore, $R(\alpha)R(\beta) = R(\alpha + \beta)$. \\
+By expanding the matrix product $R(\alpha)R(\beta)$, derive the trigonometric identities for $\cos(\alpha + \beta)$ and $\sin(\alpha + \beta)$.
+
+\textbf{(ii)} The inverse matrix $R(\theta)^{-1}$ ``undoes'' a rotation, meaning it geometrically represents a rotation by $-\theta$. Therefore, $R(\theta)^{-1} = R(-\theta)$. \\
+Find the inverse of $R(\theta)$ algebraically using the standard $2 \times 2$ matrix inverse formula. By comparing your result to $R(-\theta)$, mathematically prove the even/odd symmetry identities: $\cos(-\theta) = \cos\theta$ and $\sin(-\theta) = -\sin\theta$.
+
+\textbf{(iii)} Let $I$ be the $2 \times 2$ identity matrix. Using your knowledge from part (ii), evaluate the matrix addition $R(\beta) + R(-\beta)$, and show that the result can be written as the scalar multiplication $(2\cos\beta)I$.
+
+\textbf{(iv)} Consider the matrix expression $E = R(\alpha) \big[ R(\beta) + R(-\beta) \big]$. \\
+Evaluate $E$ in two different ways: \\
+1. \textbf{Algebraically:} Substitute your result from part (iii) into the bracket and perform the scalar multiplication. \\
+2. \textbf{Geometrically/Distributively:} Expand the bracket first, and use the angle-addition rule from part (i). \\
+By equating the corresponding elements of your two resulting matrices, deduce the ``product-to-sum'' trigonometric identities for $2\cos\alpha\cos\beta$ and $2\sin\alpha\cos\beta$.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Multiply the two $2 \times 2$ matrices row-by-column. Then, look at the top-left element and the bottom-left element to find the formulas for $\cos(\alpha+\beta)$ and $\sin(\alpha+\beta)$.
+    \item \textbf{Part (ii):} The inverse of $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ is $\frac{1}{ad-bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$. Don't forget the Pythagorean identity $\cos^2\theta + \sin^2\theta = 1$ when finding the determinant.
+    \item \textbf{Part (iii):} Add the matrices element-by-element. $R(-\beta)$ is the inverse matrix you found in part (ii). Notice how the sine terms cancel out.
+    \item \textbf{Part (iv):} For Method 1, you are evaluating $R(\alpha) \times (2\cos\beta)I$. Because $I$ is the identity matrix, multiplying it by $R(\alpha)$ leaves $R(\alpha)$ unchanged, you just multiply every term in $R(\alpha)$ by the scalar $2\cos\beta$. For Method 2, use $R(\alpha)R(-\beta) = R(\alpha-\beta)$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+$R(\alpha)R(\beta) = \begin{bmatrix} \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha \end{bmatrix} \begin{bmatrix} \cos\beta & -\sin\beta \\ \sin\beta & \cos\beta \end{bmatrix}$ \\
+Top-left (Row 1 $\times$ Col 1): $\cos\alpha\cos\beta - \sin\alpha\sin\beta$. \\
+Bottom-left (Row 2 $\times$ Col 1): $\sin\alpha\cos\beta + \cos\alpha\sin\beta$. \\
+Equating this to $R(\alpha+\beta) = \begin{bmatrix} \cos(\alpha+\beta) & -\sin(\alpha+\beta) \\ \sin(\alpha+\beta) & \cos(\alpha+\beta) \end{bmatrix}$ yields: \\
+\textbf{$\cos(\alpha+\beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta$} \\
+\textbf{$\sin(\alpha+\beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta$}
+
+\medskip
+\textbf{(ii)} \\
+Determinant of $R(\theta) = (\cos\theta)(\cos\theta) - (-\sin\theta)(\sin\theta) = \cos^2\theta + \sin^2\theta = 1$. \\
+$R(\theta)^{-1} = \frac{1}{1} \begin{bmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \end{bmatrix}$. \\
+We know this equals $R(-\theta) = \begin{bmatrix} \cos(-\theta) & -\sin(-\theta) \\ \sin(-\theta) & \cos(-\theta) \end{bmatrix}$. \\
+Equating the corresponding elements proves that: \\
+\textbf{$\cos(-\theta) = \cos\theta$} (even function) \\
+\textbf{$-\sin(-\theta) = \sin\theta \implies \sin(-\theta) = -\sin\theta$} (odd function).
+
+\medskip
+\textbf{(iii)} \\
+$R(\beta) + R(-\beta) = \begin{bmatrix} \cos\beta & -\sin\beta \\ \sin\beta & \cos\beta \end{bmatrix} + \begin{bmatrix} \cos\beta & \sin\beta \\ -\sin\beta & \cos\beta \end{bmatrix}$ \\
+$R(\beta) + R(-\beta) = \begin{bmatrix} 2\cos\beta & 0 \\ 0 & 2\cos\beta \end{bmatrix}$ \\
+Factoring out $2\cos\beta$ gives $2\cos\beta \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = \mathbf{(2\cos\beta)I}$.
+
+\medskip
+\textbf{(iv)} \textit{(The ``Aha!'' Moment)} \\
+\textbf{Method 1 (Algebraic):} \\
+$E = R(\alpha) \big[ (2\cos\beta)I \big] = (2\cos\beta) R(\alpha)$ \\
+$E = \begin{bmatrix} 2\cos\beta\cos\alpha & -2\cos\beta\sin\alpha \\ 2\cos\beta\sin\alpha & 2\cos\beta\cos\alpha \end{bmatrix}$ 
+
+\medskip
+\textbf{Method 2 (Distributive/Geometric):} \\
+$E = R(\alpha)R(\beta) + R(\alpha)R(-\beta)$ \\
+Using the geometric angle-addition property from (i): \\
+$E = R(\alpha+\beta) + R(\alpha-\beta)$ \\
+$E = \begin{bmatrix} \cos(\alpha+\beta) + \cos(\alpha-\beta) & -\sin(\alpha+\beta) - \sin(\alpha-\beta) \\ \sin(\alpha+\beta) + \sin(\alpha-\beta) & \cos(\alpha+\beta) + \cos(\alpha-\beta) \end{bmatrix}$
+
+\medskip
+Equating the top-left elements of Method 1 and Method 2: \\
+\textbf{$2\cos\alpha\cos\beta = \cos(\alpha+\beta) + \cos(\alpha-\beta)$} \\
+Equating the bottom-left elements: \\
+\textbf{$2\sin\alpha\cos\beta = \sin(\alpha+\beta) + \sin(\alpha-\beta)$}
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Matrices encapsulate complex algebra:} The long, tedious proofs of trigonometric identities found in textbooks disappear when you use matrices. Matrix arithmetic automatically handles the complexities of geometry.
+\item \textbf{The ``Aha!'' of part (iv):} The product-to-sum formulas are notoriously hard to memorize or derive using standard trigonometric algebra. But by simply adding two matrices and multiplying by a third, the identities naturally fall out of the arrays. 
+\item \textbf{Linear Transformations:} Trigonometric identities are not arbitrary rules about triangles; they are the fundamental algebraic properties of 2D space undergoing rotational transformations.
+\end{takeaways}
+
+\begin{problem}[The Matrix Code of Fibonacci]
+The famous Fibonacci sequence is defined by the recursive relation $F_{n+1} = F_n + F_{n-1}$ for $n \ge 1$, with starting values $F_0 = 0$ and $F_1 = 1$. The first few terms are $0, 1, 1, 2, 3, 5, 8, \dots$
+
+\textbf{(i)} Write down a $2 \times 2$ matrix $A$ such that:
+\[
+\begin{bmatrix} F_{n+1} \\ F_n \end{bmatrix} = A \begin{bmatrix} F_n \\ F_{n-1} \end{bmatrix}
+\]
+Calculate $A^2$ and $A^3$ using matrix multiplication, and verify that your matrix $A^3$ is exactly equal to $\begin{bmatrix} F_4 & F_3 \\ F_3 & F_2 \end{bmatrix}$.
+
+\textbf{(ii)} Use the principle of mathematical induction to prove that for all integers $n \ge 1$:
+\[
+A^n = \begin{bmatrix} F_{n+1} & F_n \\ F_n & F_{n-1} \end{bmatrix}
+\]
+
+\textbf{(iii)} The determinant of a product of matrices is the product of their determinants, meaning $\det(A^n) = (\det A)^n$. \\
+Evaluate the determinant of both sides of the result proven in part (ii) to derive \textit{Cassini's Identity}: $F_{n+1}F_{n-1} - F_n^2 = (-1)^n$. \\
+Briefly describe what this identity tells us about the square of any Fibonacci number compared to the product of its immediate neighbours.
+
+\textbf{(iv)} To find an explicit formula for the $n$-th Fibonacci number, the matrix $A$ can be decomposed (diagonalised) into $A = P D P^{-1}$, where:
+\[
+P = \begin{bmatrix} \alpha & \beta \\ 1 & 1 \end{bmatrix} \quad \text{and} \quad D = \begin{bmatrix} \alpha & 0 \\ 0 & \beta \end{bmatrix}
+\]
+Here, $\alpha$ and $\beta$ are the roots of the quadratic equation $x^2 - x - 1 = 0$ (with $\alpha > \beta$). \\
+Given that $A^n = P D^n P^{-1}$, calculate the top-right entry of $P D^n P^{-1}$ and equate it to your result from part (ii) to discover \textbf{Binet's Formula} for $F_n$. \\
+\textit{(Note: From the properties of roots, use $\alpha - \beta = \sqrt{5}$ and $\alpha\beta = -1$ to simplify your final algebra)}.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Expand the matrix equation. The top row must give $F_{n+1} = 1 \cdot F_n + 1 \cdot F_{n-1}$. The bottom row must give $F_n = 1 \cdot F_n + 0 \cdot F_{n-1}$. 
+    \item \textbf{Part (ii):} Follow the standard induction structure. Your base case is $n=1$. For the inductive step, assume true for $n=k$, and use the fact that $A^{k+1} = A^k A$ alongside the recursive rule $F_{k+1} + F_k = F_{k+2}$ to prove for $n=k+1$.
+    \item \textbf{Part (iii):} Find $\det(A)$ from part (i). Then find the determinant of the $2 \times 2$ matrix containing the Fibonacci terms. Equate them.
+    \item \textbf{Part (iv):} 
+    \begin{enumerate}
+        \item First, find $P^{-1}$ using the $2 \times 2$ inverse formula: $\frac{1}{ad-bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$. The determinant of $P$ is $\alpha - \beta = \sqrt{5}$.
+        \item Write down $D^n = \begin{bmatrix} \alpha^n & 0 \\ 0 & \beta^n \end{bmatrix}$.
+        \item Multiply $P D^n P^{-1}$. To save time, you \textit{only} need to compute the element in Row 1, Column 2 of the final matrix, because you know from part (ii) that this specific element is equal to $F_n$.
+    \end{enumerate}
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+From $F_{n+1} = 1F_n + 1F_{n-1}$ and $F_n = 1F_n + 0F_{n-1}$, we get $A = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}$. \\
+$A^2 = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}$. \\
+$A^3 = A^2 A = \begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 3 & 2 \\ 2 & 1 \end{bmatrix}$. \\
+Checking the sequence ($0,1,1,2,3,5\dots$), $F_4=3, F_3=2, F_2=1$. Thus, $A^3 = \begin{bmatrix} F_4 & F_3 \\ F_3 & F_2 \end{bmatrix}$.
+
+\medskip
+\textbf{(ii)} \\
+\textbf{Base case ($n=1$):} $A^1 = \begin{bmatrix} F_2 & F_1 \\ F_1 & F_0 \end{bmatrix} = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix} = A$. True. \\
+\textbf{Assumption:} Assume $A^k = \begin{bmatrix} F_{k+1} & F_k \\ F_k & F_{k-1} \end{bmatrix}$ for some integer $k \ge 1$. \\
+\textbf{Step ($n=k+1$):} \\
+$A^{k+1} = A^k A = \begin{bmatrix} F_{k+1} & F_k \\ F_k & F_{k-1} \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}$ \\
+$A^{k+1} = \begin{bmatrix} F_{k+1}(1) + F_k(1) & F_{k+1}(1) + F_k(0) \\ F_k(1) + F_{k-1}(1) & F_k(1) + F_{k-1}(0) \end{bmatrix}$ \\
+Using the recurrence relation $F_m + F_{m-1} = F_{m+1}$, this simplifies to: \\
+$A^{k+1} = \begin{bmatrix} F_{k+2} & F_{k+1} \\ F_{k+1} & F_k \end{bmatrix}$. \\
+This fits the required form, proving the statement by induction.
+
+\medskip
+\textbf{(iii)} \textit{(Aha! Moment 1)} \\
+$\det(A) = (1)(0) - (1)(1) = -1$. \\
+Therefore, $\det(A^n) = (-1)^n$. \\
+From part (ii), the determinant of $\begin{bmatrix} F_{n+1} & F_n \\ F_n & F_{n-1} \end{bmatrix}$ is $F_{n+1}F_{n-1} - F_n^2$. \\
+Equating them gives Cassini's Identity: \textbf{$F_{n+1}F_{n-1} - F_n^2 = (-1)^n$}. \\
+\textit{Meaning:} The square of any Fibonacci number is always exactly $1$ more or $1$ less than the product of the two numbers surrounding it (e.g., for 5: $5^2 = 25$, and $3 \times 8 = 24$).
+
+\medskip
+\textbf{(iv)} \textit{(Aha! Moment 2)} \\
+First, find $P^{-1}$. $\det(P) = \alpha - \beta = \sqrt{5}$. So, $P^{-1} = \frac{1}{\sqrt{5}} \begin{bmatrix} 1 & -\beta \\ -1 & \alpha \end{bmatrix}$. \\
+We need the top-right element of $P D^n P^{-1}$. \\
+$P D^n = \begin{bmatrix} \alpha & \beta \\ 1 & 1 \end{bmatrix} \begin{bmatrix} \alpha^n & 0 \\ 0 & \beta^n \end{bmatrix} = \begin{bmatrix} \alpha^{n+1} & \beta^{n+1} \\ \alpha^n & \beta^n \end{bmatrix}$. \\
+Now multiply by $P^{-1}$: \\
+$P D^n P^{-1} = \frac{1}{\sqrt{5}} \begin{bmatrix} \alpha^{n+1} & \beta^{n+1} \\ \alpha^n & \beta^n \end{bmatrix} \begin{bmatrix} 1 & -\beta \\ -1 & \alpha \end{bmatrix}$. \\
+The top-right element (Row 1 $\times$ Column 2) is: \\
+$\frac{1}{\sqrt{5}} \big( \alpha^{n+1}(-\beta) + \beta^{n+1}(\alpha) \big) = \frac{1}{\sqrt{5}} \big( -\alpha^n(\alpha\beta) + \beta^n(\alpha\beta) \big)$. \\
+Since $\alpha\beta = -1$ (product of roots of $x^2-x-1=0$), we substitute this in: \\
+$= \frac{1}{\sqrt{5}} \big( -\alpha^n(-1) + \beta^n(-1) \big) = \frac{\alpha^n - \beta^n}{\sqrt{5}}$. \\
+From part (ii), the top right element of $A^n$ is $F_n$. Equating them yields: \\
+\textbf{$F_n = \frac{\alpha^n - \beta^n}{\sqrt{5}}$} \textit{(where $\alpha = \frac{1+\sqrt{5}}{2}$ is the Golden Ratio)}.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Matrices Encapsulate State:} A sequence like Fibonacci isn't just a list of numbers; it's a vector moving through space. A single matrix $A$ acts as an engine that advances the sequence one step at a time.
+\item \textbf{Determinants Expose Geometric Truth:} What is ordinarily a grueling, messy algebraic proof (Cassini's identity) drops out instantly in one line simply because the determinant of a matrix product is the product of the determinants.
+\item \textbf{The Power of Diagonalisation:} By splitting a matrix into its eigenvalues (diagonal matrix $D$) and eigenvectors (matrix $P$), raising it to a massive power $n$ becomes trivial. This fundamentally bridges discrete recursive algorithms to continuous explicit formulas.
+\end{takeaways}
+
+\begin{problem}[The Nilpotent Shortcut]
+Mathematical induction is a powerful tool for proving patterns in matrices, but sometimes a deeper structural understanding of the matrix can bypass the need for induction entirely. Consider the matrix $A = \begin{bmatrix} 2 & -1 \\ 1 & 0 \end{bmatrix}$.
+
+\textbf{(i)} Using standard matrix multiplication, calculate $A^2$ and $A^3$. By observing the pattern in the elements, formulate a conjecture for the general matrix $A^n$ in the form of a single $2 \times 2$ matrix containing the variable $n$.
+
+\textbf{(ii)} Use the principle of mathematical induction to formally prove your conjecture for $A^n$ for all integers $n \ge 1$.
+
+\textbf{(iii)} Let $I$ be the $2 \times 2$ identity matrix. The original matrix $A$ can be decomposed into a sum: $A = I + N$. \\
+Find the matrix $N$. Then, calculate $N^2$. What unique property does $N$ possess when multiplied by itself?
+
+\textbf{(iv)} In algebra, the Binomial Theorem states that $(x+y)^n = x^n + nx^{n-1}y + \frac{n(n-1)}{2}x^{n-2}y^2 + \dots$ \\
+This theorem can also be applied to matrices in the form $(I+N)^n$, because the identity matrix $I$ commutes with any matrix.\\
+Using the Binomial Theorem and your result from part (iii), expand the expression $(I+N)^n$. Show how this single line of algebraic expansion perfectly derives your conjectured matrix $A^n$ from part (i), bypassing the entire inductive proof.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Calculate $A^2 = A \times A$, and $A^3 = A^2 \times A$. Look closely at how the top-left and bottom-left numbers relate to the power $n$. Then, figure out how the right-hand column relates to $n$.
+    \item \textbf{Part (ii):} Follow the standard three-step induction structure: 
+    \begin{enumerate}
+        \item Show true for $n=1$.
+        \item Assume true for $n=k$.
+        \item Prove true for $n=k+1$ by evaluating $A^{k+1} = A^k \times A$. You will need to group your $k$'s to match the conjectured format $(k+1)$.
+    \end{enumerate}
+    \item \textbf{Part (iii):} To find $N$, simply rearrange the equation to $N = A - I$. Subtract the identity matrix from $A$. Then multiply the resulting matrix by itself.
+    \item \textbf{Part (iv):} Write out the first three terms of the binomial expansion for $(I+N)^n$. Remember that $I$ raised to any power is just $I$, and $I \times N = N$. What happens to the third term (and all subsequent terms) based on your discovery in part (iii)?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+$A^2 = \begin{bmatrix} 2 & -1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 2 & -1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 4-1 & -2+0 \\ 2+0 & -1+0 \end{bmatrix} = \begin{bmatrix} 3 & -2 \\ 2 & -1 \end{bmatrix}$ \\
+$A^3 = A^2 A = \begin{bmatrix} 3 & -2 \\ 2 & -1 \end{bmatrix} \begin{bmatrix} 2 & -1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 6-2 & -3+0 \\ 4-1 & -2+0 \end{bmatrix} = \begin{bmatrix} 4 & -3 \\ 3 & -2 \end{bmatrix}$ \\
+Conjecture: \textbf{$A^n = \begin{bmatrix} n+1 & -n \\ n & 1-n \end{bmatrix}$}
+
+\medskip
+\textbf{(ii)} \\
+\textbf{Base case ($n=1$):} $A^1 = \begin{bmatrix} 1+1 & -1 \\ 1 & 1-1 \end{bmatrix} = \begin{bmatrix} 2 & -1 \\ 1 & 0 \end{bmatrix} = A$. True. \\
+\textbf{Assume true for $n=k$:} $A^k = \begin{bmatrix} k+1 & -k \\ k & 1-k \end{bmatrix}$ for some integer $k \ge 1$. \\
+\textbf{Prove for $n=k+1$:} \\
+$A^{k+1} = A^k A = \begin{bmatrix} k+1 & -k \\ k & 1-k \end{bmatrix} \begin{bmatrix} 2 & -1 \\ 1 & 0 \end{bmatrix}$ \\
+$A^{k+1} = \begin{bmatrix} 2(k+1)-k & -(k+1)+0 \\ 2k+(1-k) & -k+0 \end{bmatrix} = \begin{bmatrix} k+2 & -(k+1) \\ k+1 & -k \end{bmatrix}$ \\
+Rewriting to match the conjecture structure: \\
+$A^{k+1} = \begin{bmatrix} (k+1)+1 & -(k+1) \\ (k+1) & 1-(k+1) \end{bmatrix}$. \\
+This fits the assumption form perfectly. By mathematical induction, the conjecture is true for all $n \ge 1$.
+
+\medskip
+\textbf{(iii)} \\
+$N = A - I = \begin{bmatrix} 2 & -1 \\ 1 & 0 \end{bmatrix} - \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & -1 \\ 1 & -1 \end{bmatrix}$. \\
+$N^2 = \begin{bmatrix} 1 & -1 \\ 1 & -1 \end{bmatrix} \begin{bmatrix} 1 & -1 \\ 1 & -1 \end{bmatrix} = \begin{bmatrix} 1-1 & -1+1 \\ 1-1 & -1+1 \end{bmatrix} = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}$. \\
+\textbf{Property:} $N^2$ is the zero matrix. (In linear algebra, a matrix that eventually becomes zero when raised to a power is called a \textit{nilpotent} matrix).
+
+\medskip
+\textbf{(iv)} \textit{(The ``Aha!'' Moment)} \\
+Expanding $(I+N)^n$ using the Binomial Theorem: \\
+$(I+N)^n = I^n + \binom{n}{1}I^{n-1}N + \binom{n}{2}I^{n-2}N^2 + \binom{n}{3}I^{n-3}N^3 + \dots$ \\
+Because $N^2 = 0$, every term containing $N^2, N^3, \dots$ vanishes completely into the zero matrix! \\
+The infinite expansion collapses into just two terms: \\
+$(I+N)^n = I + nN$ \\
+Substituting our known matrices back in: \\
+$A^n = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} + n \begin{bmatrix} 1 & -1 \\ 1 & -1 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} + \begin{bmatrix} n & -n \\ n & -n \end{bmatrix} = \begin{bmatrix} n+1 & -n \\ n & 1-n \end{bmatrix}$. \\
+This exactly matches our conjecture, derived in seconds without induction!
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Multiple Paths to Proof:} Mathematical induction is a reliable ``brute force'' method for proving sequences. However, discovering the underlying algebraic structure (like a binomial expansion) often provides a much faster and more elegant solution.
+\item \textbf{Matrix Algebra Mimics Real Algebra:} The identity matrix $I$ acts exactly like the number $1$. Because $I \times N = N \times I$, matrices can be expanded using the Binomial Theorem just like standard polynomials $(x+y)^n$.
+\item \textbf{The Power of Nilpotency:} Finding a matrix that squares to zero is like finding a mathematical wormhole. It truncates infinite series or complex powers into simple, linear equations. 
+\end{takeaways}
+
+\begin{problem}[Matrices and Probability: Predicting Changing Systems]
+In a simplified weather model, the weather each day is classified as either Sunny ($S$) or Rainy ($R$). 
+Historical data shows that if it is sunny today, there is an $80\%$ chance it will be sunny tomorrow and a $20\%$ chance it will be rainy. If it is rainy today, there is a $40\%$ chance it will be sunny tomorrow and a $60\%$ chance it will be rainy.
+
+This system can be modeled using a transition matrix $P$ and a state vector $\mathbf{x}_n = \begin{bmatrix} s_n \\ r_n \end{bmatrix}$, where $s_n$ and $r_n$ are the probabilities of it being sunny or rainy on day $n$. The weather for the next day is given by the matrix equation $\mathbf{x}_{n+1} = P \mathbf{x}_n$.
+
+\textbf{(i)} Write down the $2 \times 2$ transition matrix $P$. If today (Day 0) is known with absolute certainty to be sunny ($\mathbf{x}_0 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$), calculate the state vectors $\mathbf{x}_1$ and $\mathbf{x}_2$. What is the probability that it will be rainy the day after tomorrow?
+
+\textbf{(ii)} Over a long period of time, such systems often settle into a \textit{steady state} $\mathbf{q} = \begin{bmatrix} s \\ r \end{bmatrix}$, where the probabilities no longer change from day to day. This implies that $P\mathbf{q} = \mathbf{q}$. \\
+Knowing that the sum of the probabilities must always equal $1$ ($s + r = 1$), solve the matrix equation $P\mathbf{q} = \mathbf{q}$ algebraically to find the exact steady-state probabilities for sunny and rainy weather.
+
+\textbf{(iii)} The equation $P\mathbf{q} = \mathbf{q}$ can be rewritten as $P\mathbf{q} = 1\mathbf{q}$. This means the steady state is actually an eigenvector corresponding to an eigenvalue of $\lambda = 1$. \\
+Find the characteristic equation of $P$ and solve it to verify that $\lambda = 1$ is an eigenvalue, and find the second eigenvalue, $\lambda_2$. 
+
+\textbf{(iv)} A transition matrix can be diagonalised as $P = M D M^{-1}$, where $D = \begin{bmatrix} 1 & 0 \\ 0 & \lambda_2 \end{bmatrix}$ is the diagonal matrix of eigenvalues, and $M$ is the matrix of corresponding eigenvectors.\\
+Given that $P^n = M D^n M^{-1}$, use your second eigenvalue $\lambda_2$ from part (iii) to evaluate the limit of the matrix $D^n$ as $n \to \infty$. \\
+Using this limit, mathematically prove that \textit{no matter what} the initial weather state $\mathbf{x}_0 = \begin{bmatrix} s_0 \\ r_0 \end{bmatrix}$ is, the system will always eventually ``forget'' its initial state and arrive at the exact steady state you found in part (ii). 
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} The columns of the transition matrix represent ``Today'', and the rows represent ``Tomorrow''. Column 1 should be the probabilities if today is Sunny; Column 2 if today is Rainy. 
+    \item \textbf{Part (ii):} Expand the matrix equation $P \begin{bmatrix} s \\ r \end{bmatrix} = \begin{bmatrix} s \\ r \end{bmatrix}$. This will give you two simultaneous equations. You only need to use one of them, alongside the given equation $s + r = 1$, to solve for $s$ and $r$.
+    \item \textbf{Part (iii):} To find the eigenvalues, solve the equation $\det(P - \lambda I) = 0$. You should end up with a quadratic equation in terms of $\lambda$.
+    \item \textbf{Part (iv):} Think about what happens to a fraction (or decimal between $-1$ and $1$) when you raise it to a very large power. Because $D$ is a diagonal matrix, $D^n = \begin{bmatrix} 1^n & 0 \\ 0 & \lambda_2^n \end{bmatrix}$. Write down the final matrix $M D^\infty M^{-1}$ and multiply it by $\begin{bmatrix} s_0 \\ r_0 \end{bmatrix}$. Remember that $s_0 + r_0 = 1$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+$P = \begin{bmatrix} 0.8 & 0.4 \\ 0.2 & 0.6 \end{bmatrix}$ \\
+$\mathbf{x}_1 = P \mathbf{x}_0 = \begin{bmatrix} 0.8 & 0.4 \\ 0.2 & 0.6 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 0.8 \\ 0.2 \end{bmatrix}$. \\
+$\mathbf{x}_2 = P \mathbf{x}_1 = \begin{bmatrix} 0.8 & 0.4 \\ 0.2 & 0.6 \end{bmatrix} \begin{bmatrix} 0.8 \\ 0.2 \end{bmatrix} = \begin{bmatrix} 0.64 + 0.08 \\ 0.16 + 0.12 \end{bmatrix} = \begin{bmatrix} 0.72 \\ 0.28 \end{bmatrix}$. \\
+The probability it is rainy the day after tomorrow is \textbf{$0.28$ (or $28\%$)}.
+
+\medskip
+\textbf{(ii)} \\
+$P\mathbf{q} = \mathbf{q} \implies \begin{bmatrix} 0.8 & 0.4 \\ 0.2 & 0.6 \end{bmatrix} \begin{bmatrix} s \\ r \end{bmatrix} = \begin{bmatrix} s \\ r \end{bmatrix}$. \\
+Top row gives: $0.8s + 0.4r = s \implies -0.2s + 0.4r = 0 \implies 0.2s = 0.4r \implies s = 2r$. \\
+Substitute into $s + r = 1$: \\
+$2r + r = 1 \implies 3r = 1 \implies r = \frac{1}{3}$. \\
+Therefore, $s = \frac{2}{3}$. \\
+The steady state is \textbf{$\mathbf{q} = \begin{bmatrix} 2/3 \\ 1/3 \end{bmatrix}$}.
+
+\medskip
+\textbf{(iii)} \\
+$\det(P - \lambda I) = \det \begin{bmatrix} 0.8 - \lambda & 0.4 \\ 0.2 & 0.6 - \lambda \end{bmatrix} = 0$ \\
+$(0.8 - \lambda)(0.6 - \lambda) - (0.4)(0.2) = 0$ \\
+$\lambda^2 - 1.4\lambda + 0.48 - 0.08 = 0$ \\
+$\lambda^2 - 1.4\lambda + 0.40 = 0$ \\
+$(\lambda - 1)(\lambda - 0.4) = 0$. \\
+The eigenvalues are $\lambda_1 = 1$ and \textbf{$\lambda_2 = 0.4$}.
+
+\medskip
+\textbf{(iv)} \textit{(The ``Aha!'' Moment)} \\
+For $P = M D M^{-1}$, we found $D = \begin{bmatrix} 1 & 0 \\ 0 & 0.4 \end{bmatrix}$. \\
+$P^n = M \begin{bmatrix} 1^n & 0 \\ 0 & 0.4^n \end{bmatrix} M^{-1}$. \\
+As $n \to \infty$, $0.4^n \to 0$. This is the crucial step: the second eigenvalue \textit{vanishes}. \\
+$D^\infty = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$. \\
+Let $M = \begin{bmatrix} 2 & 1 \\ 1 & -1 \end{bmatrix}$ (eigenvectors for $\lambda=1, 0.4$) and $M^{-1} = \begin{bmatrix} 1/3 & 1/3 \\ 1/3 & -2/3 \end{bmatrix}$. \\
+$P^\infty = \begin{bmatrix} 2 & 1 \\ 1 & -1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 1/3 & 1/3 \\ 1/3 & -2/3 \end{bmatrix} = \begin{bmatrix} 2 & 0 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 1/3 & 1/3 \\ 1/3 & -2/3 \end{bmatrix} = \begin{bmatrix} 2/3 & 2/3 \\ 1/3 & 1/3 \end{bmatrix}$. \\
+Applying this infinite matrix to \textit{any} initial state $\mathbf{x}_0 = \begin{bmatrix} s_0 \\ r_0 \end{bmatrix}$: \\
+$\mathbf{x}_\infty = \begin{bmatrix} 2/3 & 2/3 \\ 1/3 & 1/3 \end{bmatrix} \begin{bmatrix} s_0 \\ r_0 \end{bmatrix} = \begin{bmatrix} \frac{2}{3}s_0 + \frac{2}{3}r_0 \\ \frac{1}{3}s_0 + \frac{1}{3}r_0 \end{bmatrix} = \begin{bmatrix} \frac{2}{3}(s_0+r_0) \\ \frac{1}{3}(s_0+r_0) \end{bmatrix}$. \\
+Because the initial probabilities must sum to $1$ ($s_0+r_0 = 1$), the state completely simplifies to \textbf{$\begin{bmatrix} 2/3 \\ 1/3 \end{bmatrix}$}. The system mathematically overrides the initial conditions.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{The Meaning of ``1'':} In a probability matrix, there is always an eigenvalue of $1$. Its corresponding eigenvector is the ``steady state'' destination of the entire system.
+\item \textbf{Eigenvalues Dictate Decay:} The other eigenvalue ($0.4$ in this case) acts as the system's ``memory''. Because it is smaller than $1$, its powers shrink to zero. This algebraic decay is \textit{why} real-world random systems eventually settle into predictable, long-term averages. 
+\item \textbf{Overriding Initial Conditions:} The beautiful algebraic collapse in part (iv)—where $(s_0 + r_0)$ is factored out and becomes a $1$—shows mathematically why it doesn't matter if it's sunny or rainy today; next year's probabilities will be exactly the same regardless.
+\end{takeaways}
+
+\begin{problem}[The Algebra of Transformations]
+In 2D space, a point $(x,y)$ on a curve can be transformed to a new point $(x', y')$ using matrix multiplication: $\begin{bmatrix} x' \\ y' \end{bmatrix} = M \begin{bmatrix} x \\ y \end{bmatrix}$. 
+
+\textbf{(i)} Let $M_1 = \begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix}$ (a horizontal stretch by a factor of 2) and $M_2 = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$ (a reflection in the $x$-axis). \\
+Find the single matrix $T = M_2 M_1$ that represents applying $M_1$ followed by $M_2$. \\
+Apply $T$ to a generic point $(x,y)$ to find expressions for $x'$ and $y'$. By making $x$ and $y$ the subjects, find the new Cartesian equation of the curve $y = e^x$ after this combined transformation.
+
+\textbf{(ii)} Generalising the process from part (i), mathematically prove that if a curve undergoes a transformation matrix $M$, the algebraic substitution required to find the new Cartesian equation is given by $\begin{bmatrix} x \\ y \end{bmatrix} = M^{-1} \begin{bmatrix} x' \\ y' \end{bmatrix}$. \\
+Calculate the inverse matrix $T^{-1}$ from part (i) to verify it perfectly generates the algebraic substitutions you found earlier.
+
+\textbf{(iii)} Consider the standard rational function $y = \frac{1}{x}$, which can be written as the rectangular hyperbola $xy = 1$. \\
+Let $R$ be a transformation matrix that rotates the plane by $45^\circ$ ($\frac{\pi}{4}$ radians) \textit{clockwise} about the origin. Write down the matrix $R$, and use the properties of rotation matrices to instantly write down its inverse, $R^{-1}$.
+
+\textbf{(iv)} Use your findings from part (ii) and part (iii) to apply the $45^\circ$ clockwise rotation $R$ to the curve $xy = 1$. \\
+Substitute the expressions for $x$ and $y$ into $xy = 1$, expand, and simplify completely. \\
+What classic conic section equation does this produce? What does this reveal about the true geometric shape of the simple rational function $y = \frac{1}{x}$?
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Remember matrix multiplication order: ``Apply $M_1$ then $M_2$'' means calculating $M_2 M_1$, reading right-to-left. Once you have $x' = 2x$ and $y' = -y$, solve for $x$ and $y$ before substituting them into $y = e^x$.
+    \item \textbf{Part (ii):} Start with the matrix equation $\mathbf{v}' = M \mathbf{v}$. How do you isolate the vector $\mathbf{v}$ on one side? Recall the standard $2 \times 2$ inverse formula.
+    \item \textbf{Part (iii):} The general rotation matrix for angle $\theta$ counter-clockwise is $\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$. A clockwise rotation means $\theta = -45^\circ$. To find the inverse of a rotation, simply rotate back in the opposite direction (i.e., $+45^\circ$).
+    \item \textbf{Part (iv):} When you multiply $R^{-1} \begin{bmatrix} x' \\ y' \end{bmatrix}$, you will get $x = \frac{x' - y'}{\sqrt{2}}$ and $y = \frac{x' + y'}{\sqrt{2}}$. Substitute these brackets directly into $(x)(y) = 1$. Use the ``difference of two squares'' expansion $(a-b)(a+b) = a^2 - b^2$ to simplify the numerator.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+$T = M_2 M_1 = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 2 & 0 \\ 0 & -1 \end{bmatrix}$. \\
+$\begin{bmatrix} x' \\ y' \end{bmatrix} = \begin{bmatrix} 2 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} 2x \\ -y \end{bmatrix}$. \\
+Therefore, $x' = 2x \implies x = \frac{x'}{2}$ and $y' = -y \implies y = -y'$. \\
+Substituting into $y = e^x$: \\
+$-y' = e^{(x'/2)} \implies \mathbf{y' = -e^{x'/2}}$. 
+
+\medskip
+\textbf{(ii)} \\
+Start with $\begin{bmatrix} x' \\ y' \end{bmatrix} = M \begin{bmatrix} x \\ y \end{bmatrix}$. \\
+Left-multiply both sides by $M^{-1}$: \\
+$M^{-1} \begin{bmatrix} x' \\ y' \end{bmatrix} = M^{-1}M \begin{bmatrix} x \\ y \end{bmatrix}$. \\
+Since $M^{-1}M = I$ (the identity matrix), we have $\begin{bmatrix} x \\ y \end{bmatrix} = M^{-1} \begin{bmatrix} x' \\ y' \end{bmatrix}$. \\
+For $T$: $\det(T) = (2)(-1) - (0)(0) = -2$. \\
+$T^{-1} = -\frac{1}{2} \begin{bmatrix} -1 & 0 \\ 0 & 2 \end{bmatrix} = \begin{bmatrix} \frac{1}{2} & 0 \\ 0 & -1 \end{bmatrix}$. \\
+$T^{-1} \begin{bmatrix} x' \\ y' \end{bmatrix} = \begin{bmatrix} \frac{1}{2} & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} x' \\ y' \end{bmatrix} = \begin{bmatrix} x'/2 \\ -y' \end{bmatrix}$. This exactly matches the $x$ and $y$ substitutions found in part (i).
+
+\medskip
+\textbf{(iii)} \\
+For a clockwise rotation, $\theta = -45^\circ = -\frac{\pi}{4}$. \\
+$R = \begin{bmatrix} \cos(-\frac{\pi}{4}) & -\sin(-\frac{\pi}{4}) \\ \sin(-\frac{\pi}{4}) & \cos(-\frac{\pi}{4}) \end{bmatrix} = \begin{bmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \end{bmatrix}$. \\
+The inverse $R^{-1}$ undoes this by rotating $+45^\circ$: \\
+$R^{-1} = \begin{bmatrix} \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \end{bmatrix}$.
+
+\medskip
+\textbf{(iv)} \textit{(The ``Aha!'' Moment)} \\
+Using the inverse matrix rule: $\begin{bmatrix} x \\ y \end{bmatrix} = R^{-1} \begin{bmatrix} x' \\ y' \end{bmatrix} = \begin{bmatrix} \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \end{bmatrix} \begin{bmatrix} x' \\ y' \end{bmatrix}$. \\
+$x = \frac{x' - y'}{\sqrt{2}}$ and $y = \frac{x' + y'}{\sqrt{2}}$. \\
+Substitute into $xy = 1$: \\
+$\left( \frac{x' - y'}{\sqrt{2}} \right) \left( \frac{x' + y'}{\sqrt{2}} \right) = 1$ \\
+$\frac{(x')^2 - (y')^2}{2} = 1$ \\
+\textbf{$(x')^2 - (y')^2 = 2$} \\
+\textbf{Geometric Revelation:} The graph of $y = \frac{1}{x}$ is exactly the standard hyperbola $x^2 - y^2 = 2$, just tilted sideways by $45^\circ$! The coordinate axes $x$ and $y$ are actually the standard hyperbola's asymptotes $y = \pm x$ in disguise.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{The Inverse Answers ``Why'':} Students often ask why a horizontal stretch of $2$ requires replacing $x$ with $x/2$. Part (ii) proves mathematically why: transforming the \textit{plane} uses $M$, but transforming the \textit{algebraic rule} relies entirely on the inverse matrix $M^{-1}$.
+\item \textbf{Algebra is Geometry:} An intimidating algebraic process (simultaneously substituting difference-of-squares fractions) is simply the machinery required to pivot the 2D plane. 
+\item \textbf{Unifying the Syllabus:} Functions (Unit 1) and Conic Sections/Matrices (Unit 2) are not isolated topics. $y = 1/x$ and $x^2 - y^2 = 2$ are identically the same shape, just observed from a different angle.
+\end{takeaways}
+
+\begin{problem}[The Calculus Matrix]
+A general cubic polynomial $P(x) = a_0 + a_1x + a_2x^2 + a_3x^3$ can be uniquely represented by a column vector containing its coefficients: $\mathbf{p} = \begin{bmatrix} a_0 \\ a_1 \\ a_2 \\ a_3 \end{bmatrix}$.
+
+Rather than transforming points in space, matrices can act as \textit{operators} that transform functions into new functions.
+
+\textbf{(i)} The derivative of the polynomial is $P'(x) = a_1 + 2a_2x + 3a_3x^2$. Its coefficient vector is $\begin{bmatrix} a_1 \\ 2a_2 \\ 3a_3 \\ 0 \end{bmatrix}$. \\
+Construct a $4 \times 4$ matrix $D$ such that multiplying $D$ by $\mathbf{p}$ produces this derivative vector (i.e., $D\mathbf{p} = \mathbf{p}'$). \\
+Once you have $D$, calculate the matrix powers $D^2$, $D^3$, and $D^4$. What unique property does $D$ possess, and what does the result of $D^4$ mean in terms of polynomial calculus?
+
+\textbf{(ii)} Let $T$ be a ``shift'' matrix such that multiplying $T$ by $\mathbf{p}$ yields the coefficient vector of the horizontally shifted polynomial, $P(x+1)$. \\
+By expanding $P(x+1) = a_0 + a_1(x+1) + a_2(x+1)^2 + a_3(x+1)^3$ and grouping the like powers of $x$, find the $4 \times 4$ matrix $T$.
+
+\textbf{(iii)} Consider the infinite matrix series $M = I + D + \frac{1}{2!}D^2 + \frac{1}{3!}D^3 + \frac{1}{4!}D^4 + \dots$ (where $I$ is the $4 \times 4$ identity matrix).\\
+Using your power calculations from part (i), simplify and evaluate the matrix $M$. Compare your final matrix $M$ to your matrix $T$ from part (ii).
+
+\textbf{(iv)} Translate the matrix equivalence you discovered in part (iii) back into the language of polynomial functions. \\
+By replacing $T\mathbf{p}$ and $D^k\mathbf{p}$ with their corresponding function notations, write down the algebraic formula you have just derived. What foundational theorem in calculus have you just proven entirely through matrix arithmetic?
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} To get $a_1$ in the top row of your answer, the top row of $D$ must be $0, 1, 0, 0$. Continue this logic for the rest of the rows. When multiplying $D$ by itself, notice how the non-zero numbers shift upwards and to the right. 
+    \item \textbf{Part (ii):} Expand $(x+1)^2$ and $(x+1)^3$ using the binomial theorem. Your goal is to write $P(x+1)$ in the form $(\dots) + (\dots)x + (\dots)x^2 + (\dots)x^3$. The contents of those brackets will form the rows of $T$. 
+    \item \textbf{Part (iii):} Because $D^4$ is the zero matrix, what happens to $D^5, D^6$, and the rest of the infinite series? You only need to add four matrices together. Remember that $3! = 6$.
+    \item \textbf{Part (iv):} You proved that $T = I + D + \frac{1}{2!}D^2 + \frac{1}{3!}D^3$. Multiply both sides of this equation by the vector $\mathbf{p}$. Remember that $T\mathbf{p}$ translates to $P(x+1)$, and $D\mathbf{p}$ translates to $P'(x)$. What does $D^2\mathbf{p}$ translate to?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} \\
+To map $\begin{bmatrix} a_0 \\ a_1 \\ a_2 \\ a_3 \end{bmatrix}$ to $\begin{bmatrix} a_1 \\ 2a_2 \\ 3a_3 \\ 0 \end{bmatrix}$, the derivative matrix is: \\
+$D = \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 3 \\ 0 & 0 & 0 & 0 \end{bmatrix}$. \\
+$D^2 = \begin{bmatrix} 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 6 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}$, $D^3 = \begin{bmatrix} 0 & 0 & 0 & 6 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}$, $D^4 = \begin{bmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}$. \\
+$D$ is a \textbf{nilpotent} matrix. The fact that $D^4 = \mathbf{0}$ mathematically represents that the 4th derivative of any cubic polynomial is identically zero.
+
+\medskip
+\textbf{(ii)} \\
+$P(x+1) = a_0 + a_1(x+1) + a_2(x^2+2x+1) + a_3(x^3+3x^2+3x+1)$. \\
+Grouping by powers of $x$: \\
+Constant: $a_0 + a_1 + a_2 + a_3$ \\
+$x^1$: $a_1 + 2a_2 + 3a_3$ \\
+$x^2$: $a_2 + 3a_3$ \\
+$x^3$: $a_3$ \\
+Putting these coefficients into a matrix yields: \\
+$T = \begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 2 & 3 \\ 0 & 0 & 1 & 3 \\ 0 & 0 & 0 & 1 \end{bmatrix}$.
+
+\medskip
+\textbf{(iii)} \\
+Since $D^4 = \mathbf{0}$, the infinite series truncates to exactly four terms: \\
+$M = I + D + \frac{1}{2}D^2 + \frac{1}{6}D^3$ \\
+$M = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} + \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 3 \\ 0 & 0 & 0 & 0 \end{bmatrix} + \begin{bmatrix} 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 3 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix} + \begin{bmatrix} 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}$ \\
+Adding these together gives $M = \begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 2 & 3 \\ 0 & 0 & 1 & 3 \\ 0 & 0 & 0 & 1 \end{bmatrix}$. \\
+\textbf{Result:} The infinite matrix series $M$ is exactly identical to the translation matrix $T$.
+
+\medskip
+\textbf{(iv)} \textit{(The ``Aha!'' Moment)} \\
+We have proven algebraically that $T = I + D + \frac{1}{2!}D^2 + \frac{1}{3!}D^3$. \\
+Applying this matrix operator equation to our polynomial vector $\mathbf{p}$: \\
+$T\mathbf{p} = \mathbf{p} + D\mathbf{p} + \frac{1}{2!}D^2\mathbf{p} + \frac{1}{3!}D^3\mathbf{p}$. \\
+Translating this back into functions: \\
+\textbf{$P(x+1) = P(x) + P'(x) + \frac{P''(x)}{2!} + \frac{P'''(x)}{3!}$} \\
+This elegantly proves \textbf{Taylor's Theorem} (specifically, the Taylor series expansion for a polynomial shifted by $1$). We have demonstrated that the geometric shift operator is actually the ``matrix exponential'' of the derivative operator!
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Matrices are Operators:} We usually think of matrices moving geometric points in 2D or 3D space, but they can just as easily move \textit{functions} through calculus operations.
+\item \textbf{Nilpotency acts as a limit:} The fact that a cubic's 4th derivative vanishes to zero directly causes the matrix sequence to terminate. An intimidating infinite series naturally collapses into a finite, exact matrix.
+\item \textbf{Unifying the Syllabus:} This problem shows that polynomial algebra, matrix arithmetic, and calculus/Maclaurin series are not separate topics. They are different languages describing the exact same underlying mathematical truth.
+\end{takeaways}

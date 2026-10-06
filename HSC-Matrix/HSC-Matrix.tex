@@ -79,7 +79,7 @@
 }
 
 \author{Vu Hung Nguyen}
-\title{HSC Mathematics: Matrix Practice (QLD Specialist)}
+\title{Matrix Practice: NSW Extension Enrichment \& QLD Specialist Mathematics}
 \date{}
 
 \begin{document}
@@ -114,40 +114,107 @@ beauty can be perceived but not explained."
 
 \section{Introduction}
 
+Matrices are one of the central mathematical tools used in modern science, engineering, computing, economics, data science, computer graphics, and artificial intelligence. At first, a matrix may look like little more than a rectangular table of numbers. However, matrix algebra provides a powerful language for representing and solving many problems involving systems of equations, geometric transformations, networks, population models, and multidimensional data.
+
+For senior secondary students, matrices also provide an important bridge between school mathematics and university mathematics. Ideas that are usually studied separately at school --- such as simultaneous equations, vectors, transformations, functions, and geometry --- can often be expressed within a single mathematical framework using matrices.
+
+This booklet introduces these ideas through short explanations, worked examples, structured exercises, and more challenging problems. The aim is not simply to learn how to perform matrix calculations, but to develop an understanding of \textbf{why matrix methods work, what they represent, and where they are useful}.
+
 \begin{remark}[Syllabus Note]
-Matrices are not part of the current NSW NESA Mathematics syllabuses. The content in this booklet is adapted from the Queensland (QCAA) Specialist Mathematics syllabus. It serves as an excellent enrichment topic for students interested in linear algebra, computer graphics, and machine learning.
+Matrices are not part of the current NSW NESA Mathematics syllabuses. Therefore, NSW students should regard this booklet as \textbf{enrichment material rather than examinable HSC content}.
+
+Much of the core material is adapted from topics studied in Queensland Specialist Mathematics. The later sections and appendices extend beyond the senior secondary syllabus and provide a preview of ideas encountered in university linear algebra, mathematics, engineering, computer science, data science, and related disciplines.
 \end{remark}
 
-\subsection{Project Overview}
-This booklet is a growing collection of matrix problems. It introduces matrix arithmetic, determinants, inverses, and applications to solving systems of linear equations and geometric transformations.
+\subsection{About This Booklet}
+
+This booklet is designed as a self-contained introduction to matrix mathematics for senior secondary students.
+
+It begins with the fundamental language and operations of matrices: matrix notation, dimensions, addition, scalar multiplication, matrix multiplication, transpose, determinants, and inverses. These ideas are then connected to familiar school mathematics, particularly simultaneous linear equations and geometric transformations.
+
+As the booklet progresses, the emphasis shifts from learning individual techniques to \textbf{using matrices as a problem-solving tool}. Applications include systems of equations, dominance matrices, population modelling with Leslie matrices, polynomial curve fitting, and problems involving geometry in two and three dimensions.
+
+The worked-problem and challenge sections are intended to encourage deeper mathematical reasoning rather than mechanical calculation. Some problems combine several ideas and require students to decide which matrix method is appropriate.
+
+The appendices then provide a glimpse beyond the secondary-school syllabus. Topics such as Gaussian elimination, linear independence, eigenvalues and eigenvectors, computer-based matrix calculations, and adjacency matrices introduce students to the broader subject of \textbf{linear algebra}.
+
+The overall progression is therefore:
+
+\textbf{school algebra $\rightarrow$ matrix algebra $\rightarrow$ applications $\rightarrow$ university linear algebra.}
+
+The intention is not to replace a formal linear algebra course, but to make the transition into one considerably more familiar.
 
 \subsection{Target Audience}
-This resource is written for students who want to explore linear algebra beyond the standard NSW syllabus, in a clear, classroom-friendly format. In particular, this booklet is for:
-\begin{itemize}[leftmargin=*]
-  \item NSW Maths Extension 1 and 2 students.
-  \item QLD Maths Units 3 and 4 Specialist students who want to refresh their matrix knowledge.
-  \item Students all around Australia who want to prepare for their maths studies in university.
-\end{itemize}
 
-This booklet may also be beneficial for university units such as:
-\begin{itemize}[leftmargin=*]
-  \item USYD MATH1061 Mathematics 1A
-  \item UNSW MATH1131 Mathematics 1A, 1B
-\end{itemize}
+This booklet is primarily written for senior secondary mathematics students who would like to explore mathematics beyond their immediate syllabus.
+
+For \textbf{NSW Mathematics Extension 1 and Extension 2 students}, matrices provide useful enrichment and an opportunity to see familiar topics such as vectors, simultaneous equations, transformations, and three-dimensional geometry from a different perspective.
+
+For \textbf{Queensland Specialist Mathematics students}, the booklet can be used for revision, additional worked examples, problem-solving practice, and extension beyond the examinable course.
+
+It is also suitable for students elsewhere in Australia who are preparing for university study in mathematics-intensive fields such as engineering, computer science, physics, data science, economics, and artificial intelligence.
+
+Students beginning university mathematics may also find parts of the booklet useful as revision. The later appendices are particularly intended to provide a gentle introduction to ideas that appear in first-year linear algebra.
+
+No previous formal study of matrices is assumed.
 
 \subsection{How to Use This Booklet}
-Read the short summary of the core formulas first, then attempt each problem before reading the solution.
+
+There are several ways to use this booklet depending on your background.
+
+If matrices are completely new to you, begin with \textbf{Chapter 2: Matrix Fundamentals} and work through the topics in order. Do not try to memorise all the formulas immediately. Instead, pay attention to the meaning of each operation and the dimensions of the matrices involved.
+
+After reading an explanation, attempt the associated problem \textbf{before reading the solution}. Matrix algebra is best learned by doing calculations yourself and checking where mistakes occur.
+
+Once you are comfortable with the fundamentals, move to \textbf{Part 1: Worked Problems}. These problems demonstrate how several matrix ideas can be combined in a single question.
+
+You can then use \textbf{Part 2: Practice and Challenge Bank} for independent practice. The later problems are deliberately less routine and may require you to connect matrices with algebra, geometry, modelling, or other areas of mathematics.
+
+Finally, the appendices can be read selectively. They are not required for understanding the earlier chapters. Instead, they are intended for students who are curious about where matrix mathematics leads at university and in computing.
+
+A useful study routine is therefore:
+
+\textbf{Learn $\rightarrow$ Attempt $\rightarrow$ Check $\rightarrow$ Reflect $\rightarrow$ Extend.}
+
+When checking a solution, do not only ask whether your numerical answer is correct. Ask why the method works and whether another method could also have been used.
 
 \subsection{Knowledge Needed}
-The key background knowledge is:
-\begin{itemize}[leftmargin=*]
-  \item Basic arithmetic and algebraic manipulation.
-  \item Understanding of systems of linear equations.
-  \item Basic 2D geometry (for geometric transformations).
-\end{itemize}
 
-\subsection{Core Formulas and Ideas}
-% TODO: Add core matrix formulas, properties of determinants, and inverses here.
+This booklet assumes only the mathematical background normally developed during senior secondary mathematics.
+
+Students should be comfortable with basic algebraic manipulation, substitution and elimination, solving simultaneous linear equations, working with fractions and indices, and interpreting equations geometrically.
+
+Some familiarity with coordinate geometry and vectors is useful for the sections involving transformations and three-dimensional geometry, but the necessary matrix ideas are introduced within the booklet.
+
+Importantly, \textbf{no prior knowledge of matrices or linear algebra is required}. Chapter 2 begins from the definition of a matrix and develops the required notation and operations step by step.
+
+Some topics in the appendices require greater mathematical maturity, but these sections are explicitly intended as enrichment and may be skipped without affecting the main sequence of the booklet.
+
+\subsection{What You Will Learn}
+
+By working through this booklet, you should develop both computational skills and a broader understanding of matrix mathematics.
+
+You will learn how to represent information using matrices; perform matrix arithmetic and multiplication; work with transposes, determinants, and inverses; translate systems of linear equations into matrix form; solve systems using inverse matrices and augmented matrices; interpret matrices geometrically; and apply matrices to modelling problems.
+
+More importantly, you should begin to recognise several important ideas that continue into university mathematics:
+
+\[
+AX=B
+\]
+
+is not merely a compact way of writing simultaneous equations. It is one of the fundamental mathematical forms used throughout linear algebra, numerical computing, optimisation, statistics, engineering, and machine learning.
+
+Similarly,
+
+\[
+AB
+\]
+
+is more than an arithmetic operation. Matrix multiplication can represent the \textbf{composition of transformations}, the propagation of a population model, or movement through a network.
+
+The later enrichment sections introduce this wider perspective. They show how elementary matrix calculations develop naturally into concepts such as Gaussian elimination, linear independence, eigenvalues and eigenvectors, numerical computation, and graph theory.
+
+The goal of the booklet is therefore not simply to teach students to \textbf{calculate with matrices}, but to help them begin to \textbf{think in matrices}.
 
 \section{Matrix Fundamentals}
 
