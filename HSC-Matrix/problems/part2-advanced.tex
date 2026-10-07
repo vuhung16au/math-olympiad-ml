@@ -1638,3 +1638,90 @@ When $k=\frac12$,
     \item \textbf{Mathematical models involve choices.} The model $N+N^2$ gives direct wins and two-step paths equal weight. A weighted model $N+kN^2, 0<k<1,$ gives greater importance to direct victories.
     \item \textbf{A useful modelling question remains:} What value of $k$ should organisers choose? Different values of $k$ may produce different rankings, showing that the ranking system depends not only on the match results but also on the assumptions built into the mathematical model.
 \end{takeaways}
+
+\begin{problem}[Matrix Powers and Convergence]
+Consider the matrix
+\[ A= \begin{pmatrix} 0 & \frac12\\[2mm] \frac14 & 0 \end{pmatrix}. \]
+Repeated multiplication by $A$ defines a discrete system
+\[ \mathbf{x}_{n+1}=A\mathbf{x}_n. \]
+We investigate what happens after many repeated applications of $A$.
+
+\textbf{(a) Characteristic roots}\\
+The characteristic equation of $A$ is
+\[ \det(A-\lambda I)=0. \]
+Show that the characteristic equation is
+\[ \lambda^2-\frac18=0, \]
+and hence find its two roots. Verify that both roots satisfy $|\lambda|<1$.
+
+\textbf{(b) A surprising pattern in the powers}\\
+Calculate $A^2$. Hence show that, for every non-negative integer $n$,
+\[ A^{2n} = \left(\frac18\right)^n I \quad \text{and} \quad A^{2n+1} = \left(\frac18\right)^n A. \]
+Use your result to calculate $A^{10}$ without multiplying $A$ by itself ten times.
+
+\textbf{(c) What happens after infinitely many steps?}\\
+Using part (b), determine $\lim_{n\to\infty}A^n$.
+Now let $\mathbf{x}_{n+1}=A\mathbf{x}_n$ for an arbitrary starting vector $\mathbf{x}_0$.
+Explain why $\mathbf{x}_n\to\mathbf{0}$ regardless of the initial vector.
+How does this result relate to the fact found in part (a) that both characteristic roots have absolute value less than $1$?
+
+\textbf{(d) The system no longer dies out}\\
+Suppose that at each step a constant input is added:
+\[ \mathbf{x}_{n+1} = A\mathbf{x}_n+ \begin{pmatrix} 10\\ 8 \end{pmatrix}. \]
+An equilibrium vector $\mathbf{x}^*$ is a vector that remains unchanged from one step to the next.
+\begin{enumerate}
+\item[(i)] Find $\mathbf{x}^*$ by solving
+\[ \mathbf{x}^* = A\mathbf{x}^* + \begin{pmatrix} 10\\ 8 \end{pmatrix}. \]
+\item[(ii)] Define $\mathbf{y}_n=\mathbf{x}_n-\mathbf{x}^*$. Show that $\mathbf{y}_{n+1}=A\mathbf{y}_n$. Hence prove that, for every starting vector $\mathbf{x}_0$,
+\[ \boxed{\mathbf{x}_n\to\mathbf{x}^*}. \]
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\textbf{(a)}\\
+Write $A-\lambda I = \begin{pmatrix} -\lambda & \frac12\\[2mm] \frac14 & -\lambda \end{pmatrix}$ and evaluate its determinant.
+
+\textbf{(b)}\\
+Do not begin by calculating $A^3,A^4,\ldots$. Calculate $A^2$ first. You should obtain a scalar multiple of $I$. Then use $A^{2n}=(A^2)^n$.
+
+\textbf{(c)}\\
+Treat even and odd powers separately using the formulas from part (b). Remember that $\left(\frac18\right)^n\to0$. Also, $\mathbf{x}_n=A^n\mathbf{x}_0$.
+
+\textbf{(d)}\\
+Let $\mathbf{x}^* = \begin{pmatrix} p\\q \end{pmatrix}$. The equilibrium condition gives two simultaneous equations.
+For part (ii), subtract the equilibrium equation $\mathbf{x}^*=A\mathbf{x}^*+\mathbf b$ from $\mathbf{x}_{n+1}=A\mathbf{x}_n+\mathbf b$. The constant vector $\mathbf b$ will disappear.
+\end{hint}
+
+\begin{solution}
+\textbf{(a)}\\
+\[ \det(A-\lambda I) = \begin{vmatrix} -\lambda & \frac12\\[2mm] \frac14 & -\lambda \end{vmatrix} = \lambda^2-\frac18. \]
+Hence $\lambda^2-\frac18=0$, so $\lambda = \pm\sqrt{\frac18} = \pm\frac{\sqrt2}{4}$. Since $\frac{\sqrt2}{4}<1$, both characteristic roots have absolute value less than $1$.
+
+\textbf{(b)}\\
+\[ A^2 = \begin{pmatrix} 0 & \frac12\\ \frac14 & 0 \end{pmatrix}^2 = \begin{pmatrix} \frac18&0\\ 0&\frac18 \end{pmatrix} = \frac18I. \]
+Hence $A^{2n} = (A^2)^n = \left(\frac18\right)^nI$, and $A^{2n+1} = A^{2n}A = \left(\frac18\right)^nA$.
+Therefore $A^{10} = (A^2)^5 = \left(\frac18\right)^5I = \frac1{32768}I$.
+
+\textbf{(c)}\\
+For even powers, $A^{2n} = \left(\frac18\right)^nI \to0$. For odd powers, $A^{2n+1} = \left(\frac18\right)^nA \to0$. Therefore $\boxed{A^n\to0}$.
+Since $\mathbf{x}_n=A^n\mathbf{x}_0$, it follows that $\boxed{\mathbf{x}_n\to\mathbf0}$.
+The characteristic roots in part (a) both have magnitude less than $1$, and repeated powers of these numbers become smaller and smaller. The behaviour of $A^n$ reflects the same decay.
+
+\textbf{(d)}\\
+Let $\mathbf{x}^* = \begin{pmatrix} p\\q \end{pmatrix}$. Then
+\[ \begin{pmatrix} p\\q \end{pmatrix} = \begin{pmatrix} \frac12q\\[1mm] \frac14p \end{pmatrix} + \begin{pmatrix} 10\\8 \end{pmatrix}. \]
+Thus $p=\frac12q+10$ and $q=\frac14p+8$.
+Solving gives $p=16, q=12$. Hence $\boxed{ \mathbf{x}^* = \begin{pmatrix} 16\\12 \end{pmatrix} }$.
+Now define $\mathbf{y}_n=\mathbf{x}_n-\mathbf{x}^*$. Then
+\begin{align*} \mathbf{y}_{n+1} &=\mathbf{x}_{n+1}-\mathbf{x}^*\\ &=(A\mathbf{x}_n+\mathbf b) -(A\mathbf{x}^*+\mathbf b)\\ &=A(\mathbf{x}_n-\mathbf{x}^*)\\ &=A\mathbf{y}_n. \end{align*}
+Therefore $\mathbf{y}_n=A^n\mathbf{y}_0$. From part (c), $A^n\to0$, so $\mathbf{y}_n\to\mathbf0$. Thus $\boxed{ \mathbf{x}_n\to \begin{pmatrix} 16\\12 \end{pmatrix} }$.
+The constant input changes the destination, but not the mechanism that makes the system settle down.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Look for structure before multiplying repeatedly.} In this problem, $A^2=\frac18I$, which makes all higher powers straightforward.
+\item \textbf{Characteristic roots can give insight into long-term behaviour.} Here both roots satisfy $|\lambda|<1$, while repeated application of the matrix causes the system to decay towards zero.
+\item \textbf{Even and odd powers may have different forms.} Splitting $A^n$ into $A^{2n}$ and $A^{2n+1}$ is useful whenever $A^2$ has a particularly simple form.
+\item \textbf{A constant input can produce a non-zero equilibrium.} The recurrence $\mathbf{x}_{n+1}=A\mathbf{x}_n+\mathbf b$ approaches the fixed point satisfying $\mathbf{x}^*=A\mathbf{x}^*+\mathbf b$.
+\item \textbf{The substitution $\mathbf{y}_n=\mathbf{x}_n-\mathbf{x}^*$} is a useful technique because it converts the recurrence back into $\mathbf{y}_{n+1}=A\mathbf{y}_n$.
+\item \textbf{Question to think about:} What changes if a characteristic root has absolute value greater than $1$, or is exactly equal to $1$?
+\end{takeaways}
