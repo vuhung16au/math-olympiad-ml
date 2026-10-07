@@ -1366,3 +1366,275 @@ P(x+1)
 \]
 which is Taylor's formula for a unit shift.
 \end{takeaways}
+
+\begin{problem}[The Commutator Conundrum]
+In matrix algebra, matrix multiplication is generally not commutative. The expression $C = AB - BA$ measures the ``failure'' of commutativity and is called the commutator of matrices $A$ and $B$. This scaffolded investigation explores a surprising property of $2 \times 2$ commutators.
+
+\textbf{Part (i):} Consider the matrices $A = \begin{pmatrix} a+1 & b \\ b & a \end{pmatrix}$ and $B = \begin{pmatrix} c & x \\ x & c \end{pmatrix}$. Evaluate their commutator $C = AB - BA$ and show that the sum of the elements on its main diagonal (known as the trace) is exactly zero.
+
+\textbf{Part (ii):} Let $M = \begin{pmatrix} p & q \\ r & s \end{pmatrix}$ be a general $2 \times 2$ matrix. Prove that $M^2 - (p+s)M + (ps-qr)I_2 = 0_2$, where $I_2$ is the $2 \times 2$ identity matrix and $0_2$ is the zero matrix.
+
+\textbf{Part (iii):} Let $A$ and $B$ be \textit{any} two arbitrary $2 \times 2$ matrices with real entries. Prove that the square of their commutator, $(AB - BA)^2$, is always a scalar multiple of the identity matrix $I_2$.
+
+\textbf{Part (iv):} Suppose $A$ and $B$ are arbitrary $2 \times 2$ real matrices such that $(AB - BA)^n = I_2$ for some positive integer $n$. Using the discovery from Part (iii), prove that $n$ must be an even number, and deduce that $(AB - BA)^4 = I_2$.
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Perform the matrix multiplication for $AB$ and $BA$ separately, then subtract them. The algebraic terms will simplify significantly.
+    \item \textbf{Part (ii):} Expand $M^2$ directly by multiplying $M$ by itself. Then subtract the scalar multiplication of $(p+s)M$ and observe what remains on the diagonals and off-diagonals.
+    \item \textbf{Part (iii):} What is the trace of $AB$ compared to the trace of $BA$? What does this imply about the trace of $C = AB - BA$? Once you know the trace of $C$, apply the identity proven in Part (ii) by substituting $M = C$.
+    \item \textbf{Part (iv):} Let $C = AB - BA$. From Part (iii), you know $C^2 = kI_2$ for some real number $k$. Consider two cases: $n$ is odd ($n = 2m+1$) and $n$ is even ($n = 2m$). If $n$ is odd, can $C$ be anything other than the zero matrix?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i)}
+$$AB = \begin{pmatrix} a+1 & b \\ b & a \end{pmatrix} \begin{pmatrix} c & x \\ x & c \end{pmatrix} = \begin{pmatrix} (a+1)c+bx & (a+1)x+bc \\ bc+ax & bx+ac \end{pmatrix}$$
+$$BA = \begin{pmatrix} c & x \\ x & c \end{pmatrix} \begin{pmatrix} a+1 & b \\ b & a \end{pmatrix} = \begin{pmatrix} c(a+1)+xb & cb+xa \\ x(a+1)+cb & xb+ca \end{pmatrix}$$
+Subtracting $BA$ from $AB$ gives:
+$$C = AB - BA = \begin{pmatrix} 0 & x \\ -x & 0 \end{pmatrix}$$
+The trace is the sum of the main diagonal: $0 + 0 = 0$.
+
+\textbf{Part (ii)}
+$$M^2 = \begin{pmatrix} p & q \\ r & s \end{pmatrix} \begin{pmatrix} p & q \\ r & s \end{pmatrix} = \begin{pmatrix} p^2+qr & pq+qs \\ pr+sr & qr+s^2 \end{pmatrix}$$
+$$(p+s)M = \begin{pmatrix} p^2+ps & pq+qs \\ pr+sr & ps+s^2 \end{pmatrix}$$
+Subtracting the two matrices yields:
+$$M^2 - (p+s)M = \begin{pmatrix} qr-ps & 0 \\ 0 & qr-ps \end{pmatrix} = -(ps-qr) \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = -(ps-qr)I_2$$
+Therefore, $M^2 - (p+s)M + (ps-qr)I_2 = 0_2$.
+
+\textbf{Part (iii)}
+Let $A = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}$ and $B = \begin{pmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \end{pmatrix}$. 
+The trace of $AB$ is $a_{11}b_{11} + a_{12}b_{21} + a_{21}b_{12} + a_{22}b_{22}$, which is strictly identical to the trace of $BA$. Thus, $\text{Tr}(AB - BA) = \text{Tr}(AB) - \text{Tr}(BA) = 0$.
+Let $C = AB - BA = \begin{pmatrix} p & q \\ r & s \end{pmatrix}$. Since $\text{Tr}(C) = p+s = 0$, we substitute $M = C$ into the identity from Part (ii):
+$$C^2 - (0)C + (ps-qr)I_2 = 0_2 \implies C^2 = -(ps-qr)I_2$$
+Thus, $C^2 = kI_2$ where $k = -(ps-qr)$ is a real scalar.
+
+\textbf{Part (iv)}
+Let $C = AB - BA$. We are given $C^n = I_2$. From Part (iii), $C^2 = kI_2$ for a real scalar $k = -\det(C)$.
+Assume $n$ is odd, so $n = 2m+1$. 
+$$C^{2m+1} = C(C^2)^m = C(kI_2)^m = k^m C$$
+Since $C^n = I_2$, we have $k^m C = I_2 \implies C = \frac{1}{k^m}I_2$. This means $C$ is a scalar multiple of the identity matrix, which would imply $\text{Tr}(C) = \frac{2}{k^m}$. But from Part (iii), $\text{Tr}(C) = 0$. This implies $\frac{2}{k^m} = 0$, which is impossible. Thus, $n$ cannot be odd.
+Therefore, $n$ must be even, so $n = 2m$. 
+$$C^{2m} = (C^2)^m = (kI_2)^m = k^m I_2 = I_2$$
+This requires $k^m = 1$. Since $A$ and $B$ are real matrices, $k = -\det(C)$ is a real number. The only real solutions to $k^m = 1$ are $k = 1$ (if $m$ is even or odd) or $k = -1$ (if $m$ is even).
+In either case, $k^2 = 1$. 
+Therefore, $(AB - BA)^4 = C^4 = (C^2)^2 = (kI_2)^2 = k^2 I_2 = I_2$.
+\end{solution}
+
+\begin{takeaways}
+    \item \textbf{Linearity of the Trace:} The sum of diagonal elements (trace) holds the elegant property $\text{Tr}(AB) = \text{Tr}(BA)$, rendering the trace of any commutator identically zero.
+    \item \textbf{Cayley-Hamilton Theorem:} Part (ii) serves as a gentle algebraic introduction to the Cayley-Hamilton theorem for $2 \times 2$ matrices, proving that a matrix satisfies its own characteristic polynomial.
+    \item \textbf{Logical Proofs in Algebra:} Part (iv) highlights the power of contradiction. By assuming an odd power could yield the identity matrix, students apply properties of scalar matrices to force an impossible conclusion, seamlessly connecting polynomials, invariants (trace/determinant), and matrix algebra.
+\end{takeaways}
+
+\begin{problem}[The Net Strength Theorem]
+\textbf{Context:}\\
+The matrix $M$ provided records the results of a 5-team round-robin netball tournament. In this system, 2 points are awarded for a win, 1 point for a draw, and 0 points for a loss. The entry $m_{ij}$ represents the points team $i$ scored in their match against team $j$. 
+
+Let $J$ be a $5 \times 5$ matrix where every entry is 1, $I$ be the $5 \times 5$ identity matrix, and $c$ be a $5 \times 1$ column vector of ones. 
+
+\textbf{Part (i): The Transpose Property}\\
+Evaluate the matrix addition $S = M + M^T$. Express $S$ entirely in terms of $J$ and $I$. Briefly explain the logical reason why this algebraic relationship must hold true for \textit{any} round-robin tournament that uses this 2-1-0 point system.
+
+\textbf{Part (ii): Attack vs Defence}\\
+The column vector $p = Mc$ calculates the total points scored by each team. The vector $a = M^Tc$ calculates the total points scored \textit{against} each team (points conceded). Using your matrix equation from Part (i), algebraically prove that $a = 8c - p$. What does this imply about a team's defensive record compared to their attacking record in this specific scoring system?
+
+\textbf{Part (iii): The Net Performance Vector}\\
+In tournaments, a secondary ranking vector $M^2 c = M(Mc) = Mp$ is often used to award secondary points to teams for performing well against strong opponents. Similarly, $M^Tp$ calculates the secondary points a team \textit{conceded} to strong opponents. 
+Let $N = Mp - M^Tp$ be the ``Net Performance Vector'', representing the difference between secondary points earned and secondary points conceded. 
+Using the relationship established in Part (i), prove that $N = 2M^2c + 2Mc - 40c$. 
+\textit{(Note: You will need to determine the numerical value of the vector $Jp$ to complete this proof).}
+
+\textbf{Part (iv): The ``Aha!'' Moment}\\
+The original problem uses the model $M + M^2 + M^3$ to rank the teams. Consider a simpler second-order ranking model, $R_2 = M^2 c + Mc$, which ranks teams based on the sum of their primary and secondary points. 
+Using your result from Part (iii), explain why ranking the teams from highest to lowest using the complex Net Performance Vector ($N$) will always result in the exact same tournament ranking as using the standard second-order model ($R_2$). 
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (i):} Consider a single match between team $i$ and team $j$. What is the sum of $m_{ij} + m_{ji}$? Does this sum ever change regardless of whether the match is a win, loss, or draw? Note the main diagonal where $i = j$.
+    \item \textbf{Part (ii):} Take the equation $M + M^T = 2J - 2I$ and post-multiply both sides by the column vector $c$. Think about what the vector $Jc$ represents: multiplying a $5 \times 5$ matrix of ones by a $5 \times 1$ vector of ones. 
+    \item \textbf{Part (iii):} Substitute $M^T$ out of the equation using $M^T = 2J - 2I - M$. When expanding, you will get the term $Jp$. Remember that $p$ is the vector of total points for all 5 teams. If there are 5 teams playing a round-robin, how many games are played in total, and how many total points are distributed across the whole tournament? 
+    \item \textbf{Part (iv):} Look closely at the equation $N = 2R_2 - 40c$. If you have a set of scores, and you double them all, then subtract 40 from each of them, does the highest score remain the highest?
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{Part (i)}\\
+In a 2-1-0 scoring system, the total points awarded in any match between team $i$ and team $j$ is always 2 (either 2+0, 1+1, or 0+2). Therefore, $m_{ij} + m_{ji} = 2$ for all $i \neq j$. 
+Since a team cannot play itself, the main diagonal consists of zeros, so $m_{ii} = 0$. 
+Thus, $M + M^T$ results in a matrix with 0s on the diagonal and 2s everywhere else. 
+This can be written as: $M + M^T = 2J - 2I$.
+
+\textbf{Part (ii)}\\
+We start with $M + M^T = 2J - 2I$ and post-multiply by $c$:
+$$Mc + M^Tc = 2Jc - 2Ic$$
+Substitute $p = Mc$ and $a = M^Tc$:
+$$p + a = 2Jc - 2c$$
+The vector $c$ is a $5 \times 1$ column of 1s. Therefore, $Jc$ is a $5 \times 1$ vector where each entry is 5.
+$$p + a = 2(5c) - 2c = 10c - 2c = 8c$$
+$$a = 8c - p$$
+This implies that a team's defensive record (points conceded) is perfectly inversely proportional to their attacking record. Every point a team fails to score out of their maximum possible 8 points is a point conceded to an opponent.
+
+\textbf{Part (iii)}\\
+From Part (i), $M^T = 2J - 2I - M$. 
+Substitute this into the Net Performance Vector $N$:
+$$N = Mp - M^Tp = Mp - (2J - 2I - M)p$$
+$$N = Mp - 2Jp + 2Ip + Mp$$
+$$N = 2Mp - 2Jp + 2p$$
+We know $p = Mc$. The term $Jp$ represents multiplying the all-ones matrix $J$ by the points vector $p$. The result is a column vector where each entry is the sum of all elements in $p$. 
+In a 5-team round robin, there are 10 matches. At 2 points per match, the total points in the tournament is 20. Therefore, the sum of $p$ is 20, making $Jp = 20c$.
+$$N = 2M(Mc) - 2(20c) + 2(Mc)$$
+$$N = 2M^2c + 2Mc - 40c$$
+
+\textbf{Part (iv)}\\
+From Part (iii), we can factor out the 2:
+$$N = 2(M^2c + Mc) - 40c$$
+$$N = 2R_2 - 40c$$
+The Net Performance Vector $N$ is simply the second-order model $R_2$ multiplied by a positive scalar (2) and shifted by a constant vector ($40c$). Linear transformations of this nature (where $y = mx + c$ and $m > 0$) strictly preserve the numerical hierarchy. Therefore, ranking teams based on $N$ will yield the exact same order as ranking them by $R_2$.
+\end{solution}
+
+\begin{takeaways}
+    \item \textbf{Matrix Symmetries:} The 2-1-0 scoring system is not just convenient for counting; it creates a beautiful algebraic symmetry ($M + M^T = 2J - 2I$) that allows us to interrelate points scored and points conceded without looking at individual matches. 
+    \item \textbf{The Power of Constants:} Recognizing that $Jp$ evaluates to a constant vector representing the total points in the tournament ($20c$) is a crucial leap. It transforms a matrix multiplication into a scalar shift, demonstrating how macroeconomic tournament rules (total games played) constrain microeconomic matrix calculations.
+    \item \textbf{The ``Aha'' Insight:} Standard tournament models like $M + M^2$ can seem arbitrary—why just add $M^2$? The proof in Part (iv) validates the model. It proves that calculating a simple $R_2$ ranking inherently calculates the much more complex concept of ``Net Strength'' (points gained from strong teams minus points leaked to strong teams). 
+\end{takeaways}
+
+\begin{problem}[A Hidden Pattern in Matrix Powers]
+Let \[ A= \begin{pmatrix} 1&2&2\\ 2&1&1\\ 2&2&1 \end{pmatrix}, \] and let \(I\) denote the \(3\times 3\) identity matrix. 
+\begin{enumerate} 
+\item[(i)] Calculate \(A^2\) and \(A^3\). Without calculating the whole matrix \(A^4\), determine only the following three entries: \[ (A^4)_{11},\qquad (A^4)_{12},\qquad (A^4)_{23}. \] 
+\item[(ii)] Suppose \[ A^4=pA^3+qA^2+rA+3I, \] where \(p,q,r\) are real numbers. Using the entries found in part (i), determine \(p,q\) and \(r\). Hence write \(A^4\) entirely in terms of \(A^3,A^2,A\) and \(I\). 
+\item[(iii)] A student proposes calculating \(A^5\) and \(A^6\) by repeated matrix multiplication. Using your result from part (ii) instead, express each of \[ A^5 \quad\text{and}\quad A^6 \] in the form \[ aA^3+bA^2+cA+dI. \] Do not calculate \(A^5\) or \(A^6\) directly. 
+\item[(iv)] For \(n\geq0\), let \(u_n\) denote the entry in row \(1\), column \(3\) of \(A^n\), where \(A^0=I\). Use the matrix identity from part (ii) to show that, for \(n\geq4\), \[ u_n = 2u_{n-1} +10u_{n-2} +10u_{n-3} +3u_{n-4}. \] Hence determine the \((1,3)\) entry of \(A^7\) without calculating \(A^7\). Briefly explain why the same idea could be used to find any particular entry of a very large power such as \(A^{100}\). 
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{enumerate} 
+\item[(i)] You do not need all of \(A^4\). Since \(A^4=A^3A\), calculate a required entry by taking the appropriate row of \(A^3\) and column of \(A\). For example, \[ (A^4)_{11} = (\text{row 1 of }A^3) \cdot (\text{column 1 of }A). \] 
+\item[(ii)] Equality of matrices means corresponding entries are equal. Apply the equation to the three entries from part (i) to obtain three simultaneous equations in \(p,q,r\). 
+\item[(iii)] Multiply the identity from part (ii) by \(A\). Whenever \(A^4\) appears again, replace it using your known identity. 
+\item[(iv)] Multiply the identity in part (ii) by \(A^{n-4}\). Then look only at the \((1,3)\) entry. 
+\end{enumerate}
+\end{hint}
+
+\begin{solution}
+\paragraph{(i)} Direct multiplication gives \[ A^2= \begin{pmatrix} 9&8&6\\ 6&7&6\\ 8&8&7 \end{pmatrix} \] and \[ A^3= \begin{pmatrix} 37&38&32\\ 32&31&25\\ 38&38&31 \end{pmatrix}. \] Since \(A^4=A^3A\), \[ (A^4)_{11} = 37(1)+38(2)+32(2) =177. \] Similarly, \[ (A^4)_{12}=176, \qquad (A^4)_{23}=120. \] Thus \[ \boxed{ (A^4)_{11}=177,\qquad (A^4)_{12}=176,\qquad (A^4)_{23}=120. } \] 
+\paragraph{(ii)} Using the \((1,1)\) entry, \[ 177=37p+9q+r+3, \] so \[ 37p+9q+r=174. \tag{1} \] Using the \((1,2)\) entry, \[ 176=38p+8q+2r. \tag{2} \] Using the \((2,3)\) entry, \[ 120=25p+6q+r. \tag{3} \] Solving (1)--(3) gives \[ \boxed{p=2,\qquad q=10,\qquad r=10}. \] Hence \[ \boxed{ A^4=2A^3+10A^2+10A+3I. } \] 
+\paragraph{(iii)} Multiplying the identity from part (ii) by \(A\), \[ A^5 = 2A^4+10A^3+10A^2+3A. \] Substituting for \(A^4\), \begin{align*} A^5 &= 2(2A^3+10A^2+10A+3I) +10A^3+10A^2+3A\\ &= \boxed{ 14A^3+30A^2+23A+6I }. \end{align*} Similarly, \[ A^6 = 14A^4+30A^3+23A^2+6A, \] so \[ \boxed{ A^6 = 58A^3+163A^2+146A+42I. } \] 
+\paragraph{(iv)} From \[ A^4=2A^3+10A^2+10A+3I, \] multiply by \(A^{n-4}\) to obtain \[ A^n = 2A^{n-1} +10A^{n-2} +10A^{n-3} +3A^{n-4}. \] Therefore the \((1,3)\) entries satisfy \[ \boxed{ u_n = 2u_{n-1} +10u_{n-2} +10u_{n-3} +3u_{n-4}. } \] The initial values are \[ u_0=0,\qquad u_1=2,\qquad u_2=6,\qquad u_3=32. \] Hence \[ u_4 = 2(32)+10(6)+10(2)+3(0) =144, \] \[ u_5 = 2(144)+10(32)+10(6)+3(2) =674, \] \[ u_6 = 2(674)+10(144)+10(32)+3(6) =3126, \] and \begin{align*} u_7 &= 2(3126)+10(674)+10(144)+3(32)\\ &=14528. \end{align*} Therefore \[ \boxed{(A^7)_{13}=14528}. \] The same recurrence applies to every corresponding entry of the matrices \(A^n\). Thus a particular entry of a large power such as \(A^{100}\) can be found using a numerical recurrence instead of repeatedly multiplying entire matrices.
+\end{solution}
+
+\begin{takeaways}
+\item If only a few entries of a matrix product are required, calculate only those entries using the relevant row--column products. 
+\item A matrix identity can provide a powerful shortcut for calculating higher powers. Once \[ A^4=2A^3+10A^2+10A+3I \] is known, higher powers can be reduced using algebra rather than repeated matrix multiplication. 
+\item A relationship between whole matrices automatically produces the same recurrence relation for each corresponding entry of their powers. 
+\item Large powers such as \(A^{20}\) or \(A^{100}\) may therefore be much easier to analyse than they first appear. 
+\item \textbf{Further question:} If another matrix \(B\) satisfies a different relation involving \(B^4,B^3,B^2,B\) and \(I\), what recurrence would the entries of \(B^n\) satisfy? 
+\end{takeaways}
+
+\begin{problem}[Esports Dominance Networks]
+Six esports teams --- \textbf{Apex (A), Brawlers (B), Cyphers (C), Drifters (D), Echo (E), and Falcons (F)} --- competed in a preliminary regional tournament. Due to time constraints, not every team played every other team.
+
+The results were:
+\begin{itemize}
+    \item Brawlers defeated Drifters, Echo, and Falcons.
+    \item Cyphers defeated Drifters, Echo, and Falcons.
+    \item Apex defeated Brawlers and Cyphers.
+    \item Drifters defeated Apex.
+    \item Echo and Falcons did not win any matches.
+\end{itemize}
+
+The tournament organisers use a \textbf{dominance matrix} $N$, where
+\[ N_{ij}= \begin{cases} 1,&\text{if team }i\text{ defeated team }j,\\ 0,&\text{otherwise.} \end{cases} \]
+They initially rank the teams using the model
+\[ R=N+N^2. \]
+The score of a team is the sum of the entries in its corresponding row of $R$.
+
+\textbf{(i)} Construct the $6\times 6$ dominance matrix $N$, using the order $A, B, C, D, E, F$.
+
+\textbf{(ii)} Calculate $N^2$, and hence determine the ranking scores obtained from $R=N+N^2$. Rank the six teams from highest to lowest score.
+
+\textbf{(iii)} Brawlers and Cyphers complain:
+\begin{quote}
+``We each won three matches, while Apex won only two. How can Apex be ranked above us?''
+\end{quote}
+Use your results from part (ii) to explain mathematically why Apex receives the highest score. In your explanation, interpret the entries of $N^2$ as \textbf{two-step dominance paths}. In particular, explain why some entries in $N^2$ can be greater than 1.
+
+\textbf{(iv)} The organisers decide that a direct victory should be worth more than a two-step dominance path. They replace the model by
+\[ R_k=N+kN^2, \qquad 0<k<1. \]
+\begin{enumerate}
+    \item Find Apex's score in terms of $k$.
+    \item Hence find Apex's score when $k=\frac12$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\textbf{Part (i)}\\
+Place the winning team on the row and the defeated team on the column. For example, because Brawlers defeated Drifters, $N_{BD}=1$.
+
+\textbf{Part (ii)}\\
+Recall that $N^2=N\times N$. An entry $(N^2)_{ij}$ counts the number of ways to travel from team $i$ to team $j$ through exactly one intermediate team. For example, $A\to B\to D$ is one two-step path from Apex to Drifters.
+
+\textbf{Part (iii)}\\
+Compare the row sums of $N$ and $N^2$. Ask:
+\begin{itemize}
+    \item How many direct wins does Apex have?
+    \item Which teams did Apex defeat?
+    \item How many wins do those teams themselves have?
+\end{itemize}
+Also investigate why $(N^2)_{AD}=2$. Can you find the two different paths?
+
+\textbf{Part (iv)}\\
+If $R_k=N+kN^2$, then Apex's score is (row sum of Apex in $N$) $+ k(\text{row sum of Apex in }N^2)$. Use your results from part (ii).
+\end{hint}
+
+\begin{solution}
+\textbf{(i)}\\
+Using the order $A, B, C, D, E, F$, the dominance matrix is
+\[ N= \begin{pmatrix} 0&1&1&0&0&0\\ 0&0&0&1&1&1\\ 0&0&0&1&1&1\\ 1&0&0&0&0&0\\ 0&0&0&0&0&0\\ 0&0&0&0&0&0 \end{pmatrix}. \]
+
+\textbf{(ii)}\\
+Multiplying,
+\[ N^2= \begin{pmatrix} 0&0&0&2&2&2\\ 1&0&0&0&0&0\\ 1&0&0&0&0&0\\ 0&1&1&0&0&0\\ 0&0&0&0&0&0\\ 0&0&0&0&0&0 \end{pmatrix}. \]
+Therefore the row sums of $R=N+N^2$ are
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{Team} & \textbf{Score} \\
+\hline
+A & 8 \\
+B & 4 \\
+C & 4 \\
+D & 3 \\
+E & 0 \\
+F & 0
+\end{tabular}
+\end{center}
+Hence the ranking is
+\[ \boxed{ A>B=C>D>E=F } \]
+so Apex is first, Brawlers and Cyphers are equal second, Drifters is fourth, and Echo and Falcons are equal fifth.
+
+\textbf{(iii)}\\
+Apex has only two direct victories: $A\to B$ and $A\to C$. Thus its row sum in $N$ is 2.
+However, both Brawlers and Cyphers defeated Drifters, Echo, and Falcons. For example, Apex has two different two-step paths to Drifters: $A\to B\to D$ and $A\to C\to D$. Therefore $(N^2)_{AD}=2$. 
+Similarly, $(N^2)_{AE}=2$ and $(N^2)_{AF}=2$. Hence Apex's row sum in $N^2$ is $2+2+2=6$. Its total score is therefore $2+6=8$.
+
+The important point is that $N^2$ does \textbf{not merely record whether an indirect dominance exists}. It counts the number of distinct two-step paths. Thus defeating opponents who themselves defeated several other teams can contribute many additional two-step paths. This is why Apex ranks above Brawlers and Cyphers despite having fewer direct victories.
+
+\textbf{(iv)}\\
+For $R_k=N+kN^2$, Apex has 2 direct-win points and 6 two-step-path contributions. Therefore
+\[ \boxed{S_A=2+6k}. \]
+When $k=\frac12$,
+\[ S_A = 2+6\left(\frac12\right) = 2+3 = \boxed{5}. \]
+\end{solution}
+
+\begin{takeaways}
+    \item \textbf{Matrix powers count paths.} In a dominance network, the entry $(N^2)_{ij}$ counts the number of distinct two-step paths from team $i$ to team $j$. This is why entries of $N^2$ can be greater than $1$.
+    \item \textbf{Do not interpret $N^2$ as simply ``indirect wins''.} Apex indirectly reaches only three teams --- Drifters, Echo, and Falcons --- but it has six two-step paths to them because each can be reached through either Brawlers or Cyphers.
+    \item \textbf{Matrix multiplication contains information about structure, not just arithmetic.} The product $N^2$ reveals how the direct relationships represented by $N$ combine to form longer chains.
+    \item \textbf{A ranking model can reward the quality of opponents defeated.} Apex defeats two teams that themselves have many victories, so those wins generate many two-step paths.
+    \item \textbf{Mathematical models involve choices.} The model $N+N^2$ gives direct wins and two-step paths equal weight. A weighted model $N+kN^2, 0<k<1,$ gives greater importance to direct victories.
+    \item \textbf{A useful modelling question remains:} What value of $k$ should organisers choose? Different values of $k$ may produce different rankings, showing that the ranking system depends not only on the match results but also on the assumptions built into the mathematical model.
+\end{takeaways}
