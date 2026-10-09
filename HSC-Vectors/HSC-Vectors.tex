@@ -668,11 +668,23 @@ This subsection is included only as optional enrichment. The cross product is \t
 
 \textbf{Definition:} For $\mathbf{a} = (a_1, a_2, a_3)$ and $\mathbf{b} = (b_1, b_2, b_3)$:
 \[
-\mathbf{a} \times \mathbf{b} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix} = (a_2b_3 - a_3b_2)\mathbf{i} - (a_1b_3 - a_3b_1)\mathbf{j} + (a_1b_2 - a_2b_1)\mathbf{k}
+\begin{aligned}
+\mathbf{a} \times \mathbf{b} &= \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix}
+= \begin{vmatrix} a_2 & a_3 \\ b_2 & b_3 \end{vmatrix}\mathbf{i} - \begin{vmatrix} a_1 & a_3 \\ b_1 & b_3 \end{vmatrix}\mathbf{j} + \begin{vmatrix} a_1 & a_2 \\ b_1 & b_2 \end{vmatrix}\mathbf{k} \\
+&= (a_2b_3 - a_3b_2)\mathbf{i} - (a_1b_3 - a_3b_1)\mathbf{j} + (a_1b_2 - a_2b_1)\mathbf{k}
+\end{aligned}
 \]
 
+\textbf{Understanding the Matrix Notation:}
+Because matrices and determinants are not taught in the NSW HSC syllabus, this notation is used here purely as a practical calculation mnemonic (recipe):
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
+  \item \textbf{$2 \times 2$ Determinant (Criss-Cross):} $\begin{vmatrix} p & q \\ r & s \end{vmatrix} = ps - qr$ (main diagonal minus off-diagonal).
+  \item \textbf{Top-Row Expansion:} For each unit vector ($\mathbf{i}, \mathbf{j}, \mathbf{k}$), delete its row and column; the remaining four entries form a $2 \times 2$ sub-determinant.
+  \item \textbf{Alternating Signs ($+,-,+$):} Notice the \textbf{minus sign} on the middle $\mathbf{j}$ component: $-(a_1b_3 - a_3b_1)\mathbf{j}$, which is the most frequent source of errors.
+\end{itemize}
+
 \textbf{Properties:}
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
   \item $\mathbf{a} \times \mathbf{b}$ is perpendicular to both $\mathbf{a}$ and $\mathbf{b}$
   \item $|\mathbf{a} \times \mathbf{b}| = |\mathbf{a}||\mathbf{b}|\sin\theta$ (area of parallelogram)
   \item $\mathbf{a} \times \mathbf{b} = -\mathbf{b} \times \mathbf{a}$ (anticommutative)
@@ -776,7 +788,9 @@ The vector from $A$ to $P$ is $\vec{AP} = \begin{pmatrix}0\\2\\-1\end{pmatrix}$.
 
 Using the cross product:
 \[
-\vec{AP} \times \mathbf{d} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 0 & 2 & -1 \\ 0 & 1 & 1 \end{vmatrix} = 3\mathbf{i} + 0\mathbf{j} + 0\mathbf{k} = \begin{pmatrix}3\\0\\0\end{pmatrix}
+\vec{AP} \times \mathbf{d} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 0 & 2 & -1 \\ 0 & 1 & 1 \end{vmatrix}
+= \begin{vmatrix} 2 & -1 \\ 1 & 1 \end{vmatrix}\mathbf{i} - \begin{vmatrix} 0 & -1 \\ 0 & 1 \end{vmatrix}\mathbf{j} + \begin{vmatrix} 0 & 2 \\ 0 & 1 \end{vmatrix}\mathbf{k}
+= 3\mathbf{i} - 0\mathbf{j} + 0\mathbf{k} = \begin{pmatrix}3\\0\\0\end{pmatrix}
 \]
 
 Distance: $d = \tfrac{|\vec{AP} \times \mathbf{d}|}{|\mathbf{d}|} = \tfrac{3}{\sqrt{2}} = \tfrac{3\sqrt{2}}{2}$ units.
@@ -788,6 +802,7 @@ The in-syllabus method uses projection. The component of $\vec{AP}$ perpendicula
 \]
 Then $d = |\vec{AP}_{\perp}|$. Both methods yield the same result; for HSC purposes, the projection method is the syllabus-aligned approach to remember.
 
+\newpage
 \subsection{Conic Sections Reference (Enrichment)}
 \begin{center}
 \textbf{\large Reference Table: Key Conic Sections (Enrichment \& Further Study)} \\
