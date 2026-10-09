@@ -1,0 +1,106 @@
+% Appendix 7: Linear Dependence and Independence
+% VIC Specialist Mathematics — Units 3–4
+\begingroup
+\small
+
+\noindent\fbox{%
+\begin{minipage}{0.97\textwidth}
+\textit{\textbf{Enrichment only.}
+Linear dependence and independence are part of
+\textbf{VIC Specialist Mathematics (Units~3--4)}.
+The NESA syllabus uses these concepts informally in geometric proofs
+(e.g.\ showing coplanarity via linear combinations);
+this appendix provides the formal definitions.}
+\end{minipage}}
+
+\vspace{0.8em}
+
+% ---- Key concepts ----
+\noindent\textbf{Key concepts.}
+
+A \textbf{linear combination} of vectors is an expression formed by
+multiplying vectors by scalars and adding them.
+For example,
+\[
+  \mathbf{w} = 2\mathbf{a} - 3\mathbf{b}
+\]
+is a linear combination of $\mathbf{a}$ and $\mathbf{b}$.
+
+\vspace{0.4em}
+Vectors $\mathbf{v}_1, \ldots, \mathbf{v}_n$ are
+\textbf{linearly independent} if
+\[
+  \boxed{
+  c_1 \mathbf{v}_1 + \cdots + c_n \mathbf{v}_n = \mathbf{0}
+  }
+\]
+is possible \textbf{only} when
+\[
+  c_1 = c_2 = \cdots = c_n = 0.
+\]
+
+Otherwise, they are \textbf{linearly dependent}.
+
+\vspace{0.4em}
+Informally, dependence means at least one vector can be constructed
+from the others: it does not provide a genuinely new direction.
+
+% ---- Worked example ----
+\vspace{0.8em}
+\noindent\textbf{Worked example.}
+
+\noindent Consider the three vectors
+\[
+  \mathbf{a} = (1, 0, 1), \qquad
+  \mathbf{b} = (0, 2, 0), \qquad
+  \mathbf{c} = (1, 2, 1).
+\]
+Determine whether they are linearly independent.
+
+\vspace{0.3em}
+\noindent\textit{Solution.}
+Observe that
+\[
+  \mathbf{a} + \mathbf{b} = (1, 2, 1) = \mathbf{c}.
+\]
+Therefore,
+\[
+  \boxed{\mathbf{a} + \mathbf{b} - \mathbf{c} = \mathbf{0}}.
+\]
+The coefficients $1, 1, -1$ are not all zero.
+Hence, the three vectors are \textbf{linearly dependent}.
+
+\vspace{0.4em}
+\noindent\textit{Geometric interpretation.}
+All three vectors lie in the plane $x - z = 0$ through the origin.
+
+However, $\mathbf{a}$ and $\mathbf{b}$ themselves \emph{are}
+independent. Indeed,
+\[
+  s\,\mathbf{a} + t\,\mathbf{b}
+  = (s,\, 2t,\, s) = \mathbf{0}
+\]
+implies $s = t = 0$.
+
+Thus, two independent vectors can describe the whole plane, while
+the third adds no new direction.
+
+% ---- Key takeaways ----
+\vspace{0.8em}
+\noindent\textbf{Key takeaways.}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Linear dependence means some vector information is redundant.
+  \item Two non-zero vectors are independent precisely when they are
+        \textbf{not parallel}.
+  \item In three-dimensional space, three independent vectors can
+        describe every vector through linear combinations.
+        Any set of four or more 3D vectors is necessarily dependent.
+\end{itemize}
+
+\vspace{0.4em}
+\noindent\textit{Beyond school --- University connection.}
+Linear independence leads to the concept of a \emph{basis} in linear
+algebra. It is fundamental to matrix rank, solving simultaneous
+equations, computer graphics and data science.
+
+\endgroup

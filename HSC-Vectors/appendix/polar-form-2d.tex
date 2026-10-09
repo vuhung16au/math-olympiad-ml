@@ -1,0 +1,112 @@
+% Appendix 4: Polar Form of Two-Dimensional Vectors
+% QLD Specialist Mathematics — Unit 1
+\begingroup
+\small
+
+\noindent\fbox{%
+\begin{minipage}{0.97\textwidth}
+\textit{\textbf{Enrichment only.}
+Polar form of vectors is part of
+\textbf{QLD Specialist Mathematics (Unit~1)}.
+It is not prescribed in the current NESA Extension~1 or Extension~2
+syllabus.}
+\end{minipage}}
+
+\vspace{0.8em}
+
+\noindent\textbf{Key concepts.}
+
+A vector in two dimensions has both magnitude and direction.
+We usually express a vector in Cartesian form:
+\[
+  \mathbf{v} = x\,\mathbf{i} + y\,\mathbf{j}.
+\]
+An alternative is \textbf{polar form}, which represents a non-zero
+vector by
+\[
+  \boxed{(r,\,\theta)}
+\]
+where:
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item $r > 0$ is the magnitude (length) of the vector.
+  \item $\theta$ is its direction, measured anticlockwise from the
+        positive $x$-axis.
+\end{itemize}
+
+The two forms are related by
+\[
+  \boxed{x = r\cos\theta, \qquad y = r\sin\theta}.
+\]
+Conversely,
+\[
+  r = \sqrt{x^2 + y^2},
+  \qquad
+  \tan\theta = \frac{y}{x} \quad (x \ne 0).
+\]
+
+When calculating $\theta$, always check the quadrant.
+The direction is determined modulo $2\pi$.
+The zero vector has no uniquely defined direction.
+
+\vspace{0.4em}
+\noindent\textit{NSW connection.}
+Extension~1 already teaches vector components, magnitude and direction,
+while Extension~2 uses trigonometric vector equations of circles.
+The enrichment here is the systematic use of polar-form notation
+and conversion.
+
+\vspace{0.8em}
+\noindent\textbf{Worked example.}
+Express
+\[
+  \mathbf{v} = -\sqrt{3}\,\mathbf{i} + \mathbf{j}
+\]
+in polar form.
+
+\vspace{0.3em}
+\noindent\textit{Step~1: Find the magnitude.}
+\[
+  r = \sqrt{(-\sqrt{3})^{2} + 1^{2}} = 2.
+\]
+
+\noindent\textit{Step~2: Find the direction.}
+Since $x < 0$ and $y > 0$, the vector lies in Quadrant~II.
+\[
+  \tan\theta = -\frac{1}{\sqrt{3}}.
+\]
+Taking $0 \le \theta < 2\pi$,
+\[
+  \theta = \frac{5\pi}{6}.
+\]
+Therefore,
+\[
+  \boxed{(r,\,\theta) = \left(2,\;\frac{5\pi}{6}\right)}.
+\]
+
+\noindent\textit{Verification.}
+\[
+  2\cos\frac{5\pi}{6} = -\sqrt{3},
+  \qquad
+  2\sin\frac{5\pi}{6} = 1.  \quad\checkmark
+\]
+
+\vspace{0.8em}
+\noindent\textbf{Key takeaways.}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Cartesian form is convenient for adding vectors and performing
+        algebra; polar form makes magnitude and direction immediately
+        visible.
+  \item Always check the quadrant when converting to polar form.
+  \item Polar form connects naturally with the modulus and argument
+        of complex numbers.
+\end{itemize}
+
+\vspace{0.4em}
+\noindent\textit{Beyond school --- University connection.}
+Polar coordinates are widely used in physics, robotics and engineering.
+They also connect vector geometry with complex numbers through
+\[
+  z = r(\cos\theta + i\sin\theta).
+\]
+
+\endgroup

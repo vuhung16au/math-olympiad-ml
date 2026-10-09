@@ -1,0 +1,150 @@
+% Appendix 6: Equations of Planes in Three Dimensions
+% VIC Specialist Mathematics — Units 3–4; QLD Specialist Mathematics — Unit 3
+\begingroup
+\small
+
+\noindent\fbox{%
+\begin{minipage}{0.97\textwidth}
+\textit{\textbf{Beyond the HSC syllabus.}
+The NESA Mathematics Extension~2 syllabus requires understanding of
+coordinate planes ($z = 0$, etc.)\ and coplanarity through vector
+relationships---see \S\ref{sec:planes-hsc-note} in the Vectors
+Primer.
+This appendix covers the \textbf{full algebra of general plane
+equations} as taught in
+\textbf{VIC Specialist Mathematics (Units~3--4)} and
+\textbf{QLD Specialist Mathematics (Unit~3)}.
+It is intended as enrichment for university preparation,
+\textbf{not} as additional HSC examination content.
+Students should master the coordinate-plane reasoning in the main
+booklet before exploring this material.}
+\end{minipage}}
+
+\vspace{0.8em}
+
+% ---- Key concepts ----
+\noindent\textbf{Key concepts.}
+
+In three-dimensional space, a line can be determined by a point and a
+direction vector:
+\[
+  \mathbf{r} = \mathbf{p} + t\,\mathbf{d}.
+\]
+A \textbf{plane} can be determined by a point and a non-zero
+\textbf{normal vector}.
+
+A normal vector is perpendicular to every direction lying in the
+plane.
+
+\vspace{0.4em}
+\noindent\textbf{Parametric form of a plane.}
+A plane can also be described using a point and \textbf{two
+non-parallel direction vectors} that lie in the plane:
+\[
+  \boxed{
+  \mathbf{r} = \mathbf{p} + s\,\mathbf{u} + t\,\mathbf{v}
+  },
+  \qquad s, t \in \mathbb{R}.
+\]
+This is analogous to the parametric form of a line
+$\mathbf{r} = \mathbf{a} + \lambda\,\mathbf{b}$,
+but with \emph{two} independent parameters instead of one.
+
+\vspace{0.4em}
+\noindent\textbf{From parametric form to Cartesian form.}
+Given two direction vectors $\mathbf{u}$ and $\mathbf{v}$ in the
+plane, a normal vector can be found using the cross product
+(Appendix~\ref{app:cross-product}):
+\[
+  \mathbf{n} = \mathbf{u} \times \mathbf{v}.
+\]
+Then the point-normal equation is
+\[
+  \boxed{\mathbf{n} \cdot (\mathbf{r} - \mathbf{p}) = 0}.
+\]
+If $\mathbf{n} = (a, b, c)$ and
+$\mathbf{p} = (x_0, y_0, z_0)$, this becomes
+\[
+  a(x - x_0) + b(y - y_0) + c(z - z_0) = 0.
+\]
+Equivalently, the Cartesian equation of a plane is
+\[
+  \boxed{ax + by + cz = d},
+\]
+where $a$, $b$, $c$ are not all zero.
+
+% ---- Worked example ----
+\vspace{0.8em}
+\noindent\textbf{Worked example --- Finding a plane from three
+points.}
+
+\noindent Find the Cartesian equation of the plane passing through
+\[
+  A(1, 0, 0), \qquad B(2, 0, 1), \qquad C(1, 2, 0).
+\]
+
+\vspace{0.3em}
+\noindent\textit{Step~1: Find two vectors in the plane.}
+\[
+  \overrightarrow{AB} = (1, 0, 1),
+  \qquad
+  \overrightarrow{AC} = (0, 2, 0).
+\]
+
+\noindent\textit{Step~2: Find a normal vector using the cross
+product.}
+
+From Appendix~\ref{app:cross-product},
+\[
+  \overrightarrow{AB} \times \overrightarrow{AC}
+  = \bigl(0\cdot 0 - 1\cdot 2,\;
+         1\cdot 0 - 1\cdot 0,\;
+         1\cdot 2 - 0\cdot 0\bigr)
+  = (-2,\, 0,\, 2).
+\]
+A simpler normal vector is therefore
+\[
+  \mathbf{n} = (1, 0, -1).
+\]
+
+\noindent\textit{Step~3: Form the plane equation.}
+
+Using point $A(1, 0, 0)$,
+\[
+  (1, 0, -1) \cdot (x - 1,\; y,\; z) = 0.
+\]
+Expanding,
+\[
+  x - 1 - z = 0.
+\]
+Hence,
+\[
+  \boxed{x - z = 1}.
+\]
+
+\noindent\textit{Verification.}
+All three given points satisfy the equation:
+$A$: $1 - 0 = 1$~$\checkmark$;\quad
+$B$: $2 - 1 = 1$~$\checkmark$;\quad
+$C$: $1 - 0 = 1$~$\checkmark$.
+
+% ---- Key takeaways ----
+\vspace{0.8em}
+\noindent\textbf{Key takeaways.}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item A line is described by one direction vector; a plane can be
+        described by two non-parallel direction vectors.
+  \item The cross product provides a quick method of finding a
+        plane's normal vector.
+  \item Coordinate planes such as $z = 0$ are special cases of
+        general plane equations.
+\end{itemize}
+
+\vspace{0.4em}
+\noindent\textit{Beyond school --- University connection.}
+Plane equations appear in linear algebra, computer-aided design,
+3D graphics and optimisation.
+They also form the foundation for studying intersections of surfaces
+in multivariable calculus.
+
+\endgroup

@@ -1,0 +1,181 @@
+% Appendix 8: Vector-Valued Motion in Three Dimensions
+% VIC Specialist Mathematics — Units 3–4;
+% QLD Specialist Mathematics — Unit 3 (vector calculus)
+\begingroup
+\small
+
+\noindent\fbox{%
+\begin{minipage}{0.97\textwidth}
+\textit{\textbf{Enrichment only.}
+Three-dimensional vector calculus is part of
+\textbf{VIC Specialist Mathematics (Units~3--4)} and
+\textbf{QLD Specialist Mathematics (Unit~3)}.
+NSW Extension~1 already covers vector functions for motion in a plane;
+this appendix extends those ideas by adding a third component.}
+\end{minipage}}
+
+\vspace{0.8em}
+
+% ---- Key concepts ----
+\noindent\textbf{Key concepts.}
+
+The position vector of a moving particle is
+\[
+  \boxed{
+  \mathbf{r}(t)
+  = x(t)\,\mathbf{i} + y(t)\,\mathbf{j} + z(t)\,\mathbf{k}
+  }.
+\]
+The \textbf{velocity} vector is the derivative of position:
+\[
+  \boxed{\mathbf{v}(t) = \mathbf{r}'(t)}.
+\]
+The \textbf{acceleration} vector is the derivative of velocity:
+\[
+  \boxed{\mathbf{a}(t) = \mathbf{r}''(t)}.
+\]
+The particle's \textbf{speed} is the magnitude of its velocity:
+\[
+  \boxed{
+  |\mathbf{v}(t)|
+  = \sqrt{x'(t)^{2} + y'(t)^{2} + z'(t)^{2}}
+  }.
+\]
+The same differentiation rules used in two dimensions apply
+component by component in three dimensions.
+
+% ---- Worked example ----
+\vspace{0.8em}
+\noindent\textbf{Worked example.}
+
+\noindent A particle moves through space with position
+\[
+  \mathbf{r}(t) = t\,\mathbf{i} + t^{2}\,\mathbf{j}
+                + t^{3}\,\mathbf{k},
+  \qquad t \ge 0.
+\]
+Find: (a) its velocity and acceleration;\quad
+      (b) its speed at $t = 1$;\quad
+      (c) the equation of the tangent line to its path at $t = 1$.
+
+\vspace{0.3em}
+\noindent\textbf{(a) Velocity and acceleration.}
+
+Differentiating each component,
+\[
+  \boxed{
+  \mathbf{v}(t) = \mathbf{i} + 2t\,\mathbf{j} + 3t^{2}\,\mathbf{k}
+  }.
+\]
+Differentiating again,
+\[
+  \boxed{
+  \mathbf{a}(t) = 2\,\mathbf{j} + 6t\,\mathbf{k}
+  }.
+\]
+
+\vspace{0.3em}
+\noindent\textbf{(b) Speed at $\boldsymbol{t = 1}$.}
+
+The velocity at $t = 1$ is
+\[
+  \mathbf{v}(1) = (1, 2, 3).
+\]
+Therefore,
+\[
+  |\mathbf{v}(1)|
+  = \sqrt{1^{2} + 2^{2} + 3^{2}}
+  = \boxed{\sqrt{14}}.
+\]
+
+\vspace{0.3em}
+\noindent\textbf{(c) Tangent line.}
+
+At $t = 1$, the particle is at
+\[
+  \mathbf{r}(1) = (1, 1, 1).
+\]
+The velocity vector $(1, 2, 3)$ gives the direction of the tangent.
+Hence the tangent line is
+\[
+  \boxed{
+  \mathbf{R} = (1, 1, 1) + \lambda\,(1, 2, 3),
+  \qquad \lambda \in \mathbb{R}
+  }.
+\]
+This connects the familiar NSW vector equation of a line with
+calculus: the velocity gives the tangent direction to the particle's
+path.
+
+% ---- Key takeaways ----
+\vspace{0.8em}
+\noindent\textbf{Key takeaways.}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item Velocity is a vector; speed is its magnitude.
+        They are not interchangeable.
+  \item Differentiation of vector functions works component by
+        component.
+  \item The velocity vector gives the instantaneous tangent direction
+        to a particle's path, even in three-dimensional space.
+\end{itemize}
+
+\vspace{0.4em}
+\noindent\textit{Beyond school --- University connection.}
+Three-dimensional vector calculus introduces space curves, tangent
+vectors, arc length and curvature
+(see also Problem~2.20 in Part~1 of this booklet).
+These ideas are used in robotics, aerospace engineering, mechanics
+and computer animation.
+
+% ================================================================
+%  Final Thoughts: Three Operations, Three Geometric Ideas
+% ================================================================
+\vspace{1.2em}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.4em}
+
+\noindent\textbf{\large Final Thoughts: Three Operations,
+Three Geometric Ideas}
+
+\vspace{0.4em}
+\noindent
+The dot product, cross product and linear independence describe
+different aspects of vector geometry.
+
+\vspace{0.5em}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{0.30\textwidth}|p{0.58\textwidth}|}
+\hline
+\textbf{Concept} & \textbf{What it tells us} \\
+\hline
+Dot product $\mathbf{a} \cdot \mathbf{b}$
+  & Angles, projections and perpendicularity \\
+\hline
+Cross product $\mathbf{a} \times \mathbf{b}$
+  & A perpendicular vector and an area \\
+\hline
+Linear independence
+  & Whether vectors provide genuinely different directions \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\noindent
+Together, these concepts explain how vectors describe directions,
+lines, planes and motion.
+
+\vspace{0.4em}
+\noindent
+The underlying message is simple:
+
+\begin{center}
+\itshape
+Vectors are more than arrows.
+They provide a common mathematical language for geometry, motion,
+linear algebra and many problems encountered in university STEM
+courses.
+\end{center}
+
+\endgroup
