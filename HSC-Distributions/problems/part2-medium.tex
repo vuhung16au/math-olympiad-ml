@@ -416,3 +416,60 @@ E(T)=4E(X)=80\text{ s},\qquad
 \item Memorylessness means past failures do not change the future waiting-time distribution.
 \item Scaling time by $4$ scales the standard deviation by $4$ as well.
 \end{takeaways}
+
+\begin{problem}[Penalty scoring and the CLT]
+A science competition quiz consists of $30$ multiple-choice questions, each with $5$ possible options (only one of which is correct). To discourage wild guessing, the scoring rule awards $1$ mark for a correct answer and deducts $\frac{1}{4}$ of a mark for an incorrect answer. A candidate guesses independently on every question.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+  \item Let $M$ be the mark obtained on a single randomly guessed question. Show that $E(M) = 0$.
+  \item Show that $\mathrm{Var}(M) = \dfrac{1}{4}$.
+  \item Let $S = \sum_{i=1}^{30} M_i$ be the candidate's total score over the $30$ questions. Using the Central Limit Theorem, find the probability that the candidate scores at least $4$ marks on the quiz.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+  \item (i) For one question, $P(M=1) = \frac{1}{5}$ and $P(M=-\frac{1}{4}) = \frac{4}{5}$. Compute $E(M) = \sum m\,P(M=m)$.
+  \item (ii) Compute $E(M^2) = 1^2(\frac{1}{5}) + (-\frac{1}{4})^2(\frac{4}{5})$, then use $\mathrm{Var}(M) = E(M^2) - [E(M)]^2$.
+  \item (iii) Notice that $S = 30\bar{M}$, so $S \geq 4 \iff \bar{M} \geq \frac{4}{30}$. Apply the CLT: $\bar{M} \approx N(0, \sigma^2/30)$ where $\sigma^2 = \frac{1}{4}$, or equivalently $S \approx N(0, 30\sigma^2) = N(0, 7{.}5)$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since there are $5$ options and only one is correct, the probability of guessing correctly is $p = \frac{1}{5}$, and the probability of guessing incorrectly is $1 - p = \frac{4}{5}$.
+The random variable $M$ takes values in $\{1, -\frac{1}{4}\}$. The expected mark on one question is:
+\[
+E(M) = 1 \times P(M = 1) + \left(-\frac{1}{4}\right) \times P\!\left(M = -\frac{1}{4}\right) = 1\left(\frac{1}{5}\right) - \frac{1}{4}\left(\frac{4}{5}\right) = \frac{1}{5} - \frac{1}{5} = \boxed{0}.
+\]
+Thus, the scoring system is ``fair'' in the sense that random guessing has an expected return of zero.
+
+\textbf{(ii)} To find the variance, first compute $E(M^2)$:
+\[
+E(M^2) = 1^2 \left(\frac{1}{5}\right) + \left(-\frac{1}{4}\right)^2 \left(\frac{4}{5}\right) = \frac{1}{5} + \frac{1}{16}\left(\frac{4}{5}\right) = \frac{1}{5} + \frac{1}{20} = \frac{4}{20} + \frac{1}{20} = \frac{5}{20} = \frac{1}{4}.
+\]
+Then:
+\[
+\mathrm{Var}(M) = E(M^2) - [E(M)]^2 = \frac{1}{4} - 0^2 = \boxed{\frac{1}{4}}.
+\]
+
+\textbf{(iii)} The total score is $S = \sum_{i=1}^{30} M_i = 30\bar{M}$, where $\bar{M} = \frac{1}{30}\sum_{i=1}^{30} M_i$ is the average mark per question.
+By the Central Limit Theorem with $n = 30$:
+\[
+\bar{M} \approx N\!\left(\mu,\, \frac{\sigma^2}{n}\right) = N\!\left(0,\, \frac{1/4}{30}\right) = N\!\left(0,\, \frac{1}{120}\right).
+\]
+Equivalently, the sum $S = 30\bar{M}$ is approximately normal with mean $30\mu = 0$ and variance $30^2 \times \frac{1}{120} = \frac{900}{120} = 7{.}5$, so $S \approx N(0,\, 7{.}5)$.
+
+The event that the total score is at least $4$ corresponds to:
+\[
+S \geq 4 \iff Z \geq \frac{4 - 0}{\sqrt{7{.}5}} = \frac{4}{2{.}7386} \approx 1{.}46.
+\]
+Using the standard normal cumulative distribution table:
+\[
+P(S \geq 4) \approx P(Z \geq 1{.}46) = 1 - \Phi(1{.}46) \approx 1 - 0{.}9279 = \boxed{0{.}0721} \quad (\approx 7{.}2\%).
+\]
+\end{solution}
+
+\begin{takeaways}
+\item A scoring scheme where $E(M) = 0$ is called risk-neutral; random guessing yields zero on average.
+\item Sums of independent random variables $S = \sum X_i = n\bar{X}$ are handled directly via the CLT: $S \approx N(n\mu, n\sigma^2)$.
+\item Even with zero expectation, the probability of scoring $\geq 4$ purely by chance across $30$ questions is roughly $7\%$.
+\end{takeaways}

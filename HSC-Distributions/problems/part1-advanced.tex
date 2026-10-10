@@ -179,3 +179,74 @@ P(F<M)=P(D<0)=\Phi\!\left(\frac{0-5}{\sqrt{171{.}25}}\right).
 \item Averages have tighter sampling distributions than singleton draws.
 \item Differences add variances even when subtracting independent variables.
 \end{takeaways}
+
+\begin{problem}[Bakery service times and the CLT]
+The service time $T$ (in minutes) for a customer at a bakery counter is modelled by the continuous probability density function
+\[
+f(t) = c\,t(3-t), \qquad 0 \leq t \leq 3,
+\]
+and $f(t) = 0$ otherwise.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+  \item Show that $c = \dfrac{2}{9}$.
+  \item Show that $E(T) = \dfrac{3}{2}$ and $\mathrm{Var}(T) = \dfrac{9}{20}$.
+  \item On a busy morning, $45$ customers are served independently. Let $\bar{T}$ be their average service time. Using the Central Limit Theorem, find the probability that their average service time is less than $1.4$ minutes.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+  \item (i) Set $\int_0^3 f(t)\,dt = 1$ and solve for $c$.
+  \item (ii) Compute $E(T) = \int_0^3 t f(t)\,dt$ and $E(T^2) = \int_0^3 t^2 f(t)\,dt$, then use $\mathrm{Var}(T) = E(T^2) - [E(T)]^2$.
+  \item (iii) By the CLT, $\bar{T} \approx N(\mu, \sigma^2/n)$. Note that $\mathrm{Var}(\bar{T}) = \frac{9/20}{45} = \frac{1}{100}$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since $f(t)$ is a probability density function, the total area under the curve must equal~$1$:
+\[
+\int_0^3 c\,t(3-t)\,dt = c \int_0^3 (3t - t^2)\,dt = c \left[ \frac{3t^2}{2} - \frac{t^3}{3} \right]_0^3 = 1.
+\]
+Evaluating at the limits:
+\[
+c \left( \frac{3(9)}{2} - \frac{27}{3} \right) = c \left( \frac{27}{2} - 9 \right) = c \left( \frac{9}{2} \right) = 1 \implies \boxed{c = \frac{2}{9}}.
+\]
+
+\textbf{(ii)} By the definition of expected value for a continuous random variable:
+\[
+E(T) = \int_0^3 t f(t)\,dt = \frac{2}{9} \int_0^3 (3t^2 - t^3)\,dt = \frac{2}{9} \left[ t^3 - \frac{t^4}{4} \right]_0^3 = \frac{2}{9} \left( 27 - \frac{81}{4} \right) = \frac{2}{9} \left( \frac{27}{4} \right) = \boxed{\frac{3}{2}}.
+\]
+(Note: By symmetry of the parabola on $[0,3]$, the mean is immediately the midpoint $t = 1{.}5$.)
+
+Next, compute the second moment:
+\[
+E(T^2) = \int_0^3 t^2 f(t)\,dt = \frac{2}{9} \int_0^3 (3t^3 - t^4)\,dt = \frac{2}{9} \left[ \frac{3t^4}{4} - \frac{t^5}{5} \right]_0^3 = \frac{2}{9} \left( \frac{243}{4} - \frac{243}{5} \right).
+\]
+Factoring out $243$:
+\[
+E(T^2) = \frac{2}{9} \times 243 \times \left( \frac{1}{4} - \frac{1}{5} \right) = 2 \times 27 \times \frac{1}{20} = \frac{54}{20} = \frac{27}{10}.
+\]
+Then the variance is:
+\[
+\mathrm{Var}(T) = E(T^2) - [E(T)]^2 = \frac{27}{10} - \left(\frac{3}{2}\right)^2 = \frac{27}{10} - \frac{9}{4} = \frac{54 - 45}{20} = \boxed{\frac{9}{20}} \quad (= 0{.}45).
+\]
+
+\textbf{(iii)} The sample size is $n = 45 \geq 30$. By the Central Limit Theorem, the distribution of the sample mean $\bar{T}$ is approximately normal:
+\[
+\bar{T} \approx N\!\left(\mu,\, \frac{\sigma^2}{n}\right) = N\!\left(\frac{3}{2},\, \frac{9/20}{45}\right) = N\!\left(1{.}5,\, \frac{1}{100}\right).
+\]
+The standard error is $\sigma_{\bar{T}} = \sqrt{\frac{1}{100}} = \frac{1}{10} = 0{.}1$.
+Standardising $\bar{t} = 1{.}4$:
+\[
+Z = \frac{1{.}4 - 1{.}5}{0{.}1} = \frac{-0{.}1}{0{.}1} = -1.
+\]
+Hence,
+\[
+P(\bar{T} < 1{.}4) \approx P(Z < -1) = 1 - P(Z \leq 1) \approx 1 - 0{.}8413 = \boxed{0{.}1587} \quad (\approx 15{.}9\%).
+\]
+\end{solution}
+
+\begin{takeaways}
+\item Continuous probability density functions feed directly into the Central Limit Theorem: integrate to find $\mu$ and $\sigma^2$, then apply $\bar{X} \approx N(\mu, \sigma^2/n)$.
+\item The standard error $\sigma / \sqrt{n}$ simplifies cleanly when $n$ shares factors with $\sigma^2$.
+\item Even for continuous populations, the CLT guarantees that the average of a sample of size $n \geq 30$ can be analysed using standard normal tables.
+\end{takeaways}

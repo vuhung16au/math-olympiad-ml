@@ -24,6 +24,27 @@
 \usetikzlibrary{calc,decorations.pathreplacing}
 \pgfplotsset{compat=1.18}
 
+\usepackage{listings}
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue!70!black}\bfseries,
+  stringstyle=\color{orange!80!black},
+  commentstyle=\color{green!50!black}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{gray!50},
+  backgroundcolor=\color{softivory},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=4,
+  xleftmargin=1.5em,
+  framexleftmargin=1.5em,
+}
+
 \usepackage{dl101-colors}
 \usepackage{dl101-hints}
 \usepackage[takeawaysitemize]{dl101-hsc-problems}
@@ -93,7 +114,7 @@ which accurate minds feel with a sort of instinct.
 %% ============================================================
 
 \subsection{Project Overview}
-This booklet is a growing collection of probability distribution problems for NSW HSC Mathematics Extension~2 students. It covers continuous probability distributions (including the normal distribution), binomial distributions, and selected advanced topics such as Monte Carlo simulations and the hypergeometric distribution.
+This booklet is a growing collection of probability distribution problems for NSW HSC Mathematics Extension~1 and Extension~2 students. It covers continuous probability distributions (including the normal distribution), the sampling distribution of the mean and the Central Limit Theorem, binomial distributions, and selected advanced topics such as Monte Carlo simulations and the hypergeometric distribution.
 
 \subsection{Target Audience}
 This resource is written for students who want extra practice with probability distributions in a clear, classroom-friendly format. Every problem begins with an upside-down \textbf{Hints} panel and ends with full worked solutions followed by short takeaways.
@@ -167,6 +188,17 @@ X \sim B(n,p) \approx N\!\left(np,\, np(1-p)\right).
 \hat{p} = \frac{X}{n}, \qquad E(\hat{p}) = p, \qquad \mathrm{Var}(\hat{p}) = \frac{p(1-p)}{n}.
 \]
 
+\textbf{Sample mean.} For a sample of size $n$ from a population with mean $\mu$ and variance $\sigma^2$,
+\[
+\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i, \qquad E(\bar{X}) = \mu, \qquad \mathrm{Var}(\bar{X}) = \frac{\sigma^2}{n}.
+\]
+
+\textbf{Central Limit Theorem.} For large $n$ (typically $n \geq 30$),
+\[
+\bar{X} \approx N\!\left(\mu,\, \frac{\sigma^2}{n}\right),
+\]
+regardless of the shape of the population distribution.
+
 %% ============================================================
 \section{Continuous Probability Distributions}
 %% ============================================================
@@ -191,6 +223,13 @@ X \sim B(n,p) \approx N\!\left(np,\, np(1-p)\right).
 
 \subsection{Investigations Using the Normal Distribution}
 \input{topics/Investigations-normal-distribution}
+
+%% ============================================================
+\section{Sampling Distribution and the Central Limit Theorem}
+%% ============================================================
+
+\subsection{The Sample Mean and Its Distribution}
+\input{topics/Sampling-distribution-CLT}
 
 %% ============================================================
 \section{Binomial Distributions}

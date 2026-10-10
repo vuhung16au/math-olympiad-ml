@@ -284,3 +284,61 @@ P(X>28)\approx\frac{39}{150}=\boxed{0{.}26}.
 \item Grouped variance uses centre-of-class plug-in expectations.
 \item Linear profit rules scale means and variances predictably.
 \end{takeaways}
+
+\begin{problem}[Bus arrival times and the CLT]
+At a city bus stop, the waiting time $W$ (in minutes) until the next bus arrives is modelled as a discrete uniform random variable taking values in the set $\{1, 2, 3, 4, 5\}$.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+  \item Write down the probability distribution of $W$ and verify that $\sum P(W=w) = 1$.
+  \item Show that $E(W) = 3$ and $\mathrm{Var}(W) = 2$.
+  \item Over $50$ independent visits to this stop, a commuter records their waiting times $W_1, W_2, \ldots, W_{50}$ and computes the average waiting time $\bar{W} = \frac{1}{50}\sum_{i=1}^{50} W_i$. Using the Central Limit Theorem, find the probability that the commuter's average waiting time exceeds $3.4$ minutes.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+  \item (i) Each of the $5$ values is equally likely.
+  \item (ii) Compute $E(W^2) = \frac{1}{5}(1^2 + 2^2 + 3^2 + 4^2 + 5^2)$ and use $\mathrm{Var}(W) = E(W^2) - [E(W)]^2$.
+  \item (iii) State the approximate distribution $\bar{W} \approx N(\mu, \sigma^2/n)$ with $\mu=3$, $\sigma^2=2$, $n=50$, then standardise to $Z$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since $W$ is uniformly distributed over $\{1, 2, 3, 4, 5\}$, each outcome has probability
+\[
+P(W=w) = \frac{1}{5} = 0{.}2, \qquad w \in \{1, 2, 3, 4, 5\}.
+\]
+The sum of probabilities is $\sum_{w=1}^5 P(W=w) = 5 \times \frac{1}{5} = 1$, confirming a valid probability distribution.
+
+\textbf{(ii)} By symmetry, or directly from the definition of expectation:
+\[
+E(W) = \sum_{w=1}^5 w\,P(W=w) = \frac{1+2+3+4+5}{5} = \frac{15}{5} = 3.
+\]
+To calculate the variance:
+\[
+E(W^2) = \sum_{w=1}^5 w^2 P(W=w) = \frac{1^2 + 2^2 + 3^2 + 4^2 + 5^2}{5} = \frac{1 + 4 + 9 + 16 + 25}{5} = \frac{55}{5} = 11.
+\]
+Hence,
+\[
+\mathrm{Var}(W) = E(W^2) - [E(W)]^2 = 11 - 3^2 = 11 - 9 = \boxed{2}.
+\]
+
+\textbf{(iii)} The sample size is $n = 50 \geq 30$. By the Central Limit Theorem, the distribution of the sample mean $\bar{W}$ is approximately normal:
+\[
+\bar{W} \approx N\!\left(\mu,\, \frac{\sigma^2}{n}\right) = N\!\left(3,\, \frac{2}{50}\right) = N(3,\, 0{.}04).
+\]
+The standard error is $\sigma_{\bar{W}} = \sqrt{0{.}04} = 0{.}2$.
+Standardising the value $3{.}4$:
+\[
+Z = \frac{\bar{W} - \mu}{\sigma / \sqrt{n}} = \frac{3{.}4 - 3}{0{.}2} = \frac{0{.}4}{0{.}2} = 2.
+\]
+Thus,
+\[
+P(\bar{W} > 3{.}4) \approx P(Z > 2) = 1 - P(Z \leq 2) \approx 1 - 0{.}9772 = \boxed{0{.}0228} \quad (\approx 2{.}3\%).
+\]
+\end{solution}
+
+\begin{takeaways}
+\item The Central Limit Theorem applies to discrete populations as well as continuous ones.
+\item When finding $P(\bar{W} > c)$, always use the standard error $\sigma / \sqrt{n}$, not the population standard deviation $\sigma$.
+\item As sample size $n$ grows, the variability of the sample mean shrinks rapidly.
+\end{takeaways}

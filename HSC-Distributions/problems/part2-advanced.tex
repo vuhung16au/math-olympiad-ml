@@ -152,3 +152,87 @@ Therefore $\mathrm{Var}(X)=1-0^2=\boxed{1}$.
 \item Symmetry is powerful, but improper integrals still need convergence checks.
 \item The substitution $x=\tan\theta$ is natural whenever $1+x^2$ appears.
 \end{takeaways}
+
+\begin{problem}[Determining sample size via the normal approximation]
+A clinical trial tests a new immunotherapy treatment. Based on preliminary data, each enrolled patient has a probability $p = 0{.}25$ of responding positively to the treatment, independently of all other patients. To establish statistical significance, the clinical trial requires at least $40$ patients to show a positive response, with a confidence of at least $99\%$.
+\begin{enumerate}[label=\textbf{(\roman*)}]
+  \item Let $X$ be the number of positive responses observed in a trial of $n$ patients. Express $E(X)$ and $\mathrm{Var}(X)$ in terms of $n$.
+  \item Using the normal approximation to the binomial distribution and the critical value $z_{0{.}01} \approx 2{.}326$ (where $P(Z \geq -2{.}326) = 0{.}99$), show that the requirement $P(X \geq 40) \geq 0{.}99$ leads to the condition:
+  \[
+  0{.}25n - 2{.}326\sqrt{0{.}1875n} \geq 40.
+  \]
+  \item By making the substitution $u = \sqrt{n}$, form a quadratic equation in $u$ and hence determine the minimum number of patients $n$ that must be enrolled in the trial.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}[leftmargin=*]
+  \item (i) Recall that $X \sim B(n, p)$ has $E(X) = np$ and $\mathrm{Var}(X) = np(1-p)$.
+  \item (ii) Standardise $X$ to $Z = \frac{X - np}{\sqrt{np(1-p)}}$. For $P(Z \geq z^*) \geq 0{.}99$, we need $z^* \leq -2{.}326$.
+  \item (iii) Let $u = \sqrt{n}$, so $n = u^2$. Rewrite the boundary condition as $0{.}25u^2 - 2{.}326\sqrt{0{.}1875}\,u - 40 = 0$, solve for the positive root $u$, and compute $n = u^2$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(i)} Since each patient responds independently with probability $p = 0{.}25$, the number of responders $X$ follows a binomial distribution $X \sim B(n,\, 0{.}25)$. Therefore:
+\[
+E(X) = np = 0{.}25n,
+\]
+\[
+\mathrm{Var}(X) = np(1-p) = n(0{.}25)(0{.}75) = \boxed{0{.}1875n}.
+\]
+
+\textbf{(ii)} For large $n$, by the Central Limit Theorem (normal approximation to the binomial):
+\[
+X \approx N(np,\, np(1-p)) = N(0{.}25n,\, 0{.}1875n).
+\]
+Standardising the requirement $P(X \geq 40) \geq 0{.}99$:
+\[
+P\!\left(Z \geq \frac{40 - 0{.}25n}{\sqrt{0{.}1875n}}\right) \geq 0{.}99.
+\]
+For a standard normal variable $Z$, $P(Z \geq -2{.}326) = 0{.}99$. Hence, the standardized boundary must satisfy:
+\[
+\frac{40 - 0{.}25n}{\sqrt{0{.}1875n}} \leq -2{.}326.
+\]
+Multiplying both sides by the positive denominator $\sqrt{0{.}1875n}$:
+\[
+40 - 0{.}25n \leq -2{.}326\sqrt{0{.}1875n} \implies 0{.}25n - 2{.}326\sqrt{0{.}1875n} \geq 40.
+\]
+
+\textbf{(iii)} To solve for the minimum $n$, set equality:
+\[
+0{.}25n - 2{.}326\sqrt{0{.}1875n} - 40 = 0.
+\]
+Let $u = \sqrt{n}$ with $u > 0$, so $n = u^2$. Notice that $\sqrt{0{.}1875} = \sqrt{\frac{3}{16}} = \frac{\sqrt{3}}{4} \approx 0{.}4330$.
+The equation becomes a quadratic in $u$:
+\[
+0{.}25 u^2 - \left(2{.}326 \times 0{.}4330\right)u - 40 = 0 \implies 0{.}25 u^2 - 1{.}0072 u - 40 = 0.
+\]
+Multiplying by $4$ to clear the leading coefficient:
+\[
+u^2 - 4{.}0288 u - 160 = 0.
+\]
+Applying the quadratic formula:
+\[
+u = \frac{4{.}0288 + \sqrt{(-4{.}0288)^2 - 4(1)(-160)}}{2} = \frac{4{.}0288 + \sqrt{16{.}231 + 640}}{2} = \frac{4{.}0288 + \sqrt{656{.}231}}{2}.
+\]
+Since $\sqrt{656{.}231} \approx 25{.}617$:
+\[
+u \approx \frac{4{.}0288 + 25{.}617}{2} = \frac{29{.}646}{2} \approx 14{.}823.
+\]
+Squaring to find $n$:
+\[
+n = u^2 \approx (14{.}823)^2 \approx 219{.}72.
+\]
+Since the number of participants must be an integer, rounding up gives the minimum sample size:
+\[
+\boxed{n = 220\text{ patients}}.
+\]
+(Verification: For $n = 220$, $\mu = 55$ and $\sigma = \sqrt{0{.}1875(220)} \approx 6{.}423$. Then $Z = \frac{40 - 55}{6{.}423} \approx -2{.}335$, yielding $P(X \geq 40) \approx \Phi(2{.}335) \approx 0{.}9902 \geq 0{.}99$.)
+\end{solution}
+
+\begin{takeaways}
+\item Sample size determination problems frequently turn into quadratics in $u = \sqrt{n}$.
+\item Always round the sample size $n$ up to the nearest whole integer to ensure the required probability threshold is satisfied.
+\item When trial size $n$ is unknown, an exact binomial calculation requires exhaustive brute-force search, whereas the normal approximation provides a direct, closed-form algebraic solution.
+\end{takeaways}

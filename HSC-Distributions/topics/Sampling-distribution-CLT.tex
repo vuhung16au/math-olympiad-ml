@@ -1,0 +1,81 @@
+% Sampling-distribution-CLT.tex
+% Topic: Sampling Distribution of the Mean and the Central Limit Theorem
+
+Suppose a population has mean $\mu$ and variance $\sigma^2$. We draw $n$
+independent observations $X_1, X_2, \ldots, X_n$ from this population and
+form the \textbf{sample mean}
+\[
+\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i.
+\]
+Each $X_i$ is a random variable with the same distribution as the
+population, and $\bar{X}$ is a random variable built from all of them.
+Before any data are collected, $\bar{X}$ could take many values; its
+distribution is called the \textbf{sampling distribution of the mean}.
+
+\begin{remark}[Notation: $\bar{X}$ versus $\bar{x}$]
+Upper-case $\bar{X}$ is a random variable --- it describes every possible
+value the sample mean could take before data are collected.  Lower-case
+$\bar{x}$ is a number, calculated after observing.  Probability statements
+are always about $\bar{X}$: writing $P(\bar{x} > 4)$ makes no sense because
+$\bar{x}$ is either bigger than~$4$ or it is not.
+\end{remark}
+
+\textbf{Mean and variance of the sample mean.}
+Because the $X_i$ are independent and identically distributed,
+\[
+E(\bar{X}) = \mu, \qquad
+\mathrm{Var}(\bar{X}) = \frac{\sigma^2}{n}, \qquad
+\mathrm{s.d.}(\bar{X}) = \frac{\sigma}{\sqrt{n}}.
+\]
+The quantity $\sigma/\sqrt{n}$ is called the \textbf{standard error} of the
+sample mean.  It measures how much $\bar{X}$ typically varies from sample to
+sample: the larger $n$ is, the smaller the standard error.
+
+\subsubsection*{Example: rolling a die three times}
+Roll a fair die $3$ times.  Before rolling, $X_1, X_2, X_3$ are each
+uniform on $\{1,2,\ldots,6\}$, and $\bar{X}$ is a random variable with
+\[
+E(\bar{X}) = \frac{7}{2}, \qquad
+\mathrm{Var}(\bar{X}) = \frac{35/12}{3} = \frac{35}{36}.
+\]
+Now roll and get $2, 5, 6$.  Then
+$\bar{x} = \frac{2+5+6}{3} = \frac{13}{3} \approx 4.33$, which is one
+observed value of the random variable~$\bar{X}$.  Roll three more times
+and you will most likely get a different $\bar{x}$.
+
+\subsubsection*{The Central Limit Theorem}
+
+\textbf{Central Limit Theorem.}
+Let $X_1, X_2, \ldots, X_n$ be independent observations from \emph{any}
+population with mean~$\mu$ and variance~$\sigma^2$.  For large~$n$
+(a common guideline is $n \geq 30$),
+\[
+\bar{X} \approx N\!\left(\mu,\, \frac{\sigma^2}{n}\right).
+\]
+The population can be discrete, continuous, symmetric, or skewed ---
+the distribution of~$\bar{X}$ still approaches a normal distribution as
+$n$ increases.  This is why the normal distribution appears so often in
+statistics.
+
+\subsubsection*{Special case: Bernoulli population}
+
+If each $X_i$ takes only the values $0$ (failure) and $1$ (success) with
+$P(X_i = 1) = p$, then $X_i \sim \mathrm{Bernoulli}(p)$ with
+$\mu = p$ and $\sigma^2 = p(1-p)$.  The sample mean becomes
+\[
+\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i = \frac{X}{n} = \hat{p},
+\]
+the sample proportion.  Substituting into the CLT gives
+\[
+\hat{p} \approx N\!\left(p,\, \frac{p(1-p)}{n}\right),
+\]
+which recovers the sample-proportion formulas.  The normal approximation to
+the binomial is also a consequence: $X = n\hat{p} \approx N(np,\, np(1-p))$.
+
+\subsubsection*{Why it matters}
+
+In the previous syllabus, the CLT was only applied to Bernoulli populations
+(success or failure).  In the current syllabus the CLT is stated for any
+population, so questions may involve discrete distributions (such as uniform
+dice or scoring rules), continuous probability density functions, or any
+other model with a well-defined mean and variance.

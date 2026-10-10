@@ -22,4 +22,13 @@ E(\hat{p}) = p, \qquad \mathrm{Var}(\hat{p}) = \frac{p(1-p)}{n}.
 \hat{p} \pm 1.96\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
 \]
 
+\begin{remark}[Sample proportion as a special case of the CLT]
+The sample proportion $\hat{p}$ is the sample mean $\bar{X}$ when each
+observation $X_i$ is Bernoulli (taking values $0$ or $1$ with probability
+$1-p$ and $p$). Substituting $\mu = p$ and $\sigma^2 = p(1-p)$ into the
+Central Limit Theorem recovers the formulas above. In the current syllabus,
+the CLT is stated for any population, not just Bernoulli, so the sample
+proportion is one instance of a more general result.
+\end{remark}
+
 \input{figures/tikz/fig-topic-sample-proportions.tex}

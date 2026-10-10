@@ -65,6 +65,18 @@ E(X)=np,
 \mathrm{Var}(X)=np(1-p).
 \]
 
+\subsubsection*{Sample Mean (Extension~1 preview)}
+If $X_1, X_2, \ldots, X_n$ are independent observations from a population with mean~$\mu$ and variance~$\sigma^2$, the sample mean is
+\[
+\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i,
+\qquad
+E(\bar{X}) = \mu,
+\qquad
+\mathrm{Var}(\bar{X}) = \frac{\sigma^2}{n}.
+\]
+For large $n$ (typically $n \geq 30$), the Central Limit Theorem gives
+$\bar{X} \approx N\!\left(\mu, \frac{\sigma^2}{n}\right)$.
+
 \subsubsection*{Counting Formulas}
 \[
 {}^nP_r=\frac{n!}{(n-r)!},
