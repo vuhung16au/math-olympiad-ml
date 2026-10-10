@@ -7,10 +7,10 @@
 \begin{minipage}{0.97\textwidth}
 \textit{\textbf{Enrichment only.}
 Linear dependence and independence are part of
-\textbf{VIC Specialist Mathematics (Units~3--4)}.
-The NESA syllabus uses these concepts informally in geometric proofs
+\textbf{VIC Specialist Mathematics (Units~3--4)} and were an integral component of the \textbf{NSW 1966--1980 First Level / 4~Unit curriculum}.
+The current NESA syllabus uses these concepts informally in geometric proofs
 (e.g.\ showing coplanarity via linear combinations);
-this appendix provides the formal definitions.}
+this appendix provides the formal definitions and matrix connections.}
 \end{minipage}}
 
 \vspace{0.8em}
@@ -84,6 +84,18 @@ implies $s = t = 0$.
 
 Thus, two independent vectors can describe the whole plane, while
 the third adds no new direction.
+
+\vspace{0.4em}
+\noindent\textit{The Matrix Determinant Connection (1966--1980 NSW Heritage).}
+In three dimensions, whether three vectors $\mathbf{u}, \mathbf{v}, \mathbf{w}$ are linearly independent is directly determined by the determinant of the $3 \times 3$ matrix containing them as columns:
+\[
+\mathbf{u}, \mathbf{v}, \mathbf{w} \text{ are linearly independent} \iff \det \begin{bmatrix} \mathbf{u} & \mathbf{v} & \mathbf{w} \end{bmatrix} \neq 0 \iff \mathbf{u} \cdot (\mathbf{v} \times \mathbf{w}) \neq 0.
+\]
+If the determinant is zero, the scalar triple product vanishes, meaning the volume of the parallelepiped they span is zero and the vectors are coplanar (linearly dependent). For the worked example vectors above:
+\[
+\det \begin{bmatrix} 1 & 0 & 1 \\ 0 & 2 & 2 \\ 1 & 0 & 1 \end{bmatrix} = 1(2 - 0) - 0 + 1(0 - 2) = 2 - 2 = 0,
+\]
+confirming their linear dependence in one calculation without needing to solve simultaneous equations!
 
 % ---- Key takeaways ----
 \vspace{0.8em}

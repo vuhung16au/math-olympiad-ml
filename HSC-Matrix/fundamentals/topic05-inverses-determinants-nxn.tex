@@ -70,6 +70,26 @@ Three points $P_1, P_2, P_3$ are \textbf{collinear} (lie on the same straight li
 \]
 \end{remark}
 
+\begin{remark}[Concurrence Criterion for Three Lines]
+Historically, the 1965 NSW First Level syllabus Section~4(a) explicitly paired the triangle area formula with the determinant condition for the concurrence of three straight lines.
+
+Three distinct lines in the Cartesian plane:
+\[
+L_1: a_1 x + b_1 y + c_1 = 0, \qquad
+L_2: a_2 x + b_2 y + c_2 = 0, \qquad
+L_3: a_3 x + b_3 y + c_3 = 0
+\]
+are \textbf{concurrent} (pass through a common single point) if and only if the determinant of their coefficients vanishes:
+\[
+\det \begin{bmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{bmatrix} = 0.
+\]
+This highlights a remarkable projective duality in coordinate geometry:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Three points are collinear} $\iff$ the coordinate matrix has determinant zero.
+  \item \textbf{Three lines are concurrent} $\iff$ the line coefficient matrix has determinant zero.
+\end{itemize}
+\end{remark}
+
 \bigskip
 
 % ── Worked Example: 3x3 Inverse ──

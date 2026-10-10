@@ -19,3 +19,46 @@ Compute the Determinant:
 \[ f(\lambda) = \lambda^2 - 7\lambda + 10 \]
 
 Setting $f(\lambda) = 0$ yields $(\lambda - 2)(\lambda - 5) = 0$, giving the eigenvalues $\lambda_1 = 2$ and $\lambda_2 = 5$.
+
+\subsubsection*{The Cayley--Hamilton Theorem}
+A cornerstone result of matrix algebra is the \textbf{Cayley--Hamilton Theorem}: \emph{Every square matrix satisfies its own characteristic equation}. That is, if $f(\lambda) = \det(A - \lambda I) = 0$, then substituting the matrix $A$ in place of $\lambda$ yields the zero matrix:
+\[
+f(A) = O.
+\]
+For the matrix $A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}$ above with $f(\lambda) = \lambda^2 - 7\lambda + 10$, this means:
+\[
+A^2 - 7A + 10I = O.
+\]
+We can directly verify this:
+\[
+A^2 = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix} \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix} = \begin{pmatrix} 18 & 7 \\ 14 & 11 \end{pmatrix},
+\]
+and
+\[
+A^2 - 7A + 10I = \begin{pmatrix} 18 & 7 \\ 14 & 11 \end{pmatrix} - \begin{pmatrix} 28 & 7 \\ 14 & 21 \end{pmatrix} + \begin{pmatrix} 10 & 0 \\ 0 & 10 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = O.
+\]
+
+\subsubsection*{NSW HSC Heritage (1977 Q9): Computing Inverses via Cayley--Hamilton}
+In the 1977 NSW HSC 4~Unit examination, students were asked:
+\begin{quote}
+\emph{The matrix $A$ is given by $A = \begin{pmatrix} 5 & -4 \\ -4 & 5 \end{pmatrix}$.\\
+(i) Write down the characteristic equation of $A$.\\
+(ii) Prove that $A^2 - 10A + 9I = O$.\\
+(iii) Find $A^{-1}$.}
+\end{quote}
+The Cayley--Hamilton relation provides a swift, cofactor-free method to compute the matrix inverse. Multiplying $A^2 - 10A + 9I = O$ through by $A^{-1}$:
+\[
+A - 10I + 9A^{-1} = O \implies 9A^{-1} = 10I - A \implies A^{-1} = \frac{1}{9}(10I - A).
+\]
+Substituting $A$ gives:
+\[
+A^{-1} = \frac{1}{9} \left[ \begin{pmatrix} 10 & 0 \\ 0 & 10 \end{pmatrix} - \begin{pmatrix} 5 & -4 \\ -4 & 5 \end{pmatrix} \right] = \frac{1}{9} \begin{pmatrix} 5 & 4 \\ 4 & 5 \end{pmatrix}.
+\]
+This technique bypasses minors, cofactors, and adjugate matrices entirely!
+
+\subsubsection*{NSW HSC Heritage (1970 Q6, 1975 Q7): Classifying Conics via Eigenvalues}
+Symmetric $2 \times 2$ matrices $M = \begin{pmatrix} a & h \\ h & b \end{pmatrix}$ possess real eigenvalues $\lambda_1, \lambda_2$ and orthogonal eigenvectors. In the 1970 and 1975 HSC examinations, students used these eigenvalues to rotate Cartesian axes and eliminate the cross-term $2hxy$ from quadratic equations:
+\[
+ax^2 + 2hxy + by^2 = \begin{pmatrix} x & y \end{pmatrix} \begin{pmatrix} a & h \\ h & b \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \lambda_1 {x'}^2 + \lambda_2 {y'}^2 = 1.
+\]
+If $\lambda_1, \lambda_2 > 0$, the locus is an ellipse with principal semi-axes $1/\sqrt{\lambda_1}$ and $1/\sqrt{\lambda_2}$ aligned precisely along the eigenvectors. This was how 4~Unit originally unified linear algebra with analytic geometry.

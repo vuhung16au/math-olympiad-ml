@@ -120,38 +120,43 @@ For senior secondary students, matrices also provide an important bridge between
 
 This booklet introduces these ideas through short explanations, worked examples, structured exercises, and more challenging problems. The aim is not simply to learn how to perform matrix calculations, but to develop an understanding of \textbf{why matrix methods work, what they represent, and where they are useful}.
 
-\begin{remark}[Syllabus Note]
-Matrices are not part of the current NSW NESA Mathematics syllabuses. Therefore, NSW students should regard this booklet as \textbf{enrichment material rather than examinable HSC content}.
+\begin{remark}[Syllabus Note and Historical Context]
+Matrices are not part of the current NSW NESA Mathematics Extension~1 or Extension~2 syllabuses (where they are currently taught in Queensland and Victorian Specialist Mathematics). Therefore, NSW students should regard this booklet as \textbf{enrichment material rather than examinable HSC content}.
 
-Much of the core material is adapted from topics studied in Queensland Specialist Mathematics. The later sections and appendices extend beyond the senior secondary syllabus and provide a preview of ideas encountered in university linear algebra, mathematics, engineering, computer science, data science, and related disciplines.
+However, matrices are \textbf{not foreign to NSW}. From 1966 to 1980, the highest level of senior mathematics in NSW (originally called \textbf{First Level} under the Wyndham Scheme, and later renamed \textbf{4~Unit}) was a \textbf{two-year senior course} studied across both Year~11 and Year~12. Matrices and linear algebra formed the theoretical foundation of that course: Section~4 of the 1965 syllabus was explicitly titled \emph{``Plane Geometry, Geometric Algebra, Matrices, Geometry in Three Dimensions''}.
+
+In \textbf{1981}, the NSW Board restructured 4~Unit into a \textbf{one-year course taken only in Year~12}. With instructional time halved, matrices, linear transformations, group theory, and 3D geometry were excised from the curriculum. Studying this booklet is therefore not merely looking across state borders---it is a \textbf{restoration of NSW's own mathematical heritage}.
 \end{remark}
 
-\subsection{Do Matrices Belong in High School? The NSW Perspective}
+\subsection{The Lost Heritage: When NSW Extension~2 Had Matrices (1966--1980)}
 
-A common debate among mathematics educators across Australia is whether matrices belong in the senior secondary school syllabus.
-
+A perennial debate among mathematics educators across Australia is whether matrices belong in the senior secondary school syllabus:
 \begin{itemize}[leftmargin=*]
-  \item \textbf{The argument against:} When rushed or introduced as an isolated topic, matrices often devolve into students blindly memorising mechanical algorithms (such as the standard ``row-by-column'' multiplication recipe) without understanding the underlying linear transformations or geometric meaning.
-  \item \textbf{The argument for:} When connected to geometry and algebra, matrices offer an extraordinarily powerful, elegant language that unifies diverse mathematical areas. They provide structural shortcuts that turn pages of exhausting algebra into clean, conceptual deductions. Furthermore, they are the foundational language of 3D computer graphics, data science, quantum physics, and artificial intelligence.
+  \item \textbf{The argument against:} When rushed or taught in isolation, matrices often devolve into students blindly memorising mechanical algorithms (such as the ``row-by-column'' recipe) without appreciating the underlying linear transformations or geometric meaning.
+  \item \textbf{The argument for:} When connected to geometry and algebra, matrices offer an extraordinarily powerful, unifying language. They provide structural shortcuts that turn pages of exhausting algebra into clean, conceptual deductions. Furthermore, they are the foundational language of 3D computer graphics, data science, quantum physics, and artificial intelligence.
 \end{itemize}
 
-A vivid historical example demonstrates this power. In the pre-2020 NSW HSC Mathematics Extension~2 (4~Unit) syllabus, the Conic Sections topic regularly featured questions asking students to find the area of a triangle formed by points on an ellipse or hyperbola. Because these points were defined parametrically (such as $P(a\cos\theta, b\sin\theta)$ and $Q(a\cos\phi, b\sin\phi)$), the syllabus-mandated approach was algebraically punishing:
+The historical trajectory of the NSW curriculum provides the ultimate case study in this debate. When matrices were excised in 1981 due to the compression of the course into a single year, one major topic was left behind: \textbf{Conic Sections} (ellipses and hyperbolas), which remained in the syllabus until 2019.
+
+This led to a 40-year historical paradox. In the pre-2020 NSW HSC Extension~2 examinations, classic questions regularly required students to find the area of a triangle formed by points on an ellipse or hyperbola. Because these points were defined parametrically ($P(a\cos\theta, b\sin\theta)$ and $Q(a\cos\phi, b\sin\phi)$), students were forced to use the only tools remaining in the syllabus:
 \begin{enumerate}[leftmargin=*]
-  \item Calculate the chord length $PQ$ using the distance formula: $\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$, resulting in massive radical expressions.
-  \item Derive the Cartesian equation of the line passing through $P$ and $Q$.
-  \item Apply the perpendicular distance formula $h = \dfrac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}$ to find the triangle's altitude from the third vertex.
-  \item Calculate $\text{Area} = \frac{1}{2} \times \text{base} \times \text{height}$, filling pages of paper with trigonometric expansions just to get the nested square roots to cancel out.
+  \item Calculate the chord length $PQ$ using the distance formula: $\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$, producing massive radical expressions.
+  \item Derive the Cartesian equation of the secant line passing through $P$ and $Q$.
+  \item Apply the perpendicular distance formula $h = \dfrac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}$ to find the altitude from the third vertex.
+  \item Calculate $\text{Area} = \frac{1}{2} \times \text{base} \times \text{height}$, filling pages of algebra waiting for nested square roots to cancel out.
 \end{enumerate}
 
-Yet, if a student understood matrix determinants, this entire ordeal could be bypassed instantly. The area of any triangle with vertices $(x_1, y_1)$, $(x_2, y_2)$, and $(x_3, y_3)$ is given directly by:
+Students and teachers endured decades of algebraic torture, unaware that \textbf{these problems were originally written when matrix determinants were on the syllabus to solve them!}
+
+If one uses the matrix tools from the 1966--1980 syllabus, the area of any triangle with vertices $(x_1, y_1)$, $(x_2, y_2)$, and $(x_3, y_3)$ is given directly by the $3 \times 3$ coordinate determinant:
 \[
 \text{Area} = \frac{1}{2} \left| \det \begin{pmatrix} x_1 & y_1 & 1 \\ x_2 & y_2 & 1 \\ x_3 & y_3 & 1 \end{pmatrix} \right|.
 \]
-When parametric coordinates are substituted into this matrix, standard determinant properties evaluate the area in \textbf{two short lines of elementary algebra}.
+When parametric coordinates are substituted into this matrix, the determinant evaluates in \textbf{two short lines of elementary algebra} ($\frac{1}{2}ab\sin(\phi - \theta)$). 
 
-This matrix determinant is also intimately connected to 3D vectors: it is the algebraic translation of the vector cross-product magnitude $\frac{1}{2}\|\mathbf{u} \times \mathbf{v}\|$ flattened into two dimensions.
+Furthermore, this matrix determinant is intimately connected to 3D vectors: it is the algebraic counterpart of the vector cross-product magnitude $\frac{1}{2}\|\mathbf{u} \times \mathbf{v}\|$ flattened into two dimensions.
 
-The goal of this booklet is to teach matrices not as a collection of rote computational drills, but as a \textbf{conceptual superpower} that brings clarity, efficiency, and beauty to senior mathematics.
+The goal of this booklet is to teach matrices not as rote drills, but as a \textbf{conceptual superpower}---reconnecting modern students with the depth, elegance, and coherence that once defined senior mathematics in NSW.
 
 \subsection{About This Booklet}
 

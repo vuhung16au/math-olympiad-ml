@@ -24,10 +24,8 @@ $\begin{bmatrix} k_x & 0 \\ 0 & k_y \end{bmatrix}$ &
 Enlarges or shrinks shapes by factor $k_x$ in $x$-dir, $k_y$ in $y$-dir. \\
 
 \textbf{Reflection} & 
-$\begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$ ($x$-axis) \newline 
-$\begin{bmatrix} -1 & 0 \\ 0 & 1 \end{bmatrix}$ ($y$-axis) \newline 
-$\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ ($y=x$) & 
-Flips a shape across the specified line of reflection. \\
+$\begin{bmatrix} \cos 2\alpha & \sin 2\alpha \\ \sin 2\alpha & -\cos 2\alpha \end{bmatrix}$ & 
+Reflects across a line through the origin making angle $\alpha$ with the positive $x$-axis ($y = x\tan\alpha$). \\
 
 \textbf{Rotation} & 
 $\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$ & 
@@ -47,6 +45,16 @@ If we apply a transformation $A$ and then a transformation $B$, this is equivale
 Because matrix multiplication is generally \textbf{not commutative} ($AB \neq BA$), the order of transformations matters. For example, rotating an object and then reflecting it is usually different from reflecting it and then rotating it.
 
 Furthermore, if a matrix $A$ represents a transformation, its inverse $A^{-1}$ (if it exists) represents \textbf{undoing} that transformation. The absolute value $|\det(A)|$ gives the area scale factor; the sign indicates orientation. If $\det(A) = 0$, the transformation collapses the 2D plane into a line or a point, making it non-invertible.
+
+\begin{remark}[NSW HSC Heritage: Reflections and Rotations (1975--1980)]
+A celebrated theorem examined in the NSW HSC 4~Unit examinations (notably 1975 Question~6 and 1976 Question~9) states that \textbf{the product of any two reflection matrices is a rotation matrix}.
+
+Let $R_\alpha$ and $R_\beta$ be reflection matrices across lines inclined at angles $\alpha$ and $\beta$ respectively:
+\[
+R_\beta R_\alpha = \begin{bmatrix} \cos 2\beta & \sin 2\beta \\ \sin 2\beta & -\cos 2\beta \end{bmatrix} \begin{bmatrix} \cos 2\alpha & \sin 2\alpha \\ \sin 2\alpha & -\cos 2\alpha \end{bmatrix} = \begin{bmatrix} \cos 2(\beta - \alpha) & -\sin 2(\beta - \alpha) \\ \sin 2(\beta - \alpha) & \cos 2(\beta - \alpha) \end{bmatrix}.
+\]
+The composite transformation is a rotation through an angle $\theta = 2(\beta - \alpha)$, twice the angle between the two lines of reflection! Notice also that $\det(R_\alpha) = -\cos^2 2\alpha - \sin^2 2\alpha = -1$ (reversing orientation), while $\det(R_\beta R_\alpha) = (-1)(-1) = +1$ (preserving orientation), confirming geometrically why two reflections yield a rotation.
+\end{remark}
 
 \bigskip
 
