@@ -309,6 +309,52 @@ Then $d = |\overrightarrow{AP}_{\perp}|$.
 Both methods yield the same result; for HSC purposes, the projection
 method is the syllabus-aligned approach to remember.
 
+% ---- Worked Example 3: Flattening 3D to 2D ----
+\vspace{0.8em}
+\noindent\textbf{Worked example~3 --- Flattening 3D to 2D: Triangle Area on an Ellipse.}
+
+\noindent\textit{Problem.}
+Let $P(a\cos\theta,\, b\sin\theta)$ and $Q(a\cos\phi,\, b\sin\phi)$ be two points on the ellipse $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$, where $a, b > 0$. Find the area of triangle $OPQ$, where $O$ is the origin $(0,0)$.
+
+\vspace{0.3em}
+\noindent\textit{Solution using the Cross Product (The ``Two-Line'' Shortcut).}
+Embed the two-dimensional position vectors into three-dimensional space by setting the $z$-coordinate to zero:
+\[
+  \mathbf{p} = \begin{pmatrix} a\cos\theta \\ b\sin\theta \\ 0 \end{pmatrix},
+  \qquad
+  \mathbf{q} = \begin{pmatrix} a\cos\phi \\ b\sin\phi \\ 0 \end{pmatrix}.
+\]
+Their cross product points strictly perpendicular to the $xy$-plane along $\mathbf{k}$:
+\begin{align*}
+  \mathbf{p} \times \mathbf{q}
+  &= \begin{vmatrix}
+       \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+       a\cos\theta & b\sin\theta & 0 \\
+       a\cos\phi & b\sin\phi & 0
+     \end{vmatrix}
+  = 0\mathbf{i} - 0\mathbf{j} + \bigl(ab\cos\theta\sin\phi - ab\sin\theta\cos\phi\bigr)\mathbf{k} \\
+  &= ab\sin(\phi - \theta)\,\mathbf{k}.
+\end{align*}
+The area of the triangle is half the area of the parallelogram formed by $\mathbf{p}$ and $\mathbf{q}$:
+\[
+  \boxed{\text{Area}(\triangle OPQ) = \frac{1}{2}|\mathbf{p} \times \mathbf{q}| = \frac{1}{2}ab|\sin(\phi - \theta)|}.
+\]
+
+\vspace{0.3em}
+\noindent\textit{The Historical 4U HSC Pain Point.}
+In the pre-2020 NSW HSC Extension~2 (4~Unit) syllabus, conic sections were examined extensively without vector cross products or matrices. Under the standard syllabus method, students had to:
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item Apply the distance formula to find the base length $PQ = \sqrt{a^2(\cos\phi - \cos\theta)^2 + b^2(\sin\phi - \sin\theta)^2}$.
+  \item Determine the Cartesian equation of the chord $PQ$: $(b\cos\tfrac{\theta+\phi}{2})x + (a\sin\tfrac{\theta+\phi}{2})y = ab\cos\tfrac{\phi-\theta}{2}$.
+  \item Apply the perpendicular distance formula $h = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}$ from $O(0,0)$ to the chord.
+  \item Calculate $\text{Area} = \frac{1}{2} \times \text{base} \times \text{height}$, expanding pages of nested square roots and trig identities to obtain cancellations.
+\end{enumerate}
+With the cross product, this entire algebraic marathon collapses into two elementary lines!
+
+\vspace{0.3em}
+\noindent\textit{Connection to Matrices.}
+Notice that the $\mathbf{k}$-component of $\mathbf{p}\times\mathbf{q}$ is identically the $2\times 2$ matrix determinant $\det \begin{pmatrix} a\cos\theta & b\sin\theta \\ a\cos\phi & b\sin\phi \end{pmatrix}$. For full coverage of coordinate determinants and the general $3\times 3$ area formula $\frac{1}{2}\left|\det \begin{pmatrix} x_1 & y_1 & 1 \\ x_2 & y_2 & 1 \\ x_3 & y_3 & 1 \end{pmatrix}\right|$, see our companion booklet \emph{Matrix Practice: NSW Extension Enrichment \& QLD Specialist Mathematics}.
+
 % ---- Key takeaways ----
 \vspace{0.8em}
 \noindent\textbf{Key takeaways.}
@@ -316,6 +362,9 @@ method is the syllabus-aligned approach to remember.
   \item The dot product measures how much two vectors point in the
         same direction; the cross product gives a perpendicular
         direction and an area.
+  \item In 2D plane geometry, embedding vectors into 3D with $z=0$ turns
+        triangle and polygon area calculations into a one-step cross
+        product, bypassing tedious coordinate geometry formulas.
   \item Two vectors have zero cross product precisely when they are
         parallel, including the case where one is the zero vector.
   \item The order matters:

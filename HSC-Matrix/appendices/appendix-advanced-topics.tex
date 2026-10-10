@@ -16,3 +16,10 @@ Instead of just viewing matrices as grids of numbers, pure mathematics views the
 
 \subsubsection*{Systems of Differential Equations}
 In physics and engineering, variables change continuously over time. A \emph{differential equation} describes this change. When multiple variables affect each other (like predator and prey populations, or currents in an electrical circuit), you get a \textbf{System of Differential Equations}. Using matrices, eigenvectors, and the matrix exponential ($e^A$), you can solve these intertwined systems simultaneously.
+
+\subsubsection*{Exterior Algebra and the Vector Cross Product}
+In multivariable calculus and modern geometry, determinants are understood through \textbf{exterior algebra} and differential forms. The determinant of three vectors in $\mathbb{R}^3$ computes the signed volume of the parallelepiped they span, which is identical to the scalar triple product:
+\[
+\det(\mathbf{u}, \mathbf{v}, \mathbf{w}) = \mathbf{u} \cdot (\mathbf{v} \times \mathbf{w}).
+\]
+When we set $\mathbf{w} = \mathbf{k} = (0, 0, 1)$, the $3 \times 3$ determinant projects directly onto the $z$-component of the cross product of two-dimensional vectors lying in the plane. This provides the mathematical foundation connecting $2 \times 2$ determinants, $3 \times 3$ coordinate area formulas, and 3D vector cross products (as explored in detail in our companion booklet \emph{Vectors Mastery: HSC Math Extension~2}).

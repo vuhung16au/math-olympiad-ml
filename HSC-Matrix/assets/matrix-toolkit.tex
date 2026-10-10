@@ -55,3 +55,14 @@ To solve a linear system $AX = B$:
 AX = B \implies X = A^{-1} B \quad \text{(if } A^{-1} \text{ exists)}
 \]
 (Pre-multiply both sides by $A^{-1}$).
+
+\subsection*{8. Geometric Area via Determinants}
+\textbf{Triangle Area (with one vertex at the origin $O(0,0)$):}
+\[
+\text{Area}(\triangle OPQ) = \frac{1}{2} |x_1 y_2 - x_2 y_1| = \frac{1}{2} \left| \det \begin{pmatrix} x_1 & y_1 \\ x_2 & y_2 \end{pmatrix} \right|
+\]
+\textbf{General Triangle Area (vertices $P_1, P_2, P_3$):}
+\[
+\text{Area}(\triangle P_1 P_2 P_3) = \frac{1}{2} \left| \det \begin{pmatrix} x_1 & y_1 & 1 \\ x_2 & y_2 & 1 \\ x_3 & y_3 & 1 \end{pmatrix} \right| = \frac{1}{2} \left| \det \begin{pmatrix} x_2 - x_1 & y_2 - y_1 \\ x_3 - x_1 & y_3 - y_1 \end{pmatrix} \right|
+\]
+\textbf{Collinearity:} Points $P_1, P_2, P_3$ are collinear if and only if $\det = 0$.

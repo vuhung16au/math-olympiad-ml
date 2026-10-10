@@ -324,3 +324,77 @@ Therefore, there is exactly $6 / 6 = 1$ triangle in the network structure (which
 \item \textbf{Graph Invariants:} Simple graph properties can be extracted from matrix properties. For example, the sum of the main diagonal of $A^2$ gives twice the number of edges, and the trace of $A^3$ gives six times the number of triangles.
 \item \textbf{Symmetry:} Because the network is undirected (bidirectional links), the adjacency matrix $A$ is symmetric ($A^T = A$), which in turn guarantees that all powers of $A$ are also symmetric.
 \end{takeaways}
+
+\begin{problem}[Parametric Conics: The Matrix Shortcut]
+In the Cartesian plane, consider the ellipse $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$ with semi-major axis $a > 0$ and semi-minor axis $b > 0$. Let $O(0,0)$ denote the origin, and let $P(a\cos\theta, b\sin\theta)$ and $Q(a\cos\phi, b\sin\phi)$ be two points on the ellipse ($0 \le \theta < \phi < 2\pi$).
+
+\paragraph{Historical Context (The Pre-2020 4U Coordinate Geometry Ordeal).}
+In the old NSW HSC Extension~2 (4~Unit) syllabus, finding the area of $\triangle OPQ$ was a classic examination question. Under the standard syllabus coordinate geometry method, students had to:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+    \item Apply the distance formula to find the base chord length: $PQ = 2\sin\left(\frac{\phi-\theta}{2}\right)\sqrt{a^2\sin^2\left(\frac{\theta+\phi}{2}\right) + b^2\cos^2\left(\frac{\theta+\phi}{2}\right)}$.
+    \item Derive the Cartesian equation of chord $PQ$: $\left(b\cos\frac{\theta+\phi}{2}\right)x + \left(a\sin\frac{\theta+\phi}{2}\right)y = ab\cos\frac{\phi-\theta}{2}$.
+    \item Apply the perpendicular distance formula from $O(0,0)$ to chord $PQ$: $h = \frac{ab\cos\left(\frac{\phi-\theta}{2}\right)}{\sqrt{a^2\sin^2\left(\frac{\theta+\phi}{2}\right) + b^2\cos^2\left(\frac{\theta+\phi}{2}\right)}}$.
+    \item Multiply $\text{Area} = \frac{1}{2} \times PQ \times h$, filling pages of algebra waiting for the radicals to cancel and yield $\frac{1}{2}ab\sin(\phi - \theta)$.
+\end{enumerate}
+In this problem, we explore how matrix determinants and vector methods bypass this entire ordeal.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item \textbf{The Matrix Determinant Shortcut:}
+    Construct the $3 \times 3$ coordinate matrix for vertices $O(0,0)$, $P(a\cos\theta, b\sin\theta)$, and $Q(a\cos\phi, b\sin\phi)$. By evaluating the determinant, derive the exact triangle area $\text{Area}(\triangle OPQ) = \frac{1}{2}ab\sin(\phi - \theta)$ in two lines of algebra.
+
+    \item \textbf{The Vector Cross-Product Bridge:}
+    Express the position vectors of $P$ and $Q$ in 3D as $\mathbf{p} = (a\cos\theta, b\sin\theta, 0)$ and $\mathbf{q} = (a\cos\phi, b\sin\phi, 0)$. Use the cross product $\mathbf{p} \times \mathbf{q}$ to calculate the area, and explain why the result is mathematically identical to the matrix determinant.
+
+    \item \textbf{Geometric Deduction and Optimization:}
+    Determine the maximum possible area of $\triangle OPQ$ as $P$ and $Q$ vary on the ellipse. What is the value of $\phi - \theta$ when this maximum occurs, and what does this mean geometrically for the radii $OP$ and $OQ$?
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+    \item \textbf{Part (a):} Expand the $3 \times 3$ determinant along the first row containing $(0, 0, 1)$, reducing it immediately to a $2 \times 2$ determinant. Factor $ab$ out and apply the sine subtraction formula $\sin(\phi-\theta) = \sin\phi\cos\theta - \cos\phi\sin\theta$.
+    \item \textbf{Part (b):} Compute the cross product $\mathbf{p} \times \mathbf{q}$. Since both vectors lie in the $xy$-plane ($z=0$), the cross product points purely in the $\mathbf{k}$ direction, with magnitude equal to the $2 \times 2$ determinant.
+    \item \textbf{Part (c):} The area is $\frac{1}{2}ab\sin(\phi-\theta)$. Maximize this with respect to $\phi-\theta$. Two points on an ellipse whose eccentric angles differ by $\frac{\pi}{2}$ define \emph{conjugate semi-diameters}.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{The Coordinate Geometry Baseline (Context)} \\
+As outlined in the historical context, the traditional syllabus method evaluates base $PQ$ and altitude $h$. When multiplied, the bulky radical $\sqrt{a^2\sin^2\frac{\theta+\phi}{2} + b^2\cos^2\frac{\theta+\phi}{2}}$ cancels identically:
+\[
+\text{Area}(\triangle OPQ) = \frac{1}{2} \cdot PQ \cdot h = \frac{1}{2} \left[2\sin\frac{\phi-\theta}{2}\sqrt{\cdots}\right]\left[\frac{ab\cos\frac{\phi-\theta}{2}}{\sqrt{\cdots}}\right] = \frac{1}{2}ab\sin(\phi - \theta).
+\]
+
+\textbf{(a) The Matrix Determinant Shortcut (Two Short Lines)} \\
+Using the $3 \times 3$ coordinate determinant with vertices $O(0,0)$, $P$, and $Q$:
+\begin{align*}
+\text{Area}(\triangle OPQ) &= \frac{1}{2} \left| \det \begin{bmatrix} 0 & 0 & 1 \\ a\cos\theta & b\sin\theta & 1 \\ a\cos\phi & b\sin\phi & 1 \end{bmatrix} \right|
+= \frac{1}{2} \left| 1 \cdot \det \begin{bmatrix} a\cos\theta & b\sin\theta \\ a\cos\phi & b\sin\phi \end{bmatrix} \right| \\[2pt]
+&= \frac{1}{2} | ab\cos\theta\sin\phi - ab\sin\theta\cos\phi | = \frac{1}{2}ab | \sin\phi\cos\theta - \cos\phi\sin\theta | \\[2pt]
+&= \frac{1}{2}ab \sin(\phi - \theta).
+\end{align*}
+What required an entire page of intricate trigonometric expansions, line equations, and radical cancellations collapses into \textbf{two lines of elementary algebra}.
+
+\medskip
+\textbf{(b) The Vector Cross-Product Bridge} \\
+Embedding the vectors in $\mathbb{R}^3$ with $z=0$: $\mathbf{p} = \begin{bmatrix} a\cos\theta \\ b\sin\theta \\ 0 \end{bmatrix}$ and $\mathbf{q} = \begin{bmatrix} a\cos\phi \\ b\sin\phi \\ 0 \end{bmatrix}$. \\
+Their cross product points purely along the normal $\mathbf{k}$:
+\[
+\mathbf{p} \times \mathbf{q} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ a\cos\theta & b\sin\theta & 0 \\ a\cos\phi & b\sin\phi & 0 \end{vmatrix} = \bigl( ab\cos\theta\sin\phi - ab\sin\theta\cos\phi \bigr) \mathbf{k} = ab\sin(\phi - \theta)\mathbf{k}.
+\]
+The triangle area is $\frac{1}{2}\|\mathbf{p} \times \mathbf{q}\| = \frac{1}{2}ab\sin(\phi - \theta)$. This is mathematically identical to the matrix determinant because the $\mathbf{k}$-component of $\mathbf{p} \times \mathbf{q}$ is precisely the $2 \times 2$ determinant formed by the $x$ and $y$ coordinates.
+
+\medskip
+\textbf{(c) Geometric Optimization} \\
+Since $a, b > 0$, the maximum area occurs when $\sin(\phi - \theta) = 1 \implies \phi - \theta = \frac{\pi}{2}$ (or $90^\circ$):
+\[
+\text{Area}_{\max} = \frac{1}{2}ab.
+\]
+Geometrically, two points on an ellipse whose eccentric angles differ by $\frac{\pi}{2}$ define \emph{conjugate semi-diameters}. Under the horizontal/vertical scaling transformation $x' = x/a, y' = y/b$, the ellipse becomes a unit circle of area $\pi$. The conjugate radii map to perpendicular radii forming a right-angled triangle of area $\frac{1}{2}(1)(1) = \frac{1}{2}$. Scaling back by the determinant factor $\det(M) = ab$ yields the maximal area $\frac{1}{2}ab$.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Algebraic Muscle vs Mathematical Insight:} The coordinate geometry approach forces students to compute intermediate radicals (base length and perpendicular height) that exist solely to cancel out. The matrix determinant bypasses these intermediate expressions by evaluating the signed area invariant directly.
+\item \textbf{Matrices as a Universal Bridge:} This problem unites coordinate geometry, trigonometry, matrix algebra, and vector cross products.
+\item \textbf{Affine Invariance:} Scaling coordinates by $1/a$ and $1/b$ transforms the ellipse into a circle. Because determinants preserve area scaling ratios, optimization on an ellipse reduces directly to optimization on a circle.
+\end{takeaways}
