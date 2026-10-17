@@ -1725,3 +1725,144 @@ The constant input changes the destination, but not the mechanism that makes the
 \item \textbf{The substitution $\mathbf{y}_n=\mathbf{x}_n-\mathbf{x}^*$} is a useful technique because it converts the recurrence back into $\mathbf{y}_{n+1}=A\mathbf{y}_n$.
 \item \textbf{Question to think about:} What changes if a characteristic root has absolute value greater than $1$, or is exactly equal to $1$?
 \end{takeaways}
+
+\begin{problem}[A Coupled Recurrence and Rational Approximations to $\sqrt{2}$]
+Two sequences of positive integers $(a_n)$ and $(b_n)$ are defined by
+\[
+a_1=2026,\qquad b_1=2027,\qquad
+a_{n+1}=a_n+2b_n,\qquad b_{n+1}=a_n+b_n.
+\]
+Let $x_n=\dfrac{a_n}{b_n}$ and
+\[
+\mathbf{X}_n=\begin{pmatrix}a_n\\b_n\end{pmatrix}.
+\]
+
+\textbf{(i)} Express the recurrence in the form
+\[
+\mathbf{X}_{n+1}=\mathbf{M}\mathbf{X}_n
+\]
+and state the matrix $\mathbf{M}$. Given
+\[
+\mathbf{Q}=\begin{pmatrix}1&-\sqrt{2}\\1&\sqrt{2}\end{pmatrix},
+\qquad
+\mathbf{D}=\begin{pmatrix}1-\sqrt{2}&0\\0&1+\sqrt{2}\end{pmatrix},
+\]
+find $\mathbf{Q}^{-1}$ and verify that
+\[
+\mathbf{Q}\mathbf{M}\mathbf{Q}^{-1}=\mathbf{D}.
+\]
+
+\textbf{(ii)} Define $\mathbf{Y}_n=\mathbf{Q}\mathbf{X}_n$. Show that
+\[
+\mathbf{Y}_{n+1}=\mathbf{D}\mathbf{Y}_n
+\]
+and use its first row to prove that, for all $n\in\mathbb{Z}^+$,
+\[
+\left|x_{n+1}-\sqrt{2}\right|
+<\frac12\left|x_n-\sqrt{2}\right|.
+\]
+
+\textbf{(iii)} Use mathematical induction to prove that
+\[
+\mathbf{M}^n=\mathbf{Q}^{-1}\mathbf{D}^n\mathbf{Q}
+\]
+for all $n\in\mathbb{Z}^+$. Hence find a closed-form expression for $\mathbf{X}_n$ in terms of $n$, $\alpha=1-\sqrt{2}$, $\beta=1+\sqrt{2}$, $c_1=a_1-\sqrt{2}b_1$, and $c_2=a_1+\sqrt{2}b_1$.
+
+\textbf{(iv)} Evaluate $\displaystyle\lim_{n\to\infty}x_n$ in two ways:
+\begin{enumerate}[label=\arabic*.]
+\item by applying the inequality from part (ii);
+\item by using the explicit formula from part (iii).
+\end{enumerate}
+Briefly explain why this limit is independent of the choice of positive initial values $a_1$ and $b_1$.
+\end{problem}
+
+\begin{hint}
+\textbf{(i)} Use the inverse formula for a $2\times2$ matrix, or verify $\mathbf{Q}\mathbf{M}=\mathbf{D}\mathbf{Q}$ and right-multiply by $\mathbf{Q}^{-1}$.
+
+\textbf{(ii)} Write
+\[
+\mathbf{Y}_n=
+\begin{pmatrix}
+a_n-\sqrt{2}b_n\\
+a_n+\sqrt{2}b_n
+\end{pmatrix}.
+\]
+Divide the first row equation by $b_{n+1}$ and use $b_{n+1}=a_n+b_n>b_n>0$ and $\sqrt{2}<\frac32$.
+
+\textbf{(iii)} In the inductive step, substitute $\mathbf{M}=\mathbf{Q}^{-1}\mathbf{D}\mathbf{Q}$ and use $\mathbf{Q}\mathbf{Q}^{-1}=\mathbf{I}$. Also, $\mathbf{Q}\mathbf{X}_1=(c_1,c_2)^{\mathsf T}$.
+
+\textbf{(iv)} Iterate the inequality for $n\ge2$. For the explicit formula, divide the numerator and denominator of $a_n/b_n$ by $\beta^{n-1}$.
+\end{hint}
+
+\begin{solution}[Brief]
+\textbf{(i)} The recurrence gives
+\[
+\mathbf{M}=\begin{pmatrix}1&2\\1&1\end{pmatrix}.
+\]
+Since $\det(\mathbf{Q})=2\sqrt{2}$,
+\[
+\mathbf{Q}^{-1}=\frac{1}{2\sqrt{2}}
+\begin{pmatrix}\sqrt{2}&\sqrt{2}\\-1&1\end{pmatrix}.
+\]
+Direct multiplication gives $\mathbf{Q}\mathbf{M}=\mathbf{D}\mathbf{Q}$, and hence $\mathbf{Q}\mathbf{M}\mathbf{Q}^{-1}=\mathbf{D}$.
+
+\textbf{(ii)} By part (i),
+\[
+\mathbf{Y}_{n+1}
+=\mathbf{Q}\mathbf{X}_{n+1}
+=\mathbf{Q}\mathbf{M}\mathbf{X}_n
+=\mathbf{D}\mathbf{Y}_n.
+\]
+The first row yields
+\[
+a_{n+1}-\sqrt{2}b_{n+1}
+=(1-\sqrt{2})(a_n-\sqrt{2}b_n),
+\]
+so
+\[
+x_{n+1}-\sqrt{2}
+=(1-\sqrt{2})\frac{b_n}{b_{n+1}}(x_n-\sqrt{2}).
+\]
+The terms $a_n,b_n$ stay positive integers, so $b_n/b_{n+1}<1$. Also, $x_n$ is rational and therefore differs from $\sqrt{2}$. As $\sqrt{2}-1<\frac12$, taking absolute values proves the required strict inequality.
+
+\textbf{(iii)} For $n=1$, the identity follows from $\mathbf{M}=\mathbf{Q}^{-1}\mathbf{D}\mathbf{Q}$. If it holds for $n=k$, then
+\[
+\mathbf{M}^{k+1}
+=(\mathbf{Q}^{-1}\mathbf{D}^k\mathbf{Q})
+(\mathbf{Q}^{-1}\mathbf{D}\mathbf{Q})
+=\mathbf{Q}^{-1}\mathbf{D}^{k+1}\mathbf{Q}.
+\]
+Thus it holds for all positive integers $n$. Since $\mathbf{X}_n=\mathbf{M}^{n-1}\mathbf{X}_1$,
+\[
+\mathbf{X}_n
+=\mathbf{Q}^{-1}
+\begin{pmatrix}\alpha^{n-1}&0\\0&\beta^{n-1}\end{pmatrix}
+\begin{pmatrix}c_1\\c_2\end{pmatrix}
+=
+\begin{pmatrix}
+\dfrac{c_1\alpha^{n-1}+c_2\beta^{n-1}}{2}\\[2mm]
+\dfrac{-c_1\alpha^{n-1}+c_2\beta^{n-1}}{2\sqrt{2}}
+\end{pmatrix}.
+\]
+
+\textbf{(iv)} Iterating part (ii), for $n\ge2$,
+\[
+0\le\left|x_n-\sqrt{2}\right|
+<\left(\frac12\right)^{n-1}\left|x_1-\sqrt{2}\right|,
+\]
+so $x_n\to\sqrt{2}$. Alternatively, part (iii) gives
+\[
+x_n=\sqrt{2}\,
+\frac{c_1(\alpha/\beta)^{n-1}+c_2}
+{-c_1(\alpha/\beta)^{n-1}+c_2}.
+\]
+Here $c_2>0$ and $|\alpha/\beta|<1$, so this expression also tends to $\sqrt{2}$. For any positive initial values, the coefficient $c_2=a_1+\sqrt{2}b_1$ of the dominant term is positive, while the other term decays relative to it; the limit is therefore unchanged.
+\end{solution}
+
+\begin{takeaways}
+\item \textbf{Diagonalisation decouples a coupled recurrence.} The rows of $\mathbf{Q}$ transform the original state into two independent geometric sequences.
+\item \textbf{A contraction gives quantitative convergence.} The error from $\sqrt{2}$ is reduced by a factor of less than $\frac12$ at every step.
+\item \textbf{Induction proves identities for matrix powers.} The diagonal form makes the closed formula for $\mathbf{X}_n$ accessible.
+\item \textbf{The dominant eigenvalue determines the limiting ratio.} The contribution from $\beta=1+\sqrt{2}$ dominates the decaying contribution from $\alpha=1-\sqrt{2}$.
+\item \textbf{Further exploration:} Replacing $\mathbf{M}$ by $\begin{pmatrix}m&k\\1&m\end{pmatrix}$ for positive $m,k$ leads to a related recurrence whose ratios converge to $\sqrt{k}$.
+\end{takeaways}
