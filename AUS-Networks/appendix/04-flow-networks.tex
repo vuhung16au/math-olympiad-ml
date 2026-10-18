@@ -1,0 +1,19 @@
+\chapter{Flow networks}
+A flow network is a finite directed graph with distinct source $s$ and sink $t$, and a finite non-negative capacity $c(u,v)$ on every edge. A flow assigns a value $f(u,v)$ to each edge, satisfying $0\leq f(u,v)\leq c(u,v)$, and conserves flow at every vertex other than $s$ and $t$. Its value is the net outflow from the source,
+\[
+  |f|=\sum_{(s,v)\in E} f(s,v)-\sum_{(v,s)\in E} f(v,s).
+\]
+By conservation, this equals the net inflow at the sink.
+
+A cut separates the vertices into a source side containing $s$ and a sink side containing $t$. Its capacity is the sum of capacities on edges directed from the source side to the sink side. The value of any flow is at most the capacity of every cut: flow conservation makes the net flow crossing the cut equal to the flow value, and each forward edge is capacity-limited.
+
+\textbf{Max-flow min-cut theorem (statement).} In every finite capacitated network, the maximum possible flow value equals the minimum cut capacity. A constructive method repeatedly finds an augmenting path in the residual network. Residual edges record both unused capacity and the possibility of undoing earlier flow, which allows rerouting. Simply filling a locally available edge can miss the optimum.
+
+For small networks, enumerate cuts to establish an upper bound, then exhibit a flow achieving that bound. The two matching values certify optimality. [NSW12] [QCE] [VCE4]
+
+\section*{Exercises}
+\begin{enumerate}
+\item Give an example of a cut that proves a flow of value 8 is impossible.
+\item Construct a small network where an early choice must be rerouted to obtain a maximum flow.
+\item Explain why the capacity of a cut is an upper bound on any flow.
+\end{enumerate}

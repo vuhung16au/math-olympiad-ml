@@ -1,0 +1,49 @@
+\chapter*{Glossary and notation}
+\addcontentsline{toc}{chapter}{Glossary and notation}
+\begin{description}[style=nextline]
+\item[Adjacency] Two distinct vertices are adjacent when an edge joins them.
+\item[Bipartite] A graph whose vertices split into two classes with every edge crossing between classes.
+\item[Chromatic polynomial] The polynomial $P_G(q)$ counting proper colourings of a graph $G$ from $q$ labelled colours.
+\item[Complete graph] A simple graph in which every pair of distinct vertices is joined by an edge.
+\item[Cycle] A closed walk of length at least 3 in which no vertex is repeated except that the starting and ending vertices are the same.
+\item[Degree] The number of edges incident with a vertex, counting parallel edges separately and each loop twice.
+\item[Edge] A connection between vertices.
+\item[Euler characteristic] For a surface, the quantity represented here by $v-e+f$ for a cellularly embedded graph.
+\item[Eulerian graph] A graph with at least one edge that has a closed trail containing every edge exactly once; isolated vertices are allowed.
+\item[Face] A connected component of the plane after removing the vertices and edge-curves of a particular plane drawing of a graph. The unbounded component is also a face.
+\item[Finite graph] A graph with finite vertex and edge sets.
+\item[Girth] The length of a graph's shortest cycle.
+\item[Graph] A vertex set, an edge set, and a rule assigning each edge its pair of endpoints; endpoints may coincide and distinct edges may share endpoints.
+\item[Hamiltonian graph] A graph that contains a Hamiltonian cycle.
+\item[Hamiltonian path] A path that visits every vertex of the graph exactly once.
+\item[Incident] An edge is incident with a vertex if that vertex is one of its endpoints.
+\item[Infinite graph] A graph with an infinite vertex set or an infinite edge set.
+\item[Isomorphic] Two simple graphs are isomorphic if there is a bijection between their vertex sets that preserves adjacency in both directions.
+\item[Leaf (pendant vertex)] A vertex of degree 1.
+\item[Linear recurrence] A rule expressing each term of a sequence as a fixed linear combination of earlier terms.
+\item[Matching] A set of edges with no common endpoints.
+\item[Maximum degree] The largest vertex degree in a finite nonempty graph, denoted $\Delta(G)$.
+\item[Minimum degree] The smallest vertex degree in a finite nonempty graph, denoted $\delta(G)$.
+\item[Odd/even vertex] A vertex is odd if its degree is odd, and even if its degree is even.
+\item[Path] A walk with no repeated vertices.
+\item[Planar graph] A graph that has a drawing in the plane in which edges meet only at common endpoints. A specific such drawing is a plane graph.
+\item[Random graph $G(n,p)$] A graph on $n$ labelled vertices where each possible edge is independently included with probability $p$.
+\item[Ramsey number] The least $N$ such that every edge-colouring of $K_N$ with a specified number of colours contains a monochromatic clique of a specified size.
+\item[Spanning forest] A subgraph containing every vertex whose components are trees.
+\item[Spanning tree] A tree containing every vertex of a graph.
+\item[Subgraph] A graph $H=(V_H,E_H)$ of a graph $G=(V,E)$ with $V_H\subseteq V$ and $E_H\subseteq E$, where both endpoints of each edge in $E_H$ lie in $V_H$ and the endpoint assignment is inherited from $G$.
+\item[Simple graph] A graph with no loops or parallel edges.
+\item[Vertex] An object represented in a graph.
+\item[Walk] A sequence of vertices with consecutive vertices adjacent; repetition is allowed.
+\end{description}
+
+\section*{Further terminology (optional)}
+\begin{description}[style=nextline]
+\item[Arc] An ordered pair $(u,v)$ in a directed graph, directed from $u$ to $v$.
+\item[Complement] For a simple graph $G$, the graph $\overline{G}$ on the same vertices in which two distinct vertices are adjacent exactly when they are not adjacent in $G$.
+\item[Directed graph (digraph)] A pair $D=(V,A)$, where $V$ is a finite vertex set and $A$ is a set of ordered pairs $(u,v)$ of distinct vertices, called arcs. The reverse arc $(v,u)$ may also be present.
+\item[In-degree / out-degree] In a directed graph, the number of arcs ending at a vertex / starting at a vertex, respectively.
+\item[$k$-partite] For a positive integer $k$, a graph whose vertices can be partitioned into $k$ sets, with no edge joining two vertices in the same set; some sets may be empty.
+\item[$k$-regular] A graph in which every vertex has degree $k$.
+\item[Tournament] A directed graph in which, for every pair of distinct vertices $u,v$, exactly one of the arcs $(u,v)$ and $(v,u)$ is present.
+\end{description}

@@ -1,0 +1,34 @@
+\chapter*{Hints for challenging exercises}
+\addcontentsline{toc}{chapter}{Hints for challenging exercises}
+The hints below target proofs, challenge questions, enrichments, and tasks where choosing a useful construction is the main difficulty. Appendix references use the letters printed in the book: B for routes, C for critical path analysis, D for flows, and E for assignments.
+\begin{description}[style=nextline]
+\item[1.3] Compare degree sequences: they are preserved by isomorphism. Try a triangle with an isolated vertex and a star.
+\item[2.1] A vertex cannot be adjacent to itself or to a second copy of the same neighbour.
+\item[2.5] Count the vertex-edge incidences in two ways, then divide the total degree by 2.
+\item[2.6] The reductions should be $3,3,2,2,2\to2,2,1,1\to1,1,0\to0,0$. Reversing each reduction tells you which edges to add.
+\item[3.1] Repeat an edge for the walk that is not a trail; repeat a vertex but not an edge for the trail that is not a path.
+\item[3.2] Use the theorem connecting bipartite graphs with odd cycles.
+\item[3.4] Mark vertices when they are first discovered. A queue gives BFS; a stack (or recursion) gives DFS.
+\item[4.2] Interpret the matrix entry as a two-step walk that leaves $v_1$ and returns to it.
+\item[5.2] Take a path with the greatest possible number of vertices. What would an extra neighbour of either endpoint imply?
+\item[5.3] A spanning tree on 8 vertices has a fixed number of edges. A connected graph can be reduced to one by deleting cycle edges.
+\item[5.4] If the universal vertex is joined to all others, any extra edge among those others would make a cycle.
+\item[6.1] Apply the handshaking lemma's corollary about the number of odd-degree vertices.
+\item[6.4] Use two triangles joined by a single bridge; a cycle cannot use that bridge exactly once.
+\item[6.5] For the Hamiltonian path, compare the two sets of indices in the question. Their sizes sum to more than the number of available indices.
+\item[7.3] A tree has $e=v-1$. Substitute this into Euler's formula.
+\item[7.4] Combine $e\leq3v-6$ with $\sum_v\degG(v)=2e$ and average the degrees.
+\item[8.3] Every pair of vertices in the clique must receive distinct colours.
+\item[8.4] Try the path $a-b-c-d$ in the order $a,d,b,c$.
+\item[9.1] Choose a small graph with non-negative weights and show the labels after each vertex is made permanent.
+\item[9.2] Let a vertex be settled before another vertex with a larger temporary label; then use a negative edge from the latter back to the settled vertex.
+\item[9.3] Use the five-hub graph in the minimum-spanning-trees section. For Prim, start at Sydney and at each step choose the cheapest edge from the current tree to a new hub; for Kruskal, scan edges in increasing cost and skip any that closes a cycle.
+\item[9.4] A locally cheapest tour edge can force an expensive final return. Compare a nearest-neighbour tour with another tour on four vertices.
+\item[B.2] A triangle with all edge weights equal has three different spanning trees of equal total weight.
+\item[C.2] Make two different start-to-finish routes have the same total duration.
+\item[D.2] In the residual network, a reverse edge can undo an earlier assignment and free a route for another unit of flow.
+\item[D.3] Sum the conservation equations over all vertices on the source side; internal edge flows cancel.
+\item[E.3] Use a two-agent, two-task cost table where the cheapest choice for the first agent is the other agent's only inexpensive task.
+\item[E.4] For the modified choices, take $X=\{A,B,C\}$ and list all tasks adjacent to at least one member of $X$.
+\end{description}
+\textbf{Challenge note (Ramsey problem in Chapter 10).} From one vertex of $K_6$, five edges have only two colours. Use the pigeonhole principle, then consider whether the three same-coloured neighbours contain an edge of that colour.

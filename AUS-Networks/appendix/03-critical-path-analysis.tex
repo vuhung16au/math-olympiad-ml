@@ -1,0 +1,27 @@
+\chapter{Critical path analysis}
+A project can be represented by activities and precedence constraints. In an activity-on-arrow network, arrows are activities and vertices are events. Each activity has a duration; an arrow points from the event that must occur first to the event that follows. A dummy activity, where used, has duration zero and records a precedence relation without consuming time.
+
+Assume the network is a finite directed acyclic graph with one designated start event and one designated finish event, and that every event lies on a start-to-finish path. Use zero-duration dummy activities where needed to make the start and finish common to the project network. The recurrences below assume fixed, non-negative activity durations and no resource constraints. Define $E_j$ as the earliest event time of event $j$ and $L_j$ as its latest allowable event time without delaying the project. Set $E_{\text{start}}=0$ and evaluate
+\[
+E_j=\max_{i\to j}(E_i+d_{ij})
+\]
+for each other event $j$ in topological order, where $d_{ij}$ is the duration of activity $i\to j$. The project duration is $E_{\text{finish}}$.
+
+Set $L_{\text{finish}}=E_{\text{finish}}$ and evaluate the backward recurrence in reverse topological order:
+\[
+L_i=\min_{i\to j}(L_j-d_{ij}).
+\]
+The latest start time of an activity $i\to j$ is $L_j-d_{ij}$. Its total float is latest start minus earliest start: $(L_j-d_{ij})-E_i$. Activities with zero float lie on at least one critical path. If any critical activity is delayed, the whole project is delayed unless the plan changes.
+
+\begin{example}
+Activity $A$ takes 3 days. After $A$, activities $B$ (2 days) and $C$ (5 days) run in parallel, then activity $D$ (1 day) follows both. The two route lengths are $3+2+1=6$ and $3+5+1=9$ days. The project takes 9 days; $A,C,D$ are critical, while $B$ has 3 days of float.
+\end{example}
+
+A Gantt chart places activities against a time axis and is useful for communicating a schedule. Crashing means shortening selected activity durations, usually at extra cost; the best choice targets critical work and accounts for how the critical path may change after an activity is shortened. [NSW12] [QCE] [VCE4]
+
+\section*{Exercises}
+\begin{enumerate}
+\item In the example, calculate earliest and latest start times for each activity.
+\item Give a precedence table with two critical paths. Explain what happens if one critical activity is shortened.
+\item Why is an activity with positive float not necessarily irrelevant to project management?
+\end{enumerate}

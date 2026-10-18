@@ -1,0 +1,97 @@
+\chapter{Applications and investigations}
+Graphs are useful not because every situation is literally a collection of dots and lines, but because they isolate relations that matter to a question. A strong investigation makes the modelling choices explicit, tests conjectures on small examples, and explains what a result means back in context.
+
+\section{Applications: several kinds of networks}
+The same graph ideas apply to very different networks. In each case, the model depends on the question: a link may be directed, weighted, or labelled, and the model should include only information needed to answer that question.
+
+\subsection{Social networks}
+Represent people by vertices and a relationship by an edge. Mutual friendships can be modelled by undirected edges, while following, messaging, or citing can be represented by directed edges. If interaction frequency matters, attach a weight to each edge. Degree can describe how many contacts a person has, while paths can describe chains of connection.
+
+\textbf{Try it.} Model a small directed network of people who follow one another. Specify whether repeated interactions count, then design an algorithm that finds everyone reachable from a chosen person. Explain why the algorithm finds all and only those people by showing that each newly reached vertex is adjacent to one already reached.
+
+\subsection{Transport networks}
+Represent locations such as stations or intersections by vertices and direct routes by edges. A route may be directed, and its travel time, distance, or fare can be an edge weight. Shortest-path algorithms can then compare journeys, while a minimum spanning tree answers a different question: how to connect all locations at minimum total link cost.
+
+\textbf{Try it.} Build a weighted transport network and construct a step-by-step method for finding a least-time route from a specified origin. State the condition on edge weights your method needs, and justify why its next choice cannot later be improved.
+
+\subsection{A simplified electricity-link network}
+Use the NSW-inspired five-hub model in Figure~\ref{fig:nsw-mst-model}. Its vertices are labelled Newcastle, Sydney, Wollongong, Orange and Dubbo; its edges are possible links, and the displayed values are invented cost units. For the deliberately limited objective of connecting all five hubs at minimum total cost, an MST is the right model: it uses four links and costs 30 units. The schematic is not a geographic map or a representation of existing transmission infrastructure. Real electricity-network design involves requirements beyond connectivity and minimum link cost, including reliability and capacity.
+
+The MST is a path, so a single link failure can disconnect it. Adding the candidate link $ND$ of cost 14 closes a cycle through all five hubs. This five-link design costs 44 units and remains connected after any one of its links is removed.
+
+\textbf{Try it.} Starting from the MST in Figure~\ref{fig:nsw-mst-model}, test each unused candidate link one at a time. Which addition makes the resulting network stay connected after any single link failure? Justify your answer by examining cycles, then explain what the toy model omits.
+
+\subsection{Telecommunication networks}
+Represent exchanges or relay stations by vertices and communication links by edges. Links may have costs or capacities. Connectivity asks whether messages can travel between sites; edge-disjoint paths ask whether communication can survive a link failure. A spanning tree gives a connected backbone without redundant links, while additional links may improve resilience.
+
+\textbf{Try it.} For a proposed network, test whether it stays connected after any one link is removed. Turn your test into an algorithm and prove that it succeeds exactly when every pair of sites remains connected after each such removal.
+
+\subsection{Computer networks}
+Represent computers, routers, or servers by vertices and physical or logical connections by directed or undirected edges. Edge labels can record bandwidth, delay, or reliability. Reachability can model whether a device can send data to another; a flow model can represent how much data can be sent when links have capacity limits.
+
+\textbf{Try it.} Give every link a capacity and design a procedure that repeatedly finds a source-to-destination augmenting path in the residual network (a path whose edges have positive residual capacity), then augments the flow by the path's bottleneck residual capacity. After each augmentation, decrease the residual capacity of every used residual edge by the augmentation amount and increase the capacity of its corresponding reverse residual edge; reverse edges record how much earlier flow can be cancelled. State and justify the stopping condition: no source-to-destination path remains in the residual network.
+
+Across these settings, a sound algorithm description specifies its input, its steps, and when it stops. A correctness argument connects those steps to the model: an invariant explains what remains true during the procedure, and a final argument shows that the output answers the original question. State assumptions such as non-negative travel times or reliable links explicitly, since conclusions proved for the graph model hold in the real network only to the extent that the model is appropriate.
+
+\subsection{Beyond communication networks}
+Graph theory also appears in computer science, statistical physics, and computational biology. For example:
+\begin{itemize}
+\item \textbf{Computer science:} In a web of software dependencies, which package could break the most other programs if it fails?
+\item \textbf{Statistical physics:} If particles affect only their neighbours, how can a tiny local change trigger a system-wide shift?
+\item \textbf{Computational biology:} In a protein-interaction graph, which protein might be a crucial link in a biological process?
+\end{itemize}
+
+\section{An investigation cycle}
+\begin{enumerate}
+\item Ask a focused question. Example: how many links are needed to make a communication network robust to one failure?
+\item Define the vertices, edges, and any weights or directions.
+\item Explore small cases and record patterns.
+\item State a conjecture precisely, including its assumptions.
+\item Prove it or find a counterexample.
+\item Interpret the result and discuss what the model leaves out.
+\end{enumerate}
+
+\section*{Two investigations in probability and counting}
+\subsection*{Random graphs}
+In the random graph model $G(n,p)$, begin with $n$ labelled vertices and independently include each possible edge with probability $p$. For example, when $n=5$ there are $\binom{5}{2}=10$ possible edges; if $p=\tfrac12$, each of the $2^{10}$ graphs is equally likely. The expected number of edges is $p\binom{n}{2}$, since each possible edge contributes probability $p$ of appearing.
+
+\Investigation{} Generate several $G(n,p)$ graphs, by hand for small $n$ or with a spreadsheet or short program. For fixed $n$, compare what happens as $p$ increases: how do the number of edges, largest degree, and connectedness change? Record variation between trials as well as the typical pattern. \Coding{} Try many trials and compare the average number of edges with $p\binom{n}{2}$; no programming language is required.
+
+\subsection*{The party problem and Ramsey theory}
+Colour each edge of a complete graph red or blue. The following small Ramsey result says that any such colouring of $K_6$ contains a monochromatic triangle; in a party model, red can mean ``know one another'' and blue ``do not know one another''.
+
+\Challenge{} Choose one vertex $x$. Among its five incident edges, at least three have the same colour. If those three neighbours contain an edge of that colour, it forms a monochromatic triangle with $x$. If none does, the three neighbours form a monochromatic triangle in the other colour. Thus every red-blue colouring of $K_6$ contains a monochromatic $K_3$.
+
+Six is the smallest number with this guarantee: colour the edges of a $K_5$ red around a 5-cycle and blue on the remaining edges. Both colours form 5-cycles, so neither contains a triangle. The least $N$ such that every red-blue colouring of $K_N$ contains a monochromatic $K_3$ is called the Ramsey number $R(3,3)$; the argument proves $R(3,3)=6$. General Ramsey theory studies how these guarantees grow for larger cliques and more colours; that broader theory is beyond this short enrichment.
+
+\subsection*{An olympiad challenge: intersecting triangles}
+\Challenge{} \textbf{Problem (IMO 2001 Shortlist).} Model the people at a party by the vertices of a simple graph $G$, joining two people when they know each other. A $k$-clique is a set of $k$ pairwise acquainted people. Suppose every pair of $3$-cliques has at least one person in common, and there is no $5$-clique. Prove that at most two people can be chosen so that, after they leave, no $3$-clique remains.
+
+\textbf{Solution.} In graph language, $G$ has no $K_5$, and every two triangles intersect. We seek a set of at most two vertices that meets every triangle. If there are no triangles, the empty set works.
+
+\textbf{Case 1: $G$ contains a $K_4$.} Let its vertices be $Q=\{a,b,c,d\}$. Every triangle must contain at least two vertices of $Q$: if it contained at most one, the other three vertices of $Q$ would form a triangle disjoint from it. Now consider the two pairs $\{a,b\}$ and $\{c,d\}$. If neither pair met every triangle, there would be a triangle avoiding $\{a,b\}$, necessarily of the form $\{c,d,x\}$, and a triangle avoiding $\{c,d\}$, necessarily of the form $\{a,b,y\}$. These triangles must intersect, so $x=y$. This vertex is adjacent to all four vertices of $Q$, creating a forbidden $K_5$. Thus one of the two pairs meets every triangle.
+
+\textbf{Case 2: $G$ contains no $K_4$.} If every pair of triangles shares at least two vertices, choose one triangle $\{a,b,c\}$. Every triangle then contains at least two of these vertices, and so contains $a$ or $b$. The pair $\{a,b\}$ meets every triangle.
+
+Otherwise, two triangles meet in exactly one vertex. Write them as $T_0=\{a,b,c\}$ and $T_1=\{a,d,e\}$. The vertex $a$ is adjacent to $b,c,d,e$. No triangle can lie among those four neighbours, since together with $a$ it would form a $K_4$. As $bc$ and $de$ are edges, the edges between $\{b,c\}$ and $\{d,e\}$ must form a matching: two such edges sharing an endpoint would create a triangle among the four neighbours.
+
+Any triangle avoiding $a$ must meet both $T_0$ and $T_1$, so it contains one vertex from each of $\{b,c\}$ and $\{d,e\}$, and hence uses a cross-edge between these sets. Its third vertex lies outside $\{a,b,c,d,e\}$, since there is no triangle among the four neighbours.
+
+If no triangle avoids $a$, then $\{a\}$ meets them all. Otherwise, if all triangles avoiding $a$ use just one cross-edge, say $bd$, then each contains $b$, and $\{a,b\}$ meets every triangle. If triangles avoiding $a$ use two cross-edges, they are disjoint, so after relabelling they are $bd$ and $ce$. Let the corresponding triangles be $T_2=\{b,d,x\}$ and $T_3=\{c,e,y\}$. Since every two triangles intersect and the pairs $\{b,d\}$ and $\{c,e\}$ are disjoint, we must have $x=y$. Any triangle avoiding $a$ uses either $bd$ or $ce$. In the first case it must intersect $T_3$ at $x$; in the second it must intersect $T_2$ at $x$. Thus every triangle either contains $a$ or contains $x$, and $\{a,x\}$ meets them all.
+
+In either case, at most two vertices meet every triangle. Removing the corresponding people therefore leaves no $3$-clique.
+
+\textbf{Takeaway.} The $K_4$ case uses complementary pairs: if both fail, they force a $K_5$. In the $K_4$-free case, the four neighbours of the bowtie's shared vertex induce a triangle-free graph, so the cross-edges form a matching. More generally, in a $K_t$-free graph, the common neighbourhood of a $K_r$ contains no $K_{t-r}$ for $r<t$; here this constrains the possible triangle overlaps and yields a two-vertex hitting set.
+
+\section*{Investigation menu}
+\begin{enumerate}
+\item \Investigation{} \textbf{Friendship paradox.} In many social networks, a randomly chosen person's friends tend to have more friends than the person does. Build small graphs and compare the average degree of a randomly chosen vertex with the average degree seen by following a randomly chosen edge. Which assumptions matter?
+\item \Investigation{} \textbf{Resilient connections.} For $n$ sites, what is the smallest number of edges that keeps the network connected after any single edge failure? Explore lower bounds and constructions.
+\item \Investigation{} \textbf{Route planning.} Compare shortest routes and MSTs on maps you create. When do the objectives agree? When do they differ?
+\item \Investigation{} \textbf{NSW-inspired electricity links.} In Figure~\ref{fig:nsw-mst-model}, begin with the MST and test each unused candidate link. Which single added link protects the network against any one link failure, and what is the total cost? Explain why the result is only a toy model of electricity-network planning.
+\item \Investigation{} \textbf{Timetable design.} Create a conflict graph from a realistic set of subjects or activities. Compare a greedy schedule with a schedule using the fewest possible time slots.
+\item \Investigation{} \textbf{Small-world networks.} Start with a ring, add a few long-range edges, and measure how typical distances change. Decide how to define ``typical'' and report your method.
+\end{enumerate}
+
+\section*{Communicating a graph argument}
+A clear solution states the model, names the graph-theoretic claim, gives enough reasoning to justify the conclusion, and translates the answer back into the original setting. A diagram is helpful, but it does not replace proof when the question asks for a general result.

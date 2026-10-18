@@ -1,0 +1,15 @@
+\chapter{Routes and minimal connectors}
+\section{Shortest routes by inspection}
+For a small network, list plausible routes and add their edge weights. Compare complete route totals, not the number of edges: a route with more edges can be shorter if those edges have smaller weights. [NSW11] [QCE] [VCE2/VCE4]
+
+\section{Subgraphs}
+Let $G=(V,E)$ be a graph, with each edge assigned its pair of endpoints. A graph $H=(V_H,E_H)$ is a \emph{subgraph} of $G$ if $V_H\subseteq V$, $E_H\subseteq E$, and both endpoints of every edge in $E_H$ belong to $V_H$. The endpoint assignment in $H$ is inherited from $G$. Thus, choosing a subset of edges also requires including their endpoints among the vertices; vertices or edges of $G$ may otherwise be omitted. In particular, a subgraph need not contain every edge of $G$ joining two vertices it retains.
+
+\section{Minimum spanning trees}
+A minimum spanning tree connects all listed locations at minimum total edge weight. Apply Prim's or Kruskal's algorithm (Chapter 8), making sure not to add an edge that closes a cycle. If some edge weights tie, there may be more than one MST, with the same minimum total weight. [NSW11] [QCE] [VCE4]
+
+\section*{Exercises}
+\begin{enumerate}
+\item Design a weighted network with two different MSTs. Verify that their total weights agree.
+\item Explain why finding the shortest route from a depot to each location separately is not necessarily the same as finding a minimum network that connects all locations.
+\end{enumerate}

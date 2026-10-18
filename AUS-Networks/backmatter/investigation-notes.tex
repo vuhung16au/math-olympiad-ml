@@ -1,0 +1,28 @@
+\chapter*{Investigation notes and sample approaches}
+\addcontentsline{toc}{chapter}{Investigation notes and sample approaches}
+Investigations allow multiple valid models and conclusions. These notes provide starting points and useful checks rather than unique answers.
+
+\section*{Applications: try-it activities}
+\begin{description}[style=nextline]
+\item[Social networks] Use a directed graph and run BFS or DFS from the chosen person, following outgoing arcs only. Mark each vertex once; the search stops when no newly reached vertex has an unvisited out-neighbour. Every reached vertex has a path from the start, and any vertex with such a path is eventually reached.
+\item[Transport networks] Dijkstra's algorithm applies when all travel-time weights are non-negative. At each stage settle the unvisited vertex with smallest tentative distance and update its neighbours; non-negative weights ensure no route through unvisited vertices can later improve that settled label.
+\item[Telecommunication networks] For each edge, remove it temporarily and test connectivity by a graph search. The network survives every single-link failure exactly when each such deletion leaves it connected; equivalently, the graph has no bridge.
+\item[Computer networks] Use the augmenting-path procedure described in the prompt, including reverse residual edges. When no residual source-to-sink path remains, the vertices reachable from the source define a cut whose capacity equals the current flow, certifying maximality by max-flow min-cut.
+\item[NSW-inspired electricity links] For the fictional five-hub model, the MST is $D$--$O$--$W$--$S$--$N$ with cost 30. Of the unused candidate links, adding $ND=14$ closes a cycle through all five vertices; only this one-link addition gives protection against every single link failure. The resulting cost is 44. These invented costs and links illustrate graph ideas, not actual NSW infrastructure planning.
+\end{description}
+
+\section*{Further investigations}
+\begin{description}[style=nextline]
+\item[Random graphs] For each fixed $n$, the expected number of edges is $p\binom n2$. As $p$ increases, graphs tend to be denser and more connected, but individual trials vary. To compare $p$ values clearly, record edge counts, maximum degree, and connectedness over many trials; use the same random number for each potential edge across values of $p$ to make edge sets nested.
+\item[Friendship paradox] In a nonempty undirected graph, the mean degree of a vertex reached by following a uniformly chosen edge is $\sum_v d(v)^2/\sum_v d(v)$. This is at least the ordinary mean degree $\sum_v d(v)/n$, since $n\sum_vd(v)^2\geq(\sum_vd(v))^2$. Equality holds for regular graphs; isolated vertices and sampling conventions affect how the comparison is interpreted.
+\item[Resilient connections] For $n\geq3$, a simple connected graph that stays connected after any one edge deletion has minimum degree at least 2, so $2e=\sum_vd(v)\geq2n$ and $e\geq n$. The cycle $C_n$ attains this bound. For $n=2$, no simple graph survives deletion of its only connecting edge.
+\item[Route planning] The triangle in Appendix B.2 gives different shortest-route and MST objectives. Try changing edge weights and compare both the selected links and their total weights.
+\item[Timetable design] Model subjects as vertices and shared students as edges. A clique gives a lower bound on the number of time slots; compare it with a greedy colouring and try changing the vertex order.
+\item[Small-world networks] Begin with a cycle and add a few long-range edges. Compute all-pairs shortest-path distances before and after; report a statistic such as the mean distance and explain how the result depends on which shortcuts were added.
+\end{description}
+
+\section*{Matrix recurrence exploration}
+For $P_3$, direct multiplication verifies $A^3=2A$. The recurrence $a_{n+2}=2a_n$ gives $a_1=1$, $a_3=2$, $a_5=4$, $a_7=8$, and $a_9=16$. Even lengths give zero walks from an endpoint to the middle vertex because each step alternates between the two sides of the bipartition.
+
+\section*{Chapter 10 party challenge}
+The pigeonhole principle ensures that one of the two colours occurs on at least three edges from a chosen vertex $x$. If any edge between those three neighbours has that same colour, it forms a monochromatic triangle with $x$. Otherwise all three edges among those neighbours have the opposite colour and form such a triangle. A 5-cycle colouring of $K_5$ with the cycle one colour and its complementary 5-cycle the other shows that 5 vertices do not suffice; hence $R(3,3)=6$.

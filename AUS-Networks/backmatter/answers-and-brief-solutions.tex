@@ -1,0 +1,105 @@
+\chapter*{Answers and brief solutions}
+\addcontentsline{toc}{chapter}{Answers and brief solutions}
+For construction and modelling questions, the answer shown is one valid example; other correct models may differ. Proof questions receive a short argument or proof sketch. Appendix labels below match the printed chapter letters: Appendix B is routes, C is critical path analysis, D is flow networks, and E is assignments.
+
+\section*{Chapter 1: Problems that lead to graphs}
+\begin{description}[style=nextline]
+\item[1.1] Use five vertices, one per person, and join two vertices if those people have exchanged a book. This simple graph forgets how many exchanges occurred, when they occurred, and which person initiated them.
+\item[1.2] Use a directed graph, with an arc from a follower to the account followed. Give each arc a weight equal to the number of messages exchanged if message volume matters.
+\item[1.3] Yes. A triangle plus an isolated vertex and the star $K_{1,3}$ each have four vertices and three edges, but their degree sequences differ.
+\item[1.4] Make one vertex per exam and join two exams if at least one student must sit both. A proper colouring assigns non-conflicting time slots; the chromatic number is the minimum number of slots.
+\end{description}
+
+\section*{Chapter 2: Degrees, counting and proof}
+\begin{description}[style=nextline]
+\item[2.1] A vertex in a simple graph can be adjacent to at most the other $n-1$ vertices, so its degree is at most $n-1$.
+\item[2.2] $K_{12}$ has $\binom{12}{2}=66$ edges; $K_{4,7}$ has $4\cdot7=28$ edges.
+\item[2.3] Yes. The handshaking lemma gives total degree $2\cdot9=18$, so if every degree is 3 there must be $18/3=6$ vertices. Such a graph exists, for example the triangular prism.
+\item[2.4] A path of length 2 has two edges but its two endpoints have degree 1, disproving the claim.
+\item[2.5] The degree sum is $10\cdot3=30=2|E|$, so the Petersen graph has 15 edges.
+\item[2.6] The reductions are $3,3,2,2,2\to2,2,1,1\to1,1,0\to0,0$, so the first sequence is graphical. One construction on vertices $A,B,C,D,E$ has edges $AB,AC,AD,BE,BC,DE$, giving degrees $3,3,2,2,2$. For $3,3,1,1$, the reductions reach $2,0,0$ and then force a negative degree, so it is not graphical.
+\end{description}
+
+\section*{Chapter 3: Paths and connectedness}
+\begin{description}[style=nextline]
+\item[3.1] On square $A-B-C-D-A$ with diagonal $AC$, $A-B-C-A-B$ is a length-4 walk that repeats edge $AB$. The walk $A-B-C-D-A$ is a trail but not a path because it repeats $A$.
+\item[3.2] $C_7$ is not bipartite because it is an odd cycle. $C_{10}$ is bipartite by alternating the two classes around the even cycle.
+\item[3.3] One example has components of sizes 1, 2, and 3: take an isolated vertex, a single edge, and a three-vertex path.
+\item[3.4] The visit order depends on the chosen graph and neighbour order. BFS uses a queue and explores by distance; DFS uses a stack or recursion and follows one branch before backtracking.
+\end{description}
+
+\section*{Chapter 4: Matrices and graphs}
+\begin{description}[style=nextline]
+\item[4.1] The adjacency matrix is $\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix}$.
+\item[4.2] $(A^2)_{11}=1$ counts the walk $v_1,v_2,v_1$. It is not a path because the starting vertex is repeated.
+\item[4.3] The sum of row $i$ is the number of vertices adjacent to $v_i$, hence it equals $\degG(v_i)$.
+\end{description}
+
+\section*{Chapter 5: Trees and spanning trees}
+\begin{description}[style=nextline]
+\item[5.1] A tree on 17 vertices has 16 edges; a tree with 12 edges has 13 vertices, since every tree has one fewer edge than vertices.
+\item[5.2] Choose a longest path in the tree. If an endpoint had a neighbour not on the path, the path could be extended; if it had another neighbour on the path, there would be a cycle. Thus both endpoints are leaves.
+\item[5.3] A spanning tree on 8 vertices has 7 edges, so remove $10-7=3$ edges. Delete edges from cycles to preserve connectedness.
+\item[5.4] If the universal vertex is joined to all other vertices, an edge between any two of the other vertices would form a triangle. Thus a tree with a universal vertex has only the universal vertex's incident edges: it is a star.
+\end{description}
+
+\section*{Chapter 6: Eulerian and Hamiltonian problems}
+\begin{description}[style=nextline]
+\item[6.1] No. The handshaking lemma implies that every graph has an even number of odd-degree vertices.
+\item[6.2] Yes. The graph is connected and all listed degrees are even, so the Euler criterion gives an Euler circuit.
+\item[6.3] A three-vertex path has degrees $1,2,1$ and has an Euler trail from one endpoint to the other.
+\item[6.4] Take two triangles joined by one bridge. A Hamiltonian cycle would have to cross the bridge to enter and leave the other triangle, but there is only one such edge.
+\item[6.5] If a Hamiltonian cycle in $G+uv$ uses $uv$, deleting it leaves a Hamiltonian path $w_1=u,\ldots,w_n=v$ in $G$. The sets $I$ and $J$ each index the neighbours of $u$ and $v$ along this path, so $|I|+|J|=\degG(u)+\degG(v)\geq n>n-1$. Hence they overlap at some $i$. The edges $uw_{i+1}$ and $w_iv$, together with the path edges, form a Hamiltonian cycle in $G$. Thus adding an edge between a nonadjacent Ore pair cannot create Hamiltonicity from nothing. Adding missing edges one at a time preserves the degree-sum condition; the complete graph is Hamiltonian, so reversing the additions proves $G$ is Hamiltonian.
+\end{description}
+
+\section*{Chapter 7: Planarity and Euler's formula}
+\begin{description}[style=nextline]
+\item[7.1] Euler's formula gives $f=2-v+e=2-8+12=6$.
+\item[7.2] $K_6$ has 15 edges, exceeding the planar bound $3v-6=12$ for a simple planar graph on six vertices.
+\item[7.3] A tree has $e=v-1$. Euler's formula then gives $f=2-v+(v-1)=1$.
+\item[7.4] If every vertex had degree at least 6, the degree sum would give $2e\geq6v$. But planarity gives $e\leq3v-6$, hence $2e\leq6v-12$, a contradiction. Therefore some vertex has degree at most 5.
+\end{description}
+
+\section*{Chapter 8: Graph colouring}
+\begin{description}[style=nextline]
+\item[8.1] $\chiG(C_5)=3$, $\chiG(C_6)=2$, and $\chiG(K_4)=4$.
+\item[8.2] Use one vertex per exam and an edge for each pair of exams sharing a student. A clique of size $r$ is a set of $r$ pairwise conflicting exams, so at least $r$ time slots are needed.
+\item[8.3] Every two vertices in a clique are adjacent, so all $r$ vertices must receive distinct colours; at least $r$ colours are necessary.
+\item[8.4] For path $a-b-c-d$, greedily colour in the order $a,d,b,c$. The first two get colour 1, then $b$ gets 2 and $c$ gets 3. Yet the path is bipartite and needs only 2 colours.
+\end{description}
+
+\section*{Chapter 9: Optimisation and algorithms}
+\begin{description}[style=nextline]
+\item[9.1] Example: use edges $SA=2$, $SB=5$, $AB=1$, $AT=6$, $BT=2$, with source $S$. After processing $S$, labels are $A=2,B=5$; processing $A$ updates $B=3,T=8$; processing $B$ updates $T=5$. The shortest distance to $T$ is 5 along $S-A-B-T$.
+\item[9.2] Use directed edges $S\to A=2$, $S\to B=5$, $B\to A=-10$, $A\to T=2$, and $B\to T=1$. Dijkstra settles $A$ at 2 and can settle $T$ at 4 before $B$ at 5, but the actual route $S\to B\to A\to T$ has weight $-3$.
+\item[9.3] Prim starting at $S$ accepts $SW=7$, $WO=6$, $SN=8$, and $OD=9$; the total is 30. Kruskal considers $WO=6$, $SW=7$, $SN=8$, and $OD=9$ in that order and accepts all four. Both produce the MST with four links, as expected for a tree on five vertices.
+\item[9.4] The cut property supports an exchange proof for a spanning tree; it does not justify arbitrary next-edge choices in a tour. For example, on $K_4$ with $AB=BC=CD=1$, $AC=BD=2$, $DA=10$, nearest-neighbour starting at $A$ gives $A-B-C-D-A$ of weight 13, while $A-B-D-C-A$ has weight 6.
+\end{description}
+
+\section*{Appendix B: Routes and minimal connectors}
+\begin{description}[style=nextline]
+\item[B.1] A triangle with all three edge weights 2 has three distinct MSTs (each omits a different edge); each has total weight 4.
+\item[B.2] On vertices $r,a,b$, set $ra=2$, $rb=2$, and $ab=1$. Shortest routes from $r$ to $a$ and $b$ use the two direct edges, total 4, while the MST uses $ra$ and $ab$, total 3. The objectives differ because shortest routes optimize origin-to-each distances, whereas an MST optimizes total connecting cost.
+\end{description}
+
+\section*{Appendix C: Critical path analysis}
+\begin{description}[style=nextline]
+\item[C.1] Earliest starts are $A=0$, $B=C=3$, $D=8$. Latest starts are $A=0$, $B=6$, $C=3$, $D=8$. Thus $A,C,D$ have zero float and $B$ has 3 days.
+\item[C.2] For example, use two routes: $S\to A\to T$ with durations 2 and 3, and $S\to B\to T$ with durations 4 and 1. Both take 5 days. Shortening one activity on the first route leaves the second route at 5 days, so the project duration does not change; the second route becomes critical.
+\item[C.3] An activity with float may use scarce people or equipment, face uncertainty, or become critical if another duration changes. Float is scheduling flexibility, not proof of irrelevance.
+\end{description}
+
+\section*{Appendix D: Flow networks}
+\begin{description}[style=nextline]
+\item[D.1] Let the only edges leaving $s$ be $s\to a$ of capacity 4 and $s\to b$ of capacity 3. The cut with source side $\{s\}$ has capacity 7, so no flow of value 8 is possible.
+\item[D.2] Use unit-capacity arcs $s\to A$, $s\to B$, $A\to X$, $A\to Y$, $B\to X$, $X\to t$, $Y\to t$. If the first path is $s-A-X-t$, a second unit can use the residual path $s-B-X-A-Y-t$, which reverses the earlier $A\to X$ choice. The resulting flow has value 2.
+\item[D.3] Summing flow conservation over all vertices on the source side of a cut cancels internal flows; the net flow crossing the cut equals the flow value. Forward crossing flow is at most the sum of those edge capacities, so every flow value is at most the cut capacity.
+\end{description}
+
+\section*{Appendix E: Assignment problems}
+\begin{description}[style=nextline]
+\item[E.1] The six assignment costs are 6, 11, 5, 9, 7, and 6. The minimum is 5, assigning row 1 to column 2, row 2 to column 1, and row 3 to column 3.
+\item[E.2] For example, let two agents both be allowed only one common task. Each has an option, but both cannot be assigned distinct tasks; their combined neighbour set has size 1, less than 2.
+\item[E.3] With cost matrix $\begin{pmatrix}1&2\\2&100\end{pmatrix}$, if the first agent greedily takes task 1 at cost 1, the second must take task 2 at cost 100. The global optimum assigns the first agent to task 2 and the second to task 1, total cost 4.
+\item[E.4] (a) One matching is $A\to1$, $B\to2$, $C\to3$, $D\to4$. (b) After changing $C$'s choices, $N(\{A,B,C\})=\{1,2\}$, so $|N(X)|=2<3=|X|$. (c) Hall's condition fails, so no matching can assign all agents distinct tasks. (d) Hall's condition checks that every group of agents collectively has enough available tasks.
+\end{description}

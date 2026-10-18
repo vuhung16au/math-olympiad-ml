@@ -1,0 +1,102 @@
+\documentclass[11pt]{book}
+
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{AUS Networks}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{booktabs,tabularx,array}
+\usepackage[most,skins]{tcolorbox}
+
+% Shared DL101 booklet styles, loaded in dependency order.
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage{dl101-boxes}
+\usepackage{dl101-theorems}
+\usepackage{dl101-hsc-problems}
+\usepackage{dl101-diffeq-enrichment}
+\usepackage{dl101-layout}
+
+% Links without visible rectangles (TOC and cross-references remain clickable).
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\hypersetup{hidelinks}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlist[enumerate]{leftmargin=*,itemsep=0.3em}
+\setlist[itemize]{leftmargin=*,itemsep=0.25em}
+\newcommand{\Core}{\textsf{[Core]}}
+\newcommand{\Challenge}{\textsf{[Challenge]}}
+\newcommand{\Investigation}{\textsf{[Investigation]}}
+\newcommand{\Coding}{\textsf{[Optional coding]}}
+\newcommand{\Enrichment}{\textsf{[Enrichment]}}
+\newcommand{\Uni}{\textsf{[Uni-level]}}
+\newcommand{\V}{V}
+\newcommand{\E}{E}
+\newcommand{\degG}{\operatorname{deg}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\chiG}{\chi}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\title{AUS-Graphs: An Introduction to Graph Theory for Extension and Specialist Students}
+\author{Vu Hung Nguyen}
+\date{2026}
+
+\begin{document}
+
+% Unnumbered matte cover.
+\input{frontmatter/title-page}
+
+% Numbered front matter: QR codes (1), quote (2), contents (3).
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\thispagestyle{empty}
+\input{../HSC-Common/assets/qrcode-page.tex}
+\begingroup\small\noindent
+This work is licensed under CC BY-NC 4.0 (Attribution-Non-Commercial), see the LICENSE file on the GitHub page for more information.
+\par\endgroup
+
+\clearpage
+\input{frontmatter/quote}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\input{frontmatter/guide}
+\input{frontmatter/diagnostic}
+\mainmatter
+\part{Problems that lead to graphs}
+\input{chapters/01-problems-that-lead-to-graphs}
+\input{chapters/02-degrees-counting-and-proof}
+\input{chapters/03-paths-and-connectedness}
+\input{chapters/04-matrices-and-graphs}
+\part{Structure theorems}
+\input{chapters/05-trees-and-spanning-trees}
+\input{chapters/06-eulerian-and-hamiltonian-problems}
+\input{chapters/07-planarity-and-eulers-formula}
+\part{Colouring and optimisation}
+\input{chapters/08-graph-colouring}
+\input{chapters/09-optimisation-and-algorithms}
+\input{chapters/10-applications-and-investigations}
+\input{chapters/11-conclusion}
+\appendix
+\part{Applied networks}
+\input{appendix/01-course-networks-at-a-glance}
+\input{appendix/02-routes-and-minimal-connectors}
+\input{appendix/03-critical-path-analysis}
+\input{appendix/04-flow-networks}
+\input{appendix/05-assignment-problems}
+\backmatter
+\input{backmatter/hints}
+\input{backmatter/answers-and-brief-solutions}
+\input{backmatter/investigation-notes}
+\input{backmatter/glossary-and-notation}
+\input{backmatter/curriculum-connections-and-sources}
+\end{document}

@@ -1,0 +1,46 @@
+\chapter*{Guide to AUS-Graphs}
+\addcontentsline{toc}{chapter}{Guide to AUS-Graphs}
+\section*{Introduction}
+
+\subsection*{About This Booklet}
+AUS-Graphs is an introduction to graph theory: the mathematics of networks and connections. It develops the subject from its basic language to structural results, colouring, optimisation and algorithms. The current edition is theory-focused, with examples and a substantial set of exercises; it is not an examination-preparation text.
+
+\subsection*{Target Audience}
+This booklet is for curious senior mathematics students in Australia, especially those studying extension or specialist mathematics. It is also suitable for independent readers who enjoy mathematical reasoning and want to explore a subject linking proof, counting, geometry, computing and real-world models.
+
+\subsection*{Why This Book?}
+Graph and network ideas appear across senior mathematics courses in New South Wales, Victoria and Queensland, but their scope, emphasis and assumed background are not identical. This booklet gives students from all three states a shared starting point and develops the ideas consistently, without assuming that a topic has already been taught in a particular course. It is also intended to help students build the reasoning and problem-solving skills used in olympiad-style mathematics competitions, and to prepare interested readers for further study, especially discrete mathematics.
+
+\subsection*{A Foundation for Further Study}
+The ideas in this booklet build foundations in graph theory and discrete mathematics, and offer a first look at concepts that also appear in the foundations of computer science. These subjects feature in higher studies, including undergraduate mathematics and applied mathematics. This booklet is a starting point for that study, not a substitute for university-level courses.
+
+\subsection*{How to Use This Booklet}
+The main chapters build ideas in sequence, from modelling situations as graphs to proving structural results and applying algorithms. Sections marked \Core{} form the main path; the five central proved theorems are also marked \Core{}. Their proofs are given in the text. \Challenge{} sections go further, while \Investigation{} prompts invite exploration with more than one possible outcome. \Enrichment{} sections offer optional extensions that remain accessible with the booklet's background. \Uni{} sections preview ideas usually developed in undergraduate mathematics and may use unfamiliar concepts. \Coding{} activities are optional; pseudocode or a spreadsheet can be used instead of a programming language. Every numbered exercise has an answer or brief solution in the back matter; challenging exercises also have hints, while open-ended investigations have sample approaches.
+
+\subsection*{Knowledge Needed}
+Familiarity with algebra, basic counting and the idea of mathematical proof is helpful, but no particular state course or prior graph theory is assumed. The booklet introduces the definitions and methods it uses. Here is a quick guide to some shared language and notation:
+\begin{itemize}
+\item \textbf{Numbers and algebra:} A letter such as $n$ or $k$ stands for a number. For example, $2k$ is even, and $n-1$ means one less than $n$.
+\item \textbf{Sets and graph notation:} A graph is written $G=(V,E)$: $V$ is its set of vertices (the objects) and $E$ is its set of edges (the connections). In a graph with vertices labelled $v_1,v_2,\ldots,v_n$, the subscripts are labels, not powers.
+\item \textbf{Graph drawings:} Vertices are shown as solid dots when their names are not needed. When a discussion depends on identifying particular vertices, they are shown as labelled circles.
+\item \textbf{Counting pairs:} The notation $\binom{n}{2}$ counts the ways to choose two objects from $n$ when order does not matter. For example, $\binom{7}{2}=21$.
+\item \textbf{Proof:} A proof explains why a statement must be true. To disprove a claim that is supposed to hold in every case, one counterexample is enough.
+\item \textbf{Matrices:} A matrix is a rectangular array of numbers. Its size is given as rows $\times$ columns; $A_{ij}$ means the entry in row $i$, column $j$. In the example below, the 1s record which pairs of vertices are joined. No matrix knowledge is assumed: the later bridge module explains how to read and use these arrays.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[thick,every node/.style={circle,draw,fill=white,minimum size=8mm}]
+\node (v1) at (0,0) {$v_1$};
+\node (v2) at (1.5,0) {$v_2$};
+\node (v3) at (3,0) {$v_3$};
+\draw (v1)--(v2)--(v3);
+\node[draw=none,rectangle,align=center] at (6.4,0) {$A=\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix}$\\[-0.2em]\small rows and columns follow $v_1,v_2,v_3$};
+\end{tikzpicture}
+\caption{The graph and its adjacency matrix: for example, $A_{12}=1$ because $v_1$ and $v_2$ are joined, while $A_{13}=0$ because they are not.}
+\end{figure}
+
+The chapters also explain the graph-specific terms as they arise. Readers who already know matrices may skim the bridge module, while others can use it as a first introduction to the matrix ideas needed here.
+
+\subsection*{What You Will Learn}
+You will learn to model connections with graphs; reason about degrees, paths, cycles, trees and planarity; develop and communicate proofs; and use colouring and algorithms to study network problems. The applied appendix provides a bridge to selected network methods used in senior mathematics courses.
