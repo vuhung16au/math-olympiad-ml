@@ -1,0 +1,231 @@
+\addcontentsline{toc}{subsubsection}{Solution 17. IMO 2022 Shortlist -- Algebra A3}
+
+\begin{dlsummary}[title={\bfseries Solution 17. IMO 2022 Shortlist -- Algebra A3},breakable]
+
+\begin{proof}
+Call a pair $(x,y)$ \emph{good} if
+\[
+xf(y)+yf(x)\leq2.
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Every good pair has $x=y$.}
+
+Suppose $(x,y)$ is good with $x\ne y$.
+By symmetry and uniqueness, neither
+$(x,x)$ nor $(y,y)$ can be good. Thus
+\[
+xf(x)>1,\qquad yf(y)>1.
+\]
+
+By AM--GM,
+\[
+\begin{aligned}
+xf(y)+yf(x)
+&\geq2\sqrt{xf(y)\cdot yf(x)}\\
+&=2\sqrt{xf(x)\cdot yf(y)}\\
+&>2,
+\end{aligned}
+\]
+a contradiction.
+
+Therefore every good pair satisfies $x=y$.
+
+\medskip
+\noindent
+\textbf{Step 2. Establish an upper bound.}
+
+For every $x>0$, a good pair exists.
+By Step 1, it must be $(x,x)$. Hence
+\[
+2xf(x)\leq2,
+\]
+so
+\[
+\boxed{f(x)\leq\frac1x.} \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Force equality.}
+
+Fix $x>0$ and let
+\[
+t=\frac1{f(x)}>0.
+\]
+
+By (1),
+\[
+f(t)\leq\frac1t=f(x).
+\]
+Therefore,
+\[
+\begin{aligned}
+xf(t)+tf(x)
+&\leq xf(x)+1\\
+&\leq2.
+\end{aligned}
+\]
+
+Thus $(x,t)$ is a good pair. By Step 1,
+$t=x$, which gives
+\[
+\boxed{f(x)=\frac1x\qquad(x>0).}
+\]
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+For $f(x)=1/x$, the given inequality becomes
+\[
+\frac{x}{y}+\frac{y}{x}\leq2.
+\]
+
+However, AM--GM gives
+\[
+\frac{x}{y}+\frac{y}{x}\geq2,
+\]
+with equality if and only if $x=y$.
+
+Hence, for every $x>0$, there is exactly
+one admissible $y>0$, namely $y=x$.
+
+Therefore $f(x)=1/x$ is the unique solution.
+\end{proof}
+
+\medskip
+\noindent
+\textbf{Alternative 1.1. A direct contradiction.}
+
+We use the bound $f(x)\leq1/x$ established above. Suppose that
+$f(x)<1/x$ for some $x>0$. Then the interval $(x,1/f(x))$ is nonempty.
+For every $a$ in this interval,
+\[
+af(x)<1,\qquad xf(a)\leq\frac{x}{a}<1,
+\]
+so
+\[
+af(x)+xf(a)<2.
+\]
+Thus every such $a$ is a good partner of $x$. Since the interval contains
+more than one number, this contradicts uniqueness. Hence $f(x)=1/x$.
+
+\medskip
+\noindent
+\textbf{Alternative 1.2. Strict decrease.}
+
+We again use the fact that every good pair is diagonal and
+$f(x)\leq1/x$. If $y>x$, then $(x,y)$ is not good, whereas $(y,y)$ is
+good. Therefore
+\[
+xf(y)+yf(x)>2\geq2yf(y)>xf(y)+yf(y),
+\]
+which gives $f(x)>f(y)$. Thus $f$ is strictly decreasing.
+
+For any $y>x$, strict decrease and the fact that $(x,y)$ is not good give
+\[
+2<xf(y)+yf(x)<(x+y)f(x).
+\]
+Letting $y\to x^+$ yields $f(x)\geq1/x$. Together with the upper bound,
+this proves $f(x)=1/x$.
+
+\medskip
+\noindent
+\textbf{Alternative 2. A partner map.}
+
+For each $x>0$, let $g(x)$ be the unique good partner of $x$. Symmetry of
+the condition and uniqueness imply $g(g(x))=x$.
+
+We first show that $f$ is strictly decreasing. If $x<y$, then
+$(g(y),y)$ is good, but $(g(y),x)$ is not, since $y$ is the unique good
+partner of $g(y)$. Hence
+\[
+xf(g(y))+g(y)f(x)>2\geq yf(g(y))+g(y)f(y).
+\]
+Rearranging shows $f(x)>f(y)$.
+
+Now suppose that $(x,y)$ is a good pair with $x\ne y$. Uniqueness
+implies that neither $(x,x)$ nor $(y,y)$ is good, so
+$xf(x)+yf(y)>2$. But $(x,y)$ being good gives
+\[
+(x-y)(f(x)-f(y))
+=xf(x)+yf(y)-xf(y)-yf(x)>0,
+\]
+contradicting strict decrease. Thus every good pair is diagonal, giving
+$f(x)\leq1/x$. Alternative 1.1 now forces equality.
+
+\medskip
+\noindent
+\textbf{Alternative 3. Equality at the unique partner.}
+
+Let $g(x)$ again denote the unique good partner of $x$. Symmetry gives
+$g(g(x))=x$. We claim that every good pair satisfies equality. Suppose
+instead that $(x,y)$ is good and
+\[
+\delta=2-xf(y)-yf(x)>0.
+\]
+For $0<\varepsilon<\delta/(2f(x))$, uniqueness makes $(x,y+\varepsilon)$
+not good, and therefore
+\[
+f(y+\varepsilon)
+>\frac{2-(y+\varepsilon)f(x)}{x}
+>f(y)+\frac{\delta}{2x}.
+\]
+Put $z=y+\varepsilon$. The good pair $(z,g(z))$ and the fact that
+$(g(z),y)$ is not good give
+\[
+f(g(z))\leq\frac{2-g(z)f(z)}{z},
+\qquad
+f(g(z))>\frac{2-g(z)f(y)}{y}.
+\]
+Combining these inequalities yields
+\[
+2\varepsilon<g(z)\bigl[zf(y)-yf(z)\bigr]
+<g(z)\left[\varepsilon f(y)-\frac{y\delta}{2x}\right].
+\]
+For sufficiently small positive $\varepsilon$, the final bracket is
+negative, a contradiction. Thus every good pair has value exactly $2$.
+
+Every pair other than $(x,g(x))$ is not good, so
+\[
+xf(y)+yf(x)\geq2\qquad(x,y>0).
+\]
+Taking $y=x$ gives $f(x)\geq1/x$. Applying this bound to the good pair
+$(x,g(x))$ gives
+\[
+2\geq xf(g(x))+g(x)f(x)
+\geq\frac{x}{g(x)}+\frac{g(x)}{x}\geq2.
+\]
+Equality throughout implies $f(x)=1/x$.
+
+\medskip
+\noindent
+\textbf{Alternative 4. Strict convexity and continuity.}
+
+Let $g(w)$ be the unique good partner of $w$, and define
+\[
+q_s(t)=f(t)+st.
+\]
+For $s=f(g(w))/g(w)$, the good-pair condition gives
+$q_s(w)\leq2/g(w)$. If $t\ne w$, then $(g(w),t)$ is not good, so
+$q_s(t)>2/g(w)$. Thus $q_s$ has a unique global minimum at $w$.
+
+We claim that $f$ is strictly convex. Otherwise, for some $u<v$ and
+$\lambda\in(0,1)$, setting $w=\lambda u+(1-\lambda)v$ would give
+\[
+f(w)\geq\lambda f(u)+(1-\lambda)f(v).
+\]
+Adding the linear term $st$ yields
+$q_s(w)\geq\lambda q_s(u)+(1-\lambda)q_s(v)$, contradicting the
+strict minimality of $q_s$ at $w$. Hence $f$ is strictly convex and, as
+a finite convex function on an open interval, is continuous.
+
+As in the first solution, every good pair is diagonal, so $f(x)\leq1/x$.
+If this inequality were strict at some $x$, the continuous function
+$h(y)=xf(y)+yf(x)$ would satisfy $h(x)=2xf(x)<2$. It would then be less
+than $2$ for all $y$ in some interval around $x$, contradicting the
+uniqueness of the good partner. Therefore $f(x)=1/x$ for all $x>0$.
+
+\end{dlsummary}

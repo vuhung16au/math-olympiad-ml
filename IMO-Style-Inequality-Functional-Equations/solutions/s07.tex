@@ -1,0 +1,86 @@
+\addcontentsline{toc}{subsubsection}{Solution 26. IMO 2023 Shortlist -- Algebra A2}
+
+\begin{dlsummary}[title={\bfseries Solution 26. IMO 2023 Shortlist -- Algebra A2},breakable]
+
+\begin{proof}
+\textbf{Step 1. Introduce a symmetric substitution.}
+
+Put
+\[
+s=x+y,\qquad t=x-y,
+\]
+so that
+\[
+x=\frac{s+t}{2},\qquad
+y=\frac{s-t}{2}.
+\]
+The given inequality becomes
+\[
+f(s)f(t)\geq
+f\left(\frac{s+t}{2}\right)^2
+-f\left(\frac{s-t}{2}\right)^2.
+\tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Force a sign constraint.}
+
+Replacing $t$ by $-t$ in (1), we obtain
+\[
+f(s)f(-t)\geq
+f\left(\frac{s-t}{2}\right)^2
+-f\left(\frac{s+t}{2}\right)^2.
+\tag{2}
+\]
+
+Adding (1) and (2), the squared terms cancel:
+\[
+\boxed{
+f(s)\bigl(f(t)+f(-t)\bigr)\geq0
+}
+\tag{3}
+\]
+for every $s,t\in\mathbb R$.
+
+\medskip
+\noindent
+\textbf{Step 3. Apply the strictness assumption.}
+
+By assumption, the original inequality is strict
+for some pair $(x_0,y_0)$.
+
+Set
+\[
+s_0=x_0+y_0,\qquad t_0=x_0-y_0.
+\]
+Then (1) is strict at $(s_0,t_0)$.
+Adding the corresponding inequality (2) yields
+\[
+f(s_0)\bigl(f(t_0)+f(-t_0)\bigr)>0.
+\]
+Therefore,
+\[
+\boxed{f(t_0)+f(-t_0)\neq0.}
+\]
+
+Now fix $t=t_0$ in (3). For every
+$s\in\mathbb R$,
+\[
+f(s)\bigl(f(t_0)+f(-t_0)\bigr)\geq0.
+\]
+
+Since the second factor is a fixed nonzero
+real number, either
+\[
+f(s)\geq0\qquad\text{for all }s\in\mathbb R,
+\]
+or
+\[
+f(s)\leq0\qquad\text{for all }s\in\mathbb R.
+\]
+
+This proves the required conclusion.
+\end{proof}
+
+\end{dlsummary}

@@ -1,0 +1,49 @@
+\addcontentsline{toc}{subsubsection}{Solution 21. 2026 IMO Problem 5}
+
+\begin{dlsummary}[title={\bfseries Solution 21. 2026 IMO Problem 5},breakable]
+
+\begin{proof}
+We use the arithmetic-orbit approach from the AoPS Wiki.
+Write $P(x,y)$ for the given chain. Substituting $(f(x),x)$ squeezes
+its middle term between two copies of $f(x)$, so
+\[
+f(f(x))=2f(x)-x.
+\]
+Set $d(x)=f(x)-x$. Then $d(f(x))=d(x)$ and
+\[
+f^n(x)=x+nd(x)\qquad(n\geq0),
+\]
+so positivity of all iterates gives $d(x)\geq0$.
+
+Suppose $A=d(x)>0$ and $B=d(y)>0$. For integers $m\geq0$, $n\geq1$,
+set $X=x+mA$ and $Y=y+nB$. Since $d(f(t))=d(t)$, we have
+$f(X)=X+A$ and $f(Y-B)=Y$. Applying the right inequality to
+$(X,Y-B)$ gives
+\[
+\frac{X+Y+A-B}{2}\geq\sqrt{XY}.
+\]
+Squaring and rearranging yields
+\[
+(X-Y)^2\geq2(B-A)(X+Y)-(B-A)^2. \tag{1}
+\]
+If $A<B$, then for each sufficiently large $n$ choose $m\geq0$ so
+that $|X-Y|\leq A/2$; this is possible because the values $x+mA$ have
+spacing $A$ and $Y$ tends to infinity. The left side of (1) is then at
+most $A^2/4$, while its right side tends to $+\infty$, a contradiction.
+Interchanging $x,y$ rules out $B<A$. Hence all positive values of $d$
+equal one constant $c>0$, if any occur.
+
+Thus $d$ takes only the values $0,c$. If $d(x)=c$ and $d(y)=0$, the
+left inequality in $P(x,y)$ gives
+\[
+(x-y)^2\geq2c(x+y)+c^2>c^2.
+\]
+So the two level sets are relatively open; connectedness of
+$(0,\infty)$ forces one to be empty. Therefore $d$ is constant and
+$f(x)=x+c$ for some $c\geq0$.
+
+For these functions, the chain reduces to the RMS--AM--GM inequalities
+for $x$ and $y+c$, so every $c\geq0$ works.
+\end{proof}
+
+\end{dlsummary}

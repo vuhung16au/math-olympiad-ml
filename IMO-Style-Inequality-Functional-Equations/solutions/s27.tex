@@ -1,0 +1,56 @@
+\addcontentsline{toc}{subsubsection}{Solution 4. The Dyadic Lock}
+
+\begin{dlsummary}[title={\bfseries Solution 4. The Dyadic Lock},breakable]
+
+\begin{proof}
+The second inequality in the problem implies
+\[
+f(xy)\leq f(x)f(y). \tag{1}
+\]
+Also, $f$ is strictly increasing: if $u>v>0$, then
+$f(u)=f(v+(u-v))\geq f(v)+f(u-v)>f(v)$.
+Taking $x=y=1$ in (1) gives $f(1)\geq1$. Superadditivity then gives
+$f(2)\geq2f(1)\geq2$. Since $f$ is increasing,
+$f(f(2))\geq f(2)$, and therefore
+\[
+4\geq f(2)f(f(2))\geq f(2)^2\geq4.
+\]
+It follows that $f(2)=2$ and, from $f(2)\geq2f(1)\geq2$, also
+$f(1)=1$. Superadditivity and (1), applied repeatedly, now give
+\[
+f(2^n)=2^n\qquad(n=0,1,2,\ldots). \tag{2}
+\]
+
+We next obtain a common upper bound. Fix $t>0$, and for all sufficiently
+large $n$ let
+\[
+m_n=\left\lfloor\frac{2^n}{t}\right\rfloor.
+\]
+By monotonicity, superadditivity and (2),
+\[
+2^n=f(2^n)\geq f(m_nt)\geq m_nf(t).
+\]
+Since $2^n/m_n\to t$, this proves
+\[
+f(t)\leq t\qquad(t>0). \tag{3}
+\]
+
+For every positive integer $k$, superadditivity and (3) give
+\[
+k=kf(1)\leq f(k)\leq k,
+\]
+so $f(k)=k$. If $r=p/q$ is a positive rational, where $p,q$ are
+positive integers, then (1) yields
+\[
+p=f(p)=f(qr)\leq f(q)f(r)=qf(r).
+\]
+Hence $f(r)\geq r$, and (3) gives $f(r)=r$. For any positive real $x$,
+choose positive rationals $r<x<s$ arbitrarily close to $x$. Monotonicity
+then gives $r=f(r)\leq f(x)\leq f(s)=s$. Letting $r,s$ approach $x$
+proves $f(x)=x$.
+
+The identity function satisfies the original inequalities and numerical
+condition with equality, so it is the unique solution.
+\end{proof}
+
+\end{dlsummary}

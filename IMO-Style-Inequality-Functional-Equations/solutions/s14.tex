@@ -1,0 +1,105 @@
+\addcontentsline{toc}{subsubsection}{Solution 11. The Harmonic--Product Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 11. The Harmonic--Product Squeeze},breakable]
+
+\begin{proof}
+Define
+\[
+g(t)=\frac1{f(1/t)}\qquad(t>0).
+\]
+Taking reciprocals in the first inequality and substituting
+$x=1/u$ and $y=1/v$ gives
+\[
+g(u+v)\geq g(u)+g(v). \tag{1}
+\]
+The second inequality, applied to $1/u$ and $1/v$ and then reciprocated,
+gives
+\[
+g(uv)\leq g(u)g(v). \tag{2}
+\]
+Thus $g$ is positive, superadditive, and submultiplicative.
+
+\medskip
+\noindent
+\textbf{Step 1. Obtain a lower bound for $g$.}
+
+Taking $x=y=1$ in (2) gives $g(1)\leq g(1)^2$, so $g(1)\geq1$.
+Also, (1) and positivity show that $g$ is strictly increasing: if
+$y>x>0$, then
+\[
+g(y)=g(x+(y-x))\geq g(x)+g(y-x)>g(x).
+\]
+Fix $t>1$ and a positive integer $n$. Submultiplicativity and
+superadditivity give
+\[
+g(t)^n\geq g(t^n)\geq\lfloor t^n\rfloor g(1)
+\geq\lfloor t^n\rfloor.
+\]
+The middle inequality follows by writing $t^n$ as the sum of
+$\lfloor t^n\rfloor$ copies of $1$ and, if needed, a positive
+remainder. Taking $n$th roots and letting $n\to\infty$ yields
+\[
+g(t)\geq t\qquad(t>1). \tag{3}
+\]
+
+Let $a=1/c>1$. By the definition of $g$,
+\[
+g(a)=\frac1{f(c)},\qquad \frac1{g(a)}=f(c),
+\]
+and therefore
+\[
+g(g(a))=\frac1{f(1/g(a))}
+       =\frac1{f(f(c))}\leq\frac1c=a.
+\]
+On the other hand, (3) applied first to $a$ and then to $g(a)>1$ gives
+\[
+g(g(a))\geq g(a)\geq a.
+\]
+Therefore,
+\[
+g(a)=a. \tag{4}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Establish a global upper bound.}
+
+By (2) and (4), $g(a^n)\leq g(a)^n=a^n$ for every positive integer
+$n$. Fix $x>0$ and, for sufficiently large $n$, put
+\[
+m_n=\left\lfloor\frac{a^n}{x}\right\rfloor\geq1.
+\]
+Since $m_nx\leq a^n$, monotonicity and repeated superadditivity give
+\[
+a^n\geq g(a^n)\geq g(m_nx)\geq m_ng(x).
+\]
+Consequently,
+\[
+g(x)\leq\frac{a^n}{\lfloor a^n/x\rfloor}\longrightarrow x,
+\]
+so $g(x)\leq x$ for all $x>0$.
+
+\medskip
+\noindent
+\textbf{Step 3. Force equality.}
+
+The upper bound gives $g(1)\leq1$, and hence $g(1)=1$. By (2),
+\[
+1=g(1)=g(x\cdot1/x)\leq g(x)g(1/x)\leq\frac{g(x)}x.
+\]
+Thus $g(x)\geq x$. Together with the upper bound, this proves
+$g(x)=x$ for all $x>0$. Returning to the definition of $g$,
+\[
+\frac1{f(1/x)}=x,
+\]
+so $f(x)=x$ for every $x>0$.
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+For $f(x)=x$, both inequalities hold with equality, and
+$f(f(c))=c$. Hence the identity function is indeed the unique solution.
+\end{proof}
+
+\end{dlsummary}

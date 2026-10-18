@@ -1,0 +1,30 @@
+\addcontentsline{toc}{subsubsection}{Solution 12. IMO 1977 -- Problem 6}
+
+\begin{dlsummary}[title={\bfseries Solution 12. IMO 1977 -- Problem 6},breakable]
+
+\begin{proof}
+Start with $a_0=2$ and, while $a_j>1$, set $a_{j+1}=f(a_j-1)$. If
+the sequence never reaches $1$, then
+\[
+f(a_j)>f(f(a_j-1))=f(a_{j+1})
+\]
+produces an infinite decreasing sequence of positive integers. Hence
+$a_j=1$ for some $j$, so $f(t)=1$ for $t=a_{j-1}-1$. If $t>1$,
+the condition at $t-1$ gives $1=f(t)>f(f(t-1))\geq1$, impossible.
+Thus $t=1$ and $f(1)=1$.
+
+Inductively, $f(n)\geq k$ for all $n\geq k$: if it holds for $k$,
+then for $n\geq k+1$, $f(n-1)\geq k$ and
+\[
+f(n)>f(f(n-1))\geq k,
+\]
+so $f(n)\geq k+1$. In particular, $f(n)\geq n$.
+
+It follows that $f(f(n))\geq f(n)$, hence $f(n+1)>f(n)$; thus $f$
+is strictly increasing. If $f(n)>n$, then $f(n)\geq n+1$, so
+$f(f(n))\geq f(n+1)$, contradicting the hypothesis. Therefore
+$f(n)=n$ for every positive integer $n$, and direct substitution verifies
+the solution.
+\end{proof}
+
+\end{dlsummary}

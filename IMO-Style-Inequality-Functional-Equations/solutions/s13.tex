@@ -1,0 +1,70 @@
+\addcontentsline{toc}{subsubsection}{Solution 16. The Iterated Ratio Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 16. The Iterated Ratio Squeeze},breakable]
+
+\begin{proof}
+For positive $u,v$, define
+\[
+R(u,v)=\frac uv+\frac vu.
+\]
+The first inequality in the statement says
+\[
+R(f(x),f(y))\geq R(x,y).
+\]
+Applying this inequality successively to
+$(f(x),f(y))$ and $(f^{\circ2}(x),f^{\circ2}(y))$ gives
+\[
+R(f^{\circ3}(x),f^{\circ3}(y))
+\geq R(f^{\circ2}(x),f^{\circ2}(y))
+\geq R(f(x),f(y))
+\geq R(x,y).
+\]
+The second inequality in the statement gives the reverse bound
+$R(x,y)\geq R(f^{\circ3}(x),f^{\circ3}(y))$. Hence equality holds
+throughout, and in particular
+\[
+R(f(x),f(y))=R(x,y). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Determine the form of $f$.}
+
+Let $c=f(1)>0$. Taking $y=1$ in (1),
+\[
+\frac{f(x)}c+\frac c{f(x)}=x+\frac1x.
+\]
+For positive $t$, the equation $t+t^{-1}=x+x^{-1}$ has roots
+$t=x$ and $t=x^{-1}$. Therefore, for every $x>0$,
+\[
+f(x)=cx\quad\text{or}\quad f(x)=\frac cx. \tag{2}
+\]
+
+The choice in (2) cannot differ for two inputs other than $1$. Indeed,
+if $u,v\ne1$ satisfied $f(u)=cu$ and $f(v)=c/v$, then (1) would give
+\[
+uv+\frac1{uv}=\frac uv+\frac vu,
+\]
+which is equivalent to $(u^2-1)(v^2-1)=0$, a contradiction. Thus the
+same choice holds for every $x\ne1$. At $x=1$ the two expressions
+coincide, so globally either $f(x)=cx$ or $f(x)=c/x$.
+
+\medskip
+\noindent
+\textbf{Step 2. Apply the fixed-point condition.}
+
+If $f(x)=cx$, then $f(a)=a$ gives $c=1$. If $f(x)=c/x$, then
+$f(a)=a$ gives $c=a^2$. Hence the only possibilities are
+\[
+f(x)=x\qquad\text{or}\qquad f(x)=\frac{a^2}{x}.
+\]
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+Both functions satisfy $f(a)=a$ and preserve $R(x,y)$, so both
+inequalities hold with equality. Therefore both are solutions.
+\end{proof}
+
+\end{dlsummary}

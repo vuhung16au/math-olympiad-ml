@@ -1,0 +1,66 @@
+\addcontentsline{toc}{subsubsection}{Solution 30. The Quadratic--Difference Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 30. The Quadratic--Difference Squeeze},breakable]
+
+\begin{proof}
+Taking $y=x$ in the first inequality gives $f(x)\geq x^2$ for every
+real $x$. Define
+\[
+g(x)=f(x)-x^2.
+\]
+Then $g(x)\geq0$. Substituting $f(t)=t^2+g(t)$ into the second
+inequality and cancelling the quadratic terms yields
+\[
+g(x+y)+g(x-y)\leq2g(x)\qquad(x,y\in\mathbb R). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Show that $g$ is constant.}
+
+Fix arbitrary $a,b\in\mathbb R$, and set
+\[
+x_k=a+k(b-a)\qquad(k\in\mathbb Z),
+\qquad
+\Delta_k=g(x_{k+1})-g(x_k).
+\]
+Applying (1) with $x=x_k$ and $y=b-a$ gives
+\[
+g(x_{k+1})+g(x_{k-1})\leq2g(x_k),
+\]
+so $\Delta_k\leq\Delta_{k-1}$. In particular,
+$\Delta_j\leq\Delta_0=g(b)-g(a)$ for every integer $j\geq0$.
+For any positive integer $n$, summing these bounds gives
+\[
+-g(a)\leq g(x_n)-g(a)
+=\sum_{j=0}^{n-1}\Delta_j
+\leq n\bigl(g(b)-g(a)\bigr),
+\]
+where the first inequality uses $g(x_n)\geq0$.
+If $g(b)<g(a)$, choosing $n$ sufficiently large makes the rightmost
+quantity less than $-g(a)$, a contradiction. Thus $g(b)\geq g(a)$.
+Since $a,b$ were arbitrary, interchanging them shows $g(a)=g(b)$;
+therefore $g$ is constant. Write $g(x)=d$. Its nonnegativity gives
+$d\geq0$, and hence
+\[
+f(x)=x^2+d\qquad(x\in\mathbb R).
+\]
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+For $d\geq0$,
+\[
+f(x)+f(y)-2xy=(x-y)^2+2d\geq0,
+\]
+and
+\[
+f(x+y)+f(x-y)
+=(x+y)^2+(x-y)^2+2d
+=2f(x)+2y^2.
+\]
+Thus every function in the stated family satisfies both inequalities.
+\end{proof}
+
+\end{dlsummary}

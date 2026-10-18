@@ -1,0 +1,70 @@
+\addcontentsline{toc}{subsubsection}{Solution 19. The Reciprocal-Slope Pinch}
+
+\begin{dlsummary}[title={\bfseries Solution 19. The Reciprocal-Slope Pinch},breakable]
+
+\begin{proof}
+\textbf{Step 1. Establish a lower bound.}
+
+Since $f(xf(x))>0$, the given inequality implies
+\[
+f(x+y)>y\qquad(x,y>0).
+\]
+Fix $z>0$ and take any $x\in(0,z)$ with $y=z-x$. Then
+$f(z)>z-x$. As this holds for every such $x$, it follows that
+\[
+f(z)\geq z\qquad(z>0). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Control the excess over the identity.}
+
+Define $g(x)=f(x)-x$, so $g(x)\geq0$ by (1). Since
+$f(xf(x))=xf(x)+g(xf(x))$, the original inequality is equivalent to
+\[
+g(x+y)-g(x)\geq\frac{g(xf(x))}{x}\qquad(x,y>0). \tag{2}
+\]
+In particular, $g$ is nondecreasing.
+
+If $f(1)>1$, taking $x=1$ and $y=f(1)-1$ in the original inequality
+would give
+\[
+f(1)-1+f(f(1))\leq f(f(1)),
+\]
+which is impossible. Hence $f(1)\leq1$, and (1) gives $f(1)=1$;
+therefore $g(1)=0$. Since $g$ is nonnegative and nondecreasing,
+\[
+g(x)=0\qquad(0<x\leq1). \tag{3}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Rule out positive excess above $1$.}
+
+Suppose $g(a)=c>0$ for some $a>1$. For every $u>1$, we have
+$uf(u)\geq u^2>u$. Monotonicity of $g$ and (2) therefore imply, for
+all $v>u>1$,
+\[
+g(v)\geq g(u)+\frac{g(uf(u))}{u}
+\geq g(u)+\frac{g(u)}{u}. \tag{4}
+\]
+Fix $X>a$. For any positive integer $N$, choose
+\[
+u_j=a+\frac{j(X-a)}{N+1}\qquad(0\leq j\leq N).
+\]
+All these points lie in $[a,X)$, so $g(u_j)\geq c$ and
+$u_j<X$. Applying (4) to each successive pair gives
+\[
+g(u_{j+1})\geq g(u_j)+\frac{c}{X}
+\qquad(0\leq j<N).
+\]
+Thus $g(u_N)\geq c+Nc/X$. But monotonicity gives $g(u_N)\leq g(X)$,
+which is a fixed finite value. Choosing $N$ sufficiently large is a
+contradiction. Hence $g(x)=0$ for all $x>1$ as well. Together with (3),
+this proves $f(x)=x$ for every $x>0$.
+
+Finally, the identity function satisfies the original inequality with
+equality throughout. It is therefore the unique solution.
+\end{proof}
+
+\end{dlsummary}

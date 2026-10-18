@@ -1,0 +1,84 @@
+\addcontentsline{toc}{subsubsection}{Solution 33. The Dyadic Parallelogram--Quadratic Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 33. The Dyadic Parallelogram--Quadratic Squeeze},breakable]
+
+\begin{proof}
+\textbf{Step 1. Obtain an inequality for the residual.}
+
+Put $g(x)=f(x)-x^2$. Comparing the outer expressions in the given chain
+and substituting $f(x)=x^2+g(x)$ gives
+\[
+2g(x)+3g(y)+2(x-2y)^2\geq0
+\qquad(x,y\in\mathbb R). \tag{1}
+\]
+Taking $x=y=0$ shows $g(0)\geq0$, while setting $x=2t$ and $y=t$ gives
+\[
+2g(2t)+3g(t)\geq0\qquad(t\in\mathbb R). \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Prove that $g$ is nonnegative.}
+
+The right-hand inequality in the problem and the parallelogram identity
+imply
+\[
+g(x+y)+g(x-y)\leq2g(x)
+\qquad(x,y\in\mathbb R). \tag{3}
+\]
+Taking $x=y=t$ gives $g(2t)\leq2g(t)-g(0)$. Combining this with (2),
+\[
+0\leq2g(2t)+3g(t)\leq7g(t)-2g(0).
+\]
+Since $g(0)\geq0$, it follows that $g(t)\geq\frac27g(0)\geq0$ for
+all $t\in\mathbb R$.
+
+\medskip
+\noindent
+\textbf{Step 3. Show that $g$ is constant.}
+
+Fix $a,b\in\mathbb R$, and define
+\[
+x_k=a+k(b-a)\quad(k\geq0),
+\qquad
+\Delta_k=g(x_{k+1})-g(x_k).
+\]
+For each $k\geq1$, apply (3) with $x=x_k$ and $y=b-a$. Then
+\[
+g(x_{k+1})+g(x_{k-1})\leq2g(x_k),
+\]
+so $\Delta_k\leq\Delta_{k-1}$. Therefore
+$\Delta_k\leq\Delta_0=g(b)-g(a)$ for all $k\geq0$. For any positive
+integer $n$, nonnegativity of $g$ yields
+\[
+-g(a)\leq g(x_n)-g(a)
+=\sum_{k=0}^{n-1}\Delta_k
+\leq n\bigl(g(b)-g(a)\bigr).
+\]
+Letting $n\to\infty$ gives $g(b)\geq g(a)$. Interchanging $a$ and $b$
+shows that $g$ is constant, say $g(x)=d$ with $d\geq0$. Hence
+\[
+f(x)=x^2+d. \tag{4}
+\]
+
+\medskip
+\noindent
+\textbf{Step 4. Determine $d$ and verify the solution.}
+
+Using (4) in the composition condition gives
+\[
+1\geq f(f(1))=(1+d)^2+d=1+3d+d^2.
+\]
+As $d\geq0$, this forces $d=0$, so $f(x)=x^2$ for all real $x$.
+
+For $f(x)=x^2$, the middle and right-hand expressions in the problem
+both equal $5x^2+5y^2$, while the left-hand expression is
+\[
+3x^2+8xy-3y^2=5x^2+5y^2-2(x-2y)^2
+\leq5x^2+5y^2.
+\]
+Also $f(f(1))=1$. Thus $f(x)=x^2$ satisfies all conditions and is the
+unique solution.
+\end{proof}
+
+\end{dlsummary}

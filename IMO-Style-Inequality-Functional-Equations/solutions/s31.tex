@@ -1,0 +1,93 @@
+\addcontentsline{toc}{subsubsection}{Solution 7. The Harmonic Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 7. The Harmonic Squeeze},breakable]
+
+\begin{proof}
+Set
+\[
+g(x)=\frac1{f(x)}.
+\]
+Since all function values are positive, taking reciprocals in the given
+inequalities gives
+\[
+g(x+y)\ge g(x)+g(y),
+\qquad
+g(xy)\le g(x)g(y),
+\]
+and the condition on $f(2)$ gives $g(2)\le2$.
+
+\medskip
+\noindent
+\textbf{Step 1. Lock the dyadic values.}
+
+Taking $x=y=1$ in submultiplicativity yields
+\[
+g(1)\le g(1)^2,
+\]
+so $g(1)\ge1$. Therefore
+\[
+2\ge g(2)\ge2g(1)\ge2,
+\]
+which implies $g(1)=1$ and $g(2)=2$. By induction, superadditivity and
+submultiplicativity give
+\[
+g(2^n)=2^n
+\qquad(n=0,1,2,\ldots). \tag{1}
+\]
+Moreover, $g$ is strictly increasing, since
+\[
+g(y+x)\ge g(y)+g(x)>g(y)
+\qquad(x,y>0).
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Establish an upper bound.}
+
+Fix $t>0$. For sufficiently large $n$, let
+\[
+m_n=\left\lfloor\frac{2^n}{t}\right\rfloor.
+\]
+Since $m_nt\le2^n$, monotonicity, superadditivity, and (1) yield
+\[
+2^n=g(2^n)\ge g(m_nt)\ge m_ng(t).
+\]
+As $2^n/m_n\to t$, it follows that
+\[
+g(t)\le t\qquad(t>0). \tag{2}
+\]
+
+\medskip
+
+For every positive integer $k$, we have $g(k)=k$. If $x>1$, repeated
+submultiplicativity and monotonicity give
+\[
+g(x)^n\ge g(x^n)
+\ge g\bigl(\lfloor x^n\rfloor\bigr)
+=\lfloor x^n\rfloor.
+\]
+Taking $n$-th roots and letting $n\to\infty$ gives $g(x)\ge x$.
+Together with (2), this proves $g(x)=x$ for every $x>1$.
+
+For $0<x<1$, submultiplicativity gives
+\[
+1=g(1)\le g(x)g\left(\frac1x\right)=\frac{g(x)}x,
+\]
+where the last equality follows from the result for $1/x>1$. Thus
+$g(x)\ge x$, and (2) forces equality. Therefore $g(x)=x$ for all
+$x>0$, and hence $f(x)=1/x$ for all $x>0$.
+\end{proof}
+
+\begin{proof}[Verification]
+For $f(x)=1/x$,
+\[
+f(x+y)\bigl(f(x)+f(y)\bigr)
+=\frac1{xy}
+=f(x)f(y)
+\le \frac1{xy}=f(xy),
+\]
+and $f(2)=1/2$. Thus the function satisfies all the conditions and is
+the unique solution.
+\end{proof}
+
+\end{dlsummary}

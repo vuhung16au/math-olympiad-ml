@@ -1,0 +1,76 @@
+\addcontentsline{toc}{subsubsection}{Solution 18. The Geometric-Mean Trap}
+
+\begin{dlsummary}[title={\bfseries Solution 18. The Geometric-Mean Trap},breakable]
+
+\begin{proof}
+Write $P(x,y)$ for the inequality in the statement. It is symmetric
+in $x$ and $y$. On the diagonal, $P(x,x)$ is equivalent to
+\[
+\frac{2x}{f(x)}\leq\frac{2f(x)}x,
+\]
+which, since $x,f(x)>0$, is equivalent to
+\[
+f(x)\geq x. \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Every admissible pair is diagonal.}
+
+Suppose $P(x,y)$ holds for some $x\ne y$. If $f(x)\geq x$, then
+$P(x,x)$ also holds, contradicting uniqueness for this fixed $x$.
+Thus $f(x)<x$. By symmetry, $f(y)<y$ as well. Therefore,
+\[
+\frac{x}{f(y)}+\frac{y}{f(x)}
+>\frac xy+\frac yx\geq2,
+\]
+whereas
+\[
+\frac{f(x)}x+\frac{f(y)}y<2.
+\]
+This contradicts $P(x,y)$. Hence every admissible pair has $x=y$.
+
+For each $x>0$, an admissible $y$ exists, so it must equal $x$.
+Consequently, $P(x,x)$ holds for every $x>0$, and (1) gives
+\[
+f(x)\geq x\qquad(x>0). \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Use a geometric-mean choice.}
+
+Suppose $f(a)>a$ for some $a>0$, and put
+\[
+u=\frac{f(a)}a>1,
+\qquad y=a\sqrt u=\sqrt{a f(a)}.
+\]
+By (2), $f(y)\geq y$. Hence
+\[
+\frac{a}{f(y)}+\frac{y}{f(a)}
+\leq\frac ay+\frac{y}{f(a)}
+=\frac1{\sqrt u}+\frac1{\sqrt u}
+=\frac2{\sqrt u}<2.
+\]
+On the other hand,
+\[
+\frac{f(a)}a+\frac{f(y)}y\geq u+1>2.
+\]
+Thus $P(a,y)$ holds. Since $u>1$, $y\ne a$, contradicting Step 1.
+Therefore $f(a)\leq a$ for every $a>0$. Together with (2), this
+proves $f(x)=x$ for all $x>0$.
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+For $f(x)=x$, the inequality becomes
+\[
+\frac xy+\frac yx\leq2.
+\]
+By AM--GM, the left-hand side is at least $2$, with equality if and
+only if $x=y$. Thus exactly one $y>0$ works for each $x>0$, namely
+$y=x$.
+\end{proof}
+
+\end{dlsummary}

@@ -1,0 +1,93 @@
+\addcontentsline{toc}{subsubsection}{Solution 29. The Conditioned Cubic Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 29. The Conditioned Cubic Squeeze},breakable]
+
+\begin{proof}
+\textbf{Step 1. Establish oddness and monotonicity.}
+
+On the plane $a+b+c=0$, both conditions apply, so
+\[
+f(a^3)+f(b^3)+f(c^3)=3f(abc). \tag{1}
+\]
+Taking $(a,b,c)=(t,-t,0)$ and using $f(0)=0$ gives
+$f(-t^3)=-f(t^3)$. Since every real number is a cube, $f$ is odd.
+
+If $x\geq y$, take
+$a=\sqrt[3]{x}$, $b=-\sqrt[3]{y}$, and $c=0$. Their sum is
+nonnegative, and the first condition gives
+\[
+f(x)+f(-y)+f(0)\geq3f(0).
+\]
+Oddness and $f(0)=0$ imply $f(x)\geq f(y)$. Thus $f$ is
+non-decreasing.
+
+\medskip
+\noindent
+\textbf{Step 2. Derive a boundary identity.}
+
+In (1), take $(a,b,c)=(u,v,-u-v)$. Oddness yields
+\[
+f((u+v)^3)=f(u^3)+f(v^3)+3f(uv(u+v)). \tag{2}
+\]
+Expand $f((a+b+c)^3)$ by applying (2) first to $(a+b,c)$ and then
+to $(a,b)$. Expanding instead first with $(a+c,b)$ gives, after
+cancelling the common terms,
+\[
+f(ab(a+b))+f((a+b)c(a+b+c))
+=f(ac(a+c))+f((a+c)b(a+b+c)). \tag{3}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Obtain Jensen's equation and affinity.}
+
+Let $x,y>0$ with $x\ne y$, and set
+\[
+k=\sqrt{\frac yx}\ne1,
+\qquad 2k(k^2-1)t^3=x,
+\]
+where the nonzero real $t$ exists uniquely. Choose
+\[
+a=(k+1)t,\qquad b=(k-1)t,\qquad c=k(k-1)t.
+\]
+Direct calculation gives
+\[
+ab(a+b)=x,\qquad (a+b)c(a+b+c)=y,
+\]
+and
+\[
+ac(a+c)=(a+c)b(a+b+c)=\frac{x+y}{2}.
+\]
+Substitution in (3) proves
+\[
+f(x)+f(y)=2f\!\left(\frac{x+y}{2}\right). \tag{4}
+\]
+This also holds when $x=y$, so (4) holds for all positive $x,y$.
+
+Because $f$ is non-decreasing, the midpoint identity implies that $f$
+is affine on $(0,\infty)$. Indeed, repeated midpoint interpolation
+first gives linear interpolation at dyadic fractions of any interval;
+monotonicity then squeezes the value at every intermediate point between
+such dyadic approximations. Thus there are constants $m,b$ such that
+$f(x)=mx+b$ for all $x>0$.
+
+Substitute this form into (2), for positive $u,v$. The left side is
+$m(u+v)^3+b$, while the right side is
+$m(u^3+v^3+3uv(u+v))+5b=m(u+v)^3+5b$. Hence $b=0$.
+Since $f(1)=1$, we get $m=1$, so $f(x)=x$ for $x>0$. Oddness
+and $f(0)=0$ extend this to every real $x$.
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+For the identity function,
+\[
+a^3+b^3+c^3-3abc
+=\frac12(a+b+c)\bigl((a-b)^2+(b-c)^2+(c-a)^2\bigr).
+\]
+Its sign agrees with the sign of $a+b+c$, so both required
+inequalities hold.
+\end{proof}
+
+\end{dlsummary}

@@ -1,0 +1,88 @@
+\addcontentsline{toc}{subsubsection}{Solution 14. IMO 2023 Shortlist -- Algebra A4}
+
+\begin{dlsummary}[title={\bfseries Solution 14. IMO 2023 Shortlist -- Algebra A4},breakable]
+
+\begin{proof}
+Write $f^n(x)$ for the $n$-fold composition
+of $f$, with $f^0(x)=x$.
+
+\medskip
+\noindent\textbf{Step 1.}
+Setting $y=x$ gives
+\[
+2xf(x)\ge(f^2(x)+x)f(x).
+\]
+Since $f(x)>0$,
+\[
+\boxed{f^2(x)\le x.} \tag{1}
+\]
+
+\medskip
+\noindent\textbf{Step 2.}
+Setting $x=f(y)$ yields
+\[
+f(y)-f^3(y)\ge y-f^2(y).
+\]
+Replacing $y$ by $f^n(y)$ gives
+\[
+f^{n+1}(y)-f^{n+3}(y)
+\ge f^n(y)-f^{n+2}(y).
+\]
+
+Define
+\[
+D_n=f^n(y)-f^{n+2}(y).
+\]
+Then
+\[
+D_{n+1}\ge D_n\ge D_0
+=y-f^2(y)\ge0.
+\]
+
+For every positive integer $m$,
+\begin{align*}
+y-f^{2m}(y)
+&=\sum_{k=0}^{m-1}D_{2k}\\
+&\ge m\bigl(y-f^2(y)\bigr).
+\end{align*}
+
+Since $f^{2m}(y)>0$,
+\[
+y>m\bigl(y-f^2(y)\bigr).
+\]
+As $m$ is arbitrarily large,
+\[
+\boxed{f^2(y)=y.} \tag{2}
+\]
+
+\medskip
+\noindent\textbf{Step 3.}
+Using (2), the original inequality becomes
+\[
+x(f(x)+f(y))\ge(x+y)f(y),
+\]
+hence
+\[
+xf(x)\ge yf(y).
+\]
+Interchanging $x$ and $y$ gives equality:
+\[
+xf(x)=yf(y)=c
+\]
+for some $c>0$. Therefore,
+\[
+\boxed{f(x)=\frac{c}{x},\qquad c>0.}
+\]
+
+Conversely, for $f(x)=c/x$,
+we have $f(f(x))=x$ and
+\[
+x(f(x)+f(y))
+=c+\frac{cx}{y}
+=(f(f(x))+y)f(y).
+\]
+Thus every such function satisfies the
+given inequality.
+\end{proof}
+
+\end{dlsummary}

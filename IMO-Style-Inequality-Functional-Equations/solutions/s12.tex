@@ -1,0 +1,102 @@
+\addcontentsline{toc}{subsubsection}{Solution 23. The Euclidean--Multiplicative Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 23. The Euclidean--Multiplicative Squeeze},breakable]
+
+\begin{proof}
+Define
+\[
+g(t)=f(\sqrt t)^2\qquad(t>0).
+\]
+The first inequality in the statement gives
+\[
+g(x+y)\geq g(x)+g(y). \tag{1}
+\]
+For the second inequality, its right-hand side is
+\[
+f(xy)^2\frac{f(x)^2+f(y)^2}{f(x)^2f(y)^2}.
+\]
+Since $f(x)^2+f(y)^2>0$, cancellation yields
+\[
+f(xy)^2\leq f(x)^2f(y)^2.
+\]
+Applying this with $\sqrt x$ and $\sqrt y$ in place of $x$ and $y$ gives
+\[
+g(xy)\leq g(x)g(y). \tag{2}
+\]
+The composition condition is equivalently
+\[
+g(g(2))=f(f(\sqrt2))^2\leq2. \tag{3}
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Determine $g(1)$ and $g(2)$.}
+
+Taking $x=y=1$ in (2) gives $g(1)\leq g(1)^2$. Since $g(1)>0$,
+we have $g(1)\geq1$. By repeated use of (1),
+\[
+g(n)\geq n g(1)\geq n\qquad(n\in\mathbb N).
+\]
+Fix $t>1$ and a positive integer $n$. Submultiplicativity and
+superadditivity imply
+\[
+g(t)^n\geq g(t^n)\geq\lfloor t^n\rfloor.
+\]
+Taking $n$th roots and letting $n\to\infty$ gives $g(t)\geq t$.
+In particular, $g(2)\geq2$. Applying this bound again at $g(2)>1$,
+\[
+2\geq g(g(2))\geq g(2)\geq2,
+\]
+where (3) supplies the first inequality. Thus $g(2)=2$. Now (2) at
+$x=y=1$ gives $g(1)\leq g(1)^2$, while (1) and $g(2)=2$ give
+$2\geq2g(1)$. Therefore $g(1)=1$.
+
+\medskip
+\noindent
+\textbf{Step 2. Obtain a global upper bound.}
+
+For every positive integer $n$, (1) and (2) give
+\[
+2^n\leq g(2^n)\leq g(2)^n=2^n,
+\]
+so $g(2^n)=2^n$. Fix $x>0$ and, for sufficiently large $n$, let
+\[
+m_n=\left\lfloor\frac{2^n}{x}\right\rfloor\geq1.
+\]
+Write $2^n=m_nx+r_n$ with $r_n\geq0$. If $r_n>0$, repeated
+superadditivity and positivity of $g(r_n)$ show that
+\[
+2^n=g(2^n)\geq m_ng(x)+g(r_n)\geq m_ng(x).
+\]
+If $r_n=0$, repeated superadditivity directly gives the same final
+bound. Hence
+\[
+g(x)\leq\frac{2^n}{\lfloor 2^n/x\rfloor}\longrightarrow x,
+\]
+and so $g(x)\leq x$ for every $x>0$.
+
+\medskip
+\noindent
+\textbf{Step 3. Force equality.}
+
+By (2), $g(1)\leq g(x)g(1/x)$. Using $g(1)=1$ and the upper bound
+just proved,
+\[
+1\leq g(x)g(1/x)\leq\frac{g(x)}x.
+\]
+Thus $g(x)\geq x$, and consequently $g(x)=x$ for every $x>0$.
+Since $g(x)=f(\sqrt x)^2$ and $f$ is positive, it follows that
+\[
+f(x)=x\qquad(x>0).
+\]
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+For $f(x)=x$, both inequalities hold with equality, and
+$f(f(\sqrt2))=\sqrt2$. Therefore this function is indeed the unique
+solution.
+\end{proof}
+
+\end{dlsummary}

@@ -1,0 +1,58 @@
+\addcontentsline{toc}{subsubsection}{Solution 27. IMO 2011 -- Problem 3}
+
+\begin{dlsummary}[title={\bfseries Solution 27. IMO 2011 -- Problem 3},breakable]
+
+\begin{proof}
+Replacing $y$ by $t-x$ in the given inequality gives
+\[
+f(t)\leq(t-x)f(x)+f(f(x))\qquad(x,t\in\mathbb R). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Derive a two-variable inequality.}
+
+Set $t=f(z)$ in (1), then add the resulting inequality to the one
+obtained by interchanging $x$ and $z$. The terms involving $f(f(x))$
+and $f(f(z))$ cancel, yielding
+\[
+xf(x)+zf(z)\leq2f(x)f(z)\qquad(x,z\in\mathbb R). \tag{2}
+\]
+Taking $z=2f(x)$ in (2) cancels the terms involving
+$f(2f(x))$ and gives
+\[
+xf(x)\leq0\qquad(x\in\mathbb R). \tag{3}
+\]
+In particular, $f(x)\leq0$ for $x>0$, while $f(x)\geq0$ for $x<0$.
+
+\medskip
+\noindent
+\textbf{Step 2. Show that $f$ is nonpositive everywhere.}
+
+Suppose $f(w)>0$ for some $w\in\mathbb R$. Taking $x=w$ in (1),
+\[
+f(t)\leq(t-w)f(w)+f(f(w)).
+\]
+Choose
+\[
+t<\min\!\left(0,\,w-\frac{f(f(w))}{f(w)}\right).
+\]
+Then $t<0$ and the right-hand side is negative, so $f(t)<0$.
+This contradicts $f(t)\geq0$ for $t<0$, established in Step 1.
+Therefore $f(x)\leq0$ for every real $x$.
+
+\medskip
+\noindent
+\textbf{Step 3. Prove the required vanishing.}
+
+For $x<0$, Step 1 gives $f(x)\geq0$, while Step 2 gives
+$f(x)\leq0$. Hence $f(x)=0$ for all $x<0$. Using (1) with any
+$x<0$ and $t<0$ now gives
+\[
+0=f(t)\leq(t-x)f(x)+f(f(x))=f(0),
+\]
+so $f(0)\geq0$. Step 2 also gives $f(0)\leq0$, and therefore
+$f(0)=0$. Thus $f(x)=0$ for every $x\leq0$.
+\end{proof}
+
+\end{dlsummary}

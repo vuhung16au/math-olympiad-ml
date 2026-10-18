@@ -1,0 +1,84 @@
+\addcontentsline{toc}{subsubsection}{Solution 6. The Sum--Product Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 6. The Sum--Product Squeeze},breakable]
+
+\begin{proof}
+Set
+\[
+g(x)=\frac1{f(x)},\qquad k=\frac{g(2)}2.
+\]
+The given inequalities are equivalent to
+\begin{align}
+g(x+y)&\ge k(g(x)+g(y)), \tag{1}\\
+g(xy)&\le k\,g(x)g(y). \tag{2}
+\end{align}
+
+\textbf{Step 1.} Setting $x=y=1$ gives
+\[
+g(1)\le1,\qquad kg(1)\ge1,
+\]
+so $k\ge1$.
+
+If $k>1$, repeated application of (1), with
+increments $1/n$, yields
+\[
+g(2)\ge k^n g(1).
+\]
+Letting $n\to\infty$ gives a contradiction.
+Thus $k=1$, and consequently
+\[
+g(1)=1,\qquad g(2)=2.
+\]
+
+\textbf{Step 2.} By (1) and (2),
+\[
+2g(x)\le g(2x)\le g(2)g(x)=2g(x).
+\]
+Hence
+\[
+\boxed{g(2x)=2g(x).}
+\]
+In particular, $g(2^n)=2^n$ for every
+positive integer $n$.
+
+\textbf{Step 3.} As $g$ is positive and
+superadditive, it is strictly increasing.
+
+Fix $x>0$ and put
+\[
+m_n=\left\lfloor\frac{2^n}{x}\right\rfloor.
+\]
+For all sufficiently large $n$,
+\[
+2^n=g(2^n)\ge g(m_nx)\ge m_ng(x).
+\]
+Therefore,
+\[
+g(x)\le
+\frac{2^n}{\lfloor 2^n/x\rfloor}
+\xrightarrow[n\to\infty]{}x.
+\]
+Thus $g(x)\le x$ for every $x>0$.
+
+Conversely, by (2),
+\[
+1=g(1)\le g(x)g(1/x)\le\frac{g(x)}x,
+\]
+so $g(x)\ge x$.
+
+We conclude that $g(x)=x$, whence
+\[
+\boxed{f(x)=\frac1x}.
+\]
+
+Finally, direct substitution gives
+\[
+f(x+y)(f(x)+f(y))
+=2f(2)f(x)f(y)
+=f(xy)=\frac1{xy}.
+\]
+Thus the proposed function satisfies
+both inequalities.
+\end{proof}
+
+\end{dlsummary}

@@ -1,0 +1,86 @@
+\addcontentsline{toc}{subsubsection}{Solution 32. The Skew-Symmetric Parallelogram Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 32. The Skew-Symmetric Parallelogram Squeeze},breakable]
+
+\begin{proof}
+\textbf{Step 1. Obtain a quadratic lower bound.}
+
+Comparing the outer expressions in the given chain gives
+\[
+2xy+x^2f(y)-y^2f(x)\leq f(x)+y^2.
+\]
+Setting $y=x$ cancels the skew-symmetric terms, so
+\[
+2x^2\leq f(x)+x^2,
+\qquad\text{hence}\qquad
+f(x)\geq x^2\quad(x\in\mathbb R). \tag{1}
+\]
+Define $g(x)=f(x)-x^2$. Then $g(x)\geq0$ for all real $x$.
+
+\medskip
+\noindent
+\textbf{Step 2. Establish midpoint concavity of the residual.}
+
+The right-hand inequality and the parallelogram identity give
+\[
+\frac{(x+y)^2+(x-y)^2}{2}
++\frac{g(x+y)+g(x-y)}2
+\leq x^2+y^2+g(x).
+\]
+After cancellation,
+\[
+g(x+y)+g(x-y)\leq2g(x)
+\qquad(x,y\in\mathbb R). \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Prove that $g$ is constant.}
+
+Fix $a,b\in\mathbb R$, and put
+\[
+x_k=a+k(b-a)\quad(k\geq0),
+\qquad
+\Delta_k=g(x_{k+1})-g(x_k).
+\]
+For each $k\geq1$, applying (2) with $x=x_k$ and $y=b-a$ yields
+\[
+g(x_{k+1})+g(x_{k-1})\leq2g(x_k),
+\]
+so $\Delta_k\leq\Delta_{k-1}$. Thus $\Delta_k\leq\Delta_0=g(b)-g(a)$
+for all $k\geq0$. For every positive integer $n$, nonnegativity of $g$
+implies
+\[
+-g(a)\leq g(x_n)-g(a)
+=\sum_{k=0}^{n-1}\Delta_k
+\leq n\bigl(g(b)-g(a)\bigr).
+\]
+Letting $n\to\infty$ gives $g(b)\geq g(a)$. Interchanging $a$ and $b$
+shows $g(a)=g(b)$, so $g(x)=d$ for some constant $d\geq0$. Therefore
+\[
+f(x)=x^2+d. \tag{3}
+\]
+
+\medskip
+\noindent
+\textbf{Step 4. Eliminate the constant shift.}
+
+Substituting (3) into the outer inequality gives
+\[
+(x-y)^2+d(1-x^2+y^2)\geq0
+\qquad(x,y\in\mathbb R).
+\]
+Taking $y=x-1$ reduces this to
+\[
+1+d(2-2x)\geq0\qquad(x\in\mathbb R).
+\]
+If $d>0$, this fails for sufficiently large $x$. Hence $d=0$ and
+$f(x)=x^2$ for all real $x$.
+
+For $f(x)=x^2$, the middle and right-hand expressions are both
+$x^2+y^2$, while the left-hand expression is $2xy\leq x^2+y^2$.
+Thus this function satisfies the stated inequalities and is the unique
+solution.
+\end{proof}
+
+\end{dlsummary}

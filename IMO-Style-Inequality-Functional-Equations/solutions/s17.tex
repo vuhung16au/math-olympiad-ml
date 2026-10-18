@@ -1,0 +1,91 @@
+\addcontentsline{toc}{subsubsection}{Solution 3. The Periodic Excess}
+
+\begin{dlsummary}[title={\bfseries Solution 3. The Periodic Excess},breakable]
+
+\begin{proof}
+\textbf{Step 1. Establish monotonicity and a growth bound.}
+
+Since $f$ is positive and superadditive, it is strictly increasing:
+if $y>x>0$, then
+\[
+f(y)=f(x+(y-x))\geq f(x)+f(y-x)>f(x).
+\]
+Taking $x=y=1$ in the multiplicative inequality gives
+$f(1)\leq f(1)^2$, so $f(1)\geq1$. Repeated superadditivity then
+implies
+\[
+f(n)\geq n\qquad(n\in\mathbb N).
+\]
+Fix $t>1$ and a positive integer $n$. Repeated submultiplicativity
+and monotonicity give
+\[
+f(t)^n\geq f(t^n)\geq f(\lfloor t^n\rfloor)
+\geq\lfloor t^n\rfloor.
+\]
+Taking $n$th roots and letting $n\to\infty$ yields
+\[
+f(t)\geq t\qquad(t>1). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Force an exact translation law.}
+
+Superadditivity and the third condition imply
+\[
+f(x)+f(a)\leq f(x+a)\leq f(x)+a.
+\]
+Thus $f(a)\leq a$. Since $a>1$, (1) also gives $f(a)\geq a$.
+Therefore
+\[
+f(a)=a,\qquad f(x+a)=f(x)+a\quad(x>0). \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Study the periodic excess.}
+
+Define $h(x)=f(x)-x$. Equation (2) gives
+\[
+h(x+a)=h(x),
+\]
+so $h$ is periodic with period $a$ on the positive reals.
+Superadditivity of $f$ gives
+\[
+h(x+y)\geq h(x)+h(y). \tag{3}
+\]
+For any $x>0$, choose a positive integer $k$ large enough that
+$x+ka>1$. By periodicity and (1),
+\[
+h(x)=h(x+ka)=f(x+ka)-(x+ka)\geq0.
+\]
+Since $f$ is increasing and $f(a)=a$, for $0<x\leq a$ we have
+\[
+h(x)=f(x)-x\leq a-x<a.
+\]
+By periodicity, this yields
+\[
+0\leq h(x)\leq a\qquad(x>0). \tag{4}
+\]
+
+\medskip
+\noindent
+\textbf{Step 4. Show that the periodic excess vanishes.}
+
+Repeated use of (3) gives $h(nx)\geq n h(x)$ for every positive
+integer $n$. By (4),
+\[
+0\leq n h(x)\leq h(nx)\leq a.
+\]
+Hence $0\leq h(x)\leq a/n$ for every positive integer $n$, forcing
+$h(x)=0$. Thus $f(x)=x$ for all $x>0$.
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+The identity function satisfies all three inequalities with equality,
+so it is the unique solution.
+\end{proof}
+
+\end{dlsummary}

@@ -1,0 +1,302 @@
+\documentclass[12pt,a4paper]{article}
+
+% Shared HSC style packages (see ../HSC-Common/).
+\makeatletter
+\def\input@path{{../HSC-Common/styles/}{./}}
+\makeatother
+\newcommand{\HSCBookletHeaderTitle}{Inequality Functional Equations}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{hidelinks}
+
+\usepackage{dl101-colors}
+\usepackage{dl101-hints}
+\usepackage{dl101-boxes}
+\usepackage{dl101-theorems}
+\usepackage{dl101-hsc-problems}
+\usepackage{dl101-layout}
+
+% Compatibility wrapper for the booklet's existing inline hint syntax.
+\newcommand{\upsidehint}[1]{%
+  \begin{hint}[#1]\end{hint}%
+}
+
+\usetikzlibrary{calc}
+
+\title{\textbf{Inequality Functional Equations}\\
+\large An Olympiad Problem Collection}
+\author{Vu Hung Nguyen}
+\date{2026}
+
+\renewcommand{\contentsname}{Table of Contents}
+
+\begin{document}
+
+\input{assets/matte.tex}
+
+\newpage
+
+\setcounter{page}{1}
+\input{../HSC-Common/assets/qrcode-page.tex}
+\begingroup\small\noindent This work is licensed under CC BY-NC 4.0 (Attribution-Non-Commercial), see the LICENSE file on the github page for more info.\par\endgroup
+
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\itshape
+``Exercise is the beste instrument in learnyng.''
+
+\vspace{1em}
+\normalfont Robert Recorde
+\end{center}
+\vspace*{\fill}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section*{Preface}
+\addcontentsline{toc}{section}{Preface}
+
+This is the final edition of a booklet of olympiad-style functional
+equations and inequalities. It is written especially for students in Years
+10--12 preparing for mathematical olympiads, as well as for anyone who enjoys
+practising with challenging, unusual, and unfamiliar problems. The aim is to
+develop flexible problem-solving habits, not just to collect answers.
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+The problems focus on olympiad-style functional equations built around
+inequalities. Their domains include the positive real numbers, the real
+numbers, the positive rationals, and the positive integers. The booklet is
+arranged in five themed parts: additive and multiplicative rigidity;
+reciprocal and harmonic transforms; iteration, fixed points, and growth;
+mean and norm squeezes; and real-line and polynomial inequalities. Problems
+come first, grouped by theme, and the full solutions appear together at the
+end.
+
+For each problem, first read the statement carefully and try to solve it on
+your own. Pay attention to the domain and to what the inequalities say for
+special choices of inputs. If you get stuck, use the hint as a nudge rather
+than as a replacement for a proof. Once you have a solution, compare it with
+the one at the end: check each step, and note any idea that you did not use.
+
+\section*{Fundamental Review: Facts and Tools}
+\addcontentsline{toc}{section}{Fundamental Review: Facts and Tools}
+
+The \emph{squeeze principle} says that if a quantity is bounded above and
+below by the same value, it must equal that value. In these problems, one
+inequality often supplies an upper bound and another a matching lower bound,
+sometimes only after a substitution or iteration.
+
+\paragraph{Order and monotonicity.}
+Adding inequalities preserves their direction. Multiplying or dividing by a
+positive quantity also preserves the direction, while doing so by a negative
+quantity reverses it. Applying an increasing function preserves order; for
+positive numbers, taking reciprocals reverses order. A function is
+\emph{nondecreasing} if $x\le y$ implies $f(x)\le f(y)$. For example, a
+positive superadditive function on the positive reals is strictly increasing:
+if $0<x<y$, then $f(y)\ge f(x)+f(y-x)>f(x)$.
+
+\paragraph{Means.}
+For nonnegative $u,v$, the arithmetic--geometric mean inequality is
+\[
+\frac{u+v}{2}\ge\sqrt{uv},
+\]
+with equality exactly when $u=v$. The root-mean-square--arithmetic-mean
+inequality is
+\[
+\sqrt{\frac{u^2+v^2}{2}}\ge\frac{u+v}{2}
+\qquad (u,v\ge0),
+\]
+again with equality exactly when $u=v$. These inequalities are useful when
+the problem places a function expression between two familiar means.
+
+\paragraph{Iteration and approximation.}
+Mathematical induction justifies repeated addition or multiplication, such as
+deriving bounds at integer multiples or powers. The Archimedean property says
+that the positive integers are unbounded. In particular, for $t>0$,
+\[
+0\le t-\frac{\lfloor nt\rfloor}{n}<\frac1n,
+\]
+so $\lfloor nt\rfloor/n\to t$. Floor approximations of this kind let us
+compare a value at an arbitrary real input with values at integer multiples.
+
+\paragraph{Density and monotonicity.}
+The rational numbers are dense in the real numbers, and
+$\{2^q:q\in\mathbb Q\}$ is dense in the positive reals. If a nondecreasing
+function agrees with the identity on a dense subset of its domain, it agrees
+with the identity throughout: nearby points from the dense subset bound its
+value from below and above.
+
+\paragraph{Midpoints and quadratic identities.}
+The parallelogram identity
+\[
+\frac{(x+y)^2+(x-y)^2}{2}=x^2+y^2
+\]
+often simplifies inequalities on the real line. A related midpoint fact is
+that a monotone function on an interval satisfying
+\[
+f\!\left(\frac{x+y}{2}\right)=\frac{f(x)+f(y)}2
+\]
+for all $x,y$ in that interval is affine. This is a regularity result for the midpoint Jensen
+equation; no continuity assumption needs to be added when monotonicity is
+known.
+
+Basic algebra is used throughout: factor differences of squares, use the laws
+of exponents, and handle reciprocals carefully, noting that reciprocal order
+reversal requires positive quantities. Also choose inputs such as $x=y$,
+$y=1$, or $y=-x$ only when the domain permits them. Normalizing a function,
+for example by setting $g(x)=f(x)/x^k$, can expose simpler behavior; always
+check that the normalization is defined on the stated domain.
+
+\section*{Frequently Seen Patterns}
+\addcontentsline{toc}{section}{Frequently Seen Patterns}
+
+Look for special inputs that produce bounds, then combine or repeat those
+bounds until they meet. Swapping variables, using reciprocal or scaled
+inputs, and normalizing by a power often reveal hidden symmetry or
+monotonicity. Equality cases are especially informative: they can point to
+the candidate function and help show that no other function works.
+
+\newpage
+\setcounter{tocdepth}{3}
+\tableofcontents
+\newpage
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Part I. Additive--Multiplicative Rigidity}
+\addcontentsline{toc}{subsection}{Part I. Additive--Multiplicative Rigidity}
+
+\input{problems/p16.tex}
+\input{problems/p08.tex}
+\input{problems/p17.tex}
+\input{problems/p27.tex}
+\input{problems/p32.tex}
+\input{problems/p34.tex}
+\input{problems/p35.tex}
+
+\subsection*{Part II. Reciprocal and Harmonic Transforms}
+\addcontentsline{toc}{subsection}{Part II. Reciprocal and Harmonic Transforms}
+
+\input{problems/p01.tex}
+\input{problems/p31.tex}
+\input{problems/p03.tex}
+\input{problems/p29.tex}
+\input{problems/p33.tex}
+\input{problems/p14.tex}
+
+\subsection*{Part III. Iteration, Fixed Points, and Growth}
+\addcontentsline{toc}{subsection}{Part III. Iteration, Fixed Points, and Growth}
+
+\input{problems/p20.tex}
+\input{problems/p11.tex}
+\input{problems/p05.tex}
+\input{problems/p09.tex}
+\input{problems/p13.tex}
+\input{problems/p10.tex}
+\input{problems/p15.tex}
+\input{problems/p28.tex}
+\input{problems/p30.tex}
+
+\subsection*{Part IV. Mean and Norm Squeezes}
+\addcontentsline{toc}{subsection}{Part IV. Mean and Norm Squeezes}
+
+\input{problems/p04.tex}
+\input{problems/p02.tex}
+\input{problems/p12.tex}
+\input{problems/p18.tex}
+
+\subsection*{Part V. Real-Line and Polynomial Inequalities}
+\addcontentsline{toc}{subsection}{Part V. Real-Line and Polynomial Inequalities}
+
+\input{problems/p06.tex}
+\input{problems/p07.tex}
+\input{problems/p19.tex}
+\input{problems/p21.tex}
+\input{problems/p22.tex}
+\input{problems/p23.tex}
+\input{problems/p24.tex}
+\input{problems/p25.tex}
+\input{problems/p26.tex}
+
+\newpage
+\section*{Solutions}
+\addcontentsline{toc}{section}{Solutions}
+
+\subsection*{Part I. Additive--Multiplicative Rigidity}
+\addcontentsline{toc}{subsection}{Part I. Additive--Multiplicative Rigidity}
+
+\input{solutions/s16.tex}
+\input{solutions/s08.tex}
+\input{solutions/s17.tex}
+\input{solutions/s27.tex}
+\input{solutions/s32.tex}
+\input{solutions/s34.tex}
+\input{solutions/s35.tex}
+
+\subsection*{Part II. Reciprocal and Harmonic Transforms}
+\addcontentsline{toc}{subsection}{Part II. Reciprocal and Harmonic Transforms}
+
+\input{solutions/s01.tex}
+\input{solutions/s31.tex}
+\input{solutions/s03.tex}
+\input{solutions/s29.tex}
+\input{solutions/s33.tex}
+\input{solutions/s14.tex}
+
+\subsection*{Part III. Iteration, Fixed Points, and Growth}
+\addcontentsline{toc}{subsection}{Part III. Iteration, Fixed Points, and Growth}
+
+\input{solutions/s20.tex}
+\input{solutions/s11.tex}
+\input{solutions/s05.tex}
+\input{solutions/s09.tex}
+\input{solutions/s13.tex}
+\input{solutions/s10.tex}
+\input{solutions/s15.tex}
+\input{solutions/s28.tex}
+\input{solutions/s30.tex}
+
+\subsection*{Part IV. Mean and Norm Squeezes}
+\addcontentsline{toc}{subsection}{Part IV. Mean and Norm Squeezes}
+
+\input{solutions/s04.tex}
+\input{solutions/s02.tex}
+\input{solutions/s12.tex}
+\input{solutions/s18.tex}
+
+\subsection*{Part V. Real-Line and Polynomial Inequalities}
+\addcontentsline{toc}{subsection}{Part V. Real-Line and Polynomial Inequalities}
+
+\input{solutions/s06.tex}
+\input{solutions/s07.tex}
+\input{solutions/s19.tex}
+\input{solutions/s21.tex}
+\input{solutions/s22.tex}
+\input{solutions/s23.tex}
+\input{solutions/s24.tex}
+\input{solutions/s25.tex}
+\input{solutions/s26.tex}
+
+\newpage
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+The central lesson of these problems is to keep experimenting with the
+inequalities: choose useful inputs, look for quantities to compare, and
+follow a promising bound until it becomes decisive. We hope this booklet
+encourages you to approach unfamiliar problems with patience, curiosity, and
+confidence.
+
+\end{document}

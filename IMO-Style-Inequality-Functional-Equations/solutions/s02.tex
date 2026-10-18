@@ -1,0 +1,104 @@
+\addcontentsline{toc}{subsubsection}{Solution 22. The Hidden Quadratic Function}
+
+\begin{dlsummary}[title={\bfseries Solution 22. The Hidden Quadratic Function},breakable]
+
+\begin{proof}
+Put $g(x)=\sqrt{f(x)}$. The given inequalities
+are equivalent to
+\begin{align}
+g(x+y)&\ge g(x)+g(y), \tag{1}\\
+g(xy)&\le g(x)g(y). \tag{2}
+\end{align}
+Since $g>0$, condition (1) implies that $g$
+is strictly increasing. From (2), $g(1)\ge1$.
+
+\medskip
+\noindent\textbf{Step 1. Show that $g(2)=2$.}
+
+By (1),
+\[
+g(2)\ge2g(1)\ge2,\qquad
+g(4)\ge4g(1)\ge4.
+\]
+The condition $f(f(2))\le16$ gives
+\[
+g(g(2)^2)\le4.
+\]
+Since $g(2)^2\ge4$ and $g$ is increasing,
+\[
+4\ge g(g(2)^2)\ge g(4)
+\ge4g(1)\ge4.
+\]
+Thus $g(1)=1$ and, by strict monotonicity,
+\[
+\boxed{g(2)=2.}
+\]
+
+\medskip
+\noindent\textbf{Step 2. Show that $g(x)\le x$.}
+
+For every positive integer $n$, (1) and (2)
+give
+\[
+2^n=2^n g(1)
+\le g(2^n)\le g(2)^n=2^n.
+\]
+Hence
+\[
+\boxed{g(2^n)=2^n.}
+\]
+
+Fix $x>0$ and put
+\[
+m_n=\left\lfloor\frac{2^n}{x}\right\rfloor.
+\]
+For sufficiently large $n$, we have $m_n\ge1$.
+By monotonicity and (1),
+\[
+2^n=g(2^n)\ge g(m_nx)\ge m_ng(x).
+\]
+Consequently,
+\[
+g(x)\le
+\frac{2^n}{\lfloor2^n/x\rfloor}
+\xrightarrow[n\to\infty]{}x.
+\]
+Therefore
+\[
+\boxed{g(x)\le x\qquad(x>0).}
+\]
+
+\medskip
+\noindent\textbf{Step 3. Establish equality.}
+
+By (2) and the preceding bound,
+\[
+1=g(1)
+\le g(x)g(1/x)
+\le \frac{g(x)}{x}.
+\]
+Thus $g(x)\ge x$, and hence
+\[
+g(x)=x\qquad(x>0).
+\]
+It follows that
+\[
+\boxed{f(x)=x^2\qquad(x>0).}
+\]
+
+Finally, this function satisfies $f(f(2))=16$
+and
+\[
+\sqrt{f(x+y)}
+=\sqrt{f(x)}+\sqrt{f(y)}
+=\sqrt{f(xy)}
+\left(
+\frac1{\sqrt{f(x)}}+
+\frac1{\sqrt{f(y)}}
+\right)
+=x+y.
+\]
+Therefore it is indeed the unique solution.
+\end{proof}
+
+\end{dlsummary}

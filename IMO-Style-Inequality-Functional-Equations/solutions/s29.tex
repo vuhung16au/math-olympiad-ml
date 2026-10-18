@@ -1,0 +1,74 @@
+\addcontentsline{toc}{subsubsection}{Solution 9. The Reflected Product}
+
+\begin{dlsummary}[title={\bfseries Solution 9. The Reflected Product},breakable]
+
+\begin{proof}
+\textbf{Step 1. Derive multiplicativity.}
+
+The reciprocal identity at $x=1$ gives $f(1)=1$. Superadditivity shows that
+$f$ is strictly increasing: if $v>u>0$, then
+\[
+f(v)\geq f(u)+f(v-u)>f(u),
+\]
+because $f(v-u)>0$. In particular,
+\[
+f(2)\geq f(1)+f(1)=2.
+\]
+Together with the given bound, this gives $f(2)=2$.
+
+Apply the second inequality with $x$ replaced by $1/x$. Using the
+reciprocal identity, we obtain
+\[
+\frac1{f(x)^2}\leq
+\frac1{f(xy)f(x/y)},
+\]
+so $f(x)^2\geq f(xy)f(x/y)$. Hence
+\[
+f(x)^2=f(xy)f(x/y)\qquad(x,y>0). \tag{1}
+\]
+Taking $y=x$ in (1) gives $f(x^2)=f(x)^2$. Then, for any $a,b>0$,
+use (1) with $x=\sqrt{ab}$ and $y=\sqrt{a/b}$ to get
+\[
+f(ab)=f(\sqrt{ab})^2=f(a)f(b).
+\]
+Thus $f$ is multiplicative.
+
+\medskip
+\noindent
+\textbf{Method I. Dyadic squeeze.}
+
+Multiplicativity and $f(2)=2$ give $f(2^n)=2^n$ for every integer
+$n\geq0$. Fix $t>0$ and, for sufficiently large $n$, set
+\[
+m_n=\left\lfloor\frac{2^n}{t}\right\rfloor.
+\]
+Since $m_nt\leq2^n$, monotonicity and repeated superadditivity yield
+\[
+2^n=f(2^n)\geq f(m_nt)\geq m_nf(t).
+\]
+As $2^n/m_n\to t$, it follows that $f(t)\leq t$. The reciprocal
+identity then gives
+\[
+f(t)=\frac1{f(1/t)}\geq t.
+\]
+Therefore $f(t)=t$ for all $t>0$.
+
+\medskip
+\noindent
+\textbf{Method II. Dense fixed points.}
+
+For every rational number $q=m/n$ with $m\in\mathbb Z$ and
+$n\in\mathbb Z_{>0}$, multiplicativity implies
+\[
+f(2^q)^n=f(2^m)=2^m,
+\]
+where negative integer powers follow from $f(1)=1$ and
+multiplicativity. Since $f(2^q)>0$, we get $f(2^q)=2^q$.
+The set $\{2^q:q\in\mathbb Q\}$ is dense in $(0,\infty)$;
+monotonicity and these fixed points imply $f(x)=x$ for every $x>0$.
+
+Finally, $f(x)=x$ satisfies the reciprocal identity and $f(2)=2$;
+both inequalities hold with equality. Hence it is the unique solution.
+\end{proof}
+
+\end{dlsummary}

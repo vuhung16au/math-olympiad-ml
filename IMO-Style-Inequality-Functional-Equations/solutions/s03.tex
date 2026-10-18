@@ -1,0 +1,39 @@
+\addcontentsline{toc}{subsubsection}{Solution 8. The Multiplicative Mirror}
+
+\begin{dlsummary}[title={\bfseries Solution 8. The Multiplicative Mirror},breakable]
+
+\begin{proof}
+The reciprocal condition gives $f(1)=1$ and $f(1/x)=1/f(x)$. The
+inequalities become
+\[
+\frac1{f(x+y)}\geq\frac1{f(x)}+\frac1{f(y)},\qquad
+f(xy)f(x/y)\geq f(x)^2. \tag{1}
+\]
+Replacing $x$ by $1/x$ in the second inequality and using reciprocity
+gives the reverse inequality. Hence
+\[
+f(xy)f(x/y)=f(x)^2.
+\]
+Applying this to $(u,v)$ and $(v,u)$ and multiplying yields
+$f(uv)^2=f(u)^2f(v)^2$, so positivity gives $f(uv)=f(u)f(v)$.
+
+Set $g=1/f$. Then $g$ is positive, increasing, superadditive,
+multiplicative, and $g(1)=1$. The reciprocal condition also gives
+\[
+g(1/x)=\frac1{f(1/x)}=f(x)=\frac1{g(x)}.
+\]
+In particular $g(2)\geq2$. Moreover, using this identity with
+$x=f(2)$,
+\[
+g(g(2))=\frac1{f(1/f(2))}=f(f(2))\leq2.
+\]
+Since $g(2)\geq2$ and $g$ is increasing,
+$2\geq g(g(2))\geq g(2)\geq2$, so $g(2)=2$.
+
+Multiplicativity gives $g(2^q)=2^q$ for every rational $q$. These
+arguments form a dense subset of $(0,\infty)$; monotonicity therefore
+forces $g(x)=x$ everywhere. Thus $f(x)=1/x$. Direct substitution
+shows this function satisfies all conditions with equality.
+\end{proof}
+
+\end{dlsummary}

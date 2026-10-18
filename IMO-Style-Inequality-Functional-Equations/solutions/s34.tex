@@ -1,0 +1,74 @@
+\addcontentsline{toc}{subsubsection}{Solution 34. The Ratio--Product Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 34. The Ratio--Product Squeeze},breakable]
+
+\begin{proof}
+Define
+\[
+g(x)=\frac{f(x)}x\qquad(x>0).
+\]
+The first inequality implies
+\[
+g(x+y)\ge g(x),
+\]
+so $g$ is nondecreasing. The second inequality becomes
+\[
+g(xy)\le g(x)g(y). \tag{1}
+\]
+Taking $x=y=1$ in (1) gives $g(1)\le g(1)^2$. Since $g(1)>0$,
+\[
+g(1)\ge1. \tag{2}
+\]
+
+Let $a>1$ satisfy the composition condition. By monotonicity and (2),
+\[
+g(a)\ge g(1)\ge1,
+\qquad
+f(a)=ag(a)\ge a>1.
+\]
+Therefore $g(f(a))\ge g(a)\ge1$. On the other hand,
+\[
+f(f(a))=f(a)g(f(a))\le f(a),
+\]
+so $g(f(a))\le1$. It follows that
+\[
+g(f(a))=g(a)=g(1)=1.
+\]
+By monotonicity,
+\[
+g(x)=1\qquad(1\le x\le a). \tag{3}
+\]
+
+Now let $1/a\le x\le1$. From monotonicity and (3), $g(x)\le1$ and
+$g(1/x)=1$. Applying (1) to $x$ and $1/x$ gives
+\[
+1=g(1)\le g(x)g(1/x)=g(x),
+\]
+so $g(x)=1$. Hence
+\[
+g(x)=1\qquad(1/a\le x\le a). \tag{4}
+\]
+
+Finally, fix any $x>0$. Choose a positive integer $n$ large enough that
+$t=x^{1/n}\in[1/a,a]$. By (4), $g(t)=g(1/t)=1$. Repeatedly applying
+(1) yields
+\[
+g(x)=g(t^n)\le g(t)^n=1,
+\qquad
+g(1/x)=g((1/t)^n)\le g(1/t)^n=1.
+\]
+But (1) also gives
+\[
+1=g(1)\le g(x)g(1/x).
+\]
+Both factors are positive and at most $1$, so they are both equal to $1$.
+In particular, $g(x)=1$. Thus $g\equiv1$, and consequently
+\[
+f(x)=x\qquad(x>0).
+\]
+\end{proof}
+
+The identity function satisfies both inequalities with equality and
+$f(f(a))=f(a)$, so it is the unique solution.
+
+\end{dlsummary}

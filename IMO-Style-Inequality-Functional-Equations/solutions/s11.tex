@@ -1,0 +1,70 @@
+\addcontentsline{toc}{subsubsection}{Solution 13. The Fixed-Point Lever}
+
+\begin{dlsummary}[title={\bfseries Solution 13. The Fixed-Point Lever},breakable]
+
+\begin{proof}
+Setting $y=x$ in the given inequality gives
+\[
+f(x)\bigl(x+f(x)\bigr)
+\geq f(f(x))\bigl(f(x)+x\bigr).
+\]
+Since $x+f(x)>0$, it follows that
+\[
+f(f(x))\leq f(x). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Use the assumed two-cycle.}
+
+Let $b=f(a)$. Then $f(b)=a$. Applying (1) at $a$ gives
+$a\leq b$, while applying it at $b$ gives
+\[
+b=f(f(b))\leq f(b)=a.
+\]
+Thus $a=b$ and $f(a)=a$.
+
+Now set $x=a$ in the original inequality. Since
+$f(a)=f(f(a))=a$, we get
+\[
+a\bigl(a+f(y)\bigr)\geq a(a+y),
+\]
+so
+\[
+f(y)\geq y\qquad(y>0). \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Force idempotence.}
+
+Applying (2) to $f(x)>0$ yields $f(f(x))\geq f(x)$.
+Together with (1), this gives
+\[
+f(f(x))=f(x). \tag{3}
+\]
+
+Substituting (3) into the original inequality and dividing by
+$f(x)>0$ yields
+\[
+x+f(y)\geq f(x)+y.
+\]
+Therefore $f(x)-x\leq f(y)-y$ for all $x,y>0$.
+Interchanging $x$ and $y$ shows that $f(x)-x$ is a constant
+$c$. By (2), $c\geq0$.
+
+Finally, $f(x)=x+c$ and (3) imply
+\[
+x+2c=f(f(x))=f(x)=x+c,
+\]
+so $c=0$. Hence $f(x)=x$ for every $x>0$.
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+For $f(x)=x$, the inequality holds with equality, and
+$f(f(a))=a$ for every $a>0$.
+\end{proof}
+
+\end{dlsummary}

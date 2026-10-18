@@ -1,0 +1,47 @@
+\addcontentsline{toc}{subsubsection}{Solution 24. The Quadratic Mean Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 24. The Quadratic Mean Squeeze},breakable]
+
+\begin{proof}
+Set $g(t)=f(\sqrt t)$. The given chain becomes
+\[
+\sqrt{\frac{x^2+g(y)^2}{2}}
+\geq\frac{g(x)+y}{2}\geq\sqrt{xg(y)}. \tag{1}
+\]
+Taking $x=g(y)$ forces equality throughout, so
+\[
+g(g(y))=2g(y)-y.
+\]
+For $d(x)=g(x)-x$, this gives $d(g(x))=d(x)$ and
+$g^{\circ n}(x)=x+nd(x)$. Positivity of every iterate implies $d(x)\geq0$.
+
+Squaring (1) and factoring the difference of the outer squares yields
+\[
+|d(x)-d(y)|\bigl(g(x)+y+x+g(y)\bigr)
+\leq (x-g(y))^2. \tag{2}
+\]
+Indeed, each outer square differs from $(x+g(y))^2$ by
+$(x-g(y))^2$.
+
+Any two positive values of $d$ must coincide. Otherwise, let
+$d(p)=r>0$, $d(q)=s>0$, $r\ne s$. The iterates
+$X_n=p+nr$ and $Y_m=q+ms$ retain these respective $d$-values.
+For each large $n$, choose $m\geq0$ with $|X_n-Y_m|\leq s/2$.
+In (2) at $(X_n,Y_m)$, the left side tends to infinity, while
+$(X_n-g(Y_m))^2=(X_n-Y_m-s)^2\leq9s^2/4$, a contradiction.
+
+Thus $d$ takes at most two values, $0$ and some $c>0$. If both occur,
+(2) shows that any points with different values are more than $c$
+apart. Bisecting an interval whose endpoints have different values
+produces such pairs arbitrarily close together, impossible. Hence
+$d$ is constant, say $c\geq0$, and $f(x)=g(x^2)=x^2+c$.
+
+The composition condition gives
+\[
+a^4\geq f(f(a))=(a^2+c)^2+c,
+\]
+forcing $c=0$. Thus $f(x)=x^2$. Substitution reduces the chain to
+RMS--AM--GM for $x^2,y^2$, and $f(f(a))=a^4$.
+\end{proof}
+
+\end{dlsummary}

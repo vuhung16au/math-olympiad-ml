@@ -1,0 +1,68 @@
+\addcontentsline{toc}{subsubsection}{Solution 28. The Degree-Normalized Cubic Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 28. The Degree-Normalized Cubic Squeeze},breakable]
+
+\begin{proof}
+Define $g(x)=f(x)/x^3$, so $f(x)=x^3g(x)$. Substitution into the
+given inequalities gives
+\[
+xg(x)+yg(y)\leq(x+y)g(x+y),
+\qquad
+g(x)+g(y)\geq2g(x+y).
+\]
+Equivalently,
+\[
+\frac{xg(x)+yg(y)}{x+y}
+\leq g(x+y)\leq\frac{g(x)+g(y)}2
+\qquad(x,y>0). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Establish dyadic invariance and monotonicity.}
+
+Taking $y=x$ in (1) yields
+\[
+g(x)\leq g(2x)\leq g(x),
+\]
+so
+\[
+g(2x)=g(x)\qquad(x>0). \tag{2}
+\]
+The lower and upper bounds in (1) also imply
+\[
+2\bigl(xg(x)+yg(y)\bigr)\leq(x+y)\bigl(g(x)+g(y)\bigr),
+\]
+which simplifies to
+\[
+(x-y)\bigl(g(x)-g(y)\bigr)\leq0.
+\]
+Thus $g$ is non-increasing.
+
+\medskip
+\noindent
+\textbf{Step 2. Show that $g$ is constant.}
+
+Fix $a>0$. For any $x\in[a,2a]$, monotonicity and (2) give
+\[
+g(a)=g(2a)\leq g(x)\leq g(a),
+\]
+so $g(x)=g(a)$ throughout $[a,2a]$. These intervals cover
+$(0,\infty)$ as $a$ varies, and therefore $g$ is constant: there is
+some $c\in\mathbb R$ such that $g(x)=c$ for all $x>0$.
+Consequently,
+\[
+f(x)=cx^3\qquad(x>0).
+\]
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+For any real constant $c$, substituting $f(x)=cx^3$ into the first
+inequality reduces it to
+$c(x+y)\leq c(x+y)$, and the second to
+$2c\geq2c$. Hence every such function satisfies both conditions.
+\end{proof}
+
+\end{dlsummary}

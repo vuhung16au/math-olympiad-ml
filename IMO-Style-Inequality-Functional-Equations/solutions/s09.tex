@@ -1,0 +1,116 @@
+\addcontentsline{toc}{subsubsection}{Solution 15. FEOO 2020 Shortlist -- Algebra A1}
+
+\begin{dlsummary}[title={\bfseries Solution 15. FEOO 2020 Shortlist -- Algebra A1},breakable]
+
+\begin{proof}
+Let $P(x,y)$ denote the given inequality.
+
+\medskip
+\noindent
+\textbf{Step 1. Determine $f(1)$.}
+
+From $P(1,1)$,
+\[
+2f(1)\geq1+f(1)^2,
+\]
+which gives
+\[
+(f(1)-1)^2\leq0.
+\]
+Thus
+\[
+\boxed{f(1)=1.} \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Establish a lower bound.}
+
+By $P(x,1)$ and (1),
+\[
+2xf(x)\geq x^2+xf(x).
+\]
+Hence
+\[
+\boxed{xf(x)\geq x^2
+\qquad(x\in\mathbb R).} \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Force equality.}
+
+For $x\ne0$, applying $P(x,1/x)$ gives
+\[
+2f(1)\geq
+1+xf(x)f\left(\frac1{x^2}\right).
+\]
+By (2) at $1/x^2$, we have
+$f(1/x^2)\geq1/x^2>0$. Thus multiplying $xf(x)\geq x^2$ by this
+positive value preserves the inequality. Using (1) and (2),
+\[
+\begin{aligned}
+1
+&\geq xf(x)f\left(\frac1{x^2}\right)\\
+&\geq x^2f\left(\frac1{x^2}\right)\\
+&\geq x^2\cdot\frac1{x^2}=1.
+\end{aligned}
+\]
+
+All inequalities are equalities.
+In particular,
+\[
+xf(x)=x^2.
+\]
+Therefore,
+\[
+\boxed{f(x)=x\qquad(x\ne0).} \tag{3}
+\]
+
+\medskip
+\noindent
+\textbf{Step 4. Determine $f(0)$.}
+
+Setting $y=0$ gives
+\[
+0\geq xf(x)f(0).
+\]
+For $x\ne0$, by (3),
+\[
+0\geq x^2f(0).
+\]
+Consequently,
+\[
+\boxed{f(0)\leq0.}
+\]
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+Let
+\[
+f(x)=
+\begin{cases}
+x,&x\ne0,\\
+c,&x=0,
+\end{cases}
+\qquad c\leq0.
+\]
+
+If $xy\ne0$, both sides of the original
+inequality equal $2x^2y^2$.
+
+If $x=0$, both sides vanish.
+
+If $y=0$, the inequality becomes
+\[
+0\geq x^2c,
+\]
+which holds because $c\leq0$.
+
+Thus all such functions satisfy the
+given inequality.
+\end{proof}
+
+\end{dlsummary}

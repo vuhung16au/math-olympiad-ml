@@ -1,0 +1,63 @@
+\addcontentsline{toc}{subsubsection}{Solution 20. The Cross-Dilated Shift}
+
+\begin{dlsummary}[title={\bfseries Solution 20. The Cross-Dilated Shift},breakable]
+
+\begin{proof}
+The identity function satisfies the inequality with equality. We prove it
+is the only solution.
+
+\medskip
+\noindent
+\textbf{Step 1. Establish a lower bound.}
+
+Since $f(xf(y))>0$, the given inequality implies $f(x+y)>x$ for all
+$x,y>0$. Fix $z>0$. For each $\varepsilon\in(0,z)$, take
+$x=z-\varepsilon$ and $y=\varepsilon$. Then $f(z)>z-\varepsilon$;
+hence
+\[
+f(z)\geq z\qquad(z>0). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Bound the excess over the identity.}
+
+Suppose $f(a)>a+1$ for some $a>0$, and set
+\[
+x=\frac{a}{f(a)-1}.
+\]
+Then $0<x<1$ and $xf(a)=x+a$. Applying the given inequality at
+$(x,a)$ gives
+\[
+x^2+f(x+a)\leq x f(x+a),
+\]
+which is impossible because $f(x+a)>0$ and $0<x<1$. Therefore
+$f(a)\leq a+1$ for all $a>0$.
+
+Define $g(t)=f(t)-t$. By (1),
+\[
+0\leq g(t)\leq1\qquad(t>0). \tag{2}
+\]
+Substituting $f(t)=t+g(t)$ into the original inequality and cancelling
+the common terms yields
+\[
+xg(y)+g\bigl(xf(y)\bigr)\leq xg(x+y)
+\qquad(x,y>0). \tag{3}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Force the excess to vanish.}
+
+Since $g$ is nonnegative, (3) implies $g(y)\leq g(x+y)$ for all
+$x,y>0$, so $g$ is nondecreasing. Taking $x=1$ in (3), and using
+$f(y)\geq y$ and the monotonicity of $g$, gives
+\[
+2g(y)\leq g(y)+g\bigl(f(y)\bigr)\leq g(y+1).
+\]
+Inductively, $g(y+n)\geq2^n g(y)$ for every positive integer $n$.
+By (2), this forces $g(y)=0$ for every $y>0$. Thus $f(y)=y$ on
+$(0,\infty)$, as claimed.
+\end{proof}
+
+\end{dlsummary}

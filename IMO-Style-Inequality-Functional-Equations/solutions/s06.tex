@@ -1,0 +1,78 @@
+\addcontentsline{toc}{subsubsection}{Solution 25. Vietnam Mathematical Olympiad 1991}
+
+\begin{dlsummary}[title={\bfseries Solution 25. Vietnam Mathematical Olympiad 1991},breakable]
+
+\begin{proof}
+\textbf{Step 1. Determine $f(0)$.}
+
+Setting $x=y=z=0$ gives
+\[
+f(0)-f(0)^2\geq\frac14,
+\]
+or equivalently,
+\[
+\left(f(0)-\frac12\right)^2\leq0.
+\]
+Hence
+\[
+\boxed{f(0)=\frac12.} \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Establish a key inequality.}
+
+Setting $z=0$ and using (1), we obtain
+\[
+\frac{f(xy)}2+\frac14-\frac{f(x)}2
+\geq\frac14.
+\]
+Therefore,
+\[
+\boxed{f(xy)\geq f(x)}
+\qquad(x,y\in\mathbb R). \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Prove that $f$ is constant.}
+
+For any $t\neq0$, taking $x=1,y=t$ in (2)
+gives
+\[
+f(t)\geq f(1).
+\]
+Taking $x=t,y=1/t$ gives
+\[
+f(1)\geq f(t).
+\]
+Thus
+\[
+f(t)=f(1)\qquad(t\neq0). \tag{3}
+\]
+
+Finally, setting $x=y=z=1$ gives
+\[
+f(1)-f(1)^2\geq\frac14,
+\]
+so
+\[
+\left(f(1)-\frac12\right)^2\leq0.
+\]
+Consequently, $f(1)=\frac12$.
+
+Combining this with (1) and (3), we get
+\[
+\boxed{f(x)=\frac12\qquad(x\in\mathbb R).}
+\]
+
+Conversely, for $f(x)=\frac12$, we have
+\[
+\frac{f(xy)+f(xz)}2-f(x)f(yz)
+=\frac12-\frac14=\frac14.
+\]
+Thus the inequality holds with equality
+for all real $x,y,z$.
+\end{proof}
+
+\end{dlsummary}

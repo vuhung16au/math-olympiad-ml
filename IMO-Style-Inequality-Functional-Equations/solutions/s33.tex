@@ -1,0 +1,55 @@
+\addcontentsline{toc}{subsubsection}{Solution 10. The Reciprocal Pinch}
+
+\begin{dlsummary}[title={\bfseries Solution 10. The Reciprocal Pinch},breakable]
+
+\begin{proof}
+The reciprocal identity gives $f(1)=1$. By superadditivity,
+\[
+f(2)\geq 2f(1)=2.
+\]
+Writing $a=f(2)$, we have $a\geq2$ and $f(1/2)=1/a$. Thus
+\[
+a+\frac1a\leq\frac52,
+\]
+or $(2a-1)(a-2)\leq0$. Since $a\geq2$, this forces
+\[
+f(2)=2. \tag{1}
+\]
+
+Applying the multiplicative inequality to $1/x,1/y$ and using the
+reciprocal identity gives
+\[
+\frac1{f(xy)}=f\left(\frac1{xy}\right)
+\geq f\left(\frac1x\right)f\left(\frac1y\right)
+=\frac1{f(x)f(y)}.
+\]
+Together with the original inequality, this proves
+\[
+f(xy)=f(x)f(y). \tag{2}
+\]
+Also, $f$ is strictly increasing: if $x<y$, then
+\[
+f(y)=f(x+(y-x))\geq f(x)+f(y-x)>f(x).
+\]
+
+By (2) and (1), $f(2^n)=2^n$ for every integer $n\geq0$. Fix $t>0$,
+and for sufficiently large $n$ put
+\[
+m_n=\left\lfloor\frac{2^n}{t}\right\rfloor.
+\]
+Since $m_nt\leq2^n$, monotonicity and repeated superadditivity give
+\[
+2^n=f(2^n)\geq f(m_nt)\geq m_nf(t).
+\]
+As $2^n/m_n\to t$, we obtain $f(t)\leq t$. Applying this bound to
+$1/t$ and using the reciprocal identity yields
+\[
+f(t)=\frac1{f(1/t)}\geq t.
+\]
+Hence $f(t)=t$ for every $t>0$.
+\end{proof}
+
+The identity function directly satisfies all the conditions, so it is
+the unique solution.
+
+\end{dlsummary}

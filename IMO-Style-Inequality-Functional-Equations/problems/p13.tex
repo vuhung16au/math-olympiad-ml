@@ -1,0 +1,23 @@
+\subsubsection*{Problem 16. The Iterated Ratio Squeeze}
+\addcontentsline{toc}{subsubsection}{Problem 16. The Iterated Ratio Squeeze}
+
+\begin{exercisebox}[hard]
+
+Let $a>1$ be a fixed real number. Find all functions $f$ that map
+positive real numbers to positive real numbers, satisfy $f(a)=a$, and,
+for all $x,y>0$,
+\[
+\frac{f(x)}{f(y)}+\frac{f(y)}{f(x)}
+\geq\frac{x}{y}+\frac{y}{x}
+\geq\frac{f^{\circ 3}(x)}{f^{\circ 3}(y)}
++\frac{f^{\circ 3}(y)}{f^{\circ 3}(x)}.
+\]
+Here $f^{\circ 3}(x)=f(f(f(x)))$.
+
+\begin{flushright}
+\textit{Composed by Vu Hung Nguyen, 2026}
+\end{flushright}
+
+\upsidehint{Fix one variable at $a$ and follow what the squeeze says through repeated applications of $f$.}
+
+\end{exercisebox}

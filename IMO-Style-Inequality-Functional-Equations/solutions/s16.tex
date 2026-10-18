@@ -1,0 +1,93 @@
+\addcontentsline{toc}{subsubsection}{Solution 1. The Additive--Multiplicative Rigidity}
+
+\begin{dlsummary}[title={\bfseries Solution 1. The Additive--Multiplicative Rigidity},breakable]
+
+\begin{proof}
+Set $g(x)=\ln f(x)$. Since $\ln$ is strictly increasing, the given
+inequalities are equivalent to
+\[
+g(x+y)\geq g(x)+g(y),
+\qquad
+g(xy)\leq g(x)+g(y). \tag{1}
+\]
+
+\medskip
+\noindent
+\textbf{Step 1. Show that $g$ vanishes on the positive integers.}
+
+Taking $x=y=1$ in the second inequality of (1) gives $g(1)\geq0$.
+Repeated superadditivity then gives
+\[
+g(n)\geq n g(1)\geq0\qquad(n\in\mathbb N).
+\]
+Fix an integer $n\geq2$. For every positive integer $m$, repeated
+application of the two inequalities in (1) gives
+\[
+n^{m-1}g(n)\leq g(n^m)\leq m g(n).
+\]
+If $g(n)>0$, division by $g(n)$ would imply
+$n^{m-1}\leq m$ for every positive integer $m$, which is impossible
+for sufficiently large $m$. Since $g(n)\geq0$, it follows that
+$g(n)=0$ for each integer $n\geq2$.
+
+Superadditivity gives $g(2)\geq2g(1)$. As $g(2)=0$ and $g(1)\geq0$,
+we obtain $g(1)=0$. Thus
+\[
+g(n)=0\qquad(n\in\mathbb N). \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 2. Show that $g$ vanishes on positive rationals.}
+
+Write a positive rational as $r=p/q$, where $p,q$ are positive
+integers. By superadditivity and (2),
+\[
+0=g(p)=g(\underbrace{r+\cdots+r}_{q\text{ terms}})
+\geq qg(r),
+\]
+so $g(r)\leq0$. By the second inequality in (1) and (2),
+\[
+0=g(p)=g(rq)\leq g(r)+g(q)=g(r),
+\]
+so $g(r)\geq0$. Therefore
+\[
+g(r)=0\qquad(r\in\mathbb Q_{>0}). \tag{3}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Show that $g$ vanishes everywhere.}
+
+Fix $x>0$ and an integer $n\geq2$. Using $g(n)=0$ in (1),
+\[
+g(x)=g\!\left(\frac xn\cdot n\right)\leq g\!\left(\frac xn\right),
+\]
+while superadditivity gives
+\[
+g(x)\geq n g\!\left(\frac xn\right).
+\]
+Hence
+\[
+g(x)\leq g\!\left(\frac xn\right)\leq\frac{g(x)}n.
+\]
+If $g(x)>0$, these bounds contradict $n\geq2$. Thus $g(x)\leq0$
+for every $x>0$.
+
+Finally, by (1) and (2),
+\[
+0=g(1)=g\!\left(x\cdot\frac1x\right)
+\leq g(x)+g\!\left(\frac1x\right).
+\]
+Both terms on the right are nonpositive, so each must be zero. In
+particular, $g(x)=0$ for all $x>0$. Therefore $f(x)=e^{g(x)}=1$.
+
+\medskip
+\noindent
+\textbf{Verification.}
+
+The constant function $f(x)=1$ makes both inequalities equalities,
+so it is indeed the unique solution.
+\end{proof}
+
+\end{dlsummary}

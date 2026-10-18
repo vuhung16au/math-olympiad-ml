@@ -1,0 +1,83 @@
+\addcontentsline{toc}{subsubsection}{Solution 5. The Triadic Balance}
+
+\begin{dlsummary}[title={\bfseries Solution 5. The Triadic Balance},breakable]
+
+\begin{proof}
+\textbf{Step 1. Unlock the value at $3$.}
+
+Taking $x=y=1$ in submultiplicativity gives
+\[
+f(1)\le f(1)^2,
+\]
+so $f(1)\ge1$. By superadditivity,
+\[
+f(3)\ge3f(1)\ge3.
+\]
+Also, submultiplicativity gives
+\[
+f(1)=f\left(3\cdot\frac13\right)
+\le f(3)f\left(\frac13\right),
+\]
+and hence
+\[
+f\left(\frac13\right)\ge\frac{f(1)}{f(3)}\ge\frac1{f(3)}.
+\]
+Writing $a=f(3)\ge3$, we obtain
+\[
+\frac{10}{3}
+\ge f(3)+f\left(\frac13\right)
+\ge a+\frac1a
+\ge 3+\frac13=\frac{10}{3}.
+\]
+Equality holds throughout, so
+\[
+f(1)=1,\qquad f(3)=3,\qquad f\left(\frac13\right)=\frac13.
+\]
+
+\medskip
+\noindent\textbf{Step 2. Establish an upper bound.}
+
+By induction, superadditivity and submultiplicativity give
+\[
+f(3^n)=3^n\qquad(n=0,1,2,\ldots).
+\]
+The function is strictly increasing: if $u>v>0$, then
+\[
+f(u)=f\bigl(v+(u-v)\bigr)
+\ge f(v)+f(u-v)>f(v).
+\]
+
+Fix $t>0$, and for all sufficiently large $n$ let
+\[
+m_n=\left\lfloor\frac{3^n}{t}\right\rfloor.
+\]
+Since $m_nt\le3^n$, monotonicity and superadditivity yield
+\[
+3^n=f(3^n)\ge f(m_nt)\ge m_nf(t).
+\]
+As $3^n/m_n\to t$, it follows that
+\[
+f(t)\le t\qquad(t>0). \tag{1}
+\]
+
+\medskip
+\noindent\textbf{Method I. Rational squeeze.}
+
+For every positive integer $k$, superadditivity and (1) give
+\[
+k=kf(1)\le f(k)\le k,
+\]
+so $f(k)=k$. If $r=p/q$ is a positive rational, where $p,q$ are
+positive integers, submultiplicativity gives
+\[
+p=f(p)=f(qr)\le f(q)f(r)=qf(r).
+\]
+Thus $f(r)\ge r$, and (1) shows $f(r)=r$. By monotonicity and the
+density of the positive rationals, $f(x)=x$ for all $x>0$.
+
+\end{proof}
+
+The identity function satisfies the original conditions with equality
+throughout, so it is the unique solution.
+
+\end{dlsummary}

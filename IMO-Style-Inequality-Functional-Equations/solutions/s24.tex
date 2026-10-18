@@ -1,0 +1,79 @@
+\addcontentsline{toc}{subsubsection}{Solution 31. The Iterated Parallelogram--Quadratic Squeeze}
+
+\begin{dlsummary}[title={\bfseries Solution 31. The Iterated Parallelogram--Quadratic Squeeze},breakable]
+
+\begin{proof}
+\textbf{Step 1. Derive a quadratic lower bound.}
+
+Comparing the outer expressions in the given chain gives
+\[
+f(x)-x^2+f(f(x))-f(y)+2y^2-2yf(x)\geq0.
+\]
+Setting $y=f(x)$ cancels the terms involving $f(f(x))$ and the quadratic
+terms in $y$, leaving
+\[
+f(x)\geq x^2\qquad(x\in\mathbb R). \tag{1}
+\]
+Define $g(x)=f(x)-x^2$. Then $g(x)\geq0$ for every real $x$.
+
+\medskip
+\noindent
+\textbf{Step 2. Obtain midpoint concavity of the residual.}
+
+The right-hand inequality and the identity
+\[
+\frac{(x+y)^2+(x-y)^2}{2}=x^2+y^2
+\]
+show that
+\[
+g(x+y)+g(x-y)\leq2g(x)\qquad(x,y\in\mathbb R). \tag{2}
+\]
+
+\medskip
+\noindent
+\textbf{Step 3. Prove that $g$ is constant.}
+
+Fix $a,b\in\mathbb R$, and write
+\[
+x_k=a+k(b-a)\quad(k\geq0),
+\qquad
+\Delta_k=g(x_{k+1})-g(x_k).
+\]
+For each $k\geq1$, apply (2) with $x=x_k$ and $y=b-a$. This gives
+\[
+g(x_{k+1})+g(x_{k-1})\leq2g(x_k),
+\]
+so $\Delta_k\leq\Delta_{k-1}$. Consequently,
+$\Delta_k\leq\Delta_0=g(b)-g(a)$ for all $k\geq0$. For every positive
+integer $n$, nonnegativity of $g$ now yields
+\[
+-g(a)\leq g(x_n)-g(a)
+=\sum_{k=0}^{n-1}\Delta_k
+\leq n\bigl(g(b)-g(a)\bigr).
+\]
+Thus $g(b)-g(a)\geq-g(a)/n$ for every $n$, and letting $n\to\infty$
+shows $g(b)\geq g(a)$. Since $a,b$ were arbitrary, interchanging them
+proves $g(a)=g(b)$. Therefore $g(x)=d$ for a constant $d\geq0$, and
+\[
+f(x)=x^2+d. \tag{3}
+\]
+
+\medskip
+\noindent
+\textbf{Step 4. Use the composition condition and verify.}
+
+By (3),
+\[
+f(f(2))=(4+d)^2+d=16+9d+d^2\leq16.
+\]
+Since $d\geq0$, this forces $d=0$. Hence $f(x)=x^2$ for every real $x$.
+
+For this function, $f(f(2))=16$, the middle and right expressions in
+the given chain are both $x^2+y^2$, and the left expression equals
+\[
+x^2+y^2-(y-x^2)^2\leq x^2+y^2.
+\]
+Thus $f(x)=x^2$ satisfies all the conditions, completing the proof.
+\end{proof}
+
+\end{dlsummary}

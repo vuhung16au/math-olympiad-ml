@@ -1,0 +1,30 @@
+\addcontentsline{toc}{subsubsection}{Solution 2. IMO 2013 -- Problem 5}
+
+\begin{dlsummary}[title={\bfseries Solution 2. IMO 2013 -- Problem 5},breakable]
+
+\begin{proof}
+From $f(a)f(1)\geq f(a)$, we have $f(1)\geq1$, hence
+$f(n)\geq n$ for positive integers $n$. Also,
+$f(q)f(p/q)\geq f(p)>0$ shows $f(r)>0$ for every positive rational
+$r$. Thus superadditivity makes $f$ strictly increasing.
+
+Submultiplicativity gives $f(a^n)\leq a^n$, while
+$f(a^n)f(a^{-n})\geq f(1)\geq1$ yields $f(a^{-n})\geq a^{-n}$.
+For rational $x>0$, set $m_n=\lfloor a^n x\rfloor$. For large $n$,
+monotonicity and superadditivity give
+\[
+f(x)\geq f(m_na^{-n})\geq m_nf(a^{-n})
+\geq\frac{\lfloor a^n x\rfloor}{a^n}\longrightarrow x.
+\]
+Hence $f(x)\geq x$.
+
+Applying this to $a^n$ shows $f(a^n)=a^n$. For any positive
+rational $x$, choose $n$ with $a^n>x$. Then
+\[
+a^n=f(a^n)\geq f(x)+f(a^n-x)\geq f(x)+a^n-x,
+\]
+so $f(x)\leq x$. Therefore $f(x)=x$ for all positive rationals;
+the identity satisfies both inequalities and the fixed-point condition.
+\end{proof}
+
+\end{dlsummary}
