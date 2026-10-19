@@ -6,9 +6,13 @@ Let $(x_n)_{n\geq 1}$ be defined by
 x_1=1,\qquad x_{n+1}=\frac{1}{2\lfloor x_n\rfloor-x_n+1}.
 \]
 Write $x_n=p_n/q_n$ in lowest terms, where $p_n,q_n\in\mathbb Z^+$.
+$\lfloor\cdot\rfloor$ denotes the floor function.
+For example, $\rfloor 3.7\rfloor=3$ and $\lfloor-2.1\rfloor=-3$.
+
+The sequence $(x_n)$ is known as the \emph{Calkin--Wilf sequence}.
 
 \begin{enumerate}[label=\textbf{(\alph*)}]
-\item Compute $x_2,\ldots,x_7$ and arrange them in the first three levels of a binary tree. Prove, by induction, that
+\item Prove, by induction, that
 \[
 x_{2k}=\frac{x_k}{x_k+1},\qquad x_{2k+1}=x_k+1.
 \]
@@ -113,4 +117,6 @@ Thus
 \item The matrices $M_0$ and $M_1$ encode the two Euclidean subtraction branches and give unique binary addresses to positive rationals.
 \item Tree telescoping replaces cancellation along a chain by cancellation from each parent against its two children.
 \item Positive series may be re-indexed by the geometry of coprime lattice points, turning the limit into a boundary estimate.
+\item The pairs $(p_n,q_n)$ are the \emph{Calkin--Wilf coordinates} and the sequence enumerates all positive rational numbers exactly once.
+
 \end{takeaways}
