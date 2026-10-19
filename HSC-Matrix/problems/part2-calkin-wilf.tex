@@ -1,0 +1,116 @@
+\begin{problem}[The Calkin--Wilf Tree and Unimodular Matrix Walks]
+% \textit{Target level: Senior Specialist Mathematics / Olympiad bridge.}
+
+Let $(x_n)_{n\geq 1}$ be defined by
+\[
+x_1=1,\qquad x_{n+1}=\frac{1}{2\lfloor x_n\rfloor-x_n+1}.
+\]
+Write $x_n=p_n/q_n$ in lowest terms, where $p_n,q_n\in\mathbb Z^+$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Compute $x_2,\ldots,x_7$ and arrange them in the first three levels of a binary tree. Prove, by induction, that
+\[
+x_{2k}=\frac{x_k}{x_k+1},\qquad x_{2k+1}=x_k+1.
+\]
+
+\item Define
+\[
+M_0=\begin{pmatrix}1&0\\1&1\end{pmatrix},\qquad
+M_1=\begin{pmatrix}1&1\\0&1\end{pmatrix}.
+\]
+Show that, with $\mathbf v_k=(p_k,q_k)^T$,
+\[
+\mathbf v_{2k+b}=M_b\mathbf v_k\qquad(b\in\{0,1\}).
+\]
+Hence, if $n=(1b_{m-1}\cdots b_0)_2$, prove that
+\[
+\mathbf v_n=M_{b_0}M_{b_1}\cdots M_{b_{m-1}}\binom11.
+\]
+Use the inverse operations to prove that every positive rational number occurs exactly once in the sequence.
+
+\item Put
+\[
+u_k=\frac1{p_k^2q_k}+\frac1{p_kq_k^2},\qquad
+S_n=\sum_{k=1}^n\frac1{p_kq_k(p_k+q_k)}.
+\]
+Prove the tree-telescoping identity
+\[
+\frac1{p_kq_k(p_k+q_k)}=u_k-u_{2k}-u_{2k+1},
+\]
+and deduce that
+\[
+S_n=2-\sum_{j=n+1}^{2n+1}u_j.
+\]
+Conclude that $(S_n)$ is strictly increasing and bounded above by $2$.
+
+\item Let
+$\mathcal C=\{(p,q)\in\mathbb Z^+\times\mathbb Z^+:\gcd(p,q)=1\},\quad
+T_N=\{(p,q)\in\mathcal C:p+q\leq N\},
+$
+and define $\Sigma_N=\sum_{(p,q)\in T_N}1/[pq(p+q)]$. Show that
+\[
+0<2-\Sigma_N<\frac8N\sum_{m=1}^{N-1}\frac1m.
+\]
+Explain why this proves the exact value of $\lim_{n\to\infty}S_n$.
+\end{enumerate}
+\end{problem}
+
+\begin{hint}
+\begin{itemize}
+\item Use $2\lfloor x_k\rfloor-x_k+1=1/x_{k+1}$ in the induction. The even child lies in $(0,1)$.
+\item $M_0^{-1}(p,q)^T=(p,q-p)^T$ when $p<q$, while $M_1^{-1}(p,q)^T=(p-q,q)^T$ when $p>q$. Each subtraction lowers $p+q$.
+\item Substitute $(p_{2k},q_{2k})=(p_k,p_k+q_k)$ and $(p_{2k+1},q_{2k+1})=(p_k+q_k,q_k)$, then sum over $k$.
+\item For the boundary estimate, set $m=\min(a,b)$ and $M=\max(a,b)$. A boundary point satisfies $N-m<M\leq N$, so there are at most $2m$ ordered pairs for each $m$.
+\end{itemize}
+\end{hint}
+
+\begin{solution}
+\textbf{(a)} The first terms are
+\[
+1,\ \frac12,\ 2,\ \frac13,\ \frac32,\ \frac23,\ 3.
+\]
+Thus the children of $x_k$ are $x_k/(x_k+1)$ and $x_k+1$. The assertion holds for $k=1$. If it holds for $k$, then
+\[
+x_{2k+2}=\frac1{2(\lfloor x_k\rfloor+1)-(x_k+1)+1}
+=\frac{x_{k+1}}{x_{k+1}+1},
+\]
+which lies in $(0,1)$, and therefore $x_{2k+3}=x_{k+1}+1$. This completes the induction.
+
+\textbf{(b)} The child formulae give
+\[
+(p_{2k},q_{2k})=(p_k,p_k+q_k),\qquad
+(p_{2k+1},q_{2k+1})=(p_k+q_k,q_k),
+\]
+and no cancellation occurs because the parent coordinates are coprime. These are exactly the two matrix equations. Repeatedly removing the least significant binary digit gives the displayed product.
+
+For a coprime pair $(p,q)\ne(1,1)$, exactly one of $p<q$ and $p>q$ holds. Apply the corresponding inverse subtraction. Positivity and coprimality are preserved, while $p+q$ decreases, so the process terminates at $(1,1)$ and is unique. Hence the sequence enumerates $\mathbb Q^+$ bijectively.
+
+\textbf{(c)} Direct substitution of the two child pairs gives
+\[
+u_k-u_{2k}-u_{2k+1}=\frac1{p_kq_k(p_k+q_k)}.
+\]
+Summing for $1\leq k\leq n$ cancels the indices $2,\ldots,2n+1$ and yields
+\[
+S_n=u_1-\sum_{j=n+1}^{2n+1}u_j=2-\sum_{j=n+1}^{2n+1}u_j<2.
+\]
+The summands defining $S_n$ are positive, so $S_n$ is strictly increasing.
+
+\textbf{(d)} The bijection in (b) and positivity allow the series to be re-indexed by $p+q\leq N$; hence $\lim S_n=\lim\Sigma_N$. Tree telescoping over $T_N$ leaves the root contribution $u(1,1)=2$ minus the children outside $T_N$ whose parent is inside. These boundary children are precisely the pairs $(a,b)$ with $a+b>N$ and $\max(a,b)\leq N$.
+
+Writing $m=\min(a,b)$ and $M=\max(a,b)$, there are at most $2m$ ordered pairs for each $m$, and $M>N/2$. Therefore each contributes less than $4/(m^2N)$, giving
+\[
+0<2-\Sigma_N<\sum_{m=1}^{N-1}2m\frac4{m^2N}
+=\frac8N\sum_{m=1}^{N-1}\frac1m\leq\frac{8(1+\log N)}N\longrightarrow0.
+\]
+Thus
+\[
+\boxed{\displaystyle\lim_{n\to\infty}S_n=2}.
+\]
+\end{solution}
+
+\begin{takeaways}
+\item A floor recurrence can encode a breadth-first traversal of the Calkin--Wilf tree.
+\item The matrices $M_0$ and $M_1$ encode the two Euclidean subtraction branches and give unique binary addresses to positive rationals.
+\item Tree telescoping replaces cancellation along a chain by cancellation from each parent against its two children.
+\item Positive series may be re-indexed by the geometry of coprime lattice points, turning the limit into a boundary estimate.
+\end{takeaways}
