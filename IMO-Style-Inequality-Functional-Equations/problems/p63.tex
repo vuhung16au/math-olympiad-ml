@@ -1,0 +1,37 @@
+\subsubsection*{Problem 63. The Hidden Euclidean Length}
+\addcontentsline{toc}{subsubsection}{Problem 63. The Hidden Euclidean Length}
+
+\begin{exercisebox}[hard]
+
+Determine all functions
+\[
+F:\mathbb Q^2\to[0,\infty)
+\]
+satisfying
+\[
+F(0,0)=0,\qquad F(1,0)=1,\qquad F(2,0)=2,
+\]
+and, for all rational numbers $a,b,c,d$,
+\[
+\boxed{
+F(a+c,b+d)\le F(a,b)+F(c,d)
+}
+\tag{1}
+\]
+and
+\[
+\boxed{
+F(ac-bd,ad+bc)=F(a,b)F(c,d).
+}
+\tag{2}
+\]
+
+No continuity, monotonicity, or symmetry is assumed.
+
+\begin{flushright}
+\textit{Composed by Vu Hung Nguyen, 2026}
+\end{flushright}
+
+\upsidehint{First determine $F$ on the coordinate axes, then take large powers under the multiplication $(a,b)(c,d)=(ac-bd,ad+bc)$.}
+
+\end{exercisebox}

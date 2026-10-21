@@ -1,0 +1,109 @@
+\addcontentsline{toc}{subsubsection}{Solution 36. The Multiplicative Mirror: Positive Recurrence}
+
+\begin{dlsummary}[title={\bfseries Solution 36. The Multiplicative Mirror: Positive Recurrence},breakable]
+
+\begin{proof}
+We prove that the only solutions are
+\[
+f(x)=x\qquad\text{and}\qquad f(x)=\frac1x.
+\]
+
+\medskip
+\noindent\textbf{1. A sharp growth bound.}
+
+Fix $t>1$ and write $a_n=f(t^n)$ for integers $n$. Substituting
+$x=t$ and $y=t^n$ gives
+\[
+a_{n+1}+a_{n-1}\le (t+t^{-1})a_n. \tag{1}
+\]
+Put
+\[
+U_n=\frac{t^n-t^{-n}}{t-t^{-1}}.
+\]
+Iterating (1), and using positivity of all the terms, gives
+\[
+0<a_n\le U_n a_1-U_{n-1}a_0.
+\]
+Put
+\[
+b_n=a_{n+1}-\frac{a_n}{t}.
+\]
+The recurrence (1) rearranges to
+\[
+b_n\le t b_{n-1},
+\]
+so $b_n\le t^n b_0$. If $b_0<0$, then $b_n\to-\infty$, and
+\[
+a_{n+1}=\frac{a_n}{t}+b_n<0
+\]
+for all sufficiently large $n$, contradicting positivity. Hence
+\[
+a_1\ge\frac{a_0}{t}.
+\]
+Applying the same argument to the sequence $a_{-n}$ yields
+\[
+a_1\ge \frac{a_0}{t},\qquad a_{-1}\ge \frac{a_0}{t}.
+\]
+Since $a_0=f(1)=1$, (1) with $n=0$ also gives
+$a_1+a_{-1}\le t+t^{-1}$. Consequently $a_1,a_{-1}\le t$. As $t>1$ was arbitrary,
+\[
+\min\{u,u^{-1}\}\le f(u)\le\max\{u,u^{-1}\}
+\qquad(u>0). \tag{2}
+\]
+
+\medskip
+\noindent\textbf{2. The pointwise alternatives.}
+
+Taking logarithms in (2) gives
+\[
+|\log f(u)|\le |\log u|.
+\]
+Applying this inequality to $f(u)$ and using $f(f(u))=u$ gives the reverse
+inequality. Thus
+\[
+|\log f(u)|=|\log u|,
+\]
+so
+\[
+f(u)\in\{u,u^{-1}\}\qquad(u>0). \tag{3}
+\]
+
+\medskip
+\noindent\textbf{3. The choice cannot switch.}
+
+For $u>1$, let
+\[
+L=\{u>1:f(u)=u^{-1}\}.
+\]
+If $u\in L$, substitute $y=u$ and $x=z/u$ in the original inequality. Using
+(2) gives
+\[
+f(z)\le
+\frac{z/u+u/z}{u}
+-\min\left\{\frac{u^2}{z},\frac{z}{u^2}\right\}. \tag{4}
+\]
+As $z\to u$, the right-hand side tends to $u^{-1}<u$. Hence, for $z$
+sufficiently close to $u$, the alternative $f(z)=z$ in (3) is impossible;
+therefore $L$ is open in $(1,\infty)$.
+
+Conversely, if $u_k\in L$ and $u_k\to u>1$, use (4) with centre $u_k$
+and $z=u$, and pass to the limit. This gives $f(u)\le u^{-1}$, so (3)
+implies $u\in L$. Thus $L$ is closed in $(1,\infty)$.
+
+Since $(1,\infty)$ is connected, $L$ is either empty or all of $(1,\infty)$.
+Finally, the involution makes $f$ injective, which forces the corresponding
+choice on $(0,1)$ as well. The two possibilities are therefore precisely
+\[
+f(x)=x\qquad\text{or}\qquad f(x)=\frac1x.
+\]
+Direct substitution shows that both functions satisfy the inequality with
+equality.
+\end{proof}
+
+\paragraph{Takeaways.}
+Multiplicative orbits turn the two-variable inequality into a recurrence.
+Positivity makes the recurrence rigid, and applying the involution twice
+turns a one-sided estimate into an equality. The final connectedness argument
+is needed to exclude mixed pointwise choices.
+
+\end{dlsummary}

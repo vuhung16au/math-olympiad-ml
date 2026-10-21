@@ -1,0 +1,32 @@
+\subsubsection*{Problem 62. The Hidden Square Root}
+\addcontentsline{toc}{subsubsection}{Problem 62. The Hidden Square Root}
+
+\begin{exercisebox}[hard]
+
+Determine all functions $f:\mathbb Q\to[0,\infty)$ satisfying
+\[
+f(0)=0,\qquad f(1)=1,\qquad f(4)=2,
+\]
+and, for all rational numbers $x,y$,
+\[
+\boxed{
+\begin{aligned}
+f(x+y)&\le f(x)+f(y),\\
+f(xy)&\ge f(x)f(y),
+\end{aligned}}
+\]
+together with
+\[
+\boxed{\qquad
+f(x)f(1/x)\le1
+\qquad(x\ne0).
+\qquad}
+\]
+
+\begin{flushright}
+\textit{Composed by Vu Hung Nguyen, 2026}
+\end{flushright}
+
+\upsidehint{First force multiplicativity, then compare base-$2$ and base-$b$ expansions of large powers.}
+
+\end{exercisebox}

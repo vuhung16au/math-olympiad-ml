@@ -1,0 +1,31 @@
+\subsubsection*{Problem 60. The Squared-Logarithm Trap}
+\addcontentsline{toc}{subsubsection}{Problem 60. The Squared-Logarithm Trap}
+
+\begin{exercisebox}[hard]
+
+Determine all functions $f:(0,\infty)\to[1,\infty)$ satisfying
+\[
+f(2)=2,\qquad f(t)\le t\quad(1\le t\le2),
+\]
+and, for all positive real numbers $x,y$,
+\[
+\boxed{\qquad
+f(xy)\,f(x/y)\le f(x)^2f(y)^2,
+\qquad} \tag{1}
+\]
+together with
+\[
+\boxed{\qquad
+f(x^2)\ge f(x)^4.
+\qquad} \tag{2}
+\]
+
+No continuity or monotonicity is assumed.
+
+\begin{flushright}
+\textit{Composed by Vu Hung Nguyen, 2026}
+\end{flushright}
+
+\upsidehint{Set $g(t)=\log_2 f(2^t)$, then use the substitution $(u,v)\mapsto(u+v,u-v)$.}
+
+\end{exercisebox}

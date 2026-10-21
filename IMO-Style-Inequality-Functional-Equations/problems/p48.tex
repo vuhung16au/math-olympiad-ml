@@ -1,0 +1,27 @@
+\subsubsection*{Problem 48. The One-Point Cubic Lock}
+\addcontentsline{toc}{subsubsection}{Problem 48. The One-Point Cubic Lock}
+
+\begin{exercisebox}[hard]
+
+Determine all functions $f:(0,\infty)\to(0,\infty)$ satisfying
+\[
+\boxed{
+\begin{aligned}
+f(x+y)&\ge f(x)+f(y)+3xy(x+y),\\
+f(xy)&\le f(x)f(y)
+\end{aligned}}
+\]
+for all positive real numbers $x,y$, together with
+\[
+\boxed{\qquad f(f(2))\le512.\qquad}
+\]
+
+No continuity or monotonicity is assumed.
+
+\begin{flushright}
+\textit{Composed by Vu Hung Nguyen, 2026}
+\end{flushright}
+
+\upsidehint{Split $t$ into $n$ equal pieces to prove $f(t)\ge t^3$, then use the composition bound to lock $f(2)$.}
+
+\end{exercisebox}

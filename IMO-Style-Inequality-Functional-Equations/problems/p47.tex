@@ -1,0 +1,31 @@
+\subsubsection*{Problem 47. The Three-Variable Quadratic Trap}
+\addcontentsline{toc}{subsubsection}{Problem 47. The Three-Variable Quadratic Trap}
+
+\begin{exercisebox}[hard]
+
+Determine all functions $f:\mathbb R\to[0,\infty)$ satisfying
+\[
+f(1)=1,\qquad f(t)\le1\quad(0\le t\le1),
+\]
+and, for all real $x,y,z$,
+\[
+\boxed{
+f(x+y)+f(y+z)+f(z+x)
+\le f(x+y+z)+f(x)+f(y)+f(z),
+}
+\tag{1}
+\]
+together with
+\[
+\boxed{\qquad f(2x)\ge4f(x).\qquad} \tag{2}
+\]
+
+No continuity is assumed.
+
+\begin{flushright}
+\textit{Composed by Vu Hung Nguyen, 2026}
+\end{flushright}
+
+\upsidehint{Use $(x,y,z)=(t,t,-t)$, then $(x,y,z)=(x,y,-y)$, and finally replace $(x,y)$ by $(x+y,x-y)$.}
+
+\end{exercisebox}

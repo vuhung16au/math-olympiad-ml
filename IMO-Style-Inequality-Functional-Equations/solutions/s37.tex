@@ -1,0 +1,71 @@
+\addcontentsline{toc}{subsubsection}{Solution 37. The Crossed Contraction Lock}
+
+\begin{dlsummary}[title={\bfseries Solution 37. The Crossed Contraction Lock},breakable]
+
+\begin{proof}
+The only solution is
+\[
+\boxed{f(x)=x\qquad(x>0).}
+\]
+
+Let $c=f(1)$. Substituting $y=1$ in the main inequality gives
+\[
+f(cx)+f(f(x))\le2x.
+\]
+Since $f(f(x))\ge x$, we obtain
+\[
+f(cx)\le x,
+\]
+or, equivalently,
+\[
+f(t)\le\frac tc\qquad(t>0). \tag{1}
+\]
+
+Applying (1) to $t=f(x)$ yields
+\[
+x\le f(f(x))\le\frac{f(x)}c,
+\]
+and therefore
+\[
+f(x)\ge cx. \tag{2}
+\]
+
+Taking $x=1$ in (1), we have $f(c)\le1$. On the other hand,
+$f(c)=f(f(1))\ge1$, so $f(c)=1$. Now set $x=c$ in the main
+inequality. Using $f(c)=1$ gives
+\[
+f\bigl(cf(y)\bigr)+f(y)\le2cy.
+\]
+By (2), $f(cf(y))\ge c^2f(y)$; hence
+\[
+(1+c^2)f(y)\le2cy,
+\]
+so
+\[
+f(y)\le ky,
+\qquad k=\frac{2c}{1+c^2}\le1. \tag{3}
+\]
+
+Applying (3) twice gives
+\[
+f(f(x))\le k^2x.
+\]
+Together with $f(f(x))\ge x$, this forces $k=1$. Equality in
+$2c\le1+c^2$ then gives $c=1$. Consequently, (2) and (3) become
+\[
+x\le f(x)\le x,
+\]
+so $f(x)=x$ for every $x>0$.
+
+Finally, $f(x)=x$ satisfies the iteration condition and makes the
+main inequality an equality.
+\end{proof}
+
+\paragraph{Takeaways.}
+The substitution $y=1$ converts the two-variable inequality into a
+linear upper bound involving the constant $c=f(1)$. The iteration
+condition turns that upper bound into a lower bound. A second special
+substitution, $x=c$, produces the sharp contraction factor
+$2c/(1+c^2)$, and iterating the contraction closes the argument.
+
+\end{dlsummary}
