@@ -65,29 +65,36 @@
 \section*{Preface}
 \addcontentsline{toc}{section}{Preface}
 
-This is the final edition of a booklet of olympiad-style functional
-equations and inequalities. It is written especially for students in Years
-10--12 preparing for mathematical olympiads, as well as for anyone who enjoys
-practising with challenging, unusual, and unfamiliar problems. The aim is to
-develop flexible problem-solving habits, not just to collect answers.
+This is a growing booklet of olympiad-style functional equations and
+inequalities. It is written especially for students in Years 10--12 preparing
+for mathematical olympiads, as well as for anyone who enjoys practising with
+challenging, unusual, and unfamiliar problems. The aim is to develop flexible
+problem-solving habits, not just to collect answers.
+
+The collection includes problems with different domains, methods, and levels
+of rigidity. Some problems have more than one solution, while others admit a
+parameter family or an exceptional value until the final hypotheses are used.
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
 
 The problems focus on olympiad-style functional equations built around
 inequalities. Their domains include the positive real numbers, the real
-numbers, the positive rationals, and the positive integers. The booklet is
-arranged in five themed parts: additive and multiplicative rigidity;
-reciprocal and harmonic transforms; iteration, fixed points, and growth;
-mean and norm squeezes; and real-line and polynomial inequalities. Problems
-come first, grouped by theme, and the full solutions appear together at the
-end.
+numbers, the positive rationals, and the positive integers. These domains
+require different tools: order and limits on the positive reals, symmetry and
+regularity on the real line, prime exponents on the positive rationals, and
+counting or divisibility on the integers. The booklet is arranged in five
+themed parts: additive and multiplicative rigidity; reciprocal and harmonic
+transforms; iteration, fixed points, and growth; mean and norm squeezes; and
+real-line and polynomial inequalities. Problems come first, grouped by theme,
+and the full solutions appear together at the end.
 
 For each problem, first read the statement carefully and try to solve it on
 your own. Pay attention to the domain and to what the inequalities say for
 special choices of inputs. If you get stuck, use the hint as a nudge rather
 than as a replacement for a proof. Once you have a solution, compare it with
-the one at the end: check each step, and note any idea that you did not use.
+the one at the end: check each step, note any idea that you did not use, and
+compare alternative solutions when they are provided.
 
 \section*{Fundamental Review: Facts and Tools}
 \addcontentsline{toc}{section}{Fundamental Review: Facts and Tools}
@@ -137,6 +144,32 @@ function agrees with the identity on a dense subset of its domain, it agrees
 with the identity throughout: nearby points from the dense subset bound its
 value from below and above.
 
+\paragraph{Defects and normalization.}
+When a candidate model $M(x)$ is suggested by the problem, it is often useful
+to study the defect
+\[
+g(x)=f(x)-M(x)
+\]
+or the ratio $f(x)/M(x)$ when $M(x)>0$. The hypotheses may become simpler in
+terms of $g$: a polynomial expression may become a midpoint inequality, while
+a multiplicative expression may become submultiplicative after taking
+reciprocals or logarithms. Always check that the normalization is defined on
+the stated domain.
+
+\paragraph{Iteration and bounded growth.}
+If a relation is applied repeatedly, write the first few cases and identify
+the resulting sequence. A nonnegative quantity cannot have a negative partial
+sum, a bounded quantity cannot grow exponentially, and a quantity bounded by
+$C/2^n$ for every $n$ must be zero. These elementary observations often turn
+an inequality into an identity.
+
+\paragraph{Discrete rigidity.}
+On the positive integers, injectivity permits counting arguments: $N$
+distinct inputs require $N$ distinct positive outputs. On the positive
+rationals, unique factorization permits comparison of prime exponents and
+divisibility chains. These tools are different from real-variable arguments,
+where order, density, and regularity are central.
+
 \paragraph{Midpoints and quadratic identities.}
 The parallelogram identity
 \[
@@ -156,16 +189,70 @@ of exponents, and handle reciprocals carefully, noting that reciprocal order
 reversal requires positive quantities. Also choose inputs such as $x=y$,
 $y=1$, or $y=-x$ only when the domain permits them. Normalizing a function,
 for example by setting $g(x)=f(x)/x^k$, can expose simpler behavior; always
-check that the normalization is defined on the stated domain.
+check that the normalization is defined on the stated domain. When a formula
+is first established on the integers, rationals, or dyadic rationals, do not
+assume that it extends automatically to all real inputs: first prove the
+continuity, monotonicity, boundedness, or other regularity needed for that
+extension.
 
 \section*{Frequently Seen Patterns}
 \addcontentsline{toc}{section}{Frequently Seen Patterns}
 
-Look for special inputs that produce bounds, then combine or repeat those
-bounds until they meet. Swapping variables, using reciprocal or scaled
-inputs, and normalizing by a power often reveal hidden symmetry or
-monotonicity. Equality cases are especially informative: they can point to
-the candidate function and help show that no other function works.
+Look for special inputs that produce bounds, identities, or fixed points, then
+combine or repeat those consequences until they become decisive. The useful
+substitutions depend on the domain: try $x=y$, $y=1$, $y=-x$, $x=0$, $x=1$,
+reciprocal inputs, scaled inputs, and values such as $x=f(y)$ or $x=f(x)$
+when these are permitted.
+
+\paragraph{Normalize the expected answer.}
+If the statement contains products, reciprocals, roots, powers, or a familiar
+polynomial expression, introduce a transformed function. Useful examples are
+\[
+g(x)=\frac1{f(x)},\qquad g(x)=\sqrt{f(x)},\qquad
+g(x)=f(x)-x^2,\qquad g(x)=\frac{f(x)}x,\qquad g(x)=\log f(x).
+\]
+A good normalization can turn a complicated inequality into superadditivity,
+subadditivity, submultiplicativity, midpoint concavity, or a statement about
+a nonnegative defect.
+
+\paragraph{Track and eliminate a defect.}
+After identifying a likely model $M(x)$, define $g(x)=f(x)-M(x)$ or
+$g(x)=f(x)/M(x)$. If a positive defect grows under translation, scaling,
+multiplication, or iteration while another condition keeps it bounded, the
+defect must vanish. Conversely, if repeated scaling bounds it by a quantity
+tending to zero, it must be zero.
+
+\paragraph{Reverse inequalities and propagate equality.}
+Interchanging variables, reversing an arithmetic progression, or applying a
+condition at reciprocal inputs can produce the opposite inequality. Together
+the two directions force equality. A single anchor value can then propagate
+through integer multiples, powers, roots, dyadic scaling, or density. Equality
+cases in standard mean and norm inequalities are especially informative.
+
+\paragraph{Use iteration and composition.}
+A pointwise estimate for $f$ is often most effective after evaluating it at
+$f(x)$. Compare that result with a condition on $f(f(x))$ or a higher iterate
+to eliminate constants, force fixed points, or rule out an alternative branch.
+
+\paragraph{Use the domain's arithmetic structure.}
+On the positive integers, count distinct values and use divisibility. On the
+positive rationals, track prime supports and prime exponents under iteration.
+On the positive reals, use order, reciprocal reversal, roots, and density. On
+the full real line, exploit signs and symmetry, but prove any needed
+monotonicity or continuity rather than assuming it.
+
+\paragraph{Prove regularity before extending a formula.}
+Many real-line solutions first determine a function on integers, rationals, or
+dyadic rationals. That information alone is not enough. Establish continuity,
+monotonicity, boundedness, or a Lipschitz estimate from the hypotheses before
+passing from a dense subset to all real inputs. In particular, continuity is
+proved, not assumed, in additive, quadratic, and midpoint-identity arguments.
+
+\paragraph{Keep equality cases and exceptional parameters.}
+After finding a candidate, substitute it into every original condition and
+record where equality occurs. Do not discard zero slopes, zero exponents,
+constant solutions, endpoint values, or exceptional values at the origin
+without checking whether the domain and hypotheses genuinely exclude them.
 
 \newpage
 \setcounter{tocdepth}{3}
@@ -360,9 +447,18 @@ the candidate function and help show that no other function works.
 \addcontentsline{toc}{section}{Conclusion}
 
 The central lesson of these problems is to keep experimenting with the
-inequalities: choose useful inputs, look for quantities to compare, and
-follow a promising bound until it becomes decisive. We hope this booklet
-encourages you to approach unfamiliar problems with patience, curiosity, and
-confidence.
+inequalities: choose useful inputs, normalize the function when appropriate,
+look for quantities to compare, and follow a promising bound until it becomes
+decisive. Symmetry, reciprocal substitutions, iteration, density, and
+discrete arithmetic can all turn a weak-looking inequality into a rigid
+identity.
+
+Not every problem ends with the same kind of conclusion. Some force a unique
+function, some leave a parameter family, and some require a separate analysis
+of exceptional points or equality cases. In every case, respect the domain,
+prove continuity or other regularity rather than assuming it, verify the final
+candidates in the original statement, and use failed approaches as information
+about the hidden structure of the problem. We hope this booklet encourages you
+to approach unfamiliar problems with patience, curiosity, and confidence.
 
 \end{document}
