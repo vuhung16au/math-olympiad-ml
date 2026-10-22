@@ -1,0 +1,102 @@
+\addcontentsline{toc}{subsubsection}{Solution 56. The Microscopic Error Trap}
+
+\begin{dlsummary}[title={\bfseries Solution 56. The Microscopic Error Trap},breakable]
+
+\begin{proof}
+The complete family is
+\[
+\boxed{f(x)=ax\qquad(x\in\mathbb R),\quad a\in\mathbb R.}
+\]
+
+\paragraph{1. Extract exact doubling.}
+
+Taking \(x=y=0\) in (1) gives \(f(0)=0\).
+
+Taking \(y=x\), the upper bound vanishes, so
+\[
+\boxed{f(2x)=2f(x).} \tag{3}
+\]
+Consequently,
+\[
+f(x/2^n)=\frac{f(x)}{2^n}
+\]
+for every nonnegative integer \(n\).
+
+\paragraph{2. Shrink the error until it disappears.}
+
+Apply (1) at \(x/2^n,y/2^n\). Using (3),
+\[
+0\le
+\frac{f(x)+f(y)-f(x+y)}{2^n}
+\le\frac{(x-y)^2}{4^n}.
+\]
+Multiplying by \(2^n\),
+\[
+0\le f(x)+f(y)-f(x+y)
+\le\frac{(x-y)^2}{2^n}.
+\]
+Letting \(n\to\infty\), we obtain
+\[
+\boxed{f(x+y)=f(x)+f(y).} \tag{4}
+\]
+
+Additivity alone is \textbf{not} enough to conclude that \(f\) is linear.
+
+\paragraph{3. Find regularity in the composite.}
+
+Define
+\[
+h(x)=f(f(x)).
+\]
+By (4), \(h\) is additive. Condition (2) says
+\[
+h(x^2)\ge f(x)^2\ge0.
+\]
+Every nonnegative real number is a square, so
+\[
+h(t)\ge0\qquad(t\ge0).
+\]
+Thus \(h\) is nondecreasing: for \(u<v\),
+\[
+h(v)-h(u)=h(v-u)\ge0.
+\]
+
+An additive, nondecreasing function is linear. Indeed, writing \(c=h(1)\ge0\), additivity gives \(h(q)=cq\) for rational \(q\), and rational approximation plus monotonicity gives
+\[
+\boxed{h(x)=cx\qquad(x\in\mathbb R).} \tag{5}
+\]
+
+\paragraph{4. Transfer the regularity back to \(f\).}
+
+Combining (2) and (5),
+\[
+f(x)^2\le h(x^2)=cx^2.
+\]
+Therefore
+\[
+\boxed{|f(x)|\le\sqrt c\,|x|.} \tag{6}
+\]
+By additivity,
+\[
+|f(u)-f(v)|=|f(u-v)|\le\sqrt c\,|u-v|.
+\]
+Hence \(f\) is continuous.
+
+Put \(a=f(1)\). Additivity gives \(f(q)=aq\) for every rational \(q\); continuity extends this to every real input:
+\[
+f(x)=ax.
+\]
+
+\paragraph{5. Verify every slope.}
+
+For any real \(a\), the function \(f(x)=ax\) has zero additive error, and
+\[
+f(f(x^2))=a^2x^2=f(x)^2.
+\]
+Thus every real slope works, including \(a=0\) and negative slopes.
+\end{proof}
+
+\paragraph{Takeaways.}
+\emph{No takeaways were provided in the source draft.}
+
+\end{dlsummary}

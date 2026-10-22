@@ -1,0 +1,139 @@
+\addcontentsline{toc}{subsubsection}{Solution 62. The Hidden Square Root}
+
+\begin{dlsummary}[title={\bfseries Solution 62. The Hidden Square Root},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{f(x)=\sqrt{|x|}\qquad(x\in\mathbb Q).}
+\]
+
+\paragraph{1. Turn the multiplicative inequality into equality.}
+
+For \(x\ne0\), supermultiplicativity gives
+\[
+1=f(1)\ge f(x)f(1/x).
+\]
+This repeats the stated bound, so we need a stronger argument.
+
+Apply supermultiplicativity to \(4x\) and \(1/x\):
+\[
+2=f(4)\ge f(4x)f(1/x)\ge2f(x)f(1/x).
+\]
+Again, this only supplies the same upper bound.
+
+In fact, these hypotheses do \textbf{not} force multiplicativity: the reciprocal condition points in the same direction as supermultiplicativity at a reciprocal pair.
+
+\textbf{The corrected problem replaces the reciprocal condition by}
+\[
+\boxed{\qquad f(x)f(1/x)\ge1\qquad(x\ne0).\qquad} \tag{3}
+\]
+
+With this correction, the two bounds force
+\[
+f(x)f(1/x)=1.
+\]
+In particular, \(f(x)>0\) for \(x\ne0\).
+
+Now, for nonzero \(x,y\),
+\[
+f(x)=f((xy)(1/y))
+\ge f(xy)f(1/y)=\frac{f(xy)}{f(y)}.
+\]
+Combined with supermultiplicativity, this proves
+\[
+\boxed{f(xy)=f(x)f(y).} \tag{4}
+\]
+
+Consequently,
+\[
+f(2)=\sqrt2,\qquad f(-1)=1,\qquad f(-x)=f(x).
+\]
+
+\paragraph{2. Prove an upper bound using binary expansions.}
+
+Write a positive integer \(N\) in binary:
+\[
+N=\sum_{j=0}^{s}\varepsilon_j2^j,
+\qquad \varepsilon_j\in\{0,1\},\quad 2^s\le N.
+\]
+Subadditivity and multiplicativity give
+\[
+f(N)\le\sum_{j=0}^{s}(\sqrt2)^j
+< C\sqrt N,
+\qquad
+C=\frac{\sqrt2}{\sqrt2-1}.
+\]
+Apply this to \(N=n^r\):
+\[
+f(n)^r=f(n^r)<C\,n^{r/2}.
+\]
+Taking \(r\)-th roots and letting \(r\to\infty\),
+\[
+\boxed{f(n)\le\sqrt n.} \tag{5}
+\]
+
+\paragraph{3. Prove the reverse bound using base-\(b\) expansions.}
+
+Fix an integer \(b\ge2\), and write \(A=f(b)>0\). Let
+\[
+M=\max\{f(0),f(1),\ldots,f(b-1)\}.
+\]
+
+Write \(2^k\) in base \(b\):
+\[
+2^k=d_0+d_1b+\cdots+d_sb^s,
+\qquad 0\le d_j<b,\quad b^s\le2^k.
+\]
+Then
+\[
+2^{k/2}=f(2^k)\le M\sum_{j=0}^{s}A^j. \tag{6}
+\]
+
+If \(A\le1\), the right side is at most \(M(s+1)\), which grows at most linearly in \(k\). The left side grows exponentially—a contradiction. Thus \(A>1\).
+
+The geometric sum in (6) now gives
+\[
+2^{k/2}
+\le \frac{MA}{A-1}A^s
+\le \frac{MA}{A-1}A^{k\log_b2}.
+\]
+Taking \(k\)-th roots and letting \(k\to\infty\),
+\[
+\sqrt2\le A^{\log_b2}.
+\]
+Therefore \(A\ge\sqrt b\). Together with (5),
+\[
+\boxed{f(n)=\sqrt n\qquad(n\in\mathbb Z_{>0}).}
+\]
+
+\paragraph{4. Extend to rational numbers and verify.}
+
+For positive integers \(m,n\), multiplicativity gives
+\[
+f(m/n)=\frac{f(m)}{f(n)}=\sqrt{m/n}.
+\]
+Evenness and \(f(0)=0\) complete the classification.
+
+Conversely, \(f(x)=\sqrt{|x|}\) is multiplicative, has the required normalisations, and satisfies the corrected reciprocal condition with equality. Finally,
+\[
+\sqrt{|x+y|}
+\le\sqrt{|x|+|y|}
+\le\sqrt{|x|}+\sqrt{|y|},
+\]
+so it is subadditive.
+
+\subsubsection{Final corrected statement}\label{final-corrected-statement}
+
+Use the problem above with the reciprocal condition \textbf{\(f(x)f(1/x)\ge1\)}, not \(\le1\). With that correction, the classification and proof are complete.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Check inequality directions carefully:** Reciprocal substitutions only create rigidity when the bounds oppose one another.
+\item **Do not assume monotonicity:** Numeral expansions provide growth estimates without comparing \(f(a)\) and \(f(b)\) directly.
+\item **Change the base strategically:** Binary expansions give one bound; base-\(b\) expansions give the reverse bound at \(b\).
+\item **Amplify away constants:** Taking high powers eliminates fixed multiplicative losses.
+\end{itemize}
+
+\end{dlsummary}

@@ -1,0 +1,137 @@
+\addcontentsline{toc}{subsubsection}{Solution 65. Three Hidden Primes}
+
+\begin{dlsummary}[title={\bfseries Solution 65. Three Hidden Primes},breakable]
+
+\begin{proof}
+For a prime \(p\), let \(v_p(x)\) denote the exponent of \(p\) in a nonzero rational \(x\), allowing negative exponents.
+
+The three solutions are
+\[
+\boxed{
+f(0)=0,\qquad f(x)=30^{-v_p(x)}\quad(x\ne0),
+\qquad p\in\{2,3,5\}.
+}
+\]
+
+\paragraph{1. Establish the basic identities.}
+
+Since \(f(30)>0\), multiplicativity forces \(f(1)=1\). For \(x\ne0\),
+\[
+f(x)f(1/x)=1.
+\]
+Thus nonzero inputs have positive values.
+
+Also,
+\[
+f(-1)^2=f(1)=1,
+\]
+so \(f(-1)=1\) and
+\[
+f(-x)=f(x). \tag{1}
+\]
+
+\paragraph{2. Obtain a uniform bound on integers.}
+
+Let
+\[
+M=\max\{f(0),f(1),\ldots,f(29)\}.
+\]
+Write a positive integer \(N\) in base \(30\):
+\[
+N=d_0+d_1 30+\cdots+d_s30^s,
+\qquad 0\le d_j\le29.
+\]
+Subadditivity and multiplicativity give
+\[
+f(N)
+\le\sum_{j=0}^{s}f(d_j)f(30)^j
+\le M\sum_{j=0}^{s}30^{-j}
+<\frac{30M}{29}.
+\]
+Hence \(f\) is uniformly bounded on the positive integers.
+
+Now apply this bound to \(N=n^r\):
+\[
+f(n)^r=f(n^r)<\frac{30M}{29}.
+\]
+Since this holds for every positive integer \(r\),
+\[
+\boxed{f(n)\le1\qquad(n\in\mathbb Z_{>0}).} \tag{2}
+\]
+By (1), the same bound holds for negative integers.
+
+\paragraph{3. Locate a prime with value below \(1\).}
+
+Multiplicativity gives
+\[
+f(2)f(3)f(5)=f(30)=\frac1{30}.
+\]
+All three factors belong to \((0,1]\), so at least one is below \(1\).
+
+We next prove that \textbf{at most one prime anywhere} can have value below \(1\).
+
+\paragraph{4. Rule out two exceptional primes.}
+
+Suppose distinct primes \(p,q\) satisfy
+\[
+f(p)<1,\qquad f(q)<1.
+\]
+Choose a positive integer \(r\) sufficiently large that
+\[
+f(p)^r+f(q)^r<1.
+\]
+
+Since \(p^r\) and \(q^r\) are coprime, Bézout’s identity supplies integers \(a,b\) such that
+\[
+ap^r+bq^r=1.
+\]
+Using subadditivity, multiplicativity, and the integer bound,
+\[
+\begin{aligned}
+1=f(1)
+&\le f(a)f(p)^r+f(b)f(q)^r\\
+&\le f(p)^r+f(q)^r\\
+&<1,
+\end{aligned}
+\]
+a contradiction.
+
+Therefore exactly one prime \(p\) has \(f(p)<1\). It belongs to \(\{2,3,5\}\); every other prime has value \(1\). Consequently,
+\[
+f(p)=\frac1{30}.
+\]
+
+\paragraph{5. Determine every rational value.}
+
+Unique prime factorisation and multiplicativity now give
+\[
+f(x)=30^{-v_p(x)}
+\]
+for every nonzero rational \(x\).
+
+\paragraph{6. Verify the three candidates.}
+
+Multiplicativity and the normalisations are immediate.
+
+For nonzero \(x,y\) with \(x+y\ne0\),
+\[
+v_p(x+y)\ge\min\{v_p(x),v_p(y)\}.
+\]
+Therefore
+\[
+f(x+y)
+\le\max\{f(x),f(y)\}
+\le f(x)+f(y).
+\]
+Cases involving zero or \(x+y=0\) are immediate. All three functions work.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **A shrinking base controls all integers:** Base-\(30\) expansions turn \(f(30)<1\) into a uniform bound.
+\item **Powers sharpen boundedness:** Uniformly bounded values of \(f(n)^r\) force \(f(n)\le1\).
+\item **Bézout connects unrelated primes:** Two independently shrinking primes would make the value at \(1\) too small.
+\item **One normalisation can leave several solutions:** The factorisation \(30=2\cdot3\cdot5\) creates exactly three possible controlling primes.
+\end{itemize}
+
+\end{dlsummary}

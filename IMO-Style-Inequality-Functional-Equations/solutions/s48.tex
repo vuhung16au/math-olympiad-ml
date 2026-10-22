@@ -1,0 +1,87 @@
+\addcontentsline{toc}{subsubsection}{Solution 48. The One-Point Cubic Lock}
+
+\begin{dlsummary}[title={\bfseries Solution 48. The One-Point Cubic Lock},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{f(x)=x^3\qquad(x>0).}
+\]
+
+\paragraph{1. Extract a global cubic lower bound.}
+
+Set
+\[
+g(x)=f(x)-x^3.
+\]
+Because
+\[
+(x+y)^3=x^3+y^3+3xy(x+y),
+\]
+the first inequality becomes
+\[
+g(x+y)\ge g(x)+g(y). \tag{1}
+\]
+
+For any positive integer \(n\), repeated application gives
+\[
+g(t)\ge n\,g(t/n).
+\]
+Returning to \(f\), and using its positivity,
+\[
+f(t)\ge n f(t/n)+t^3\left(1-\frac1{n^2}\right)
+>t^3\left(1-\frac1{n^2}\right).
+\]
+Letting \(n\to\infty\), we obtain
+\[
+\boxed{f(t)\ge t^3,\quad\text{so }g(t)\ge0.} \tag{2}
+\]
+
+\paragraph{2. Lock the value at \(2\).}
+
+Applying (2) twice,
+\[
+512\ge f(f(2))\ge f(2)^3\ge8^3=512.
+\]
+Therefore every inequality is an equality, and
+\[
+\boxed{f(2)=8,\qquad g(2)=0.} \tag{3}
+\]
+
+\paragraph{3. Determine the function on an interval.}
+
+For \(0<t<2\), superadditivity gives
+\[
+0=g(2)\ge g(t)+g(2-t).
+\]
+Both summands are nonnegative, so \(g(t)=0\). Hence
+\[
+\boxed{f(t)=t^3\qquad(0<t\le2).} \tag{4}
+\]
+
+\paragraph{4. Propagate to every positive input.}
+
+Fix \(x>0\). Choose a positive integer \(k\) such that \(x/2^k<2\). Repeated submultiplicativity, followed by (3) and (4), gives
+\[
+f(x)
+\le f(2)^k f(x/2^k)
+=8^k\left(\frac{x}{2^k}\right)^3
+=x^3.
+\]
+Combined with (2), this proves \(f(x)=x^3\).
+
+\textbf{Verification.} The cubic identity makes the first inequality an equality; multiplicativity also holds, and
+\[
+f(f(2))=f(8)=512.
+\]
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Subtract the expected model:** Removing \(x^3\) exposes an ordinary superadditive defect.
+\item **Subdivide before taking limits:** Positivity of \(f\) controls the potentially negative defect at small inputs.
+\item **One exact value can determine an interval:** A nonnegative superadditive function that vanishes at \(2\) must vanish throughout \((0,2)\).
+\item **Use different inequalities locally and globally:** Addition determines a bounded interval; multiplication propagates the result everywhere.
+\end{itemize}
+
+\end{dlsummary}

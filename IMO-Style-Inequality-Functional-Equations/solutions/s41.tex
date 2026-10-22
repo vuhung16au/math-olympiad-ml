@@ -1,0 +1,73 @@
+\addcontentsline{toc}{subsubsection}{Solution 41. The Prime-Exponent Trap}
+
+\begin{dlsummary}[title={\bfseries Solution 41. The Prime-Exponent Trap},breakable]
+
+\begin{proof}
+We prove that the only solution is
+\[
+\boxed{f(x)=x\qquad(x\in\mathbb Q_{>0}).}
+\]
+
+\paragraph{1. Turn the inequality into equality.}
+
+Positivity and multiplicativity give
+\[
+f(1)=1,\qquad f(1/x)=\frac1{f(x)}.
+\]
+Applying the inequality at \(1/x\), we obtain
+\[
+\frac1{f(f(x)^3)}\ge\frac1{x^2f(x)}.
+\]
+Together with the original inequality, this forces
+\[
+f(f(x))^3=x^2f(x). \tag{1}
+\]
+
+\paragraph{2. Isolate the deviation from the identity.}
+
+Fix \(x>0\), and put
+\[
+h=\frac{f(x)}x.
+\]
+By multiplicativity,
+\[
+f(f(x))=f(xh)=f(x)f(h).
+\]
+Substituting into (1) gives
+\[
+f(h)^3=h^{-2}. \tag{2}
+\]
+
+We will prove that a positive rational \(h\) satisfying (2) must equal \(1\).
+
+\paragraph{3. Iterate and use prime exponents.}
+
+Set \(h_0=h\) and \(h_{n+1}=f(h_n)\). Applying \(f\) repeatedly to (2), using multiplicativity, gives
+\[
+h_{n+1}^3=h_n^{-2}\qquad(n\ge0).
+\]
+
+For a prime \(p\), let \(e_n\) be the exponent of \(p\) in the prime factorisation of the positive rational \(h_n\). Each \(e_n\) is an integer, possibly negative, and
+\[
+3e_{n+1}=-2e_n.
+\]
+Consequently,
+\[
+3^n e_n=(-2)^n e_0.
+\]
+Since \(2\) and \(3\) are coprime, \(3^n\) divides \(e_0\) for every \(n\). Therefore \(e_0=0\).
+
+This holds for every prime \(p\), so \(h=1\). Hence \(f(x)=x\) for every positive rational \(x\).
+
+Conversely, \(f(x)=x\) satisfies both conditions, with equality.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Reciprocals reverse inequalities:** Multiplicativity makes the substitution \(x\mapsto1/x\) especially powerful.
+\item **Normalise the defect:** The ratio \(f(x)/x\) separates the desired solution from its possible deviations.
+\item **Iteration creates divisibility:** A relation that looks harmless once can become impossible when repeated indefinitely.
+\item **The rational domain matters:** Prime exponents must remain integers at every iteration.
+\end{itemize}
+
+\end{dlsummary}

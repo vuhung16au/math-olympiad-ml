@@ -1,0 +1,96 @@
+\addcontentsline{toc}{subsubsection}{Solution 54. The Harmonic Involution}
+
+\begin{dlsummary}[title={\bfseries Solution 54. The Harmonic Involution},breakable]
+
+\begin{proof}
+The complete family of solutions is
+\[
+\boxed{f(x)=\frac{c}{x}\qquad(x>0),\quad c>0.}
+\]
+
+\paragraph{1. Recover strict monotonicity.}
+
+Rewrite the inequality as
+\[
+f(x+y)\le\frac{f(x)f(y)}{f(x)+f(y)}<f(x).
+\]
+Whenever \(b>a>0\), take \(x=a\), \(y=b-a\). Thus
+\[
+f(b)<f(a),
+\]
+so \(f\) is strictly decreasing.
+
+\paragraph{2. Obtain an integer scaling bound.}
+
+Taking reciprocals gives
+\[
+\frac1{f(x+y)}\ge\frac1{f(x)}+\frac1{f(y)}.
+\]
+Repeated addition therefore yields
+\[
+\boxed{f(nx)\le\frac{f(x)}n} \tag{1}
+\]
+for every positive integer \(n\).
+
+\paragraph{3. Make the scaling bound exact.}
+
+Fix \(x>0\) and a positive integer \(n\). From (1),
+\[
+nf(nx)\le f(x).
+\]
+Since \(f\) is decreasing,
+\[
+f\bigl(nf(nx)\bigr)\ge f(f(x))=x. \tag{2}
+\]
+
+But applying (1) with input \(f(nx)\) gives
+\[
+f\bigl(nf(nx)\bigr)
+\le\frac{f(f(nx))}{n}
+=\frac{nx}{n}=x. \tag{3}
+\]
+Hence equality holds in (2) and (3). Strict monotonicity makes \(f\) injective, so
+\[
+nf(nx)=f(x).
+\]
+Therefore
+\[
+\boxed{f(nx)=\frac{f(x)}n.} \tag{4}
+\]
+
+\paragraph{4. Extend from rationals to all positive reals.}
+
+Put \(c=f(1)>0\). Equation (4) gives
+\[
+f(1/n)=nc,
+\qquad
+f(m/n)=\frac{nc}{m}=\frac{c}{m/n}.
+\]
+Thus \(f(q)=c/q\) for every positive rational \(q\).
+
+For any real \(x>0\), choose positive rationals \(r_k<x<s_k\) with both sequences tending to \(x\). Monotonicity gives
+\[
+\frac{c}{s_k}=f(s_k)\le f(x)\le f(r_k)=\frac{c}{r_k}.
+\]
+The bounds converge to \(c/x\), proving \(f(x)=c/x\).
+
+\paragraph{5. Verify every member of the family.}
+
+For any \(c>0\),
+\[
+f(f(x))=\frac{c}{c/x}=x,
+\]
+and
+\[
+f(x+y)\bigl(f(x)+f(y)\bigr)
+=\frac{c}{x+y}\left(\frac cx+\frac cy\right)
+=\frac{c^2}{xy}
+=f(x)f(y).
+\]
+Thus every \(c>0\) works.
+\end{proof}
+
+\paragraph{Takeaways.}
+\emph{No takeaways were provided in the source draft.}
+
+\end{dlsummary}

@@ -1,0 +1,36 @@
+\addcontentsline{toc}{subsubsection}{Solution 39. The Twin Squeeze at Zero}
+
+\begin{dlsummary}[title={\bfseries Solution 39. The Twin Squeeze at Zero},breakable]
+
+\begin{proof}
+The only solution is \(f(x)=x+1\).
+
+\paragraph{1. Find \(f(0)\).} Write \(a=f(0)\). The second inequality at \(x=y=0\) gives \(a\le 2a-1\), so \(a\ge1\). The first inequality at \(x=y=0\) gives \(a^2\le a\), so \(a\le1\). Hence \(f(0)=1\).
+
+\paragraph{2. Upper bound.} Put \(y=0\) in the first inequality:
+\[
+f(x)\cdot1\le f(0)+x=x+1.
+\]
+So \(f(x)\le x+1\) for every real \(x\). \((1)\)
+
+\paragraph{3. Lower bound by symmetry.} Put \(y=-x\) in the second inequality:
+\[
+1=f(0)\le f(x)+f(-x)-1,
+\]
+so \(f(x)\ge 2-f(-x)\). Apply (1) at \(-x\) to get \(f(-x)\le 1-x\). Therefore
+\[
+f(x)\ge 2-(1-x)=x+1.
+\]
+
+Together with (1), \(f(x)=x+1\). It satisfies both conditions with equality. \(\blacksquare\)
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Opposing inequalities fix constants:** The two conditions pushed \(f(0)\) in opposite directions, which forced \(f(0)=1\).
+\item **Use \(y=-x\) to reverse a bound:** An upper bound on \(f(-x)\) became a lower bound on \(f(x)\). The same move solves many inequality problems.
+\item **Shift to a cleaner function:** Setting \(g=f-1\) makes the second condition ordinary subadditivity.
+\item **Predict the answer by testing a family:** Trying \(f(x)=cx+d\) shows that \(x+1\) is the only candidate.
+\end{itemize}
+
+\end{dlsummary}

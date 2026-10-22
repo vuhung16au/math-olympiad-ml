@@ -1,0 +1,106 @@
+\addcontentsline{toc}{subsubsection}{Solution 61. The Hidden Entropy Function}
+
+\begin{dlsummary}[title={\bfseries Solution 61. The Hidden Entropy Function},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{f(x)=x\ln x-x+1\qquad(x>0).}
+\]
+
+\paragraph{1. Find the forced normalisation.}
+
+Putting \(x=y=1\),
+\[
+f(1)\ge2f(1).
+\]
+Nonnegativity therefore gives
+\[
+f(1)=0.
+\]
+
+\paragraph{2. Absorb the correction term.}
+
+Define
+\[
+g(x)=\frac{f(x)+x-1}{x}.
+\]
+A direct rearrangement of the original inequality gives
+\[
+\boxed{g(xy)\ge g(x)+g(y).} \tag{1}
+\]
+Also, \(g(1)=0\), and nonnegativity of \(f\) implies
+\[
+\boxed{g(x)\ge1-\frac1x.} \tag{2}
+\]
+
+The problem is now to sharpen the elementary bound (2).
+
+\paragraph{3. Subdivide multiplicatively.}
+
+For every positive integer \(n\), repeated application of (1) gives
+\[
+g(x)\ge n\,g(x^{1/n}).
+\]
+Using (2),
+\[
+g(x)\ge n\left(1-x^{-1/n}\right).
+\]
+The elementary numerical limit
+\[
+\lim_{n\to\infty}n\left(1-x^{-1/n}\right)=\ln x
+\]
+therefore yields
+\[
+\boxed{g(x)\ge\ln x\qquad(x>0).} \tag{3}
+\]
+
+No continuity of \(g\) has been used: the limit concerns only the explicit expression on the right.
+
+\paragraph{4. Use reciprocals to obtain the reverse bound.}
+
+Apply (1) to \(x\) and \(1/x\):
+\[
+0=g(1)\ge g(x)+g(1/x).
+\]
+By (3),
+\[
+g(x)\le-g(1/x)\le-\ln(1/x)=\ln x.
+\]
+Thus \(g(x)=\ln x\). Undoing the normalisation,
+\[
+f(x)=xg(x)-x+1=x\ln x-x+1.
+\]
+
+\paragraph{5. Verify.}
+
+First, the standard inequality
+\[
+\ln u\le u-1
+\]
+applied to \(u=1/x\) gives
+\[
+x\ln x-x+1\ge0.
+\]
+So the required range is satisfied.
+
+Next, direct expansion gives
+\[
+\begin{aligned}
+&f(xy)-xf(y)-yf(x)\\
+&\qquad=xy-x-y+1\\
+&\qquad=(x-1)(y-1).
+\end{aligned}
+\]
+Hence the original inequality holds with equality.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Choose the normalisation strategically:** Adding \(x-1\) and dividing by \(x\) removes both the weights and the correction term.
+\item **Use the range as structural information:** Nonnegativity becomes the lower bound that drives the entire argument.
+\item **Repeated roots sharpen a crude estimate:** Multiplicative subdivision turns \(1-1/x\) into \(\ln x\).
+\item **Reciprocals force exactness:** Once the global lower bound is established, the upper bound follows immediately.
+\end{itemize}
+
+\end{dlsummary}

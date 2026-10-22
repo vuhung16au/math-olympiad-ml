@@ -1,0 +1,133 @@
+\addcontentsline{toc}{subsubsection}{Solution 63. The Hidden Euclidean Length}
+
+\begin{dlsummary}[title={\bfseries Solution 63. The Hidden Euclidean Length},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{F(a,b)=\sqrt{a^2+b^2}\qquad(a,b\in\mathbb Q).}
+\]
+
+\paragraph{1. Recover the basic symmetries.}
+
+Using (2),
+\[
+F(-1,0)^2=F(1,0)=1,
+\]
+so \(F(-1,0)=1\). Consequently,
+\[
+F(-a,-b)=F(a,b).
+\]
+
+Similarly,
+\[
+F(0,1)^2=F(-1,0)=1,
+\]
+so \(F(0,1)=1\). Thus
+\[
+F(0,t)=F(t,0)\qquad(t\in\mathbb Q). \tag{3}
+\]
+
+\paragraph{2. Determine the values on the axes.}
+
+Repeated use of (1) gives
+\[
+F(n,0)\le n\qquad(n\in\mathbb Z_{>0}).
+\]
+Meanwhile, multiplicativity and the normalisation give
+\[
+F(2^k,0)=2^k.
+\]
+
+Fix a positive integer \(n\), and choose \(2^k>n\). By (1),
+\[
+2^k
+\le F(n,0)+F(2^k-n,0)
+\le F(n,0)+2^k-n.
+\]
+Therefore \(F(n,0)\ge n\), proving equality.
+
+For positive integers \(m,n\), multiplicativity now gives
+\[
+m=F(m,0)=F(m/n,0)F(n,0)=nF(m/n,0).
+\]
+Using symmetry and (3), we obtain
+\[
+\boxed{F(t,0)=F(0,t)=|t|\qquad(t\in\mathbb Q).} \tag{4}
+\]
+
+In particular, (1) yields the preliminary bound
+\[
+\boxed{F(a,b)\le |a|+|b|.} \tag{5}
+\]
+
+\paragraph{3. Improve the bound by taking powers.}
+
+Define multiplication of pairs by
+\[
+(a,b)\ast(c,d)=(ac-bd,ad+bc).
+\]
+For a fixed pair \((a,b)\), write its \(n\)-th power as \((A_n,B_n)\). All coordinates remain rational.
+
+Condition (2) gives
+\[
+F(A_n,B_n)=F(a,b)^n.
+\]
+The elementary identity
+\[
+(ac-bd)^2+(ad+bc)^2=(a^2+b^2)(c^2+d^2)
+\]
+also gives
+\[
+A_n^2+B_n^2=(a^2+b^2)^n.
+\]
+
+Apply (5) and \((|u|+|v|)^2\le2(u^2+v^2)\):
+\[
+\begin{aligned}
+F(a,b)^n
+&\le |A_n|+|B_n|\\
+&\le\sqrt2\,(a^2+b^2)^{n/2}.
+\end{aligned}
+\]
+For a nonzero pair, take \(n\)-th roots and let \(n\to\infty\):
+\[
+\boxed{F(a,b)\le\sqrt{a^2+b^2}.} \tag{6}
+\]
+
+\paragraph{4. Use the conjugate pair to force equality.}
+
+Since
+\[
+(a,b)\ast(a,-b)=(a^2+b^2,0),
+\]
+equations (2) and (4) give
+\[
+F(a,b)F(a,-b)=a^2+b^2.
+\]
+But (6) bounds both factors above by \(\sqrt{a^2+b^2}\). Their product reaches the product of these upper bounds, so both must attain them:
+\[
+F(a,b)=\sqrt{a^2+b^2}.
+\]
+The zero pair is already determined.
+
+\paragraph{5. Verify.}
+
+The displayed algebraic identity proves (2). For (1), use
+\[
+ac+bd\le\sqrt{a^2+b^2}\sqrt{c^2+d^2},
+\]
+which follows from \((ad-bc)^2\ge0\). Expanding the squares then proves the required triangle inequality.
+
+All normalisations hold.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **An exact value can propagate backwards:** Knowing the values at powers of \(2\) determines every integer on an axis.
+\item **High powers sharpen estimates:** The crude factor \(\sqrt2\) disappears after taking \(n\)-th roots.
+\item **Conjugates produce a known product:** Pairing \((a,b)\) with \((a,-b)\) forces equality in both upper bounds.
+\item **Geometry can emerge from algebra:** Neither distance nor length appears in the hypotheses.
+\end{itemize}
+
+\end{dlsummary}

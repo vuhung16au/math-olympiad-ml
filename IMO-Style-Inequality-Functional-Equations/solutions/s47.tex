@@ -1,0 +1,104 @@
+\addcontentsline{toc}{subsubsection}{Solution 47. The Three-Variable Quadratic Trap}
+
+\begin{dlsummary}[title={\bfseries Solution 47. The Three-Variable Quadratic Trap},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{f(x)=x^2\qquad(x\in\mathbb R).}
+\]
+
+\paragraph{1. Force evenness and exact doubling.}
+
+Condition (2) at \(x=0\), together with nonnegativity, gives \(f(0)=0\).
+
+In (1), substitute \((x,y,z)=(t,t,-t)\):
+\[
+f(2t)\le3f(t)+f(-t).
+\]
+Combining this with (2) gives \(f(t)\le f(-t)\). Replacing \(t\) by \(-t\) proves
+\[
+f(-t)=f(t).
+\]
+The same inequalities now yield
+\[
+\boxed{f(2t)=4f(t).} \tag{3}
+\]
+
+\paragraph{2. Make the inequality reverse itself.}
+
+Substitute \(z=-y\) in (1). Evenness gives
+\[
+f(x+y)+f(x-y)\le2f(x)+2f(y). \tag{4}
+\]
+
+Now apply (4) to \(x+y\) and \(x-y\):
+\[
+f(2x)+f(2y)\le2f(x+y)+2f(x-y).
+\]
+Using (3), this is the reverse of (4). Consequently,
+\[
+\boxed{f(x+y)+f(x-y)=2f(x)+2f(y).} \tag{5}
+\]
+
+\paragraph{3. Determine a dense set of values.}
+
+Taking \(y=1\) in (5),
+\[
+f(n+1)+f(n-1)=2f(n)+2.
+\]
+Starting from \(f(0)=0\) and \(f(1)=1\), induction gives
+\[
+f(n)=n^2\qquad(n\in\mathbb Z).
+\]
+Exact doubling then gives
+\[
+f\!\left(\frac{m}{2^k}\right)=\left(\frac{m}{2^k}\right)^2
+\]
+for every integer \(m\) and nonnegative integer \(k\).
+
+\paragraph{4. Derive continuity instead of assuming it.}
+
+Equations (3) and (5) imply midpoint convexity:
+\[
+f\!\left(\frac{u+v}{2}\right)
+\le\frac{f(u)+f(v)}2.
+\]
+Iterating this gives the corresponding inequality for dyadic weights.
+
+Fix \(x\), and let \(N\) be a power of two. If \(|h|\le1/N\), then evenness and the assumed unit-interval bound give \(f(Nh)\le1\). By (5) and nonnegativity,
+\[
+f(x+Nh)\le2f(x)+2f(Nh)\le2f(x)+2.
+\]
+Using the dyadic weight \(1/N\),
+\[
+f(x+h)\le
+\left(1-\frac1N\right)f(x)+\frac1N f(x+Nh)
+\le f(x)+\frac{f(x)+2}{N}.
+\]
+The same upper bound holds for \(f(x-h)\). Since midpoint convexity gives
+\[
+2f(x)\le f(x+h)+f(x-h),
+\]
+we obtain
+\[
+|f(x+h)-f(x)|\le\frac{f(x)+2}{N}.
+\]
+Thus \(f\) is continuous everywhere.
+
+Approximating any real number by dyadic rationals now proves \(f(x)=x^2\).
+
+\paragraph{5. Verify.}
+
+For \(f(x)=x^2\), expansion shows that (1) holds with equality. All other conditions are immediate.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Exploit sign changes:** The substitution \((t,t,-t)\) creates evenness from a one-sided inequality.
+\item **Change coordinates:** Replacing \((x,y)\) by \((x+y,x-y)\) reverses the parallelogram inequality.
+\item **Local bounds can replace continuity:** A bound on one interval, combined with the functional structure, controls the function everywhere.
+\item **Do not stop at rational values:** Extending a classification to all real inputs requires a justified regularity argument.
+\end{itemize}
+
+\end{dlsummary}

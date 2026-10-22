@@ -1,0 +1,123 @@
+\addcontentsline{toc}{subsubsection}{Solution 53. When Even Numbers Become Smaller}
+
+\begin{dlsummary}[title={\bfseries Solution 53. When Even Numbers Become Smaller},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{
+f(0)=0,\qquad
+f\!\left(2^k\frac ab\right)=2^{-k},
+}
+\]
+where \(k\in\mathbb Z\), and \(a,b\) are odd integers with \(b>0\).
+
+In other words, only the exponent of \(2\) in a nonzero rational number matters.
+
+\paragraph{1. Establish the basic identities.}
+
+Since
+\[
+f(2)=f(2)f(1)>0,
+\]
+we have \(f(1)=1\). Consequently, for \(x\ne0\),
+\[
+f(x)f(1/x)=1,
+\]
+so \(f(x)>0\) and
+\[
+f(1/x)=\frac1{f(x)}.
+\]
+Also, \(f(-1)^2=f(1)=1\), so nonnegativity gives \(f(-1)=1\). Thus
+\[
+f(-x)=f(x).
+\]
+
+\paragraph{2. Use binary expansions to bound all integers.}
+
+Write a positive integer \(n\) in binary:
+\[
+n=\varepsilon_0+\varepsilon_1 2+\cdots+\varepsilon_s2^s,
+\qquad \varepsilon_j\in\{0,1\}.
+\]
+Repeated subadditivity gives
+\[
+f(n)\le\sum_{j=0}^s\varepsilon_j f(2^j)
+=\sum_{j=0}^s\varepsilon_j2^{-j}<2.
+\]
+Therefore
+\[
+\boxed{f(n)<2\qquad(n\in\mathbb Z_{>0}).} \tag{1}
+\]
+
+\paragraph{3. Sharpen the bound by taking powers.}
+
+Apply (1) to \(n^r\). Multiplicativity yields
+\[
+f(n)^r=f(n^r)<2
+\]
+for every positive integer \(r\).
+
+If \(f(n)>1\), its powers would eventually exceed \(2\). Hence
+\[
+\boxed{f(n)\le1\qquad(n\in\mathbb Z_{>0}).} \tag{2}
+\]
+
+\paragraph{4. Determine the values at odd integers.}
+
+Let \(n\) be a positive odd integer. For every positive integer \(r\),
+\[
+j=\frac{n^r-1}{2}
+\]
+is a nonnegative integer. Since \(1=n^r-2j\), subadditivity, evenness, and (2) imply
+\[
+1=f(1)\le f(n^r)+f(2j)
+=f(n)^r+\frac12f(j)
+\le f(n)^r+\frac12.
+\]
+Thus
+\[
+f(n)^r\ge\frac12
+\]
+for every \(r\). If \(f(n)<1\), its powers would tend to zero. Together with (2), this proves
+\[
+\boxed{f(n)=1\qquad(n\text{ odd}).}
+\]
+
+\paragraph{5. Determine all rational values and verify.}
+
+Every nonzero rational has a unique representation
+\[
+x=2^k\frac ab
+\]
+with \(a,b\) odd and \(b>0\). Multiplicativity now forces
+\[
+f(x)=f(2)^k\frac{f(a)}{f(b)}=2^{-k}.
+\]
+
+Conversely, define \(f\) by this formula. Multiplication adds the exponents of \(2\), so multiplicativity holds.
+
+For nonzero \(x,y\), write
+\[
+x=2^k u,\qquad y=2^\ell v,\qquad k\le\ell,
+\]
+where \(u,v\) have odd numerators and denominators. Then
+\[
+x+y=2^k\bigl(u+2^{\ell-k}v\bigr).
+\]
+Unless the sum is zero, the expression in parentheses has a nonnegative exponent of \(2\). Therefore
+\[
+f(x+y)\le2^{-k}=\max\{f(x),f(y)\}\le f(x)+f(y).
+\]
+Zero cases are immediate, completing the verification.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **A small value at \(2\) makes binary expansions powerful:** They produce a uniform bound independent of the integer.
+\item **Powers sharpen uniform bounds:** From \(f(n^r)<2\), multiplicativity forces \(f(n)\le1\).
+\item **Parity supplies the reverse bound:** The identity \(n^r-2j=1\) prevents odd integers from having values below \(1\).
+\item **Stronger inequalities can emerge:** The solution satisfies the maximum bound \(f(x+y)\le\max\{f(x),f(y)\}\), although only a sum bound was assumed.
+\end{itemize}
+
+\end{dlsummary}

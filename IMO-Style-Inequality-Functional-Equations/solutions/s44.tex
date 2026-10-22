@@ -1,0 +1,100 @@
+\addcontentsline{toc}{subsubsection}{Solution 44. The Hidden Golden Exponent}
+
+\begin{dlsummary}[title={\bfseries Solution 44. The Hidden Golden Exponent},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{
+f(x)=x^\varphi,\qquad
+\varphi=\frac{1+\sqrt5}{2}.
+}
+\]
+
+\paragraph{1. Extract superadditivity.}
+
+Multiplicativity and positivity give \(f(1)=1\). The inequality with \(y=1\) becomes
+\[
+f(x+1)\ge f(x)+1.
+\]
+For \(u,v>0\), substitute \(x=u/v\), then multiply by \(f(v)\). Multiplicativity yields
+\[
+\boxed{f(u+v)\ge f(u)+f(v).} \tag{1}
+\]
+In particular, \(f\) is strictly increasing: if \(b>a>0\), then
+\[
+f(b)\ge f(a)+f(b-a)>f(a).
+\]
+
+\paragraph{2. Show that \(f\) is a power function.}
+
+Let
+\[
+p=\frac{\log f(2)}{\log2}.
+\]
+Since \(f(2)\ge2\), we have \(p\ge1\).
+
+Multiplicativity gives, for every rational \(r\),
+\[
+f(2^r)=f(2)^r=2^{pr}.
+\]
+For any \(t>0\), choose rational numbers \(r_n,s_n\) such that
+\[
+r_n<\log_2t<s_n,
+\qquad r_n,s_n\longrightarrow\log_2t.
+\]
+Monotonicity implies
+\[
+2^{pr_n}\le f(t)\le2^{ps_n}.
+\]
+Thus
+\[
+\boxed{f(t)=t^p\qquad(t>0).} \tag{2}
+\]
+This establishes continuity as a consequence, rather than assuming it.
+
+\paragraph{3. Pin down the exponent.}
+
+Substituting (2) into the original inequality gives
+\[
+(x+y^p)^p\ge x^p+y^{p+1}.
+\]
+For fixed \(y>0\), let \(x\to0^+\). We obtain
+\[
+y^{p^2}\ge y^{p+1}\qquad(y>0).
+\]
+Choosing \(y>1\) gives \(p^2\ge p+1\), while choosing \(0<y<1\) gives the reverse inequality. Hence
+\[
+p^2=p+1.
+\]
+Since \(p\ge1\),
+\[
+p=\varphi=\frac{1+\sqrt5}{2}.
+\]
+
+\paragraph{4. Verify the solution.}
+
+Multiplicativity is immediate. For any \(a,b>0\) and \(p\ge1\),
+\[
+(a+b)^p
+=a(a+b)^{p-1}+b(a+b)^{p-1}
+\ge a^p+b^p.
+\]
+Taking \(a=x\), \(b=y^\varphi\), and using \(\varphi^2=\varphi+1\), we get
+\[
+(x+y^\varphi)^\varphi
+\ge x^\varphi+y^{\varphi^2}
+=x^\varphi+y^{\varphi+1},
+\]
+exactly the required inequality.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **A unit shift can control arbitrary sums:** Multiplicativity converts \(f(x+1)\ge f(x)+1\) into superadditivity.
+\item **Positivity supplies regularity:** Superadditivity forces monotonicity, eliminating nonstandard multiplicative functions.
+\item **Use both sides of \(1\):** A power comparison valid for every positive input often forces equality of exponents.
+\item **Composition multiplies exponents:** The competition between \(f(f(y))\) and \(y f(y)\) produces \(p^2=p+1\).
+\end{itemize}
+
+\end{dlsummary}

@@ -1,0 +1,113 @@
+\addcontentsline{toc}{subsubsection}{Solution 49. The Prime-Pairing Machine}
+
+\begin{dlsummary}[title={\bfseries Solution 49. The Prime-Pairing Machine},breakable]
+
+\begin{proof}
+\textbf{The solutions:} Partition the set of all primes into pairs. Within each pair, designate one prime \(p\) and the other \(q\), and set
+\[
+\boxed{f(p)=q,\qquad f(q)=p^2.}
+\]
+Extend these assignments multiplicatively to all positive rationals. Every solution arises this way.
+
+\paragraph{1. Remove the inequality.}
+
+Positivity and multiplicativity give
+\[
+f(1)=1,\qquad f(1/x)=\frac1{f(x)}.
+\]
+Applying the composition inequality to \(1/x\),
+\[
+\frac1{f(f(x))}\ge\frac1{x^2}.
+\]
+Together with the original inequality, this proves
+\[
+\boxed{f(f(x))=x^2\qquad(x>0).} \tag{1}
+\]
+
+\paragraph{2. Show that primes map to prime powers.}
+
+Let \(p\) be prime. Since \(f(p)\) is an integer and
+\[
+f(f(p))=p^2>1,
+\]
+we have \(f(p)>1\).
+
+Choose a prime divisor \(q\) of \(f(p)\). Factoring \(f(p)\) into primes and applying \(f\), all factors are positive integers and their product is \(p^2\). Also, \(f(q)>1\), by the same reasoning as above. Thus
+\[
+f(q)=p^b
+\]
+for some positive integer \(b\).
+
+Apply \(f\) once more:
+\[
+q^2=f(f(q))=f(p)^b.
+\]
+Unique prime factorisation forces
+\[
+\boxed{f(p)=q^a}
+\]
+for a positive integer \(a\). In particular, \(f(p)\) has only one prime divisor.
+
+\paragraph{3. Identify the allowed pairs.}
+
+Now
+\[
+p^2=f(f(p))=f(q)^a=p^{ab},
+\]
+so
+\[
+ab=2.
+\]
+Therefore
+\[
+(a,b)=(1,2)\quad\text{or}\quad(2,1).
+\]
+
+Moreover, \(q\ne p\): otherwise \(f(p)=p^a\) would give \(a^2=2\), impossible for an integer \(a\).
+
+Thus every prime belongs to a two-prime pair, with assignments
+\[
+f(p)=q,\qquad f(q)=p^2
+\]
+after choosing the orientation. These pairs are disjoint because the prime associated with any given prime is uniquely determined.
+
+\paragraph{4. Construct and verify every solution.}
+
+Choose any partition of the primes into oriented pairs, make the assignments above, and define
+\[
+f\!\left(\prod_r r^{e_r}\right)=\prod_r f(r)^{e_r},
+\]
+where the exponents \(e_r\) are integers and only finitely many are nonzero.
+
+This is well-defined and multiplicative. It sends positive integers to positive integers, and on every prime,
+\[
+f(f(r))=r^2.
+\]
+Multiplicativity therefore gives \(f(f(x))=x^2\) for every positive rational \(x\), verifying all conditions.
+
+\paragraph{Example.}
+
+Pair consecutive primes and orient them as
+\[
+(2,3),\ (5,7),\ (11,13),\ldots.
+\]
+Then
+\[
+f(2)=3,\quad f(3)=4,\quad f(5)=7,\quad f(7)=25,
+\]
+so, for instance,
+\[
+f(6)=12,\qquad f(12)=36.
+\]
+This construction also passed direct composition checks on the integers from 1 through 100.[1]
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Reciprocals can force exactness:** A global multiplicative inequality may secretly be an equation.
+\item **Integrality controls factorisation:** Integer-valued images prevent unwanted prime factors from cancelling.
+\item **Follow a prime through two iterations:** The return to \(p^2\) restricts both the prime support and the exponents.
+\item **Classification need not mean uniqueness:** A complete answer can be a structural recipe for infinitely many functions.
+\end{itemize}
+
+\end{dlsummary}

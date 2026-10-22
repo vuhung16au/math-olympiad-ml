@@ -1,0 +1,112 @@
+\addcontentsline{toc}{subsubsection}{Solution 58. The Four-Step Prime Labyrinth}
+
+\begin{dlsummary}[title={\bfseries Solution 58. The Four-Step Prime Labyrinth},breakable]
+
+\begin{proof}
+Write \(f^{\circ j}\) for \(j\) successive applications of \(f\).
+
+\paragraph{1. Force equality by taking reciprocals.}
+
+Positivity and multiplicativity give
+\[
+f(1)=1,\qquad f(1/x)=\frac1{f(x)}.
+\]
+The same reciprocal identity holds for every iterate. Applying the given inequality at \(1/x\) therefore gives the reverse bound, so
+\[
+\boxed{f^{\circ4}(x)=x^4.} \tag{1}
+\]
+
+For every prime \(p\), we must have \(f(p)>1\); otherwise all subsequent iterates would equal \(1\), contradicting (1).
+
+Also, multiplicativity and integer preservation imply
+\[
+a\mid b\quad\Longrightarrow\quad f(a)\mid f(b)
+\]
+for positive integers \(a,b\).
+
+\paragraph{2. Prove that each prime maps to a prime power.}
+
+Fix a prime \(p\). Choose primes successively so that
+\[
+q\mid f(p),\qquad r\mid f(q),\qquad s\mid f(r).
+\]
+These choices are possible because the image of every prime exceeds \(1\).
+
+By repeated divisibility,
+\[
+f(s)\mid f^{\circ4}(p)=p^4.
+\]
+Since \(f(s)>1\), we have \(p\mid f(s)\). Thus we have a closed divisibility chain:
+\[
+p\longrightarrow q\longrightarrow r\longrightarrow s\longrightarrow p,
+\]
+where an arrow \(u\longrightarrow v\) means \(v\mid f(u)\).
+
+Now let \(q'\) be \textbf{any} prime divisor of \(f(p)\). Restarting at \(q\), we obtain
+\[
+q\longrightarrow r\longrightarrow s\longrightarrow p\longrightarrow q'.
+\]
+Hence
+\[
+q'\mid f^{\circ4}(q)=q^4,
+\]
+so \(q'=q\).
+
+Therefore \(f(p)\) has only one prime divisor:
+\[
+\boxed{f(p)=\sigma(p)^{a_p},}
+\]
+where \(\sigma(p)\) is prime and \(a_p\) is a positive integer.
+
+\paragraph{3. Classify the prime cycles.}
+
+Applying \(f\) four times,
+\[
+f^{\circ4}(p)
+=
+\sigma^4(p)^{
+a_p a_{\sigma(p)}a_{\sigma^2(p)}a_{\sigma^3(p)}
+}.
+\]
+Comparing with \(p^4\),
+\[
+\boxed{
+\sigma^4(p)=p,\qquad
+a_p a_{\sigma(p)}a_{\sigma^2(p)}a_{\sigma^3(p)}=4.
+} \tag{2}
+\]
+
+Thus \(\sigma\) is a permutation whose cycles have lengths \(1,2,\) or \(4\).
+
+\begin{itemize}
+\item **Length \(1\) is impossible:** It would require \(a_p^4=4\).
+\item **Length \(2\):** If \(p\leftrightarrow q\), then \((a_pa_q)^2=4\), so \(a_pa_q=2\).
+\item **Length \(4\):** The four exponents must have product \(4\).
+\end{itemize}
+
+\paragraph{Complete classification.}
+
+Partition the primes into disjoint directed cycles of the following types:
+
+| Cycle | Assignments |
+|---|---|
+| Two primes \(p,q\) | \(f(p)=q,\quad f(q)=p^2\), after choosing an orientation |
+| Four primes \(p_1,p_2,p_3,p_4\) | \(f(p_i)=p_{i+1}^{a_i}\), with indices taken cyclically and \(a_1a_2a_3a_4=4\) |
+
+For a four-cycle, the exponent pattern consists either of \textbf{one \(4\) and three \(1\)s}, or \textbf{two \(2\)s and two \(1\)s}, in any cyclic arrangement.
+
+Extend these prime assignments multiplicatively:
+\[
+f\!\left(\prod_p p^{e_p}\right)
+=\prod_p f(p)^{e_p},
+\qquad e_p\in\mathbb Z.
+\]
+These are exactly all solutions.
+
+\textbf{Verification.} The construction preserves positive integers and is multiplicative. On a two-cycle, four iterations produce exponent \((1\cdot2)^2=4\); on a four-cycle, they produce exponent \(a_1a_2a_3a_4=4\). Therefore \(f^{\circ4}(x)=x^4\) for every positive rational \(x\).
+\end{proof}
+
+\paragraph{Takeaways.}
+\emph{No takeaways were provided in the source draft.}
+
+\end{dlsummary}

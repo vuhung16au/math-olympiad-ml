@@ -1,0 +1,107 @@
+\addcontentsline{toc}{subsubsection}{Solution 57. The Hidden Interval}
+
+\begin{dlsummary}[title={\bfseries Solution 57. The Hidden Interval},breakable]
+
+\begin{proof}
+The solutions are precisely the functions that \textbf{move each real number to the nearest point of a nonempty closed interval}, allowing unbounded intervals and single points.
+
+Explicitly:
+
+| Fixed-point interval | Function |
+|---|---|
+| \([a,b]\), where \(a\le b\) | \(\displaystyle f(x)=\begin{cases}a,&x<a,\\x,&a\le x\le b,\\b,&x>b;\end{cases}\) |
+| \([a,\infty)\) | \(f(x)=\max\{x,a\}\) |
+| \((-\infty,b]\) | \(f(x)=\min\{x,b\}\) |
+| \(\mathbb R\) | \(f(x)=x\) |
+
+The case \(a=b\) includes every constant function.
+
+\paragraph{1. Extract order and continuity.}
+
+For \(x>y\), put \(d=f(x)-f(y)\). Condition (1) says
+\[
+d^2\le(x-y)d.
+\]
+Equivalently,
+\[
+d\bigl(d-(x-y)\bigr)\le0,
+\]
+so
+\[
+\boxed{0\le f(x)-f(y)\le x-y.} \tag{3}
+\]
+Thus \(f\) is nondecreasing and
+\[
+|f(x)-f(y)|\le|x-y|.
+\]
+In particular, \(f\) is continuous.
+
+\paragraph{2. Collapse the threefold iteration.}
+
+Fix \(x\), and write
+\[
+u=f(x),\qquad v=f(u).
+\]
+By (2),
+\[
+f(v)=u.
+\]
+
+If \(u<v\), monotonicity gives
+\[
+v=f(u)\le f(v)=u,
+\]
+a contradiction. If \(u>v\), the same argument gives the opposite contradiction. Hence \(u=v\).
+
+Therefore
+\[
+\boxed{f(f(x))=f(x).} \tag{4}
+\]
+
+\paragraph{3. Identify the fixed-point set.}
+
+Let
+\[
+C=\{t\in\mathbb R:f(t)=t\}.
+\]
+Equation (4) shows that every function value belongs to \(C\), so \(C\) is nonempty and equals the image of \(f\). Continuity makes \(C\) closed.
+
+Suppose \(a,b\in C\) and \(a<t<b\). Applying (3) between \(a,t\),
+\[
+f(t)-a\le t-a,
+\]
+so \(f(t)\le t\). Applying it between \(t,b\),
+\[
+b-f(t)\le b-t,
+\]
+so \(f(t)\ge t\).
+
+Thus \(f(t)=t\). Consequently, \(C\) is an interval.
+
+\paragraph{4. Determine the function outside the interval.}
+
+If \(C\) has a finite lower endpoint \(a\), then \(a\in C\). For \(x<a\), monotonicity gives \(f(x)\le f(a)=a\), while \(f(x)\in C\) gives \(f(x)\ge a\). Hence
+\[
+f(x)=a.
+\]
+
+Similarly, above a finite upper endpoint \(b\), we have \(f(x)=b\). On \(C\), the function is the identity. This gives exactly the listed formulas.
+
+\paragraph{5. Verify.}
+
+Each listed function is nondecreasing and satisfies
+\[
+0\le f(x)-f(y)\le x-y\qquad(x>y),
+\]
+which implies (1). Its values lie in an interval that it fixes pointwise, so \(f(f(x))=f(x)\), proving (2).
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Factor a quadratic inequality:** It can simultaneously reveal monotonicity and a distance bound.
+\item **Order rules out nontrivial two-cycles:** This turns threefold iteration into idempotence.
+\item **Study the fixed-point set:** Its geometry can determine the entire function.
+\item **Expect piecewise answers:** A functional inequality need not force a polynomial or power function.
+\end{itemize}
+
+\end{dlsummary}

@@ -1,0 +1,110 @@
+\addcontentsline{toc}{subsubsection}{Solution 45. The Conjugate-Radical Lock}
+
+\begin{dlsummary}[title={\bfseries Solution 45. The Conjugate-Radical Lock},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{
+f(x)=\frac{(2+\sqrt3)^x+(2-\sqrt3)^x}{2}
+\qquad(x\ge0).
+}
+\]
+
+\paragraph{1. Remove the radicals.}
+
+For \(t\ge1\), define
+\[
+H(t)=t+\sqrt{t^2-1}.
+\]
+This function is strictly increasing, and
+\[
+H(t)^{-1}=t-\sqrt{t^2-1}.
+\]
+
+For \(a,b\ge1\), direct expansion gives
+\[
+H\!\left(ab+\sqrt{a^2-1}\sqrt{b^2-1}\right)=H(a)H(b).
+\tag{3}
+\]
+Also,
+\[
+H(2a^2-1)=H(a)^2. \tag{4}
+\]
+
+Set
+\[
+g(x)=\log H(f(x)).
+\]
+Then \(g(x)\ge0\). Applying \(H\) and taking logarithms in (1) and (2), using (3) and (4), gives
+\[
+g(x+y)\ge g(x)+g(y),
+\qquad
+g(2x)\le2g(x).
+\]
+The first inequality with \(y=x\) supplies the reverse doubling bound. Therefore
+\[
+\boxed{g(2x)=2g(x).} \tag{5}
+\]
+
+\paragraph{2. Recover monotonicity and rational values.}
+
+Since \(g\) is nonnegative and superadditive, it is nondecreasing:
+\[
+b>a\ge0
+\implies
+g(b)\ge g(a)+g(b-a)\ge g(a).
+\]
+
+Write
+\[
+L=g(1)=\log(2+\sqrt3).
+\]
+Superadditivity gives \(g(n)\ge nL\) for every positive integer \(n\).
+
+Choose a power of two \(N>n\). By (5), \(g(N)=NL\), so
+\[
+NL=g(N)\ge g(n)+g(N-n)\ge g(n)+(N-n)L.
+\]
+Thus \(g(n)\le nL\), proving
+\[
+g(n)=nL.
+\]
+Repeated doubling now yields
+\[
+g\!\left(\frac{m}{2^k}\right)=\frac{m}{2^k}L
+\]
+for all nonnegative integers \(m,k\).
+
+\paragraph{3. Squeeze arbitrary real inputs.}
+
+Every nonnegative real number can be approached from below and above by numbers of the form \(m/2^k\). Monotonicity therefore forces
+\[
+g(x)=Lx\qquad(x\ge0).
+\]
+
+Hence \(H(f(x))=(2+\sqrt3)^x\). Using the reciprocal identity for \(H\),
+\[
+2f(x)=H(f(x))+H(f(x))^{-1},
+\]
+which gives the claimed formula.
+
+\paragraph{4. Verify.}
+
+Put \(A=2+\sqrt3\), so \(A^{-1}=2-\sqrt3\). For the proposed function,
+\[
+\sqrt{f(x)^2-1}=\frac{A^x-A^{-x}}2
+\qquad(x\ge0).
+\]
+Expansion shows that (1) holds with equality, as does (2). The domain, range, and normalisation are also satisfied.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Use conjugate radicals:** The expressions \(t+\sqrt{t^2-1}\) and \(t-\sqrt{t^2-1}\) are reciprocals.
+\item **Linearise before estimating:** A transformation can turn a radical addition rule into superadditivity.
+\item **Exact doubling is powerful:** Together with nonnegativity and superadditivity, it determines values first on integers, then on dyadic rationals.
+\item **Derive regularity:** Monotonicity justifies the final squeeze; continuity need not be assumed.
+\end{itemize}
+
+\end{dlsummary}

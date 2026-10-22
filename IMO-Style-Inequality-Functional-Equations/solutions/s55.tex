@@ -1,0 +1,109 @@
+\addcontentsline{toc}{subsubsection}{Solution 55. The Reversible Difference}
+
+\begin{dlsummary}[title={\bfseries Solution 55. The Reversible Difference},breakable]
+
+\begin{proof}
+The only solutions are
+\[
+\boxed{
+f(n)=n^2
+\quad\text{and}\quad
+f(n)=\frac{n(n+1)}2
+\qquad(n\in\mathbb Z).
+}
+\]
+
+\paragraph{1. Reverse the step to force equality.}
+
+Replace \(m\) by \(m+3n\) and \(n\) by \(-n\). The given inequality becomes
+\[
+f(m)+3f(m+2n)
+\ge3f(m+n)+f(m+3n),
+\]
+which is precisely the reverse inequality.
+
+Therefore
+\[
+\boxed{
+f(m+3n)-3f(m+2n)+3f(m+n)-f(m)=0.
+} \tag{1}
+\]
+
+\paragraph{2. Recover a quadratic formula.}
+
+Take \(n=1\) in (1), and define
+\[
+d_m=f(m+2)-2f(m+1)+f(m).
+\]
+Equation (1) says
+\[
+d_{m+1}=d_m.
+\]
+Thus all second differences equal a fixed integer \(k\).
+
+Using \(f(0)=0\) and \(f(1)=1\), the resulting recurrence gives
+\[
+\boxed{
+f(n)=n+k\frac{n(n-1)}2
+\qquad(n\in\mathbb Z).
+} \tag{2}
+\]
+For completeness, the right-hand side has the same second differences and initial values as \(f\); the recurrence determines values both forwards and backwards.
+
+\paragraph{3. Use nonnegativity to restrict \(k\).}
+
+At \(n=-1\), formula (2) gives
+\[
+f(-1)=k-1.
+\]
+Since \(f(-1)\ge0\),
+\[
+\boxed{k\ge1.}
+\]
+
+\paragraph{4. Use the composition bound to finish.}
+
+We have
+\[
+f(2)=k+2,
+\]
+and hence
+\[
+f(f(2))
+=k+2+\frac{k(k+1)(k+2)}2.
+\]
+If \(k\ge3\), then
+\[
+f(f(2))\ge5+\frac{3\cdot4\cdot5}{2}=35>16,
+\]
+a contradiction. Consequently,
+\[
+k\in\{1,2\}.
+\]
+
+Substituting these values into (2) gives
+\[
+k=1:\quad f(n)=\frac{n(n+1)}2,
+\qquad
+k=2:\quad f(n)=n^2.
+\]
+
+\paragraph{5. Verify both solutions.}
+
+Both formulas give nonnegative integers for every integer \(n\), with the required values at \(0\) and \(1\). Every quadratic satisfies (1), so the original inequality holds with equality.
+
+Finally,
+\[
+f(f(2))=
+\begin{cases}
+6,&f(n)=n(n+1)/2,\\
+16,&f(n)=n^2.
+\end{cases}
+\]
+Both satisfy the composition bound.
+\end{proof}
+
+\paragraph{Takeaways.}
+\emph{No takeaways were provided in the source draft.}
+
+\end{dlsummary}

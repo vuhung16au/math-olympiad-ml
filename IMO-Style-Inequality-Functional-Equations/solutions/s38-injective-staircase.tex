@@ -1,0 +1,43 @@
+\addcontentsline{toc}{subsubsection}{Solution 38. The Injective Staircase}
+
+\begin{dlsummary}[title={\bfseries Solution 38. The Injective Staircase},breakable]
+
+\begin{proof}
+The only solution is \(f(n)=n\). It satisfies the inequality with equality: \(m+n\le n+(m+1)-1\).
+
+\paragraph{1. Show \(f(1)=1\).} Put \(n=1\) and \(c=f(1)\). Then
+\[
+f(m+c)\le f(m+1)\quad\text{for all } m\ge1.
+\]
+Suppose \(c\ge2\). Fix \(j\ge2\) and apply the bound repeatedly. This gives
+\[
+f\bigl(j+t(c-1)\bigr)\le f(j)\quad\text{for all } t\ge0.
+\]
+So infinitely many distinct inputs would map into the finite set \(\{1,\dots,f(j)\}\). This contradicts injectivity, so \(c=1\).
+
+\paragraph{2. Show \(f(2)=2\).} Let \(k=f(2)\). Since \(f(1)=1\) and \(f\) is injective, \(k\ge2\). Put \(n=2\):
+\[
+f(m+k)\le f(m+1)+1.
+\]
+Writing \(j=m+1\ge2\), this reads
+\[
+f\bigl(j+(k-1)\bigr)\le f(j)+1.
+\]
+Suppose \(k\ge3\). Every \(n\ge2\) can be written as \(n=j+t(k-1)\) with \(j\in\{2,\dots,k\}\) and \(t\le\frac{n}{k-1}\). Let \(M=\max_{2\le j\le k}f(j)\). Then
+\[
+f(n)\le M+\frac{n}{k-1}\le M+\frac n2 .
+\]
+Now consider \(f(1),\dots,f(N)\). These are \(N\) distinct positive integers, all at most \(M+\frac N2\). Hence \(N\le M+\frac N2\), which fails for large \(N\). So \(k=2\).
+
+\paragraph{3. Conclude \(f(n)=n\).} With \(k=2\), the bound from Step 2 becomes \(f(j+1)\le f(j)+1\). Since \(f(1)=1\), induction gives \(f(n)\le n\) for all \(n\). An injective map of \(\{1,\dots,N\}\) into itself is a bijection. So \(f\) permutes \(\{1,\dots,N\}\) for every \(N\), and therefore \(f(n)=n\). \(\blacksquare\)
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Use \(n=1\) and \(n=2\) as probes:** Small values of \(n\) turn a two-variable inequality into one-step shift bounds.
+\item **Injectivity beats descent:** A rule like \(f(x+d)\le f(x)\) cannot continue forever on an injective map into the positive integers.
+\item **Counting is a quantitative injectivity argument:** Compare \(N\) distinct values with a linear upper bound.
+\item **Show the hypothesis is needed:** The constant function \(f\equiv1\) satisfies the inequality, so injectivity cannot be dropped.
+\end{itemize}
+
+\end{dlsummary}

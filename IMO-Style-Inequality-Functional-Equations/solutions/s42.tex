@@ -1,0 +1,83 @@
+\addcontentsline{toc}{subsubsection}{Solution 42. Bounded Errors, Exact Answer}
+
+\begin{dlsummary}[title={\bfseries Solution 42. Bounded Errors, Exact Answer},breakable]
+
+\begin{proof}
+The only solution is
+\[
+\boxed{f(x)=x\qquad(x\in\mathbb R).}
+\]
+
+\paragraph{1. Force unboundedness.}
+
+Repeatedly applying the additive inequality gives
+\[
+f(2n)\ge nf(2)-(n-1)
+=1+n\bigl(f(2)-1\bigr).
+\]
+Since \(f(2)>1\), these values tend to infinity.
+
+\paragraph{2. Eliminate the multiplicative error.}
+
+Write
+\[
+E(x,y)=f(xy)-f(x)f(y),\qquad |E(x,y)|\le1.
+\]
+Evaluating the same triple product in two ways yields
+\[
+E(x,y)f(t)
+=E(x,yt)-E(xy,t)+f(x)E(y,t).
+\]
+Consequently,
+\[
+|E(x,y)|\,|f(t)|\le2+|f(x)|.
+\]
+For fixed \(x,y\), the right-hand side is constant, while \(|f(t)|\) can be arbitrarily large. Therefore \(E(x,y)=0\), proving
+\[
+f(xy)=f(x)f(y). \tag{1}
+\]
+
+\paragraph{3. Eliminate the additive error.}
+
+Apply the additive inequality to \(tx,ty\). Using (1),
+\[
+|f(t)|\,|f(x+y)-f(x)-f(y)|\le1.
+\]
+Again, unboundedness forces
+\[
+f(x+y)=f(x)+f(y). \tag{2}
+\]
+
+\paragraph{4. Recover order, then the function.}
+
+Multiplicativity gives \(f(1)^2=f(1)\); since \(f\) is not identically zero, \(f(1)=1\). Additivity now gives
+\[
+f(q)=q\qquad(q\in\mathbb Q).
+\]
+
+For \(u>0\),
+\[
+f(u)=f(\sqrt u)^2>0,
+\]
+where strict positivity follows from
+\[
+f(\sqrt u)\,f(1/\sqrt u)=1.
+\]
+Thus, if \(b>a\), then
+\[
+f(b)-f(a)=f(b-a)>0.
+\]
+So \(f\) is strictly increasing. Comparing any real \(x\) with rational numbers immediately below and above it forces \(f(x)=x\).
+
+The identity function plainly satisfies both inequalities and \(f(2)>1\).
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Associativity can remove errors:** Comparing two expansions of a triple product makes a fixed discrepancy multiply an unbounded quantity.
+\item **Order can be a conclusion:** Squares establish positivity, and additivity turns positivity into monotonicity.
+\item **A threshold can matter:** The condition \(f(2)>1\) excludes \(f\equiv1\), which satisfies both error bounds.
+\item **Avoid assuming regularity:** The argument establishes every property it needs directly from the hypotheses.
+\end{itemize}
+
+\end{dlsummary}

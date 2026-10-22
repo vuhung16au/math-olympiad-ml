@@ -1,0 +1,110 @@
+\addcontentsline{toc}{subsubsection}{Solution 50. The Golden Staircase}
+
+\begin{dlsummary}[title={\bfseries Solution 50. The Golden Staircase},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{
+f(n)=\left\lfloor\varphi n\right\rfloor,
+\qquad
+\varphi=\frac{1+\sqrt5}{2}.
+}
+\]
+
+\paragraph{1. Prove that a limiting slope exists.}
+
+Repeated application of (1) gives
+\[
+m f(n)\le f(mn)\le m f(n)+m-1.
+\]
+Interchanging \(m,n\) and combining the bounds yields
+\[
+\frac{f(n)}n<\frac{f(m)}m+\frac1m,
+\qquad
+\frac{f(m)}m<\frac{f(n)}n+\frac1n.
+\]
+Thus the sequence \(f(n)/n\) is Cauchy. Write
+\[
+\alpha=\lim_{n\to\infty}\frac{f(n)}n.
+\]
+Also, superadditivity gives \(f(n)\ge n f(1)\ge n\), so \(\alpha\ge1\).
+
+For fixed \(n\), divide
+\[
+k f(n)\le f(kn)\le k f(n)+k-1
+\]
+by \(k\), and let \(k\to\infty\). We obtain
+\[
+\boxed{\alpha n-1\le f(n)\le\alpha n.} \tag{3}
+\]
+
+\paragraph{2. Use composition to determine the slope.}
+
+Divide (2) by \(n\):
+\[
+\left|
+\frac{f(f(n))}{n}-\frac{f(n)}n-1
+\right|\le\frac1n.
+\]
+Since \(f(n)\ge n\), its values tend to infinity, and hence
+\[
+\frac{f(f(n))}{n}
+=
+\frac{f(f(n))}{f(n)}\frac{f(n)}n
+\longrightarrow\alpha^2.
+\]
+Therefore
+\[
+\alpha^2=\alpha+1.
+\]
+As \(\alpha\ge1\), necessarily \(\alpha=\varphi\).
+
+\paragraph{3. Recover the exact integer values.}
+
+By (3),
+\[
+\varphi n-1\le f(n)\le\varphi n.
+\]
+Because \(\varphi n\) is irrational, this interval contains exactly one integer:
+\[
+f(n)=\lfloor\varphi n\rfloor.
+\]
+
+\paragraph{4. Verify the solution.}
+
+The elementary floor inequality
+\[
+\lfloor a\rfloor+\lfloor b\rfloor
+\le\lfloor a+b\rfloor
+\le\lfloor a\rfloor+\lfloor b\rfloor+1
+\]
+proves (1).
+
+For (2), write
+\[
+k=\lfloor\varphi n\rfloor,
+\qquad
+t=\varphi n-k\in(0,1).
+\]
+Using \(\varphi^2=\varphi+1\),
+\[
+\varphi k
+=n+k-(\varphi-1)t.
+\]
+Since \(0<(\varphi-1)t<1\),
+\[
+f(f(n))=\lfloor\varphi k\rfloor=n+k-1=n+f(n)-1.
+\]
+Thus (2) holds, with absolute difference exactly \(1\).
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Compare a common input:** Two estimates for \(f(mn)\) control the ratios \(f(n)/n\).
+\item **Bounded errors can reveal exact slopes:** The additive error disappears after normalisation.
+\item **Composition determines an algebraic number:** The limiting slope must satisfy \(\alpha^2=\alpha+1\).
+\item **Integrality finishes the classification:** A narrow interval identifies each function value exactly.
+\end{itemize}
+
+\end{dlsummary}

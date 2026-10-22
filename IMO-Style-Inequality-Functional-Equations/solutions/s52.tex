@@ -1,0 +1,111 @@
+\addcontentsline{toc}{subsubsection}{Solution 52. The Almost-Cosine Sequence}
+
+\begin{dlsummary}[title={\bfseries Solution 52. The Almost-Cosine Sequence},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{
+f(n)=\frac{(2+\sqrt3)^n+(2-\sqrt3)^n}{2}
+\qquad(n\in\mathbb Z).
+}
+\]
+
+\paragraph{1. Force growth.}
+
+Taking \(m=1,n=0\),
+\[
+|4-4f(0)|\le1.
+\]
+Since \(f(0)\) is an integer, \(f(0)=1\).
+
+Now take \(m=n\):
+\[
+f(2n)\ge2f(n)^2-2.
+\]
+Starting from \(f(1)=2\), this gives
+\[
+f(2)\ge6,\qquad f(4)\ge70,
+\]
+and repeated doubling proves that \(f\) is unbounded.
+
+\paragraph{2. Introduce the error.}
+
+Write
+\[
+E(a,b)=f(a+b)+f(a-b)-2f(a)f(b),
+\qquad |E(a,b)|\le1.
+\]
+
+Consider
+\[
+S=f(x+y+z)+f(x+y-z)+f(x-y+z)+f(x-y-z).
+\]
+
+Pairing terms with centres \(x+y\) and \(x-y\), we obtain
+\[
+S=
+4f(x)f(y)f(z)
++2f(z)E(x,y)
++E(x+y,z)+E(x-y,z).
+\]
+
+Pairing instead with centre \(x\) and offsets \(y+z\) and \(y-z\), we obtain
+\[
+S=
+4f(x)f(y)f(z)
++2f(x)E(y,z)
++E(x,y+z)+E(x,y-z).
+\]
+
+Subtracting these expressions gives
+\[
+2f(x)|E(y,z)|\le2f(z)+4.
+\]
+For fixed \(y,z\), the right side is constant, while \(f(x)\) is unbounded. Therefore
+\[
+E(y,z)=0.
+\]
+Thus the original inequality secretly forces
+\[
+\boxed{f(m+n)+f(m-n)=2f(m)f(n).} \tag{1}
+\]
+
+\paragraph{3. Recover the sequence.}
+
+Taking \(m=0\) in (1), using \(f(0)=1\), gives
+\[
+f(-n)=f(n).
+\]
+
+Taking \(n=1\), using \(f(1)=2\), gives
+\[
+f(m+1)=4f(m)-f(m-1).
+\]
+Consequently, \(f(0)=1\) and \(f(1)=2\) determine every value:
+\[
+1,\ 2,\ 7,\ 26,\ 97,\ 362,\ldots
+\]
+
+The roots of \(r^2-4r+1=0\) are \(2+\sqrt3\) and \(2-\sqrt3\). Solving the recurrence gives the stated formula.
+
+\paragraph{4. Verify.}
+
+Put \(A=2+\sqrt3\), so \(A^{-1}=2-\sqrt3\). Direct expansion shows that
+\[
+f(n)=\frac{A^n+A^{-n}}2
+\]
+satisfies (1), hence the original inequality with zero error.
+
+These values are positive, and the recurrence with integer initial values proves they are integers for nonnegative \(n\). Evenness handles negative \(n\).
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Find growth before controlling errors:** Unboundedness supplies the amplification needed to eliminate a fixed discrepancy.
+\item **Regroup a common expression:** The four-term sum links errors at different input pairs.
+\item **Separate rigidity from classification:** First establish the exact equation; only then solve its recurrence.
+\item **Irrational formulas can give integers:** A recurrence often explains integrality more clearly than a closed form.
+\end{itemize}
+
+\end{dlsummary}

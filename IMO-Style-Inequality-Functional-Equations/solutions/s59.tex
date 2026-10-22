@@ -1,0 +1,129 @@
+\addcontentsline{toc}{subsubsection}{Solution 59. The Hidden Product Rule}
+
+\begin{dlsummary}[title={\bfseries Solution 59. The Hidden Product Rule},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{f(x)=x\qquad(x\in\mathbb R).}
+\]
+
+\paragraph{1. Remove the expected solution.}
+
+Define
+\[
+g(x)=f(x)-x.
+\]
+The first two inequalities become
+\[
+g(x+y)\ge g(x)+g(y), \tag{1}
+\]
+\[
+g(xy)\ge xg(y)+yg(x). \tag{2}
+\]
+
+We first show that both are actually equalities.
+
+\paragraph{2. Establish the normalisation and oddness.}
+
+Putting \(y=0\) in (2),
+\[
+g(0)\ge xg(0)\qquad(x\in\mathbb R),
+\]
+which forces \(g(0)=0\).
+
+Putting \(x=1\) in (2),
+\[
+0\ge yg(1)\qquad(y\in\mathbb R),
+\]
+so \(g(1)=0\).
+
+Taking \(x=y=-1\) in (2) gives
+\[
+0\ge-2g(-1),
+\]
+so \(g(-1)\ge0\). But (1) at \((1,-1)\) gives \(g(-1)\le0\). Hence \(g(-1)=0\).
+
+Now (2) at \((-1,x)\) gives
+\[
+g(-x)\ge-g(x),
+\]
+while (1) at \((x,-x)\) gives the reverse inequality. Therefore
+\[
+\boxed{g(-x)=-g(x).} \tag{3}
+\]
+
+\paragraph{3. Force additivity and the product identity.}
+
+Apply (1) to \(-x,-y\), then use oddness:
+\[
+g(x+y)\le g(x)+g(y).
+\]
+Thus
+\[
+\boxed{g(x+y)=g(x)+g(y).} \tag{4}
+\]
+
+Similarly, applying (2) to \(-x,y\) reverses its direction. Hence
+\[
+\boxed{g(xy)=xg(y)+yg(x).} \tag{5}
+\]
+
+\paragraph{4. Interpret the composition inequality.}
+
+Since \(f(t)=t+g(t)\), additivity gives
+\[
+f(f(t))
+=f(t)+g(f(t))
+=t+2g(t)+g(g(t)).
+\]
+Consequently, the third original inequality becomes
+\[
+\boxed{g(g(t))\ge0\qquad(t\ge0).} \tag{6}
+\]
+
+Let \(h=g\circ g\). It is additive, and (6) makes it nondecreasing: if \(b>a\), then
+\[
+h(b)-h(a)=h(b-a)\ge0.
+\]
+Moreover,
+\[
+h(1)=g(g(1))=0.
+\]
+An additive, nondecreasing function with value \(0\) at \(1\) is identically zero: it vanishes on the rationals, and rational bounds squeeze its value at every real input. Thus
+\[
+\boxed{g(g(x))=0\qquad(x\in\mathbb R).} \tag{7}
+\]
+
+\paragraph{5. Apply the product identity twice.}
+
+From (5),
+\[
+g(x^2)=2xg(x).
+\]
+Apply \(g\) again. By additivity and (5),
+\[
+\begin{aligned}
+g(g(x^2))
+&=2g(xg(x))\\
+&=2xg(g(x))+2g(x)^2.
+\end{aligned}
+\]
+Both composite terms vanish by (7), leaving
+\[
+0=2g(x)^2.
+\]
+Hence \(g(x)=0\) everywhere, so \(f(x)=x\).
+
+The identity function satisfies all three inequalities with equality.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Subtract the expected model:** This exposes the algebraic structure hidden in the inequalities.
+\item **Negative inputs reverse information:** Oddness turns superadditivity and the product inequality into exact identities.
+\item **Regularise the composite first:** Positivity on nonnegative inputs makes \(g\circ g\) monotone, even though no regularity of \(g\) is assumed.
+\item **Apply a structural identity twice:** The final square \(g(x)^2\) eliminates every remaining possibility.
+\end{itemize}
+
+\end{dlsummary}

@@ -1,0 +1,128 @@
+\addcontentsline{toc}{subsubsection}{Solution 67. The Forbidden Coefficient}
+
+\begin{dlsummary}[title={\bfseries Solution 67. The Forbidden Coefficient},breakable]
+
+\begin{proof}
+The only solutions are
+\[
+\boxed{f(x)=x^3\quad\text{and}\quad f(x)=x^3+x.}
+\]
+
+\paragraph{1. Remove the cubic contribution.}
+
+Set
+\[
+g(x)=f(x)-x^3.
+\]
+The identity
+\[
+(x+y)^3-x^3-y^3=3xy(x+y)
+\]
+turns (1) into
+\[
+0\le g(x+y)-g(x)-g(y)\le(x-y)^2. \tag{4}
+\]
+
+Taking \(y=x\) gives
+\[
+g(2x)=2g(x).
+\]
+Now apply (4) at \(x/2^n,y/2^n\) and multiply by \(2^n\):
+\[
+0\le g(x+y)-g(x)-g(y)
+\le\frac{(x-y)^2}{2^n}.
+\]
+Letting \(n\to\infty\), we obtain
+\[
+\boxed{g(x+y)=g(x)+g(y).} \tag{5}
+\]
+
+\paragraph{2. Use positivity to eliminate irregular additive functions.}
+
+For \(0<t<1\), positivity of \(f\) gives
+\[
+g(t)=f(t)-t^3>-1.
+\]
+By additivity,
+\[
+g(t)=g(1)-g(1-t)<g(1)+1.
+\]
+Thus \(g\) is bounded in absolute value on \((0,1)\); write \(|g(t)|\le M\) there.
+
+For any positive integer \(N\), if \(0<h<1/N\), then
+\[
+N|g(h)|=|g(Nh)|\le M.
+\]
+Consequently, \(g(h)\to0\) as \(h\to0^+\). Additivity then gives continuity at every positive input.
+
+Writing \(c=g(1)\), additivity first gives \(g(q)=cq\) for positive rationals, and continuity extends this to every positive real number. Hence
+\[
+\boxed{f(x)=x^3+cx.} \tag{6}
+\]
+Positivity for arbitrarily small \(x>0\) forces \(c\ge0\).
+
+\paragraph{3. Discover the forbidden coefficient interval.}
+
+Substitution into (2) gives
+\[
+f(x)f(y)-f(xy)
+=cxy\bigl(c+x^2+y^2-1\bigr)\ge0.
+\]
+This factorisation was also checked symbolically.[1]
+
+If \(c>0\), division by \(cxy\) yields
+\[
+c+x^2+y^2\ge1.
+\]
+Taking arbitrarily small positive \(x,y\), we conclude \(c\ge1\). Therefore
+\[
+\boxed{c=0\quad\text{or}\quad c\ge1.} \tag{7}
+\]
+
+\paragraph{4. Apply the nested-value lock.}
+
+From (6),
+\[
+f(1)=1+c,
+\]
+so (3) becomes
+\[
+(1+c)^3+c(1+c)\le10.
+\]
+Equivalently,
+\[
+(c-1)(c^2+5c+9)\le0.
+\]
+Since \(c\ge0\), the second factor is positive, and thus \(c\le1\).
+
+Together with (7), this leaves exactly
+\[
+c=0\quad\text{or}\quad c=1.
+\]
+
+\paragraph{5. Verify.}
+
+For either candidate, the middle expression in (1) is zero.
+
+For \(f(x)=x^3\), condition (2) is equality and \(f(f(1))=1\).
+
+For \(f(x)=x^3+x\),
+\[
+f(x)f(y)-f(xy)=xy(x^2+y^2)>0,
+\]
+and
+\[
+f(f(1))=f(2)=10.
+\]
+Both functions satisfy every condition.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Subtract the polynomial suggested by the defect:** This exposes a nearly additive remainder.
+\item **Exploit competing scaling rates:** A quadratic error bound cannot survive exact linear scaling.
+\item **Use positivity locally:** It supplies the boundedness needed to rule out discontinuous additive behaviour.
+\item **Look for coefficient gaps:** Submultiplicativity excludes every \(c\in(0,1)\), rather than merely bounding \(c\).
+\end{itemize}
+
+\end{dlsummary}

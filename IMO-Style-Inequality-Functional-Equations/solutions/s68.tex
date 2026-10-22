@@ -1,0 +1,100 @@
+\addcontentsline{toc}{subsubsection}{Solution 68. The Conditioned Bilinear Sign Test}
+
+\begin{dlsummary}[title={\bfseries Solution 68. The Conditioned Bilinear Sign Test},breakable]
+
+\begin{proof}
+We claim that all solutions are
+\[
+\boxed{
+f(x)=
+\begin{cases}
+x^p,&x>0,\\
+0,&x=0,\\
+-(-x)^p,&x<0,
+\end{cases}
+\qquad p\geq0.}
+\]
+
+\medskip
+\noindent\textbf{1. Boundary identities.}
+If $ab+cd=0$, both conditions apply, so
+\[
+f(a)f(b)+f(c)f(d)=0. \tag{1}
+\]
+Taking $(a,b,c,d)=(t,1,-t,1)$ gives
+\[
+f(t)+f(-t)=0,
+\]
+so $f$ is odd. Next, taking $(a,b,c,d)=(x,y,-xy,1)$ in (1) gives
+\[
+f(x)f(y)+f(-xy)=0.
+\]
+Using oddness, we obtain
+\[
+f(xy)=f(x)f(y)\qquad(x,y\in\mathbb R). \tag{2}
+\]
+
+\medskip
+\noindent\textbf{2. Positivity and monotonicity.}
+For $t>0$, (2) gives
+\[
+f(t)=f(\sqrt t)^2\geq0.
+\]
+Also, $f(t)f(1/t)=f(1)=1$, so in fact $f(t)>0$ for every $t>0$.
+If $s\geq t$, apply the first condition to $(a,b,c,d)=(s,1,-t,1)$:
+since $s-t\geq0$, it follows that
+\[
+f(s)-f(t)\geq0.
+\]
+Thus $f$ is nondecreasing on all of $\mathbb R$.
+
+\medskip
+\noindent\textbf{3. Classification on the positive half-line.}
+Define
+\[
+g(u)=\log f(e^u)\qquad(u\in\mathbb R).
+\]
+By (2), $g$ is additive, and since $f$ is nondecreasing, so is $g$.
+Put $p=g(1)$. Because $g(0)=0$ and $g$ is nondecreasing, $p\geq0$.
+
+For positive integers $n$, additivity gives $g(n)=np$; also
+$g(-n)=-np$, and $g(1)=g(n\cdot 1/n)=n g(1/n)$, so
+$g(1/n)=p/n$. Hence, for every rational $q=m/n$,
+\[
+g(q)=pq. \tag{3}
+\]
+Now let $u\in\mathbb R$. For rationals $q\leq u\leq r$, monotonicity and (3) give
+\[
+pq=g(q)\leq g(u)\leq g(r)=pr.
+\]
+Choose rational $q$ and $r$ tending to $u$ from below and above. Since $p\geq0$,
+the two bounds tend to $pu$, and therefore $g(u)=pu$. Consequently,
+\[
+f(t)=t^p\qquad(t>0). \tag{4}
+\]
+Oddness and $f(0)=0$ determine the values for $t\leq0$.
+
+\medskip
+\noindent\textbf{4. Verification.}
+Each function in the displayed family is odd, multiplicative, and nondecreasing.
+For $u,v\in\mathbb R$,
+\[
+f(a)f(b)+f(c)f(d)=f(ab)+f(cd),
+\qquad u=ab,\ v=cd.
+\]
+If $u+v\geq0$, then $u\geq-v$, so monotonicity and oddness give
+\[
+f(u)\geq f(-v)=-f(v).
+\]
+Thus the sum is nonnegative. If $u+v\leq0$, the same comparison is reversed,
+and the sum is nonpositive. Hence every displayed function satisfies both conditions.
+\end{proof}
+
+\paragraph{Takeaways.}
+The boundary case of two opposite inequalities produces exact identities: one
+gives oddness and another gives multiplicativity. Positivity and a single ordered
+substitution then yield global monotonicity. Taking logarithms converts the
+positive multiplicative problem into a monotone additive one; the explicit
+rational calculation and squeeze rule out pathological additive functions.
+
+\end{dlsummary}

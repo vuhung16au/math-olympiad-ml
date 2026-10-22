@@ -1,0 +1,83 @@
+\addcontentsline{toc}{subsubsection}{Solution 43. The Moving Zero}
+
+\begin{dlsummary}[title={\bfseries Solution 43. The Moving Zero},breakable]
+
+\begin{proof}
+The only solution is
+\[
+\boxed{f(x)=x^2\qquad(x\in\mathbb R).}
+\]
+
+\paragraph{1. Find a zero—but do not assume it is \(0\).}
+
+Set
+\[
+a=f(0)\ge0.
+\]
+By (2) at \(x=0\),
+\[
+0\le f(a)=f(f(0))\le0,
+\]
+so \(f(a)=0\).
+
+\paragraph{2. Build a quadratic lower bound around that zero.}
+
+In (1), substitute
+\[
+x=\frac{t+a}{2},\qquad y=\frac{t-a}{2}.
+\]
+Since \(f(a)=0\),
+\[
+f(t)\ge 2f\!\left(\frac{t+a}{2}\right)+\frac{(t-a)^2}{2}.
+\]
+Repeating this midpoint substitution \(n\) times gives
+\[
+f(t)\ge
+2^n f\!\left(a+\frac{t-a}{2^n}\right)
++(1-2^{-n})(t-a)^2.
+\]
+Nonnegativity lets us discard the first term. Letting \(n\to\infty\), we obtain
+\[
+\boxed{f(t)\ge(t-a)^2\qquad(t\in\mathbb R).} \tag{3}
+\]
+No limit of function values is being taken, so continuity is unnecessary.
+
+\paragraph{3. Turn the lower bound into an upper bound.}
+
+Apply (3) at \(t=f(x)\), then use (2):
+\[
+(f(x)-a)^2\le f(f(x))\le x^4.
+\]
+Therefore
+\[
+|f(x)-a|\le x^2,
+\qquad\text{in particular}\qquad
+f(x)\le a+x^2. \tag{4}
+\]
+
+On the other hand, (1) at \(x=0\) gives
+\[
+f(y)+f(-y)\ge2a+2y^2.
+\]
+Each summand is at most \(a+y^2\) by (4). Both must therefore attain their upper bounds:
+\[
+f(y)=a+y^2\qquad(y\in\mathbb R).
+\]
+Since \(f(a)=0\),
+\[
+a+a^2=0.
+\]
+Together with \(a\ge0\), this forces \(a=0\). Hence \(f(x)=x^2\).
+
+Finally, \(f(x)=x^2\) satisfies both original conditions with equality.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Locate a zero before normalising:** The composition condition supplies a zero at \(f(0)\), not immediately at \(0\).
+\item **Iterate a midpoint inequality:** Repeated bisection produces a sharp bound without establishing continuity.
+\item **Feed bounds into compositions:** A lower bound for \(f(t)\) becomes an upper bound for \(f(x)\) through \(f(f(x))\).
+\item **Exploit equality of sums:** If two terms each have the same upper bound and their sum reaches the total bound, both are determined.
+\end{itemize}
+
+\end{dlsummary}

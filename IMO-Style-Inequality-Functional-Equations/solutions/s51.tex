@@ -1,0 +1,80 @@
+\addcontentsline{toc}{subsubsection}{Solution 51. The Logarithm Hidden in a Chain}
+
+\begin{dlsummary}[title={\bfseries Solution 51. The Logarithm Hidden in a Chain},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{f(x)=\log x\qquad(x>0),}
+\]
+where \(\log\) denotes the natural logarithm.
+
+\paragraph{1. Find the normalisation and a pointwise bound.}
+
+Setting \(x=y=1\), we get
+\[
+f(1)\le2f(1)\le0.
+\]
+Thus \(f(1)=0\).
+
+Now set \(y=1\) in the upper inequality:
+\[
+\boxed{f(x)\le x-1.} \tag{1}
+\]
+
+\paragraph{2. Improve the upper bound by taking roots.}
+
+Repeated application of the first inequality gives
+\[
+f(t^n)\le n f(t)
+\]
+for every positive integer \(n\).
+
+Taking \(t=x^{1/n}\) and using (1),
+\[
+f(x)\le n f(x^{1/n})
+\le n\bigl(x^{1/n}-1\bigr).
+\]
+The standard elementary limit
+\[
+\lim_{n\to\infty}n\bigl(x^{1/n}-1\bigr)=\log x
+\]
+therefore yields
+\[
+\boxed{f(x)\le\log x.} \tag{2}
+\]
+
+\paragraph{3. Use reciprocals to obtain the reverse bound.}
+
+The first inequality at \((x,1/x)\) gives
+\[
+0=f(1)\le f(x)+f(1/x).
+\]
+Applying (2) at \(1/x\),
+\[
+f(x)\ge-f(1/x)\ge-\log(1/x)=\log x.
+\]
+Together with (2), this proves \(f(x)=\log x\).
+
+\paragraph{4. Verify.}
+
+The logarithm satisfies
+\[
+\log(xy)=\log x+\log y,
+\]
+and the standard inequality \(\log t\le t-1\) gives
+\[
+\log x+\log y\le x+y-2.
+\]
+Thus it satisfies the entire chain.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Multiplicative subdivision sharpens bounds:** Replacing \(x\) by \(n\) identical factors improves \(f(x)\le x-1\) to the exact logarithmic bound.
+\item **Reciprocals reverse one-sided information:** An upper bound at \(1/x\) becomes a lower bound at \(x\).
+\item **Normalisation can be forced:** Neither \(f(1)=0\) nor a value at any other input needs to be supplied.
+\item **No continuity of \(f\) is needed:** The limit concerns an explicit numerical expression, not function values approaching an input.
+\end{itemize}
+
+\end{dlsummary}

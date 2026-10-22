@@ -1,0 +1,152 @@
+\addcontentsline{toc}{subsubsection}{Solution 60. The Squared-Logarithm Trap}
+
+\begin{dlsummary}[title={\bfseries Solution 60. The Squared-Logarithm Trap},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{
+f(x)=2^{(\log_2 x)^2}
+\qquad(x>0).
+}
+\]
+
+\paragraph{1. Translate multiplication into addition.}
+
+Define
+\[
+g(t)=\log_2 f(2^t)\qquad(t\in\mathbb R).
+\]
+The range and normalisations give
+\[
+g(t)\ge0,\qquad g(1)=1,\qquad
+g(t)\le t\quad(0\le t\le1).
+\tag{3}
+\]
+
+The two functional inequalities become
+\[
+g(u+v)+g(u-v)\le2g(u)+2g(v), \tag{4}
+\]
+and
+\[
+g(2u)\ge4g(u). \tag{5}
+\]
+
+\paragraph{2. Recover evenness and exact scaling.}
+
+At \(u=0\), (5) and nonnegativity force \(g(0)=0\).
+
+Taking \(u=0\) in (4),
+\[
+g(v)+g(-v)\le2g(v),
+\]
+so \(g(-v)\le g(v)\). Replacing \(v\) by \(-v\) proves
+\[
+g(-v)=g(v).
+\]
+
+Taking \(v=u\) in (4), then combining with (5), gives
+\[
+\boxed{g(2u)=4g(u).} \tag{6}
+\]
+
+\paragraph{3. Turn the inequality into the parallelogram equation.}
+
+Apply (4) to \(u+v,u-v\):
+\[
+g(2u)+g(2v)\le2g(u+v)+2g(u-v).
+\]
+Using (6), this reverses (4). Hence
+\[
+\boxed{
+g(u+v)+g(u-v)=2g(u)+2g(v).
+}
+\tag{7}
+\]
+
+\paragraph{4. Determine rational values.}
+
+For fixed \(t\), equation (7) gives
+\[
+g((n+1)t)+g((n-1)t)=2g(nt)+2g(t).
+\]
+Induction from \(g(0)=0\) proves
+\[
+g(nt)=n^2g(t)
+\]
+for every integer \(n\).
+
+Since \(g(1)=1\), it follows that
+\[
+\boxed{g(q)=q^2\qquad(q\in\mathbb Q).} \tag{8}
+\]
+
+\paragraph{5. Eliminate discontinuous possibilities.}
+
+From evenness and (3),
+\[
+0\le g(h)\le |h|\qquad(|h|\le1).
+\]
+Thus \(g(h)\to0\) as \(h\to0\).
+
+We now transfer this control to any fixed input \(x\). For any positive integer \(N\), use (7) with inputs \(x/N\) and \(h\). Nonnegativity and integer scaling give
+\[
+g(x+Nh)\le2g(x)+2N^2g(h).
+\]
+
+Also, (6) and (7) imply midpoint convexity:
+\[
+g\!\left(\frac{a+b}{2}\right)
+\le\frac{g(a)+g(b)}2.
+\]
+For \(N\) a power of two, repeated midpoint convexity therefore gives
+\[
+\begin{aligned}
+g(x+h)
+&\le\left(1-\frac1N\right)g(x)
++\frac1N g(x+Nh)\\
+&\le g(x)+\frac{g(x)}N+2Ng(h).
+\end{aligned}
+\]
+The same upper bound holds for \(g(x-h)\). Since (7) gives
+\[
+g(x+h)+g(x-h)\ge2g(x),
+\]
+we conclude
+\[
+|g(x+h)-g(x)|
+\le\frac{g(x)}N+2Ng(h).
+\]
+Choose \(N\) large first, then \(h\) small. This proves continuity at every \(x\).
+
+Now (8) and rational approximation force
+\[
+g(t)=t^2\qquad(t\in\mathbb R).
+\]
+Undoing the transformation yields the claimed formula.
+
+\paragraph{6. Verify.}
+
+Write \(a=\log_2 x\) and \(b=\log_2 y\). Then
+\[
+(a+b)^2+(a-b)^2=2a^2+2b^2,
+\]
+so (1) holds with equality. Likewise, (2) holds with equality.
+
+Finally, if \(1\le t\le2\), then \(s=\log_2t\in[0,1]\), so \(s^2\le s\). Therefore
+\[
+f(t)=2^{s^2}\le2^s=t.
+\]
+All conditions are satisfied.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Transform both inputs and outputs:** Logarithms expose the additive structure behind a multiplicative inequality.
+\item **Change coordinates to reverse a bound:** The substitution \((u+v,u-v)\) forces equality.
+\item **Rational values are not the finish line:** A separate regularity argument is essential.
+\item **A local condition can have global force:** The bound on \([1,2]\) eliminates all irregular quadratic solutions.
+\end{itemize}
+
+\end{dlsummary}

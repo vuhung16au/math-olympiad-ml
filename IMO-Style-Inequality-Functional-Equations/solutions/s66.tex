@@ -1,0 +1,129 @@
+\addcontentsline{toc}{subsubsection}{Solution 66. The Irrational Iteration Root}
+
+\begin{dlsummary}[title={\bfseries Solution 66. The Irrational Iteration Root},breakable]
+
+\begin{proof}
+The unique solution is
+\[
+\boxed{f(x)=x^{\sqrt2}\qquad(x>0).}
+\]
+
+\paragraph{1. Recover strict monotonicity.}
+
+If \(b>a>0\), superadditivity and positivity give
+\[
+f(b)=f(a+(b-a))
+\ge f(a)+f(b-a)>f(a).
+\]
+Thus \(f\) is strictly increasing and, in particular, injective.
+
+\paragraph{2. Force multiplicativity through composition.}
+
+By submultiplicativity,
+\[
+f(xy)\le f(x)f(y).
+\]
+Applying the increasing function \(f\),
+\[
+f(f(xy))\le f(f(x)f(y)).
+\]
+Applying submultiplicativity again, now to \(f(x),f(y)\),
+\[
+f(f(x)f(y))
+\le f(f(x))f(f(y)).
+\]
+The iteration identity therefore produces the squeeze
+\[
+\boxed{
+x^2y^2
+\le f(f(x)f(y))
+\le x^2y^2.
+}
+\]
+Hence
+\[
+f(f(x)f(y))=f(f(xy)).
+\]
+Injectivity gives
+\[
+\boxed{f(xy)=f(x)f(y).} \tag{1}
+\]
+
+This is the main breakthrough: the multiplicative inequality cannot remain strict anywhere.
+
+\paragraph{3. Obtain the normalisation and rational powers.}
+
+Taking \(x=y=1\) in (1), positivity yields
+\[
+f(1)=1.
+\]
+Also,
+\[
+f(2)\ge2f(1)=2.
+\]
+Define
+\[
+p=\log_2 f(2),
+\]
+so \(p\ge1\).
+
+Multiplicativity gives, for every rational number \(r\),
+\[
+\boxed{f(2^r)=f(2)^r=2^{pr}.} \tag{2}
+\]
+For positive rational exponents, this follows by taking integer powers; reciprocal inputs handle negative exponents.
+
+\paragraph{4. Determine every positive real input.}
+
+Fix \(x>0\). Choose rational sequences \(r_n,s_n\) such that
+\[
+r_n<\log_2x<s_n,
+\qquad r_n,s_n\longrightarrow\log_2x.
+\]
+Monotonicity and (2) give
+\[
+2^{pr_n}\le f(x)\le2^{ps_n}.
+\]
+The explicit bounds converge to \(x^p\). Therefore
+\[
+\boxed{f(x)=x^p\qquad(x>0).} \tag{3}
+\]
+No continuity of \(f\) was assumed.
+
+Now the iteration identity becomes
+\[
+x^{p^2}=x^2\qquad(x>0).
+\]
+Thus \(p^2=2\), and \(p\ge1\) forces
+\[
+p=\sqrt2.
+\]
+
+\paragraph{5. Verify the solution.}
+
+For \(f(x)=x^{\sqrt2}\), multiplicativity is immediate, and
+\[
+f(f(x))=(x^{\sqrt2})^{\sqrt2}=x^2.
+\]
+
+To verify superadditivity, note that for \(p\ge1\),
+\[
+\begin{aligned}
+(x+y)^p
+&=x(x+y)^{p-1}+y(x+y)^{p-1}\\
+&\ge x\,x^{p-1}+y\,y^{p-1}\\
+&=x^p+y^p.
+\end{aligned}
+\]
+Taking \(p=\sqrt2\) completes the verification.
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Use inequalities at two levels:** First at \(x,y\), then at their function values.
+\item **Iteration can close a squeeze:** The composition identity makes the two endpoints coincide exactly.
+\item **Derive multiplicativity rather than guessing it:** This is the essential classification step.
+\item **Separate regularity from algebra:** Positivity and superadditivity supply order; multiplicativity and rational approximation then identify the power.
+\end{itemize}
+
+\end{dlsummary}

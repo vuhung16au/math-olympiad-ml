@@ -1,0 +1,156 @@
+\addcontentsline{toc}{subsubsection}{Solution 64. The Invisible Conjugate}
+
+\begin{dlsummary}[title={\bfseries Solution 64. The Invisible Conjugate},breakable]
+
+\begin{proof}
+The only solutions are
+\[
+\boxed{f(a+b\sqrt2)=|a+b\sqrt2|}
+\]
+and
+\[
+\boxed{f(a+b\sqrt2)=|a-b\sqrt2|.}
+\]
+
+\paragraph{1. Establish symmetry and the reverse triangle inequality.}
+
+Multiplicativity gives
+\[
+f(-1)^2=f(1)=1.
+\]
+Nonnegativity implies \(f(-1)=1\), hence
+\[
+f(-x)=f(x).
+\]
+Subadditivity now gives
+\[
+\boxed{|f(x)-f(y)|\le f(x-y).} \tag{1}
+\]
+
+\paragraph{2. Determine the function on the rationals.}
+
+Repeated addition gives
+\[
+f(n)\le n\qquad(n\in\mathbb Z_{>0}),
+\]
+while multiplicativity gives \(f(2^k)=2^k\).
+
+For any positive integer \(n\), choose \(2^k>n\). Then
+\[
+2^k=f(2^k)
+\le f(n)+f(2^k-n)
+\le f(n)+2^k-n.
+\]
+Thus \(f(n)\ge n\), proving equality.
+
+Multiplicativity and symmetry consequently yield
+\[
+\boxed{f(q)=|q|\qquad(q\in\mathbb Q).} \tag{2}
+\]
+Also,
+\[
+f(\sqrt2)^2=f(2)=2,
+\]
+so \(f(\sqrt2)=\sqrt2\).
+
+\paragraph{3. Force one conjugate direction to vanish.}
+
+Choose rational numbers \(r_n\to\sqrt2\), and define
+\[
+A_n=f(\sqrt2-r_n),\qquad
+B_n=f(\sqrt2+r_n).
+\]
+
+By (1) and (2),
+\[
+|A_n-A_m|\le|r_n-r_m|,
+\qquad
+|B_n-B_m|\le|r_n-r_m|.
+\]
+Therefore both sequences converge; write their limits as \(A,B\ge0\).
+
+Multiplicativity gives
+\[
+A_nB_n
+=f\bigl((\sqrt2-r_n)(\sqrt2+r_n)\bigr)
+=f(2-r_n^2)
+=|2-r_n^2|.
+\]
+Hence
+\[
+AB=0.
+\]
+But subadditivity gives
+\[
+A_n+B_n\ge f(2\sqrt2)=2\sqrt2,
+\]
+so
+\[
+A+B\ge2\sqrt2.
+\]
+Thus \textbf{exactly one} of \(A,B\) is zero.
+
+\paragraph{4. The vanishing direction determines every value.}
+
+If \(A=0\), then, for any rational \(a,b\), equation (1) gives
+\[
+\begin{aligned}
+\left|f(a+b\sqrt2)-|a+br_n|\right|
+&=\left|f(a+b\sqrt2)-f(a+br_n)\right|\\
+&\le f\bigl(b(\sqrt2-r_n)\bigr)\\
+&=|b|A_n.
+\end{aligned}
+\]
+Taking limits,
+\[
+f(a+b\sqrt2)=|a+b\sqrt2|.
+\]
+
+If \(B=0\), compare instead with the rational number \(a-br_n\):
+\[
+\left|f(a+b\sqrt2)-|a-br_n|\right|
+\le |b|B_n.
+\]
+Taking limits gives
+\[
+f(a+b\sqrt2)=|a-b\sqrt2|.
+\]
+
+This proves completeness.
+
+\paragraph{5. Verify both solutions.}
+
+The first is ordinary absolute value.
+
+For the second, define
+\[
+\overline{a+b\sqrt2}=a-b\sqrt2.
+\]
+Direct expansion shows
+\[
+\overline{x+y}=\bar x+\bar y,
+\qquad
+\overline{xy}=\bar x\,\bar y.
+\]
+Therefore \(f(x)=|\bar x|\) satisfies both functional conditions and all normalisations.
+
+\paragraph{A revealing example.}
+
+At \(x=1+\sqrt2\), the two solutions give
+\[
+f(x)=1+\sqrt2
+\quad\text{or}\quad
+f(x)=\sqrt2-1.
+\]
+So an input larger than \(2\) can have a function value smaller than \(1\).
+\end{proof}
+
+\paragraph{Takeaways.}
+\begin{itemize}
+\item **Identify a familiar subdomain first:** Exact values on \(\mathbb Q\) provide the approximation machinery.
+\item **Conjugate products can force a choice:** Two nonnegative limiting quantities have product zero but cannot both vanish.
+\item **A local choice can determine everything:** Once one direction becomes small, rational comparison fixes all inputs.
+\item **Do not assume ordinary continuity:** One solution is discontinuous relative to the usual real-number distance on \(K\).
+\end{itemize}
+
+\end{dlsummary}
