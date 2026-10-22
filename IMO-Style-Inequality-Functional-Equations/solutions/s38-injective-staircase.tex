@@ -31,13 +31,13 @@ Now consider \(f(1),\dots,f(N)\). These are \(N\) distinct positive integers, al
 
 \paragraph{3. Conclude \(f(n)=n\).} With \(k=2\), the bound from Step 2 becomes \(f(j+1)\le f(j)+1\). Since \(f(1)=1\), induction gives \(f(n)\le n\) for all \(n\). An injective map of \(\{1,\dots,N\}\) into itself is a bijection. So \(f\) permutes \(\{1,\dots,N\}\) for every \(N\), and therefore \(f(n)=n\). \(\blacksquare\)
 \end{proof}
-
-\paragraph{Takeaways.}
-\begin{itemize}
-\item **Use \(n=1\) and \(n=2\) as probes:** Small values of \(n\) turn a two-variable inequality into one-step shift bounds.
-\item **Injectivity beats descent:** A rule like \(f(x+d)\le f(x)\) cannot continue forever on an injective map into the positive integers.
-\item **Counting is a quantitative injectivity argument:** Compare \(N\) distinct values with a linear upper bound.
-\item **Show the hypothesis is needed:** The constant function \(f\equiv1\) satisfies the inequality, so injectivity cannot be dropped.
-\end{itemize}
-
 \end{dlsummary}
+
+\begin{takeaways}
+\begin{itemize}
+\item \textbf{Use \(n=1\) and \(n=2\) as probes:} Small values of \(n\) turn a two-variable inequality into one-step shift bounds.
+\item \textbf{Injectivity beats descent:} A rule like \(f(x+d)\le f(x)\) cannot continue forever on an injective map into the positive integers.
+\item \textbf{Counting is a quantitative injectivity argument:} Compare \(N\) distinct values with a linear upper bound.
+\item \textbf{Show the hypothesis is needed:} The constant function \(f\equiv1\) satisfies the inequality, so injectivity cannot be dropped.
+\end{itemize}
+\end{takeaways}
