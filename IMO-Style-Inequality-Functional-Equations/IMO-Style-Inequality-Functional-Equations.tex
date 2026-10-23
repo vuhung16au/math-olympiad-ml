@@ -598,6 +598,132 @@ without checking whether the domain and hypotheses genuinely exclude them.
 \input{solutions/s39.tex}
 
 \newpage
+\section*{Appendix}
+\addcontentsline{toc}{section}{Appendix}
+
+This appendix records a few broader facts that clarify methods used in the
+booklet. The statements are given without proof.
+
+\paragraph{1. Jensen convexity and concavity.}
+Let $I$ be an interval. A function $f:I\to\mathbb R$ is Jensen convex if
+\[
+f(\lambda x+(1-\lambda)y)
+\le \lambda f(x)+(1-\lambda)f(y)
+\qquad(0\le\lambda\le1),
+\]
+and Jensen concave if the inequality is reversed. The midpoint condition is
+the special case $\lambda=\tfrac12$. If a midpoint-convex function is locally
+bounded above on a nonempty interval (in particular, if it is continuous or
+measurable), then it is Jensen convex. The analogous statement holds for
+concavity.
+
+\paragraph{2. Contractions and fixed points.}
+Suppose that a function $T$ sends real numbers to real numbers and brings
+nearby numbers closer together by a fixed factor $c<1$:
+\[
+|T(x)-T(y)|\le c|x-y|\qquad(0\le c<1).
+\]
+Starting from any number $x_0$, define
+\[
+x_{n+1}=T(x_n).
+\]
+Then the successive differences shrink geometrically:
+\[
+|x_{n+1}-x_n|\le c^n|x_1-x_0|.
+\]
+In the usual real-number settings of this booklet, the iterates approach a
+number $x^*$ satisfying $T(x^*)=x^*$; this is called a fixed point. The fixed
+point is unique: if $u$ and $v$ are both fixed points, then
+\[
+|u-v|=|T(u)-T(v)|\le c|u-v|,
+\]
+which is possible only when $u=v$. More generally,
+\[
+|a_{n+1}-b_{n+1}|\le c|a_n-b_n|
+\quad\Longrightarrow\quad
+|a_n-b_n|\le c^n|a_0-b_0|\to0.
+\]
+Thus repeated application eventually erases the effect of the starting value.
+
+\paragraph{3. Regularity for additive and Jensen-type equations.}
+If $f:\mathbb R\to\mathbb R$ is additive,
+\[
+f(x+y)=f(x)+f(y),
+\]
+then any one of the following conditions implies $f(x)=cx$ for some constant
+$c$: monotonicity, boundedness on a nontrivial interval, continuity at one
+point, or measurability. Without a regularity condition, additive functions
+need not be linear in the usual sense. The same principle applies to
+midpoint-convex, midpoint-concave, and Jensen-affine equations: regularity is
+what permits extension from rational or dyadic coefficients to all real
+coefficients.
+
+\paragraph{4. Density and extension from $\mathbb Q$.}
+The rational numbers are dense in the real numbers: whenever $a<b$, there is
+some $q\in\mathbb Q$ with
+\[
+a<q<b.
+\]
+The dyadic rationals $m/2^n$ are dense as well. Consequently, if continuous
+functions $f,g:\mathbb R\to\mathbb R$ satisfy $f(q)=g(q)$ for every
+$q\in\mathbb Q$, then $f=g$ on $\mathbb R$. The same conclusion follows from
+monotonicity when the values on the dense set squeeze the values at every
+real point. Density alone is not enough without an appropriate regularity
+condition.
+
+\paragraph{5. Continuity for real functions.}
+For the one-variable functions in this booklet, continuity at a real number
+$a$ means that making $x$ close to $a$ makes $f(x)$ close to $f(a)$:
+\[
+x\to a\qquad\Longrightarrow\qquad f(x)\to f(a).
+\]
+Equivalently, for every $\varepsilon>0$ there is a $\delta>0$ such that
+\[
+|x-a|<\delta\qquad\Longrightarrow\qquad
+|f(x)-f(a)|<\varepsilon.
+\]
+
+A particularly useful sufficient condition is a uniform distance estimate:
+there is a constant $L\ge0$ such that, for all real $x,y$ in the domain,
+\[
+|f(x)-f(y)|\le L|x-y|.
+\]
+This says that the output cannot change more than $L$ times as fast as the
+input. Such an estimate automatically proves continuity. If $L<1$, it also
+shows that $f$ brings points closer together and can be used in the
+contraction and fixed-point arguments above.
+
+The same idea works for points $(x_1,x_2)$ in the plane, or for points with
+more coordinates, by replacing $|x-y|$ with the usual distance between the
+points. The one-variable version is all that is needed for most problems in
+this booklet.
+
+\paragraph{6. Quadratic fields and rational approximations.}
+The set
+\[
+\mathbb Q(\sqrt2)=\{a+b\sqrt2:a,b\in\mathbb Q\}
+\]
+is closed under addition, subtraction, multiplication, and division by a
+nonzero element. Rational approximations to $\sqrt2$ can therefore be used
+to construct elements of this field that are arbitrarily close to a desired
+real value or arbitrarily small and nonzero.
+
+More generally, for a positive integer $k$ that is not a perfect square,
+\[
+\mathbb Q(\sqrt{k})=\{a+b\sqrt{k}:a,b\in\mathbb Q\}
+\]
+is a quadratic field. Its two field embeddings into $\mathbb R$ send
+$a+b\sqrt{k}$ to $a+b\sqrt{k}$ and $a-b\sqrt{k}$, respectively. Their
+product gives the norm
+\[
+N(a+b\sqrt{k})=a^2-kb^2.
+\]
+More generally, Galois theory studies the field automorphisms that preserve
+all rational relations. For a quadratic field the Galois group has the two
+elements that fix $\mathbb Q$ and either preserve or negate $\sqrt{k}$; this
+conjugation often explains why paired expressions and norms are useful.
+
+\newpage
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
