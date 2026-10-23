@@ -1,6 +1,6 @@
 # Makefile for AUS-Networks
 
-TEX=main.tex
+TEX=AUS-Networks.tex
 STEM=$(TEX:.tex=)
 RELEASE=AUS-Networks.pdf
 
@@ -36,10 +36,10 @@ open: pdf
 
 help:
 	@echo "Available targets:"
-	@echo "  all     - Build the main PDF (default)"
+	@echo "  all     - Build the AUS-Networks PDF (default)"
 	@echo "  pdf     - Compile .tex file to .pdf"
 	@echo "  clean   - Remove build artifacts"
 	@echo "  release - Build PDF (latexmk) and move to releases/"
 	@echo "  final   - Clean, then release"
-	@echo "  open    - Build and open the main PDF"
+	@echo "  open    - Build and open the AUS-Networks PDF"
 	@echo "  help    - Show this help message"
