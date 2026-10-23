@@ -14,26 +14,12 @@ For \(x\ne0\), supermultiplicativity gives
 \[
 1=f(1)\ge f(x)f(1/x).
 \]
-This repeats the stated bound, so we need a stronger argument.
-
-Apply supermultiplicativity to \(4x\) and \(1/x\):
-\[
-2=f(4)\ge f(4x)f(1/x)\ge2f(x)f(1/x).
-\]
-Again, this only supplies the same upper bound.
-
-In fact, these hypotheses do \textbf{not} force multiplicativity: the reciprocal condition points in the same direction as supermultiplicativity at a reciprocal pair.
-
-\textbf{The corrected problem replaces the reciprocal condition by}
-\[
-\boxed{\qquad f(x)f(1/x)\ge1\qquad(x\ne0).\qquad} \tag{3}
-\]
-
-With this correction, the two bounds force
+The reciprocal hypothesis in the statement supplies the reverse bound, so
+the two inequalities force
 \[
 f(x)f(1/x)=1.
 \]
-In particular, \(f(x)>0\) for \(x\ne0\).
+In particular, \(f(x)>0\) for every \(x\ne0\).
 
 Now, for nonzero \(x,y\),
 \[
@@ -114,8 +100,8 @@ For positive integers \(m,n\), multiplicativity gives
 f(m/n)=\frac{f(m)}{f(n)}=\sqrt{m/n}.
 \]
 Evenness and \(f(0)=0\) complete the classification.
-
-Conversely, \(f(x)=\sqrt{|x|}\) is multiplicative, has the required normalisations, and satisfies the corrected reciprocal condition with equality. Finally,
+Conversely, \(f(x)=\sqrt{|x|}\) is multiplicative, has the required
+normalisations, and satisfies the reciprocal condition with equality. Finally,
 \[
 \sqrt{|x+y|}
 \le\sqrt{|x|+|y|}
@@ -123,15 +109,12 @@ Conversely, \(f(x)=\sqrt{|x|}\) is multiplicative, has the required normalisatio
 \]
 so it is subadditive.
 
-\subsubsection{Final corrected statement}\label{final-corrected-statement}
-
-Use the problem above with the reciprocal condition \textbf{\(f(x)f(1/x)\ge1\)}, not \(\le1\). With that correction, the classification and proof are complete.
 \end{proof}
 \end{dlsummary}
 
 \begin{takeaways}
 \begin{itemize}
-\item \textbf{Check inequality directions carefully:} Reciprocal substitutions only create rigidity when the bounds oppose one another.
+\item \textbf{Check inequality directions carefully:} Reciprocal substitutions create rigidity when the bounds oppose one another.
 \item \textbf{Do not assume monotonicity:} Numeral expansions provide growth estimates without comparing \(f(a)\) and \(f(b)\) directly.
 \item \textbf{Change the base strategically:} Binary expansions give one bound; base-\(b\) expansions give the reverse bound at \(b\).
 \item \textbf{Amplify away constants:} Taking high powers eliminates fixed multiplicative losses.
