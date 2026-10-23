@@ -9,7 +9,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{positioning,arrows.meta,calc}
+\usetikzlibrary{positioning,arrows.meta,calc,shapes.geometric}
 \usepackage{enumitem}
 \usepackage{booktabs,tabularx,array}
 \usepackage[most,skins]{tcolorbox}
@@ -37,6 +37,7 @@
 \newcommand{\Coding}{\textsf{[Optional coding]}}
 \newcommand{\Enrichment}{\textsf{[Enrichment]}}
 \newcommand{\Uni}{\textsf{[Uni-level]}}
+\newcommand{\WarningSign}{\tikz[baseline=-0.6ex]\node[draw,regular polygon,regular polygon sides=3,inner sep=0pt,minimum size=1.1em,line width=0.35pt] {!};}
 \newcommand{\V}{V}
 \newcommand{\E}{E}
 \newcommand{\degG}{\operatorname{deg}}
@@ -52,7 +53,7 @@
 % Unnumbered matte cover.
 \input{frontmatter/title-page}
 
-% Numbered front matter: QR codes (1), quote (2), contents (3).
+% Numbered front matter: QR codes (1), quote (2), warning (3), contents (4).
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
@@ -64,6 +65,9 @@ This work is licensed under CC BY-NC 4.0 (Attribution-Non-Commercial), see the L
 
 \clearpage
 \input{frontmatter/quote}
+
+\clearpage
+\input{frontmatter/warning}
 
 \clearpage
 \tableofcontents
