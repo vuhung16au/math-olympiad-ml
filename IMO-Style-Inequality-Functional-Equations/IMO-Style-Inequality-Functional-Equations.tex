@@ -195,6 +195,129 @@ assume that it extends automatically to all real inputs: first prove the
 continuity, monotonicity, boundedness, or other regularity needed for that
 extension.
 
+\section*{Fundamental Review: Core Theorems}
+\addcontentsline{toc}{section}{Fundamental Review: Core Theorems}
+
+The following facts appear repeatedly in olympiad-style functional
+inequalities. Use them only when their hypotheses have been verified.
+
+\paragraph{1. Squeezing and equality.}
+If $A\le B\le A$, then $A=B$. More generally, if
+
+\[
+0\le u_n\le v_n\qquad\text{and}\qquad v_n\to0,
+\]
+then $u_n\to0$. One inequality often gives one side of a bound, while a
+reciprocal substitution, symmetry, or iteration gives the other side. Always
+record the equality condition in a standard inequality; it often identifies
+the candidate function.
+
+\paragraph{2. The basic mean inequalities.}
+For $u,v\ge0$,
+\[
+\sqrt{uv}\le \frac{u+v}{2}
+\]
+with equality if and only if $u=v$, and
+\[
+\frac{u+v}{2}\le
+\sqrt{\frac{u^2+v^2}{2}}
+\]
+with equality if and only if $u=v$. The Cauchy--Schwarz inequality is
+\[
+\left(\sum_{i=1}^n a_i b_i\right)^2
+\le
+\left(\sum_{i=1}^n a_i^2\right)
+\left(\sum_{i=1}^n b_i^2\right),
+\]
+including the useful special case $2uv\le u^2+v^2$.
+
+\paragraph{3. Triangle and norm inequalities.}
+For real numbers,
+\[
+|x+y|\le |x|+|y|.
+\]
+Consequently, for $0\le\alpha\le1$,
+\[
+|x+y|^\alpha\le |x|^\alpha+|y|^\alpha.
+\]
+The Euclidean norm satisfies the triangle inequality as well:
+\[
+\sqrt{\sum_i(x_i+y_i)^2}
+\le \sqrt{\sum_i x_i^2}+\sqrt{\sum_i y_i^2}.
+\]
+
+\paragraph{4. Induction, iteration, and growth.}
+Repeated application is justified by induction. For example,
+\[
+g(x+y)\ge g(x)+g(y)\Longrightarrow g(nx)\ge ng(x),
+\]
+and
+\[
+g(xy)\le g(x)g(y)\Longrightarrow g(x^n)\le g(x)^n.
+\]
+A bounded quantity cannot grow exponentially. If a nonnegative quantity is
+bounded above by $C/r^n$ for every $n$, where $r>1$, it is zero.
+
+\paragraph{5. Archimedean approximation.}
+The positive integers are unbounded, and for $t>0$,
+\[
+0\le t-\frac{\lfloor nt\rfloor}{n}<\frac1n,
+\qquad\text{so}\qquad
+\frac{\lfloor nt\rfloor}{n}\longrightarrow t.
+\]
+Floor and ceiling approximations transfer conclusions from integer inputs to
+arbitrary real inputs, usually after monotonicity has been proved.
+
+\paragraph{6. Monotonicity and density.}
+If $x\le y$ implies $f(x)\le f(y)$, then $f$ is nondecreasing. A positive
+superadditive function on $(0,\infty)$ is strictly increasing, since
+\[
+0<x<y\Longrightarrow f(y)\ge f(x)+f(y-x)>f(x).
+\]
+The rationals are dense in $\mathbb R$, and
+$\{2^q:q\in\mathbb Q\}$ is dense in $(0,\infty)$. A nondecreasing function
+that agrees with a known function on a dense subset agrees with it everywhere.
+
+\paragraph{7. Midpoint and additive rigidity.}
+If a monotone function satisfies
+\[
+f\!\left(\frac{x+y}{2}\right)=\frac{f(x)+f(y)}2,
+\]
+then it is affine. An additive function satisfying
+$f(x+y)=f(x)+f(y)$ is linear once one proves a regularity condition such as
+monotonicity, boundedness on an interval, or continuity at one point.
+Additivity alone does not justify continuity.
+
+\textbf{Continuity is proved, not assumed, in this booklet}, especially in
+the additive, quadratic, and midpoint-identity problems.
+
+\paragraph{8. Quadratic identities.}
+The parallelogram identity is
+\[
+f(x+y)+f(x-y)=2f(x)+2f(y).
+\]
+For $f(x)=x^2$ this follows from
+\[
+(x+y)^2+(x-y)^2=2x^2+2y^2.
+\]
+A one-sided inequality can become this identity after symmetry supplies the
+reverse inequality. A separately proved regularity condition is still needed
+to rule out pathological solutions on the real line.
+
+\paragraph{9. Integer and rational rigidity.}
+Unique prime factorization gives
+\[
+n=\prod_p p^{v_p(n)}
+\]
+for positive integers, with integer exponents; for nonzero positive rationals,
+the exponents may be negative. Multiplicative problems can therefore be
+studied prime by prime. Bézout's identity says that if $\gcd(a,b)=1$, then
+there exist integers $r,s$ such that $ra+sb=1$.
+
+On the positive integers, injectivity gives a counting principle: $N$
+distinct inputs require $N$ distinct positive outputs. This can contradict an
+upper bound placing all outputs in a set with fewer than $N$ elements.
+
 \section*{Frequently Seen Patterns}
 \addcontentsline{toc}{section}{Frequently Seen Patterns}
 
