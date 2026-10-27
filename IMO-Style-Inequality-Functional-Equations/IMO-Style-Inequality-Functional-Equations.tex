@@ -765,6 +765,33 @@ all rational relations. For a quadratic field the Galois group has the two
 elements that fix $\mathbb Q$ and either preserve or negate $\sqrt{k}$; this
 conjugation often explains why paired expressions and norms are useful.
 
+\paragraph{7. Difference operators and derivatives.}
+For a sequence $(a_n)$, the forward difference operator is
+\[
+\Delta a_n=a_{n+1}-a_n.
+\]
+Higher differences are defined recursively:
+\[
+\Delta^2a_n=a_{n+2}-2a_{n+1}+a_n,\qquad
+\Delta^3a_n=a_{n+3}-3a_{n+2}+3a_{n+1}-a_n,
+\]
+and, in general,
+\[
+\Delta^k a_n=\sum_{j=0}^k(-1)^{k-j}\binom{k}{j}a_{n+j}.
+\]
+For a function, use a step $h$ and write
+\[
+\Delta_h f(x)=f(x+h)-f(x).
+\]
+Finite differences are discrete analogues of derivatives: when the relevant
+derivatives exist,
+\[
+\frac{\Delta_h f(x)}{h}\to f'(x),\qquad
+\frac{\Delta_h^2 f(x)}{h^2}\to f''(x),\qquad
+\frac{\Delta_h^k f(x)}{h^k}\to f^{(k)}(x)
+\quad(h\to0).
+\]
+
 \newpage
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
